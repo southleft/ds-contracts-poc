@@ -42,9 +42,10 @@ const COMPONENTS = [
               "type": "frame",
               "name": "accordion__item",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -111,7 +112,8 @@ const COMPONENTS = [
                         "right": 0
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -156,7 +158,8 @@ const COMPONENTS = [
                         "left": 0
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 }
               ],
               "fillW": true
@@ -190,9 +193,10 @@ const COMPONENTS = [
               "type": "frame",
               "name": "accordion__item",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -259,7 +263,8 @@ const COMPONENTS = [
                         "right": 0
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -304,7 +309,8 @@ const COMPONENTS = [
                         "left": 0
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 }
               ],
               "fillW": true
@@ -338,9 +344,10 @@ const COMPONENTS = [
               "type": "frame",
               "name": "accordion__item",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -407,7 +414,8 @@ const COMPONENTS = [
                         "right": 0
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -452,7 +460,8 @@ const COMPONENTS = [
                         "left": 0
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 }
               ],
               "fillW": true
@@ -486,9 +495,10 @@ const COMPONENTS = [
               "type": "frame",
               "name": "accordion__item",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -555,7 +565,8 @@ const COMPONENTS = [
                         "right": 16
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -600,7 +611,8 @@ const COMPONENTS = [
                         "left": 32
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 }
               ],
               "fillW": true
@@ -634,9 +646,10 @@ const COMPONENTS = [
               "type": "frame",
               "name": "accordion__item",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -703,7 +716,8 @@ const COMPONENTS = [
                         "right": 16
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -748,7 +762,8 @@ const COMPONENTS = [
                         "left": 32
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 }
               ],
               "fillW": true
@@ -782,9 +797,10 @@ const COMPONENTS = [
               "type": "frame",
               "name": "accordion__item",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -851,7 +867,8 @@ const COMPONENTS = [
                         "right": 16
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -896,7 +913,8 @@ const COMPONENTS = [
                         "left": 32
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 }
               ],
               "fillW": true
@@ -932,9 +950,10 @@ const COMPONENTS = [
               "type": "frame",
               "name": "accordion__item",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -1001,7 +1020,8 @@ const COMPONENTS = [
                         "right": 0
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -1046,7 +1066,8 @@ const COMPONENTS = [
                         "left": 0
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 }
               ],
               "fillW": true
@@ -1080,9 +1101,10 @@ const COMPONENTS = [
               "type": "frame",
               "name": "accordion__item",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
@@ -1149,7 +1171,8 @@ const COMPONENTS = [
                         "right": 16
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -1194,7 +1217,8 @@ const COMPONENTS = [
                         "left": 32
                       }
                     }
-                  ]
+                  ],
+                  "fillW": true
                 }
               ],
               "fillW": true

@@ -69,6 +69,14 @@
         "accordion__item": {
           "element": "li",
           "description": "Promoted from the computed floor (round 4): rendered anatomy li|accordion__item — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "list-item",
+            "border-bottom-style": "solid",
+            "border-top-style": "solid",
+            "transition-duration": "0.11s",
+            "transition-property": "border-color",
+            "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
+          },
           "parts": {
             "accordion__heading": {
               "element": "button",
@@ -283,13 +291,6 @@
                 "padding-top": "{imported.accordion.accordion-wrapper.padding-top}"
               }
             }
-          },
-          "declared": {
-            "border-bottom-style": "solid",
-            "border-top-style": "solid",
-            "transition-duration": "0.11s",
-            "transition-property": "border-color",
-            "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
           },
           "tokens": {
             "border-bottom-color": "{imported.accordion.accordion-item.border-bottom-color}",

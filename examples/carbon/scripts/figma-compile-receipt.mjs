@@ -36,6 +36,7 @@ async function runScript(figma, src) {
 const failures = [];
 const rows = [];
 let totalVariants = 0;
+let totalTextOverflow = 0;
 
 const scripts = readdirSync(FIGMA_DIR)
   .filter((f) => f.endsWith('.figma.js') && f !== '00-tokens.figma.js' && f !== 'GENESIS-BATCH.figma.js')
@@ -69,6 +70,7 @@ for (const file of scripts) {
   }
 
   // headless execute: fresh mock file, tokens first, then the component sync
+  let textOverflowCount = 0;
   try {
     const mock = createFigmaMock();
     // CARBON: the mock lowers createNodeFromSvg to a plain FRAME (it renames to
@@ -144,8 +146,108 @@ for (const file of scripts) {
         throw new Error(`icon-button $import pin: ${svgPayloads.length} glyph(s) for ${got} variant cells — every cell must carry the icon`);
       }
     }
+    // ---- LIVE-DEFECT ROUND PINS (the six defects the owner's real paste
+    // found). Each one is the MEASUREMENT that was red before the fix, so a
+    // regression cannot pass headlessly again. ----
+    const allCells = mock.root.findAll((n) => n.type === 'COMPONENT' && n.parent?.type === 'COMPONENT_SET');
+    const cellsOf = () => (allCells.length > 0 ? allCells : mock.root.findAll((n) => n.type === 'COMPONENT'));
+    const descend = (n, out = []) => { out.push(n); for (const c of n.children ?? []) descend(c, out); return out; };
+    const nodesOf = (n) => descend(n).slice(1);
+
+    // D1 — SVG <title>/<desc> must never reach the canvas as visible ink.
+    // Measured before the fix: InlineNotification drew the literal words
+    // "error icon" beside the notification title, inside an `icon` FRAME
+    // 173px wide (an icon frame carrying a text box).
+    if (name === 'inline-notification') {
+      const allowed = new Set(['Notification title', 'Notification subtitle']);
+      const stray = cellsOf().flatMap((c) => nodesOf(c)).filter((n) => n.type === 'TEXT' && !allowed.has(n.characters));
+      if (stray.length > 0) {
+        throw new Error(`inline-notification D1 pin: ${stray.length} TEXT node(s) the component never authors reached the canvas (${[...new Set(stray.map((n) => JSON.stringify(n.characters)))].join(', ')}) — SVG <title>/<desc> is a11y METADATA, not canvas ink`);
+      }
+      for (const f of cellsOf().flatMap((c) => nodesOf(c)).filter((n) => n.name === 'icon' || n.name === 'icon-2')) {
+        if (f.width > 24) throw new Error(`inline-notification D1 pin: "${f.name}" frame is ${Math.round(f.width)}px wide — an icon frame is a glyph box, never a text box`);
+      }
+    }
+    // D2 — PSEUDO-ELEMENT ANATOMY. Carbon builds the checkbox box and the
+    // toggle knob with ::before on the label; without them the components are
+    // hollow (measured: the whole Checkbox was 288×20 of label, and
+    // toggle__switch was a 48×24 track with ZERO children).
+    if (name === 'checkbox') {
+      const boxes = cellsOf().flatMap((c) => nodesOf(c)).filter((n) => n.name === 'checkbox-label-before');
+      if (boxes.length === 0) throw new Error('checkbox D2 pin: no "checkbox-label-before" node — the ::before BOX is the whole visible checkbox and the canvas has none');
+      for (const b of boxes) {
+        if (Math.abs(b.width - 16) > 0.6 || Math.abs(b.height - 16) > 0.6) {
+          throw new Error(`checkbox D2 pin: the box is ${Math.round(b.width)}×${Math.round(b.height)}, captured truth says 16×16`);
+        }
+      }
+    }
+    if (name === 'toggle') {
+      const knobs = cellsOf().flatMap((c) => nodesOf(c)).filter((n) => n.name === 'toggle__switch-before');
+      if (knobs.length === 0) throw new Error('toggle D2 pin: no "toggle__switch-before" node — the track draws and the knob does not');
+      if (!knobs.some((k) => k.type === 'ELLIPSE')) {
+        throw new Error(`toggle D2 pin: the knob is ${[...new Set(knobs.map((k) => k.type))].join('/')} — Carbon spells it \`border-radius: 50%\`; a percentage radius that folds to 0 ships a SQUARE knob`);
+      }
+    }
+    // D3 — no in-flow child may be WIDER than its parent. A container whose
+    // children overlap is never right. Measured before the fix: Accordion's
+    // `accordion__wrapper` was 472/504px inside a 328px `accordion__item`
+    // (display:list-item carried no layout), and `toggle__label` stacked the
+    // label on top of the track (an inline box with block children).
+    //
+    // ONE EXEMPTION, COUNTED NOT HIDDEN: an overflow whose CAUSE is a hugging
+    // TEXT descendant already wider than the parent is the corpus-wide TEXT
+    // WRAPPING gap (docs/22 §"Text wrapping is not implemented" — MUI's
+    // AccordionDetails body at 426px inside 288px is the same shape). Figma
+    // text nodes here auto-size on one line, so the box hugs an unwrapped
+    // run. That round changes every hugging text node in the corpus and is
+    // not this one; the count is printed in the receipt table.
+    {
+      const over = [];
+      let textCaused = 0;
+      for (const cell of cellsOf()) {
+        for (const n of descend(cell)) {
+          for (const c of n.children ?? []) {
+            if (c.layoutPositioning === 'ABSOLUTE' || !c.visible) continue;
+            if (c.width <= n.width + 0.6) continue;
+            const byText = descend(c).some((d) => d.type === 'TEXT' && d.width > n.width + 0.6);
+            if (byText) { textCaused++; continue; }
+            over.push(`"${c.name}" ${Math.round(c.width)} > parent "${n.name}" ${Math.round(n.width)} (${cell.name})`);
+          }
+        }
+      }
+      textOverflowCount = textCaused;
+      if (over.length > 0) {
+        throw new Error(`${name} D3 pin: ${over.length} in-flow child(ren) wider than their parent, none of them text-caused — ${[...new Set(over)].slice(0, 3).join('; ')}`);
+      }
+    }
+    // D5 — the Modal must not be a full-viewport dim rectangle. Measured
+    // before the fix: 900×1000 per variant — the exact capture viewport.
+    if (name === 'modal') {
+      for (const cell of cellsOf()) {
+        if (cell.height > 600 || cell.width > 900) {
+          throw new Error(`modal D5 pin: variant "${cell.name}" is ${Math.round(cell.width)}×${Math.round(cell.height)} — a viewport-pinned scrim's captured box is the CAPTURE STAGE, not the component`);
+        }
+      }
+    }
+    // D6 — IconButton: no part that draws nothing, and the button keeps its
+    // own box. Measured before the fix: a 24×24 ABSOLUTE `popover` frame that
+    // paints nothing, and `btn` at 16×16 (the glyph) instead of the 24×24
+    // control the contract sizes.
+    if (name === 'icon-button') {
+      const popovers = cellsOf().flatMap((c) => nodesOf(c)).filter((n) => n.name === 'popover');
+      if (popovers.length > 0) throw new Error(`icon-button D6 pin: ${popovers.length} "popover" node(s) — an absolutely-positioned tooltip wrapper whose whole subtree is display:none draws NOTHING and is not anatomy`);
+      const xs = cellsOf().filter((c) => /Size=Xs(,|$)/.test(c.name));
+      for (const cell of xs) {
+        const btn = descend(cell).find((n) => n.name === 'btn');
+        if (!btn) throw new Error(`icon-button D6 pin: no "btn" node in ${cell.name}`);
+        if (Math.abs(btn.width - 24) > 0.6 || Math.abs(btn.height - 24) > 0.6) {
+          throw new Error(`icon-button D6 pin: "btn" is ${Math.round(btn.width)}×${Math.round(btn.height)} at Size=Xs — the contract sizes it 24×24; an icon-bearing part that loses its own box draws a bare glyph with no button chrome`);
+        }
+      }
+    }
     const set = mock.root.findAll((n) => n.type === 'COMPONENT_SET');
-    rows.push(`| ${file} | ${contract.id} | ${axesLabel} | ${got} | tokens ${tok.total} (${tok.aliased} aliased) · ${set.length} set(s) built |`);
+    rows.push(`| ${file} | ${contract.id} | ${axesLabel} | ${got} | tokens ${tok.total} (${tok.aliased} aliased) · ${set.length} set(s) built | ${textOverflowCount} |`);
+    totalTextOverflow += textOverflowCount;
     totalVariants += got;
   } catch (e) {
     failures.push(`${file}: headless execute FAILED — ${e.message}`);
@@ -159,8 +261,8 @@ refuses (exit 1) on drift. Scripts under \`examples/carbon/figma/\` emitted by
 \`ds-contracts figma examples/carbon/contracts --out examples/carbon/figma --tokens
 examples/carbon/tokens/carbon.dtcg.json,examples/carbon/tokens/carbon-minted.dtcg.json\`.
 
-| script | contract | variant axes | variants | headless execute |
-|---|---|---|---|---|
+| script | contract | variant axes | variants | headless execute | text-caused overflows |
+|---|---|---|---|---|---|
 ${rows.join('\n')}
 
 **${scripts.length} scripts · ${totalVariants} variants total.** Each script ran to completion

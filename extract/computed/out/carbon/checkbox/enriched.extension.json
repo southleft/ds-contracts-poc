@@ -685,10 +685,14 @@
       "root-display-carried: flex",
       "sr-only-carried-as-hidden: checkbox is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "literal-text-carried: label = \"Checkbox\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
+      "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "pseudo-decor-carried: checkbox-label::before → UNCONDITIONAL shape part \"checkbox-label-before\" (rect 16×16 at 0,2, fill rgba(0, 0, 0, 0), 1px ring rgba(22, 22, 22, 1); drawn in 6/6 default-interaction combos; geometry uniform, paint per checked — pseudo-decor v2)"
     ],
     "refusals": [
-      "pseudo-decor-nonuniform: checkbox-label::before drawn geometry/fill varies across the drawn combos ({\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 1)\",\"radius\":2} vs {\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 0.25)\",\"radius\":2}) — the bounded v1 decor grammar carries one box; named refusal"
+      "pseudo-decor-state-paint-uncarried: checkbox-label::before at unchecked.disabled paints {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(22, 22, 22, 0.25)\",\"radius\":2} where the matching enabled combo paints {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(22, 22, 22, 1)\",\"radius\":2} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+      "pseudo-decor-state-paint-uncarried: checkbox-label::before at checked.disabled paints {\"bg\":\"rgba(22, 22, 22, 0.25)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} where the matching enabled combo paints {\"bg\":\"rgba(22, 22, 22, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+      "pseudo-decor-state-paint-uncarried: checkbox-label::before at indeterminate.disabled paints {\"bg\":\"rgba(22, 22, 22, 0.25)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} where the matching enabled combo paints {\"bg\":\"rgba(22, 22, 22, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+      "pseudo-decor-outside-grammar: checkbox-label::after drawn with a non-identity scale transform (matrix(0, 0, 0, 0, 0, 0)) — the bounded v1 decor grammar carries translate-only; named refusal"
     ]
   },
   "enrichmentNotes": [

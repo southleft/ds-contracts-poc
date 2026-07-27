@@ -113,6 +113,72 @@ export function lowerTableDisplay(display: string, style: Record<string, string>
   }
 }
 
+/** CARBON LIVE-DEFECT ROUND (D3) — CSS GRID LOWERED TO THE FLEX VOCABULARY.
+ *
+ *  `display:grid` / `inline-grid` had NO lowering at all: the part fell to the
+ *  `display-outside-vocabulary` receipt, carried no `layout` and no `declared
+ *  .display`, and the emitter's HORIZONTAL default then drew Carbon's Modal
+ *  header/body/footer SIDE BY SIDE inside a container narrower than any of
+ *  them (`modal-container` grid, 1 column × 4 rows) — the live paste's
+ *  overlapping copy. Two of Carbon's ten components are built this way.
+ *
+ *  The lowering is MEASURED, never guessed: `grid-template-columns` and
+ *  `grid-template-rows` resolve to explicit px track lists in computed style,
+ *  so the track COUNTS are captured facts.
+ *    · 1 column, ≥1 row   → flex COLUMN (a stack)      — gap from `row-gap`
+ *    · 1 row, >1 column   → flex ROW                   — gap from `column-gap`
+ *    · >1 column AND >1 row → REFUSED BY NAME: a 2D grid has no auto-layout
+ *      spelling; one axis would have to be invented.
+ *    · no explicit tracks (implicit-only) → REFUSED BY NAME.
+ *  Item alignment follows CSS: the lowered flex CROSS axis takes
+ *  `justify-items` for a column stack (cross = inline) and `align-items` for
+ *  a row (cross = block). Grid's own default for both is `normal`, which for
+ *  grid items MEANS stretch — carried as such, not dropped. */
+export interface GridLowering {
+  layout: NonNullable<Part['layout']>;
+  note: string;
+}
+
+const gridTracks = (v: string | undefined): number => {
+  const s = (v ?? 'none').trim();
+  if (s === 'none' || s === '' || s === 'auto') return 0;
+  return s.split(/\s+(?![^[]*\])/).filter((t) => t !== '' && !t.startsWith('[')).length;
+};
+
+const gridAlign = (v: string | undefined): 'start' | 'center' | 'end' | 'stretch' => {
+  const s = (v ?? 'normal').trim().split(/\s+/).pop() ?? 'normal';
+  if (s === 'center') return 'center';
+  if (s === 'start' || s === 'flex-start' || s === 'self-start' || s === 'left') return 'start';
+  if (s === 'end' || s === 'flex-end' || s === 'self-end' || s === 'right') return 'end';
+  return 'stretch'; // 'normal' / 'stretch' — a grid item's default IS stretch
+};
+
+export function lowerGridDisplay(
+  display: string,
+  style: Record<string, string>,
+): GridLowering | { refusal: string } | null {
+  if (display !== 'grid' && display !== 'inline-grid') return null;
+  const cols = gridTracks(style['grid-template-columns']);
+  const rows = gridTracks(style['grid-template-rows']);
+  const d = display === 'inline-grid' ? 'inline-flex' : 'flex';
+  if (cols === 0 && rows === 0) {
+    return { refusal: `grid-implicit-tracks: ${display} declares no explicit grid-template-columns/rows (implicit tracks only) — the track counts that decide the lowered axis are not measurable; no layout carried (named refusal)` };
+  }
+  if (cols > 1 && rows > 1) {
+    return { refusal: `grid-two-dimensional: ${display} resolves ${cols} columns × ${rows} rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal)` };
+  }
+  if (cols <= 1) {
+    return {
+      layout: { display: d, direction: 'column', align: gridAlign(style['justify-items']) },
+      note: `${display} ${cols || 1}×${rows} → flex column, cross-axis ${gridAlign(style['justify-items'])} from justify-items:${style['justify-items'] ?? 'normal'} (measured track counts)`,
+    };
+  }
+  return {
+    layout: { display: d, direction: 'row', align: gridAlign(style['align-items']) },
+    note: `${display} ${cols}×${rows || 1} → flex row, cross-axis ${gridAlign(style['align-items'])} from align-items:${style['align-items'] ?? 'normal'} (measured track counts)`,
+  };
+}
+
 /** The ARIA role a lowered table box keeps (the table box model's meaning,
  *  carried on a plain <div> — see the element lowering in buildPart). */
 export function tableRoleFor(display: string, tag: string): string | null {
@@ -650,6 +716,26 @@ export function factorComplement(
 // ---------------------------------------------------------------------------
 // SVG reconstruction from captured computed truth
 // ---------------------------------------------------------------------------
+/** Non-painting SVG metadata elements (SVG 1.1 §5.4 — "not rendered").
+ *  They are real DOM elements with real text, so a naive reader captures
+ *  them; nothing about them is anatomy. */
+export const SVG_NONPAINTING = new Set(['title', 'desc', 'metadata']);
+
+/** The four border sides, in CSS order. */
+const BORDER_SIDES = ['top', 'right', 'bottom', 'left'] as const;
+
+/** CARBON LIVE-DEFECT ROUND (D2) — a PERCENTAGE corner radius resolved
+ *  against the box. `border-radius: 50%` is how most libraries spell a
+ *  circle, and computed style keeps it as a percentage: the px regex missed
+ *  it, the radius folded to 0, and Carbon's round toggle knob would have
+ *  compiled as a SQUARE (the same class of miss the `rounded-full`
+ *  3.35544e+07px sentinel already covers for the other spelling). */
+export function pctRadius(v: string | undefined, w: number, h: number): number | null {
+  const m = /^(\d+(?:\.\d+)?)%$/.exec((v ?? '').trim());
+  if (!m) return null;
+  return (Number(m[1]) / 100) * Math.min(w, h);
+}
+
 const pxNum = (v: string | undefined): number | null => {
   if (!v) return null;
   const m = /^(-?\d+(?:\.\d+)?)px$/.exec(v);
@@ -768,6 +854,15 @@ export function reconstructSvg(
         );
       } else if (el.tag === 'g') {
         if (!walkPaths(el)) return false;
+      } else if (SVG_NONPAINTING.has(el.tag)) {
+        // CARBON LIVE-DEFECT ROUND (D1): <title>/<desc>/<metadata> are SVG
+        // a11y METADATA — non-painting by spec. Refusing the asset over one
+        // of them is what turned Carbon's notification glyph into a tree of
+        // per-path parts with the accessible title rendered as canvas TEXT
+        // ("error icon" next to the notification heading). The capture now
+        // drops them at the source; this branch keeps ALREADY-COMMITTED
+        // captures reconstructible instead of silently refused.
+        receipts.push(`svg-metadata-skipped: ${label} — <${el.tag}> is non-painting SVG metadata (SVG 1.1 §5.4), skipped rather than refusing the asset`);
       } else {
         receipts.push(`svg-child-outside-grammar: ${label} — <${el.tag}> (v1 carries path/g only); asset refused`);
         return false;
@@ -1125,7 +1220,15 @@ export function promoteAnatomy(
         const t = st['transform'] ?? 'none';
         const mtx = /^matrix\((-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+), (-?[\d.]+)\)$/.exec(t);
         const scaleOk = t === 'none' || (mtx !== null && Number(mtx[2]) === 0 && Number(mtx[3]) === 0 && Math.abs(Number(mtx[1]) - 1) < 0.01 && Math.abs(Number(mtx[4]) - 1) < 0.01);
-        const drawn = alpha > 0 && opacity > 0.05 && w !== null && h !== null && w > 0 && h > 0 && st['position'] === 'absolute';
+        // PSEUDO-DECOR v2 (CARBON LIVE-DEFECT ROUND, D2) — DRAWN MEANS PAINTS
+        // ANYTHING. v1 required an opaque-ish BACKGROUND, so a box made of a
+        // RING was invisible to the grammar: an unchecked Carbon checkbox is
+        // `background: transparent; border: 1px solid #161616`, and refusing
+        // it is why the live canvas showed a checkbox with no box at all.
+        const maxBorder = Math.max(...BORDER_SIDES.map((s) => px(st[`border-${s}-width`]) ?? 0));
+        const borderAlpha = alphaOf(st['border-top-color']);
+        const paints = alpha > 0 || (maxBorder > 0 && borderAlpha > 0);
+        const drawn = paints && opacity > 0.05 && w !== null && h !== null && w > 0 && h > 0 && st['position'] === 'absolute';
         if (!drawn) continue; // hidden state of the pseudo — not drawn in this combo
         if (!scaleOk) {
           refusals.push(`pseudo-decor-outside-grammar: ${e.partName}${pe} drawn with a non-identity scale transform (${t}) — the bounded v1 decor grammar carries translate-only; named refusal`);
@@ -1172,29 +1275,126 @@ export function promoteAnatomy(
         const hostSt = hostIsShapeLeaf ? union.alignedByKey.get(`${row.combo.key}__default`)![i]!.node.style : null;
         const bT = hostSt ? (px(hostSt['border-top-width']) ?? 0) : 0;
         const bL = hostSt ? (px(hostSt['border-left-width']) ?? 0) : 0;
+        const w = px(row.st['width'])!;
+        const h = px(row.st['height'])!;
+        const borderW = Object.fromEntries(BORDER_SIDES.map((s) => [s, px(row.st[`border-${s}-width`]) ?? 0])) as Record<string, number>;
+        const sideColors = BORDER_SIDES.map((s) => row.st[`border-${s}-color`] ?? '');
         return {
-          w: px(row.st['width'])!,
-          h: px(row.st['height'])!,
+          w,
+          h,
           top: (px(row.st['top']) ?? 0) + ty + bT,
           left: (px(row.st['left']) ?? 0) + tx + bL,
           bg: row.st['background-color'],
+          borderW,
+          // ONE Figma stroke paint: disagreeing sides keep the CSS-side truth
+          // (the same rule the token border path applies) — recorded as ''.
+          borderColor: new Set(sideColors).size === 1 && Math.max(...Object.values(borderW)) > 0 ? sideColors[0] : '',
           // PSEUDO-DECOR v2 (G3) — SQUARE-THUMB TRAP. `rounded-full` computes
           // to 3.35544e+07px, which the local px() regex does not match, so
           // the radius folded to 0 and the decor shipped as a RECT. Share the
           // pill sentinel fuse.ts already uses for minted radii; the kind rule
           // below (radius ≥ min(w,h)/2) then correctly reads it as an ellipse.
+          // CARBON (D2): a PERCENTAGE radius is the third spelling of the same
+          // idea — Carbon's toggle knob is `border-radius: 50%`, which the px
+          // regex also missed, so the round knob compiled as a SQUARE.
           radius: isAbsurdRadius(row.st['border-top-left-radius'])
             ? parseFloat(PILL_RADIUS_SENTINEL)
-            : (px(row.st['border-top-left-radius']) ?? 0),
+            : (pctRadius(row.st['border-top-left-radius'], w, h) ?? px(row.st['border-top-left-radius']) ?? 0),
         };
       };
+      type Folded = ReturnType<typeof fold>;
       const folded = drawnRows.map(fold);
-      const uniq = new Set(folded.map((f) => JSON.stringify(f)));
-      if (uniq.size !== 1) {
-        refusals.push(`pseudo-decor-nonuniform: ${e.partName}${pe} drawn geometry/fill varies across the drawn combos (${[...uniq].join(' vs ')}) — the bounded v1 decor grammar carries one box; named refusal`);
+      // PSEUDO-DECOR v2 (D2) — GEOMETRY and PAINT are factored SEPARATELY.
+      //
+      // v1 hashed the whole box (size + offsets + fill + radius) into one key
+      // and refused anything non-uniform. Both hollow Carbon components died
+      // there, and for two DIFFERENT reasons that the one refusal hid:
+      //   · the CHECKBOX box has IDENTICAL geometry in all six combos and
+      //     only its PAINT moves (transparent+ring when unchecked, filled
+      //     when checked, quarter-alpha when disabled);
+      //   · the TOGGLE knob has identical PAINT in the enabled plane and only
+      //     its LEFT offset moves (3px → 27px with `toggled`).
+      // Neither is the two-axis GEOMETRY product named in
+      // examples/tailwind/PROVENANCE.md (Size × Toggled knob offsets) — that
+      // wall is still here and still refuses, below.
+      const enumAxes = space.axes.filter(
+        (a) => !presenceProps.has(a.prop) && !stateProps.includes(a.prop) && contract.props.some((p) => p.name === a.prop),
+      );
+      const isEnabledCombo = (c: Combo) => Object.values(c.stateFlags).every((v) => v !== true);
+      const enabledDrawn = drawnRows.map((r, k) => ({ ...r, f: folded[k] })).filter((r) => isEnabledCombo(r.combo));
+      const rowsForFactoring = enabledDrawn.length > 0 ? enabledDrawn : drawnRows.map((r, k) => ({ ...r, f: folded[k] }));
+      /** Uniform, or a function of exactly ONE enum axis. null = neither. */
+      const factorByAxis = <T>(
+        rows: Array<{ combo: Combo; f: Folded }>,
+        valueOf: (f: Folded) => T,
+      ): { kind: 'uniform'; value: T } | { kind: 'axis'; prop: string; map: Map<string, T> } | null => {
+        const keys = rows.map((r) => JSON.stringify(valueOf(r.f)));
+        if (new Set(keys).size === 1) return { kind: 'uniform', value: valueOf(rows[0].f) };
+        for (const ax of enumAxes) {
+          const byVal = new Map<string, string>();
+          let ok = true;
+          for (let k = 0; k < rows.length; k++) {
+            const v = rows[k].combo.axisValues[ax.prop];
+            if (v === undefined) { ok = false; break; }
+            const prev = byVal.get(v);
+            if (prev === undefined) byVal.set(v, keys[k]);
+            else if (prev !== keys[k]) { ok = false; break; }
+          }
+          if (ok && new Set(byVal.values()).size > 1) {
+            const map = new Map<string, T>();
+            for (let k = 0; k < rows.length; k++) {
+              const v = rows[k].combo.axisValues[ax.prop];
+              if (!map.has(v)) map.set(v, valueOf(rows[k].f));
+            }
+            return { kind: 'axis', prop: ax.prop, map };
+          }
+        }
+        return null;
+      };
+      const geomOf = (f: Folded) => ({ w: f.w, h: f.h, top: f.top, left: f.left });
+      const paintOf = (f: Folded) => ({ bg: f.bg, borderW: f.borderW, borderColor: f.borderColor, radius: f.radius });
+      const geomFact = factorByAxis(rowsForFactoring, geomOf);
+      if (!geomFact) {
+        refusals.push(
+          `pseudo-decor-geometry-multiaxis: ${e.partName}${pe} drawn geometry varies across the enabled combos and does not factor as a function of ONE enum axis (${[...new Set(rowsForFactoring.map((r) => JSON.stringify(geomOf(r.f))))].join(' vs ')}) — the two-axis geometry product named in examples/tailwind/PROVENANCE.md; named refusal`,
+        );
         continue;
       }
-      const f = folded[0];
+      // The SIZE must not move even when the offsets do — a shape part has ONE
+      // intrinsic width/height and no per-variant resize spelling.
+      const sizes = new Set(rowsForFactoring.map((r) => `${r.f.w}×${r.f.h}`));
+      if (sizes.size !== 1) {
+        refusals.push(`pseudo-decor-size-varies: ${e.partName}${pe} drawn at ${[...sizes].join(' vs ')} — a shape part carries ONE intrinsic size (per-variant resize has no spelling); named refusal`);
+        continue;
+      }
+      const paintFact = factorByAxis(rowsForFactoring, paintOf);
+      if (!paintFact) {
+        refusals.push(
+          `pseudo-decor-paint-multiaxis: ${e.partName}${pe} drawn paint varies across the enabled combos and does not factor as a function of ONE enum axis (${[...new Set(rowsForFactoring.map((r) => JSON.stringify(paintOf(r.f))))].join(' vs ')}); named refusal`,
+        );
+        continue;
+      }
+      // STATE-PLANE residue, NAMED not dropped: whatever the disabled plane
+      // paints differently is not carried by the decor part (the contract's
+      // `states` slot takes TOKEN REFS and this decor carries literals, so a
+      // per-enum-value × per-state product has no spelling). The enabled
+      // plane is what the canvas draws; the difference is printed.
+      for (const r of drawnRows.map((rr, k) => ({ ...rr, f: folded[k] }))) {
+        if (isEnabledCombo(r.combo)) continue;
+        const twin = rowsForFactoring.find((x) =>
+          enumAxes.every((ax) => x.combo.axisValues[ax.prop] === r.combo.axisValues[ax.prop]),
+        );
+        if (!twin) continue;
+        if (JSON.stringify(paintOf(twin.f)) !== JSON.stringify(paintOf(r.f))) {
+          refusals.push(
+            `pseudo-decor-state-paint-uncarried: ${e.partName}${pe} at ${r.combo.key} paints ${JSON.stringify(paintOf(r.f))} where the matching enabled combo paints ${JSON.stringify(paintOf(twin.f))} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue`,
+          );
+        }
+        if (JSON.stringify(geomOf(twin.f)) !== JSON.stringify(geomOf(r.f))) {
+          refusals.push(`pseudo-decor-state-geometry-uncarried: ${e.partName}${pe} at ${r.combo.key} sits at ${JSON.stringify(geomOf(r.f))} vs the enabled ${JSON.stringify(geomOf(twin.f))}; named residue`);
+        }
+      }
+      const f = rowsForFactoring[0].f;
       // presence over the enabled domain: drawn combos only
       const fact = factorPresence(
         drawnRows.map((r) => r.combo),
@@ -1226,24 +1426,86 @@ export function promoteAnatomy(
           placementConds.push({ prop: ax.prop, equals: v });
         }
       }
-      if (placementConds.length === 0) {
-        refusals.push(`pseudo-decor-unconditional-placement: ${e.partName}${pe} is drawn without an enum-axis gate — stylesWhen placement (the v9 shape grammar) has no condition to ride; decor NOT promoted (named refusal, v1 bounded)`);
-        continue;
-      }
       const partName = `${e.partName}-${pe.slice(2)}`;
       const kind: 'ellipse' | 'rect' = f.radius >= Math.min(f.w, f.h) / 2 - 0.5 ? 'ellipse' : 'rect';
+      /** Paint channels as contract literals. */
+      const paintLits = (p: ReturnType<typeof paintOf>): Record<string, string> => {
+        const out: Record<string, string> = {
+          'background-color': alphaOf(p.bg) === 0 ? 'transparent' : p.bg,
+        };
+        for (const s of BORDER_SIDES) {
+          if (p.borderW[s] > 0) out[`border-${s}-width`] = `${p.borderW[s]}px`;
+        }
+        if (p.borderColor) for (const s of BORDER_SIDES) out[`border-${s}-color`] = p.borderColor;
+        // A rect keeps its corner radius; an ellipse IS the radius.
+        if (kind === 'rect' && p.radius > 0) out['border-radius'] = `${p.radius}px`;
+        return out;
+      };
+      const geomLits = (g: ReturnType<typeof geomOf>): Record<string, string> => ({ top: `${g.top}px`, left: `${g.left}px` });
+      if (placementConds.length > 0) {
+        // ENUM-GATED decor (Polaris's RadioButton dot): unchanged v1 spelling
+        // — the placement rides `stylesWhen` on the gating axis's shown
+        // values. Kept byte-identical on purpose; every committed decor part
+        // in the repo is this shape.
+        const decor: Part = {
+          shape: { kind, width: f.w, height: f.h },
+          literals: paintLits(paintOf(f)),
+          ...(fact.visibleWhen ? { visibleWhen: { prop: fact.visibleWhen.prop } } : {}),
+          stylesWhen: [
+            ...fact.hiddenWhen.map((hw) => ({ prop: hw.prop, ...(hw.equals !== undefined ? { equals: hw.equals } : {}), styles: { display: 'none' } })),
+            ...placementConds.map((pc) => ({ prop: pc.prop, equals: pc.equals, styles: { position: 'absolute', top: `${f.top}px`, left: `${f.left}px` } })),
+          ],
+          description: `Drawn ${pe} pseudo-element decor promoted from the computed floor (round 5c, S5 v1): a ${f.w}×${f.h} ${kind} at ${f.left},${f.top} inside ${e.partName}, fill ${f.bg} — background+box+radius only, no content text; translate folded into top/left (receipted).`,
+        };
+        receipts.push(
+          `pseudo-decor-carried: ${e.partName}${pe} → shape part "${partName}" (${kind} ${f.w}×${f.h} at ${f.left},${f.top}, fill ${f.bg}; drawn in ${drawnRows.length}/${domain.length} default-interaction combos${fact.hiddenWhen.length ? `, hidden-when ${fact.hiddenWhen.map((hw) => (hw.equals ? `${hw.prop}=${hw.equals}` : hw.prop)).join(', ')}` : ''}; translate${hostIsShapeLeaf ? ' + host border' : ''} folded into top/left${hostIsShapeLeaf ? '; BUBBLED to the host parent (shape leaves cannot nest children; parent content box == host border box, asserted)' : ''} — round 5c S5)`,
+        );
+        out.push([partName, decor]);
+        continue;
+      }
+      // PSEUDO-DECOR v2 (D2) — UNCONDITIONAL ABSOLUTE DECOR. v1 refused
+      // outright here ("stylesWhen placement has no condition to ride"), and
+      // that refusal is precisely what left Carbon's checkbox with no box and
+      // its toggle with no knob: both are drawn in EVERY combo, so neither
+      // has a gate to hang a condition on. A decor drawn everywhere does not
+      // need one — it declares `position: absolute` and carries its offsets
+      // as ordinary literals, the same lowering every other absolute part in
+      // the repo uses (absolutePartPlacement). Per-value geometry/paint ride
+      // `literalsByProp`, one ordered entry per driving axis.
+      const byProp: Array<{ prop: string; map: Record<string, Record<string, string>> }> = [];
+      const baseValueOf = (prop: string): string => {
+        const ax = space.axes.find((a) => a.prop === prop)!;
+        const decl = contract.props.find((p) => p.name === prop)?.default;
+        return decl !== undefined ? String(decl) : (ax.values.find((v) => v !== ax.unset) ?? ax.values[0]);
+      };
+      let baseGeom = geomOf(f);
+      let basePaint = paintOf(f);
+      if (geomFact.kind === 'axis') {
+        const base = geomFact.map.get(baseValueOf(geomFact.prop)) ?? [...geomFact.map.values()][0];
+        baseGeom = base;
+        byProp.push({ prop: geomFact.prop, map: Object.fromEntries([...geomFact.map].map(([v, g]) => [v, geomLits(g)])) });
+      }
+      if (paintFact.kind === 'axis') {
+        const base = paintFact.map.get(baseValueOf(paintFact.prop)) ?? [...paintFact.map.values()][0];
+        basePaint = base;
+        const entry = byProp.find((b) => b.prop === paintFact.prop);
+        const map = Object.fromEntries([...paintFact.map].map(([v, p]) => [v, paintLits(p)]));
+        if (entry) for (const [v, m] of Object.entries(map)) entry.map[v] = { ...entry.map[v], ...m };
+        else byProp.push({ prop: paintFact.prop, map });
+      }
       const decor: Part = {
         shape: { kind, width: f.w, height: f.h },
-        literals: { 'background-color': f.bg },
+        declared: { position: 'absolute' },
+        literals: { ...paintLits(basePaint), ...geomLits(baseGeom) },
+        ...(byProp.length > 0 ? { literalsByProp: byProp } : {}),
         ...(fact.visibleWhen ? { visibleWhen: { prop: fact.visibleWhen.prop } } : {}),
-        stylesWhen: [
-          ...fact.hiddenWhen.map((hw) => ({ prop: hw.prop, ...(hw.equals !== undefined ? { equals: hw.equals } : {}), styles: { display: 'none' } })),
-          ...placementConds.map((pc) => ({ prop: pc.prop, equals: pc.equals, styles: { position: 'absolute', top: `${f.top}px`, left: `${f.left}px` } })),
-        ],
-        description: `Drawn ${pe} pseudo-element decor promoted from the computed floor (round 5c, S5 v1): a ${f.w}×${f.h} ${kind} at ${f.left},${f.top} inside ${e.partName}, fill ${f.bg} — background+box+radius only, no content text; translate folded into top/left (receipted).`,
+        ...(fact.hiddenWhen.length > 0
+          ? { stylesWhen: fact.hiddenWhen.map((hw) => ({ prop: hw.prop, ...(hw.equals !== undefined ? { equals: hw.equals } : {}), styles: { display: 'none' } })) }
+          : {}),
+        description: `Drawn ${pe} pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round): an UNCONDITIONAL ${f.w}×${f.h} ${kind} at ${baseGeom.left},${baseGeom.top} inside ${e.partName} — position:absolute with literal offsets${byProp.length ? `, per-value ${byProp.map((b) => b.prop).join(' + ')} overrides` : ''}; background+border+box+radius only, no content text; translate folded into top/left (receipted).`,
       };
       receipts.push(
-        `pseudo-decor-carried: ${e.partName}${pe} → shape part "${partName}" (${kind} ${f.w}×${f.h} at ${f.left},${f.top}, fill ${f.bg}; drawn in ${drawnRows.length}/${domain.length} default-interaction combos${fact.hiddenWhen.length ? `, hidden-when ${fact.hiddenWhen.map((hw) => (hw.equals ? `${hw.prop}=${hw.equals}` : hw.prop)).join(', ')}` : ''}; translate${hostIsShapeLeaf ? ' + host border' : ''} folded into top/left${hostIsShapeLeaf ? '; BUBBLED to the host parent (shape leaves cannot nest children; parent content box == host border box, asserted)' : ''} — round 5c S5)`,
+        `pseudo-decor-carried: ${e.partName}${pe} → UNCONDITIONAL shape part "${partName}" (${kind} ${f.w}×${f.h} at ${baseGeom.left},${baseGeom.top}, fill ${basePaint.bg}${basePaint.borderColor ? `, ${Math.max(...Object.values(basePaint.borderW))}px ring ${basePaint.borderColor}` : ''}; drawn in ${drawnRows.length}/${domain.length} default-interaction combos; geometry ${geomFact.kind === 'axis' ? `per ${geomFact.prop}` : 'uniform'}, paint ${paintFact.kind === 'axis' ? `per ${paintFact.prop}` : 'uniform'}${hostIsShapeLeaf ? '; BUBBLED to the host parent' : ''} — pseudo-decor v2)`,
       );
       out.push([partName, decor]);
     }
@@ -1255,6 +1517,14 @@ export function promoteAnatomy(
   const buildPart = (e: UnionNode): Part | null => {
     const i = idxOf.get(e.id)!;
     if (consumed.has(i) && !svgPlans.has(i)) return null; // svg internals
+    // CARBON LIVE-DEFECT ROUND (D1) — a non-painting SVG metadata element is
+    // never a part. The capture drops these now; this is the promotion-side
+    // backstop so a stale committed capture can never put an accessible
+    // title on the canvas as visible ink.
+    if (SVG_NONPAINTING.has(e.rep.tag)) {
+      refusals.push(`svg-metadata-not-a-part: ${e.partName} <${e.rep.tag}> is non-painting SVG metadata (SVG 1.1 §5.4) — never promoted; its accessible text is not canvas ink`);
+      return null;
+    }
     const existing = staticByName.get(e.partName);
     const part: Part = existing ? structuredClone(existing) : {};
     if (existing) delete part.parts; // children re-derived from the captured tree
@@ -1390,6 +1660,24 @@ export function promoteAnatomy(
           part.layout = { display: d as 'flex' | 'inline-flex', ...part.layout };
         } else if (/^(inline|inline-block|block|contents|none)$/.test(d)) {
           part.declared = { display: d, ...part.declared };
+        } else if (d === 'list-item' || d === 'flow-root') {
+          // CARBON LIVE-DEFECT ROUND (D3): `list-item` is a BLOCK-LEVEL box
+          // with a marker — CSS block flow, exactly like `block`. It was
+          // falling into the outside-vocabulary receipt, so Carbon's
+          // `<li class="cds--accordion__item">` carried no display at all and
+          // the emitter's HORIZONTAL default put the 472px panel beside the
+          // 174px heading inside a 328px item. `flow-root` rides the same
+          // rule (block box, own BFC).
+          part.declared = { display: d, ...part.declared };
+          receipts.push(`block-level-display-carried: ${e.partName} = "${d}" — a block-level box in CSS block flow; carried in the declared registry so the canvas lowers it as a stack rather than the emitter's row default`);
+        } else if (d === 'grid' || d === 'inline-grid') {
+          const low = lowerGridDisplay(d, e.rep.style);
+          if (low && 'refusal' in low) {
+            refusals.push(`${low.refusal} (part ${e.partName})`);
+          } else if (low) {
+            part.layout = { ...low.layout, ...part.layout };
+            receipts.push(`grid-lowering: ${e.partName} ${low.note}`);
+          }
         } else if (TABLE_DISPLAYS.has(d)) {
           // ORGANISM round: the CSS table box model lowered to the flex
           // vocabulary (see lowerTableDisplay). Receipted per part — the
@@ -1569,6 +1857,49 @@ export function promoteAnatomy(
       for (const [decorName, decor] of pseudoDecorParts(e, i, false)) childParts[decorName] = decor;
     }
     if (Object.keys(childParts).length > 0) part.parts = childParts;
+    // CARBON LIVE-DEFECT ROUND (D6) — INERT OVERLAY WRAPPER.
+    //
+    // In Carbon an icon button IS a tooltip trigger, so its captured anatomy
+    // carries `span.cds--popover` — an absolutely-positioned wrapper whose
+    // whole subtree is `display:none` until the tooltip opens. Promoted, it
+    // became a 24×24 ABSOLUTE frame sitting over the entire component that
+    // draws nothing at all (the live tree's "invisible absolute tooltip
+    // part"). This is the census-capture sibling of the portal round's
+    // `stripInertPortalChildren`: what paints nothing, contains nothing
+    // visible, and says nothing is not anatomy.
+    //
+    // BOUNDED: the part must paint no box in EVERY captured combo, carry no
+    // ink of its own (no text/icon/shape/component/slot), and have at least
+    // one child with EVERY child declared `display:none`. A childless
+    // paintless frame is LEFT ALONE — it can be a real spacer, and this
+    // round has no measurement that says otherwise.
+    {
+      const kids = Object.values(childParts);
+      const inkless = !part.text && !part.icon && !part.shape && !part.component && !part.slot;
+      const paintsNothing = (presentBy.get(i) ?? []).every((combo) => {
+        const el = union.alignedByKey.get(`${combo.key}__default`)![i];
+        if (!el) return true;
+        const s = el.node.style;
+        const bg = s['background-color'];
+        if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') return false;
+        if (['border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width'].some((p) => s[p] !== undefined && s[p] !== '0px')) return false;
+        if (s['box-shadow'] && s['box-shadow'] !== 'none') return false;
+        if (s['background-image'] && s['background-image'] !== 'none') return false;
+        return true;
+      });
+      if (
+        inkless &&
+        paintsNothing &&
+        part.declared?.['display'] !== 'none' &&
+        kids.length > 0 &&
+        kids.every((k) => k.declared?.['display'] === 'none')
+      ) {
+        refusals.push(
+          `inert-overlay-wrapper: ${e.partName} draws no box in any captured combo, carries no text/icon/shape of its own, and every one of its ${kids.length} child part(s) is declared display:none — a carried part that draws NOTHING; refused by name (Carbon's tooltip \`popover\` wrapper; census sibling of the portal round's stripInertPortalChildren)`,
+        );
+        return null;
+      }
+    }
     return part;
   };
 
@@ -1600,6 +1931,17 @@ export function promoteAnatomy(
           if (Object.keys(newRoot.layout).length === 0) delete newRoot.layout;
         }
         newRoot.declared = { display: d, ...newRoot.declared };
+      } else if (d === 'list-item' || d === 'flow-root') {
+        // D3, root edition — the same block-level carry as a promoted part.
+        newRoot.declared = { display: d, ...newRoot.declared };
+        receipts.push(`root-display-carried: ${d} via declared (a block-level box in CSS block flow)`);
+      } else if (d === 'grid' || d === 'inline-grid') {
+        const low = lowerGridDisplay(d, rootEntry.rep.style);
+        if (low && 'refusal' in low) refusals.push(`${low.refusal} (root)`);
+        else if (low) {
+          newRoot.layout = { ...low.layout, ...newRoot.layout };
+          receipts.push(`grid-lowering: root ${low.note}`);
+        }
       } else if (TABLE_DISPLAYS.has(d)) {
         // ORGANISM round: a display:table ROOT (the Table organism) lowers
         // exactly like a promoted part — the root is the column stack its

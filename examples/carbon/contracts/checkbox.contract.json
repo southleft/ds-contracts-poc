@@ -125,6 +125,58 @@
                   "color": "{imported.shared.color-16161640}"
                 }
               }
+            },
+            "checkbox-label-before": {
+              "shape": {
+                "kind": "rect",
+                "width": 16,
+                "height": 16
+              },
+              "declared": {
+                "position": "absolute"
+              },
+              "literals": {
+                "background-color": "transparent",
+                "border-top-width": "1px",
+                "border-right-width": "1px",
+                "border-bottom-width": "1px",
+                "border-left-width": "1px",
+                "border-top-color": "rgba(22, 22, 22, 1)",
+                "border-right-color": "rgba(22, 22, 22, 1)",
+                "border-bottom-color": "rgba(22, 22, 22, 1)",
+                "border-left-color": "rgba(22, 22, 22, 1)",
+                "border-radius": "2px",
+                "top": "2px",
+                "left": "0px"
+              },
+              "literalsByProp": [
+                {
+                  "prop": "checked",
+                  "map": {
+                    "unchecked": {
+                      "background-color": "transparent",
+                      "border-top-width": "1px",
+                      "border-right-width": "1px",
+                      "border-bottom-width": "1px",
+                      "border-left-width": "1px",
+                      "border-top-color": "rgba(22, 22, 22, 1)",
+                      "border-right-color": "rgba(22, 22, 22, 1)",
+                      "border-bottom-color": "rgba(22, 22, 22, 1)",
+                      "border-left-color": "rgba(22, 22, 22, 1)",
+                      "border-radius": "2px"
+                    },
+                    "checked": {
+                      "background-color": "rgba(22, 22, 22, 1)",
+                      "border-radius": "2px"
+                    },
+                    "indeterminate": {
+                      "background-color": "rgba(22, 22, 22, 1)",
+                      "border-radius": "2px"
+                    }
+                  }
+                }
+              ],
+              "description": "Drawn ::before pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round): an UNCONDITIONAL 16×16 rect at 0,2 inside checkbox-label — position:absolute with literal offsets, per-value checked overrides; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
             }
           },
           "declared": {

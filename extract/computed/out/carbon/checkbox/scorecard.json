@@ -16,9 +16,9 @@
     "pairs": 24,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 2.4023437499999996,
-    "meanAA": 1.4567057291666663,
-    "maxAA": 2.0540364583333335
+    "meanExact": 2.3632812499999996,
+    "meanAA": 1.3962131076388886,
+    "maxAA": 1.8033854166666667
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -34,52 +34,52 @@
   },
   "worstRows": [
     {
-      "key": "indeterminate.enabled__focus-visible",
-      "pctAA": 2.0540364583333335,
-      "pctExact": 3.0533854166666665,
-      "channelsMismatched": 6
+      "key": "indeterminate.disabled__default",
+      "pctAA": 1.8033854166666667,
+      "pctExact": 2.7604166666666665,
+      "channelsMismatched": 18
     },
     {
-      "key": "checked.enabled__focus-visible",
-      "pctAA": 2.0279947916666665,
-      "pctExact": 3.10546875,
-      "channelsMismatched": 6
+      "key": "indeterminate.disabled__hover",
+      "pctAA": 1.8033854166666667,
+      "pctExact": 2.7604166666666665,
+      "channelsMismatched": 18
     },
     {
-      "key": "indeterminate.enabled__default",
-      "pctAA": 1.6243489583333333,
-      "pctExact": 2.5065104166666665,
-      "channelsMismatched": 5
+      "key": "indeterminate.disabled__focus-visible",
+      "pctAA": 1.8033854166666667,
+      "pctExact": 2.7604166666666665,
+      "channelsMismatched": 18
     },
     {
-      "key": "indeterminate.enabled__hover",
-      "pctAA": 1.6243489583333333,
-      "pctExact": 2.5065104166666665,
-      "channelsMismatched": 5
+      "key": "indeterminate.disabled__active",
+      "pctAA": 1.8033854166666667,
+      "pctExact": 2.7604166666666665,
+      "channelsMismatched": 18
     },
     {
-      "key": "indeterminate.enabled__active",
-      "pctAA": 1.6243489583333333,
-      "pctExact": 2.5065104166666665,
-      "channelsMismatched": 5
+      "key": "checked.disabled__default",
+      "pctAA": 1.7317708333333333,
+      "pctExact": 2.7604166666666665,
+      "channelsMismatched": 18
     },
     {
-      "key": "checked.enabled__default",
-      "pctAA": 1.5983072916666667,
-      "pctExact": 2.55859375,
-      "channelsMismatched": 5
+      "key": "checked.disabled__hover",
+      "pctAA": 1.7317708333333333,
+      "pctExact": 2.7604166666666665,
+      "channelsMismatched": 18
     },
     {
-      "key": "checked.enabled__hover",
-      "pctAA": 1.5983072916666667,
-      "pctExact": 2.55859375,
-      "channelsMismatched": 5
+      "key": "checked.disabled__focus-visible",
+      "pctAA": 1.7317708333333333,
+      "pctExact": 2.7604166666666665,
+      "channelsMismatched": 18
     },
     {
-      "key": "checked.enabled__active",
-      "pctAA": 1.5983072916666667,
-      "pctExact": 2.55859375,
-      "channelsMismatched": 5
+      "key": "checked.disabled__active",
+      "pctAA": 1.7317708333333333,
+      "pctExact": 2.7604166666666665,
+      "channelsMismatched": 18
     }
   ],
   "topMismatchedChannels": [
@@ -145,7 +145,10 @@
     ]
   ],
   "namedLosses": [
-    "promotion: pseudo-decor-nonuniform: checkbox-label::before drawn geometry/fill varies across the drawn combos ({\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 1)\",\"radius\":2} vs {\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 0.25)\",\"radius\":2}) — the bounded v1 decor grammar carries one box; named refusal",
+    "promotion: pseudo-decor-state-paint-uncarried: checkbox-label::before at unchecked.disabled paints {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(22, 22, 22, 0.25)\",\"radius\":2} where the matching enabled combo paints {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(22, 22, 22, 1)\",\"radius\":2} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+    "promotion: pseudo-decor-state-paint-uncarried: checkbox-label::before at checked.disabled paints {\"bg\":\"rgba(22, 22, 22, 0.25)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} where the matching enabled combo paints {\"bg\":\"rgba(22, 22, 22, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+    "promotion: pseudo-decor-state-paint-uncarried: checkbox-label::before at indeterminate.disabled paints {\"bg\":\"rgba(22, 22, 22, 0.25)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} where the matching enabled combo paints {\"bg\":\"rgba(22, 22, 22, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+    "promotion: pseudo-decor-outside-grammar: checkbox-label::after drawn with a non-identity scale transform (matrix(0, 0, 0, 0, 0, 0)) — the bounded v1 decor grammar carries translate-only; named refusal",
     "overflow: checkbox-label.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: checkbox-label.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: checkbox-label.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -183,7 +186,7 @@
   },
   "shippedMinted": {
     "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-    "leavesAdded": 1105,
+    "leavesAdded": 1097,
     "divergent": []
   },
   "rows": [
@@ -821,8 +824,8 @@
       "key": "checked.enabled__default",
       "channelsCompared": 74,
       "channelsEqual": 69,
-      "pctExact": 2.55859375,
-      "pctAA": 1.5983072916666667,
+      "pctExact": 2.2395833333333335,
+      "pctAA": 1.2467447916666667,
       "mismatches": [
         {
           "part": "checkbox",
@@ -860,8 +863,8 @@
       "key": "checked.enabled__hover",
       "channelsCompared": 74,
       "channelsEqual": 69,
-      "pctExact": 2.55859375,
-      "pctAA": 1.5983072916666667,
+      "pctExact": 2.2395833333333335,
+      "pctAA": 1.2467447916666667,
       "mismatches": [
         {
           "part": "checkbox",
@@ -899,8 +902,8 @@
       "key": "checked.enabled__focus-visible",
       "channelsCompared": 74,
       "channelsEqual": 68,
-      "pctExact": 3.10546875,
-      "pctAA": 2.0279947916666665,
+      "pctExact": 2.6627604166666665,
+      "pctAA": 1.5625,
       "mismatches": [
         {
           "part": "checkbox",
@@ -944,8 +947,8 @@
       "key": "checked.enabled__active",
       "channelsCompared": 74,
       "channelsEqual": 69,
-      "pctExact": 2.55859375,
-      "pctAA": 1.5983072916666667,
+      "pctExact": 2.2395833333333335,
+      "pctAA": 1.2467447916666667,
       "mismatches": [
         {
           "part": "checkbox",
@@ -983,8 +986,8 @@
       "key": "checked.disabled__default",
       "channelsCompared": 74,
       "channelsEqual": 56,
-      "pctExact": 2.55859375,
-      "pctAA": 1.552734375,
+      "pctExact": 2.7604166666666665,
+      "pctAA": 1.7317708333333333,
       "mismatches": [
         {
           "part": "checkbox",
@@ -1100,8 +1103,8 @@
       "key": "checked.disabled__hover",
       "channelsCompared": 74,
       "channelsEqual": 56,
-      "pctExact": 2.55859375,
-      "pctAA": 1.552734375,
+      "pctExact": 2.7604166666666665,
+      "pctAA": 1.7317708333333333,
       "mismatches": [
         {
           "part": "checkbox",
@@ -1217,8 +1220,8 @@
       "key": "checked.disabled__focus-visible",
       "channelsCompared": 74,
       "channelsEqual": 56,
-      "pctExact": 2.55859375,
-      "pctAA": 1.552734375,
+      "pctExact": 2.7604166666666665,
+      "pctAA": 1.7317708333333333,
       "mismatches": [
         {
           "part": "checkbox",
@@ -1334,8 +1337,8 @@
       "key": "checked.disabled__active",
       "channelsCompared": 74,
       "channelsEqual": 56,
-      "pctExact": 2.55859375,
-      "pctAA": 1.552734375,
+      "pctExact": 2.7604166666666665,
+      "pctAA": 1.7317708333333333,
       "mismatches": [
         {
           "part": "checkbox",
@@ -1451,8 +1454,8 @@
       "key": "indeterminate.enabled__default",
       "channelsCompared": 74,
       "channelsEqual": 69,
-      "pctExact": 2.5065104166666665,
-      "pctAA": 1.6243489583333333,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 1.279296875,
       "mismatches": [
         {
           "part": "checkbox",
@@ -1490,8 +1493,8 @@
       "key": "indeterminate.enabled__hover",
       "channelsCompared": 74,
       "channelsEqual": 69,
-      "pctExact": 2.5065104166666665,
-      "pctAA": 1.6243489583333333,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 1.279296875,
       "mismatches": [
         {
           "part": "checkbox",
@@ -1529,8 +1532,8 @@
       "key": "indeterminate.enabled__focus-visible",
       "channelsCompared": 74,
       "channelsEqual": 68,
-      "pctExact": 3.0533854166666665,
-      "pctAA": 2.0540364583333335,
+      "pctExact": 2.6236979166666665,
+      "pctAA": 1.5950520833333333,
       "mismatches": [
         {
           "part": "checkbox",
@@ -1574,8 +1577,8 @@
       "key": "indeterminate.enabled__active",
       "channelsCompared": 74,
       "channelsEqual": 69,
-      "pctExact": 2.5065104166666665,
-      "pctAA": 1.6243489583333333,
+      "pctExact": 2.2005208333333335,
+      "pctAA": 1.279296875,
       "mismatches": [
         {
           "part": "checkbox",
@@ -1613,8 +1616,8 @@
       "key": "indeterminate.disabled__default",
       "channelsCompared": 74,
       "channelsEqual": 56,
-      "pctExact": 2.509765625,
-      "pctAA": 1.591796875,
+      "pctExact": 2.7604166666666665,
+      "pctAA": 1.8033854166666667,
       "mismatches": [
         {
           "part": "checkbox",
@@ -1730,8 +1733,8 @@
       "key": "indeterminate.disabled__hover",
       "channelsCompared": 74,
       "channelsEqual": 56,
-      "pctExact": 2.509765625,
-      "pctAA": 1.591796875,
+      "pctExact": 2.7604166666666665,
+      "pctAA": 1.8033854166666667,
       "mismatches": [
         {
           "part": "checkbox",
@@ -1847,8 +1850,8 @@
       "key": "indeterminate.disabled__focus-visible",
       "channelsCompared": 74,
       "channelsEqual": 56,
-      "pctExact": 2.509765625,
-      "pctAA": 1.591796875,
+      "pctExact": 2.7604166666666665,
+      "pctAA": 1.8033854166666667,
       "mismatches": [
         {
           "part": "checkbox",
@@ -1964,8 +1967,8 @@
       "key": "indeterminate.disabled__active",
       "channelsCompared": 74,
       "channelsEqual": 56,
-      "pctExact": 2.509765625,
-      "pctAA": 1.591796875,
+      "pctExact": 2.7604166666666665,
+      "pctAA": 1.8033854166666667,
       "mismatches": [
         {
           "part": "checkbox",

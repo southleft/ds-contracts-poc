@@ -6498,7 +6498,20 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/carbon/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`carbon genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(10 sets: Accordion\(8\), Button\(80\), Checkbox\(3\), IconButton\(16\), InlineNotification\(12\), Modal\(4\), Tabs\(3\), Tag\(36\), TextInput\(8\), Toggle\(4\); 1459 variables\)/.test(batch.out)) {
+      // LIVE-DEFECT ROUND (task #30) — REPINNED 1459 → 1425 variables after
+      // REVIEW, not silently. The 34 that left are the minted leaves of parts
+      // the round REFUSED: Carbon's tooltip `popover` wrapper and its subtree
+      // (inert-overlay-wrapper — it painted nothing in any combo and every
+      // child was display:none) on IconButton and on Modal's close button,
+      // plus InlineNotification's five per-path parts per glyph, which are now
+      // one reconstructed ICON ASSET each because `<title>` no longer refuses
+      // the svg grammar. Variant cells (132) and source aliases (94) are
+      // UNCHANGED — no variant and no alias was lost. The compile receipt this
+      // eval runs also carries the round's six structural pins (D1 SVG title
+      // as ink / D2 checkbox box + toggle knob / D3 no child wider than its
+      // parent / D5 modal not a viewport rectangle / D6 no inert part + the
+      // icon button keeps its box), so this eval fails if any of them regress.
+      if (!/mock-proven \(10 sets: Accordion\(8\), Button\(80\), Checkbox\(3\), IconButton\(16\), InlineNotification\(12\), Modal\(4\), Tabs\(3\), Tag\(36\), TextInput\(8\), Toggle\(4\); 1425 variables\)/.test(batch.out)) {
         throw new Error(`carbon genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // The token wrap is a PURE function of the pinned compiled stylesheet, so
@@ -6552,7 +6565,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const committed = readFileSync(path.join(ROOT, 'examples/carbon/figma/carbon.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/carbon/figma/carbon.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
       console.log(
-        `carbon-figma-genesis: 10/10 scripts referee+execute headless (132 variant cells, 1459 variables incl. 94 Figma-native source aliases); ` +
+        `carbon-figma-genesis: 10/10 scripts referee+execute headless (132 variant cells, 1425 variables incl. 94 Figma-native source aliases; live-defect round: the six canvas defects are pinned by the compile receipt this eval runs); ` +
           `Light/Dark = .cds--white/.cds--g100 differ on ${differing.length} tokens; no "unset" pseudo-value reached a contract enum; ` +
           `one-paste batch mock-proven; committed carbon.bundle.json fresh and byte-deterministic; ${tokenNote} — the generality control case`,
       );

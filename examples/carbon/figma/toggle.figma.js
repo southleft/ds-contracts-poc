@@ -42,21 +42,20 @@ const COMPONENTS = [
               "type": "frame",
               "name": "toggle__label",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "itemSpacing": "imported/shared/size-16"
               },
               "children": [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 16
-                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -66,7 +65,8 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "textFill": "imported/toggle/label/color",
                   "lineHeight": 16,
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -74,7 +74,7 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "CENTER"
                   },
                   "bindings": {
                     "itemSpacing": "imported/toggle/toggle-appearance/column-gap",
@@ -112,7 +112,31 @@ const COMPONENTS = [
                         "varName": "imported/toggle/toggle-switch/width"
                       },
                       "fill": "imported/toggle/toggle-switch/background-color/untoggled",
-                      "children": []
+                      "children": [
+                        {
+                          "type": "shape",
+                          "name": "toggle__switch-before",
+                          "shape": {
+                            "kind": "ellipse",
+                            "width": 18,
+                            "height": 18
+                          },
+                          "lits": {
+                            "fillColor": {
+                              "r": 1,
+                              "g": 1,
+                              "b": 1,
+                              "a": 1
+                            }
+                          },
+                          "absolute": {
+                            "h": "MIN",
+                            "v": "MIN",
+                            "left": 3,
+                            "top": 3
+                          }
+                        }
+                      ]
                     },
                     {
                       "type": "text",
@@ -157,21 +181,20 @@ const COMPONENTS = [
               "type": "frame",
               "name": "toggle__label",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "itemSpacing": "imported/shared/size-16"
               },
               "children": [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 16
-                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -181,7 +204,8 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "textFill": "imported/toggle/label/color",
                   "lineHeight": 16,
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -189,7 +213,7 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "CENTER"
                   },
                   "bindings": {
                     "itemSpacing": "imported/toggle/toggle-appearance/column-gap",
@@ -227,7 +251,31 @@ const COMPONENTS = [
                         "varName": "imported/toggle/toggle-switch/width"
                       },
                       "fill": "imported/toggle/toggle-switch/background-color/toggled",
-                      "children": []
+                      "children": [
+                        {
+                          "type": "shape",
+                          "name": "toggle__switch-before",
+                          "shape": {
+                            "kind": "ellipse",
+                            "width": 18,
+                            "height": 18
+                          },
+                          "lits": {
+                            "fillColor": {
+                              "r": 1,
+                              "g": 1,
+                              "b": 1,
+                              "a": 1
+                            }
+                          },
+                          "absolute": {
+                            "h": "MIN",
+                            "v": "MIN",
+                            "left": 27,
+                            "top": 3
+                          }
+                        }
+                      ]
                     },
                     {
                       "type": "text",
@@ -274,21 +322,20 @@ const COMPONENTS = [
               "type": "frame",
               "name": "toggle__label",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "itemSpacing": "imported/shared/size-16"
               },
               "children": [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 16
-                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -298,7 +345,8 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "textFill": "imported/shared/color-16161640",
                   "lineHeight": 16,
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -306,7 +354,7 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "CENTER"
                   },
                   "bindings": {
                     "itemSpacing": "imported/toggle/toggle-appearance/column-gap",
@@ -344,7 +392,31 @@ const COMPONENTS = [
                         "varName": "imported/toggle/toggle-switch/width"
                       },
                       "fill": "imported/toggle/toggle-switch/background-color/untoggled",
-                      "children": []
+                      "children": [
+                        {
+                          "type": "shape",
+                          "name": "toggle__switch-before",
+                          "shape": {
+                            "kind": "ellipse",
+                            "width": 18,
+                            "height": 18
+                          },
+                          "lits": {
+                            "fillColor": {
+                              "r": 1,
+                              "g": 1,
+                              "b": 1,
+                              "a": 1
+                            }
+                          },
+                          "absolute": {
+                            "h": "MIN",
+                            "v": "MIN",
+                            "left": 3,
+                            "top": 3
+                          }
+                        }
+                      ]
                     },
                     {
                       "type": "text",
@@ -390,21 +462,20 @@ const COMPONENTS = [
               "type": "frame",
               "name": "toggle__label",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
+                "minWidth": "imported/shared/size-0",
+                "itemSpacing": "imported/shared/size-16"
               },
               "children": [
                 {
                   "type": "text",
                   "name": "label",
-                  "margins": {
-                    "bottom": 16
-                  },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0"
@@ -414,7 +485,8 @@ const COMPONENTS = [
                   "fontStyle": "Regular",
                   "textFill": "imported/shared/color-16161640",
                   "lineHeight": 16,
-                  "letterSpacing": 0.32
+                  "letterSpacing": 0.32,
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -422,7 +494,7 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "MIN"
+                    "counter": "CENTER"
                   },
                   "bindings": {
                     "itemSpacing": "imported/toggle/toggle-appearance/column-gap",
@@ -460,7 +532,31 @@ const COMPONENTS = [
                         "varName": "imported/toggle/toggle-switch/width"
                       },
                       "fill": "imported/toggle/toggle-switch/background-color/toggled",
-                      "children": []
+                      "children": [
+                        {
+                          "type": "shape",
+                          "name": "toggle__switch-before",
+                          "shape": {
+                            "kind": "ellipse",
+                            "width": 18,
+                            "height": 18
+                          },
+                          "lits": {
+                            "fillColor": {
+                              "r": 1,
+                              "g": 1,
+                              "b": 1,
+                              "a": 1
+                            }
+                          },
+                          "absolute": {
+                            "h": "MIN",
+                            "v": "MIN",
+                            "left": 27,
+                            "top": 3
+                          }
+                        }
+                      ]
                     },
                     {
                       "type": "text",
@@ -764,6 +860,50 @@ function applyFrameSpec(node, spec) {
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+      if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+      if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+      if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
+    }
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -784,32 +924,74 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
-// Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
-function applyMarginBox(parent, childNode, childSpec) {
-  const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
+// v9 shape placement: exact offsets vs the parent box, after append.
+function applyShapeAbsolute(parent, childNode, childSpec) {
+  if (!childSpec.absolute) return;
   try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { /* nodes without layout sizing */ }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
-  if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
-  const box = figma.createFrame();
-  box.name = childSpec.name + ' (margin box)';
-  box.fills = [];
-  box.clipsContent = false;
-  parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
-  box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const a = childSpec.absolute;
+    // absolute-position round: STRETCH pins BOTH sides — size derives from
+    // the parent box minus the offsets (rail: left 0 + right 0, fixed height).
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      const w2 = a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width;
+      const h2 = a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height;
+      childNode.resize(w2, h2);
+    }
+    childNode.constraints = {
+      horizontal: a.h === 'STRETCH' ? 'STRETCH' : a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
+      vertical: a.v === 'STRETCH' ? 'STRETCH' : a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
+    };
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      childNode.x = a.h === 'STRETCH' ? (a.left || 0) : childNode.x;
+      childNode.y = a.v === 'STRETCH' ? (a.top || 0) : childNode.y;
+      if (a.h !== 'STRETCH' && a.left !== undefined) childNode.x = a.left;
+      if (a.h !== 'STRETCH' && a.right !== undefined) childNode.x = parent.width - a.right - childNode.width;
+      if (a.v !== 'STRETCH' && a.top !== undefined) childNode.y = a.top;
+      if (a.v !== 'STRETCH' && a.bottom !== undefined) childNode.y = parent.height - a.bottom - childNode.height;
+      return;
+    }
+    const w = childSpec.shape ? childSpec.shape.width : childNode.width;
+    const h = childSpec.shape ? childSpec.shape.height : childNode.height;
+    // Center of the intrinsic box in parent coordinates (MIN pins left/top,
+    // MAX pins right/bottom, CENTER centers):
+    const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
+    const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Rotation moves the measured box — correct against the actual bounds.
+    const bb = childNode.absoluteBoundingBox;
+    const pb = parent.absoluteBoundingBox;
+    if (bb && pb) {
+      childNode.x += cx - bb.width / 2 - (bb.x - pb.x);
+      childNode.y += cy - bb.height / 2 - (bb.y - pb.y);
+    } else {
+      childNode.x = cx - w / 2;
+      childNode.y = cy - h / 2;
+    }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
+function resizeOutOfFlow(parent, built) {
+  for (const pair of built) {
+    const childSpec = pair[0], childNode = pair[1];
+    try {
+      if (childSpec.insetOverlay) {
+        const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+        childNode.x = o.left || 0;
+        childNode.y = o.top || 0;
+        childNode.resize(
+          Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
+          Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
+        );
+      } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
+        const a = childSpec.absolute;
+        childNode.resize(
+          a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width,
+          a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height,
+        );
+        if (a.h === 'STRETCH') childNode.x = a.left || 0;
+        if (a.v === 'STRETCH') childNode.y = a.top || 0;
+      }
+    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
+  }
 }
 
 async function buildNode(spec, registry) {
@@ -901,6 +1083,37 @@ async function buildNode(spec, registry) {
         registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
       }
     }
+  } else if (spec.type === 'shape') {
+    // v9 shape (#42): a REAL parametric node with native rotation.
+    node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
+      : spec.shape.kind === 'rect' ? figma.createRectangle()
+      : figma.createPolygon();
+    if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
+    node.resize(spec.shape.width, spec.shape.height);
+    // Shape nodes ship a default gray paint — a spec with NO fill channel
+    // clears it (a canvas artifact is not contract data; Phase B deviation 3).
+    // Round 5f (B5E finding 2): a shape's LITERAL fill (lits.fillColor — the
+    // RadioButton checked dot's white, compiled from the decor's
+    // background-color literal) was DROPPED here (the shape branch never runs
+    // applyFrameSpec's litsRuntime), so the dot landed with no fill and had to
+    // be hand-corrected on canvas each re-amend. Apply it at the SOURCE:
+    // bound fill wins; else a literal fill; else clear.
+    node.fills = spec.fill
+      ? [boundPaint(spec.fill, node)]
+      : (spec.lits && spec.lits.fillColor)
+        ? [{ type: 'SOLID', color: { r: spec.lits.fillColor.r, g: spec.lits.fillColor.g, b: spec.lits.fillColor.b }, opacity: spec.lits.fillColor.a === undefined ? 1 : spec.lits.fillColor.a }]
+        : [];
+    // spec.stroke + spec.bindings apply exactly as on frames (Phase B
+    // deviation 2: the emitted shape branch silently dropped the checkbox /
+    // radio backdrop strokes and radii — the shim now lives at the source).
+    if (spec.stroke) {
+      node.strokes = [boundPaint(spec.stroke, node)];
+      node.strokeAlign = 'INSIDE';
+    }
+    for (const [field, varName] of Object.entries(spec.bindings || {})) {
+      node.setBoundVariable(field, need(varName));
+    }
+    if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -915,6 +1128,7 @@ async function buildNode(spec, registry) {
     node.appendChild(childNode);
     built.push([child, childNode]);
     applyOverlay(node, childNode, child);
+    applyShapeAbsolute(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -945,8 +1159,8 @@ async function buildNode(spec, registry) {
     if (child.fillW && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
-    applyMarginBox(node, childNode, child);
   }
+  resizeOutOfFlow(node, built);
   return node;
 }
 
@@ -1154,6 +1368,7 @@ async function amendSet(set, C) {
         comp.appendChild(childNode);
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
@@ -1168,8 +1383,8 @@ async function amendSet(set, C) {
         if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
-    applyMarginBox(comp, childNode, childSpec);
       }
+  resizeOutOfFlow(comp, built);
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -1304,6 +1519,7 @@ async function amendComponent(comp, C) {
     comp.appendChild(childNode);
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
     }
@@ -1319,6 +1535,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
+  resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }

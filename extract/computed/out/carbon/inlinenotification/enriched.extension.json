@@ -275,189 +275,9 @@
             "$value": "0",
             "$type": "number"
           },
-          "row-rule-color": {
-            "high": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#161616",
-              "$type": "color"
-            }
-          }
-        },
-        "part-0-0-0": {
-          "color": {
-            "high": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#161616",
-              "$type": "color"
-            }
-          },
-          "row-rule-color": {
-            "high": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#161616",
-              "$type": "color"
-            }
-          }
-        },
-        "part-0-0-1-2": {
-          "color": {
-            "high": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#161616",
-              "$type": "color"
-            }
-          },
-          "row-rule-color": {
-            "high": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#161616",
-              "$type": "color"
-            }
-          }
-        },
-        "part-0-0-2": {
-          "color": {
-            "high": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#161616",
-              "$type": "color"
-            }
-          },
-          "fill": {
-            "$value": "#f1c21b",
-            "$type": "color"
-          },
-          "row-rule-color": {
-            "high": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#161616",
-              "$type": "color"
-            }
-          }
-        },
-        "part-0-0-1": {
-          "color": {
-            "high": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#161616",
-              "$type": "color"
-            }
-          },
-          "opacity": {
-            "$value": "0",
-            "$type": "number"
-          },
-          "row-rule-color": {
-            "high": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#161616",
-              "$type": "color"
-            }
-          }
-        },
-        "label": {
-          "color": {
-            "high": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#161616",
-              "$type": "color"
-            }
-          },
-          "fill": {
-            "error": {
-              "high": {
-                "$value": "#fa4d56",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#da1e28",
-                "$type": "color"
-              }
-            },
-            "info": {
-              "high": {
-                "$value": "#4589ff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#0043ce",
-                "$type": "color"
-              }
-            },
-            "info-square": {
-              "high": {
-                "$value": "#4589ff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#0043ce",
-                "$type": "color"
-              }
-            },
-            "success": {
-              "high": {
-                "$value": "#42be65",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#24a148",
-                "$type": "color"
-              }
-            },
-            "warning": {
-              "high": {
-                "$value": "#f1c21b",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#f1c21b",
-                "$type": "color"
-              }
-            },
-            "warning-alt": {
-              "high": {
-                "$value": "#f1c21b",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#f1c21b",
-                "$type": "color"
-              }
-            }
-          },
-          "font-weight": {
-            "$value": "400",
-            "$type": "number"
+          "margin-right": {
+            "$value": "16px",
+            "$type": "dimension"
           },
           "row-rule-color": {
             "high": {
@@ -500,7 +320,7 @@
             }
           }
         },
-        "label-2": {
+        "label": {
           "color": {
             "high": {
               "$value": "#ffffff",
@@ -538,7 +358,7 @@
             }
           }
         },
-        "label-3": {
+        "label-2": {
           "color": {
             "high": {
               "$value": "#ffffff",
@@ -612,10 +432,6 @@
         },
         "size-48": {
           "$value": "48px",
-          "$type": "dimension"
-        },
-        "size-16": {
-          "$value": "16px",
           "$type": "dimension"
         },
         "size-14": {
@@ -999,60 +815,6 @@
       "class": "currentColor"
     },
     {
-      "part": "label",
-      "channel": "border-bottom-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label",
-      "channel": "border-left-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label",
-      "channel": "border-right-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label",
-      "channel": "border-top-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label",
-      "channel": "caret-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label",
-      "channel": "column-rule-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label",
-      "channel": "outline-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label",
-      "channel": "text-decoration-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label",
-      "channel": "text-emphasis-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
       "part": "inline-notification__text-wrapper",
       "channel": "border-bottom-color",
       "foldedInto": "color",
@@ -1107,109 +869,109 @@
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-2",
+      "part": "label",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-3",
+      "part": "label-2",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-3",
+      "part": "label-2",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-3",
+      "part": "label-2",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-3",
+      "part": "label-2",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-3",
+      "part": "label-2",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-3",
+      "part": "label-2",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-3",
+      "part": "label-2",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-3",
+      "part": "label-2",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "label-3",
+      "part": "label-2",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1431,48 +1193,6 @@
       "distinctValues": 1
     },
     {
-      "part": "part-0-0-0",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")",
-      "distinctValues": 5
-    },
-    {
-      "part": "part-0-0-0",
-      "channel": "fill",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "none",
-      "distinctValues": 7
-    },
-    {
-      "part": "part-0-0-1-2",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")",
-      "distinctValues": 4
-    },
-    {
-      "part": "part-0-0-2",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")",
-      "distinctValues": 1
-    },
-    {
-      "part": "part-0-0-1",
-      "channel": "d",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")",
-      "distinctValues": 2
-    },
-    {
-      "part": "part-0-0-1",
-      "channel": "fill",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "none",
-      "distinctValues": 3
-    },
-    {
       "part": "inline-notification__text-wrapper",
       "channel": "flex-wrap",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -1480,7 +1200,7 @@
       "distinctValues": 1
     },
     {
-      "part": "label-3",
+      "part": "label-2",
       "channel": "word-break",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "break-word",
@@ -1496,11 +1216,6 @@
   ],
   "stateOverflow": [],
   "overflowBindings": [
-    {
-      "part": "part-0-0-1-2",
-      "channel": "fill",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
     {
       "part": "inline-notification__close-button",
       "channel": "outline-color",
@@ -1614,9 +1329,7 @@
     "control-fallback: no control for <path> — span control used (part part-0-0-1-2)",
     "control-fallback: no control for <path> — span control used (part part-0-0-2)",
     "control-fallback: no control for <path> — span control used (part part-0-0-1)",
-    "control-fallback: no control for <title> — span control used (part label)",
-    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "svg-host-color-carried: inline-notification__close-button — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
     "control-fallback: no control for <path> — span control used (part part-1-0-0)",
@@ -1625,13 +1338,10 @@
     "inheritance-check-rejected: label-2.font-weight — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-2.letter-spacing — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-2.line-height — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.font-size — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.letter-spacing — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.line-height — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.font-size — values track ancestor \"icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.font-weight — values track ancestor \"icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.line-height — values track ancestor \"icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.letter-spacing — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-only: icon.caret-color equals ancestor \"inline-notification__details\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: icon.color equals ancestor \"inline-notification__details\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: inline-notification__details.caret-color equals ancestor \"root\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
@@ -1640,20 +1350,8 @@
     "inheritance-only: inline-notification__text-wrapper.color equals ancestor \"inline-notification__details\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: label-2.caret-color equals ancestor \"inline-notification__text-wrapper\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: label-2.color equals ancestor \"inline-notification__text-wrapper\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: label-3.caret-color equals ancestor \"inline-notification__text-wrapper\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: label-3.color equals ancestor \"inline-notification__text-wrapper\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: label.caret-color equals ancestor \"icon\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: label.color equals ancestor \"icon\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: label.fill equals ancestor \"icon\" on all 48 captured planes — the part carries no independent fill fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-0-0.caret-color equals ancestor \"icon\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-0-0.color equals ancestor \"icon\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-0-1-2.caret-color equals ancestor \"icon\" on all 32 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-0-1-2.color equals ancestor \"icon\" on all 32 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-0-1.caret-color equals ancestor \"icon\" on all 16 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-0-1.color equals ancestor \"icon\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-0-2.caret-color equals ancestor \"icon\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-0-2.color equals ancestor \"icon\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-0-2.fill equals ancestor \"icon\" on all 8 captured planes — the part carries no independent fill fact (CSS inheritance, observed)"
+    "inheritance-only: label.caret-color equals ancestor \"inline-notification__text-wrapper\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"inline-notification__text-wrapper\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1686,19 +1384,15 @@
         "join": "computed-only"
       },
       {
-        "part": "label",
-        "join": "computed-only"
-      },
-      {
         "part": "inline-notification__text-wrapper",
         "join": "computed-only"
       },
       {
-        "part": "label-2",
+        "part": "label",
         "join": "computed-only"
       },
       {
-        "part": "label-3",
+        "part": "label-2",
         "join": "computed-only"
       },
       {
@@ -1722,32 +1416,33 @@
       "root",
       "inline-notification__details",
       "icon",
-      "part-0-0-0",
-      "part-0-0-1-2",
-      "part-0-0-2",
-      "part-0-0-1",
-      "label",
       "inline-notification__text-wrapper",
+      "label",
       "label-2",
-      "label-3",
       "inline-notification__close-button"
     ],
     "svgAssets": [
+      "inline-notification-icon-error",
+      "inline-notification-icon-info",
+      "inline-notification-icon-info-square",
+      "inline-notification-icon-success",
+      "inline-notification-icon-warning",
+      "inline-notification-icon-warning-alt",
       "inline-notification-inline-notification-close-button"
     ],
     "receipts": [
-      "svg-child-outside-grammar: InlineNotification.icon@error.high — <title> (v1 carries path/g only); asset refused",
-      "svg-child-outside-grammar: InlineNotification.icon@error.low — <title> (v1 carries path/g only); asset refused",
-      "svg-child-outside-grammar: InlineNotification.icon@info.high — <title> (v1 carries path/g only); asset refused",
-      "svg-child-outside-grammar: InlineNotification.icon@info.low — <title> (v1 carries path/g only); asset refused",
-      "svg-child-outside-grammar: InlineNotification.icon@info-square.high — <title> (v1 carries path/g only); asset refused",
-      "svg-child-outside-grammar: InlineNotification.icon@info-square.low — <title> (v1 carries path/g only); asset refused",
-      "svg-child-outside-grammar: InlineNotification.icon@success.high — <title> (v1 carries path/g only); asset refused",
-      "svg-child-outside-grammar: InlineNotification.icon@success.low — <title> (v1 carries path/g only); asset refused",
-      "svg-child-outside-grammar: InlineNotification.icon@warning.high — <title> (v1 carries path/g only); asset refused",
-      "svg-child-outside-grammar: InlineNotification.icon@warning.low — <title> (v1 carries path/g only); asset refused",
-      "svg-child-outside-grammar: InlineNotification.icon@warning-alt.high — <title> (v1 carries path/g only); asset refused",
-      "svg-child-outside-grammar: InlineNotification.icon@warning-alt.low — <title> (v1 carries path/g only); asset refused",
+      "svg-viewbox-reconstructed: InlineNotification.icon@error.high — 0 0 20 20 from computed size 20×20 (path extent 19.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: InlineNotification.icon@error.low — 0 0 20 20 from computed size 20×20 (path extent 19.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.icon@info.high — computed size 20 < path extent 30; viewBox reconstructed as 0 0 30 30 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.icon@info.low — computed size 20 < path extent 30; viewBox reconstructed as 0 0 30 30 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.icon@info-square.high — computed size 20 < path extent 28; viewBox reconstructed as 0 0 28 28 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.icon@info-square.low — computed size 20 < path extent 28; viewBox reconstructed as 0 0 28 28 (named reconstruction)",
+      "svg-viewbox-reconstructed: InlineNotification.icon@success.high — 0 0 20 20 from computed size 20×20 (path extent 19.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: InlineNotification.icon@success.low — 0 0 20 20 from computed size 20×20 (path extent 19.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: InlineNotification.icon@warning.high — 0 0 20 20 from computed size 20×20 (path extent 19.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: InlineNotification.icon@warning.low — 0 0 20 20 from computed size 20×20 (path extent 19.0; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.icon@warning-alt.high — computed size 20 < path extent 30; viewBox reconstructed as 0 0 30 30 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.icon@warning-alt.low — computed size 20 < path extent 30; viewBox reconstructed as 0 0 30 30 (named reconstruction)",
       "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@error.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
       "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@error.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
       "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@info.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
@@ -1761,12 +1456,9 @@
       "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@warning-alt.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
       "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@warning-alt.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
       "root-display-carried: flex",
-      "presence-carried: part-0-0-1-2 (8/12 combos) →  hidden-when kind=error, kind=success",
-      "presence-carried: part-0-0-2 (2/12 combos) →  hidden-when kind=error, kind=info, kind=info-square, kind=success, kind=warning",
-      "sr-only-carried-as-hidden: part-0-0-1 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
-      "literal-text-carried: label = \"error icon\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "literal-text-carried: label-2 = \"Notification title\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "literal-text-carried: label-3 = \"Notification subtitle\" (no text prop sample matches — the mounted value is carried verbatim)"
+      "literal-text-carried: label = \"Notification title\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-2 = \"Notification subtitle\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "pseudo-decor-carried: root::before → shape part \"root-before\" (rect 425×48 at 0,0, fill rgba(0, 0, 0, 0); drawn in 6/12 default-interaction combos, hidden-when contrast=high; translate folded into top/left — round 5c S5)"
     ],
     "refusals": []
   },
@@ -1788,7 +1480,6 @@
     "declared fact carried: inline-notification__close-button.transition-duration = 0.11s, 0.11s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: inline-notification__close-button.transition-property = outline, background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: inline-notification__close-button.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "nested pair carried: icon.fill = per-contrast map whose refs substitute kind (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
-    "nested pair carried: label.fill = per-contrast map whose refs substitute kind (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)"
+    "nested pair carried: icon.fill = per-contrast map whose refs substitute kind (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)"
   ]
 }

@@ -13,8 +13,8 @@ const COMPONENTS = [
     "textProps": [],
     "fontStyles": [
       "Medium",
-      "Regular",
-      "Semi Bold"
+      "Semi Bold",
+      "Regular"
     ],
     "variants": [
       {
@@ -69,31 +69,11 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/high",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-error",
+                      "svg": "<svg fill=\"#fa4d56\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\"/><path d=\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\" opacity=\"0\"/></svg>",
+                      "svgPaintVar": "imported/inline-notification/icon/fill/error/high",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -109,26 +89,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/high",
+                      "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/high",
+                      "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -136,15 +116,39 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
             }
           ]
         }
@@ -201,31 +205,11 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/low",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-error",
+                      "svg": "<svg fill=\"#da1e28\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\"/><path d=\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\" opacity=\"0\"/></svg>",
+                      "svgPaintVar": "imported/inline-notification/icon/fill/error/low",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -241,26 +225,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/low",
+                      "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/low",
+                      "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -268,15 +252,68 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
+            },
+            {
+              "type": "shape",
+              "name": "root-before",
+              "shape": {
+                "kind": "rect",
+                "width": 425,
+                "height": 48
+              },
+              "lits": {
+                "fillClear": true,
+                "strokeSides": {
+                  "top": 1,
+                  "right": 1,
+                  "bottom": 1
+                },
+                "strokeColor": {
+                  "r": 0.8549019607843137,
+                  "g": 0.11764705882352941,
+                  "b": 0.1568627450980392,
+                  "a": 1
+                }
+              },
+              "absolute": {
+                "h": "MIN",
+                "v": "MIN",
+                "left": 0,
+                "top": 0
+              }
             }
           ]
         }
@@ -333,45 +370,10 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-0-0-1-2",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/high",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-info",
+                      "svg": "<svg viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -387,26 +389,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/high",
+                      "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/high",
+                      "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -414,15 +416,39 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
             }
           ]
         }
@@ -479,45 +505,10 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-0-0-1-2",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/low",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-info",
+                      "svg": "<svg viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -533,26 +524,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/low",
+                      "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/low",
+                      "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -560,15 +551,68 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
+            },
+            {
+              "type": "shape",
+              "name": "root-before",
+              "shape": {
+                "kind": "rect",
+                "width": 425,
+                "height": 48
+              },
+              "lits": {
+                "fillClear": true,
+                "strokeSides": {
+                  "top": 1,
+                  "right": 1,
+                  "bottom": 1
+                },
+                "strokeColor": {
+                  "r": 0.8549019607843137,
+                  "g": 0.11764705882352941,
+                  "b": 0.1568627450980392,
+                  "a": 1
+                }
+              },
+              "absolute": {
+                "h": "MIN",
+                "v": "MIN",
+                "left": 0,
+                "top": 0
+              }
             }
           ]
         }
@@ -625,45 +669,10 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-0-0-1-2",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/high",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-info-square",
+                      "svg": "<svg viewBox=\"0 0 28 28\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -679,26 +688,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/high",
+                      "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/high",
+                      "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -706,15 +715,39 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
             }
           ]
         }
@@ -771,45 +804,10 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-0-0-1-2",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/low",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-info-square",
+                      "svg": "<svg viewBox=\"0 0 28 28\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -825,26 +823,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/low",
+                      "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/low",
+                      "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -852,15 +850,68 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
+            },
+            {
+              "type": "shape",
+              "name": "root-before",
+              "shape": {
+                "kind": "rect",
+                "width": 425,
+                "height": 48
+              },
+              "lits": {
+                "fillClear": true,
+                "strokeSides": {
+                  "top": 1,
+                  "right": 1,
+                  "bottom": 1
+                },
+                "strokeColor": {
+                  "r": 0.8549019607843137,
+                  "g": 0.11764705882352941,
+                  "b": 0.1568627450980392,
+                  "a": 1
+                }
+              },
+              "absolute": {
+                "h": "MIN",
+                "v": "MIN",
+                "left": 0,
+                "top": 0
+              }
             }
           ]
         }
@@ -917,31 +968,10 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/high",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-success",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\"/><path d=\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\" fill=\"none\" opacity=\"0\"/></svg>",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -957,26 +987,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/high",
+                      "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/high",
+                      "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -984,15 +1014,39 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
             }
           ]
         }
@@ -1049,31 +1103,10 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/low",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-success",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\"/><path d=\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\" fill=\"none\" opacity=\"0\"/></svg>",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -1089,26 +1122,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/low",
+                      "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/low",
+                      "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -1116,15 +1149,68 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
+            },
+            {
+              "type": "shape",
+              "name": "root-before",
+              "shape": {
+                "kind": "rect",
+                "width": 425,
+                "height": 48
+              },
+              "lits": {
+                "fillClear": true,
+                "strokeSides": {
+                  "top": 1,
+                  "right": 1,
+                  "bottom": 1
+                },
+                "strokeColor": {
+                  "r": 0.8549019607843137,
+                  "g": 0.11764705882352941,
+                  "b": 0.1568627450980392,
+                  "a": 1
+                }
+              },
+              "absolute": {
+                "h": "MIN",
+                "v": "MIN",
+                "left": 0,
+                "top": 0
+              }
             }
           ]
         }
@@ -1181,45 +1267,10 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-0-0-1-2",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/high",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-warning",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\"/><path d=\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\" fill=\"rgba(0, 0, 0, 1)\"/></svg>",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -1235,26 +1286,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/high",
+                      "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/high",
+                      "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -1262,15 +1313,39 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
             }
           ]
         }
@@ -1327,45 +1402,10 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-0-0-1-2",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/low",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-warning",
+                      "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\"/><path d=\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\" fill=\"rgba(0, 0, 0, 1)\"/></svg>",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -1381,26 +1421,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/low",
+                      "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/low",
+                      "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -1408,15 +1448,68 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
+            },
+            {
+              "type": "shape",
+              "name": "root-before",
+              "shape": {
+                "kind": "rect",
+                "width": 425,
+                "height": 48
+              },
+              "lits": {
+                "fillClear": true,
+                "strokeSides": {
+                  "top": 1,
+                  "right": 1,
+                  "bottom": 1
+                },
+                "strokeColor": {
+                  "r": 0.8549019607843137,
+                  "g": 0.11764705882352941,
+                  "b": 0.1568627450980392,
+                  "a": 1
+                }
+              },
+              "absolute": {
+                "h": "MIN",
+                "v": "MIN",
+                "left": 0,
+                "top": 0
+              }
             }
           ]
         }
@@ -1473,59 +1566,10 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-0-0-1-2",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-0-0-2",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/high",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-warning-alt",
+                      "svg": "<svg viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\" fill=\"rgba(0, 0, 0, 1)\"/><path d=\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\"/><path d=\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\"/></svg>",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -1541,26 +1585,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/high",
+                      "textFill": "imported/inline-notification/label/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/high",
+                      "textFill": "imported/inline-notification/label-2/color/high",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -1568,15 +1612,39 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
             }
           ]
         }
@@ -1633,59 +1701,10 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "frame",
-                      "name": "part-0-0-0",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-0-0-1-2",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "frame",
-                      "name": "part-0-0-2",
-                      "layout": {
-                        "mode": "HORIZONTAL",
-                        "primary": "MIN",
-                        "counter": "MIN"
-                      },
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "children": []
-                    },
-                    {
-                      "type": "text",
-                      "name": "label",
-                      "bindings": {
-                        "minHeight": "imported/shared/size-0",
-                        "minWidth": "imported/shared/size-0"
-                      },
-                      "characters": "error icon",
-                      "fontSize": 16,
-                      "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label/color/low",
-                      "lineHeight": 16
+                      "type": "svg",
+                      "name": "icon-warning-alt",
+                      "svg": "<svg viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\" fill=\"rgba(0, 0, 0, 1)\"/><path d=\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\"/><path d=\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\"/></svg>",
+                      "iconSize": 20
                     }
                   ]
                 },
@@ -1701,26 +1720,26 @@ const COMPONENTS = [
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
                     "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
-                    "itemSpacing": "imported/inline-notification/label-2/margin-right"
+                    "itemSpacing": "imported/inline-notification/label/margin-right"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "name": "label-2",
+                      "name": "label",
                       "characters": "Notification title",
                       "fontSize": 14,
                       "fontStyle": "Semi Bold",
-                      "textFill": "imported/inline-notification/label-2/color/low",
+                      "textFill": "imported/inline-notification/label/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     },
                     {
                       "type": "text",
-                      "name": "label-3",
+                      "name": "label-2",
                       "characters": "Notification subtitle",
                       "fontSize": 14,
                       "fontStyle": "Regular",
-                      "textFill": "imported/inline-notification/label-3/color/low",
+                      "textFill": "imported/inline-notification/label-2/color/low",
                       "lineHeight": 18.0001,
                       "letterSpacing": 0.16
                     }
@@ -1728,15 +1747,68 @@ const COMPONENTS = [
                 }
               ],
               "bindings": {
-                "itemSpacing": "imported/shared/size-16"
+                "itemSpacing": "imported/inline-notification/icon/margin-right"
               }
             },
             {
-              "type": "svg",
+              "type": "frame",
               "name": "inline-notification__close-button",
-              "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
-              "iconSize": 16
+              "layout": {
+                "mode": "VERTICAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "inline-notification__close-button-icon",
+                  "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                  "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
+                  "iconSize": 16
+                }
+              ],
+              "fill": "imported/inline-notification/inline-notification-close-button/background-color",
+              "bindings": {
+                "strokeBottomWeight": "imported/shared/size-0",
+                "strokeLeftWeight": "imported/shared/size-0",
+                "strokeRightWeight": "imported/shared/size-0",
+                "strokeTopWeight": "imported/shared/size-0",
+                "maxWidth": "imported/shared/size-48",
+                "minWidth": "imported/shared/size-48",
+                "paddingBottom": "imported/shared/size-0",
+                "paddingLeft": "imported/shared/size-0",
+                "paddingRight": "imported/shared/size-0",
+                "paddingTop": "imported/shared/size-0"
+              }
+            },
+            {
+              "type": "shape",
+              "name": "root-before",
+              "shape": {
+                "kind": "rect",
+                "width": 425,
+                "height": 48
+              },
+              "lits": {
+                "fillClear": true,
+                "strokeSides": {
+                  "top": 1,
+                  "right": 1,
+                  "bottom": 1
+                },
+                "strokeColor": {
+                  "r": 0.8549019607843137,
+                  "g": 0.11764705882352941,
+                  "b": 0.1568627450980392,
+                  "a": 1
+                }
+              },
+              "absolute": {
+                "h": "MIN",
+                "v": "MIN",
+                "left": 0,
+                "top": 0
+              }
             }
           ]
         }
@@ -2025,6 +2097,51 @@ function applyFrameSpec(node, spec) {
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeColor) node.strokes = [{ type: 'SOLID', color: { r: li.strokeColor.r, g: li.strokeColor.g, b: li.strokeColor.b }, opacity: li.strokeColor.a === undefined ? 1 : li.strokeColor.a }];
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+      if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+      if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+      if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
+    }
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -2043,6 +2160,76 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
   } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
+// v9 shape placement: exact offsets vs the parent box, after append.
+function applyShapeAbsolute(parent, childNode, childSpec) {
+  if (!childSpec.absolute) return;
+  try {
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const a = childSpec.absolute;
+    // absolute-position round: STRETCH pins BOTH sides — size derives from
+    // the parent box minus the offsets (rail: left 0 + right 0, fixed height).
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      const w2 = a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width;
+      const h2 = a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height;
+      childNode.resize(w2, h2);
+    }
+    childNode.constraints = {
+      horizontal: a.h === 'STRETCH' ? 'STRETCH' : a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
+      vertical: a.v === 'STRETCH' ? 'STRETCH' : a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
+    };
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      childNode.x = a.h === 'STRETCH' ? (a.left || 0) : childNode.x;
+      childNode.y = a.v === 'STRETCH' ? (a.top || 0) : childNode.y;
+      if (a.h !== 'STRETCH' && a.left !== undefined) childNode.x = a.left;
+      if (a.h !== 'STRETCH' && a.right !== undefined) childNode.x = parent.width - a.right - childNode.width;
+      if (a.v !== 'STRETCH' && a.top !== undefined) childNode.y = a.top;
+      if (a.v !== 'STRETCH' && a.bottom !== undefined) childNode.y = parent.height - a.bottom - childNode.height;
+      return;
+    }
+    const w = childSpec.shape ? childSpec.shape.width : childNode.width;
+    const h = childSpec.shape ? childSpec.shape.height : childNode.height;
+    // Center of the intrinsic box in parent coordinates (MIN pins left/top,
+    // MAX pins right/bottom, CENTER centers):
+    const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
+    const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Rotation moves the measured box — correct against the actual bounds.
+    const bb = childNode.absoluteBoundingBox;
+    const pb = parent.absoluteBoundingBox;
+    if (bb && pb) {
+      childNode.x += cx - bb.width / 2 - (bb.x - pb.x);
+      childNode.y += cy - bb.height / 2 - (bb.y - pb.y);
+    } else {
+      childNode.x = cx - w / 2;
+      childNode.y = cy - h / 2;
+    }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
+function resizeOutOfFlow(parent, built) {
+  for (const pair of built) {
+    const childSpec = pair[0], childNode = pair[1];
+    try {
+      if (childSpec.insetOverlay) {
+        const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
+        childNode.x = o.left || 0;
+        childNode.y = o.top || 0;
+        childNode.resize(
+          Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
+          Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
+        );
+      } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
+        const a = childSpec.absolute;
+        childNode.resize(
+          a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width,
+          a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height,
+        );
+        if (a.h === 'STRETCH') childNode.x = a.left || 0;
+        if (a.v === 'STRETCH') childNode.y = a.top || 0;
+      }
+    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
+  }
 }
 
 // Round 5d: auto-layout has no per-child margin — a child carrying residual
@@ -2171,6 +2358,53 @@ async function buildNode(spec, registry) {
         registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
       }
     }
+  } else if (spec.type === 'shape') {
+    // v9 shape (#42): a REAL parametric node with native rotation.
+    node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
+      : spec.shape.kind === 'rect' ? figma.createRectangle()
+      : figma.createPolygon();
+    if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
+    node.resize(spec.shape.width, spec.shape.height);
+    // Shape nodes ship a default gray paint — a spec with NO fill channel
+    // clears it (a canvas artifact is not contract data; Phase B deviation 3).
+    // Round 5f (B5E finding 2): a shape's LITERAL fill (lits.fillColor — the
+    // RadioButton checked dot's white, compiled from the decor's
+    // background-color literal) was DROPPED here (the shape branch never runs
+    // applyFrameSpec's litsRuntime), so the dot landed with no fill and had to
+    // be hand-corrected on canvas each re-amend. Apply it at the SOURCE:
+    // bound fill wins; else a literal fill; else clear.
+    node.fills = spec.fill
+      ? [boundPaint(spec.fill, node)]
+      : (spec.lits && spec.lits.fillColor)
+        ? [{ type: 'SOLID', color: { r: spec.lits.fillColor.r, g: spec.lits.fillColor.g, b: spec.lits.fillColor.b }, opacity: spec.lits.fillColor.a === undefined ? 1 : spec.lits.fillColor.a }]
+        : [];
+    // spec.stroke + spec.bindings apply exactly as on frames (Phase B
+    // deviation 2: the emitted shape branch silently dropped the checkbox /
+    // radio backdrop strokes and radii — the shim now lives at the source).
+    if (spec.stroke) {
+      node.strokes = [boundPaint(spec.stroke, node)];
+      node.strokeAlign = 'INSIDE';
+    }
+    // CARBON LIVE-DEFECT ROUND (D2): a shape's LITERAL RING. An unchecked
+    // Carbon checkbox box is a transparent square with a 1px border — a ring
+    // with no paint, no weight and no radius is not a box.
+    else if (spec.lits && spec.lits.strokeColor) {
+      node.strokes = [{ type: 'SOLID', color: { r: spec.lits.strokeColor.r, g: spec.lits.strokeColor.g, b: spec.lits.strokeColor.b }, opacity: spec.lits.strokeColor.a === undefined ? 1 : spec.lits.strokeColor.a }];
+      node.strokeAlign = 'INSIDE';
+    }
+    if (spec.lits && spec.lits.strokeWeight !== undefined) node.strokeWeight = spec.lits.strokeWeight;
+    if (spec.lits && spec.lits.strokeSides) {
+      const sw = spec.lits.strokeSides;
+      if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+      if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+      if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+      if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+    }
+    if (spec.lits && spec.lits.radius !== undefined) node.cornerRadius = spec.lits.radius;
+    for (const [field, varName] of Object.entries(spec.bindings || {})) {
+      node.setBoundVariable(field, need(varName));
+    }
+    if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -2185,6 +2419,7 @@ async function buildNode(spec, registry) {
     node.appendChild(childNode);
     built.push([child, childNode]);
     applyOverlay(node, childNode, child);
+    applyShapeAbsolute(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -2217,6 +2452,7 @@ async function buildNode(spec, registry) {
     }
     applyMarginBox(node, childNode, child);
   }
+  resizeOutOfFlow(node, built);
   return node;
 }
 
@@ -2424,6 +2660,7 @@ async function amendSet(set, C) {
         comp.appendChild(childNode);
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
@@ -2440,6 +2677,7 @@ async function amendSet(set, C) {
         }
     applyMarginBox(comp, childNode, childSpec);
       }
+  resizeOutOfFlow(comp, built);
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -2574,6 +2812,7 @@ async function amendComponent(comp, C) {
     comp.appendChild(childNode);
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
     }
@@ -2589,6 +2828,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
   }
+  resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }

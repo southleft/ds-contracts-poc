@@ -29,25 +29,18 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/modal/root/background-color",
-          "fixedHeight": {
-            "px": 1000,
-            "varName": "imported/modal/root/height"
-          },
           "bindings": {
             "minWidth": "imported/shared/size-0"
-          },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/modal/root/width"
           },
           "children": [
             {
               "type": "frame",
               "name": "modal-container",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "fill": "imported/modal/modal-container/background-color",
               "stroke": "imported/shared/color-c6c6c6",
@@ -201,35 +194,41 @@ const COMPONENTS = [
                               },
                               "children": [
                                 {
-                                  "type": "svg",
+                                  "type": "frame",
                                   "name": "btn",
-                                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-                                  "svgPaintVar": "imported/shared/color-ffffff",
-                                  "iconSize": 20
+                                  "layout": {
+                                    "mode": "HORIZONTAL",
+                                    "primary": "CENTER",
+                                    "counter": "CENTER"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "svg",
+                                      "name": "btn-icon",
+                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svgPaintVar": "imported/shared/color-ffffff",
+                                      "iconSize": 20
+                                    }
+                                  ],
+                                  "fill": "imported/shared/color-00000000",
+                                  "fixedHeight": {
+                                    "px": 48,
+                                    "varName": "imported/shared/size-48"
+                                  },
+                                  "bindings": {
+                                    "maxWidth": "imported/modal/btn/max-width",
+                                    "minWidth": "imported/shared/size-0",
+                                    "paddingBottom": "imported/shared/size-12",
+                                    "paddingLeft": "imported/shared/size-12",
+                                    "paddingRight": "imported/shared/size-12",
+                                    "paddingTop": "imported/shared/size-12"
+                                  },
+                                  "fixedWidth": {
+                                    "px": 48,
+                                    "varName": "imported/shared/size-48"
+                                  }
                                 }
                               ]
-                            },
-                            {
-                              "type": "frame",
-                              "name": "popover",
-                              "layout": {
-                                "mode": "HORIZONTAL",
-                                "primary": "MIN",
-                                "counter": "MIN"
-                              },
-                              "insetOverlay": true,
-                              "fixedHeight": {
-                                "px": 48,
-                                "varName": "imported/shared/size-48"
-                              },
-                              "bindings": {
-                                "minWidth": "imported/shared/size-0"
-                              },
-                              "fixedWidth": {
-                                "px": 48,
-                                "varName": "imported/shared/size-48"
-                              },
-                              "children": []
                             }
                           ]
                         }
@@ -262,7 +261,8 @@ const COMPONENTS = [
                     "paddingLeft": "imported/shared/size-16",
                     "paddingRight": "imported/shared/size-16",
                     "paddingTop": "imported/shared/size-8"
-                  }
+                  },
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -387,25 +387,18 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/modal/root/background-color",
-          "fixedHeight": {
-            "px": 1000,
-            "varName": "imported/modal/root/height"
-          },
           "bindings": {
             "minWidth": "imported/shared/size-0"
-          },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/modal/root/width"
           },
           "children": [
             {
               "type": "frame",
               "name": "modal-container",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "fill": "imported/modal/modal-container/background-color",
               "stroke": "imported/shared/color-c6c6c6",
@@ -559,35 +552,41 @@ const COMPONENTS = [
                               },
                               "children": [
                                 {
-                                  "type": "svg",
+                                  "type": "frame",
                                   "name": "btn",
-                                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-                                  "svgPaintVar": "imported/shared/color-ffffff",
-                                  "iconSize": 20
+                                  "layout": {
+                                    "mode": "HORIZONTAL",
+                                    "primary": "CENTER",
+                                    "counter": "CENTER"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "svg",
+                                      "name": "btn-icon",
+                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svgPaintVar": "imported/shared/color-ffffff",
+                                      "iconSize": 20
+                                    }
+                                  ],
+                                  "fill": "imported/shared/color-00000000",
+                                  "fixedHeight": {
+                                    "px": 48,
+                                    "varName": "imported/shared/size-48"
+                                  },
+                                  "bindings": {
+                                    "maxWidth": "imported/modal/btn/max-width",
+                                    "minWidth": "imported/shared/size-0",
+                                    "paddingBottom": "imported/shared/size-12",
+                                    "paddingLeft": "imported/shared/size-12",
+                                    "paddingRight": "imported/shared/size-12",
+                                    "paddingTop": "imported/shared/size-12"
+                                  },
+                                  "fixedWidth": {
+                                    "px": 48,
+                                    "varName": "imported/shared/size-48"
+                                  }
                                 }
                               ]
-                            },
-                            {
-                              "type": "frame",
-                              "name": "popover",
-                              "layout": {
-                                "mode": "HORIZONTAL",
-                                "primary": "MIN",
-                                "counter": "MIN"
-                              },
-                              "insetOverlay": true,
-                              "fixedHeight": {
-                                "px": 48,
-                                "varName": "imported/shared/size-48"
-                              },
-                              "bindings": {
-                                "minWidth": "imported/shared/size-0"
-                              },
-                              "fixedWidth": {
-                                "px": 48,
-                                "varName": "imported/shared/size-48"
-                              },
-                              "children": []
                             }
                           ]
                         }
@@ -620,7 +619,8 @@ const COMPONENTS = [
                     "paddingLeft": "imported/shared/size-16",
                     "paddingRight": "imported/shared/size-16",
                     "paddingTop": "imported/shared/size-8"
-                  }
+                  },
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -745,25 +745,18 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/modal/root/background-color",
-          "fixedHeight": {
-            "px": 1000,
-            "varName": "imported/modal/root/height"
-          },
           "bindings": {
             "minWidth": "imported/shared/size-0"
-          },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/modal/root/width"
           },
           "children": [
             {
               "type": "frame",
               "name": "modal-container",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "fill": "imported/modal/modal-container/background-color",
               "stroke": "imported/shared/color-c6c6c6",
@@ -917,35 +910,41 @@ const COMPONENTS = [
                               },
                               "children": [
                                 {
-                                  "type": "svg",
+                                  "type": "frame",
                                   "name": "btn",
-                                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-                                  "svgPaintVar": "imported/shared/color-ffffff",
-                                  "iconSize": 20
+                                  "layout": {
+                                    "mode": "HORIZONTAL",
+                                    "primary": "CENTER",
+                                    "counter": "CENTER"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "svg",
+                                      "name": "btn-icon",
+                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svgPaintVar": "imported/shared/color-ffffff",
+                                      "iconSize": 20
+                                    }
+                                  ],
+                                  "fill": "imported/shared/color-00000000",
+                                  "fixedHeight": {
+                                    "px": 48,
+                                    "varName": "imported/shared/size-48"
+                                  },
+                                  "bindings": {
+                                    "maxWidth": "imported/modal/btn/max-width",
+                                    "minWidth": "imported/shared/size-0",
+                                    "paddingBottom": "imported/shared/size-12",
+                                    "paddingLeft": "imported/shared/size-12",
+                                    "paddingRight": "imported/shared/size-12",
+                                    "paddingTop": "imported/shared/size-12"
+                                  },
+                                  "fixedWidth": {
+                                    "px": 48,
+                                    "varName": "imported/shared/size-48"
+                                  }
                                 }
                               ]
-                            },
-                            {
-                              "type": "frame",
-                              "name": "popover",
-                              "layout": {
-                                "mode": "HORIZONTAL",
-                                "primary": "MIN",
-                                "counter": "MIN"
-                              },
-                              "insetOverlay": true,
-                              "fixedHeight": {
-                                "px": 48,
-                                "varName": "imported/shared/size-48"
-                              },
-                              "bindings": {
-                                "minWidth": "imported/shared/size-0"
-                              },
-                              "fixedWidth": {
-                                "px": 48,
-                                "varName": "imported/shared/size-48"
-                              },
-                              "children": []
                             }
                           ]
                         }
@@ -978,7 +977,8 @@ const COMPONENTS = [
                     "paddingLeft": "imported/shared/size-16",
                     "paddingRight": "imported/shared/size-16",
                     "paddingTop": "imported/shared/size-8"
-                  }
+                  },
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -1103,25 +1103,18 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/modal/root/background-color",
-          "fixedHeight": {
-            "px": 1000,
-            "varName": "imported/modal/root/height"
-          },
           "bindings": {
             "minWidth": "imported/shared/size-0"
-          },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/modal/root/width"
           },
           "children": [
             {
               "type": "frame",
               "name": "modal-container",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "VERTICAL",
                 "primary": "MIN",
-                "counter": "MIN"
+                "counter": "MIN",
+                "stretchChildren": true
               },
               "fill": "imported/modal/modal-container/background-color",
               "stroke": "imported/shared/color-c6c6c6",
@@ -1275,35 +1268,41 @@ const COMPONENTS = [
                               },
                               "children": [
                                 {
-                                  "type": "svg",
+                                  "type": "frame",
                                   "name": "btn",
-                                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-                                  "svgPaintVar": "imported/shared/color-ffffff",
-                                  "iconSize": 20
+                                  "layout": {
+                                    "mode": "HORIZONTAL",
+                                    "primary": "CENTER",
+                                    "counter": "CENTER"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "svg",
+                                      "name": "btn-icon",
+                                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+                                      "svgPaintVar": "imported/shared/color-ffffff",
+                                      "iconSize": 20
+                                    }
+                                  ],
+                                  "fill": "imported/shared/color-00000000",
+                                  "fixedHeight": {
+                                    "px": 48,
+                                    "varName": "imported/shared/size-48"
+                                  },
+                                  "bindings": {
+                                    "maxWidth": "imported/modal/btn/max-width",
+                                    "minWidth": "imported/shared/size-0",
+                                    "paddingBottom": "imported/shared/size-12",
+                                    "paddingLeft": "imported/shared/size-12",
+                                    "paddingRight": "imported/shared/size-12",
+                                    "paddingTop": "imported/shared/size-12"
+                                  },
+                                  "fixedWidth": {
+                                    "px": 48,
+                                    "varName": "imported/shared/size-48"
+                                  }
                                 }
                               ]
-                            },
-                            {
-                              "type": "frame",
-                              "name": "popover",
-                              "layout": {
-                                "mode": "HORIZONTAL",
-                                "primary": "MIN",
-                                "counter": "MIN"
-                              },
-                              "insetOverlay": true,
-                              "fixedHeight": {
-                                "px": 48,
-                                "varName": "imported/shared/size-48"
-                              },
-                              "bindings": {
-                                "minWidth": "imported/shared/size-0"
-                              },
-                              "fixedWidth": {
-                                "px": 48,
-                                "varName": "imported/shared/size-48"
-                              },
-                              "children": []
                             }
                           ]
                         }
@@ -1336,7 +1335,8 @@ const COMPONENTS = [
                     "paddingLeft": "imported/shared/size-16",
                     "paddingRight": "imported/shared/size-16",
                     "paddingTop": "imported/shared/size-8"
-                  }
+                  },
+                  "fillW": true
                 },
                 {
                   "type": "frame",
@@ -1449,7 +1449,7 @@ const COMPONENTS = [
         }
       }
     ],
-    "colW": 960
+    "colW": 380
   }
 ];
 const ROW_H = 240, PAD = 40;

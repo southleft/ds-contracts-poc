@@ -209,6 +209,16 @@ export const LITERAL_CHANNELS = new Set([
   // base combo's captured paddings when per-plane values refuse correlation
   // (Tag's remove-×/link planes shift them; the base plane is exact).
   'padding-left', 'padding-right', 'padding-top', 'padding-bottom',
+  // CARBON LIVE-DEFECT ROUND (pseudo-decor v2): placement OFFSETS and border
+  // COLOURS. An UNCONDITIONAL absolute decor box (Carbon's checkbox square,
+  // its toggle knob) declares `position: absolute` and carries its own
+  // offsets — `absolutePartPlacement` has always read them out of
+  // `resolveLiterals`, so the emitter expected this spelling before the
+  // registry allowed it. Border colours join for the same reason: an
+  // unchecked checkbox box is a transparent square with a 1px RING, and a
+  // ring is a colour, not only a width.
+  'top', 'right', 'bottom', 'left',
+  'border-color', 'border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color',
 ]);
 
 /** v14: per-enum-value literal overrides — the literals sibling of
@@ -366,9 +376,15 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
   },
   // -- display keywords outside the flex layout vocabulary ------------------
   display: {
-    value: kw('inline', 'inline-block', 'block', 'contents', 'none'),
+    // CARBON LIVE-DEFECT ROUND (D3): `list-item` and `flow-root` join the
+    // grammar. Both are BLOCK-LEVEL boxes in CSS block flow, and leaving them
+    // out did not make them safe — it made them SILENT: Carbon's
+    // `<li class="cds--accordion__item">` carried no display fact at all, so
+    // the canvas fell through to the emitter's row default and drew the 472px
+    // panel beside the 174px heading inside a 328px item.
+    value: kw('inline', 'inline-block', 'block', 'flow-root', 'list-item', 'contents', 'none'),
     canvas: 'annotate',
-    note: 'CSS display modes outside auto-layout flex (inline, block) have no direct Figma equivalent; the canvas approximates with frame nesting.',
+    note: 'CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).',
   },
   // -- wrapping & overflow --------------------------------------------------
   'text-wrap-mode': {

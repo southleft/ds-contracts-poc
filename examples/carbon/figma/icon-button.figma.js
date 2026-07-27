@@ -58,35 +58,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/primary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/primary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 24,
+                    "varName": "imported/icon-button/btn/height/xs"
+                  },
+                  "fixedWidth": {
+                    "px": 24,
+                    "varName": "imported/icon-button/btn/width/xs"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/primary",
+                  "stroke": "imported/icon-button/btn/border-top-color/primary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 24,
-                "varName": "imported/icon-button/popover/height/xs"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 24,
-                "varName": "imported/icon-button/popover/width/xs"
-              },
-              "children": []
             }
           ]
         }
@@ -134,35 +145,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/primary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/primary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 32,
+                    "varName": "imported/icon-button/btn/height/sm"
+                  },
+                  "fixedWidth": {
+                    "px": 32,
+                    "varName": "imported/icon-button/btn/width/sm"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/primary",
+                  "stroke": "imported/icon-button/btn/border-top-color/primary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 32,
-                "varName": "imported/icon-button/popover/height/sm"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 32,
-                "varName": "imported/icon-button/popover/width/sm"
-              },
-              "children": []
             }
           ]
         }
@@ -210,35 +232,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/primary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/primary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 40,
+                    "varName": "imported/icon-button/btn/height/md"
+                  },
+                  "fixedWidth": {
+                    "px": 40,
+                    "varName": "imported/icon-button/btn/width/md"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/primary",
+                  "stroke": "imported/icon-button/btn/border-top-color/primary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/icon-button/popover/height/md"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 40,
-                "varName": "imported/icon-button/popover/width/md"
-              },
-              "children": []
             }
           ]
         }
@@ -286,35 +319,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/primary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/primary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 48,
+                    "varName": "imported/icon-button/btn/height/lg"
+                  },
+                  "fixedWidth": {
+                    "px": 48,
+                    "varName": "imported/icon-button/btn/width/lg"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/primary",
+                  "stroke": "imported/icon-button/btn/border-top-color/primary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 48,
-                "varName": "imported/icon-button/popover/height/lg"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 48,
-                "varName": "imported/icon-button/popover/width/lg"
-              },
-              "children": []
             }
           ]
         }
@@ -362,35 +406,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/secondary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/secondary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 24,
+                    "varName": "imported/icon-button/btn/height/xs"
+                  },
+                  "fixedWidth": {
+                    "px": 24,
+                    "varName": "imported/icon-button/btn/width/xs"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/secondary",
+                  "stroke": "imported/icon-button/btn/border-top-color/secondary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 24,
-                "varName": "imported/icon-button/popover/height/xs"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 24,
-                "varName": "imported/icon-button/popover/width/xs"
-              },
-              "children": []
             }
           ]
         }
@@ -438,35 +493,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/secondary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/secondary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 32,
+                    "varName": "imported/icon-button/btn/height/sm"
+                  },
+                  "fixedWidth": {
+                    "px": 32,
+                    "varName": "imported/icon-button/btn/width/sm"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/secondary",
+                  "stroke": "imported/icon-button/btn/border-top-color/secondary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 32,
-                "varName": "imported/icon-button/popover/height/sm"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 32,
-                "varName": "imported/icon-button/popover/width/sm"
-              },
-              "children": []
             }
           ]
         }
@@ -514,35 +580,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/secondary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/secondary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 40,
+                    "varName": "imported/icon-button/btn/height/md"
+                  },
+                  "fixedWidth": {
+                    "px": 40,
+                    "varName": "imported/icon-button/btn/width/md"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/secondary",
+                  "stroke": "imported/icon-button/btn/border-top-color/secondary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/icon-button/popover/height/md"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 40,
-                "varName": "imported/icon-button/popover/width/md"
-              },
-              "children": []
             }
           ]
         }
@@ -590,35 +667,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/secondary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/secondary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 48,
+                    "varName": "imported/icon-button/btn/height/lg"
+                  },
+                  "fixedWidth": {
+                    "px": 48,
+                    "varName": "imported/icon-button/btn/width/lg"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/secondary",
+                  "stroke": "imported/icon-button/btn/border-top-color/secondary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 48,
-                "varName": "imported/icon-button/popover/height/lg"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 48,
-                "varName": "imported/icon-button/popover/width/lg"
-              },
-              "children": []
             }
           ]
         }
@@ -666,35 +754,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/tertiary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/tertiary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 24,
+                    "varName": "imported/icon-button/btn/height/xs"
+                  },
+                  "fixedWidth": {
+                    "px": 24,
+                    "varName": "imported/icon-button/btn/width/xs"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/tertiary",
+                  "stroke": "imported/icon-button/btn/border-top-color/tertiary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 24,
-                "varName": "imported/icon-button/popover/height/xs"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 24,
-                "varName": "imported/icon-button/popover/width/xs"
-              },
-              "children": []
             }
           ]
         }
@@ -742,35 +841,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/tertiary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/tertiary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 32,
+                    "varName": "imported/icon-button/btn/height/sm"
+                  },
+                  "fixedWidth": {
+                    "px": 32,
+                    "varName": "imported/icon-button/btn/width/sm"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/tertiary",
+                  "stroke": "imported/icon-button/btn/border-top-color/tertiary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 32,
-                "varName": "imported/icon-button/popover/height/sm"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 32,
-                "varName": "imported/icon-button/popover/width/sm"
-              },
-              "children": []
             }
           ]
         }
@@ -818,35 +928,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/tertiary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/tertiary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 40,
+                    "varName": "imported/icon-button/btn/height/md"
+                  },
+                  "fixedWidth": {
+                    "px": 40,
+                    "varName": "imported/icon-button/btn/width/md"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/tertiary",
+                  "stroke": "imported/icon-button/btn/border-top-color/tertiary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/icon-button/popover/height/md"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 40,
-                "varName": "imported/icon-button/popover/width/md"
-              },
-              "children": []
             }
           ]
         }
@@ -894,35 +1015,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/tertiary",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/tertiary",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 48,
+                    "varName": "imported/icon-button/btn/height/lg"
+                  },
+                  "fixedWidth": {
+                    "px": 48,
+                    "varName": "imported/icon-button/btn/width/lg"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/tertiary",
+                  "stroke": "imported/icon-button/btn/border-top-color/tertiary"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 48,
-                "varName": "imported/icon-button/popover/height/lg"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 48,
-                "varName": "imported/icon-button/popover/width/lg"
-              },
-              "children": []
             }
           ]
         }
@@ -970,35 +1102,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/ghost",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/ghost",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 24,
+                    "varName": "imported/icon-button/btn/height/xs"
+                  },
+                  "fixedWidth": {
+                    "px": 24,
+                    "varName": "imported/icon-button/btn/width/xs"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/ghost",
+                  "stroke": "imported/icon-button/btn/border-top-color/ghost"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 24,
-                "varName": "imported/icon-button/popover/height/xs"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 24,
-                "varName": "imported/icon-button/popover/width/xs"
-              },
-              "children": []
             }
           ]
         }
@@ -1046,35 +1189,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/ghost",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/ghost",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 32,
+                    "varName": "imported/icon-button/btn/height/sm"
+                  },
+                  "fixedWidth": {
+                    "px": 32,
+                    "varName": "imported/icon-button/btn/width/sm"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/ghost",
+                  "stroke": "imported/icon-button/btn/border-top-color/ghost"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 32,
-                "varName": "imported/icon-button/popover/height/sm"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 32,
-                "varName": "imported/icon-button/popover/width/sm"
-              },
-              "children": []
             }
           ]
         }
@@ -1122,35 +1276,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/ghost",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/ghost",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 40,
+                    "varName": "imported/icon-button/btn/height/md"
+                  },
+                  "fixedWidth": {
+                    "px": 40,
+                    "varName": "imported/icon-button/btn/width/md"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/ghost",
+                  "stroke": "imported/icon-button/btn/border-top-color/ghost"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/icon-button/popover/height/md"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 40,
-                "varName": "imported/icon-button/popover/width/md"
-              },
-              "children": []
             }
           ]
         }
@@ -1198,35 +1363,46 @@ const COMPONENTS = [
               },
               "children": [
                 {
-                  "type": "svg",
+                  "type": "frame",
                   "name": "btn",
-                  "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/btn/color/ghost",
-                  "iconSize": 16
+                  "layout": {
+                    "mode": "HORIZONTAL",
+                    "primary": "CENTER",
+                    "counter": "CENTER"
+                  },
+                  "children": [
+                    {
+                      "type": "svg",
+                      "name": "btn-icon",
+                      "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+                      "svgPaintVar": "imported/icon-button/btn/color/ghost",
+                      "iconSize": 16
+                    }
+                  ],
+                  "bindings": {
+                    "strokeBottomWeight": "imported/shared/size-1",
+                    "strokeLeftWeight": "imported/shared/size-1",
+                    "strokeRightWeight": "imported/shared/size-1",
+                    "strokeTopWeight": "imported/shared/size-1",
+                    "maxWidth": "imported/icon-button/btn/max-width",
+                    "minWidth": "imported/shared/size-0",
+                    "paddingBottom": "imported/shared/size-0",
+                    "paddingLeft": "imported/shared/size-0",
+                    "paddingRight": "imported/shared/size-0",
+                    "paddingTop": "imported/shared/size-0"
+                  },
+                  "fixedHeight": {
+                    "px": 48,
+                    "varName": "imported/icon-button/btn/height/lg"
+                  },
+                  "fixedWidth": {
+                    "px": 48,
+                    "varName": "imported/icon-button/btn/width/lg"
+                  },
+                  "fill": "imported/icon-button/btn/background-color/ghost",
+                  "stroke": "imported/icon-button/btn/border-top-color/ghost"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "popover",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "fixedHeight": {
-                "px": 48,
-                "varName": "imported/icon-button/popover/height/lg"
-              },
-              "bindings": {
-                "minWidth": "imported/shared/size-0"
-              },
-              "fixedWidth": {
-                "px": 48,
-                "varName": "imported/icon-button/popover/width/lg"
-              },
-              "children": []
             }
           ]
         }
@@ -1535,63 +1711,6 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
-// B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
-// lowered out of flow — ABSOLUTE, stretched to the parent, BEHIND the
-// in-flow siblings — matching the declared anatomy and the HTML render.
-function applyInsetOverlay(parent, childNode, childSpec) {
-  if (!childSpec.insetOverlay) return;
-  try {
-    // Round 5f (B5E finding 3): only a childless BACKDROP overlay (an
-    // inset:0 fill layer — TextField's backdrop) lowers BEHIND the in-flow
-    // siblings (index 0). A CONTENT overlay that carries glyphs (the Checkbox
-    // check, the RadioButton dot, a remove button) must stay ON TOP at its
-    // natural post-backdrop index — else the opaque backdrop sibling paints
-    // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
-    // previously hand-corrected on canvas each re-amend).
-    // Absolute-position round: the backdrop shove applies ONLY to true
-    // inset-0 backdrops (no offsets). An OFFSET overlay (Slider's rail/track
-    // at their y positions) keeps its compile-time paint order — the shove
-    // was inverting rail/track stacking.
-    if ((!childNode.children || childNode.children.length === 0) && !childSpec.insetOffsets) {
-      parent.insertChild(0, childNode);
-    }
-    childNode.layoutPositioning = 'ABSOLUTE';
-    childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
-    const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
-    childNode.x = o.left;
-    childNode.y = o.top;
-    childNode.resize(
-      Math.max(1, parent.width - o.left - o.right),
-      Math.max(1, parent.height - o.top - o.bottom),
-    );
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
-}
-
-function resizeOutOfFlow(parent, built) {
-  for (const pair of built) {
-    const childSpec = pair[0], childNode = pair[1];
-    try {
-      if (childSpec.insetOverlay) {
-        const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
-        childNode.x = o.left || 0;
-        childNode.y = o.top || 0;
-        childNode.resize(
-          Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
-          Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
-        );
-      } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
-        const a = childSpec.absolute;
-        childNode.resize(
-          a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width,
-          a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height,
-        );
-        if (a.h === 'STRETCH') childNode.x = a.left || 0;
-        if (a.v === 'STRETCH') childNode.y = a.top || 0;
-      }
-    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
-  }
-}
-
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -1722,9 +1841,7 @@ async function buildNode(spec, registry) {
     if (child.fillW && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
-    applyInsetOverlay(node, childNode, child);
   }
-  resizeOutOfFlow(node, built);
   return node;
 }
 
@@ -1946,9 +2063,7 @@ async function amendSet(set, C) {
         if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
-    applyInsetOverlay(comp, childNode, childSpec);
       }
-  resizeOutOfFlow(comp, built);
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -2097,9 +2212,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
-    applyInsetOverlay(comp, childNode, childSpec);
   }
-  resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }

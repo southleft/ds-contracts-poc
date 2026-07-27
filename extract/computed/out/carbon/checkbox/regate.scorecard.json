@@ -245,7 +245,10 @@
       ]
     ],
     "namedLosses": [
-      "promotion: pseudo-decor-nonuniform: checkbox-label::before drawn geometry/fill varies across the drawn combos ({\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 1)\",\"radius\":2} vs {\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 0.25)\",\"radius\":2}) — the bounded v1 decor grammar carries one box; named refusal",
+      "promotion: pseudo-decor-state-paint-uncarried: checkbox-label::before at unchecked.disabled paints {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(22, 22, 22, 0.25)\",\"radius\":2} where the matching enabled combo paints {\"bg\":\"rgba(0, 0, 0, 0)\",\"borderW\":{\"top\":1,\"right\":1,\"bottom\":1,\"left\":1},\"borderColor\":\"rgba(22, 22, 22, 1)\",\"radius\":2} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+      "promotion: pseudo-decor-state-paint-uncarried: checkbox-label::before at checked.disabled paints {\"bg\":\"rgba(22, 22, 22, 0.25)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} where the matching enabled combo paints {\"bg\":\"rgba(22, 22, 22, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+      "promotion: pseudo-decor-state-paint-uncarried: checkbox-label::before at indeterminate.disabled paints {\"bg\":\"rgba(22, 22, 22, 0.25)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} where the matching enabled combo paints {\"bg\":\"rgba(22, 22, 22, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":2} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+      "promotion: pseudo-decor-outside-grammar: checkbox-label::after drawn with a non-identity scale transform (matrix(0, 0, 0, 0, 0, 0)) — the bounded v1 decor grammar carries translate-only; named refusal",
       "overflow: checkbox-label.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: checkbox-label.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: checkbox-label.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -283,7 +286,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 1097,
+      "leavesAdded": 1063,
       "divergent": []
     },
     "rows": [

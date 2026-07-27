@@ -456,13 +456,6 @@
     },
     {
       "part": "accordion__item",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "list-item",
-      "distinctValues": 1
-    },
-    {
-      "part": "accordion__item",
       "channel": "list-style-type",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "none",
@@ -1041,7 +1034,7 @@
       "svg-viewbox-reconstructed: Accordion.icon@end.sm.enabled — 0 0 16 16 from computed size 16×16 (path extent 13.0; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Accordion.icon@end.md.enabled — 0 0 16 16 from computed size 16×16 (path extent 13.0; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Accordion.icon@end.lg.enabled — 0 0 16 16 from computed size 16×16 (path extent 13.0; viewBox is not a computed style — named reconstruction)",
-      "display-outside-vocabulary: accordion__item = \"list-item\" — carried by neither layout nor the declared registry (named residue)",
+      "block-level-display-carried: accordion__item = \"list-item\" — a block-level box in CSS block flow; carried in the declared registry so the canvas lowers it as a stack rather than the emitter's row default",
       "literal-text-carried: label = \"Accordion title\" (no text prop sample matches — the mounted value is carried verbatim)",
       "sr-only-carried-as-hidden: accordion__wrapper-2 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "literal-text-carried: label-2 = \"Details body copy for the Carbon round.\" (no text prop sample matches — the mounted value is carried verbatim)"

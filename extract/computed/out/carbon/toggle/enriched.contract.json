@@ -136,6 +136,11 @@
             },
             "toggle__appearance": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|toggle__appearance — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "inline-flex",
+                "direction": "row",
+                "align": "center"
+              },
               "parts": {
                 "toggle__switch": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|toggle__switch — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -147,6 +152,39 @@
                     "transition-property": "background-color",
                     "transition-timing-function": "cubic-bezier(0.2, 0, 1, 0.9)",
                     "user-select": "none"
+                  },
+                  "parts": {
+                    "toggle__switch-before": {
+                      "shape": {
+                        "kind": "ellipse",
+                        "width": 18,
+                        "height": 18
+                      },
+                      "declared": {
+                        "position": "absolute"
+                      },
+                      "literals": {
+                        "background-color": "rgba(255, 255, 255, 1)",
+                        "top": "3px",
+                        "left": "3px"
+                      },
+                      "literalsByProp": [
+                        {
+                          "prop": "toggled",
+                          "map": {
+                            "untoggled": {
+                              "top": "3px",
+                              "left": "3px"
+                            },
+                            "toggled": {
+                              "top": "3px",
+                              "left": "27px"
+                            }
+                          }
+                        }
+                      ],
+                      "description": "Drawn ::before pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round): an UNCONDITIONAL 18×18 ellipse at 3,3 inside toggle__switch — position:absolute with literal offsets, per-value toggled overrides; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
+                    }
                   },
                   "declaredStates": {
                     "disabled": {

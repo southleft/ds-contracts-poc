@@ -108,7 +108,7 @@
   "anatomyPromotion": {
     "partsCarried": 7,
     "svgAssets": 0,
-    "refusals": 1
+    "refusals": 2
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
@@ -180,7 +180,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 83.13953488372093,
+    "computedPctEqual": 84.30232558139535,
     "rowsFullyEqual": 0,
     "rows": 16,
     "pixelPerfectExact": 0,

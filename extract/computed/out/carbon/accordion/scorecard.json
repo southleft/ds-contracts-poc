@@ -7,8 +7,8 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 5472,
-    "cellsEqual": 4184,
-    "pctEqual": 76.46198830409357,
+    "cellsEqual": 4248,
+    "pctEqual": 77.63157894736842,
     "rowsFullyEqual": 0,
     "rows": 64
   },
@@ -16,9 +16,9 @@
     "pairs": 64,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 5.781782670454545,
-    "meanAA": 2.6661142676767677,
-    "maxAA": 4.8143939393939394
+    "meanExact": 4.4513888888888875,
+    "meanAA": 2.071338383838384,
+    "maxAA": 3.0694444444444446
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -28,67 +28,63 @@
     "mintedLeavesUnfolded": 37,
     "baseBindings": 54,
     "stateBindings": 26,
-    "codeOnlyChannels": 35,
+    "codeOnlyChannels": 34,
     "overflowBindings": 23,
     "folds": 9
   },
   "worstRows": [
     {
-      "key": "start.lg.enabled__focus-visible",
-      "pctAA": 4.8143939393939394,
-      "pctExact": 8.608585858585858,
-      "channelsMismatched": 13
-    },
-    {
-      "key": "start.unset.enabled__focus-visible",
-      "pctAA": 4.771464646464646,
-      "pctExact": 8.598484848484848,
-      "channelsMismatched": 13
-    },
-    {
-      "key": "start.md.enabled__focus-visible",
-      "pctAA": 4.771464646464646,
-      "pctExact": 8.598484848484848,
+      "key": "end.lg.enabled__focus-visible",
+      "pctAA": 3.0694444444444446,
+      "pctExact": 6.032828282828283,
       "channelsMismatched": 13
     },
     {
       "key": "end.unset.enabled__focus-visible",
-      "pctAA": 4.744949494949495,
-      "pctExact": 8.664141414141413,
-      "channelsMismatched": 14
+      "pctAA": 3.0088383838383836,
+      "pctExact": 5.962121212121212,
+      "channelsMismatched": 13
     },
     {
       "key": "end.md.enabled__focus-visible",
-      "pctAA": 4.744949494949495,
-      "pctExact": 8.664141414141413,
-      "channelsMismatched": 14
+      "pctAA": 3.0088383838383836,
+      "pctExact": 5.962121212121212,
+      "channelsMismatched": 13
     },
     {
-      "key": "end.lg.enabled__focus-visible",
-      "pctAA": 4.585858585858586,
-      "pctExact": 8.517676767676768,
-      "channelsMismatched": 14
+      "key": "start.lg.disabled__focus-visible",
+      "pctAA": 2.95959595959596,
+      "pctExact": 4.934343434343434,
+      "channelsMismatched": 25
     },
     {
       "key": "end.sm.enabled__focus-visible",
-      "pctAA": 4.465909090909091,
-      "pctExact": 8.193181818181818,
-      "channelsMismatched": 14
+      "pctAA": 2.948232323232323,
+      "pctExact": 5.891414141414141,
+      "channelsMismatched": 13
     },
     {
-      "key": "start.sm.enabled__focus-visible",
-      "pctAA": 3.9785353535353534,
-      "pctExact": 7.707070707070707,
-      "channelsMismatched": 13
+      "key": "end.lg.disabled__focus-visible",
+      "pctAA": 2.936868686868687,
+      "pctExact": 4.983585858585859,
+      "channelsMismatched": 26
+    },
+    {
+      "key": "start.unset.disabled__focus-visible",
+      "pctAA": 2.919191919191919,
+      "pctExact": 4.893939393939394,
+      "channelsMismatched": 25
+    },
+    {
+      "key": "start.md.disabled__focus-visible",
+      "pctAA": 2.919191919191919,
+      "pctExact": 4.893939393939394,
+      "channelsMismatched": 25
     }
   ],
   "topMismatchedChannels": [
     [
       "root.list-style-type",
-      64
-    ],
-    [
-      "accordion__item.display",
       64
     ],
     [
@@ -142,6 +138,10 @@
     [
       "accordion__heading.color",
       32
+    ],
+    [
+      "accordion__heading.column-rule-color",
+      32
     ]
   ],
   "namedLosses": [
@@ -170,7 +170,6 @@
     "overflow: accordion__heading.z-index [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: accordion__item.display — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: accordion__item.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: accordion__item.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: accordion__heading.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -210,28 +209,22 @@
   },
   "shippedMinted": {
     "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-    "leavesAdded": 1096,
+    "leavesAdded": 1083,
     "divergent": []
   },
   "rows": [
     {
       "key": "start.unset.enabled__default",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 6.277777777777778,
-      "pctAA": 2.801767676767677,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -298,21 +291,15 @@
     {
       "key": "start.unset.enabled__hover",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 6.277777777777778,
-      "pctAA": 2.801767676767677,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -379,21 +366,15 @@
     {
       "key": "start.unset.enabled__focus-visible",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 8.598484848484848,
-      "pctAA": 4.771464646464646,
+      "channelsEqual": 77,
+      "pctExact": 5.796717171717172,
+      "pctAA": 2.7234848484848486,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -466,21 +447,15 @@
     {
       "key": "start.unset.enabled__active",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 6.277777777777778,
-      "pctAA": 2.801767676767677,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -547,21 +522,15 @@
     {
       "key": "start.unset.disabled__default",
       "channelsCompared": 82,
-      "channelsEqual": 56,
-      "pctExact": 4.401515151515151,
-      "pctAA": 2.157828282828283,
+      "channelsEqual": 57,
+      "pctExact": 4.0353535353535355,
+      "pctAA": 2.1073232323232323,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -712,9 +681,9 @@
     {
       "key": "start.unset.disabled__hover",
       "channelsCompared": 82,
-      "channelsEqual": 54,
-      "pctExact": 4.815656565656566,
-      "pctAA": 1.8017676767676767,
+      "channelsEqual": 55,
+      "pctExact": 4.44949494949495,
+      "pctAA": 1.6931818181818181,
       "mismatches": [
         {
           "part": "root",
@@ -733,12 +702,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -889,21 +852,15 @@
     {
       "key": "start.unset.disabled__focus-visible",
       "channelsCompared": 82,
-      "channelsEqual": 56,
-      "pctExact": 5.311868686868687,
-      "pctAA": 3.013888888888889,
+      "channelsEqual": 57,
+      "pctExact": 4.893939393939394,
+      "pctAA": 2.919191919191919,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -1054,9 +1011,9 @@
     {
       "key": "start.unset.disabled__active",
       "channelsCompared": 82,
-      "channelsEqual": 54,
-      "pctExact": 4.815656565656566,
-      "pctAA": 1.8017676767676767,
+      "channelsEqual": 55,
+      "pctExact": 4.44949494949495,
+      "pctAA": 1.6931818181818181,
       "mismatches": [
         {
           "part": "root",
@@ -1075,12 +1032,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -1231,21 +1182,15 @@
     {
       "key": "start.sm.enabled__default",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 5.332070707070707,
-      "pctAA": 1.9381313131313131,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -1312,21 +1257,15 @@
     {
       "key": "start.sm.enabled__hover",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 5.332070707070707,
-      "pctAA": 1.9381313131313131,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -1393,21 +1332,15 @@
     {
       "key": "start.sm.enabled__focus-visible",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 7.707070707070707,
-      "pctAA": 3.9785353535353534,
+      "channelsEqual": 77,
+      "pctExact": 5.726010101010101,
+      "pctAA": 2.662878787878788,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -1480,21 +1413,15 @@
     {
       "key": "start.sm.enabled__active",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 5.332070707070707,
-      "pctAA": 1.9381313131313131,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -1561,21 +1488,15 @@
     {
       "key": "start.sm.disabled__default",
       "channelsCompared": 82,
-      "channelsEqual": 56,
-      "pctExact": 4.391414141414141,
-      "pctAA": 2.1527777777777777,
+      "channelsEqual": 57,
+      "pctExact": 4.0353535353535355,
+      "pctAA": 2.1073232323232323,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -1726,9 +1647,9 @@
     {
       "key": "start.sm.disabled__hover",
       "channelsCompared": 82,
-      "channelsEqual": 54,
-      "pctExact": 4.805555555555555,
-      "pctAA": 1.8068181818181819,
+      "channelsEqual": 55,
+      "pctExact": 4.44949494949495,
+      "pctAA": 1.6931818181818181,
       "mismatches": [
         {
           "part": "root",
@@ -1747,12 +1668,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -1903,21 +1818,15 @@
     {
       "key": "start.sm.disabled__focus-visible",
       "channelsCompared": 82,
-      "channelsEqual": 56,
-      "pctExact": 5.3017676767676765,
-      "pctAA": 3.007575757575758,
+      "channelsEqual": 57,
+      "pctExact": 4.853535353535354,
+      "pctAA": 2.878787878787879,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -2068,9 +1977,9 @@
     {
       "key": "start.sm.disabled__active",
       "channelsCompared": 82,
-      "channelsEqual": 54,
-      "pctExact": 4.805555555555555,
-      "pctAA": 1.8068181818181819,
+      "channelsEqual": 55,
+      "pctExact": 4.44949494949495,
+      "pctAA": 1.6931818181818181,
       "mismatches": [
         {
           "part": "root",
@@ -2089,12 +1998,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -2245,21 +2148,15 @@
     {
       "key": "start.md.enabled__default",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 6.277777777777778,
-      "pctAA": 2.801767676767677,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -2326,21 +2223,15 @@
     {
       "key": "start.md.enabled__hover",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 6.277777777777778,
-      "pctAA": 2.801767676767677,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -2407,21 +2298,15 @@
     {
       "key": "start.md.enabled__focus-visible",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 8.598484848484848,
-      "pctAA": 4.771464646464646,
+      "channelsEqual": 77,
+      "pctExact": 5.796717171717172,
+      "pctAA": 2.7234848484848486,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -2494,21 +2379,15 @@
     {
       "key": "start.md.enabled__active",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 6.277777777777778,
-      "pctAA": 2.801767676767677,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -2575,21 +2454,15 @@
     {
       "key": "start.md.disabled__default",
       "channelsCompared": 82,
-      "channelsEqual": 56,
-      "pctExact": 4.401515151515151,
-      "pctAA": 2.157828282828283,
+      "channelsEqual": 57,
+      "pctExact": 4.0353535353535355,
+      "pctAA": 2.1073232323232323,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -2740,9 +2613,9 @@
     {
       "key": "start.md.disabled__hover",
       "channelsCompared": 82,
-      "channelsEqual": 54,
-      "pctExact": 4.815656565656566,
-      "pctAA": 1.8017676767676767,
+      "channelsEqual": 55,
+      "pctExact": 4.44949494949495,
+      "pctAA": 1.6931818181818181,
       "mismatches": [
         {
           "part": "root",
@@ -2761,12 +2634,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -2917,21 +2784,15 @@
     {
       "key": "start.md.disabled__focus-visible",
       "channelsCompared": 82,
-      "channelsEqual": 56,
-      "pctExact": 5.311868686868687,
-      "pctAA": 3.013888888888889,
+      "channelsEqual": 57,
+      "pctExact": 4.893939393939394,
+      "pctAA": 2.919191919191919,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -3082,9 +2943,9 @@
     {
       "key": "start.md.disabled__active",
       "channelsCompared": 82,
-      "channelsEqual": 54,
-      "pctExact": 4.815656565656566,
-      "pctAA": 1.8017676767676767,
+      "channelsEqual": 55,
+      "pctExact": 4.44949494949495,
+      "pctAA": 1.6931818181818181,
       "mismatches": [
         {
           "part": "root",
@@ -3103,12 +2964,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -3259,21 +3114,15 @@
     {
       "key": "start.lg.enabled__default",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 6.246212121212121,
-      "pctAA": 2.8005050505050506,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -3340,21 +3189,15 @@
     {
       "key": "start.lg.enabled__hover",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 6.246212121212121,
-      "pctAA": 2.8005050505050506,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -3421,21 +3264,15 @@
     {
       "key": "start.lg.enabled__focus-visible",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 8.608585858585858,
-      "pctAA": 4.8143939393939394,
+      "channelsEqual": 77,
+      "pctExact": 5.867424242424242,
+      "pctAA": 2.784090909090909,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -3508,21 +3345,15 @@
     {
       "key": "start.lg.enabled__active",
       "channelsCompared": 89,
-      "channelsEqual": 77,
-      "pctExact": 6.246212121212121,
-      "pctAA": 2.8005050505050506,
+      "channelsEqual": 78,
+      "pctExact": 3.7916666666666665,
+      "pctAA": 1.6565656565656566,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -3589,21 +3420,15 @@
     {
       "key": "start.lg.disabled__default",
       "channelsCompared": 82,
-      "channelsEqual": 56,
-      "pctExact": 4.421717171717172,
-      "pctAA": 2.164141414141414,
+      "channelsEqual": 57,
+      "pctExact": 4.0353535353535355,
+      "pctAA": 2.1073232323232323,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -3754,9 +3579,9 @@
     {
       "key": "start.lg.disabled__hover",
       "channelsCompared": 82,
-      "channelsEqual": 54,
-      "pctExact": 4.835858585858586,
-      "pctAA": 1.7878787878787878,
+      "channelsEqual": 55,
+      "pctExact": 4.44949494949495,
+      "pctAA": 1.6931818181818181,
       "mismatches": [
         {
           "part": "root",
@@ -3775,12 +3600,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -3931,21 +3750,15 @@
     {
       "key": "start.lg.disabled__focus-visible",
       "channelsCompared": 82,
-      "channelsEqual": 56,
-      "pctExact": 5.32449494949495,
-      "pctAA": 3.0176767676767677,
+      "channelsEqual": 57,
+      "pctExact": 4.934343434343434,
+      "pctAA": 2.95959595959596,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -4096,9 +3909,9 @@
     {
       "key": "start.lg.disabled__active",
       "channelsCompared": 82,
-      "channelsEqual": 54,
-      "pctExact": 4.835858585858586,
-      "pctAA": 1.7878787878787878,
+      "channelsEqual": 55,
+      "pctExact": 4.44949494949495,
+      "pctAA": 1.6931818181818181,
       "mismatches": [
         {
           "part": "root",
@@ -4117,12 +3930,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -4273,21 +4080,15 @@
     {
       "key": "end.unset.enabled__default",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.402777777777778,
-      "pctAA": 2.7992424242424243,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -4360,21 +4161,15 @@
     {
       "key": "end.unset.enabled__hover",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.402777777777778,
-      "pctAA": 2.7992424242424243,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -4447,21 +4242,15 @@
     {
       "key": "end.unset.enabled__focus-visible",
       "channelsCompared": 89,
-      "channelsEqual": 75,
-      "pctExact": 8.664141414141413,
-      "pctAA": 4.744949494949495,
+      "channelsEqual": 76,
+      "pctExact": 5.962121212121212,
+      "pctAA": 3.0088383838383836,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -4540,21 +4329,15 @@
     {
       "key": "end.unset.enabled__active",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.402777777777778,
-      "pctAA": 2.7992424242424243,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -4627,21 +4410,15 @@
     {
       "key": "end.unset.disabled__default",
       "channelsCompared": 82,
-      "channelsEqual": 55,
-      "pctExact": 4.44949494949495,
-      "pctAA": 2.167929292929293,
+      "channelsEqual": 56,
+      "pctExact": 4.20580808080808,
+      "pctAA": 2.205808080808081,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -4798,9 +4575,9 @@
     {
       "key": "end.unset.disabled__hover",
       "channelsCompared": 82,
-      "channelsEqual": 53,
-      "pctExact": 4.863636363636363,
-      "pctAA": 1.7563131313131313,
+      "channelsEqual": 54,
+      "pctExact": 4.619949494949495,
+      "pctAA": 1.7916666666666667,
       "mismatches": [
         {
           "part": "root",
@@ -4819,12 +4596,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -4981,21 +4752,15 @@
     {
       "key": "end.unset.disabled__focus-visible",
       "channelsCompared": 82,
-      "channelsEqual": 55,
-      "pctExact": 5.194444444444445,
-      "pctAA": 2.8623737373737375,
+      "channelsEqual": 56,
+      "pctExact": 4.943181818181818,
+      "pctAA": 2.8964646464646466,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -5152,9 +4917,9 @@
     {
       "key": "end.unset.disabled__active",
       "channelsCompared": 82,
-      "channelsEqual": 53,
-      "pctExact": 4.863636363636363,
-      "pctAA": 1.7563131313131313,
+      "channelsEqual": 54,
+      "pctExact": 4.619949494949495,
+      "pctAA": 1.7916666666666667,
       "mismatches": [
         {
           "part": "root",
@@ -5173,12 +4938,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -5335,21 +5094,15 @@
     {
       "key": "end.sm.enabled__default",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.183080808080808,
-      "pctAA": 2.7664141414141414,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -5422,21 +5175,15 @@
     {
       "key": "end.sm.enabled__hover",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.183080808080808,
-      "pctAA": 2.7664141414141414,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -5509,21 +5256,15 @@
     {
       "key": "end.sm.enabled__focus-visible",
       "channelsCompared": 89,
-      "channelsEqual": 75,
-      "pctExact": 8.193181818181818,
-      "pctAA": 4.465909090909091,
+      "channelsEqual": 76,
+      "pctExact": 5.891414141414141,
+      "pctAA": 2.948232323232323,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -5602,21 +5343,15 @@
     {
       "key": "end.sm.enabled__active",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.183080808080808,
-      "pctAA": 2.7664141414141414,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -5689,21 +5424,15 @@
     {
       "key": "end.sm.disabled__default",
       "channelsCompared": 82,
-      "channelsEqual": 55,
-      "pctExact": 4.33080808080808,
-      "pctAA": 2.1035353535353534,
+      "channelsEqual": 56,
+      "pctExact": 4.20580808080808,
+      "pctAA": 2.205808080808081,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -5860,9 +5589,9 @@
     {
       "key": "end.sm.disabled__hover",
       "channelsCompared": 82,
-      "channelsEqual": 53,
-      "pctExact": 4.744949494949495,
-      "pctAA": 1.8093434343434343,
+      "channelsEqual": 54,
+      "pctExact": 4.619949494949495,
+      "pctAA": 1.7916666666666667,
       "mismatches": [
         {
           "part": "root",
@@ -5881,12 +5610,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -6043,21 +5766,15 @@
     {
       "key": "end.sm.disabled__focus-visible",
       "channelsCompared": 82,
-      "channelsEqual": 55,
-      "pctExact": 5.077020202020202,
-      "pctAA": 2.797979797979798,
+      "channelsEqual": 56,
+      "pctExact": 4.902777777777778,
+      "pctAA": 2.856060606060606,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -6214,9 +5931,9 @@
     {
       "key": "end.sm.disabled__active",
       "channelsCompared": 82,
-      "channelsEqual": 53,
-      "pctExact": 4.744949494949495,
-      "pctAA": 1.8093434343434343,
+      "channelsEqual": 54,
+      "pctExact": 4.619949494949495,
+      "pctAA": 1.7916666666666667,
       "mismatches": [
         {
           "part": "root",
@@ -6235,12 +5952,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -6397,21 +6108,15 @@
     {
       "key": "end.md.enabled__default",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.402777777777778,
-      "pctAA": 2.7992424242424243,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -6484,21 +6189,15 @@
     {
       "key": "end.md.enabled__hover",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.402777777777778,
-      "pctAA": 2.7992424242424243,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -6571,21 +6270,15 @@
     {
       "key": "end.md.enabled__focus-visible",
       "channelsCompared": 89,
-      "channelsEqual": 75,
-      "pctExact": 8.664141414141413,
-      "pctAA": 4.744949494949495,
+      "channelsEqual": 76,
+      "pctExact": 5.962121212121212,
+      "pctAA": 3.0088383838383836,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -6664,21 +6357,15 @@
     {
       "key": "end.md.enabled__active",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.402777777777778,
-      "pctAA": 2.7992424242424243,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -6751,21 +6438,15 @@
     {
       "key": "end.md.disabled__default",
       "channelsCompared": 82,
-      "channelsEqual": 55,
-      "pctExact": 4.44949494949495,
-      "pctAA": 2.167929292929293,
+      "channelsEqual": 56,
+      "pctExact": 4.20580808080808,
+      "pctAA": 2.205808080808081,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -6922,9 +6603,9 @@
     {
       "key": "end.md.disabled__hover",
       "channelsCompared": 82,
-      "channelsEqual": 53,
-      "pctExact": 4.863636363636363,
-      "pctAA": 1.7563131313131313,
+      "channelsEqual": 54,
+      "pctExact": 4.619949494949495,
+      "pctAA": 1.7916666666666667,
       "mismatches": [
         {
           "part": "root",
@@ -6943,12 +6624,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -7105,21 +6780,15 @@
     {
       "key": "end.md.disabled__focus-visible",
       "channelsCompared": 82,
-      "channelsEqual": 55,
-      "pctExact": 5.194444444444445,
-      "pctAA": 2.8623737373737375,
+      "channelsEqual": 56,
+      "pctExact": 4.943181818181818,
+      "pctAA": 2.8964646464646466,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -7276,9 +6945,9 @@
     {
       "key": "end.md.disabled__active",
       "channelsCompared": 82,
-      "channelsEqual": 53,
-      "pctExact": 4.863636363636363,
-      "pctAA": 1.7563131313131313,
+      "channelsEqual": 54,
+      "pctExact": 4.619949494949495,
+      "pctAA": 1.7916666666666667,
       "mismatches": [
         {
           "part": "root",
@@ -7297,12 +6966,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -7459,21 +7122,15 @@
     {
       "key": "end.lg.enabled__default",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.367424242424242,
-      "pctAA": 2.768939393939394,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -7546,21 +7203,15 @@
     {
       "key": "end.lg.enabled__hover",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.367424242424242,
-      "pctAA": 2.768939393939394,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -7633,21 +7284,15 @@
     {
       "key": "end.lg.enabled__focus-visible",
       "channelsCompared": 89,
-      "channelsEqual": 75,
-      "pctExact": 8.517676767676768,
-      "pctAA": 4.585858585858586,
+      "channelsEqual": 76,
+      "pctExact": 6.032828282828283,
+      "pctAA": 3.0694444444444446,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -7726,21 +7371,15 @@
     {
       "key": "end.lg.enabled__active",
       "channelsCompared": 89,
-      "channelsEqual": 76,
-      "pctExact": 6.367424242424242,
-      "pctAA": 2.768939393939394,
+      "channelsEqual": 77,
+      "pctExact": 3.957070707070707,
+      "pctAA": 1.7803030303030303,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -7813,21 +7452,15 @@
     {
       "key": "end.lg.disabled__default",
       "channelsCompared": 82,
-      "channelsEqual": 55,
-      "pctExact": 4.345959595959596,
-      "pctAA": 2.1616161616161618,
+      "channelsEqual": 56,
+      "pctExact": 4.20580808080808,
+      "pctAA": 2.205808080808081,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -7984,9 +7617,9 @@
     {
       "key": "end.lg.disabled__hover",
       "channelsCompared": 82,
-      "channelsEqual": 53,
-      "pctExact": 4.761363636363637,
-      "pctAA": 1.8042929292929293,
+      "channelsEqual": 54,
+      "pctExact": 4.619949494949495,
+      "pctAA": 1.7916666666666667,
       "mismatches": [
         {
           "part": "root",
@@ -8005,12 +7638,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -8167,21 +7794,15 @@
     {
       "key": "end.lg.disabled__focus-visible",
       "channelsCompared": 82,
-      "channelsEqual": 55,
-      "pctExact": 5.092171717171717,
-      "pctAA": 2.867424242424242,
+      "channelsEqual": 56,
+      "pctExact": 4.983585858585859,
+      "pctAA": 2.936868686868687,
       "mismatches": [
         {
           "part": "root",
           "channel": "list-style-type",
           "ours": "disc",
           "theirs": "none"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",
@@ -8338,9 +7959,9 @@
     {
       "key": "end.lg.disabled__active",
       "channelsCompared": 82,
-      "channelsEqual": 53,
-      "pctExact": 4.761363636363637,
-      "pctAA": 1.8042929292929293,
+      "channelsEqual": 54,
+      "pctExact": 4.619949494949495,
+      "pctAA": 1.7916666666666667,
       "mismatches": [
         {
           "part": "root",
@@ -8359,12 +7980,6 @@
           "channel": "border-top-color",
           "ours": "rgba(224, 224, 224, 1)",
           "theirs": "rgba(232, 232, 232, 1)"
-        },
-        {
-          "part": "accordion__item",
-          "channel": "display",
-          "ours": "flex",
-          "theirs": "list-item"
         },
         {
           "part": "accordion__item",

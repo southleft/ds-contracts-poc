@@ -157,8 +157,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 1376,
-      "cellsEqual": 1144,
-      "pctEqual": 83.13953488372093,
+      "cellsEqual": 1160,
+      "pctEqual": 84.30232558139535,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -187,49 +187,49 @@
         "key": "untoggled.disabled__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 23
+        "channelsMismatched": 22
       },
       {
         "key": "untoggled.disabled__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 23
+        "channelsMismatched": 22
       },
       {
         "key": "untoggled.disabled__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 23
+        "channelsMismatched": 22
       },
       {
         "key": "untoggled.disabled__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 23
+        "channelsMismatched": 22
       },
       {
         "key": "toggled.disabled__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 23
+        "channelsMismatched": 22
       },
       {
         "key": "toggled.disabled__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 23
+        "channelsMismatched": 22
       },
       {
         "key": "toggled.disabled__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 23
+        "channelsMismatched": 22
       },
       {
         "key": "toggled.disabled__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 23
+        "channelsMismatched": 22
       }
     ],
     "topMismatchedChannels": [
@@ -239,10 +239,6 @@
       ],
       [
         "label.unicode-bidi",
-        16
-      ],
-      [
-        "toggle__appearance.align-items",
         16
       ],
       [
@@ -292,10 +288,15 @@
       [
         "label.column-rule-color",
         8
+      ],
+      [
+        "label.outline-color",
+        8
       ]
     ],
     "namedLosses": [
-      "promotion: pseudo-decor-nonuniform: toggle__switch::before drawn geometry/fill varies across the drawn combos ({\"w\":18,\"h\":18,\"top\":3,\"left\":3,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0} vs {\"w\":18,\"h\":18,\"top\":3,\"left\":3,\"bg\":\"rgba(141, 141, 141, 1)\",\"radius\":0} vs {\"w\":18,\"h\":18,\"top\":3,\"left\":27,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0} vs {\"w\":18,\"h\":18,\"top\":3,\"left\":27,\"bg\":\"rgba(141, 141, 141, 1)\",\"radius\":0}) — the bounded v1 decor grammar carries one box; named refusal",
+      "promotion: pseudo-decor-state-paint-uncarried: toggle__switch::before at untoggled.disabled paints {\"bg\":\"rgba(141, 141, 141, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":9} where the matching enabled combo paints {\"bg\":\"rgba(255, 255, 255, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":9} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
+      "promotion: pseudo-decor-state-paint-uncarried: toggle__switch::before at toggled.disabled paints {\"bg\":\"rgba(141, 141, 141, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":9} where the matching enabled combo paints {\"bg\":\"rgba(255, 255, 255, 1)\",\"borderW\":{\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"borderColor\":\"\",\"radius\":9} — the decor carries the ENABLED plane; a per-enum-value × per-state paint product has no contract spelling (states take token refs, decor paint is literal); named residue",
       "overflow: label-2.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: label-2.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: label-2.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -334,7 +335,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 1083,
+      "leavesAdded": 1049,
       "divergent": [
         {
           "token": "imported.toggle.label.color",
@@ -366,7 +367,7 @@
       {
         "key": "untoggled.enabled__default",
         "channelsCompared": 86,
-        "channelsEqual": 80,
+        "channelsEqual": 81,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -384,14 +385,8 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -412,7 +407,7 @@
       {
         "key": "untoggled.enabled__hover",
         "channelsCompared": 86,
-        "channelsEqual": 80,
+        "channelsEqual": 81,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -430,14 +425,8 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -458,7 +447,7 @@
       {
         "key": "untoggled.enabled__focus-visible",
         "channelsCompared": 86,
-        "channelsEqual": 80,
+        "channelsEqual": 81,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -476,14 +465,8 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -504,7 +487,7 @@
       {
         "key": "untoggled.enabled__active",
         "channelsCompared": 86,
-        "channelsEqual": 80,
+        "channelsEqual": 81,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -522,14 +505,8 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -550,7 +527,7 @@
       {
         "key": "untoggled.disabled__default",
         "channelsCompared": 86,
-        "channelsEqual": 63,
+        "channelsEqual": 64,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -646,12 +623,6 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
@@ -659,7 +630,7 @@
           {
             "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -698,7 +669,7 @@
       {
         "key": "untoggled.disabled__hover",
         "channelsCompared": 86,
-        "channelsEqual": 63,
+        "channelsEqual": 64,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -794,12 +765,6 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
@@ -807,7 +772,7 @@
           {
             "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -846,7 +811,7 @@
       {
         "key": "untoggled.disabled__focus-visible",
         "channelsCompared": 86,
-        "channelsEqual": 63,
+        "channelsEqual": 64,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -942,12 +907,6 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
@@ -955,7 +914,7 @@
           {
             "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -994,7 +953,7 @@
       {
         "key": "untoggled.disabled__active",
         "channelsCompared": 86,
-        "channelsEqual": 63,
+        "channelsEqual": 64,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1090,12 +1049,6 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
@@ -1103,7 +1056,7 @@
           {
             "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -1142,7 +1095,7 @@
       {
         "key": "toggled.enabled__default",
         "channelsCompared": 86,
-        "channelsEqual": 80,
+        "channelsEqual": 81,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1160,14 +1113,8 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -1188,7 +1135,7 @@
       {
         "key": "toggled.enabled__hover",
         "channelsCompared": 86,
-        "channelsEqual": 80,
+        "channelsEqual": 81,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1206,14 +1153,8 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -1234,7 +1175,7 @@
       {
         "key": "toggled.enabled__focus-visible",
         "channelsCompared": 86,
-        "channelsEqual": 80,
+        "channelsEqual": 81,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1252,14 +1193,8 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -1280,7 +1215,7 @@
       {
         "key": "toggled.enabled__active",
         "channelsCompared": 86,
-        "channelsEqual": 80,
+        "channelsEqual": 81,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1298,14 +1233,8 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -1326,7 +1255,7 @@
       {
         "key": "toggled.disabled__default",
         "channelsCompared": 86,
-        "channelsEqual": 63,
+        "channelsEqual": 64,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1422,12 +1351,6 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
@@ -1435,7 +1358,7 @@
           {
             "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -1474,7 +1397,7 @@
       {
         "key": "toggled.disabled__hover",
         "channelsCompared": 86,
-        "channelsEqual": 63,
+        "channelsEqual": 64,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1570,12 +1493,6 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
@@ -1583,7 +1500,7 @@
           {
             "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -1622,7 +1539,7 @@
       {
         "key": "toggled.disabled__focus-visible",
         "channelsCompared": 86,
-        "channelsEqual": 63,
+        "channelsEqual": 64,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1718,12 +1635,6 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
@@ -1731,7 +1642,7 @@
           {
             "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {
@@ -1770,7 +1681,7 @@
       {
         "key": "toggled.disabled__active",
         "channelsCompared": 86,
-        "channelsEqual": 63,
+        "channelsEqual": 64,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1866,12 +1777,6 @@
           },
           {
             "part": "toggle__appearance",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "center"
-          },
-          {
-            "part": "toggle__appearance",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
@@ -1879,7 +1784,7 @@
           {
             "part": "toggle__appearance",
             "channel": "display",
-            "ours": "flex",
+            "ours": "inline-flex",
             "theirs": "inline-grid"
           },
           {

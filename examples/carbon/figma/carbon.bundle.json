@@ -7063,189 +7063,9 @@
               "$value": "0",
               "$type": "number"
             },
-            "row-rule-color": {
-              "high": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#161616",
-                "$type": "color"
-              }
-            }
-          },
-          "part-0-0-0": {
-            "color": {
-              "high": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#161616",
-                "$type": "color"
-              }
-            },
-            "row-rule-color": {
-              "high": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#161616",
-                "$type": "color"
-              }
-            }
-          },
-          "part-0-0-1-2": {
-            "color": {
-              "high": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#161616",
-                "$type": "color"
-              }
-            },
-            "row-rule-color": {
-              "high": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#161616",
-                "$type": "color"
-              }
-            }
-          },
-          "part-0-0-2": {
-            "color": {
-              "high": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#161616",
-                "$type": "color"
-              }
-            },
-            "fill": {
-              "$value": "#f1c21b",
-              "$type": "color"
-            },
-            "row-rule-color": {
-              "high": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#161616",
-                "$type": "color"
-              }
-            }
-          },
-          "part-0-0-1": {
-            "color": {
-              "high": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#161616",
-                "$type": "color"
-              }
-            },
-            "opacity": {
-              "$value": "0",
-              "$type": "number"
-            },
-            "row-rule-color": {
-              "high": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#161616",
-                "$type": "color"
-              }
-            }
-          },
-          "label": {
-            "color": {
-              "high": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "low": {
-                "$value": "#161616",
-                "$type": "color"
-              }
-            },
-            "fill": {
-              "error": {
-                "high": {
-                  "$value": "#fa4d56",
-                  "$type": "color"
-                },
-                "low": {
-                  "$value": "#da1e28",
-                  "$type": "color"
-                }
-              },
-              "info": {
-                "high": {
-                  "$value": "#4589ff",
-                  "$type": "color"
-                },
-                "low": {
-                  "$value": "#0043ce",
-                  "$type": "color"
-                }
-              },
-              "info-square": {
-                "high": {
-                  "$value": "#4589ff",
-                  "$type": "color"
-                },
-                "low": {
-                  "$value": "#0043ce",
-                  "$type": "color"
-                }
-              },
-              "success": {
-                "high": {
-                  "$value": "#42be65",
-                  "$type": "color"
-                },
-                "low": {
-                  "$value": "#24a148",
-                  "$type": "color"
-                }
-              },
-              "warning": {
-                "high": {
-                  "$value": "#f1c21b",
-                  "$type": "color"
-                },
-                "low": {
-                  "$value": "#f1c21b",
-                  "$type": "color"
-                }
-              },
-              "warning-alt": {
-                "high": {
-                  "$value": "#f1c21b",
-                  "$type": "color"
-                },
-                "low": {
-                  "$value": "#f1c21b",
-                  "$type": "color"
-                }
-              }
-            },
-            "font-weight": {
-              "$value": "400",
-              "$type": "number"
+            "margin-right": {
+              "$value": "16px",
+              "$type": "dimension"
             },
             "row-rule-color": {
               "high": {
@@ -7288,7 +7108,7 @@
               }
             }
           },
-          "label-2": {
+          "label": {
             "color": {
               "high": {
                 "$value": "#ffffff",
@@ -7326,7 +7146,7 @@
               }
             }
           },
-          "label-3": {
+          "label-2": {
             "color": {
               "high": {
                 "$value": "#ffffff",
@@ -9197,6 +9017,12 @@
   "icons": {
     "accordion-icon": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"currentColor\"/></svg>",
     "icon-button-btn": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+    "inline-notification-icon-error": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\"/><path d=\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\" opacity=\"0\"/></svg>",
+    "inline-notification-icon-info": "<svg viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
+    "inline-notification-icon-info-square": "<svg viewBox=\"0 0 28 28\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\" fill=\"none\"/><path d=\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\"/></svg>",
+    "inline-notification-icon-success": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\"/><path d=\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\" fill=\"none\" opacity=\"0\"/></svg>",
+    "inline-notification-icon-warning": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\"/><path d=\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\" fill=\"rgba(0, 0, 0, 1)\"/></svg>",
+    "inline-notification-icon-warning-alt": "<svg viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\" fill=\"rgba(0, 0, 0, 1)\"/><path d=\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\"/><path d=\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\"/></svg>",
     "inline-notification-inline-notification-close-button": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
     "modal-btn": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
     "tabs-part-0": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 5 8 L 10 3 L 10.7 3.7 L 6.4 8 L 10.7 12.3 L 10 13 Z\"/></svg>",
@@ -9274,6 +9100,14 @@
             "accordion__item": {
               "element": "li",
               "description": "Promoted from the computed floor (round 4): rendered anatomy li|accordion__item — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "list-item",
+                "border-bottom-style": "solid",
+                "border-top-style": "solid",
+                "transition-duration": "0.11s",
+                "transition-property": "border-color",
+                "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
+              },
               "parts": {
                 "accordion__heading": {
                   "element": "button",
@@ -9488,13 +9322,6 @@
                     "padding-top": "{imported.accordion.accordion-wrapper.padding-top}"
                   }
                 }
-              },
-              "declared": {
-                "border-bottom-style": "solid",
-                "border-top-style": "solid",
-                "transition-duration": "0.11s",
-                "transition-property": "border-color",
-                "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
               },
               "tokens": {
                 "border-bottom-color": "{imported.accordion.accordion-item.border-bottom-color}",
@@ -9997,6 +9824,58 @@
                       "color": "{imported.shared.color-16161640}"
                     }
                   }
+                },
+                "checkbox-label-before": {
+                  "shape": {
+                    "kind": "rect",
+                    "width": 16,
+                    "height": 16
+                  },
+                  "declared": {
+                    "position": "absolute"
+                  },
+                  "literals": {
+                    "background-color": "transparent",
+                    "border-top-width": "1px",
+                    "border-right-width": "1px",
+                    "border-bottom-width": "1px",
+                    "border-left-width": "1px",
+                    "border-top-color": "rgba(22, 22, 22, 1)",
+                    "border-right-color": "rgba(22, 22, 22, 1)",
+                    "border-bottom-color": "rgba(22, 22, 22, 1)",
+                    "border-left-color": "rgba(22, 22, 22, 1)",
+                    "border-radius": "2px",
+                    "top": "2px",
+                    "left": "0px"
+                  },
+                  "literalsByProp": [
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "unchecked": {
+                          "background-color": "transparent",
+                          "border-top-width": "1px",
+                          "border-right-width": "1px",
+                          "border-bottom-width": "1px",
+                          "border-left-width": "1px",
+                          "border-top-color": "rgba(22, 22, 22, 1)",
+                          "border-right-color": "rgba(22, 22, 22, 1)",
+                          "border-bottom-color": "rgba(22, 22, 22, 1)",
+                          "border-left-color": "rgba(22, 22, 22, 1)",
+                          "border-radius": "2px"
+                        },
+                        "checked": {
+                          "background-color": "rgba(22, 22, 22, 1)",
+                          "border-radius": "2px"
+                        },
+                        "indeterminate": {
+                          "background-color": "rgba(22, 22, 22, 1)",
+                          "border-radius": "2px"
+                        }
+                      }
+                    }
+                  ],
+                  "description": "Drawn ::before pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round): an UNCONDITIONAL 16×16 rect at 0,2 inside checkbox-label — position:absolute with literal offsets, per-value checked overrides; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
                 }
               },
               "declared": {
@@ -10139,10 +10018,7 @@
         }
       ],
       "states": [
-        "active",
-        "disabled",
-        "focus-visible",
-        "hover"
+        "disabled"
       ],
       "anatomy": {
         "root": {
@@ -10317,127 +10193,6 @@
                   }
                 }
               ]
-            },
-            "popover": {
-              "element": "span",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover — this element exists in the real component's DOM; the static layer had no part for it.",
-              "declared": {
-                "display": "block",
-                "position": "absolute",
-                "aspect-ratio": "1 / 1",
-                "pointer-events": "none"
-              },
-              "parts": {
-                "label": {
-                  "text": "Add",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-content.tooltip-content — this element exists in the real component's DOM; the static layer had no part for it.",
-                  "declared": {
-                    "display": "none",
-                    "position": "absolute"
-                  },
-                  "declaredStates": {
-                    "active": {
-                      "display": "block",
-                      "transform": "matrix(1, 0, 0, 1, -28.8516, -30)"
-                    },
-                    "focus-visible": {
-                      "display": "block",
-                      "transform": "matrix(1, 0, 0, 1, -28.8516, -30)"
-                    },
-                    "hover": {
-                      "display": "block",
-                      "transform": "matrix(1, 0, 0, 1, -28.8516, -30)"
-                    }
-                  },
-                  "tokens": {
-                    "background-color": "{imported.icon-button.label.background-color}",
-                    "border-bottom-left-radius": "{imported.shared.size-2}",
-                    "border-bottom-right-radius": "{imported.shared.size-2}",
-                    "border-top-left-radius": "{imported.shared.size-2}",
-                    "border-top-right-radius": "{imported.shared.size-2}",
-                    "color": "{imported.icon-button.label.color}",
-                    "font-size": "{imported.icon-button.label.font-size}",
-                    "font-weight": "{imported.icon-button.label.font-weight}",
-                    "letter-spacing": "{imported.icon-button.label.letter-spacing}",
-                    "line-height": "{imported.icon-button.label.line-height}",
-                    "max-width": "{imported.icon-button.label.max-width}",
-                    "min-height": "{imported.shared.size-0}",
-                    "min-width": "{imported.shared.size-0}",
-                    "padding-bottom": "{imported.shared.size-2}",
-                    "padding-left": "{imported.icon-button.label.padding-left}",
-                    "padding-right": "{imported.icon-button.label.padding-right}",
-                    "padding-top": "{imported.shared.size-2}",
-                    "row-rule-color": "{imported.icon-button.label.row-rule-color}",
-                    "top": "{imported.shared.size-0}",
-                    "z-index": "{imported.shared.num-6000}"
-                  }
-                },
-                "popover-caret": {
-                  "element": "span",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-caret — this element exists in the real component's DOM; the static layer had no part for it.",
-                  "declared": {
-                    "display": "none",
-                    "position": "absolute",
-                    "pointer-events": "none"
-                  },
-                  "declaredStates": {
-                    "active": {
-                      "display": "block",
-                      "transform": "matrix(1, 0, 0, 1, -4, -8)"
-                    },
-                    "focus-visible": {
-                      "display": "block",
-                      "transform": "matrix(1, 0, 0, 1, -4, -8)"
-                    },
-                    "hover": {
-                      "display": "block",
-                      "transform": "matrix(1, 0, 0, 1, -4, -8)"
-                    }
-                  },
-                  "tokens": {
-                    "height": "{imported.icon-button.popover-caret.height}",
-                    "min-height": "{imported.shared.size-0}",
-                    "min-width": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-0}",
-                    "width": "{imported.icon-button.popover-caret.width}",
-                    "z-index": "{imported.shared.num-6000}"
-                  }
-                }
-              },
-              "tokens": {
-                "bottom": "{imported.shared.size-0}",
-                "height": "{imported.icon-button.popover.height.unset}",
-                "left": "{imported.shared.size-0}",
-                "min-height": "{imported.shared.size-0}",
-                "min-width": "{imported.shared.size-0}",
-                "right": "{imported.shared.size-0}",
-                "top": "{imported.shared.size-0}",
-                "width": "{imported.icon-button.popover.width.unset}",
-                "z-index": "{imported.shared.num-6000}"
-              },
-              "tokensByProp": [
-                {
-                  "prop": "size",
-                  "map": {
-                    "lg": {
-                      "height": "{imported.icon-button.popover.height.lg}",
-                      "width": "{imported.icon-button.popover.width.lg}"
-                    },
-                    "md": {
-                      "height": "{imported.icon-button.popover.height.md}",
-                      "width": "{imported.icon-button.popover.width.md}"
-                    },
-                    "sm": {
-                      "height": "{imported.icon-button.popover.height.sm}",
-                      "width": "{imported.icon-button.popover.width.sm}"
-                    },
-                    "xs": {
-                      "height": "{imported.icon-button.popover.height.xs}",
-                      "width": "{imported.icon-button.popover.width.xs}"
-                    }
-                  }
-                }
-              ]
             }
           },
           "tokens": {
@@ -10564,7 +10319,6 @@
               },
               "parts": {
                 "icon": {
-                  "element": "svg",
                   "description": "Promoted from the computed floor (round 4): rendered anatomy svg|inline-notification__icon — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
@@ -10572,201 +10326,76 @@
                     "overflow-y": "hidden"
                   },
                   "parts": {
-                    "part-0-0-0": {
-                      "element": "path",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy path| — this element exists in the real component's DOM; the static layer had no part for it.",
-                      "declared": {
-                        "display": "inline"
+                    "icon-error": {
+                      "icon": {
+                        "asset": "inline-notification-icon-error",
+                        "size": 20
                       },
-                      "tokens": {
-                        "min-height": "{imported.shared.size-0}",
-                        "min-width": "{imported.shared.size-0}"
+                      "visibleWhen": {
+                        "prop": "kind",
+                        "equals": "error"
                       },
-                      "tokensByProp": [
-                        {
-                          "prop": "contrast",
-                          "map": {
-                            "high": {
-                              "color": "{imported.inline-notification.part-0-0-0.color.high}",
-                              "row-rule-color": "{imported.inline-notification.part-0-0-0.row-rule-color.high}"
-                            },
-                            "low": {
-                              "color": "{imported.inline-notification.part-0-0-0.color.low}",
-                              "row-rule-color": "{imported.inline-notification.part-0-0-0.row-rule-color.low}"
-                            }
-                          }
-                        }
-                      ]
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when kind=error."
                     },
-                    "part-0-0-1-2": {
-                      "element": "path",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy path| — this element exists in the real component's DOM; the static layer had no part for it.",
-                      "declared": {
-                        "display": "inline"
+                    "icon-info": {
+                      "icon": {
+                        "asset": "inline-notification-icon-info",
+                        "size": 20
                       },
-                      "stylesWhen": [
-                        {
-                          "prop": "kind",
-                          "equals": "error",
-                          "styles": {
-                            "display": "none"
-                          }
-                        },
-                        {
-                          "prop": "kind",
-                          "equals": "success",
-                          "styles": {
-                            "display": "none"
-                          }
-                        }
-                      ],
-                      "tokens": {
-                        "min-height": "{imported.shared.size-0}",
-                        "min-width": "{imported.shared.size-0}"
+                      "visibleWhen": {
+                        "prop": "kind",
+                        "equals": "info"
                       },
-                      "tokensByProp": [
-                        {
-                          "prop": "contrast",
-                          "map": {
-                            "high": {
-                              "color": "{imported.inline-notification.part-0-0-1-2.color.high}",
-                              "row-rule-color": "{imported.inline-notification.part-0-0-1-2.row-rule-color.high}"
-                            },
-                            "low": {
-                              "color": "{imported.inline-notification.part-0-0-1-2.color.low}",
-                              "row-rule-color": "{imported.inline-notification.part-0-0-1-2.row-rule-color.low}"
-                            }
-                          }
-                        }
-                      ]
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when kind=info."
                     },
-                    "part-0-0-2": {
-                      "element": "path",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy path| — this element exists in the real component's DOM; the static layer had no part for it.",
-                      "declared": {
-                        "display": "inline"
+                    "icon-info-square": {
+                      "icon": {
+                        "asset": "inline-notification-icon-info-square",
+                        "size": 20
                       },
-                      "stylesWhen": [
-                        {
-                          "prop": "kind",
-                          "equals": "error",
-                          "styles": {
-                            "display": "none"
-                          }
-                        },
-                        {
-                          "prop": "kind",
-                          "equals": "info",
-                          "styles": {
-                            "display": "none"
-                          }
-                        },
-                        {
-                          "prop": "kind",
-                          "equals": "info-square",
-                          "styles": {
-                            "display": "none"
-                          }
-                        },
-                        {
-                          "prop": "kind",
-                          "equals": "success",
-                          "styles": {
-                            "display": "none"
-                          }
-                        },
-                        {
-                          "prop": "kind",
-                          "equals": "warning",
-                          "styles": {
-                            "display": "none"
-                          }
-                        }
-                      ],
-                      "tokens": {
-                        "fill": "{imported.inline-notification.part-0-0-2.fill}",
-                        "min-height": "{imported.shared.size-0}",
-                        "min-width": "{imported.shared.size-0}"
+                      "visibleWhen": {
+                        "prop": "kind",
+                        "equals": "info-square"
                       },
-                      "tokensByProp": [
-                        {
-                          "prop": "contrast",
-                          "map": {
-                            "high": {
-                              "color": "{imported.inline-notification.part-0-0-2.color.high}",
-                              "row-rule-color": "{imported.inline-notification.part-0-0-2.row-rule-color.high}"
-                            },
-                            "low": {
-                              "color": "{imported.inline-notification.part-0-0-2.color.low}",
-                              "row-rule-color": "{imported.inline-notification.part-0-0-2.row-rule-color.low}"
-                            }
-                          }
-                        }
-                      ]
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when kind=info-square."
                     },
-                    "part-0-0-1": {
-                      "element": "path",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy path||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
-                      "declared": {
-                        "display": "none"
+                    "icon-success": {
+                      "icon": {
+                        "asset": "inline-notification-icon-success",
+                        "size": 20
                       },
-                      "tokens": {
-                        "min-height": "{imported.shared.size-0}",
-                        "min-width": "{imported.shared.size-0}",
-                        "opacity": "{imported.inline-notification.part-0-0-1.opacity}"
+                      "visibleWhen": {
+                        "prop": "kind",
+                        "equals": "success"
                       },
-                      "tokensByProp": [
-                        {
-                          "prop": "contrast",
-                          "map": {
-                            "high": {
-                              "color": "{imported.inline-notification.part-0-0-1.color.high}",
-                              "row-rule-color": "{imported.inline-notification.part-0-0-1.row-rule-color.high}"
-                            },
-                            "low": {
-                              "color": "{imported.inline-notification.part-0-0-1.color.low}",
-                              "row-rule-color": "{imported.inline-notification.part-0-0-1.row-rule-color.low}"
-                            }
-                          }
-                        }
-                      ]
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when kind=success."
                     },
-                    "label": {
-                      "element": "title",
-                      "text": "error icon",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy title| — this element exists in the real component's DOM; the static layer had no part for it.",
-                      "declared": {
-                        "display": "inline"
+                    "icon-warning": {
+                      "icon": {
+                        "asset": "inline-notification-icon-warning",
+                        "size": 20
                       },
-                      "tokens": {
-                        "font-size": "{imported.shared.size-16}",
-                        "font-weight": "{imported.inline-notification.label.font-weight}",
-                        "line-height": "{imported.shared.size-16}",
-                        "min-height": "{imported.shared.size-0}",
-                        "min-width": "{imported.shared.size-0}"
+                      "visibleWhen": {
+                        "prop": "kind",
+                        "equals": "warning"
                       },
-                      "tokensByProp": [
-                        {
-                          "prop": "contrast",
-                          "map": {
-                            "high": {
-                              "color": "{imported.inline-notification.label.color.high}",
-                              "fill": "{imported.inline-notification.label.fill.{kind}.high}",
-                              "row-rule-color": "{imported.inline-notification.label.row-rule-color.high}"
-                            },
-                            "low": {
-                              "color": "{imported.inline-notification.label.color.low}",
-                              "fill": "{imported.inline-notification.label.fill.{kind}.low}",
-                              "row-rule-color": "{imported.inline-notification.label.row-rule-color.low}"
-                            }
-                          }
-                        }
-                      ]
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when kind=warning."
+                    },
+                    "icon-warning-alt": {
+                      "icon": {
+                        "asset": "inline-notification-icon-warning-alt",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "kind",
+                        "equals": "warning-alt"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when kind=warning-alt."
                     }
                   },
                   "tokens": {
                     "flex-shrink": "{imported.inline-notification.icon.flex-shrink}",
-                    "margin-right": "{imported.shared.size-16}",
+                    "margin-right": "{imported.inline-notification.icon.margin-right}",
                     "margin-top": "{imported.shared.size-14}"
                   },
                   "tokensByProp": [
@@ -10793,7 +10422,7 @@
                     "display": "flex"
                   },
                   "parts": {
-                    "label-2": {
+                    "label": {
                       "text": "Notification title",
                       "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__title — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
@@ -10801,10 +10430,38 @@
                       },
                       "tokens": {
                         "font-size": "{imported.shared.size-14}",
+                        "font-weight": "{imported.inline-notification.label.font-weight}",
+                        "letter-spacing": "{imported.inline-notification.label.letter-spacing}",
+                        "line-height": "{imported.inline-notification.label.line-height}",
+                        "margin-right": "{imported.inline-notification.label.margin-right}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "contrast",
+                          "map": {
+                            "high": {
+                              "color": "{imported.inline-notification.label.color.high}",
+                              "row-rule-color": "{imported.inline-notification.label.row-rule-color.high}"
+                            },
+                            "low": {
+                              "color": "{imported.inline-notification.label.color.low}",
+                              "row-rule-color": "{imported.inline-notification.label.row-rule-color.low}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "label-2": {
+                      "text": "Notification subtitle",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__subtitle — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block"
+                      },
+                      "tokens": {
+                        "font-size": "{imported.shared.size-14}",
                         "font-weight": "{imported.inline-notification.label-2.font-weight}",
                         "letter-spacing": "{imported.inline-notification.label-2.letter-spacing}",
-                        "line-height": "{imported.inline-notification.label-2.line-height}",
-                        "margin-right": "{imported.inline-notification.label-2.margin-right}"
+                        "line-height": "{imported.inline-notification.label-2.line-height}"
                       },
                       "tokensByProp": [
                         {
@@ -10817,34 +10474,6 @@
                             "low": {
                               "color": "{imported.inline-notification.label-2.color.low}",
                               "row-rule-color": "{imported.inline-notification.label-2.row-rule-color.low}"
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    "label-3": {
-                      "text": "Notification subtitle",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__subtitle — this element exists in the real component's DOM; the static layer had no part for it.",
-                      "declared": {
-                        "display": "block"
-                      },
-                      "tokens": {
-                        "font-size": "{imported.shared.size-14}",
-                        "font-weight": "{imported.inline-notification.label-3.font-weight}",
-                        "letter-spacing": "{imported.inline-notification.label-3.letter-spacing}",
-                        "line-height": "{imported.inline-notification.label-3.line-height}"
-                      },
-                      "tokensByProp": [
-                        {
-                          "prop": "contrast",
-                          "map": {
-                            "high": {
-                              "color": "{imported.inline-notification.label-3.color.high}",
-                              "row-rule-color": "{imported.inline-notification.label-3.row-rule-color.high}"
-                            },
-                            "low": {
-                              "color": "{imported.inline-notification.label-3.color.low}",
-                              "row-rule-color": "{imported.inline-notification.label-3.row-rule-color.low}"
                             }
                           }
                         }
@@ -10937,6 +10566,42 @@
                 "right": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}"
               }
+            },
+            "root-before": {
+              "shape": {
+                "kind": "rect",
+                "width": 425,
+                "height": 48
+              },
+              "literals": {
+                "background-color": "transparent",
+                "border-top-width": "1px",
+                "border-right-width": "1px",
+                "border-bottom-width": "1px",
+                "border-top-color": "rgba(218, 30, 40, 1)",
+                "border-right-color": "rgba(218, 30, 40, 1)",
+                "border-bottom-color": "rgba(218, 30, 40, 1)",
+                "border-left-color": "rgba(218, 30, 40, 1)"
+              },
+              "stylesWhen": [
+                {
+                  "prop": "contrast",
+                  "equals": "high",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
+                {
+                  "prop": "contrast",
+                  "equals": "low",
+                  "styles": {
+                    "position": "absolute",
+                    "top": "0px",
+                    "left": "0px"
+                  }
+                }
+              ],
+              "description": "Drawn ::before pseudo-element decor promoted from the computed floor (round 5c, S5 v1): a 425×48 rect at 0,0 inside root, fill rgba(0, 0, 0, 0) — background+box+radius only, no content text; translate folded into top/left (receipted)."
             }
           },
           "declared": {
@@ -11075,6 +10740,11 @@
             },
             "modal-container": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|modal-container — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "column",
+                "align": "stretch"
+              },
               "parts": {
                 "modal-header": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|modal-header — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -11216,73 +10886,6 @@
                                 "min-height": "{imported.shared.size-0}",
                                 "min-width": "{imported.shared.size-0}",
                                 "width": "{imported.shared.size-48}"
-                              }
-                            },
-                            "popover": {
-                              "element": "span",
-                              "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover — this element exists in the real component's DOM; the static layer had no part for it.",
-                              "declared": {
-                                "display": "block",
-                                "position": "absolute",
-                                "pointer-events": "none"
-                              },
-                              "parts": {
-                                "label-4": {
-                                  "text": "Close",
-                                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-content.tooltip-content — this element exists in the real component's DOM; the static layer had no part for it.",
-                                  "declared": {
-                                    "display": "none",
-                                    "position": "absolute"
-                                  },
-                                  "tokens": {
-                                    "background-color": "{imported.modal.label-4.background-color}",
-                                    "border-bottom-left-radius": "{imported.shared.size-2}",
-                                    "border-bottom-right-radius": "{imported.shared.size-2}",
-                                    "border-top-left-radius": "{imported.shared.size-2}",
-                                    "border-top-right-radius": "{imported.shared.size-2}",
-                                    "color": "{imported.shared.color-ffffff}",
-                                    "font-size": "{imported.shared.size-14}",
-                                    "font-weight": "{imported.shared.num-400}",
-                                    "letter-spacing": "{imported.shared.size-0-16}",
-                                    "line-height": "{imported.shared.size-18-0001}",
-                                    "max-width": "{imported.modal.label-4.max-width}",
-                                    "min-height": "{imported.shared.size-0}",
-                                    "min-width": "{imported.shared.size-0}",
-                                    "padding-bottom": "{imported.shared.size-2}",
-                                    "padding-left": "{imported.shared.size-16}",
-                                    "padding-right": "{imported.shared.size-16}",
-                                    "padding-top": "{imported.shared.size-2}",
-                                    "row-rule-color": "{imported.shared.color-ffffff}",
-                                    "z-index": "{imported.shared.num-6000}"
-                                  }
-                                },
-                                "popover-caret": {
-                                  "element": "span",
-                                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-caret — this element exists in the real component's DOM; the static layer had no part for it.",
-                                  "declared": {
-                                    "display": "none",
-                                    "position": "absolute",
-                                    "pointer-events": "none"
-                                  },
-                                  "tokens": {
-                                    "height": "{imported.shared.size-8}",
-                                    "min-height": "{imported.shared.size-0}",
-                                    "min-width": "{imported.shared.size-0}",
-                                    "width": "{imported.modal.popover-caret.width}",
-                                    "z-index": "{imported.shared.num-6000}"
-                                  }
-                                }
-                              },
-                              "tokens": {
-                                "bottom": "{imported.shared.size-0}",
-                                "height": "{imported.shared.size-48}",
-                                "left": "{imported.shared.size-0}",
-                                "min-height": "{imported.shared.size-0}",
-                                "min-width": "{imported.shared.size-0}",
-                                "right": "{imported.shared.size-0}",
-                                "top": "{imported.shared.size-0}",
-                                "width": "{imported.shared.size-48}",
-                                "z-index": "{imported.shared.num-6000}"
                               }
                             }
                           },
@@ -12982,6 +12585,11 @@
                 },
                 "toggle__appearance": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|toggle__appearance — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "inline-flex",
+                    "direction": "row",
+                    "align": "center"
+                  },
                   "parts": {
                     "toggle__switch": {
                       "description": "Promoted from the computed floor (round 4): rendered anatomy div|toggle__switch — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -12993,6 +12601,39 @@
                         "transition-property": "background-color",
                         "transition-timing-function": "cubic-bezier(0.2, 0, 1, 0.9)",
                         "user-select": "none"
+                      },
+                      "parts": {
+                        "toggle__switch-before": {
+                          "shape": {
+                            "kind": "ellipse",
+                            "width": 18,
+                            "height": 18
+                          },
+                          "declared": {
+                            "position": "absolute"
+                          },
+                          "literals": {
+                            "background-color": "rgba(255, 255, 255, 1)",
+                            "top": "3px",
+                            "left": "3px"
+                          },
+                          "literalsByProp": [
+                            {
+                              "prop": "toggled",
+                              "map": {
+                                "untoggled": {
+                                  "top": "3px",
+                                  "left": "3px"
+                                },
+                                "toggled": {
+                                  "top": "3px",
+                                  "left": "27px"
+                                }
+                              }
+                            }
+                          ],
+                          "description": "Drawn ::before pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round): an UNCONDITIONAL 18×18 ellipse at 3,3 inside toggle__switch — position:absolute with literal offsets, per-value toggled overrides; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
+                        }
                       },
                       "declaredStates": {
                         "disabled": {

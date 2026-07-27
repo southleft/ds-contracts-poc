@@ -87,9 +87,9 @@
     "combos": 12,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 7488,
-      "cellsEqual": 7232,
-      "pctEqual": 96.58119658119658,
+      "cellsCompared": 4944,
+      "cellsEqual": 4800,
+      "pctEqual": 97.0873786407767,
       "rowsFullyEqual": 0,
       "rows": 48
     },
@@ -105,67 +105,67 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 122,
-      "mintedLeavesUnfolded": 318,
-      "baseBindings": 84,
+      "mintedLeaves": 87,
+      "mintedLeavesUnfolded": 193,
+      "baseBindings": 57,
       "stateBindings": 1,
-      "codeOnlyChannels": 10,
-      "overflowBindings": 2,
-      "folds": 116
+      "codeOnlyChannels": 4,
+      "overflowBindings": 1,
+      "folds": 107
     },
     "worstRows": [
       {
-        "key": "success.high__default",
+        "key": "error.high__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 6
+        "channelsMismatched": 3
       },
       {
-        "key": "success.high__hover",
+        "key": "error.high__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 6
+        "channelsMismatched": 3
       },
       {
-        "key": "success.high__focus-visible",
+        "key": "error.high__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 6
+        "channelsMismatched": 3
       },
       {
-        "key": "success.high__active",
+        "key": "error.high__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 6
+        "channelsMismatched": 3
       },
       {
-        "key": "success.low__default",
+        "key": "error.low__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 6
+        "channelsMismatched": 3
       },
       {
-        "key": "success.low__hover",
+        "key": "error.low__hover",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 6
+        "channelsMismatched": 3
       },
       {
-        "key": "success.low__focus-visible",
+        "key": "error.low__focus-visible",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 6
+        "channelsMismatched": 3
       },
       {
-        "key": "success.low__active",
+        "key": "error.low__active",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 6
+        "channelsMismatched": 3
       }
     ],
     "topMismatchedChannels": [
       [
-        "part-0-0-0.d",
+        "icon.overflow-clip-margin",
         48
       ],
       [
@@ -173,50 +173,15 @@
         48
       ],
       [
-        "label-3.word-break",
+        "label-2.word-break",
         48
-      ],
-      [
-        "part-0-0-1-2.d",
-        32
-      ],
-      [
-        "part-0-0-0.fill",
-        24
-      ],
-      [
-        "part-0-0-1.d",
-        16
-      ],
-      [
-        "part-0-0-1.display",
-        16
-      ],
-      [
-        "part-0-0-1.fill",
-        8
-      ],
-      [
-        "part-0-0-1-2.fill",
-        8
-      ],
-      [
-        "part-0-0-2.d",
-        8
       ]
     ],
     "namedLosses": [
-      "overflow: part-0-0-1-2.fill — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
       "overflow: inline-notification__close-button.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-0-0-0.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-0-0-0.fill — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-0-0-1-2.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-0-0-2.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-0-0-1.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-0-0-1.fill — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: inline-notification__text-wrapper.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label-3.word-break — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.word-break — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: inline-notification__close-button.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
@@ -225,7 +190,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 998,
+      "leavesAdded": 999,
       "divergent": [
         {
           "token": "imported.inline-notification.icon.fill.error.high",
@@ -316,28 +281,16 @@
     "rows": [
       {
         "key": "error.high__default",
-        "channelsCompared": 154,
-        "channelsEqual": 149,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -346,7 +299,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -356,28 +309,16 @@
       },
       {
         "key": "error.high__hover",
-        "channelsCompared": 154,
-        "channelsEqual": 149,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -386,7 +327,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -396,28 +337,16 @@
       },
       {
         "key": "error.high__focus-visible",
-        "channelsCompared": 154,
-        "channelsEqual": 149,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -426,7 +355,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -436,28 +365,16 @@
       },
       {
         "key": "error.high__active",
-        "channelsCompared": 154,
-        "channelsEqual": 149,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -466,7 +383,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -476,28 +393,16 @@
       },
       {
         "key": "error.low__default",
-        "channelsCompared": 154,
-        "channelsEqual": 149,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -506,7 +411,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -516,28 +421,16 @@
       },
       {
         "key": "error.low__hover",
-        "channelsCompared": 154,
-        "channelsEqual": 149,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -546,7 +439,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -556,28 +449,16 @@
       },
       {
         "key": "error.low__focus-visible",
-        "channelsCompared": 154,
-        "channelsEqual": 149,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -586,7 +467,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -596,28 +477,16 @@
       },
       {
         "key": "error.low__active",
-        "channelsCompared": 154,
-        "channelsEqual": 149,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 13.5 14.5 L 5.5 6.5 L 6.5 5.5 L 14.5 13.5 L 13.5 14.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -626,7 +495,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -636,28 +505,16 @@
       },
       {
         "key": "info.high__default",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(69, 137, 255, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -666,7 +523,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -676,28 +533,16 @@
       },
       {
         "key": "info.high__hover",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(69, 137, 255, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -706,7 +551,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -716,28 +561,16 @@
       },
       {
         "key": "info.high__focus-visible",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(69, 137, 255, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -746,7 +579,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -756,28 +589,16 @@
       },
       {
         "key": "info.high__active",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(69, 137, 255, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -786,7 +607,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -796,28 +617,16 @@
       },
       {
         "key": "info.low__default",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(0, 67, 206, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -826,7 +635,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -836,28 +645,16 @@
       },
       {
         "key": "info.low__hover",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(0, 67, 206, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -866,7 +663,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -876,28 +673,16 @@
       },
       {
         "key": "info.low__focus-visible",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(0, 67, 206, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -906,7 +691,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -916,28 +701,16 @@
       },
       {
         "key": "info.low__active",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(0, 67, 206, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -946,7 +719,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -956,28 +729,16 @@
       },
       {
         "key": "info-square.high__default",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(69, 137, 255, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -986,7 +747,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -996,28 +757,16 @@
       },
       {
         "key": "info-square.high__hover",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(69, 137, 255, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1026,7 +775,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1036,28 +785,16 @@
       },
       {
         "key": "info-square.high__focus-visible",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(69, 137, 255, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1066,7 +803,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1076,28 +813,16 @@
       },
       {
         "key": "info-square.high__active",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(69, 137, 255, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1106,7 +831,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1116,28 +841,16 @@
       },
       {
         "key": "info-square.low__default",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(0, 67, 206, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1146,7 +859,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1156,28 +869,16 @@
       },
       {
         "key": "info-square.low__hover",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(0, 67, 206, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1186,7 +887,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1196,28 +897,16 @@
       },
       {
         "key": "info-square.low__focus-visible",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(0, 67, 206, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1226,7 +915,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1236,28 +925,16 @@
       },
       {
         "key": "info-square.low__active",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 21.875 H 17.125 V 13.875 H 13 V 16.125 H 14.875 V 21.875 H 12 V 24.125 H 20 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(0, 67, 206, 1)",
-            "theirs": "none"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1266,7 +943,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1276,34 +953,16 @@
       },
       {
         "key": "success.high__default",
-        "channelsCompared": 154,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "fill",
-            "ours": "rgba(66, 190, 101, 1)",
-            "theirs": "none"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1312,7 +971,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1322,34 +981,16 @@
       },
       {
         "key": "success.high__hover",
-        "channelsCompared": 154,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "fill",
-            "ours": "rgba(66, 190, 101, 1)",
-            "theirs": "none"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1358,7 +999,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1368,34 +1009,16 @@
       },
       {
         "key": "success.high__focus-visible",
-        "channelsCompared": 154,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "fill",
-            "ours": "rgba(66, 190, 101, 1)",
-            "theirs": "none"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1404,7 +1027,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1414,34 +1037,16 @@
       },
       {
         "key": "success.high__active",
-        "channelsCompared": 154,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "fill",
-            "ours": "rgba(66, 190, 101, 1)",
-            "theirs": "none"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1450,7 +1055,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1460,34 +1065,16 @@
       },
       {
         "key": "success.low__default",
-        "channelsCompared": 154,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "fill",
-            "ours": "rgba(36, 161, 72, 1)",
-            "theirs": "none"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1496,7 +1083,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1506,34 +1093,16 @@
       },
       {
         "key": "success.low__hover",
-        "channelsCompared": 154,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "fill",
-            "ours": "rgba(36, 161, 72, 1)",
-            "theirs": "none"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1542,7 +1111,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1552,34 +1121,16 @@
       },
       {
         "key": "success.low__focus-visible",
-        "channelsCompared": 154,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "fill",
-            "ours": "rgba(36, 161, 72, 1)",
-            "theirs": "none"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1588,7 +1139,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1598,34 +1149,16 @@
       },
       {
         "key": "success.low__active",
-        "channelsCompared": 154,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5.1 1 1 5.1 1 10 S 5.1 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 8.7 13.5 L 5.5 10.3 L 6.5 9.3 L 8.7 11.5 L 13.5 6.7 L 14.5 7.7 L 8.7 13.5 Z\")"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "display",
-            "ours": "none",
-            "theirs": "inline"
-          },
-          {
-            "part": "part-0-0-1",
-            "channel": "fill",
-            "ours": "rgba(36, 161, 72, 1)",
-            "theirs": "none"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1634,7 +1167,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1644,28 +1177,16 @@
       },
       {
         "key": "warning.high__default",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1674,7 +1195,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1684,28 +1205,16 @@
       },
       {
         "key": "warning.high__hover",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1714,7 +1223,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1724,28 +1233,16 @@
       },
       {
         "key": "warning.high__focus-visible",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1754,7 +1251,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1764,28 +1261,16 @@
       },
       {
         "key": "warning.high__active",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1794,7 +1279,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1804,28 +1289,16 @@
       },
       {
         "key": "warning.low__default",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1834,7 +1307,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1844,28 +1317,16 @@
       },
       {
         "key": "warning.low__hover",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1874,7 +1335,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1884,28 +1345,16 @@
       },
       {
         "key": "warning.low__focus-visible",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1914,7 +1363,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1924,28 +1373,16 @@
       },
       {
         "key": "warning.low__active",
-        "channelsCompared": 153,
-        "channelsEqual": 148,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 10 1 C 5 1 1 5 1 10 S 5 19 10 19 S 19 15 19 10 S 15 1 10 1 Z M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 9.2 5 H 10.7 V 12 H 9.2 V 5 Z M 10 16 C 9.4 16 9 15.6 9 15 S 9.4 14 10 14 S 11 14.4 11 15 S 10.6 16 10 16 Z\")"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -1954,7 +1391,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -1964,34 +1401,16 @@
       },
       {
         "key": "warning-alt.high__default",
-        "channelsCompared": 169,
-        "channelsEqual": 163,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
-          },
-          {
-            "part": "part-0-0-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -2000,7 +1419,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -2010,34 +1429,16 @@
       },
       {
         "key": "warning-alt.high__hover",
-        "channelsCompared": 169,
-        "channelsEqual": 163,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
-          },
-          {
-            "part": "part-0-0-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -2046,7 +1447,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -2056,34 +1457,16 @@
       },
       {
         "key": "warning-alt.high__focus-visible",
-        "channelsCompared": 169,
-        "channelsEqual": 163,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
-          },
-          {
-            "part": "part-0-0-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -2092,7 +1475,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -2102,34 +1485,16 @@
       },
       {
         "key": "warning-alt.high__active",
-        "channelsCompared": 169,
-        "channelsEqual": 163,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
-          },
-          {
-            "part": "part-0-0-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -2138,7 +1503,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -2148,34 +1513,16 @@
       },
       {
         "key": "warning-alt.low__default",
-        "channelsCompared": 169,
-        "channelsEqual": 163,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
-          },
-          {
-            "part": "part-0-0-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -2184,7 +1531,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -2194,34 +1541,16 @@
       },
       {
         "key": "warning-alt.low__hover",
-        "channelsCompared": 169,
-        "channelsEqual": 163,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
-          },
-          {
-            "part": "part-0-0-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -2230,7 +1559,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -2240,34 +1569,16 @@
       },
       {
         "key": "warning-alt.low__focus-visible",
-        "channelsCompared": 169,
-        "channelsEqual": 163,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
-          },
-          {
-            "part": "part-0-0-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -2276,7 +1587,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"
@@ -2286,34 +1597,16 @@
       },
       {
         "key": "warning-alt.low__active",
-        "channelsCompared": 169,
-        "channelsEqual": 163,
+        "channelsCompared": 103,
+        "channelsEqual": 100,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
           {
-            "part": "part-0-0-0",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z M 14.875 21 H 17.125 V 12 H 14.875 Z\")"
-          },
-          {
-            "part": "part-0-0-0",
-            "channel": "fill",
-            "ours": "rgba(241, 194, 27, 1)",
-            "theirs": "rgba(0, 0, 0, 1)"
-          },
-          {
-            "part": "part-0-0-1-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 16.002 6.1714 H 15.998 L 4.6487 27.9966 L 4.6506 28 H 27.3494 L 27.3513 27.9966 Z M 14.875 12 H 17.125 V 21 H 14.875 Z M 16 26 A 1.5 1.5 0 1 1 17.5 24.5 A 1.5 1.5 0 0 1 16 26 Z\")"
-          },
-          {
-            "part": "part-0-0-2",
-            "channel": "d",
-            "ours": "none",
-            "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
+            "part": "icon",
+            "channel": "overflow-clip-margin",
+            "ours": "0px",
+            "theirs": "content-box"
           },
           {
             "part": "inline-notification__text-wrapper",
@@ -2322,7 +1615,7 @@
             "theirs": "wrap"
           },
           {
-            "part": "label-3",
+            "part": "label-2",
             "channel": "word-break",
             "ours": "normal",
             "theirs": "break-word"

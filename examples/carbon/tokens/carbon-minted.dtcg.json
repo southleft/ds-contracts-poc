@@ -2896,189 +2896,9 @@
           "$value": "0",
           "$type": "number"
         },
-        "row-rule-color": {
-          "high": {
-            "$value": "#ffffff",
-            "$type": "color"
-          },
-          "low": {
-            "$value": "#161616",
-            "$type": "color"
-          }
-        }
-      },
-      "part-0-0-0": {
-        "color": {
-          "high": {
-            "$value": "#ffffff",
-            "$type": "color"
-          },
-          "low": {
-            "$value": "#161616",
-            "$type": "color"
-          }
-        },
-        "row-rule-color": {
-          "high": {
-            "$value": "#ffffff",
-            "$type": "color"
-          },
-          "low": {
-            "$value": "#161616",
-            "$type": "color"
-          }
-        }
-      },
-      "part-0-0-1-2": {
-        "color": {
-          "high": {
-            "$value": "#ffffff",
-            "$type": "color"
-          },
-          "low": {
-            "$value": "#161616",
-            "$type": "color"
-          }
-        },
-        "row-rule-color": {
-          "high": {
-            "$value": "#ffffff",
-            "$type": "color"
-          },
-          "low": {
-            "$value": "#161616",
-            "$type": "color"
-          }
-        }
-      },
-      "part-0-0-2": {
-        "color": {
-          "high": {
-            "$value": "#ffffff",
-            "$type": "color"
-          },
-          "low": {
-            "$value": "#161616",
-            "$type": "color"
-          }
-        },
-        "fill": {
-          "$value": "#f1c21b",
-          "$type": "color"
-        },
-        "row-rule-color": {
-          "high": {
-            "$value": "#ffffff",
-            "$type": "color"
-          },
-          "low": {
-            "$value": "#161616",
-            "$type": "color"
-          }
-        }
-      },
-      "part-0-0-1": {
-        "color": {
-          "high": {
-            "$value": "#ffffff",
-            "$type": "color"
-          },
-          "low": {
-            "$value": "#161616",
-            "$type": "color"
-          }
-        },
-        "opacity": {
-          "$value": "0",
-          "$type": "number"
-        },
-        "row-rule-color": {
-          "high": {
-            "$value": "#ffffff",
-            "$type": "color"
-          },
-          "low": {
-            "$value": "#161616",
-            "$type": "color"
-          }
-        }
-      },
-      "label": {
-        "color": {
-          "high": {
-            "$value": "#ffffff",
-            "$type": "color"
-          },
-          "low": {
-            "$value": "#161616",
-            "$type": "color"
-          }
-        },
-        "fill": {
-          "error": {
-            "high": {
-              "$value": "#fa4d56",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#da1e28",
-              "$type": "color"
-            }
-          },
-          "info": {
-            "high": {
-              "$value": "#4589ff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#0043ce",
-              "$type": "color"
-            }
-          },
-          "info-square": {
-            "high": {
-              "$value": "#4589ff",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#0043ce",
-              "$type": "color"
-            }
-          },
-          "success": {
-            "high": {
-              "$value": "#42be65",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#24a148",
-              "$type": "color"
-            }
-          },
-          "warning": {
-            "high": {
-              "$value": "#f1c21b",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#f1c21b",
-              "$type": "color"
-            }
-          },
-          "warning-alt": {
-            "high": {
-              "$value": "#f1c21b",
-              "$type": "color"
-            },
-            "low": {
-              "$value": "#f1c21b",
-              "$type": "color"
-            }
-          }
-        },
-        "font-weight": {
-          "$value": "400",
-          "$type": "number"
+        "margin-right": {
+          "$value": "16px",
+          "$type": "dimension"
         },
         "row-rule-color": {
           "high": {
@@ -3121,7 +2941,7 @@
           }
         }
       },
-      "label-2": {
+      "label": {
         "color": {
           "high": {
             "$value": "#ffffff",
@@ -3159,7 +2979,7 @@
           }
         }
       },
-      "label-3": {
+      "label-2": {
         "color": {
           "high": {
             "$value": "#ffffff",

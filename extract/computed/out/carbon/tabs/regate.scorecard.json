@@ -761,7 +761,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 1072,
+      "leavesAdded": 1038,
       "divergent": [
         {
           "token": "imported.tabs.part-0.background-color",

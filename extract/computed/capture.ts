@@ -1045,6 +1045,7 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
   // Identical result for every ordinary element, so the committed captures do
   // not move.
   const tagGet = Object.getOwnPropertyDescriptor(Element.prototype, 'tagName').get;
+  const SVG_NONPAINTING = new Set(['title', 'desc', 'metadata']);
   const readEl = (el) => {
     const vr = vrefsOf(el);
     const out = {
@@ -1077,6 +1078,18 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
     // are the chain the inner box reads. Only the CAPTURED ROOT descends
     // (policy 1); depth-2 is exercised by exactly that avatar axis this round.
     for (const child of shChildNodesOf(el)) {
+      // CARBON LIVE-DEFECT ROUND (D1) — SVG A11Y METADATA IS NOT ANATOMY.
+      // \`<title>\`/\`<desc>\`/\`<metadata>\` inside an <svg> are NON-PAINTING
+      // (SVG 1.1 §5.4: "not rendered ... shall not be displayed") — the
+      // browser draws nothing, but they ARE elements with a text node, so
+      // the reader captured Carbon's \`<title>error icon</title>\` as a real
+      // child and the words "error icon" reached the canvas as visible TEXT
+      // next to the notification title. They also made the svg fail the
+      // path/g asset grammar, so the whole glyph fell back to per-path parts.
+      // Dropped at the SOURCE: what does not paint is not captured.
+      // Measured byte-safe: 0 committed captures in mui/polaris/astryx/
+      // altitude/tailwind carry any of these tags; carbon is the only subject.
+      if (child.nodeType === 1 && child instanceof SVGElement && SVG_NONPAINTING.has(tagGet.call(child).toLowerCase())) continue;
       if (child.nodeType === 3 && child.textContent.length > 0) out.nodes.push({ t: 'text', v: child.textContent });
       else if (child.nodeType === 1) out.nodes.push({ t: 'el', el: readEl(child) });
     }
@@ -1559,6 +1572,7 @@ const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
     .map((c) => (prefix && c.startsWith(prefix) ? c.slice(prefix.length) : c))
     .filter((c) => c !== '' && !c.includes('--'));
   const read = (cs) => { const o = {}; for (const p of props) o[p] = cs.getPropertyValue(p); return o; };
+  const SVG_NONPAINTING = new Set(['title', 'desc', 'metadata']);
   const readEl = (el) => {
     const out = {
       tag: el.tagName.toLowerCase(),
@@ -1575,6 +1589,10 @@ const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
       if (content !== 'none' && content !== 'normal') out.pseudo[pe] = read(pcs);
     }
     for (const child of el.childNodes) {
+      // D1 mirror (see the census reader): non-painting SVG a11y metadata is
+      // never anatomy. Kept identical in both readers on purpose — a portal
+      // component (carbon/Modal) reads its close-button glyph through THIS one.
+      if (child.nodeType === 1 && child instanceof SVGElement && SVG_NONPAINTING.has(child.tagName.toLowerCase())) continue;
       if (child.nodeType === 3 && child.textContent.length > 0) out.nodes.push({ t: 'text', v: child.textContent });
       else if (child.nodeType === 1) out.nodes.push({ t: 'el', el: readEl(child) });
     }

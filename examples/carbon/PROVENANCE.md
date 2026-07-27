@@ -608,3 +608,377 @@ variant cells — is measured over that slice, and the slice was hand-picked for
 tractability. The engine generalizing across libraries (`docs/22`) and a
 library being *captured* are different claims; this row is the second one, and
 it is small. Full table and how to re-derive it: [docs/22 §8.3](../../docs/22-generality.md).
+
+---
+
+# THE LIVE-DEFECT ROUND (task #30) — six defects a real canvas paste found
+
+The owner pasted `examples/carbon/figma/carbon.bundle.json` into a real Figma
+file and reported "lots of issues with these components". The canvas was
+triaged through the desktop bridge and the evidence captured as **node trees,
+not impressions**. Every defect below was first reproduced as a **failing
+headless assertion** against the real engine bundle in the mocked canvas
+(`scripts/plugin-engine-mock-figma.mjs`), then fixed at its source, then
+re-measured green. **11 of 13 assertions were RED at 5e4c885; 12 are green now,
+and the one that is still red is named at the bottom with its measurement.**
+
+What was already right and is now pinned so it stays right: **Button** (80
+variants — kind × size × disabled colours, fills, outlines and text) and
+**Tag** (36 variants, per-type pill colours including high-contrast and
+outline) were correct before and are byte-unchanged in their floors.
+
+## The six, each with its root cause
+
+### D1 — an SVG `<title>` was being rendered as visible canvas text
+
+InlineNotification drew the literal words **"error icon"** beside the
+notification heading, inside an `icon` FRAME **173×30** wrapping an `icon`
+FRAME **173×16** — an icon frame the width of a sentence.
+
+**Root cause, two consequences from one miss.** Carbon's notification icons
+ship `<title>error icon</title>` inside the SVG for screen readers. `<title>`
+/ `<desc>` / `<metadata>` are **non-painting** by spec (SVG 1.1 §5.4) but they
+are real elements carrying real text, so the capture's DOM reader took them:
+
+1. the title's text node promoted into a contract part and became canvas ink;
+2. `reconstructSvg`'s bounded `path`/`g` asset grammar hit `<title>` and
+   **refused the whole asset** — the receipt
+   `svg-child-outside-grammar: InlineNotification.icon@error.high — <title>`
+   was already in `enriched.extension.json` on every one of the 12 combos and
+   nobody had read it — so one glyph exploded into five per-path parts.
+
+**Fixed at the source** (`extract/computed/capture.ts`, both DOM readers — the
+census one and the portal one): a child that `instanceof SVGElement` and whose
+tag is `title|desc|metadata` is never captured. A promotion-side backstop
+(`svg-metadata-not-a-part`) and a reconstruction-side skip
+(`svg-metadata-skipped`) keep already-committed captures safe.
+**Measured byte-safe by construction:** `"tag":"title"|"desc"|"metadata"`
+appears in **0** committed `captured-truth.json` files in mui / polaris /
+astryx / altitude / tailwind, and **1** in carbon.
+
+**Result:** the six per-kind notification glyphs now promote as REAL icon
+assets (`inline-notification-icon-{error,info,info-square,success,warning,
+warning-alt}.svg`); the icon frame is **20×20**; floor **96.581 → 97.087%**.
+
+### D2 — pseudo-element anatomy: two of ten components were hollow
+
+Measured: the whole **Checkbox** was `288×20` containing only
+`checkbox-label(93×20) → label(73×18) → label-text(68×18)` — **no box at all**;
+**Toggle**'s `toggle__switch` was `48×24` **with no children** — the track drew
+and the knob did not.
+
+Both were refused by the v1 decor grammar, and the single refusal
+(`pseudo-decor-nonuniform`) hid **two different reasons**:
+
+| | what actually varies | v1 verdict |
+|---|---|---|
+| checkbox `::before` | geometry IDENTICAL in all 6 combos (16×16 at 2,0, r2); only PAINT moves — `transparent + 1px #161616 ring` when unchecked, `#161616` filled when checked/indeterminate, quarter-alpha when disabled | refused: fill not uniform; also **never even seen as drawn** when unchecked, because v1 required an opaque BACKGROUND and a box made of a RING has none |
+| toggle `::before` | paint IDENTICAL in the enabled plane; only `left` moves (3px → 27px with `toggled`) | refused: geometry not uniform; and refused AGAIN as "unconditional placement" — it is drawn in EVERY combo, so it has no enum gate to hang a `stylesWhen` on |
+
+**Neither is the two-axis product wall.** That wall (named in
+`examples/tailwind/PROVENANCE.md` and `docs/22`) is Flowbite's knob offset as a
+function of `Sizing × Checked` — two ENUM axes on one GEOMETRY channel. Carbon's
+are one enum axis on geometry (toggled) and one enum axis on paint (checked).
+The wall is still here and still refuses by name
+(`pseudo-decor-geometry-multiaxis`, `pseudo-decor-paint-multiaxis`).
+
+**PSEUDO-DECOR v2** (`extract/computed/anatomy.ts`), four bounded extensions:
+
+1. **DRAWN means PAINTS ANYTHING** — an opaque background *or* a visible border
+   (width > 0 with a non-transparent colour). A ring is a box.
+2. **GEOMETRY and PAINT factor SEPARATELY**, each as uniform *or* a function of
+   exactly ONE enum axis (`literalsByProp`, one ordered entry per driving axis).
+3. **UNCONDITIONAL ABSOLUTE DECOR** — a decor drawn in every combo declares
+   `position: absolute` and carries its own `top`/`left` literals, lowering
+   through the same `absolutePartPlacement` every other absolute part uses. The
+   enum-GATED spelling (Polaris's RadioButton dot) is untouched and
+   byte-identical — every committed decor part in the repo is that shape.
+4. **PERCENTAGE RADIUS** — `border-radius: 50%` is how most libraries spell a
+   circle and the px regex silently read it as `0`. Carbon's round knob would
+   have shipped as a **square**. (Same class as the `rounded-full`
+   3.35544e+07px sentinel the v2/G3 round already covers.)
+
+Three supporting changes rode with it, each a real silent-drop closed:
+`LITERAL_CHANNELS` gains `top/right/bottom/left` (the emitter's
+`absolutePartPlacement` has always READ them out of `resolveLiterals` — the
+registry just never allowed the spelling) and `border-*-color`; `applyLiterals`
+gains a **literal border colour** case (`lits.strokeColor`) which had no case
+at all and was dropped on the floor; and the emitted shape runtime applies a
+literal ring/weight/radius. All three are **feature-gated**, so a contract that
+carries none of them emits a byte-identical script.
+
+**Result:** `RECTANGLE "checkbox-label-before" 16×16 ABSOLUTE` (transparent
+with a 1px `#161616` ring, per-`checked` paint) and
+`ELLIPSE "toggle__switch-before" 18×18 ABSOLUTE` (per-`toggled` placement).
+Toggle floor **83.140 → 84.302%**.
+
+**NAMED, NOT CARRIED** (printed as `pseudo-decor-*` receipts, with the numbers):
+
+- the checkbox **CHECKMARK** (`::after`): a 45°-rotated L drawn from two
+  border sides — `pseudo-decor-outside-grammar` (non-identity scale/rotate
+  matrix). The box is the visible defect; the tick is residue.
+- the **DISABLED-plane paint** of both decors:
+  `pseudo-decor-state-paint-uncarried` prints, per combo, what the disabled
+  plane paints (`rgba(22,22,22,0.25)` ring / `rgba(141,141,141)` knob) against
+  what the enabled plane paints. The decor carries the ENABLED plane. There is
+  no contract spelling for a per-enum-value × per-state paint PRODUCT:
+  `states` takes token refs and decor paint is literal. (Checkbox does not
+  ship a disabled canvas plane at all — the referee refuses its
+  `figmaStatePreviews` by name — so nothing on the canvas is wrong; the code
+  surface is what loses the fact.)
+
+### D3 — frames with no `layoutMode` let children overlap
+
+Measured: `toggle__label` 75×32 containing BOTH `label (margin box)`(40×32) and
+`toggle__appearance`(75×24) — the word "Toggle" collided with the track; and
+`accordion__item`(328×48) containing `accordion__heading`(147×32) and
+`accordion__wrapper`(**402**×48) — a panel wider than the component it lives in.
+
+**Root cause: three separate holes in the display lowering, all of them
+SILENT.** The promotion's display fact carries `flex`/`inline-flex` into
+`Part.layout` and `inline|inline-block|block|contents|none` into
+`Part.declared`; **everything else fell into a `display-outside-vocabulary`
+receipt and reached the emitter with no display fact at all**, where the
+default is `HORIZONTAL`. Measured across Carbon's ten:
+
+```
+accordion__item      = "list-item"   (an <li>)
+toggle__appearance   = "inline-grid"
+modal-container      = "grid"
+```
+
+1. **CSS GRID now lowers to the flex vocabulary** (`lowerGridDisplay`,
+   the sibling of the organism round's `lowerTableDisplay`), from the
+   **measured** `grid-template-columns` / `grid-template-rows` track counts —
+   these resolve to explicit px track lists in computed style, so the counts
+   are captured facts, not guesses. 1 column → flex COLUMN; 1 row → flex ROW;
+   cross-axis from `justify-items` / `align-items` (grid's `normal` IS
+   stretch). A genuine 2-D grid (>1 column AND >1 row) is **refused by name** —
+   one axis would have to be invented. Carbon: `modal-container` is
+   `1 × 4 → column`, `toggle__appearance` is `2 × 1 → row, align center`.
+2. **`list-item` and `flow-root` join the declared display grammar.** Both are
+   block-level boxes in CSS block flow. Leaving them out did not make them
+   safe, it made them invisible.
+3. **The block-flow rule was too narrow in two ways** (`core/emit-figma-script.ts`
+   `layoutSpec`): its TRIGGER was `display:block` only (so an `inline` box and
+   an `<li>` fell through), and a `display:none` child counted as an in-flow
+   sibling (Accordion's second, hidden wrapper vetoed the whole rule on its
+   own). The CSS truth it approximated is **blockification** — a block
+   container with at least ONE block-level in-flow child wraps every child in
+   anonymous block boxes and stacks them. `every` is only the safe half of
+   that; the `some` half is now taken **only when no two inline-level children
+   are ADJACENT**, because a run of ≥2 inline siblings shares one anonymous
+   block (one LINE) which a flat VERTICAL frame cannot express — that shape
+   keeps the row default and is named residue rather than guessed at. A part
+   placed absolutely by a CONDITION (`stylesWhen … position: absolute` — the
+   decor spelling) is also out of flow now, which it always was in CSS.
+
+**Result:** `toggle__label` VERTICAL (label above the track),
+`accordion__item` VERTICAL, `modal-container` VERTICAL,
+`toggle__appearance` HORIZONTAL/center. Accordion floor **76.462 → 77.632%**,
+Modal **89.744 → 90.038%**. Zero non-text container overflows remain in
+Carbon's canvas (see D4 for what does).
+
+### D4 — text truncation: NOT this round's, and here is why, with numbers
+
+Three symptoms were reported: Tabs labels clipping to "Overvi…/Activ…/Settin…",
+Accordion body copy clipping, the Checkbox label clipping. Checked against the
+MUI round's max-width-as-ceiling fix and against D3's overflow — **it is
+neither**. Two measured mechanisms, both the same corpus-wide round:
+
+1. **A hugging TEXT node inside a fixed-width ancestor.** Carbon's
+   `accordion__content` is 328px in the DOM with the copy WRAPPING inside it;
+   on canvas the frame HUGS an unwrapped run and comes out 472px. This is
+   character-for-character the case `docs/22` already names ("MUI's
+   `AccordionDetails` body copy at 426px inside 288px"). **8 instances in
+   Carbon**, all in Accordion — now COUNTED in the compile receipt's own
+   column rather than being invisible.
+2. **A shrink-to-fit box measured in the WRONG FONT and baked as fixed.**
+   `tabs__nav-item-label-wrapper` carries `width: 62.3125px` — that number is
+   "Overview" measured in the harness's FALLBACK font, because IBM Plex is not
+   loaded (105 `@font-face` blocks, every `src` an Akamai CDN URL, harness is
+   network-free — probe 2 above). The canvas draws **Inter**. A shrink-to-fit
+   width from font A applied as a fixed box in font B clips, and Carbon's own
+   `overflow: hidden` + `text-overflow: ellipsis` on `.cds--tabs__nav-item`
+   are declared facts the canvas records but does not draw.
+
+Complete inventory of Carbon text inside a fixed-width ancestor, measured:
+Accordion `label`/`label-2` (root 328px), Checkbox `label`
+(`checkbox-label` 92.9219px), Modal `label-2`/`label-3`/`label-6`/`label-7`,
+Tabs `label`/`label-2`/`label-3` (62.3125 / 48 / 52.4688px), TextInput `label`
+(288px). **Fixing this changes every hugging text node in the corpus** — it
+needs either real text wrapping on canvas or a hug-vs-fixed decision in the
+promotion, and it is deliberately not attempted mid-live-defect-round.
+
+### D5 — the Modal was 980×4200 on canvas (measured here: 900×1000 per variant)
+
+Carbon's Modal is `position: fixed` with `block-size: 100vh` and a VISIBLE
+`rgba(0,0,0,.6)` scrim, so `demoteFullBleedScrim` correctly REFUSES to demote
+it — **that rule is right and it is what keeps MUI's Dialog whole**. The result
+was faithful to the DOM and useless on canvas: four modal variants as
+900×1000 dim rectangles — the exact width and height of the capture viewport.
+
+**This is a SHARED, pre-existing canvas defect, and Carbon only made it
+unmissable.** Measured on the committed MUI bundle through the same engine:
+`mui.dialog` builds at **900×126** — the 900 is the stage, not the dialog.
+
+**The decision, and it is a deliberate canvas-vs-DOM divergence:** a component
+ROOT that is a viewport-pinned overlay layer carries the CAPTURE STAGE as its
+box, not the component's. Its canvas box is bound to the overlay's own content;
+the scrim keeps its fill, its layout, its inset and z-index channels, and
+**the contract is not edited** — `width`, `height` and all four insets are
+still in it, saying exactly what the DOM does. The divergence joins the
+component's code-only facts (the description dagger).
+
+The signature needs **no new capture fact and no guessing**: only an
+OUT-OF-FLOW box has computed insets at all, so a root carrying all four of
+`top/right/bottom/left` resolving to 0 IS `inset: 0` on a positioned layer.
+A root that declares `position: relative | static | sticky` is EXCLUDED, and
+that exclusion is load-bearing: MUI's Accordion, Checkbox, Slider and Switch
+roots all declare `position: relative` AND carry inset-0 channels, and without
+it this rule would have thrown away four real component boxes (caught by the
+cross-library A/B before anything was committed).
+
+**Result:** Carbon Modal `Size=Xs` is **432×214**. MUI's Dialog is improved by
+the same rule (see the cross-library section).
+
+### D6 — IconButton was 24×24 with an invisible absolute tooltip part
+
+Measured: component 24×24 → `popover` FRAME 24×24 **ABSOLUTE** + `tooltip-trigger__wrapper`(24×24)
+→ `btn`(16×16) → `Vector`(11×11). Two independent defects in one component.
+
+**(a) A carried part that draws nothing.** In Carbon an icon button *is* a
+tooltip trigger, so its captured anatomy carries `span.cds--popover` and its
+whole subtree (`popover-caret`, the tooltip label) — every one of them
+`display: none` in every captured combo. Promoted, that is an absolutely-
+positioned frame over the entire component that paints nothing. This is the
+**census-capture sibling** of the molecule round's `stripInertPortalChildren`:
+a new promotion refusal `inert-overlay-wrapper`, bounded to a part that paints
+no box in EVERY captured combo, carries no ink of its own, and has ≥1 child
+with EVERY child declared `display: none`. A CHILDLESS paintless frame is left
+alone by name — it can be a real spacer and this round has no measurement that
+says otherwise.
+
+**(b) An icon-bearing part lost its own box.** The icon lowering compiled a
+part with `part.icon` to a **bare svg node** sized by `icon.size` and threw the
+part's entire box away — every fill, border, padding, radius and width/height
+channel. Carbon's `button.cds--btn` carries the per-kind background, the 1px
+border and the 24/32/40/48 control box AND hosts the glyph, so the canvas drew
+a bare 16px glyph with no button chrome at all. Fixed with the **same lowering
+the MUI round gave box-carrying TEXT parts** (`wrapTextInBox`): a box-carrying
+icon part becomes FRAME(box) → svg child; a box-less one keeps the plain svg
+lowering byte-identically. "Carries a box" = paints one (background / border /
+shadow) or reserves space around the glyph (padding); a part whose only
+geometry is a width equal to the glyph stays bare.
+
+**Result:** IconButton is `tooltip-trigger__wrapper(24×24) → btn(24×24) →
+btn-icon(16×16)`, 6 parts → 3, floor **91.810 → 100.000%**.
+**Read that 100% correctly**: refusing the inert wrapper takes 8160 of 9280
+compared cells out of the denominator. A 100% on 1120 cells is a *smaller*
+claim than 91.810% on 9280, not a bigger one — the drift baseline row says so
+in those words.
+
+## Floors, before and after
+
+| component | before | after | Δ | cellsCompared |
+|---|---|---|---|---|
+| Button | 77.276% | 77.276% | — | 20608 → 20608 |
+| Tag | 80.521% | 80.521% | — | 12896 → 12896 |
+| Checkbox | 84.291% | 84.291% | — | 1776 → 1776 |
+| Toggle | 83.140% | **84.302%** | +1.162 | 1376 → 1376 |
+| TextInput | 89.045% | 89.045% | — | 3560 → 3560 |
+| InlineNotification | 96.581% | **97.087%** | +0.506 | 7488 → **4944** |
+| Accordion | 76.462% | **77.632%** | +1.170 | 5472 → 5472 |
+| Tabs | 92.742% | 92.742% | — | 1240 → 1240 |
+| Modal | 89.744% | **90.038%** | +0.294 | 1560 → **1305** |
+| IconButton | 91.810% | **100.000%** | +8.190 | 9280 → **1120** |
+
+Every moved row is re-recorded in `extract/computed/regate-baseline.json` with
+its `gapCause` naming what moved and why; the three moved `cellsCompared`
+counts are VOCABULARY changes and each says which parts left the tree.
+
+Downstream: **1425 variables** (was 1459) / **94 Figma-native source aliases**
+(unchanged) / **952 minted literals** (was 987) / **132 variant cells across 10
+sets** (unchanged) / 339 base tokens / Light+Dark. **15 icon assets** (was 9) —
+the six per-kind notification glyphs are new, no orphans.
+
+## Cross-library byte safety — proven by A/B, not by hope
+
+A comparison against committed artifacts is not a valid proof (they can be
+stale for unrelated reasons — Polaris's committed scripts already are). The
+valid proof is **the same command, the same contracts, HEAD engine vs changed
+engine**:
+
+| library | scripts | result |
+|---|---|---|
+| tailwind | 5 | **all byte-identical** |
+| astryx | 13 | **all byte-identical** |
+| polaris | 12 | **all byte-identical** |
+| altitude | 8 | **all byte-identical** |
+| **mui** | 14 | **3 differ — all three are the same fixes IMPROVING MUI, named below** |
+
+- `mui/dialog.figma.js` — D5. Root drops `fixedWidth 900` (the capture stage)
+  and bounds to the dialog's own content.
+- `mui/autocomplete.figma.js` — D6(b). `MuiAutocomplete-clearIndicator` and
+  `-popupIndicator` are REAL BUTTONS (background + 1px border + padding on all
+  four sides) that were drawing as bare 20/24px glyphs; they regain their box.
+- `mui/table-pagination.figma.js` — D6(b). The two `MuiButtonBase-root`
+  prev/next buttons, same shape.
+
+That is the evidence the rules are general rather than a Carbon patch. **MUI's
+committed artifacts are deliberately NOT regenerated in this round** (that
+pulls in its bundle, receipts and the engine receipt, and it is an MUI round);
+they are now knowingly stale by exactly those three improvements.
+
+Three intermediate findings were caught by this A/B before anything was
+committed, each of which would have silently damaged another library:
+the D5 signature originally fired on any inset-0 root and stripped the boxes of
+MUI's Accordion/Checkbox/Slider/Switch; the new literal-stroke and shape-lits
+runtime lines were emitted unconditionally and moved 20 files' bytes for dead
+code (now feature-gated); and the block-flow `some()` half flipped Polaris's
+RadioButton because a `stylesWhen`-absolute decor was being counted as an
+in-flow inline sibling.
+
+The 54-row offline drift instrument was run before and after: **every
+non-Carbon row EXACT**, Carbon's five moved rows re-recorded with causes.
+
+## New instrument: child-wider-than-parent
+
+"A container whose children overlap is never right" is now measurable. The
+compile receipt fails Carbon on any in-flow child wider than its parent, with
+ONE counted exemption (an overflow whose cause is a hugging TEXT descendant —
+D4's round). Run across every committed bundle for a baseline, this is where
+the corpus stands today:
+
+| bundle | non-absolute children wider than their parent |
+|---|---|
+| altitude | 0 |
+| tailwind | 0 |
+| astryx | 11 (ProgressBar `fill` inside `track`, Slider label) |
+| mui | 12 (AccordionDetails body — D4; Autocomplete indicator margin boxes) |
+| polaris | 42 (Badge `icon` 20 inside a 12px margin box) |
+| carbon | 16 → **8, all 8 text-caused (D4)** |
+
+It is NOT turned on repo-wide in this round: four libraries would go red
+immediately and each of those numbers is its own investigation. The
+measurement is published so the next round starts from a number.
+
+## What stays refused, by name
+
+- The checkbox **CHECKMARK** — a rotated two-border L, outside the decor
+  grammar (`pseudo-decor-outside-grammar`).
+- The **disabled-plane paint** of both decors — no spelling for an
+  enum × state paint product (`pseudo-decor-state-paint-uncarried`, with the
+  measured values printed per combo).
+- The **two-axis geometry product** (Flowbite's `Sizing × Checked` knob) —
+  unchanged, and now refused with its own message
+  (`pseudo-decor-geometry-multiaxis`).
+- **Text wrapping / font-metric width** (D4) — the corpus-wide round, with
+  Carbon's complete inventory measured above.
+- A genuine **2-D grid** (>1 column AND >1 row) — `grid-two-dimensional`.
+- A **run of ≥2 adjacent inline children** in a block container — one anonymous
+  line box, no flat-frame spelling; keeps the row default.
+- `portalSweep` still takes no `varPrefix`, so `carbon/modal` still has **0**
+  source-binding facts (THE HEADLINE DEFECT above) — untouched by this round.
+- `gate.ts`'s flat 30 ms interaction wait (Button's ±0.20 tolerance) —
+  untouched by this round.

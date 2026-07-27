@@ -197,6 +197,14 @@ export interface NodeSpec {
    *  preview renders width:100%; the sync runtime keeps hug sizing — a named
    *  preview-only stage fact (the component has no intrinsic width). */
   blockRoot?: boolean;
+  /** CARBON LIVE-DEFECT ROUND (D5): the root is a VIEWPORT-PINNED overlay
+   *  scrim (`inset: 0` on all four edges) whose captured width/height
+   *  measured the CAPTURE STAGE, not the component. The canvas box is bound
+   *  to the overlay's content instead — a deliberate canvas-vs-DOM
+   *  divergence, stripped before serialization and named in the code-only
+   *  facts. The CONTRACT still carries the inset/width/height channels
+   *  unchanged: what the DOM does is not edited, only what the canvas draws. */
+  scrimBounded?: boolean;
   /** PIXEL line height (dump v1.3) — the runtime sets
    *  node.lineHeight = { unit: 'PIXELS', value }. */
   lineHeight?: number;
@@ -238,6 +246,14 @@ export interface NodeSpec {
     radiusCorners?: { tl?: number; tr?: number; bl?: number; br?: number };
     /** v15 (S4/matrix a.5): per-side literal border widths. */
     strokeSides?: { top?: number; right?: number; bottom?: number; left?: number };
+    /** CARBON LIVE-DEFECT ROUND (D2): a LITERAL border colour. Token-bound
+     *  border colours have lowered to `spec.stroke` since round 4, but a
+     *  literal one had no case at all in applyLiterals — it was a SILENT
+     *  CANVAS DROP, and it is exactly what an unchecked Carbon checkbox box
+     *  is made of (transparent fill, 1px solid #161616 ring). Figma strokes
+     *  carry ONE paint, so the same uniform-sides rule the token path uses
+     *  applies: disagreeing sides keep the CSS-side truth. */
+    strokeColor?: { r: number; g: number; b: number; a?: number };
   };
   // svg (icon parts) — markup with currentColor resolved to the variant's
   // literal foreground color (SVG paint is not variable-bindable on import)
@@ -889,6 +905,74 @@ const JUSTIFY_FIGMA: Record<string, LayoutSpec['primary']> = {
   'space-between': 'SPACE_BETWEEN',
 };
 
+/** CARBON LIVE-DEFECT ROUND (D5) — BOUND A VIEWPORT-PINNED OVERLAY SCRIM.
+ *
+ *  Carbon's Modal is `position: fixed; inset: 0` with a VISIBLE
+ *  rgba(0,0,0,.6) scrim, so `demoteFullBleedScrim` correctly REFUSES to
+ *  demote it (that rule is what keeps MUI's Dialog whole). The consequence
+ *  was faithful to the DOM and useless on canvas: four modal variants as
+ *  900×1000 dim rectangles — the exact width and height of the capture
+ *  viewport. MUI's Dialog carries the same shape (measured: 900×126 — the
+ *  900 is the stage, not the dialog), so this is a SHARED pre-existing
+ *  canvas defect that Carbon made unmissable by pinning the height too.
+ *
+ *  The signature is exact and needs no new capture fact: only an OUT-OF-FLOW
+ *  box has computed insets at all, so a ROOT carrying all four of
+ *  top/right/bottom/left resolving to 0 IS `inset: 0` on a fixed/absolute
+ *  layer. Its width/height then measured whatever contained it — the stage.
+ *
+ *  What changes: the CANVAS box only. The scrim keeps its fill, its layout,
+ *  its inset and z-index channels, and the contract is not edited — the
+ *  component simply bounds to the overlay's own content (the paper) instead
+ *  of reproducing the capture viewport. Named in the code-only facts. */
+function boundFullBleedScrimRoot(
+  rootSpec: NodeSpec,
+  root: Part,
+  subst: Record<string, string>,
+  notes: Set<string>,
+): void {
+  // A `position: relative | static | sticky` root's inset channels are INERT
+  // in CSS — the box is still in flow and its width/height are its own. Only
+  // an OUT-OF-FLOW layer can be pinned to the viewport. (Same exclusion
+  // `insetOverlayOffsets` makes for parts, and the reason it matters: MUI's
+  // Accordion / Checkbox / Slider / Switch roots all declare position
+  // relative AND carry inset-0 channels — bounding those would have thrown
+  // away four real component boxes.)
+  const pos = root.declared?.['position'];
+  if (pos === 'relative' || pos === 'static' || pos === 'sticky') return;
+  const tokens = resolveTokens(root, subst);
+  const lits = resolveLiterals(root, subst);
+  const sides = ['top', 'right', 'bottom', 'left'] as const;
+  const zero = sides.every((s) => {
+    if (tokens[s] !== undefined) {
+      let tokenPath = tokens[s].slice(1, -1);
+      for (const [propName, v] of Object.entries(subst)) tokenPath = tokenPath.replaceAll(`{${propName}}`, v);
+      return px(resolveLiteral(tokenPath)) === 0;
+    }
+    if (lits[s] !== undefined) return px(lits[s]) === 0;
+    return false;
+  });
+  if (!zero) return;
+  const hadW = rootSpec.fixedWidth !== undefined || rootSpec.lits?.width !== undefined;
+  const hadH = rootSpec.fixedHeight !== undefined || rootSpec.lits?.height !== undefined;
+  if (!hadW && !hadH) return;
+  const was = `${rootSpec.fixedWidth?.px ?? rootSpec.lits?.width ?? '—'}×${rootSpec.fixedHeight?.px ?? rootSpec.lits?.height ?? '—'}`;
+  delete rootSpec.fixedWidth;
+  delete rootSpec.fixedHeight;
+  if (rootSpec.lits) {
+    delete rootSpec.lits.width;
+    delete rootSpec.lits.height;
+  }
+  if (rootSpec.bindings) {
+    delete rootSpec.bindings.width;
+    delete rootSpec.bindings.height;
+  }
+  rootSpec.scrimBounded = true;
+  notes.add(
+    `root: viewport-pinned overlay scrim (inset:0) — captured box ${was} is the CAPTURE STAGE, not the component; the canvas box is bound to the overlay's content (deliberate canvas-vs-DOM divergence; the contract's inset/width/height channels are unchanged)`,
+  );
+}
+
 function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> = {}): LayoutSpec {
   // v7 layoutByProp: each canvas variant is compiled with every enum axis's
   // value (subst), so the per-variant layout override resolves right here.
@@ -915,15 +999,42 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
   // schema, so the two cases are distinguishable without guessing. A
   // single-child block box is left alone (one child lays out the same in
   // both modes and the byte-neutrality of every prior contract matters).
-  if (!l && !isRoot && part.declared?.['display'] === 'block') {
-    const kids = Object.values(part.parts ?? {}).filter(
-      (k) => k.declared?.['position'] !== 'absolute' && k.declared?.['position'] !== 'fixed',
-    );
+  //
+  // CARBON LIVE-DEFECT ROUND (D3) — the rule was too narrow in TWO ways and
+  // both of them drew overlapping children on the live canvas:
+  //   (a) the TRIGGER was `display:block` only. Carbon's accordion item is an
+  //       `<li>` (display:list-item) and its toggle label is an `inline` box —
+  //       both are CSS block CONTAINERS, and both drew a 472px panel beside a
+  //       174px heading inside a 328px item / the word "Toggle" on top of the
+  //       track. list-item / flow-root / inline join block.
+  //   (b) a `display:none` child was counted as an in-flow sibling, so one
+  //       hidden part (accordion's second wrapper) vetoed the whole rule.
+  // And the CSS truth the `every` test approximated is BLOCKIFICATION: a
+  // block container with AT LEAST ONE block-level in-flow child wraps every
+  // child in anonymous block boxes and stacks them. `every` is only the safe
+  // half of that. The `some` half is taken here ONLY when no two inline-level
+  // children are ADJACENT — a run of ≥2 inline siblings shares one anonymous
+  // block (one LINE), which a flat VERTICAL frame cannot express, so that
+  // shape keeps the row default and is named residue rather than guessed at.
+  const BLOCK_FLOW_CONTAINER = new Set(['block', 'list-item', 'flow-root', 'inline']);
+  if (!l && !isRoot && BLOCK_FLOW_CONTAINER.has(part.declared?.['display'] ?? '')) {
+    const outOfFlow = (k: Part): boolean =>
+      k.declared?.['position'] === 'absolute' ||
+      k.declared?.['position'] === 'fixed' ||
+      k.declared?.['display'] === 'none' ||
+      // …and a part placed absolutely by a CONDITION (the v9 decor spelling:
+      // `stylesWhen … styles.position = absolute`) is out of flow too. Polaris's
+      // RadioButton dot is exactly that, and counting it as an in-flow inline
+      // sibling is what made this rule's answer depend on a node that never
+      // participates in the flow.
+      (k.stylesWhen ?? []).some((sw) => sw.styles['position'] === 'absolute' || sw.styles['position'] === 'fixed');
+    const kids = Object.values(part.parts ?? {}).filter((k) => !outOfFlow(k));
     const blockLevel = (k: Part): boolean => {
       const d = k.layout?.display ?? k.declared?.['display'];
-      return d === 'flex' || d === 'block' || d === 'grid' || d === 'list-item' || d === 'table';
+      return d === 'flex' || d === 'block' || d === 'grid' || d === 'list-item' || d === 'table' || d === 'flow-root';
     };
-    if (kids.length >= 2 && kids.every(blockLevel)) {
+    const adjacentInlines = kids.some((k, i) => i > 0 && !blockLevel(k) && !blockLevel(kids[i - 1]));
+    if (kids.length >= 2 && (kids.every(blockLevel) || (kids.some(blockLevel) && !adjacentInlines))) {
       return { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', stretchChildren: true };
     }
   }
@@ -1374,6 +1485,28 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
       case 'border-right-width': { const n = parseLitPx(value); if (n !== undefined) (li().strokeSides ??= {}).right = n; break; }
       case 'border-bottom-width': { const n = parseLitPx(value); if (n !== undefined) (li().strokeSides ??= {}).bottom = n; break; }
       case 'border-left-width': { const n = parseLitPx(value); if (n !== undefined) (li().strokeSides ??= {}).left = n; break; }
+      // D2: LITERAL border colour (see lits.strokeColor). A token-bound
+      // border colour wins (applyTokens ran first and set spec.stroke); the
+      // per-side spellings only lower when every carried side agrees, the
+      // same one-paint rule the token path applies.
+      case 'border-color': {
+        const c = parseLitColor(value);
+        if (c && !spec.stroke) li().strokeColor = c;
+        break;
+      }
+      case 'border-top-color':
+      case 'border-right-color':
+      case 'border-bottom-color':
+      case 'border-left-color': {
+        if (spec.stroke) break;
+        const sides = ['border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color']
+          .filter((ch) => lits[ch] !== undefined)
+          .map((ch) => lits[ch]);
+        if (new Set(sides).size !== 1) break; // disagreeing sides: CSS-side truth
+        const c = parseLitColor(value);
+        if (c) li().strokeColor = c;
+        break;
+      }
       case 'letter-spacing': { const n = parseLitPx(value); if (n !== undefined) next.letterSpacing = n; break; }
       case 'font-size': {
         const n = parseLitPx(value);
@@ -2074,8 +2207,51 @@ function partToSpecInner(
       // icon.size (captured glyph size) sizes the node on every surface.
       ...(part.icon.size ? { iconSize: part.icon.size } : {}),
     };
-    applyVisibleWhen(spec, part, contract);
-    return spec;
+    // CARBON LIVE-DEFECT ROUND (D6) — AN ICON PART CAN ALSO BE A BOX.
+    //
+    // The icon lowering compiled the part to a BARE svg node sized by
+    // `icon.size` and threw the part's own box away — every fill, border,
+    // padding, radius and width/height channel it carried. Carbon's
+    // IconButton is exactly that shape: `button.cds--btn` carries the
+    // per-kind background + 1px border + the 24/32/40/48 control box AND
+    // hosts the glyph, so the live canvas drew a bare 16px glyph with no
+    // button chrome at all (measured: `btn` 16×16 inside a 24×24 wrapper).
+    //
+    // Same lowering the MUI round gave box-carrying TEXT parts (`wrapTextInBox`
+    // below): a box-carrying icon part becomes FRAME(box) → svg child; a
+    // box-less icon part keeps the plain svg lowering BYTE-IDENTICALLY.
+    // "Carries a box" = paints one (background / border / shadow) or reserves
+    // space around the glyph (padding). A part whose only geometry is a
+    // width/height equal to the glyph is NOT a box — it stays bare.
+    const iconPartHasBox = (): boolean => {
+      const chans = [...Object.keys(resolveTokens(part, subst)), ...Object.keys(resolveLiterals(part, subst))];
+      return chans.some(
+        (c) =>
+          c === 'background-color' ||
+          c === 'background-image' ||
+          c === 'box-shadow' ||
+          c.startsWith('padding') ||
+          /^border-(top|right|bottom|left)-width$/.test(c),
+      );
+    };
+    if (!iconPartHasBox()) {
+      applyVisibleWhen(spec, part, contract);
+      return spec;
+    }
+    const frame: NodeSpec = {
+      type: 'frame',
+      name,
+      // The glyph sits in the middle of its control unless the part says
+      // otherwise — a button's own layout wins when it declares one.
+      layout: resolveLayout(part, subst)
+        ? layoutSpec(part, false, subst)
+        : { mode: 'HORIZONTAL', primary: 'CENTER', counter: 'CENTER' },
+      grow: part.layout?.grow || undefined,
+      children: [{ ...spec, name: `${name}-icon`, grow: undefined }],
+    };
+    applyStyling(frame, part, subst, ctx);
+    applyVisibleWhen(frame, part, contract);
+    return frame;
   }
   // v9 shape (#42): a REAL parametric node — geometry from the contract,
   // fill from tokens, placement/rotation from the compiled stylesWhen.
@@ -2084,6 +2260,17 @@ function partToSpecInner(
     applyStyling(spec, part, subst, ctx);
     const placement = shapePlacement(part, contract, subst);
     if (placement.absolute) spec.absolute = placement.absolute;
+    // CARBON LIVE-DEFECT ROUND (D2): UNCONDITIONAL absolute decor. v1 decor
+    // could only be placed through `stylesWhen` — it needed an enum
+    // condition to hang the placement on, so a box drawn in EVERY combo
+    // (Carbon's checkbox square) was refused outright rather than placed.
+    // A shape that declares position:absolute and carries offsets falls
+    // back to the same `absolutePartPlacement` every other absolute part
+    // uses; per-variant offsets ride `literalsByProp` (the toggle knob).
+    else if (part.declared?.['position'] === 'absolute') {
+      const abs = absolutePartPlacement(part, subst);
+      if (abs) spec.absolute = abs;
+    }
     if (placement.rotation !== undefined) spec.shape!.rotation = placement.rotation;
     if (spec.shape!.rotation === undefined) delete spec.shape!.rotation;
     applyVisibleWhen(spec, part, contract);
@@ -2430,6 +2617,8 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   };
 
   const root = contract.anatomy.root;
+  /** D5: viewport-pinned-scrim bounding notes (code-only facts, never silent). */
+  const scrimNotes = new Set<string>();
   const variants: VariantSpec[] = [];
   // N-axis variant support: EVERY enum prop becomes a variant axis, in prop
   // declaration order, with each axis's DEFAULT value first (orderedValues).
@@ -2506,6 +2695,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     // without tokensByProp (resolveTokens returns the base map unchanged).
     const ctx = applyStyling(rootSpec, root, subst, {});
     applyStylesWhenOpacity(rootSpec, root, contract, subst);
+    boundFullBleedScrimRoot(rootSpec, root, subst, scrimNotes);
     // Round 5: parent aspect lowering + block-root width fact (see NodeSpec).
     applyChildAspect(rootSpec, root);
     if (
@@ -2593,6 +2783,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           baseCtx,
         );
         applyStylesWhenOpacity(rootSpec, root, contract, subst);
+        boundFullBleedScrimRoot(rootSpec, root, subst, scrimNotes);
         // Round 5: same parent-aspect + block-root facts as the base loop.
         applyChildAspect(rootSpec, root);
         if (
@@ -2731,6 +2922,8 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       shadowMissLines.add(`${spec.name}.box-shadow: ${spec.shadowMiss}`);
       delete spec.shadowMiss;
     }
+    // D5: compile-side flag only — the bounding already happened on the box.
+    delete spec.scrimBounded;
     (spec.children ?? []).forEach(stripMisses);
   };
   for (const v of variants) stripMisses(v.spec);
@@ -2769,6 +2962,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     gradientMissLines.size > 0 ||
     shadowMissLines.size > 0 ||
     hasMeter ||
+    scrimNotes.size > 0 ||
     hasPreviewOnlyFacts;
 
   return {
@@ -3003,7 +3197,7 @@ const svgPaintRuntime = (has: boolean): string =>
     }`
     : '';
 
-const shapeRuntime = (has: boolean, effects: string, alignExpr: string): string =>
+const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false): string =>
   has
     ? ` else if (spec.type === 'shape') {
     // v9 shape (#42): a REAL parametric node with native rotation.
@@ -3031,7 +3225,23 @@ const shapeRuntime = (has: boolean, effects: string, alignExpr: string): string 
     if (spec.stroke) {
       node.strokes = [boundPaint(spec.stroke, node)];
       node.strokeAlign = ${alignExpr};
+    }${shapeLits ? `
+    // CARBON LIVE-DEFECT ROUND (D2): a shape's LITERAL RING. An unchecked
+    // Carbon checkbox box is a transparent square with a 1px border — a ring
+    // with no paint, no weight and no radius is not a box.
+    else if (spec.lits && spec.lits.strokeColor) {
+      node.strokes = [{ type: 'SOLID', color: { r: spec.lits.strokeColor.r, g: spec.lits.strokeColor.g, b: spec.lits.strokeColor.b }, opacity: spec.lits.strokeColor.a === undefined ? 1 : spec.lits.strokeColor.a }];
+      node.strokeAlign = ${alignExpr};
     }
+    if (spec.lits && spec.lits.strokeWeight !== undefined) node.strokeWeight = spec.lits.strokeWeight;
+    if (spec.lits && spec.lits.strokeSides) {
+      const sw = spec.lits.strokeSides;
+      if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+      if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+      if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+      if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+    }
+    if (spec.lits && spec.lits.radius !== undefined) node.cornerRadius = spec.lits.radius;` : ''}
     for (const [field, varName] of Object.entries(spec.bindings || {})) {
       node.setBoundVariable(field, need(varName));
     }
@@ -3292,7 +3502,7 @@ const outOfFlowResizeCall = (has: boolean, args: string): string =>
  *  Emitted ONLY when a compiled spec carries lits — contracts without
  *  literals emit byte-identical scripts (the golden discipline, same as
  *  shapeRuntime/opacityRuntime). */
-const litsRuntime = (has: boolean): string =>
+const litsRuntime = (has: boolean, hasStrokeColor = false): string =>
   has
     ? `
   if (spec.lits) {
@@ -3321,7 +3531,7 @@ const litsRuntime = (has: boolean): string =>
       if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
       if (rc.br !== undefined) node.bottomRightRadius = rc.br;
     }
-    if (li.strokeSides) {
+${hasStrokeColor ? `    if (li.strokeColor) node.strokes = [{ type: 'SOLID', color: { r: li.strokeColor.r, g: li.strokeColor.g, b: li.strokeColor.b }, opacity: li.strokeColor.a === undefined ? 1 : li.strokeColor.a }];\n` : ''}    if (li.strokeSides) {
       const sw = li.strokeSides;
       if (sw.top !== undefined) node.strokeTopWeight = sw.top;
       if (sw.right !== undefined) node.strokeRightWeight = sw.right;
@@ -3404,6 +3614,13 @@ function buildSyncScript(
   const hasLineHeight = datas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
   const hasAbsolute = datas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
   const hasLits = datas.some((d) => dataSome(d, (x) => x.lits !== undefined));
+  // D2: literal stroke COLOUR — feature-gated like every other lits field so
+  // a contract that never carries one emits a byte-identical script.
+  const hasLitStrokeColor = datas.some((d) => dataSome(d, (x) => x.lits?.strokeColor !== undefined));
+  // …and the SHAPE branch's literal ring/weight/radius application.
+  const hasShapeLits = datas.some((d) =>
+    dataSome(d, (x) => x.shape !== undefined && (x.lits?.strokeColor !== undefined || x.lits?.strokeWeight !== undefined || x.lits?.strokeSides !== undefined || x.lits?.radius !== undefined)),
+  );
   const hasWrap = datas.some((d) => dataSome(d, (x) => x.layout?.wrap === true));
   const hasEffectStack = datas.some((d) => dataSome(d, (x) => x.effectStack !== undefined));
   const hasGradient = datas.some((d) => dataSome(d, (x) => x.gradient !== undefined));
@@ -3703,7 +3920,7 @@ function applyFrameSpec(node, spec) {
       else node.primaryAxisSizingMode = 'FIXED';
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
-  }${litsRuntime(hasLits)}${gradientRuntime(hasGradient)}
+  }${litsRuntime(hasLits, hasLitStrokeColor)}${gradientRuntime(hasGradient)}
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -3801,7 +4018,7 @@ async function buildNode(spec, registry) {
         registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
       }
     }
-  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside))} else {
+  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
   }

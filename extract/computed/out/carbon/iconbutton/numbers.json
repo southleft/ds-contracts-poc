@@ -235,17 +235,17 @@
     }
   },
   "declared": {
-    "base": 14,
-    "state": 15
+    "base": 12,
+    "state": 3
   },
   "codeOnly": {
-    "base": 8,
-    "state": 0,
-    "overflowBindings": 44
+    "base": 15,
+    "state": 12,
+    "overflowBindings": 79
   },
   "pseudoElementFindings": 240,
   "anatomyPromotion": {
-    "partsCarried": 6,
+    "partsCarried": 3,
     "svgAssets": 1,
     "refusals": 1
   },
@@ -275,7 +275,7 @@
   "pixel": {
     "pairs": 160,
     "exact": {
-      "mean": 0.1393066406250001,
+      "mean": 0.13933919270833342,
       "max": 0.2630208333333333,
       "perfect": 0
     },
@@ -328,8 +328,8 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 91.8103448275862,
-    "rowsFullyEqual": 0,
+    "computedPctEqual": 100,
+    "rowsFullyEqual": 160,
     "rows": 160,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,

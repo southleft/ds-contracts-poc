@@ -166,16 +166,6 @@
         "value": "cubic-bezier(0.2, 0, 0.38, 0.9)"
       },
       {
-        "part": "popover",
-        "channel": "pointer-events",
-        "value": "none"
-      },
-      {
-        "part": "popover-caret",
-        "channel": "pointer-events",
-        "value": "none"
-      },
-      {
         "part": "label-5",
         "channel": "overflow-x",
         "value": "auto"
@@ -332,9 +322,9 @@
     "combos": 5,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1560,
-      "cellsEqual": 1400,
-      "pctEqual": 89.74358974358974,
+      "cellsCompared": 1305,
+      "cellsEqual": 1175,
+      "pctEqual": 90.03831417624521,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -354,8 +344,8 @@
       "mintedLeavesUnfolded": 82,
       "baseBindings": 227,
       "stateBindings": 0,
-      "codeOnlyChannels": 37,
-      "overflowBindings": 0,
+      "codeOnlyChannels": 44,
+      "overflowBindings": 33,
       "folds": 51
     },
     "worstRows": [
@@ -363,31 +353,31 @@
         "key": "unset__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 32
+        "channelsMismatched": 26
       },
       {
         "key": "xs__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 32
+        "channelsMismatched": 26
       },
       {
         "key": "sm__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 32
+        "channelsMismatched": 26
       },
       {
         "key": "md__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 32
+        "channelsMismatched": 26
       },
       {
         "key": "lg__default",
         "pctAA": 100,
         "pctExact": 100,
-        "channelsMismatched": 32
+        "channelsMismatched": 26
       },
       {
         "key": "unset__hover",
@@ -438,40 +428,73 @@
         5
       ],
       [
-        "label-4.overflow-wrap",
-        5
-      ],
-      [
-        "label-4.right",
-        5
-      ],
-      [
-        "label-4.top",
-        5
-      ],
-      [
-        "popover-caret.right",
-        5
-      ],
-      [
-        "popover-caret.top",
-        5
-      ],
-      [
-        "popover-caret.will-change",
-        5
-      ],
-      [
         "label-5.--cds-border-subtle",
         5
       ],
       [
         "label-5.--cds-border-tile",
         5
+      ],
+      [
+        "label-5.--cds-field",
+        5
+      ],
+      [
+        "label-5.--cds-layer",
+        5
+      ],
+      [
+        "label-5.--cds-layer-background",
+        5
+      ],
+      [
+        "label-5.grid-column-end",
+        5
+      ],
+      [
+        "label-5.grid-row-end",
+        5
+      ],
+      [
+        "btn-set.grid-column-end",
+        5
       ]
     ],
     "namedLosses": [
-      "promotion: pseudo-decor-unconditional-placement: popover-caret::after is drawn without an enum-axis gate — stylesWhen placement (the v9 shape grammar) has no condition to ride; decor NOT promoted (named refusal, v1 bounded)",
+      "promotion: inert-overlay-wrapper: popover draws no box in any captured combo, carries no text/icon/shape of its own, and every one of its 2 child part(s) is declared display:none — a carried part that draws NOTHING; refused by name (Carbon's tooltip `popover` wrapper; census sibling of the portal round's stripInertPortalChildren)",
+      "overflow: popover.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover.height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover.width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover.z-index — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.background-color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.border-bottom-left-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.border-bottom-right-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.border-top-left-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.border-top-right-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.font-weight — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.letter-spacing — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.line-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.max-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.padding-bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.padding-left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.padding-right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.padding-top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.row-rule-color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: label-4.z-index — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover-caret.height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover-caret.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover-caret.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover-caret.width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+      "overflow: popover-caret.z-index — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
       "code-only: root.content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.position — declared-channel value outside the bounded grammar — named residue (v15)",
       "code-only: root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -482,11 +505,18 @@
       "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: btn.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: popover.pointer-events — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: popover.position — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: label-4.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "code-only: label-4.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-4.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-4.position — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "code-only: label-4.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-4.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-4.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: popover-caret.display — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: popover-caret.pointer-events — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "code-only: popover-caret.position — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "code-only: popover-caret.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: popover-caret.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: popover-caret.will-change — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -516,14 +546,14 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 1037,
+      "leavesAdded": 1003,
       "divergent": []
     },
     "rows": [
       {
         "key": "unset__default",
-        "channelsCompared": 312,
-        "channelsEqual": 280,
+        "channelsCompared": 261,
+        "channelsEqual": 235,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -568,42 +598,6 @@
             "channel": "grid-column-end",
             "ours": "auto",
             "theirs": "-1"
-          },
-          {
-            "part": "label-4",
-            "channel": "overflow-wrap",
-            "ours": "normal",
-            "theirs": "break-word"
-          },
-          {
-            "part": "label-4",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-4",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "50%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "50%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "will-change",
-            "ours": "auto",
-            "theirs": "transform"
           },
           {
             "part": "label-5",
@@ -751,8 +745,8 @@
       },
       {
         "key": "xs__default",
-        "channelsCompared": 312,
-        "channelsEqual": 280,
+        "channelsCompared": 261,
+        "channelsEqual": 235,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -797,42 +791,6 @@
             "channel": "grid-column-end",
             "ours": "auto",
             "theirs": "-1"
-          },
-          {
-            "part": "label-4",
-            "channel": "overflow-wrap",
-            "ours": "normal",
-            "theirs": "break-word"
-          },
-          {
-            "part": "label-4",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-4",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "50%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "50%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "will-change",
-            "ours": "auto",
-            "theirs": "transform"
           },
           {
             "part": "label-5",
@@ -980,8 +938,8 @@
       },
       {
         "key": "sm__default",
-        "channelsCompared": 312,
-        "channelsEqual": 280,
+        "channelsCompared": 261,
+        "channelsEqual": 235,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1026,42 +984,6 @@
             "channel": "grid-column-end",
             "ours": "auto",
             "theirs": "-1"
-          },
-          {
-            "part": "label-4",
-            "channel": "overflow-wrap",
-            "ours": "normal",
-            "theirs": "break-word"
-          },
-          {
-            "part": "label-4",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-4",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "50%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "50%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "will-change",
-            "ours": "auto",
-            "theirs": "transform"
           },
           {
             "part": "label-5",
@@ -1209,8 +1131,8 @@
       },
       {
         "key": "md__default",
-        "channelsCompared": 312,
-        "channelsEqual": 280,
+        "channelsCompared": 261,
+        "channelsEqual": 235,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1255,42 +1177,6 @@
             "channel": "grid-column-end",
             "ours": "auto",
             "theirs": "-1"
-          },
-          {
-            "part": "label-4",
-            "channel": "overflow-wrap",
-            "ours": "normal",
-            "theirs": "break-word"
-          },
-          {
-            "part": "label-4",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-4",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "50%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "50%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "will-change",
-            "ours": "auto",
-            "theirs": "transform"
           },
           {
             "part": "label-5",
@@ -1438,8 +1324,8 @@
       },
       {
         "key": "lg__default",
-        "channelsCompared": 312,
-        "channelsEqual": 280,
+        "channelsCompared": 261,
+        "channelsEqual": 235,
         "pctExact": 100,
         "pctAA": 100,
         "mismatches": [
@@ -1484,42 +1370,6 @@
             "channel": "grid-column-end",
             "ours": "auto",
             "theirs": "-1"
-          },
-          {
-            "part": "label-4",
-            "channel": "overflow-wrap",
-            "ours": "normal",
-            "theirs": "break-word"
-          },
-          {
-            "part": "label-4",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-4",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "50%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "right",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "top",
-            "ours": "auto",
-            "theirs": "50%"
-          },
-          {
-            "part": "popover-caret",
-            "channel": "will-change",
-            "ours": "auto",
-            "theirs": "transform"
           },
           {
             "part": "label-5",

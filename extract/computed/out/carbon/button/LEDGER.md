@@ -83,5 +83,5 @@ Zero contradictions.
 ## Fidelity gate (scorecard.json)
 
 - computed-equality (styled channels, contract-mediated): **77.276%** (15925/20608 cells; 0/448 combo×state rows fully equal)
-- pixel: 0/448 pairs perfect at threshold 0 · 0/448 at the AA point (mean AA 13.516%, max 54.219%)
+- pixel: 0/448 pairs perfect at threshold 0 · 0/448 at the AA point (mean AA 13.505%, max 54.219%)
 

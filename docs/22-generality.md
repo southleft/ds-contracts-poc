@@ -276,7 +276,7 @@ The falsifiable metric, measured:
 | library | live-paste / engine rounds | evidence |
 |---|---|---|
 | **MUI** | **six** | `f52c334` (live-review), `acb0342` (live-paste-2), `04498cc` (live-paste-3), `6e76346` (live-paste-4), then `3e14f6f` / `53792d3` / `2d2098a`, and `8dad6b2` explicitly labelled "round 6 of the live-paste loop" |
-| **Carbon** | **one** | `28f4d85` — 10 components, one engine expression changed |
+| **Carbon** | **three** | `28f4d85` — 10 components, one engine expression changed; `d8478ea` — the class-stem prefix defect; task #30 — the LIVE-DEFECT round (six canvas defects from a real paste, four of them general engine rules) |
 
 MUI cost six rounds because it was the *first* of its kind on almost every
 axis: first Emotion-runtime system, first portal components, first organism
@@ -529,7 +529,35 @@ captured at all*, and it is the largest qualifier in this document.
 - **Text wrapping is not implemented.** A hugging text node inside a
   fixed-width ancestor clips (MUI's `AccordionDetails` body copy at 426px inside
   288px). Fixing it changes every hugging text node in the corpus, so it is its
-  own round, deliberately not attempted mid-molecule-round.
+  own round, deliberately not attempted mid-molecule-round. The Carbon
+  live-defect round measured its SECOND mechanism and it is the same round: a
+  SHRINK-TO-FIT box measured in the harness's fallback font and baked as a
+  FIXED width, then drawn in Inter — Carbon's `tabs__nav-item-label-wrapper`
+  carries `width: 62.3125px`, which is "Overview" in a font the canvas does not
+  have. Complete Carbon inventory in `examples/carbon/PROVENANCE.md` §D4.
+- **PSEUDO-DECOR v2 landed (Carbon live-defect round), and what it did NOT
+  close is the next bullet.** The v1 grammar hashed a decor box's size, offsets,
+  fill and radius into ONE key and refused anything non-uniform — which hid two
+  different failures behind one message and left two of Carbon's ten components
+  HOLLOW (a checkbox with no box, a toggle with no knob). v2: DRAWN now means
+  *paints anything* (a ring is a box — v1 required an opaque background, so a
+  transparent-with-border checkbox square was invisible to it); GEOMETRY and
+  PAINT factor SEPARATELY, each as uniform or a function of exactly ONE enum
+  axis (`literalsByProp`); a decor drawn in EVERY combo no longer needs an enum
+  gate to hang a `stylesWhen` placement on — it declares `position: absolute`
+  and carries its own offsets; and a PERCENTAGE radius (`border-radius: 50%`,
+  how most libraries spell a circle) resolves instead of folding to 0 and
+  shipping a square. Riding with it: literal `top/right/bottom/left` and
+  `border-*-color` join `LITERAL_CHANNELS`, and a LITERAL border colour lowers
+  to the canvas at all (it had no case in `applyLiterals` — a silent drop).
+- **CSS GRID lowers to the flex vocabulary** (`lowerGridDisplay`, sibling of
+  the organism round's `lowerTableDisplay`) from the MEASURED
+  `grid-template-columns`/`-rows` track counts; `list-item` and `flow-root`
+  join the declared display grammar. Before this, `display: grid |
+  inline-grid | list-item` reached the emitter with NO display fact at all and
+  took the HORIZONTAL default — Carbon's Modal drew header/body/footer side by
+  side and its accordion panel sat beside the heading. A genuine 2-D grid
+  (>1 column AND >1 row) is refused by name.
 - **The two-axis decor product has no spelling.** Flowbite's toggle knob offset
   is a function of `Sizing × Checked`; `stylesWhen` conditions are single-prop
   and `literals`/`shape` are scalars, so no decor grammar can express it. On

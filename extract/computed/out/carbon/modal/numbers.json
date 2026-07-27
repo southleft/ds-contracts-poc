@@ -361,17 +361,17 @@
     }
   },
   "declared": {
-    "base": 63,
+    "base": 61,
     "state": 0
   },
   "codeOnly": {
-    "base": 37,
+    "base": 44,
     "state": 0,
-    "overflowBindings": 0
+    "overflowBindings": 33
   },
   "pseudoElementFindings": 15,
   "anatomyPromotion": {
-    "partsCarried": 18,
+    "partsCarried": 15,
     "svgAssets": 1,
     "refusals": 1
   },
@@ -444,7 +444,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 89.74358974358974,
+    "computedPctEqual": 90.03831417624521,
     "rowsFullyEqual": 0,
     "rows": 20,
     "pixelPerfectExact": 0,

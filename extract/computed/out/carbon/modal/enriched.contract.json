@@ -90,6 +90,11 @@
         },
         "modal-container": {
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|modal-container — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "stretch"
+          },
           "parts": {
             "modal-header": {
               "description": "Promoted from the computed floor (round 4): rendered anatomy div|modal-header — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -231,73 +236,6 @@
                             "min-height": "{imported.shared.size-0}",
                             "min-width": "{imported.shared.size-0}",
                             "width": "{imported.shared.size-48}"
-                          }
-                        },
-                        "popover": {
-                          "element": "span",
-                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover — this element exists in the real component's DOM; the static layer had no part for it.",
-                          "declared": {
-                            "display": "block",
-                            "position": "absolute",
-                            "pointer-events": "none"
-                          },
-                          "parts": {
-                            "label-4": {
-                              "text": "Close",
-                              "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-content.tooltip-content — this element exists in the real component's DOM; the static layer had no part for it.",
-                              "declared": {
-                                "display": "none",
-                                "position": "absolute"
-                              },
-                              "tokens": {
-                                "background-color": "{imported.modal.label-4.background-color}",
-                                "border-bottom-left-radius": "{imported.shared.size-2}",
-                                "border-bottom-right-radius": "{imported.shared.size-2}",
-                                "border-top-left-radius": "{imported.shared.size-2}",
-                                "border-top-right-radius": "{imported.shared.size-2}",
-                                "color": "{imported.shared.color-ffffff}",
-                                "font-size": "{imported.shared.size-14}",
-                                "font-weight": "{imported.shared.num-400}",
-                                "letter-spacing": "{imported.shared.size-0-16}",
-                                "line-height": "{imported.shared.size-18-0001}",
-                                "max-width": "{imported.modal.label-4.max-width}",
-                                "min-height": "{imported.shared.size-0}",
-                                "min-width": "{imported.shared.size-0}",
-                                "padding-bottom": "{imported.shared.size-2}",
-                                "padding-left": "{imported.shared.size-16}",
-                                "padding-right": "{imported.shared.size-16}",
-                                "padding-top": "{imported.shared.size-2}",
-                                "row-rule-color": "{imported.shared.color-ffffff}",
-                                "z-index": "{imported.shared.num-6000}"
-                              }
-                            },
-                            "popover-caret": {
-                              "element": "span",
-                              "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-caret — this element exists in the real component's DOM; the static layer had no part for it.",
-                              "declared": {
-                                "display": "none",
-                                "position": "absolute",
-                                "pointer-events": "none"
-                              },
-                              "tokens": {
-                                "height": "{imported.shared.size-8}",
-                                "min-height": "{imported.shared.size-0}",
-                                "min-width": "{imported.shared.size-0}",
-                                "width": "{imported.modal.popover-caret.width}",
-                                "z-index": "{imported.shared.num-6000}"
-                              }
-                            }
-                          },
-                          "tokens": {
-                            "bottom": "{imported.shared.size-0}",
-                            "height": "{imported.shared.size-48}",
-                            "left": "{imported.shared.size-0}",
-                            "min-height": "{imported.shared.size-0}",
-                            "min-width": "{imported.shared.size-0}",
-                            "right": "{imported.shared.size-0}",
-                            "top": "{imported.shared.size-0}",
-                            "width": "{imported.shared.size-48}",
-                            "z-index": "{imported.shared.num-6000}"
                           }
                         }
                       },
