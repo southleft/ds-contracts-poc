@@ -31,12 +31,15 @@ import {
 import {
   CONTRACT_STATES,
   ContractSchema,
+  TOKEN_CHANNELS,
   resolveTokens as schemaResolveTokens,
+  tokensByPropEntries as coreTokensByPropEntries,
+  walkAnatomy as coreWalkAnatomy,
   type Contract as SchemaContract,
   type Part as SchemaPart,
 } from '../scripts/contract-schema.js';
 import { buildPlan as proposePrBuildPlan, contentsPutBody, summarize as proposePrSummarize } from '../packages/cli/src/commands/propose-pr.js';
-import { emitReact as coreEmitReact, generateCss as coreGenerateCss, isMultiRoot as coreIsMultiRoot, validateContract as coreValidateContract } from '../core/emit-react.js';
+import { emitReact as coreEmitReact, generateCss as coreGenerateCss, isMultiRoot as coreIsMultiRoot, stripCanvasOnlyChannels as coreStripCanvasOnly, validateContract as coreValidateContract } from '../core/emit-react.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
 import { tokenInventoryFromJson } from '../core/tokens.js';
@@ -52,7 +55,7 @@ import {
   promoteMultiRootAnatomy,
 } from '../extract/computed/anatomy.js';
 import type { Capture as DepthCapture, CapturedNode as DepthNode } from '../extract/computed/lib.js';
-import { decomposeTranslate, isAbsurdRadius, mergeShippedMinted, mintedLeafCount, signature, stems } from '../extract/computed/lib.js';
+import { CSS_SHORTHANDS, decomposeTranslate, isAbsurdRadius, mergeShippedMinted, mintedLeafCount, shorthandVarSkip, signature, stems } from '../extract/computed/lib.js';
 import { kebab as depthKebab } from '../extract/types.js';
 // POLARIS/ASTRYX REPAIR WAVE pins (both Chromium-free — the first replays the
 // COMMITTED capture through fusion, the second is pure JSON).
@@ -7148,14 +7151,355 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       console.log(`decision-ledger-value-check: unresolvable decision targets refused by name (and applied without the guard — the corruption is real); ${ledgers} committed ledgers across 4 libraries target only tokens their own library ships`);
     },
   },
+  {
+    // ---- SILENT-LOSS ROUND (task #33) — fix 4: THE TOKEN-CHANNEL REGISTRY.
+    //
+    // `tokens` was `z.record(z.string(), TokenRefSchema)` and validateContract
+    // whitelisted `declared` and `literals` but NOT `tokens`, so ANY string
+    // was a legal channel and the CSS emitters wrote it out verbatim. The
+    // live consequence, verifiable before this round: MUI's Switch carries
+    // `tokens["translate-y"]` — a SYNTHETIC channel invented by
+    // decomposeTranslate — and Switch.module.css said
+    // `translate-y: var(--imported-shared-size-0)`, a property no browser
+    // understands, dropped by every UA in silence. Same class as the
+    // `-state-checked` bug this repo thought it had closed.
+    id: 'token-channel-registry',
+    claim: 'C2-refusal',
+    run: () => {
+      // 1. REFUSAL: an unregistered channel is refused BY NAME, on the field
+      //    that had no gate at all.
+      const base = JSON.parse(readFileSync(path.join(ROOT, 'examples/mui/contracts/switch.contract.json'), 'utf8')) as SchemaContract;
+      const planted = (mut: (c: any) => void) => {
+        const c = JSON.parse(JSON.stringify(base));
+        mut(c);
+        const errs: string[] = [];
+        coreValidateContract(c, new Map(), errs, new Map());
+        return errs;
+      };
+      const cases: Array<[string, (c: any) => void, string]> = [
+        ['tokens', (c) => { c.anatomy.root.tokens['translate-z'] = '{imported.shared.size-0}'; }, 'translate-z'],
+        ['root states', (c) => { c.anatomy.root.states = { ...(c.anatomy.root.states ?? {}), disabled: { 'scroll-snap-type': '{imported.shared.size-0}' } }; }, 'scroll-snap-type'],
+      ];
+      for (const [where, mut, channel] of cases) {
+        const errs = planted(mut);
+        const named = errs.filter((e) => e.includes(channel) && e.includes('not a token channel'));
+        if (named.length === 0) {
+          throw new Error(`an unregistered channel in ${where} was NOT refused by name (errors: ${errs.join(' | ') || 'none'})`);
+        }
+      }
+      // …and the guard is not over-broad: the real contract validates clean.
+      const clean: string[] = [];
+      coreValidateContract(JSON.parse(JSON.stringify(base)), new Map(), clean, new Map());
+      const channelErrs = clean.filter((e) => e.includes('not a token channel'));
+      if (channelErrs.length > 0) throw new Error(`the registry refuses a channel the shipped MUI Switch actually carries: ${channelErrs.join(' | ')}`);
+
+      // 2. EVERY committed contract in the repo, across all seven libraries,
+      //    carries only registered channels — the census that makes the
+      //    registry a fact rather than a wish.
+      const dirs = ['contracts', ...readdirSync(path.join(ROOT, 'examples'), { withFileTypes: true })
+        .filter((e) => e.isDirectory() && existsSync(path.join(ROOT, 'examples', e.name, 'contracts')))
+        .map((e) => `examples/${e.name}/contracts`)];
+      const unregistered = new Set<string>();
+      let contractCount = 0;
+      const seen = new Set<string>();
+      for (const d of dirs) {
+        for (const f of readdirSync(path.join(ROOT, d)).filter((x) => x.endsWith('.contract.json'))) {
+          contractCount++;
+          const c = JSON.parse(readFileSync(path.join(ROOT, d, f), 'utf8')) as SchemaContract;
+          for (const { part } of coreWalkAnatomy(c)) {
+            const chans = [
+              ...Object.keys(part.tokens ?? {}),
+              ...coreTokensByPropEntries(part).flatMap((e) => Object.values(e.map ?? {}).flatMap((m) => Object.keys(m))),
+            ];
+            for (const ch of chans) { seen.add(ch); if (!TOKEN_CHANNELS[ch]) unregistered.add(`${d}/${f}: ${ch}`); }
+          }
+        }
+      }
+      if (unregistered.size > 0) {
+        throw new Error(`${unregistered.size} committed token channel(s) outside TOKEN_CHANNELS:\n  - ${[...unregistered].join('\n  - ')}`);
+      }
+
+      // 3. THE CSS SURFACE: a canvas-only synthetic channel must NEVER reach a
+      //    stylesheet as a declaration, and its absence must be NAMED there.
+      const tokens = tokenInventoryFromJson([
+        JSON.parse(readFileSync(path.join(ROOT, 'examples/mui/tokens/mui.dtcg.json'), 'utf8')) as Record<string, unknown>,
+        JSON.parse(readFileSync(path.join(ROOT, 'examples/mui/tokens/mui-minted.dtcg.json'), 'utf8')) as Record<string, unknown>,
+      ]);
+      const cssErrors: string[] = [];
+      const css = coreGenerateCss(base, tokens, cssErrors);
+      // strip the leading /* … */ note before looking for declarations: the
+      // note NAMES the refused channels, so a naive grep matches itself.
+      const declLines = css.replace(/\/\*[\s\S]*?\*\//g, '').split('\n').filter((l) => /^\s*translate-[xy]\s*:/.test(l));
+      if (declLines.length > 0) {
+        throw new Error(`the emitted stylesheet still declares a synthetic channel no browser understands:\n  ${declLines.join('\n  ')}`);
+      }
+      if (!css.includes('REFUSED BY NAME') || !css.includes('translate-x') || !css.includes('translate-y')) {
+        throw new Error('the CSS drops translate-x/translate-y SILENTLY — the refusal must be named in the stylesheet');
+      }
+      // FALSIFICATION: the stripper is what removes them. Feed it a stylesheet
+      // that declares one and it must come back both stripped and named.
+      const proof = coreStripCanvasOnly('.x {\n  color: red;\n  translate-y: var(--t);\n}\n');
+      if (/^\s*translate-y\s*:/m.test(proof.replace(/\/\*[\s\S]*?\*\//g, '')) || !proof.includes('REFUSED BY NAME')) {
+        throw new Error('stripCanvasOnlyChannels did not strip-and-name a planted declaration');
+      }
+      console.log(`token-channel-registry: ${Object.keys(TOKEN_CHANNELS).length} registered channels; ${seen.size} distinct channels across ${contractCount} committed contracts all registered; an unregistered channel in tokens AND in root states refuses BY NAME (root states had NO gate at all before); MUI Switch's synthetic translate-x/translate-y no longer reach the stylesheet as invalid declarations and the refusal is named there`);
+    },
+  },
+  {
+    // ---- fix 3: CHANNEL MISSES. `applyTokens`/`applyLiterals` ended in
+    // `default: break;` — three separate rounds of that same defect are
+    // documented in emit-figma-script.ts's own comments (padding longhands,
+    // column-gap, the RadioButton ring), each found on a canvas by a person
+    // AFTER shipping. A channel the contract CARRIES and the canvas cannot
+    // draw now says so, through the same marker path the file already had for
+    // gradients and shadows.
+    id: 'channel-miss-named',
+    claim: 'C2-refusal',
+    run: () => {
+      const contract = JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/contracts/modal.contract.json'), 'utf8')) as SchemaContract;
+      const trees = ['carbon.dtcg.json', 'carbon-minted.dtcg.json'].map(
+        (f) => JSON.parse(readFileSync(path.join(ROOT, 'examples/carbon/tokens', f), 'utf8')) as Record<string, unknown>,
+      );
+      const mkEngine = (t: Record<string, unknown>[], ic: Map<string, string> = new Map()) => createFigmaEngine({
+        tokens: { primitives: t[0], semantic: t[1], light: {}, dark: {}, brands: { default: {} } } as never,
+        icons: ic,
+      });
+      const icons = new Map(readdirSync(path.join(ROOT, 'examples/carbon/assets/icons')).map((f) => [f.replace(/\.svg$/, ''), readFileSync(path.join(ROOT, 'examples/carbon/assets/icons', f), 'utf8')]));
+      const emit = (c: SchemaContract) => mkEngine(trees, icons).buildComponentScript(c as never, new Map([[c.id, c as never]]));
+      // Carbon's Modal carries grid-template-columns / grid-column-start /
+      // max-height — real facts, no Figma field. The dagger must be on.
+      const script = emit(contract);
+      if (!/"description": "[^"]*†"/.test(script)) {
+        throw new Error('a component carrying grid/max-height token channels emitted NO code-only-fact marker — the miss is silent again');
+      }
+      // FALSIFICATION: strip every unhandled channel and the dagger must go
+      // away for the right reason — i.e. the marker tracks the FACT, not the
+      // component. (Modal also carries events/declared facts, so compare a
+      // component that carries neither.)
+      const bare = JSON.parse(readFileSync(path.join(ROOT, 'examples/tailwind/contracts/card.contract.json'), 'utf8')) as SchemaContract;
+      const twTrees = ['tailwind.dtcg.json', 'tailwind-minted.dtcg.json'].map(
+        (f) => JSON.parse(readFileSync(path.join(ROOT, 'examples/tailwind/tokens', f), 'utf8')) as Record<string, unknown>,
+      );
+      const emitTw = (c: SchemaContract) => mkEngine(twTrees).buildComponentScript(c as never, new Map([[c.id, c as never]]));
+      const withMiss = emitTw(bare);
+      if (!/"description": "[^"]*†"/.test(withMiss)) {
+        throw new Error('tailwind Card carries row-rule-color (a channel with no canvas field) and emitted no marker');
+      }
+      // Remove every channel that CAN miss: the registry's non-'draw'
+      // verdicts, plus the two CONDITIONAL no-ops (a gap longhand on the
+      // CROSS axis has a native field on one axis and none on the other, so
+      // the registry alone cannot classify it — tailwind's Card label carries
+      // BOTH row-gap and column-gap and the emitter used to drop one of them
+      // in silence, which is how this pin found it).
+      const CAN_MISS = (ch: string) => (TOKEN_CHANNELS[ch] && TOKEN_CHANNELS[ch].canvas !== 'draw') || ch === 'row-gap' || ch === 'column-gap';
+      const stripped = JSON.parse(JSON.stringify(bare)) as SchemaContract;
+      let removed = 0;
+      for (const { part } of coreWalkAnatomy(stripped)) {
+        for (const ch of Object.keys(part.tokens ?? {})) {
+          if (CAN_MISS(ch)) { delete (part.tokens as Record<string, string>)[ch]; removed++; }
+        }
+        for (const e of coreTokensByPropEntries(part)) {
+          for (const m of Object.values(e.map ?? {})) {
+            for (const ch of Object.keys(m)) if (CAN_MISS(ch)) { delete (m as Record<string, string>)[ch]; removed++; }
+          }
+        }
+      }
+      if (removed === 0) throw new Error('the falsification removed nothing — tailwind Card carries no undrawable channel, so this pin proves nothing');
+      const noMiss = emitTw(stripped);
+      if (/"description": "[^"]*†"/.test(noMiss)) {
+        throw new Error(`removing all ${removed} undrawable channel(s) left the marker on — it is not tracking the miss`);
+      }
+      console.log(`channel-miss-named: a carried channel with no canvas field marks the component as carrying code-only facts (carbon Modal: grid-template-columns/grid-column-start/max-height; tailwind Card: row-rule-color AND a CROSS-AXIS gap longhand — the conditional no-op class this pin found on its first run); removing all ${removed} missable channels from Card clears the marker — the mark tracks the FACT, not the component`);
+    },
+  },
+  {
+    // ---- SILENT-LOSS ROUND (task #33) — fixes 1, 2 and 5, the three RECEIPT
+    // fixes. Each one turned a bare `continue` / a fabricated number into a
+    // named, counted fact. Each pin here is the falsification: it fails if the
+    // silence returns.
+    id: 'silent-loss-receipts',
+    claim: 'C2-refusal',
+    run: () => {
+      // ---- fix 1: THE SHORTHAND CEILING (task #27) -------------------------
+      // The audit located this at extract/computed/run.ts's
+      // `if (el.node.style[ch] === undefined) continue;`. MEASURED, the loss
+      // is one layer EARLIER: Chromium stores `background: var(--tok)` as a
+      // PENDING-SUBSTITUTION value and enumerates the shorthand's LONGHANDS
+      // with the EMPTY STRING, so capture.ts's `if (!val …) continue` dropped
+      // the declaration before the Node side ever saw it. Both layers now
+      // name what they drop; this pin covers the message contract.
+      for (const sh of ['background', 'font', 'border', 'padding', 'transition']) {
+        if (!CSS_SHORTHANDS.has(sh)) throw new Error(`CSS_SHORTHANDS is missing "${sh}" — the audit named it explicitly`);
+        const msg = shorthandVarSkip('root', sh, ['--tok', '--tok']);
+        if (!msg.includes(sh) || !msg.includes('--tok') || !msg.includes('SHORTHAND') || !msg.includes('LONGHANDS')) {
+          throw new Error(`the shorthand skip for "${sh}" does not name the property, the var and the reason: ${msg}`);
+        }
+        if (msg.split('--tok').length - 1 !== 1) throw new Error(`the skip repeats a var name — the message must dedupe: ${msg}`);
+      }
+      // …and a NON-shorthand property that simply is not enumerated reads
+      // DIFFERENTLY. Two causes must never share a message.
+      const other = shorthandVarSkip('root', 'app-region', ['--x']);
+      if (other.includes('SHORTHAND')) throw new Error('a non-shorthand unenumerated property is reported as a shorthand — the two causes share a message');
+
+      // ---- fix 2: THE TWO BARE `continue`s -------------------------------
+      // The pseudo-element loop hid EVERY un-promoted pseudo: text/glyph
+      // content (icon-font ligature carets, chevrons, close ×s) and the
+      // `!drawn` skip, which CONFLATED "legitimately hidden in this combo"
+      // with "painted by something the grammar cannot read" — the exact shape
+      // of Carbon's hollow checkbox. The two must stay distinguishable.
+      const HIDDEN = 'pseudo-decor-hidden-in-combo';
+      const OUTSIDE = 'pseudo-decor-outside-grammar';
+      const CONTENT = 'pseudo-content-not-canvas-ink';
+      const src = readFileSync(path.join(ROOT, 'extract/computed/anatomy.ts'), 'utf8');
+      for (const marker of [HIDDEN, OUTSIDE, CONTENT]) {
+        if (!src.includes(marker)) throw new Error(`the pseudo-element loop no longer emits "${marker}" — a skip went silent again`);
+      }
+      if (src.includes("if (st['content'] !== '\"\"') continue;") || /if \(!drawn\) continue;/.test(src)) {
+        throw new Error('a BARE `continue` is back in the pseudo-element loop — the skip it takes is silent');
+      }
+      // The three names must be genuinely distinct strings, or "distinguishable"
+      // is a claim the messages do not keep.
+      if (new Set([HIDDEN, OUTSIDE, CONTENT]).size !== 3) throw new Error('the pseudo refusal names collide');
+      // Every committed capture receipt that DOES carry one of these names
+      // carries it with its measurement, never bare.
+      let pseudoNamed = 0;
+      for (const root of ['extract/computed/out', 'extract/computed/out/mui', 'extract/computed/out/astryx', 'extract/computed/out/tailwind', 'extract/computed/out/carbon', 'extract/computed/out/altitude']) {
+        const abs = path.join(ROOT, root);
+        if (!existsSync(abs)) continue;
+        for (const d of readdirSync(abs)) {
+          const f = path.join(abs, d, 'scorecard.json');
+          if (!existsSync(f) || !statSync(path.join(abs, d)).isDirectory()) continue;
+          for (const l of (JSON.parse(readFileSync(f, 'utf8')).namedLosses ?? []) as string[]) {
+            if (!l.includes(OUTSIDE) && !l.includes(CONTENT) && !l.includes(HIDDEN)) continue;
+            pseudoNamed++;
+            if (!/\d/.test(l)) throw new Error(`a pseudo refusal carries no measurement: ${l}`);
+          }
+        }
+      }
+
+      // ---- fix 5: THE PIXEL GATE'S FABRICATED NUMBER ----------------------
+      // On a size mismatch the gate wrote `pctExact = 100; pctAA = 100` — a
+      // number pixelmatch never produced — and let it into the mean. (The
+      // audit read that as "scores a wrong-sized box 100% PERFECT"; in this
+      // metric 100 is the WORST value, so the number pointed the right way.
+      // It was still fabricated, still indistinguishable from a measured
+      // 100, and — in run.ts's roll-up — the "original screenshot
+      // unavailable" rows were averaged the same way while their own note
+      // said "pixel not scored".) Unscorable rows are now NULL, excluded from
+      // the mean, COUNTED and PRINTED.
+      const gateSrc = readFileSync(path.join(ROOT, 'extract/computed/gate.ts'), 'utf8');
+      const runSrc = readFileSync(path.join(ROOT, 'extract/computed/run.ts'), 'utf8');
+      for (const [file, text] of [['gate.ts', gateSrc], ['run.ts', runSrc]] as const) {
+        if (/pctExact\s*[:=]\s*100/.test(text) || /pctAA\s*[:=]\s*100/.test(text)) {
+          throw new Error(`${file} still writes the fabricated 100 into a pixel score`);
+        }
+        if (!text.includes('size-mismatch') || !text.includes('no-original')) {
+          throw new Error(`${file} no longer distinguishes the two unscorable causes`);
+        }
+      }
+      // An empty mean must be NULL, never 0 — in this metric 0 reads as
+      // PERFECT, which is the inversion the audit was worried about.
+      if (!/measured\.length === 0 \? null/.test(gateSrc) || !/pxMeasured\.length === 0 \? null/.test(runSrc)) {
+        throw new Error('an empty pixel mean can still render as 0 — the best possible score for something nothing could be measured on');
+      }
+      // Every committed receipt that carries the NEW shape must be internally
+      // consistent, and no receipt may report a scored row that is also
+      // unscorable.
+      let checked = 0;
+      let oldShape = 0;
+      for (const root of ['extract/computed/out', 'extract/computed/out/mui', 'extract/computed/out/astryx', 'extract/computed/out/tailwind', 'extract/computed/out/carbon', 'extract/computed/out/altitude']) {
+        const abs = path.join(ROOT, root);
+        if (!existsSync(abs)) continue;
+        for (const d of readdirSync(abs)) {
+          const f = path.join(abs, d, 'scorecard.json');
+          if (!existsSync(f) || !statSync(path.join(abs, d)).isDirectory()) continue;
+          const sc = JSON.parse(readFileSync(f, 'utf8')) as { pixel?: { pairs: number; measured?: number; unscored?: { sizeMismatch: number }; meanAA: number | null } };
+          if (!sc.pixel) continue;
+          if (sc.pixel.measured === undefined) { oldShape++; continue; }
+          checked++;
+          if (sc.pixel.measured + (sc.pixel.unscored?.sizeMismatch ?? 0) !== sc.pixel.pairs) {
+            throw new Error(`${root}/${d}: measured ${sc.pixel.measured} + size-mismatched ${sc.pixel.unscored?.sizeMismatch} ≠ pairs ${sc.pixel.pairs} — the denominator does not add up`);
+          }
+          if (sc.pixel.measured === 0 && sc.pixel.meanAA !== null) {
+            throw new Error(`${root}/${d}: 0 pairs measured but meanAA is ${sc.pixel.meanAA} — an unmeasured mean must be null`);
+          }
+        }
+      }
+      console.log(`silent-loss-receipts: fix 1 — the shorthand ceiling names property+var+cause for all 5 shorthands the audit listed and reads DIFFERENTLY for a merely-unenumerated property (the loss is in capture.ts, one layer earlier than the audit placed it: Chromium enumerates a var()-carrying shorthand's longhands with the EMPTY string); fix 2 — the two bare continues are gone and the three refusal names (${CONTENT} / ${OUTSIDE} / ${HIDDEN}) are distinct, ${pseudoNamed} committed refusal(s) all carry their measurement; fix 5 — neither roll-up can write the fabricated 100, both name size-mismatch vs no-original, an empty mean is null not 0 (0 means PERFECT here), ${checked} receipt(s) in the new shape are denominator-consistent (${oldShape} still in the pre-round shape — they gain the fields at their next capture)`);
+    },
+  },
+  {
+    // ---- fix 2 companion + the repo-wide CHILD-WIDER RATCHET and the
+    // FIGMA-SCRIPT FRESHNESS gate. Both are the same lesson from two
+    // directions: an ungated surface rots, and a number published only in
+    // prose rots faster.
+    id: 'child-wider-ratchet-and-script-freshness',
+    claim: 'C3-detection',
+    run: () => {
+      // Both instruments read `examples/*/figma`, which resetScratch does not
+      // copy — they run against the REAL tree (read-only) by design.
+      const atRoot = (args: string[]) => {
+        const r = spawnSync(process.execPath, args, { cwd: ROOT, encoding: 'utf8' });
+        return { status: r.status ?? -1, out: `${r.stdout ?? ''}${r.stderr ?? ''}` };
+      };
+      const ratchet = atRoot(['scripts/child-wider.mjs']);
+      if (ratchet.status !== 0) throw new Error(`child-wider ratchet RED:\n${ratchet.out.slice(0, 1600)}`);
+      const baseline = JSON.parse(readFileSync(path.join(ROOT, 'scripts/child-wider-baseline.json'), 'utf8')) as {
+        rows: Array<{ library: string; overflows: number; textCaused: number; marginBox: number; cause: string }>;
+      };
+      // Every library with figma scripts has a row, and every nonzero row
+      // names its cause — an exemption nobody counts is a silent drop.
+      const libDirs = readdirSync(path.join(ROOT, 'examples'), { withFileTypes: true })
+        .filter((e) => e.isDirectory() && existsSync(path.join(ROOT, 'examples', e.name, 'figma')))
+        .map((e) => e.name)
+        .filter((n) => readdirSync(path.join(ROOT, 'examples', n, 'figma')).some((f) => f.endsWith('.figma.js') && f !== '00-tokens.figma.js' && f !== 'GENESIS-BATCH.figma.js'));
+      for (const lib of libDirs) {
+        const row = baseline.rows.find((r) => r.library === lib);
+        if (!row) throw new Error(`${lib} has committed figma scripts and NO child-wider baseline row — an ungated surface`);
+        if (row.overflows + row.textCaused + row.marginBox > 0 && (!row.cause || row.cause.startsWith('UNNAMED'))) {
+          throw new Error(`${lib}: ${row.overflows + row.textCaused + row.marginBox} overflow(s) with no named cause`);
+        }
+      }
+      // FALSIFICATION: lowering a committed number must make the ratchet red
+      // (a two-sided ratchet catches an unrecorded IMPROVEMENT too — a stale
+      // high baseline is room to regrow in silence).
+      // The falsification runs entirely inside SCRATCH (run()'s cwd) — a pin
+      // that mutates the real repo to prove itself is a pin that can leave the
+      // repo broken when it throws.
+      const scratchBaseline = path.join(SCRATCH, 'child-wider-baseline-planted.json');
+      const planted = JSON.parse(JSON.stringify(baseline));
+      planted.rows.find((r: { library: string }) => r.library === 'astryx').overflows = 99;
+      writeFileSync(scratchBaseline, JSON.stringify(planted, null, 2));
+      const red = atRoot(['scripts/child-wider.mjs', '--baseline', scratchBaseline]);
+      if (red.status === 0) throw new Error('the ratchet passed against a baseline the measurement disagrees with — it is not gating');
+      if (!red.out.includes('IMPROVED')) throw new Error(`the ratchet did not name the DECREASE direction:\n${red.out.slice(0, 800)}`);
+
+      const fresh = atRoot(['scripts/figma-scripts-fresh.mjs']);
+      if (fresh.status !== 0) throw new Error(`figma sync scripts are STALE vs a rebuild:\n${fresh.out.slice(0, 1600)}`);
+      if (!fresh.out.includes('NOT GATED')) {
+        throw new Error('the freshness gate stopped naming its own hole — an un-gated library must be printed, never quietly skipped');
+      }
+      const total = baseline.rows.reduce((n, r) => n + r.overflows, 0);
+      console.log(`child-wider-ratchet-and-script-freshness: ${baseline.rows.length} libraries carry a committed child-wider baseline (${total} real overflows repo-wide, all astryx ProgressBar percent-width; text-caused and margin-box counted SEPARATELY so neither can flatter the first number), the ratchet is two-sided and names an unrecorded improvement, and every rebuildable library's sync scripts are BYTE-FRESH vs a fresh emission — the gap that let MUI's scripts sit three engine fixes stale while the suite stayed green`);
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------
 // Runner
 // ---------------------------------------------------------------------------
 
+// `npm run eval -- --only <substring>[,<substring>]` runs a SUBSET. The subset
+// run deliberately does NOT write evals/results.json — a partial run must
+// never be able to masquerade as the committed suite result (docs:check reads
+// that file and gates every "N/N" claim in the docs against it).
+const ONLY = (() => {
+  const i = process.argv.indexOf('--only');
+  return i > -1 && process.argv[i + 1] ? process.argv[i + 1].split(',') : null;
+})();
+
 const results: Array<{ id: string; claim: string; pass: boolean; error?: string }> = [];
-for (const c of cases) {
+for (const c of ONLY ? cases.filter((x) => ONLY.some((o) => x.id.includes(o))) : cases) {
   resetScratch();
   try {
     c.run();
@@ -7169,9 +7513,13 @@ for (const c of cases) {
 rmSync(SCRATCH, { recursive: true, force: true });
 
 const passed = results.filter((r) => r.pass).length;
-writeFileSync(
-  path.join(ROOT, 'evals', 'results.json'),
-  JSON.stringify({ passed, total: results.length, results }, null, 2) + '\n',
-);
-console.log(`\n${passed}/${results.length} evals passed — evals/results.json`);
+if (ONLY) {
+  console.log(`\n${passed}/${results.length} evals passed — SUBSET run (--only ${ONLY.join(',')}); evals/results.json NOT written`);
+} else {
+  writeFileSync(
+    path.join(ROOT, 'evals', 'results.json'),
+    JSON.stringify({ passed, total: results.length, results }, null, 2) + '\n',
+  );
+  console.log(`\n${passed}/${results.length} evals passed — evals/results.json`);
+}
 process.exit(passed === results.length ? 0 : 1);

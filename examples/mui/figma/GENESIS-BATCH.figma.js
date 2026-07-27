@@ -22607,18 +22607,94 @@ const COMPONENTS = [
                       },
                       "children": [
                         {
-                          "type": "svg",
+                          "type": "frame",
                           "name": "autocomplete-clearindicator",
-                          "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 6.41 L 17.59 5 L 12 10.59 L 6.41 5 L 5 6.41 L 10.59 12 L 5 17.59 L 6.41 19 L 12 13.41 L 17.59 19 L 19 17.59 L 13.41 12 Z\" fill=\"#0000008a\"/></svg>",
-                          "svgPaintVar": "imported/shared/color-0000008a",
-                          "iconSize": 20
+                          "layout": {
+                            "mode": "HORIZONTAL",
+                            "primary": "CENTER",
+                            "counter": "CENTER"
+                          },
+                          "children": [
+                            {
+                              "type": "svg",
+                              "name": "autocomplete-clearindicator-icon",
+                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 6.41 L 17.59 5 L 12 10.59 L 6.41 5 L 5 6.41 L 10.59 12 L 5 17.59 L 6.41 19 L 12 13.41 L 17.59 19 L 19 17.59 L 13.41 12 Z\" fill=\"#0000008a\"/></svg>",
+                              "svgPaintVar": "imported/shared/color-0000008a",
+                              "iconSize": 20
+                            }
+                          ],
+                          "fill": "imported/autocomplete/autocomplete-clearindicator/background-color",
+                          "bindings": {
+                            "bottomLeftRadius": "imported/shared/size-14",
+                            "bottomRightRadius": "imported/shared/size-14",
+                            "strokeBottomWeight": "imported/shared/size-0",
+                            "strokeLeftWeight": "imported/shared/size-0",
+                            "strokeRightWeight": "imported/shared/size-0",
+                            "topLeftRadius": "imported/shared/size-14",
+                            "topRightRadius": "imported/shared/size-14",
+                            "strokeTopWeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "paddingBottom": "imported/shared/size-4",
+                            "paddingLeft": "imported/shared/size-4",
+                            "paddingRight": "imported/shared/size-4",
+                            "paddingTop": "imported/shared/size-4"
+                          },
+                          "fixedHeight": {
+                            "px": 28,
+                            "varName": "imported/shared/size-28"
+                          },
+                          "margins": {
+                            "right": -2
+                          },
+                          "fixedWidth": {
+                            "px": 28,
+                            "varName": "imported/shared/size-28"
+                          }
                         },
                         {
-                          "type": "svg",
+                          "type": "frame",
                           "name": "autocomplete-popupindicator",
-                          "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
-                          "svgPaintVar": "imported/shared/color-0000008a",
-                          "iconSize": 24
+                          "layout": {
+                            "mode": "HORIZONTAL",
+                            "primary": "CENTER",
+                            "counter": "CENTER"
+                          },
+                          "children": [
+                            {
+                              "type": "svg",
+                              "name": "autocomplete-popupindicator-icon",
+                              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
+                              "svgPaintVar": "imported/shared/color-0000008a",
+                              "iconSize": 24
+                            }
+                          ],
+                          "fill": "imported/autocomplete/autocomplete-popupindicator/background-color",
+                          "bindings": {
+                            "bottomLeftRadius": "imported/shared/size-14",
+                            "bottomRightRadius": "imported/shared/size-14",
+                            "strokeBottomWeight": "imported/shared/size-0",
+                            "strokeLeftWeight": "imported/shared/size-0",
+                            "strokeRightWeight": "imported/shared/size-0",
+                            "topLeftRadius": "imported/shared/size-14",
+                            "topRightRadius": "imported/shared/size-14",
+                            "strokeTopWeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "paddingBottom": "imported/shared/size-2",
+                            "paddingLeft": "imported/shared/size-2",
+                            "paddingRight": "imported/shared/size-2",
+                            "paddingTop": "imported/shared/size-2"
+                          },
+                          "fixedHeight": {
+                            "px": 28,
+                            "varName": "imported/shared/size-28"
+                          },
+                          "margins": {
+                            "right": -2
+                          },
+                          "fixedWidth": {
+                            "px": 28,
+                            "varName": "imported/shared/size-28"
+                          }
                         }
                       ]
                     },
@@ -22977,18 +23053,94 @@ const COMPONENTS = [
                       },
                       "children": [
                         {
-                          "type": "svg",
+                          "type": "frame",
                           "name": "autocomplete-clearindicator",
-                          "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 6.41 L 17.59 5 L 12 10.59 L 6.41 5 L 5 6.41 L 10.59 12 L 5 17.59 L 6.41 19 L 12 13.41 L 17.59 19 L 19 17.59 L 13.41 12 Z\" fill=\"#0000008a\"/></svg>",
-                          "svgPaintVar": "imported/shared/color-0000008a",
-                          "iconSize": 20
+                          "layout": {
+                            "mode": "HORIZONTAL",
+                            "primary": "CENTER",
+                            "counter": "CENTER"
+                          },
+                          "children": [
+                            {
+                              "type": "svg",
+                              "name": "autocomplete-clearindicator-icon",
+                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 6.41 L 17.59 5 L 12 10.59 L 6.41 5 L 5 6.41 L 10.59 12 L 5 17.59 L 6.41 19 L 12 13.41 L 17.59 19 L 19 17.59 L 13.41 12 Z\" fill=\"#0000008a\"/></svg>",
+                              "svgPaintVar": "imported/shared/color-0000008a",
+                              "iconSize": 20
+                            }
+                          ],
+                          "fill": "imported/autocomplete/autocomplete-clearindicator/background-color",
+                          "bindings": {
+                            "bottomLeftRadius": "imported/shared/size-14",
+                            "bottomRightRadius": "imported/shared/size-14",
+                            "strokeBottomWeight": "imported/shared/size-0",
+                            "strokeLeftWeight": "imported/shared/size-0",
+                            "strokeRightWeight": "imported/shared/size-0",
+                            "topLeftRadius": "imported/shared/size-14",
+                            "topRightRadius": "imported/shared/size-14",
+                            "strokeTopWeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "paddingBottom": "imported/shared/size-4",
+                            "paddingLeft": "imported/shared/size-4",
+                            "paddingRight": "imported/shared/size-4",
+                            "paddingTop": "imported/shared/size-4"
+                          },
+                          "fixedHeight": {
+                            "px": 28,
+                            "varName": "imported/shared/size-28"
+                          },
+                          "margins": {
+                            "right": -2
+                          },
+                          "fixedWidth": {
+                            "px": 28,
+                            "varName": "imported/shared/size-28"
+                          }
                         },
                         {
-                          "type": "svg",
+                          "type": "frame",
                           "name": "autocomplete-popupindicator",
-                          "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
-                          "svgPaintVar": "imported/shared/color-0000008a",
-                          "iconSize": 24
+                          "layout": {
+                            "mode": "HORIZONTAL",
+                            "primary": "CENTER",
+                            "counter": "CENTER"
+                          },
+                          "children": [
+                            {
+                              "type": "svg",
+                              "name": "autocomplete-popupindicator-icon",
+                              "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
+                              "svgPaintVar": "imported/shared/color-0000008a",
+                              "iconSize": 24
+                            }
+                          ],
+                          "fill": "imported/autocomplete/autocomplete-popupindicator/background-color",
+                          "bindings": {
+                            "bottomLeftRadius": "imported/shared/size-14",
+                            "bottomRightRadius": "imported/shared/size-14",
+                            "strokeBottomWeight": "imported/shared/size-0",
+                            "strokeLeftWeight": "imported/shared/size-0",
+                            "strokeRightWeight": "imported/shared/size-0",
+                            "topLeftRadius": "imported/shared/size-14",
+                            "topRightRadius": "imported/shared/size-14",
+                            "strokeTopWeight": "imported/shared/size-0",
+                            "minWidth": "imported/shared/size-0",
+                            "paddingBottom": "imported/shared/size-2",
+                            "paddingLeft": "imported/shared/size-2",
+                            "paddingRight": "imported/shared/size-2",
+                            "paddingTop": "imported/shared/size-2"
+                          },
+                          "fixedHeight": {
+                            "px": 28,
+                            "varName": "imported/shared/size-28"
+                          },
+                          "margins": {
+                            "right": -2
+                          },
+                          "fixedWidth": {
+                            "px": 28,
+                            "varName": "imported/shared/size-28"
+                          }
                         }
                       ]
                     },
@@ -24252,10 +24404,7 @@ const COMPONENTS = [
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0"
           },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/dialog/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -24376,8 +24525,7 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ],
-              "fillW": true
+              ]
             }
           ]
         }
@@ -24399,10 +24547,7 @@ const COMPONENTS = [
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0"
           },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/dialog/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -24523,8 +24668,7 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ],
-              "fillW": true
+              ]
             }
           ]
         }
@@ -24546,10 +24690,7 @@ const COMPONENTS = [
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0"
           },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/dialog/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -24670,8 +24811,7 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ],
-              "fillW": true
+              ]
             }
           ]
         }
@@ -24693,10 +24833,7 @@ const COMPONENTS = [
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0"
           },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/dialog/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -24817,8 +24954,7 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ],
-              "fillW": true
+              ]
             }
           ]
         }
@@ -24840,10 +24976,7 @@ const COMPONENTS = [
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0"
           },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/dialog/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -24964,14 +25097,13 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ],
-              "fillW": true
+              ]
             }
           ]
         }
       }
     ],
-    "colW": 960
+    "colW": 380
   }
 ];
 const ROW_H = 240, PAD = 40;
@@ -30302,18 +30434,88 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "svg",
+                      "type": "frame",
                       "name": "buttonbase-root",
-                      "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 15.41 16.09 L 10.83 11.5 L 15.41 6.91 L 14 5.5 L 8 11.5 L 14 17.5 Z\" fill=\"#00000042\"/></svg>",
-                      "svgPaintVar": "imported/shared/color-00000042",
-                      "iconSize": 24
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
+                      },
+                      "children": [
+                        {
+                          "type": "svg",
+                          "name": "buttonbase-root-icon",
+                          "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 15.41 16.09 L 10.83 11.5 L 15.41 6.91 L 14 5.5 L 8 11.5 L 14 17.5 Z\" fill=\"#00000042\"/></svg>",
+                          "svgPaintVar": "imported/shared/color-00000042",
+                          "iconSize": 24
+                        }
+                      ],
+                      "fill": "imported/pagination/buttonbase-root/background-color",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-20",
+                        "bottomRightRadius": "imported/shared/size-20",
+                        "strokeBottomWeight": "imported/shared/size-0",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "topLeftRadius": "imported/shared/size-20",
+                        "topRightRadius": "imported/shared/size-20",
+                        "strokeTopWeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0",
+                        "paddingBottom": "imported/shared/size-8",
+                        "paddingLeft": "imported/shared/size-8",
+                        "paddingRight": "imported/shared/size-8",
+                        "paddingTop": "imported/shared/size-8"
+                      },
+                      "fixedHeight": {
+                        "px": 40,
+                        "varName": "imported/shared/size-40"
+                      },
+                      "fixedWidth": {
+                        "px": 40,
+                        "varName": "imported/shared/size-40"
+                      }
                     },
                     {
-                      "type": "svg",
+                      "type": "frame",
                       "name": "buttonbase-root-2",
-                      "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.59 16.34 L 13.17 11.75 L 8.59 7.16 L 10 5.75 L 16 11.75 L 10 17.75 Z\" fill=\"#00000042\"/></svg>",
-                      "svgPaintVar": "imported/shared/color-00000042",
-                      "iconSize": 24
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
+                      },
+                      "children": [
+                        {
+                          "type": "svg",
+                          "name": "buttonbase-root-2-icon",
+                          "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.59 16.34 L 13.17 11.75 L 8.59 7.16 L 10 5.75 L 16 11.75 L 10 17.75 Z\" fill=\"#00000042\"/></svg>",
+                          "svgPaintVar": "imported/shared/color-00000042",
+                          "iconSize": 24
+                        }
+                      ],
+                      "fill": "imported/pagination/buttonbase-root-2/background-color",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-20",
+                        "bottomRightRadius": "imported/shared/size-20",
+                        "strokeBottomWeight": "imported/shared/size-0",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "topLeftRadius": "imported/shared/size-20",
+                        "topRightRadius": "imported/shared/size-20",
+                        "strokeTopWeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0",
+                        "paddingBottom": "imported/shared/size-8",
+                        "paddingLeft": "imported/shared/size-8",
+                        "paddingRight": "imported/shared/size-8",
+                        "paddingTop": "imported/shared/size-8"
+                      },
+                      "fixedHeight": {
+                        "px": 40,
+                        "varName": "imported/shared/size-40"
+                      },
+                      "fixedWidth": {
+                        "px": 40,
+                        "varName": "imported/shared/size-40"
+                      }
                     }
                   ]
                 }

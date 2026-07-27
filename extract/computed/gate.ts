@@ -37,8 +37,18 @@ export interface GateRow {
   key: string; // `${combo}__${interaction}`
   channelsCompared: number;
   channelsEqual: number;
-  pctExact: number;
-  pctAA: number;
+  /** SILENT-LOSS ROUND (task #33, fix 5): NULL means NOT MEASURED. It used to
+   *  be the number 100, asserted rather than measured, and indistinguishable
+   *  from a genuinely-measured 100%-differing row. See `unscorable`. */
+  pctExact: number | null;
+  pctAA: number | null;
+  /** Why this row carries no pixel score. `size-mismatch` = our render is a
+   *  different SIZE than the original, so pixelmatch cannot run at all (a
+   *  total geometry failure, and one that must never be averaged as if it
+   *  were a measurement); `no-original` = the original screenshot does not
+   *  exist (portal roots the sweep could not shoot). Both are COUNTED and
+   *  PRINTED — an exclusion nobody counts is a silent drop. */
+  unscorable?: 'size-mismatch' | 'no-original';
   mismatches: Array<{ part: string; channel: string; ours: string; theirs: string }>;
   note?: string;
 }
@@ -62,9 +72,17 @@ export interface Scorecard {
     pairs: number;
     perfectExact: number;
     perfectAA: number;
-    meanExact: number;
-    meanAA: number;
-    maxAA: number;
+    /** fix 5: rows pixelmatch actually ran on — the mean's denominator. */
+    measured: number;
+    /** fix 5: the COUNTED exclusions (an uncounted exclusion is a silent drop). */
+    unscored: { sizeMismatch: number; noOriginal: number; note: string };
+    /** fix 5: NULL when nothing was measured. It must NOT be 0 — in this
+     *  metric 0 means PERFECT, so an empty mean rendered as 0 would read as
+     *  the best possible score for a component nothing could be scored on
+     *  (MUI's Dialog: 5 size-mismatched pairs, 0 measured). */
+    meanExact: number | null;
+    meanAA: number | null;
+    maxAA: number | null;
   };
   fusion: {
     boundConfirmed: number;
@@ -78,7 +96,7 @@ export interface Scorecard {
     overflowBindings: number;
     folds: number;
   };
-  worstRows: Array<{ key: string; pctAA: number; pctExact: number; channelsMismatched: number }>;
+  worstRows: Array<{ key: string; pctAA: number | null; pctExact: number | null; channelsMismatched: number; unscorable?: 'size-mismatch' | 'no-original' }>;
   topMismatchedChannels: Array<[string, number]>;
   namedLosses: string[];
   /** DEFECT FIXED (regate-drift triage): the gate page resolves a contract's
@@ -388,7 +406,7 @@ ${stages.join('\n')}
 
       const key = `${combo.key}__${interaction}`;
       const truthCap = aligned.byKey.get(key);
-      const row: GateRow = { key, channelsCompared: 0, channelsEqual: 0, pctExact: 100, pctAA: 100, mismatches: [] };
+      const row: GateRow = { key, channelsCompared: 0, channelsEqual: 0, pctExact: null, pctAA: null, unscorable: 'no-original', mismatches: [] };
       if (interactionNote) row.note = interactionNote;
       if (!truthCap) {
         row.note = [row.note, 'no captured truth for this combo×state'].filter(Boolean).join('; ');
@@ -430,15 +448,24 @@ ${stages.join('\n')}
         const a = PNG.sync.read(readFileSync(origPng));
         const b = PNG.sync.read(shot);
         if (a.width !== b.width || a.height !== b.height) {
-          row.pctExact = 100;
-          row.pctAA = 100;
-          row.note = [row.note, `size mismatch ours ${b.width}x${b.height} vs orig ${a.width}x${a.height}`].filter(Boolean).join('; ');
+          // fix 5: this used to write the NUMBER 100 into pctExact/pctAA and
+          // let it into the mean. pixelmatch never ran — there is no
+          // measurement here, only the knowledge that the geometry is wrong.
+          // A fabricated number that happens to point the right way is still
+          // fabricated, and it was indistinguishable from a real 100. The row
+          // is now explicitly UNSCORABLE: excluded from the mean, counted in
+          // `pairs`, and structurally unable to be `perfect`.
+          row.pctExact = null;
+          row.pctAA = null;
+          row.unscorable = 'size-mismatch';
+          row.note = [row.note, `size mismatch ours ${b.width}x${b.height} vs orig ${a.width}x${a.height} — NOT SCORED (a wrong-sized box is a geometry failure, not a percentage)`].filter(Boolean).join('; ');
         } else {
           const total = a.width * a.height;
           const diffExact = pixelmatch(a.data, b.data, undefined, a.width, a.height, { threshold: 0, includeAA: true });
           const diffAA = pixelmatch(a.data, b.data, undefined, a.width, a.height, { threshold: 0.1 });
           row.pctExact = (100 * diffExact) / total;
           row.pctAA = (100 * diffAA) / total;
+          delete row.unscorable;
         }
       } else {
         row.note = [row.note, 'original screenshot unavailable — pixel not scored'].filter(Boolean).join('; ');
@@ -450,7 +477,18 @@ ${stages.join('\n')}
 
   const cellsCompared = rows.reduce((n, r) => n + r.channelsCompared, 0);
   const cellsEqual = rows.reduce((n, r) => n + r.channelsEqual, 0);
-  const scored = rows.filter((r) => !r.note?.startsWith('original screenshot'));
+  // fix 5: the denominators, said out loud.
+  //   · `comparable` — a row with an original screenshot to compare against.
+  //     A `no-original` row was never a pair at all and is excluded from
+  //     `pairs` (this is what `!r.note?.startsWith('original screenshot')`
+  //     used to mean, spelled structurally instead of by prose matching).
+  //   · `measured`   — a comparable row that pixelmatch actually ran on.
+  //     A size mismatch is comparable (it counts as a failed pair) but NOT
+  //     measured, so it can never be `perfect` and never enters a mean.
+  const comparable = rows.filter((r) => r.unscorable !== 'no-original');
+  const measured = comparable.filter((r) => r.pctExact !== null && r.pctAA !== null) as Array<GateRow & { pctExact: number; pctAA: number }>;
+  const sizeMismatched = comparable.filter((r) => r.unscorable === 'size-mismatch');
+  const noOriginal = rows.filter((r) => r.unscorable === 'no-original');
   const scorecard: Scorecard = {
     component: comp.name,
     generatedBy: 'extract/computed/gate.ts',
@@ -467,18 +505,29 @@ ${stages.join('\n')}
       rows: rows.length,
     },
     pixel: {
-      pairs: scored.length,
-      perfectExact: scored.filter((r) => r.pctExact === 0).length,
-      perfectAA: scored.filter((r) => r.pctAA === 0).length,
-      meanExact: scored.length === 0 ? 0 : scored.reduce((n, r) => n + r.pctExact, 0) / scored.length,
-      meanAA: scored.length === 0 ? 0 : scored.reduce((n, r) => n + r.pctAA, 0) / scored.length,
-      maxAA: scored.length === 0 ? 0 : Math.max(...scored.map((r) => r.pctAA)),
+      pairs: comparable.length,
+      perfectExact: measured.filter((r) => r.pctExact === 0).length,
+      perfectAA: measured.filter((r) => r.pctAA === 0).length,
+      // fix 5: means are over MEASURED rows only, and the exclusion is
+      // published next to them — an excluded row nobody counts is exactly
+      // the silence this round exists to remove.
+      measured: measured.length,
+      unscored: {
+        sizeMismatch: sizeMismatched.length,
+        noOriginal: noOriginal.length,
+        note: 'sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely.',
+      },
+      meanExact: measured.length === 0 ? null : measured.reduce((n, r) => n + r.pctExact, 0) / measured.length,
+      meanAA: measured.length === 0 ? null : measured.reduce((n, r) => n + r.pctAA, 0) / measured.length,
+      maxAA: measured.length === 0 ? null : Math.max(...measured.map((r) => r.pctAA)),
     },
     fusion: opts.fusionCounts,
     worstRows: [...rows]
-      .sort((x, y) => y.pctAA - x.pctAA || y.pctExact - x.pctExact || y.mismatches.length - x.mismatches.length)
+      // fix 5: an UNSCORED row sorts to the top — it is the worst kind of
+      // row (nothing could be measured), not a missing number to skip past.
+      .sort((x, y) => (y.pctAA ?? 101) - (x.pctAA ?? 101) || (y.pctExact ?? 101) - (x.pctExact ?? 101) || y.mismatches.length - x.mismatches.length)
       .slice(0, 8)
-      .map((r) => ({ key: r.key, pctAA: r.pctAA, pctExact: r.pctExact, channelsMismatched: r.mismatches.length })),
+      .map((r) => ({ key: r.key, pctAA: r.pctAA, pctExact: r.pctExact, channelsMismatched: r.mismatches.length, ...(r.unscorable ? { unscorable: r.unscorable } : {}) })),
     topMismatchedChannels: [...mismatchByChannel.entries()].sort((a, b) => b[1] - a[1]).slice(0, 15),
     namedLosses: opts.namedLosses,
     unresolvedTokenRefs: { count: unresolvedRefs.length, refs: unresolvedRefs.slice(0, 40) },

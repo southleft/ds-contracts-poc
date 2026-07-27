@@ -77,7 +77,7 @@ import { promoteAnatomy } from './anatomy.js';
 import { labeledPair } from './label-png.js';
 import { applyDecisions, type AckedDecision } from './decisions.js';
 import { kebab } from '../types.js';
-import { flatten, normalizeValue, type Capture, type CapturedNode, type FlatEl, type StyleMap, oklchToRgba,
+import { flatten, normalizeValue, shorthandVarSkip, type Capture, type CapturedNode, type FlatEl, type StyleMap, oklchToRgba,
 } from './lib.js';
 
 const HERE = path.resolve(new URL('.', import.meta.url).pathname);
@@ -338,14 +338,32 @@ async function main() {
         return false;
       };
       type Fact = { token: string; varName: string; selector: string };
+      /** fix 1: the shorthand ceiling — one named line per dropped source
+       *  declaration, deduplicated across combos (the same rule matches every
+       *  combo; the LOSS is per declaration, not per combo). */
+      const shorthandSkips = new Set<string>();
       const perPart = new Map<string, Map<string, Map<string, Fact | null>>>(); // part -> channel -> comboKey -> fact
       for (let pi = 0; pi < aligned.baseFlat.length; pi++) {
         const partName = aligned.partNames[pi];
         for (const combo of space.enumeration.combos) {
           const el = aligned.getAligned(`${combo.key}__default`)[pi];
+          // fix 1: shorthand-carried var refs never had a computed value to
+          // verify against — they are the ceiling, named here.
+          for (const [prop, names] of Object.entries(el?.node.vshorthands ?? {})) {
+            shorthandSkips.add(shorthandVarSkip(partName, prop, names));
+          }
           if (!el?.node.vrefs) continue;
           for (const [ch, cands] of Object.entries(el.node.vrefs)) {
-            if (el.node.style[ch] === undefined) continue; // shorthand/pending-substitution — longhand facts only
+            if (el.node.style[ch] === undefined) {
+              // SILENT-LOSS ROUND (task #33, fix 1): this was a bare
+              // `continue`. Nothing reached `skips`, so source-bindings.json
+              // reported `skips: []` and the console printed `0 named
+              // skip(s)` — the artifact ASSERTED COMPLETENESS over a loss it
+              // had just taken. Every dropped declaration is now named, and
+              // the COUNT is the size of the shorthand ceiling (task #27).
+              shorthandSkips.add(shorthandVarSkip(partName, ch, (cands as Array<[string, string, string?]>).map((c) => c[0])));
+              continue;
+            }
             if (!perPart.has(partName)) perPart.set(partName, new Map());
             const chans = perPart.get(partName)!;
             if (!chans.has(ch)) chans.set(ch, new Map());
@@ -379,14 +397,22 @@ async function main() {
           }
         }
       }
+      const shorthandSkipList = [...shorthandSkips].sort();
       writeFileSync(path.join(outDir, 'source-bindings.json'), JSON.stringify({
         _marker: 'EMOTION/CSS-VARS READER — SOURCE facts: the library\'s own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.',
         component: comp.name,
         varPrefix: vp,
         facts: srcFacts,
         skips: srcSkips,
+        // fix 1 (task #33): source declarations dropped because the property
+        // they name is not in the computed longhand sweep — overwhelmingly
+        // SHORTHANDS carrying a var(). This count IS the shorthand ceiling
+        // (task #27) for this component; `skips: []` used to be printed over
+        // it.
+        shorthandCeiling: shorthandSkipList.length,
+        shorthandSkips: shorthandSkipList,
       }, null, 2) + '\n');
-      console.log(`    source-bindings: ${srcFacts.length} verified fact(s) over ${new Set(srcFacts.map((f) => `${f.part}.${f.channel}`)).size} channel(s), ${srcSkips.length} named skip(s)`);
+      console.log(`    source-bindings: ${srcFacts.length} verified fact(s) over ${new Set(srcFacts.map((f) => `${f.part}.${f.channel}`)).size} channel(s), ${srcSkips.length} named skip(s), ${shorthandSkipList.length} shorthand-ceiling skip(s)`);
     }
 
     const controlStyles = Object.fromEntries(Object.entries(run1.controls).map(([t, n]) => [t, n.style]));
@@ -780,7 +806,13 @@ async function main() {
     await replayPage.waitForTimeout(200);
     const reread = await rereadEquality((js) => replayPage.evaluate(js), replaySpecs, run1.allProps);
 
-    interface PixelRow { key: string; pctExact: number; pctAA: number; note?: string }
+    // SILENT-LOSS ROUND (task #33, fix 5) — see extract/computed/gate.ts. The
+    // replay roll-up had the SAME defect and one worse: gate.ts at least
+    // excluded the "original screenshot unavailable" rows from its
+    // denominator, while this one counted them at the fabricated 100 in the
+    // mean, the max and the perfect-count — a NUMBER for a row whose own note
+    // said "pixel not scored". The two roll-ups of the same concept now agree.
+    interface PixelRow { key: string; pctExact: number | null; pctAA: number | null; unscorable?: 'size-mismatch' | 'no-original'; note?: string }
     const pixelRows: PixelRow[] = [];
     const replayShots = path.join(outDir, '.replay-shots');
     mkdirSync(replayShots, { recursive: true });
@@ -792,13 +824,13 @@ async function main() {
       const origPath = path.join(scratchShots, `${comp.name}--${spec.key}.png`);
       if (!existsSync(origPath)) {
         // portal combos whose root pick could not be screenshotted — named
-        pixelRows.push({ key: spec.key, pctExact: 100, pctAA: 100, note: 'original screenshot unavailable — pixel not scored' });
+        pixelRows.push({ key: spec.key, pctExact: null, pctAA: null, unscorable: 'no-original', note: 'original screenshot unavailable — pixel not scored' });
         continue;
       }
       const a = PNG.sync.read(readFileSync(origPath));
       const b = PNG.sync.read(shot);
       if (a.width !== b.width || a.height !== b.height) {
-        pixelRows.push({ key: spec.key, pctExact: 100, pctAA: 100, note: `size mismatch ours ${b.width}x${b.height} vs orig ${a.width}x${a.height}` });
+        pixelRows.push({ key: spec.key, pctExact: null, pctAA: null, unscorable: 'size-mismatch', note: `size mismatch ours ${b.width}x${b.height} vs orig ${a.width}x${a.height} — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)` });
         continue;
       }
       const total = a.width * a.height;
@@ -806,7 +838,15 @@ async function main() {
       const diffAA = pixelmatch(a.data, b.data, undefined, a.width, a.height, { threshold: 0.1 });
       pixelRows.push({ key: spec.key, pctExact: (100 * diffExact) / total, pctAA: (100 * diffAA) / total });
     }
-    const worst = [...pixelRows].sort((x, y) => y.pctAA - x.pctAA || y.pctExact - x.pctExact).slice(0, 8);
+    // an UNSCORED row sorts to the top: nothing could be measured at all.
+    const worst = [...pixelRows].sort((x, y) => (y.pctAA ?? 101) - (x.pctAA ?? 101) || (y.pctExact ?? 101) - (x.pctExact ?? 101)).slice(0, 8);
+    const pxComparable = pixelRows.filter((r) => r.unscorable !== 'no-original');
+    const pxMeasured = pxComparable.filter((r) => r.pctExact !== null && r.pctAA !== null) as Array<PixelRow & { pctExact: number; pctAA: number }>;
+    // NULL, never 0: in this metric 0 means PERFECT, so an empty mean printed
+    // as 0 would report the best possible score for a component nothing could
+    // be measured on.
+    const mean = (pick: (r: { pctExact: number; pctAA: number }) => number) =>
+      pxMeasured.length === 0 ? null : pxMeasured.reduce((n, r) => n + pick(r), 0) / pxMeasured.length;
     await replayPage.close();
 
     // ---- phase 4: the fidelity gate (contract-mediated) ----
@@ -862,7 +902,7 @@ async function main() {
         [...space.presence.keys()].every((pp) => c.axisValues[pp] === 'on') &&
         space.axes.filter((ax) => !space.presence.has(ax.prop)).every((ax) => c.axisValues[ax.prop] === space.baseAxisValues[ax.prop]),
     );
-    const worstGate = [...scorecard.rows].sort((x, y) => y.pctAA - x.pctAA)[0];
+    const worstGate = [...scorecard.rows].sort((x, y) => (y.pctAA ?? 101) - (x.pctAA ?? 101))[0];
     const receiptKeys = [...new Set([
       `${space.baseComboKey}__default`,
       ...(allOnCombo ? [`${allOnCombo.key}__default`] : []),
@@ -881,7 +921,9 @@ async function main() {
     }
 
     // ---- artifacts ----
-    const fmt = (n: number) => n.toFixed(3);
+    // NOT MEASURED prints as words, never as a number — a null rendered as
+    // "0.000%" in this metric would read as PERFECT (fix 5).
+    const fmt = (n: number | null) => (n === null ? 'NOT MEASURED' : `${n.toFixed(3)}%`);
     const numbers = {
       component: comp.name,
       browser: run1.browserVersion,
@@ -923,18 +965,24 @@ async function main() {
       enrichedContractGeneratorValid: true,
       replayComputedEquality: reread,
       pixel: {
-        pairs: pixelRows.length,
+        pairs: pxComparable.length,
+        measured: pxMeasured.length,
+        unscored: {
+          sizeMismatch: pxComparable.filter((r) => r.unscorable === 'size-mismatch').length,
+          noOriginal: pixelRows.filter((r) => r.unscorable === 'no-original').length,
+          note: 'sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured.',
+        },
         exact: {
-          mean: pixelRows.reduce((n, r) => n + r.pctExact, 0) / pixelRows.length,
-          max: Math.max(...pixelRows.map((r) => r.pctExact)),
-          perfect: pixelRows.filter((r) => r.pctExact === 0).length,
+          mean: mean((r) => r.pctExact),
+          max: pxMeasured.length === 0 ? null : Math.max(...pxMeasured.map((r) => r.pctExact)),
+          perfect: pxMeasured.filter((r) => r.pctExact === 0).length,
         },
         aa: {
-          mean: pixelRows.reduce((n, r) => n + r.pctAA, 0) / pixelRows.length,
-          max: Math.max(...pixelRows.map((r) => r.pctAA)),
-          perfect: pixelRows.filter((r) => r.pctAA === 0).length,
+          mean: mean((r) => r.pctAA),
+          max: pxMeasured.length === 0 ? null : Math.max(...pxMeasured.map((r) => r.pctAA)),
+          perfect: pxMeasured.filter((r) => r.pctAA === 0).length,
         },
-        worst: worst.map((r) => ({ key: r.key, pctExact: r.pctExact, pctAA: r.pctAA, ...(r.note ? { note: r.note } : {}) })),
+        worst: worst.map((r) => ({ key: r.key, pctExact: r.pctExact, pctAA: r.pctAA, ...(r.unscorable ? { unscorable: r.unscorable } : {}), ...(r.note ? { note: r.note } : {}) })),
       },
       gate: {
         computedPctEqual: scorecard.computed.pctEqual,
@@ -1017,8 +1065,11 @@ async function main() {
       '',
       '## Fidelity gate (scorecard.json)',
       '',
-      `- computed-equality (styled channels, contract-mediated): **${fmt(scorecard.computed.pctEqual)}%** (${scorecard.computed.cellsEqual}/${scorecard.computed.cellsCompared} cells; ${scorecard.computed.rowsFullyEqual}/${scorecard.computed.rows} combo×state rows fully equal)`,
-      `- pixel: ${scorecard.pixel.perfectExact}/${scorecard.pixel.pairs} pairs perfect at threshold 0 · ${scorecard.pixel.perfectAA}/${scorecard.pixel.pairs} at the AA point (mean AA ${fmt(scorecard.pixel.meanAA)}%, max ${fmt(scorecard.pixel.maxAA)}%)`,
+      `- computed-equality (styled channels, contract-mediated): **${fmt(scorecard.computed.pctEqual)}** (${scorecard.computed.cellsEqual}/${scorecard.computed.cellsCompared} cells; ${scorecard.computed.rowsFullyEqual}/${scorecard.computed.rows} combo×state rows fully equal)`,
+      // fix 5 (task #33): the ledger says how many pairs were actually
+      // MEASURED and names every exclusion. It used to quote a mean over rows
+      // pixelmatch never ran on.
+      `- pixel: ${scorecard.pixel.perfectExact}/${scorecard.pixel.pairs} pairs perfect at threshold 0 · ${scorecard.pixel.perfectAA}/${scorecard.pixel.pairs} at the AA point (mean AA ${fmt(scorecard.pixel.meanAA)}, max ${fmt(scorecard.pixel.maxAA)}; ${scorecard.pixel.measured}/${scorecard.pixel.pairs} pairs MEASURED — ${scorecard.pixel.unscored.sizeMismatch} size-mismatched, ${scorecard.pixel.unscored.noOriginal} with no original screenshot, none averaged)`,
       '',
     ];
 
@@ -1033,8 +1084,8 @@ async function main() {
     rmSync(replayShots, { recursive: true, force: true });
 
     console.log(`  ✔ bound ${boundConfirmed}/${boundRows.length} · minted ${numbers.minted.leaves} leaves (unfolded ${prep.unfoldedLeafCount}) · folds ${folds.length}`);
-    console.log(`  ✔ replay computed equality ${fmt(reread.pct)}% · pixel AA perfect ${numbers.pixel.aa.perfect}/${pixelRows.length}`);
-    console.log(`  ✔ gate computed ${fmt(scorecard.computed.pctEqual)}% · gate pixel AA perfect ${scorecard.pixel.perfectAA}/${scorecard.pixel.pairs}`);
+    console.log(`  ✔ replay computed equality ${fmt(reread.pct)} · pixel AA perfect ${numbers.pixel.aa.perfect}/${pxComparable.length} measured pairs (${numbers.pixel.unscored.sizeMismatch} size-mismatched, ${numbers.pixel.unscored.noOriginal} no-original — NOT scored)`);
+    console.log(`  ✔ gate computed ${fmt(scorecard.computed.pctEqual)} · gate pixel AA perfect ${scorecard.pixel.perfectAA}/${scorecard.pixel.pairs} (${scorecard.pixel.measured} measured)`);
   }
 
   rmSync(scratchShots, { recursive: true, force: true });

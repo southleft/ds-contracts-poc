@@ -144,9 +144,15 @@
       "pairs": 0,
       "perfectExact": 0,
       "perfectAA": 0,
-      "meanExact": 0,
-      "meanAA": 0,
-      "maxAA": 0
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 48,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
     },
     "fusion": {
       "boundConfirmed": 0,
@@ -163,51 +169,59 @@
     "worstRows": [
       {
         "key": "primary.medium__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 21
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 21,
+        "unscorable": "no-original"
       },
       {
         "key": "secondary.medium__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 21
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 21,
+        "unscorable": "no-original"
       },
       {
         "key": "error.medium__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 21
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 21,
+        "unscorable": "no-original"
       },
       {
         "key": "warning.medium__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 21
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 21,
+        "unscorable": "no-original"
       },
       {
         "key": "info.medium__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 21
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 21,
+        "unscorable": "no-original"
       },
       {
         "key": "success.medium__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 21
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 21,
+        "unscorable": "no-original"
       },
       {
         "key": "primary.medium__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 20
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 20,
+        "unscorable": "no-original"
       },
       {
         "key": "primary.medium__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 20
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 20,
+        "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
@@ -273,6 +287,8 @@
       ]
     ],
     "namedLosses": [
+      "promotion: pseudo-decor-outside-grammar: slider-thumb::before is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
+      "promotion: pseudo-decor-outside-grammar: slider-thumb::after occupies 42x42 at position:absolute but paints nothing the grammar reads (background-color rgba(0, 0, 0, 0), border 0px rgba(46, 125, 50, 1)) — NOT promoted",
       "overflow: slider-thumb.box-shadow [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: slider-thumb.z-index [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: part-2-0.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -340,8 +356,9 @@
         "key": "primary.small__default",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -422,8 +439,9 @@
         "key": "primary.small__hover",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -504,8 +522,9 @@
         "key": "primary.small__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -592,8 +611,9 @@
         "key": "primary.small__active",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -674,8 +694,9 @@
         "key": "primary.medium__default",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -804,8 +825,9 @@
         "key": "primary.medium__hover",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -934,8 +956,9 @@
         "key": "primary.medium__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 133,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -1070,8 +1093,9 @@
         "key": "primary.medium__active",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -1200,8 +1224,9 @@
         "key": "secondary.small__default",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -1282,8 +1307,9 @@
         "key": "secondary.small__hover",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -1364,8 +1390,9 @@
         "key": "secondary.small__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -1452,8 +1479,9 @@
         "key": "secondary.small__active",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -1534,8 +1562,9 @@
         "key": "secondary.medium__default",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -1664,8 +1693,9 @@
         "key": "secondary.medium__hover",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -1794,8 +1824,9 @@
         "key": "secondary.medium__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 133,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -1930,8 +1961,9 @@
         "key": "secondary.medium__active",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -2060,8 +2092,9 @@
         "key": "error.small__default",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -2142,8 +2175,9 @@
         "key": "error.small__hover",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -2224,8 +2258,9 @@
         "key": "error.small__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -2312,8 +2347,9 @@
         "key": "error.small__active",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -2394,8 +2430,9 @@
         "key": "error.medium__default",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -2524,8 +2561,9 @@
         "key": "error.medium__hover",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -2654,8 +2692,9 @@
         "key": "error.medium__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 133,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -2790,8 +2829,9 @@
         "key": "error.medium__active",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -2920,8 +2960,9 @@
         "key": "warning.small__default",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -3002,8 +3043,9 @@
         "key": "warning.small__hover",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -3084,8 +3126,9 @@
         "key": "warning.small__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -3172,8 +3215,9 @@
         "key": "warning.small__active",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -3254,8 +3298,9 @@
         "key": "warning.medium__default",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -3384,8 +3429,9 @@
         "key": "warning.medium__hover",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -3514,8 +3560,9 @@
         "key": "warning.medium__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 133,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -3650,8 +3697,9 @@
         "key": "warning.medium__active",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -3780,8 +3828,9 @@
         "key": "info.small__default",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -3862,8 +3911,9 @@
         "key": "info.small__hover",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -3944,8 +3994,9 @@
         "key": "info.small__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -4032,8 +4083,9 @@
         "key": "info.small__active",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -4114,8 +4166,9 @@
         "key": "info.medium__default",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -4244,8 +4297,9 @@
         "key": "info.medium__hover",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -4374,8 +4428,9 @@
         "key": "info.medium__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 133,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -4510,8 +4565,9 @@
         "key": "info.medium__active",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -4640,8 +4696,9 @@
         "key": "success.small__default",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -4722,8 +4779,9 @@
         "key": "success.small__hover",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -4804,8 +4862,9 @@
         "key": "success.small__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -4892,8 +4951,9 @@
         "key": "success.small__active",
         "channelsCompared": 154,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -4974,8 +5034,9 @@
         "key": "success.medium__default",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -5104,8 +5165,9 @@
         "key": "success.medium__hover",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -5234,8 +5296,9 @@
         "key": "success.medium__focus-visible",
         "channelsCompared": 154,
         "channelsEqual": 133,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",
@@ -5370,8 +5433,9 @@
         "key": "success.medium__active",
         "channelsCompared": 154,
         "channelsEqual": 134,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "slider-rail",

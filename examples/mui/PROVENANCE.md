@@ -71,6 +71,53 @@ because a capture that reads its own promoted output stops minting the leaves
 the promoted bindings reference (the dangling-ref trap — now also caught by
 the promote-floor resolution guard).
 
+## Regen round (task #31, 2026-07-27) — MUI takes the three fixes the Carbon round proved
+
+The Carbon live-defect round (9c30204) A/B'd its engine changes over every
+library's committed contracts. tailwind, astryx, polaris and altitude came back
+BYTE-IDENTICAL; **MUI differed on 3 of 14, and all three were improvements MUI
+had not taken**. This round takes them.
+
+| script | what moved |
+|---|---|
+| `dialog.figma.js` | **D5** — the root is a viewport-pinned full-bleed scrim, so the computed floor measured its width as the CAPTURE VIEWPORT (900px, the `viewport` above) and the emitter baked it as a fixed width. Every Dialog cell drew **900px** wide, a number that exists nowhere in MUI. `boundFullBleedScrimRoot` drops it; the cell hugs its real content at **496px**. |
+| `autocomplete.figma.js` | **D6b** — `MuiAutocomplete-clearIndicator` / `-popupIndicator` are REAL BUTTONS (background + 1px border + padding + a 28px control box) that lowered to BARE GLYPHS, the box thrown away. Each is now `FRAME(box) → svg child`. |
+| `table-pagination.figma.js` | **D6b** — the two `MuiButtonBase-root` pagination arrows, same shape, 40×40. |
+
+**The contracts did not move.** Both fixes live in `core/emit-figma-script.ts`,
+which READS contracts and never writes them: `git status` after the full regen
+showed 4 changed files, all under `examples/mui/figma/`. `mui.bundle.json` and
+`00-tokens.figma.js` came back BYTE-IDENTICAL, and the compile receipt's
+variant table is unchanged. **Nothing in the capture/fusion pipeline ran, so no
+MUI floor could move** — the numbers in the tables below are the same
+measurements, not re-measured ones.
+
+Everything regenerated twice: all 17 artifacts byte-identical on the second run.
+
+### Why nothing caught the staleness — and what does now
+
+MUI's compiled scripts sat three engine fixes out of date through a 167/167
+green suite. Three gates looked at them and none could see it:
+
+* the compile receipts EXECUTE the committed scripts against the mocked Figma
+  and assert structure — a stale script executes fine;
+* `mui-figma-genesis` DOES byte-compare a rebuild, but of `mui.bundle.json`,
+  which is contracts + tokens. The engine's OUTPUT is not in it, so the bundle
+  stayed byte-FRESH while the compiled scripts rotted;
+* `plugin-engine-check`'s bundle≡script equivalence compares set shapes,
+  variant counts and the variable NAME inventory. All three fixes changed
+  geometry and node kind and moved **none** of those numbers.
+
+Two things close it. `scripts/figma-scripts-fresh.mjs` (`npm run figma:fresh`)
+re-emits every library's scripts and byte-compares — falsified by reverting one
+file. And the equivalence pins gained the two assertions that live at the level
+of the fixes (no Dialog cell may carry the 900px capture stage; the four icon
+buttons must carry a filled control box with an `-icon` child), asserted on
+BOTH the bundle path and the compiled-script path, so a stale
+`GENESIS-BATCH.figma.js` now fails by name. Polaris is the one library whose
+emit command is not recorded anywhere in the repo; the freshness gate PRINTS it
+as a named hole rather than skipping the directory.
+
 ## Gates (default-state fidelity floor)
 
 The "pre-state rounds" caveat this heading used to carry is CLOSED for the

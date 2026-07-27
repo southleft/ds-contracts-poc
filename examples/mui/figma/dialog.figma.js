@@ -33,10 +33,7 @@ const COMPONENTS = [
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0"
           },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/dialog/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -157,8 +154,7 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ],
-              "fillW": true
+              ]
             }
           ]
         }
@@ -180,10 +176,7 @@ const COMPONENTS = [
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0"
           },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/dialog/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -304,8 +297,7 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ],
-              "fillW": true
+              ]
             }
           ]
         }
@@ -327,10 +319,7 @@ const COMPONENTS = [
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0"
           },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/dialog/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -451,8 +440,7 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ],
-              "fillW": true
+              ]
             }
           ]
         }
@@ -474,10 +462,7 @@ const COMPONENTS = [
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0"
           },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/dialog/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -598,8 +583,7 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ],
-              "fillW": true
+              ]
             }
           ]
         }
@@ -621,10 +605,7 @@ const COMPONENTS = [
             "minHeight": "imported/shared/size-0",
             "minWidth": "imported/shared/size-0"
           },
-          "fixedWidth": {
-            "px": 900,
-            "varName": "imported/dialog/root/width"
-          },
+          "blockRoot": true,
           "children": [
             {
               "type": "frame",
@@ -745,14 +726,13 @@ const COMPONENTS = [
                     }
                   ]
                 }
-              ],
-              "fillW": true
+              ]
             }
           ]
         }
       }
     ],
-    "colW": 960
+    "colW": 380
   }
 ];
 const ROW_H = 240, PAD = 40;

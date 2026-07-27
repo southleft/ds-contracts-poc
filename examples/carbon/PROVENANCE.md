@@ -963,6 +963,39 @@ It is NOT turned on repo-wide in this round: four libraries would go red
 immediately and each of those numbers is its own investigation. The
 measurement is published so the next round starts from a number.
 
+### CORRECTION + repo-wide posture (silent-loss round, task #33, 2026-07-27)
+
+The next round started from that number and found it was measuring three
+different things at once. The instrument moved to `scripts/child-wider.mjs`
+(ONE implementation — Carbon's receipt now calls it) and separated a SECOND
+exemption the table above had folded in: the CSS **margin box**. A part with a
+NEGATIVE margin lowers to a wrapper frame named `"<part> (margin box)"` that
+reserves LESS layout space than the child paints. That is the entire meaning of
+a negative margin, not an overflow.
+
+| bundle | real overflows | text-caused (D4) | margin-box paint-outside |
+|---|---|---|---|
+| altitude | 0 | 0 | 0 |
+| tailwind | 0 | 0 | 0 |
+| astryx | **5** | 6 | 0 |
+| mui | **0** | 6 | 4 |
+| polaris | **0** | 0 | 42 |
+| carbon | **0** | 8 | 0 |
+
+So the repo-wide real number is **5, all of them one defect**: astryx's
+ProgressBar `fill` renders 100px inside a 48px `track` in all five Variant
+cells — a PERCENT width baked as a px literal by the computed floor. The
+published "polaris 42" was 42 negative margins; polaris has ZERO. The
+published "mui 12" was 6 text + 4 margin-box + 2 that the MUI regen round
+(task #31) closed on the way past.
+
+The posture is the repo's existing RATCHET (drift-check, parity/baseline.json):
+a committed per-library baseline in `scripts/child-wider-baseline.json` that
+may only DECREASE, two-sided so an unrecorded IMPROVEMENT also fails — a stale
+high baseline is room to regrow in silence. Every nonzero row names its cause.
+Gated by `npm run child-wider` and the `child-wider-ratchet-and-script-freshness`
+eval.
+
 ## What stays refused, by name
 
 - The checkbox **CHECKMARK** — a rotated two-border L, outside the decor

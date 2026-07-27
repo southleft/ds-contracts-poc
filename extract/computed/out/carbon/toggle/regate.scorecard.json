@@ -166,9 +166,15 @@
       "pairs": 0,
       "perfectExact": 0,
       "perfectAA": 0,
-      "meanExact": 0,
-      "meanAA": 0,
-      "maxAA": 0
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 16,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
     },
     "fusion": {
       "boundConfirmed": 0,
@@ -185,51 +191,59 @@
     "worstRows": [
       {
         "key": "untoggled.disabled__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 22
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
       },
       {
         "key": "untoggled.disabled__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 22
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
       },
       {
         "key": "untoggled.disabled__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 22
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
       },
       {
         "key": "untoggled.disabled__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 22
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 22
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 22
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 22
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
       },
       {
         "key": "toggled.disabled__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 22
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 22,
+        "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
@@ -368,8 +382,9 @@
         "key": "untoggled.enabled__default",
         "channelsCompared": 86,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -408,8 +423,9 @@
         "key": "untoggled.enabled__hover",
         "channelsCompared": 86,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -448,8 +464,9 @@
         "key": "untoggled.enabled__focus-visible",
         "channelsCompared": 86,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -488,8 +505,9 @@
         "key": "untoggled.enabled__active",
         "channelsCompared": 86,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -528,8 +546,9 @@
         "key": "untoggled.disabled__default",
         "channelsCompared": 86,
         "channelsEqual": 64,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -670,8 +689,9 @@
         "key": "untoggled.disabled__hover",
         "channelsCompared": 86,
         "channelsEqual": 64,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -812,8 +832,9 @@
         "key": "untoggled.disabled__focus-visible",
         "channelsCompared": 86,
         "channelsEqual": 64,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -954,8 +975,9 @@
         "key": "untoggled.disabled__active",
         "channelsCompared": 86,
         "channelsEqual": 64,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -1096,8 +1118,9 @@
         "key": "toggled.enabled__default",
         "channelsCompared": 86,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -1136,8 +1159,9 @@
         "key": "toggled.enabled__hover",
         "channelsCompared": 86,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -1176,8 +1200,9 @@
         "key": "toggled.enabled__focus-visible",
         "channelsCompared": 86,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -1216,8 +1241,9 @@
         "key": "toggled.enabled__active",
         "channelsCompared": 86,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -1256,8 +1282,9 @@
         "key": "toggled.disabled__default",
         "channelsCompared": 86,
         "channelsEqual": 64,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -1398,8 +1425,9 @@
         "key": "toggled.disabled__hover",
         "channelsCompared": 86,
         "channelsEqual": 64,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -1540,8 +1568,9 @@
         "key": "toggled.disabled__focus-visible",
         "channelsCompared": 86,
         "channelsEqual": 64,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",
@@ -1682,8 +1711,9 @@
         "key": "toggled.disabled__active",
         "channelsCompared": 86,
         "channelsEqual": 64,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "toggle__button",

@@ -684,6 +684,52 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   const namesB = mockB.variables.map((v) => v.name).sort().join('\n');
   assert(namesA === namesB, 'bundle path ≡ script path on the full variable NAME inventory');
 
+  // --- MUI REGEN ROUND (task #31) — REVIEW-THEN-REPIN -----------------------
+  // Every counted number above (set shapes, variant grids, variable inventory,
+  // the resolved fill) was UNMOVED by the three fixes MUI's artifacts were
+  // stale by. That is the finding, not the reassurance: these pins are
+  // STRUCTURALLY BLIND to the class of defect the fixes address, which is why
+  // GENESIS-BATCH.figma.js could sit three engine fixes out of date while this
+  // check stayed green. Two pins at the level where the fixes actually live,
+  // asserted on BOTH paths so a stale compiled script fails here too.
+  const geomOf = (mock) => {
+    const dialogCells = mock.root.findAll((n) => n.type === 'COMPONENT' && /^Max width=/.test(n.name));
+    const iconBox = (nm) => mock.root.findAll((n) => n.name === nm).map((n) => ({
+      w: Math.round(n.width), h: Math.round(n.height),
+      kid: (n.children ?? []).some((c) => c.name === `${nm}-icon`),
+      fills: (n.fills ?? []).length > 0,
+    }));
+    return {
+      dialogWidths: [...new Set(dialogCells.map((n) => Math.round(n.width)))].sort((a, b) => a - b),
+      clear: iconBox('autocomplete-clearindicator'),
+      popup: iconBox('autocomplete-popupindicator'),
+    };
+  };
+  const gA = geomOf(mockA);
+  const gB = geomOf(mockB);
+  // D5 — the Dialog root is a viewport-pinned full-bleed scrim, so the floor
+  // measured its width as the CAPTURE VIEWPORT (900px) and the emitter baked
+  // it. Every Dialog cell drew 900px wide: a number that exists nowhere in MUI.
+  assert(
+    !gA.dialogWidths.includes(900) && !gB.dialogWidths.includes(900),
+    `D5: no Dialog cell may carry the 900px CAPTURE STAGE width (bundle ${gA.dialogWidths.join('/')}, script ${gB.dialogWidths.join('/')})`,
+  );
+  assert(
+    JSON.stringify(gA.dialogWidths) === JSON.stringify(gB.dialogWidths) && gA.dialogWidths.join() === '496',
+    `D5: both paths hug the Dialog to its real content width 496 (bundle ${gA.dialogWidths.join('/')}, script ${gB.dialogWidths.join('/')})`,
+  );
+  // D6b — an icon part can also be a BOX. MUI's Autocomplete indicators are
+  // real buttons (background + 1px border + padding) that lowered to bare
+  // glyphs, throwing the whole control box away.
+  const boxOk = (rows) => rows.length > 0 && rows.every((r) => r.w === 28 && r.h === 28 && r.kid && r.fills);
+  assert(
+    boxOk(gA.clear) && boxOk(gA.popup) && boxOk(gB.clear) && boxOk(gB.popup),
+    `D6b: the Autocomplete clear/popup indicators must carry a 28x28 filled control box with an -icon child, not a bare vector (bundle ${JSON.stringify(gA.clear[0])}, script ${JSON.stringify(gB.clear[0])})`,
+  );
+  console.log(
+    `✔ MUI regen (task #31) — the three fixes are pinned where they LIVE, on both paths: Dialog cells hug 496 and can never carry the 900px capture stage again (D5); the Autocomplete indicators carry a 28x28 filled control box with an -icon child instead of a bare glyph (D6b). Every pre-existing equivalence number above was UNMOVED by these fixes — which is exactly why a stale GENESIS-BATCH could pass this check for a whole round`,
+  );
+
   // Spot-check a bound value end to end: the contained-primary Button root
   // fill must resolve (through the minted alias → base token) to MUI's
   // palette-primary-main #1976d2.

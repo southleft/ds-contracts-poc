@@ -7,7 +7,7 @@ const COMPONENTS = [
     "setName": "Card",
     "contractId": "flowbite.card",
     "anchorKey": null,
-    "description": "Card — generated from contract flowbite.card v0.2.0",
+    "description": "Card — generated from contract flowbite.card v0.2.0 †",
     "isSet": false,
     "boolProps": [],
     "textProps": [],

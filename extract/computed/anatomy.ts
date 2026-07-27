@@ -1208,11 +1208,36 @@ export function promoteAnatomy(
       // enabled-only domain would fabricate a hidden-when-disabled fact).
       const domain = allDefaultCombos.filter((combo) => union.alignedByKey.get(`${combo.key}__default`)![i]);
       const drawnRows: Array<{ combo: Combo; st: Record<string, string> }> = [];
+      // SILENT-LOSS ROUND (task #33, fix 2) — THE TWO BARE `continue`s.
+      //
+      // Both of the skips in this loop used to be silent, and between them
+      // they hid EVERY un-promoted pseudo-element:
+      //
+      //   · `content !== '""'` — text/glyph-bearing pseudo content, i.e.
+      //     every ICON-FONT GLYPH. `content: "\ea01"` is how Bootstrap,
+      //     FontAwesome and Material ligature sets draw carets, chevrons and
+      //     close ×s. The grammar cannot promote one, which is fine; saying
+      //     nothing about it is not.
+      //   · `!drawn` — which CONFLATED two completely different facts:
+      //     "legitimately hidden in this combo" (the component's own
+      //     scale-0/opacity-0 hidden state — normal, expected, not a loss)
+      //     with "painted by something the grammar cannot read"
+      //     (position:static/relative decor, gradient/shadow/outline-only
+      //     paint, opacity in (0, 0.05]). The second is exactly the shape of
+      //     Carbon's hollow checkbox, and this is the change that would have
+      //     caught it on its FIRST run.
+      //
+      // The two are reported under DIFFERENT names on purpose — a hidden
+      // state is not a limit, and a limit is not a hidden state.
+      const notDrawn = new Map<string, string>(); // reason-key -> message (deduped per part/pseudo)
       for (const combo of domain) {
         const el = union.alignedByKey.get(`${combo.key}__default`)![i];
         const st = el?.node.pseudo[pe];
         if (!st) continue;
-        if (st['content'] !== '""') continue; // text-bearing pseudo: named residue (extension findings)
+        if (st['content'] !== '""') {
+          notDrawn.set('content', `pseudo-content-not-canvas-ink: ${e.partName}${pe} carries content ${st['content']} — the bounded decor grammar promotes EMPTY-content decor boxes only. A glyph drawn by an icon-font ligature (Bootstrap/FontAwesome/Material carets, chevrons, close ×s) is real ink that does NOT reach the canvas; named refusal`);
+          continue;
+        }
         const w = px(st['width']);
         const h = px(st['height']);
         const opacity = Number(st['opacity'] ?? '1');
@@ -1229,7 +1254,31 @@ export function promoteAnatomy(
         const borderAlpha = alphaOf(st['border-top-color']);
         const paints = alpha > 0 || (maxBorder > 0 && borderAlpha > 0);
         const drawn = paints && opacity > 0.05 && w !== null && h !== null && w > 0 && h > 0 && st['position'] === 'absolute';
-        if (!drawn) continue; // hidden state of the pseudo — not drawn in this combo
+        if (!drawn) {
+          // fix 2: name WHICH of the two it is, and MEASURE it.
+          const pos = st['position'] ?? '(unset)';
+          const zeroBox = w === null || h === null || w <= 0 || h <= 0;
+          const hasGradient = (st['background-image'] ?? 'none') !== 'none';
+          const hasShadow = (st['box-shadow'] ?? 'none') !== 'none';
+          const outlineW = px(st['outline-width']) ?? 0;
+          const hasOutline = outlineW > 0 && (st['outline-style'] ?? 'none') !== 'none';
+          if (opacity === 0 || zeroBox) {
+            // the component's OWN hidden state for this combo — expected,
+            // and NOT a limit of the grammar. Named separately so it can
+            // never be mistaken for one.
+            notDrawn.set('hidden', `pseudo-decor-hidden-in-combo: ${e.partName}${pe} is not drawn in every combo (opacity ${opacity}, box ${w ?? 'null'}x${h ?? 'null'}) — the component's own hidden state, NOT a grammar limit`);
+          } else if (pos !== 'absolute') {
+            notDrawn.set('position', `pseudo-decor-outside-grammar: ${e.partName}${pe} paints at position:${pos} (${w}x${h}, opacity ${opacity}) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas`);
+          } else if (!paints && (hasGradient || hasShadow || hasOutline)) {
+            const how = [hasGradient ? `background-image: ${st['background-image']}` : null, hasShadow ? `box-shadow: ${st['box-shadow']}` : null, hasOutline ? `outline: ${outlineW}px ${st['outline-style']}` : null].filter(Boolean).join('; ');
+            notDrawn.set('paint', `pseudo-decor-outside-grammar: ${e.partName}${pe} is painted by a mechanism the grammar cannot read (${how}) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted`);
+          } else if (!paints) {
+            notDrawn.set('paint', `pseudo-decor-outside-grammar: ${e.partName}${pe} occupies ${w}x${h} at position:absolute but paints nothing the grammar reads (background-color ${st['background-color'] ?? '(unset)'}, border ${maxBorder}px ${st['border-top-color'] ?? '(unset)'}) — NOT promoted`);
+          } else if (opacity <= 0.05) {
+            notDrawn.set('opacity', `pseudo-decor-outside-grammar: ${e.partName}${pe} paints at opacity ${opacity} — inside the (0, 0.05] band the grammar treats as not-drawn. That band cannot tell a nearly-invisible DECOR box from a hidden state; named refusal rather than a guess`);
+          }
+          continue;
+        }
         if (!scaleOk) {
           refusals.push(`pseudo-decor-outside-grammar: ${e.partName}${pe} drawn with a non-identity scale transform (${t}) — the bounded v1 decor grammar carries translate-only; named refusal`);
           drawnRows.length = 0;
@@ -1237,7 +1286,14 @@ export function promoteAnatomy(
         }
         drawnRows.push({ combo, st });
       }
-      if (drawnRows.length === 0) continue;
+      if (drawnRows.length === 0) {
+        // fix 2: nothing promoted for this pseudo — say why, by name. (When
+        // SOME combos drew, the promotion proceeds and the per-combo notes
+        // are the domain's own hidden-state facts, already carried by
+        // factorPresence.)
+        for (const msg of [...notDrawn.values()].sort()) refusals.push(msg);
+        continue;
+      }
       // uniform geometry + fill over the drawn combos (translate folded)
       // Bubbled decor: offsets are parent-relative — fold the HOST's border
       // widths in (absolute children position against the PADDING box) and

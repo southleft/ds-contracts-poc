@@ -18,6 +18,7 @@
 import {
   DECLARED_CHANNELS,
   LITERAL_CHANNELS,
+  TOKEN_CHANNELS,
   STATE_PREVIEW_PROPERTY,
   STYLES_WHEN_ALLOWED,
   isNativeCheckablePart,
@@ -424,6 +425,36 @@ export function validateContract(
         const channels = new Set(Object.values(entry.map).flatMap((o) => Object.keys(o)));
         for (const ch of channels) claim(entry.prop, ch, `literalsByProp[${i}]`);
       });
+    }
+    // SILENT-LOSS ROUND (task #33, fix 4) — TOKEN CHANNELS ARE A REGISTRY.
+    // `tokens` was typed `z.record(z.string(), TokenRefSchema)` and this
+    // function whitelisted `declared` and `literals` but NOT `tokens`, so any
+    // string was a legal channel and the CSS emitters wrote it out verbatim.
+    // Live consequence: MUI's Switch carries `tokens["translate-y"]` (a
+    // SYNTHETIC channel minted by decomposeTranslate) and the stylesheet said
+    // `translate-y: var(…)` — a property no browser understands. Same class
+    // as the `-state-checked` bug. Now every channel names what each surface
+    // does with it (TOKEN_CHANNELS) or is refused BY NAME.
+    const checkTokenChannel = (cssProp: string, where: string) => {
+      if (TOKEN_CHANNELS[cssProp]) return;
+      errors.push(
+        `${contract.id}: part "${name}" ${where} sets "${cssProp}" which is not a token channel (TOKEN_CHANNELS registry — no emitter renders it; register the channel with its canvas verdict and its CSS spelling, or move the fact to declared/literals)`,
+      );
+    };
+    for (const cssProp of Object.keys(part.tokens ?? {})) checkTokenChannel(cssProp, 'tokens');
+    tokensByPropEntries(part).forEach((entry, i) => {
+      for (const overrides of Object.values(entry.map ?? {})) {
+        for (const ch of Object.keys(overrides)) checkTokenChannel(ch, `tokensByProp[${i}]`);
+      }
+    });
+    // Root `states` had NO channel gate at all (nested-part states are gated
+    // by the narrower PART_STATE_CHANNELS below) — the same hole, one level
+    // up. It uses the token vocabulary, so it is refereed by the same
+    // registry.
+    if (p.length === 1) {
+      for (const [state, m] of Object.entries(part.states ?? {})) {
+        for (const ch of Object.keys(m ?? {})) checkTokenChannel(ch, `states.${state}`);
+      }
     }
     // v14 literals: bounded channels only; literalsByProp props must be
     // declared enums with valid value keys; a channel carried by BOTH
@@ -1667,7 +1698,57 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     lines.push('', '@keyframes ds-pulse {', '  0%, 100% { opacity: 1; }', '  50% { opacity: 0.45; }', '}');
   }
 
-  return lines.join('\n') + '\n';
+  return stripCanvasOnlyChannels(lines.join('\n') + '\n');
+}
+
+/** SILENT-LOSS ROUND (task #33, fix 4) — CANVAS-ONLY CHANNELS NEVER REACH A
+ *  STYLESHEET AS AN INVALID DECLARATION, AND THE DROP IS NAMED.
+ *
+ *  `translate-x` / `translate-y` are SYNTHETIC channels minted by
+ *  `decomposeTranslate` (extract/computed/lib.ts) so the canvas can fold a
+ *  CSS transform into absolute x/y placement. They are NOT CSS properties —
+ *  CSS `translate` is ONE property taking 1-3 values, with no per-component
+ *  longhand. Until this round the emitters wrote `translate-y: var(…)` into
+ *  the stylesheet verbatim; every UA dropped the declaration in silence and
+ *  the artifact claimed the fact was carried.
+ *
+ *  Recomposing them into a single `translate:` declaration is NOT available:
+ *  the repo's own contracts condition the two components on DIFFERENT axes
+ *  (MUI Switch carries translate-y on the base rule and translate-x per
+ *  {size}×checked), and `translate` being one property means the more
+ *  specific rule would clobber the other component entirely. So the code
+ *  surface REFUSES the declaration and says so, in the stylesheet, by name.
+ *
+ *  Applied to the FINISHED css text rather than at each `decls.push` site:
+ *  there are eleven such sites across three emitters, and a filter no site
+ *  can route around is worth more than eleven guarded pushes.
+ */
+export function stripCanvasOnlyChannels(css: string): string {
+  const canvasOnly = Object.keys(TOKEN_CHANNELS).filter((c) => TOKEN_CHANNELS[c].css === 'canvas-only');
+  if (!canvasOnly.some((c) => css.includes(`${c}:`))) return css;
+  const dropRe = new RegExp(`^\\s*(${canvasOnly.join('|')})\\s*:[^\\n]*$`);
+  const refused = new Set<string>();
+  const kept: string[] = [];
+  for (const line of css.split('\n')) {
+    const m = dropRe.exec(line);
+    if (m) { refused.add(m[1]); continue; }
+    kept.push(line);
+  }
+  // A rule whose only declarations were canvas-only is now empty — drop it
+  // (an empty rule is noise, and a selector with no body is not a fact).
+  const out: string[] = [];
+  for (let i = 0; i < kept.length; i++) {
+    if (/\{\s*$/.test(kept[i]) && kept[i + 1] !== undefined && /^\s*\}\s*$/.test(kept[i + 1])) { i++; continue; }
+    out.push(kept[i]);
+  }
+  const note = [
+    '/* code-only facts — REFUSED BY NAME, not silently dropped:',
+    ...[...refused].sort().map((c) => `     ${c}: ${TOKEN_CHANNELS[c].note}`),
+    '   CSS has no per-component translate longhand and this contract conditions',
+    '   the components on different axes, so no single `translate:` declaration',
+    '   can carry them. The canvas lowers them to absolute placement. */',
+  ].join('\n');
+  return `${note}\n${out.join('\n').replace(/\n{3,}/g, '\n\n')}`;
 }
 
 // ---------------------------------------------------------------------------

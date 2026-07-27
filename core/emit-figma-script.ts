@@ -31,6 +31,7 @@
  */
 import {
   DECLARED_CHANNELS,
+  TOKEN_CHANNELS,
   STATE_PREVIEW_DEFAULT,
   STATE_PREVIEW_PROPERTY,
   isNativeCheckablePart,
@@ -154,6 +155,26 @@ export interface NodeSpec {
    *  compileComponentData into the code-only-fact footnote (†) and STRIPPED
    *  before the spec JSON is emitted — never a silent drop. */
   shadowMiss?: string;
+  /** SILENT-LOSS ROUND (task #33, fix 3) — CHANNEL MISSES.
+   *
+   *  `applyTokens`/`applyLiterals` both ended in `default: break;`. Three
+   *  separate rounds of the SAME defect are documented in this file's own
+   *  comments — padding longhands (Round 4), column-gap (Round 5), the
+   *  RadioButton ring — each one found on a canvas, by a person, after
+   *  shipping. A channel the contract CARRIES and the canvas has no field
+   *  for is a fact that was measured and then dropped, and until now the
+   *  drop left no trace anywhere.
+   *
+   *  Mirrors the existing good precedent in this file: `gradientMiss` and
+   *  `shadowMiss` are explicit "I had a value and could not draw it" markers
+   *  that reach the component description. `channelMiss` is the same marker
+   *  for the whole registry — TOKEN_CHANNELS says, per channel, whether a
+   *  native field exists; anything that is not `canvas: 'draw'` lands here,
+   *  as do the three CONDITIONAL lowerings that silently no-op (cross-axis
+   *  gap longhands, disagreeing per-side border colours). Collected by
+   *  compileComponentData into the code-only-fact footnote (†) and STRIPPED
+   *  before the spec JSON is emitted. */
+  channelMiss?: string[];
   /** B-3 finding 5: inset-0 overlay lowering. Compiled when a part carries
    *  ALL FOUR inset channels (top/right/bottom/left) resolving to 0 and does
    *  not itself declare position:relative (TextField's backdrop). The
@@ -1112,6 +1133,12 @@ function applyTokens(
       case 'border-bottom-color':
       case 'border-left-color':
         if (uniformSideStroke !== null && spec.stroke === undefined) spec.stroke = uniformSideStroke;
+        // fix 3: ONE strokes paint list serves all four sides (matrix §2), so
+        // per-side colours only lower when every carried side agrees AND a
+        // width source exists. Disagreeing sides used to no-op in silence.
+        else if (uniformSideStroke === null) {
+          miss(spec, cssProp, 'per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.');
+        }
         break;
       case 'border-width':
         spec.bindings = { ...spec.bindings, strokeWeight: varName };
@@ -1174,11 +1201,18 @@ function applyTokens(
       case 'column-gap':
         if ((spec.layout?.mode ?? 'HORIZONTAL') === 'HORIZONTAL') {
           spec.bindings = { ...spec.bindings, itemSpacing: varName };
+        } else {
+          // fix 3: the CROSS axis of a vertical stack — only observable
+          // under wrap, which Figma auto-layout expresses differently. It
+          // used to no-op in silence.
+          miss(spec, cssProp, 'the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.');
         }
         break;
       case 'row-gap':
         if (spec.layout?.mode === 'VERTICAL') {
           spec.bindings = { ...spec.bindings, itemSpacing: varName };
+        } else {
+          miss(spec, cssProp, 'the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.');
         }
         break;
       // Round 5 (canvas-gate finding): margin channels — the floor-promoted
@@ -1380,14 +1414,26 @@ function applyTokens(
         if (!Number.isNaN(v)) next.letterSpacing = v;
         break;
       }
-      default:
-        // outline-* are state/CSS concerns; max-height (dump v1.4 style
-        // fact) stays CSS-side (min-height binds since Round 5 — see the
-        // case above; the sync scripts' golden was regenerated with it).
+      default: {
+        // SILENT-LOSS ROUND (task #33, fix 3): this was a bare `break`. A
+        // channel that reaches here is either lowered OUTSIDE this switch
+        // (top/right/bottom/left and the synthetic translate-x/translate-y,
+        // handled by absolutePartPlacement / insetOverlayOffsets /
+        // boundFullBleedScrimRoot — TOKEN_CHANNELS marks those `draw`), or
+        // it has NO canvas field at all. The second class is now named.
+        const reg = TOKEN_CHANNELS[cssProp];
+        if (reg && reg.canvas !== 'draw') miss(spec, cssProp, reg.note);
         break;
+      }
     }
   }
   return next;
+}
+
+/** SILENT-LOSS ROUND (task #33, fix 3): record a carried-but-undrawable
+ *  channel on the spec. Deduplicated and sorted at collection time. */
+function miss(spec: NodeSpec, cssProp: string, why: string): void {
+  (spec.channelMiss ??= []).push(`${cssProp}: ${why}`);
 }
 
 /** v14 literals: parse a bounded literal dimension to px (rem/em at the
@@ -2913,6 +2959,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   // a silent drop, never emitted noise.
   const gradientMissLines = new Set<string>();
   const shadowMissLines = new Set<string>();
+  // SILENT-LOSS ROUND (task #33, fix 3): channel misses ride the SAME
+  // collection path as the gradient/shadow misses this file already had —
+  // one "I had a value and could not draw it" mechanism, not three.
+  const channelMissLines = new Set<string>();
   const stripMisses = (spec: NodeSpec) => {
     if (spec.gradientMiss !== undefined) {
       gradientMissLines.add(`${spec.name}.background-image: ${spec.gradientMiss}`);
@@ -2921,6 +2971,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     if (spec.shadowMiss !== undefined) {
       shadowMissLines.add(`${spec.name}.box-shadow: ${spec.shadowMiss}`);
       delete spec.shadowMiss;
+    }
+    if (spec.channelMiss !== undefined) {
+      for (const line of spec.channelMiss) channelMissLines.add(`${spec.name}.${line}`);
+      delete spec.channelMiss;
     }
     // D5: compile-side flag only — the bounding already happened on the box.
     delete spec.scrimBounded;
@@ -2961,6 +3015,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     declaredNoteLines.size > 0 ||
     gradientMissLines.size > 0 ||
     shadowMissLines.size > 0 ||
+    channelMissLines.size > 0 ||
     hasMeter ||
     scrimNotes.size > 0 ||
     hasPreviewOnlyFacts;

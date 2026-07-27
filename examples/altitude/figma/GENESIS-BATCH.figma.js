@@ -1259,7 +1259,7 @@ const COMPONENTS = [
     "setName": "Badge",
     "contractId": "altitude.badge",
     "anchorKey": null,
-    "description": "Badge — generated from contract altitude.badge v0.2.0",
+    "description": "Badge — generated from contract altitude.badge v0.2.0 †",
     "isSet": true,
     "boolProps": [],
     "textProps": [],

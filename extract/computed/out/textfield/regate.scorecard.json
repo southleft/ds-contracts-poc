@@ -235,9 +235,15 @@
       "pairs": 0,
       "perfectExact": 0,
       "perfectAA": 0,
-      "meanExact": 0,
-      "meanAA": 0,
-      "maxAA": 0
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 256,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
     },
     "fusion": {
       "boundConfirmed": 576,
@@ -254,51 +260,59 @@
     "worstRows": [
       {
         "key": "inherit.slim.on.on.on.disabled__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 49
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 49,
+        "unscorable": "no-original"
       },
       {
         "key": "inherit.slim.on.on.on.disabled__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 49
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 49,
+        "unscorable": "no-original"
       },
       {
         "key": "inherit.slim.on.on.on.disabled__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 49
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 49,
+        "unscorable": "no-original"
       },
       {
         "key": "inherit.slim.on.on.on.disabled__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 49
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 49,
+        "unscorable": "no-original"
       },
       {
         "key": "inherit.medium.on.on.on.disabled__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 48
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 48,
+        "unscorable": "no-original"
       },
       {
         "key": "inherit.medium.on.on.on.disabled__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 48
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 48,
+        "unscorable": "no-original"
       },
       {
         "key": "inherit.medium.on.on.on.disabled__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 48
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 48,
+        "unscorable": "no-original"
       },
       {
         "key": "inherit.medium.on.on.on.disabled__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 48
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 48,
+        "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
@@ -365,6 +379,7 @@
     ],
     "namedLosses": [
       "promotion: part-presence-uncorrelated: clearbutton present in 0/32 enabled combos and the presence set does not factor per-axis (nor does its ABSENCE — the round-5c complement spelling was tried) — part NOT promoted (named refusal; a phantom always-drawn part would be worse)",
+      "promotion: pseudo-decor-outside-grammar: backdrop::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 91, 211, 1) 0px 0px 0px -2px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
       "overflow: root.width — presence-prop pair ref — boolean tokensByProp has no spelling (round 4 residue)",
       "overflow: labelled__labelwrapper.width — presence-prop pair ref — boolean tokensByProp has no spelling (round 4 residue)",
       "overflow: connected.width — presence-prop pair ref — boolean tokensByProp has no spelling (round 4 residue)",
@@ -661,8 +676,9 @@
         "key": "inherit.slim.off.off.off.enabled__default",
         "channelsCompared": 104,
         "channelsEqual": 90,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -755,8 +771,9 @@
         "key": "inherit.slim.off.off.off.enabled__hover",
         "channelsCompared": 104,
         "channelsEqual": 87,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -867,8 +884,9 @@
         "key": "inherit.slim.off.off.off.enabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -991,8 +1009,9 @@
         "key": "inherit.slim.off.off.off.enabled__active",
         "channelsCompared": 104,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -1115,8 +1134,9 @@
         "key": "inherit.slim.off.off.off.disabled__default",
         "channelsCompared": 104,
         "channelsEqual": 75,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -1299,8 +1319,9 @@
         "key": "inherit.slim.off.off.off.disabled__hover",
         "channelsCompared": 104,
         "channelsEqual": 75,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -1483,8 +1504,9 @@
         "key": "inherit.slim.off.off.off.disabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 75,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -1667,8 +1689,9 @@
         "key": "inherit.slim.off.off.off.disabled__active",
         "channelsCompared": 104,
         "channelsEqual": 75,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -1851,8 +1874,9 @@
         "key": "inherit.slim.off.off.on.enabled__default",
         "channelsCompared": 148,
         "channelsEqual": 127,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -1987,8 +2011,9 @@
         "key": "inherit.slim.off.off.on.enabled__hover",
         "channelsCompared": 148,
         "channelsEqual": 124,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -2141,8 +2166,9 @@
         "key": "inherit.slim.off.off.on.enabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -2265,8 +2291,9 @@
         "key": "inherit.slim.off.off.on.enabled__active",
         "channelsCompared": 104,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -2389,8 +2416,9 @@
         "key": "inherit.slim.off.off.on.disabled__default",
         "channelsCompared": 148,
         "channelsEqual": 105,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -2657,8 +2685,9 @@
         "key": "inherit.slim.off.off.on.disabled__hover",
         "channelsCompared": 148,
         "channelsEqual": 105,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -2925,8 +2954,9 @@
         "key": "inherit.slim.off.off.on.disabled__focus-visible",
         "channelsCompared": 148,
         "channelsEqual": 105,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -3193,8 +3223,9 @@
         "key": "inherit.slim.off.off.on.disabled__active",
         "channelsCompared": 148,
         "channelsEqual": 105,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -3461,8 +3492,9 @@
         "key": "inherit.slim.off.on.off.enabled__default",
         "channelsCompared": 143,
         "channelsEqual": 128,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -3561,8 +3593,9 @@
         "key": "inherit.slim.off.on.off.enabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 125,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -3679,8 +3712,9 @@
         "key": "inherit.slim.off.on.off.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -3809,8 +3843,9 @@
         "key": "inherit.slim.off.on.off.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -3939,8 +3974,9 @@
         "key": "inherit.slim.off.on.off.disabled__default",
         "channelsCompared": 143,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -4141,8 +4177,9 @@
         "key": "inherit.slim.off.on.off.disabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -4343,8 +4380,9 @@
         "key": "inherit.slim.off.on.off.disabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -4545,8 +4583,9 @@
         "key": "inherit.slim.off.on.off.disabled__active",
         "channelsCompared": 143,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -4747,8 +4786,9 @@
         "key": "inherit.slim.off.on.on.enabled__default",
         "channelsCompared": 187,
         "channelsEqual": 165,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -4889,8 +4929,9 @@
         "key": "inherit.slim.off.on.on.enabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 162,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -5049,8 +5090,9 @@
         "key": "inherit.slim.off.on.on.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -5179,8 +5221,9 @@
         "key": "inherit.slim.off.on.on.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -5309,8 +5352,9 @@
         "key": "inherit.slim.off.on.on.disabled__default",
         "channelsCompared": 187,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -5595,8 +5639,9 @@
         "key": "inherit.slim.off.on.on.disabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -5881,8 +5926,9 @@
         "key": "inherit.slim.off.on.on.disabled__focus-visible",
         "channelsCompared": 187,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -6167,8 +6213,9 @@
         "key": "inherit.slim.off.on.on.disabled__active",
         "channelsCompared": 187,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -6453,8 +6500,9 @@
         "key": "inherit.slim.on.off.off.enabled__default",
         "channelsCompared": 143,
         "channelsEqual": 128,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -6553,8 +6601,9 @@
         "key": "inherit.slim.on.off.off.enabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 125,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -6671,8 +6720,9 @@
         "key": "inherit.slim.on.off.off.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -6801,8 +6851,9 @@
         "key": "inherit.slim.on.off.off.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -6931,8 +6982,9 @@
         "key": "inherit.slim.on.off.off.disabled__default",
         "channelsCompared": 143,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -7133,8 +7185,9 @@
         "key": "inherit.slim.on.off.off.disabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -7335,8 +7388,9 @@
         "key": "inherit.slim.on.off.off.disabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -7537,8 +7591,9 @@
         "key": "inherit.slim.on.off.off.disabled__active",
         "channelsCompared": 143,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -7739,8 +7794,9 @@
         "key": "inherit.slim.on.off.on.enabled__default",
         "channelsCompared": 187,
         "channelsEqual": 165,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -7881,8 +7937,9 @@
         "key": "inherit.slim.on.off.on.enabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 162,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -8041,8 +8098,9 @@
         "key": "inherit.slim.on.off.on.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -8171,8 +8229,9 @@
         "key": "inherit.slim.on.off.on.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -8301,8 +8360,9 @@
         "key": "inherit.slim.on.off.on.disabled__default",
         "channelsCompared": 187,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -8587,8 +8647,9 @@
         "key": "inherit.slim.on.off.on.disabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -8873,8 +8934,9 @@
         "key": "inherit.slim.on.off.on.disabled__focus-visible",
         "channelsCompared": 187,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -9159,8 +9221,9 @@
         "key": "inherit.slim.on.off.on.disabled__active",
         "channelsCompared": 187,
         "channelsEqual": 141,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -9445,8 +9508,9 @@
         "key": "inherit.slim.on.on.off.enabled__default",
         "channelsCompared": 182,
         "channelsEqual": 166,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -9551,8 +9615,9 @@
         "key": "inherit.slim.on.on.off.enabled__hover",
         "channelsCompared": 182,
         "channelsEqual": 163,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -9675,8 +9740,9 @@
         "key": "inherit.slim.on.on.off.enabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 161,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -9811,8 +9877,9 @@
         "key": "inherit.slim.on.on.off.enabled__active",
         "channelsCompared": 182,
         "channelsEqual": 161,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -9947,8 +10014,9 @@
         "key": "inherit.slim.on.on.off.disabled__default",
         "channelsCompared": 182,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -10167,8 +10235,9 @@
         "key": "inherit.slim.on.on.off.disabled__hover",
         "channelsCompared": 182,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -10387,8 +10456,9 @@
         "key": "inherit.slim.on.on.off.disabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -10607,8 +10677,9 @@
         "key": "inherit.slim.on.on.off.disabled__active",
         "channelsCompared": 182,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -10827,8 +10898,9 @@
         "key": "inherit.slim.on.on.on.enabled__default",
         "channelsCompared": 226,
         "channelsEqual": 203,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -10975,8 +11047,9 @@
         "key": "inherit.slim.on.on.on.enabled__hover",
         "channelsCompared": 226,
         "channelsEqual": 200,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -11141,8 +11214,9 @@
         "key": "inherit.slim.on.on.on.enabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 161,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -11277,8 +11351,9 @@
         "key": "inherit.slim.on.on.on.enabled__active",
         "channelsCompared": 182,
         "channelsEqual": 161,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -11413,8 +11488,9 @@
         "key": "inherit.slim.on.on.on.disabled__default",
         "channelsCompared": 226,
         "channelsEqual": 177,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -11717,8 +11793,9 @@
         "key": "inherit.slim.on.on.on.disabled__hover",
         "channelsCompared": 226,
         "channelsEqual": 177,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -12021,8 +12098,9 @@
         "key": "inherit.slim.on.on.on.disabled__focus-visible",
         "channelsCompared": 226,
         "channelsEqual": 177,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -12325,8 +12403,9 @@
         "key": "inherit.slim.on.on.on.disabled__active",
         "channelsCompared": 226,
         "channelsEqual": 177,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -12629,8 +12708,9 @@
         "key": "inherit.medium.off.off.off.enabled__default",
         "channelsCompared": 104,
         "channelsEqual": 91,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -12717,8 +12797,9 @@
         "key": "inherit.medium.off.off.off.enabled__hover",
         "channelsCompared": 104,
         "channelsEqual": 88,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -12823,8 +12904,9 @@
         "key": "inherit.medium.off.off.off.enabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -12941,8 +13023,9 @@
         "key": "inherit.medium.off.off.off.enabled__active",
         "channelsCompared": 104,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -13059,8 +13142,9 @@
         "key": "inherit.medium.off.off.off.disabled__default",
         "channelsCompared": 104,
         "channelsEqual": 76,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -13237,8 +13321,9 @@
         "key": "inherit.medium.off.off.off.disabled__hover",
         "channelsCompared": 104,
         "channelsEqual": 76,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -13415,8 +13500,9 @@
         "key": "inherit.medium.off.off.off.disabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 76,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -13593,8 +13679,9 @@
         "key": "inherit.medium.off.off.off.disabled__active",
         "channelsCompared": 104,
         "channelsEqual": 76,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -13771,8 +13858,9 @@
         "key": "inherit.medium.off.off.on.enabled__default",
         "channelsCompared": 148,
         "channelsEqual": 128,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -13901,8 +13989,9 @@
         "key": "inherit.medium.off.off.on.enabled__hover",
         "channelsCompared": 148,
         "channelsEqual": 125,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -14049,8 +14138,9 @@
         "key": "inherit.medium.off.off.on.enabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -14167,8 +14257,9 @@
         "key": "inherit.medium.off.off.on.enabled__active",
         "channelsCompared": 104,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -14285,8 +14376,9 @@
         "key": "inherit.medium.off.off.on.disabled__default",
         "channelsCompared": 148,
         "channelsEqual": 106,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -14547,8 +14639,9 @@
         "key": "inherit.medium.off.off.on.disabled__hover",
         "channelsCompared": 148,
         "channelsEqual": 106,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -14809,8 +14902,9 @@
         "key": "inherit.medium.off.off.on.disabled__focus-visible",
         "channelsCompared": 148,
         "channelsEqual": 106,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -15071,8 +15165,9 @@
         "key": "inherit.medium.off.off.on.disabled__active",
         "channelsCompared": 148,
         "channelsEqual": 106,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -15333,8 +15428,9 @@
         "key": "inherit.medium.off.on.off.enabled__default",
         "channelsCompared": 143,
         "channelsEqual": 129,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -15427,8 +15523,9 @@
         "key": "inherit.medium.off.on.off.enabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 126,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -15539,8 +15636,9 @@
         "key": "inherit.medium.off.on.off.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 124,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -15663,8 +15761,9 @@
         "key": "inherit.medium.off.on.off.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 124,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -15787,8 +15886,9 @@
         "key": "inherit.medium.off.on.off.disabled__default",
         "channelsCompared": 143,
         "channelsEqual": 112,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -15983,8 +16083,9 @@
         "key": "inherit.medium.off.on.off.disabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 112,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -16179,8 +16280,9 @@
         "key": "inherit.medium.off.on.off.disabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 112,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -16375,8 +16477,9 @@
         "key": "inherit.medium.off.on.off.disabled__active",
         "channelsCompared": 143,
         "channelsEqual": 112,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -16571,8 +16674,9 @@
         "key": "inherit.medium.off.on.on.enabled__default",
         "channelsCompared": 187,
         "channelsEqual": 166,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -16707,8 +16811,9 @@
         "key": "inherit.medium.off.on.on.enabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 163,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -16861,8 +16966,9 @@
         "key": "inherit.medium.off.on.on.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 124,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -16985,8 +17091,9 @@
         "key": "inherit.medium.off.on.on.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 124,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -17109,8 +17216,9 @@
         "key": "inherit.medium.off.on.on.disabled__default",
         "channelsCompared": 187,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -17389,8 +17497,9 @@
         "key": "inherit.medium.off.on.on.disabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -17669,8 +17778,9 @@
         "key": "inherit.medium.off.on.on.disabled__focus-visible",
         "channelsCompared": 187,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -17949,8 +18059,9 @@
         "key": "inherit.medium.off.on.on.disabled__active",
         "channelsCompared": 187,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -18229,8 +18340,9 @@
         "key": "inherit.medium.on.off.off.enabled__default",
         "channelsCompared": 143,
         "channelsEqual": 129,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -18323,8 +18435,9 @@
         "key": "inherit.medium.on.off.off.enabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 126,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -18435,8 +18548,9 @@
         "key": "inherit.medium.on.off.off.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 124,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -18559,8 +18673,9 @@
         "key": "inherit.medium.on.off.off.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 124,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -18683,8 +18798,9 @@
         "key": "inherit.medium.on.off.off.disabled__default",
         "channelsCompared": 143,
         "channelsEqual": 112,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -18879,8 +18995,9 @@
         "key": "inherit.medium.on.off.off.disabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 112,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -19075,8 +19192,9 @@
         "key": "inherit.medium.on.off.off.disabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 112,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -19271,8 +19389,9 @@
         "key": "inherit.medium.on.off.off.disabled__active",
         "channelsCompared": 143,
         "channelsEqual": 112,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -19467,8 +19586,9 @@
         "key": "inherit.medium.on.off.on.enabled__default",
         "channelsCompared": 187,
         "channelsEqual": 166,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -19603,8 +19723,9 @@
         "key": "inherit.medium.on.off.on.enabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 163,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -19757,8 +19878,9 @@
         "key": "inherit.medium.on.off.on.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 124,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -19881,8 +20003,9 @@
         "key": "inherit.medium.on.off.on.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 124,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -20005,8 +20128,9 @@
         "key": "inherit.medium.on.off.on.disabled__default",
         "channelsCompared": 187,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -20285,8 +20409,9 @@
         "key": "inherit.medium.on.off.on.disabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -20565,8 +20690,9 @@
         "key": "inherit.medium.on.off.on.disabled__focus-visible",
         "channelsCompared": 187,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -20845,8 +20971,9 @@
         "key": "inherit.medium.on.off.on.disabled__active",
         "channelsCompared": 187,
         "channelsEqual": 142,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -21125,8 +21252,9 @@
         "key": "inherit.medium.on.on.off.enabled__default",
         "channelsCompared": 182,
         "channelsEqual": 167,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -21225,8 +21353,9 @@
         "key": "inherit.medium.on.on.off.enabled__hover",
         "channelsCompared": 182,
         "channelsEqual": 164,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -21343,8 +21472,9 @@
         "key": "inherit.medium.on.on.off.enabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 162,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -21473,8 +21603,9 @@
         "key": "inherit.medium.on.on.off.enabled__active",
         "channelsCompared": 182,
         "channelsEqual": 162,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -21603,8 +21734,9 @@
         "key": "inherit.medium.on.on.off.disabled__default",
         "channelsCompared": 182,
         "channelsEqual": 148,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -21817,8 +21949,9 @@
         "key": "inherit.medium.on.on.off.disabled__hover",
         "channelsCompared": 182,
         "channelsEqual": 148,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -22031,8 +22164,9 @@
         "key": "inherit.medium.on.on.off.disabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 148,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -22245,8 +22379,9 @@
         "key": "inherit.medium.on.on.off.disabled__active",
         "channelsCompared": 182,
         "channelsEqual": 148,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -22459,8 +22594,9 @@
         "key": "inherit.medium.on.on.on.enabled__default",
         "channelsCompared": 226,
         "channelsEqual": 204,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -22601,8 +22737,9 @@
         "key": "inherit.medium.on.on.on.enabled__hover",
         "channelsCompared": 226,
         "channelsEqual": 201,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -22761,8 +22898,9 @@
         "key": "inherit.medium.on.on.on.enabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 162,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -22891,8 +23029,9 @@
         "key": "inherit.medium.on.on.on.enabled__active",
         "channelsCompared": 182,
         "channelsEqual": 162,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -23021,8 +23160,9 @@
         "key": "inherit.medium.on.on.on.disabled__default",
         "channelsCompared": 226,
         "channelsEqual": 178,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -23319,8 +23459,9 @@
         "key": "inherit.medium.on.on.on.disabled__hover",
         "channelsCompared": 226,
         "channelsEqual": 178,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -23617,8 +23758,9 @@
         "key": "inherit.medium.on.on.on.disabled__focus-visible",
         "channelsCompared": 226,
         "channelsEqual": 178,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -23915,8 +24057,9 @@
         "key": "inherit.medium.on.on.on.disabled__active",
         "channelsCompared": 226,
         "channelsEqual": 178,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -24213,8 +24356,9 @@
         "key": "borderless.slim.off.off.off.enabled__default",
         "channelsCompared": 104,
         "channelsEqual": 83,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -24349,8 +24493,9 @@
         "key": "borderless.slim.off.off.off.enabled__hover",
         "channelsCompared": 104,
         "channelsEqual": 83,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -24485,8 +24630,9 @@
         "key": "borderless.slim.off.off.off.enabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -24633,8 +24779,9 @@
         "key": "borderless.slim.off.off.off.enabled__active",
         "channelsCompared": 104,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -24781,8 +24928,9 @@
         "key": "borderless.slim.off.off.off.disabled__default",
         "channelsCompared": 104,
         "channelsEqual": 79,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -24941,8 +25089,9 @@
         "key": "borderless.slim.off.off.off.disabled__hover",
         "channelsCompared": 104,
         "channelsEqual": 79,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -25101,8 +25250,9 @@
         "key": "borderless.slim.off.off.off.disabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 79,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -25261,8 +25411,9 @@
         "key": "borderless.slim.off.off.off.disabled__active",
         "channelsCompared": 104,
         "channelsEqual": 79,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -25421,8 +25572,9 @@
         "key": "borderless.slim.off.off.on.enabled__default",
         "channelsCompared": 148,
         "channelsEqual": 120,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -25599,8 +25751,9 @@
         "key": "borderless.slim.off.off.on.enabled__hover",
         "channelsCompared": 148,
         "channelsEqual": 120,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -25777,8 +25930,9 @@
         "key": "borderless.slim.off.off.on.enabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -25925,8 +26079,9 @@
         "key": "borderless.slim.off.off.on.enabled__active",
         "channelsCompared": 104,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -26073,8 +26228,9 @@
         "key": "borderless.slim.off.off.on.disabled__default",
         "channelsCompared": 148,
         "channelsEqual": 109,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -26317,8 +26473,9 @@
         "key": "borderless.slim.off.off.on.disabled__hover",
         "channelsCompared": 148,
         "channelsEqual": 109,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -26561,8 +26718,9 @@
         "key": "borderless.slim.off.off.on.disabled__focus-visible",
         "channelsCompared": 148,
         "channelsEqual": 109,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -26805,8 +26963,9 @@
         "key": "borderless.slim.off.off.on.disabled__active",
         "channelsCompared": 148,
         "channelsEqual": 109,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -27049,8 +27208,9 @@
         "key": "borderless.slim.off.on.off.enabled__default",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -27191,8 +27351,9 @@
         "key": "borderless.slim.off.on.off.enabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -27333,8 +27494,9 @@
         "key": "borderless.slim.off.on.off.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 119,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -27487,8 +27649,9 @@
         "key": "borderless.slim.off.on.off.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 119,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -27641,8 +27804,9 @@
         "key": "borderless.slim.off.on.off.disabled__default",
         "channelsCompared": 143,
         "channelsEqual": 115,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -27819,8 +27983,9 @@
         "key": "borderless.slim.off.on.off.disabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 115,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -27997,8 +28162,9 @@
         "key": "borderless.slim.off.on.off.disabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 115,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -28175,8 +28341,9 @@
         "key": "borderless.slim.off.on.off.disabled__active",
         "channelsCompared": 143,
         "channelsEqual": 115,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -28353,8 +28520,9 @@
         "key": "borderless.slim.off.on.on.enabled__default",
         "channelsCompared": 187,
         "channelsEqual": 158,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -28537,8 +28705,9 @@
         "key": "borderless.slim.off.on.on.enabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 158,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -28721,8 +28890,9 @@
         "key": "borderless.slim.off.on.on.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 119,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -28875,8 +29045,9 @@
         "key": "borderless.slim.off.on.on.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 119,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -29029,8 +29200,9 @@
         "key": "borderless.slim.off.on.on.disabled__default",
         "channelsCompared": 187,
         "channelsEqual": 145,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -29291,8 +29463,9 @@
         "key": "borderless.slim.off.on.on.disabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 145,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -29553,8 +29726,9 @@
         "key": "borderless.slim.off.on.on.disabled__focus-visible",
         "channelsCompared": 187,
         "channelsEqual": 145,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -29815,8 +29989,9 @@
         "key": "borderless.slim.off.on.on.disabled__active",
         "channelsCompared": 187,
         "channelsEqual": 145,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -30077,8 +30252,9 @@
         "key": "borderless.slim.on.off.off.enabled__default",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -30219,8 +30395,9 @@
         "key": "borderless.slim.on.off.off.enabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -30361,8 +30538,9 @@
         "key": "borderless.slim.on.off.off.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 119,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -30515,8 +30693,9 @@
         "key": "borderless.slim.on.off.off.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 119,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -30669,8 +30848,9 @@
         "key": "borderless.slim.on.off.off.disabled__default",
         "channelsCompared": 143,
         "channelsEqual": 115,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -30847,8 +31027,9 @@
         "key": "borderless.slim.on.off.off.disabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 115,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -31025,8 +31206,9 @@
         "key": "borderless.slim.on.off.off.disabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 115,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -31203,8 +31385,9 @@
         "key": "borderless.slim.on.off.off.disabled__active",
         "channelsCompared": 143,
         "channelsEqual": 115,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -31381,8 +31564,9 @@
         "key": "borderless.slim.on.off.on.enabled__default",
         "channelsCompared": 187,
         "channelsEqual": 158,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -31565,8 +31749,9 @@
         "key": "borderless.slim.on.off.on.enabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 158,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -31749,8 +31934,9 @@
         "key": "borderless.slim.on.off.on.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 119,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -31903,8 +32089,9 @@
         "key": "borderless.slim.on.off.on.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 119,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -32057,8 +32244,9 @@
         "key": "borderless.slim.on.off.on.disabled__default",
         "channelsCompared": 187,
         "channelsEqual": 145,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -32319,8 +32507,9 @@
         "key": "borderless.slim.on.off.on.disabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 145,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -32581,8 +32770,9 @@
         "key": "borderless.slim.on.off.on.disabled__focus-visible",
         "channelsCompared": 187,
         "channelsEqual": 145,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -32843,8 +33033,9 @@
         "key": "borderless.slim.on.off.on.disabled__active",
         "channelsCompared": 187,
         "channelsEqual": 145,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -33105,8 +33296,9 @@
         "key": "borderless.slim.on.on.off.enabled__default",
         "channelsCompared": 182,
         "channelsEqual": 159,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -33253,8 +33445,9 @@
         "key": "borderless.slim.on.on.off.enabled__hover",
         "channelsCompared": 182,
         "channelsEqual": 159,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -33401,8 +33594,9 @@
         "key": "borderless.slim.on.on.off.enabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 157,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -33561,8 +33755,9 @@
         "key": "borderless.slim.on.on.off.enabled__active",
         "channelsCompared": 182,
         "channelsEqual": 157,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -33721,8 +33916,9 @@
         "key": "borderless.slim.on.on.off.disabled__default",
         "channelsCompared": 182,
         "channelsEqual": 151,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -33917,8 +34113,9 @@
         "key": "borderless.slim.on.on.off.disabled__hover",
         "channelsCompared": 182,
         "channelsEqual": 151,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -34113,8 +34310,9 @@
         "key": "borderless.slim.on.on.off.disabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 151,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -34309,8 +34507,9 @@
         "key": "borderless.slim.on.on.off.disabled__active",
         "channelsCompared": 182,
         "channelsEqual": 151,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -34505,8 +34704,9 @@
         "key": "borderless.slim.on.on.on.enabled__default",
         "channelsCompared": 226,
         "channelsEqual": 196,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -34695,8 +34895,9 @@
         "key": "borderless.slim.on.on.on.enabled__hover",
         "channelsCompared": 226,
         "channelsEqual": 196,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -34885,8 +35086,9 @@
         "key": "borderless.slim.on.on.on.enabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 157,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -35045,8 +35247,9 @@
         "key": "borderless.slim.on.on.on.enabled__active",
         "channelsCompared": 182,
         "channelsEqual": 157,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -35205,8 +35408,9 @@
         "key": "borderless.slim.on.on.on.disabled__default",
         "channelsCompared": 226,
         "channelsEqual": 181,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -35485,8 +35689,9 @@
         "key": "borderless.slim.on.on.on.disabled__hover",
         "channelsCompared": 226,
         "channelsEqual": 181,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -35765,8 +35970,9 @@
         "key": "borderless.slim.on.on.on.disabled__focus-visible",
         "channelsCompared": 226,
         "channelsEqual": 181,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -36045,8 +36251,9 @@
         "key": "borderless.slim.on.on.on.disabled__active",
         "channelsCompared": 226,
         "channelsEqual": 181,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -36325,8 +36532,9 @@
         "key": "borderless.medium.off.off.off.enabled__default",
         "channelsCompared": 104,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -36449,8 +36657,9 @@
         "key": "borderless.medium.off.off.off.enabled__hover",
         "channelsCompared": 104,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -36573,8 +36782,9 @@
         "key": "borderless.medium.off.off.off.enabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 83,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -36709,8 +36919,9 @@
         "key": "borderless.medium.off.off.off.enabled__active",
         "channelsCompared": 104,
         "channelsEqual": 83,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -36845,8 +37056,9 @@
         "key": "borderless.medium.off.off.off.disabled__default",
         "channelsCompared": 104,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -36993,8 +37205,9 @@
         "key": "borderless.medium.off.off.off.disabled__hover",
         "channelsCompared": 104,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -37141,8 +37354,9 @@
         "key": "borderless.medium.off.off.off.disabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -37289,8 +37503,9 @@
         "key": "borderless.medium.off.off.off.disabled__active",
         "channelsCompared": 104,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -37437,8 +37652,9 @@
         "key": "borderless.medium.off.off.on.enabled__default",
         "channelsCompared": 148,
         "channelsEqual": 122,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -37603,8 +37819,9 @@
         "key": "borderless.medium.off.off.on.enabled__hover",
         "channelsCompared": 148,
         "channelsEqual": 122,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -37769,8 +37986,9 @@
         "key": "borderless.medium.off.off.on.enabled__focus-visible",
         "channelsCompared": 104,
         "channelsEqual": 83,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -37905,8 +38123,9 @@
         "key": "borderless.medium.off.off.on.enabled__active",
         "channelsCompared": 104,
         "channelsEqual": 83,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -38041,8 +38260,9 @@
         "key": "borderless.medium.off.off.on.disabled__default",
         "channelsCompared": 148,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -38273,8 +38493,9 @@
         "key": "borderless.medium.off.off.on.disabled__hover",
         "channelsCompared": 148,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -38505,8 +38726,9 @@
         "key": "borderless.medium.off.off.on.disabled__focus-visible",
         "channelsCompared": 148,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -38737,8 +38959,9 @@
         "key": "borderless.medium.off.off.on.disabled__active",
         "channelsCompared": 148,
         "channelsEqual": 111,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -38969,8 +39192,9 @@
         "key": "borderless.medium.off.on.off.enabled__default",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -39099,8 +39323,9 @@
         "key": "borderless.medium.off.on.off.enabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -39229,8 +39454,9 @@
         "key": "borderless.medium.off.on.off.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -39371,8 +39597,9 @@
         "key": "borderless.medium.off.on.off.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -39513,8 +39740,9 @@
         "key": "borderless.medium.off.on.off.disabled__default",
         "channelsCompared": 143,
         "channelsEqual": 117,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -39679,8 +39907,9 @@
         "key": "borderless.medium.off.on.off.disabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 117,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -39845,8 +40074,9 @@
         "key": "borderless.medium.off.on.off.disabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 117,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -40011,8 +40241,9 @@
         "key": "borderless.medium.off.on.off.disabled__active",
         "channelsCompared": 143,
         "channelsEqual": 117,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -40177,8 +40408,9 @@
         "key": "borderless.medium.off.on.on.enabled__default",
         "channelsCompared": 187,
         "channelsEqual": 160,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -40349,8 +40581,9 @@
         "key": "borderless.medium.off.on.on.enabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 160,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -40521,8 +40754,9 @@
         "key": "borderless.medium.off.on.on.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -40663,8 +40897,9 @@
         "key": "borderless.medium.off.on.on.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -40805,8 +41040,9 @@
         "key": "borderless.medium.off.on.on.disabled__default",
         "channelsCompared": 187,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -41055,8 +41291,9 @@
         "key": "borderless.medium.off.on.on.disabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -41305,8 +41542,9 @@
         "key": "borderless.medium.off.on.on.disabled__focus-visible",
         "channelsCompared": 187,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -41555,8 +41793,9 @@
         "key": "borderless.medium.off.on.on.disabled__active",
         "channelsCompared": 187,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -41805,8 +42044,9 @@
         "key": "borderless.medium.on.off.off.enabled__default",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -41935,8 +42175,9 @@
         "key": "borderless.medium.on.off.off.enabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 123,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -42065,8 +42306,9 @@
         "key": "borderless.medium.on.off.off.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -42207,8 +42449,9 @@
         "key": "borderless.medium.on.off.off.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -42349,8 +42592,9 @@
         "key": "borderless.medium.on.off.off.disabled__default",
         "channelsCompared": 143,
         "channelsEqual": 117,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -42515,8 +42759,9 @@
         "key": "borderless.medium.on.off.off.disabled__hover",
         "channelsCompared": 143,
         "channelsEqual": 117,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -42681,8 +42926,9 @@
         "key": "borderless.medium.on.off.off.disabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 117,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -42847,8 +43093,9 @@
         "key": "borderless.medium.on.off.off.disabled__active",
         "channelsCompared": 143,
         "channelsEqual": 117,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -43013,8 +43260,9 @@
         "key": "borderless.medium.on.off.on.enabled__default",
         "channelsCompared": 187,
         "channelsEqual": 160,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -43185,8 +43433,9 @@
         "key": "borderless.medium.on.off.on.enabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 160,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -43357,8 +43606,9 @@
         "key": "borderless.medium.on.off.on.enabled__focus-visible",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -43499,8 +43749,9 @@
         "key": "borderless.medium.on.off.on.enabled__active",
         "channelsCompared": 143,
         "channelsEqual": 121,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -43641,8 +43892,9 @@
         "key": "borderless.medium.on.off.on.disabled__default",
         "channelsCompared": 187,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -43891,8 +44143,9 @@
         "key": "borderless.medium.on.off.on.disabled__hover",
         "channelsCompared": 187,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -44141,8 +44394,9 @@
         "key": "borderless.medium.on.off.on.disabled__focus-visible",
         "channelsCompared": 187,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -44391,8 +44645,9 @@
         "key": "borderless.medium.on.off.on.disabled__active",
         "channelsCompared": 187,
         "channelsEqual": 147,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -44641,8 +44896,9 @@
         "key": "borderless.medium.on.on.off.enabled__default",
         "channelsCompared": 182,
         "channelsEqual": 161,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -44777,8 +45033,9 @@
         "key": "borderless.medium.on.on.off.enabled__hover",
         "channelsCompared": 182,
         "channelsEqual": 161,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -44913,8 +45170,9 @@
         "key": "borderless.medium.on.on.off.enabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 159,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -45061,8 +45319,9 @@
         "key": "borderless.medium.on.on.off.enabled__active",
         "channelsCompared": 182,
         "channelsEqual": 159,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -45209,8 +45468,9 @@
         "key": "borderless.medium.on.on.off.disabled__default",
         "channelsCompared": 182,
         "channelsEqual": 153,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -45393,8 +45653,9 @@
         "key": "borderless.medium.on.on.off.disabled__hover",
         "channelsCompared": 182,
         "channelsEqual": 153,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -45577,8 +45838,9 @@
         "key": "borderless.medium.on.on.off.disabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 153,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -45761,8 +46023,9 @@
         "key": "borderless.medium.on.on.off.disabled__active",
         "channelsCompared": 182,
         "channelsEqual": 153,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -45945,8 +46208,9 @@
         "key": "borderless.medium.on.on.on.enabled__default",
         "channelsCompared": 226,
         "channelsEqual": 198,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -46123,8 +46387,9 @@
         "key": "borderless.medium.on.on.on.enabled__hover",
         "channelsCompared": 226,
         "channelsEqual": 198,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -46301,8 +46566,9 @@
         "key": "borderless.medium.on.on.on.enabled__focus-visible",
         "channelsCompared": 182,
         "channelsEqual": 159,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -46449,8 +46715,9 @@
         "key": "borderless.medium.on.on.on.enabled__active",
         "channelsCompared": 182,
         "channelsEqual": 159,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -46597,8 +46864,9 @@
         "key": "borderless.medium.on.on.on.disabled__default",
         "channelsCompared": 226,
         "channelsEqual": 183,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -46865,8 +47133,9 @@
         "key": "borderless.medium.on.on.on.disabled__hover",
         "channelsCompared": 226,
         "channelsEqual": 183,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -47133,8 +47402,9 @@
         "key": "borderless.medium.on.on.on.disabled__focus-visible",
         "channelsCompared": 226,
         "channelsEqual": 183,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",
@@ -47401,8 +47671,9 @@
         "key": "borderless.medium.on.on.on.disabled__active",
         "channelsCompared": 226,
         "channelsEqual": 183,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "labelled__labelwrapper",

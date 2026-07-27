@@ -532,9 +532,15 @@
       "pairs": 0,
       "perfectExact": 0,
       "perfectAA": 0,
-      "meanExact": 0,
-      "meanAA": 0,
-      "maxAA": 0
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 4,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
     },
     "fusion": {
       "boundConfirmed": 0,
@@ -551,27 +557,31 @@
     "worstRows": [
       {
         "key": "__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 25
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 25,
+        "unscorable": "no-original"
       },
       {
         "key": "__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 24
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 24,
+        "unscorable": "no-original"
       },
       {
         "key": "__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 21
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 21,
+        "unscorable": "no-original"
       },
       {
         "key": "__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 20
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 20,
+        "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
@@ -788,8 +798,9 @@
         "key": "__default",
         "channelsCompared": 310,
         "channelsEqual": 290,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "part-1",
@@ -918,8 +929,9 @@
         "key": "__hover",
         "channelsCompared": 310,
         "channelsEqual": 286,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "part-1",
@@ -1072,8 +1084,9 @@
         "key": "__focus-visible",
         "channelsCompared": 310,
         "channelsEqual": 289,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "part-1",
@@ -1208,8 +1221,9 @@
         "key": "__active",
         "channelsCompared": 310,
         "channelsEqual": 285,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "part-1",

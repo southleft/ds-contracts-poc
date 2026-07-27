@@ -519,6 +519,147 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
   },
 };
 
+/** SILENT-LOSS ROUND (task #33, fix 4) — THE TOKEN-CHANNEL REGISTRY.
+ *
+ *  `tokens` was typed `z.record(z.string(), TokenRefSchema)`: ANY string was a
+ *  legal channel, and `validateContract` whitelisted `declared` and
+ *  `literals` but never `tokens`. The consequence was live, not theoretical —
+ *  `examples/mui/contracts/switch.contract.json` carries
+ *  `tokens["translate-y"]`, a SYNTHETIC channel invented by
+ *  `decomposeTranslate` (extract/computed/lib.ts), and the React/HTML
+ *  emitters wrote `translate-y: var(…)` into the stylesheet: a property no
+ *  browser understands, dropped by every UA in silence. That is the same
+ *  class as the `-state-checked` bug this repo thought it had closed.
+ *
+ *  Every channel an emitter can carry is registered HERE, with two verdicts:
+ *
+ *   · `canvas` — 'draw'       a native Figma field expresses it (applyTokens,
+ *                             or one of the named out-of-switch lowerings:
+ *                             absolutePartPlacement / insetOverlayOffsets /
+ *                             boundFullBleedScrimRoot).
+ *                'state-only' drawn ONLY on the state-preview plane (the
+ *                             ':outline-preview' stamp — a RESTING CSS
+ *                             outline paints nothing, so the base plane
+ *                             deliberately does not draw it).
+ *                'annotate'   the contract carries a value and the canvas has
+ *                             NO field for it. `channelMiss` says so on the
+ *                             component (fix 3) — declared-not-drawn, never a
+ *                             silent drop.
+ *   · `css`    — 'verbatim'   the channel name IS the CSS property.
+ *                'canvas-only' a SYNTHETIC channel with no CSS spelling; the
+ *                             code emitters refuse it BY NAME in the emitted
+ *                             stylesheet instead of writing an invalid
+ *                             declaration (see foldTranslateDecls).
+ *
+ *  An unregistered channel is REFUSED BY NAME by validateContract. Adding a
+ *  channel is a deliberate act: you must say what each surface does with it.
+ */
+export interface TokenChannelSpec {
+  canvas: 'draw' | 'annotate' | 'state-only';
+  css: 'verbatim' | 'canvas-only';
+  /** Why this verdict — quoted into the channelMiss note / the refusal. */
+  note: string;
+}
+
+const drawn = (note: string): TokenChannelSpec => ({ canvas: 'draw', css: 'verbatim', note });
+const annotated = (note: string): TokenChannelSpec => ({ canvas: 'annotate', css: 'verbatim', note });
+
+export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
+  // -- paint -----------------------------------------------------------------
+  'background': drawn('fills[0] (the CSS shorthand colour layer).'),
+  'background-color': drawn('fills[0].'),
+  'background-image': drawn('a parsed linear gradient appends as a GRADIENT_LINEAR paint; radial/conic/unparseable values fall to gradientMiss.'),
+  'box-shadow': drawn('DROP_SHADOW effect / effect stack; values outside the stack grammar fall to shadowMiss.'),
+  'color': drawn('the text node fill.'),
+  'fill': drawn('baked into the promoted glyph markup (iconSvg), like currentColor bakes the text colour.'),
+  'opacity': drawn('the node opacity (literal — Figma opacity is percent-scaled, so the 0-1 token is not bound).'),
+  // -- border ----------------------------------------------------------------
+  'border-color': drawn('the strokes paint.'),
+  'border-top-color': drawn('one strokes paint serves all four sides — lowered only when every carried side agrees.'),
+  'border-right-color': drawn('one strokes paint serves all four sides — lowered only when every carried side agrees.'),
+  'border-bottom-color': drawn('one strokes paint serves all four sides — lowered only when every carried side agrees.'),
+  'border-left-color': drawn('one strokes paint serves all four sides — lowered only when every carried side agrees.'),
+  'border-width': drawn('strokeWeight.'),
+  'border-top-width': drawn('strokeTopWeight.'),
+  'border-right-width': drawn('strokeRightWeight.'),
+  'border-bottom-width': drawn('strokeBottomWeight.'),
+  'border-left-width': drawn('strokeLeftWeight.'),
+  'border-radius': drawn('all four corner radius fields.'),
+  'border-top-left-radius': drawn('topLeftRadius.'),
+  'border-top-right-radius': drawn('topRightRadius.'),
+  'border-bottom-left-radius': drawn('bottomLeftRadius.'),
+  'border-bottom-right-radius': drawn('bottomRightRadius.'),
+  // -- box -------------------------------------------------------------------
+  'width': drawn('a fixed width.'),
+  'height': drawn('a fixed height.'),
+  'min-width': drawn('minWidth.'),
+  'min-height': drawn('minHeight (suppressed when the same part carries height — a fixed height is the drawn design truth).'),
+  'max-width': drawn('a root/text part bakes it as a fixed width; any other part binds the real maxWidth ceiling and hugs beneath it.'),
+  'padding-inline': drawn('paddingLeft + paddingRight.'),
+  'padding-block': drawn('paddingTop + paddingBottom.'),
+  'padding-left': drawn('paddingLeft.'),
+  'padding-right': drawn('paddingRight.'),
+  'padding-top': drawn('paddingTop.'),
+  'padding-bottom': drawn('paddingBottom.'),
+  'gap': drawn('itemSpacing.'),
+  'column-gap': drawn('itemSpacing on a HORIZONTAL stack; on a VERTICAL stack it is the CROSS axis and only matters under wrap — CSS-side there.'),
+  'row-gap': drawn('itemSpacing on a VERTICAL stack; on a HORIZONTAL stack it is the CROSS axis — CSS-side there.'),
+  'margin-top': drawn('the margin-box wrapper / sibling-gap itemSpacing lowering.'),
+  'margin-right': drawn('the margin-box wrapper / sibling-gap itemSpacing lowering.'),
+  'margin-bottom': drawn('the margin-box wrapper / sibling-gap itemSpacing lowering.'),
+  'margin-left': drawn('the margin-box wrapper / sibling-gap itemSpacing lowering.'),
+  // -- absolute placement (lowered OUTSIDE applyTokens) ----------------------
+  'top': drawn('absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot — absolute offsets, not a switch case.'),
+  'right': drawn('absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot.'),
+  'bottom': drawn('absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot.'),
+  'left': drawn('absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot.'),
+  // -- SYNTHETIC: minted by decomposeTranslate, canvas-only ------------------
+  //  CSS has NO per-component translate longhand — `translate` is ONE
+  //  property taking 1-3 values. The repo's own contracts condition the two
+  //  components on DIFFERENT axes (MUI Switch: translate-y on the base rule,
+  //  translate-x per {size}×checked), so no single-property recomposition
+  //  exists that would not silently clobber the other component. The canvas
+  //  lowering (absolutePartPlacement) folds them into x/y offsets, which is
+  //  exactly where a per-axis-conditioned offset belongs; the code emitters
+  //  refuse the declaration BY NAME in the stylesheet.
+  'translate-x': { canvas: 'draw', css: 'canvas-only', note: 'SYNTHETIC (decomposeTranslate) — folded into absolute x placement on canvas; CSS has no translate-x longhand.' },
+  'translate-y': { canvas: 'draw', css: 'canvas-only', note: 'SYNTHETIC (decomposeTranslate) — folded into absolute y placement on canvas; CSS has no translate-y longhand.' },
+  // -- type ------------------------------------------------------------------
+  'font-family': drawn('the text node family (falls back to Inter when unavailable — named limit).'),
+  'font-size': drawn('fontSize.'),
+  'font-weight': drawn('the font STYLE name (Regular/Medium/Semi Bold/Bold).'),
+  'line-height': drawn('pixel lineHeight on text nodes.'),
+  'letter-spacing': drawn('pixel letterSpacing on text nodes.'),
+  // -- state-only ------------------------------------------------------------
+  'outline-color': {
+    canvas: 'state-only', css: 'verbatim',
+    note: 'a RESTING CSS outline has outline-style:none and paints nothing, so the base plane deliberately draws it nowhere; the state-preview stamp lowers it to an OUTSIDE-aligned stroke.',
+  },
+  'outline-width': {
+    canvas: 'state-only', css: 'verbatim',
+    note: 'state-preview only — the base plane draws no resting outline (drawing it inflated every toned base cell by the ring).',
+  },
+  'outline-offset': annotated('Figma strokes have no offset field — an outside-aligned stroke sits flush against the box.'),
+  // -- annotate: carried by the contract, NO canvas field --------------------
+  'flex-basis': annotated('Figma auto-layout has no flex-basis; sizing is hug/fill/fixed.'),
+  'flex-grow': annotated('the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.'),
+  'flex-shrink': annotated('Figma auto-layout children do not shrink below their content — there is no shrink factor.'),
+  'grid-template-columns': annotated('Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.'),
+  'grid-template-rows': annotated('Figma has no grid track sizing.'),
+  'grid-column-start': annotated('Figma has no grid placement.'),
+  'grid-row-start': annotated('Figma has no grid placement.'),
+  'grid-row-end': annotated('Figma has no grid placement.'),
+  'max-height': annotated('Figma has no maxHeight field (maxWidth exists; its height twin does not).'),
+  'text-indent': annotated('Figma text nodes have no first-line indent.'),
+  'vertical-align': annotated('Figma has no inline baseline alignment; auto-layout counterAxisAlignItems is the nearest, coarser, fact.'),
+  'z-index': annotated('paint order on canvas is CHILD ORDER — a z-index a part carries independently of its DOM order has no field.'),
+  'row-rule-color': annotated('a Chromium GAP-DECORATION longhand (CSS gap decorations) that the computed sweep enumerates for every element — nobody authored it, and neither surface paints it. Registered so it is CARRIED and NAMED rather than silently believed.'),
+  'column-rule-color': annotated('a column-rule longhand the computed sweep enumerates; the canvas has no column rules.'),
+  'caret-color': annotated('the text caret is runtime UI, not canvas ink.'),
+  'text-decoration-color': annotated('Figma textDecoration is an enum with no independent colour.'),
+  'text-emphasis-color': annotated('Figma has no text-emphasis marks.'),
+};
+
 /** Schema-level value guard for declared facts: never a token ref, never a
  *  CSS injection vector. The per-channel grammar refusal lives in
  *  validateContract (generator level) where messages can name the channel. */

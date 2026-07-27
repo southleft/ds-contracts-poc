@@ -238,6 +238,32 @@ for (const file of scripts) {
     // w/h/x/y and nobody was asserting on them. One layout pin per live
     // defect, each of which FAILS against the pre-round artifacts.
     const rootsOf = () => mock.root.findAll((n) => n.type === 'COMPONENT');
+    // MUI REGEN ROUND (task #31) — D6b, AN ICON PART CAN ALSO BE A BOX.
+    // The icon lowering used to compile a glyph-hosting part to a BARE svg
+    // node sized by `icon.size`, throwing away the part's own box: its
+    // background, its border, its padding, its control size. MUI's
+    // Autocomplete indicators and TablePagination arrows are exactly that
+    // shape — REAL BUTTONS (background + 1px border + padding) drawn on the
+    // canvas as naked glyphs. The fix lowers a box-carrying icon part to
+    // FRAME(box) → svg child. This pin asserts the BOX, not the glyph: a
+    // regression to the bare-vector lowering fails by name.
+    const iconButtonPin = (label, partName, w, h) => {
+      const nodes = partNamed(partName);
+      if (nodes.length === 0) throw new Error(`${label} pin: part "${partName}" missing`);
+      for (const n of nodes) {
+        const kid = (n.children ?? []).find((c) => c.name === `${partName}-icon`);
+        if (!kid) {
+          throw new Error(
+            `${label} pin (D6b BARE GLYPH): "${partName}" has no "${partName}-icon" child — a box-carrying icon part must lower to FRAME(box) → svg child, not a bare vector (children: ${(n.children ?? []).map((c) => c.name).join(', ') || 'none'})`,
+          );
+        }
+        if (Math.round(n.width) !== w || Math.round(n.height) !== h) {
+          throw new Error(`${label} pin (D6b): "${partName}" control box is ${Math.round(n.width)}x${Math.round(n.height)}, expected ${w}x${h}`);
+        }
+        if (!(n.fills ?? []).length) throw new Error(`${label} pin (D6b): "${partName}" carries no fill — the button's own background was dropped`);
+        if (!(n.paddingLeft > 0)) throw new Error(`${label} pin (D6b): "${partName}" reserves no padding around the glyph (padL=${n.paddingLeft})`);
+      }
+    };
     if (name === 'dialog') {
       // the modal pair: backdrop part + the paper carrying the content text
       if (partNamed('backdrop-root').length === 0) throw new Error('dialog pin: backdrop-root missing — the modal backdrop part collapsed');
@@ -280,6 +306,22 @@ for (const file of scripts) {
       // the focus-trap sentinels are DOM plumbing, never canvas anatomy
       const sentinels = mock.root.findAll((n) => /^part-\d+$/.test(n.name));
       if (sentinels.length > 0) throw new Error(`dialog pin: ${sentinels.length} classless focus-trap sentinel part(s) reached the canvas (${sentinels.map((n) => n.name).join(', ')})`);
+      // MUI REGEN ROUND (task #31) — D5, THE CAPTURE STAGE IS NOT A DESIGN
+      // WIDTH. Dialog's root is a viewport-pinned full-bleed scrim, so the
+      // computed floor measured its width as the CAPTURE VIEWPORT (900px,
+      // examples/mui/PROVENANCE.md `viewport`) and the emitter baked that
+      // number as the component's fixed width. Every Dialog cell drew 900px
+      // wide — a number that exists nowhere in MUI. `boundFullBleedScrimRoot`
+      // (core/emit-figma-script.ts) drops it; the root becomes a blockRoot
+      // and the cell hugs its real content. Pinned at the number so a
+      // regression to the stage size can never ship silently again.
+      for (const v of rootsOf()) {
+        const w = Math.round(v.width);
+        if (w === 900) {
+          throw new Error(`dialog pin (D5 CAPTURE STAGE): ${v.name} is ${w}px wide — that is the capture VIEWPORT width, not a MUI design width; the full-bleed scrim root must not carry it`);
+        }
+        if (w !== 496) throw new Error(`dialog pin (D5): ${v.name} is ${w}px wide, expected the content-hugged 496 (a moved number is a real change — re-review, then re-pin)`);
+      }
     }
     if (name === 'menu') {
       for (const item of ['Profile', 'My account', 'Log out']) {
@@ -398,6 +440,10 @@ for (const file of scripts) {
       }
       if (partNamed('autocomplete-clearindicator').length === 0) throw new Error('autocomplete pin: clear indicator missing');
       if (partNamed('autocomplete-popupindicator').length === 0) throw new Error('autocomplete pin: popup indicator missing');
+      // MUI REGEN ROUND (D6b): both indicators are REAL BUTTONS — background,
+      // 1px border, padding, a 28px control box — and drew as bare glyphs.
+      iconButtonPin('autocomplete', 'autocomplete-clearindicator', 28, 28);
+      iconButtonPin('autocomplete', 'autocomplete-popupindicator', 28, 28);
     }
     if (name === 'tooltip') {
       // the positioned bubble: label text + arrow part
@@ -466,6 +512,9 @@ for (const file of scripts) {
       if (actions.length === 0) throw new Error('table-pagination pin: tablepagination-actions missing');
       const buttons = actions[actions.length - 1].children ?? [];
       if (buttons.length !== 2) throw new Error(`table-pagination pin: expected 2 arrow buttons, found ${buttons.length}`);
+      // MUI REGEN ROUND (D6b): the two arrows are 40px IconButtons, not glyphs.
+      iconButtonPin('table-pagination', 'buttonbase-root', 40, 40);
+      iconButtonPin('table-pagination', 'buttonbase-root-2', 40, 40);
     }
     if (name === 'table') {
       // THE ORGANISM PIN — the class no percentage can see: a table that is

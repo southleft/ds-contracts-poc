@@ -25,6 +25,7 @@
  *   · Composition imports sibling inline-emitted components ('./Dep').
  */
 import {
+  TOKEN_CHANNELS,
   isNativeCheckablePart,
   pascal,
   resolveLayout,
@@ -776,6 +777,26 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     ? `\n * Fidelity: repeat collections render the contract's OBSERVED sample as fixed\n * instances (the array prop is declared but not mapped on this surface) — the\n * full React surface maps the live array.`
     : '';
 
+  // SILENT-LOSS ROUND (task #33, fix 4) — CANVAS-ONLY SYNTHETIC CHANNELS.
+  // `translate-x`/`translate-y` are minted by decomposeTranslate so the canvas
+  // can fold a transform into absolute placement; they are not CSS properties
+  // and `style={{ translateX: … }}` is not a React style key. They were
+  // reaching this surface verbatim. Removed HERE (one choke point over the
+  // finished style maps, so no emission site can route around it) and NAMED in
+  // the emitted header — never a silent drop.
+  const canvasOnlyKeys = new Set(
+    Object.keys(TOKEN_CHANNELS).filter((c) => TOKEN_CHANNELS[c].css === 'canvas-only').map(camel),
+  );
+  const canvasOnlyRefused = new Set<string>();
+  for (const rec of [...Object.values(baseStyles), ...Object.values(variantFlat)]) {
+    for (const k of Object.keys(rec)) {
+      if (canvasOnlyKeys.has(k)) { delete rec[k]; canvasOnlyRefused.add(k); }
+    }
+  }
+  const canvasOnlyNote = canvasOnlyRefused.size > 0
+    ? `\n * Fidelity: ${[...canvasOnlyRefused].sort().join(', ')} REFUSED BY NAME — synthetic\n * canvas-only channel(s) (decomposeTranslate) with no CSS spelling; the canvas\n * lowers them to absolute placement.`
+    : '';
+
   // MULTI-ROOT composite: the roots render as SIBLINGS in a Fragment (no
   // wrapper element — a Modal's backdrop + dialog are position-driven
   // siblings). Each root/descendant carries its resolved inline style via the
@@ -790,7 +811,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
  * Emitted by core/emit-react-inline.ts — token references RESOLVED to literals.
  * Resolution mode: ${mode} (brand: default).
  * MULTI-ROOT composite — ${topRoots(contract).length} top-level roots (${topRoots(contract).map(([n]) => n).join(', ')})
- * render as SIBLINGS in a Fragment; there is no single wrapping element.
+ * render as SIBLINGS in a Fragment; there is no single wrapping element.${canvasOnlyNote}
  */
 import type { ${typeImports} } from 'react';
 ${depImports}${depImports ? '\n' : ''}
@@ -825,7 +846,7 @@ export function ${name}({ ${destructured.join(', ')} }: ${name}Props) {
  * Fidelity: :hover/:focus-visible state tokens are not expressible as inline
  * styles and are omitted; ROOT disabled-state tokens apply via the disabled
  * prop; PART-level state overrides (Part.states, v13) are omitted — the same
- * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}
+ * declared limit as the hover states (state-selected descendant styling).${overlapNote}${repeatNote}${canvasOnlyNote}
  */
 import { forwardRef${events.some((e) => e.toggles) ? ', useState' : ''} } from 'react';
 import type { ${typeImports} } from 'react';

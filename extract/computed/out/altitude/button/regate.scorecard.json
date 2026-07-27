@@ -74,9 +74,15 @@
       "pairs": 0,
       "perfectExact": 0,
       "perfectAA": 0,
-      "meanExact": 0,
-      "meanAA": 0,
-      "maxAA": 0
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 20,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
     },
     "fusion": {
       "boundConfirmed": 0,
@@ -93,51 +99,59 @@
     "worstRows": [
       {
         "key": "tertiary__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 32
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 32,
+        "unscorable": "no-original"
       },
       {
         "key": "tertiary__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 31
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 31,
+        "unscorable": "no-original"
       },
       {
         "key": "tertiary__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 31
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 31,
+        "unscorable": "no-original"
       },
       {
         "key": "bare__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 24
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 24,
+        "unscorable": "no-original"
       },
       {
         "key": "secondary__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 23
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 23,
+        "unscorable": "no-original"
       },
       {
         "key": "secondary__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 23
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 23,
+        "unscorable": "no-original"
       },
       {
         "key": "secondary__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 23
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 23,
+        "unscorable": "no-original"
       },
       {
         "key": "bare__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 23
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 23,
+        "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
@@ -330,8 +344,9 @@
         "key": "unset__default",
         "channelsCompared": 64,
         "channelsEqual": 63,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -346,13 +361,14 @@
         "key": "unset__hover",
         "channelsCompared": 64,
         "channelsEqual": 62,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(93, 136, 255, 1)",
+            "ours": "rgba(92, 136, 255, 1)",
             "theirs": "rgba(107, 147, 255, 1)"
           },
           {
@@ -368,8 +384,9 @@
         "key": "unset__focus-visible",
         "channelsCompared": 64,
         "channelsEqual": 61,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -396,13 +413,14 @@
         "key": "unset__active",
         "channelsCompared": 64,
         "channelsEqual": 61,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(98, 140, 255, 1)",
+            "ours": "rgba(100, 142, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -414,7 +432,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(5, 20, 58, 1)",
+            "ours": "rgba(4, 17, 53, 1)",
             "theirs": "rgba(0, 11, 41, 1)"
           }
         ],
@@ -424,8 +442,9 @@
         "key": "secondary__default",
         "channelsCompared": 64,
         "channelsEqual": 63,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -440,55 +459,56 @@
         "key": "secondary__hover",
         "channelsCompared": 64,
         "channelsEqual": 41,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(137, 150, 188, 1)",
+            "ours": "rgba(137, 150, 189, 1)",
             "theirs": "rgba(192, 177, 145, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(13, 15, 22, 1)",
+            "ours": "rgba(13, 15, 23, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(13, 15, 22, 1)",
+            "ours": "rgba(13, 15, 23, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(13, 15, 22, 1)",
+            "ours": "rgba(13, 15, 23, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(13, 15, 22, 1)",
+            "ours": "rgba(13, 15, 23, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
             "part": "root",
             "channel": "caret-color",
-            "ours": "rgba(13, 15, 22, 1)",
+            "ours": "rgba(13, 15, 23, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
             "part": "root",
             "channel": "color",
-            "ours": "rgba(13, 15, 22, 1)",
+            "ours": "rgba(13, 15, 23, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
             "part": "root",
             "channel": "column-rule-color",
-            "ours": "rgba(13, 15, 22, 1)",
+            "ours": "rgba(13, 15, 23, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
@@ -500,25 +520,25 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(13, 15, 22, 1)",
+            "ours": "rgba(13, 15, 23, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
             "part": "root",
             "channel": "row-rule-color",
-            "ours": "rgba(13, 15, 22, 1)",
+            "ours": "rgba(13, 15, 23, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
             "part": "root",
             "channel": "text-decoration-color",
-            "ours": "rgba(13, 15, 22, 1)",
+            "ours": "rgba(13, 15, 23, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
             "part": "root",
             "channel": "text-emphasis-color",
-            "ours": "rgba(13, 15, 22, 1)",
+            "ours": "rgba(13, 15, 23, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
@@ -588,8 +608,9 @@
         "key": "secondary__focus-visible",
         "channelsCompared": 64,
         "channelsEqual": 41,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -648,7 +669,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(49, 81, 169, 1)",
+            "ours": "rgba(50, 82, 172, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -736,8 +757,9 @@
         "key": "secondary__active",
         "channelsCompared": 64,
         "channelsEqual": 41,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -796,7 +818,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(10, 22, 56, 1)",
+            "ours": "rgba(12, 27, 68, 1)",
             "theirs": "rgba(25, 19, 6, 1)"
           },
           {
@@ -884,8 +906,9 @@
         "key": "tertiary__default",
         "channelsCompared": 64,
         "channelsEqual": 55,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -948,19 +971,20 @@
         "key": "tertiary__hover",
         "channelsCompared": 64,
         "channelsEqual": 32,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(107, 147, 255, 0.486)",
+            "ours": "rgba(107, 147, 255, 0.482)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(90, 96, 110, 1)",
+            "ours": "rgba(91, 96, 111, 1)",
             "theirs": "rgba(217, 217, 217, 1)"
           },
           {
@@ -978,7 +1002,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(90, 96, 110, 1)",
+            "ours": "rgba(91, 96, 111, 1)",
             "theirs": "rgba(217, 217, 217, 1)"
           },
           {
@@ -996,7 +1020,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(90, 96, 110, 1)",
+            "ours": "rgba(91, 96, 111, 1)",
             "theirs": "rgba(217, 217, 217, 1)"
           },
           {
@@ -1014,7 +1038,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(90, 96, 110, 1)",
+            "ours": "rgba(91, 96, 111, 1)",
             "theirs": "rgba(217, 217, 217, 1)"
           },
           {
@@ -1150,8 +1174,9 @@
         "key": "tertiary__focus-visible",
         "channelsCompared": 64,
         "channelsEqual": 33,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1258,7 +1283,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(48, 81, 174, 1)",
+            "ours": "rgba(47, 81, 173, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -1346,19 +1371,20 @@
         "key": "tertiary__active",
         "channelsCompared": 64,
         "channelsEqual": 33,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(107, 147, 255, 0.757)",
+            "ours": "rgba(107, 147, 255, 0.835)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(60, 68, 87, 1)",
+            "ours": "rgba(41, 49, 72, 1)",
             "theirs": "rgba(176, 176, 176, 1)"
           },
           {
@@ -1376,7 +1402,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(60, 68, 87, 1)",
+            "ours": "rgba(41, 49, 72, 1)",
             "theirs": "rgba(176, 176, 176, 1)"
           },
           {
@@ -1394,7 +1420,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(60, 68, 87, 1)",
+            "ours": "rgba(41, 49, 72, 1)",
             "theirs": "rgba(176, 176, 176, 1)"
           },
           {
@@ -1412,7 +1438,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(60, 68, 87, 1)",
+            "ours": "rgba(41, 49, 72, 1)",
             "theirs": "rgba(176, 176, 176, 1)"
           },
           {
@@ -1430,19 +1456,19 @@
           {
             "part": "root",
             "channel": "caret-color",
-            "ours": "rgba(5, 13, 32, 1)",
+            "ours": "rgba(4, 12, 35, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "color",
-            "ours": "rgba(5, 13, 32, 1)",
+            "ours": "rgba(4, 12, 35, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "column-rule-color",
-            "ours": "rgba(5, 13, 32, 1)",
+            "ours": "rgba(4, 12, 35, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
@@ -1454,25 +1480,25 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(15, 33, 80, 1)",
+            "ours": "rgba(11, 26, 69, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "row-rule-color",
-            "ours": "rgba(5, 13, 32, 1)",
+            "ours": "rgba(4, 12, 35, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "text-decoration-color",
-            "ours": "rgba(5, 13, 32, 1)",
+            "ours": "rgba(4, 12, 35, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "text-emphasis-color",
-            "ours": "rgba(5, 13, 32, 1)",
+            "ours": "rgba(4, 12, 35, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
@@ -1542,8 +1568,9 @@
         "key": "bare__default",
         "channelsCompared": 64,
         "channelsEqual": 63,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1558,13 +1585,14 @@
         "key": "bare__hover",
         "channelsCompared": 64,
         "channelsEqual": 40,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(107, 147, 255, 0.475)",
+            "ours": "rgba(107, 147, 255, 0.482)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
@@ -1712,8 +1740,9 @@
         "key": "bare__focus-visible",
         "channelsCompared": 64,
         "channelsEqual": 41,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1772,7 +1801,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(47, 81, 173, 1)",
+            "ours": "rgba(47, 80, 172, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -1860,55 +1889,56 @@
         "key": "bare__active",
         "channelsCompared": 64,
         "channelsEqual": 41,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(107, 147, 255, 0.827)",
+            "ours": "rgba(107, 147, 255, 0.77)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(4, 12, 35, 1)",
+            "ours": "rgba(5, 13, 32, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(4, 12, 35, 1)",
+            "ours": "rgba(5, 13, 32, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(4, 12, 35, 1)",
+            "ours": "rgba(5, 13, 32, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(4, 12, 35, 1)",
+            "ours": "rgba(5, 13, 32, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "caret-color",
-            "ours": "rgba(4, 12, 35, 1)",
+            "ours": "rgba(5, 13, 32, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "color",
-            "ours": "rgba(4, 12, 35, 1)",
+            "ours": "rgba(5, 13, 32, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "column-rule-color",
-            "ours": "rgba(4, 12, 35, 1)",
+            "ours": "rgba(5, 13, 32, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
@@ -1920,25 +1950,25 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(11, 26, 68, 1)",
+            "ours": "rgba(16, 33, 81, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "row-rule-color",
-            "ours": "rgba(4, 12, 35, 1)",
+            "ours": "rgba(5, 13, 32, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "text-decoration-color",
-            "ours": "rgba(4, 12, 35, 1)",
+            "ours": "rgba(5, 13, 32, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
             "part": "root",
             "channel": "text-emphasis-color",
-            "ours": "rgba(4, 12, 35, 1)",
+            "ours": "rgba(5, 13, 32, 1)",
             "theirs": "rgba(16, 16, 16, 1)"
           },
           {
@@ -2008,8 +2038,9 @@
         "key": "danger__default",
         "channelsCompared": 64,
         "channelsEqual": 63,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2024,13 +2055,14 @@
         "key": "danger__hover",
         "channelsCompared": 64,
         "channelsEqual": 41,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(176, 116, 150, 1)",
+            "ours": "rgba(174, 117, 153, 1)",
             "theirs": "rgba(255, 113, 82, 1)"
           },
           {
@@ -2172,8 +2204,9 @@
         "key": "danger__focus-visible",
         "channelsCompared": 64,
         "channelsEqual": 41,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2232,7 +2265,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(51, 77, 167, 1)",
+            "ours": "rgba(51, 78, 169, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -2320,13 +2353,14 @@
         "key": "danger__active",
         "channelsCompared": 64,
         "channelsEqual": 41,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(140, 132, 205, 1)",
+            "ours": "rgba(138, 133, 208, 1)",
             "theirs": "rgba(240, 87, 53, 1)"
           },
           {
@@ -2380,7 +2414,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(18, 31, 78, 1)",
+            "ours": "rgba(18, 32, 79, 1)",
             "theirs": "rgba(31, 6, 0, 1)"
           },
           {

@@ -438,7 +438,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 
 | instrument | what it pins | how to run |
 |---|---|---|
-| **Eval suite** | 167/167 as of `evals/results.json` — 21 refusal, 29 determinism, 41 detection, 56 extraction, 3 convergence, 4 CLI, 12 journey, 1 theming | `npm run eval` |
+| **Eval suite** | 171/171 as of `evals/results.json` — 24 refusal, 29 determinism, 42 detection, 56 extraction, 3 convergence, 4 CLI, 12 journey, 1 theming | `npm run eval` |
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
 | **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |
@@ -446,6 +446,9 @@ What makes a library-specific hack expensive rather than merely discouraged:
 | **Double-run byte identity** | every capture is swept twice in one session; unstable channels fail the run and the refusal **names its witness** (capture key, element path + signature, both values) | part of `npm run extract:computed` |
 | **Shipped-contract refs resolve** | every shipped contract resolves every token ref against its library's inventory | `shipped-contract-refs-resolve` eval |
 | **Gate inventory = shipped inventory** | the gate measures against the token set the shipped contract can actually see; withholding the shipped tree must bring the unresolved refs back (the falsification half) | `gate-inventory-shipped-minted` eval |
+| **Token-channel registry** | `TOKEN_CHANNELS` — every channel a `tokens` map may carry, with what each surface does with it. An unregistered channel refuses BY NAME on `tokens`, `tokensByProp` and root `states` (which had no gate at all); a channel with no canvas field marks the component as carrying code-only facts | `token-channel-registry`, `channel-miss-named` evals |
+| **Figma-script freshness** | every rebuildable library's committed `*.figma.js` byte-compared to a fresh emission. The gap that let MUI's compiled scripts sit three engine fixes stale through a green suite; the one library whose emit command is unrecorded is PRINTED as a named hole, never skipped | `npm run figma:fresh` |
+| **Child-wider-than-parent ratchet** | a committed per-library count of in-flow children wider than their parent, TWO-SIDED (an unrecorded improvement fails too — a stale high baseline is room to regrow in silence). Text-caused and negative-margin paint-outside are counted as separate exempted classes so neither can flatter the first number | `npm run child-wider` |
 
 The drift baseline is what makes cross-library damage a number rather than a
 vibe. Its 54 rows: mui 14, polaris 12, carbon 10, altitude 8, astryx 5,
@@ -705,7 +708,7 @@ Figma account or a network call except `npm install`.
 npm install
 
 # ── the claim's own numbers ────────────────────────────────────────────────
-npm run eval                       # 167/167 as of evals/results.json
+npm run eval                       # 171/171 as of evals/results.json
 node -e "const r=require('./evals/results.json');console.log(r.passed+'/'+r.total)"
 
 # 54 drift rows, per library

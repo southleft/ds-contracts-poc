@@ -47,6 +47,13 @@ export interface CapturedNode {
    *  declares `library.varPrefix`; undefined (and omitted by normalizeNode)
    *  everywhere else, keeping committed captures byte-identical. */
   vrefs?: Record<string, Array<[string, string, string]>>;
+  /** SILENT-LOSS ROUND (task #33, fix 1): property → var names for source
+   *  declarations that are SHORTHANDS carrying a var(). Chromium stores such a
+   *  declaration as a pending-substitution value and enumerates its longhands
+   *  with the EMPTY STRING, so the reader used to drop them before anything
+   *  could name the loss. Recorded here, never bound — the count is the size
+   *  of the shorthand ceiling (task #27). */
+  vshorthands?: Record<string, string[]>;
 }
 
 export interface Capture {
@@ -69,6 +76,50 @@ export const normalizeValue = (v: string): string =>
  *  only declared fact can't carry them). Excluded from replay application
  *  and the fidelity gate by name (SYNTHETIC_CHANNELS). */
 export const SYNTHETIC_CHANNELS = new Set(['translate-x', 'translate-y']);
+
+/** SILENT-LOSS ROUND (task #33, fix 1) — THE SHORTHAND CEILING (task #27).
+ *
+ *  The CSS-variables reader collects candidates from the rules that MATCH an
+ *  element, keyed by the property each rule declares. A source declaration
+ *  can be a SHORTHAND carrying a var():
+ *
+ *      background: var(--tok);   font: var(--x);
+ *      border: 1px solid var(--y);   padding: var(--p);   transition: var(--t);
+ *
+ *  Chromium's CSSOM reports the shorthand as the declared property, and
+ *  `getComputedStyle` enumerates LONGHANDS ONLY — a shorthand with a var() is
+ *  a "pending-substitution value" whose longhands compute to the empty string.
+ *  So the reader had a source fact naming a real token and NO computed value
+ *  to verify it against, and the Node side did `continue` — dropping it with
+ *  nothing pushed to `skips`. The artifact then said `skips: []` and the
+ *  console printed `0 named skip(s)`: the receipt ASSERTED COMPLETENESS over
+ *  a loss it had just taken.
+ *
+ *  This is the size of the shorthand ceiling. It is now counted, named per
+ *  declaration, and printed. */
+export const CSS_SHORTHANDS = new Set([
+  'all', 'animation', 'background', 'border', 'border-block', 'border-block-end',
+  'border-block-start', 'border-bottom', 'border-color', 'border-image',
+  'border-inline', 'border-inline-end', 'border-inline-start', 'border-left',
+  'border-radius', 'border-right', 'border-style', 'border-top', 'border-width',
+  'column-rule', 'columns', 'container', 'flex', 'flex-flow', 'font', 'gap',
+  'grid', 'grid-area', 'grid-column', 'grid-row', 'grid-template', 'inset',
+  'inset-block', 'inset-inline', 'list-style', 'margin', 'margin-block',
+  'margin-inline', 'mask', 'offset', 'outline', 'overflow', 'padding',
+  'padding-block', 'padding-inline', 'place-content', 'place-items',
+  'place-self', 'scroll-margin', 'scroll-padding', 'text-decoration',
+  'text-emphasis', 'transition',
+]);
+
+/** The named skip for one dropped source declaration. Pure — shared by the
+ *  capture runner (which writes it into source-bindings.json) and any
+ *  instrument that wants to size the ceiling without re-fusing. */
+export function shorthandVarSkip(part: string, channel: string, varNames: string[]): string {
+  const vars = [...new Set(varNames)].sort().join(', ');
+  return CSS_SHORTHANDS.has(channel)
+    ? `${part}.${channel}: SHORTHAND carrying var(${vars}) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)`
+    : `${part}.${channel}: source declares var(${vars}) on a property the computed sweep does not enumerate — no computed value to verify against, binding NOT carried`;
+}
 const IDENTITY_MATRIX = /^matrix\(1, 0, 0, 1, (-?[\d.]+), (-?[\d.]+)\)$/;
 
 /** PSEUDO-DECOR v2 ROUND — the `translate` LONGHAND joins the decomposition.

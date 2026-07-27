@@ -1,6 +1,6 @@
 {
-  "passed": 167,
-  "total": 167,
+  "passed": 171,
+  "total": 171,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -835,6 +835,26 @@
     {
       "id": "decision-ledger-value-check",
       "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "token-channel-registry",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "channel-miss-named",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "silent-loss-receipts",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "child-wider-ratchet-and-script-freshness",
+      "claim": "C3-detection",
       "pass": true
     }
   ]

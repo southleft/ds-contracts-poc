@@ -119,9 +119,15 @@
       "pairs": 0,
       "perfectExact": 0,
       "perfectAA": 0,
-      "meanExact": 0,
-      "meanAA": 0,
-      "maxAA": 0
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 40,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
     },
     "fusion": {
       "boundConfirmed": 0,
@@ -138,51 +144,59 @@
     "worstRows": [
       {
         "key": "unset.disabled__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 16
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
       },
       {
         "key": "unset.disabled__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 16
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
       },
       {
         "key": "unset.disabled__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 16
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
       },
       {
         "key": "unset.disabled__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 16
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
       },
       {
         "key": "xs.disabled__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 16
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
       },
       {
         "key": "xs.disabled__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 16
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
       },
       {
         "key": "xs.disabled__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 16
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
       },
       {
         "key": "xs.disabled__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 16
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
@@ -291,8 +305,9 @@
         "key": "unset.enabled__default",
         "channelsCompared": 89,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -319,8 +334,9 @@
         "key": "unset.enabled__hover",
         "channelsCompared": 89,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -347,8 +363,9 @@
         "key": "unset.enabled__focus-visible",
         "channelsCompared": 89,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -381,8 +398,9 @@
         "key": "unset.enabled__active",
         "channelsCompared": 89,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -415,8 +433,9 @@
         "key": "unset.disabled__default",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -521,8 +540,9 @@
         "key": "unset.disabled__hover",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -627,8 +647,9 @@
         "key": "unset.disabled__focus-visible",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -733,8 +754,9 @@
         "key": "unset.disabled__active",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -839,8 +861,9 @@
         "key": "xs.enabled__default",
         "channelsCompared": 89,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -867,8 +890,9 @@
         "key": "xs.enabled__hover",
         "channelsCompared": 89,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -895,8 +919,9 @@
         "key": "xs.enabled__focus-visible",
         "channelsCompared": 89,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -929,8 +954,9 @@
         "key": "xs.enabled__active",
         "channelsCompared": 89,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -963,8 +989,9 @@
         "key": "xs.disabled__default",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1069,8 +1096,9 @@
         "key": "xs.disabled__hover",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1175,8 +1203,9 @@
         "key": "xs.disabled__focus-visible",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1281,8 +1310,9 @@
         "key": "xs.disabled__active",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1387,8 +1417,9 @@
         "key": "sm.enabled__default",
         "channelsCompared": 89,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1415,8 +1446,9 @@
         "key": "sm.enabled__hover",
         "channelsCompared": 89,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1443,8 +1475,9 @@
         "key": "sm.enabled__focus-visible",
         "channelsCompared": 89,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1477,8 +1510,9 @@
         "key": "sm.enabled__active",
         "channelsCompared": 89,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1511,8 +1545,9 @@
         "key": "sm.disabled__default",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1617,8 +1652,9 @@
         "key": "sm.disabled__hover",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1723,8 +1759,9 @@
         "key": "sm.disabled__focus-visible",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1829,8 +1866,9 @@
         "key": "sm.disabled__active",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1935,8 +1973,9 @@
         "key": "md.enabled__default",
         "channelsCompared": 89,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1963,8 +2002,9 @@
         "key": "md.enabled__hover",
         "channelsCompared": 89,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -1991,8 +2031,9 @@
         "key": "md.enabled__focus-visible",
         "channelsCompared": 89,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2025,8 +2066,9 @@
         "key": "md.enabled__active",
         "channelsCompared": 89,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2059,8 +2101,9 @@
         "key": "md.disabled__default",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2165,8 +2208,9 @@
         "key": "md.disabled__hover",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2271,8 +2315,9 @@
         "key": "md.disabled__focus-visible",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2377,8 +2422,9 @@
         "key": "md.disabled__active",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2483,8 +2529,9 @@
         "key": "lg.enabled__default",
         "channelsCompared": 89,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2511,8 +2558,9 @@
         "key": "lg.enabled__hover",
         "channelsCompared": 89,
         "channelsEqual": 86,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2539,8 +2587,9 @@
         "key": "lg.enabled__focus-visible",
         "channelsCompared": 89,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2573,8 +2622,9 @@
         "key": "lg.enabled__active",
         "channelsCompared": 89,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2607,8 +2657,9 @@
         "key": "lg.disabled__default",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2713,8 +2764,9 @@
         "key": "lg.disabled__hover",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2819,8 +2871,9 @@
         "key": "lg.disabled__focus-visible",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -2925,8 +2978,9 @@
         "key": "lg.disabled__active",
         "channelsCompared": 89,
         "channelsEqual": 73,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",

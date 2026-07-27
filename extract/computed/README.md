@@ -8,6 +8,56 @@ prototype-with-receipts). Spike gate numbers it was promoted on: 99.947%
 replay computed equality, 480/480 pixel pairs at the AA point, on the full
 Polaris Button variant×state space.
 
+## Silent-loss round (task #33) — the receipts stop asserting completeness
+
+The module's most dangerous property was never a gap; it was a SILENT gap —
+confident, plausible, wrong output with no receipt. Three of the five fixes
+land here.
+
+**The shorthand ceiling (task #27) is now a number.** A source declaration can
+be a SHORTHAND carrying a `var()` (`background: var(--tok)`,
+`border: 1px solid var(--y)`, `padding: var(--p)`). Chromium stores that as a
+PENDING-SUBSTITUTION value: `rule.style` enumerates the shorthand's LONGHANDS,
+each with the EMPTY STRING, and never the shorthand itself. `capture.ts`'s
+`if (!val …) continue` therefore dropped the declaration before the Node side
+could see it — `source-bindings.json` reported `skips: []` and the console
+printed `0 named skip(s)`, over a loss taken two layers earlier. The reader now
+recovers the declaration from `rule.style.cssText`, records it as
+`vshorthands`, and `run.ts` writes one named skip per declaration plus a
+`shorthandCeiling` count. **MEASURED on the four libraries whose configs
+declare a `varPrefix` (mui, carbon, tailwind, altitude — astryx and polaris run
+no reader at all): the ceiling is ZERO.** Emotion, SCSS-compiled Carbon,
+Tailwind v4 utilities and Lit all emit longhands. The instrument is proven to
+fire on a synthetic `background: var(--mui-tok); padding: var(--mui-p)` rule,
+so the zero is a measurement, not an absence of instrument.
+
+**The pseudo-element loop's two bare `continue`s are named refusals.** Between
+them they hid EVERY un-promoted pseudo-element:
+
+* `pseudo-content-not-canvas-ink` — text/glyph-bearing content. `content:
+  "\ea01"` is how Bootstrap/FontAwesome/Material ligature sets draw carets,
+  chevrons and close ×s: real ink that does not reach the canvas.
+* `pseudo-decor-outside-grammar` — painted by a mechanism the grammar cannot
+  read (position static/relative, gradient/shadow/outline-only paint, opacity
+  in (0, 0.05]). This is the shape of Carbon's hollow checkbox, and this is the
+  message that would have caught it on its FIRST run.
+* `pseudo-decor-hidden-in-combo` — the component's own hidden state. NOT a
+  grammar limit, and deliberately a DIFFERENT message: conflating the two is
+  what made the old skip useless.
+
+**The pixel gate no longer fabricates a number.** On a size mismatch the gate
+wrote `pctExact = 100; pctAA = 100` — a value pixelmatch never produced — and
+averaged it. (In this metric 100 is the WORST value, not the best, so the
+fabrication pointed the right way; it was still indistinguishable from a
+measured 100, and `run.ts`'s roll-up additionally averaged the "original
+screenshot unavailable — pixel not scored" rows at 100 while their own note
+said they were not scored.) Unscorable rows are now `null` with an explicit
+`unscorable: 'size-mismatch' | 'no-original'`, excluded from the mean, COUNTED
+and PRINTED (`pixel.measured`, `pixel.unscored`). An empty mean is `null`, never
+`0` — `0` means PERFECT here. Committed receipts gain the fields at their next
+capture; the `silent-loss-receipts` eval reports how many are still in the
+pre-round shape.
+
 ## Round 4 — DOM-anatomy promotion (the one-to-one round)
 
 Round 4 makes computed-only DOM elements REAL contract parts

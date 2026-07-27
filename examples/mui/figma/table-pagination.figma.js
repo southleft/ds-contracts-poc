@@ -194,18 +194,88 @@ const COMPONENTS = [
                   },
                   "children": [
                     {
-                      "type": "svg",
+                      "type": "frame",
                       "name": "buttonbase-root",
-                      "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 15.41 16.09 L 10.83 11.5 L 15.41 6.91 L 14 5.5 L 8 11.5 L 14 17.5 Z\" fill=\"#00000042\"/></svg>",
-                      "svgPaintVar": "imported/shared/color-00000042",
-                      "iconSize": 24
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
+                      },
+                      "children": [
+                        {
+                          "type": "svg",
+                          "name": "buttonbase-root-icon",
+                          "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 15.41 16.09 L 10.83 11.5 L 15.41 6.91 L 14 5.5 L 8 11.5 L 14 17.5 Z\" fill=\"#00000042\"/></svg>",
+                          "svgPaintVar": "imported/shared/color-00000042",
+                          "iconSize": 24
+                        }
+                      ],
+                      "fill": "imported/pagination/buttonbase-root/background-color",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-20",
+                        "bottomRightRadius": "imported/shared/size-20",
+                        "strokeBottomWeight": "imported/shared/size-0",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "topLeftRadius": "imported/shared/size-20",
+                        "topRightRadius": "imported/shared/size-20",
+                        "strokeTopWeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0",
+                        "paddingBottom": "imported/shared/size-8",
+                        "paddingLeft": "imported/shared/size-8",
+                        "paddingRight": "imported/shared/size-8",
+                        "paddingTop": "imported/shared/size-8"
+                      },
+                      "fixedHeight": {
+                        "px": 40,
+                        "varName": "imported/shared/size-40"
+                      },
+                      "fixedWidth": {
+                        "px": 40,
+                        "varName": "imported/shared/size-40"
+                      }
                     },
                     {
-                      "type": "svg",
+                      "type": "frame",
                       "name": "buttonbase-root-2",
-                      "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.59 16.34 L 13.17 11.75 L 8.59 7.16 L 10 5.75 L 16 11.75 L 10 17.75 Z\" fill=\"#00000042\"/></svg>",
-                      "svgPaintVar": "imported/shared/color-00000042",
-                      "iconSize": 24
+                      "layout": {
+                        "mode": "HORIZONTAL",
+                        "primary": "CENTER",
+                        "counter": "CENTER"
+                      },
+                      "children": [
+                        {
+                          "type": "svg",
+                          "name": "buttonbase-root-2-icon",
+                          "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8.59 16.34 L 13.17 11.75 L 8.59 7.16 L 10 5.75 L 16 11.75 L 10 17.75 Z\" fill=\"#00000042\"/></svg>",
+                          "svgPaintVar": "imported/shared/color-00000042",
+                          "iconSize": 24
+                        }
+                      ],
+                      "fill": "imported/pagination/buttonbase-root-2/background-color",
+                      "bindings": {
+                        "bottomLeftRadius": "imported/shared/size-20",
+                        "bottomRightRadius": "imported/shared/size-20",
+                        "strokeBottomWeight": "imported/shared/size-0",
+                        "strokeLeftWeight": "imported/shared/size-0",
+                        "strokeRightWeight": "imported/shared/size-0",
+                        "topLeftRadius": "imported/shared/size-20",
+                        "topRightRadius": "imported/shared/size-20",
+                        "strokeTopWeight": "imported/shared/size-0",
+                        "minWidth": "imported/shared/size-0",
+                        "paddingBottom": "imported/shared/size-8",
+                        "paddingLeft": "imported/shared/size-8",
+                        "paddingRight": "imported/shared/size-8",
+                        "paddingTop": "imported/shared/size-8"
+                      },
+                      "fixedHeight": {
+                        "px": 40,
+                        "varName": "imported/shared/size-40"
+                      },
+                      "fixedWidth": {
+                        "px": 40,
+                        "varName": "imported/shared/size-40"
+                      }
                     }
                   ]
                 }

@@ -84,12 +84,18 @@
       "rows": 8
     },
     "pixel": {
-      "pairs": 6,
+      "pairs": 0,
       "perfectExact": 0,
       "perfectAA": 0,
-      "meanExact": 100,
-      "meanAA": 100,
-      "maxAA": 100
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 8,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
     },
     "fusion": {
       "boundConfirmed": 0,
@@ -106,51 +112,59 @@
     "worstRows": [
       {
         "key": "on__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 8
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 8,
+        "unscorable": "no-original"
       },
       {
         "key": "off__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 4
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 4,
+        "unscorable": "no-original"
       },
       {
         "key": "off__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 0
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
       },
       {
         "key": "off__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 0
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
       },
       {
         "key": "off__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 0
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
       },
       {
         "key": "on__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 0
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
       },
       {
         "key": "on__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 0
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
       },
       {
         "key": "on__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 0
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 0,
+        "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
@@ -196,6 +210,7 @@
       ]
     ],
     "namedLosses": [
+      "promotion: pseudo-decor-outside-grammar: tooltip-arrow::before paints at position:static (11x7.79688, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
       "overflow: root.bottom — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue)",
       "overflow: root.height — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue)",
       "overflow: label.margin-bottom — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue)",
@@ -223,8 +238,9 @@
         "key": "off__default",
         "channelsCompared": 51,
         "channelsEqual": 47,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -257,8 +273,9 @@
         "key": "off__hover",
         "channelsCompared": 0,
         "channelsEqual": 0,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [],
         "note": "no captured truth for this combo×state"
       },
@@ -266,8 +283,9 @@
         "key": "off__focus-visible",
         "channelsCompared": 0,
         "channelsEqual": 0,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [],
         "note": "no captured truth for this combo×state"
       },
@@ -275,8 +293,9 @@
         "key": "off__active",
         "channelsCompared": 0,
         "channelsEqual": 0,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [],
         "note": "no captured truth for this combo×state"
       },
@@ -284,8 +303,9 @@
         "key": "on__default",
         "channelsCompared": 78,
         "channelsEqual": 70,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "label",
@@ -342,8 +362,9 @@
         "key": "on__hover",
         "channelsCompared": 0,
         "channelsEqual": 0,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [],
         "note": "no captured truth for this combo×state"
       },
@@ -351,8 +372,9 @@
         "key": "on__focus-visible",
         "channelsCompared": 0,
         "channelsEqual": 0,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [],
         "note": "no captured truth for this combo×state"
       },
@@ -360,8 +382,9 @@
         "key": "on__active",
         "channelsCompared": 0,
         "channelsEqual": 0,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [],
         "note": "no captured truth for this combo×state"
       }

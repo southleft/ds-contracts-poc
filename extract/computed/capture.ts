@@ -944,6 +944,7 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
       for (const r of flatRules) {
         const defs = [];
         const chans = [];
+        const shorts = [];
         const seen = new Set();
         for (let i = 0; i < r.style.length; i++) {
           const prop = r.style[i];
@@ -962,7 +963,48 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
             while ((m = g.exec(val)) !== null) chans.push([prop, m[1]]);
           }
         }
-        if (defs.length || chans.length) out.push([r.selectorText, defs, chans]);
+        // SILENT-LOSS ROUND (task #33, fix 1) — THE SHORTHAND CEILING, AT THE
+        // LAYER WHERE IT ACTUALLY HAPPENS.
+        //
+        // A source declaration can be a SHORTHAND carrying a var():
+        //   background: var(--tok);  border: 1px solid var(--y);
+        //   padding: var(--p);       font: var(--x);  transition: var(--t)
+        // Chromium stores that as a PENDING-SUBSTITUTION VALUE: the loop
+        // above enumerates the shorthand's LONGHANDS, each with the EMPTY
+        // STRING as its value, so the 'if (!val ...) continue' guard dropped every one of
+        // them — and dropped the shorthand's var reference with them. The
+        // reader then reported an EMPTY skip list and the console printed
+        // '0 named skip(s)': the artifact ASSERTED COMPLETENESS over a loss taken two
+        // layers earlier.
+        //
+        // The declared text still holds the truth, so read it: any declaration
+        // in cssText whose property enumerated EMPTY (or did not enumerate
+        // at all) and whose value references a var() is a shorthand-carried
+        // token this pipeline cannot bind. Recorded, never bound — the
+        // measurement IS the size of the shorthand ceiling (task #27).
+        try {
+          const text = r.style.cssText || '';
+          const declRe = /(^|;)\s*(-{0,2}[a-zA-Z][a-zA-Z0-9-]*)\s*:\s*([^;]*)/g;
+          let dm;
+          while ((dm = declRe.exec(text)) !== null) {
+            const prop = dm[2];
+            const val = dm[3];
+            if (prop.startsWith('--') || !val.includes('var(')) continue;
+            // A SHORTHAND is never enumerated by item() — only its longhands
+            // are, each with the EMPTY string. getPropertyValue(shorthand)
+            // DOES return the declared text, so testing that would skip
+            // exactly the declaration we are after. The test is: was this
+            // property ITSELF enumerated with a real value? If so it is an
+            // ordinary longhand already collected above.
+            if (seen.has(prop) && r.style.getPropertyValue(prop)) continue;
+            const names = [];
+            let m2;
+            const g2 = new RegExp(anyRe.source, 'g');
+            while ((m2 = g2.exec(val)) !== null) names.push(m2[1]);
+            if (names.length) shorts.push([prop, names]);
+          }
+        } catch {}
+        if (defs.length || chans.length || shorts.length) out.push([r.selectorText, defs, chans, shorts]);
       }
     }
     return out;
@@ -1003,6 +1045,7 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
   };
   const vrefsOf = (el) => {
     if (!vp) return undefined;
+    // returns { refs, shorthands } — fix 1 (task #33) adds the second half.
     const root = el.getRootNode();
     let VRULES = VRULES_BY_ROOT.get(root);
     if (!VRULES) { VRULES = buildVrules(root); VRULES_BY_ROOT.set(root, VRULES); }
@@ -1012,7 +1055,8 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
     // rule's selector: the PROVENANCE ANCHOR for write-back (the rule that
     // declares "background-color: var(...)" is where a patch would land, even
     // when the token itself resolves through an indirection in another rule).
-    for (const [sel, rdefs, rchans] of VRULES) {
+    const shorts = {}; // fix 1: shorthand-carried var refs, by property
+    for (const [sel, rdefs, rchans, rshorts] of VRULES) {
       let hit = false;
       if (sel.indexOf(':host') === 0) hit = hostMatch(el, sel, root);
       else { try { hit = el.matches(sel); } catch {} }
@@ -1021,6 +1065,10 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
       for (const [prop, name] of rchans) {
         (chans[prop] = chans[prop] || []);
         if (!chans[prop].some((c) => c.name === name)) chans[prop].push({ name, sel });
+      }
+      for (const [prop, names] of (rshorts || [])) {
+        const acc = (shorts[prop] = shorts[prop] || []);
+        for (const n of names) if (!acc.includes(n)) acc.push(n);
       }
     }
     const out = {};
@@ -1036,7 +1084,7 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
       }
       if (cands.length) out[prop] = cands;
     }
-    return Object.keys(out).length ? out : undefined;
+    return { refs: Object.keys(out).length ? out : undefined, shorthands: Object.keys(shorts).length ? shorts : undefined };
   };
   // SHADOW-DOM ROUND — read \`tagName\` off Element.prototype, never off the
   // instance. A custom element can DEFINE A REACTIVE PROPERTY THAT SHADOWS IT:
@@ -1047,7 +1095,8 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
   const tagGet = Object.getOwnPropertyDescriptor(Element.prototype, 'tagName').get;
   const SVG_NONPAINTING = new Set(['title', 'desc', 'metadata']);
   const readEl = (el) => {
-    const vr = vrefsOf(el);
+    const vrPair = vrefsOf(el) || {};
+    const vr = vrPair.refs;
     const out = {
       tag: tagGet.call(el).toLowerCase(),
       classes: keepCls([...el.classList]),
@@ -1056,6 +1105,7 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
       pseudo: {},
     };
     if (vr) out.vrefs = vr;
+    if (vrPair.shorthands) out.vshorthands = vrPair.shorthands;
     for (const pe of ['::before', '::after']) {
       const pcs = getComputedStyle(el, pe);
       const content = pcs.getPropertyValue('content');

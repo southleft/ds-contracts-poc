@@ -20,6 +20,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { createFigmaMock } from '../../../scripts/plugin-engine-mock-figma.mjs';
+import { countChildWider } from '../../../scripts/child-wider.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const EX = path.join(HERE, '..');
@@ -201,23 +202,17 @@ for (const file of scripts) {
     // text nodes here auto-size on one line, so the box hugs an unwrapped
     // run. That round changes every hugging text node in the corpus and is
     // not this one; the count is printed in the receipt table.
+    // SILENT-LOSS ROUND (task #33): the measurement moved to
+    // scripts/child-wider.mjs — ONE implementation, shared with the repo-wide
+    // per-library RATCHET (`node scripts/child-wider.mjs`). Carbon keeps its
+    // own HARD ZERO here because Carbon's investigation is the one that
+    // already landed; the other libraries ratchet down from a committed
+    // baseline instead of going red all at once.
     {
-      const over = [];
-      let textCaused = 0;
-      for (const cell of cellsOf()) {
-        for (const n of descend(cell)) {
-          for (const c of n.children ?? []) {
-            if (c.layoutPositioning === 'ABSOLUTE' || !c.visible) continue;
-            if (c.width <= n.width + 0.6) continue;
-            const byText = descend(c).some((d) => d.type === 'TEXT' && d.width > n.width + 0.6);
-            if (byText) { textCaused++; continue; }
-            over.push(`"${c.name}" ${Math.round(c.width)} > parent "${n.name}" ${Math.round(n.width)} (${cell.name})`);
-          }
-        }
-      }
+      const { overflows, textCaused, detail } = countChildWider(mock.root);
       textOverflowCount = textCaused;
-      if (over.length > 0) {
-        throw new Error(`${name} D3 pin: ${over.length} in-flow child(ren) wider than their parent, none of them text-caused — ${[...new Set(over)].slice(0, 3).join('; ')}`);
+      if (overflows > 0) {
+        throw new Error(`${name} D3 pin: ${overflows} in-flow child(ren) wider than their parent, none of them text-caused — ${detail.slice(0, 3).join('; ')}`);
       }
     }
     // D5 — the Modal must not be a full-viewport dim rectangle. Measured

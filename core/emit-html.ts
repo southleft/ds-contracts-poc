@@ -44,6 +44,7 @@ import {
   isEnum,
   isMultiRoot,
   rootElementsOf,
+  stripCanvasOnlyChannels,
   textProps,
   topRoots,
   UA_MARGIN_ELEMENTS,
@@ -953,7 +954,10 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
       if (w.part.component) collectCss(ctx.contracts.get(w.part.component.id)!);
       for (const item of w.part.slot?.defaultContent ?? []) collectCss(ctx.contracts.get(item.id)!);
     }
-    cssBlocks.push(componentCss(c).join('\n'));
+    // SILENT-LOSS ROUND (task #33, fix 4): canvas-only synthetic channels
+    // (translate-x/translate-y) are refused BY NAME in the stylesheet rather
+    // than written out as declarations no browser understands.
+    cssBlocks.push(stripCanvasOnlyChannels(componentCss(c).join('\n')));
   };
   collectCss(contract);
 

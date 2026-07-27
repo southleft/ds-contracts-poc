@@ -57,9 +57,15 @@
       "pairs": 0,
       "perfectExact": 0,
       "perfectAA": 0,
-      "meanExact": 0,
-      "meanAA": 0,
-      "maxAA": 0
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 208,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
     },
     "fusion": {
       "boundConfirmed": 0,
@@ -76,51 +82,59 @@
     "worstRows": [
       {
         "key": "outline.unset__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 13
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
       },
       {
         "key": "outline.unset__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 13
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
       },
       {
         "key": "outline.unset__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 13
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
       },
       {
         "key": "outline.unset__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 13
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
       },
       {
         "key": "outline.sm__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 13
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
       },
       {
         "key": "outline.sm__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 13
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
       },
       {
         "key": "outline.sm__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 13
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
       },
       {
         "key": "outline.sm__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 13
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
@@ -363,8 +377,9 @@
         "key": "unset.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -445,8 +460,9 @@
         "key": "unset.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -527,8 +543,9 @@
         "key": "unset.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -609,8 +626,9 @@
         "key": "unset.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -691,8 +709,9 @@
         "key": "unset.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -773,8 +792,9 @@
         "key": "unset.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -855,8 +875,9 @@
         "key": "unset.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -937,8 +958,9 @@
         "key": "unset.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1019,8 +1041,9 @@
         "key": "unset.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1101,8 +1124,9 @@
         "key": "unset.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1183,8 +1207,9 @@
         "key": "unset.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1265,8 +1290,9 @@
         "key": "unset.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1347,8 +1373,9 @@
         "key": "unset.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1429,8 +1456,9 @@
         "key": "unset.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1511,8 +1539,9 @@
         "key": "unset.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1593,8 +1622,9 @@
         "key": "unset.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1675,8 +1705,9 @@
         "key": "red.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1757,8 +1788,9 @@
         "key": "red.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1839,8 +1871,9 @@
         "key": "red.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1921,8 +1954,9 @@
         "key": "red.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2003,8 +2037,9 @@
         "key": "red.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2085,8 +2120,9 @@
         "key": "red.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2167,8 +2203,9 @@
         "key": "red.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2249,8 +2286,9 @@
         "key": "red.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2331,8 +2369,9 @@
         "key": "red.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2413,8 +2452,9 @@
         "key": "red.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2495,8 +2535,9 @@
         "key": "red.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2577,8 +2618,9 @@
         "key": "red.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2659,8 +2701,9 @@
         "key": "red.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2741,8 +2784,9 @@
         "key": "red.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2823,8 +2867,9 @@
         "key": "red.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2905,8 +2950,9 @@
         "key": "red.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -2987,8 +3033,9 @@
         "key": "magenta.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3069,8 +3116,9 @@
         "key": "magenta.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3151,8 +3199,9 @@
         "key": "magenta.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3233,8 +3282,9 @@
         "key": "magenta.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3315,8 +3365,9 @@
         "key": "magenta.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3397,8 +3448,9 @@
         "key": "magenta.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3479,8 +3531,9 @@
         "key": "magenta.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3561,8 +3614,9 @@
         "key": "magenta.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3643,8 +3697,9 @@
         "key": "magenta.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3725,8 +3780,9 @@
         "key": "magenta.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3807,8 +3863,9 @@
         "key": "magenta.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3889,8 +3946,9 @@
         "key": "magenta.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -3971,8 +4029,9 @@
         "key": "magenta.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4053,8 +4112,9 @@
         "key": "magenta.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4135,8 +4195,9 @@
         "key": "magenta.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4217,8 +4278,9 @@
         "key": "magenta.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4299,8 +4361,9 @@
         "key": "purple.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4381,8 +4444,9 @@
         "key": "purple.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4463,8 +4527,9 @@
         "key": "purple.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4545,8 +4610,9 @@
         "key": "purple.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4627,8 +4693,9 @@
         "key": "purple.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4709,8 +4776,9 @@
         "key": "purple.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4791,8 +4859,9 @@
         "key": "purple.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4873,8 +4942,9 @@
         "key": "purple.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -4955,8 +5025,9 @@
         "key": "purple.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5037,8 +5108,9 @@
         "key": "purple.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5119,8 +5191,9 @@
         "key": "purple.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5201,8 +5274,9 @@
         "key": "purple.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5283,8 +5357,9 @@
         "key": "purple.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5365,8 +5440,9 @@
         "key": "purple.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5447,8 +5523,9 @@
         "key": "purple.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5529,8 +5606,9 @@
         "key": "purple.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5611,8 +5689,9 @@
         "key": "blue.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5693,8 +5772,9 @@
         "key": "blue.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5775,8 +5855,9 @@
         "key": "blue.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5857,8 +5938,9 @@
         "key": "blue.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -5939,8 +6021,9 @@
         "key": "blue.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6021,8 +6104,9 @@
         "key": "blue.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6103,8 +6187,9 @@
         "key": "blue.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6185,8 +6270,9 @@
         "key": "blue.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6267,8 +6353,9 @@
         "key": "blue.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6349,8 +6436,9 @@
         "key": "blue.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6431,8 +6519,9 @@
         "key": "blue.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6513,8 +6602,9 @@
         "key": "blue.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6595,8 +6685,9 @@
         "key": "blue.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6677,8 +6768,9 @@
         "key": "blue.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6759,8 +6851,9 @@
         "key": "blue.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6841,8 +6934,9 @@
         "key": "blue.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -6923,8 +7017,9 @@
         "key": "cyan.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7005,8 +7100,9 @@
         "key": "cyan.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7087,8 +7183,9 @@
         "key": "cyan.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7169,8 +7266,9 @@
         "key": "cyan.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7251,8 +7349,9 @@
         "key": "cyan.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7333,8 +7432,9 @@
         "key": "cyan.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7415,8 +7515,9 @@
         "key": "cyan.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7497,8 +7598,9 @@
         "key": "cyan.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7579,8 +7681,9 @@
         "key": "cyan.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7661,8 +7764,9 @@
         "key": "cyan.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7743,8 +7847,9 @@
         "key": "cyan.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7825,8 +7930,9 @@
         "key": "cyan.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7907,8 +8013,9 @@
         "key": "cyan.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -7989,8 +8096,9 @@
         "key": "cyan.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8071,8 +8179,9 @@
         "key": "cyan.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8153,8 +8262,9 @@
         "key": "cyan.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8235,8 +8345,9 @@
         "key": "teal.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8317,8 +8428,9 @@
         "key": "teal.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8399,8 +8511,9 @@
         "key": "teal.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8481,8 +8594,9 @@
         "key": "teal.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8563,8 +8677,9 @@
         "key": "teal.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8645,8 +8760,9 @@
         "key": "teal.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8727,8 +8843,9 @@
         "key": "teal.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8809,8 +8926,9 @@
         "key": "teal.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8891,8 +9009,9 @@
         "key": "teal.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -8973,8 +9092,9 @@
         "key": "teal.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9055,8 +9175,9 @@
         "key": "teal.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9137,8 +9258,9 @@
         "key": "teal.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9219,8 +9341,9 @@
         "key": "teal.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9301,8 +9424,9 @@
         "key": "teal.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9383,8 +9507,9 @@
         "key": "teal.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9465,8 +9590,9 @@
         "key": "teal.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9547,8 +9673,9 @@
         "key": "green.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9629,8 +9756,9 @@
         "key": "green.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9711,8 +9839,9 @@
         "key": "green.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9793,8 +9922,9 @@
         "key": "green.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9875,8 +10005,9 @@
         "key": "green.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -9957,8 +10088,9 @@
         "key": "green.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10039,8 +10171,9 @@
         "key": "green.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10121,8 +10254,9 @@
         "key": "green.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10203,8 +10337,9 @@
         "key": "green.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10285,8 +10420,9 @@
         "key": "green.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10367,8 +10503,9 @@
         "key": "green.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10449,8 +10586,9 @@
         "key": "green.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10531,8 +10669,9 @@
         "key": "green.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10613,8 +10752,9 @@
         "key": "green.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10695,8 +10835,9 @@
         "key": "green.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10777,8 +10918,9 @@
         "key": "green.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10859,8 +11001,9 @@
         "key": "gray.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -10941,8 +11084,9 @@
         "key": "gray.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11023,8 +11167,9 @@
         "key": "gray.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11105,8 +11250,9 @@
         "key": "gray.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11187,8 +11333,9 @@
         "key": "gray.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11269,8 +11416,9 @@
         "key": "gray.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11351,8 +11499,9 @@
         "key": "gray.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11433,8 +11582,9 @@
         "key": "gray.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11515,8 +11665,9 @@
         "key": "gray.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11597,8 +11748,9 @@
         "key": "gray.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11679,8 +11831,9 @@
         "key": "gray.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11761,8 +11914,9 @@
         "key": "gray.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11843,8 +11997,9 @@
         "key": "gray.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -11925,8 +12080,9 @@
         "key": "gray.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12007,8 +12163,9 @@
         "key": "gray.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12089,8 +12246,9 @@
         "key": "gray.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12171,8 +12329,9 @@
         "key": "cool-gray.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12253,8 +12412,9 @@
         "key": "cool-gray.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12335,8 +12495,9 @@
         "key": "cool-gray.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12417,8 +12578,9 @@
         "key": "cool-gray.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12499,8 +12661,9 @@
         "key": "cool-gray.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12581,8 +12744,9 @@
         "key": "cool-gray.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12663,8 +12827,9 @@
         "key": "cool-gray.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12745,8 +12910,9 @@
         "key": "cool-gray.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12827,8 +12993,9 @@
         "key": "cool-gray.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12909,8 +13076,9 @@
         "key": "cool-gray.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -12991,8 +13159,9 @@
         "key": "cool-gray.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13073,8 +13242,9 @@
         "key": "cool-gray.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13155,8 +13325,9 @@
         "key": "cool-gray.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13237,8 +13408,9 @@
         "key": "cool-gray.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13319,8 +13491,9 @@
         "key": "cool-gray.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13401,8 +13574,9 @@
         "key": "cool-gray.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13483,8 +13657,9 @@
         "key": "warm-gray.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13565,8 +13740,9 @@
         "key": "warm-gray.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13647,8 +13823,9 @@
         "key": "warm-gray.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13729,8 +13906,9 @@
         "key": "warm-gray.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13811,8 +13989,9 @@
         "key": "warm-gray.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13893,8 +14072,9 @@
         "key": "warm-gray.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -13975,8 +14155,9 @@
         "key": "warm-gray.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14057,8 +14238,9 @@
         "key": "warm-gray.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14139,8 +14321,9 @@
         "key": "warm-gray.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14221,8 +14404,9 @@
         "key": "warm-gray.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14303,8 +14487,9 @@
         "key": "warm-gray.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14385,8 +14570,9 @@
         "key": "warm-gray.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14467,8 +14653,9 @@
         "key": "warm-gray.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14549,8 +14736,9 @@
         "key": "warm-gray.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14631,8 +14819,9 @@
         "key": "warm-gray.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14713,8 +14902,9 @@
         "key": "warm-gray.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14795,8 +14985,9 @@
         "key": "high-contrast.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14877,8 +15068,9 @@
         "key": "high-contrast.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -14959,8 +15151,9 @@
         "key": "high-contrast.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15041,8 +15234,9 @@
         "key": "high-contrast.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15123,8 +15317,9 @@
         "key": "high-contrast.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15205,8 +15400,9 @@
         "key": "high-contrast.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15287,8 +15483,9 @@
         "key": "high-contrast.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15369,8 +15566,9 @@
         "key": "high-contrast.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15451,8 +15649,9 @@
         "key": "high-contrast.md__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15533,8 +15732,9 @@
         "key": "high-contrast.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15615,8 +15815,9 @@
         "key": "high-contrast.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15697,8 +15898,9 @@
         "key": "high-contrast.md__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15779,8 +15981,9 @@
         "key": "high-contrast.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15861,8 +16064,9 @@
         "key": "high-contrast.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -15943,8 +16147,9 @@
         "key": "high-contrast.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16025,8 +16230,9 @@
         "key": "high-contrast.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 50,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16107,8 +16313,9 @@
         "key": "outline.unset__default",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16195,8 +16402,9 @@
         "key": "outline.unset__hover",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16283,8 +16491,9 @@
         "key": "outline.unset__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16371,8 +16580,9 @@
         "key": "outline.unset__active",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16459,8 +16669,9 @@
         "key": "outline.sm__default",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16547,8 +16758,9 @@
         "key": "outline.sm__hover",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16635,8 +16847,9 @@
         "key": "outline.sm__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16723,8 +16936,9 @@
         "key": "outline.sm__active",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16811,8 +17025,9 @@
         "key": "outline.md__default",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16899,8 +17114,9 @@
         "key": "outline.md__hover",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -16987,8 +17203,9 @@
         "key": "outline.md__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -17075,8 +17292,9 @@
         "key": "outline.md__active",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -17163,8 +17381,9 @@
         "key": "outline.lg__default",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -17251,8 +17470,9 @@
         "key": "outline.lg__hover",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -17339,8 +17559,9 @@
         "key": "outline.lg__focus-visible",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -17427,8 +17648,9 @@
         "key": "outline.lg__active",
         "channelsCompared": 62,
         "channelsEqual": 49,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",

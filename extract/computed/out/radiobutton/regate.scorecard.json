@@ -220,9 +220,15 @@
       "pairs": 0,
       "perfectExact": 0,
       "perfectAA": 0,
-      "meanExact": 0,
-      "meanAA": 0,
-      "maxAA": 0
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 16,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
     },
     "fusion": {
       "boundConfirmed": 16,
@@ -239,51 +245,59 @@
     "worstRows": [
       {
         "key": "unchecked.disabled__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 30
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 30,
+        "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 30
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 30,
+        "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 30
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 30,
+        "unscorable": "no-original"
       },
       {
         "key": "unchecked.disabled__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 30
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 30,
+        "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__default",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 26
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 26,
+        "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__hover",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 26
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 26,
+        "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__focus-visible",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 26
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 26,
+        "unscorable": "no-original"
       },
       {
         "key": "checked.disabled__active",
-        "pctAA": 100,
-        "pctExact": 100,
-        "channelsMismatched": 26
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 26,
+        "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
@@ -349,6 +363,7 @@
       ]
     ],
     "namedLosses": [
+      "promotion: pseudo-decor-outside-grammar: backdrop::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 91, 211, 1) 0px 0px 0px -3px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
       "overflow: backdrop.background-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: backdrop.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: backdrop.border-bottom-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -413,8 +428,9 @@
         "key": "unchecked.enabled__default",
         "channelsCompared": 86,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "input",
@@ -429,8 +445,9 @@
         "key": "unchecked.enabled__hover",
         "channelsCompared": 86,
         "channelsEqual": 80,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "input",
@@ -475,8 +492,9 @@
         "key": "unchecked.enabled__focus-visible",
         "channelsCompared": 86,
         "channelsEqual": 84,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "input",
@@ -497,8 +515,9 @@
         "key": "unchecked.enabled__active",
         "channelsCompared": 86,
         "channelsEqual": 76,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "input",
@@ -567,8 +586,9 @@
         "key": "unchecked.disabled__default",
         "channelsCompared": 86,
         "channelsEqual": 56,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -757,8 +777,9 @@
         "key": "unchecked.disabled__hover",
         "channelsCompared": 86,
         "channelsEqual": 56,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -947,8 +968,9 @@
         "key": "unchecked.disabled__focus-visible",
         "channelsCompared": 86,
         "channelsEqual": 56,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1137,8 +1159,9 @@
         "key": "unchecked.disabled__active",
         "channelsCompared": 86,
         "channelsEqual": 56,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1327,8 +1350,9 @@
         "key": "checked.enabled__default",
         "channelsCompared": 86,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "input",
@@ -1343,8 +1367,9 @@
         "key": "checked.enabled__hover",
         "channelsCompared": 86,
         "channelsEqual": 85,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "input",
@@ -1359,8 +1384,9 @@
         "key": "checked.enabled__focus-visible",
         "channelsCompared": 86,
         "channelsEqual": 84,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "input",
@@ -1381,8 +1407,9 @@
         "key": "checked.enabled__active",
         "channelsCompared": 86,
         "channelsEqual": 81,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "input",
@@ -1421,8 +1448,9 @@
         "key": "checked.disabled__default",
         "channelsCompared": 86,
         "channelsEqual": 60,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1587,8 +1615,9 @@
         "key": "checked.disabled__hover",
         "channelsCompared": 86,
         "channelsEqual": 60,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1753,8 +1782,9 @@
         "key": "checked.disabled__focus-visible",
         "channelsCompared": 86,
         "channelsEqual": 60,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
@@ -1919,8 +1949,9 @@
         "key": "checked.disabled__active",
         "channelsCompared": 86,
         "channelsEqual": 60,
-        "pctExact": 100,
-        "pctAA": 100,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",

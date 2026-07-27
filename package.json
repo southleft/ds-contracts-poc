@@ -76,7 +76,9 @@
     "core:browser-check": "node scripts/core-browser-check.mjs",
     "site:build": "tsx site/build.ts",
     "plugin:ui-check": "node scripts/plugin-ui-check.mjs",
-    "docs:check": "node scripts/docs-numbers-check.mjs"
+    "docs:check": "node scripts/docs-numbers-check.mjs",
+    "child-wider": "node scripts/child-wider.mjs",
+    "figma:fresh": "node scripts/figma-scripts-fresh.mjs"
   },
   "engines": {
     "node": ">=20"
