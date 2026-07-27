@@ -6,7 +6,7 @@
  *
  * Three jobs:
  *   1. DRIFT GUARD (dump) — ui.html embeds extract/figma/dump.plugin.js
- *      verbatim (the "Send to Playground" tab runs it through the same
+ *      verbatim (the Send tab runs it through the same
  *      runScript path as the paste box). This build REFUSES to package when
  *      the embedded copy differs from the repo file.
  *   2. ENGINE BUNDLE + DRIFT GUARD (engine) — esbuild bundles the plugin
@@ -267,7 +267,7 @@ export async function verifyEmbeddedDumpSource() {
   const start = ui.indexOf(openTag);
   if (start < 0) {
     throw new Error(
-      'plugin-zip: figma-sync/plugin/ui.html has no #dump-source block — the Send to Playground tab has nothing to run',
+      'plugin-zip: figma-sync/plugin/ui.html has no #dump-source block — the Send tab has nothing to dump',
     );
   }
   const end = ui.indexOf('</script>', start);

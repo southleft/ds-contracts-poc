@@ -22,10 +22,11 @@ page.on('console', (m) => { if (m.type() === 'error') errors.push('console.error
 // --- the code.js simulator, installed before ui.html's script runs ---------
 await page.addInitScript(() => {
   const saved = JSON.parse(localStorage.getItem('sim') || '{}');
-  window.__sim = Object.assign({ markedSets: [], applyLog: null, channel: null, drift: null, channelKey: '', uiState: null }, saved);
+  window.__sim = Object.assign({ markedSets: [], allSets: null, applyLog: null, channel: null, drift: null, channelKey: '', uiState: null }, saved);
   window.__sim.sent = [];
+  window.__sim.readOnlyRuns = [];
   window.__simSave = () => localStorage.setItem('sim', JSON.stringify({
-    markedSets: window.__sim.markedSets, applyLog: window.__sim.applyLog,
+    markedSets: window.__sim.markedSets, allSets: window.__sim.allSets, applyLog: window.__sim.applyLog,
     channel: window.__sim.channel, drift: window.__sim.drift,
     channelKey: window.__sim.channelKey, uiState: window.__sim.uiState,
   }));
@@ -42,7 +43,14 @@ await page.addInitScript(() => {
     else if (msg.type === 'channel-check') post(Object.assign({ type: 'channel-check-result', replyTo: msg.replyTo }, window.__sim.channel));
     else if (msg.type === 'engine-run') {
       const code = String(msg.code || '');
-      if (code.indexOf('apply log') >= 0) post({ type: 'engine-result', id: msg.id, ok: true, result: { applyLog: window.__sim.applyLog } });
+      if (msg.readOnly) window.__sim.readOnlyRuns.push(code.slice(0, 60));
+      // The SCAN and the marked inventory are the same emitted walk with the
+      // marker filter on/off — the simulator tells them apart the same way a
+      // reader does: the scan keeps unmarked rows instead of `continue`ing.
+      const isScan = code.indexOf('const contractBacked = !!(contractId || specHash)') >= 0;
+      if (code.indexOf('Design-side ANATOMY dump') >= 0) post({ type: 'engine-result', id: msg.id, ok: true, result: window.__sim.dump || {} });
+      else if (code.indexOf('apply log') >= 0) post({ type: 'engine-result', id: msg.id, ok: true, result: { applyLog: window.__sim.applyLog } });
+      else if (isScan) post({ type: 'engine-result', id: msg.id, ok: true, result: { inventory: window.__sim.allSets || window.__sim.markedSets } });
       else if (code.indexOf('marker inventory') >= 0) post({ type: 'engine-result', id: msg.id, ok: true, result: { inventory: window.__sim.markedSets } });
       else post({ type: 'engine-result', id: msg.id, ok: true, result: {} });
     }
@@ -196,6 +204,83 @@ await page.waitForTimeout(600);
 const buildRep = await page.locator('#gen-result').innerHTML();
 ok(!buildRep.includes('class="note"') && !buildRep.includes('Delivery #3'),
   'DELIVERY-SEQ BINDING: a paste into Build never borrows the Changes delivery ordering');
+
+// --- 5. BROWNFIELD: a file this tool never made --------------------------
+// The audit's finding, driven end to end: the plugin gated inventory, the
+// empty state and Propose on a marker a hand-built file does not have.
+const HAND_DUMP = {
+  _provenance: { fileKey: 'TESTFILE', extractedAt: '2026-07-27', note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.6) for design→contract proposal.', dumpVersion: '1.6' },
+  _degradations: [], _variables: {},
+  HandBuilt: {
+    setName: 'HandBuilt', type: 'COMPONENT_SET', nodeId: '5:6', key: 'key-5:6',
+    variants: [
+      { name: 'Size=sm', type: 'COMPONENT', bbox: { width: 100, height: 100 }, children: [] },
+      { name: 'Size=lg', type: 'COMPONENT', bbox: { width: 100, height: 100 }, children: [] },
+    ],
+  },
+};
+await page.evaluate((dump) => {
+  window.__sim.markedSets = [];
+  window.__sim.allSets = [
+    { contractId: null, name: 'HandBuilt', nodeId: '5:6', key: 'key-5:6', type: 'COMPONENT_SET', specHash: null, version: null, variants: 2, props: ['Size'], drift: null, contractBacked: false, page: 'Page 1', variantAxes: { Size: ['sm', 'lg'] }, propKinds: { variant: 1, boolean: 0, text: 0, swap: 0 } },
+    { contractId: null, name: 'Legacy Card', nodeId: '5:9', key: null, type: 'COMPONENT', specHash: null, version: null, variants: 1, props: [], drift: null, contractBacked: false, page: 'Page 2', variantAxes: {}, propKinds: { variant: 0, boolean: 0, text: 0, swap: 0 } },
+  ];
+  window.__sim.channel = null;
+  window.__sim.channelKey = '';
+  window.__sim.dump = dump;
+  window.__simSave();
+}, HAND_DUMP);
+await page.reload();
+await page.evaluate((dump) => { window.__sim.dump = dump; }, HAND_DUMP);
+await page.waitForTimeout(400);
+
+// the empty state tells the TRUTH about a file with components in it
+ok(await page.locator('#panel-build').evaluate((e) => e.classList.contains('active')), 'a file with 0 contract-backed sets still opens on Build');
+ok(await shown('#build-empty'), 'the empty card is up');
+const headline = await page.locator('#build-empty-headline').textContent();
+ok(headline === 'This file already has 2 component sets — none of them are under contract yet.',
+  'BROWNFIELD EMPTY STATE: the card counts what is really there instead of "Nothing here is contract-backed yet." (got: ' + headline + ')');
+ok(await shown('#build-brownfield-row'), 'the brownfield door appears');
+ok(await page.locator('#build-scan').evaluate((e) => e.className === 'primary'), 'looking at the file is the panel primary, not building a sample');
+ok(await page.locator('#gen-sample').evaluate((e) => e.className === 'secondary'), 'the sample library steps back to secondary for a file that has components');
+ok((await page.locator('#diag-file').textContent()).includes('not under contract: 2'), 'Diagnostics counts the foreign half');
+
+// the scan itself
+await page.click('#build-scan');
+await page.waitForTimeout(400);
+ok(await page.locator('#panel-send').evaluate((e) => e.classList.contains('active')), 'the brownfield door lands in Send');
+const scanHtml = await page.locator('#scan-result').innerHTML();
+ok(scanHtml.includes('2 component sets — none contract-backed yet.'), 'the scan headline names both halves');
+ok(scanHtml.includes('Not under contract') && scanHtml.includes('HandBuilt'), 'foreign sets are listed with a status word');
+ok(scanHtml.includes('axes: Size (2)'), 'each row reports its variant axes');
+ok(scanHtml.includes('0 boolean · 0 text · 0 swap'), 'each row reports its property counts');
+ok(scanHtml.includes('cannot write to your file'), 'the scan states the read-only guarantee it now actually enforces');
+ok(scanHtml.includes('>Copy JSON<') && scanHtml.includes('>Download JSON<'), 'the scan result carries BOTH a copy and a download affordance');
+ok(!/style="(?!background)/.test(scanHtml), 'no inline style in the scan markup');
+const scanHex = (scanHtml.match(/#[0-9a-fA-F]{3,8}/g) || []).filter((h) => !scanHtml.includes('background:' + h));
+ok(scanHex.length === 0, 'no literal hex in the scan markup — found: ' + JSON.stringify(scanHex));
+ok(await page.evaluate(() => window.__sim.readOnlyRuns.some((c) => c.indexOf('marker inventory') >= 0)),
+  'the scan is dispatched as a readOnly engine-run (the flag code.js now enforces)');
+
+// base-less propose, straight off a scan row
+await page.click('.scan-propose');
+await page.waitForTimeout(700);
+const propHtml = await page.locator('#prop-result').innerHTML();
+ok(await page.locator('#prop-result').evaluate((e) => e.classList.contains('ok')),
+  'BASE-LESS PROPOSE: an empty base box produces a RESULT, not the "the diff needs both sides" refusal');
+ok(propHtml.includes('Proposal from this canvas'), '…headlined as a proposal, not as a diff');
+ok(propHtml.includes('No base contract — proposing'), '…and it says so in the first line');
+ok(propHtml.includes('prop size (enum(sm|lg))'), '…describing the API the canvas drew');
+ok(propHtml.includes('nearest-token suggestions come from'), '…naming the token corpus behind its suggestions');
+ok(propHtml.includes('proposal READ FROM THE CANVAS'), '…with the base-less scope note, not the diff scope note');
+ok(propHtml.includes('>Copy JSON<') && propHtml.includes('>Download JSON<'), 'the proposal carries copy AND download');
+ok(!(await shown('#prop-pr-section')) === false, 'the PR door opens for a base-less proposal too');
+ok((await page.locator('#pr-path').inputValue()).indexOf('contracts/') === 0, 'the PR path pre-fills from the PROPOSED id when there is no base');
+
+// the old refusal string is gone from the product
+const uiText = await page.evaluate(() => document.documentElement.innerHTML);
+ok(uiText.indexOf('Paste the contract this set was generated from into the base box') < 0,
+  'the old refusal copy ("Paste the contract this set was generated from into the base box — the diff needs both sides") no longer exists anywhere in the UI');
 
 console.log('\nconsole/page errors: ' + (errors.length ? '\n  ' + errors.join('\n  ') : 'none'));
 if (errors.length) fails.push('console/page errors');

@@ -1182,4 +1182,214 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log(`✔ sibling bundles — astryx (13 built, ${astryx.vars} vars, ${astryx.aliases} re-anchored minted aliases resolving the unchanged neutral light values), polaris (12 built incl. 22 embedded icons, ${polaris.vars} vars), altitude (8 built from SHADOW-DOM captures, ${altitude.vars} vars, depth-2 nested-shadow parts intact, Light/Dark proven distinct on theme-color-content-default), astryx docs-theme (13 built, same inventory re-skinned, same ${docs.aliases} aliases — these ${docs.aliases} now DO re-theme): carbon (10 built, ${carbon.vars} vars, Light/Dark = .cds--white/.cds--g100 proven distinct on layer-01): the JSON-only rule holds for EVERY example round through the real engine path`);
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles)');
+// --- N+5. BROWNFIELD: scan an unmarked set, propose it with NO base, and
+//          prove the read-only guard is enforcement rather than a label -----
+{
+  // A hand-built set: no ds_contracts marker anywhere. This is the file every
+  // brownfield designer actually has, and the shape the plugin used to drop.
+  await runScript(`
+const page = figma.root.children[0];
+const a = figma.createComponent(); a.name = 'Size=sm';
+const b = figma.createComponent(); b.name = 'Size=lg';
+page.appendChild(a); page.appendChild(b);
+const set = figma.combineAsVariants([a, b], page);
+set.name = 'HandBuilt';
+return { ok: true };
+`);
+
+  // (a) SCAN — the same walk, marker filter off.
+  const scan = await runScript(DSC.scanScriptSource());
+  const scanRows = scan.inventory;
+  const hand = scanRows.find((r) => r.name === 'HandBuilt');
+  assert(hand, 'scanScriptSource() returns the hand-built set the marked inventory drops');
+  assert(hand.contractBacked === false, 'the hand-built row is marked contractBacked:false, not hidden');
+  assert(
+    JSON.stringify(hand.variantAxes) === JSON.stringify({ Size: ['sm', 'lg'] }),
+    `the scan carries the set's variant axes (got ${JSON.stringify(hand.variantAxes)})`,
+  );
+  assert(hand.propKinds && hand.propKinds.variant === 1, 'the scan counts property kinds per set');
+  const marked = await runScript(DSC.inventoryScriptSource());
+  assert(
+    marked.inventory.every((r) => r.contractBacked) &&
+      !marked.inventory.some((r) => r.name === 'HandBuilt'),
+    'the MARKED inventory is untouched — no unmarked row leaks into the update check',
+  );
+  assert(
+    marked.inventory.length > 0 && scanRows.length > marked.inventory.length,
+    `the scan is a strict superset (${scanRows.length} scanned vs ${marked.inventory.length} contract-backed)`,
+  );
+  const report = DSC.scanReport(scanRows);
+  assert(
+    report.total === scanRows.length && report.backed === marked.inventory.length && report.foreign >= 1,
+    `scanReport counts both halves (total ${report.total}, backed ${report.backed}, foreign ${report.foreign})`,
+  );
+  assert(
+    report.headline === `${report.total} component sets — ${report.backed} contract-backed, ${report.foreign} not yet.`,
+    `the scan headline names both halves (got "${report.headline}")`,
+  );
+  const scanExport = JSON.parse(DSC.scanExportJson(scanRows, 'TESTFILE'));
+  assert(
+    scanExport.type === 'FIGMA-FILE-SCAN' && scanExport.totals.notUnderContract === report.foreign,
+    'the scan export artifact carries the totals and every set',
+  );
+
+  // (b) BASE-LESS PROPOSE — the `if` that was the whole B2 blocker.
+  const ui = read('figma-sync/plugin/ui.html');
+  const openTag = '<script type="text/plain" id="dump-source">';
+  const start = ui.indexOf(openTag);
+  const source = ui.slice(start + openTag.length, ui.indexOf('</script>', start)).replace(/^\n/, '');
+  const scopedHand = source.replace(
+    /^const TARGET_SETS = \[[^\n]*\];$/m,
+    `const TARGET_SETS = ${JSON.stringify(['HandBuilt'])};`,
+  );
+  const handDump = await runScript(scopedHand);
+  assert(handDump && handDump.HandBuilt, 'the embedded dump script reads the hand-built set');
+  const baseless = DSC.proposeDiff(handDump, 'HandBuilt', null);
+  assert(baseless.ok, `a base-less propose SUCCEEDS (${baseless.ok ? '' : baseless.issue.headline})`);
+  assert(baseless.baseless === true, 'the result declares itself base-less');
+  assert(
+    baseless.summaryLines[0] === `No base contract — proposing "${baseless.proposal.id}" v${baseless.proposal.version} from what is drawn.`,
+    `the first line says proposal, not diff (got "${baseless.summaryLines[0]}")`,
+  );
+  assert(
+    baseless.summaryLines.some((l) => l.startsWith('prop size (enum(sm|lg))')),
+    `the base-less summary describes the drawn API (got: ${baseless.summaryLines.join(' | ')})`,
+  );
+  assert(
+    baseless.summaryLines[baseless.summaryLines.length - 1].startsWith('Scope: this is a proposal READ FROM THE CANVAS'),
+    'the base-less summary ends with its OWN scope note, not the diff scope note',
+  );
+  assert(
+    baseless.summaryLines.some((l) => l.indexOf('nearest-token suggestions come from the tokens baked into this plugin build') >= 0),
+    'the base-less summary NAMES the token corpus its suggestions came from',
+  );
+  const baselessExport = JSON.parse(baseless.exportJson);
+  assert(
+    baselessExport.type === 'CONTRACT-PROPOSAL' && baselessExport.baseContractId === null &&
+      baselessExport.baseVersion === null && baselessExport.proposedContract,
+    'the base-less export is a CONTRACT-PROPOSAL with a null base, never a fabricated one',
+  );
+  // The WITH-base path is untouched, byte for byte.
+  const withBase = DSC.proposeDiff(await runScript(
+    source.replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['Badge'])};`),
+  ), 'Badge', badge);
+  assert(withBase.ok && withBase.baseless === false, 'the with-base path still diffs');
+  assert(
+    withBase.summaryLines[withBase.summaryLines.length - 1].startsWith('Scope: this diff covers the API surface'),
+    'the with-base diff keeps its own scope note verbatim',
+  );
+  // A present-but-broken base is still a named refusal — only ABSENCE is ok.
+  const broken = DSC.proposeDiff(handDump, 'HandBuilt', { id: 'nope' });
+  assert(
+    !broken.ok && broken.issue.headline.indexOf('does not parse against the schema') >= 0,
+    'a base that is present but does not parse is STILL refused by name',
+  );
+
+  // (c) FOREIGN TOKEN CORPUS — the suggestions follow the user's tokens.
+  const foreignSet = {
+    name: 'Acme',
+    base: { 'acme.color.brand': { $type: 'color', $value: '#123456' } },
+  };
+  const foreign = DSC.proposeDiff(handDump, 'HandBuilt', null, { tokenSet: foreignSet });
+  assert(
+    foreign.ok && foreign.tokenSource === 'your token set "Acme" (from the bundle you pasted)',
+    `a bundle-carried token set becomes the proposal corpus (got "${foreign.ok ? foreign.tokenSource : foreign.issue.headline}")`,
+  );
+  assert(
+    foreign.summaryLines.some((l) => l.indexOf('your token set "Acme"') >= 0),
+    'the report names the foreign corpus in words, so a wrong suggestion is attributable',
+  );
+
+  console.log(
+    `✔ brownfield: scan sees ${report.total} sets (${report.backed} contract-backed, ${report.foreign} hand-built) where the marked inventory saw ${marked.inventory.length}; a base-less propose on "HandBuilt" returns a proposal (not a refusal) naming its corpus; a foreign tokenSet replaces that corpus by name; with-base diff and the parse refusal are unchanged`,
+  );
+  if (process.argv.includes('--show-brownfield')) {
+    console.log('\n--- scan rows (plain words) ---\n  ' + report.lines.join('\n  '));
+    console.log('\n--- base-less proposal for "HandBuilt" ---\n  ' + baseless.summaryLines.join('\n  ') + '\n');
+  }
+}
+
+// --- N+6. READ-ONLY is ENFORCED, not asserted -------------------------------
+// The guard lives in code.js (the sandbox side — it cannot import the engine
+// bundle, which runs in the UI iframe). Pin the REAL bytes: lift the marked
+// block out of code.js, run it here, and drive it against the mock file.
+{
+  const codeJs = read('figma-sync/plugin/code.js');
+  const startMark = '// --- READ-ONLY GUARD (start)';
+  const endMark = '// --- READ-ONLY GUARD (end)';
+  const s = codeJs.indexOf(startMark);
+  const e = codeJs.indexOf(endMark);
+  assert(s >= 0 && e > s, 'code.js carries the marked READ-ONLY GUARD block');
+  const guardSrc = codeJs.slice(s, e);
+  const guardCtx = vm.createContext({});
+  vm.runInContext(`${guardSrc}\nglobalThis.createReadOnlyFigma = createReadOnlyFigma;`, guardCtx);
+  const guarded = guardCtx.createReadOnlyFigma(figma);
+
+  // Same execution shape code.js uses for a readOnly engine-run: the `figma`
+  // global is SHADOWED by the façade.
+  const roContext = vm.createContext({ console: { log() {}, warn() {}, error() {} }, __guarded: guarded });
+  const runReadOnly = (code) =>
+    vm.runInContext(
+      `(async (figma) => {\n${code}\n})(__guarded)`,
+      roContext,
+      { timeout: 120_000 },
+    );
+
+  // 1. every read-only script the UI runs still WORKS through the façade.
+  const roScan = await runReadOnly(DSC.scanScriptSource());
+  const plainScan = await runScript(DSC.scanScriptSource());
+  assert(
+    JSON.stringify(roScan) === JSON.stringify(plainScan),
+    'the guarded run returns byte-identical rows to the unguarded one — the façade is transparent to reads',
+  );
+  const roLog = await runReadOnly(DSC.applyLogScriptSource());
+  assert('applyLog' in roLog, 'the apply-log read runs through the façade');
+  const uiSrc = read('figma-sync/plugin/ui.html');
+  const dumpStart = uiSrc.indexOf('<script type="text/plain" id="dump-source">');
+  const dumpSrc = uiSrc
+    .slice(dumpStart + '<script type="text/plain" id="dump-source">'.length, uiSrc.indexOf('</script>', dumpStart))
+    .replace(/^\n/, '')
+    .replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['Badge'])};`);
+  const roDump = await runReadOnly(dumpSrc);
+  assert(roDump && roDump.Badge, 'the Send-tab dump — variables, resolveForConsumer and all — runs through the façade');
+
+  // 2. every write REFUSES BY NAME.
+  const refusals = [
+    ['figma.createFrame()', 'const f = figma.createFrame(); return f;'],
+    ['node.setSharedPluginData', "await figma.loadAllPagesAsync(); figma.root.children[0].setSharedPluginData('ds_contracts', 'x', 'y'); return 1;"],
+    ['property assignment', 'await figma.loadAllPagesAsync(); figma.root.children[0].name = "hacked"; return 1;'],
+    ['node.remove()', "await figma.loadAllPagesAsync(); const n = figma.root.children[0].findAllWithCriteria({ types: ['COMPONENT_SET'] })[0]; n.remove(); return 1;"],
+    ['figma.variables.createVariable', "figma.variables.createVariableCollection('x'); return 1;"],
+  ];
+  for (const [what, code] of refusals) {
+    let threw = null;
+    try {
+      await runReadOnly(code);
+    } catch (err) {
+      threw = err;
+    }
+    assert(threw, `read-only REFUSES ${what} (it did not throw)`);
+    assert(
+      String(threw.message).startsWith('Read-only run refused '),
+      `the ${what} refusal is the named plain-words one (got "${threw && threw.message}")`,
+    );
+  }
+  // 3. …and the refusals changed nothing.
+  const after = await runScript(DSC.scanScriptSource());
+  assert(
+    JSON.stringify(after.inventory) === JSON.stringify(plainScan.inventory),
+    'after five refused writes the file is byte-identical — the guard blocked, it did not half-apply',
+  );
+  // 4. the UI only ever asks for readOnly on scripts that read.
+  const readOnlyCalls = (uiSrc.match(/readOnly:\s*true/g) || []).length;
+  assert(readOnlyCalls >= 5, `the UI marks its audit runs readOnly (found ${readOnlyCalls})`);
+  assert(
+    codeJs.indexOf('runScript(String(msg.code || \'\'), { readOnly: !!msg.readOnly })') >= 0,
+    'the engine-run handler THREADS readOnly into the runner (the flag used to be dropped on the floor)',
+  );
+  console.log(
+    `✔ read-only enforced: the marker inventory, apply log, file scan and Send dump all run byte-identically through the guarded figma façade, while createFrame / setSharedPluginData / name= / remove() / createVariableCollection each refuse BY NAME and leave the file unchanged`,
+  );
+}
+
+console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles, brownfield-scan, base-less-propose, read-only-enforcement)');

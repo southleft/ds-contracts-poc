@@ -140,9 +140,116 @@ function toPlain(value) {
   }
 }
 
+// --- READ-ONLY GUARD (start) ------------------------------------------------
+// `readOnly: true` used to be a WORD. The ui sent it on every audit run (the
+// marker inventory, the apply log, the Send-tab dump, the brownfield file
+// scan) and nothing here read it — those scripts executed with full plugin
+// permissions and the label promised a safety the runner did not enforce.
+//
+// This is the enforcement. A read-only run gets a `figma` that is a hardened
+// façade instead of the real global:
+//
+//   • every method whose name mutates (set* / create* / import* / delete*,
+//     plus the named list below) THROWS a plain-words refusal naming the call;
+//   • every property assignment, defineProperty and delete on any API object
+//     reached through it THROWS the same way;
+//   • reads pass through untouched — methods run with the RAW object as
+//     `this`, and any wrapped object handed BACK to the API as an argument is
+//     unwrapped first, so Figma never sees a proxy.
+//
+// Scope, stated honestly: this bounds the FIGMA API surface, which is the
+// only way a plugin script can touch the document. It is not a VM sandbox —
+// a script can still spin the CPU or read anything readable. That is exactly
+// what the UI label claims and no more. `Paste a script` (the Advanced debug
+// surface) deliberately does NOT go through here and says so.
+function createReadOnlyFigma(target) {
+  var NAMED_MUTATORS = [
+    'remove', 'appendChild', 'insertChild', 'resize', 'resizeWithoutConstraints', 'rescale',
+    'rotate', 'clone', 'detachInstance', 'swapComponent', 'attachInstance', 'combineAsVariants',
+    'group', 'ungroup', 'flatten', 'union', 'subtract', 'intersect', 'exclude', 'resetOverrides',
+    'insertCharacters', 'deleteCharacters', 'appendCharacters', 'saveVersionHistoryAsync',
+    'commitUndo', 'triggerUndo', 'addComponentProperty', 'editComponentProperty',
+    'appendChildren', 'reparent',
+  ];
+  var refusal = function (what) {
+    return new Error(
+      'Read-only run refused ' + what + ' — this is an audit of your file and cannot change it. ' +
+      'Nothing was written.',
+    );
+  };
+  var isMutatorName = function (name) {
+    if (typeof name !== 'string') return false;
+    if (name.indexOf('set') === 0 || name.indexOf('create') === 0 ||
+        name.indexOf('import') === 0 || name.indexOf('delete') === 0) return true;
+    return NAMED_MUTATORS.indexOf(name) >= 0;
+  };
+  var proxies = new WeakMap(); // raw → proxy (stable identity: node.parent === set still holds)
+  var raws = new WeakMap();    // proxy → raw (argument unwrapping)
+  var unwrapArg = function (v) {
+    if (Array.isArray(v)) return v.map(unwrapArg);
+    if (v && typeof v === 'object' && raws.has(v)) return raws.get(v);
+    return v;
+  };
+  var wrap = function (value, isNamespace) {
+    if (Array.isArray(value)) {
+      return value.map(function (v) { return wrap(v, false); });
+    }
+    if (value === null || typeof value !== 'object') return value;
+    // Wrap API OBJECTS: anything reached off the figma namespace, and
+    // anything carrying an id (nodes, variables, collections, styles).
+    if (!isNamespace && typeof value.id !== 'string') return value;
+    if (proxies.has(value)) return proxies.get(value);
+    // A non-configurable, non-writable data property must be returned
+    // verbatim or the proxy invariant throws — honour it rather than wrap.
+    var locked = function (t, prop, replacement, original) {
+      if (replacement === original) return replacement;
+      var desc = Object.getOwnPropertyDescriptor(t, prop);
+      if (desc && desc.configurable === false && desc.writable === false && 'value' in desc) {
+        return original;
+      }
+      return replacement;
+    };
+    var proxy = new Proxy(value, {
+      get: function (t, prop) {
+        var v = Reflect.get(t, prop, t);
+        if (typeof v === 'function') {
+          var fn = isMutatorName(prop)
+            ? function () { throw refusal('figma.' + String(prop) + '()'); }
+            : function () {
+                var args = Array.prototype.slice.call(arguments).map(unwrapArg);
+                var out = v.apply(t, args);
+                if (out && typeof out.then === 'function') {
+                  return out.then(function (r) { return wrap(r, false); });
+                }
+                return wrap(out, false);
+              };
+          return locked(t, prop, fn, v);
+        }
+        var isObj = v !== null && typeof v === 'object' && !Array.isArray(v);
+        return locked(t, prop, wrap(v, isNamespace && isObj), v);
+      },
+      set: function (t, prop) { throw refusal('the assignment "' + String(prop) + ' = …"'); },
+      defineProperty: function (t, prop) { throw refusal('defining "' + String(prop) + '"'); },
+      deleteProperty: function (t, prop) { throw refusal('deleting "' + String(prop) + '"'); },
+    });
+    proxies.set(value, proxy);
+    raws.set(proxy, value);
+    return proxy;
+  };
+  return wrap(target, true);
+}
+// --- READ-ONLY GUARD (end) --------------------------------------------------
+
 // Same execution shape both transports use: the generated scripts are plain
-// async plugin bodies ending in `return <report>`.
-function runScript(code) {
+// async plugin bodies ending in `return <report>`. A read-only run shadows
+// the `figma` global with the guarded façade above — same script text, same
+// reports, no write reachable.
+function runScript(code, opts) {
+  if (opts && opts.readOnly) {
+    return new Function('figma', 'return (async () => {\n' + code + '\n})()')(
+      createReadOnlyFigma(figma),
+    );
+  }
   return new Function('return (async () => {\n' + code + '\n})()')();
 }
 
@@ -489,10 +596,12 @@ figma.ui.onmessage = async (msg) => {
     // by id. `focus` asks for the paste tab's select+zoom on the result.
     busy = true;
     try {
-      const result = await runScript(String(msg.code || ''));
+      // READ-ONLY: the ui's `readOnly` flag is now ENFORCED, not decorative —
+      // the script runs against the guarded façade and any write throws.
+      const result = await runScript(String(msg.code || ''), { readOnly: !!msg.readOnly });
       const plain = toPlain(result);
       let focus = null;
-      if (msg.focus) {
+      if (msg.focus && !msg.readOnly) {
         try {
           const subject = reportSubject(plain);
           if (subject) {

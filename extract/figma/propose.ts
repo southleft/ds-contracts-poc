@@ -115,7 +115,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { DumpFile } from './types.js';
 import { isDumpSet } from './types.js';
-import { loadTokenCorpus } from './tokens.js';
+import { loadTokenCorpus, NoTokenCorpusError } from './tokens.js';
+import { loadConfig } from '../config.js';
 import { componentIdSlug, dumpCapturesHidden, figmaProposalsReport, proposeFromDump, type FigmaProposalResult } from '../../core/propose-figma.js';
 
 // The inversion engine itself is the pure core module — re-exported here so
@@ -186,14 +187,44 @@ function main() {
   };
   const outDir = readFlag('--out') ?? path.join('extract', 'out', 'figma');
   const contractsDir = readFlag('--contracts') ?? 'contracts';
+  // BROWNFIELD: the token corpus is an INPUT, not this repo's layout.
+  // --tokens wins; otherwise extract.config.json's "tokens" (the field
+  // brownfield orgs already point at their own DTCG files); otherwise the
+  // reference layout when it exists, and a named refusal when it does not.
+  const tokensFlag = readFlag('--tokens');
+  const configFlag = readFlag('--config');
   const dumpPathArg = args[0];
   if (!dumpPathArg) {
-    console.error('Usage: npm run extract:figma -- <dump.json> [--out dir] [--contracts dir]');
+    console.error(
+      'Usage: npm run extract:figma -- <dump.json> [--out dir] [--contracts dir] [--tokens a.json,b.json] [--config extract.config.json]',
+    );
     process.exit(2);
   }
   const root = process.cwd();
   const dump = JSON.parse(readFileSync(path.resolve(root, dumpPathArg), 'utf8')) as DumpFile;
-  const corpus = loadTokenCorpus(root);
+  const configTokens = (() => {
+    try {
+      return loadConfig(configFlag).config.tokens;
+    } catch {
+      return undefined; // a missing/invalid config is not a token-corpus failure
+    }
+  })();
+  const tokenFiles = tokensFlag
+    ? tokensFlag.split(',').map((s) => s.trim()).filter(Boolean)
+    : configTokens;
+  let corpus;
+  try {
+    corpus = loadTokenCorpus(root, {
+      files: tokenFiles,
+      supplyHint: 'pass --tokens <files> or set "tokens" in extract.config.json',
+    });
+  } catch (e) {
+    if (e instanceof NoTokenCorpusError) {
+      console.error(e.message);
+      process.exit(2);
+    }
+    throw e;
+  }
   const loaded = loadContracts(path.resolve(root, contractsDir));
   const contractIdByName = loaded.byName;
   const fileKey = dump._provenance?.fileKey ?? null;

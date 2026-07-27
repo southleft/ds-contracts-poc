@@ -46,6 +46,7 @@ import {
   tokenCorpusFromJson,
   tokenSetTokenTrees,
   type Contract,
+  type TokenCorpus,
   type TokenSetPayload,
 } from '../../../core/index.js';
 import { FINGERPRINT_SRC } from '../../../core/canvas-fingerprint.js';
@@ -180,6 +181,16 @@ export interface InventoryRow {
    *  (v4→v5 with the prototype-wiring round) — regenerate to re-baseline.
    *  Deliberately NOT 'canvas-edited': that would be a false alarm. */
   drift: 'in-sync' | 'canvas-edited' | 'unstamped' | 'version-changed' | null;
+  /** BROWNFIELD: false only on rows a `scanScriptSource()` run kept because
+   *  the file made them by hand. The marked-only inventory every existing
+   *  caller runs emits `true` on every row. */
+  contractBacked?: boolean;
+  /** Page the set lives on (scan rows; the marked inventory carries it too). */
+  page?: string;
+  /** Variant axis name → its options, straight off componentPropertyDefinitions. */
+  variantAxes?: Record<string, string[]>;
+  /** Property counts by kind — the API surface extract/figma-dump.js reads. */
+  propKinds?: { variant: number; boolean: number; text: number; swap: number };
 }
 
 // ---------------------------------------------------------------------------
@@ -764,8 +775,21 @@ return { marker: 'version', contractId: ${JSON.stringify(contractId)}, version: 
    *  run-script path, mutates nothing. G2: the scan also RECOMPUTES each
    *  set's canvas fingerprint (the same dsCanvasFingerprint the Drift tab
    *  runs) against the stamp genesis wrote, so the update check knows which
-   *  targets carry un-proposed canvas edits BEFORE anything applies. */
-  function inventoryScriptSource(): string {
+   *  targets carry un-proposed canvas edits BEFORE anything applies.
+   *
+   *  BROWNFIELD (`includeUnmarked`): the walk below has ALWAYS visited every
+   *  local set — the marker test was a `continue`, which is why a hand-built
+   *  library inventoried as `[]` and the panel said "nothing here is
+   *  contract-backed yet" to a file with 300 sets. With the flag on, the
+   *  unmarked sets are KEPT (contractBacked:false) instead of dropped, and
+   *  every row carries its variant axes and property kinds — the same facts
+   *  extract/figma-dump.js reads, from the walk that was already running.
+   *  Default OFF: every existing caller (the update check, the Send tab's
+   *  base pre-fill) keeps exactly today's marked-only rows. */
+  function inventoryScriptSource(opts: { includeUnmarked?: boolean } = {}): string {
+    const skipUnmarked = opts.includeUnmarked
+      ? '    const contractBacked = !!(contractId || specHash);'
+      : '    if (!contractId && !specHash) continue;\n    const contractBacked = true;';
     return `// ds-contracts plugin: read-only marker inventory (nothing changes).
 ${FINGERPRINT_SRC}
 await figma.loadAllPagesAsync();
@@ -775,10 +799,21 @@ for (const page of figma.root.children) {
     if (node.type === 'COMPONENT' && node.parent && node.parent.type === 'COMPONENT_SET') continue;
     const contractId = node.getSharedPluginData('ds_contracts', 'contractId');
     const specHash = node.getSharedPluginData('ds_contracts', 'specHash');
-    if (!contractId && !specHash) continue;
+${skipUnmarked}
     let props = [];
+    const variantAxes = {};
+    const propKinds = { variant: 0, boolean: 0, text: 0, swap: 0 };
     try {
-      props = Object.keys(node.componentPropertyDefinitions || {}).map((k) => k.split('#')[0]);
+      const defs = node.componentPropertyDefinitions || {};
+      props = Object.keys(defs).map((k) => k.split('#')[0]);
+      for (const rawName of Object.keys(defs)) {
+        const def = defs[rawName];
+        const plainName = rawName.split('#')[0];
+        if (def.type === 'VARIANT') { variantAxes[plainName] = def.variantOptions || []; propKinds.variant++; }
+        else if (def.type === 'BOOLEAN') propKinds.boolean++;
+        else if (def.type === 'TEXT') propKinds.text++;
+        else if (def.type === 'INSTANCE_SWAP') propKinds.swap++;
+      }
     } catch (e) { /* non-set components can throw — the row still counts */ }
     let drift = null;
     try {
@@ -802,11 +837,90 @@ for (const page of figma.root.children) {
       variants: node.type === 'COMPONENT_SET' ? node.children.length : 1,
       props: props,
       drift: drift,
+      contractBacked: contractBacked,
+      page: page.name,
+      variantAxes: variantAxes,
+      propKinds: propKinds,
     });
   }
 }
 return { inventory: rows };
 `;
+  }
+
+  /** BROWNFIELD — "scan this file": the SAME read-only walk, unfiltered.
+   *  This is the caller extract/figma-dump.js never had inside the plugin. */
+  function scanScriptSource(): string {
+    return inventoryScriptSource({ includeUnmarked: true });
+  }
+
+  /** Plain-words summary of a full scan — what the file HAS, including the
+   *  part this tool did not make. Pure: the UI renders it, the check pins it. */
+  function scanReport(rows: InventoryRow[]): {
+    total: number;
+    backed: number;
+    foreign: number;
+    headline: string;
+    lines: string[];
+    rows: InventoryRow[];
+  } {
+    const total = rows.length;
+    const backed = rows.filter((r) => r.contractBacked).length;
+    const foreign = total - backed;
+    const axisCount = (r: InventoryRow) => Object.keys(r.variantAxes ?? {}).length;
+    const headline =
+      total === 0
+        ? 'No component sets in this file.'
+        : foreign === 0
+          ? `${total} component set${total === 1 ? '' : 's'} — all contract-backed.`
+          : backed === 0
+            ? `${total} component set${total === 1 ? '' : 's'} — none contract-backed yet.`
+            : `${total} component set${total === 1 ? '' : 's'} — ${backed} contract-backed, ${foreign} not yet.`;
+    const lines = rows
+      .slice()
+      .sort((a, b) => (a.page ?? '').localeCompare(b.page ?? '') || a.name.localeCompare(b.name))
+      .map((r) => {
+        const axes = Object.entries(r.variantAxes ?? {})
+          .map(([name, options]) => `${name} (${options.length})`)
+          .join(', ');
+        const kinds = r.propKinds ?? { variant: 0, boolean: 0, text: 0, swap: 0 };
+        const bits = [
+          `${r.variants} variant${r.variants === 1 ? '' : 's'}`,
+          axes ? `axes: ${axes}` : 'no variant axes',
+          `${kinds.boolean} boolean · ${kinds.text} text · ${kinds.swap} swap`,
+        ];
+        return `${r.name} — ${r.contractBacked ? `contract-backed (${r.contractId ?? 'no id'})` : 'not under contract'} · ${bits.join(' · ')} · ${r.page ?? 'unknown page'}`;
+      });
+    return { total, backed, foreign, headline, lines, rows };
+  }
+
+  /** The downloadable/copyable scan artifact — the same rows, as JSON. */
+  function scanExportJson(rows: InventoryRow[], fileKey: string | null = null): string {
+    const s = scanReport(rows);
+    return JSON.stringify(
+      {
+        type: 'FIGMA-FILE-SCAN',
+        version: 1,
+        fileKey: fileKey || null,
+        totals: { sets: s.total, contractBacked: s.backed, notUnderContract: s.foreign },
+        sets: s.rows.map((r) => ({
+          name: r.name,
+          page: r.page ?? null,
+          nodeId: r.nodeId,
+          key: r.key,
+          type: r.type,
+          contractBacked: !!r.contractBacked,
+          contractId: r.contractId,
+          version: r.version,
+          variants: r.variants,
+          variantAxes: r.variantAxes ?? {},
+          propKinds: r.propKinds ?? { variant: 0, boolean: 0, text: 0, swap: 0 },
+          props: r.props,
+        })),
+      },
+      null,
+      2,
+    );
   }
 
   /** Expected property-name surface of a compiled contract (variant axes,
@@ -1229,6 +1343,9 @@ return { inventory: rows };
   const DIFF_SCOPE_NOTE =
     'Scope: this diff covers the API surface (version, props, slots, variant axes) and names when anatomy/style bytes differ — interior style changes are summarized, not itemized.';
 
+  const BASELESS_SCOPE_NOTE =
+    'Scope: this is a proposal READ FROM THE CANVAS, not a diff — there is no base contract to compare against, so nothing here is called a change. Review it, then adopt it into your repo as the contract for this set.';
+
   interface ProposeDiffResult {
     ok: true;
     setName: string;
@@ -1237,15 +1354,51 @@ return { inventory: rows };
     /** The downloadable artifact: base id/version, proposal, summary. */
     exportJson: string;
     proposalNotes: string[];
+    /** BROWNFIELD: true when no base contract was supplied. The proposal
+     *  stands alone; `summaryLines` describes it instead of diffing it. */
+    baseless: boolean;
+    /** Which token corpus the nearest-token suggestions came from — a
+     *  brownfield file suggesting THIS repo's tokens would be a confidently
+     *  wrong answer, so the answer names its source. */
+    tokenSource: string;
+    /** Canvas values that bound to no token, with the corpus's nearest
+     *  candidates. Reported, never applied. */
+    unbound: Array<{ nodePath: string; property: string; value: string | number; suggestions: string[] }>;
+  }
+
+  /** The corpus nearest-token suggestions resolve against. A bundle-carried
+   *  foreign token set REPLACES the baked repo tokens here — the same choice
+   *  planGenerate/updatePlan make for compiling, applied to proposing. The
+   *  user's tree lands in the semantic slot (the playground's adapter shape:
+   *  one modeless tree, suggestions ordered semantic-first). */
+  function proposalCorpus(tokenSet: TokenSetPayload | null | undefined): {
+    corpus: TokenCorpus;
+    label: string;
+  } {
+    if (!tokenSet) return { corpus, label: 'the tokens baked into this plugin build' };
+    const trees = tokenSetTokenTrees(tokenSet);
+    return {
+      corpus: tokenCorpusFromJson({
+        primitives: {},
+        semantic: trees.primitives,
+        light: {},
+        brandDefault: {},
+      }),
+      label: `your token set "${tokenSet.name}" (from the bundle you pasted)`,
+    };
   }
 
   function proposeDiff(
     dump: Record<string, unknown>,
     setName: string,
+    /** null/undefined = BASE-LESS: propose from the canvas anyway. A value
+     *  that is present but does not parse is still a named refusal. */
     baseRaw: unknown,
+    opts: { tokenSet?: TokenSetPayload | null } = {},
   ): ProposeDiffResult | { ok: false; issue: PlainIssue } {
-    const base = ContractSchema.safeParse(baseRaw);
-    if (!base.success) {
+    const baseless = baseRaw === null || baseRaw === undefined;
+    const base = baseless ? null : ContractSchema.safeParse(baseRaw);
+    if (base && !base.success) {
       return {
         ok: false,
         issue: plain(
@@ -1254,11 +1407,13 @@ return { inventory: rows };
         ),
       };
     }
+    const baseData = base && base.success ? base.data : null;
+    const { corpus: activeCorpus, label: tokenSource } = proposalCorpus(opts.tokenSet);
     const provenance = (dump as { _provenance?: { fileKey?: string | null } })._provenance;
     let batch;
     try {
       batch = proposeBatchFromDump(dump as never, {
-        corpus,
+        corpus: activeCorpus,
         contractIdByName: new Map(
           [...bakedById.values()].map((c) => [c.name, c.id] as [string, string]),
         ),
@@ -1285,12 +1440,14 @@ return { inventory: rows };
           : plain(`No component set named "${setName}" was in the dump.`),
       };
     }
-    const summaryLines = boundedContractDiff(base.data, proposal.contract);
+    const summaryLines = baseData
+      ? boundedContractDiff(baseData, proposal.contract)
+      : baselessProposalLines(proposal.contract, proposal.unbound, tokenSource);
     const exportJson = JSON.stringify(
       {
         type: 'CONTRACT-PROPOSAL',
-        baseContractId: base.data.id,
-        baseVersion: base.data.version,
+        baseContractId: baseData ? baseData.id : null,
+        baseVersion: baseData ? baseData.version : null,
         setName: proposal.setName,
         summary: summaryLines,
         proposedContract: proposal.contract,
@@ -1306,7 +1463,57 @@ return { inventory: rows };
       summaryLines,
       exportJson,
       proposalNotes: proposal.notes,
+      baseless,
+      tokenSource,
+      unbound: proposal.unbound,
     };
+  }
+
+  /** BROWNFIELD — what a proposal SAYS when there is nothing to diff it
+   *  against. Describes the API surface the canvas drew, names the token
+   *  corpus the suggestions came from, and counts the unbound values. */
+  function baselessProposalLines(
+    proposedRaw: Record<string, unknown>,
+    unbound: Array<{ property: string; value: string | number; suggestions: string[] }>,
+    tokenSource: string,
+  ): string[] {
+    const lines: string[] = [];
+    const parsed = ContractSchema.safeParse(proposedRaw);
+    if (!parsed.success) {
+      return [
+        'The proposed contract did not parse against the schema — see the export for the raw proposal.',
+        BASELESS_SCOPE_NOTE,
+      ];
+    }
+    const p = parsed.data;
+    lines.push(`No base contract — proposing "${p.id}" v${p.version} from what is drawn.`);
+    for (const prop of p.props) {
+      const t = propTypeText(prop.type);
+      const dflt = prop.default === undefined ? '' : ` (default ${JSON.stringify(prop.default)})`;
+      lines.push(`prop ${prop.name} (${t})${dflt}`);
+    }
+    if (!p.props.length) lines.push('no component properties — this set draws a single fixed variant.');
+    const slotNames = [...slotsOf(p)].map((s) => s.slot.name);
+    if (slotNames.length) lines.push(`slots: ${slotNames.join(', ')}`);
+    lines.push(`nearest-token suggestions come from ${tokenSource}.`);
+    lines.push(
+      unbound.length === 0
+        ? 'every drawn value resolved to a token — nothing unbound.'
+        : `${unbound.length} drawn value${unbound.length === 1 ? '' : 's'} bound to no token (reported, never invented) — e.g. ${unbound
+            .slice(0, 3)
+            .map((u) => `${u.property} ${String(u.value)}${u.suggestions.length ? ` → nearest: ${u.suggestions[0]}` : ' → no candidate'}`)
+            .join('; ')}.`,
+    );
+    lines.push(BASELESS_SCOPE_NOTE);
+    return lines;
+  }
+
+  /** Plain-words spelling of a prop's declared type — shared by the diff and
+   *  the base-less proposal summary so both reports speak one language. */
+  function propTypeText(t: Contract['props'][number]['type']): string {
+    if (typeof t === 'string') return t;
+    if ('enum' in t) return `enum(${t.enum.join('|')})`;
+    return 'arrayOf';
   }
 
   /** Bounded API-level contract diff, plain words. */
@@ -1320,12 +1527,7 @@ return { inventory: rows };
       ];
     }
     const p = proposed.data;
-    type PropDoc = Contract['props'][number];
-    const typeText = (t: PropDoc['type']): string => {
-      if (typeof t === 'string') return t;
-      if ('enum' in t) return `enum(${t.enum.join('|')})`;
-      return 'arrayOf';
-    };
+    const typeText = propTypeText;
     const baseProps = new Map(base.props.map((x) => [x.name, x]));
     const propProps = new Map(p.props.map((x) => [x.name, x]));
     for (const [name, prop] of propProps) {
@@ -1486,6 +1688,11 @@ return { inventory: rows };
     validateOne,
     planGenerate,
     inventoryScriptSource,
+    // BROWNFIELD — the read-only "what is in this file" half. Same walk,
+    // marker filter off; the marked inventory above is untouched.
+    scanScriptSource,
+    scanReport,
+    scanExportJson,
     updatePlan,
     updateApplySteps,
     // THE STANDING CHANNEL (G1) — the same module-level pure functions the

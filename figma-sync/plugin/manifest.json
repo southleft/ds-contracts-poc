@@ -16,6 +16,6 @@
       "http://localhost:8765",
       "http://localhost:8787"
     ],
-    "reasoning": "The workers.dev origin is the pairing bridge: Send to Playground POSTs the read-only component dump there, and Generate/Update receive pushed contract bundles from it by code. api.github.com carries the OPTIONAL Propose-change PR flow (BYO fine-grained token, session-only, never stored; dry-run sends nothing). Dev-only: the local runner fetches generated figma-sync scripts from npm run figma:serve (port 8765), and 8787 is wrangler dev for testing the bridge locally."
+    "reasoning": "The workers.dev origin is the pairing bridge and the standing channel: Send POSTs the read-only component dump there, and Build/Changes receive pushed contract bundles from it (by pairing code, or by read key from a CI-published channel). api.github.com carries the OPTIONAL Propose-change PR flow (BYO fine-grained token, session-only, never stored; dry-run sends nothing). Dev-only: the local runner fetches generated figma-sync scripts from npm run figma:serve (port 8765), and 8787 is wrangler dev for testing the bridge locally."
   }
 }

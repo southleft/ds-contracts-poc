@@ -219,8 +219,18 @@
      (per-set boxes, protected-edits card, Apply) answers below.
      ==================================================================== -->
 <div class="panel active" id="panel-build" role="tabpanel">
+  <!-- Empty state, two truths. A file with nothing in it gets the sample
+       library. A file that ALREADY HAS components (brownfield — the common
+       real case) gets told how many, and its first action is to look at
+       them, not to build a sample it does not need. -->
   <div class="section" id="build-empty" hidden>
-    <div class="strong">Nothing here is contract-backed yet.</div>
+    <div class="strong" id="build-empty-headline">Nothing here is contract-backed yet.</div>
+    <div class="row" id="build-brownfield-row" hidden>
+      <button class="primary" id="build-scan">See what’s in this file</button>
+    </div>
+    <div class="meta" id="build-brownfield-meta" hidden>A read-only pass over the
+      sets you already have — what they are, and which could come under
+      contract. Nothing is changed.</div>
     <div class="row"><button class="primary" id="gen-sample" data-busy="Building…">Build the sample library</button></div>
     <div class="meta">Card, Badge, Avatar, Button — token-bound, built in this file in ~30 seconds. Safe to re-run.</div>
     <div class="meta">Or paste your contracts file below.</div>
@@ -319,22 +329,42 @@
 </div>
 
 <!-- ========================================================================
-     SEND — "get my canvas change to the code side." Reached mainly from a
-     Changes row; the two doors (GitHub PR, pairing bridge) appear once a
-     proposal exists.
+     SEND — "get what is on this canvas to the code side." Two doors in, one
+     direction out. Reached mainly from a Changes row ("Propose this change");
+     ALSO the brownfield entry point — a file this tool never made can be
+     scanned here and proposed straight from the canvas with no base contract.
+     IA note (brownfield round): adoption did NOT get a fourth tab. Build is
+     "contracts → this canvas"; Send is the other direction, "this canvas →
+     contracts", which is exactly what adopting a hand-built library is. The
+     panel's intent widened; the tab bar did not grow.
      ==================================================================== -->
 <div class="panel" id="panel-send" role="tabpanel">
-  <div class="section grow">
+  <div class="section">
+    <div class="section-label">What’s in this file</div>
+    <div class="hint">A read-only pass over every local component set —
+      including the ones this tool did not make. Nothing is changed.</div>
+    <div class="row">
+      <button class="secondary" id="scan-run" data-busy="Scanning…">Scan this file</button>
+      <span class="status" id="scan-status"></span>
+    </div>
+    <div class="result short" id="scan-result" hidden></div>
+  </div>
+  <div class="section grow rule">
     <div class="hint">Usually you arrive here from Changes — “Propose this
-      change.” To start cold, select a generated set on the canvas.</div>
+      change.” To start cold, select a set on the canvas, or pick one from the
+      scan above. A set this tool did not build needs no base contract.</div>
     <div class="field">
       <label for="prop-set">Component set name</label>
       <input type="text" id="prop-set" spellcheck="false" autocomplete="off" placeholder="Badge (empty = your current selection)" />
     </div>
     <div class="field">
-      <label for="prop-base">Base contract (the contract this set was generated from)</label>
+      <label for="prop-base">Base contract — optional</label>
       <textarea id="prop-base" spellcheck="false" style="min-height:64px;flex:none;"
-        placeholder="Paste the base contract JSON. For sets generated from a repo contract the plugin pre-fills this after reading the set."></textarea>
+        placeholder="Paste the contract this set was generated from to get a diff. Leave it empty and the plugin proposes a contract from what is drawn."></textarea>
+      <div class="meta">With a base contract you get a diff (what changed).
+        Without one you get a proposal (what this set is) — that is the path
+        for components this tool did not build. Sets generated from a repo
+        contract pre-fill their own base after the read.</div>
     </div>
     <div class="row">
       <button class="primary" id="prop-run" data-busy="Reading…">Read the set &amp; diff</button>
@@ -390,7 +420,9 @@
   <div class="section">
     <div class="section-label">Paste a script</div>
     <div class="meta">Debug surface — runs raw generated scripts with full
-      plugin permissions. For developers of this tool.</div>
+      plugin permissions, and unlike every read-only action in Build, Changes
+      and Send it is NOT run against the guarded read-only API. A script
+      pasted here can change this file. For developers of this tool.</div>
     <textarea id="paste-input" spellcheck="false"
       placeholder="Paste a generated Figma script — a plain async plugin body ending in `return <report>`."></textarea>
     <div class="row">
@@ -502,11 +534,19 @@
   // How many contract-backed sets this file carries. Decides the default tab,
   // the Build empty state, and whether Build's button generates or checks.
   var markedSets = 0;
+  // BROWNFIELD: how many local component sets this tool did NOT make. The
+  // number the plugin used to throw away.
+  var foreignSets = 0;
   var inventoryKnown = false;
+  // The token set the last pasted/received bundle carried, if any. Threaded
+  // into the propose corpus so nearest-token suggestions come from the
+  // user's tokens instead of this repo's — a confidently wrong answer is
+  // worse than none.
+  var activeTokenSet = null;
 
   // --- busy handling --------------------------------------------------------
   // Busy = disabled + label swap. No spinners anywhere.
-  var BUSY_BUTTONS = ['paste-run', 'runner-run', 'gen-run', 'gen-sample', 'prop-run', 'drift-check', 'channel-check']
+  var BUSY_BUTTONS = ['paste-run', 'runner-run', 'gen-run', 'gen-sample', 'prop-run', 'drift-check', 'channel-check', 'scan-run', 'build-scan']
     .map(function (id) { return $(id); });
   var APPLY_BUTTONS = [$('build-apply'), $('changes-apply')];
   function swapLabel(btn, on) {
@@ -563,6 +603,49 @@
     box.appendChild(el);
     return el;
   }
+  /** Every JSON a report produces gets BOTH doors: copy (the plugin window
+   *  is a 640px iframe — reading JSON out of it by hand is not a plan) and
+   *  download. `navigator.clipboard` is unavailable in the plugin iframe, so
+   *  the copy runs the execCommand path against a detached textarea; when
+   *  even that is refused the link says so instead of lying. */
+  function copyToClipboard(text, link) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, text.length);
+    var copied = false;
+    try { copied = document.execCommand('copy'); } catch (e) { copied = false; }
+    document.body.removeChild(ta);
+    var was = link.dataset.idleText || link.textContent;
+    link.dataset.idleText = was;
+    link.textContent = copied ? 'Copied' : 'Copy blocked — use Download';
+    setTimeout(function () { link.textContent = was; }, 1800);
+    return copied;
+  }
+  function addArtifactActions(box, filename, text) {
+    var row = document.createElement('div');
+    row.className = 'row';
+    var copy = document.createElement('a');
+    copy.className = 'row-action';
+    copy.href = '#';
+    copy.textContent = 'Copy JSON';
+    copy.onclick = function (e) { e.preventDefault(); copyToClipboard(text, copy); };
+    var dl = document.createElement('a');
+    dl.className = 'download';
+    dl.download = filename;
+    dl.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(text);
+    dl.textContent = 'Download JSON';
+    row.appendChild(copy);
+    row.appendChild(dl);
+    box.appendChild(row);
+    return row;
+  }
+
   function addIssues(box, issues) {
     (issues || []).forEach(function (issue) {
       addLine(box, issue.headline, 'error');
@@ -674,6 +757,83 @@
     });
   }
 
+  // --- Send: scan this file (the brownfield door) ---------------------------
+  // Read-only, and now ENFORCED read-only: code.js runs `readOnly` scripts
+  // against a guarded figma façade where every write throws by name.
+  function runScan() {
+    var DSC = engine();
+    if (!DSC || !DSC.scanScriptSource) {
+      addLine(resultBox('scan-result', false, 'No engine.'), NO_ENGINE);
+      return;
+    }
+    setBusy(true);
+    $('scan-status').textContent = 'Reading every component set (read-only)…';
+    engineRun(DSC.scanScriptSource(), { readOnly: true }, function (msg) {
+      setBusy(false);
+      $('scan-status').textContent = '';
+      if (!msg.ok) {
+        addIssues(resultBox('scan-result', false, 'Could not read this file.'), [{ headline: msg.error }]);
+        return;
+      }
+      renderScan(DSC, (msg.result && msg.result.inventory) || []);
+    });
+  }
+  $('scan-run').onclick = runScan;
+  $('build-scan').onclick = function () {
+    userPickedTab = true;
+    select('send');
+    runScan();
+  };
+
+  function renderScan(DSC, rows) {
+    var report = DSC.scanReport(rows);
+    markedSets = report.backed;
+    foreignSets = report.foreign;
+    inventoryKnown = true;
+    syncSurfaces();
+    var box = resultBox('scan-result', report.total > 0 && report.foreign === 0 ? true : null, report.headline);
+    addMeta(box, 'Read-only — this pass cannot write to your file.');
+    if (report.total === 0) {
+      addLine(box, 'Nothing to adopt: this file has no local component sets or components.');
+      return;
+    }
+    var html = report.rows.map(function (r) {
+      var axes = Object.keys(r.variantAxes || {}).map(function (name) {
+        return escHtml(name) + ' (' + (r.variantAxes[name] || []).length + ')';
+      }).join(', ');
+      var kinds = r.propKinds || { boolean: 0, text: 0, swap: 0 };
+      var meta = [
+        escHtml(r.page || 'unknown page'),
+        r.variants + ' variant' + (r.variants === 1 ? '' : 's'),
+        axes ? 'axes: ' + axes : 'no variant axes',
+        kinds.boolean + ' boolean · ' + kinds.text + ' text · ' + kinds.swap + ' swap',
+      ].join(' · ');
+      var statusClass = r.contractBacked ? 'text-success' : 'report-meta';
+      var statusWord = r.contractBacked ? 'Contract-backed' : 'Not under contract';
+      var action = r.contractBacked ? '' :
+        '<div class="indent"><a href="#" class="row-action scan-propose" data-set="' +
+        escHtml(r.name).replace(/"/g, '&quot;') + '">Propose a contract from this set</a></div>';
+      return '<div class="report-row">' +
+        '<div class="report-head"><span class="report-name">' + escHtml(r.name) + '</span>' +
+        '<span class="report-status ' + statusClass + '">' + escHtml(statusWord) + '</span></div>' +
+        '<div class="report-meta">' + meta + '</div>' + action + '</div>';
+    }).join('');
+    var wrap = document.createElement('div');
+    wrap.innerHTML = html;
+    box.appendChild(wrap);
+    wrap.querySelectorAll('.scan-propose').forEach(function (a) {
+      a.onclick = function (e) {
+        e.preventDefault();
+        // A set this tool did not make has no base contract, and must not
+        // inherit one left in the box from a previous read.
+        $('prop-base').value = '';
+        $('prop-set').value = a.getAttribute('data-set');
+        $('prop-run').click();
+      };
+    });
+    addArtifactActions(box, 'figma-file-scan.json', DSC.scanExportJson(rows, currentFileKey));
+  }
+
   // --- engine-run correlation ----------------------------------------------
   var enginePending = {}; // id → callback(msg)
   var engineSeq = 0;
@@ -709,13 +869,27 @@
   }
 
   // --- this file's inventory ------------------------------------------------
-  // One read-only marker read on open: it decides the default tab, the Build
-  // empty state, and whether Build checks or generates. Nothing is staged.
+  // One read-only read on open: it decides the default tab, the Build empty
+  // state, and whether Build checks or generates. Nothing is staged.
+  //
+  // BROWNFIELD: this now runs the UNFILTERED walk (scanScriptSource). It is
+  // the same traversal that always ran — the marker test was a `continue`,
+  // which is why a 300-set hand-built library reported "nothing here is
+  // contract-backed yet" and offered a sample library. Both counts come back
+  // now, so the empty state can say the true sentence. Every OTHER caller
+  // (the update check, the Send base pre-fill) still runs the marked-only
+  // inventory: their semantics are untouched.
   function refreshInventory(cb) {
     var DSC = engine();
-    if (!DSC || !DSC.inventoryScriptSource) { inventoryKnown = true; syncSurfaces(); if (cb) cb(); return; }
-    engineRun(DSC.inventoryScriptSource(), { readOnly: true }, function (msg) {
-      markedSets = (msg.ok && msg.result && msg.result.inventory) ? msg.result.inventory.length : 0;
+    if (!DSC || !DSC.scanScriptSource) { inventoryKnown = true; syncSurfaces(); if (cb) cb(); return; }
+    engineRun(DSC.scanScriptSource(), { readOnly: true }, function (msg) {
+      var rows = (msg.ok && msg.result && msg.result.inventory) ? msg.result.inventory : [];
+      // `contractBacked` rides every scan row; the marker fields are the
+      // fallback so an older/marked-only reply still counts correctly.
+      markedSets = rows.filter(function (r) {
+        return r.contractBacked !== undefined ? !!r.contractBacked : !!(r.contractId || r.specHash);
+      }).length;
+      foreignSets = rows.length - markedSets;
       inventoryKnown = true;
       syncSurfaces();
       if (cb) cb();
@@ -728,9 +902,18 @@
   function syncSurfaces() {
     var empty = markedSets === 0 && !$('gen-input').value.trim();
     $('build-empty').hidden = !empty;
-    // ONE filled button per panel: in the empty state the sample IS the
-    // action, so Generate steps back to a bordered secondary.
-    $('gen-sample').className = empty ? 'primary' : 'secondary';
+    // BROWNFIELD split. A file with nothing in it wants the sample library.
+    // A file that already has components wants to be TOLD SO, and its first
+    // action is to look at what it has — not to build a sample it does not
+    // need. One filled primary per panel either way.
+    var brownfield = empty && foreignSets > 0;
+    $('build-empty-headline').textContent = brownfield
+      ? 'This file already has ' + foreignSets + ' component set' + (foreignSets === 1 ? '' : 's') +
+        ' — none of them are under contract yet.'
+      : 'Nothing here is contract-backed yet.';
+    $('build-brownfield-row').hidden = !brownfield;
+    $('build-brownfield-meta').hidden = !brownfield;
+    $('gen-sample').className = empty && !brownfield ? 'primary' : 'secondary';
     $('gen-run').className = empty ? 'secondary' : 'primary';
     $('gen-run').textContent = markedSets > 0 ? 'Check against this file' : 'Generate in this file';
     delete $('gen-run').dataset.idle;
@@ -742,7 +925,8 @@
     $('drift-actions').hidden = noSets;
     $('drift-help').hidden = noSets;
     $('diag-file').textContent = 'file key: ' + (currentFileKey || '(unshared draft)') +
-      ' · contract-backed sets: ' + (inventoryKnown ? markedSets : 'unread');
+      ' · contract-backed sets: ' + (inventoryKnown ? markedSets : 'unread') +
+      ' · not under contract: ' + (inventoryKnown ? foreignSets : 'unread');
     // Default tab, once: marked sets → Changes (the common return visit is a
     // check, not a build); otherwise Build.
     if (inventoryKnown && !userPickedTab && markedSets > 0) select('changes');
@@ -1094,6 +1278,12 @@
       addIssues(resultBox(ctx.result, false, 'Nothing checked.'), [parsed.issue]);
       return;
     }
+    // The bundle's OWN tokens become the active corpus for proposing too —
+    // last parse wins, including back to the baked tokens when a bundle
+    // carries none. Without this, a foreign-token library's nearest-token
+    // suggestions in Send came from THIS repo's tokens: wrong answers,
+    // confidently given.
+    activeTokenSet = parsed.tokenSet || null;
     setBusy(true);
     $(ctx.status).textContent = 'Reading this file’s markers (read-only)…';
     engineRun(DSC.inventoryScriptSource(), { readOnly: true }, function (msg) {
@@ -1231,6 +1421,9 @@
       addIssues(resultBox('gen-result', false, 'Nothing generated.'), [parsed.issue]);
       return;
     }
+    // Same threading as the check path: this bundle's tokens become the
+    // corpus Send proposes against.
+    activeTokenSet = parsed.tokenSet || null;
     var plan = DSC.planGenerate(parsed.contracts, {
       // Tokens-first is not a choice any more: a fresh file needs it and a
       // re-run upserts, so the control was a way to break your own build.
@@ -1327,35 +1520,36 @@
             baseText = baked;
           }
         }
-        if (!baseText) {
-          addIssues(resultBox('prop-result', false, 'No base contract.'), [{
-            headline: 'Paste the contract this set was generated from into the base box — the diff needs both sides. (Sets generated by this plugin from a repo contract pre-fill automatically.)',
-          }]);
-          return;
+        // BROWNFIELD — THE ONE `if` THAT WAS THE WHOLE BLOCKER. This used to
+        // refuse ("the diff needs both sides") whenever the base box was
+        // empty, which is by definition every set this tool did not build.
+        // The proposer never needed a base: it is marker-agnostic and runs
+        // on whatever the dump carries. No base now means NO DIFF, not no
+        // proposal — and the report says which of the two it is showing.
+        var baseRaw = null;
+        if (baseText) {
+          try { baseRaw = JSON.parse(baseText); } catch (e) {
+            addIssues(resultBox('prop-result', false, 'No proposal.'), [{ headline: 'The base contract box is not valid JSON — empty it to propose from the canvas instead.', detail: String(e && e.message || e) }]);
+            return;
+          }
         }
-        var baseRaw;
-        try { baseRaw = JSON.parse(baseText); } catch (e) {
-          addIssues(resultBox('prop-result', false, 'No base contract.'), [{ headline: 'The base contract box is not valid JSON.', detail: String(e && e.message || e) }]);
-          return;
-        }
-        var diff = DSC.proposeDiff(dump, setName, baseRaw);
+        var diff = DSC.proposeDiff(dump, setName, baseRaw, { tokenSet: activeTokenSet });
         if (!diff.ok) {
           addIssues(resultBox('prop-result', false, 'No proposal.'), [diff.issue]);
           return;
         }
         lastProposal = diff;
-        var box = resultBox('prop-result', true, 'Proposed change — ' + diff.setName + ':');
+        var proposedId = (diff.proposal && diff.proposal.id) || (baseRaw && baseRaw.id) || 'contract';
+        var box = resultBox('prop-result', true, diff.baseless
+          ? 'Proposal from this canvas — ' + diff.setName + ':'
+          : 'Proposed change — ' + diff.setName + ':');
         diff.summaryLines.forEach(function (l) { addLine(box, l); });
-        var a = document.createElement('a');
-        a.className = 'download';
-        a.download = (baseRaw.id || 'contract') + '.proposal.json';
-        a.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(diff.exportJson);
-        a.textContent = 'Download the proposed contract diff (JSON)';
-        box.appendChild(a);
+        (diff.proposalNotes || []).forEach(function (n) { addWarning(box, n, true); });
+        addArtifactActions(box, proposedId + (diff.baseless ? '.contract.json' : '.proposal.json'), diff.exportJson);
         $('prop-pr-section').hidden = false;
         $('prop-bridge-section').hidden = false;
         if (!$('pr-path').value) {
-          $('pr-path').value = 'contracts/' + String(baseRaw.id || 'component').replace(/^[^.]+\./, '') + '.contract.json';
+          $('pr-path').value = 'contracts/' + String(proposedId).replace(/^[^.]+\./, '') + '.contract.json';
         }
       });
     });
@@ -1368,14 +1562,19 @@
     var repoFull = $('pr-repo').value.trim();
     var m = repoFull.match(/^([^\/\s]+)\/([^\/\s]+)$/);
     if (!m) return { error: 'Repository must be owner/repo (e.g. acme/design-system).' };
-    var baseRaw = JSON.parse($('prop-base').value);
+    // BASE-LESS: a set with no base contract has no base id/version to quote.
+    // Identity comes from the PROPOSAL, and the version reads "(new)" rather
+    // than inventing a number the repo never had.
+    var baseText = $('prop-base').value.trim();
+    var baseRaw = baseText ? JSON.parse(baseText) : null;
+    var identity = baseRaw || lastProposal.proposal || {};
     return {
       owner: m[1], repo: m[2],
       base: $('pr-base').value.trim(),
-      path: $('pr-path').value.trim() || ('contracts/' + String(baseRaw.id || 'component').replace(/^[^.]+\./, '') + '.contract.json'),
+      path: $('pr-path').value.trim() || ('contracts/' + String(identity.id || 'component').replace(/^[^.]+\./, '') + '.contract.json'),
       contractJson: JSON.stringify(lastProposal.proposal, null, 2) + '\n',
-      contractId: String(baseRaw.id || ''),
-      baseVersion: String(baseRaw.version || ''),
+      contractId: String(identity.id || ''),
+      baseVersion: baseRaw ? String(baseRaw.version || '') : '(new — no base contract in the repo yet)',
       summaryLines: lastProposal.summaryLines,
     };
   }
@@ -1384,7 +1583,7 @@
     var DSC = engine();
     if (!DSC || !lastProposal) return;
     var input;
-    try { input = prInput(); } catch (e) { input = { error: 'The base contract box is not valid JSON.' }; }
+    try { input = prInput(); } catch (e) { input = { error: 'The base contract box is not valid JSON — empty it to open the PR from the canvas proposal instead.' }; }
     if (input.error) {
       addLine(resultBox('pr-result', false, 'Not started.'), input.error);
       return;
@@ -1563,9 +1762,12 @@
         });
         box.appendChild(strip);
       }
+      var reportJson = JSON.stringify(msg.result, null, 2);
       var pre = document.createElement('pre');
-      pre.textContent = JSON.stringify(msg.result, null, 2);
+      pre.textContent = reportJson;
       box.appendChild(pre);
+      // The report was readable and un-exportable: a <pre> in a 640px iframe.
+      addArtifactActions(box, 'script-report.json', reportJson);
     } else {
       var err = document.createElement('pre');
       err.textContent = msg.error + (msg.stack ? '\n\n' + msg.stack : '');

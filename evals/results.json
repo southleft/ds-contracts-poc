@@ -1,6 +1,6 @@
 {
-  "passed": 164,
-  "total": 164,
+  "passed": 167,
+  "total": 167,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -125,6 +125,21 @@
     {
       "id": "diagnose-foreign-green-red-green",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "shoelace-reconcile-pinned",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "shoelace-diagnose-prefix-match",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "diagnose-stale-design-snapshot",
+      "claim": "C3-detection",
       "pass": true
     },
     {
