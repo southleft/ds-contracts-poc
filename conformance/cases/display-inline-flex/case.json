@@ -1,0 +1,18 @@
+{
+  "id": "display-inline-flex",
+  "feature": "display",
+  "construct": "display: inline-flex",
+  "why": "Chips, tags and inline buttons: the inline sibling of the root layout channel.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.display",
+  "observable": {
+    "part": "root",
+    "channel": "display",
+    "capturedValue": "inline-flex"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Figma AutoLayout HORIZONTAL, hug"
+  }
+}

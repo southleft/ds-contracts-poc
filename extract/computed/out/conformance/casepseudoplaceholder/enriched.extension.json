@@ -1,0 +1,236 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@ds-contracts/conformance@0.1.0",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "case-pseudo-placeholder": {
+        "root": {
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          }
+        },
+        "a": {
+          "background-color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "padding-left": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "2px",
+            "$type": "dimension"
+          },
+          "outline-color-state-active": {
+            "$value": "#005fcc",
+            "$type": "color"
+          },
+          "outline-width-state-active": {
+            "$value": "1px",
+            "$type": "dimension"
+          },
+          "outline-color-state-focus-visible": {
+            "$value": "#005fcc",
+            "$type": "color"
+          },
+          "outline-width-state-focus-visible": {
+            "$value": "1px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "shared": {
+        "color-bebebe": {
+          "$value": "#bebebe",
+          "$type": "color"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "a",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "a",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "a",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "a",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "a",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "a",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "a",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "a",
+        "channel": "font-family",
+        "value": "monospace"
+      },
+      {
+        "part": "a",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "a",
+        "channel": "overflow-y",
+        "value": "clip"
+      }
+    ],
+    "state": [
+      {
+        "state": "active",
+        "part": "a",
+        "channel": "outline-style",
+        "value": "auto"
+      },
+      {
+        "state": "focus-visible",
+        "part": "a",
+        "channel": "outline-style",
+        "value": "auto"
+      }
+    ]
+  },
+  "codeOnlyChannels": [],
+  "stateOverflow": [],
+  "overflowBindings": [
+    {
+      "part": "a",
+      "channel": "outline-color",
+      "state": "active",
+      "ref": "{imported.case-pseudo-placeholder.a.outline-color-state-active}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "a",
+      "channel": "outline-width",
+      "state": "active",
+      "ref": "{imported.case-pseudo-placeholder.a.outline-width-state-active}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "a",
+      "channel": "outline-color",
+      "state": "focus-visible",
+      "ref": "{imported.case-pseudo-placeholder.a.outline-color-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "a",
+      "channel": "outline-width",
+      "state": "focus-visible",
+      "ref": "{imported.case-pseudo-placeholder.a.outline-width-state-focus-visible}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <input> — span control used (part a)",
+    "inheritance-only: a.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "a",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "a"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "full-width-carried: a spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: a.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: a.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: a.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: a.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: a.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: a.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: a.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: a.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: a.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: a.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [active] a.outline-style = auto (v15 declared vocabulary)",
+    "declared state fact carried: [focus-visible] a.outline-style = auto (v15 declared vocabulary)"
+  ]
+}

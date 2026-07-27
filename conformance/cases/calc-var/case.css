@@ -1,0 +1,1 @@
+[data-cf="calc-var"] { display: flex; padding-left: calc(var(--cf-space-2) * 2); background: rgb(246, 246, 246); }

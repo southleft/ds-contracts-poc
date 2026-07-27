@@ -1,0 +1,19 @@
+{
+  "id": "display-out-of-vocab",
+  "feature": "display",
+  "construct": "display: table",
+  "why": "Legacy layout roots (and display:contents wrappers) still ship in real libraries.",
+  "expect": "REFUSED",
+  "expectName": "table-lowering",
+  "expectWhere": "LEDGER.md (DOM-anatomy promotion)",
+  "observable": {
+    "part": "root",
+    "channel": "display",
+    "capturedValue": "table"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "AutoLayout has no table formatting context"
+  },
+  "blockStage": true
+}

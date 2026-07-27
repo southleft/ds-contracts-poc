@@ -1,0 +1,19 @@
+{
+  "id": "webkit-line-clamp",
+  "feature": "vendor-prefixed",
+  "construct": "-webkit-line-clamp: 2 + -webkit-box-orient: vertical",
+  "why": "Multi-line truncation. Still the ONLY cross-browser spelling, so every card description uses it.",
+  "expect": "UNSUPPORTED",
+  "expectName": "-webkit-line-clamp",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "-webkit-line-clamp",
+    "capturedValue": "2"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Figma textTruncation + maxLines is an exact match — this one IS canvas-expressible"
+  },
+  "blockStage": true
+}

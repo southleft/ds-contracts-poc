@@ -1,0 +1,18 @@
+{
+  "id": "media-non-matching",
+  "feature": "at-rules",
+  "construct": "@media (min-width: 2000px) branch that does NOT match the pinned viewport",
+  "why": "Responsive breakpoints. A capture at ONE viewport measures ONE branch and cannot know the others exist.",
+  "expect": "UNSUPPORTED",
+  "expectName": "unmatched media branch",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "background-color",
+    "capturedValue": "rgb(200, 210, 220)"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "the OTHER branch is invisible to a single-viewport capture — a whole rendering is missing"
+  }
+}

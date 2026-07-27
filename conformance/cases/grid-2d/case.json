@@ -1,0 +1,19 @@
+{
+  "id": "grid-2d",
+  "feature": "layout",
+  "construct": "display: grid + grid-template-columns: 1fr 1fr",
+  "why": "Two-dimensional grid is the layout Figma AutoLayout cannot express; every data-dense DS ships one.",
+  "expect": "REFUSED",
+  "expectName": "grid-two-dimensional",
+  "expectWhere": "LEDGER.md (DOM-anatomy promotion refusals)",
+  "observable": {
+    "part": "root",
+    "channel": "display",
+    "capturedValue": "grid"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "AutoLayout is 1-D; a 2-D track grid has no canvas spelling"
+  },
+  "blockStage": true
+}

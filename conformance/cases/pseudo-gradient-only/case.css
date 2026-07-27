@@ -1,0 +1,2 @@
+[data-cf="pseudo-gradient-only"] { position: relative; display: flex; background: rgb(255, 255, 255); }
+[data-cf="pseudo-gradient-only"]::after { content: ""; position: absolute; top: 0px; right: 0px; width: 24px; height: 100%; background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255)); }

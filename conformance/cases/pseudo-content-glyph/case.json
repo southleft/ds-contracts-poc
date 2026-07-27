@@ -1,0 +1,18 @@
+{
+  "id": "pseudo-content-glyph",
+  "feature": "pseudo-elements",
+  "construct": "::before { content: \"\\2715\"; font-family: icons }",
+  "why": "Icon-font glyph pseudo — how Bootstrap/FontAwesome/Material draw carets, chevrons, close ×s.",
+  "expect": "REFUSED",
+  "expectName": "pseudo-content-not-canvas-ink",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root::before",
+    "channel": "content",
+    "capturedValue": "\"✕\""
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "a glyph from an unavailable icon font has no canvas spelling"
+  }
+}

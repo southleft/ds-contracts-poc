@@ -1,0 +1,18 @@
+{
+  "id": "flex-gap",
+  "feature": "layout",
+  "construct": "column-gap / row-gap in px",
+  "why": "Gap is Figma itemSpacing — the one spacing channel AutoLayout speaks natively.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.column-gap",
+  "observable": {
+    "part": "root",
+    "channel": "column-gap",
+    "capturedValue": "12px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "itemSpacing"
+  }
+}

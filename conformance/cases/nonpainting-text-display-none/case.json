@@ -1,0 +1,18 @@
+{
+  "id": "nonpainting-text-display-none",
+  "feature": "invariant",
+  "construct": "a NON-PAINTING element carrying text (display: none)",
+  "why": "The GENERAL form of the SVG <title> defect: does non-painting text reach the canvas as ink? MEASURED: it is carried, but GUARDED — the promoted part carries declared display:none alongside the text, so the invariant survives. This is the SAFE half of the pair; its twin (visibility:hidden) is not.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.label-2 (text + declared.display: none)",
+  "observable": {
+    "part": "b",
+    "channel": "__text",
+    "capturedValue": "INVISIBLE-SENTINEL"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "INVARIANT HELD: the text is in the contract but the part declares display:none, so nothing draws it"
+  }
+}

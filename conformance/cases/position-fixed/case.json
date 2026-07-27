@@ -1,0 +1,19 @@
+{
+  "id": "position-fixed",
+  "feature": "position",
+  "construct": "position: fixed",
+  "why": "Sticky headers, toasts and scrims. Fixed is viewport-relative — a canvas has no viewport.",
+  "expect": "REFUSED",
+  "expectName": "position",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "a",
+    "channel": "position",
+    "capturedValue": "fixed"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "no viewport-relative positioning on a canvas"
+  },
+  "blockStage": true
+}

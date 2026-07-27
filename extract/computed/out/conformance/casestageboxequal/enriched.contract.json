@@ -1,0 +1,39 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.stage-box-equal",
+  "name": "CaseStageBoxEqual",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"stage-box-equal\" (invariant). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: a captured box exactly equal to the STAGE box (100% × 100%) COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "background-color": "{imported.case-stage-box-equal.root.background-color}",
+        "font-size": "{imported.case-stage-box-equal.root.font-size}",
+        "min-height": "{imported.case-stage-box-equal.root.min-height}",
+        "min-width": "{imported.case-stage-box-equal.root.min-width}",
+        "width": "{imported.case-stage-box-equal.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@ds-contracts/conformance",
+      "export": "CaseStageBoxEqual"
+    }
+  }
+}

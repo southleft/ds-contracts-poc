@@ -1,0 +1,2 @@
+[data-cf="position-sticky"] { display: block; height: 40px; overflow-y: auto; background: rgb(233, 233, 233); }
+[data-cf="position-sticky"] .cf-a { position: sticky; top: 0px; background: rgb(255, 235, 180); }

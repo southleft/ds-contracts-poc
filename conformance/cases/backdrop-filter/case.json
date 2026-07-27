@@ -1,0 +1,18 @@
+{
+  "id": "backdrop-filter",
+  "feature": "effects",
+  "construct": "backdrop-filter: blur(4px)",
+  "why": "Frosted-glass headers and sheets. Figma has BACKGROUND_BLUR — also canvas-expressible.",
+  "expect": "UNSUPPORTED",
+  "expectName": "backdrop-filter",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "backdrop-filter",
+    "capturedValue": "blur(4px)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Figma BACKGROUND_BLUR is an exact match"
+  }
+}

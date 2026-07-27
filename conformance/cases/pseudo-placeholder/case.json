@@ -1,0 +1,18 @@
+{
+  "id": "pseudo-placeholder",
+  "feature": "pseudo-elements",
+  "construct": "input::placeholder { color }",
+  "why": "Placeholder colour is a REVIEWED design token in every input in every design system.",
+  "expect": "UNSUPPORTED",
+  "expectName": "::placeholder",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "a::placeholder",
+    "channel": "color",
+    "capturedValue": "rgb(150, 150, 150)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "placeholder text is REAL INK on a canvas mock-up — the loss is visible"
+  }
+}

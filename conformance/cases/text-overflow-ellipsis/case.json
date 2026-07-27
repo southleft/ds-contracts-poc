@@ -1,0 +1,19 @@
+{
+  "id": "text-overflow-ellipsis",
+  "feature": "text",
+  "construct": "text-overflow: ellipsis + overflow hidden + nowrap",
+  "why": "Truncation is in every table cell and menu item; Figma has textTruncation = ENDING.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.declared.text-overflow",
+  "observable": {
+    "part": "root",
+    "channel": "text-overflow",
+    "capturedValue": "ellipsis"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "textTruncation ENDING"
+  },
+  "blockStage": true
+}

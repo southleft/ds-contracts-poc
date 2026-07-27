@@ -1,0 +1,18 @@
+{
+  "id": "svg-outside-grammar",
+  "feature": "svg",
+  "construct": "<svg> whose children are <circle> and <rect>",
+  "why": "Half the icon sets in the world ship circles and rects, not paths.",
+  "expect": "REFUSED",
+  "expectName": "svg",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "a",
+    "channel": "r",
+    "capturedValue": "6px"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "the asset grammar admits path/g only"
+  }
+}

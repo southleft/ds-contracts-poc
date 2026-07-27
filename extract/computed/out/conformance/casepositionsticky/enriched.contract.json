@@ -1,0 +1,88 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.position-sticky",
+  "name": "CasePositionSticky",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"position-sticky\" (position). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: position: sticky + top COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "monospace",
+        "overflow-x": "auto",
+        "overflow-y": "auto"
+      },
+      "parts": {
+        "label": {
+          "text": "Header",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.case-position-sticky.label.background-color}",
+            "font-size": "{imported.shared.size-12}",
+            "font-weight": "{imported.case-position-sticky.label.font-weight}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}"
+          }
+        },
+        "label-2": {
+          "text": "Body copy that overflows the container box.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|b — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-12}",
+            "font-weight": "{imported.case-position-sticky.label-2.font-weight}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}"
+          }
+        }
+      },
+      "declaredStates": {
+        "focus-visible": {
+          "outline-style": "auto"
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.case-position-sticky.root.background-color}",
+        "font-size": "{imported.shared.size-12}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "width": "{imported.case-position-sticky.root.width}"
+      },
+      "states": {
+        "focus-visible": {
+          "outline-color": "{imported.case-position-sticky.root.outline-color-state-focus-visible}",
+          "outline-width": "{imported.case-position-sticky.root.outline-width-state-focus-visible}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@ds-contracts/conformance",
+      "export": "CasePositionSticky"
+    }
+  }
+}

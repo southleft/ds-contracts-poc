@@ -1,0 +1,18 @@
+{
+  "id": "min-max-width",
+  "feature": "geometry",
+  "construct": "min-width / max-width in px",
+  "why": "Button min-widths and container max-widths are the constraint channels Figma has (minWidth/maxWidth).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.min-width",
+  "observable": {
+    "part": "root",
+    "channel": "min-width",
+    "capturedValue": "96px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "minWidth on the frame"
+  }
+}

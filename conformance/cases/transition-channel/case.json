@@ -1,0 +1,18 @@
+{
+  "id": "transition-channel",
+  "feature": "motion",
+  "construct": "transition: background-color 200ms ease",
+  "why": "Every interactive component declares transitions; they are the design system’s motion tokens.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.declared.transition-duration",
+  "observable": {
+    "part": "root",
+    "channel": "transition-duration",
+    "capturedValue": "0.2s"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "no canvas spelling — but the channel is a DECLARED fact with its own canvas verdict, which is the honest treatment, not a loss"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "pseudo-gradient-only",
+  "feature": "pseudo-elements",
+  "construct": "::after painted ONLY by a linear-gradient",
+  "why": "Fade-out masks and skeleton shimmers are gradient-only pseudos with no box paint.",
+  "expect": "REFUSED",
+  "expectName": "pseudo-decor",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root::after",
+    "channel": "background-image",
+    "capturedValue": "linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1))"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "the v1/v2 decor grammar carries solid paint, not gradient stacks"
+  }
+}

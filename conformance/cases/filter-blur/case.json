@@ -1,0 +1,18 @@
+{
+  "id": "filter-blur",
+  "feature": "effects",
+  "construct": "filter: blur(2px)",
+  "why": "Disabled/loading treatments and glass surfaces. Figma has LAYER_BLUR — this IS canvas-expressible.",
+  "expect": "UNSUPPORTED",
+  "expectName": "filter",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "filter",
+    "capturedValue": "blur(2px)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Figma LAYER_BLUR is an exact match"
+  }
+}

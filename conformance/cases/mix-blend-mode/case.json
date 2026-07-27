@@ -1,0 +1,18 @@
+{
+  "id": "mix-blend-mode",
+  "feature": "effects",
+  "construct": "mix-blend-mode: multiply",
+  "why": "Highlight and overlay treatments. Figma blendMode is an exact match.",
+  "expect": "UNSUPPORTED",
+  "expectName": "mix-blend-mode",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "mix-blend-mode",
+    "capturedValue": "multiply"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Figma blendMode MULTIPLY"
+  }
+}

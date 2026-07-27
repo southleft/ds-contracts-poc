@@ -1,0 +1,2 @@
+[data-cf="position-absolute-insets"] { position: relative; display: block; width: 120px; height: 48px; background: rgb(238, 238, 238); }
+[data-cf="position-absolute-insets"] .cf-a { position: absolute; top: 4px; left: 6px; width: 12px; height: 12px; background: rgb(200, 30, 30); }

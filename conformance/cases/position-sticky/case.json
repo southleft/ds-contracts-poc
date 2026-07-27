@@ -1,0 +1,19 @@
+{
+  "id": "position-sticky",
+  "feature": "position",
+  "construct": "position: sticky + top",
+  "why": "Sticky table headers. Position depends on scroll state, which no static capture holds.",
+  "expect": "REFUSED",
+  "expectName": "position",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "a",
+    "channel": "position",
+    "capturedValue": "sticky"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "scroll-dependent placement has no canvas spelling"
+  },
+  "blockStage": true
+}

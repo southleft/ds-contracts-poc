@@ -1,0 +1,18 @@
+{
+  "id": "pseudo-selection",
+  "feature": "pseudo-elements",
+  "construct": "::selection { background-color }",
+  "why": "Selection colour is a themed token in editors and rich-text components.",
+  "expect": "UNSUPPORTED",
+  "expectName": "::selection",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root::selection",
+    "channel": "background-color",
+    "capturedValue": "rgb(255, 214, 0)"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "transient user state; no canvas spelling"
+  }
+}

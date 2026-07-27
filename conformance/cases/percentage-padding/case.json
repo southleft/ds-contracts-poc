@@ -1,0 +1,19 @@
+{
+  "id": "percentage-padding",
+  "feature": "units",
+  "construct": "padding-left: 10% (resolved against the PARENT width)",
+  "why": "Percentage padding is parent-relative — the captured px is only true at the stage width.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.padding-left",
+  "observable": {
+    "part": "root",
+    "channel": "padding-left",
+    "capturedValue": "28.7969px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "carried as a FIXED px — correct at one width, wrong at every other"
+  },
+  "blockStage": true
+}

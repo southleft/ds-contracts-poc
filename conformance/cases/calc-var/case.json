@@ -1,0 +1,18 @@
+{
+  "id": "calc-var",
+  "feature": "custom-properties",
+  "construct": "padding-left: calc(var(--cf-space-2) * 2)",
+  "why": "Density scales are computed, not literal. calc() over a token is how every compact mode ships.",
+  "expect": "LOWERED",
+  "expectName": "calc",
+  "expectWhere": "source-bindings.json.skips",
+  "observable": {
+    "part": "root",
+    "channel": "padding-left",
+    "capturedValue": "16px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the resolved px is right; the token name is at risk"
+  }
+}

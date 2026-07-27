@@ -1,0 +1,19 @@
+{
+  "id": "aspect-ratio",
+  "feature": "geometry",
+  "construct": "aspect-ratio: 2 / 1",
+  "why": "Media thumbnails and avatars. A declared ratio the browser resolves into a real box.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.declared.aspect-ratio",
+  "observable": {
+    "part": "root",
+    "channel": "aspect-ratio",
+    "capturedValue": "2 / 1"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "fixed w/h frame"
+  },
+  "blockStage": true
+}

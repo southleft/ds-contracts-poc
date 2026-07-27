@@ -1,0 +1,45 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.text-overflow-ellipsis",
+  "name": "CaseTextOverflowEllipsis",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"text-overflow-ellipsis\" (text). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: text-overflow: ellipsis + overflow hidden + nowrap COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "box-sizing": "border-box",
+        "font-family": "monospace",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden",
+        "text-overflow": "ellipsis",
+        "text-wrap-mode": "nowrap"
+      },
+      "text": "A very long label that will not fit",
+      "tokens": {
+        "background-color": "{imported.case-text-overflow-ellipsis.root.background-color}",
+        "font-size": "{imported.case-text-overflow-ellipsis.root.font-size}",
+        "font-weight": "{imported.case-text-overflow-ellipsis.root.font-weight}",
+        "min-height": "{imported.case-text-overflow-ellipsis.root.min-height}",
+        "min-width": "{imported.case-text-overflow-ellipsis.root.min-width}",
+        "width": "{imported.case-text-overflow-ellipsis.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@ds-contracts/conformance",
+      "export": "CaseTextOverflowEllipsis"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "mask-image",
+  "feature": "effects",
+  "construct": "mask-image: linear-gradient(...)",
+  "why": "Fade-out scroll edges. A mask decides visibility just as decisively as a fill.",
+  "expect": "UNSUPPORTED",
+  "expectName": "mask-image",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "mask-image",
+    "capturedValue": "linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "no mask channel in the emit grammar"
+  }
+}

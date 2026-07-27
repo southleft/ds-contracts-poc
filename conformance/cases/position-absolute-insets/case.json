@@ -1,0 +1,19 @@
+{
+  "id": "position-absolute-insets",
+  "feature": "position",
+  "construct": "position: absolute + top/left insets",
+  "why": "Badge-on-avatar, focus rings, dropdown carets — the one positioning mode Figma can spell.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.tokens.top",
+  "observable": {
+    "part": "a",
+    "channel": "top",
+    "capturedValue": "4px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "absolute child inside a frame"
+  },
+  "blockStage": true
+}

@@ -1,0 +1,25 @@
+/* CSS/DOM CONFORMANCE FIXTURE — the fixture "library"'s own token layer.
+ *
+ * These are the custom properties the fixture's components reference. They are
+ * the LIVE spelling (varPrefix "--cf-"); their DTCG twins live in
+ * conformance/tokens/conformance.dtcg.json under the SAME names with the
+ * prefix stripped, which is the shape the CSS-vars source reader matches on
+ * (the Carbon convention: tokens/<lib>.vars.css spells the DTCG name,
+ * library.varPrefix spells the live one).
+ *
+ * Hand-authored. Nothing here is generated. */
+:root {
+  --cf-color-primary: #1976d2;
+  --cf-color-secondary: rebeccapurple;
+  --cf-space-2: 8px;
+  --cf-radius-md: 6px;
+}
+
+/* Every case root is a direct stage child; the fixture pins font and box model
+ * so that no case's numbers depend on another case's CSS. */
+.cf-case-reset,
+[class^='cf-'] {
+  box-sizing: border-box;
+  font-family: monospace;
+  font-size: 12px;
+}

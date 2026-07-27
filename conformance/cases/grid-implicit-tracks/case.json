@@ -1,0 +1,19 @@
+{
+  "id": "grid-implicit-tracks",
+  "feature": "layout",
+  "construct": "grid-auto-rows: 24px + grid-auto-flow: column",
+  "why": "Implicit tracks are how card galleries auto-place; the track sizes exist only in the layout engine.",
+  "expect": "REFUSED",
+  "expectName": "grid-auto-rows",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "grid-auto-rows",
+    "capturedValue": "24px"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "no implicit-track concept on the canvas"
+  },
+  "blockStage": true
+}

@@ -1,0 +1,19 @@
+{
+  "id": "pseudo-backdrop",
+  "feature": "pseudo-elements",
+  "construct": "dialog::backdrop { background-color }",
+  "why": "The modal scrim. Native <dialog> is how new libraries ship modals, and the scrim IS the token.",
+  "expect": "UNSUPPORTED",
+  "expectName": "::backdrop",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root::backdrop",
+    "channel": "background-color",
+    "capturedValue": "rgba(0, 0, 0, 0.5)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "a modal scrim is a real rectangle on the canvas"
+  },
+  "blockStage": true
+}

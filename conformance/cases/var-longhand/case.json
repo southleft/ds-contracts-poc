@@ -1,0 +1,18 @@
+{
+  "id": "var-longhand",
+  "feature": "custom-properties",
+  "construct": "background-color: var(--cf-color-primary)",
+  "why": "The single-hop token reference: the shape that makes a captured pixel recover its NAME.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "source-bindings.json.facts",
+  "observable": {
+    "part": "root",
+    "channel": "background-color",
+    "capturedValue": "rgb(25, 118, 210)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "variable-bound fill"
+  }
+}

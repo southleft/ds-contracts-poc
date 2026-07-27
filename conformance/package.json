@@ -1,0 +1,10 @@
+{
+  "name": "@ds-contracts/conformance",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CSS/DOM conformance fixture — a synthetic design system whose only purpose is to be captured. Mounted through the UNMODIFIED extract/computed pipeline as a real library; no engine path special-cases it.",
+  "main": "lib/index.jsx",
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "color-rgb-solid",
+  "feature": "color",
+  "construct": "background-color: rgb(25, 118, 210)",
+  "why": "The baseline paint channel. Every fill in every library reduces to this.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.background-color",
+  "observable": {
+    "part": "root",
+    "channel": "background-color",
+    "capturedValue": "rgb(25, 118, 210)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "SOLID fill"
+  }
+}

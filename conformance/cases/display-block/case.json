@@ -1,0 +1,19 @@
+{
+  "id": "display-block",
+  "feature": "display",
+  "construct": "display: block",
+  "why": "Cards, panels, form rows — the non-flex root every library also ships.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.display",
+  "observable": {
+    "part": "root",
+    "channel": "display",
+    "capturedValue": "block"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Figma frame, vertical AutoLayout or plain frame"
+  },
+  "blockStage": true
+}

@@ -1,0 +1,2 @@
+[data-cf="shadow-part"] { display: flex; background: rgb(252, 252, 252); }
+[data-cf="shadow-part"] .cf-a::part(label) { color: rgb(180, 20, 90); font-weight: 700; }

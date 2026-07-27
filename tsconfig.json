@@ -28,9 +28,11 @@
     "extract",
     "parity",
     "evals",
+    "conformance",
     "figma-sync/plugin/engine"
   ],
   "exclude": [
+    "conformance/.sandbox",
     "extract/fixtures",
     "evals/.scratch",
     "evals/adherence",

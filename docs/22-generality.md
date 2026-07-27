@@ -438,7 +438,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 
 | instrument | what it pins | how to run |
 |---|---|---|
-| **Eval suite** | 171/171 as of `evals/results.json` — 24 refusal, 29 determinism, 42 detection, 56 extraction, 3 convergence, 4 CLI, 12 journey, 1 theming | `npm run eval` |
+| **Eval suite** | 172/172 as of `evals/results.json` — 24 refusal, 29 determinism, 43 detection, 56 extraction, 3 convergence, 4 CLI, 12 journey, 1 theming | `npm run eval` |
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
 | **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |
@@ -708,7 +708,7 @@ Figma account or a network call except `npm install`.
 npm install
 
 # ── the claim's own numbers ────────────────────────────────────────────────
-npm run eval                       # 171/171 as of evals/results.json
+npm run eval                       # 172/172 as of evals/results.json
 node -e "const r=require('./evals/results.json');console.log(r.passed+'/'+r.total)"
 
 # 54 drift rows, per library

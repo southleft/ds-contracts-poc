@@ -1,6 +1,6 @@
 {
-  "passed": 171,
-  "total": 171,
+  "passed": 172,
+  "total": 172,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -854,6 +854,11 @@
     },
     {
       "id": "child-wider-ratchet-and-script-freshness",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "css-dom-conformance-frontier",
       "claim": "C3-detection",
       "pass": true
     }

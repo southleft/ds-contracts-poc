@@ -1,0 +1,18 @@
+{
+  "id": "webkit-text-fill-color",
+  "feature": "vendor-prefixed",
+  "construct": "-webkit-text-fill-color OVERRIDING color",
+  "why": "A disabled input’s grey text: the painted colour is the fill, NOT `color`. Carrying `color` carries a lie.",
+  "expect": "UNSUPPORTED",
+  "expectName": "-webkit-text-fill-color",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "-webkit-text-fill-color",
+    "capturedValue": "rgb(153, 153, 153)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the text fill IS the ink the canvas draws"
+  }
+}

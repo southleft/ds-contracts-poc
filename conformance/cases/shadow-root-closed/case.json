@@ -1,0 +1,18 @@
+{
+  "id": "shadow-root-closed",
+  "feature": "shadow-dom",
+  "construct": "a custom element with a CLOSED shadow root",
+  "why": "Closed roots ship in real web-component libraries; the whole rendered box is unreachable from script.",
+  "expect": "UNSUPPORTED",
+  "expectName": "closed shadow root",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "a",
+    "channel": "background-color",
+    "capturedValue": "rgb(0, 128, 128)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the box is painted and visible; only the READER cannot see it"
+  }
+}

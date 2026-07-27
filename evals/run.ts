@@ -7483,6 +7483,149 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       console.log(`child-wider-ratchet-and-script-freshness: ${baseline.rows.length} libraries carry a committed child-wider baseline (${total} real overflows repo-wide, all astryx ProgressBar percent-width; text-caused and margin-box counted SEPARATELY so neither can flatter the first number), the ratchet is two-sided and names an unrecorded improvement, and every rebuildable library's sync scripts are BYTE-FRESH vs a fresh emission — the gap that let MUI's scripts sit three engine fixes stale while the suite stayed green`);
     },
   },
+  {
+    // ---- THE CSS/DOM CONFORMANCE FIXTURE (task #32).
+    //
+    // The owner's question was "can we start PREDICTING the flaws instead of
+    // discovering one per library". The structural reason we could not: every
+    // instrument in this repo derives its denominator from the same filter
+    // that decides carriage. The fidelity gate scores channels that passed
+    // isFusable, so a channel the filter never opened is not in the
+    // denominator and scores 100%. Promotion removes refused parts from
+    // scoring, so refusing a part cannot lower a score.
+    //
+    // The fixture inverts that: a synthetic library of labelled CSS/DOM
+    // constructs whose expected disposition is declared IN ADVANCE, in a
+    // manifest derived from NOTHING in the engine. This eval is the gate on
+    // that gate — it runs the conformance measurement against its committed
+    // baseline and RED-s on drift in either direction, and it separately
+    // asserts the properties that make the instrument trustworthy at all.
+    //
+    // Chromium-free: the measurement reads the committed capture artifacts.
+    id: 'css-dom-conformance-frontier',
+    claim: 'C3-detection',
+    run: () => {
+      // The fixture reads conformance/ and extract/computed/out/conformance,
+      // neither of which resetScratch copies — it runs against the REAL tree
+      // (read-only) by design, exactly as the child-wider ratchet does.
+      const atRoot = (args: string[]) => {
+        const r = spawnSync('npx', ['tsx', ...args], { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+        return { status: r.status ?? -1, out: `${r.stdout ?? ''}${r.stderr ?? ''}` };
+      };
+
+      // 1 · THE GATE ITSELF. Reds on any SILENT-LOSS, UNDECLARED-CARRY,
+      //     WRONG-NAME, or UNMEASURED-for-a-CARRIED/LOWERED case that is not
+      //     in the committed frontier — and equally on any that has been
+      //     FIXED without re-recording, so a repair can never be absorbed
+      //     silently.
+      const gate = atRoot(['conformance/run.ts']);
+      if (gate.status !== 0) throw new Error(`conformance gate RED (drift against conformance/BASELINE.json):\n${gate.out.slice(-2400)}`);
+
+      // 2 · THE MANIFEST IS THE DENOMINATOR, and it is INDEPENDENT of the
+      //     engine. This is the whole claim; if the manifest ever starts
+      //     importing the filters, the fixture becomes another instrument
+      //     that cannot be surprised.
+      const manifest = JSON.parse(readFileSync(path.join(ROOT, 'conformance/MANIFEST.json'), 'utf8')) as {
+        count: number;
+        byExpectation: Record<string, number>;
+        cases: Array<{ id: string; expect: string; expectName: string; observable: { channel: string } }>;
+      };
+      const caseDirs = readdirSync(path.join(ROOT, 'conformance/cases'), { withFileTypes: true })
+        .filter((e) => e.isDirectory())
+        .map((e) => e.name)
+        .sort();
+      if (manifest.count !== caseDirs.length || manifest.cases.length !== caseDirs.length) {
+        throw new Error(`MANIFEST.json is stale: ${manifest.count} entries vs ${caseDirs.length} case directories — run npm run conformance:build`);
+      }
+      for (const src of ['conformance/build.ts', 'conformance/run.ts', 'conformance/report.ts']) {
+        const text = readFileSync(path.join(ROOT, src), 'utf8');
+        // The engine's own filters, by name. Mentioning them in PROSE is the
+        // point (the doc comments explain why they are excluded); IMPORTING
+        // them would make the denominator derived.
+        const imports = text.split('\n').filter((l) => /^\s*import\b/.test(l)).join('\n');
+        for (const forbidden of ['extract/computed/lib', 'extract/computed/fuse', 'extract/computed/gate', 'contract-schema', 'core/emit-']) {
+          if (imports.includes(forbidden)) {
+            throw new Error(`${src} imports "${forbidden}" — THE MANIFEST IS THE DENOMINATOR and must not be derived from the filter that decides carriage (isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts)`);
+          }
+        }
+      }
+
+      // 3 · THE CLOSED VOCABULARY. There is no fifth expectation value, and
+      //     UNSUPPORTED is not a free pass — it must still be NAMED.
+      const VOCAB = ['CARRIED', 'LOWERED', 'REFUSED', 'UNSUPPORTED'];
+      for (const c of manifest.cases) {
+        if (!VOCAB.includes(c.expect)) throw new Error(`${c.id}: expect "${c.expect}" is outside the closed vocabulary`);
+        if (c.expect !== 'CARRIED' && !c.expectName) throw new Error(`${c.id}: ${c.expect} with no expectName — UNSUPPORTED is not a free pass`);
+        if (!c.observable?.channel) throw new Error(`${c.id}: no observable channel — nothing to measure`);
+      }
+
+      // 4 · THE RATCHET. The UNSUPPORTED count is a committed number that may
+      //     only DECREASE without an explicit manifest edit.
+      const base = JSON.parse(readFileSync(path.join(ROOT, 'conformance/BASELINE.json'), 'utf8')) as {
+        counts: Record<string, number>;
+        unsupportedDeclared: number;
+        verdicts: Record<string, string>;
+      };
+      const declaredUnsupported = manifest.byExpectation.UNSUPPORTED;
+      if (declaredUnsupported > base.unsupportedDeclared) {
+        throw new Error(`UNSUPPORTED ratchet: ${base.unsupportedDeclared} → ${declaredUnsupported}. A construct moving INTO "never modelled" widens the hole and must be argued for, not defaulted into.`);
+      }
+      if (Object.keys(base.verdicts).length !== manifest.count) {
+        throw new Error(`BASELINE.json covers ${Object.keys(base.verdicts).length} cases, the manifest has ${manifest.count} — every case must have a recorded verdict`);
+      }
+
+      // 5 · THE REPORT IS GENERATED, NOT ASSERTED, and it agrees with the
+      //     measurement it claims to describe. (docs/FIGMA-CAPABILITY-MATRIX.md
+      //     is the counter-example this replaces: 355 asserted lines that
+      //     nothing reads and nothing checks.)
+      const expectations = readFileSync(path.join(ROOT, 'conformance/EXPECTATIONS.md'), 'utf8');
+      const reds = ['SILENT-LOSS', 'RUN-ABORTED', 'UNDECLARED-CARRY', 'WRONG-NAME', 'UNMEASURED'].reduce(
+        (n, v) => n + (base.counts[v] ?? 0),
+        0,
+      );
+      for (const claim of [
+        `| cases | **${manifest.count}** |`,
+        `| 🟢 pass | **${base.counts.PASS}** |`,
+        `| 🔴 red | **${reds}** |`,
+        `| 🟡 yellow (UNSUPPORTED, never read) | **${base.counts['UNMEASURED-YELLOW']}** |`,
+      ]) {
+        if (!expectations.includes(claim)) {
+          throw new Error(`conformance/EXPECTATIONS.md is stale — it does not carry "${claim}". Run npm run conformance:report`);
+        }
+      }
+      const matrix = readFileSync(path.join(ROOT, 'docs/FIGMA-CAPABILITY-MATRIX.md'), 'utf8');
+      if (!matrix.includes('conformance/EXPECTATIONS.md')) {
+        throw new Error('docs/FIGMA-CAPABILITY-MATRIX.md does not point at the GENERATED capability matrix — a hand-asserted matrix that outlives a measured one is how the fiction restarts');
+      }
+
+      // 6 · THE FIXTURE MUST NOT LAUNDER ITS OWN SILENCE. Not one case class
+      //     may contain a CSS channel name: a part signature spelled
+      //     `root(div|filter-blur)` in the LEDGER would satisfy a search for
+      //     "filter" and turn a silent loss into a PASS. (This eval caught
+      //     exactly that: 8 of the first run's "passes" were the engine
+      //     echoing the case's own name back at the gate.)
+      for (const dir of caseDirs) {
+        const tsx = readFileSync(path.join(ROOT, 'conformance/cases', dir, 'Case.tsx'), 'utf8');
+        for (const m of tsx.matchAll(/className="([^"]*)"/g)) {
+          for (const cls of m[1].split(/\s+/).filter(Boolean)) {
+            if (!/^cf-(root|a|b|c)$/.test(cls)) {
+              throw new Error(`conformance/cases/${dir}/Case.tsx uses class "${cls}" — case classes must be NEUTRAL (cf-root / cf-a / cf-b / cf-c) and cases scoped by data-cf, or the class name reaches the anatomy signature and the fixture launders its own silence`);
+            }
+          }
+        }
+        if (!tsx.includes(`data-cf="${dir}"`)) {
+          throw new Error(`conformance/cases/${dir}/Case.tsx does not scope itself with data-cf="${dir}" — every case shares one stylesheet`);
+        }
+      }
+
+      console.log(
+        `css-dom-conformance-frontier: ${manifest.count} labelled CSS/DOM cases through the UNMODIFIED extract/computed pipeline as a real library — ` +
+          `${base.counts.PASS} green, ${reds} red, ${base.counts['UNMEASURED-YELLOW']} yellow, and the frontier is PINNED both ways (a new red is a regression, a fixed red must be re-recorded). ` +
+          `The denominator is a hand-authored manifest that imports none of isFusable/styled/DECLARED_CHANNELS/CHANNEL_TO_COMPUTED/TOKEN_CHANNELS/carriedParts — the independence that makes a construct the filters never opened FAILABLE instead of absent. ` +
+          `UNSUPPORTED ratchet at ${base.unsupportedDeclared} (decrease-only), EXPECTATIONS.md generated and agreeing, and no case class carries a CSS channel name (the leak that turned 8 first-run silences into passes).`,
+      );
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

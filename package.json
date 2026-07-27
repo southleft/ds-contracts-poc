@@ -77,6 +77,10 @@
     "site:build": "tsx site/build.ts",
     "plugin:ui-check": "node scripts/plugin-ui-check.mjs",
     "docs:check": "node scripts/docs-numbers-check.mjs",
+    "conformance:build": "tsx conformance/build.ts",
+    "conformance:capture": "tsx conformance/capture.ts",
+    "conformance": "tsx conformance/run.ts",
+    "conformance:report": "tsx conformance/report.ts",
     "child-wider": "node scripts/child-wider.mjs",
     "figma:fresh": "node scripts/figma-scripts-fresh.mjs"
   },

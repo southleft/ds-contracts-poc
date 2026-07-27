@@ -1,5 +1,33 @@
 # FIGMA CAPABILITY MATRIX — CSS ↔ Figma representability, per channel
 
+> ## ⚠️ THIS DOCUMENT IS ASSERTED. THE MEASURED ONE IS
+> ## **[`conformance/EXPECTATIONS.md`](../conformance/EXPECTATIONS.md)**.
+>
+> Every row below is hand-written prose about what the engine does. Nothing
+> reads this file and nothing checks it: `grep -rn "FIGMA-CAPABILITY-MATRIX"
+> evals/ scripts/ package.json` returns **zero hits**. It has therefore been
+> free to drift since the day it was written, and a capability claim that
+> cannot go red is a claim nobody should spend trust on.
+>
+> `conformance/EXPECTATIONS.md` is the **generated** source of truth: one row
+> per labelled CSS/DOM construct, each measured through the unmodified
+> `extract/computed` pipeline against an expectation declared **in advance**,
+> pinned by `conformance/BASELINE.json` and gated by the
+> `css-dom-conformance-frontier` eval. Where the two disagree, the generated
+> one is right by construction.
+>
+> **What should happen to this file** (not done in this round, stated so it is
+> not lost): the *representability* half — what the Figma Plugin API can
+> express on a node, with its API sources and version stamp — is real research
+> that the conformance fixture does **not** measure, because this round has no
+> canvas half (see EXPECTATIONS.md § "What this round cannot yet test"). That
+> half should survive as `docs/FIGMA-NODE-API-SURFACE.md`. The *"what the
+> contract carries today"* half should be **deleted** and replaced by a link
+> to the generated matrix, once the fixture's canvas assertions exist to
+> replace it. Deleting it before then would trade an unchecked document for no
+> document.
+
+
 The gate document for the "complete aesthetics" program. One row per renderable
 CSS channel: what the **Figma Plugin API** can express natively on nodes today,
 whether the expressing field is **variable-bindable** (token fidelity), what the

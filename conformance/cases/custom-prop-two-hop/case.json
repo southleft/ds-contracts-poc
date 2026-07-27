@@ -1,0 +1,18 @@
+{
+  "id": "custom-prop-two-hop",
+  "feature": "custom-properties",
+  "construct": "--a: #123456; --b: var(--a); color: var(--b)",
+  "why": "Semantic-over-primitive token layering is TWO hops; the reader follows exactly one.",
+  "expect": "LOWERED",
+  "expectName": "indirection",
+  "expectWhere": "source-bindings.json.skips",
+  "observable": {
+    "part": "root",
+    "channel": "color",
+    "capturedValue": "rgb(18, 52, 86)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the pixel is right; the NAME is what is at risk"
+  }
+}

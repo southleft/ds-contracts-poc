@@ -1,0 +1,18 @@
+{
+  "id": "display-flex",
+  "feature": "display",
+  "construct": "display: flex",
+  "why": "The single most common design-system root layout. If this is not carried, nothing is.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.display",
+  "observable": {
+    "part": "root",
+    "channel": "display",
+    "capturedValue": "flex"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Figma AutoLayout HORIZONTAL"
+  }
+}

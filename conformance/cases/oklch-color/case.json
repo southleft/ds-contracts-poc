@@ -1,0 +1,19 @@
+{
+  "id": "oklch-color",
+  "feature": "color",
+  "construct": "background-color: oklch(0.6 0.15 250)",
+  "why": "Tailwind v4 themes are oklch and Chromium KEEPS the space in computed values.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.background-color",
+  "observable": {
+    "part": "root",
+    "channel": "background-color",
+    "capturedValue": "oklch(0.6 0.15 250)",
+    "carriedValue": "#2784d5"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "SOLID fill via the deterministic oklch→sRGB conversion"
+  }
+}

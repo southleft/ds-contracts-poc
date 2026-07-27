@@ -1,0 +1,19 @@
+{
+  "id": "pseudo-marker",
+  "feature": "pseudo-elements",
+  "construct": "li::marker { color; font-size }",
+  "why": "Every list in every documentation-shaped component. The reader has never looked at ::marker.",
+  "expect": "UNSUPPORTED",
+  "expectName": "::marker",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "a::marker",
+    "channel": "color",
+    "capturedValue": "rgb(200, 60, 60)"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "a list marker would have to be drawn as a real text node"
+  },
+  "blockStage": true
+}

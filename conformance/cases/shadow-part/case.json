@@ -1,0 +1,18 @@
+{
+  "id": "shadow-part",
+  "feature": "shadow-dom",
+  "construct": "::part(label) styling across an OPEN shadow boundary",
+  "why": "The sanctioned theming seam for web components: the page restyles internals it does not own. MEASURED: the shadow-walking reader introduced for the web-components round descends OPEN roots, and getComputedStyle resolves ::part() styling like any other rule — so this is carried. Kept as a case because the carriage is INCIDENTAL (nothing in the pipeline knows what a part() seam IS) and would be lost the moment the walker changed.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a.tokens.color",
+  "observable": {
+    "part": "a",
+    "channel": "color",
+    "capturedValue": "rgb(180, 20, 90)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the restyled internal is real ink, and it is carried"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "em-relative-padding",
+  "feature": "units",
+  "construct": "padding: 1.5em against a 12px font-size",
+  "why": "em-based spacing scales with type; the resolved px is a FUNCTION of an inherited channel.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.padding-left",
+  "observable": {
+    "part": "root",
+    "channel": "padding-left",
+    "capturedValue": "18px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the resolved px is the canvas truth; the RELATIONSHIP is what is lost"
+  }
+}

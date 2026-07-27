@@ -1,0 +1,18 @@
+{
+  "id": "clip-path-polygon",
+  "feature": "effects",
+  "construct": "clip-path: polygon(...)",
+  "why": "Ribbons, notched cards, sr-only insets. clip-path decides what is VISIBLE.",
+  "expect": "UNSUPPORTED",
+  "expectName": "clip-path",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "clip-path",
+    "capturedValue": "polygon(0% 0%, 100% 0%, 90% 100%, 0% 100%)"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "arbitrary polygon clipping has no frame-level spelling"
+  }
+}

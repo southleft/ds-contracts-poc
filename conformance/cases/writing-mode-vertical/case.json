@@ -1,0 +1,18 @@
+{
+  "id": "writing-mode-vertical",
+  "feature": "writing-mode",
+  "construct": "writing-mode: vertical-rl",
+  "why": "CJK-capable libraries ship vertical text; the LOGICAL_ALIASES pin assumes horizontal-tb.",
+  "expect": "UNSUPPORTED",
+  "expectName": "writing-mode",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "writing-mode",
+    "capturedValue": "vertical-rl"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "Figma AutoLayout has no vertical writing mode"
+  }
+}

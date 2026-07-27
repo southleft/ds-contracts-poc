@@ -1,0 +1,18 @@
+{
+  "id": "border-radius-px",
+  "feature": "geometry",
+  "construct": "border-radius: 6px",
+  "why": "Corner radius is a first-class Figma property and a first-class token.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.border-top-left-radius",
+  "observable": {
+    "part": "root",
+    "channel": "border-top-left-radius",
+    "capturedValue": "6px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "cornerRadius"
+  }
+}

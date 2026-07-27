@@ -1,0 +1,2 @@
+[data-cf="pseudo-content-glyph"] { display: flex; background: rgb(244, 244, 244); }
+[data-cf="pseudo-content-glyph"]::before { content: "\2715"; font-family: "cf-icons", monospace; color: rgb(180, 40, 40); }

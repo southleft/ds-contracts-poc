@@ -1,0 +1,4 @@
+[data-cf="media-non-matching"] { display: flex; background-color: rgb(200, 210, 220); }
+@media (min-width: 2000px) {
+  [data-cf="media-non-matching"] { background-color: rgb(10, 10, 10); }
+}

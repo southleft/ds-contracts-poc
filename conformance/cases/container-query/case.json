@@ -1,0 +1,19 @@
+{
+  "id": "container-query",
+  "feature": "at-rules",
+  "construct": "@container (min-inline-size: 100px) { … }",
+  "why": "Container queries are how 2026-era libraries do responsive components. The rule MATCHES here.",
+  "expect": "UNSUPPORTED",
+  "expectName": "@container",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "a",
+    "channel": "background-color",
+    "capturedValue": "rgb(60, 160, 90)"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "a size-conditional rendering is a MODE, not a single canvas variant"
+  },
+  "blockStage": true
+}

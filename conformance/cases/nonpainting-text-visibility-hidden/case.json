@@ -1,0 +1,18 @@
+{
+  "id": "nonpainting-text-visibility-hidden",
+  "feature": "invariant",
+  "construct": "a NON-PAINTING element carrying text (visibility: hidden)",
+  "why": "visibility:hidden keeps the BOX but paints nothing — the harder half of the SVG <title> invariant. MEASURED: the part is carried with text \"INVISIBLE-SENTINEL\" and declared display:\"block\"; the visibility channel is dropped as code-only, so the contract asserts a VISIBLE block containing text the browser paints nowhere. The display:none twin is guarded and safe; this one is not.",
+  "expect": "REFUSED",
+  "expectName": "visibility",
+  "expectWhere": "anatomy.root.parts.label-2 must carry a non-painting guard, as the display:none twin does",
+  "observable": {
+    "part": "b",
+    "channel": "__text",
+    "capturedValue": "INVISIBLE-SENTINEL"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "INVARIANT BROKEN: text that paints nowhere is carried with no guard — the SVG <title> defect, generalised"
+  }
+}

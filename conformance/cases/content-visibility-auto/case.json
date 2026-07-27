@@ -1,0 +1,19 @@
+{
+  "id": "content-visibility-auto",
+  "feature": "rendering",
+  "construct": "content-visibility: auto",
+  "why": "Long virtualised lists opt out of rendering; an off-screen subtree has NO computed geometry.",
+  "expect": "UNSUPPORTED",
+  "expectName": "content-visibility",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "content-visibility",
+    "capturedValue": "auto"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "a rendering optimisation, not ink"
+  },
+  "blockStage": true
+}

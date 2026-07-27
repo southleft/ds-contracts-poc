@@ -1,0 +1,18 @@
+{
+  "color-primary": {
+    "$type": "color",
+    "$value": "#1976d2"
+  },
+  "color-secondary": {
+    "$type": "color",
+    "$value": "#663399"
+  },
+  "radius-md": {
+    "$type": "dimension",
+    "$value": "6px"
+  },
+  "space-2": {
+    "$type": "dimension",
+    "$value": "8px"
+  }
+}

@@ -1,0 +1,2 @@
+[data-cf="pseudo-selection"] { display: flex; }
+[data-cf="pseudo-selection"]::selection { background-color: rgb(255, 214, 0); }

@@ -1,0 +1,1 @@
+[data-cf="custom-prop-two-hop"] { display: flex; --cf-hop-a: #123456; --cf-hop-b: var(--cf-hop-a); color: var(--cf-hop-b); }

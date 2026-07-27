@@ -1,0 +1,2 @@
+[data-cf="pseudo-backdrop"] { display: block; border: 0px; padding: 4px; background: rgb(255, 255, 255); }
+[data-cf="pseudo-backdrop"]::backdrop { background-color: rgba(0, 0, 0, 0.5); }

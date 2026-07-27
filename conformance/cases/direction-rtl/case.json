@@ -1,0 +1,18 @@
+{
+  "id": "direction-rtl",
+  "feature": "writing-mode",
+  "construct": "direction: rtl + padding-inline-start: 24px",
+  "why": "RTL INVERTS the physical meaning of every logical property — the exact pin LOGICAL_ALIASES rests on.",
+  "expect": "UNSUPPORTED",
+  "expectName": "direction",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "direction",
+    "capturedValue": "rtl"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Figma AutoLayout does have RTL; and if the alias pin does not invert, the padding lands on the WRONG side"
+  }
+}

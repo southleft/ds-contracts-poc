@@ -1,0 +1,18 @@
+{
+  "id": "rotate-independent-property",
+  "feature": "transform",
+  "construct": "rotate: 15deg (the INDEPENDENT transform property)",
+  "why": "The modern spelling. A reader that only knows `transform` sees an IDENTITY matrix and reports nothing wrong.",
+  "expect": "UNSUPPORTED",
+  "expectName": "rotate",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "rotate",
+    "capturedValue": "15deg"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "Figma rotation is an exact match — and the box IS rotated on screen"
+  }
+}

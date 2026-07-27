@@ -1,0 +1,18 @@
+{
+  "id": "transform-scale-rotate",
+  "feature": "transform",
+  "construct": "transform: rotate(15deg) scale(1.2)",
+  "why": "Chevron flips, loading spinners, checkbox tick scale-ins. Non-identity transforms are everywhere.",
+  "expect": "REFUSED",
+  "expectName": "transform",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "transform",
+    "capturedValue": "matrix(1.15911, 0.310583, -0.310583, 1.15911, 0, 0)"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "the bounded grammar carries translate only"
+  }
+}

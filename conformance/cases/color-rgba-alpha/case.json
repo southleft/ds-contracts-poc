@@ -1,0 +1,18 @@
+{
+  "id": "color-rgba-alpha",
+  "feature": "color",
+  "construct": "background-color: rgba(25, 118, 210, 0.5)",
+  "why": "Hover overlays and scrims are alpha fills; alpha must survive the mint as an 8-digit hex.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.background-color",
+  "observable": {
+    "part": "root",
+    "channel": "background-color",
+    "capturedValue": "rgba(25, 118, 210, 0.5)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "SOLID fill with opacity"
+  }
+}

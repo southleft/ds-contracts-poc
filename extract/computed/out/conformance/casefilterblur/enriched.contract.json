@@ -1,0 +1,40 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.filter-blur",
+  "name": "CaseFilterBlur",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"filter-blur\" (effects). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: filter: blur(2px) COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "text": "Sample",
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace"
+      },
+      "tokens": {
+        "background-color": "{imported.case-filter-blur.root.background-color}",
+        "font-size": "{imported.case-filter-blur.root.font-size}",
+        "font-weight": "{imported.case-filter-blur.root.font-weight}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@ds-contracts/conformance",
+      "export": "CaseFilterBlur"
+    }
+  }
+}

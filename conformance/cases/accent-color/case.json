@@ -1,0 +1,18 @@
+{
+  "id": "accent-color",
+  "feature": "forms",
+  "construct": "accent-color: rebeccapurple on a native checkbox",
+  "why": "The one-line way to theme native form controls; it is the ONLY paint the control has.",
+  "expect": "UNSUPPORTED",
+  "expectName": "accent-color",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "a",
+    "channel": "accent-color",
+    "capturedValue": "rgb(102, 51, 153)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the checked box fill is real ink"
+  }
+}

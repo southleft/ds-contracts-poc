@@ -1,0 +1,19 @@
+{
+  "id": "stage-box-equal",
+  "feature": "invariant",
+  "construct": "a captured box exactly equal to the STAGE box (100% × 100%)",
+  "why": "The GENERAL form of the 100vh-scrim defect: a measured box that is really the harness, not the component.",
+  "expect": "REFUSED",
+  "expectName": "stage-box",
+  "expectWhere": "LEDGER.md",
+  "observable": {
+    "part": "root",
+    "channel": "width",
+    "capturedValue": "288px"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "a stage-sized box is a measurement artefact, not a component fact"
+  },
+  "blockStage": true
+}

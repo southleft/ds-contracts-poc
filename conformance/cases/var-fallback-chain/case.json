@@ -1,0 +1,18 @@
+{
+  "id": "var-fallback-chain",
+  "feature": "custom-properties",
+  "construct": "color: var(--cf-missing, var(--cf-color-secondary, #333))",
+  "why": "Every library ships fallback chains so a page renders without the theme provider mounted.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.tokens.color",
+  "observable": {
+    "part": "root",
+    "channel": "color",
+    "capturedValue": "rgb(102, 51, 153)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "text fill; the RESOLVED value is the truth"
+  }
+}
