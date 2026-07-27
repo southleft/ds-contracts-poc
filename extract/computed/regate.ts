@@ -188,6 +188,12 @@ async function main() {
       fontChecks: {},
       pinnedAnimations: [],
       shadowHostTrails: {},
+      // CONFORMANCE FRONTIER (R1/R8): read-boundary receipts belong to the
+      // CAPTURE. An offline re-fuse of a committed truth file has no raw tree
+      // to take them from — the fold is still APPLIED (reconstructCaptures
+      // runs it), only its receipt is not re-derivable. Empty, never faked.
+      textFillFolds: [],
+      closedShadowSuspects: [],
     };
 
     const aligned = alignSweep(sweep, comp, space, cfg.library.classPrefix);

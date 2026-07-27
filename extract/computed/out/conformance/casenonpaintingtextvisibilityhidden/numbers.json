@@ -37,26 +37,26 @@
     }
   },
   "declared": {
-    "base": 6,
+    "base": 4,
     "state": 0
   },
   "codeOnly": {
-    "base": 3,
+    "base": 5,
     "state": 0,
-    "overflowBindings": 0
+    "overflowBindings": 2
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
-    "partsCarried": 3,
+    "partsCarried": 2,
     "svgAssets": 0,
-    "refusals": 0
+    "refusals": 1
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
     "cellsCompared": 5688,
-    "cellsMatched": 5680,
-    "pct": 99.85935302390999,
+    "cellsMatched": 5664,
+    "pct": 99.57805907172995,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -65,7 +65,15 @@
     ],
     "topMismatchedChannels": [
       [
+        "inline-size",
+        8
+      ],
+      [
         "perspective-origin",
+        8
+      ],
+      [
+        "width",
         8
       ]
     ]
@@ -112,11 +120,11 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 93.75,
-    "rowsFullyEqual": 0,
+    "computedPctEqual": 100,
+    "rowsFullyEqual": 4,
     "rows": 4,
     "pixelPerfectExact": 0,
-    "pixelPerfectAA": 0,
+    "pixelPerfectAA": 4,
     "pairs": 4
   },
   "focusVisibleDriverMatched": 0,

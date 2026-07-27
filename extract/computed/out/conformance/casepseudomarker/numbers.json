@@ -73,35 +73,35 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.8984375,
-      "max": 0.8984375,
-      "perfect": 0
+      "mean": 0,
+      "max": 0,
+      "perfect": 4
     },
     "aa": {
-      "mean": 0.3385416666666667,
-      "max": 0.3385416666666667,
-      "perfect": 0
+      "mean": 0,
+      "max": 0,
+      "perfect": 4
     },
     "worst": [
       {
         "key": "__default",
-        "pctExact": 0.8984375,
-        "pctAA": 0.3385416666666667
+        "pctExact": 0,
+        "pctAA": 0
       },
       {
         "key": "__hover",
-        "pctExact": 0.8984375,
-        "pctAA": 0.3385416666666667
+        "pctExact": 0,
+        "pctAA": 0
       },
       {
         "key": "__focus-visible",
-        "pctExact": 0.8984375,
-        "pctAA": 0.3385416666666667
+        "pctExact": 0,
+        "pctAA": 0
       },
       {
         "key": "__active",
-        "pctExact": 0.8984375,
-        "pctAA": 0.3385416666666667
+        "pctExact": 0,
+        "pctAA": 0
       }
     ]
   },

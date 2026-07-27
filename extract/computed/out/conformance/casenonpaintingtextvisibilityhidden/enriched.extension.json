@@ -63,16 +63,6 @@
         "part": "label",
         "channel": "font-family",
         "value": "monospace"
-      },
-      {
-        "part": "label-2",
-        "channel": "box-sizing",
-        "value": "border-box"
-      },
-      {
-        "part": "label-2",
-        "channel": "font-family",
-        "value": "monospace"
       }
     ],
     "state": []
@@ -83,6 +73,20 @@
       "channel": "line-height",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "box-sizing",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "border-box",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "font-family",
+      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+      "sample": "monospace",
       "distinctValues": 1
     },
     {
@@ -101,7 +105,20 @@
     }
   ],
   "stateOverflow": [],
-  "overflowBindings": [],
+  "overflowBindings": [
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "ref": "{imported.shared.size-12}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "ref": "{imported.case-nonpainting-text-visibility-hidden.label-2.font-weight}",
+      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
+    }
+  ],
   "pairwiseRefusals": [],
   "pseudoParts": {
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
@@ -120,6 +137,13 @@
     "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-only: label-2.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
     "inheritance-only: label.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -142,23 +166,22 @@
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
     "partsCarried": [
       "root",
-      "label",
-      "label-2"
+      "label"
     ],
     "svgAssets": [],
     "receipts": [
       "root-display-carried: flex",
       "literal-text-carried: label = \"Visible\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "literal-text-carried: label-2 = \"INVISIBLE-SENTINEL\" (no text prop sample matches — the mounted value is carried verbatim)"
+      "literal-text-carried: label-2 = \"PAINTS-NOWHERE-SENTINEL\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
-    "refusals": []
+    "refusals": [
+      "non-painting-part: label-2 <span> renders NO INK in any combo it appears in (visibility: hidden) and no descendant paints, yet it carries the text \"PAINTS-NOWHERE-SENTINEL\" — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame with visible text on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)"
+    ]
   },
   "enrichmentNotes": [
     "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: root.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-2.font-family = monospace (v15 declared vocabulary — canvas-drawable)"
+    "declared fact carried: label.font-family = monospace (v15 declared vocabulary — canvas-drawable)"
   ]
 }

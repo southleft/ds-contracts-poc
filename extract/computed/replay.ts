@@ -16,7 +16,9 @@
 import {
   decomposeTranslate,
   flatten,
+  foldTextFillColor,
   normalizeValue,
+  PSEUDO_KEY_RE,
   REPLAY_APPLY_EXCLUDE,
   type Capture,
   type CapturedNode,
@@ -125,10 +127,10 @@ export function reconstructCaptures(truth: CapturedTruthFile): Capture[] {
     };
     walk(truth.anatomy[0].part, root);
     for (const [key, style] of Object.entries(cap.pseudo ?? {})) {
-      const m = /^(.*)(::before|::after)$/.exec(key);
+      const m = PSEUDO_KEY_RE.exec(key);
       if (!m) continue;
       const node = flatParts.get(m[1]);
-      if (node) node.pseudo[m[2] as '::before' | '::after'] = style;
+      if (node) node.pseudo[m[2] as keyof CapturedNode['pseudo']] = style;
     }
     return root;
   };
@@ -156,11 +158,11 @@ export function reconstructCaptures(truth: CapturedTruthFile): Capture[] {
     // pseudo maps are FULL (not deltas): captures carry their own pseudo set
     for (const node of byPath.values()) node.pseudo = {};
     for (const [key, style] of Object.entries(cap.pseudo ?? {})) {
-      const m = /^(.*)(::before|::after)$/.exec(key);
+      const m = PSEUDO_KEY_RE.exec(key);
       if (!m) continue;
       const p = pathByPart.get(m[1]) ?? m[1]; // part name, else raw path
       const node = byPath.get(p);
-      if (node) node.pseudo[m[2] as '::before' | '::after'] = style;
+      if (node) node.pseudo[m[2] as keyof CapturedNode['pseudo']] = style;
     }
     out.push({ combo, interaction, ...(cap.focusVisibleMatched !== undefined ? { focusVisibleMatched: cap.focusVisibleMatched } : {}), root });
   }
@@ -174,7 +176,13 @@ export function reconstructCaptures(truth: CapturedTruthFile): Capture[] {
   for (const cap of out) {
     const walk = (node: CapturedNode): void => {
       decomposeTranslate(node.style);
-      for (const st of Object.values(node.pseudo)) if (st) decomposeTranslate(st as StyleMap);
+      // CONFORMANCE FRONTIER (R1) — the painted-ink fold rides the SAME
+      // boundary for the same reason: a COMMITTED capture taken before the
+      // fold existed still stores the overridden `color`, so an offline
+      // re-fuse (regate) would carry a colour that is not on screen. Pure and
+      // idempotent — a capture already folded recomputes byte-identically.
+      foldTextFillColor(node.style);
+      for (const st of Object.values(node.pseudo)) if (st) { decomposeTranslate(st as StyleMap); foldTextFillColor(st as StyleMap); }
       for (const c of node.nodes) if (c.t === 'el') walk(c.el);
     };
     walk(cap.root);

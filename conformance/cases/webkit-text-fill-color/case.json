@@ -2,17 +2,17 @@
   "id": "webkit-text-fill-color",
   "feature": "vendor-prefixed",
   "construct": "-webkit-text-fill-color OVERRIDING color",
-  "why": "A disabled input’s grey text: the painted colour is the fill, NOT `color`. Carrying `color` carries a lie.",
-  "expect": "UNSUPPORTED",
+  "why": "A disabled input’s grey text: the painted colour is the fill, NOT `color`. Carrying `color` carried a lie — the contract minted #111111 for text the browser drew in #999999, with no receipt anywhere. MANIFEST EDIT (conformance-frontier round, R1): the engine's behaviour genuinely changed. `-webkit-text-fill-color` is now FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor, applied at both the capture and the replay/regate boundaries), so the case is re-declared CARRIED on the channel that carries it. Declaring it CARRIED on `color` is strictly STRONGER than the old UNSUPPORTED: it asserts the contract equals the PAINTED INK, so reverting the fold turns the case red (the reader would record color: rgb(17,17,17) and the prediction would fail) instead of passing on the mere presence of the string '-webkit-text-fill-color' in some receipt.",
+  "expect": "CARRIED",
   "expectName": "-webkit-text-fill-color",
   "expectWhere": "LEDGER.md",
   "observable": {
     "part": "root",
-    "channel": "-webkit-text-fill-color",
+    "channel": "color",
     "capturedValue": "rgb(153, 153, 153)"
   },
   "canvas": {
     "expect": "PRESENT",
-    "note": "the text fill IS the ink the canvas draws"
+    "note": "the text fill IS the ink the canvas draws — and now it is the ink the contract mints (verified in the subject browser: with the fill set, the rasterised glyph is rgb(153,153,153); the authored `color` rgb(17,17,17) paints nowhere)"
   }
 }

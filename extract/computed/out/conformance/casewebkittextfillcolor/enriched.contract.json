@@ -21,10 +21,19 @@
         "font-family": "monospace"
       },
       "tokens": {
+        "border-bottom-color": "{imported.shared.color-111111}",
+        "border-left-color": "{imported.shared.color-111111}",
+        "border-right-color": "{imported.shared.color-111111}",
+        "border-top-color": "{imported.shared.color-111111}",
+        "caret-color": "{imported.shared.color-111111}",
         "color": "{imported.case-webkit-text-fill-color.root.color}",
+        "column-rule-color": "{imported.shared.color-111111}",
         "font-size": "{imported.case-webkit-text-fill-color.root.font-size}",
         "font-weight": "{imported.case-webkit-text-fill-color.root.font-weight}",
-        "row-rule-color": "{imported.case-webkit-text-fill-color.root.row-rule-color}"
+        "outline-color": "{imported.shared.color-111111}",
+        "row-rule-color": "{imported.shared.color-111111}",
+        "text-decoration-color": "{imported.shared.color-111111}",
+        "text-emphasis-color": "{imported.shared.color-111111}"
       }
     }
   },

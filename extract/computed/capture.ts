@@ -21,6 +21,7 @@ import {
   enumerate,
   mintedLeafCount,
   normalizeNode,
+  READ_PSEUDOS,
   type CapturedNode,
   type Capture,
   type Combo,
@@ -945,13 +946,39 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
         const defs = [];
         const chans = [];
         const shorts = [];
+        const calcs = [];
         const seen = new Set();
         for (let i = 0; i < r.style.length; i++) {
           const prop = r.style[i];
           if (seen.has(prop)) continue; seen.add(prop);
           const val = r.style.getPropertyValue(prop);
-          if (!val || val.includes('calc(')) continue;
+          if (!val) continue;
+          // CONFORMANCE FRONTIER (R5) — CALC IS NO LONGER A BLANKET SKIP.
+          // 'if (!val || val.includes("calc("))' dropped EVERY declaration
+          // whose value mentioned calc(), before defs, before chans, and
+          // before the shorthand-ceiling pass — so 'padding-left:
+          // calc(var(--space-2) * 2)' lost its token name with NOTHING
+          // anywhere naming the loss, while source-bindings.json printed
+          // 'skips: []' and the console printed '0 named skip(s)'. Density
+          // scales are computed, not literal: calc() over a token is how
+          // every compact mode ships.
+          //
+          // The var references INSIDE the calc are now CANDIDATES like any
+          // other, and the existing Node-side verification (does the token's
+          // own value equal the captured computed value?) confirms or rejects
+          // them — 'calc(var(--x))' and 'calc(var(--x) + 0px)' recover the
+          // name; 'calc(var(--x) * 2)' cannot verify by construction and
+          // falls to the NAMED calc skip recorded here.
+          const isCalc = val.includes('calc(');
+          if (isCalc) {
+            const gc = new RegExp(anyRe.source, 'g');
+            const cnames = [];
+            let cm;
+            while ((cm = gc.exec(val)) !== null) cnames.push(cm[1]);
+            if (cnames.length) calcs.push([prop, cnames, val.trim().slice(0, 120)]);
+          }
           if (prop.startsWith('--')) {
+            if (isCalc) continue;
             const m = muiRe.exec(val);
             if (m) defs.push([prop, m[1]]);
           } else {
@@ -1004,7 +1031,7 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
             if (names.length) shorts.push([prop, names]);
           }
         } catch {}
-        if (defs.length || chans.length || shorts.length) out.push([r.selectorText, defs, chans, shorts]);
+        if (defs.length || chans.length || shorts.length || calcs.length) out.push([r.selectorText, defs, chans, shorts, calcs]);
       }
     }
     return out;
@@ -1056,7 +1083,8 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
     // declares "background-color: var(...)" is where a patch would land, even
     // when the token itself resolves through an indirection in another rule).
     const shorts = {}; // fix 1: shorthand-carried var refs, by property
-    for (const [sel, rdefs, rchans, rshorts] of VRULES) {
+    const calcs = {}; // R5: calc()-carried var refs, by property
+    for (const [sel, rdefs, rchans, rshorts, rcalcs] of VRULES) {
       let hit = false;
       if (sel.indexOf(':host') === 0) hit = hostMatch(el, sel, root);
       else { try { hit = el.matches(sel); } catch {} }
@@ -1069,6 +1097,10 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
       for (const [prop, names] of (rshorts || [])) {
         const acc = (shorts[prop] = shorts[prop] || []);
         for (const n of names) if (!acc.includes(n)) acc.push(n);
+      }
+      for (const [prop, names, text] of (rcalcs || [])) {
+        const acc = (calcs[prop] = calcs[prop] || []);
+        if (!acc.some((c) => c[1] === text)) acc.push([names, text]);
       }
     }
     const out = {};
@@ -1084,7 +1116,11 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
       }
       if (cands.length) out[prop] = cands;
     }
-    return { refs: Object.keys(out).length ? out : undefined, shorthands: Object.keys(shorts).length ? shorts : undefined };
+    return {
+      refs: Object.keys(out).length ? out : undefined,
+      shorthands: Object.keys(shorts).length ? shorts : undefined,
+      calcs: Object.keys(calcs).length ? calcs : undefined,
+    };
   };
   // SHADOW-DOM ROUND — read \`tagName\` off Element.prototype, never off the
   // instance. A custom element can DEFINE A REACTIVE PROPERTY THAT SHADOWS IT:
@@ -1097,19 +1133,35 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
   const readEl = (el) => {
     const vrPair = vrefsOf(el) || {};
     const vr = vrPair.refs;
+    const ecs = getComputedStyle(el);
     const out = {
       tag: tagGet.call(el).toLowerCase(),
       classes: keepCls([...el.classList]),
       nodes: [],
-      style: read(getComputedStyle(el)),
+      style: read(ecs),
       pseudo: {},
     };
     if (vr) out.vrefs = vr;
     if (vrPair.shorthands) out.vshorthands = vrPair.shorthands;
-    for (const pe of ['::before', '::after']) {
+    if (vrPair.calcs) out.vcalcs = vrPair.calcs;
+    // CONFORMANCE FRONTIER (R7) — the reader's pseudo frontier is DECLARED in
+    // lib.ts (READ_PSEUDOS) and injected here, so the census reader, the
+    // portal reader and the replay reconstruction cannot drift apart.
+    // ::before/::after are gated on 'content' (a pseudo with no content box
+    // does not exist); ::marker and ::placeholder have no content gate — they
+    // exist iff the element is a list item / a placeholder-bearing control,
+    // which is what the display probe below asks.
+    for (const pe of ${JSON.stringify(READ_PSEUDOS)}) {
       const pcs = getComputedStyle(el, pe);
-      const content = pcs.getPropertyValue('content');
-      if (content !== 'none' && content !== 'normal') out.pseudo[pe] = read(pcs);
+      if (pe === '::before' || pe === '::after') {
+        const content = pcs.getPropertyValue('content');
+        if (content !== 'none' && content !== 'normal') out.pseudo[pe] = read(pcs);
+        continue;
+      }
+      if (!pcs || pcs.getPropertyValue('display') === '') continue;
+      if (pe === '::marker' && ecs.getPropertyValue('display') !== 'list-item') continue;
+      if (pe === '::placeholder' && !('placeholder' in el)) continue;
+      out.pseudo[pe] = read(pcs);
     }
     // SHADOW-DOM ROUND — the rendered children of an element are:
     //   · a shadow HOST  → its shadow root's child nodes (the light children
@@ -1142,6 +1194,39 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
       if (child.nodeType === 1 && child instanceof SVGElement && SVG_NONPAINTING.has(tagGet.call(child).toLowerCase())) continue;
       if (child.nodeType === 3 && child.textContent.length > 0) out.nodes.push({ t: 'text', v: child.textContent });
       else if (child.nodeType === 1) out.nodes.push({ t: 'el', el: readEl(child) });
+    }
+    // CONFORMANCE FRONTIER (R8) — CLOSED SHADOW ROOTS. \`el.shadowRoot\` is null
+    // for a closed root, so the host was captured as an EMPTY LEAF with no
+    // receipt: a painted box with nothing inside it and nothing saying why.
+    // A closed root is undetectable BY DEFINITION — but its ABSENCE has a
+    // signature, and that IS detectable. TWO signatures, because the first one
+    // alone misses the commonest hand-rolled case:
+    //
+    //  (a) CUSTOM ELEMENT — a dash in the tag, no shadow root the script can
+    //      see, no rendered light children, and a painted box.
+    //  (b) UNEXPLAINED INLINE BOX — a non-replaced element whose computed
+    //      display is \`inline\`, with NO child nodes and NO rendered
+    //      ::before/::after, whose CONTENT box is nevertheless non-zero. By
+    //      CSS that is impossible: a non-replaced inline box is sized by its
+    //      content, and this one has none the reader can see. Something is
+    //      rendering inside it that no walker can reach. (The fixture's own
+    //      subject is exactly this: \`attachShadow({ mode: 'closed' })\` on a
+    //      plain <span>, which signature (a) does not match.)
+    //
+    // Marked on the RAW node only; \`normalizeNode\` builds a fresh object and
+    // never copies it, so no committed capture moves by one byte.
+    if (!el.shadowRoot && out.nodes.length === 0) {
+      const r = el.getBoundingClientRect();
+      const painted = r.width > 0 && r.height > 0;
+      const box = out.tag + ' ' + Math.round(r.width) + 'x' + Math.round(r.height);
+      const num = (v) => parseFloat(v) || 0;
+      const inlineContentW = r.width - num(ecs.paddingLeft) - num(ecs.paddingRight) - num(ecs.borderLeftWidth) - num(ecs.borderRightWidth);
+      const inlineContentH = r.height - num(ecs.paddingTop) - num(ecs.paddingBottom) - num(ecs.borderTopWidth) - num(ecs.borderBottomWidth);
+      const noDecor = !out.pseudo['::before'] && !out.pseudo['::after'];
+      if (painted && out.tag.indexOf('-') > 0) out.closedShadowRootSuspect = 'custom-element ' + box;
+      else if (painted && noDecor && ecs.getPropertyValue('display') === 'inline' && inlineContentW > 0 && inlineContentH > 0) {
+        out.closedShadowRootSuspect = 'unexplained-inline-box ' + box;
+      }
     }
     return out;
   };
@@ -1191,6 +1276,59 @@ export interface SweepResult {
    *  the captured anatomy's root is `button.al-c-button`, and this records that
    *  it was reached through `al-button`. */
   shadowHostTrails: Record<string, string>;
+  /** CONFORMANCE FRONTIER (R1/R8) — READ-BOUNDARY RECEIPTS.
+   *
+   *  Two facts the reader knows and the persisted capture deliberately does
+   *  not carry, because carrying them would move committed bytes for every
+   *  library that has neither:
+   *
+   *   · `textFillFolds` — every element whose painted ink came from
+   *     `-webkit-text-fill-color` rather than `color`, quoted before→after.
+   *     After the fold the two channels are EQUAL, so the receipt cannot be
+   *     re-derived downstream; it has to be taken here or not at all.
+   *   · `closedShadowSuspects` — every custom element with no reachable shadow
+   *     root, no rendered children and a painted box: the signature of a
+   *     CLOSED root, which is the only thing about a closed root that IS
+   *     detectable.
+   *
+   *  Both are read off the RAW tree before `normalizeNode`, which builds a
+   *  fresh object and copies neither — so captured-truth.json is byte-identical
+   *  for every subject that triggers neither. */
+  textFillFolds: string[];
+  closedShadowSuspects: string[];
+}
+
+/** CONFORMANCE FRONTIER (R1/R8) — read the two RAW-tree receipts before
+ *  `normalizeNode` erases them (the fold makes `color` and the fill equal; the
+ *  closed-root marker is never copied). Pure, and it never touches the node. */
+export function readBoundaryReceipts(
+  raw: CapturedNode,
+  where: string,
+  folds: Set<string>,
+  suspects: Set<string>,
+): void {
+  const walk = (n: CapturedNode, path: string): void => {
+    const fill = n.style?.['-webkit-text-fill-color'];
+    const color = n.style?.['color'];
+    if (fill !== undefined && color !== undefined && fill !== color && !/^currentcolor$/i.test(fill.trim())) {
+      folds.add(
+        `text-fill-is-the-ink: ${where}${path} — the painted text colour is \`-webkit-text-fill-color: ${fill}\`, NOT \`color: ${color}\`; the \`color\` channel is folded to the fill at the read boundary so the contract mints the ink that is actually on screen (verified in the subject browser: the rasterised glyph is the fill)`,
+      );
+    }
+    const sus = (n as { closedShadowRootSuspect?: string }).closedShadowRootSuspect;
+    if (sus) {
+      const [kind, tag, box] = sus.split(' ');
+      suspects.add(
+        `closed-shadow-root-suspected: ${where}${path} <${tag}> — ${
+          kind === 'custom-element'
+            ? 'a CUSTOM ELEMENT with no shadow root this script can reach, no rendered light children'
+            : 'a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach'
+        } and a painted ${box} box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script`,
+      );
+    }
+    for (const c of n.nodes ?? []) if (c.t === 'el') walk(c.el, `${path}>${c.el.tag}`);
+  };
+  walk(raw, '');
 }
 
 /** The state sweep (§2): real browser states, driven exactly as
@@ -1217,6 +1355,8 @@ export async function sweep(
 
   const pinnedAnimations = new Set<string>();
   const shadowHostTrails = new Map<string, string>();
+  const textFillFolds = new Set<string>();
+  const closedShadowSuspects = new Set<string>();
   for (const { comp, space } of mounts) {
     for (const combo of space.enumeration.combos) {
       const key = `${comp.name}:${combo.key}`;
@@ -1320,6 +1460,7 @@ export async function sweep(
 
         const raw = (await page.evaluate(captureJs(stageSel, opts.classAllow, opts.varPrefix))) as CapturedNode | null;
         if (!raw) throw new Error(`capture failed: ${key} ${interaction}`);
+        readBoundaryReceipts(raw, `${key}__${interaction}`, textFillFolds, closedShadowSuspects);
         captures.push({
           combo: key,
           interaction,
@@ -1365,6 +1506,8 @@ export async function sweep(
     fontChecks,
     pinnedAnimations: [...pinnedAnimations].sort(),
     shadowHostTrails: Object.fromEntries([...shadowHostTrails].sort()),
+    textFillFolds: [...textFillFolds].sort(),
+    closedShadowSuspects: [...closedShadowSuspects].sort(),
   };
 }
 
@@ -1624,19 +1767,31 @@ const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
   const read = (cs) => { const o = {}; for (const p of props) o[p] = cs.getPropertyValue(p); return o; };
   const SVG_NONPAINTING = new Set(['title', 'desc', 'metadata']);
   const readEl = (el) => {
+    const ecs = getComputedStyle(el);
     const out = {
       tag: el.tagName.toLowerCase(),
       classes: keepCls([...el.classList]),
       role: el.getAttribute('role'),
       ariaModal: el.getAttribute('aria-modal'),
       nodes: [],
-      style: read(getComputedStyle(el)),
+      style: read(ecs),
       pseudo: {},
     };
-    for (const pe of ['::before', '::after']) {
+    // CONFORMANCE FRONTIER (R7) — the SAME declared pseudo frontier as the
+    // census reader (READ_PSEUDOS), injected from lib.ts. The two readers
+    // used to hardcode ::before/::after independently, which is how a reader
+    // gap becomes two reader gaps.
+    for (const pe of ${JSON.stringify(READ_PSEUDOS)}) {
       const pcs = getComputedStyle(el, pe);
-      const content = pcs.getPropertyValue('content');
-      if (content !== 'none' && content !== 'normal') out.pseudo[pe] = read(pcs);
+      if (pe === '::before' || pe === '::after') {
+        const content = pcs.getPropertyValue('content');
+        if (content !== 'none' && content !== 'normal') out.pseudo[pe] = read(pcs);
+        continue;
+      }
+      if (!pcs || pcs.getPropertyValue('display') === '') continue;
+      if (pe === '::marker' && ecs.getPropertyValue('display') !== 'list-item') continue;
+      if (pe === '::placeholder' && !('placeholder' in el)) continue;
+      out.pseudo[pe] = read(pcs);
     }
     for (const child of el.childNodes) {
       // D1 mirror (see the census reader): non-painting SVG a11y metadata is
@@ -1645,6 +1800,21 @@ const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
       if (child.nodeType === 1 && child instanceof SVGElement && SVG_NONPAINTING.has(child.tagName.toLowerCase())) continue;
       if (child.nodeType === 3 && child.textContent.length > 0) out.nodes.push({ t: 'text', v: child.textContent });
       else if (child.nodeType === 1) out.nodes.push({ t: 'el', el: readEl(child) });
+    }
+    // CONFORMANCE FRONTIER (R8) — the SAME two closed-root signatures as the
+    // census reader (see there for the argument). RAW-node marker only.
+    if (!el.shadowRoot && out.nodes.length === 0) {
+      const r = el.getBoundingClientRect();
+      const painted = r.width > 0 && r.height > 0;
+      const box = out.tag + ' ' + Math.round(r.width) + 'x' + Math.round(r.height);
+      const num = (v) => parseFloat(v) || 0;
+      const inlineContentW = r.width - num(ecs.paddingLeft) - num(ecs.paddingRight) - num(ecs.borderLeftWidth) - num(ecs.borderRightWidth);
+      const inlineContentH = r.height - num(ecs.paddingTop) - num(ecs.paddingBottom) - num(ecs.borderTopWidth) - num(ecs.borderBottomWidth);
+      const noDecor = !out.pseudo['::before'] && !out.pseudo['::after'];
+      if (painted && out.tag.indexOf('-') > 0) out.closedShadowRootSuspect = 'custom-element ' + box;
+      else if (painted && noDecor && ecs.getPropertyValue('display') === 'inline' && inlineContentW > 0 && inlineContentH > 0) {
+        out.closedShadowRootSuspect = 'unexplained-inline-box ' + box;
+      }
     }
     return out;
   };

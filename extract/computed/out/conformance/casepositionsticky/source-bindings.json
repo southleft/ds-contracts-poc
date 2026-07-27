@@ -5,5 +5,7 @@
   "facts": [],
   "skips": [],
   "shorthandCeiling": 0,
-  "shorthandSkips": []
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }

@@ -3,7 +3,11 @@
   "component": "CaseCalcVar",
   "varPrefix": "--cf-",
   "facts": [],
-  "skips": [],
+  "skips": [
+    "root.padding-left: source declares `calc(var(--cf-space-2) * 2)` — a calc() over var(--cf-space-2). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
   "shorthandCeiling": 0,
-  "shorthandSkips": []
+  "shorthandSkips": [],
+  "calcDeclarations": 1,
+  "calcCeiling": 1
 }

@@ -41,6 +41,7 @@ import { PRESENCE_OFF } from './capture.js';
 import type { ComponentConfig, PropSpace, SweepResult, Interaction } from './capture.js';
 import {
   CHANNEL_TO_COMPUTED,
+  DECOR_PSEUDOS,
   flatten,
   isFusable,
   isAbsurdRadius,
@@ -408,6 +409,22 @@ export function styledChannels(
       receipts.push(`block-root-width-admitted: ${a.partNames[rootPi]} — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)`);
     }
   }
+  /** CONFORMANCE FRONTIER (R4) — THE `-webkit-` BLANKET STOPS BEING SILENT.
+   *
+   *  `isFusable` refuses every `-webkit-` prefixed longhand by one blanket
+   *  rule, and NOT ONE `-webkit-*` name appeared in ANY of the six libraries'
+   *  union artifacts: the exclusion was total and unlogged, so a vendor-
+   *  prefixed construct could disappear with no receipt at all. That is how
+   *  `-webkit-line-clamp` (the ONLY cross-browser two-line truncation, i.e.
+   *  every card description in every library) vanished.
+   *
+   *  The blanket STAYS — vendor-prefixed longhands are mostly Chromium's own
+   *  internal mirrors of standard channels and fusing them would double-count
+   *  — but every prefixed channel a subject actually STYLES (differs from the
+   *  bare control element, or varies across combos) is now counted and named,
+   *  so the next vendor-prefixed construct announces itself instead of
+   *  evaporating. */
+  const webkitStyled = new Map<string, Set<string>>(); // channel -> parts
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
     const set = new Set<string>();
     const inTableBox = table.lowered.has(pi);
@@ -420,6 +437,11 @@ export function styledChannels(
     const ctrl = controls[tag] ?? controls['span'];
     if (!controls[tag]) receipts.push(`control-fallback: no control for <${tag}> — span control used (part ${a.partNames[pi]})`);
     for (const p of allProps) {
+      // R4: the -webkit census runs over the SAME comparison the fusion door
+      // uses (differs from the control), on the channels the door refuses.
+      if (p.startsWith('-webkit-') && a.baseFlat[pi].node.style[p] !== ctrl[p]) {
+        (webkitStyled.get(p) ?? webkitStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
+      }
       if (!admit(p)) continue;
       if (a.baseFlat[pi].node.style[p] !== ctrl[p]) set.add(p);
     }
@@ -428,6 +450,9 @@ export function styledChannels(
       const el = a.getAligned(`${combo.key}__default`)[pi];
       if (!el) continue;
       for (const p of allProps) {
+        if (p.startsWith('-webkit-') && el.node.style[p] !== a.baseFlat[pi].node.style[p]) {
+          (webkitStyled.get(p) ?? webkitStyled.set(p, new Set()).get(p)!).add(a.partNames[pi]);
+        }
         if (!admit(p)) continue;
         if (el.node.style[p] !== a.baseFlat[pi].node.style[p]) set.add(p);
       }
@@ -517,8 +542,30 @@ export function styledChannels(
     }
     out.set(a.partNames[pi], set);
   }
+  // R4: emit the -webkit census. One line per prefixed channel the subject
+  // actually styles, naming the channel and the parts, plus a count — so
+  // "the blanket refused nothing here" and "the blanket ate a construct" are
+  // different, visible facts. `-webkit-line-clamp` gets the argued refusal it
+  // has earned by measurement (see WEBKIT_NOTES).
+  const wk = [...webkitStyled].sort(([x], [y]) => x.localeCompare(y));
+  if (wk.length > 0) {
+    receipts.push(
+      `webkit-prefixed-channels-refused: ${wk.length} vendor-prefixed channel(s) are STYLED by this component and refused by the blanket \`-webkit-\` fusion exclusion (isFusable) — named here because the exclusion used to be silent: ${wk.map(([c, parts]) => `${c} (${[...parts].sort().join(', ')})`).join('; ')}`,
+    );
+    for (const [ch] of wk) {
+      const note = WEBKIT_NOTES[ch];
+      if (note) receipts.push(`webkit-refusal-argued: ${ch} — ${note}`);
+    }
+  }
   return out;
 }
+
+/** R4 — the vendor-prefixed channels whose refusal is an ARGUED call rather
+ *  than the blanket, each with the measurement behind it. */
+export const WEBKIT_NOTES: Record<string, string> = {
+  '-webkit-line-clamp': `MULTI-LINE TRUNCATION, REFUSED BY NAME after measurement, not by the blanket. Figma DOES have the field (textTruncation + maxLines), so the canvas half is expressible — but the CODE half is NOT RECOVERABLE FROM COMPUTED STYLE. Measured in the subject browser: an element authored \`display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden\` COMPUTES \`display: flow-root\` (Chromium's current line-clamp implementation blockifies it), and re-authoring \`display: flow-root; -webkit-line-clamp: 2; overflow: hidden\` from that computed truth does NOT clamp — 100.73px tall against the clamped original's 28.78px. The authored \`-webkit-box\` that makes the clamp work is erased by the cascade before the reader sees it, so carrying the channel would put a DEAD declaration in the emitted CSS and a clamp on the canvas that the generated code does not reproduce: a contract that disagrees with itself. Refused on both surfaces until the reader can recover the authored display (a source-CSS read, not a computed read) — the upgrade is named, costed and NOT taken here.`,
+  '-webkit-text-fill-color': `NOT a loss: this channel is FOLDED INTO \`color\` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from \`color\`. It stays in the capture as the evidence for that fold.`,
+};
 
 // ---------------------------------------------------------------------------
 // DERIVED-CHANNEL FOLDING (item 4 / spike risk #2)
@@ -1920,7 +1967,7 @@ export function pseudoFindings(a: AlignedSweep, classPrefix: string): PseudoFind
     if (!def) continue;
     const flatD = flatten(def.root, classPrefix);
     for (let i = 0; i < flatC.length; i++) {
-      for (const pe of ['::before', '::after'] as const) {
+      for (const pe of DECOR_PSEUDOS) {
         const now = flatC[i]?.node.pseudo[pe];
         if (!now) continue;
         const before = flatD[i]?.node.pseudo[pe];

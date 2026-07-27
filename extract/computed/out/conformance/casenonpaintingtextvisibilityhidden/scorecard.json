@@ -6,25 +6,25 @@
   "combos": 1,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 64,
-    "cellsEqual": 60,
-    "pctEqual": 93.75,
-    "rowsFullyEqual": 0,
+    "cellsCompared": 40,
+    "cellsEqual": 40,
+    "pctEqual": 100,
+    "rowsFullyEqual": 4,
     "rows": 4
   },
   "pixel": {
     "pairs": 4,
     "perfectExact": 0,
-    "perfectAA": 0,
+    "perfectAA": 4,
     "measured": 4,
     "unscored": {
       "sizeMismatch": 0,
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 2.20703125,
-    "meanAA": 1.005859375,
-    "maxAA": 1.005859375
+    "meanExact": 7.565104166666667,
+    "meanAA": 0,
+    "maxAA": 0
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -34,44 +34,44 @@
     "mintedLeavesUnfolded": 4,
     "baseBindings": 6,
     "stateBindings": 0,
-    "codeOnlyChannels": 3,
-    "overflowBindings": 0,
+    "codeOnlyChannels": 5,
+    "overflowBindings": 2,
     "folds": 0
   },
   "worstRows": [
     {
       "key": "__default",
-      "pctAA": 1.005859375,
-      "pctExact": 2.20703125,
-      "channelsMismatched": 1
+      "pctAA": 0,
+      "pctExact": 7.565104166666667,
+      "channelsMismatched": 0
     },
     {
       "key": "__hover",
-      "pctAA": 1.005859375,
-      "pctExact": 2.20703125,
-      "channelsMismatched": 1
+      "pctAA": 0,
+      "pctExact": 7.565104166666667,
+      "channelsMismatched": 0
     },
     {
       "key": "__focus-visible",
-      "pctAA": 1.005859375,
-      "pctExact": 2.20703125,
-      "channelsMismatched": 1
+      "pctAA": 0,
+      "pctExact": 7.565104166666667,
+      "channelsMismatched": 0
     },
     {
       "key": "__active",
-      "pctAA": 1.005859375,
-      "pctExact": 2.20703125,
-      "channelsMismatched": 1
+      "pctAA": 0,
+      "pctExact": 7.565104166666667,
+      "channelsMismatched": 0
     }
   ],
-  "topMismatchedChannels": [
-    [
-      "label-2.visibility",
-      4
-    ]
-  ],
+  "topMismatchedChannels": [],
   "namedLosses": [
+    "promotion: non-painting-part: label-2 <span> renders NO INK in any combo it appears in (visibility: hidden) and no descendant paints, yet it carries the text \"PAINTS-NOWHERE-SENTINEL\" — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame with visible text on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
+    "overflow: label-2.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: label-2.font-weight — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
     "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.box-sizing — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: label-2.font-family — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.visibility — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
@@ -87,63 +87,35 @@
   "rows": [
     {
       "key": "__default",
-      "channelsCompared": 16,
-      "channelsEqual": 15,
-      "pctExact": 2.20703125,
-      "pctAA": 1.005859375,
-      "mismatches": [
-        {
-          "part": "label-2",
-          "channel": "visibility",
-          "ours": "visible",
-          "theirs": "hidden"
-        }
-      ]
+      "channelsCompared": 10,
+      "channelsEqual": 10,
+      "pctExact": 7.565104166666667,
+      "pctAA": 0,
+      "mismatches": []
     },
     {
       "key": "__hover",
-      "channelsCompared": 16,
-      "channelsEqual": 15,
-      "pctExact": 2.20703125,
-      "pctAA": 1.005859375,
-      "mismatches": [
-        {
-          "part": "label-2",
-          "channel": "visibility",
-          "ours": "visible",
-          "theirs": "hidden"
-        }
-      ]
+      "channelsCompared": 10,
+      "channelsEqual": 10,
+      "pctExact": 7.565104166666667,
+      "pctAA": 0,
+      "mismatches": []
     },
     {
       "key": "__focus-visible",
-      "channelsCompared": 16,
-      "channelsEqual": 15,
-      "pctExact": 2.20703125,
-      "pctAA": 1.005859375,
-      "mismatches": [
-        {
-          "part": "label-2",
-          "channel": "visibility",
-          "ours": "visible",
-          "theirs": "hidden"
-        }
-      ]
+      "channelsCompared": 10,
+      "channelsEqual": 10,
+      "pctExact": 7.565104166666667,
+      "pctAA": 0,
+      "mismatches": []
     },
     {
       "key": "__active",
-      "channelsCompared": 16,
-      "channelsEqual": 15,
-      "pctExact": 2.20703125,
-      "pctAA": 1.005859375,
-      "mismatches": [
-        {
-          "part": "label-2",
-          "channel": "visibility",
-          "ours": "visible",
-          "theirs": "hidden"
-        }
-      ]
+      "channelsCompared": 10,
+      "channelsEqual": 10,
+      "pctExact": 7.565104166666667,
+      "pctAA": 0,
+      "mismatches": []
     }
   ]
 }

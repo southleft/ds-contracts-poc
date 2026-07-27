@@ -92,6 +92,19 @@ Plus one measured disposition the four do not cover: **RUN-ABORTED** — the
 production runner threw and wrote no artifacts. Loud and named, but a
 whole-round stop rather than a per-construct receipt.
 
+> **RUN-ABORTED is no longer reachable for a contract the generator refuses**
+> (conformance-frontier round, R3). Three cases used to land here —
+> `accent-color`, `grid-implicit-tracks`, `svg-outside-grammar` — because one
+> unregistered channel threw at `validateContract` and killed the round before
+> any artifact was written, which meant a real library shipping `accent-color`
+> on ONE component could not be onboarded at all. That refusal is now **scoped
+> to the component**: `extract/computed/run.ts` quarantines it, writes
+> `captured-truth.json` + `REFUSAL.md` + `refusal.json` and **no contract**,
+> completes the rest of the library, counts the quarantine in the library
+> scorecard, and exits **non-zero**. The verdict is still reachable — an engine
+> fault that is not a quarantine is still a hard stop, and the fixture would
+> still record it as RUN-ABORTED.
+
 ## Two rules the fixture must obey about itself
 
 1. **`expect` is a closed vocabulary of four** — CARRIED, LOWERED, REFUSED,

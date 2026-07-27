@@ -32,7 +32,7 @@
 import type { Contract, Part } from '../../scripts/contract-schema.js';
 import { walkAnatomy } from '../../scripts/contract-schema.js';
 import { PRESENCE_ON, PRESENCE_OFF, type ComponentConfig, type PropSpace } from './capture.js';
-import { isAbsurdRadius, PILL_RADIUS_SENTINEL, signature, stems, type Capture, type CapturedNode, type Combo, type FlatEl } from './lib.js';
+import { DECOR_PSEUDOS, isAbsurdRadius, PILL_RADIUS_SENTINEL, signature, stems, type Capture, type CapturedNode, type Combo, type FlatEl } from './lib.js';
 
 // ---------------------------------------------------------------------------
 // ORGANISM ROUND (Table) — TABLE-DISPLAY LOWERING
@@ -1202,7 +1202,7 @@ export function promoteAnatomy(
       const m = /^rgba\(\d+, \d+, \d+, ([\d.]+)\)$/.exec(v ?? '');
       return m ? Number(m[1]) : 0;
     };
-    for (const pe of ['::before', '::after'] as const) {
+    for (const pe of DECOR_PSEUDOS) {
       // Domain: ALL default-interaction combos where the host renders (state
       // planes included — a disabled checked Radio keeps its dot; an
       // enabled-only domain would fabricate a hidden-when-disabled fact).
@@ -1652,6 +1652,83 @@ export function promoteAnatomy(
         }
       }
       part.description = `Promoted from the computed floor (round 4): rendered anatomy ${e.sig} — this element exists in the real component's DOM; the static layer had no part for it.`;
+    }
+
+    // ═══ CONFORMANCE FRONTIER (R2) — THE GENERAL NON-PAINTING INVARIANT ═══
+    //
+    //  The SVG `<title>` defect (Carbon D1) was patched with a hardcoded TAG
+    //  ALLOWLIST — `title`/`desc`/`metadata` — so the INVARIANT behind it was
+    //  never written down and its general form kept shipping: an element that
+    //  renders NO INK was promoted as ordinary, VISIBLE anatomy, text and all.
+    //  Measured on the fixture: a `visibility: hidden` span carrying a sentinel
+    //  string was promoted with `declared.display: "block"` and
+    //  that literal text, so the contract asserted a visible block containing
+    //  words the browser paints nowhere. Its `display: none` twin is SAFE for
+    //  one reason only — promotion carries `declared.display: none` alongside
+    //  the text, i.e. it CARRIES THE FACT THAT HIDES IT.
+    //
+    //  So that is the invariant, stated once and applied generally: a part
+    //  that paints no ink must either CARRY THE FACT THAT HIDES IT, or be
+    //  REFUSED BY NAME. It is never promoted as visible anatomy.
+    //
+    //  BOUNDED, and the bound is part of the rule:
+    //   · `visibility: hidden|collapse` and `content-visibility: hidden`
+    //     REFUSE — neither has a carried spelling, and both keep a full-size
+    //     box the canvas would draw with its text.
+    //   · a ZERO-SIZE box with clipped overflow REFUSES — nothing inside it
+    //     can reach a pixel.
+    //   · `display: none` does NOT refuse: promotion already carries
+    //     `declared.display: none` (the twin above), which IS the fact that
+    //     hides it — and per-axis presence factoring depends on those hidden
+    //     parts surviving so a set value can restore them.
+    //   · `opacity: 0` does NOT refuse: `opacity` is a registered TOKEN
+    //     channel (TOKEN_CHANNELS, drawn as node opacity), so a part at zero
+    //     opacity carries the fact that hides it on both surfaces.
+    //   · sr-only does NOT refuse: it is handled immediately below, and it
+    //     carries `declared.display: none` for exactly this reason.
+    //
+    //  An element is only refused when it paints nowhere in EVERY combo it
+    //  appears in, AND no descendant paints (a `visibility: visible`
+    //  descendant of a hidden ancestor DOES paint — refusing the ancestor
+    //  would delete real ink). A part hidden in SOME combos is a state fact
+    //  and rides the existing presence machinery untouched.
+    {
+      const paintsNowhere = (el: FlatEl | null | undefined): string | null => {
+        if (!el) return null;
+        const st = el.node.style;
+        const vis = st['visibility'];
+        if (vis === 'hidden' || vis === 'collapse') return `visibility: ${vis}`;
+        if (st['content-visibility'] === 'hidden') return 'content-visibility: hidden';
+        const zero = (v: string | undefined): boolean => v === '0px' || v === '0';
+        const clipped = /^(hidden|clip)$/.test(st['overflow-x'] ?? '') && /^(hidden|clip)$/.test(st['overflow-y'] ?? '');
+        if ((zero(st['width']) || zero(st['height'])) && clipped) return `a ${st['width']}×${st['height']} box with overflow ${st['overflow-x']}`;
+        return null;
+      };
+      /** Does anything in this union subtree paint? `visibility` INHERITS, so
+       *  a descendant may set `visibility: visible` and become real ink. */
+      const subtreePaints = (node: UnionNode, comboKey: string): boolean => {
+        const el = union.alignedByKey.get(comboKey)?.[idxOf.get(node.id)!];
+        if (el && paintsNowhere(el) === null) return true;
+        return node.children.some((k) => subtreePaints(k, comboKey));
+      };
+      const combos = presentBy.get(i) ?? [];
+      const causes = new Set<string>();
+      let everPaints = false;
+      for (const combo of combos) {
+        const key = `${combo.key}__default`;
+        const el = union.alignedByKey.get(key)?.[i];
+        if (!el) continue;
+        const cause = paintsNowhere(el);
+        if (cause === null || subtreePaints(e, key)) { everPaints = true; break; }
+        causes.add(cause);
+      }
+      if (!everPaints && causes.size > 0 && !isSrOnlyStyle(e.rep.style)) {
+        const text = e.rep.nodes.filter((n) => n.t === 'text' && n.v.trim()).map((n) => (n as { v: string }).v.trim()).join(' ');
+        refusals.push(
+          `non-painting-part: ${e.partName} <${e.rep.tag}> renders NO INK in any combo it appears in (${[...causes].sort().join('; ')}) and no descendant paints${text ? `, yet it carries the text "${text.slice(0, 60)}"` : ''} — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither \`visibility\` nor \`content-visibility\` has a carried spelling, so promoting this box would put a VISIBLE frame${text ? ' with visible text' : ''} on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)`,
+        );
+        return null;
+      }
     }
 
     // Visually-hidden (sr-only) fact: the real component clips these parts

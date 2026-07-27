@@ -29,7 +29,9 @@ export interface CapturedNode {
   /** child NODES in document order: text runs and elements interleaved. */
   nodes: Array<{ t: 'text'; v: string } | { t: 'el'; el: CapturedNode }>;
   style: StyleMap;
-  pseudo: Partial<Record<'::before' | '::after', StyleMap>>;
+  /** CONFORMANCE FRONTIER (R7): the reader looks at `READ_PSEUDOS`. The DECOR
+   *  grammar still promotes `DECOR_PSEUDOS` only — reading is not carrying. */
+  pseudo: Partial<Record<ReadPseudo, StyleMap>>;
   /** DEPTH BUILD (Stage A/B, portal-aware capture only): the element's ARIA
    *  `role` / `aria-modal` attribute, read only on the portal-capture path so
    *  the root-descent (anatomy.realRootsOf) and multi-root naming can treat a
@@ -54,6 +56,13 @@ export interface CapturedNode {
    *  could name the loss. Recorded here, never bound — the count is the size
    *  of the shorthand ceiling (task #27). */
   vshorthands?: Record<string, string[]>;
+  /** CONFORMANCE FRONTIER (R5): property → [varNames, declarationText] pairs
+   *  for source declarations whose value contains a `calc()` carrying a
+   *  `var()`. The var names ALSO enter `vrefs` as ordinary candidates (the
+   *  existing value verification confirms or rejects them); this record is
+   *  what lets the skip say `calc` when the arithmetic makes verification
+   *  impossible by construction. */
+  vcalcs?: Record<string, Array<[string[], string]>>;
 }
 
 export interface Capture {
@@ -120,6 +129,20 @@ export function shorthandVarSkip(part: string, channel: string, varNames: string
     ? `${part}.${channel}: SHORTHAND carrying var(${vars}) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)`
     : `${part}.${channel}: source declares var(${vars}) on a property the computed sweep does not enumerate — no computed value to verify against, binding NOT carried`;
 }
+/** CONFORMANCE FRONTIER (R5) — THE CALC CEILING, named per declaration.
+ *
+ *  A `calc()` over a token is how every compact/density mode ships. The var
+ *  references inside it are now ordinary candidates and the existing value
+ *  verification confirms them when the arithmetic is an identity; when it is
+ *  NOT (`calc(var(--space-2) * 2)` → 16px against a token worth 8px), no
+ *  candidate can verify BY CONSTRUCTION and the name is lost. That loss is
+ *  this message — the same shape as `shorthandVarSkip`, in the same artifact,
+ *  instead of the silence that used to print `0 named skip(s)` over it. */
+export function calcVarSkip(part: string, channel: string, varNames: string[], declaration: string): string {
+  const vars = [...new Set(varNames)].sort().join(', ');
+  return `${part}.${channel}: source declares \`${declaration}\` — a calc() over var(${vars}). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.`;
+}
+
 const IDENTITY_MATRIX = /^matrix\(1, 0, 0, 1, (-?[\d.]+), (-?[\d.]+)\)$/;
 
 /** PSEUDO-DECOR v2 ROUND — the `translate` LONGHAND joins the decomposition.
@@ -185,6 +208,53 @@ export function decomposeTranslate(out: StyleMap): void {
   out['translate-y'] = `${resolved[1]}px`;
 }
 
+/**
+ * CONFORMANCE FRONTIER (R1) — THE PAINTED-INK RULE.
+ *
+ * `-webkit-text-fill-color` IS the colour the browser paints text with.
+ * `color` is only the FALLBACK: the fill defaults to `currentcolor`, and when
+ * a rule sets the fill explicitly, `color` paints NOWHERE. Verified in the
+ * subject browser rather than assumed — a 48px monospace run with
+ * `color: rgb(17,17,17); -webkit-text-fill-color: rgb(153,153,153)` rasterises
+ * its darkest pixel at rgb(153,153,153); the identical run without the fill
+ * rasterises at rgb(17,17,17).
+ *
+ * This is exactly how every library styles disabled input text, and until this
+ * fold the contract MINTED A COLOUR THAT IS NOT ON SCREEN: the conformance
+ * case carried `tokens.color = #111111` for text the browser drew in #999999,
+ * with no receipt anywhere. That is a correctness defect, not a missing
+ * receipt — so it is fixed at the READ BOUNDARY, where this repo already
+ * decided that what does not paint is not captured (the Carbon D1 SVG
+ * `<title>` drop) and where the derived translate channels are minted.
+ *
+ * `color` becomes the fill (it is not a distinct channel): `TOKEN_CHANNELS`
+ * defines `color` as "the text node fill", so the painted fill IS what that
+ * channel means on both surfaces. Registering `-webkit-text-fill-color`
+ * separately would put TWO fills on one text node and force every consumer to
+ * re-decide precedence. The raw `-webkit-text-fill-color` channel stays in the
+ * capture as the evidence.
+ *
+ * PURE, IDEMPOTENT, applied at BOTH read boundaries (normalizeNode + the
+ * replay/regate reconstruction) exactly like `decomposeTranslate`, so an
+ * offline re-fuse of a COMMITTED capture folds too. Returns the overridden
+ * authored colour when it folded (the receipt), else null.
+ *
+ * MEASURED CORPUS IMPACT: across all six committed libraries — 706 captured
+ * elements and 2,845 capture-delta cells that touch either channel — the fill
+ * and `color` NEVER disagree. The fold is a byte-level no-op for every
+ * library; the only subject that moves is the conformance case.
+ */
+export function foldTextFillColor(out: StyleMap): string | null {
+  const fill = out['-webkit-text-fill-color'];
+  const color = out['color'];
+  if (fill === undefined || color === undefined) return null;
+  if (fill === color) return null;
+  // `currentcolor` is the initial value: it IS `color`, nothing to fold.
+  if (/^currentcolor$/i.test(fill.trim())) return null;
+  out['color'] = fill;
+  return color;
+}
+
 /** PILL SENTINEL (shared — pseudo-decor v2 round). `rounded-full` compiles to
  *  `calc(infinity * 1px)`; Chromium clamps it to `3.35544e+07px`, scientific
  *  notation that NO px grammar in this repo matches. fuse.ts has always
@@ -192,6 +262,55 @@ export function decomposeTranslate(out: StyleMap): void {
  *  fold used a local px() regex that silently produced 0 instead — which
  *  shipped a promoted pill thumb as a SQUARE. One implementation, both
  *  consumers. */
+/**
+ * CONFORMANCE FRONTIER (R7) — THE PSEUDO-ELEMENT READER'S FRONTIER, DECLARED.
+ *
+ * The reader looked at `::before`/`::after` and NOTHING ELSE, in both the
+ * census and the portal path — so `::placeholder` (every text input in every
+ * library) and `::marker` (every list) were not refused, they were NEVER
+ * MEASURED. "We never read ::marker" and "we read it and refused it" are
+ * different facts and the fixture counts them differently.
+ *
+ * MEASURED in the subject browser before choosing: all four candidate pseudos
+ * read back real values through `getComputedStyle(el, pe)` —
+ * `::placeholder{color}` → rgb(150,150,150), `::marker{color,font-size}` →
+ * rgb(200,60,60)/20px, `::selection{background-color}` → rgb(255,214,0), and
+ * `::backdrop{background-color}` → rgb(10,20,30) but ONLY after `showModal()`.
+ *
+ * WHAT THE READER NOW LOOKS AT, and why the line is here:
+ *   · `::placeholder` — real ink a designer notices (placeholder text colour
+ *     is a reviewed token in every design system's input).
+ *   · `::marker`      — real ink (the bullet/number of every list).
+ *   · `::selection`   — NOT read. Transient user state; it paints only while
+ *     a pointer drag exists, and the capture drives no selection. REFUSED BY
+ *     NAME with a count instead of measured.
+ *   · `::backdrop`    — NOT read. It paints only for a dialog in the top
+ *     layer, which requires the capture to call `showModal()`; the sweep
+ *     drives prop combos and pseudo-class states, not top-layer promotion.
+ *     REFUSED BY NAME with a count instead of measured.
+ *
+ * Reading a pseudo is NOT carrying it: the bounded decor grammar in anatomy.ts
+ * still promotes `::before`/`::after` only, and every newly-read pseudo is
+ * refused by name in the ledger with its measured values quoted.
+ */
+export const READ_PSEUDOS = ['::before', '::after', '::marker', '::placeholder'] as const;
+export type ReadPseudo = (typeof READ_PSEUDOS)[number];
+/** The two the reader deliberately does NOT look at, each with the measured
+ *  reason it is out of reach. Counted and named in every run's ledger. */
+export const REFUSED_PSEUDOS: ReadonlyArray<readonly [string, string]> = [
+  ['::selection', 'transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight'],
+  ['::backdrop', 'paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, "::backdrop") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit'],
+];
+/** The pseudos the DECOR grammar may promote — deliberately narrower than
+ *  READ_PSEUDOS, so extending the reader can never widen promotion. */
+export const DECOR_PSEUDOS = ['::before', '::after'] as const;
+/** Splits a `${part}${pseudo}` capture key. Kept in ONE place so the reader,
+ *  the reconstruction and the replay page can never disagree about which
+ *  pseudo keys survive a round-trip (they disagreed by construction before:
+ *  reconstruction hardcoded `/(::before|::after)$/`, so any newly-read pseudo
+ *  would have silently forced every capture to the `fullRoot` fallback). */
+export const PSEUDO_KEY_RE = new RegExp(`^(.*)(${READ_PSEUDOS.join('|')})$`);
+
 export const PILL_RADIUS_SENTINEL = '9999px';
 export const isAbsurdRadius = (v: string | undefined): boolean => /^[\d.]+e\+?\d+px$/.test(v ?? '');
 
@@ -200,6 +319,7 @@ export function normalizeNode(n: CapturedNode): CapturedNode {
     const out: StyleMap = {};
     for (const k of Object.keys(s).sort()) out[k] = normalizeValue(s[k]);
     decomposeTranslate(out);
+    foldTextFillColor(out);
     return out;
   };
   return {
@@ -216,6 +336,19 @@ export function normalizeNode(n: CapturedNode): CapturedNode {
     ...(n.ariaModal !== undefined ? { ariaModal: n.ariaModal } : {}),
     ...(n.vrefs !== undefined
       ? { vrefs: Object.fromEntries(Object.keys(n.vrefs).sort().map((k) => [k, n.vrefs![k]])) }
+      : {}),
+    // DEFECT FOUND WHILE CLOSING R5 — `vshorthands` was NEVER preserved here.
+    // normalizeNode builds a fresh object, and the task-#33 shorthand-ceiling
+    // field was not on the list, so `el.node.vshorthands` was `undefined` on
+    // every aligned element and `shorthandCeiling` was STRUCTURALLY 0 in every
+    // artifact the instrument has ever written. The instrument existed, was
+    // documented, and measured nothing. Preserved now — together with the new
+    // `vcalcs` — so both receipts survive the read boundary.
+    ...(n.vshorthands !== undefined
+      ? { vshorthands: Object.fromEntries(Object.keys(n.vshorthands).sort().map((k) => [k, n.vshorthands![k]])) }
+      : {}),
+    ...(n.vcalcs !== undefined
+      ? { vcalcs: Object.fromEntries(Object.keys(n.vcalcs).sort().map((k) => [k, n.vcalcs![k]])) }
       : {}),
   };
 }

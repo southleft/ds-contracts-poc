@@ -28,19 +28,6 @@
             "font-size": "{imported.shared.size-12}",
             "font-weight": "{imported.case-nonpainting-text-visibility-hidden.label.font-weight}"
           }
-        },
-        "label-2": {
-          "text": "INVISIBLE-SENTINEL",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy span|b — this element exists in the real component's DOM; the static layer had no part for it.",
-          "declared": {
-            "display": "block",
-            "box-sizing": "border-box",
-            "font-family": "monospace"
-          },
-          "tokens": {
-            "font-size": "{imported.shared.size-12}",
-            "font-weight": "{imported.case-nonpainting-text-visibility-hidden.label-2.font-weight}"
-          }
         }
       },
       "declared": {

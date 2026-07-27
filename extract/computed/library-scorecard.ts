@@ -94,17 +94,32 @@ export function coverageRow(name: string, a: ComponentArtifacts): CoverageRow {
   };
 }
 
+/** R3: one quarantined component, read from its committed refusal.json. */
+export interface QuarantineRow {
+  name: string;
+  reason: string;
+  detail: string[];
+}
+
 export interface LibraryScorecard {
   library: string;
   rows: CoverageRow[];
   /** Configured components with NO capture output — unmeasurable, by name. */
   unmeasured: string[];
+  /** CONFORMANCE FRONTIER (R3): components the run QUARANTINED — a channel the
+   *  generator registry refuses, scoped to the component. They shipped a
+   *  capture and a refusal and NO CONTRACT, so they are not "unmeasured" (the
+   *  measurement exists) and they are certainly not in the floor. A quarantine
+   *  is a defect with a name, and the rollup a lead budgets with has to show
+   *  it or the library reads as complete when a component is missing. */
+  quarantined: QuarantineRow[];
   totals: {
     measured: number;
     weightedFloorPct: number | null;
     cellsCompared: number;
     namedRefusals: number;
     openQueue: number;
+    quarantined: number;
   };
   lines: string[];
 }
@@ -114,7 +129,7 @@ const rpad = (s: string, w: number): string => (s.length >= w ? s : ' '.repeat(w
 
 /** PURE: rows (+ configured-but-uncaptured names) → the library scorecard.
  *  Deterministic: rows render in the given order; unmeasured sorts. */
-export function libraryScorecard(library: string, rows: CoverageRow[], unmeasured: string[]): LibraryScorecard {
+export function libraryScorecard(library: string, rows: CoverageRow[], unmeasured: string[], quarantined: QuarantineRow[] = []): LibraryScorecard {
   const measured = rows.filter((r) => r.measured);
   const cellsCompared = measured.reduce((n, r) => n + r.cellsCompared, 0);
   const cellsEqual = measured.reduce((n, r) => n + r.cellsEqual, 0);
@@ -144,6 +159,13 @@ export function libraryScorecard(library: string, rows: CoverageRow[], unmeasure
   } else {
     lines.push('0 unmeasurable/skipped — every configured component has capture output');
   }
+  if (quarantined.length > 0) {
+    lines.push(
+      `${quarantined.length} QUARANTINED (captured, refused, NO CONTRACT SHIPPED): ${quarantined.map((q) => `${q.name} — ${q.reason}`).join(' · ')} — a quarantined component is NOT in the floor and NOT "unmeasured"; its capture exists and its contract was refused by name (see REFUSAL.md)`,
+    );
+  } else {
+    lines.push('0 quarantined — every captured component produced a contract the generator registry accepts');
+  }
   lines.push(
     'floor % = gate computed-equality (exact string, no tolerance) · src-facts = source-bindings facts (— = CSS-vars reader off) · refusals = named extension-sidecar entries (codeOnly + pairwise + stateOverflow + contradictions)',
   );
@@ -152,7 +174,8 @@ export function libraryScorecard(library: string, rows: CoverageRow[], unmeasure
     library,
     rows,
     unmeasured: sortedUnmeasured,
-    totals: { measured: measured.length, weightedFloorPct, cellsCompared, namedRefusals, openQueue },
+    quarantined,
+    totals: { measured: measured.length, weightedFloorPct, cellsCompared, namedRefusals, openQueue, quarantined: quarantined.length },
     lines,
   };
 }
@@ -196,10 +219,20 @@ export function runLibraryScorecard(dirArg: string, configArg?: string, write = 
   }
 
   const rows = subdirs.map((name) => coverageRow(name, artifactsFromDir(path.join(dirAbs, name))));
-  const captured = new Set(subdirs);
+  // R3: a quarantined component has a refusal.json and NO scorecard.json, so
+  // it never appears in `subdirs` — it is discovered by its refusal, which is
+  // the only artifact it is allowed to ship besides its capture.
+  const quarantined = readdirSync(dirAbs, { withFileTypes: true })
+    .filter((e) => e.isDirectory() && existsSync(path.join(dirAbs, e.name, 'refusal.json')))
+    .map((e) => {
+      const r = readJson(path.join(dirAbs, e.name, 'refusal.json')) as { component?: string; reason?: string; detail?: string[] } | null;
+      return { name: r?.component ?? e.name, reason: r?.reason ?? 'refusal.json unreadable', detail: r?.detail ?? [] };
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const captured = new Set([...subdirs, ...quarantined.map((q) => q.name.toLowerCase())]);
   const unmeasured = (configured ?? []).filter((n) => !captured.has(n.toLowerCase()));
 
-  const result = libraryScorecard(path.basename(dirAbs), rows, unmeasured);
+  const result = libraryScorecard(path.basename(dirAbs), rows, unmeasured, quarantined);
   console.log(result.lines.join('\n'));
   if (write) {
     const outPath = path.join(dirAbs, 'library-scorecard.json');

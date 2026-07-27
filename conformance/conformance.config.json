@@ -467,7 +467,7 @@
       "blockStage": true
     },
     {
-      "__case": "vendor-prefixed: -webkit-text-fill-color OVERRIDING color — declared UNSUPPORTED",
+      "__case": "vendor-prefixed: -webkit-text-fill-color OVERRIDING color — declared CARRIED",
       "name": "CaseWebkitTextFillColor",
       "importName": "CaseWebkitTextFillColor",
       "contract": "conformance/seeds/webkit-text-fill-color.contract.json",

@@ -4,8 +4,10 @@
   "varPrefix": "--cf-",
   "facts": [],
   "skips": [
-    "root.color: no var candidate verified against the computed value in any combo"
+    "root.color: candidate --cf-hop-b → \"hop-b\" = #123456 (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
   ],
   "shorthandCeiling": 0,
-  "shorthandSkips": []
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }
