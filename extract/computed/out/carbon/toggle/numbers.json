@@ -10,11 +10,11 @@
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 3,
-    "part-0": 30,
-    "part-1": 7,
+    "toggle__button": 30,
+    "toggle__label": 7,
     "label": 21,
-    "part-1-1": 11,
-    "part-1-1-0": 17,
+    "toggle__appearance": 11,
+    "toggle__switch": 17,
     "label-2": 7
   },
   "folds": {
@@ -127,8 +127,8 @@
   "pixel": {
     "pairs": 16,
     "exact": {
-      "mean": 1.4363606770833335,
-      "max": 1.4973958333333333,
+      "mean": 1.4485677083333335,
+      "max": 1.5559895833333333,
       "perfect": 0
     },
     "aa": {
@@ -138,43 +138,43 @@
     },
     "worst": [
       {
-        "key": "untoggled.enabled__default",
-        "pctExact": 1.494140625,
-        "pctAA": 0.6705729166666666
-      },
-      {
-        "key": "untoggled.enabled__hover",
-        "pctExact": 1.494140625,
-        "pctAA": 0.6705729166666666
-      },
-      {
         "key": "untoggled.enabled__focus-visible",
-        "pctExact": 1.494140625,
+        "pctExact": 1.5559895833333333,
         "pctAA": 0.6705729166666666
       },
       {
         "key": "untoggled.enabled__active",
-        "pctExact": 1.494140625,
+        "pctExact": 1.5559895833333333,
+        "pctAA": 0.6705729166666666
+      },
+      {
+        "key": "untoggled.enabled__default",
+        "pctExact": 1.5169270833333333,
+        "pctAA": 0.6705729166666666
+      },
+      {
+        "key": "untoggled.enabled__hover",
+        "pctExact": 1.5169270833333333,
         "pctAA": 0.6705729166666666
       },
       {
         "key": "toggled.enabled__focus-visible",
-        "pctExact": 1.4973958333333333,
+        "pctExact": 1.4713541666666667,
         "pctAA": 0.615234375
       },
       {
         "key": "toggled.enabled__active",
-        "pctExact": 1.4973958333333333,
+        "pctExact": 1.4713541666666667,
         "pctAA": 0.615234375
       },
       {
         "key": "toggled.enabled__default",
-        "pctExact": 1.40625,
+        "pctExact": 1.4322916666666667,
         "pctAA": 0.615234375
       },
       {
         "key": "toggled.enabled__hover",
-        "pctExact": 1.40625,
+        "pctExact": 1.4322916666666667,
         "pctAA": 0.615234375
       }
     ]

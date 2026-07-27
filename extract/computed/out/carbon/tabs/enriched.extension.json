@@ -110,7 +110,7 @@
             "$type": "dimension"
           }
         },
-        "part-1-0": {
+        "tabs-nav-item": {
           "border-bottom-color": {
             "$value": "#0f62fe",
             "$type": "color"
@@ -132,13 +132,13 @@
             "$type": "color"
           }
         },
-        "part-1-0-0": {
+        "tabs-nav-item-label-wrapper": {
           "width": {
             "$value": "62.3125px",
             "$type": "dimension"
           }
         },
-        "part-1-1-0": {
+        "visually-hidden": {
           "left": {
             "$value": "93.3125px",
             "$type": "dimension"
@@ -148,7 +148,7 @@
             "$type": "dimension"
           }
         },
-        "part-1-2": {
+        "tabs-nav-item-2": {
           "border-bottom-color": {
             "$value": "#e0e0e0",
             "$type": "color"
@@ -170,7 +170,7 @@
             "$type": "color"
           }
         },
-        "part-1-2-0": {
+        "tabs-nav-item-label-wrapper-2": {
           "width": {
             "$value": "48px",
             "$type": "dimension"
@@ -182,7 +182,7 @@
             "$type": "number"
           }
         },
-        "part-1-3-0": {
+        "visually-hidden-2": {
           "left": {
             "$value": "174.312px",
             "$type": "dimension"
@@ -192,7 +192,7 @@
             "$type": "dimension"
           }
         },
-        "part-1-4": {
+        "tabs-nav-item-3": {
           "border-bottom-color": {
             "$value": "#e0e0e0",
             "$type": "color"
@@ -202,7 +202,7 @@
             "$type": "dimension"
           }
         },
-        "part-1-4-0": {
+        "tabs-nav-item-label-wrapper-3": {
           "width": {
             "$value": "52.4688px",
             "$type": "dimension"
@@ -214,7 +214,7 @@
             "$type": "number"
           }
         },
-        "part-1-5-0": {
+        "visually-hidden-3": {
           "left": {
             "$value": "259.781px",
             "$type": "dimension"
@@ -343,43 +343,43 @@
       "class": "currentColor"
     },
     {
-      "part": "part-1-0",
+      "part": "tabs__nav-item",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-0",
+      "part": "tabs__nav-item",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-0",
+      "part": "tabs__nav-item",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-0",
+      "part": "tabs__nav-item",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-0",
+      "part": "tabs__nav-item",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-0",
+      "part": "tabs__nav-item",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-0",
+      "part": "tabs__nav-item",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -493,97 +493,97 @@
       "class": "currentColor"
     },
     {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-2",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-2",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-2",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-2",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-2",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-2",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-2",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2-0",
+      "part": "tabs__nav-item-label-wrapper-2",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2-0",
+      "part": "tabs__nav-item-label-wrapper-2",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2-0",
+      "part": "tabs__nav-item-label-wrapper-2",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2-0",
+      "part": "tabs__nav-item-label-wrapper-2",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2-0",
+      "part": "tabs__nav-item-label-wrapper-2",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2-0",
+      "part": "tabs__nav-item-label-wrapper-2",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2-0",
+      "part": "tabs__nav-item-label-wrapper-2",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2-0",
+      "part": "tabs__nav-item-label-wrapper-2",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-2-0",
+      "part": "tabs__nav-item-label-wrapper-2",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -751,97 +751,97 @@
       "class": "currentColor"
     },
     {
-      "part": "part-1-4",
+      "part": "tabs__nav-item-3",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4",
+      "part": "tabs__nav-item-3",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4",
+      "part": "tabs__nav-item-3",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4",
+      "part": "tabs__nav-item-3",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4",
+      "part": "tabs__nav-item-3",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4",
+      "part": "tabs__nav-item-3",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4",
+      "part": "tabs__nav-item-3",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4-0",
+      "part": "tabs__nav-item-label-wrapper-3",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4-0",
+      "part": "tabs__nav-item-label-wrapper-3",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4-0",
+      "part": "tabs__nav-item-label-wrapper-3",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4-0",
+      "part": "tabs__nav-item-label-wrapper-3",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4-0",
+      "part": "tabs__nav-item-label-wrapper-3",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4-0",
+      "part": "tabs__nav-item-label-wrapper-3",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4-0",
+      "part": "tabs__nav-item-label-wrapper-3",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4-0",
+      "part": "tabs__nav-item-label-wrapper-3",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-4-0",
+      "part": "tabs__nav-item-label-wrapper-3",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1127,22 +1127,22 @@
     "fold-carries-state-delta: [active] label-2.outline-color rides its source fact",
     "fold-carries-state-delta: [active] label-2.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [active] label-2.text-emphasis-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2-0.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2-0.border-left-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2-0.border-right-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2-0.border-top-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2-0.caret-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2-0.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2-0.outline-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2-0.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2-0.text-emphasis-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2.border-left-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2.border-right-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2.border-top-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2.caret-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [active] part-1-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-label-wrapper-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-label-wrapper-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-label-wrapper-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-label-wrapper-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-label-wrapper-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-label-wrapper-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-label-wrapper-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-label-wrapper-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [active] tabs__nav-item-label-wrapper-2.text-emphasis-color rides its source fact",
     "fold-carries-state-delta: [hover] label-2.border-bottom-color rides its source fact",
     "fold-carries-state-delta: [hover] label-2.border-left-color rides its source fact",
     "fold-carries-state-delta: [hover] label-2.border-right-color rides its source fact",
@@ -1152,22 +1152,22 @@
     "fold-carries-state-delta: [hover] label-2.outline-color rides its source fact",
     "fold-carries-state-delta: [hover] label-2.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [hover] label-2.text-emphasis-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2-0.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2-0.border-left-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2-0.border-right-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2-0.border-top-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2-0.caret-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2-0.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2-0.outline-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2-0.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2-0.text-emphasis-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2.border-left-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2.border-right-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2.border-top-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2.caret-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [hover] part-1-2.text-emphasis-color rides its source fact"
+    "fold-carries-state-delta: [hover] tabs__nav-item-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-label-wrapper-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-label-wrapper-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-label-wrapper-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-label-wrapper-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-label-wrapper-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-label-wrapper-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-label-wrapper-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-label-wrapper-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [hover] tabs__nav-item-label-wrapper-2.text-emphasis-color rides its source fact"
   ],
   "layout": {
     "enriched": [],
@@ -1244,102 +1244,102 @@
         "value": "auto"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "appearance",
         "value": "none"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "border-bottom-style",
         "value": "solid"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "border-left-style",
         "value": "none"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "border-right-style",
         "value": "none"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "border-top-style",
         "value": "none"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "outline-style",
         "value": "solid"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "overflow-x",
         "value": "hidden"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "overflow-y",
         "value": "hidden"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "text-align",
         "value": "start"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "text-overflow",
         "value": "ellipsis"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "text-wrap-mode",
         "value": "nowrap"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "transition-duration",
         "value": "0.07s"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "transition-property",
         "value": "color"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.2, 0, 0.38, 0.9)"
       },
       {
-        "part": "part-1-0-0",
+        "part": "tabs__nav-item-label-wrapper",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1-0-0",
+        "part": "tabs__nav-item-label-wrapper",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1-0-0",
+        "part": "tabs__nav-item-label-wrapper",
         "channel": "text-rendering",
         "value": "auto"
       },
       {
-        "part": "part-1-0-0",
+        "part": "tabs__nav-item-label-wrapper",
         "channel": "text-wrap-mode",
         "value": "nowrap"
       },
@@ -1374,107 +1374,107 @@
         "value": "nowrap"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "appearance",
         "value": "none"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "border-bottom-style",
         "value": "solid"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "border-left-style",
         "value": "none"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "border-right-style",
         "value": "none"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "border-top-style",
         "value": "none"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "outline-style",
         "value": "solid"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "overflow-x",
         "value": "hidden"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "overflow-y",
         "value": "hidden"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "text-align",
         "value": "start"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "text-overflow",
         "value": "ellipsis"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "text-wrap-mode",
         "value": "nowrap"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "transition-delay",
         "value": "0s, 0s"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "transition-duration",
         "value": "0.07s, 0.07s"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "transition-property",
         "value": "border, outline"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
       },
       {
-        "part": "part-1-2-0",
+        "part": "tabs__nav-item-label-wrapper-2",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1-2-0",
+        "part": "tabs__nav-item-label-wrapper-2",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1-2-0",
+        "part": "tabs__nav-item-label-wrapper-2",
         "channel": "text-rendering",
         "value": "auto"
       },
       {
-        "part": "part-1-2-0",
+        "part": "tabs__nav-item-label-wrapper-2",
         "channel": "text-wrap-mode",
         "value": "nowrap"
       },
@@ -1509,107 +1509,107 @@
         "value": "nowrap"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "appearance",
         "value": "none"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "border-bottom-style",
         "value": "solid"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "border-left-style",
         "value": "none"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "border-right-style",
         "value": "none"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "border-top-style",
         "value": "none"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "outline-style",
         "value": "solid"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "overflow-x",
         "value": "hidden"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "overflow-y",
         "value": "hidden"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "text-align",
         "value": "start"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "text-overflow",
         "value": "ellipsis"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "text-wrap-mode",
         "value": "nowrap"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "transition-delay",
         "value": "0s, 0s"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "transition-duration",
         "value": "0.07s, 0.07s"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "transition-property",
         "value": "border, outline"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
       },
       {
-        "part": "part-1-4-0",
+        "part": "tabs__nav-item-label-wrapper-3",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1-4-0",
+        "part": "tabs__nav-item-label-wrapper-3",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1-4-0",
+        "part": "tabs__nav-item-label-wrapper-3",
         "channel": "text-rendering",
         "value": "auto"
       },
       {
-        "part": "part-1-4-0",
+        "part": "tabs__nav-item-label-wrapper-3",
         "channel": "text-wrap-mode",
         "value": "nowrap"
       },
@@ -1744,70 +1744,70 @@
       "distinctValues": 1
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "border-bottom-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "border-left-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "border-right-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "border-top-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "clip",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "rect(0px, 0px, 0px, 0px)",
       "distinctValues": 1
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "overflow-x",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "hidden",
       "distinctValues": 1
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "overflow-y",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "hidden",
       "distinctValues": 1
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "position",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "absolute",
       "distinctValues": 1
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "text-wrap-mode",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "nowrap",
       "distinctValues": 1
     },
     {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-2",
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal, normal",
@@ -1828,70 +1828,70 @@
       "distinctValues": 1
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "border-bottom-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "border-left-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "border-right-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "border-top-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "clip",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "rect(0px, 0px, 0px, 0px)",
       "distinctValues": 1
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "overflow-x",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "hidden",
       "distinctValues": 1
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "overflow-y",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "hidden",
       "distinctValues": 1
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "position",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "absolute",
       "distinctValues": 1
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "text-wrap-mode",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "nowrap",
       "distinctValues": 1
     },
     {
-      "part": "part-1-4",
+      "part": "tabs__nav-item-3",
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal, normal",
@@ -1912,63 +1912,63 @@
       "distinctValues": 1
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "border-bottom-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "border-left-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "border-right-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "border-top-style",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "none",
       "distinctValues": 1
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "clip",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "rect(0px, 0px, 0px, 0px)",
       "distinctValues": 1
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "overflow-x",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "hidden",
       "distinctValues": 1
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "overflow-y",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "hidden",
       "distinctValues": 1
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "position",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "absolute",
       "distinctValues": 1
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "text-wrap-mode",
       "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
       "sample": "nowrap",
@@ -1999,379 +1999,379 @@
   "stateOverflow": [],
   "overflowBindings": [
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "border-bottom-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "border-left-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "border-right-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "border-top-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "bottom",
       "ref": "{imported.shared.size-42}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "color",
       "ref": "{imported.shared.color-000000}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "height",
       "ref": "{imported.shared.size-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "left",
-      "ref": "{imported.tabs.part-1-1-0.left}",
+      "ref": "{imported.tabs.visually-hidden.left}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "margin-bottom",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "margin-left",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "margin-right",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "margin-top",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "min-height",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "min-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "padding-bottom",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "padding-left",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "padding-right",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "padding-top",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "right",
-      "ref": "{imported.tabs.part-1-1-0.right}",
+      "ref": "{imported.tabs.visually-hidden.right}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "top",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-1-0",
+      "part": "visually-hidden",
       "channel": "width",
       "ref": "{imported.shared.size-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "border-bottom-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "border-left-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "border-right-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "border-top-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "bottom",
       "ref": "{imported.shared.size-42}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "color",
       "ref": "{imported.shared.color-000000}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "height",
       "ref": "{imported.shared.size-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "left",
-      "ref": "{imported.tabs.part-1-3-0.left}",
+      "ref": "{imported.tabs.visually-hidden-2.left}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "margin-bottom",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "margin-left",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "margin-right",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "margin-top",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "min-height",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "min-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "padding-bottom",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "padding-left",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "padding-right",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "padding-top",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "right",
-      "ref": "{imported.tabs.part-1-3-0.right}",
+      "ref": "{imported.tabs.visually-hidden-2.right}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "top",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-3-0",
+      "part": "visually-hidden-2",
       "channel": "width",
       "ref": "{imported.shared.size-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "border-bottom-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "border-left-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "border-right-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "border-top-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "bottom",
       "ref": "{imported.shared.size-42}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "color",
       "ref": "{imported.shared.color-000000}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "height",
       "ref": "{imported.shared.size-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "left",
-      "ref": "{imported.tabs.part-1-5-0.left}",
+      "ref": "{imported.tabs.visually-hidden-3.left}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "margin-bottom",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "margin-left",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "margin-right",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "margin-top",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "min-height",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "min-width",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "padding-bottom",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "padding-left",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "padding-right",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "padding-top",
       "ref": "{imported.shared.size-0}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "right",
-      "ref": "{imported.tabs.part-1-5-0.right}",
+      "ref": "{imported.tabs.visually-hidden-3.right}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "top",
       "ref": "{imported.shared.size-neg-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
     },
     {
-      "part": "part-1-5-0",
+      "part": "visually-hidden-3",
       "channel": "width",
       "ref": "{imported.shared.size-1}",
       "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
@@ -2384,38 +2384,38 @@
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-2-0",
-      "channel": "row-rule-color",
-      "state": "active",
-      "ref": "{imported.shared.color-161616}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-2",
       "channel": "border-bottom-color",
       "state": "active",
-      "ref": "{imported.tabs.part-1-2.border-bottom-color-state-active}",
+      "ref": "{imported.tabs.tabs-nav-item-2.border-bottom-color-state-active}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-2",
       "channel": "outline-color",
       "state": "active",
-      "ref": "{imported.tabs.part-1-2.outline-color-state-active}",
+      "ref": "{imported.tabs.tabs-nav-item-2.outline-color-state-active}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-2",
       "channel": "row-rule-color",
       "state": "active",
       "ref": "{imported.shared.color-161616}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-0",
+      "part": "tabs__nav-item-label-wrapper-2",
+      "channel": "row-rule-color",
+      "state": "active",
+      "ref": "{imported.shared.color-161616}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "tabs__nav-item",
       "channel": "outline-color",
       "state": "focus-visible",
-      "ref": "{imported.tabs.part-1-0.outline-color-state-focus-visible}",
+      "ref": "{imported.tabs.tabs-nav-item.outline-color-state-focus-visible}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
@@ -2426,21 +2426,21 @@
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-2-0",
+      "part": "tabs__nav-item-2",
+      "channel": "border-bottom-color",
+      "state": "hover",
+      "ref": "{imported.tabs.tabs-nav-item-2.border-bottom-color-state-hover}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "tabs__nav-item-2",
       "channel": "row-rule-color",
       "state": "hover",
       "ref": "{imported.shared.color-161616}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-2",
-      "channel": "border-bottom-color",
-      "state": "hover",
-      "ref": "{imported.tabs.part-1-2.border-bottom-color-state-hover}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1-2",
+      "part": "tabs__nav-item-label-wrapper-2",
       "channel": "row-rule-color",
       "state": "hover",
       "ref": "{imported.shared.color-161616}",
@@ -2484,22 +2484,22 @@
     "absolute-geometry-admitted: icon — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-1 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tabs__nav-item — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tabs__nav-item-label-wrapper — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-1-1 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-1-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: visually-hidden — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: icon-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-1-1-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-2-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tabs__nav-item-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tabs__nav-item-label-wrapper-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-1-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-3-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: visually-hidden-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: icon-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-1-3-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-4 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-4-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tabs__nav-item-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tabs__nav-item-label-wrapper-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-1-5 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-5-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: visually-hidden-3 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: icon-4 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-1-5-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
@@ -2508,85 +2508,85 @@
     "svg-host-color-carried: part-0 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon)",
     "control-fallback: no control for <path> — span control used (part part-0-0-0)",
-    "svg-host-color-carried: part-1-1-0 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "svg-host-color-carried: visually-hidden — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
     "control-fallback: no control for <path> — span control used (part part-1-1-0-0-0)",
     "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "svg-host-color-carried: part-1-3-0 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "svg-host-color-carried: visually-hidden-2 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-3)",
     "control-fallback: no control for <path> — span control used (part part-1-3-0-0-0)",
     "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "svg-host-color-carried: part-1-5-0 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "svg-host-color-carried: visually-hidden-3 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-4)",
     "control-fallback: no control for <path> — span control used (part part-1-5-0-0-0)",
     "svg-host-color-carried: part-2 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-5)",
     "control-fallback: no control for <path> — span control used (part part-2-0-0)",
-    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"part-1-2-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"part-1-4-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"tabs__nav-item-label-wrapper-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"tabs__nav-item-label-wrapper-3\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: part-0.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-0.caret-color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-0.color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-0.font-weight — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-1-0.color — values track ancestor \"part-1-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-2.caret-color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-2.color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-3-0.color — values track ancestor \"part-1-3\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-4.caret-color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-4.color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-5-0.color — values track ancestor \"part-1-5\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: part-2.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-only: label-2.caret-color equals ancestor \"part-1-2-0\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: label-2.color equals ancestor \"part-1-2-0\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: label-2.font-size equals ancestor \"part-1-2-0\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: label-2.letter-spacing equals ancestor \"part-1-2-0\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: label-2.line-height equals ancestor \"part-1-2-0\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: label-3.caret-color equals ancestor \"part-1-4-0\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: label-3.color equals ancestor \"part-1-4-0\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: label-3.font-size equals ancestor \"part-1-4-0\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: label-3.letter-spacing equals ancestor \"part-1-4-0\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: label-3.line-height equals ancestor \"part-1-4-0\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: label.font-size equals ancestor \"part-1-0-0\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: label.font-weight equals ancestor \"part-1-0-0\" on all 4 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
-    "inheritance-only: label.letter-spacing equals ancestor \"part-1-0-0\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: label.line-height equals ancestor \"part-1-0-0\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-check-rejected: tabs__nav-item-2.caret-color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tabs__nav-item-2.color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tabs__nav-item-3.caret-color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tabs__nav-item-3.color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tabs__nav-item.caret-color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tabs__nav-item.color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tabs__nav-item.font-weight — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: visually-hidden-2.color — values track ancestor \"part-1-3\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: visually-hidden-3.color — values track ancestor \"part-1-5\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: visually-hidden.color — values track ancestor \"part-1-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: label-2.caret-color equals ancestor \"tabs__nav-item-label-wrapper-2\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"tabs__nav-item-label-wrapper-2\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.font-size equals ancestor \"tabs__nav-item-label-wrapper-2\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.letter-spacing equals ancestor \"tabs__nav-item-label-wrapper-2\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.line-height equals ancestor \"tabs__nav-item-label-wrapper-2\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.caret-color equals ancestor \"tabs__nav-item-label-wrapper-3\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.color equals ancestor \"tabs__nav-item-label-wrapper-3\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.font-size equals ancestor \"tabs__nav-item-label-wrapper-3\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.letter-spacing equals ancestor \"tabs__nav-item-label-wrapper-3\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.line-height equals ancestor \"tabs__nav-item-label-wrapper-3\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-size equals ancestor \"tabs__nav-item-label-wrapper\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-weight equals ancestor \"tabs__nav-item-label-wrapper\" on all 4 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: label.letter-spacing equals ancestor \"tabs__nav-item-label-wrapper\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: label.line-height equals ancestor \"tabs__nav-item-label-wrapper\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: part-0.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.font-size equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.font-weight equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.letter-spacing equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.line-height equals ancestor \"part-1-0\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: part-1-1.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
     "inheritance-only: part-1-1.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
     "inheritance-only: part-1-1.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-2-0.caret-color equals ancestor \"part-1-2\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-2-0.color equals ancestor \"part-1-2\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-2-0.font-size equals ancestor \"part-1-2\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-2-0.letter-spacing equals ancestor \"part-1-2\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-2-0.line-height equals ancestor \"part-1-2\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-2.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-2.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-2.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: part-1-3.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
     "inheritance-only: part-1-3.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
     "inheritance-only: part-1-3.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-4-0.caret-color equals ancestor \"part-1-4\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-4-0.color equals ancestor \"part-1-4\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-4-0.font-size equals ancestor \"part-1-4\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-4-0.letter-spacing equals ancestor \"part-1-4\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-4-0.line-height equals ancestor \"part-1-4\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-4.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-4.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-4.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: part-1-5.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
     "inheritance-only: part-1-5.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
     "inheritance-only: part-1-5.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
     "inheritance-only: part-1.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
     "inheritance-only: part-1.letter-spacing equals ancestor \"root\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
     "inheritance-only: part-1.line-height equals ancestor \"root\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-2.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
+    "inheritance-only: part-2.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-2.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-2.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-2.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-3.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-3.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-3.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper-2.caret-color equals ancestor \"tabs__nav-item-2\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper-2.color equals ancestor \"tabs__nav-item-2\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper-2.font-size equals ancestor \"tabs__nav-item-2\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper-2.letter-spacing equals ancestor \"tabs__nav-item-2\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper-2.line-height equals ancestor \"tabs__nav-item-2\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper-3.caret-color equals ancestor \"tabs__nav-item-3\" on all 4 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper-3.color equals ancestor \"tabs__nav-item-3\" on all 4 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper-3.font-size equals ancestor \"tabs__nav-item-3\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper-3.letter-spacing equals ancestor \"tabs__nav-item-3\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper-3.line-height equals ancestor \"tabs__nav-item-3\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper.font-size equals ancestor \"tabs__nav-item\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper.font-weight equals ancestor \"tabs__nav-item\" on all 4 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper.letter-spacing equals ancestor \"tabs__nav-item\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item-label-wrapper.line-height equals ancestor \"tabs__nav-item\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item.font-size equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item.letter-spacing equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: tabs__nav-item.line-height equals ancestor \"part-1\" on all 4 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -2611,11 +2611,11 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1-0",
+        "part": "tabs__nav-item",
         "join": "computed-only"
       },
       {
-        "part": "part-1-0-0",
+        "part": "tabs__nav-item-label-wrapper",
         "join": "computed-only"
       },
       {
@@ -2627,7 +2627,7 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1-1-0",
+        "part": "visually-hidden",
         "join": "computed-only"
       },
       {
@@ -2639,11 +2639,11 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1-2",
+        "part": "tabs__nav-item-2",
         "join": "computed-only"
       },
       {
-        "part": "part-1-2-0",
+        "part": "tabs__nav-item-label-wrapper-2",
         "join": "computed-only"
       },
       {
@@ -2655,7 +2655,7 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1-3-0",
+        "part": "visually-hidden-2",
         "join": "computed-only"
       },
       {
@@ -2667,11 +2667,11 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1-4",
+        "part": "tabs__nav-item-3",
         "join": "computed-only"
       },
       {
-        "part": "part-1-4-0",
+        "part": "tabs__nav-item-label-wrapper-3",
         "join": "computed-only"
       },
       {
@@ -2683,7 +2683,7 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1-5-0",
+        "part": "visually-hidden-3",
         "join": "computed-only"
       },
       {
@@ -2715,32 +2715,32 @@
       "root",
       "part-0",
       "part-1",
-      "part-1-0",
-      "part-1-0-0",
+      "tabs__nav-item",
+      "tabs__nav-item-label-wrapper",
       "label",
       "part-1-1",
-      "part-1-2",
-      "part-1-2-0",
+      "tabs__nav-item-2",
+      "tabs__nav-item-label-wrapper-2",
       "label-2",
       "part-1-3",
-      "part-1-4",
-      "part-1-4-0",
+      "tabs__nav-item-3",
+      "tabs__nav-item-label-wrapper-3",
       "label-3",
       "part-1-5",
       "part-2"
     ],
     "svgAssets": [
       "tabs-part-0",
-      "tabs-part-1-1-0",
-      "tabs-part-1-3-0",
-      "tabs-part-1-5-0",
-      "tabs-part-2"
+      "tabs-part-2",
+      "tabs-visually-hidden",
+      "tabs-visually-hidden-2",
+      "tabs-visually-hidden-3"
     ],
     "receipts": [
       "svg-viewbox-reconstructed: Tabs.part-0@ — 0 0 16 16 from computed size 16×16 (path extent 13.0; viewBox is not a computed style — named reconstruction)",
-      "svg-viewbox-bumped: Tabs.part-1-1-0@ — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: Tabs.part-1-3-0@ — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: Tabs.part-1-5-0@ — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Tabs.visually-hidden@ — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Tabs.visually-hidden-2@ — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Tabs.visually-hidden-3@ — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
       "svg-viewbox-reconstructed: Tabs.part-2@ — 0 0 16 16 from computed size 16×16 (path extent 13.0; viewBox is not a computed style — named reconstruction)",
       "root-display-carried: flex",
       "literal-text-carried: label = \"Overview\" (no text prop sample matches — the mounted value is carried verbatim)",
@@ -2769,80 +2769,80 @@
     "declared fact carried: part-0.text-align = start (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-1.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.text-align = start (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-1-0.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-1-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.transition-duration = 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.transition-property = color (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tabs__nav-item.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tabs__nav-item.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.transition-duration = 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.transition-property = color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-1.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-1.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-1.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.text-align = start (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-1-2.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-1-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.transition-duration = 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.transition-property = border, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2-0.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-2-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tabs__nav-item-2.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tabs__nav-item-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.transition-duration = 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.transition-property = border, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-2.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper-2.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper-2.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.text-align = start (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-1-4.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-1-4.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.transition-duration = 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.transition-property = border, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4-0.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-4-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tabs__nav-item-3.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tabs__nav-item-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.transition-duration = 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.transition-property = border, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-3.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper-3.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper-3.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tabs__nav-item-label-wrapper-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-3.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",

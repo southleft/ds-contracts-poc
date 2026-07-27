@@ -48,39 +48,6 @@
       }
     },
     {
-      "part": "part-1-0",
-      "channel": "color",
-      "combo": "",
-      "axisValues": {},
-      "token": "text-primary",
-      "varName": "--cds-text-primary",
-      "anchor": {
-        "selector": ".cds--tabs.cds--tabs--contained .cds--tabs__nav-item--selected, .cds--tabs .cds--tabs__nav-item--selected, .cds--tabs .cds--tabs__nav-item--selected:focus .cds--tabs__nav-link:focus, .cds--tabs .cds--tabs__nav-item--selected:active .cds--tabs__nav-link:active"
-      }
-    },
-    {
-      "part": "part-1-2",
-      "channel": "color",
-      "combo": "",
-      "axisValues": {},
-      "token": "text-secondary",
-      "varName": "--cds-text-secondary",
-      "anchor": {
-        "selector": ".cds--tabs .cds--tabs__nav-link"
-      }
-    },
-    {
-      "part": "part-1-4",
-      "channel": "color",
-      "combo": "",
-      "axisValues": {},
-      "token": "text-secondary",
-      "varName": "--cds-text-secondary",
-      "anchor": {
-        "selector": ".cds--tabs .cds--tabs__nav-link"
-      }
-    },
-    {
       "part": "part-2",
       "channel": "background-color",
       "combo": "",
@@ -111,6 +78,39 @@
       "varName": "--cds-layout-size-height-xl",
       "anchor": {
         "selector": ".cds--tabs"
+      }
+    },
+    {
+      "part": "tabs__nav-item",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "text-primary",
+      "varName": "--cds-text-primary",
+      "anchor": {
+        "selector": ".cds--tabs.cds--tabs--contained .cds--tabs__nav-item--selected, .cds--tabs .cds--tabs__nav-item--selected, .cds--tabs .cds--tabs__nav-item--selected:focus .cds--tabs__nav-link:focus, .cds--tabs .cds--tabs__nav-item--selected:active .cds--tabs__nav-link:active"
+      }
+    },
+    {
+      "part": "tabs__nav-item-2",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "text-secondary",
+      "varName": "--cds-text-secondary",
+      "anchor": {
+        "selector": ".cds--tabs .cds--tabs__nav-link"
+      }
+    },
+    {
+      "part": "tabs__nav-item-3",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "text-secondary",
+      "varName": "--cds-text-secondary",
+      "anchor": {
+        "selector": ".cds--tabs .cds--tabs__nav-link"
       }
     }
   ],

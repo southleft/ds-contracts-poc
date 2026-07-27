@@ -1,6 +1,6 @@
 {
-  "passed": 163,
-  "total": 163,
+  "passed": 164,
+  "total": 164,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -734,6 +734,11 @@
     },
     {
       "id": "simple-component-anatomy-unchanged",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "class-stem-prefix-order",
       "claim": "C1-determinism",
       "pass": true
     },

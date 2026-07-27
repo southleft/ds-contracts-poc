@@ -43,13 +43,13 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "modal-container",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "fill": "imported/modal/part-1/background-color",
+              "fill": "imported/modal/modal-container/background-color",
               "stroke": "imported/shared/color-c6c6c6",
               "bindings": {
                 "strokeBottomWeight": "imported/shared/size-1",
@@ -59,16 +59,16 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 213.969,
-                "varName": "imported/modal/part-1/height"
+                "varName": "imported/modal/modal-container/height"
               },
               "fixedWidth": {
                 "px": 432,
-                "varName": "imported/modal/part-1/width/xs"
+                "varName": "imported/modal/modal-container/width/xs"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "modal-header",
                   "layout": {
                     "mode": "VERTICAL",
                     "primary": "MIN",
@@ -77,7 +77,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 63.9844,
-                    "varName": "imported/modal/part-1-0/height"
+                    "varName": "imported/modal/modal-header/height"
                   },
                   "margins": {
                     "bottom": 8
@@ -90,7 +90,7 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 430,
-                    "varName": "imported/modal/part-1-0/width/xs"
+                    "varName": "imported/modal/modal-header/width/xs"
                   },
                   "children": [
                     {
@@ -135,7 +135,7 @@ const COMPONENTS = [
                     },
                     {
                       "type": "frame",
-                      "name": "part-1-0-2",
+                      "name": "modal-close-button",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "CENTER",
@@ -162,7 +162,7 @@ const COMPONENTS = [
                       "children": [
                         {
                           "type": "frame",
-                          "name": "part-1-0-2-0",
+                          "name": "icon-tooltip",
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
@@ -182,7 +182,7 @@ const COMPONENTS = [
                           "children": [
                             {
                               "type": "frame",
-                              "name": "part-1-0-2-0-0",
+                              "name": "tooltip-trigger__wrapper",
                               "layout": {
                                 "mode": "HORIZONTAL",
                                 "primary": "MIN",
@@ -202,7 +202,7 @@ const COMPONENTS = [
                               "children": [
                                 {
                                   "type": "svg",
-                                  "name": "part-1-0-2-0-0-0",
+                                  "name": "btn",
                                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                   "svgPaintVar": "imported/shared/color-ffffff",
                                   "iconSize": 20
@@ -211,7 +211,7 @@ const COMPONENTS = [
                             },
                             {
                               "type": "frame",
-                              "name": "part-1-0-2-0-1",
+                              "name": "popover",
                               "layout": {
                                 "mode": "HORIZONTAL",
                                 "primary": "MIN",
@@ -266,7 +266,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-2",
+                  "name": "btn-set",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MAX",
@@ -275,11 +275,11 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 64,
-                    "varName": "imported/modal/part-1-2/height"
+                    "varName": "imported/modal/btn-set/height"
                   },
                   "fixedWidth": {
                     "px": 430,
-                    "varName": "imported/modal/part-1-2/width/xs"
+                    "varName": "imported/modal/btn-set/width/xs"
                   },
                   "children": [
                     {
@@ -401,13 +401,13 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "modal-container",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "fill": "imported/modal/part-1/background-color",
+              "fill": "imported/modal/modal-container/background-color",
               "stroke": "imported/shared/color-c6c6c6",
               "bindings": {
                 "strokeBottomWeight": "imported/shared/size-1",
@@ -417,16 +417,16 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 213.969,
-                "varName": "imported/modal/part-1/height"
+                "varName": "imported/modal/modal-container/height"
               },
               "fixedWidth": {
                 "px": 540,
-                "varName": "imported/modal/part-1/width/sm"
+                "varName": "imported/modal/modal-container/width/sm"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "modal-header",
                   "layout": {
                     "mode": "VERTICAL",
                     "primary": "MIN",
@@ -435,7 +435,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 63.9844,
-                    "varName": "imported/modal/part-1-0/height"
+                    "varName": "imported/modal/modal-header/height"
                   },
                   "margins": {
                     "bottom": 8
@@ -448,7 +448,7 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 538,
-                    "varName": "imported/modal/part-1-0/width/sm"
+                    "varName": "imported/modal/modal-header/width/sm"
                   },
                   "children": [
                     {
@@ -493,7 +493,7 @@ const COMPONENTS = [
                     },
                     {
                       "type": "frame",
-                      "name": "part-1-0-2",
+                      "name": "modal-close-button",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "CENTER",
@@ -520,7 +520,7 @@ const COMPONENTS = [
                       "children": [
                         {
                           "type": "frame",
-                          "name": "part-1-0-2-0",
+                          "name": "icon-tooltip",
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
@@ -540,7 +540,7 @@ const COMPONENTS = [
                           "children": [
                             {
                               "type": "frame",
-                              "name": "part-1-0-2-0-0",
+                              "name": "tooltip-trigger__wrapper",
                               "layout": {
                                 "mode": "HORIZONTAL",
                                 "primary": "MIN",
@@ -560,7 +560,7 @@ const COMPONENTS = [
                               "children": [
                                 {
                                   "type": "svg",
-                                  "name": "part-1-0-2-0-0-0",
+                                  "name": "btn",
                                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                   "svgPaintVar": "imported/shared/color-ffffff",
                                   "iconSize": 20
@@ -569,7 +569,7 @@ const COMPONENTS = [
                             },
                             {
                               "type": "frame",
-                              "name": "part-1-0-2-0-1",
+                              "name": "popover",
                               "layout": {
                                 "mode": "HORIZONTAL",
                                 "primary": "MIN",
@@ -624,7 +624,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-2",
+                  "name": "btn-set",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MAX",
@@ -633,11 +633,11 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 64,
-                    "varName": "imported/modal/part-1-2/height"
+                    "varName": "imported/modal/btn-set/height"
                   },
                   "fixedWidth": {
                     "px": 538,
-                    "varName": "imported/modal/part-1-2/width/sm"
+                    "varName": "imported/modal/btn-set/width/sm"
                   },
                   "children": [
                     {
@@ -759,13 +759,13 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "modal-container",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "fill": "imported/modal/part-1/background-color",
+              "fill": "imported/modal/modal-container/background-color",
               "stroke": "imported/shared/color-c6c6c6",
               "bindings": {
                 "strokeBottomWeight": "imported/shared/size-1",
@@ -775,16 +775,16 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 213.969,
-                "varName": "imported/modal/part-1/height"
+                "varName": "imported/modal/modal-container/height"
               },
               "fixedWidth": {
                 "px": 756,
-                "varName": "imported/modal/part-1/width/md"
+                "varName": "imported/modal/modal-container/width/md"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "modal-header",
                   "layout": {
                     "mode": "VERTICAL",
                     "primary": "MIN",
@@ -793,7 +793,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 63.9844,
-                    "varName": "imported/modal/part-1-0/height"
+                    "varName": "imported/modal/modal-header/height"
                   },
                   "margins": {
                     "bottom": 8
@@ -806,7 +806,7 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 754,
-                    "varName": "imported/modal/part-1-0/width/md"
+                    "varName": "imported/modal/modal-header/width/md"
                   },
                   "children": [
                     {
@@ -851,7 +851,7 @@ const COMPONENTS = [
                     },
                     {
                       "type": "frame",
-                      "name": "part-1-0-2",
+                      "name": "modal-close-button",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "CENTER",
@@ -878,7 +878,7 @@ const COMPONENTS = [
                       "children": [
                         {
                           "type": "frame",
-                          "name": "part-1-0-2-0",
+                          "name": "icon-tooltip",
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
@@ -898,7 +898,7 @@ const COMPONENTS = [
                           "children": [
                             {
                               "type": "frame",
-                              "name": "part-1-0-2-0-0",
+                              "name": "tooltip-trigger__wrapper",
                               "layout": {
                                 "mode": "HORIZONTAL",
                                 "primary": "MIN",
@@ -918,7 +918,7 @@ const COMPONENTS = [
                               "children": [
                                 {
                                   "type": "svg",
-                                  "name": "part-1-0-2-0-0-0",
+                                  "name": "btn",
                                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                   "svgPaintVar": "imported/shared/color-ffffff",
                                   "iconSize": 20
@@ -927,7 +927,7 @@ const COMPONENTS = [
                             },
                             {
                               "type": "frame",
-                              "name": "part-1-0-2-0-1",
+                              "name": "popover",
                               "layout": {
                                 "mode": "HORIZONTAL",
                                 "primary": "MIN",
@@ -982,7 +982,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-2",
+                  "name": "btn-set",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MAX",
@@ -991,11 +991,11 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 64,
-                    "varName": "imported/modal/part-1-2/height"
+                    "varName": "imported/modal/btn-set/height"
                   },
                   "fixedWidth": {
                     "px": 754,
-                    "varName": "imported/modal/part-1-2/width/md"
+                    "varName": "imported/modal/btn-set/width/md"
                   },
                   "children": [
                     {
@@ -1117,13 +1117,13 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "modal-container",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "fill": "imported/modal/part-1/background-color",
+              "fill": "imported/modal/modal-container/background-color",
               "stroke": "imported/shared/color-c6c6c6",
               "bindings": {
                 "strokeBottomWeight": "imported/shared/size-1",
@@ -1133,16 +1133,16 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 213.969,
-                "varName": "imported/modal/part-1/height"
+                "varName": "imported/modal/modal-container/height"
               },
               "fixedWidth": {
                 "px": 864,
-                "varName": "imported/modal/part-1/width/lg"
+                "varName": "imported/modal/modal-container/width/lg"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "modal-header",
                   "layout": {
                     "mode": "VERTICAL",
                     "primary": "MIN",
@@ -1151,7 +1151,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 63.9844,
-                    "varName": "imported/modal/part-1-0/height"
+                    "varName": "imported/modal/modal-header/height"
                   },
                   "margins": {
                     "bottom": 8
@@ -1164,7 +1164,7 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 862,
-                    "varName": "imported/modal/part-1-0/width/lg"
+                    "varName": "imported/modal/modal-header/width/lg"
                   },
                   "children": [
                     {
@@ -1209,7 +1209,7 @@ const COMPONENTS = [
                     },
                     {
                       "type": "frame",
-                      "name": "part-1-0-2",
+                      "name": "modal-close-button",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "CENTER",
@@ -1236,7 +1236,7 @@ const COMPONENTS = [
                       "children": [
                         {
                           "type": "frame",
-                          "name": "part-1-0-2-0",
+                          "name": "icon-tooltip",
                           "layout": {
                             "mode": "HORIZONTAL",
                             "primary": "MIN",
@@ -1256,7 +1256,7 @@ const COMPONENTS = [
                           "children": [
                             {
                               "type": "frame",
-                              "name": "part-1-0-2-0-0",
+                              "name": "tooltip-trigger__wrapper",
                               "layout": {
                                 "mode": "HORIZONTAL",
                                 "primary": "MIN",
@@ -1276,7 +1276,7 @@ const COMPONENTS = [
                               "children": [
                                 {
                                   "type": "svg",
-                                  "name": "part-1-0-2-0-0-0",
+                                  "name": "btn",
                                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
                                   "svgPaintVar": "imported/shared/color-ffffff",
                                   "iconSize": 20
@@ -1285,7 +1285,7 @@ const COMPONENTS = [
                             },
                             {
                               "type": "frame",
-                              "name": "part-1-0-2-0-1",
+                              "name": "popover",
                               "layout": {
                                 "mode": "HORIZONTAL",
                                 "primary": "MIN",
@@ -1340,7 +1340,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-2",
+                  "name": "btn-set",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MAX",
@@ -1349,11 +1349,11 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 64,
-                    "varName": "imported/modal/part-1-2/height"
+                    "varName": "imported/modal/btn-set/height"
                   },
                   "fixedWidth": {
                     "px": 862,
-                    "varName": "imported/modal/part-1-2/width/lg"
+                    "varName": "imported/modal/btn-set/width/lg"
                   },
                   "children": [
                     {

@@ -52,7 +52,7 @@ import {
   promoteMultiRootAnatomy,
 } from '../extract/computed/anatomy.js';
 import type { Capture as DepthCapture, CapturedNode as DepthNode } from '../extract/computed/lib.js';
-import { decomposeTranslate, isAbsurdRadius, mergeShippedMinted } from '../extract/computed/lib.js';
+import { decomposeTranslate, isAbsurdRadius, mergeShippedMinted, mintedLeafCount, signature, stems } from '../extract/computed/lib.js';
 import { kebab as depthKebab } from '../extract/types.js';
 // POLARIS/ASTRYX REPAIR WAVE pins (both Chromium-free — the first replays the
 // COMMITTED capture through fusion, the second is pure JSON).
@@ -5392,8 +5392,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (inStage.length !== 0) throw new Error('unexpected in-stage root for a fully portaled Modal');
       const portalBytes = portaled.reduce((n, r) => n + r.bytes, 0);
       if (portalBytes < 3000) throw new Error(`portaled DOM ${portalBytes} B is too small to be the real dialog subtree`);
-      // the portaled root descends (production descent) to the real roots
-      const real = cap.roots.flatMap((r) => descendToRealRoots(r.node));
+      // the portaled root descends (production descent) to the real roots,
+      // with the LIBRARY'S OWN class prefix (no vendor literal in the engine)
+      const dcfg = loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs/polaris-depth.json'));
+      const real = cap.roots.flatMap((r) => descendToRealRoots(r.node, dcfg.library.classPrefix));
       if (real.length < 2) throw new Error(`descent yielded ${real.length} real root(s) — expected the dialog + backdrop`);
       console.log(`portal-capture-modal: current reader ABSENT (0) → 1 portaled root, ${portalBytes} B dialog; descends to ${real.length} real roots`);
     },
@@ -5448,7 +5450,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           readFileSync(path.join(ROOT, 'extract/computed/out', name.toLowerCase(), 'captured-truth.json'), 'utf8'),
         ) as { base: { root: DepthNode } };
         const root = truth.base.root;
-        const rr = descendToRealRoots(root);
+        const rr = descendToRealRoots(root, cfg.library.classPrefix);
         if (!(rr.length === 1 && rr[0] === root)) {
           throw new Error(`${name}: realRootsOf(root) descended a wrapper — the census root is not preserved`);
         }
@@ -5468,6 +5470,80 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         }
       }
       console.log('simple-component-anatomy-unchanged: Badge/Button/Checkbox descend zero wrappers; multi-root anatomy == single-root anatomy (byte-identical)');
+    },
+  },
+  {
+    // CLASS-STEM PREFIX DEFECT (task #25) — THE CLASS, not the instance.
+    //
+    // `stems()` decides what a captured element IS: signature = tag + stems,
+    // and part names come from the dominant stem. It drops "modifier" classes
+    // by testing for `--`. That test is only meaningful on what the library
+    // wrote AFTER its own prefix — so prefix-stripping MUST run FIRST.
+    //
+    // It did not. Carbon's `classPrefix` is `cds--`, so the modifier filter
+    // read the PREFIX's own separator and discarded EVERY Carbon class:
+    // `cds--btn` scored `button|` (tag only) while the node's `classes` still
+    // said `["cds--btn"]`. Alignment fell back to POSITION and every part
+    // named `part-<path>`. `classAllow` had preserved exactly the right
+    // classes; the engine threw them away one step later.
+    //
+    // This pin is written against the CLASS — "a library whose classPrefix
+    // contains `--` keeps its block classes as stems" — using both a
+    // synthetic prefix and Carbon's committed capture, plus the two
+    // properties the fix must not break (BEM modifiers still dropped, the
+    // `Block--root` block-root case still yields the block name). Falsified
+    // by reverting the order: every assertion below fails BY NAME.
+    id: 'class-stem-prefix-order',
+    claim: 'C1-determinism',
+    run: () => {
+      // 1. THE CLASS: any prefix containing '--'. Synthetic, so the rule is
+      //    pinned independently of whether Carbon is still in the repo.
+      const s1 = stems(['zz--card', 'zz--card__title', 'zz--card--elevated'], 'zz--');
+      if (JSON.stringify(s1) !== JSON.stringify(['card', 'card__title'])) {
+        throw new Error(`a classPrefix containing '--' lost its block classes: got [${s1.join(', ')}] — expected [card, card__title] (prefix-stripping must precede modifier-filtering)`);
+      }
+      // 2. THE PROPERTIES THE FIX MUST NOT BREAK.
+      //    BEM modifiers still drop, after the prefix comes off.
+      if (stems(['cds--btn--primary'], 'cds--').length !== 0) {
+        throw new Error('a real BEM modifier survived the filter — cds--btn--primary is not an element');
+      }
+      //    A `Block--root` block-root keeps the block name (Polaris Text).
+      if (JSON.stringify(stems(['Polaris-Text--root', 'Polaris-Text--bodyMd'], 'Polaris-')) !== JSON.stringify(['Text'])) {
+        throw new Error('the Block--root block-root special case no longer yields the block name');
+      }
+      //    An empty prefix (Tailwind) is untouched.
+      if (JSON.stringify(stems(['rounded-md', 'bg-blue-600'], '')) !== JSON.stringify(['bg-blue-600', 'rounded-md'])) {
+        throw new Error('the empty-prefix (Tailwind) reading moved');
+      }
+      // 3. THE FIELD CASE, against the COMMITTED Carbon capture: every node
+      //    the config's own classAllow kept must produce at least one stem,
+      //    and the root signature must carry a class, not just a tag.
+      const cfg = loadCaptureConfig(ROOT, path.join(ROOT, 'extract/computed/configs/carbon.json'));
+      if (!cfg.library.classPrefix.includes('--')) {
+        throw new Error(`carbon.json classPrefix is "${cfg.library.classPrefix}" — this pin needs the library whose prefix contains '--'`);
+      }
+      const truth = JSON.parse(
+        readFileSync(path.join(ROOT, 'extract/computed/out/carbon/button/captured-truth.json'), 'utf8'),
+      ) as { base: { root: DepthNode } };
+      let classed = 0;
+      let stemless: string[] = [];
+      const walk = (n: DepthNode): void => {
+        if (n.classes.length > 0) {
+          classed++;
+          if (stems(n.classes, cfg.library.classPrefix).length === 0) stemless.push(n.classes.join('.'));
+        }
+        for (const c of n.nodes) if (c.t === 'el') walk((c as { el: DepthNode }).el);
+      };
+      walk(truth.base.root);
+      if (classed === 0) throw new Error('carbon/button capture carries no classed nodes — the fixture cannot pin anything');
+      if (stemless.length > 0) {
+        throw new Error(`${stemless.length}/${classed} classed Carbon node(s) produced ZERO stems — the prefix's own '--' is being read as a BEM modifier: ${stemless.slice(0, 3).join(' | ')}`);
+      }
+      const rootSig = signature(truth.base.root, cfg.library.classPrefix);
+      if (!rootSig.includes('|') || rootSig.endsWith('|')) {
+        throw new Error(`carbon/button root signature is "${rootSig}" — tag-only, so union alignment falls back to POSITION and parts name as part-<path>`);
+      }
+      console.log(`class-stem-prefix-order: a classPrefix containing '--' keeps its block classes (zz--card → card); modifiers still drop, Block--root still yields the block, empty prefix untouched; all ${classed} classed nodes of the committed carbon/Button capture yield stems and the root signature is "${rootSig}" (was "button|")`);
     },
   },
   {
@@ -6582,6 +6658,52 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         throw new Error(`loadConfig ACCEPTED a config whose declared minted tree is missing — the gate would fall back to fresh-mint-only inventory in silence (got: ${refusal || 'no refusal'})`);
       }
 
+      // 1b. THE ORDERING GUARD (task #28). "Absent" was never the state that
+      //     actually happened: the pipeline runs the harness BEFORE
+      //     promote-floor writes the minted tree, so the tree gets stubbed to
+      //     satisfy the refusal above and the gate records `leavesAdded: 0`
+      //     for a tree that did not exist yet — which is exactly what all ten
+      //     committed Carbon scorecards said. A DECLARED tree with ZERO
+      //     leaves is now refused by name, the bootstrap allowance is
+      //     explicit and RECEIPTED, and the allowance cannot rot.
+      const guard = (mutate: (t: Record<string, unknown>) => void, mintedJson: string): string => {
+        mkdirSync(path.join(ROOT, '.eval-tmp'), { recursive: true });
+        const c = JSON.parse(readFileSync(path.join(cfgDir, 'astryx.json'), 'utf8')) as Record<string, unknown>;
+        const mintedPath = path.join(ROOT, '.eval-tmp', 'minted.dtcg.json');
+        writeFileSync(mintedPath, mintedJson);
+        (c.tokens as Record<string, unknown>).minted = path.relative(ROOT, mintedPath);
+        mutate(c);
+        const p = path.join(ROOT, '.eval-tmp', 'ordering-guard.json');
+        writeFileSync(p, JSON.stringify(c));
+        let msg = '';
+        try { loadCaptureConfig(ROOT, p); } catch (e) { msg = String((e as Error).message); }
+        rmSync(path.join(ROOT, '.eval-tmp'), { recursive: true, force: true });
+        return msg;
+      };
+      const LEAF = '{"imported":{"probe":{"$value":"#000000","$type":"color"}}}';
+      const emptyRefusal = guard(() => {}, '{}');
+      if (!emptyRefusal.includes('ZERO leaves')) {
+        throw new Error(`loadConfig ACCEPTED a declared minted tree with zero leaves — the gate would record leavesAdded: 0 for a tree the promotion has not written (got: ${emptyRefusal || 'no refusal'})`);
+      }
+      const bootstrapped = guard((c) => { (c.tokens as Record<string, unknown>).mintedBootstrap = true; }, '{}');
+      if (bootstrapped !== '') {
+        throw new Error(`a library's genuine FIRST-EVER pass cannot run: mintedBootstrap did not allow an empty tree (got: ${bootstrapped})`);
+      }
+      const rotted = guard((c) => { (c.tokens as Record<string, unknown>).mintedBootstrap = true; }, LEAF);
+      if (!rotted.includes('outlived')) {
+        throw new Error(`a stale mintedBootstrap flag was ACCEPTED over a tree that now carries leaves — it would suppress the ordering guard forever (got: ${rotted || 'no refusal'})`);
+      }
+      if (mintedLeafCount(JSON.parse('{}') as Record<string, unknown>) !== 0 || mintedLeafCount(JSON.parse(LEAF) as Record<string, unknown>) !== 1) {
+        throw new Error('mintedLeafCount does not agree with the guard on what "exists" means');
+      }
+      // …and no SHIPPING config leans on the allowance.
+      for (const f of configs) {
+        const c = JSON.parse(readFileSync(path.join(cfgDir, f), 'utf8')) as { tokens?: { minted?: string; mintedBootstrap?: boolean } };
+        if (c.tokens?.mintedBootstrap) throw new Error(`${f} still carries tokens.mintedBootstrap — a shipped library measures against its shipped tree`);
+        const n = mintedLeafCount(JSON.parse(readFileSync(path.join(ROOT, c.tokens!.minted!), 'utf8')) as Record<string, unknown>);
+        if (n === 0) throw new Error(`${f}: shipped minted tree ${c.tokens!.minted} carries ZERO leaves`);
+      }
+
       // 2. THE CLASS. astryx Slider's gated contract binds 44 refs that live
       //    in the shipped tree and NOT in the run's own fresh mint.
       const out = path.join(ROOT, 'extract/computed/out/astryx/slider');
@@ -6622,7 +6744,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (structuredClone(freshProbe).imported.probe.c.$value !== '#111111' || 'only' in (freshProbe.imported.probe as object)) {
         throw new Error('mergeShippedMinted MUTATED the caller‘s fresh tree — the harness writes that tree into the extension block');
       }
-      console.log(`gate-inventory-shipped-minted: ${configs.length} capture configs name their shipped minted tree (absent path refused by name at load); the gate inventory = base + fresh mint + shipped tree resolves all ${withoutShipped.length} astryx Slider refs the FRESH MINT ALONE cannot (the 55.299 defect, falsified by withholding the tree); precedence fresh-first/shipped-fallback with value divergences named`);
+      console.log(`gate-inventory-shipped-minted: ${configs.length} capture configs name their shipped minted tree (absent path refused by name at load; a ZERO-LEAF tree refused as the task-#28 ORDERING GUARD, bootstrap allowance explicit + receipted + unable to rot); the gate inventory = base + fresh mint + shipped tree resolves all ${withoutShipped.length} astryx Slider refs the FRESH MINT ALONE cannot (the 55.299 defect, falsified by withholding the tree); precedence fresh-first/shipped-fallback with value divergences named`);
     },
   },
   {

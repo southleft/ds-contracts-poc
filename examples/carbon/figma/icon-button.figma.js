@@ -39,7 +39,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -47,28 +47,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/icon-button/part-0/height/xs"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/xs"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 24,
-                "varName": "imported/icon-button/part-0/width/xs"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/xs"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/primary",
+                  "svgPaintVar": "imported/icon-button/btn/color/primary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -77,14 +77,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/icon-button/part-1/height/xs"
+                "varName": "imported/icon-button/popover/height/xs"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 24,
-                "varName": "imported/icon-button/part-1/width/xs"
+                "varName": "imported/icon-button/popover/width/xs"
               },
               "children": []
             }
@@ -115,7 +115,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -123,28 +123,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 32,
-                "varName": "imported/icon-button/part-0/height/sm"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/sm"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 32,
-                "varName": "imported/icon-button/part-0/width/sm"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/sm"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/primary",
+                  "svgPaintVar": "imported/icon-button/btn/color/primary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -153,14 +153,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 32,
-                "varName": "imported/icon-button/part-1/height/sm"
+                "varName": "imported/icon-button/popover/height/sm"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 32,
-                "varName": "imported/icon-button/part-1/width/sm"
+                "varName": "imported/icon-button/popover/width/sm"
               },
               "children": []
             }
@@ -191,7 +191,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -199,28 +199,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 40,
-                "varName": "imported/icon-button/part-0/height/md"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/md"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 40,
-                "varName": "imported/icon-button/part-0/width/md"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/md"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/primary",
+                  "svgPaintVar": "imported/icon-button/btn/color/primary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -229,14 +229,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 40,
-                "varName": "imported/icon-button/part-1/height/md"
+                "varName": "imported/icon-button/popover/height/md"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 40,
-                "varName": "imported/icon-button/part-1/width/md"
+                "varName": "imported/icon-button/popover/width/md"
               },
               "children": []
             }
@@ -267,7 +267,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -275,28 +275,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 48,
-                "varName": "imported/icon-button/part-0/height/lg"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/lg"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 48,
-                "varName": "imported/icon-button/part-0/width/lg"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/lg"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/primary",
+                  "svgPaintVar": "imported/icon-button/btn/color/primary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -305,14 +305,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 48,
-                "varName": "imported/icon-button/part-1/height/lg"
+                "varName": "imported/icon-button/popover/height/lg"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 48,
-                "varName": "imported/icon-button/part-1/width/lg"
+                "varName": "imported/icon-button/popover/width/lg"
               },
               "children": []
             }
@@ -343,7 +343,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -351,28 +351,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/icon-button/part-0/height/xs"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/xs"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 24,
-                "varName": "imported/icon-button/part-0/width/xs"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/xs"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/secondary",
+                  "svgPaintVar": "imported/icon-button/btn/color/secondary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -381,14 +381,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/icon-button/part-1/height/xs"
+                "varName": "imported/icon-button/popover/height/xs"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 24,
-                "varName": "imported/icon-button/part-1/width/xs"
+                "varName": "imported/icon-button/popover/width/xs"
               },
               "children": []
             }
@@ -419,7 +419,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -427,28 +427,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 32,
-                "varName": "imported/icon-button/part-0/height/sm"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/sm"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 32,
-                "varName": "imported/icon-button/part-0/width/sm"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/sm"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/secondary",
+                  "svgPaintVar": "imported/icon-button/btn/color/secondary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -457,14 +457,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 32,
-                "varName": "imported/icon-button/part-1/height/sm"
+                "varName": "imported/icon-button/popover/height/sm"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 32,
-                "varName": "imported/icon-button/part-1/width/sm"
+                "varName": "imported/icon-button/popover/width/sm"
               },
               "children": []
             }
@@ -495,7 +495,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -503,28 +503,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 40,
-                "varName": "imported/icon-button/part-0/height/md"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/md"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 40,
-                "varName": "imported/icon-button/part-0/width/md"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/md"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/secondary",
+                  "svgPaintVar": "imported/icon-button/btn/color/secondary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -533,14 +533,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 40,
-                "varName": "imported/icon-button/part-1/height/md"
+                "varName": "imported/icon-button/popover/height/md"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 40,
-                "varName": "imported/icon-button/part-1/width/md"
+                "varName": "imported/icon-button/popover/width/md"
               },
               "children": []
             }
@@ -571,7 +571,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -579,28 +579,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 48,
-                "varName": "imported/icon-button/part-0/height/lg"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/lg"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 48,
-                "varName": "imported/icon-button/part-0/width/lg"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/lg"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#ffffff\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/secondary",
+                  "svgPaintVar": "imported/icon-button/btn/color/secondary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -609,14 +609,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 48,
-                "varName": "imported/icon-button/part-1/height/lg"
+                "varName": "imported/icon-button/popover/height/lg"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 48,
-                "varName": "imported/icon-button/part-1/width/lg"
+                "varName": "imported/icon-button/popover/width/lg"
               },
               "children": []
             }
@@ -647,7 +647,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -655,28 +655,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/icon-button/part-0/height/xs"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/xs"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 24,
-                "varName": "imported/icon-button/part-0/width/xs"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/xs"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/tertiary",
+                  "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -685,14 +685,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/icon-button/part-1/height/xs"
+                "varName": "imported/icon-button/popover/height/xs"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 24,
-                "varName": "imported/icon-button/part-1/width/xs"
+                "varName": "imported/icon-button/popover/width/xs"
               },
               "children": []
             }
@@ -723,7 +723,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -731,28 +731,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 32,
-                "varName": "imported/icon-button/part-0/height/sm"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/sm"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 32,
-                "varName": "imported/icon-button/part-0/width/sm"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/sm"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/tertiary",
+                  "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -761,14 +761,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 32,
-                "varName": "imported/icon-button/part-1/height/sm"
+                "varName": "imported/icon-button/popover/height/sm"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 32,
-                "varName": "imported/icon-button/part-1/width/sm"
+                "varName": "imported/icon-button/popover/width/sm"
               },
               "children": []
             }
@@ -799,7 +799,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -807,28 +807,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 40,
-                "varName": "imported/icon-button/part-0/height/md"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/md"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 40,
-                "varName": "imported/icon-button/part-0/width/md"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/md"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/tertiary",
+                  "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -837,14 +837,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 40,
-                "varName": "imported/icon-button/part-1/height/md"
+                "varName": "imported/icon-button/popover/height/md"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 40,
-                "varName": "imported/icon-button/part-1/width/md"
+                "varName": "imported/icon-button/popover/width/md"
               },
               "children": []
             }
@@ -875,7 +875,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -883,28 +883,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 48,
-                "varName": "imported/icon-button/part-0/height/lg"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/lg"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 48,
-                "varName": "imported/icon-button/part-0/width/lg"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/lg"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/tertiary",
+                  "svgPaintVar": "imported/icon-button/btn/color/tertiary",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -913,14 +913,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 48,
-                "varName": "imported/icon-button/part-1/height/lg"
+                "varName": "imported/icon-button/popover/height/lg"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 48,
-                "varName": "imported/icon-button/part-1/width/lg"
+                "varName": "imported/icon-button/popover/width/lg"
               },
               "children": []
             }
@@ -951,7 +951,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -959,28 +959,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/icon-button/part-0/height/xs"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/xs"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 24,
-                "varName": "imported/icon-button/part-0/width/xs"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/xs"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/ghost",
+                  "svgPaintVar": "imported/icon-button/btn/color/ghost",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -989,14 +989,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/icon-button/part-1/height/xs"
+                "varName": "imported/icon-button/popover/height/xs"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 24,
-                "varName": "imported/icon-button/part-1/width/xs"
+                "varName": "imported/icon-button/popover/width/xs"
               },
               "children": []
             }
@@ -1027,7 +1027,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -1035,28 +1035,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 32,
-                "varName": "imported/icon-button/part-0/height/sm"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/sm"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 32,
-                "varName": "imported/icon-button/part-0/width/sm"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/sm"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/ghost",
+                  "svgPaintVar": "imported/icon-button/btn/color/ghost",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -1065,14 +1065,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 32,
-                "varName": "imported/icon-button/part-1/height/sm"
+                "varName": "imported/icon-button/popover/height/sm"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 32,
-                "varName": "imported/icon-button/part-1/width/sm"
+                "varName": "imported/icon-button/popover/width/sm"
               },
               "children": []
             }
@@ -1103,7 +1103,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -1111,28 +1111,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 40,
-                "varName": "imported/icon-button/part-0/height/md"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/md"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 40,
-                "varName": "imported/icon-button/part-0/width/md"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/md"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/ghost",
+                  "svgPaintVar": "imported/icon-button/btn/color/ghost",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -1141,14 +1141,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 40,
-                "varName": "imported/icon-button/part-1/height/md"
+                "varName": "imported/icon-button/popover/height/md"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 40,
-                "varName": "imported/icon-button/part-1/width/md"
+                "varName": "imported/icon-button/popover/width/md"
               },
               "children": []
             }
@@ -1179,7 +1179,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "tooltip-trigger__wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -1187,28 +1187,28 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 48,
-                "varName": "imported/icon-button/part-0/height/lg"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/height/lg"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 48,
-                "varName": "imported/icon-button/part-0/width/lg"
+                "varName": "imported/icon-button/tooltip-trigger-wrapper/width/lg"
               },
               "children": [
                 {
                   "type": "svg",
-                  "name": "part-0-0",
+                  "name": "btn",
                   "svg": "<svg fill=\"#0f62fe\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-                  "svgPaintVar": "imported/icon-button/part-0-0/color/ghost",
+                  "svgPaintVar": "imported/icon-button/btn/color/ghost",
                   "iconSize": 16
                 }
               ]
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "popover",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -1217,14 +1217,14 @@ const COMPONENTS = [
               "insetOverlay": true,
               "fixedHeight": {
                 "px": 48,
-                "varName": "imported/icon-button/part-1/height/lg"
+                "varName": "imported/icon-button/popover/height/lg"
               },
               "bindings": {
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
                 "px": 48,
-                "varName": "imported/icon-button/part-1/width/lg"
+                "varName": "imported/icon-button/popover/width/lg"
               },
               "children": []
             }

@@ -11,25 +11,25 @@
       "selector": ".cds--toggle__label-text"
     },
     {
-      "leaf": "imported.toggle.part-1-1-0.background-color-state-disabled",
+      "leaf": "imported.toggle.toggle-switch.background-color-state-disabled",
       "token": "button-disabled",
-      "part": "part-1-1-0",
+      "part": "toggle-switch",
       "cssProperty": "background-color",
       "varName": "--cds-button-disabled",
       "selector": ".cds--toggle--disabled .cds--toggle__switch"
     },
     {
-      "leaf": "imported.toggle.part-1-1-0.background-color.toggled",
+      "leaf": "imported.toggle.toggle-switch.background-color.toggled",
       "token": "support-success",
-      "part": "part-1-1-0",
+      "part": "toggle-switch",
       "cssProperty": "background-color",
       "varName": "--cds-support-success",
       "selector": ".cds--toggle__switch--checked"
     },
     {
-      "leaf": "imported.toggle.part-1-1-0.background-color.untoggled",
+      "leaf": "imported.toggle.toggle-switch.background-color.untoggled",
       "token": "toggle-off",
-      "part": "part-1-1-0",
+      "part": "toggle-switch",
       "cssProperty": "background-color",
       "varName": "--cds-toggle-off",
       "selector": ".cds--toggle__switch"

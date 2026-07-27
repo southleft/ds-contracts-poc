@@ -76,16 +76,16 @@
         "position": "relative"
       },
       "parts": {
-        "part-0": {
-          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+        "tooltip-trigger__wrapper": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip-trigger__wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
             "aspect-ratio": "1 / 1"
           },
           "parts": {
-            "part-0-0": {
+            "btn": {
               "element": "button",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "inline-flex",
                 "align": "center",
@@ -106,7 +106,7 @@
                 "transition-timing-function": "cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9)"
               },
               "icon": {
-                "asset": "icon-button-part-0-0",
+                "asset": "icon-button-btn",
                 "size": 16
               },
               "declaredStates": {
@@ -121,14 +121,14 @@
                 "border-right-width": "{imported.shared.size-1}",
                 "border-top-width": "{imported.shared.size-1}",
                 "bottom": "{imported.shared.size-0}",
-                "flex-shrink": "{imported.icon-button.part-0-0.flex-shrink}",
-                "font-size": "{imported.icon-button.part-0-0.font-size}",
-                "height": "{imported.icon-button.part-0-0.height.unset}",
+                "flex-shrink": "{imported.icon-button.btn.flex-shrink}",
+                "font-size": "{imported.icon-button.btn.font-size}",
+                "height": "{imported.icon-button.btn.height.unset}",
                 "left": "{imported.shared.size-0}",
-                "letter-spacing": "{imported.icon-button.part-0-0.letter-spacing}",
-                "line-height": "{imported.icon-button.part-0-0.line-height}",
-                "max-width": "{imported.icon-button.part-0-0.max-width}",
-                "min-height": "{imported.icon-button.part-0-0.min-height.unset}",
+                "letter-spacing": "{imported.icon-button.btn.letter-spacing}",
+                "line-height": "{imported.icon-button.btn.line-height}",
+                "max-width": "{imported.icon-button.btn.max-width}",
+                "min-height": "{imported.icon-button.btn.min-height.unset}",
                 "min-width": "{imported.shared.size-0}",
                 "padding-bottom": "{imported.shared.size-0}",
                 "padding-left": "{imported.shared.size-0}",
@@ -136,47 +136,47 @@
                 "padding-top": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}",
-                "width": "{imported.icon-button.part-0-0.width.unset}"
+                "width": "{imported.icon-button.btn.width.unset}"
               },
               "tokensByProp": [
                 {
                   "prop": "kind",
                   "map": {
                     "ghost": {
-                      "background-color": "{imported.icon-button.part-0-0.background-color.ghost}",
-                      "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.ghost}",
-                      "border-left-color": "{imported.icon-button.part-0-0.border-left-color.ghost}",
-                      "border-right-color": "{imported.icon-button.part-0-0.border-right-color.ghost}",
-                      "border-top-color": "{imported.icon-button.part-0-0.border-top-color.ghost}",
-                      "color": "{imported.icon-button.part-0-0.color.ghost}",
-                      "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.ghost}"
+                      "background-color": "{imported.icon-button.btn.background-color.ghost}",
+                      "border-bottom-color": "{imported.icon-button.btn.border-bottom-color.ghost}",
+                      "border-left-color": "{imported.icon-button.btn.border-left-color.ghost}",
+                      "border-right-color": "{imported.icon-button.btn.border-right-color.ghost}",
+                      "border-top-color": "{imported.icon-button.btn.border-top-color.ghost}",
+                      "color": "{imported.icon-button.btn.color.ghost}",
+                      "row-rule-color": "{imported.icon-button.btn.row-rule-color.ghost}"
                     },
                     "primary": {
-                      "background-color": "{imported.icon-button.part-0-0.background-color.primary}",
-                      "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.primary}",
-                      "border-left-color": "{imported.icon-button.part-0-0.border-left-color.primary}",
-                      "border-right-color": "{imported.icon-button.part-0-0.border-right-color.primary}",
-                      "border-top-color": "{imported.icon-button.part-0-0.border-top-color.primary}",
-                      "color": "{imported.icon-button.part-0-0.color.primary}",
-                      "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.primary}"
+                      "background-color": "{imported.icon-button.btn.background-color.primary}",
+                      "border-bottom-color": "{imported.icon-button.btn.border-bottom-color.primary}",
+                      "border-left-color": "{imported.icon-button.btn.border-left-color.primary}",
+                      "border-right-color": "{imported.icon-button.btn.border-right-color.primary}",
+                      "border-top-color": "{imported.icon-button.btn.border-top-color.primary}",
+                      "color": "{imported.icon-button.btn.color.primary}",
+                      "row-rule-color": "{imported.icon-button.btn.row-rule-color.primary}"
                     },
                     "secondary": {
-                      "background-color": "{imported.icon-button.part-0-0.background-color.secondary}",
-                      "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.secondary}",
-                      "border-left-color": "{imported.icon-button.part-0-0.border-left-color.secondary}",
-                      "border-right-color": "{imported.icon-button.part-0-0.border-right-color.secondary}",
-                      "border-top-color": "{imported.icon-button.part-0-0.border-top-color.secondary}",
-                      "color": "{imported.icon-button.part-0-0.color.secondary}",
-                      "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.secondary}"
+                      "background-color": "{imported.icon-button.btn.background-color.secondary}",
+                      "border-bottom-color": "{imported.icon-button.btn.border-bottom-color.secondary}",
+                      "border-left-color": "{imported.icon-button.btn.border-left-color.secondary}",
+                      "border-right-color": "{imported.icon-button.btn.border-right-color.secondary}",
+                      "border-top-color": "{imported.icon-button.btn.border-top-color.secondary}",
+                      "color": "{imported.icon-button.btn.color.secondary}",
+                      "row-rule-color": "{imported.icon-button.btn.row-rule-color.secondary}"
                     },
                     "tertiary": {
-                      "background-color": "{imported.icon-button.part-0-0.background-color.tertiary}",
-                      "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.tertiary}",
-                      "border-left-color": "{imported.icon-button.part-0-0.border-left-color.tertiary}",
-                      "border-right-color": "{imported.icon-button.part-0-0.border-right-color.tertiary}",
-                      "border-top-color": "{imported.icon-button.part-0-0.border-top-color.tertiary}",
-                      "color": "{imported.icon-button.part-0-0.color.tertiary}",
-                      "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.tertiary}"
+                      "background-color": "{imported.icon-button.btn.background-color.tertiary}",
+                      "border-bottom-color": "{imported.icon-button.btn.border-bottom-color.tertiary}",
+                      "border-left-color": "{imported.icon-button.btn.border-left-color.tertiary}",
+                      "border-right-color": "{imported.icon-button.btn.border-right-color.tertiary}",
+                      "border-top-color": "{imported.icon-button.btn.border-top-color.tertiary}",
+                      "color": "{imported.icon-button.btn.color.tertiary}",
+                      "row-rule-color": "{imported.icon-button.btn.row-rule-color.tertiary}"
                     }
                   }
                 },
@@ -184,24 +184,24 @@
                   "prop": "size",
                   "map": {
                     "lg": {
-                      "height": "{imported.icon-button.part-0-0.height.lg}",
-                      "min-height": "{imported.icon-button.part-0-0.min-height.lg}",
-                      "width": "{imported.icon-button.part-0-0.width.lg}"
+                      "height": "{imported.icon-button.btn.height.lg}",
+                      "min-height": "{imported.icon-button.btn.min-height.lg}",
+                      "width": "{imported.icon-button.btn.width.lg}"
                     },
                     "md": {
-                      "height": "{imported.icon-button.part-0-0.height.md}",
-                      "min-height": "{imported.icon-button.part-0-0.min-height.md}",
-                      "width": "{imported.icon-button.part-0-0.width.md}"
+                      "height": "{imported.icon-button.btn.height.md}",
+                      "min-height": "{imported.icon-button.btn.min-height.md}",
+                      "width": "{imported.icon-button.btn.width.md}"
                     },
                     "sm": {
-                      "height": "{imported.icon-button.part-0-0.height.sm}",
-                      "min-height": "{imported.icon-button.part-0-0.min-height.sm}",
-                      "width": "{imported.icon-button.part-0-0.width.sm}"
+                      "height": "{imported.icon-button.btn.height.sm}",
+                      "min-height": "{imported.icon-button.btn.min-height.sm}",
+                      "width": "{imported.icon-button.btn.width.sm}"
                     },
                     "xs": {
-                      "height": "{imported.icon-button.part-0-0.height.xs}",
-                      "min-height": "{imported.icon-button.part-0-0.min-height.xs}",
-                      "width": "{imported.icon-button.part-0-0.width.xs}"
+                      "height": "{imported.icon-button.btn.height.xs}",
+                      "min-height": "{imported.icon-button.btn.min-height.xs}",
+                      "width": "{imported.icon-button.btn.width.xs}"
                     }
                   }
                 }
@@ -214,38 +214,38 @@
             }
           },
           "tokens": {
-            "height": "{imported.icon-button.part-0.height.unset}",
+            "height": "{imported.icon-button.tooltip-trigger-wrapper.height.unset}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
-            "width": "{imported.icon-button.part-0.width.unset}"
+            "width": "{imported.icon-button.tooltip-trigger-wrapper.width.unset}"
           },
           "tokensByProp": [
             {
               "prop": "size",
               "map": {
                 "lg": {
-                  "height": "{imported.icon-button.part-0.height.lg}",
-                  "width": "{imported.icon-button.part-0.width.lg}"
+                  "height": "{imported.icon-button.tooltip-trigger-wrapper.height.lg}",
+                  "width": "{imported.icon-button.tooltip-trigger-wrapper.width.lg}"
                 },
                 "md": {
-                  "height": "{imported.icon-button.part-0.height.md}",
-                  "width": "{imported.icon-button.part-0.width.md}"
+                  "height": "{imported.icon-button.tooltip-trigger-wrapper.height.md}",
+                  "width": "{imported.icon-button.tooltip-trigger-wrapper.width.md}"
                 },
                 "sm": {
-                  "height": "{imported.icon-button.part-0.height.sm}",
-                  "width": "{imported.icon-button.part-0.width.sm}"
+                  "height": "{imported.icon-button.tooltip-trigger-wrapper.height.sm}",
+                  "width": "{imported.icon-button.tooltip-trigger-wrapper.width.sm}"
                 },
                 "xs": {
-                  "height": "{imported.icon-button.part-0.height.xs}",
-                  "width": "{imported.icon-button.part-0.width.xs}"
+                  "height": "{imported.icon-button.tooltip-trigger-wrapper.height.xs}",
+                  "width": "{imported.icon-button.tooltip-trigger-wrapper.width.xs}"
                 }
               }
             }
           ]
         },
-        "part-1": {
+        "popover": {
           "element": "span",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
             "position": "absolute",
@@ -255,7 +255,7 @@
           "parts": {
             "label": {
               "text": "Add",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-content.tooltip-content — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "none",
                 "position": "absolute"
@@ -297,9 +297,9 @@
                 "z-index": "{imported.shared.num-6000}"
               }
             },
-            "part-1-1": {
+            "popover-caret": {
               "element": "span",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-caret — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "none",
                 "position": "absolute",
@@ -320,24 +320,24 @@
                 }
               },
               "tokens": {
-                "height": "{imported.icon-button.part-1-1.height}",
+                "height": "{imported.icon-button.popover-caret.height}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}",
-                "width": "{imported.icon-button.part-1-1.width}",
+                "width": "{imported.icon-button.popover-caret.width}",
                 "z-index": "{imported.shared.num-6000}"
               }
             }
           },
           "tokens": {
             "bottom": "{imported.shared.size-0}",
-            "height": "{imported.icon-button.part-1.height.unset}",
+            "height": "{imported.icon-button.popover.height.unset}",
             "left": "{imported.shared.size-0}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}",
-            "width": "{imported.icon-button.part-1.width.unset}",
+            "width": "{imported.icon-button.popover.width.unset}",
             "z-index": "{imported.shared.num-6000}"
           },
           "tokensByProp": [
@@ -345,20 +345,20 @@
               "prop": "size",
               "map": {
                 "lg": {
-                  "height": "{imported.icon-button.part-1.height.lg}",
-                  "width": "{imported.icon-button.part-1.width.lg}"
+                  "height": "{imported.icon-button.popover.height.lg}",
+                  "width": "{imported.icon-button.popover.width.lg}"
                 },
                 "md": {
-                  "height": "{imported.icon-button.part-1.height.md}",
-                  "width": "{imported.icon-button.part-1.width.md}"
+                  "height": "{imported.icon-button.popover.height.md}",
+                  "width": "{imported.icon-button.popover.width.md}"
                 },
                 "sm": {
-                  "height": "{imported.icon-button.part-1.height.sm}",
-                  "width": "{imported.icon-button.part-1.width.sm}"
+                  "height": "{imported.icon-button.popover.height.sm}",
+                  "width": "{imported.icon-button.popover.width.sm}"
                 },
                 "xs": {
-                  "height": "{imported.icon-button.part-1.height.xs}",
-                  "width": "{imported.icon-button.part-1.width.xs}"
+                  "height": "{imported.icon-button.popover.height.xs}",
+                  "width": "{imported.icon-button.popover.width.xs}"
                 }
               }
             }

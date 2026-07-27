@@ -11,21 +11,21 @@
   "styledChannels": {
     "root": 20,
     "label": 20,
-    "part-1": 31,
-    "part-1-0": 13,
+    "modal-container": 31,
+    "modal-header": 13,
     "label-2": 19,
     "label-3": 7,
-    "part-1-0-2": 9,
-    "part-1-0-2-0": 11,
-    "part-1-0-2-0-0": 4,
-    "part-1-0-2-0-0-0": 43,
+    "modal-close-button": 9,
+    "icon-tooltip": 11,
+    "tooltip-trigger__wrapper": 4,
+    "btn": 43,
     "icon": 24,
     "part-1-0-2-0-0-0-0-0": 24,
-    "part-1-0-2-0-1": 11,
+    "popover": 11,
     "label-4": 35,
-    "part-1-0-2-0-1-1": 11,
+    "popover-caret": 11,
     "label-5": 24,
-    "part-1-2": 8,
+    "btn-set": 8,
     "label-6": 46,
     "label-7": 47,
     "label-8": 20
@@ -88,31 +88,31 @@
         "class": "currentColor"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "caret-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "column-rule-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "outline-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"

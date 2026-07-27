@@ -204,15 +204,17 @@ the CSS-vars reader) key off *methods* and config values, not vendors; the
 variable literally named `muiRe` in `capture.ts` is built from the config's
 `varPrefix` and serves Carbon and Tailwind unchanged.
 
-**What leaks — four places, reported because a document that only reports the
-green is not evidence:**
+**What leaked — four places, all four CLOSED in the class-stem prefix round
+(task #25/#28). The audit is kept in full, because a document that deletes its
+own findings once they are fixed is not evidence either. Each row now carries
+what closing it cost:**
 
-| # | site | what it hardcodes | consequence |
-|---|---|---|---|
-| L1 | `extract/computed/lib.ts:399`, inside `stems()` | `.filter(c => !c.includes('--'))` — a BEM assumption that `--` means *modifier*, applied **before** the prefix strip | **Carbon's `classPrefix` is `cds--`, which contains `--`, so every Carbon class is discarded.** No config key can override it. |
-| L2 | `extract/computed/anatomy.ts:212` | `const PORTAL_PREFIX = 'Polaris-'` on the live portal-anatomy descent (`realRootsOf` → `descendToRealRoots`, reached by every `portalCapture: true` component) | the config's own `classPrefix` is ignored at this one call site; the docstring admits it and argues the failure is asymmetric |
-| L3 | `extract/computed/capture.ts` (`grep -n '\^Polaris-'`) | `/^Polaris-/` inside the browser-evaluated portal reader | diagnostic plumbing (`currentReader`) with no downstream consumer found — low severity, still a literal |
-| L4 | `extract/computed/drift-check.ts:52` | a five-entry `LIBRARIES` registry of config paths | adding a sixth library to the standing instrument edits engine source, not just a config |
+| # | site | what it hardcoded | consequence | CLOSED |
+|---|---|---|---|---|
+| L1 | `extract/computed/lib.ts:399`, inside `stems()` | `.filter(c => !c.includes('--'))` — a BEM assumption that `--` means *modifier*, applied **before** the prefix strip | **Carbon's `classPrefix` is `cds--`, which contains `--`, so every Carbon class is discarded.** No config key can override it. | **prefix strip now precedes the modifier filter**; pinned as a class by the eval `class-stem-prefix-order`; Carbon RE-CAPTURED and re-promoted |
+| L2 | `extract/computed/anatomy.ts:212` | `const PORTAL_PREFIX = 'Polaris-'` on the live portal-anatomy descent (`realRootsOf` → `descendToRealRoots`, reached by every `portalCapture: true` component) | the config's own `classPrefix` is ignored at this one call site; the docstring admits it and argues the failure is asymmetric | `realRootsOf(node, classPrefix)` / `descendToRealRoots(node, classPrefix)` threaded from the config; measured no-op on every committed library |
+| L3 | `extract/computed/capture.ts` (`grep -n '\^Polaris-'`) | `/^Polaris-/` inside the browser-evaluated portal reader | diagnostic plumbing (`currentReader`) with no downstream consumer found — low severity, still a literal | replaced by an in-page `stemsOf` mirror of the CORRECTED rule, taking the config's `classPrefix`; committed depth receipt bytes unchanged |
+| L4 | `extract/computed/drift-check.ts:52` | a five-entry `LIBRARIES` registry of config paths | adding a sixth library to the standing instrument edits engine source, not just a config | registry DERIVED from `configs/*.json`; a config with no committed scorecard is skipped **and printed** (`polaris-depth.json`) |
 
 **L1 is the real finding, and it is measurable from committed artifacts.**
 Carbon's config author explicitly intended the opposite —
@@ -227,21 +229,38 @@ committed root signatures in `extract/computed/out/*/captured-truth.json`:
 | mui | `button\|Button-root.ButtonBase-root` | `MuiButtonBase-root`, `MuiButton-root` |
 | astryx | `button\|button` | `astryx-button` |
 | tailwind | `button\|` | `[]` — *intentional*, `classAllow: "^$"` |
-| **carbon** | **`button\|`** | **`["cds--btn"]`** — classes present, stem empty |
+| **carbon** (before) | **`button\|`** | **`["cds--btn"]`** — classes present, stem empty |
+| **carbon** (after) | **`button\|btn`** | same classes, now read |
 
-Carbon Checkbox degrades the same way: root `div|` with
+Carbon Checkbox degraded the same way: root `div|` with
 `["cds--form-item","cds--checkbox-wrapper"]`, children named positionally
-(`part-0`, `part-1`) rather than by class stem. Carbon's parts therefore align
-on tag + position alone.
+(`part-0`, `part-1`) rather than by class stem. Carbon's parts aligned on
+tag + position alone.
 
-**How to read this honestly.** It did not *break* Carbon — the round still
-converged, 10 components, floors 76.5–96.6%. But those floors were measured
-*with* this degradation, and nothing in the repo names it. It violates the house
-rule that degradation is named, never silent, and it is the strongest single
-qualifier on the generality claim in this document. Fixing it means ordering the
-modifier filter after the prefix strip (or making the modifier grammar a config
-key) and re-measuring Carbon. **Open; owner: whoever takes the next Carbon
-round.**
+**How to read this honestly — and what re-measuring actually showed.** It did
+not *break* Carbon: the round converged, 10 components, floors 76.5–96.6%. The
+violation was that the degradation was **silent**. It has since been fixed
+(prefix strip before modifier filter) and Carbon **re-captured and re-promoted**
+end to end. What moved:
+
+- **Part names**: 42 parts across 8 of the 10 components, `part-<path>` →
+  Carbon's own vocabulary (`toggle__switch`, `tabs__nav-item`,
+  `text-input__field-wrapper`, `modal-header`, …).
+- **Floors**: **nothing**. `cellsCompared`, part counts and `pctEqual` are
+  unchanged on all ten (Button moves −0.005, an order of magnitude inside its
+  own recorded gate-timing tolerance). The reason is worth carrying forward:
+  Carbon's DOM shape is stable across every combo of every component, so
+  positional alignment and class-identity alignment built the **same tree**.
+  The defect corrupted IDENTITY, not measurement — and no percentage was ever
+  going to catch it. What caught it was reading the captured `classes` array
+  next to the captured signature, which is what this table does.
+- One consequence the rename exposed: the per-library promotion's alias join
+  matched a raw part name against a *sanitized* minted path segment, which
+  worked by coincidence while names were positional and cost 4 verified aliases
+  once they were not. Fixed, with an unjoined-fact receipt so the next spelling
+  divergence is loud. See `examples/carbon/PROVENANCE.md`.
+
+**CLOSED.**
 
 Lower-stakes cousins, for completeness: `run.ts:94`, `regate.ts:67` and
 `resolve.ts:87` default to `configs/polaris.json` when `--config` is omitted, and
@@ -419,7 +438,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 
 | instrument | what it pins | how to run |
 |---|---|---|
-| **Eval suite** | 163/163 as of `evals/results.json` — 21 refusal, 28 determinism, 40 detection, 54 extraction, 3 convergence, 4 CLI, 12 journey, 1 theming | `npm run eval` |
+| **Eval suite** | 164/164 as of `evals/results.json` — 21 refusal, 29 determinism, 40 detection, 54 extraction, 3 convergence, 4 CLI, 12 journey, 1 theming | `npm run eval` |
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
 | **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |
@@ -601,7 +620,7 @@ Figma account or a network call except `npm install`.
 npm install
 
 # ── the claim's own numbers ────────────────────────────────────────────────
-npm run eval                       # 163/163 as of evals/results.json
+npm run eval                       # 164/164 as of evals/results.json
 node -e "const r=require('./evals/results.json');console.log(r.passed+'/'+r.total)"
 
 # 54 drift rows, per library

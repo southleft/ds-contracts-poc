@@ -104,6 +104,45 @@ const aliasReceipts = [];
 // Written per component as contracts/<name>.anchors.json (sidecar, never
 // contract vocabulary — same discipline as the extension block).
 const anchorsByComponent = new Map();
+
+/**
+ * JOIN-KEY NORMALIZATION (class-stem prefix round, task #25).
+ *
+ * The alias pass joins a MINTED TOKEN PATH segment against a SOURCE FACT's
+ * `part` name. Those two spellings are not the same string: the minted path
+ * runs every segment through `core/mint-tokens.ts` `sanitizeSegment`
+ * ([a-z0-9-] only, camel split, runs collapsed) while `source-bindings.json`
+ * carries the RAW promoted part name.
+ *
+ * That never mattered until Carbon's part names became real class stems.
+ * With positional names (`part-1-1-0`) the sanitized form equalled the raw
+ * form, so the join worked BY COINCIDENCE. Carbon's BEM ELEMENT stems carry
+ * `__` — `toggle__switch` mints as `toggle-switch` — and the join silently
+ * missed, costing four verified aliases (3 on Toggle's switch, 1 on Tabs'
+ * nav-item) that fell back to anonymous literals with no receipt.
+ *
+ * MIRRORED, NOT IMPORTED: `sanitizeSegment` is module-private in
+ * `core/mint-tokens.ts`, and exporting it would change the plugin ENGINE
+ * BUNDLE (core/index.ts is bundled) to serve a per-library promotion script.
+ * The rule is copied here verbatim with this note, and the unjoined-fact
+ * receipt below makes a future divergence LOUD instead of silent.
+ *
+ * The identical latent join lives in every other library's own
+ * `promote-floor.mjs` under `examples/`. Measured today: no other library has a part name whose
+ * sanitized form differs from its raw form, so the defect is LATENT there and
+ * live only here. Each closes it on its next re-promotion.
+ */
+const mintSegment = (s) =>
+  s
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .toLowerCase()
+    .replace(/[^a-z0-9-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+/** Every (part, channel) a component's facts offered, and which ones joined —
+ *  a fact that never reaches a leaf is a silent alias loss and is receipted. */
+const factPartsSeen = new Map();
+
 function aliasPass(node, segs, facts, componentName) {
   for (const [k, v] of Object.entries(node)) {
     if (v && typeof v === 'object' && '$value' in v) {
@@ -111,8 +150,9 @@ function aliasPass(node, segs, facts, componentName) {
       // leaf: imported.<comp>.<part...>.<channel>[.axisVal...]
       // find the channel segment = the segment matching a fact's channel;
       // trailing segments are axis values the leaf is conditioned on.
+      // Join on the MINTED spelling of the fact's part (see mintSegment).
       const byChannel = new Map();
-      for (const f of facts) byChannel.set(`${f.part}|${f.channel}`, true);
+      for (const f of facts) byChannel.set(`${mintSegment(f.part)}|${f.channel}`, true);
       let matched = null;
       for (let ci = leafPath.length - 1; ci >= 2; ci--) {
         // a state-plane leaf spells the channel with a -state-<x> suffix
@@ -126,7 +166,7 @@ function aliasPass(node, segs, facts, componentName) {
         // plane this leaf belongs to (equality was verified at capture, so
         // this drops only other-plane facts, never the leaf's own).
         const covering = facts.filter(
-          (f) => f.part === part && f.channel === channel &&
+          (f) => mintSegment(f.part) === part && f.channel === channel &&
             axisVals.every((av) => Object.values(f.axisValues).includes(av)) &&
             valueEq(v.$value, tokenValue(f.token)),
         );
@@ -143,6 +183,7 @@ function aliasPass(node, segs, facts, componentName) {
         }
         const witness = covering[0];
         matched = { token: tok, part, channel, varName: witness.varName ?? '', selector: witness.anchor?.selector ?? '' };
+        factPartsSeen.set(`${componentName}|${part}|${channel}`, true);
         break;
       }
       if (matched) {
@@ -247,6 +288,15 @@ for (const name of MINT_SOURCES) {
   const sbPath = path.join(OUT, name, 'source-bindings.json');
   const facts = existsSync(sbPath) ? (JSON.parse(readFileSync(sbPath, 'utf8')).facts ?? []) : [];
   if (facts.length > 0 && minted.imported) aliasPass(minted.imported, ['imported'], facts, name);
+  // UNJOINED-FACT RECEIPT (class-stem prefix round). A verified source fact
+  // that reaches NO minted leaf is a silent alias loss — exactly how the
+  // part-name/mint-path spelling mismatch cost four aliases without a word.
+  // Naming it here means the next spelling divergence is loud.
+  for (const key of new Set(facts.map((f) => `${mintSegment(f.part)}|${f.channel}`))) {
+    if (!factPartsSeen.has(`${name}|${key}`)) {
+      aliasReceipts.push(`fact NOT JOINED ${name}: (part "${key.split('|')[0]}", channel "${key.split('|')[1]}") verified at capture but reached no minted leaf — either the leaf's value disagrees with the token (a plane split) or the part spelling diverged from the minted path`);
+    }
+  }
   mergeInto(mintedMerged, minted);
 }
 

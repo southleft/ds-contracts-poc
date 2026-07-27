@@ -170,8 +170,8 @@
   "pixel": {
     "pairs": 208,
     "exact": {
-      "mean": 0.39910732171474367,
-      "max": 0.419921875,
+      "mean": 0.398356119791667,
+      "max": 0.4329427083333333,
       "perfect": 0
     },
     "aa": {
@@ -182,42 +182,42 @@
     "worst": [
       {
         "key": "outline.sm__default",
-        "pctExact": 0.400390625,
+        "pctExact": 0.3971354166666667,
         "pctAA": 0.13671875
       },
       {
         "key": "outline.sm__hover",
-        "pctExact": 0.400390625,
+        "pctExact": 0.3971354166666667,
         "pctAA": 0.13671875
       },
       {
         "key": "outline.sm__focus-visible",
-        "pctExact": 0.400390625,
+        "pctExact": 0.3971354166666667,
         "pctAA": 0.13671875
       },
       {
         "key": "outline.sm__active",
-        "pctExact": 0.400390625,
+        "pctExact": 0.3971354166666667,
         "pctAA": 0.13671875
       },
       {
-        "key": "high-contrast.lg__default",
-        "pctExact": 0.4069010416666667,
+        "key": "red.lg__default",
+        "pctExact": 0.4329427083333333,
         "pctAA": 0.13346354166666666
       },
       {
-        "key": "high-contrast.lg__hover",
-        "pctExact": 0.4069010416666667,
+        "key": "red.lg__hover",
+        "pctExact": 0.4264322916666667,
         "pctAA": 0.13346354166666666
       },
       {
-        "key": "high-contrast.lg__focus-visible",
-        "pctExact": 0.4069010416666667,
+        "key": "red.lg__focus-visible",
+        "pctExact": 0.4264322916666667,
         "pctAA": 0.13346354166666666
       },
       {
-        "key": "high-contrast.lg__active",
-        "pctExact": 0.4069010416666667,
+        "key": "red.lg__active",
+        "pctExact": 0.4264322916666667,
         "pctAA": 0.13346354166666666
       }
     ]

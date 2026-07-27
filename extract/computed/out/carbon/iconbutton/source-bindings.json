@@ -4,147 +4,7 @@
   "varPrefix": "--cds-",
   "facts": [
     {
-      "part": "icon",
-      "channel": "fill",
-      "combo": "ghost.unset.enabled",
-      "axisValues": {
-        "kind": "ghost",
-        "size": "unset"
-      },
-      "token": "icon-primary",
-      "varName": "--cds-icon-primary",
-      "anchor": {
-        "selector": ".cds--btn--ghost:not([disabled]) svg"
-      }
-    },
-    {
-      "part": "icon",
-      "channel": "fill",
-      "combo": "ghost.unset.disabled",
-      "axisValues": {
-        "kind": "ghost",
-        "size": "unset"
-      },
-      "token": "icon-on-color-disabled",
-      "varName": "--cds-icon-on-color-disabled",
-      "anchor": {
-        "selector": ".cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon path:not([data-icon-path]):not([fill=\"none\"]), .cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon, .cds--btn.cds--btn--icon-only.cds--btn--ghost[disabled]:hover .cds--btn__icon"
-      }
-    },
-    {
-      "part": "icon",
-      "channel": "fill",
-      "combo": "ghost.xs.enabled",
-      "axisValues": {
-        "kind": "ghost",
-        "size": "xs"
-      },
-      "token": "icon-primary",
-      "varName": "--cds-icon-primary",
-      "anchor": {
-        "selector": ".cds--btn--ghost:not([disabled]) svg"
-      }
-    },
-    {
-      "part": "icon",
-      "channel": "fill",
-      "combo": "ghost.xs.disabled",
-      "axisValues": {
-        "kind": "ghost",
-        "size": "xs"
-      },
-      "token": "icon-on-color-disabled",
-      "varName": "--cds-icon-on-color-disabled",
-      "anchor": {
-        "selector": ".cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon path:not([data-icon-path]):not([fill=\"none\"]), .cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon, .cds--btn.cds--btn--icon-only.cds--btn--ghost[disabled]:hover .cds--btn__icon"
-      }
-    },
-    {
-      "part": "icon",
-      "channel": "fill",
-      "combo": "ghost.sm.enabled",
-      "axisValues": {
-        "kind": "ghost",
-        "size": "sm"
-      },
-      "token": "icon-primary",
-      "varName": "--cds-icon-primary",
-      "anchor": {
-        "selector": ".cds--btn--ghost:not([disabled]) svg"
-      }
-    },
-    {
-      "part": "icon",
-      "channel": "fill",
-      "combo": "ghost.sm.disabled",
-      "axisValues": {
-        "kind": "ghost",
-        "size": "sm"
-      },
-      "token": "icon-on-color-disabled",
-      "varName": "--cds-icon-on-color-disabled",
-      "anchor": {
-        "selector": ".cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon path:not([data-icon-path]):not([fill=\"none\"]), .cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon, .cds--btn.cds--btn--icon-only.cds--btn--ghost[disabled]:hover .cds--btn__icon"
-      }
-    },
-    {
-      "part": "icon",
-      "channel": "fill",
-      "combo": "ghost.md.enabled",
-      "axisValues": {
-        "kind": "ghost",
-        "size": "md"
-      },
-      "token": "icon-primary",
-      "varName": "--cds-icon-primary",
-      "anchor": {
-        "selector": ".cds--btn--ghost:not([disabled]) svg"
-      }
-    },
-    {
-      "part": "icon",
-      "channel": "fill",
-      "combo": "ghost.md.disabled",
-      "axisValues": {
-        "kind": "ghost",
-        "size": "md"
-      },
-      "token": "icon-on-color-disabled",
-      "varName": "--cds-icon-on-color-disabled",
-      "anchor": {
-        "selector": ".cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon path:not([data-icon-path]):not([fill=\"none\"]), .cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon, .cds--btn.cds--btn--icon-only.cds--btn--ghost[disabled]:hover .cds--btn__icon"
-      }
-    },
-    {
-      "part": "icon",
-      "channel": "fill",
-      "combo": "ghost.lg.enabled",
-      "axisValues": {
-        "kind": "ghost",
-        "size": "lg"
-      },
-      "token": "icon-primary",
-      "varName": "--cds-icon-primary",
-      "anchor": {
-        "selector": ".cds--btn--ghost:not([disabled]) svg"
-      }
-    },
-    {
-      "part": "icon",
-      "channel": "fill",
-      "combo": "ghost.lg.disabled",
-      "axisValues": {
-        "kind": "ghost",
-        "size": "lg"
-      },
-      "token": "icon-on-color-disabled",
-      "varName": "--cds-icon-on-color-disabled",
-      "anchor": {
-        "selector": ".cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon path:not([data-icon-path]):not([fill=\"none\"]), .cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon, .cds--btn.cds--btn--icon-only.cds--btn--ghost[disabled]:hover .cds--btn__icon"
-      }
-    },
-    {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "background-color",
       "combo": "primary.unset.enabled",
       "axisValues": {
@@ -158,7 +18,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "background-color",
       "combo": "primary.xs.enabled",
       "axisValues": {
@@ -172,7 +32,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "background-color",
       "combo": "primary.sm.enabled",
       "axisValues": {
@@ -186,7 +46,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "background-color",
       "combo": "primary.md.enabled",
       "axisValues": {
@@ -200,7 +60,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "background-color",
       "combo": "primary.lg.enabled",
       "axisValues": {
@@ -214,7 +74,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "background-color",
       "combo": "secondary.unset.enabled",
       "axisValues": {
@@ -228,7 +88,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "background-color",
       "combo": "secondary.xs.enabled",
       "axisValues": {
@@ -242,7 +102,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "background-color",
       "combo": "secondary.sm.enabled",
       "axisValues": {
@@ -256,7 +116,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "background-color",
       "combo": "secondary.md.enabled",
       "axisValues": {
@@ -270,7 +130,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "background-color",
       "combo": "secondary.lg.enabled",
       "axisValues": {
@@ -284,7 +144,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "primary.unset.enabled",
       "axisValues": {
@@ -298,7 +158,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "primary.unset.disabled",
       "axisValues": {
@@ -312,7 +172,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "primary.xs.enabled",
       "axisValues": {
@@ -326,7 +186,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "primary.xs.disabled",
       "axisValues": {
@@ -340,7 +200,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "primary.sm.enabled",
       "axisValues": {
@@ -354,7 +214,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "primary.sm.disabled",
       "axisValues": {
@@ -368,7 +228,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "primary.md.enabled",
       "axisValues": {
@@ -382,7 +242,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "primary.md.disabled",
       "axisValues": {
@@ -396,7 +256,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "primary.lg.enabled",
       "axisValues": {
@@ -410,7 +270,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "primary.lg.disabled",
       "axisValues": {
@@ -424,7 +284,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "secondary.unset.enabled",
       "axisValues": {
@@ -438,7 +298,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "secondary.unset.disabled",
       "axisValues": {
@@ -452,7 +312,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "secondary.xs.enabled",
       "axisValues": {
@@ -466,7 +326,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "secondary.xs.disabled",
       "axisValues": {
@@ -480,7 +340,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "secondary.sm.enabled",
       "axisValues": {
@@ -494,7 +354,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "secondary.sm.disabled",
       "axisValues": {
@@ -508,7 +368,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "secondary.md.enabled",
       "axisValues": {
@@ -522,7 +382,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "secondary.md.disabled",
       "axisValues": {
@@ -536,7 +396,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "secondary.lg.enabled",
       "axisValues": {
@@ -550,7 +410,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "secondary.lg.disabled",
       "axisValues": {
@@ -564,7 +424,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "tertiary.unset.enabled",
       "axisValues": {
@@ -578,7 +438,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "tertiary.unset.disabled",
       "axisValues": {
@@ -592,7 +452,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "tertiary.xs.enabled",
       "axisValues": {
@@ -606,7 +466,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "tertiary.xs.disabled",
       "axisValues": {
@@ -620,7 +480,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "tertiary.sm.enabled",
       "axisValues": {
@@ -634,7 +494,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "tertiary.sm.disabled",
       "axisValues": {
@@ -648,7 +508,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "tertiary.md.enabled",
       "axisValues": {
@@ -662,7 +522,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "tertiary.md.disabled",
       "axisValues": {
@@ -676,7 +536,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "tertiary.lg.enabled",
       "axisValues": {
@@ -690,7 +550,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "tertiary.lg.disabled",
       "axisValues": {
@@ -704,7 +564,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "ghost.unset.enabled",
       "axisValues": {
@@ -718,7 +578,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "ghost.unset.disabled",
       "axisValues": {
@@ -732,7 +592,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "ghost.xs.enabled",
       "axisValues": {
@@ -746,7 +606,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "ghost.xs.disabled",
       "axisValues": {
@@ -760,7 +620,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "ghost.sm.enabled",
       "axisValues": {
@@ -774,7 +634,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "ghost.sm.disabled",
       "axisValues": {
@@ -788,7 +648,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "ghost.md.enabled",
       "axisValues": {
@@ -802,7 +662,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "ghost.md.disabled",
       "axisValues": {
@@ -816,7 +676,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "ghost.lg.enabled",
       "axisValues": {
@@ -830,7 +690,7 @@
       }
     },
     {
-      "part": "part-0-0",
+      "part": "btn",
       "channel": "color",
       "combo": "ghost.lg.disabled",
       "axisValues": {
@@ -841,6 +701,146 @@
       "varName": "--cds-text-disabled",
       "anchor": {
         "selector": ".cds--btn--ghost:disabled, .cds--btn--ghost:hover:disabled, .cds--btn--ghost:focus:disabled, .cds--btn--ghost.cds--btn--disabled, .cds--btn--ghost.cds--btn--disabled:hover, .cds--btn--ghost.cds--btn--disabled:focus"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "ghost.unset.enabled",
+      "axisValues": {
+        "kind": "ghost",
+        "size": "unset"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--btn--ghost:not([disabled]) svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "ghost.unset.disabled",
+      "axisValues": {
+        "kind": "ghost",
+        "size": "unset"
+      },
+      "token": "icon-on-color-disabled",
+      "varName": "--cds-icon-on-color-disabled",
+      "anchor": {
+        "selector": ".cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon path:not([data-icon-path]):not([fill=\"none\"]), .cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon, .cds--btn.cds--btn--icon-only.cds--btn--ghost[disabled]:hover .cds--btn__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "ghost.xs.enabled",
+      "axisValues": {
+        "kind": "ghost",
+        "size": "xs"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--btn--ghost:not([disabled]) svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "ghost.xs.disabled",
+      "axisValues": {
+        "kind": "ghost",
+        "size": "xs"
+      },
+      "token": "icon-on-color-disabled",
+      "varName": "--cds-icon-on-color-disabled",
+      "anchor": {
+        "selector": ".cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon path:not([data-icon-path]):not([fill=\"none\"]), .cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon, .cds--btn.cds--btn--icon-only.cds--btn--ghost[disabled]:hover .cds--btn__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "ghost.sm.enabled",
+      "axisValues": {
+        "kind": "ghost",
+        "size": "sm"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--btn--ghost:not([disabled]) svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "ghost.sm.disabled",
+      "axisValues": {
+        "kind": "ghost",
+        "size": "sm"
+      },
+      "token": "icon-on-color-disabled",
+      "varName": "--cds-icon-on-color-disabled",
+      "anchor": {
+        "selector": ".cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon path:not([data-icon-path]):not([fill=\"none\"]), .cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon, .cds--btn.cds--btn--icon-only.cds--btn--ghost[disabled]:hover .cds--btn__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "ghost.md.enabled",
+      "axisValues": {
+        "kind": "ghost",
+        "size": "md"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--btn--ghost:not([disabled]) svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "ghost.md.disabled",
+      "axisValues": {
+        "kind": "ghost",
+        "size": "md"
+      },
+      "token": "icon-on-color-disabled",
+      "varName": "--cds-icon-on-color-disabled",
+      "anchor": {
+        "selector": ".cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon path:not([data-icon-path]):not([fill=\"none\"]), .cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon, .cds--btn.cds--btn--icon-only.cds--btn--ghost[disabled]:hover .cds--btn__icon"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "ghost.lg.enabled",
+      "axisValues": {
+        "kind": "ghost",
+        "size": "lg"
+      },
+      "token": "icon-primary",
+      "varName": "--cds-icon-primary",
+      "anchor": {
+        "selector": ".cds--btn--ghost:not([disabled]) svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "ghost.lg.disabled",
+      "axisValues": {
+        "kind": "ghost",
+        "size": "lg"
+      },
+      "token": "icon-on-color-disabled",
+      "varName": "--cds-icon-on-color-disabled",
+      "anchor": {
+        "selector": ".cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon path:not([data-icon-path]):not([fill=\"none\"]), .cds--btn--ghost.cds--btn--icon-only[disabled] .cds--btn__icon, .cds--btn.cds--btn--icon-only.cds--btn--ghost[disabled]:hover .cds--btn__icon"
       }
     },
     {
@@ -985,14 +985,14 @@
     }
   ],
   "skips": [
+    "btn.block-size: no var candidate verified against the computed value in any combo",
+    "btn.inline-size: no var candidate verified against the computed value in any combo",
+    "btn.min-block-size: no var candidate verified against the computed value in any combo",
     "icon.inset-block-start: no var candidate verified against the computed value in any combo",
     "icon.inset-inline-end: no var candidate verified against the computed value in any combo",
     "label.background-color: no var candidate verified against the computed value in any combo",
     "label.color: no var candidate verified against the computed value in any combo",
-    "part-0-0.block-size: no var candidate verified against the computed value in any combo",
-    "part-0-0.inline-size: no var candidate verified against the computed value in any combo",
-    "part-0-0.min-block-size: no var candidate verified against the computed value in any combo",
-    "part-1-1.block-size: no var candidate verified against the computed value in any combo",
-    "part-1-1.inline-size: no var candidate verified against the computed value in any combo"
+    "popover-caret.block-size: no var candidate verified against the computed value in any combo",
+    "popover-caret.inline-size: no var candidate verified against the computed value in any combo"
   ]
 }

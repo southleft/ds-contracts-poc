@@ -71,15 +71,15 @@
         "display": "flex"
       },
       "parts": {
-        "part-0": {
-          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+        "inline-notification__details": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__details — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
             "display": "flex"
           },
           "parts": {
             "icon": {
               "element": "svg",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy svg|inline-notification__icon — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "overflow-x": "hidden",
@@ -301,15 +301,15 @@
                 }
               ]
             },
-            "part-0-1": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+            "inline-notification__text-wrapper": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__text-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex"
               },
               "parts": {
                 "label-2": {
                   "text": "Notification title",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__title — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block"
                   },
@@ -338,7 +338,7 @@
                 },
                 "label-3": {
                   "text": "Notification subtitle",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__subtitle — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block"
                   },
@@ -366,20 +366,20 @@
                 }
               },
               "tokens": {
-                "padding-bottom": "{imported.inline-notification.part-0-1.padding-bottom}",
-                "padding-top": "{imported.inline-notification.part-0-1.padding-top}"
+                "padding-bottom": "{imported.inline-notification.inline-notification-text-wrapper.padding-bottom}",
+                "padding-top": "{imported.inline-notification.inline-notification-text-wrapper.padding-top}"
               },
               "tokensByProp": [
                 {
                   "prop": "contrast",
                   "map": {
                     "high": {
-                      "color": "{imported.inline-notification.part-0-1.color.high}",
-                      "row-rule-color": "{imported.inline-notification.part-0-1.row-rule-color.high}"
+                      "color": "{imported.inline-notification.inline-notification-text-wrapper.color.high}",
+                      "row-rule-color": "{imported.inline-notification.inline-notification-text-wrapper.row-rule-color.high}"
                     },
                     "low": {
-                      "color": "{imported.inline-notification.part-0-1.color.low}",
-                      "row-rule-color": "{imported.inline-notification.part-0-1.row-rule-color.low}"
+                      "color": "{imported.inline-notification.inline-notification-text-wrapper.color.low}",
+                      "row-rule-color": "{imported.inline-notification.inline-notification-text-wrapper.row-rule-color.low}"
                     }
                   }
                 }
@@ -387,29 +387,29 @@
             }
           },
           "tokens": {
-            "flex-grow": "{imported.inline-notification.part-0.flex-grow}",
-            "margin-left": "{imported.inline-notification.part-0.margin-left}",
-            "margin-right": "{imported.inline-notification.part-0.margin-right}"
+            "flex-grow": "{imported.inline-notification.inline-notification-details.flex-grow}",
+            "margin-left": "{imported.inline-notification.inline-notification-details.margin-left}",
+            "margin-right": "{imported.inline-notification.inline-notification-details.margin-right}"
           },
           "tokensByProp": [
             {
               "prop": "contrast",
               "map": {
                 "high": {
-                  "color": "{imported.inline-notification.part-0.color.high}",
-                  "row-rule-color": "{imported.inline-notification.part-0.row-rule-color.high}"
+                  "color": "{imported.inline-notification.inline-notification-details.color.high}",
+                  "row-rule-color": "{imported.inline-notification.inline-notification-details.row-rule-color.high}"
                 },
                 "low": {
-                  "color": "{imported.inline-notification.part-0.color.low}",
-                  "row-rule-color": "{imported.inline-notification.part-0.row-rule-color.low}"
+                  "color": "{imported.inline-notification.inline-notification-details.color.low}",
+                  "row-rule-color": "{imported.inline-notification.inline-notification-details.row-rule-color.low}"
                 }
               }
             }
           ]
         },
-        "part-1": {
+        "inline-notification__close-button": {
           "element": "button",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button|inline-notification__close-button — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
             "display": "flex",
             "direction": "column",
@@ -417,7 +417,7 @@
             "justify": "center"
           },
           "icon": {
-            "asset": "inline-notification-part-1",
+            "asset": "inline-notification-inline-notification-close-button",
             "size": 16
           },
           "declared": {
@@ -433,17 +433,17 @@
             "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
           },
           "tokens": {
-            "background-color": "{imported.inline-notification.part-1.background-color}",
+            "background-color": "{imported.inline-notification.inline-notification-close-button.background-color}",
             "border-bottom-width": "{imported.shared.size-0}",
             "border-left-width": "{imported.shared.size-0}",
             "border-right-width": "{imported.shared.size-0}",
             "border-top-width": "{imported.shared.size-0}",
-            "color": "{imported.inline-notification.part-1.color}",
+            "color": "{imported.inline-notification.inline-notification-close-button.color}",
             "max-width": "{imported.shared.size-48}",
             "min-width": "{imported.shared.size-48}",
-            "outline-color": "{imported.inline-notification.part-1.outline-color}",
-            "outline-offset": "{imported.inline-notification.part-1.outline-offset}",
-            "outline-width": "{imported.inline-notification.part-1.outline-width}",
+            "outline-color": "{imported.inline-notification.inline-notification-close-button.outline-color}",
+            "outline-offset": "{imported.inline-notification.inline-notification-close-button.outline-offset}",
+            "outline-width": "{imported.inline-notification.inline-notification-close-button.outline-width}",
             "padding-bottom": "{imported.shared.size-0}",
             "padding-left": "{imported.shared.size-0}",
             "padding-right": "{imported.shared.size-0}",

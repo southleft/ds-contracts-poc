@@ -24,7 +24,7 @@
             "$type": "number"
           }
         },
-        "part-1": {
+        "modal-container": {
           "background-color": {
             "$value": "#f4f4f4",
             "$type": "color"
@@ -82,7 +82,7 @@
             }
           }
         },
-        "part-1-0": {
+        "modal-header": {
           "height": {
             "$value": "63.9844px",
             "$type": "dimension"
@@ -164,7 +164,7 @@
             }
           }
         },
-        "part-1-0-2": {
+        "modal-close-button": {
           "bottom": {
             "$value": "163.969px",
             "$type": "dimension"
@@ -192,13 +192,13 @@
             }
           }
         },
-        "part-1-0-2-0": {
+        "icon-tooltip": {
           "z-index": {
             "$value": "9000",
             "$type": "number"
           }
         },
-        "part-1-0-2-0-0-0": {
+        "btn": {
           "flex-shrink": {
             "$value": "0",
             "$type": "number"
@@ -218,7 +218,7 @@
             "$type": "dimension"
           }
         },
-        "part-1-0-2-0-1-1": {
+        "popover-caret": {
           "width": {
             "$value": "4px",
             "$type": "dimension"
@@ -234,7 +234,7 @@
             "$type": "dimension"
           }
         },
-        "part-1-2": {
+        "btn-set": {
           "height": {
             "$value": "64px",
             "$type": "dimension"
@@ -439,31 +439,31 @@
       "class": "currentColor"
     },
     {
-      "part": "part-1-0-2-0-0-0",
+      "part": "btn",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-0-2-0-0-0",
+      "part": "btn",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-0-2-0-0-0",
+      "part": "btn",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-0-2-0-0-0",
+      "part": "btn",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-1-0-2-0-0-0",
+      "part": "btn",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -705,17 +705,17 @@
         "value": "center"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "field": "align",
         "value": "center"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "field": "justify",
         "value": "center"
       },
       {
-        "part": "part-1-2",
+        "part": "btn-set",
         "field": "justify",
         "value": "end"
       },
@@ -781,132 +781,132 @@
         "value": "nowrap"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "channel": "border-bottom-style",
         "value": "solid"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "channel": "border-left-style",
         "value": "solid"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "channel": "border-right-style",
         "value": "solid"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "channel": "border-top-style",
         "value": "solid"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "channel": "max-height",
         "value": "90%"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "channel": "outline-style",
         "value": "solid"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "channel": "transform",
         "value": "matrix(1, 0, 0, 1, 0, 0)"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "channel": "transition-duration",
         "value": "0.24s"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "channel": "transition-property",
         "value": "transform"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0, 0, 0.3, 1)"
       },
       {
-        "part": "part-1-0",
+        "part": "modal-header",
         "channel": "overflow-x",
         "value": "auto"
       },
       {
-        "part": "part-1-0",
+        "part": "modal-header",
         "channel": "overflow-y",
         "value": "auto"
       },
       {
-        "part": "part-1-0-2-0",
+        "part": "icon-tooltip",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "border-bottom-style",
         "value": "solid"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "border-left-style",
         "value": "solid"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "border-right-style",
         "value": "solid"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "border-top-style",
         "value": "solid"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "text-align",
         "value": "start"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "transition-duration",
         "value": "0.11s"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "transition-property",
         "value": "background-color"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.2, 0, 0.38, 0.9)"
       },
       {
-        "part": "part-1-0-2-0-1",
+        "part": "popover",
         "channel": "pointer-events",
         "value": "none"
       },
       {
-        "part": "part-1-0-2-0-1-1",
+        "part": "popover-caret",
         "channel": "pointer-events",
         "value": "none"
       },
@@ -1088,21 +1088,21 @@
       "distinctValues": 1
     },
     {
-      "part": "part-1",
+      "part": "modal-container",
       "channel": "display",
       "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
       "sample": "grid",
       "distinctValues": 1
     },
     {
-      "part": "part-1",
+      "part": "modal-container",
       "channel": "grid-template-rows",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "71.9844px 75.9844px 0px 64px",
       "distinctValues": 1
     },
     {
-      "part": "part-1-0",
+      "part": "modal-header",
       "channel": "grid-column-end",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "-1",
@@ -1123,7 +1123,7 @@
       "distinctValues": 1
     },
     {
-      "part": "part-1-0-2-0-0-0",
+      "part": "btn",
       "channel": "vertical-align",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "top",
@@ -1165,21 +1165,21 @@
       "distinctValues": 1
     },
     {
-      "part": "part-1-0-2-0-1-1",
+      "part": "popover-caret",
       "channel": "right",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "100%",
       "distinctValues": 1
     },
     {
-      "part": "part-1-0-2-0-1-1",
+      "part": "popover-caret",
       "channel": "top",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "50%",
       "distinctValues": 1
     },
     {
-      "part": "part-1-0-2-0-1-1",
+      "part": "popover-caret",
       "channel": "will-change",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "transform",
@@ -1235,21 +1235,21 @@
       "distinctValues": 1
     },
     {
-      "part": "part-1-2",
+      "part": "btn-set",
       "channel": "grid-column-end",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "-1",
       "distinctValues": 1
     },
     {
-      "part": "part-1-2",
+      "part": "btn-set",
       "channel": "grid-row-end",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "-1",
       "distinctValues": 1
     },
     {
-      "part": "part-1-2",
+      "part": "btn-set",
       "channel": "grid-row-start",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "-1",
@@ -1337,7 +1337,7 @@
       {
         "combo": "unset",
         "interaction": "default",
-        "part": "part-1-0-2-0-1-1",
+        "part": "popover-caret",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1346,7 +1346,7 @@
       {
         "combo": "unset",
         "interaction": "default",
-        "part": "part-1-0-2-0-1-1",
+        "part": "popover-caret",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1364,7 +1364,7 @@
       {
         "combo": "xs",
         "interaction": "default",
-        "part": "part-1-0-2-0-1-1",
+        "part": "popover-caret",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1373,7 +1373,7 @@
       {
         "combo": "xs",
         "interaction": "default",
-        "part": "part-1-0-2-0-1-1",
+        "part": "popover-caret",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1391,7 +1391,7 @@
       {
         "combo": "sm",
         "interaction": "default",
-        "part": "part-1-0-2-0-1-1",
+        "part": "popover-caret",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1400,7 +1400,7 @@
       {
         "combo": "sm",
         "interaction": "default",
-        "part": "part-1-0-2-0-1-1",
+        "part": "popover-caret",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1418,7 +1418,7 @@
       {
         "combo": "md",
         "interaction": "default",
-        "part": "part-1-0-2-0-1-1",
+        "part": "popover-caret",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1427,7 +1427,7 @@
       {
         "combo": "md",
         "interaction": "default",
-        "part": "part-1-0-2-0-1-1",
+        "part": "popover-caret",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1453,18 +1453,18 @@
     "absolute-geometry-excluded: label-7 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: label — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0-2-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0-2-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0-2-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: modal-container — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: modal-header — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: modal-close-button — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-tooltip — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tooltip-trigger__wrapper — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: btn — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: icon — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-1-0-2-0-0-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0-2-0-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: popover — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: label-4 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0-2-0-1-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: popover-caret — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: btn-set — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: label-8 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "control-fallback: no control for <h2> — span control used (part label-2)",
@@ -1478,48 +1478,48 @@
     "text-part-typography-carried: label-6 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "text-part-typography-carried: label-7 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "text-part-typography-carried: label-8 — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "inheritance-check-rejected: label-2.caret-color — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.color — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.font-size — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.letter-spacing — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.line-height — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.font-size — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.line-height — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-4.caret-color — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-4.color — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-4.font-size — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-4.font-weight — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-4.letter-spacing — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-4.line-height — values track ancestor \"part-1-0-2-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-5.font-size — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-5.font-weight — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-5.letter-spacing — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-5.line-height — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-6.caret-color — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-6.color — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-6.font-size — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-6.font-weight — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-6.letter-spacing — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-6.line-height — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-7.caret-color — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-7.color — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-7.font-size — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-7.font-weight — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-7.letter-spacing — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-7.line-height — values track ancestor \"part-1-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: btn.caret-color — values track ancestor \"tooltip-trigger__wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: btn.color — values track ancestor \"tooltip-trigger__wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: btn.font-size — values track ancestor \"tooltip-trigger__wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: btn.letter-spacing — values track ancestor \"tooltip-trigger__wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: btn.line-height — values track ancestor \"tooltip-trigger__wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.caret-color — values track ancestor \"modal-header\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.color — values track ancestor \"modal-header\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-size — values track ancestor \"modal-header\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"modal-header\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.letter-spacing — values track ancestor \"modal-header\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.line-height — values track ancestor \"modal-header\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-size — values track ancestor \"modal-header\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"modal-header\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.line-height — values track ancestor \"modal-header\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.caret-color — values track ancestor \"popover\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.color — values track ancestor \"popover\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.font-size — values track ancestor \"popover\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.font-weight — values track ancestor \"popover\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.letter-spacing — values track ancestor \"popover\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-4.line-height — values track ancestor \"popover\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.font-size — values track ancestor \"modal-container\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.font-weight — values track ancestor \"modal-container\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.letter-spacing — values track ancestor \"modal-container\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-5.line-height — values track ancestor \"modal-container\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.caret-color — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.color — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.font-size — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.font-weight — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.letter-spacing — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-6.line-height — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.caret-color — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.color — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.font-size — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.font-weight — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.letter-spacing — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-7.line-height — values track ancestor \"btn-set\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-8.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-8.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-8.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-0-2-0-0-0.caret-color — values track ancestor \"part-1-0-2-0-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-0-2-0-0-0.color — values track ancestor \"part-1-0-2-0-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-0-2-0-0-0.font-size — values track ancestor \"part-1-0-2-0-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-0-2-0-0-0.letter-spacing — values track ancestor \"part-1-0-2-0-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-1-0-2-0-0-0.line-height — values track ancestor \"part-1-0-2-0-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+    "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1532,11 +1532,11 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1",
+        "part": "modal-container",
         "join": "computed-only"
       },
       {
-        "part": "part-1-0",
+        "part": "modal-header",
         "join": "computed-only"
       },
       {
@@ -1548,19 +1548,19 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1-0-2",
+        "part": "modal-close-button",
         "join": "computed-only"
       },
       {
-        "part": "part-1-0-2-0",
+        "part": "icon-tooltip",
         "join": "computed-only"
       },
       {
-        "part": "part-1-0-2-0-0",
+        "part": "tooltip-trigger__wrapper",
         "join": "computed-only"
       },
       {
-        "part": "part-1-0-2-0-0-0",
+        "part": "btn",
         "join": "computed-only"
       },
       {
@@ -1572,7 +1572,7 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1-0-2-0-1",
+        "part": "popover",
         "join": "computed-only"
       },
       {
@@ -1580,7 +1580,7 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1-0-2-0-1-1",
+        "part": "popover-caret",
         "join": "computed-only"
       },
       {
@@ -1588,7 +1588,7 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1-2",
+        "part": "btn-set",
         "join": "computed-only"
       },
       {
@@ -1611,36 +1611,36 @@
     "partsCarried": [
       "root",
       "label",
-      "part-1",
-      "part-1-0",
+      "modal-container",
+      "modal-header",
       "label-2",
       "label-3",
-      "part-1-0-2",
-      "part-1-0-2-0",
-      "part-1-0-2-0-0",
-      "part-1-0-2-0-0-0",
-      "part-1-0-2-0-1",
+      "modal-close-button",
+      "icon-tooltip",
+      "tooltip-trigger__wrapper",
+      "btn",
+      "popover",
       "label-4",
-      "part-1-0-2-0-1-1",
+      "popover-caret",
       "label-5",
-      "part-1-2",
+      "btn-set",
       "label-6",
       "label-7",
       "label-8"
     ],
     "svgAssets": [
-      "modal-part-1-0-2-0-0-0"
+      "modal-btn"
     ],
     "receipts": [
-      "svg-viewbox-bumped: Modal.part-1-0-2-0-0-0@unset — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: Modal.part-1-0-2-0-0-0@xs — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: Modal.part-1-0-2-0-0-0@sm — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: Modal.part-1-0-2-0-0-0@md — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: Modal.part-1-0-2-0-0-0@lg — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Modal.btn@unset — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Modal.btn@xs — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Modal.btn@sm — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Modal.btn@md — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: Modal.btn@lg — computed size 20 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
       "root-display-carried: flex",
       "literal-text-carried: label = \"Focus sentinel\" (no text prop sample matches — the mounted value is carried verbatim)",
       "sr-only-carried-as-hidden: label is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
-      "display-outside-vocabulary: part-1 = \"grid\" — carried by neither layout nor the declared registry (named residue)",
+      "display-outside-vocabulary: modal-container = \"grid\" — carried by neither layout nor the declared registry (named residue)",
       "literal-text-carried: label-2 = \"Label\" (no text prop sample matches — the mounted value is carried verbatim)",
       "literal-text-carried: label-3 = \"Modal heading\" (no text prop sample matches — the mounted value is carried verbatim)",
       "literal-text-carried: label-4 = \"Close\" (no text prop sample matches — the mounted value is carried verbatim)",
@@ -1651,15 +1651,15 @@
       "sr-only-carried-as-hidden: label-8 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
     ],
     "refusals": [
-      "pseudo-decor-unconditional-placement: part-1-0-2-0-1-1::after is drawn without an enum-axis gate — stylesWhen placement (the v9 shape grammar) has no condition to ride; decor NOT promoted (named refusal, v1 bounded)"
+      "pseudo-decor-unconditional-placement: popover-caret::after is drawn without an enum-axis gate — stylesWhen placement (the v9 shape grammar) has no condition to ride; decor NOT promoted (named refusal, v1 bounded)"
     ]
   },
   "enrichmentNotes": [
     "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: part-1-0-2-0-0-0.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: part-1-0-2-0-0-0.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: part-1-2.layout.justify = end (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: btn.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: btn.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: btn-set.layout.justify = end (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: label-6.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: label-7.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1670,32 +1670,32 @@
     "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.max-height = 90% (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-1.transition-duration = 0.24s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.transition-timing-function = cubic-bezier(0, 0, 0.3, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0-0-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0-0-0.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0-0-0.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0-0-0.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0-0-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0-0-0.text-align = start (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: part-1-0-2-0-0-0.transition-duration = 0.11s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0-0-0.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0-0-0.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0-1.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-2-0-1-1.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-container.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-container.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-container.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-container.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-container.max-height = 90% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-container.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-container.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-container.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: modal-container.transition-duration = 0.24s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-container.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-container.transition-timing-function = cubic-bezier(0, 0, 0.3, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-header.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: modal-header.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-tooltip.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: btn.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: btn.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: btn.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: btn.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: btn.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: btn.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: btn.text-align = start (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: btn.transition-duration = 0.11s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: btn.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: btn.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: popover.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: popover-caret.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-5.overflow-x = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-5.overflow-y = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-5.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",

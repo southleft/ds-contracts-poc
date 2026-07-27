@@ -2231,7 +2231,7 @@
           "$type": "dimension"
         }
       },
-      "part-0": {
+      "checkbox": {
         "font-size": {
           "$value": "13.3333px",
           "$type": "dimension"
@@ -2257,7 +2257,7 @@
           "$type": "dimension"
         }
       },
-      "part-1": {
+      "checkbox-label": {
         "width": {
           "$value": "92.9219px",
           "$type": "dimension"
@@ -2273,7 +2273,7 @@
           "$type": "dimension"
         }
       },
-      "part-2": {
+      "checkbox-validation-msg": {
         "margin-top": {
           "$value": "4px",
           "$type": "dimension"
@@ -2297,14 +2297,14 @@
           }
         }
       },
-      "part-0": {
+      "toggle-button": {
         "bottom": {
           "untoggled": {
-            "$value": "969px",
+            "$value": "-21655px",
             "$type": "dimension"
           },
           "toggled": {
-            "$value": "745px",
+            "$value": "-21879px",
             "$type": "dimension"
           }
         },
@@ -2318,11 +2318,11 @@
         },
         "top": {
           "untoggled": {
-            "$value": "32px",
+            "$value": "22656px",
             "$type": "dimension"
           },
           "toggled": {
-            "$value": "256px",
+            "$value": "22880px",
             "$type": "dimension"
           }
         },
@@ -2336,21 +2336,21 @@
         },
         "bottom-state-disabled": {
           "untoggled": {
-            "$value": "857px",
+            "$value": "-21767px",
             "$type": "dimension"
           },
           "toggled": {
-            "$value": "633px",
+            "$value": "-21991px",
             "$type": "dimension"
           }
         },
         "top-state-disabled": {
           "untoggled": {
-            "$value": "144px",
+            "$value": "22768px",
             "$type": "dimension"
           },
           "toggled": {
-            "$value": "368px",
+            "$value": "22992px",
             "$type": "dimension"
           }
         }
@@ -2373,7 +2373,7 @@
           "$type": "color"
         }
       },
-      "part-1-1": {
+      "toggle-appearance": {
         "column-gap": {
           "$value": "8px",
           "$type": "dimension"
@@ -2389,7 +2389,7 @@
           }
         }
       },
-      "part-1-1-0": {
+      "toggle-switch": {
         "background-color": {
           "untoggled": {
             "$value": "{toggle-off}",
@@ -2457,7 +2457,7 @@
           }
         }
       },
-      "part-0": {
+      "text-input-label-wrapper": {
         "height": {
           "$value": "24px",
           "$type": "dimension"
@@ -2489,7 +2489,7 @@
           "$type": "color"
         }
       },
-      "part-1": {
+      "text-input-field-outer-wrapper": {
         "flex-grow": {
           "$value": "1",
           "$type": "number"
@@ -2517,7 +2517,7 @@
           }
         }
       },
-      "part-1-0": {
+      "text-input-field-wrapper": {
         "height": {
           "unset": {
             "$value": "40px",
@@ -2541,7 +2541,7 @@
           }
         }
       },
-      "part-1-0-0": {
+      "text-input": {
         "background-color": {
           "$value": "{field}",
           "$type": "color"
@@ -2597,7 +2597,7 @@
           "$type": "color"
         }
       },
-      "part-1-0-1": {
+      "text-input-counter-alert": {
         "bottom": {
           "unset": {
             "$value": "41px",
@@ -2785,7 +2785,7 @@
           }
         }
       },
-      "part-0": {
+      "inline-notification-details": {
         "color": {
           "high": {
             "$value": "#ffffff",
@@ -3091,7 +3091,7 @@
           }
         }
       },
-      "part-0-1": {
+      "inline-notification-text-wrapper": {
         "color": {
           "high": {
             "$value": "#ffffff",
@@ -3193,7 +3193,7 @@
           }
         }
       },
-      "part-1": {
+      "inline-notification-close-button": {
         "background-color": {
           "$value": "#00000000",
           "$type": "color"
@@ -3233,7 +3233,7 @@
           "$type": "dimension"
         }
       },
-      "part-0": {
+      "accordion-item": {
         "border-bottom-color": {
           "$value": "#e0e0e0",
           "$type": "color"
@@ -3251,7 +3251,7 @@
           "$type": "dimension"
         }
       },
-      "part-0-0": {
+      "accordion-heading": {
         "background-color": {
           "$value": "#00000000",
           "$type": "color"
@@ -3353,7 +3353,7 @@
           "$type": "number"
         }
       },
-      "part-0-1": {
+      "accordion-wrapper": {
         "padding-bottom": {
           "$value": "24px",
           "$type": "dimension"
@@ -3407,7 +3407,7 @@
           "$type": "dimension"
         }
       },
-      "part-1-0": {
+      "tabs-nav-item": {
         "border-bottom-color": {
           "$value": "#0f62fe",
           "$type": "color"
@@ -3429,13 +3429,13 @@
           "$type": "color"
         }
       },
-      "part-1-0-0": {
+      "tabs-nav-item-label-wrapper": {
         "width": {
           "$value": "62.3125px",
           "$type": "dimension"
         }
       },
-      "part-1-1-0": {
+      "visually-hidden": {
         "left": {
           "$value": "93.3125px",
           "$type": "dimension"
@@ -3445,7 +3445,7 @@
           "$type": "dimension"
         }
       },
-      "part-1-2": {
+      "tabs-nav-item-2": {
         "border-bottom-color": {
           "$value": "#e0e0e0",
           "$type": "color"
@@ -3467,7 +3467,7 @@
           "$type": "color"
         }
       },
-      "part-1-2-0": {
+      "tabs-nav-item-label-wrapper-2": {
         "width": {
           "$value": "48px",
           "$type": "dimension"
@@ -3479,7 +3479,7 @@
           "$type": "number"
         }
       },
-      "part-1-3-0": {
+      "visually-hidden-2": {
         "left": {
           "$value": "174.312px",
           "$type": "dimension"
@@ -3489,7 +3489,7 @@
           "$type": "dimension"
         }
       },
-      "part-1-4": {
+      "tabs-nav-item-3": {
         "border-bottom-color": {
           "$value": "#e0e0e0",
           "$type": "color"
@@ -3499,7 +3499,7 @@
           "$type": "dimension"
         }
       },
-      "part-1-4-0": {
+      "tabs-nav-item-label-wrapper-3": {
         "width": {
           "$value": "52.4688px",
           "$type": "dimension"
@@ -3511,7 +3511,7 @@
           "$type": "number"
         }
       },
-      "part-1-5-0": {
+      "visually-hidden-3": {
         "left": {
           "$value": "259.781px",
           "$type": "dimension"
@@ -3547,7 +3547,7 @@
           "$type": "number"
         }
       },
-      "part-1": {
+      "modal-container": {
         "background-color": {
           "$value": "#f4f4f4",
           "$type": "color"
@@ -3605,7 +3605,7 @@
           }
         }
       },
-      "part-1-0": {
+      "modal-header": {
         "height": {
           "$value": "63.9844px",
           "$type": "dimension"
@@ -3687,7 +3687,7 @@
           }
         }
       },
-      "part-1-0-2": {
+      "modal-close-button": {
         "bottom": {
           "$value": "163.969px",
           "$type": "dimension"
@@ -3715,13 +3715,13 @@
           }
         }
       },
-      "part-1-0-2-0": {
+      "icon-tooltip": {
         "z-index": {
           "$value": "9000",
           "$type": "number"
         }
       },
-      "part-1-0-2-0-0-0": {
+      "btn": {
         "flex-shrink": {
           "$value": "0",
           "$type": "number"
@@ -3741,7 +3741,7 @@
           "$type": "dimension"
         }
       },
-      "part-1-0-2-0-1-1": {
+      "popover-caret": {
         "width": {
           "$value": "4px",
           "$type": "dimension"
@@ -3757,7 +3757,7 @@
           "$type": "dimension"
         }
       },
-      "part-1-2": {
+      "btn-set": {
         "height": {
           "$value": "64px",
           "$type": "dimension"
@@ -3873,7 +3873,7 @@
           }
         }
       },
-      "part-0": {
+      "tooltip-trigger-wrapper": {
         "height": {
           "unset": {
             "$value": "48px",
@@ -3919,7 +3919,7 @@
           }
         }
       },
-      "part-0-0": {
+      "btn": {
         "background-color": {
           "primary": {
             "$value": "{button-primary}",
@@ -4529,7 +4529,7 @@
           }
         }
       },
-      "part-1": {
+      "popover": {
         "height": {
           "unset": {
             "$value": "48px",
@@ -4815,7 +4815,7 @@
           }
         }
       },
-      "part-1-1": {
+      "popover-caret": {
         "height": {
           "$value": "4px",
           "$type": "dimension"

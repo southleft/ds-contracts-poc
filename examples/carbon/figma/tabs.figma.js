@@ -62,14 +62,14 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "tabs__nav-item",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "fill": "imported/shared/color-00000000",
-                  "stroke": "imported/tabs/part-1-0/border-bottom-color",
+                  "stroke": "imported/tabs/tabs-nav-item/border-bottom-color",
                   "bindings": {
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
@@ -85,12 +85,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 94.3125,
-                    "varName": "imported/tabs/part-1-0/width"
+                    "varName": "imported/tabs/tabs-nav-item/width"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-0-0",
+                      "name": "tabs__nav-item-label-wrapper",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -106,7 +106,7 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 62.3125,
-                        "varName": "imported/tabs/part-1-0-0/width"
+                        "varName": "imported/tabs/tabs-nav-item-label-wrapper/width"
                       },
                       "children": [
                         {
@@ -116,7 +116,7 @@ const COMPONENTS = [
                           "characters": "Overview",
                           "fontSize": 14,
                           "fontStyle": "Semi Bold",
-                          "textFill": "imported/tabs/part-1-0/color",
+                          "textFill": "imported/tabs/tabs-nav-item/color",
                           "lineHeight": 18.0001,
                           "letterSpacing": 0.16,
                           "textAlignH": "LEFT",
@@ -129,14 +129,14 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-2",
+                  "name": "tabs__nav-item-2",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "fill": "imported/shared/color-00000000",
-                  "stroke": "imported/tabs/part-1-2/border-bottom-color",
+                  "stroke": "imported/tabs/tabs-nav-item-2/border-bottom-color",
                   "bindings": {
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
@@ -152,12 +152,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 80,
-                    "varName": "imported/tabs/part-1-2/width"
+                    "varName": "imported/tabs/tabs-nav-item-2/width"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-2-0",
+                      "name": "tabs__nav-item-label-wrapper-2",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -173,7 +173,7 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 48,
-                        "varName": "imported/tabs/part-1-2-0/width"
+                        "varName": "imported/tabs/tabs-nav-item-label-wrapper-2/width"
                       },
                       "children": [
                         {
@@ -196,14 +196,14 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-4",
+                  "name": "tabs__nav-item-3",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "fill": "imported/shared/color-00000000",
-                  "stroke": "imported/tabs/part-1-4/border-bottom-color",
+                  "stroke": "imported/tabs/tabs-nav-item-3/border-bottom-color",
                   "bindings": {
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
@@ -219,12 +219,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 84.4688,
-                    "varName": "imported/tabs/part-1-4/width"
+                    "varName": "imported/tabs/tabs-nav-item-3/width"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-4-0",
+                      "name": "tabs__nav-item-label-wrapper-3",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -240,7 +240,7 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 52.4688,
-                        "varName": "imported/tabs/part-1-4-0/width"
+                        "varName": "imported/tabs/tabs-nav-item-label-wrapper-3/width"
                       },
                       "children": [
                         {
@@ -313,14 +313,14 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "tabs__nav-item",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "fill": "imported/shared/color-00000000",
-                  "stroke": "imported/tabs/part-1-0/border-bottom-color",
+                  "stroke": "imported/tabs/tabs-nav-item/border-bottom-color",
                   "bindings": {
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
@@ -336,12 +336,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 94.3125,
-                    "varName": "imported/tabs/part-1-0/width"
+                    "varName": "imported/tabs/tabs-nav-item/width"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-0-0",
+                      "name": "tabs__nav-item-label-wrapper",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -357,7 +357,7 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 62.3125,
-                        "varName": "imported/tabs/part-1-0-0/width"
+                        "varName": "imported/tabs/tabs-nav-item-label-wrapper/width"
                       },
                       "children": [
                         {
@@ -367,7 +367,7 @@ const COMPONENTS = [
                           "characters": "Overview",
                           "fontSize": 14,
                           "fontStyle": "Semi Bold",
-                          "textFill": "imported/tabs/part-1-0/color",
+                          "textFill": "imported/tabs/tabs-nav-item/color",
                           "lineHeight": 18.0001,
                           "letterSpacing": 0.16,
                           "textAlignH": "LEFT",
@@ -380,14 +380,14 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-2",
+                  "name": "tabs__nav-item-2",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "fill": "imported/shared/color-00000000",
-                  "stroke": "imported/tabs/part-1-2/border-bottom-color",
+                  "stroke": "imported/tabs/tabs-nav-item-2/border-bottom-color",
                   "bindings": {
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
@@ -403,12 +403,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 80,
-                    "varName": "imported/tabs/part-1-2/width"
+                    "varName": "imported/tabs/tabs-nav-item-2/width"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-2-0",
+                      "name": "tabs__nav-item-label-wrapper-2",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -424,7 +424,7 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 48,
-                        "varName": "imported/tabs/part-1-2-0/width"
+                        "varName": "imported/tabs/tabs-nav-item-label-wrapper-2/width"
                       },
                       "children": [
                         {
@@ -447,14 +447,14 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-4",
+                  "name": "tabs__nav-item-3",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "fill": "imported/shared/color-00000000",
-                  "stroke": "imported/tabs/part-1-4/border-bottom-color",
+                  "stroke": "imported/tabs/tabs-nav-item-3/border-bottom-color",
                   "bindings": {
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
@@ -470,12 +470,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 84.4688,
-                    "varName": "imported/tabs/part-1-4/width"
+                    "varName": "imported/tabs/tabs-nav-item-3/width"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-4-0",
+                      "name": "tabs__nav-item-label-wrapper-3",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -491,7 +491,7 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 52.4688,
-                        "varName": "imported/tabs/part-1-4-0/width"
+                        "varName": "imported/tabs/tabs-nav-item-label-wrapper-3/width"
                       },
                       "children": [
                         {
@@ -562,14 +562,14 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "tabs__nav-item",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "fill": "imported/shared/color-00000000",
-                  "stroke": "imported/tabs/part-1-0/border-bottom-color",
+                  "stroke": "imported/tabs/tabs-nav-item/border-bottom-color",
                   "bindings": {
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
@@ -585,12 +585,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 94.3125,
-                    "varName": "imported/tabs/part-1-0/width"
+                    "varName": "imported/tabs/tabs-nav-item/width"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-0-0",
+                      "name": "tabs__nav-item-label-wrapper",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -606,7 +606,7 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 62.3125,
-                        "varName": "imported/tabs/part-1-0-0/width"
+                        "varName": "imported/tabs/tabs-nav-item-label-wrapper/width"
                       },
                       "children": [
                         {
@@ -616,7 +616,7 @@ const COMPONENTS = [
                           "characters": "Overview",
                           "fontSize": 14,
                           "fontStyle": "Semi Bold",
-                          "textFill": "imported/tabs/part-1-0/color",
+                          "textFill": "imported/tabs/tabs-nav-item/color",
                           "lineHeight": 18.0001,
                           "letterSpacing": 0.16,
                           "textAlignH": "LEFT",
@@ -629,14 +629,14 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-2",
+                  "name": "tabs__nav-item-2",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "fill": "imported/shared/color-00000000",
-                  "stroke": "imported/tabs/part-1-2/border-bottom-color",
+                  "stroke": "imported/tabs/tabs-nav-item-2/border-bottom-color",
                   "bindings": {
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
@@ -652,12 +652,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 80,
-                    "varName": "imported/tabs/part-1-2/width"
+                    "varName": "imported/tabs/tabs-nav-item-2/width"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-2-0",
+                      "name": "tabs__nav-item-label-wrapper-2",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -673,7 +673,7 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 48,
-                        "varName": "imported/tabs/part-1-2-0/width"
+                        "varName": "imported/tabs/tabs-nav-item-label-wrapper-2/width"
                       },
                       "children": [
                         {
@@ -696,14 +696,14 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-4",
+                  "name": "tabs__nav-item-3",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "fill": "imported/shared/color-00000000",
-                  "stroke": "imported/tabs/part-1-4/border-bottom-color",
+                  "stroke": "imported/tabs/tabs-nav-item-3/border-bottom-color",
                   "bindings": {
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
@@ -719,12 +719,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 84.4688,
-                    "varName": "imported/tabs/part-1-4/width"
+                    "varName": "imported/tabs/tabs-nav-item-3/width"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-4-0",
+                      "name": "tabs__nav-item-label-wrapper-3",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -740,7 +740,7 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 52.4688,
-                        "varName": "imported/tabs/part-1-4-0/width"
+                        "varName": "imported/tabs/tabs-nav-item-label-wrapper-3/width"
                       },
                       "children": [
                         {

@@ -40,35 +40,35 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "accordion__item",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "stroke": "imported/accordion/part-0/border-top-color",
+              "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
-                "strokeBottomWeight": "imported/accordion/part-0/border-bottom-width",
-                "strokeTopWeight": "imported/accordion/part-0/border-top-width",
+                "strokeBottomWeight": "imported/accordion/accordion-item/border-bottom-width",
+                "strokeTopWeight": "imported/accordion/accordion-item/border-top-width",
                 "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-0-0",
+                  "name": "accordion__heading",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "CENTER"
                   },
-                  "fill": "imported/accordion/part-0-0/background-color",
+                  "fill": "imported/accordion/accordion-heading/background-color",
                   "bindings": {
                     "strokeBottomWeight": "imported/shared/size-0",
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
                     "strokeTopWeight": "imported/shared/size-0",
-                    "minHeight": "imported/accordion/part-0-0/min-height/sm",
+                    "minHeight": "imported/accordion/accordion-heading/min-height/sm",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/shared/size-0",
                     "paddingLeft": "imported/shared/size-0",
@@ -115,7 +115,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "accordion__wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -124,8 +124,8 @@ const COMPONENTS = [
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
-                    "paddingBottom": "imported/accordion/part-0-1/padding-bottom",
-                    "paddingTop": "imported/accordion/part-0-1/padding-top"
+                    "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
                   },
                   "children": [
                     {
@@ -188,35 +188,35 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "accordion__item",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "stroke": "imported/accordion/part-0/border-top-color",
+              "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
-                "strokeBottomWeight": "imported/accordion/part-0/border-bottom-width",
-                "strokeTopWeight": "imported/accordion/part-0/border-top-width",
+                "strokeBottomWeight": "imported/accordion/accordion-item/border-bottom-width",
+                "strokeTopWeight": "imported/accordion/accordion-item/border-top-width",
                 "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-0-0",
+                  "name": "accordion__heading",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "CENTER"
                   },
-                  "fill": "imported/accordion/part-0-0/background-color",
+                  "fill": "imported/accordion/accordion-heading/background-color",
                   "bindings": {
                     "strokeBottomWeight": "imported/shared/size-0",
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
                     "strokeTopWeight": "imported/shared/size-0",
-                    "minHeight": "imported/accordion/part-0-0/min-height/md",
+                    "minHeight": "imported/accordion/accordion-heading/min-height/md",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/shared/size-0",
                     "paddingLeft": "imported/shared/size-0",
@@ -263,7 +263,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "accordion__wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -272,8 +272,8 @@ const COMPONENTS = [
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
-                    "paddingBottom": "imported/accordion/part-0-1/padding-bottom",
-                    "paddingTop": "imported/accordion/part-0-1/padding-top"
+                    "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
                   },
                   "children": [
                     {
@@ -336,35 +336,35 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "accordion__item",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "stroke": "imported/accordion/part-0/border-top-color",
+              "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
-                "strokeBottomWeight": "imported/accordion/part-0/border-bottom-width",
-                "strokeTopWeight": "imported/accordion/part-0/border-top-width",
+                "strokeBottomWeight": "imported/accordion/accordion-item/border-bottom-width",
+                "strokeTopWeight": "imported/accordion/accordion-item/border-top-width",
                 "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-0-0",
+                  "name": "accordion__heading",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "CENTER"
                   },
-                  "fill": "imported/accordion/part-0-0/background-color",
+                  "fill": "imported/accordion/accordion-heading/background-color",
                   "bindings": {
                     "strokeBottomWeight": "imported/shared/size-0",
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
                     "strokeTopWeight": "imported/shared/size-0",
-                    "minHeight": "imported/accordion/part-0-0/min-height/lg",
+                    "minHeight": "imported/accordion/accordion-heading/min-height/lg",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/shared/size-0",
                     "paddingLeft": "imported/shared/size-0",
@@ -411,7 +411,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "accordion__wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -420,8 +420,8 @@ const COMPONENTS = [
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
-                    "paddingBottom": "imported/accordion/part-0-1/padding-bottom",
-                    "paddingTop": "imported/accordion/part-0-1/padding-top"
+                    "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
                   },
                   "children": [
                     {
@@ -484,35 +484,35 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "accordion__item",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "stroke": "imported/accordion/part-0/border-top-color",
+              "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
-                "strokeBottomWeight": "imported/accordion/part-0/border-bottom-width",
-                "strokeTopWeight": "imported/accordion/part-0/border-top-width",
+                "strokeBottomWeight": "imported/accordion/accordion-item/border-bottom-width",
+                "strokeTopWeight": "imported/accordion/accordion-item/border-top-width",
                 "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-0-0",
+                  "name": "accordion__heading",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "CENTER"
                   },
-                  "fill": "imported/accordion/part-0-0/background-color",
+                  "fill": "imported/accordion/accordion-heading/background-color",
                   "bindings": {
                     "strokeBottomWeight": "imported/shared/size-0",
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
                     "strokeTopWeight": "imported/shared/size-0",
-                    "minHeight": "imported/accordion/part-0-0/min-height/sm",
+                    "minHeight": "imported/accordion/accordion-heading/min-height/sm",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/shared/size-0",
                     "paddingLeft": "imported/shared/size-0",
@@ -559,7 +559,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "accordion__wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -568,8 +568,8 @@ const COMPONENTS = [
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
-                    "paddingBottom": "imported/accordion/part-0-1/padding-bottom",
-                    "paddingTop": "imported/accordion/part-0-1/padding-top"
+                    "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
                   },
                   "children": [
                     {
@@ -632,35 +632,35 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "accordion__item",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "stroke": "imported/accordion/part-0/border-top-color",
+              "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
-                "strokeBottomWeight": "imported/accordion/part-0/border-bottom-width",
-                "strokeTopWeight": "imported/accordion/part-0/border-top-width",
+                "strokeBottomWeight": "imported/accordion/accordion-item/border-bottom-width",
+                "strokeTopWeight": "imported/accordion/accordion-item/border-top-width",
                 "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-0-0",
+                  "name": "accordion__heading",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "CENTER"
                   },
-                  "fill": "imported/accordion/part-0-0/background-color",
+                  "fill": "imported/accordion/accordion-heading/background-color",
                   "bindings": {
                     "strokeBottomWeight": "imported/shared/size-0",
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
                     "strokeTopWeight": "imported/shared/size-0",
-                    "minHeight": "imported/accordion/part-0-0/min-height/md",
+                    "minHeight": "imported/accordion/accordion-heading/min-height/md",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/shared/size-0",
                     "paddingLeft": "imported/shared/size-0",
@@ -707,7 +707,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "accordion__wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -716,8 +716,8 @@ const COMPONENTS = [
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
-                    "paddingBottom": "imported/accordion/part-0-1/padding-bottom",
-                    "paddingTop": "imported/accordion/part-0-1/padding-top"
+                    "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
                   },
                   "children": [
                     {
@@ -780,35 +780,35 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "accordion__item",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "stroke": "imported/accordion/part-0/border-top-color",
+              "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
-                "strokeBottomWeight": "imported/accordion/part-0/border-bottom-width",
-                "strokeTopWeight": "imported/accordion/part-0/border-top-width",
+                "strokeBottomWeight": "imported/accordion/accordion-item/border-bottom-width",
+                "strokeTopWeight": "imported/accordion/accordion-item/border-top-width",
                 "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-0-0",
+                  "name": "accordion__heading",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "CENTER"
                   },
-                  "fill": "imported/accordion/part-0-0/background-color",
+                  "fill": "imported/accordion/accordion-heading/background-color",
                   "bindings": {
                     "strokeBottomWeight": "imported/shared/size-0",
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
                     "strokeTopWeight": "imported/shared/size-0",
-                    "minHeight": "imported/accordion/part-0-0/min-height/lg",
+                    "minHeight": "imported/accordion/accordion-heading/min-height/lg",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/shared/size-0",
                     "paddingLeft": "imported/shared/size-0",
@@ -855,7 +855,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "accordion__wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -864,8 +864,8 @@ const COMPONENTS = [
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
-                    "paddingBottom": "imported/accordion/part-0-1/padding-bottom",
-                    "paddingTop": "imported/accordion/part-0-1/padding-top"
+                    "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
                   },
                   "children": [
                     {
@@ -930,35 +930,35 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "accordion__item",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "stroke": "imported/accordion/part-0/border-top-color",
+              "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
-                "strokeBottomWeight": "imported/accordion/part-0/border-bottom-width",
-                "strokeTopWeight": "imported/accordion/part-0/border-top-width",
+                "strokeBottomWeight": "imported/accordion/accordion-item/border-bottom-width",
+                "strokeTopWeight": "imported/accordion/accordion-item/border-top-width",
                 "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-0-0",
+                  "name": "accordion__heading",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "CENTER"
                   },
-                  "fill": "imported/accordion/part-0-0/background-color",
+                  "fill": "imported/accordion/accordion-heading/background-color",
                   "bindings": {
                     "strokeBottomWeight": "imported/shared/size-0",
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
                     "strokeTopWeight": "imported/shared/size-0",
-                    "minHeight": "imported/accordion/part-0-0/min-height/sm",
+                    "minHeight": "imported/accordion/accordion-heading/min-height/sm",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/shared/size-0",
                     "paddingLeft": "imported/shared/size-0",
@@ -1005,7 +1005,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "accordion__wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -1014,8 +1014,8 @@ const COMPONENTS = [
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
-                    "paddingBottom": "imported/accordion/part-0-1/padding-bottom",
-                    "paddingTop": "imported/accordion/part-0-1/padding-top"
+                    "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
                   },
                   "children": [
                     {
@@ -1078,35 +1078,35 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "accordion__item",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
                 "counter": "MIN"
               },
-              "stroke": "imported/accordion/part-0/border-top-color",
+              "stroke": "imported/accordion/accordion-item/border-top-color",
               "bindings": {
-                "strokeBottomWeight": "imported/accordion/part-0/border-bottom-width",
-                "strokeTopWeight": "imported/accordion/part-0/border-top-width",
+                "strokeBottomWeight": "imported/accordion/accordion-item/border-bottom-width",
+                "strokeTopWeight": "imported/accordion/accordion-item/border-top-width",
                 "minHeight": "imported/shared/size-0",
                 "minWidth": "imported/shared/size-0"
               },
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-0-0",
+                  "name": "accordion__heading",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "CENTER"
                   },
-                  "fill": "imported/accordion/part-0-0/background-color",
+                  "fill": "imported/accordion/accordion-heading/background-color",
                   "bindings": {
                     "strokeBottomWeight": "imported/shared/size-0",
                     "strokeLeftWeight": "imported/shared/size-0",
                     "strokeRightWeight": "imported/shared/size-0",
                     "strokeTopWeight": "imported/shared/size-0",
-                    "minHeight": "imported/accordion/part-0-0/min-height/sm",
+                    "minHeight": "imported/accordion/accordion-heading/min-height/sm",
                     "minWidth": "imported/shared/size-0",
                     "paddingBottom": "imported/shared/size-0",
                     "paddingLeft": "imported/shared/size-0",
@@ -1153,7 +1153,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "accordion__wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -1162,8 +1162,8 @@ const COMPONENTS = [
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
                     "minWidth": "imported/shared/size-0",
-                    "paddingBottom": "imported/accordion/part-0-1/padding-bottom",
-                    "paddingTop": "imported/accordion/part-0-1/padding-top"
+                    "paddingBottom": "imported/accordion/accordion-wrapper/padding-bottom",
+                    "paddingTop": "imported/accordion/accordion-wrapper/padding-top"
                   },
                   "children": [
                     {

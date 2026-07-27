@@ -10,43 +10,43 @@
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 7,
-    "part-0": 4,
-    "part-0-0": 49,
+    "tooltip-trigger__wrapper": 4,
+    "btn": 49,
     "icon": 28,
     "part-0-0-0-0": 24,
-    "part-1": 11,
+    "popover": 11,
     "label": 35,
-    "part-1-1": 11
+    "popover-caret": 11
   },
   "folds": {
     "count": 32,
     "receipts": [
       {
-        "part": "part-0-0",
+        "part": "btn",
         "channel": "caret-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0-0",
+        "part": "btn",
         "channel": "column-rule-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0-0",
+        "part": "btn",
         "channel": "outline-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0-0",
+        "part": "btn",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
       {
-        "part": "part-0-0",
+        "part": "btn",
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -275,7 +275,7 @@
   "pixel": {
     "pairs": 160,
     "exact": {
-      "mean": 0.1390136718750001,
+      "mean": 0.1393066406250001,
       "max": 0.2630208333333333,
       "perfect": 0
     },
@@ -301,13 +301,13 @@
         "pctAA": 0.12239583333333333
       },
       {
-        "key": "tertiary.lg.enabled__hover",
+        "key": "tertiary.md.enabled__hover",
         "pctExact": 0.2630208333333333,
         "pctAA": 0.12239583333333333
       },
       {
-        "key": "tertiary.md.enabled__hover",
-        "pctExact": 0.25,
+        "key": "tertiary.lg.enabled__hover",
+        "pctExact": 0.2630208333333333,
         "pctAA": 0.12239583333333333
       },
       {

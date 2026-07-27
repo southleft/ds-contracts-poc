@@ -6398,7 +6398,7 @@
               "$type": "dimension"
             }
           },
-          "part-0": {
+          "checkbox": {
             "font-size": {
               "$value": "13.3333px",
               "$type": "dimension"
@@ -6424,7 +6424,7 @@
               "$type": "dimension"
             }
           },
-          "part-1": {
+          "checkbox-label": {
             "width": {
               "$value": "92.9219px",
               "$type": "dimension"
@@ -6440,7 +6440,7 @@
               "$type": "dimension"
             }
           },
-          "part-2": {
+          "checkbox-validation-msg": {
             "margin-top": {
               "$value": "4px",
               "$type": "dimension"
@@ -6464,14 +6464,14 @@
               }
             }
           },
-          "part-0": {
+          "toggle-button": {
             "bottom": {
               "untoggled": {
-                "$value": "969px",
+                "$value": "-21655px",
                 "$type": "dimension"
               },
               "toggled": {
-                "$value": "745px",
+                "$value": "-21879px",
                 "$type": "dimension"
               }
             },
@@ -6485,11 +6485,11 @@
             },
             "top": {
               "untoggled": {
-                "$value": "32px",
+                "$value": "22656px",
                 "$type": "dimension"
               },
               "toggled": {
-                "$value": "256px",
+                "$value": "22880px",
                 "$type": "dimension"
               }
             },
@@ -6503,21 +6503,21 @@
             },
             "bottom-state-disabled": {
               "untoggled": {
-                "$value": "857px",
+                "$value": "-21767px",
                 "$type": "dimension"
               },
               "toggled": {
-                "$value": "633px",
+                "$value": "-21991px",
                 "$type": "dimension"
               }
             },
             "top-state-disabled": {
               "untoggled": {
-                "$value": "144px",
+                "$value": "22768px",
                 "$type": "dimension"
               },
               "toggled": {
-                "$value": "368px",
+                "$value": "22992px",
                 "$type": "dimension"
               }
             }
@@ -6540,7 +6540,7 @@
               "$type": "color"
             }
           },
-          "part-1-1": {
+          "toggle-appearance": {
             "column-gap": {
               "$value": "8px",
               "$type": "dimension"
@@ -6556,7 +6556,7 @@
               }
             }
           },
-          "part-1-1-0": {
+          "toggle-switch": {
             "background-color": {
               "untoggled": {
                 "$value": "{toggle-off}",
@@ -6624,7 +6624,7 @@
               }
             }
           },
-          "part-0": {
+          "text-input-label-wrapper": {
             "height": {
               "$value": "24px",
               "$type": "dimension"
@@ -6656,7 +6656,7 @@
               "$type": "color"
             }
           },
-          "part-1": {
+          "text-input-field-outer-wrapper": {
             "flex-grow": {
               "$value": "1",
               "$type": "number"
@@ -6684,7 +6684,7 @@
               }
             }
           },
-          "part-1-0": {
+          "text-input-field-wrapper": {
             "height": {
               "unset": {
                 "$value": "40px",
@@ -6708,7 +6708,7 @@
               }
             }
           },
-          "part-1-0-0": {
+          "text-input": {
             "background-color": {
               "$value": "{field}",
               "$type": "color"
@@ -6764,7 +6764,7 @@
               "$type": "color"
             }
           },
-          "part-1-0-1": {
+          "text-input-counter-alert": {
             "bottom": {
               "unset": {
                 "$value": "41px",
@@ -6952,7 +6952,7 @@
               }
             }
           },
-          "part-0": {
+          "inline-notification-details": {
             "color": {
               "high": {
                 "$value": "#ffffff",
@@ -7258,7 +7258,7 @@
               }
             }
           },
-          "part-0-1": {
+          "inline-notification-text-wrapper": {
             "color": {
               "high": {
                 "$value": "#ffffff",
@@ -7360,7 +7360,7 @@
               }
             }
           },
-          "part-1": {
+          "inline-notification-close-button": {
             "background-color": {
               "$value": "#00000000",
               "$type": "color"
@@ -7400,7 +7400,7 @@
               "$type": "dimension"
             }
           },
-          "part-0": {
+          "accordion-item": {
             "border-bottom-color": {
               "$value": "#e0e0e0",
               "$type": "color"
@@ -7418,7 +7418,7 @@
               "$type": "dimension"
             }
           },
-          "part-0-0": {
+          "accordion-heading": {
             "background-color": {
               "$value": "#00000000",
               "$type": "color"
@@ -7520,7 +7520,7 @@
               "$type": "number"
             }
           },
-          "part-0-1": {
+          "accordion-wrapper": {
             "padding-bottom": {
               "$value": "24px",
               "$type": "dimension"
@@ -7574,7 +7574,7 @@
               "$type": "dimension"
             }
           },
-          "part-1-0": {
+          "tabs-nav-item": {
             "border-bottom-color": {
               "$value": "#0f62fe",
               "$type": "color"
@@ -7596,13 +7596,13 @@
               "$type": "color"
             }
           },
-          "part-1-0-0": {
+          "tabs-nav-item-label-wrapper": {
             "width": {
               "$value": "62.3125px",
               "$type": "dimension"
             }
           },
-          "part-1-1-0": {
+          "visually-hidden": {
             "left": {
               "$value": "93.3125px",
               "$type": "dimension"
@@ -7612,7 +7612,7 @@
               "$type": "dimension"
             }
           },
-          "part-1-2": {
+          "tabs-nav-item-2": {
             "border-bottom-color": {
               "$value": "#e0e0e0",
               "$type": "color"
@@ -7634,7 +7634,7 @@
               "$type": "color"
             }
           },
-          "part-1-2-0": {
+          "tabs-nav-item-label-wrapper-2": {
             "width": {
               "$value": "48px",
               "$type": "dimension"
@@ -7646,7 +7646,7 @@
               "$type": "number"
             }
           },
-          "part-1-3-0": {
+          "visually-hidden-2": {
             "left": {
               "$value": "174.312px",
               "$type": "dimension"
@@ -7656,7 +7656,7 @@
               "$type": "dimension"
             }
           },
-          "part-1-4": {
+          "tabs-nav-item-3": {
             "border-bottom-color": {
               "$value": "#e0e0e0",
               "$type": "color"
@@ -7666,7 +7666,7 @@
               "$type": "dimension"
             }
           },
-          "part-1-4-0": {
+          "tabs-nav-item-label-wrapper-3": {
             "width": {
               "$value": "52.4688px",
               "$type": "dimension"
@@ -7678,7 +7678,7 @@
               "$type": "number"
             }
           },
-          "part-1-5-0": {
+          "visually-hidden-3": {
             "left": {
               "$value": "259.781px",
               "$type": "dimension"
@@ -7714,7 +7714,7 @@
               "$type": "number"
             }
           },
-          "part-1": {
+          "modal-container": {
             "background-color": {
               "$value": "#f4f4f4",
               "$type": "color"
@@ -7772,7 +7772,7 @@
               }
             }
           },
-          "part-1-0": {
+          "modal-header": {
             "height": {
               "$value": "63.9844px",
               "$type": "dimension"
@@ -7854,7 +7854,7 @@
               }
             }
           },
-          "part-1-0-2": {
+          "modal-close-button": {
             "bottom": {
               "$value": "163.969px",
               "$type": "dimension"
@@ -7882,13 +7882,13 @@
               }
             }
           },
-          "part-1-0-2-0": {
+          "icon-tooltip": {
             "z-index": {
               "$value": "9000",
               "$type": "number"
             }
           },
-          "part-1-0-2-0-0-0": {
+          "btn": {
             "flex-shrink": {
               "$value": "0",
               "$type": "number"
@@ -7908,7 +7908,7 @@
               "$type": "dimension"
             }
           },
-          "part-1-0-2-0-1-1": {
+          "popover-caret": {
             "width": {
               "$value": "4px",
               "$type": "dimension"
@@ -7924,7 +7924,7 @@
               "$type": "dimension"
             }
           },
-          "part-1-2": {
+          "btn-set": {
             "height": {
               "$value": "64px",
               "$type": "dimension"
@@ -8040,7 +8040,7 @@
               }
             }
           },
-          "part-0": {
+          "tooltip-trigger-wrapper": {
             "height": {
               "unset": {
                 "$value": "48px",
@@ -8086,7 +8086,7 @@
               }
             }
           },
-          "part-0-0": {
+          "btn": {
             "background-color": {
               "primary": {
                 "$value": "{button-primary}",
@@ -8696,7 +8696,7 @@
               }
             }
           },
-          "part-1": {
+          "popover": {
             "height": {
               "unset": {
                 "$value": "48px",
@@ -8982,7 +8982,7 @@
               }
             }
           },
-          "part-1-1": {
+          "popover-caret": {
             "height": {
               "$value": "4px",
               "$type": "dimension"
@@ -9196,9 +9196,9 @@
   },
   "icons": {
     "accordion-icon": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\" fill=\"currentColor\"/></svg>",
-    "icon-button-part-0-0": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
-    "inline-notification-part-1": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-    "modal-part-1-0-2-0-0-0": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+    "icon-button-btn": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17 15 L 17 8 L 15 8 L 15 15 L 8 15 L 8 17 L 15 17 L 15 24 L 17 24 L 17 17 L 24 17 L 24 15 Z\"/></svg>",
+    "inline-notification-inline-notification-close-button": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
+    "modal-btn": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
     "tabs-part-0": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 5 8 L 10 3 L 10.7 3.7 L 6.4 8 L 10.7 12.3 L 10 13 Z\"/></svg>",
     "tabs-part-2": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 11 8 L 6 13 L 5.3 12.3 L 9.6 8 L 5.3 3.7 L 6 3 Z\"/></svg>"
   },
@@ -9271,13 +9271,13 @@
             "display": "block"
           },
           "parts": {
-            "part-0": {
+            "accordion__item": {
               "element": "li",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy li| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy li|accordion__item — this element exists in the real component's DOM; the static layer had no part for it.",
               "parts": {
-                "part-0-0": {
+                "accordion__heading": {
                   "element": "button",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|accordion__heading — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex",
                     "align": "center",
@@ -9285,7 +9285,7 @@
                   },
                   "parts": {
                     "icon": {
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy svg|accordion__arrow — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
                         "cursor": "pointer",
@@ -9337,7 +9337,7 @@
                     },
                     "label": {
                       "text": "Accordion title",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|accordion__title — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
                         "cursor": "pointer",
@@ -9395,7 +9395,7 @@
                     }
                   },
                   "tokens": {
-                    "background-color": "{imported.accordion.part-0-0.background-color}",
+                    "background-color": "{imported.accordion.accordion-heading.background-color}",
                     "border-bottom-width": "{imported.shared.size-0}",
                     "border-left-width": "{imported.shared.size-0}",
                     "border-right-width": "{imported.shared.size-0}",
@@ -9404,7 +9404,7 @@
                     "color": "{imported.shared.color-161616}",
                     "font-size": "{imported.shared.size-16}",
                     "left": "{imported.shared.size-0}",
-                    "min-height": "{imported.accordion.part-0-0.min-height.unset}",
+                    "min-height": "{imported.accordion.accordion-heading.min-height.unset}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-bottom": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-0}",
@@ -9424,26 +9424,26 @@
                       "prop": "size",
                       "map": {
                         "lg": {
-                          "min-height": "{imported.accordion.part-0-0.min-height.lg}"
+                          "min-height": "{imported.accordion.accordion-heading.min-height.lg}"
                         },
                         "md": {
-                          "min-height": "{imported.accordion.part-0-0.min-height.md}"
+                          "min-height": "{imported.accordion.accordion-heading.min-height.md}"
                         },
                         "sm": {
-                          "min-height": "{imported.accordion.part-0-0.min-height.sm}"
+                          "min-height": "{imported.accordion.accordion-heading.min-height.sm}"
                         }
                       }
                     }
                   ]
                 },
-                "part-0-1-2": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                "accordion__wrapper-2": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|accordion__wrapper|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "none"
                   }
                 },
-                "part-0-1": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                "accordion__wrapper": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|accordion__wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "max-height": "fit-content",
@@ -9453,7 +9453,7 @@
                   "parts": {
                     "label-2": {
                       "text": "Details body copy for the Carbon round.",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|accordion__content — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block"
                       },
@@ -9484,8 +9484,8 @@
                   "tokens": {
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
-                    "padding-bottom": "{imported.accordion.part-0-1.padding-bottom}",
-                    "padding-top": "{imported.accordion.part-0-1.padding-top}"
+                    "padding-bottom": "{imported.accordion.accordion-wrapper.padding-bottom}",
+                    "padding-top": "{imported.accordion.accordion-wrapper.padding-top}"
                   }
                 }
               },
@@ -9497,10 +9497,10 @@
                 "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
               },
               "tokens": {
-                "border-bottom-color": "{imported.accordion.part-0.border-bottom-color}",
-                "border-bottom-width": "{imported.accordion.part-0.border-bottom-width}",
-                "border-top-color": "{imported.accordion.part-0.border-top-color}",
-                "border-top-width": "{imported.accordion.part-0.border-top-width}",
+                "border-bottom-color": "{imported.accordion.accordion-item.border-bottom-color}",
+                "border-bottom-width": "{imported.accordion.accordion-item.border-bottom-width}",
+                "border-top-color": "{imported.accordion.accordion-item.border-top-color}",
+                "border-top-width": "{imported.accordion.accordion-item.border-top-width}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}"
               }
@@ -9919,9 +9919,9 @@
             "align": "start"
           },
           "parts": {
-            "part-0": {
+            "checkbox": {
               "element": "input",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy input|checkbox|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "none",
                 "appearance": "auto",
@@ -9941,9 +9941,9 @@
               "tokens": {
                 "bottom": "{imported.shared.size-1}",
                 "color": "{imported.shared.color-000000}",
-                "font-size": "{imported.checkbox.part-0.font-size}",
+                "font-size": "{imported.checkbox.checkbox.font-size}",
                 "height": "{imported.shared.size-1}",
-                "left": "{imported.checkbox.part-0.left}",
+                "left": "{imported.checkbox.checkbox.left}",
                 "margin-bottom": "{imported.shared.size-neg-1}",
                 "margin-left": "{imported.shared.size-neg-1}",
                 "margin-right": "{imported.shared.size-neg-1}",
@@ -9951,7 +9951,7 @@
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "outline-color": "{imported.shared.color-000000}",
-                "right": "{imported.checkbox.part-0.right}",
+                "right": "{imported.checkbox.checkbox.right}",
                 "row-rule-color": "{imported.shared.color-000000}",
                 "top": "{imported.shared.size-20}",
                 "width": "{imported.shared.size-1}"
@@ -9962,16 +9962,16 @@
                 }
               }
             },
-            "part-1": {
+            "checkbox-label": {
               "element": "label",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy label| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy label|checkbox-label — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex"
               },
               "parts": {
                 "label": {
                   "text": "Checkbox",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|checkbox-label-text — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "cursor": "pointer",
@@ -10021,7 +10021,7 @@
                 "padding-top": "{imported.shared.size-1}",
                 "right": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}",
-                "width": "{imported.checkbox.part-1.width}"
+                "width": "{imported.checkbox.checkbox-label.width}"
               },
               "states": {
                 "disabled": {
@@ -10029,8 +10029,8 @@
                 }
               }
             },
-            "part-2": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+            "checkbox__validation-msg": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|checkbox__validation-msg — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "none"
               },
@@ -10038,7 +10038,7 @@
                 "font-size": "{imported.shared.size-14}",
                 "letter-spacing": "{imported.shared.size-0-16}",
                 "line-height": "{imported.shared.size-18-0001}",
-                "margin-top": "{imported.checkbox.part-2.margin-top}",
+                "margin-top": "{imported.checkbox.checkbox-validation-msg.margin-top}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}"
               }
@@ -10151,16 +10151,16 @@
             "position": "relative"
           },
           "parts": {
-            "part-0": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+            "tooltip-trigger__wrapper": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip-trigger__wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "aspect-ratio": "1 / 1"
               },
               "parts": {
-                "part-0-0": {
+                "btn": {
                   "element": "button",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "inline-flex",
                     "align": "center",
@@ -10181,7 +10181,7 @@
                     "transition-timing-function": "cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9), cubic-bezier(0, 0, 0.38, 0.9)"
                   },
                   "icon": {
-                    "asset": "icon-button-part-0-0",
+                    "asset": "icon-button-btn",
                     "size": 16
                   },
                   "declaredStates": {
@@ -10196,14 +10196,14 @@
                     "border-right-width": "{imported.shared.size-1}",
                     "border-top-width": "{imported.shared.size-1}",
                     "bottom": "{imported.shared.size-0}",
-                    "flex-shrink": "{imported.icon-button.part-0-0.flex-shrink}",
-                    "font-size": "{imported.icon-button.part-0-0.font-size}",
-                    "height": "{imported.icon-button.part-0-0.height.unset}",
+                    "flex-shrink": "{imported.icon-button.btn.flex-shrink}",
+                    "font-size": "{imported.icon-button.btn.font-size}",
+                    "height": "{imported.icon-button.btn.height.unset}",
                     "left": "{imported.shared.size-0}",
-                    "letter-spacing": "{imported.icon-button.part-0-0.letter-spacing}",
-                    "line-height": "{imported.icon-button.part-0-0.line-height}",
-                    "max-width": "{imported.icon-button.part-0-0.max-width}",
-                    "min-height": "{imported.icon-button.part-0-0.min-height.unset}",
+                    "letter-spacing": "{imported.icon-button.btn.letter-spacing}",
+                    "line-height": "{imported.icon-button.btn.line-height}",
+                    "max-width": "{imported.icon-button.btn.max-width}",
+                    "min-height": "{imported.icon-button.btn.min-height.unset}",
                     "min-width": "{imported.shared.size-0}",
                     "padding-bottom": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-0}",
@@ -10211,47 +10211,47 @@
                     "padding-top": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
                     "top": "{imported.shared.size-0}",
-                    "width": "{imported.icon-button.part-0-0.width.unset}"
+                    "width": "{imported.icon-button.btn.width.unset}"
                   },
                   "tokensByProp": [
                     {
                       "prop": "kind",
                       "map": {
                         "ghost": {
-                          "background-color": "{imported.icon-button.part-0-0.background-color.ghost}",
-                          "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.ghost}",
-                          "border-left-color": "{imported.icon-button.part-0-0.border-left-color.ghost}",
-                          "border-right-color": "{imported.icon-button.part-0-0.border-right-color.ghost}",
-                          "border-top-color": "{imported.icon-button.part-0-0.border-top-color.ghost}",
-                          "color": "{imported.icon-button.part-0-0.color.ghost}",
-                          "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.ghost}"
+                          "background-color": "{imported.icon-button.btn.background-color.ghost}",
+                          "border-bottom-color": "{imported.icon-button.btn.border-bottom-color.ghost}",
+                          "border-left-color": "{imported.icon-button.btn.border-left-color.ghost}",
+                          "border-right-color": "{imported.icon-button.btn.border-right-color.ghost}",
+                          "border-top-color": "{imported.icon-button.btn.border-top-color.ghost}",
+                          "color": "{imported.icon-button.btn.color.ghost}",
+                          "row-rule-color": "{imported.icon-button.btn.row-rule-color.ghost}"
                         },
                         "primary": {
-                          "background-color": "{imported.icon-button.part-0-0.background-color.primary}",
-                          "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.primary}",
-                          "border-left-color": "{imported.icon-button.part-0-0.border-left-color.primary}",
-                          "border-right-color": "{imported.icon-button.part-0-0.border-right-color.primary}",
-                          "border-top-color": "{imported.icon-button.part-0-0.border-top-color.primary}",
-                          "color": "{imported.icon-button.part-0-0.color.primary}",
-                          "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.primary}"
+                          "background-color": "{imported.icon-button.btn.background-color.primary}",
+                          "border-bottom-color": "{imported.icon-button.btn.border-bottom-color.primary}",
+                          "border-left-color": "{imported.icon-button.btn.border-left-color.primary}",
+                          "border-right-color": "{imported.icon-button.btn.border-right-color.primary}",
+                          "border-top-color": "{imported.icon-button.btn.border-top-color.primary}",
+                          "color": "{imported.icon-button.btn.color.primary}",
+                          "row-rule-color": "{imported.icon-button.btn.row-rule-color.primary}"
                         },
                         "secondary": {
-                          "background-color": "{imported.icon-button.part-0-0.background-color.secondary}",
-                          "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.secondary}",
-                          "border-left-color": "{imported.icon-button.part-0-0.border-left-color.secondary}",
-                          "border-right-color": "{imported.icon-button.part-0-0.border-right-color.secondary}",
-                          "border-top-color": "{imported.icon-button.part-0-0.border-top-color.secondary}",
-                          "color": "{imported.icon-button.part-0-0.color.secondary}",
-                          "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.secondary}"
+                          "background-color": "{imported.icon-button.btn.background-color.secondary}",
+                          "border-bottom-color": "{imported.icon-button.btn.border-bottom-color.secondary}",
+                          "border-left-color": "{imported.icon-button.btn.border-left-color.secondary}",
+                          "border-right-color": "{imported.icon-button.btn.border-right-color.secondary}",
+                          "border-top-color": "{imported.icon-button.btn.border-top-color.secondary}",
+                          "color": "{imported.icon-button.btn.color.secondary}",
+                          "row-rule-color": "{imported.icon-button.btn.row-rule-color.secondary}"
                         },
                         "tertiary": {
-                          "background-color": "{imported.icon-button.part-0-0.background-color.tertiary}",
-                          "border-bottom-color": "{imported.icon-button.part-0-0.border-bottom-color.tertiary}",
-                          "border-left-color": "{imported.icon-button.part-0-0.border-left-color.tertiary}",
-                          "border-right-color": "{imported.icon-button.part-0-0.border-right-color.tertiary}",
-                          "border-top-color": "{imported.icon-button.part-0-0.border-top-color.tertiary}",
-                          "color": "{imported.icon-button.part-0-0.color.tertiary}",
-                          "row-rule-color": "{imported.icon-button.part-0-0.row-rule-color.tertiary}"
+                          "background-color": "{imported.icon-button.btn.background-color.tertiary}",
+                          "border-bottom-color": "{imported.icon-button.btn.border-bottom-color.tertiary}",
+                          "border-left-color": "{imported.icon-button.btn.border-left-color.tertiary}",
+                          "border-right-color": "{imported.icon-button.btn.border-right-color.tertiary}",
+                          "border-top-color": "{imported.icon-button.btn.border-top-color.tertiary}",
+                          "color": "{imported.icon-button.btn.color.tertiary}",
+                          "row-rule-color": "{imported.icon-button.btn.row-rule-color.tertiary}"
                         }
                       }
                     },
@@ -10259,24 +10259,24 @@
                       "prop": "size",
                       "map": {
                         "lg": {
-                          "height": "{imported.icon-button.part-0-0.height.lg}",
-                          "min-height": "{imported.icon-button.part-0-0.min-height.lg}",
-                          "width": "{imported.icon-button.part-0-0.width.lg}"
+                          "height": "{imported.icon-button.btn.height.lg}",
+                          "min-height": "{imported.icon-button.btn.min-height.lg}",
+                          "width": "{imported.icon-button.btn.width.lg}"
                         },
                         "md": {
-                          "height": "{imported.icon-button.part-0-0.height.md}",
-                          "min-height": "{imported.icon-button.part-0-0.min-height.md}",
-                          "width": "{imported.icon-button.part-0-0.width.md}"
+                          "height": "{imported.icon-button.btn.height.md}",
+                          "min-height": "{imported.icon-button.btn.min-height.md}",
+                          "width": "{imported.icon-button.btn.width.md}"
                         },
                         "sm": {
-                          "height": "{imported.icon-button.part-0-0.height.sm}",
-                          "min-height": "{imported.icon-button.part-0-0.min-height.sm}",
-                          "width": "{imported.icon-button.part-0-0.width.sm}"
+                          "height": "{imported.icon-button.btn.height.sm}",
+                          "min-height": "{imported.icon-button.btn.min-height.sm}",
+                          "width": "{imported.icon-button.btn.width.sm}"
                         },
                         "xs": {
-                          "height": "{imported.icon-button.part-0-0.height.xs}",
-                          "min-height": "{imported.icon-button.part-0-0.min-height.xs}",
-                          "width": "{imported.icon-button.part-0-0.width.xs}"
+                          "height": "{imported.icon-button.btn.height.xs}",
+                          "min-height": "{imported.icon-button.btn.min-height.xs}",
+                          "width": "{imported.icon-button.btn.width.xs}"
                         }
                       }
                     }
@@ -10289,38 +10289,38 @@
                 }
               },
               "tokens": {
-                "height": "{imported.icon-button.part-0.height.unset}",
+                "height": "{imported.icon-button.tooltip-trigger-wrapper.height.unset}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
-                "width": "{imported.icon-button.part-0.width.unset}"
+                "width": "{imported.icon-button.tooltip-trigger-wrapper.width.unset}"
               },
               "tokensByProp": [
                 {
                   "prop": "size",
                   "map": {
                     "lg": {
-                      "height": "{imported.icon-button.part-0.height.lg}",
-                      "width": "{imported.icon-button.part-0.width.lg}"
+                      "height": "{imported.icon-button.tooltip-trigger-wrapper.height.lg}",
+                      "width": "{imported.icon-button.tooltip-trigger-wrapper.width.lg}"
                     },
                     "md": {
-                      "height": "{imported.icon-button.part-0.height.md}",
-                      "width": "{imported.icon-button.part-0.width.md}"
+                      "height": "{imported.icon-button.tooltip-trigger-wrapper.height.md}",
+                      "width": "{imported.icon-button.tooltip-trigger-wrapper.width.md}"
                     },
                     "sm": {
-                      "height": "{imported.icon-button.part-0.height.sm}",
-                      "width": "{imported.icon-button.part-0.width.sm}"
+                      "height": "{imported.icon-button.tooltip-trigger-wrapper.height.sm}",
+                      "width": "{imported.icon-button.tooltip-trigger-wrapper.width.sm}"
                     },
                     "xs": {
-                      "height": "{imported.icon-button.part-0.height.xs}",
-                      "width": "{imported.icon-button.part-0.width.xs}"
+                      "height": "{imported.icon-button.tooltip-trigger-wrapper.height.xs}",
+                      "width": "{imported.icon-button.tooltip-trigger-wrapper.width.xs}"
                     }
                   }
                 }
               ]
             },
-            "part-1": {
+            "popover": {
               "element": "span",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "position": "absolute",
@@ -10330,7 +10330,7 @@
               "parts": {
                 "label": {
                   "text": "Add",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-content.tooltip-content — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "none",
                     "position": "absolute"
@@ -10372,9 +10372,9 @@
                     "z-index": "{imported.shared.num-6000}"
                   }
                 },
-                "part-1-1": {
+                "popover-caret": {
                   "element": "span",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-caret — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "none",
                     "position": "absolute",
@@ -10395,24 +10395,24 @@
                     }
                   },
                   "tokens": {
-                    "height": "{imported.icon-button.part-1-1.height}",
+                    "height": "{imported.icon-button.popover-caret.height}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "top": "{imported.shared.size-0}",
-                    "width": "{imported.icon-button.part-1-1.width}",
+                    "width": "{imported.icon-button.popover-caret.width}",
                     "z-index": "{imported.shared.num-6000}"
                   }
                 }
               },
               "tokens": {
                 "bottom": "{imported.shared.size-0}",
-                "height": "{imported.icon-button.part-1.height.unset}",
+                "height": "{imported.icon-button.popover.height.unset}",
                 "left": "{imported.shared.size-0}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}",
-                "width": "{imported.icon-button.part-1.width.unset}",
+                "width": "{imported.icon-button.popover.width.unset}",
                 "z-index": "{imported.shared.num-6000}"
               },
               "tokensByProp": [
@@ -10420,20 +10420,20 @@
                   "prop": "size",
                   "map": {
                     "lg": {
-                      "height": "{imported.icon-button.part-1.height.lg}",
-                      "width": "{imported.icon-button.part-1.width.lg}"
+                      "height": "{imported.icon-button.popover.height.lg}",
+                      "width": "{imported.icon-button.popover.width.lg}"
                     },
                     "md": {
-                      "height": "{imported.icon-button.part-1.height.md}",
-                      "width": "{imported.icon-button.part-1.width.md}"
+                      "height": "{imported.icon-button.popover.height.md}",
+                      "width": "{imported.icon-button.popover.width.md}"
                     },
                     "sm": {
-                      "height": "{imported.icon-button.part-1.height.sm}",
-                      "width": "{imported.icon-button.part-1.width.sm}"
+                      "height": "{imported.icon-button.popover.height.sm}",
+                      "width": "{imported.icon-button.popover.width.sm}"
                     },
                     "xs": {
-                      "height": "{imported.icon-button.part-1.height.xs}",
-                      "width": "{imported.icon-button.part-1.width.xs}"
+                      "height": "{imported.icon-button.popover.height.xs}",
+                      "width": "{imported.icon-button.popover.width.xs}"
                     }
                   }
                 }
@@ -10557,15 +10557,15 @@
             "display": "flex"
           },
           "parts": {
-            "part-0": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+            "inline-notification__details": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__details — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex"
               },
               "parts": {
                 "icon": {
                   "element": "svg",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy svg|inline-notification__icon — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "overflow-x": "hidden",
@@ -10787,15 +10787,15 @@
                     }
                   ]
                 },
-                "part-0-1": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                "inline-notification__text-wrapper": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__text-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex"
                   },
                   "parts": {
                     "label-2": {
                       "text": "Notification title",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__title — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block"
                       },
@@ -10824,7 +10824,7 @@
                     },
                     "label-3": {
                       "text": "Notification subtitle",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__subtitle — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block"
                       },
@@ -10852,20 +10852,20 @@
                     }
                   },
                   "tokens": {
-                    "padding-bottom": "{imported.inline-notification.part-0-1.padding-bottom}",
-                    "padding-top": "{imported.inline-notification.part-0-1.padding-top}"
+                    "padding-bottom": "{imported.inline-notification.inline-notification-text-wrapper.padding-bottom}",
+                    "padding-top": "{imported.inline-notification.inline-notification-text-wrapper.padding-top}"
                   },
                   "tokensByProp": [
                     {
                       "prop": "contrast",
                       "map": {
                         "high": {
-                          "color": "{imported.inline-notification.part-0-1.color.high}",
-                          "row-rule-color": "{imported.inline-notification.part-0-1.row-rule-color.high}"
+                          "color": "{imported.inline-notification.inline-notification-text-wrapper.color.high}",
+                          "row-rule-color": "{imported.inline-notification.inline-notification-text-wrapper.row-rule-color.high}"
                         },
                         "low": {
-                          "color": "{imported.inline-notification.part-0-1.color.low}",
-                          "row-rule-color": "{imported.inline-notification.part-0-1.row-rule-color.low}"
+                          "color": "{imported.inline-notification.inline-notification-text-wrapper.color.low}",
+                          "row-rule-color": "{imported.inline-notification.inline-notification-text-wrapper.row-rule-color.low}"
                         }
                       }
                     }
@@ -10873,29 +10873,29 @@
                 }
               },
               "tokens": {
-                "flex-grow": "{imported.inline-notification.part-0.flex-grow}",
-                "margin-left": "{imported.inline-notification.part-0.margin-left}",
-                "margin-right": "{imported.inline-notification.part-0.margin-right}"
+                "flex-grow": "{imported.inline-notification.inline-notification-details.flex-grow}",
+                "margin-left": "{imported.inline-notification.inline-notification-details.margin-left}",
+                "margin-right": "{imported.inline-notification.inline-notification-details.margin-right}"
               },
               "tokensByProp": [
                 {
                   "prop": "contrast",
                   "map": {
                     "high": {
-                      "color": "{imported.inline-notification.part-0.color.high}",
-                      "row-rule-color": "{imported.inline-notification.part-0.row-rule-color.high}"
+                      "color": "{imported.inline-notification.inline-notification-details.color.high}",
+                      "row-rule-color": "{imported.inline-notification.inline-notification-details.row-rule-color.high}"
                     },
                     "low": {
-                      "color": "{imported.inline-notification.part-0.color.low}",
-                      "row-rule-color": "{imported.inline-notification.part-0.row-rule-color.low}"
+                      "color": "{imported.inline-notification.inline-notification-details.color.low}",
+                      "row-rule-color": "{imported.inline-notification.inline-notification-details.row-rule-color.low}"
                     }
                   }
                 }
               ]
             },
-            "part-1": {
+            "inline-notification__close-button": {
               "element": "button",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button|inline-notification__close-button — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
                 "direction": "column",
@@ -10903,7 +10903,7 @@
                 "justify": "center"
               },
               "icon": {
-                "asset": "inline-notification-part-1",
+                "asset": "inline-notification-inline-notification-close-button",
                 "size": 16
               },
               "declared": {
@@ -10919,17 +10919,17 @@
                 "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
               },
               "tokens": {
-                "background-color": "{imported.inline-notification.part-1.background-color}",
+                "background-color": "{imported.inline-notification.inline-notification-close-button.background-color}",
                 "border-bottom-width": "{imported.shared.size-0}",
                 "border-left-width": "{imported.shared.size-0}",
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
-                "color": "{imported.inline-notification.part-1.color}",
+                "color": "{imported.inline-notification.inline-notification-close-button.color}",
                 "max-width": "{imported.shared.size-48}",
                 "min-width": "{imported.shared.size-48}",
-                "outline-color": "{imported.inline-notification.part-1.outline-color}",
-                "outline-offset": "{imported.inline-notification.part-1.outline-offset}",
-                "outline-width": "{imported.inline-notification.part-1.outline-width}",
+                "outline-color": "{imported.inline-notification.inline-notification-close-button.outline-color}",
+                "outline-offset": "{imported.inline-notification.inline-notification-close-button.outline-offset}",
+                "outline-width": "{imported.inline-notification.inline-notification-close-button.outline-width}",
                 "padding-bottom": "{imported.shared.size-0}",
                 "padding-left": "{imported.shared.size-0}",
                 "padding-right": "{imported.shared.size-0}",
@@ -11047,7 +11047,7 @@
           "parts": {
             "label": {
               "text": "Focus sentinel",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy span||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|visually-hidden|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "none",
                 "overflow-x": "hidden",
@@ -11073,11 +11073,11 @@
                 "width": "{imported.shared.size-1}"
               }
             },
-            "part-1": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+            "modal-container": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|modal-container — this element exists in the real component's DOM; the static layer had no part for it.",
               "parts": {
-                "part-1-0": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                "modal-header": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|modal-header — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "overflow-x": "auto",
@@ -11087,7 +11087,7 @@
                     "label-2": {
                       "element": "h2",
                       "text": "Label",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy h2| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy h2|modal-header__label — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block"
                       },
@@ -11106,7 +11106,7 @@
                     "label-3": {
                       "element": "h2",
                       "text": "Modal heading",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy h2| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy h2|modal-header__heading — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block"
                       },
@@ -11138,37 +11138,37 @@
                         }
                       ]
                     },
-                    "part-1-0-2": {
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                    "modal-close-button": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|modal-close-button — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
                         "position": "absolute"
                       },
                       "parts": {
-                        "part-1-0-2-0": {
+                        "icon-tooltip": {
                           "element": "span",
-                          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|icon-tooltip.popover-container.tooltip — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
                             "display": "inline-block",
                             "position": "relative"
                           },
                           "parts": {
-                            "part-1-0-2-0-0": {
-                              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                            "tooltip-trigger__wrapper": {
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip-trigger__wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                               "declared": {
                                 "display": "block"
                               },
                               "parts": {
-                                "part-1-0-2-0-0-0": {
+                                "btn": {
                                   "element": "button",
-                                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn.modal-close — this element exists in the real component's DOM; the static layer had no part for it.",
                                   "layout": {
                                     "display": "inline-flex",
                                     "align": "center",
                                     "justify": "center"
                                   },
                                   "icon": {
-                                    "asset": "modal-part-1-0-2-0-0-0",
+                                    "asset": "modal-btn",
                                     "size": 20
                                   },
                                   "declared": {
@@ -11191,13 +11191,13 @@
                                     "border-top-color": "{imported.shared.color-00000000}",
                                     "bottom": "{imported.shared.size-0}",
                                     "color": "{imported.shared.color-ffffff}",
-                                    "flex-shrink": "{imported.modal.part-1-0-2-0-0-0.flex-shrink}",
+                                    "flex-shrink": "{imported.modal.btn.flex-shrink}",
                                     "font-size": "{imported.shared.size-14}",
                                     "height": "{imported.shared.size-48}",
                                     "left": "{imported.shared.size-0}",
                                     "letter-spacing": "{imported.shared.size-0-16}",
                                     "line-height": "{imported.shared.size-18-0001}",
-                                    "max-width": "{imported.modal.part-1-0-2-0-0-0.max-width}",
+                                    "max-width": "{imported.modal.btn.max-width}",
                                     "min-height": "{imported.shared.size-48}",
                                     "min-width": "{imported.shared.size-0}",
                                     "padding-bottom": "{imported.shared.size-12}",
@@ -11218,9 +11218,9 @@
                                 "width": "{imported.shared.size-48}"
                               }
                             },
-                            "part-1-0-2-0-1": {
+                            "popover": {
                               "element": "span",
-                              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover — this element exists in the real component's DOM; the static layer had no part for it.",
                               "declared": {
                                 "display": "block",
                                 "position": "absolute",
@@ -11229,7 +11229,7 @@
                               "parts": {
                                 "label-4": {
                                   "text": "Close",
-                                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-content.tooltip-content — this element exists in the real component's DOM; the static layer had no part for it.",
                                   "declared": {
                                     "display": "none",
                                     "position": "absolute"
@@ -11256,9 +11256,9 @@
                                     "z-index": "{imported.shared.num-6000}"
                                   }
                                 },
-                                "part-1-0-2-0-1-1": {
+                                "popover-caret": {
                                   "element": "span",
-                                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-caret — this element exists in the real component's DOM; the static layer had no part for it.",
                                   "declared": {
                                     "display": "none",
                                     "position": "absolute",
@@ -11268,7 +11268,7 @@
                                     "height": "{imported.shared.size-8}",
                                     "min-height": "{imported.shared.size-0}",
                                     "min-width": "{imported.shared.size-0}",
-                                    "width": "{imported.modal.part-1-0-2-0-1-1.width}",
+                                    "width": "{imported.modal.popover-caret.width}",
                                     "z-index": "{imported.shared.num-6000}"
                                   }
                                 }
@@ -11295,14 +11295,14 @@
                             "right": "{imported.shared.size-0}",
                             "top": "{imported.shared.size-0}",
                             "width": "{imported.shared.size-48}",
-                            "z-index": "{imported.modal.part-1-0-2-0.z-index}"
+                            "z-index": "{imported.modal.icon-tooltip.z-index}"
                           }
                         }
                       },
                       "tokens": {
-                        "bottom": "{imported.modal.part-1-0-2.bottom}",
+                        "bottom": "{imported.modal.modal-close-button.bottom}",
                         "height": "{imported.shared.size-48}",
-                        "left": "{imported.modal.part-1-0-2.left.unset}",
+                        "left": "{imported.modal.modal-close-button.left.unset}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
@@ -11314,16 +11314,16 @@
                           "prop": "size",
                           "map": {
                             "lg": {
-                              "left": "{imported.modal.part-1-0-2.left.lg}"
+                              "left": "{imported.modal.modal-close-button.left.lg}"
                             },
                             "md": {
-                              "left": "{imported.modal.part-1-0-2.left.md}"
+                              "left": "{imported.modal.modal-close-button.left.md}"
                             },
                             "sm": {
-                              "left": "{imported.modal.part-1-0-2.left.sm}"
+                              "left": "{imported.modal.modal-close-button.left.sm}"
                             },
                             "xs": {
-                              "left": "{imported.modal.part-1-0-2.left.xs}"
+                              "left": "{imported.modal.modal-close-button.left.xs}"
                             }
                           }
                         }
@@ -11334,29 +11334,29 @@
                     "grid-column-start": "{imported.shared.num-1}",
                     "grid-row-end": "{imported.shared.num-1}",
                     "grid-row-start": "{imported.shared.num-1}",
-                    "height": "{imported.modal.part-1-0.height}",
+                    "height": "{imported.modal.modal-header.height}",
                     "margin-bottom": "{imported.shared.size-8}",
-                    "max-height": "{imported.modal.part-1-0.max-height}",
+                    "max-height": "{imported.modal.modal-header.max-height}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-48}",
                     "padding-top": "{imported.shared.size-16}",
-                    "width": "{imported.modal.part-1-0.width.unset}"
+                    "width": "{imported.modal.modal-header.width.unset}"
                   },
                   "tokensByProp": [
                     {
                       "prop": "size",
                       "map": {
                         "lg": {
-                          "width": "{imported.modal.part-1-0.width.lg}"
+                          "width": "{imported.modal.modal-header.width.lg}"
                         },
                         "md": {
-                          "width": "{imported.modal.part-1-0.width.md}"
+                          "width": "{imported.modal.modal-header.width.md}"
                         },
                         "sm": {
-                          "width": "{imported.modal.part-1-0.width.sm}"
+                          "width": "{imported.modal.modal-header.width.sm}"
                         },
                         "xs": {
-                          "width": "{imported.modal.part-1-0.width.xs}"
+                          "width": "{imported.modal.modal-header.width.xs}"
                         }
                       }
                     }
@@ -11366,7 +11366,7 @@
                   "content": {
                     "prop": "children"
                   },
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|layer-two.modal-content — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "overflow-x": "auto",
@@ -11390,8 +11390,8 @@
                     "top": "{imported.shared.size-0}"
                   }
                 },
-                "part-1-2": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                "btn-set": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|btn-set.modal-footer — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex",
                     "justify": "end"
@@ -11400,7 +11400,7 @@
                     "label-6": {
                       "element": "button",
                       "text": "Cancel",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
                       "layout": {
                         "display": "flex",
                         "justify": "space-between"
@@ -11448,7 +11448,7 @@
                     "label-7": {
                       "element": "button",
                       "text": "Save",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
                       "layout": {
                         "display": "flex",
                         "justify": "space-between"
@@ -11497,24 +11497,24 @@
                   },
                   "tokens": {
                     "grid-column-start": "{imported.shared.num-1}",
-                    "height": "{imported.modal.part-1-2.height}",
-                    "width": "{imported.modal.part-1-2.width.unset}"
+                    "height": "{imported.modal.btn-set.height}",
+                    "width": "{imported.modal.btn-set.width.unset}"
                   },
                   "tokensByProp": [
                     {
                       "prop": "size",
                       "map": {
                         "lg": {
-                          "width": "{imported.modal.part-1-2.width.lg}"
+                          "width": "{imported.modal.btn-set.width.lg}"
                         },
                         "md": {
-                          "width": "{imported.modal.part-1-2.width.md}"
+                          "width": "{imported.modal.btn-set.width.md}"
                         },
                         "sm": {
-                          "width": "{imported.modal.part-1-2.width.sm}"
+                          "width": "{imported.modal.btn-set.width.sm}"
                         },
                         "xs": {
-                          "width": "{imported.modal.part-1-2.width.xs}"
+                          "width": "{imported.modal.btn-set.width.xs}"
                         }
                       }
                     }
@@ -11535,7 +11535,7 @@
                 "transition-timing-function": "cubic-bezier(0, 0, 0.3, 1)"
               },
               "tokens": {
-                "background-color": "{imported.modal.part-1.background-color}",
+                "background-color": "{imported.modal.modal-container.background-color}",
                 "border-bottom-color": "{imported.shared.color-c6c6c6}",
                 "border-bottom-width": "{imported.shared.size-1}",
                 "border-left-color": "{imported.shared.color-c6c6c6}",
@@ -11545,34 +11545,34 @@
                 "border-top-color": "{imported.shared.color-c6c6c6}",
                 "border-top-width": "{imported.shared.size-1}",
                 "bottom": "{imported.shared.size-0}",
-                "grid-template-columns": "{imported.modal.part-1.grid-template-columns.unset}",
-                "height": "{imported.modal.part-1.height}",
+                "grid-template-columns": "{imported.modal.modal-container.grid-template-columns.unset}",
+                "height": "{imported.modal.modal-container.height}",
                 "left": "{imported.shared.size-0}",
                 "outline-color": "{imported.shared.color-00000000}",
-                "outline-offset": "{imported.modal.part-1.outline-offset}",
+                "outline-offset": "{imported.modal.modal-container.outline-offset}",
                 "right": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}",
-                "width": "{imported.modal.part-1.width.unset}"
+                "width": "{imported.modal.modal-container.width.unset}"
               },
               "tokensByProp": [
                 {
                   "prop": "size",
                   "map": {
                     "lg": {
-                      "grid-template-columns": "{imported.modal.part-1.grid-template-columns.lg}",
-                      "width": "{imported.modal.part-1.width.lg}"
+                      "grid-template-columns": "{imported.modal.modal-container.grid-template-columns.lg}",
+                      "width": "{imported.modal.modal-container.width.lg}"
                     },
                     "md": {
-                      "grid-template-columns": "{imported.modal.part-1.grid-template-columns.md}",
-                      "width": "{imported.modal.part-1.width.md}"
+                      "grid-template-columns": "{imported.modal.modal-container.grid-template-columns.md}",
+                      "width": "{imported.modal.modal-container.width.md}"
                     },
                     "sm": {
-                      "grid-template-columns": "{imported.modal.part-1.grid-template-columns.sm}",
-                      "width": "{imported.modal.part-1.width.sm}"
+                      "grid-template-columns": "{imported.modal.modal-container.grid-template-columns.sm}",
+                      "width": "{imported.modal.modal-container.width.sm}"
                     },
                     "xs": {
-                      "grid-template-columns": "{imported.modal.part-1.grid-template-columns.xs}",
-                      "width": "{imported.modal.part-1.width.xs}"
+                      "grid-template-columns": "{imported.modal.modal-container.grid-template-columns.xs}",
+                      "width": "{imported.modal.modal-container.width.xs}"
                     }
                   }
                 }
@@ -11580,7 +11580,7 @@
             },
             "label-8": {
               "text": "Focus sentinel",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy span||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|visually-hidden|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "none",
                 "overflow-x": "hidden",
@@ -11705,9 +11705,9 @@
                 "display": "flex"
               },
               "parts": {
-                "part-1-0": {
+                "tabs__nav-item": {
                   "element": "button",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|tabs__nav-item.tabs__nav-link — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "appearance": "none",
@@ -11728,15 +11728,15 @@
                     "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
                   },
                   "parts": {
-                    "part-1-0-0": {
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                    "tabs__nav-item-label-wrapper": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|tabs__nav-item-label-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                       "layout": {
                         "display": "flex"
                       },
                       "parts": {
                         "label": {
                           "text": "Overview",
-                          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|tabs__nav-item-label — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
                             "display": "block",
                             "cursor": "pointer",
@@ -11772,18 +11772,18 @@
                         "min-width": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
                         "top": "{imported.shared.size-1}",
-                        "width": "{imported.tabs.part-1-0-0.width}"
+                        "width": "{imported.tabs.tabs-nav-item-label-wrapper.width}"
                       }
                     }
                   },
                   "tokens": {
                     "background-color": "{imported.shared.color-00000000}",
-                    "border-bottom-color": "{imported.tabs.part-1-0.border-bottom-color}",
+                    "border-bottom-color": "{imported.tabs.tabs-nav-item.border-bottom-color}",
                     "border-left-width": "{imported.shared.size-0}",
                     "border-right-width": "{imported.shared.size-0}",
                     "border-top-width": "{imported.shared.size-0}",
                     "bottom": "{imported.shared.size-0}",
-                    "color": "{imported.tabs.part-1-0.color}",
+                    "color": "{imported.tabs.tabs-nav-item.color}",
                     "flex-grow": "{imported.shared.num-1}",
                     "flex-shrink": "{imported.shared.num-0}",
                     "font-size": "{imported.shared.size-14}",
@@ -11800,9 +11800,9 @@
                     "padding-right": "{imported.shared.size-16}",
                     "padding-top": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "row-rule-color": "{imported.tabs.part-1-0.row-rule-color}",
+                    "row-rule-color": "{imported.tabs.tabs-nav-item.row-rule-color}",
                     "top": "{imported.shared.size-0}",
-                    "width": "{imported.tabs.part-1-0.width}"
+                    "width": "{imported.tabs.tabs-nav-item.width}"
                   }
                 },
                 "part-1-1": {
@@ -11825,9 +11825,9 @@
                     "width": "{imported.shared.size-3}"
                   }
                 },
-                "part-1-2": {
+                "tabs__nav-item-2": {
                   "element": "button",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|tabs__nav-item.tabs__nav-link — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "appearance": "none",
@@ -11849,15 +11849,15 @@
                     "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
                   },
                   "parts": {
-                    "part-1-2-0": {
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                    "tabs__nav-item-label-wrapper-2": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|tabs__nav-item-label-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                       "layout": {
                         "display": "flex"
                       },
                       "parts": {
                         "label-2": {
                           "text": "Activity",
-                          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|tabs__nav-item-label — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
                             "display": "block",
                             "cursor": "pointer",
@@ -11904,7 +11904,7 @@
                         "right": "{imported.shared.size-0}",
                         "row-rule-color": "{imported.shared.color-525252}",
                         "top": "{imported.shared.size-1}",
-                        "width": "{imported.tabs.part-1-2-0.width}"
+                        "width": "{imported.tabs.tabs-nav-item-label-wrapper-2.width}"
                       },
                       "states": {
                         "active": {
@@ -11918,7 +11918,7 @@
                   },
                   "tokens": {
                     "background-color": "{imported.shared.color-00000000}",
-                    "border-bottom-color": "{imported.tabs.part-1-2.border-bottom-color}",
+                    "border-bottom-color": "{imported.tabs.tabs-nav-item-2.border-bottom-color}",
                     "border-left-width": "{imported.shared.size-0}",
                     "border-right-width": "{imported.shared.size-0}",
                     "border-top-width": "{imported.shared.size-0}",
@@ -11941,7 +11941,7 @@
                     "right": "{imported.shared.size-0}",
                     "row-rule-color": "{imported.shared.color-525252}",
                     "top": "{imported.shared.size-0}",
-                    "width": "{imported.tabs.part-1-2.width}"
+                    "width": "{imported.tabs.tabs-nav-item-2.width}"
                   },
                   "states": {
                     "active": {
@@ -11972,9 +11972,9 @@
                     "width": "{imported.shared.size-3}"
                   }
                 },
-                "part-1-4": {
+                "tabs__nav-item-3": {
                   "element": "button",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|tabs__nav-item.tabs__nav-link — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "appearance": "none",
@@ -11996,15 +11996,15 @@
                     "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
                   },
                   "parts": {
-                    "part-1-4-0": {
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                    "tabs__nav-item-label-wrapper-3": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|tabs__nav-item-label-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                       "layout": {
                         "display": "flex"
                       },
                       "parts": {
                         "label-3": {
                           "text": "Settings",
-                          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|tabs__nav-item-label — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
                             "display": "block",
                             "cursor": "pointer",
@@ -12043,13 +12043,13 @@
                         "right": "{imported.shared.size-0}",
                         "row-rule-color": "{imported.shared.color-525252}",
                         "top": "{imported.shared.size-1}",
-                        "width": "{imported.tabs.part-1-4-0.width}"
+                        "width": "{imported.tabs.tabs-nav-item-label-wrapper-3.width}"
                       }
                     }
                   },
                   "tokens": {
                     "background-color": "{imported.shared.color-00000000}",
-                    "border-bottom-color": "{imported.tabs.part-1-4.border-bottom-color}",
+                    "border-bottom-color": "{imported.tabs.tabs-nav-item-3.border-bottom-color}",
                     "border-left-width": "{imported.shared.size-0}",
                     "border-right-width": "{imported.shared.size-0}",
                     "border-top-width": "{imported.shared.size-0}",
@@ -12072,7 +12072,7 @@
                     "right": "{imported.shared.size-0}",
                     "row-rule-color": "{imported.shared.color-525252}",
                     "top": "{imported.shared.size-0}",
-                    "width": "{imported.tabs.part-1-4.width}"
+                    "width": "{imported.tabs.tabs-nav-item-3.width}"
                   }
                 },
                 "part-1-5": {
@@ -12287,7 +12287,7 @@
               "content": {
                 "prop": "children"
               },
-              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|tag__label — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "cursor": "default",
@@ -12571,8 +12571,8 @@
             "align": "start"
           },
           "parts": {
-            "part-0": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+            "text-input__label-wrapper": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|text-input__label-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
                 "justify": "space-between"
@@ -12581,7 +12581,7 @@
                 "label": {
                   "element": "label",
                   "text": "Label",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy label| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy label|label — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "cursor": "default"
@@ -12604,29 +12604,29 @@
               },
               "tokens": {
                 "font-size": "{imported.shared.size-14}",
-                "height": "{imported.text-input.part-0.height}",
+                "height": "{imported.text-input.text-input-label-wrapper.height}",
                 "letter-spacing": "{imported.shared.size-0-16}",
                 "line-height": "{imported.shared.size-18-0001}",
                 "width": "{imported.shared.size-288}"
               }
             },
-            "part-1": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+            "text-input__field-outer-wrapper": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|text-input__field-outer-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
                 "direction": "column",
                 "align": "start"
               },
               "parts": {
-                "part-1-0": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                "text-input__field-wrapper": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|text-input__field-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex"
                   },
                   "parts": {
-                    "part-1-0-0": {
+                    "text-input": {
                       "element": "input",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy input| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy input|text-input — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
                         "appearance": "auto",
@@ -12651,16 +12651,16 @@
                         }
                       },
                       "tokens": {
-                        "background-color": "{imported.text-input.part-1-0-0.background-color}",
-                        "border-bottom-color": "{imported.text-input.part-1-0-0.border-bottom-color}",
+                        "background-color": "{imported.text-input.text-input.background-color}",
+                        "border-bottom-color": "{imported.text-input.text-input.border-bottom-color}",
                         "border-bottom-width": "{imported.shared.size-1}",
                         "font-size": "{imported.shared.size-14}",
-                        "height": "{imported.text-input.part-1-0-0.height.unset}",
+                        "height": "{imported.text-input.text-input.height.unset}",
                         "letter-spacing": "{imported.shared.size-0-16}",
                         "line-height": "{imported.shared.size-18-0001}",
-                        "outline-color": "{imported.text-input.part-1-0-0.outline-color}",
-                        "outline-offset": "{imported.text-input.part-1-0-0.outline-offset}",
-                        "outline-width": "{imported.text-input.part-1-0-0.outline-width}",
+                        "outline-color": "{imported.text-input.text-input.outline-color}",
+                        "outline-offset": "{imported.text-input.text-input.outline-offset}",
+                        "outline-width": "{imported.text-input.text-input.outline-width}",
                         "padding-left": "{imported.shared.size-16}",
                         "padding-right": "{imported.shared.size-16}",
                         "width": "{imported.shared.size-288}"
@@ -12675,24 +12675,24 @@
                           "prop": "size",
                           "map": {
                             "lg": {
-                              "height": "{imported.text-input.part-1-0-0.height.lg}"
+                              "height": "{imported.text-input.text-input.height.lg}"
                             },
                             "md": {
-                              "height": "{imported.text-input.part-1-0-0.height.md}"
+                              "height": "{imported.text-input.text-input.height.md}"
                             },
                             "sm": {
-                              "height": "{imported.text-input.part-1-0-0.height.sm}"
+                              "height": "{imported.text-input.text-input.height.sm}"
                             },
                             "xs": {
-                              "height": "{imported.text-input.part-1-0-0.height.xs}"
+                              "height": "{imported.text-input.text-input.height.xs}"
                             }
                           }
                         }
                       ]
                     },
-                    "part-1-0-1": {
+                    "text-input__counter-alert": {
                       "element": "span",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy span||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|text-input__counter-alert|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "none",
                         "overflow-x": "hidden",
@@ -12700,7 +12700,7 @@
                         "position": "absolute"
                       },
                       "tokens": {
-                        "bottom": "{imported.text-input.part-1-0-1.bottom.unset}",
+                        "bottom": "{imported.text-input.text-input-counter-alert.bottom.unset}",
                         "font-size": "{imported.shared.size-14}",
                         "height": "{imported.shared.size-1}",
                         "left": "{imported.shared.size-0}",
@@ -12712,7 +12712,7 @@
                         "margin-top": "{imported.shared.size-neg-1}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
-                        "right": "{imported.text-input.part-1-0-1.right}",
+                        "right": "{imported.text-input.text-input-counter-alert.right}",
                         "top": "{imported.shared.size-0}",
                         "width": "{imported.shared.size-1}"
                       },
@@ -12721,16 +12721,16 @@
                           "prop": "size",
                           "map": {
                             "lg": {
-                              "bottom": "{imported.text-input.part-1-0-1.bottom.lg}"
+                              "bottom": "{imported.text-input.text-input-counter-alert.bottom.lg}"
                             },
                             "md": {
-                              "bottom": "{imported.text-input.part-1-0-1.bottom.md}"
+                              "bottom": "{imported.text-input.text-input-counter-alert.bottom.md}"
                             },
                             "sm": {
-                              "bottom": "{imported.text-input.part-1-0-1.bottom.sm}"
+                              "bottom": "{imported.text-input.text-input-counter-alert.bottom.sm}"
                             },
                             "xs": {
-                              "bottom": "{imported.text-input.part-1-0-1.bottom.xs}"
+                              "bottom": "{imported.text-input.text-input-counter-alert.bottom.xs}"
                             }
                           }
                         }
@@ -12743,7 +12743,7 @@
                   "tokens": {
                     "bottom": "{imported.shared.size-0}",
                     "font-size": "{imported.shared.size-14}",
-                    "height": "{imported.text-input.part-1-0.height.unset}",
+                    "height": "{imported.text-input.text-input-field-wrapper.height.unset}",
                     "left": "{imported.shared.size-0}",
                     "letter-spacing": "{imported.shared.size-0-16}",
                     "line-height": "{imported.shared.size-18-0001}",
@@ -12756,16 +12756,16 @@
                       "prop": "size",
                       "map": {
                         "lg": {
-                          "height": "{imported.text-input.part-1-0.height.lg}"
+                          "height": "{imported.text-input.text-input-field-wrapper.height.lg}"
                         },
                         "md": {
-                          "height": "{imported.text-input.part-1-0.height.md}"
+                          "height": "{imported.text-input.text-input-field-wrapper.height.md}"
                         },
                         "sm": {
-                          "height": "{imported.text-input.part-1-0.height.sm}"
+                          "height": "{imported.text-input.text-input-field-wrapper.height.sm}"
                         },
                         "xs": {
-                          "height": "{imported.text-input.part-1-0.height.xs}"
+                          "height": "{imported.text-input.text-input-field-wrapper.height.xs}"
                         }
                       }
                     }
@@ -12773,9 +12773,9 @@
                 }
               },
               "tokens": {
-                "flex-grow": "{imported.text-input.part-1.flex-grow}",
+                "flex-grow": "{imported.text-input.text-input-field-outer-wrapper.flex-grow}",
                 "font-size": "{imported.shared.size-14}",
-                "height": "{imported.text-input.part-1.height.unset}",
+                "height": "{imported.text-input.text-input-field-outer-wrapper.height.unset}",
                 "letter-spacing": "{imported.shared.size-0-16}",
                 "line-height": "{imported.shared.size-18-0001}",
                 "width": "{imported.shared.size-288}"
@@ -12785,16 +12785,16 @@
                   "prop": "size",
                   "map": {
                     "lg": {
-                      "height": "{imported.text-input.part-1.height.lg}"
+                      "height": "{imported.text-input.text-input-field-outer-wrapper.height.lg}"
                     },
                     "md": {
-                      "height": "{imported.text-input.part-1.height.md}"
+                      "height": "{imported.text-input.text-input-field-outer-wrapper.height.md}"
                     },
                     "sm": {
-                      "height": "{imported.text-input.part-1.height.sm}"
+                      "height": "{imported.text-input.text-input-field-outer-wrapper.height.sm}"
                     },
                     "xs": {
-                      "height": "{imported.text-input.part-1.height.xs}"
+                      "height": "{imported.text-input.text-input-field-outer-wrapper.height.xs}"
                     }
                   }
                 }
@@ -12889,9 +12889,9 @@
             "user-select": "none"
           },
           "parts": {
-            "part-0": {
+            "toggle__button": {
               "element": "button",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy button||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button|toggle__button|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "none",
                 "border-bottom-style": "none",
@@ -12909,7 +12909,7 @@
                 "border-left-width": "{imported.shared.size-0}",
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
-                "height": "{imported.toggle.part-0.height}",
+                "height": "{imported.toggle.toggle-button.height}",
                 "left": "{imported.shared.size-16}",
                 "margin-bottom": "{imported.shared.size-neg-1}",
                 "margin-left": "{imported.shared.size-neg-1}",
@@ -12921,12 +12921,12 @@
                 "padding-left": "{imported.shared.size-0}",
                 "padding-right": "{imported.shared.size-0}",
                 "padding-top": "{imported.shared.size-0}",
-                "right": "{imported.toggle.part-0.right}",
-                "width": "{imported.toggle.part-0.width}"
+                "right": "{imported.toggle.toggle-button.right}",
+                "width": "{imported.toggle.toggle-button.width}"
               },
               "states": {
                 "disabled": {
-                  "background-color": "{imported.toggle.part-0.background-color-state-disabled}",
+                  "background-color": "{imported.toggle.toggle-button.background-color-state-disabled}",
                   "color": "{imported.shared.color-1010104d}"
                 }
               },
@@ -12935,20 +12935,20 @@
                   "prop": "toggled",
                   "map": {
                     "toggled": {
-                      "bottom": "{imported.toggle.part-0.bottom.toggled}",
-                      "top": "{imported.toggle.part-0.top.toggled}"
+                      "bottom": "{imported.toggle.toggle-button.bottom.toggled}",
+                      "top": "{imported.toggle.toggle-button.top.toggled}"
                     },
                     "untoggled": {
-                      "bottom": "{imported.toggle.part-0.bottom.untoggled}",
-                      "top": "{imported.toggle.part-0.top.untoggled}"
+                      "bottom": "{imported.toggle.toggle-button.bottom.untoggled}",
+                      "top": "{imported.toggle.toggle-button.top.untoggled}"
                     }
                   }
                 }
               ]
             },
-            "part-1": {
+            "toggle__label": {
               "element": "label",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy label| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy label|toggle__label — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "inline",
                 "cursor": "default",
@@ -12957,7 +12957,7 @@
               "parts": {
                 "label": {
                   "text": "Toggle",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|toggle__label-text — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "cursor": "default",
@@ -12980,11 +12980,11 @@
                     }
                   }
                 },
-                "part-1-1": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                "toggle__appearance": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|toggle__appearance — this element exists in the real component's DOM; the static layer had no part for it.",
                   "parts": {
-                    "part-1-1-0": {
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                    "toggle__switch": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|toggle__switch — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
                         "cursor": "pointer",
@@ -13009,11 +13009,11 @@
                         "left": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
                         "top": "{imported.shared.size-0}",
-                        "width": "{imported.toggle.part-1-1-0.width}"
+                        "width": "{imported.toggle.toggle-switch.width}"
                       },
                       "states": {
                         "disabled": {
-                          "background-color": "{imported.toggle.part-1-1-0.background-color-state-disabled}"
+                          "background-color": "{imported.toggle.toggle-switch.background-color-state-disabled}"
                         }
                       },
                       "tokensByProp": [
@@ -13021,10 +13021,10 @@
                           "prop": "toggled",
                           "map": {
                             "toggled": {
-                              "background-color": "{imported.toggle.part-1-1-0.background-color.toggled}"
+                              "background-color": "{imported.toggle.toggle-switch.background-color.toggled}"
                             },
                             "untoggled": {
-                              "background-color": "{imported.toggle.part-1-1-0.background-color.untoggled}"
+                              "background-color": "{imported.toggle.toggle-switch.background-color.untoggled}"
                             }
                           }
                         }
@@ -13032,7 +13032,7 @@
                     },
                     "label-2": {
                       "text": "Off",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|toggle__text — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
                         "cursor": "pointer",
@@ -13066,7 +13066,7 @@
                     }
                   },
                   "tokens": {
-                    "column-gap": "{imported.toggle.part-1-1.column-gap}",
+                    "column-gap": "{imported.toggle.toggle-appearance.column-gap}",
                     "grid-template-rows": "{imported.shared.size-24}",
                     "height": "{imported.shared.size-24}",
                     "min-height": "{imported.shared.size-0}",
@@ -13077,10 +13077,10 @@
                       "prop": "toggled",
                       "map": {
                         "toggled": {
-                          "width": "{imported.toggle.part-1-1.width.toggled}"
+                          "width": "{imported.toggle.toggle-appearance.width.toggled}"
                         },
                         "untoggled": {
-                          "width": "{imported.toggle.part-1-1.width.untoggled}"
+                          "width": "{imported.toggle.toggle-appearance.width.untoggled}"
                         }
                       }
                     }

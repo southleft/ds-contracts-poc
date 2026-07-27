@@ -62,7 +62,7 @@
             "$type": "dimension"
           }
         },
-        "part-0": {
+        "checkbox": {
           "font-size": {
             "$value": "13.3333px",
             "$type": "dimension"
@@ -88,7 +88,7 @@
             "$type": "dimension"
           }
         },
-        "part-1": {
+        "checkbox-label": {
           "width": {
             "$value": "92.9219px",
             "$type": "dimension"
@@ -104,7 +104,7 @@
             "$type": "dimension"
           }
         },
-        "part-2": {
+        "checkbox-validation-msg": {
           "margin-top": {
             "$value": "4px",
             "$type": "dimension"
@@ -115,63 +115,63 @@
   },
   "folds": [
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
     }
   ],
   "foldedStateSkips": [
-    "fold-carries-state-delta: [disabled] part-0.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-0.border-left-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-0.border-right-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-0.border-top-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-0.caret-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-0.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-0.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [disabled] part-0.text-emphasis-color rides its source fact"
+    "fold-carries-state-delta: [disabled] checkbox.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [disabled] checkbox.border-left-color rides its source fact",
+    "fold-carries-state-delta: [disabled] checkbox.border-right-color rides its source fact",
+    "fold-carries-state-delta: [disabled] checkbox.border-top-color rides its source fact",
+    "fold-carries-state-delta: [disabled] checkbox.caret-color rides its source fact",
+    "fold-carries-state-delta: [disabled] checkbox.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] checkbox.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [disabled] checkbox.text-emphasis-color rides its source fact"
   ],
   "layout": {
     "enriched": [
@@ -199,57 +199,57 @@
         "value": "relative"
       },
       {
-        "part": "part-0",
+        "part": "checkbox",
         "channel": "appearance",
         "value": "auto"
       },
       {
-        "part": "part-0",
+        "part": "checkbox",
         "channel": "cursor",
         "value": "default"
       },
       {
-        "part": "part-0",
+        "part": "checkbox",
         "channel": "font-feature-settings",
         "value": "normal"
       },
       {
-        "part": "part-0",
+        "part": "checkbox",
         "channel": "overflow-x",
         "value": "hidden"
       },
       {
-        "part": "part-0",
+        "part": "checkbox",
         "channel": "overflow-y",
         "value": "hidden"
       },
       {
-        "part": "part-0",
+        "part": "checkbox",
         "channel": "position",
         "value": "absolute"
       },
       {
-        "part": "part-0",
+        "part": "checkbox",
         "channel": "text-rendering",
         "value": "auto"
       },
       {
-        "part": "part-0",
+        "part": "checkbox",
         "channel": "text-wrap-mode",
         "value": "nowrap"
       },
       {
-        "part": "part-1",
+        "part": "checkbox-label",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1",
+        "part": "checkbox-label",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1",
+        "part": "checkbox-label",
         "channel": "user-select",
         "value": "none"
       },
@@ -267,19 +267,19 @@
     "state": [
       {
         "state": "disabled",
-        "part": "label",
+        "part": "checkbox-label",
         "channel": "cursor",
         "value": "not-allowed"
       },
       {
         "state": "disabled",
-        "part": "part-1",
+        "part": "label",
         "channel": "cursor",
         "value": "not-allowed"
       },
       {
         "state": "focus-visible",
-        "part": "part-0",
+        "part": "checkbox",
         "channel": "outline-style",
         "value": "auto"
       }
@@ -287,35 +287,35 @@
   },
   "codeOnlyChannels": [
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "clip",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "rect(0px, 0px, 0px, 0px)",
       "distinctValues": 1
     },
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "line-height",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal",
       "distinctValues": 1
     },
     {
-      "part": "part-2",
+      "part": "checkbox__validation-msg",
       "channel": "align-items",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "flex-start",
       "distinctValues": 1
     },
     {
-      "part": "part-2",
+      "part": "checkbox__validation-msg",
       "channel": "height",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "auto",
       "distinctValues": 1
     },
     {
-      "part": "part-2",
+      "part": "checkbox__validation-msg",
       "channel": "width",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "100%",
@@ -325,6 +325,90 @@
   "stateOverflow": [],
   "overflowBindings": [
     {
+      "part": "checkbox-label",
+      "channel": "border-bottom-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "checkbox-label",
+      "channel": "border-left-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "checkbox-label",
+      "channel": "border-right-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "checkbox-label",
+      "channel": "border-top-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "checkbox-label",
+      "channel": "caret-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "checkbox-label",
+      "channel": "column-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "checkbox-label",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "checkbox-label",
+      "channel": "row-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "checkbox-label",
+      "channel": "text-decoration-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "checkbox-label",
+      "channel": "text-emphasis-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-16161640}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "checkbox",
+      "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-545454}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "checkbox",
+      "channel": "row-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-545454}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
       "part": "label",
       "channel": "border-bottom-color",
       "state": "disabled",
@@ -395,108 +479,24 @@
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
-      "channel": "outline-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-545454}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-0",
-      "channel": "row-rule-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-545454}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1",
-      "channel": "border-bottom-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-16161640}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1",
-      "channel": "border-left-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-16161640}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1",
-      "channel": "border-right-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-16161640}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1",
-      "channel": "border-top-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-16161640}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1",
-      "channel": "caret-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-16161640}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1",
-      "channel": "column-rule-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-16161640}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1",
-      "channel": "outline-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-16161640}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1",
-      "channel": "row-rule-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-16161640}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1",
-      "channel": "text-decoration-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-16161640}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-1",
-      "channel": "text-emphasis-color",
-      "state": "disabled",
-      "ref": "{imported.shared.color-16161640}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "outline-color",
       "state": "focus-visible",
-      "ref": "{imported.checkbox.part-0.outline-color-state-focus-visible}",
+      "ref": "{imported.checkbox.checkbox.outline-color-state-focus-visible}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "outline-offset",
       "state": "focus-visible",
-      "ref": "{imported.checkbox.part-0.outline-offset-state-focus-visible}",
+      "ref": "{imported.checkbox.checkbox.outline-offset-state-focus-visible}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "checkbox",
       "channel": "outline-width",
       "state": "focus-visible",
-      "ref": "{imported.checkbox.part-0.outline-width-state-focus-visible}",
+      "ref": "{imported.checkbox.checkbox.outline-width-state-focus-visible}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     }
   ],
@@ -507,7 +507,7 @@
       {
         "combo": "unchecked.enabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -516,7 +516,7 @@
       {
         "combo": "unchecked.enabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -525,7 +525,7 @@
       {
         "combo": "unchecked.enabled",
         "interaction": "focus-visible",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::before",
         "deltaVsDefault": {
           "outline-color": "rgba(15, 98, 254, 1)",
@@ -537,7 +537,7 @@
       {
         "combo": "unchecked.disabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -546,7 +546,7 @@
       {
         "combo": "unchecked.disabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -555,7 +555,7 @@
       {
         "combo": "checked.enabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -564,7 +564,7 @@
       {
         "combo": "checked.enabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -573,7 +573,7 @@
       {
         "combo": "checked.enabled",
         "interaction": "focus-visible",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::before",
         "deltaVsDefault": {
           "outline-color": "rgba(15, 98, 254, 1)",
@@ -585,7 +585,7 @@
       {
         "combo": "checked.disabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -594,7 +594,7 @@
       {
         "combo": "checked.disabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -603,7 +603,7 @@
       {
         "combo": "indeterminate.enabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -612,7 +612,7 @@
       {
         "combo": "indeterminate.enabled",
         "interaction": "default",
-        "part": "part-1",
+        "part": "checkbox-label",
         "pseudo": "::after",
         "deltaVsDefault": {
           "content": "\"\""
@@ -627,24 +627,24 @@
   "styledChannelReceipts": [
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "control-fallback: no control for <input> — span control used (part part-0)",
-    "control-fallback: no control for <label> — span control used (part part-1)",
+    "absolute-geometry-admitted: checkbox — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: checkbox-label — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: checkbox__validation-msg — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "control-fallback: no control for <input> — span control used (part checkbox)",
+    "control-fallback: no control for <label> — span control used (part checkbox-label)",
     "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "inheritance-check-rejected: label.font-weight — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-0.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: part-0.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-only: label.font-size equals ancestor \"part-1\" on all 24 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: label.letter-spacing equals ancestor \"part-1\" on all 24 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: label.line-height equals ancestor \"part-1\" on all 24 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-1.font-size equals ancestor \"root\" on all 24 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1.letter-spacing equals ancestor \"root\" on all 24 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-1.line-height equals ancestor \"root\" on all 24 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-2.font-size equals ancestor \"root\" on all 24 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-2.letter-spacing equals ancestor \"root\" on all 24 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-2.line-height equals ancestor \"root\" on all 24 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+    "inheritance-check-rejected: checkbox.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: checkbox.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"checkbox-label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: checkbox-label.font-size equals ancestor \"root\" on all 24 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: checkbox-label.letter-spacing equals ancestor \"root\" on all 24 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: checkbox-label.line-height equals ancestor \"root\" on all 24 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: checkbox__validation-msg.font-size equals ancestor \"root\" on all 24 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: checkbox__validation-msg.letter-spacing equals ancestor \"root\" on all 24 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: checkbox__validation-msg.line-height equals ancestor \"root\" on all 24 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-size equals ancestor \"checkbox-label\" on all 24 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.letter-spacing equals ancestor \"checkbox-label\" on all 24 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: label.line-height equals ancestor \"checkbox-label\" on all 24 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -653,11 +653,11 @@
         "join": "matched"
       },
       {
-        "part": "part-0",
+        "part": "checkbox",
         "join": "computed-only"
       },
       {
-        "part": "part-1",
+        "part": "checkbox-label",
         "join": "computed-only"
       },
       {
@@ -665,7 +665,7 @@
         "join": "computed-only"
       },
       {
-        "part": "part-2",
+        "part": "checkbox__validation-msg",
         "join": "computed-only"
       }
     ],
@@ -675,41 +675,41 @@
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
     "partsCarried": [
       "root",
-      "part-0",
-      "part-1",
+      "checkbox",
+      "checkbox-label",
       "label",
-      "part-2"
+      "checkbox__validation-msg"
     ],
     "svgAssets": [],
     "receipts": [
       "root-display-carried: flex",
-      "sr-only-carried-as-hidden: part-0 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "sr-only-carried-as-hidden: checkbox is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "literal-text-carried: label = \"Checkbox\" (no text prop sample matches — the mounted value is carried verbatim)",
       "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
     ],
     "refusals": [
-      "pseudo-decor-nonuniform: part-1::before drawn geometry/fill varies across the drawn combos ({\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 1)\",\"radius\":2} vs {\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 0.25)\",\"radius\":2}) — the bounded v1 decor grammar carries one box; named refusal"
+      "pseudo-decor-nonuniform: checkbox-label::before drawn geometry/fill varies across the drawn combos ({\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 1)\",\"radius\":2} vs {\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 0.25)\",\"radius\":2}) — the bounded v1 decor grammar carries one box; named refusal"
     ]
   },
   "enrichmentNotes": [
     "layout enriched: root.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.align = start (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox-label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox-label.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: checkbox-label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [disabled] checkbox-label.cursor = not-allowed (v15 declared vocabulary)",
     "declared state fact carried: [disabled] label.cursor = not-allowed (v15 declared vocabulary)",
-    "declared state fact carried: [disabled] part-1.cursor = not-allowed (v15 declared vocabulary)",
-    "declared state fact carried: [focus-visible] part-0.outline-style = auto (v15 declared vocabulary)"
+    "declared state fact carried: [focus-visible] checkbox.outline-style = auto (v15 declared vocabulary)"
   ]
 }

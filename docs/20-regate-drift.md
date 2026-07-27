@@ -171,6 +171,41 @@ and 0). Card's `pctEqual` is proven unmoved by the offline instrument, so a
 recapture there is cosmetic — but the 54 in that committed file is a stale
 number and this is the sentence that says so.
 
+## GATE ORDERING GUARD (task #28) — what task #21's refusal did not cover
+
+Task #21 made `loadConfig` refuse a `tokens.minted` path that does not EXIST.
+That is not the state the pipeline actually produces. The recipe every library
+follows runs the HARNESS first and `promote-floor.mjs` second, so on a round
+that introduces the minted tree the file is created as an **empty stub** to
+satisfy the existence refusal — and an empty stub passes.
+
+Measured: all ten of Carbon's committed scorecards recorded
+`shippedMinted.leavesAdded: 0`, while the offline re-fuse of the SAME captures
+against the SAME shipped tree measured **755–1037** leaves added. Every
+divergence was `resolvedEqual: true`, so no value was ever wrong; the receipts
+simply understated what the gate would measure. Carbon is the only library that
+recorded it — astryx and altitude promoted their trees in an earlier round, so
+their harness runs already had one to see.
+
+**The guard, in `loadConfig` (general, not Carbon-specific):**
+
+| state | outcome |
+|---|---|
+| `tokens.minted` declared, file ABSENT | refused by name (task #21, unchanged) |
+| declared, file present, **ZERO leaves** | **refused by name** — "the fidelity gate would record shippedMinted.leavesAdded: 0 for a tree the promotion has not written yet (ORDERING: the harness runs BEFORE promote-floor)" |
+| declared, zero leaves, `tokens.mintedBootstrap: true` | **allowed and RECEIPTED** — the scorecard carries `shippedMinted.bootstrap: true` and the sentence *"measured without a shipped minted tree"* |
+| `mintedBootstrap: true` but the tree now HAS leaves | **refused by name** — the allowance cannot outlive its reason |
+
+**Why an explicit flag rather than a silent first-run pass.** A bootstrap run is
+a real, different measurement, and the artifact is where that has to be legible
+— a reader holding a scorecard cannot tell "there was no tree" from "the tree
+added nothing" if both spell it `0`. The flag also has to be *deletable*, which
+is why leaving it set once the tree exists is itself a refusal: an allowance
+that never expires is just the defect with a name on it.
+
+Pinned by the eval `gate-inventory-shipped-minted` (all four states, plus a
+sweep asserting no shipping config leans on the allowance).
+
 ## Classification
 
 | component | committed → offline | class | cause, located |

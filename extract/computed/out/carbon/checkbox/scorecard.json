@@ -84,68 +84,80 @@
   ],
   "topMismatchedChannels": [
     [
-      "part-0.clip",
+      "checkbox.clip",
       24
     ],
     [
-      "part-0.line-height",
+      "checkbox.line-height",
       24
     ],
     [
-      "part-0.overflow-x",
+      "checkbox.overflow-x",
       24
     ],
     [
-      "part-0.overflow-y",
+      "checkbox.overflow-y",
       24
     ],
     [
-      "part-2.align-items",
+      "checkbox__validation-msg.align-items",
       24
     ],
     [
-      "part-0.outline-color",
+      "checkbox.outline-color",
       15
     ],
     [
-      "part-0.border-bottom-color",
+      "checkbox.border-bottom-color",
       12
     ],
     [
-      "part-0.border-left-color",
+      "checkbox.border-left-color",
       12
     ],
     [
-      "part-0.border-right-color",
+      "checkbox.border-right-color",
       12
     ],
     [
-      "part-0.border-top-color",
+      "checkbox.border-top-color",
       12
     ],
     [
-      "part-0.caret-color",
+      "checkbox.caret-color",
       12
     ],
     [
-      "part-0.color",
+      "checkbox.color",
       12
     ],
     [
-      "part-0.column-rule-color",
+      "checkbox.column-rule-color",
       12
     ],
     [
-      "part-0.row-rule-color",
+      "checkbox.row-rule-color",
       12
     ],
     [
-      "part-0.text-decoration-color",
+      "checkbox.text-decoration-color",
       12
     ]
   ],
   "namedLosses": [
-    "promotion: pseudo-decor-nonuniform: part-1::before drawn geometry/fill varies across the drawn combos ({\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 1)\",\"radius\":2} vs {\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 0.25)\",\"radius\":2}) — the bounded v1 decor grammar carries one box; named refusal",
+    "promotion: pseudo-decor-nonuniform: checkbox-label::before drawn geometry/fill varies across the drawn combos ({\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 1)\",\"radius\":2} vs {\"w\":16,\"h\":16,\"top\":2,\"left\":0,\"bg\":\"rgba(22, 22, 22, 0.25)\",\"radius\":2}) — the bounded v1 decor grammar carries one box; named refusal",
+    "overflow: checkbox-label.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-label.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-label.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-label.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-label.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-label.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-label.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-label.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-label.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox-label.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -156,26 +168,14 @@
     "overflow: label.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-0.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-0.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-1.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-1.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-1.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-1.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-1.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-1.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-1.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-1.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-1.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-1.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-0.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-0.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: part-0.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "code-only: part-0.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-0.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-2.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-2.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-2.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    "overflow: checkbox.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: checkbox.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: checkbox.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: checkbox.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: checkbox__validation-msg.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: checkbox__validation-msg.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: checkbox__validation-msg.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "unresolvedTokenRefs": {
     "count": 0,
@@ -183,7 +183,7 @@
   },
   "shippedMinted": {
     "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-    "leavesAdded": 0,
+    "leavesAdded": 1105,
     "divergent": []
   },
   "rows": [
@@ -195,31 +195,31 @@
       "pctAA": 1.0384114583333333,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -234,31 +234,31 @@
       "pctAA": 1.0384114583333333,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -273,37 +273,37 @@
       "pctAA": 1.494140625,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(0, 95, 204, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -318,31 +318,31 @@
       "pctAA": 1.0384114583333333,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -357,97 +357,97 @@
       "pctAA": 1.005859375,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -459,7 +459,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -474,97 +474,97 @@
       "pctAA": 1.005859375,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -576,7 +576,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -591,97 +591,97 @@
       "pctAA": 1.005859375,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -693,7 +693,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -708,97 +708,97 @@
       "pctAA": 1.005859375,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -810,7 +810,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -825,31 +825,31 @@
       "pctAA": 1.5983072916666667,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -864,31 +864,31 @@
       "pctAA": 1.5983072916666667,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -903,37 +903,37 @@
       "pctAA": 2.0279947916666665,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(0, 95, 204, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -948,31 +948,31 @@
       "pctAA": 1.5983072916666667,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -987,97 +987,97 @@
       "pctAA": 1.552734375,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -1089,7 +1089,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -1104,97 +1104,97 @@
       "pctAA": 1.552734375,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -1206,7 +1206,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -1221,97 +1221,97 @@
       "pctAA": 1.552734375,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -1323,7 +1323,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -1338,97 +1338,97 @@
       "pctAA": 1.552734375,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -1440,7 +1440,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -1455,31 +1455,31 @@
       "pctAA": 1.6243489583333333,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -1494,31 +1494,31 @@
       "pctAA": 1.6243489583333333,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -1533,37 +1533,37 @@
       "pctAA": 2.0540364583333335,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(0, 95, 204, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -1578,31 +1578,31 @@
       "pctAA": 1.6243489583333333,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -1617,97 +1617,97 @@
       "pctAA": 1.591796875,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -1719,7 +1719,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -1734,97 +1734,97 @@
       "pctAA": 1.591796875,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -1836,7 +1836,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -1851,97 +1851,97 @@
       "pctAA": 1.591796875,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -1953,7 +1953,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"
@@ -1968,97 +1968,97 @@
       "pctAA": 1.591796875,
       "mismatches": [
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-bottom-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-left-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-right-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "border-top-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "caret-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "clip",
           "ours": "auto",
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "column-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "line-height",
           "ours": "18.0001px",
           "theirs": "normal"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "outline-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-x",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "overflow-y",
           "ours": "clip",
           "theirs": "hidden"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-decoration-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-0",
+          "part": "checkbox",
           "channel": "text-emphasis-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
         {
-          "part": "part-1",
+          "part": "checkbox-label",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
@@ -2070,7 +2070,7 @@
           "theirs": "not-allowed"
         },
         {
-          "part": "part-2",
+          "part": "checkbox__validation-msg",
           "channel": "align-items",
           "ours": "normal",
           "theirs": "flex-start"

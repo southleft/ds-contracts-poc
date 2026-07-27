@@ -26,52 +26,52 @@
         "value": "hidden"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "border-bottom-style",
         "value": "none"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "border-left-style",
         "value": "none"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "border-right-style",
         "value": "none"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "border-top-style",
         "value": "none"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "outline-style",
         "value": "solid"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "transition-delay",
         "value": "0s, 0s"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "transition-duration",
         "value": "0.11s, 0.11s"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "transition-property",
         "value": "outline, background-color"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
       }
@@ -169,7 +169,7 @@
         48
       ],
       [
-        "part-0-1.flex-wrap",
+        "inline-notification__text-wrapper.flex-wrap",
         48
       ],
       [
@@ -207,7 +207,7 @@
     ],
     "namedLosses": [
       "overflow: part-0-0-1-2.fill — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: part-1.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+      "overflow: inline-notification__close-button.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0-0.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0-0.fill — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -215,9 +215,9 @@
       "code-only: part-0-0-2.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0-1.d — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0-1.fill — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-0-1.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: inline-notification__text-wrapper.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-3.word-break — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: part-1.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: inline-notification__close-button.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -340,7 +340,7 @@
             "theirs": "inline"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -380,7 +380,7 @@
             "theirs": "inline"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -420,7 +420,7 @@
             "theirs": "inline"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -460,7 +460,7 @@
             "theirs": "inline"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -500,7 +500,7 @@
             "theirs": "inline"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -540,7 +540,7 @@
             "theirs": "inline"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -580,7 +580,7 @@
             "theirs": "inline"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -620,7 +620,7 @@
             "theirs": "inline"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -660,7 +660,7 @@
             "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -700,7 +700,7 @@
             "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -740,7 +740,7 @@
             "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -780,7 +780,7 @@
             "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -820,7 +820,7 @@
             "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -860,7 +860,7 @@
             "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -900,7 +900,7 @@
             "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -940,7 +940,7 @@
             "theirs": "path(\"M 16 2 A 14 14 0 1 0 30 16 A 14 14 0 0 0 16 2 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -980,7 +980,7 @@
             "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1020,7 +1020,7 @@
             "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1060,7 +1060,7 @@
             "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1100,7 +1100,7 @@
             "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1140,7 +1140,7 @@
             "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1180,7 +1180,7 @@
             "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1220,7 +1220,7 @@
             "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1260,7 +1260,7 @@
             "theirs": "path(\"M 26 4 H 6 A 2 2 0 0 0 4 6 V 26 A 2 2 0 0 0 6 28 H 26 A 2 2 0 0 0 28 26 V 6 A 2 2 0 0 0 26 4 Z M 16 8 A 1.5 1.5 0 1 1 14.5 9.5 A 1.5 1.5 0 0 1 16 8 Z M 20 24.125 H 12 V 21.875 H 14.875 V 16.125 H 13 V 13.875 H 17.125 V 21.875 H 20 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1306,7 +1306,7 @@
             "theirs": "none"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1352,7 +1352,7 @@
             "theirs": "none"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1398,7 +1398,7 @@
             "theirs": "none"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1444,7 +1444,7 @@
             "theirs": "none"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1490,7 +1490,7 @@
             "theirs": "none"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1536,7 +1536,7 @@
             "theirs": "none"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1582,7 +1582,7 @@
             "theirs": "none"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1628,7 +1628,7 @@
             "theirs": "none"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1668,7 +1668,7 @@
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1708,7 +1708,7 @@
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1748,7 +1748,7 @@
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1788,7 +1788,7 @@
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1828,7 +1828,7 @@
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1868,7 +1868,7 @@
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1908,7 +1908,7 @@
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1948,7 +1948,7 @@
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -1994,7 +1994,7 @@
             "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -2040,7 +2040,7 @@
             "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -2086,7 +2086,7 @@
             "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -2132,7 +2132,7 @@
             "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -2178,7 +2178,7 @@
             "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -2224,7 +2224,7 @@
             "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -2270,7 +2270,7 @@
             "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"
@@ -2316,7 +2316,7 @@
             "theirs": "path(\"M 29 30 H 3 A 1 1 0 0 1 2.1128 28.5386 L 15.1128 3.5386 A 1 1 0 0 1 16.8872 3.5386 L 29.8872 28.5386 A 1 1 0 0 1 29 30 Z M 4.6507 28 H 27.3493 L 27.3513 27.9967 L 16.002 6.1714 H 15.998 L 4.6487 27.9967 Z\")"
           },
           {
-            "part": "part-0-1",
+            "part": "inline-notification__text-wrapper",
             "channel": "flex-wrap",
             "ours": "nowrap",
             "theirs": "wrap"

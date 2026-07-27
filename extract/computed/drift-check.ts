@@ -32,7 +32,7 @@
  * rather than rediscovered every round (docs/20-regate-drift.md).
  */
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 const HERE = path.resolve(new URL('.', import.meta.url).pathname);
@@ -47,16 +47,55 @@ const WRITE = process.argv.includes('--write');
 const TOLERANCE = Number(arg('tolerance') ?? '0.001');
 const ONLY_CONFIG = arg('config');
 
-/** library → [config path, out subdir]. `polaris` is the un-namespaced root
- *  for historical reasons (regate.ts's --out defect note). */
-const LIBRARIES: Array<{ name: string; config: string; out: string }> = [
-  { name: 'polaris', config: 'extract/computed/configs/polaris.json', out: 'extract/computed/out' },
-  { name: 'mui', config: 'extract/computed/configs/mui.json', out: 'extract/computed/out/mui' },
-  { name: 'astryx', config: 'extract/computed/configs/astryx.json', out: 'extract/computed/out/astryx' },
-  { name: 'tailwind', config: 'extract/computed/configs/tailwind.json', out: 'extract/computed/out/tailwind' },
-  { name: 'carbon', config: 'extract/computed/configs/carbon.json', out: 'extract/computed/out/carbon' },
-  { name: 'altitude', config: 'extract/computed/configs/altitude.json', out: 'extract/computed/out/altitude' },
-];
+/**
+ * The library registry is DERIVED from `extract/computed/configs/*.json`, not
+ * listed here. It used to be a hand-written array, which meant adding a config
+ * left the instrument silently stale — a library could ship with no drift pin
+ * at all and nothing would say so. Deriving it makes "there is a config" and
+ * "there is a drift row" the same fact.
+ *
+ * Two derivations, both from the config itself:
+ *   · `name` = the config's own `library.name`, falling back to the file stem.
+ *   · `out`  = `extract/computed/out/<name>` when that directory exists; else
+ *     the un-namespaced `extract/computed/out` IF that root actually holds
+ *     this config's own components (polaris, for the historical reason
+ *     regate.ts's `--out` defect note records) — never by name-matching.
+ *
+ * A config whose components have NO committed harness scorecard anywhere is
+ * SKIPPED, and the skip is PRINTED with the config named — never dropped in
+ * silence. `polaris-depth.json` is the standing case: a single-component
+ * depth receipt sharing polaris's package that writes to
+ * `extract/computed/depth/receipts`, so it has no capture output of its own
+ * and must not be mapped onto polaris's.
+ */
+const CONFIG_DIR = path.join(HERE, 'configs');
+const OUT_ROOT = path.join(HERE, 'out');
+
+function discoverLibraries(): { libraries: Array<{ name: string; config: string; out: string }>; skipped: string[] } {
+  const libraries: Array<{ name: string; config: string; out: string }> = [];
+  const skipped: string[] = [];
+  for (const file of readdirSync(CONFIG_DIR).filter((f) => f.endsWith('.json')).sort()) {
+    const abs = path.join(CONFIG_DIR, file);
+    const cfg = JSON.parse(readFileSync(abs, 'utf8')) as { library?: { name?: string }; components: Array<{ name: string }> };
+    const name = cfg.library?.name ?? file.replace(/\.json$/, '');
+    const holdsComponents = (dir: string): boolean =>
+      cfg.components.some((c) => existsSync(path.join(dir, c.name.toLowerCase(), 'scorecard.json')));
+    const namespaced = path.join(OUT_ROOT, name);
+    const out = existsSync(namespaced) && holdsComponents(namespaced)
+      ? namespaced
+      : holdsComponents(OUT_ROOT)
+        ? OUT_ROOT
+        : null;
+    if (out === null) {
+      skipped.push(`${file} (library "${name}") — no committed harness scorecard for any of its ${cfg.components.length} component(s), under ${path.relative(REPO, namespaced)} or ${path.relative(REPO, OUT_ROOT)}; nothing to drift from`);
+      continue;
+    }
+    libraries.push({ name, config: path.relative(REPO, abs), out: path.relative(REPO, out) });
+  }
+  return { libraries, skipped };
+}
+
+const { libraries: LIBRARIES, skipped: SKIPPED_CONFIGS } = discoverLibraries();
 
 interface BaselineRow {
   library: string;
@@ -98,6 +137,8 @@ const prior: BaselineRow[] = existsSync(BASELINE)
   ? (JSON.parse(readFileSync(BASELINE, 'utf8')) as { rows: BaselineRow[] }).rows
   : [];
 const priorBy = new Map<string, BaselineRow>(prior.map((r) => [`${r.library}/${r.component}`, r]));
+
+for (const s of SKIPPED_CONFIGS) process.stdout.write(`  … config SKIPPED: ${s}\n`);
 
 for (const lib of LIBRARIES) {
   if (ONLY_CONFIG && path.resolve(REPO, ONLY_CONFIG) !== path.resolve(REPO, lib.config)) continue;

@@ -47,9 +47,9 @@
         "align": "start"
       },
       "parts": {
-        "part-0": {
+        "checkbox": {
           "element": "input",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input|checkbox|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "none",
             "appearance": "auto",
@@ -69,9 +69,9 @@
           "tokens": {
             "bottom": "{imported.shared.size-1}",
             "color": "{imported.shared.color-000000}",
-            "font-size": "{imported.checkbox.part-0.font-size}",
+            "font-size": "{imported.checkbox.checkbox.font-size}",
             "height": "{imported.shared.size-1}",
-            "left": "{imported.checkbox.part-0.left}",
+            "left": "{imported.checkbox.checkbox.left}",
             "margin-bottom": "{imported.shared.size-neg-1}",
             "margin-left": "{imported.shared.size-neg-1}",
             "margin-right": "{imported.shared.size-neg-1}",
@@ -79,7 +79,7 @@
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "outline-color": "{imported.shared.color-000000}",
-            "right": "{imported.checkbox.part-0.right}",
+            "right": "{imported.checkbox.checkbox.right}",
             "row-rule-color": "{imported.shared.color-000000}",
             "top": "{imported.shared.size-20}",
             "width": "{imported.shared.size-1}"
@@ -90,16 +90,16 @@
             }
           }
         },
-        "part-1": {
+        "checkbox-label": {
           "element": "label",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy label| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label|checkbox-label — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
             "display": "flex"
           },
           "parts": {
             "label": {
               "text": "Checkbox",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|checkbox-label-text — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "cursor": "pointer",
@@ -149,7 +149,7 @@
             "padding-top": "{imported.shared.size-1}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}",
-            "width": "{imported.checkbox.part-1.width}"
+            "width": "{imported.checkbox.checkbox-label.width}"
           },
           "states": {
             "disabled": {
@@ -157,8 +157,8 @@
             }
           }
         },
-        "part-2": {
-          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+        "checkbox__validation-msg": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|checkbox__validation-msg — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "none"
           },
@@ -166,7 +166,7 @@
             "font-size": "{imported.shared.size-14}",
             "letter-spacing": "{imported.shared.size-0-16}",
             "line-height": "{imported.shared.size-18-0001}",
-            "margin-top": "{imported.checkbox.part-2.margin-top}",
+            "margin-top": "{imported.checkbox.checkbox-validation-msg.margin-top}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
           }

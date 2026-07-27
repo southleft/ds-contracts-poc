@@ -42,7 +42,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "text-input__label-wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
@@ -51,7 +51,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/text-input/part-0/height"
+                "varName": "imported/text-input/text-input-label-wrapper/height"
               },
               "fixedWidth": {
                 "px": 288,
@@ -75,7 +75,7 @@ const COMPONENTS = [
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "text-input__field-outer-wrapper",
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
@@ -83,7 +83,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/text-input/part-1/height/xs"
+                "varName": "imported/text-input/text-input-field-outer-wrapper/height/xs"
               },
               "fixedWidth": {
                 "px": 288,
@@ -92,7 +92,7 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "text-input__field-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -101,7 +101,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 24,
-                    "varName": "imported/text-input/part-1-0/height/xs"
+                    "varName": "imported/text-input/text-input-field-wrapper/height/xs"
                   },
                   "fixedWidth": {
                     "px": 288,
@@ -110,15 +110,15 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-0-0",
+                      "name": "text-input",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
                       "grow": true,
-                      "fill": "imported/text-input/part-1-0-0/background-color",
-                      "stroke": "imported/text-input/part-1-0-0/border-bottom-color",
+                      "fill": "imported/text-input/text-input/background-color",
+                      "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
@@ -126,7 +126,7 @@ const COMPONENTS = [
                       },
                       "fixedHeight": {
                         "px": 24,
-                        "varName": "imported/text-input/part-1-0-0/height/xs"
+                        "varName": "imported/text-input/text-input/height/xs"
                       },
                       "fixedWidth": {
                         "px": 288,
@@ -177,7 +177,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "text-input__label-wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
@@ -186,7 +186,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/text-input/part-0/height"
+                "varName": "imported/text-input/text-input-label-wrapper/height"
               },
               "fixedWidth": {
                 "px": 288,
@@ -210,7 +210,7 @@ const COMPONENTS = [
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "text-input__field-outer-wrapper",
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
@@ -218,7 +218,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 32,
-                "varName": "imported/text-input/part-1/height/sm"
+                "varName": "imported/text-input/text-input-field-outer-wrapper/height/sm"
               },
               "fixedWidth": {
                 "px": 288,
@@ -227,7 +227,7 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "text-input__field-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -236,7 +236,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 32,
-                    "varName": "imported/text-input/part-1-0/height/sm"
+                    "varName": "imported/text-input/text-input-field-wrapper/height/sm"
                   },
                   "fixedWidth": {
                     "px": 288,
@@ -245,15 +245,15 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-0-0",
+                      "name": "text-input",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
                       "grow": true,
-                      "fill": "imported/text-input/part-1-0-0/background-color",
-                      "stroke": "imported/text-input/part-1-0-0/border-bottom-color",
+                      "fill": "imported/text-input/text-input/background-color",
+                      "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
@@ -261,7 +261,7 @@ const COMPONENTS = [
                       },
                       "fixedHeight": {
                         "px": 32,
-                        "varName": "imported/text-input/part-1-0-0/height/sm"
+                        "varName": "imported/text-input/text-input/height/sm"
                       },
                       "fixedWidth": {
                         "px": 288,
@@ -312,7 +312,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "text-input__label-wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
@@ -321,7 +321,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/text-input/part-0/height"
+                "varName": "imported/text-input/text-input-label-wrapper/height"
               },
               "fixedWidth": {
                 "px": 288,
@@ -345,7 +345,7 @@ const COMPONENTS = [
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "text-input__field-outer-wrapper",
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
@@ -353,7 +353,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 40,
-                "varName": "imported/text-input/part-1/height/md"
+                "varName": "imported/text-input/text-input-field-outer-wrapper/height/md"
               },
               "fixedWidth": {
                 "px": 288,
@@ -362,7 +362,7 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "text-input__field-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -371,7 +371,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 40,
-                    "varName": "imported/text-input/part-1-0/height/md"
+                    "varName": "imported/text-input/text-input-field-wrapper/height/md"
                   },
                   "fixedWidth": {
                     "px": 288,
@@ -380,15 +380,15 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-0-0",
+                      "name": "text-input",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
                       "grow": true,
-                      "fill": "imported/text-input/part-1-0-0/background-color",
-                      "stroke": "imported/text-input/part-1-0-0/border-bottom-color",
+                      "fill": "imported/text-input/text-input/background-color",
+                      "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
@@ -396,7 +396,7 @@ const COMPONENTS = [
                       },
                       "fixedHeight": {
                         "px": 40,
-                        "varName": "imported/text-input/part-1-0-0/height/md"
+                        "varName": "imported/text-input/text-input/height/md"
                       },
                       "fixedWidth": {
                         "px": 288,
@@ -447,7 +447,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "text-input__label-wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
@@ -456,7 +456,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/text-input/part-0/height"
+                "varName": "imported/text-input/text-input-label-wrapper/height"
               },
               "fixedWidth": {
                 "px": 288,
@@ -480,7 +480,7 @@ const COMPONENTS = [
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "text-input__field-outer-wrapper",
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
@@ -488,7 +488,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 48,
-                "varName": "imported/text-input/part-1/height/lg"
+                "varName": "imported/text-input/text-input-field-outer-wrapper/height/lg"
               },
               "fixedWidth": {
                 "px": 288,
@@ -497,7 +497,7 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "text-input__field-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -506,7 +506,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 48,
-                    "varName": "imported/text-input/part-1-0/height/lg"
+                    "varName": "imported/text-input/text-input-field-wrapper/height/lg"
                   },
                   "fixedWidth": {
                     "px": 288,
@@ -515,15 +515,15 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-0-0",
+                      "name": "text-input",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
                       "grow": true,
-                      "fill": "imported/text-input/part-1-0-0/background-color",
-                      "stroke": "imported/text-input/part-1-0-0/border-bottom-color",
+                      "fill": "imported/text-input/text-input/background-color",
+                      "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
@@ -531,7 +531,7 @@ const COMPONENTS = [
                       },
                       "fixedHeight": {
                         "px": 48,
-                        "varName": "imported/text-input/part-1-0-0/height/lg"
+                        "varName": "imported/text-input/text-input/height/lg"
                       },
                       "fixedWidth": {
                         "px": 288,
@@ -584,7 +584,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "text-input__label-wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
@@ -593,7 +593,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/text-input/part-0/height"
+                "varName": "imported/text-input/text-input-label-wrapper/height"
               },
               "fixedWidth": {
                 "px": 288,
@@ -617,7 +617,7 @@ const COMPONENTS = [
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "text-input__field-outer-wrapper",
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
@@ -625,7 +625,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/text-input/part-1/height/xs"
+                "varName": "imported/text-input/text-input-field-outer-wrapper/height/xs"
               },
               "fixedWidth": {
                 "px": 288,
@@ -634,7 +634,7 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "text-input__field-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -643,7 +643,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 24,
-                    "varName": "imported/text-input/part-1-0/height/xs"
+                    "varName": "imported/text-input/text-input-field-wrapper/height/xs"
                   },
                   "fixedWidth": {
                     "px": 288,
@@ -652,15 +652,15 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-0-0",
+                      "name": "text-input",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
                       "grow": true,
-                      "fill": "imported/text-input/part-1-0-0/background-color",
-                      "stroke": "imported/text-input/part-1-0-0/border-bottom-color",
+                      "fill": "imported/text-input/text-input/background-color",
+                      "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
@@ -668,7 +668,7 @@ const COMPONENTS = [
                       },
                       "fixedHeight": {
                         "px": 24,
-                        "varName": "imported/text-input/part-1-0-0/height/xs"
+                        "varName": "imported/text-input/text-input/height/xs"
                       },
                       "fixedWidth": {
                         "px": 288,
@@ -720,7 +720,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "text-input__label-wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
@@ -729,7 +729,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/text-input/part-0/height"
+                "varName": "imported/text-input/text-input-label-wrapper/height"
               },
               "fixedWidth": {
                 "px": 288,
@@ -753,7 +753,7 @@ const COMPONENTS = [
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "text-input__field-outer-wrapper",
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
@@ -761,7 +761,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 32,
-                "varName": "imported/text-input/part-1/height/sm"
+                "varName": "imported/text-input/text-input-field-outer-wrapper/height/sm"
               },
               "fixedWidth": {
                 "px": 288,
@@ -770,7 +770,7 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "text-input__field-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -779,7 +779,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 32,
-                    "varName": "imported/text-input/part-1-0/height/sm"
+                    "varName": "imported/text-input/text-input-field-wrapper/height/sm"
                   },
                   "fixedWidth": {
                     "px": 288,
@@ -788,15 +788,15 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-0-0",
+                      "name": "text-input",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
                       "grow": true,
-                      "fill": "imported/text-input/part-1-0-0/background-color",
-                      "stroke": "imported/text-input/part-1-0-0/border-bottom-color",
+                      "fill": "imported/text-input/text-input/background-color",
+                      "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
@@ -804,7 +804,7 @@ const COMPONENTS = [
                       },
                       "fixedHeight": {
                         "px": 32,
-                        "varName": "imported/text-input/part-1-0-0/height/sm"
+                        "varName": "imported/text-input/text-input/height/sm"
                       },
                       "fixedWidth": {
                         "px": 288,
@@ -856,7 +856,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "text-input__label-wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
@@ -865,7 +865,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/text-input/part-0/height"
+                "varName": "imported/text-input/text-input-label-wrapper/height"
               },
               "fixedWidth": {
                 "px": 288,
@@ -889,7 +889,7 @@ const COMPONENTS = [
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "text-input__field-outer-wrapper",
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
@@ -897,7 +897,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 40,
-                "varName": "imported/text-input/part-1/height/md"
+                "varName": "imported/text-input/text-input-field-outer-wrapper/height/md"
               },
               "fixedWidth": {
                 "px": 288,
@@ -906,7 +906,7 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "text-input__field-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -915,7 +915,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 40,
-                    "varName": "imported/text-input/part-1-0/height/md"
+                    "varName": "imported/text-input/text-input-field-wrapper/height/md"
                   },
                   "fixedWidth": {
                     "px": 288,
@@ -924,15 +924,15 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-0-0",
+                      "name": "text-input",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
                       "grow": true,
-                      "fill": "imported/text-input/part-1-0-0/background-color",
-                      "stroke": "imported/text-input/part-1-0-0/border-bottom-color",
+                      "fill": "imported/text-input/text-input/background-color",
+                      "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
@@ -940,7 +940,7 @@ const COMPONENTS = [
                       },
                       "fixedHeight": {
                         "px": 40,
-                        "varName": "imported/text-input/part-1-0-0/height/md"
+                        "varName": "imported/text-input/text-input/height/md"
                       },
                       "fixedWidth": {
                         "px": 288,
@@ -992,7 +992,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "text-input__label-wrapper",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "SPACE_BETWEEN",
@@ -1001,7 +1001,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 24,
-                "varName": "imported/text-input/part-0/height"
+                "varName": "imported/text-input/text-input-label-wrapper/height"
               },
               "fixedWidth": {
                 "px": 288,
@@ -1025,7 +1025,7 @@ const COMPONENTS = [
             },
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "text-input__field-outer-wrapper",
               "layout": {
                 "mode": "VERTICAL",
                 "primary": "MIN",
@@ -1033,7 +1033,7 @@ const COMPONENTS = [
               },
               "fixedHeight": {
                 "px": 48,
-                "varName": "imported/text-input/part-1/height/lg"
+                "varName": "imported/text-input/text-input-field-outer-wrapper/height/lg"
               },
               "fixedWidth": {
                 "px": 288,
@@ -1042,7 +1042,7 @@ const COMPONENTS = [
               "children": [
                 {
                   "type": "frame",
-                  "name": "part-1-0",
+                  "name": "text-input__field-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -1051,7 +1051,7 @@ const COMPONENTS = [
                   },
                   "fixedHeight": {
                     "px": 48,
-                    "varName": "imported/text-input/part-1-0/height/lg"
+                    "varName": "imported/text-input/text-input-field-wrapper/height/lg"
                   },
                   "fixedWidth": {
                     "px": 288,
@@ -1060,15 +1060,15 @@ const COMPONENTS = [
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-0-0",
+                      "name": "text-input",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
                         "counter": "CENTER"
                       },
                       "grow": true,
-                      "fill": "imported/text-input/part-1-0-0/background-color",
-                      "stroke": "imported/text-input/part-1-0-0/border-bottom-color",
+                      "fill": "imported/text-input/text-input/background-color",
+                      "stroke": "imported/text-input/text-input/border-bottom-color",
                       "bindings": {
                         "strokeBottomWeight": "imported/shared/size-1",
                         "paddingLeft": "imported/shared/size-16",
@@ -1076,7 +1076,7 @@ const COMPONENTS = [
                       },
                       "fixedHeight": {
                         "px": 48,
-                        "varName": "imported/text-input/part-1-0-0/height/lg"
+                        "varName": "imported/text-input/text-input/height/lg"
                       },
                       "fixedWidth": {
                         "px": 288,

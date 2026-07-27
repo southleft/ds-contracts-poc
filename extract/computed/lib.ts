@@ -221,6 +221,25 @@ export interface MintedMerge {
   divergent: Array<{ token: string; fresh: string; shipped: string }>;
 }
 
+/** DTCG leaf count of a token tree (a node with `$value`). The ORDERING GUARD
+ *  (task #28) uses it as the one honest test of "does this shipped minted tree
+ *  exist yet": a stub written only to satisfy the task-#21 existence refusal
+ *  counts ZERO, and a gate measured against it records `leavesAdded: 0` for a
+ *  tree the promotion had not written. Pure, so `loadConfig`, the gate and the
+ *  eval suite share one definition of the word "exists". */
+export function mintedLeafCount(tree: Record<string, unknown>): number {
+  let n = 0;
+  const walk = (o: Record<string, unknown>): void => {
+    if ('$value' in o) { n++; return; }
+    for (const [k, v] of Object.entries(o)) {
+      if (k.startsWith('$') || !v || typeof v !== 'object') continue;
+      walk(v as Record<string, unknown>);
+    }
+  };
+  walk(tree);
+  return n;
+}
+
 /**
  * PRECEDENCE, from first principles (docs/20-regate-drift.md):
  *
@@ -389,15 +408,36 @@ export const CHANNEL_TO_COMPUTED: Record<string, string[]> = {
 // ---------------------------------------------------------------------------
 // DOM → anatomy (§4)
 // ---------------------------------------------------------------------------
-/** Class stems: drop modifier classes (contain '--'), strip the library's
- *  class prefix. A BEM block-root class spelled `Block--root` (Polaris Text)
- *  keeps its block name as the stem — it identifies the element, unlike
- *  value modifiers. Signature = tag + stems (presence/absence discipline). */
+/** Class stems: strip the library's class prefix, THEN drop modifier classes
+ *  (a `--` in what REMAINS). A BEM block-root class spelled `Block--root`
+ *  (Polaris Text) keeps its block name as the stem — it identifies the
+ *  element, unlike value modifiers. Signature = tag + stems (presence/absence
+ *  discipline).
+ *
+ *  ORDER IS LOAD-BEARING — prefix-stripping MUST precede modifier-filtering.
+ *  The `--` test encodes "BEM modifier", and that is only true of the part of
+ *  the class name the LIBRARY wrote after its own prefix. CARBON is the
+ *  library that discovered it: its `classPrefix` is `cds--`, so filtering
+ *  first read the PREFIX's own separator as a modifier marker and discarded
+ *  EVERY Carbon class — `cds--btn` and `cds--btn__icon` alike. The captured
+ *  signature collapsed to `button|` (tag only) while `classes` still carried
+ *  `["cds--btn"]`, so union alignment fell back to POSITION and every part
+ *  named `part-<path>` instead of by class identity. `classAllow`
+ *  (`^cds--(?!.*--)`) had already preserved exactly the right classes; the
+ *  engine threw them away one step later, and no config key could override
+ *  it. Stripping first, `cds--btn` → `btn` (KEPT) and `cds--btn--primary` →
+ *  `btn--primary` (DROPPED, correctly a modifier).
+ *
+ *  Proven a no-op for every other committed library — MUI `MuiButton-root`,
+ *  Polaris `Polaris-Text--root`, Astryx `astryx-*`, Altitude `al-c-button`,
+ *  Tailwind (empty prefix) carry no `--` inside their prefixes, so the two
+ *  orders agree on all 1,695 of their captured nodes (examples/carbon/
+ *  PROVENANCE.md, "the class-stem prefix defect"). */
 export const stems = (classes: string[], classPrefix: string): string[] =>
   classes
     .map((c) => (c.endsWith('--root') ? c.slice(0, -'--root'.length) : c))
-    .filter((c) => !c.includes('--'))
     .map((c) => (classPrefix && c.startsWith(classPrefix) ? c.slice(classPrefix.length) : c))
+    .filter((c) => c !== '' && !c.includes('--'))
     .sort();
 
 export const signature = (n: CapturedNode, classPrefix: string): string =>

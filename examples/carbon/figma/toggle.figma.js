@@ -40,7 +40,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "toggle__label",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -70,14 +70,14 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-1",
+                  "name": "toggle__appearance",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "bindings": {
-                    "itemSpacing": "imported/toggle/part-1-1/column-gap",
+                    "itemSpacing": "imported/toggle/toggle-appearance/column-gap",
                     "minWidth": "imported/shared/size-0"
                   },
                   "fixedHeight": {
@@ -86,12 +86,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 75.4688,
-                    "varName": "imported/toggle/part-1-1/width/untoggled"
+                    "varName": "imported/toggle/toggle-appearance/width/untoggled"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-1-0",
+                      "name": "toggle__switch",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -109,9 +109,9 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 48,
-                        "varName": "imported/toggle/part-1-1-0/width"
+                        "varName": "imported/toggle/toggle-switch/width"
                       },
-                      "fill": "imported/toggle/part-1-1-0/background-color/untoggled",
+                      "fill": "imported/toggle/toggle-switch/background-color/untoggled",
                       "children": []
                     },
                     {
@@ -155,7 +155,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "toggle__label",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -185,14 +185,14 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-1",
+                  "name": "toggle__appearance",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "bindings": {
-                    "itemSpacing": "imported/toggle/part-1-1/column-gap",
+                    "itemSpacing": "imported/toggle/toggle-appearance/column-gap",
                     "minWidth": "imported/shared/size-0"
                   },
                   "fixedHeight": {
@@ -201,12 +201,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 74.1875,
-                    "varName": "imported/toggle/part-1-1/width/toggled"
+                    "varName": "imported/toggle/toggle-appearance/width/toggled"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-1-0",
+                      "name": "toggle__switch",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -224,9 +224,9 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 48,
-                        "varName": "imported/toggle/part-1-1-0/width"
+                        "varName": "imported/toggle/toggle-switch/width"
                       },
-                      "fill": "imported/toggle/part-1-1-0/background-color/toggled",
+                      "fill": "imported/toggle/toggle-switch/background-color/toggled",
                       "children": []
                     },
                     {
@@ -272,7 +272,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "toggle__label",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -302,14 +302,14 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-1",
+                  "name": "toggle__appearance",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "bindings": {
-                    "itemSpacing": "imported/toggle/part-1-1/column-gap",
+                    "itemSpacing": "imported/toggle/toggle-appearance/column-gap",
                     "minWidth": "imported/shared/size-0"
                   },
                   "fixedHeight": {
@@ -318,12 +318,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 75.4688,
-                    "varName": "imported/toggle/part-1-1/width/untoggled"
+                    "varName": "imported/toggle/toggle-appearance/width/untoggled"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-1-0",
+                      "name": "toggle__switch",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -341,9 +341,9 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 48,
-                        "varName": "imported/toggle/part-1-1-0/width"
+                        "varName": "imported/toggle/toggle-switch/width"
                       },
-                      "fill": "imported/toggle/part-1-1-0/background-color/untoggled",
+                      "fill": "imported/toggle/toggle-switch/background-color/untoggled",
                       "children": []
                     },
                     {
@@ -388,7 +388,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "toggle__label",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -418,14 +418,14 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-1-1",
+                  "name": "toggle__appearance",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN"
                   },
                   "bindings": {
-                    "itemSpacing": "imported/toggle/part-1-1/column-gap",
+                    "itemSpacing": "imported/toggle/toggle-appearance/column-gap",
                     "minWidth": "imported/shared/size-0"
                   },
                   "fixedHeight": {
@@ -434,12 +434,12 @@ const COMPONENTS = [
                   },
                   "fixedWidth": {
                     "px": 74.1875,
-                    "varName": "imported/toggle/part-1-1/width/toggled"
+                    "varName": "imported/toggle/toggle-appearance/width/toggled"
                   },
                   "children": [
                     {
                       "type": "frame",
-                      "name": "part-1-1-0",
+                      "name": "toggle__switch",
                       "layout": {
                         "mode": "HORIZONTAL",
                         "primary": "MIN",
@@ -457,9 +457,9 @@ const COMPONENTS = [
                       },
                       "fixedWidth": {
                         "px": 48,
-                        "varName": "imported/toggle/part-1-1-0/width"
+                        "varName": "imported/toggle/toggle-switch/width"
                       },
-                      "fill": "imported/toggle/part-1-1-0/background-color/toggled",
+                      "fill": "imported/toggle/toggle-switch/background-color/toggled",
                       "children": []
                     },
                     {

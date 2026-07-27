@@ -4,7 +4,7 @@
   "varPrefix": "--cds-",
   "facts": [
     {
-      "part": "part-1",
+      "part": "checkbox-label",
       "channel": "color",
       "combo": "unchecked.disabled",
       "axisValues": {
@@ -17,7 +17,7 @@
       }
     },
     {
-      "part": "part-1",
+      "part": "checkbox-label",
       "channel": "color",
       "combo": "checked.disabled",
       "axisValues": {
@@ -30,7 +30,7 @@
       }
     },
     {
-      "part": "part-1",
+      "part": "checkbox-label",
       "channel": "color",
       "combo": "indeterminate.disabled",
       "axisValues": {

@@ -62,7 +62,7 @@
       "parts": {
         "label": {
           "text": "Focus sentinel",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy span||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|visually-hidden|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "none",
             "overflow-x": "hidden",
@@ -88,11 +88,11 @@
             "width": "{imported.shared.size-1}"
           }
         },
-        "part-1": {
-          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+        "modal-container": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|modal-container — this element exists in the real component's DOM; the static layer had no part for it.",
           "parts": {
-            "part-1-0": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+            "modal-header": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|modal-header — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "overflow-x": "auto",
@@ -102,7 +102,7 @@
                 "label-2": {
                   "element": "h2",
                   "text": "Label",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy h2| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy h2|modal-header__label — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block"
                   },
@@ -121,7 +121,7 @@
                 "label-3": {
                   "element": "h2",
                   "text": "Modal heading",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy h2| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy h2|modal-header__heading — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block"
                   },
@@ -153,37 +153,37 @@
                     }
                   ]
                 },
-                "part-1-0-2": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                "modal-close-button": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|modal-close-button — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "position": "absolute"
                   },
                   "parts": {
-                    "part-1-0-2-0": {
+                    "icon-tooltip": {
                       "element": "span",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|icon-tooltip.popover-container.tooltip — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "inline-block",
                         "position": "relative"
                       },
                       "parts": {
-                        "part-1-0-2-0-0": {
-                          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                        "tooltip-trigger__wrapper": {
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy div|tooltip-trigger__wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
                             "display": "block"
                           },
                           "parts": {
-                            "part-1-0-2-0-0-0": {
+                            "btn": {
                               "element": "button",
-                              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn.modal-close — this element exists in the real component's DOM; the static layer had no part for it.",
                               "layout": {
                                 "display": "inline-flex",
                                 "align": "center",
                                 "justify": "center"
                               },
                               "icon": {
-                                "asset": "modal-part-1-0-2-0-0-0",
+                                "asset": "modal-btn",
                                 "size": 20
                               },
                               "declared": {
@@ -206,13 +206,13 @@
                                 "border-top-color": "{imported.shared.color-00000000}",
                                 "bottom": "{imported.shared.size-0}",
                                 "color": "{imported.shared.color-ffffff}",
-                                "flex-shrink": "{imported.modal.part-1-0-2-0-0-0.flex-shrink}",
+                                "flex-shrink": "{imported.modal.btn.flex-shrink}",
                                 "font-size": "{imported.shared.size-14}",
                                 "height": "{imported.shared.size-48}",
                                 "left": "{imported.shared.size-0}",
                                 "letter-spacing": "{imported.shared.size-0-16}",
                                 "line-height": "{imported.shared.size-18-0001}",
-                                "max-width": "{imported.modal.part-1-0-2-0-0-0.max-width}",
+                                "max-width": "{imported.modal.btn.max-width}",
                                 "min-height": "{imported.shared.size-48}",
                                 "min-width": "{imported.shared.size-0}",
                                 "padding-bottom": "{imported.shared.size-12}",
@@ -233,9 +233,9 @@
                             "width": "{imported.shared.size-48}"
                           }
                         },
-                        "part-1-0-2-0-1": {
+                        "popover": {
                           "element": "span",
-                          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover — this element exists in the real component's DOM; the static layer had no part for it.",
                           "declared": {
                             "display": "block",
                             "position": "absolute",
@@ -244,7 +244,7 @@
                           "parts": {
                             "label-4": {
                               "text": "Close",
-                              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-content.tooltip-content — this element exists in the real component's DOM; the static layer had no part for it.",
                               "declared": {
                                 "display": "none",
                                 "position": "absolute"
@@ -271,9 +271,9 @@
                                 "z-index": "{imported.shared.num-6000}"
                               }
                             },
-                            "part-1-0-2-0-1-1": {
+                            "popover-caret": {
                               "element": "span",
-                              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                              "description": "Promoted from the computed floor (round 4): rendered anatomy span|popover-caret — this element exists in the real component's DOM; the static layer had no part for it.",
                               "declared": {
                                 "display": "none",
                                 "position": "absolute",
@@ -283,7 +283,7 @@
                                 "height": "{imported.shared.size-8}",
                                 "min-height": "{imported.shared.size-0}",
                                 "min-width": "{imported.shared.size-0}",
-                                "width": "{imported.modal.part-1-0-2-0-1-1.width}",
+                                "width": "{imported.modal.popover-caret.width}",
                                 "z-index": "{imported.shared.num-6000}"
                               }
                             }
@@ -310,14 +310,14 @@
                         "right": "{imported.shared.size-0}",
                         "top": "{imported.shared.size-0}",
                         "width": "{imported.shared.size-48}",
-                        "z-index": "{imported.modal.part-1-0-2-0.z-index}"
+                        "z-index": "{imported.modal.icon-tooltip.z-index}"
                       }
                     }
                   },
                   "tokens": {
-                    "bottom": "{imported.modal.part-1-0-2.bottom}",
+                    "bottom": "{imported.modal.modal-close-button.bottom}",
                     "height": "{imported.shared.size-48}",
-                    "left": "{imported.modal.part-1-0-2.left.unset}",
+                    "left": "{imported.modal.modal-close-button.left.unset}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
@@ -329,16 +329,16 @@
                       "prop": "size",
                       "map": {
                         "lg": {
-                          "left": "{imported.modal.part-1-0-2.left.lg}"
+                          "left": "{imported.modal.modal-close-button.left.lg}"
                         },
                         "md": {
-                          "left": "{imported.modal.part-1-0-2.left.md}"
+                          "left": "{imported.modal.modal-close-button.left.md}"
                         },
                         "sm": {
-                          "left": "{imported.modal.part-1-0-2.left.sm}"
+                          "left": "{imported.modal.modal-close-button.left.sm}"
                         },
                         "xs": {
-                          "left": "{imported.modal.part-1-0-2.left.xs}"
+                          "left": "{imported.modal.modal-close-button.left.xs}"
                         }
                       }
                     }
@@ -349,29 +349,29 @@
                 "grid-column-start": "{imported.shared.num-1}",
                 "grid-row-end": "{imported.shared.num-1}",
                 "grid-row-start": "{imported.shared.num-1}",
-                "height": "{imported.modal.part-1-0.height}",
+                "height": "{imported.modal.modal-header.height}",
                 "margin-bottom": "{imported.shared.size-8}",
-                "max-height": "{imported.modal.part-1-0.max-height}",
+                "max-height": "{imported.modal.modal-header.max-height}",
                 "padding-left": "{imported.shared.size-16}",
                 "padding-right": "{imported.shared.size-48}",
                 "padding-top": "{imported.shared.size-16}",
-                "width": "{imported.modal.part-1-0.width.unset}"
+                "width": "{imported.modal.modal-header.width.unset}"
               },
               "tokensByProp": [
                 {
                   "prop": "size",
                   "map": {
                     "lg": {
-                      "width": "{imported.modal.part-1-0.width.lg}"
+                      "width": "{imported.modal.modal-header.width.lg}"
                     },
                     "md": {
-                      "width": "{imported.modal.part-1-0.width.md}"
+                      "width": "{imported.modal.modal-header.width.md}"
                     },
                     "sm": {
-                      "width": "{imported.modal.part-1-0.width.sm}"
+                      "width": "{imported.modal.modal-header.width.sm}"
                     },
                     "xs": {
-                      "width": "{imported.modal.part-1-0.width.xs}"
+                      "width": "{imported.modal.modal-header.width.xs}"
                     }
                   }
                 }
@@ -381,7 +381,7 @@
               "content": {
                 "prop": "children"
               },
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|layer-two.modal-content — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "overflow-x": "auto",
@@ -405,8 +405,8 @@
                 "top": "{imported.shared.size-0}"
               }
             },
-            "part-1-2": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+            "btn-set": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|btn-set.modal-footer — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
                 "justify": "end"
@@ -415,7 +415,7 @@
                 "label-6": {
                   "element": "button",
                   "text": "Cancel",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex",
                     "justify": "space-between"
@@ -463,7 +463,7 @@
                 "label-7": {
                   "element": "button",
                   "text": "Save",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex",
                     "justify": "space-between"
@@ -512,24 +512,24 @@
               },
               "tokens": {
                 "grid-column-start": "{imported.shared.num-1}",
-                "height": "{imported.modal.part-1-2.height}",
-                "width": "{imported.modal.part-1-2.width.unset}"
+                "height": "{imported.modal.btn-set.height}",
+                "width": "{imported.modal.btn-set.width.unset}"
               },
               "tokensByProp": [
                 {
                   "prop": "size",
                   "map": {
                     "lg": {
-                      "width": "{imported.modal.part-1-2.width.lg}"
+                      "width": "{imported.modal.btn-set.width.lg}"
                     },
                     "md": {
-                      "width": "{imported.modal.part-1-2.width.md}"
+                      "width": "{imported.modal.btn-set.width.md}"
                     },
                     "sm": {
-                      "width": "{imported.modal.part-1-2.width.sm}"
+                      "width": "{imported.modal.btn-set.width.sm}"
                     },
                     "xs": {
-                      "width": "{imported.modal.part-1-2.width.xs}"
+                      "width": "{imported.modal.btn-set.width.xs}"
                     }
                   }
                 }
@@ -550,7 +550,7 @@
             "transition-timing-function": "cubic-bezier(0, 0, 0.3, 1)"
           },
           "tokens": {
-            "background-color": "{imported.modal.part-1.background-color}",
+            "background-color": "{imported.modal.modal-container.background-color}",
             "border-bottom-color": "{imported.shared.color-c6c6c6}",
             "border-bottom-width": "{imported.shared.size-1}",
             "border-left-color": "{imported.shared.color-c6c6c6}",
@@ -560,34 +560,34 @@
             "border-top-color": "{imported.shared.color-c6c6c6}",
             "border-top-width": "{imported.shared.size-1}",
             "bottom": "{imported.shared.size-0}",
-            "grid-template-columns": "{imported.modal.part-1.grid-template-columns.unset}",
-            "height": "{imported.modal.part-1.height}",
+            "grid-template-columns": "{imported.modal.modal-container.grid-template-columns.unset}",
+            "height": "{imported.modal.modal-container.height}",
             "left": "{imported.shared.size-0}",
             "outline-color": "{imported.shared.color-00000000}",
-            "outline-offset": "{imported.modal.part-1.outline-offset}",
+            "outline-offset": "{imported.modal.modal-container.outline-offset}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}",
-            "width": "{imported.modal.part-1.width.unset}"
+            "width": "{imported.modal.modal-container.width.unset}"
           },
           "tokensByProp": [
             {
               "prop": "size",
               "map": {
                 "lg": {
-                  "grid-template-columns": "{imported.modal.part-1.grid-template-columns.lg}",
-                  "width": "{imported.modal.part-1.width.lg}"
+                  "grid-template-columns": "{imported.modal.modal-container.grid-template-columns.lg}",
+                  "width": "{imported.modal.modal-container.width.lg}"
                 },
                 "md": {
-                  "grid-template-columns": "{imported.modal.part-1.grid-template-columns.md}",
-                  "width": "{imported.modal.part-1.width.md}"
+                  "grid-template-columns": "{imported.modal.modal-container.grid-template-columns.md}",
+                  "width": "{imported.modal.modal-container.width.md}"
                 },
                 "sm": {
-                  "grid-template-columns": "{imported.modal.part-1.grid-template-columns.sm}",
-                  "width": "{imported.modal.part-1.width.sm}"
+                  "grid-template-columns": "{imported.modal.modal-container.grid-template-columns.sm}",
+                  "width": "{imported.modal.modal-container.width.sm}"
                 },
                 "xs": {
-                  "grid-template-columns": "{imported.modal.part-1.grid-template-columns.xs}",
-                  "width": "{imported.modal.part-1.width.xs}"
+                  "grid-template-columns": "{imported.modal.modal-container.grid-template-columns.xs}",
+                  "width": "{imported.modal.modal-container.width.xs}"
                 }
               }
             }
@@ -595,7 +595,7 @@
         },
         "label-8": {
           "text": "Focus sentinel",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy span||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|visually-hidden|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "none",
             "overflow-x": "hidden",

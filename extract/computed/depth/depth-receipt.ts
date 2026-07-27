@@ -100,8 +100,8 @@ async function main(): Promise<void> {
 
   // ---- Stage A: portal-aware capture (PRODUCTION capture.capturePortalRoots)
   console.log('\nphase 2 — Stage A: portal-aware capture (Modal)…');
-  const cap1 = await capturePortalRoots(page, space.baseComboKey);
-  const cap2 = await capturePortalRoots(page, space.baseComboKey);
+  const cap1 = await capturePortalRoots(page, space.baseComboKey, undefined, 0, undefined, cfg.library.classPrefix);
+  const cap2 = await capturePortalRoots(page, space.baseComboKey, undefined, 0, undefined, cfg.library.classPrefix);
   const determinism = JSON.stringify(cap1.roots) === JSON.stringify(cap2.roots);
   if (!determinism) throw new Error('portal capture NOT double-run byte-identical');
   const browserVersion = browser.version();
@@ -116,7 +116,7 @@ async function main(): Promise<void> {
 
   // ---- Stage B: multi-root anatomy (PRODUCTION descent + union + promotion)
   console.log('\nphase 3 — Stage B: root-descending multi-root anatomy…');
-  const realRoots = cap1.roots.flatMap((r) => descendToRealRoots(r.node));
+  const realRoots = cap1.roots.flatMap((r) => descendToRealRoots(r.node, cfg.library.classPrefix));
   const multi = buildMultiRootUnion(
     [{ combo: space.baseComboKey, interaction: 'default', newRoots: cap1.roots.map((r) => r.node) }],
     baseKey,
@@ -142,7 +142,7 @@ async function main(): Promise<void> {
     const root = truth.base.root;
     const ck = `${ss.baseComboKey}__default`;
     // descent is a no-op for an HTML-rooted component
-    const rr = descendToRealRoots(root);
+    const rr = descendToRealRoots(root, cfg.library.classPrefix);
     const realRootsIsRoot = rr.length === 1 && rr[0] === root;
     // single-root path
     const uSingle = buildUnion(baseCombo(root, ss.baseComboKey), baseCombo(root, ss.baseComboKey)[0], simpleCfg.library.classPrefix);

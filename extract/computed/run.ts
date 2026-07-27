@@ -182,8 +182,8 @@ async function main() {
     if (JSON.stringify(pProps) !== JSON.stringify(run1.allProps)) {
       throw new Error(`${m.comp.name}: portal page enumerates a different longhand set than the census page (${pProps.length} vs ${run1.allProps.length}) — refusing`);
     }
-    const p1 = await portalSweep(pPage, m.comp, m.space, { screenshots: scratchShots, classAllow: cfg.library.classAllow });
-    const p2 = await portalSweep(pPage, m.comp, m.space, { classAllow: cfg.library.classAllow });
+    const p1 = await portalSweep(pPage, m.comp, m.space, { screenshots: scratchShots, classAllow: cfg.library.classAllow, classPrefix: cfg.library.classPrefix });
+    const p2 = await portalSweep(pPage, m.comp, m.space, { classAllow: cfg.library.classAllow, classPrefix: cfg.library.classPrefix });
     run1.captures.push(...p1.captures);
     run2.captures.push(...p2.captures);
     portalReceipts.set(m.comp.name, p1.receipts);

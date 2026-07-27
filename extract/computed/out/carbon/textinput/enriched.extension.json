@@ -34,7 +34,7 @@
             }
           }
         },
-        "part-0": {
+        "text-input-label-wrapper": {
           "height": {
             "$value": "24px",
             "$type": "dimension"
@@ -66,7 +66,7 @@
             "$type": "color"
           }
         },
-        "part-1": {
+        "text-input-field-outer-wrapper": {
           "flex-grow": {
             "$value": "1",
             "$type": "number"
@@ -94,7 +94,7 @@
             }
           }
         },
-        "part-1-0": {
+        "text-input-field-wrapper": {
           "height": {
             "unset": {
               "$value": "40px",
@@ -118,7 +118,7 @@
             }
           }
         },
-        "part-1-0-0": {
+        "text-input": {
           "background-color": {
             "$value": "#f4f4f4",
             "$type": "color"
@@ -174,7 +174,7 @@
             "$type": "color"
           }
         },
-        "part-1-0-1": {
+        "text-input-counter-alert": {
           "bottom": {
             "unset": {
               "$value": "41px",
@@ -323,17 +323,17 @@
         "value": "start"
       },
       {
-        "part": "part-0",
+        "part": "text-input__label-wrapper",
         "field": "justify",
         "value": "space-between"
       },
       {
-        "part": "part-1",
+        "part": "text-input__field-outer-wrapper",
         "field": "direction",
         "value": "column"
       },
       {
-        "part": "part-1",
+        "part": "text-input__field-outer-wrapper",
         "field": "align",
         "value": "start"
       }
@@ -351,82 +351,82 @@
         "value": "default"
       },
       {
-        "part": "part-1-0",
+        "part": "text-input__field-wrapper",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "appearance",
         "value": "auto"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "border-bottom-style",
         "value": "solid"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "cursor",
         "value": "text"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "font-feature-settings",
         "value": "normal"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "outline-style",
         "value": "solid"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "overflow-x",
         "value": "clip"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "overflow-y",
         "value": "clip"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "text-rendering",
         "value": "auto"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "transition-delay",
         "value": "0s, 0s"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "transition-duration",
         "value": "0.07s, 0.07s"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "transition-property",
         "value": "background-color, outline"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
       },
       {
-        "part": "part-1-0-1",
+        "part": "text-input__counter-alert",
         "channel": "overflow-x",
         "value": "hidden"
       },
       {
-        "part": "part-1-0-1",
+        "part": "text-input__counter-alert",
         "channel": "overflow-y",
         "value": "hidden"
       },
       {
-        "part": "part-1-0-1",
+        "part": "text-input__counter-alert",
         "channel": "position",
         "value": "absolute"
       }
@@ -434,7 +434,7 @@
     "state": [
       {
         "state": "disabled",
-        "part": "part-1-0-0",
+        "part": "text-input",
         "channel": "cursor",
         "value": "not-allowed"
       }
@@ -449,14 +449,14 @@
       "distinctValues": 1
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal, normal",
       "distinctValues": 1
     },
     {
-      "part": "part-1-0-1",
+      "part": "text-input__counter-alert",
       "channel": "clip",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "rect(0px, 0px, 0px, 0px)",
@@ -466,10 +466,10 @@
   "stateOverflow": [],
   "overflowBindings": [
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "outline-color",
       "state": "active",
-      "ref": "{imported.text-input.part-1-0-0.outline-color-state-active}",
+      "ref": "{imported.text-input.text-input.outline-color-state-active}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
@@ -480,73 +480,73 @@
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "border-bottom-color",
       "state": "disabled",
-      "ref": "{imported.text-input.part-1-0-0.border-bottom-color-state-disabled}",
+      "ref": "{imported.text-input.text-input.border-bottom-color-state-disabled}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "border-left-color",
       "state": "disabled",
       "ref": "{imported.shared.color-16161640}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "border-right-color",
       "state": "disabled",
       "ref": "{imported.shared.color-16161640}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "border-top-color",
       "state": "disabled",
       "ref": "{imported.shared.color-16161640}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "caret-color",
       "state": "disabled",
       "ref": "{imported.shared.color-16161640}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "column-rule-color",
       "state": "disabled",
       "ref": "{imported.shared.color-16161640}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "row-rule-color",
       "state": "disabled",
       "ref": "{imported.shared.color-16161640}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "text-decoration-color",
       "state": "disabled",
       "ref": "{imported.shared.color-16161640}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "text-emphasis-color",
       "state": "disabled",
       "ref": "{imported.shared.color-16161640}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "outline-color",
       "state": "focus-visible",
-      "ref": "{imported.text-input.part-1-0-0.outline-color-state-focus-visible}",
+      "ref": "{imported.text-input.text-input.outline-color-state-focus-visible}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     }
   ],
@@ -562,32 +562,32 @@
   "styledChannelReceipts": [
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-0-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: text-input__label-wrapper — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: text-input__field-outer-wrapper — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: text-input__field-wrapper — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: text-input — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: text-input__counter-alert — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "control-fallback: no control for <label> — span control used (part label)",
     "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "control-fallback: no control for <input> — span control used (part part-1-0-0)",
-    "inheritance-check-rejected: label.caret-color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.font-weight — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-only: part-0.font-size equals ancestor \"root\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-0.letter-spacing equals ancestor \"root\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-0.line-height equals ancestor \"root\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.font-size equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.letter-spacing equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-0.line-height equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-1.font-size equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-1.letter-spacing equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0-1.line-height equals ancestor \"part-1-0\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0.font-size equals ancestor \"part-1\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0.letter-spacing equals ancestor \"part-1\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-1-0.line-height equals ancestor \"part-1\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
-    "inheritance-only: part-1.font-size equals ancestor \"root\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
-    "inheritance-only: part-1.letter-spacing equals ancestor \"root\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
-    "inheritance-only: part-1.line-height equals ancestor \"root\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+    "control-fallback: no control for <input> — span control used (part text-input)",
+    "inheritance-check-rejected: label.caret-color — values track ancestor \"text-input__label-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.color — values track ancestor \"text-input__label-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"text-input__label-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: text-input.font-size equals ancestor \"text-input__field-wrapper\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: text-input.letter-spacing equals ancestor \"text-input__field-wrapper\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: text-input.line-height equals ancestor \"text-input__field-wrapper\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__counter-alert.font-size equals ancestor \"text-input__field-wrapper\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__counter-alert.letter-spacing equals ancestor \"text-input__field-wrapper\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__counter-alert.line-height equals ancestor \"text-input__field-wrapper\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__field-outer-wrapper.font-size equals ancestor \"root\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__field-outer-wrapper.letter-spacing equals ancestor \"root\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__field-outer-wrapper.line-height equals ancestor \"root\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__field-wrapper.font-size equals ancestor \"text-input__field-outer-wrapper\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__field-wrapper.letter-spacing equals ancestor \"text-input__field-outer-wrapper\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__field-wrapper.line-height equals ancestor \"text-input__field-outer-wrapper\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__label-wrapper.font-size equals ancestor \"root\" on all 40 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__label-wrapper.letter-spacing equals ancestor \"root\" on all 40 captured planes — the part carries no independent letter-spacing fact (CSS inheritance, observed)",
+    "inheritance-only: text-input__label-wrapper.line-height equals ancestor \"root\" on all 40 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -596,7 +596,7 @@
         "join": "matched"
       },
       {
-        "part": "part-0",
+        "part": "text-input__label-wrapper",
         "join": "computed-only"
       },
       {
@@ -604,19 +604,19 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1",
+        "part": "text-input__field-outer-wrapper",
         "join": "computed-only"
       },
       {
-        "part": "part-1-0",
+        "part": "text-input__field-wrapper",
         "join": "computed-only"
       },
       {
-        "part": "part-1-0-0",
+        "part": "text-input",
         "join": "computed-only"
       },
       {
-        "part": "part-1-0-1",
+        "part": "text-input__counter-alert",
         "join": "computed-only"
       }
     ],
@@ -626,45 +626,45 @@
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
     "partsCarried": [
       "root",
-      "part-0",
+      "text-input__label-wrapper",
       "label",
-      "part-1",
-      "part-1-0",
-      "part-1-0-0",
-      "part-1-0-1"
+      "text-input__field-outer-wrapper",
+      "text-input__field-wrapper",
+      "text-input",
+      "text-input__counter-alert"
     ],
     "svgAssets": [],
     "receipts": [
       "root-display-carried: flex",
       "literal-text-carried: label = \"Label\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "full-width-carried: part-1-0-0 spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
-      "sr-only-carried-as-hidden: part-1-0-1 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
+      "full-width-carried: text-input spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "sr-only-carried-as-hidden: text-input__counter-alert is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
     ],
     "refusals": []
   },
   "enrichmentNotes": [
     "layout enriched: root.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.align = start (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: part-0.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: part-1.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: part-1.layout.align = start (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: text-input__label-wrapper.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: text-input__field-outer-wrapper.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: text-input__field-outer-wrapper.layout.align = start (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: label.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.transition-duration = 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.transition-property = background-color, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-0.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-1.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-1.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-0-1.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared state fact carried: [disabled] part-1-0-0.cursor = not-allowed (v15 declared vocabulary)"
+    "declared fact carried: text-input__field-wrapper.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.cursor = text (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.overflow-x = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.overflow-y = clip (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.transition-duration = 0.07s, 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.transition-property = background-color, outline (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input__counter-alert.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input__counter-alert.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: text-input__counter-alert.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [disabled] text-input.cursor = not-allowed (v15 declared vocabulary)"
   ]
 }

@@ -19,6 +19,7 @@ import { ContractSchema, CONTRACT_STATES, type Contract } from '../../scripts/co
 import { DRAFT_MARKER_KEY, draftRefusalMessage } from '../draft-capture-config.js';
 import {
   enumerate,
+  mintedLeafCount,
   normalizeNode,
   type CapturedNode,
   type Capture,
@@ -274,6 +275,27 @@ export interface CaptureConfig {
      *  the eval `gate-inventory-shipped-minted` refuses a config that does
      *  not (an absent path is exactly how this defect stayed invisible). */
     minted?: string;
+    /** ORDERING GUARD (task #28) — the BOOTSTRAP allowance, and the only way
+     *  to run a gate against a minted tree with ZERO leaves.
+     *
+     *  The task-#21 refusal covers a minted path that does not EXIST. It does
+     *  not cover the thing that actually happened on the Carbon round: the
+     *  pipeline runs the harness BEFORE `promote-floor.mjs` writes
+     *  `<lib>-minted.dtcg.json`, so the file was created as an empty stub to
+     *  satisfy that refusal and every one of Carbon's ten committed
+     *  scorecards recorded `shippedMinted.leavesAdded: 0` — a gate measured
+     *  against a tree that did not exist yet. The offline re-fuse of the same
+     *  captures against the SHIPPED tree measures 755–1037 leaves added. No
+     *  value was wrong (every divergence resolved equal); the receipts simply
+     *  understated what the gate saw.
+     *
+     *  So: a DECLARED minted tree with zero leaves is REFUSED BY NAME, unless
+     *  this flag says the run is a library's genuine first-ever pass, in which
+     *  case the scorecard records `shippedMinted.bootstrap: true` and the
+     *  marker "measured without a shipped minted tree" — allowed explicitly,
+     *  receipted, never silent. The flag cannot rot: once the tree HAS leaves,
+     *  leaving it set is itself refused. */
+    mintedBootstrap?: boolean;
   };
   /** Optional repo-relative dir of committed icon assets (`<name>.svg`) —
    *  contracts whose anatomy carries `icon.asset` refs (Spinner) need the
@@ -304,6 +326,26 @@ export function loadConfig(repoRoot: string, configPath: string): CaptureConfig 
     throw new Error(
       `tokens.minted not found: ${cfg.tokens.minted} — the fidelity gate would fall back to the FRESH mint only and score the shipped contract's reviewed refs as unresolved (docs/20-regate-drift.md)`,
     );
+  }
+  // ORDERING GUARD (task #28) — see `tokens.mintedBootstrap`. A minted tree
+  // that EXISTS but carries ZERO leaves is the "gate ran before the promotion
+  // wrote it" state; refuse it by name so no library can record a gate
+  // measured against a tree that did not exist yet, and refuse a bootstrap
+  // allowance that has outlived the tree it was granted for.
+  if (cfg.tokens.minted) {
+    const leaves = mintedLeafCount(
+      JSON.parse(readFileSync(path.join(repoRoot, cfg.tokens.minted), 'utf8')) as Record<string, unknown>,
+    );
+    if (leaves === 0 && cfg.tokens.mintedBootstrap !== true) {
+      throw new Error(
+        `tokens.minted has ZERO leaves: ${cfg.tokens.minted} — the fidelity gate would record shippedMinted.leavesAdded: 0 for a tree the promotion has not written yet (ORDERING: the harness runs BEFORE promote-floor). Run the promotion first and re-run the harness, or declare "mintedBootstrap": true for a library's genuine FIRST-EVER pass (the scorecard then receipts "measured without a shipped minted tree")`,
+      );
+    }
+    if (leaves > 0 && cfg.tokens.mintedBootstrap === true) {
+      throw new Error(
+        `tokens.mintedBootstrap is still true but ${cfg.tokens.minted} now carries ${leaves} leaf/leaves — the bootstrap allowance has outlived its reason and would silently suppress the ordering guard for every future run. Delete the flag.`,
+      );
+    }
   }
   for (const c of cfg.components) {
     const contractPath = path.join(repoRoot, c.contract);
@@ -1502,12 +1544,20 @@ const blurActiveJs = `(() => {
  *  serialization trap). Reads every new root as a full CapturedNode using the
  *  SAME longhand set (window.__ALL_PROPS) and ::before/::after rule as the
  *  census captureJs, plus role/aria-modal for root descent. */
-const capturePortalJs = (classAllow?: string) => `(() => {
+const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
   const baseline = window.__depthBaseline;
   const stage = document.getElementById(${JSON.stringify(PORTAL_STAGE_ID)});
   const props = window.__ALL_PROPS;
   const allow = ${JSON.stringify(classAllow ?? null)};
+  const prefix = ${JSON.stringify(classPrefix ?? '')};
   const keepCls = (l) => (allow ? l.filter((c) => new RegExp(allow).test(c)) : l);
+  // In-page mirror of lib.ts \`stems\` — prefix FIRST, modifier filter SECOND.
+  // See that function's header: a library whose own prefix contains '--'
+  // (Carbon's \`cds--\`) has every class discarded by the other order.
+  const stemsOf = (l) => l
+    .map((c) => (c.endsWith('--root') ? c.slice(0, -'--root'.length) : c))
+    .map((c) => (prefix && c.startsWith(prefix) ? c.slice(prefix.length) : c))
+    .filter((c) => c !== '' && !c.includes('--'));
   const read = (cs) => { const o = {}; for (const p of props) o[p] = cs.getPropertyValue(p); return o; };
   const readEl = (el) => {
     const out = {
@@ -1545,7 +1595,7 @@ const capturePortalJs = (classAllow?: string) => `(() => {
   newRoots.forEach((el, i) => el.setAttribute('data-portal-root', String(i)));
   const cur = stage && stage.firstElementChild;
   const currentReader = cur
-    ? { present: true, sig: cur.tagName.toLowerCase() + '|' + [...cur.classList].filter((c) => !c.includes('--')).map((c) => c.replace(/^Polaris-/, '')).join('.'), descendantEls: cur.querySelectorAll('*').length }
+    ? { present: true, sig: cur.tagName.toLowerCase() + '|' + stemsOf([...cur.classList]).join('.'), descendantEls: cur.querySelectorAll('*').length }
     : { present: false, sig: '', descendantEls: 0 };
   return {
     preBytes: window.__preBytes,
@@ -1573,6 +1623,10 @@ export async function capturePortalRoots(
   classAllow?: string,
   specIndex = 0,
   beforeReset?: (raw: PortalCapture) => Promise<void>,
+  /** The LIBRARY'S OWN class prefix (`cfg.library.classPrefix`), used only for
+   *  the diagnostic `currentReader.sig`. It used to be a literal `/^Polaris-/`
+   *  in the in-page reader — a vendor name on the live path. */
+  classPrefix?: string,
 ): Promise<PortalCapture> {
   await page.evaluate(`window.__setSpec(false)`);
   await page.waitForTimeout(150);
@@ -1590,7 +1644,7 @@ export async function capturePortalRoots(
   // double-run byte-identity check still has to pass over it.
   const blurred = (await page.evaluate(blurActiveJs)) as string;
   if (blurred !== '') await page.waitForTimeout(120);
-  const raw = (await page.evaluate(capturePortalJs(classAllow))) as {
+  const raw = (await page.evaluate(capturePortalJs(classAllow, classPrefix))) as {
     preBytes: number;
     postBytes: number;
     currentReader: PortalCapture['currentReader'];
@@ -1707,7 +1761,7 @@ export async function portalSweep(
   page: Page,
   comp: ComponentConfig,
   space: PropSpace,
-  opts: { screenshots?: string; classAllow?: string },
+  opts: { screenshots?: string; classAllow?: string; classPrefix?: string },
 ): Promise<{ captures: Capture[]; receipts: string[] }> {
   const captures: Capture[] = [];
   const receipts: string[] = [];
@@ -1721,7 +1775,7 @@ export async function portalSweep(
       if (pickIdx < 0) return; // the refusal below names it; nothing to shoot
       const shot = await page.locator(`[data-portal-root="${pickIdx}"]`).screenshot({ timeout: 10_000 });
       writeFileSync(path.join(opts.screenshots!, `${comp.name}--${combo.key}__default.png`), shot);
-    });
+    }, opts.classPrefix);
     const portaled = pc.roots.filter((r) => r.location === 'portaled');
     const inStage = pc.roots.filter((r) => r.location === 'in-stage');
     let picked: CapturedRoot;

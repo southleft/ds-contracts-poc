@@ -114,6 +114,13 @@ export interface Scorecard {
   shippedMinted: {
     path: string;
     leavesAdded: number;
+    /** ORDERING GUARD (task #28, `CaptureConfig.tokens.mintedBootstrap`).
+     *  Present ONLY on a library's genuine first-ever pass, when no promotion
+     *  has written the minted tree yet; `note` carries the receipt sentence.
+     *  Every other run is refused at config load rather than recording a
+     *  `leavesAdded: 0` that looks like a measurement. */
+    bootstrap?: true;
+    note?: string;
     /** `resolvedEqual` separates a RE-ANCHORING (the shipped tree aliases an
      *  equal-valued semantic token — same paint, different spelling) from a
      *  real value disagreement, which is the regression candidate. */
@@ -478,6 +485,14 @@ ${stages.join('\n')}
     shippedMinted: {
       path: cfg.tokens.minted ?? '(none declared)',
       leavesAdded: merged.added.length,
+      // ORDERING GUARD (task #28): the only run that may legitimately measure
+      // against an empty shipped tree says so on the receipt.
+      ...(cfg.tokens.mintedBootstrap === true
+        ? {
+            bootstrap: true as const,
+            note: 'measured without a shipped minted tree — this library has never promoted one (tokens.mintedBootstrap). The gate inventory is base + this run\'s FRESH mint only; re-run the harness after the first promotion to measure against the shipped tree.',
+          }
+        : {}),
       divergent,
     },
     rows,

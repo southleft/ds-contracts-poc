@@ -42,7 +42,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "checkbox-label",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -59,7 +59,7 @@ const COMPONENTS = [
               },
               "fixedWidth": {
                 "px": 92.9219,
-                "varName": "imported/checkbox/part-1/width"
+                "varName": "imported/checkbox/checkbox-label/width"
               },
               "children": [
                 {
@@ -119,7 +119,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "checkbox-label",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -136,7 +136,7 @@ const COMPONENTS = [
               },
               "fixedWidth": {
                 "px": 92.9219,
-                "varName": "imported/checkbox/part-1/width"
+                "varName": "imported/checkbox/checkbox-label/width"
               },
               "children": [
                 {
@@ -196,7 +196,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-1",
+              "name": "checkbox-label",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -213,7 +213,7 @@ const COMPONENTS = [
               },
               "fixedWidth": {
                 "px": 92.9219,
-                "varName": "imported/checkbox/part-1/width"
+                "varName": "imported/checkbox/checkbox-label/width"
               },
               "children": [
                 {

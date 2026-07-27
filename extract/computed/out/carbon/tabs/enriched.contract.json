@@ -65,9 +65,9 @@
             "display": "flex"
           },
           "parts": {
-            "part-1-0": {
+            "tabs__nav-item": {
               "element": "button",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button|tabs__nav-item.tabs__nav-link — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "appearance": "none",
@@ -88,15 +88,15 @@
                 "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9)"
               },
               "parts": {
-                "part-1-0-0": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                "tabs__nav-item-label-wrapper": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|tabs__nav-item-label-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex"
                   },
                   "parts": {
                     "label": {
                       "text": "Overview",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|tabs__nav-item-label — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
                         "cursor": "pointer",
@@ -132,18 +132,18 @@
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
                     "top": "{imported.shared.size-1}",
-                    "width": "{imported.tabs.part-1-0-0.width}"
+                    "width": "{imported.tabs.tabs-nav-item-label-wrapper.width}"
                   }
                 }
               },
               "tokens": {
                 "background-color": "{imported.shared.color-00000000}",
-                "border-bottom-color": "{imported.tabs.part-1-0.border-bottom-color}",
+                "border-bottom-color": "{imported.tabs.tabs-nav-item.border-bottom-color}",
                 "border-left-width": "{imported.shared.size-0}",
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
                 "bottom": "{imported.shared.size-0}",
-                "color": "{imported.tabs.part-1-0.color}",
+                "color": "{imported.tabs.tabs-nav-item.color}",
                 "flex-grow": "{imported.shared.num-1}",
                 "flex-shrink": "{imported.shared.num-0}",
                 "font-size": "{imported.shared.size-14}",
@@ -160,9 +160,9 @@
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "row-rule-color": "{imported.tabs.part-1-0.row-rule-color}",
+                "row-rule-color": "{imported.tabs.tabs-nav-item.row-rule-color}",
                 "top": "{imported.shared.size-0}",
-                "width": "{imported.tabs.part-1-0.width}"
+                "width": "{imported.tabs.tabs-nav-item.width}"
               }
             },
             "part-1-1": {
@@ -185,9 +185,9 @@
                 "width": "{imported.shared.size-3}"
               }
             },
-            "part-1-2": {
+            "tabs__nav-item-2": {
               "element": "button",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button|tabs__nav-item.tabs__nav-link — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "appearance": "none",
@@ -209,15 +209,15 @@
                 "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
               },
               "parts": {
-                "part-1-2-0": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                "tabs__nav-item-label-wrapper-2": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|tabs__nav-item-label-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex"
                   },
                   "parts": {
                     "label-2": {
                       "text": "Activity",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|tabs__nav-item-label — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
                         "cursor": "pointer",
@@ -264,7 +264,7 @@
                     "right": "{imported.shared.size-0}",
                     "row-rule-color": "{imported.shared.color-525252}",
                     "top": "{imported.shared.size-1}",
-                    "width": "{imported.tabs.part-1-2-0.width}"
+                    "width": "{imported.tabs.tabs-nav-item-label-wrapper-2.width}"
                   },
                   "states": {
                     "active": {
@@ -278,7 +278,7 @@
               },
               "tokens": {
                 "background-color": "{imported.shared.color-00000000}",
-                "border-bottom-color": "{imported.tabs.part-1-2.border-bottom-color}",
+                "border-bottom-color": "{imported.tabs.tabs-nav-item-2.border-bottom-color}",
                 "border-left-width": "{imported.shared.size-0}",
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
@@ -301,7 +301,7 @@
                 "right": "{imported.shared.size-0}",
                 "row-rule-color": "{imported.shared.color-525252}",
                 "top": "{imported.shared.size-0}",
-                "width": "{imported.tabs.part-1-2.width}"
+                "width": "{imported.tabs.tabs-nav-item-2.width}"
               },
               "states": {
                 "active": {
@@ -332,9 +332,9 @@
                 "width": "{imported.shared.size-3}"
               }
             },
-            "part-1-4": {
+            "tabs__nav-item-3": {
               "element": "button",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy button| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy button|tabs__nav-item.tabs__nav-link — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "appearance": "none",
@@ -356,15 +356,15 @@
                 "transition-timing-function": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
               },
               "parts": {
-                "part-1-4-0": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                "tabs__nav-item-label-wrapper-3": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|tabs__nav-item-label-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex"
                   },
                   "parts": {
                     "label-3": {
                       "text": "Settings",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy span|tabs__nav-item-label — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
                         "display": "block",
                         "cursor": "pointer",
@@ -403,13 +403,13 @@
                     "right": "{imported.shared.size-0}",
                     "row-rule-color": "{imported.shared.color-525252}",
                     "top": "{imported.shared.size-1}",
-                    "width": "{imported.tabs.part-1-4-0.width}"
+                    "width": "{imported.tabs.tabs-nav-item-label-wrapper-3.width}"
                   }
                 }
               },
               "tokens": {
                 "background-color": "{imported.shared.color-00000000}",
-                "border-bottom-color": "{imported.tabs.part-1-4.border-bottom-color}",
+                "border-bottom-color": "{imported.tabs.tabs-nav-item-3.border-bottom-color}",
                 "border-left-width": "{imported.shared.size-0}",
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
@@ -432,7 +432,7 @@
                 "right": "{imported.shared.size-0}",
                 "row-rule-color": "{imported.shared.color-525252}",
                 "top": "{imported.shared.size-0}",
-                "width": "{imported.tabs.part-1-4.width}"
+                "width": "{imported.tabs.tabs-nav-item-3.width}"
               }
             },
             "part-1-5": {

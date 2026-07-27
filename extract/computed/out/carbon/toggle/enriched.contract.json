@@ -43,9 +43,9 @@
         "user-select": "none"
       },
       "parts": {
-        "part-0": {
+        "toggle__button": {
           "element": "button",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy button||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button|toggle__button|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "none",
             "border-bottom-style": "none",
@@ -63,7 +63,7 @@
             "border-left-width": "{imported.shared.size-0}",
             "border-right-width": "{imported.shared.size-0}",
             "border-top-width": "{imported.shared.size-0}",
-            "height": "{imported.toggle.part-0.height}",
+            "height": "{imported.toggle.toggle-button.height}",
             "left": "{imported.shared.size-16}",
             "margin-bottom": "{imported.shared.size-neg-1}",
             "margin-left": "{imported.shared.size-neg-1}",
@@ -75,12 +75,12 @@
             "padding-left": "{imported.shared.size-0}",
             "padding-right": "{imported.shared.size-0}",
             "padding-top": "{imported.shared.size-0}",
-            "right": "{imported.toggle.part-0.right}",
-            "width": "{imported.toggle.part-0.width}"
+            "right": "{imported.toggle.toggle-button.right}",
+            "width": "{imported.toggle.toggle-button.width}"
           },
           "states": {
             "disabled": {
-              "background-color": "{imported.toggle.part-0.background-color-state-disabled}",
+              "background-color": "{imported.toggle.toggle-button.background-color-state-disabled}",
               "color": "{imported.shared.color-1010104d}"
             }
           },
@@ -89,20 +89,20 @@
               "prop": "toggled",
               "map": {
                 "toggled": {
-                  "bottom": "{imported.toggle.part-0.bottom.toggled}",
-                  "top": "{imported.toggle.part-0.top.toggled}"
+                  "bottom": "{imported.toggle.toggle-button.bottom.toggled}",
+                  "top": "{imported.toggle.toggle-button.top.toggled}"
                 },
                 "untoggled": {
-                  "bottom": "{imported.toggle.part-0.bottom.untoggled}",
-                  "top": "{imported.toggle.part-0.top.untoggled}"
+                  "bottom": "{imported.toggle.toggle-button.bottom.untoggled}",
+                  "top": "{imported.toggle.toggle-button.top.untoggled}"
                 }
               }
             }
           ]
         },
-        "part-1": {
+        "toggle__label": {
           "element": "label",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy label| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label|toggle__label — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "inline",
             "cursor": "default",
@@ -111,7 +111,7 @@
           "parts": {
             "label": {
               "text": "Toggle",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|toggle__label-text — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "cursor": "default",
@@ -134,11 +134,11 @@
                 }
               }
             },
-            "part-1-1": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+            "toggle__appearance": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|toggle__appearance — this element exists in the real component's DOM; the static layer had no part for it.",
               "parts": {
-                "part-1-1-0": {
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                "toggle__switch": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|toggle__switch — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "cursor": "pointer",
@@ -163,11 +163,11 @@
                     "left": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
                     "top": "{imported.shared.size-0}",
-                    "width": "{imported.toggle.part-1-1-0.width}"
+                    "width": "{imported.toggle.toggle-switch.width}"
                   },
                   "states": {
                     "disabled": {
-                      "background-color": "{imported.toggle.part-1-1-0.background-color-state-disabled}"
+                      "background-color": "{imported.toggle.toggle-switch.background-color-state-disabled}"
                     }
                   },
                   "tokensByProp": [
@@ -175,10 +175,10 @@
                       "prop": "toggled",
                       "map": {
                         "toggled": {
-                          "background-color": "{imported.toggle.part-1-1-0.background-color.toggled}"
+                          "background-color": "{imported.toggle.toggle-switch.background-color.toggled}"
                         },
                         "untoggled": {
-                          "background-color": "{imported.toggle.part-1-1-0.background-color.untoggled}"
+                          "background-color": "{imported.toggle.toggle-switch.background-color.untoggled}"
                         }
                       }
                     }
@@ -186,7 +186,7 @@
                 },
                 "label-2": {
                   "text": "Off",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|toggle__text — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "cursor": "pointer",
@@ -220,7 +220,7 @@
                 }
               },
               "tokens": {
-                "column-gap": "{imported.toggle.part-1-1.column-gap}",
+                "column-gap": "{imported.toggle.toggle-appearance.column-gap}",
                 "grid-template-rows": "{imported.shared.size-24}",
                 "height": "{imported.shared.size-24}",
                 "min-height": "{imported.shared.size-0}",
@@ -231,10 +231,10 @@
                   "prop": "toggled",
                   "map": {
                     "toggled": {
-                      "width": "{imported.toggle.part-1-1.width.toggled}"
+                      "width": "{imported.toggle.toggle-appearance.width.toggled}"
                     },
                     "untoggled": {
-                      "width": "{imported.toggle.part-1-1.width.untoggled}"
+                      "width": "{imported.toggle.toggle-appearance.width.untoggled}"
                     }
                   }
                 }

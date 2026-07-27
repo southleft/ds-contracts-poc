@@ -100,15 +100,15 @@
       5
     ],
     [
-      "part-1.display",
+      "modal-container.display",
       5
     ],
     [
-      "part-1.grid-template-rows",
+      "modal-container.grid-template-rows",
       5
     ],
     [
-      "part-1-0.grid-column-end",
+      "modal-header.grid-column-end",
       5
     ],
     [
@@ -124,15 +124,15 @@
       5
     ],
     [
-      "part-1-0-2-0-1-1.right",
+      "popover-caret.right",
       5
     ],
     [
-      "part-1-0-2-0-1-1.top",
+      "popover-caret.top",
       5
     ],
     [
-      "part-1-0-2-0-1-1.will-change",
+      "popover-caret.will-change",
       5
     ],
     [
@@ -145,25 +145,25 @@
     ]
   ],
   "namedLosses": [
-    "promotion: pseudo-decor-unconditional-placement: part-1-0-2-0-1-1::after is drawn without an enum-axis gate — stylesWhen placement (the v9 shape grammar) has no condition to ride; decor NOT promoted (named refusal, v1 bounded)",
+    "promotion: pseudo-decor-unconditional-placement: popover-caret::after is drawn without an enum-axis gate — stylesWhen placement (the v9 shape grammar) has no condition to ride; decor NOT promoted (named refusal, v1 bounded)",
     "code-only: root.content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: root.position — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: root.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1.display — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: part-1.grid-template-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1-0.grid-column-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: modal-container.display — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: modal-container.grid-template-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: modal-header.grid-column-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-3.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1-0-2-0-0-0.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: btn.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-4.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-4.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-4.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-4.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-4.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1-0-2-0-1-1.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1-0-2-0-1-1.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1-0-2-0-1-1.will-change — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: popover-caret.right — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: popover-caret.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: popover-caret.will-change — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-5.--cds-border-subtle — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-5.--cds-border-tile — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-5.--cds-field — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -171,9 +171,9 @@
     "code-only: label-5.--cds-layer-background — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-5.grid-column-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-5.grid-row-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1-2.grid-column-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1-2.grid-row-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: part-1-2.grid-row-start — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: btn-set.grid-column-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: btn-set.grid-row-end — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: btn-set.grid-row-start — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-6.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-6.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-6.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -190,7 +190,7 @@
   },
   "shippedMinted": {
     "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-    "leavesAdded": 0,
+    "leavesAdded": 1073,
     "divergent": []
   },
   "rows": [
@@ -226,19 +226,19 @@
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-1",
+          "part": "modal-container",
           "channel": "display",
           "ours": "flex",
           "theirs": "grid"
         },
         {
-          "part": "part-1",
+          "part": "modal-container",
           "channel": "grid-template-rows",
           "ours": "none",
           "theirs": "71.9844px 75.9844px 0px 64px"
         },
         {
-          "part": "part-1-0",
+          "part": "modal-header",
           "channel": "grid-column-end",
           "ours": "auto",
           "theirs": "-1"
@@ -262,19 +262,19 @@
           "theirs": "50%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "right",
           "ours": "auto",
           "theirs": "100%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "top",
           "ours": "auto",
           "theirs": "50%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "will-change",
           "ours": "auto",
           "theirs": "transform"
@@ -322,19 +322,19 @@
           "theirs": "-2"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-column-end",
           "ours": "auto",
           "theirs": "-1"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-row-end",
           "ours": "auto",
           "theirs": "-1"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-row-start",
           "ours": "auto",
           "theirs": "-1"
@@ -455,19 +455,19 @@
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-1",
+          "part": "modal-container",
           "channel": "display",
           "ours": "flex",
           "theirs": "grid"
         },
         {
-          "part": "part-1",
+          "part": "modal-container",
           "channel": "grid-template-rows",
           "ours": "none",
           "theirs": "71.9844px 75.9844px 0px 64px"
         },
         {
-          "part": "part-1-0",
+          "part": "modal-header",
           "channel": "grid-column-end",
           "ours": "auto",
           "theirs": "-1"
@@ -491,19 +491,19 @@
           "theirs": "50%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "right",
           "ours": "auto",
           "theirs": "100%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "top",
           "ours": "auto",
           "theirs": "50%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "will-change",
           "ours": "auto",
           "theirs": "transform"
@@ -551,19 +551,19 @@
           "theirs": "-2"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-column-end",
           "ours": "auto",
           "theirs": "-1"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-row-end",
           "ours": "auto",
           "theirs": "-1"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-row-start",
           "ours": "auto",
           "theirs": "-1"
@@ -684,19 +684,19 @@
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-1",
+          "part": "modal-container",
           "channel": "display",
           "ours": "flex",
           "theirs": "grid"
         },
         {
-          "part": "part-1",
+          "part": "modal-container",
           "channel": "grid-template-rows",
           "ours": "none",
           "theirs": "71.9844px 75.9844px 0px 64px"
         },
         {
-          "part": "part-1-0",
+          "part": "modal-header",
           "channel": "grid-column-end",
           "ours": "auto",
           "theirs": "-1"
@@ -720,19 +720,19 @@
           "theirs": "50%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "right",
           "ours": "auto",
           "theirs": "100%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "top",
           "ours": "auto",
           "theirs": "50%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "will-change",
           "ours": "auto",
           "theirs": "transform"
@@ -780,19 +780,19 @@
           "theirs": "-2"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-column-end",
           "ours": "auto",
           "theirs": "-1"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-row-end",
           "ours": "auto",
           "theirs": "-1"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-row-start",
           "ours": "auto",
           "theirs": "-1"
@@ -913,19 +913,19 @@
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-1",
+          "part": "modal-container",
           "channel": "display",
           "ours": "flex",
           "theirs": "grid"
         },
         {
-          "part": "part-1",
+          "part": "modal-container",
           "channel": "grid-template-rows",
           "ours": "none",
           "theirs": "71.9844px 75.9844px 0px 64px"
         },
         {
-          "part": "part-1-0",
+          "part": "modal-header",
           "channel": "grid-column-end",
           "ours": "auto",
           "theirs": "-1"
@@ -949,19 +949,19 @@
           "theirs": "50%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "right",
           "ours": "auto",
           "theirs": "100%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "top",
           "ours": "auto",
           "theirs": "50%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "will-change",
           "ours": "auto",
           "theirs": "transform"
@@ -1009,19 +1009,19 @@
           "theirs": "-2"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-column-end",
           "ours": "auto",
           "theirs": "-1"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-row-end",
           "ours": "auto",
           "theirs": "-1"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-row-start",
           "ours": "auto",
           "theirs": "-1"
@@ -1142,19 +1142,19 @@
           "theirs": "rect(0px, 0px, 0px, 0px)"
         },
         {
-          "part": "part-1",
+          "part": "modal-container",
           "channel": "display",
           "ours": "flex",
           "theirs": "grid"
         },
         {
-          "part": "part-1",
+          "part": "modal-container",
           "channel": "grid-template-rows",
           "ours": "none",
           "theirs": "71.9844px 75.9844px 0px 64px"
         },
         {
-          "part": "part-1-0",
+          "part": "modal-header",
           "channel": "grid-column-end",
           "ours": "auto",
           "theirs": "-1"
@@ -1178,19 +1178,19 @@
           "theirs": "50%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "right",
           "ours": "auto",
           "theirs": "100%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "top",
           "ours": "auto",
           "theirs": "50%"
         },
         {
-          "part": "part-1-0-2-0-1-1",
+          "part": "popover-caret",
           "channel": "will-change",
           "ours": "auto",
           "theirs": "transform"
@@ -1238,19 +1238,19 @@
           "theirs": "-2"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-column-end",
           "ours": "auto",
           "theirs": "-1"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-row-end",
           "ours": "auto",
           "theirs": "-1"
         },
         {
-          "part": "part-1-2",
+          "part": "btn-set",
           "channel": "grid-row-start",
           "ours": "auto",
           "theirs": "-1"

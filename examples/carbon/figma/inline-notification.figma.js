@@ -36,7 +36,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -45,7 +45,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -99,7 +99,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -107,8 +107,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -141,9 +141,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]
@@ -168,7 +168,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -177,7 +177,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -231,7 +231,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -239,8 +239,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -273,9 +273,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]
@@ -300,7 +300,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -309,7 +309,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -377,7 +377,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -385,8 +385,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -419,9 +419,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]
@@ -446,7 +446,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -455,7 +455,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -523,7 +523,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -531,8 +531,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -565,9 +565,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]
@@ -592,7 +592,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -601,7 +601,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -669,7 +669,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -677,8 +677,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -711,9 +711,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]
@@ -738,7 +738,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -747,7 +747,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -815,7 +815,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -823,8 +823,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -857,9 +857,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]
@@ -884,7 +884,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -893,7 +893,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -947,7 +947,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -955,8 +955,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -989,9 +989,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]
@@ -1016,7 +1016,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -1025,7 +1025,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -1079,7 +1079,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -1087,8 +1087,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -1121,9 +1121,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]
@@ -1148,7 +1148,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -1157,7 +1157,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -1225,7 +1225,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -1233,8 +1233,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -1267,9 +1267,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]
@@ -1294,7 +1294,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -1303,7 +1303,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -1371,7 +1371,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -1379,8 +1379,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -1413,9 +1413,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]
@@ -1440,7 +1440,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -1449,7 +1449,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -1531,7 +1531,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -1539,8 +1539,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -1573,9 +1573,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]
@@ -1600,7 +1600,7 @@ const COMPONENTS = [
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "minHeight": "imported/shared/size-48",
             "minWidth": "imported/inline-notification/root/min-width",
-            "itemSpacing": "imported/inline-notification/part-0/margin-right"
+            "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
           "fixedWidth": {
             "px": 608,
@@ -1609,7 +1609,7 @@ const COMPONENTS = [
           "children": [
             {
               "type": "frame",
-              "name": "part-0",
+              "name": "inline-notification__details",
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
@@ -1691,7 +1691,7 @@ const COMPONENTS = [
                 },
                 {
                   "type": "frame",
-                  "name": "part-0-1",
+                  "name": "inline-notification__text-wrapper",
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
@@ -1699,8 +1699,8 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "bindings": {
-                    "paddingBottom": "imported/inline-notification/part-0-1/padding-bottom",
-                    "paddingTop": "imported/inline-notification/part-0-1/padding-top",
+                    "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
+                    "paddingTop": "imported/inline-notification/inline-notification-text-wrapper/padding-top",
                     "itemSpacing": "imported/inline-notification/label-2/margin-right"
                   },
                   "children": [
@@ -1733,9 +1733,9 @@ const COMPONENTS = [
             },
             {
               "type": "svg",
-              "name": "part-1",
+              "name": "inline-notification__close-button",
               "svg": "<svg fill=\"#000000\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 17.4141 16 L 24 9.4141 L 22.5859 8 L 16 14.5859 L 9.4143 8 L 8 9.4141 L 14.5859 16 L 8 22.5859 L 9.4143 24 L 16 17.4141 L 22.5859 24 L 24 22.5859 L 17.4141 16 Z\"/></svg>",
-              "svgPaintVar": "imported/inline-notification/part-1/color",
+              "svgPaintVar": "imported/inline-notification/inline-notification-close-button/color",
               "iconSize": 16
             }
           ]

@@ -193,26 +193,30 @@ const isThemeContainerNode = (n: CapturedNode): boolean => n.classes.some((c) =>
  *  Modal portal renders {dialog, backdrop} under one ThemeProvider div);
  *  single-child box-less passthrough → its child. A node with its own box,
  *  ARIA role, direct text, or a real class-stem is KEPT with raw children
- *  intact (the dialog, the backdrop, the list, the activator, the overlay). */
-export function realRootsOf(n: CapturedNode): CapturedNode[] {
-  if (n.style['display'] === 'contents') return childEls(n).flatMap(realRootsOf);
+ *  intact (the dialog, the backdrop, the list, the activator, the overlay).
+ *
+ *  `classPrefix` is the LIBRARY'S OWN, threaded from the capture config. It
+ *  used to be a module constant spelled `'Polaris-'` — a vendor name sitting
+ *  on the live path for every library. The descent only asks whether a wrapper
+ *  has ANY own class-stem, so the wrong prefix was survivable (it can only
+ *  over-keep, never over-strip) but it made the answer library-dependent for
+ *  no reason. Defaulted to `''` so a caller with no config (the spike
+ *  receipts) keeps the "any class at all is a stem" reading. */
+export function realRootsOf(n: CapturedNode, classPrefix = ''): CapturedNode[] {
+  if (n.style['display'] === 'contents') return childEls(n).flatMap((c) => realRootsOf(c, classPrefix));
   if (directText(n).length > 0 || (n.role != null && n.role !== '')) return [n];
   const boxless = isBoxlessNode(n);
   const kids = childEls(n);
-  if (boxless && kids.length >= 1 && (stems(n.classes, PORTAL_PREFIX).length === 0 || isThemeContainerNode(n))) {
-    return kids.flatMap(realRootsOf); // anon/theme wrapper → unwrap (multi-root)
+  if (boxless && kids.length >= 1 && (stems(n.classes, classPrefix).length === 0 || isThemeContainerNode(n))) {
+    return kids.flatMap((c) => realRootsOf(c, classPrefix)); // anon/theme wrapper → unwrap (multi-root)
   }
-  if (boxless && kids.length === 1) return realRootsOf(kids[0]); // single-child passthrough
+  if (boxless && kids.length === 1) return realRootsOf(kids[0], classPrefix); // single-child passthrough
   return [n];
 }
-/** The library class prefix stripped for the stem test in realRootsOf. The
- *  descent only needs to know whether a wrapper has ANY own class-stem, so the
- *  Polaris prefix is used directly (the census carries the real prefix on the
- *  spike-verified path; a wrong prefix would only over-keep, never over-strip). */
-const PORTAL_PREFIX = 'Polaris-';
 
 /** Descend a captured new-root to its real root(s) (the Stage-B seed). */
-export const descendToRealRoots = (n: CapturedNode): CapturedNode[] => realRootsOf(n);
+export const descendToRealRoots = (n: CapturedNode, classPrefix = ''): CapturedNode[] =>
+  realRootsOf(n, classPrefix);
 
 /** A real root's part-name for a MULTI-root anatomy: role=dialog → 'dialog';
  *  aria-modal → 'dialog'; else the class-stem's last BEM segment lowercased
@@ -1776,7 +1780,7 @@ export function buildMultiRootUnion(
   const perCombo = combos.map((c) => ({
     combo: c.combo,
     interaction: c.interaction,
-    real: c.newRoots.flatMap(descendToRealRoots),
+    real: c.newRoots.flatMap((r) => descendToRealRoots(r, classPrefix)),
   }));
   const base = perCombo.find((c) => `${c.combo}__${c.interaction}` === baseKey);
   if (!base) throw new Error(`multi-root union: base ${baseKey} not among combos`);

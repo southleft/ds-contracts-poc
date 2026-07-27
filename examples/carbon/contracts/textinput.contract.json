@@ -47,8 +47,8 @@
         "align": "start"
       },
       "parts": {
-        "part-0": {
-          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+        "text-input__label-wrapper": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|text-input__label-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
             "display": "flex",
             "justify": "space-between"
@@ -57,7 +57,7 @@
             "label": {
               "element": "label",
               "text": "Label",
-              "description": "Promoted from the computed floor (round 4): rendered anatomy label| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy label|label — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
                 "cursor": "default"
@@ -80,29 +80,29 @@
           },
           "tokens": {
             "font-size": "{imported.shared.size-14}",
-            "height": "{imported.text-input.part-0.height}",
+            "height": "{imported.text-input.text-input-label-wrapper.height}",
             "letter-spacing": "{imported.shared.size-0-16}",
             "line-height": "{imported.shared.size-18-0001}",
             "width": "{imported.shared.size-288}"
           }
         },
-        "part-1": {
-          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+        "text-input__field-outer-wrapper": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|text-input__field-outer-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
             "display": "flex",
             "direction": "column",
             "align": "start"
           },
           "parts": {
-            "part-1-0": {
-              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+            "text-input__field-wrapper": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|text-input__field-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex"
               },
               "parts": {
-                "part-1-0-0": {
+                "text-input": {
                   "element": "input",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy input| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy input|text-input — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
                     "appearance": "auto",
@@ -127,16 +127,16 @@
                     }
                   },
                   "tokens": {
-                    "background-color": "{imported.text-input.part-1-0-0.background-color}",
-                    "border-bottom-color": "{imported.text-input.part-1-0-0.border-bottom-color}",
+                    "background-color": "{imported.text-input.text-input.background-color}",
+                    "border-bottom-color": "{imported.text-input.text-input.border-bottom-color}",
                     "border-bottom-width": "{imported.shared.size-1}",
                     "font-size": "{imported.shared.size-14}",
-                    "height": "{imported.text-input.part-1-0-0.height.unset}",
+                    "height": "{imported.text-input.text-input.height.unset}",
                     "letter-spacing": "{imported.shared.size-0-16}",
                     "line-height": "{imported.shared.size-18-0001}",
-                    "outline-color": "{imported.text-input.part-1-0-0.outline-color}",
-                    "outline-offset": "{imported.text-input.part-1-0-0.outline-offset}",
-                    "outline-width": "{imported.text-input.part-1-0-0.outline-width}",
+                    "outline-color": "{imported.text-input.text-input.outline-color}",
+                    "outline-offset": "{imported.text-input.text-input.outline-offset}",
+                    "outline-width": "{imported.text-input.text-input.outline-width}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
                     "width": "{imported.shared.size-288}"
@@ -151,24 +151,24 @@
                       "prop": "size",
                       "map": {
                         "lg": {
-                          "height": "{imported.text-input.part-1-0-0.height.lg}"
+                          "height": "{imported.text-input.text-input.height.lg}"
                         },
                         "md": {
-                          "height": "{imported.text-input.part-1-0-0.height.md}"
+                          "height": "{imported.text-input.text-input.height.md}"
                         },
                         "sm": {
-                          "height": "{imported.text-input.part-1-0-0.height.sm}"
+                          "height": "{imported.text-input.text-input.height.sm}"
                         },
                         "xs": {
-                          "height": "{imported.text-input.part-1-0-0.height.xs}"
+                          "height": "{imported.text-input.text-input.height.xs}"
                         }
                       }
                     }
                   ]
                 },
-                "part-1-0-1": {
+                "text-input__counter-alert": {
                   "element": "span",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy span||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|text-input__counter-alert|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "none",
                     "overflow-x": "hidden",
@@ -176,7 +176,7 @@
                     "position": "absolute"
                   },
                   "tokens": {
-                    "bottom": "{imported.text-input.part-1-0-1.bottom.unset}",
+                    "bottom": "{imported.text-input.text-input-counter-alert.bottom.unset}",
                     "font-size": "{imported.shared.size-14}",
                     "height": "{imported.shared.size-1}",
                     "left": "{imported.shared.size-0}",
@@ -188,7 +188,7 @@
                     "margin-top": "{imported.shared.size-neg-1}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
-                    "right": "{imported.text-input.part-1-0-1.right}",
+                    "right": "{imported.text-input.text-input-counter-alert.right}",
                     "top": "{imported.shared.size-0}",
                     "width": "{imported.shared.size-1}"
                   },
@@ -197,16 +197,16 @@
                       "prop": "size",
                       "map": {
                         "lg": {
-                          "bottom": "{imported.text-input.part-1-0-1.bottom.lg}"
+                          "bottom": "{imported.text-input.text-input-counter-alert.bottom.lg}"
                         },
                         "md": {
-                          "bottom": "{imported.text-input.part-1-0-1.bottom.md}"
+                          "bottom": "{imported.text-input.text-input-counter-alert.bottom.md}"
                         },
                         "sm": {
-                          "bottom": "{imported.text-input.part-1-0-1.bottom.sm}"
+                          "bottom": "{imported.text-input.text-input-counter-alert.bottom.sm}"
                         },
                         "xs": {
-                          "bottom": "{imported.text-input.part-1-0-1.bottom.xs}"
+                          "bottom": "{imported.text-input.text-input-counter-alert.bottom.xs}"
                         }
                       }
                     }
@@ -219,7 +219,7 @@
               "tokens": {
                 "bottom": "{imported.shared.size-0}",
                 "font-size": "{imported.shared.size-14}",
-                "height": "{imported.text-input.part-1-0.height.unset}",
+                "height": "{imported.text-input.text-input-field-wrapper.height.unset}",
                 "left": "{imported.shared.size-0}",
                 "letter-spacing": "{imported.shared.size-0-16}",
                 "line-height": "{imported.shared.size-18-0001}",
@@ -232,16 +232,16 @@
                   "prop": "size",
                   "map": {
                     "lg": {
-                      "height": "{imported.text-input.part-1-0.height.lg}"
+                      "height": "{imported.text-input.text-input-field-wrapper.height.lg}"
                     },
                     "md": {
-                      "height": "{imported.text-input.part-1-0.height.md}"
+                      "height": "{imported.text-input.text-input-field-wrapper.height.md}"
                     },
                     "sm": {
-                      "height": "{imported.text-input.part-1-0.height.sm}"
+                      "height": "{imported.text-input.text-input-field-wrapper.height.sm}"
                     },
                     "xs": {
-                      "height": "{imported.text-input.part-1-0.height.xs}"
+                      "height": "{imported.text-input.text-input-field-wrapper.height.xs}"
                     }
                   }
                 }
@@ -249,9 +249,9 @@
             }
           },
           "tokens": {
-            "flex-grow": "{imported.text-input.part-1.flex-grow}",
+            "flex-grow": "{imported.text-input.text-input-field-outer-wrapper.flex-grow}",
             "font-size": "{imported.shared.size-14}",
-            "height": "{imported.text-input.part-1.height.unset}",
+            "height": "{imported.text-input.text-input-field-outer-wrapper.height.unset}",
             "letter-spacing": "{imported.shared.size-0-16}",
             "line-height": "{imported.shared.size-18-0001}",
             "width": "{imported.shared.size-288}"
@@ -261,16 +261,16 @@
               "prop": "size",
               "map": {
                 "lg": {
-                  "height": "{imported.text-input.part-1.height.lg}"
+                  "height": "{imported.text-input.text-input-field-outer-wrapper.height.lg}"
                 },
                 "md": {
-                  "height": "{imported.text-input.part-1.height.md}"
+                  "height": "{imported.text-input.text-input-field-outer-wrapper.height.md}"
                 },
                 "sm": {
-                  "height": "{imported.text-input.part-1.height.sm}"
+                  "height": "{imported.text-input.text-input-field-outer-wrapper.height.sm}"
                 },
                 "xs": {
-                  "height": "{imported.text-input.part-1.height.xs}"
+                  "height": "{imported.text-input.text-input-field-outer-wrapper.height.xs}"
                 }
               }
             }

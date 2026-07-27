@@ -11,9 +11,9 @@
       "selector": ".cds--label"
     },
     {
-      "leaf": "imported.text-input.part-1-0-0.background-color",
+      "leaf": "imported.text-input.text-input.background-color",
       "token": "field",
-      "part": "part-1-0-0",
+      "part": "text-input",
       "cssProperty": "background-color",
       "varName": "--cds-field",
       "selector": ".cds--text-input"

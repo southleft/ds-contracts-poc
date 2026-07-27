@@ -23,6 +23,12 @@ reproducible pin. **No CSS build step** — `@carbon/styles` ships
 Akamai CDN URL (0 relative), so esbuild bundles it with no loader configuration
 and the harness stays network-free.
 
+> **SUPERSEDED IN PART — read "THE CLASS-STEM PREFIX DEFECT" first.** Round 1's
+> numbers below were measured with EVERY Carbon class discarded by the engine.
+> The floors are unchanged (they were never wrong), but the part names and the
+> generality verdict are. The corrected round is recorded at the end of this
+> file.
+
 ## The generality verdict
 
 **Engine files changed: 1** (`extract/computed/capture.ts`, one expression,
@@ -30,6 +36,14 @@ mirrored in the portal harness). Everything else Carbon needed was config,
 seed contracts, and per-library scripts. Both engine-shaped problems the round
 hit are recorded below — the one that turned out to be config, and the one
 that genuinely was not.
+
+**CORRECTED (task #25):** the honest count is **2**. The round shipped with a
+second, unnoticed engine defect — `extract/computed/lib.ts` `stems()` read
+Carbon's own `cds--` prefix as a BEM modifier marker and threw away every
+class the config had carefully preserved. See the last section. The round's
+own prediction ("a new library costs CONFIG ONLY") was not falsified by that
+defect; it was *hidden* by it, because the engine degraded to positional
+naming instead of refusing.
 
 ### CONFIG, not engine — the defaultless-axis underscore
 
@@ -169,6 +183,7 @@ npm run extract:computed -- --harness examples/carbon/.carbon-sandbox \
   --config extract/computed/configs/carbon.json --component <C> --out extract/computed/out/carbon
 npx tsx examples/carbon/scripts/promote-floor.mjs    # + figmaStatePreviews probe + source-alias pass
 npx tsx packages/cli/src/cli.ts figma examples/carbon/contracts --out examples/carbon/figma \
+  --icons examples/carbon/assets/icons \
   --tokens examples/carbon/tokens/carbon.dtcg.json,examples/carbon/tokens/carbon-minted.dtcg.json
 node examples/carbon/scripts/build-figma-tokens.mjs
 node examples/carbon/scripts/figma-compile-receipt.mjs
@@ -176,14 +191,20 @@ node examples/carbon/scripts/build-genesis-batch.mjs
 npx tsx packages/cli/src/cli.ts figma bundle examples/carbon/contracts \
   --tokens examples/carbon/tokens/carbon.dtcg.json,examples/carbon/tokens/carbon-minted.dtcg.json \
   --modes examples/carbon/tokens/modes/carbon.light.dtcg.json,examples/carbon/tokens/modes/carbon.dark.dtcg.json \
-  --name Carbon --out examples/carbon/figma/carbon.bundle.json
+  --name Carbon --icons examples/carbon/assets/icons --out examples/carbon/figma/carbon.bundle.json
 ```
 
 ## Gates (default-state floor)
 
+> Re-measured after the class-stem prefix fix. Every number below is unchanged
+> except Button (77.281 → **77.276**, inside that row's own recorded gate-timing
+> tolerance); part counts and `cellsCompared` are unchanged on all ten. See
+> "THE CLASS-STEM PREFIX DEFECT" for why the floors held while the part NAMES
+> all moved.
+
 | component | axes | combos | computed | pixel AA perfect |
 |---|---|---|---|---|
-| Button | kind(8)×size(6+unset) × disabled | 112 | 77.281% | 0/448 |
+| Button | kind(8)×size(6+unset) × disabled | 112 | 77.276% | 0/448 |
 | Tag | type(12+unset)×size(3+unset) | 52 | 80.521% | 0/208 |
 | Checkbox | checked(3) × disabled | 6 | 84.291% | 0/24 |
 | Toggle | toggled(2) × disabled | 4 | 83.140% | 0/16 |
@@ -195,7 +216,9 @@ npx tsx packages/cli/src/cli.ts figma bundle examples/carbon/contracts \
 | IconButton | kind(4)×size(4+unset) × disabled | 40 | 91.810% | 0/160 |
 
 Genesis: **132 variant cells across 10 sets, 1459 variables (94 Figma-native
-source aliases), Light/Dark modes**, batch mock-proven.
+source aliases), Light/Dark modes**, batch mock-proven. (All four totals
+survived the re-capture unchanged — the aliases only after the promotion's
+part-name join was fixed; see the last section.)
 Truth replay ≥ 99.76% on every component; all ten double-run byte-identical.
 
 **Read the 94 aliases with the FAMILY SPLIT above**: 94 aliased vs 987 kept
@@ -332,3 +355,242 @@ The valid proof is A/B on the SAME engine, changing only this expression:
 Both libraries' committed `out/` artifacts were restored from git afterwards, so
 this round moves nothing outside `examples/carbon` and the files listed in the
 task report.
+
+---
+
+# THE CLASS-STEM PREFIX DEFECT (task #25) — the round that re-ran Carbon
+
+Carbon shipped (28f4d85) with **every one of its CSS classes discarded by the
+engine**, and nothing in the repo said so. This section records the defect, the
+fix, what moved, and — the uncomfortable part — what did *not*.
+
+## The defect
+
+`extract/computed/lib.ts` `stems()` is the function that decides what a
+captured element **is**. A signature is `tag + stems`, alignment across combos
+matches on signatures, and a part's NAME comes from its dominant stem. It drops
+"modifier" classes by testing for `--`, and it did that test **before**
+stripping the library's own class prefix:
+
+```ts
+classes
+  .map(c => c.endsWith('--root') ? c.slice(0, -6) : c)
+  .filter(c => !c.includes('--'))          // ← ran FIRST
+  .map(c => c.startsWith(prefix) ? c.slice(prefix.length) : c)
+```
+
+`--` means "BEM modifier" only in what the library wrote **after** its prefix.
+Carbon's `classPrefix` is **`cds--`**. So the filter read the PREFIX's own
+separator: `cds--btn` and `cds--btn__icon` were both discarded as modifiers,
+every Carbon element captured the signature `button|` (tag only) while its
+`classes` array still said `["cds--btn"]`, alignment fell back to **position**,
+and every part was named `part-<path>`.
+
+The config was never wrong. `classAllow` (`^cds--(?!.*--)`) had preserved
+exactly the right classes — the engine threw them away one step later, no
+config key could override it, and the round's own reader-configuration table
+above argues the opposite intent. **274 of the 394 classed nodes** in Carbon's
+committed captures produced zero stems.
+
+## The fix
+
+Strip the prefix FIRST, then filter modifiers (plus an explicit empty-stem
+drop, for a class that *is* the prefix):
+
+```ts
+classes
+  .map(c => c.endsWith('--root') ? c.slice(0, -6) : c)
+  .map(c => c.startsWith(prefix) ? c.slice(prefix.length) : c)
+  .filter(c => c !== '' && !c.includes('--'))
+```
+
+`cds--btn` → `btn` (KEPT). `cds--btn--primary` → `btn--primary` (DROPPED —
+correctly a modifier). Pinned as a CLASS, not an instance, by the eval
+`class-stem-prefix-order`.
+
+### Byte-safety for the other six libraries — proven twice, not assumed
+
+**1. Pure-function A/B over every committed capture.** Both orders were run
+over all `classes` arrays in every committed `captured-truth.json`:
+
+| library | prefix | classed nodes | nodes where the two orders DIFFER |
+|---|---|---|---|
+| polaris | `Polaris-` | 415 | **0** (`Polaris-Text--root` → `Text` under both — the `--root` case runs first either way) |
+| mui | `Mui` | 988 | **0** |
+| astryx | `astryx-` | 170 | **0** |
+| altitude | `al-c-` | 80 | **0** |
+| tailwind | `` (empty) | 42 | **0** |
+| **carbon** | **`cds--`** | **394** | **274** |
+
+**2. Harness A/B on the SAME engine, changing only this ordering** (the proof
+pattern this round's `renderKids` change used — a comparison against committed
+artifacts is not valid, since those can be stale for unrelated reasons):
+
+| subject | artifacts compared | result |
+|---|---|---|
+| `tailwind` ToggleSwitch | captured-truth, enriched contract, extension, scorecard, source-bindings, numbers, LEDGER, pixel-rows, replay/gate HTML, **every gate + receipt PNG** | **all byte-identical** |
+| `mui` Switch (224 captures) | same | **all byte-identical** |
+
+Both libraries' `out/` artifacts were restored from git afterwards.
+
+**3. The 54-row offline drift instrument**, before and after: every non-Carbon
+row EXACT. Carbon's ten rows are re-recorded (below).
+
+## What moved — and what did NOT
+
+**Floors did not move.** This is the finding, and it is not the one the round
+expected:
+
+| component | committed (round 1) | re-captured | Δ |
+|---|---|---|---|
+| Button | 77.281% | 77.276% | −0.005 |
+| Tag | 80.521% | 80.521% | — |
+| Checkbox | 84.291% | 84.291% | — |
+| Toggle | 83.140% | 83.140% | — |
+| TextInput | 89.045% | 89.045% | — |
+| InlineNotification | 96.581% | 96.581% | — |
+| Accordion | 76.462% | 76.462% | — |
+| Tabs | 92.742% | 92.742% | — |
+| Modal | 89.744% | 89.744% | — |
+| IconButton | 91.810% | 91.810% | — |
+
+`cellsCompared` is **identical** on all ten, and so is every component's PART
+COUNT (1/2/5/7/7/12/8/16/18/6). Button's −0.005 is an order of magnitude inside
+that row's own recorded ±0.08 gate-timing tolerance ("THE GATE SAMPLES
+MID-TRANSITION" above) — the two runs of *this* round measured 77.276 twice.
+
+**Why the floors held.** The gate walks the promoted tree and compares channel
+values per part. Positional alignment and class-identity alignment produced the
+**same tree** here, because Carbon's DOM shape is stable across every combo of
+every component — no combo adds or removes an element. The defect corrupted
+**identity**, not measurement. That is worth stating plainly: the number that
+would have caught this was never going to catch it, and the thing that did was
+reading the captured `classes` array next to the captured signature.
+
+**Names moved — 42 parts across 8 of the 10 components**, from position to the
+library's own vocabulary:
+
+| component | before → after |
+|---|---|
+| Checkbox | `part-0` → `checkbox`, `part-1` → `checkbox-label`, `part-2` → `checkbox__validation-msg` |
+| Toggle | `part-0` → `toggle__button`, `part-1` → `toggle__label`, `part-1-1` → `toggle__appearance`, `part-1-1-0` → `toggle__switch` |
+| TextInput | `part-0` → `text-input__label-wrapper`, `part-1` → `text-input__field-outer-wrapper`, `part-1-0` → `text-input__field-wrapper`, `part-1-0-0` → `text-input`, `part-1-0-1` → `text-input__counter-alert` |
+| InlineNotification | `part-0` → `inline-notification__details`, `part-0-1` → `inline-notification__text-wrapper`, `part-1` → `inline-notification__close-button` |
+| Accordion | `part-0` → `accordion__item`, `part-0-0` → `accordion__heading`, `part-0-1` → `accordion__wrapper` (+ `-2`) |
+| Tabs | `part-1-0/2/4` → `tabs__nav-item{,-2,-3}`, `part-1-*-0` → `tabs__nav-item-label-wrapper{,-2,-3}` |
+| Modal | `part-1` → `modal-container`, `part-1-0` → `modal-header`, `part-1-0-2` → `modal-close-button`, → `icon-tooltip` → `tooltip-trigger__wrapper` → `btn`, `part-1-0-2-0-1` → `popover`, `part-1-2` → `btn-set` |
+| IconButton | `part-0` → `tooltip-trigger__wrapper`, `part-0-0` → `btn`, `part-1` → `popover`, `part-1-1` → `popover-caret` |
+
+Button (root only) and Tag (root + label) were already fully named.
+
+Nine parts keep a positional name and that is CORRECT: they are Carbon
+elements with no `cds--` class at all (Tabs' scroll buttons and `<path>`
+glyphs, InlineNotification's inner `<path>`s). A `part-<path>` name is now a
+real statement — "this element carries no library class" — rather than the
+engine's silence.
+
+**Seed contracts needed no change**: all ten `contracts-seed/*.json` carry
+`anatomy.root` with no `parts`, so nothing referenced a promoted part name.
+
+## The alias join this exposed (defect-first)
+
+The rename cost **4 verified source aliases** on the first re-promotion
+(94 → 90) before anyone asked for them back. Cause: `promote-floor.mjs` joins a
+MINTED TOKEN PATH segment against a source fact's raw `part` name, and the two
+spellings are not the same string — the minted path runs every segment through
+`core/mint-tokens.ts` `sanitizeSegment`. With positional names
+(`part-1-1-0`) the sanitized form equalled the raw form and the join worked
+**by coincidence**. Carbon's BEM element stems carry `__`: `toggle__switch`
+mints as `toggle-switch`, the join missed, and three Toggle-switch aliases plus
+one Tabs nav-item alias fell back to anonymous literals **with no receipt**.
+
+Fixed here by joining on the minted spelling; **94 source-aliased / 987
+literal restored exactly**. Two things ride with the fix:
+
+- The rule is **mirrored, not imported** — `sanitizeSegment` is module-private
+  in `core/mint-tokens.ts` and exporting it would change the plugin ENGINE
+  BUNDLE to serve a per-library promotion script. The copy carries that note.
+- An **unjoined-fact receipt**: any verified source fact that reaches no minted
+  leaf is now printed into `tokens/MINTED.md` by name. It surfaced 16 such
+  facts that were ALWAYS unjoined and always silent (svg `fill` channels that
+  promote to assets, `-webkit-text-fill-color`, `max-block-size`). None is a
+  new loss; all sixteen are now visible.
+
+**LATENT ELSEWHERE, NAMED:** every other library's `promote-floor.mjs` carries
+the identical join. Measured: no other library has a part name whose sanitized
+form differs from its raw form, so the defect is latent there and was live only
+here. Each closes it on its next re-promotion.
+
+## Task #28 — the gate ordering guard
+
+All ten of Carbon's round-1 scorecards recorded `shippedMinted.leavesAdded: 0`.
+That was not a measurement: the pipeline runs the harness **before**
+`promote-floor.mjs` writes `tokens/carbon-minted.dtcg.json`, so the gate scored
+against a tree that did not exist yet. (The task-#21 refusal only covers a
+DECLARED-but-ABSENT path; an empty stub written to satisfy it passes.) The
+offline re-fuse of the same captures against the shipped tree measured 755–1037
+leaves added — every divergence `resolvedEqual: true`, so no value was ever
+wrong; the receipts simply understated what the gate saw.
+
+The general fix is in `loadConfig`, not in Carbon:
+
+- a DECLARED `tokens.minted` whose tree carries **ZERO leaves** is **refused by
+  name** — "the fidelity gate would record shippedMinted.leavesAdded: 0 for a
+  tree the promotion has not written yet (ORDERING: the harness runs BEFORE
+  promote-floor)";
+- a library's genuine first-ever pass sets `tokens.mintedBootstrap: true`,
+  which allows it **explicitly** and makes the scorecard carry
+  `shippedMinted.bootstrap: true` + the receipt sentence *"measured without a
+  shipped minted tree"*. Chosen over a silent pass because a bootstrap run is a
+  real state that must be legible in the artifact, not inferred from a zero;
+- the allowance **cannot rot**: leaving the flag set once the tree carries
+  leaves is itself refused by name.
+
+Re-run naturally produces correct receipts: `leavesAdded` is now 755 (Button)
+to 1105 (Checkbox) across the ten, `divergent: 0` everywhere.
+
+## Vendor names removed from the live path
+
+- `anatomy.ts` `PORTAL_PREFIX = 'Polaris-'` — a module constant used by
+  `realRootsOf` for every library. Now `realRootsOf(node, classPrefix)` /
+  `descendToRealRoots(node, classPrefix)`, threaded from the capture config.
+  Behaviourally a no-op today (the descent only asks whether a wrapper has ANY
+  own stem, and every library's classes answer the same under both prefixes) —
+  removed because a library-dependent answer to a library-independent question
+  is a defect waiting for a subject.
+- `capture.ts` in-page portal reader `/^Polaris-/` + its own copy of the
+  modifier filter. Replaced with a `stemsOf` mirror of the CORRECTED rule,
+  taking the config's `classPrefix`. Diagnostic-only (`currentReader.sig`); the
+  committed depth receipt records `present: false, sig: ""`, so the change is a
+  no-op on committed bytes.
+
+## Instrument generality
+
+`extract/computed/drift-check.ts` listed its six libraries in a hand-written
+array, so adding a capture config left the instrument silently stale. The
+registry is now DERIVED from `extract/computed/configs/*.json`, with the output
+directory resolved by asking which directory actually holds that config's own
+components (never by name-matching). A config with no committed scorecard is
+SKIPPED **and printed** — `polaris-depth.json` is the standing case, and it now
+says so on every run instead of being invisible.
+
+## Re-run pipeline and receipts
+
+Identical to the pipeline above, plus `--icons examples/carbon/assets/icons` on
+the `figma` compile (the round-1 recipe omitted it; the emit refuses without
+it once a promoted part carries an icon asset).
+
+- capture: 1012 census captures + 5 portal captures, **double-run byte-identity
+  IDENTICAL**; a full SECOND harness run reproduced the quoted computed number
+  on all ten to three decimals and every `captured-truth.json`,
+  `enriched.contract.json`, `enriched.extension.json` and `source-bindings.json`
+  byte-for-byte. What did NOT reproduce: Button's and IconButton's
+  `:focus-visible`/`:active` gate PNGs and their pixel sub-scores — the
+  pre-existing mid-transition sampling named above, unchanged by this round.
+- promotion, figma emit, token sync, compile receipt, genesis batch and bundle
+  all **double-run byte-identical**.
+- unchanged downstream totals: **1459 variables (94 Figma-native aliases),
+  132 variant cells across 10 sets, 339 base tokens, Light/Dark**.
+- six orphaned icon assets named after the old positional parts
+  (`tabs-part-1-1-0.svg`, `modal-part-1-0-2-0-0-0.svg`, …) were deleted; their
+  replacements carry the class-stem names.

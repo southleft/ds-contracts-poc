@@ -134,7 +134,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "-webkit-text-fill-color",
       "combo": "unset.disabled",
       "axisValues": {
@@ -147,7 +147,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "-webkit-text-fill-color",
       "combo": "xs.disabled",
       "axisValues": {
@@ -160,7 +160,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "-webkit-text-fill-color",
       "combo": "sm.disabled",
       "axisValues": {
@@ -173,7 +173,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "-webkit-text-fill-color",
       "combo": "md.disabled",
       "axisValues": {
@@ -186,7 +186,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "-webkit-text-fill-color",
       "combo": "lg.disabled",
       "axisValues": {
@@ -199,7 +199,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "background-color",
       "combo": "unset.enabled",
       "axisValues": {
@@ -212,7 +212,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "background-color",
       "combo": "unset.disabled",
       "axisValues": {
@@ -225,7 +225,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "background-color",
       "combo": "xs.enabled",
       "axisValues": {
@@ -238,7 +238,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "background-color",
       "combo": "xs.disabled",
       "axisValues": {
@@ -251,7 +251,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "background-color",
       "combo": "sm.enabled",
       "axisValues": {
@@ -264,7 +264,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "background-color",
       "combo": "sm.disabled",
       "axisValues": {
@@ -277,7 +277,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "background-color",
       "combo": "md.enabled",
       "axisValues": {
@@ -290,7 +290,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "background-color",
       "combo": "md.disabled",
       "axisValues": {
@@ -303,7 +303,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "background-color",
       "combo": "lg.enabled",
       "axisValues": {
@@ -316,7 +316,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "background-color",
       "combo": "lg.disabled",
       "axisValues": {
@@ -329,7 +329,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "color",
       "combo": "unset.enabled",
       "axisValues": {
@@ -342,7 +342,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "color",
       "combo": "unset.disabled",
       "axisValues": {
@@ -355,7 +355,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "color",
       "combo": "xs.enabled",
       "axisValues": {
@@ -368,7 +368,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "color",
       "combo": "xs.disabled",
       "axisValues": {
@@ -381,7 +381,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "color",
       "combo": "sm.enabled",
       "axisValues": {
@@ -394,7 +394,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "color",
       "combo": "sm.disabled",
       "axisValues": {
@@ -407,7 +407,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "color",
       "combo": "md.enabled",
       "axisValues": {
@@ -420,7 +420,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "color",
       "combo": "md.disabled",
       "axisValues": {
@@ -433,7 +433,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "color",
       "combo": "lg.enabled",
       "axisValues": {
@@ -446,7 +446,7 @@
       }
     },
     {
-      "part": "part-1-0-0",
+      "part": "text-input",
       "channel": "color",
       "combo": "lg.disabled",
       "axisValues": {
@@ -460,6 +460,6 @@
     }
   ],
   "skips": [
-    "part-1-0-0.block-size: no var candidate verified against the computed value in any combo"
+    "text-input.block-size: no var candidate verified against the computed value in any combo"
   ]
 }

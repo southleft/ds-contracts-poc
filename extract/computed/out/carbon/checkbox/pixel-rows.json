@@ -41,22 +41,22 @@
   },
   {
     "key": "checked.enabled__default",
-    "pctExact": 1.69921875,
+    "pctExact": 1.7024739583333333,
     "pctAA": 0.8626302083333334
   },
   {
     "key": "checked.enabled__hover",
-    "pctExact": 1.69921875,
+    "pctExact": 1.7024739583333333,
     "pctAA": 0.8626302083333334
   },
   {
     "key": "checked.enabled__focus-visible",
-    "pctExact": 1.69921875,
+    "pctExact": 1.7024739583333333,
     "pctAA": 0.8626302083333334
   },
   {
     "key": "checked.enabled__active",
-    "pctExact": 1.7024739583333333,
+    "pctExact": 1.69921875,
     "pctAA": 0.8626302083333334
   },
   {

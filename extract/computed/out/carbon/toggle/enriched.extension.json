@@ -22,14 +22,14 @@
             }
           }
         },
-        "part-0": {
+        "toggle-button": {
           "bottom": {
             "untoggled": {
-              "$value": "969px",
+              "$value": "-21655px",
               "$type": "dimension"
             },
             "toggled": {
-              "$value": "745px",
+              "$value": "-21879px",
               "$type": "dimension"
             }
           },
@@ -43,11 +43,11 @@
           },
           "top": {
             "untoggled": {
-              "$value": "32px",
+              "$value": "22656px",
               "$type": "dimension"
             },
             "toggled": {
-              "$value": "256px",
+              "$value": "22880px",
               "$type": "dimension"
             }
           },
@@ -61,21 +61,21 @@
           },
           "bottom-state-disabled": {
             "untoggled": {
-              "$value": "857px",
+              "$value": "-21767px",
               "$type": "dimension"
             },
             "toggled": {
-              "$value": "633px",
+              "$value": "-21991px",
               "$type": "dimension"
             }
           },
           "top-state-disabled": {
             "untoggled": {
-              "$value": "144px",
+              "$value": "22768px",
               "$type": "dimension"
             },
             "toggled": {
-              "$value": "368px",
+              "$value": "22992px",
               "$type": "dimension"
             }
           }
@@ -98,7 +98,7 @@
             "$type": "color"
           }
         },
-        "part-1-1": {
+        "toggle-appearance": {
           "column-gap": {
             "$value": "8px",
             "$type": "dimension"
@@ -114,7 +114,7 @@
             }
           }
         },
-        "part-1-1-0": {
+        "toggle-switch": {
           "background-color": {
             "untoggled": {
               "$value": "#8d8d8d",
@@ -267,57 +267,57 @@
         "value": "none"
       },
       {
-        "part": "part-0",
+        "part": "toggle__button",
         "channel": "border-bottom-style",
         "value": "none"
       },
       {
-        "part": "part-0",
+        "part": "toggle__button",
         "channel": "border-left-style",
         "value": "none"
       },
       {
-        "part": "part-0",
+        "part": "toggle__button",
         "channel": "border-right-style",
         "value": "none"
       },
       {
-        "part": "part-0",
+        "part": "toggle__button",
         "channel": "border-top-style",
         "value": "none"
       },
       {
-        "part": "part-0",
+        "part": "toggle__button",
         "channel": "overflow-x",
         "value": "hidden"
       },
       {
-        "part": "part-0",
+        "part": "toggle__button",
         "channel": "overflow-y",
         "value": "hidden"
       },
       {
-        "part": "part-0",
+        "part": "toggle__button",
         "channel": "position",
         "value": "absolute"
       },
       {
-        "part": "part-0",
+        "part": "toggle__button",
         "channel": "text-wrap-mode",
         "value": "nowrap"
       },
       {
-        "part": "part-0",
+        "part": "toggle__button",
         "channel": "user-select",
         "value": "none"
       },
       {
-        "part": "part-1",
+        "part": "toggle__label",
         "channel": "cursor",
         "value": "default"
       },
       {
-        "part": "part-1",
+        "part": "toggle__label",
         "channel": "user-select",
         "value": "none"
       },
@@ -332,42 +332,42 @@
         "value": "none"
       },
       {
-        "part": "part-1-1",
+        "part": "toggle__appearance",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1-1",
+        "part": "toggle__appearance",
         "channel": "user-select",
         "value": "none"
       },
       {
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "channel": "position",
         "value": "relative"
       },
       {
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "channel": "transition-duration",
         "value": "0.07s"
       },
       {
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "channel": "transition-property",
         "value": "background-color"
       },
       {
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.2, 0, 1, 0.9)"
       },
       {
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "channel": "user-select",
         "value": "none"
       },
@@ -391,13 +391,13 @@
       },
       {
         "state": "disabled",
-        "part": "part-1-1-0",
+        "part": "toggle__appearance",
         "channel": "cursor",
         "value": "not-allowed"
       },
       {
         "state": "disabled",
-        "part": "part-1-1",
+        "part": "toggle__switch",
         "channel": "cursor",
         "value": "not-allowed"
       }
@@ -405,21 +405,21 @@
   },
   "codeOnlyChannels": [
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "clip",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "rect(0px, 0px, 0px, 0px)",
       "distinctValues": 1
     },
     {
-      "part": "part-1",
+      "part": "toggle__label",
       "channel": "height",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "auto",
       "distinctValues": 1
     },
     {
-      "part": "part-1",
+      "part": "toggle__label",
       "channel": "width",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "auto",
@@ -433,21 +433,21 @@
       "distinctValues": 1
     },
     {
-      "part": "part-1-1",
+      "part": "toggle__appearance",
       "channel": "align-items",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "center",
       "distinctValues": 1
     },
     {
-      "part": "part-1-1",
+      "part": "toggle__appearance",
       "channel": "display",
       "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
       "sample": "inline-grid",
       "distinctValues": 1
     },
     {
-      "part": "part-1-1",
+      "part": "toggle__appearance",
       "channel": "grid-template-columns",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "48px 19.4688px",
@@ -541,87 +541,87 @@
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "border-bottom-color",
       "state": "disabled",
       "ref": "{imported.shared.color-1010104d}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "border-left-color",
       "state": "disabled",
       "ref": "{imported.shared.color-1010104d}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "border-right-color",
       "state": "disabled",
       "ref": "{imported.shared.color-1010104d}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "border-top-color",
       "state": "disabled",
       "ref": "{imported.shared.color-1010104d}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "bottom",
       "state": "disabled",
-      "ref": "{imported.toggle.part-0.bottom-state-disabled.{toggled}}",
+      "ref": "{imported.toggle.toggle-button.bottom-state-disabled.{toggled}}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "caret-color",
       "state": "disabled",
       "ref": "{imported.shared.color-1010104d}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "column-rule-color",
       "state": "disabled",
       "ref": "{imported.shared.color-1010104d}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "outline-color",
       "state": "disabled",
       "ref": "{imported.shared.color-1010104d}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "row-rule-color",
       "state": "disabled",
       "ref": "{imported.shared.color-1010104d}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "text-decoration-color",
       "state": "disabled",
       "ref": "{imported.shared.color-1010104d}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "text-emphasis-color",
       "state": "disabled",
       "ref": "{imported.shared.color-1010104d}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "part-0",
+      "part": "toggle__button",
       "channel": "top",
       "state": "disabled",
-      "ref": "{imported.toggle.part-0.top-state-disabled.{toggled}}",
+      "ref": "{imported.toggle.toggle-button.top-state-disabled.{toggled}}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     }
   ],
@@ -632,7 +632,7 @@
       {
         "combo": "untoggled.enabled",
         "interaction": "default",
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -641,7 +641,7 @@
       {
         "combo": "untoggled.enabled",
         "interaction": "focus-visible",
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "pseudo": "::after",
         "deltaVsDefault": {
           "--cds-border-strong": "#8d8d8d",
@@ -1151,7 +1151,7 @@
       {
         "combo": "untoggled.enabled",
         "interaction": "active",
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "pseudo": "::after",
         "deltaVsDefault": {
           "--cds-border-strong": "#8d8d8d",
@@ -1661,7 +1661,7 @@
       {
         "combo": "untoggled.disabled",
         "interaction": "default",
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1670,7 +1670,7 @@
       {
         "combo": "toggled.enabled",
         "interaction": "default",
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -1679,7 +1679,7 @@
       {
         "combo": "toggled.enabled",
         "interaction": "focus-visible",
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "pseudo": "::after",
         "deltaVsDefault": {
           "--cds-border-strong": "#8d8d8d",
@@ -2189,7 +2189,7 @@
       {
         "combo": "toggled.enabled",
         "interaction": "active",
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "pseudo": "::after",
         "deltaVsDefault": {
           "--cds-border-strong": "#8d8d8d",
@@ -2699,7 +2699,7 @@
       {
         "combo": "toggled.disabled",
         "interaction": "default",
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "pseudo": "::before",
         "deltaVsDefault": {
           "content": "\"\""
@@ -2715,23 +2715,23 @@
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-1 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "absolute-geometry-admitted: part-1-1-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "control-fallback: no control for <label> — span control used (part part-1)",
+    "absolute-geometry-admitted: toggle__button — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: toggle__label — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: toggle__appearance — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: toggle__switch — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "control-fallback: no control for <label> — span control used (part toggle__label)",
     "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "inheritance-check-rejected: label-2.font-size — values track ancestor \"part-1-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"part-1-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.letter-spacing — values track ancestor \"part-1-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.line-height — values track ancestor \"part-1-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.caret-color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.color — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.font-size — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.font-weight — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.letter-spacing — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.line-height — values track ancestor \"part-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+    "inheritance-check-rejected: label-2.font-size — values track ancestor \"toggle__appearance\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"toggle__appearance\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.letter-spacing — values track ancestor \"toggle__appearance\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.line-height — values track ancestor \"toggle__appearance\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.caret-color — values track ancestor \"toggle__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.color — values track ancestor \"toggle__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"toggle__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"toggle__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.letter-spacing — values track ancestor \"toggle__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"toggle__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -2740,11 +2740,11 @@
         "join": "matched"
       },
       {
-        "part": "part-0",
+        "part": "toggle__button",
         "join": "computed-only"
       },
       {
-        "part": "part-1",
+        "part": "toggle__label",
         "join": "computed-only"
       },
       {
@@ -2752,11 +2752,11 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1-1",
+        "part": "toggle__appearance",
         "join": "computed-only"
       },
       {
-        "part": "part-1-1-0",
+        "part": "toggle__switch",
         "join": "computed-only"
       },
       {
@@ -2770,51 +2770,51 @@
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
     "partsCarried": [
       "root",
-      "part-0",
-      "part-1",
+      "toggle__button",
+      "toggle__label",
       "label",
-      "part-1-1",
-      "part-1-1-0",
+      "toggle__appearance",
+      "toggle__switch",
       "label-2"
     ],
     "svgAssets": [],
     "receipts": [
-      "sr-only-carried-as-hidden: part-0 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "sr-only-carried-as-hidden: toggle__button is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "literal-text-carried: label = \"Toggle\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "display-outside-vocabulary: part-1-1 = \"inline-grid\" — carried by neither layout nor the declared registry (named residue)",
+      "display-outside-vocabulary: toggle__appearance = \"inline-grid\" — carried by neither layout nor the declared registry (named residue)",
       "literal-text-carried: label-2 = \"Off\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
     "refusals": [
-      "pseudo-decor-nonuniform: part-1-1-0::before drawn geometry/fill varies across the drawn combos ({\"w\":18,\"h\":18,\"top\":3,\"left\":3,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0} vs {\"w\":18,\"h\":18,\"top\":3,\"left\":3,\"bg\":\"rgba(141, 141, 141, 1)\",\"radius\":0} vs {\"w\":18,\"h\":18,\"top\":3,\"left\":27,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0} vs {\"w\":18,\"h\":18,\"top\":3,\"left\":27,\"bg\":\"rgba(141, 141, 141, 1)\",\"radius\":0}) — the bounded v1 decor grammar carries one box; named refusal"
+      "pseudo-decor-nonuniform: toggle__switch::before drawn geometry/fill varies across the drawn combos ({\"w\":18,\"h\":18,\"top\":3,\"left\":3,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0} vs {\"w\":18,\"h\":18,\"top\":3,\"left\":3,\"bg\":\"rgba(141, 141, 141, 1)\",\"radius\":0} vs {\"w\":18,\"h\":18,\"top\":3,\"left\":27,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0} vs {\"w\":18,\"h\":18,\"top\":3,\"left\":27,\"bg\":\"rgba(141, 141, 141, 1)\",\"radius\":0}) — the bounded v1 decor grammar carries one box; named refusal"
     ]
   },
   "enrichmentNotes": [
     "declared fact carried: root.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-0.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__button.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__button.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__button.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__button.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__button.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__button.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__button.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__button.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__button.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__label.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-1.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-1.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-1-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-1-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-1-0.transition-duration = 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-1-0.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-1-0.transition-timing-function = cubic-bezier(0.2, 0, 1, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1-1-0.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__appearance.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__appearance.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__switch.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__switch.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__switch.transition-duration = 0.07s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__switch.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__switch.transition-timing-function = cubic-bezier(0.2, 0, 1, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: toggle__switch.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [disabled] label-2.cursor = not-allowed (v15 declared vocabulary)",
-    "declared state fact carried: [disabled] part-1-1-0.cursor = not-allowed (v15 declared vocabulary)",
-    "declared state fact carried: [disabled] part-1-1.cursor = not-allowed (v15 declared vocabulary)"
+    "declared state fact carried: [disabled] toggle__appearance.cursor = not-allowed (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] toggle__switch.cursor = not-allowed (v15 declared vocabulary)"
   ]
 }

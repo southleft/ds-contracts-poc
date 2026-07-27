@@ -104,7 +104,7 @@
           "content": {
             "prop": "children"
           },
-          "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|tag__label — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
             "cursor": "default",

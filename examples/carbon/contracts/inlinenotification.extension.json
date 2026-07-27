@@ -164,7 +164,7 @@
             }
           }
         },
-        "part-0": {
+        "inline-notification-details": {
           "color": {
             "high": {
               "$value": "#ffffff",
@@ -470,7 +470,7 @@
             }
           }
         },
-        "part-0-1": {
+        "inline-notification-text-wrapper": {
           "color": {
             "high": {
               "$value": "#ffffff",
@@ -572,7 +572,7 @@
             }
           }
         },
-        "part-1": {
+        "inline-notification-close-button": {
           "background-color": {
             "$value": "#00000000",
             "$type": "color"
@@ -675,55 +675,55 @@
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "inline-notification__details",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "inline-notification__details",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "inline-notification__details",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "inline-notification__details",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "inline-notification__details",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "inline-notification__details",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "inline-notification__details",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "inline-notification__details",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0",
+      "part": "inline-notification__details",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1053,55 +1053,55 @@
       "class": "currentColor"
     },
     {
-      "part": "part-0-1",
+      "part": "inline-notification__text-wrapper",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0-1",
+      "part": "inline-notification__text-wrapper",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0-1",
+      "part": "inline-notification__text-wrapper",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0-1",
+      "part": "inline-notification__text-wrapper",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0-1",
+      "part": "inline-notification__text-wrapper",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0-1",
+      "part": "inline-notification__text-wrapper",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0-1",
+      "part": "inline-notification__text-wrapper",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0-1",
+      "part": "inline-notification__text-wrapper",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "part-0-1",
+      "part": "inline-notification__text-wrapper",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1327,17 +1327,17 @@
   "layout": {
     "enriched": [
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "field": "direction",
         "value": "column"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "field": "align",
         "value": "center"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "field": "justify",
         "value": "center"
       }
@@ -1370,52 +1370,52 @@
         "value": "hidden"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "border-bottom-style",
         "value": "none"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "border-left-style",
         "value": "none"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "border-right-style",
         "value": "none"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "border-top-style",
         "value": "none"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "outline-style",
         "value": "solid"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "transition-delay",
         "value": "0s, 0s"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "transition-duration",
         "value": "0.11s, 0.11s"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "transition-property",
         "value": "outline, background-color"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "channel": "transition-timing-function",
         "value": "cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9)"
       }
@@ -1473,7 +1473,7 @@
       "distinctValues": 3
     },
     {
-      "part": "part-0-1",
+      "part": "inline-notification__text-wrapper",
       "channel": "flex-wrap",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "wrap",
@@ -1487,7 +1487,7 @@
       "distinctValues": 1
     },
     {
-      "part": "part-1",
+      "part": "inline-notification__close-button",
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal, normal",
@@ -1502,10 +1502,10 @@
       "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
     },
     {
-      "part": "part-1",
+      "part": "inline-notification__close-button",
       "channel": "outline-color",
       "state": "focus-visible",
-      "ref": "{imported.inline-notification.part-1.outline-color-state-focus-visible.{contrast}}",
+      "ref": "{imported.inline-notification.inline-notification-close-button.outline-color-state-focus-visible.{contrast}}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     }
   ],
@@ -1617,27 +1617,31 @@
     "control-fallback: no control for <title> — span control used (part label)",
     "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "svg-host-color-carried: part-1 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "svg-host-color-carried: inline-notification__close-button — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
     "control-fallback: no control for <path> — span control used (part part-1-0-0)",
-    "inheritance-check-rejected: icon.fill — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.font-size — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.letter-spacing — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.line-height — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.font-size — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.letter-spacing — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.line-height — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: icon.fill — values track ancestor \"inline-notification__details\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-size — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.letter-spacing — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.line-height — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-size — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.letter-spacing — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.line-height — values track ancestor \"inline-notification__text-wrapper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-size — values track ancestor \"icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.line-height — values track ancestor \"icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-only: icon.caret-color equals ancestor \"part-0\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: icon.color equals ancestor \"part-0\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: label-2.caret-color equals ancestor \"part-0-1\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: label-2.color equals ancestor \"part-0-1\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: label-3.caret-color equals ancestor \"part-0-1\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: label-3.color equals ancestor \"part-0-1\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: icon.caret-color equals ancestor \"inline-notification__details\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: icon.color equals ancestor \"inline-notification__details\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: inline-notification__details.caret-color equals ancestor \"root\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: inline-notification__details.color equals ancestor \"root\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: inline-notification__text-wrapper.caret-color equals ancestor \"inline-notification__details\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: inline-notification__text-wrapper.color equals ancestor \"inline-notification__details\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.caret-color equals ancestor \"inline-notification__text-wrapper\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"inline-notification__text-wrapper\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.caret-color equals ancestor \"inline-notification__text-wrapper\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.color equals ancestor \"inline-notification__text-wrapper\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: label.caret-color equals ancestor \"icon\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: label.color equals ancestor \"icon\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: label.fill equals ancestor \"icon\" on all 48 captured planes — the part carries no independent fill fact (CSS inheritance, observed)",
@@ -1649,11 +1653,7 @@
     "inheritance-only: part-0-0-1.color equals ancestor \"icon\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: part-0-0-2.caret-color equals ancestor \"icon\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: part-0-0-2.color equals ancestor \"icon\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-0-2.fill equals ancestor \"icon\" on all 8 captured planes — the part carries no independent fill fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-1.caret-color equals ancestor \"part-0\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0-1.color equals ancestor \"part-0\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0.caret-color equals ancestor \"root\" on all 48 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
-    "inheritance-only: part-0.color equals ancestor \"root\" on all 48 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
+    "inheritance-only: part-0-0-2.fill equals ancestor \"icon\" on all 8 captured planes — the part carries no independent fill fact (CSS inheritance, observed)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1662,7 +1662,7 @@
         "join": "matched"
       },
       {
-        "part": "part-0",
+        "part": "inline-notification__details",
         "join": "computed-only"
       },
       {
@@ -1690,7 +1690,7 @@
         "join": "computed-only"
       },
       {
-        "part": "part-0-1",
+        "part": "inline-notification__text-wrapper",
         "join": "computed-only"
       },
       {
@@ -1702,7 +1702,7 @@
         "join": "computed-only"
       },
       {
-        "part": "part-1",
+        "part": "inline-notification__close-button",
         "join": "computed-only"
       },
       {
@@ -1720,20 +1720,20 @@
     "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
     "partsCarried": [
       "root",
-      "part-0",
+      "inline-notification__details",
       "icon",
       "part-0-0-0",
       "part-0-0-1-2",
       "part-0-0-2",
       "part-0-0-1",
       "label",
-      "part-0-1",
+      "inline-notification__text-wrapper",
       "label-2",
       "label-3",
-      "part-1"
+      "inline-notification__close-button"
     ],
     "svgAssets": [
-      "inline-notification-part-1"
+      "inline-notification-inline-notification-close-button"
     ],
     "receipts": [
       "svg-child-outside-grammar: InlineNotification.icon@error.high — <title> (v1 carries path/g only); asset refused",
@@ -1748,18 +1748,18 @@
       "svg-child-outside-grammar: InlineNotification.icon@warning.low — <title> (v1 carries path/g only); asset refused",
       "svg-child-outside-grammar: InlineNotification.icon@warning-alt.high — <title> (v1 carries path/g only); asset refused",
       "svg-child-outside-grammar: InlineNotification.icon@warning-alt.low — <title> (v1 carries path/g only); asset refused",
-      "svg-viewbox-bumped: InlineNotification.part-1@error.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: InlineNotification.part-1@error.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: InlineNotification.part-1@info.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: InlineNotification.part-1@info.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: InlineNotification.part-1@info-square.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: InlineNotification.part-1@info-square.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: InlineNotification.part-1@success.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: InlineNotification.part-1@success.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: InlineNotification.part-1@warning.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: InlineNotification.part-1@warning.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: InlineNotification.part-1@warning-alt.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
-      "svg-viewbox-bumped: InlineNotification.part-1@warning-alt.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@error.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@error.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@info.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@info.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@info-square.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@info-square.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@success.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@success.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@warning.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@warning.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@warning-alt.high — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
+      "svg-viewbox-bumped: InlineNotification.inline-notification__close-button@warning-alt.low — computed size 16 < path extent 24; viewBox reconstructed as 0 0 24 24 (named reconstruction)",
       "root-display-carried: flex",
       "presence-carried: part-0-0-1-2 (8/12 combos) →  hidden-when kind=error, kind=success",
       "presence-carried: part-0-0-2 (2/12 combos) →  hidden-when kind=error, kind=info, kind=info-square, kind=success, kind=warning",
@@ -1771,23 +1771,23 @@
     "refusals": []
   },
   "enrichmentNotes": [
-    "layout enriched: part-1.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: part-1.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: part-1.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: inline-notification__close-button.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: inline-notification__close-button.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: inline-notification__close-button.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.transition-duration = 0.11s, 0.11s (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.transition-property = outline, background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: part-1.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inline-notification__close-button.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inline-notification__close-button.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inline-notification__close-button.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inline-notification__close-button.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inline-notification__close-button.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inline-notification__close-button.outline-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inline-notification__close-button.transition-delay = 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inline-notification__close-button.transition-duration = 0.11s, 0.11s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inline-notification__close-button.transition-property = outline, background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: inline-notification__close-button.transition-timing-function = cubic-bezier(0.2, 0, 0.38, 0.9), cubic-bezier(0.2, 0, 0.38, 0.9) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "nested pair carried: icon.fill = per-contrast map whose refs substitute kind (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
     "nested pair carried: label.fill = per-contrast map whose refs substitute kind (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)"
   ]
