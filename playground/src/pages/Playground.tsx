@@ -2244,25 +2244,41 @@ export function Playground() {
 
         {sourceTab === 'figma' && (
           <div className="rail__section">
-            {/* Two routes in, plugin first (recommended): the Plugin API
-                resolves bound variable NAMES on any Figma plan, closing the
-                Enterprise-only REST variables gap. The three-rung fidelity
-                ladder lives in the Help drawer. */}
+            {/* Two routes in. The plugin route is CURRENTLY UNREACHABLE: the
+                2026-07-26 plugin IA re-housing (87dd943) folded seven tabs into
+                Build / Changes / Send + Advanced and KILLED the "Send to
+                Playground" tab. code.js still handles `run-send`
+                (code.js:551 → runSendToPlayground) but ui.html never posts it
+                (`grep -c run-send figma-sync/plugin/ui.html` = 0), so the code
+                this button mints can never be fulfilled by the shipped plugin.
+                Transport (engine/bridge.ts) and this UI are left intact and
+                DISABLED rather than deleted — re-enabling is one flag when the
+                plugin regains a sender. Do not re-enable on the strength of
+                code.js alone; the orphan is named in 87dd943's own message.
+                The three-rung fidelity ladder lives in the Help drawer. */}
             <div className="rail__group">
-              <div className="rail__group-title">From the Figma plugin — recommended</div>
+              <div className="rail__group-title">
+                From the Figma plugin — currently unavailable
+              </div>
               <p className="hint">
-                Full token names <em>and</em> values, on any Figma plan. The plugin reads your
-                component sets right out of the open file, so every bound variable arrives with
-                its real name — the contract binds your tokens, nothing has to be minted.
+                This route delivered full token names <em>and</em> values on any Figma plan, by
+                reading your component sets out of the open file. The plugin&rsquo;s{' '}
+                <strong>Send to Playground</strong> tab was removed on 2026-07-26 when its seven
+                tabs were re-housed into Build / Changes / Send, so nothing can answer a pairing
+                code today. Named, not hidden: the button below is disabled until the plugin
+                ships a sender again. Use the figma.com URL route below, or — for native variable
+                names with zero ambiguity — paste an{' '}
+                <code>extract/figma/dump.plugin.js</code> dump into the <strong>JSON</strong> tab.
               </p>
               {bridge === null ? (
                 <button
                   type="button"
                   className="btn--primary"
-                  disabled={bridgeBusy}
+                  disabled
+                  title="The plugin's Send to Playground tab was removed on 2026-07-26; no sender exists to answer a pairing code."
                   onClick={() => void startBridge()}
                 >
-                  {bridgeBusy ? 'Asking for a code…' : 'Receive from plugin'}
+                  Receive from plugin — unavailable
                 </button>
               ) : (
                 <div className="notice" aria-live="polite">
@@ -2294,7 +2310,14 @@ export function Playground() {
               )}
               <ErrorNotice error={bridgeError} />
               <details className="rail__details">
-                <summary>First time? Install the plugin (about a minute)</summary>
+                <summary>Install the plugin anyway (about a minute)</summary>
+                <p className="hint" style={{ margin: '6px 0' }}>
+                  The plugin is still the other half of the loop — it just doesn&rsquo;t send
+                  <em> here</em> any more. It builds contracts onto your canvas (Build), watches
+                  your team&rsquo;s CI channel and canvas drift (Changes), and opens a canvas
+                  edit as a pull request (Send). This zip is rebuilt from the repo every time
+                  the playground is built, so it is never older than the engine it ships.
+                </p>
                 <ol className="hint" style={{ paddingLeft: 18, margin: '6px 0' }}>
                   <li>
                     <a href="/ds-contracts-sync-runner-plugin.zip" download>
@@ -2312,17 +2335,15 @@ export function Playground() {
                     pick <code>manifest.json</code> from the unzipped folder.
                   </li>
                   <li>
-                    Run <strong>DS Contracts Sync Runner</strong> and open its{' '}
-                    <strong>Send to Playground</strong> tab.
+                    Run <strong>DS Contracts Sync Runner</strong>. It opens on{' '}
+                    <strong>Build</strong> (or <strong>Changes</strong> if the file already has
+                    contract-backed sets).
                   </li>
                 </ol>
                 <p className="hint">
-                  The plugin is read-only in your file. By default it sends the component
-                  set you have <em>selected</em> on the canvas (its names box overrides;
-                  empty box + no selection sends every set, and it says so). What it sends:
-                  the chosen component sets&rsquo; structure, styles, and variable names —
-                  never your Figma token. The bridge holds a dump for at most 15 minutes,
-                  deletes it the moment this tab picks it up, and never logs its contents.
+                  The plugin never writes to your repo, and an Apply never overwrites a canvas
+                  edit silently — edits are detected as drift and the affected rows start
+                  unchecked.
                 </p>
               </details>
             </div>

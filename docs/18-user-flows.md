@@ -15,6 +15,15 @@ repo, not the optimism.
 
 Legend: **[EXISTS — surface]** means built and verified on that surface
 today. **[GAP → Gn]** points into the ranked gap list at the end.
+**[CLOSED → Gn]** means the gap the walkthrough found has since shipped;
+the original finding is kept so the record shows what drove the fix.
+
+**Surface names, 2026-07-26.** The plugin's seven implementation-shaped
+tabs were re-housed into **Build / Changes / Send** plus an Advanced
+drawer (`87dd943`, recorded in doc 19). Where a step below names a
+Generate, Update, Watch, Drift, Receive or Propose *tab*, read: Generate
+and Update → **Build**; Drift and channel delivery → **Changes**;
+Propose → **Send**; paste-a-script and Local runner → **Advanced**.
 
 ---
 
@@ -43,24 +52,28 @@ The contract is where they meet, and git is where they argue.
 *"From 'what is this' to 'our real button is on my canvas' — without a
 terminal."*
 
-1. Install the plugin from Figma Community (or the org's private plugin
-   list) in one click. **[GAP → G0]** — the mechanics are ready
-   (`figma-sync/plugin/GET-STARTED.md`, `PUBLISHING.md` checklist), but the
-   plugin is **not published**. Today's path is a dev-zip installed from an
-   engineer's laptop, which disqualifies this persona outright. Every other
-   step in this document is unreachable until G0 closes.
+1. Install the plugin. **[NOT A GATE → G0]** — the original walkthrough
+   assumed a one-click Community install and tagged its absence as the
+   blocker for everything downstream. The owner decided (2026-07-26) that
+   Community publication may never happen; the distribution model is the
+   **manifest-upload developer plugin** (`figma-sync/plugin-dist/`,
+   refreshed in place by `npm run plugin:zip`; `GET-STARTED.md` Option B).
+   So read this step as a property of the model, not a pending task: a
+   file's owner imports the manifest once, from a folder someone with repo
+   access produced. Nothing downstream in this document waits on it.
 2. Open the plugin in a scratch file and click **"Build the sample
-   library"** — the baked reference contracts (Card, Badge, Avatar,
-   Button) generate token-bound sets in about 30 seconds, no paste, no
-   repo. **[GAP → G9]** — the generate path and the baked contracts both
-   exist (`DSC.bakedContract` already ships in the bundle), but the
-   Generate tab today greets a repo-less designer with an empty textarea
-   whose placeholder is JSON and whose hint is a CLI incantation. She has
-   nothing to paste and the first words she reads are code.
+   library"** — the baked reference contracts generate token-bound sets,
+   no paste, no repo. **[CLOSED → G9]** — shipped in `c0aed6f`
+   (`sampleBundleJson()` in `figma-sync/plugin/engine/entry.ts:1470` feeds
+   `ds.card`'s dependency closure through the normal generate path;
+   `#gen-sample` in `ui.html`) and re-housed in `87dd943` as the **empty
+   state of the Build tab** — it exists nowhere else, so a repo-less
+   designer meets a button rather than an empty JSON textarea.
 3. Click Generate a second time. Nothing duplicates, nothing moves — and
-   the plugin says so: "Re-ran. Identical result, 0 changes."
-   **[EXISTS mechanically — Generate tab re-run dedupe; narration is
-   GAP → G12]** Determinism is invisible unless you narrate it.
+   the plugin says so. **[CLOSED → G12, this sub-item]** — the shipped
+   line is "Re-ran: 0 changes — your canvas already matches (N
+   component(s) checked; nothing moved, nothing duplicated)"
+   (`ui.html:1269`). Determinism is invisible unless you narrate it.
 4. Receive your real library. The designer opens the Receive panel, types
    a 6-character code, and the plugin polls; an engineer runs
    `ds-contracts figma push <bundle> --code <CODE>` with the same code
@@ -78,14 +91,18 @@ terminal."*
    token; they're plain values — here's why"), not in a refusal report.
    **[EXISTS for the mechanism — graceful degradation, correct pixels;
    the in-plugin per-node callout is GAP → G12]**
-7. The hour ends on a "What's protected" card: "These 4 sets are
-   contract-backed. Your edits are detected as drift, never silently
-   overwritten." **[GAP → G12]** — genesis stamps exist; the plain-words
-   safety promise does not. Nobody edits a component they think a robot
-   might stomp.
+7. The hour ends on a "What's protected" card. **[CLOSED → G12, this
+   sub-item]** — shipped in `c0aed6f` and carried verbatim into the Build
+   tab's check/apply report by `87dd943`: "What's protected: an update
+   never overwrites your canvas edits silently."
+   (`ui.html:962`, `protectedCard()`). Nobody edits a component they think
+   a robot might stomp.
 
-**Honest summary:** the first hour is genuinely no-terminal *if* G0 is
-closed and an engineer is live for step 4. Both caveats are load-bearing.
+**Honest summary:** the first hour is genuinely no-terminal once someone
+has imported the manifest for the file (step 1). Step 4's synchronous
+courier is no longer the only door — G1's standing channel means CI can
+publish and the plugin checks on open — but the *pairing-code* path in
+this walkthrough still requires two humans online at once.
 
 ---
 
@@ -96,9 +113,11 @@ components.*
 
 1. `npx @ds-contracts/cli init` → `ds-contracts.config.json` appears; edit
    `code.root` / `code.adapter` to point at `src/components`.
-   **[EXISTS — CLI `init`]** An `init --detect` that sniffs package.json
-   and pre-fills the adapter would make this a confirmation, not
-   authoring. **[GAP → G14]**
+   **[EXISTS — CLI `init`]** **[CLOSED → G14, this sub-item]** —
+   `init --detect` shipped in `c0aed6f` (`packages/cli/src/cli.ts:25`):
+   adapter, roots and styling are pre-filled from package.json and every
+   pre-filled line is marked detected-**not**-confirmed, so this is a
+   confirmation step, not authoring.
 2. `ds-contracts extract --reconcile` → proposed contracts land in
    `ds-contracts/out/contracts/`, plus the unbound-value report with
    nearest-token candidates and named refusals. Source files untouched —
@@ -107,7 +126,11 @@ components.*
 3. Work the refusal report. On a real 40-component library this report
    runs to hundreds of items; grouped acceptance ("these 12 literals all
    resolve to `color.border.subtle` — accept all?") is the dominant
-   day-one labor, not report polish. **[GAP → G14]**
+   day-one labor, not report polish. **[CLOSED → G14]** —
+   `extract --accept-candidates exact|all|<list.json>` shipped in
+   `c0aed6f` (`packages/cli/src/cli.ts:31`): proposals are never mutated,
+   output lands in `contracts-accepted/`, every acknowledgement is
+   ledgered, and ambiguity is refused by name.
 4. `ds-contracts diff` → exit 0. A falsifiable, exit-coded baseline that
    goes into CI on day one. **[EXISTS — `diff` exit-code contract]**
 5. Copy `examples/ci/code-led.yml` — and audit it, because today it
@@ -127,7 +150,13 @@ components.*
    core engine work, not just config (doc 17: "currently expert work";
    the MUI and Tailwind PROVENANCE files confirm multi-hour expert
    pipelines). For half of real-world libraries, first hour becomes first
-   week. **[GAP → G6]**
+   week. **[PARTIALLY CLOSED → G6]** — `extract --draft-capture-config`
+   shipped in `c0aed6f` (`extract/draft-capture-config.ts`): the static
+   pass drafts a full `CaptureConfig`, every non-inferable field carries a
+   `__review` marker, and the capture runner **refuses an unreviewed draft
+   by name** — draft is not approved. That converts authoring into
+   reviewing; it does not remove the expert step, and six libraries have
+   now been onboarded this way (`extract/computed/configs/`).
 
 **The lead's minute-5 version of the same cliff:** pasting a real
 Emotion-styled component into the playground returns a wall of refusals
@@ -136,7 +165,14 @@ The playground should detect runtime-styling signatures and route to an
 explicit "this library needs computed extraction — here is what it
 costs" panel, and the coverage scorecard the lead wants for budgeting
 must honestly report "N components unmeasurable without computed
-capture" as its own top line. **[GAP → G6]**
+capture" as its own top line. **[SPLIT → G6]** — the **scorecard
+shipped** (`npm run extract:computed:scorecard`,
+`extract/computed/library-scorecard.ts`): cell-weighted, never a naive
+average, with unmeasurable components on their own line. The
+**playground routing did not** — pasting an Emotion-styled component
+into `playground/` still returns the raw refusal wall, with no
+runtime-styling detection anywhere in `playground/src/`. That half is
+the open remainder of G6.
 
 ---
 
@@ -407,27 +443,44 @@ reviews (five of the original [EXISTS] tags did not survive contact with
 the code). Sizing: **SMALL** = glue over machinery that exists; **ENGINE**
 = new engine surface, real design work. Order is build order.
 
-| # | Gap | Blocks | Size |
-|---|---|---|---|
-| **G0** | **Plugin publish.** Not on Community; today's dev-zip path means a designer cannot start without an engineer's laptop. Mechanics ready (`GET-STARTED.md`, `PUBLISHING.md`); publish org-internal first to skip the review queue. | designer (everything downstream) | SMALL |
-| **G1** | **Async CI↔Figma channel — deliver + verify, provenance-first.** **DELIVER HALF SHIPPED** (slices S1+S2): a standing channel on the assist worker (`workers/assist/src/channel.ts`) with a write-key/read-key split — `readKey = sha256(writeKey)`, so a leaked Figma-side key reads and can never inject. `ds-contracts figma claim-channel` mints the pair; `figma publish` posts a CONTRACTS-BUNDLE with a GitHub-Actions **provenance sibling** (never inside the bundle bytes, so `figma bundle` stays byte-deterministic); the plugin peeks non-consumingly (check-on-open + a "Check for updates" button — **no timer**, a plugin has no background execution) and renders "repo — CI run #N, commit abc1234, published 4 minutes ago" above the change report. Deliveries carry a monotonic `seq`, and the new **freshness guard** names an out-of-order delivery and starts every Apply box unchecked — closing a real silent-downgrade hole (`updatePlan` compared specHash for equality only; no ordering existed anywhere). The pairing-code bridge is untouched and is now the documented "unverified / ad-hoc" path. **STILL OPEN, named:** (a) deliveries are **not signed** — anyone with the write key can publish any provenance, so there is no "verified" badge yet (slice S3, excluded by name: the plugin sandbox has no WebCrypto for an end-to-end in-plugin signature); (b) the **read half** — a headless fingerprint drift recompute off a REST file dump so CI referees drift without a human clicking a tab — is not started. | all three; the daily loop dies here | ENGINE |
-| **G2** | **Drift-aware update check + named overwrite warning.** `updatePlan` never runs the drift check, so Apply on a canvas-edited set silently overwrites the designer's work today. Join the existing drift check into `upd-check`; drifted rows warn ("applying overwrites your edit to X") and default-unchecked. Covenant repair, days not weeks. | designer, lead | SMALL |
-| **G3** | **Three-way merge surface (genesis × incoming × canvas), per-channel resolution.** Auto-merge non-overlapping channels; true collisions get a named mine/theirs choice rendered as before/after swatches, never channel names; "keep mine" flows into Propose→PR. Must refuse a stale base ("canvas is 3 syncs behind — deliver before proposing"), so it ships after G1. | all three; the scale-breaker | ENGINE |
-| **G4** | **Silent-revert guard ("awaiting code adoption" state).** After a design-led merge, the next code-led extract reads unchanged source and re-commits the old value — reverting the approved change with drift green. Extract must refuse (named, counted) to overwrite a design-led contract until the anchored source changes. | engineer, lead | ENGINE |
-| **G5** | **Org-level GitHub App + bundle-carried repo coordinates.** Replaces designer-pasted fine-grained PATs and the owner/repo form. Admin installs once; PRs attribute to the person; Propose pre-fills everything from bundle provenance (falls out of G1's signing work). PR machinery already exists (`propose-pr`). | designer, lead | ENGINE |
-| **G6** | **Runtime-styled onboarding: draft capture-config generation + coverage scorecard.** Emotion/MUI/Tailwind capture configs are expert work with a history of needing core engine changes per styling method. Propose a draft config from the extract pass; aggregate refusal reports into a library scorecard that honestly counts "N components unmeasurable without computed capture"; playground routes runtime-styled pastes to a cost explanation, not raw refusals. | engineer, lead (brownfield default path) | ENGINE (config gen) + SMALL (scorecard rollup) |
-| **G7** | **Brownfield write-back suggested diffs.** Design-led merges leave hand-written components stale. Emit anchor-derived suggested patches on the PR ("`Badge.module.css:14`: `var(--radius-md)` → `var(--radius-lg)`") — human applies, ideally as GitHub suggested changes; never auto-write. | engineer | ENGINE |
-| **G8** | **Plain-words style diffs in the update report.** Every recolor and token rename collapses into "interior/style changes (no API change)" — exactly what a designer needs to decide apply/hold. Both compiled specs are in hand at plan time; diff per channel and reuse the drift pretty-printer so both reports speak one language. | designer | SMALL |
-| **G9** | **Sample-library cold start.** The Generate tab greets a repo-less designer with an empty textarea and CLI text. Add "Build the sample library" feeding the baked bundle straight into the existing generate path. Gates trust moments one and two for anyone without an engineer beside them. | designer | SMALL |
-| **G10** | **PR-first CI defaults + config split.** code-led.yml commits contracts to main; default must open/append a PR. Split `code.root` (extract/diff = real components) from `generate.out`; after design-led merges, run a second diff against real components as a named expected-red status so brownfield debt is tracked by the tool. Defaults are trust statements. | engineer | SMALL (wiring) |
-| **G11** | **Contract-diff English summarizer (`diff --summarize --base <ref>`).** Channel-level "Button: +variant size.xl; padding: space.300 → space.400" for PR comments and job summaries — new CLI surface, not reordering (plus the extract-on-PR walls: fork tokens, bot-loop guards, contract races). Feeds G8's language too. | engineer; feeds designer reports | ENGINE |
-| **G12** | **Designer-language safety narration bundle.** "Re-ran: 0 changes"; the "What's protected" card; per-node degradation callouts; Drift hint rewritten without "hash"/"fingerprint"; spec-sheet (not JSON) diff in Propose; post-apply change highlights; token naming in drift detail on exact value match (full reverse lookup is ENGINE — do not budget it as copy). Style model: the shipped apply-success line. The engine is already safe; this makes it *believed* safe. | designer | SMALL |
-| **G13** | **Audit trail + loop closure.** File-local apply-log in root `pluginData` (bundle hash, CI run, user, timestamp) with a viewer tab; audit block in design-led PR bodies so git is the durable log; merged PR → genesis re-stamp → Drift shows "resolved by PR #N"; merge status surfaced in-plugin (needs G1). Org-grade identity rides G5 — a hosted audit service is *not* small and is not proposed. | lead (governance), designer (loop closure) | SMALL (file-local + PR-body); in-plugin status after G1 |
-| **G14** | **Extract refusal triage + `init --detect`.** Group the unbound-value report by fix-type with bulk acceptance (`--accept-candidates`) — on a 40-component brownfield library this is the dominant day-one labor, not polish. `init --detect` pre-fills adapter and token paths from package.json. | engineer | SMALL |
+**Status column, verified 2026-07-26** against the shipped surfaces (not
+against commit messages). `SHIPPED` means the named behavior is in
+`figma-sync/plugin/{ui.html,engine/entry.ts}`, `packages/cli/src/`, or
+`workers/assist/` today and is pinned by a gate. `PARTIAL` means some
+named sub-items shipped and the rest are still listed in the row — read
+the row for which. Six gaps closed in `c0aed6f`, G1's deliver half in
+`f493249`. Each **gap body below is left as it was written** — it is the
+finding that drove the work, and rewriting it would erase the evidence
+that the walkthrough was right. Read the body as "what was true when this
+was found" and the Status column as "what is true now"; where a body says
+"today", it means the day it was written (2026-07-25).
 
-**Sequencing notes.** G0 and G9 unblock the designer's first hour and cost
-almost nothing. G2 repairs the live covenant violation before anything
-else ships. G1 is the hinge: G3's merge base, G13's in-plugin status, and
+| # | Gap | Status | Blocks | Size |
+|---|---|---|---|---|
+| **G0** | **Plugin distribution.** Not on Figma Community. The owner decided (2026-07-26) that Community publication may never happen and is **no longer a gate**: the distribution model is the manifest-upload developer-plugin path (`figma-sync/plugin-dist/`, refreshed in place by `npm run plugin:zip`; `GET-STARTED.md` Option B). `PUBLISHING.md` stays as the checklist if that decision is ever revisited. The consequence for the designer persona is unchanged and should be read as a *property of the distribution model*, not a pending task: someone with repo access imports the manifest once per file-owner. | **NOT A GATE** (owner decision, 2026-07-26) | — | — |
+| **G1** | **Async CI↔Figma channel — deliver + verify, provenance-first.** **DELIVER HALF SHIPPED** (slices S1+S2): a standing channel on the assist worker (`workers/assist/src/channel.ts`) with a write-key/read-key split — `readKey = sha256(writeKey)`, so a leaked Figma-side key reads and can never inject. `ds-contracts figma claim-channel` mints the pair; `figma publish` posts a CONTRACTS-BUNDLE with a GitHub-Actions **provenance sibling** (never inside the bundle bytes, so `figma bundle` stays byte-deterministic); the plugin peeks non-consumingly (check-on-open + a "Check for updates" button — **no timer**, a plugin has no background execution) and renders "repo — CI run #N, commit abc1234, published 4 minutes ago" above the change report. Deliveries carry a monotonic `seq`, and the new **freshness guard** names an out-of-order delivery and starts every Apply box unchecked — closing a real silent-downgrade hole (`updatePlan` compared specHash for equality only; no ordering existed anywhere). The pairing-code bridge is untouched and is now the documented "unverified / ad-hoc" path. **STILL OPEN, named:** (a) deliveries are **not signed** — anyone with the write key can publish any provenance, so there is no "verified" badge yet (slice S3, excluded by name: the plugin sandbox has no WebCrypto for an end-to-end in-plugin signature); (b) the **read half** — a headless fingerprint drift recompute off a REST file dump so CI referees drift without a human clicking a tab — is not started. | **PARTIAL** — deliver half shipped `f493249`; signing (S3) + read half OPEN | all three; the daily loop dies here | ENGINE |
+| **G2** | **Drift-aware update check + named overwrite warning.** `updatePlan` never runs the drift check, so Apply on a canvas-edited set silently overwrites the designer's work today. Join the existing drift check into `upd-check`; drifted rows warn ("applying overwrites your edit to X") and default-unchecked. Covenant repair, days not weeks. | **SHIPPED** `c0aed6f` | designer, lead | SMALL |
+| **G3** | **Three-way merge surface (genesis × incoming × canvas), per-channel resolution.** Auto-merge non-overlapping channels; true collisions get a named mine/theirs choice rendered as before/after swatches, never channel names; "keep mine" flows into Propose→PR. Must refuse a stale base ("canvas is 3 syncs behind — deliver before proposing"), so it ships after G1. | OPEN | all three; the scale-breaker | ENGINE |
+| **G4** | **Silent-revert guard ("awaiting code adoption" state).** After a design-led merge, the next code-led extract reads unchanged source and re-commits the old value — reverting the approved change with drift green. Extract must refuse (named, counted) to overwrite a design-led contract until the anchored source changes. | OPEN | engineer, lead | ENGINE |
+| **G5** | **Org-level GitHub App + bundle-carried repo coordinates.** Replaces designer-pasted fine-grained PATs and the owner/repo form. Admin installs once; PRs attribute to the person; Propose pre-fills everything from bundle provenance (falls out of G1's signing work). PR machinery already exists (`propose-pr`). | OPEN | designer, lead | ENGINE |
+| **G6** | **Runtime-styled onboarding: draft capture-config generation + coverage scorecard.** Emotion/MUI/Tailwind capture configs are expert work with a history of needing core engine changes per styling method. Propose a draft config from the extract pass; aggregate refusal reports into a library scorecard that honestly counts "N components unmeasurable without computed capture"; playground routes runtime-styled pastes to a cost explanation, not raw refusals. | **PARTIAL** — CLI halves shipped `c0aed6f`; playground routing OPEN | engineer, lead (brownfield default path) | ENGINE (config gen) + SMALL (scorecard rollup) |
+| **G7** | **Brownfield write-back suggested diffs.** Design-led merges leave hand-written components stale. Emit anchor-derived suggested patches on the PR ("`Badge.module.css:14`: `var(--radius-md)` → `var(--radius-lg)`") — human applies, ideally as GitHub suggested changes; never auto-write. | OPEN | engineer | ENGINE |
+| **G8** | **Plain-words style diffs in the update report.** Every recolor and token rename collapses into "interior/style changes (no API change)" — exactly what a designer needs to decide apply/hold. Both compiled specs are in hand at plan time; diff per channel and reuse the drift pretty-printer so both reports speak one language. | **SHIPPED** `c0aed6f` | designer | SMALL |
+| **G9** | **Sample-library cold start.** The Generate tab greets a repo-less designer with an empty textarea and CLI text. Add "Build the sample library" feeding the baked bundle straight into the existing generate path. Gates trust moments one and two for anyone without an engineer beside them. | **SHIPPED** `c0aed6f` | designer | SMALL |
+| **G10** | **PR-first CI defaults + config split.** code-led.yml commits contracts to main; default must open/append a PR. Split `code.root` (extract/diff = real components) from `generate.out`; after design-led merges, run a second diff against real components as a named expected-red status so brownfield debt is tracked by the tool. Defaults are trust statements. | OPEN | engineer | SMALL (wiring) |
+| **G11** | **Contract-diff English summarizer (`diff --summarize --base <ref>`).** Channel-level "Button: +variant size.xl; padding: space.300 → space.400" for PR comments and job summaries — new CLI surface, not reordering (plus the extract-on-PR walls: fork tokens, bot-loop guards, contract races). Feeds G8's language too. | OPEN | engineer; feeds designer reports | ENGINE |
+| **G12** | **Designer-language safety narration bundle.** "Re-ran: 0 changes"; the "What's protected" card; per-node degradation callouts; Drift hint rewritten without "hash"/"fingerprint"; spec-sheet (not JSON) diff in Propose; post-apply change highlights; token naming in drift detail on exact value match (full reverse lookup is ENGINE — do not budget it as copy). Style model: the shipped apply-success line. The engine is already safe; this makes it *believed* safe. | **PARTIAL** — narration shipped `c0aed6f`; 3 sub-items OPEN | designer | SMALL |
+| **G13** | **Audit trail + loop closure.** File-local apply-log in root `pluginData` (bundle hash, CI run, user, timestamp) with a viewer tab; audit block in design-led PR bodies so git is the durable log; merged PR → genesis re-stamp → Drift shows "resolved by PR #N"; merge status surfaced in-plugin (needs G1). Org-grade identity rides G5 — a hosted audit service is *not* small and is not proposed. | OPEN | lead (governance), designer (loop closure) | SMALL (file-local + PR-body); in-plugin status after G1 |
+| **G14** | **Extract refusal triage + `init --detect`.** Group the unbound-value report by fix-type with bulk acceptance (`--accept-candidates`) — on a 40-component brownfield library this is the dominant day-one labor, not polish. `init --detect` pre-fills adapter and token paths from package.json. | **SHIPPED** `c0aed6f` | engineer | SMALL |
+
+**Sequencing notes.** *(Original build order preserved; the status column
+above says what has since happened, and this paragraph is annotated rather
+than rewritten so the plan and the outcome can be compared.)* G0 and G9
+unblock the designer's first hour and cost almost nothing — **G9 shipped;
+G0 was retired as a gate by owner decision rather than closed.** G2 repairs
+the live covenant violation before anything else ships — **shipped, and it
+was the right order: it landed before G1 put a second delivery door in
+front of the same Apply.** G1 is the hinge: G3's merge base, G13's in-plugin status, and
 the "zero manual sync chores" claim are all downstream of it. **G1's
 deliver half now stands** — the "zero manual sync chores" claim is true for
 CI→designer delivery, and G3 has its ordering base (`seq`) and G13 its

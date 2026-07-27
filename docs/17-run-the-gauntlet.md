@@ -10,7 +10,7 @@ you know the difference between "you found a bug" (please report it!) and
 "you found a named gap."
 
 Prereqs: Node 20+, a Figma file you can run plugins in, and the DS Contracts
-plugin (see [`plugin/GET-STARTED.md`](../plugin/GET-STARTED.md) for install —
+plugin (see [`figma-sync/plugin/GET-STARTED.md`](../figma-sync/plugin/GET-STARTED.md) for install —
 it's a one-time manifest import).
 
 ---
@@ -91,8 +91,9 @@ and asserts byte-identical node trees across runs.
 **The dev door (no GitHub):** a designer's proposed change can also land
 straight in a developer's working tree. Run
 `npx @ds-contracts/cli figma receive --out contracts` — it prints a
-6-character pairing code; the designer enters it in the plugin's Propose tab
-under **Send to repo**, and the proposal arrives as a unified diff in your
+6-character pairing code; the designer enters it in the plugin's **Send**
+tab (named Propose before the 2026-07-26 IA re-housing, `87dd943`) under
+**Send to repo**, and the proposal arrives as a unified diff in your
 terminal plus a saved artifact in `contracts/.proposals/`. Nothing is
 written to a contract file without `--apply`, and even then git stays
 yours — every change enters the repo as a reviewed change

@@ -939,6 +939,110 @@ presentation mode:
 
 Suite: **154/154**.
 
+## 2026-07-25/26 — The long day: 151 → 162, and a seventh library that changed one line
+
+Thirteen commits between `3e14f6f` (07-25 23:17) and `28f4d85` (07-26 18:39) —
+about twenty hours, each commit with its own gate. Read as one arc it
+answers a single question — *is this engine general, or is it six libraries of
+special cases?* — and the answer arrived at the end, measured.
+
+**The canvas learned to move.**
+- **Organism wave** (`3e14f6f`, 152/152): the composed MUI **DataTable** through
+  the real pipeline — the first `display:table` organism, 34 parts, 85.2% floor
+  — plus Checkbox (12/24 AA-perfect rows, the best MUI pixel result to date) and
+  TablePagination (93.97%). MUI reached 14 components / 146 variants / 1,514
+  variables. Four **pre-existing** defects fell out of it, each now pinned; the
+  worst was `emit-html` silently dropping the children of text parts, which had
+  been eating Polaris Avatar's person glyph in generated HTML all along
+  (33.5 → 85.2 once fixed).
+- **State-plane projection** (`53792d3`, 153/153): `checked` became a real
+  variant axis instead of an inert channel name. MUI Switch 14 → 28 variants,
+  Flowbite ToggleSwitch 3 → 6, MUI Button 63 → 75. The defect was proven at both
+  ends first: minted names like `background-color-state-checked` never re-parsed
+  into `Part.states`, so the committed Switch contract had been emitting **four
+  literally invalid CSS declarations** and the Figma emitter had been dropping the
+  same channels silently. `loadConfig` now refuses an out-of-vocabulary state by
+  name — and it fired on the real config before the reclassification.
+- **Prototype wiring** (`2d593d8`, 154/154) — its own milestone above.
+- **Translate door** (`2d2098a`, 155/155): the Switch thumb now *travels*.
+  `translate-x` mints as a `{size}×checked` product (medium 0→20px, small
+  0→16px). The brief named two consumers needing absent≡0; there were **three** —
+  `pushStateValue`'s two state loops crashed on absent channels, a latent hole for
+  any channel absent on an interaction plane.
+
+**The daily loop got a durable door.** **G1's deliver half** (`f493249`,
+156/156, worker 79/79): a standing CI↔Figma channel with a write-key/read-key
+split (`readKey = sha256(writeKey)`), GitHub-Actions provenance carried as an
+envelope **sibling** so `figma bundle` stays byte-deterministic, non-consuming
+peeks with check-on-open and no timer, and a monotonic `seq`. That last one
+closed a real hole: **no ordering existed anywhere** — `updatePlan` compared
+`specHash` for equality only, so an older bundle applied as an ordinary
+default-selected change. Named as still open: deliveries are **not signed**, and
+the read half is not started. The pairing-code path was left deliberately
+untouched, because it carries no ordering and inventing a warning would be worse
+than none.
+
+**Astryx stopped being half-themed.** `c9242cc` (157/157) built the re-anchoring
+machinery — StyleX compiles token names away, so astryx has no source bindings by
+construction and value identity alone is exactly the silent match the house rules
+forbid; the answer was a human ledger, not a script. `1427b77` executed it under
+owner delegation: 47 of 54 review-queue refs re-anchored, 7 stay literal with
+DECIDED-LITERAL receipts, 0 pending. Astryx went 111 semantic / 111 minted →
+**165 / 57**, and Badge and Button now retheme fully. The round found and closed
+two silent-corruption traps, including a `promote-floor.ts` run that would have
+quietly reverted every human-acked alias.
+
+**The scary number was false, and the real one got fixed.** `0ce7c67` (158/158)
+classified all 36 regated components with a named cause (table in
+`docs/20-regate-drift.md`): astryx Slider's 55.3 was **contract/mint skew
+rendering unresolved refs black in the gate page only** — the canvas was never
+affected. `d10511c` (160/160) then fixed the one real regression, polaris Button
+85.858 → 91.331 via an inheritance-aware refusal, and **falsified its own
+charter hypothesis** about the astryx skew by faithful recapture — the defect was
+in the gate's inventory, not the contracts. `05a8ce0` (161/161) fixed that:
+inventory = config DTCG + fresh mint + the shipped minted tree. The measurement
+moved (astryx Slider 55.333 → 90.387, Badge 96.296 → 100.000, Button 95.391 →
+98.724) while captured truth and contracts came back **byte-identical** — the fix
+changed the measurement, not the artifact. All 36 baseline rows now carry
+`unresolvedTokenRefs: 0`.
+
+**The molecules stopped looking wrong on canvas.** Round 6 of the live-paste loop
+(`8dad6b2`, 160/160): all four bad-on-canvas molecules fixed with per-defect
+red→green proof, reproduced in a HEAD worktree *before* any fix landed. One root
+cause drove three defects — `max-width` lowered as a fixed width, baking a 360px
+Tabs strip into 288px and clipping 900px Dialog papers. The mock learned real
+Figma layout physics, so the class cannot pass headlessly again.
+
+**The plugin got an information architecture.** `87dd943` (161/161): seven
+implementation-shaped tabs → **Build / Changes / Send** plus an Advanced drawer,
+per the owner-delegated UX panel decision (recorded in `docs/19-plugin-ia.md`).
+Watch was renamed Changes because *a plugin cannot watch* — the old name promised
+background behavior Figma forbids. The new permanent UI gate
+(`npm run plugin:ui-check`, 54 assertions in real Chrome) caught a live dark-mode
+bug on its first run: hardcoded hexes in JS-generated report markup, plus a
+`[hidden]` rule outranked by `.section{display:flex}` that rendered both channel
+states at once. **Killed:** the Send-to-Playground UI (its `run-send` handler
+survives in `code.js` as a *named* orphan).
+
+**And then the control case.** **Carbon, library #7** (`28f4d85`, 162/162): ten
+components through the full pipeline in **one** round — MUI took six — with
+**exactly one** engine file changed, and that change was a latent pre-existing
+bug (`buildHarnessPage` mounting `sampleText ""` as a real empty-string child,
+which six libraries had tolerated by accident). Everything else was config and
+scripts modeled file-for-file on the tailwind exemplars. Floors read with
+Carbon's own family split stated up front: InlineNotification 96.6, Tabs 92.7,
+IconButton 91.8, Modal 89.7 (the recon prediction held exactly), TextInput 89.0
+… Button 77.3. Pixel-AA is 0 everywhere and the reason is named, not excused:
+neither gate side loads IBM Plex, and type tokens are uncarried. Two
+cross-library findings shipped forward rather than being quietly absorbed —
+`portalSweep` takes no `varPrefix`, so **every overlay in every library** has 0
+source facts; and `gate.ts` waits a flat 30ms after driving interactions while
+Carbon transitions at 70ms, making `carbon/Button` the first baseline row with
+its own measured tolerance.
+
+Suite: **151/151 → 162/162**. Drift instrument: **46/46**, zero pre-existing
+rows moved.
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
@@ -962,4 +1066,7 @@ Suite: **154/154**.
 | Canvas fidelity | headless canvas renders vs the real npm package, 7/10 PASS (3 at exact 0.00), every >10% cell named | `canvas-gate-standing-pin` eval · `examples/polaris/receipts/canvas-gate/` |
 | Vendor-doc referee | extraction proposals diffed against the vendor's own shipped docs, 0 silent rows | `examples/astryx/extraction/DOC-REFEREE.md` |
 | Live prototype behavior | hover/press wired as reactions on the State axis; focus/disabled excluded by name and asserted as destinations of nothing | `npm run plugin:check` prototype-wiring pins · `state-reactions-wired-deterministically` eval |
+| Standing CI→designer channel | write/read key split (`readKey = sha256(writeKey)`), provenance as an envelope sibling, monotonic `seq` with a named freshness guard; unsigned and read-half-open, both named | `workers/assist/src/channel.ts` · `channel-round-trip` eval · `npm run plugin:check` standing-channel pins |
+| Engine generality | library #7 (Carbon): 10 components in one round, **one** engine file changed — and that change was a latent pre-existing bug, not Carbon-specific code | `28f4d85` · `examples/carbon/PROVENANCE.md` · `carbon-figma-genesis` eval |
+| Plugin UI, gated | the packaged `plugin-dist/ui.html` driven in real Chrome — 54 assertions plus a static sweep proving no literal hex and no inline style survives in generated report markup | `npm run plugin:ui-check` |
 | Advanced composition, LIVE | the multi-root composite (composed instance + repeated collection + labeled set-instances + inset backdrop) builds correctly on a real canvas from one pasted contract; both real-Figma quirks found en route are mock-modeled | owner's live run 2026-07-22 · `npm run plugin:check` composite pins |

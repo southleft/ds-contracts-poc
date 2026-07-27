@@ -793,7 +793,7 @@ function eventsPage(): { route: string; html: string } {
       'events',
       'The interaction surface, declared',
       ['curated'],
-      `<p>A contract declares <em>what interactions exist</em> without ever describing how they’re implemented. An event is a code-side callback (<code>onToggle</code>) fired when the trigger part is activated. The canvas cannot run behavior, so events surface there as component-description text — a declared fidelity limit, like animation.</p><p><strong>What events deliberately do NOT cover:</strong> drag, typeahead, focus trapping, animation timing — behavior whose truth can’t be verified on both surfaces. That stays a hand-written layer, and the contract refuses to pretend otherwise.</p>`,
+      `<p>A contract declares <em>what interactions exist</em> without ever describing how they’re implemented. An event is a code-side callback (<code>onToggle</code>) fired when the trigger part is activated. The canvas cannot fire a callback, so events surface there as component-description text — a declared fidelity limit, like animation. (Distinguish this from <a href="/spec/states/">state previews</a>, where the canvas <em>does</em> now carry live behavior: hover and press are wired as prototype reactions. A reaction can move a variant; it cannot call your code.)</p><p><strong>What events deliberately do NOT cover:</strong> drag, typeahead, focus trapping, animation timing — behavior whose truth can’t be verified on both surfaces. That stays a hand-written layer, and the contract refuses to pretend otherwise.</p>`,
     ),
     section(
       'event-fields',

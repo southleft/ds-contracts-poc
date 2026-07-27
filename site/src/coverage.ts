@@ -2,7 +2,10 @@
  * The schema-coverage drift guard — the site's standing receipt.
  *
  * enumerateBranches() walks the LIVE Zod schema and yields every branch key
- * (131 at schema v13). This registry maps every key to the reference page +
+ * (140 at @ds-contracts/schema 15.0.0 — the count is printed by the build's
+ * own receipt, never transcribed into a page; this comment is the only
+ * hand-maintained copy and is therefore the only one that can go stale).
+ * This registry maps every key to the reference page +
  * anchor that documents it. The build FAILS when:
  *   - the schema grows a branch with no registry entry (undocumented spec), or
  *   - the registry names a branch the schema no longer has (stale docs).

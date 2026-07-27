@@ -48,9 +48,12 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
               fixture.
             </p>
             <p>
-              To close the loop, copy the <b>Figma script</b> output and paste it back into the
-              source file (Sync Runner plugin): it builds the contract&rsquo;s version beside
-              your original for A/B — provisional variables included.
+              To close the loop, copy the <b>Figma script</b> output and run it in the source
+              file through the Sync Runner plugin&rsquo;s <b>Advanced → Paste a script</b>{' '}
+              drawer (a developer surface — it runs raw scripts with full plugin permissions):
+              it builds the contract&rsquo;s version beside your original for A/B — provisional
+              variables included. The plugin&rsquo;s everyday door is <b>Build</b>, which takes
+              a contracts file rather than a script.
             </p>
             <p className="drawer__subnote">
               <b>Working locally?</b> Two more rungs, by variable-name fidelity: paste a plugin
