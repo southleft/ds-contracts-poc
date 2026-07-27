@@ -75,7 +75,8 @@
     "mint:code:check": "tsx core/mint-code-check.ts",
     "core:browser-check": "node scripts/core-browser-check.mjs",
     "site:build": "tsx site/build.ts",
-    "plugin:ui-check": "node scripts/plugin-ui-check.mjs"
+    "plugin:ui-check": "node scripts/plugin-ui-check.mjs",
+    "docs:check": "node scripts/docs-numbers-check.mjs"
   },
   "engines": {
     "node": ">=20"

@@ -1,6 +1,6 @@
 # 9 · Advanced Components — the DataTable Round
 
-Round 5 (July 3, 2026) pushed composition to compound, data-shaped components — the class that includes data tables and date pickers — and packaged the system as a real npm library. Eight components now generate from contracts to both surfaces; 24/24 evals pass.
+Round 5 (July 3, 2026) pushed composition to compound, data-shaped components — the class that includes data tables and date pickers — and packaged the system as a real npm library. Eight components now generate from contracts to both surfaces; 24/24 evals pass. <!-- docs-check:ignore -->
 
 ## The table family
 

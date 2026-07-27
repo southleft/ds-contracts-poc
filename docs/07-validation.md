@@ -1,8 +1,23 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes five falsifiable claims. Each is backed by an automated eval (`npm run eval`, 99 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **99/99 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes eight falsifiable claims. Each is backed by an automated eval (`npm run eval`, 162 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **162/162 deterministic evals pass** (`evals/results.json`), all live checks pass. This section is written to be lifted into a PRD.
 
-**Rounds 11+ addendum (the import frontier, censused and instrumented, 2026-07-09 → 07-12):** the eval count grew 60 → 99 across the July field-test arc, and three standing instruments joined the suite alongside the evals. **The whole-kit census** (`npm run extract:figma:gauntlet`) replays every component set in a live enterprise Figma kit — 1,618 sets, 76 variant composites — through the full deterministic import pipeline: 100.0% clean, with facts-carried, named-note, and degradation counts per set so "clean" is never confused with "pixel-right" ([`extract/figma/gauntlet/CENSUS.md`](../extract/figma/gauntlet/CENSUS.md)). **The visual-parity instrument** (`npm run extract:figma:visual`) perceptually diffs emitted previews against Figma's own PNG renders (pixelmatch, text-masked second score, real browser interaction states) and maintains a worst-first fix queue ([`extract/figma/visual-parity/REPORT.md`](../extract/figma/visual-parity/REPORT.md)). **The enterprise code gauntlet** ran Carbon, Fluent 2, Spectrum, and Polaris at pinned SHAs through the unmodified code-extraction pipeline; the two silent-loss classes it exposed (vanishing `as`-expression exports, hollow intersection-of-named-refs props) were eliminated and receipt-locked ([`extract/pilots/ENTERPRISE-GAUNTLET.md`](../extract/pilots/ENTERPRISE-GAUNTLET.md)). The dump format advanced to v1.6 (paint alpha → shape geometry → resolved variable values → composite child keys → collection modes), and each capability landed with its own committed check: `extract:figma:tooltip:check`, `dialog:check`, `cbds:bridge:check`, `composite:check`, `overlap:check`, `repeat:check`, `theme:check`. The dated narrative is [MILESTONES.md](../MILESTONES.md).
+The suite tags every case with the claim it defends, so the rollup below is derived from `evals/results.json`, not asserted:
+
+| Claim | Cases | What it holds |
+|---|---|---|
+| C1 — determinism | 28 | byte-identical regeneration, golden-output manifests |
+| C2 — refusal | 21 | illegal contracts fail by name, on both surfaces |
+| C3 — detection | 40 | every claimed drift class has a failing test |
+| C4 — convergence | 3 | promotion round-trips instead of ping-ponging |
+| C5 — extraction | 54 | foreign libraries read into schema-valid proposals; round-trips hold |
+| C6 — theming | 1 | a brand is a token-layer dimension and nothing else |
+| C7 — CLI | 4 | the published CLI's verbs, consumer-style (`cli-smoke`, `propose-pr-live-shape`, `emitter-plugin-loads`, `wc-emitter-roundtrip`) |
+| C8 — journeys | 11 | both end-to-end directions and every example library's Figma genesis (`journey-engineer`, `journey-designer`, `reverse-bridge-dev-door`, `channel-round-trip`, `{astryx,mui,tailwind,carbon}-figma-genesis`, …) |
+
+`npm run docs:check` re-derives the total from `evals/results.json` and fails if any doc on this page — or in the README — quotes a different number.
+
+**Rounds 11+ addendum (the import frontier, censused and instrumented, 2026-07-09 → 07-12):** the eval count grew 60 → 99 across the July field-test arc (and to 162 since), and three standing instruments joined the suite alongside the evals. **The whole-kit census** (`npm run extract:figma:gauntlet`) replays every component set in a live enterprise Figma kit — 1,618 sets, 76 variant composites — through the full deterministic import pipeline: 100.0% clean, with facts-carried, named-note, and degradation counts per set so "clean" is never confused with "pixel-right" ([`extract/figma/gauntlet/CENSUS.md`](../extract/figma/gauntlet/CENSUS.md)). **The visual-parity instrument** (`npm run extract:figma:visual`) perceptually diffs emitted previews against Figma's own PNG renders (pixelmatch, text-masked second score, real browser interaction states) and maintains a worst-first fix queue ([`extract/figma/visual-parity/REPORT.md`](../extract/figma/visual-parity/REPORT.md)). **The enterprise code gauntlet** ran Carbon, Fluent 2, Spectrum, and Polaris at pinned SHAs through the unmodified code-extraction pipeline; the two silent-loss classes it exposed (vanishing `as`-expression exports, hollow intersection-of-named-refs props) were eliminated and receipt-locked ([`extract/pilots/ENTERPRISE-GAUNTLET.md`](../extract/pilots/ENTERPRISE-GAUNTLET.md)). The dump format advanced to v1.6 (paint alpha → shape geometry → resolved variable values → composite child keys → collection modes), and each capability landed with its own committed check: `extract:figma:tooltip:check`, `dialog:check`, `cbds:bridge:check`, `composite:check`, `overlap:check`, `repeat:check`, `theme:check`. The dated narrative is [MILESTONES.md](../MILESTONES.md).
 
 **Round 6 addendum (governed generation):** two eval cases exercise the deterministic generation judge itself — `judge-passes-canonical-screen` and `judge-catches-all-violation-classes` — backing the measured 100-vs-69 governed-generation A/B result in [docs/10](10-honest-generation.md).
 
@@ -96,7 +111,7 @@ Live receipts: extraction against **Shoelace v2.20.1** (58/58 components, 411 pr
 | **Export completeness** — exported DTCG carries scopes, code-syntax metadata, per-mode alias references, and the design tool's variable/collection IDs in `$extensions` (the dual-ID rename-survival pattern) | ✅ verified, including the previously promoted dark-mode change |
 | **Two-direction promotion on live surfaces** | ✅ executed end-to-end — see [docs/06](06-parity-loop.md) |
 | **In-place amend — the steady-state update path** (2026-07-08) — Button v1.4.0 added a `ghost` enum value; the sync runtime AMENDED the existing sets on both the test and production files (31 amended / hash-skipped the rest, 0 failures) instead of recreating them. Forensic verification on a prepared Instance Lab: set key byte-identical, all pre-existing variant node IDs preserved, new Ghost variants added beside them, and every instance survived on its original mainComponent with all overrides intact (custom label, variant flip, boolean). Extra variants from removed values are reported, never deleted | ✅ |
-| **Fresh-file rebuild** (2026-07-06) — the entire library regenerated into a BLANK file via the Sync Runner plugin (`figma-sync/plugin/`): 282 variables across all three collections, 48 component sets built + arranged onto 50 pages in one run, then verified by `npm run diagnose` — **all 50 contracts hold with zero findings** on the rebuilt surface. The exercise flushed out three generator bugs masked by 8 months of incremental building (Slot utility never created, cross-page `combineAsVariants`, slot `accepts` missing from build order) — the exact bug class this check exists to catch | ✅ |
+| **Fresh-file rebuild** (2026-07-06) — the entire library regenerated into a BLANK file via the Sync Runner plugin (`figma-sync/plugin/`): 282 variables across all three collections, 48 component sets built + arranged onto 50 pages in one run, then verified by `npm run diagnose` — **all 50 contracts hold with zero findings** on the rebuilt surface. The exercise flushed out three generator bugs masked by 8 months of incremental building (Slot utility never created, cross-page `combineAsVariants`, slot `accepts` missing from build order) — the exact bug class this check exists to catch | ✅ | <!-- docs-check:ignore -->
 
 ## What is NOT yet validated (say this in the PRD too)
 
@@ -131,7 +146,8 @@ Harness design:
 ```bash
 npm install
 npm run build     # C1/C2 gates run here too
-npm run eval      # 99 deterministic evals → evals/results.json
+npm run eval      # 162 deterministic evals → evals/results.json
+npm run docs:check # cheap: re-derive every number this page quotes (no browser, no eval run)
 npm run parity    # current three-surface drift report
 ```
 

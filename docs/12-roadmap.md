@@ -14,7 +14,7 @@ The contract-as-source-of-truth loop, demonstrated end to end.
 - [x] 282 DTCG tokens compiled to CSS custom properties and design-tool variables (light + dark × Default/Aurora brand modes)
 - [x] Three-way parity differ: every drift classified *ahead / behind / mismatched* with a proposed remedy
 - [x] Promotion loop executed in both directions on live surfaces, with receipts ([docs/06](06-parity-loop.md))
-- [x] 99/99 deterministic machinery evals ([docs/07](07-validation.md))
+- [x] 162/162 deterministic machinery evals ([docs/07](07-validation.md))
 - [x] Governed AI generation measured: 100/100 with the contract catalog vs 69/100 without ([docs/10](10-honest-generation.md))
 - [x] Coverage attributed against a full 93-component industry library ([coverage map](research/astryx-coverage.md))
 
@@ -25,7 +25,7 @@ The contract-as-source-of-truth loop, demonstrated end to end.
 Close the honesty gaps the PoC itself documented, so every claim survives adversarial review.
 
 - [ ] **Anatomy-level parity** — extend the differ below the API surface with a per-variant anatomy fingerprint (part tree, layout, bindings), closing the gap described in [docs/07 § What "parity clean" does and doesn't mean](07-validation.md)
-- [x] **Fresh-file rebuild** — executed 2026-07-06 via the Sync Runner dev plugin: blank file → 282 variables + 48 sets + arranged pages in one run, `diagnose` clean across all 50 contracts; caught three generator bugs incremental building had masked (docs/07 live checks)
+- [x] **Fresh-file rebuild** — executed 2026-07-06 via the Sync Runner dev plugin: blank file → 282 variables + 48 sets + arranged pages in one run, `diagnose` clean across all 50 contracts; caught three generator bugs incremental building had masked (docs/07 live checks) <!-- docs-check:ignore -->
 - [ ] **Live token re-extraction in the loop** — the token snapshot is periodically re-extracted from the design tool, not only derived from `tokens/` (verified manually 264/264 on 2026-07-03; make it automatic)
 - [ ] **Visual regression baseline** — screenshot-per-variant-grid comparison, so the class of defect found in the July 2026 visual audit is caught mechanically
 - [ ] **Close the declared schema gaps** ([docs/08](08-composition-and-spec.md)): nested-part states, parent→child prop mapping, slot `min`/`max` + `restrict` enforcement, slot default content
