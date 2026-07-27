@@ -292,10 +292,21 @@ bundle.*
    in the shipped plugin. **[GAP → G2 — the live covenant violation, and
    a days-scale fix]**
 6. Apply selected: sets update in place, variables re-sync, no
-   duplicates, instances keep their overrides. **[EXISTS — deterministic
-   apply; the apply-success line "Instances keep their overrides (same
-   nodes, same property ids)" is the best designer-language sentence in
-   the product and the style model for G12]**
+   duplicates, instances keep their overrides. **[EXISTS with a NAMED
+   CAVEAT — deterministic apply; the apply-success line "Instances keep
+   their overrides (same nodes, same property ids)" is the best
+   designer-language sentence in the product and the style model for G12,
+   and it is true only of COMPONENT-PROPERTY overrides. The amend path
+   deletes every child of an existing variant and rebuilds it from spec
+   (`core/emit-figma-script.ts:3958`, and `:4107` for single components),
+   so a designer's override on an INTERIOR node — a nudged child frame, a
+   swapped nested instance, a recoloured layer — is destroyed. The
+   forensics behind the claim (docs/07, 2026-07-08) tested exactly three
+   overrides: custom label, variant flip, boolean — all three are
+   component properties. This applies to greenfield update-in-place too,
+   and **no eval covers it**. The plugin copy at
+   `figma-sync/plugin/ui.html:1157` and `figma-sync/plugin/README.md:30`
+   still states the unqualified version → G12's copy work]**
 7. After apply, a dismissible highlight on updated nodes for a 30-second
    visual audit. **[GAP → G12]**
 

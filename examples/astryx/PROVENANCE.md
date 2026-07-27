@@ -80,3 +80,17 @@ table contents as extraction evidence, and commits mechanical transformations of
 the published token values (verbatim values, DTCG-wrapped). No Astryx source
 files are vendored into this repository; the sandbox install is gitignored and
 reproduced by the pinned command above.
+
+## Coverage of this library — the denominator
+
+| committed contracts | pinned by the drift instrument | library size | **coverage** |
+|---|---|---|---|
+| 13 | 5 | 222 | **5.9%** |
+
+Library size: **this repo's own extractor over the whole library** — `extraction/CENSUS.md` (222 extracted, 15 named-skipped).
+
+Every per-component number in this file — floors, `pctEqual`, token counts,
+variant cells — is measured over that slice, and the slice was hand-picked for
+tractability. The engine generalizing across libraries (`docs/22`) and a
+library being *captured* are different claims; this row is the second one, and
+it is small. Full table and how to re-derive it: [docs/22 §8.3](../../docs/22-generality.md).

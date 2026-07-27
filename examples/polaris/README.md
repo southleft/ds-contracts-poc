@@ -67,3 +67,20 @@ contracts (metadata about Polaris's public API), the mechanically wrapped token 
 spinner glyphs carried verbatim as showcase icon assets (from `Spinner.tsx`), and screenshots
 of renderings. No Polaris source is vendored; the clone lives in the git-ignored
 `.polaris-clone/`. This showcase is not affiliated with or endorsed by Shopify.
+
+## Coverage of this library — the denominator
+
+| committed contracts | pinned by the drift instrument | library size | **coverage** |
+|---|---|---|---|
+| 12 | 12 | 180 | **6.7%** |
+
+Library size: **this repo's own extractor over the whole library** —
+`extract/pilots/ENTERPRISE-GAUNTLET.md` (180 extracted, 15 named-skipped). The
+depth config captures a 13th component (`Modal`) which is not a drift row.
+
+Every per-component number in this showcase — floors, `pctEqual`, receipts —
+is measured over that slice, and the slice was hand-picked for tractability.
+The engine generalizing across libraries ([docs/22](../../docs/22-generality.md))
+and a library being *captured* are different claims; this row is the second one,
+and it is small. Full table and how to re-derive it:
+[docs/22 §8.3](../../docs/22-generality.md).

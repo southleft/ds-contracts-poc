@@ -1,6 +1,1866 @@
 {
   "contractsDir": "extract/pilots/shoelace/out/contracts",
   "codeAdapter": "cem",
-  "designChecked": false,
-  "findings": []
+  "designChecked": true,
+  "designSource": "extract/pilots/shoelace/design.json",
+  "designSets": 36,
+  "designSnapshot": {
+    "ageDays": 20.14,
+    "stampMs": 1783385117858,
+    "basis": "file-mtime",
+    "file": "extract/pilots/shoelace/design.json"
+  },
+  "codePrefixStripped": "sl",
+  "prefixMatched": [
+    "SlAlert ⇄ Alert",
+    "SlAvatar ⇄ Avatar",
+    "SlBadge ⇄ Badge",
+    "SlBreadcrumbItem ⇄ _Breadcrumb item",
+    "SlBreadcrumb ⇄ Breadcrumb",
+    "SlButtonGroup ⇄ Button group",
+    "SlButton ⇄ Button",
+    "SlCheckbox ⇄ Checkbox",
+    "SlDetails ⇄ Details",
+    "SlDialog ⇄ Dialog",
+    "SlDivider ⇄ Divider",
+    "SlDrawer ⇄ Drawer",
+    "SlDropdown ⇄ Dropdown",
+    "SlIcon ⇄ Icon",
+    "SlImageComparer ⇄ Image Comparer",
+    "SlInput ⇄ input",
+    "SlMenuItem ⇄ Menu Item",
+    "SlMenu ⇄ Menu",
+    "SlRadioGroup ⇄ radio group",
+    "SlRadio ⇄ Radio",
+    "SlRange ⇄ Range",
+    "SlSelect ⇄ select",
+    "SlSkeleton ⇄ Skeleton",
+    "SlTabGroup ⇄ Tab Group",
+    "SlTab ⇄ Tab",
+    "SlTag ⇄ Tag",
+    "SlTextarea ⇄ Textarea",
+    "SlTooltip ⇄ Tooltip"
+  ],
+  "findings": [
+    {
+      "surface": "design",
+      "classification": "mismatch",
+      "subject": "design-snapshot",
+      "detail": "extract/pilots/shoelace/design.json is 20.1 days old (max 14, override via MAX_SNAPSHOT_AGE_DAYS; age from file-mtime) — a hand-saved design dump cannot be refreshed by CI, so every design result below is only as current as this file",
+      "remedy": "Re-run extract/figma-dump.js in the design file and save it over this dump"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlAlert.Open",
+      "detail": "BOOLEAN property \"Open\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlAlert.Countdown",
+      "detail": "Variant axis \"Countdown\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlAnimatedImage",
+      "detail": "No design component set named like \"SlAnimatedImage\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlAnimation",
+      "detail": "No design component set named like \"SlAnimation\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlAvatar.Image",
+      "detail": "TEXT property \"Image\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlAvatar.Label",
+      "detail": "TEXT property \"Label\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlAvatar.Loading",
+      "detail": "Variant axis \"Loading\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlAvatar.type",
+      "detail": "Design declares variant axis \"type\" [default, initials, image] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlBadge.Variant",
+      "detail": "Variant axis \"Variant\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlBadge.Pill",
+      "detail": "BOOLEAN property \"Pill\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlBadge.Pulse",
+      "detail": "BOOLEAN property \"Pulse\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlBreadcrumbItem.Target",
+      "detail": "Variant axis \"Target\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlBreadcrumbItem.Rel",
+      "detail": "TEXT property \"Rel\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlBreadcrumbItem.isLink",
+      "detail": "Design declares variant axis \"isLink\" [false, true] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlBreadcrumb.Label",
+      "detail": "TEXT property \"Label\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButtonGroup.Label",
+      "detail": "TEXT property \"Label\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButtonGroup.Disable Role",
+      "detail": "BOOLEAN property \"Disable Role\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlButtonGroup.position",
+      "detail": "Design declares variant axis \"position\" [left, center, right, position4] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlButtonGroup.size",
+      "detail": "Design declares variant axis \"size\" [large, small, medium] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlButtonGroup.type",
+      "detail": "Design declares variant axis \"type\" [default, primary] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlButtonGroup.isPill",
+      "detail": "Design declares variant axis \"isPill\" [false, true] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Title",
+      "detail": "TEXT property \"Title\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Caret",
+      "detail": "BOOLEAN property \"Caret\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Loading",
+      "detail": "BOOLEAN property \"Loading\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Outline",
+      "detail": "BOOLEAN property \"Outline\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Pill",
+      "detail": "BOOLEAN property \"Pill\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Circle",
+      "detail": "BOOLEAN property \"Circle\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Type",
+      "detail": "Variant axis \"Type\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Name",
+      "detail": "TEXT property \"Name\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Value",
+      "detail": "TEXT property \"Value\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Href",
+      "detail": "TEXT property \"Href\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Target",
+      "detail": "Variant axis \"Target\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Rel",
+      "detail": "TEXT property \"Rel\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Form",
+      "detail": "TEXT property \"Form\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Formaction",
+      "detail": "TEXT property \"Formaction\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Formenctype",
+      "detail": "Variant axis \"Formenctype\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Formmethod",
+      "detail": "Variant axis \"Formmethod\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Formnovalidate",
+      "detail": "BOOLEAN property \"Formnovalidate\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Invalid",
+      "detail": "BOOLEAN property \"Invalid\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Form Action",
+      "detail": "TEXT property \"Form Action\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Form Enctype",
+      "detail": "Variant axis \"Form Enctype\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Form Method",
+      "detail": "Variant axis \"Form Method\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlButton.Form No Validate",
+      "detail": "BOOLEAN property \"Form No Validate\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlButton.state",
+      "detail": "Design declares variant axis \"state\" [default, hover, active, disabled, focus, deafult] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlButton.isOutline",
+      "detail": "Design declares variant axis \"isOutline\" [true, false] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlButton.isPill",
+      "detail": "Design declares variant axis \"isPill\" [false, true] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlButton.isCircle",
+      "detail": "Design declares variant axis \"isCircle\" [false, true] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCard",
+      "detail": "No design component set named like \"SlCard\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCarouselItem",
+      "detail": "No design component set named like \"SlCarouselItem\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCarousel",
+      "detail": "No design component set named like \"SlCarousel\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCheckbox.Title",
+      "detail": "TEXT property \"Title\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCheckbox.Name",
+      "detail": "TEXT property \"Name\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCheckbox.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCheckbox.Checked",
+      "detail": "BOOLEAN property \"Checked\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCheckbox.Indeterminate",
+      "detail": "BOOLEAN property \"Indeterminate\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCheckbox.Form",
+      "detail": "TEXT property \"Form\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCheckbox.Required",
+      "detail": "BOOLEAN property \"Required\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCheckbox.Help Text",
+      "detail": "TEXT property \"Help Text\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCheckbox.Default Checked",
+      "detail": "BOOLEAN property \"Default Checked\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCheckbox.Help Text",
+      "detail": "TEXT property \"Help Text\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlCheckbox.state",
+      "detail": "Design declares variant axis \"state\" [default, disabled, hover] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlCheckbox.isChecked",
+      "detail": "Design declares variant axis \"isChecked\" [false, true] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlCheckbox.isIndeterminate",
+      "detail": "Design declares variant axis \"isIndeterminate\" [false, true] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlColorPicker",
+      "detail": "No design component set named like \"SlColorPicker\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlCopyButton",
+      "detail": "No design component set named like \"SlCopyButton\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDetails.Open",
+      "detail": "BOOLEAN property \"Open\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDetails.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlDetails.isOpen",
+      "detail": "Design declares variant axis \"isOpen\" [true, false] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlDetails.isDisabled",
+      "detail": "Design declares variant axis \"isDisabled\" [false, true] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDialog.Open",
+      "detail": "BOOLEAN property \"Open\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDialog.Label",
+      "detail": "TEXT property \"Label\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDialog.No Header",
+      "detail": "BOOLEAN property \"No Header\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDialog.No Header",
+      "detail": "BOOLEAN property \"No Header\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDivider.Vertical",
+      "detail": "BOOLEAN property \"Vertical\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlDivider.isVertical",
+      "detail": "Design declares variant axis \"isVertical\" [false, true] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDrawer.Open",
+      "detail": "BOOLEAN property \"Open\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDrawer.Label",
+      "detail": "TEXT property \"Label\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDrawer.Contained",
+      "detail": "BOOLEAN property \"Contained\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDrawer.No Header",
+      "detail": "BOOLEAN property \"No Header\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDrawer.No Header",
+      "detail": "BOOLEAN property \"No Header\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDropdown.Open",
+      "detail": "BOOLEAN property \"Open\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDropdown.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDropdown.Stay Open On Select",
+      "detail": "BOOLEAN property \"Stay Open On Select\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDropdown.Distance",
+      "detail": "TEXT property \"Distance\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDropdown.Skidding",
+      "detail": "TEXT property \"Skidding\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDropdown.Hoist",
+      "detail": "BOOLEAN property \"Hoist\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDropdown.Sync",
+      "detail": "Variant axis \"Sync\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlDropdown.Stay Open On Select",
+      "detail": "BOOLEAN property \"Stay Open On Select\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlFormatBytes",
+      "detail": "No design component set named like \"SlFormatBytes\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlFormatDate",
+      "detail": "No design component set named like \"SlFormatDate\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlFormatNumber",
+      "detail": "No design component set named like \"SlFormatNumber\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlIconButton",
+      "detail": "No design component set named like \"SlIconButton\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlIcon.Label",
+      "detail": "TEXT property \"Label\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlIcon.Library",
+      "detail": "TEXT property \"Library\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlIcon.variant",
+      "detail": "Design declares variant axis \"variant\" [material] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlIcon.size",
+      "detail": "Design declares variant axis \"size\" [medium, small, large, x-large] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlIcon.state",
+      "detail": "Design declares variant axis \"state\" [default, hover, active, disabled] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlImageComparer.Position",
+      "detail": "TEXT property \"Position\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlImageComparer.position",
+      "detail": "Design declares variant axis \"position\" [middle, left, right] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInclude",
+      "detail": "No design component set named like \"SlInclude\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Title",
+      "detail": "TEXT property \"Title\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Name",
+      "detail": "TEXT property \"Name\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Filled",
+      "detail": "BOOLEAN property \"Filled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Pill",
+      "detail": "BOOLEAN property \"Pill\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Clearable",
+      "detail": "BOOLEAN property \"Clearable\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Placeholder",
+      "detail": "TEXT property \"Placeholder\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Readonly",
+      "detail": "BOOLEAN property \"Readonly\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Password Toggle",
+      "detail": "BOOLEAN property \"Password Toggle\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Password Visible",
+      "detail": "BOOLEAN property \"Password Visible\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.No Spin Buttons",
+      "detail": "BOOLEAN property \"No Spin Buttons\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Form",
+      "detail": "TEXT property \"Form\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Required",
+      "detail": "BOOLEAN property \"Required\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Pattern",
+      "detail": "TEXT property \"Pattern\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Minlength",
+      "detail": "TEXT property \"Minlength\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Maxlength",
+      "detail": "TEXT property \"Maxlength\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Autocapitalize",
+      "detail": "Variant axis \"Autocapitalize\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Autocorrect",
+      "detail": "Variant axis \"Autocorrect\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Autocomplete",
+      "detail": "TEXT property \"Autocomplete\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Autofocus",
+      "detail": "BOOLEAN property \"Autofocus\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Enterkeyhint",
+      "detail": "Variant axis \"Enterkeyhint\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Spellcheck",
+      "detail": "BOOLEAN property \"Spellcheck\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Inputmode",
+      "detail": "Variant axis \"Inputmode\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Default Value",
+      "detail": "TEXT property \"Default Value\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Password Toggle",
+      "detail": "BOOLEAN property \"Password Toggle\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.Password Visible",
+      "detail": "BOOLEAN property \"Password Visible\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlInput.No Spin Buttons",
+      "detail": "BOOLEAN property \"No Spin Buttons\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlInput.state",
+      "detail": "Design declares variant axis \"state\" [default, disabled, hover, focus] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlInput.alignement",
+      "detail": "Design declares variant axis \"alignement\" [vertical, horizontal] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlInput.display",
+      "detail": "Design declares variant axis \"display\" [placeholder, content] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlInput.isPill",
+      "detail": "Design declares variant axis \"isPill\" [false, true] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlInput.variant",
+      "detail": "Design declares variant axis \"variant\" [default] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlMenuItem.Type",
+      "detail": "Variant axis \"Type\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlMenuItem.Checked",
+      "detail": "BOOLEAN property \"Checked\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlMenuItem.Value",
+      "detail": "TEXT property \"Value\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlMenuItem.Loading",
+      "detail": "BOOLEAN property \"Loading\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlMenuItem.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlMenuItem.isSelected",
+      "detail": "Design declares variant axis \"isSelected\" [false, true] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlMenuItem.state",
+      "detail": "Design declares variant axis \"state\" [default, hover, active, disabled] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlMenuLabel",
+      "detail": "No design component set named like \"SlMenuLabel\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlMenu.variant",
+      "detail": "Design declares variant axis \"variant\" [prefilled, empty] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlMutationObserver",
+      "detail": "No design component set named like \"SlMutationObserver\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlOption",
+      "detail": "No design component set named like \"SlOption\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlPopup",
+      "detail": "No design component set named like \"SlPopup\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlProgressBar",
+      "detail": "No design component set named like \"SlProgressBar\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlProgressRing",
+      "detail": "No design component set named like \"SlProgressRing\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlQrCode",
+      "detail": "No design component set named like \"SlQrCode\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRadioButton",
+      "detail": "No design component set named like \"SlRadioButton\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRadioGroup.Help Text",
+      "detail": "TEXT property \"Help Text\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRadioGroup.Name",
+      "detail": "TEXT property \"Name\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRadioGroup.Value",
+      "detail": "TEXT property \"Value\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRadioGroup.Form",
+      "detail": "TEXT property \"Form\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRadioGroup.Required",
+      "detail": "BOOLEAN property \"Required\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRadioGroup.Default Value",
+      "detail": "TEXT property \"Default Value\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRadioGroup.Help Text",
+      "detail": "TEXT property \"Help Text\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlRadioGroup.variant",
+      "detail": "Design declares variant axis \"variant\" [default] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlRadioGroup.direction",
+      "detail": "Design declares variant axis \"direction\" [vertical, horizontal] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRadio.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRadio.Checked",
+      "detail": "BOOLEAN property \"Checked\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlRadio.isCheched",
+      "detail": "Design declares variant axis \"isCheched\" [false, true] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlRadio.state",
+      "detail": "Design declares variant axis \"state\" [default, hover, disabled] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRange.Title",
+      "detail": "TEXT property \"Title\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRange.Name",
+      "detail": "TEXT property \"Name\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRange.Value",
+      "detail": "TEXT property \"Value\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRange.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRange.Min",
+      "detail": "TEXT property \"Min\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRange.Max",
+      "detail": "TEXT property \"Max\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRange.Step",
+      "detail": "TEXT property \"Step\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRange.Tooltip",
+      "detail": "Variant axis \"Tooltip\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRange.Form",
+      "detail": "TEXT property \"Form\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRange.Default Value",
+      "detail": "TEXT property \"Default Value\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlRange.state",
+      "detail": "Design declares variant axis \"state\" [default, disabled, hover] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRating",
+      "detail": "No design component set named like \"SlRating\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlRelativeTime",
+      "detail": "No design component set named like \"SlRelativeTime\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlResizeObserver",
+      "detail": "No design component set named like \"SlResizeObserver\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Name",
+      "detail": "TEXT property \"Name\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Size",
+      "detail": "Variant axis \"Size\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Placeholder",
+      "detail": "TEXT property \"Placeholder\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Multiple",
+      "detail": "BOOLEAN property \"Multiple\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Max Options Visible",
+      "detail": "TEXT property \"Max Options Visible\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Clearable",
+      "detail": "BOOLEAN property \"Clearable\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Open",
+      "detail": "BOOLEAN property \"Open\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Hoist",
+      "detail": "BOOLEAN property \"Hoist\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Filled",
+      "detail": "BOOLEAN property \"Filled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Pill",
+      "detail": "BOOLEAN property \"Pill\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Label",
+      "detail": "TEXT property \"Label\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Placement",
+      "detail": "Variant axis \"Placement\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Help Text",
+      "detail": "TEXT property \"Help Text\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Form",
+      "detail": "TEXT property \"Form\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Required",
+      "detail": "BOOLEAN property \"Required\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Display Label",
+      "detail": "TEXT property \"Display Label\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Max Options Visible",
+      "detail": "TEXT property \"Max Options Visible\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSelect.Help Text",
+      "detail": "TEXT property \"Help Text\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlSelect.Property 1",
+      "detail": "Design declares variant axis \"Property 1\" [Default] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSkeleton.Effect",
+      "detail": "Variant axis \"Effect\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlSkeleton.type",
+      "detail": "Design declares variant axis \"type\" [text, avatar-square, avatar-rounded, avatar-pill] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSpinner",
+      "detail": "No design component set named like \"SlSpinner\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSplitPanel",
+      "detail": "No design component set named like \"SlSplitPanel\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlSwitch",
+      "detail": "No design component set named like \"SlSwitch\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTabGroup.Activation",
+      "detail": "Variant axis \"Activation\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTabGroup.No Scroll Controls",
+      "detail": "BOOLEAN property \"No Scroll Controls\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTabGroup.Fixed Scroll Controls",
+      "detail": "BOOLEAN property \"Fixed Scroll Controls\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTabGroup.No Scroll Controls",
+      "detail": "BOOLEAN property \"No Scroll Controls\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTabGroup.Fixed Scroll Controls",
+      "detail": "BOOLEAN property \"Fixed Scroll Controls\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTabPanel",
+      "detail": "No design component set named like \"SlTabPanel\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTab.Panel",
+      "detail": "TEXT property \"Panel\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTab.Active",
+      "detail": "BOOLEAN property \"Active\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTab.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlTab.state",
+      "detail": "Design declares variant axis \"state\" [active, default, disabled] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlTab.showBorder",
+      "detail": "Design declares variant axis \"showBorder\" [true, false] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlTab.placement",
+      "detail": "Design declares variant axis \"placement\" [top, none, bottom, start, end] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "mismatch",
+      "subject": "SlTag.Variant",
+      "detail": "Variant options differ — contract expects [Primary, Success, Neutral, Warning, Danger, Text], design has [primary, success, neutral, warning, danger]",
+      "remedy": "Promote the design change into the contract, or fix the design set"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTag.Pill",
+      "detail": "BOOLEAN property \"Pill\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlTag.isPill",
+      "detail": "Design declares variant axis \"isPill\" [true, false] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Title",
+      "detail": "TEXT property \"Title\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Name",
+      "detail": "TEXT property \"Name\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "mismatch",
+      "subject": "SlTextarea.Size",
+      "detail": "Variant options differ — contract expects [Small, Medium, Large], design has [medium]",
+      "remedy": "Promote the design change into the contract, or fix the design set"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Filled",
+      "detail": "BOOLEAN property \"Filled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Help Text",
+      "detail": "TEXT property \"Help Text\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Placeholder",
+      "detail": "TEXT property \"Placeholder\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Rows",
+      "detail": "TEXT property \"Rows\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Resize",
+      "detail": "Variant axis \"Resize\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Readonly",
+      "detail": "BOOLEAN property \"Readonly\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Form",
+      "detail": "TEXT property \"Form\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Required",
+      "detail": "BOOLEAN property \"Required\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Minlength",
+      "detail": "TEXT property \"Minlength\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Maxlength",
+      "detail": "TEXT property \"Maxlength\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Autocapitalize",
+      "detail": "Variant axis \"Autocapitalize\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Autocorrect",
+      "detail": "TEXT property \"Autocorrect\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Autocomplete",
+      "detail": "TEXT property \"Autocomplete\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Autofocus",
+      "detail": "BOOLEAN property \"Autofocus\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Enterkeyhint",
+      "detail": "Variant axis \"Enterkeyhint\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Spellcheck",
+      "detail": "BOOLEAN property \"Spellcheck\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Inputmode",
+      "detail": "Variant axis \"Inputmode\" missing from the design set",
+      "remedy": "Add the axis, or remove the prop from the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Help Text",
+      "detail": "TEXT property \"Help Text\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTextarea.Default Value",
+      "detail": "TEXT property \"Default Value\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlTextarea.state",
+      "detail": "Design declares variant axis \"state\" [default, filled, disabled] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTooltip.Content",
+      "detail": "TEXT property \"Content\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTooltip.Disabled",
+      "detail": "BOOLEAN property \"Disabled\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTooltip.Distance",
+      "detail": "TEXT property \"Distance\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTooltip.Open",
+      "detail": "BOOLEAN property \"Open\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTooltip.Skidding",
+      "detail": "TEXT property \"Skidding\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTooltip.Trigger",
+      "detail": "TEXT property \"Trigger\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTooltip.Hoist",
+      "detail": "BOOLEAN property \"Hoist\" missing from the design set",
+      "remedy": "Add it, or adjust the contract binding"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "SlTooltip.placement",
+      "detail": "Design declares variant axis \"placement\" [bottom, bottomLeft, bottomRight, left, right, topLeft, topRight, top] the contract does not define",
+      "remedy": "Review + promote into the contract, or remove the axis"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTreeItem",
+      "detail": "No design component set named like \"SlTreeItem\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlTree",
+      "detail": "No design component set named like \"SlTree\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "behind",
+      "subject": "SlVisuallyHidden",
+      "detail": "No design component set named like \"SlVisuallyHidden\" (also tried without the \"sl\" prefix)",
+      "remedy": "Create the set, or retire the contract"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "Slot",
+      "detail": "No contract claims design component set \"Slot\" — it ships to designers unowned by the contract layer",
+      "remedy": "Extract/author a contract for it, or retire the set"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "_Image Comparer Handler",
+      "detail": "No contract claims design component set \"_Image Comparer Handler\" — it ships to designers unowned by the contract layer",
+      "remedy": "Extract/author a contract for it, or retire the set"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "Menu submenu",
+      "detail": "No contract claims design component set \"Menu submenu\" — it ships to designers unowned by the contract layer",
+      "remedy": "Extract/author a contract for it, or retire the set"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "Menu title",
+      "detail": "No contract claims design component set \"Menu title\" — it ships to designers unowned by the contract layer",
+      "remedy": "Extract/author a contract for it, or retire the set"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "radio group button",
+      "detail": "No contract claims design component set \"radio group button\" — it ships to designers unowned by the contract layer",
+      "remedy": "Extract/author a contract for it, or retire the set"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "_ellipse",
+      "detail": "No contract claims design component set \"_ellipse\" — it ships to designers unowned by the contract layer",
+      "remedy": "Extract/author a contract for it, or retire the set"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "_demo / header",
+      "detail": "No contract claims design component set \"_demo / header\" — it ships to designers unowned by the contract layer",
+      "remedy": "Extract/author a contract for it, or retire the set"
+    },
+    {
+      "surface": "design",
+      "classification": "ahead",
+      "subject": "Color Swatch",
+      "detail": "No contract claims design component set \"Color Swatch\" — it ships to designers unowned by the contract layer",
+      "remedy": "Extract/author a contract for it, or retire the set"
+    }
+  ]
 }

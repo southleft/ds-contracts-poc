@@ -13,7 +13,7 @@
  * abbreviation pairs (sm ⇄ Small…) resolved. Everything else is reported,
  * not guessed — a wrong auto-match would poison the contract it seeds.
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { normalizeName } from './types.js';
 import type { DesignComponent, ExtractedComponent } from './types.js';
@@ -68,6 +68,56 @@ export function loadDesign(source: string, root = process.cwd()): DesignComponen
   }
   const dump = JSON.parse(readFileSync(source, 'utf8')) as { components: DesignComponent[] };
   return dump.components;
+}
+
+/** Resolve a design source to the file that actually holds it — the one place
+ *  that knows the two source forms ("parity-snapshot" vs a saved dump path). */
+export const designSourcePath = (source: string, root = process.cwd()): string =>
+  source === 'parity-snapshot'
+    ? path.join(root, 'parity', 'snapshots', 'figma-components.json')
+    : source;
+
+export interface DesignSnapshotAge {
+  /** Age in days of the design-side input, measured AT RUN TIME — the one
+   *  value here that is not a pure function of the inputs. */
+  ageDays: number;
+  /** The epoch-ms the age was measured from (dump stamp, or file mtime). */
+  stampMs: number;
+  /** `extractedAt` = a real epoch-ms stamp inside the dump (exact).
+   *  `file-mtime` = the dump carries no numeric stamp, so the file's
+   *  last-modified time is used — a FLOOR on its age, never an overstatement,
+   *  and it reads as 0 on a fresh clone. Reported so nobody mistakes it for
+   *  a measurement of when the Figma file was actually read. */
+  basis: 'extractedAt' | 'file-mtime';
+  file: string;
+}
+
+/** How old is the design-side snapshot? The design input is hand-saved (there
+ *  is no headless Figma read), so nothing in CI can refresh it — which is
+ *  exactly why a referee must be able to say how stale it is instead of
+ *  reporting green over a year-old dump. Returns null only when the file
+ *  cannot be inspected at all. */
+export function designSnapshotAge(
+  source: string,
+  root = process.cwd(),
+  now = Date.now(),
+): DesignSnapshotAge | null {
+  const file = designSourcePath(source, root);
+  let stamp: unknown;
+  try {
+    stamp = (JSON.parse(readFileSync(file, 'utf8')) as { extractedAt?: unknown }).extractedAt;
+  } catch {
+    return null;
+  }
+  if (typeof stamp === 'number' && Number.isFinite(stamp)) {
+    return { ageDays: (now - stamp) / 86_400_000, stampMs: stamp, basis: 'extractedAt', file };
+  }
+  try {
+    const mtimeMs = statSync(file).mtimeMs;
+    return { ageDays: (now - mtimeMs) / 86_400_000, stampMs: mtimeMs, basis: 'file-mtime', file };
+  } catch {
+    return null;
+  }
 }
 
 type PropFinding =

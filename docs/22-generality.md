@@ -438,7 +438,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 
 | instrument | what it pins | how to run |
 |---|---|---|
-| **Eval suite** | 164/164 as of `evals/results.json` — 21 refusal, 29 determinism, 40 detection, 54 extraction, 3 convergence, 4 CLI, 12 journey, 1 theming | `npm run eval` |
+| **Eval suite** | 167/167 as of `evals/results.json` — 21 refusal, 29 determinism, 41 detection, 56 extraction, 3 convergence, 4 CLI, 12 journey, 1 theming | `npm run eval` |
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
 | **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |
@@ -470,6 +470,10 @@ the number itself is an on-demand script CI can call.
 
 Scope boundaries, each with its cause located and its next step named. None of
 these is an apology; a document without this section is marketing.
+
+**Read §8.3 first.** Everything else in this section qualifies *how well* a
+captured component is captured. §8.3 qualifies *how much of a library is
+captured at all*, and it is the largest qualifier in this document.
 
 ### 8.1 Named residuals that qualify the generality claim
 
@@ -565,6 +569,59 @@ these is an apology; a document without this section is marketing.
   Dialog, Menu and Tooltip are absent, fusion skips them by name, and those
   contracts declare `states: []` — pinned by the contract, not by luck.
 
+### 8.3 The coverage fraction — how much of each library is actually captured
+
+Every per-component number in this document (floors, drift rows, token counts)
+is measured over a **hand-configured slice** of each library. Until 2026-07-26
+this document reported those per-component numbers and never once stated the
+denominator. Here it is.
+
+| library | contracts committed | of those, pinned by the drift instrument | library size | **coverage** | where the denominator comes from |
+|---|---|---|---|---|---|
+| MUI (`@mui/material@9.2.0`) | 14 | 14 | 135 | **10.4%** | capitalised component directories in the pinned sandbox (measured, §10) |
+| Flowbite / Tailwind (`flowbite-react@0.12.17`) | 5 | 5 | 46 | **10.9%** | component directories in the pinned sandbox (measured, §10) |
+| Altitude (`altitude-web-components@1.0.2`) | 8 | 8 | 67 | **11.9%** | component directories in the published package (measured, §10; `examples/altitude/PROVENANCE.md` says "65 components" — the 2-directory gap is `bundle` / `focus-trap`, which are not components) |
+| Polaris (`@shopify/polaris@13.9.5`) | 12 | 12 | 180 | **6.7%** | **this repo's own extractor** over the whole library — `extract/pilots/ENTERPRISE-GAUNTLET.md` (180 extracted, 15 named-skipped) |
+| Carbon (`@carbon/react@1.112.0`) | 10 | 10 | 243 | **4.1%** | **this repo's own extractor** over the whole library — same table (243 extracted, 62 named-skipped) |
+| Astryx (`@astryxdesign/core@0.1.6`) | 13 | **5** | 222 | **5.9%** (2.3% computed-captured) | **this repo's own extractor** over the whole library — `examples/astryx/extraction/CENSUS.md` (222 extracted, 15 named-skipped) |
+| **total** | **62** | **54** | **893** | **6.9%** | |
+
+**How to read it — both halves are true, and the second is the one usually
+left out:**
+
+- **The gauntlet proves the ENGINE generalizes.** Six vendors, five styling
+  architectures, one pipeline, engine-change cost trending to zero (§1, §5).
+  That claim is about the *engine*, it is supported by the evidence above, and
+  the coverage fraction does not dent it.
+- **It does not prove a LIBRARY can be captured.** No library in this repo is
+  captured past **11.9%**. Nobody has run a component set large enough to hit
+  the long tail — the two-dozenth component of a real system, the one with the
+  virtualized list, the date grid, the rich-text surface. An adopter reading §1
+  as "point it at your library" is reading a claim this repo has never tested.
+  The honest scope is: *a hand-picked slice of your library, configured by an
+  expert, one round per novel styling method.*
+- **The slice is not random, and that biases every average upward.** Components
+  were chosen because they were tractable — the drift rows are Button, Badge,
+  Chip, Card, Checkbox, Tag, Avatar, Divider. The hardest thing in the corpus is
+  MUI's `Table`, and the hardest classes (data grid, tree, virtualized list,
+  date picker, rich text, charts) are captured **nowhere**. Read every floor
+  percentage as "on the easy 6.9%".
+- **The denominators lean against us, deliberately.** MUI's 135 counts every
+  capitalised directory including utilities (`NoSsr`, `ClickAwayListener`,
+  `TextareaAutosize`), and Carbon's 243 / Polaris's 180 / Astryx's 222 are
+  *whatever this repo's extractor could see*, helpers included. The true
+  component denominators are smaller and the true percentages therefore a
+  little higher. The order of magnitude is the finding; no row is rounded in
+  our favour.
+- **The gap between 62 and 54** is Astryx: 13 committed contracts, only 5 of
+  which went through the computed-capture pipeline and are pinned by
+  `regate-baseline.json`. The other 8 came from the static Phase-A path and
+  carry no captured floor. A contract existing is not the same as a contract
+  being measured, and the two columns are separated here for that reason.
+
+The next honest step is not a seventh library. It is **one library taken to
+50%** — which would test the long tail this table shows has never been touched.
+
 ---
 
 ## 9. Altitude — landed, and the counterexample §1 needed
@@ -620,7 +677,7 @@ Figma account or a network call except `npm install`.
 npm install
 
 # ── the claim's own numbers ────────────────────────────────────────────────
-npm run eval                       # 164/164 as of evals/results.json
+npm run eval                       # 167/167 as of evals/results.json
 node -e "const r=require('./evals/results.json');console.log(r.passed+'/'+r.total)"
 
 # 54 drift rows, per library
@@ -631,6 +688,31 @@ console.log(b.recordedAt);for(const k in by)console.log(k,by[k].length)"
 # the config:engine ratio
 wc -l extract/computed/configs/*.json
 cat extract/computed/*.ts core/*.ts | wc -l
+
+# ── the coverage fraction (§8.3) ──────────────────────────────────────────
+# numerators — committed contracts, and how many the drift instrument pins:
+node -e "const fs=require('fs'),b=require('./extract/computed/regate-baseline.json');
+const rows={};for(const r of b.rows)rows[r.library]=(rows[r.library]||0)+1;
+let C=0,R=0;for(const l of ['mui','tailwind','altitude','polaris','carbon','astryx']){
+ const c=fs.readdirSync('examples/'+l+'/contracts').filter(f=>f.endsWith('.contract.json')).length;
+ C+=c;R+=rows[l];console.log(l.padEnd(9),'contracts',c,'drift rows',rows[l])}
+console.log('total'.padEnd(9),'contracts',C,'drift rows',R)"
+# → 62 contracts, 54 drift rows
+
+# denominators, extractor-measured (whole library, this repo's own adapter):
+grep -n 'Whole library' extract/pilots/ENTERPRISE-GAUNTLET.md    # carbon 243, polaris 180
+grep -n 'Whole library' examples/astryx/extraction/CENSUS.md     # astryx 222
+
+# denominators, package-measured (needs each library's gitignored sandbox,
+# recreated per its PROVENANCE recipe). Use node, not a shell glob: `[A-Z]*/`
+# is case-insensitive on macOS and silently counts 19 lowercase utility
+# directories into MUI's number.
+node -e "const fs=require('fs');const n=(d,re)=>fs.readdirSync(d,{withFileTypes:true})
+ .filter(e=>e.isDirectory()&&(!re||re.test(e.name))).length;
+console.log('mui     ',n('examples/mui/.mui-sandbox/node_modules/@mui/material',/^[A-Z]/));
+console.log('flowbite',n('examples/tailwind/.tw-sandbox/node_modules/flowbite-react/dist/components'));
+console.log('altitude',n('examples/altitude/.altitude-sandbox/node_modules/altitude-web-components/dist/components'))"
+# → 135 / 46 / 67
 
 # ── the engine audit (§3): no dispatch on library identity ─────────────────
 grep -nE "=== *'(polaris|mui|astryx|tailwind|carbon|altitude)'" extract/computed/*.ts core/*.ts

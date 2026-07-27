@@ -17,14 +17,30 @@
  * is ahead / behind / mismatch with a remedy. Scope is the contracted API
  * surface (props, enum options, defaults, booleans, text, events, variant
  * axes) — exactly what extraction can honestly see. Exit 1 on drift.
+ *
+ * Three rules exist here because a brownfield kit is not a generated one
+ * (all three were missing until 2026-07-26, and their absence is what made
+ * the Shoelace pilot report 58 false findings):
+ *
+ *   1 VENDOR PREFIX — code names carry a vendor prefix the design kit does
+ *     not (`SlButton` ⇄ kit "Button"). The same rule `extract/reconcile.ts`
+ *     applies, read from the same config key (`idPrefix`), and every
+ *     prefix-stripped match is listed, never silent.
+ *   2 ORPHAN SWEEP — a design set NO contract claims is the brownfield case
+ *     ("we have 300 kit components and nobody knows which are owned"). It is
+ *     invisible to a loop that only walks contracts, so the sweep walks the
+ *     design side too and reports `[design AHEAD]`.
+ *   3 SNAPSHOT STALENESS — the design input is HAND-SAVED; no CI can refresh
+ *     it, so an untouched dump would otherwise report green forever. Same
+ *     gate as parity/diff.ts, same `MAX_SNAPSHOT_AGE_DAYS` override.
  */
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { ContractSchema, type Contract } from '../scripts/contract-schema.js';
-import { loadConfig, outDir } from '../extract/config.js';
+import { loadConfig, outDir, idPrefix } from '../extract/config.js';
 import { extractReactTsx } from '../extract/adapters/react-tsx.js';
 import { extractCem } from '../extract/adapters/cem.js';
-import { loadDesign } from '../extract/reconcile.js';
+import { designSnapshotAge, loadDesign } from '../extract/reconcile.js';
 import { isEventCallbackName, normalizeName } from '../extract/types.js';
 import type { ExtractedComponent } from '../extract/types.js';
 
@@ -67,6 +83,46 @@ export function runDiagnose(configArg?: string): number {
 
   const findings: Finding[] = [];
   const add = (f: Finding) => findings.push(f);
+
+  // Rule 1 — the vendor prefix. `idPrefix` is the same config key
+  // extract/run.ts hands reconcile as `stripCodePrefix`; using anything else
+  // here would let the two referees disagree about the same two surfaces.
+  const prefix = normalizeName(idPrefix(config)) || null;
+  const prefixMatched: string[] = [];
+  const usedDesign = new Set<string>();
+  /** Design set for a contract: exact normalized name first, then the same
+   *  prefix strip reconcile uses. Returns which rule fired. */
+  const designFor = (name: string) => {
+    if (!designByName) return null;
+    const n = normalizeName(name);
+    const direct = designByName.get(n);
+    if (direct) return { d: direct, viaPrefix: false };
+    if (prefix && n.startsWith(prefix)) {
+      const stripped = designByName.get(n.slice(prefix.length));
+      if (stripped) return { d: stripped, viaPrefix: true };
+    }
+    return null;
+  };
+
+  // Rule 3 — snapshot staleness. Identical gate + override to parity/diff.ts.
+  const MAX_SNAPSHOT_AGE_DAYS = Number(process.env.MAX_SNAPSHOT_AGE_DAYS ?? 14);
+  const age = config.design?.source ? designSnapshotAge(config.design.source) : null;
+  if (design && !age) {
+    console.warn(
+      `⚠ design snapshot freshness unverifiable (${config.design?.source}) — staleness NOT checked`,
+    );
+  }
+  if (age && age.ageDays > MAX_SNAPSHOT_AGE_DAYS) {
+    add({
+      surface: 'design',
+      classification: 'mismatch',
+      subject: 'design-snapshot',
+      detail:
+        `${age.file} is ${age.ageDays.toFixed(1)} days old (max ${MAX_SNAPSHOT_AGE_DAYS}, override via MAX_SNAPSHOT_AGE_DAYS; age from ${age.basis}) — ` +
+        'a hand-saved design dump cannot be refreshed by CI, so every design result below is only as current as this file',
+      remedy: 'Re-run extract/figma-dump.js in the design file and save it over this dump',
+    });
+  }
 
   for (const contract of contracts) {
     // ---- code ⟷ contract -----------------------------------------------
@@ -157,17 +213,22 @@ export function runDiagnose(configArg?: string): number {
     // Native-representation contracts (layout primitives) intentionally have
     // no design component set — the concept IS the canvas capability.
     if (contract.figmaRepresentation === 'native') continue;
-    const d = designByName.get(normalizeName(contract.name));
-    if (!d) {
+    const hit = designFor(contract.name);
+    if (!hit) {
       add({
         surface: 'design',
         classification: 'behind',
         subject: contract.name,
-        detail: `No design component set named like "${contract.name}"`,
+        detail:
+          `No design component set named like "${contract.name}"` +
+          (prefix ? ` (also tried without the "${idPrefix(config)}" prefix)` : ''),
         remedy: 'Create the set, or retire the contract',
       });
       continue;
     }
+    const d = hit.d;
+    usedDesign.add(normalizeName(d.name));
+    if (hit.viaPrefix) prefixMatched.push(`${contract.name} ⇄ ${d.name}`);
     const claimed = new Set<string>();
     for (const p of contract.props) {
       const fig = p.bindings.figma;
@@ -228,6 +289,23 @@ export function runDiagnose(configArg?: string): number {
     }
   }
 
+  // Rule 2 — the orphan sweep. Everything above iterates CONTRACTS, so a
+  // design set no contract mentions cannot produce a finding there. In a
+  // brownfield kit that set is the whole question: it is shipping to
+  // designers with nothing owning it.
+  if (designByName) {
+    for (const [norm, d] of designByName) {
+      if (usedDesign.has(norm)) continue;
+      add({
+        surface: 'design',
+        classification: 'ahead',
+        subject: d.name,
+        detail: `No contract claims design component set "${d.name}" — it ships to designers unowned by the contract layer`,
+        remedy: 'Extract/author a contract for it, or retire the set',
+      });
+    }
+  }
+
   const out = outDir(config);
   mkdirSync(out, { recursive: true });
   writeFileSync(
@@ -237,6 +315,23 @@ export function runDiagnose(configArg?: string): number {
         contractsDir,
         codeAdapter: config.code.adapter,
         designChecked: designByName !== null,
+        designSource: config.design?.source ?? null,
+        designSets: design?.length ?? null,
+        // Recorded even when green: a report that cannot say how old its
+        // design input is cannot be read as evidence about today. `ageDays` is
+        // the one field here measured against the CLOCK rather than the
+        // inputs — on a fresh clone a `file-mtime` basis reads ~0, which is
+        // why the pilot README states its finding count both ways.
+        designSnapshot: age
+          ? {
+              ageDays: Number(age.ageDays.toFixed(2)),
+              stampMs: Math.round(age.stampMs),
+              basis: age.basis,
+              file: age.file,
+            }
+          : null,
+        codePrefixStripped: prefix ? idPrefix(config) : null,
+        prefixMatched,
         findings,
       },
       null,
@@ -246,6 +341,16 @@ export function runDiagnose(configArg?: string): number {
 
   if (!designByName) {
     console.log('ℹ design surface not provided — design checks SKIPPED (set design.source to include them)');
+  } else {
+    console.log(
+      `ℹ design surface: ${design!.length} set(s) from ${config.design!.source}` +
+        (age ? ` (${age.ageDays.toFixed(1)}d old by ${age.basis})` : ' (age unverifiable)'),
+    );
+    if (prefixMatched.length > 0) {
+      console.log(
+        `ℹ ${prefixMatched.length} contract(s) matched a design set only after stripping the "${idPrefix(config)}" code prefix: ${prefixMatched.join(', ')}`,
+      );
+    }
   }
   if (findings.length === 0) {
     console.log(

@@ -715,6 +715,225 @@ const cases: Case[] = [
     },
   },
   {
+    // THE FLAGSHIP PILOT, PINNED (2026-07-26). The Shoelace pilot is the
+    // repo's brownfield credibility artifact and its numbers lived only in a
+    // hand-written README — which is exactly how it rotted: the committed
+    // diagnose report predated `design.source` landing in its own config, so
+    // "code-side diagnose ✔ clean" had never been verified against the
+    // shipped config for three weeks. A number quoted in prose and gated
+    // nowhere is a number that is already wrong.
+    //
+    // Pins the whole foreign-library chain on inputs neither surface of which
+    // this repo owns: a published CEM (58 custom elements) + a read-only dump
+    // of a community Figma kit.
+    id: 'shoelace-reconcile-pinned',
+    claim: 'C5-extraction',
+    run: () => {
+      const CFG = 'extract/pilots/shoelace/extract.config.json';
+      const OUT = 'extract/pilots/shoelace/out';
+      let r = run(TSX, ['extract/run.ts', 'code', CFG]);
+      if (r.status !== 0) throw new Error(`Shoelace extraction failed:\n${r.out}`);
+      const extracted = JSON.parse(
+        readFileSync(path.join(SCRATCH, OUT, 'code-extraction.json'), 'utf8'),
+      ) as Array<{ name: string }>;
+      if (extracted.length !== 58) {
+        throw new Error(`Shoelace CEM: expected 58 components, got ${extracted.length}`);
+      }
+      const contractsDir = path.join(SCRATCH, OUT, 'contracts');
+      const files = readdirSync(contractsDir).filter((f) => f.endsWith('.contract.json'));
+      let props = 0;
+      let events = 0;
+      for (const f of files) {
+        const c = JSON.parse(readFileSync(path.join(contractsDir, f), 'utf8'));
+        props += c.props.length;
+        events += (c.events ?? []).length;
+      }
+      if (files.length !== 58 || props !== 411 || events !== 113) {
+        throw new Error(
+          `Proposal pin moved: ${files.length} contracts / ${props} props / ${events} events (README: 58 / 411 / 113)`,
+        );
+      }
+      r = run(TSX, ['extract/run.ts', 'reconcile', CFG]);
+      if (r.status !== 0) throw new Error(`Shoelace reconcile failed:\n${r.out}`);
+      const rec = JSON.parse(readFileSync(path.join(SCRATCH, OUT, 'reconciliation.json'), 'utf8'));
+      const got = `${rec.stats.matched}/${rec.stats.components} ${rec.stats.propsAgree} ${rec.stats.propsDiffer} ${rec.codeOnly.length} ${rec.designOnly.length}`;
+      // The exact sentence the pilot README publishes, plus the two coverage
+      // tails the diagnose orphan sweep is cross-checked against.
+      if (got !== '28/58 42 236 30 8') {
+        throw new Error(
+          `Shoelace reconciliation pin moved — matched/components propsAgree propsDiffer codeOnly designOnly = "${got}", pinned "28/58 42 236 30 8"`,
+        );
+      }
+      // FALSIFICATION: the pin must be sensitive to its own inputs. Rename one
+      // kit set and the match count and the design-only tail must both move.
+      editJson('extract/pilots/shoelace/design.json', (d) => {
+        const btn = d.components.find((c: { name: string }) => c.name === 'Button');
+        if (!btn) throw new Error('fixture drift: no "Button" set in the Shoelace kit dump');
+        btn.name = 'Buttton';
+      });
+      r = run(TSX, ['extract/run.ts', 'reconcile', CFG]);
+      const rec2 = JSON.parse(readFileSync(path.join(SCRATCH, OUT, 'reconciliation.json'), 'utf8'));
+      if (rec2.stats.matched !== 27 || rec2.designOnly.length !== 9) {
+        throw new Error(
+          `Pin is not falsifiable: renaming the kit's Button left ${rec2.stats.matched} matched / ${rec2.designOnly.length} design-only (expected 27 / 9)`,
+        );
+      }
+      console.log(
+        'shoelace-reconcile-pinned: 58 elements → 58 contracts (411 props, 113 events); 28/58 matched, 42 agree, 236 decisions, 30 code-only, 8 design-only — and a one-set rename moves it',
+      );
+    },
+  },
+  {
+    // THE DEFECT THIS PIN GUARDS (fixed 2026-07-26): parity/diagnose.ts matched
+    // contracts to design sets on the bare name, while extract/reconcile.ts
+    // stripped the vendor prefix from the same config key. Running the pilot's
+    // OWN documented command therefore produced 58 `[design BEHIND] Sl* — No
+    // design component set named like "Sl*"` findings, 28 of them false, and —
+    // worse — because every match failed, not one design property was ever
+    // compared. This case is the regression guard for all three brownfield
+    // rules the referee was missing: prefix match, orphan sweep, and the
+    // report recording what design input it read.
+    id: 'shoelace-diagnose-prefix-match',
+    claim: 'C5-extraction',
+    run: () => {
+      const CFG = 'extract/pilots/shoelace/extract.config.json';
+      const REPORT = 'extract/pilots/shoelace/out/diagnose-report.json';
+      const readReportJson = () => JSON.parse(readFileSync(path.join(SCRATCH, REPORT), 'utf8'));
+      if (run(TSX, ['extract/run.ts', 'code', CFG]).status !== 0) {
+        throw new Error('Shoelace extraction failed');
+      }
+      const r = run(TSX, ['parity/diagnose.ts', CFG]);
+      if (r.status !== 1) {
+        throw new Error(`Expected exit 1 (the two surfaces really do disagree), got ${r.status}`);
+      }
+      const rep = readReportJson();
+      if (rep.designChecked !== true) {
+        throw new Error('designChecked false — the design surface was not loaded at all');
+      }
+      if (rep.designSets !== 36 || rep.codePrefixStripped !== 'sl') {
+        throw new Error(`Report provenance moved: ${rep.designSets} sets, prefix ${rep.codePrefixStripped}`);
+      }
+      if (rep.prefixMatched.length !== 28) {
+        throw new Error(
+          `THE DEFECT: ${rep.prefixMatched.length} contracts matched a kit set via the prefix rule, expected 28`,
+        );
+      }
+      type F = { surface: string; classification: string; subject: string; detail: string };
+      const findings: F[] = rep.findings;
+      const missingSet = findings.filter((f) => f.detail.startsWith('No design component set'));
+      const orphans = findings.filter((f) => f.detail.startsWith('No contract claims'));
+      // The 30 genuinely-absent components are exactly reconcile's codeOnly
+      // tail; the 28 prefix-matchable ones must NOT be in here. That equality
+      // is the whole fix: 58 → 30, and the 28 that vanished were the false ones.
+      if (missingSet.length !== 30) {
+        throw new Error(
+          `Spurious [design BEHIND] regression: ${missingSet.length} "no design component set" findings, expected 30 (58 was the bug, 28 of them false)`,
+        );
+      }
+      if (findings.some((f) => f.surface === 'code')) {
+        throw new Error('Code surface must be clean — proposals are extracted from this same manifest');
+      }
+      const orphanNames = orphans.map((f) => f.subject).sort().join('|');
+      const EXPECTED_ORPHANS =
+        'Color Swatch|Menu submenu|Menu title|Slot|_Image Comparer Handler|_demo / header|_ellipse|radio group button';
+      if (orphanNames !== EXPECTED_ORPHANS) {
+        throw new Error(`Orphan sweep moved:\n  got  ${orphanNames}\n  want ${EXPECTED_ORPHANS}`);
+      }
+      // FALSIFICATION 1 — the prefix rule is real, not a blanket match: point
+      // idPrefix at the wrong vendor and the 28 false findings come straight back.
+      editJson(CFG, (c) => { c.idPrefix = 'zz'; });
+      const bad = run(TSX, ['parity/diagnose.ts', CFG]);
+      if (bad.status !== 1) throw new Error('Expected drift with a wrong prefix');
+      const repBad = readReportJson();
+      if (repBad.prefixMatched.length !== 0) {
+        throw new Error('A wrong idPrefix still matched sets — the rule is not reading the config');
+      }
+      const missingBad = (repBad.findings as F[]).filter((f) =>
+        f.detail.startsWith('No design component set'),
+      );
+      if (missingBad.length !== 58) {
+        throw new Error(
+          `Falsification failed: a wrong prefix produced ${missingBad.length} unmatched contracts, expected the original 58`,
+        );
+      }
+      editJson(CFG, (c) => { c.idPrefix = 'sl'; });
+      // FALSIFICATION 2 — the orphan sweep is real: give one orphan a contract
+      // name and it must stop being reported as unowned.
+      editJson('extract/pilots/shoelace/design.json', (d) => {
+        const orphan = d.components.find((c: { name: string }) => c.name === 'Menu title');
+        orphan.name = 'Qr Code'; // ⇄ SlQrCode, one of the 30 code-only contracts
+      });
+      run(TSX, ['parity/diagnose.ts', CFG]);
+      const rep3 = readReportJson();
+      const orphans3 = (rep3.findings as F[]).filter((f) => f.detail.startsWith('No contract claims'));
+      if (orphans3.length !== 7 || orphans3.some((f) => f.subject === 'Menu title')) {
+        throw new Error(
+          `Orphan sweep is not falsifiable: ${orphans3.length} orphans after adopting one (expected 7)`,
+        );
+      }
+      console.log(
+        'shoelace-diagnose-prefix-match: 28 prefix matches, 30 truly-absent sets (was 58, 28 false), 8 unowned kit sets, 0 code findings — wrong prefix restores all 58, adopting an orphan removes it',
+      );
+    },
+  },
+  {
+    // The design side of `diagnose` is a HAND-SAVED dump: no CI can re-read a
+    // Figma file, so an untouched design.json would report green forever while
+    // the kit moved on. Same gate, same override, same finding shape as the
+    // parity differ's snapshot-staleness check (`detect-stale-snapshot`), now
+    // on the brownfield referee — where it matters more, because there is no
+    // refresh command to run.
+    id: 'diagnose-stale-design-snapshot',
+    claim: 'C3-detection',
+    run: () => {
+      const CFG = 'extract/fixtures/foreign-react.config.json';
+      const DESIGN = 'extract/fixtures/foreign-design.json';
+      const REPORT = 'extract/fixtures/.out-react/diagnose-report.json';
+      const stamp = (msAgo: number) =>
+        editJson(DESIGN, (d) => { d.extractedAt = Date.now() - msAgo; });
+      const staleFindings = () =>
+        (JSON.parse(readFileSync(path.join(SCRATCH, REPORT), 'utf8')).findings as Array<{
+          subject: string;
+          surface: string;
+          classification: string;
+        }>).filter((f) => f.subject === 'design-snapshot');
+      if (run(TSX, ['extract/run.ts', 'code', CFG]).status !== 0) {
+        throw new Error('Fixture extraction failed');
+      }
+      // This case's claim IS the clock, so it pins the threshold back to 14
+      // (run() disables the gate for every other case — the hermetic clock).
+      process.env.MAX_SNAPSHOT_AGE_DAYS = '14';
+      try {
+        stamp(15 * 86_400_000);
+        const r = run(TSX, ['parity/diagnose.ts', CFG]);
+        const stale = staleFindings();
+        if (r.status !== 1 || stale.length !== 1) {
+          throw new Error(`A 15-day-old design dump passed the 14-day gate (exit ${r.status}, ${stale.length} findings)`);
+        }
+        if (stale[0].surface !== 'design' || stale[0].classification !== 'mismatch') {
+          throw new Error(`Wrong classification: ${JSON.stringify(stale[0])}`);
+        }
+        // FALSIFICATION: a fresh stamp must clear it — and the rest of the
+        // report must go back to green, proving the gate is the only thing
+        // that fired.
+        stamp(1 * 86_400_000);
+        const ok = run(TSX, ['parity/diagnose.ts', CFG]);
+        if (ok.status !== 0 || staleFindings().length !== 0) {
+          throw new Error(`A 1-day-old design dump did not clear the gate:\n${ok.out}`);
+        }
+        const rep = JSON.parse(readFileSync(path.join(SCRATCH, REPORT), 'utf8'));
+        if (rep.designSnapshot?.basis !== 'extractedAt') {
+          throw new Error(`Green report must still record the snapshot age: ${JSON.stringify(rep.designSnapshot)}`);
+        }
+      } finally {
+        delete process.env.MAX_SNAPSHOT_AGE_DAYS;
+      }
+      console.log(
+        'diagnose-stale-design-snapshot: a 15-day-old hand-saved design dump fails the referee by name; a 1-day-old one passes, and the age is recorded even when green',
+      );
+    },
+  },
+  {
     // Enterprise gauntlet fix #1 (SIBLING-TYPE-FILE + CAST-TRANSPARENCY
     // rules): a Fluent-2-shaped component — props interface in a sibling
     // `X.types.ts`, export cast `as ForwardRefComponent<XProps>` — was

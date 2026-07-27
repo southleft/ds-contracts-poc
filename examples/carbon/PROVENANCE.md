@@ -594,3 +594,17 @@ it once a promoted part carries an icon asset).
 - six orphaned icon assets named after the old positional parts
   (`tabs-part-1-1-0.svg`, `modal-part-1-0-2-0-0-0.svg`, …) were deleted; their
   replacements carry the class-stem names.
+
+## Coverage of this library — the denominator
+
+| committed contracts | pinned by the drift instrument | library size | **coverage** |
+|---|---|---|---|
+| 10 | 10 | 243 | **4.1%** |
+
+Library size: **this repo's own extractor over the whole library** — `extract/pilots/ENTERPRISE-GAUNTLET.md` (243 extracted, 62 named-skipped).
+
+Every per-component number in this file — floors, `pctEqual`, token counts,
+variant cells — is measured over that slice, and the slice was hand-picked for
+tractability. The engine generalizing across libraries (`docs/22`) and a
+library being *captured* are different claims; this row is the second one, and
+it is small. Full table and how to re-derive it: [docs/22 §8.3](../../docs/22-generality.md).
