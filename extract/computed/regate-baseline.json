@@ -1,7 +1,79 @@
 {
-  "_marker": "REGATE DRIFT BASELINE \u2014 what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved.",
-  "recordedAt": "2026-07-26",
+  "_marker": "REGATE DRIFT BASELINE — what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved.",
+  "recordedAt": "2026-07-27",
   "rows": [
+    {
+      "library": "altitude",
+      "component": "Avatar",
+      "rerunPctEqual": 81.69014084507042,
+      "cellsCompared": 568,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 81.69014084507042,
+      "gapCause": ""
+    },
+    {
+      "library": "altitude",
+      "component": "Badge",
+      "rerunPctEqual": 93.75,
+      "cellsCompared": 1280,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 93.75,
+      "gapCause": ""
+    },
+    {
+      "library": "altitude",
+      "component": "Button",
+      "rerunPctEqual": 74.765625,
+      "cellsCompared": 1280,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 74.765625,
+      "gapCause": ""
+    },
+    {
+      "library": "altitude",
+      "component": "Chip",
+      "rerunPctEqual": 94.3089430894309,
+      "cellsCompared": 1968,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 94.3089430894309,
+      "gapCause": ""
+    },
+    {
+      "library": "altitude",
+      "component": "Divider",
+      "rerunPctEqual": 100,
+      "cellsCompared": 144,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 100,
+      "gapCause": ""
+    },
+    {
+      "library": "altitude",
+      "component": "Heading",
+      "rerunPctEqual": 100,
+      "cellsCompared": 392,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 100,
+      "gapCause": ""
+    },
+    {
+      "library": "altitude",
+      "component": "IconClose",
+      "rerunPctEqual": 100,
+      "cellsCompared": 160,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 100,
+      "gapCause": ""
+    },
+    {
+      "library": "altitude",
+      "component": "Link",
+      "rerunPctEqual": 63.888888888888886,
+      "cellsCompared": 432,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 63.888888888888886,
+      "gapCause": ""
+    },
     {
       "library": "astryx",
       "component": "Badge",
@@ -9,7 +81,7 @@
       "cellsCompared": 1512,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
-      "gapCause": "repaired: gate now measures shipped inventory (task #21). The 1 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json \u2014 the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 1 -> 0 unresolved, 96.296 -> 100.000 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL \u2014 the recapture changed the measurement, not the artifact."
+      "gapCause": "repaired: gate now measures shipped inventory (task #21). The 1 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json — the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 1 -> 0 unresolved, 96.296 -> 100.000 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL — the recapture changed the measurement, not the artifact."
     },
     {
       "library": "astryx",
@@ -18,7 +90,7 @@
       "cellsCompared": 11520,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 98.72395833333333,
-      "gapCause": "repaired: gate now measures shipped inventory (task #21). The 22 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json \u2014 the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 22 -> 0 unresolved, 95.391 -> 98.724 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL \u2014 the recapture changed the measurement, not the artifact."
+      "gapCause": "repaired: gate now measures shipped inventory (task #21). The 22 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json — the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 22 -> 0 unresolved, 95.391 -> 98.724 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL — the recapture changed the measurement, not the artifact."
     },
     {
       "library": "astryx",
@@ -27,7 +99,7 @@
       "cellsCompared": 1144,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 98.25174825174825,
-      "gapCause": "repaired: gate now measures shipped inventory (task #21) \u2014 54 unresolved refs -> 0 with pctEqual UNCHANGED at 98.252. This is the counterfactual that keeps unresolvedTokenRefs pinned SEPARATELY from pctEqual: the affected channels are already mismatched or uncompared, so the empty custom properties cost nothing here and closing them gains nothing. NOT re-run through the harness (outside the named scope of task #21, and its number is proven unmoved by the offline instrument) \u2014 so its committed scorecard.json still records the PRE-FIX count of 54 unresolved refs. That number in that file is stale; it is named here rather than quietly left to be rediscovered."
+      "gapCause": "repaired: gate now measures shipped inventory (task #21) — 54 unresolved refs -> 0 with pctEqual UNCHANGED at 98.252. This is the counterfactual that keeps unresolvedTokenRefs pinned SEPARATELY from pctEqual: the affected channels are already mismatched or uncompared, so the empty custom properties cost nothing here and closing them gains nothing. NOT re-run through the harness (outside the named scope of task #21, and its number is proven unmoved by the offline instrument) — so its committed scorecard.json still records the PRE-FIX count of 54 unresolved refs. That number in that file is stale; it is named here rather than quietly left to be rediscovered."
     },
     {
       "library": "astryx",
@@ -36,7 +108,7 @@
       "cellsCompared": 2944,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.38722826086956,
-      "gapCause": "repaired: gate now measures shipped inventory (task #21). The 44 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json \u2014 the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 44 -> 0 unresolved, 55.333 -> 90.387 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL \u2014 the recapture changed the measurement, not the artifact."
+      "gapCause": "repaired: gate now measures shipped inventory (task #21). The 44 unresolved ref(s) were REVIEWED-LAYER bindings present in examples/astryx/tokens/astryx-minted.dtcg.json — the SHIPPED minted tree, which the gate's inventory AND its rendered custom properties omitted, so they rendered as EMPTY custom properties and depressed the score in silence. gate.ts now merges the shipped tree UNDER the fresh mint (fresh-first, shipped-fallback; value divergences named in scorecard.shippedMinted): 44 -> 0 unresolved, 55.333 -> 90.387 pctEqual, cellsCompared UNCHANGED. The committed receipt was RE-RUN through the real harness (pinned @astryxdesign/core@0.1.6 sandbox, scorecard.json + numbers.json double-run byte-identical), so committed and offline agree to three decimals; captured-truth.json, enriched.contract.json and resolved.contract.json came back BYTE-IDENTICAL — the recapture changed the measurement, not the artifact."
     },
     {
       "library": "astryx",
@@ -45,7 +117,7 @@
       "cellsCompared": 1536,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 76.30208333333333,
-      "gapCause": "ENGINE IMPROVED \u2014 absolute-positioning round f52c334 (+1.042). Reproduced 76.302 EXACTLY at 0078020."
+      "gapCause": "ENGINE IMPROVED — absolute-positioning round f52c334 (+1.042). Reproduced 76.302 EXACTLY at 0078020."
     },
     {
       "library": "carbon",
@@ -59,12 +131,12 @@
     {
       "library": "carbon",
       "component": "Button",
-      "rerunPctEqual": 77.57666925465838,
+      "rerunPctEqual": 77.48447204968944,
       "cellsCompared": 20608,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 77.28066770186335,
-      "gapCause": "INSTRUMENT NOISE + A REAL GATE DEFECT THIS ROUND FOUND. Two separate things, both measured. (1) The harness/offline gap (0.28) is NOT a vocabulary or engine difference: cellsCompared is identical (20608) and exactly 58 of 448 rows differ, ALL of them ENABLED rows on the two DRIVEN state planes (42 active/root.outline-color, 16 focus-visible/root.background-color). The harness gate's values are near-misses of the target \u2014 rgba(0,70,206) vs rgba(0,67,206), rgba(58,58,58) vs rgba(57,57,57), rgba(13,96,251) vs rgba(15,98,254), and 13 rows reading a blue-tinted white rgba(229,239,250) where the target is pure rgba(255,255,255). Those are INTERMEDIATE frames of a running transition. (2) THE CAUSE IS AN ENGINE GAP, NAMED NOT FIXED: extract/computed/gate.ts drives an interaction and then waits a FLAT 30ms (`await page.waitForTimeout(30)`), while the CAPTURE sweep polls to two consecutive stable samples for up to 1.5s. Carbon's buttons transition at 70ms, which straddles that window; every library with transitions longer than 30ms has been measured mid-flight, Carbon just makes it legible. Fixing gate.ts moves the number for EVERY library and every committed scorecard, so it is its own round. MEASURED SPREAD of the offline instrument on this row across four consecutive runs: 77.528 / 77.552 / 77.567 / 77.577 \u2014 a 0.049 range, 49x the global 0.001 tolerance, which is why this row carries tolerance 0.08. Every engine-sized move this baseline has ever recorded (+1.042, +2.459, +20.155, -3.296) is far above 0.08, so a real regression still fails this row.",
-      "tolerance": 0.08
+      "gapCause": "INSTRUMENT NOISE + A REAL GATE DEFECT THIS ROUND FOUND. Two separate things, both measured. (1) The harness/offline gap (0.28) is NOT a vocabulary or engine difference: cellsCompared is identical (20608) and exactly 58 of 448 rows differ, ALL of them ENABLED rows on the two DRIVEN state planes (42 active/root.outline-color, 16 focus-visible/root.background-color). The harness gate's values are near-misses of the target — rgba(0,70,206) vs rgba(0,67,206), rgba(58,58,58) vs rgba(57,57,57), rgba(13,96,251) vs rgba(15,98,254), and 13 rows reading a blue-tinted white rgba(229,239,250) where the target is pure rgba(255,255,255). Those are INTERMEDIATE frames of a running transition. (2) THE CAUSE IS AN ENGINE GAP, NAMED NOT FIXED: extract/computed/gate.ts drives an interaction and then waits a FLAT 30ms (`await page.waitForTimeout(30)`), while the CAPTURE sweep polls to two consecutive stable samples for up to 1.5s. Carbon's buttons transition at 70ms, which straddles that window; every library with transitions longer than 30ms has been measured mid-flight, Carbon just makes it legible. Fixing gate.ts moves the number for EVERY library and every committed scorecard, so it is its own round. MEASURED SPREAD of the offline instrument on this row, now across EIGHT runs in two sessions: 77.528 / 77.552 / 77.567 / 77.577 (2026-07-26) and 77.494 / 77.499 / 77.528 / 77.441 (2026-07-27, ALTITUDE round, identical committed inputs and an engine path regate.ts does not touch) — a 0.136 range. The original 0.08 was sized to the first four runs alone and FAILED on the fifth; it is widened to 0.20, sized to the measured 0.136 with headroom, rather than re-pinned silently. Every engine-sized move this baseline has ever recorded (+1.042, +2.459, +20.155, -3.296) is far above 0.08, so a real regression still fails this row.",
+      "tolerance": 0.2
     },
     {
       "library": "carbon",
@@ -190,7 +262,7 @@
       "cellsCompared": 6832,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 87.70491803278688,
-      "gapCause": "ENGINE IMPROVED \u2014 state-plane projection 53792d3 (+2.459). Reproduced 87.705 EXACTLY at its own commit 82d312f."
+      "gapCause": "ENGINE IMPROVED — state-plane projection 53792d3 (+2.459). Reproduced 87.705 EXACTLY at its own commit 82d312f."
     },
     {
       "library": "mui",
@@ -199,7 +271,7 @@
       "cellsCompared": 435,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 95.40229885057471,
-      "gapCause": "MOLECULE LIVE-DEFECT ROUND (round 6): VOCABULARY CHANGE \u2014 the two classless focus-trap sentinels (`<div tabindex=0>` around the modal content) are dropped from the captured anatomy; they draw nothing, contain nothing and lowered to full-bleed invisible frames over the component. cellsCompared 455 -> 435. Those sentinel rows matched nearly perfectly (empty divs), so removing them LOWERS the surviving percentage (95.604 -> 95.402) while the canvas strictly improves. Dialog KEEPS its full-bleed layer root by rule: its scrim is visible anatomy."
+      "gapCause": "MOLECULE LIVE-DEFECT ROUND (round 6): VOCABULARY CHANGE — the two classless focus-trap sentinels (`<div tabindex=0>` around the modal content) are dropped from the captured anatomy; they draw nothing, contain nothing and lowered to full-bleed invisible frames over the component. cellsCompared 455 -> 435. Those sentinel rows matched nearly perfectly (empty divs), so removing them LOWERS the surviving percentage (95.604 -> 95.402) while the canvas strictly improves. Dialog KEEPS its full-bleed layer root by rule: its scrim is visible anatomy."
     },
     {
       "library": "mui",
@@ -208,7 +280,7 @@
       "cellsCompared": 171,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 94.15204678362574,
-      "gapCause": "MOLECULE LIVE-DEFECT ROUND (round 6): VOCABULARY CHANGE \u2014 the portal capture no longer carries MUI's full-bleed `position:fixed; inset:0` Popover LAYER as the root. The demotion drops 4 non-painting elements (the layer itself, the INVISIBLE MuiBackdrop, two classless focus-trap sentinels) and promotes the PAPER; cellsCompared 198 -> 171. The surviving parts are the ones that draw, and they score better (93.434 -> 94.152). Live cause: the generated component was 900x1000 (the capture stage) with the 115x124 paper in its corner."
+      "gapCause": "MOLECULE LIVE-DEFECT ROUND (round 6): VOCABULARY CHANGE — the portal capture no longer carries MUI's full-bleed `position:fixed; inset:0` Popover LAYER as the root. The demotion drops 4 non-painting elements (the layer itself, the INVISIBLE MuiBackdrop, two classless focus-trap sentinels) and promotes the PAPER; cellsCompared 198 -> 171. The surviving parts are the ones that draw, and they score better (93.434 -> 94.152). Live cause: the generated component was 900x1000 (the capture stage) with the 115x124 paper in its corner."
     },
     {
       "library": "mui",
@@ -262,7 +334,7 @@
       "cellsCompared": 129,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 90.69767441860465,
-      "gapCause": "ENGINE IMPROVED \u2014 organism/table-lowering round 3e14f6f (+20.155). Reproduced 70.543 EXACTLY at its own commit aab937b. The harness receipt was RE-RUN by a later round (molecule live-defect round 8dad6b2), so committed and offline now AGREE at 90.698 and the row prints EXACT \u2014 but this baseline's committedPctEqual had been left at the old 70.543. It is a CONTEXT-ONLY field the drift check never compares, which is exactly why it could go stale unnoticed; task #21's re-record corrects it."
+      "gapCause": "ENGINE IMPROVED — organism/table-lowering round 3e14f6f (+20.155). Reproduced 70.543 EXACTLY at its own commit aab937b. The harness receipt was RE-RUN by a later round (molecule live-defect round 8dad6b2), so committed and offline now AGREE at 90.698 and the row prints EXACT — but this baseline's committedPctEqual had been left at the old 70.543. It is a CONTEXT-ONLY field the drift check never compares, which is exactly why it could go stale unnoticed; task #21's re-record corrects it."
     },
     {
       "library": "polaris",
@@ -280,7 +352,7 @@
       "cellsCompared": 22144,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 97.32658959537572,
-      "gapCause": "repaired: FOREIGN decision ledger removed (repair wave #19). extract/computed/out/badge/decisions.json was not a polluted Polaris ledger \u2014 it was the ASTRYX Badge ledger in full (its combo ids are astryx's 14 Badge variants; both rows appear verbatim in out/astryx/badge/decisions.md with identical queue counts; the only commit that ever wrote it is 2f494ab, an astryx round). b66e5a3's namespacing restore covered the GENERATED artifacts but run.ts preserves the human-decision ones, so it survived. Removed along with the stale resolved.contract.json it had produced \u2014 which promote-floor PREFERS, and which would have silently regressed the shipped Badge contract on the next promotion. 2 unresolved refs -> 0, committed number reproduced exactly. Guarded by the apply-time value check + eval decision-ledger-value-check."
+      "gapCause": "repaired: FOREIGN decision ledger removed (repair wave #19). extract/computed/out/badge/decisions.json was not a polluted Polaris ledger — it was the ASTRYX Badge ledger in full (its combo ids are astryx's 14 Badge variants; both rows appear verbatim in out/astryx/badge/decisions.md with identical queue counts; the only commit that ever wrote it is 2f494ab, an astryx round). b66e5a3's namespacing restore covered the GENERATED artifacts but run.ts preserves the human-decision ones, so it survived. Removed along with the stale resolved.contract.json it had produced — which promote-floor PREFERS, and which would have silently regressed the shipped Badge contract on the next promotion. 2 unresolved refs -> 0, committed number reproduced exactly. Guarded by the apply-time value check + eval decision-ledger-value-check."
     },
     {
       "library": "polaris",
@@ -298,7 +370,7 @@
       "cellsCompared": 81120,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 91.33136094674556,
-      "gapCause": "repaired: inheritance-aware nested refusal (repair wave #19). The nested-pair lift (53792d3) minted a BASE colour on the nested label/icon that blocked inheritance of the root's hover/focus-visible colour while every nested per-state delta went uncarried (91.331 -> 85.858). fuse.ts now REFUSES that base binding BY NAME when the capture proves the channel is pure inheritance (equal to its ancestor on all 960 planes) AND its own state delta cannot be carried \u2014 counting BOTH doors, the nested-state vocabulary and the pre-mint stateCodeOnly drop, because label died at the first and icon at the second. Reproduces the committed harness scorecard EXACTLY (74088/81120 cells, 320/960 rows) and the re-fused contract is BYTE-IDENTICAL to the committed enriched.contract.json, so no downstream artifact moved. Pinned by eval nested-inheritance-refusal."
+      "gapCause": "repaired: inheritance-aware nested refusal (repair wave #19). The nested-pair lift (53792d3) minted a BASE colour on the nested label/icon that blocked inheritance of the root's hover/focus-visible colour while every nested per-state delta went uncarried (91.331 -> 85.858). fuse.ts now REFUSES that base binding BY NAME when the capture proves the channel is pure inheritance (equal to its ancestor on all 960 planes) AND its own state delta cannot be carried — counting BOTH doors, the nested-state vocabulary and the pre-mint stateCodeOnly drop, because label died at the first and icon at the second. Reproduces the committed harness scorecard EXACTLY (74088/81120 cells, 320/960 rows) and the re-fused contract is BYTE-IDENTICAL to the committed enriched.contract.json, so no downstream artifact moved. Pinned by eval nested-inheritance-refusal."
     },
     {
       "library": "polaris",
@@ -307,7 +379,7 @@
       "cellsCompared": 2440,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 84.11602209944752,
-      "gapCause": "VOCABULARY CHANGE \u2014 live-paste-2 acb0342 carried sr-only hidden inputs as hidden; cellsCompared 2896 \u2192 2440. The dropped rows scored well, so the surviving % fell. Correct behaviour, moved denominator."
+      "gapCause": "VOCABULARY CHANGE — live-paste-2 acb0342 carried sr-only hidden inputs as hidden; cellsCompared 2896 → 2440. The dropped rows scored well, so the surviving % fell. Correct behaviour, moved denominator."
     },
     {
       "library": "polaris",
@@ -343,7 +415,7 @@
       "cellsCompared": 7353,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 82.05605158730158,
-      "gapCause": "VOCABULARY CHANGE \u2014 same class as Checkbox (acb0342 hidden-input + paint-order); cellsCompared 8064 \u2192 7353."
+      "gapCause": "VOCABULARY CHANGE — same class as Checkbox (acb0342 hidden-input + paint-order); cellsCompared 8064 → 7353."
     },
     {
       "library": "polaris",
@@ -361,7 +433,7 @@
       "cellsCompared": 40832,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.86239193083574,
-      "gapCause": "VOCABULARY CHANGE \u2014 same class (acb0342); cellsCompared 44416 \u2192 40832, % within 0.005 of committed."
+      "gapCause": "VOCABULARY CHANGE — same class (acb0342); cellsCompared 44416 → 40832, % within 0.005 of committed."
     },
     {
       "library": "polaris",

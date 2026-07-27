@@ -1,0 +1,54 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "badge",
+  "anchors": [
+    {
+      "leaf": "imported.badge.root.color.danger",
+      "token": "theme-color-content-danger-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-danger-weak",
+      "selector": ".al-c-badge--danger"
+    },
+    {
+      "leaf": "imported.badge.root.color.info",
+      "token": "theme-color-content-info-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-info-weak",
+      "selector": ".al-c-badge--info"
+    },
+    {
+      "leaf": "imported.badge.root.color.success",
+      "token": "theme-color-content-success-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-success-weak",
+      "selector": ".al-c-badge--success"
+    },
+    {
+      "leaf": "imported.badge.root.color.unset",
+      "token": "theme-color-content-default",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-default",
+      "selector": ".al-c-badge"
+    },
+    {
+      "leaf": "imported.badge.root.color.warning",
+      "token": "theme-color-content-warning-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-warning-weak",
+      "selector": ".al-c-badge--warning"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight",
+      "token": "font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--al-font-weight-bold",
+      "selector": ".al-c-badge"
+    }
+  ]
+}

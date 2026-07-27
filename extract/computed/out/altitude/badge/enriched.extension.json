@@ -1,0 +1,375 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "altitude-web-components@1.0.2",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "badge": {
+        "root": {
+          "background-color": {
+            "unset": {
+              "$value": "#f4f3f1",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#4375ff",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#3ee48c",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ffab00",
+              "$type": "color"
+            },
+            "danger": {
+              "$value": "#f05735",
+              "$type": "color"
+            }
+          },
+          "border-bottom-left-radius": {
+            "default": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "dot": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius": {
+            "default": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "dot": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-left-radius": {
+            "default": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "dot": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius": {
+            "default": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "dot": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "color": {
+            "unset": {
+              "$value": "#101010",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#000b29",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#00190c",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#191100",
+              "$type": "color"
+            },
+            "danger": {
+              "$value": "#1f0600",
+              "$type": "color"
+            }
+          },
+          "column-gap": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "600",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "min-height": {
+            "default": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "dot": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "min-width": {
+            "default": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "dot": {
+              "$value": "8px",
+              "$type": "dimension"
+            }
+          },
+          "padding-left": {
+            "default": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "dot": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "padding-right": {
+            "default": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "dot": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "row-gap": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "row-rule-color": {
+            "unset": {
+              "$value": "#101010",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#000b29",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#00190c",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#191100",
+              "$type": "color"
+            },
+            "danger": {
+              "$value": "#1f0600",
+              "$type": "color"
+            }
+          },
+          "text-indent": {
+            "default": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "dot": {
+              "$value": "9999px",
+              "$type": "dimension"
+            }
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "root",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "max-height",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "max-width",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "none",
+      "distinctValues": 2
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "unset.dot",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "info.dot",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "success.dot",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "warning.dot",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "danger.dot",
+        "interaction": "default",
+        "part": "root",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 5
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: inline-flex",
+      "root-content-carried: the root holds direct text (\"Badge\") with no text-holder child part — bound to text prop \"children\" (MUI Card class)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)"
+  ]
+}

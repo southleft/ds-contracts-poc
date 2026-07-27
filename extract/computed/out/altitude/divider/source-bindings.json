@@ -1,0 +1,60 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Divider",
+  "varPrefix": "--al-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "unset",
+      "axisValues": {
+        "variant": "unset"
+      },
+      "token": "theme-color-border-default",
+      "varName": "--al-theme-color-border-default",
+      "anchor": {
+        "selector": ".al-c-divider"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "vertical",
+      "axisValues": {
+        "variant": "vertical"
+      },
+      "token": "theme-color-border-default",
+      "varName": "--al-theme-color-border-default",
+      "anchor": {
+        "selector": ".al-c-divider"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "height",
+      "combo": "unset",
+      "axisValues": {
+        "variant": "unset"
+      },
+      "token": "theme-border-width",
+      "varName": "--al-theme-border-width",
+      "anchor": {
+        "selector": ".al-c-divider"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "width",
+      "combo": "vertical",
+      "axisValues": {
+        "variant": "vertical"
+      },
+      "token": "theme-border-width",
+      "varName": "--al-theme-border-width",
+      "anchor": {
+        "selector": ".al-c-divider--vertical"
+      }
+    }
+  ],
+  "skips": []
+}

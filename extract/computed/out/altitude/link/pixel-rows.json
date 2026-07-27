@@ -1,0 +1,82 @@
+[
+  {
+    "key": "unset__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unset__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unset__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unset__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "xs__default",
+    "pctExact": 0.5891927083333334,
+    "pctAA": 0.33203125
+  },
+  {
+    "key": "xs__hover",
+    "pctExact": 0.5859375,
+    "pctAA": 0.3255208333333333
+  },
+  {
+    "key": "xs__focus-visible",
+    "pctExact": 1.3444010416666667,
+    "pctAA": 1.0872395833333333
+  },
+  {
+    "key": "xs__active",
+    "pctExact": 0.5891927083333334,
+    "pctAA": 0.33203125
+  },
+  {
+    "key": "sm__default",
+    "pctExact": 0.5533854166666666,
+    "pctAA": 0.3092447916666667
+  },
+  {
+    "key": "sm__hover",
+    "pctExact": 0.5533854166666666,
+    "pctAA": 0.302734375
+  },
+  {
+    "key": "sm__focus-visible",
+    "pctExact": 1.38671875,
+    "pctAA": 1.142578125
+  },
+  {
+    "key": "sm__active",
+    "pctExact": 0.5533854166666666,
+    "pctAA": 0.3092447916666667
+  },
+  {
+    "key": "lg__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

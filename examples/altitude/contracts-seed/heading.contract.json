@@ -1,0 +1,80 @@
+{
+  "id": "altitude.heading",
+  "name": "Heading",
+  "semantics": {
+    "element": "h2"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "display-lg",
+          "display-md",
+          "display-sm",
+          "lg",
+          "md",
+          "sm"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "display-lg": "Display Lg",
+            "display-md": "Display Md",
+            "display-sm": "Display Sm",
+            "lg": "Lg",
+            "md": "Md",
+            "sm": "Sm"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "weight",
+      "type": {
+        "enum": [
+          "regular",
+          "bold"
+        ]
+      },
+      "default": "regular",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Weight",
+          "values": {
+            "regular": "Regular",
+            "bold": "Bold"
+          }
+        },
+        "code": {
+          "prop": "isBold"
+        }
+      }
+    }
+  ],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the ALTITUDE round \u2014 props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS \u2014 the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY \u2014 measured identical background, cursor and opacity \u2014 and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-heading. `tagName` EXCLUDED BY NAME: it is a SEMANTIC axis (h1..h6), not a visual one \u2014 and it SHADOWS the built-in `Element.prototype.tagName`, so on every instance `el.tagName` reads 'h2' instead of 'AL-HEADING'. Held at its default (h2, the only defaulted enum in the library).",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "altitude-web-components",
+      "export": "al-heading"
+    }
+  },
+  "states": []
+}

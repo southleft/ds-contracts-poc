@@ -1,0 +1,127 @@
+{
+  "library": {
+    "__note": "THE FIRST SHADOW-DOM SUBJECT. Every component's CSS lives in shadowRoot.adoptedStyleSheets (Lit static styles) — document.styleSheets carries ZERO component rules — and every component's rendered box lives inside an open shadow root. See extract/computed/capture.ts SHADOW_HELPERS_JS for the two captured-root policies and examples/altitude/PROVENANCE.md for what each one was measured against.",
+    "package": "altitude-web-components",
+    "version": "1.0.2",
+    "framework": "react",
+    "customElements": true,
+    "classPrefix": "al-c-",
+    "classAllow": "^al-(c|u)-(?!.*--)[a-z_-]+$",
+    "varPrefix": "--al-"
+  },
+  "mount": {
+    "__note": "LOAD-BEARING, THREE WAYS. (1) preScript sets globalThis.alAutoRegistry BEFORE the bundle evaluates — an `imports` line cannot, because ES import hoisting runs the library first, and WITHOUT the flag not one top-level tag registers (<al-button> stays an unknown element that renders its light children and nothing else). (2) headStyles puts style#al-theme-sheet in the document BEFORE the first connectedCallback — ALElement.getGlobalStyles() looks that id up ONCE, memoizes it on globalThis, adopts a stripped copy into every shadow root, and console.errors 'Altitude style#al-theme-sheet not found' otherwise; the tokens themselves are STRIPPED from that copy by the library and reach components by INHERITANCE from :root in the light DOM, so the same <style> is doing both jobs. (3) tokens-light.css is appended AFTER main.css because main.css's own :root block is the DARK set (322 names, dark values) — loading main.css alone gives a dark page under a light colorScheme. The Google-Fonts @import is stripped by the engine (quoted-string-aware; a naive [^;]+ strip cuts inside the URL's own semicolons and silently voids the whole :root token block — 323 custom properties to 0 with no error anywhere).",
+    "imports": ["import 'altitude-web-components';"],
+    "preScript": ["globalThis.alAutoRegistry = true;"],
+    "headStyles": [
+      {
+        "id": "al-theme-sheet",
+        "files": [
+          "node_modules/altitude-web-components/dist/css/main.css",
+          "node_modules/altitude-web-components/dist/css/tokens-light.css"
+        ]
+      }
+    ],
+    "wrapperOpen": "<>",
+    "wrapperClose": "</>"
+  },
+  "tokens": {
+    "__note": "varPrefix is --al-, NOT --al-theme-: the reader's tokenName() strips the prefix to get the DTCG leaf path, and Altitude carries BOTH tiers in one namespace (208 primitives + 115 semantic aliases). Prefixing at --al-theme- would leave every direct primitive reference unbindable. The recon's objection — that the ~40 UNDEFINED per-component escape hatches (--al-button-padding, --al-toggle-width) would crowd the candidates — is wrong and was measured: an undefined custom property computes to the empty string and the reader drops empty candidates before scoring them.",
+    "dtcg": ["examples/altitude/tokens/altitude.dtcg.json"],
+    "css": "examples/altitude/tokens/altitude.vars.css",
+    "minted": "examples/altitude/tokens/altitude-minted.dtcg.json"
+  },
+  "browser": {
+    "viewport": { "width": 900, "height": 1000 },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": { "width": 320, "height": 96, "padding": 16 },
+  "enumeration": {
+    "__note": "unsetLabel is \"unset\", not the drafter's \"__unset\" (underscores are outside the contract token-ref character class and fail ContractSchema.parse with errors that never mention the underscore — the Carbon lesson). It matters more here than anywhere: EVERY enum in this library is defaultless, so the pseudo-value is a segment of a minted token path on every single component.",
+    "cartesianLimit": 512,
+    "unsetLabel": "unset"
+  },
+  "components": [
+    {
+      "__note": "variant is DEFAULTLESS and there is NO 'primary' value — primary IS the unset axis value. The captured root is button.al-c-button inside the shadow root; the host <al-button> draws nothing (the library's purgecss build deletes its :host rule) and is recorded as the descent trail. `isDisabled` DROPPED: measured aria-disabled only, with bg/cursor/opacity identical to enabled.",
+      "name": "Button",
+      "importName": "al-button",
+      "contract": "examples/altitude/contracts-seed/button.contract.json",
+      "sampleText": "Button",
+      "axes": ["variant"]
+    },
+    {
+      "__note": "isDot is a prop-selected RENDERING (a modifier class plus an ::after), so it is a VARIANT AXIS through $props, not a state and not a presence prop (it creates no subtree). `position` is not an axis at all — it mutates parentElement.style.",
+      "name": "Badge",
+      "importName": "al-badge",
+      "contract": "examples/altitude/contracts-seed/badge.contract.json",
+      "sampleText": "Badge",
+      "axes": ["variant", "dot"],
+      "axisValueMap": {
+        "dot": {
+          "default": { "$props": {} },
+          "dot": { "$props": { "isDot": true } }
+        }
+      }
+    },
+    {
+      "name": "Chip",
+      "importName": "al-chip",
+      "contract": "examples/altitude/contracts-seed/chip.contract.json",
+      "sampleText": "Chip",
+      "axes": ["variant", "type"]
+    },
+    {
+      "__note": "href PINNED: the shadow template swaps its ROOT between <a> and <button> on this prop, so an unset href would make the anatomy a function of a non-axis. The value leaks into the root's classList verbatim (class=\"al-c-link #al\") — a real library defect; classAllow drops it.",
+      "name": "Link",
+      "importName": "al-link",
+      "contract": "examples/altitude/contracts-seed/link.contract.json",
+      "sampleText": "Link",
+      "axes": ["variant"],
+      "fixedProps": { "href": "#al" }
+    },
+    {
+      "__note": "THE DEPTH-2 CASE. hasBadge mounts a nested <al-badge> — a custom element with its OWN shadow root — inside the avatar's shadow tree. The reader keeps the nested HOST as an element (it occupies a real box in its parent's layout and is the inheritance link its inner box reads) and descends into ITS shadow root for children; only the CAPTURED ROOT descends past a host.",
+      "name": "Avatar",
+      "importName": "al-avatar",
+      "contract": "examples/altitude/contracts-seed/avatar.contract.json",
+      "sampleText": "AB",
+      "axes": ["variant"],
+      "presenceProps": [{ "prop": "hasBadge", "libraryProp": "hasBadge", "value": true }]
+    },
+    {
+      "__note": "blockStage: a heading is a display:block element and shrink-to-fits inside the flex stage. tagName is held at its default h2 and is NOT an axis (semantic, and it shadows Element.prototype.tagName).",
+      "name": "Heading",
+      "importName": "al-heading",
+      "contract": "examples/altitude/contracts-seed/heading.contract.json",
+      "sampleText": "Heading",
+      "axes": ["variant", "weight"],
+      "axisValueMap": {
+        "weight": {
+          "regular": { "$props": {} },
+          "bold": { "$props": { "isBold": true } }
+        }
+      },
+      "blockStage": true,
+      "stage": { "width": 360, "height": 120, "padding": 16 }
+    },
+    {
+      "__note": "blockStage is REQUIRED, not cosmetic: measured 0x1px in the default flex stage (an <hr> is a shrink-to-fit flex item) and 288x1px in a block formatting context. The vertical variant then measures 1x64px in the same stage.",
+      "name": "Divider",
+      "importName": "al-divider",
+      "contract": "examples/altitude/contracts-seed/divider.contract.json",
+      "sampleText": "",
+      "axes": ["variant"],
+      "blockStage": true
+    },
+    {
+      "__note": "The svg-promotion path reached through the shadow reader: the glyph is an inline <svg> inside al-icon-close's shadow root. size is defaultless (unset renders 16px) and is the widest axis in the round at 8 values.",
+      "name": "IconClose",
+      "importName": "al-icon-close",
+      "contract": "examples/altitude/contracts-seed/iconclose.contract.json",
+      "sampleText": "",
+      "axes": ["size"]
+    }
+  ]
+}

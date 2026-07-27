@@ -709,6 +709,18 @@ async function main() {
               animationPinning: `infinite CSS animations pinned at currentTime 0 (paused) — the captured value is each animation's own 0% keyframe, a deterministic point of the declared animation; finite animations/transitions untouched. Pinned: ${run1.pinnedAnimations.join(', ')}`,
             }
           : {}),
+        // SHADOW-DOM ROUND — the descent receipt. Present only when the reader
+        // actually crossed an open shadow boundary, so every light-DOM
+        // library's provenance block is byte-unchanged.
+        ...(Object.keys(run1.shadowHostTrails).length > 0
+          ? {
+              shadowDescent:
+                'CAPTURED ROOT POLICY (shadow DOM): a custom-element HOST draws nothing of its own here (the published bundle ships no :host rules — the library\'s purgecss step deletes them), so the captured root is the first BOX-DRAWING element of its open shadow root and the host chain descended past is recorded per combo below. <slot> nodes are read as their assignedNodes() in rendered order; the host\'s light children are never walked directly, so slotted content is neither lost nor duplicated.',
+              shadowHostTrails: Object.fromEntries(
+                Object.entries(run1.shadowHostTrails).filter(([k]) => k.startsWith(`${comp.name}:`)),
+              ),
+            }
+          : {}),
         interactionDrivers: comp.portalCapture
           ? {
               portalCapture: `baseline-diff portal reader (capture.portalSweep): the component's DOM contribution captured wherever React put it (portaled overlays included), one combo mounted at a time, DEFAULT interaction ONLY — overlay hover/focus/active states are a NAMED residual of the molecule round. Open-driver props: ${JSON.stringify(comp.openDriver ?? {})}`,

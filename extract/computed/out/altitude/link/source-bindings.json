@@ -1,0 +1,60 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Link",
+  "varPrefix": "--al-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unset",
+      "axisValues": {
+        "variant": "unset"
+      },
+      "token": "theme-color-content-primary-default",
+      "varName": "--al-theme-color-content-primary-default",
+      "anchor": {
+        "selector": ".al-c-link"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "xs",
+      "axisValues": {
+        "variant": "xs"
+      },
+      "token": "theme-color-content-primary-default",
+      "varName": "--al-theme-color-content-primary-default",
+      "anchor": {
+        "selector": ".al-c-link"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "sm",
+      "axisValues": {
+        "variant": "sm"
+      },
+      "token": "theme-color-content-primary-default",
+      "varName": "--al-theme-color-content-primary-default",
+      "anchor": {
+        "selector": ".al-c-link"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "lg",
+      "axisValues": {
+        "variant": "lg"
+      },
+      "token": "theme-color-content-primary-default",
+      "varName": "--al-theme-color-content-primary-default",
+      "anchor": {
+        "selector": ".al-c-link"
+      }
+    }
+  ],
+  "skips": []
+}

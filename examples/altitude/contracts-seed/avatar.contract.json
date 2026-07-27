@@ -1,0 +1,47 @@
+{
+  "id": "altitude.avatar",
+  "name": "Avatar",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "sm"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "sm": "Sm"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the ALTITUDE round \u2014 props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS \u2014 the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY \u2014 measured identical background, cursor and opacity \u2014 and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-avatar. `hasBadge` rides the PRESENCE-PROP vocabulary (it creates a DOM subtree \u2014 a nested <al-badge> custom element with its OWN shadow root, which is the depth-2 case this round exercises). `badgeVariant` held at its default.",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "altitude-web-components",
+      "export": "al-avatar"
+    }
+  },
+  "states": []
+}

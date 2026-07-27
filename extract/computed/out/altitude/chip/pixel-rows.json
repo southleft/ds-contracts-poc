@@ -1,0 +1,242 @@
+[
+  {
+    "key": "unset.unset__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unset.unset__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unset.unset__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unset.unset__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unset.squared__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unset.squared__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unset.squared__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unset.squared__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.unset__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.unset__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.unset__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.unset__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.squared__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.squared__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.squared__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.squared__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.unset__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.unset__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.unset__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.unset__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.squared__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.squared__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.squared__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.squared__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.unset__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.unset__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.unset__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.unset__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.squared__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.squared__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.squared__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.squared__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.unset__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.unset__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.unset__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.unset__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.squared__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.squared__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.squared__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.squared__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "danger.unset__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "danger.unset__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "danger.unset__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "danger.unset__active",
+    "pctExact": 0.026041666666666668,
+    "pctAA": 0
+  },
+  {
+    "key": "danger.squared__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "danger.squared__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "danger.squared__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "danger.squared__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

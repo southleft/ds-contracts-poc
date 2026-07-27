@@ -55,6 +55,7 @@ const LIBRARIES: Array<{ name: string; config: string; out: string }> = [
   { name: 'astryx', config: 'extract/computed/configs/astryx.json', out: 'extract/computed/out/astryx' },
   { name: 'tailwind', config: 'extract/computed/configs/tailwind.json', out: 'extract/computed/out/tailwind' },
   { name: 'carbon', config: 'extract/computed/configs/carbon.json', out: 'extract/computed/out/carbon' },
+  { name: 'altitude', config: 'extract/computed/configs/altitude.json', out: 'extract/computed/out/altitude' },
 ];
 
 interface BaselineRow {

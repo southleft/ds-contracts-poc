@@ -1,0 +1,102 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "chip",
+  "anchors": [
+    {
+      "leaf": "imported.chip.root.background-color.danger",
+      "token": "theme-color-background-danger-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-danger-default",
+      "selector": ".al-c-chip--danger"
+    },
+    {
+      "leaf": "imported.chip.root.background-color.info",
+      "token": "theme-color-background-info-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-info-default",
+      "selector": ".al-c-chip--info"
+    },
+    {
+      "leaf": "imported.chip.root.background-color.secondary",
+      "token": "theme-color-background-transparent-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-transparent-default",
+      "selector": ".al-c-chip--secondary"
+    },
+    {
+      "leaf": "imported.chip.root.background-color.success",
+      "token": "theme-color-background-success-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-success-default",
+      "selector": ".al-c-chip--success"
+    },
+    {
+      "leaf": "imported.chip.root.background-color.unset",
+      "token": "theme-color-background-default-strong",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-default-strong",
+      "selector": ".al-c-chip"
+    },
+    {
+      "leaf": "imported.chip.root.background-color.warning",
+      "token": "theme-color-background-warning-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-warning-default",
+      "selector": ".al-c-chip--warning"
+    },
+    {
+      "leaf": "imported.chip.root.color.danger",
+      "token": "theme-color-content-danger-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-danger-weak",
+      "selector": ".al-c-chip--danger"
+    },
+    {
+      "leaf": "imported.chip.root.color.info",
+      "token": "theme-color-content-info-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-info-weak",
+      "selector": ".al-c-chip--info"
+    },
+    {
+      "leaf": "imported.chip.root.color.secondary",
+      "token": "theme-color-content-default-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-default-weak",
+      "selector": ".al-c-chip"
+    },
+    {
+      "leaf": "imported.chip.root.color.success",
+      "token": "theme-color-content-success-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-success-weak",
+      "selector": ".al-c-chip--success"
+    },
+    {
+      "leaf": "imported.chip.root.color.unset",
+      "token": "theme-color-content-default-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-default-weak",
+      "selector": ".al-c-chip"
+    },
+    {
+      "leaf": "imported.chip.root.color.warning",
+      "token": "theme-color-content-warning-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-warning-weak",
+      "selector": ".al-c-chip--warning"
+    }
+  ]
+}

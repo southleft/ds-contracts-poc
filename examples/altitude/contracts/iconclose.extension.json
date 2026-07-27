@@ -1,0 +1,152 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "altitude-web-components@1.0.2",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "icon-close": {
+        "root": {
+          "color": {
+            "$value": "#101010",
+            "$type": "color"
+          },
+          "line-height": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "min-height": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "min-width": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "width": {
+            "unset": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "xs": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "md": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "xl": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "xxl": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
+            "xxxl": {
+              "$value": "40px",
+              "$type": "dimension"
+            }
+          }
+        }
+      }
+    }
+  },
+  "folds": [],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
+    "svg-host-color-carried: root — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "control-fallback: no control for <svg> — span control used (part icon)",
+    "control-fallback: no control for <path> — span control used (part part-0-0)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root"
+    ],
+    "svgAssets": [
+      "icon-close-root-lg",
+      "icon-close-root-md",
+      "icon-close-root-sm",
+      "icon-close-root-unset",
+      "icon-close-root-xl",
+      "icon-close-root-xs",
+      "icon-close-root-xxl",
+      "icon-close-root-xxxl"
+    ],
+    "receipts": [
+      "svg-viewbox-bumped: IconClose.root@unset — computed size 16 < path extent 17.6; viewBox reconstructed as 0 0 18 18 (named reconstruction)",
+      "svg-viewbox-bumped: IconClose.root@xs — computed size 8 < path extent 17.6; viewBox reconstructed as 0 0 18 18 (named reconstruction)",
+      "svg-viewbox-bumped: IconClose.root@sm — computed size 12 < path extent 17.6; viewBox reconstructed as 0 0 18 18 (named reconstruction)",
+      "svg-viewbox-reconstructed: IconClose.root@md — 0 0 20 20 from computed size 20×20 (path extent 17.6; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: IconClose.root@lg — 0 0 24 24 from computed size 24×24 (path extent 17.6; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: IconClose.root@xl — 0 0 32 32 from computed size 32×32 (path extent 17.6; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: IconClose.root@xxl — 0 0 36 36 from computed size 36×36 (path extent 17.6; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: IconClose.root@xxxl — 0 0 40 40 from computed size 40×40 (path extent 17.6; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-unified: IconClose.root@unset — bumped 0 0 18 18 adopts the sibling capture's authored space 0 0 40 40 (identical path data drawn where the computed box bounds the extent — the package's own viewBox; round 5c)",
+      "svg-viewbox-unified: IconClose.root@xs — bumped 0 0 18 18 adopts the sibling capture's authored space 0 0 40 40 (identical path data drawn where the computed box bounds the extent — the package's own viewBox; round 5c)",
+      "svg-viewbox-unified: IconClose.root@sm — bumped 0 0 18 18 adopts the sibling capture's authored space 0 0 40 40 (identical path data drawn where the computed box bounds the extent — the package's own viewBox; round 5c)",
+      "root-svg-plan-carried: IconClose root hosts 8 per-value glyph part(s) (icon-close-root-unset, icon-close-root-xs, icon-close-root-sm, icon-close-root-md, icon-close-root-lg, icon-close-root-xl, icon-close-root-xxl, icon-close-root-xxxl) — round 5c root-hosted svg plan (the round-5a named promotion drop)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)"
+  ]
+}

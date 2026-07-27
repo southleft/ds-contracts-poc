@@ -62,9 +62,9 @@ better, and Altitude (§9) is the next one.
 
 ## 2. The test vectors
 
-**Six distinct libraries across seven rounds** (Polaris runs twice: a census
-config and a depth/Modal config). Five are in the standing offline drift
-instrument; a seventh library is in flight (§9).
+**Seven distinct libraries across eight rounds** (Polaris runs twice: a census
+config and a depth/Modal config). **Six** are in the standing offline drift
+instrument, 54 rows in total; the newest — a shadow-DOM library — is §9.
 
 ### The styling-architecture matrix
 
@@ -77,11 +77,25 @@ instrument; a seventh library is in flight (§9).
 | 5 | `flowbite-react@0.12.17` on `tailwindcss@4.3.3` | **Tailwind v4 utilities** | `@theme` → `--color-*`, `--radius-*`, oklch | the same CSS-vars reader | `--` | `^$` (keep nothing) |
 | 6 | `@shopify/polaris@13.9.5` (depth config) | as #2 | as #2 | as #2 | — | — |
 | 7 | `@carbon/react@1.112.0` + `@carbon/styles@1.111.0` | **precompiled CSS** (955 KB, no build step) | 366 `--cds-*` in theme *class scopes* | the same CSS-vars reader | `--cds-` | `^cds--(?!.*--)` |
+| 8 | `altitude-web-components@1.0.2` | **Lit 3 SHADOW DOM** — every component's CSS in `shadowRoot.adoptedStyleSheets` | 323 `--al-*` at light-DOM `:root`, inherited across the shadow boundary | the same CSS-vars reader, made **per-root** | `--al-` | `^al-(c\|u)-(?!.*--)[a-z_-]+$` |
 
-Four distinct styling architectures — build-time atomic, runtime CSS-in-JS,
-utility-first, and precompiled stylesheets — plus two token-delivery shapes
-(`:root` vs class-scoped themes). The tier-1 guarantee in
-[docs/16](16-sync-boundary.md) is exactly this set.
+Five distinct styling architectures — build-time atomic, runtime CSS-in-JS,
+utility-first, precompiled stylesheets, and **shadow DOM** — plus three
+token-delivery shapes (`:root`, class-scoped themes, and `:root` values
+*inherited across a shadow boundary* into constructed stylesheets). The tier-1
+guarantee in [docs/16](16-sync-boundary.md) is exactly this set.
+
+Library #8 is the one that cost real engine work, and it is worth being precise
+about how much: **one engine file** (`extract/computed/capture.ts`), and every
+change in it is a general open-shadow-DOM rule that is a *no-op* on a page
+without shadow roots — the reader collects CSSOM rules per `el.getRootNode()`
+instead of per document, descends a shadow host to the box-drawing element that
+actually paints, splices `<slot>` into its `assignedNodes()`, and walks shadow
+trees in the settle poll, the form-state reset and the focus-visible receipt.
+Byte-identity for the seven light-DOM libraries was proven by re-capture, not
+asserted (`examples/altitude/PROVENANCE.md`). It is also the round that shows the
+generality claim has teeth in the other direction: **a config-only round was not
+possible here**, and saying so is the point.
 
 The load-bearing observation from the Tailwind round is worth restating,
 because it is the cheapest generality result in the repo: **Tailwind v4 is
@@ -102,6 +116,7 @@ Counted from the committed token trees (`examples/<lib>/tokens/*.dtcg.json`):
 | mui | 150 | 1,498 | 73 | 1,425 | shadows serialize differently (value verification refuses); `calc(var(--mui-spacing)*N)` excluded by name |
 | tailwind | 68 | 276 | 21 | 255 | Flowbite's `primary` palette is `@theme inline` — utilities compile to literal `#1A56DB`, by the library's own choice |
 | carbon | 339 | 1,120 | 94 | 1,026 | **the family split** (below) |
+| altitude | 323 | 349 | 41 | 310 | **the shorthand ceiling** — the reader carries LONGHAND facts only, and 95 of Altitude's 231 `var()`-carrying declarations are shorthands (`font` ×36, `background` ×19, `border-radius` ×14, `padding`, `gap`, `transition`…). This one is a READER gap, not a library property; measured and named in `examples/altitude/PROVENANCE.md` |
 
 *Astryx's 54 are **not** extraction facts. They are a human review ledger
 (`examples/astryx/tokens/reanchor-decisions.json`, 19 acked alias rows + 2
@@ -157,17 +172,18 @@ a declared-but-missing `tokens.minted` path refuses by name; `childWrap` +
 `CONTRACT_STATES` refuses by name — that last one added *after* MUI Switch
 silently minted channel names no emitter could render (§5).
 
-**The ratio.** 1,281 lines of config across the **six committed** configs,
-against ~29,000 lines of engine (`extract/computed/*.ts` ≈ 9.4k, `core/*.ts`
-≈ 19.6k). Roughly 1:23. (A seventh, `altitude.json`, is in flight — §9 — and is
-already adding config *keys* rather than engine branches: `customElements`,
-`preScript`, `headStyles`.)
+**The ratio.** ~1,400 lines of config across the **seven committed** configs,
+against ~29,000 lines of engine (`extract/computed/*.ts` ≈ 9.6k, `core/*.ts`
+≈ 19.6k). Roughly 1:21. The newest, `altitude.json`, added config *keys* rather
+than library branches (`customElements`, `preScript`, `headStyles`) — but it
+also added general reader rules to the engine, which is §9's point.
 
 | config | lines |
 |---|---|
 | `polaris.json` | 475 |
 | `mui.json` | 391 |
 | `carbon.json` | 189 |
+| `altitude.json` | 127 |
 | `astryx.json` | 113 |
 | `tailwind.json` | 71 |
 | `polaris-depth.json` | 42 |
@@ -339,7 +355,7 @@ focus-visible half is not.
 ## 6. The general vocabulary, discovered through libraries
 
 Every rule below is stated without naming a vendor; the parenthesis is the
-library that exposed it. This is the actual product of seven rounds.
+library that exposed it. This is the actual product of eight rounds.
 
 - **`max-width` is a ceiling, not a width.** A part binds the ceiling and hugs
   beneath it; a component *root* keeps the design-width lowering, because a root
@@ -403,20 +419,26 @@ What makes a library-specific hack expensive rather than merely discouraged:
 
 | instrument | what it pins | how to run |
 |---|---|---|
-| **Eval suite** | 162/162 as of `evals/results.json` — 21 refusal, 28 determinism, 40 detection, 54 extraction, 3 convergence, 4 CLI, 11 journey, 1 theming | `npm run eval` |
+| **Eval suite** | 163/163 as of `evals/results.json` — 21 refusal, 28 determinism, 40 detection, 54 extraction, 3 convergence, 4 CLI, 12 journey, 1 theming | `npm run eval` |
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
-| **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
+| **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |
-| **Offline drift instrument** | 46 rows across 5 libraries, per component: `pctEqual` within tolerance, `cellsCompared` **exactly** (a moved denominator is a vocabulary change and must be acknowledged), `unresolvedTokenRefs` exactly, and a hard fail if a component stops fusing | `npm run extract:computed:drift` |
+| **Offline drift instrument** | 54 rows across 6 libraries, per component: `pctEqual` within tolerance, `cellsCompared` **exactly** (a moved denominator is a vocabulary change and must be acknowledged), `unresolvedTokenRefs` exactly, and a hard fail if a component stops fusing | `npm run extract:computed:drift` |
 | **Double-run byte identity** | every capture is swept twice in one session; unstable channels fail the run and the refusal **names its witness** (capture key, element path + signature, both values) | part of `npm run extract:computed` |
 | **Shipped-contract refs resolve** | every shipped contract resolves every token ref against its library's inventory | `shipped-contract-refs-resolve` eval |
 | **Gate inventory = shipped inventory** | the gate measures against the token set the shipped contract can actually see; withholding the shipped tree must bring the unresolved refs back (the falsification half) | `gate-inventory-shipped-minted` eval |
 
 The drift baseline is what makes cross-library damage a number rather than a
-vibe. Its 46 rows, recorded 2026-07-26: mui 14, polaris 12, carbon 10, astryx 5,
-tailwind 5. `28f4d85` reports "drift 46/46 with **zero pre-existing rows
-moved**" — adding a whole library moved no other library's number. That sentence
-is the thesis, measured.
+vibe. Its 54 rows: mui 14, polaris 12, carbon 10, altitude 8, astryx 5,
+tailwind 5. `28f4d85` reported "drift 46/46 with **zero pre-existing rows
+moved**" for library #7; the shadow-DOM round repeated it for library #8 — 45 of
+the 46 pre-existing rows came back EXACT, and the one that moved is `carbon/Button`,
+whose own `gapCause` already documents it as the 30 ms gate-settle instrument
+noise. Eight further runs on identical inputs measured that row across
+77.441 … 77.577 (a 0.136 spread), so its own tolerance was **widened to 0.20 and
+the measurement written next to it** — never re-pinned silently. Adding a whole
+library, this time one that required real engine work, still moved no other
+library's number. That sentence is the thesis, measured.
 
 It is deliberately **not** an eval: it renders a real headless Chromium per
 component, ~8–20s each, ~5–6 minutes total, against a ~10-minute eval suite. The
@@ -513,7 +535,7 @@ these is an apology; a document without this section is marketing.
 
 - **Web DOM only.** Every capture is a browser-computed fact from a headless
   Chromium page. The tier-1 supported set in [docs/16](16-sync-boundary.md) is
-  React and Web Components (CEM) with four styling methods. Non-DOM renderers
+  React and Web Components (CEM) with five styling methods. Non-DOM renderers
   (React Native, Flutter, native toolkits) are outside the computed floor
   entirely — not "not yet", but not on this path.
 - **Behavior, motion, and a11y semantics beyond states** are downstream
@@ -526,33 +548,47 @@ these is an apology; a document without this section is marketing.
 
 ---
 
-## 9. Altitude — in flight, no results claimed
+## 9. Altitude — landed, and the counterexample §1 needed
 
-A seventh library and a fifth styling architecture is in flight as this is
-written: **`altitude-web-components@1.0.2` — Lit web components, shadow DOM**.
-It is the first subject whose CSS lives in `shadowRoot.adoptedStyleSheets` (the
-document's own `styleSheets` carry zero component rules) and whose every
-rendered box lives inside an open shadow root.
+**`altitude-web-components@1.0.2` — Lit 3 web components, open SHADOW DOM** is
+library #8 and the fifth styling architecture. It is the first subject whose CSS
+lives in `shadowRoot.adoptedStyleSheets` (the document's own `styleSheets` carry
+**zero** component rules) and whose every rendered box lives inside a shadow
+root. Eight components, 59 combos, 236 captures, all double-run byte-identical;
+41 variant cells and 672 Figma variables through the unchanged genesis path
+(`examples/altitude/PROVENANCE.md`).
 
-At the time of writing there is an **uncommitted** capture config
-(`extract/computed/configs/altitude.json`), an uncommitted sandbox, and
-in-progress shadow-piercing work in `capture.ts`. There is **no committed
-contract, no scorecard, and no drift baseline row.** Nothing about Altitude is
-claimed here, and no number in this document includes it.
+**It is also the round that partially falsifies the config-only reading of §1,
+and that is the most useful thing about it.** It cost **one engine file**
+(`extract/computed/capture.ts`) — not a config-only round, and not a
+library-branch round either. Every change is a general open-shadow-DOM rule that
+is a *no-op* where there are no shadow roots:
 
-Two things about it are worth flagging in advance, because they bear directly on
-§1's metric:
+| change | the general rule |
+|---|---|
+| per-root CSSOM collection | rules come from `el.getRootNode()`, not from `document` — which is also the correct cascade |
+| root descent | a shadow HOST that draws nothing is not the component; the first box-drawing element of its shadow root is |
+| `<slot>` splice | a slot is a distribution point with `display: contents`; its rendered stand-in is `assignedNodes()` |
+| shadow-walking settle poll / form reset / focus-visible receipt | `querySelectorAll` does not pierce shadow roots, and each of the three was silently wrong rather than merely blind |
 
-- It has already required **new config keys** (`customElements`, `preScript`,
-  `headStyles`) rather than new library branches — which is the shape the thesis
-  predicts, but it is a prediction until the round closes.
-- Its config `__note` fields already read like the Carbon round's: three
-  load-bearing mount facts, each stating what silently produced zero facts
-  without it. That the failure mode is *silence* is exactly what §8's ledger is
-  about.
+Byte-identity for the seven light-DOM libraries was **proven by re-capture, not
+asserted**: three components across two libraries were re-captured through the
+changed engine and diffed (`examples/altitude/PROVENANCE.md`, "CROSS-LIBRARY
+BYTE-IDENTITY PROOF"), and the 46 pre-existing drift rows were re-measured.
 
-When it lands it becomes the second control case for §1, and the first test of
-whether the computed floor reads through a shadow boundary at all.
+New **config keys** (`customElements`, `preScript`, `headStyles`) carried the
+mount recipe, exactly as the thesis predicts — but the reader itself had to
+learn a new DOM shape, and no amount of config would have taught it. §1's metric
+should be read with that distinction in it: *library knowledge* stayed in config;
+*platform knowledge* did not, and should not.
+
+The round's own headline defect is worth recording here because it is a
+generality lesson in reverse: `al-toggle` was dropped because the **published
+package renders it 0×0** — the library's purgecss build deletes bare `:host`
+rules, including the two custom properties the toggle sizes itself from. The
+same build step deletes `:host{display:contents}` from 29 of the 65 components.
+Capturing the *published artifact* rather than the source is what made that
+visible.
 
 ---
 
@@ -565,10 +601,10 @@ Figma account or a network call except `npm install`.
 npm install
 
 # ── the claim's own numbers ────────────────────────────────────────────────
-npm run eval                       # 162/162 as of evals/results.json
+npm run eval                       # 163/163 as of evals/results.json
 node -e "const r=require('./evals/results.json');console.log(r.passed+'/'+r.total)"
 
-# 46 drift rows, per library
+# 54 drift rows, per library
 node -e "const b=require('./extract/computed/regate-baseline.json');
 const by={};for(const r of b.rows)(by[r.library]??=[]).push(r.component);
 console.log(b.recordedAt);for(const k in by)console.log(k,by[k].length)"
@@ -578,7 +614,7 @@ wc -l extract/computed/configs/*.json
 cat extract/computed/*.ts core/*.ts | wc -l
 
 # ── the engine audit (§3): no dispatch on library identity ─────────────────
-grep -nE "=== *'(polaris|mui|astryx|tailwind|carbon)'" extract/computed/*.ts core/*.ts
+grep -nE "=== *'(polaris|mui|astryx|tailwind|carbon|altitude)'" extract/computed/*.ts core/*.ts
 # → no output. Then the four leaks, each a single line:
 grep -n "PORTAL_PREFIX = " extract/computed/anatomy.ts          # L2
 grep -n "includes('--')" extract/computed/lib.ts                # L1
@@ -633,13 +669,15 @@ it deliberately, alone, and say what moved.
 
 **Claimed, with receipts above:**
 - No engine code dispatches on library identity.
-- Four unrelated styling architectures and five vendors run through one
-  pipeline, sharing one CSS-vars reader across three of them.
+- Five unrelated styling architectures and six vendors run through one
+  pipeline, sharing one CSS-vars reader across four of them — including a
+  shadow-DOM library, where the same reader was made per-root rather than
+  replaced.
 - Engine-change cost per library trends down, and the newest library
   (10 components, a fifth architecture) cost one expression — a latent bug.
 - Fixes found via one library demonstrably repaired others in the same commit,
   with the sibling diffs reviewed rather than blind-repinned.
-- 46 drift rows and 162 evals make cross-library damage a number.
+- 54 drift rows and the eval suite make cross-library damage a number.
 
 **Not claimed:**
 - That library knowledge lives *only* in config. It does not — see L1–L4.
@@ -647,7 +685,8 @@ it deliberately, alone, and say what moved.
   history of needing engine changes per styling method; that cost is gap G6 in
   [docs/18](18-user-flows.md), not a solved problem.
 - That the supported set is "all design systems." It is React + Web Components
-  on the web DOM, four styling methods, per [docs/16](16-sync-boundary.md).
+  on the web DOM (light DOM and open shadow DOM), five styling methods, per
+  [docs/16](16-sync-boundary.md).
   Everything outside degrades gracefully — correct pixels, poorer token names —
   and graduates via a community reader plugin under the open spec.
 - Anything at all about Altitude.

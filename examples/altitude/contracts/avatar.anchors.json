@@ -1,0 +1,30 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "avatar",
+  "anchors": [
+    {
+      "leaf": "imported.avatar.badge.z-index",
+      "token": "z-index-400",
+      "part": "badge",
+      "cssProperty": "z-index",
+      "varName": "--al-z-index-400",
+      "selector": ".al-c-badge--top-left, .al-c-badge--top-right, .al-c-badge--bottom-left, .al-c-badge--bottom-right"
+    },
+    {
+      "leaf": "imported.avatar.root.line-height.sm",
+      "token": "theme-icon-xl",
+      "part": "root",
+      "cssProperty": "line-height",
+      "varName": "--al-theme-icon-xl",
+      "selector": ".al-c-avatar--sm"
+    },
+    {
+      "leaf": "imported.avatar.root.line-height.unset",
+      "token": "theme-icon-xxxl",
+      "part": "root",
+      "cssProperty": "line-height",
+      "varName": "--al-theme-icon-xxxl",
+      "selector": ".al-c-avatar"
+    }
+  ]
+}

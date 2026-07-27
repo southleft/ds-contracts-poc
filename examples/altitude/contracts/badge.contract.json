@@ -1,0 +1,167 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "altitude.badge",
+  "name": "Badge",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the ALTITUDE round — props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS — the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY — measured identical background, cursor and opacity — and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-badge. `position` EXCLUDED BY NAME: `handlePosition()` mutates `this.parentElement.style.position` — a component that writes to the DOM OUTSIDE itself has no anatomy the contract can carry, and the mutation would make the captured stage a function of the combo. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of altitude-web-components@1.0.2 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/altitude/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Altitude's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "danger": "Danger"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "dot",
+      "type": {
+        "enum": [
+          "default",
+          "dot"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Dot",
+          "values": {
+            "default": "Default",
+            "dot": "Dot"
+          }
+        },
+        "code": {
+          "prop": "isDot"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Badge",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "content": {
+        "prop": "children"
+      },
+      "declared": {
+        "box-sizing": "border-box"
+      },
+      "tokens": {
+        "background-color": "{imported.badge.root.background-color.unset}",
+        "color": "{imported.badge.root.color.unset}",
+        "column-gap": "{imported.badge.root.column-gap}",
+        "font-size": "{imported.badge.root.font-size}",
+        "font-weight": "{imported.badge.root.font-weight}",
+        "line-height": "{imported.badge.root.line-height}",
+        "row-gap": "{imported.badge.root.row-gap}",
+        "row-rule-color": "{imported.badge.root.row-rule-color.unset}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "dot",
+          "map": {
+            "default": {
+              "border-bottom-left-radius": "{imported.badge.root.border-bottom-left-radius.default}",
+              "border-bottom-right-radius": "{imported.badge.root.border-bottom-right-radius.default}",
+              "border-top-left-radius": "{imported.badge.root.border-top-left-radius.default}",
+              "border-top-right-radius": "{imported.badge.root.border-top-right-radius.default}",
+              "min-height": "{imported.badge.root.min-height.default}",
+              "min-width": "{imported.badge.root.min-width.default}",
+              "padding-left": "{imported.badge.root.padding-left.default}",
+              "padding-right": "{imported.badge.root.padding-right.default}",
+              "text-indent": "{imported.badge.root.text-indent.default}"
+            },
+            "dot": {
+              "border-bottom-left-radius": "{imported.badge.root.border-bottom-left-radius.dot}",
+              "border-bottom-right-radius": "{imported.badge.root.border-bottom-right-radius.dot}",
+              "border-top-left-radius": "{imported.badge.root.border-top-left-radius.dot}",
+              "border-top-right-radius": "{imported.badge.root.border-top-right-radius.dot}",
+              "min-height": "{imported.badge.root.min-height.dot}",
+              "min-width": "{imported.badge.root.min-width.dot}",
+              "padding-left": "{imported.badge.root.padding-left.dot}",
+              "padding-right": "{imported.badge.root.padding-right.dot}",
+              "text-indent": "{imported.badge.root.text-indent.dot}"
+            }
+          }
+        },
+        {
+          "prop": "variant",
+          "map": {
+            "danger": {
+              "background-color": "{imported.badge.root.background-color.danger}",
+              "color": "{imported.badge.root.color.danger}",
+              "row-rule-color": "{imported.badge.root.row-rule-color.danger}"
+            },
+            "info": {
+              "background-color": "{imported.badge.root.background-color.info}",
+              "color": "{imported.badge.root.color.info}",
+              "row-rule-color": "{imported.badge.root.row-rule-color.info}"
+            },
+            "success": {
+              "background-color": "{imported.badge.root.background-color.success}",
+              "color": "{imported.badge.root.color.success}",
+              "row-rule-color": "{imported.badge.root.row-rule-color.success}"
+            },
+            "warning": {
+              "background-color": "{imported.badge.root.background-color.warning}",
+              "color": "{imported.badge.root.color.warning}",
+              "row-rule-color": "{imported.badge.root.row-rule-color.warning}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "altitude-web-components",
+      "export": "al-badge"
+    }
+  }
+}

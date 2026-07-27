@@ -107,10 +107,13 @@ The known edges, so nobody discovers them the hard way:
 ## The supported set (the scope decision, 2026-07-25)
 
 Guaranteed, gated, first-party: **React and Web Components (CEM)** component
-libraries, with four styling methods — **CSS Modules, Emotion (CSS-variables
-mode), StyleX, and Tailwind**. All four readers are built and receipted
-(CSS Modules/Polaris, StyleX/Astryx, Emotion/MUI, Tailwind v4/Flowbite —
-`examples/tailwind/`). Everything outside this set
+libraries, with five styling methods — **CSS Modules, Emotion (CSS-variables
+mode), StyleX, Tailwind, and open SHADOW DOM (Lit)**. All are built and
+receipted (CSS Modules/Polaris + Carbon, StyleX/Astryx, Emotion/MUI,
+Tailwind v4/Flowbite — `examples/tailwind/`, shadow DOM/Altitude —
+`examples/altitude/`). Shadow DOM is qualified: **open** roots only (a closed
+root is not readable from the page and is a named refusal, not a gap), and
+depth-2 nesting is exercised while depth-3 is not yet. Everything outside this set
 is **explicitly not a core promise**: it runs through the computed floor's
 graceful degradation (correct pixels, literal token names) and graduates to
 full support only as a *reader plugin* — community-contributed under the

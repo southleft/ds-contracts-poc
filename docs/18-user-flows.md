@@ -155,7 +155,7 @@ components.*
    pass drafts a full `CaptureConfig`, every non-inferable field carries a
    `__review` marker, and the capture runner **refuses an unreviewed draft
    by name** — draft is not approved. That converts authoring into
-   reviewing; it does not remove the expert step, and six libraries have
+   reviewing; it does not remove the expert step, and seven libraries have
    now been onboarded this way (`extract/computed/configs/`).
 
 **The lead's minute-5 version of the same cliff:** pasting a real

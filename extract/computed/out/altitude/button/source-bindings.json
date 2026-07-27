@@ -1,0 +1,203 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Button",
+  "varPrefix": "--al-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "unset",
+      "axisValues": {
+        "variant": "unset"
+      },
+      "token": "theme-color-background-primary-default",
+      "varName": "--al-theme-color-background-primary-default",
+      "anchor": {
+        "selector": ".al-c-button"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "secondary",
+      "axisValues": {
+        "variant": "secondary"
+      },
+      "token": "theme-color-background-secondary-default",
+      "varName": "--al-theme-color-background-secondary-default",
+      "anchor": {
+        "selector": ".al-c-button--secondary"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "tertiary",
+      "axisValues": {
+        "variant": "tertiary"
+      },
+      "token": "theme-color-background-transparent-default",
+      "varName": "--al-theme-color-background-transparent-default",
+      "anchor": {
+        "selector": ".al-c-button--tertiary"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "bare",
+      "axisValues": {
+        "variant": "bare"
+      },
+      "token": "theme-color-background-transparent-default",
+      "varName": "--al-theme-color-background-transparent-default",
+      "anchor": {
+        "selector": ".al-c-button--bare"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "danger",
+      "axisValues": {
+        "variant": "danger"
+      },
+      "token": "theme-color-background-danger-default",
+      "varName": "--al-theme-color-background-danger-default",
+      "anchor": {
+        "selector": ".al-c-button--danger"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unset",
+      "axisValues": {
+        "variant": "unset"
+      },
+      "token": "theme-color-content-primary-weak",
+      "varName": "--al-theme-color-content-primary-weak",
+      "anchor": {
+        "selector": ".al-c-button"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "secondary",
+      "axisValues": {
+        "variant": "secondary"
+      },
+      "token": "theme-color-content-secondary-weak",
+      "varName": "--al-theme-color-content-secondary-weak",
+      "anchor": {
+        "selector": ".al-c-button--secondary"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "tertiary",
+      "axisValues": {
+        "variant": "tertiary"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-button--tertiary"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "bare",
+      "axisValues": {
+        "variant": "bare"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-button--bare"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "danger",
+      "axisValues": {
+        "variant": "danger"
+      },
+      "token": "theme-color-content-danger-weak",
+      "varName": "--al-theme-color-content-danger-weak",
+      "anchor": {
+        "selector": ".al-c-button--danger"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "unset",
+      "axisValues": {
+        "variant": "unset"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-button"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "secondary",
+      "axisValues": {
+        "variant": "secondary"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-button"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "tertiary",
+      "axisValues": {
+        "variant": "tertiary"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-button"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "bare",
+      "axisValues": {
+        "variant": "bare"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-button"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "danger",
+      "axisValues": {
+        "variant": "danger"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-button"
+      }
+    }
+  ],
+  "skips": []
+}

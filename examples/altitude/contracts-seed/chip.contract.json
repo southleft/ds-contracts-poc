@@ -1,0 +1,75 @@
+{
+  "id": "altitude.chip",
+  "name": "Chip",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "secondary",
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "secondary": "Secondary",
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "danger": "Danger"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "squared"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "squared": "Squared"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    }
+  ],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the ALTITUDE round \u2014 props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS \u2014 the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY \u2014 measured identical background, cursor and opacity \u2014 and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-chip. `isDismissible` DEFERRED BY NAME: it mounts a nested <al-icon-close> (a second shadow root inside this one) and `close()` mutates the HOST's classList \u2014 a depth-2 presence subtree with a self-mutating driver, out of round 1.",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "altitude-web-components",
+      "export": "al-chip"
+    }
+  },
+  "states": []
+}

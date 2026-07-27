@@ -1,11 +1,14 @@
 # 21 · Bring Your Own Design System
 
-*The onboarding path for a stranger's library. Six distinct libraries across
-seven rounds have now gone through this pipeline — four styling methods —
+*The onboarding path for a stranger's library. Seven distinct libraries across
+eight rounds have now gone through this pipeline — five styling methods —
 and **not one of them was special-cased in the engine**. This page is the recipe
 those rounds actually followed, written so the next one can follow it without an
 engine change — and honest about the three places where it is still craft rather
-than procedure.*
+than procedure. Round 8 (a shadow-DOM library) is the honest counterexample to
+the "no engine change" reading of that sentence: it needed general new reader
+rules — not library-specific ones — and `examples/altitude/PROVENANCE.md` says
+so in its first section.*
 
 ---
 

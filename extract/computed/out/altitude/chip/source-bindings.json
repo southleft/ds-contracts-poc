@@ -1,0 +1,344 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Chip",
+  "varPrefix": "--al-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "unset.unset",
+      "axisValues": {
+        "variant": "unset",
+        "type": "unset"
+      },
+      "token": "theme-color-background-default-strong",
+      "varName": "--al-theme-color-background-default-strong",
+      "anchor": {
+        "selector": ".al-c-chip"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "unset.squared",
+      "axisValues": {
+        "variant": "unset",
+        "type": "squared"
+      },
+      "token": "theme-color-background-default-strong",
+      "varName": "--al-theme-color-background-default-strong",
+      "anchor": {
+        "selector": ".al-c-chip"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "secondary.unset",
+      "axisValues": {
+        "variant": "secondary",
+        "type": "unset"
+      },
+      "token": "theme-color-background-transparent-default",
+      "varName": "--al-theme-color-background-transparent-default",
+      "anchor": {
+        "selector": ".al-c-chip--secondary"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "secondary.squared",
+      "axisValues": {
+        "variant": "secondary",
+        "type": "squared"
+      },
+      "token": "theme-color-background-transparent-default",
+      "varName": "--al-theme-color-background-transparent-default",
+      "anchor": {
+        "selector": ".al-c-chip--secondary"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.unset",
+      "axisValues": {
+        "variant": "info",
+        "type": "unset"
+      },
+      "token": "theme-color-background-info-default",
+      "varName": "--al-theme-color-background-info-default",
+      "anchor": {
+        "selector": ".al-c-chip--info"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.squared",
+      "axisValues": {
+        "variant": "info",
+        "type": "squared"
+      },
+      "token": "theme-color-background-info-default",
+      "varName": "--al-theme-color-background-info-default",
+      "anchor": {
+        "selector": ".al-c-chip--info"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.unset",
+      "axisValues": {
+        "variant": "success",
+        "type": "unset"
+      },
+      "token": "theme-color-background-success-default",
+      "varName": "--al-theme-color-background-success-default",
+      "anchor": {
+        "selector": ".al-c-chip--success"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.squared",
+      "axisValues": {
+        "variant": "success",
+        "type": "squared"
+      },
+      "token": "theme-color-background-success-default",
+      "varName": "--al-theme-color-background-success-default",
+      "anchor": {
+        "selector": ".al-c-chip--success"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.unset",
+      "axisValues": {
+        "variant": "warning",
+        "type": "unset"
+      },
+      "token": "theme-color-background-warning-default",
+      "varName": "--al-theme-color-background-warning-default",
+      "anchor": {
+        "selector": ".al-c-chip--warning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.squared",
+      "axisValues": {
+        "variant": "warning",
+        "type": "squared"
+      },
+      "token": "theme-color-background-warning-default",
+      "varName": "--al-theme-color-background-warning-default",
+      "anchor": {
+        "selector": ".al-c-chip--warning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "danger.unset",
+      "axisValues": {
+        "variant": "danger",
+        "type": "unset"
+      },
+      "token": "theme-color-background-danger-default",
+      "varName": "--al-theme-color-background-danger-default",
+      "anchor": {
+        "selector": ".al-c-chip--danger"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "danger.squared",
+      "axisValues": {
+        "variant": "danger",
+        "type": "squared"
+      },
+      "token": "theme-color-background-danger-default",
+      "varName": "--al-theme-color-background-danger-default",
+      "anchor": {
+        "selector": ".al-c-chip--danger"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unset.unset",
+      "axisValues": {
+        "variant": "unset",
+        "type": "unset"
+      },
+      "token": "theme-color-content-default-weak",
+      "varName": "--al-theme-color-content-default-weak",
+      "anchor": {
+        "selector": ".al-c-chip"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unset.squared",
+      "axisValues": {
+        "variant": "unset",
+        "type": "squared"
+      },
+      "token": "theme-color-content-default-weak",
+      "varName": "--al-theme-color-content-default-weak",
+      "anchor": {
+        "selector": ".al-c-chip"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "secondary.unset",
+      "axisValues": {
+        "variant": "secondary",
+        "type": "unset"
+      },
+      "token": "theme-color-content-default-weak",
+      "varName": "--al-theme-color-content-default-weak",
+      "anchor": {
+        "selector": ".al-c-chip"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "secondary.squared",
+      "axisValues": {
+        "variant": "secondary",
+        "type": "squared"
+      },
+      "token": "theme-color-content-default-weak",
+      "varName": "--al-theme-color-content-default-weak",
+      "anchor": {
+        "selector": ".al-c-chip"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.unset",
+      "axisValues": {
+        "variant": "info",
+        "type": "unset"
+      },
+      "token": "theme-color-content-info-weak",
+      "varName": "--al-theme-color-content-info-weak",
+      "anchor": {
+        "selector": ".al-c-chip--info"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.squared",
+      "axisValues": {
+        "variant": "info",
+        "type": "squared"
+      },
+      "token": "theme-color-content-info-weak",
+      "varName": "--al-theme-color-content-info-weak",
+      "anchor": {
+        "selector": ".al-c-chip--info"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success.unset",
+      "axisValues": {
+        "variant": "success",
+        "type": "unset"
+      },
+      "token": "theme-color-content-success-weak",
+      "varName": "--al-theme-color-content-success-weak",
+      "anchor": {
+        "selector": ".al-c-chip--success"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success.squared",
+      "axisValues": {
+        "variant": "success",
+        "type": "squared"
+      },
+      "token": "theme-color-content-success-weak",
+      "varName": "--al-theme-color-content-success-weak",
+      "anchor": {
+        "selector": ".al-c-chip--success"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning.unset",
+      "axisValues": {
+        "variant": "warning",
+        "type": "unset"
+      },
+      "token": "theme-color-content-warning-weak",
+      "varName": "--al-theme-color-content-warning-weak",
+      "anchor": {
+        "selector": ".al-c-chip--warning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning.squared",
+      "axisValues": {
+        "variant": "warning",
+        "type": "squared"
+      },
+      "token": "theme-color-content-warning-weak",
+      "varName": "--al-theme-color-content-warning-weak",
+      "anchor": {
+        "selector": ".al-c-chip--warning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "danger.unset",
+      "axisValues": {
+        "variant": "danger",
+        "type": "unset"
+      },
+      "token": "theme-color-content-danger-weak",
+      "varName": "--al-theme-color-content-danger-weak",
+      "anchor": {
+        "selector": ".al-c-chip--danger"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "danger.squared",
+      "axisValues": {
+        "variant": "danger",
+        "type": "squared"
+      },
+      "token": "theme-color-content-danger-weak",
+      "varName": "--al-theme-color-content-danger-weak",
+      "anchor": {
+        "selector": ".al-c-chip--danger"
+      }
+    }
+  ],
+  "skips": []
+}

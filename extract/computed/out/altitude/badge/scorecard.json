@@ -1,0 +1,991 @@
+{
+  "component": "Badge",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 10,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 1280,
+    "cellsEqual": 1200,
+    "pctEqual": 93.75,
+    "rowsFullyEqual": 0,
+    "rows": 40
+  },
+  "pixel": {
+    "pairs": 40,
+    "perfectExact": 0,
+    "perfectAA": 4,
+    "meanExact": 6.734374999999998,
+    "meanAA": 5.050455729166666,
+    "maxAA": 11.129557291666666
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 38,
+    "mintedLeavesUnfolded": 83,
+    "baseBindings": 17,
+    "stateBindings": 0,
+    "codeOnlyChannels": 2,
+    "overflowBindings": 0,
+    "folds": 9
+  },
+  "worstRows": [
+    {
+      "key": "info.dot__default",
+      "pctAA": 11.129557291666666,
+      "pctExact": 11.305338541666666,
+      "channelsMismatched": 3
+    },
+    {
+      "key": "info.dot__hover",
+      "pctAA": 11.129557291666666,
+      "pctExact": 11.305338541666666,
+      "channelsMismatched": 3
+    },
+    {
+      "key": "info.dot__focus-visible",
+      "pctAA": 11.129557291666666,
+      "pctExact": 11.305338541666666,
+      "channelsMismatched": 3
+    },
+    {
+      "key": "info.dot__active",
+      "pctAA": 11.129557291666666,
+      "pctExact": 11.305338541666666,
+      "channelsMismatched": 3
+    },
+    {
+      "key": "success.dot__default",
+      "pctAA": 11.129557291666666,
+      "pctExact": 11.305338541666666,
+      "channelsMismatched": 3
+    },
+    {
+      "key": "success.dot__hover",
+      "pctAA": 11.129557291666666,
+      "pctExact": 11.305338541666666,
+      "channelsMismatched": 3
+    },
+    {
+      "key": "success.dot__focus-visible",
+      "pctAA": 11.129557291666666,
+      "pctExact": 11.305338541666666,
+      "channelsMismatched": 3
+    },
+    {
+      "key": "success.dot__active",
+      "pctAA": 11.129557291666666,
+      "pctExact": 11.305338541666666,
+      "channelsMismatched": 3
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.display",
+      40
+    ],
+    [
+      "root.max-height",
+      20
+    ],
+    [
+      "root.max-width",
+      20
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.max-height — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: root.max-width — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
+    "leavesAdded": 311,
+    "divergent": [
+      {
+        "token": "imported.badge.root.color.danger",
+        "fresh": "#1f0600",
+        "shipped": "{theme-color-content-danger-weak}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.root.color.info",
+        "fresh": "#000b29",
+        "shipped": "{theme-color-content-info-weak}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.root.color.success",
+        "fresh": "#00190c",
+        "shipped": "{theme-color-content-success-weak}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.root.color.unset",
+        "fresh": "#101010",
+        "shipped": "{theme-color-content-default}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.root.color.warning",
+        "fresh": "#191100",
+        "shipped": "{theme-color-content-warning-weak}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.badge.root.font-weight",
+        "fresh": "600",
+        "shipped": "{font-weight-bold}",
+        "resolvedEqual": true
+      }
+    ]
+  },
+  "rows": [
+    {
+      "key": "unset.default__default",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 0.6705729166666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "unset.default__hover",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 0.6705729166666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "unset.default__focus-visible",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 0.6705729166666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "unset.default__active",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 0.6705729166666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "unset.dot__default",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.295572916666666,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "unset.dot__hover",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.295572916666666,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "unset.dot__focus-visible",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.295572916666666,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "unset.dot__active",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.295572916666666,
+      "pctAA": 0,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "info.default__default",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.3118489583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "info.default__hover",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.3118489583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "info.default__focus-visible",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.3118489583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "info.default__active",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.3118489583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "info.dot__default",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "info.dot__hover",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "info.dot__focus-visible",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "info.dot__active",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "success.default__default",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.34765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "success.default__hover",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.34765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "success.default__focus-visible",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.34765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "success.default__active",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.34765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "success.dot__default",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "success.dot__hover",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "success.dot__focus-visible",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "success.dot__active",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "warning.default__default",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "warning.default__hover",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "warning.default__focus-visible",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "warning.default__active",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "warning.dot__default",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.30859375,
+      "pctAA": 11.106770833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "warning.dot__hover",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.30859375,
+      "pctAA": 11.106770833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "warning.dot__focus-visible",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.30859375,
+      "pctAA": 11.106770833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "warning.dot__active",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.30859375,
+      "pctAA": 11.106770833333334,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "danger.default__default",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.318359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "danger.default__hover",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.318359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "danger.default__focus-visible",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.318359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "danger.default__active",
+      "channelsCompared": 32,
+      "channelsEqual": 31,
+      "pctExact": 2.1647135416666665,
+      "pctAA": 1.318359375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        }
+      ]
+    },
+    {
+      "key": "danger.dot__default",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "danger.dot__hover",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "danger.dot__focus-visible",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    },
+    {
+      "key": "danger.dot__active",
+      "channelsCompared": 32,
+      "channelsEqual": 29,
+      "pctExact": 11.305338541666666,
+      "pctAA": 11.129557291666666,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "max-height",
+          "ours": "none",
+          "theirs": "8px"
+        },
+        {
+          "part": "root",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "8px"
+        }
+      ]
+    }
+  ]
+}

@@ -1145,10 +1145,41 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
     const [lv, dv] = modes.map(hx);
     assert(lv === '#f4f4f4' && dv === '#262626', `carbon layer-01 resolves .cds--white #f4f4f4 / .cds--g100 #262626 (got ${lv} / ${dv}) — if these were equal the Dark mode would be the Light theme wearing a different label`);
   }
+  // ALTITUDE ROUND (library #8, the FIRST SHADOW-DOM subject): the same engine
+  // path again, on a library whose every contract part was read from INSIDE an
+  // open shadow root. Two pins beyond "it builds":
+  //   (1) THE DEPTH-2 PART. al-avatar's `hasBadge` mounts a nested <al-badge>
+  //       — a custom element with its OWN shadow root — inside the avatar's
+  //       shadow tree. The promoted contract carries the nested HOST and its
+  //       inner box as parts, so the built canvas must too. If the reader had
+  //       stopped at the first shadow boundary this set would be a bare circle.
+  //   (2) REAL MODES from two shipped stylesheets (tokens-light/dark.css).
+  //       Altitude's dark mode is THIN by its own choice — brand and status
+  //       colours are identical in both — so the pin targets a token that does
+  //       move rather than asserting a large diff that does not exist.
+  const altitude = await exercise('examples/altitude/figma/altitude.bundle.json', 'Altitude', 8);
+  assert(altitude.built === 8, `altitude bundle builds all 8 shadow-DOM components (got ${altitude.built})`);
+  {
+    const content = altitude.byName.get('theme-color-content-default');
+    assert(content, 'altitude bundle emits the base token theme-color-content-default');
+    const modes = Object.values(content.valuesByMode);
+    assert(modes.length === 2, `altitude theme-color-content-default carries TWO modes (got ${modes.length})`);
+    const hx = (v) => `#${['r', 'g', 'b'].map((k) => Math.round((v[k] || 0) * 255).toString(16).padStart(2, '0')).join('')}`;
+    const [lv, dv] = modes.map(hx);
+    assert(lv === '#101010' && dv === '#f8f8f6', `altitude theme-color-content-default resolves tokens-light #101010 / tokens-dark #f8f8f6 (got ${lv} / ${dv}) — equal values would mean the alias chain was resolved against ONE block instead of each mode's own`);
+    // (1) the depth-2 part, read off the bundle's own contract payload.
+    const altBundle = JSON.parse(read('examples/altitude/figma/altitude.bundle.json'));
+    const avatar = (altBundle.contracts ?? []).find((c) => String(c.id) === 'altitude.avatar');
+    assert(avatar, 'altitude bundle carries the altitude.avatar contract');
+    const avatarJson = JSON.stringify(avatar);
+    for (const part of ['avatar__badge', 'badge']) {
+      assert(avatarJson.includes(`"${part}"`), `altitude.avatar carries the "${part}" part — read from a shadow root NESTED inside another shadow root (depth-2)`);
+    }
+  }
   const docs = await exercise('examples/astryx/figma/astryx-docs.bundle.json', 'Astryx (docs theme)', 13);
   assert(docs.built === 13 && docs.vars === astryx.vars, `docs-theme bundle builds the same 13 with the same variable count (${docs.built}, ${docs.vars} vs ${astryx.vars})`);
   assert(docs.aliases === astryx.aliases, `docs-theme bundle carries the SAME ${astryx.aliases} minted aliases — re-anchoring is what makes them re-theme (got ${docs.aliases})`);
-  console.log(`✔ sibling bundles — astryx (13 built, ${astryx.vars} vars, ${astryx.aliases} re-anchored minted aliases resolving the unchanged neutral light values), polaris (12 built incl. 22 embedded icons, ${polaris.vars} vars), astryx docs-theme (13 built, same inventory re-skinned, same ${docs.aliases} aliases — these ${docs.aliases} now DO re-theme): carbon (10 built, ${carbon.vars} vars, Light/Dark = .cds--white/.cds--g100 proven distinct on layer-01): the JSON-only rule holds for EVERY example round through the real engine path`);
+  console.log(`✔ sibling bundles — astryx (13 built, ${astryx.vars} vars, ${astryx.aliases} re-anchored minted aliases resolving the unchanged neutral light values), polaris (12 built incl. 22 embedded icons, ${polaris.vars} vars), altitude (8 built from SHADOW-DOM captures, ${altitude.vars} vars, depth-2 nested-shadow parts intact, Light/Dark proven distinct on theme-color-content-default), astryx docs-theme (13 built, same inventory re-skinned, same ${docs.aliases} aliases — these ${docs.aliases} now DO re-theme): carbon (10 built, ${carbon.vars} vars, Light/Dark = .cds--white/.cds--g100 proven distinct on layer-01): the JSON-only rule holds for EVERY example round through the real engine path`);
 }
 
 console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles)');

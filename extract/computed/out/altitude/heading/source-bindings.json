@@ -1,0 +1,302 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Heading",
+  "varPrefix": "--al-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unset.regular",
+      "axisValues": {
+        "variant": "unset",
+        "weight": "regular"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "unset.bold",
+      "axisValues": {
+        "variant": "unset",
+        "weight": "bold"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "display-lg.regular",
+      "axisValues": {
+        "variant": "display-lg",
+        "weight": "regular"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "display-lg.bold",
+      "axisValues": {
+        "variant": "display-lg",
+        "weight": "bold"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "display-md.regular",
+      "axisValues": {
+        "variant": "display-md",
+        "weight": "regular"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "display-md.bold",
+      "axisValues": {
+        "variant": "display-md",
+        "weight": "bold"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "display-sm.regular",
+      "axisValues": {
+        "variant": "display-sm",
+        "weight": "regular"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "display-sm.bold",
+      "axisValues": {
+        "variant": "display-sm",
+        "weight": "bold"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "lg.regular",
+      "axisValues": {
+        "variant": "lg",
+        "weight": "regular"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "lg.bold",
+      "axisValues": {
+        "variant": "lg",
+        "weight": "bold"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "md.regular",
+      "axisValues": {
+        "variant": "md",
+        "weight": "regular"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "md.bold",
+      "axisValues": {
+        "variant": "md",
+        "weight": "bold"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "sm.regular",
+      "axisValues": {
+        "variant": "sm",
+        "weight": "regular"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "sm.bold",
+      "axisValues": {
+        "variant": "sm",
+        "weight": "bold"
+      },
+      "token": "theme-color-content-default",
+      "varName": "--al-theme-color-content-default",
+      "anchor": {
+        "selector": ".al-c-heading"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "unset.bold",
+      "axisValues": {
+        "variant": "unset",
+        "weight": "bold"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-heading.al-is-bold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "display-lg.bold",
+      "axisValues": {
+        "variant": "display-lg",
+        "weight": "bold"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-heading.al-is-bold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "display-md.bold",
+      "axisValues": {
+        "variant": "display-md",
+        "weight": "bold"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-heading.al-is-bold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "display-sm.bold",
+      "axisValues": {
+        "variant": "display-sm",
+        "weight": "bold"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-heading.al-is-bold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "lg.bold",
+      "axisValues": {
+        "variant": "lg",
+        "weight": "bold"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-heading.al-is-bold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "md.bold",
+      "axisValues": {
+        "variant": "md",
+        "weight": "bold"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-heading.al-is-bold"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "sm.bold",
+      "axisValues": {
+        "variant": "sm",
+        "weight": "bold"
+      },
+      "token": "font-weight-bold",
+      "varName": "--al-font-weight-bold",
+      "anchor": {
+        "selector": ".al-c-heading.al-is-bold"
+      }
+    }
+  ],
+  "skips": []
+}

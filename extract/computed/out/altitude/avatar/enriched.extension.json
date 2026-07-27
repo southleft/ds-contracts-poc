@@ -1,0 +1,356 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "altitude-web-components@1.0.2",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "avatar": {
+        "root": {
+          "background-color": {
+            "$value": "#f4f3f1",
+            "$type": "color"
+          },
+          "border-bottom-left-radius": {
+            "unset": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius": {
+            "unset": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-left-radius": {
+            "unset": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius": {
+            "unset": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          },
+          "font-size": {
+            "unset": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          },
+          "line-height": {
+            "unset": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "avatar-badge": {
+          "font-size": {
+            "unset": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          },
+          "line-height": {
+            "unset": {
+              "$value": "40px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "32px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "badge": {
+          "background-color": {
+            "$value": "#f4f3f1",
+            "$type": "color"
+          },
+          "column-gap": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "left": {
+            "unset": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "line-height": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "row-gap": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "text-indent": {
+            "$value": "9999px",
+            "$type": "dimension"
+          },
+          "top": {
+            "unset": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "24px",
+              "$type": "dimension"
+            }
+          },
+          "z-index": {
+            "$value": "400",
+            "$type": "number"
+          }
+        }
+      },
+      "shared": {
+        "num-600": {
+          "$value": "600",
+          "$type": "number"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "root",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "badge",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "badge",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "avatar__badge",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "badge",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "badge",
+        "channel": "text-align",
+        "value": "center"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "bottom",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "left",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "position",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "static",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "right",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    },
+    {
+      "part": "root",
+      "channel": "top",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 2
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [
+      {
+        "combo": "unset.on",
+        "interaction": "default",
+        "part": "badge",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      },
+      {
+        "combo": "sm.on",
+        "interaction": "default",
+        "part": "badge",
+        "pseudo": "::after",
+        "deltaVsDefault": {
+          "content": "\"\""
+        }
+      }
+    ],
+    "totalFindings": 2
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "structureReceipts": [
+    "union-part-added: unset.on__default @0 (al-badge|avatar__badge)",
+    "union-part-added: unset.on__default @0.0 (div|badge)"
+  ],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: root — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: avatar__badge — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: badge — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "control-fallback: no control for <al-badge> — span control used (part avatar__badge)",
+    "inheritance-check-rejected: badge.text-indent — values track ancestor \"avatar__badge\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: avatar__badge.font-size equals ancestor \"root\" on all 8 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: avatar__badge.font-weight equals ancestor \"root\" on all 8 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: avatar__badge.line-height equals ancestor \"root\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: badge.font-weight equals ancestor \"avatar__badge\" on all 8 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "avatar__badge",
+        "join": "computed-only"
+      },
+      {
+        "part": "badge",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "avatar__badge",
+      "badge"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "presence-prop-added: hasBadge (boolean, default false; library prop hasBadge)",
+      "root-display-carried: flex",
+      "presence-carried: avatar__badge (2/4 combos) → visibleWhen hasBadge",
+      "presence-carried: badge (2/4 combos) → visibleWhen hasBadge",
+      "root-content-carried: the root holds direct text (\"AB\") with no text-holder child part — bound to text prop \"children\" (MUI Card class)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: badge.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: badge.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: avatar__badge.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: avatar__badge.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge.text-align = center (v15 declared vocabulary — canvas-drawable)"
+  ]
+}

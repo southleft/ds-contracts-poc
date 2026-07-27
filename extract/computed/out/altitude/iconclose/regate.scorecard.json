@@ -1,0 +1,403 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "IconClose",
+  "config": "extract/computed/configs/altitude.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "IconClose",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 8,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 160,
+      "cellsEqual": 160,
+      "pctEqual": 100,
+      "rowsFullyEqual": 32,
+      "rows": 32
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "meanExact": 0,
+      "meanAA": 0,
+      "maxAA": 0
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 12,
+      "mintedLeavesUnfolded": 12,
+      "baseBindings": 5,
+      "stateBindings": 0,
+      "codeOnlyChannels": 0,
+      "overflowBindings": 0,
+      "folds": 0
+    },
+    "worstRows": [
+      {
+        "key": "unset__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "unset__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "unset__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "unset__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "xs__default",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "xs__hover",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "xs__focus-visible",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      },
+      {
+        "key": "xs__active",
+        "pctAA": 100,
+        "pctExact": 100,
+        "channelsMismatched": 0
+      }
+    ],
+    "topMismatchedChannels": [],
+    "namedLosses": [],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
+      "leavesAdded": 337,
+      "divergent": []
+    },
+    "rows": [
+      {
+        "key": "unset__default",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset__hover",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset__focus-visible",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "unset__active",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xs__default",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xs__hover",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xs__focus-visible",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xs__active",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "sm__default",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "sm__hover",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "sm__focus-visible",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "sm__active",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "md__default",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "md__hover",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "md__focus-visible",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "md__active",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "lg__default",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "lg__hover",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "lg__focus-visible",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "lg__active",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xl__default",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xl__hover",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xl__focus-visible",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xl__active",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xxl__default",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xxl__hover",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xxl__focus-visible",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xxl__active",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xxxl__default",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xxxl__hover",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xxxl__focus-visible",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "xxxl__active",
+        "channelsCompared": 5,
+        "channelsEqual": 5,
+        "pctExact": 100,
+        "pctAA": 100,
+        "mismatches": [],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

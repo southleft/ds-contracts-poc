@@ -187,6 +187,7 @@ async function main() {
       browserVersion: String(truth._provenance.browser ?? 'committed'),
       fontChecks: {},
       pinnedAnimations: [],
+      shadowHostTrails: {},
     };
 
     const aligned = alignSweep(sweep, comp, space, cfg.library.classPrefix);

@@ -1,0 +1,59 @@
+{
+  "id": "altitude.iconclose",
+  "name": "IconClose",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "xxl",
+          "xxxl"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg",
+            "xl": "Xl",
+            "xxl": "Xxl",
+            "xxxl": "Xxxl"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "$schema": "./contract.schema.json",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the ALTITUDE round \u2014 props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS \u2014 the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY \u2014 measured identical background, cursor and opacity \u2014 and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-icon-close. One of 37 SEPARATE icon ELEMENTS (there is no `al-icon name=...` router in the shipped bundle) \u2014 the glyph is an inline <svg> inside the shadow root, which is the svg-promotion path reached through the shadow reader.",
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "altitude-web-components",
+      "export": "al-icon-close"
+    }
+  },
+  "states": []
+}

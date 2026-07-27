@@ -1,0 +1,236 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "altitude.chip",
+  "name": "Chip",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the ALTITUDE round — props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS — the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY — measured identical background, cursor and opacity — and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-chip. `isDismissible` DEFERRED BY NAME: it mounts a nested <al-icon-close> (a second shadow root inside this one) and `close()` mutates the HOST's classList — a depth-2 presence subtree with a self-mutating driver, out of round 1. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of altitude-web-components@1.0.2 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/altitude/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Altitude's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "secondary",
+          "info",
+          "success",
+          "warning",
+          "danger"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "secondary": "Secondary",
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "danger": "Danger"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "squared"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "squared": "Squared"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Chip",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "content": {
+        "prop": "children"
+      },
+      "declared": {
+        "cursor": "pointer",
+        "font-family": "\"IBM Plex Sans\", sans-serif",
+        "text-wrap-mode": "nowrap"
+      },
+      "declaredStates": {
+        "focus-visible": {
+          "outline-style": "solid"
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.chip.root.background-color.unset}",
+        "border-bottom-color": "{imported.chip.root.border-bottom-color.unset}",
+        "border-bottom-left-radius": "{imported.chip.root.border-bottom-left-radius.unset}",
+        "border-bottom-right-radius": "{imported.chip.root.border-bottom-right-radius.unset}",
+        "border-bottom-width": "{imported.chip.root.border-bottom-width.unset}",
+        "border-left-color": "{imported.chip.root.border-left-color.unset}",
+        "border-left-width": "{imported.chip.root.border-left-width.unset}",
+        "border-right-color": "{imported.chip.root.border-right-color.unset}",
+        "border-right-width": "{imported.chip.root.border-right-width.unset}",
+        "border-top-color": "{imported.chip.root.border-top-color.unset}",
+        "border-top-left-radius": "{imported.chip.root.border-top-left-radius.unset}",
+        "border-top-right-radius": "{imported.chip.root.border-top-right-radius.unset}",
+        "border-top-width": "{imported.chip.root.border-top-width.unset}",
+        "color": "{imported.chip.root.color.unset}",
+        "column-gap": "{imported.chip.root.column-gap}",
+        "font-size": "{imported.chip.root.font-size}",
+        "font-weight": "{imported.chip.root.font-weight}",
+        "line-height": "{imported.chip.root.line-height}",
+        "min-height": "{imported.chip.root.min-height}",
+        "min-width": "{imported.chip.root.min-width}",
+        "outline-color": "{imported.chip.root.outline-color.unset}",
+        "padding-bottom": "{imported.chip.root.padding-bottom}",
+        "padding-left": "{imported.chip.root.padding-left}",
+        "padding-right": "{imported.chip.root.padding-right}",
+        "padding-top": "{imported.chip.root.padding-top}",
+        "row-gap": "{imported.chip.root.row-gap}",
+        "row-rule-color": "{imported.chip.root.row-rule-color.unset}"
+      },
+      "states": {
+        "focus-visible": {
+          "outline-color": "{imported.chip.root.outline-color-state-focus-visible}",
+          "outline-offset": "{imported.chip.root.outline-offset-state-focus-visible}",
+          "outline-width": "{imported.chip.root.outline-width-state-focus-visible}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "type",
+          "map": {
+            "squared": {
+              "border-bottom-left-radius": "{imported.chip.root.border-bottom-left-radius.squared}",
+              "border-bottom-right-radius": "{imported.chip.root.border-bottom-right-radius.squared}",
+              "border-top-left-radius": "{imported.chip.root.border-top-left-radius.squared}",
+              "border-top-right-radius": "{imported.chip.root.border-top-right-radius.squared}"
+            }
+          }
+        },
+        {
+          "prop": "variant",
+          "map": {
+            "danger": {
+              "background-color": "{imported.chip.root.background-color.danger}",
+              "border-bottom-color": "{imported.chip.root.border-bottom-color.danger}",
+              "border-bottom-width": "{imported.chip.root.border-bottom-width.danger}",
+              "border-left-color": "{imported.chip.root.border-left-color.danger}",
+              "border-left-width": "{imported.chip.root.border-left-width.danger}",
+              "border-right-color": "{imported.chip.root.border-right-color.danger}",
+              "border-right-width": "{imported.chip.root.border-right-width.danger}",
+              "border-top-color": "{imported.chip.root.border-top-color.danger}",
+              "border-top-width": "{imported.chip.root.border-top-width.danger}",
+              "color": "{imported.chip.root.color.danger}",
+              "outline-color": "{imported.chip.root.outline-color.danger}",
+              "row-rule-color": "{imported.chip.root.row-rule-color.danger}"
+            },
+            "info": {
+              "background-color": "{imported.chip.root.background-color.info}",
+              "border-bottom-color": "{imported.chip.root.border-bottom-color.info}",
+              "border-bottom-width": "{imported.chip.root.border-bottom-width.info}",
+              "border-left-color": "{imported.chip.root.border-left-color.info}",
+              "border-left-width": "{imported.chip.root.border-left-width.info}",
+              "border-right-color": "{imported.chip.root.border-right-color.info}",
+              "border-right-width": "{imported.chip.root.border-right-width.info}",
+              "border-top-color": "{imported.chip.root.border-top-color.info}",
+              "border-top-width": "{imported.chip.root.border-top-width.info}",
+              "color": "{imported.chip.root.color.info}",
+              "outline-color": "{imported.chip.root.outline-color.info}",
+              "row-rule-color": "{imported.chip.root.row-rule-color.info}"
+            },
+            "secondary": {
+              "background-color": "{imported.chip.root.background-color.secondary}",
+              "border-bottom-color": "{imported.chip.root.border-bottom-color.secondary}",
+              "border-bottom-width": "{imported.chip.root.border-bottom-width.secondary}",
+              "border-left-color": "{imported.chip.root.border-left-color.secondary}",
+              "border-left-width": "{imported.chip.root.border-left-width.secondary}",
+              "border-right-color": "{imported.chip.root.border-right-color.secondary}",
+              "border-right-width": "{imported.chip.root.border-right-width.secondary}",
+              "border-top-color": "{imported.chip.root.border-top-color.secondary}",
+              "border-top-width": "{imported.chip.root.border-top-width.secondary}",
+              "color": "{imported.chip.root.color.secondary}",
+              "outline-color": "{imported.chip.root.outline-color.secondary}",
+              "row-rule-color": "{imported.chip.root.row-rule-color.secondary}"
+            },
+            "success": {
+              "background-color": "{imported.chip.root.background-color.success}",
+              "border-bottom-color": "{imported.chip.root.border-bottom-color.success}",
+              "border-bottom-width": "{imported.chip.root.border-bottom-width.success}",
+              "border-left-color": "{imported.chip.root.border-left-color.success}",
+              "border-left-width": "{imported.chip.root.border-left-width.success}",
+              "border-right-color": "{imported.chip.root.border-right-color.success}",
+              "border-right-width": "{imported.chip.root.border-right-width.success}",
+              "border-top-color": "{imported.chip.root.border-top-color.success}",
+              "border-top-width": "{imported.chip.root.border-top-width.success}",
+              "color": "{imported.chip.root.color.success}",
+              "outline-color": "{imported.chip.root.outline-color.success}",
+              "row-rule-color": "{imported.chip.root.row-rule-color.success}"
+            },
+            "warning": {
+              "background-color": "{imported.chip.root.background-color.warning}",
+              "border-bottom-color": "{imported.chip.root.border-bottom-color.warning}",
+              "border-bottom-width": "{imported.chip.root.border-bottom-width.warning}",
+              "border-left-color": "{imported.chip.root.border-left-color.warning}",
+              "border-left-width": "{imported.chip.root.border-left-width.warning}",
+              "border-right-color": "{imported.chip.root.border-right-color.warning}",
+              "border-right-width": "{imported.chip.root.border-right-width.warning}",
+              "border-top-color": "{imported.chip.root.border-top-color.warning}",
+              "border-top-width": "{imported.chip.root.border-top-width.warning}",
+              "color": "{imported.chip.root.color.warning}",
+              "outline-color": "{imported.chip.root.outline-color.warning}",
+              "row-rule-color": "{imported.chip.root.row-rule-color.warning}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "altitude-web-components",
+      "export": "al-chip"
+    }
+  },
+  "figmaStatePreviews": true
+}

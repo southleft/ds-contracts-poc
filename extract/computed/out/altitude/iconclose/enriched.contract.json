@@ -1,0 +1,236 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "altitude.iconclose",
+  "name": "IconClose",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the ALTITUDE round — props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS — the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY — measured identical background, cursor and opacity — and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-icon-close. One of 37 SEPARATE icon ELEMENTS (there is no `al-icon name=...` router in the shipped bundle) — the glyph is an inline <svg> inside the shadow root, which is the svg-promotion path reached through the shadow reader. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of altitude-web-components@1.0.2 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "xxl",
+          "xxxl"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "Xs",
+            "sm": "Sm",
+            "md": "Md",
+            "lg": "Lg",
+            "xl": "Xl",
+            "xxl": "Xxl",
+            "xxxl": "Xxxl"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "box-sizing": "border-box"
+      },
+      "parts": {
+        "root-unset": {
+          "icon": {
+            "asset": "icon-close-root-unset",
+            "size": 16
+          },
+          "stylesWhen": [
+            {
+              "prop": "size",
+              "equals": "xs",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "size",
+              "equals": "sm",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "size",
+              "equals": "md",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "size",
+              "equals": "lg",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "size",
+              "equals": "xl",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "size",
+              "equals": "xxl",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "size",
+              "equals": "xxxl",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=unset (default)."
+        },
+        "root-xs": {
+          "icon": {
+            "asset": "icon-close-root-xs",
+            "size": 8
+          },
+          "visibleWhen": {
+            "prop": "size",
+            "equals": "xs"
+          },
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=xs."
+        },
+        "root-sm": {
+          "icon": {
+            "asset": "icon-close-root-sm",
+            "size": 12
+          },
+          "visibleWhen": {
+            "prop": "size",
+            "equals": "sm"
+          },
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=sm."
+        },
+        "root-md": {
+          "icon": {
+            "asset": "icon-close-root-md",
+            "size": 20
+          },
+          "visibleWhen": {
+            "prop": "size",
+            "equals": "md"
+          },
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=md."
+        },
+        "root-lg": {
+          "icon": {
+            "asset": "icon-close-root-lg",
+            "size": 24
+          },
+          "visibleWhen": {
+            "prop": "size",
+            "equals": "lg"
+          },
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=lg."
+        },
+        "root-xl": {
+          "icon": {
+            "asset": "icon-close-root-xl",
+            "size": 32
+          },
+          "visibleWhen": {
+            "prop": "size",
+            "equals": "xl"
+          },
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=xl."
+        },
+        "root-xxl": {
+          "icon": {
+            "asset": "icon-close-root-xxl",
+            "size": 36
+          },
+          "visibleWhen": {
+            "prop": "size",
+            "equals": "xxl"
+          },
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=xxl."
+        },
+        "root-xxxl": {
+          "icon": {
+            "asset": "icon-close-root-xxxl",
+            "size": 40
+          },
+          "visibleWhen": {
+            "prop": "size",
+            "equals": "xxxl"
+          },
+          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=xxxl."
+        }
+      },
+      "tokens": {
+        "color": "{imported.icon-close.root.color}",
+        "line-height": "{imported.icon-close.root.line-height}",
+        "min-height": "{imported.icon-close.root.min-height}",
+        "min-width": "{imported.icon-close.root.min-width}",
+        "width": "{imported.icon-close.root.width.unset}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "lg": {
+              "width": "{imported.icon-close.root.width.lg}"
+            },
+            "md": {
+              "width": "{imported.icon-close.root.width.md}"
+            },
+            "sm": {
+              "width": "{imported.icon-close.root.width.sm}"
+            },
+            "xl": {
+              "width": "{imported.icon-close.root.width.xl}"
+            },
+            "xs": {
+              "width": "{imported.icon-close.root.width.xs}"
+            },
+            "xxl": {
+              "width": "{imported.icon-close.root.width.xxl}"
+            },
+            "xxxl": {
+              "width": "{imported.icon-close.root.width.xxxl}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "altitude-web-components",
+      "export": "al-icon-close"
+    }
+  }
+}

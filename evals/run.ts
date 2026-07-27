@@ -124,6 +124,9 @@ function resetScratch() {
     // an examples/ file needs it staged here, or plugin-engine-check passes
     // locally and dies in scratch.
     ['carbon', 'carbon.bundle.json'],
+    // ALTITUDE ROUND: same lesson, eighth time — the shadow-DOM library's
+    // bundle is read by the sibling-bundles flow and must be staged here too.
+    ['altitude', 'altitude.bundle.json'],
   ]) {
     mkdirSync(path.join(SCRATCH, 'examples', dir, 'figma'), { recursive: true });
     cpSync(path.join(ROOT, 'examples', dir, 'figma', f), path.join(SCRATCH, 'examples', dir, 'figma', f));
@@ -6261,6 +6264,129 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    id: 'altitude-shadow-dom-genesis',
+    claim: 'C8-journey',
+    run: () => {
+      // THE FIRST SHADOW-DOM LIBRARY — altitude-web-components@1.0.2 (Lit 3,
+      // 65 components, the owner's own OSS system), library #8. What this eval
+      // pins is the SHIPPED end; the engine accounting lives in
+      // examples/altitude/PROVENANCE.md ("THE SHADOW-DOM VERDICT").
+      //
+      // Four things here are Altitude-specific and cannot be checked anywhere
+      // else in the suite:
+      //   (1) SLOTTED TEXT. Every component's text lives in the LIGHT DOM and
+      //       reaches the render only through a <slot> inside the shadow root.
+      //       The compile receipt asserts the sample text reached the canvas —
+      //       a reader that did not resolve assignedNodes() produces an empty
+      //       one.
+      //   (2) DEPTH-2 SHADOW. al-avatar hasBadge mounts a nested <al-badge>
+      //       with its OWN shadow root; the promoted contract must carry both
+      //       the nested host part and its inner box.
+      //   (3) SVG INSIDE A SHADOW ROOT. al-icon-close's glyph is only
+      //       reachable through the shadow reader.
+      //   (4) EVERY ENUM IS DEFAULTLESS. There is no variant="primary" —
+      //       primary IS the absent attribute — so the `unset` pseudo-value is
+      //       a segment of a minted token path on EVERY component, and no
+      //       "Unset" cell may reach the canvas.
+      cpSync(path.join(ROOT, 'examples', 'altitude'), path.join(SCRATCH, 'examples', 'altitude'), {
+        recursive: true,
+        filter: (src) => !src.includes('.altitude-sandbox'),
+      });
+      const receipt = run(process.execPath, ['examples/altitude/scripts/figma-compile-receipt.mjs']);
+      if (receipt.status !== 0) throw new Error(`altitude figma compile receipt failed:\n${receipt.out.slice(0, 1600)}`);
+      if (!receipt.out.includes('8 scripts, 41 variants')) {
+        throw new Error(`altitude compile receipt missing the 8-scripts/41-variants line:\n${receipt.out.slice(0, 800)}`);
+      }
+      const batch = run(process.execPath, ['examples/altitude/scripts/build-genesis-batch.mjs']);
+      if (batch.status !== 0) throw new Error(`altitude genesis batch refused:\n${batch.out.slice(0, 1600)}`);
+      if (!/mock-proven \(6 sets: Badge\(8\), Button\(12\), Chip\(10\), Heading\(12\), IconClose\(7\), Link\(9\); standalone: Avatar, Divider; 672 variables\)/.test(batch.out)) {
+        throw new Error(`altitude genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
+      }
+      // THE SHADOW-DOM ANATOMY PINS, read off the COMMITTED promoted contracts.
+      const contractOf = (stem: string) =>
+        JSON.parse(readFileSync(path.join(ROOT, 'examples/altitude/contracts', `${stem}.contract.json`), 'utf8')) as {
+          props?: Array<{ name: string; type?: { enum?: string[] } }>;
+          anatomy?: Record<string, unknown>;
+        };
+      // (2) depth-2: the nested <al-badge> host AND its inner box are parts.
+      const avatarJson = JSON.stringify(contractOf('avatar'));
+      for (const part of ['avatar__badge', 'badge']) {
+        if (!avatarJson.includes(`"${part}"`)) {
+          throw new Error(`altitude avatar: promoted contract carries no "${part}" part — the nested <al-badge>'s OWN shadow root was not read (depth-2)`);
+        }
+      }
+      // (3) svg inside a shadow root → committed icon assets, one per size.
+      const icons = readdirSync(path.join(ROOT, 'examples/altitude/assets/icons')).filter((f) => f.endsWith('.svg'));
+      if (icons.length < 8) {
+        throw new Error(`altitude: ${icons.length} promoted icon asset(s) — al-icon-close's glyph lives inside its shadow root and must reconstruct once per size value (8)`);
+      }
+      // (4) no "unset" pseudo-value reached a contract enum, on ANY component
+      // (every axis in this library is defaultless, so this is 8/8, not 1/8).
+      let defaultlessAxes = 0;
+      for (const f of readdirSync(path.join(ROOT, 'examples/altitude/contracts')).filter((x) => x.endsWith('.contract.json'))) {
+        const c = JSON.parse(readFileSync(path.join(ROOT, 'examples/altitude/contracts', f), 'utf8')) as {
+          props?: Array<{ name: string; type?: { enum?: string[] }; default?: unknown }>;
+        };
+        for (const pr of c.props ?? []) {
+          if (pr.type?.enum?.includes('unset')) {
+            throw new Error(`${f}: prop "${pr.name}" carries the "unset" PSEUDO-value as a real enum value — it is a capture-side plane, never a variant`);
+          }
+          if (pr.type?.enum && pr.default === undefined) defaultlessAxes++;
+        }
+      }
+      if (defaultlessAxes < 8) {
+        throw new Error(`altitude: only ${defaultlessAxes} defaultless enum axes across the promoted contracts — this library has no defaulted variant at all (primary IS the absent attribute); this few means an axis grew a default it does not have`);
+      }
+      // The token wrap is a PURE function of the pinned shipped stylesheets.
+      const sandboxCss = path.join(ROOT, 'examples/altitude/.altitude-sandbox/node_modules/altitude-web-components/dist/css/tokens-light.css');
+      let tokenNote = 'token wrap not re-run (sandbox absent — network-free suite)';
+      if (existsSync(sandboxCss)) {
+        const before = readFileSync(path.join(ROOT, 'examples/altitude/tokens/altitude.dtcg.json'), 'utf8');
+        const tw = run(process.execPath, [path.join(ROOT, 'examples/altitude/scripts/build-tokens.mjs')]);
+        if (tw.status !== 0) throw new Error(`altitude build-tokens refused:\n${tw.out.slice(0, 800)}`);
+        const after = readFileSync(path.join(ROOT, 'examples/altitude/tokens/altitude.dtcg.json'), 'utf8');
+        if (before !== after) throw new Error('committed examples/altitude/tokens/altitude.dtcg.json is STALE — a fresh wrap of the pinned stylesheets differs');
+        tokenNote = 'token wrap re-run against the pinned stylesheets: byte-identical';
+      }
+      // MODES ARE REAL — but Altitude's dark mode is THIN by its own choice
+      // (brand and status colours are identical in both), so the pin is sized
+      // to the measured truth and says which families move. Reading a low
+      // number here as a parsing failure is exactly the mistake this comment
+      // exists to prevent.
+      const light = JSON.parse(readFileSync(path.join(ROOT, 'examples/altitude/tokens/modes/altitude.light.dtcg.json'), 'utf8')) as Record<string, { $value: string }>;
+      const dark = JSON.parse(readFileSync(path.join(ROOT, 'examples/altitude/tokens/modes/altitude.dark.dtcg.json'), 'utf8')) as Record<string, { $value: string }>;
+      const differing = Object.keys(light).filter((k) => k in dark && light[k].$value !== dark[k].$value);
+      if (differing.length < 20) {
+        throw new Error(`altitude Light/Dark differ on only ${differing.length} tokens — tokens-light.css and tokens-dark.css are two DIFFERENT shipped stylesheets; this few means one was parsed twice`);
+      }
+      if (light['theme-color-content-default'].$value === dark['theme-color-content-default'].$value) {
+        throw new Error('altitude theme-color-content-default is identical in Light and Dark — the alias chain was resolved against ONE block instead of each mode\'s own');
+      }
+      // FOREIGN-TOKEN BUNDLE freshness (two-mode variant).
+      const bundleArgs = [
+        'packages/cli/src/cli.ts', 'figma', 'bundle', 'examples/altitude/contracts',
+        '--tokens', 'examples/altitude/tokens/altitude.dtcg.json,examples/altitude/tokens/altitude-minted.dtcg.json',
+        '--modes', 'examples/altitude/tokens/modes/altitude.light.dtcg.json,examples/altitude/tokens/modes/altitude.dark.dtcg.json',
+        '--name', 'Altitude',
+        '--icons', 'examples/altitude/assets/icons',
+      ];
+      const a1 = run(TSX, [...bundleArgs, '--out', 'examples/altitude/figma/bundle-run-a.json']);
+      const a2 = run(TSX, [...bundleArgs, '--out', 'examples/altitude/figma/bundle-run-b.json']);
+      if (a1.status !== 0 || a2.status !== 0) throw new Error(`figma bundle (altitude) failed:\n${(a1.out + a2.out).slice(0, 1200)}`);
+      const runA = readFileSync(path.join(SCRATCH, 'examples/altitude/figma/bundle-run-a.json'), 'utf8');
+      const runB = readFileSync(path.join(SCRATCH, 'examples/altitude/figma/bundle-run-b.json'), 'utf8');
+      if (runA !== runB) throw new Error('altitude figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
+      const committed = readFileSync(path.join(ROOT, 'examples/altitude/figma/altitude.bundle.json'), 'utf8');
+      if (runA !== committed) throw new Error('committed examples/altitude/figma/altitude.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
+      console.log(
+        `altitude-shadow-dom-genesis: 8/8 shadow-DOM scripts referee+execute headless (41 variant cells, 672 variables incl. 41 Figma-native source aliases); ` +
+          `slotted text, depth-2 nested shadow (avatar → al-badge) and an svg inside a shadow root all reached the canvas; ` +
+          `${defaultlessAxes} defaultless axes and no "unset" pseudo-value in any contract enum; Light/Dark differ on ${differing.length} tokens (thin by Altitude's own choice); ` +
+          `one-paste batch mock-proven; committed altitude.bundle.json fresh and byte-deterministic; ${tokenNote} — the first shadow-DOM subject`,
+      );
+    },
+  },
+  {
     id: 'generalized-translate-door',
     claim: 'C5-extraction',
     run: () => {
@@ -6369,7 +6495,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     id: 'shipped-contract-refs-resolve',
     claim: 'C2-refusal',
     run: () => {
-      const libs = ['polaris', 'astryx', 'mui', 'tailwind', 'carbon'];
+      const libs = ['polaris', 'astryx', 'mui', 'tailwind', 'carbon', 'altitude'];
       let contracts = 0;
       const findings: string[] = [];
       for (const lib of libs) {

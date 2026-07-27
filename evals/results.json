@@ -1,6 +1,6 @@
 {
-  "passed": 162,
-  "total": 162,
+  "passed": 163,
+  "total": 163,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -784,6 +784,11 @@
     },
     {
       "id": "carbon-figma-genesis",
+      "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "altitude-shadow-dom-genesis",
       "claim": "C8-journey",
       "pass": true
     },

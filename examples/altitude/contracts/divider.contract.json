@@ -1,0 +1,72 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "altitude.divider",
+  "name": "Divider",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the ALTITUDE round — props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS — the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY — measured identical background, cursor and opacity — and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-divider. Captured on a BLOCK stage: an <hr> in the default flex stage is a shrink-to-fit flex item and measures 0x1px (measured); a block formatting context is what gives a full-bleed rule its CSS-true width (288x1px). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of altitude-web-components@1.0.2 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/altitude/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to Altitude's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "hr"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "vertical"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "vertical": "Vertical"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "box-sizing": "border-box",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden"
+      },
+      "tokens": {
+        "background-color": "{imported.divider.root.background-color}",
+        "color": "{imported.divider.root.color}",
+        "min-height": "{imported.divider.root.min-height}",
+        "min-width": "{imported.divider.root.min-width}",
+        "row-rule-color": "{imported.divider.root.row-rule-color}",
+        "width": "{imported.divider.root.width.unset}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "vertical": {
+              "width": "{imported.divider.root.width.vertical}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "altitude-web-components",
+      "export": "al-divider"
+    }
+  }
+}

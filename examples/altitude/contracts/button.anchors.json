@@ -1,0 +1,134 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "button",
+  "anchors": [
+    {
+      "leaf": "imported.button.root.background-color-state-hover.bare",
+      "token": "theme-color-background-transparent-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-transparent-default",
+      "selector": ".al-c-button--bare"
+    },
+    {
+      "leaf": "imported.button.root.background-color-state-hover.tertiary",
+      "token": "theme-color-background-transparent-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-transparent-default",
+      "selector": ".al-c-button--tertiary"
+    },
+    {
+      "leaf": "imported.button.root.background-color.bare",
+      "token": "theme-color-background-transparent-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-transparent-default",
+      "selector": ".al-c-button--bare"
+    },
+    {
+      "leaf": "imported.button.root.background-color.danger",
+      "token": "theme-color-background-danger-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-danger-default",
+      "selector": ".al-c-button--danger"
+    },
+    {
+      "leaf": "imported.button.root.background-color.secondary",
+      "token": "theme-color-background-secondary-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-secondary-default",
+      "selector": ".al-c-button--secondary"
+    },
+    {
+      "leaf": "imported.button.root.background-color.tertiary",
+      "token": "theme-color-background-transparent-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-transparent-default",
+      "selector": ".al-c-button--tertiary"
+    },
+    {
+      "leaf": "imported.button.root.background-color.unset",
+      "token": "theme-color-background-primary-default",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--al-theme-color-background-primary-default",
+      "selector": ".al-c-button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.danger",
+      "token": "theme-color-content-danger-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-danger-weak",
+      "selector": ".al-c-button--danger"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.secondary",
+      "token": "theme-color-content-secondary-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-secondary-weak",
+      "selector": ".al-c-button--secondary"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.unset",
+      "token": "theme-color-content-primary-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-primary-weak",
+      "selector": ".al-c-button"
+    },
+    {
+      "leaf": "imported.button.root.color.bare",
+      "token": "theme-color-content-default",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-default",
+      "selector": ".al-c-button--bare"
+    },
+    {
+      "leaf": "imported.button.root.color.danger",
+      "token": "theme-color-content-danger-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-danger-weak",
+      "selector": ".al-c-button--danger"
+    },
+    {
+      "leaf": "imported.button.root.color.secondary",
+      "token": "theme-color-content-secondary-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-secondary-weak",
+      "selector": ".al-c-button--secondary"
+    },
+    {
+      "leaf": "imported.button.root.color.tertiary",
+      "token": "theme-color-content-default",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-default",
+      "selector": ".al-c-button--tertiary"
+    },
+    {
+      "leaf": "imported.button.root.color.unset",
+      "token": "theme-color-content-primary-weak",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--al-theme-color-content-primary-weak",
+      "selector": ".al-c-button"
+    },
+    {
+      "leaf": "imported.button.root.font-weight",
+      "token": "font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--al-font-weight-bold",
+      "selector": ".al-c-button"
+    }
+  ]
+}

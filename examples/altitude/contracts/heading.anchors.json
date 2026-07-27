@@ -1,0 +1,14 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "heading",
+  "anchors": [
+    {
+      "leaf": "imported.heading.root.font-weight.bold",
+      "token": "font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--al-font-weight-bold",
+      "selector": ".al-c-heading.al-is-bold"
+    }
+  ]
+}

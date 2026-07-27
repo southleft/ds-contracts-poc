@@ -441,7 +441,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95226px 1.14323px -1.95226px, rgba(0, 0, 0, 0.14) 0px 2.09549px 2.14323px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.23871px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95327px 1.14019px -1.95327px, rgba(0, 0, 0, 0.14) 0px 2.09346px 2.14019px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.23364px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -481,7 +481,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99716px 1.11291px -1.97106px, rgba(0, 0, 0, 0.14) 0px 2.11006px 2.21729px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35345px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99717px 1.11194px -1.97131px, rgba(0, 0, 0, 0.14) 0px 2.10911px 2.21539px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35037px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -533,7 +533,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97121px 1.27995px -1.92282px, rgba(0, 0, 0, 0.14) 0px 2.25116px 2.47353px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.77308px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.94757px 1.34616px -1.90035px, rgba(0, 0, 0, 0.14) 0px 2.29373px 2.53502px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.87596px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -749,7 +749,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97344px 1.07969px -1.97344px, rgba(0, 0, 0, 0.14) 0px 2.05313px 2.07969px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13282px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95054px 1.14839px -1.95054px, rgba(0, 0, 0, 0.14) 0px 2.09893px 2.14839px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.24732px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -789,7 +789,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99629px 1.11366px -1.97066px, rgba(0, 0, 0, 0.14) 0px 2.10995px 2.21619px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35178px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99642px 1.11604px -1.97009px, rgba(0, 0, 0, 0.14) 0px 2.11247px 2.22136px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.36016px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -841,7 +841,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9457px 1.35014px -1.89889px, rgba(0, 0, 0, 0.14) 0px 2.29585px 2.53739px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.88005px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.94995px 1.33963px -1.90258px, rgba(0, 0, 0, 0.14) 0px 2.28959px 2.52912px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.86608px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -1057,7 +1057,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97296px 1.08111px -1.97296px, rgba(0, 0, 0, 0.14) 0px 2.05407px 2.08111px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13519px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9739px 1.07829px -1.9739px, rgba(0, 0, 0, 0.14) 0px 2.05219px 2.07829px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13048px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -1097,7 +1097,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 3px 1.03899px -1.99025px, rgba(0, 0, 0, 0.14) 0px 2.03899px 2.07799px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12673px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9963px 1.11362px -1.97067px, rgba(0, 0, 0, 0.14) 0px 2.10993px 2.21615px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35171px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -1149,7 +1149,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97437px 1.09025px -1.97103px, rgba(0, 0, 0, 0.14) 0px 2.06461px 2.10359px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.17155px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97132px 1.28117px -1.92254px, rgba(0, 0, 0, 0.14) 0px 2.25249px 2.4763px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.77756px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -1365,7 +1365,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97344px 1.07969px -1.97344px, rgba(0, 0, 0, 0.14) 0px 2.05313px 2.07969px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13282px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97414px 1.07759px -1.97414px, rgba(0, 0, 0, 0.14) 0px 2.05173px 2.07759px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12931px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -1405,7 +1405,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 3px 1.10069px -1.97483px, rgba(0, 0, 0, 0.14) 0px 2.10069px 2.20139px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.32726px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 3px 1.09798px -1.9755px, rgba(0, 0, 0, 0.14) 0px 2.09798px 2.19596px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.31844px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -1457,7 +1457,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97414px 1.09212px -1.9705px, rgba(0, 0, 0, 0.14) 0px 2.06625px 2.10665px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.17653px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95226px 1.15864px -1.9484px, rgba(0, 0, 0, 0.14) 0px 2.1109px 2.17406px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.28881px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -1673,7 +1673,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97437px 1.0769px -1.97437px, rgba(0, 0, 0, 0.14) 0px 2.05126px 2.0769px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12816px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95054px 1.14839px -1.95054px, rgba(0, 0, 0, 0.14) 0px 2.09893px 2.14839px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.24732px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -1713,7 +1713,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99768px 1.11322px -1.97112px, rgba(0, 0, 0, 0.14) 0px 2.1109px 2.21947px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35693px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99626px 1.1156px -1.97017px, rgba(0, 0, 0, 0.14) 0px 2.11186px 2.21998px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35793px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -1765,7 +1765,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.94908px 1.34722px -1.90046px, rgba(0, 0, 0, 0.14) 0px 2.29631px 2.54169px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.88662px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.94353px 1.35897px -1.89614px, rgba(0, 0, 0, 0.14) 0px 2.3025px 2.54852px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.89841px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -2021,7 +2021,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99743px 1.11209px -1.97134px, rgba(0, 0, 0, 0.14) 0px 2.10952px 2.21647px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35208px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99768px 1.11135px -1.97158px, rgba(0, 0, 0, 0.14) 0px 2.10902px 2.21573px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35085px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -2073,7 +2073,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.94816px 1.34579px -1.90059px, rgba(0, 0, 0, 0.14) 0px 2.29395px 2.53605px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.87756px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97171px 1.28118px -1.92263px, rgba(0, 0, 0, 0.14) 0px 2.25289px 2.47748px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.77945px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -2289,7 +2289,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9746px 1.07621px -1.9746px, rgba(0, 0, 0, 0.14) 0px 2.0508px 2.07621px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12701px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9739px 1.07829px -1.9739px, rgba(0, 0, 0, 0.14) 0px 2.05219px 2.07829px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13048px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -2329,7 +2329,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99714px 1.10567px -1.97287px, rgba(0, 0, 0, 0.14) 0px 2.10281px 2.20275px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.32983px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99824px 1.04802px -1.98755px, rgba(0, 0, 0, 0.14) 0px 2.04626px 2.09077px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.14772px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -2381,7 +2381,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.94754px 1.33708px -1.90261px, rgba(0, 0, 0, 0.14) 0px 2.28462px 2.51679px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.84633px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9725px 1.2775px -1.92375px, rgba(0, 0, 0, 0.14) 0px 2.25px 2.47249px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.77124px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -2597,7 +2597,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97414px 1.07759px -1.97414px, rgba(0, 0, 0, 0.14) 0px 2.05173px 2.07759px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12931px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95293px 1.1412px -1.95293px, rgba(0, 0, 0, 0.14) 0px 2.09413px 2.1412px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.23533px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -2637,7 +2637,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99802px 1.10302px -1.97375px, rgba(0, 0, 0, 0.14) 0px 2.10104px 2.2001px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.32542px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99846px 1.10624px -1.97305px, rgba(0, 0, 0, 0.14) 0px 2.10469px 2.20785px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.33794px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -2689,7 +2689,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97318px 1.27429px -1.92472px, rgba(0, 0, 0, 0.14) 0px 2.24747px 2.46812px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.76405px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97267px 1.2756px -1.92427px, rgba(0, 0, 0, 0.14) 0px 2.24828px 2.46923px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.76591px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -2905,7 +2905,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9739px 1.07829px -1.9739px, rgba(0, 0, 0, 0.14) 0px 2.05219px 2.07829px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13048px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97414px 1.07759px -1.97414px, rgba(0, 0, 0, 0.14) 0px 2.05173px 2.07759px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12931px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -2945,7 +2945,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 3px 1.10438px -1.9739px, rgba(0, 0, 0, 0.14) 0px 2.10438px 2.20876px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.33924px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 3px 1.04728px -1.98818px, rgba(0, 0, 0, 0.14) 0px 2.04728px 2.09456px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.15365px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -2997,7 +2997,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95054px 1.18169px -1.94221px, rgba(0, 0, 0, 0.14) 0px 2.13223px 2.21499px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35554px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97224px 1.09954px -1.96817px, rgba(0, 0, 0, 0.14) 0px 2.07179px 2.11582px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.19167px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -3213,7 +3213,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9755px 1.07349px -1.9755px, rgba(0, 0, 0, 0.14) 0px 2.04899px 2.07349px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12248px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.94984px 1.15049px -1.94984px, rgba(0, 0, 0, 0.14) 0px 2.10033px 2.15049px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.25082px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -3253,7 +3253,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 3px 1.10345px -1.97414px, rgba(0, 0, 0, 0.14) 0px 2.10345px 2.2069px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.33622px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99805px 1.04642px -1.98791px, rgba(0, 0, 0, 0.14) 0px 2.04447px 2.087px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.14161px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -3305,7 +3305,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97248px 1.09792px -1.96864px, rgba(0, 0, 0, 0.14) 0px 2.0704px 2.11329px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.18754px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97255px 1.27726px -1.92382px, rgba(0, 0, 0, 0.14) 0px 2.24982px 2.47218px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.77073px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -3521,7 +3521,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97437px 1.0769px -1.97437px, rgba(0, 0, 0, 0.14) 0px 2.05126px 2.0769px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12816px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95123px 1.14631px -1.95123px, rgba(0, 0, 0, 0.14) 0px 2.09754px 2.14631px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.24386px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -3561,7 +3561,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99755px 1.11173px -1.97146px, rgba(0, 0, 0, 0.14) 0px 2.10928px 2.21611px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35149px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99739px 1.0528px -1.98615px, rgba(0, 0, 0, 0.14) 0px 2.05019px 2.09778px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.15922px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -3613,7 +3613,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97158px 1.27891px -1.92317px, rgba(0, 0, 0, 0.14) 0px 2.25049px 2.47257px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.77148px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97171px 1.284px -1.92193px, rgba(0, 0, 0, 0.14) 0px 2.25571px 2.48312px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.7886px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -3829,7 +3829,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95123px 1.14631px -1.95123px, rgba(0, 0, 0, 0.14) 0px 2.09754px 2.14631px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.24386px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9739px 1.07829px -1.9739px, rgba(0, 0, 0, 0.14) 0px 2.05219px 2.07829px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13048px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -3869,7 +3869,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99824px 1.10689px -1.97284px, rgba(0, 0, 0, 0.14) 0px 2.10513px 2.2085px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.33903px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99703px 1.11053px -1.97162px, rgba(0, 0, 0, 0.14) 0px 2.10755px 2.21214px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.34509px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -3921,7 +3921,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97247px 1.27214px -1.92508px, rgba(0, 0, 0, 0.14) 0px 2.2446px 2.46167px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.75366px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97132px 1.27827px -1.92326px, rgba(0, 0, 0, 0.14) 0px 2.24959px 2.47051px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.76816px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -4137,7 +4137,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97483px 1.07552px -1.97483px, rgba(0, 0, 0, 0.14) 0px 2.05035px 2.07552px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12587px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9732px 1.0804px -1.9732px, rgba(0, 0, 0, 0.14) 0px 2.0536px 2.0804px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.134px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -4177,7 +4177,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 3px 1.09888px -1.97528px, rgba(0, 0, 0, 0.14) 0px 2.09888px 2.19776px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.32136px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99667px 1.05274px -1.98598px, rgba(0, 0, 0, 0.14) 0px 2.04941px 2.09549px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.15558px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -4229,7 +4229,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97414px 1.09389px -1.97006px, rgba(0, 0, 0, 0.14) 0px 2.06803px 2.1102px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.1823px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97217px 1.27732px -1.92371px, rgba(0, 0, 0, 0.14) 0px 2.24948px 2.47113px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.76907px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -4445,7 +4445,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9739px 1.07829px -1.9739px, rgba(0, 0, 0, 0.14) 0px 2.05219px 2.07829px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13048px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95157px 1.14528px -1.95157px, rgba(0, 0, 0, 0.14) 0px 2.09685px 2.14528px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.24214px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -4485,7 +4485,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 3px 1.09979px -1.97505px, rgba(0, 0, 0, 0.14) 0px 2.09979px 2.19957px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.3243px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99585px 1.11499px -1.97022px, rgba(0, 0, 0, 0.14) 0px 2.11083px 2.21751px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35398px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -4537,7 +4537,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97224px 1.09942px -1.96821px, rgba(0, 0, 0, 0.14) 0px 2.07166px 2.11557px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.19126px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.94875px 1.34045px -1.90207px, rgba(0, 0, 0, 0.14) 0px 2.28919px 2.52713px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.863px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -4753,7 +4753,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.972px 1.084px -1.972px, rgba(0, 0, 0, 0.14) 0px 2.056px 2.084px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.14px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97595px 1.07215px -1.97595px, rgba(0, 0, 0, 0.14) 0px 2.0481px 2.07215px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12025px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -4793,7 +4793,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99639px 1.11428px -1.97053px, rgba(0, 0, 0, 0.14) 0px 2.11067px 2.21773px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35426px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99725px 1.05098px -1.98657px, rgba(0, 0, 0, 0.14) 0px 2.04824px 2.09373px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.15265px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -4845,7 +4845,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97095px 1.28083px -1.92253px, rgba(0, 0, 0, 0.14) 0px 2.25178px 2.4745px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.7747px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97157px 1.27624px -1.92383px, rgba(0, 0, 0, 0.14) 0px 2.24781px 2.46719px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.76274px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -5061,7 +5061,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97414px 1.07759px -1.97414px, rgba(0, 0, 0, 0.14) 0px 2.05173px 2.07759px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12931px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97639px 1.07083px -1.97639px, rgba(0, 0, 0, 0.14) 0px 2.04722px 2.07083px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.11804px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -5101,7 +5101,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99791px 1.10606px -1.97296px, rgba(0, 0, 0, 0.14) 0px 2.10397px 2.20585px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.33476px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99743px 1.1057px -1.97293px, rgba(0, 0, 0, 0.14) 0px 2.10313px 2.20368px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.33131px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -5153,7 +5153,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97193px 1.27918px -1.92319px, rgba(0, 0, 0, 0.14) 0px 2.2511px 2.47413px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.77398px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.96933px 1.28793px -1.92035px, rgba(0, 0, 0, 0.14) 0px 2.25726px 2.48384px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.79008px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -5369,7 +5369,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9739px 1.07829px -1.9739px, rgba(0, 0, 0, 0.14) 0px 2.05219px 2.07829px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13048px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9755px 1.07349px -1.9755px, rgba(0, 0, 0, 0.14) 0px 2.04899px 2.07349px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12248px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -5409,7 +5409,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99859px 1.04374px -1.98871px, rgba(0, 0, 0, 0.14) 0px 2.04233px 2.08326px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13547px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99754px 1.10992px -1.97191px, rgba(0, 0, 0, 0.14) 0px 2.10745px 2.21244px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.34553px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -5461,7 +5461,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97189px 1.27775px -1.92354px, rgba(0, 0, 0, 0.14) 0px 2.24964px 2.47116px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.76916px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95032px 1.33834px -1.90299px, rgba(0, 0, 0, 0.14) 0px 2.28865px 2.52762px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.8636px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -5677,7 +5677,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97414px 1.07759px -1.97414px, rgba(0, 0, 0, 0.14) 0px 2.05173px 2.07759px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12931px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97505px 1.07484px -1.97505px, rgba(0, 0, 0, 0.14) 0px 2.04989px 2.07484px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12473px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -5717,7 +5717,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99743px 1.11209px -1.97134px, rgba(0, 0, 0, 0.14) 0px 2.10952px 2.21647px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.35208px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 3px 1.10438px -1.9739px, rgba(0, 0, 0, 0.14) 0px 2.10438px 2.20876px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.33924px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -5769,7 +5769,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9717px 1.27717px -1.92363px, rgba(0, 0, 0, 0.14) 0px 2.24887px 2.46944px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.76637px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97528px 1.09343px -1.97046px, rgba(0, 0, 0, 0.14) 0px 2.06871px 2.1127px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.18622px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -5985,7 +5985,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97505px 1.07484px -1.97505px, rgba(0, 0, 0, 0.14) 0px 2.04989px 2.07484px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.12473px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95019px 1.14944px -1.95019px, rgba(0, 0, 0, 0.14) 0px 2.09963px 2.14944px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.24907px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -6025,7 +6025,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99846px 1.10716px -1.97283px, rgba(0, 0, 0, 0.14) 0px 2.10561px 2.20968px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.34093px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99686px 1.10561px -1.97281px, rgba(0, 0, 0, 0.14) 0px 2.10247px 2.20181px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.32833px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -6077,7 +6077,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97291px 1.28453px -1.9221px, rgba(0, 0, 0, 0.14) 0px 2.25744px 2.48778px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.79604px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.94729px 1.34561px -1.90042px, rgba(0, 0, 0, 0.14) 0px 2.2929px 2.53309px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.87286px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -6293,7 +6293,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97528px 1.07416px -1.97528px, rgba(0, 0, 0, 0.14) 0px 2.04944px 2.07416px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.1236px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9739px 1.07829px -1.9739px, rgba(0, 0, 0, 0.14) 0px 2.05219px 2.07829px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13048px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -6333,7 +6333,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.9991px 1.0989px -1.97505px, rgba(0, 0, 0, 0.14) 0px 2.098px 2.1951px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.31715px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99872px 1.10637px -1.97309px, rgba(0, 0, 0, 0.14) 0px 2.10509px 2.2089px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.33963px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -6385,7 +6385,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97328px 1.26846px -1.9262px, rgba(0, 0, 0, 0.14) 0px 2.24175px 2.45678px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.7456px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.94935px 1.337px -1.90309px, rgba(0, 0, 0, 0.14) 0px 2.28635px 2.52205px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.85466px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {
@@ -6601,7 +6601,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.95088px 1.14735px -1.95088px, rgba(0, 0, 0, 0.14) 0px 2.09823px 2.14735px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.24559px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97248px 1.08255px -1.97248px, rgba(0, 0, 0, 0.14) 0px 2.05503px 2.08255px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.13758px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 2px 4px -1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px"
           },
           {
@@ -6641,7 +6641,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.99685px 1.11013px -1.97168px, rgba(0, 0, 0, 0.14) 0px 2.10699px 2.21083px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.34299px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 3px 1.09531px -1.97617px, rgba(0, 0, 0, 0.14) 0px 2.09531px 2.19063px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.30977px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px"
           },
           {
@@ -6693,7 +6693,7 @@
           {
             "part": "root",
             "channel": "box-shadow",
-            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97022px 1.2828px -1.92186px, rgba(0, 0, 0, 0.14) 0px 2.25302px 2.47626px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.77765px 0px",
+            "ours": "rgba(0, 0, 0, 0.2) 0px 2.97272px 1.0972px -1.96888px, rgba(0, 0, 0, 0.14) 0px 2.06993px 2.11258px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5.18635px 0px",
             "theirs": "rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px"
           },
           {

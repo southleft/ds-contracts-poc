@@ -1,0 +1,216 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "IconClose",
+  "varPrefix": "--al-",
+  "facts": [
+    {
+      "part": "icon",
+      "channel": "height",
+      "combo": "unset",
+      "axisValues": {
+        "size": "unset"
+      },
+      "token": "theme-icon",
+      "varName": "--al-theme-icon",
+      "anchor": {
+        "selector": "::slotted(svg), svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "height",
+      "combo": "xs",
+      "axisValues": {
+        "size": "xs"
+      },
+      "token": "theme-icon-xs",
+      "varName": "--al-theme-icon-xs",
+      "anchor": {
+        "selector": ".al-c-icon--xs ::slotted(svg), .al-c-icon--xs svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "height",
+      "combo": "sm",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "theme-icon-sm",
+      "varName": "--al-theme-icon-sm",
+      "anchor": {
+        "selector": ".al-c-icon--sm ::slotted(svg), .al-c-icon--sm svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "height",
+      "combo": "md",
+      "axisValues": {
+        "size": "md"
+      },
+      "token": "theme-icon-md",
+      "varName": "--al-theme-icon-md",
+      "anchor": {
+        "selector": ".al-c-icon--md ::slotted(svg), .al-c-icon--md svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "height",
+      "combo": "lg",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "theme-icon-lg",
+      "varName": "--al-theme-icon-lg",
+      "anchor": {
+        "selector": ".al-c-icon--lg ::slotted(svg), .al-c-icon--lg svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "height",
+      "combo": "xl",
+      "axisValues": {
+        "size": "xl"
+      },
+      "token": "theme-icon-xl",
+      "varName": "--al-theme-icon-xl",
+      "anchor": {
+        "selector": ".al-c-icon--xl ::slotted(svg), .al-c-icon--xl svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "height",
+      "combo": "xxl",
+      "axisValues": {
+        "size": "xxl"
+      },
+      "token": "theme-icon-xxl",
+      "varName": "--al-theme-icon-xxl",
+      "anchor": {
+        "selector": ".al-c-icon--xxl ::slotted(svg), .al-c-icon--xxl svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "height",
+      "combo": "xxxl",
+      "axisValues": {
+        "size": "xxxl"
+      },
+      "token": "theme-icon-xxxl",
+      "varName": "--al-theme-icon-xxxl",
+      "anchor": {
+        "selector": ".al-c-icon--xxxl ::slotted(svg), .al-c-icon--xxxl svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "width",
+      "combo": "unset",
+      "axisValues": {
+        "size": "unset"
+      },
+      "token": "theme-icon",
+      "varName": "--al-theme-icon",
+      "anchor": {
+        "selector": "::slotted(svg), svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "width",
+      "combo": "xs",
+      "axisValues": {
+        "size": "xs"
+      },
+      "token": "theme-icon-xs",
+      "varName": "--al-theme-icon-xs",
+      "anchor": {
+        "selector": ".al-c-icon--xs ::slotted(svg), .al-c-icon--xs svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "width",
+      "combo": "sm",
+      "axisValues": {
+        "size": "sm"
+      },
+      "token": "theme-icon-sm",
+      "varName": "--al-theme-icon-sm",
+      "anchor": {
+        "selector": ".al-c-icon--sm ::slotted(svg), .al-c-icon--sm svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "width",
+      "combo": "md",
+      "axisValues": {
+        "size": "md"
+      },
+      "token": "theme-icon-md",
+      "varName": "--al-theme-icon-md",
+      "anchor": {
+        "selector": ".al-c-icon--md ::slotted(svg), .al-c-icon--md svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "width",
+      "combo": "lg",
+      "axisValues": {
+        "size": "lg"
+      },
+      "token": "theme-icon-lg",
+      "varName": "--al-theme-icon-lg",
+      "anchor": {
+        "selector": ".al-c-icon--lg ::slotted(svg), .al-c-icon--lg svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "width",
+      "combo": "xl",
+      "axisValues": {
+        "size": "xl"
+      },
+      "token": "theme-icon-xl",
+      "varName": "--al-theme-icon-xl",
+      "anchor": {
+        "selector": ".al-c-icon--xl ::slotted(svg), .al-c-icon--xl svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "width",
+      "combo": "xxl",
+      "axisValues": {
+        "size": "xxl"
+      },
+      "token": "theme-icon-xxl",
+      "varName": "--al-theme-icon-xxl",
+      "anchor": {
+        "selector": ".al-c-icon--xxl ::slotted(svg), .al-c-icon--xxl svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "width",
+      "combo": "xxxl",
+      "axisValues": {
+        "size": "xxxl"
+      },
+      "token": "theme-icon-xxxl",
+      "varName": "--al-theme-icon-xxxl",
+      "anchor": {
+        "selector": ".al-c-icon--xxxl ::slotted(svg), .al-c-icon--xxxl svg"
+      }
+    }
+  ],
+  "skips": []
+}

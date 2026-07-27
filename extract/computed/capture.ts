@@ -204,6 +204,21 @@ export interface CaptureConfig {
      *  bindings (CapturedNode.vrefs). Absent = reader off (every committed
      *  library; captures stay byte-identical). */
     varPrefix?: string;
+    /** SHADOW-DOM ROUND (Altitude): the library ships CUSTOM ELEMENTS, not
+     *  React components. `importName` is then a TAG NAME ("al-button") and the
+     *  harness mounts `React.createElement('al-button', props, children)`
+     *  instead of importing a named export — React passes unknown props
+     *  straight through as ATTRIBUTES, which is exactly the custom-element
+     *  contract. Two consequences the mount honors:
+     *    · a `false` boolean prop is OMITTED, never rendered as `="false"`
+     *      (Lit's `type: Boolean` reads ATTRIBUTE PRESENCE — `isDisabled=
+     *      "false"` is TRUE), so booleans ride the axis/state machinery's
+     *      absent-value path;
+     *    · nothing is imported from `library.package` for the component
+     *      itself; the package is imported once for its registration side
+     *      effect via `mount.imports`.
+     *  Absent/false on every React library — their harness page is unchanged. */
+    customElements?: boolean;
   };
   mount: {
     /** Raw import lines for providers/locale/stylesheet. */
@@ -211,6 +226,29 @@ export interface CaptureConfig {
     /** Provider JSX wrapped around every stage ('' = none). */
     wrapperOpen: string;
     wrapperClose: string;
+    /** SHADOW-DOM ROUND (Altitude): stylesheets inlined into the harness
+     *  page's <head> as `<style id="…">` BEFORE the bundle runs.
+     *
+     *  Why this cannot be an `import` line: Altitude's `ALElement` looks up
+     *  `style#al-theme-sheet` on its FIRST `connectedCallback` and adopts a
+     *  stripped copy into every shadow root — the sheet must already be in
+     *  the document when the library's registration side effect upgrades the
+     *  first element, and ES imports are hoisted above any statement that
+     *  could inject it. A general mechanism: any library whose global theme
+     *  is discovered by DOM id/selector at upgrade time needs it.
+     *
+     *  `files` are HARNESS-relative (e.g. "node_modules/<pkg>/dist/css/…"),
+     *  concatenated in order. `@import` rules are ALWAYS stripped — the
+     *  harness is network-free and a surviving `@import` is a live fetch.
+     *  The strip is QUOTED-STRING AWARE by necessity, see stripAtImports. */
+    headStyles?: Array<{ id?: string; files: string[] }>;
+    /** SHADOW-DOM ROUND (Altitude): raw JS statements emitted into an inline
+     *  <script> in <head>, i.e. BEFORE the module bundle evaluates. The
+     *  general need is a GLOBAL FLAG a library reads at import time
+     *  (`globalThis.alAutoRegistry = true` selects Altitude's unsuffixed
+     *  custom-element tag names). An `imports` line cannot do this: ES import
+     *  hoisting runs the library first. */
+    preScript?: string[];
   };
   /** DTCG token files whose custom-property spellings the bound-probe and
    *  the fidelity gate resolve against (repo-relative). */
@@ -425,6 +463,128 @@ export const CONTROL_TAGS = ['button', 'span', 'a', 'div'] as const;
 export const stageFor = (cfg: CaptureConfig, comp: ComponentConfig): { width: number; height: number; padding: number } =>
   comp.stage ?? cfg.stage;
 
+/** SHADOW-DOM ROUND (Altitude) — strip `@import` rules from a stylesheet that
+ *  is about to be INLINED into the network-free harness page.
+ *
+ *  THE REASON THIS IS NOT `/@import[^;]+;/`. Altitude's `main.css` opens with
+ *
+ *      @import"https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap";
+ *
+ *  and the Google-Fonts URL CONTAINS SEMICOLONS. A `[^;]+` strip cuts at the
+ *  first one, leaves `0,600;1,400;1,600&display=swap";` at the top of the
+ *  file, and the CSS parser folds that fragment into the PRELUDE of the
+ *  `:root{…}` block that follows — so the entire token block becomes an
+ *  invalid selector and is dropped. Measured on the live page: 323 custom
+ *  properties at `:root` → **0**, every component rendering unstyled, the
+ *  page throwing nothing and logging nothing. The naive strip is a silent
+ *  zero-token round; this one matches the QUOTED STRING (or `url(…)`) first
+ *  and only then runs to the terminating `;`.
+ *
+ *  Returns the stripped text plus the count, so the caller can receipt it. */
+export function stripAtImports(css: string): { css: string; stripped: number } {
+  const re = /@import\s*(?:url\(\s*)?(["'])(?:(?!\1)[\s\S])*\1\s*\)?[^;]*;/g;
+  let stripped = 0;
+  const out = css.replace(re, () => { stripped++; return ''; });
+  // A bare `@import url(unquoted);` has no quoted string — handled separately
+  // (no semicolon can appear in an unquoted url() token, so `[^;]` is safe).
+  const re2 = /@import\s+url\([^)"']*\)[^;]*;/g;
+  const out2 = out.replace(re2, () => { stripped++; return ''; });
+  return { css: out2, stripped };
+}
+
+// ---------------------------------------------------------------------------
+// SHADOW-DOM ROUND (Altitude, library #8) — in-page traversal primitives.
+//
+// Every helper below is a GENERAL open-shadow-DOM rule, and every one of them
+// is a NO-OP on a page without shadow roots: the seven committed libraries
+// render entirely into light DOM, so `el.shadowRoot` is null everywhere, the
+// walks visit exactly the elements `querySelectorAll` visited before, and the
+// captured bytes are unchanged (proven by re-capture, see the wave report).
+//
+// Emitted as a JS STRING because every reader here runs through
+// `page.evaluate(<string>)` — the tsx `__name` serialization trap (see
+// visual-parity/render.ts).
+// ---------------------------------------------------------------------------
+export const SHADOW_HELPERS_JS = `
+  // POLICY DECISION 1 — CAPTURED ROOT OF A SHADOW HOST: DESCEND.
+  // A custom-element host in Altitude carries NO :host rule at all (measured:
+  // the published 1.0.2 bundle contains exactly ONE ':host' selector in the
+  // whole 65-component library, and it is not on any round-1 component), so
+  // the host paints nothing, has no class stem, and computes to the UA
+  // default display. Carried as the captured root it would add a nameless
+  // wrapper part to every component's anatomy and hand the class-stem part
+  // namer nothing to name. The element that draws the component IS the
+  // shadow root's first box-drawing child (\`button.al-c-button\`,
+  // \`div.al-c-badge\`, \`hr.al-c-divider\`), so that is the captured root and
+  // the host chain is recorded as provenance. Loops, so a host whose shadow
+  // root's first box is itself a host descends again (bounded).
+  const shDrawsRects = (el) => el.getClientRects().length > 0;
+  // \`tagName\` off the PROTOTYPE: a custom element may declare a reactive
+  // property that SHADOWS it (altitude's al-heading declares
+  // \`accessor tagName: 'h1'|…|'h6' = 'h2'\`, so \`host.tagName\` reads "h2"
+  // instead of "AL-HEADING" — the host-trail receipt would have named the
+  // wrong element). Identical for every ordinary element.
+  const shTagOf = (el) => Object.getOwnPropertyDescriptor(Element.prototype, 'tagName').get.call(el).toLowerCase();
+  const shDescendHost = (el, trail) => {
+    let guard = 0;
+    while (el && el.shadowRoot && guard++ < 8) {
+      const kids = [...el.shadowRoot.children];
+      const pick = kids.find(shDrawsRects) || kids[0];
+      if (!pick) break;
+      if (trail) trail.push(shTagOf(el));
+      el = pick;
+    }
+    return el;
+  };
+  // POLICY DECISION 2 — <slot>: SPLICED AWAY, replaced by assignedNodes().
+  // A <slot> is SPLICED AWAY, not captured: it is a distribution point with
+  // \`display: contents\` that draws no box, has no class stem, and would
+  // otherwise promote into a nameless part in EVERY component's anatomy (all
+  // eight round-1 Altitude components slot their text). Its rendered stand-in
+  // is \`assignedNodes()\` in rendered order — falling back to its own children,
+  // which is exactly what the browser draws for an unfilled slot. Walking the
+  // host's LIGHT children as well would double every slotted node, so the
+  // light tree is never walked directly: slotted content is reached only here.
+  // \`::slotted()\` rules style the assigned elements themselves, so nothing is
+  // lost by dropping the slot. Recursive — a slot may appear in another slot's
+  // fallback content.
+  const shSlotNodes = (slot, out) => {
+    const a = typeof slot.assignedNodes === 'function' ? slot.assignedNodes() : [];
+    for (const n of (a.length ? a : [...slot.childNodes])) {
+      if (n.nodeType === 1 && n.tagName === 'SLOT') shSlotNodes(n, out);
+      else out.push(n);
+    }
+    return out;
+  };
+  const shChildNodesOf = (el) => {
+    const raw = el.shadowRoot ? [...el.shadowRoot.childNodes] : [...el.childNodes];
+    if (!raw.some((n) => n.nodeType === 1 && n.tagName === 'SLOT')) return raw;
+    const out = [];
+    for (const n of raw) {
+      if (n.nodeType === 1 && n.tagName === 'SLOT') shSlotNodes(n, out);
+      else out.push(n);
+    }
+    return out;
+  };
+  // Tree-order element walk that ALSO enters open shadow roots. On a page
+  // without shadow roots this yields exactly \`el, ...el.querySelectorAll('*')\`
+  // in the same order.
+  const shWalkEls = (el, out) => {
+    out.push(el);
+    if (el.shadowRoot) for (const c of el.shadowRoot.children) shWalkEls(c, out);
+    for (const c of el.children) shWalkEls(c, out);
+    return out;
+  };
+  // The interaction/capture root of one stage: the first stage child that
+  // draws boxes (the Tailwind sr-only-input rule), then shadow-descended.
+  const shStageRoot = (stage) => {
+    if (!stage || !stage.firstElementChild) return null;
+    let rootEl = stage.firstElementChild;
+    for (const c of stage.children) { if (shDrawsRects(c)) { rootEl = c; break; } }
+    return shDescendHost(rootEl, null);
+  };
+`;
+
 export function buildHarnessPage(
   harness: string,
   cfg: CaptureConfig,
@@ -479,14 +639,37 @@ export function buildHarnessPage(
   // display:flex + align-items:flex-start: the component is a flex item, so
   // its position never depends on the stage's own line-box strut (inherited
   // font metrics) — the mount-context receipt (spike finding; DESIGN §1.1/§4).
+  // SHADOW-DOM ROUND — a custom-element library exports no component bindings
+  // to import: `importName` IS the tag name and React.createElement takes the
+  // tag string. The package itself is imported once, for its registration side
+  // effect, through `mount.imports`.
+  const ce = cfg.library.customElements === true;
   const entry = `import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { ${importNames.join(', ')} } from '${cfg.library.package}';
-${extraImportLines.join('\n')}
+${ce ? '' : `import { ${importNames.join(', ')} } from '${cfg.library.package}';\n`}${extraImportLines.join('\n')}
 ${cfg.mount.imports.join('\n')}
 
-const COMPONENTS = { ${importNames.join(', ')} };
+const CE = ${ce};
+const COMPONENTS = ${ce ? JSON.stringify(Object.fromEntries(importNames.map((n) => [n, n]))) : `{ ${importNames.join(', ')} }`};
 const EXTRA = { ${extraNames.join(', ')} };
+// CUSTOM-ELEMENT PROP SEMANTICS (React 18 sets unknown props as ATTRIBUTES):
+//   · \`false\` must be OMITTED — Lit's \`type: Boolean\` converter reads
+//     ATTRIBUTE PRESENCE, so isDisabled="false" is TRUE. This is the same
+//     "absent ≠ falsy" rule the unset pseudo-value already encodes for
+//     defaultless enums, applied to booleans.
+//   · function values are dropped — React 18 does not attach listeners to
+//     custom elements and would try to stringify the function into an
+//     attribute. Custom elements take events, not callback props.
+const ceProps = (p) => {
+  if (!CE) return p;
+  const o = {};
+  for (const k of Object.keys(p)) {
+    const v = p[k];
+    if (v === false || v === undefined || v === null || typeof v === 'function') continue;
+    o[k] = v;
+  }
+  return o;
+};
 const SPECS = ${JSON.stringify(specs)};
 const stageStyle = (st, block) => ({ display: block ? 'block' : 'flex', ...(block ? {} : { alignItems: 'flex-start' }), width: st.width, height: st.height, padding: st.padding, boxSizing: 'border-box', background: '#fff', overflow: 'hidden' });
 const stage = stageStyle({ width: ${cfg.stage.width}, height: ${cfg.stage.height}, padding: ${cfg.stage.padding} });
@@ -515,7 +698,7 @@ function resolveMarkers(v) {
 function renderKidList(list) {
   return list.map((cs, i) => React.createElement(
     COMPONENTS[cs.importName],
-    { key: i, ...resolveMarkers({ ...(cs.props || {}) }) },
+    { key: i, ...ceProps(resolveMarkers({ ...(cs.props || {}) })) },
     cs.children ? renderKidList(cs.children) : cs.text,
   ));
 }
@@ -540,8 +723,9 @@ function App() {
     ${cfg.mount.wrapperOpen}
       {SPECS.map((s) => {
         const C = COMPONENTS[s.component];
-        const props = resolveMarkers({ ...s.props });
-        for (const cb of s.callbacks) props[cb] = () => {};
+        const props0 = resolveMarkers({ ...s.props });
+        for (const cb of s.callbacks) props0[cb] = () => {};
+        const props = ceProps(props0);
         return (
           <React.Fragment key={s.key}>
             <button data-sentinel={s.key} style={{ width: 8, height: 8, padding: 0, border: 0, margin: 2, background: '#eee' }} aria-label="sentinel" />
@@ -587,7 +771,7 @@ createRoot(document.getElementById('root')).render(<App />);
   writeFileSync(
     path.join(pageDir, 'index.html'),
     `<!doctype html><html><head><meta charset="utf-8">
-${bundleCss ? `<style>${bundleCss}</style>` : ''}
+${headStyleTags(harness, cfg)}${preScriptTag(cfg)}${bundleCss ? `<style>${bundleCss}</style>` : ''}
 <style>html { color-scheme: ${cfg.browser.colorScheme}; } body { margin: 0; background: #ddd; }</style>
 </head><body><div id="root"></div>
 <script>
@@ -601,12 +785,45 @@ document.addEventListener('click', (e) => e.preventDefault(), true);
   return path.join(pageDir, 'index.html');
 }
 
+/** SHADOW-DOM ROUND — `mount.headStyles` → `<style id>` tags, with `@import`
+ *  stripped (network hermeticity) and every file's presence refused by name.
+ *  Returns '' when the config declares none, so every committed harness page
+ *  is byte-unchanged. */
+export function headStyleTags(harness: string, cfg: CaptureConfig): string {
+  const specs = cfg.mount.headStyles ?? [];
+  if (specs.length === 0) return '';
+  return specs
+    .map((s) => {
+      const parts = s.files.map((f) => {
+        const p = path.join(harness, f);
+        if (!existsSync(p)) {
+          throw new Error(
+            `mount.headStyles: ${f} not found under the harness (${p}) — the library's global theme sheet would be MISSING and every component would render unstyled while the page throws nothing`,
+          );
+        }
+        return readFileSync(p, 'utf8');
+      });
+      const { css } = stripAtImports(parts.join('\n'));
+      return `<style${s.id ? ` id="${s.id}"` : ''}>${css}</style>\n`;
+    })
+    .join('');
+}
+
+/** SHADOW-DOM ROUND — `mount.preScript` → one inline `<script>` in <head>,
+ *  evaluated BEFORE the module bundle (global flags a library reads at import
+ *  time). '' when unset — committed pages unchanged. */
+export function preScriptTag(cfg: CaptureConfig): string {
+  const lines = cfg.mount.preScript ?? [];
+  return lines.length === 0 ? '' : `<script>${lines.join('\n')}</script>\n`;
+}
+
 // ---------------------------------------------------------------------------
 // The read (§3.1): every enumerated longhand + ::before/::after, per element
 // ---------------------------------------------------------------------------
 /** In-page capture (STRING evaluate — the tsx __name serialization trap,
  *  see visual-parity/render.ts). */
 const captureJs = (selector: string, classAllow?: string, varPrefix?: string) => `(() => {
+  ${SHADOW_HELPERS_JS}
   const stage = document.querySelector(${JSON.stringify(selector)});
   if (!stage || !stage.firstElementChild) return null;
   // Tailwind round (Flowbite ToggleSwitch): the component's FIRST DOM child
@@ -614,10 +831,12 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
   // control — the captured root is the first child that actually renders
   // boxes (getClientRects), falling back to firstElementChild (identical
   // pick for every component whose first child is visible).
-  let rootEl = stage.firstElementChild;
-  for (const c of stage.children) {
-    if (c.getClientRects().length > 0) { rootEl = c; break; }
-  }
+  // SHADOW-DOM ROUND: then descended through open shadow roots (policy 1 in
+  // SHADOW_HELPERS_JS). \`shStageRoot\` is the ONE implementation of this pick
+  // — the interaction drivers stamp the very same element (W3/W4), so the
+  // element that is hovered is by construction the element that is read.
+  const rootEl = shStageRoot(stage);
+  if (!rootEl) return null;
   const props = window.__ALL_PROPS;
   const allow = ${JSON.stringify(classAllow ?? null)};
   const keepCls = (l) => (allow ? l.filter((c) => new RegExp(allow).test(c)) : l);
@@ -629,8 +848,23 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
   // verifies every candidate against the element's computed value and drops
   // mismatches, so cascade subtleties cannot mint a false binding).
   const vp = ${JSON.stringify(varPrefix ?? null)};
-  let VRULES = null;
-  const buildVrules = () => {
+  // SHADOW-DOM ROUND — VRULES ARE PER ROOT NODE, NOT PER DOCUMENT.
+  // \`document.styleSheets\` contains ZERO component rules for a Lit/web-
+  // component library: every component's CSS lives in
+  // \`shadowRoot.adoptedStyleSheets\` (constructed sheets, invisible to the
+  // document sheet list). A document-only reader therefore yields zero source
+  // facts in silence — the same shape of defect as Carbon's missing <Theme>
+  // wrapper. Rules are collected per \`el.getRootNode()\` and an element is
+  // only ever matched against rules from ITS OWN root, which is also the
+  // correct cascade: a document rule does not apply inside a shadow tree, and
+  // a shadow rule does not apply outside it.
+  // BYTE-SAFETY for the seven light-DOM libraries: their elements' root is
+  // \`document\`, the sheet list is \`document.styleSheets\` in the same order
+  // as before, and \`document.adoptedStyleSheets\` is empty on all of them, so
+  // the collected rule list — and therefore every captured \`vrefs\` array —
+  // is identical.
+  const VRULES_BY_ROOT = new Map();
+  const buildVrules = (root) => {
     // Two declaration classes per rule (MUI v9 indirection: the combo rule
     // sets --variant-containedBg: var(--mui-palette-primary-main) and the
     // base rule reads background-color: var(--variant-containedBg)):
@@ -649,7 +883,18 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
         else if (r.cssRules) { try { collectRules(r.cssRules); } catch {} }
       }
     };
-    for (const sh of document.styleSheets) {
+    const sheets = [];
+    if (root === document) {
+      for (const sh of document.styleSheets) sheets.push(sh);
+      for (const sh of (document.adoptedStyleSheets || [])) sheets.push(sh);
+    } else {
+      // A ShadowRoot carries BOTH: adoptedStyleSheets (Lit static styles + the
+      // library's adopted global copy) and styleSheets (<style> inside the
+      // shadow tree). Adopted first — that is the order the platform applies.
+      for (const sh of (root.adoptedStyleSheets || [])) sheets.push(sh);
+      for (const sh of (root.styleSheets || [])) sheets.push(sh);
+    }
+    for (const sh of sheets) {
       let rules; try { rules = sh.cssRules; } catch { continue; }
       collectRules(rules);
     }
@@ -683,9 +928,42 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
   // ALL candidates per channel, one indirection hop followed (specificity is
   // NOT document order — the Node side picks whichever candidate VERIFIES
   // against the captured computed value).
+  // SHADOW-DOM ROUND — the :host branch. \`el.matches(':host…')\` is NOT an
+  // error in Chromium; it quietly returns FALSE for every element including
+  // the host itself, so a :host rule's bindings are dropped in silence rather
+  // than caught by the try/catch below. A :host compound can only ever be the
+  // LEFTMOST compound of a selector, which makes the split total:
+  //   ':host'            → the host element itself
+  //   ':host(S)'         → the host, additionally matching S
+  //   ':host(S) REST'    → any element in THIS root matching REST, when the
+  //                        host matches S
+  // ':host-context(…)' and ':host(S) > REST' (a combinator immediately after
+  // the host compound) are OUTSIDE this grammar: they fall through to \`false\`
+  // — i.e. they behave exactly as they did before this branch existed, no
+  // better and no worse. They are NOT counted anywhere; naming that here is
+  // the receipt, because zero such selectors exist in the subject and a
+  // counter with no observation to make would be decoration.
+  // MEASURED ON THE SUBJECT: the published altitude-web-components@1.0.2
+  // bundle contains exactly ONE ':host' selector across all 65 components
+  // (':host(:last-child) .al-c-list-item', on al-list-item) and ZERO on any
+  // round-1 component — the source's 29 \`:host{display:contents}\` rules are
+  // PURGED by the library's own purgecss build step and never ship. So this
+  // branch is a general correctness rule that THIS round exercises zero
+  // times; it is unproven by capture and said so in the provenance.
+  const hostMatch = (el, sel, root) => {
+    const host = root && root.host;
+    if (!host) return false;
+    const m = /^:host(?:\\(([^)]*)\\))?(?:\\s+([\\s\\S]+))?$/.exec(sel.trim());
+    if (!m) return false;
+    if (m[1]) { try { if (!host.matches(m[1])) return false; } catch { return false; } }
+    if (!m[2]) return el === host;
+    try { return el.matches(m[2]); } catch { return false; }
+  };
   const vrefsOf = (el) => {
     if (!vp) return undefined;
-    if (!VRULES) VRULES = buildVrules();
+    const root = el.getRootNode();
+    let VRULES = VRULES_BY_ROOT.get(root);
+    if (!VRULES) { VRULES = buildVrules(root); VRULES_BY_ROOT.set(root, VRULES); }
     const cs = getComputedStyle(el);
     const defs = {}; // intermediate custom prop -> [mui var names]
     const chans = {}; // channel -> [{name, sel}] — sel = the CHANNEL-declaring
@@ -693,7 +971,9 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
     // declares "background-color: var(...)" is where a patch would land, even
     // when the token itself resolves through an indirection in another rule).
     for (const [sel, rdefs, rchans] of VRULES) {
-      let hit = false; try { hit = el.matches(sel); } catch {}
+      let hit = false;
+      if (sel.indexOf(':host') === 0) hit = hostMatch(el, sel, root);
+      else { try { hit = el.matches(sel); } catch {} }
       if (!hit) continue;
       for (const [prop, mui] of rdefs) { (defs[prop] = defs[prop] || []).includes(mui) || defs[prop].push(mui); }
       for (const [prop, name] of rchans) {
@@ -716,10 +996,17 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
     }
     return Object.keys(out).length ? out : undefined;
   };
+  // SHADOW-DOM ROUND — read \`tagName\` off Element.prototype, never off the
+  // instance. A custom element can DEFINE A REACTIVE PROPERTY THAT SHADOWS IT:
+  // altitude's al-heading declares \`accessor tagName: 'h1'|…|'h6' = 'h2'\`, so
+  // \`host.tagName\` returns "h2" instead of "AL-HEADING" on every instance.
+  // Identical result for every ordinary element, so the committed captures do
+  // not move.
+  const tagGet = Object.getOwnPropertyDescriptor(Element.prototype, 'tagName').get;
   const readEl = (el) => {
     const vr = vrefsOf(el);
     const out = {
-      tag: el.tagName.toLowerCase(),
+      tag: tagGet.call(el).toLowerCase(),
       classes: keepCls([...el.classList]),
       nodes: [],
       style: read(getComputedStyle(el)),
@@ -731,7 +1018,23 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
       const content = pcs.getPropertyValue('content');
       if (content !== 'none' && content !== 'normal') out.pseudo[pe] = read(pcs);
     }
-    for (const child of el.childNodes) {
+    // SHADOW-DOM ROUND — the rendered children of an element are:
+    //   · a shadow HOST  → its shadow root's child nodes (the light children
+    //     are reached only through the <slot> that consumes them, so nothing
+    //     is duplicated and nothing slotted is lost — the current reader,
+    //     walking light children only, would have captured the SLOT-ASSIGNED
+    //     text of every Altitude component as the host's own text while
+    //     losing the entire shadow box that draws it);
+    //   · a <slot>       → its assignedNodes() in rendered order, falling
+    //     back to its own children (the fallback content the browser draws
+    //     when the slot is empty);
+    //   · anything else  → its child nodes, exactly as before.
+    // A NESTED host (al-avatar's hasBadge=on mounts a real <al-badge> inside
+    // the avatar's shadow tree) is KEPT as an element and read this way — it
+    // occupies a real box in its parent's layout and its inherited channels
+    // are the chain the inner box reads. Only the CAPTURED ROOT descends
+    // (policy 1); depth-2 is exercised by exactly that avatar axis this round.
+    for (const child of shChildNodesOf(el)) {
       if (child.nodeType === 3 && child.textContent.length > 0) out.nodes.push({ t: 'text', v: child.textContent });
       else if (child.nodeType === 1) out.nodes.push({ t: 'el', el: readEl(child) });
     }
@@ -776,6 +1079,13 @@ export interface SweepResult {
   /** Keyframe names of infinite CSS animations pinned at currentTime 0
    *  (deterministic capture point; empty when the page has none). */
   pinnedAnimations: string[];
+  /** SHADOW-DOM ROUND — for every capture whose root was reached by descending
+   *  through open shadow roots, the '>'-joined chain of HOST tag names that was
+   *  descended past (policy 1). Empty on every light-DOM library, so their
+   *  provenance blocks are unchanged. This is the provenance the descent owes:
+   *  the captured anatomy's root is `button.al-c-button`, and this records that
+   *  it was reached through `al-button`. */
+  shadowHostTrails: Record<string, string>;
 }
 
 /** The state sweep (§2): real browser states, driven exactly as
@@ -801,14 +1111,43 @@ export async function sweep(
   if (opts.screenshots) mkdirSync(opts.screenshots, { recursive: true });
 
   const pinnedAnimations = new Set<string>();
+  const shadowHostTrails = new Map<string, string>();
   for (const { comp, space } of mounts) {
     for (const combo of space.enumeration.combos) {
       const key = `${comp.name}:${combo.key}`;
       const stageSel = `[data-combo="${key}"]`;
-      // Tailwind round (Flowbite ToggleSwitch): the first stage child can be
-      // a HIDDEN sr-only input — interaction drivers target the first
-      // VISIBLE child (identical pick everywhere the first child is visible).
-      const rootLoc = page.locator(`${stageSel} > *`).filter({ visible: true }).first();
+      // SHADOW-DOM ROUND (W3/W4) — THE INTERACTION ROOT.
+      // `${stageSel} > *` cannot reach into a shadow root: Playwright's CSS
+      // engine pierces open shadow DOM for DESCENDANT combinators but NOT for
+      // `>`, so for a custom-element library the locator resolves to the HOST.
+      // A host with no :host rule (all 65 of Altitude's, since its own
+      // purgecss build deletes them) computes to the UA default display and
+      // can have a ZERO-SIZE box, at which point `.filter({visible:true})`
+      // resolves EMPTY and hover()/mouse.down() throw instead of driving the
+      // state — measured live on al-divider (0×1) and al-toggle (0×0).
+      // The fix is not a second root heuristic: the page stamps
+      // `data-capture-root` on the element `shStageRoot()` picks — the SAME
+      // function the reader uses — and the driver targets that attribute
+      // (Playwright's attribute selector pierces shadow, verified). Nothing is
+      // stamped, and the locator is byte-for-byte the old one, unless the
+      // stage's chosen child is actually a shadow host.
+      const stamped = (await page.evaluate(`(() => {
+        ${SHADOW_HELPERS_JS}
+        const stage = document.querySelector('${stageSel}');
+        if (!stage || !stage.firstElementChild) return false;
+        let first = stage.firstElementChild;
+        for (const c of stage.children) { if (shDrawsRects(c)) { first = c; break; } }
+        if (!first.shadowRoot) return false;
+        const trail = [];
+        const el = shDescendHost(first, trail);
+        if (!el || el === first) return false;
+        el.setAttribute('data-capture-root', ${JSON.stringify(key)});
+        return trail.join('>');
+      })()`)) as string | false;
+      if (stamped) shadowHostTrails.set(key, stamped);
+      const rootLoc = stamped
+        ? page.locator(`[data-capture-root="${key}"]`)
+        : page.locator(`${stageSel} > *`).filter({ visible: true }).first();
       for (const interaction of INTERACTIONS) {
         // pin infinite animations at a deterministic time point (idempotent)
         for (const n of (await page.evaluate(pinInfiniteAnimationsJs)) as string[]) pinnedAnimations.add(n);
@@ -825,8 +1164,20 @@ export async function sweep(
         } else if (interaction === 'focus-visible') {
           await page.evaluate(`document.querySelector('[data-sentinel="${key}"]').focus()`);
           await page.keyboard.press('Tab'); // keyboard modality → :focus-visible heuristic
+          // SHADOW-DOM ROUND (W5) — the receipt must ask the element that
+          // actually takes the focus ring. Focus inside a shadow tree lands on
+          // an element in that tree; `document.activeElement` is only the HOST,
+          // and the HOST does not match :focus-visible (measured on al-button:
+          // host `false`, shadow `button.al-c-button` `true` with a real 3px
+          // outline). Reading the host would have receipted "the driver never
+          // reached the focus-visible plane" on every Altitude capture while the
+          // capture itself recorded the focus ring. Non-shadow pages resolve the
+          // identical element as before.
           focusVisibleMatched = (await page.evaluate(
-            `(() => { const el = document.querySelector('${stageSel} > *'); return !!el && el.matches(':focus-visible'); })()`,
+            `(() => { ${SHADOW_HELPERS_JS}
+              const el = document.querySelector('${stageSel} > *');
+              if (!el) return false;
+              return shDescendHost(el, null).matches(':focus-visible'); })()`,
           )) as boolean;
         } else if (interaction === 'active') {
           await rootLoc.hover({ force: true });
@@ -836,7 +1187,15 @@ export async function sweep(
         // steady-state probe over EVERY stage element (root-only polling let
         // inner-element transitions — Checkbox/RadioButton backdrop border
         // colors — get captured mid-flight and fail double-run byte-identity)
-        const probe = `(() => { const els = document.querySelectorAll('${stageSel}, ${stageSel} *'); const parts = []; for (const el of els) { const cs = getComputedStyle(el); parts.push(cs.backgroundColor, cs.color, cs.boxShadow, cs.transform, cs.borderTopColor, cs.borderRightColor, cs.borderBottomColor, cs.borderLeftColor, cs.opacity, cs.outlineColor, cs.fill); } return parts.join('|'); })()`;
+        // SHADOW-DOM ROUND (W6) — the settle probe must WALK SHADOW TREES.
+        // `querySelectorAll` does not pierce shadow roots, so on a web-component
+        // page the poll sampled the stage and the (unstyled) host only: nothing
+        // it looked at ever transitions, the very first pair of samples matched,
+        // and the sweep declared stability INSTANTLY — captured mid-flight,
+        // which is a double-run byte-identity failure. `shWalkEls` enters open
+        // shadow roots and, on a light-DOM page, yields exactly the elements
+        // `querySelectorAll('stage, stage *')` yielded, in the same order.
+        const probe = `(() => { ${SHADOW_HELPERS_JS} const stageEl = document.querySelector('${stageSel}'); const els = stageEl ? shWalkEls(stageEl, []) : []; const parts = []; for (const el of els) { const cs = getComputedStyle(el); parts.push(cs.backgroundColor, cs.color, cs.boxShadow, cs.transform, cs.borderTopColor, cs.borderRightColor, cs.borderBottomColor, cs.borderLeftColor, cs.opacity, cs.outlineColor, cs.fill); } return parts.join('|'); })()`;
         // Settle discipline (MUI round): ONE matched pair can be a
         // mid-transition flat spot — require TWO consecutive stable samples,
         // with patience sized for 250–300ms transition suites.
@@ -875,7 +1234,12 @@ export async function sweep(
         // mount defaults; controlled inputs are unaffected (React re-asserts
         // their props). Named in provenance (formStateReset).
         await page.evaluate(
-          `(() => { const stage = document.querySelector('${stageSel}'); if (!stage) return; for (const inp of stage.querySelectorAll('input')) { if (inp.checked !== inp.defaultChecked) { inp.checked = inp.defaultChecked; inp.dispatchEvent(new Event('change', { bubbles: true })); } if (inp.value !== inp.defaultValue) inp.value = inp.defaultValue; } })()`,
+          // SHADOW-DOM ROUND (W7): the inputs to reset can live INSIDE a
+          // shadow root (al-toggle's checkbox does), and `querySelectorAll`
+          // does not reach them — the active-state driver's mouse.up would flip
+          // `isChecked` and that state would leak into every later combo. Same
+          // element set as before on a light-DOM page.
+          `(() => { ${SHADOW_HELPERS_JS} const stage = document.querySelector('${stageSel}'); if (!stage) return; for (const inp of shWalkEls(stage, []).filter((e) => e.tagName === 'INPUT')) { if (inp.checked !== inp.defaultChecked) { inp.checked = inp.defaultChecked; inp.dispatchEvent(new Event('change', { bubbles: true })); } if (inp.value !== inp.defaultValue) inp.value = inp.defaultValue; } })()`,
         );
       }
     }
@@ -895,6 +1259,7 @@ export async function sweep(
     browserVersion: page.context().browser()!.version(),
     fontChecks,
     pinnedAnimations: [...pinnedAnimations].sort(),
+    shadowHostTrails: Object.fromEntries([...shadowHostTrails].sort()),
   };
 }
 
@@ -994,15 +1359,32 @@ export function buildPortalHarnessPage(
   ])].sort();
 
   const stageJs = `{ display:'flex', alignItems:'flex-start', width:${st.width}, height:${st.height}, padding:${st.padding}, boxSizing:'border-box', background:'#fff', overflow:'hidden' }`;
+  // Kept in LOCKSTEP with buildHarnessPage (the Carbon renderKids lesson: a
+  // divergence between the two pages is a defect that only shows on the path
+  // nobody ran this round). NOT EXERCISED THIS ROUND — no Altitude component
+  // is portalCapture in round 1 (Dialog/Drawer render inside their OWN shadow
+  // root rather than portaling to body, which is a different problem shape and
+  // is deferred by name).
+  const ce = cfg.library.customElements === true;
   const entry = `import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { ${kidImports.join(', ')} } from '${cfg.library.package}';
-${extraImportLines.join('\n')}
+${ce ? '' : `import { ${kidImports.join(', ')} } from '${cfg.library.package}';\n`}${extraImportLines.join('\n')}
 ${cfg.mount.imports.join('\n')}
 
-const C = ${comp.importName};
-const COMPONENTS = { ${kidImports.join(', ')} };
+const CE = ${ce};
+const C = ${ce ? JSON.stringify(comp.importName) : comp.importName};
+const COMPONENTS = ${ce ? JSON.stringify(Object.fromEntries(kidImports.map((n) => [n, n]))) : `{ ${kidImports.join(', ')} }`};
 const EXTRA = { ${extraNames.join(', ')} };
+const ceProps = (p) => {
+  if (!CE) return p;
+  const o = {};
+  for (const k of Object.keys(p)) {
+    const v = p[k];
+    if (v === false || v === undefined || v === null || typeof v === 'function') continue;
+    o[k] = v;
+  }
+  return o;
+};
 const SPECS = ${JSON.stringify(specs)};
 const CALLBACKS = ${JSON.stringify(comp.callbackProps ?? [])};
 const TEXT = ${JSON.stringify(comp.sampleText)};
@@ -1024,7 +1406,7 @@ function resolveMarkers(v) {
 function renderKidList(list) {
   return list.map((cs, i) => React.createElement(
     COMPONENTS[cs.importName],
-    { key: i, ...resolveMarkers({ ...(cs.props || {}) }) },
+    { key: i, ...ceProps(resolveMarkers({ ...(cs.props || {}) })) },
     cs.children ? renderKidList(cs.children) : cs.text,
   ));
 }
@@ -1042,8 +1424,9 @@ let root = null;
 function render() {
   let content = null;
   if (specIdx !== null) {
-    const props = resolveMarkers({ ...SPECS[specIdx].props });
-    for (const cb of CALLBACKS) props[cb] = () => {};
+    const props0 = resolveMarkers({ ...SPECS[specIdx].props });
+    for (const cb of CALLBACKS) props0[cb] = () => {};
+    const props = ceProps(props0);
     content = <C {...props}>{renderKids()}</C>;
   }
   root.render(
@@ -1083,7 +1466,7 @@ window.__setSpec(false);
   writeFileSync(
     path.join(pageDir, 'index.html'),
     `<!doctype html><html><head><meta charset="utf-8">
-${bundleCss ? `<style>${bundleCss}</style>` : ''}
+${headStyleTags(harness, cfg)}${preScriptTag(cfg)}${bundleCss ? `<style>${bundleCss}</style>` : ''}
 <style>html { color-scheme: ${cfg.browser.colorScheme}; } body { margin: 0; background: #ddd; }</style>
 </head><body><div id="root"></div>
 <script>document.addEventListener('click', (e) => e.preventDefault(), true);</script>

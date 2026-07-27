@@ -1,0 +1,241 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "altitude.button",
+  "name": "Button",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the ALTITUDE round — props/axes only; anatomy is promoted from captured DOM truth. Subject: altitude-web-components@1.0.2 (published npm, Lit 3, SHADOW DOM), pinned in examples/altitude/.altitude-sandbox (examples/altitude/PROVENANCE.md). EVERY enum in this library is DEFAULTLESS — the default rendering is the ABSENCE of the attribute (there is no `variant=\"primary\"`; primary IS unset), so every axis leads with the `unset` pseudo-value. No `disabled` state plane: Altitude never reaches the `:disabled` pseudo-class from a prop on these components (al-button's isDisabled emits aria-disabled ONLY — measured identical background, cursor and opacity — and the other seven spell it as an `al-is-disabled` class, which is a prop-selected RENDERING, i.e. a variant axis, not a pseudo-class plane). al-button. `isDisabled` DROPPED BY NAME: it sets aria-disabled only and the shipped CSS keys the disabled look on `:disabled`, so the disabled STYLE is unreachable from the prop (measured: bg rgb(67,117,255), cursor pointer, opacity 1 — identical to the enabled button). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of altitude-web-components@1.0.2 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "secondary",
+          "tertiary",
+          "bare",
+          "danger"
+        ]
+      },
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "secondary": "Secondary",
+            "tertiary": "Tertiary",
+            "bare": "Bare",
+            "danger": "Danger"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Button",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "label": {
+          "content": {
+            "prop": "children"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|button__text — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "box-sizing": "border-box",
+            "cursor": "pointer",
+            "text-align": "center"
+          },
+          "tokens": {
+            "font-size": "{imported.shared.size-16}",
+            "font-weight": "{imported.button.label.font-weight}",
+            "line-height": "{imported.button.label.line-height}",
+            "row-rule-color": "{imported.button.label.row-rule-color.unset}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "bare": {
+                  "row-rule-color": "{imported.button.label.row-rule-color.bare}"
+                },
+                "danger": {
+                  "row-rule-color": "{imported.button.label.row-rule-color.danger}"
+                },
+                "secondary": {
+                  "row-rule-color": "{imported.button.label.row-rule-color.secondary}"
+                },
+                "tertiary": {
+                  "row-rule-color": "{imported.button.label.row-rule-color.tertiary}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "cursor": "pointer",
+        "font-family": "\"IBM Plex Sans\", sans-serif",
+        "position": "relative",
+        "transition-duration": "0.2s",
+        "transition-timing-function": "cubic-bezier(0.15, 0.99, 0.18, 0.99)"
+      },
+      "declaredStates": {
+        "focus-visible": {
+          "outline-style": "solid"
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.button.root.background-color.unset}",
+        "border-bottom-color": "{imported.button.root.border-bottom-color.unset}",
+        "border-bottom-left-radius": "{imported.shared.size-4}",
+        "border-bottom-right-radius": "{imported.shared.size-4}",
+        "border-bottom-width": "{imported.button.root.border-bottom-width.unset}",
+        "border-left-color": "{imported.button.root.border-left-color.unset}",
+        "border-left-width": "{imported.button.root.border-left-width.unset}",
+        "border-right-color": "{imported.button.root.border-right-color.unset}",
+        "border-right-width": "{imported.button.root.border-right-width.unset}",
+        "border-top-color": "{imported.button.root.border-top-color.unset}",
+        "border-top-left-radius": "{imported.shared.size-4}",
+        "border-top-right-radius": "{imported.shared.size-4}",
+        "border-top-width": "{imported.button.root.border-top-width.unset}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.button.root.color.unset}",
+        "column-gap": "{imported.shared.size-8}",
+        "font-size": "{imported.shared.size-16}",
+        "font-weight": "{imported.button.root.font-weight}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.button.root.line-height}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "outline-color": "{imported.button.root.outline-color.unset}",
+        "padding-bottom": "{imported.shared.size-8}",
+        "padding-left": "{imported.shared.size-16}",
+        "padding-right": "{imported.shared.size-16}",
+        "padding-top": "{imported.shared.size-8}",
+        "right": "{imported.shared.size-0}",
+        "row-gap": "{imported.shared.size-8}",
+        "row-rule-color": "{imported.button.root.row-rule-color.unset}",
+        "top": "{imported.shared.size-0}"
+      },
+      "states": {
+        "focus-visible": {
+          "outline-color": "{imported.button.root.outline-color-state-focus-visible}",
+          "outline-offset": "{imported.button.root.outline-offset-state-focus-visible}",
+          "outline-width": "{imported.button.root.outline-width-state-focus-visible}"
+        },
+        "hover": {
+          "background-color": "{imported.button.root.background-color-state-hover.unset}",
+          "border-bottom-color": "{imported.button.root.border-bottom-color-state-hover.unset}",
+          "border-left-color": "{imported.button.root.border-left-color-state-hover.unset}",
+          "border-right-color": "{imported.button.root.border-right-color-state-hover.unset}",
+          "border-top-color": "{imported.button.root.border-top-color-state-hover.unset}",
+          "color": "{imported.button.root.color-state-hover.unset}",
+          "outline-color": "{imported.button.root.outline-color-state-hover.unset}",
+          "row-rule-color": "{imported.button.root.row-rule-color-state-hover.unset}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "bare": {
+              "background-color": "{imported.button.root.background-color.bare}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.bare}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.bare}",
+              "border-left-color": "{imported.button.root.border-left-color.bare}",
+              "border-left-width": "{imported.button.root.border-left-width.bare}",
+              "border-right-color": "{imported.button.root.border-right-color.bare}",
+              "border-right-width": "{imported.button.root.border-right-width.bare}",
+              "border-top-color": "{imported.button.root.border-top-color.bare}",
+              "border-top-width": "{imported.button.root.border-top-width.bare}",
+              "color": "{imported.button.root.color.bare}",
+              "outline-color": "{imported.button.root.outline-color.bare}",
+              "row-rule-color": "{imported.button.root.row-rule-color.bare}"
+            },
+            "danger": {
+              "background-color": "{imported.button.root.background-color.danger}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.danger}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.danger}",
+              "border-left-color": "{imported.button.root.border-left-color.danger}",
+              "border-left-width": "{imported.button.root.border-left-width.danger}",
+              "border-right-color": "{imported.button.root.border-right-color.danger}",
+              "border-right-width": "{imported.button.root.border-right-width.danger}",
+              "border-top-color": "{imported.button.root.border-top-color.danger}",
+              "border-top-width": "{imported.button.root.border-top-width.danger}",
+              "color": "{imported.button.root.color.danger}",
+              "outline-color": "{imported.button.root.outline-color.danger}",
+              "row-rule-color": "{imported.button.root.row-rule-color.danger}"
+            },
+            "secondary": {
+              "background-color": "{imported.button.root.background-color.secondary}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.secondary}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.secondary}",
+              "border-left-color": "{imported.button.root.border-left-color.secondary}",
+              "border-left-width": "{imported.button.root.border-left-width.secondary}",
+              "border-right-color": "{imported.button.root.border-right-color.secondary}",
+              "border-right-width": "{imported.button.root.border-right-width.secondary}",
+              "border-top-color": "{imported.button.root.border-top-color.secondary}",
+              "border-top-width": "{imported.button.root.border-top-width.secondary}",
+              "color": "{imported.button.root.color.secondary}",
+              "outline-color": "{imported.button.root.outline-color.secondary}",
+              "row-rule-color": "{imported.button.root.row-rule-color.secondary}"
+            },
+            "tertiary": {
+              "background-color": "{imported.button.root.background-color.tertiary}",
+              "border-bottom-color": "{imported.button.root.border-bottom-color.tertiary}",
+              "border-bottom-width": "{imported.button.root.border-bottom-width.tertiary}",
+              "border-left-color": "{imported.button.root.border-left-color.tertiary}",
+              "border-left-width": "{imported.button.root.border-left-width.tertiary}",
+              "border-right-color": "{imported.button.root.border-right-color.tertiary}",
+              "border-right-width": "{imported.button.root.border-right-width.tertiary}",
+              "border-top-color": "{imported.button.root.border-top-color.tertiary}",
+              "border-top-width": "{imported.button.root.border-top-width.tertiary}",
+              "color": "{imported.button.root.color.tertiary}",
+              "outline-color": "{imported.button.root.outline-color.tertiary}",
+              "row-rule-color": "{imported.button.root.row-rule-color.tertiary}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "altitude-web-components",
+      "export": "al-button"
+    }
+  }
+}
