@@ -48,5 +48,14 @@
       }
     }
   ],
-  "skips": []
+  "skips": [
+    "tablepagination-toolbar.padding-left: source declares `calc(3 * var(--mui-spacing))` — a calc() over var(--mui-spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "tablepagination-toolbar.padding-right: source declares `calc(3 * var(--mui-spacing))` — a calc() over var(--mui-spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "buttonbase-root-2.--IconButton-hoverBg: source declares `rgba(var(--mui-palette-action-activeChannel) / calc(var(--mui-palette-action-hoverOpacity)))` — a calc() over var(--mui-palette-action-activeChannel, --mui-palette-action-hoverOpacity). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "buttonbase-root.--IconButton-hoverBg: source declares `rgba(var(--mui-palette-action-activeChannel) / calc(var(--mui-palette-action-hoverOpacity)))` — a calc() over var(--mui-palette-action-activeChannel, --mui-palette-action-hoverOpacity). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 4,
+  "calcCeiling": 4
 }

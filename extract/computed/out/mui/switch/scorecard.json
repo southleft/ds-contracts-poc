@@ -16,7 +16,13 @@
     "pairs": 224,
     "perfectExact": 28,
     "perfectAA": 56,
-    "meanExact": 1.9895717075892885,
+    "measured": 224,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 1.9889613560267885,
     "meanAA": 0.7097807384672615,
     "maxAA": 1.73828125
   },
@@ -24,12 +30,12 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 256,
-    "mintedLeavesUnfolded": 647,
-    "baseBindings": 69,
+    "mintedLeaves": 260,
+    "mintedLeavesUnfolded": 651,
+    "baseBindings": 71,
     "stateBindings": 22,
     "codeOnlyChannels": 6,
-    "overflowBindings": 21,
+    "overflowBindings": 22,
     "folds": 14
   },
   "worstRows": [
@@ -145,6 +151,7 @@
     ]
   ],
   "namedLosses": [
+    "overflow: switch-thumb.color — inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)",
     "overflow: buttonbase-root.background-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: buttonbase-root.color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: buttonbase-root.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -173,6 +180,88 @@
     "code-only: switch-track.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: switch-track.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/mui/tokens/mui-minted.dtcg.json",
+    "leavesAdded": 1238,
+    "divergent": [
+      {
+        "token": "imported.switch.buttonbase-root.color.error.checked",
+        "fresh": "#d32f2f",
+        "shipped": "{palette-error-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.switch.buttonbase-root.color.info.checked",
+        "fresh": "#0288d1",
+        "shipped": "{palette-info-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.switch.buttonbase-root.color.primary.checked",
+        "fresh": "#1976d2",
+        "shipped": "{palette-primary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.switch.buttonbase-root.color.secondary.checked",
+        "fresh": "#9c27b0",
+        "shipped": "{palette-secondary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.switch.buttonbase-root.color.success.checked",
+        "fresh": "#2e7d32",
+        "shipped": "{palette-success-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.switch.buttonbase-root.color.warning.checked",
+        "fresh": "#ed6c02",
+        "shipped": "{palette-warning-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.switch.switch-track.background-color.error.checked",
+        "fresh": "#d32f2f",
+        "shipped": "{palette-error-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.switch.switch-track.background-color.info.checked",
+        "fresh": "#0288d1",
+        "shipped": "{palette-info-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.switch.switch-track.background-color.primary.checked",
+        "fresh": "#1976d2",
+        "shipped": "{palette-primary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.switch.switch-track.background-color.secondary.checked",
+        "fresh": "#9c27b0",
+        "shipped": "{palette-secondary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.switch.switch-track.background-color.success.checked",
+        "fresh": "#2e7d32",
+        "shipped": "{palette-success-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.switch.switch-track.background-color.warning.checked",
+        "fresh": "#ed6c02",
+        "shipped": "{palette-warning-main}",
+        "resolvedEqual": true
+      }
+    ]
+  },
   "rows": [
     {
       "key": "primary.small.unchecked.enabled__default",
@@ -2809,7 +2898,7 @@
       "key": "primary.medium.unchecked.enabled__hover",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -2983,7 +3072,7 @@
       "key": "primary.medium.unchecked.enabled__active",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -7897,7 +7986,7 @@
       "key": "secondary.medium.unchecked.enabled__hover",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -8071,7 +8160,7 @@
       "key": "secondary.medium.unchecked.enabled__active",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -12985,7 +13074,7 @@
       "key": "error.medium.unchecked.enabled__hover",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -13159,7 +13248,7 @@
       "key": "error.medium.unchecked.enabled__active",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -18073,7 +18162,7 @@
       "key": "warning.medium.unchecked.enabled__hover",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -18247,7 +18336,7 @@
       "key": "warning.medium.unchecked.enabled__active",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -23161,7 +23250,7 @@
       "key": "info.medium.unchecked.enabled__hover",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -23335,7 +23424,7 @@
       "key": "info.medium.unchecked.enabled__active",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -28249,7 +28338,7 @@
       "key": "success.medium.unchecked.enabled__hover",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -28423,7 +28512,7 @@
       "key": "success.medium.unchecked.enabled__active",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -33337,7 +33426,7 @@
       "key": "default.medium.unchecked.enabled__hover",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {
@@ -33511,7 +33600,7 @@
       "key": "default.medium.unchecked.enabled__active",
       "channelsCompared": 112,
       "channelsEqual": 99,
-      "pctExact": 2.9264322916666665,
+      "pctExact": 2.9166666666666665,
       "pctAA": 0,
       "mismatches": [
         {

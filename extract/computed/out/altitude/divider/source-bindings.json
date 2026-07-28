@@ -56,5 +56,9 @@
       }
     }
   ],
-  "skips": []
+  "skips": [],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }

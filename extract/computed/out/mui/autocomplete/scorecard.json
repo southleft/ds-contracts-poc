@@ -16,9 +16,15 @@
     "pairs": 8,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 9.061941964285715,
-    "meanAA": 2.251116071428571,
-    "maxAA": 3.8816964285714284
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 8.935825892857142,
+    "meanAA": 2.142299107142857,
+    "maxAA": 3.799107142857143
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -28,57 +34,57 @@
     "mintedLeavesUnfolded": 188,
     "baseBindings": 225,
     "stateBindings": 28,
-    "codeOnlyChannels": 21,
-    "overflowBindings": 28,
+    "codeOnlyChannels": 35,
+    "overflowBindings": 55,
     "folds": 184
   },
   "worstRows": [
     {
       "key": "medium__focus-visible",
-      "pctAA": 3.8816964285714284,
-      "pctExact": 5.118303571428571,
+      "pctAA": 3.799107142857143,
+      "pctExact": 5.013392857142857,
       "channelsMismatched": 19
     },
     {
       "key": "small__focus-visible",
-      "pctAA": 3.138392857142857,
-      "pctExact": 3.658482142857143,
+      "pctAA": 3.0245535714285716,
+      "pctExact": 3.5223214285714284,
       "channelsMismatched": 19
     },
     {
       "key": "small__active",
-      "pctAA": 2.783482142857143,
-      "pctExact": 51.03794642857143,
+      "pctAA": 2.669642857142857,
+      "pctExact": 50.94642857142857,
       "channelsMismatched": 19
     },
     {
       "key": "medium__hover",
-      "pctAA": 2.611607142857143,
-      "pctExact": 3.841517857142857,
+      "pctAA": 2.529017857142857,
+      "pctExact": 3.736607142857143,
       "channelsMismatched": 15
     },
     {
       "key": "medium__active",
-      "pctAA": 2.611607142857143,
-      "pctExact": 3.841517857142857,
+      "pctAA": 2.529017857142857,
+      "pctExact": 3.736607142857143,
       "channelsMismatched": 15
     },
     {
       "key": "small__hover",
-      "pctAA": 1.7299107142857142,
-      "pctExact": 2.2388392857142856,
+      "pctAA": 1.6160714285714286,
+      "pctExact": 2.1026785714285716,
       "channelsMismatched": 15
     },
     {
       "key": "medium__default",
-      "pctAA": 0.9397321428571429,
-      "pctExact": 2.049107142857143,
+      "pctAA": 0.8013392857142857,
+      "pctExact": 1.8883928571428572,
       "channelsMismatched": 11
     },
     {
       "key": "small__default",
-      "pctAA": 0.3125,
-      "pctExact": 0.7098214285714286,
+      "pctAA": 0.16964285714285715,
+      "pctExact": 0.5401785714285714,
       "channelsMismatched": 11
     }
   ],
@@ -145,6 +151,34 @@
     ]
   ],
   "namedLosses": [
+    "promotion: non-painting-part: autocomplete-clearindicator <button> renders NO INK in any combo it appears in (visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
+    "overflow: autocomplete-clearindicator.background-color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.border-bottom-left-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.border-bottom-right-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.border-bottom-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.border-left-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.border-right-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.border-top-left-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.border-top-right-radius — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.border-top-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.flex-shrink — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.margin-right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.min-height — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.min-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.outline-width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.padding-bottom — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.padding-left — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.padding-right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.padding-top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.right — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.row-rule-color — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.top — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
+    "overflow: autocomplete-clearindicator.width — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
     "overflow: autocomplete-input.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: icon-2.color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: icon-2.fill [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -185,6 +219,20 @@
     "code-only: icon-2.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: autocomplete-input.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: autocomplete-input.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: autocomplete-clearindicator.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: autocomplete-clearindicator.appearance — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: autocomplete-clearindicator.border-bottom-style — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: autocomplete-clearindicator.border-left-style — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: autocomplete-clearindicator.border-right-style — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: autocomplete-clearindicator.border-top-style — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: autocomplete-clearindicator.cursor — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: autocomplete-clearindicator.display — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: autocomplete-clearindicator.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: autocomplete-clearindicator.position — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: autocomplete-clearindicator.transition-duration — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: autocomplete-clearindicator.transition-property — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: autocomplete-clearindicator.transition-timing-function — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
+    "code-only: autocomplete-clearindicator.user-select — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
     "code-only: autocomplete-clearindicator.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: autocomplete-clearindicator.visibility — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: autocomplete-popupindicator.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -195,13 +243,22 @@
     "code-only[focus-visible]: autocomplete-clearindicator.visibility — value shape outside mintable kinds and outside the declared vocabulary",
     "code-only[hover]: autocomplete-clearindicator.visibility — value shape outside mintable kinds and outside the declared vocabulary"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/mui/tokens/mui-minted.dtcg.json",
+    "leavesAdded": 1357,
+    "divergent": []
+  },
   "rows": [
     {
       "key": "small__default",
       "channelsCompared": 317,
       "channelsEqual": 306,
-      "pctExact": 0.7098214285714286,
-      "pctAA": 0.3125,
+      "pctExact": 0.5401785714285714,
+      "pctAA": 0.16964285714285715,
       "mismatches": [
         {
           "part": "formcontrol-fullwidth",
@@ -275,8 +332,8 @@
       "key": "small__hover",
       "channelsCompared": 317,
       "channelsEqual": 302,
-      "pctExact": 2.2388392857142856,
-      "pctAA": 1.7299107142857142,
+      "pctExact": 2.1026785714285716,
+      "pctAA": 1.6160714285714286,
       "mismatches": [
         {
           "part": "formcontrol-fullwidth",
@@ -374,8 +431,8 @@
       "key": "small__focus-visible",
       "channelsCompared": 317,
       "channelsEqual": 298,
-      "pctExact": 3.658482142857143,
-      "pctAA": 3.138392857142857,
+      "pctExact": 3.5223214285714284,
+      "pctAA": 3.0245535714285716,
       "mismatches": [
         {
           "part": "formcontrol-fullwidth",
@@ -497,8 +554,8 @@
       "key": "small__active",
       "channelsCompared": 317,
       "channelsEqual": 298,
-      "pctExact": 51.03794642857143,
-      "pctAA": 2.783482142857143,
+      "pctExact": 50.94642857142857,
+      "pctAA": 2.669642857142857,
       "mismatches": [
         {
           "part": "formcontrol-fullwidth",
@@ -620,8 +677,8 @@
       "key": "medium__default",
       "channelsCompared": 317,
       "channelsEqual": 306,
-      "pctExact": 2.049107142857143,
-      "pctAA": 0.9397321428571429,
+      "pctExact": 1.8883928571428572,
+      "pctAA": 0.8013392857142857,
       "mismatches": [
         {
           "part": "formcontrol-fullwidth",
@@ -695,8 +752,8 @@
       "key": "medium__hover",
       "channelsCompared": 317,
       "channelsEqual": 302,
-      "pctExact": 3.841517857142857,
-      "pctAA": 2.611607142857143,
+      "pctExact": 3.736607142857143,
+      "pctAA": 2.529017857142857,
       "mismatches": [
         {
           "part": "formcontrol-fullwidth",
@@ -794,8 +851,8 @@
       "key": "medium__focus-visible",
       "channelsCompared": 317,
       "channelsEqual": 298,
-      "pctExact": 5.118303571428571,
-      "pctAA": 3.8816964285714284,
+      "pctExact": 5.013392857142857,
+      "pctAA": 3.799107142857143,
       "mismatches": [
         {
           "part": "formcontrol-fullwidth",
@@ -917,8 +974,8 @@
       "key": "medium__active",
       "channelsCompared": 317,
       "channelsEqual": 302,
-      "pctExact": 3.841517857142857,
-      "pctAA": 2.611607142857143,
+      "pctExact": 3.736607142857143,
+      "pctAA": 2.529017857142857,
       "mismatches": [
         {
           "part": "formcontrol-fullwidth",

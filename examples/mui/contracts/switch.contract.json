@@ -230,12 +230,10 @@
                   "map": {
                     "checked": {
                       "background-color": "{imported.switch.switch-thumb.background-color.{color}.checked}",
-                      "color": "{imported.switch.switch-thumb.color.{color}.checked}",
                       "row-rule-color": "{imported.switch.switch-thumb.row-rule-color.{color}.checked}"
                     },
                     "unchecked": {
                       "background-color": "{imported.switch.switch-thumb.background-color.{color}.unchecked}",
-                      "color": "{imported.switch.switch-thumb.color.{color}.unchecked}",
                       "row-rule-color": "{imported.switch.switch-thumb.row-rule-color.{color}.unchecked}"
                     }
                   }

@@ -33,10 +33,11 @@ export function homePage(stats: SiteStats, receipt: CoverageReceipt): { route: s
   <h1>The source of truth is neither the design file nor the code.</h1>
   <p class="lede">A design system's truth should live in a machine-readable <strong>contract</strong> that sits between the surfaces and generates both. This is the working spec for that contract — vendor-neutral, deterministic, and open — with a reference implementation that proves every claim it makes.</p>
   <div class="doors">
-    <a class="door door--primary" href="/spec/">Read the Spec <span class="door__arrow">→</span></a>
+    <a class="door door--primary" href="/get-started/">Get started <span class="door__arrow">→</span></a>
     <a class="door" href="${PLAYGROUND_URL}">Try the Playground <span class="door__arrow">→</span></a>
-    <a class="door" href="/contribute/">Contribute <span class="door__arrow">→</span></a>
+    <a class="door" href="/spec/">Read the Spec <span class="door__arrow">→</span></a>
   </div>
+  <p class="section-note">New here and not sure what this <em>does</em>? <a href="/get-started/">Get started</a> is organised by what you want: components in code that you want in Figma (<a href="/get-started/#a">A</a>), a component on the canvas that you want as code (<a href="/get-started/#b">B</a>), or a mature library on both sides that you want reconciled (<a href="/get-started/#c">C</a>).</p>
 </div>
 
 <section id="positions">
@@ -78,7 +79,7 @@ export function homePage(stats: SiteStats, receipt: CoverageReceipt): { route: s
   <div class="cards">
     <a class="card" href="/spec/"><h3>Read the Spec</h3><p>Every schema branch, with constraints, refusal rules, and real shipping contracts as examples.</p><span class="card__meta">generated from the schema</span></a>
     <a class="card" href="${PLAYGROUND_URL}"><h3>Try the Playground</h3><p>The actual engine in your browser: import from Figma or code, edit under governance, watch refusals by name.</p><span class="card__meta">no accounts, no backend</span></a>
-    <a class="card" href="/get-started/"><h3>Get started</h3><p>Two first-person journeys on the published CLI — a designer on a code-led team, an engineer on a design-led team — plus the zero-install playground.</p><span class="card__meta">commands rendered from the tested manifest</span></a>
+    <a class="card" href="/get-started/"><h3>Get started</h3><p>Organised by what you want to do: code into Figma, canvas into code, or both-already-exist reconciled. Real commands, and the structural limits stated up front.</p><span class="card__meta">commands rendered from the tested manifest</span></a>
   </div>
 </section>
 `;

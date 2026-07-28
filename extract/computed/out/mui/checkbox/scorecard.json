@@ -16,6 +16,12 @@
     "pairs": 24,
     "perfectExact": 12,
     "perfectAA": 12,
+    "measured": 24,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 0.3971354166666667,
     "meanAA": 0.3624131944444444,
     "maxAA": 0.9505208333333334
@@ -163,6 +169,34 @@
     "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: icon.overflow-clip-margin — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/mui/tokens/mui-minted.dtcg.json",
+    "leavesAdded": 1469,
+    "divergent": [
+      {
+        "token": "imported.checkbox.root.color.checked",
+        "fresh": "#1976d2",
+        "shipped": "{palette-primary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.checkbox.root.color.indeterminate",
+        "fresh": "#1976d2",
+        "shipped": "{palette-primary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.checkbox.root.color.unchecked",
+        "fresh": "#00000099",
+        "shipped": "{palette-text-secondary}",
+        "resolvedEqual": true
+      }
+    ]
+  },
   "rows": [
     {
       "key": "unchecked.enabled__default",

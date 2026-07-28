@@ -16,6 +16,12 @@
     "pairs": 32,
     "perfectExact": 3,
     "perfectAA": 3,
+    "measured": 32,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 22.94025213068182,
     "meanAA": 20.90558416193182,
     "maxAA": 49.91477272727273
@@ -145,6 +151,7 @@
     ]
   ],
   "namedLosses": [
+    "promotion: pseudo-decor-hidden-in-combo: root::before is not drawn in every combo (opacity 0, box nullx1) — the component's own hidden state, NOT a grammar limit",
     "overflow: accordionsummary-gutters.opacity [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "code-only: root.border-bottom-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
     "code-only: root.border-left-style — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
@@ -166,6 +173,22 @@
     "code-only: label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-2.visibility — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/mui/tokens/mui-minted.dtcg.json",
+    "leavesAdded": 1440,
+    "divergent": [
+      {
+        "token": "imported.accordion.root.background-color",
+        "fresh": "#ffffff",
+        "shipped": "{palette-background-paper}",
+        "resolvedEqual": true
+      }
+    ]
+  },
   "rows": [
     {
       "key": "elevation.collapsed.enabled__default",

@@ -322,7 +322,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1469,
+      "leavesAdded": 1505,
       "divergent": [
         {
           "token": "imported.checkbox.root.color.checked",

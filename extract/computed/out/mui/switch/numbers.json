@@ -10,7 +10,7 @@
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 18,
-    "buttonbase-root": 43,
+    "buttonbase-root": 45,
     "switch-input": 17,
     "switch-thumb": 30,
     "switch-track": 14
@@ -103,8 +103,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 647,
-    "mintedLeavesFolded": 256
+    "mintedLeavesUnfolded": 651,
+    "mintedLeavesFolded": 260
   },
   "bound": {
     "cellsChecked": 0,
@@ -113,13 +113,13 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 256,
-    "baseBindings": 69,
+    "leaves": 260,
+    "baseBindings": 71,
     "stateBindings": 22,
     "byShape": {
-      "uniform": 48,
+      "uniform": 49,
       "perAxis": 30,
-      "perPair": 13,
+      "perPair": 14,
       "refused": 0
     }
   },
@@ -130,7 +130,7 @@
   "codeOnly": {
     "base": 6,
     "state": 0,
-    "overflowBindings": 21
+    "overflowBindings": 22
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
@@ -171,10 +171,16 @@
   },
   "pixel": {
     "pairs": 224,
+    "measured": 224,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
-      "mean": 0.0017147972470238095,
+      "mean": 0.0013369605654761905,
       "max": 0.016276041666666668,
-      "perfect": 188
+      "perfect": 197
     },
     "aa": {
       "mean": 0,
@@ -183,42 +189,42 @@
     },
     "worst": [
       {
-        "key": "success.medium.unchecked.enabled__hover",
+        "key": "primary.medium.unchecked.enabled__hover",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "success.medium.unchecked.enabled__active",
+        "key": "primary.medium.unchecked.enabled__active",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "default.medium.unchecked.enabled__hover",
+        "key": "secondary.medium.unchecked.enabled__hover",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "default.medium.unchecked.enabled__active",
+        "key": "secondary.medium.unchecked.enabled__active",
         "pctExact": 0.016276041666666668,
         "pctAA": 0
       },
       {
-        "key": "error.medium.unchecked.disabled__hover",
+        "key": "error.medium.unchecked.enabled__hover",
+        "pctExact": 0.016276041666666668,
+        "pctAA": 0
+      },
+      {
+        "key": "error.medium.unchecked.enabled__active",
+        "pctExact": 0.016276041666666668,
+        "pctAA": 0
+      },
+      {
+        "key": "primary.medium.unchecked.disabled__default",
         "pctExact": 0.013020833333333334,
         "pctAA": 0
       },
       {
-        "key": "error.medium.unchecked.disabled__focus-visible",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
-      },
-      {
-        "key": "error.medium.unchecked.disabled__active",
-        "pctExact": 0.013020833333333334,
-        "pctAA": 0
-      },
-      {
-        "key": "warning.medium.unchecked.disabled__hover",
+        "key": "primary.medium.unchecked.disabled__hover",
         "pctExact": 0.013020833333333334,
         "pctAA": 0
       }

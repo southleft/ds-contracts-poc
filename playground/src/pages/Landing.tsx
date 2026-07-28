@@ -8,15 +8,31 @@ export function Landing() {
       <p className="landing__kicker">Design-system contracts — proof of concept</p>
       <h1>The contract loop, in your browser.</h1>
       <p className="landing__pitch">
-        A component contract is a machine-readable agreement about a component&rsquo;s API,
-        anatomy, and token bindings — one source of truth that both design tools and code
-        generate from, and are checked against. Bidirectional, deterministic, receipted, and
-        fully open: round-trips are proven rather than promised, nothing in the pipeline is
-        an AI guess, every gap is named on screen, and the schema has no gated tier. This
-        playground runs the actual engine behind a {contractsById.size}-component library:
-        import a design or paste code, watch a contract be proposed, edit it under schema
-        governance, and generate React, static HTML, and a Figma sync script from the same
-        document. Everything runs client-side; nothing you paste leaves your browser.
+        A <b>contract</b> is one JSON file per component. It records the things design and
+        engineering have to agree on — the props and their legal values, the parts the
+        component is made of, which design token paints each part, and its states. Both a
+        React component and a real Figma component set are <i>generated</i> from that one
+        file, and then continuously checked against it.
+      </p>
+      <p className="landing__pitch">
+        This page runs the real engine — the same code behind a {contractsById.size}-component
+        library — right in your browser. Load a contract, change it, and watch what happens:
+        the React, the HTML, the Figma sync script and the canvas preview all move together,
+        and anything the engine can&rsquo;t do it says out loud instead of guessing.{' '}
+        <b>Nothing you paste leaves your browser</b>, and there are no accounts.
+      </p>
+      <p className="landing__pitch">
+        <b>Start here:</b> open an example, then break its contract on purpose — delete a
+        required field, or point a token binding at a name that doesn&rsquo;t exist. The
+        refusal that appears, named and on screen, is the whole idea.
+      </p>
+      <p className="landing__pitch landing__pitch--aside">
+        This playground is for <i>understanding</i> the model and trying a contract. Actually
+        building your library into Figma is the CLI plus the companion plugin —{' '}
+        <a href="https://ds-contracts-spec.pages.dev/get-started/" target="_blank" rel="noreferrer">
+          the three get-started paths
+        </a>{' '}
+        walk that end to end.
       </p>
 
       {/* The one-line thesis: it may wrap BETWEEN steps at narrow widths but

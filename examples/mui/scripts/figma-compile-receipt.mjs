@@ -20,6 +20,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { createFigmaMock } from '../../../scripts/plugin-engine-mock-figma.mjs';
+import { checkHugCeiling } from '../../../scripts/hug-ceiling-pin.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const EX = path.join(HERE, '..');
@@ -80,8 +81,34 @@ for (const file of scripts) {
     if (name === 'chip') {
       const labels = mock.root.findAll((n) => n.name === 'label' && n.type === 'FRAME');
       if (labels.length === 0) throw new Error('chip pin: no label FRAME — box-padded text lowering missing');
-      const bad = labels.find((f) => f.paddingLeft !== 12 || f.paddingRight !== 12 || !(f.children ?? []).some((c) => c.type === 'TEXT'));
-      if (bad) throw new Error(`chip pin: label frame missing 12px side padding or TEXT child (padL=${bad.paddingLeft}, padR=${bad.paddingRight})`);
+      // TASK #38 (the harness recapture wave) — the flat `=== 12` this pin
+      // used to assert was the OLD, COARSER contract. MUI's chip label padding
+      // is a function of TWO axes, and the recapture carried it as one:
+      // filled/medium 12, filled/small 8, outlined/medium 11, outlined/small 7
+      // (the outlined pair is one pixel narrower because the 1px border eats
+      // into the box). The shipped contract predated the per-axis lift and
+      // carried a single 12 for all 28 variants, so three quarters of them
+      // were a pixel or four wide. The pin now asserts the MEASURED SET —
+      // still falsifiable, and no longer blind to the axis it was missing.
+      const PADS = new Set([7, 8, 11, 12]);
+      const bad = labels.find(
+        (f) =>
+          f.paddingLeft !== f.paddingRight ||
+          !PADS.has(f.paddingLeft) ||
+          !(f.children ?? []).some((c) => c.type === 'TEXT'),
+      );
+      if (bad) {
+        throw new Error(
+          `chip pin: label frame side padding ${bad.paddingLeft}/${bad.paddingRight} is outside the captured set ` +
+            `{filled·medium 12, filled·small 8, outlined·medium 11, outlined·small 7}, or it has no TEXT child`,
+        );
+      }
+      if (new Set(labels.map((f) => f.paddingLeft)).size < 2) {
+        throw new Error(
+          `chip pin: every label frame padded ${labels[0].paddingLeft}px — the variant×size padding map collapsed back ` +
+            'to a single value (the pre-recapture defect: one flat 12 across all 28 variants)',
+        );
+      }
     }
     if (name === 'card') {
       const texts = mock.root.findAll((n) => n.type === 'TEXT' && n.characters === 'Card content');
@@ -438,11 +465,34 @@ for (const file of scripts) {
       for (const chip of ['Alpha', 'Beta']) {
         if (textNode(chip).length === 0) throw new Error(`autocomplete pin: chip "${chip}" missing`);
       }
-      if (partNamed('autocomplete-clearindicator').length === 0) throw new Error('autocomplete pin: clear indicator missing');
+      // TASK #38 (the harness recapture wave) — THIS PIN WAS PINNING A
+      // PHANTOM, and is INVERTED here rather than deleted.
+      //
+      // It used to assert `autocomplete-clearindicator` was PRESENT on the
+      // canvas. It is not anatomy: MUI renders the clear button with
+      // `visibility: hidden` until the field is hovered or focused, so in
+      // EVERY captured combo of the closed-state capture it paints no ink and
+      // no descendant of it paints either. The engine's `non-painting-part`
+      // refusal (extract/computed/anatomy.ts) has existed since the
+      // conformance round and refuses it correctly — but MUI's SHIPPED
+      // artifacts predated that refusal, so the committed contract carried a
+      // fully-visible 28x28 button with an SVG glyph, a cursor and background
+      // tokens that the browser draws nowhere. The recapture removed it; this
+      // pin, written against the old artifacts, is what noticed.
+      //
+      // Pinned ABSENT now, with the cause named, so the phantom cannot return
+      // in silence. The popup indicator is a real painted control and stays.
+      if (partNamed('autocomplete-clearindicator').length > 0) {
+        throw new Error(
+          'autocomplete pin: `autocomplete-clearindicator` is BACK on the canvas — MUI hides it with ' +
+            '`visibility: hidden` in every combo of the closed-state capture, so it paints no ink anywhere and ' +
+            'must stay refused by `non-painting-part`. A visible button the browser draws nowhere is a phantom.',
+        );
+      }
       if (partNamed('autocomplete-popupindicator').length === 0) throw new Error('autocomplete pin: popup indicator missing');
-      // MUI REGEN ROUND (D6b): both indicators are REAL BUTTONS — background,
-      // 1px border, padding, a 28px control box — and drew as bare glyphs.
-      iconButtonPin('autocomplete', 'autocomplete-clearindicator', 28, 28);
+      // MUI REGEN ROUND (D6b): the popup indicator is a REAL BUTTON —
+      // background, 1px border, padding, a 28px control box — and drew as a
+      // bare glyph.
       iconButtonPin('autocomplete', 'autocomplete-popupindicator', 28, 28);
     }
     if (name === 'tooltip') {
@@ -565,6 +615,15 @@ for (const file of scripts) {
         if (textNode(s).length === 0) throw new Error(`table pin: cell text "${s}" missing`);
       }
       if (mock.root.findAll((n) => n.name === 'icon-2').length === 0) throw new Error('table pin: sort-label icon part missing');
+    }
+    // D7 (task #37) — the HUG-CEILING pin: a root the capture MEASURED
+    // hugging beneath its max-width must bind that cap as a Figma ceiling and
+    // render strictly narrower than it. Shared implementation, one per
+    // library (scripts/hug-ceiling-pin.mjs) — this is the pin that keeps the
+    // 320-wide Carbon Button from coming back.
+    {
+      const hugFailures = checkHugCeiling({ contract, entry, mockRoot: mock.root, name });
+      if (hugFailures.length > 0) throw new Error(hugFailures.join(' | '));
     }
     const set = mock.root.findAll((n) => n.type === 'COMPONENT_SET');
     rows.push(`| ${file} | ${contract.id} | ${axesLabel} | ${got} | tokens ${tok.total} (${tok.aliased} aliased) · ${set.length} set(s) built |`);

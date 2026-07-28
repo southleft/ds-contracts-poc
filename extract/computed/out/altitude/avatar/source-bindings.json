@@ -123,10 +123,10 @@
         "variant": "unset",
         "hasBadge": "on"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -137,10 +137,10 @@
         "variant": "sm",
         "hasBadge": "on"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -151,10 +151,10 @@
         "variant": "unset",
         "hasBadge": "on"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -165,10 +165,10 @@
         "variant": "sm",
         "hasBadge": "on"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -481,6 +481,10 @@
     }
   ],
   "skips": [
-    "badge.transform: no var candidate verified against the computed value in any combo"
-  ]
+    "badge.transform: candidate --al-badge-transform → \"badge-transform\" = none (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 2,
+  "calcCeiling": 0
 }

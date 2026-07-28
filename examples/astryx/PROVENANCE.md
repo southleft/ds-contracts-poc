@@ -94,3 +94,46 @@ variant cells — is measured over that slice, and the slice was hand-picked for
 tractability. The engine generalizing across libraries (`docs/22`) and a
 library being *captured* are different claims; this row is the second one, and
 it is small. Full table and how to re-derive it: [docs/22 §8.3](../../docs/22-generality.md).
+
+## THE HARNESS RECAPTURE WAVE (task #38) — ASTRYX IS STALE, AND WHY
+
+Every other sandboxed library (carbon, mui, tailwind, altitude) was re-captured and fully
+re-promoted in this wave. **Astryx was re-captured successfully and then REVERTED.** Its
+`extract/computed/out/astryx/**` and `examples/astryx/contracts/**` are at their previous state.
+Its `figma/*.figma.js`, `GENESIS-BATCH.figma.js`, compile receipt and both bundles WERE re-emitted
+(the engine moved and the emission is reproducible from the committed contracts — that half is
+fresh).
+
+Two blockers, both PRE-EXISTING and both reproducible at HEAD before this round touched anything:
+
+1. **`promote-floor.ts` REFUSES.** `REFUSED: decision RA-ffffff: leaf
+   `imported.button.label.color.primary` is not in the minted tree.` The committed
+   `tokens/reanchor-decisions.json` ledger acks a leaf the current engine no longer mints — the
+   capture mints `imported.button.label.row-rule-color.*` and no `color` leaf at all. Verified
+   pre-existing by stashing the fresh capture and re-running against the committed artifacts: it
+   fails identically. So astryx's contracts cannot be re-promoted by any command in the repo until
+   that ledger entry is re-anchored or retired.
+
+2. **The capture loop is NOT IDEMPOTENT for astryx.** It is the one library whose capture config
+   reads its OWN SHIPPED contracts — `extract/computed/configs/astryx.json` points every component
+   at `examples/astryx/contracts/<c>.contract.json`, where carbon/mui/tailwind point at a
+   `contracts-seed/`. So each capture+promote cycle appends another provenance sentence to every
+   `description` and bumps the `version` (observed this round: card `0.1.0` -> `0.3.0`, with
+   "COMPUTED-ENRICHED (extract/computed): …" written twice). Committing one turn of that loop would
+   ship a self-referential artifact that grows on every future run.
+
+**What the reverted capture measured, recorded so the work is not invisible:** Switch came back
+77.344% against a committed 76.302% — exactly the offline regate number, which means the
+`ENGINE IMPROVED — absolute-positioning round f52c334 (+1.042)` gap in
+`extract/computed/regate-baseline.json` is real and would have closed. Every other astryx
+`captured-truth.json` and `enriched.contract.json` came back byte-identical.
+
+**The shorthand ceiling (task #27) is NOT MEASURED for astryx** — and that is not the same as
+zero. Astryx's config declares no `varPrefix` (StyleX compiles token names away), so the CSS-vars
+source reader never runs and no `source-bindings.json` is written at all. The same is true of
+polaris. The instrument's real numbers exist only for the four libraries whose source CSS names
+its own tokens: carbon 14, tailwind 16, altitude 16, mui 2.
+
+**Closing it** is a round of its own: re-anchor or retire `RA-ffffff`, then repoint the capture
+config at a committed `examples/astryx/contracts-seed/` the way the other libraries do, so the loop
+becomes idempotent. Named here rather than carried silently.

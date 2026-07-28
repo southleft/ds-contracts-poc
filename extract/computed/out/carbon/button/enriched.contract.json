@@ -328,7 +328,8 @@
             }
           }
         }
-      ]
+      ],
+      "hugsBelowMaxWidth": true
     }
   },
   "anchors": {

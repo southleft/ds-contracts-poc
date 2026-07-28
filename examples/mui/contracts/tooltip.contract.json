@@ -100,7 +100,8 @@
             "padding-right": "{imported.tooltip.label.padding-right}",
             "padding-top": "{imported.shared.size-4}",
             "row-rule-color": "{imported.tooltip.label.row-rule-color}"
-          }
+          },
+          "hugsBelowMaxWidth": true
         }
       },
       "tokens": {

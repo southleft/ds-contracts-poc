@@ -154,7 +154,8 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "hugsBelowMaxWidth": true
                 },
                 "label-2": {
                   "element": "button",
@@ -225,7 +226,8 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "hugsBelowMaxWidth": true
                 },
                 "label-3": {
                   "element": "button",
@@ -296,7 +298,8 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "hugsBelowMaxWidth": true
                 }
               },
               "declared": {

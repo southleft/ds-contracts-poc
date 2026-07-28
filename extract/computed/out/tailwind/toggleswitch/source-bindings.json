@@ -173,6 +173,17 @@
     }
   ],
   "skips": [
-    "label.line-height: no var candidate verified against the computed value in any combo"
-  ]
+    "label.line-height: candidate --text-sm--line-height → \"text-sm--line-height\" = calc(1.25 / 0.875) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label.margin-inline-start: source declares `calc(var(--spacing) * 3)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "label.margin-top: source declares `calc(var(--spacing) * 0.5)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "part-0.height: source declares `calc(var(--spacing) * 7)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "part-0.min-width: source declares `calc(var(--spacing) * 11)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "part-0.width: source declares `calc(var(--spacing) * 11)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "root.border-radius: SHORTHAND carrying var(--radius-lg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 5,
+  "calcCeiling": 5
 }

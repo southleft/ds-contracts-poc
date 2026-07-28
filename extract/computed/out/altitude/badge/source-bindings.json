@@ -431,10 +431,10 @@
         "variant": "unset",
         "dot": "dot"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -445,10 +445,10 @@
         "variant": "info",
         "dot": "dot"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -459,10 +459,10 @@
         "variant": "success",
         "dot": "dot"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -473,10 +473,10 @@
         "variant": "warning",
         "dot": "dot"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -487,10 +487,10 @@
         "variant": "danger",
         "dot": "dot"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -501,10 +501,10 @@
         "variant": "unset",
         "dot": "dot"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -515,10 +515,10 @@
         "variant": "info",
         "dot": "dot"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -529,10 +529,10 @@
         "variant": "success",
         "dot": "dot"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -543,10 +543,10 @@
         "variant": "warning",
         "dot": "dot"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     },
     {
@@ -557,12 +557,21 @@
         "variant": "danger",
         "dot": "dot"
       },
-      "token": "theme-space-xs",
-      "varName": "--al-theme-space-xs",
+      "token": "base-space",
+      "varName": "--al-base-space",
       "anchor": {
-        "selector": ".al-c-badge.al-is-dot"
+        "selector": ".al-c-badge"
       }
     }
   ],
-  "skips": []
+  "skips": [],
+  "shorthandCeiling": 4,
+  "shorthandSkips": [
+    "root.background: SHORTHAND carrying var(--al-theme-color-background-danger-default) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--al-theme-color-background-info-default) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--al-theme-color-background-success-default) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--al-theme-color-background-warning-default) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 2,
+  "calcCeiling": 0
 }

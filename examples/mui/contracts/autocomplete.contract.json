@@ -397,61 +397,6 @@
                     "transform": "matrix(1, 0, 0, 1, 0, -14)"
                   },
                   "parts": {
-                    "autocomplete-clearindicator": {
-                      "element": "button",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|Autocomplete-clearIndicator.ButtonBase-root.IconButton-root — this element exists in the real component's DOM; the static layer had no part for it.",
-                      "layout": {
-                        "display": "inline-flex",
-                        "align": "center",
-                        "justify": "center"
-                      },
-                      "icon": {
-                        "asset": "autocomplete-autocomplete-clearindicator",
-                        "size": 20
-                      },
-                      "declared": {
-                        "appearance": "none",
-                        "border-bottom-style": "none",
-                        "border-left-style": "none",
-                        "border-right-style": "none",
-                        "border-top-style": "none",
-                        "cursor": "pointer",
-                        "position": "relative",
-                        "transition-duration": "0.15s",
-                        "transition-property": "background-color",
-                        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
-                        "user-select": "none"
-                      },
-                      "tokens": {
-                        "background-color": "{imported.autocomplete.autocomplete-clearindicator.background-color}",
-                        "border-bottom-left-radius": "{imported.shared.size-14}",
-                        "border-bottom-right-radius": "{imported.shared.size-14}",
-                        "border-bottom-width": "{imported.shared.size-0}",
-                        "border-left-width": "{imported.shared.size-0}",
-                        "border-right-width": "{imported.shared.size-0}",
-                        "border-top-left-radius": "{imported.shared.size-14}",
-                        "border-top-right-radius": "{imported.shared.size-14}",
-                        "border-top-width": "{imported.shared.size-0}",
-                        "bottom": "{imported.shared.size-0}",
-                        "color": "{imported.shared.color-0000008a}",
-                        "flex-shrink": "{imported.shared.num-0}",
-                        "font-size": "{imported.autocomplete.autocomplete-clearindicator.font-size}",
-                        "height": "{imported.shared.size-28}",
-                        "left": "{imported.shared.size-0}",
-                        "margin-right": "{imported.autocomplete.autocomplete-clearindicator.margin-right}",
-                        "min-height": "{imported.shared.size-0}",
-                        "min-width": "{imported.shared.size-0}",
-                        "outline-width": "{imported.shared.size-0}",
-                        "padding-bottom": "{imported.shared.size-4}",
-                        "padding-left": "{imported.shared.size-4}",
-                        "padding-right": "{imported.shared.size-4}",
-                        "padding-top": "{imported.shared.size-4}",
-                        "right": "{imported.shared.size-0}",
-                        "row-rule-color": "{imported.shared.color-0000008a}",
-                        "top": "{imported.shared.size-0}",
-                        "width": "{imported.shared.size-28}"
-                      }
-                    },
                     "autocomplete-popupindicator": {
                       "element": "button",
                       "description": "Promoted from the computed floor (round 4): rendered anatomy button|Autocomplete-popupIndicator.ButtonBase-root.IconButton-root — this element exists in the real component's DOM; the static layer had no part for it.",

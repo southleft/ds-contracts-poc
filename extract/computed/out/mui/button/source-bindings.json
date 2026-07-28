@@ -2345,6 +2345,12 @@
     }
   ],
   "skips": [
-    "root.box-shadow: no var candidate verified against the computed value in any combo"
-  ]
+    "root.box-shadow: candidate --mui-shadows-2 → \"shadows-2\" = 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "root.border: SHORTHAND carrying var(--mui-palette-action-disabledBackground) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }

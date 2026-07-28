@@ -1,6 +1,6 @@
 {
-  "_marker": "CHILD-WIDER-THAN-PARENT BASELINE \u2014 a committed per-library defect count that may only DECREASE. `overflows` counts in-flow children wider than their parent with a non-text cause; `textCaused` counts the exempted class (the corpus-wide text-wrapping gap, docs/22) separately so it can never flatter the first number. Both ratchet TWO-SIDED: an increase is a new defect, a decrease is a fix that must be re-recorded here with its cause named. Re-record deliberately with `node scripts/child-wider.mjs --write` and say what moved.",
-  "recordedAt": "2026-07-27",
+  "_marker": "CHILD-WIDER-THAN-PARENT BASELINE — a committed per-library defect count that may only DECREASE. `overflows` counts in-flow children wider than their parent with a non-text cause; `textCaused` counts the exempted class (the corpus-wide text-wrapping gap, docs/22) separately so it can never flatter the first number. Both ratchet TWO-SIDED: an increase is a new defect, a decrease is a fix that must be re-recorded here with its cause named. Re-record deliberately with `node scripts/child-wider.mjs --write` and say what moved.",
+  "recordedAt": "2026-07-28",
   "rows": [
     {
       "library": "altitude",
@@ -17,7 +17,7 @@
       "overflows": 5,
       "textCaused": 6,
       "marginBox": 0,
-      "cause": "overflows(5): ProgressBar `fill` renders 100px inside a 48px `track` in all five Variant cells \u2014 ONE defect class, a PERCENT width (`width: 100%`) baked as a px literal by the computed floor. textCaused(6): the corpus-wide text-wrapping gap (docs/22 \u00a7\"Text wrapping is not implemented\") \u2014 Figma text nodes auto-size on one line, so a hugging box holds an unwrapped run.",
+      "cause": "overflows(5): ProgressBar `fill` renders 100px inside a 48px `track` in all five Variant cells — ONE defect class, a PERCENT width (`width: 100%`) baked as a px literal by the computed floor. textCaused(6): the corpus-wide text-wrapping gap (docs/22 §\"Text wrapping is not implemented\") — Figma text nodes auto-size on one line, so a hugging box holds an unwrapped run.",
       "detail": [
         "\"fill\" 100 > parent \"track\" 48 (Variant=Accent)",
         "\"fill\" 100 > parent \"track\" 48 (Variant=Success)",
@@ -31,7 +31,7 @@
       "overflows": 0,
       "textCaused": 8,
       "marginBox": 0,
-      "cause": "textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them \u2014 this row is the exempted class only.",
+      "cause": "textCaused(8): all eight are the corpus-wide text-wrapping gap in Accordion (docs/22). Carbon's NON-text overflows were closed by the live-defect round (9c30204, D3) and its own compile receipt keeps a HARD zero on them — this row is the exempted class only.",
       "detail": []
     },
     {
@@ -39,8 +39,8 @@
       "scripts": 14,
       "overflows": 0,
       "textCaused": 6,
-      "marginBox": 4,
-      "cause": "textCaused(6): the corpus-wide text-wrapping gap (AccordionDetails body 426px inside 288px is the canonical case). marginBox(4): Autocomplete's clear/popup indicators carry margin-right -2, so the margin-box wrapper reserves 26px while the 28px control paints over it \u2014 the MEANING of a negative margin, not an overflow. Both classes appeared at their current values only after the MUI regen round gave the indicators a real control box (D6b); before that the indicators were bare glyphs with no box to overflow anything.",
+      "marginBox": 2,
+      "cause": "textCaused(6): the corpus-wide text-wrapping gap (AccordionDetails body 426px inside 288px is the canonical case). marginBox(2): Autocomplete's POPUP indicator carries margin-right -2, so the margin-box wrapper reserves 26px while the 28px control paints over it — the MEANING of a negative margin, not an overflow. WAS 4 UNTIL THE TASK-#38 RECAPTURE: the other two were the CLEAR indicator, which MUI renders `visibility: hidden` in every combo of the closed-state capture. It was a PHANTOM — a fully-visible 28x28 button with an SVG glyph that the browser draws nowhere — carried because MUI's shipped artifacts predated the engine's `non-painting-part` refusal. The recapture refused it, and this number halving is what that removal looks like from the canvas side. Both classes reached their earlier values only after the MUI regen round gave the indicators a real control box (D6b).",
       "detail": []
     },
     {

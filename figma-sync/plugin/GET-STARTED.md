@@ -1,7 +1,7 @@
 # DS Contracts Sync Runner — get started
 
 A Figma plugin that builds your component library **from contracts**, deterministically.
-Paste a contract, click Generate — the plugin emits and runs the sync locally, so the
+Paste a contract, click Generate in this file — the plugin emits and runs the sync locally, so the
 canvas is a pure, byte-reproducible function of the contract. **No AI is in the
 conversion.** (AI may author contracts or build this tooling; it never runs the sync.)
 
@@ -34,7 +34,7 @@ no re-import needed. The plugin header shows the running engine's build stamp
 
 1. Open a **blank** Figma design file (fresh files need token variables — the plugin
    seeds them).
-2. Run **DS Contracts Sync Runner** → **Generate** tab.
+2. Run **DS Contracts Sync Runner** → **Build** tab.
 3. Paste a contract into the box. Two to try:
    - **Simple:** paste `contracts/badge.contract.json` → builds a Badge variant set.
    - **Advanced:** paste `examples/depth-composite/composite-modal.contract.json` → builds
@@ -42,7 +42,7 @@ no re-import needed. The plugin header shows the running engine's build stamp
      plugin resolves the child components (Card, Badge, Avatar, Button) from its baked
      repo contracts and builds them dependency-ordered, tokens first — **you paste one
      contract.**
-4. Leave **"Sync token variables first"** checked. Click **Generate in this file.**
+4. Click **Generate in this file.** (Token variables always sync first — the old opt-out checkbox was removed.)
 
 That's it. The set appears, token-bound, styled, identity-marked. Run it again → the same
 bytes. Because it's a function of the contract, not a guess.
@@ -58,7 +58,7 @@ npx @ds-contracts/cli figma bundle <contracts-dir> \
   [--modes <light.json[,dark.json]>] --name <Collection> --out my-library.bundle.json
 ```
 
-Paste that single JSON into the **Generate** tab. The plugin syncs the token set first —
+Paste that single JSON into the **Build** tab. The plugin syncs the token set first —
 one variable collection named after the library, Light/Dark modes, Figma-native
 variable aliases for minted `{alias}` leaves — then builds every component set bound to
 it. **JSON is the only thing you ever paste**; there is no script step. Try it:
@@ -88,7 +88,7 @@ repo token.
 ## The round-trip: canvas → contract (the other direction)
 
 1. Edit a generated set on the canvas (add a variant, tweak a prop).
-2. **Propose** tab → the plugin dumps the set and diffs it against its contract, in plain
+2. **Send** tab → the plugin dumps the set and diffs it against its contract, in plain
    words, then exports the proposed contract diff (or opens a PR with a fine-grained
    token — session-only, never stored).
 

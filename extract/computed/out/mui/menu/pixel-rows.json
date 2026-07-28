@@ -1,8 +1,9 @@
 [
   {
     "key": "__default",
-    "pctExact": 100,
-    "pctAA": 100,
-    "note": "size mismatch ours 320x96 vs orig 900x1000"
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "size-mismatch",
+    "note": "size mismatch ours 320x96 vs orig 900x1000 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
   }
 ]

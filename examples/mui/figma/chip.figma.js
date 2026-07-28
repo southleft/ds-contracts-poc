@@ -57,15 +57,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/default",
+                  "textFill": "imported/chip/label/color/filled/default",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/medium",
+                "paddingRight": "imported/chip/label/padding-right/filled/medium"
               }
             }
           ]
@@ -112,15 +112,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/default",
+                  "textFill": "imported/chip/label/color/filled/default",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/small",
+                "paddingRight": "imported/chip/label/padding-right/filled/small"
               }
             }
           ]
@@ -167,15 +167,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/primary",
+                  "textFill": "imported/chip/label/color/filled/primary",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/medium",
+                "paddingRight": "imported/chip/label/padding-right/filled/medium"
               }
             }
           ]
@@ -222,15 +222,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/primary",
+                  "textFill": "imported/chip/label/color/filled/primary",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/small",
+                "paddingRight": "imported/chip/label/padding-right/filled/small"
               }
             }
           ]
@@ -277,15 +277,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/secondary",
+                  "textFill": "imported/chip/label/color/filled/secondary",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/medium",
+                "paddingRight": "imported/chip/label/padding-right/filled/medium"
               }
             }
           ]
@@ -332,15 +332,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/secondary",
+                  "textFill": "imported/chip/label/color/filled/secondary",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/small",
+                "paddingRight": "imported/chip/label/padding-right/filled/small"
               }
             }
           ]
@@ -387,15 +387,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/error",
+                  "textFill": "imported/chip/label/color/filled/error",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/medium",
+                "paddingRight": "imported/chip/label/padding-right/filled/medium"
               }
             }
           ]
@@ -442,15 +442,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/error",
+                  "textFill": "imported/chip/label/color/filled/error",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/small",
+                "paddingRight": "imported/chip/label/padding-right/filled/small"
               }
             }
           ]
@@ -497,15 +497,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/success",
+                  "textFill": "imported/chip/label/color/filled/success",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/medium",
+                "paddingRight": "imported/chip/label/padding-right/filled/medium"
               }
             }
           ]
@@ -552,15 +552,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/success",
+                  "textFill": "imported/chip/label/color/filled/success",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/small",
+                "paddingRight": "imported/chip/label/padding-right/filled/small"
               }
             }
           ]
@@ -607,15 +607,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/warning",
+                  "textFill": "imported/chip/label/color/filled/warning",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/medium",
+                "paddingRight": "imported/chip/label/padding-right/filled/medium"
               }
             }
           ]
@@ -662,15 +662,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/warning",
+                  "textFill": "imported/chip/label/color/filled/warning",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/small",
+                "paddingRight": "imported/chip/label/padding-right/filled/small"
               }
             }
           ]
@@ -717,15 +717,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/info",
+                  "textFill": "imported/chip/label/color/filled/info",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/medium",
+                "paddingRight": "imported/chip/label/padding-right/filled/medium"
               }
             }
           ]
@@ -772,15 +772,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/filled/info",
+                  "textFill": "imported/chip/label/color/filled/info",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/filled/small",
+                "paddingRight": "imported/chip/label/padding-right/filled/small"
               }
             }
           ]
@@ -827,15 +827,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/default",
+                  "textFill": "imported/chip/label/color/outlined/default",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/medium",
+                "paddingRight": "imported/chip/label/padding-right/outlined/medium"
               }
             }
           ]
@@ -882,15 +882,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/default",
+                  "textFill": "imported/chip/label/color/outlined/default",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/small",
+                "paddingRight": "imported/chip/label/padding-right/outlined/small"
               }
             }
           ]
@@ -937,15 +937,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/primary",
+                  "textFill": "imported/chip/label/color/outlined/primary",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/medium",
+                "paddingRight": "imported/chip/label/padding-right/outlined/medium"
               }
             }
           ]
@@ -992,15 +992,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/primary",
+                  "textFill": "imported/chip/label/color/outlined/primary",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/small",
+                "paddingRight": "imported/chip/label/padding-right/outlined/small"
               }
             }
           ]
@@ -1047,15 +1047,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/secondary",
+                  "textFill": "imported/chip/label/color/outlined/secondary",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/medium",
+                "paddingRight": "imported/chip/label/padding-right/outlined/medium"
               }
             }
           ]
@@ -1102,15 +1102,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/secondary",
+                  "textFill": "imported/chip/label/color/outlined/secondary",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/small",
+                "paddingRight": "imported/chip/label/padding-right/outlined/small"
               }
             }
           ]
@@ -1157,15 +1157,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/error",
+                  "textFill": "imported/chip/label/color/outlined/error",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/medium",
+                "paddingRight": "imported/chip/label/padding-right/outlined/medium"
               }
             }
           ]
@@ -1212,15 +1212,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/error",
+                  "textFill": "imported/chip/label/color/outlined/error",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/small",
+                "paddingRight": "imported/chip/label/padding-right/outlined/small"
               }
             }
           ]
@@ -1267,15 +1267,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/success",
+                  "textFill": "imported/chip/label/color/outlined/success",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/medium",
+                "paddingRight": "imported/chip/label/padding-right/outlined/medium"
               }
             }
           ]
@@ -1322,15 +1322,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/success",
+                  "textFill": "imported/chip/label/color/outlined/success",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/small",
+                "paddingRight": "imported/chip/label/padding-right/outlined/small"
               }
             }
           ]
@@ -1377,15 +1377,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/warning",
+                  "textFill": "imported/chip/label/color/outlined/warning",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/medium",
+                "paddingRight": "imported/chip/label/padding-right/outlined/medium"
               }
             }
           ]
@@ -1432,15 +1432,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/warning",
+                  "textFill": "imported/chip/label/color/outlined/warning",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/small",
+                "paddingRight": "imported/chip/label/padding-right/outlined/small"
               }
             }
           ]
@@ -1487,15 +1487,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/info",
+                  "textFill": "imported/chip/label/color/outlined/info",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/medium",
+                "paddingRight": "imported/chip/label/padding-right/outlined/medium"
               }
             }
           ]
@@ -1542,15 +1542,15 @@ const COMPONENTS = [
                   "contentProp": "Label",
                   "fontSize": 13,
                   "fontStyle": "Regular",
-                  "textFill": "imported/chip/root/color/outlined/info",
+                  "textFill": "imported/chip/label/color/outlined/info",
                   "lineHeight": 19.5,
                   "fontFamily": "Roboto",
                   "textTruncation": true
                 }
               ],
-              "lits": {
-                "paddingLeft": 12,
-                "paddingRight": 12
+              "bindings": {
+                "paddingLeft": "imported/chip/label/padding-left/outlined/small",
+                "paddingRight": "imported/chip/label/padding-right/outlined/small"
               }
             }
           ]
@@ -1840,50 +1840,6 @@ function applyFrameSpec(node, spec) {
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
-  if (spec.lits) {
-    // v14 literals: no variable to bind — plain values, compile-parsed.
-    const li = spec.lits;
-    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
-    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
-    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
-    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
-    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
-    if (li.radius !== undefined) node.cornerRadius = li.radius;
-    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
-    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
-    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
-    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
-    // trampled — fillClear only clears when no fill was spec'd. The compile
-    // side already drops fillClear when a fill binding exists (applyLiterals);
-    // this runtime guard makes the emitted script safe even for hand-fed
-    // specs carrying both.
-    if (li.fillClear && !spec.fill) node.fills = [];
-    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
-    if (li.radiusCorners) {
-      const rc = li.radiusCorners;
-      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
-      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
-      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
-      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
-    }
-    if (li.strokeSides) {
-      const sw = li.strokeSides;
-      if (sw.top !== undefined) node.strokeTopWeight = sw.top;
-      if (sw.right !== undefined) node.strokeRightWeight = sw.right;
-      if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
-      if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
-    }
-    if (li.width !== undefined || li.height !== undefined) {
-      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
-      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
-      if (li.width !== undefined) {
-        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
-      }
-      if (li.height !== undefined) {
-        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
-      }
-    }
-  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -1941,10 +1897,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];

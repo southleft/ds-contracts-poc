@@ -149,7 +149,38 @@ const COMPONENTS = [
                     "px": 8,
                     "varName": "imported/shared/size-8"
                   },
-                  "children": [],
+                  "children": [
+                    {
+                      "type": "shape",
+                      "name": "badge-after",
+                      "shape": {
+                        "kind": "ellipse",
+                        "width": 12,
+                        "height": 12
+                      },
+                      "lits": {
+                        "fillClear": true,
+                        "strokeSides": {
+                          "top": 2,
+                          "right": 2,
+                          "bottom": 2,
+                          "left": 2
+                        },
+                        "strokeColor": {
+                          "r": 0.9137254901960784,
+                          "g": 0.9058823529411765,
+                          "b": 0.8862745098039215,
+                          "a": 1
+                        }
+                      },
+                      "absolute": {
+                        "h": "MIN",
+                        "v": "MIN",
+                        "left": -2,
+                        "top": -2
+                      }
+                    }
+                  ],
                   "visibleProp": "Show HasBadge",
                   "visibleDefault": false
                 }
@@ -444,6 +475,51 @@ function applyFrameSpec(node, spec) {
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { /* needs auto-layout */ } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { /* needs auto-layout */ } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeColor) node.strokes = [{ type: 'SOLID', color: { r: li.strokeColor.r, g: li.strokeColor.g, b: li.strokeColor.b }, opacity: li.strokeColor.a === undefined ? 1 : li.strokeColor.a }];
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+      if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+      if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+      if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      const horizontalIsPrimary = (spec.layout || { mode: 'HORIZONTAL' }).mode === 'HORIZONTAL';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
+    }
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -461,6 +537,51 @@ function applyOverlay(parent, childNode, childSpec) {
     else if (p === 'bottom') { childNode.x = 0; childNode.y = parent.height; }
     else if (p === 'start') { childNode.x = -childNode.width; childNode.y = 0; }
     else { childNode.x = parent.width; childNode.y = 0; }
+  } catch (e) { /* parent not auto-layout — leave in flow */ }
+}
+
+// v9 shape placement: exact offsets vs the parent box, after append.
+function applyShapeAbsolute(parent, childNode, childSpec) {
+  if (!childSpec.absolute) return;
+  try {
+    childNode.layoutPositioning = 'ABSOLUTE';
+    const a = childSpec.absolute;
+    // absolute-position round: STRETCH pins BOTH sides — size derives from
+    // the parent box minus the offsets (rail: left 0 + right 0, fixed height).
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      const w2 = a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width;
+      const h2 = a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height;
+      childNode.resize(w2, h2);
+    }
+    childNode.constraints = {
+      horizontal: a.h === 'STRETCH' ? 'STRETCH' : a.h === 'MAX' ? 'MAX' : a.h === 'CENTER' ? 'CENTER' : 'MIN',
+      vertical: a.v === 'STRETCH' ? 'STRETCH' : a.v === 'MAX' ? 'MAX' : a.v === 'CENTER' ? 'CENTER' : 'MIN',
+    };
+    if (a.h === 'STRETCH' || a.v === 'STRETCH') {
+      childNode.x = a.h === 'STRETCH' ? (a.left || 0) : childNode.x;
+      childNode.y = a.v === 'STRETCH' ? (a.top || 0) : childNode.y;
+      if (a.h !== 'STRETCH' && a.left !== undefined) childNode.x = a.left;
+      if (a.h !== 'STRETCH' && a.right !== undefined) childNode.x = parent.width - a.right - childNode.width;
+      if (a.v !== 'STRETCH' && a.top !== undefined) childNode.y = a.top;
+      if (a.v !== 'STRETCH' && a.bottom !== undefined) childNode.y = parent.height - a.bottom - childNode.height;
+      return;
+    }
+    const w = childSpec.shape ? childSpec.shape.width : childNode.width;
+    const h = childSpec.shape ? childSpec.shape.height : childNode.height;
+    // Center of the intrinsic box in parent coordinates (MIN pins left/top,
+    // MAX pins right/bottom, CENTER centers):
+    const cx = a.left !== undefined ? a.left + w / 2 : a.right !== undefined ? parent.width - a.right - w / 2 : parent.width / 2;
+    const cy = a.top !== undefined ? a.top + h / 2 : a.bottom !== undefined ? parent.height - a.bottom - h / 2 : parent.height / 2;
+    // Rotation moves the measured box — correct against the actual bounds.
+    const bb = childNode.absoluteBoundingBox;
+    const pb = parent.absoluteBoundingBox;
+    if (bb && pb) {
+      childNode.x += cx - bb.width / 2 - (bb.x - pb.x);
+      childNode.y += cy - bb.height / 2 - (bb.y - pb.y);
+    } else {
+      childNode.x = cx - w / 2;
+      childNode.y = cy - h / 2;
+    }
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
@@ -546,10 +667,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];
@@ -598,6 +734,53 @@ async function buildNode(spec, registry) {
         registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
       }
     }
+  } else if (spec.type === 'shape') {
+    // v9 shape (#42): a REAL parametric node with native rotation.
+    node = spec.shape.kind === 'ellipse' ? figma.createEllipse()
+      : spec.shape.kind === 'rect' ? figma.createRectangle()
+      : figma.createPolygon();
+    if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
+    node.resize(spec.shape.width, spec.shape.height);
+    // Shape nodes ship a default gray paint — a spec with NO fill channel
+    // clears it (a canvas artifact is not contract data; Phase B deviation 3).
+    // Round 5f (B5E finding 2): a shape's LITERAL fill (lits.fillColor — the
+    // RadioButton checked dot's white, compiled from the decor's
+    // background-color literal) was DROPPED here (the shape branch never runs
+    // applyFrameSpec's litsRuntime), so the dot landed with no fill and had to
+    // be hand-corrected on canvas each re-amend. Apply it at the SOURCE:
+    // bound fill wins; else a literal fill; else clear.
+    node.fills = spec.fill
+      ? [boundPaint(spec.fill, node)]
+      : (spec.lits && spec.lits.fillColor)
+        ? [{ type: 'SOLID', color: { r: spec.lits.fillColor.r, g: spec.lits.fillColor.g, b: spec.lits.fillColor.b }, opacity: spec.lits.fillColor.a === undefined ? 1 : spec.lits.fillColor.a }]
+        : [];
+    // spec.stroke + spec.bindings apply exactly as on frames (Phase B
+    // deviation 2: the emitted shape branch silently dropped the checkbox /
+    // radio backdrop strokes and radii — the shim now lives at the source).
+    if (spec.stroke) {
+      node.strokes = [boundPaint(spec.stroke, node)];
+      node.strokeAlign = 'INSIDE';
+    }
+    // CARBON LIVE-DEFECT ROUND (D2): a shape's LITERAL RING. An unchecked
+    // Carbon checkbox box is a transparent square with a 1px border — a ring
+    // with no paint, no weight and no radius is not a box.
+    else if (spec.lits && spec.lits.strokeColor) {
+      node.strokes = [{ type: 'SOLID', color: { r: spec.lits.strokeColor.r, g: spec.lits.strokeColor.g, b: spec.lits.strokeColor.b }, opacity: spec.lits.strokeColor.a === undefined ? 1 : spec.lits.strokeColor.a }];
+      node.strokeAlign = 'INSIDE';
+    }
+    if (spec.lits && spec.lits.strokeWeight !== undefined) node.strokeWeight = spec.lits.strokeWeight;
+    if (spec.lits && spec.lits.strokeSides) {
+      const sw = spec.lits.strokeSides;
+      if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+      if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+      if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+      if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+    }
+    if (spec.lits && spec.lits.radius !== undefined) node.cornerRadius = spec.lits.radius;
+    for (const [field, varName] of Object.entries(spec.bindings || {})) {
+      node.setBoundVariable(field, need(varName));
+    }
+    if (typeof spec.shape.rotation === 'number' && spec.shape.rotation !== 0) node.rotation = -spec.shape.rotation;
   } else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
@@ -612,6 +795,7 @@ async function buildNode(spec, registry) {
     node.appendChild(childNode);
     built.push([child, childNode]);
     applyOverlay(node, childNode, child);
+    applyShapeAbsolute(node, childNode, child);
     if (child.pct != null) {
       try {
         childNode.resize(Math.max(1, Math.round(node.width * child.pct)), childNode.height);
@@ -852,6 +1036,7 @@ async function amendSet(set, C) {
         comp.appendChild(childNode);
         built.push([childSpec, childNode]);
         applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
         if (childSpec.pct != null) {
           try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
         }
@@ -1003,6 +1188,7 @@ async function amendComponent(comp, C) {
     comp.appendChild(childNode);
     built.push([childSpec, childNode]);
     applyOverlay(comp, childNode, childSpec);
+    applyShapeAbsolute(comp, childNode, childSpec);
     if (childSpec.pct != null) {
       try { childNode.resize(Math.max(1, Math.round(comp.width * childSpec.pct)), childNode.height); childNode.primaryAxisSizingMode = 'FIXED'; } catch (e) {}
     }
@@ -1902,10 +2088,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];
@@ -3555,10 +3756,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];
@@ -5084,10 +5300,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];
@@ -6152,10 +6383,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];
@@ -7619,10 +7865,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];
@@ -8903,10 +9164,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];
@@ -10247,10 +10523,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];

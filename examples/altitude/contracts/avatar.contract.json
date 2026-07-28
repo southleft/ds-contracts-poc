@@ -96,6 +96,32 @@
               "visibleWhen": {
                 "prop": "hasBadge"
               },
+              "parts": {
+                "badge-after": {
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 12,
+                    "height": 12
+                  },
+                  "declared": {
+                    "position": "absolute"
+                  },
+                  "literals": {
+                    "background-color": "transparent",
+                    "border-top-width": "2px",
+                    "border-right-width": "2px",
+                    "border-bottom-width": "2px",
+                    "border-left-width": "2px",
+                    "border-top-color": "rgba(233, 231, 226, 1)",
+                    "border-right-color": "rgba(233, 231, 226, 1)",
+                    "border-bottom-color": "rgba(233, 231, 226, 1)",
+                    "border-left-color": "rgba(233, 231, 226, 1)",
+                    "top": "-2px",
+                    "left": "-2px"
+                  },
+                  "description": "Drawn ::after pseudo-element decor promoted from the computed floor (pseudo-decor v2, Carbon live-defect round): an UNCONDITIONAL 12×12 ellipse at -2,-2 inside badge — position:absolute with literal offsets; background+border+box+radius only, no content text; translate folded into top/left (receipted)."
+                }
+              },
               "tokens": {
                 "background-color": "{imported.avatar.badge.background-color}",
                 "border-bottom-left-radius": "{imported.shared.size-8}",

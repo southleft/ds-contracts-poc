@@ -1,6 +1,6 @@
 {
   "_marker": "REGATE DRIFT BASELINE — what extract/computed/regate.ts (OFFLINE re-fuse of the committed captured truth through the CURRENT engine) produces, per component. NOT a copy of the harness scorecards: where the two differ, `gapCause` names why (docs/20-regate-drift.md). Re-record deliberately with `npm run extract:computed:drift -- --write` and say what moved.",
-  "recordedAt": "2026-07-27",
+  "recordedAt": "2026-07-28",
   "rows": [
     {
       "library": "altitude",
@@ -117,7 +117,7 @@
       "cellsCompared": 1536,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 76.30208333333333,
-      "gapCause": "ENGINE IMPROVED — absolute-positioning round f52c334 (+1.042). Reproduced 76.302 EXACTLY at 0078020."
+      "gapCause": "ENGINE IMPROVED — absolute-positioning round f52c334 (+1.042). Reproduced 76.302 EXACTLY at 0078020. — NOT CLOSED BY THE TASK-#38 RECAPTURE WAVE, and named rather than left to look like an oversight: astryx WAS re-captured successfully (Switch came back 77.344 — the offline number exactly, closing this gap in the measurement) but the result was REVERTED and is not committed, because astryx cannot complete the wave. Two blockers, both pre-existing and both reproducible at HEAD: (1) examples/astryx/scripts/promote-floor.ts REFUSES — \"decision RA-ffffff: leaf imported.button.label.color.primary is not in the minted tree\" — the committed reanchor-decisions.json ledger acks a leaf the current engine no longer mints, so the contracts cannot be re-promoted; (2) astryx is the one library whose capture config reads its OWN SHIPPED contracts (extract/computed/configs/astryx.json points at examples/astryx/contracts/*.contract.json, not a contracts-seed/), so every capture+promote cycle appends another provenance sentence to each description and bumps the version — the loop is NOT IDEMPOTENT and committing one turn of it would ship a self-referential artifact. astryx's figma scripts and bundles WERE re-emitted (the engine moved); only its captured truth and contracts are stale."
     },
     {
       "library": "carbon",
@@ -261,8 +261,8 @@
       "rerunPctEqual": 90.1639344262295,
       "cellsCompared": 6832,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 87.70491803278688,
-      "gapCause": "ENGINE IMPROVED — state-plane projection 53792d3 (+2.459). Reproduced 87.705 EXACTLY at its own commit 82d312f."
+      "committedPctEqual": 90.1639344262295,
+      "gapCause": "repaired by the TASK-#38 RECAPTURE WAVE: the gap this row recorded (\"ENGINE IMPROVED — state-plane projection 53792d3 (+2.459). Reproduced 87.705 EXACTLY at its own commit 82d312f.\") was the offline instrument knowing something the SHIPPED artifacts did not. MUI was re-captured through the real harness and its committed scorecard came back 90.164 — the offline number, to every decimal. cellsCompared UNCHANGED at 6832. What moved in the artifact: Chip's label side padding, which the shipped contract carried as ONE flat 12px for all 28 variants, is now the measured variant x size map (filled/medium 12, filled/small 8, outlined/medium 11, outlined/small 7 — the outlined pair a pixel narrower because its 1px border eats into the box), carried as 36 new minted leaves under imported.chip.label. This is the ONLY floor number that moved anywhere in the wave: 37 scorecards across carbon/mui/tailwind/altitude were re-measured and 36 came back byte-identical."
     },
     {
       "library": "mui",
@@ -343,7 +343,7 @@
       "cellsCompared": 1840,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 70.65217391304348,
-      "gapCause": ""
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'."
     },
     {
       "library": "polaris",
@@ -352,7 +352,7 @@
       "cellsCompared": 22144,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 97.32658959537572,
-      "gapCause": "repaired: FOREIGN decision ledger removed (repair wave #19). extract/computed/out/badge/decisions.json was not a polluted Polaris ledger — it was the ASTRYX Badge ledger in full (its combo ids are astryx's 14 Badge variants; both rows appear verbatim in out/astryx/badge/decisions.md with identical queue counts; the only commit that ever wrote it is 2f494ab, an astryx round). b66e5a3's namespacing restore covered the GENERATED artifacts but run.ts preserves the human-decision ones, so it survived. Removed along with the stale resolved.contract.json it had produced — which promote-floor PREFERS, and which would have silently regressed the shipped Badge contract on the next promotion. 2 unresolved refs -> 0, committed number reproduced exactly. Guarded by the apply-time value check + eval decision-ledger-value-check."
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'. — repaired: FOREIGN decision ledger removed (repair wave #19). extract/computed/out/badge/decisions.json was not a polluted Polaris ledger — it was the ASTRYX Badge ledger in full (its combo ids are astryx's 14 Badge variants; both rows appear verbatim in out/astryx/badge/decisions.md with identical queue counts; the only commit that ever wrote it is 2f494ab, an astryx round). b66e5a3's namespacing restore covered the GENERATED artifacts but run.ts preserves the human-decision ones, so it survived. Removed along with the stale resolved.contract.json it had produced — which promote-floor PREFERS, and which would have silently regressed the shipped Badge contract on the next promotion. 2 unresolved refs -> 0, committed number reproduced exactly. Guarded by the apply-time value check + eval decision-ledger-value-check."
     },
     {
       "library": "polaris",
@@ -361,7 +361,7 @@
       "cellsCompared": 11744,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 96.90054495912807,
-      "gapCause": ""
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'."
     },
     {
       "library": "polaris",
@@ -370,7 +370,7 @@
       "cellsCompared": 81120,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 91.33136094674556,
-      "gapCause": "repaired: inheritance-aware nested refusal (repair wave #19). The nested-pair lift (53792d3) minted a BASE colour on the nested label/icon that blocked inheritance of the root's hover/focus-visible colour while every nested per-state delta went uncarried (91.331 -> 85.858). fuse.ts now REFUSES that base binding BY NAME when the capture proves the channel is pure inheritance (equal to its ancestor on all 960 planes) AND its own state delta cannot be carried — counting BOTH doors, the nested-state vocabulary and the pre-mint stateCodeOnly drop, because label died at the first and icon at the second. Reproduces the committed harness scorecard EXACTLY (74088/81120 cells, 320/960 rows) and the re-fused contract is BYTE-IDENTICAL to the committed enriched.contract.json, so no downstream artifact moved. Pinned by eval nested-inheritance-refusal."
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'. — repaired: inheritance-aware nested refusal (repair wave #19). The nested-pair lift (53792d3) minted a BASE colour on the nested label/icon that blocked inheritance of the root's hover/focus-visible colour while every nested per-state delta went uncarried (91.331 -> 85.858). fuse.ts now REFUSES that base binding BY NAME when the capture proves the channel is pure inheritance (equal to its ancestor on all 960 planes) AND its own state delta cannot be carried — counting BOTH doors, the nested-state vocabulary and the pre-mint stateCodeOnly drop, because label died at the first and icon at the second. Reproduces the committed harness scorecard EXACTLY (74088/81120 cells, 320/960 rows) and the re-fused contract is BYTE-IDENTICAL to the committed enriched.contract.json, so no downstream artifact moved. Pinned by eval nested-inheritance-refusal."
     },
     {
       "library": "polaris",
@@ -379,7 +379,7 @@
       "cellsCompared": 2440,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 84.11602209944752,
-      "gapCause": "VOCABULARY CHANGE — live-paste-2 acb0342 carried sr-only hidden inputs as hidden; cellsCompared 2896 → 2440. The dropped rows scored well, so the surviving % fell. Correct behaviour, moved denominator."
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'. — VOCABULARY CHANGE — live-paste-2 acb0342 carried sr-only hidden inputs as hidden; cellsCompared 2896 → 2440. The dropped rows scored well, so the surviving % fell. Correct behaviour, moved denominator."
     },
     {
       "library": "polaris",
@@ -388,7 +388,7 @@
       "cellsCompared": 1824,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 92.10526315789474,
-      "gapCause": ""
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'."
     },
     {
       "library": "polaris",
@@ -397,7 +397,7 @@
       "cellsCompared": 1376,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.68604651162791,
-      "gapCause": ""
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'."
     },
     {
       "library": "polaris",
@@ -406,7 +406,7 @@
       "cellsCompared": 8,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
-      "gapCause": ""
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'."
     },
     {
       "library": "polaris",
@@ -415,7 +415,7 @@
       "cellsCompared": 7353,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 82.05605158730158,
-      "gapCause": "VOCABULARY CHANGE — same class as Checkbox (acb0342 hidden-input + paint-order); cellsCompared 8064 → 7353."
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'. — VOCABULARY CHANGE — same class as Checkbox (acb0342 hidden-input + paint-order); cellsCompared 8064 → 7353."
     },
     {
       "library": "polaris",
@@ -424,7 +424,7 @@
       "cellsCompared": 22740,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
-      "gapCause": ""
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'."
     },
     {
       "library": "polaris",
@@ -433,7 +433,7 @@
       "cellsCompared": 40832,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 81.86239193083574,
-      "gapCause": "VOCABULARY CHANGE — same class (acb0342); cellsCompared 44416 → 40832, % within 0.005 of committed."
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'. — VOCABULARY CHANGE — same class (acb0342); cellsCompared 44416 → 40832, % within 0.005 of committed."
     },
     {
       "library": "polaris",
@@ -442,7 +442,7 @@
       "cellsCompared": 576,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 100,
-      "gapCause": ""
+      "gapCause": "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED (task #38). Polaris is the only library in examples/ with NO committed sandbox: every other one commits a pinned package.json + package-lock.json under a git-ignored .<lib>-sandbox/ that `npm run extract:computed -- --harness` runs against, and examples/polaris/README.md step 6 says `--harness <harness-dir>` — a directory recorded nowhere in this repo (.polaris-clone/ is the SOURCE clone for the static extraction, not a harness). Consequence, stated plainly: these rows' captured-truth.json is FROZEN at whatever engine produced it. Engine fixes reach Polaris ONLY through this offline regate re-fuse; anything in the CAPTURE half — a new channel read, a new pseudo-element, a refusal that needs to re-measure the DOM — cannot reach Polaris at all. The task-#38 recapture wave therefore refreshed altitude, astryx, carbon, mui and tailwind and left Polaris STALE BY NECESSITY, not by choice. Closing it is a round of its own (commit examples/polaris/.polaris-sandbox/ + a PROVENANCE.md, then recapture); see examples/polaris/README.md §'PERMANENT HOLE'."
     },
     {
       "library": "tailwind",

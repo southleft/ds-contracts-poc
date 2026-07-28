@@ -17,7 +17,7 @@ JSON document — built by `ds-contracts figma bundle --icons` (see
 component. The headless equivalence gate
 (`scripts/plugin-engine-check.mjs`, flow `foreign-token-bundle`) pins this
 paste against the compiled-script path below: same sets + standalone
-components, same variants, same 1648 variables, same bound values.
+components, same variants, same 1684 variables, same bound values.
 
 ## Script path (debug / CI surface)
 
@@ -25,7 +25,7 @@ components, same variants, same 1648 variables, same bound values.
 2. Run the DS Contracts plugin → **Paste a script** tab.
 3. Paste the entire contents of `GENESIS-BATCH.figma.js` → Run.
 
-Result (either path): a "MUI" variable collection (1648 variables, Light/Dark
+Result (either path): a "MUI" variable collection (1684 variables, Light/Dark
 modes — 73 of them **real Figma aliases** into the palette, exactly the
 references MUI's own CSS declares) and 11 component sets + 3 standalone
 components on their own pages (the counts below are the ones

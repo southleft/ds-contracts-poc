@@ -2105,6 +2105,15 @@
     }
   ],
   "skips": [
-    "root.line-height: no var candidate verified against the computed value in any combo"
-  ]
+    "root.height: source declares `calc(var(--spacing) * 12)` — a calc() over var(--spacing). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.line-height: candidates --text-base--line-height → \"text-base--line-height\" = calc(1.5 / 1); --text-sm--line-height → \"text-sm--line-height\" = calc(1.25 / 0.875); --text-xs--line-height → \"text-xs--line-height\" = calc(1 / 0.75) name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 3,
+  "shorthandSkips": [
+    "root.border-radius: SHORTHAND carrying var(--radius-lg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-style: SHORTHAND carrying var(--tw-border-style) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.padding-inline: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 1,
+  "calcCeiling": 1
 }

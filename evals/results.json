@@ -1,6 +1,6 @@
 {
-  "passed": 172,
-  "total": 172,
+  "passed": 173,
+  "total": 173,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -204,6 +204,11 @@
     },
     {
       "id": "slot-wrapper-floor",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "hug-ceiling",
       "claim": "C3-detection",
       "pass": true
     },

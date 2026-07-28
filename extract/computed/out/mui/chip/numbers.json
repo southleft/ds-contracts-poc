@@ -100,8 +100,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 183,
-    "mintedLeavesFolded": 113
+    "mintedLeavesUnfolded": 345,
+    "mintedLeavesFolded": 149
   },
   "bound": {
     "cellsChecked": 0,
@@ -110,24 +110,24 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 113,
+    "leaves": 149,
     "baseBindings": 25,
     "stateBindings": 0,
     "byShape": {
       "uniform": 10,
       "perAxis": 4,
-      "perPair": 7,
-      "refused": 4
+      "perPair": 11,
+      "refused": 0
     }
   },
   "declared": {
-    "base": 12,
+    "base": 13,
     "state": 0
   },
   "codeOnly": {
-    "base": 7,
+    "base": 6,
     "state": 0,
-    "overflowBindings": 4
+    "overflowBindings": 0
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
@@ -143,16 +143,24 @@
     "pct": 100,
     "namedExclusions": [
       "app-region",
-      "text-decoration"
+      "text-decoration",
+      "translate-x",
+      "translate-y"
     ],
     "topMismatchedChannels": []
   },
   "pixel": {
     "pairs": 112,
+    "measured": 112,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
-      "mean": 0.015723818824404764,
-      "max": 0.09114583333333333,
-      "perfect": 60
+      "mean": 0.018804640997023815,
+      "max": 0.087890625,
+      "perfect": 47
     },
     "aa": {
       "mean": 0,
@@ -161,49 +169,49 @@
     },
     "worst": [
       {
-        "key": "outlined.success.medium__default",
-        "pctExact": 0.09114583333333333,
+        "key": "outlined.primary.medium__default",
+        "pctExact": 0.087890625,
         "pctAA": 0
       },
       {
-        "key": "outlined.success.medium__hover",
-        "pctExact": 0.09114583333333333,
+        "key": "outlined.primary.medium__hover",
+        "pctExact": 0.087890625,
         "pctAA": 0
       },
       {
-        "key": "outlined.success.medium__focus-visible",
-        "pctExact": 0.09114583333333333,
+        "key": "outlined.primary.medium__focus-visible",
+        "pctExact": 0.087890625,
         "pctAA": 0
       },
       {
-        "key": "outlined.success.medium__active",
-        "pctExact": 0.09114583333333333,
+        "key": "outlined.primary.medium__active",
+        "pctExact": 0.087890625,
         "pctAA": 0
       },
       {
-        "key": "outlined.warning.medium__default",
-        "pctExact": 0.061848958333333336,
+        "key": "filled.success.medium__default",
+        "pctExact": 0.078125,
         "pctAA": 0
       },
       {
-        "key": "outlined.warning.medium__hover",
-        "pctExact": 0.061848958333333336,
+        "key": "filled.success.medium__hover",
+        "pctExact": 0.078125,
         "pctAA": 0
       },
       {
-        "key": "outlined.warning.medium__focus-visible",
-        "pctExact": 0.061848958333333336,
+        "key": "filled.success.medium__focus-visible",
+        "pctExact": 0.078125,
         "pctAA": 0
       },
       {
-        "key": "outlined.warning.medium__active",
-        "pctExact": 0.061848958333333336,
+        "key": "filled.success.medium__active",
+        "pctExact": 0.078125,
         "pctAA": 0
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 87.70491803278688,
+    "computedPctEqual": 90.1639344262295,
     "rowsFullyEqual": 0,
     "rows": 112,
     "pixelPerfectExact": 0,

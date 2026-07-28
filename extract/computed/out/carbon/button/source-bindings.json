@@ -1769,6 +1769,14 @@
     }
   ],
   "skips": [
-    "root.min-block-size: no var candidate verified against the computed value in any combo"
-  ]
+    "root.min-block-size: candidate --cds-layout-size-height-local → \"layout-size-height-local\" = clamp(max(0px, 1.5rem), 3rem, min(999999999px, 5rem)) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "root.padding-inline-end: source declares `calc(var(--cds-layout-density-padding-inline-local) - 0.0625rem)` — a calc() over var(--cds-layout-density-padding-inline-local). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.--temp-padding-block-max: source declares `calc( (var(--cds-layout-size-height-lg) - var(--temp-1lh)) / 2 - 0.0625rem )` — a calc() over var(--cds-layout-size-height-lg, --temp-1lh). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "root.border-color: SHORTHAND carrying var(--cds-button-disabled) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 2,
+  "calcCeiling": 2
 }

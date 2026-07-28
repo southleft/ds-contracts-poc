@@ -316,7 +316,7 @@
   "anatomyPromotion": {
     "partsCarried": 5,
     "svgAssets": 0,
-    "refusals": 0
+    "refusals": 2
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
@@ -351,6 +351,12 @@
   },
   "pixel": {
     "pairs": 48,
+    "measured": 48,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
       "mean": 0.00033908420138888893,
       "max": 0.009765625,

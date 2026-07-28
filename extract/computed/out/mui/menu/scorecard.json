@@ -13,12 +13,18 @@
     "rows": 4
   },
   "pixel": {
-    "pairs": 4,
+    "pairs": 1,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 100,
-    "meanAA": 100,
-    "maxAA": 100
+    "measured": 0,
+    "unscored": {
+      "sizeMismatch": 1,
+      "noOriginal": 3,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": null,
+    "meanAA": null,
+    "maxAA": null
   },
   "fusion": {
     "boundConfirmed": 0,
@@ -35,27 +41,31 @@
   "worstRows": [
     {
       "key": "__default",
-      "pctAA": 100,
-      "pctExact": 100,
-      "channelsMismatched": 10
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 10,
+      "unscorable": "size-mismatch"
     },
     {
       "key": "__hover",
-      "pctAA": 100,
-      "pctExact": 100,
-      "channelsMismatched": 0
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 0,
+      "unscorable": "no-original"
     },
     {
       "key": "__focus-visible",
-      "pctAA": 100,
-      "pctExact": 100,
-      "channelsMismatched": 0
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 0,
+      "unscorable": "no-original"
     },
     {
       "key": "__active",
-      "pctAA": 100,
-      "pctExact": 100,
-      "channelsMismatched": 0
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 0,
+      "unscorable": "no-original"
     }
   ],
   "topMismatchedChannels": [
@@ -120,13 +130,19 @@
     "count": 0,
     "refs": []
   },
+  "shippedMinted": {
+    "path": "examples/mui/tokens/mui-minted.dtcg.json",
+    "leavesAdded": 1480,
+    "divergent": []
+  },
   "rows": [
     {
       "key": "__default",
       "channelsCompared": 171,
       "channelsEqual": 161,
-      "pctExact": 100,
-      "pctAA": 100,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "size-mismatch",
       "mismatches": [
         {
           "part": "root",
@@ -189,14 +205,15 @@
           "theirs": "middle"
         }
       ],
-      "note": "size mismatch ours 320x96 vs orig 900x1000"
+      "note": "size mismatch ours 320x96 vs orig 900x1000 — NOT SCORED (a wrong-sized box is a geometry failure, not a percentage)"
     },
     {
       "key": "__hover",
       "channelsCompared": 0,
       "channelsEqual": 0,
-      "pctExact": 100,
-      "pctAA": 100,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "no-original",
       "mismatches": [],
       "note": "no captured truth for this combo×state"
     },
@@ -204,8 +221,9 @@
       "key": "__focus-visible",
       "channelsCompared": 0,
       "channelsEqual": 0,
-      "pctExact": 100,
-      "pctAA": 100,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "no-original",
       "mismatches": [],
       "note": "no captured truth for this combo×state"
     },
@@ -213,8 +231,9 @@
       "key": "__active",
       "channelsCompared": 0,
       "channelsEqual": 0,
-      "pctExact": 100,
-      "pctAA": 100,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "no-original",
       "mismatches": [],
       "note": "no captured truth for this combo×state"
     }

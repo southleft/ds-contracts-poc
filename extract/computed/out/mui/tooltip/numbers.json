@@ -158,7 +158,7 @@
   "anatomyPromotion": {
     "partsCarried": 3,
     "svgAssets": 0,
-    "refusals": 0
+    "refusals": 1
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
@@ -189,28 +189,36 @@
   },
   "pixel": {
     "pairs": 2,
+    "measured": 0,
+    "unscored": {
+      "sizeMismatch": 2,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
-      "mean": 100,
-      "max": 100,
+      "mean": null,
+      "max": null,
       "perfect": 0
     },
     "aa": {
-      "mean": 100,
-      "max": 100,
+      "mean": null,
+      "max": null,
       "perfect": 0
     },
     "worst": [
       {
         "key": "off__default",
-        "pctExact": 100,
-        "pctAA": 100,
-        "note": "size mismatch ours 320x96 vs orig 73x39"
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "size-mismatch",
+        "note": "size mismatch ours 320x96 vs orig 73x39 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
       },
       {
         "key": "on__default",
-        "pctExact": 100,
-        "pctAA": 100,
-        "note": "size mismatch ours 320x96 vs orig 73x37"
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "size-mismatch",
+        "note": "size mismatch ours 320x96 vs orig 73x37 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
       }
     ]
   },
@@ -220,7 +228,7 @@
     "rows": 8,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,
-    "pairs": 8
+    "pairs": 2
   },
   "focusVisibleDriverMatched": 0,
   "focusVisibleDriverTotal": 0

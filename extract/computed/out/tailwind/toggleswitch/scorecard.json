@@ -16,6 +16,12 @@
     "pairs": 24,
     "perfectExact": 0,
     "perfectAA": 0,
+    "measured": 24,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 7.254231770833333,
     "meanAA": 2.3442925347222223,
     "maxAA": 4.641927083333333
@@ -101,7 +107,7 @@
     ]
   ],
   "namedLosses": [
-    "promotion: pseudo-decor-nonuniform: part-0::after drawn geometry/fill varies across the drawn combos ({\"w\":16,\"h\":16,\"top\":2,\"left\":2,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0} vs {\"w\":20,\"h\":20,\"top\":2,\"left\":2,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0} vs {\"w\":24,\"h\":24,\"top\":2,\"left\":2,\"bg\":\"rgba(255, 255, 255, 1)\",\"radius\":0}) — the bounded v1 decor grammar carries one box; named refusal",
+    "promotion: pseudo-decor-size-varies: part-0::after drawn at 16×16 vs 20×20 vs 24×24 — a shape part carries ONE intrinsic size (per-variant resize has no spelling); named refusal",
     "overflow: part-0.box-shadow [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: part-0.box-shadow [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "code-only[active]: part-0.--tw-ring-shadow — value shape outside mintable kinds and outside the declared vocabulary",
@@ -109,6 +115,22 @@
     "code-only[focus-visible]: part-0.--tw-ring-shadow — value shape outside mintable kinds and outside the declared vocabulary",
     "code-only[focus-visible]: root.--tw-outline-style — value shape outside mintable kinds and outside the declared vocabulary"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+    "leavesAdded": 245,
+    "divergent": [
+      {
+        "token": "imported.toggle-switch.label.font-weight",
+        "fresh": "500",
+        "shipped": "{font-weight-medium}",
+        "resolvedEqual": true
+      }
+    ]
+  },
   "rows": [
     {
       "key": "sm.unchecked__default",

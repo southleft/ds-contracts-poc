@@ -115,6 +115,12 @@
     }
   ],
   "skips": [
-    "root.min-block-size: no var candidate verified against the computed value in any combo"
-  ]
+    "root.min-block-size: candidate --cds-layout-size-height-local → \"layout-size-height-local\" = clamp(max(0px, 2rem), 2.5rem, min(999999999px, 3rem)) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind."
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "tabs__nav-item.border-block-end: SHORTHAND carrying var(--cds-border-interactive) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }

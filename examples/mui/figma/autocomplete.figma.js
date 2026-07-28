@@ -288,51 +288,6 @@ const COMPONENTS = [
                       "children": [
                         {
                           "type": "frame",
-                          "name": "autocomplete-clearindicator",
-                          "layout": {
-                            "mode": "HORIZONTAL",
-                            "primary": "CENTER",
-                            "counter": "CENTER"
-                          },
-                          "children": [
-                            {
-                              "type": "svg",
-                              "name": "autocomplete-clearindicator-icon",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 6.41 L 17.59 5 L 12 10.59 L 6.41 5 L 5 6.41 L 10.59 12 L 5 17.59 L 6.41 19 L 12 13.41 L 17.59 19 L 19 17.59 L 13.41 12 Z\" fill=\"#0000008a\"/></svg>",
-                              "svgPaintVar": "imported/shared/color-0000008a",
-                              "iconSize": 20
-                            }
-                          ],
-                          "fill": "imported/autocomplete/autocomplete-clearindicator/background-color",
-                          "bindings": {
-                            "bottomLeftRadius": "imported/shared/size-14",
-                            "bottomRightRadius": "imported/shared/size-14",
-                            "strokeBottomWeight": "imported/shared/size-0",
-                            "strokeLeftWeight": "imported/shared/size-0",
-                            "strokeRightWeight": "imported/shared/size-0",
-                            "topLeftRadius": "imported/shared/size-14",
-                            "topRightRadius": "imported/shared/size-14",
-                            "strokeTopWeight": "imported/shared/size-0",
-                            "minWidth": "imported/shared/size-0",
-                            "paddingBottom": "imported/shared/size-4",
-                            "paddingLeft": "imported/shared/size-4",
-                            "paddingRight": "imported/shared/size-4",
-                            "paddingTop": "imported/shared/size-4"
-                          },
-                          "fixedHeight": {
-                            "px": 28,
-                            "varName": "imported/shared/size-28"
-                          },
-                          "margins": {
-                            "right": -2
-                          },
-                          "fixedWidth": {
-                            "px": 28,
-                            "varName": "imported/shared/size-28"
-                          }
-                        },
-                        {
-                          "type": "frame",
                           "name": "autocomplete-popupindicator",
                           "layout": {
                             "mode": "HORIZONTAL",
@@ -732,51 +687,6 @@ const COMPONENTS = [
                         "varName": "imported/autocomplete/autocomplete-endadornment/width"
                       },
                       "children": [
-                        {
-                          "type": "frame",
-                          "name": "autocomplete-clearindicator",
-                          "layout": {
-                            "mode": "HORIZONTAL",
-                            "primary": "CENTER",
-                            "counter": "CENTER"
-                          },
-                          "children": [
-                            {
-                              "type": "svg",
-                              "name": "autocomplete-clearindicator-icon",
-                              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 6.41 L 17.59 5 L 12 10.59 L 6.41 5 L 5 6.41 L 10.59 12 L 5 17.59 L 6.41 19 L 12 13.41 L 17.59 19 L 19 17.59 L 13.41 12 Z\" fill=\"#0000008a\"/></svg>",
-                              "svgPaintVar": "imported/shared/color-0000008a",
-                              "iconSize": 20
-                            }
-                          ],
-                          "fill": "imported/autocomplete/autocomplete-clearindicator/background-color",
-                          "bindings": {
-                            "bottomLeftRadius": "imported/shared/size-14",
-                            "bottomRightRadius": "imported/shared/size-14",
-                            "strokeBottomWeight": "imported/shared/size-0",
-                            "strokeLeftWeight": "imported/shared/size-0",
-                            "strokeRightWeight": "imported/shared/size-0",
-                            "topLeftRadius": "imported/shared/size-14",
-                            "topRightRadius": "imported/shared/size-14",
-                            "strokeTopWeight": "imported/shared/size-0",
-                            "minWidth": "imported/shared/size-0",
-                            "paddingBottom": "imported/shared/size-4",
-                            "paddingLeft": "imported/shared/size-4",
-                            "paddingRight": "imported/shared/size-4",
-                            "paddingTop": "imported/shared/size-4"
-                          },
-                          "fixedHeight": {
-                            "px": 28,
-                            "varName": "imported/shared/size-28"
-                          },
-                          "margins": {
-                            "right": -2
-                          },
-                          "fixedWidth": {
-                            "px": 28,
-                            "varName": "imported/shared/size-28"
-                          }
-                        },
                         {
                           "type": "frame",
                           "name": "autocomplete-popupindicator",
@@ -1343,10 +1253,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];

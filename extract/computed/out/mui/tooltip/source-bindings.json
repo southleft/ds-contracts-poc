@@ -3,5 +3,9 @@
   "component": "Tooltip",
   "varPrefix": "--mui-",
   "facts": [],
-  "skips": []
+  "skips": [],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }

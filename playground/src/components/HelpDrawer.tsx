@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * "How do I use this?" — a plain right-side drawer. No tour machinery: six
- * short sections, one per way in, imperative voice. Esc, the Close button,
- * or a click outside dismisses it.
+ * "How do I use this?" — a plain right-side drawer. No tour machinery: short
+ * sections, one per way in, imperative voice. The first section answers the
+ * question a newcomer actually has ("what IS this, and what can't it do") —
+ * everything after it is a route. Esc, the Close button, or a click outside
+ * dismisses it.
  */
 export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -32,10 +34,50 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
         </div>
         <div className="drawer__body">
           <section>
+            <h3 className="drawer__section-title">What this is</h3>
+            <p>
+              A <b>contract</b> is one JSON file per component: its props and their legal
+              values, the parts it&rsquo;s made of, which design token paints each part, and
+              its states. A React component and a Figma component set are both{' '}
+              <i>generated</i> from that file — neither is hand-maintained, and a differ proves
+              they still match.
+            </p>
+            <p>
+              This page runs the real engine in your browser so you can see that happen. Load a
+              contract, change it, watch every output move together — and watch the engine
+              refuse, by name, when you ask for something it cannot honestly do.
+            </p>
+            <p className="drawer__subnote">
+              <b>What it is not:</b> this is not how you build your library into Figma. That is
+              the <code>ds-contracts</code> CLI plus the Sync Runner plugin — the CLI packages
+              your contracts and tokens into one bundle, the plugin builds it onto the canvas.{' '}
+              <a
+                href="https://ds-contracts-spec.pages.dev/get-started/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                The three get-started paths
+              </a>{' '}
+              walk that end to end.
+            </p>
+          </section>
+          <section>
+            <h3 className="drawer__section-title">If you only do one thing</h3>
+            <p>
+              Open <b>Examples</b>, load the Badge, then break its contract on purpose — point a
+              token binding at a name that doesn&rsquo;t exist, or delete a required field. The
+              named refusal that appears is the entire product. Everything else here is
+              plumbing around that behaviour.
+            </p>
+          </section>
+          <section>
             <h3 className="drawer__section-title">Coming from design</h3>
             <p>
               Open the <b>Figma</b> tab and paste a figma.com component URL + personal access
-              token. The token stays in your browser, sent only to api.figma.com — session-only by
+              token. That is the route that works today; the live relay from the plugin is
+              switched off (its <b>Send to Playground</b> tab was removed when the plugin&rsquo;s
+              tabs were re-housed into Build / Changes / Send), and the button says so rather
+              than failing when you press it. The token stays in your browser, sent only to api.figma.com — session-only by
               default; the &ldquo;Remember on this device&rdquo; checkbox (and the matching one on
               the Describe tab&rsquo;s Anthropic key) opts a secret into this browser&rsquo;s
               localStorage ONLY, until you clear it from the same field.

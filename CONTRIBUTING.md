@@ -12,7 +12,7 @@ If you're adding a capability: fixture first, eval second, claim last.
 
 ## The doctrine a change has to respect
 
-The claims rule is the first of six. The others are what make it hold:
+The claims rule is the first of seven. The others are what make it hold:
 
 1. **Determinism.** Same input, byte-identical output — no LLM anywhere in the conversion path. AI is available as an *assistant* that writes proposals; only an explicit human ack writes anything load-bearing ([docs/16](docs/16-sync-boundary.md)). If your change makes an output depend on wall-clock time, iteration order, a random id, or model output, it is a defect regardless of how good the output looks.
 2. **Named refusals over silent degradation.** When the pipeline cannot carry something, it must say so *by name*, on screen, at the point of failure. A plausible substituted value is the worst outcome in this repo — worse than a crash. Every refusal in the engine exists because something was once dropped on the floor quietly; read `loadConfig` in `extract/computed/capture.ts` for a dense example.
@@ -20,6 +20,7 @@ The claims rule is the first of six. The others are what make it hold:
 4. **Defect-first reporting.** Lead with what is broken, then the green numbers. A commit message, a PROVENANCE file, and a PR description all put the named residuals *before* the wins. Green gates are not "it works" — they are "these specific things were checked."
 5. **Byte-identity as a proof technique.** When you change the engine, prove the change is inert everywhere it should be inert: re-run an unrelated library's capture through the changed engine and compare artifacts byte-for-byte. Comparing against a *committed* artifact is not a valid proof if that artifact is stale — the valid proof is A/B on the same engine, changing only the one expression ([`examples/carbon/PROVENANCE.md` § "Byte-identity proof"](examples/carbon/PROVENANCE.md)).
 6. **Documented limits live where the capability is claimed**, not in a footnote elsewhere.
+7. **Docs describe what a person does, not what the machinery is.** The owner's own review (2026-07-27) found the docs explained the pipeline accurately and left a reader unable to say what they should type. A capability page that cannot be followed by someone who has never read this repo is not finished. Where a step can fail, name the failure and the fix; where a verb does not exist yet (`promote` is a copied script, not a CLI command), say so instead of implying it.
 
 ## The gates
 
@@ -66,6 +67,7 @@ Engine changes made for one library must be proven inert on the others (doctrine
 | Extraction / brownfield | `extract/` |
 | A new library round | `extract/computed/configs/<lib>.json` + `examples/<lib>/` — see [docs/21](docs/21-bring-your-own-design-system.md) |
 | Docs numbers | nowhere by hand — they are derived; `npm run docs:check` names every disagreement |
+| **A CLI verb's shape or behavior** | four user-facing surfaces move together: `README.md` (the three journeys), `site/src/pages/get-started.ts`, `site/src/pages/cli.ts`, and — if the command line itself changes — `evals/fixtures/journey-commands.json`, which the site renders and the journey evals execute |
 | **Never by hand** | `src/components/`, `figma-sync/*.js` (generated), `catalog/catalog.json`, `contracts/contract.schema.json` |
 
 Hand-editing generated output is drift — the differ will flag it, which is the product working, not a bug to route around.

@@ -1043,7 +1043,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1302,
+      "leavesAdded": 1338,
       "divergent": []
     },
     "rows": [

@@ -410,7 +410,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1454,
+      "leavesAdded": 1490,
       "divergent": [
         {
           "token": "imported.tabs.label-2.color.primary",

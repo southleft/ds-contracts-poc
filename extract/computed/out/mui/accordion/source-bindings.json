@@ -677,6 +677,12 @@
     }
   ],
   "skips": [
-    "accordionsummary-gutters.opacity: no var candidate verified against the computed value in any combo"
-  ]
+    "accordionsummary-gutters.opacity: candidate --mui-palette-action-disabledOpacity → \"palette-action-disabled-opacity\" = 0.38 (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "label-2.padding: SHORTHAND carrying var(--mui-spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }

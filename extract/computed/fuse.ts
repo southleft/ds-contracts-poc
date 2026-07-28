@@ -638,6 +638,87 @@ export function detectFolds(a: AlignedSweep, styled: Map<string, Set<string>>): 
 }
 
 // ---------------------------------------------------------------------------
+// HUG EVIDENCE (task #37): is a carried `max-width` a CEILING or a design
+// width? The answer is a MEASUREMENT, not a list.
+//
+// The live-canvas defect: Carbon's Button carries `max-inline-size: 20rem`
+// (320px) beside `inline-size: max-content`. The contract carries the
+// max-width channel and — correctly — no width fact. The Figma emitter then
+// baked the ROOT's max-width as a FIXED 320px width, and the root's own
+// `justify: space-between` stranded the label at the left edge of a mostly
+// empty box. The SAME button nested inside Modal's footer rendered at 125px
+// — correct — because a non-root PART has bound Figma's real `maxWidth`
+// field since the molecule round, which exempted roots by name.
+//
+// The discriminator, from the captured facts: an element whose USED width is
+// STRICTLY BELOW its max-width is hugging beneath a ceiling; an element
+// whose used width EQUALS its max-width is sitting at its cap, where the
+// value may be a genuine design width and the old lowering is right.
+//
+// Deliberately conservative. Evidence is emitted ONLY when every enumerated
+// combo agrees and both values are real pixels; `none`, percentages and
+// calc() max-widths, and combos that disagree, produce a NAMED receipt and
+// no field — so the contract keeps the design-width lowering. That is also
+// why the repo's 21 hand-authored `{size.card.width}` roots are untouched:
+// they carry no measurement at all.
+// ---------------------------------------------------------------------------
+const pxValue = (v: string | undefined): number | null => {
+  if (typeof v !== 'string') return null;
+  const m = /^(-?[\d.]+)px$/.exec(v.trim());
+  return m ? Number(m[1]) : null;
+};
+
+export interface HugEvidence {
+  /** part → true when the used width stayed strictly below max-width in
+   *  EVERY enumerated combo. Absent from the map = no evidence (see
+   *  `receipts`), and the consumer must keep the design-width lowering. */
+  hugs: Map<string, boolean>;
+  receipts: string[];
+}
+
+/** DETECTION ONLY (pure). Reads the captured computed `width` / `max-width`
+ *  of every union part across the enabled combos. */
+export function hugEvidence(a: AlignedSweep, space: PropSpace): HugEvidence {
+  const out: HugEvidence = { hugs: new Map(), receipts: [] };
+  const enabled = space.enumeration.combos.filter(isEnabled);
+  for (let pi = 0; pi < a.baseFlat.length; pi++) {
+    const partName = a.partNames[pi];
+    const verdicts = new Set<boolean>();
+    const unmeasurable = new Set<string>();
+    let seen = 0;
+    for (const combo of enabled) {
+      const el = a.getAligned(`${combo.key}__default`)[pi];
+      if (!el) continue;
+      const maxRaw = el.node.style['max-width'];
+      if (maxRaw === undefined || maxRaw === 'none') continue;
+      seen++;
+      const max = pxValue(maxRaw);
+      const width = pxValue(el.node.style['width']);
+      if (max === null || width === null) {
+        unmeasurable.add(maxRaw);
+        continue;
+      }
+      verdicts.add(width < max);
+    }
+    if (seen === 0) continue;
+    if (unmeasurable.size > 0) {
+      out.receipts.push(
+        `hug-evidence-unmeasurable: ${partName}.max-width = ${[...unmeasurable].sort().join(' / ')} — not a pixel value, so "is the used width below the cap" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.`,
+      );
+      continue;
+    }
+    if (verdicts.size !== 1) {
+      out.receipts.push(
+        `hug-evidence-not-uniform: ${partName} hugs beneath its max-width in some combos and sits at the cap in others — no sizing evidence carried (the max-width lowering is unchanged).`,
+      );
+      continue;
+    }
+    out.hugs.set(partName, [...verdicts][0]);
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------
 // LAYOUT enrichment: computed flex keywords → the contract's OWN layout
 // vocabulary (Part.layout). These channels are keyword-valued, so they can
 // never mint — but the schema already has slots for them. Uniform observed

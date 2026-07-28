@@ -134,6 +134,9 @@
         "align": "center",
         "justify": "center"
       },
+      "content": {
+        "prop": "children"
+      },
       "declared": {
         "appearance": "none",
         "cursor": "pointer",

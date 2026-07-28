@@ -985,14 +985,24 @@
     }
   ],
   "skips": [
-    "btn.block-size: no var candidate verified against the computed value in any combo",
-    "btn.inline-size: no var candidate verified against the computed value in any combo",
-    "btn.min-block-size: no var candidate verified against the computed value in any combo",
-    "icon.inset-block-start: no var candidate verified against the computed value in any combo",
-    "icon.inset-inline-end: no var candidate verified against the computed value in any combo",
-    "label.background-color: no var candidate verified against the computed value in any combo",
-    "label.color: no var candidate verified against the computed value in any combo",
-    "popover-caret.block-size: no var candidate verified against the computed value in any combo",
-    "popover-caret.inline-size: no var candidate verified against the computed value in any combo"
-  ]
+    "btn.block-size: candidate --cds-layout-size-height-local → \"layout-size-height-local\" = clamp(max(0px, 1.5rem), 3rem, min(999999999px, 5rem)) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "btn.inline-size: candidate --cds-layout-size-height-local → \"layout-size-height-local\" = clamp(max(0px, 1.5rem), 3rem, min(999999999px, 5rem)) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "btn.min-block-size: candidate --cds-layout-size-height-local → \"layout-size-height-local\" = clamp(max(0px, 1.5rem), 3rem, min(999999999px, 5rem)) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "btn.padding-inline-end: source declares `calc(var(--cds-layout-density-padding-inline-local) - 0.0625rem)` — a calc() over var(--cds-layout-density-padding-inline-local). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "icon.inset-block-start: candidate --cds-layout-size-height-local → \"layout-size-height-local\" = clamp(max(0px, 1.5rem), 3rem, min(999999999px, 5rem)) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "icon.inset-inline-end: candidate --cds-layout-density-padding-inline-local → \"layout-density-padding-inline-local\" = clamp(0px, 1rem, 999999999px) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "label.background-color: candidate --cds-layer → \"layer\" = #f4f4f4 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label.color: candidate --cds-text-primary → \"text-primary\" = #161616 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label.transform: source declares `translate(-50%, calc(-100% - var(--cds-popover-offset, 0rem)))` — a calc() over var(--cds-popover-offset). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "popover-caret.block-size: candidate --cds-popover-caret-height → \"popover-caret-height\" = 0.25rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "popover-caret.inline-size: candidate --cds-popover-caret-width → \"popover-caret-width\" = 0.5rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "popover-caret.transform: source declares `translate(-50%, calc(-1 * var(--cds-popover-offset, 0rem)))` — a calc() over var(--cds-popover-offset). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "btn.--temp-padding-block-max: source declares `calc( (var(--cds-layout-size-height-lg) - var(--temp-1lh)) / 2 - 0.0625rem )` — a calc() over var(--cds-layout-size-height-lg, --temp-1lh). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "btn.border-color: SHORTHAND carrying var(--cds-button-disabled) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 4,
+  "calcCeiling": 4
 }

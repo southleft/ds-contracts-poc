@@ -16,6 +16,12 @@
     "pairs": 24,
     "perfectExact": 18,
     "perfectAA": 18,
+    "measured": 24,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 0.20182291666666666,
     "meanAA": 0.18880208333333334,
     "maxAA": 0.7552083333333334
@@ -149,6 +155,64 @@
     "code-only: label-2.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: label-3.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/mui/tokens/mui-minted.dtcg.json",
+    "leavesAdded": 1454,
+    "divergent": [
+      {
+        "token": "imported.tabs.label-2.color.primary",
+        "fresh": "#00000099",
+        "shipped": "{palette-text-secondary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tabs.label-2.color.secondary",
+        "fresh": "#00000099",
+        "shipped": "{palette-text-secondary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tabs.label-3.color.primary",
+        "fresh": "#00000099",
+        "shipped": "{palette-text-secondary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tabs.label-3.color.secondary",
+        "fresh": "#00000099",
+        "shipped": "{palette-text-secondary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tabs.label.color.primary",
+        "fresh": "#1976d2",
+        "shipped": "{palette-primary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tabs.label.color.secondary",
+        "fresh": "#9c27b0",
+        "shipped": "{palette-secondary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tabs.tabs-indicator.background-color.primary",
+        "fresh": "#1976d2",
+        "shipped": "{palette-primary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.tabs.tabs-indicator.background-color.secondary",
+        "fresh": "#9c27b0",
+        "shipped": "{palette-secondary-main}",
+        "resolvedEqual": true
+      }
+    ]
+  },
   "rows": [
     {
       "key": "primary.primary__default",

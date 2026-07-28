@@ -882,6 +882,29 @@ export interface Part {
    *  drawn from the contract's declared `states`. Rendered as state-selector
    *  rules by the CSS emitters; declared-not-drawn on the canvas. */
   declaredStates?: Record<string, Record<string, string>>;
+  /** v16 (root max-width round, task #37) — MEASURED sizing evidence, never
+   *  hand-authored. TRUE when the CAPTURED element's used width stayed
+   *  STRICTLY BELOW its captured `max-width` in every enumerated combo: the
+   *  max-width is a CEILING the box hugs beneath, not a design width.
+   *
+   *  Only the `max-width` lowering reads it, and only on a ROOT. A PART has
+   *  bound Figma's real `maxWidth` field since the molecule round; a ROOT was
+   *  EXEMPTED from that ("golden pins those design widths") and kept baking
+   *  max-width as a FIXED width. That exemption is what drew Carbon's Button
+   *  320px wide with its label stranded at the left by
+   *  `justify: space-between`, while the SAME Carbon button nested in Modal's
+   *  footer — a part, so it got the ceiling — hugged correctly at 125px.
+   *
+   *  The discriminator is the measurement, not a list: width BELOW max-width
+   *  means the box hugs (⇒ ceiling); width EQUAL to max-width means it is
+   *  sitting at its cap and the value may be a genuine design width (⇒ the
+   *  fixed-width lowering). A contract with no captured evidence omits the
+   *  field and keeps the design-width lowering — which is why the repo's
+   *  hand-authored `{size.card.width}` roots are untouched.
+   *
+   *  Emitted by extract/computed (fuse.ts `hugEvidence`); a part with no
+   *  `max-width` channel must not carry it (validateContract refuses). */
+  hugsBelowMaxWidth?: boolean;
   /** interaction state → (CSS property → token reference). On the ROOT:
    *  the full state vocabulary (background-color, outline-*, opacity, …).
    *  v13 (P18 second half): on a NON-ref part (text/icon/box — never a
@@ -946,6 +969,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     declared: z.record(z.string(), DeclaredValueSchema).optional(),
     /** v15 (S4): per-state declared facts (state → channel → value). */
     declaredStates: z.record(z.string(), z.record(z.string(), DeclaredValueSchema)).optional(),
+    /** v16 (task #37): MEASURED sizing evidence — see the Part interface. */
+    hugsBelowMaxWidth: z.boolean().optional(),
     /** Root: full state vocabulary. v13: non-ref parts, color-kind channels
      *  only — see the Part interface doc + emit-react validateContract. */
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),

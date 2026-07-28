@@ -1085,6 +1085,9 @@ function applyTokens(
   tokens: Record<string, string>,
   subst: Record<string, string>,
   ctx: TextCtx,
+  /** task #37: the part's MEASURED sizing evidence for its max-width
+   *  channel — see the `max-width` case below and Part.hugsBelowMaxWidth. */
+  hugsBelowMaxWidth?: boolean,
 ): TextCtx {
   const next: TextCtx = { ...ctx };
   // Round 5c (canvas-gate finding): the floor promotes border-COLOR
@@ -1329,22 +1332,40 @@ function applyTokens(
       case 'max-width': {
         // ROUND 6 (live paste): max-width is a CEILING, not a width.
         //
-        // Baking it as a FIXED width is right for a ROOT — a component's
-        // root box has no container to be fluid inside, so it renders at
-        // its natural (max) width (the Card/Toast/Chip design widths every
-        // golden pins). For a PART it was catastrophic, twice in one paste:
-        // MUI's Tab carries max-width 360, so three 360px tabs overflowed a
-        // 288px strip and only "Overview" reached the canvas; MUI's Tooltip
-        // bubble carries max-width 300, so the bubble stretched to 300px
-        // instead of hugging "Tooltip text". A PART now binds the real
-        // Figma `maxWidth` field and HUGS beneath it — the CSS semantics
-        // exactly. Text nodes have no maxWidth field (Figma sizes text by
-        // textAutoResize), so a bare-text part keeps the old lowering.
+        // For a PART, baking it was catastrophic twice in one paste: MUI's
+        // Tab carries max-width 360, so three 360px tabs overflowed a 288px
+        // strip and only "Overview" reached the canvas; MUI's Tooltip bubble
+        // carries max-width 300, so the bubble stretched to 300px instead of
+        // hugging "Tooltip text". A PART binds the real Figma `maxWidth`
+        // field and HUGS beneath it — the CSS semantics exactly. Text nodes
+        // have no maxWidth field (Figma sizes text by textAutoResize), so a
+        // bare-text part keeps the lowering.
+        //
+        // TASK #37 (the owner's live canvas: "the buttons are messed up").
+        // That round EXEMPTED roots — "a component's root box has no
+        // container to be fluid inside" — and the exemption was wrong for
+        // any root that hugs. Carbon's Button is `inline-size: max-content;
+        // max-inline-size: 20rem`: the root box HUGS its label under a 320px
+        // ceiling. Baking 320 as a fixed width drew a mostly-empty box, and
+        // the root's own `justify: space-between` stranded the label at its
+        // left edge. The CONTROL was in the same paste: the SAME Carbon
+        // button nested in Modal's footer rendered at 125px and 111px —
+        // correct — because a nested part got the ceiling treatment.
+        //
+        // The discriminator is a MEASUREMENT carried on the contract, not a
+        // list of components: `hugsBelowMaxWidth` is set by the capture when
+        // the element's used width stayed STRICTLY BELOW its max-width in
+        // every enumerated combo. A root sitting AT its cap, and any root
+        // with no measurement at all (every hand-authored `{size.card.width}`
+        // contract in this repo), keeps the fixed-width lowering — which is
+        // exactly what the golden design widths depend on.
         const value = px(resolveLiteral(tokenPath));
-        if (spec.type === 'root' || spec.type === 'text' || !Number.isFinite(value)) {
-          spec.fixedWidth = { px: value, varName };
-        } else {
+        const ceiling = spec.type !== 'text' && Number.isFinite(value) &&
+          (spec.type !== 'root' || hugsBelowMaxWidth === true);
+        if (ceiling) {
           spec.bindings = { ...spec.bindings, maxWidth: varName };
+        } else {
+          spec.fixedWidth = { px: value, varName };
         }
         break;
       }
@@ -1628,7 +1649,7 @@ function applyStyling(
   subst: Record<string, string>,
   ctx: TextCtx,
 ): TextCtx {
-  const t = applyTokens(spec, resolveTokens(part, subst), subst, ctx);
+  const t = applyTokens(spec, resolveTokens(part, subst), subst, ctx, part.hugsBelowMaxWidth);
   const l = applyLiterals(spec, resolveLiterals(part, subst), t);
   // absolute-position round: content-box geometry means captured width/
   // height EXCLUDE padding — a canvas frame resize is border-box, so the
@@ -2827,6 +2848,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           translateStateOverrides(overrides[stateName] ?? {}),
           subst,
           baseCtx,
+          root.hugsBelowMaxWidth,
         );
         applyStylesWhenOpacity(rootSpec, root, contract, subst);
         boundFullBleedScrimRoot(rootSpec, root, subst, scrimNotes);
@@ -4021,10 +4043,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares \`min-width: 0\`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with \`min-width: 0\`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];

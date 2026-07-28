@@ -16,6 +16,12 @@
     "pairs": 48,
     "perfectExact": 0,
     "perfectAA": 0,
+    "measured": 48,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 4.225025879917184,
     "meanAA": 2.536296583850931,
     "maxAA": 3.392857142857143
@@ -109,7 +115,7 @@
   },
   "shippedMinted": {
     "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-    "leavesAdded": 1037,
+    "leavesAdded": 999,
     "divergent": [
       {
         "token": "imported.inline-notification.icon.fill.error.high",
@@ -182,18 +188,6 @@
         "fresh": "#f1c21b",
         "shipped": "{support-warning}",
         "resolvedEqual": true
-      },
-      {
-        "token": "imported.inline-notification.label-2.font-weight",
-        "fresh": "400",
-        "shipped": "600",
-        "resolvedEqual": false
-      },
-      {
-        "token": "imported.inline-notification.label.font-weight",
-        "fresh": "600",
-        "shipped": "400",
-        "resolvedEqual": false
       },
       {
         "token": "imported.inline-notification.root.color.high",

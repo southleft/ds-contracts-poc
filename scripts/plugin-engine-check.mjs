@@ -608,9 +608,16 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // MOLECULE round: the bundle carries Autocomplete's floor-reconstructed
   // icon SVGs — JSON stays the only thing a user pastes. ORGANISM round: +10
   // (3 Checkbox glyphs, 4 Table, 3 TablePagination).
+  // TASK #38 (the harness recapture wave): 14 → 13. The one that left is
+  // `autocomplete-autocomplete-clearindicator` — MUI renders the clear button
+  // `visibility: hidden` in every combo of the closed-state capture, so the
+  // part paints no ink anywhere and the engine's `non-painting-part` refusal
+  // drops it. MUI's shipped artifacts predated that refusal, so the bundle
+  // had been carrying a glyph for a button the browser draws nowhere. A
+  // DECREASE here is the phantom leaving, not coverage lost.
   assert(
-    parsed.icons && Object.keys(parsed.icons).length === 14,
-    `the bundle surfaces its 14 icon assets (got ${parsed.icons ? Object.keys(parsed.icons).length : 'none'})`,
+    parsed.icons && Object.keys(parsed.icons).length === 13,
+    `the bundle surfaces its 13 icon assets (got ${parsed.icons ? Object.keys(parsed.icons).length : 'none'})`,
   );
   const plan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '', tokenSet: parsed.tokenSet, icons: parsed.icons });
   assert(plan.ok, `the foreign bundle plans clean (${plan.ok ? '' : plan.issues.map((i) => i.headline).join('; ')})`);
@@ -673,8 +680,8 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
       Object.values(v.valuesByMode).some((val) => val && typeof val === 'object' && val.type === 'VARIABLE_ALIAS'),
     ).length;
   assert(
-    mockA.variables.length === 1648 && mockB.variables.length === 1648,
-    `both paths land 1648 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+    mockA.variables.length === 1684 && mockB.variables.length === 1684,
+    `both paths land 1684 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
   );
   assert(
     aliasCountOf(mockA) === 73 && aliasCountOf(mockB) === 73,
@@ -718,16 +725,29 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
     JSON.stringify(gA.dialogWidths) === JSON.stringify(gB.dialogWidths) && gA.dialogWidths.join() === '496',
     `D5: both paths hug the Dialog to its real content width 496 (bundle ${gA.dialogWidths.join('/')}, script ${gB.dialogWidths.join('/')})`,
   );
-  // D6b — an icon part can also be a BOX. MUI's Autocomplete indicators are
-  // real buttons (background + 1px border + padding) that lowered to bare
-  // glyphs, throwing the whole control box away.
+  // D6b — an icon part can also be a BOX. MUI's Autocomplete POPUP indicator
+  // is a real button (background + 1px border + padding) that lowered to a
+  // bare glyph, throwing the whole control box away.
+  //
+  // TASK #38 (the harness recapture wave): the CLEAR indicator is no longer
+  // asserted present here, and its absence is asserted instead. MUI renders
+  // it `visibility: hidden` until the field is hovered or focused, so in every
+  // combo of the closed-state capture it paints no ink and no descendant of it
+  // paints either — the engine's `non-painting-part` refusal drops it. MUI's
+  // shipped artifacts predated that refusal, so this pin had been asserting
+  // that a phantom (a fully-visible 28x28 button with an SVG glyph the browser
+  // draws nowhere) was on the canvas. Inverted, not deleted.
   const boxOk = (rows) => rows.length > 0 && rows.every((r) => r.w === 28 && r.h === 28 && r.kid && r.fills);
   assert(
-    boxOk(gA.clear) && boxOk(gA.popup) && boxOk(gB.clear) && boxOk(gB.popup),
-    `D6b: the Autocomplete clear/popup indicators must carry a 28x28 filled control box with an -icon child, not a bare vector (bundle ${JSON.stringify(gA.clear[0])}, script ${JSON.stringify(gB.clear[0])})`,
+    boxOk(gA.popup) && boxOk(gB.popup),
+    `D6b: the Autocomplete popup indicator must carry a 28x28 filled control box with an -icon child, not a bare vector (bundle ${JSON.stringify(gA.popup[0])}, script ${JSON.stringify(gB.popup[0])})`,
+  );
+  assert(
+    gA.clear.length === 0 && gB.clear.length === 0,
+    `D6b/phantom: \`autocomplete-clearindicator\` must NOT reach the canvas on either path — MUI hides it with \`visibility: hidden\` in every captured combo, so it paints nothing anywhere (bundle ${gA.clear.length}, script ${gB.clear.length})`,
   );
   console.log(
-    `✔ MUI regen (task #31) — the three fixes are pinned where they LIVE, on both paths: Dialog cells hug 496 and can never carry the 900px capture stage again (D5); the Autocomplete indicators carry a 28x28 filled control box with an -icon child instead of a bare glyph (D6b). Every pre-existing equivalence number above was UNMOVED by these fixes — which is exactly why a stale GENESIS-BATCH could pass this check for a whole round`,
+    `✔ MUI regen (task #31) — the three fixes are pinned where they LIVE, on both paths: Dialog cells hug 496 and can never carry the 900px capture stage again (D5); the Autocomplete POPUP indicator carries a 28x28 filled control box with an -icon child instead of a bare glyph, and the visibility:hidden CLEAR indicator — a phantom the shipped artifacts carried until the task-#38 recapture — reaches neither path (D6b). Every pre-existing equivalence number above was UNMOVED by these fixes — which is exactly why a stale GENESIS-BATCH could pass this check for a whole round`,
   );
 
   // Spot-check a bound value end to end: the contained-primary Button root
@@ -761,7 +781,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 
   console.log(
-    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 1648 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
+    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 1684 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
 
   // --- PROTOTYPE WIRING: the State axis is LIVE, and its limits are named --

@@ -2001,7 +2001,11 @@ export function Playground() {
     <>
       {!onboardDismissed && (
         <div className="onboard" role="note" aria-label="Getting started">
-          <span className="onboard__title">New here? The whole loop in three clicks, plus a reset:</span>
+          {/* Count derived from onboardSteps — the old copy said "three
+              clicks, plus a reset" for a four-step array. */}
+          <span className="onboard__title">
+            New here? Walk the whole loop — {onboardSteps.length} clicks, in order:
+          </span>
           {onboardSteps.map((step, i) => (
             <button
               key={step.label}
@@ -2244,117 +2248,30 @@ export function Playground() {
 
         {sourceTab === 'figma' && (
           <div className="rail__section">
-            {/* Two routes in. The plugin route is CURRENTLY UNREACHABLE: the
-                2026-07-26 plugin IA re-housing (87dd943) folded seven tabs into
-                Build / Changes / Send + Advanced and KILLED the "Send to
-                Playground" tab. code.js still handles `run-send`
-                (code.js:551 → runSendToPlayground) but ui.html never posts it
-                (`grep -c run-send figma-sync/plugin/ui.html` = 0), so the code
-                this button mints can never be fulfilled by the shipped plugin.
-                Transport (engine/bridge.ts) and this UI are left intact and
-                DISABLED rather than deleted — re-enabling is one flag when the
-                plugin regains a sender. Do not re-enable on the strength of
-                code.js alone; the orphan is named in 87dd943's own message.
-                The three-rung fidelity ladder lives in the Help drawer. */}
+            {/* ROUTE ORDER IS THE COPY. The working route leads; the disabled
+                plugin relay moved to the bottom of this section (it used to
+                come first, so the first thing a visitor read was a route they
+                could not use). Nothing about the transport changed. */}
             <div className="rail__group">
-              <div className="rail__group-title">
-                From the Figma plugin — currently unavailable
-              </div>
+              <div className="rail__group-title">Bring a component in from Figma</div>
               <p className="hint">
-                This route delivered full token names <em>and</em> values on any Figma plan, by
-                reading your component sets out of the open file. The plugin&rsquo;s{' '}
-                <strong>Send to Playground</strong> tab was removed on 2026-07-26 when its seven
-                tabs were re-housed into Build / Changes / Send, so nothing can answer a pairing
-                code today. Named, not hidden: the button below is disabled until the plugin
-                ships a sender again. Use the figma.com URL route below, or — for native variable
-                names with zero ambiguity — paste an{' '}
-                <code>extract/figma/dump.plugin.js</code> dump into the <strong>JSON</strong> tab.
+                Two ways in, and a third that is currently switched off. <strong>Start with
+                the URL route below</strong> — paste a component URL and a token and you get a
+                proposed contract. If your plan gates the variables endpoint you still get
+                every value exactly right; only the token <em>names</em> degrade, and each one
+                is receipted rather than invented. For native token names on any plan, paste a{' '}
+                <code>extract/figma/dump.plugin.js</code> dump into the <strong>JSON</strong>{' '}
+                tab instead.
               </p>
-              {bridge === null ? (
-                <button
-                  type="button"
-                  className="btn--primary"
-                  disabled
-                  title="The plugin's Send to Playground tab was removed on 2026-07-26; no sender exists to answer a pairing code."
-                  onClick={() => void startBridge()}
-                >
-                  Receive from plugin — unavailable
-                </button>
-              ) : (
-                <div className="notice" aria-live="polite">
-                  {bridgeDelivered ? (
-                    <div style={{ fontWeight: 600, marginBottom: 6 }}>{bridgeDelivered}</div>
-                  ) : null}
-                  <div
-                    style={{
-                      fontFamily: 'var(--pg-mono)',
-                      fontSize: 22,
-                      letterSpacing: 6,
-                      fontWeight: 600,
-                      margin: '4px 0 8px',
-                    }}
-                  >
-                    {bridge.code}
-                  </div>
-                  Waiting for the plugin… In Figma desktop, run{' '}
-                  <strong>Plugins → Development → DS Contracts Sync Runner</strong>, open the{' '}
-                  <strong>Send to Playground</strong> tab, and enter this code. It expires in{' '}
-                  {Math.floor(bridgeRemaining / 60)}:
-                  {String(bridgeRemaining % 60).padStart(2, '0')}.
-                  <div style={{ marginTop: 8 }}>
-                    <button type="button" onClick={stopBridge}>
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              )}
-              <ErrorNotice error={bridgeError} />
-              <details className="rail__details">
-                <summary>Install the plugin anyway (about a minute)</summary>
-                <p className="hint" style={{ margin: '6px 0' }}>
-                  The plugin is still the other half of the loop — it just doesn&rsquo;t send
-                  <em> here</em> any more. It builds contracts onto your canvas (Build), watches
-                  your team&rsquo;s CI channel and canvas drift (Changes), and opens a canvas
-                  edit as a pull request (Send). This zip is rebuilt from the repo every time
-                  the playground is built, so it is never older than the engine it ships.
-                </p>
-                <ol className="hint" style={{ paddingLeft: 18, margin: '6px 0' }}>
-                  <li>
-                    <a href="/ds-contracts-sync-runner-plugin.zip" download>
-                      Download the plugin zip
-                    </a>{' '}
-                    and unzip it.
-                  </li>
-                  <li>
-                    Open your file in the <strong>Figma desktop app</strong> — development
-                    plugins only load there, not on figma.com. Any plan works; no admin
-                    approval needed.
-                  </li>
-                  <li>
-                    <strong>Plugins → Development → Import plugin from manifest…</strong> and
-                    pick <code>manifest.json</code> from the unzipped folder.
-                  </li>
-                  <li>
-                    Run <strong>DS Contracts Sync Runner</strong>. It opens on{' '}
-                    <strong>Build</strong> (or <strong>Changes</strong> if the file already has
-                    contract-backed sets).
-                  </li>
-                </ol>
-                <p className="hint">
-                  The plugin never writes to your repo, and an Apply never overwrites a canvas
-                  edit silently — edits are detected as drift and the affected rows start
-                  unchecked.
-                </p>
-              </details>
             </div>
 
             <div className="rail__group" style={{ marginTop: 16 }}>
               <div className="rail__group-title">From a figma.com URL + token — quick</div>
               <p className="hint">
-                No install, but variable (token) <em>names</em> are unavailable outside
-                Enterprise plans on this route — values still come through exactly, and every
-                unresolved name is receipted, never invented. For true-to-form token bindings,
-                use the plugin route above.
+                No install. Variable (token) <em>names</em> are unavailable outside Enterprise
+                plans on this route — values still come through exactly, and every unresolved
+                name is receipted, never invented. For true-to-form token names, use the JSON
+                dump route named above.
               </p>
             </div>
             <div className="field">
@@ -2451,6 +2368,110 @@ export function Playground() {
             ) : null}
 
             {wsMiniList('figma')}
+
+            {/* The plugin route is CURRENTLY UNREACHABLE: the 2026-07-26 plugin
+                IA re-housing (87dd943) folded seven tabs into Build / Changes /
+                Send + Advanced and KILLED the "Send to Playground" tab. code.js
+                still handles `run-send` (runSendToPlayground) but ui.html never
+                posts it (`grep -c run-send figma-sync/plugin/ui.html` = 0), so
+                the code this button mints can never be fulfilled by the shipped
+                plugin. Transport (engine/bridge.ts) and this UI are left intact
+                and DISABLED rather than deleted — re-enabling is one flag when
+                the plugin regains a sender. Do not re-enable on the strength of
+                code.js alone; the orphan is named in 87dd943's own message.
+                The three-rung fidelity ladder lives in the Help drawer. */}
+            <div className="rail__group" style={{ marginTop: 24 }}>
+              <div className="rail__group-title">
+                From the Figma plugin — currently unavailable
+              </div>
+              <p className="hint">
+                This route used to deliver full token names <em>and</em> values on any Figma
+                plan, by reading your component sets straight out of the open file. The
+                plugin&rsquo;s <strong>Send to Playground</strong> tab was removed on
+                2026-07-26 when its seven tabs were re-housed into Build / Changes / Send, so
+                nothing can answer a pairing code today. Named, not hidden: the button below
+                stays disabled until the plugin ships a sender again. Use the URL route above,
+                or paste a dump into the <strong>JSON</strong> tab.
+              </p>
+              {bridge === null ? (
+                <button
+                  type="button"
+                  className="btn--primary"
+                  disabled
+                  title="The plugin's Send to Playground tab was removed on 2026-07-26; no sender exists to answer a pairing code."
+                  onClick={() => void startBridge()}
+                >
+                  Receive from plugin — unavailable
+                </button>
+              ) : (
+                <div className="notice" aria-live="polite">
+                  {bridgeDelivered ? (
+                    <div style={{ fontWeight: 600, marginBottom: 6 }}>{bridgeDelivered}</div>
+                  ) : null}
+                  <div
+                    style={{
+                      fontFamily: 'var(--pg-mono)',
+                      fontSize: 22,
+                      letterSpacing: 6,
+                      fontWeight: 600,
+                      margin: '4px 0 8px',
+                    }}
+                  >
+                    {bridge.code}
+                  </div>
+                  Waiting for the plugin… In Figma desktop, run{' '}
+                  <strong>Plugins → Development → DS Contracts Sync Runner</strong> and enter
+                  this code in whichever panel offers to send to the playground. It expires in{' '}
+                  {Math.floor(bridgeRemaining / 60)}:
+                  {String(bridgeRemaining % 60).padStart(2, '0')}.
+                  <div style={{ marginTop: 8 }}>
+                    <button type="button" onClick={stopBridge}>
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+              <ErrorNotice error={bridgeError} />
+              <details className="rail__details">
+                <summary>Install the plugin anyway (about a minute)</summary>
+                <p className="hint" style={{ margin: '6px 0' }}>
+                  The plugin is the other half of the loop — it just doesn&rsquo;t send
+                  <em> here</em> any more. It is what actually builds your components onto a
+                  canvas: paste a contracts bundle and it builds the sets (Build), it watches
+                  your team&rsquo;s CI channel and your canvas for drift (Changes), and it
+                  opens a canvas edit as a pull request (Send). This zip is rebuilt from the
+                  repo every time the playground is built, so it is never older than the engine
+                  it ships.
+                </p>
+                <ol className="hint" style={{ paddingLeft: 18, margin: '6px 0' }}>
+                  <li>
+                    <a href="/ds-contracts-sync-runner-plugin.zip" download>
+                      Download the plugin zip
+                    </a>{' '}
+                    and unzip it.
+                  </li>
+                  <li>
+                    Open your file in the <strong>Figma desktop app</strong> — development
+                    plugins only load there, not on figma.com. Any plan works; no admin
+                    approval needed.
+                  </li>
+                  <li>
+                    <strong>Plugins → Development → Import plugin from manifest…</strong> and
+                    pick <code>manifest.json</code> from the unzipped folder.
+                  </li>
+                  <li>
+                    Run <strong>DS Contracts Sync Runner</strong>. It opens on{' '}
+                    <strong>Build</strong> (or <strong>Changes</strong> if the file already has
+                    contract-backed sets).
+                  </li>
+                </ol>
+                <p className="hint">
+                  The plugin never writes to your repo, and an Apply never overwrites a canvas
+                  edit silently — edits are detected as drift and the affected rows start
+                  unchecked.
+                </p>
+              </details>
+            </div>
           </div>
         )}
 

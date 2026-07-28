@@ -16,6 +16,12 @@
     "pairs": 16,
     "perfectExact": 0,
     "perfectAA": 0,
+    "measured": 16,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 3.670247395833333,
     "meanAA": 0.27506510416666663,
     "maxAA": 0.3287760416666667

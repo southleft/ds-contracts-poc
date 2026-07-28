@@ -82,6 +82,8 @@ Item 6 is the one that changes the conversation with enterprise teams. A methodo
 
 ## Scope discipline (learned the hard way in this repo)
 
+> **Superseded in part — read this first.** The paragraph below was the plan, and its "no anatomy inference" rule was later relaxed *with evidence*: see [Code-first anatomy](#code-first-anatomy-when-the-org-arrives-code-only) and [Design-first anatomy](#design-first-anatomy-the-drawn-structure-proposes-the-contract) below. The rule that survived is the important half — nothing is guessed, everything unreadable is skipped **by name**. Kept unrewritten because it is the reasoning that produced the discipline.
+
 Extraction should target **exactly the differ's current scope** — the contracted API surface — and not attempt anatomy inference. Recovering part-level anatomy, icon usage, or `visibleWhen` logic from arbitrary hand-written code is a research project; recovering props, variants, defaults, and token references is engineering. The PoC's own validation history ([docs/07](07-validation.md)) shows the API surface is where drift is detectable, classifiable, and actionable. Anatomy stays human-owned on brownfield components, which is also the answer teams want to hear.
 
 ## What this phase must prove

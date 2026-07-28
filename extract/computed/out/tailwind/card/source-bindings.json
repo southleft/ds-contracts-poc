@@ -16,6 +16,15 @@
     }
   ],
   "skips": [
-    "root.box-shadow: no var candidate verified against the computed value in any combo"
-  ]
+    "root.box-shadow: candidates --tw-inset-ring-shadow → \"tw-inset-ring-shadow\" = 0 0 #0000 (value differs); --tw-inset-shadow → \"tw-inset-shadow\" = 0 0 #0000 (value differs); --tw-ring-offset-shadow → \"tw-ring-offset-shadow\" = 0 0 #0000 (value differs); --tw-ring-shadow → \"tw-ring-shadow\" = 0 0 #0000 (value differs); --tw-shadow → \"tw-shadow\" = 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind."
+  ],
+  "shorthandCeiling": 4,
+  "shorthandSkips": [
+    "label.gap: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "label.padding: SHORTHAND carrying var(--spacing) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-radius: SHORTHAND carrying var(--radius-lg) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border-style: SHORTHAND carrying var(--tw-border-style) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }

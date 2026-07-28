@@ -122,10 +122,16 @@
   },
   "pixel": {
     "pairs": 24,
+    "measured": 24,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 24
+      "mean": 0.023057725694444448,
+      "max": 0.052083333333333336,
+      "perfect": 2
     },
     "aa": {
       "mean": 0,
@@ -134,43 +140,43 @@
     },
     "worst": [
       {
-        "key": "sm.unchecked__default",
-        "pctExact": 0,
+        "key": "md.unchecked__focus-visible",
+        "pctExact": 0.052083333333333336,
         "pctAA": 0
       },
       {
-        "key": "sm.unchecked__hover",
-        "pctExact": 0,
+        "key": "md.unchecked__active",
+        "pctExact": 0.052083333333333336,
         "pctAA": 0
       },
       {
-        "key": "sm.unchecked__focus-visible",
-        "pctExact": 0,
+        "key": "md.unchecked__default",
+        "pctExact": 0.042317708333333336,
         "pctAA": 0
       },
       {
-        "key": "sm.unchecked__active",
-        "pctExact": 0,
+        "key": "md.unchecked__hover",
+        "pctExact": 0.042317708333333336,
         "pctAA": 0
       },
       {
-        "key": "sm.checked__default",
-        "pctExact": 0,
+        "key": "md.checked__focus-visible",
+        "pctExact": 0.042317708333333336,
         "pctAA": 0
       },
       {
-        "key": "sm.checked__hover",
-        "pctExact": 0,
+        "key": "md.checked__active",
+        "pctExact": 0.042317708333333336,
         "pctAA": 0
       },
       {
-        "key": "sm.checked__focus-visible",
-        "pctExact": 0,
+        "key": "md.checked__default",
+        "pctExact": 0.032552083333333336,
         "pctAA": 0
       },
       {
-        "key": "sm.checked__active",
-        "pctExact": 0,
+        "key": "md.checked__hover",
+        "pctExact": 0.032552083333333336,
         "pctAA": 0
       }
     ]

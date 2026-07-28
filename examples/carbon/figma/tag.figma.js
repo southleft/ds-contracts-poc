@@ -34,14 +34,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -55,8 +52,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -79,14 +75,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -100,8 +93,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -124,14 +116,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -145,8 +134,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -169,14 +157,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -190,8 +175,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -214,14 +198,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -235,8 +216,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -259,14 +239,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -280,8 +257,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -304,14 +280,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -325,8 +298,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -349,14 +321,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -370,8 +339,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -394,14 +362,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -415,8 +380,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -439,14 +403,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -460,8 +421,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -484,14 +444,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -505,8 +462,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -529,14 +485,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -550,8 +503,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -574,14 +526,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -595,8 +544,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -619,14 +567,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -640,8 +585,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -664,14 +608,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -685,8 +626,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -709,14 +649,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -730,8 +667,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -754,14 +690,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -775,8 +708,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -799,14 +731,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -820,8 +749,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -844,14 +772,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -865,8 +790,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -889,14 +813,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -910,8 +831,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -934,14 +854,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -955,8 +872,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -979,14 +895,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1000,8 +913,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1024,14 +936,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1045,8 +954,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1069,14 +977,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1090,8 +995,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1114,14 +1018,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1135,8 +1036,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1159,14 +1059,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1180,8 +1077,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1204,14 +1100,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1225,8 +1118,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1249,14 +1141,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1270,8 +1159,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1294,14 +1182,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1315,8 +1200,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1339,14 +1223,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1360,8 +1241,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1384,14 +1264,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1405,8 +1282,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1429,14 +1305,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1450,8 +1323,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1474,14 +1346,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1495,8 +1364,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1519,14 +1387,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/sm",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/sm",
             "paddingRight": "imported/tag/root/padding-right/sm"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1540,8 +1405,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1564,14 +1428,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/md",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/md",
             "paddingRight": "imported/tag/root/padding-right/md"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1585,8 +1446,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1609,14 +1469,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/shared/size-16",
             "topLeftRadius": "imported/shared/size-16",
             "topRightRadius": "imported/shared/size-16",
+            "maxWidth": "imported/tag/root/max-width",
             "minHeight": "imported/tag/root/min-height/lg",
             "minWidth": "imported/tag/root/min-width",
             "paddingLeft": "imported/tag/root/padding-left/lg",
             "paddingRight": "imported/tag/root/padding-right/lg"
-          },
-          "fixedWidth": {
-            "px": 208,
-            "varName": "imported/tag/root/max-width"
           },
           "children": [
             {
@@ -1630,8 +1487,7 @@ const COMPONENTS = [
               "lineHeight": 16,
               "letterSpacing": 0.32,
               "textTruncation": true,
-              "contentProp": "Content",
-              "fillW": true
+              "contentProp": "Content"
             }
           ]
         }
@@ -1977,10 +1833,25 @@ async function buildNode(spec, registry) {
     if (spec.fill || spec.fixedWidth || spec.fixedHeight || spec.bindings) {
       // Styled static text (page chips, dots, thumbs): wrap in a frame so
       // fills/dimensions/radius apply to a container, not the glyphs.
+      //
+      // TASK #37, second live-canvas finding: "Modal's Label renders CENTERED
+      // at the top rather than top-left". The wrapper's CENTER/CENTER was
+      // hard-coded for the chip/dot/thumb case — a DRAWN box, where centering
+      // the glyph is right. But 46 of the corpus's 62 wrapped texts have no
+      // fill and no fixed size at all: they are wrapped only to carry
+      // min-width/min-height bindings the floor promoted (Carbon's own reset
+      // declares `min-width: 0`), and then the wrapper re-centered text that
+      // CSS lays out at the start of its line box. Carbon's Modal "Label" is
+      // exactly that: a bare h2 with `min-width: 0`, FILLing the header, so
+      // the wrapper centered it in a 430px row.
+      //
+      // A wrapper with no drawn box inherits the CSS truth (start/start); a
+      // wrapper that DOES draw a box keeps the centering it was built for.
+      const boxed = Boolean(spec.fill || spec.fixedWidth || spec.fixedHeight);
       const wrap = figma.createFrame();
       wrap.layoutMode = 'HORIZONTAL';
-      wrap.primaryAxisAlignItems = 'CENTER';
-      wrap.counterAxisAlignItems = 'CENTER';
+      wrap.primaryAxisAlignItems = boxed ? 'CENTER' : 'MIN';
+      wrap.counterAxisAlignItems = boxed ? 'CENTER' : 'MIN';
       wrap.primaryAxisSizingMode = 'AUTO';
       wrap.counterAxisSizingMode = 'AUTO';
       wrap.fills = [];

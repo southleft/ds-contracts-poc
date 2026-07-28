@@ -2688,6 +2688,68 @@
         }
       },
       "label": {
+        "color": {
+          "filled": {
+            "default": {
+              "$value": "#000000de",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "outlined": {
+            "default": {
+              "$value": "#000000de",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            }
+          }
+        },
         "font-size": {
           "$value": "13px",
           "$type": "dimension"
@@ -2699,6 +2761,112 @@
         "line-height": {
           "$value": "19.5px",
           "$type": "dimension"
+        },
+        "padding-left": {
+          "filled": {
+            "small": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          },
+          "outlined": {
+            "small": {
+              "$value": "7px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "11px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "padding-right": {
+          "filled": {
+            "small": {
+              "$value": "8px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          },
+          "outlined": {
+            "small": {
+              "$value": "7px",
+              "$type": "dimension"
+            },
+            "medium": {
+              "$value": "11px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "row-rule-color": {
+          "filled": {
+            "default": {
+              "$value": "#000000de",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "outlined": {
+            "default": {
+              "$value": "#000000de",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            }
+          }
         }
       }
     },

@@ -373,7 +373,7 @@
   "anatomyPromotion": {
     "partsCarried": 15,
     "svgAssets": 1,
-    "refusals": 1
+    "refusals": 3
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
@@ -400,46 +400,57 @@
   },
   "pixel": {
     "pairs": 5,
+    "measured": 0,
+    "unscored": {
+      "sizeMismatch": 5,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
-      "mean": 100,
-      "max": 100,
+      "mean": null,
+      "max": null,
       "perfect": 0
     },
     "aa": {
-      "mean": 100,
-      "max": 100,
+      "mean": null,
+      "max": null,
       "perfect": 0
     },
     "worst": [
       {
         "key": "unset__default",
-        "pctExact": 100,
-        "pctAA": 100,
-        "note": "size mismatch ours 320x96 vs orig 900x1000"
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "size-mismatch",
+        "note": "size mismatch ours 320x96 vs orig 900x1000 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
       },
       {
         "key": "xs__default",
-        "pctExact": 100,
-        "pctAA": 100,
-        "note": "size mismatch ours 320x96 vs orig 900x1000"
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "size-mismatch",
+        "note": "size mismatch ours 320x96 vs orig 900x1000 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
       },
       {
         "key": "sm__default",
-        "pctExact": 100,
-        "pctAA": 100,
-        "note": "size mismatch ours 320x96 vs orig 900x1000"
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "size-mismatch",
+        "note": "size mismatch ours 320x96 vs orig 900x1000 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
       },
       {
         "key": "md__default",
-        "pctExact": 100,
-        "pctAA": 100,
-        "note": "size mismatch ours 320x96 vs orig 900x1000"
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "size-mismatch",
+        "note": "size mismatch ours 320x96 vs orig 900x1000 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
       },
       {
         "key": "lg__default",
-        "pctExact": 100,
-        "pctAA": 100,
-        "note": "size mismatch ours 320x96 vs orig 900x1000"
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "size-mismatch",
+        "note": "size mismatch ours 320x96 vs orig 900x1000 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
       }
     ]
   },
@@ -449,7 +460,7 @@
     "rows": 20,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,
-    "pairs": 20
+    "pairs": 5
   },
   "focusVisibleDriverMatched": 0,
   "focusVisibleDriverTotal": 0

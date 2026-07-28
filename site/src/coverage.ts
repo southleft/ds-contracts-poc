@@ -1,11 +1,11 @@
 /**
  * The schema-coverage drift guard — the site's standing receipt.
  *
- * enumerateBranches() walks the LIVE Zod schema and yields every branch key
- * (140 at @ds-contracts/schema 15.0.0 — the count is printed by the build's
- * own receipt, never transcribed into a page; this comment is the only
- * hand-maintained copy and is therefore the only one that can go stale).
- * This registry maps every key to the reference page +
+ * enumerateBranches() walks the LIVE Zod schema and yields every branch key.
+ * The count is printed by the build's own receipt and never transcribed
+ * anywhere — the previous version of this comment carried it by hand and went
+ * stale the first time the schema grew a branch, which is exactly the failure
+ * this file exists to prevent. This registry maps every key to the reference page +
  * anchor that documents it. The build FAILS when:
  *   - the schema grows a branch with no registry entry (undocumented spec), or
  *   - the registry names a branch the schema no longer has (stale docs).
@@ -174,6 +174,8 @@ reg('layout', 'layout', [
   // v15 (S4): flex-wrap — native on both surfaces.
   'layout.wrap',
 ]);
+// v16: MEASURED sizing evidence — qualifies a part's `max-width` channel.
+reg('layout', 'hugs-below-max-width', ['part.hugsBelowMaxWidth']);
 reg('layout', 'layout-by-prop', [
   'part.layoutByProp',
   'layoutByProp.prop',

@@ -460,6 +460,10 @@
     }
   ],
   "skips": [
-    "text-input.block-size: no var candidate verified against the computed value in any combo"
-  ]
+    "text-input.block-size: candidate --cds-layout-size-height-local → \"layout-size-height-local\" = clamp(max(0px, 1.5rem), 2.5rem, min(999999999px, 3rem)) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }

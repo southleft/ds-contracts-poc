@@ -11,112 +11,112 @@
   },
   {
     "key": "sm.unchecked__focus-visible",
-    "pctExact": 0,
+    "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
     "key": "sm.unchecked__active",
-    "pctExact": 0,
+    "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
     "key": "sm.checked__default",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
     "key": "sm.checked__hover",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
     "key": "sm.checked__focus-visible",
-    "pctExact": 0,
+    "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
     "key": "sm.checked__active",
-    "pctExact": 0,
+    "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
     "key": "md.unchecked__default",
-    "pctExact": 0,
+    "pctExact": 0.042317708333333336,
     "pctAA": 0
   },
   {
     "key": "md.unchecked__hover",
-    "pctExact": 0,
+    "pctExact": 0.042317708333333336,
     "pctAA": 0
   },
   {
     "key": "md.unchecked__focus-visible",
-    "pctExact": 0,
+    "pctExact": 0.052083333333333336,
     "pctAA": 0
   },
   {
     "key": "md.unchecked__active",
-    "pctExact": 0,
+    "pctExact": 0.052083333333333336,
     "pctAA": 0
   },
   {
     "key": "md.checked__default",
-    "pctExact": 0,
+    "pctExact": 0.032552083333333336,
     "pctAA": 0
   },
   {
     "key": "md.checked__hover",
-    "pctExact": 0,
+    "pctExact": 0.032552083333333336,
     "pctAA": 0
   },
   {
     "key": "md.checked__focus-visible",
-    "pctExact": 0,
+    "pctExact": 0.042317708333333336,
     "pctAA": 0
   },
   {
     "key": "md.checked__active",
-    "pctExact": 0,
+    "pctExact": 0.042317708333333336,
     "pctAA": 0
   },
   {
     "key": "lg.unchecked__default",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
     "key": "lg.unchecked__hover",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
     "key": "lg.unchecked__focus-visible",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
     "key": "lg.unchecked__active",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
     "key": "lg.checked__default",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
     "key": "lg.checked__hover",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
     "key": "lg.checked__focus-visible",
-    "pctExact": 0,
+    "pctExact": 0.029296875,
     "pctAA": 0
   },
   {
     "key": "lg.checked__active",
-    "pctExact": 0,
+    "pctExact": 0.029296875,
     "pctAA": 0
   }
 ]

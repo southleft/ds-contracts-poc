@@ -1015,3 +1015,70 @@ eval.
   source-binding facts (THE HEADLINE DEFECT above) — untouched by this round.
 - `gate.ts`'s flat 30 ms interaction wait (Button's ±0.20 tolerance) —
   untouched by this round.
+
+## THE HARNESS RECAPTURE WAVE (task #38)
+
+Three rounds deferred library regeneration for the same reason, and every library's SHIPPED
+artifacts had drifted behind fixes that were already in the engine. All 10 components were
+re-captured against the pinned `.carbon-sandbox` with the recipe above, double-run byte-identity
+required and met, then re-promoted and every downstream artifact rebuilt.
+
+**Floors before -> after:** NONE — all 10 scorecards came back byte-identical (pctEqual and cellsCompared both).
+That is the honest shape of this wave across the corpus: 37 scorecards were re-measured over
+carbon/mui/tailwind/altitude and exactly ONE moved. The artifacts were stale in their VOCABULARY
+(refusals, instrument fields, per-axis token maps), not in their floor numbers.
+
+**THE SHORTHAND CEILING (task #27) — the real number, measured for the first time.**
+`shorthandCeiling` counts source declarations dropped because the property they name is not in the
+computed longhand sweep — overwhelmingly CSS SHORTHANDS carrying a `var()`, which are
+pending-substitution values with no computed value to verify a token name against. The instrument
+was STRUCTURALLY ZERO in every artifact ever written, because `normalizeNode` never preserved the
+`vshorthands` field it reads; that was fixed but had never produced a real number until this wave.
+**This library: 14** (accordion 5, inline-notification 5, button 1, icon-button 1, tabs 1, tag 1).
+
+**The root max-width fix landed here (task #37).** Three roots and two nested parts now carry the MEASURED `hugsBelowMaxWidth` fact: Button (used width 123.5px under a 320px cap), InlineNotification (428 under 608), Tag (35.7 under 208), plus Modal's and IconButton's `btn`. On the canvas that is Button 320 -> 128, InlineNotification 608 -> 441, Tag 208 -> 38/46 per size. The counter-case is in the same library and is why the discriminator is a measurement and not a list: `inline-notification__close-button` sits AT its max-width in every combo, so it carries NO evidence and keeps the fixed-width lowering. A new D7 pin in the compile receipt (scripts/hug-ceiling-pin.mjs) refuses a hug-measured root that renders at its ceiling.
+
+### The other two live-canvas findings from the same review
+
+**FIXED — "Modal's Label renders centered at the top rather than top-left."** Not a Modal bug and
+not a Carbon bug: a corpus-wide one. `core/emit-figma-script.ts` wraps a TEXT spec in a frame
+whenever it carries a fill, a fixed size **or any bindings at all**, "so fills/dimensions/radius
+apply to a container, not the glyphs" — and that wrapper was hard-coded `primaryAxisAlignItems:
+CENTER, counterAxisAlignItems: CENTER`. Right for the case it was built for (a chip/dot/thumb: a
+DRAWN box where centering the glyph is correct); wrong for the 46 of the corpus's 62 wrapped texts
+that have **no fill and no fixed size at all** and are wrapped only to carry `min-width` /
+`min-height` bindings the floor promoted. Carbon's Modal `label-2` is exactly that — a bare `<h2>`
+whose only bindings are `min-width: 0` and `min-height: 0` from Carbon's own reset — so it FILLed
+the 430px header and the wrapper centered it. A wrapper with no drawn box now takes MIN/MIN (the
+CSS truth: `text-align` initial is `start`); a wrapper that draws a box keeps its centering. The
+built header now measures `label-2 w=366 x=0 primary=MIN counter=MIN`. The change is in the emitted
+RUNTIME, so all 53 `figma-sync/*.js` goldens moved by exactly that block and **zero spec bytes
+changed** (verified by diffing the emission).
+
+**NOT FIXED, NAMED PRECISELY — "Modal's footer buttons render 125/111 where Carbon's footer is an
+equal-width flush-right pair."** After this round they measure **128 and 112**; Carbon's captured
+truth is **377 and 377**. The cause is not the emitter and not the max-width lowering: Carbon
+declares `.cds--modal-footer .cds--btn { flex: 0 1 50% }`, and the captured computed style records
+`flex-basis: 50%` on both `label-6` and `label-7`. **`flex-basis` is not a carried channel
+anywhere in the pipeline** — it is absent from `CHANNEL_TO_COMPUTED` in `extract/computed/lib.ts`,
+so it never reaches the contract, and `core/emit-figma-script.ts` has no lowering for it. Closing
+it is a real round, not a cheap win: a PERCENTAGE basis is not mintable (the mint takes
+color/px/number/shadow/gradient), so it would have to enter the `DECLARED_CHANNELS` registry and
+then lower to Figma `layoutGrow = 1` on every sibling that carries it — a new channel with
+cross-library blast radius that this wrap-up round cannot measure. Until then the footer pair hugs
+its labels. Recorded here rather than left for the owner to find on the canvas a second time.
+
+### A standing gap this wave made visible: ORPHANED MINTED LEAVES
+
+A part refused by `non-painting-part` / `inert-overlay-wrapper` leaves the ANATOMY but **not the
+MINT**: `enriched.extension.json.mintedTokens` still carries its leaves, and `promote-floor` writes
+them into the shipped token set, where `00-tokens.figma.js` creates Figma variables nothing binds.
+Measured across the recaptured corpus: **224 orphan leaves** — carbon icon-button 122 (`label` 55,
+`popover-caret` 47, `popover` 10, `tooltip-trigger-wrapper` 10), carbon tabs 21, carbon toggle 19,
+carbon inline-notification 20, carbon text-input 18, carbon accordion 13, carbon modal 3, carbon
+checkbox 1, mui autocomplete 3, altitude avatar 4. This is PRE-EXISTING and corpus-wide (the carbon
+figures are already in the committed HEAD minted tree, from the earlier live-defect round); the
+recapture only made it countable. The same ordering leaves an orphan SVG behind:
+`examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg` is still written by
+promote-floor and referenced by no contract. Not fixed here — moving the refusal ahead of the mint
+moves every library's variable count and every golden, and that is its own round.

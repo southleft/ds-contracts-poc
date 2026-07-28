@@ -508,5 +508,15 @@
       }
     }
   ],
-  "skips": []
+  "skips": [],
+  "shorthandCeiling": 5,
+  "shorthandSkips": [
+    "root.background: SHORTHAND carrying var(--cds-background-inverse) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--cds-background-inverse, --cds-notification-background-error) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--cds-background-inverse, --cds-notification-background-info) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--cds-background-inverse, --cds-notification-background-success) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--cds-background-inverse, --cds-notification-background-warning) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }

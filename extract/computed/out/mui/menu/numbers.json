@@ -340,22 +340,29 @@
   },
   "pixel": {
     "pairs": 1,
+    "measured": 0,
+    "unscored": {
+      "sizeMismatch": 1,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
-      "mean": 100,
-      "max": 100,
+      "mean": null,
+      "max": null,
       "perfect": 0
     },
     "aa": {
-      "mean": 100,
-      "max": 100,
+      "mean": null,
+      "max": null,
       "perfect": 0
     },
     "worst": [
       {
         "key": "__default",
-        "pctExact": 100,
-        "pctAA": 100,
-        "note": "size mismatch ours 320x96 vs orig 900x1000"
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "size-mismatch",
+        "note": "size mismatch ours 320x96 vs orig 900x1000 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
       }
     ]
   },
@@ -365,7 +372,7 @@
     "rows": 4,
     "pixelPerfectExact": 0,
     "pixelPerfectAA": 0,
-    "pairs": 4
+    "pairs": 1
   },
   "focusVisibleDriverMatched": 0,
   "focusVisibleDriverTotal": 0

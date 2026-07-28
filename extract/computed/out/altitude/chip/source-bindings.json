@@ -340,5 +340,13 @@
       }
     }
   ],
-  "skips": []
+  "skips": [],
+  "shorthandCeiling": 3,
+  "shorthandSkips": [
+    "root.border-radius: SHORTHAND carrying var(--al-theme-border-radius) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border: SHORTHAND carrying var(--al-theme-border-width, --al-theme-color-border-default) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.font: SHORTHAND carrying var(--al-typography-preset-14) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }

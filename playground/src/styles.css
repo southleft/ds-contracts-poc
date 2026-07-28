@@ -510,8 +510,21 @@ label {
 .landing__pitch {
   font-size: 16px;
   color: var(--pg-muted);
-  margin: 0 0 32px;
+  margin: 0 0 16px;
   max-width: 72ch;
+}
+
+/* The last pitch paragraph carries the gap down to the loop strip. */
+.landing__pitch:last-of-type {
+  margin-bottom: 32px;
+}
+
+/* The "this is not the build tool" aside — quieter, set off by a rule. */
+.landing__pitch--aside {
+  font-size: 14px;
+  color: var(--pg-faint);
+  border-left: 2px solid var(--pg-border);
+  padding-left: 12px;
 }
 
 /* The one-line thesis. It may WRAP (between steps, never mid-word) — the

@@ -325,7 +325,8 @@
             }
           }
         }
-      ]
+      ],
+      "hugsBelowMaxWidth": true
     }
   },
   "anchors": {

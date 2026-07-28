@@ -522,6 +522,19 @@ export function validateContract(
         `${contract.id}: part "${name}" is a ${part.component ? 'component instance' : 'slot'} — declared facts cannot restyle it (the child contract / consumer owns its styling)`,
       );
     }
+    // v16 (task #37): sizing evidence describes ONE channel. A part that
+    // does not carry max-width has nothing for the flag to qualify, so a
+    // stray flag is a contract error, not a no-op.
+    if (
+      part.hugsBelowMaxWidth !== undefined &&
+      !(part.tokens && 'max-width' in part.tokens) &&
+      !(part.declared && 'max-width' in part.declared) &&
+      !(part.literals && 'max-width' in part.literals)
+    ) {
+      errors.push(
+        `${contract.id}: part "${name}" carries hugsBelowMaxWidth but no "max-width" channel — the flag qualifies that channel and qualifies nothing here`,
+      );
+    }
     for (const [cssProp, value] of Object.entries(part.declared ?? {})) {
       checkDeclaredEntry(cssProp, value, 'declared');
       if (part.tokens && cssProp in part.tokens) {

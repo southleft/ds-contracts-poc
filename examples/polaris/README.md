@@ -60,6 +60,38 @@ npx tsx examples/polaris/scripts/promote-floor.ts
 
 Steps 4 and the eval run from the COMMITTED artifacts alone — that is the point of a contract.
 
+## PERMANENT HOLE — Polaris cannot be recaptured (task #38)
+
+**Every other library in `examples/` commits a git-ignored but REPRODUCIBLE sandbox recipe with
+a pinned `package.json` + `package-lock.json`** (`examples/mui/.mui-sandbox`,
+`.carbon-sandbox`, `.tw-sandbox`, `.altitude-sandbox`, `.astryx-sandbox`). Polaris has none.
+Step 6 above says `--harness <harness-dir>` — a directory whose path, contents and lockfile are
+**recorded nowhere in this repo**. `.polaris-clone/` is the SOURCE clone for the static
+extraction (step 2); it is not the harness, and it cannot serve as one.
+
+**What that means, stated plainly:**
+
+- Polaris's committed artifacts under `extract/computed/out/<comp>/` — `captured-truth.json`,
+  `enriched.contract.json`, the scorecards — are **FROZEN at whatever engine produced them**.
+  They are the only artifacts in the corpus that no command in this repo can regenerate.
+- Every engine fix that lands after that freeze reaches Polaris only through
+  `npm run extract:computed:regate` (the OFFLINE re-fuse of the committed `captured-truth.json`),
+  which is why the drift baseline still covers it. Anything that lives in the CAPTURE half —
+  a new channel read, a new pseudo-element, a refusal that depends on re-measuring the DOM —
+  cannot reach Polaris at all.
+- Polaris is therefore also the one library `scripts/figma-scripts-fresh.mjs` does not gate:
+  its `figma/*.figma.js` are emitted by `generate.ts` (the provisional-minting path), not by the
+  CLI `figma` command, and the exact invocation is not recorded either.
+
+The recorded gap cause lives with the numbers, in
+`extract/computed/regate-baseline.json` (`gapCause` on each `polaris/*` row) — so a reader of the
+drift table sees it without reading this file.
+
+**Closing it** means committing a `examples/polaris/.polaris-sandbox/` package.json +
+package-lock.json pinning `@shopify/polaris@13.9.5 react@18 react-dom@18 esbuild`, adding
+`examples/polaris/PROVENANCE.md` with the same shape the other five have, and re-running the
+capture. That is a round of its own; it is named here rather than silently carried.
+
 ## License hygiene
 
 Polaris is MIT © Shopify Inc. This directory commits **derived artifacts and receipts only**:

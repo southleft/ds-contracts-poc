@@ -2,14 +2,24 @@
 
 The contract model is not specific to this repo's components, React, CSS Modules, or any design tool. This page is the hands-on path for anyone who cloned the repo and wants to point the machinery at **their own** library — the first shipped slice of [brownfield adoption](11-brownfield-adoption.md).
 
-What you get today (extraction v0):
+What you get today:
 
-1. **Proposed contracts** for your components — schema-valid, API-surface only
+1. **Proposed contracts** for your components — always schema-valid, always carrying your API surface. Whether they *also* carry anatomy and token bindings depends on your styling method (see below).
 2. **The disagreement report** — where your code library and your design library disagree with *each other*, before any contract is adopted
-
 3. **A continuous referee** — `npm run diagnose` checks your real surfaces against the contracts on every run, generating nothing
 
-What you don't get yet: anatomy/token inference (deliberately — anatomy stays human-owned), token-surface checks against foreign token systems, and the reconciliation UI (both on the [roadmap](12-roadmap.md)).
+**Anatomy: what you get, and when.** This page originally said extraction was API-surface only and would never propose anatomy. That stopped being true when CSS Modules anatomy extraction shipped, and the corrected statement is:
+
+| Your library | Static extraction produces |
+|---|---|
+| React + co-located `<Component>.module.css` | **API surface *and* anatomy** — parts, token bindings, layout, states. This repo's own 51 proposals come out this way. Best-effort, not guaranteed: a whole-library run against Polaris produced anatomy for 109 of 182 components. |
+| React + StyleX | API surface + **structure only** (parts, no styling); styling flagged for review |
+| React + Tailwind / Emotion / styled-components | **API surface only** — the stub `{"root": {}}` |
+| `cem` adapter | **API surface only** — a manifest has no styling channel |
+
+Each proposal's `description` states which one it is. A stub anatomy is schema-valid and will happily emit a Figma component set — correctly named, with blank interiors. Browser-observed styling truth comes only from the computed capture: [docs/21](21-bring-your-own-design-system.md).
+
+What you still don't get: token-surface checks against foreign token systems, and the reconciliation UI (both on the [roadmap](12-roadmap.md)).
 
 ## 0 · See it work before pointing it at your system
 
@@ -51,7 +61,7 @@ npm run extract:code
 
 The CEM adapter is the framework-agnosticism proof: adapters normalize into one shared shape, so everything downstream (proposals, reconciliation, eventually the differ) is framework-blind. A Vue/Svelte adapter is the same ~200-line pattern against their SFC tooling.
 
-What extraction reads is deliberately scoped to the **API surface** — props, enum values, defaults, booleans, text, `on*` events. It will not guess your anatomy or tokens; proposals ship with a stub root and explicit notes on every inference (`extract/out/proposals.md`).
+Extraction always reads the **API surface** — props, enum values, defaults, booleans, text, `on*` events. It reads **anatomy and token bindings** on top of that only where the styling method exposes them to static analysis (the table above); everywhere else the proposal ships with a stub root, and says so. Nothing is guessed either way: every inference is noted, and every component the adapter can see but cannot read is listed with the reason in `extract/out/proposals.md`.
 
 ## 2 · Dump your design library
 

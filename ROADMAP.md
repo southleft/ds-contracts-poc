@@ -1,10 +1,12 @@
 # Roadmap
 
+*Looking for how to **use** this rather than where it's going? Start at [which journey are you on](README.md#which-journey-are-you-on) — code into Figma, canvas into code, or a brownfield pair reconciled.*
+
 The public roadmap lives in the documentation: **[docs/12-roadmap.md](docs/12-roadmap.md)**.
 
 Short version — four phases, each with a falsifiable exit criterion:
 
-0. **Prove the model** — complete (July 2026): 51 component contracts, two generated surfaces, three-way parity, 172/172 evals, measured governed-generation result.
+0. **Prove the model** — complete (July 2026): 51 component contracts, two generated surfaces, three-way parity, 173/173 evals, measured governed-generation result.
 1. **Harden the loop** — anatomy-level parity, fresh-file rebuild, automated visual regression.
 2. **Brownfield adoption** — extract proposed contracts from *pre-existing* design + code libraries, reconcile, run diagnostic-only; public pilot on a real open-source pair.
 3. **Spec candidacy** — separate format from implementation: normative spec draft, conformance kit, and a second independent implementation.

@@ -187,7 +187,13 @@
     }
   ],
   "skips": [
-    "icon.color: no var candidate verified against the computed value in any combo",
-    "icon-2.color: no var candidate verified against the computed value in any combo"
-  ]
+    "icon.color: candidate --mui-palette-text-primaryChannel → \"palette-text-primary-channel\" = 0 0 0 (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "icon-2.color: candidate --mui-palette-text-primaryChannel → \"palette-text-primary-channel\" = 0 0 0 (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "autocomplete-clearindicator.--IconButton-hoverBg: source declares `rgba(var(--mui-palette-action-activeChannel) / calc(var(--mui-palette-action-hoverOpacity)))` — a calc() over var(--mui-palette-action-activeChannel, --mui-palette-action-hoverOpacity). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "autocomplete-popupindicator.--IconButton-hoverBg: source declares `rgba(var(--mui-palette-action-activeChannel) / calc(var(--mui-palette-action-hoverOpacity)))` — a calc() over var(--mui-palette-action-activeChannel, --mui-palette-action-hoverOpacity). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 2,
+  "calcCeiling": 2
 }

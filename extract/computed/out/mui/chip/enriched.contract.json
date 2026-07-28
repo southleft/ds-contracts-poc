@@ -130,13 +130,58 @@
             "font-weight": "{imported.chip.label.font-weight}",
             "line-height": "{imported.chip.label.line-height}"
           },
-          "literals": {
-            "padding-left": "12px",
-            "padding-right": "12px"
-          }
+          "tokensByProp": [
+            {
+              "prop": "color",
+              "map": {
+                "default": {
+                  "color": "{imported.chip.label.color.{variant}.default}",
+                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.default}"
+                },
+                "error": {
+                  "color": "{imported.chip.label.color.{variant}.error}",
+                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.error}"
+                },
+                "info": {
+                  "color": "{imported.chip.label.color.{variant}.info}",
+                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.info}"
+                },
+                "primary": {
+                  "color": "{imported.chip.label.color.{variant}.primary}",
+                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.primary}"
+                },
+                "secondary": {
+                  "color": "{imported.chip.label.color.{variant}.secondary}",
+                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.secondary}"
+                },
+                "success": {
+                  "color": "{imported.chip.label.color.{variant}.success}",
+                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.success}"
+                },
+                "warning": {
+                  "color": "{imported.chip.label.color.{variant}.warning}",
+                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.warning}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "medium": {
+                  "padding-left": "{imported.chip.label.padding-left.{variant}.medium}",
+                  "padding-right": "{imported.chip.label.padding-right.{variant}.medium}"
+                },
+                "small": {
+                  "padding-left": "{imported.chip.label.padding-left.{variant}.small}",
+                  "padding-right": "{imported.chip.label.padding-right.{variant}.small}"
+                }
+              }
+            }
+          ]
         }
       },
       "declared": {
+        "box-sizing": "border-box",
         "font-family": "Roboto, Helvetica, Arial, sans-serif",
         "max-width": "100%",
         "text-wrap-mode": "nowrap",

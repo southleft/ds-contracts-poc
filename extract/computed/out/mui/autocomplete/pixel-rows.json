@@ -21,22 +21,22 @@
   },
   {
     "key": "medium__default",
-    "pctExact": 1.2276785714285714,
+    "pctExact": 1.2366071428571428,
     "pctAA": 0.8839285714285714
   },
   {
     "key": "medium__hover",
-    "pctExact": 1.3794642857142858,
+    "pctExact": 1.3883928571428572,
     "pctAA": 0.9910714285714286
   },
   {
     "key": "medium__focus-visible",
-    "pctExact": 1.4330357142857142,
+    "pctExact": 1.4419642857142858,
     "pctAA": 0.9910714285714286
   },
   {
     "key": "medium__active",
-    "pctExact": 1.3794642857142858,
+    "pctExact": 1.3883928571428572,
     "pctAA": 0.9910714285714286
   }
 ]

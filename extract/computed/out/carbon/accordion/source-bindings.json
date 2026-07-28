@@ -453,7 +453,19 @@
     }
   ],
   "skips": [
-    "accordion__heading.min-block-size: no var candidate verified against the computed value in any combo",
-    "accordion__heading.padding-inline-end: no var candidate verified against the computed value in any combo"
-  ]
+    "accordion__heading.min-block-size: candidate --cds-layout-size-height-local → \"layout-size-height-local\" = clamp(max(0px, 2rem), 2.5rem, min(999999999px, 3rem)) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "accordion__heading.padding-inline-end: candidate --cds-layout-density-padding-inline-local → \"layout-density-padding-inline-local\" = clamp(0px, 1rem, 999999999px) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "label-2.margin-inline-start: source declares `calc(var(--cds-layout-density-padding-inline-local) + 1rem)` — a calc() over var(--cds-layout-density-padding-inline-local). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "label-3.margin-inline-start: source declares `calc(var(--cds-layout-density-padding-inline-local) + 1rem)` — a calc() over var(--cds-layout-density-padding-inline-local). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 5,
+  "shorthandSkips": [
+    "accordion__item.border-block-end: SHORTHAND carrying var(--cds-border-subtle) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "accordion__item.border-block-start: SHORTHAND carrying var(--cds-border-subtle) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "icon.margin: SHORTHAND carrying var(--cds-layout-density-padding-inline-local) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "label-2.padding-inline: SHORTHAND carrying var(--cds-layout-density-padding-inline-local) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "label-3.padding-inline: SHORTHAND carrying var(--cds-layout-density-padding-inline-local) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 2,
+  "calcCeiling": 2
 }

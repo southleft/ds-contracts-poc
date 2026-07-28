@@ -1169,19 +1169,19 @@
     }
   },
   "declared": {
-    "base": 111,
+    "base": 100,
     "state": 0
   },
   "codeOnly": {
-    "base": 17,
+    "base": 31,
     "state": 4,
-    "overflowBindings": 28
+    "overflowBindings": 55
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
-    "partsCarried": 16,
+    "partsCarried": 15,
     "svgAssets": 4,
-    "refusals": 0
+    "refusals": 1
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
@@ -1204,8 +1204,14 @@
   },
   "pixel": {
     "pairs": 8,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
-      "mean": 7.188616071428571,
+      "mean": 7.193080357142857,
       "max": 49.60267857142857,
       "perfect": 0
     },
@@ -1217,22 +1223,22 @@
     "worst": [
       {
         "key": "medium__focus-visible",
-        "pctExact": 1.4330357142857142,
+        "pctExact": 1.4419642857142858,
         "pctAA": 0.9910714285714286
       },
       {
         "key": "medium__hover",
-        "pctExact": 1.3794642857142858,
+        "pctExact": 1.3883928571428572,
         "pctAA": 0.9910714285714286
       },
       {
         "key": "medium__active",
-        "pctExact": 1.3794642857142858,
+        "pctExact": 1.3883928571428572,
         "pctAA": 0.9910714285714286
       },
       {
         "key": "medium__default",
-        "pctExact": 1.2276785714285714,
+        "pctExact": 1.2366071428571428,
         "pctAA": 0.8839285714285714
       },
       {

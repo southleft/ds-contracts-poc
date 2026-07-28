@@ -432,6 +432,15 @@ function layoutPage(): { route: string; html: string } {
         shippingExample('avatar-group.contract.json', { paths: ['anatomy.root.parts.stack.layout', 'anatomy.root.parts.stack.tokens'] }, 'overlap — the negative-spacing projection'),
     ),
     section(
+      'hugs-below-max-width',
+      'hugsBelowMaxWidth — measured sizing evidence',
+      ['curated'],
+      `<p><code>hugsBelowMaxWidth: boolean</code> on a part answers one question about that part's <code>max-width</code> channel: <em>is this a ceiling the box normally sits under, or the width the box is actually drawn at?</em> A CSS <code>max-width</code> alone cannot tell you, and the two answers lower to opposite things on the canvas — hug-contents versus a fixed width.</p><p>The flag is <strong>measured, never assumed</strong>. The computed capture sets it to <code>true</code> only when the used width stayed strictly below the cap in every enumerated combination, which means the box hugs and the cap is a ceiling. A width <em>equal</em> to the cap means the box is sitting at it and the value may be a genuine design width, so the flag is not set and the fixed-width lowering stands. A contract with no captured evidence <strong>omits the field</strong> and keeps the design-width lowering — which is why hand-authored contracts are unaffected by its existence.</p>` +
+        refusals('Refusals:', [
+          'a part carrying <code>hugsBelowMaxWidth</code> with no <code>max-width</code> channel — the flag qualifies that channel and qualifies nothing else',
+        ]),
+    ),
+    section(
       'layout-by-prop',
       'Layout by prop',
       ['generated', 'curated'],

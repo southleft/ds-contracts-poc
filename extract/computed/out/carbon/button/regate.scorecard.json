@@ -60,8 +60,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 20608,
-      "cellsEqual": 15966,
-      "pctEqual": 77.47476708074534,
+      "cellsEqual": 15962,
+      "pctEqual": 77.45535714285714,
       "rowsFullyEqual": 0,
       "rows": 448
     },
@@ -93,7 +93,28 @@
     },
     "worstRows": [
       {
+        "key": "primary.unset.enabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "primary.xs.enabled__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
+      },
+      {
         "key": "primary.xs.enabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 16,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "primary.sm.enabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
         "channelsMismatched": 16,
@@ -107,7 +128,7 @@
         "unscorable": "no-original"
       },
       {
-        "key": "primary.lg.enabled__focus-visible",
+        "key": "primary.md.enabled__active",
         "pctAA": null,
         "pctExact": null,
         "channelsMismatched": 16,
@@ -121,28 +142,7 @@
         "unscorable": "no-original"
       },
       {
-        "key": "primary.xl.enabled__active",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 16,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "primary.2xl.enabled__active",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 16,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "secondary.xs.enabled__active",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 16,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "secondary.md.enabled__focus-visible",
+        "key": "secondary.unset.enabled__active",
         "pctAA": null,
         "pctExact": null,
         "channelsMismatched": 16,
@@ -192,7 +192,7 @@
       ],
       [
         "root.background-color",
-        134
+        137
       ],
       [
         "root.border-bottom-color",
@@ -480,7 +480,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(7, 88, 240, 1)",
+            "ours": "rgba(12, 94, 248, 1)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -557,7 +557,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -575,7 +575,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -593,7 +593,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -611,7 +611,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -629,7 +629,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(109, 163, 226, 1)",
+            "ours": "rgba(108, 163, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -650,7 +650,7 @@
       {
         "key": "primary.unset.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -658,13 +658,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(4, 85, 237, 1)",
+            "ours": "rgba(6, 87, 240, 1)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -682,7 +682,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -700,7 +700,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -718,7 +718,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -732,6 +732,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(245, 249, 253, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -1114,7 +1120,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(6, 88, 240, 1)",
+            "ours": "rgba(4, 85, 237, 1)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -1183,15 +1189,21 @@
       {
         "key": "primary.xs.enabled__focus-visible",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(15, 97, 253, 1)",
+            "theirs": "rgba(15, 98, 254, 1)"
+          },
+          {
+            "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.604)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -1209,7 +1221,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.604)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -1227,7 +1239,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.604)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -1245,7 +1257,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.604)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -1263,7 +1275,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(101, 159, 224, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -1292,7 +1304,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(5, 86, 237, 1)",
+            "ours": "rgba(5, 85, 237, 1)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
@@ -1754,7 +1766,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(6, 87, 240, 1)",
+            "ours": "rgba(4, 85, 237, 1)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -1823,15 +1835,21 @@
       {
         "key": "primary.sm.enabled__focus-visible",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(14, 96, 252, 1)",
+            "theirs": "rgba(15, 98, 254, 1)"
+          },
+          {
+            "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.392)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -1849,7 +1867,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.392)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -1867,7 +1885,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.392)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -1885,7 +1903,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.392)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -1903,7 +1921,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(107, 162, 225, 1)",
+            "ours": "rgba(155, 193, 235, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -2388,7 +2406,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(6, 88, 240, 1)",
+            "ours": "rgba(4, 85, 237, 1)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -2465,13 +2483,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(15, 97, 253, 1)",
+            "ours": "rgba(15, 98, 253, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.44)",
+            "ours": "rgba(15, 98, 254, 0.57)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -2489,7 +2507,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.44)",
+            "ours": "rgba(15, 98, 254, 0.57)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -2507,7 +2525,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.44)",
+            "ours": "rgba(15, 98, 254, 0.57)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -2525,7 +2543,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.44)",
+            "ours": "rgba(15, 98, 254, 0.57)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -2543,7 +2561,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(143, 185, 233, 1)",
+            "ours": "rgba(110, 164, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -2564,7 +2582,7 @@
       {
         "key": "primary.md.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2572,13 +2590,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(5, 86, 237, 1)",
+            "ours": "rgba(6, 88, 240, 1)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -2596,7 +2614,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -2614,7 +2632,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -2632,7 +2650,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -2646,6 +2664,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(246, 249, 253, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -3097,21 +3121,15 @@
       {
         "key": "primary.lg.enabled__focus-visible",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(15, 98, 253, 1)",
-            "theirs": "rgba(15, 98, 254, 1)"
-          },
-          {
-            "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.408)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3129,7 +3147,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.408)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3147,7 +3165,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.408)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3165,7 +3183,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.408)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3183,7 +3201,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(151, 190, 234, 1)",
+            "ours": "rgba(108, 163, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -3212,7 +3230,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(6, 87, 240, 1)",
+            "ours": "rgba(4, 85, 237, 1)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
@@ -3668,7 +3686,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(6, 88, 240, 1)",
+            "ours": "rgba(5, 86, 237, 1)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -3751,7 +3769,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3769,7 +3787,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3787,7 +3805,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3805,7 +3823,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3823,7 +3841,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(109, 163, 226, 1)",
+            "ours": "rgba(106, 161, 225, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -3844,7 +3862,7 @@
       {
         "key": "primary.xl.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3852,13 +3870,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(6, 88, 240, 1)",
+            "ours": "rgba(4, 85, 237, 1)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3876,7 +3894,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3894,7 +3912,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3912,7 +3930,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -3926,12 +3944,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -4314,7 +4326,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(6, 88, 240, 1)",
+            "ours": "rgba(4, 85, 237, 1)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -4391,7 +4403,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.57)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -4409,7 +4421,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.57)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -4427,7 +4439,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.57)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -4445,7 +4457,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.57)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -4463,7 +4475,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(110, 164, 226, 1)",
+            "ours": "rgba(106, 162, 225, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -4484,7 +4496,7 @@
       {
         "key": "primary.2xl.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4492,13 +4504,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(6, 87, 240, 1)",
+            "ours": "rgba(5, 86, 237, 1)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -4516,7 +4528,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -4534,7 +4546,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -4552,7 +4564,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -4566,12 +4578,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -5031,7 +5037,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.443)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5049,7 +5055,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.443)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5067,7 +5073,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.443)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5085,7 +5091,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.443)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5103,7 +5109,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(142, 184, 232, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -5124,7 +5130,7 @@
       {
         "key": "secondary.unset.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5132,13 +5138,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(65, 65, 65, 1)",
+            "ours": "rgba(63, 63, 63, 1)",
             "theirs": "rgba(111, 111, 111, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5156,7 +5162,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5174,7 +5180,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5192,7 +5198,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5206,6 +5212,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(246, 249, 253, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -5588,7 +5600,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(65, 65, 65, 1)",
+            "ours": "rgba(67, 67, 67, 1)",
             "theirs": "rgba(71, 71, 71, 1)"
           },
           {
@@ -5758,7 +5770,7 @@
       {
         "key": "secondary.xs.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5766,13 +5778,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(65, 65, 65, 1)",
+            "ours": "rgba(67, 67, 67, 1)",
             "theirs": "rgba(111, 111, 111, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5790,7 +5802,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5808,7 +5820,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5826,7 +5838,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -5840,12 +5852,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -6228,7 +6234,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(67, 67, 67, 1)",
+            "ours": "rgba(65, 65, 65, 1)",
             "theirs": "rgba(71, 71, 71, 1)"
           },
           {
@@ -6305,7 +6311,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -6323,7 +6329,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -6341,7 +6347,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -6359,7 +6365,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -6377,7 +6383,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(109, 163, 226, 1)",
+            "ours": "rgba(107, 162, 225, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -6398,7 +6404,7 @@
       {
         "key": "secondary.sm.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6406,13 +6412,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(67, 67, 67, 1)",
+            "ours": "rgba(65, 65, 65, 1)",
             "theirs": "rgba(111, 111, 111, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -6430,7 +6436,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -6448,7 +6454,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -6466,7 +6472,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -6480,6 +6486,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(246, 249, 253, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -6862,7 +6874,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(68, 68, 68, 1)",
+            "ours": "rgba(67, 67, 67, 1)",
             "theirs": "rgba(71, 71, 71, 1)"
           },
           {
@@ -6931,21 +6943,15 @@
       {
         "key": "secondary.md.enabled__focus-visible",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(59, 59, 59, 1)",
-            "theirs": "rgba(57, 57, 57, 1)"
-          },
-          {
-            "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -6963,7 +6969,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -6981,7 +6987,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -6999,7 +7005,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7017,7 +7023,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(109, 164, 226, 1)",
+            "ours": "rgba(108, 163, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -7052,7 +7058,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.024)",
+            "ours": "rgba(15, 98, 254, 0.047)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7070,7 +7076,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.024)",
+            "ours": "rgba(15, 98, 254, 0.047)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7088,7 +7094,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.024)",
+            "ours": "rgba(15, 98, 254, 0.047)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7106,7 +7112,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.024)",
+            "ours": "rgba(15, 98, 254, 0.047)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7124,7 +7130,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(249, 251, 254, 1)",
+            "ours": "rgba(243, 248, 253, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -7508,7 +7514,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(65, 65, 65, 1)",
+            "ours": "rgba(67, 67, 67, 1)",
             "theirs": "rgba(71, 71, 71, 1)"
           },
           {
@@ -7585,7 +7591,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.56)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7603,7 +7609,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.56)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7621,7 +7627,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.56)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7639,7 +7645,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.56)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7657,7 +7663,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(112, 165, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -7692,7 +7698,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.035)",
+            "ours": "rgba(15, 98, 254, 0.024)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7710,7 +7716,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.035)",
+            "ours": "rgba(15, 98, 254, 0.024)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7728,7 +7734,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.035)",
+            "ours": "rgba(15, 98, 254, 0.024)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7746,7 +7752,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.035)",
+            "ours": "rgba(15, 98, 254, 0.024)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -7764,7 +7770,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(246, 249, 253, 1)",
+            "ours": "rgba(249, 251, 254, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -8148,7 +8154,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(67, 67, 67, 1)",
+            "ours": "rgba(65, 65, 65, 1)",
             "theirs": "rgba(71, 71, 71, 1)"
           },
           {
@@ -8225,7 +8231,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.592)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8243,7 +8249,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.592)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8261,7 +8267,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.592)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8279,7 +8285,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.592)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8297,7 +8303,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(107, 162, 225, 1)",
+            "ours": "rgba(104, 160, 225, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -8318,7 +8324,7 @@
       {
         "key": "secondary.xl.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8326,13 +8332,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(65, 65, 65, 1)",
+            "ours": "rgba(67, 67, 67, 1)",
             "theirs": "rgba(111, 111, 111, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8350,7 +8356,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8368,7 +8374,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8386,7 +8392,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8400,12 +8406,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -8865,7 +8865,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8883,7 +8883,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8901,7 +8901,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8919,7 +8919,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8937,7 +8937,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(106, 161, 225, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -8972,7 +8972,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -8990,7 +8990,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -9008,7 +9008,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -9026,7 +9026,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -9044,7 +9044,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
+            "ours": "rgba(245, 249, 253, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -9428,7 +9428,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(0, 80, 230, 0.592)",
+            "ours": "rgba(0, 80, 230, 0.573)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -9505,7 +9505,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(13, 95, 250, 0.82)",
+            "ours": "rgba(13, 95, 251, 0.808)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -9559,7 +9559,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(112, 165, 226, 1)",
+            "ours": "rgba(106, 161, 225, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -9588,7 +9588,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(2, 82, 232, 0.9)",
+            "ours": "rgba(1, 82, 232, 0.91)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
@@ -10044,7 +10044,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(0, 80, 230, 0.57)",
+            "ours": "rgba(0, 80, 230, 0.682)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -10121,7 +10121,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(12, 94, 249, 0.745)",
+            "ours": "rgba(12, 94, 248, 0.776)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -10175,7 +10175,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(150, 189, 234, 1)",
+            "ours": "rgba(151, 190, 234, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -10204,7 +10204,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(2, 83, 233, 0.847)",
+            "ours": "rgba(2, 83, 233, 0.87)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
@@ -10660,7 +10660,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(0, 80, 230, 0.56)",
+            "ours": "rgba(0, 80, 230, 0.718)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -10737,7 +10737,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(13, 96, 251, 0.804)",
+            "ours": "rgba(13, 95, 250, 0.83)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -10820,7 +10820,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(2, 82, 233, 0.816)",
+            "ours": "rgba(1, 82, 232, 0.91)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
@@ -11276,7 +11276,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(0, 80, 230, 0.57)",
+            "ours": "rgba(0, 80, 230, 0.72)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -11353,7 +11353,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(13, 95, 251, 0.827)",
+            "ours": "rgba(12, 94, 249, 0.77)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -11407,7 +11407,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(148, 188, 234, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -11428,7 +11428,7 @@
       {
         "key": "tertiary.md.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11436,7 +11436,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(2, 83, 234, 0.855)",
+            "ours": "rgba(2, 83, 234, 0.835)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
@@ -11510,12 +11510,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -11898,7 +11892,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(0, 80, 230, 0.576)",
+            "ours": "rgba(0, 80, 230, 0.698)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -11975,7 +11969,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(13, 95, 251, 0.827)",
+            "ours": "rgba(12, 94, 249, 0.74)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -12029,7 +12023,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(140, 183, 232, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -12058,7 +12052,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(1, 82, 232, 0.906)",
+            "ours": "rgba(2, 83, 233, 0.847)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
@@ -12514,7 +12508,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(0, 80, 230, 0.596)",
+            "ours": "rgba(0, 80, 230, 0.56)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -12591,7 +12585,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(12, 94, 248, 0.765)",
+            "ours": "rgba(13, 95, 251, 0.824)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -12645,7 +12639,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(148, 188, 234, 1)",
+            "ours": "rgba(111, 164, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -12666,7 +12660,7 @@
       {
         "key": "tertiary.xl.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12674,7 +12668,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(2, 83, 234, 0.86)",
+            "ours": "rgba(2, 82, 233, 0.898)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
@@ -12748,12 +12742,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -13136,7 +13124,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(0, 80, 230, 0.576)",
+            "ours": "rgba(0, 80, 230, 0.68)",
             "theirs": "rgba(0, 80, 230, 1)"
           },
           {
@@ -13213,7 +13201,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(13, 95, 251, 0.827)",
+            "ours": "rgba(13, 95, 251, 0.808)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -13267,7 +13255,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(115, 167, 227, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -13288,7 +13276,7 @@
       {
         "key": "tertiary.2xl.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13296,7 +13284,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(2, 82, 232, 0.906)",
+            "ours": "rgba(2, 82, 233, 0.906)",
             "theirs": "rgba(0, 45, 156, 1)"
           },
           {
@@ -13370,6 +13358,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(254, 254, 255, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -13752,7 +13746,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.07)",
+            "ours": "rgba(141, 141, 141, 0.067)",
             "theirs": "rgba(141, 141, 141, 0.12)"
           },
           {
@@ -13829,13 +13823,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.004)",
+            "ours": "rgba(141, 141, 141, 0)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -13853,7 +13847,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -13871,7 +13865,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -13889,7 +13883,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -13928,7 +13922,7 @@
       {
         "key": "ghost.unset.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13936,13 +13930,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.07)",
+            "ours": "rgba(141, 141, 141, 0.086)",
             "theirs": "rgba(141, 141, 141, 0.5)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -13960,7 +13954,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -13978,7 +13972,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -13996,7 +13990,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -14010,12 +14004,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(0, 68, 207, 1)",
-            "theirs": "rgba(0, 67, 206, 1)"
           },
           {
             "part": "root",
@@ -14398,7 +14386,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.07)",
+            "ours": "rgba(141, 141, 141, 0.086)",
             "theirs": "rgba(141, 141, 141, 0.12)"
           },
           {
@@ -14467,15 +14455,21 @@
       {
         "key": "ghost.xs.enabled__focus-visible",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(141, 141, 141, 0.004)",
+            "theirs": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.604)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -14493,7 +14487,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.604)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -14511,7 +14505,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.604)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -14529,7 +14523,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.604)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -14547,7 +14541,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(6, 96, 225, 1)",
+            "ours": "rgba(6, 96, 224, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -14568,7 +14562,7 @@
       {
         "key": "ghost.xs.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -14576,13 +14570,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.07)",
+            "ours": "rgba(141, 141, 141, 0.086)",
             "theirs": "rgba(141, 141, 141, 0.5)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.004)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -14600,7 +14594,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.004)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -14618,7 +14612,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.004)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -14636,7 +14630,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.004)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -14650,12 +14644,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(0, 68, 207, 1)",
-            "theirs": "rgba(0, 67, 206, 1)"
           },
           {
             "part": "root",
@@ -15038,7 +15026,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.07)",
+            "ours": "rgba(141, 141, 141, 0.086)",
             "theirs": "rgba(141, 141, 141, 0.12)"
           },
           {
@@ -15121,7 +15109,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15139,7 +15127,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15157,7 +15145,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15175,7 +15163,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.573)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15214,7 +15202,7 @@
       {
         "key": "ghost.sm.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -15222,13 +15210,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.07)",
+            "ours": "rgba(141, 141, 141, 0.086)",
             "theirs": "rgba(141, 141, 141, 0.5)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15246,7 +15234,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15264,7 +15252,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15282,7 +15270,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15296,12 +15284,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(0, 68, 207, 1)",
-            "theirs": "rgba(0, 67, 206, 1)"
           },
           {
             "part": "root",
@@ -15684,7 +15666,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.086)",
+            "ours": "rgba(141, 141, 141, 0.067)",
             "theirs": "rgba(141, 141, 141, 0.12)"
           },
           {
@@ -15767,7 +15749,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.57)",
+            "ours": "rgba(15, 98, 254, 0.447)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15785,7 +15767,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.57)",
+            "ours": "rgba(15, 98, 254, 0.447)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15803,7 +15785,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.57)",
+            "ours": "rgba(15, 98, 254, 0.447)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15821,7 +15803,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.57)",
+            "ours": "rgba(15, 98, 254, 0.447)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15839,7 +15821,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(6, 96, 226, 1)",
+            "ours": "rgba(8, 97, 232, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15860,7 +15842,7 @@
       {
         "key": "ghost.md.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -15868,13 +15850,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.07)",
+            "ours": "rgba(141, 141, 141, 0.086)",
             "theirs": "rgba(141, 141, 141, 0.5)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.027)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15892,7 +15874,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.027)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15910,7 +15892,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.027)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15928,7 +15910,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.027)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -15942,12 +15924,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(0, 68, 206, 1)",
-            "theirs": "rgba(0, 67, 206, 1)"
           },
           {
             "part": "root",
@@ -16413,7 +16389,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.57)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -16431,7 +16407,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.57)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -16449,7 +16425,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.57)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -16467,7 +16443,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.57)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -16485,7 +16461,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(6, 96, 225, 1)",
+            "ours": "rgba(6, 96, 226, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -16514,13 +16490,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.05)",
+            "ours": "rgba(141, 141, 141, 0.082)",
             "theirs": "rgba(141, 141, 141, 0.5)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.004)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -16538,7 +16514,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.004)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -16556,7 +16532,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.004)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -16574,7 +16550,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.004)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -16970,7 +16946,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.086)",
+            "ours": "rgba(141, 141, 141, 0.082)",
             "theirs": "rgba(141, 141, 141, 0.12)"
           },
           {
@@ -17047,13 +17023,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.004)",
+            "ours": "rgba(141, 141, 141, 0)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.584)",
+            "ours": "rgba(15, 98, 254, 0.565)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17071,7 +17047,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.584)",
+            "ours": "rgba(15, 98, 254, 0.565)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17089,7 +17065,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.584)",
+            "ours": "rgba(15, 98, 254, 0.565)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17107,7 +17083,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.584)",
+            "ours": "rgba(15, 98, 254, 0.565)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17125,7 +17101,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(6, 96, 225, 1)",
+            "ours": "rgba(7, 96, 226, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17154,13 +17130,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.07)",
+            "ours": "rgba(141, 141, 141, 0.067)",
             "theirs": "rgba(141, 141, 141, 0.5)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.04)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17178,7 +17154,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.04)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17196,7 +17172,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.04)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17214,7 +17190,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.04)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17232,7 +17208,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 69, 207, 1)",
+            "ours": "rgba(0, 68, 207, 1)",
             "theirs": "rgba(0, 67, 206, 1)"
           },
           {
@@ -17616,7 +17592,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(141, 141, 141, 0.07)",
+            "ours": "rgba(141, 141, 141, 0.086)",
             "theirs": "rgba(141, 141, 141, 0.12)"
           },
           {
@@ -17685,15 +17661,21 @@
       {
         "key": "ghost.2xl.enabled__focus-visible",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(141, 141, 141, 0)",
+            "theirs": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.573)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17711,7 +17693,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.573)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17729,7 +17711,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.573)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17747,7 +17729,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.573)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17800,7 +17782,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17818,7 +17800,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17836,7 +17818,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -17854,7 +17836,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -18250,7 +18232,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -18333,7 +18315,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.573)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -18351,7 +18333,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.573)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -18369,7 +18351,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.573)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -18387,7 +18369,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.573)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -18405,7 +18387,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(111, 165, 226, 1)",
+            "ours": "rgba(109, 164, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -18890,7 +18872,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(195, 27, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -18973,7 +18955,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.55)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -18991,7 +18973,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.55)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19009,7 +18991,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.55)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19027,7 +19009,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.55)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19045,7 +19027,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(115, 167, 227, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -19066,7 +19048,7 @@
       {
         "key": "danger.xs.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -19074,13 +19056,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(194, 26, 35, 1)",
+            "ours": "rgba(198, 27, 36, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.03)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19098,7 +19080,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.03)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19116,7 +19098,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.03)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19134,7 +19116,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.03)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19148,6 +19130,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(247, 250, 253, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -19530,7 +19518,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(199, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -19613,7 +19601,7 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.557)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19631,7 +19619,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.557)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19649,7 +19637,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.557)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19667,7 +19655,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.557)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19685,7 +19673,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(113, 166, 227, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -19706,7 +19694,7 @@
       {
         "key": "danger.sm.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -19714,13 +19702,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(194, 27, 35, 1)",
+            "ours": "rgba(197, 27, 36, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.027)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19738,7 +19726,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.027)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19756,7 +19744,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.027)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19774,7 +19762,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.027)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -19788,6 +19776,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(248, 251, 254, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -20170,7 +20164,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 27, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -20247,13 +20241,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(216, 30, 40, 1)",
+            "ours": "rgba(217, 30, 40, 1)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.53)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -20271,7 +20265,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.53)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -20289,7 +20283,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.53)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -20307,7 +20301,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.53)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -20325,7 +20319,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(120, 170, 228, 1)",
+            "ours": "rgba(108, 163, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -20810,7 +20804,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(194, 27, 35, 1)",
+            "ours": "rgba(198, 27, 36, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -20986,7 +20980,7 @@
       {
         "key": "danger.lg.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -20994,13 +20988,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(194, 27, 35, 1)",
+            "ours": "rgba(198, 27, 36, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.02)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21018,7 +21012,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.02)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21036,7 +21030,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.02)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21054,7 +21048,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.02)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21068,6 +21062,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(250, 252, 254, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -21450,7 +21450,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -21527,13 +21527,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(217, 30, 40, 1)",
+            "ours": "rgba(216, 30, 40, 1)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.42)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21551,7 +21551,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.42)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21569,7 +21569,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.42)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21587,7 +21587,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.42)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21605,7 +21605,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(111, 165, 226, 1)",
+            "ours": "rgba(148, 188, 234, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -21626,7 +21626,7 @@
       {
         "key": "danger.xl.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -21634,13 +21634,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(199, 27, 36, 1)",
+            "ours": "rgba(195, 27, 35, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21658,7 +21658,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21676,7 +21676,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21694,7 +21694,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -21708,12 +21708,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -22096,7 +22090,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(195, 27, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -22173,13 +22167,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(217, 30, 40, 1)",
+            "ours": "rgba(215, 30, 39, 1)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.584)",
+            "ours": "rgba(15, 98, 254, 0.455)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -22197,7 +22191,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.584)",
+            "ours": "rgba(15, 98, 254, 0.455)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -22215,7 +22209,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.584)",
+            "ours": "rgba(15, 98, 254, 0.455)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -22233,7 +22227,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.584)",
+            "ours": "rgba(15, 98, 254, 0.455)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -22251,7 +22245,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(106, 162, 225, 1)",
+            "ours": "rgba(139, 182, 232, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -22280,13 +22274,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(194, 27, 35, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -22304,7 +22298,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -22322,7 +22316,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -22340,7 +22334,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -22711,7 +22705,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 56, 120, 1)",
+            "ours": "rgba(0, 56, 121, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
@@ -22732,11 +22726,17 @@
       {
         "key": "danger--primary.unset.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 44,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 5, 11, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
           {
             "part": "root",
             "channel": "transition-behavior",
@@ -22901,7 +22901,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 55, 118, 1)",
+            "ours": "rgba(0, 57, 122, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
@@ -22922,11 +22922,17 @@
       {
         "key": "danger--primary.xs.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 44,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 4, 8, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
           {
             "part": "root",
             "channel": "transition-behavior",
@@ -23091,7 +23097,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 40, 86, 1)",
+            "ours": "rgba(0, 55, 119, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
@@ -23281,7 +23287,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 41, 89, 1)",
+            "ours": "rgba(0, 57, 123, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
@@ -23310,7 +23316,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 3, 6, 1)",
+            "ours": "rgba(0, 4, 8, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
@@ -23477,7 +23483,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 38, 82, 1)",
+            "ours": "rgba(0, 53, 115, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
@@ -23498,11 +23504,17 @@
       {
         "key": "danger--primary.lg.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 44,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 3, 6, 1)",
+            "theirs": "rgba(0, 0, 0, 1)"
+          },
           {
             "part": "root",
             "channel": "transition-behavior",
@@ -23667,7 +23679,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 56, 121, 1)",
+            "ours": "rgba(0, 56, 120, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
@@ -23863,7 +23875,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 55, 118, 1)",
+            "ours": "rgba(0, 53, 114, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
@@ -23892,7 +23904,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(0, 3, 6, 1)",
+            "ours": "rgba(0, 2, 4, 1)",
             "theirs": "rgba(0, 0, 0, 1)"
           },
           {
@@ -24084,7 +24096,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.7)",
+            "ours": "rgba(184, 25, 33, 0.706)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -24161,13 +24173,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.027)",
+            "ours": "rgba(184, 25, 33, 0.02)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.553)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24185,7 +24197,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.553)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24203,7 +24215,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.553)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24221,7 +24233,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.565)",
+            "ours": "rgba(15, 98, 254, 0.553)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24239,7 +24251,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(95, 67, 133, 1)",
+            "ours": "rgba(97, 66, 131, 1)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
@@ -24260,7 +24272,7 @@
       {
         "key": "danger--ghost.unset.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -24268,13 +24280,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.56)",
+            "ours": "rgba(184, 25, 33, 0.694)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.035)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24292,7 +24304,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.035)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24310,7 +24322,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.035)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24328,7 +24340,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.035)",
+            "ours": "rgba(0, 0, 0, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24342,12 +24354,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(245, 246, 250, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -24730,7 +24736,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.694)",
+            "ours": "rgba(184, 25, 33, 0.7)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -24807,13 +24813,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.024)",
+            "ours": "rgba(184, 25, 33, 0.03)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.59)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24831,7 +24837,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.59)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24849,7 +24855,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.59)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24867,7 +24873,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.59)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24885,7 +24891,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(92, 68, 135, 1)",
+            "ours": "rgba(90, 68, 136, 1)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
@@ -24906,7 +24912,7 @@
       {
         "key": "danger--ghost.xs.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -24914,13 +24920,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.706)",
+            "ours": "rgba(184, 25, 33, 0.576)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.027)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24938,7 +24944,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.027)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24956,7 +24962,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.027)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24974,7 +24980,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0.027)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -24988,6 +24994,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(247, 248, 251, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -25370,7 +25382,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.565)",
+            "ours": "rgba(184, 25, 33, 0.576)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -25439,15 +25451,21 @@
       {
         "key": "danger--ghost.sm.enabled__focus-visible",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
+            "channel": "background-color",
+            "ours": "rgba(184, 25, 33, 0.02)",
+            "theirs": "rgba(0, 0, 0, 0)"
+          },
+          {
+            "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -25465,7 +25483,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -25483,7 +25501,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -25501,7 +25519,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.576)",
+            "ours": "rgba(15, 98, 254, 0.58)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -25519,7 +25537,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(92, 67, 134, 1)",
+            "ours": "rgba(91, 68, 135, 1)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
@@ -25548,13 +25566,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.58)",
+            "ours": "rgba(184, 25, 33, 0.557)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -25572,7 +25590,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -25590,7 +25608,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -25608,7 +25626,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.03)",
+            "ours": "rgba(15, 98, 254, 0.035)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -25626,7 +25644,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(247, 247, 251, 1)",
+            "ours": "rgba(245, 246, 250, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -26010,7 +26028,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.58)",
+            "ours": "rgba(184, 25, 33, 0.71)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -26087,13 +26105,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.024)",
+            "ours": "rgba(184, 25, 33, 0.02)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.424)",
+            "ours": "rgba(15, 98, 254, 0.545)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26111,7 +26129,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.424)",
+            "ours": "rgba(15, 98, 254, 0.545)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26129,7 +26147,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.424)",
+            "ours": "rgba(15, 98, 254, 0.545)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26147,7 +26165,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.424)",
+            "ours": "rgba(15, 98, 254, 0.545)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26165,7 +26183,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(126, 57, 109, 1)",
+            "ours": "rgba(99, 65, 129, 1)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
@@ -26186,7 +26204,7 @@
       {
         "key": "danger--ghost.md.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -26194,13 +26212,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.698)",
+            "ours": "rgba(184, 25, 33, 0.596)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.016)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26218,7 +26236,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.016)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26236,7 +26254,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.016)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26254,7 +26272,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0)",
+            "ours": "rgba(15, 98, 254, 0.016)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26268,6 +26286,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(251, 251, 253, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -26650,7 +26674,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.71)",
+            "ours": "rgba(184, 25, 33, 0.576)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -26727,13 +26751,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.082)",
+            "ours": "rgba(184, 25, 33, 0.035)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.408)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26751,7 +26775,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.408)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26769,7 +26793,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.408)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26787,7 +26811,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.408)",
+            "ours": "rgba(15, 98, 254, 0.576)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26805,7 +26829,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(129, 57, 107, 1)",
+            "ours": "rgba(92, 67, 134, 1)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
@@ -26834,13 +26858,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.576)",
+            "ours": "rgba(184, 25, 33, 0.592)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.024)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26858,7 +26882,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.024)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26876,7 +26900,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.024)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26894,7 +26918,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.024)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -26912,7 +26936,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(249, 249, 252, 1)",
+            "ours": "rgba(245, 246, 250, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -27296,7 +27320,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.576)",
+            "ours": "rgba(184, 25, 33, 0.584)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -27373,13 +27397,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.024)",
+            "ours": "rgba(184, 25, 33, 0.016)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.565)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -27397,7 +27421,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.565)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -27415,7 +27439,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.565)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -27433,7 +27457,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.565)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -27451,7 +27475,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(91, 68, 135, 1)",
+            "ours": "rgba(95, 67, 133, 1)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
@@ -27480,13 +27504,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.706)",
+            "ours": "rgba(184, 25, 33, 0.714)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -27504,7 +27528,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -27522,7 +27546,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -27540,7 +27564,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 0)",
+            "ours": "rgba(15, 98, 254, 0)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -27936,7 +27960,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.576)",
+            "ours": "rgba(184, 25, 33, 0.686)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -28013,13 +28037,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.024)",
+            "ours": "rgba(184, 25, 33, 0.016)",
             "theirs": "rgba(0, 0, 0, 0)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28037,7 +28061,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28055,7 +28079,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28073,7 +28097,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.58)",
+            "ours": "rgba(15, 98, 254, 0.584)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28091,7 +28115,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(92, 68, 135, 1)",
+            "ours": "rgba(91, 68, 136, 1)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
@@ -28120,13 +28144,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.592)",
+            "ours": "rgba(184, 25, 33, 0.565)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(15, 98, 254, 0.027)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28144,7 +28168,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(15, 98, 254, 0.027)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28162,7 +28186,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(15, 98, 254, 0.027)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28180,7 +28204,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(15, 98, 254, 0.027)",
+            "ours": "rgba(15, 98, 254, 0.04)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28198,7 +28222,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(248, 248, 251, 1)",
+            "ours": "rgba(244, 245, 250, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -28582,13 +28606,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.576)",
+            "ours": "rgba(184, 25, 33, 0.714)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -28606,7 +28630,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -28624,7 +28648,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -28642,7 +28666,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -28683,13 +28707,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(213, 29, 39, 0.827)",
+            "ours": "rgba(213, 29, 39, 0.808)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(98, 68, 160, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28707,7 +28731,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(98, 68, 160, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28725,7 +28749,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(98, 68, 160, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28743,7 +28767,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(98, 68, 160, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -28761,7 +28785,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(111, 164, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -28790,13 +28814,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(189, 26, 34, 0.863)",
+            "ours": "rgba(189, 26, 34, 0.867)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(153, 41, 81, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -28814,7 +28838,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(153, 41, 81, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -28832,7 +28856,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(153, 41, 81, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -28850,7 +28874,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(153, 41, 81, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -28868,7 +28892,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
+            "ours": "rgba(249, 251, 254, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -29252,7 +29276,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.71)",
+            "ours": "rgba(184, 25, 33, 0.714)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -29353,13 +29377,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(210, 29, 38, 0.75)",
+            "ours": "rgba(213, 29, 39, 0.82)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(121, 59, 133, 1)",
+            "ours": "rgba(98, 67, 159, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -29377,7 +29401,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(121, 59, 133, 1)",
+            "ours": "rgba(98, 67, 159, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -29395,7 +29419,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(121, 59, 133, 1)",
+            "ours": "rgba(98, 67, 159, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -29413,7 +29437,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(121, 59, 133, 1)",
+            "ours": "rgba(98, 67, 159, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -29431,7 +29455,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(143, 185, 233, 1)",
+            "ours": "rgba(112, 165, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -29460,13 +29484,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(189, 26, 34, 0.86)",
+            "ours": "rgba(188, 26, 34, 0.9)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(160, 37, 69, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -29484,7 +29508,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(160, 37, 69, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -29502,7 +29526,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(160, 37, 69, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -29520,7 +29544,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(160, 37, 69, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -29538,7 +29562,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(246, 249, 253, 1)",
+            "ours": "rgba(254, 255, 255, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -29922,13 +29946,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.576)",
+            "ours": "rgba(184, 25, 33, 0.56)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(199, 27, 36, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -29946,7 +29970,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(199, 27, 36, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -29964,7 +29988,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(199, 27, 36, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -29982,7 +30006,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(199, 27, 36, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -30023,13 +30047,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(213, 29, 39, 0.827)",
+            "ours": "rgba(214, 29, 39, 0.79)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(98, 68, 160, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -30047,7 +30071,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(98, 68, 160, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -30065,7 +30089,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(98, 68, 160, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -30083,7 +30107,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(98, 68, 160, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -30101,7 +30125,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(111, 164, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -30122,7 +30146,7 @@
       {
         "key": "danger--tertiary.sm.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -30130,13 +30154,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(189, 26, 34, 0.86)",
+            "ours": "rgba(187, 26, 34, 0.89)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(163, 36, 67, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -30154,7 +30178,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(163, 36, 67, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -30172,7 +30196,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(163, 36, 67, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -30190,7 +30214,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(150, 43, 85, 1)",
+            "ours": "rgba(163, 36, 67, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -30204,12 +30228,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -30592,13 +30610,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.58)",
+            "ours": "rgba(184, 25, 33, 0.714)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -30616,7 +30634,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -30634,7 +30652,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -30652,7 +30670,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -30693,13 +30711,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(210, 29, 38, 0.753)",
+            "ours": "rgba(213, 29, 39, 0.824)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(127, 56, 125, 1)",
+            "ours": "rgba(95, 68, 162, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -30717,7 +30735,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(127, 56, 125, 1)",
+            "ours": "rgba(95, 68, 162, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -30735,7 +30753,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(127, 56, 125, 1)",
+            "ours": "rgba(95, 68, 162, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -30753,7 +30771,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(127, 56, 125, 1)",
+            "ours": "rgba(95, 68, 162, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -30771,7 +30789,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(151, 190, 234, 1)",
+            "ours": "rgba(108, 163, 226, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -30792,7 +30810,7 @@
       {
         "key": "danger--tertiary.md.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -30800,13 +30818,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(188, 26, 34, 0.808)",
+            "ours": "rgba(190, 26, 34, 0.847)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(168, 37, 67, 1)",
+            "ours": "rgba(151, 42, 84, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -30824,7 +30842,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(168, 37, 67, 1)",
+            "ours": "rgba(151, 42, 84, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -30842,7 +30860,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(168, 37, 67, 1)",
+            "ours": "rgba(151, 42, 84, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -30860,7 +30878,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(168, 37, 67, 1)",
+            "ours": "rgba(151, 42, 84, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -30874,6 +30892,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(245, 249, 253, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -31256,7 +31280,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.576)",
+            "ours": "rgba(184, 25, 33, 0.592)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -31357,13 +31381,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(214, 29, 39, 0.8)",
+            "ours": "rgba(214, 29, 39, 0.808)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(96, 69, 163, 1)",
+            "ours": "rgba(100, 67, 157, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -31381,7 +31405,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(96, 69, 163, 1)",
+            "ours": "rgba(100, 67, 157, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -31399,7 +31423,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(96, 69, 163, 1)",
+            "ours": "rgba(100, 67, 157, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -31417,7 +31441,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(96, 69, 163, 1)",
+            "ours": "rgba(100, 67, 157, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -31435,7 +31459,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(114, 166, 227, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -31456,7 +31480,7 @@
       {
         "key": "danger--tertiary.lg.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 30,
+        "channelsEqual": 31,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -31464,13 +31488,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(189, 26, 34, 0.855)",
+            "ours": "rgba(187, 25, 34, 0.906)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(151, 43, 85, 1)",
+            "ours": "rgba(161, 37, 69, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -31488,7 +31512,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(151, 43, 85, 1)",
+            "ours": "rgba(161, 37, 69, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -31506,7 +31530,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(151, 43, 85, 1)",
+            "ours": "rgba(161, 37, 69, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -31524,7 +31548,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(151, 43, 85, 1)",
+            "ours": "rgba(161, 37, 69, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -31538,12 +31562,6 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
-            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",
@@ -31926,7 +31944,7 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.59)",
+            "ours": "rgba(184, 25, 33, 0.573)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -32027,13 +32045,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(213, 29, 39, 0.824)",
+            "ours": "rgba(214, 29, 39, 0.8)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(97, 67, 159, 1)",
+            "ours": "rgba(94, 69, 165, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -32051,7 +32069,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(97, 67, 159, 1)",
+            "ours": "rgba(94, 69, 165, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -32069,7 +32087,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(97, 67, 159, 1)",
+            "ours": "rgba(94, 69, 165, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -32087,7 +32105,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(97, 67, 159, 1)",
+            "ours": "rgba(94, 69, 165, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -32105,7 +32123,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(111, 165, 226, 1)",
+            "ours": "rgba(105, 161, 225, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -32134,13 +32152,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(189, 26, 34, 0.86)",
+            "ours": "rgba(190, 26, 34, 0.855)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(151, 42, 85, 1)",
+            "ours": "rgba(151, 42, 84, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -32158,7 +32176,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(151, 42, 85, 1)",
+            "ours": "rgba(151, 42, 84, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -32176,7 +32194,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(151, 42, 85, 1)",
+            "ours": "rgba(151, 42, 84, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -32194,7 +32212,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(151, 42, 85, 1)",
+            "ours": "rgba(151, 42, 84, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -32212,7 +32230,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(247, 250, 253, 1)",
+            "ours": "rgba(246, 249, 253, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -32596,13 +32614,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(184, 25, 33, 0.58)",
+            "ours": "rgba(184, 25, 33, 0.71)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -32620,7 +32638,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -32638,7 +32656,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -32656,7 +32674,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(198, 27, 36, 1)",
+            "ours": "rgba(194, 26, 35, 1)",
             "theirs": "rgba(184, 25, 33, 1)"
           },
           {
@@ -32697,13 +32715,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(213, 29, 39, 0.827)",
+            "ours": "rgba(213, 29, 39, 0.808)",
             "theirs": "rgba(218, 30, 40, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(94, 69, 164, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -32721,7 +32739,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(94, 69, 164, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -32739,7 +32757,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(94, 69, 164, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -32757,7 +32775,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(95, 68, 162, 1)",
+            "ours": "rgba(94, 69, 164, 1)",
             "theirs": "rgba(15, 98, 254, 1)"
           },
           {
@@ -32775,7 +32793,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(108, 163, 226, 1)",
+            "ours": "rgba(106, 161, 225, 1)",
             "theirs": "rgba(255, 255, 255, 1)"
           },
           {
@@ -32796,7 +32814,7 @@
       {
         "key": "danger--tertiary.2xl.enabled__active",
         "channelsCompared": 46,
-        "channelsEqual": 31,
+        "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -32804,13 +32822,13 @@
           {
             "part": "root",
             "channel": "background-color",
-            "ours": "rgba(187, 25, 34, 0.91)",
+            "ours": "rgba(189, 26, 34, 0.843)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(161, 37, 69, 1)",
+            "ours": "rgba(151, 43, 85, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -32828,7 +32846,7 @@
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(161, 37, 69, 1)",
+            "ours": "rgba(151, 43, 85, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -32846,7 +32864,7 @@
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(161, 37, 69, 1)",
+            "ours": "rgba(151, 43, 85, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -32864,7 +32882,7 @@
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(161, 37, 69, 1)",
+            "ours": "rgba(151, 43, 85, 1)",
             "theirs": "rgba(117, 14, 19, 1)"
           },
           {
@@ -32878,6 +32896,12 @@
             "channel": "border-top-width",
             "ours": "0px",
             "theirs": "1px"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(247, 250, 253, 1)",
+            "theirs": "rgba(255, 255, 255, 1)"
           },
           {
             "part": "root",

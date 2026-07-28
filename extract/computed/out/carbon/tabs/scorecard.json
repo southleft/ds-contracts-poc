@@ -16,6 +16,12 @@
     "pairs": 4,
     "perfectExact": 0,
     "perfectAA": 0,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 3.3935185185185186,
     "meanAA": 1.695216049382716,
     "maxAA": 2.044753086419753
@@ -245,7 +251,7 @@
   },
   "shippedMinted": {
     "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-    "leavesAdded": 1072,
+    "leavesAdded": 1038,
     "divergent": [
       {
         "token": "imported.tabs.part-0.background-color",

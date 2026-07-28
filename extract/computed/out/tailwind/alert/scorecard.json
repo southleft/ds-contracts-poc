@@ -16,6 +16,12 @@
     "pairs": 16,
     "perfectExact": 12,
     "perfectAA": 16,
+    "measured": 16,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 0.06591796875,
     "meanAA": 0,
     "maxAA": 0
@@ -145,6 +151,28 @@
     ]
   ],
   "namedLosses": [],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+    "leavesAdded": 227,
+    "divergent": [
+      {
+        "token": "imported.alert.root.background-color.info",
+        "fresh": "#cefafe",
+        "shipped": "{color-cyan-100}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.alert.root.color.info",
+        "fresh": "#007595",
+        "shipped": "{color-cyan-700}",
+        "resolvedEqual": true
+      }
+    ]
+  },
   "rows": [
     {
       "key": "info__default",

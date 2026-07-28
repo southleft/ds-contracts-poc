@@ -36,7 +36,7 @@ import pixelmatch from 'pixelmatch';
 import { chromiumExecutable } from '../figma/visual-parity/render.js';
 import { mintTokens } from '../../core/mint-tokens.js';
 import { flattenTokens } from '../../core/tokens.js';
-import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
+import { ContractSchema, walkAnatomy, type Contract } from '../../scripts/contract-schema.js';
 import { validateContract } from '../../core/emit-react.js';
 import {
   buildHarnessPage,
@@ -58,6 +58,7 @@ import {
   boundCheck,
   detectFolds,
   enrichLayout,
+  hugEvidence,
   prepareMint,
   pseudoFindings,
   styledChannels,
@@ -749,6 +750,38 @@ async function main() {
       prep.declared, prep.declaredStates, prep.setPlaneLiterals,
       { only: prep.inheritanceOnly, stateDeltas: prep.inheritanceStateDeltas },
     );
+
+    // task #37 — SIZING EVIDENCE for the max-width channel. A part that
+    // carries max-width and was MEASURED hugging beneath it (used width
+    // strictly below the cap, in every combo) records that fact; the Figma
+    // emitter reads it to bind maxWidth as a real ceiling instead of baking
+    // a fixed width. No measurement ⇒ no field ⇒ unchanged lowering.
+    const hugs = hugEvidence(aligned, space);
+    enrichmentNotes.push(...hugs.receipts);
+    for (const { name, part } of walkAnatomy(enriched as Contract)) {
+      const carries =
+        (part.tokens && 'max-width' in part.tokens) ||
+        (part.declared && 'max-width' in part.declared) ||
+        (part.literals && 'max-width' in part.literals);
+      if (!carries) continue;
+      const verdict = hugs.hugs.get(name);
+      if (verdict === undefined) {
+        enrichmentNotes.push(
+          `hug-evidence-absent: ${name} carries max-width but the capture produced no uniform pixel measurement for it — no sizing evidence carried (the max-width lowering is unchanged).`,
+        );
+        continue;
+      }
+      if (verdict) {
+        part.hugsBelowMaxWidth = true;
+        enrichmentNotes.push(
+          `sizing evidence carried: ${name}.hugsBelowMaxWidth = true (MEASURED — the used width stayed strictly below the max-width cap in every enumerated combo, so the max-width is a CEILING the box hugs beneath, not a design width)`,
+        );
+      } else {
+        enrichmentNotes.push(
+          `sizing evidence measured, NOT carried: ${name} sits AT its max-width in every combo — the value may be a genuine design width, so the fixed-width lowering stands.`,
+        );
+      }
+    }
 
     const mergedTree = structuredClone(mintBase.tree) as Record<string, unknown>;
     const mergeInto = (dst: Record<string, unknown>, src: Record<string, unknown>) => {

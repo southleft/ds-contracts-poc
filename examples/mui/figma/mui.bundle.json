@@ -3511,6 +3511,68 @@
             }
           },
           "label": {
+            "color": {
+              "filled": {
+                "default": {
+                  "$value": "#000000de",
+                  "$type": "color"
+                },
+                "primary": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                },
+                "secondary": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                },
+                "error": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                },
+                "success": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                },
+                "warning": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                },
+                "info": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                }
+              },
+              "outlined": {
+                "default": {
+                  "$value": "#000000de",
+                  "$type": "color"
+                },
+                "primary": {
+                  "$value": "#1976d2",
+                  "$type": "color"
+                },
+                "secondary": {
+                  "$value": "#9c27b0",
+                  "$type": "color"
+                },
+                "error": {
+                  "$value": "#d32f2f",
+                  "$type": "color"
+                },
+                "success": {
+                  "$value": "#2e7d32",
+                  "$type": "color"
+                },
+                "warning": {
+                  "$value": "#ed6c02",
+                  "$type": "color"
+                },
+                "info": {
+                  "$value": "#0288d1",
+                  "$type": "color"
+                }
+              }
+            },
             "font-size": {
               "$value": "13px",
               "$type": "dimension"
@@ -3522,6 +3584,112 @@
             "line-height": {
               "$value": "19.5px",
               "$type": "dimension"
+            },
+            "padding-left": {
+              "filled": {
+                "small": {
+                  "$value": "8px",
+                  "$type": "dimension"
+                },
+                "medium": {
+                  "$value": "12px",
+                  "$type": "dimension"
+                }
+              },
+              "outlined": {
+                "small": {
+                  "$value": "7px",
+                  "$type": "dimension"
+                },
+                "medium": {
+                  "$value": "11px",
+                  "$type": "dimension"
+                }
+              }
+            },
+            "padding-right": {
+              "filled": {
+                "small": {
+                  "$value": "8px",
+                  "$type": "dimension"
+                },
+                "medium": {
+                  "$value": "12px",
+                  "$type": "dimension"
+                }
+              },
+              "outlined": {
+                "small": {
+                  "$value": "7px",
+                  "$type": "dimension"
+                },
+                "medium": {
+                  "$value": "11px",
+                  "$type": "dimension"
+                }
+              }
+            },
+            "row-rule-color": {
+              "filled": {
+                "default": {
+                  "$value": "#000000de",
+                  "$type": "color"
+                },
+                "primary": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                },
+                "secondary": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                },
+                "error": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                },
+                "success": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                },
+                "warning": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                },
+                "info": {
+                  "$value": "#ffffff",
+                  "$type": "color"
+                }
+              },
+              "outlined": {
+                "default": {
+                  "$value": "#000000de",
+                  "$type": "color"
+                },
+                "primary": {
+                  "$value": "#1976d2",
+                  "$type": "color"
+                },
+                "secondary": {
+                  "$value": "#9c27b0",
+                  "$type": "color"
+                },
+                "error": {
+                  "$value": "#d32f2f",
+                  "$type": "color"
+                },
+                "success": {
+                  "$value": "#2e7d32",
+                  "$type": "color"
+                },
+                "warning": {
+                  "$value": "#ed6c02",
+                  "$type": "color"
+                },
+                "info": {
+                  "$value": "#0288d1",
+                  "$type": "color"
+                }
+              }
             }
           }
         },
@@ -7983,7 +8151,6 @@
     }
   },
   "icons": {
-    "autocomplete-autocomplete-clearindicator": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 19 6.41 L 17.59 5 L 12 10.59 L 6.41 5 L 5 6.41 L 10.59 12 L 5 17.59 L 6.41 19 L 12 13.41 L 17.59 19 L 19 17.59 L 13.41 12 Z\" fill=\"currentColor\"/></svg>",
     "autocomplete-autocomplete-popupindicator": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"currentColor\"/></svg>",
     "autocomplete-icon": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"currentColor\"/></svg>",
     "autocomplete-icon-2": "<svg viewBox=\"0 0 22 22\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 12 2 C 6.47 2 2 6.47 2 12 S 6.47 22 12 22 S 22 17.53 22 12 S 17.53 2 12 2 Z M 17 15.59 L 15.59 17 L 12 13.41 L 8.41 17 L 7 15.59 L 10.59 12 L 7 8.41 L 8.41 7 L 12 10.59 L 15.59 7 L 17 8.41 L 13.41 12 L 17 15.59 Z\" fill=\"currentColor\"/></svg>",
@@ -8836,61 +9003,6 @@
                         "transform": "matrix(1, 0, 0, 1, 0, -14)"
                       },
                       "parts": {
-                        "autocomplete-clearindicator": {
-                          "element": "button",
-                          "description": "Promoted from the computed floor (round 4): rendered anatomy button|Autocomplete-clearIndicator.ButtonBase-root.IconButton-root — this element exists in the real component's DOM; the static layer had no part for it.",
-                          "layout": {
-                            "display": "inline-flex",
-                            "align": "center",
-                            "justify": "center"
-                          },
-                          "icon": {
-                            "asset": "autocomplete-autocomplete-clearindicator",
-                            "size": 20
-                          },
-                          "declared": {
-                            "appearance": "none",
-                            "border-bottom-style": "none",
-                            "border-left-style": "none",
-                            "border-right-style": "none",
-                            "border-top-style": "none",
-                            "cursor": "pointer",
-                            "position": "relative",
-                            "transition-duration": "0.15s",
-                            "transition-property": "background-color",
-                            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
-                            "user-select": "none"
-                          },
-                          "tokens": {
-                            "background-color": "{imported.autocomplete.autocomplete-clearindicator.background-color}",
-                            "border-bottom-left-radius": "{imported.shared.size-14}",
-                            "border-bottom-right-radius": "{imported.shared.size-14}",
-                            "border-bottom-width": "{imported.shared.size-0}",
-                            "border-left-width": "{imported.shared.size-0}",
-                            "border-right-width": "{imported.shared.size-0}",
-                            "border-top-left-radius": "{imported.shared.size-14}",
-                            "border-top-right-radius": "{imported.shared.size-14}",
-                            "border-top-width": "{imported.shared.size-0}",
-                            "bottom": "{imported.shared.size-0}",
-                            "color": "{imported.shared.color-0000008a}",
-                            "flex-shrink": "{imported.shared.num-0}",
-                            "font-size": "{imported.autocomplete.autocomplete-clearindicator.font-size}",
-                            "height": "{imported.shared.size-28}",
-                            "left": "{imported.shared.size-0}",
-                            "margin-right": "{imported.autocomplete.autocomplete-clearindicator.margin-right}",
-                            "min-height": "{imported.shared.size-0}",
-                            "min-width": "{imported.shared.size-0}",
-                            "outline-width": "{imported.shared.size-0}",
-                            "padding-bottom": "{imported.shared.size-4}",
-                            "padding-left": "{imported.shared.size-4}",
-                            "padding-right": "{imported.shared.size-4}",
-                            "padding-top": "{imported.shared.size-4}",
-                            "right": "{imported.shared.size-0}",
-                            "row-rule-color": "{imported.shared.color-0000008a}",
-                            "top": "{imported.shared.size-0}",
-                            "width": "{imported.shared.size-28}"
-                          }
-                        },
                         "autocomplete-popupindicator": {
                           "element": "button",
                           "description": "Promoted from the computed floor (round 4): rendered anatomy button|Autocomplete-popupIndicator.ButtonBase-root.IconButton-root — this element exists in the real component's DOM; the static layer had no part for it.",
@@ -9322,6 +9434,9 @@
             "display": "flex",
             "align": "center",
             "justify": "center"
+          },
+          "content": {
+            "prop": "children"
           },
           "declared": {
             "appearance": "none",
@@ -9969,13 +10084,58 @@
                 "font-weight": "{imported.chip.label.font-weight}",
                 "line-height": "{imported.chip.label.line-height}"
               },
-              "literals": {
-                "padding-left": "12px",
-                "padding-right": "12px"
-              }
+              "tokensByProp": [
+                {
+                  "prop": "color",
+                  "map": {
+                    "default": {
+                      "color": "{imported.chip.label.color.{variant}.default}",
+                      "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.default}"
+                    },
+                    "error": {
+                      "color": "{imported.chip.label.color.{variant}.error}",
+                      "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.error}"
+                    },
+                    "info": {
+                      "color": "{imported.chip.label.color.{variant}.info}",
+                      "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.info}"
+                    },
+                    "primary": {
+                      "color": "{imported.chip.label.color.{variant}.primary}",
+                      "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.primary}"
+                    },
+                    "secondary": {
+                      "color": "{imported.chip.label.color.{variant}.secondary}",
+                      "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.secondary}"
+                    },
+                    "success": {
+                      "color": "{imported.chip.label.color.{variant}.success}",
+                      "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.success}"
+                    },
+                    "warning": {
+                      "color": "{imported.chip.label.color.{variant}.warning}",
+                      "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.warning}"
+                    }
+                  }
+                },
+                {
+                  "prop": "size",
+                  "map": {
+                    "medium": {
+                      "padding-left": "{imported.chip.label.padding-left.{variant}.medium}",
+                      "padding-right": "{imported.chip.label.padding-right.{variant}.medium}"
+                    },
+                    "small": {
+                      "padding-left": "{imported.chip.label.padding-left.{variant}.small}",
+                      "padding-right": "{imported.chip.label.padding-right.{variant}.small}"
+                    }
+                  }
+                }
+              ]
             }
           },
           "declared": {
+            "box-sizing": "border-box",
             "font-family": "Roboto, Helvetica, Arial, sans-serif",
             "max-width": "100%",
             "text-wrap-mode": "nowrap",
@@ -11137,12 +11297,10 @@
                       "map": {
                         "checked": {
                           "background-color": "{imported.switch.switch-thumb.background-color.{color}.checked}",
-                          "color": "{imported.switch.switch-thumb.color.{color}.checked}",
                           "row-rule-color": "{imported.switch.switch-thumb.row-rule-color.{color}.checked}"
                         },
                         "unchecked": {
                           "background-color": "{imported.switch.switch-thumb.background-color.{color}.unchecked}",
-                          "color": "{imported.switch.switch-thumb.color.{color}.unchecked}",
                           "row-rule-color": "{imported.switch.switch-thumb.row-rule-color.{color}.unchecked}"
                         }
                       }
@@ -13377,7 +13535,8 @@
                             }
                           }
                         }
-                      ]
+                      ],
+                      "hugsBelowMaxWidth": true
                     },
                     "label-2": {
                       "element": "button",
@@ -13448,7 +13607,8 @@
                             }
                           }
                         }
-                      ]
+                      ],
+                      "hugsBelowMaxWidth": true
                     },
                     "label-3": {
                       "element": "button",
@@ -13519,7 +13679,8 @@
                             }
                           }
                         }
-                      ]
+                      ],
+                      "hugsBelowMaxWidth": true
                     }
                   },
                   "declared": {
@@ -13702,7 +13863,8 @@
                 "padding-right": "{imported.tooltip.label.padding-right}",
                 "padding-top": "{imported.shared.size-4}",
                 "row-rule-color": "{imported.tooltip.label.row-rule-color}"
-              }
+              },
+              "hugsBelowMaxWidth": true
             }
           },
           "tokens": {

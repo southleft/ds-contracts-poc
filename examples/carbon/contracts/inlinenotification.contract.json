@@ -393,7 +393,8 @@
             }
           }
         }
-      ]
+      ],
+      "hugsBelowMaxWidth": true
     }
   },
   "anchors": {

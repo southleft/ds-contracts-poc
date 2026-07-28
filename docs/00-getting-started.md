@@ -139,6 +139,30 @@ Same file, two faithful renderings, and the differ can mechanically prove both �
 
 **And in both directions:** this repo has run the loop both ways with receipts. An engineer added a `loading` prop in code → the differ flagged code *ahead* → the prop was promoted into the contract (v1.1.0) → the canvas set gained a Loading property on regeneration. A designer changed a surface color on the canvas → the differ flagged the token *mismatched* with a proposed patch → the patch was promoted into the tokens → the CSS rebuilt. Neither change touched the other surface directly. (Blow-by-blow: [The Parity Loop](./06-parity-loop.md).)
 
+## Which journey are you on?
+
+Before the per-role advice below, find your situation. These are genuinely different amounts of work, and people get stuck by starting on the wrong one.
+
+| | Your situation | The path | Ends with |
+|---|---|---|---|
+| **A** | *"I have components in **code**. I want them in **Figma**."* | `init --detect` → review the drafted capture config → `extract --computed` → promote → `figma bundle` → `figma claim-channel` once, then `figma publish` | A designer clicks **Check for updates** in the plugin's Changes tab and your real components land on their canvas, token-bound |
+| **B** | *"I have a component on the **canvas**. I want **code**."* | plugin **Send** tab reads the set and proposes a contract → deliver it (PR, `figma receive`, or copy the JSON) → `ds-contracts generate` | A typed React component, CSS Modules and Storybook stories, in your repo |
+| **C** | *"I already have a mature Figma library **and** a mature codebase."* | plugin **Send → Scan this file** → `extract --reconcile` → `ds-contracts diff` in CI | A property-by-property disagreement report, and a gate that stops the gap growing |
+
+Full walkthroughs with every command and every failure message: **[the get-started journeys on the spec site](https://ds-contracts-spec.pages.dev/get-started/)** and the [README](../README.md#which-journey-are-you-on). The same loop written as two people actually live it, hour by hour, with every step tagged built-or-missing: [docs/18 — User Flows](./18-user-flows.md).
+
+### Two things to know before you start journey A
+
+**You cannot point the Figma plugin at a GitHub URL or an npm package.** The tool has to *run* your components in a real browser to read their computed styles — that is what makes the result true rather than guessed — and a Figma plugin is a sandboxed iframe with no Node, no npm and no browser engine of its own. So the browser step happens on your laptop or in your CI, and what travels to Figma is a finished JSON bundle.
+
+**Static extraction alone may not be enough to build a canvas component.** `ds-contracts extract` (without `--computed`) always proposes your API surface. It also reads *anatomy* — parts, layout, token bindings — when the `react-tsx` adapter finds a co-located `<Component>.module.css`, and even then best-effort. With StyleX you get structure but no styling; with Tailwind, Emotion, styled-components or the `cem` adapter you get the stub `{"root": {}}`. A stub anatomy is schema-valid and **will** emit a Figma set — a correctly named component set with blank interiors. If your canvas sets come out empty, that is why, and the fix is the computed capture. Each proposal states which it is, in its `description`.
+
+### What to expect
+
+Two facts pull in opposite directions, and both are true. **Fidelity per captured component is high** — what lands on the canvas is the browser's own computed truth for your real component. **Coverage per library is partial** — each foreign-library round here committed a dozen or so components out of a library of one to two hundred, measured coverage running from about 4% to about 12%. Budget hours per library for the recon and config; the capture itself is machine time. The measured table with denominators is [docs/22 §8.3](./22-generality.md).
+
+Three known gaps you will meet, written down rather than discovered: overlay components (Dialog, Menu, Tooltip) have no hover/focus/active planes in the captured truth and declare `states: []` by design; text wrapping is not implemented, so a hugging text node inside a narrower fixed-width ancestor clips; the capture harness loads no webfonts, so absolute text widths are fallback-font widths. Full ledger: [docs/22 §8](./22-generality.md).
+
 ## How do I use it?
 
 **If you're a designer:** work in the canvas library like you always do — the components there are real, with variants, properties, and swappable slots. When something needs to change (a color that fails in context, a missing variant), change it. The differ will surface your change as a proposal; once accepted, code follows automatically. You never file a ticket asking engineering to "match the file."
@@ -149,7 +173,9 @@ Same file, two faithful renderings, and the differ can mechanically prove both �
 
 **If you maintain the system:** the contract files in `contracts/` are your entire authoring surface. Edit one (or use the Hub's *Evolve the contract* panel), and everything downstream — React, stories, CSS, canvas sets, catalog, docs data — regenerates.
 
-## How to get started
+## Running the reference implementation
+
+*This is for people who want to run or extend **this repository**. To use the tool on your own library you do not need to clone anything — see [which journey are you on](#which-journey-are-you-on) above; those run on the published `@ds-contracts/cli` and the Sync Runner plugin.*
 
 ```bash
 git clone <repo> && cd ds-contracts-poc
@@ -165,6 +191,6 @@ Then prove the loop to yourself in about two minutes:
 2. Open a contract in `contracts/` and change something small — add an enum value, tweak a token binding.
 3. `npm run build && npm run parity` — the differ now reports the canvas **behind**, naming exactly what's missing and how to fix it. That honest red state *is* the product: nothing pretends to be in sync when it isn't.
 4. Revert, or carry the change through — regenerate, sync the canvas, and watch it go green again.
-5. `npm run eval` — 172 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
+5. `npm run eval` — 173 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
 
 From there: [The Bridge](./00-the-bridge.md) for the narrative, [Architecture](./01-architecture.md) for the model, [Contract Specification](./02-contract-spec.md) when you're ready to write one.

@@ -545,7 +545,11 @@
     }
   ],
   "skips": [
-    "switch-thumb.box-shadow: no var candidate verified against the computed value in any combo",
-    "switch-track.opacity: no var candidate verified against the computed value in any combo"
-  ]
+    "switch-thumb.box-shadow: candidate --mui-shadows-1 → \"shadows-1\" = 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "switch-track.opacity: candidates --mui-opacity-switchTrack → \"opacity-switch-track\" = 0.38 (value MATCHES the computed value); --mui-opacity-switchTrackDisabled → \"opacity-switch-track-disabled\" = 0.12 (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
 }

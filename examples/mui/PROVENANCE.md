@@ -174,8 +174,8 @@ text columns, a right-aligned action cell) and two body rows, one of them
 `selected` with a checked box.
 
 Genesis: **11 component sets + 3 standalone** (Menu, Tooltip, TablePagination
-— no variant axes), **160 variants, 1649 variables** (73 Figma-native source
-aliases), 14 embedded icon assets — the exact `GENESIS-BATCH.figma.js` byte
+— no variant axes), **160 variants, 1684 variables** (73 Figma-native source
+aliases), 13 embedded icon assets — the exact `GENESIS-BATCH.figma.js` byte
 stream is executed against the mocked Figma before it is written (builder
 refuses otherwise), and `mui.bundle.json` is built twice byte-identically.
 
@@ -725,3 +725,29 @@ variant cells — is measured over that slice, and the slice was hand-picked for
 tractability. The engine generalizing across libraries (`docs/22`) and a
 library being *captured* are different claims; this row is the second one, and
 it is small. Full table and how to re-derive it: [docs/22 §8.3](../../docs/22-generality.md).
+
+## THE HARNESS RECAPTURE WAVE (task #38)
+
+Three rounds deferred library regeneration for the same reason, and every library's SHIPPED
+artifacts had drifted behind fixes that were already in the engine. All 14 components were
+re-captured against the pinned `.mui-sandbox` with the recipe above, double-run byte-identity
+required and met, then re-promoted and every downstream artifact rebuilt.
+
+**Floors before -> after:** Chip 87.705 -> 90.164 (+2.459), cellsCompared UNCHANGED at 6832. The other 13 came back byte-identical.
+That is the honest shape of this wave across the corpus: 37 scorecards were re-measured over
+carbon/mui/tailwind/altitude and exactly ONE moved. The artifacts were stale in their VOCABULARY
+(refusals, instrument fields, per-axis token maps), not in their floor numbers.
+
+**THE SHORTHAND CEILING (task #27) — the real number, measured for the first time.**
+`shorthandCeiling` counts source declarations dropped because the property they name is not in the
+computed longhand sweep — overwhelmingly CSS SHORTHANDS carrying a `var()`, which are
+pending-substitution values with no computed value to verify a token name against. The instrument
+was STRUCTURALLY ZERO in every artifact ever written, because `normalizeNode` never preserved the
+`vshorthands` field it reads; that was fixed but had never produced a real number until this wave.
+**This library: 2** (button 1, accordion 1).
+
+**The phantom is gone.** The shipped `autocomplete.contract.json` carried `autocomplete-clearindicator` — a `visibility: hidden` `<button>` promoted as a fully visible 28x28 control with a committed SVG glyph, a cursor and background tokens. MUI renders it hidden until the field is hovered or focused, so in every combo of the closed-state capture it paints no ink and no descendant of it paints either. The engine's `non-painting-part` refusal has existed since the conformance round; MUI's artifacts predated it. The recapture drops the part (16 -> 15), the bundle drops from 14 embedded icons to 13, and the child-wider margin-box class halves 4 -> 2 (the clear indicator's `margin-right: -2` on two sizes). The FLOOR NUMBER DID NOT MOVE (2536 cells, 95.110% before and after) — a `visibility: hidden` element contributes no styled channels, so the phantom never flattered the score. It only ever misled the canvas.
+
+**What moved the Chip number**: its label side padding was carried as ONE flat 12px for all 28 variants and is now the measured variant x size map — filled/medium 12, filled/small 8, outlined/medium 11, outlined/small 7 (the outlined pair a pixel narrower because its 1px border eats into the box). That is +36 minted leaves under `imported.chip.label` and the whole of the library's 1648 -> 1684 variable move.
+
+TWO COMPILE-RECEIPT PINS WERE PINNING THE OLD, WRONG ARTIFACTS and were corrected here rather than loosened: the autocomplete pin asserted the phantom was PRESENT (now asserts it is absent, with the cause named), and the chip pin asserted a blanket `padding === 12` (now asserts the measured four-value set, and fails if the map ever collapses back to one value).

@@ -16,6 +16,12 @@
     "pairs": 4,
     "perfectExact": 0,
     "perfectAA": 0,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 8.958333333333334,
     "meanAA": 1.6178385416666667,
     "maxAA": 1.6178385416666667
@@ -95,6 +101,22 @@
   "namedLosses": [
     "code-only: root.--tw-shadow — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+    "leavesAdded": 268,
+    "divergent": [
+      {
+        "token": "imported.card.root.background-color",
+        "fresh": "#ffffff",
+        "shipped": "{color-white}",
+        "resolvedEqual": true
+      }
+    ]
+  },
   "rows": [
     {
       "key": "__default",

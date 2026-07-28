@@ -20,6 +20,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { createFigmaMock } from '../../../scripts/plugin-engine-mock-figma.mjs';
+import { checkHugCeiling } from '../../../scripts/hug-ceiling-pin.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const EX = path.join(HERE, '..');
@@ -136,6 +137,15 @@ for (const file of scripts) {
       if (svgPayloads.length !== got) {
         throw new Error(`icon-close svg-in-shadow pin: ${svgPayloads.length} glyph(s) for ${got} variant cells — every cell must carry the icon`);
       }
+    }
+    // D7 (task #37) — the HUG-CEILING pin: a root the capture MEASURED
+    // hugging beneath its max-width must bind that cap as a Figma ceiling and
+    // render strictly narrower than it. Shared implementation, one per
+    // library (scripts/hug-ceiling-pin.mjs) — this is the pin that keeps the
+    // 320-wide Carbon Button from coming back.
+    {
+      const hugFailures = checkHugCeiling({ contract, entry, mockRoot: mock.root, name });
+      if (hugFailures.length > 0) throw new Error(hugFailures.join(' | '));
     }
     const set = mock.root.findAll((n) => n.type === 'COMPONENT_SET');
     rows.push(`| ${file} | ${contract.id} | ${axesLabel} | ${got} | tokens ${tok.total} (${tok.aliased} aliased) · ${set.length} set(s) built |`);

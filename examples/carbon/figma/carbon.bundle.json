@@ -9682,7 +9682,8 @@
                 }
               }
             }
-          ]
+          ],
+          "hugsBelowMaxWidth": true
         }
       },
       "anchors": {
@@ -10156,7 +10157,8 @@
                         }
                       }
                     }
-                  ]
+                  ],
+                  "hugsBelowMaxWidth": true
                 }
               },
               "declaredStates": {
@@ -10634,7 +10636,8 @@
                 }
               }
             }
-          ]
+          ],
+          "hugsBelowMaxWidth": true
         }
       },
       "anchors": {
@@ -10878,7 +10881,8 @@
                                     "row-rule-color": "{imported.shared.color-ffffff}",
                                     "top": "{imported.shared.size-0}",
                                     "width": "{imported.shared.size-48}"
-                                  }
+                                  },
+                                  "hugsBelowMaxWidth": true
                                 }
                               },
                               "tokens": {
@@ -12111,7 +12115,8 @@
                 }
               }
             }
-          ]
+          ],
+          "hugsBelowMaxWidth": true
         }
       },
       "anchors": {

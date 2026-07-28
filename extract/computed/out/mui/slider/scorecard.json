@@ -16,6 +16,12 @@
     "pairs": 48,
     "perfectExact": 0,
     "perfectAA": 0,
+    "measured": 48,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 5.495741102430557,
     "meanAA": 4.553154839409721,
     "maxAA": 8.14453125
@@ -145,6 +151,8 @@
     ]
   ],
   "namedLosses": [
+    "promotion: pseudo-decor-outside-grammar: slider-thumb::before is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
+    "promotion: pseudo-decor-outside-grammar: slider-thumb::after occupies 42x42 at position:absolute but paints nothing the grammar reads (background-color rgba(0, 0, 0, 0), border 0px rgba(46, 125, 50, 1)) — NOT promoted",
     "overflow: slider-thumb.box-shadow [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: slider-thumb.z-index [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: part-2-0.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -161,6 +169,52 @@
     "code-only: slider-thumb.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-2-0.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/mui/tokens/mui-minted.dtcg.json",
+    "leavesAdded": 1348,
+    "divergent": [
+      {
+        "token": "imported.slider.root.color.error",
+        "fresh": "#d32f2f",
+        "shipped": "{palette-error-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.slider.root.color.info",
+        "fresh": "#0288d1",
+        "shipped": "{palette-info-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.slider.root.color.primary",
+        "fresh": "#1976d2",
+        "shipped": "{palette-primary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.slider.root.color.secondary",
+        "fresh": "#9c27b0",
+        "shipped": "{palette-secondary-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.slider.root.color.success",
+        "fresh": "#2e7d32",
+        "shipped": "{palette-success-main}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.slider.root.color.warning",
+        "fresh": "#ed6c02",
+        "shipped": "{palette-warning-main}",
+        "resolvedEqual": true
+      }
+    ]
+  },
   "rows": [
     {
       "key": "primary.small__default",

@@ -449,3 +449,23 @@ variant cells — is measured over that slice, and the slice was hand-picked for
 tractability. The engine generalizing across libraries (`docs/22`) and a
 library being *captured* are different claims; this row is the second one, and
 it is small. Full table and how to re-derive it: [docs/22 §8.3](../../docs/22-generality.md).
+
+## THE HARNESS RECAPTURE WAVE (task #38)
+
+Three rounds deferred library regeneration for the same reason, and every library's SHIPPED
+artifacts had drifted behind fixes that were already in the engine. All 8 components were
+re-captured against the pinned `.altitude-sandbox` with the recipe above, double-run byte-identity
+required and met, then re-promoted and every downstream artifact rebuilt.
+
+**Floors before -> after:** NONE — all 8 scorecards came back byte-identical.
+That is the honest shape of this wave across the corpus: 37 scorecards were re-measured over
+carbon/mui/tailwind/altitude and exactly ONE moved. The artifacts were stale in their VOCABULARY
+(refusals, instrument fields, per-axis token maps), not in their floor numbers.
+
+**THE SHORTHAND CEILING (task #27) — the real number, measured for the first time.**
+`shorthandCeiling` counts source declarations dropped because the property they name is not in the
+computed longhand sweep — overwhelmingly CSS SHORTHANDS carrying a `var()`, which are
+pending-substitution values with no computed value to verify a token name against. The instrument
+was STRUCTURALLY ZERO in every artifact ever written, because `normalizeNode` never preserved the
+`vshorthands` field it reads; that was fixed but had never produced a real number until this wave.
+**This library: 16** (heading 6, badge 4, chip 3, link 3).

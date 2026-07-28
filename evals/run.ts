@@ -1257,6 +1257,38 @@ const cases: Case[] = [
     },
   },
   {
+    // TASK #37, the owner's live canvas ("the buttons are messed up"). A ROOT's
+    // max-width was baked as a FIXED width — the molecule round bound the real
+    // Figma `maxWidth` ceiling for PARTS but exempted roots by name — so
+    // Carbon's Button, which is `inline-size: max-content; max-inline-size:
+    // 20rem`, drew a 320px box with its label stranded at the left by its own
+    // `justify: space-between`. The control was in the same paste: the SAME
+    // button nested in Modal's footer hugged at 125px, because a nested part
+    // got the ceiling.
+    //
+    // The discriminator is a MEASUREMENT carried on the contract, not a list:
+    // extract/computed records `hugsBelowMaxWidth` when the captured used width
+    // stayed strictly below the cap in every combo. The fixture pins BOTH
+    // halves on one synthetic contract — evidence-free roots keep the
+    // design-width lowering (what the 21 hand-authored `{size.card.width}`
+    // roots in contracts/ depend on), measured-hugging roots bind a ceiling and
+    // build narrower — plus the by-name refusal of a flag that qualifies
+    // nothing, and the shipped Carbon Button actually carrying the fact.
+    id: 'hug-ceiling',
+    claim: 'C3-detection',
+    run: () => {
+      // examples/ is not staged into SCRATCH (see resetScratch) — the fixture
+      // takes the shipped Carbon contract by ABSOLUTE path from the real repo.
+      const r = run(TSX, [
+        'evals/fixtures/hug-ceiling-check.ts',
+        '--carbon', path.join(ROOT, 'examples', 'carbon', 'contracts', 'button.contract.json'),
+      ]);
+      if (r.status !== 0 || !r.out.includes('hug-ceiling ok:')) {
+        throw new Error(`hug-ceiling check failed:\n${r.out}`);
+      }
+    },
+  },
+  {
     // Red-team (2026-07-08): these five drift classes previously passed
     // "parity clean" — boolean/text defaults on the canvas were
     // presence-only, numeric code defaults were invisible to extraction,
@@ -4988,13 +5020,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         // FOREIGN TOKEN SET — the JSON-only Generate: the MUI bundle
         // (contracts + tokenSet + icons in ONE paste, MOLECULE round) through
         // the real engine bundle path is EQUIVALENT to the compiled-script
-        // path (same sets + standalone Menu/Tooltip, 1648 variables incl. 73
+        // path (same sets + standalone Menu/Tooltip, 1684 variables incl. 73
         // Figma-native aliases, contained-primary Button fill resolves
         // #1976d2), and a contract ref outside base+minted refuses BY NAME.
         // STATE-PLANE PROJECTION round: Switch 14→28 (checked is a VARIANT
         // AXIS now) and Button 63→75 (accepted State preview axis) — both
         // survive the JSON-only paste identically to the script path.
-        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6) + standalone Menu, TablePagination, Tooltip with 1648 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
+        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6) + standalone Menu, TablePagination, Tooltip with 1684 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
         'plugin-engine-check: all flows green',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
@@ -6399,7 +6431,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(11 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\); standalone: TablePagination, Menu, Tooltip; 1648 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(11 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\); standalone: TablePagination, Menu, Tooltip; 1684 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
@@ -6424,7 +6456,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
       const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('mui-figma-genesis: 14/14 Emotion-runtime scripts referee+execute headless (160 variants — state-plane projection round: Switch 14→28 on the new Checked axis, Button 63→75 on the accepted State preview axis); token sync 1648 variables incl. 73 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 14 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
+      console.log('mui-figma-genesis: 14/14 Emotion-runtime scripts referee+execute headless (160 variants — state-plane projection round: Switch 14→28 on the new Checked axis, Button 63→75 on the accepted State preview axis); token sync 1684 variables incl. 73 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 13 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {
