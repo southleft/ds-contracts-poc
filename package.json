@@ -64,7 +64,7 @@
     "extract:computed:drift": "tsx extract/computed/drift-check.ts",
     "extract:computed:resolve": "tsx extract/computed/resolve.ts",
     "extract:computed:scorecard": "tsx extract/computed/library-scorecard.ts",
-    "test:onboarding": "tsx --test packages/cli/test/draft-capture-config.test.ts packages/cli/test/accept-candidates.test.ts packages/cli/test/init-detect.test.ts packages/cli/test/library-scorecard.test.ts",
+    "test:onboarding": "tsx --test packages/cli/test/draft-capture-config.test.ts packages/cli/test/accept-candidates.test.ts packages/cli/test/init-detect.test.ts packages/cli/test/library-scorecard.test.ts packages/cli/test/onboard.test.ts",
     "reconcile": "tsx extract/run.ts reconcile",
     "diagnose": "tsx parity/diagnose.ts",
     "figma:serve": "node scripts/figma-serve.mjs",

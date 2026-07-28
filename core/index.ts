@@ -156,6 +156,19 @@ export {
   type EmitterCtx,
 } from './emitter.js';
 
+// Canvas → code: the shared file plan + the provenance sentence the plugin
+// panel and `propose-pr` must both print (core/canvas-code-plan.ts).
+export {
+  CODE_TARGET_LABELS,
+  canvasCodePlan,
+  plannedCodePaths,
+  provenanceHeadline,
+  provenanceSentence,
+  type CanvasProvenance,
+  type CodePathOptions,
+  type CodePlan,
+} from './canvas-code-plan.js';
+
 // Design → contract (proposals from a canvas dump).
 export {
   componentIdSlug,

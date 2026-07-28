@@ -26,6 +26,10 @@
  *                  file; proposeDiff yields a proposal + bounded API diff
  *                  (a mutated base surfaces its +prop/default lines)
  *   6. pr        — the dry-run PR plan, exact lines, zero network
+ *   6b. canvas→code — task #40: a proposal names the files it becomes and
+ *                  STAMPS the round-trip fact (tool-generated vs hand-built
+ *                  vs unrecorded) into the CONTRACT-PROPOSAL envelope that
+ *                  `ds-contracts propose-pr` reads
  *   (2b. G9 — the baked sample bundle parses, plans tokens-first, builds)
  *   7. channel   — G1's plugin half: the apply log (root pluginData, key
  *                  fingerprint never the key), the FRESHNESS GUARD that
@@ -1369,6 +1373,64 @@ return { ok: true };
   console.log(
     `✔ brownfield: scan sees ${report.total} sets (${report.backed} contract-backed, ${report.foreign} hand-built) where the marked inventory saw ${marked.inventory.length}; a base-less propose on "HandBuilt" returns a proposal (not a refusal) naming its corpus; a foreign tokenSet replaces that corpus by name; with-base diff and the parse refusal are unchanged`,
   );
+
+  // (d) CANVAS → CODE (task #40) — THE ASYMMETRY, stamped and shown.
+  // A proposal now says what code it becomes and how far that code can be
+  // trusted. The two answers must never be interchangeable: a set this tool
+  // GENERATED round-trips byte for byte; a HAND-BUILT set is an inversion,
+  // so its code is a starting point. `propose-pr` reads the same stamp out
+  // of the export envelope and prints the same sentence on the PR.
+  const handProp = DSC.proposeDiff(handDump, 'HandBuilt', null, { toolGenerated: false });
+  const toolProp = DSC.proposeDiff(handDump, 'HandBuilt', null, { toolGenerated: true });
+  const unknownProp = DSC.proposeDiff(handDump, 'HandBuilt', null);
+  assert(
+    handProp.provenance === 'hand-built' && toolProp.provenance === 'tool-generated' &&
+      unknownProp.provenance === 'unrecorded',
+    'proposeDiff maps the marker fact to exactly three provenances — and an ABSENT fact is "unrecorded", never quietly hand-built',
+  );
+  assert(
+    handProp.codePlan.sentence.indexOf('STARTING POINT, NOT A REPRODUCTION') >= 0 &&
+      handProp.codePlan.sentence.indexOf('INVERSION') >= 0,
+    'the hand-built sentence refuses to call the generated component a reproduction',
+  );
+  assert(
+    toolProp.codePlan.sentence.indexOf('true round trip') >= 0 &&
+      toolProp.codePlan.sentence.indexOf('byte for byte') >= 0,
+    'the tool-generated sentence claims the round trip in those words',
+  );
+  assert(
+    unknownProp.codePlan.sentence.indexOf('No canvas provenance was recorded') >= 0,
+    'an unrecorded provenance says so instead of picking a side',
+  );
+  const handEnvelope = JSON.parse(handProp.exportJson);
+  const toolEnvelope = JSON.parse(toolProp.exportJson);
+  const unknownEnvelope = JSON.parse(unknownProp.exportJson);
+  assert(
+    handEnvelope.provenance.toolGenerated === false && handEnvelope.provenance.kind === 'hand-built' &&
+      toolEnvelope.provenance.toolGenerated === true &&
+      unknownEnvelope.provenance.toolGenerated === null,
+    'the CONTRACT-PROPOSAL envelope CARRIES the fact (true / false / null) — this is what propose-pr reads to print the right sentence',
+  );
+  // The file list the Send panel shows is the file list the CLI writes:
+  // both come from core/canvas-code-plan.ts. Named paths, not a shape.
+  const plan = DSC.codePlanFor('Badge', 'tool-generated');
+  const expectedPaths = ['Badge/Badge.module.css', 'Badge/Badge.tsx', 'Badge/index.ts'];
+  assert(
+    JSON.stringify(plan.paths) === JSON.stringify(expectedPaths),
+    `the react code plan names the files generate writes (got ${JSON.stringify(plan.paths)})`,
+  );
+  assert(
+    plan.target === 'react' && plan.targetLabel === 'React + CSS Modules' &&
+      plan.altTargets.join(',') === 'html,react-inline',
+    `the plan names its default target and the alternatives a repo can pick (got ${plan.target} / ${JSON.stringify(plan.altTargets)})`,
+  );
+  assert(
+    DSC.codePlanFor('Badge', 'hand-built').headline.indexOf('starting point, not a reproduction') >= 0,
+    'the one-line headline carries the same asymmetry as the sentence',
+  );
+  console.log(
+    '✔ canvas→code (task #40): a proposal states what code it becomes (react → Badge/Badge.module.css, Badge/Badge.tsx, Badge/index.ts; html + react-inline named as alternatives) and stamps the round-trip fact into the CONTRACT-PROPOSAL envelope — tool-generated says "byte for byte", hand-built says "STARTING POINT, NOT A REPRODUCTION", and an unknown marker says "not recorded" rather than either',
+  );
   if (process.argv.includes('--show-brownfield')) {
     console.log('\n--- scan rows (plain words) ---\n  ' + report.lines.join('\n  '));
     console.log('\n--- base-less proposal for "HandBuilt" ---\n  ' + baseless.summaryLines.join('\n  ') + '\n');
@@ -1458,4 +1520,4 @@ return { ok: true };
   );
 }
 
-console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles, brownfield-scan, base-less-propose, read-only-enforcement)');
+console.log('plugin-engine-check: all flows green (bundle, generate, sample-library, order, update-report, style-diff, drift-aware-update, apply, propose-diff, pr-dry-run, composite-plugin-path, composite-reverse-journey, drift-fingerprint, foreign-token-bundle, prototype-wiring, standing-channel, sibling-bundles, brownfield-scan, base-less-propose, canvas-code-plan, read-only-enforcement)');

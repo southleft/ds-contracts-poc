@@ -371,6 +371,16 @@
       <span class="status" id="prop-status"></span>
     </div>
     <div class="result" id="prop-result" hidden></div>
+    <!-- CLOSING THE LOOP (task #40). A proposal used to end at a contract,
+         and a designer had no way to know what code it would become — the
+         second hop was invisible. This names it BEFORE anything is sent:
+         the target, the exact files, and the one sentence that says how far
+         to trust them. A set this tool GENERATED round-trips byte for byte;
+         a HAND-BUILT set is inverted, so its code is a starting point. -->
+    <div class="field" id="prop-code-section" hidden>
+      <label>What this becomes in code</label>
+      <div class="result short" id="prop-code-result"></div>
+    </div>
     <div class="field" id="prop-pr-section" hidden>
       <label>Open a GitHub PR (optional)</label>
       <div class="grid2">
@@ -1501,19 +1511,29 @@
     // Read the file markers alongside the dump so a repo-generated set can
     // pre-fill its own base contract.
     engineRun(DSC.inventoryScriptSource(), { readOnly: true }, function (invMsg) {
-      var inventory = invMsg.ok && invMsg.result ? invMsg.result.inventory || [] : [];
+      var inventoryOk = !!(invMsg.ok && invMsg.result);
+      var inventory = inventoryOk ? invMsg.result.inventory || [] : [];
       engineRun(scoped, { readOnly: true }, function (msg) {
         setBusy(false);
         $('prop-status').textContent = '';
         if (!msg.ok) {
+          $('prop-code-section').hidden = true;
           addIssues(resultBox('prop-result', false, 'Could not read the set.'), [{ headline: msg.error }]);
           return;
         }
         var dump = msg.result || {};
+        var row = null;
+        inventory.forEach(function (r) { if (r.name === setName || (r.contractId && r.name.indexOf(setName) === 0)) row = row || r; });
+        // MARKER = PROVENANCE, and the whole canvas→code asymmetry hangs off
+        // it. The marked inventory lists every set this tool generated; a set
+        // missing from it carries no ds_contracts/contractId and was drawn by
+        // hand, so its contract is an INVERSION and its code is a starting
+        // point. If the inventory read itself failed we know nothing — pass
+        // null and let the report say "not recorded" rather than call a
+        // generated set hand-built.
+        var toolGenerated = inventoryOk ? !!(row && row.contractId) : null;
         var baseText = $('prop-base').value.trim();
         if (!baseText) {
-          var row = null;
-          inventory.forEach(function (r) { if (r.name === setName || (r.contractId && r.name.indexOf(setName) === 0)) row = row || r; });
           var baked = row && row.contractId ? DSC.bakedContract(row.contractId) : null;
           if (baked) {
             $('prop-base').value = baked;
@@ -1529,12 +1549,14 @@
         var baseRaw = null;
         if (baseText) {
           try { baseRaw = JSON.parse(baseText); } catch (e) {
+            $('prop-code-section').hidden = true;
             addIssues(resultBox('prop-result', false, 'No proposal.'), [{ headline: 'The base contract box is not valid JSON — empty it to propose from the canvas instead.', detail: String(e && e.message || e) }]);
             return;
           }
         }
-        var diff = DSC.proposeDiff(dump, setName, baseRaw, { tokenSet: activeTokenSet });
+        var diff = DSC.proposeDiff(dump, setName, baseRaw, { tokenSet: activeTokenSet, toolGenerated: toolGenerated });
         if (!diff.ok) {
+          $('prop-code-section').hidden = true;
           addIssues(resultBox('prop-result', false, 'No proposal.'), [diff.issue]);
           return;
         }
@@ -1545,7 +1567,8 @@
           : 'Proposed change — ' + diff.setName + ':');
         diff.summaryLines.forEach(function (l) { addLine(box, l); });
         (diff.proposalNotes || []).forEach(function (n) { addWarning(box, n, true); });
-        addArtifactActions(box, proposedId + (diff.baseless ? '.contract.json' : '.proposal.json'), diff.exportJson);
+        addArtifactActions(box, proposedId + '.proposal.json', diff.exportJson);
+        renderCodePlan(diff.codePlan);
         $('prop-pr-section').hidden = false;
         $('prop-bridge-section').hidden = false;
         if (!$('pr-path').value) {
@@ -1553,6 +1576,28 @@
         }
       });
     });
+  }
+
+  // CLOSING THE LOOP: what the proposal becomes on the code side, shown
+  // before it is sent. Every string here comes from the engine
+  // (core/canvas-code-plan.ts) — the SAME module `ds-contracts propose-pr`
+  // writes files from, so this panel can never promise a file the CLI does
+  // not write, or soften a sentence the PR body states.
+  function renderCodePlan(plan) {
+    var section = $('prop-code-section');
+    if (!plan) { section.hidden = true; return; }
+    var box = resultBox('prop-code-result', null, plan.headline);
+    addLine(box, 'Target: ' + plan.targetLabel + ' (' + plan.target + '). Your repository’s ds-contracts.config.json picks the target; this is the default.');
+    plan.paths.forEach(function (p) {
+      var line = document.createElement('div');
+      line.className = 'diff-line';
+      line.textContent = p;
+      box.appendChild(line);
+    });
+    addLine(box, plan.sentence);
+    addMeta(box, 'Other targets a repository can choose: ' + (plan.altTargets || []).join(', ') + '.');
+    addMeta(box, 'On the code side, ds-contracts propose-pr <this proposal> --repo owner/name opens ONE pull request carrying the contract and these files together.');
+    section.hidden = false;
   }
 
   // --- GitHub PR (BYO fine-grained token, session-only) ---------------------

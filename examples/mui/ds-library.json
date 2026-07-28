@@ -1,0 +1,51 @@
+{
+  "__note": "LIBRARY MANIFEST — the per-library half of the whole code→canvas pipeline (docs/21). `ds-contracts promote --config <this>` runs the promote stage; `ds-contracts onboard --adopt examples/mui` runs capture → promote → emit → bundle → publish from it. packages/cli/src/promote.ts is the shared engine-free pipeline; nothing here is library-specific code.",
+  "library": "mui",
+  "exampleDir": "examples/mui",
+  "captureOut": "extract/computed/out/mui",
+  "dtcg": "examples/mui/tokens/mui.dtcg.json",
+  "mintedOut": "examples/mui/tokens/mui-minted.dtcg.json",
+  "mintedDoc": "examples/mui/tokens/MINTED.md",
+  "__note:components": "ORGANISM round appends checkbox, pagination and table (the composed DataTable — the first ORGANISM).",
+  "components": [
+    "button",
+    "chip",
+    "card",
+    "switch",
+    "slider",
+    "tabs",
+    "accordion",
+    "autocomplete",
+    "tooltip",
+    "menu",
+    "dialog",
+    "checkbox",
+    "pagination",
+    "table"
+  ],
+  "__note:contractStem": "The emitted Figma script is named kebab(contract.name), so a promoted contract FILE must carry the same stem or the compile receipt cannot find it. Capture-dir names come from the capture config; this is the one place the two spellings differ.",
+  "contractStem": {
+    "pagination": "table-pagination"
+  },
+  "contractVersion": "0.2.0",
+  "promoterPath": "examples/mui/scripts/promote-floor.mjs",
+  "possessive": "MUI's",
+  "mintedDocTitle": "MUI minted tokens",
+  "capture": {
+    "config": "extract/computed/configs/mui.json",
+    "harness": "examples/mui/.mui-sandbox"
+  },
+  "seeds": "examples/mui/contracts-seed",
+  "emit": {
+    "out": "examples/mui/figma",
+    "icons": "examples/mui/assets/icons"
+  },
+  "bundle": {
+    "out": "examples/mui/figma/mui.bundle.json",
+    "name": "MUI",
+    "modes": [
+      "examples/mui/tokens/modes/mui.light.dtcg.json",
+      "examples/mui/tokens/modes/mui.dark.dtcg.json"
+    ]
+  }
+}

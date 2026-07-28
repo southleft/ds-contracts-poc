@@ -39,6 +39,9 @@ import {
   type Part as SchemaPart,
 } from '../scripts/contract-schema.js';
 import { buildPlan as proposePrBuildPlan, contentsPutBody, summarize as proposePrSummarize } from '../packages/cli/src/commands/propose-pr.js';
+// PROMOTE GENERALIZATION (task #39) — the ONE promotion pipeline the four
+// generalized libraries now share (was six copies under examples/*/scripts/).
+import { promote as promoteFloor, type PromoteConfig } from '../packages/cli/src/promote.js';
 import { emitReact as coreEmitReact, generateCss as coreGenerateCss, isMultiRoot as coreIsMultiRoot, stripCanvasOnlyChannels as coreStripCanvasOnly, validateContract as coreValidateContract } from '../core/emit-react.js';
 import { createFigmaEngine } from '../core/emit-figma-script.js';
 import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
@@ -4238,6 +4241,165 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    // CANVAS → CODE, THE WHOLE LOOP (task #40) — the four promises the Send
+    // panel and `propose-pr` make to each other, made falsifiable:
+    //
+    //   a. THE PATH TABLE IS NOT A GUESS. core/canvas-code-plan.ts names the
+    //      files a proposal would create, and the plugin's Send panel shows
+    //      that list to a designer BEFORE anything is written. It is a
+    //      promise the CLI has to keep, so the REAL emitters run here and
+    //      their paths must equal plannedCodePaths() for html, react-inline
+    //      and (through generateCodeFiles, the shipping generator) react.
+    //   b. "BYTE FOR BYTE" IS MEASURED, NOT CLAIMED. The tool-generated PR
+    //      body says re-running the emitters reproduces the component byte
+    //      for byte; so the repo's OWN Badge is regenerated from its OWN
+    //      contract + four token trees + icons and compared to the committed
+    //      files. A formatter change, a prettier bump, a stray emitter tweak
+    //      turns that sentence into a lie — and fails here first.
+    //   c. The react ROOT BARREL is never shipped (it names the whole
+    //      library; a proposal knows one component) and its absence is NAMED.
+    //   d. A CONTRACT-PROPOSAL envelope is UNWRAPPED — committing the
+    //      envelope puts a non-contract where a contract belongs, which is
+    //      the exact defect readProposalInput() was written to close.
+    //   e. THE ASYMMETRY IS NON-NEGOTIABLE. tool-generated says "true round
+    //      trip"/"byte for byte"; hand-built says INVERSION and "STARTING
+    //      POINT, NOT A REPRODUCTION" and MUST NOT anywhere say "byte for
+    //      byte"; an unstamped envelope says neither and admits it.
+    //   f. A FRAMEWORK IS NEVER GUESSED: no config and no --target refuses
+    //      by name ("not something to guess"), as do a target with nowhere
+    //      to put the code and an unregistered target.
+    //
+    // Runs as a scratch probe (generateCodeFiles is async; the case runner is
+    // sync) over the STAGED repo — contracts/, tokens/, assets/, src/ and
+    // packages/ all ride along, and examples/ deliberately does not.
+    id: 'canvas-code-loop',
+    claim: 'C7-cli',
+    run: () => {
+      // Written as a FILE, not `tsx -e`: -e compiles to CJS, and the shipping
+      // generator this loop must run through (scripts/generate-components.ts,
+      // reached via generateCodeFiles) is ESM with a top-level await.
+      const probeFile = path.join(SCRATCH, 'canvas-code-loop-probe.ts');
+      writeFileSync(probeFile, `
+        import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+        import path from 'node:path';
+        import { buildPlan, generateCodeFiles, readProposalInput, resolveCodeConfig } from './packages/cli/src/commands/propose-pr.ts';
+        import { plannedCodePaths } from './core/canvas-code-plan.ts';
+        import { emitterByName } from './core/emitter.ts';
+        import { ContractSchema } from './scripts/contract-schema.ts';
+
+        const CWD = process.cwd();
+        const CONTRACT = 'contracts/badge.contract.json';
+        const TOKENS = ['tokens/primitives.tokens.json', 'tokens/semantic.tokens.json', 'tokens/modes/semantic.light.tokens.json', 'tokens/modes/semantic.dark.tokens.json'];
+        const ICONS = 'assets/icons';
+        const readJson = (rel) => JSON.parse(readFileSync(path.join(CWD, rel), 'utf8'));
+        const eq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
+        // (a) THE PATH TABLE IS THE REAL EMITTERS' PATHS — pure-emitter targets.
+        const contract = ContractSchema.parse(readJson(CONTRACT));
+        const ctx = {
+          tokens: {
+            primitives: readJson(TOKENS[0]), semantic: readJson(TOKENS[1]), light: readJson(TOKENS[2]), dark: readJson(TOKENS[3]),
+            brands: Object.fromEntries(readdirSync('tokens/modes').filter((f) => /^brand\\./.test(f)).map((f) => [f.replace(/^brand\\.|\\.tokens\\.json$/g, ''), readJson('tokens/modes/' + f)])),
+          },
+          icons: new Map(readdirSync(ICONS).filter((f) => f.endsWith('.svg')).map((f) => [f.replace(/\\.svg$/, ''), readFileSync(path.join(CWD, ICONS, f), 'utf8').trim()])),
+          contracts: new Map([[contract.id, contract]]),
+        };
+        for (const target of ['html', 'react-inline']) {
+          const real = emitterByName.get(target).emit(contract, ctx).map((f) => f.path).sort();
+          const planned = plannedCodePaths('Badge', target).sort();
+          if (!eq(real, planned)) {
+            throw new Error('plannedCodePaths(Badge, ' + target + ') = ' + JSON.stringify(planned) + ' but the REAL emitter writes ' + JSON.stringify(real) + ' — the Send panel would promise a designer file names the CLI does not write');
+          }
+        }
+
+        // (a + b + c) react, through the SHIPPING generator propose-pr runs.
+        const cfg = { targets: ['react'], outDir: 'src/components', tokenFiles: TOKENS, iconsDir: ICONS, stories: false, source: 'config' };
+        const gen = await generateCodeFiles(readFileSync(path.join(CWD, CONTRACT), 'utf8'), cfg, CWD);
+        const rel = gen.files.map((f) => f.destPath.slice(cfg.outDir.length + 1)).sort();
+        const plannedReact = plannedCodePaths('Badge', 'react', { stories: false }).sort();
+        if (!eq(plannedReact, ['Badge/Badge.module.css', 'Badge/Badge.tsx', 'Badge/index.ts'])) {
+          throw new Error('plannedCodePaths(Badge, react, stories:false) changed shape: ' + JSON.stringify(plannedReact));
+        }
+        if (!eq(rel, plannedReact)) {
+          throw new Error('react: generateCodeFiles wrote ' + JSON.stringify(rel) + ' but the plan promised ' + JSON.stringify(plannedReact));
+        }
+        for (const f of gen.files) {
+          const committed = readFileSync(path.join(CWD, f.destPath), 'utf8');
+          if (committed !== f.contents) {
+            throw new Error('NOT a round trip: ' + f.destPath + ' regenerated from the contract in this repo differs from the COMMITTED file (' + committed.length + ' vs ' + f.contents.length + ' chars) — the tool-generated PR body says "byte for byte"');
+          }
+        }
+        if (gen.files.some((f) => f.destPath === cfg.outDir + '/index.ts')) {
+          throw new Error('the react ROOT BARREL was shipped — it lists every component in the library and would clobber a real repo barrel down to one line');
+        }
+        if (!gen.notes.some((n) => n.includes('root barrel'))) {
+          throw new Error('the dropped root barrel is not NAMED in the notes: ' + JSON.stringify(gen.notes));
+        }
+
+        // (d) A CONTRACT-PROPOSAL envelope is unwrapped to its contract, and
+        //     the plugin's stamp decides the provenance — never a guess.
+        const dir = path.join(CWD, 'canvas-code-loop');
+        mkdirSync(dir, { recursive: true });
+        const contractDoc = readJson(CONTRACT);
+        const WANT_CONTENT = JSON.stringify(contractDoc, null, 2) + '\\n';
+        const bodies = {};
+        for (const [stamp, want] of [[true, 'tool-generated'], [false, 'hand-built'], [undefined, 'unrecorded']]) {
+          const envelope = { type: 'CONTRACT-PROPOSAL', proposedContract: contractDoc };
+          if (stamp !== undefined) envelope.provenance = { toolGenerated: stamp };
+          const file = path.join(dir, 'proposal-' + String(stamp) + '.json');
+          writeFileSync(file, JSON.stringify(envelope, null, 2) + '\\n');
+          const input = readProposalInput(file);
+          if (input.content !== WANT_CONTENT) {
+            throw new Error('toolGenerated=' + String(stamp) + ': the ENVELOPE itself was about to be committed where a contract belongs');
+          }
+          if (!input.unwrapped) throw new Error('toolGenerated=' + String(stamp) + ': the envelope was not reported as unwrapped');
+          if (input.provenance !== want) {
+            throw new Error('toolGenerated=' + String(stamp) + ' must resolve provenance "' + want + '", got "' + input.provenance + '"');
+          }
+          const built = buildPlan(file, 'acme/design-system', {});
+          if (built.plan.provenance !== want) throw new Error('buildPlan lost the provenance for toolGenerated=' + String(stamp));
+          bodies[want] = built.plan.body;
+        }
+
+        // (e) THE PR-BODY ASYMMETRY — the sentence a reviewer reads.
+        for (const [prov, must, mustNot] of [
+          ['tool-generated', ['true round trip', 'byte for byte'], []],
+          ['hand-built', ['STARTING POINT, NOT A REPRODUCTION', 'INVERSION'], ['byte for byte']],
+          ['unrecorded', ['No canvas provenance was recorded'], []],
+        ]) {
+          for (const phrase of must) {
+            if (!bodies[prov].includes(phrase)) throw new Error(prov + ' PR body must say "' + phrase + '"');
+          }
+          for (const phrase of mustNot) {
+            if (bodies[prov].includes(phrase)) throw new Error(prov + ' PR body must NEVER say "' + phrase + '" — a hand-built set is an INVERSION, and promising a reproduction is the one thing this loop may not do');
+          }
+        }
+
+        // (f) A FRAMEWORK IS NEVER GUESSED.
+        for (const [label, got, reason] of [
+          ['no config and no --target', resolveCodeConfig({ noCode: false }, null, 'ds-contracts.config.json'), 'not something to guess'],
+          ['--target with no out dir', resolveCodeConfig({ target: 'react', noCode: false }, null, 'ds-contracts.config.json'), 'somewhere to put the code'],
+          ['unknown --target', resolveCodeConfig({ target: 'svelte', codePath: 'out', noCode: false }, null, 'ds-contracts.config.json'), 'Unknown --target svelte'],
+        ]) {
+          if (got.ok) throw new Error(label + ': resolveCodeConfig GUESSED a code plan instead of refusing by name');
+          if (!got.reason.includes(reason)) throw new Error(label + ': the refusal does not name "' + reason + '" — ' + got.reason);
+        }
+        const configured = resolveCodeConfig({ noCode: false }, { generate: { target: 'react', out: 'src/components' } }, 'ds-contracts.config.json');
+        if (!configured.ok) throw new Error('a RECORDED generate.target must resolve, got: ' + configured.reason);
+        if (!eq(configured.config.targets, ['react']) || configured.config.outDir !== 'src/components' || configured.config.source !== 'config') {
+          throw new Error('config-derived code plan wrong: ' + JSON.stringify(configured.config));
+        }
+
+        console.log('canvas-code-loop probe ok: ' + rel.join(', '));
+      `);
+      const probe = run(TSX, ['canvas-code-loop-probe.ts']);
+      if (probe.status !== 0 || !probe.out.includes('canvas-code-loop probe ok: Badge/Badge.module.css, Badge/Badge.tsx, Badge/index.ts')) {
+        throw new Error(`canvas-code-loop probe failed:\n${probe.out}`);
+      }
+      console.log('canvas-code-loop: the Send panel\'s path table equals the REAL emitters (html, react-inline, react), the repo\'s own Badge regenerates BYTE-IDENTICAL to its committed files, the root barrel stays out and is named, the CONTRACT-PROPOSAL envelope is unwrapped, and the round-trip/inversion/unrecorded PR sentences stay asymmetric — with no framework guessed');
+    },
+  },
+  {
     // PHASE 1 (open emitter registry) — registerEmitter(): a foreign emitter
     // module registers, appears in getEmitters() AND the live `emitters`
     // array (the one every generic consumer iterates), name collisions and
@@ -4992,6 +5154,105 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         if (!out.includes(pin)) throw new Error(`onboarding gate missing load-bearing test "${pin}"`);
       }
       console.log('onboarding-ramps: draft-config refusal, exact-only bulk acceptance, detect-not-confirmed prefill — 4 suites green');
+    },
+  },
+  {
+    // `ds-contracts onboard` (task #39) — the two-phase code→canvas command.
+    // The suite is browser-free: it resumes phase 2 over COMMITTED capture
+    // artifacts (`--from promote`), so what runs here is the real promote →
+    // emit → bundle chain, the real refusal path, and the real review gate.
+    //
+    // The load-bearing claim is the REFUSAL: an unreviewed drafted capture
+    // config must stop phase 2 dead and write nothing — at every stage, so
+    // there is no arrangement of flags that gets past the one place a human
+    // must decide (docs/21 §4: classAllow/varPrefix/mount fail QUIETLY).
+    id: 'onboard-two-phase',
+    claim: 'C8-journey',
+    run: () => {
+      const r = run(TSX, ['--test', 'packages/cli/test/onboard.test.ts']);
+      if ((r.status ?? -1) !== 0 || !/# fail 0\b/.test(r.out)) {
+        const notOk = r.out.split('\n').filter((l) => l.startsWith('not ok')).join('\n');
+        throw new Error(`onboard suite failed:\n${notOk || '(none tagged)'}\n\nHEAD:\n${r.out.slice(0, 2500)}`);
+      }
+      for (const pin of [
+        'phase 2 REFUSES an unreviewed draft capture config by name, and writes nothing',
+        'the review gate is not stage-dependent — --from promote still refuses an unreviewed draft',
+        'phase 2 happy path: promote → emit → bundle over committed capture artifacts',
+        'a QUARANTINED component ships no contract, is named in the summary, and the run still finishes the others',
+      ]) {
+        if (!r.out.includes(pin)) throw new Error(`onboard gate missing load-bearing test "${pin}"`);
+      }
+      console.log('onboard-two-phase: unreviewed-draft refusal (stage-independent), phase-2 promote→emit→bundle, per-component quarantine excluded BY NAME with a non-zero exit, double-run bundle byte-identity — 8 pins green');
+    },
+  },
+  {
+    // PROMOTE GENERALIZATION (task #39). Promotion used to be six near-
+    // identical copies of a ~450-line script under `examples/*/scripts/`, and
+    // it was the one pipeline step with no CLI verb. It is now ONE module
+    // (packages/cli/src/promote.ts) driven by a per-library manifest.
+    //
+    // The claim a refactor like that has to earn is BYTE IDENTITY: the shared
+    // module must reproduce every committed artifact of every library it took
+    // over, quirks included. This runs the real promotion for all four into a
+    // throwaway example dir (reads point at the committed capture artifacts,
+    // writes go to a temp dir — a green run can never move a committed byte)
+    // and compares every produced file to the one in the repo.
+    //
+    // NOT COVERED, BY NAME: polaris (a different generation — v0.3.2, no
+    // source-alias pass, bespoke per-component provenance prose) and astryx
+    // (its re-anchor decisions ledger must be re-applied after the mint merge,
+    // and it refuses at HEAD on a stale ledger row, task #43). Both keep their
+    // own scripts, and that is a stated limit rather than a silent one.
+    id: 'promote-generalization',
+    claim: 'C1-determinism',
+    run: () => {
+      const tmp = path.join(SCRATCH, '.promote-generalization');
+      rmSync(tmp, { recursive: true, force: true });
+      let compared = 0;
+      for (const lib of ['carbon', 'mui', 'tailwind', 'altitude']) {
+        const committedDir = path.join(ROOT, 'examples', lib);
+        const manifest = JSON.parse(readFileSync(path.join(committedDir, 'ds-library.json'), 'utf8')) as PromoteConfig;
+        // A throwaway example dir seeded with the committed icons (the icon map
+        // is an INPUT to the figmaStatePreviews probe) — everything else the
+        // module reads stays pointed at the repo.
+        const workDir = path.join(tmp, lib);
+        mkdirSync(path.join(workDir, 'contracts'), { recursive: true });
+        mkdirSync(path.join(workDir, 'tokens'), { recursive: true });
+        if (existsSync(path.join(committedDir, 'assets'))) {
+          cpSync(path.join(committedDir, 'assets'), path.join(workDir, 'assets'), { recursive: true });
+        }
+        const rel = (p: string): string => p.replace(`examples/${lib}/`, '');
+        promoteFloor(ROOT, {
+          ...manifest,
+          exampleDir: path.relative(ROOT, workDir),
+          mintedOut: path.join(path.relative(ROOT, workDir), 'tokens', path.basename(manifest.mintedOut)),
+          mintedDoc: path.join(path.relative(ROOT, workDir), 'tokens', path.basename(manifest.mintedDoc)),
+        }, () => {});
+
+        for (const sub of ['contracts', 'tokens', 'assets']) {
+          const producedDir = path.join(workDir, sub);
+          if (!existsSync(producedDir)) continue;
+          for (const f of readdirSync(producedDir).sort()) {
+            const produced = path.join(producedDir, f);
+            if (statSync(produced).isDirectory()) continue;
+            const committed = path.join(committedDir, sub, f);
+            if (!existsSync(committed)) throw new Error(`${lib}: the shared promote module produced ${sub}/${f}, which the repo does not carry`);
+            if (!readFileSync(produced).equals(readFileSync(committed))) {
+              throw new Error(`${lib}: ${sub}/${f} — the shared promote module did NOT reproduce the committed bytes (${rel(committed)})`);
+            }
+            compared++;
+          }
+        }
+        // …and the committed set has nothing the module failed to produce.
+        for (const f of readdirSync(path.join(committedDir, 'contracts')).sort()) {
+          if (!/\.(contract|extension|anchors)\.json$/.test(f)) continue;
+          if (!existsSync(path.join(workDir, 'contracts', f))) {
+            throw new Error(`${lib}: the repo carries contracts/${f} but the shared promote module did not produce it`);
+          }
+        }
+      }
+      rmSync(tmp, { recursive: true, force: true });
+      console.log(`promote-generalization: 4 libraries (carbon, mui, tailwind, altitude) re-promoted through the ONE shared module — ${compared} committed artifact(s) byte-identical; polaris + astryx keep their scripts BY NAME`);
     },
   },
   {

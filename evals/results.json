@@ -1,6 +1,6 @@
 {
-  "passed": 173,
-  "total": 173,
+  "passed": 176,
+  "total": 176,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -648,6 +648,11 @@
       "pass": true
     },
     {
+      "id": "canvas-code-loop",
+      "claim": "C7-cli",
+      "pass": true
+    },
+    {
       "id": "emitter-plugin-loads",
       "claim": "C7-cli",
       "pass": true
@@ -680,6 +685,16 @@
     {
       "id": "onboarding-ramps",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "onboard-two-phase",
+      "claim": "C8-journey",
+      "pass": true
+    },
+    {
+      "id": "promote-generalization",
+      "claim": "C1-determinism",
       "pass": true
     },
     {

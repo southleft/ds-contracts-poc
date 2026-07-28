@@ -8,6 +8,7 @@
 import { CliUsageError } from './lib.js';
 import { ContractViolationError } from '../../../scripts/generate-components.js';
 import { initCommand } from './commands/init.js';
+import { onboardCommand, promoteCommand } from './commands/onboard.js';
 import { extractCommand } from './commands/extract.js';
 import { generateCommand } from './commands/generate.js';
 import { figmaCommand } from './commands/figma.js';
@@ -22,6 +23,23 @@ const USAGE = `ds-contracts ${VERSION} — contracts as the deterministic bridge
 Usage: ds-contracts <command> [options]
 
 Commands:
+  onboard <package-or-path>                   PHASE 1 of the code → canvas pipeline: detect the
+          [--components a,b,c]                adapter/styling, create or reuse a sandbox, seed
+          [--workspace <dir>]                 contracts from the static pass, DRAFT the capture
+                                              config — then STOP at the review gate and print
+                                              what a human must decide and why. A directory that
+                                              already carries a ds-library.json is ADOPTED.
+  onboard --continue                          PHASE 2: capture → promote → emit → bundle →
+          [--channel-key K] [--dry-run]       publish to the standing channel. The designer
+          [--bridge <url>]                    clicks "Check for updates" — NO JSON ON A CLIPBOARD.
+          [--from capture|promote|emit|       REFUSES an unreviewed capture config by name; there
+                bundle|publish]               is no flag that skips the gate (--from resumes a
+                                              run over artifacts that already exist; the gate
+                                              still runs first, whatever stage you resume from)
+  promote --config <ds-library.json>          computed-capture artifacts → promoted contracts +
+                                              minted token tree (source-alias pass, provenance
+                                              anchors, figmaStatePreviews probe, resolution
+                                              guard). Also runs as onboard's promote stage.
   init [--detect]                             write ds-contracts.config.json here (--detect
                                               prefills adapter/root/tokens + styling hints from
                                               the repo — marked detected, NOT confirmed)
@@ -61,11 +79,16 @@ Commands:
                                               in memory only, never persisted or logged.
   figma receive --out <contracts-dir>         the dev door: print a pairing code, wait for the
           [--bridge <url>] [--apply]          plugin's proposed contract, land it as a reviewed
-                                              local diff (writes NOTHING without --apply)
+                                              local diff (writes NOTHING without --apply). With
+                                              --apply it ALSO generates the component code that
+                                              contract produces — same as propose-pr, from the
+                                              generate section of ds-contracts.config.json; with
+                                              no recorded target it says so and writes no code.
   diff [config]                               parity referee: contracts vs code/design
                                               exit 0 clean · 1 drift · 2 error
-  propose-pr <file> --repo owner/name         open the contract change as a reviewable PR
-          [--token t] [--base b] [--path p] [--dry-run]
+  propose-pr <file> --repo owner/name         open the contract change + generated code as one PR
+          [--token t] [--base b] [--path p] [--target t] [--code-path d]
+          [--tokens f,f] [--icons d] [--stories] [--no-code] [--dry-run]
 
 ds-contracts <command> --help shows nothing extra yet — this block is the reference.
 `;
@@ -83,6 +106,10 @@ async function main(): Promise<number> {
     case '-v':
       console.log(VERSION);
       return 0;
+    case 'onboard':
+      return onboardCommand(rest);
+    case 'promote':
+      return promoteCommand(rest);
     case 'init':
       return initCommand(rest);
     case 'extract':

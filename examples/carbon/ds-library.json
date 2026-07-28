@@ -1,0 +1,50 @@
+{
+  "__note": "LIBRARY MANIFEST — the per-library half of the whole code→canvas pipeline (docs/21). `ds-contracts promote --config <this>` runs the promote stage; `ds-contracts onboard --adopt examples/carbon` runs capture → promote → emit → bundle → publish from it. packages/cli/src/promote.ts is the shared engine-free pipeline; nothing here is library-specific code.",
+  "library": "carbon",
+  "exampleDir": "examples/carbon",
+  "captureOut": "extract/computed/out/carbon",
+  "dtcg": "examples/carbon/tokens/carbon.dtcg.json",
+  "mintedOut": "examples/carbon/tokens/carbon-minted.dtcg.json",
+  "mintedDoc": "examples/carbon/tokens/MINTED.md",
+  "__note:components": "CARBON round 1 — the ten components of the control case. Capture dirs are extract/computed/out/carbon/<config component name lowercased>.",
+  "components": [
+    "button",
+    "tag",
+    "checkbox",
+    "toggle",
+    "textinput",
+    "inlinenotification",
+    "accordion",
+    "tabs",
+    "modal",
+    "iconbutton"
+  ],
+  "__note:contractStem": "The emitted Figma script is named kebab(contract.name) — TextInput → text-input — while the capture dir is the flat lowercase name. The compile receipt maps back by stripping the dashes, so the promoted contract FILE keeps the flat stem and this map stays empty.",
+  "contractStem": {},
+  "contractVersion": "0.2.0",
+  "promoterPath": "examples/carbon/scripts/promote-floor.mjs",
+  "possessive": "Carbon's",
+  "mintedDocTitle": "Carbon minted tokens",
+  "__note:unjoinedFactReceipts": "Carbon is the library the class-stem join defect (task #25) was found on, and it is the only one that ships the unjoined-fact receipts today. Turning this on elsewhere ADDS receipt lines to that library's MINTED.md — a real change to a committed artifact, so it is opt-in per library rather than a silent default.",
+  "unjoinedFactReceipts": true,
+  "capture": {
+    "config": "extract/computed/configs/carbon.json",
+    "harness": "examples/carbon/.carbon-sandbox",
+    "env": {
+      "IBM_TELEMETRY_DISABLED": "true"
+    }
+  },
+  "seeds": "examples/carbon/contracts-seed",
+  "emit": {
+    "out": "examples/carbon/figma",
+    "icons": "examples/carbon/assets/icons"
+  },
+  "bundle": {
+    "out": "examples/carbon/figma/carbon.bundle.json",
+    "name": "Carbon",
+    "modes": [
+      "examples/carbon/tokens/modes/carbon.light.dtcg.json",
+      "examples/carbon/tokens/modes/carbon.dark.dtcg.json"
+    ]
+  }
+}

@@ -44,7 +44,11 @@
  *       that code, then land it as a REVIEWED LOCAL DIFF. Without --apply
  *       nothing but the proposal artifact (<out>/.proposals/<id>.proposal.json)
  *       is written — the contract file is never touched silently. With
- *       --apply the contract file is written too; git stays yours.
+ *       --apply the contract file is written too, AND the component code that
+ *       contract generates (the same resolveCodeConfig/generateCodeFiles
+ *       propose-pr uses — the target comes from ds-contracts.config.json and
+ *       is never guessed; with none recorded the refusal is printed and no
+ *       code is written). git stays yours.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -59,6 +63,12 @@ import {
   parseFlags,
   splitList,
 } from '../lib.js';
+// propose-pr's three code-plan functions are imported LAZILY, inside the
+// --apply branch of receive (see below) — not here. Statically, this module
+// would pull in scripts/generate-components.ts, whose direct-run shell ends
+// in a top-level await; three eval probes import this file through `tsx -e`
+// (CJS), where a top-level await is a hard transform error. The dev door
+// needs the generator only when it is actually about to generate.
 
 export const DEFAULT_BRIDGE_URL = 'https://ds-contracts-assist.southleft-llc.workers.dev';
 
@@ -728,6 +738,26 @@ async function receiveCommand(argv: string[]): Promise<number> {
   console.log(
     `\n✔ Wrote ${path.join(out, plan.contractWrite.fileName)} — review the diff and commit it yourself (ds-contracts never touches git).`,
   );
+
+  // The landed contract is only half of what the proposal is worth: a
+  // contract nobody can run is a document. `propose-pr` already carries both
+  // halves into one PR; this door now does the same on disk — SAME
+  // resolveCodeConfig (a framework is never guessed), SAME generateCodeFiles
+  // (the shipping generator), same named refusal printed when there is no
+  // recorded target. Reached only under --apply: without it, plan.contractWrite
+  // is null and this command's whole contract is that it writes nothing.
+  const { generateCodeFiles, loadDsConfig, resolveCodeConfig } = await import('./propose-pr.js');
+  const rc = resolveCodeConfig({ noCode: false }, loadDsConfig(process.cwd()), 'ds-contracts.config.json');
+  if (!rc.ok) console.log(`\nNo component code generated — ${rc.reason}`);
+  else {
+    const { files, notes } = await generateCodeFiles(plan.contractWrite.contents, rc.config, process.cwd());
+    for (const f of files) {
+      mkdirSync(path.dirname(f.destPath), { recursive: true });
+      writeFileSync(f.destPath, f.contents);
+    }
+    console.log(`✔ Generated ${files.length} file(s): ${files.map((f) => f.destPath).join(', ')}`);
+    for (const n of notes) console.log(`  ${n}`);
+  }
   return 0;
 }
 

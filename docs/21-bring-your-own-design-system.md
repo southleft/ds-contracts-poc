@@ -25,7 +25,9 @@ what it actually cost. Result: **one expression changed in
 `extract/computed/capture.ts`** — and that change was a real, universal bug
 (`sampleText: ""` was mounting `children: ''`, which React does not treat as "no
 children"), not a Carbon accommodation. Everything else Carbon needed was a
-JSON config, ten seed contracts, and five per-library scripts.
+JSON config, ten seed contracts, and five per-library scripts. *(One of those
+five — the promote script — has since been generalized into `ds-contracts
+promote` + a per-library manifest, so a new library today copies four; §2.6.)*
 
 *(This page is the **how**. For the **evidence** behind the generality claim —
 the metric that would falsify it, and the places where it is not true today —
@@ -37,7 +39,7 @@ So the honest framing:
 |---|---|
 | **Engine code you write** | none — if your library is React and ships either static CSS or runtime styling |
 | **JSON you write** | one capture config + one seed contract per component |
-| **Scripts you copy** | five, from `examples/carbon/scripts/` — token wrap, promote, receipt, genesis, and (optionally) a per-library gate |
+| **Scripts you copy** | four, from `examples/carbon/scripts/` — token wrap, receipt, genesis, and (optionally) a per-library gate. **Promote is no longer one of them**: it is `ds-contracts promote`, driven by the `ds-library.json` manifest (§2.6) |
 | **Time** | the recon and the config are the cost. Budget hours, not minutes; the capture itself is machine time |
 | **The part that is still craft** | `classAllow`, `varPrefix`, and axis-vs-state — §4. A wrong answer on any of the three fails *quietly* |
 
@@ -58,10 +60,109 @@ What it *does* parse your CSS for is **names** — which is the entire subject o
 
 ---
 
-## 1 · The recipe, at a glance
+## 1 · Start here: `ds-contracts onboard`
+
+The whole pipeline is one command, in **two phases with a human acknowledgement
+between them**.
+
+```bash
+# PHASE 1 — detect the adapter and styling, create or reuse a sandbox, seed
+# contracts from the static pass, DRAFT the capture config. Then STOP.
+ds-contracts onboard @acme/ui
+
+# …review the drafted config (§4 is the whole subject), then:
+
+# PHASE 2 — capture → promote → emit → bundle → publish, without stopping.
+ds-contracts onboard --continue --channel-key $DS_CONTRACTS_CHANNEL_KEY
+```
+
+The designer clicks **Check for updates** in the plugin. **No JSON touches a
+clipboard.**
+
+### Why it stops in the middle
+
+Because there is exactly one decision in this pipeline a machine cannot make,
+and getting it wrong does not produce an error — it produces a **confident
+wrong contract**. `classAllow`, `varPrefix` and the mount recipe are §4's whole
+subject, and phase 1 prints them with the value the config carries and one line
+on how each one fails:
+
+```
+⏸  STOPPED at the review gate — .ds-contracts/onboard/capture-config.json is an UNREVIEWED DRAFT.
+
+   There is no flag that skips this, and that is deliberate. The three fields
+   below cannot be inferred from source, and a wrong answer on any of them does
+   not error — it produces a CONFIDENT WRONG CONTRACT (docs/21 §4).
+
+   THE THREE THAT FAIL QUIETLY
+   · library.classAllow = (absent)
+       which CSS classes survive into a part SIGNATURE. Too loose on a hashed/atomic
+       system (StyleX, Tailwind) and every combo looks like a different element, so the
+       anatomy union explodes; too tight and two genuinely different parts collapse into
+       one. Absent = keep every class (the CSS-Modules behaviour).
+   · library.varPrefix = (absent)
+       the custom-property prefix the CSS-vars source reader follows to learn the NAME of
+       the token a channel binds. Absent = reader off: the pixels stay correct and the
+       token names degrade to anonymous literals — a silent loss of semantics, not an error.
+   · mount.wrapperOpen = ""
+       the mount recipe wrapped around EVERY stage — the theme provider / locale wrapper
+       the library needs to render at all. Wrong here and you capture an unthemed component
+       that still renders, which is the worst kind of wrong: it looks like a result.
+
+   1. Open …/capture-config.json, answer every "__review:*" field, delete each marker.
+   2. Delete the top-level "__unreviewed-draft" key. That deletion IS the acknowledgement.
+   3. ds-contracts onboard --continue
+```
+
+`--continue` re-checks that gate **before anything else**, including when you
+resume a later stage with `--from bundle`. There is no `--yes`.
+
+### The per-library manifest
+
+Everything `onboard` needs about a library lives in one file,
+`ds-library.json` — see [`examples/carbon/ds-library.json`](../examples/carbon/ds-library.json).
+Phase 1 writes one; a directory that already has one is **adopted** instead of
+re-detected, which is also what a second `onboard` run does:
+
+```bash
+ds-contracts onboard examples/carbon      # adopts the manifest, gates on review
+ds-contracts onboard --continue           # capture → … → publish
+```
+
+The manifest is also the input to the promote verb on its own:
+
+```bash
+ds-contracts promote --config examples/carbon/ds-library.json
+```
+
+### What it prints, and what it refuses
+
+One progress line per stage, then a summary naming what was produced *and what
+was refused* — state previews the referee rejected, components the capture
+**quarantined** (a quarantined component ships no contract, drops out of the
+bundle, and the exit status is non-zero because a quarantine is a defect, not a
+waiver), and whether the publish actually happened.
+
+Two things worth knowing before you run it:
+
+- **Capture is one sweep for the whole library** unless you narrow it with
+  `--components`. That is not only faster — the runner's read-boundary frontier
+  receipts are collected *across* the components of a run and written into every
+  component's `LEDGER.md` and `enriched.extension.json`, so a narrowed run and a
+  whole-library run produce **different bytes** for the same component. Narrowing
+  is fine for iteration; the artifacts you commit should come from a full sweep.
+- **`--from <stage>`** resumes over artifacts that already exist (`capture`,
+  `promote`, `emit`, `bundle`, `publish`) so a failed bundle does not cost
+  another browser run. It is not a way past the review gate.
+
+---
+
+## 1b · The recipe, at a glance — what `onboard` does for you
 
 Nine steps. Every one of them is a real command from a committed PROVENANCE
-file; §2 gives them verbatim.
+file; §2 gives them verbatim. **You do not have to run these by hand** —
+`onboard` runs them in order — but when something goes wrong, this is the
+sequence you are debugging.
 
 | # | Step | Artifact it produces |
 |---|---|---|
@@ -177,10 +278,26 @@ channel binds), `scorecard.json` (the fidelity gate), and
 ### 2.6 Promote
 
 ```bash
-npx tsx examples/carbon/scripts/promote-floor.mjs
+ds-contracts promote --config examples/carbon/ds-library.json
+# (examples/carbon/scripts/promote-floor.mjs is a shim over the same module)
 ```
 
-Copy `examples/carbon/scripts/promote-floor.mjs`. It fuses captured truth into
+Promotion **used to be** the one step with no CLI verb: six near-identical
+copies of a ~450-line script under `examples/*/scripts/`, which is why the
+class-stem join fix (task #25) landed in Carbon's copy and stayed latent in the
+other five. The pipeline now lives once in
+[`packages/cli/src/promote.ts`](../packages/cli/src/promote.ts), driven by the
+per-library `ds-library.json`. Carbon, MUI, Tailwind and Altitude go through
+it and reproduce their committed artifacts **byte-for-byte** (the
+`promote-generalization` eval case re-promotes all four and compares every
+file). Two libraries keep their own scripts, by name:
+
+| Library | Why it is not generalized |
+|---|---|
+| `polaris` | a different generation — contract version 0.3.2, no source-alias pass, bespoke per-component provenance prose, `ContractSchema.parse` enforcement, and un-namespaced capture out dirs |
+| `astryx` | its re-anchoring decisions ledger must be re-applied *after* the mint merge or promotion silently reverts acked aliases — and it refuses at HEAD on a stale ledger row (task #43) |
+
+It fuses captured truth into
 the seed contracts, runs the **source-alias pass** (a minted leaf whose covering
 combos all agree on one source token, and whose minted value equals that token's
 DTCG value, becomes a DTCG alias to it — value-verified twice, so aliasing can

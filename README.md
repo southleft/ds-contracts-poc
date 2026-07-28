@@ -80,6 +80,20 @@ The goal: your real Button, with its real padding, its real colors, and its real
 ```bash
 npm i -g @ds-contracts/cli
 
+# ONE command, TWO phases, with a human acknowledgement between them.
+ds-contracts onboard @acme/ui          # detect · sandbox · seed · draft · STOP
+# …review the draft (below), then:
+ds-contracts onboard --continue        # capture · promote · emit · bundle · publish
+```
+
+Phase 1 does everything a machine can decide: detects your adapter and styling
+method, creates or reuses a pinned sandbox, reads your components' source into
+seed contracts, and drafts the capture config. Then it stops and prints exactly
+what you have to decide.
+
+<details><summary>The individual verbs, if you want to run the steps yourself</summary>
+
+```bash
 # 1. Point it at your repo. --detect prefills adapter, root, tokens and styling
 #    hints from what it finds — marked "detected", never "confirmed".
 ds-contracts init --detect
@@ -93,6 +107,8 @@ ds-contracts init --detect
 ds-contracts extract --draft-capture-config
 ```
 
+</details>
+
 Now **review the draft.** This is the one irreducibly human step. The draft marks four things it cannot guess — `classAllow`, `varPrefix`, `mount`, `fixedProps` — and you answer them by reading your own library. If you skip it, the next command refuses:
 
 ```
@@ -102,7 +118,9 @@ REFUSED: extract/computed/configs/acme.json is an UNREVIEWED DRAFT capture confi
 then delete the marker to approve it.
 ```
 
-That refusal is the design. A wrong `classAllow` fails *silently* — you get a contract that looks fine and describes the wrong box — so the tool would rather stop.
+That refusal is the design. A wrong `classAllow` fails *silently* — you get a contract that looks fine and describes the wrong box — so the tool would rather stop. `onboard --continue` re-checks it before anything else runs, including when you resume a later stage; there is no `--yes`.
+
+<details><summary>The individual verbs, continued</summary>
 
 ```bash
 # 3. The capture. This launches a real Chromium, mounts every prop combination
@@ -116,7 +134,14 @@ ds-contracts extract --computed --config extract/computed/configs/acme.json \
 
 If there is no browser on the machine, this verb — and only this verb — degrades with a named message and **exit code 3**, telling you to `npm i playwright-core && npx playwright-core install chromium` (or point `PLAYWRIGHT_CHROMIUM_PATH` at a Chromium you already have). Every other verb keeps working without a browser.
 
-**4. Promote.** Fusing captured truth into the seed contracts is a per-library script you copy and retarget — `examples/carbon/scripts/promote-floor.mjs` is the worked example. It is *not* a CLI verb yet, and saying otherwise would be a lie; [docs/21 §2.6](docs/21-bring-your-own-design-system.md) walks it.
+```bash
+# 4. Promote: fuse captured truth into the seed contracts, alias minted leaves
+#    back to your library's own token names, probe state previews against the
+#    real referee.
+ds-contracts promote --config examples/acme/ds-library.json
+```
+
+Promotion *used to be* a per-library script you copied and retargeted — six near-identical copies under `examples/*/scripts/`, which is why a fix in one stayed latent in the other five. It is one module now, driven by the per-library `ds-library.json` manifest; Carbon, MUI, Tailwind and Altitude reproduce their committed artifacts byte-for-byte through it. Polaris and Astryx keep their own scripts, by name — see [docs/21 §2.6](docs/21-bring-your-own-design-system.md).
 
 ```bash
 # 5. One file, containing everything: contracts + your token set + icons.
@@ -132,6 +157,8 @@ ds-contracts figma claim-channel
 # 7. Publish. CI runs this whenever; nobody has to be online.
 ds-contracts figma publish acme.bundle.json
 ```
+
+</details>
 
 **8. The designer opens the plugin's *Changes* tab and clicks "Check for updates".** They see what changed in plain words, tick the rows they want, and click **Apply selected**. Applying is in-place: same node ids, same component keys, so instances placed around the file keep their component-property overrides. New components land as new sets. A row whose set has been edited on canvas warns that applying would overwrite that edit, and starts unchecked.
 
@@ -290,7 +317,7 @@ Every capability claim in this repository is backed by an executable check or a 
 | **Engine as library** | the whole pipeline is browser-safe pure functions; CLI output golden-guarded through the refactor | `npm run core:browser-check` · [docs/15](docs/15-engine-as-library.md) |
 | **Advanced composition, live** | the multi-root composite Modal — a composed Card instance, a repeated Badge collection, real Button instances with applied labels, an inset backdrop — builds correctly on a **real Figma canvas** from one pasted contract (2026-07-22), deterministically, no AI in the conversion; both journey directions gated headless, and both real-Figma quirks found en route (auto-layout hug↔fill collapse, instance property-exposure lag) are modeled in the mock so they fail in Node forever | `npm run plugin:check` (composite pins) · [`docs/handoff/08`](docs/handoff/08-status-what-doesnt-work.md) · `npx tsx scripts/deterministic-roundtrip.mjs` |
 
-All of it is gated by **173 executable checks** (`npm run eval`) that run the real pipeline in a scratch copy — not mocks.
+All of it is gated by **176 executable checks** (`npm run eval`) that run the real pipeline in a scratch copy — not mocks.
 
 ## What's actually here
 
@@ -304,7 +331,7 @@ All of it is gated by **173 executable checks** (`npm run eval`) that run the re
 | `parity/` | The three-way differ: classifies every difference between contract, code, and canvas as *ahead*, *behind*, or *mismatched* — with a proposed remedy. Plus the adherence judge and the brownfield `diagnose` referee. | ✅ |
 | `extract/` | Brownfield extraction: code→contract (React/TSX, CSS Modules, Custom Elements Manifest) and design→contract (plugin dump + Figma REST) adapters, plus `computed/` — the real-browser capture floor. The static adapters always propose the API surface, and anatomy + token bindings when the styling method exposes them ([which is which](#what-the-static-path-does-and-does-not-give-you)); the computed floor is what produces browser-observed styling truth. Also the four pilot write-ups and the round-trip receipts. | ✅ |
 | `catalog/` + `context/` | The compiled generation constraint (every API + every token + the governance rules) that an AI agent — or a human — can be held to, sharded to fit an agent's context window at any component count, plus the org rules and memory that feed it. | catalog ❌ · rules ✅ |
-| `evals/` | 173 deterministic checks on the machinery itself: byte-identical regeneration against golden manifests, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion, extraction round-trips. | ✅ |
+| `evals/` | 176 deterministic checks on the machinery itself: byte-identical regeneration against golden manifests, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion, extraction round-trips. | ✅ |
 | `conformance/` | The **CSS/DOM conformance fixture** — a synthetic library of labelled CSS constructs, mounted through the unmodified capture pipeline, whose expected disposition is declared IN ADVANCE. Every other instrument here derives its denominator from the same filter that decides carriage, so a channel the filter never opened scores 100%; this one does not, which is what makes the frontier *predictable* instead of discovered one library at a time. Generated matrix: [`conformance/EXPECTATIONS.md`](conformance/EXPECTATIONS.md). | ✅ |
 | `playground/` | The public browser playground ([live](https://ds-contracts-playground.pages.dev)) — a Vite app importing `core/` unmodified. | ✅ |
 | `dashboard/` | The **Contract Hub** — a local app visualizing the whole system: live component previews, per-prop binding maps across all three surfaces, token provenance, one-click parity runs, contract editing with regeneration, and the full docs. | ✅ |
@@ -330,7 +357,7 @@ npm run parity   # ① clean — code, canvas, and tokens all match the contract
 # ② edit any contract in contracts/ — add an enum value, change a token binding
 npm run build && npm run parity
 #    ③ the differ reports exactly what is now behind, and how to fix it
-npm run eval     # ④ 173 checks that detection, refusal, and convergence still hold
+npm run eval     # ④ 176 checks that detection, refusal, and convergence still hold
 npm run docs:check # ⑤ every number these docs quote, re-derived from the repo (seconds, no browser)
 ```
 
@@ -399,7 +426,7 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 ## Status
 
-The model is validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 173/173 evals, the schema and CLI published to the public npm registry (`@ds-contracts/schema`, `@ds-contracts/cli` — stranger-verified from a clean directory), a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same engine — with a companion Figma plugin bridging live selections into it. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
+The model is validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 176/176 evals, the schema and CLI published to the public npm registry (`@ds-contracts/schema`, `@ds-contracts/cli` — stranger-verified from a clean directory), a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same engine — with a companion Figma plugin bridging live selections into it. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 
 - **What has been proven, dated, with receipts:** [MILESTONES.md](MILESTONES.md)
 - **Release history:** [CHANGELOG.md](CHANGELOG.md)

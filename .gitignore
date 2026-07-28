@@ -47,3 +47,8 @@ figma-sync/plugin-dist/
 # CSS/DOM conformance fixture: the capture harness (symlinks into the repo's own
 # node_modules — recreated by conformance/build.ts, never installed from a network)
 conformance/.sandbox/
+
+# `ds-contracts onboard` workspace — the two-phase onboarding's scratch state
+# (sandbox install, drafted capture config, seed contracts). Everything a run
+# should COMMIT lands under the library's own dirs, named by its ds-library.json.
+.ds-contracts/

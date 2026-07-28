@@ -1,0 +1,37 @@
+{
+  "__note": "LIBRARY MANIFEST — the per-library half of the whole code→canvas pipeline (docs/21). `ds-contracts promote --config <this>` runs the promote stage; `ds-contracts onboard --adopt examples/altitude` runs capture → promote → emit → bundle → publish from it. packages/cli/src/promote.ts is the shared engine-free pipeline; nothing here is library-specific code.",
+  "library": "altitude",
+  "exampleDir": "examples/altitude",
+  "captureOut": "extract/computed/out/altitude",
+  "dtcg": "examples/altitude/tokens/altitude.dtcg.json",
+  "mintedOut": "examples/altitude/tokens/altitude-minted.dtcg.json",
+  "mintedDoc": "examples/altitude/tokens/MINTED.md",
+  "components": [
+    "button",
+    "badge",
+    "chip",
+    "link",
+    "avatar",
+    "heading",
+    "divider",
+    "iconclose"
+  ],
+  "contractStem": {},
+  "contractVersion": "0.2.0",
+  "promoterPath": "examples/altitude/scripts/promote-floor.mjs",
+  "possessive": "Altitude's",
+  "mintedDocTitle": "Altitude minted tokens",
+  "capture": {
+    "config": "extract/computed/configs/altitude.json",
+    "harness": "examples/altitude/.altitude-sandbox"
+  },
+  "seeds": "examples/altitude/contracts-seed",
+  "emit": {
+    "out": "examples/altitude/figma",
+    "icons": "examples/altitude/assets/icons"
+  },
+  "bundle": {
+    "out": "examples/altitude/figma/altitude.bundle.json",
+    "name": "Altitude"
+  }
+}

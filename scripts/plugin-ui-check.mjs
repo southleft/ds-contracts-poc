@@ -277,6 +277,53 @@ ok(propHtml.includes('>Copy JSON<') && propHtml.includes('>Download JSON<'), 'th
 ok(!(await shown('#prop-pr-section')) === false, 'the PR door opens for a base-less proposal too');
 ok((await page.locator('#pr-path').inputValue()).indexOf('contracts/') === 0, 'the PR path pre-fills from the PROPOSED id when there is no base');
 
+// --- 5b. CLOSING THE LOOP (task #40): what code does this proposal make? --
+// A hand-built set has no ds_contracts/contractId marker, so the marked
+// inventory does not list it — the proposal is an INVERSION and the panel
+// must say so before the designer sends anything.
+ok(await shown('#prop-code-section'), 'a proposal opens the "What this becomes in code" section');
+const codeHtml = await page.locator('#prop-code-result').innerHTML();
+ok(codeHtml.includes('Target: React + CSS Modules (react)'), 'the code plan names the target in words and by flag value');
+ok(codeHtml.includes('HandBuilt/HandBuilt.tsx') && codeHtml.includes('HandBuilt/HandBuilt.module.css') && codeHtml.includes('HandBuilt/index.ts'),
+  'the code plan lists the exact files the CLI would write (got: ' + codeHtml + ')');
+ok(codeHtml.includes('html, react-inline'), 'the other targets a repo can choose are named');
+ok(codeHtml.includes('starting point, not a reproduction'),
+  'HAND-BUILT ASYMMETRY: an unmarked set is headlined as an inversion, never as a round trip');
+ok(codeHtml.includes('STARTING POINT, NOT A REPRODUCTION') && codeHtml.includes('INVERSION'),
+  '…and the full sentence refuses to call the generated component a reproduction');
+ok(!codeHtml.includes('byte for byte'), 'a hand-built proposal never claims byte-for-byte reproduction');
+ok(codeHtml.includes('propose-pr') && codeHtml.includes('ONE pull request'),
+  'the panel names the command that carries the contract AND the code in one PR');
+ok(!/style="(?!background)/.test(codeHtml), 'no inline style in the code-plan markup');
+const codeHex = (codeHtml.match(/#[0-9a-fA-F]{3,8}/g) || []).filter((h) => !codeHtml.includes('background:' + h));
+ok(codeHex.length === 0, 'no literal hex in the code-plan markup — found: ' + JSON.stringify(codeHex));
+ok(JSON.parse(await page.evaluate(() => {
+  const a = document.querySelector('#prop-result .download');
+  return JSON.stringify({ name: a && a.download });
+})).name.endsWith('.proposal.json'),
+  'the download is named .proposal.json — it is a CONTRACT-PROPOSAL envelope, and naming an envelope .contract.json was a trap');
+
+// The OTHER half of the asymmetry: a set this tool generated carries a
+// marker, so the SAME panel must promise the round trip.
+await page.evaluate((dump) => {
+  window.__sim.markedSets = [{ contractId: 'ds.badge', name: 'HandBuilt', nodeId: '5:6', key: 'key-5:6', specHash: 'h', props: [], version: '1.1.0', drift: 'in-sync', contractBacked: true, page: 'Page 1' }];
+  window.__sim.allSets = null;
+  window.__sim.dump = dump;
+  window.__simSave();
+}, HAND_DUMP);
+await page.reload();
+await page.evaluate((dump) => { window.__sim.dump = dump; }, HAND_DUMP);
+await page.waitForTimeout(400);
+await page.click('#tab-send');
+await page.fill('#prop-set', 'HandBuilt');
+await page.fill('#prop-base', '');
+await page.click('#prop-run');
+await page.waitForTimeout(800);
+const genHtml = await page.locator('#prop-code-result').innerHTML();
+ok(genHtml.includes('byte for byte') && genHtml.includes('true round trip'),
+  'TOOL-GENERATED ASYMMETRY: a marked set IS promised as a round trip (got: ' + genHtml + ')');
+ok(!genHtml.includes('STARTING POINT'), '…and the hand-built warning is gone for a marked set');
+
 // the old refusal string is gone from the product
 const uiText = await page.evaluate(() => document.documentElement.innerHTML);
 ok(uiText.indexOf('Paste the contract this set was generated from into the base box') < 0,

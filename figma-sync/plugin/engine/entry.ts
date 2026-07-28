@@ -34,17 +34,22 @@
  *     level — never a guessed diff.
  */
 import {
+  CODE_TARGET_LABELS,
   ContractSchema,
   componentRefsOf,
   createFigmaEngine,
   dumpCapturesHidden,
   emitTokenSetScript,
   parseTokenSet,
+  plannedCodePaths,
   proposeBatchFromDump,
+  provenanceHeadline,
+  provenanceSentence,
   slotsOf,
   sortByDependencies,
   tokenCorpusFromJson,
   tokenSetTokenTrees,
+  type CanvasProvenance,
   type Contract,
   type TokenCorpus,
   type TokenSetPayload,
@@ -1364,6 +1369,50 @@ return { inventory: rows };
     /** Canvas values that bound to no token, with the corpus's nearest
      *  candidates. Reported, never applied. */
     unbound: Array<{ nodePath: string; property: string; value: string | number; suggestions: string[] }>;
+    /** THE ASYMMETRY. 'tool-generated' when the set carries a
+     *  ds_contracts/contractId marker (this tool drew it, so code comes back
+     *  byte for byte); 'hand-built' when it does not (the contract is an
+     *  INVERSION and the code is a starting point). 'unrecorded' only when
+     *  the caller could not say. Stamped into the export envelope so
+     *  `propose-pr` prints the same sentence on the PR. */
+    provenance: CanvasProvenance;
+    /** What this proposal turns into on the code side — shown in Send
+     *  BEFORE anything leaves the canvas. */
+    codePlan: CodePlanView;
+  }
+
+  /** The Send tab's "what code does this produce" answer. Names come from
+   *  core/canvas-code-plan.ts, the SAME module propose-pr writes files
+   *  from — the panel can never promise a file the CLI does not write. */
+  interface CodePlanView {
+    target: string;
+    targetLabel: string;
+    /** Output-root-relative file names the default target would write. */
+    paths: string[];
+    /** Every other registered emitter a repo can choose instead. */
+    altTargets: string[];
+    headline: string;
+    sentence: string;
+  }
+
+  /** The plugin cannot see a repo's ds-contracts.config.json, so it shows
+   *  the DEFAULT target and names the alternatives rather than guessing
+   *  which one a given repo picked. */
+  function codePlanFor(contractName: string, provenance: CanvasProvenance): CodePlanView {
+    const target = 'react';
+    return {
+      target,
+      targetLabel: CODE_TARGET_LABELS[target] ?? target,
+      paths: plannedCodePaths(contractName, target),
+      // Names only, from the shared label table — importing the emitter
+      // registry here would drag three code generators (+76 KB minified)
+      // into the plugin zip to print two words.
+      altTargets: Object.keys(CODE_TARGET_LABELS).filter(
+        (n) => n !== target && n !== 'figma-script',
+      ),
+      headline: provenanceHeadline(provenance),
+      sentence: provenanceSentence(provenance),
+    };
   }
 
   /** The corpus nearest-token suggestions resolve against. A bundle-carried
@@ -1394,7 +1443,13 @@ return { inventory: rows };
     /** null/undefined = BASE-LESS: propose from the canvas anyway. A value
      *  that is present but does not parse is still a named refusal. */
     baseRaw: unknown,
-    opts: { tokenSet?: TokenSetPayload | null } = {},
+    opts: {
+      tokenSet?: TokenSetPayload | null;
+      /** From the file's marker inventory: did THIS tool draw the set?
+       *  Omitted/null = the caller genuinely does not know, which is
+       *  'unrecorded' — never quietly one of the two real answers. */
+      toolGenerated?: boolean | null;
+    } = {},
   ): ProposeDiffResult | { ok: false; issue: PlainIssue } {
     const baseless = baseRaw === null || baseRaw === undefined;
     const base = baseless ? null : ContractSchema.safeParse(baseRaw);
@@ -1443,6 +1498,16 @@ return { inventory: rows };
     const summaryLines = baseData
       ? boundedContractDiff(baseData, proposal.contract)
       : baselessProposalLines(proposal.contract, proposal.unbound, tokenSource);
+    const canvasProvenance: CanvasProvenance =
+      opts.toolGenerated === true
+        ? 'tool-generated'
+        : opts.toolGenerated === false
+          ? 'hand-built'
+          : 'unrecorded';
+    const contractName = String(
+      (proposal.contract as { name?: unknown }).name ?? proposal.setName,
+    );
+    const codePlan = codePlanFor(contractName, canvasProvenance);
     const exportJson = JSON.stringify(
       {
         type: 'CONTRACT-PROPOSAL',
@@ -1452,6 +1517,15 @@ return { inventory: rows };
         summary: summaryLines,
         proposedContract: proposal.contract,
         proposalNotes: proposal.notes,
+        // THE ASYMMETRY, carried to the code side. `propose-pr` reads this
+        // and prints the matching sentence in the PR body; without it the
+        // PR would have to say "not recorded".
+        provenance: {
+          toolGenerated:
+            canvasProvenance === 'unrecorded' ? null : canvasProvenance === 'tool-generated',
+          kind: canvasProvenance,
+          note: provenanceSentence(canvasProvenance),
+        },
       },
       null,
       2,
@@ -1466,6 +1540,8 @@ return { inventory: rows };
       baseless,
       tokenSource,
       unbound: proposal.unbound,
+      provenance: canvasProvenance,
+      codePlan,
     };
   }
 
@@ -1714,6 +1790,9 @@ return { inventory: rows };
       return specHashOf(v.contract, scopeFor([v.contract]));
     },
     proposeDiff,
+    // Canvas → code, named before it happens: the files a proposal turns
+    // into and the provenance sentence that says how far to trust them.
+    codePlanFor,
     prPlan,
     prDryRunLines,
   };

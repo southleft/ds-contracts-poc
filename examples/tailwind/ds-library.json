@@ -1,0 +1,34 @@
+{
+  "__note": "LIBRARY MANIFEST — the per-library half of the whole code→canvas pipeline (docs/21). `ds-contracts promote --config <this>` runs the promote stage; `ds-contracts onboard --adopt examples/tailwind` runs capture → promote → emit → bundle → publish from it. packages/cli/src/promote.ts is the shared engine-free pipeline; nothing here is library-specific code.",
+  "library": "tailwind",
+  "exampleDir": "examples/tailwind",
+  "captureOut": "extract/computed/out/tailwind",
+  "dtcg": "examples/tailwind/tokens/tailwind.dtcg.json",
+  "mintedOut": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
+  "mintedDoc": "examples/tailwind/tokens/MINTED.md",
+  "components": [
+    "button",
+    "badge",
+    "card",
+    "alert",
+    "toggleswitch"
+  ],
+  "contractStem": {},
+  "contractVersion": "0.2.0",
+  "promoterPath": "examples/tailwind/scripts/promote-floor.mjs",
+  "possessive": "the library's",
+  "__note:mintedDocTitle": "SIC — the committed examples/tailwind/tokens/MINTED.md is titled 'MUI minted tokens'. The Tailwind promote script was copied from MUI's and the heading was never retitled. Preserved verbatim so the generalization is provably byte-identical; retitling it is a one-word edit to this field, and it should be made deliberately, not as a side effect of refactoring.",
+  "mintedDocTitle": "MUI minted tokens",
+  "capture": {
+    "config": "extract/computed/configs/tailwind.json",
+    "harness": "examples/tailwind/.tw-sandbox"
+  },
+  "seeds": "examples/tailwind/contracts-seed",
+  "emit": {
+    "out": "examples/tailwind/figma"
+  },
+  "bundle": {
+    "out": "examples/tailwind/figma/tailwind.bundle.json",
+    "name": "Tailwind"
+  }
+}
