@@ -1,6 +1,6 @@
 {
-  "passed": 178,
-  "total": 178,
+  "passed": 180,
+  "total": 180,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -885,6 +885,16 @@
     {
       "id": "capture-scope-independence",
       "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "emitters-refuse-undefined-tokens",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "mount-sanity",
+      "claim": "C2-refusal",
       "pass": true
     },
     {

@@ -27,6 +27,7 @@ import { extractCem } from '../../../extract/adapters/cem.js';
 import { proposeContract } from '../../../extract/propose.js';
 import type { SkippedComponent } from '../../../core/extract-react-tsx.js';
 import { attrOf, classNameOf, emitWebComponent, propFromAttr, tagOf } from '../src/emit-wc.js';
+import { tokenInventoryFromJson } from '../../../core/tokens.js';
 
 const argv = process.argv.slice(2);
 const argValue = (flag: string, fallback: string): string => {
@@ -71,12 +72,24 @@ const check = (label: string, cond: boolean) => {
   console.log(`  ${cond ? '✔' : '✖'} ${label}`);
 };
 
+// task #47: the emitter refuses an unchecked token reference, so the harness
+// has to hand it the inventory the SUBJECTS actually draw from — this script
+// spans the repo's own contracts AND the Polaris pilot, so it spans both trees.
+const tokenInventory = tokenInventoryFromJson([
+  readJson(path.join(ROOT, 'tokens', 'primitives.tokens.json')),
+  readJson(path.join(ROOT, 'tokens', 'semantic.tokens.json')),
+  readJson(path.join(ROOT, 'tokens', 'modes', 'semantic.light.tokens.json')),
+  readJson(path.join(ROOT, 'tokens', 'modes', 'semantic.dark.tokens.json')),
+  readJson(path.join(EXAMPLES, 'polaris', 'tokens', 'polaris-light.dtcg.json')),
+  readJson(path.join(EXAMPLES, 'polaris', 'tokens', 'polaris-minted.dtcg.json')),
+]);
+
 const mergedModules: unknown[] = [];
 for (const id of SUBJECTS) {
   const contract = contracts.get(id);
   if (!contract) throw new Error(`Subject contract not loaded: ${id}`);
   const tag = tagOf(contract);
-  const r = emitWebComponent(contract, { icons, contracts });
+  const r = emitWebComponent(contract, { icons, contracts, tokens: tokenInventory });
   writeFileSync(path.join(OUT, `${tag}.ts`), r.element);
   writeFileSync(path.join(OUT, `${tag}.css.ts`), r.stylesheet);
   writeFileSync(path.join(OUT, `${tag}.demo.html`), r.demo);

@@ -44,6 +44,7 @@ import { figmaCommand } from './figma.js';
 import { promote, parsePromoteConfig, type PromoteConfig } from '../promote.js';
 import { DRAFT_MARKER_KEY, draftRefusalMessage, runDraftCaptureConfig } from '../../../../extract/draft-capture-config.js';
 import { runExtractCommand } from '../../../../extract/run.js';
+import { disclosureAdvisory, type DisclosureAdvisory } from '../../../../extract/computed/mount-sanity.js';
 
 export const MANIFEST_FILENAME = 'ds-library.json';
 export const STATE_FILENAME = 'onboard.state.json';
@@ -246,7 +247,7 @@ function phaseOne(argv: string[]): number {
       captureComponents: selected,
       adopted: true,
     });
-    printReviewGate(status, path.resolve(root, manifest.capture.config), workspace, selected, manifest);
+    printReviewGate(status, path.resolve(root, manifest.capture.config), workspace, selected, manifest, captureCfg, root);
     return 0;
   }
 
@@ -360,13 +361,46 @@ function freshOnboard(target: string, workspace: string, only: string[], force: 
     captureComponents: selected,
     adopted: false,
   });
-  printReviewGate(status, draftPath, workspace, selected, manifest);
+  printReviewGate(status, draftPath, workspace, selected, manifest, captureCfg, root);
   return 0;
 }
 
 function writeState(workspace: string, state: OnboardState): void {
   mkdirSync(workspace, { recursive: true });
   writeFileSync(path.join(workspace, STATE_FILENAME), JSON.stringify(state, null, 2) + '\n');
+}
+
+/** Reads each queued component's seed contract for a disclosure/anchor prop the
+ *  config leaves undriven. Absent seeds are skipped in silence rather than
+ *  guessed at — the advisory's only job is to be right when it speaks. */
+export function mountAdvisories(
+  captureCfg: Record<string, unknown> | undefined,
+  root: string | undefined,
+  components: string[],
+): DisclosureAdvisory[] {
+  if (!captureCfg || !root) return [];
+  const queued = new Set(components.map((c) => c.toLowerCase()));
+  const entries = (captureCfg.components as Array<Record<string, unknown>> | undefined) ?? [];
+  const out: DisclosureAdvisory[] = [];
+  for (const e of entries) {
+    const name = String(e.name ?? '');
+    if (!queued.has(name.toLowerCase())) continue;
+    const seed = typeof e.contract === 'string' ? path.resolve(root, e.contract) : null;
+    if (!seed || !existsSync(seed)) continue;
+    let propNames: string[] = [];
+    try {
+      propNames = ((JSON.parse(readFileSync(seed, 'utf8')) as { props?: Array<{ name: string }> }).props ?? []).map((p) => p.name);
+    } catch {
+      continue;
+    }
+    const a = disclosureAdvisory(name, propNames, {
+      openDriver: e.openDriver,
+      portalCapture: e.portalCapture,
+      fixedProps: e.fixedProps as Record<string, unknown> | undefined,
+    });
+    if (a) out.push(a);
+  }
+  return out;
 }
 
 /** The whole point of phase 1: say exactly what a human must decide, why each
@@ -377,6 +411,8 @@ function printReviewGate(
   workspace: string,
   components: string[],
   manifest: LibraryManifest,
+  captureCfg?: Record<string, unknown>,
+  root?: string,
 ): void {
   const wsFlag = path.resolve(DEFAULT_WORKSPACE) === path.resolve(workspace) ? '' : ` --workspace ${displayPath(workspace)}`;
   const cfgRel = displayPath(captureConfigPath);
@@ -401,6 +437,20 @@ function printReviewGate(
     console.log('');
     console.log(`   ${status.open.length} FIELD(S) STILL MARKED "__review:*" — fix the value, then delete the marker`);
     for (const o of status.open) console.log(`   · ${o.field}\n       ${o.guidance}`);
+  }
+  // MOUNT ADVISORY (task #48). A component whose own prop surface says it has
+  // a closed state, with nothing in the config driving it open, is the one
+  // class of capture that goes WRONG WITHOUT ERRORING: the harness renders the
+  // activator, the sweep measures the activator, and a contract ships
+  // describing a button. The review gate is where a person is already looking,
+  // so this is where it belongs. It is an advisory, not a refusal — a
+  // component can legitimately be captured closed (MUI's Accordion is) and the
+  // run-level mount-sanity check is the hard stop.
+  const advisories = mountAdvisories(captureCfg, root, components);
+  if (advisories.length > 0) {
+    console.log('');
+    console.log(`   ⚠  ${advisories.length} COMPONENT(S) MAY CAPTURE THEIR TRIGGER INSTEAD OF THEMSELVES`);
+    for (const a of advisories) console.log(`   · ${a.component}\n       ${a.message}`);
   }
   console.log('');
   console.log(`   Components queued for capture (${components.length}): ${components.join(', ') || '(none)'}`);

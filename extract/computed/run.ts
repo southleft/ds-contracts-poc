@@ -77,6 +77,7 @@ import { gateInventory, runGate } from './gate.js';
 import { promoteAnatomy } from './anatomy.js';
 import { labeledPair } from './label-png.js';
 import { applyDecisions, type AckedDecision } from './decisions.js';
+import { mountSanity, type MountRow } from './mount-sanity.js';
 import { kebab } from '../types.js';
 import { calcVarSkip, DECOR_PSEUDOS, flatten, normalizeValue, READ_PSEUDOS, REFUSED_PSEUDOS, shorthandVarSkip, type Capture, type CapturedNode, type FlatEl, type StyleMap, oklchToRgba,
 } from './lib.js';
@@ -284,6 +285,14 @@ async function main() {
   };
   const candidatesFor = (observed: string): string[] =>
     dtcgLeaves.filter((l) => canonicalDtcg(l.value) === observed || l.value === observed).map((l) => l.path).sort().slice(0, 6);
+
+  // MOUNT SANITY (extract/computed/mount-sanity.ts) — one row per component
+  // that produced a contract, compared to each other AFTER the loop. It is
+  // run-level on purpose: the check reads across components, and writing its
+  // verdict into a component's own directory would make that component's
+  // artifacts a function of which siblings shared the sweep — exactly the
+  // property `capture-scope-independence` proves they do not have.
+  const mountRows: MountRow[] = [];
 
   const runOne = async (comp: ComponentConfig, space: PropSpace): Promise<void> => {
     console.log(`\n== ${comp.name}`);
@@ -1291,6 +1300,10 @@ async function main() {
     console.log(`  ✔ bound ${boundConfirmed}/${boundRows.length} · minted ${numbers.minted.leaves} leaves (unfolded ${prep.unfoldedLeafCount}) · folds ${folds.length}`);
     console.log(`  ✔ replay computed equality ${fmt(reread.pct)} · pixel AA perfect ${numbers.pixel.aa.perfect}/${pxComparable.length} measured pairs (${numbers.pixel.unscored.sizeMismatch} size-mismatched, ${numbers.pixel.unscored.noOriginal} no-original — NOT scored)`);
     console.log(`  ✔ gate computed ${fmt(scorecard.computed.pctEqual)} · gate pixel AA perfect ${scorecard.pixel.perfectAA}/${scorecard.pixel.pairs} (${scorecard.pixel.measured} measured)`);
+
+    // Recorded only on the success path: a quarantined component shipped no
+    // contract, so there is nothing to confuse with another component's.
+    mountRows.push({ name: comp.name, sigChain: aligned.baseFlat.map((e) => e.sig).join(' → '), anatomy: gated.anatomy });
   };
 
   // ═══ CONFORMANCE FRONTIER (R3) — PER-COMPONENT QUARANTINE ═══
@@ -1371,6 +1384,24 @@ async function main() {
 
   rmSync(scratchShots, { recursive: true, force: true });
   await browser.close();
+
+  // ═══ MOUNT SANITY — did every component mount ITSELF? ═══
+  // Two different components cannot render the same DOM with the same styles.
+  // When they do, one of them mounted the other — the classic shape being a
+  // trigger-required component (Popover, Dropdown, Menu) captured with no open
+  // state, which renders its ACTIVATOR and reports success. See
+  // extract/computed/mount-sanity.ts for the false-positive measurement that
+  // chose this fingerprint over three weaker ones.
+  const mountFindings = mountSanity(mountRows);
+  if (mountFindings.length > 0) {
+    console.log(`\n✖ MOUNT SANITY — ${mountFindings.length} collision(s) across ${mountRows.length} captured component(s):`);
+    for (const f of mountFindings) console.log(`  ✖ ${f.name}: ${f.message}`);
+    console.log('  exit status is NON-ZERO: a contract that describes a different component is worse than no contract');
+    process.exitCode = 1;
+  } else if (mountRows.length > 1) {
+    console.log(`\n  ✔ mount sanity: ${mountRows.length} components, ${mountRows.length} distinct captures — none mounted another`);
+  }
+
   console.log(`\ndone in ${Math.round((Date.now() - t0) / 1000)}s`);
   if (quarantined.length > 0) {
     console.log(

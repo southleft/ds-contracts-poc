@@ -69,6 +69,7 @@ import {
 import {
   boolProps,
   enumProps,
+  generateCss,
   isArrayType,
   isEnum,
   numberProps,
@@ -106,6 +107,23 @@ export interface WcEmitCtx {
   icons: Map<string, string>;
   /** Every known contract by id — composition refs resolve through it. */
   contracts: Map<string, Contract>;
+  /**
+   * Token inventory (core/tokens.ts `tokenInventoryFromJson`) — every DTCG
+   * leaf path the emitted CSS is allowed to reference.
+   *
+   * WHY IT EXISTS (task #47). Three of the four registered targets refused an
+   * undefined token; this one had no inventory to refuse against, so a
+   * contract referencing `{p.color-that-does-not-exist}` compiled cleanly and
+   * shipped `var(--p-color-that-does-not-exist)` — a dangling custom property
+   * that renders as *nothing* at runtime, silently, on one target only. "The
+   * tool refuses rather than guesses" has to be true on ALL targets or it is
+   * not a guarantee.
+   *
+   * OPTIONAL, and the absence is itself named: a caller with no inventory gets
+   * a refusal that says so rather than a pass. Nothing may reach the emitted
+   * CSS unchecked.
+   */
+  tokens?: Set<string>;
 }
 
 export interface EmitWcResult {
@@ -1333,6 +1351,24 @@ function generateManifest(contract: Contract): string {
 export function emitWebComponent(contract: Contract, ctx: WcEmitCtx): EmitWcResult {
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);
+
+  // TOKEN INVENTORY (task #47) — the SAME referee the React target uses, not a
+  // parallel one. `generateCss` resolves every placeholder ref per enum value
+  // across ~20 call sites (root/part tokens, tokensByProp, states, the gap
+  // overlap rule); re-implementing that here would be a second opinion that
+  // drifts, and a target that disagrees with another target about whether a
+  // contract is valid is worse than one that never checked. Its CSS output is
+  // discarded — this emitter writes its own shadow-scoped stylesheet — and
+  // only the errors are kept.
+  if (ctx.tokens === undefined) {
+    errors.push(
+      `${contract.id}: no token inventory was supplied to the web-components emitter, so no token reference in this contract can be checked. ` +
+        `Pass WcEmitCtx.tokens (core/tokens.ts tokenInventoryFromJson). Emitting unchecked would ship dangling var(--…) references that render as nothing, silently.`,
+    );
+  } else {
+    generateCss(contract, ctx.tokens, errors);
+  }
+
   if (errors.length > 0) {
     throw new Error(
       `Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`,

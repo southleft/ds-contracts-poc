@@ -90,7 +90,7 @@ try {
       const htmlDoc = `<!doctype html><html><head><meta charset="utf-8"><style>${tokensCss}</style><style>${css}</style></head><body>${html}</body></html>`;
 
       // ---- surface B: the web-components emitter (compiled + inlined) ----
-      const wc = emitWebComponent(contract, { icons, contracts });
+      const wc = emitWebComponent(contract, { icons, contracts, tokens: tokenInventory });
       writeFileSync(path.join(work, `${tag}.ts`), wc.element);
       writeFileSync(path.join(work, `${tag}.css.ts`), wc.stylesheet);
       const bundled = await build({

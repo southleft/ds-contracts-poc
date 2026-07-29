@@ -109,6 +109,13 @@ on how each one fails:
        the library needs to render at all. Wrong here and you capture an unthemed component
        that still renders, which is the worst kind of wrong: it looks like a result.
 
+   ⚠  1 COMPONENT(S) MAY CAPTURE THEIR TRIGGER INSTEAD OF THEMSELVES
+   · Popover
+       Popover declares `active`, `activator` but the config drives no open state (no
+       openDriver, no portalCapture, and fixedProps sets none of them). If this component
+       renders its activator when closed, the capture will measure the ACTIVATOR and report
+       success. Check the review screenshot before continuing.
+
    1. Open …/capture-config.json, answer every "__review:*" field, delete each marker.
    2. Delete the top-level "__unreviewed-draft" key. That deletion IS the acknowledgement.
    3. ds-contracts onboard --continue
@@ -116,6 +123,38 @@ on how each one fails:
 
 `--continue` re-checks that gate **before anything else**, including when you
 resume a later stage with `--from bundle`. There is no `--yes`.
+
+### The fourth thing that fails quietly — and it is not a config field
+
+A component that needs a **trigger** or an **open state** — Popover, Dropdown,
+Menu, Tooltip — renders its *activator* when it is closed. Point the capture at
+one with nothing driving it open and the sweep measures the activator, finishes
+cleanly, and mints a contract describing a button. **Nothing errors.**
+
+Two things stand in the way, and it is worth knowing which is which:
+
+- **The advisory above** is a *warning*, printed before a browser starts,
+  whenever a queued component's own prop surface declares `open` / `active` /
+  `activator` and your config drives none of them. It can be wrong in both
+  directions — a component may legitimately be captured closed (MUI's Accordion
+  is), and a component whose disclosure prop is named something unconventional
+  will not be flagged.
+- **`mount-collision`** is a *hard stop* at the end of the run: two different
+  components cannot render the same DOM with the same styles, so if two do, the
+  run names both and exits non-zero. Nothing is published. Note the shape of
+  its blind spot — it only fires when the thing that got mounted instead is
+  **also a component in your config**.
+
+The fix is a `openDriver` (and usually `portalCapture`) on that component's
+config entry:
+
+```json
+{ "name": "Popover", "portalCapture": true, "openDriver": { "active": true } }
+```
+
+If `mount-collision` fires on two components that genuinely *are* the same
+component under two exported names, the right answer is to remove one from the
+config — not to relax the check.
 
 ### The per-library manifest
 

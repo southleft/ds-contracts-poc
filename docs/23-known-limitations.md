@@ -125,6 +125,35 @@ discovered by you.
 structure-creating props *hard*, N5 component-family fragmentation *hard*).
 None started.
 
+#### What now catches the Popover row — and what still does not
+
+Two checks were added because "nothing errors" is not something to ship:
+
+1. **Mount sanity — a hard stop, at run level.** Two different components
+   cannot render the same DOM with the same styles. When two do, one of them
+   mounted the other: the run prints `mount-collision`, names both components,
+   and exits non-zero. Nothing is published.
+   (`extract/computed/mount-sanity.ts`, eval `mount-sanity`.)
+
+2. **The trigger advisory — a warning, at the review gate.** A queued
+   component whose own prop surface declares `open` / `active` / `activator`
+   and whose config drives none of them is flagged before the browser starts,
+   where `onboard` already stops for a human.
+
+**The gap that remains, stated plainly.** The collision only fires when the
+thing mounted *instead* is **also a configured component**. Capture a Popover
+whose activator is a plain `<button>` that no config entry names, and neither
+check fires. The advisory is the net under that case, and an advisory is not a
+guarantee — **look at the review screenshot for anything with a closed state.**
+
+The obvious check — "does the captured root carry a class the component's own
+name predicts?" — was measured against the committed corpus and **rejected**: it
+refuses real components (Carbon's `Button` stems to `btn`, Tailwind's
+`classAllow` is `^$` so all five have no stems, seven of Altitude's eight are
+shadow hosts with no `:host` rules, and eight of Polaris's twelve carry only
+generic stems like `icon` / `label` / `box`). A check that refuses two-thirds of
+a shipped library to catch one absent component is a check people learn to skip.
+
 ---
 
 ## 2. Fidelity — what a captured component reproduces, and what it does not
@@ -640,8 +669,35 @@ around. Anyone who follows the README against the *published* package gets an
 unknown-command error. (`figma claim-channel`, `figma publish`, `figma receive`
 and the `--tokens` bundle path *are* in 0.2.0.)
 
-**Status** — the fix is a CLI release. It is the single most user-visible item on
-this list.
+**Status** — the version numbers in the tree are now ahead of the registry, on
+purpose, and the publish is what closes this:
+
+| package | published | in this tree | why the bump |
+|---|---|---|---|
+| `@ds-contracts/cli` | 0.2.0 | **0.3.0** | adds `onboard` and `promote` |
+| `@ds-contracts/schema` | 15.0.0 | **16.0.0** | spec v16 — `Part.hugsBelowMaxWidth`; the published 15.0.0 tarball does **not** contain the field while the repo's copy does, so two different documents were sharing one version string |
+| `@ds-contracts/emitter-web-components` | 0.2.0 | **0.3.0** | it now refuses an undefined token (§4.9), so it accepts strictly less than 0.2.0 did |
+
+Until that publish lands, **the CI recipes in `examples/ci/` stay pinned to
+0.2.0 on purpose** — a workflow pinned to a version that does not exist is the
+exact defect those files were just repaired for. Bump the pins in the same
+change as the publish, not before.
+
+### 4.9 One emitter target used to ship dangling token references
+
+Three of the four registered targets refused a token that was not in the
+inventory. The web-components target had **no inventory in its emit context at
+all**, so a contract referencing a token that does not exist compiled cleanly
+and emitted `var(--p-does-not-exist)` — a custom property that renders as
+nothing, at runtime, with no error, on one target only.
+
+**Status — fixed.** It validates through `generateCss`'s own checker rather
+than a second implementation, so the two targets cannot drift into disagreeing
+about whether a contract is valid. Omitting the inventory is itself a named
+refusal, so the check cannot be bypassed by leaving a field undefined. Pinned
+by the eval `emitters-refuse-undefined-tokens`, which poisons one root channel
+of a real contract and requires the refusal to name the offending token, with
+the unpoisoned contract emitting as a control.
 
 ---
 
@@ -707,7 +763,7 @@ Its own list of what it cannot yet test, quoted rather than paraphrased:
 54 rows across 6 libraries pin `pctEqual` within tolerance, `cellsCompared`
 exactly, `unresolvedTokenRefs` exactly, and hard-fail if a component stops
 fusing. It renders a real headless Chromium per component (~8–20s each, ~5–6
-minutes total), so it is an **on-demand script**, not one of the 178 evals. CI
+minutes total), so it is an **on-demand script**, not one of the 180 evals. CI
 can call it; `npm run eval` does not.
 
 It also skips any capture config with no committed scorecard — currently

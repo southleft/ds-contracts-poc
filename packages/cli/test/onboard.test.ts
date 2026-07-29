@@ -24,7 +24,7 @@ import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, 
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { DRAFT_MARKER_KEY, DRAFT_MARKER_MESSAGE } from '../../../extract/draft-capture-config.js';
-import { onboardCommand, reviewStatus, STATE_FILENAME, type LibraryManifest, type OnboardState } from '../src/commands/onboard.js';
+import { mountAdvisories, onboardCommand, reviewStatus, STATE_FILENAME, type LibraryManifest, type OnboardState } from '../src/commands/onboard.js';
 
 /** The repo root: walk up from this module until the committed Tailwind
  *  library manifest is in view. The eval suite runs this file from
@@ -252,4 +252,46 @@ test('phase 1 refuses a target that is neither a manifest dir nor resolvable', a
     () => onboardCommand([lib]) as Promise<number>,
     /names input\(s\) that do not exist here/,
   );
+});
+
+// ---------------------------------------------------------------------------
+// MOUNT ADVISORY (task #48) — the review gate must warn when a queued
+// component's own prop surface says it has a closed state and the config
+// drives nothing open. That is the one capture failure that does not error:
+// the harness renders the ACTIVATOR, the sweep measures the activator, and a
+// contract ships describing a button. The gate is where a person is already
+// looking, so this is where it has to appear.
+
+test('the review gate warns when a queued component can capture its trigger instead of itself', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'ds-onboard-adv-'));
+  const seed = (name: string, props: string[]): string => {
+    const rel = `seeds/${name.toLowerCase()}.contract.json`;
+    mkdirSync(path.join(root, 'seeds'), { recursive: true });
+    writeFileSync(path.join(root, rel), JSON.stringify({ name, props: props.map((p) => ({ name: p, type: { kind: 'boolean' } })) }));
+    return rel;
+  };
+  const cfg = {
+    components: [
+      { name: 'Popover', contract: seed('Popover', ['active', 'activator']) },
+      { name: 'Tooltip', contract: seed('Tooltip', ['open']), openDriver: { open: true } },
+      { name: 'Modal', contract: seed('Modal', ['open']), portalCapture: true },
+      { name: 'Drawer', contract: seed('Drawer', ['open']), fixedProps: { open: true } },
+      { name: 'Button', contract: seed('Button', ['disabled', 'variant']) },
+      { name: 'Dropdown', contract: seed('Dropdown', ['isOpen']) },
+    ],
+  };
+
+  const all = mountAdvisories(cfg, root, ['Popover', 'Tooltip', 'Modal', 'Drawer', 'Button', 'Dropdown']);
+  assert.deepEqual(all.map((a) => a.component), ['Popover', 'Dropdown'], 'only the two undriven disclosure components may warn');
+  assert.deepEqual(all[0].props, ['active', 'activator'], 'the warning names the exact props that triggered it');
+  assert.match(all[0].message, /capture will measure the ACTIVATOR and report success/);
+
+  // Queue-scoped: a component in the config but NOT queued for capture cannot
+  // produce a warning about a capture that is not going to happen.
+  assert.deepEqual(mountAdvisories(cfg, root, ['Button']).map((a) => a.component), []);
+
+  // A missing seed is skipped in silence rather than guessed at — the
+  // advisory's only job is to be right when it speaks.
+  const noSeed = { components: [{ name: 'Ghost', contract: 'seeds/absent.contract.json' }] };
+  assert.deepEqual(mountAdvisories(noSeed, root, ['Ghost']), []);
 });

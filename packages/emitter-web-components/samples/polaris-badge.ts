@@ -1,6 +1,6 @@
 /**
  * Badge — vanilla Custom Element <polaris-badge> emitted from contract
- * polaris.badge v0.3.0 by @ds-contracts/emitter-web-components. Do not edit.
+ * polaris.badge v0.3.2 by @ds-contracts/emitter-web-components. Do not edit.
  *
  * Token values arrive via CSS custom properties (custom properties inherit
  * through the shadow boundary) — include the token stylesheet on the page
@@ -39,10 +39,10 @@ export class BadgeElement extends HTMLElement {
     else this.setAttribute('tone', v);
   }
   /** Render a pip showing the progress of a given task (round 4: real Badge API axis). */
-  get progress(): 'incomplete' | 'partiallyComplete' | 'complete' | null {
-    return this.getAttribute('progress') as 'incomplete' | 'partiallyComplete' | 'complete' | null;
+  get progress(): 'none' | 'incomplete' | 'partiallyComplete' | 'complete' {
+    return (this.getAttribute('progress') as 'none' | 'incomplete' | 'partiallyComplete' | 'complete' | null) ?? 'none';
   }
-  set progress(v: 'incomplete' | 'partiallyComplete' | 'complete' | null) {
+  set progress(v: 'none' | 'incomplete' | 'partiallyComplete' | 'complete' | null) {
     if (v == null) this.removeAttribute('progress');
     else this.setAttribute('progress', v);
   }
@@ -69,7 +69,7 @@ export class BadgeElement extends HTMLElement {
       progress: this.progress,
       toneAndProgressLabelOverride: this.toneAndProgressLabelOverride,
     };
-    return `<span part="root"${p.tone == null ? '' : ` data-tone="${__esc(String(p.tone))}"`}${p.progress == null ? '' : ` data-progress="${__esc(String(p.progress))}"`}><span part="label-2">Info</span><span part="icon"><span part="icon-2"><span part="label-3">Incomplete</span><div part="icon-3">${(p.progress ?? '') === "incomplete" ? `<span part="icon-3-incomplete" aria-hidden="true">${ICONS["badge-icon-3-incomplete"] ?? ''}</span>` : ''}${(p.progress ?? '') === "partiallyComplete" ? `<span part="icon-3-partiallycomplete" aria-hidden="true">${ICONS["badge-icon-3-partiallycomplete"] ?? ''}</span>` : ''}${(p.progress ?? '') === "complete" ? `<span part="icon-3-complete" aria-hidden="true">${ICONS["badge-icon-3-complete"] ?? ''}</span>` : ''}</div></span></span><span part="label">Fulfilled</span></span>`;
+    return `<span part="root"${p.tone == null ? '' : ` data-tone="${__esc(String(p.tone))}"`} data-progress="${__esc(String(p.progress))}"><span part="label-2">Info</span><span part="icon"><span part="icon-2"><span part="label-3">Incomplete</span><div part="icon-3">${(p.progress ?? '') === "incomplete" ? `<span part="icon-3-incomplete" aria-hidden="true">${ICONS["badge-icon-3-incomplete"] ?? ''}</span>` : ''}${(p.progress ?? '') === "partiallyComplete" ? `<span part="icon-3-partiallycomplete" aria-hidden="true">${ICONS["badge-icon-3-partiallycomplete"] ?? ''}</span>` : ''}${(p.progress ?? '') === "complete" ? `<span part="icon-3-complete" aria-hidden="true">${ICONS["badge-icon-3-complete"] ?? ''}</span>` : ''}</div></span></span><span part="label">Fulfilled</span></span>`;
   }
 
   #render(): void {

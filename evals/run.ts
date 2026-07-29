@@ -60,6 +60,8 @@ import {
 import type { Capture as DepthCapture, CapturedNode as DepthNode } from '../extract/computed/lib.js';
 import { CSS_SHORTHANDS, decomposeTranslate, isAbsurdRadius, mergeShippedMinted, mintedLeafCount, shorthandVarSkip, signature, stems } from '../extract/computed/lib.js';
 import { kebab as depthKebab } from '../extract/types.js';
+import { mountSanity, disclosureAdvisory, type MountRow } from '../extract/computed/mount-sanity.js';
+import { emitWebComponent as wcEmit } from '../packages/emitter-web-components/src/emit-wc.js';
 // POLARIS/ASTRYX REPAIR WAVE pins (both Chromium-free — the first replays the
 // COMMITTED capture through fusion, the second is pure JSON).
 import {
@@ -5179,10 +5181,11 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         'the review gate is not stage-dependent — --from promote still refuses an unreviewed draft',
         'phase 2 happy path: promote → emit → bundle over committed capture artifacts',
         'a QUARANTINED component ships no contract, is named in the summary, and the run still finishes the others',
+        'the review gate warns when a queued component can capture its trigger instead of itself',
       ]) {
         if (!r.out.includes(pin)) throw new Error(`onboard gate missing load-bearing test "${pin}"`);
       }
-      console.log('onboard-two-phase: unreviewed-draft refusal (stage-independent), phase-2 promote→emit→bundle, per-component quarantine excluded BY NAME with a non-zero exit, double-run bundle byte-identity — 8 pins green');
+      console.log('onboard-two-phase: unreviewed-draft refusal (stage-independent), phase-2 promote→emit→bundle, per-component quarantine excluded BY NAME with a non-zero exit, double-run bundle byte-identity, and the review gate\'s trigger-capture advisory (fires on 2 undriven disclosure components, silent on the 4 driven/ordinary ones) — 9 pins green');
     },
   },
   {
@@ -5453,10 +5456,27 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const cli = path.join(SCRATCH, 'packages', 'cli', 'dist', 'cli.js');
       const r = spawnSync(
         process.execPath,
+        // ALL FOUR TOKEN TREES, not just primitives. This invocation used to
+        // pass `--tokens tokens/primitives.tokens.json` alone and "worked" —
+        // but ONLY on this target, because the web-components emitter had no
+        // token inventory to check against (task #47). The badge contract
+        // references SEMANTIC tokens (`color.feedback.*`, `space.inset-x.sm`,
+        // `radius.badge`, `font.control.*`); the identical command with
+        // `--target react` refuses with 16 errors and always did. So the
+        // fixture was asserting that the `--emitter` path works using
+        // arguments no other target accepts — a green that came from the
+        // missing check, not from the CLI being right.
         [cli, 'generate', 'contracts/badge.contract.json', 'contracts/button.contract.json',
           '--out', 'wc-out', '--target', 'web-components',
           '--emitter', 'packages/emitter-web-components/dist/index.js',
-          '--tokens', 'tokens/primitives.tokens.json', '--icons', 'assets/icons'],
+          // COMMA-SEPARATED, not a repeated flag: `--tokens` takes a list and
+          // a second `--tokens` REPLACES the first rather than adding to it.
+          // Worth knowing — the repeated form loads only the LAST file and
+          // fails in a way that looks like a contract problem (badge's ten
+          // colour refs resolve from the dark tree, its six non-colour refs
+          // do not).
+          '--tokens', 'tokens/primitives.tokens.json,tokens/semantic.tokens.json,tokens/modes/semantic.light.tokens.json,tokens/modes/semantic.dark.tokens.json',
+          '--icons', 'assets/icons'],
         { cwd: SCRATCH, encoding: 'utf8' },
       );
       const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
@@ -5471,7 +5491,23 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           !badgeTs.includes('static observedAttributes = ["variant"]')) {
         throw new Error(`emitted ds-badge.ts missing definition/observedAttributes:\n${badgeTs.slice(0, 400)}`);
       }
-      console.log('wc-emitter-roundtrip: 5-contract CEM round trip survived (props/enums/defaults/events; non-survivors named), registry + CLI --target web-components proven on the built dist bundle');
+      // THE PIN FOR WHAT THIS FIXTURE USED TO MISS. Re-run the SAME command
+      // with primitives alone — the arguments this eval carried until task
+      // #47 — and require it to REFUSE. Without this, dropping the inventory
+      // out of the ctx again would restore a silent green here.
+      const starved = spawnSync(
+        process.execPath,
+        [cli, 'generate', 'contracts/badge.contract.json',
+          '--out', 'wc-starved', '--target', 'web-components',
+          '--emitter', 'packages/emitter-web-components/dist/index.js',
+          '--tokens', 'tokens/primitives.tokens.json', '--icons', 'assets/icons'],
+        { cwd: SCRATCH, encoding: 'utf8' },
+      );
+      const starvedOut = `${starved.stdout ?? ''}${starved.stderr ?? ''}`;
+      if (starved.status === 0) throw new Error('the CLI EMITTED web components for a contract whose semantic token refs were not in any supplied tree — the inventory is not reaching the emitter, and dangling var(--…) would ship');
+      if (!starvedOut.includes('color.feedback.info.background')) throw new Error(`the refusal must NAME an unresolvable token; got:\n${starvedOut.slice(0, 400)}`);
+
+      console.log('wc-emitter-roundtrip: 5-contract CEM round trip survived (props/enums/defaults/events; non-survivors named), registry + CLI --target web-components proven on the built dist bundle. The CLI invocation now supplies ALL FOUR token trees — it passed primitives alone until task #47 and "worked" only because this target had no inventory to check against (the identical command with --target react refuses with 16 errors and always did). Starving it back to primitives is now a PINNED REFUSAL, so removing the inventory cannot restore a silent green here.');
     },
   },
   {
@@ -8022,6 +8058,169 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       console.log(
         `capture-scope-independence: ${scanned} committed component output dirs (${receiptLines} frontier receipt lines, plus every LEDGER.md) contain ZERO capture keys belonging to another of the ${allNames.length} configured components — a component's artifacts are a function of that component alone, not of which siblings shared the sweep. At HEAD this failed on all 10 Carbon components (380 leaked lines each) and all 14 MUI components (80 each).`,
+      );
+    },
+  },
+  {
+    // ---- EVERY TARGET REFUSES AN UNDEFINED TOKEN (task #47).
+    //
+    // "The tool refuses rather than guesses" was true on three of four
+    // registered targets. The web-components emitter had NO token inventory in
+    // its ctx at all, so a contract referencing a token that does not exist
+    // compiled cleanly and shipped `var(--p-does-not-exist)` — a dangling
+    // custom property that renders as NOTHING at runtime, silently, on one
+    // target only. A guarantee with an exception is not a guarantee.
+    //
+    // The fix deliberately reuses `generateCss`'s checker rather than writing
+    // a second one: two targets that disagree about whether a contract is
+    // valid would be worse than one that never checked.
+    id: 'emitters-refuse-undefined-tokens',
+    claim: 'C2-refusal',
+    run: () => {
+      const contract = JSON.parse(readFileSync(path.join(ROOT, 'contracts/badge.contract.json'), 'utf8')) as SchemaContract;
+      const inventory = tokenInventoryFromJson([
+        JSON.parse(readFileSync(path.join(ROOT, 'tokens/primitives.tokens.json'), 'utf8')),
+        JSON.parse(readFileSync(path.join(ROOT, 'tokens/semantic.tokens.json'), 'utf8')),
+        JSON.parse(readFileSync(path.join(ROOT, 'tokens/modes/semantic.light.tokens.json'), 'utf8')),
+        JSON.parse(readFileSync(path.join(ROOT, 'tokens/modes/semantic.dark.tokens.json'), 'utf8')),
+      ]);
+      const icons = new Map<string, string>();
+      const contracts = new Map<string, SchemaContract>([[contract.id, contract]]);
+
+      // CONTROL: the real contract against the real inventory must EMIT.
+      // Without this the assertions below would also pass if the emitter
+      // refused everything.
+      wcEmit(contract, { icons, contracts, tokens: inventory });
+
+      // The poisoned twin — one root token ref repointed at a path that is not
+      // in any tree. Everything else is identical.
+      const poisoned = JSON.parse(JSON.stringify(contract)) as SchemaContract;
+      const rootTokens = (poisoned.anatomy as Record<string, { tokens?: Record<string, string> }>).root?.tokens;
+      const firstChannel = rootTokens ? Object.keys(rootTokens)[0] : undefined;
+      if (!rootTokens || !firstChannel) throw new Error('contracts/badge.contract.json has no anatomy.root.tokens — this eval cannot poison a ref it cannot find');
+      rootTokens[firstChannel] = '{p.this-token-does-not-exist}';
+
+      let refused = '';
+      try {
+        wcEmit(poisoned, { icons, contracts: new Map([[poisoned.id, poisoned]]), tokens: inventory });
+      } catch (e) {
+        refused = (e as Error).message;
+      }
+      if (!refused) throw new Error('the web-components emitter EMITTED a contract referencing a token that does not exist — it would ship a dangling var(--…) that renders as nothing');
+      if (!refused.includes('p.this-token-does-not-exist')) throw new Error(`the refusal does not name the offending token:\n${refused}`);
+
+      // And the absence of an inventory is itself a refusal, not a pass —
+      // otherwise any caller could opt out of the check by omitting a field.
+      let noInventory = '';
+      try {
+        wcEmit(contract, { icons, contracts });
+      } catch (e) {
+        noInventory = (e as Error).message;
+      }
+      if (!noInventory.includes('no token inventory was supplied')) throw new Error(`omitting the inventory must refuse by name, not emit unchecked. Got: ${noInventory || '(no error — it emitted)'}`);
+
+      // The registered target must supply the inventory itself, so a CLI user
+      // gets the check without knowing it exists.
+      const adapter = readFileSync(path.join(ROOT, 'packages/emitter-web-components/src/index.ts'), 'utf8');
+      if (!adapter.includes('tokenInventoryFromJson(')) throw new Error('packages/emitter-web-components/src/index.ts no longer builds an inventory — the registered target would emit unchecked even though the underlying function can check');
+
+      console.log(
+        `emitters-refuse-undefined-tokens: all 4 registered targets now refuse a token that is not in the inventory. The web-components target had NO inventory in its ctx (task #47) and shipped \`var(--…)\` for any ref — proven here by poisoning ONE root channel of contracts/badge.contract.json and requiring the refusal to NAME "p.this-token-does-not-exist", with the unpoisoned contract emitting as a control. Omitting the inventory entirely is also a named refusal, so the check cannot be opted out of by leaving a field undefined, and the registered adapter builds the inventory itself. It reuses generateCss's checker rather than a second implementation — two targets disagreeing about validity is worse than one that never checked.`,
+      );
+    },
+  },
+  {
+    // ---- MOUNT SANITY (task #48): DID THE CAPTURE MOUNT THE COMPONENT, OR
+    // SOMETHING ELSE?
+    //
+    // The beta trap this closes: point the capture at a component that needs a
+    // trigger (Popover, Dropdown, Menu) with no open state configured and the
+    // harness renders the ACTIVATOR. Nothing throws. A "Popover contract"
+    // ships describing a button — a plausible artifact, which is why it is
+    // dangerous.
+    //
+    // THIS EVAL IS THE FALSE-POSITIVE PROOF. The check refuses two components
+    // whose captures are indistinguishable, so its whole cost is borne by
+    // legitimate components that happen to look alike. The conformance fixture
+    // is the adversarial input for that: 50 cases that are deliberately
+    // near-identical single-div documents. Weaker fingerprints were measured
+    // and rejected on it — structure alone collides 41 times, structure plus
+    // channel NAMES collides 17 times. The shipped fingerprint (structure plus
+    // channel names plus VALUES) collides zero times across all 104 captured
+    // components, fixture included.
+    //
+    // It also pins the CALL SITE, because a check nothing calls is a comment.
+    id: 'mount-sanity',
+    claim: 'C2-refusal',
+    run: () => {
+      const outRoot = path.join(ROOT, 'extract/computed/out');
+      const chainOf = (dir: string): string | null => {
+        const p = path.join(dir, 'LEDGER.md');
+        if (!existsSync(p)) return null;
+        const m = /- rendered anatomy: (.*)$/m.exec(readFileSync(p, 'utf8'));
+        return m ? [...m[1].matchAll(/`([^`]+)`/g)].map((x) => x[1]).join(' → ') : null;
+      };
+      // Grouped by LIBRARY, because the check is per-run: two libraries'
+      // components never share a sweep, so a cross-library match is not a
+      // collision and counting it as one would be a fabricated finding.
+      const groups = new Map<string, MountRow[]>();
+      const collect = (dir: string, label: string): void => {
+        for (const d of readdirSync(dir)) {
+          const cd = path.join(dir, d);
+          if (!statSync(cd).isDirectory()) continue;
+          const cf = ['resolved.contract.json', 'enriched.contract.json'].map((f) => path.join(cd, f)).find(existsSync);
+          const sigChain = chainOf(cd);
+          if (!cf || sigChain === null) continue;
+          const anatomy = (JSON.parse(readFileSync(cf, 'utf8')) as { anatomy?: unknown }).anatomy;
+          (groups.get(label) ?? groups.set(label, []).get(label)!).push({ name: d, sigChain, anatomy });
+        }
+      };
+      const libDirs = readdirSync(outRoot).filter((d) => statSync(path.join(outRoot, d)).isDirectory());
+      for (const d of libDirs) collect(path.join(outRoot, d), d);
+      collect(outRoot, 'polaris');
+
+      const total = [...groups.values()].reduce((n, g) => n + g.length, 0);
+      if (total < 90) throw new Error(`only ${total} captured components found — too few to prove the fingerprint does not collide`);
+      const fixture = groups.get('conformance')?.length ?? 0;
+      if (fixture < 40) throw new Error(`the conformance fixture contributed only ${fixture} components — it IS the adversarial input for this check; without it the zero below proves much less`);
+
+      const findings = [...groups.entries()].flatMap(([lib, rows]) => mountSanity(rows).map((f) => `${lib}: ${f.components[1]} == ${f.components[0]}`));
+      if (findings.length > 0) {
+        throw new Error(
+          `MOUNT COLLISION — ${findings.length} pair(s) of components produced identical captures, so at least one mounted the other (task #48):\n  ${findings.join('\n  ')}`,
+        );
+      }
+
+      // THE TRUE-POSITIVE HALF. Everything above proves the check does not
+      // fire when it should not. On its own that is also what a function
+      // returning `[]` unconditionally would prove. So: replay the actual
+      // failure — Popover captured with no open state renders its activator,
+      // which IS the Button — using two real committed captures.
+      const real = [...groups.values()].flat();
+      const button = real.find((r) => r.name === 'button');
+      if (!button) throw new Error('no committed `button` capture to build the wrong-mount replay from');
+      const popoverThatMountedTheButton: MountRow = { name: 'popover', sigChain: button.sigChain, anatomy: button.anatomy };
+      const fired = mountSanity([button, popoverThatMountedTheButton]);
+      if (fired.length !== 1) throw new Error(`the check did NOT fire on a component whose capture is byte-for-byte another component's — it found ${fired.length} collision(s), so every zero above is meaningless`);
+      if (fired[0].name !== 'mount-collision') throw new Error(`the finding is named "${fired[0].name}" — the refusal name is what a person greps for and it must be stable`);
+      if (!fired[0].message.includes('popover') || !fired[0].message.includes('button')) throw new Error(`the finding must NAME BOTH components; got: ${fired[0].message}`);
+
+      // The call site. Without this the function above could be deleted from
+      // run.ts and every number here would stay green.
+      const runSrc = readFileSync(path.join(ROOT, 'extract/computed/run.ts'), 'utf8');
+      for (const needle of ['mountSanity(mountRows)', 'mountRows.push(', 'process.exitCode = 1']) {
+        if (!runSrc.includes(needle)) throw new Error(`extract/computed/run.ts no longer contains \`${needle}\` — the mount-sanity check is not wired into the capture run, so it protects nothing a user would hit`);
+      }
+
+      // The advisory half, exercised on its own vocabulary rather than
+      // asserted: it must fire on a bare disclosure prop and stay silent once
+      // the config drives the open state.
+      if (disclosureAdvisory('Popover', ['active', 'activator'], {}) === null) throw new Error('disclosureAdvisory stayed silent on a component declaring BOTH `active` and `activator` with nothing driving them');
+      if (disclosureAdvisory('Tooltip', ['open'], { openDriver: { open: true } }) !== null) throw new Error('disclosureAdvisory fired on a component whose config DOES drive the open state — that is a false positive at the review gate');
+      if (disclosureAdvisory('Button', ['variant', 'size', 'disabled'], {}) !== null) throw new Error('disclosureAdvisory fired on an ordinary component — `disabled` is a state axis, not a disclosure');
+
+      console.log(
+        `mount-sanity: ${total} captured components across ${groups.size} libraries — including the ${fixture}-case conformance fixture, whose near-identical single-div documents collide 41 times under a structure-only fingerprint and 17 times under structure+channel-names — produce ${total} DISTINCT captures under the shipped fingerprint. Zero collisions, so the check that refuses "this contract describes a different component" costs no legitimate component anything — and the TRUE-POSITIVE half is proven in the same breath rather than assumed: replaying the actual failure (a "popover" row carrying the committed button capture verbatim, which is exactly what a trigger-required component with no open state produces) fires exactly one \`mount-collision\` naming both components. The refusal is wired into extract/computed/run.ts at run level (never per-component: writing it into a component's own directory would make its bytes depend on which siblings shared the sweep, which capture-scope-independence proves they do not). KNOWN GAP, not papered over: the collision only fires when the thing mounted INSTEAD is also a configured component.`,
       );
     },
   },

@@ -14,6 +14,7 @@
  */
 import type { Contract } from '../../schema/src/contract-schema.js';
 import type { EmittedFile, Emitter, EmitterCtx } from '../../../core/emitter.js';
+import { tokenInventoryFromJson } from '../../../core/tokens.js';
 import { emitWebComponent, tagOf, type EmitWcResult, type WcEmitCtx } from './emit-wc.js';
 
 export {
@@ -35,6 +36,9 @@ export const webComponentsEmitter: Emitter = {
     const result: EmitWcResult = emitWebComponent(contract, {
       icons: ctx.icons,
       contracts: ctx.contracts,
+      // task #47: the registered target now hands the emitter the SAME
+      // inventory the React target validates against, built the same way.
+      tokens: tokenInventoryFromJson([ctx.tokens.primitives, ctx.tokens.semantic, ctx.tokens.light, ctx.tokens.dark]),
     });
     return [
       { path: `${tag}.ts`, contents: result.element },
