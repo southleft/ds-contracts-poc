@@ -1,22 +1,65 @@
 # CODE-LED journey — code is truth; CI keeps the contracts current.
 #
+# READ THIS BEFORE COPYING THE FILE — what static extraction can and cannot do
+# ============================================================================
+# This recipe runs STATIC extraction (`ds-contracts extract`): it reads your
+# component SOURCE. It recovers the API surface (props, enums, defaults,
+# events) for any library the adapters understand, and it recovers ANATOMY —
+# the parts, the token bindings, the thing a component actually looks like —
+# only for React + a co-located CSS Module.
+#
+# For every other library (CSS-in-JS, StyleX, Tailwind classes, web
+# components, a design system whose styles live anywhere else) static
+# extraction emits a STUB anatomy: `"anatomy": { "root": {} }`.
+#
+# A stub does NOT refuse. It generates. Sent to the Figma plugin, a stub
+# produces a component set with correctly-named variant frames and NOTHING
+# INSIDE THEM — measured: one stub contract (10 variants) emits a 53,283-byte
+# sync script whose every variant spec is a bare `{ type: root, name, layout }`
+# with no children, no fills and no text. Blank boxes, correctly labelled.
+#
+# So this workflow is split by a GATE, on purpose:
+#
+#   ALWAYS  — extract → adopt → commit contracts/. Contracts in git are
+#             worth having on their own: a diffable, reviewable API surface
+#             for the whole library, on every push. Stub anatomy included.
+#   GATED   — bundle + deliver to the designer's canvas. Runs ONLY when every
+#             adopted contract carries real anatomy. If any is a stub the
+#             canvas half is skipped and the job summary names each stub
+#             component and the command that fixes it.
+#
+# The fix is the computed-capture path — a real Chromium renders your
+# components and the anatomy is measured instead of guessed:
+#
+#     npx @ds-contracts/cli onboard <your-package-or-path>
+#     # …review the drafted capture config it stops at, then:
+#     npx @ds-contracts/cli onboard --continue
+#
+# `onboard` ships in the release AFTER 0.2.0. Until it lands, the equivalent
+# is `extract --draft-capture-config` → review → `extract --computed --config`
+# → `promote`. Either way: capture first, canvas second. This recipe will not
+# publish blank components to a designer's file.
+#
+# ----------------------------------------------------------------------------
 # On every push to main (and on each published release) this workflow:
-#   1. runs the PUBLISHED @ds-contracts/cli@0.1.0 `extract` over the component
+#   1. runs the PUBLISHED @ds-contracts/cli@0.2.0 `extract` over the component
 #      source (config: ds-contracts.config.json, committed in the repo),
 #   2. adopts the freshly proposed contracts into contracts/ (code-led means
 #      code wins — extraction output IS the new truth),
 #   3. commits the refreshed contracts/ back to the branch,
-#   4. uploads a CONTRACTS-BUNDLE artifact — the exact envelope the plugin
-#      bridge carries ({ "type": "CONTRACTS-BUNDLE", "version": 1,
+#   4. GATE — refuses the canvas half when any adopted contract is stub anatomy,
+#   5. (gated) uploads a CONTRACTS-BUNDLE artifact — the exact envelope the
+#      plugin bridge carries ({ "type": "CONTRACTS-BUNDLE", "version": 1,
 #      "contracts": [...] }, workers/assist/src/bridge.ts) — so a designer can
-#      deliver it to the Figma plugin with
+#      deliver it with
 #      `npx @ds-contracts/cli figma push contracts-bundle.json --code <CODE>`,
-#   5. PUBLISHES the bundle to the standing CI→Figma channel, so the
+#   6. (gated) PUBLISHES the bundle to the standing CI→Figma channel, so the
 #      designer's plugin finds it waiting with no human courier,
-#   6. writes the proposal/skip counts into the job summary.
+#   7. writes proposal/skip counts AND the anatomy verdict into the job
+#      summary — whichever way the gate went.
 #
-# The channel step is the fully-async half that used to be roadmap here. It
-# needs one repository secret, minted once:
+# The channel step is the fully-async half. It needs one repository secret,
+# minted once:
 #
 #     npx @ds-contracts/cli figma claim-channel
 #     → WRITE key (dscw_…)  → repo secret DS_CONTRACTS_CHANNEL_KEY (this file)
@@ -38,7 +81,11 @@
 # G1's slice S3 and are excluded from this round BY NAME.
 #
 # Validated locally step-by-step against the published CLI:
-# examples/ci/VALIDATION.md (produced by examples/ci/validate.mjs).
+# examples/ci/VALIDATION.md (produced by examples/ci/validate.mjs). That
+# receipt's own consumer fixture is a React library with NO co-located CSS —
+# so the anatomy gate FIRES there, and the receipt shows the canvas half
+# skipped. That is the recipe working, demonstrated on the exact case this
+# header warns about.
 
 name: contracts-code-led
 
@@ -63,7 +110,7 @@ jobs:
 
       - name: Extract contracts from code
         run: |
-          npx --yes @ds-contracts/cli@0.1.0 extract ds-contracts.config.json | tee extract.log
+          npx --yes @ds-contracts/cli@0.2.0 extract ds-contracts.config.json | tee extract.log
 
       - name: Adopt the proposed contracts (code-led — extraction is the new truth)
         run: |
@@ -72,7 +119,51 @@ jobs:
           mkdir -p contracts
           cp ds-contracts/out/contracts/*.contract.json contracts/
 
+      - name: "GATE: is this library's anatomy real, or a stub?"
+        id: anatomy
+        # The whole point of this workflow's split. Static extraction recovers
+        # anatomy ONLY from React + a co-located CSS Module; for anything else
+        # it emits `"anatomy": { "root": {} }` — a contract that generates a
+        # canvas set of correctly-named, EMPTY variant frames. Nothing
+        # downstream refuses it, so the refusal has to live here.
+        #
+        # Stub test, read off the contract itself (not off the adapter name):
+        # the root part declares no parts AND no token bindings AND no content
+        # — there is nothing to draw.
+        run: |
+          node --input-type=module <<'EOF'
+          import { appendFileSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+          const files = readdirSync("contracts").filter((f) => f.endsWith(".contract.json")).sort();
+          if (files.length === 0) throw new Error("no contracts to check");
+          const stubs = [];
+          for (const f of files) {
+            const c = JSON.parse(readFileSync(`contracts/${f}`, "utf8"));
+            const root = c?.anatomy?.root ?? {};
+            const drawable =
+              Object.keys(root.parts ?? {}).length > 0 ||
+              Object.keys(root.tokens ?? {}).length > 0 ||
+              root.content !== undefined ||
+              root.component !== undefined;
+            if (!drawable) stubs.push(`${c.id} (${c.name}) — ${f}`);
+          }
+          const ready = stubs.length === 0;
+          console.log(
+            ready
+              ? `anatomy OK: ${files.length}/${files.length} contract(s) carry real anatomy — canvas delivery proceeds`
+              : `STUB ANATOMY: ${stubs.length}/${files.length} contract(s) have an empty root. Canvas delivery is SKIPPED — sending these would create correctly-named, VISUALLY EMPTY component sets in the designer's file.`,
+          );
+          for (const s of stubs) console.log(`  - ${s}`);
+          writeFileSync("anatomy-stubs.txt", stubs.join("\n") + (stubs.length ? "\n" : ""));
+          const out = [
+            `canvas_ready=${ready}`,
+            `total=${files.length}`,
+            `stub_count=${stubs.length}`,
+          ].join("\n") + "\n";
+          if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, out);
+          EOF
+
       - name: Build the CONTRACTS-BUNDLE artifact (the plugin-bridge envelope)
+        if: ${{ steps.anatomy.outputs.canvas_ready == 'true' }}
         run: |
           node --input-type=module <<'EOF'
           import { readFileSync, readdirSync, writeFileSync } from "node:fs";
@@ -85,6 +176,10 @@ jobs:
           EOF
 
       - name: Commit the refreshed contracts back to the branch
+        # NOT gated: contracts in git are the deliverable of the always-half.
+        # A stub-anatomy contract is still a real, reviewable API surface —
+        # it just must not reach a canvas.
+        #
         # CI-only: pushes with the workflow's GITHUB_TOKEN. No-op when
         # extraction changed nothing (the diff check guards the commit).
         run: |
@@ -99,6 +194,7 @@ jobs:
           fi
 
       - name: Upload the CONTRACTS-BUNDLE artifact
+        if: ${{ steps.anatomy.outputs.canvas_ready == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: CONTRACTS-BUNDLE
@@ -114,23 +210,31 @@ jobs:
         # it, so `ds-contracts figma bundle` keeps its byte-determinism.
         #
         # Skipped, not failed, when the secret is absent: a fork PR and a repo
-        # that has not minted a channel both still get their artifact.
+        # that has not minted a channel both still get their artifact. Skipped
+        # too when the anatomy gate said no.
         #
-        # VERSION HONESTY: `figma publish` and `figma claim-channel` ship in
-        # the NEXT CLI release — the published 0.1.0 the steps above pin does
-        # NOT carry them. Until that release the pin below resolves to a
-        # version that does not exist, so this step is documentation, not a
-        # working recipe; the `if:` guard means a repo with no secret never
-        # reaches it. Bump both pins together when the release lands.
-        # (examples/ci/VALIDATION.md therefore does not cover this step —
-        # examples/ci/validate.mjs classifies it CI-only for this reason.)
-        if: ${{ env.DS_CONTRACTS_CHANNEL_KEY != '' }}
+        # VERSION: `figma publish` and `figma claim-channel` are IN the pinned
+        # 0.2.0 (verified: `npx @ds-contracts/cli@0.2.0 help` lists both). An
+        # earlier revision of this file claimed they were unreleased and that
+        # the pin resolved to a nonexistent version — that was wrong, and it is
+        # corrected here. `onboard`/`promote` are the verbs still unreleased;
+        # this recipe does not call them.
+        if: ${{ steps.anatomy.outputs.canvas_ready == 'true' && env.DS_CONTRACTS_CHANNEL_KEY != '' }}
         env:
           DS_CONTRACTS_CHANNEL_KEY: ${{ secrets.DS_CONTRACTS_CHANNEL_KEY }}
         run: |
           npx --yes @ds-contracts/cli@0.2.0 figma publish contracts-bundle.json | tee publish.log
 
-      - name: Job summary — proposal / skip counts
+      - name: Job summary — proposal / skip counts + the anatomy verdict
+        if: ${{ always() }}
+        # Gate results arrive as env, not as `${{ }}` interpolated into the
+        # shell body: an expression spliced into a script is an injection seam,
+        # and env keeps this step runnable verbatim outside Actions (which is
+        # how examples/ci/validate.mjs executes it).
+        env:
+          CANVAS_READY: ${{ steps.anatomy.outputs.canvas_ready }}
+          ANATOMY_TOTAL: ${{ steps.anatomy.outputs.total }}
+          ANATOMY_STUBS: ${{ steps.anatomy.outputs.stub_count }}
         run: |
           {
             echo "## ds-contracts extract"
@@ -138,13 +242,43 @@ jobs:
             grep -E "proposed contract" extract.log | sed 's/^/- /'
             grep -E "seen but not extractable" extract.log | sed 's/^/- /' || echo "- 0 components skipped"
             echo ""
+            echo "### Anatomy gate"
+            echo ""
+            if [ "${CANVAS_READY}" = "true" ]; then
+              echo "✅ **${ANATOMY_TOTAL}/${ANATOMY_TOTAL} contracts carry real anatomy.** Canvas delivery ran."
+            else
+              echo "⛔ **Canvas delivery SKIPPED — ${ANATOMY_STUBS} of ${ANATOMY_TOTAL} contracts have STUB anatomy** (\`\"anatomy\": { \"root\": {} }\`)."
+              echo ""
+              echo "Static extraction recovers anatomy only from **React + a co-located CSS Module**."
+              echo "For every other styling system it proposes an empty root — and an empty root does"
+              echo "not refuse downstream, it **generates correctly-named, visually EMPTY component"
+              echo "sets** in the designer's Figma file. That is why this job stopped here."
+              echo ""
+              echo "Stub contracts:"
+              echo ""
+              sed 's/^/- /' anatomy-stubs.txt
+              echo ""
+              echo "**The fix — measure the anatomy instead of guessing it** (real Chromium, computed styles):"
+              echo ""
+              echo '```'
+              echo 'npx @ds-contracts/cli onboard <your-package-or-path>   # stops at a review gate'
+              echo 'npx @ds-contracts/cli onboard --continue               # capture → promote → publish'
+              echo '```'
+              echo ""
+              echo "(\`onboard\` ships after 0.2.0; today: \`extract --draft-capture-config\` → review →"
+              echo "\`extract --computed --config\` → \`promote\`, then re-run this workflow.)"
+              echo ""
+              echo "The contracts themselves **were** committed — a stub contract is still a real,"
+              echo "reviewable API surface. Only the canvas half is withheld."
+            fi
+            echo ""
             if [ -f publish.log ]; then
               echo "### Delivered to the standing channel"
               echo ""
               sed 's/^/- /' publish.log
               echo ""
               echo "The designer's plugin picks this up on its next **Check for updates**."
-            else
+            elif [ "${CANVAS_READY}" = "true" ]; then
               echo "No channel configured (secret \`DS_CONTRACTS_CHANNEL_KEY\` is unset)."
               echo "Mint one with \`npx @ds-contracts/cli figma claim-channel\`, or hand the"
               echo "artifact over the ad-hoc pairing-code route:"

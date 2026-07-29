@@ -224,13 +224,13 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 260,
+      "mintedLeaves": 204,
       "mintedLeavesUnfolded": 651,
-      "baseBindings": 71,
-      "stateBindings": 22,
+      "baseBindings": 69,
+      "stateBindings": 20,
       "codeOnlyChannels": 6,
-      "overflowBindings": 22,
-      "folds": 14
+      "overflowBindings": 20,
+      "folds": 16
     },
     "worstRows": [
       {
@@ -356,7 +356,6 @@
       "overflow: switch-thumb.color — inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)",
       "overflow: buttonbase-root.background-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: buttonbase-root.color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: buttonbase-root.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: switch-input.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: switch-input.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: switch-input.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -369,7 +368,6 @@
       "overflow: switch-input.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: switch-thumb.background-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: switch-thumb.color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-      "overflow: switch-thumb.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: switch-track.opacity [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: switch-input.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: switch-input.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -388,7 +386,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1274,
+      "leavesAdded": 1189,
       "divergent": [
         {
           "token": "imported.switch.buttonbase-root.color.error.checked",

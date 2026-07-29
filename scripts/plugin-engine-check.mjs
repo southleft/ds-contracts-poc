@@ -683,9 +683,16 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
     mock.variables.filter((v) =>
       Object.values(v.valuesByMode).some((val) => val && typeof val === 'object' && val.type === 'VARIABLE_ALIAS'),
     ).length;
+  // ORPHAN-LEAF + ROW-RULE ROUND (tasks #42/#35): 1684 -> 1543. MUI's shipped
+  // minted tree lost 141 leaves — every one of them a variable NOTHING bound:
+  // 124 `row-rule-color` refs (a `currentcolor` mirror Chromium enumerates and
+  // no library authored) and the leaves of parts the anatomy promotion had
+  // already refused by name. The EQUIVALENCE this pin exists for is unchanged
+  // and is what matters: the bundle path and the compiled-script path land the
+  // SAME count and the same NAME inventory.
   assert(
-    mockA.variables.length === 1684 && mockB.variables.length === 1684,
-    `both paths land 1684 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+    mockA.variables.length === 1543 && mockB.variables.length === 1543,
+    `both paths land 1543 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
   );
   assert(
     aliasCountOf(mockA) === 73 && aliasCountOf(mockB) === 73,
@@ -785,7 +792,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 
   console.log(
-    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 1684 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
+    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 1543 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
 
   // --- PROTOTYPE WIRING: the State axis is LIVE, and its limits are named --

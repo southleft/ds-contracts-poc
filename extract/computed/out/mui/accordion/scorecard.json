@@ -32,11 +32,11 @@
     "contradictions": 0,
     "mintedLeaves": 58,
     "mintedLeavesUnfolded": 58,
-    "baseBindings": 87,
+    "baseBindings": 78,
     "stateBindings": 3,
     "codeOnlyChannels": 19,
     "overflowBindings": 1,
-    "folds": 77
+    "folds": 86
   },
   "worstRows": [
     {
@@ -179,7 +179,7 @@
   },
   "shippedMinted": {
     "path": "examples/mui/tokens/mui-minted.dtcg.json",
-    "leavesAdded": 1440,
+    "leavesAdded": 1476,
     "divergent": [
       {
         "token": "imported.accordion.root.background-color",

@@ -710,28 +710,6 @@
                 "$type": "dimension"
               }
             },
-            "row-rule-color": {
-              "default": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "alternative": {
-                "$value": "#111827",
-                "$type": "color"
-              },
-              "dark": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "green": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "red": {
-                "$value": "#ffffff",
-                "$type": "color"
-              }
-            },
             "background-color-state-active": {
               "default": {
                 "$value": "#1e429f",
@@ -799,28 +777,6 @@
               }
             },
             "outline-color-state-active": {
-              "alternative": {
-                "$value": "#1a56db",
-                "$type": "color"
-              },
-              "default": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "dark": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "green": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "red": {
-                "$value": "#ffffff",
-                "$type": "color"
-              }
-            },
-            "row-rule-color-state-active": {
               "alternative": {
                 "$value": "#1a56db",
                 "$type": "color"
@@ -921,28 +877,6 @@
               }
             },
             "outline-color-state-hover": {
-              "alternative": {
-                "$value": "#1a56db",
-                "$type": "color"
-              },
-              "default": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "dark": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "green": {
-                "$value": "#ffffff",
-                "$type": "color"
-              },
-              "red": {
-                "$value": "#ffffff",
-                "$type": "color"
-              }
-            },
-            "row-rule-color-state-hover": {
               "alternative": {
                 "$value": "#1a56db",
                 "$type": "color"
@@ -1102,32 +1036,6 @@
               "$value": "2px",
               "$type": "dimension"
             },
-            "row-rule-color": {
-              "info": {
-                "$value": "#005f78",
-                "$type": "color"
-              },
-              "failure": {
-                "$value": "#9b1c1c",
-                "$type": "color"
-              },
-              "success": {
-                "$value": "#03543f",
-                "$type": "color"
-              },
-              "warning": {
-                "$value": "#723b13",
-                "$type": "color"
-              },
-              "indigo": {
-                "$value": "#42389d",
-                "$type": "color"
-              },
-              "pink": {
-                "$value": "#99154b",
-                "$type": "color"
-              }
-            },
             "background-color-state-active": {
               "info": {
                 "$value": "#a2f4fd",
@@ -1230,32 +1138,6 @@
               "sm": {
                 "$value": "20px",
                 "$type": "dimension"
-              }
-            },
-            "row-rule-color": {
-              "info": {
-                "$value": "#005f78",
-                "$type": "color"
-              },
-              "failure": {
-                "$value": "#9b1c1c",
-                "$type": "color"
-              },
-              "success": {
-                "$value": "#03543f",
-                "$type": "color"
-              },
-              "warning": {
-                "$value": "#723b13",
-                "$type": "color"
-              },
-              "indigo": {
-                "$value": "#42389d",
-                "$type": "color"
-              },
-              "pink": {
-                "$value": "#99154b",
-                "$type": "color"
               }
             }
           }
@@ -1387,46 +1269,10 @@
                 "$value": "#8e4b10",
                 "$type": "color"
               }
-            },
-            "row-rule-color": {
-              "info": {
-                "$value": "#007595",
-                "$type": "color"
-              },
-              "failure": {
-                "$value": "#c81e1e",
-                "$type": "color"
-              },
-              "success": {
-                "$value": "#046c4e",
-                "$type": "color"
-              },
-              "warning": {
-                "$value": "#8e4b10",
-                "$type": "color"
-              }
             }
           },
           "part-0": {
             "color": {
-              "info": {
-                "$value": "#007595",
-                "$type": "color"
-              },
-              "failure": {
-                "$value": "#c81e1e",
-                "$type": "color"
-              },
-              "success": {
-                "$value": "#046c4e",
-                "$type": "color"
-              },
-              "warning": {
-                "$value": "#8e4b10",
-                "$type": "color"
-              }
-            },
-            "row-rule-color": {
               "info": {
                 "$value": "#007595",
                 "$type": "color"
@@ -1467,24 +1313,6 @@
             "font-weight": {
               "$value": "400",
               "$type": "number"
-            },
-            "row-rule-color": {
-              "info": {
-                "$value": "#007595",
-                "$type": "color"
-              },
-              "failure": {
-                "$value": "#c81e1e",
-                "$type": "color"
-              },
-              "success": {
-                "$value": "#046c4e",
-                "$type": "color"
-              },
-              "warning": {
-                "$value": "#8e4b10",
-                "$type": "color"
-              }
             }
           }
         },
@@ -1613,10 +1441,6 @@
             "margin-top": {
               "$value": "2px",
               "$type": "dimension"
-            },
-            "row-rule-color": {
-              "$value": "#111827",
-              "$type": "color"
             }
           }
         }
@@ -1714,20 +1538,16 @@
                       "prop": "color",
                       "map": {
                         "failure": {
-                          "color": "{imported.alert.label.color.failure}",
-                          "row-rule-color": "{imported.alert.label.row-rule-color.failure}"
+                          "color": "{imported.alert.label.color.failure}"
                         },
                         "info": {
-                          "color": "{imported.alert.label.color.info}",
-                          "row-rule-color": "{imported.alert.label.row-rule-color.info}"
+                          "color": "{imported.alert.label.color.info}"
                         },
                         "success": {
-                          "color": "{imported.alert.label.color.success}",
-                          "row-rule-color": "{imported.alert.label.row-rule-color.success}"
+                          "color": "{imported.alert.label.color.success}"
                         },
                         "warning": {
-                          "color": "{imported.alert.label.color.warning}",
-                          "row-rule-color": "{imported.alert.label.row-rule-color.warning}"
+                          "color": "{imported.alert.label.color.warning}"
                         }
                       }
                     }
@@ -1743,20 +1563,16 @@
                   "prop": "color",
                   "map": {
                     "failure": {
-                      "color": "{imported.alert.part-0.color.failure}",
-                      "row-rule-color": "{imported.alert.part-0.row-rule-color.failure}"
+                      "color": "{imported.alert.part-0.color.failure}"
                     },
                     "info": {
-                      "color": "{imported.alert.part-0.color.info}",
-                      "row-rule-color": "{imported.alert.part-0.row-rule-color.info}"
+                      "color": "{imported.alert.part-0.color.info}"
                     },
                     "success": {
-                      "color": "{imported.alert.part-0.color.success}",
-                      "row-rule-color": "{imported.alert.part-0.row-rule-color.success}"
+                      "color": "{imported.alert.part-0.color.success}"
                     },
                     "warning": {
-                      "color": "{imported.alert.part-0.color.warning}",
-                      "row-rule-color": "{imported.alert.part-0.row-rule-color.warning}"
+                      "color": "{imported.alert.part-0.color.warning}"
                     }
                   }
                 }
@@ -1787,8 +1603,7 @@
                   "border-left-color": "{imported.alert.root.border-left-color.failure}",
                   "border-right-color": "{imported.alert.root.border-right-color.failure}",
                   "border-top-color": "{imported.alert.root.border-top-color.failure}",
-                  "color": "{imported.alert.root.color.failure}",
-                  "row-rule-color": "{imported.alert.root.row-rule-color.failure}"
+                  "color": "{imported.alert.root.color.failure}"
                 },
                 "info": {
                   "background-color": "{imported.alert.root.background-color.info}",
@@ -1796,8 +1611,7 @@
                   "border-left-color": "{imported.alert.root.border-left-color.info}",
                   "border-right-color": "{imported.alert.root.border-right-color.info}",
                   "border-top-color": "{imported.alert.root.border-top-color.info}",
-                  "color": "{imported.alert.root.color.info}",
-                  "row-rule-color": "{imported.alert.root.row-rule-color.info}"
+                  "color": "{imported.alert.root.color.info}"
                 },
                 "success": {
                   "background-color": "{imported.alert.root.background-color.success}",
@@ -1805,8 +1619,7 @@
                   "border-left-color": "{imported.alert.root.border-left-color.success}",
                   "border-right-color": "{imported.alert.root.border-right-color.success}",
                   "border-top-color": "{imported.alert.root.border-top-color.success}",
-                  "color": "{imported.alert.root.color.success}",
-                  "row-rule-color": "{imported.alert.root.row-rule-color.success}"
+                  "color": "{imported.alert.root.color.success}"
                 },
                 "warning": {
                   "background-color": "{imported.alert.root.background-color.warning}",
@@ -1814,8 +1627,7 @@
                   "border-left-color": "{imported.alert.root.border-left-color.warning}",
                   "border-right-color": "{imported.alert.root.border-right-color.warning}",
                   "border-top-color": "{imported.alert.root.border-top-color.warning}",
-                  "color": "{imported.alert.root.color.warning}",
-                  "row-rule-color": "{imported.alert.root.row-rule-color.warning}"
+                  "color": "{imported.alert.root.color.warning}"
                 }
               }
             }
@@ -1944,28 +1756,22 @@
                   "prop": "color",
                   "map": {
                     "failure": {
-                      "color": "{imported.badge.label.color.failure}",
-                      "row-rule-color": "{imported.badge.label.row-rule-color.failure}"
+                      "color": "{imported.badge.label.color.failure}"
                     },
                     "indigo": {
-                      "color": "{imported.badge.label.color.indigo}",
-                      "row-rule-color": "{imported.badge.label.row-rule-color.indigo}"
+                      "color": "{imported.badge.label.color.indigo}"
                     },
                     "info": {
-                      "color": "{imported.badge.label.color.info}",
-                      "row-rule-color": "{imported.badge.label.row-rule-color.info}"
+                      "color": "{imported.badge.label.color.info}"
                     },
                     "pink": {
-                      "color": "{imported.badge.label.color.pink}",
-                      "row-rule-color": "{imported.badge.label.row-rule-color.pink}"
+                      "color": "{imported.badge.label.color.pink}"
                     },
                     "success": {
-                      "color": "{imported.badge.label.color.success}",
-                      "row-rule-color": "{imported.badge.label.row-rule-color.success}"
+                      "color": "{imported.badge.label.color.success}"
                     },
                     "warning": {
-                      "color": "{imported.badge.label.color.warning}",
-                      "row-rule-color": "{imported.badge.label.row-rule-color.warning}"
+                      "color": "{imported.badge.label.color.warning}"
                     }
                   }
                 },
@@ -2012,33 +1818,27 @@
               "map": {
                 "failure": {
                   "background-color": "{imported.badge.root.background-color.failure}",
-                  "color": "{imported.badge.root.color.failure}",
-                  "row-rule-color": "{imported.badge.root.row-rule-color.failure}"
+                  "color": "{imported.badge.root.color.failure}"
                 },
                 "indigo": {
                   "background-color": "{imported.badge.root.background-color.indigo}",
-                  "color": "{imported.badge.root.color.indigo}",
-                  "row-rule-color": "{imported.badge.root.row-rule-color.indigo}"
+                  "color": "{imported.badge.root.color.indigo}"
                 },
                 "info": {
                   "background-color": "{imported.badge.root.background-color.info}",
-                  "color": "{imported.badge.root.color.info}",
-                  "row-rule-color": "{imported.badge.root.row-rule-color.info}"
+                  "color": "{imported.badge.root.color.info}"
                 },
                 "pink": {
                   "background-color": "{imported.badge.root.background-color.pink}",
-                  "color": "{imported.badge.root.color.pink}",
-                  "row-rule-color": "{imported.badge.root.row-rule-color.pink}"
+                  "color": "{imported.badge.root.color.pink}"
                 },
                 "success": {
                   "background-color": "{imported.badge.root.background-color.success}",
-                  "color": "{imported.badge.root.color.success}",
-                  "row-rule-color": "{imported.badge.root.row-rule-color.success}"
+                  "color": "{imported.badge.root.color.success}"
                 },
                 "warning": {
                   "background-color": "{imported.badge.root.background-color.warning}",
-                  "color": "{imported.badge.root.color.warning}",
-                  "row-rule-color": "{imported.badge.root.row-rule-color.warning}"
+                  "color": "{imported.badge.root.color.warning}"
                 }
               }
             },
@@ -2195,8 +1995,7 @@
               "background-color": "{imported.button.root.background-color-state-active.{color}}",
               "box-shadow": "{imported.button.root.box-shadow-state-active.{color}}",
               "color": "{imported.button.root.color-state-active.{color}}",
-              "outline-color": "{imported.button.root.outline-color-state-active.{color}}",
-              "row-rule-color": "{imported.button.root.row-rule-color-state-active.{color}}"
+              "outline-color": "{imported.button.root.outline-color-state-active.{color}}"
             },
             "disabled": {
               "opacity": "{imported.button.root.opacity-state-disabled}"
@@ -2209,8 +2008,7 @@
             "hover": {
               "background-color": "{imported.button.root.background-color-state-hover.{color}}",
               "color": "{imported.button.root.color-state-hover.{color}}",
-              "outline-color": "{imported.button.root.outline-color-state-hover.{color}}",
-              "row-rule-color": "{imported.button.root.row-rule-color-state-hover.{color}}"
+              "outline-color": "{imported.button.root.outline-color-state-hover.{color}}"
             }
           },
           "tokensByProp": [
@@ -2228,8 +2026,7 @@
                   "border-top-color": "{imported.button.root.border-top-color.alternative}",
                   "border-top-width": "{imported.button.root.border-top-width.alternative}",
                   "color": "{imported.button.root.color.alternative}",
-                  "outline-color": "{imported.button.root.outline-color.alternative}",
-                  "row-rule-color": "{imported.button.root.row-rule-color.alternative}"
+                  "outline-color": "{imported.button.root.outline-color.alternative}"
                 },
                 "dark": {
                   "background-color": "{imported.button.root.background-color.dark}",
@@ -2242,8 +2039,7 @@
                   "border-top-color": "{imported.button.root.border-top-color.dark}",
                   "border-top-width": "{imported.button.root.border-top-width.dark}",
                   "color": "{imported.button.root.color.dark}",
-                  "outline-color": "{imported.button.root.outline-color.dark}",
-                  "row-rule-color": "{imported.button.root.row-rule-color.dark}"
+                  "outline-color": "{imported.button.root.outline-color.dark}"
                 },
                 "default": {
                   "background-color": "{imported.button.root.background-color.default}",
@@ -2256,8 +2052,7 @@
                   "border-top-color": "{imported.button.root.border-top-color.default}",
                   "border-top-width": "{imported.button.root.border-top-width.default}",
                   "color": "{imported.button.root.color.default}",
-                  "outline-color": "{imported.button.root.outline-color.default}",
-                  "row-rule-color": "{imported.button.root.row-rule-color.default}"
+                  "outline-color": "{imported.button.root.outline-color.default}"
                 },
                 "green": {
                   "background-color": "{imported.button.root.background-color.green}",
@@ -2270,8 +2065,7 @@
                   "border-top-color": "{imported.button.root.border-top-color.green}",
                   "border-top-width": "{imported.button.root.border-top-width.green}",
                   "color": "{imported.button.root.color.green}",
-                  "outline-color": "{imported.button.root.outline-color.green}",
-                  "row-rule-color": "{imported.button.root.row-rule-color.green}"
+                  "outline-color": "{imported.button.root.outline-color.green}"
                 },
                 "red": {
                   "background-color": "{imported.button.root.background-color.red}",
@@ -2284,8 +2078,7 @@
                   "border-top-color": "{imported.button.root.border-top-color.red}",
                   "border-top-width": "{imported.button.root.border-top-width.red}",
                   "color": "{imported.button.root.color.red}",
-                  "outline-color": "{imported.button.root.outline-color.red}",
-                  "row-rule-color": "{imported.button.root.row-rule-color.red}"
+                  "outline-color": "{imported.button.root.outline-color.red}"
                 }
               }
             },
@@ -2578,8 +2371,7 @@
                 "font-weight": "{imported.toggle-switch.label.font-weight}",
                 "line-height": "{imported.toggle-switch.label.line-height}",
                 "margin-left": "{imported.toggle-switch.label.margin-left}",
-                "margin-top": "{imported.toggle-switch.label.margin-top}",
-                "row-rule-color": "{imported.toggle-switch.label.row-rule-color}"
+                "margin-top": "{imported.toggle-switch.label.margin-top}"
               }
             }
           },

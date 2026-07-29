@@ -24,8 +24,7 @@
         "background-color": "{imported.case-color-rgb-solid.root.background-color}",
         "color": "{imported.case-color-rgb-solid.root.color}",
         "font-size": "{imported.case-color-rgb-solid.root.font-size}",
-        "font-weight": "{imported.case-color-rgb-solid.root.font-weight}",
-        "row-rule-color": "{imported.case-color-rgb-solid.root.row-rule-color}"
+        "font-weight": "{imported.case-color-rgb-solid.root.font-weight}"
       }
     }
   },

@@ -83,8 +83,7 @@
         "line-height": "{imported.link.root.line-height.unset}",
         "min-height": "{imported.link.root.min-height}",
         "min-width": "{imported.link.root.min-width}",
-        "row-gap": "{imported.link.root.row-gap}",
-        "row-rule-color": "{imported.link.root.row-rule-color}"
+        "row-gap": "{imported.link.root.row-gap}"
       },
       "states": {
         "focus-visible": {
@@ -92,8 +91,7 @@
           "outline-width": "{imported.link.root.outline-width-state-focus-visible}"
         },
         "hover": {
-          "color": "{imported.link.root.color-state-hover}",
-          "row-rule-color": "{imported.link.root.row-rule-color-state-hover}"
+          "color": "{imported.link.root.color-state-hover}"
         }
       },
       "tokensByProp": [

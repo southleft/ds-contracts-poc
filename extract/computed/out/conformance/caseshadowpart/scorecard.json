@@ -30,13 +30,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 7,
+    "mintedLeaves": 6,
     "mintedLeavesUnfolded": 6,
-    "baseBindings": 9,
+    "baseBindings": 8,
     "stateBindings": 0,
     "codeOnlyChannels": 1,
     "overflowBindings": 0,
-    "folds": 9
+    "folds": 10
   },
   "worstRows": [
     {

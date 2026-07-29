@@ -151,28 +151,6 @@
             "$value": "4px",
             "$type": "dimension"
           },
-          "row-rule-color": {
-            "unset": {
-              "$value": "#101010",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#000b29",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#00190c",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#191100",
-              "$type": "color"
-            },
-            "danger": {
-              "$value": "#1f0600",
-              "$type": "color"
-            }
-          },
           "text-indent": {
             "default": {
               "$value": "0px",
@@ -227,6 +205,12 @@
     {
       "part": "root",
       "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },

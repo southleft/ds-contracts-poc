@@ -50,8 +50,8 @@
     "interactions": 4,
     "computed": {
       "cellsCompared": 432,
-      "cellsEqual": 276,
-      "pctEqual": 63.888888888888886,
+      "cellsEqual": 356,
+      "pctEqual": 82.4074074074074,
       "rowsFullyEqual": 0,
       "rows": 16
     },
@@ -73,13 +73,13 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 19,
+      "mintedLeaves": 17,
       "mintedLeavesUnfolded": 17,
-      "baseBindings": 9,
-      "stateBindings": 4,
+      "baseBindings": 8,
+      "stateBindings": 3,
       "codeOnlyChannels": 1,
       "overflowBindings": 0,
-      "folds": 9
+      "folds": 10
     },
     "worstRows": [
       {
@@ -111,31 +111,31 @@
         "unscorable": "no-original"
       },
       {
+        "key": "unset__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 2,
+        "unscorable": "no-original"
+      },
+      {
         "key": "unset__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
         "key": "unset__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       },
       {
-        "key": "xs__hover",
+        "key": "xs__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 12,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "xs__focus-visible",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 12,
+        "channelsMismatched": 2,
         "unscorable": "no-original"
       }
     ],
@@ -150,46 +150,46 @@
       ],
       [
         "root.border-bottom-color",
-        12
+        4
       ],
       [
         "root.border-left-color",
-        12
+        4
       ],
       [
         "root.border-right-color",
-        12
+        4
       ],
       [
         "root.border-top-color",
-        12
+        4
       ],
       [
         "root.caret-color",
-        12
+        4
       ],
       [
         "root.color",
-        12
+        4
       ],
       [
         "root.column-rule-color",
-        12
+        4
       ],
       [
         "root.outline-color",
-        12
-      ],
-      [
-        "root.text-decoration-color",
-        12
-      ],
-      [
-        "root.text-emphasis-color",
-        12
+        4
       ],
       [
         "root.row-rule-color",
+        4
+      ],
+      [
+        "root.text-decoration-color",
+        4
+      ],
+      [
+        "root.text-emphasis-color",
         4
       ]
     ],
@@ -202,7 +202,7 @@
     },
     "shippedMinted": {
       "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-      "leavesAdded": 330,
+      "leavesAdded": 298,
       "divergent": [
         {
           "token": "imported.link.root.color",
@@ -239,76 +239,16 @@
       {
         "key": "unset__hover",
         "channelsCompared": 27,
-        "channelsEqual": 15,
+        "channelsEqual": 25,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "caret-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "column-rule-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-emphasis-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
           },
           {
             "part": "root",
@@ -322,76 +262,16 @@
       {
         "key": "unset__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 15,
+        "channelsEqual": 25,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "caret-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "column-rule-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-emphasis-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
@@ -413,43 +293,43 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "caret-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "column-rule-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -461,7 +341,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -473,13 +353,13 @@
           {
             "part": "root",
             "channel": "text-decoration-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "text-emphasis-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -517,76 +397,16 @@
       {
         "key": "xs__hover",
         "channelsCompared": 27,
-        "channelsEqual": 15,
+        "channelsEqual": 25,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "caret-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "column-rule-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-emphasis-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
           },
           {
             "part": "root",
@@ -600,76 +420,16 @@
       {
         "key": "xs__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 15,
+        "channelsEqual": 25,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "caret-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "column-rule-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-emphasis-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
@@ -691,43 +451,43 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "caret-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "column-rule-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -739,7 +499,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -751,13 +511,13 @@
           {
             "part": "root",
             "channel": "text-decoration-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "text-emphasis-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -795,76 +555,16 @@
       {
         "key": "sm__hover",
         "channelsCompared": 27,
-        "channelsEqual": 15,
+        "channelsEqual": 25,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "caret-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "column-rule-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-emphasis-color",
-            "ours": "rgba(93, 136, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
           },
           {
             "part": "root",
@@ -878,76 +578,16 @@
       {
         "key": "sm__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 15,
+        "channelsEqual": 25,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "caret-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "column-rule-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-emphasis-color",
-            "ours": "rgba(70, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
@@ -969,43 +609,43 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "caret-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "column-rule-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -1017,7 +657,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -1029,13 +669,13 @@
           {
             "part": "root",
             "channel": "text-decoration-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "text-emphasis-color",
-            "ours": "rgba(93, 137, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -1073,76 +713,16 @@
       {
         "key": "lg__hover",
         "channelsCompared": 27,
-        "channelsEqual": 15,
+        "channelsEqual": 25,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-color",
-            "ours": "rgba(93, 137, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-color",
-            "ours": "rgba(93, 137, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-color",
-            "ours": "rgba(93, 137, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-color",
-            "ours": "rgba(93, 137, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "caret-color",
-            "ours": "rgba(93, 137, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "color",
-            "ours": "rgba(93, 137, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "column-rule-color",
-            "ours": "rgba(93, 137, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(93, 137, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration-color",
-            "ours": "rgba(93, 137, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-emphasis-color",
-            "ours": "rgba(93, 137, 255, 1)",
-            "theirs": "rgba(107, 147, 255, 1)"
           },
           {
             "part": "root",
@@ -1156,76 +736,16 @@
       {
         "key": "lg__focus-visible",
         "channelsCompared": 27,
-        "channelsEqual": 15,
+        "channelsEqual": 25,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
           {
             "part": "root",
-            "channel": "border-bottom-color",
-            "ours": "rgba(69, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-color",
-            "ours": "rgba(69, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-color",
-            "ours": "rgba(69, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-color",
-            "ours": "rgba(69, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "caret-color",
-            "ours": "rgba(69, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "color",
-            "ours": "rgba(69, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "column-rule-color",
-            "ours": "rgba(69, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
             "channel": "display",
             "ours": "flex",
             "theirs": "inline-flex"
-          },
-          {
-            "part": "root",
-            "channel": "outline-color",
-            "ours": "rgba(69, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-decoration-color",
-            "ours": "rgba(69, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "text-emphasis-color",
-            "ours": "rgba(69, 119, 255, 1)",
-            "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
@@ -1247,43 +767,43 @@
           {
             "part": "root",
             "channel": "border-bottom-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-left-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-right-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "border-top-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "caret-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "column-rule-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -1295,7 +815,7 @@
           {
             "part": "root",
             "channel": "outline-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
@@ -1307,13 +827,13 @@
           {
             "part": "root",
             "channel": "text-decoration-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {
             "part": "root",
             "channel": "text-emphasis-color",
-            "ours": "rgba(97, 140, 255, 1)",
+            "ours": "rgba(107, 147, 255, 1)",
             "theirs": "rgba(67, 117, 255, 1)"
           },
           {

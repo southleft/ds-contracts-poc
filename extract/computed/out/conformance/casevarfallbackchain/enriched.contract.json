@@ -23,8 +23,7 @@
       "tokens": {
         "color": "{imported.case-var-fallback-chain.root.color}",
         "font-size": "{imported.case-var-fallback-chain.root.font-size}",
-        "font-weight": "{imported.case-var-fallback-chain.root.font-weight}",
-        "row-rule-color": "{imported.case-var-fallback-chain.root.row-rule-color}"
+        "font-weight": "{imported.case-var-fallback-chain.root.font-weight}"
       }
     }
   },

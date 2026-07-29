@@ -30,13 +30,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 44,
+    "mintedLeaves": 35,
     "mintedLeavesUnfolded": 125,
-    "baseBindings": 97,
+    "baseBindings": 94,
     "stateBindings": 0,
     "codeOnlyChannels": 3,
     "overflowBindings": 0,
-    "folds": 27
+    "folds": 30
   },
   "worstRows": [
     {
@@ -161,7 +161,7 @@
   },
   "shippedMinted": {
     "path": "examples/mui/tokens/mui-minted.dtcg.json",
-    "leavesAdded": 1454,
+    "leavesAdded": 1499,
     "divergent": [
       {
         "token": "imported.tabs.label-2.color.primary",

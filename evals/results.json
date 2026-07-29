@@ -1,6 +1,6 @@
 {
-  "passed": 176,
-  "total": 176,
+  "passed": 178,
+  "total": 178,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -880,6 +880,16 @@
     {
       "id": "css-dom-conformance-frontier",
       "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "capture-scope-independence",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "minted-leaves-bind-to-something",
+      "claim": "C2-refusal",
       "pass": true
     }
   ]

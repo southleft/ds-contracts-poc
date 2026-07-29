@@ -30,13 +30,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 52,
+    "mintedLeaves": 51,
     "mintedLeavesUnfolded": 51,
-    "baseBindings": 63,
-    "stateBindings": 14,
+    "baseBindings": 62,
+    "stateBindings": 13,
     "codeOnlyChannels": 3,
-    "overflowBindings": 12,
-    "folds": 9
+    "overflowBindings": 11,
+    "folds": 10
   },
   "worstRows": [
     {
@@ -152,7 +152,6 @@
   ],
   "namedLosses": [
     "overflow: text-input.outline-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: label.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: text-input.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: text-input.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: text-input.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -173,7 +172,7 @@
   },
   "shippedMinted": {
     "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-    "leavesAdded": 1034,
+    "leavesAdded": 1035,
     "divergent": [
       {
         "token": "imported.text-input.label.color",

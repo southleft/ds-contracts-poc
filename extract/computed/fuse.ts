@@ -577,6 +577,45 @@ export const WEBKIT_NOTES: Record<string, string> = {
 export const CURRENTCOLOR_FOLD_CANDIDATES = new Set([
   'caret-color', 'text-decoration-color', 'text-emphasis-color', 'column-rule-color',
   'outline-color', 'border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color',
+  // ═══ TASK #35 — `row-rule-color`, THE 55% MISS, IS ONE MISSING LINE.
+  //
+  // `row-rule-color` accounted for 268 occurrences — 55% of ALL unhandled-
+  // channel misses corpus-wide — and it reaches the SHIPPED contracts of five
+  // of six libraries (altitude 25 refs, astryx 34, carbon 69, mui 124,
+  // tailwind 32). Nobody authored it and neither surface paints it.
+  //
+  // WHY IT PASSED THE DELTA-FROM-CONTROL DOOR (measured, not assumed): its CSS
+  // initial value is `currentcolor`, so its computed value IS the element's own
+  // `color`. Verified on astryx/button's committed capture — every element:
+  // `color: rgba(10,19,23,1)`, `row-rule-color: rgba(10,19,23,1)`,
+  // `row-rule-style: none`, i.e. identical to `color` and structurally unable
+  // to paint. The door compares the subject against a BARE control element
+  // whose `color` is the UA default, so any part with an authored `color`
+  // differs in `row-rule-color` too. The door is doing exactly what it should;
+  // the channel is a DERIVED mirror, not an authored fact.
+  //
+  // WHICH IS WHAT THIS LIST IS FOR — and `row-rule-color` was simply missing
+  // from it. `row-rule-*` is CSS Gap Decorations, a longhand family Chromium
+  // began enumerating AFTER this list was written, and unlike every other
+  // member of its class it is neither `-webkit-`-prefixed nor a logical alias,
+  // so no earlier door caught it. Census over all 107 committed captures
+  // (`equals color` on every element carrying both):
+  //     -webkit-text-fill-color  100.0%  — refused earlier by the -webkit blanket
+  //     -webkit-text-stroke-color 99.9%  — refused earlier by the -webkit blanket
+  //     caret/column-rule/text-decoration/text-emphasis-color 99.9% — ON THIS LIST
+  //     row-rule-color            99.8%  — NOT ON THIS LIST  ←  the whole defect
+  //     border-{block,inline}-*-color 95-98% — refused earlier as LOGICAL_ALIASES
+  //     border-{top,right,bottom,left}/outline-color 93-98% — ON THIS LIST
+  // So the enumeration was not systemically stale: EXACTLY ONE fusable channel
+  // slipped, and the `currentcolor-fold-candidate-missing` census receipt below
+  // now makes the next browser widening announce itself instead of minting
+  // another 268 leaves in silence.
+  //
+  // The fold stays EMPIRICAL — this only makes `row-rule-color` eligible; it
+  // folds on a given part only when it equals that part's `color` in every
+  // captured combo × interaction. Where it genuinely differs it still mints,
+  // and the census names it.
+  'row-rule-color',
 ]);
 
 export interface FoldReceipt {
@@ -590,8 +629,22 @@ export interface FoldReceipt {
 
 /** Detect folds per part. A folded channel's base values AND state deltas are
  *  carried by its source fact — it mints nothing, receipted by name. */
-export function detectFolds(a: AlignedSweep, styled: Map<string, Set<string>>): FoldReceipt[] {
+export function detectFolds(
+  a: AlignedSweep,
+  styled: Map<string, Set<string>>,
+  /** TASK #35 — the STALENESS CENSUS. `CURRENTCOLOR_FOLD_CANDIDATES` is a
+   *  hand-maintained enumeration and the browser widens underneath it: that is
+   *  precisely how `row-rule-color` (CSS Gap Decorations, added to Chromium's
+   *  longhand enumeration after the list was written) became 55% of all
+   *  unhandled-channel misses without one line of receipt anywhere. Any styled
+   *  channel that WOULD have folded — equal to the part's own `color` on every
+   *  captured plane — but is NOT on the candidate list is named here, so the
+   *  next widening announces itself instead of minting leaves in silence.
+   *  Same discipline as the R4 `-webkit` census in `styledChannels`. */
+  receipts?: string[],
+): FoldReceipt[] {
   const folds: FoldReceipt[] = [];
+  const missingCandidates = new Map<string, Set<string>>(); // channel -> parts
   const pxOf = (v: string | undefined): number | null => {
     if (v === undefined) return null;
     const m = /^(-?\d+(?:\.\d+)?)px$/.exec(v);
@@ -610,6 +663,22 @@ export function detectFolds(a: AlignedSweep, styled: Map<string, Set<string>>): 
           if (el.node.style[ch] !== el.node.style['color']) { holds = false; break; }
         }
         if (holds) { folds.push({ part, channel: ch, foldedInto: 'color', class: 'currentColor' }); continue; }
+      } else if (/-color$/.test(ch) && receipts) {
+        // TASK #35 census: a non-candidate `*-color` channel that equals the
+        // part's own `color` on EVERY captured plane is a currentcolor mirror
+        // the list does not know about. Measured, never assumed — a channel
+        // that ever differs is a real fact and is not named here.
+        let mirrors = true;
+        let seen = 0;
+        for (const c of a.captures) {
+          const el = a.getAligned(`${c.combo}__${c.interaction}`)[pi];
+          if (!el || el.node.style[ch] === undefined) continue;
+          seen++;
+          if (el.node.style[ch] !== el.node.style['color']) { mirrors = false; break; }
+        }
+        if (mirrors && seen > 0) {
+          (missingCandidates.get(ch) ?? missingCandidates.set(ch, new Set()).get(ch)!).add(part);
+        }
       }
       if (ch === 'font-size') continue;
       // em-tracking: constant ratio to font-size across ALL captures, with
@@ -632,6 +701,13 @@ export function detectFolds(a: AlignedSweep, styled: Map<string, Set<string>>): 
       if (holds && ratio !== null && ratio !== 0 && fontSizes.size >= 2) {
         folds.push({ part, channel: ch, foldedInto: 'font-size', ratio, class: 'em-tracking' });
       }
+    }
+  }
+  if (receipts && missingCandidates.size > 0) {
+    for (const [ch, parts] of [...missingCandidates].sort()) {
+      receipts.push(
+        `currentcolor-fold-candidate-missing: ${ch} equals its part's own \`color\` on EVERY captured plane of ${[...parts].sort().join(', ')} — the signature of a \`currentcolor\`-initial channel — but it is NOT in CURRENTCOLOR_FOLD_CANDIDATES, so it passes the delta-from-control door as if it were an authored fact and MINTS. This is exactly how \`row-rule-color\` became 55% of all unhandled-channel misses (task #35). Either the list needs this channel or the channel is a genuine independent fact; it is named rather than left to accumulate.`,
+      );
     }
   }
   return folds;
@@ -948,6 +1024,11 @@ export interface MintPrep {
   declaredStates: DeclaredStateEnrichment[];
   inertOnDisabled: string[];
   pairwiseRefusals: string[];
+  /** ORPHAN-LEAF ROUND (task #42) — one named line per union part the anatomy
+   *  promotion refused, with the styled-channel count that therefore did NOT
+   *  mint. The COUNT is the receipt: "0 orphan refusals" and "the door is not
+   *  wired" must not look the same. */
+  orphanRefusals: string[];
   /** leaf-count comparison: mint run WITHOUT the folding pass. */
   unfoldedLeafCount: number;
   foldedStateSkips: string[];
@@ -1072,6 +1153,11 @@ export function prepareMint(
   contract: Contract = space.contract,
   /** Union part names whose channels are consumed by promoted svg assets. */
   svgConsumedParts?: Set<string>,
+  /** ORPHAN-LEAF ROUND (task #42) — the union part names the anatomy promotion
+   *  actually CARRIED (`PromotionResult.partIndex` keys). Omitted ⇒ the door
+   *  is derived from `contract` itself, which is the same set whenever the
+   *  caller passes the PROMOTED contract (both callers do). */
+  promotedParts?: Set<string>,
 ): MintPrep {
   const axes: MintAxis[] = space.axes.map((ax) => ({ propName: ax.prop, values: [...ax.values] }));
   const partByName = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
@@ -1083,6 +1169,48 @@ export function prepareMint(
     if (!p || p.component || p.slot) return undefined; // ref/slot parts never carry declared facts
     return p;
   };
+
+  // ═══ ORPHAN-LEAF ROUND (task #42) — THE PROMOTION REFUSAL NOW RUNS AT THE
+  // MINT DOOR, NOT ONLY AT THE ANATOMY DOOR.
+  //
+  // `promoteAnatomy` already refuses parts BY NAME (`non-painting-part`,
+  // `inert-overlay-wrapper`, `pseudo-decor-hidden-in-combo`,
+  // `static-part-unrendered`, …) and the refused part is absent from the
+  // promoted contract. But every loop below iterated `a.baseFlat` — the UNION
+  // anatomy — so a refused part's channels went on minting exactly as if it
+  // existed. The leaves landed in `extension.mintedTokens`, `promote` merged
+  // them into the shipped `*-minted.dtcg.json`, and `figma bundle` shipped
+  // them as real Figma variables that NOTHING references. Measured before this
+  // door: carbon/IconButton minted 112 leaves under three refused parts
+  // (`popover`, `label`, `popover-caret`); 224 such leaves corpus-wide.
+  //
+  // A leaf that exists because of a part that does not is the same class of
+  // lie as the phantom part itself — so it is refused at the SAME door, by the
+  // SAME decision, rather than swept up afterwards. Refusing here (instead of
+  // post-mint) also means the refusal is a fact of fusion the receipts can
+  // name per part+channel, not an anonymous count of deleted rows.
+  const refusedByPromotion = new Set<string>();
+  const orphanRefusals: string[] = [];
+  {
+    const carried = promotedParts ?? new Set(partByName.keys());
+    const counts = new Map<string, number>();
+    for (let pi = 0; pi < a.baseFlat.length; pi++) {
+      const partName = a.partNames[pi];
+      if (carried.has(partName)) continue;
+      if (svgConsumedParts?.has(partName)) continue; // already named by the svg-asset door
+      refusedByPromotion.add(partName);
+      counts.set(partName, (styled.get(partName) ?? new Set()).size);
+    }
+    for (const [partName, n] of [...counts].sort()) {
+      orphanRefusals.push(
+        `orphan-mint-refused: ${partName} was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its ${n} styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and \`figma bundle\` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.`,
+      );
+    }
+  }
+  /** Union part names that may reach the mint: carried by the promotion AND
+   *  not consumed by a promoted svg asset. */
+  const mintablePart = (partName: string): boolean =>
+    !refusedByPromotion.has(partName) && !svgConsumedParts?.has(partName);
 
   // Round 5c — CARRIED-CHANNEL RE-MINT on a defaultless-axis contest (the
   // Button tone×variant paint refusal): a channel the reviewed static layer
@@ -1137,7 +1265,7 @@ export function prepareMint(
     const pairwiseRefusals: string[] = [];
     for (let pi = 0; pi < a.baseFlat.length; pi++) {
       const partName = a.partNames[pi];
-      if (svgConsumedParts?.has(partName)) continue; // svg internals: carried by the promoted icon asset (round 4)
+      if (!mintablePart(partName)) continue; // svg internals (round 4) OR a part the promotion refused (task #42)
       const carried = carriedChannels(partByName.get(partName));
       for (const channel of [...(styled.get(partName) ?? [])].sort()) {
         if (carried.has(channel)) {
@@ -1314,7 +1442,7 @@ export function prepareMint(
     for (let pi = 0; pi < a.baseFlat.length; pi++) {
       if (a.union.entries[pi]?.parent == null) continue; // root has no ancestor
       const partName = a.partNames[pi];
-      if (svgConsumedParts?.has(partName)) continue;
+      if (!mintablePart(partName)) continue;
       const ai = ancestorOf(pi);
       if (ai === null) continue;
       const ancestorName = a.partNames[ai];
@@ -1397,7 +1525,7 @@ export function prepareMint(
       if (!a.byKey.has(`${combo.key}__${interaction}`)) continue;
       const els = a.getAligned(`${combo.key}__${interaction}`);
       for (let pi = 0; pi < a.baseFlat.length; pi++) {
-        if (svgConsumedParts?.has(a.partNames[pi])) continue;
+        if (!mintablePart(a.partNames[pi])) continue;
         const d0 = defaults[pi];
         const d1 = els[pi];
         if (!d0 || !d1) continue;
@@ -1431,7 +1559,7 @@ export function prepareMint(
       const d0 = a.getAligned(`${twin.key}__default`);
       const d1 = a.getAligned(`${combo.key}__default`);
       for (let pi = 0; pi < a.baseFlat.length; pi++) {
-        if (svgConsumedParts?.has(a.partNames[pi])) continue;
+        if (!mintablePart(a.partNames[pi])) continue;
         if (!d0[pi] || !d1[pi]) continue;
         for (const p of allProps) {
           if (!isFusable(p)) continue;
@@ -1519,6 +1647,7 @@ export function prepareMint(
     declaredStates,
     inertOnDisabled,
     pairwiseRefusals: folded.pairwiseRefusals,
+    orphanRefusals,
     unfoldedLeafCount: unfoldedMint.count,
     foldedStateSkips: [...new Set(foldedStateSkips)],
     remintReceipts: [...new Set(remintReceipts)],

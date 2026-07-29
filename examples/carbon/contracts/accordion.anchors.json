@@ -1,0 +1,22 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "accordion",
+  "anchors": [
+    {
+      "leaf": "imported.accordion.accordion-heading.color",
+      "token": "text-primary",
+      "part": "accordion-heading",
+      "cssProperty": "color",
+      "varName": "--cds-text-primary",
+      "selector": ".cds--accordion__heading"
+    },
+    {
+      "leaf": "imported.accordion.icon.fill",
+      "token": "icon-primary",
+      "part": "icon",
+      "cssProperty": "fill",
+      "varName": "--cds-icon-primary",
+      "selector": ".cds--accordion__arrow"
+    }
+  ]
+}

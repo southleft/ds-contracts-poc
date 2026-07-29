@@ -64,7 +64,6 @@
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-6}",
                 "right": "{imported.shared.size-0}",
-                "row-rule-color": "{imported.shared.color-000000de}",
                 "top": "{imported.shared.size-0}"
               }
             },
@@ -101,7 +100,6 @@
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-6}",
                 "right": "{imported.shared.size-0}",
-                "row-rule-color": "{imported.shared.color-000000de}",
                 "top": "{imported.shared.size-0}"
               }
             },
@@ -138,7 +136,6 @@
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-6}",
                 "right": "{imported.shared.size-0}",
-                "row-rule-color": "{imported.shared.color-000000de}",
                 "top": "{imported.shared.size-0}"
               }
             }
@@ -154,7 +151,6 @@
             "padding-bottom": "{imported.menu.list-padding.padding-bottom}",
             "padding-top": "{imported.menu.list-padding.padding-top}",
             "right": "{imported.shared.size-0}",
-            "row-rule-color": "{imported.shared.color-000000de}",
             "top": "{imported.shared.size-0}",
             "width": "{imported.menu.list-padding.width}"
           }
@@ -175,7 +171,6 @@
         "min-width": "{imported.shared.size-16}",
         "outline-width": "{imported.shared.size-0}",
         "right": "{imported.menu.root.right}",
-        "row-rule-color": "{imported.shared.color-000000de}",
         "top": "{imported.shared.size-24}",
         "width": "{imported.menu.root.width}"
       }

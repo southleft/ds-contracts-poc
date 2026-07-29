@@ -12,7 +12,7 @@
     "root": 41
   },
   "folds": {
-    "count": 4,
+    "count": 5,
     "receipts": [
       {
         "part": "root",
@@ -23,6 +23,12 @@
       {
         "part": "root",
         "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
@@ -40,7 +46,7 @@
       }
     ],
     "mintedLeavesUnfolded": 118,
-    "mintedLeavesFolded": 94
+    "mintedLeavesFolded": 88
   },
   "bound": {
     "cellsChecked": 0,
@@ -49,12 +55,12 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 94,
-    "baseBindings": 27,
+    "leaves": 88,
+    "baseBindings": 26,
     "stateBindings": 3,
     "byShape": {
       "uniform": 14,
-      "perAxis": 16,
+      "perAxis": 15,
       "perPair": 0,
       "refused": 0
     }

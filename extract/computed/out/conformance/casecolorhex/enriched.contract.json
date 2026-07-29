@@ -23,8 +23,7 @@
       "tokens": {
         "color": "{imported.case-color-hex.root.color}",
         "font-size": "{imported.case-color-hex.root.font-size}",
-        "font-weight": "{imported.case-color-hex.root.font-weight}",
-        "row-rule-color": "{imported.case-color-hex.root.row-rule-color}"
+        "font-weight": "{imported.case-color-hex.root.font-weight}"
       }
     }
   },

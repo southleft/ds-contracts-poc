@@ -54,14 +54,16 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import path from 'node:path';
 import { figmaScriptEmitter } from '../../../../core/emitter.js';
 import {
-  buildEmitterCtx,
+  buildEmitterCtxWithRouting,
   CliUsageError,
   expandContractArgs,
+  expandTokenArgs,
   flagString,
   loadContracts,
   loadIcons,
   parseFlags,
   splitList,
+  withTokenDiagnostics,
 } from '../lib.js';
 // propose-pr's three code-plan functions are imported LAZILY, inside the
 // --apply branch of receive (see below) — not here. Statically, this module
@@ -778,9 +780,9 @@ export async function figmaCommand(argv: string[]): Promise<number> {
   if (!out) throw new CliUsageError('figma needs --out <dir>');
   const files = expandContractArgs(parsed.positionals);
   const contracts = loadContracts(files);
-  const ctx = buildEmitterCtx(
+  const { ctx, routing } = buildEmitterCtxWithRouting(
     contracts,
-    splitList(flagString(parsed, 'tokens')).map((f) => path.resolve(f)),
+    expandTokenArgs(flagString(parsed, 'tokens')),
     flagString(parsed, 'icons'),
     flagString(parsed, 'file-key'),
   );
@@ -788,7 +790,7 @@ export async function figmaCommand(argv: string[]): Promise<number> {
   mkdirSync(outDir, { recursive: true });
   const written: string[] = [];
   for (const contract of contracts.values()) {
-    for (const file of figmaScriptEmitter.emit(contract, ctx)) {
+    for (const file of withTokenDiagnostics(routing, () => figmaScriptEmitter.emit(contract, ctx))) {
       writeFileSync(path.join(outDir, file.path), file.contents);
       written.push(file.path);
     }

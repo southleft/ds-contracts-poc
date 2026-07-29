@@ -12,7 +12,7 @@
     "root": 54
   },
   "folds": {
-    "count": 7,
+    "count": 8,
     "receipts": [
       {
         "part": "root",
@@ -48,6 +48,12 @@
       },
       {
         "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -60,7 +66,7 @@
       }
     ],
     "mintedLeavesUnfolded": 552,
-    "mintedLeavesFolded": 442
+    "mintedLeavesFolded": 420
   },
   "bound": {
     "cellsChecked": 0,
@@ -69,13 +75,13 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 442,
-    "baseBindings": 28,
-    "stateBindings": 21,
+    "leaves": 420,
+    "baseBindings": 27,
+    "stateBindings": 20,
     "byShape": {
-      "uniform": 14,
+      "uniform": 13,
       "perAxis": 14,
-      "perPair": 21,
+      "perPair": 20,
       "refused": 0
     }
   },
@@ -183,7 +189,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 86.19929453262786,
+    "computedPctEqual": 86.35361552028219,
     "rowsFullyEqual": 0,
     "rows": 504,
     "pixelPerfectExact": 0,

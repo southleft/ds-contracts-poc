@@ -10,25 +10,21 @@
           "background-color": {
             "$value": "#fafafa",
             "$type": "color"
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
           }
         },
         "label": {
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
           "font-weight": {
             "$value": "400",
             "$type": "number"
           }
-        },
-        "label-2": {
-          "font-weight": {
-            "$value": "400",
-            "$type": "number"
-          }
-        }
-      },
-      "shared": {
-        "size-12": {
-          "$value": "12px",
-          "$type": "dimension"
         }
       }
     }
@@ -74,51 +70,10 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal",
       "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "box-sizing",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "border-box",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "font-family",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "monospace",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "line-height",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "normal",
-      "distinctValues": 1
-    },
-    {
-      "part": "label-2",
-      "channel": "visibility",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "hidden",
-      "distinctValues": 1
     }
   ],
   "stateOverflow": [],
-  "overflowBindings": [
-    {
-      "part": "label-2",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-12}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "label-2",
-      "channel": "font-weight",
-      "ref": "{imported.case-nonpainting-text-visibility-hidden.label-2.font-weight}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    }
-  ],
+  "overflowBindings": [],
   "pairwiseRefusals": [],
   "pseudoParts": {
     "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
@@ -131,11 +86,9 @@
   "styledChannelReceipts": [
     "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "text-part-typography-carried: label-2 — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
-    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-2.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "orphan-mint-refused: label-2 was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 6 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-only: label-2.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
     "inheritance-only: label.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [

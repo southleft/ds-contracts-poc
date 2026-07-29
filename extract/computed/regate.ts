@@ -192,8 +192,8 @@ async function main() {
       // CAPTURE. An offline re-fuse of a committed truth file has no raw tree
       // to take them from — the fold is still APPLIED (reconstructCaptures
       // runs it), only its receipt is not re-derivable. Empty, never faked.
-      textFillFolds: [],
-      closedShadowSuspects: [],
+      textFillFolds: {},
+      closedShadowSuspects: {},
     };
 
     const aligned = alignSweep(sweep, comp, space, cfg.library.classPrefix);
@@ -206,15 +206,15 @@ async function main() {
     const styledReceipts: string[] = [];
     const styled = styledChannels(aligned, space, controlStyles, sweep.allProps, styledReceipts);
 
-    const folds = detectFolds(aligned, styled);
+    const folds = detectFolds(aligned, styled, styledReceipts);
     const { rows: boundRows } = await boundCheck(aligned, comp, space, probeToken, promotion.contract);
     const boundConfirmed = boundRows.filter((r) => r.verdict === 'confirmed').length;
     const contradictions = boundRows.filter((r) => r.verdict === 'contradiction');
     const layout = enrichLayout(aligned, space, styled, promotion.contract);
-    const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts);
+    const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts, new Set(promotion.partIndex.keys()));
     // mirror run.ts: re-mint + inheritance-refusal receipts ride the styled
     // channel receipts into the extension block (`?? []` — pre-v15 builds).
-    styledReceipts.push(...(prep.remintReceipts ?? []), ...(prep.inheritanceReceipts ?? []));
+    styledReceipts.push(...(prep.remintReceipts ?? []), ...(prep.inheritanceReceipts ?? []), ...(prep.orphanRefusals ?? []));
     const mintBase = mintTokens(comp.name, prep.baseObs, prep.axes, { nestedPairs: true });
     const mintStates = mintTokens(comp.name, prep.stateObs, prep.axes, { nestedPairs: true });
     // `?? []` keeps the runner executable against pre-v15 fusion builds — the

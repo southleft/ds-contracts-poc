@@ -36,8 +36,8 @@ Zero contradictions.
 
 ## Minted (no name recoverable — core/mint-tokens.ts, unchanged)
 
-- leaves: **4** · bindings: 6 base + 0 state
-- shape: 6 uniform · 0 per-axis · 0 per-axis-pair · 0 refused (uncorrelated — nothing minted, named)
+- leaves: **4** · bindings: 4 base + 0 state
+- shape: 4 uniform · 0 per-axis · 0 per-axis-pair · 0 refused (uncorrelated — nothing minted, named)
 
 ## Declared facts (v15 — carried, first-class)
 
@@ -50,16 +50,10 @@ Zero contradictions.
 
 ## Code-only / overflow (named, in the extension file)
 
-- base channels outside mintable kinds: **5**
+- base channels outside mintable kinds: **1**
   - label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `normal`, 1 distinct value(s))
-  - label-2.box-sizing — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision (sample: `border-box`, 1 distinct value(s))
-  - label-2.font-family — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision (sample: `monospace`, 1 distinct value(s))
-  - label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `normal`, 1 distinct value(s))
-  - label-2.visibility — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today (sample: `hidden`, 1 distinct value(s))
 - state channels outside mintable kinds: **0**
-- refused/overflow bindings: **2**
-  - {"part":"label-2","channel":"font-size","ref":"{imported.shared.size-12}","refusal":"computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"}
-  - {"part":"label-2","channel":"font-weight","ref":"{imported.case-nonpainting-text-visibility-hidden.label-2.font-weight}","refusal":"computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"}
+- refused/overflow bindings: **0**
 
 ## Fidelity gate (scorecard.json)
 

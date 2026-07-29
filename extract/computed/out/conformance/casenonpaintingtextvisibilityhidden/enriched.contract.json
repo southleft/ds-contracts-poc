@@ -25,7 +25,7 @@
             "font-family": "monospace"
           },
           "tokens": {
-            "font-size": "{imported.shared.size-12}",
+            "font-size": "{imported.case-nonpainting-text-visibility-hidden.label.font-size}",
             "font-weight": "{imported.case-nonpainting-text-visibility-hidden.label.font-weight}"
           }
         }
@@ -36,7 +36,7 @@
       },
       "tokens": {
         "background-color": "{imported.case-nonpainting-text-visibility-hidden.root.background-color}",
-        "font-size": "{imported.shared.size-12}"
+        "font-size": "{imported.case-nonpainting-text-visibility-hidden.root.font-size}"
       }
     }
   },

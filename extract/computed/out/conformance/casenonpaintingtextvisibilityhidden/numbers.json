@@ -27,10 +27,10 @@
   },
   "minted": {
     "leaves": 4,
-    "baseBindings": 6,
+    "baseBindings": 4,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 6,
+      "uniform": 4,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -41,9 +41,9 @@
     "state": 0
   },
   "codeOnly": {
-    "base": 5,
+    "base": 1,
     "state": 0,
-    "overflowBindings": 2
+    "overflowBindings": 0
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {

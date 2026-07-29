@@ -44,7 +44,6 @@
         "color": "{imported.divider.root.color}",
         "min-height": "{imported.divider.root.min-height}",
         "min-width": "{imported.divider.root.min-width}",
-        "row-rule-color": "{imported.divider.root.row-rule-color}",
         "width": "{imported.divider.root.width.unset}"
       },
       "tokensByProp": [

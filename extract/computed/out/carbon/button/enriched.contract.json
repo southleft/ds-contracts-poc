@@ -143,8 +143,7 @@
           "border-right-color": "{imported.button.root.border-right-color-state-active.{kind}}",
           "border-top-color": "{imported.button.root.border-top-color-state-active.{kind}}",
           "box-shadow": "{imported.button.root.box-shadow-state-active.{kind}}",
-          "color": "{imported.button.root.color-state-active.{kind}}",
-          "row-rule-color": "{imported.button.root.row-rule-color-state-active.{kind}}"
+          "color": "{imported.button.root.color-state-active.{kind}}"
         },
         "disabled": {
           "background-color": "{imported.button.root.background-color-state-disabled.{kind}}",
@@ -152,8 +151,7 @@
           "border-left-color": "{imported.button.root.border-left-color-state-disabled.{kind}}",
           "border-right-color": "{imported.button.root.border-right-color-state-disabled.{kind}}",
           "border-top-color": "{imported.button.root.border-top-color-state-disabled.{kind}}",
-          "color": "{imported.button.root.color-state-disabled.{kind}}",
-          "row-rule-color": "{imported.button.root.row-rule-color-state-disabled.{kind}}"
+          "color": "{imported.button.root.color-state-disabled.{kind}}"
         },
         "focus-visible": {
           "background-color": "{imported.button.root.background-color-state-focus-visible.{kind}}",
@@ -162,8 +160,7 @@
           "border-right-color": "{imported.button.root.border-right-color-state-focus-visible.{kind}}",
           "border-top-color": "{imported.button.root.border-top-color-state-focus-visible.{kind}}",
           "box-shadow": "{imported.button.root.box-shadow-state-focus-visible.{kind}}",
-          "color": "{imported.button.root.color-state-focus-visible.{kind}}",
-          "row-rule-color": "{imported.button.root.row-rule-color-state-focus-visible.{kind}}"
+          "color": "{imported.button.root.color-state-focus-visible.{kind}}"
         },
         "hover": {
           "background-color": "{imported.button.root.background-color-state-hover.{kind}}",
@@ -171,8 +168,7 @@
           "border-left-color": "{imported.button.root.border-left-color-state-hover.{kind}}",
           "border-right-color": "{imported.button.root.border-right-color-state-hover.{kind}}",
           "border-top-color": "{imported.button.root.border-top-color-state-hover.{kind}}",
-          "color": "{imported.button.root.color-state-hover.{kind}}",
-          "row-rule-color": "{imported.button.root.row-rule-color-state-hover.{kind}}"
+          "color": "{imported.button.root.color-state-hover.{kind}}"
         }
       },
       "tokensByProp": [
@@ -190,8 +186,7 @@
               "border-top-color": "{imported.button.root.border-top-color.danger}",
               "border-top-width": "{imported.button.root.border-top-width.danger}",
               "color": "{imported.button.root.color.danger}",
-              "padding-right": "{imported.button.root.padding-right.danger}",
-              "row-rule-color": "{imported.button.root.row-rule-color.danger}"
+              "padding-right": "{imported.button.root.padding-right.danger}"
             },
             "danger--ghost": {
               "background-color": "{imported.button.root.background-color.danger--ghost}",
@@ -204,8 +199,7 @@
               "border-top-color": "{imported.button.root.border-top-color.danger--ghost}",
               "border-top-width": "{imported.button.root.border-top-width.danger--ghost}",
               "color": "{imported.button.root.color.danger--ghost}",
-              "padding-right": "{imported.button.root.padding-right.danger--ghost}",
-              "row-rule-color": "{imported.button.root.row-rule-color.danger--ghost}"
+              "padding-right": "{imported.button.root.padding-right.danger--ghost}"
             },
             "danger--primary": {
               "background-color": "{imported.button.root.background-color.danger--primary}",
@@ -218,8 +212,7 @@
               "border-top-color": "{imported.button.root.border-top-color.danger--primary}",
               "border-top-width": "{imported.button.root.border-top-width.danger--primary}",
               "color": "{imported.button.root.color.danger--primary}",
-              "padding-right": "{imported.button.root.padding-right.danger--primary}",
-              "row-rule-color": "{imported.button.root.row-rule-color.danger--primary}"
+              "padding-right": "{imported.button.root.padding-right.danger--primary}"
             },
             "danger--tertiary": {
               "background-color": "{imported.button.root.background-color.danger--tertiary}",
@@ -232,8 +225,7 @@
               "border-top-color": "{imported.button.root.border-top-color.danger--tertiary}",
               "border-top-width": "{imported.button.root.border-top-width.danger--tertiary}",
               "color": "{imported.button.root.color.danger--tertiary}",
-              "padding-right": "{imported.button.root.padding-right.danger--tertiary}",
-              "row-rule-color": "{imported.button.root.row-rule-color.danger--tertiary}"
+              "padding-right": "{imported.button.root.padding-right.danger--tertiary}"
             },
             "ghost": {
               "background-color": "{imported.button.root.background-color.ghost}",
@@ -246,8 +238,7 @@
               "border-top-color": "{imported.button.root.border-top-color.ghost}",
               "border-top-width": "{imported.button.root.border-top-width.ghost}",
               "color": "{imported.button.root.color.ghost}",
-              "padding-right": "{imported.button.root.padding-right.ghost}",
-              "row-rule-color": "{imported.button.root.row-rule-color.ghost}"
+              "padding-right": "{imported.button.root.padding-right.ghost}"
             },
             "primary": {
               "background-color": "{imported.button.root.background-color.primary}",
@@ -260,8 +251,7 @@
               "border-top-color": "{imported.button.root.border-top-color.primary}",
               "border-top-width": "{imported.button.root.border-top-width.primary}",
               "color": "{imported.button.root.color.primary}",
-              "padding-right": "{imported.button.root.padding-right.primary}",
-              "row-rule-color": "{imported.button.root.row-rule-color.primary}"
+              "padding-right": "{imported.button.root.padding-right.primary}"
             },
             "secondary": {
               "background-color": "{imported.button.root.background-color.secondary}",
@@ -274,8 +264,7 @@
               "border-top-color": "{imported.button.root.border-top-color.secondary}",
               "border-top-width": "{imported.button.root.border-top-width.secondary}",
               "color": "{imported.button.root.color.secondary}",
-              "padding-right": "{imported.button.root.padding-right.secondary}",
-              "row-rule-color": "{imported.button.root.row-rule-color.secondary}"
+              "padding-right": "{imported.button.root.padding-right.secondary}"
             },
             "tertiary": {
               "background-color": "{imported.button.root.background-color.tertiary}",
@@ -288,8 +277,7 @@
               "border-top-color": "{imported.button.root.border-top-color.tertiary}",
               "border-top-width": "{imported.button.root.border-top-width.tertiary}",
               "color": "{imported.button.root.color.tertiary}",
-              "padding-right": "{imported.button.root.padding-right.tertiary}",
-              "row-rule-color": "{imported.button.root.row-rule-color.tertiary}"
+              "padding-right": "{imported.button.root.padding-right.tertiary}"
             }
           }
         },

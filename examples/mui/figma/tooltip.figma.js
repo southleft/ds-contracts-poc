@@ -94,7 +94,7 @@ const COMPONENTS = [
                   "visibleDefault": false
                 }
               ],
-              "fill": "imported/shared/color-616161eb",
+              "fill": "imported/tooltip/label/background-color",
               "bindings": {
                 "bottomLeftRadius": "imported/shared/size-4",
                 "bottomRightRadius": "imported/shared/size-4",

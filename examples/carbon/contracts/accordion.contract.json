@@ -110,7 +110,7 @@
                     }
                   },
                   "tokens": {
-                    "fill": "{imported.shared.color-161616}",
+                    "fill": "{imported.accordion.icon.fill}",
                     "flex-basis": "{imported.shared.size-16}",
                     "flex-shrink": "{imported.accordion.icon.flex-shrink}",
                     "outline-color": "{imported.accordion.icon.outline-color}",
@@ -204,7 +204,7 @@
                 "border-right-width": "{imported.shared.size-0}",
                 "border-top-width": "{imported.shared.size-0}",
                 "bottom": "{imported.shared.size-0}",
-                "color": "{imported.shared.color-161616}",
+                "color": "{imported.accordion.accordion-heading.color}",
                 "font-size": "{imported.shared.size-16}",
                 "left": "{imported.shared.size-0}",
                 "min-height": "{imported.accordion.accordion-heading.min-height.unset}",
@@ -214,7 +214,6 @@
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "row-rule-color": "{imported.shared.color-161616}",
                 "top": "{imported.shared.size-0}"
               },
               "states": {

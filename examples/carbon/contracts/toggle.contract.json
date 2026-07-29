@@ -125,8 +125,7 @@
                 "line-height": "{imported.shared.size-16}",
                 "margin-bottom": "{imported.shared.size-16}",
                 "min-height": "{imported.shared.size-0}",
-                "min-width": "{imported.shared.size-0}",
-                "row-rule-color": "{imported.toggle.label.row-rule-color}"
+                "min-width": "{imported.shared.size-0}"
               },
               "states": {
                 "disabled": {

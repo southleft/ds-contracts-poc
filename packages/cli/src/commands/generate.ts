@@ -22,13 +22,15 @@ import { pathToFileURL } from 'node:url';
 import { emitterByName, getEmitters, registerEmitter, type Emitter } from '../../../../core/emitter.js';
 import { generateComponents } from '../../../../scripts/generate-components.js';
 import {
-  buildEmitterCtx,
+  buildEmitterCtxWithRouting,
   CliUsageError,
   expandContractArgs,
+  expandTokenArgs,
   flagString,
   loadContracts,
   parseFlags,
-  splitList,
+  tokenPathsOf,
+  withTokenDiagnostics,
 } from '../lib.js';
 
 /** Load + register a plugin emitter module (path or bare specifier). */
@@ -78,13 +80,16 @@ export async function generateCommand(argv: string[]): Promise<number> {
 
   const target = flagString(parsed, 'target') ?? 'react';
   const files = expandContractArgs(parsed.positionals);
-  const tokenFiles = splitList(flagString(parsed, 'tokens')).map((f) => path.resolve(f));
+  const tokenEntries = expandTokenArgs(flagString(parsed, 'tokens'));
   const iconsDir = flagString(parsed, 'icons');
   const outDir = path.resolve(out);
 
   if (target === 'react') {
     // The shipping generator — same exported function `npm run generate`
     // runs (prettier formatting, per-component index, root barrel).
+    // The repo generator builds its own FLAT inventory (paths only, no slots),
+    // so slot prefixes are stripped here rather than routed.
+    const tokenFiles = tokenPathsOf(tokenEntries);
     const { generated } = await generateComponents({
       contractFiles: files,
       tokenFiles: tokenFiles.length > 0 ? tokenFiles : undefined,
@@ -103,11 +108,16 @@ export async function generateCommand(argv: string[]): Promise<number> {
     );
   }
   const contracts = loadContracts(files);
-  const ctx = buildEmitterCtx(contracts, tokenFiles, iconsDir, flagString(parsed, 'file-key'));
+  const { ctx, routing } = buildEmitterCtxWithRouting(
+    contracts,
+    tokenEntries,
+    iconsDir,
+    flagString(parsed, 'file-key'),
+  );
   mkdirSync(outDir, { recursive: true });
   const written: string[] = [];
   for (const contract of contracts.values()) {
-    for (const file of emitter.emit(contract, ctx)) {
+    for (const file of withTokenDiagnostics(routing, () => emitter.emit(contract, ctx))) {
       const dest = path.join(outDir, file.path);
       mkdirSync(path.dirname(dest), { recursive: true });
       writeFileSync(dest, file.contents);

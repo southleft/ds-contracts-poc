@@ -4935,28 +4935,6 @@
                 "$type": "color"
               }
             },
-            "row-rule-color": {
-              "unset": {
-                "$value": "#000b29",
-                "$type": "color"
-              },
-              "secondary": {
-                "$value": "#191306",
-                "$type": "color"
-              },
-              "tertiary": {
-                "$value": "#101010",
-                "$type": "color"
-              },
-              "bare": {
-                "$value": "#101010",
-                "$type": "color"
-              },
-              "danger": {
-                "$value": "#1f0600",
-                "$type": "color"
-              }
-            },
             "outline-color-state-focus-visible": {
               "$value": "#4375ff",
               "$type": "color"
@@ -5122,28 +5100,6 @@
                 "$value": "#1f0600",
                 "$type": "color"
               }
-            },
-            "row-rule-color-state-hover": {
-              "tertiary": {
-                "$value": "#3a3a3a",
-                "$type": "color"
-              },
-              "bare": {
-                "$value": "#3a3a3a",
-                "$type": "color"
-              },
-              "unset": {
-                "$value": "#000b29",
-                "$type": "color"
-              },
-              "secondary": {
-                "$value": "#191306",
-                "$type": "color"
-              },
-              "danger": {
-                "$value": "#1f0600",
-                "$type": "color"
-              }
             }
           },
           "label": {
@@ -5177,51 +5133,7 @@
               "$value": "24px",
               "$type": "dimension"
             },
-            "row-rule-color": {
-              "unset": {
-                "$value": "#000b29",
-                "$type": "color"
-              },
-              "secondary": {
-                "$value": "#191306",
-                "$type": "color"
-              },
-              "tertiary": {
-                "$value": "#101010",
-                "$type": "color"
-              },
-              "bare": {
-                "$value": "#101010",
-                "$type": "color"
-              },
-              "danger": {
-                "$value": "#1f0600",
-                "$type": "color"
-              }
-            },
             "color-state-hover": {
-              "tertiary": {
-                "$value": "#3a3a3a",
-                "$type": "color"
-              },
-              "bare": {
-                "$value": "#3a3a3a",
-                "$type": "color"
-              },
-              "unset": {
-                "$value": "#000b29",
-                "$type": "color"
-              },
-              "secondary": {
-                "$value": "#191306",
-                "$type": "color"
-              },
-              "danger": {
-                "$value": "#1f0600",
-                "$type": "color"
-              }
-            },
-            "row-rule-color-state-hover": {
               "tertiary": {
                 "$value": "#3a3a3a",
                 "$type": "color"
@@ -5412,28 +5324,6 @@
             "row-gap": {
               "$value": "4px",
               "$type": "dimension"
-            },
-            "row-rule-color": {
-              "unset": {
-                "$value": "#101010",
-                "$type": "color"
-              },
-              "info": {
-                "$value": "#000b29",
-                "$type": "color"
-              },
-              "success": {
-                "$value": "#00190c",
-                "$type": "color"
-              },
-              "warning": {
-                "$value": "#191100",
-                "$type": "color"
-              },
-              "danger": {
-                "$value": "#1f0600",
-                "$type": "color"
-              }
             },
             "text-indent": {
               "default": {
@@ -5819,32 +5709,6 @@
               "$value": "8px",
               "$type": "dimension"
             },
-            "row-rule-color": {
-              "unset": {
-                "$value": "#3a3a3a",
-                "$type": "color"
-              },
-              "secondary": {
-                "$value": "#3a3a3a",
-                "$type": "color"
-              },
-              "info": {
-                "$value": "#000b29",
-                "$type": "color"
-              },
-              "success": {
-                "$value": "#00190c",
-                "$type": "color"
-              },
-              "warning": {
-                "$value": "#191100",
-                "$type": "color"
-              },
-              "danger": {
-                "$value": "#1f0600",
-                "$type": "color"
-              }
-            },
             "outline-color-state-focus-visible": {
               "$value": "#4375ff",
               "$type": "color"
@@ -5921,10 +5785,6 @@
               "$value": "8px",
               "$type": "dimension"
             },
-            "row-rule-color": {
-              "$value": "#4375ff",
-              "$type": "color"
-            },
             "outline-offset-state-focus-visible": {
               "$value": "2px",
               "$type": "dimension"
@@ -5934,10 +5794,6 @@
               "$type": "dimension"
             },
             "color-state-hover": {
-              "$value": "#6b93ff",
-              "$type": "color"
-            },
-            "row-rule-color-state-hover": {
               "$value": "#6b93ff",
               "$type": "color"
             }
@@ -6186,10 +6042,6 @@
             "min-width": {
               "$value": "0px",
               "$type": "dimension"
-            },
-            "row-rule-color": {
-              "$value": "#808080",
-              "$type": "color"
             },
             "width": {
               "unset": {
@@ -6596,8 +6448,7 @@
             "font-size": "{imported.badge.root.font-size}",
             "font-weight": "{imported.badge.root.font-weight}",
             "line-height": "{imported.badge.root.line-height}",
-            "row-gap": "{imported.badge.root.row-gap}",
-            "row-rule-color": "{imported.badge.root.row-rule-color.unset}"
+            "row-gap": "{imported.badge.root.row-gap}"
           },
           "tokensByProp": [
             {
@@ -6632,23 +6483,19 @@
               "map": {
                 "danger": {
                   "background-color": "{imported.badge.root.background-color.danger}",
-                  "color": "{imported.badge.root.color.danger}",
-                  "row-rule-color": "{imported.badge.root.row-rule-color.danger}"
+                  "color": "{imported.badge.root.color.danger}"
                 },
                 "info": {
                   "background-color": "{imported.badge.root.background-color.info}",
-                  "color": "{imported.badge.root.color.info}",
-                  "row-rule-color": "{imported.badge.root.row-rule-color.info}"
+                  "color": "{imported.badge.root.color.info}"
                 },
                 "success": {
                   "background-color": "{imported.badge.root.background-color.success}",
-                  "color": "{imported.badge.root.color.success}",
-                  "row-rule-color": "{imported.badge.root.row-rule-color.success}"
+                  "color": "{imported.badge.root.color.success}"
                 },
                 "warning": {
                   "background-color": "{imported.badge.root.background-color.warning}",
-                  "color": "{imported.badge.root.color.warning}",
-                  "row-rule-color": "{imported.badge.root.row-rule-color.warning}"
+                  "color": "{imported.badge.root.color.warning}"
                 }
               }
             }
@@ -6745,28 +6592,8 @@
               "tokens": {
                 "font-size": "{imported.shared.size-16}",
                 "font-weight": "{imported.button.label.font-weight}",
-                "line-height": "{imported.button.label.line-height}",
-                "row-rule-color": "{imported.button.label.row-rule-color.unset}"
-              },
-              "tokensByProp": [
-                {
-                  "prop": "variant",
-                  "map": {
-                    "bare": {
-                      "row-rule-color": "{imported.button.label.row-rule-color.bare}"
-                    },
-                    "danger": {
-                      "row-rule-color": "{imported.button.label.row-rule-color.danger}"
-                    },
-                    "secondary": {
-                      "row-rule-color": "{imported.button.label.row-rule-color.secondary}"
-                    },
-                    "tertiary": {
-                      "row-rule-color": "{imported.button.label.row-rule-color.tertiary}"
-                    }
-                  }
-                }
-              ]
+                "line-height": "{imported.button.label.line-height}"
+              }
             }
           },
           "declared": {
@@ -6811,7 +6638,6 @@
             "padding-top": "{imported.shared.size-8}",
             "right": "{imported.shared.size-0}",
             "row-gap": "{imported.shared.size-8}",
-            "row-rule-color": "{imported.button.root.row-rule-color.unset}",
             "top": "{imported.shared.size-0}"
           },
           "states": {
@@ -6827,8 +6653,7 @@
               "border-right-color": "{imported.button.root.border-right-color-state-hover.unset}",
               "border-top-color": "{imported.button.root.border-top-color-state-hover.unset}",
               "color": "{imported.button.root.color-state-hover.unset}",
-              "outline-color": "{imported.button.root.outline-color-state-hover.unset}",
-              "row-rule-color": "{imported.button.root.row-rule-color-state-hover.unset}"
+              "outline-color": "{imported.button.root.outline-color-state-hover.unset}"
             }
           },
           "tokensByProp": [
@@ -6846,8 +6671,7 @@
                   "border-top-color": "{imported.button.root.border-top-color.bare}",
                   "border-top-width": "{imported.button.root.border-top-width.bare}",
                   "color": "{imported.button.root.color.bare}",
-                  "outline-color": "{imported.button.root.outline-color.bare}",
-                  "row-rule-color": "{imported.button.root.row-rule-color.bare}"
+                  "outline-color": "{imported.button.root.outline-color.bare}"
                 },
                 "danger": {
                   "background-color": "{imported.button.root.background-color.danger}",
@@ -6860,8 +6684,7 @@
                   "border-top-color": "{imported.button.root.border-top-color.danger}",
                   "border-top-width": "{imported.button.root.border-top-width.danger}",
                   "color": "{imported.button.root.color.danger}",
-                  "outline-color": "{imported.button.root.outline-color.danger}",
-                  "row-rule-color": "{imported.button.root.row-rule-color.danger}"
+                  "outline-color": "{imported.button.root.outline-color.danger}"
                 },
                 "secondary": {
                   "background-color": "{imported.button.root.background-color.secondary}",
@@ -6874,8 +6697,7 @@
                   "border-top-color": "{imported.button.root.border-top-color.secondary}",
                   "border-top-width": "{imported.button.root.border-top-width.secondary}",
                   "color": "{imported.button.root.color.secondary}",
-                  "outline-color": "{imported.button.root.outline-color.secondary}",
-                  "row-rule-color": "{imported.button.root.row-rule-color.secondary}"
+                  "outline-color": "{imported.button.root.outline-color.secondary}"
                 },
                 "tertiary": {
                   "background-color": "{imported.button.root.background-color.tertiary}",
@@ -6888,8 +6710,7 @@
                   "border-top-color": "{imported.button.root.border-top-color.tertiary}",
                   "border-top-width": "{imported.button.root.border-top-width.tertiary}",
                   "color": "{imported.button.root.color.tertiary}",
-                  "outline-color": "{imported.button.root.outline-color.tertiary}",
-                  "row-rule-color": "{imported.button.root.row-rule-color.tertiary}"
+                  "outline-color": "{imported.button.root.outline-color.tertiary}"
                 }
               }
             }
@@ -7032,8 +6853,7 @@
             "padding-left": "{imported.chip.root.padding-left}",
             "padding-right": "{imported.chip.root.padding-right}",
             "padding-top": "{imported.chip.root.padding-top}",
-            "row-gap": "{imported.chip.root.row-gap}",
-            "row-rule-color": "{imported.chip.root.row-rule-color.unset}"
+            "row-gap": "{imported.chip.root.row-gap}"
           },
           "states": {
             "focus-visible": {
@@ -7068,8 +6888,7 @@
                   "border-top-color": "{imported.chip.root.border-top-color.danger}",
                   "border-top-width": "{imported.chip.root.border-top-width.danger}",
                   "color": "{imported.chip.root.color.danger}",
-                  "outline-color": "{imported.chip.root.outline-color.danger}",
-                  "row-rule-color": "{imported.chip.root.row-rule-color.danger}"
+                  "outline-color": "{imported.chip.root.outline-color.danger}"
                 },
                 "info": {
                   "background-color": "{imported.chip.root.background-color.info}",
@@ -7082,8 +6901,7 @@
                   "border-top-color": "{imported.chip.root.border-top-color.info}",
                   "border-top-width": "{imported.chip.root.border-top-width.info}",
                   "color": "{imported.chip.root.color.info}",
-                  "outline-color": "{imported.chip.root.outline-color.info}",
-                  "row-rule-color": "{imported.chip.root.row-rule-color.info}"
+                  "outline-color": "{imported.chip.root.outline-color.info}"
                 },
                 "secondary": {
                   "background-color": "{imported.chip.root.background-color.secondary}",
@@ -7096,8 +6914,7 @@
                   "border-top-color": "{imported.chip.root.border-top-color.secondary}",
                   "border-top-width": "{imported.chip.root.border-top-width.secondary}",
                   "color": "{imported.chip.root.color.secondary}",
-                  "outline-color": "{imported.chip.root.outline-color.secondary}",
-                  "row-rule-color": "{imported.chip.root.row-rule-color.secondary}"
+                  "outline-color": "{imported.chip.root.outline-color.secondary}"
                 },
                 "success": {
                   "background-color": "{imported.chip.root.background-color.success}",
@@ -7110,8 +6927,7 @@
                   "border-top-color": "{imported.chip.root.border-top-color.success}",
                   "border-top-width": "{imported.chip.root.border-top-width.success}",
                   "color": "{imported.chip.root.color.success}",
-                  "outline-color": "{imported.chip.root.outline-color.success}",
-                  "row-rule-color": "{imported.chip.root.row-rule-color.success}"
+                  "outline-color": "{imported.chip.root.outline-color.success}"
                 },
                 "warning": {
                   "background-color": "{imported.chip.root.background-color.warning}",
@@ -7124,8 +6940,7 @@
                   "border-top-color": "{imported.chip.root.border-top-color.warning}",
                   "border-top-width": "{imported.chip.root.border-top-width.warning}",
                   "color": "{imported.chip.root.color.warning}",
-                  "outline-color": "{imported.chip.root.outline-color.warning}",
-                  "row-rule-color": "{imported.chip.root.row-rule-color.warning}"
+                  "outline-color": "{imported.chip.root.outline-color.warning}"
                 }
               }
             }
@@ -7190,7 +7005,6 @@
             "color": "{imported.divider.root.color}",
             "min-height": "{imported.divider.root.min-height}",
             "min-width": "{imported.divider.root.min-width}",
-            "row-rule-color": "{imported.divider.root.row-rule-color}",
             "width": "{imported.divider.root.width.unset}"
           },
           "tokensByProp": [
@@ -7689,8 +7503,7 @@
             "line-height": "{imported.link.root.line-height.unset}",
             "min-height": "{imported.link.root.min-height}",
             "min-width": "{imported.link.root.min-width}",
-            "row-gap": "{imported.link.root.row-gap}",
-            "row-rule-color": "{imported.link.root.row-rule-color}"
+            "row-gap": "{imported.link.root.row-gap}"
           },
           "states": {
             "focus-visible": {
@@ -7698,8 +7511,7 @@
               "outline-width": "{imported.link.root.outline-width-state-focus-visible}"
             },
             "hover": {
-              "color": "{imported.link.root.color-state-hover}",
-              "row-rule-color": "{imported.link.root.row-rule-color-state-hover}"
+              "color": "{imported.link.root.color-state-hover}"
             }
           },
           "tokensByProp": [

@@ -16,7 +16,7 @@
     "label": 21
   },
   "folds": {
-    "count": 18,
+    "count": 20,
     "receipts": [
       {
         "part": "dialog-paper",
@@ -62,6 +62,12 @@
       },
       {
         "part": "dialog-paper",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "dialog-paper",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -116,6 +122,12 @@
       },
       {
         "part": "label",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -128,7 +140,7 @@
       }
     ],
     "mintedLeavesUnfolded": 21,
-    "mintedLeavesFolded": 21
+    "mintedLeavesFolded": 22
   },
   "bound": {
     "cellsChecked": 0,
@@ -137,11 +149,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 21,
-    "baseBindings": 45,
+    "leaves": 22,
+    "baseBindings": 43,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 44,
+      "uniform": 42,
       "perAxis": 1,
       "perPair": 0,
       "refused": 0

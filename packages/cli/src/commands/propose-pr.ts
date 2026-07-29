@@ -48,7 +48,18 @@ import { provenanceSentence, type CanvasProvenance } from '../../../../core/canv
 import { emitterByName, getEmitters } from '../../../../core/emitter.js';
 import { generateComponents } from '../../../../scripts/generate-components.js';
 import { contractFileNameForId, unifiedDiff } from './figma.js';
-import { buildEmitterCtx, CliUsageError, flagString, loadContracts, parseFlags, splitList } from '../lib.js';
+import {
+  buildEmitterCtxWithRouting,
+  CliUsageError,
+  expandTokenArgs,
+  flagString,
+  loadContracts,
+  parseFlags,
+  parseTokenEntry,
+  splitList,
+  tokenPathsOf,
+  withTokenDiagnostics,
+} from '../lib.js';
 
 const API = 'https://api.github.com';
 
@@ -298,18 +309,26 @@ export async function generateCodeFiles(
   try {
     const contractFile = path.join(tmp, 'proposed.contract.json');
     writeFileSync(contractFile, contractText);
-    const tokenFiles = cfg.tokenFiles.map((f) => path.resolve(cwd, f));
+    // Token entries may carry an explicit `slot=` prefix (see lib.ts) — resolve
+    // the PATH half against cwd and keep the slot attached.
+    const named = cfg.tokenFiles.map((e) => {
+      const { prefix, file } = parseTokenEntry(e);
+      const abs = path.resolve(cwd, file);
+      return prefix ? `${prefix}=${abs}` : abs;
+    });
     // Name a missing token file in plain words. Without this the failure
     // surfaces as a raw ENOENT with an absolute path — true, but not an
     // answer. Tokens are the referee for every var(--x) binding, so a
     // missing tree is a real refusal, not a warning.
-    const missing = cfg.tokenFiles.filter((f, i) => !existsSync(tokenFiles[i]));
+    const missing = cfg.tokenFiles.filter((f, i) => !existsSync(tokenPathsOf(named)[i]));
     if (missing.length > 0) {
       throw new CliUsageError(
         `the token file(s) ${missing.join(', ')} named for code generation do not exist — ` +
           'fix `generate.tokens` in ds-contracts.config.json (or pass --tokens), or pass --no-code to propose the contract alone.',
       );
     }
+    const tokenEntries = expandTokenArgs(named);
+    const tokenFiles = tokenPathsOf(tokenEntries);
     const iconsDir = cfg.iconsDir ? path.resolve(cwd, cfg.iconsDir) : undefined;
 
     for (const target of cfg.targets) {
@@ -341,9 +360,9 @@ export async function generateCodeFiles(
       const emitter = emitterByName.get(target);
       if (!emitter) throw new CliUsageError(`Unknown --target "${target}"`);
       const contracts = loadContracts([contractFile]);
-      const ctx = buildEmitterCtx(contracts, tokenFiles, iconsDir);
+      const { ctx, routing } = buildEmitterCtxWithRouting(contracts, tokenEntries, iconsDir);
       for (const contract of contracts.values()) {
-        for (const f of emitter.emit(contract, ctx)) {
+        for (const f of withTokenDiagnostics(routing, () => emitter.emit(contract, ctx))) {
           files.push({ destPath: `${cfg.outDir}/${f.path}`, contents: f.contents, kind: 'code', target });
         }
       }

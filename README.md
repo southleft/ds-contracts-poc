@@ -11,6 +11,8 @@ This repository is the working proof, and the candidate reference implementation
 
 **→ The spec site: [ds-contracts-spec.pages.dev](https://ds-contracts-spec.pages.dev)** · **The playground: [ds-contracts-playground.pages.dev](https://ds-contracts-playground.pages.dev)** · **New here? [Which journey are you on?](#which-journey-are-you-on)**
 
+**Evaluating this? Read [Known Limitations](docs/23-known-limitations.md) first.** It is the complete inventory of what this tool does *not* do — measured coverage per library, the component classes captured nowhere, what a captured component fails to reproduce, which examples are frozen, and what each gate does and does not measure. It is deliberately the least flattering document here, and it is the one worth your time before you invest any.
+
 ---
 
 ## What a contract is
@@ -90,6 +92,16 @@ Phase 1 does everything a machine can decide: detects your adapter and styling
 method, creates or reuses a pinned sandbox, reads your components' source into
 seed contracts, and drafts the capture config. Then it stops and prints exactly
 what you have to decide.
+
+**The stop is deliberate, and there is no flag that skips it.** The drafted
+capture config carries `__review:*` markers on every field static source
+cannot infer — how to mount your component, which classes and CSS-variable
+prefixes are yours, which props must be fixed. `onboard --continue` refuses an
+unreviewed config **by name** and tells you which fields are still marked.
+`--from <stage>` resumes a run over artifacts that already exist; the gate
+still runs first, whatever stage you resume from. A capture driven by guessed
+mount code measures the wrong thing and reports it with full confidence —
+that is the failure this gate exists to prevent.
 
 <details><summary>The individual verbs, if you want to run the steps yourself</summary>
 
@@ -204,11 +216,11 @@ The static path is still worth running first for any library: it is the seed the
 The goal: a designer has a component set in Figma; you want a real, typed React component in your repo.
 
 1. **In the plugin, open the *Send* tab.** Select the set (or find it with *Scan this file*), leave the base-contract box empty if this tool did not build it, and click **Read the set & diff**. The engine reads the live set and proposes a contract from what is actually drawn — variants become props, layers become anatomy, bound variables become token refs.
-2. **Get that contract into the repo.** Three doors, all reviewable:
-   - **GitHub PR** — fill in `owner/repo` and a fine-grained token (session-only, never stored; leave *Dry run* ticked to see the exact plan first).
-   - **Send to repo** — the developer runs `ds-contracts figma receive --out contracts` on their machine, which prints a 6-character code; the designer types it in. The CLI **writes nothing without `--apply`**.
-   - **Copy the JSON out** and commit it yourself.
-3. **Generate the component.**
+2. **Get that contract into the repo — with the code already in it.** Three doors, all reviewable, and **none of them ends at a document nobody can run**. The contract and the component it generates travel together, in the same change:
+   - **GitHub PR** — fill in `owner/repo` and a fine-grained token (session-only, never stored; leave *Dry run* ticked to see the exact plan first). The PR carries **both halves**: the contract *and* the emitted component files next to it. Which target it emits is never guessed — `--target` wins, otherwise the `generate` section of `ds-contracts.config.json` decides, and with neither recorded the PR carries the contract alone **and says so in the body**.
+   - **Send to repo** — the developer runs `ds-contracts figma receive --out contracts` on their machine, which prints a 6-character code; the designer types it in. The CLI **writes nothing without `--apply`** — and with `--apply` it writes the generated component too, from the same config.
+   - **Copy the JSON out** and commit it yourself, then run `generate` (below).
+3. **Generate the component** — the explicit form, and what the two doors above run for you:
 
 ```bash
 ds-contracts generate contracts/button.contract.json --out src/generated \
@@ -217,13 +229,19 @@ ds-contracts generate contracts/button.contract.json --out src/generated \
 
 `--target` accepts `react` (typed TSX + CSS Modules + stories), `html`, `react-inline`, `figma-script`, or any emitter you register with `--emitter`. An unknown target is refused with the list of registered names.
 
+`--tokens` takes DTCG files, **a directory** (every `*.tokens.json` / `*.dtcg.json` inside it), or slot-named entries — `--tokens light=<file>,dark=<file>` — when your token set is layered. Two files that fight over the same token inside one slot are refused by name rather than silently merged, because a light tree merged over a dark one produces a dark component that reports itself as light.
+
 Generation is **fully deterministic**: the same contract produces byte-identical output, every time, on any machine. No model is in the path.
 
 ### The honest asymmetry
 
-For a set **this tool generated**, Journey B is a true round trip — the proposal is measured against the contract that built it, and this repo's own components re-extract to zero mismatches in both directions.
+Every PR states which of these it is, in the body — the tool does not let you find out later.
 
-For a **hand-built** set, it is not a reproduction. The proposal is an inversion of what can be read off the canvas: real structure, real variants, real bound variables — but a canvas cannot tell you about a `useEffect`, a keyboard handler, or why a value is what it is. **Treat the generated component as a strong, correct-by-construction starting point, not as your finished component.**
+For a set **this tool generated** (it carries a `ds_contracts/contractId` marker), Journey B is a **true round trip**: re-running the emitters reproduces the component **byte for byte** from the contract in the PR, and this repo's own components re-extract to zero mismatches in both directions.
+
+For a **hand-built** set, it is **an inversion**, not a reproduction. The proposal is what can be read off the canvas: real structure, real variants, real bound variables — but a canvas cannot tell you about a `useEffect`, a keyboard handler, or why a value is what it is. **Treat the generated component as a strong, correct-by-construction starting point, not as your finished component**, and review it as new code.
+
+When a contract arrives with no canvas provenance at all (a document straight out of the repo), the PR says exactly that rather than picking a side.
 
 ---
 
@@ -252,7 +270,7 @@ Beyond that, four properties you can rely on:
 - **It refuses rather than guesses.** A token ref outside the inventory, an illegal contract, an unreviewed draft config, a state preview that would render identically to Default — each stops with a message that names the thing. A plausible substituted value is treated as worse than a crash.
 - **Everything it cannot carry, it names.** Every extraction writes a `*.extension.json` sidecar listing each captured fact the vocabulary refuses, with the reason. Nothing is dropped on the floor.
 - **Re-running is always safe.** Same input, same bytes. Applying an update to a live canvas preserves node ids, component keys and component-property overrides on placed instances.
-- **The known gaps are written down, not discovered.** Three you will meet soon enough: **overlay components** (Dialog, Menu, Tooltip) have no hover/focus/active planes in the captured truth, so those contracts declare `states: []` by design; **text wrapping is not implemented**, so a hugging text node inside a narrower fixed-width ancestor clips; **the harness loads no webfonts**, so absolute text widths are fallback-font widths. The full ledger, including where the generality claim leaks, is [docs/22 §8](docs/22-generality.md).
+- **The known gaps are written down, not discovered.** Three you will meet soon enough: **overlay components** (Dialog, Menu, Tooltip) have no hover/focus/active planes in the captured truth, so those contracts declare `states: []` by design; **text wrapping is not implemented**, so a hugging text node inside a narrower fixed-width ancestor clips; **the harness loads no webfonts**, so absolute text widths are fallback-font widths. **The complete inventory is [Known Limitations](docs/23-known-limitations.md)** — coverage, fidelity, per-library freshness, the journey verbs that don't exist, and what each gate leaves out of its denominator. The evidence behind the generality claim, and where it leaks, is [docs/22 §8](docs/22-generality.md).
 
 ---
 
@@ -317,7 +335,7 @@ Every capability claim in this repository is backed by an executable check or a 
 | **Engine as library** | the whole pipeline is browser-safe pure functions; CLI output golden-guarded through the refactor | `npm run core:browser-check` · [docs/15](docs/15-engine-as-library.md) |
 | **Advanced composition, live** | the multi-root composite Modal — a composed Card instance, a repeated Badge collection, real Button instances with applied labels, an inset backdrop — builds correctly on a **real Figma canvas** from one pasted contract (2026-07-22), deterministically, no AI in the conversion; both journey directions gated headless, and both real-Figma quirks found en route (auto-layout hug↔fill collapse, instance property-exposure lag) are modeled in the mock so they fail in Node forever | `npm run plugin:check` (composite pins) · [`docs/handoff/08`](docs/handoff/08-status-what-doesnt-work.md) · `npx tsx scripts/deterministic-roundtrip.mjs` |
 
-All of it is gated by **176 executable checks** (`npm run eval`) that run the real pipeline in a scratch copy — not mocks.
+All of it is gated by **178 executable checks** (`npm run eval`) that run the real pipeline in a scratch copy — not mocks.
 
 ## What's actually here
 
@@ -331,7 +349,7 @@ All of it is gated by **176 executable checks** (`npm run eval`) that run the re
 | `parity/` | The three-way differ: classifies every difference between contract, code, and canvas as *ahead*, *behind*, or *mismatched* — with a proposed remedy. Plus the adherence judge and the brownfield `diagnose` referee. | ✅ |
 | `extract/` | Brownfield extraction: code→contract (React/TSX, CSS Modules, Custom Elements Manifest) and design→contract (plugin dump + Figma REST) adapters, plus `computed/` — the real-browser capture floor. The static adapters always propose the API surface, and anatomy + token bindings when the styling method exposes them ([which is which](#what-the-static-path-does-and-does-not-give-you)); the computed floor is what produces browser-observed styling truth. Also the four pilot write-ups and the round-trip receipts. | ✅ |
 | `catalog/` + `context/` | The compiled generation constraint (every API + every token + the governance rules) that an AI agent — or a human — can be held to, sharded to fit an agent's context window at any component count, plus the org rules and memory that feed it. | catalog ❌ · rules ✅ |
-| `evals/` | 176 deterministic checks on the machinery itself: byte-identical regeneration against golden manifests, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion, extraction round-trips. | ✅ |
+| `evals/` | 178 deterministic checks on the machinery itself: byte-identical regeneration against golden manifests, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion, extraction round-trips. | ✅ |
 | `conformance/` | The **CSS/DOM conformance fixture** — a synthetic library of labelled CSS constructs, mounted through the unmodified capture pipeline, whose expected disposition is declared IN ADVANCE. Every other instrument here derives its denominator from the same filter that decides carriage, so a channel the filter never opened scores 100%; this one does not, which is what makes the frontier *predictable* instead of discovered one library at a time. Generated matrix: [`conformance/EXPECTATIONS.md`](conformance/EXPECTATIONS.md). | ✅ |
 | `playground/` | The public browser playground ([live](https://ds-contracts-playground.pages.dev)) — a Vite app importing `core/` unmodified. | ✅ |
 | `dashboard/` | The **Contract Hub** — a local app visualizing the whole system: live component previews, per-prop binding maps across all three surfaces, token provenance, one-click parity runs, contract editing with regeneration, and the full docs. | ✅ |
@@ -357,7 +375,7 @@ npm run parity   # ① clean — code, canvas, and tokens all match the contract
 # ② edit any contract in contracts/ — add an enum value, change a token binding
 npm run build && npm run parity
 #    ③ the differ reports exactly what is now behind, and how to fix it
-npm run eval     # ④ 176 checks that detection, refusal, and convergence still hold
+npm run eval     # ④ 178 checks that detection, refusal, and convergence still hold
 npm run docs:check # ⑤ every number these docs quote, re-derived from the repo (seconds, no browser)
 ```
 
@@ -393,6 +411,8 @@ That is a claim about the future, so it's held to the same standard as everythin
 
 **If you are new, read these three in this order:** [Getting Started](docs/00-getting-started.md) (the five-minute orientation) → [User Flows](docs/18-user-flows.md) (the loop as two people actually live it, every step tagged built or missing) → [Bring Your Own Design System](docs/21-bring-your-own-design-system.md) (the recipe, when you're ready to run it on your library).
 
+**If you are deciding whether to adopt this, read [Known Limitations](docs/23-known-limitations.md) alongside them.** Everything the tool cannot do, in one place, sourced to a measurement.
+
 1. [Getting Started — What, Why, and How](docs/00-getting-started.md) · the five-minute orientation, per-persona usage, and the workflow schematic
 2. [The Bridge — Why This Exists](docs/00-the-bridge.md) · the narrative case
 3. [Architecture & the Contract Model](docs/01-architecture.md) · generative-first, diagnostic-forever
@@ -413,8 +433,9 @@ That is a claim about the future, so it's held to the same standard as everythin
 18. [Run the Gauntlet](docs/17-run-the-gauntlet.md) · the to-and-from sequence packaged for an outside tester — commands, expected outcomes, honest gaps
 19. [User Flows](docs/18-user-flows.md) · the two disciplines' first hour and daily loop, every step tagged built-or-missing, plus the ranked gap list that drives the build order
 20. [Bring Your Own Design System](docs/21-bring-your-own-design-system.md) · the nine-step recipe eight library rounds actually followed, the full capture-config reference, the decision guide for the parts that are still craft, and a troubleshooting table built from real failures
-20. [Generality — general engine, or just these libraries?](docs/22-generality.md) · the evidence behind the recipe: the styling-architecture matrix, the cross-library fix record (a defect found via one library repairing another's bytes in the same commit), the adversarial engine audit, and the honest ledger of where the claim leaks
-21. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
+21. [Generality — general engine, or just these libraries?](docs/22-generality.md) · the evidence behind the recipe: the styling-architecture matrix, the cross-library fix record (a defect found via one library repairing another's bytes in the same commit), the adversarial engine audit, and the honest ledger of where the claim leaks
+22. [**Known Limitations**](docs/23-known-limitations.md) · the adoption-decision document: measured coverage per library, the component classes captured nowhere, what a captured component does not reproduce, which examples are frozen and why, the journey verbs that do not exist, and what every gate leaves out of its denominator
+23. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
 
 ## Honesty as a design principle
 
@@ -426,9 +447,10 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 ## Status
 
-The model is validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 176/176 evals, the schema and CLI published to the public npm registry (`@ds-contracts/schema`, `@ds-contracts/cli` — stranger-verified from a clean directory), a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same engine — with a companion Figma plugin bridging live selections into it. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
+The model is validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 178/178 evals, the schema and CLI published to the public npm registry (`@ds-contracts/schema`, `@ds-contracts/cli` — stranger-verified from a clean directory), a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same engine — with a companion Figma plugin bridging live selections into it. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 
 - **What has been proven, dated, with receipts:** [MILESTONES.md](MILESTONES.md)
+- **What it does NOT do — read before adopting:** [docs/23 — Known Limitations](docs/23-known-limitations.md)
 - **Release history:** [CHANGELOG.md](CHANGELOG.md)
 - **Where this goes next:** [ROADMAP.md](ROADMAP.md)
 

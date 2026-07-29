@@ -30,13 +30,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 29,
+    "mintedLeaves": 23,
     "mintedLeavesUnfolded": 83,
-    "baseBindings": 35,
-    "stateBindings": 19,
+    "baseBindings": 33,
+    "stateBindings": 17,
     "codeOnlyChannels": 2,
-    "overflowBindings": 15,
-    "folds": 27
+    "overflowBindings": 14,
+    "folds": 30
   },
   "worstRows": [
     {
@@ -152,7 +152,6 @@
   ],
   "namedLosses": [
     "overflow: icon.fill [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: icon.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: part-0.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: part-0.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: part-0.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -175,7 +174,7 @@
   },
   "shippedMinted": {
     "path": "examples/mui/tokens/mui-minted.dtcg.json",
-    "leavesAdded": 1469,
+    "leavesAdded": 1511,
     "divergent": [
       {
         "token": "imported.checkbox.root.color.checked",

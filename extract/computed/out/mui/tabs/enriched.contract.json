@@ -141,16 +141,13 @@
                       "prop": "textColor",
                       "map": {
                         "inherit": {
-                          "color": "{imported.tabs.label.color.inherit}",
-                          "row-rule-color": "{imported.tabs.label.row-rule-color.inherit}"
+                          "color": "{imported.tabs.label.color.inherit}"
                         },
                         "primary": {
-                          "color": "{imported.tabs.label.color.primary}",
-                          "row-rule-color": "{imported.tabs.label.row-rule-color.primary}"
+                          "color": "{imported.tabs.label.color.primary}"
                         },
                         "secondary": {
-                          "color": "{imported.tabs.label.color.secondary}",
-                          "row-rule-color": "{imported.tabs.label.row-rule-color.secondary}"
+                          "color": "{imported.tabs.label.color.secondary}"
                         }
                       }
                     }
@@ -211,18 +208,15 @@
                       "map": {
                         "inherit": {
                           "color": "{imported.tabs.label-2.color.inherit}",
-                          "opacity": "{imported.tabs.label-2.opacity.inherit}",
-                          "row-rule-color": "{imported.tabs.label-2.row-rule-color.inherit}"
+                          "opacity": "{imported.tabs.label-2.opacity.inherit}"
                         },
                         "primary": {
                           "color": "{imported.tabs.label-2.color.primary}",
-                          "opacity": "{imported.tabs.label-2.opacity.primary}",
-                          "row-rule-color": "{imported.tabs.label-2.row-rule-color.primary}"
+                          "opacity": "{imported.tabs.label-2.opacity.primary}"
                         },
                         "secondary": {
                           "color": "{imported.tabs.label-2.color.secondary}",
-                          "opacity": "{imported.tabs.label-2.opacity.secondary}",
-                          "row-rule-color": "{imported.tabs.label-2.row-rule-color.secondary}"
+                          "opacity": "{imported.tabs.label-2.opacity.secondary}"
                         }
                       }
                     }
@@ -283,18 +277,15 @@
                       "map": {
                         "inherit": {
                           "color": "{imported.tabs.label-3.color.inherit}",
-                          "opacity": "{imported.tabs.label-3.opacity.inherit}",
-                          "row-rule-color": "{imported.tabs.label-3.row-rule-color.inherit}"
+                          "opacity": "{imported.tabs.label-3.opacity.inherit}"
                         },
                         "primary": {
                           "color": "{imported.tabs.label-3.color.primary}",
-                          "opacity": "{imported.tabs.label-3.opacity.primary}",
-                          "row-rule-color": "{imported.tabs.label-3.row-rule-color.primary}"
+                          "opacity": "{imported.tabs.label-3.opacity.primary}"
                         },
                         "secondary": {
                           "color": "{imported.tabs.label-3.color.secondary}",
-                          "opacity": "{imported.tabs.label-3.opacity.secondary}",
-                          "row-rule-color": "{imported.tabs.label-3.row-rule-color.secondary}"
+                          "opacity": "{imported.tabs.label-3.opacity.secondary}"
                         }
                       }
                     }

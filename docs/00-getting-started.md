@@ -145,13 +145,15 @@ Before the per-role advice below, find your situation. These are genuinely diffe
 
 | | Your situation | The path | Ends with |
 |---|---|---|---|
-| **A** | *"I have components in **code**. I want them in **Figma**."* | `init --detect` → review the drafted capture config → `extract --computed` → promote → `figma bundle` → `figma claim-channel` once, then `figma publish` | A designer clicks **Check for updates** in the plugin's Changes tab and your real components land on their canvas, token-bound |
-| **B** | *"I have a component on the **canvas**. I want **code**."* | plugin **Send** tab reads the set and proposes a contract → deliver it (PR, `figma receive`, or copy the JSON) → `ds-contracts generate` | A typed React component, CSS Modules and Storybook stories, in your repo |
+| **A** | *"I have components in **code**. I want them in **Figma**."* | `ds-contracts onboard <package-or-path>` → **review the drafted capture config** → `ds-contracts onboard --continue` (the two commands run `init` → `extract --draft-capture-config` → `extract --computed` → `promote` → `figma bundle` → `figma publish` for you; the individual verbs still exist) | A designer clicks **Check for updates** in the plugin's Changes tab and your real components land on their canvas, token-bound |
+| **B** | *"I have a component on the **canvas**. I want **code**."* | plugin **Send** tab reads the set and proposes a contract → deliver it (PR, `figma receive --apply`, or copy the JSON) — **the change carries the contract *and* the generated component** | A typed React component, CSS Modules and Storybook stories, in your repo |
 | **C** | *"I already have a mature Figma library **and** a mature codebase."* | plugin **Send → Scan this file** → `extract --reconcile` → `ds-contracts diff` in CI | A property-by-property disagreement report, and a gate that stops the gap growing |
 
 Full walkthroughs with every command and every failure message: **[the get-started journeys on the spec site](https://ds-contracts-spec.pages.dev/get-started/)** and the [README](../README.md#which-journey-are-you-on). The same loop written as two people actually live it, hour by hour, with every step tagged built-or-missing: [docs/18 — User Flows](./18-user-flows.md).
 
-### Two things to know before you start journey A
+### Three things to know before you start journey A
+
+**Journey A is two commands with one human step wedged between them, on purpose.** `ds-contracts onboard <package-or-path>` does everything a machine can decide and then **stops**, printing the fields a person must answer. `ds-contracts onboard --continue` runs the rest. The stop is not a convenience prompt: `--continue` refuses an unreviewed capture config **by name**, there is no flag that skips it, and even `--from <stage>` re-runs the gate first. A capture driven by a guessed mount recipe or a wrong `classAllow` does not error — it produces a confident, wrong contract.
 
 **You cannot point the Figma plugin at a GitHub URL or an npm package.** The tool has to *run* your components in a real browser to read their computed styles — that is what makes the result true rather than guessed — and a Figma plugin is a sandboxed iframe with no Node, no npm and no browser engine of its own. So the browser step happens on your laptop or in your CI, and what travels to Figma is a finished JSON bundle.
 
@@ -191,6 +193,6 @@ Then prove the loop to yourself in about two minutes:
 2. Open a contract in `contracts/` and change something small — add an enum value, tweak a token binding.
 3. `npm run build && npm run parity` — the differ now reports the canvas **behind**, naming exactly what's missing and how to fix it. That honest red state *is* the product: nothing pretends to be in sync when it isn't.
 4. Revert, or carry the change through — regenerate, sync the canvas, and watch it go green again.
-5. `npm run eval` — 176 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
+5. `npm run eval` — 178 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
 
 From there: [The Bridge](./00-the-bridge.md) for the narrative, [Architecture](./01-architecture.md) for the model, [Contract Specification](./02-contract-spec.md) when you're ready to write one.

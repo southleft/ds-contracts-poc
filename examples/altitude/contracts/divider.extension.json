@@ -23,10 +23,6 @@
             "$value": "0px",
             "$type": "dimension"
           },
-          "row-rule-color": {
-            "$value": "#808080",
-            "$type": "color"
-          },
           "width": {
             "unset": {
               "$value": "288px",
@@ -81,6 +77,12 @@
     {
       "part": "root",
       "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },

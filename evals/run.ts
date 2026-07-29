@@ -5281,13 +5281,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         // FOREIGN TOKEN SET — the JSON-only Generate: the MUI bundle
         // (contracts + tokenSet + icons in ONE paste, MOLECULE round) through
         // the real engine bundle path is EQUIVALENT to the compiled-script
-        // path (same sets + standalone Menu/Tooltip, 1684 variables incl. 73
+        // path (same sets + standalone Menu/Tooltip, 1543 variables incl. 73
         // Figma-native aliases, contained-primary Button fill resolves
         // #1976d2), and a contract ref outside base+minted refuses BY NAME.
         // STATE-PLANE PROJECTION round: Switch 14→28 (checked is a VARIANT
         // AXIS now) and Button 63→75 (accepted State preview axis) — both
         // survive the JSON-only paste identically to the script path.
-        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6) + standalone Menu, TablePagination, Tooltip with 1684 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
+        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6) + standalone Menu, TablePagination, Tooltip with 1543 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
         'plugin-engine-check: all flows green',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
@@ -6692,7 +6692,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(11 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\); standalone: TablePagination, Menu, Tooltip; 1684 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(11 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\); standalone: TablePagination, Menu, Tooltip; 1543 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
@@ -6717,7 +6717,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
       const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('mui-figma-genesis: 14/14 Emotion-runtime scripts referee+execute headless (160 variants — state-plane projection round: Switch 14→28 on the new Checked axis, Button 63→75 on the accepted State preview axis); token sync 1684 variables incl. 73 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 13 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
+      console.log('mui-figma-genesis: 14/14 Emotion-runtime scripts referee+execute headless (160 variants — state-plane projection round: Switch 14→28 on the new Checked axis, Button 63→75 on the accepted State preview axis); token sync 1543 variables incl. 73 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 13 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {
@@ -6742,7 +6742,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/tailwind/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`tailwind genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(5 sets: Alert\(4\), Badge\(24\), Button\(45\), Card\(1\), ToggleSwitch\(6\); 344 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(5 sets: Alert\(4\), Badge\(24\), Button\(45\), Card\(1\), ToggleSwitch\(6\); 304 variables\)/.test(batch.out)) {
         throw new Error(`tailwind genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE freshness (single-mode variant — no modes dir):
@@ -6794,7 +6794,11 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/carbon/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`carbon genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      // LIVE-DEFECT ROUND (task #30) — REPINNED 1459 → 1425 variables after
+      // ORPHAN-LEAF + ROW-RULE ROUND (tasks #42/#35) — REPINNED 1425 → 1207
+      // variables: the shipped minted tree lost every `row-rule-color` leaf (a
+      // `currentcolor` mirror nobody authored) and every leaf of a part the
+      // anatomy promotion had already refused by name. Carbon/IconButton alone
+      // shed 112. Previously: LIVE-DEFECT ROUND (task #30) — REPINNED 1459 → 1425 variables after
       // REVIEW, not silently. The 34 that left are the minted leaves of parts
       // the round REFUSED: Carbon's tooltip `popover` wrapper and its subtree
       // (inert-overlay-wrapper — it painted nothing in any combo and every
@@ -6807,7 +6811,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // as ink / D2 checkbox box + toggle knob / D3 no child wider than its
       // parent / D5 modal not a viewport rectangle / D6 no inert part + the
       // icon button keeps its box), so this eval fails if any of them regress.
-      if (!/mock-proven \(10 sets: Accordion\(8\), Button\(80\), Checkbox\(3\), IconButton\(16\), InlineNotification\(12\), Modal\(4\), Tabs\(3\), Tag\(36\), TextInput\(8\), Toggle\(4\); 1425 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(10 sets: Accordion\(8\), Button\(80\), Checkbox\(3\), IconButton\(16\), InlineNotification\(12\), Modal\(4\), Tabs\(3\), Tag\(36\), TextInput\(8\), Toggle\(4\); 1207 variables\)/.test(batch.out)) {
         throw new Error(`carbon genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // The token wrap is a PURE function of the pinned compiled stylesheet, so
@@ -6861,7 +6865,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const committed = readFileSync(path.join(ROOT, 'examples/carbon/figma/carbon.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/carbon/figma/carbon.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
       console.log(
-        `carbon-figma-genesis: 10/10 scripts referee+execute headless (132 variant cells, 1425 variables incl. 94 Figma-native source aliases; live-defect round: the six canvas defects are pinned by the compile receipt this eval runs); ` +
+        `carbon-figma-genesis: 10/10 scripts referee+execute headless (132 variant cells, 1207 variables incl. 94 Figma-native source aliases; live-defect round: the six canvas defects are pinned by the compile receipt this eval runs); ` +
           `Light/Dark = .cds--white/.cds--g100 differ on ${differing.length} tokens; no "unset" pseudo-value reached a contract enum; ` +
           `one-paste batch mock-proven; committed carbon.bundle.json fresh and byte-deterministic; ${tokenNote} — the generality control case`,
       );
@@ -6903,7 +6907,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/altitude/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`altitude genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(6 sets: Badge\(8\), Button\(12\), Chip\(10\), Heading\(12\), IconClose\(7\), Link\(9\); standalone: Avatar, Divider; 672 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(6 sets: Badge\(8\), Button\(12\), Chip\(10\), Heading\(12\), IconClose\(7\), Link\(9\); standalone: Avatar, Divider; 638 variables\)/.test(batch.out)) {
         throw new Error(`altitude genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // THE SHADOW-DOM ANATOMY PINS, read off the COMMITTED promoted contracts.
@@ -6983,7 +6987,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const committed = readFileSync(path.join(ROOT, 'examples/altitude/figma/altitude.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/altitude/figma/altitude.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
       console.log(
-        `altitude-shadow-dom-genesis: 8/8 shadow-DOM scripts referee+execute headless (41 variant cells, 672 variables incl. 41 Figma-native source aliases); ` +
+        `altitude-shadow-dom-genesis: 8/8 shadow-DOM scripts referee+execute headless (41 variant cells, 638 variables incl. 41 Figma-native source aliases); ` +
           `slotted text, depth-2 nested shadow (avatar → al-badge) and an svg inside a shadow root all reached the canvas; ` +
           `${defaultlessAxes} defaultless axes and no "unset" pseudo-value in any contract enum; Light/Dark differ on ${differing.length} tokens (thin by Altitude's own choice); ` +
           `one-paste batch mock-proven; committed altitude.bundle.json fresh and byte-deterministic; ${tokenNote} — the first shadow-DOM subject`,
@@ -7916,6 +7920,233 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           `${base.counts.PASS} green, ${reds} red, ${base.counts['UNMEASURED-YELLOW']} yellow, and the frontier is PINNED both ways (a new red is a regression, a fixed red must be re-recorded). ` +
           `The denominator is a hand-authored manifest that imports none of isFusable/styled/DECLARED_CHANNELS/CHANNEL_TO_COMPUTED/TOKEN_CHANNELS/carriedParts — the independence that makes a construct the filters never opened FAILABLE instead of absent. ` +
           `UNSUPPORTED ratchet at ${base.unsupportedDeclared} (decrease-only), EXPECTATIONS.md generated and agreeing, and no case class carries a CSS channel name (the leak that turned 8 first-run silences into passes).`,
+      );
+    },
+  },
+  {
+    // ---- SCOPE INDEPENDENCE (task #45): A COMPONENT'S ARTIFACTS MAY NOT
+    // CONTAIN ANOTHER COMPONENT'S FACTS.
+    //
+    // The defect this pins: `extract/computed/run.ts` spliced the run-wide
+    // read-boundary accumulators (`SweepResult.textFillFolds` /
+    // `.closedShadowSuspects`) into EVERY component's `frontierReceipts` and
+    // into every component's LEDGER.md. Capturing `--component Button` alone
+    // therefore produced DIFFERENT BYTES for Button than capturing Button
+    // inside the full-library sweep — measured on Carbon, where all ten
+    // components carried the same 380 lines and MUI, where all fourteen
+    // carried the same 80. "The same component yields different bytes
+    // depending on which siblings ran" contradicts the determinism claim this
+    // whole project rests on, and it is why `onboard` had to default to
+    // whole-library sweeps.
+    //
+    // The property is checkable OFFLINE and without Chromium, because every
+    // capture-scoped receipt in this pipeline embeds its capture key and every
+    // capture key is `${component}:${combo}__${interaction}`. So: no committed
+    // artifact of component X may quote a capture key belonging to component
+    // Y. That is exactly what a leak looks like, and it is what this asserts —
+    // over BOTH serializations of the receipts (enriched.extension.json and
+    // the human-facing LEDGER.md), because the bug was reported against the
+    // ledger and found in the JSON.
+    //
+    // The BYTE-IDENTITY half of the proof (capture one component alone,
+    // capture it inside its library, diff the artifacts) needs a harness run
+    // and a browser; it is run by hand per round and recorded in
+    // examples/tailwind/PROVENANCE.md. This pin is the part that can run in
+    // the suite, and it would have failed loudly on every Carbon and MUI
+    // component at HEAD.
+    id: 'capture-scope-independence',
+    claim: 'C1-determinism',
+    run: () => {
+      const cfgDir = path.join(ROOT, 'extract/computed/configs');
+      // The component-name universe comes from the CONFIGS, not from the
+      // artifacts — so a leak cannot hide by also being missing from the
+      // corpus.
+      const namesByConfig = new Map<string, string[]>();
+      for (const f of readdirSync(cfgDir).filter((x) => x.endsWith('.json')).sort()) {
+        const cfg = JSON.parse(readFileSync(path.join(cfgDir, f), 'utf8')) as { components?: Array<{ name: string }> };
+        namesByConfig.set(f, (cfg.components ?? []).map((c) => c.name));
+      }
+      const allNames = [...new Set([...namesByConfig.values()].flat())];
+      if (allNames.length < 20) throw new Error(`only ${allNames.length} configured component names found — the scan universe is too small to prove anything`);
+
+      const outRoot = path.join(ROOT, 'extract/computed/out');
+      const dirs: string[] = [];
+      (function walk(d: string): void {
+        for (const f of readdirSync(d)) {
+          const p = path.join(d, f);
+          if (!statSync(p).isDirectory()) continue;
+          if (existsSync(path.join(p, 'enriched.extension.json'))) dirs.push(p);
+          else walk(p);
+        }
+      })(outRoot);
+      if (dirs.length < 40) throw new Error(`only ${dirs.length} committed component output dirs found — expected the whole corpus`);
+
+      const leaks: string[] = [];
+      let receiptLines = 0;
+      let scanned = 0;
+      for (const dir of dirs) {
+        const ext = JSON.parse(readFileSync(path.join(dir, 'enriched.extension.json'), 'utf8')) as {
+          generatedBy?: string; frontierReceipts?: string[];
+        };
+        // whose component is this? the capture-key prefix is the component
+        // NAME (not the lower-cased directory), so resolve it by matching the
+        // directory stem against the configured names.
+        const stem = path.basename(dir);
+        const mine = allNames.filter((n) => n.toLowerCase() === stem);
+        if (mine.length === 0) continue; // depth/conformance fixtures — not config components
+        scanned++;
+        const others = allNames.filter((n) => n.toLowerCase() !== stem);
+        const bodies: Array<[string, string]> = [
+          ['enriched.extension.json', (ext.frontierReceipts ?? []).join('\n')],
+        ];
+        const ledger = path.join(dir, 'LEDGER.md');
+        if (existsSync(ledger)) bodies.push(['LEDGER.md', readFileSync(ledger, 'utf8')]);
+        receiptLines += (ext.frontierReceipts ?? []).length;
+        for (const [file, body] of bodies) {
+          for (const other of others) {
+            // a capture key: `Name:` immediately followed by a combo key.
+            // Anchored on the receipt grammar so ordinary prose naming a
+            // sibling component cannot false-positive.
+            const re = new RegExp(`(?:^|[\\s@])${other}:[A-Za-z0-9]`, 'm');
+            if (re.test(body)) {
+              leaks.push(`${path.relative(ROOT, dir)}/${file} quotes a CAPTURE KEY of "${other}"`);
+            }
+          }
+        }
+      }
+      if (scanned < 40) throw new Error(`only ${scanned} of ${dirs.length} output dirs resolved to a configured component — the resolver is broken, so a green result would prove nothing`);
+      if (leaks.length > 0) {
+        throw new Error(
+          `CAPTURE SCOPE LEAK — ${leaks.length} artifact(s) carry another component's capture keys, so the bytes they contain depend on which SIBLINGS were in the run (task #45):\n  ${leaks.slice(0, 12).join('\n  ')}`,
+        );
+      }
+      console.log(
+        `capture-scope-independence: ${scanned} committed component output dirs (${receiptLines} frontier receipt lines, plus every LEDGER.md) contain ZERO capture keys belonging to another of the ${allNames.length} configured components — a component's artifacts are a function of that component alone, not of which siblings shared the sweep. At HEAD this failed on all 10 Carbon components (380 leaked lines each) and all 14 MUI components (80 each).`,
+      );
+    },
+  },
+  {
+    // ---- ORPHANED MINTED LEAVES (task #42): THE SHIPPED TOKEN SET MAY NOT
+    // GROW VARIABLES NOTHING BINDS.
+    //
+    // Every library's `tokens/<lib>-minted.dtcg.json` becomes real Figma
+    // variables — `00-tokens.figma.js` creates one per leaf, and the pasted
+    // `<lib>.bundle.json` carries the whole tree. A leaf no contract
+    // references is therefore a variable the user imports and nothing uses.
+    //
+    // TWO DISTINCT CAUSES, and this pin separates them because they have
+    // different remedies:
+    //
+    //   A. THE PART DOES NOT EXIST. The anatomy promotion refused the part by
+    //      name (`non-painting-part`, `inert-overlay-wrapper`, …) and the mint
+    //      went on minting its channels anyway. A leaf that exists because of
+    //      a part that does not is the same class of lie as the phantom part,
+    //      so it is now refused AT THE MINT DOOR (fuse.ts `mintablePart`).
+    //      This half is asserted at ZERO — a hard failure, not a ratchet.
+    //
+    //   B. THE BINDING WAS DROPPED DOWNSTREAM. The part is real and the mint
+    //      is real, but `applyMintToContract` did not bind it — the
+    //      inheritance-aware refusal proved the child carries no independent
+    //      fact, a reviewed binding won the collision, or it went to
+    //      overflowBindings. The leaf is honest; it is just unreferenced.
+    //      Removing these is a LIBRARY-LEVEL sweep (the reference set spans
+    //      every contract — mui's table-pagination binds `imported.pagination.*`),
+    //      so it belongs in the minted MERGE in packages/cli/src/promote.ts,
+    //      beside `resolutionGuard`, which already computes exactly this
+    //      reference set in the other direction. Not done in this round; the
+    //      count is RATCHETED here instead of going unrecorded.
+    id: 'minted-leaves-bind-to-something',
+    claim: 'C2-refusal',
+    run: () => {
+      const isLeaf = (v: unknown): v is { $value: unknown } => !!v && typeof v === 'object' && '$value' in (v as object);
+      const leafPaths = (t: Record<string, unknown>, p: string[] = [], o = new Set<string>()): Set<string> => {
+        for (const [k, v] of Object.entries(t)) {
+          if (isLeaf(v)) o.add([...p, k].join('.'));
+          else if (v && typeof v === 'object') leafPaths(v as Record<string, unknown>, [...p, k], o);
+        }
+        return o;
+      };
+      // ---- half A: NOTHING may mint under a part the promotion refused ----
+      const outRoot = path.join(ROOT, 'extract/computed/out');
+      const compDirs: string[] = [];
+      (function walk(d: string): void {
+        for (const f of readdirSync(d)) {
+          const q = path.join(d, f);
+          if (!statSync(q).isDirectory()) continue;
+          if (existsSync(path.join(q, 'enriched.extension.json'))) compDirs.push(q);
+          else walk(q);
+        }
+      })(outRoot);
+      const kebabPart = (n: string) => n.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase();
+      const phantom: string[] = [];
+      for (const d of compDirs) {
+        const ext = JSON.parse(readFileSync(path.join(d, 'enriched.extension.json'), 'utf8')) as {
+          mintedTokens?: Record<string, unknown>;
+          anatomyPromotion?: { partsCarried?: string[] };
+        };
+        const carried = new Set((ext.anatomyPromotion?.partsCarried ?? []).map(kebabPart));
+        for (const leaf of leafPaths(ext.mintedTokens ?? {})) {
+          const seg = leaf.split('.');
+          if (seg[0] !== 'imported' || seg.length < 4) continue;
+          if (!carried.has(seg[2])) phantom.push(`${path.relative(ROOT, d)}: ${leaf} (part "${seg[2]}" is NOT in the promoted anatomy)`);
+        }
+      }
+      if (phantom.length > 0) {
+        throw new Error(
+          `PHANTOM MINTED LEAVES — ${phantom.length} leaf/leaves are minted under a part the anatomy promotion REFUSED, so the shipped token set carries Figma variables for parts that do not exist (task #42, cause A — the mint door in fuse.ts is not holding):\n  ${phantom.slice(0, 10).join('\n  ')}`,
+        );
+      }
+      // ---- half B: the unreferenced-leaf RATCHET, per library ----
+      const BASELINE = path.join(ROOT, 'extract/computed/minted-orphan-baseline.json');
+      const rows: Array<{ library: string; leaves: number; unreferenced: number }> = [];
+      for (const lib of readdirSync(path.join(ROOT, 'examples')).sort()) {
+        const tokDir = path.join(ROOT, 'examples', lib, 'tokens');
+        const cDir = path.join(ROOT, 'examples', lib, 'contracts');
+        if (!existsSync(tokDir) || !existsSync(cDir)) continue;
+        const mf = readdirSync(tokDir).find((f) => f.includes('minted') && f.endsWith('.json'));
+        if (!mf) continue;
+        const leaves = leafPaths(JSON.parse(readFileSync(path.join(tokDir, mf), 'utf8')) as Record<string, unknown>);
+        const referenced = new Set<string>();
+        for (const f of readdirSync(cDir).filter((x) => x.endsWith('.contract.json'))) {
+          const c = JSON.parse(readFileSync(path.join(cDir, f), 'utf8')) as { props?: Array<{ name: string; type?: { enum?: string[] } }> };
+          const enums: Record<string, string[]> = {};
+          for (const pr of c.props ?? []) if (pr.type?.enum) enums[pr.name] = pr.type.enum;
+          const expand = (ref: string): string[] => {
+            let refs = [ref];
+            for (const [prop, vals] of Object.entries(enums)) {
+              if (!ref.includes(`{${prop}}`)) continue;
+              refs = refs.flatMap((r) => vals.map((v) => r.replaceAll(`{${prop}}`, v)));
+            }
+            return refs;
+          };
+          for (const m of JSON.stringify(c).matchAll(/"\{(imported\.[^"]+)\}"/g)) for (const r of expand(m[1])) referenced.add(r);
+        }
+        rows.push({ library: lib, leaves: leaves.size, unreferenced: [...leaves].filter((l) => !referenced.has(l)).length });
+      }
+      if (rows.length < 5) throw new Error(`only ${rows.length} libraries measured — the scan is broken`);
+      if (process.argv.includes('--write-orphan-baseline')) {
+        writeFileSync(BASELINE, JSON.stringify({ _marker: 'UNREFERENCED MINTED LEAVES per library — a DECREASE-ONLY ratchet (task #42, cause B). Re-record with `npm run eval -- --only minted-leaves --write-orphan-baseline` as part of a reviewed change.', rows }, null, 2) + '\n');
+      }
+      const baseline = JSON.parse(readFileSync(BASELINE, 'utf8')) as { rows: typeof rows };
+      const worse: string[] = [];
+      const better: string[] = [];
+      for (const r of rows) {
+        const b = baseline.rows.find((x) => x.library === r.library);
+        if (!b) { worse.push(`${r.library}: NO BASELINE ROW — a new library must record one`); continue; }
+        if (r.unreferenced > b.unreferenced) worse.push(`${r.library}: ${b.unreferenced} → ${r.unreferenced} unreferenced minted leaves (GREW)`);
+        if (r.unreferenced < b.unreferenced) better.push(`${r.library}: ${b.unreferenced} → ${r.unreferenced}`);
+      }
+      if (worse.length > 0) {
+        throw new Error(`the shipped token sets grew variables nothing binds (task #42):\n  ${worse.join('\n  ')}`);
+      }
+      if (better.length > 0) {
+        throw new Error(`the ratchet IMPROVED and was not re-recorded — an unrecorded win is as much drift as a loss:\n  ${better.join('\n  ')}\nRe-record with: npm run eval -- --only minted-leaves --write-orphan-baseline`);
+      }
+      const totalLeaves = rows.reduce((n, r) => n + r.leaves, 0);
+      const totalUnref = rows.reduce((n, r) => n + r.unreferenced, 0);
+      console.log(
+        `minted-leaves-bind-to-something: ZERO of ${totalLeaves} shipped minted leaves across ${rows.length} libraries sit under a part the anatomy promotion refused (cause A — the mint door holds; before it, carbon/IconButton alone minted 112 such leaves under \`popover\`/\`label\`/\`popover-caret\`). ` +
+          `The residual ${totalUnref} unreferenced leaves are cause B — real parts whose BINDING was dropped downstream (inheritance refusal, reviewed-binding collision, overflow) — ratcheted decrease-only per library: ${rows.map((r) => `${r.library} ${r.unreferenced}/${r.leaves}`).join(', ')}. Removing them is a library-level sweep that belongs beside promote.ts's resolutionGuard; it is NAMED and COUNTED here rather than left to accumulate.`,
       );
     },
   },

@@ -68,7 +68,7 @@
           },
           "tokens": {
             "bottom": "{imported.shared.size-1}",
-            "color": "{imported.shared.color-000000}",
+            "color": "{imported.checkbox.checkbox.color}",
             "font-size": "{imported.checkbox.checkbox.font-size}",
             "height": "{imported.shared.size-1}",
             "left": "{imported.checkbox.checkbox.left}",
@@ -78,15 +78,14 @@
             "margin-top": "{imported.shared.size-neg-1}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
-            "outline-color": "{imported.shared.color-000000}",
+            "outline-color": "{imported.checkbox.checkbox.outline-color}",
             "right": "{imported.checkbox.checkbox.right}",
-            "row-rule-color": "{imported.shared.color-000000}",
             "top": "{imported.shared.size-20}",
             "width": "{imported.shared.size-1}"
           },
           "states": {
             "disabled": {
-              "color": "{imported.shared.color-545454}"
+              "color": "{imported.checkbox.checkbox.color-state-disabled}"
             }
           }
         },

@@ -174,7 +174,6 @@
                             "height": "{imported.shared.size-24}",
                             "letter-spacing": "{imported.shared.size-0-14994}",
                             "line-height": "{imported.shared.size-24}",
-                            "row-rule-color": "{imported.shared.color-1976d2}",
                             "width": "{imported.shared.size-24}"
                           }
                         }
@@ -191,7 +190,6 @@
                         "min-width": "{imported.shared.size-0}",
                         "outline-width": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
-                        "row-rule-color": "{imported.shared.color-1976d2}",
                         "top": "{imported.shared.size-0}"
                       },
                       "tokensByProp": [
@@ -242,7 +240,6 @@
                     "line-height": "{imported.shared.size-24}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-52}"
                   },
                   "tokensByProp": [
@@ -314,7 +311,6 @@
                             "line-height": "{imported.shared.size-24}",
                             "margin-left": "{imported.table.icon-2.margin-left}",
                             "margin-right": "{imported.table.icon-2.margin-right}",
-                            "row-rule-color": "{imported.shared.color-00000099}",
                             "width": "{imported.shared.size-18}"
                           }
                         }
@@ -339,7 +335,6 @@
                         "min-width": "{imported.shared.size-0}",
                         "outline-width": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
-                        "row-rule-color": "{imported.shared.color-000000de}",
                         "top": "{imported.shared.size-0}"
                       }
                     }
@@ -361,7 +356,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-240-125}"
                   },
                   "tokensByProp": [
@@ -412,7 +406,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-132-969}"
                   },
                   "tokensByProp": [
@@ -463,7 +456,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-142-484}"
                   },
                   "tokensByProp": [
@@ -514,7 +506,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-120-422}"
                   },
                   "tokensByProp": [
@@ -671,7 +662,6 @@
                             "height": "{imported.shared.size-24}",
                             "letter-spacing": "{imported.shared.size-0-14994}",
                             "line-height": "{imported.table.icon-3.line-height}",
-                            "row-rule-color": "{imported.shared.color-00000099}",
                             "width": "{imported.shared.size-24}"
                           }
                         }
@@ -687,7 +677,6 @@
                         "min-width": "{imported.shared.size-0}",
                         "outline-width": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
-                        "row-rule-color": "{imported.shared.color-00000099}",
                         "top": "{imported.shared.size-0}"
                       },
                       "tokensByProp": [
@@ -737,7 +726,6 @@
                     "line-height": "{imported.shared.size-20-02}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-52}"
                   },
                   "tokensByProp": [
@@ -788,7 +776,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-240-125}"
                   },
                   "tokensByProp": [
@@ -839,7 +826,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-132-969}"
                   },
                   "tokensByProp": [
@@ -890,7 +876,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-142-484}"
                   },
                   "tokensByProp": [
@@ -953,7 +938,7 @@
                         "border-right-width": "{imported.shared.size-0}",
                         "border-top-width": "{imported.shared.size-0}",
                         "bottom": "{imported.shared.size-0}",
-                        "color": "{imported.shared.color-0000008a}",
+                        "color": "{imported.table.label-8.color}",
                         "flex-shrink": "{imported.shared.num-0}",
                         "font-size": "{imported.shared.size-18}",
                         "font-weight": "{imported.shared.num-400}",
@@ -966,7 +951,6 @@
                         "padding-right": "{imported.shared.size-5}",
                         "padding-top": "{imported.shared.size-5}",
                         "right": "{imported.shared.size-0}",
-                        "row-rule-color": "{imported.shared.color-0000008a}",
                         "top": "{imported.shared.size-0}"
                       }
                     }
@@ -987,7 +971,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-120-422}"
                   },
                   "tokensByProp": [
@@ -1126,7 +1109,6 @@
                             "height": "{imported.shared.size-24}",
                             "letter-spacing": "{imported.shared.size-0-14994}",
                             "line-height": "{imported.table.icon-4.line-height}",
-                            "row-rule-color": "{imported.shared.color-1976d2}",
                             "width": "{imported.shared.size-24}"
                           }
                         }
@@ -1142,7 +1124,6 @@
                         "min-width": "{imported.shared.size-0}",
                         "outline-width": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
-                        "row-rule-color": "{imported.shared.color-1976d2}",
                         "top": "{imported.shared.size-0}"
                       },
                       "tokensByProp": [
@@ -1192,7 +1173,6 @@
                     "line-height": "{imported.shared.size-20-02}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-52}"
                   },
                   "tokensByProp": [
@@ -1243,7 +1223,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-240-125}"
                   },
                   "tokensByProp": [
@@ -1294,7 +1273,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-132-969}"
                   },
                   "tokensByProp": [
@@ -1345,7 +1323,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-142-484}"
                   },
                   "tokensByProp": [
@@ -1408,7 +1385,7 @@
                         "border-right-width": "{imported.shared.size-0}",
                         "border-top-width": "{imported.shared.size-0}",
                         "bottom": "{imported.shared.size-0}",
-                        "color": "{imported.shared.color-0000008a}",
+                        "color": "{imported.table.label-12.color}",
                         "flex-shrink": "{imported.shared.num-0}",
                         "font-size": "{imported.shared.size-18}",
                         "font-weight": "{imported.shared.num-400}",
@@ -1421,7 +1398,6 @@
                         "padding-right": "{imported.shared.size-5}",
                         "padding-top": "{imported.shared.size-5}",
                         "right": "{imported.shared.size-0}",
-                        "row-rule-color": "{imported.shared.color-0000008a}",
                         "top": "{imported.shared.size-0}"
                       }
                     }
@@ -1442,7 +1418,6 @@
                     "min-width": "{imported.shared.size-0}",
                     "padding-left": "{imported.shared.size-16}",
                     "padding-right": "{imported.shared.size-16}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "width": "{imported.shared.size-120-422}"
                   },
                   "tokensByProp": [

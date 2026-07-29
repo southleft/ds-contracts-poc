@@ -77,28 +77,8 @@
           "tokens": {
             "font-size": "{imported.shared.size-16}",
             "font-weight": "{imported.button.label.font-weight}",
-            "line-height": "{imported.button.label.line-height}",
-            "row-rule-color": "{imported.button.label.row-rule-color.unset}"
-          },
-          "tokensByProp": [
-            {
-              "prop": "variant",
-              "map": {
-                "bare": {
-                  "row-rule-color": "{imported.button.label.row-rule-color.bare}"
-                },
-                "danger": {
-                  "row-rule-color": "{imported.button.label.row-rule-color.danger}"
-                },
-                "secondary": {
-                  "row-rule-color": "{imported.button.label.row-rule-color.secondary}"
-                },
-                "tertiary": {
-                  "row-rule-color": "{imported.button.label.row-rule-color.tertiary}"
-                }
-              }
-            }
-          ]
+            "line-height": "{imported.button.label.line-height}"
+          }
         }
       },
       "declared": {
@@ -143,7 +123,6 @@
         "padding-top": "{imported.shared.size-8}",
         "right": "{imported.shared.size-0}",
         "row-gap": "{imported.shared.size-8}",
-        "row-rule-color": "{imported.button.root.row-rule-color.unset}",
         "top": "{imported.shared.size-0}"
       },
       "states": {
@@ -159,8 +138,7 @@
           "border-right-color": "{imported.button.root.border-right-color-state-hover.unset}",
           "border-top-color": "{imported.button.root.border-top-color-state-hover.unset}",
           "color": "{imported.button.root.color-state-hover.unset}",
-          "outline-color": "{imported.button.root.outline-color-state-hover.unset}",
-          "row-rule-color": "{imported.button.root.row-rule-color-state-hover.unset}"
+          "outline-color": "{imported.button.root.outline-color-state-hover.unset}"
         }
       },
       "tokensByProp": [
@@ -178,8 +156,7 @@
               "border-top-color": "{imported.button.root.border-top-color.bare}",
               "border-top-width": "{imported.button.root.border-top-width.bare}",
               "color": "{imported.button.root.color.bare}",
-              "outline-color": "{imported.button.root.outline-color.bare}",
-              "row-rule-color": "{imported.button.root.row-rule-color.bare}"
+              "outline-color": "{imported.button.root.outline-color.bare}"
             },
             "danger": {
               "background-color": "{imported.button.root.background-color.danger}",
@@ -192,8 +169,7 @@
               "border-top-color": "{imported.button.root.border-top-color.danger}",
               "border-top-width": "{imported.button.root.border-top-width.danger}",
               "color": "{imported.button.root.color.danger}",
-              "outline-color": "{imported.button.root.outline-color.danger}",
-              "row-rule-color": "{imported.button.root.row-rule-color.danger}"
+              "outline-color": "{imported.button.root.outline-color.danger}"
             },
             "secondary": {
               "background-color": "{imported.button.root.background-color.secondary}",
@@ -206,8 +182,7 @@
               "border-top-color": "{imported.button.root.border-top-color.secondary}",
               "border-top-width": "{imported.button.root.border-top-width.secondary}",
               "color": "{imported.button.root.color.secondary}",
-              "outline-color": "{imported.button.root.outline-color.secondary}",
-              "row-rule-color": "{imported.button.root.row-rule-color.secondary}"
+              "outline-color": "{imported.button.root.outline-color.secondary}"
             },
             "tertiary": {
               "background-color": "{imported.button.root.background-color.tertiary}",
@@ -220,8 +195,7 @@
               "border-top-color": "{imported.button.root.border-top-color.tertiary}",
               "border-top-width": "{imported.button.root.border-top-width.tertiary}",
               "color": "{imported.button.root.color.tertiary}",
-              "outline-color": "{imported.button.root.outline-color.tertiary}",
-              "row-rule-color": "{imported.button.root.row-rule-color.tertiary}"
+              "outline-color": "{imported.button.root.outline-color.tertiary}"
             }
           }
         }

@@ -822,98 +822,6 @@
             }
           }
         },
-        "row-rule-color": {
-          "contained": {
-            "primary": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "error": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "inherit": {
-              "$value": "#000000",
-              "$type": "color"
-            }
-          },
-          "outlined": {
-            "primary": {
-              "$value": "#1976d2",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#9c27b0",
-              "$type": "color"
-            },
-            "error": {
-              "$value": "#d32f2f",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#2e7d32",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#ed6c02",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#0288d1",
-              "$type": "color"
-            },
-            "inherit": {
-              "$value": "#000000",
-              "$type": "color"
-            }
-          },
-          "text": {
-            "primary": {
-              "$value": "#1976d2",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#9c27b0",
-              "$type": "color"
-            },
-            "error": {
-              "$value": "#d32f2f",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#2e7d32",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#ed6c02",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#0288d1",
-              "$type": "color"
-            },
-            "inherit": {
-              "$value": "#000000",
-              "$type": "color"
-            }
-          }
-        },
         "background-color-state-active": {
           "contained": {
             "primary": {
@@ -1466,10 +1374,6 @@
           "$value": "#00000042",
           "$type": "color"
         },
-        "row-rule-color-state-disabled": {
-          "$value": "#00000042",
-          "$type": "color"
-        },
         "box-shadow-state-focus-visible": {
           "contained": {
             "$value": "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px",
@@ -1973,10 +1877,6 @@
         "$value": "16px",
         "$type": "dimension"
       },
-      "color-000000de": {
-        "$value": "#000000de",
-        "$type": "color"
-      },
       "num-0": {
         "$value": "0",
         "$type": "number"
@@ -2000,10 +1900,6 @@
       "size-12": {
         "$value": "12px",
         "$type": "dimension"
-      },
-      "color-101010": {
-        "$value": "#101010",
-        "$type": "color"
       },
       "size-neg-1": {
         "$value": "-1px",
@@ -2041,6 +1937,10 @@
         "$value": "90px",
         "$type": "dimension"
       },
+      "color-000000de": {
+        "$value": "#000000de",
+        "$type": "color"
+      },
       "size-60": {
         "$value": "60px",
         "$type": "dimension"
@@ -2073,10 +1973,6 @@
         "$value": "28px",
         "$type": "dimension"
       },
-      "color-0000008a": {
-        "$value": "#0000008a",
-        "$type": "color"
-      },
       "size-2": {
         "$value": "2px",
         "$type": "dimension"
@@ -2091,10 +1987,6 @@
       },
       "color-1976d2": {
         "$value": "#1976d2",
-        "$type": "color"
-      },
-      "color-616161eb": {
-        "$value": "#616161eb",
         "$type": "color"
       },
       "size-24": {
@@ -2623,68 +2515,6 @@
         "outline-width": {
           "$value": "0px",
           "$type": "dimension"
-        },
-        "row-rule-color": {
-          "filled": {
-            "default": {
-              "$value": "#000000de",
-              "$type": "color"
-            },
-            "primary": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "error": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#ffffff",
-              "$type": "color"
-            }
-          },
-          "outlined": {
-            "default": {
-              "$value": "#000000de",
-              "$type": "color"
-            },
-            "primary": {
-              "$value": "#1976d2",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#9c27b0",
-              "$type": "color"
-            },
-            "error": {
-              "$value": "#d32f2f",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#2e7d32",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#ed6c02",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#0288d1",
-              "$type": "color"
-            }
-          }
         }
       },
       "label": {
@@ -2805,68 +2635,6 @@
               "$type": "dimension"
             }
           }
-        },
-        "row-rule-color": {
-          "filled": {
-            "default": {
-              "$value": "#000000de",
-              "$type": "color"
-            },
-            "primary": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "error": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#ffffff",
-              "$type": "color"
-            }
-          },
-          "outlined": {
-            "default": {
-              "$value": "#000000de",
-              "$type": "color"
-            },
-            "primary": {
-              "$value": "#1976d2",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#9c27b0",
-              "$type": "color"
-            },
-            "error": {
-              "$value": "#d32f2f",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#2e7d32",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#ed6c02",
-              "$type": "color"
-            },
-            "info": {
-              "$value": "#0288d1",
-              "$type": "color"
-            }
-          }
         }
       }
     },
@@ -2894,12 +2662,20 @@
             "$type": "shadow"
           }
         },
+        "color": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
         "width": {
           "$value": "288px",
           "$type": "dimension"
         }
       },
       "label": {
+        "color": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
         "font-weight": {
           "$value": "400",
           "$type": "number"
@@ -3146,78 +2922,6 @@
             "$type": "dimension"
           }
         },
-        "row-rule-color": {
-          "primary": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#1976d2",
-              "$type": "color"
-            }
-          },
-          "secondary": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#9c27b0",
-              "$type": "color"
-            }
-          },
-          "error": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#d32f2f",
-              "$type": "color"
-            }
-          },
-          "warning": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#ed6c02",
-              "$type": "color"
-            }
-          },
-          "info": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#0288d1",
-              "$type": "color"
-            }
-          },
-          "success": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#2e7d32",
-              "$type": "color"
-            }
-          },
-          "default": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            }
-          }
-        },
         "translate-x": {
           "small": {
             "unchecked": {
@@ -3327,78 +3031,6 @@
           }
         },
         "color-state-disabled": {
-          "primary": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#a7caed",
-              "$type": "color"
-            }
-          },
-          "secondary": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#d9ace0",
-              "$type": "color"
-            }
-          },
-          "error": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#eeafaf",
-              "$type": "color"
-            }
-          },
-          "warning": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#f8c79e",
-              "$type": "color"
-            }
-          },
-          "info": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#9ed1ed",
-              "$type": "color"
-            }
-          },
-          "success": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#afcdb1",
-              "$type": "color"
-            }
-          },
-          "default": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            }
-          }
-        },
-        "row-rule-color-state-disabled": {
           "primary": {
             "unchecked": {
               "$value": "#f5f5f5",
@@ -3804,78 +3436,6 @@
             "$type": "dimension"
           }
         },
-        "row-rule-color": {
-          "primary": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#1976d2",
-              "$type": "color"
-            }
-          },
-          "secondary": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#9c27b0",
-              "$type": "color"
-            }
-          },
-          "error": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#d32f2f",
-              "$type": "color"
-            }
-          },
-          "warning": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#ed6c02",
-              "$type": "color"
-            }
-          },
-          "info": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#0288d1",
-              "$type": "color"
-            }
-          },
-          "success": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#2e7d32",
-              "$type": "color"
-            }
-          },
-          "default": {
-            "unchecked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#ffffff",
-              "$type": "color"
-            }
-          }
-        },
         "width": {
           "small": {
             "$value": "16px",
@@ -3959,78 +3519,6 @@
           }
         },
         "color-state-disabled": {
-          "primary": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#a7caed",
-              "$type": "color"
-            }
-          },
-          "secondary": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#d9ace0",
-              "$type": "color"
-            }
-          },
-          "error": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#eeafaf",
-              "$type": "color"
-            }
-          },
-          "warning": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#f8c79e",
-              "$type": "color"
-            }
-          },
-          "info": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#9ed1ed",
-              "$type": "color"
-            }
-          },
-          "success": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#afcdb1",
-              "$type": "color"
-            }
-          },
-          "default": {
-            "unchecked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            },
-            "checked": {
-              "$value": "#f5f5f5",
-              "$type": "color"
-            }
-          }
-        },
-        "row-rule-color-state-disabled": {
           "primary": {
             "unchecked": {
               "$value": "#f5f5f5",
@@ -4258,32 +3746,6 @@
           "$value": "13px",
           "$type": "dimension"
         },
-        "row-rule-color": {
-          "primary": {
-            "$value": "#1976d2",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#9c27b0",
-            "$type": "color"
-          },
-          "error": {
-            "$value": "#d32f2f",
-            "$type": "color"
-          },
-          "warning": {
-            "$value": "#ed6c02",
-            "$type": "color"
-          },
-          "info": {
-            "$value": "#0288d1",
-            "$type": "color"
-          },
-          "success": {
-            "$value": "#2e7d32",
-            "$type": "color"
-          }
-        },
         "width": {
           "$value": "288px",
           "$type": "dimension"
@@ -4365,32 +3827,6 @@
         "opacity": {
           "$value": "0.38",
           "$type": "number"
-        },
-        "row-rule-color": {
-          "primary": {
-            "$value": "#1976d2",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#9c27b0",
-            "$type": "color"
-          },
-          "error": {
-            "$value": "#d32f2f",
-            "$type": "color"
-          },
-          "warning": {
-            "$value": "#ed6c02",
-            "$type": "color"
-          },
-          "info": {
-            "$value": "#0288d1",
-            "$type": "color"
-          },
-          "success": {
-            "$value": "#2e7d32",
-            "$type": "color"
-          }
         },
         "top": {
           "small": {
@@ -4538,32 +3974,6 @@
           "medium": {
             "$value": "170.812px",
             "$type": "dimension"
-          }
-        },
-        "row-rule-color": {
-          "primary": {
-            "$value": "#1976d2",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#9c27b0",
-            "$type": "color"
-          },
-          "error": {
-            "$value": "#d32f2f",
-            "$type": "color"
-          },
-          "warning": {
-            "$value": "#ed6c02",
-            "$type": "color"
-          },
-          "info": {
-            "$value": "#0288d1",
-            "$type": "color"
-          },
-          "success": {
-            "$value": "#2e7d32",
-            "$type": "color"
           }
         },
         "top": {
@@ -4724,32 +4134,6 @@
             "$type": "dimension"
           }
         },
-        "row-rule-color": {
-          "primary": {
-            "$value": "#1976d2",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#9c27b0",
-            "$type": "color"
-          },
-          "error": {
-            "$value": "#d32f2f",
-            "$type": "color"
-          },
-          "warning": {
-            "$value": "#ed6c02",
-            "$type": "color"
-          },
-          "info": {
-            "$value": "#0288d1",
-            "$type": "color"
-          },
-          "success": {
-            "$value": "#2e7d32",
-            "$type": "color"
-          }
-        },
         "top": {
           "small": {
             "$value": "14px",
@@ -4852,6 +4236,10 @@
           "$value": "#ffffff",
           "$type": "color"
         },
+        "color": {
+          "$value": "#101010",
+          "$type": "color"
+        },
         "font-size": {
           "$value": "13.3333px",
           "$type": "dimension"
@@ -4865,6 +4253,10 @@
             "$value": "20px",
             "$type": "dimension"
           }
+        },
+        "outline-color": {
+          "$value": "#101010",
+          "$type": "color"
         },
         "width": {
           "small": {
@@ -4907,20 +4299,6 @@
             "$value": "#000000",
             "$type": "color"
           }
-        },
-        "row-rule-color": {
-          "primary": {
-            "$value": "#1976d2",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#9c27b0",
-            "$type": "color"
-          },
-          "inherit": {
-            "$value": "#000000",
-            "$type": "color"
-          }
         }
       },
       "label-2": {
@@ -4951,20 +4329,6 @@
             "$value": "0.6",
             "$type": "number"
           }
-        },
-        "row-rule-color": {
-          "primary": {
-            "$value": "#00000099",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#00000099",
-            "$type": "color"
-          },
-          "inherit": {
-            "$value": "#000000",
-            "$type": "color"
-          }
         }
       },
       "label-3": {
@@ -4994,20 +4358,6 @@
           "inherit": {
             "$value": "0.6",
             "$type": "number"
-          }
-        },
-        "row-rule-color": {
-          "primary": {
-            "$value": "#00000099",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#00000099",
-            "$type": "color"
-          },
-          "inherit": {
-            "$value": "#000000",
-            "$type": "color"
           }
         }
       },
@@ -5644,16 +4994,6 @@
             "$type": "color"
           }
         },
-        "row-rule-color-state-active": {
-          "medium": {
-            "$value": "#00000066",
-            "$type": "color"
-          },
-          "small": {
-            "$value": "#00000042",
-            "$type": "color"
-          }
-        },
         "color-state-hover": {
           "medium": {
             "$value": "#00000066",
@@ -5665,16 +5005,6 @@
           }
         },
         "fill-state-hover": {
-          "medium": {
-            "$value": "#00000066",
-            "$type": "color"
-          },
-          "small": {
-            "$value": "#00000042",
-            "$type": "color"
-          }
-        },
-        "row-rule-color-state-hover": {
           "medium": {
             "$value": "#00000066",
             "$type": "color"
@@ -5797,23 +5127,13 @@
           "$type": "dimension"
         }
       },
-      "autocomplete-clearindicator": {
+      "autocomplete-popupindicator": {
         "background-color": {
           "$value": "#00000000",
           "$type": "color"
         },
-        "font-size": {
-          "$value": "24px",
-          "$type": "dimension"
-        },
-        "margin-right": {
-          "$value": "-2px",
-          "$type": "dimension"
-        }
-      },
-      "autocomplete-popupindicator": {
-        "background-color": {
-          "$value": "#00000000",
+        "color": {
+          "$value": "#0000008a",
           "$type": "color"
         },
         "font-size": {
@@ -5974,6 +5294,10 @@
         }
       },
       "label": {
+        "background-color": {
+          "$value": "#616161eb",
+          "$type": "color"
+        },
         "color": {
           "$value": "#ffffff",
           "$type": "color"
@@ -6015,16 +5339,16 @@
         "padding-right": {
           "$value": "8px",
           "$type": "dimension"
-        },
-        "row-rule-color": {
-          "$value": "#ffffff",
-          "$type": "color"
         }
       },
       "tooltip-arrow": {
         "bottom": {
           "$value": "23px",
           "$type": "dimension"
+        },
+        "color": {
+          "$value": "#616161eb",
+          "$type": "color"
         },
         "font-weight": {
           "$value": "500",
@@ -6120,6 +5444,10 @@
           "$value": "rgba(0, 0, 0, 0.2) 0px 11px 15px -7px, rgba(0, 0, 0, 0.14) 0px 24px 38px 3px, rgba(0, 0, 0, 0.12) 0px 9px 46px 8px",
           "$type": "shadow"
         },
+        "color": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
         "max-width": {
           "xs": {
             "$value": "444px",
@@ -6144,6 +5472,10 @@
         }
       },
       "label": {
+        "color": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
         "flex-grow": {
           "$value": "1",
           "$type": "number"
@@ -6187,20 +5519,6 @@
           },
           "indeterminate": {
             "$value": "{palette-primary-main}",
-            "$type": "color"
-          }
-        },
-        "row-rule-color": {
-          "unchecked": {
-            "$value": "#00000099",
-            "$type": "color"
-          },
-          "checked": {
-            "$value": "#1976d2",
-            "$type": "color"
-          },
-          "indeterminate": {
-            "$value": "#1976d2",
             "$type": "color"
           }
         }
@@ -6263,20 +5581,6 @@
         "flex-shrink": {
           "$value": "0",
           "$type": "number"
-        },
-        "row-rule-color": {
-          "unchecked": {
-            "$value": "#00000099",
-            "$type": "color"
-          },
-          "checked": {
-            "$value": "#1976d2",
-            "$type": "color"
-          },
-          "indeterminate": {
-            "$value": "#1976d2",
-            "$type": "color"
-          }
         }
       }
     },
@@ -6384,6 +5688,14 @@
           "$value": "2.5625px",
           "$type": "dimension"
         },
+        "color": {
+          "$value": "#0000008a",
+          "$type": "color"
+        },
+        "fill": {
+          "$value": "#0000008a",
+          "$type": "color"
+        },
         "top": {
           "$value": "2.5625px",
           "$type": "dimension"
@@ -6409,11 +5721,19 @@
         "background-color": {
           "$value": "#00000000",
           "$type": "color"
+        },
+        "color": {
+          "$value": "#00000042",
+          "$type": "color"
         }
       },
       "buttonbase-root-2": {
         "background-color": {
           "$value": "#00000000",
+          "$type": "color"
+        },
+        "color": {
+          "$value": "#00000042",
           "$type": "color"
         }
       }
@@ -7019,6 +6339,10 @@
         "background-color": {
           "$value": "#00000000",
           "$type": "color"
+        },
+        "color": {
+          "$value": "#0000008a",
+          "$type": "color"
         }
       },
       "tablerow-root-2": {
@@ -7320,6 +6644,10 @@
       "label-12": {
         "background-color": {
           "$value": "#00000000",
+          "$type": "color"
+        },
+        "color": {
+          "$value": "#0000008a",
           "$type": "color"
         }
       }

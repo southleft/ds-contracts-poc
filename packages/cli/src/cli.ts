@@ -25,10 +25,13 @@ Usage: ds-contracts <command> [options]
 Commands:
   onboard <package-or-path>                   PHASE 1 of the code → canvas pipeline: detect the
           [--components a,b,c]                adapter/styling, create or reuse a sandbox, seed
-          [--workspace <dir>]                 contracts from the static pass, DRAFT the capture
+          [--workspace <dir>] [--force]       contracts from the static pass, DRAFT the capture
                                               config — then STOP at the review gate and print
                                               what a human must decide and why. A directory that
                                               already carries a ds-library.json is ADOPTED.
+                                              (--force starts a NEW onboarding over a workspace
+                                              that already has one in flight; it does NOT skip
+                                              the phase-2 review gate — nothing does.)
   onboard --continue                          PHASE 2: capture → promote → emit → bundle →
           [--channel-key K] [--dry-run]       publish to the standing channel. The designer
           [--bridge <url>]                    clicks "Check for updates" — NO JSON ON A CLIPBOARD.
@@ -40,9 +43,10 @@ Commands:
                                               minted token tree (source-alias pass, provenance
                                               anchors, figmaStatePreviews probe, resolution
                                               guard). Also runs as onboard's promote stage.
-  init [--detect]                             write ds-contracts.config.json here (--detect
+  init [--detect] [--force]                   write ds-contracts.config.json here (--detect
                                               prefills adapter/root/tokens + styling hints from
-                                              the repo — marked detected, NOT confirmed)
+                                              the repo — marked detected, NOT confirmed;
+                                              --force overwrites an existing config)
   extract [config] [--reconcile]              code → proposed contracts (react-tsx | cem adapter)
           [--draft-capture-config]            + DRAFT computed-capture config with "__review:*"
                                               markers (the capture runner refuses it unreviewed)
@@ -87,8 +91,25 @@ Commands:
   diff [config]                               parity referee: contracts vs code/design
                                               exit 0 clean · 1 drift · 2 error
   propose-pr <file> --repo owner/name         open the contract change + generated code as one PR
-          [--token t] [--base b] [--path p] [--target t] [--code-path d]
-          [--tokens f,f] [--icons d] [--stories] [--no-code] [--dry-run]
+          [--token t] [--base b] [--path p] [--title t] [--target t]
+          [--code-path d] [--tokens f,f] [--icons d] [--stories]
+          [--no-code] [--dry-run]             (targets are never guessed: --target wins, else the
+                                              "generate" block of ds-contracts.config.json, else
+                                              the contract alone AND the body says so)
+
+--tokens on generate / figma / propose-pr (NOT on "figma bundle", where it is
+positional: base first, minted second) takes any mix of:
+  path/to/file.dtcg.json    a DTCG file
+  path/to/dir               a DIRECTORY — every *.tokens.json / *.dtcg.json
+                            inside it, recursive and sorted
+  slot=path/to/file.json    an explicit SLOT: primitives | semantic | light |
+                            dark | brand | brand.<name>
+Each file is routed to one slot. Unnamed files follow the *.tokens.json layer
+convention (brand.<n>.tokens.json, *.light.*, *.dark.*, *semantic*,
+*primitives*); anything else is a flat foreign set and lands in primitives.
+Two files that define the SAME token differently inside ONE slot are refused
+by name — a light tree merged over a dark one emits a dark component whose
+own header says light, so the merge that would hide it is not allowed.
 
 ds-contracts <command> --help shows nothing extra yet — this block is the reference.
 `;

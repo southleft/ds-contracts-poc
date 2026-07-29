@@ -229,12 +229,10 @@
                   "prop": "checked",
                   "map": {
                     "checked": {
-                      "background-color": "{imported.switch.switch-thumb.background-color.{color}.checked}",
-                      "row-rule-color": "{imported.switch.switch-thumb.row-rule-color.{color}.checked}"
+                      "background-color": "{imported.switch.switch-thumb.background-color.{color}.checked}"
                     },
                     "unchecked": {
-                      "background-color": "{imported.switch.switch-thumb.background-color.{color}.unchecked}",
-                      "row-rule-color": "{imported.switch.switch-thumb.row-rule-color.{color}.unchecked}"
+                      "background-color": "{imported.switch.switch-thumb.background-color.{color}.unchecked}"
                     }
                   }
                 },
@@ -284,12 +282,10 @@
               "map": {
                 "checked": {
                   "color": "{imported.switch.buttonbase-root.color.{color}.checked}",
-                  "row-rule-color": "{imported.switch.buttonbase-root.row-rule-color.{color}.checked}",
                   "translate-x": "{imported.switch.buttonbase-root.translate-x.{size}.checked}"
                 },
                 "unchecked": {
                   "color": "{imported.switch.buttonbase-root.color.{color}.unchecked}",
-                  "row-rule-color": "{imported.switch.buttonbase-root.row-rule-color.{color}.unchecked}",
                   "translate-x": "{imported.switch.buttonbase-root.translate-x.{size}.unchecked}"
                 }
               }

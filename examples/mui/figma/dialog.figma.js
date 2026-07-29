@@ -142,7 +142,7 @@ const COMPONENTS = [
                           "contentProp": "Content",
                           "fontSize": 16,
                           "fontStyle": "Regular",
-                          "textFill": "imported/shared/color-000000de"
+                          "textFill": "imported/dialog/label/color"
                         }
                       ],
                       "bindings": {
@@ -285,7 +285,7 @@ const COMPONENTS = [
                           "contentProp": "Content",
                           "fontSize": 16,
                           "fontStyle": "Regular",
-                          "textFill": "imported/shared/color-000000de"
+                          "textFill": "imported/dialog/label/color"
                         }
                       ],
                       "bindings": {
@@ -428,7 +428,7 @@ const COMPONENTS = [
                           "contentProp": "Content",
                           "fontSize": 16,
                           "fontStyle": "Regular",
-                          "textFill": "imported/shared/color-000000de"
+                          "textFill": "imported/dialog/label/color"
                         }
                       ],
                       "bindings": {
@@ -571,7 +571,7 @@ const COMPONENTS = [
                           "contentProp": "Content",
                           "fontSize": 16,
                           "fontStyle": "Regular",
-                          "textFill": "imported/shared/color-000000de"
+                          "textFill": "imported/dialog/label/color"
                         }
                       ],
                       "bindings": {
@@ -714,7 +714,7 @@ const COMPONENTS = [
                           "contentProp": "Content",
                           "fontSize": 16,
                           "fontStyle": "Regular",
-                          "textFill": "imported/shared/color-000000de"
+                          "textFill": "imported/dialog/label/color"
                         }
                       ],
                       "bindings": {

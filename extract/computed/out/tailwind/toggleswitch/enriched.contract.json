@@ -150,8 +150,7 @@
             "font-weight": "{imported.toggle-switch.label.font-weight}",
             "line-height": "{imported.toggle-switch.label.line-height}",
             "margin-left": "{imported.toggle-switch.label.margin-left}",
-            "margin-top": "{imported.toggle-switch.label.margin-top}",
-            "row-rule-color": "{imported.toggle-switch.label.row-rule-color}"
+            "margin-top": "{imported.toggle-switch.label.margin-top}"
           }
         }
       },

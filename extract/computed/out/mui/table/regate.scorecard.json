@@ -783,13 +783,13 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 196,
+      "mintedLeaves": 197,
       "mintedLeavesUnfolded": 195,
-      "baseBindings": 440,
+      "baseBindings": 415,
       "stateBindings": 3,
       "codeOnlyChannels": 121,
       "overflowBindings": 3,
-      "folds": 246
+      "folds": 275
     },
     "worstRows": [
       {
@@ -1043,7 +1043,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1338,
+      "leavesAdded": 1196,
       "divergent": []
     },
     "rows": [

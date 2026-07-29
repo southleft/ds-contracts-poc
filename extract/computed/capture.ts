@@ -1293,9 +1293,64 @@ export interface SweepResult {
    *
    *  Both are read off the RAW tree before `normalizeNode`, which builds a
    *  fresh object and copies neither — so captured-truth.json is byte-identical
-   *  for every subject that triggers neither. */
-  textFillFolds: string[];
-  closedShadowSuspects: string[];
+   *  for every subject that triggers neither.
+   *
+   *  SCOPE-INDEPENDENCE ROUND (task #45) — KEYED BY COMPONENT, NOT FLAT.
+   *  These two used to be flat `string[]` accumulated across the WHOLE sweep,
+   *  and run.ts spliced the whole accumulator into EVERY component's
+   *  `frontierReceipts` — so `--component Button` alone wrote a different
+   *  LEDGER.md and enriched.extension.json than the same Button captured
+   *  alongside its siblings (MEASURED on Carbon: 380 frontier lines in the
+   *  committed files, absent from the solo run; MUI: 80). A per-component
+   *  fact reported on every component is not a receipt, it is a leak — and
+   *  "the same component yields different bytes depending on which siblings
+   *  ran" contradicts the determinism claim this project rests on. Both are
+   *  now keyed by `comp.name`, the SAME scoping discipline `shadowHostTrails`
+   *  has always had. */
+  textFillFolds: Record<string, string[]>;
+  closedShadowSuspects: Record<string, string[]>;
+}
+
+/**
+ * STEADY-STATE SETTLE POLL — ONE implementation, shared by the CAPTURE sweep
+ * and the fidelity GATE.
+ *
+ * Transitions are left ENABLED throughout this pipeline (freezing them would
+ * alter the captured `transition-*` channels), so every sampling point has to
+ * wait for paint to stop moving. The capture sweep has polled to stability
+ * since the MUI round; the GATE did not — it drove its interaction and then
+ * slept a FIXED 30ms. Carbon's transitions are 70–110ms, so the gate sampled
+ * mid-flight and its computed-equality % moved run to run: that is task #34,
+ * and it is why carbon/Button carried a 0.20 drift tolerance while every other
+ * row was pinned at 0.001.
+ *
+ * Discipline (unchanged from the capture side): sample every element of the
+ * stage — ENTERING OPEN SHADOW ROOTS, because `querySelectorAll` does not and a
+ * web-component page would otherwise look instantly stable — and require TWO
+ * CONSECUTIVE identical samples 60ms apart, bounded at 25 rounds (1.5s). One
+ * matched pair is not enough: a transition can have a flat spot.
+ *
+ * Bounded, never infinite: an animation that genuinely never settles exhausts
+ * the rounds and sampling proceeds, exactly as before.
+ */
+export const settleProbeJs = (stageSel: string): string =>
+  `(() => { ${SHADOW_HELPERS_JS} const stageEl = document.querySelector('${stageSel}'); const els = stageEl ? shWalkEls(stageEl, []) : []; const parts = []; for (const el of els) { const cs = getComputedStyle(el); parts.push(cs.backgroundColor, cs.color, cs.boxShadow, cs.transform, cs.borderTopColor, cs.borderRightColor, cs.borderBottomColor, cs.borderLeftColor, cs.opacity, cs.outlineColor, cs.fill); } return parts.join('|'); })()`;
+
+export async function settleStage(page: Page, stageSel: string): Promise<void> {
+  const probe = settleProbeJs(stageSel);
+  let prev = await page.evaluate(probe);
+  let stableRuns = 0;
+  for (let i = 0; i < 25; i++) {
+    await page.waitForTimeout(60);
+    const cur = await page.evaluate(probe);
+    if (cur === prev) {
+      stableRuns++;
+      if (stableRuns >= 2) break;
+    } else {
+      stableRuns = 0;
+      prev = cur;
+    }
+  }
 }
 
 /** CONFORMANCE FRONTIER (R1/R8) — read the two RAW-tree receipts before
@@ -1355,9 +1410,14 @@ export async function sweep(
 
   const pinnedAnimations = new Set<string>();
   const shadowHostTrails = new Map<string, string>();
-  const textFillFolds = new Set<string>();
-  const closedShadowSuspects = new Set<string>();
+  // SCOPE-INDEPENDENCE ROUND (task #45): one set PER COMPONENT. These used to
+  // be two run-wide sets, which is what leaked every component's read-boundary
+  // facts into every other component's ledger.
+  const textFillFolds = new Map<string, Set<string>>();
+  const closedShadowSuspects = new Map<string, Set<string>>();
   for (const { comp, space } of mounts) {
+    const compFolds = textFillFolds.get(comp.name) ?? textFillFolds.set(comp.name, new Set()).get(comp.name)!;
+    const compSuspects = closedShadowSuspects.get(comp.name) ?? closedShadowSuspects.set(comp.name, new Set()).get(comp.name)!;
     for (const combo of space.enumeration.combos) {
       const key = `${comp.name}:${combo.key}`;
       const stageSel = `[data-combo="${key}"]`;
@@ -1440,27 +1500,11 @@ export async function sweep(
         // which is a double-run byte-identity failure. `shWalkEls` enters open
         // shadow roots and, on a light-DOM page, yields exactly the elements
         // `querySelectorAll('stage, stage *')` yielded, in the same order.
-        const probe = `(() => { ${SHADOW_HELPERS_JS} const stageEl = document.querySelector('${stageSel}'); const els = stageEl ? shWalkEls(stageEl, []) : []; const parts = []; for (const el of els) { const cs = getComputedStyle(el); parts.push(cs.backgroundColor, cs.color, cs.boxShadow, cs.transform, cs.borderTopColor, cs.borderRightColor, cs.borderBottomColor, cs.borderLeftColor, cs.opacity, cs.outlineColor, cs.fill); } return parts.join('|'); })()`;
-        // Settle discipline (MUI round): ONE matched pair can be a
-        // mid-transition flat spot — require TWO consecutive stable samples,
-        // with patience sized for 250–300ms transition suites.
-        let prev = await page.evaluate(probe);
-        let stableRuns = 0;
-        for (let i = 0; i < 25; i++) {
-          await page.waitForTimeout(60);
-          const cur = await page.evaluate(probe);
-          if (cur === prev) {
-            stableRuns++;
-            if (stableRuns >= 2) break;
-          } else {
-            stableRuns = 0;
-            prev = cur;
-          }
-        }
+        await settleStage(page, stageSel);
 
         const raw = (await page.evaluate(captureJs(stageSel, opts.classAllow, opts.varPrefix))) as CapturedNode | null;
         if (!raw) throw new Error(`capture failed: ${key} ${interaction}`);
-        readBoundaryReceipts(raw, `${key}__${interaction}`, textFillFolds, closedShadowSuspects);
+        readBoundaryReceipts(raw, `${key}__${interaction}`, compFolds, compSuspects);
         captures.push({
           combo: key,
           interaction,
@@ -1506,8 +1550,8 @@ export async function sweep(
     fontChecks,
     pinnedAnimations: [...pinnedAnimations].sort(),
     shadowHostTrails: Object.fromEntries([...shadowHostTrails].sort()),
-    textFillFolds: [...textFillFolds].sort(),
-    closedShadowSuspects: [...closedShadowSuspects].sort(),
+    textFillFolds: Object.fromEntries([...textFillFolds].sort().map(([c, s]) => [c, [...s].sort()])),
+    closedShadowSuspects: Object.fromEntries([...closedShadowSuspects].sort().map(([c, s]) => [c, [...s].sort()])),
   };
 }
 

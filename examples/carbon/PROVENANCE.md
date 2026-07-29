@@ -1082,3 +1082,73 @@ recapture only made it countable. The same ordering leaves an orphan SVG behind:
 `examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg` is still written by
 promote-floor and referenced by no contract. Not fixed here — moving the refusal ahead of the mint
 moves every library's variable count and every golden, and that is its own round.
+
+#### CLOSED (task #42) — the refusal now runs at the MINT door
+
+That round happened. `extract/computed/fuse.ts` `prepareMint` takes the promotion's carried-part
+set and refuses every union part the promotion refused, at the same door that decides the part, one
+named `orphan-mint-refused:` receipt per part with the channel count that therefore did not mint.
+The svg half is closed at the same place: `promoteAnatomy` drops an icon asset whose HOST PART it
+refused (`orphan-asset-dropped:`), so the four unreferenced SVGs — mui's
+`autocomplete-autocomplete-clearindicator` and carbon's three `tabs-visually-hidden*` — are gone
+from `assets/icons/` and no longer written.
+
+**Measured, whole corpus: ZERO minted leaves now sit under a part the promotion refused** (was 121
+in the pre-fix tree: carbon icon-button 112 — `label` 55, `popover-caret` 47, `popover` 10 — carbon
+tabs 6, carbon modal 3). The `224` above over-counted: `tooltip-trigger-wrapper` (10) is CARRIED and
+referenced — the contract spells it `tooltip-trigger__wrapper` and the mint path kebabs it, so a
+name-shape comparison read it as an orphan. That is why this note quotes the re-measured number.
+
+Shipped minted leaves, before → after this round: carbon **1086 → 868**, mui **1534 → 1393**,
+altitude **349 → 315**, tailwind **276 → 236** (the rest of each drop is `row-rule-color`, task #35).
+Not every unreferenced leaf is closed by this door: the residual — real parts whose BINDING was
+dropped downstream by the inheritance refusal, a reviewed-binding collision or overflow — is a
+LIBRARY-LEVEL sweep (mui's `table-pagination` binds `imported.pagination.*`, so the reference set
+spans contracts) and belongs beside `resolutionGuard` in `packages/cli/src/promote.ts`. It is
+counted and ratcheted decrease-only by the `minted-leaves-bind-to-something` eval rather than left
+to accumulate.
+
+### CARBON IS REPRODUCIBLE NOW (task #34) — the gate settles instead of sleeping
+
+The drift baseline's own `gapCause` for `carbon/Button` named this defect and declined to
+fix it: *"extract/computed/gate.ts drives an interaction and then waits a FLAT 30ms
+(`await page.waitForTimeout(30)`), while the CAPTURE sweep polls to two consecutive stable
+samples for up to 1.5s. Carbon's buttons transition at 70ms, which straddles that window …
+Fixing gate.ts moves the number for EVERY library and every committed scorecard, so it is
+its own round."* This is that round. The poll is now ONE implementation
+(`capture.ts settleStage`) shared by the capture sweep and the gate, so the two sampling
+points cannot drift apart again.
+
+**Measured.** `carbon/Button` offline regate, three consecutive runs at the fixed engine:
+`78.974% / 78.974% / 78.974%` — 16275 of 20608, byte-identical. The eight previously
+recorded runs spread 77.441-77.577 (a 0.136 range) and the harness/offline gap was 0.28;
+both are now ZERO, and the harness gate reports the same 78.9741847826087. The row's
+widened `tolerance: 0.2` — the only per-row tolerance in the baseline — is retired.
+
+**Scope-independence proof (task #45) holds on Carbon too**, including the scorecard that
+was the non-deterministic artifact. Carbon Button captured ALONE vs captured as one of ten:
+
+```
+  captured-truth.json     full=e9ce819d3c080bee solo=e9ce819d3c080bee IDENTICAL
+  enriched.contract.json  full=103fd246716ca580 solo=103fd246716ca580 IDENTICAL
+  enriched.extension.json full=98cdacab577e4456 solo=98cdacab577e4456 IDENTICAL
+  LEDGER.md               full=94b79c09dfeaf7d6 solo=94b79c09dfeaf7d6 IDENTICAL
+  scorecard.json          full=9081898ffc603f82 solo=9081898ffc603f82 IDENTICAL
+  numbers.json            full=1568206efadde4d7 solo=1568206efadde4d7 IDENTICAL
+  pixel-rows.json         full=42e4cb1d876fc682 solo=42e4cb1d876fc682 IDENTICAL
+  review-queue.json       full=b2d8da20cf593501 solo=b2d8da20cf593501 IDENTICAL
+  source-bindings.json    full=8d610e735b6d2316 solo=8d610e735b6d2316 IDENTICAL
+```
+
+**Every gate row that moved this round moved on an IDENTICAL denominator**, so these are
+fidelity gains, not shrunken scoring sets:
+
+| component | before | after | delta | cellsCompared |
+|---|---|---|---|---|
+| altitude/link | 63.889% | 82.407% | +18.519 | 432 → 432 |
+| altitude/button | 74.766% | 81.484% | +6.719 | 1280 → 1280 |
+| carbon/button | 77.276% | 78.974% | +1.698 | 20608 → 20608 |
+| carbon/tabs | 92.742% | 93.226% | +0.484 | 1240 → 1240 |
+| mui/button | 86.199% | 86.354% | +0.154 | 27216 → 27216 |
+
+The other 32 re-measured scorecards came back byte-identical.

@@ -7,8 +7,8 @@
   "interactions": 4,
   "computed": {
     "cellsCompared": 432,
-    "cellsEqual": 276,
-    "pctEqual": 63.888888888888886,
+    "cellsEqual": 356,
+    "pctEqual": 82.4074074074074,
     "rowsFullyEqual": 0,
     "rows": 16
   },
@@ -22,63 +22,63 @@
       "noOriginal": 0,
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
-    "meanExact": 0.7932535807291667,
-    "meanAA": 0.44474283854166663,
+    "meanExact": 0.6343587239583334,
+    "meanAA": 0.4467773437499999,
     "maxAA": 1.07421875
   },
   "fusion": {
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 19,
+    "mintedLeaves": 17,
     "mintedLeavesUnfolded": 17,
-    "baseBindings": 9,
-    "stateBindings": 4,
+    "baseBindings": 8,
+    "stateBindings": 3,
     "codeOnlyChannels": 1,
     "overflowBindings": 0,
-    "folds": 9
+    "folds": 10
   },
   "worstRows": [
     {
       "key": "sm__focus-visible",
       "pctAA": 1.07421875,
-      "pctExact": 1.4518229166666667,
-      "channelsMismatched": 12
+      "pctExact": 1.318359375,
+      "channelsMismatched": 2
     },
     {
       "key": "lg__focus-visible",
       "pctAA": 1.0579427083333333,
-      "pctExact": 1.6080729166666667,
-      "channelsMismatched": 12
+      "pctExact": 1.0611979166666667,
+      "channelsMismatched": 2
     },
     {
       "key": "xs__focus-visible",
-      "pctAA": 1.0221354166666667,
-      "pctExact": 1.3639322916666667,
-      "channelsMismatched": 12
+      "pctAA": 1.0188802083333333,
+      "pctExact": 1.2923177083333333,
+      "channelsMismatched": 2
     },
     {
       "key": "unset__focus-visible",
       "pctAA": 0.9440104166666666,
-      "pctExact": 1.40625,
-      "channelsMismatched": 12
+      "pctExact": 0.9440104166666666,
+      "channelsMismatched": 2
     },
     {
       "key": "sm__active",
-      "pctAA": 0.3971354166666667,
-      "pctExact": 0.7259114583333334,
+      "pctAA": 0.4036458333333333,
+      "pctExact": 0.7291666666666666,
       "channelsMismatched": 13
     },
     {
       "key": "xs__active",
       "pctAA": 0.361328125,
-      "pctExact": 0.6803385416666666,
+      "pctExact": 0.703125,
       "channelsMismatched": 13
     },
     {
       "key": "lg__active",
       "pctAA": 0.3515625,
-      "pctExact": 0.72265625,
+      "pctExact": 0.7291666666666666,
       "channelsMismatched": 13
     },
     {
@@ -99,46 +99,46 @@
     ],
     [
       "root.border-bottom-color",
-      12
+      4
     ],
     [
       "root.border-left-color",
-      12
+      4
     ],
     [
       "root.border-right-color",
-      12
+      4
     ],
     [
       "root.border-top-color",
-      12
+      4
     ],
     [
       "root.caret-color",
-      12
+      4
     ],
     [
       "root.color",
-      12
+      4
     ],
     [
       "root.column-rule-color",
-      12
+      4
     ],
     [
       "root.outline-color",
-      12
-    ],
-    [
-      "root.text-decoration-color",
-      12
-    ],
-    [
-      "root.text-emphasis-color",
-      12
+      4
     ],
     [
       "root.row-rule-color",
+      4
+    ],
+    [
+      "root.text-decoration-color",
+      4
+    ],
+    [
+      "root.text-emphasis-color",
       4
     ]
   ],
@@ -151,7 +151,7 @@
   },
   "shippedMinted": {
     "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-    "leavesAdded": 330,
+    "leavesAdded": 332,
     "divergent": [
       {
         "token": "imported.link.root.color",
@@ -186,75 +186,15 @@
     {
       "key": "unset__hover",
       "channelsCompared": 27,
-      "channelsEqual": 15,
-      "pctExact": 0.6315104166666666,
+      "channelsEqual": 25,
+      "pctExact": 0.09765625,
       "pctAA": 0.09765625,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-color",
-          "ours": "rgba(92, 136, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-color",
-          "ours": "rgba(92, 136, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-color",
-          "ours": "rgba(92, 136, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-color",
-          "ours": "rgba(92, 136, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "caret-color",
-          "ours": "rgba(92, 136, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "color",
-          "ours": "rgba(92, 136, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "column-rule-color",
-          "ours": "rgba(92, 136, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(92, 136, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-decoration-color",
-          "ours": "rgba(92, 136, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-emphasis-color",
-          "ours": "rgba(92, 136, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
         },
         {
           "part": "root",
@@ -267,75 +207,15 @@
     {
       "key": "unset__focus-visible",
       "channelsCompared": 27,
-      "channelsEqual": 15,
-      "pctExact": 1.40625,
+      "channelsEqual": 25,
+      "pctExact": 0.9440104166666666,
       "pctAA": 0.9440104166666666,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "caret-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "column-rule-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-decoration-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-emphasis-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
@@ -349,49 +229,49 @@
       "key": "unset__active",
       "channelsCompared": 27,
       "channelsEqual": 14,
-      "pctExact": 0.6412760416666666,
-      "pctAA": 0.23763020833333334,
+      "pctExact": 0.654296875,
+      "pctAA": 0.2669270833333333,
       "mismatches": [
         {
           "part": "root",
           "channel": "border-bottom-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-left-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-right-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-top-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "caret-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "column-rule-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
@@ -403,7 +283,7 @@
         {
           "part": "root",
           "channel": "outline-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
@@ -415,13 +295,13 @@
         {
           "part": "root",
           "channel": "text-decoration-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "text-emphasis-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
@@ -456,75 +336,15 @@
     {
       "key": "xs__hover",
       "channelsCompared": 27,
-      "channelsEqual": 15,
-      "pctExact": 0.6868489583333334,
+      "channelsEqual": 25,
+      "pctExact": 0.5859375,
       "pctAA": 0.3125,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "caret-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "column-rule-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-decoration-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-emphasis-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
         },
         {
           "part": "root",
@@ -537,75 +357,15 @@
     {
       "key": "xs__focus-visible",
       "channelsCompared": 27,
-      "channelsEqual": 15,
-      "pctExact": 1.3639322916666667,
-      "pctAA": 1.0221354166666667,
+      "channelsEqual": 25,
+      "pctExact": 1.2923177083333333,
+      "pctAA": 1.0188802083333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "caret-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "column-rule-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-decoration-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-emphasis-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
@@ -619,49 +379,49 @@
       "key": "xs__active",
       "channelsCompared": 27,
       "channelsEqual": 14,
-      "pctExact": 0.6803385416666666,
+      "pctExact": 0.703125,
       "pctAA": 0.361328125,
       "mismatches": [
         {
           "part": "root",
           "channel": "border-bottom-color",
-          "ours": "rgba(92, 136, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-left-color",
-          "ours": "rgba(92, 136, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-right-color",
-          "ours": "rgba(92, 136, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-top-color",
-          "ours": "rgba(92, 136, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "caret-color",
-          "ours": "rgba(92, 136, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "color",
-          "ours": "rgba(92, 136, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "column-rule-color",
-          "ours": "rgba(92, 136, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
@@ -673,7 +433,7 @@
         {
           "part": "root",
           "channel": "outline-color",
-          "ours": "rgba(92, 136, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
@@ -685,13 +445,13 @@
         {
           "part": "root",
           "channel": "text-decoration-color",
-          "ours": "rgba(92, 136, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "text-emphasis-color",
-          "ours": "rgba(92, 136, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
@@ -726,75 +486,15 @@
     {
       "key": "sm__hover",
       "channelsCompared": 27,
-      "channelsEqual": 15,
-      "pctExact": 0.7063802083333334,
+      "channelsEqual": 25,
+      "pctExact": 0.5631510416666666,
       "pctAA": 0.3125,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-color",
-          "ours": "rgba(97, 140, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-color",
-          "ours": "rgba(97, 140, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-color",
-          "ours": "rgba(97, 140, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-color",
-          "ours": "rgba(97, 140, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "caret-color",
-          "ours": "rgba(97, 140, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "color",
-          "ours": "rgba(97, 140, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "column-rule-color",
-          "ours": "rgba(97, 140, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(97, 140, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-decoration-color",
-          "ours": "rgba(97, 140, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-emphasis-color",
-          "ours": "rgba(97, 140, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
         },
         {
           "part": "root",
@@ -807,75 +507,15 @@
     {
       "key": "sm__focus-visible",
       "channelsCompared": 27,
-      "channelsEqual": 15,
-      "pctExact": 1.4518229166666667,
+      "channelsEqual": 25,
+      "pctExact": 1.318359375,
       "pctAA": 1.07421875,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "caret-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "column-rule-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-decoration-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-emphasis-color",
-          "ours": "rgba(73, 122, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
@@ -889,49 +529,49 @@
       "key": "sm__active",
       "channelsCompared": 27,
       "channelsEqual": 14,
-      "pctExact": 0.7259114583333334,
-      "pctAA": 0.3971354166666667,
+      "pctExact": 0.7291666666666666,
+      "pctAA": 0.4036458333333333,
       "mismatches": [
         {
           "part": "root",
           "channel": "border-bottom-color",
-          "ours": "rgba(97, 140, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-left-color",
-          "ours": "rgba(97, 140, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-right-color",
-          "ours": "rgba(97, 140, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-top-color",
-          "ours": "rgba(97, 140, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "caret-color",
-          "ours": "rgba(97, 140, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "color",
-          "ours": "rgba(97, 140, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "column-rule-color",
-          "ours": "rgba(97, 140, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
@@ -943,7 +583,7 @@
         {
           "part": "root",
           "channel": "outline-color",
-          "ours": "rgba(97, 140, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
@@ -955,13 +595,13 @@
         {
           "part": "root",
           "channel": "text-decoration-color",
-          "ours": "rgba(97, 140, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "text-emphasis-color",
-          "ours": "rgba(97, 140, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
@@ -996,75 +636,15 @@
     {
       "key": "lg__hover",
       "channelsCompared": 27,
-      "channelsEqual": 15,
-      "pctExact": 0.7063802083333334,
+      "channelsEqual": 25,
+      "pctExact": 0.11067708333333333,
       "pctAA": 0.107421875,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "caret-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "column-rule-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-decoration-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-emphasis-color",
-          "ours": "rgba(96, 139, 255, 1)",
-          "theirs": "rgba(107, 147, 255, 1)"
         },
         {
           "part": "root",
@@ -1077,75 +657,15 @@
     {
       "key": "lg__focus-visible",
       "channelsCompared": 27,
-      "channelsEqual": 15,
-      "pctExact": 1.6080729166666667,
+      "channelsEqual": 25,
+      "pctExact": 1.0611979166666667,
       "pctAA": 1.0579427083333333,
       "mismatches": [
-        {
-          "part": "root",
-          "channel": "border-bottom-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-left-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-right-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "border-top-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "caret-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "column-rule-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
         {
           "part": "root",
           "channel": "display",
           "ours": "flex",
           "theirs": "inline-flex"
-        },
-        {
-          "part": "root",
-          "channel": "outline-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-decoration-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
-        },
-        {
-          "part": "root",
-          "channel": "text-emphasis-color",
-          "ours": "rgba(71, 120, 255, 1)",
-          "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
@@ -1159,49 +679,49 @@
       "key": "lg__active",
       "channelsCompared": 27,
       "channelsEqual": 14,
-      "pctExact": 0.72265625,
+      "pctExact": 0.7291666666666666,
       "pctAA": 0.3515625,
       "mismatches": [
         {
           "part": "root",
           "channel": "border-bottom-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-left-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-right-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "border-top-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "caret-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "column-rule-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
@@ -1213,7 +733,7 @@
         {
           "part": "root",
           "channel": "outline-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
@@ -1225,13 +745,13 @@
         {
           "part": "root",
           "channel": "text-decoration-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {
           "part": "root",
           "channel": "text-emphasis-color",
-          "ours": "rgba(94, 137, 255, 1)",
+          "ours": "rgba(107, 147, 255, 1)",
           "theirs": "rgba(67, 117, 255, 1)"
         },
         {

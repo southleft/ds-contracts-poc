@@ -145,8 +145,7 @@
                       "border-left-color": "{imported.icon-button.btn.border-left-color.ghost}",
                       "border-right-color": "{imported.icon-button.btn.border-right-color.ghost}",
                       "border-top-color": "{imported.icon-button.btn.border-top-color.ghost}",
-                      "color": "{imported.icon-button.btn.color.ghost}",
-                      "row-rule-color": "{imported.icon-button.btn.row-rule-color.ghost}"
+                      "color": "{imported.icon-button.btn.color.ghost}"
                     },
                     "primary": {
                       "background-color": "{imported.icon-button.btn.background-color.primary}",
@@ -154,8 +153,7 @@
                       "border-left-color": "{imported.icon-button.btn.border-left-color.primary}",
                       "border-right-color": "{imported.icon-button.btn.border-right-color.primary}",
                       "border-top-color": "{imported.icon-button.btn.border-top-color.primary}",
-                      "color": "{imported.icon-button.btn.color.primary}",
-                      "row-rule-color": "{imported.icon-button.btn.row-rule-color.primary}"
+                      "color": "{imported.icon-button.btn.color.primary}"
                     },
                     "secondary": {
                       "background-color": "{imported.icon-button.btn.background-color.secondary}",
@@ -163,8 +161,7 @@
                       "border-left-color": "{imported.icon-button.btn.border-left-color.secondary}",
                       "border-right-color": "{imported.icon-button.btn.border-right-color.secondary}",
                       "border-top-color": "{imported.icon-button.btn.border-top-color.secondary}",
-                      "color": "{imported.icon-button.btn.color.secondary}",
-                      "row-rule-color": "{imported.icon-button.btn.row-rule-color.secondary}"
+                      "color": "{imported.icon-button.btn.color.secondary}"
                     },
                     "tertiary": {
                       "background-color": "{imported.icon-button.btn.background-color.tertiary}",
@@ -172,8 +169,7 @@
                       "border-left-color": "{imported.icon-button.btn.border-left-color.tertiary}",
                       "border-right-color": "{imported.icon-button.btn.border-right-color.tertiary}",
                       "border-top-color": "{imported.icon-button.btn.border-top-color.tertiary}",
-                      "color": "{imported.icon-button.btn.color.tertiary}",
-                      "row-rule-color": "{imported.icon-button.btn.row-rule-color.tertiary}"
+                      "color": "{imported.icon-button.btn.color.tertiary}"
                     }
                   }
                 },

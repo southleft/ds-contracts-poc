@@ -260,7 +260,7 @@ const COMPONENTS = [
                     "paddingBottom": "imported/shared/size-48",
                     "paddingLeft": "imported/shared/size-16",
                     "paddingRight": "imported/shared/size-16",
-                    "paddingTop": "imported/shared/size-8"
+                    "paddingTop": "imported/modal/label-5/padding-top"
                   },
                   "fillW": true
                 },
@@ -618,7 +618,7 @@ const COMPONENTS = [
                     "paddingBottom": "imported/shared/size-48",
                     "paddingLeft": "imported/shared/size-16",
                     "paddingRight": "imported/shared/size-16",
-                    "paddingTop": "imported/shared/size-8"
+                    "paddingTop": "imported/modal/label-5/padding-top"
                   },
                   "fillW": true
                 },
@@ -976,7 +976,7 @@ const COMPONENTS = [
                     "paddingBottom": "imported/shared/size-48",
                     "paddingLeft": "imported/shared/size-16",
                     "paddingRight": "imported/shared/size-16",
-                    "paddingTop": "imported/shared/size-8"
+                    "paddingTop": "imported/modal/label-5/padding-top"
                   },
                   "fillW": true
                 },
@@ -1334,7 +1334,7 @@ const COMPONENTS = [
                     "paddingBottom": "imported/shared/size-48",
                     "paddingLeft": "imported/shared/size-16",
                     "paddingRight": "imported/shared/size-16",
-                    "paddingTop": "imported/shared/size-8"
+                    "paddingTop": "imported/modal/label-5/padding-top"
                   },
                   "fillW": true
                 },

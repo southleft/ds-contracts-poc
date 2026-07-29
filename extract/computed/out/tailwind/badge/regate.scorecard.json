@@ -40,13 +40,13 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 57,
+      "mintedLeaves": 45,
       "mintedLeavesUnfolded": 165,
-      "baseBindings": 21,
+      "baseBindings": 19,
       "stateBindings": 2,
       "codeOnlyChannels": 0,
       "overflowBindings": 0,
-      "folds": 18
+      "folds": 20
     },
     "worstRows": [
       {
@@ -175,7 +175,7 @@
     },
     "shippedMinted": {
       "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
-      "leavesAdded": 219,
+      "leavesAdded": 191,
       "divergent": [
         {
           "token": "imported.badge.root.background-color.info",

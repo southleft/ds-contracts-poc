@@ -2,15 +2,15 @@
 
 Two GitHub Actions workflows that make contracts carry the design/code sync
 so neither side has to. Both run the **published** CLI
-(`npx --yes @ds-contracts/cli@0.1.0`) — they work in any repo today, no clone
+(`npx --yes @ds-contracts/cli@0.2.0`) — they work in any repo today, no clone
 of this reference repo required.
 
 Every `run:` step in both files has been executed locally against the
 published CLI — see [VALIDATION.md](./VALIDATION.md) (produced by
 `node examples/ci/validate.mjs`) — with two named exceptions that
 `validate.mjs` classifies as CI-only: the git push, and the standing-channel
-publish (it needs a live channel *and* a CLI newer than the published
-`0.1.0` the other steps pin — `figma publish` ships in the next release).
+publish (it needs a live channel and the deployed worker; the *verbs* —
+`figma publish`, `figma claim-channel` — are in the pinned `0.2.0`).
 
 ## [`code-led.yml`](./code-led.yml) — code is truth
 
@@ -18,10 +18,63 @@ publish (it needs a live channel *and* a CLI newer than the published
 
 ```
 extract (published CLI) → adopt proposals into contracts/ → commit
-                        → CONTRACTS-BUNDLE artifact
-                        → publish to the standing CI→Figma channel
-                        → job summary (proposal/skip counts + delivery number)
+                        → ANATOMY GATE ──┬─ stub  → stop, say why
+                                         └─ real  → CONTRACTS-BUNDLE artifact
+                                                  → publish to the standing channel
+                        → job summary (counts + the gate verdict, either way)
 ```
+
+### Read this before you copy the file: static extraction has a ceiling
+
+`ds-contracts extract` reads your component **source**. It recovers the API
+surface (props, enums, defaults, events) for any library the adapters
+understand. It recovers **anatomy** — the parts, the token bindings, the thing
+a component actually *looks like* — only for **React + a co-located CSS
+Module**.
+
+For every other styling system (CSS-in-JS, StyleX, Tailwind classes, web
+components, styles in a separate build) static extraction emits
+
+```json
+"anatomy": { "root": {} }
+```
+
+A stub. And **a stub does not refuse — it generates.** Delivered to the Figma
+plugin it produces a component set with correctly-named variant frames and
+nothing inside them. Measured on a real stub contract (10 variants): a
+53,283-byte sync script whose every variant spec is a bare
+`{ type: root, name, layout }` — no children, no fills, no text. Blank boxes,
+correctly labelled, in a designer's file.
+
+So the recipe is split by a gate:
+
+| half | runs when | why |
+|---|---|---|
+| extract → adopt → **commit `contracts/`** | always | contracts in git are worth having on their own — a diffable, reviewable API surface for the whole library. Stub anatomy included. |
+| **bundle + deliver to the canvas** | only when every adopted contract carries real anatomy | a stub on a canvas is a hollow component set, and nothing downstream refuses it |
+
+When the gate stops the canvas half, the job summary names **every** stub
+component and the command that fixes it. The fix is the computed-capture path
+— a real Chromium renders your components and the anatomy is *measured*
+instead of guessed:
+
+```
+npx @ds-contracts/cli onboard <your-package-or-path>   # stops at a review gate
+npx @ds-contracts/cli onboard --continue               # capture → promote → publish
+```
+
+(`onboard` ships in the release after `0.2.0`. Until then the same path is
+`extract --draft-capture-config` → review → `extract --computed --config` →
+`promote`.)
+
+This is not hypothetical for the recipe's own validation: the code-led
+consumer fixture is a React library with no co-located CSS, so
+[VALIDATION.md](./VALIDATION.md) shows the gate returning
+`canvas_ready=false` and the canvas steps `skipped-by-if`. Before the gate
+existed, that same receipt certified a bundle step passing over five hollow
+contracts.
+
+### The always-half
 
 - `ds-contracts extract ds-contracts.config.json` proposes contracts from the
   component source (react-tsx or CEM adapter). The job summary names the
@@ -29,6 +82,9 @@ extract (published CLI) → adopt proposals into contracts/ → commit
   could not extract are never silently dropped.
 - The refreshed `contracts/` directory is committed back to the branch:
   contracts-in-git are the canon; per-version history is the changelog.
+
+### The gated half
+
 - The **CONTRACTS-BUNDLE** artifact is the exact envelope both delivery
   routes carry (`{ "type": "CONTRACTS-BUNDLE", "version": 1,
   "contracts": [...] }`).

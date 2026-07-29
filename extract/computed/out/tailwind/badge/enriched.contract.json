@@ -109,28 +109,22 @@
               "prop": "color",
               "map": {
                 "failure": {
-                  "color": "{imported.badge.label.color.failure}",
-                  "row-rule-color": "{imported.badge.label.row-rule-color.failure}"
+                  "color": "{imported.badge.label.color.failure}"
                 },
                 "indigo": {
-                  "color": "{imported.badge.label.color.indigo}",
-                  "row-rule-color": "{imported.badge.label.row-rule-color.indigo}"
+                  "color": "{imported.badge.label.color.indigo}"
                 },
                 "info": {
-                  "color": "{imported.badge.label.color.info}",
-                  "row-rule-color": "{imported.badge.label.row-rule-color.info}"
+                  "color": "{imported.badge.label.color.info}"
                 },
                 "pink": {
-                  "color": "{imported.badge.label.color.pink}",
-                  "row-rule-color": "{imported.badge.label.row-rule-color.pink}"
+                  "color": "{imported.badge.label.color.pink}"
                 },
                 "success": {
-                  "color": "{imported.badge.label.color.success}",
-                  "row-rule-color": "{imported.badge.label.row-rule-color.success}"
+                  "color": "{imported.badge.label.color.success}"
                 },
                 "warning": {
-                  "color": "{imported.badge.label.color.warning}",
-                  "row-rule-color": "{imported.badge.label.row-rule-color.warning}"
+                  "color": "{imported.badge.label.color.warning}"
                 }
               }
             },
@@ -177,33 +171,27 @@
           "map": {
             "failure": {
               "background-color": "{imported.badge.root.background-color.failure}",
-              "color": "{imported.badge.root.color.failure}",
-              "row-rule-color": "{imported.badge.root.row-rule-color.failure}"
+              "color": "{imported.badge.root.color.failure}"
             },
             "indigo": {
               "background-color": "{imported.badge.root.background-color.indigo}",
-              "color": "{imported.badge.root.color.indigo}",
-              "row-rule-color": "{imported.badge.root.row-rule-color.indigo}"
+              "color": "{imported.badge.root.color.indigo}"
             },
             "info": {
               "background-color": "{imported.badge.root.background-color.info}",
-              "color": "{imported.badge.root.color.info}",
-              "row-rule-color": "{imported.badge.root.row-rule-color.info}"
+              "color": "{imported.badge.root.color.info}"
             },
             "pink": {
               "background-color": "{imported.badge.root.background-color.pink}",
-              "color": "{imported.badge.root.color.pink}",
-              "row-rule-color": "{imported.badge.root.row-rule-color.pink}"
+              "color": "{imported.badge.root.color.pink}"
             },
             "success": {
               "background-color": "{imported.badge.root.background-color.success}",
-              "color": "{imported.badge.root.color.success}",
-              "row-rule-color": "{imported.badge.root.row-rule-color.success}"
+              "color": "{imported.badge.root.color.success}"
             },
             "warning": {
               "background-color": "{imported.badge.root.background-color.warning}",
-              "color": "{imported.badge.root.color.warning}",
-              "row-rule-color": "{imported.badge.root.row-rule-color.warning}"
+              "color": "{imported.badge.root.color.warning}"
             }
           }
         },

@@ -176,7 +176,6 @@
         "padding-right": "{imported.button.root.padding-right.{variant}.{size}}",
         "padding-top": "{imported.button.root.padding-top.{variant}.{size}}",
         "right": "{imported.shared.size-0}",
-        "row-rule-color": "{imported.button.root.row-rule-color.{variant}.{color}}",
         "top": "{imported.shared.size-0}"
       },
       "states": {
@@ -190,8 +189,7 @@
           "border-right-color": "{imported.button.root.border-right-color-state-disabled.{variant}}",
           "border-top-color": "{imported.button.root.border-top-color-state-disabled.{variant}}",
           "box-shadow": "{imported.button.root.box-shadow-state-disabled}",
-          "color": "{imported.button.root.color-state-disabled}",
-          "row-rule-color": "{imported.button.root.row-rule-color-state-disabled}"
+          "color": "{imported.button.root.color-state-disabled}"
         },
         "focus-visible": {
           "box-shadow": "{imported.button.root.box-shadow-state-focus-visible.{variant}}"

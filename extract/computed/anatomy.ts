@@ -944,6 +944,17 @@ export function promoteAnatomy(
   const receipts: string[] = [];
   const refusals: string[] = [];
   const assets = new Map<string, string>();
+  /** ORPHAN-ASSET ROUND (task #42, second half) — asset name -> the union part
+   *  that hosts it. The svg-asset door runs at the TOP of this function and the
+   *  painting refusals (`non-painting-part`, `inert-overlay-wrapper`, …) run at
+   *  the BOTTOM, so an asset could be reconstructed and committed for a part
+   *  that never reaches the promoted contract. MEASURED:
+   *  `examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg`
+   *  is written by promote-floor and referenced by no contract — its host
+   *  `autocomplete-clearindicator` is refused `non-painting-part: renders NO
+   *  INK in any combo it appears in (visibility: hidden)`. Same class of lie as
+   *  the orphan minted leaf; fixed at the same door, below. */
+  const assetOwner = new Map<string, string>();
   const consumed = new Set<number>();
   const contract = structuredClone(space.contract) as Contract;
   const entries = union.entries;
@@ -1077,6 +1088,7 @@ export function promoteAnatomy(
     if (distinct.size === 1) {
       const name = `${componentKebab}-${kebabValue(t.host.partName)}`;
       assets.set(name, [...markups.values()][0].markup);
+      assetOwner.set(name, t.host.partName);
       svgPlans.set(hostIdx, { hostIdx, perValue: [{ asset: name, size: [...markups.values()][0].size }] });
     } else {
       // single-axis explanation: find an axis whose value partitions markup
@@ -1101,6 +1113,7 @@ export function promoteAnatomy(
         seenValues.add(v);
         const name = `${componentKebab}-${kebabValue(t.host.partName)}-${kebabValue(v)}`;
         assets.set(name, m.markup);
+        assetOwner.set(name, t.host.partName);
         perValue.push({ value: v, prop: axis.prop, asset: name, size: m.size });
       }
       svgPlans.set(hostIdx, { hostIdx, perValue });
@@ -2174,6 +2187,19 @@ export function promoteAnatomy(
   entries.forEach((e, i) => {
     if (promotedNames.has(e.partName)) partIndex.set(e.partName, i);
   });
+
+  // ORPHAN-ASSET ROUND (task #42): an icon asset whose HOST PART the promotion
+  // just refused belongs to nothing. It used to be written to
+  // examples/<lib>/assets/icons/ by promote-floor and referenced by no
+  // contract — a committed SVG file for a part that does not exist. Dropped
+  // here, by NAME, at the same door that decides the part.
+  for (const [name, owner] of [...assetOwner].sort()) {
+    if (promotedNames.has(owner) || !assets.has(name)) continue;
+    assets.delete(name);
+    refusals.push(
+      `orphan-asset-dropped: icon asset "${name}" was reconstructed from the svg subtree of part "${owner}", which this promotion then REFUSED (see the named refusal above) — the asset belongs to no part of the promoted contract and is not carried. Before this door it was committed to the library's assets/icons/ directory and referenced by nothing (measured: examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg).`,
+    );
+  }
 
   // Round 5f — materialize the UNSET pseudo-value of every defaultless
   // structure-gating enum into the contract enum AS THE DEFAULT. Only axes

@@ -16,7 +16,7 @@
     "checkbox__validation-msg": 10
   },
   "folds": {
-    "count": 8,
+    "count": 9,
     "receipts": [
       {
         "part": "checkbox",
@@ -56,6 +56,12 @@
       },
       {
         "part": "checkbox",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "checkbox",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -68,7 +74,7 @@
       }
     ],
     "mintedLeavesUnfolded": 22,
-    "mintedLeavesFolded": 23
+    "mintedLeavesFolded": 25
   },
   "bound": {
     "cellsChecked": 0,
@@ -77,11 +83,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 23,
-    "baseBindings": 50,
-    "stateBindings": 28,
+    "leaves": 25,
+    "baseBindings": 49,
+    "stateBindings": 27,
     "byShape": {
-      "uniform": 78,
+      "uniform": 76,
       "perAxis": 0,
       "perPair": 0,
       "refused": 0
@@ -94,7 +100,7 @@
   "codeOnly": {
     "base": 5,
     "state": 0,
-    "overflowBindings": 25
+    "overflowBindings": 24
   },
   "pseudoElementFindings": 15,
   "anatomyPromotion": {

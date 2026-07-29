@@ -299,7 +299,7 @@ const COMPONENTS = [
                               "type": "svg",
                               "name": "autocomplete-popupindicator-icon",
                               "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
-                              "svgPaintVar": "imported/shared/color-0000008a",
+                              "svgPaintVar": "imported/autocomplete/autocomplete-popupindicator/color",
                               "iconSize": 24
                             }
                           ],
@@ -700,7 +700,7 @@ const COMPONENTS = [
                               "type": "svg",
                               "name": "autocomplete-popupindicator-icon",
                               "svg": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 7 10 L 12 15 L 17 10 Z\" fill=\"#0000008a\"/></svg>",
-                              "svgPaintVar": "imported/shared/color-0000008a",
+                              "svgPaintVar": "imported/autocomplete/autocomplete-popupindicator/color",
                               "iconSize": 24
                             }
                           ],

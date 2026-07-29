@@ -66,13 +66,13 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 12,
+      "mintedLeaves": 13,
       "mintedLeavesUnfolded": 12,
-      "baseBindings": 21,
+      "baseBindings": 19,
       "stateBindings": 0,
       "codeOnlyChannels": 1,
       "overflowBindings": 0,
-      "folds": 18
+      "folds": 20
     },
     "worstRows": [
       {
@@ -142,7 +142,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1522,
+      "leavesAdded": 1380,
       "divergent": [
         {
           "token": "imported.card.root.background-color",

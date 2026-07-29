@@ -26,7 +26,8 @@
         "font-weight": "{imported.case-min-max-width.root.font-weight}",
         "max-width": "{imported.case-min-max-width.root.max-width}",
         "min-width": "{imported.case-min-max-width.root.min-width}"
-      }
+      },
+      "hugsBelowMaxWidth": true
     }
   },
   "anchors": {

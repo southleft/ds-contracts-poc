@@ -44,7 +44,7 @@
             "border-right-width": "{imported.shared.size-0}",
             "border-top-width": "{imported.shared.size-0}",
             "bottom": "{imported.shared.size-0}",
-            "color": "{imported.shared.color-000000}",
+            "color": "{imported.tabs.part-0.color}",
             "flex-shrink": "{imported.shared.num-0}",
             "font-size": "{imported.shared.size-14}",
             "left": "{imported.shared.size-0}",
@@ -160,7 +160,6 @@
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "row-rule-color": "{imported.tabs.tabs-nav-item.row-rule-color}",
                 "top": "{imported.shared.size-0}",
                 "width": "{imported.tabs.tabs-nav-item.width}"
               }
@@ -232,8 +231,7 @@
                         "font-size": "{imported.shared.size-14}",
                         "font-weight": "{imported.tabs.label-2.font-weight}",
                         "letter-spacing": "{imported.shared.size-0-16}",
-                        "line-height": "{imported.shared.size-18-0001}",
-                        "row-rule-color": "{imported.shared.color-525252}"
+                        "line-height": "{imported.shared.size-18-0001}"
                       },
                       "states": {
                         "active": {
@@ -262,7 +260,6 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "row-rule-color": "{imported.shared.color-525252}",
                     "top": "{imported.shared.size-1}",
                     "width": "{imported.tabs.tabs-nav-item-label-wrapper-2.width}"
                   },
@@ -299,7 +296,6 @@
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "row-rule-color": "{imported.shared.color-525252}",
                 "top": "{imported.shared.size-0}",
                 "width": "{imported.tabs.tabs-nav-item-2.width}"
               },
@@ -379,8 +375,7 @@
                         "font-size": "{imported.shared.size-14}",
                         "font-weight": "{imported.tabs.label-3.font-weight}",
                         "letter-spacing": "{imported.shared.size-0-16}",
-                        "line-height": "{imported.shared.size-18-0001}",
-                        "row-rule-color": "{imported.shared.color-525252}"
+                        "line-height": "{imported.shared.size-18-0001}"
                       }
                     }
                   },
@@ -401,7 +396,6 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "row-rule-color": "{imported.shared.color-525252}",
                     "top": "{imported.shared.size-1}",
                     "width": "{imported.tabs.tabs-nav-item-label-wrapper-3.width}"
                   }
@@ -430,7 +424,6 @@
                 "padding-right": "{imported.shared.size-16}",
                 "padding-top": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "row-rule-color": "{imported.shared.color-525252}",
                 "top": "{imported.shared.size-0}",
                 "width": "{imported.tabs.tabs-nav-item-3.width}"
               }
@@ -493,7 +486,7 @@
             "border-right-width": "{imported.shared.size-0}",
             "border-top-width": "{imported.shared.size-0}",
             "bottom": "{imported.shared.size-0}",
-            "color": "{imported.shared.color-000000}",
+            "color": "{imported.tabs.part-2.color}",
             "flex-shrink": "{imported.shared.num-0}",
             "font-size": "{imported.shared.size-14}",
             "min-height": "{imported.shared.size-0}",

@@ -33,7 +33,7 @@
     "label-3": 22
   },
   "folds": {
-    "count": 184,
+    "count": 204,
     "receipts": [
       {
         "part": "autocomplete-inputroot",
@@ -79,6 +79,12 @@
       },
       {
         "part": "autocomplete-inputroot",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "autocomplete-inputroot",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -133,6 +139,12 @@
       },
       {
         "part": "autocomplete-tag",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "autocomplete-tag",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -187,6 +199,12 @@
       },
       {
         "part": "label",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -255,6 +273,12 @@
       },
       {
         "part": "icon",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -323,6 +347,12 @@
       },
       {
         "part": "part-0-0-0-1-0",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-1-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -377,6 +407,12 @@
       },
       {
         "part": "autocomplete-tag-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "autocomplete-tag-2",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -426,6 +462,12 @@
       {
         "part": "label-2",
         "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label-2",
+        "channel": "row-rule-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
@@ -499,6 +541,12 @@
       },
       {
         "part": "icon-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -567,6 +615,12 @@
       },
       {
         "part": "part-0-0-1-1-0",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-1-1-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -621,6 +675,12 @@
       },
       {
         "part": "autocomplete-input",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "autocomplete-input",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -675,6 +735,12 @@
       },
       {
         "part": "autocomplete-endadornment",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "autocomplete-endadornment",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -729,6 +795,12 @@
       },
       {
         "part": "autocomplete-clearindicator",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "autocomplete-clearindicator",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -783,6 +855,12 @@
       },
       {
         "part": "icon-3",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-3",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -837,6 +915,12 @@
       },
       {
         "part": "part-0-0-3-0-0-0",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-3-0-0-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -891,6 +975,12 @@
       },
       {
         "part": "autocomplete-popupindicator",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "autocomplete-popupindicator",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -945,6 +1035,12 @@
       },
       {
         "part": "icon-4",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -999,6 +1095,12 @@
       },
       {
         "part": "part-0-0-3-1-0-0",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-3-1-0-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -1029,6 +1131,12 @@
       },
       {
         "part": "outlinedinput-notchedoutline",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "outlinedinput-notchedoutline",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -1083,6 +1191,12 @@
       },
       {
         "part": "part-0-0-4-0",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-4-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -1137,6 +1251,12 @@
       },
       {
         "part": "label-3",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label-3",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -1148,8 +1268,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 188,
-    "mintedLeavesFolded": 143
+    "mintedLeavesUnfolded": 185,
+    "mintedLeavesFolded": 136
   },
   "bound": {
     "cellsChecked": 0,
@@ -1158,12 +1278,12 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 143,
-    "baseBindings": 225,
-    "stateBindings": 28,
+    "leaves": 136,
+    "baseBindings": 185,
+    "stateBindings": 26,
     "byShape": {
-      "uniform": 202,
-      "perAxis": 51,
+      "uniform": 162,
+      "perAxis": 49,
       "perPair": 0,
       "refused": 0
     }
@@ -1173,15 +1293,15 @@
     "state": 0
   },
   "codeOnly": {
-    "base": 31,
-    "state": 4,
-    "overflowBindings": 55
+    "base": 15,
+    "state": 1,
+    "overflowBindings": 26
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
     "partsCarried": 15,
-    "svgAssets": 4,
-    "refusals": 1
+    "svgAssets": 3,
+    "refusals": 2
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,

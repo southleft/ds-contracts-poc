@@ -205,13 +205,13 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 37,
+      "mintedLeaves": 38,
       "mintedLeavesUnfolded": 37,
-      "baseBindings": 54,
-      "stateBindings": 26,
-      "codeOnlyChannels": 34,
-      "overflowBindings": 23,
-      "folds": 9
+      "baseBindings": 53,
+      "stateBindings": 25,
+      "codeOnlyChannels": 25,
+      "overflowBindings": 22,
+      "folds": 10
     },
     "worstRows": [
       {
@@ -334,7 +334,6 @@
       ]
     ],
     "namedLosses": [
-      "overflow: accordion__heading.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: icon.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: icon.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: icon.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -378,15 +377,6 @@
       "code-only: accordion__wrapper-2.transition-behavior — part absent in every default-state combo (interaction-only part) — state rounds own it",
       "code-only: accordion__wrapper-2.transition-duration — part absent in every default-state combo (interaction-only part) — state rounds own it",
       "code-only: accordion__wrapper-2.transition-timing-function — part absent in every default-state combo (interaction-only part) — state rounds own it",
-      "code-only: label-3.font-size — part absent in every default-state combo (interaction-only part) — state rounds own it",
-      "code-only: label-3.font-weight — part absent in every default-state combo (interaction-only part) — state rounds own it",
-      "code-only: label-3.line-height — part absent in every default-state combo (interaction-only part) — state rounds own it",
-      "code-only: label-3.list-style-type — part absent in every default-state combo (interaction-only part) — state rounds own it",
-      "code-only: label-3.margin-left — part absent in every default-state combo (interaction-only part) — state rounds own it",
-      "code-only: label-3.min-height — part absent in every default-state combo (interaction-only part) — state rounds own it",
-      "code-only: label-3.min-width — part absent in every default-state combo (interaction-only part) — state rounds own it",
-      "code-only: label-3.padding-left — part absent in every default-state combo (interaction-only part) — state rounds own it",
-      "code-only: label-3.padding-right — part absent in every default-state combo (interaction-only part) — state rounds own it",
       "code-only: accordion__wrapper.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: accordion__wrapper.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -398,8 +388,21 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 1049,
-      "divergent": []
+      "leavesAdded": 830,
+      "divergent": [
+        {
+          "token": "imported.accordion.accordion-heading.color",
+          "fresh": "#161616",
+          "shipped": "{text-primary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.accordion.icon.fill",
+          "fresh": "#161616",
+          "shipped": "{icon-primary}",
+          "resolvedEqual": true
+        }
+      ]
     },
     "rows": [
       {

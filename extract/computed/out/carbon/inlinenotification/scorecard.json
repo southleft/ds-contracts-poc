@@ -30,13 +30,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 87,
+    "mintedLeaves": 75,
     "mintedLeavesUnfolded": 193,
-    "baseBindings": 57,
+    "baseBindings": 51,
     "stateBindings": 1,
     "codeOnlyChannels": 4,
     "overflowBindings": 1,
-    "folds": 107
+    "folds": 119
   },
   "worstRows": [
     {
@@ -115,7 +115,7 @@
   },
   "shippedMinted": {
     "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-    "leavesAdded": 999,
+    "leavesAdded": 1011,
     "divergent": [
       {
         "token": "imported.inline-notification.icon.fill.error.high",

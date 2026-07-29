@@ -24,8 +24,7 @@
         "background-color": "{imported.case-mask-image.root.background-color}",
         "color": "{imported.case-mask-image.root.color}",
         "font-size": "{imported.case-mask-image.root.font-size}",
-        "font-weight": "{imported.case-mask-image.root.font-weight}",
-        "row-rule-color": "{imported.case-mask-image.root.row-rule-color}"
+        "font-weight": "{imported.case-mask-image.root.font-weight}"
       }
     }
   },

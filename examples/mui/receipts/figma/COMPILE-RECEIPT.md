@@ -8,23 +8,23 @@ examples/mui/tokens/mui.dtcg.json,examples/mui/tokens/mui-minted.dtcg.json`.
 
 | script | contract | variant axes | variants | headless execute |
 |---|---|---|---|---|
-| accordion.figma.js | mui.accordion | variant(2)×expanded(2) | 4 | tokens 1684 (73 aliased) · 1 set(s) built |
-| autocomplete.figma.js | mui.autocomplete | size(2) | 2 | tokens 1684 (73 aliased) · 1 set(s) built |
-| button.figma.js | mui.button | variant(3)×color(7)×size(3) | 63 | tokens 1684 (73 aliased) · 1 set(s) built |
-| card.figma.js | mui.card | elevation(4) | 4 | tokens 1684 (73 aliased) · 1 set(s) built |
-| checkbox.figma.js | mui.checkbox | checked(3) | 3 | tokens 1684 (73 aliased) · 1 set(s) built |
-| chip.figma.js | mui.chip | variant(2)×color(7)×size(2) | 28 | tokens 1684 (73 aliased) · 1 set(s) built |
-| dialog.figma.js | mui.dialog | maxWidth(5) | 5 | tokens 1684 (73 aliased) · 1 set(s) built |
-| menu.figma.js | mui.menu | standalone | 1 | tokens 1684 (73 aliased) · 0 set(s) built |
-| slider.figma.js | mui.slider | color(6)×size(2) | 12 | tokens 1684 (73 aliased) · 1 set(s) built |
-| switch.figma.js | mui.switch | color(7)×size(2)×checked(2) | 28 | tokens 1684 (73 aliased) · 1 set(s) built |
-| table-pagination.figma.js | mui.table-pagination | standalone | 1 | tokens 1684 (73 aliased) · 0 set(s) built |
-| table.figma.js | mui.table | size(2) | 2 | tokens 1684 (73 aliased) · 1 set(s) built |
-| tabs.figma.js | mui.tabs | textColor(3)×indicatorColor(2) | 6 | tokens 1684 (73 aliased) · 1 set(s) built |
-| tooltip.figma.js | mui.tooltip | standalone | 1 | tokens 1684 (73 aliased) · 0 set(s) built |
+| accordion.figma.js | mui.accordion | variant(2)×expanded(2) | 4 | tokens 1543 (73 aliased) · 1 set(s) built |
+| autocomplete.figma.js | mui.autocomplete | size(2) | 2 | tokens 1543 (73 aliased) · 1 set(s) built |
+| button.figma.js | mui.button | variant(3)×color(7)×size(3) | 63 | tokens 1543 (73 aliased) · 1 set(s) built |
+| card.figma.js | mui.card | elevation(4) | 4 | tokens 1543 (73 aliased) · 1 set(s) built |
+| checkbox.figma.js | mui.checkbox | checked(3) | 3 | tokens 1543 (73 aliased) · 1 set(s) built |
+| chip.figma.js | mui.chip | variant(2)×color(7)×size(2) | 28 | tokens 1543 (73 aliased) · 1 set(s) built |
+| dialog.figma.js | mui.dialog | maxWidth(5) | 5 | tokens 1543 (73 aliased) · 1 set(s) built |
+| menu.figma.js | mui.menu | standalone | 1 | tokens 1543 (73 aliased) · 0 set(s) built |
+| slider.figma.js | mui.slider | color(6)×size(2) | 12 | tokens 1543 (73 aliased) · 1 set(s) built |
+| switch.figma.js | mui.switch | color(7)×size(2)×checked(2) | 28 | tokens 1543 (73 aliased) · 1 set(s) built |
+| table-pagination.figma.js | mui.table-pagination | standalone | 1 | tokens 1543 (73 aliased) · 0 set(s) built |
+| table.figma.js | mui.table | size(2) | 2 | tokens 1543 (73 aliased) · 1 set(s) built |
+| tabs.figma.js | mui.tabs | textColor(3)×indicatorColor(2) | 6 | tokens 1543 (73 aliased) · 1 set(s) built |
+| tooltip.figma.js | mui.tooltip | standalone | 1 | tokens 1543 (73 aliased) · 0 set(s) built |
 
 **14 scripts · 160 variants total.** Each script ran to completion
-against the mocked Figma (00-tokens.figma.js first — 1684 variables
+against the mocked Figma (00-tokens.figma.js first — 1543 variables
 including the Figma-native ALIAS pass for source-aliased minted leaves).
 
 **0 failures.**

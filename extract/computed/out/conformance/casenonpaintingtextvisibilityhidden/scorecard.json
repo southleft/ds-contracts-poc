@@ -32,10 +32,10 @@
     "contradictions": 0,
     "mintedLeaves": 4,
     "mintedLeavesUnfolded": 4,
-    "baseBindings": 6,
+    "baseBindings": 4,
     "stateBindings": 0,
-    "codeOnlyChannels": 5,
-    "overflowBindings": 2,
+    "codeOnlyChannels": 1,
+    "overflowBindings": 0,
     "folds": 0
   },
   "worstRows": [
@@ -67,13 +67,7 @@
   "topMismatchedChannels": [],
   "namedLosses": [
     "promotion: non-painting-part: label-2 <span> renders NO INK in any combo it appears in (visibility: hidden) and no descendant paints, yet it carries the text \"PAINTS-NOWHERE-SENTINEL\" — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame with visible text on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
-    "overflow: label-2.font-size — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "overflow: label-2.font-weight — computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision",
-    "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-2.box-sizing — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: label-2.font-family — declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-    "code-only: label-2.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: label-2.visibility — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
   "unresolvedTokenRefs": {
     "count": 0,

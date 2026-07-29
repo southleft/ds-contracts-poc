@@ -21,7 +21,7 @@
     "label-2": 9
   },
   "folds": {
-    "count": 9,
+    "count": 10,
     "receipts": [
       {
         "part": "accordion__heading",
@@ -67,6 +67,12 @@
       },
       {
         "part": "accordion__heading",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "accordion__heading",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -79,7 +85,7 @@
       }
     ],
     "mintedLeavesUnfolded": 37,
-    "mintedLeavesFolded": 37
+    "mintedLeavesFolded": 38
   },
   "bound": {
     "cellsChecked": 0,
@@ -88,11 +94,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 37,
-    "baseBindings": 54,
-    "stateBindings": 26,
+    "leaves": 38,
+    "baseBindings": 53,
+    "stateBindings": 25,
     "byShape": {
-      "uniform": 75,
+      "uniform": 73,
       "perAxis": 5,
       "perPair": 0,
       "refused": 0
@@ -103,9 +109,9 @@
     "state": 3
   },
   "codeOnly": {
-    "base": 33,
+    "base": 24,
     "state": 1,
-    "overflowBindings": 23
+    "overflowBindings": 22
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {

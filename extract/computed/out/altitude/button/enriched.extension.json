@@ -257,28 +257,6 @@
               "$type": "color"
             }
           },
-          "row-rule-color": {
-            "unset": {
-              "$value": "#000b29",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#191306",
-              "$type": "color"
-            },
-            "tertiary": {
-              "$value": "#101010",
-              "$type": "color"
-            },
-            "bare": {
-              "$value": "#101010",
-              "$type": "color"
-            },
-            "danger": {
-              "$value": "#1f0600",
-              "$type": "color"
-            }
-          },
           "outline-color-state-focus-visible": {
             "$value": "#4375ff",
             "$type": "color"
@@ -444,28 +422,6 @@
               "$value": "#1f0600",
               "$type": "color"
             }
-          },
-          "row-rule-color-state-hover": {
-            "tertiary": {
-              "$value": "#3a3a3a",
-              "$type": "color"
-            },
-            "bare": {
-              "$value": "#3a3a3a",
-              "$type": "color"
-            },
-            "unset": {
-              "$value": "#000b29",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#191306",
-              "$type": "color"
-            },
-            "danger": {
-              "$value": "#1f0600",
-              "$type": "color"
-            }
           }
         },
         "label": {
@@ -499,51 +455,7 @@
             "$value": "24px",
             "$type": "dimension"
           },
-          "row-rule-color": {
-            "unset": {
-              "$value": "#000b29",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#191306",
-              "$type": "color"
-            },
-            "tertiary": {
-              "$value": "#101010",
-              "$type": "color"
-            },
-            "bare": {
-              "$value": "#101010",
-              "$type": "color"
-            },
-            "danger": {
-              "$value": "#1f0600",
-              "$type": "color"
-            }
-          },
           "color-state-hover": {
-            "tertiary": {
-              "$value": "#3a3a3a",
-              "$type": "color"
-            },
-            "bare": {
-              "$value": "#3a3a3a",
-              "$type": "color"
-            },
-            "unset": {
-              "$value": "#000b29",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#191306",
-              "$type": "color"
-            },
-            "danger": {
-              "$value": "#1f0600",
-              "$type": "color"
-            }
-          },
-          "row-rule-color-state-hover": {
             "tertiary": {
               "$value": "#3a3a3a",
               "$type": "color"
@@ -597,6 +509,12 @@
     {
       "part": "root",
       "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
@@ -656,6 +574,12 @@
     },
     {
       "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -675,10 +599,12 @@
     "fold-carries-state-delta: [hover] label.caret-color rides its source fact",
     "fold-carries-state-delta: [hover] label.column-rule-color rides its source fact",
     "fold-carries-state-delta: [hover] label.outline-color rides its source fact",
+    "fold-carries-state-delta: [hover] label.row-rule-color rides its source fact",
     "fold-carries-state-delta: [hover] label.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [hover] label.text-emphasis-color rides its source fact",
     "fold-carries-state-delta: [hover] root.caret-color rides its source fact",
     "fold-carries-state-delta: [hover] root.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] root.row-rule-color rides its source fact",
     "fold-carries-state-delta: [hover] root.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [hover] root.text-emphasis-color rides its source fact"
   ],
@@ -798,13 +724,6 @@
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "label",
-      "channel": "row-rule-color",
-      "state": "hover",
-      "ref": "{imported.button.label.row-rule-color-state-hover.{variant}}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
       "part": "root",
       "channel": "background-color",
       "state": "hover",
@@ -851,13 +770,6 @@
       "channel": "outline-color",
       "state": "hover",
       "ref": "{imported.button.root.outline-color-state-hover.{variant}}",
-      "refusal": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
-    },
-    {
-      "part": "root",
-      "channel": "row-rule-color",
-      "state": "hover",
-      "ref": "{imported.button.root.row-rule-color-state-hover.{variant}}",
       "refusal": "state×variant set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
     }
   ],

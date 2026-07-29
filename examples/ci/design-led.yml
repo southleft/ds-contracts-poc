@@ -3,7 +3,7 @@
 #
 # On every pull request that touches contracts/ this workflow:
 #   1. regenerates React + CSS Modules + Storybook stories from the changed
-#      contracts with the PUBLISHED @ds-contracts/cli@0.1.0,
+#      contracts with the PUBLISHED @ds-contracts/cli@0.2.0,
 #   2. GATE — `ds-contracts diff`: after regeneration, contracts ⟷ code parity
 #      must hold. Exit codes are the contract: 0 clean · 1 drift (fails the
 #      job, findings named on stderr) · 2 configuration error,
@@ -52,7 +52,7 @@ jobs:
 
       - name: Regenerate code + stories from the contracts
         run: |
-          npx --yes @ds-contracts/cli@0.1.0 generate contracts \
+          npx --yes @ds-contracts/cli@0.2.0 generate contracts \
             --out src/generated \
             --tokens tokens/primitives.tokens.json,tokens/semantic.tokens.json,tokens/modes/semantic.light.tokens.json,tokens/modes/semantic.dark.tokens.json \
             --icons icons \
@@ -60,7 +60,7 @@ jobs:
 
       - name: "GATE: contracts ⟷ regenerated code parity (exit 0 clean · 1 drift · 2 config error)"
         run: |
-          npx --yes @ds-contracts/cli@0.1.0 diff ds-contracts.config.json
+          npx --yes @ds-contracts/cli@0.2.0 diff ds-contracts.config.json
 
       - name: Build Storybook (static — no dev server)
         run: npm run build-storybook

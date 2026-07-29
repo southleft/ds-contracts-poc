@@ -176,18 +176,15 @@
               "map": {
                 "checked": {
                   "color": "{imported.checkbox.icon.color.checked}",
-                  "fill": "{imported.checkbox.icon.fill.checked}",
-                  "row-rule-color": "{imported.checkbox.icon.row-rule-color.checked}"
+                  "fill": "{imported.checkbox.icon.fill.checked}"
                 },
                 "indeterminate": {
                   "color": "{imported.checkbox.icon.color.indeterminate}",
-                  "fill": "{imported.checkbox.icon.fill.indeterminate}",
-                  "row-rule-color": "{imported.checkbox.icon.row-rule-color.indeterminate}"
+                  "fill": "{imported.checkbox.icon.fill.indeterminate}"
                 },
                 "unchecked": {
                   "color": "{imported.checkbox.icon.color.unchecked}",
-                  "fill": "{imported.checkbox.icon.fill.unchecked}",
-                  "row-rule-color": "{imported.checkbox.icon.row-rule-color.unchecked}"
+                  "fill": "{imported.checkbox.icon.fill.unchecked}"
                 }
               }
             }
@@ -225,8 +222,7 @@
       },
       "states": {
         "disabled": {
-          "color": "{imported.shared.color-00000042}",
-          "row-rule-color": "{imported.shared.color-00000042}"
+          "color": "{imported.shared.color-00000042}"
         }
       },
       "tokensByProp": [
@@ -234,16 +230,13 @@
           "prop": "checked",
           "map": {
             "checked": {
-              "color": "{imported.checkbox.root.color.checked}",
-              "row-rule-color": "{imported.checkbox.root.row-rule-color.checked}"
+              "color": "{imported.checkbox.root.color.checked}"
             },
             "indeterminate": {
-              "color": "{imported.checkbox.root.color.indeterminate}",
-              "row-rule-color": "{imported.checkbox.root.row-rule-color.indeterminate}"
+              "color": "{imported.checkbox.root.color.indeterminate}"
             },
             "unchecked": {
-              "color": "{imported.checkbox.root.color.unchecked}",
-              "row-rule-color": "{imported.checkbox.root.row-rule-color.unchecked}"
+              "color": "{imported.checkbox.root.color.unchecked}"
             }
           }
         }

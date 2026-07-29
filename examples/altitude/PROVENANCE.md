@@ -232,6 +232,7 @@ npm run extract:computed -- --harness examples/altitude/.altitude-sandbox \
   --config extract/computed/configs/altitude.json --out extract/computed/out/altitude
 npx tsx examples/altitude/scripts/promote-floor.mjs
 npx tsx packages/cli/src/cli.ts figma examples/altitude/contracts --out examples/altitude/figma \
+  --icons examples/altitude/assets/icons \
   --tokens examples/altitude/tokens/altitude.dtcg.json,examples/altitude/tokens/altitude-minted.dtcg.json
 node examples/altitude/scripts/build-figma-tokens.mjs
 node examples/altitude/scripts/figma-compile-receipt.mjs
@@ -239,7 +240,7 @@ node examples/altitude/scripts/build-genesis-batch.mjs
 npx tsx packages/cli/src/cli.ts figma bundle examples/altitude/contracts \
   --tokens examples/altitude/tokens/altitude.dtcg.json,examples/altitude/tokens/altitude-minted.dtcg.json \
   --modes examples/altitude/tokens/modes/altitude.light.dtcg.json,examples/altitude/tokens/modes/altitude.dark.dtcg.json \
-  --name Altitude --out examples/altitude/figma/altitude.bundle.json
+  --name Altitude --icons examples/altitude/assets/icons --out examples/altitude/figma/altitude.bundle.json
 ```
 
 ---

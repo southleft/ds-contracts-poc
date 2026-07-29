@@ -335,16 +335,6 @@
               "$type": "color"
             }
           },
-          "row-rule-color-state-active": {
-            "medium": {
-              "$value": "#00000066",
-              "$type": "color"
-            },
-            "small": {
-              "$value": "#00000042",
-              "$type": "color"
-            }
-          },
           "color-state-hover": {
             "medium": {
               "$value": "#00000066",
@@ -356,16 +346,6 @@
             }
           },
           "fill-state-hover": {
-            "medium": {
-              "$value": "#00000066",
-              "$type": "color"
-            },
-            "small": {
-              "$value": "#00000042",
-              "$type": "color"
-            }
-          },
-          "row-rule-color-state-hover": {
             "medium": {
               "$value": "#00000066",
               "$type": "color"
@@ -488,23 +468,13 @@
             "$type": "dimension"
           }
         },
-        "autocomplete-clearindicator": {
+        "autocomplete-popupindicator": {
           "background-color": {
             "$value": "#00000000",
             "$type": "color"
           },
-          "font-size": {
-            "$value": "24px",
-            "$type": "dimension"
-          },
-          "margin-right": {
-            "$value": "-2px",
-            "$type": "dimension"
-          }
-        },
-        "autocomplete-popupindicator": {
-          "background-color": {
-            "$value": "#00000000",
+          "color": {
+            "$value": "#0000008a",
             "$type": "color"
           },
           "font-size": {
@@ -678,10 +648,6 @@
           "$value": "14px",
           "$type": "dimension"
         },
-        "color-0000008a": {
-          "$value": "#0000008a",
-          "$type": "color"
-        },
         "size-2": {
           "$value": "2px",
           "$type": "dimension"
@@ -750,6 +716,12 @@
     },
     {
       "part": "autocomplete-inputroot",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-inputroot",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -804,6 +776,12 @@
     },
     {
       "part": "autocomplete-tag",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -858,6 +836,12 @@
     },
     {
       "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -926,6 +910,12 @@
     },
     {
       "part": "icon",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -994,6 +984,12 @@
     },
     {
       "part": "part-0-0-0-1-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-1-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1048,6 +1044,12 @@
     },
     {
       "part": "autocomplete-tag-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-tag-2",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1097,6 +1099,12 @@
     {
       "part": "label-2",
       "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
@@ -1170,6 +1178,12 @@
     },
     {
       "part": "icon-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1238,6 +1252,12 @@
     },
     {
       "part": "part-0-0-1-1-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-1-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1292,6 +1312,12 @@
     },
     {
       "part": "autocomplete-input",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-input",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1346,6 +1372,12 @@
     },
     {
       "part": "autocomplete-endadornment",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-endadornment",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1400,6 +1432,12 @@
     },
     {
       "part": "autocomplete-clearindicator",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-clearindicator",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1454,6 +1492,12 @@
     },
     {
       "part": "icon-3",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1508,6 +1552,12 @@
     },
     {
       "part": "part-0-0-3-0-0-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-0-0-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1562,6 +1612,12 @@
     },
     {
       "part": "autocomplete-popupindicator",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "autocomplete-popupindicator",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1616,6 +1672,12 @@
     },
     {
       "part": "icon-4",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1670,6 +1732,12 @@
     },
     {
       "part": "part-0-0-3-1-0-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-3-1-0-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1700,6 +1768,12 @@
     },
     {
       "part": "outlinedinput-notchedoutline",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "outlinedinput-notchedoutline",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1754,6 +1828,12 @@
     },
     {
       "part": "part-0-0-4-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-4-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1808,6 +1888,12 @@
     },
     {
       "part": "label-3",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1827,6 +1913,7 @@
     "fold-carries-state-delta: [active] icon-2.caret-color rides its source fact",
     "fold-carries-state-delta: [active] icon-2.column-rule-color rides its source fact",
     "fold-carries-state-delta: [active] icon-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [active] icon-2.row-rule-color rides its source fact",
     "fold-carries-state-delta: [active] icon-2.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [active] icon-2.text-emphasis-color rides its source fact",
     "fold-carries-state-delta: [hover] icon-2.border-bottom-color rides its source fact",
@@ -1836,6 +1923,7 @@
     "fold-carries-state-delta: [hover] icon-2.caret-color rides its source fact",
     "fold-carries-state-delta: [hover] icon-2.column-rule-color rides its source fact",
     "fold-carries-state-delta: [hover] icon-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [hover] icon-2.row-rule-color rides its source fact",
     "fold-carries-state-delta: [hover] icon-2.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [hover] icon-2.text-emphasis-color rides its source fact"
   ],
@@ -2478,118 +2566,6 @@
       "distinctValues": 1
     },
     {
-      "part": "autocomplete-clearindicator",
-      "channel": "align-items",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "center",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "appearance",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-bottom-style",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-left-style",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-right-style",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-top-style",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "cursor",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "pointer",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "display",
-      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
-      "sample": "inline-flex",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "justify-content",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "center",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "position",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "relative",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "transition-duration",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "0.15s",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "transition-property",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "background-color",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "transition-timing-function",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "cubic-bezier(0.4, 0, 0.2, 1)",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "user-select",
-      "reason": "declared channel on a computed-only (or ref/slot) part — adding parts is a curation decision, not a capture decision",
-      "sample": "none",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "vertical-align",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "middle",
-      "distinctValues": 1
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "visibility",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "hidden",
-      "distinctValues": 1
-    },
-    {
       "part": "autocomplete-popupindicator",
       "channel": "vertical-align",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -2614,196 +2590,13 @@
   "stateOverflow": [
     {
       "state": "active",
-      "part": "autocomplete-clearindicator",
-      "channel": "visibility",
-      "sample": "visible",
-      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
-    },
-    {
-      "state": "active",
       "part": "autocomplete-popupindicator",
       "channel": "transform",
       "sample": "matrix(-1, 0, 0, -1, 0, 0)",
       "reason": "value shape outside mintable kinds and outside the declared vocabulary"
-    },
-    {
-      "state": "focus-visible",
-      "part": "autocomplete-clearindicator",
-      "channel": "visibility",
-      "sample": "visible",
-      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
-    },
-    {
-      "state": "hover",
-      "part": "autocomplete-clearindicator",
-      "channel": "visibility",
-      "sample": "visible",
-      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
     }
   ],
   "overflowBindings": [
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "background-color",
-      "ref": "{imported.autocomplete.autocomplete-clearindicator.background-color}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-bottom-left-radius",
-      "ref": "{imported.shared.size-14}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-bottom-right-radius",
-      "ref": "{imported.shared.size-14}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-bottom-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-left-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-right-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-top-left-radius",
-      "ref": "{imported.shared.size-14}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-top-right-radius",
-      "ref": "{imported.shared.size-14}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "border-top-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "bottom",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "color",
-      "ref": "{imported.shared.color-0000008a}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "flex-shrink",
-      "ref": "{imported.shared.num-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "font-size",
-      "ref": "{imported.autocomplete.autocomplete-clearindicator.font-size}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "height",
-      "ref": "{imported.shared.size-28}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "left",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "margin-right",
-      "ref": "{imported.autocomplete.autocomplete-clearindicator.margin-right}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "min-height",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "min-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "outline-width",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "padding-bottom",
-      "ref": "{imported.shared.size-4}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "padding-left",
-      "ref": "{imported.shared.size-4}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "padding-right",
-      "ref": "{imported.shared.size-4}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "padding-top",
-      "ref": "{imported.shared.size-4}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "right",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "row-rule-color",
-      "ref": "{imported.shared.color-0000008a}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "top",
-      "ref": "{imported.shared.size-0}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
-    {
-      "part": "autocomplete-clearindicator",
-      "channel": "width",
-      "ref": "{imported.shared.size-28}",
-      "refusal": "computed-only part not present in the committed anatomy — adding parts is a curation decision, not a capture decision"
-    },
     {
       "part": "autocomplete-input",
       "channel": "outline-width",
@@ -2823,13 +2616,6 @@
       "channel": "fill",
       "state": "active",
       "ref": "{imported.autocomplete.icon-2.fill-state-active.{size}}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
-      "part": "icon-2",
-      "channel": "row-rule-color",
-      "state": "active",
-      "ref": "{imported.autocomplete.icon-2.row-rule-color-state-active.{size}}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
@@ -2966,13 +2752,6 @@
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
     },
     {
-      "part": "icon-2",
-      "channel": "row-rule-color",
-      "state": "hover",
-      "ref": "{imported.autocomplete.icon-2.row-rule-color-state-hover.{size}}",
-      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
-    },
-    {
       "part": "outlinedinput-notchedoutline",
       "channel": "border-bottom-color",
       "state": "hover",
@@ -3050,7 +2829,7 @@
     "text-part-typography-carried: label-3 — font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "webkit-prefixed-channels-refused: 6 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (autocomplete-clearindicator, autocomplete-inputroot, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2); -webkit-box-flex (autocomplete-input); -webkit-box-pack (autocomplete-clearindicator, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2); -webkit-tap-highlight-color (autocomplete-clearindicator, autocomplete-input, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2, icon, icon-2, icon-3, icon-4, label, label-2, part-0-0-0-1-0, part-0-0-1-1-0, part-0-0-3-0-0-0, part-0-0-3-1-0-0); -webkit-text-fill-color (autocomplete-clearindicator, autocomplete-endadornment, autocomplete-input, autocomplete-inputroot, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2, icon, icon-2, icon-3, icon-4, label, label-2, label-3, outlinedinput-notchedoutline, part-0-0-0-1-0, part-0-0-1-1-0, part-0-0-3-0-0-0, part-0-0-3-1-0-0, part-0-0-4-0); -webkit-text-stroke-color (autocomplete-clearindicator, autocomplete-endadornment, autocomplete-input, autocomplete-inputroot, autocomplete-popupindicator, autocomplete-tag, autocomplete-tag-2, icon, icon-2, icon-3, icon-4, label, label-2, label-3, outlinedinput-notchedoutline, part-0-0-0-1-0, part-0-0-1-1-0, part-0-0-3-0-0-0, part-0-0-3-1-0-0, part-0-0-4-0)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
-    "inheritance-check-rejected: autocomplete-clearindicator.font-size — values track ancestor \"autocomplete-endadornment\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "orphan-mint-refused: autocomplete-clearindicator was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 52 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
     "inheritance-check-rejected: autocomplete-inputroot.caret-color — values track ancestor \"formcontrol-fullwidth\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: autocomplete-inputroot.color — values track ancestor \"formcontrol-fullwidth\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: autocomplete-inputroot.letter-spacing — values track ancestor \"formcontrol-fullwidth\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -3127,63 +2906,7 @@
     "closed-shadow-root-suspected: Autocomplete:small__hover>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
     "closed-shadow-root-suspected: Autocomplete:small__hover>div>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
     "closed-shadow-root-suspected: Autocomplete:small__hover>div>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 13x13 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:checked.disabled__active>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:checked.disabled__default>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:checked.disabled__focus-visible>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:checked.disabled__hover>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:checked.enabled__active>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:checked.enabled__default>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:checked.enabled__focus-visible>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:checked.enabled__hover>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:indeterminate.disabled__active>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:indeterminate.disabled__default>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:indeterminate.disabled__focus-visible>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:indeterminate.disabled__hover>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:indeterminate.enabled__active>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:indeterminate.enabled__default>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:indeterminate.enabled__focus-visible>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:indeterminate.enabled__hover>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:unchecked.disabled__active>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:unchecked.disabled__default>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:unchecked.disabled__focus-visible>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:unchecked.disabled__hover>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:unchecked.enabled__active>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:unchecked.enabled__default>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:unchecked.enabled__focus-visible>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Checkbox:unchecked.enabled__hover>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__active>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 7x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__active>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__default>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 7x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__default>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__focus-visible>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 7x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__focus-visible>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__hover>div>div>button>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 7x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Pagination:__hover>div>div>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 10x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__active>tbody>tr>td>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__active>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__active>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__default>tbody>tr>td>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__default>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__default>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__focus-visible>tbody>tr>td>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__focus-visible>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__focus-visible>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__hover>tbody>tr>td>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__hover>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:medium__hover>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__active>tbody>tr>td>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__active>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__active>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__default>tbody>tr>td>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__default>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__default>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__focus-visible>tbody>tr>td>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__focus-visible>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__focus-visible>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__hover>tbody>tr>td>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__hover>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x12 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-suspected: Table:small__hover>thead>tr>th>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 18x18 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
-    "closed-shadow-root-limit: 80 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "closed-shadow-root-limit: 24 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
     "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::placeholder (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
     "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
     "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
@@ -3302,7 +3025,6 @@
       "label-3"
     ],
     "svgAssets": [
-      "autocomplete-autocomplete-clearindicator",
       "autocomplete-autocomplete-popupindicator",
       "autocomplete-icon",
       "autocomplete-icon-2"
@@ -3323,7 +3045,8 @@
       "literal-text-carried: label-3 = \"​\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
     "refusals": [
-      "non-painting-part: autocomplete-clearindicator <button> renders NO INK in any combo it appears in (visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)"
+      "non-painting-part: autocomplete-clearindicator <button> renders NO INK in any combo it appears in (visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
+      "orphan-asset-dropped: icon asset \"autocomplete-autocomplete-clearindicator\" was reconstructed from the svg subtree of part \"autocomplete-clearindicator\", which this promotion then REFUSED (see the named refusal above) — the asset belongs to no part of the promoted contract and is not carried. Before this door it was committed to the library's assets/icons/ directory and referenced by nothing (measured: examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg)."
     ]
   },
   "enrichmentNotes": [

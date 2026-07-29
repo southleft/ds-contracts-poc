@@ -163,13 +163,11 @@
                   "map": {
                     "high": {
                       "color": "{imported.inline-notification.icon.color.high}",
-                      "fill": "{imported.inline-notification.icon.fill.{kind}.high}",
-                      "row-rule-color": "{imported.inline-notification.icon.row-rule-color.high}"
+                      "fill": "{imported.inline-notification.icon.fill.{kind}.high}"
                     },
                     "low": {
                       "color": "{imported.inline-notification.icon.color.low}",
-                      "fill": "{imported.inline-notification.icon.fill.{kind}.low}",
-                      "row-rule-color": "{imported.inline-notification.icon.row-rule-color.low}"
+                      "fill": "{imported.inline-notification.icon.fill.{kind}.low}"
                     }
                   }
                 }
@@ -199,12 +197,10 @@
                       "prop": "contrast",
                       "map": {
                         "high": {
-                          "color": "{imported.inline-notification.label.color.high}",
-                          "row-rule-color": "{imported.inline-notification.label.row-rule-color.high}"
+                          "color": "{imported.inline-notification.label.color.high}"
                         },
                         "low": {
-                          "color": "{imported.inline-notification.label.color.low}",
-                          "row-rule-color": "{imported.inline-notification.label.row-rule-color.low}"
+                          "color": "{imported.inline-notification.label.color.low}"
                         }
                       }
                     }
@@ -227,12 +223,10 @@
                       "prop": "contrast",
                       "map": {
                         "high": {
-                          "color": "{imported.inline-notification.label-2.color.high}",
-                          "row-rule-color": "{imported.inline-notification.label-2.row-rule-color.high}"
+                          "color": "{imported.inline-notification.label-2.color.high}"
                         },
                         "low": {
-                          "color": "{imported.inline-notification.label-2.color.low}",
-                          "row-rule-color": "{imported.inline-notification.label-2.row-rule-color.low}"
+                          "color": "{imported.inline-notification.label-2.color.low}"
                         }
                       }
                     }
@@ -248,12 +242,10 @@
                   "prop": "contrast",
                   "map": {
                     "high": {
-                      "color": "{imported.inline-notification.inline-notification-text-wrapper.color.high}",
-                      "row-rule-color": "{imported.inline-notification.inline-notification-text-wrapper.row-rule-color.high}"
+                      "color": "{imported.inline-notification.inline-notification-text-wrapper.color.high}"
                     },
                     "low": {
-                      "color": "{imported.inline-notification.inline-notification-text-wrapper.color.low}",
-                      "row-rule-color": "{imported.inline-notification.inline-notification-text-wrapper.row-rule-color.low}"
+                      "color": "{imported.inline-notification.inline-notification-text-wrapper.color.low}"
                     }
                   }
                 }
@@ -270,12 +262,10 @@
               "prop": "contrast",
               "map": {
                 "high": {
-                  "color": "{imported.inline-notification.inline-notification-details.color.high}",
-                  "row-rule-color": "{imported.inline-notification.inline-notification-details.row-rule-color.high}"
+                  "color": "{imported.inline-notification.inline-notification-details.color.high}"
                 },
                 "low": {
-                  "color": "{imported.inline-notification.inline-notification-details.color.low}",
-                  "row-rule-color": "{imported.inline-notification.inline-notification-details.row-rule-color.low}"
+                  "color": "{imported.inline-notification.inline-notification-details.color.low}"
                 }
               }
             }
@@ -384,12 +374,10 @@
           "prop": "contrast",
           "map": {
             "high": {
-              "color": "{imported.inline-notification.root.color.high}",
-              "row-rule-color": "{imported.inline-notification.root.row-rule-color.high}"
+              "color": "{imported.inline-notification.root.color.high}"
             },
             "low": {
-              "color": "{imported.inline-notification.root.color.low}",
-              "row-rule-color": "{imported.inline-notification.root.row-rule-color.low}"
+              "color": "{imported.inline-notification.root.color.low}"
             }
           }
         }

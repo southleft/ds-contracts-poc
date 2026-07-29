@@ -44,13 +44,13 @@
       "boundConfirmed": 70,
       "boundCells": 354,
       "contradictions": 150,
-      "mintedLeaves": 111,
+      "mintedLeaves": 107,
       "mintedLeavesUnfolded": 110,
-      "baseBindings": 66,
+      "baseBindings": 62,
       "stateBindings": 0,
       "codeOnlyChannels": 43,
       "overflowBindings": 2,
-      "folds": 36
+      "folds": 40
     },
     "worstRows": [
       {
@@ -225,15 +225,8 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 203,
-      "divergent": [
-        {
-          "token": "imported.slider.label.row-rule-color",
-          "fresh": "#4e606f",
-          "shipped": "{color-text-secondary}",
-          "resolvedEqual": true
-        }
-      ]
+      "leavesAdded": 204,
+      "divergent": []
     },
     "rows": [
       {

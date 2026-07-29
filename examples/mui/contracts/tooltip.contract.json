@@ -63,7 +63,7 @@
               },
               "tokens": {
                 "bottom": "{imported.tooltip.tooltip-arrow.bottom}",
-                "color": "{imported.shared.color-616161eb}",
+                "color": "{imported.tooltip.tooltip-arrow.color}",
                 "font-size": "{imported.shared.size-11}",
                 "font-weight": "{imported.tooltip.tooltip-arrow.font-weight}",
                 "height": "{imported.tooltip.tooltip-arrow.height}",
@@ -72,7 +72,6 @@
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "right": "{imported.tooltip.tooltip-arrow.right}",
-                "row-rule-color": "{imported.shared.color-616161eb}",
                 "top": "{imported.shared.size-0}",
                 "translate-x": "{imported.tooltip.tooltip-arrow.translate-x}",
                 "translate-y": "{imported.shared.size-0}",
@@ -81,7 +80,7 @@
             }
           },
           "tokens": {
-            "background-color": "{imported.shared.color-616161eb}",
+            "background-color": "{imported.tooltip.label.background-color}",
             "border-bottom-left-radius": "{imported.shared.size-4}",
             "border-bottom-right-radius": "{imported.shared.size-4}",
             "border-top-left-radius": "{imported.shared.size-4}",
@@ -98,8 +97,7 @@
             "padding-bottom": "{imported.shared.size-4}",
             "padding-left": "{imported.tooltip.label.padding-left}",
             "padding-right": "{imported.tooltip.label.padding-right}",
-            "padding-top": "{imported.shared.size-4}",
-            "row-rule-color": "{imported.tooltip.label.row-rule-color}"
+            "padding-top": "{imported.shared.size-4}"
           },
           "hugsBelowMaxWidth": true
         }

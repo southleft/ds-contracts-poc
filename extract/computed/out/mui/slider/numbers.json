@@ -16,7 +16,7 @@
     "part-2-0": 33
   },
   "folds": {
-    "count": 44,
+    "count": 49,
     "receipts": [
       {
         "part": "root",
@@ -62,6 +62,12 @@
       },
       {
         "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -116,6 +122,12 @@
       },
       {
         "part": "slider-rail",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "slider-rail",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -170,6 +182,12 @@
       },
       {
         "part": "slider-track",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "slider-track",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -224,6 +242,12 @@
       },
       {
         "part": "slider-thumb",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "slider-thumb",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -272,6 +296,12 @@
       },
       {
         "part": "part-2-0",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-2-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -284,7 +314,7 @@
       }
     ],
     "mintedLeavesUnfolded": 365,
-    "mintedLeavesFolded": 150
+    "mintedLeavesFolded": 127
   },
   "bound": {
     "cellsChecked": 0,
@@ -293,12 +323,12 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 150,
-    "baseBindings": 88,
+    "leaves": 127,
+    "baseBindings": 83,
     "stateBindings": 5,
     "byShape": {
-      "uniform": 52,
-      "perAxis": 41,
+      "uniform": 51,
+      "perAxis": 37,
       "perPair": 0,
       "refused": 0
     }

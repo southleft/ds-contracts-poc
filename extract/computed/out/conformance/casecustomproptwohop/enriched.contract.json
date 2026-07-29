@@ -23,8 +23,7 @@
       "tokens": {
         "color": "{imported.case-custom-prop-two-hop.root.color}",
         "font-size": "{imported.case-custom-prop-two-hop.root.font-size}",
-        "font-weight": "{imported.case-custom-prop-two-hop.root.font-weight}",
-        "row-rule-color": "{imported.case-custom-prop-two-hop.root.row-rule-color}"
+        "font-weight": "{imported.case-custom-prop-two-hop.root.font-weight}"
       }
     }
   },

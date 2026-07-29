@@ -135,32 +135,25 @@
               "prop": "color",
               "map": {
                 "default": {
-                  "color": "{imported.chip.label.color.{variant}.default}",
-                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.default}"
+                  "color": "{imported.chip.label.color.{variant}.default}"
                 },
                 "error": {
-                  "color": "{imported.chip.label.color.{variant}.error}",
-                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.error}"
+                  "color": "{imported.chip.label.color.{variant}.error}"
                 },
                 "info": {
-                  "color": "{imported.chip.label.color.{variant}.info}",
-                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.info}"
+                  "color": "{imported.chip.label.color.{variant}.info}"
                 },
                 "primary": {
-                  "color": "{imported.chip.label.color.{variant}.primary}",
-                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.primary}"
+                  "color": "{imported.chip.label.color.{variant}.primary}"
                 },
                 "secondary": {
-                  "color": "{imported.chip.label.color.{variant}.secondary}",
-                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.secondary}"
+                  "color": "{imported.chip.label.color.{variant}.secondary}"
                 },
                 "success": {
-                  "color": "{imported.chip.label.color.{variant}.success}",
-                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.success}"
+                  "color": "{imported.chip.label.color.{variant}.success}"
                 },
                 "warning": {
-                  "color": "{imported.chip.label.color.{variant}.warning}",
-                  "row-rule-color": "{imported.chip.label.row-rule-color.{variant}.warning}"
+                  "color": "{imported.chip.label.color.{variant}.warning}"
                 }
               }
             },
@@ -203,8 +196,7 @@
         "color": "{imported.chip.root.color.{variant}.{color}}",
         "font-size": "{imported.chip.root.font-size}",
         "line-height": "{imported.chip.root.line-height}",
-        "outline-width": "{imported.chip.root.outline-width}",
-        "row-rule-color": "{imported.chip.root.row-rule-color.{variant}.{color}}"
+        "outline-width": "{imported.chip.root.outline-width}"
       },
       "tokensByProp": [
         {

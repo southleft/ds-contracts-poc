@@ -122,7 +122,7 @@
     },
     "shippedMinted": {
       "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-      "leavesAdded": 330,
+      "leavesAdded": 296,
       "divergent": [
         {
           "token": "imported.heading.root.font-weight.bold",

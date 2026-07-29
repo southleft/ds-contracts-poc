@@ -204,13 +204,13 @@
       "boundConfirmed": 0,
       "boundCells": 10,
       "contradictions": 10,
-      "mintedLeaves": 32,
+      "mintedLeaves": 33,
       "mintedLeavesUnfolded": 32,
-      "baseBindings": 76,
+      "baseBindings": 74,
       "stateBindings": 0,
-      "codeOnlyChannels": 58,
+      "codeOnlyChannels": 56,
       "overflowBindings": 0,
-      "folds": 18
+      "folds": 20
     },
     "worstRows": [
       {
@@ -364,10 +364,8 @@
       "code-only[active]: switch.background-color — value shape outside mintable kinds and outside the declared vocabulary",
       "code-only[disabled]: label-2.color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: label-2.cursor — declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue",
-      "code-only[disabled]: label-2.row-rule-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: label.color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: label.cursor — declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue",
-      "code-only[disabled]: label.row-rule-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: part-0-0-0.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
       "code-only[disabled]: part-0-0-0.cursor — declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue",
       "code-only[disabled]: part-0-1-0.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
@@ -399,7 +397,7 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 213,
+      "leavesAdded": 214,
       "divergent": []
     },
     "rows": [

@@ -252,28 +252,6 @@
             "$type": "color"
           }
         },
-        "row-rule-color": {
-          "unset": {
-            "$value": "#000b29",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#191306",
-            "$type": "color"
-          },
-          "tertiary": {
-            "$value": "#101010",
-            "$type": "color"
-          },
-          "bare": {
-            "$value": "#101010",
-            "$type": "color"
-          },
-          "danger": {
-            "$value": "#1f0600",
-            "$type": "color"
-          }
-        },
         "outline-color-state-focus-visible": {
           "$value": "#4375ff",
           "$type": "color"
@@ -439,28 +417,6 @@
             "$value": "#1f0600",
             "$type": "color"
           }
-        },
-        "row-rule-color-state-hover": {
-          "tertiary": {
-            "$value": "#3a3a3a",
-            "$type": "color"
-          },
-          "bare": {
-            "$value": "#3a3a3a",
-            "$type": "color"
-          },
-          "unset": {
-            "$value": "#000b29",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#191306",
-            "$type": "color"
-          },
-          "danger": {
-            "$value": "#1f0600",
-            "$type": "color"
-          }
         }
       },
       "label": {
@@ -494,51 +450,7 @@
           "$value": "24px",
           "$type": "dimension"
         },
-        "row-rule-color": {
-          "unset": {
-            "$value": "#000b29",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#191306",
-            "$type": "color"
-          },
-          "tertiary": {
-            "$value": "#101010",
-            "$type": "color"
-          },
-          "bare": {
-            "$value": "#101010",
-            "$type": "color"
-          },
-          "danger": {
-            "$value": "#1f0600",
-            "$type": "color"
-          }
-        },
         "color-state-hover": {
-          "tertiary": {
-            "$value": "#3a3a3a",
-            "$type": "color"
-          },
-          "bare": {
-            "$value": "#3a3a3a",
-            "$type": "color"
-          },
-          "unset": {
-            "$value": "#000b29",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#191306",
-            "$type": "color"
-          },
-          "danger": {
-            "$value": "#1f0600",
-            "$type": "color"
-          }
-        },
-        "row-rule-color-state-hover": {
           "tertiary": {
             "$value": "#3a3a3a",
             "$type": "color"
@@ -729,28 +641,6 @@
         "row-gap": {
           "$value": "4px",
           "$type": "dimension"
-        },
-        "row-rule-color": {
-          "unset": {
-            "$value": "#101010",
-            "$type": "color"
-          },
-          "info": {
-            "$value": "#000b29",
-            "$type": "color"
-          },
-          "success": {
-            "$value": "#00190c",
-            "$type": "color"
-          },
-          "warning": {
-            "$value": "#191100",
-            "$type": "color"
-          },
-          "danger": {
-            "$value": "#1f0600",
-            "$type": "color"
-          }
         },
         "text-indent": {
           "default": {
@@ -1136,32 +1026,6 @@
           "$value": "8px",
           "$type": "dimension"
         },
-        "row-rule-color": {
-          "unset": {
-            "$value": "#3a3a3a",
-            "$type": "color"
-          },
-          "secondary": {
-            "$value": "#3a3a3a",
-            "$type": "color"
-          },
-          "info": {
-            "$value": "#000b29",
-            "$type": "color"
-          },
-          "success": {
-            "$value": "#00190c",
-            "$type": "color"
-          },
-          "warning": {
-            "$value": "#191100",
-            "$type": "color"
-          },
-          "danger": {
-            "$value": "#1f0600",
-            "$type": "color"
-          }
-        },
         "outline-color-state-focus-visible": {
           "$value": "#4375ff",
           "$type": "color"
@@ -1238,10 +1102,6 @@
           "$value": "8px",
           "$type": "dimension"
         },
-        "row-rule-color": {
-          "$value": "#4375ff",
-          "$type": "color"
-        },
         "outline-offset-state-focus-visible": {
           "$value": "2px",
           "$type": "dimension"
@@ -1251,10 +1111,6 @@
           "$type": "dimension"
         },
         "color-state-hover": {
-          "$value": "#6b93ff",
-          "$type": "color"
-        },
-        "row-rule-color-state-hover": {
           "$value": "#6b93ff",
           "$type": "color"
         }
@@ -1503,10 +1359,6 @@
         "min-width": {
           "$value": "0px",
           "$type": "dimension"
-        },
-        "row-rule-color": {
-          "$value": "#808080",
-          "$type": "color"
         },
         "width": {
           "unset": {

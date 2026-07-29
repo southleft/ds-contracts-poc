@@ -158,13 +158,13 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 150,
+      "mintedLeaves": 127,
       "mintedLeavesUnfolded": 365,
-      "baseBindings": 88,
+      "baseBindings": 83,
       "stateBindings": 5,
       "codeOnlyChannels": 10,
       "overflowBindings": 5,
-      "folds": 44
+      "folds": 49
     },
     "worstRows": [
       {
@@ -311,7 +311,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1384,
+      "leavesAdded": 1266,
       "divergent": [
         {
           "token": "imported.slider.root.color.error",

@@ -30,13 +30,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 31,
+    "mintedLeaves": 30,
     "mintedLeavesUnfolded": 30,
-    "baseBindings": 25,
+    "baseBindings": 24,
     "stateBindings": 4,
     "codeOnlyChannels": 4,
     "overflowBindings": 2,
-    "folds": 9
+    "folds": 10
   },
   "worstRows": [
     {
@@ -121,7 +121,7 @@
   },
   "shippedMinted": {
     "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
-    "leavesAdded": 245,
+    "leavesAdded": 246,
     "divergent": [
       {
         "token": "imported.toggle-switch.label.font-weight",

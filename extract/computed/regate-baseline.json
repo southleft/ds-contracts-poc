@@ -23,10 +23,10 @@
     {
       "library": "altitude",
       "component": "Button",
-      "rerunPctEqual": 74.765625,
+      "rerunPctEqual": 81.484375,
       "cellsCompared": 1280,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 74.765625,
+      "committedPctEqual": 81.484375,
       "gapCause": ""
     },
     {
@@ -68,10 +68,10 @@
     {
       "library": "altitude",
       "component": "Link",
-      "rerunPctEqual": 63.888888888888886,
+      "rerunPctEqual": 82.4074074074074,
       "cellsCompared": 432,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 63.888888888888886,
+      "committedPctEqual": 82.4074074074074,
       "gapCause": ""
     },
     {
@@ -131,12 +131,11 @@
     {
       "library": "carbon",
       "component": "Button",
-      "rerunPctEqual": 77.49417701863354,
+      "rerunPctEqual": 78.9741847826087,
       "cellsCompared": 20608,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 77.2758152173913,
-      "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. INSTRUMENT NOISE + A REAL GATE DEFECT THIS ROUND FOUND. Two separate things, both measured. (1) The harness/offline gap (0.28) is NOT a vocabulary or engine difference: cellsCompared is identical (20608) and exactly 58 of 448 rows differ, ALL of them ENABLED rows on the two DRIVEN state planes (42 active/root.outline-color, 16 focus-visible/root.background-color). The harness gate's values are near-misses of the target — rgba(0,70,206) vs rgba(0,67,206), rgba(58,58,58) vs rgba(57,57,57), rgba(13,96,251) vs rgba(15,98,254), and 13 rows reading a blue-tinted white rgba(229,239,250) where the target is pure rgba(255,255,255). Those are INTERMEDIATE frames of a running transition. (2) THE CAUSE IS AN ENGINE GAP, NAMED NOT FIXED: extract/computed/gate.ts drives an interaction and then waits a FLAT 30ms (`await page.waitForTimeout(30)`), while the CAPTURE sweep polls to two consecutive stable samples for up to 1.5s. Carbon's buttons transition at 70ms, which straddles that window; every library with transitions longer than 30ms has been measured mid-flight, Carbon just makes it legible. Fixing gate.ts moves the number for EVERY library and every committed scorecard, so it is its own round. MEASURED SPREAD of the offline instrument on this row, now across EIGHT runs in two sessions: 77.528 / 77.552 / 77.567 / 77.577 (2026-07-26) and 77.494 / 77.499 / 77.528 / 77.441 (2026-07-27, ALTITUDE round, identical committed inputs and an engine path regate.ts does not touch) — a 0.136 range. The original 0.08 was sized to the first four runs alone and FAILED on the fifth; it is widened to 0.20, sized to the measured 0.136 with headroom, rather than re-pinned silently. Every engine-sized move this baseline has ever recorded (+1.042, +2.459, +20.155, -3.296) is far above 0.08, so a real regression still fails this row. — repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md.",
-      "tolerance": 0.2
+      "committedPctEqual": 78.9741847826087,
+      "gapCause": "repaired: THE GATE SETTLES NOW (task #34). This row carried the baseline's ONLY widened tolerance (0.20) and a 0.28 harness/offline gap, and its previous gapCause named the cause and declined to fix it: extract/computed/gate.ts drove an interaction and then slept a FLAT 30ms while the CAPTURE sweep polled to two consecutive stable samples for up to 1.5s, so Carbon’s 70-110ms transitions were sampled MID-FLIGHT. Both sampling points now share ONE implementation (capture.ts settleStage). MEASURED at the fixed engine: three consecutive offline runs return 78.974% / 78.974% / 78.974% (16275 of 20608, byte-identical), the harness gate reports the same 78.9741847826087, so the gap is 0.000000 and the spread is 0. The tolerance is RETIRED to the global 0.001 rather than left widened over a defect that no longer exists. The row moved +1.480 offline (+1.698 against the committed harness number) on an IDENTICAL cellsCompared of 20608 — a fidelity gain, not a shrunken denominator; the same fix moved altitude/Link +18.519, altitude/Button +6.719, carbon/Tabs +0.484, mui/Button +0.154 and polaris/Checkbox +0.492, every one of them on an unchanged denominator."
     },
     {
       "library": "carbon",
@@ -177,10 +176,10 @@
     {
       "library": "carbon",
       "component": "Tabs",
-      "rerunPctEqual": 92.74193548387096,
+      "rerunPctEqual": 93.2258064516129,
       "cellsCompared": 1240,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 92.74193548387096,
+      "committedPctEqual": 93.2258064516129,
       "gapCause": "LIVE-DEFECT ROUND (Carbon, task #30) — RE-CAPTURED after six defects the owner found on a real canvas paste were fixed at their sources. Unmoved by the round: offline pctEqual and cellsCompared are identical to the class-stem-prefix baseline. repaired: CLASS-STEM PREFIX round (task #25) — Carbon was RE-CAPTURED after `stems()` stopped reading its own `cds--` prefix as a BEM modifier (every Carbon class was previously discarded, so parts aligned and named POSITIONALLY). Part names moved from `part-<path>` to class-stem identity; the FLOOR DID NOT: cellsCompared, part counts and pctEqual are unchanged on all ten (Carbon's DOM shape is stable across every combo, so positional and class-identity alignment built the same tree). Kept so the re-capture is not invisible in the history. See examples/carbon/PROVENANCE.md."
     },
     {
@@ -231,10 +230,10 @@
     {
       "library": "mui",
       "component": "Button",
-      "rerunPctEqual": 86.19929453262786,
+      "rerunPctEqual": 86.35361552028219,
       "cellsCompared": 27216,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 86.19929453262786,
+      "committedPctEqual": 86.35361552028219,
       "gapCause": ""
     },
     {
@@ -375,7 +374,7 @@
     {
       "library": "polaris",
       "component": "Checkbox",
-      "rerunPctEqual": 80.81967213114754,
+      "rerunPctEqual": 81.31147540983606,
       "cellsCompared": 2440,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 84.11602209944752,

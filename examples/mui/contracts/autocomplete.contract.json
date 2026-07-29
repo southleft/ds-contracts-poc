@@ -84,8 +84,7 @@
                         "font-size": "{imported.shared.size-13}",
                         "font-weight": "{imported.shared.num-400}",
                         "letter-spacing": "{imported.shared.size-0-15008}",
-                        "line-height": "{imported.shared.size-19-5}",
-                        "row-rule-color": "{imported.shared.color-000000de}"
+                        "line-height": "{imported.shared.size-19-5}"
                       },
                       "tokensByProp": [
                         {
@@ -126,8 +125,7 @@
                         "color": "{imported.shared.color-00000042}",
                         "fill": "{imported.shared.color-00000042}",
                         "flex-shrink": "{imported.shared.num-0}",
-                        "letter-spacing": "{imported.shared.size-0-15008}",
-                        "row-rule-color": "{imported.shared.color-00000042}"
+                        "letter-spacing": "{imported.shared.size-0-15008}"
                       },
                       "tokensByProp": [
                         {
@@ -174,7 +172,6 @@
                     "line-height": "{imported.shared.size-19-5}",
                     "outline-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "top": "{imported.shared.size-0}"
                   },
                   "tokensByProp": [
@@ -227,8 +224,7 @@
                         "font-size": "{imported.shared.size-13}",
                         "font-weight": "{imported.shared.num-400}",
                         "letter-spacing": "{imported.shared.size-0-15008}",
-                        "line-height": "{imported.shared.size-19-5}",
-                        "row-rule-color": "{imported.shared.color-000000de}"
+                        "line-height": "{imported.shared.size-19-5}"
                       },
                       "tokensByProp": [
                         {
@@ -269,8 +265,7 @@
                         "color": "{imported.shared.color-00000042}",
                         "fill": "{imported.shared.color-00000042}",
                         "flex-shrink": "{imported.shared.num-0}",
-                        "letter-spacing": "{imported.shared.size-0-15008}",
-                        "row-rule-color": "{imported.shared.color-00000042}"
+                        "letter-spacing": "{imported.shared.size-0-15008}"
                       },
                       "tokensByProp": [
                         {
@@ -317,7 +312,6 @@
                     "line-height": "{imported.shared.size-19-5}",
                     "outline-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "top": "{imported.shared.size-0}"
                   },
                   "tokensByProp": [
@@ -362,8 +356,7 @@
                     "letter-spacing": "{imported.shared.size-0-15008}",
                     "line-height": "{imported.shared.size-23}",
                     "min-width": "{imported.autocomplete.autocomplete-input.min-width}",
-                    "padding-right": "{imported.shared.size-4}",
-                    "row-rule-color": "{imported.shared.color-000000de}"
+                    "padding-right": "{imported.shared.size-4}"
                   },
                   "tokensByProp": [
                     {
@@ -433,7 +426,7 @@
                         "border-top-right-radius": "{imported.shared.size-14}",
                         "border-top-width": "{imported.shared.size-0}",
                         "bottom": "{imported.shared.size-0}",
-                        "color": "{imported.shared.color-0000008a}",
+                        "color": "{imported.autocomplete.autocomplete-popupindicator.color}",
                         "flex-shrink": "{imported.shared.num-0}",
                         "font-size": "{imported.autocomplete.autocomplete-popupindicator.font-size}",
                         "height": "{imported.shared.size-28}",
@@ -447,7 +440,6 @@
                         "padding-right": "{imported.shared.size-2}",
                         "padding-top": "{imported.shared.size-2}",
                         "right": "{imported.shared.size-0}",
-                        "row-rule-color": "{imported.shared.color-0000008a}",
                         "top": "{imported.shared.size-0}",
                         "width": "{imported.shared.size-28}"
                       }
@@ -462,7 +454,6 @@
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.autocomplete.autocomplete-endadornment.right}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "translate-x": "{imported.shared.size-0}",
                     "translate-y": "{imported.autocomplete.autocomplete-endadornment.translate-y}",
                     "width": "{imported.autocomplete.autocomplete-endadornment.width}"
@@ -534,8 +525,7 @@
                             "letter-spacing": "{imported.shared.size-0-15008}",
                             "line-height": "{imported.shared.size-11}",
                             "min-height": "{imported.shared.size-0}",
-                            "min-width": "{imported.shared.size-0}",
-                            "row-rule-color": "{imported.shared.color-000000de}"
+                            "min-width": "{imported.shared.size-0}"
                           }
                         }
                       },
@@ -546,7 +536,6 @@
                         "line-height": "{imported.shared.size-11}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
-                        "row-rule-color": "{imported.shared.color-000000de}",
                         "width": "{imported.shared.size-0}"
                       }
                     }
@@ -573,7 +562,6 @@
                     "padding-left": "{imported.autocomplete.outlinedinput-notchedoutline.padding-left}",
                     "padding-right": "{imported.autocomplete.outlinedinput-notchedoutline.padding-right}",
                     "right": "{imported.shared.size-0}",
-                    "row-rule-color": "{imported.shared.color-000000de}",
                     "top": "{imported.autocomplete.outlinedinput-notchedoutline.top}",
                     "width": "{imported.shared.size-288}"
                   },
@@ -610,7 +598,6 @@
                 "line-height": "{imported.shared.size-23}",
                 "padding-right": "{imported.autocomplete.autocomplete-inputroot.padding-right}",
                 "right": "{imported.shared.size-0}",
-                "row-rule-color": "{imported.shared.color-000000de}",
                 "top": "{imported.shared.size-0}",
                 "width": "{imported.shared.size-288}"
               },

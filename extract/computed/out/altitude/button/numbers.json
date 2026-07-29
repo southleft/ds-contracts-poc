@@ -13,7 +13,7 @@
     "label": 17
   },
   "folds": {
-    "count": 13,
+    "count": 15,
     "receipts": [
       {
         "part": "root",
@@ -24,6 +24,12 @@
       {
         "part": "root",
         "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
+        "channel": "row-rule-color",
         "foldedInto": "color",
         "class": "currentColor"
       },
@@ -83,6 +89,12 @@
       },
       {
         "part": "label",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -95,7 +107,7 @@
       }
     ],
     "mintedLeavesUnfolded": 261,
-    "mintedLeavesFolded": 131
+    "mintedLeavesFolded": 111
   },
   "bound": {
     "cellsChecked": 0,
@@ -104,12 +116,12 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 131,
-    "baseBindings": 36,
-    "stateBindings": 13,
+    "leaves": 111,
+    "baseBindings": 34,
+    "stateBindings": 11,
     "byShape": {
       "uniform": 25,
-      "perAxis": 24,
+      "perAxis": 20,
       "perPair": 0,
       "refused": 0
     }
@@ -121,7 +133,7 @@
   "codeOnly": {
     "base": 4,
     "state": 0,
-    "overflowBindings": 11
+    "overflowBindings": 9
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
@@ -222,11 +234,11 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 74.765625,
+    "computedPctEqual": 81.484375,
     "rowsFullyEqual": 0,
     "rows": 20,
-    "pixelPerfectExact": 4,
-    "pixelPerfectAA": 5,
+    "pixelPerfectExact": 9,
+    "pixelPerfectAA": 9,
     "pairs": 20
   },
   "focusVisibleDriverMatched": 5,

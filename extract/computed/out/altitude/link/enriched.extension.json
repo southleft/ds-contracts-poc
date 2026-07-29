@@ -67,10 +67,6 @@
             "$value": "8px",
             "$type": "dimension"
           },
-          "row-rule-color": {
-            "$value": "#4375ff",
-            "$type": "color"
-          },
           "outline-offset-state-focus-visible": {
             "$value": "2px",
             "$type": "dimension"
@@ -80,10 +76,6 @@
             "$type": "dimension"
           },
           "color-state-hover": {
-            "$value": "#6b93ff",
-            "$type": "color"
-          },
-          "row-rule-color-state-hover": {
             "$value": "#6b93ff",
             "$type": "color"
           }
@@ -136,6 +128,12 @@
     },
     {
       "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -155,6 +153,7 @@
     "fold-carries-state-delta: [hover] root.caret-color rides its source fact",
     "fold-carries-state-delta: [hover] root.column-rule-color rides its source fact",
     "fold-carries-state-delta: [hover] root.outline-color rides its source fact",
+    "fold-carries-state-delta: [hover] root.row-rule-color rides its source fact",
     "fold-carries-state-delta: [hover] root.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [hover] root.text-emphasis-color rides its source fact"
   ],

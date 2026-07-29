@@ -50,13 +50,13 @@
       "boundConfirmed": 196,
       "boundCells": 224,
       "contradictions": 28,
-      "mintedLeaves": 14,
+      "mintedLeaves": 0,
       "mintedLeavesUnfolded": 140,
-      "baseBindings": 1,
+      "baseBindings": 0,
       "stateBindings": 0,
       "codeOnlyChannels": 0,
       "overflowBindings": 0,
-      "folds": 9
+      "folds": 10
     },
     "worstRows": [
       {
@@ -124,93 +124,8 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 223,
-      "divergent": [
-        {
-          "token": "imported.badge.root.row-rule-color.blue",
-          "fresh": "#042f97",
-          "shipped": "{color-text-blue}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.cyan",
-          "fresh": "#014975",
-          "shipped": "{color-text-cyan}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.error",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-accent}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.green",
-          "fresh": "#09441f",
-          "shipped": "{color-text-green}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.info",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-accent}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.neutral",
-          "fresh": "#0a1317",
-          "shipped": "{color-text-gray}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.orange",
-          "fresh": "#6b2203",
-          "shipped": "{color-text-orange}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.pink",
-          "fresh": "#650053",
-          "shipped": "{color-text-pink}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.purple",
-          "fresh": "#3e0697",
-          "shipped": "{color-text-purple}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.red",
-          "fresh": "#7b0210",
-          "shipped": "{color-text-red}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.success",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-accent}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.teal",
-          "fresh": "#083943",
-          "shipped": "{color-text-teal}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.warning",
-          "fresh": "#0a1317",
-          "shipped": "{color-on-warning}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.row-rule-color.yellow",
-          "fresh": "#753f07",
-          "shipped": "{color-text-yellow}",
-          "resolvedEqual": true
-        }
-      ]
+      "leavesAdded": 237,
+      "divergent": []
     },
     "rows": [
       {

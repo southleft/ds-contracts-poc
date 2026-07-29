@@ -84,13 +84,13 @@
       "boundConfirmed": 225,
       "boundCells": 405,
       "contradictions": 180,
-      "mintedLeaves": 41,
+      "mintedLeaves": 25,
       "mintedLeavesUnfolded": 181,
-      "baseBindings": 21,
+      "baseBindings": 17,
       "stateBindings": 6,
       "codeOnlyChannels": 4,
       "overflowBindings": 0,
-      "folds": 35
+      "folds": 39
     },
     "worstRows": [
       {
@@ -180,80 +180,8 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 202,
+      "leavesAdded": 218,
       "divergent": [
-        {
-          "token": "imported.button.label.row-rule-color.destructive",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-error}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.label.row-rule-color.ghost",
-          "fresh": "#0a1317",
-          "shipped": "{color-text-primary}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.label.row-rule-color.primary",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-accent}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.label.row-rule-color.secondary",
-          "fresh": "#0a1317",
-          "shipped": "{color-text-primary}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.part-0.row-rule-color.destructive",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-error}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.part-0.row-rule-color.ghost",
-          "fresh": "#0a1317",
-          "shipped": "{color-text-primary}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.part-0.row-rule-color.primary",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-accent}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.part-0.row-rule-color.secondary",
-          "fresh": "#0a1317",
-          "shipped": "{color-text-primary}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.part-1.row-rule-color.destructive",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-error}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.part-1.row-rule-color.ghost",
-          "fresh": "#0a1317",
-          "shipped": "{color-text-primary}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.part-1.row-rule-color.primary",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-accent}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.part-1.row-rule-color.secondary",
-          "fresh": "#0a1317",
-          "shipped": "{color-text-primary}",
-          "resolvedEqual": true
-        },
         {
           "token": "imported.button.root.outline-color.destructive",
           "fresh": "#ffffff",
@@ -274,30 +202,6 @@
         },
         {
           "token": "imported.button.root.outline-color.secondary",
-          "fresh": "#0a1317",
-          "shipped": "{color-text-primary}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.root.row-rule-color.destructive",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-error}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.root.row-rule-color.ghost",
-          "fresh": "#0a1317",
-          "shipped": "{color-text-primary}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.root.row-rule-color.primary",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-accent}",
-          "resolvedEqual": true
-        },
-        {
-          "token": "imported.button.root.row-rule-color.secondary",
           "fresh": "#0a1317",
           "shipped": "{color-text-primary}",
           "resolvedEqual": true

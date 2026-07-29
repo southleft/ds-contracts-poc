@@ -73,7 +73,7 @@
             "display": "block"
           },
           "tokens": {
-            "color": "{imported.shared.color-000000de}",
+            "color": "{imported.card.label.color}",
             "font-size": "{imported.shared.size-16}",
             "font-weight": "{imported.card.label.font-weight}",
             "min-height": "{imported.shared.size-0}",
@@ -81,8 +81,7 @@
             "padding-bottom": "{imported.card.label.padding-bottom}",
             "padding-left": "{imported.shared.size-16}",
             "padding-right": "{imported.shared.size-16}",
-            "padding-top": "{imported.shared.size-16}",
-            "row-rule-color": "{imported.shared.color-000000de}"
+            "padding-top": "{imported.shared.size-16}"
           }
         }
       },
@@ -92,10 +91,9 @@
         "border-bottom-right-radius": "{imported.shared.size-4}",
         "border-top-left-radius": "{imported.shared.size-4}",
         "border-top-right-radius": "{imported.shared.size-4}",
-        "color": "{imported.shared.color-000000de}",
+        "color": "{imported.card.root.color}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
-        "row-rule-color": "{imported.shared.color-000000de}",
         "width": "{imported.card.root.width}"
       },
       "tokensByProp": [

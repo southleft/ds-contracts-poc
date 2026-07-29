@@ -173,11 +173,11 @@
       "contradictions": 0,
       "mintedLeaves": 18,
       "mintedLeavesUnfolded": 18,
-      "baseBindings": 81,
+      "baseBindings": 76,
       "stateBindings": 0,
       "codeOnlyChannels": 14,
       "overflowBindings": 0,
-      "folds": 45
+      "folds": 50
     },
     "worstRows": [
       {
@@ -273,7 +273,7 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1516,
+      "leavesAdded": 1375,
       "divergent": []
     },
     "rows": [

@@ -29,7 +29,7 @@ import { flattenTokens, makeResolveLiteral, tokenInventoryFromJson, type TokenEn
 import { kebab } from '../types.js';
 import type { Contract } from '../../scripts/contract-schema.js';
 import type { CaptureConfig, ComponentConfig, PropSpace, Interaction } from './capture.js';
-import { INTERACTIONS, stageFor } from './capture.js';
+import { INTERACTIONS, settleStage, stageFor } from './capture.js';
 import { isFusable, kindOf, mergeShippedMinted, SYNTHETIC_CHANNELS, type Capture, type Combo, type FlatEl, type MintedMerge } from './lib.js';
 import type { AlignedSweep } from './fuse.js';
 
@@ -402,7 +402,18 @@ ${stages.join('\n')}
         // still scores, with the un-driven state, under a NAMED note.
         interactionNote = `interaction-driver-failed (${interaction}): ${String(e instanceof Error ? e.message : e).split('\n')[0].trim()}`;
       }
-      await page.waitForTimeout(30);
+      // TASK #34 — THE GATE NOW SETTLES, LIKE THE CAPTURE ALWAYS HAS.
+      // This was `await page.waitForTimeout(30)`: a FIXED 30ms sleep after
+      // driving hover/focus/active, with transitions deliberately left
+      // enabled. Carbon's transitions are 70-110ms, so the gate sampled
+      // MID-FLIGHT and its computed-equality % moved run to run — the
+      // non-determinism task #34 records, and the reason carbon/Button alone
+      // carried a 0.20 drift tolerance while every other row was pinned at
+      // 0.001. The capture sweep has polled to a two-consecutive-stable-sample
+      // steady state since the MUI round; there was never a principled reason
+      // for the two sampling points to differ, and now they share ONE
+      // implementation (capture.ts `settleStage`).
+      await settleStage(page, stageSel);
 
       const key = `${combo.key}__${interaction}`;
       const truthCap = aligned.byKey.get(key);

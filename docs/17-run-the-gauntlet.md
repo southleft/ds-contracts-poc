@@ -95,8 +95,11 @@ straight in a developer's working tree. Run
 tab (named Propose before the 2026-07-26 IA re-housing, `87dd943`) under
 **Send to repo**, and the proposal arrives as a unified diff in your
 terminal plus a saved artifact in `contracts/.proposals/`. Nothing is
-written to a contract file without `--apply`, and even then git stays
-yours — every change enters the repo as a reviewed change
+written to a contract file without `--apply` — and with `--apply` it also
+generates the component code that contract produces, read from the
+`generate` section of `ds-contracts.config.json` (with no target recorded it
+says so and writes no code rather than inventing a framework). Either way git
+stays yours: every change enters the repo as a reviewed change
 ([doc 16](16-sync-boundary.md)).
 
 ## What to throw at it (the actual gauntlet)

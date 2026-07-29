@@ -341,28 +341,6 @@
               "$type": "dimension"
             }
           },
-          "row-rule-color": {
-            "default": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "alternative": {
-              "$value": "#111827",
-              "$type": "color"
-            },
-            "dark": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "green": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "red": {
-              "$value": "#ffffff",
-              "$type": "color"
-            }
-          },
           "background-color-state-active": {
             "default": {
               "$value": "#1e429f",
@@ -430,28 +408,6 @@
             }
           },
           "outline-color-state-active": {
-            "alternative": {
-              "$value": "#1a56db",
-              "$type": "color"
-            },
-            "default": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "dark": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "green": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "red": {
-              "$value": "#ffffff",
-              "$type": "color"
-            }
-          },
-          "row-rule-color-state-active": {
             "alternative": {
               "$value": "#1a56db",
               "$type": "color"
@@ -572,28 +528,6 @@
               "$value": "#ffffff",
               "$type": "color"
             }
-          },
-          "row-rule-color-state-hover": {
-            "alternative": {
-              "$value": "#1a56db",
-              "$type": "color"
-            },
-            "default": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "dark": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "green": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "red": {
-              "$value": "#ffffff",
-              "$type": "color"
-            }
           }
         }
       },
@@ -624,6 +558,12 @@
     },
     {
       "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -638,10 +578,12 @@
   "foldedStateSkips": [
     "fold-carries-state-delta: [active] root.caret-color rides its source fact",
     "fold-carries-state-delta: [active] root.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [active] root.row-rule-color rides its source fact",
     "fold-carries-state-delta: [active] root.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [active] root.text-emphasis-color rides its source fact",
     "fold-carries-state-delta: [hover] root.caret-color rides its source fact",
     "fold-carries-state-delta: [hover] root.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [hover] root.row-rule-color rides its source fact",
     "fold-carries-state-delta: [hover] root.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [hover] root.text-emphasis-color rides its source fact"
   ],

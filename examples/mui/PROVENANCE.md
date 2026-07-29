@@ -751,3 +751,38 @@ was STRUCTURALLY ZERO in every artifact ever written, because `normalizeNode` ne
 **What moved the Chip number**: its label side padding was carried as ONE flat 12px for all 28 variants and is now the measured variant x size map — filled/medium 12, filled/small 8, outlined/medium 11, outlined/small 7 (the outlined pair a pixel narrower because its 1px border eats into the box). That is +36 minted leaves under `imported.chip.label` and the whole of the library's 1648 -> 1684 variable move.
 
 TWO COMPILE-RECEIPT PINS WERE PINNING THE OLD, WRONG ARTIFACTS and were corrected here rather than loosened: the autocomplete pin asserted the phantom was PRESENT (now asserts it is absent, with the cause named), and the chip pin asserted a blanket `padding === 12` (now asserts the measured four-value set, and fails if the map ever collapses back to one value).
+
+## THE ORPHAN-LEAF ROUND (tasks #42 / #35) — MUI's numbers
+
+**Shipped minted leaves 1534 → 1393 (−141, −9.2%); Figma variables 1684 → 1543.**
+Every removed leaf was a variable **nothing bound**:
+
+- **124 `row-rule-color` refs** (task #35). A CSS Gap Decorations longhand whose CSS initial
+  value is `currentcolor`, so its computed value IS the element's own `color` — it differs
+  from the bare control element exactly when `color` does, which is why it sailed through the
+  delta-from-control door. Nobody authored it and `row-rule-style: none` means it cannot
+  paint. The pipeline already had the mechanism for this class (`CURRENTCOLOR_FOLD_CANDIDATES`
+  in `extract/computed/fuse.ts`, which folds such a channel into the `color` fact when the two
+  are equal in every capture); `row-rule-color` was simply missing from it, because
+  `row-rule-*` is a family Chromium began enumerating after that list was written and, unlike
+  every other member of its class, it is neither `-webkit-`-prefixed nor a logical alias, so
+  no earlier door caught it. A census over all 107 committed captures found it is the ONLY
+  fusable channel that slipped, and a new `currentcolor-fold-candidate-missing:` receipt now
+  names any future one.
+- **the leaves of parts the anatomy promotion had already refused** (task #42) — for MUI,
+  `autocomplete-clearindicator` (refused `non-painting-part: renders NO INK in any combo it
+  appears in (visibility: hidden)`), whose icon asset
+  `assets/icons/autocomplete-autocomplete-clearindicator.svg` was ALSO committed and
+  referenced by nothing. Both are closed at the promotion door now
+  (`orphan-mint-refused:` / `orphan-asset-dropped:`).
+
+**The gate did not lose fidelity — it gained it.** `mui/Button` moved 86.199% → 86.354% on an
+IDENTICAL `cellsCompared` of 27216 (the gain is task #34, the gate settle-poll). Every other
+MUI scorecard came back byte-identical, and `captured-truth.json` did not move for any of the
+14 components: the capture is unchanged, only what fusion does with it.
+
+**Portal components now say when they were not read.** MUI's four `portalCapture` subjects
+(Dialog, Menu, Tooltip, Autocomplete) used to display the read-boundary receipts of their
+SIBLINGS — the scope-independence defect (task #45). Scoped, they show zero, and zero on that
+path means UNREAD, not "none found": `capturePortalRoots` never calls `readBoundaryReceipts`.
+Each of them now carries that statement by name.

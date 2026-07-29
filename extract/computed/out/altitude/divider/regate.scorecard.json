@@ -56,13 +56,13 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 7,
+      "mintedLeaves": 6,
       "mintedLeavesUnfolded": 6,
-      "baseBindings": 6,
+      "baseBindings": 5,
       "stateBindings": 0,
       "codeOnlyChannels": 1,
       "overflowBindings": 0,
-      "folds": 9
+      "folds": 10
     },
     "worstRows": [
       {
@@ -132,7 +132,7 @@
     },
     "shippedMinted": {
       "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-      "leavesAdded": 342,
+      "leavesAdded": 309,
       "divergent": [
         {
           "token": "imported.divider.root.background-color",

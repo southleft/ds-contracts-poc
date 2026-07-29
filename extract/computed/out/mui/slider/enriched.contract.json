@@ -117,33 +117,27 @@
               "map": {
                 "error": {
                   "background-color": "{imported.slider.slider-rail.background-color.error}",
-                  "color": "{imported.slider.slider-rail.color.error}",
-                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.error}"
+                  "color": "{imported.slider.slider-rail.color.error}"
                 },
                 "info": {
                   "background-color": "{imported.slider.slider-rail.background-color.info}",
-                  "color": "{imported.slider.slider-rail.color.info}",
-                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.info}"
+                  "color": "{imported.slider.slider-rail.color.info}"
                 },
                 "primary": {
                   "background-color": "{imported.slider.slider-rail.background-color.primary}",
-                  "color": "{imported.slider.slider-rail.color.primary}",
-                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.primary}"
+                  "color": "{imported.slider.slider-rail.color.primary}"
                 },
                 "secondary": {
                   "background-color": "{imported.slider.slider-rail.background-color.secondary}",
-                  "color": "{imported.slider.slider-rail.color.secondary}",
-                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.secondary}"
+                  "color": "{imported.slider.slider-rail.color.secondary}"
                 },
                 "success": {
                   "background-color": "{imported.slider.slider-rail.background-color.success}",
-                  "color": "{imported.slider.slider-rail.color.success}",
-                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.success}"
+                  "color": "{imported.slider.slider-rail.color.success}"
                 },
                 "warning": {
                   "background-color": "{imported.slider.slider-rail.background-color.warning}",
-                  "color": "{imported.slider.slider-rail.color.warning}",
-                  "row-rule-color": "{imported.slider.slider-rail.row-rule-color.warning}"
+                  "color": "{imported.slider.slider-rail.color.warning}"
                 }
               }
             },
@@ -194,33 +188,27 @@
               "map": {
                 "error": {
                   "background-color": "{imported.slider.slider-track.background-color.error}",
-                  "color": "{imported.slider.slider-track.color.error}",
-                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.error}"
+                  "color": "{imported.slider.slider-track.color.error}"
                 },
                 "info": {
                   "background-color": "{imported.slider.slider-track.background-color.info}",
-                  "color": "{imported.slider.slider-track.color.info}",
-                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.info}"
+                  "color": "{imported.slider.slider-track.color.info}"
                 },
                 "primary": {
                   "background-color": "{imported.slider.slider-track.background-color.primary}",
-                  "color": "{imported.slider.slider-track.color.primary}",
-                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.primary}"
+                  "color": "{imported.slider.slider-track.color.primary}"
                 },
                 "secondary": {
                   "background-color": "{imported.slider.slider-track.background-color.secondary}",
-                  "color": "{imported.slider.slider-track.color.secondary}",
-                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.secondary}"
+                  "color": "{imported.slider.slider-track.color.secondary}"
                 },
                 "success": {
                   "background-color": "{imported.slider.slider-track.background-color.success}",
-                  "color": "{imported.slider.slider-track.color.success}",
-                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.success}"
+                  "color": "{imported.slider.slider-track.color.success}"
                 },
                 "warning": {
                   "background-color": "{imported.slider.slider-track.background-color.warning}",
-                  "color": "{imported.slider.slider-track.color.warning}",
-                  "row-rule-color": "{imported.slider.slider-track.row-rule-color.warning}"
+                  "color": "{imported.slider.slider-track.color.warning}"
                 }
               }
             },
@@ -295,7 +283,7 @@
               "tokens": {
                 "background-color": "{imported.slider.part-2-0.background-color}",
                 "bottom": "{imported.shared.size-1}",
-                "color": "{imported.shared.color-101010}",
+                "color": "{imported.slider.part-2-0.color}",
                 "font-size": "{imported.slider.part-2-0.font-size}",
                 "left": "{imported.shared.size-1}",
                 "margin-bottom": "{imported.shared.size-neg-1}",
@@ -304,9 +292,8 @@
                 "margin-top": "{imported.shared.size-neg-1}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
-                "outline-color": "{imported.shared.color-101010}",
+                "outline-color": "{imported.slider.part-2-0.outline-color}",
                 "right": "{imported.shared.size-1}",
-                "row-rule-color": "{imported.shared.color-101010}",
                 "top": "{imported.shared.size-1}"
               },
               "tokensByProp": [
@@ -338,33 +325,27 @@
               "map": {
                 "error": {
                   "background-color": "{imported.slider.slider-thumb.background-color.error}",
-                  "color": "{imported.slider.slider-thumb.color.error}",
-                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.error}"
+                  "color": "{imported.slider.slider-thumb.color.error}"
                 },
                 "info": {
                   "background-color": "{imported.slider.slider-thumb.background-color.info}",
-                  "color": "{imported.slider.slider-thumb.color.info}",
-                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.info}"
+                  "color": "{imported.slider.slider-thumb.color.info}"
                 },
                 "primary": {
                   "background-color": "{imported.slider.slider-thumb.background-color.primary}",
-                  "color": "{imported.slider.slider-thumb.color.primary}",
-                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.primary}"
+                  "color": "{imported.slider.slider-thumb.color.primary}"
                 },
                 "secondary": {
                   "background-color": "{imported.slider.slider-thumb.background-color.secondary}",
-                  "color": "{imported.slider.slider-thumb.color.secondary}",
-                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.secondary}"
+                  "color": "{imported.slider.slider-thumb.color.secondary}"
                 },
                 "success": {
                   "background-color": "{imported.slider.slider-thumb.background-color.success}",
-                  "color": "{imported.slider.slider-thumb.color.success}",
-                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.success}"
+                  "color": "{imported.slider.slider-thumb.color.success}"
                 },
                 "warning": {
                   "background-color": "{imported.slider.slider-thumb.background-color.warning}",
-                  "color": "{imported.slider.slider-thumb.color.warning}",
-                  "row-rule-color": "{imported.slider.slider-thumb.row-rule-color.warning}"
+                  "color": "{imported.slider.slider-thumb.color.warning}"
                 }
               }
             },
@@ -420,28 +401,22 @@
           "prop": "color",
           "map": {
             "error": {
-              "color": "{imported.slider.root.color.error}",
-              "row-rule-color": "{imported.slider.root.row-rule-color.error}"
+              "color": "{imported.slider.root.color.error}"
             },
             "info": {
-              "color": "{imported.slider.root.color.info}",
-              "row-rule-color": "{imported.slider.root.row-rule-color.info}"
+              "color": "{imported.slider.root.color.info}"
             },
             "primary": {
-              "color": "{imported.slider.root.color.primary}",
-              "row-rule-color": "{imported.slider.root.row-rule-color.primary}"
+              "color": "{imported.slider.root.color.primary}"
             },
             "secondary": {
-              "color": "{imported.slider.root.color.secondary}",
-              "row-rule-color": "{imported.slider.root.row-rule-color.secondary}"
+              "color": "{imported.slider.root.color.secondary}"
             },
             "success": {
-              "color": "{imported.slider.root.color.success}",
-              "row-rule-color": "{imported.slider.root.row-rule-color.success}"
+              "color": "{imported.slider.root.color.success}"
             },
             "warning": {
-              "color": "{imported.slider.root.color.warning}",
-              "row-rule-color": "{imported.slider.root.row-rule-color.warning}"
+              "color": "{imported.slider.root.color.warning}"
             }
           }
         },

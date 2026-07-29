@@ -88,20 +88,16 @@
                   "prop": "color",
                   "map": {
                     "failure": {
-                      "color": "{imported.alert.label.color.failure}",
-                      "row-rule-color": "{imported.alert.label.row-rule-color.failure}"
+                      "color": "{imported.alert.label.color.failure}"
                     },
                     "info": {
-                      "color": "{imported.alert.label.color.info}",
-                      "row-rule-color": "{imported.alert.label.row-rule-color.info}"
+                      "color": "{imported.alert.label.color.info}"
                     },
                     "success": {
-                      "color": "{imported.alert.label.color.success}",
-                      "row-rule-color": "{imported.alert.label.row-rule-color.success}"
+                      "color": "{imported.alert.label.color.success}"
                     },
                     "warning": {
-                      "color": "{imported.alert.label.color.warning}",
-                      "row-rule-color": "{imported.alert.label.row-rule-color.warning}"
+                      "color": "{imported.alert.label.color.warning}"
                     }
                   }
                 }
@@ -117,20 +113,16 @@
               "prop": "color",
               "map": {
                 "failure": {
-                  "color": "{imported.alert.part-0.color.failure}",
-                  "row-rule-color": "{imported.alert.part-0.row-rule-color.failure}"
+                  "color": "{imported.alert.part-0.color.failure}"
                 },
                 "info": {
-                  "color": "{imported.alert.part-0.color.info}",
-                  "row-rule-color": "{imported.alert.part-0.row-rule-color.info}"
+                  "color": "{imported.alert.part-0.color.info}"
                 },
                 "success": {
-                  "color": "{imported.alert.part-0.color.success}",
-                  "row-rule-color": "{imported.alert.part-0.row-rule-color.success}"
+                  "color": "{imported.alert.part-0.color.success}"
                 },
                 "warning": {
-                  "color": "{imported.alert.part-0.color.warning}",
-                  "row-rule-color": "{imported.alert.part-0.row-rule-color.warning}"
+                  "color": "{imported.alert.part-0.color.warning}"
                 }
               }
             }
@@ -161,8 +153,7 @@
               "border-left-color": "{imported.alert.root.border-left-color.failure}",
               "border-right-color": "{imported.alert.root.border-right-color.failure}",
               "border-top-color": "{imported.alert.root.border-top-color.failure}",
-              "color": "{imported.alert.root.color.failure}",
-              "row-rule-color": "{imported.alert.root.row-rule-color.failure}"
+              "color": "{imported.alert.root.color.failure}"
             },
             "info": {
               "background-color": "{imported.alert.root.background-color.info}",
@@ -170,8 +161,7 @@
               "border-left-color": "{imported.alert.root.border-left-color.info}",
               "border-right-color": "{imported.alert.root.border-right-color.info}",
               "border-top-color": "{imported.alert.root.border-top-color.info}",
-              "color": "{imported.alert.root.color.info}",
-              "row-rule-color": "{imported.alert.root.row-rule-color.info}"
+              "color": "{imported.alert.root.color.info}"
             },
             "success": {
               "background-color": "{imported.alert.root.background-color.success}",
@@ -179,8 +169,7 @@
               "border-left-color": "{imported.alert.root.border-left-color.success}",
               "border-right-color": "{imported.alert.root.border-right-color.success}",
               "border-top-color": "{imported.alert.root.border-top-color.success}",
-              "color": "{imported.alert.root.color.success}",
-              "row-rule-color": "{imported.alert.root.row-rule-color.success}"
+              "color": "{imported.alert.root.color.success}"
             },
             "warning": {
               "background-color": "{imported.alert.root.background-color.warning}",
@@ -188,8 +177,7 @@
               "border-left-color": "{imported.alert.root.border-left-color.warning}",
               "border-right-color": "{imported.alert.root.border-right-color.warning}",
               "border-top-color": "{imported.alert.root.border-top-color.warning}",
-              "color": "{imported.alert.root.color.warning}",
-              "row-rule-color": "{imported.alert.root.row-rule-color.warning}"
+              "color": "{imported.alert.root.color.warning}"
             }
           }
         }

@@ -30,13 +30,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 23,
+    "mintedLeaves": 25,
     "mintedLeavesUnfolded": 22,
-    "baseBindings": 50,
-    "stateBindings": 28,
+    "baseBindings": 49,
+    "stateBindings": 27,
     "codeOnlyChannels": 5,
-    "overflowBindings": 25,
-    "folds": 8
+    "overflowBindings": 24,
+    "folds": 9
   },
   "worstRows": [
     {
@@ -166,7 +166,6 @@
     "overflow: checkbox-label.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: checkbox-label.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: checkbox.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: checkbox.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -192,7 +191,7 @@
   },
   "shippedMinted": {
     "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-    "leavesAdded": 1063,
+    "leavesAdded": 1065,
     "divergent": []
   },
   "rows": [

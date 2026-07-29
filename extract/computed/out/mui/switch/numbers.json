@@ -16,7 +16,7 @@
     "switch-track": 14
   },
   "folds": {
-    "count": 14,
+    "count": 16,
     "receipts": [
       {
         "part": "buttonbase-root",
@@ -62,6 +62,12 @@
       },
       {
         "part": "buttonbase-root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "buttonbase-root",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -92,6 +98,12 @@
       },
       {
         "part": "switch-thumb",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "switch-thumb",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -104,7 +116,7 @@
       }
     ],
     "mintedLeavesUnfolded": 651,
-    "mintedLeavesFolded": 260
+    "mintedLeavesFolded": 204
   },
   "bound": {
     "cellsChecked": 0,
@@ -113,13 +125,13 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 260,
-    "baseBindings": 71,
-    "stateBindings": 22,
+    "leaves": 204,
+    "baseBindings": 69,
+    "stateBindings": 20,
     "byShape": {
       "uniform": 49,
       "perAxis": 30,
-      "perPair": 14,
+      "perPair": 10,
       "refused": 0
     }
   },
@@ -130,7 +142,7 @@
   "codeOnly": {
     "base": 6,
     "state": 0,
-    "overflowBindings": 22
+    "overflowBindings": 20
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {

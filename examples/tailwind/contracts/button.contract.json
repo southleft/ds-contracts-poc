@@ -123,8 +123,7 @@
           "background-color": "{imported.button.root.background-color-state-active.{color}}",
           "box-shadow": "{imported.button.root.box-shadow-state-active.{color}}",
           "color": "{imported.button.root.color-state-active.{color}}",
-          "outline-color": "{imported.button.root.outline-color-state-active.{color}}",
-          "row-rule-color": "{imported.button.root.row-rule-color-state-active.{color}}"
+          "outline-color": "{imported.button.root.outline-color-state-active.{color}}"
         },
         "disabled": {
           "opacity": "{imported.button.root.opacity-state-disabled}"
@@ -137,8 +136,7 @@
         "hover": {
           "background-color": "{imported.button.root.background-color-state-hover.{color}}",
           "color": "{imported.button.root.color-state-hover.{color}}",
-          "outline-color": "{imported.button.root.outline-color-state-hover.{color}}",
-          "row-rule-color": "{imported.button.root.row-rule-color-state-hover.{color}}"
+          "outline-color": "{imported.button.root.outline-color-state-hover.{color}}"
         }
       },
       "tokensByProp": [
@@ -156,8 +154,7 @@
               "border-top-color": "{imported.button.root.border-top-color.alternative}",
               "border-top-width": "{imported.button.root.border-top-width.alternative}",
               "color": "{imported.button.root.color.alternative}",
-              "outline-color": "{imported.button.root.outline-color.alternative}",
-              "row-rule-color": "{imported.button.root.row-rule-color.alternative}"
+              "outline-color": "{imported.button.root.outline-color.alternative}"
             },
             "dark": {
               "background-color": "{imported.button.root.background-color.dark}",
@@ -170,8 +167,7 @@
               "border-top-color": "{imported.button.root.border-top-color.dark}",
               "border-top-width": "{imported.button.root.border-top-width.dark}",
               "color": "{imported.button.root.color.dark}",
-              "outline-color": "{imported.button.root.outline-color.dark}",
-              "row-rule-color": "{imported.button.root.row-rule-color.dark}"
+              "outline-color": "{imported.button.root.outline-color.dark}"
             },
             "default": {
               "background-color": "{imported.button.root.background-color.default}",
@@ -184,8 +180,7 @@
               "border-top-color": "{imported.button.root.border-top-color.default}",
               "border-top-width": "{imported.button.root.border-top-width.default}",
               "color": "{imported.button.root.color.default}",
-              "outline-color": "{imported.button.root.outline-color.default}",
-              "row-rule-color": "{imported.button.root.row-rule-color.default}"
+              "outline-color": "{imported.button.root.outline-color.default}"
             },
             "green": {
               "background-color": "{imported.button.root.background-color.green}",
@@ -198,8 +193,7 @@
               "border-top-color": "{imported.button.root.border-top-color.green}",
               "border-top-width": "{imported.button.root.border-top-width.green}",
               "color": "{imported.button.root.color.green}",
-              "outline-color": "{imported.button.root.outline-color.green}",
-              "row-rule-color": "{imported.button.root.row-rule-color.green}"
+              "outline-color": "{imported.button.root.outline-color.green}"
             },
             "red": {
               "background-color": "{imported.button.root.background-color.red}",
@@ -212,8 +206,7 @@
               "border-top-color": "{imported.button.root.border-top-color.red}",
               "border-top-width": "{imported.button.root.border-top-width.red}",
               "color": "{imported.button.root.color.red}",
-              "outline-color": "{imported.button.root.outline-color.red}",
-              "row-rule-color": "{imported.button.root.row-rule-color.red}"
+              "outline-color": "{imported.button.root.outline-color.red}"
             }
           }
         },

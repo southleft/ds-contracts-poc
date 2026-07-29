@@ -95,8 +95,7 @@
         "font-size": "{imported.badge.root.font-size}",
         "font-weight": "{imported.badge.root.font-weight}",
         "line-height": "{imported.badge.root.line-height}",
-        "row-gap": "{imported.badge.root.row-gap}",
-        "row-rule-color": "{imported.badge.root.row-rule-color.unset}"
+        "row-gap": "{imported.badge.root.row-gap}"
       },
       "tokensByProp": [
         {
@@ -131,23 +130,19 @@
           "map": {
             "danger": {
               "background-color": "{imported.badge.root.background-color.danger}",
-              "color": "{imported.badge.root.color.danger}",
-              "row-rule-color": "{imported.badge.root.row-rule-color.danger}"
+              "color": "{imported.badge.root.color.danger}"
             },
             "info": {
               "background-color": "{imported.badge.root.background-color.info}",
-              "color": "{imported.badge.root.color.info}",
-              "row-rule-color": "{imported.badge.root.row-rule-color.info}"
+              "color": "{imported.badge.root.color.info}"
             },
             "success": {
               "background-color": "{imported.badge.root.background-color.success}",
-              "color": "{imported.badge.root.color.success}",
-              "row-rule-color": "{imported.badge.root.row-rule-color.success}"
+              "color": "{imported.badge.root.color.success}"
             },
             "warning": {
               "background-color": "{imported.badge.root.background-color.warning}",
-              "color": "{imported.badge.root.color.warning}",
-              "row-rule-color": "{imported.badge.root.row-rule-color.warning}"
+              "color": "{imported.badge.root.color.warning}"
             }
           }
         }

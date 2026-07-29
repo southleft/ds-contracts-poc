@@ -108,15 +108,14 @@
                     "overflow-y": "auto"
                   },
                   "tokens": {
-                    "color": "{imported.shared.color-000000de}",
+                    "color": "{imported.dialog.label.color}",
                     "flex-grow": "{imported.dialog.label.flex-grow}",
                     "font-size": "{imported.dialog.label.font-size}",
                     "font-weight": "{imported.dialog.label.font-weight}",
                     "padding-bottom": "{imported.dialog.label.padding-bottom}",
                     "padding-left": "{imported.dialog.label.padding-left}",
                     "padding-right": "{imported.dialog.label.padding-right}",
-                    "padding-top": "{imported.dialog.label.padding-top}",
-                    "row-rule-color": "{imported.shared.color-000000de}"
+                    "padding-top": "{imported.dialog.label.padding-top}"
                   }
                 }
               },
@@ -136,7 +135,7 @@
                 "border-top-right-radius": "{imported.shared.size-4}",
                 "bottom": "{imported.shared.size-0}",
                 "box-shadow": "{imported.dialog.dialog-paper.box-shadow}",
-                "color": "{imported.shared.color-000000de}",
+                "color": "{imported.dialog.dialog-paper.color}",
                 "left": "{imported.shared.size-0}",
                 "margin-bottom": "{imported.shared.size-32}",
                 "margin-left": "{imported.shared.size-32}",
@@ -144,7 +143,6 @@
                 "margin-top": "{imported.shared.size-32}",
                 "outline-width": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
-                "row-rule-color": "{imported.shared.color-000000de}",
                 "top": "{imported.shared.size-0}"
               },
               "tokensByProp": [

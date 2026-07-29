@@ -18,10 +18,6 @@
           "font-weight": {
             "$value": "400",
             "$type": "number"
-          },
-          "row-rule-color": {
-            "$value": "#663399",
-            "$type": "color"
           }
         }
       }
@@ -67,6 +63,12 @@
     {
       "part": "root",
       "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },

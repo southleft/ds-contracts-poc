@@ -121,7 +121,7 @@
     },
     "shippedMinted": {
       "path": "examples/tailwind/tokens/tailwind-minted.dtcg.json",
-      "leavesAdded": 268,
+      "leavesAdded": 228,
       "divergent": [
         {
           "token": "imported.card.root.background-color",

@@ -114,46 +114,10 @@
               "$value": "#8e4b10",
               "$type": "color"
             }
-          },
-          "row-rule-color": {
-            "info": {
-              "$value": "#007595",
-              "$type": "color"
-            },
-            "failure": {
-              "$value": "#c81e1e",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#046c4e",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#8e4b10",
-              "$type": "color"
-            }
           }
         },
         "part-0": {
           "color": {
-            "info": {
-              "$value": "#007595",
-              "$type": "color"
-            },
-            "failure": {
-              "$value": "#c81e1e",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#046c4e",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#8e4b10",
-              "$type": "color"
-            }
-          },
-          "row-rule-color": {
             "info": {
               "$value": "#007595",
               "$type": "color"
@@ -194,24 +158,6 @@
           "font-weight": {
             "$value": "400",
             "$type": "number"
-          },
-          "row-rule-color": {
-            "info": {
-              "$value": "#007595",
-              "$type": "color"
-            },
-            "failure": {
-              "$value": "#c81e1e",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#046c4e",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#8e4b10",
-              "$type": "color"
-            }
           }
         }
       },
@@ -256,6 +202,12 @@
     },
     {
       "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -310,6 +262,12 @@
     },
     {
       "part": "part-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -359,6 +317,12 @@
     {
       "part": "label",
       "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },

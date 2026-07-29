@@ -193,3 +193,46 @@ pending-substitution values with no computed value to verify a token name agains
 was STRUCTURALLY ZERO in every artifact ever written, because `normalizeNode` never preserved the
 `vshorthands` field it reads; that was fixed but had never produced a real number until this wave.
 **This library: 16** (alert 4, badge 4, card 4, button 3, toggle-switch 1).
+
+## SCOPE INDEPENDENCE (task #45) — the byte-identity proof
+
+`extract/computed/run.ts` used to splice the run-wide read-boundary accumulators
+(`SweepResult.textFillFolds` / `.closedShadowSuspects`) into EVERY component's
+`frontierReceipts` and LEDGER.md, so **the same component produced different bytes
+depending on which siblings shared the sweep** — measured on Carbon, where all ten
+components carried the same 380 lines, and MUI, where all fourteen carried the same 80.
+That contradicts the determinism claim the whole project rests on, and it is why
+`onboard` had to default to whole-library sweeps. Both accumulators are now keyed by
+component, the same scoping `shadowHostTrails` has always had.
+
+**The proof** — capture Button ALONE, capture Button as one of this library's five, diff
+every artifact (this library, because it is fully reproducible; run at the fixed engine):
+
+```
+npx tsx extract/computed/run.ts --harness examples/tailwind/.tw-sandbox \
+  --config extract/computed/configs/tailwind.json --component Button --out <scratch>
+
+  captured-truth.json          full=23bba2f763784736 solo=23bba2f763784736  IDENTICAL
+  enriched.contract.json       full=af8f342c9838b95c solo=af8f342c9838b95c  IDENTICAL
+  enriched.extension.json      full=4f957bd66c81b882 solo=4f957bd66c81b882  IDENTICAL
+  LEDGER.md                    full=fb72ffb009c7bff3 solo=fb72ffb009c7bff3  IDENTICAL
+  scorecard.json               full=7973cdad62cadfc4 solo=7973cdad62cadfc4  IDENTICAL
+  numbers.json                 full=89f3abda64341d52 solo=89f3abda64341d52  IDENTICAL
+  pixel-rows.json              full=f6b743ad44788562 solo=f6b743ad44788562  IDENTICAL
+  review-queue.json            full=b9de64537180d871 solo=b9de64537180d871  IDENTICAL
+  source-bindings.json         full=de329bb132c80f36 solo=de329bb132c80f36  IDENTICAL
+```
+
+(sha256, first 16 hex.) `diff -r` over the two component directories reports no differing
+file. **Carbon passes the identical proof** — see `examples/carbon/PROVENANCE.md`; its
+gate scorecard is byte-reproducible too now that task #34 is fixed.
+
+The property is pinned in the suite by the `capture-scope-independence` eval, which scans
+every committed component artifact for capture keys belonging to another configured
+component. It fails on the HEAD corpus (132 artifacts, all Carbon and MUI).
+
+**A gap the scoping made visible, named rather than papered over:** the portal reader
+(`capturePortalRoots`) normalizes inside its own reader and never calls
+`readBoundaryReceipts`, so for a `portalCapture` component ZERO read-boundary lines means
+NOT READ, not "none found". Before the scoping, such a component displayed its SIBLINGS'
+folds and looked read. Every portal component's receipts now carry that statement by name.

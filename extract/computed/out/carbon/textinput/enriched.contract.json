@@ -68,8 +68,7 @@
                 "font-weight": "{imported.text-input.label.font-weight}",
                 "letter-spacing": "{imported.text-input.label.letter-spacing}",
                 "line-height": "{imported.shared.size-16}",
-                "margin-bottom": "{imported.text-input.label.margin-bottom}",
-                "row-rule-color": "{imported.text-input.label.row-rule-color}"
+                "margin-bottom": "{imported.text-input.label.margin-bottom}"
               },
               "states": {
                 "disabled": {

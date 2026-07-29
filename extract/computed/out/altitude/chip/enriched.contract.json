@@ -122,8 +122,7 @@
         "padding-left": "{imported.chip.root.padding-left}",
         "padding-right": "{imported.chip.root.padding-right}",
         "padding-top": "{imported.chip.root.padding-top}",
-        "row-gap": "{imported.chip.root.row-gap}",
-        "row-rule-color": "{imported.chip.root.row-rule-color.unset}"
+        "row-gap": "{imported.chip.root.row-gap}"
       },
       "states": {
         "focus-visible": {
@@ -158,8 +157,7 @@
               "border-top-color": "{imported.chip.root.border-top-color.danger}",
               "border-top-width": "{imported.chip.root.border-top-width.danger}",
               "color": "{imported.chip.root.color.danger}",
-              "outline-color": "{imported.chip.root.outline-color.danger}",
-              "row-rule-color": "{imported.chip.root.row-rule-color.danger}"
+              "outline-color": "{imported.chip.root.outline-color.danger}"
             },
             "info": {
               "background-color": "{imported.chip.root.background-color.info}",
@@ -172,8 +170,7 @@
               "border-top-color": "{imported.chip.root.border-top-color.info}",
               "border-top-width": "{imported.chip.root.border-top-width.info}",
               "color": "{imported.chip.root.color.info}",
-              "outline-color": "{imported.chip.root.outline-color.info}",
-              "row-rule-color": "{imported.chip.root.row-rule-color.info}"
+              "outline-color": "{imported.chip.root.outline-color.info}"
             },
             "secondary": {
               "background-color": "{imported.chip.root.background-color.secondary}",
@@ -186,8 +183,7 @@
               "border-top-color": "{imported.chip.root.border-top-color.secondary}",
               "border-top-width": "{imported.chip.root.border-top-width.secondary}",
               "color": "{imported.chip.root.color.secondary}",
-              "outline-color": "{imported.chip.root.outline-color.secondary}",
-              "row-rule-color": "{imported.chip.root.row-rule-color.secondary}"
+              "outline-color": "{imported.chip.root.outline-color.secondary}"
             },
             "success": {
               "background-color": "{imported.chip.root.background-color.success}",
@@ -200,8 +196,7 @@
               "border-top-color": "{imported.chip.root.border-top-color.success}",
               "border-top-width": "{imported.chip.root.border-top-width.success}",
               "color": "{imported.chip.root.color.success}",
-              "outline-color": "{imported.chip.root.outline-color.success}",
-              "row-rule-color": "{imported.chip.root.row-rule-color.success}"
+              "outline-color": "{imported.chip.root.outline-color.success}"
             },
             "warning": {
               "background-color": "{imported.chip.root.background-color.warning}",
@@ -214,8 +209,7 @@
               "border-top-color": "{imported.chip.root.border-top-color.warning}",
               "border-top-width": "{imported.chip.root.border-top-width.warning}",
               "color": "{imported.chip.root.color.warning}",
-              "outline-color": "{imported.chip.root.outline-color.warning}",
-              "row-rule-color": "{imported.chip.root.row-rule-color.warning}"
+              "outline-color": "{imported.chip.root.outline-color.warning}"
             }
           }
         }

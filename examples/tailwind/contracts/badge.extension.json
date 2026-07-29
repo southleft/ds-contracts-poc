@@ -99,32 +99,6 @@
             "$value": "2px",
             "$type": "dimension"
           },
-          "row-rule-color": {
-            "info": {
-              "$value": "#005f78",
-              "$type": "color"
-            },
-            "failure": {
-              "$value": "#9b1c1c",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#03543f",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#723b13",
-              "$type": "color"
-            },
-            "indigo": {
-              "$value": "#42389d",
-              "$type": "color"
-            },
-            "pink": {
-              "$value": "#99154b",
-              "$type": "color"
-            }
-          },
           "background-color-state-active": {
             "info": {
               "$value": "#a2f4fd",
@@ -228,32 +202,6 @@
               "$value": "20px",
               "$type": "dimension"
             }
-          },
-          "row-rule-color": {
-            "info": {
-              "$value": "#005f78",
-              "$type": "color"
-            },
-            "failure": {
-              "$value": "#9b1c1c",
-              "$type": "color"
-            },
-            "success": {
-              "$value": "#03543f",
-              "$type": "color"
-            },
-            "warning": {
-              "$value": "#723b13",
-              "$type": "color"
-            },
-            "indigo": {
-              "$value": "#42389d",
-              "$type": "color"
-            },
-            "pink": {
-              "$value": "#99154b",
-              "$type": "color"
-            }
           }
         }
       },
@@ -310,6 +258,12 @@
     },
     {
       "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -359,6 +313,12 @@
     {
       "part": "label",
       "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },

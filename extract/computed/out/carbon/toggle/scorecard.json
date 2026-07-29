@@ -30,13 +30,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 37,
+    "mintedLeaves": 36,
     "mintedLeavesUnfolded": 36,
-    "baseBindings": 54,
-    "stateBindings": 28,
+    "baseBindings": 53,
+    "stateBindings": 27,
     "codeOnlyChannels": 8,
-    "overflowBindings": 23,
-    "folds": 9
+    "overflowBindings": 22,
+    "folds": 10
   },
   "worstRows": [
     {
@@ -163,7 +163,6 @@
     "overflow: label-2.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label-2.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label-2.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
-    "overflow: label.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: toggle__button.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: toggle__button.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: toggle__button.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -191,7 +190,7 @@
   },
   "shippedMinted": {
     "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-    "leavesAdded": 1049,
+    "leavesAdded": 1050,
     "divergent": [
       {
         "token": "imported.toggle.label.color",

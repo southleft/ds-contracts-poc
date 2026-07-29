@@ -108,6 +108,7 @@
   },
   "enrichmentNotes": [
     "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: root.font-family = monospace (v15 declared vocabulary — canvas-drawable)"
+    "declared fact carried: root.font-family = monospace (v15 declared vocabulary — canvas-drawable)",
+    "sizing evidence carried: root.hugsBelowMaxWidth = true (MEASURED — the used width stayed strictly below the max-width cap in every enumerated combo, so the max-width is a CEILING the box hugs beneath, not a design width)"
   ]
 }

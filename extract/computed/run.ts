@@ -725,14 +725,22 @@ async function main() {
 
     // ---- fusion (against the PROMOTED contract) ----
     console.log('  phase 2 — fusion…');
-    const folds = detectFolds(aligned, styled);
+    const folds = detectFolds(aligned, styled, styledReceipts);
     const { rows: boundRows, untriaged } = await boundCheck(aligned, comp, space, probeToken, promotion.contract);
     const boundConfirmed = boundRows.filter((r) => r.verdict === 'confirmed').length;
     const contradictions = boundRows.filter((r) => r.verdict === 'contradiction');
     console.log(`    bound: ${boundConfirmed}/${boundRows.length} confirmed · ${contradictions.length} contradictions (${untriaged.length} untriaged) · ${folds.length} folds`);
 
     const layout = enrichLayout(aligned, space, styled, promotion.contract);
-    const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts);
+    const prep = prepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumedParts, new Set(promotion.partIndex.keys()));
+    // ORPHAN-LEAF ROUND (task #42): the refusals ride the styled-channel
+    // receipt channel into the extension block AND the ledger, so the count of
+    // leaves a refused part did NOT mint is legible per component. A silent
+    // zero and a door that is not wired must not look the same.
+    styledReceipts.push(...prep.orphanRefusals);
+    if (prep.orphanRefusals.length > 0) {
+      console.log(`    orphan-mint door: ${prep.orphanRefusals.length} promotion-refused part(s) mint nothing (task #42)`);
+    }
     // Round 5c: carried-channel re-mints (defaultless-axis contest) ride the
     // styled-channel receipts into the extension block + the ledger.
     styledReceipts.push(...prep.remintReceipts);
@@ -861,9 +869,30 @@ async function main() {
         }
       }
     }
+    // SCOPE-INDEPENDENCE ROUND (task #45) — THIS COMPONENT'S read-boundary
+    // facts, not the run's. `run1.textFillFolds` / `run1.closedShadowSuspects`
+    // used to be flat, run-wide accumulators spliced WHOLE into every
+    // component's receipts, so `--component Button` alone and `Button` inside
+    // a full-library sweep wrote DIFFERENT LEDGER.md and
+    // enriched.extension.json bytes for the same component (measured: Carbon
+    // 380 lines, MUI 80). They are now keyed by component, exactly like
+    // `shadowHostTrails`, and only this component's own lines are read.
+    const myFolds = run1.textFillFolds[comp.name] ?? [];
+    const mySuspects = run1.closedShadowSuspects[comp.name] ?? [];
     const frontierReceipts: string[] = [
-      ...run1.textFillFolds,
-      ...run1.closedShadowSuspects,
+      ...myFolds,
+      ...mySuspects,
+      // The portal path (capturePortalRoots) normalizes inside its own reader
+      // and never calls readBoundaryReceipts, so for a portalCapture component
+      // ZERO lines above means NOT READ, not "none found". Scoping the
+      // accumulators made that distinction visible; stating it is the receipt
+      // the scoping owes (before, a portal component silently displayed its
+      // SIBLINGS' folds and looked read).
+      ...(comp.portalCapture
+        ? [
+            `read-boundary-not-read-on-portal-path: ${comp.name} sweeps through capturePortalRoots (two-phase baseline diff), which normalizes each root inside its own reader and never runs readBoundaryReceipts — so the text-fill fold and the closed-shadow-root signature are NOT MEASURED for this component. Zero lines above means UNREAD, not "none found"; a named residual of the molecule round, surfaced by the scope-independence fix (before it, this component displayed its SIBLINGS' folds and looked read).`,
+          ]
+        : []),
       // R8 — THE CLOSED-SHADOW-ROOT LIMIT, STATED WHETHER OR NOT ONE FIRED.
       // `el.shadowRoot` is null for a closed root, so a host's entire rendered
       // interior is unreachable from script and the host is captured as an
@@ -879,7 +908,7 @@ async function main() {
       // an empty open root, mutating the page mid-sweep and breaking the
       // double-run byte-identity self-check. Refused for that reason, by
       // name, rather than overlooked.
-      `closed-shadow-root-limit: ${run1.closedShadowSuspects.length} suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.`,
+      `closed-shadow-root-limit: ${mySuspects.length} suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.`,
       `pseudo-elements-read: the reader looks at ${READ_PSEUDOS.join(', ')} — measured here on ${[...pseudoRead].sort().map(([pe, parts]) => `${pe} (${parts.size} part(s))`).join(', ') || 'no part'}. Reading is not carrying: the bounded decor grammar promotes ${DECOR_PSEUDOS.join('/')} only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.`,
       ...REFUSED_PSEUDOS.map(([pe, why]) => `pseudo-element-not-read: ${pe} — REFUSED BY NAME, not measured: ${why}`),
       `pseudo-elements-refused: ${REFUSED_PSEUDOS.length} (${REFUSED_PSEUDOS.map(([pe]) => pe).join(', ')})`,
