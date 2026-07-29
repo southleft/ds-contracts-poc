@@ -1,8 +1,8 @@
 # CI recipe validation — local execution receipt
 
-_Produced by `node examples/ci/validate.mjs` on 2026-07-28. Regenerate any time; network required (published CLI + consumer install)._
+_Produced by `node examples/ci/validate.mjs` on 2026-07-29. Regenerate any time; network required (published CLI + consumer install)._
 
-Published CLI under test: `@ds-contracts/cli@0.2.0` (npm answers `--version` → `0.2.0`).
+Published CLI under test: `@ds-contracts/cli@0.3.0` (npm answers `--version` → `0.3.0`).
 
 `act` is not assumed. Every `run:` step below was parsed out of the workflow YAML and executed
 verbatim with GitHub's own step shell (`bash --noprofile --norc -e -o pipefail`) in a scratch
@@ -40,11 +40,11 @@ evaluator does not understand fails the validation rather than being assumed tru
 | actions/checkout@v4 | action | ✔ pass | uses: actions/checkout@v4 — no run block; YAML lint covers it |
 | actions/setup-node@v4 | action | ✔ pass | uses: actions/setup-node@v4 — no run block; YAML lint covers it |
 | Install consumer-repo dependencies (Storybook, React) | executed | ✔ pass |   run `npm fund` for details ⏎  ⏎ found 0 vulnerabilities |
-| Regenerate code + stories from the contracts | executed | ✔ pass | ✔ Generated 1 component(s) → /private/var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/ds-contracts-ci-validate-pxCS8q/design-led-consumer/src/generated: Button |
-| GATE: contracts ⟷ regenerated code parity (exit 0 clean · 1 drift · 2 config error) | executed | ✔ pass | Config: /private/var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/ds-contracts-ci-validate-pxCS8q/design-led-consumer/ds-contracts.config.json ⏎ ℹ design surface not provided — design checks SKIPPED (set design.source to include them) ⏎ ✔ Diagnostic clean — 1 contract(s) hold on the checked surface(s). Report → ds-contracts/out/diagnose-report.json |
-| Build Storybook (static — no dev server) | executed | ✔ pass | │  /private/var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/ds-contracts-ci-validate-pxCS8q/design-led-consumer/storybook-static ⏎ │ ⏎ └  Storybook build completed successfully |
+| Regenerate code + stories from the contracts | executed | ✔ pass | ✔ Generated 1 component(s) → /private/var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/ds-contracts-ci-validate-DYwMVE/design-led-consumer/src/generated: Button |
+| GATE: contracts ⟷ regenerated code parity (exit 0 clean · 1 drift · 2 config error) | executed | ✔ pass | Config: /private/var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/ds-contracts-ci-validate-DYwMVE/design-led-consumer/ds-contracts.config.json ⏎ ℹ design surface not provided — design checks SKIPPED (set design.source to include them) ⏎ ✔ Diagnostic clean — 1 contract(s) hold on the checked surface(s). Report → ds-contracts/out/diagnose-report.json |
+| Build Storybook (static — no dev server) | executed | ✔ pass | │  /private/var/folders/dx/kt5qryjx605f2md58m5cg3n80000gn/T/ds-contracts-ci-validate-DYwMVE/design-led-consumer/storybook-static ⏎ │ ⏎ └  Storybook build completed successfully |
 | Name the changed contracts | executed | ✔ pass | Changed contracts: ⏎ contracts/button.contract.json |
-| Install playwright (pinned — matches the browser revision cache) | executed | ✔ pass |   run `npm fund` for details ⏎  ⏎ found 0 vulnerabilities |
+| Install playwright (pinned — matches the browser revision cache) | executed | ✔ pass | \|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        \|  90% of 93.5 MiB ⏎ \|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\| 100% of 93.5 MiB ⏎ Chrome Headless Shell 149.0.7827.55 (playwright chromium-headless-shell v1228) downloaded to /Users/tjpitre/Library/Caches/ms-playwright/chromium_headless_shell-1228 |
 | Screenshot the changed stories | executed | ✔ pass | screenshots/components-button--ghost.png ⏎ screenshots/components-button--disabled.png ⏎ screenshots/components-button--matrix.png |
 | Upload the story screenshots | action | ✔ pass | uses: actions/upload-artifact@v4 — no run block; YAML lint covers it |
 | Compose the PR comment | executed | ✔ pass | - `components-button--secondary.png` ⏎  ⏎ _Review the stories against the Figma frames, then merge — the generated code IS the contract._ |
@@ -127,8 +127,9 @@ npx @ds-contracts/cli onboard <your-package-or-path>   # stops at a review gate
 npx @ds-contracts/cli onboard --continue               # capture → promote → publish
 ```
 
-(`onboard` ships after 0.2.0; today: `extract --draft-capture-config` → review →
-`extract --computed --config` → `promote`, then re-run this workflow.)
+(`onboard` needs @ds-contracts/cli >= 0.3.0. The longhand it wraps:
+`extract --draft-capture-config` → review → `extract --computed --config` → `promote`,
+then re-run this workflow.)
 
 The contracts themselves **were** committed — a stub contract is still a real,
 reviewable API surface. Only the canvas half is withheld.

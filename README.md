@@ -295,7 +295,7 @@ What is in there:
 
 **One route is off, and the playground says so on the button:** live relay from the Figma plugin. The plugin's *Send to Playground* tab was removed when its seven tabs were re-housed into Build / Changes / Send, so nothing can answer a pairing code today. Use the figma.com URL route, or paste a dump into the JSON tab. Both credential-gated paths — Figma URL import and prompt-to-contract — are live-verified against real endpoints ([MILESTONES.md](MILESTONES.md)).
 
-Prefer a terminal? The engine also ships as npm packages — `npm exec @ds-contracts/cli` scaffolds a working config in one command (published today: `@ds-contracts/schema` 15.0.0 · `@ds-contracts/cli` 0.2.0 — this repo carries **16.0.0** and **0.3.0**, and `onboard` is in the newer one, so run the CLI from a clone until that publish lands. Every CLI verb is eval-pinned by a consumer-style smoke test.).
+Prefer a terminal? The engine also ships as npm packages — `npm exec @ds-contracts/cli` scaffolds a working config in one command (`@ds-contracts/schema` 16.0.0 · `@ds-contracts/cli` 0.3.0 · `@ds-contracts/emitter-web-components` 0.3.0 — published, and matching this repo. `onboard` needs 0.3.0 or newer. Every CLI verb is eval-pinned by a consumer-style smoke test.).
 
 ## The model
 

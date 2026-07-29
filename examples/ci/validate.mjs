@@ -10,7 +10,7 @@
  *      contract/tokens/icons),
  *   3. EXECUTES every `run:` step's commands verbatim (bash --noprofile
  *      --norc -e -o pipefail, GitHub's own step shell) against the PUBLISHED
- *      @ds-contracts/cli@0.2.0 — the commands must actually work; that is
+ *      @ds-contracts/cli@0.3.0 — the commands must actually work; that is
  *      the test,
  *   4. HONORS step-level `if:` — each executed step gets its own
  *      $GITHUB_OUTPUT file, and a supported `if:` expression is evaluated
@@ -49,7 +49,7 @@ import { parse as parseYaml } from 'yaml';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..', '..');
-const CLI_SPEC = '@ds-contracts/cli@0.2.0';
+const CLI_SPEC = '@ds-contracts/cli@0.3.0';
 
 // ---------------------------------------------------------------------------
 // Step classification: every run-step is either executed locally or CI-only
@@ -61,7 +61,7 @@ const CI_ONLY = {
     'Commit the refreshed contracts back to the branch':
       'pushes with the workflow GITHUB_TOKEN — the scratch consumer is not a git remote; shell syntax-checked (bash -n)',
     'Publish to the standing CI→Figma channel':
-      'needs a LIVE channel — a minted write key plus the deployed worker. (`figma publish` and `figma claim-channel` ARE in the pinned 0.2.0; an earlier revision of this note claimed otherwise and was wrong.) Shell syntax-checked (bash -n). The channel transport itself is pinned network-free by workers/assist/test/channel.test.ts (24 cases) and the `channel-round-trip` eval.',
+      'needs a LIVE channel — a minted write key plus the deployed worker. (`figma publish` and `figma claim-channel` ARE in the pinned 0.3.0; an earlier revision of this note claimed otherwise and was wrong.) Shell syntax-checked (bash -n). The channel transport itself is pinned network-free by workers/assist/test/channel.test.ts (24 cases) and the `channel-round-trip` eval.',
   },
   'design-led.yml': {
     'Post the PR comment (plain GITHUB_TOKEN — no external services)':
@@ -247,7 +247,7 @@ console.log(`scratch: ${SCRATCH}`);
 
 // npx cache warm-up + version pin proof.
 const version = sh('npx', ['--yes', CLI_SPEC, '--version'], { cwd: SCRATCH });
-if (version.status !== 0 || !version.out.includes('0.2.0')) {
+if (version.status !== 0 || !version.out.includes('0.3.0')) {
   console.error(`published CLI unavailable:\n${version.out}`);
   process.exit(1);
 }

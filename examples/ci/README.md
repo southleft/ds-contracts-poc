@@ -2,7 +2,7 @@
 
 Two GitHub Actions workflows that make contracts carry the design/code sync
 so neither side has to. Both run the **published** CLI
-(`npx --yes @ds-contracts/cli@0.2.0`) — they work in any repo today, no clone
+(`npx --yes @ds-contracts/cli@0.3.0`) — they work in any repo today, no clone
 of this reference repo required.
 
 Every `run:` step in both files has been executed locally against the
@@ -10,7 +10,7 @@ published CLI — see [VALIDATION.md](./VALIDATION.md) (produced by
 `node examples/ci/validate.mjs`) — with two named exceptions that
 `validate.mjs` classifies as CI-only: the git push, and the standing-channel
 publish (it needs a live channel and the deployed worker; the *verbs* —
-`figma publish`, `figma claim-channel` — are in the pinned `0.2.0`).
+`figma publish`, `figma claim-channel` — are in the pinned `0.3.0`).
 
 ## [`code-led.yml`](./code-led.yml) — code is truth
 
@@ -63,9 +63,10 @@ npx @ds-contracts/cli onboard <your-package-or-path>   # stops at a review gate
 npx @ds-contracts/cli onboard --continue               # capture → promote → publish
 ```
 
-(`onboard` ships in the release after `0.2.0`. Until then the same path is
-`extract --draft-capture-config` → review → `extract --computed --config` →
-`promote`.)
+(`onboard` and `promote` shipped in `0.3.0`; `0.2.0`'s tarball contained no
+`onboard` at all. The longhand path — `extract --draft-capture-config` → review
+→ `extract --computed --config` → `promote` — still works and is what `onboard`
+runs for you.)
 
 This is not hypothetical for the recipe's own validation: the code-led
 consumer fixture is a React library with no co-located CSS, so

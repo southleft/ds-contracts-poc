@@ -35,14 +35,15 @@
 #     # …review the drafted capture config it stops at, then:
 #     npx @ds-contracts/cli onboard --continue
 #
-# `onboard` ships in the release AFTER 0.2.0. Until it lands, the equivalent
-# is `extract --draft-capture-config` → review → `extract --computed --config`
-# → `promote`. Either way: capture first, canvas second. This recipe will not
-# publish blank components to a designer's file.
+# `onboard` and `promote` shipped in 0.3.0 (0.2.0 had no `onboard` at all).
+# The longhand equivalent — `extract --draft-capture-config` → review →
+# `extract --computed --config` → `promote` — is what `onboard` runs for you.
+# Either way: capture first, canvas second. This recipe will not publish blank
+# components to a designer's file.
 #
 # ----------------------------------------------------------------------------
 # On every push to main (and on each published release) this workflow:
-#   1. runs the PUBLISHED @ds-contracts/cli@0.2.0 `extract` over the component
+#   1. runs the PUBLISHED @ds-contracts/cli@0.3.0 `extract` over the component
 #      source (config: ds-contracts.config.json, committed in the repo),
 #   2. adopts the freshly proposed contracts into contracts/ (code-led means
 #      code wins — extraction output IS the new truth),
@@ -110,7 +111,7 @@ jobs:
 
       - name: Extract contracts from code
         run: |
-          npx --yes @ds-contracts/cli@0.2.0 extract ds-contracts.config.json | tee extract.log
+          npx --yes @ds-contracts/cli@0.3.0 extract ds-contracts.config.json | tee extract.log
 
       - name: Adopt the proposed contracts (code-led — extraction is the new truth)
         run: |
@@ -214,16 +215,21 @@ jobs:
         # too when the anatomy gate said no.
         #
         # VERSION: `figma publish` and `figma claim-channel` are IN the pinned
-        # 0.2.0 (verified: `npx @ds-contracts/cli@0.2.0 help` lists both). An
-        # earlier revision of this file claimed they were unreleased and that
-        # the pin resolved to a nonexistent version — that was wrong, and it is
-        # corrected here. `onboard`/`promote` are the verbs still unreleased;
-        # this recipe does not call them.
+        # 0.3.0. An earlier revision of this file claimed they were unreleased
+        # and that the pin resolved to a nonexistent version — that was wrong,
+        # and it is corrected here.
+        #
+        # `onboard` and `promote` shipped in 0.3.0 as well — 0.2.0's tarball
+        # contained ZERO files matching `onboard`, which is the defect the pin
+        # bump closes. This recipe still does not call them: `onboard` runs a
+        # real browser capture, which is a per-library setup act with a human
+        # review gate in the middle, not something a push-triggered workflow
+        # should do unattended. See docs/21 for that path.
         if: ${{ steps.anatomy.outputs.canvas_ready == 'true' && env.DS_CONTRACTS_CHANNEL_KEY != '' }}
         env:
           DS_CONTRACTS_CHANNEL_KEY: ${{ secrets.DS_CONTRACTS_CHANNEL_KEY }}
         run: |
-          npx --yes @ds-contracts/cli@0.2.0 figma publish contracts-bundle.json | tee publish.log
+          npx --yes @ds-contracts/cli@0.3.0 figma publish contracts-bundle.json | tee publish.log
 
       - name: Job summary — proposal / skip counts + the anatomy verdict
         if: ${{ always() }}
@@ -265,8 +271,9 @@ jobs:
               echo 'npx @ds-contracts/cli onboard --continue               # capture → promote → publish'
               echo '```'
               echo ""
-              echo "(\`onboard\` ships after 0.2.0; today: \`extract --draft-capture-config\` → review →"
-              echo "\`extract --computed --config\` → \`promote\`, then re-run this workflow.)"
+              echo "(\`onboard\` needs @ds-contracts/cli >= 0.3.0. The longhand it wraps:"
+              echo "\`extract --draft-capture-config\` → review → \`extract --computed --config\` → \`promote\`,"
+              echo "then re-run this workflow.)"
               echo ""
               echo "The contracts themselves **were** committed — a stub contract is still a real,"
               echo "reviewable API surface. Only the canvas half is withheld."

@@ -1,6 +1,9 @@
 {
   "name": "@ds-contracts/emitter-web-components",
   "version": "0.3.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "ds-contracts emitter plugin — contract → vanilla Custom Elements (shadow DOM, constructable stylesheets, zero runtime dependencies), with a deterministic custom-elements.json manifest emitted from the same contract.",
   "license": "MIT",
   "type": "module",

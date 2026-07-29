@@ -1,7 +1,10 @@
 {
   "name": "@ds-contracts/cli",
   "version": "0.3.0",
-  "description": "ds-contracts — contracts as the deterministic bridge between design and code. init / extract / generate / figma / diff / propose-pr over the same engine the reference repo ships.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "ds-contracts — contracts as the deterministic bridge between design and code. onboard / init / extract / generate / promote / figma / diff / propose-pr over the same engine the reference repo ships.",
   "license": "MIT",
   "type": "module",
   "bin": {

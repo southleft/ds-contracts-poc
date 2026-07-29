@@ -651,37 +651,42 @@ mentions an underscore**. The fix is `"unsetLabel": "unset"` in config. The next
 library with a defaultless enum axis hits the identical wall with the identical
 unhelpful error.
 
-### 4.8 The published CLI is not this repository's CLI
+### 4.8 The published CLI was not this repository's CLI — CLOSED
 
-`@ds-contracts/cli` is published at **0.2.0**, and its verbs are `init`,
-`extract`, `generate`, `figma`, `diff`, `propose-pr`.
+**Status — fixed 2026-07-29.** Kept here because it is the failure mode most
+worth recognising: a version number that says two different artifacts are the
+same thing.
 
-**`onboard` and `promote` are not in it.** Verified against the published
-tarball:
+`@ds-contracts/cli@0.2.0` contained **no `onboard` at all** — verified against
+the tarball, zero matching files — while Journey A in the README is written
+around it. Anyone following the docs against the published package got an
+unknown-command error on their very first step. Worse, `@ds-contracts/schema`
+was published at `15.0.0` while the repo's copy had advanced to spec v16
+(`Part.hugsBelowMaxWidth`): `npm pack @ds-contracts/schema@15.0.0` plus a grep
+for the field returns nothing, so **two different schema documents were sharing
+one version string** — exactly the drift semver exists to prevent.
 
-```bash
-npm pack @ds-contracts/cli@0.2.0 && tar -xzf ds-contracts-cli-0.2.0.tgz
-grep -c onboard package/dist/cli.js   # → 0
-```
+Published, and now matching the tree:
 
-`ds-contracts onboard` is the two-command entry point Journey A is written
-around. Anyone who follows the README against the *published* package gets an
-unknown-command error. (`figma claim-channel`, `figma publish`, `figma receive`
-and the `--tokens` bundle path *are* in 0.2.0.)
-
-**Status** — the version numbers in the tree are now ahead of the registry, on
-purpose, and the publish is what closes this:
-
-| package | published | in this tree | why the bump |
+| package | was | now | why |
 |---|---|---|---|
 | `@ds-contracts/cli` | 0.2.0 | **0.3.0** | adds `onboard` and `promote` |
-| `@ds-contracts/schema` | 15.0.0 | **16.0.0** | spec v16 — `Part.hugsBelowMaxWidth`; the published 15.0.0 tarball does **not** contain the field while the repo's copy does, so two different documents were sharing one version string |
+| `@ds-contracts/schema` | 15.0.0 | **16.0.0** | spec v16 — `Part.hugsBelowMaxWidth` |
 | `@ds-contracts/emitter-web-components` | 0.2.0 | **0.3.0** | it now refuses an undefined token (§4.9), so it accepts strictly less than 0.2.0 did |
 
-Until that publish lands, **the CI recipes in `examples/ci/` stay pinned to
-0.2.0 on purpose** — a workflow pinned to a version that does not exist is the
-exact defect those files were just repaired for. Bump the pins in the same
-change as the publish, not before.
+Check it yourself:
+
+```bash
+npm pack @ds-contracts/cli@0.3.0 && tar -xzf ds-contracts-cli-0.3.0.tgz
+grep -c onboard package/dist/cli.js   # → non-zero (was 0 at 0.2.0)
+```
+
+The `examples/ci/` recipes are pinned to `0.3.0` and their receipt
+([VALIDATION.md](../examples/ci/VALIDATION.md)) is a real execution against it,
+regenerated after the publish — not hand-edited. The pins were deliberately
+held at 0.2.0 until the publish was real, because a workflow pinned to a
+version that does not exist is the defect those files had just been repaired
+for.
 
 ### 4.9 One emitter target used to ship dangling token references
 
@@ -851,9 +856,9 @@ grep -c 'tokens\|spacing\|anatomy' extract/reconcile.ts     # → 0
 # the conformance frontier (§5.2) — reads committed artifacts, no browser
 npm run conformance
 
-# the published CLI's verb list (§4.8)
-npm pack @ds-contracts/cli@0.2.0 && tar -xzf ds-contracts-cli-0.2.0.tgz \
-  && grep -c onboard package/dist/cli.js                    # → 0
+# the published CLI carries the verb the docs open with (§4.8)
+npm pack @ds-contracts/cli@0.3.0 && tar -xzf ds-contracts-cli-0.3.0.tgz \
+  && grep -c onboard package/dist/cli.js         # → non-zero (0 at 0.2.0)
 
 # every gated number in every doc, re-derived from the repo
 npm run docs:check
