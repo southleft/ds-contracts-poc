@@ -60,37 +60,45 @@ npx tsx examples/polaris/scripts/promote-floor.ts
 
 Steps 4 and the eval run from the COMMITTED artifacts alone — that is the point of a contract.
 
-## PERMANENT HOLE — Polaris cannot be recaptured (task #38)
+## The sandbox hole — CLOSED 2026-07-29 (task #26/#43)
 
-**Every other library in `examples/` commits a git-ignored but REPRODUCIBLE sandbox recipe with
-a pinned `package.json` + `package-lock.json`** (`examples/mui/.mui-sandbox`,
-`.carbon-sandbox`, `.tw-sandbox`, `.altitude-sandbox`, `.astryx-sandbox`). Polaris has none.
-Step 6 above says `--harness <harness-dir>` — a directory whose path, contents and lockfile are
-**recorded nowhere in this repo**. `.polaris-clone/` is the SOURCE clone for the static
-extraction (step 2); it is not the harness, and it cannot serve as one.
+Polaris used to be the one library with no capture harness recorded anywhere, which made its
+committed artifacts unregenerable by any command in this repo. `examples/polaris/.polaris-sandbox/`
+now exists and its **recipe is committed** — `package.json` + `package-lock.json`, pinning
+`@shopify/polaris@13.9.5`, `react@18.3.1`, `react-dom@18.3.1`, `esbuild`. The install itself is
+git-ignored; the lockfile is what makes it reproducible.
 
-**What that means, stated plainly:**
+```bash
+cd examples/polaris/.polaris-sandbox && npm ci
+```
 
-- Polaris's committed artifacts under `extract/computed/out/<comp>/` — `captured-truth.json`,
-  `enriched.contract.json`, the scorecards — are **FROZEN at whatever engine produced them**.
-  They are the only artifacts in the corpus that no command in this repo can regenerate.
-- Every engine fix that lands after that freeze reaches Polaris only through
-  `npm run extract:computed:regate` (the OFFLINE re-fuse of the committed `captured-truth.json`),
-  which is why the drift baseline still covers it. Anything that lives in the CAPTURE half —
-  a new channel read, a new pseudo-element, a refusal that depends on re-measuring the DOM —
-  cannot reach Polaris at all.
-- Polaris is therefore also the one library `scripts/figma-scripts-fresh.mjs` does not gate:
-  its `figma/*.figma.js` are emitted by `generate.ts` (the provisional-minting path), not by the
-  CLI `figma` command, and the exact invocation is not recorded either.
+**A correction to what this file used to say.** It claimed every *other* library "commits a
+git-ignored but REPRODUCIBLE sandbox recipe with a pinned `package.json` + `package-lock.json`."
+That was not true of any of them: `git ls-files examples/carbon/.carbon-sandbox` returns nothing,
+and the same holds for mui, tailwind, altitude and astryx — each `.gitignore` ignores the sandbox
+directory whole. Their recipes survive only as prose in their `PROVENANCE.md`. Polaris is now the
+first library whose harness is reproducible from committed bytes; bringing the other five up to
+the same bar is named as follow-up work, not claimed here.
 
-The recorded gap cause lives with the numbers, in
-`extract/computed/regate-baseline.json` (`gapCause` on each `polaris/*` row) — so a reader of the
-drift table sees it without reading this file.
+### What is still open
 
-**Closing it** means committing a `examples/polaris/.polaris-sandbox/` package.json +
-package-lock.json pinning `@shopify/polaris@13.9.5 react@18 react-dom@18 esbuild`, adding
-`examples/polaris/PROVENANCE.md` with the same shape the other five have, and re-running the
-capture. That is a round of its own; it is named here rather than silently carried.
+- **The recapture itself has not been run.** The sandbox exists and the reader question is
+  answered (below), but Polaris's 12 committed contracts are still the frozen ones. Until that
+  round runs, every engine fix in the CAPTURE half still reaches Polaris only through
+  `npm run extract:computed:regate` (the offline re-fuse of the committed `captured-truth.json`).
+- **`varPrefix` is measured but not yet applied.** Polaris's compiled CSS
+  (`build/esm/styles.css`, 499,065 bytes in the published 13.9.5 tarball) references
+  `var(--p-*)` **2,727 times at point of use** across **328 distinct** custom properties, with 452
+  defined. So Polaris binds through custom properties — it is nothing like StyleX, and the
+  CSS-vars source reader WOULD bind here. All 980 of its minted leaves are anonymous literals for
+  one reason only: the reader arrived at library #4 (MUI) and library #2 was never re-run with it.
+- **Polaris is still the one library `scripts/figma-scripts-fresh.mjs` does not gate** — its
+  `figma/*.figma.js` come from `generate.ts` (the provisional-minting path), not the CLI `figma`
+  command, and that invocation is still unrecorded. A recapture round has to settle this too.
+
+The recorded gap cause lives with the numbers, in `extract/computed/regate-baseline.json`
+(`gapCause` on each `polaris/*` row), so a reader of the drift table sees it without reading this
+file.
 
 ## License hygiene
 

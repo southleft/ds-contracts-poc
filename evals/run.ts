@@ -8062,6 +8062,81 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    // ---- A CAPTURE MAY NOT READ ITS OWN PROMOTE OUTPUT (task #43).
+    //
+    // Astryx's capture config pointed at `examples/astryx/contracts/` — the
+    // directory `promote` WRITES. So each round captured from the previous
+    // round's result: a feedback loop, not a measurement. The damage was
+    // already in the shipped artifacts and visible in one grep — the
+    // FLOOR-PROMOTED and COMPUTED-ENRICHED provenance sentences appear TWICE
+    // in button/badge/slider, once in card, and zero times in switch, which
+    // had never promoted at all. Five components in three different states,
+    // which is what "not idempotent" looks like when it reaches disk.
+    //
+    // The invariant is one line and it holds for every library: a seed is a
+    // FROZEN INPUT. Six of seven configs already obeyed it by convention
+    // (contracts-seed/ or extraction/static-contracts/); nothing enforced it,
+    // so the seventh drifted silently for several rounds.
+    id: 'capture-seeds-are-not-promote-output',
+    claim: 'C1-determinism',
+    run: () => {
+      const cfgDir = path.join(ROOT, 'extract/computed/configs');
+      const files = readdirSync(cfgDir).filter((f) => f.endsWith('.json')).sort();
+      if (files.length < 7) throw new Error(`only ${files.length} capture configs found — the scan universe is too small`);
+
+      const offenders: string[] = [];
+      let checked = 0;
+      for (const f of files) {
+        const cfg = JSON.parse(readFileSync(path.join(cfgDir, f), 'utf8')) as { components?: Array<{ name: string; contract?: string }> };
+        for (const c of cfg.components ?? []) {
+          if (!c.contract) continue;
+          checked++;
+          // `promote` writes to <exampleDir>/contracts/. A seed path whose
+          // directory is exactly that is the feedback loop. `contracts-seed/`
+          // and `extraction/static-contracts/` are frozen inputs and fine —
+          // matched on the path SEGMENT so `contracts-seed` cannot be read as
+          // `contracts`.
+          const segments = c.contract.split('/');
+          const dirSegment = segments[segments.length - 2];
+          if (dirSegment === 'contracts') offenders.push(`${f}: ${c.name} → ${c.contract}`);
+        }
+      }
+      if (offenders.length > 0) {
+        throw new Error(
+          `A CAPTURE CONFIG READS ITS OWN PROMOTE OUTPUT — the round-trip is a feedback loop, not a measurement (task #43):\n  ${offenders.join('\n  ')}\n` +
+            `  Move the seed to <example>/contracts-seed/ (a frozen copy of the static extraction) and repoint the config.`,
+        );
+      }
+
+      // The seeds must also BE seeds: stub anatomy, not a promoted result.
+      // A frozen copy of a promoted contract would satisfy the path rule
+      // above while reintroducing the same compounding.
+      const promoted: string[] = [];
+      for (const f of files) {
+        const cfg = JSON.parse(readFileSync(path.join(cfgDir, f), 'utf8')) as { components?: Array<{ name: string; contract?: string }> };
+        for (const c of cfg.components ?? []) {
+          if (!c.contract) continue;
+          const abs = path.join(ROOT, c.contract);
+          if (!existsSync(abs)) continue;
+          const seed = JSON.parse(readFileSync(abs, 'utf8')) as { description?: string };
+          const d = seed.description ?? '';
+          if (d.includes('FLOOR-PROMOTED') || d.includes('COMPUTED-ENRICHED')) {
+            promoted.push(`${f}: ${c.name} → ${c.contract} carries a promotion/enrichment sentence`);
+          }
+        }
+      }
+      if (promoted.length > 0) {
+        throw new Error(
+          `A SEED IS A PROMOTED CONTRACT — freezing the output does not stop the compounding, it only hides it (task #43):\n  ${promoted.join('\n  ')}`,
+        );
+      }
+
+      console.log(
+        `capture-seeds-are-not-promote-output: ${checked} seed reference(s) across ${files.length} capture configs, ZERO pointing at a \`contracts/\` directory (what promote writes) and ZERO carrying a FLOOR-PROMOTED / COMPUTED-ENRICHED sentence. At HEAD astryx failed both halves: all 5 of its components read \`examples/astryx/contracts/\`, and the shipped result showed it — the provenance sentence appears TWICE in button/badge/slider, once in card, and switch had never promoted at all. Six libraries obeyed this by convention; nothing enforced it, which is why the seventh could drift for rounds without a single gate noticing.`,
+      );
+    },
+  },
+  {
     // ---- EVERY TARGET REFUSES AN UNDEFINED TOKEN (task #47).
     //
     // "The tool refuses rather than guesses" was true on three of four

@@ -1,0 +1,1 @@
+{"name":"polaris-sandbox","private":true,"dependencies":{"@shopify/polaris":"13.9.5","esbuild":"^0.28.1","react":"^18.3.1","react-dom":"^18.3.1"}}

@@ -335,7 +335,7 @@ Every capability claim in this repository is backed by an executable check or a 
 | **Engine as library** | the whole pipeline is browser-safe pure functions; CLI output golden-guarded through the refactor | `npm run core:browser-check` · [docs/15](docs/15-engine-as-library.md) |
 | **Advanced composition, live** | the multi-root composite Modal — a composed Card instance, a repeated Badge collection, real Button instances with applied labels, an inset backdrop — builds correctly on a **real Figma canvas** from one pasted contract (2026-07-22), deterministically, no AI in the conversion; both journey directions gated headless, and both real-Figma quirks found en route (auto-layout hug↔fill collapse, instance property-exposure lag) are modeled in the mock so they fail in Node forever | `npm run plugin:check` (composite pins) · [`docs/handoff/08`](docs/handoff/08-status-what-doesnt-work.md) · `npx tsx scripts/deterministic-roundtrip.mjs` |
 
-All of it is gated by **180 executable checks** (`npm run eval`) that run the real pipeline in a scratch copy — not mocks.
+All of it is gated by **181 executable checks** (`npm run eval`) that run the real pipeline in a scratch copy — not mocks.
 
 ## What's actually here
 
@@ -349,7 +349,7 @@ All of it is gated by **180 executable checks** (`npm run eval`) that run the re
 | `parity/` | The three-way differ: classifies every difference between contract, code, and canvas as *ahead*, *behind*, or *mismatched* — with a proposed remedy. Plus the adherence judge and the brownfield `diagnose` referee. | ✅ |
 | `extract/` | Brownfield extraction: code→contract (React/TSX, CSS Modules, Custom Elements Manifest) and design→contract (plugin dump + Figma REST) adapters, plus `computed/` — the real-browser capture floor. The static adapters always propose the API surface, and anatomy + token bindings when the styling method exposes them ([which is which](#what-the-static-path-does-and-does-not-give-you)); the computed floor is what produces browser-observed styling truth. Also the four pilot write-ups and the round-trip receipts. | ✅ |
 | `catalog/` + `context/` | The compiled generation constraint (every API + every token + the governance rules) that an AI agent — or a human — can be held to, sharded to fit an agent's context window at any component count, plus the org rules and memory that feed it. | catalog ❌ · rules ✅ |
-| `evals/` | 180 deterministic checks on the machinery itself: byte-identical regeneration against golden manifests, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion, extraction round-trips. | ✅ |
+| `evals/` | 181 deterministic checks on the machinery itself: byte-identical regeneration against golden manifests, refusal of illegal contracts, detection of every claimed drift class, convergence after promotion, extraction round-trips. | ✅ |
 | `conformance/` | The **CSS/DOM conformance fixture** — a synthetic library of labelled CSS constructs, mounted through the unmodified capture pipeline, whose expected disposition is declared IN ADVANCE. Every other instrument here derives its denominator from the same filter that decides carriage, so a channel the filter never opened scores 100%; this one does not, which is what makes the frontier *predictable* instead of discovered one library at a time. Generated matrix: [`conformance/EXPECTATIONS.md`](conformance/EXPECTATIONS.md). | ✅ |
 | `playground/` | The public browser playground ([live](https://ds-contracts-playground.pages.dev)) — a Vite app importing `core/` unmodified. | ✅ |
 | `dashboard/` | The **Contract Hub** — a local app visualizing the whole system: live component previews, per-prop binding maps across all three surfaces, token provenance, one-click parity runs, contract editing with regeneration, and the full docs. | ✅ |
@@ -375,7 +375,7 @@ npm run parity   # ① clean — code, canvas, and tokens all match the contract
 # ② edit any contract in contracts/ — add an enum value, change a token binding
 npm run build && npm run parity
 #    ③ the differ reports exactly what is now behind, and how to fix it
-npm run eval     # ④ 180 checks that detection, refusal, and convergence still hold
+npm run eval     # ④ 181 checks that detection, refusal, and convergence still hold
 npm run docs:check # ⑤ every number these docs quote, re-derived from the repo (seconds, no browser)
 ```
 
@@ -447,7 +447,7 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 ## Status
 
-The model is validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 180/180 evals, the schema and CLI published to the public npm registry (`@ds-contracts/schema`, `@ds-contracts/cli` — stranger-verified from a clean directory), a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same engine — with a companion Figma plugin bridging live selections into it. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
+The model is validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 181/181 evals, the schema and CLI published to the public npm registry (`@ds-contracts/schema`, `@ds-contracts/cli` — stranger-verified from a clean directory), a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same engine — with a companion Figma plugin bridging live selections into it. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 
 - **What has been proven, dated, with receipts:** [MILESTONES.md](MILESTONES.md)
 - **What it does NOT do — read before adopting:** [docs/23 — Known Limitations](docs/23-known-limitations.md)

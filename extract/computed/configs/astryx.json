@@ -43,7 +43,7 @@
     {
       "name": "Button",
       "importName": "Button",
-      "contract": "examples/astryx/contracts/button.contract.json",
+      "contract": "examples/astryx/contracts-seed/button.contract.json",
       "sampleText": "Save changes",
       "axes": [
         "variant",
@@ -62,7 +62,7 @@
     {
       "name": "Badge",
       "importName": "Badge",
-      "contract": "examples/astryx/contracts/badge.contract.json",
+      "contract": "examples/astryx/contracts-seed/badge.contract.json",
       "sampleText": "New",
       "axes": [
         "variant"
@@ -71,7 +71,7 @@
     {
       "name": "Card",
       "importName": "Card",
-      "contract": "examples/astryx/contracts/card.contract.json",
+      "contract": "examples/astryx/contracts-seed/card.contract.json",
       "sampleText": "Card content",
       "axes": [
         "variant"
@@ -80,7 +80,7 @@
     {
       "name": "Switch",
       "importName": "Switch",
-      "contract": "examples/astryx/contracts/switch.contract.json",
+      "contract": "examples/astryx/contracts-seed/switch.contract.json",
       "sampleText": "Enable notifications",
       "axes": [
         "labelPosition"
@@ -98,7 +98,7 @@
     {
       "name": "Slider",
       "importName": "Slider",
-      "contract": "examples/astryx/contracts/slider.contract.json",
+      "contract": "examples/astryx/contracts-seed/slider.contract.json",
       "sampleText": "Volume",
       "axes": [
         "orientation",
@@ -110,5 +110,6 @@
       }
     }
   ],
-  "_bannerReceipt": "Banner EXCLUDED this round: double-run determinism self-check refuses it by name (height/transform/radii unstable \u2014 an unsettled expand/collapse transition). Re-admit with a settle strategy in the triage round."
+  "_bannerReceipt": "Banner EXCLUDED this round: double-run determinism self-check refuses it by name (height/transform/radii unstable \u2014 an unsettled expand/collapse transition). Re-admit with a settle strategy in the triage round.",
+  "__seedNote": "SEEDS ARE FROZEN INPUTS, NEVER PROMOTE OUTPUT. This config pointed at examples/astryx/contracts/ \u2014 the directory promote WRITES \u2014 so capture read its own previous result and the round-trip was not idempotent. Measured damage in the shipped artifacts: button/badge/slider each carried the FLOOR-PROMOTED and COMPUTED-ENRICHED provenance sentence TWICE, card once, and switch had never promoted at all (still v0.1.0) \u2014 five components in three different states. The seeds now live in examples/astryx/contracts-seed/, derived from the Phase-A static extraction. One measured correction rides in them: Button.size carries default \"md\", which the static adapter dropped and the library's own dist/docs-types.d.ts declares \u2014 a defaultless enum AXIS is the case that fails with an unhelpful error (docs/23 \u00a74.7). Pinned by the eval `capture-seeds-are-not-promote-output`."
 }

@@ -1,6 +1,6 @@
 {
-  "passed": 180,
-  "total": 180,
+  "passed": 181,
+  "total": 181,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -884,6 +884,11 @@
     },
     {
       "id": "capture-scope-independence",
+      "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "capture-seeds-are-not-promote-output",
       "claim": "C1-determinism",
       "pass": true
     },

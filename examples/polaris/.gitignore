@@ -1,2 +1,8 @@
 .polaris-clone
 out/
+
+# The capture harness: ignore the INSTALL, commit the RECIPE. `package.json` +
+# `package-lock.json` are what make the sandbox reproducible; node_modules is not.
+.polaris-sandbox/*
+!.polaris-sandbox/package.json
+!.polaris-sandbox/package-lock.json
