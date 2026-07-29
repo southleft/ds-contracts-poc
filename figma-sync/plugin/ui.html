@@ -231,12 +231,25 @@
     <div class="meta" id="build-brownfield-meta" hidden>A read-only pass over the
       sets you already have — what they are, and which could come under
       contract. Nothing is changed.</div>
+    <!-- FIRST-RUN COMPREHENSION. The owner's words after using the re-housed
+         IA: "I don't think it's that intuitive to understand what I should be
+         doing with it." Measured on the packaged ui.html at 400×600: the word
+         "contract" appeared FOUR times on the first screen and was never
+         defined, the paste instruction was printed TWICE verbatim, and nothing
+         said where the file comes from — that fact lived only inside the
+         collapsed "Other ways to receive". One definition, one provenance
+         sentence, and the duplicate removed. -->
+    <div class="meta" id="build-what">A <strong>contract</strong> is a JSON file your developers
+      generate from the component code (<span class="mono">ds-contracts onboard</span>). Paste one
+      below — this plugin builds it here as real component sets, bound to your variables. After
+      that, <strong>Changes</strong> tells you what drifted and <strong>Send</strong> proposes your
+      canvas edits back.</div>
     <div class="row"><button class="primary" id="gen-sample" data-busy="Building…">Build the sample library</button></div>
-    <div class="meta">Card, Badge, Avatar, Button — token-bound, built in this file in ~30 seconds. Safe to re-run.</div>
-    <div class="meta">Or paste your contracts file below.</div>
+    <div class="meta">Nobody sent you one yet? Build the sample instead — Card, Badge,
+      Avatar, Button, token-bound, ~30 seconds, safe to re-run.</div>
   </div>
   <div class="section grow">
-    <div class="hint" id="build-guidance">Paste your contracts file below — the plugin checks it, then builds it in this file, token-bound and safe to re-run.</div>
+    <div class="hint" id="build-guidance">Paste the contracts file — every set is built in this file, bound to your variables, and re-running is safe.</div>
     <textarea id="gen-input" spellcheck="false" placeholder="Paste your contracts file here."></textarea>
     <details class="help">
       <summary>Other ways to receive</summary>
@@ -924,12 +937,17 @@
     $('build-brownfield-row').hidden = !brownfield;
     $('build-brownfield-meta').hidden = !brownfield;
     $('gen-sample').className = empty && !brownfield ? 'primary' : 'secondary';
+    // The empty card's definition and the guidance line say overlapping
+    // things. On a first run the definition is the better of the two (it
+    // says what a contract IS); once the card is gone the guidance is the
+    // only instruction left. Never both.
+    $('build-guidance').hidden = empty;
     $('gen-run').className = empty ? 'secondary' : 'primary';
     $('gen-run').textContent = markedSets > 0 ? 'Check against this file' : 'Generate in this file';
     delete $('gen-run').dataset.idle;
     $('build-guidance').textContent = markedSets > 0
-      ? 'Paste your contracts file below — the plugin checks it against what this file already has, and nothing changes until you press Apply.'
-      : 'Paste your contracts file below — the plugin builds it in this file, token-bound and safe to re-run.';
+      ? 'Paste the contracts file — it is checked against what this file already has, and nothing changes until you press Apply.'
+      : 'Paste the contracts file — every set is built in this file, bound to your variables, and re-running is safe.';
     var noSets = inventoryKnown && markedSets === 0;
     $('drift-empty').hidden = !noSets;
     $('drift-actions').hidden = noSets;

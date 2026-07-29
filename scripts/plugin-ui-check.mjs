@@ -66,6 +66,25 @@ ok(await shown('#build-empty'), 'Build shows the sample-library empty state');
 ok(await page.locator('#gen-sample').evaluate((e) => e.className === 'primary'), 'the sample button is the panel primary while empty');
 ok(await page.locator('#gen-run').evaluate((e) => e.className === 'secondary'), 'Generate steps back to secondary while empty');
 ok(await page.locator('#gen-run').textContent() === 'Generate in this file', 'Generate label reads "Generate in this file" on a fresh file');
+
+// --- FIRST-RUN COMPREHENSION (the owner's report: "I don't think it's that
+//     intuitive to understand what I should be doing with it"). Measured on
+//     the packaged ui.html: "contract" appeared four times on the first screen
+//     and was never defined, the paste instruction was printed twice verbatim,
+//     and where the file comes from lived only inside a collapsed <details>.
+{
+  ok(await page.locator('#build-what').isVisible(), 'FIRST RUN: the empty card DEFINES what a contract is');
+  const what = await page.locator('#build-what').textContent();
+  ok(/JSON file/.test(what), '…in plain words ("JSON file"), not jargon');
+  ok(what.includes('ds-contracts onboard'), '…and names WHERE it comes from — the command a developer runs');
+  ok(/Changes/.test(what) && /Send/.test(what), '…and what the other two tabs are for, so the loop is legible before anything is built');
+  ok(!(await shown('#build-guidance')),
+    'the guidance line is HIDDEN while the definition is up — the first screen said the same thing twice');
+  const panel = await page.locator('#panel-build').innerText();
+  const pasteLines = panel.split('\n').filter((l) => /paste/i.test(l) && l.trim().length > 12);
+  ok(pasteLines.length <= 1,
+    'at most ONE paste instruction on the first screen (was two, verbatim) — got: ' + JSON.stringify(pasteLines));
+}
 ok(!(await shown('#drift-actions')), 'Changes hides the drift button when the file has no marked sets');
 ok(await shown('#drift-empty'), 'Changes shows the no-sets empty state');
 ok(await shown('#channel-setup'), 'no key = SETUP state, not an error');
@@ -153,6 +172,11 @@ await page.waitForTimeout(400);
 ok(await page.locator('#panel-changes').evaluate((e) => e.classList.contains('active')), 'with marked sets the default tab is Changes');
 await page.click('#tab-build');
 ok(await page.locator('#gen-run').textContent() === 'Check against this file', 'with marked sets Build\'s one button runs the CHECK');
+ok(await shown('#build-guidance'),
+  'with the empty card gone the guidance line RETURNS — hiding it on a first run must not lose the only instruction later');
+// isVisible(), not shown(): #build-what is hidden by its ANCESTOR (#build-empty),
+// and the shown() helper only reads the element's own `hidden` attribute.
+ok(!(await page.locator('#build-what').isVisible()), '…and the first-run definition steps aside once the file has contract-backed sets');
 ok(!(await shown('#build-empty')), 'no empty state once the file has contract-backed sets');
 const sample = await page.evaluate(() => window.DSC.sampleBundleJson());
 ok(!!sample, 'the packaged build carries the baked sample bundle');
