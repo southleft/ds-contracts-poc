@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "astryx.badge",
   "name": "Badge",
-  "version": "0.3.0",
+  "version": "0.1.0",
   "status": "draft",
-  "description": "Astryx Badge — a small status/category label. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Badge/Badge.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). API surface (variant) is verbatim; the label is materialized as a text content part (Astryx types it as a ReactNode child slot, dropped as a `node` prop in extraction — see DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/badge/decisions.md); extension sidecar carries the named overflow. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "description": "Astryx Badge — a small status/category label. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Badge/Badge.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). API surface (variant) is verbatim; the label is materialized as a text content part (Astryx types it as a ReactNode child slot, dropped as a `node` prop in extraction — see DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "span"
   },
@@ -78,135 +78,88 @@
     "root": {
       "layout": {
         "display": "flex",
-        "direction": "row",
         "align": "center",
         "justify": "center"
       },
+      "declared": {
+        "text-wrap-mode": "nowrap"
+      },
       "tokens": {
-        "background-color": "{color-background-gray}",
-        "color": "{color-text-gray}",
-        "padding-inline": "{spacing-2}",
-        "padding-block": "{spacing-0}",
-        "border-radius": "{radius-full}",
-        "gap": "{spacing-1}",
-        "font-family": "{font-family-body}",
-        "font-size": "{font-size-sm}",
-        "font-weight": "{font-weight-medium}",
-        "line-height": "{imported.badge.root.line-height}"
+        "border-bottom-left-radius": "{imported.shared.size-9999}",
+        "border-bottom-right-radius": "{imported.shared.size-9999}",
+        "border-top-left-radius": "{imported.shared.size-9999}",
+        "border-top-right-radius": "{imported.shared.size-9999}",
+        "column-gap": "{imported.badge.root.column-gap}",
+        "font-size": "{imported.badge.root.font-size}",
+        "font-weight": "{imported.badge.root.font-weight}",
+        "line-height": "{imported.badge.root.line-height}",
+        "padding-left": "{imported.badge.root.padding-left}",
+        "padding-right": "{imported.badge.root.padding-right}",
+        "row-gap": "{imported.badge.root.row-gap}"
       },
       "tokensByProp": [
         {
           "prop": "variant",
           "map": {
-            "neutral": {
-              "background-color": "{color-neutral}",
-              "color": "{color-text-gray}"
-            },
-            "info": {
-              "background-color": "{color-accent}",
-              "color": "{color-on-accent}"
-            },
-            "success": {
-              "background-color": "{color-success}",
-              "color": "{color-on-accent}"
-            },
-            "warning": {
-              "background-color": "{color-warning}",
-              "color": "{color-on-warning}"
-            },
-            "error": {
-              "background-color": "{color-error}",
-              "color": "{color-on-accent}"
-            },
             "blue": {
-              "background-color": "{color-background-blue}",
-              "color": "{color-text-blue}"
+              "background-color": "{imported.badge.root.background-color.blue}",
+              "color": "{imported.badge.root.color.blue}"
             },
             "cyan": {
-              "background-color": "{color-background-cyan}",
-              "color": "{color-text-cyan}"
-            },
-            "green": {
-              "background-color": "{color-background-green}",
-              "color": "{color-text-green}"
-            },
-            "orange": {
-              "background-color": "{color-background-orange}",
-              "color": "{color-text-orange}"
-            },
-            "pink": {
-              "background-color": "{color-background-pink}",
-              "color": "{color-text-pink}"
-            },
-            "purple": {
-              "background-color": "{color-background-purple}",
-              "color": "{color-text-purple}"
-            },
-            "red": {
-              "background-color": "{color-background-red}",
-              "color": "{color-text-red}"
-            },
-            "teal": {
-              "background-color": "{color-background-teal}",
-              "color": "{color-text-teal}"
-            },
-            "yellow": {
-              "background-color": "{color-background-yellow}",
-              "color": "{color-text-yellow}"
-            }
-          }
-        },
-        {
-          "prop": "variant",
-          "map": {
-            "blue": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.blue}"
-            },
-            "cyan": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.cyan}"
+              "background-color": "{imported.badge.root.background-color.cyan}",
+              "color": "{imported.badge.root.color.cyan}"
             },
             "error": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.error}"
+              "background-color": "{imported.badge.root.background-color.error}",
+              "color": "{imported.badge.root.color.error}"
             },
             "green": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.green}"
+              "background-color": "{imported.badge.root.background-color.green}",
+              "color": "{imported.badge.root.color.green}"
             },
             "info": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.info}"
+              "background-color": "{imported.badge.root.background-color.info}",
+              "color": "{imported.badge.root.color.info}"
             },
             "neutral": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.neutral}"
+              "background-color": "{imported.badge.root.background-color.neutral}",
+              "color": "{imported.badge.root.color.neutral}"
             },
             "orange": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.orange}"
+              "background-color": "{imported.badge.root.background-color.orange}",
+              "color": "{imported.badge.root.color.orange}"
             },
             "pink": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.pink}"
+              "background-color": "{imported.badge.root.background-color.pink}",
+              "color": "{imported.badge.root.color.pink}"
             },
             "purple": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.purple}"
+              "background-color": "{imported.badge.root.background-color.purple}",
+              "color": "{imported.badge.root.color.purple}"
             },
             "red": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.red}"
+              "background-color": "{imported.badge.root.background-color.red}",
+              "color": "{imported.badge.root.color.red}"
             },
             "success": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.success}"
+              "background-color": "{imported.badge.root.background-color.success}",
+              "color": "{imported.badge.root.color.success}"
             },
             "teal": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.teal}"
+              "background-color": "{imported.badge.root.background-color.teal}",
+              "color": "{imported.badge.root.color.teal}"
             },
             "warning": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.warning}"
+              "background-color": "{imported.badge.root.background-color.warning}",
+              "color": "{imported.badge.root.color.warning}"
             },
             "yellow": {
-              "row-rule-color": "{imported.badge.root.row-rule-color.yellow}"
+              "background-color": "{imported.badge.root.background-color.yellow}",
+              "color": "{imported.badge.root.color.yellow}"
             }
           }
         }
-      ],
-      "declared": {
-        "text-wrap-mode": "nowrap"
-      }
+      ]
     }
   },
   "anchors": {

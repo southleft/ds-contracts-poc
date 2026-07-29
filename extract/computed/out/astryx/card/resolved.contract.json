@@ -4,7 +4,7 @@
   "name": "Card",
   "version": "0.1.0",
   "status": "draft",
-  "description": "Astryx Card — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Card/Card.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). The single extracted structural axis (variant, 13 values) is verbatim; children is a materialized content slot (Astryx types Card body as ReactNode, dropped as a node prop). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "description": "Astryx Card — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Card/Card.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). The single extracted structural axis (variant, 13 values) is verbatim; children is a materialized content slot (Astryx types Card body as ReactNode, dropped as a node prop). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -74,69 +74,30 @@
   "states": [],
   "anatomy": {
     "root": {
-      "layout": {
-        "direction": "column"
+      "declared": {
+        "display": "block",
+        "overflow-x": "clip",
+        "overflow-y": "clip"
+      },
+      "content": {
+        "prop": "children"
       },
       "tokens": {
-        "background-color": "{color-background-card}",
-        "color": "{color-on-light}",
-        "padding-block": "{spacing-4}",
-        "padding-inline": "{spacing-4}",
-        "border-radius": "{radius-container}",
-        "gap": "{spacing-3}",
-        "font-family": "{font-family-body}",
+        "border-bottom-left-radius": "{imported.shared.size-12}",
+        "border-bottom-right-radius": "{imported.shared.size-12}",
+        "border-top-left-radius": "{imported.shared.size-12}",
+        "border-top-right-radius": "{imported.shared.size-12}",
         "font-weight": "{imported.card.root.font-weight}",
-        "line-height": "{imported.card.root.line-height}"
+        "line-height": "{imported.card.root.line-height}",
+        "width": "{imported.card.root.width}",
+        "color": "{color-on-light}"
       },
       "tokensByProp": [
         {
           "prop": "variant",
           "map": {
-            "default": {
-              "background-color": "{color-background-card}"
-            },
-            "transparent": {
-              "background-color": "{color-background-body}"
-            },
-            "muted": {
-              "background-color": "{color-background-muted}"
-            },
             "blue": {
-              "background-color": "{color-background-blue}"
-            },
-            "cyan": {
-              "background-color": "{color-background-cyan}"
-            },
-            "gray": {
-              "background-color": "{color-background-gray}"
-            },
-            "green": {
-              "background-color": "{color-background-green}"
-            },
-            "orange": {
-              "background-color": "{color-background-orange}"
-            },
-            "pink": {
-              "background-color": "{color-background-pink}"
-            },
-            "purple": {
-              "background-color": "{color-background-purple}"
-            },
-            "red": {
-              "background-color": "{color-background-red}"
-            },
-            "teal": {
-              "background-color": "{color-background-teal}"
-            },
-            "yellow": {
-              "background-color": "{color-background-yellow}"
-            }
-          }
-        },
-        {
-          "prop": "variant",
-          "map": {
-            "blue": {
+              "background-color": "{imported.card.root.background-color.blue}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.blue}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.blue}",
               "border-left-color": "{imported.card.root.border-left-color.blue}",
@@ -144,9 +105,14 @@
               "border-right-color": "{imported.card.root.border-right-color.blue}",
               "border-right-width": "{imported.card.root.border-right-width.blue}",
               "border-top-color": "{imported.card.root.border-top-color.blue}",
-              "border-top-width": "{imported.card.root.border-top-width.blue}"
+              "border-top-width": "{imported.card.root.border-top-width.blue}",
+              "padding-bottom": "{imported.card.root.padding-bottom.blue}",
+              "padding-left": "{imported.card.root.padding-left.blue}",
+              "padding-right": "{imported.card.root.padding-right.blue}",
+              "padding-top": "{imported.card.root.padding-top.blue}"
             },
             "cyan": {
+              "background-color": "{imported.card.root.background-color.cyan}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.cyan}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.cyan}",
               "border-left-color": "{imported.card.root.border-left-color.cyan}",
@@ -154,9 +120,14 @@
               "border-right-color": "{imported.card.root.border-right-color.cyan}",
               "border-right-width": "{imported.card.root.border-right-width.cyan}",
               "border-top-color": "{imported.card.root.border-top-color.cyan}",
-              "border-top-width": "{imported.card.root.border-top-width.cyan}"
+              "border-top-width": "{imported.card.root.border-top-width.cyan}",
+              "padding-bottom": "{imported.card.root.padding-bottom.cyan}",
+              "padding-left": "{imported.card.root.padding-left.cyan}",
+              "padding-right": "{imported.card.root.padding-right.cyan}",
+              "padding-top": "{imported.card.root.padding-top.cyan}"
             },
             "default": {
+              "background-color": "{imported.card.root.background-color.default}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.default}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.default}",
               "border-left-color": "{imported.card.root.border-left-color.default}",
@@ -164,9 +135,14 @@
               "border-right-color": "{imported.card.root.border-right-color.default}",
               "border-right-width": "{imported.card.root.border-right-width.default}",
               "border-top-color": "{imported.card.root.border-top-color.default}",
-              "border-top-width": "{imported.card.root.border-top-width.default}"
+              "border-top-width": "{imported.card.root.border-top-width.default}",
+              "padding-bottom": "{imported.card.root.padding-bottom.default}",
+              "padding-left": "{imported.card.root.padding-left.default}",
+              "padding-right": "{imported.card.root.padding-right.default}",
+              "padding-top": "{imported.card.root.padding-top.default}"
             },
             "gray": {
+              "background-color": "{imported.card.root.background-color.gray}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.gray}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.gray}",
               "border-left-color": "{imported.card.root.border-left-color.gray}",
@@ -174,9 +150,14 @@
               "border-right-color": "{imported.card.root.border-right-color.gray}",
               "border-right-width": "{imported.card.root.border-right-width.gray}",
               "border-top-color": "{imported.card.root.border-top-color.gray}",
-              "border-top-width": "{imported.card.root.border-top-width.gray}"
+              "border-top-width": "{imported.card.root.border-top-width.gray}",
+              "padding-bottom": "{imported.card.root.padding-bottom.gray}",
+              "padding-left": "{imported.card.root.padding-left.gray}",
+              "padding-right": "{imported.card.root.padding-right.gray}",
+              "padding-top": "{imported.card.root.padding-top.gray}"
             },
             "green": {
+              "background-color": "{imported.card.root.background-color.green}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.green}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.green}",
               "border-left-color": "{imported.card.root.border-left-color.green}",
@@ -184,9 +165,14 @@
               "border-right-color": "{imported.card.root.border-right-color.green}",
               "border-right-width": "{imported.card.root.border-right-width.green}",
               "border-top-color": "{imported.card.root.border-top-color.green}",
-              "border-top-width": "{imported.card.root.border-top-width.green}"
+              "border-top-width": "{imported.card.root.border-top-width.green}",
+              "padding-bottom": "{imported.card.root.padding-bottom.green}",
+              "padding-left": "{imported.card.root.padding-left.green}",
+              "padding-right": "{imported.card.root.padding-right.green}",
+              "padding-top": "{imported.card.root.padding-top.green}"
             },
             "muted": {
+              "background-color": "{imported.card.root.background-color.muted}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.muted}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.muted}",
               "border-left-color": "{imported.card.root.border-left-color.muted}",
@@ -194,9 +180,14 @@
               "border-right-color": "{imported.card.root.border-right-color.muted}",
               "border-right-width": "{imported.card.root.border-right-width.muted}",
               "border-top-color": "{imported.card.root.border-top-color.muted}",
-              "border-top-width": "{imported.card.root.border-top-width.muted}"
+              "border-top-width": "{imported.card.root.border-top-width.muted}",
+              "padding-bottom": "{imported.card.root.padding-bottom.muted}",
+              "padding-left": "{imported.card.root.padding-left.muted}",
+              "padding-right": "{imported.card.root.padding-right.muted}",
+              "padding-top": "{imported.card.root.padding-top.muted}"
             },
             "orange": {
+              "background-color": "{imported.card.root.background-color.orange}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.orange}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.orange}",
               "border-left-color": "{imported.card.root.border-left-color.orange}",
@@ -204,9 +195,14 @@
               "border-right-color": "{imported.card.root.border-right-color.orange}",
               "border-right-width": "{imported.card.root.border-right-width.orange}",
               "border-top-color": "{imported.card.root.border-top-color.orange}",
-              "border-top-width": "{imported.card.root.border-top-width.orange}"
+              "border-top-width": "{imported.card.root.border-top-width.orange}",
+              "padding-bottom": "{imported.card.root.padding-bottom.orange}",
+              "padding-left": "{imported.card.root.padding-left.orange}",
+              "padding-right": "{imported.card.root.padding-right.orange}",
+              "padding-top": "{imported.card.root.padding-top.orange}"
             },
             "pink": {
+              "background-color": "{imported.card.root.background-color.pink}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.pink}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.pink}",
               "border-left-color": "{imported.card.root.border-left-color.pink}",
@@ -214,9 +210,14 @@
               "border-right-color": "{imported.card.root.border-right-color.pink}",
               "border-right-width": "{imported.card.root.border-right-width.pink}",
               "border-top-color": "{imported.card.root.border-top-color.pink}",
-              "border-top-width": "{imported.card.root.border-top-width.pink}"
+              "border-top-width": "{imported.card.root.border-top-width.pink}",
+              "padding-bottom": "{imported.card.root.padding-bottom.pink}",
+              "padding-left": "{imported.card.root.padding-left.pink}",
+              "padding-right": "{imported.card.root.padding-right.pink}",
+              "padding-top": "{imported.card.root.padding-top.pink}"
             },
             "purple": {
+              "background-color": "{imported.card.root.background-color.purple}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.purple}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.purple}",
               "border-left-color": "{imported.card.root.border-left-color.purple}",
@@ -224,9 +225,14 @@
               "border-right-color": "{imported.card.root.border-right-color.purple}",
               "border-right-width": "{imported.card.root.border-right-width.purple}",
               "border-top-color": "{imported.card.root.border-top-color.purple}",
-              "border-top-width": "{imported.card.root.border-top-width.purple}"
+              "border-top-width": "{imported.card.root.border-top-width.purple}",
+              "padding-bottom": "{imported.card.root.padding-bottom.purple}",
+              "padding-left": "{imported.card.root.padding-left.purple}",
+              "padding-right": "{imported.card.root.padding-right.purple}",
+              "padding-top": "{imported.card.root.padding-top.purple}"
             },
             "red": {
+              "background-color": "{imported.card.root.background-color.red}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.red}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.red}",
               "border-left-color": "{imported.card.root.border-left-color.red}",
@@ -234,9 +240,14 @@
               "border-right-color": "{imported.card.root.border-right-color.red}",
               "border-right-width": "{imported.card.root.border-right-width.red}",
               "border-top-color": "{imported.card.root.border-top-color.red}",
-              "border-top-width": "{imported.card.root.border-top-width.red}"
+              "border-top-width": "{imported.card.root.border-top-width.red}",
+              "padding-bottom": "{imported.card.root.padding-bottom.red}",
+              "padding-left": "{imported.card.root.padding-left.red}",
+              "padding-right": "{imported.card.root.padding-right.red}",
+              "padding-top": "{imported.card.root.padding-top.red}"
             },
             "teal": {
+              "background-color": "{imported.card.root.background-color.teal}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.teal}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.teal}",
               "border-left-color": "{imported.card.root.border-left-color.teal}",
@@ -244,9 +255,14 @@
               "border-right-color": "{imported.card.root.border-right-color.teal}",
               "border-right-width": "{imported.card.root.border-right-width.teal}",
               "border-top-color": "{imported.card.root.border-top-color.teal}",
-              "border-top-width": "{imported.card.root.border-top-width.teal}"
+              "border-top-width": "{imported.card.root.border-top-width.teal}",
+              "padding-bottom": "{imported.card.root.padding-bottom.teal}",
+              "padding-left": "{imported.card.root.padding-left.teal}",
+              "padding-right": "{imported.card.root.padding-right.teal}",
+              "padding-top": "{imported.card.root.padding-top.teal}"
             },
             "transparent": {
+              "background-color": "{imported.card.root.background-color.transparent}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.transparent}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.transparent}",
               "border-left-color": "{imported.card.root.border-left-color.transparent}",
@@ -254,9 +270,14 @@
               "border-right-color": "{imported.card.root.border-right-color.transparent}",
               "border-right-width": "{imported.card.root.border-right-width.transparent}",
               "border-top-color": "{imported.card.root.border-top-color.transparent}",
-              "border-top-width": "{imported.card.root.border-top-width.transparent}"
+              "border-top-width": "{imported.card.root.border-top-width.transparent}",
+              "padding-bottom": "{imported.card.root.padding-bottom.transparent}",
+              "padding-left": "{imported.card.root.padding-left.transparent}",
+              "padding-right": "{imported.card.root.padding-right.transparent}",
+              "padding-top": "{imported.card.root.padding-top.transparent}"
             },
             "yellow": {
+              "background-color": "{imported.card.root.background-color.yellow}",
               "border-bottom-color": "{imported.card.root.border-bottom-color.yellow}",
               "border-bottom-width": "{imported.card.root.border-bottom-width.yellow}",
               "border-left-color": "{imported.card.root.border-left-color.yellow}",
@@ -264,16 +285,15 @@
               "border-right-color": "{imported.card.root.border-right-color.yellow}",
               "border-right-width": "{imported.card.root.border-right-width.yellow}",
               "border-top-color": "{imported.card.root.border-top-color.yellow}",
-              "border-top-width": "{imported.card.root.border-top-width.yellow}"
+              "border-top-width": "{imported.card.root.border-top-width.yellow}",
+              "padding-bottom": "{imported.card.root.padding-bottom.yellow}",
+              "padding-left": "{imported.card.root.padding-left.yellow}",
+              "padding-right": "{imported.card.root.padding-right.yellow}",
+              "padding-top": "{imported.card.root.padding-top.yellow}"
             }
           }
         }
       ],
-      "declared": {
-        "display": "block",
-        "overflow-x": "clip",
-        "overflow-y": "clip"
-      },
       "literalsByProp": [
         {
           "prop": "variant",

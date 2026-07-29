@@ -1,7 +1,7 @@
 {
   "component": "Slider",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 6,
   "interactions": 4,
@@ -16,21 +16,27 @@
     "pairs": 24,
     "perfectExact": 0,
     "perfectAA": 0,
+    "measured": 24,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 3.200005425347222,
     "meanAA": 1.97509765625,
     "maxAA": 4.990234375
   },
   "fusion": {
-    "boundConfirmed": 70,
-    "boundCells": 354,
-    "contradictions": 150,
-    "mintedLeaves": 111,
-    "mintedLeavesUnfolded": 110,
-    "baseBindings": 66,
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 123,
+    "mintedLeavesUnfolded": 121,
+    "baseBindings": 119,
     "stateBindings": 0,
     "codeOnlyChannels": 43,
     "overflowBindings": 2,
-    "folds": 36
+    "folds": 40
   },
   "worstRows": [
     {
@@ -197,12 +203,24 @@
   },
   "shippedMinted": {
     "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-    "leavesAdded": 203,
+    "leavesAdded": 192,
     "divergent": [
       {
-        "token": "imported.slider.label.row-rule-color",
+        "token": "imported.shared.color-0064e0",
+        "fresh": "#0064e0",
+        "shipped": "{color-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.slider.label.color",
         "fresh": "#4e606f",
         "shipped": "{color-text-secondary}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.slider.slider-track.background-color",
+        "fresh": "#ccd3db",
+        "shipped": "{color-track}",
         "resolvedEqual": true
       }
     ]
@@ -231,7 +249,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_3_"
+          "theirs": "--astryx-layer-_r_1b_"
         },
         {
           "part": "slider-track",
@@ -249,7 +267,7 @@
           "part": "slider-thumb",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_4_"
+          "theirs": "--astryx-layer-_r_1c_"
         },
         {
           "part": "slider-thumb",
@@ -290,8 +308,8 @@
         {
           "part": "tooltip",
           "channel": "position-anchor",
-          "ours": "none",
-          "theirs": "--astryx-layer-_r_4_"
+          "ours": "normal",
+          "theirs": "--astryx-layer-_r_1c_"
         },
         {
           "part": "tooltip",
@@ -336,7 +354,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_3_"
+          "theirs": "--astryx-layer-_r_1b_"
         },
         {
           "part": "slider-track",
@@ -354,7 +372,7 @@
           "part": "slider-thumb",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_4_"
+          "theirs": "--astryx-layer-_r_1c_"
         },
         {
           "part": "slider-thumb",
@@ -395,8 +413,8 @@
         {
           "part": "tooltip",
           "channel": "position-anchor",
-          "ours": "none",
-          "theirs": "--astryx-layer-_r_4_"
+          "ours": "normal",
+          "theirs": "--astryx-layer-_r_1c_"
         },
         {
           "part": "tooltip",
@@ -441,7 +459,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_3_"
+          "theirs": "--astryx-layer-_r_1b_"
         },
         {
           "part": "slider-track",
@@ -459,7 +477,7 @@
           "part": "slider-thumb",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_4_"
+          "theirs": "--astryx-layer-_r_1c_"
         },
         {
           "part": "slider-thumb",
@@ -506,8 +524,8 @@
         {
           "part": "tooltip",
           "channel": "position-anchor",
-          "ours": "none",
-          "theirs": "--astryx-layer-_r_4_"
+          "ours": "normal",
+          "theirs": "--astryx-layer-_r_1c_"
         },
         {
           "part": "tooltip",
@@ -552,7 +570,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_3_"
+          "theirs": "--astryx-layer-_r_1b_"
         },
         {
           "part": "slider-track",
@@ -570,7 +588,7 @@
           "part": "slider-thumb",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_4_"
+          "theirs": "--astryx-layer-_r_1c_"
         },
         {
           "part": "slider-thumb",
@@ -611,8 +629,8 @@
         {
           "part": "tooltip",
           "channel": "position-anchor",
-          "ours": "none",
-          "theirs": "--astryx-layer-_r_4_"
+          "ours": "normal",
+          "theirs": "--astryx-layer-_r_1c_"
         },
         {
           "part": "tooltip",
@@ -657,7 +675,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_8_"
+          "theirs": "--astryx-layer-_r_1g_"
         },
         {
           "part": "slider-track",
@@ -714,7 +732,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_8_"
+          "theirs": "--astryx-layer-_r_1g_"
         },
         {
           "part": "slider-track",
@@ -771,7 +789,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_8_"
+          "theirs": "--astryx-layer-_r_1g_"
         },
         {
           "part": "slider-track",
@@ -828,7 +846,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_8_"
+          "theirs": "--astryx-layer-_r_1g_"
         },
         {
           "part": "slider-track",
@@ -885,7 +903,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_c_"
+          "theirs": "--astryx-layer-_r_1k_"
         },
         {
           "part": "slider-track",
@@ -942,7 +960,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_c_"
+          "theirs": "--astryx-layer-_r_1k_"
         },
         {
           "part": "slider-track",
@@ -999,7 +1017,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_c_"
+          "theirs": "--astryx-layer-_r_1k_"
         },
         {
           "part": "slider-track",
@@ -1056,7 +1074,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_c_"
+          "theirs": "--astryx-layer-_r_1k_"
         },
         {
           "part": "slider-track",
@@ -1113,7 +1131,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_g_"
+          "theirs": "--astryx-layer-_r_1o_"
         },
         {
           "part": "part-1-0",
@@ -1143,7 +1161,7 @@
           "part": "slider-thumb",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_h_"
+          "theirs": "--astryx-layer-_r_1p_"
         },
         {
           "part": "slider-thumb",
@@ -1184,8 +1202,8 @@
         {
           "part": "tooltip",
           "channel": "position-anchor",
-          "ours": "none",
-          "theirs": "--astryx-layer-_r_h_"
+          "ours": "normal",
+          "theirs": "--astryx-layer-_r_1p_"
         },
         {
           "part": "tooltip",
@@ -1230,7 +1248,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_g_"
+          "theirs": "--astryx-layer-_r_1o_"
         },
         {
           "part": "part-1-0",
@@ -1260,7 +1278,7 @@
           "part": "slider-thumb",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_h_"
+          "theirs": "--astryx-layer-_r_1p_"
         },
         {
           "part": "slider-thumb",
@@ -1301,8 +1319,8 @@
         {
           "part": "tooltip",
           "channel": "position-anchor",
-          "ours": "none",
-          "theirs": "--astryx-layer-_r_h_"
+          "ours": "normal",
+          "theirs": "--astryx-layer-_r_1p_"
         },
         {
           "part": "tooltip",
@@ -1347,7 +1365,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_g_"
+          "theirs": "--astryx-layer-_r_1o_"
         },
         {
           "part": "part-1-0",
@@ -1377,7 +1395,7 @@
           "part": "slider-thumb",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_h_"
+          "theirs": "--astryx-layer-_r_1p_"
         },
         {
           "part": "slider-thumb",
@@ -1424,8 +1442,8 @@
         {
           "part": "tooltip",
           "channel": "position-anchor",
-          "ours": "none",
-          "theirs": "--astryx-layer-_r_h_"
+          "ours": "normal",
+          "theirs": "--astryx-layer-_r_1p_"
         },
         {
           "part": "tooltip",
@@ -1470,7 +1488,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_g_"
+          "theirs": "--astryx-layer-_r_1o_"
         },
         {
           "part": "part-1-0",
@@ -1500,7 +1518,7 @@
           "part": "slider-thumb",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_h_"
+          "theirs": "--astryx-layer-_r_1p_"
         },
         {
           "part": "slider-thumb",
@@ -1547,8 +1565,8 @@
         {
           "part": "tooltip",
           "channel": "position-anchor",
-          "ours": "none",
-          "theirs": "--astryx-layer-_r_h_"
+          "ours": "normal",
+          "theirs": "--astryx-layer-_r_1p_"
         },
         {
           "part": "tooltip",
@@ -1593,7 +1611,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_l_"
+          "theirs": "--astryx-layer-_r_1t_"
         },
         {
           "part": "part-1-0",
@@ -1662,7 +1680,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_l_"
+          "theirs": "--astryx-layer-_r_1t_"
         },
         {
           "part": "part-1-0",
@@ -1731,7 +1749,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_l_"
+          "theirs": "--astryx-layer-_r_1t_"
         },
         {
           "part": "part-1-0",
@@ -1800,7 +1818,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_l_"
+          "theirs": "--astryx-layer-_r_1t_"
         },
         {
           "part": "part-1-0",
@@ -1869,7 +1887,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_p_"
+          "theirs": "--astryx-layer-_r_21_"
         },
         {
           "part": "part-1-0",
@@ -1938,7 +1956,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_p_"
+          "theirs": "--astryx-layer-_r_21_"
         },
         {
           "part": "part-1-0",
@@ -2007,7 +2025,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_p_"
+          "theirs": "--astryx-layer-_r_21_"
         },
         {
           "part": "part-1-0",
@@ -2076,7 +2094,7 @@
           "part": "part-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_p_"
+          "theirs": "--astryx-layer-_r_21_"
         },
         {
           "part": "part-1-0",

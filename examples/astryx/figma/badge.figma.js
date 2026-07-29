@@ -27,18 +27,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-neutral",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "color-neutral",
           "children": [
             {
               "type": "text",
@@ -46,9 +46,8 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
-              "textFill": "color-text-gray",
+              "textFill": "imported/badge/root/color/neutral",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -66,18 +65,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-accent",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "color-accent",
           "children": [
             {
               "type": "text",
@@ -87,7 +86,6 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "textFill": "color-on-accent",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -105,18 +103,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-success",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "color-success",
           "children": [
             {
               "type": "text",
@@ -126,7 +124,6 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "textFill": "color-on-accent",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -144,18 +141,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-warning",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "color-warning",
           "children": [
             {
               "type": "text",
@@ -165,7 +162,6 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "textFill": "color-on-warning",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -183,18 +179,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-error",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "color-error",
           "children": [
             {
               "type": "text",
@@ -204,7 +200,6 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "textFill": "color-on-accent",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -222,18 +217,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-background-blue",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "imported/badge/root/background-color/blue",
           "children": [
             {
               "type": "text",
@@ -241,9 +236,8 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
-              "textFill": "color-text-blue",
+              "textFill": "imported/badge/root/color/blue",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -261,18 +255,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-background-cyan",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "imported/badge/root/background-color/cyan",
           "children": [
             {
               "type": "text",
@@ -280,9 +274,8 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
-              "textFill": "color-text-cyan",
+              "textFill": "imported/badge/root/color/cyan",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -300,18 +293,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-background-green",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "imported/badge/root/background-color/green",
           "children": [
             {
               "type": "text",
@@ -319,9 +312,8 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
-              "textFill": "color-text-green",
+              "textFill": "imported/badge/root/color/green",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -339,18 +331,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-background-orange",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "imported/badge/root/background-color/orange",
           "children": [
             {
               "type": "text",
@@ -358,9 +350,8 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
-              "textFill": "color-text-orange",
+              "textFill": "imported/badge/root/color/orange",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -378,18 +369,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-background-pink",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "imported/badge/root/background-color/pink",
           "children": [
             {
               "type": "text",
@@ -397,9 +388,8 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
-              "textFill": "color-text-pink",
+              "textFill": "imported/badge/root/color/pink",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -417,18 +407,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-background-purple",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "imported/badge/root/background-color/purple",
           "children": [
             {
               "type": "text",
@@ -436,9 +426,8 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
-              "textFill": "color-text-purple",
+              "textFill": "imported/badge/root/color/purple",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -456,18 +445,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-background-red",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "imported/badge/root/background-color/red",
           "children": [
             {
               "type": "text",
@@ -475,9 +464,8 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
-              "textFill": "color-text-red",
+              "textFill": "imported/badge/root/color/red",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -495,18 +483,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-background-teal",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "imported/badge/root/background-color/teal",
           "children": [
             {
               "type": "text",
@@ -514,9 +502,8 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
-              "textFill": "color-text-teal",
+              "textFill": "imported/badge/root/color/teal",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -534,18 +521,18 @@ const COMPONENTS = [
             "primary": "CENTER",
             "counter": "CENTER"
           },
-          "fill": "color-background-yellow",
           "bindings": {
-            "paddingLeft": "spacing-2",
-            "paddingRight": "spacing-2",
+            "bottomLeftRadius": "imported/shared/size-9999",
+            "bottomRightRadius": "imported/shared/size-9999",
+            "topLeftRadius": "imported/shared/size-9999",
+            "topRightRadius": "imported/shared/size-9999",
+            "itemSpacing": "imported/badge/root/column-gap",
+            "paddingLeft": "imported/badge/root/padding-left",
+            "paddingRight": "imported/badge/root/padding-right",
             "paddingTop": "spacing-0",
-            "paddingBottom": "spacing-0",
-            "topLeftRadius": "radius-full",
-            "topRightRadius": "radius-full",
-            "bottomLeftRadius": "radius-full",
-            "bottomRightRadius": "radius-full",
-            "itemSpacing": "spacing-1"
+            "paddingBottom": "spacing-0"
           },
+          "fill": "imported/badge/root/background-color/yellow",
           "children": [
             {
               "type": "text",
@@ -553,9 +540,8 @@ const COMPONENTS = [
               "characters": "Badge",
               "fontSize": 12,
               "fontStyle": "Medium",
-              "textFill": "color-text-yellow",
+              "textFill": "imported/badge/root/color/yellow",
               "lineHeight": 20.0004,
-              "fontFamily": "-apple-system",
               "contentProp": "Label"
             }
           ]
@@ -878,17 +864,6 @@ async function buildNode(spec, registry) {
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
-    if (spec.fontFamily) {
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
-    }
-    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
-    if (spec.textCase) node.textCase = spec.textCase;
-    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
-    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

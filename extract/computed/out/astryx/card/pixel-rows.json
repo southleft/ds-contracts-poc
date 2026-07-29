@@ -1,22 +1,22 @@
 [
   {
     "key": "default__default",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
     "key": "default__hover",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
     "key": "default__focus-visible",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
     "key": "default__active",
-    "pctExact": 0,
+    "pctExact": 0.016276041666666668,
     "pctAA": 0
   },
   {
@@ -121,22 +121,22 @@
   },
   {
     "key": "green__default",
-    "pctExact": 0,
+    "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
     "key": "green__hover",
-    "pctExact": 0,
+    "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
     "key": "green__focus-visible",
-    "pctExact": 0,
+    "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
     "key": "green__active",
-    "pctExact": 0,
+    "pctExact": 0.006510416666666667,
     "pctAA": 0
   },
   {
@@ -201,42 +201,42 @@
   },
   {
     "key": "red__default",
-    "pctExact": 0,
+    "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
     "key": "red__hover",
-    "pctExact": 0,
+    "pctExact": 0.013020833333333334,
     "pctAA": 0
   },
   {
     "key": "red__focus-visible",
-    "pctExact": 0.013020833333333334,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "red__active",
-    "pctExact": 0.013020833333333334,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "teal__default",
-    "pctExact": 0.01953125,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "teal__hover",
-    "pctExact": 0.01953125,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "teal__focus-visible",
-    "pctExact": 0.01953125,
+    "pctExact": 0,
     "pctAA": 0
   },
   {
     "key": "teal__active",
-    "pctExact": 0.01953125,
+    "pctExact": 0,
     "pctAA": 0
   },
   {

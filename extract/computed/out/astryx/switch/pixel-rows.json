@@ -6,7 +6,7 @@
   },
   {
     "key": "start.no-isDisabled__hover",
-    "pctExact": 0,
+    "pctExact": 0.026041666666666668,
     "pctAA": 0
   },
   {
@@ -16,7 +16,7 @@
   },
   {
     "key": "start.no-isDisabled__active",
-    "pctExact": 0,
+    "pctExact": 0.026041666666666668,
     "pctAA": 0
   },
   {
@@ -46,7 +46,7 @@
   },
   {
     "key": "end.no-isDisabled__hover",
-    "pctExact": 0,
+    "pctExact": 0.026041666666666668,
     "pctAA": 0
   },
   {
@@ -56,7 +56,7 @@
   },
   {
     "key": "end.no-isDisabled__active",
-    "pctExact": 0,
+    "pctExact": 0.026041666666666668,
     "pctAA": 0
   },
   {

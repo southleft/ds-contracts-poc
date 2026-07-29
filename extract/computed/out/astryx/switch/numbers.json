@@ -1,29 +1,29 @@
 {
   "component": "Switch",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "captures": 16,
   "combos": 4,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 658,
+  "channelsEnumerated": 661,
   "elementsPerCapture": 12,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 0,
-    "part-0": 6,
-    "part-0-0": 14,
+    "root": 1,
+    "part-0": 7,
+    "part-0-0": 15,
     "label-2": 20,
-    "part-0-0-0": 16,
-    "switch": 14,
-    "switch-thumb": 12,
-    "part-0-1": 14,
-    "part-0-1-0": 16,
-    "switch-2": 14,
-    "switch-thumb-2": 12,
+    "part-0-0-0": 17,
+    "switch": 15,
+    "switch-thumb": 14,
+    "part-0-1": 15,
+    "part-0-1-0": 17,
+    "switch-2": 15,
+    "switch-thumb-2": 14,
     "label": 20
   },
   "folds": {
-    "count": 18,
+    "count": 20,
     "receipts": [
       {
         "part": "label-2",
@@ -69,6 +69,12 @@
       },
       {
         "part": "label-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label-2",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -123,6 +129,12 @@
       },
       {
         "part": "label",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -134,50 +146,52 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 24,
-    "mintedLeavesFolded": 24
+    "mintedLeavesUnfolded": 32,
+    "mintedLeavesFolded": 33
   },
   "bound": {
-    "cellsChecked": 10,
+    "cellsChecked": 0,
     "confirmed": 0,
-    "contradictions": 10,
-    "untriaged": 10
+    "contradictions": 0,
+    "untriaged": 0
   },
   "minted": {
-    "leaves": 24,
-    "baseBindings": 64,
+    "leaves": 33,
+    "baseBindings": 74,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 62,
-      "perAxis": 2,
+      "uniform": 70,
+      "perAxis": 4,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 28,
+    "base": 32,
     "state": 0
   },
   "codeOnly": {
-    "base": 28,
-    "state": 32,
+    "base": 26,
+    "state": 30,
     "overflowBindings": 0
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
     "partsCarried": 12,
     "svgAssets": 0,
-    "refusals": 1
+    "refusals": 0
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 83968,
-    "cellsMatched": 83904,
-    "pct": 99.92378048780488,
+    "cellsCompared": 84352,
+    "cellsMatched": 84288,
+    "pct": 99.92412746585735,
     "namedExclusions": [
       "app-region",
-      "text-decoration"
+      "text-decoration",
+      "translate-x",
+      "translate-y"
     ],
     "topMismatchedChannels": [
       [
@@ -200,10 +214,16 @@
   },
   "pixel": {
     "pairs": 16,
+    "measured": 16,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 16
+      "mean": 0.006510416666666667,
+      "max": 0.026041666666666668,
+      "perfect": 12
     },
     "aa": {
       "mean": 0,
@@ -212,22 +232,32 @@
     },
     "worst": [
       {
+        "key": "start.no-isDisabled__hover",
+        "pctExact": 0.026041666666666668,
+        "pctAA": 0
+      },
+      {
+        "key": "start.no-isDisabled__active",
+        "pctExact": 0.026041666666666668,
+        "pctAA": 0
+      },
+      {
+        "key": "end.no-isDisabled__hover",
+        "pctExact": 0.026041666666666668,
+        "pctAA": 0
+      },
+      {
+        "key": "end.no-isDisabled__active",
+        "pctExact": 0.026041666666666668,
+        "pctAA": 0
+      },
+      {
         "key": "start.no-isDisabled__default",
         "pctExact": 0,
         "pctAA": 0
       },
       {
-        "key": "start.no-isDisabled__hover",
-        "pctExact": 0,
-        "pctAA": 0
-      },
-      {
         "key": "start.no-isDisabled__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
-      },
-      {
-        "key": "start.no-isDisabled__active",
         "pctExact": 0,
         "pctAA": 0
       },
@@ -240,21 +270,11 @@
         "key": "start.isDisabled__hover",
         "pctExact": 0,
         "pctAA": 0
-      },
-      {
-        "key": "start.isDisabled__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
-      },
-      {
-        "key": "start.isDisabled__active",
-        "pctExact": 0,
-        "pctAA": 0
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 76.30208333333333,
+    "computedPctEqual": 77.34375,
     "rowsFullyEqual": 0,
     "rows": 16,
     "pixelPerfectExact": 0,

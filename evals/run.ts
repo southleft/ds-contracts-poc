@@ -6377,15 +6377,39 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const proposals = JSON.parse(readFileSync(T(OUTPUTS[0]), 'utf8'));
       const disp = (d: string) => proposals.rows.filter((r: any) => r.disposition === d);
       const refsOf = (d: string) => disp(d).reduce((a: number, r: any) => a + r.refs, 0);
-      // POST-REVIEW STATE: the queue is RESOLVED. 63 refs applied (9 auto-clean
-      // + the reviewed round's 47, of which 7 are DECIDED LITERAL receipts that
-      // ride inside otherwise-applied rows), 0 ambiguous.
-      if (refsOf('applied') !== 63 || refsOf('ambiguous') !== 0) {
-        throw new Error(`join moved: expected 63 applied / 0 ambiguous refs, got ${refsOf('applied')} / ${refsOf('ambiguous')}`);
+      // POST-REVIEW STATE: the queue is RESOLVED — 70 refs applied, 0 ambiguous.
+      //
+      // Was 63/0 against the FROZEN capture. The 2026-07-29 recapture (task
+      // #43, the first after the capture stopped reading its own promote
+      // output) reads more of the library — the minted tree goes 237 -> 408
+      // leaves, of which the COLOUR leaves (the only anchorable kind) go
+      // 113 -> 134 — and the re-anchoring review was re-run against it. Both
+      // numbers moved the right way: aliased colour leaves 54 -> 68, i.e.
+      // 47.8% -> 50.7% of the anchorable denominator, with the review queue
+      // still empty at the end.
+      if (refsOf('applied') !== 70 || refsOf('ambiguous') !== 0) {
+        throw new Error(`join moved: expected 70 applied / 0 ambiguous refs, got ${refsOf('applied')} / ${refsOf('ambiguous')}`);
       }
+      // THE KEPT-LITERAL RECEIPTS TURNED OVER COMPLETELY, and both halves of
+      // that are the point.
+      //
+      // GONE (2 rows / 2 leaves): each explained why a value-named SHARED leaf
+      // stayed anonymous, and both existed only to back `row-rule-color` refs
+      // on the slider tooltip. With that currentcolor mirror folded away (task
+      // #35) the leaves are not minted at all, so the receipts explain nothing.
+      // One had NAMED its own unblocking condition — "name the tooltip surface
+      // first ... then this leaf becomes decidable" — and this round names that
+      // surface (color-background-inverted), so the white tooltip text it
+      // declined is now DECIDED as color-on-dark.
+      //
+      // NEW (1 row / 2 leaves): #00000000 on button variant=ghost and card
+      // variant=transparent. No candidate exists because the anchor names no
+      // token for the ABSENCE of paint, and re-anchoring either would make a
+      // deliberately transparent surface start painting on a re-theme. Kept
+      // literal on purpose, so the pair is DECIDED rather than pending.
       const lit = proposals.summary.literalReceipts;
-      if (!lit || lit.rows !== 2 || lit.leaves !== 2 || lit.refs !== 7) {
-        throw new Error(`the decided-literal receipts moved: expected 2 rows / 2 leaves / 7 refs, got ${JSON.stringify(lit)}`);
+      if (!lit || lit.rows !== 1 || lit.leaves !== 2 || lit.refs !== 2) {
+        throw new Error(`the decided-literal receipts moved: expected 1 row / 2 leaves / 2 refs (the transparent pair), got ${JSON.stringify(lit)}`);
       }
       const cardBorder = proposals.rows.find((r: any) => r.exclusion === 'card-border-degraded-capture');
       if (!cardBorder || cardBorder.refs !== 48) {
@@ -6445,7 +6469,14 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const mintedTree = JSON.parse(readFileSync(T(MINTED), 'utf8'));
       const at = (p: string) => p.split('.').reduce<any>((n, s) => (n ? n[s] : undefined), mintedTree);
       const norm = (v: string) => String(v).trim().toLowerCase();
-      if (ledger.length !== 19) throw new Error(`expected 19 ledger rows (9 auto-clean + 10 reviewed), got ${ledger.length}`);
+      // 35 rows after the 2026-07-29 post-recapture review (was 19 against the
+      // frozen capture). The turnover is larger than the net: 12 rows were
+      // RETIRED and 4 PRUNED because every leaf they anchored was a
+      // `row-rule-color` — the currentcolor mirror task #35 folds away — and 28
+      // rows were authored against the fresh mint, 17 of whose leaves carry the
+      // SAME target the previous round reviewed and are continuations rather
+      // than new judgements.
+      if (ledger.length !== 31) throw new Error(`expected 31 ledger rows (the row-rule-color prune left 7; the post-recapture review authored 28; rows sharing an id AND a target were merged, so no leaf is anchored twice), got ${ledger.length}`);
       let aliasedLeaves = 0;
       for (const d of ledger) {
         if (d.ack !== 'explicit CLI --apply') throw new Error(`ledger row ${d.ids} carries the wrong ack`);
@@ -6463,21 +6494,53 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           aliasedLeaves++;
         }
       }
-      if (aliasedLeaves !== 54) throw new Error(`expected 54 re-anchored leaves, got ${aliasedLeaves}`);
+      // 68 leaves carry an alias after the post-recapture review (was 54), and
+      // every one is anchored exactly ONCE — rows sharing an id and a target
+      // are merged, so the ledger cannot say the same leaf twice.
+      //
+      // THE NUMBER THAT SAYS WHETHER THE ROUND HELPED is the anchorable
+      // denominator, not the raw total: of the minted tree's COLOUR leaves —
+      // the only kind a colour token can ever name — aliased went 54/113 =
+      // 47.8% to 68/134 = 50.7%, while the capture itself began reading 21 more
+      // colour leaves and 150 more dimension leaves than the frozen one did.
+      // Measured against the whole tree the share appears to FALL (22.8% ->
+      // 16.7%) purely because those 150 dimension leaves join the denominator
+      // and no colour token can address them.
+      if (aliasedLeaves !== 68) throw new Error(`expected 68 re-anchored leaves, got ${aliasedLeaves}`);
 
       // PER-LEAF GRAIN. One value group splits into several decisions under one
-      // id (#ffffff answers to color-on-accent on badge+button-primary and to
-      // color-on-error on button-destructive). The applier must land EVERY row
-      // that names the id — the pre-round `find` would have landed one arm and
-      // reported success with the rest still literal.
+      // id, and the applier must land EVERY row that names the id — the
+      // pre-round `find` would have landed one arm and reported success with
+      // the rest still literal.
+      //
+      // #FFFFFF now answers FOUR ways, up from three, and the fourth arm is the
+      // interesting one. It is content-on-a-surface for button primary
+      // (color-on-accent) and destructive (color-on-error); it is a SURFACE on
+      // card's default background (color-background-card, since the color-on-*
+      // family is excluded by channel); and it is the slider tooltip's white
+      // text (color-on-dark). That last arm was DECLINED as undecidable by the
+      // previous round, whose receipt named its own unblocking condition —
+      // "name the tooltip surface first … then this leaf becomes decidable" —
+      // and the post-recapture review names that surface
+      // (color-background-inverted), so the text became decidable.
       const ffffff = ledger.filter((d: any) => d.ids.includes('RA-ffffff'));
-      if (ffffff.length !== 3) throw new Error(`RA-ffffff should split into 3 per-leaf decisions, got ${ffffff.length}`);
-      if (new Set(ffffff.map((d: any) => d.to)).size !== 2) throw new Error('the RA-ffffff split does not reach 2 distinct targets — the per-leaf grain is not exercised');
-      if (ffffff.reduce((a: number, d: any) => a + d.leaves.length, 0) !== 19) throw new Error('RA-ffffff does not cover its 19 re-anchored leaves');
+      if (ffffff.length !== 4) throw new Error(`RA-ffffff should split into 4 per-leaf decisions, got ${ffffff.length}`);
+      if (new Set(ffffff.map((d: any) => d.to)).size !== 4) throw new Error('the RA-ffffff split does not reach 4 distinct targets — the per-leaf grain is not exercised');
+      // 13 leaves, down from 19: six of the group's leaves were `row-rule-color`
+      // mirrors that the currentcolor fold (task #35) stopped minting, so there
+      // is nothing left to anchor there. The remaining 13 are the real ones —
+      // button content on two surfaces, card's default background, and the two
+      // slider tooltip leaves the previous round had to decline.
+      if (ffffff.reduce((a: number, d: any) => a + d.leaves.length, 0) !== 13) throw new Error('RA-ffffff does not cover its 13 re-anchored leaves');
 
       // THE OTHER HALF OF THE REVIEW: kept-literal receipts.
       const literals = JSON.parse(readFileSync(T(LEDGER), 'utf8')).literals;
-      if (!Array.isArray(literals) || literals.length !== 2) throw new Error(`expected 2 decided-literal receipts, got ${literals?.length}`);
+      // ONE receipt now, covering the transparent pair. The two it replaces
+      // both explained why a value-named SHARED leaf stayed anonymous, and both
+      // leaves existed only to back `row-rule-color` refs the currentcolor fold
+      // stopped minting — a receipt for a leaf that no longer exists explains
+      // nothing.
+      if (!Array.isArray(literals) || literals.length !== 1) throw new Error(`expected 1 decided-literal receipt (the transparent pair), got ${literals?.length}`);
       for (const d of literals) {
         if (d.ack !== 'decided-literal') throw new Error(`literal receipt ${d.ids} carries the wrong ack`);
         if (!/ORCHESTRATOR-REVIEWED UNDER OWNER DELEGATION, TJ 2026-07-26/.test(d.cause)) {
@@ -6492,13 +6555,21 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // receipt that no longer describes the leaf it receipts. (A refusal that
       // only checks the ALIASES would let the "decided" half rot silently.)
       const mintedSrc = readFileSync(T(MINTED), 'utf8');
-      const drifted0a = mintedSrc.replace('"color-0a1317": {\n        "$value": "#0a1317"', '"color-0a1317": {\n        "$value": "#123456"');
-      if (drifted0a === mintedSrc) throw new Error('the decided-literal leaf imported.shared.color-0a1317 is not where the falsification expects it');
+      // Retargeted onto the leaf that IS decided-literal today: button
+      // variant=ghost's transparent background. The old target
+      // (imported.shared.color-0a1317) is no longer minted at all.
+      // Retargeted onto a leaf that IS decided-literal today: the transparent
+      // pair (button variant=ghost / card variant=transparent). The old target,
+      // imported.shared.color-0a1317, is no longer minted at all. Matched on the
+      // VALUE rather than on surrounding indentation, so re-serialising the tree
+      // cannot silently disarm the falsification.
+      const drifted0a = mintedSrc.replace('"$value": "#00000000"', '"$value": "#123456"');
+      if (drifted0a === mintedSrc) throw new Error('no decided-literal #00000000 leaf found — the falsification has nothing to drift');
       writeFileSync(T(MINTED), drifted0a);
       const staleReceipt = run(TSX, [SCRIPT, '--propose']);
       writeFileSync(T(MINTED), mintedSrc);
       if (staleReceipt.status === 0) throw new Error('a DRIFTED decided-literal leaf was accepted under its old receipt');
-      if (!staleReceipt.out.includes('STALE LITERAL RECEIPT') || !staleReceipt.out.includes('imported.shared.color-0a1317')) {
+      if (!staleReceipt.out.includes('STALE LITERAL RECEIPT') || !staleReceipt.out.includes('imported.button.root.background-color.ghost')) {
         throw new Error(`the stale-receipt refusal is not named:\n${staleReceipt.out}`);
       }
 
@@ -7290,11 +7361,37 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (withShipped.length > 0) {
         throw new Error(`${withShipped.length} ref(s) of the gated astryx Slider contract still resolve to NOTHING against base + fresh mint + SHIPPED minted tree — they would render as empty custom properties:\n  - ${withShipped.slice(0, 5).join('\n  - ')}`);
       }
-      // FALSIFIABLE (the defect itself): withhold the shipped tree and the
-      // same contract, the same referee, must report the refs again.
-      const withoutShipped = unresolved([base, fresh]);
-      if (withoutShipped.length === 0) {
-        throw new Error('withholding the shipped minted tree produced ZERO unresolved refs — this pin is decorative (the fixture no longer carries a reviewed-layer ref the fresh mint lacks)');
+      // FALSIFIABLE (the defect itself): the referee must go BLIND without the
+      // shipped tree.
+      //
+      // This used to withhold the shipped tree from the real astryx Slider and
+      // require the refs to come back. That fixture is GONE, and its going is a
+      // good thing rather than a loss: it only existed because astryx could not
+      // be re-promoted, so its shipped tree and its fresh mint had drifted
+      // apart. Since the recapture (task #43) they agree — and a sweep of
+      // polaris, carbon and mui finds no component that exercises the
+      // divergence either, because every shipped tree in the corpus is now in
+      // sync with its own mint.
+      //
+      // So the falsification is now SYNTHETIC, which also makes it stronger: it
+      // no longer depends on some library happening to be stale. Plant a ref
+      // that lives ONLY in the shipped layer and require the referee to resolve
+      // it with that layer and refuse without it.
+      const plantedRef = 'imported.__shipped_only_probe.color';
+      const plantedContract = structuredClone(gated) as { anatomy: Record<string, { tokens?: Record<string, string> }> };
+      plantedContract.anatomy.root.tokens = { ...(plantedContract.anatomy.root.tokens ?? {}), color: `{${plantedRef}}` };
+      const plantedShipped = { ...shipped, imported: { ...(shipped.imported as object), __shipped_only_probe: { color: { $value: '#abcdef', $type: 'color' } } } };
+      const unresolvedFor = (contract: unknown, trees: Array<Record<string, unknown>>): string[] => {
+        const errors: string[] = [];
+        coreGenerateCss(contract as never, tokenInventoryFromJson(trees), errors);
+        return [...new Set(errors.filter((e) => e.includes('does not exist in tokens/')))];
+      };
+      const plantedMerged = mergeShippedMinted(fresh, plantedShipped as Record<string, unknown>);
+      if (unresolvedFor(plantedContract, [base, plantedMerged.tree]).some((e) => e.includes(plantedRef))) {
+        throw new Error(`a ref present ONLY in the shipped minted tree did not resolve through gateInventory's merge — the shipped layer is not reaching the referee`);
+      }
+      if (!unresolvedFor(plantedContract, [base, fresh]).some((e) => e.includes(plantedRef))) {
+        throw new Error('withholding the shipped minted tree did NOT make the shipped-only ref unresolvable — this pin is decorative, the referee is not actually consulting that layer');
       }
 
       // 3. PRECEDENCE, both halves. Fresh wins a collision (the run's own
@@ -7312,7 +7409,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (structuredClone(freshProbe).imported.probe.c.$value !== '#111111' || 'only' in (freshProbe.imported.probe as object)) {
         throw new Error('mergeShippedMinted MUTATED the caller‘s fresh tree — the harness writes that tree into the extension block');
       }
-      console.log(`gate-inventory-shipped-minted: ${configs.length} capture configs name their shipped minted tree (absent path refused by name at load; a ZERO-LEAF tree refused as the task-#28 ORDERING GUARD, bootstrap allowance explicit + receipted + unable to rot); the gate inventory = base + fresh mint + shipped tree resolves all ${withoutShipped.length} astryx Slider refs the FRESH MINT ALONE cannot (the 55.299 defect, falsified by withholding the tree); precedence fresh-first/shipped-fallback with value divergences named`);
+      console.log(`gate-inventory-shipped-minted: ${configs.length} capture configs name their shipped minted tree (absent path refused by name at load; a ZERO-LEAF tree refused as the task-#28 ORDERING GUARD, bootstrap allowance explicit + receipted + unable to rot); the gate inventory = base + fresh mint + shipped tree resolves every ref of the gated astryx Slider contract; the falsification is now SYNTHETIC — a ref planted in the shipped layer alone resolves through the merge and is UNRESOLVABLE without it — because the old fixture (a real shipped/fresh divergence) is gone: astryx's trees agree since the task-#43 recapture, and a sweep of polaris, carbon and mui finds no component that diverges either, so the whole corpus is now in sync and the pin no longer depends on a library happening to be stale; precedence fresh-first/shipped-fallback with value divergences named`);
     },
   },
   {

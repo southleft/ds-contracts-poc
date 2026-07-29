@@ -29,22 +29,25 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-card",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/default",
             "strokeLeftWeight": "imported/card/root/border-left-width/default",
             "strokeRightWeight": "imported/card/root/border-right-width/default",
-            "strokeTopWeight": "imported/card/root/border-top-width/default"
+            "strokeTopWeight": "imported/card/root/border-top-width/default",
+            "paddingBottom": "imported/card/root/padding-bottom/default",
+            "paddingLeft": "imported/card/root/padding-left/default",
+            "paddingRight": "imported/card/root/padding-right/default",
+            "paddingTop": "imported/card/root/padding-top/default"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/default",
           "stroke": "imported/card/root/border-top-color/default",
           "lits": {
             "paddingTop": 15,
@@ -52,7 +55,6 @@ const COMPONENTS = [
             "paddingLeft": 15,
             "paddingRight": 15
           },
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -62,8 +64,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -81,24 +83,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-body",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/transparent",
             "strokeLeftWeight": "imported/card/root/border-left-width/transparent",
             "strokeRightWeight": "imported/card/root/border-right-width/transparent",
-            "strokeTopWeight": "imported/card/root/border-top-width/transparent"
+            "strokeTopWeight": "imported/card/root/border-top-width/transparent",
+            "paddingBottom": "imported/card/root/padding-bottom/transparent",
+            "paddingLeft": "imported/card/root/padding-left/transparent",
+            "paddingRight": "imported/card/root/padding-right/transparent",
+            "paddingTop": "imported/card/root/padding-top/transparent"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/transparent",
           "stroke": "imported/card/root/border-top-color/transparent",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -108,8 +112,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -127,24 +131,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-muted",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/muted",
             "strokeLeftWeight": "imported/card/root/border-left-width/muted",
             "strokeRightWeight": "imported/card/root/border-right-width/muted",
-            "strokeTopWeight": "imported/card/root/border-top-width/muted"
+            "strokeTopWeight": "imported/card/root/border-top-width/muted",
+            "paddingBottom": "imported/card/root/padding-bottom/muted",
+            "paddingLeft": "imported/card/root/padding-left/muted",
+            "paddingRight": "imported/card/root/padding-right/muted",
+            "paddingTop": "imported/card/root/padding-top/muted"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/muted",
           "stroke": "imported/card/root/border-top-color/muted",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -154,8 +160,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -173,24 +179,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-blue",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/blue",
             "strokeLeftWeight": "imported/card/root/border-left-width/blue",
             "strokeRightWeight": "imported/card/root/border-right-width/blue",
-            "strokeTopWeight": "imported/card/root/border-top-width/blue"
+            "strokeTopWeight": "imported/card/root/border-top-width/blue",
+            "paddingBottom": "imported/card/root/padding-bottom/blue",
+            "paddingLeft": "imported/card/root/padding-left/blue",
+            "paddingRight": "imported/card/root/padding-right/blue",
+            "paddingTop": "imported/card/root/padding-top/blue"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/blue",
           "stroke": "imported/card/root/border-top-color/blue",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -200,8 +208,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -219,24 +227,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-cyan",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/cyan",
             "strokeLeftWeight": "imported/card/root/border-left-width/cyan",
             "strokeRightWeight": "imported/card/root/border-right-width/cyan",
-            "strokeTopWeight": "imported/card/root/border-top-width/cyan"
+            "strokeTopWeight": "imported/card/root/border-top-width/cyan",
+            "paddingBottom": "imported/card/root/padding-bottom/cyan",
+            "paddingLeft": "imported/card/root/padding-left/cyan",
+            "paddingRight": "imported/card/root/padding-right/cyan",
+            "paddingTop": "imported/card/root/padding-top/cyan"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/cyan",
           "stroke": "imported/card/root/border-top-color/cyan",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -246,8 +256,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -265,24 +275,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-gray",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/gray",
             "strokeLeftWeight": "imported/card/root/border-left-width/gray",
             "strokeRightWeight": "imported/card/root/border-right-width/gray",
-            "strokeTopWeight": "imported/card/root/border-top-width/gray"
+            "strokeTopWeight": "imported/card/root/border-top-width/gray",
+            "paddingBottom": "imported/card/root/padding-bottom/gray",
+            "paddingLeft": "imported/card/root/padding-left/gray",
+            "paddingRight": "imported/card/root/padding-right/gray",
+            "paddingTop": "imported/card/root/padding-top/gray"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/gray",
           "stroke": "imported/card/root/border-top-color/gray",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -292,8 +304,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -311,24 +323,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-green",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/green",
             "strokeLeftWeight": "imported/card/root/border-left-width/green",
             "strokeRightWeight": "imported/card/root/border-right-width/green",
-            "strokeTopWeight": "imported/card/root/border-top-width/green"
+            "strokeTopWeight": "imported/card/root/border-top-width/green",
+            "paddingBottom": "imported/card/root/padding-bottom/green",
+            "paddingLeft": "imported/card/root/padding-left/green",
+            "paddingRight": "imported/card/root/padding-right/green",
+            "paddingTop": "imported/card/root/padding-top/green"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/green",
           "stroke": "imported/card/root/border-top-color/green",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -338,8 +352,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -357,24 +371,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-orange",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/orange",
             "strokeLeftWeight": "imported/card/root/border-left-width/orange",
             "strokeRightWeight": "imported/card/root/border-right-width/orange",
-            "strokeTopWeight": "imported/card/root/border-top-width/orange"
+            "strokeTopWeight": "imported/card/root/border-top-width/orange",
+            "paddingBottom": "imported/card/root/padding-bottom/orange",
+            "paddingLeft": "imported/card/root/padding-left/orange",
+            "paddingRight": "imported/card/root/padding-right/orange",
+            "paddingTop": "imported/card/root/padding-top/orange"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/orange",
           "stroke": "imported/card/root/border-top-color/orange",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -384,8 +400,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -403,24 +419,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-pink",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/pink",
             "strokeLeftWeight": "imported/card/root/border-left-width/pink",
             "strokeRightWeight": "imported/card/root/border-right-width/pink",
-            "strokeTopWeight": "imported/card/root/border-top-width/pink"
+            "strokeTopWeight": "imported/card/root/border-top-width/pink",
+            "paddingBottom": "imported/card/root/padding-bottom/pink",
+            "paddingLeft": "imported/card/root/padding-left/pink",
+            "paddingRight": "imported/card/root/padding-right/pink",
+            "paddingTop": "imported/card/root/padding-top/pink"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/pink",
           "stroke": "imported/card/root/border-top-color/pink",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -430,8 +448,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -449,24 +467,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-purple",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/purple",
             "strokeLeftWeight": "imported/card/root/border-left-width/purple",
             "strokeRightWeight": "imported/card/root/border-right-width/purple",
-            "strokeTopWeight": "imported/card/root/border-top-width/purple"
+            "strokeTopWeight": "imported/card/root/border-top-width/purple",
+            "paddingBottom": "imported/card/root/padding-bottom/purple",
+            "paddingLeft": "imported/card/root/padding-left/purple",
+            "paddingRight": "imported/card/root/padding-right/purple",
+            "paddingTop": "imported/card/root/padding-top/purple"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/purple",
           "stroke": "imported/card/root/border-top-color/purple",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -476,8 +496,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -495,24 +515,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-red",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/red",
             "strokeLeftWeight": "imported/card/root/border-left-width/red",
             "strokeRightWeight": "imported/card/root/border-right-width/red",
-            "strokeTopWeight": "imported/card/root/border-top-width/red"
+            "strokeTopWeight": "imported/card/root/border-top-width/red",
+            "paddingBottom": "imported/card/root/padding-bottom/red",
+            "paddingLeft": "imported/card/root/padding-left/red",
+            "paddingRight": "imported/card/root/padding-right/red",
+            "paddingTop": "imported/card/root/padding-top/red"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/red",
           "stroke": "imported/card/root/border-top-color/red",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -522,8 +544,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -541,24 +563,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-teal",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/teal",
             "strokeLeftWeight": "imported/card/root/border-left-width/teal",
             "strokeRightWeight": "imported/card/root/border-right-width/teal",
-            "strokeTopWeight": "imported/card/root/border-top-width/teal"
+            "strokeTopWeight": "imported/card/root/border-top-width/teal",
+            "paddingBottom": "imported/card/root/padding-bottom/teal",
+            "paddingLeft": "imported/card/root/padding-left/teal",
+            "paddingRight": "imported/card/root/padding-right/teal",
+            "paddingTop": "imported/card/root/padding-top/teal"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/teal",
           "stroke": "imported/card/root/border-top-color/teal",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -568,8 +592,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -587,24 +611,26 @@ const COMPONENTS = [
             "counter": "MIN",
             "stretchChildren": true
           },
-          "fill": "color-background-yellow",
           "bindings": {
-            "paddingTop": "spacing-4",
-            "paddingBottom": "spacing-4",
-            "paddingLeft": "spacing-4",
-            "paddingRight": "spacing-4",
-            "topLeftRadius": "radius-container",
-            "topRightRadius": "radius-container",
-            "bottomLeftRadius": "radius-container",
-            "bottomRightRadius": "radius-container",
-            "itemSpacing": "spacing-3",
+            "bottomLeftRadius": "imported/shared/size-12",
+            "bottomRightRadius": "imported/shared/size-12",
+            "topLeftRadius": "imported/shared/size-12",
+            "topRightRadius": "imported/shared/size-12",
             "strokeBottomWeight": "imported/card/root/border-bottom-width/yellow",
             "strokeLeftWeight": "imported/card/root/border-left-width/yellow",
             "strokeRightWeight": "imported/card/root/border-right-width/yellow",
-            "strokeTopWeight": "imported/card/root/border-top-width/yellow"
+            "strokeTopWeight": "imported/card/root/border-top-width/yellow",
+            "paddingBottom": "imported/card/root/padding-bottom/yellow",
+            "paddingLeft": "imported/card/root/padding-left/yellow",
+            "paddingRight": "imported/card/root/padding-right/yellow",
+            "paddingTop": "imported/card/root/padding-top/yellow"
           },
+          "fixedWidth": {
+            "px": 114.203,
+            "varName": "imported/card/root/width"
+          },
+          "fill": "imported/card/root/background-color/yellow",
           "stroke": "imported/card/root/border-top-color/yellow",
-          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -614,8 +640,8 @@ const COMPONENTS = [
               "fontStyle": "Regular",
               "textFill": "color-on-light",
               "lineHeight": 24,
-              "fontFamily": "-apple-system",
-              "contentProp": "Body"
+              "contentProp": "Body",
+              "fillW": true
             }
           ]
         }
@@ -981,17 +1007,6 @@ async function buildNode(spec, registry) {
     node.fontSize = spec.fontSize || 16;
     node.characters = spec.characters || '';
     if (typeof spec.lineHeight === 'number') node.lineHeight = { unit: 'PIXELS', value: spec.lineHeight };
-    if (spec.fontFamily) {
-      try {
-        await figma.loadFontAsync({ family: spec.fontFamily, style: spec.fontStyle || 'Medium' });
-        node.fontName = { family: spec.fontFamily, style: spec.fontStyle || 'Medium' };
-      } catch (e) { /* family unavailable — Inter stands (named limit) */ }
-    }
-    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
-    if (spec.textCase) node.textCase = spec.textCase;
-    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
-    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
-    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { /* older API */ } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

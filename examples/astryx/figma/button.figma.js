@@ -41,16 +41,23 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
-            "paddingBottom": "spacing-2",
-            "paddingLeft": "spacing-3",
-            "paddingRight": "spacing-3",
-            "minHeight": "size-element-md"
+            "paddingBottom": "imported/shared/size-8",
+            "paddingLeft": "imported/button/root/padding-left",
+            "paddingRight": "imported/button/root/padding-right",
+            "paddingTop": "imported/shared/size-8"
+          },
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 32,
+            "varName": "imported/button/root/height/md"
           },
           "fill": "color-neutral",
           "children": [
@@ -79,38 +86,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/secondary",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 33,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -128,16 +107,23 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
             "paddingRight": "spacing-3",
-            "minHeight": "size-element-sm"
+            "paddingTop": "spacing-2"
+          },
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/button/root/height/sm"
           },
           "fill": "color-neutral",
           "children": [
@@ -166,38 +152,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/secondary",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 29,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -215,16 +173,23 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
             "paddingRight": "spacing-3",
-            "minHeight": "size-element-lg"
+            "paddingTop": "spacing-2"
+          },
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 36,
+            "varName": "imported/button/root/height/lg"
           },
           "fill": "color-neutral",
           "children": [
@@ -253,38 +218,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/secondary",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 37,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -302,18 +239,25 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
-            "paddingBottom": "spacing-2",
-            "paddingLeft": "spacing-3",
-            "paddingRight": "spacing-3",
-            "minHeight": "size-element-md"
+            "paddingBottom": "imported/shared/size-8",
+            "paddingLeft": "imported/button/root/padding-left",
+            "paddingRight": "imported/button/root/padding-right",
+            "paddingTop": "imported/shared/size-8"
           },
-          "fill": "color-accent",
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 32,
+            "varName": "imported/button/root/height/md"
+          },
+          "fill": "imported/button/root/background-color/primary",
           "children": [
             {
               "type": "frame",
@@ -340,38 +284,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/primary",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 33,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -389,18 +305,25 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
             "paddingRight": "spacing-3",
-            "minHeight": "size-element-sm"
+            "paddingTop": "spacing-2"
           },
-          "fill": "color-accent",
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/button/root/height/sm"
+          },
+          "fill": "imported/button/root/background-color/primary",
           "children": [
             {
               "type": "frame",
@@ -427,38 +350,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/primary",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 29,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -476,18 +371,25 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
             "paddingRight": "spacing-3",
-            "minHeight": "size-element-lg"
+            "paddingTop": "spacing-2"
           },
-          "fill": "color-accent",
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 36,
+            "varName": "imported/button/root/height/lg"
+          },
+          "fill": "imported/button/root/background-color/primary",
           "children": [
             {
               "type": "frame",
@@ -514,38 +416,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/primary",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 37,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -563,17 +437,25 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
-            "paddingBottom": "spacing-2",
-            "paddingLeft": "spacing-3",
-            "paddingRight": "spacing-3",
-            "minHeight": "size-element-md"
+            "paddingBottom": "imported/shared/size-8",
+            "paddingLeft": "imported/button/root/padding-left",
+            "paddingRight": "imported/button/root/padding-right",
+            "paddingTop": "imported/shared/size-8"
           },
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 32,
+            "varName": "imported/button/root/height/md"
+          },
+          "fill": "imported/button/root/background-color/ghost",
           "children": [
             {
               "type": "frame",
@@ -600,38 +482,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/ghost",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 33,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -649,17 +503,25 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
             "paddingRight": "spacing-3",
-            "minHeight": "size-element-sm"
+            "paddingTop": "spacing-2"
           },
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/button/root/height/sm"
+          },
+          "fill": "imported/button/root/background-color/ghost",
           "children": [
             {
               "type": "frame",
@@ -686,38 +548,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/ghost",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 29,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -735,17 +569,25 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
             "paddingRight": "spacing-3",
-            "minHeight": "size-element-lg"
+            "paddingTop": "spacing-2"
           },
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 36,
+            "varName": "imported/button/root/height/lg"
+          },
+          "fill": "imported/button/root/background-color/ghost",
           "children": [
             {
               "type": "frame",
@@ -772,38 +614,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/ghost",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 37,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -821,18 +635,25 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
-            "paddingBottom": "spacing-2",
-            "paddingLeft": "spacing-3",
-            "paddingRight": "spacing-3",
-            "minHeight": "size-element-md"
+            "paddingBottom": "imported/shared/size-8",
+            "paddingLeft": "imported/button/root/padding-left",
+            "paddingRight": "imported/button/root/padding-right",
+            "paddingTop": "imported/shared/size-8"
           },
-          "fill": "color-error",
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 32,
+            "varName": "imported/button/root/height/md"
+          },
+          "fill": "imported/button/root/background-color/destructive",
           "children": [
             {
               "type": "frame",
@@ -859,38 +680,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/destructive",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 33,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -908,18 +701,25 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
             "paddingRight": "spacing-3",
-            "minHeight": "size-element-sm"
+            "paddingTop": "spacing-2"
           },
-          "fill": "color-error",
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 28,
+            "varName": "imported/button/root/height/sm"
+          },
+          "fill": "imported/button/root/background-color/destructive",
           "children": [
             {
               "type": "frame",
@@ -946,38 +746,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/destructive",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 29,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -995,18 +767,25 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "bindings": {
-            "topLeftRadius": "radius-element",
-            "topRightRadius": "radius-element",
-            "bottomLeftRadius": "radius-element",
-            "bottomRightRadius": "radius-element",
+            "bottomLeftRadius": "imported/shared/size-8",
+            "bottomRightRadius": "imported/shared/size-8",
+            "topLeftRadius": "imported/shared/size-8",
+            "topRightRadius": "imported/shared/size-8",
             "itemSpacing": "spacing-2",
-            "paddingTop": "spacing-2",
             "paddingBottom": "spacing-2",
             "paddingLeft": "spacing-3",
             "paddingRight": "spacing-3",
-            "minHeight": "size-element-lg"
+            "paddingTop": "spacing-2"
           },
-          "fill": "color-error",
+          "fixedWidth": {
+            "px": 99.8125,
+            "varName": "imported/button/root/width"
+          },
+          "fixedHeight": {
+            "px": 36,
+            "varName": "imported/button/root/height/lg"
+          },
+          "fill": "imported/button/root/background-color/destructive",
           "children": [
             {
               "type": "frame",
@@ -1033,38 +812,10 @@ const COMPONENTS = [
                   "textFill": "imported/button/label/color/destructive",
                   "lineHeight": 20.0004,
                   "textAlignH": "CENTER",
-                  "fontFamily": "-apple-system",
                   "textTruncation": true,
                   "contentProp": "Label"
                 }
               ]
-            },
-            {
-              "type": "frame",
-              "name": "part-1",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "MIN",
-                "counter": "MIN"
-              },
-              "insetOverlay": true,
-              "insetOffsets": {
-                "top": 0,
-                "right": 100.812,
-                "bottom": 37,
-                "left": 0
-              },
-              "margins": {
-                "bottom": -1,
-                "left": -1,
-                "right": -1,
-                "top": -1
-              },
-              "bindings": {
-                "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0"
-              },
-              "children": []
             }
           ]
         }
@@ -1373,91 +1124,6 @@ function applyOverlay(parent, childNode, childSpec) {
   } catch (e) { /* parent not auto-layout — leave in flow */ }
 }
 
-// B-3 finding 5: an inset-0 overlay part (top/right/bottom/left all 0) is
-// lowered out of flow — ABSOLUTE, stretched to the parent, BEHIND the
-// in-flow siblings — matching the declared anatomy and the HTML render.
-function applyInsetOverlay(parent, childNode, childSpec) {
-  if (!childSpec.insetOverlay) return;
-  try {
-    // Round 5f (B5E finding 3): only a childless BACKDROP overlay (an
-    // inset:0 fill layer — TextField's backdrop) lowers BEHIND the in-flow
-    // siblings (index 0). A CONTENT overlay that carries glyphs (the Checkbox
-    // check, the RadioButton dot, a remove button) must stay ON TOP at its
-    // natural post-backdrop index — else the opaque backdrop sibling paints
-    // over the glyph (the checkbox backdrop-over-glyph z-order the owner saw,
-    // previously hand-corrected on canvas each re-amend).
-    // Absolute-position round: the backdrop shove applies ONLY to true
-    // inset-0 backdrops (no offsets). An OFFSET overlay (Slider's rail/track
-    // at their y positions) keeps its compile-time paint order — the shove
-    // was inverting rail/track stacking.
-    if ((!childNode.children || childNode.children.length === 0) && !childSpec.insetOffsets) {
-      parent.insertChild(0, childNode);
-    }
-    childNode.layoutPositioning = 'ABSOLUTE';
-    childNode.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
-    const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
-    childNode.x = o.left;
-    childNode.y = o.top;
-    childNode.resize(
-      Math.max(1, parent.width - o.left - o.right),
-      Math.max(1, parent.height - o.top - o.bottom),
-    );
-  } catch (e) { /* parent not auto-layout — leave in flow */ }
-}
-
-function resizeOutOfFlow(parent, built) {
-  for (const pair of built) {
-    const childSpec = pair[0], childNode = pair[1];
-    try {
-      if (childSpec.insetOverlay) {
-        const o = childSpec.insetOffsets || { top: 0, right: 0, bottom: 0, left: 0 };
-        childNode.x = o.left || 0;
-        childNode.y = o.top || 0;
-        childNode.resize(
-          Math.max(1, parent.width - (o.left || 0) - (o.right || 0)),
-          Math.max(1, parent.height - (o.top || 0) - (o.bottom || 0)),
-        );
-      } else if (childSpec.absolute && (childSpec.absolute.h === 'STRETCH' || childSpec.absolute.v === 'STRETCH')) {
-        const a = childSpec.absolute;
-        childNode.resize(
-          a.h === 'STRETCH' ? Math.max(parent.width - (a.left || 0) - (a.right || 0), 0.01) : childNode.width,
-          a.v === 'STRETCH' ? Math.max(parent.height - (a.top || 0) - (a.bottom || 0), 0.01) : childNode.height,
-        );
-        if (a.h === 'STRETCH') childNode.x = a.left || 0;
-        if (a.v === 'STRETCH') childNode.y = a.top || 0;
-      }
-    } catch (e) { /* parent not auto-layout — the child stayed in flow */ }
-  }
-}
-
-// Round 5d: auto-layout has no per-child margin — a child carrying residual
-// margins gets its CSS MARGIN BOX as a fixed wrapper frame (clipsContent
-// false), the child placed at (left, top). Negative margins shrink the flow
-// box and let the glyph overhang — the exact CSS geometry (the Badge pip's
-// -2/-2/-8 is what keeps the real pill 20px tall). Out-of-flow children
-// (overlay / inset / absolute) and FILL-sized children keep their own
-// lowering.
-function applyMarginBox(parent, childNode, childSpec) {
-  const m = childSpec.margins;
-  if (!m || childSpec.overlay || childSpec.insetOverlay || childSpec.absolute || childSpec.grow) return;
-  try {
-    if (childNode.layoutSizingHorizontal === 'FILL' || childNode.layoutSizingVertical === 'FILL') return;
-  } catch (e) { /* nodes without layout sizing */ }
-  const t = m.top || 0, r = m.right || 0, b = m.bottom || 0, l = m.left || 0;
-  if (!t && !r && !b && !l) return;
-  const w = Math.max(childNode.width + l + r, 0.01);
-  const h = Math.max(childNode.height + t + b, 0.01);
-  const box = figma.createFrame();
-  box.name = childSpec.name + ' (margin box)';
-  box.fills = [];
-  box.clipsContent = false;
-  parent.insertChild(parent.children.indexOf(childNode), box);
-  box.resize(w, h);
-  box.appendChild(childNode);
-  childNode.x = l;
-  childNode.y = t;
-}
-
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -1606,10 +1272,7 @@ async function buildNode(spec, registry) {
     if (child.fillW && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { /* HUG-only nodes */ }
     }
-    applyInsetOverlay(node, childNode, child);
-    applyMarginBox(node, childNode, child);
   }
-  resizeOutOfFlow(node, built);
   return node;
 }
 
@@ -1831,10 +1494,7 @@ async function amendSet(set, C) {
         if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
           try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
         }
-    applyInsetOverlay(comp, childNode, childSpec);
-    applyMarginBox(comp, childNode, childSpec);
       }
-  resizeOutOfFlow(comp, built);
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -1983,9 +1643,7 @@ async function amendComponent(comp, C) {
     if (childSpec.fillW && 'layoutSizingHorizontal' in childNode) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) {}
     }
-    applyInsetOverlay(comp, childNode, childSpec);
   }
-  resizeOutOfFlow(comp, built);
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }

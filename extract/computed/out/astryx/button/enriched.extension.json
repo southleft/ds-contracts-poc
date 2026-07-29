@@ -2,21 +2,47 @@
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@astryxdesign/core@0.1.6",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
-      "shared": {
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
-        },
-        "size-neg-1": {
-          "$value": "-1px",
-          "$type": "dimension"
-        }
-      },
       "button": {
         "root": {
+          "background-color": {
+            "primary": {
+              "$value": "#0064e0",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0536591a",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "destructive": {
+              "$value": "#e3193b",
+              "$type": "color"
+            }
+          },
+          "color": {
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "ghost": {
+              "$value": "#0a1317",
+              "$type": "color"
+            },
+            "destructive": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
           "height": {
             "sm": {
               "$value": "28px",
@@ -49,23 +75,13 @@
               "$type": "color"
             }
           },
-          "row-rule-color": {
-            "primary": {
-              "$value": "#ffffff",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#0a1317",
-              "$type": "color"
-            },
-            "ghost": {
-              "$value": "#0a1317",
-              "$type": "color"
-            },
-            "destructive": {
-              "$value": "#ffffff",
-              "$type": "color"
-            }
+          "padding-left": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "12px",
+            "$type": "dimension"
           },
           "width": {
             "$value": "99.8125px",
@@ -111,7 +127,7 @@
           }
         },
         "part-0": {
-          "row-rule-color": {
+          "color": {
             "primary": {
               "$value": "#ffffff",
               "$type": "color"
@@ -131,7 +147,7 @@
           }
         },
         "label": {
-          "row-rule-color": {
+          "color": {
             "primary": {
               "$value": "#ffffff",
               "$type": "color"
@@ -165,15 +181,7 @@
               "$type": "dimension"
             }
           },
-          "height": {
-            "$value": "1px",
-            "$type": "dimension"
-          },
-          "right": {
-            "$value": "100.812px",
-            "$type": "dimension"
-          },
-          "row-rule-color": {
+          "color": {
             "primary": {
               "$value": "#ffffff",
               "$type": "color"
@@ -191,10 +199,44 @@
               "$type": "color"
             }
           },
+          "height": {
+            "$value": "1px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "100.812px",
+            "$type": "dimension"
+          },
           "width": {
             "$value": "1px",
             "$type": "dimension"
           }
+        }
+      },
+      "shared": {
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "num-500": {
+          "$value": "500",
+          "$type": "number"
+        },
+        "size-20-0004": {
+          "$value": "20.0004px",
+          "$type": "dimension"
+        },
+        "size-neg-1": {
+          "$value": "-1px",
+          "$type": "dimension"
         }
       }
     }
@@ -238,6 +280,12 @@
     },
     {
       "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -292,6 +340,12 @@
     },
     {
       "part": "part-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -346,6 +400,12 @@
     },
     {
       "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -400,6 +460,12 @@
     },
     {
       "part": "part-1",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -413,7 +479,18 @@
   ],
   "foldedStateSkips": [],
   "layout": {
-    "enriched": [],
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "root",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
     "contradictions": [],
     "receipts": [],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
@@ -423,8 +500,158 @@
     "base": [
       {
         "part": "root",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "root",
         "channel": "transform",
         "value": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.175s"
+      },
+      {
+        "part": "root",
+        "channel": "transition-property",
+        "value": "background-image, background-color, color, opacity, transform"
+      },
+      {
+        "part": "root",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      {
+        "part": "part-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-0",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "part-0",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "part-1",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "part-1",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "part-1",
+        "channel": "text-align",
+        "value": "center"
+      },
+      {
+        "part": "part-1",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "part-1",
+        "channel": "user-select",
+        "value": "none"
       }
     ],
     "state": [
@@ -499,1808 +726,7 @@
     "findings": [],
     "totalFindings": 0
   },
-  "bindingContradictions": [
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-sm}",
-      "computedProp": "min-height",
-      "expected": "28px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-md}",
-      "computedProp": "min-height",
-      "expected": "32px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-lg}",
-      "computedProp": "min-height",
-      "expected": "36px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "primary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.primary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-sm}",
-      "computedProp": "min-height",
-      "expected": "28px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-md}",
-      "computedProp": "min-height",
-      "expected": "32px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-lg}",
-      "computedProp": "min-height",
-      "expected": "36px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "secondary.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.secondary}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-sm}",
-      "computedProp": "min-height",
-      "expected": "28px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-md}",
-      "computedProp": "min-height",
-      "expected": "32px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-lg}",
-      "computedProp": "min-height",
-      "expected": "36px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "ghost.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.ghost}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(10, 19, 23, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-sm}",
-      "computedProp": "min-height",
-      "expected": "28px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.sm.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-md}",
-      "computedProp": "min-height",
-      "expected": "32px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.md.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "root",
-      "channel": "font-family",
-      "ref": "{font-family-body}",
-      "computedProp": "font-family",
-      "expected": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
-      "observed": "Times",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "root",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "root",
-      "channel": "min-height",
-      "ref": "{size-element-lg}",
-      "computedProp": "min-height",
-      "expected": "36px",
-      "observed": "auto",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-0",
-      "channel": "color",
-      "ref": "{imported.button.part-0.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "label",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "label",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "label",
-      "channel": "color",
-      "ref": "{imported.button.label.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-size",
-      "ref": "{imported.shared.size-14}",
-      "computedProp": "font-size",
-      "expected": "16px",
-      "observed": "14px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "font-weight",
-      "ref": "{imported.shared.num-500}",
-      "computedProp": "font-weight",
-      "expected": "400",
-      "observed": "500",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "line-height",
-      "ref": "{imported.shared.size-20-0004}",
-      "computedProp": "line-height",
-      "expected": "24px",
-      "observed": "20.0004px",
-      "verdict": "contradiction"
-    },
-    {
-      "combo": "destructive.lg.no-isDisabled",
-      "part": "part-1",
-      "channel": "color",
-      "ref": "{imported.button.part-1.color.destructive}",
-      "computedProp": "color",
-      "expected": "rgba(0, 0, 0, 1)",
-      "observed": "rgba(255, 255, 255, 1)",
-      "verdict": "contradiction"
-    }
-  ],
+  "bindingContradictions": [],
   "interactionOnDisabled": [
     "interaction-on-isDisabled-changed: primary.sm.isDisabled active root.transform",
     "interaction-on-isDisabled-changed: primary.md.isDisabled active root.transform",
@@ -2321,6 +747,8 @@
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (label, part-0, part-1, root); -webkit-text-stroke-color (label, part-0, part-1, root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-only: label.caret-color equals ancestor \"part-0\" on all 96 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: label.color equals ancestor \"part-0\" on all 96 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: label.font-size equals ancestor \"part-0\" on all 96 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
@@ -2337,6 +765,13 @@
     "inheritance-only: part-1.font-weight equals ancestor \"root\" on all 96 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
     "inheritance-only: part-1.line-height equals ancestor \"root\" on all 96 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
   ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
   "anatomyJoin": {
     "computed": [
       {
@@ -2345,15 +780,15 @@
       },
       {
         "part": "part-0",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "label",
-        "join": "matched"
+        "join": "computed-only"
       },
       {
         "part": "part-1",
-        "join": "matched"
+        "join": "computed-only"
       }
     ],
     "staticOnly": []
@@ -2368,34 +803,49 @@
     ],
     "svgAssets": [],
     "receipts": [
+      "root-display-carried: flex",
       "sr-only-carried-as-hidden: part-1 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)"
     ],
     "refusals": []
   },
   "enrichmentNotes": [
+    "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
-    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: root.outline-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: root.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-0.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: label.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-1.bottom on prop size already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-1.bottom on prop size already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-1.bottom on prop size already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added",
-    "tokensByProp conflict avoided: part-1.row-rule-color on prop variant already reviewed — computed value not re-added"
+    "declared fact carried: root.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-property = background-image, background-color, color, opacity, transform (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared state fact carried: [disabled] label.cursor = not-allowed (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] part-0.cursor = not-allowed (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] part-1.cursor = not-allowed (v15 declared vocabulary)",
+    "declared state fact carried: [disabled] root.cursor = not-allowed (v15 declared vocabulary)",
+    "declared state fact carried: [focus-visible] root.outline-style = solid (v15 declared vocabulary)"
   ]
 }

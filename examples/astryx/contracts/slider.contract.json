@@ -4,7 +4,7 @@
   "name": "Slider",
   "version": "0.3.0",
   "status": "draft",
-  "description": "Astryx Slider — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Slider/Slider.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/min/max/step/orientation/valueDisplay and the optional/required/disabled flags are verbatim (82%; recovered from a union-of-refs named-skip via the keyof+union adapter fix). value, description, disabledMessage, labelTooltip, htmlName and minStepsBetweenThumbs are dropped. STRUCTURAL: track/thumb render as styled boxes, not a native range input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/slider/decisions.md); extension sidecar carries the named overflow.",
+  "description": "Astryx Slider — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Slider/Slider.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/min/max/step/orientation/valueDisplay and the optional/required/disabled flags are verbatim (82%; recovered from a union-of-refs named-skip via the keyof+union adapter fix). value, description, disabledMessage, labelTooltip, htmlName and minStepsBetweenThumbs are dropped. STRUCTURAL: track/thumb render as styled boxes, not a native range input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/slider/decisions.md); extension sidecar carries the named overflow.",
   "semantics": {
     "element": "div"
   },
@@ -113,18 +113,13 @@
         "display": "flex",
         "direction": "column"
       },
-      "tokens": {
-        "color": "{color-on-light}",
-        "gap": "{spacing-1}",
-        "width": "{spacing-12}",
-        "font-family": "{font-family-body}"
-      },
       "parts": {
         "label": {
-          "element": "span",
+          "element": "label",
           "content": {
             "prop": "label"
           },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label|field-label — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
             "display": "flex",
             "align": "center"
@@ -139,8 +134,7 @@
             "font-size": "{imported.shared.size-14}",
             "font-weight": "{imported.slider.label.font-weight}",
             "line-height": "{imported.shared.size-20-0004}",
-            "row-gap": "{imported.shared.size-4}",
-            "row-rule-color": "{imported.slider.label.row-rule-color}"
+            "row-gap": "{imported.shared.size-4}"
           }
         },
         "slider": {
@@ -180,11 +174,37 @@
                       "map": {
                         "horizontal": {
                           "bottom": "{imported.slider.slider-track.bottom.horizontal}",
-                          "top": "{imported.slider.slider-track.top.horizontal}"
+                          "height": "{imported.slider.slider-track.height.horizontal}",
+                          "top": "{imported.slider.slider-track.top.horizontal}",
+                          "translate-x": "{imported.slider.slider-track.translate-x.horizontal}",
+                          "translate-y": "{imported.slider.slider-track.translate-y.horizontal}"
                         },
                         "vertical": {
                           "bottom": "{imported.slider.slider-track.bottom.vertical}",
-                          "top": "{imported.slider.slider-track.top.vertical}"
+                          "height": "{imported.slider.slider-track.height.vertical}",
+                          "top": "{imported.slider.slider-track.top.vertical}",
+                          "translate-x": "{imported.slider.slider-track.translate-x.vertical}",
+                          "translate-y": "{imported.slider.slider-track.translate-y.vertical}"
+                        }
+                      }
+                    },
+                    {
+                      "prop": "valueDisplay",
+                      "map": {
+                        "none": {
+                          "left": "{imported.slider.slider-track.left.{orientation}.none}",
+                          "right": "{imported.slider.slider-track.right.{orientation}.none}",
+                          "width": "{imported.slider.slider-track.width.{orientation}.none}"
+                        },
+                        "text": {
+                          "left": "{imported.slider.slider-track.left.{orientation}.text}",
+                          "right": "{imported.slider.slider-track.right.{orientation}.text}",
+                          "width": "{imported.slider.slider-track.width.{orientation}.text}"
+                        },
+                        "tooltip": {
+                          "left": "{imported.slider.slider-track.left.{orientation}.tooltip}",
+                          "right": "{imported.slider.slider-track.right.{orientation}.tooltip}",
+                          "width": "{imported.slider.slider-track.width.{orientation}.tooltip}"
                         }
                       }
                     }
@@ -213,11 +233,37 @@
                       "map": {
                         "horizontal": {
                           "bottom": "{imported.slider.part-1-0-1.bottom.horizontal}",
-                          "top": "{imported.slider.part-1-0-1.top.horizontal}"
+                          "height": "{imported.slider.part-1-0-1.height.horizontal}",
+                          "top": "{imported.slider.part-1-0-1.top.horizontal}",
+                          "translate-x": "{imported.slider.part-1-0-1.translate-x.horizontal}",
+                          "translate-y": "{imported.slider.part-1-0-1.translate-y.horizontal}"
                         },
                         "vertical": {
                           "bottom": "{imported.slider.part-1-0-1.bottom.vertical}",
-                          "top": "{imported.slider.part-1-0-1.top.vertical}"
+                          "height": "{imported.slider.part-1-0-1.height.vertical}",
+                          "top": "{imported.slider.part-1-0-1.top.vertical}",
+                          "translate-x": "{imported.slider.part-1-0-1.translate-x.vertical}",
+                          "translate-y": "{imported.slider.part-1-0-1.translate-y.vertical}"
+                        }
+                      }
+                    },
+                    {
+                      "prop": "valueDisplay",
+                      "map": {
+                        "none": {
+                          "left": "{imported.slider.part-1-0-1.left.{orientation}.none}",
+                          "right": "{imported.slider.part-1-0-1.right.{orientation}.none}",
+                          "width": "{imported.slider.part-1-0-1.width.{orientation}.none}"
+                        },
+                        "text": {
+                          "left": "{imported.slider.part-1-0-1.left.{orientation}.text}",
+                          "right": "{imported.slider.part-1-0-1.right.{orientation}.text}",
+                          "width": "{imported.slider.part-1-0-1.width.{orientation}.text}"
+                        },
+                        "tooltip": {
+                          "left": "{imported.slider.part-1-0-1.left.{orientation}.tooltip}",
+                          "right": "{imported.slider.part-1-0-1.right.{orientation}.tooltip}",
+                          "width": "{imported.slider.part-1-0-1.width.{orientation}.tooltip}"
                         }
                       }
                     }
@@ -249,8 +295,11 @@
                     "border-bottom-right-radius": "{imported.shared.size-9999}",
                     "border-top-left-radius": "{imported.shared.size-9999}",
                     "border-top-right-radius": "{imported.shared.size-9999}",
+                    "height": "{imported.shared.size-20}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
+                    "translate-x": "{imported.slider.slider-thumb-2.translate-x}",
+                    "width": "{imported.shared.size-20}",
                     "z-index": "{imported.shared.num-1}"
                   },
                   "tokensByProp": [
@@ -259,11 +308,13 @@
                       "map": {
                         "horizontal": {
                           "bottom": "{imported.slider.slider-thumb-2.bottom.horizontal}",
-                          "top": "{imported.slider.slider-thumb-2.top.horizontal}"
+                          "top": "{imported.slider.slider-thumb-2.top.horizontal}",
+                          "translate-y": "{imported.slider.slider-thumb-2.translate-y.horizontal}"
                         },
                         "vertical": {
                           "bottom": "{imported.slider.slider-thumb-2.bottom.vertical}",
-                          "top": "{imported.slider.slider-thumb-2.top.vertical}"
+                          "top": "{imported.slider.slider-thumb-2.top.vertical}",
+                          "translate-y": "{imported.slider.slider-thumb-2.translate-y.vertical}"
                         }
                       }
                     }
@@ -326,8 +377,11 @@
                         "border-bottom-right-radius": "{imported.shared.size-9999}",
                         "border-top-left-radius": "{imported.shared.size-9999}",
                         "border-top-right-radius": "{imported.shared.size-9999}",
+                        "height": "{imported.shared.size-20}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
+                        "translate-x": "{imported.slider.slider-thumb.translate-x}",
+                        "width": "{imported.shared.size-20}",
                         "z-index": "{imported.shared.num-1}"
                       },
                       "tokensByProp": [
@@ -338,13 +392,15 @@
                               "bottom": "{imported.slider.slider-thumb.bottom.horizontal}",
                               "left": "{imported.slider.slider-thumb.left.horizontal}",
                               "right": "{imported.slider.slider-thumb.right.horizontal}",
-                              "top": "{imported.slider.slider-thumb.top.horizontal}"
+                              "top": "{imported.slider.slider-thumb.top.horizontal}",
+                              "translate-y": "{imported.slider.slider-thumb.translate-y.horizontal}"
                             },
                             "vertical": {
                               "bottom": "{imported.slider.slider-thumb.bottom.vertical}",
                               "left": "{imported.slider.slider-thumb.left.vertical}",
                               "right": "{imported.slider.slider-thumb.right.vertical}",
-                              "top": "{imported.slider.slider-thumb.top.vertical}"
+                              "top": "{imported.slider.slider-thumb.top.vertical}",
+                              "translate-y": "{imported.slider.slider-thumb.translate-y.vertical}"
                             }
                           }
                         }
@@ -411,7 +467,7 @@
                         }
                       ],
                       "tokens": {
-                        "color": "{imported.shared.color-ffffff}",
+                        "color": "{imported.slider.label-2.color}",
                         "font-size": "{imported.shared.size-14}",
                         "font-weight": "{imported.slider.label-2.font-weight}",
                         "line-height": "{imported.shared.size-20-0004}",
@@ -421,26 +477,24 @@
                         "padding-bottom": "{imported.shared.size-4}",
                         "padding-left": "{imported.shared.size-8}",
                         "padding-right": "{imported.shared.size-8}",
-                        "padding-top": "{imported.shared.size-4}",
-                        "row-rule-color": "{imported.shared.color-ffffff}"
+                        "padding-top": "{imported.shared.size-4}"
                       }
                     }
                   },
                   "tokens": {
-                    "background-color": "{imported.shared.color-0a1317}",
+                    "background-color": "{imported.slider.tooltip.background-color}",
                     "border-bottom-left-radius": "{imported.shared.size-12}",
                     "border-bottom-right-radius": "{imported.shared.size-12}",
                     "border-top-left-radius": "{imported.shared.size-12}",
                     "border-top-right-radius": "{imported.shared.size-12}",
                     "bottom": "{imported.shared.size-0}",
-                    "color": "{imported.shared.color-ffffff}",
+                    "color": "{imported.slider.tooltip.color}",
                     "font-size": "{imported.shared.size-14}",
                     "left": "{imported.shared.size-0}",
                     "line-height": "{imported.shared.size-20-0004}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "row-rule-color": "{imported.shared.color-ffffff}",
                     "top": "{imported.shared.size-0}"
                   },
                   "tokensByProp": [
@@ -477,7 +531,34 @@
                 "left": "{imported.shared.size-0}",
                 "right": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}"
-              }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "orientation",
+                  "map": {
+                    "horizontal": {
+                      "height": "{imported.slider.part-1-0.height.horizontal}"
+                    },
+                    "vertical": {
+                      "height": "{imported.slider.part-1-0.height.vertical}"
+                    }
+                  }
+                },
+                {
+                  "prop": "valueDisplay",
+                  "map": {
+                    "none": {
+                      "width": "{imported.slider.part-1-0.width.none}"
+                    },
+                    "text": {
+                      "width": "{imported.slider.part-1-0.width.text}"
+                    },
+                    "tooltip": {
+                      "width": "{imported.slider.part-1-0.width.tooltip}"
+                    }
+                  }
+                }
+              ]
             },
             "label-3": {
               "text": "40",
@@ -504,20 +585,44 @@
                 }
               ],
               "tokens": {
-                "color": "{imported.shared.color-0a1317}",
+                "color": "{imported.slider.label-3.color}",
                 "flex-shrink": "{imported.slider.label-3.flex-shrink}",
                 "font-size": "{imported.shared.size-14}",
                 "font-weight": "{imported.slider.label-3.font-weight}",
-                "line-height": "{imported.slider.label-3.line-height}",
-                "row-rule-color": "{imported.shared.color-0a1317}"
+                "line-height": "{imported.slider.label-3.line-height}"
               }
             }
           },
           "tokens": {
             "column-gap": "{imported.shared.size-8}",
-            "row-gap": "{imported.shared.size-8}"
-          }
+            "row-gap": "{imported.shared.size-8}",
+            "width": "{imported.slider.slider.width}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "valueDisplay",
+              "map": {
+                "none": {
+                  "height": "{imported.slider.slider.height.{orientation}.none}"
+                },
+                "text": {
+                  "height": "{imported.slider.slider.height.{orientation}.text}"
+                },
+                "tooltip": {
+                  "height": "{imported.slider.slider.height.{orientation}.tooltip}"
+                }
+              }
+            }
+          ]
         }
+      },
+      "tokens": {
+        "column-gap": "{imported.shared.size-4}",
+        "height": "{imported.slider.root.height.{orientation}.{valueDisplay}}",
+        "row-gap": "{imported.shared.size-4}",
+        "width": "{imported.slider.root.width}",
+        "color": "{color-on-light}",
+        "gap": "{spacing-1}"
       },
       "literals": {
         "font-size": "16px"

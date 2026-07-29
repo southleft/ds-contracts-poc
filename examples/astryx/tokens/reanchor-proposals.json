@@ -9,17 +9,17 @@
   },
   "generatedBy": "examples/astryx/scripts/reanchor-minted.ts --propose",
   "summary": {
-    "applied": 63,
+    "applied": 70,
     "clean": 0,
     "ambiguous": 0,
-    "noMatch": 0,
+    "noMatch": 2,
     "excluded": 50,
     "decidedLiteral": 0,
-    "rows": 21,
+    "rows": 38,
     "literalReceipts": {
-      "rows": 2,
+      "rows": 1,
       "leaves": 2,
-      "refs": 7
+      "refs": 2
     }
   },
   "rows": [
@@ -29,9 +29,61 @@
       "value": "#0064E0",
       "tuple": "0,100,224,1",
       "leaves": [
+        "imported.button.root.background-color.primary",
+        "imported.button.root.outline-color-state-focus-visible.ghost",
+        "imported.button.root.outline-color-state-focus-visible.primary",
+        "imported.button.root.outline-color-state-focus-visible.secondary",
         "imported.shared.color-0064e0"
       ],
       "leafDetail": [
+        {
+          "leaf": "imported.button.root.background-color.primary",
+          "component": "button",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "primary"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-accent"
+        },
+        {
+          "leaf": "imported.button.root.outline-color-state-focus-visible.ghost",
+          "component": "button",
+          "part": "root",
+          "channel": "outline-color",
+          "state": "focus-visible",
+          "axisValues": [
+            "ghost"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-accent"
+        },
+        {
+          "leaf": "imported.button.root.outline-color-state-focus-visible.primary",
+          "component": "button",
+          "part": "root",
+          "channel": "outline-color",
+          "state": "focus-visible",
+          "axisValues": [
+            "primary"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-accent"
+        },
+        {
+          "leaf": "imported.button.root.outline-color-state-focus-visible.secondary",
+          "component": "button",
+          "part": "root",
+          "channel": "outline-color",
+          "state": "focus-visible",
+          "axisValues": [
+            "secondary"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-accent"
+        },
         {
           "leaf": "imported.shared.color-0064e0",
           "component": "shared",
@@ -44,10 +96,16 @@
         }
       ],
       "channelClasses": [
-        "(none — value-named shared leaf)"
+        "(none — value-named shared leaf)",
+        "background-color",
+        "outline-color"
       ],
-      "refs": 3,
+      "refs": 7,
       "usedBy": [
+        "button:{imported.button.root.background-color.primary}",
+        "button:{imported.button.root.outline-color-state-focus-visible.{variant}}",
+        "button:{imported.button.root.outline-color-state-focus-visible.{variant}}",
+        "button:{imported.button.root.outline-color-state-focus-visible.{variant}}",
         "slider:{imported.shared.color-0064e0}",
         "slider:{imported.shared.color-0064e0}",
         "slider:{imported.shared.color-0064e0}"
@@ -55,9 +113,9 @@
       "candidates": [
         {
           "token": "color-accent",
-          "score": 0,
+          "score": 3,
           "rules": [
-            "+0 no channel rule: (value-named shared leaf) matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)"
+            "+3 channel:background-color→color-background-*/color-accent (1/5 leaf/leaves)"
           ],
           "darkDelta": {
             "light": "#0064E0",
@@ -70,7 +128,7 @@
           "token": "color-border-blue",
           "score": 0,
           "rules": [
-            "+0 no channel rule: (value-named shared leaf) matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)"
+            "+0 the row's channel class(es) do not point at this token family"
           ],
           "darkDelta": {
             "light": "#0064E0",
@@ -83,7 +141,7 @@
           "token": "color-icon-accent",
           "score": 0,
           "rules": [
-            "+0 no channel rule: (value-named shared leaf) matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)"
+            "+0 the row's channel class(es) do not point at this token family"
           ],
           "darkDelta": {
             "light": "#0064E0",
@@ -96,7 +154,7 @@
           "token": "color-icon-blue",
           "score": 0,
           "rules": [
-            "+0 no channel rule: (value-named shared leaf) matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)"
+            "+0 the row's channel class(es) do not point at this token family"
           ],
           "darkDelta": {
             "light": "#0064E0",
@@ -109,7 +167,7 @@
           "token": "color-text-accent",
           "score": 0,
           "rules": [
-            "+0 no channel rule: (value-named shared leaf) matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)"
+            "+0 the row's channel class(es) do not point at this token family"
           ],
           "darkDelta": {
             "light": "#0064E0",
@@ -121,7 +179,7 @@
       ],
       "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #0064E0 (0,100,224,1) — re-verified at apply time against the then-current DTCG.",
       "evidence": [
-        "APPLIED: all 1 live leaf/leaves in this group already alias {color-accent} — landed from tokens/reanchor-decisions.json.",
+        "APPLIED: all 5 live leaf/leaves in this group already alias {color-accent} — landed from tokens/reanchor-decisions.json.",
         "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
         "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
       ]
@@ -132,14 +190,14 @@
       "value": "#014975",
       "tuple": "1,73,117,1",
       "leaves": [
-        "imported.badge.root.row-rule-color.cyan"
+        "imported.badge.root.color.cyan"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.badge.root.row-rule-color.cyan",
+          "leaf": "imported.badge.root.color.cyan",
           "component": "badge",
           "part": "root",
-          "channel": "row-rule-color",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "cyan"
@@ -149,20 +207,19 @@
         }
       ],
       "channelClasses": [
-        "row-rule-color"
+        "color"
       ],
       "refs": 1,
       "usedBy": [
-        "badge:{imported.badge.root.row-rule-color.cyan}"
+        "badge:{imported.badge.root.color.cyan}"
       ],
       "candidates": [
         {
           "token": "color-text-cyan",
-          "score": 6,
+          "score": 5,
           "rules": [
-            "+0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)",
-            "+2 axis:cyan→*-cyan",
-            "+4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-cyan}"
+            "+3 channel:color→color-text-* (1/1 leaf/leaves)",
+            "+2 axis:cyan→*-cyan"
           ],
           "darkDelta": {
             "light": "#014975",
@@ -180,19 +237,151 @@
       ]
     },
     {
+      "id": "RA-0171e333",
+      "disposition": "applied",
+      "value": "#0171E333",
+      "tuple": "1,113,227,0.2",
+      "leaves": [
+        "imported.badge.root.background-color.blue",
+        "imported.card.root.background-color.blue"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.blue",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "blue"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-blue"
+        },
+        {
+          "leaf": "imported.card.root.background-color.blue",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "blue"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-blue"
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 2,
+      "usedBy": [
+        "badge:{imported.badge.root.background-color.blue}",
+        "card:{imported.card.root.background-color.blue}"
+      ],
+      "candidates": [
+        {
+          "token": "color-background-blue",
+          "score": 5,
+          "rules": [
+            "+3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)",
+            "+2 axis:blue→*-blue"
+          ],
+          "darkDelta": {
+            "light": "#0171E333",
+            "dark": "#0171E333",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-background-blue} is #0171E333 in both modes, identical to the frozen literal #0171E333; aliasing changes NO pixel in either mode (semantics only)."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #0171E333 (1,113,227,0.2) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 2 live leaf/leaves in this group already alias {color-background-blue} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
+      "id": "RA-03a7d733",
+      "disposition": "applied",
+      "value": "#03A7D733",
+      "tuple": "3,167,215,0.2",
+      "leaves": [
+        "imported.badge.root.background-color.cyan",
+        "imported.card.root.background-color.cyan"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.cyan",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "cyan"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-cyan"
+        },
+        {
+          "leaf": "imported.card.root.background-color.cyan",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "cyan"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-cyan"
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 2,
+      "usedBy": [
+        "badge:{imported.badge.root.background-color.cyan}",
+        "card:{imported.card.root.background-color.cyan}"
+      ],
+      "candidates": [
+        {
+          "token": "color-background-cyan",
+          "score": 5,
+          "rules": [
+            "+3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)",
+            "+2 axis:cyan→*-cyan"
+          ],
+          "darkDelta": {
+            "light": "#03A7D733",
+            "dark": "#03A7D733",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-background-cyan} is #03A7D733 in both modes, identical to the frozen literal #03A7D733; aliasing changes NO pixel in either mode (semantics only)."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #03A7D733 (3,167,215,0.2) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 2 live leaf/leaves in this group already alias {color-background-cyan} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
       "id": "RA-042f97",
       "disposition": "applied",
       "value": "#042F97",
       "tuple": "4,47,151,1",
       "leaves": [
-        "imported.badge.root.row-rule-color.blue"
+        "imported.badge.root.color.blue"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.badge.root.row-rule-color.blue",
+          "leaf": "imported.badge.root.color.blue",
           "component": "badge",
           "part": "root",
-          "channel": "row-rule-color",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "blue"
@@ -202,20 +391,19 @@
         }
       ],
       "channelClasses": [
-        "row-rule-color"
+        "color"
       ],
       "refs": 1,
       "usedBy": [
-        "badge:{imported.badge.root.row-rule-color.blue}"
+        "badge:{imported.badge.root.color.blue}"
       ],
       "candidates": [
         {
           "token": "color-text-blue",
-          "score": 6,
+          "score": 5,
           "rules": [
-            "+0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)",
-            "+2 axis:blue→*-blue",
-            "+4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-blue}"
+            "+3 channel:color→color-text-* (1/1 leaf/leaves)",
+            "+2 axis:blue→*-blue"
           ],
           "darkDelta": {
             "light": "#042F97",
@@ -233,19 +421,84 @@
       ]
     },
     {
+      "id": "RA-0536590c",
+      "disposition": "applied",
+      "value": "#0536590C",
+      "tuple": "5,54,89,0.0471",
+      "leaves": [
+        "imported.card.root.background-color.muted"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.card.root.background-color.muted",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "muted"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-muted"
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 1,
+      "usedBy": [
+        "card:{imported.card.root.background-color.muted}"
+      ],
+      "candidates": [
+        {
+          "token": "color-background-muted",
+          "score": 5,
+          "rules": [
+            "+3 channel:background-color→color-background-*/color-accent (1/1 leaf/leaves)",
+            "+2 axis:muted→*-muted"
+          ],
+          "darkDelta": {
+            "light": "#0536590C",
+            "dark": "#1111127F",
+            "modeVarying": true,
+            "effect": "DARK REPAIR — the leaf is frozen at #0536590C in BOTH modes today; aliasing to {color-background-muted} makes it #0536590C light / #1111127F dark. This is a deliberate pixel change in dark mode."
+          }
+        },
+        {
+          "token": "color-overlay-hover",
+          "score": 0,
+          "rules": [
+            "+0 the row's channel class(es) do not point at this token family"
+          ],
+          "darkDelta": {
+            "light": "#0536590C",
+            "dark": "#FFFFFF0C",
+            "modeVarying": true,
+            "effect": "DARK REPAIR — the leaf is frozen at #0536590C in BOTH modes today; aliasing to {color-overlay-hover} makes it #0536590C light / #FFFFFF0C dark. This is a deliberate pixel change in dark mode."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #0536590C (5,54,89,0.0471) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 1 live leaf/leaves in this group already alias {color-background-muted} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
       "id": "RA-083943",
       "disposition": "applied",
       "value": "#083943",
       "tuple": "8,57,67,1",
       "leaves": [
-        "imported.badge.root.row-rule-color.teal"
+        "imported.badge.root.color.teal"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.badge.root.row-rule-color.teal",
+          "leaf": "imported.badge.root.color.teal",
           "component": "badge",
           "part": "root",
-          "channel": "row-rule-color",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "teal"
@@ -255,20 +508,19 @@
         }
       ],
       "channelClasses": [
-        "row-rule-color"
+        "color"
       ],
       "refs": 1,
       "usedBy": [
-        "badge:{imported.badge.root.row-rule-color.teal}"
+        "badge:{imported.badge.root.color.teal}"
       ],
       "candidates": [
         {
           "token": "color-text-teal",
-          "score": 6,
+          "score": 5,
           "rules": [
-            "+0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)",
-            "+2 axis:teal→*-teal",
-            "+4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-teal}"
+            "+3 channel:color→color-text-* (1/1 leaf/leaves)",
+            "+2 axis:teal→*-teal"
           ],
           "darkDelta": {
             "light": "#083943",
@@ -291,14 +543,14 @@
       "value": "#09441F",
       "tuple": "9,68,31,1",
       "leaves": [
-        "imported.badge.root.row-rule-color.green"
+        "imported.badge.root.color.green"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.badge.root.row-rule-color.green",
+          "leaf": "imported.badge.root.color.green",
           "component": "badge",
           "part": "root",
-          "channel": "row-rule-color",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "green"
@@ -308,20 +560,19 @@
         }
       ],
       "channelClasses": [
-        "row-rule-color"
+        "color"
       ],
       "refs": 1,
       "usedBy": [
-        "badge:{imported.badge.root.row-rule-color.green}"
+        "badge:{imported.badge.root.color.green}"
       ],
       "candidates": [
         {
           "token": "color-text-green",
-          "score": 6,
+          "score": 5,
           "rules": [
-            "+0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)",
-            "+2 axis:green→*-green",
-            "+4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-green}"
+            "+3 channel:color→color-text-* (1/1 leaf/leaves)",
+            "+2 axis:green→*-green"
           ],
           "darkDelta": {
             "light": "#09441F",
@@ -344,50 +595,32 @@
       "value": "#0A1317",
       "tuple": "10,19,23,1",
       "leaves": [
-        "imported.badge.root.row-rule-color.neutral",
-        "imported.badge.root.row-rule-color.warning",
+        "imported.badge.root.color.neutral",
         "imported.button.label.color.ghost",
         "imported.button.label.color.secondary",
-        "imported.button.label.row-rule-color.ghost",
-        "imported.button.label.row-rule-color.secondary",
         "imported.button.part-0.color.ghost",
         "imported.button.part-0.color.secondary",
-        "imported.button.part-0.row-rule-color.ghost",
-        "imported.button.part-0.row-rule-color.secondary",
         "imported.button.part-1.color.ghost",
         "imported.button.part-1.color.secondary",
-        "imported.button.part-1.row-rule-color.ghost",
-        "imported.button.part-1.row-rule-color.secondary",
+        "imported.button.root.color.ghost",
+        "imported.button.root.color.secondary",
         "imported.button.root.outline-color.ghost",
         "imported.button.root.outline-color.secondary",
-        "imported.button.root.row-rule-color.ghost",
-        "imported.button.root.row-rule-color.secondary",
-        "imported.shared.color-0a1317"
+        "imported.slider.label-3.color",
+        "imported.slider.tooltip.background-color"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.badge.root.row-rule-color.neutral",
+          "leaf": "imported.badge.root.color.neutral",
           "component": "badge",
           "part": "root",
-          "channel": "row-rule-color",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "neutral"
           ],
           "refs": 1,
-          "aliasedTo": "color-text-gray"
-        },
-        {
-          "leaf": "imported.badge.root.row-rule-color.warning",
-          "component": "badge",
-          "part": "root",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "warning"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-on-warning"
+          "aliasedTo": "color-text-primary"
         },
         {
           "leaf": "imported.button.label.color.ghost",
@@ -406,30 +639,6 @@
           "component": "button",
           "part": "label",
           "channel": "color",
-          "state": null,
-          "axisValues": [
-            "secondary"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-text-primary"
-        },
-        {
-          "leaf": "imported.button.label.row-rule-color.ghost",
-          "component": "button",
-          "part": "label",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "ghost"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-text-primary"
-        },
-        {
-          "leaf": "imported.button.label.row-rule-color.secondary",
-          "component": "button",
-          "part": "label",
-          "channel": "row-rule-color",
           "state": null,
           "axisValues": [
             "secondary"
@@ -462,30 +671,6 @@
           "aliasedTo": "color-text-primary"
         },
         {
-          "leaf": "imported.button.part-0.row-rule-color.ghost",
-          "component": "button",
-          "part": "part-0",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "ghost"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-text-primary"
-        },
-        {
-          "leaf": "imported.button.part-0.row-rule-color.secondary",
-          "component": "button",
-          "part": "part-0",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "secondary"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-text-primary"
-        },
-        {
           "leaf": "imported.button.part-1.color.ghost",
           "component": "button",
           "part": "part-1",
@@ -510,10 +695,10 @@
           "aliasedTo": "color-text-primary"
         },
         {
-          "leaf": "imported.button.part-1.row-rule-color.ghost",
+          "leaf": "imported.button.root.color.ghost",
           "component": "button",
-          "part": "part-1",
-          "channel": "row-rule-color",
+          "part": "root",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "ghost"
@@ -522,10 +707,10 @@
           "aliasedTo": "color-text-primary"
         },
         {
-          "leaf": "imported.button.part-1.row-rule-color.secondary",
+          "leaf": "imported.button.root.color.secondary",
           "component": "button",
-          "part": "part-1",
-          "channel": "row-rule-color",
+          "part": "root",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "secondary"
@@ -558,78 +743,66 @@
           "aliasedTo": "color-text-primary"
         },
         {
-          "leaf": "imported.button.root.row-rule-color.ghost",
-          "component": "button",
-          "part": "root",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "ghost"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-text-primary"
-        },
-        {
-          "leaf": "imported.button.root.row-rule-color.secondary",
-          "component": "button",
-          "part": "root",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "secondary"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-text-primary"
-        },
-        {
-          "leaf": "imported.shared.color-0a1317",
-          "component": "shared",
-          "part": "root",
-          "channel": null,
+          "leaf": "imported.slider.label-3.color",
+          "component": "slider",
+          "part": "label-3",
+          "channel": "color",
           "state": null,
           "axisValues": [],
-          "refs": 3,
-          "aliasedTo": null,
-          "decidedLiteral": "ONE LEAF, TWO INCOMPATIBLE ROLES. This value-named shared leaf serves 3 axis-expanded refs that are not the same kind of thing: 1 is a SURFACE (slider tooltip background-color) and 2 are TEXT (slider label-3 color + row-rule-color). The surface role wants {color-background-inverted} (#0A1317 light / #FFFFFF dark) and the text role wants {color-text-primary} or {color-text-gray} (#0A1317 light / #DFE2E5 | #E7EAED dark) — these INVERT against each other in the dark plane, so no single alias can serve both and any choice would silently break one of the two. Fixing it requires SPLITTING the leaf into a surface leaf and a text leaf, which is a path change, which this round forbids. Kept literal with a named follow-up rather than half-fixed."
+          "refs": 1,
+          "aliasedTo": "color-text-primary"
+        },
+        {
+          "leaf": "imported.slider.tooltip.background-color",
+          "component": "slider",
+          "part": "tooltip",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [],
+          "refs": 1,
+          "aliasedTo": "color-background-inverted"
         }
       ],
       "channelClasses": [
-        "(none — value-named shared leaf)",
+        "background-color",
         "color",
-        "outline-color",
-        "row-rule-color"
+        "outline-color"
       ],
-      "refs": 21,
+      "refs": 13,
       "usedBy": [
-        "badge:{imported.badge.root.row-rule-color.neutral}",
-        "badge:{imported.badge.root.row-rule-color.warning}",
+        "badge:{imported.badge.root.color.neutral}",
         "button:{imported.button.label.color.ghost}",
         "button:{imported.button.label.color.secondary}",
-        "button:{imported.button.label.row-rule-color.ghost}",
-        "button:{imported.button.label.row-rule-color.secondary}",
         "button:{imported.button.part-0.color.ghost}",
         "button:{imported.button.part-0.color.secondary}",
-        "button:{imported.button.part-0.row-rule-color.ghost}",
-        "button:{imported.button.part-0.row-rule-color.secondary}",
         "button:{imported.button.part-1.color.ghost}",
         "button:{imported.button.part-1.color.secondary}",
-        "button:{imported.button.part-1.row-rule-color.ghost}",
-        "button:{imported.button.part-1.row-rule-color.secondary}",
+        "button:{imported.button.root.color.ghost}",
+        "button:{imported.button.root.color.secondary}",
         "button:{imported.button.root.outline-color.ghost}",
         "button:{imported.button.root.outline-color.secondary}",
-        "button:{imported.button.root.row-rule-color.ghost}",
-        "button:{imported.button.root.row-rule-color.secondary}",
-        "slider:{imported.shared.color-0a1317}",
-        "slider:{imported.shared.color-0a1317}",
-        "slider:{imported.shared.color-0a1317}"
+        "slider:{imported.slider.label-3.color}",
+        "slider:{imported.slider.tooltip.background-color}"
       ],
       "candidates": [
         {
-          "token": "color-text-gray",
-          "score": 7,
+          "token": "color-background-inverted",
+          "score": 3,
           "rules": [
-            "+3 channel:color→color-text-* (6/19 leaf/leaves)",
-            "+4 sibling-channel fact: 1/19 leaf/leaves sit in a contract channel map that already binds {color-text-gray}"
+            "+3 channel:background-color→color-background-*/color-accent (1/13 leaf/leaves)"
+          ],
+          "darkDelta": {
+            "light": "#0A1317",
+            "dark": "#FFFFFF",
+            "modeVarying": true,
+            "effect": "DARK REPAIR — the leaf is frozen at #0A1317 in BOTH modes today; aliasing to {color-background-inverted} makes it #0A1317 light / #FFFFFF dark. This is a deliberate pixel change in dark mode."
+          }
+        },
+        {
+          "token": "color-text-gray",
+          "score": 3,
+          "rules": [
+            "+3 channel:color→color-text-* (10/13 leaf/leaves)"
           ],
           "darkDelta": {
             "light": "#0A1317",
@@ -640,44 +813,15 @@
         },
         {
           "token": "color-text-primary",
-          "score": 7,
+          "score": 3,
           "rules": [
-            "+3 channel:color→color-text-* (6/19 leaf/leaves)",
-            "+4 sibling-channel fact: 4/19 leaf/leaves sit in a contract channel map that already binds {color-text-primary}"
+            "+3 channel:color→color-text-* (10/13 leaf/leaves)"
           ],
           "darkDelta": {
             "light": "#0A1317",
             "dark": "#DFE2E5",
             "modeVarying": true,
             "effect": "DARK REPAIR — the leaf is frozen at #0A1317 in BOTH modes today; aliasing to {color-text-primary} makes it #0A1317 light / #DFE2E5 dark. This is a deliberate pixel change in dark mode."
-          }
-        },
-        {
-          "token": "color-on-warning",
-          "score": 6,
-          "rules": [
-            "+0 the row's channel class(es) do not point at this token family",
-            "+2 axis:warning→*-warning",
-            "+4 sibling-channel fact: 1/19 leaf/leaves sit in a contract channel map that already binds {color-on-warning}"
-          ],
-          "darkDelta": {
-            "light": "#0A1317",
-            "dark": "#0A1317",
-            "modeVarying": false,
-            "effect": "mode-safe — {color-on-warning} is #0A1317 in both modes, identical to the frozen literal #0A1317; aliasing changes NO pixel in either mode (semantics only)."
-          }
-        },
-        {
-          "token": "color-background-inverted",
-          "score": 0,
-          "rules": [
-            "+0 the row's channel class(es) do not point at this token family"
-          ],
-          "darkDelta": {
-            "light": "#0A1317",
-            "dark": "#FFFFFF",
-            "modeVarying": true,
-            "effect": "DARK REPAIR — the leaf is frozen at #0A1317 in BOTH modes today; aliasing to {color-background-inverted} makes it #0A1317 light / #FFFFFF dark. This is a deliberate pixel change in dark mode."
           }
         },
         {
@@ -692,12 +836,208 @@
             "modeVarying": true,
             "effect": "DARK REPAIR — the leaf is frozen at #0A1317 in BOTH modes today; aliasing to {color-icon-primary} makes it #0A1317 light / #DFE2E5 dark. This is a deliberate pixel change in dark mode."
           }
+        },
+        {
+          "token": "color-on-warning",
+          "score": 0,
+          "rules": [
+            "+0 the row's channel class(es) do not point at this token family"
+          ],
+          "darkDelta": {
+            "light": "#0A1317",
+            "dark": "#0A1317",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-on-warning} is #0A1317 in both modes, identical to the frozen literal #0A1317; aliasing changes NO pixel in either mode (semantics only)."
+          }
         }
       ],
       "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #0A1317 (10,19,23,1) — re-verified at apply time against the then-current DTCG.",
       "evidence": [
-        "RESOLVED: 18 of 19 live leaves alias {color-on-warning}, {color-text-gray}, {color-text-primary} (landed from tokens/reanchor-decisions.json); the remaining 1 were REVIEWED AND KEPT LITERAL — receipts below. Nothing in this row is pending.",
-        "DECIDED LITERAL — `imported.shared.color-0a1317` (3 ref(s)): ONE LEAF, TWO INCOMPATIBLE ROLES. This value-named shared leaf serves 3 axis-expanded refs that are not the same kind of thing: 1 is a SURFACE (slider tooltip background-color) and 2 are TEXT (slider label-3 color + row-rule-color). The surface role wants {color-background-inverted} (#0A1317 light / #FFFFFF dark) and the text role wants {color-text-primary} or {color-text-gray} (#0A1317 light / #DFE2E5 | #E7EAED dark) — these INVERT against each other in the dark plane, so no single alias can serve both and any choice would silently break one of the two. Fixing it requires SPLITTING the leaf into a surface leaf and a text leaf, which is a path change, which this round forbids. Kept literal with a named follow-up rather than half-fixed.",
+        "APPLIED: all 13 live leaf/leaves in this group already alias {color-background-inverted}, {color-text-primary} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
+      "id": "RA-0a131733",
+      "disposition": "applied",
+      "value": "#0A131733",
+      "tuple": "10,19,23,0.2",
+      "leaves": [
+        "imported.card.root.background-color.gray"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.card.root.background-color.gray",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "gray"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-gray"
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 1,
+      "usedBy": [
+        "card:{imported.card.root.background-color.gray}"
+      ],
+      "candidates": [
+        {
+          "token": "color-background-gray",
+          "score": 5,
+          "rules": [
+            "+3 channel:background-color→color-background-*/color-accent (1/1 leaf/leaves)",
+            "+2 axis:gray→*-gray"
+          ],
+          "darkDelta": {
+            "light": "#0A131733",
+            "dark": "#666A724C",
+            "modeVarying": true,
+            "effect": "DARK REPAIR — the leaf is frozen at #0A131733 in BOTH modes today; aliasing to {color-background-gray} makes it #0A131733 light / #666A724C dark. This is a deliberate pixel change in dark mode."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #0A131733 (10,19,23,0.2) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 1 live leaf/leaves in this group already alias {color-background-gray} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
+      "id": "RA-0db7af33",
+      "disposition": "applied",
+      "value": "#0DB7AF33",
+      "tuple": "13,183,175,0.2",
+      "leaves": [
+        "imported.badge.root.background-color.teal",
+        "imported.card.root.background-color.teal"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.teal",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "teal"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-teal"
+        },
+        {
+          "leaf": "imported.card.root.background-color.teal",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "teal"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-teal"
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 2,
+      "usedBy": [
+        "badge:{imported.badge.root.background-color.teal}",
+        "card:{imported.card.root.background-color.teal}"
+      ],
+      "candidates": [
+        {
+          "token": "color-background-teal",
+          "score": 5,
+          "rules": [
+            "+3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)",
+            "+2 axis:teal→*-teal"
+          ],
+          "darkDelta": {
+            "light": "#0DB7AF33",
+            "dark": "#0DB7AF33",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-background-teal} is #0DB7AF33 in both modes, identical to the frozen literal #0DB7AF33; aliasing changes NO pixel in either mode (semantics only)."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #0DB7AF33 (13,183,175,0.2) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 2 live leaf/leaves in this group already alias {color-background-teal} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
+      "id": "RA-24bb5e33",
+      "disposition": "applied",
+      "value": "#24BB5E33",
+      "tuple": "36,187,94,0.2",
+      "leaves": [
+        "imported.badge.root.background-color.green",
+        "imported.card.root.background-color.green"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.green",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "green"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-green"
+        },
+        {
+          "leaf": "imported.card.root.background-color.green",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "green"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-green"
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 2,
+      "usedBy": [
+        "badge:{imported.badge.root.background-color.green}",
+        "card:{imported.card.root.background-color.green}"
+      ],
+      "candidates": [
+        {
+          "token": "color-background-green",
+          "score": 5,
+          "rules": [
+            "+3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)",
+            "+2 axis:green→*-green"
+          ],
+          "darkDelta": {
+            "light": "#24BB5E33",
+            "dark": "#24BB5E33",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-background-green} is #24BB5E33 in both modes, identical to the frozen literal #24BB5E33; aliasing changes NO pixel in either mode (semantics only)."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #24BB5E33 (36,187,94,0.2) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 2 live leaf/leaves in this group already alias {color-background-green} — landed from tokens/reanchor-decisions.json.",
         "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
         "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
       ]
@@ -708,14 +1048,14 @@
       "value": "#3E0697",
       "tuple": "62,6,151,1",
       "leaves": [
-        "imported.badge.root.row-rule-color.purple"
+        "imported.badge.root.color.purple"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.badge.root.row-rule-color.purple",
+          "leaf": "imported.badge.root.color.purple",
           "component": "badge",
           "part": "root",
-          "channel": "row-rule-color",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "purple"
@@ -725,20 +1065,19 @@
         }
       ],
       "channelClasses": [
-        "row-rule-color"
+        "color"
       ],
       "refs": 1,
       "usedBy": [
-        "badge:{imported.badge.root.row-rule-color.purple}"
+        "badge:{imported.badge.root.color.purple}"
       ],
       "candidates": [
         {
           "token": "color-text-purple",
-          "score": 6,
+          "score": 5,
           "rules": [
-            "+0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)",
-            "+2 axis:purple→*-purple",
-            "+4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-purple}"
+            "+3 channel:color→color-text-* (1/1 leaf/leaves)",
+            "+2 axis:purple→*-purple"
           ],
           "darkDelta": {
             "light": "#3E0697",
@@ -761,8 +1100,7 @@
       "value": "#4E606F",
       "tuple": "78,96,111,1",
       "leaves": [
-        "imported.slider.label.color",
-        "imported.slider.label.row-rule-color"
+        "imported.slider.label.color"
       ],
       "leafDetail": [
         {
@@ -774,33 +1112,21 @@
           "axisValues": [],
           "refs": 1,
           "aliasedTo": "color-text-secondary"
-        },
-        {
-          "leaf": "imported.slider.label.row-rule-color",
-          "component": "slider",
-          "part": "label",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [],
-          "refs": 1,
-          "aliasedTo": "color-text-secondary"
         }
       ],
       "channelClasses": [
-        "color",
-        "row-rule-color"
+        "color"
       ],
-      "refs": 2,
+      "refs": 1,
       "usedBy": [
-        "slider:{imported.slider.label.color}",
-        "slider:{imported.slider.label.row-rule-color}"
+        "slider:{imported.slider.label.color}"
       ],
       "candidates": [
         {
           "token": "color-text-secondary",
           "score": 3,
           "rules": [
-            "+3 channel:color→color-text-* (1/2 leaf/leaves)"
+            "+3 channel:color→color-text-* (1/1 leaf/leaves)"
           ],
           "darkDelta": {
             "light": "#4E606F",
@@ -838,7 +1164,7 @@
       ],
       "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #4E606F (78,96,111,1) — re-verified at apply time against the then-current DTCG.",
       "evidence": [
-        "APPLIED: all 2 live leaf/leaves in this group already alias {color-text-secondary} — landed from tokens/reanchor-decisions.json.",
+        "APPLIED: all 1 live leaf/leaves in this group already alias {color-text-secondary} — landed from tokens/reanchor-decisions.json.",
         "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
         "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
       ]
@@ -849,14 +1175,14 @@
       "value": "#650053",
       "tuple": "101,0,83,1",
       "leaves": [
-        "imported.badge.root.row-rule-color.pink"
+        "imported.badge.root.color.pink"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.badge.root.row-rule-color.pink",
+          "leaf": "imported.badge.root.color.pink",
           "component": "badge",
           "part": "root",
-          "channel": "row-rule-color",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "pink"
@@ -866,20 +1192,19 @@
         }
       ],
       "channelClasses": [
-        "row-rule-color"
+        "color"
       ],
       "refs": 1,
       "usedBy": [
-        "badge:{imported.badge.root.row-rule-color.pink}"
+        "badge:{imported.badge.root.color.pink}"
       ],
       "candidates": [
         {
           "token": "color-text-pink",
-          "score": 6,
+          "score": 5,
           "rules": [
-            "+0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)",
-            "+2 axis:pink→*-pink",
-            "+4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-pink}"
+            "+3 channel:color→color-text-* (1/1 leaf/leaves)",
+            "+2 axis:pink→*-pink"
           ],
           "darkDelta": {
             "light": "#650053",
@@ -902,14 +1227,14 @@
       "value": "#6B2203",
       "tuple": "107,34,3,1",
       "leaves": [
-        "imported.badge.root.row-rule-color.orange"
+        "imported.badge.root.color.orange"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.badge.root.row-rule-color.orange",
+          "leaf": "imported.badge.root.color.orange",
           "component": "badge",
           "part": "root",
-          "channel": "row-rule-color",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "orange"
@@ -919,20 +1244,19 @@
         }
       ],
       "channelClasses": [
-        "row-rule-color"
+        "color"
       ],
       "refs": 1,
       "usedBy": [
-        "badge:{imported.badge.root.row-rule-color.orange}"
+        "badge:{imported.badge.root.color.orange}"
       ],
       "candidates": [
         {
           "token": "color-text-orange",
-          "score": 6,
+          "score": 5,
           "rules": [
-            "+0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)",
-            "+2 axis:orange→*-orange",
-            "+4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-orange}"
+            "+3 channel:color→color-text-* (1/1 leaf/leaves)",
+            "+2 axis:orange→*-orange"
           ],
           "darkDelta": {
             "light": "#6B2203",
@@ -955,14 +1279,14 @@
       "value": "#753F07",
       "tuple": "117,63,7,1",
       "leaves": [
-        "imported.badge.root.row-rule-color.yellow"
+        "imported.badge.root.color.yellow"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.badge.root.row-rule-color.yellow",
+          "leaf": "imported.badge.root.color.yellow",
           "component": "badge",
           "part": "root",
-          "channel": "row-rule-color",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "yellow"
@@ -972,20 +1296,19 @@
         }
       ],
       "channelClasses": [
-        "row-rule-color"
+        "color"
       ],
       "refs": 1,
       "usedBy": [
-        "badge:{imported.badge.root.row-rule-color.yellow}"
+        "badge:{imported.badge.root.color.yellow}"
       ],
       "candidates": [
         {
           "token": "color-text-yellow",
-          "score": 6,
+          "score": 5,
           "rules": [
-            "+0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)",
-            "+2 axis:yellow→*-yellow",
-            "+4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-yellow}"
+            "+3 channel:color→color-text-* (1/1 leaf/leaves)",
+            "+2 axis:yellow→*-yellow"
           ],
           "darkDelta": {
             "light": "#753F07",
@@ -1003,19 +1326,85 @@
       ]
     },
     {
+      "id": "RA-7952ff33",
+      "disposition": "applied",
+      "value": "#7952FF33",
+      "tuple": "121,82,255,0.2",
+      "leaves": [
+        "imported.badge.root.background-color.purple",
+        "imported.card.root.background-color.purple"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.purple",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "purple"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-purple"
+        },
+        {
+          "leaf": "imported.card.root.background-color.purple",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "purple"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-purple"
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 2,
+      "usedBy": [
+        "badge:{imported.badge.root.background-color.purple}",
+        "card:{imported.card.root.background-color.purple}"
+      ],
+      "candidates": [
+        {
+          "token": "color-background-purple",
+          "score": 5,
+          "rules": [
+            "+3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)",
+            "+2 axis:purple→*-purple"
+          ],
+          "darkDelta": {
+            "light": "#7952FF33",
+            "dark": "#7952FF33",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-background-purple} is #7952FF33 in both modes, identical to the frozen literal #7952FF33; aliasing changes NO pixel in either mode (semantics only)."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #7952FF33 (121,82,255,0.2) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 2 live leaf/leaves in this group already alias {color-background-purple} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
       "id": "RA-7b0210",
       "disposition": "applied",
       "value": "#7B0210",
       "tuple": "123,2,16,1",
       "leaves": [
-        "imported.badge.root.row-rule-color.red"
+        "imported.badge.root.color.red"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.badge.root.row-rule-color.red",
+          "leaf": "imported.badge.root.color.red",
           "component": "badge",
           "part": "root",
-          "channel": "row-rule-color",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "red"
@@ -1025,20 +1414,19 @@
         }
       ],
       "channelClasses": [
-        "row-rule-color"
+        "color"
       ],
       "refs": 1,
       "usedBy": [
-        "badge:{imported.badge.root.row-rule-color.red}"
+        "badge:{imported.badge.root.color.red}"
       ],
       "candidates": [
         {
           "token": "color-text-red",
-          "score": 6,
+          "score": 5,
           "rules": [
-            "+0 no channel rule: row-rule-color matches none of the five named channel classes (background-color, color, border-*-color, icon parts, fill)",
-            "+2 axis:red→*-red",
-            "+4 sibling-channel fact: 1/1 leaf/leaves sit in a contract channel map that already binds {color-text-red}"
+            "+3 channel:color→color-text-* (1/1 leaf/leaves)",
+            "+2 axis:red→*-red"
           ],
           "darkDelta": {
             "light": "#7B0210",
@@ -1191,69 +1579,395 @@
       ]
     },
     {
+      "id": "RA-e2a40033",
+      "disposition": "applied",
+      "value": "#E2A40033",
+      "tuple": "226,164,0,0.2",
+      "leaves": [
+        "imported.badge.root.background-color.yellow",
+        "imported.card.root.background-color.yellow"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.yellow",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "yellow"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-yellow"
+        },
+        {
+          "leaf": "imported.card.root.background-color.yellow",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "yellow"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-yellow"
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 2,
+      "usedBy": [
+        "badge:{imported.badge.root.background-color.yellow}",
+        "card:{imported.card.root.background-color.yellow}"
+      ],
+      "candidates": [
+        {
+          "token": "color-background-yellow",
+          "score": 5,
+          "rules": [
+            "+3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)",
+            "+2 axis:yellow→*-yellow"
+          ],
+          "darkDelta": {
+            "light": "#E2A40033",
+            "dark": "#E2A40033",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-background-yellow} is #E2A40033 in both modes, identical to the frozen literal #E2A40033; aliasing changes NO pixel in either mode (semantics only)."
+          }
+        },
+        {
+          "token": "color-warning-muted",
+          "score": 0,
+          "rules": [
+            "+0 the row's channel class(es) do not point at this token family"
+          ],
+          "darkDelta": {
+            "light": "#E2A40033",
+            "dark": "#E2A4003F",
+            "modeVarying": true,
+            "effect": "DARK REPAIR — the leaf is frozen at #E2A40033 in BOTH modes today; aliasing to {color-warning-muted} makes it #E2A40033 light / #E2A4003F dark. This is a deliberate pixel change in dark mode."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #E2A40033 (226,164,0,0.2) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 2 live leaf/leaves in this group already alias {color-background-yellow} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
+      "id": "RA-e3193b",
+      "disposition": "applied",
+      "value": "#E3193B",
+      "tuple": "227,25,59,1",
+      "leaves": [
+        "imported.button.root.background-color.destructive",
+        "imported.button.root.outline-color-state-focus-visible.destructive"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.button.root.background-color.destructive",
+          "component": "button",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "destructive"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-error"
+        },
+        {
+          "leaf": "imported.button.root.outline-color-state-focus-visible.destructive",
+          "component": "button",
+          "part": "root",
+          "channel": "outline-color",
+          "state": "focus-visible",
+          "axisValues": [
+            "destructive"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-error"
+        }
+      ],
+      "channelClasses": [
+        "background-color",
+        "outline-color"
+      ],
+      "refs": 2,
+      "usedBy": [
+        "button:{imported.button.root.background-color.destructive}",
+        "button:{imported.button.root.outline-color-state-focus-visible.{variant}}"
+      ],
+      "candidates": [
+        {
+          "token": "color-border-red",
+          "score": 0,
+          "rules": [
+            "+0 the row's channel class(es) do not point at this token family"
+          ],
+          "darkDelta": {
+            "light": "#E3193B",
+            "dark": "#F5394F",
+            "modeVarying": true,
+            "effect": "DARK REPAIR — the leaf is frozen at #E3193B in BOTH modes today; aliasing to {color-border-red} makes it #E3193B light / #F5394F dark. This is a deliberate pixel change in dark mode."
+          }
+        },
+        {
+          "token": "color-error",
+          "score": 0,
+          "rules": [
+            "+0 the row's channel class(es) do not point at this token family"
+          ],
+          "darkDelta": {
+            "light": "#E3193B",
+            "dark": "#F5394F",
+            "modeVarying": true,
+            "effect": "DARK REPAIR — the leaf is frozen at #E3193B in BOTH modes today; aliasing to {color-error} makes it #E3193B light / #F5394F dark. This is a deliberate pixel change in dark mode."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #E3193B (227,25,59,1) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 2 live leaf/leaves in this group already alias {color-error} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
+      "id": "RA-e3193b33",
+      "disposition": "applied",
+      "value": "#E3193B33",
+      "tuple": "227,25,59,0.2",
+      "leaves": [
+        "imported.badge.root.background-color.red",
+        "imported.card.root.background-color.red"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.red",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "red"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-red"
+        },
+        {
+          "leaf": "imported.card.root.background-color.red",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "red"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-red"
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 2,
+      "usedBy": [
+        "badge:{imported.badge.root.background-color.red}",
+        "card:{imported.card.root.background-color.red}"
+      ],
+      "candidates": [
+        {
+          "token": "color-background-red",
+          "score": 5,
+          "rules": [
+            "+3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)",
+            "+2 axis:red→*-red"
+          ],
+          "darkDelta": {
+            "light": "#E3193B33",
+            "dark": "#E3193B33",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-background-red} is #E3193B33 in both modes, identical to the frozen literal #E3193B33; aliasing changes NO pixel in either mode (semantics only)."
+          }
+        },
+        {
+          "token": "color-error-muted",
+          "score": 0,
+          "rules": [
+            "+0 the row's channel class(es) do not point at this token family"
+          ],
+          "darkDelta": {
+            "light": "#E3193B33",
+            "dark": "#F5394F3F",
+            "modeVarying": true,
+            "effect": "DARK REPAIR — the leaf is frozen at #E3193B33 in BOTH modes today; aliasing to {color-error-muted} makes it #E3193B33 light / #F5394F3F dark. This is a deliberate pixel change in dark mode."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #E3193B33 (227,25,59,0.2) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 2 live leaf/leaves in this group already alias {color-background-red} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
+      "id": "RA-e638b333",
+      "disposition": "applied",
+      "value": "#E638B333",
+      "tuple": "230,56,179,0.2",
+      "leaves": [
+        "imported.badge.root.background-color.pink",
+        "imported.card.root.background-color.pink"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.pink",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "pink"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-pink"
+        },
+        {
+          "leaf": "imported.card.root.background-color.pink",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "pink"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-pink"
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 2,
+      "usedBy": [
+        "badge:{imported.badge.root.background-color.pink}",
+        "card:{imported.card.root.background-color.pink}"
+      ],
+      "candidates": [
+        {
+          "token": "color-background-pink",
+          "score": 5,
+          "rules": [
+            "+3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)",
+            "+2 axis:pink→*-pink"
+          ],
+          "darkDelta": {
+            "light": "#E638B333",
+            "dark": "#E638B333",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-background-pink} is #E638B333 in both modes, identical to the frozen literal #E638B333; aliasing changes NO pixel in either mode (semantics only)."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #E638B333 (230,56,179,0.2) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 2 live leaf/leaves in this group already alias {color-background-pink} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
+      "id": "RA-f2790233",
+      "disposition": "applied",
+      "value": "#F2790233",
+      "tuple": "242,121,2,0.2",
+      "leaves": [
+        "imported.badge.root.background-color.orange",
+        "imported.card.root.background-color.orange"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.orange",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "orange"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-orange"
+        },
+        {
+          "leaf": "imported.card.root.background-color.orange",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "orange"
+          ],
+          "refs": 1,
+          "aliasedTo": "color-background-orange"
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 2,
+      "usedBy": [
+        "badge:{imported.badge.root.background-color.orange}",
+        "card:{imported.card.root.background-color.orange}"
+      ],
+      "candidates": [
+        {
+          "token": "color-background-orange",
+          "score": 5,
+          "rules": [
+            "+3 channel:background-color→color-background-*/color-accent (2/2 leaf/leaves)",
+            "+2 axis:orange→*-orange"
+          ],
+          "darkDelta": {
+            "light": "#F2790233",
+            "dark": "#F2790233",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-background-orange} is #F2790233 in both modes, identical to the frozen literal #F2790233; aliasing changes NO pixel in either mode (semantics only)."
+          }
+        }
+      ],
+      "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #F2790233 (242,121,2,0.2) — re-verified at apply time against the then-current DTCG.",
+      "evidence": [
+        "APPLIED: all 2 live leaf/leaves in this group already alias {color-background-orange} — landed from tokens/reanchor-decisions.json.",
+        "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
+        "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
       "id": "RA-ffffff",
       "disposition": "applied",
       "value": "#FFFFFF",
       "tuple": "255,255,255,1",
       "leaves": [
-        "imported.badge.root.row-rule-color.error",
-        "imported.badge.root.row-rule-color.info",
-        "imported.badge.root.row-rule-color.success",
         "imported.button.label.color.destructive",
         "imported.button.label.color.primary",
-        "imported.button.label.row-rule-color.destructive",
-        "imported.button.label.row-rule-color.primary",
         "imported.button.part-0.color.destructive",
         "imported.button.part-0.color.primary",
-        "imported.button.part-0.row-rule-color.destructive",
-        "imported.button.part-0.row-rule-color.primary",
         "imported.button.part-1.color.destructive",
         "imported.button.part-1.color.primary",
-        "imported.button.part-1.row-rule-color.destructive",
-        "imported.button.part-1.row-rule-color.primary",
+        "imported.button.root.color.destructive",
+        "imported.button.root.color.primary",
         "imported.button.root.outline-color.destructive",
         "imported.button.root.outline-color.primary",
-        "imported.button.root.row-rule-color.destructive",
-        "imported.button.root.row-rule-color.primary",
-        "imported.shared.color-ffffff"
+        "imported.card.root.background-color.default",
+        "imported.slider.label-2.color",
+        "imported.slider.tooltip.color"
       ],
       "leafDetail": [
-        {
-          "leaf": "imported.badge.root.row-rule-color.error",
-          "component": "badge",
-          "part": "root",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "error"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-on-accent"
-        },
-        {
-          "leaf": "imported.badge.root.row-rule-color.info",
-          "component": "badge",
-          "part": "root",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "info"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-on-accent"
-        },
-        {
-          "leaf": "imported.badge.root.row-rule-color.success",
-          "component": "badge",
-          "part": "root",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "success"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-on-accent"
-        },
         {
           "leaf": "imported.button.label.color.destructive",
           "component": "button",
@@ -1271,30 +1985,6 @@
           "component": "button",
           "part": "label",
           "channel": "color",
-          "state": null,
-          "axisValues": [
-            "primary"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-on-accent"
-        },
-        {
-          "leaf": "imported.button.label.row-rule-color.destructive",
-          "component": "button",
-          "part": "label",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "destructive"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-on-error"
-        },
-        {
-          "leaf": "imported.button.label.row-rule-color.primary",
-          "component": "button",
-          "part": "label",
-          "channel": "row-rule-color",
           "state": null,
           "axisValues": [
             "primary"
@@ -1327,30 +2017,6 @@
           "aliasedTo": "color-on-accent"
         },
         {
-          "leaf": "imported.button.part-0.row-rule-color.destructive",
-          "component": "button",
-          "part": "part-0",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "destructive"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-on-error"
-        },
-        {
-          "leaf": "imported.button.part-0.row-rule-color.primary",
-          "component": "button",
-          "part": "part-0",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "primary"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-on-accent"
-        },
-        {
           "leaf": "imported.button.part-1.color.destructive",
           "component": "button",
           "part": "part-1",
@@ -1375,10 +2041,10 @@
           "aliasedTo": "color-on-accent"
         },
         {
-          "leaf": "imported.button.part-1.row-rule-color.destructive",
+          "leaf": "imported.button.root.color.destructive",
           "component": "button",
-          "part": "part-1",
-          "channel": "row-rule-color",
+          "part": "root",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "destructive"
@@ -1387,10 +2053,10 @@
           "aliasedTo": "color-on-error"
         },
         {
-          "leaf": "imported.button.part-1.row-rule-color.primary",
+          "leaf": "imported.button.root.color.primary",
           "component": "button",
-          "part": "part-1",
-          "channel": "row-rule-color",
+          "part": "root",
+          "channel": "color",
           "state": null,
           "axisValues": [
             "primary"
@@ -1423,122 +2089,65 @@
           "aliasedTo": "color-on-accent"
         },
         {
-          "leaf": "imported.button.root.row-rule-color.destructive",
-          "component": "button",
+          "leaf": "imported.card.root.background-color.default",
+          "component": "card",
           "part": "root",
-          "channel": "row-rule-color",
+          "channel": "background-color",
           "state": null,
           "axisValues": [
-            "destructive"
+            "default"
           ],
           "refs": 1,
-          "aliasedTo": "color-on-error"
+          "aliasedTo": "color-background-card"
         },
         {
-          "leaf": "imported.button.root.row-rule-color.primary",
-          "component": "button",
-          "part": "root",
-          "channel": "row-rule-color",
-          "state": null,
-          "axisValues": [
-            "primary"
-          ],
-          "refs": 1,
-          "aliasedTo": "color-on-accent"
-        },
-        {
-          "leaf": "imported.shared.color-ffffff",
-          "component": "shared",
-          "part": "root",
-          "channel": null,
+          "leaf": "imported.slider.label-2.color",
+          "component": "slider",
+          "part": "label-2",
+          "channel": "color",
           "state": null,
           "axisValues": [],
-          "refs": 4,
-          "aliasedTo": null,
-          "decidedLiteral": "NO ROLE-GRADE EVIDENCE. Value-named SHARED leaf: the path spells no channel, it carries no variant axis, and its contract cells bind no sibling base token — so none of the three role-grade evidence classes fires. Its 4 axis-expanded refs are all content channels (color + row-rule-color) on the slider tooltip and its label-2, whose SURFACE is itself another unnamed minted literal (imported.shared.color-0a1317). Named near-miss, deliberately declined: {color-on-dark} is a plausible role match (white content on a dark surface) and is mode-safe in both planes, but nothing on disk GRADES the pairing — the surface it would be \"on\" is a literal, not a token — so anchoring it would be a name-shaped guess dressed as a fact. Named follow-up: name the tooltip surface first (split imported.shared.color-0a1317, below), then this leaf becomes decidable."
+          "refs": 1,
+          "aliasedTo": "color-on-dark"
+        },
+        {
+          "leaf": "imported.slider.tooltip.color",
+          "component": "slider",
+          "part": "tooltip",
+          "channel": "color",
+          "state": null,
+          "axisValues": [],
+          "refs": 1,
+          "aliasedTo": "color-on-dark"
         }
       ],
       "channelClasses": [
-        "(none — value-named shared leaf)",
+        "background-color",
         "color",
-        "outline-color",
-        "row-rule-color"
+        "outline-color"
       ],
-      "refs": 23,
+      "refs": 13,
       "usedBy": [
-        "badge:{imported.badge.root.row-rule-color.error}",
-        "badge:{imported.badge.root.row-rule-color.info}",
-        "badge:{imported.badge.root.row-rule-color.success}",
         "button:{imported.button.label.color.destructive}",
         "button:{imported.button.label.color.primary}",
-        "button:{imported.button.label.row-rule-color.destructive}",
-        "button:{imported.button.label.row-rule-color.primary}",
         "button:{imported.button.part-0.color.destructive}",
         "button:{imported.button.part-0.color.primary}",
-        "button:{imported.button.part-0.row-rule-color.destructive}",
-        "button:{imported.button.part-0.row-rule-color.primary}",
         "button:{imported.button.part-1.color.destructive}",
         "button:{imported.button.part-1.color.primary}",
-        "button:{imported.button.part-1.row-rule-color.destructive}",
-        "button:{imported.button.part-1.row-rule-color.primary}",
+        "button:{imported.button.root.color.destructive}",
+        "button:{imported.button.root.color.primary}",
         "button:{imported.button.root.outline-color.destructive}",
         "button:{imported.button.root.outline-color.primary}",
-        "button:{imported.button.root.row-rule-color.destructive}",
-        "button:{imported.button.root.row-rule-color.primary}",
-        "slider:{imported.shared.color-ffffff}",
-        "slider:{imported.shared.color-ffffff}",
-        "slider:{imported.shared.color-ffffff}",
-        "slider:{imported.shared.color-ffffff}"
+        "card:{imported.card.root.background-color.default}",
+        "slider:{imported.slider.label-2.color}",
+        "slider:{imported.slider.tooltip.color}"
       ],
       "candidates": [
         {
-          "token": "color-on-error",
-          "score": 6,
-          "rules": [
-            "+0 the row's channel class(es) do not point at this token family",
-            "+2 axis:error→*-error",
-            "+4 sibling-channel fact: 2/20 leaf/leaves sit in a contract channel map that already binds {color-on-error}"
-          ],
-          "darkDelta": {
-            "light": "#FFFFFF",
-            "dark": "#FFFFFF",
-            "modeVarying": false,
-            "effect": "mode-safe — {color-on-error} is #FFFFFF in both modes, identical to the frozen literal #FFFFFF; aliasing changes NO pixel in either mode (semantics only)."
-          }
-        },
-        {
-          "token": "color-on-accent",
-          "score": 4,
-          "rules": [
-            "+0 the row's channel class(es) do not point at this token family",
-            "+4 sibling-channel fact: 5/20 leaf/leaves sit in a contract channel map that already binds {color-on-accent}"
-          ],
-          "darkDelta": {
-            "light": "#FFFFFF",
-            "dark": "#FFFFFF",
-            "modeVarying": false,
-            "effect": "mode-safe — {color-on-accent} is #FFFFFF in both modes, identical to the frozen literal #FFFFFF; aliasing changes NO pixel in either mode (semantics only)."
-          }
-        },
-        {
-          "token": "color-on-success",
-          "score": 2,
-          "rules": [
-            "+0 the row's channel class(es) do not point at this token family",
-            "+2 axis:success→*-success"
-          ],
-          "darkDelta": {
-            "light": "#FFFFFF",
-            "dark": "#FFFFFF",
-            "modeVarying": false,
-            "effect": "mode-safe — {color-on-success} is #FFFFFF in both modes, identical to the frozen literal #FFFFFF; aliasing changes NO pixel in either mode (semantics only)."
-          }
-        },
-        {
           "token": "color-background-card",
-          "score": 0,
+          "score": 3,
           "rules": [
-            "+0 the row's channel class(es) do not point at this token family"
+            "+3 channel:background-color→color-background-*/color-accent (1/13 leaf/leaves)"
           ],
           "darkDelta": {
             "light": "#FFFFFF",
@@ -1549,9 +2158,9 @@
         },
         {
           "token": "color-background-popover",
-          "score": 0,
+          "score": 3,
           "rules": [
-            "+0 the row's channel class(es) do not point at this token family"
+            "+3 channel:background-color→color-background-*/color-accent (1/13 leaf/leaves)"
           ],
           "darkDelta": {
             "light": "#FFFFFF",
@@ -1562,15 +2171,28 @@
         },
         {
           "token": "color-background-surface",
-          "score": 0,
+          "score": 3,
           "rules": [
-            "+0 the row's channel class(es) do not point at this token family"
+            "+3 channel:background-color→color-background-*/color-accent (1/13 leaf/leaves)"
           ],
           "darkDelta": {
             "light": "#FFFFFF",
             "dark": "#1F1F22",
             "modeVarying": true,
             "effect": "DARK REPAIR — the leaf is frozen at #FFFFFF in BOTH modes today; aliasing to {color-background-surface} makes it #FFFFFF light / #1F1F22 dark. This is a deliberate pixel change in dark mode."
+          }
+        },
+        {
+          "token": "color-on-accent",
+          "score": 0,
+          "rules": [
+            "+0 the row's channel class(es) do not point at this token family"
+          ],
+          "darkDelta": {
+            "light": "#FFFFFF",
+            "dark": "#FFFFFF",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-on-accent} is #FFFFFF in both modes, identical to the frozen literal #FFFFFF; aliasing changes NO pixel in either mode (semantics only)."
           }
         },
         {
@@ -1585,14 +2207,90 @@
             "modeVarying": false,
             "effect": "mode-safe — {color-on-dark} is #FFFFFF in both modes, identical to the frozen literal #FFFFFF; aliasing changes NO pixel in either mode (semantics only)."
           }
+        },
+        {
+          "token": "color-on-error",
+          "score": 0,
+          "rules": [
+            "+0 the row's channel class(es) do not point at this token family"
+          ],
+          "darkDelta": {
+            "light": "#FFFFFF",
+            "dark": "#FFFFFF",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-on-error} is #FFFFFF in both modes, identical to the frozen literal #FFFFFF; aliasing changes NO pixel in either mode (semantics only)."
+          }
+        },
+        {
+          "token": "color-on-success",
+          "score": 0,
+          "rules": [
+            "+0 the row's channel class(es) do not point at this token family"
+          ],
+          "darkDelta": {
+            "light": "#FFFFFF",
+            "dark": "#FFFFFF",
+            "modeVarying": false,
+            "effect": "mode-safe — {color-on-success} is #FFFFFF in both modes, identical to the frozen literal #FFFFFF; aliasing changes NO pixel in either mode (semantics only)."
+          }
         }
       ],
       "lightProof": "every candidate's NEUTRAL light value tuple-equals the leaf literal #FFFFFF (255,255,255,1) — re-verified at apply time against the then-current DTCG.",
       "evidence": [
-        "RESOLVED: 19 of 20 live leaves alias {color-on-accent}, {color-on-error} (landed from tokens/reanchor-decisions.json); the remaining 1 were REVIEWED AND KEPT LITERAL — receipts below. Nothing in this row is pending.",
-        "DECIDED LITERAL — `imported.shared.color-ffffff` (4 ref(s)): NO ROLE-GRADE EVIDENCE. Value-named SHARED leaf: the path spells no channel, it carries no variant axis, and its contract cells bind no sibling base token — so none of the three role-grade evidence classes fires. Its 4 axis-expanded refs are all content channels (color + row-rule-color) on the slider tooltip and its label-2, whose SURFACE is itself another unnamed minted literal (imported.shared.color-0a1317). Named near-miss, deliberately declined: {color-on-dark} is a plausible role match (white content on a dark surface) and is mode-safe in both planes, but nothing on disk GRADES the pairing — the surface it would be \"on\" is a literal, not a token — so anchoring it would be a name-shaped guess dressed as a fact. Named follow-up: name the tooltip surface first (split imported.shared.color-0a1317, below), then this leaf becomes decidable.",
+        "APPLIED: all 13 live leaf/leaves in this group already alias {color-background-card}, {color-on-accent}, {color-on-dark}, {color-on-error} — landed from tokens/reanchor-decisions.json.",
         "The row stays in the queue on purpose: a landed decision must remain visible and re-runnable. `--apply` on this id is an idempotent no-op that re-verifies the ledger against the current DTCG.",
         "TO REVERT: delete the row from tokens/reanchor-decisions.json and re-run `npx tsx examples/astryx/scripts/promote-floor.ts` (the minted tree is regenerated from the computed-floor capture, so the literal comes back)."
+      ]
+    },
+    {
+      "id": "RA-nomatch-00000000",
+      "disposition": "no-match",
+      "value": "#00000000",
+      "tuple": "0,0,0,0",
+      "leaves": [
+        "imported.button.root.background-color.ghost",
+        "imported.card.root.background-color.transparent"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.button.root.background-color.ghost",
+          "component": "button",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "ghost"
+          ],
+          "refs": 1,
+          "aliasedTo": null,
+          "decidedLiteral": "NO CANDIDATE EXISTS, and that is a fact about the value rather than a gap in the review. #00000000 is fully transparent — ZERO paint — and the neutral anchor defines no colour token for the absence of a fill, because a design system names colours, not their absence. The two leaves are exactly the two cells whose whole design intent is to paint nothing: button variant=ghost and card variant=transparent. Re-anchoring either onto any colour token would make a transparent surface start painting on a re-theme, which is the opposite of what the variant means. Kept literal deliberately, with this receipt, so the pair is DECIDED rather than pending."
+        },
+        {
+          "leaf": "imported.card.root.background-color.transparent",
+          "component": "card",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "transparent"
+          ],
+          "refs": 1,
+          "aliasedTo": null,
+          "decidedLiteral": "NO CANDIDATE EXISTS, and that is a fact about the value rather than a gap in the review. #00000000 is fully transparent — ZERO paint — and the neutral anchor defines no colour token for the absence of a fill, because a design system names colours, not their absence. The two leaves are exactly the two cells whose whole design intent is to paint nothing: button variant=ghost and card variant=transparent. Re-anchoring either onto any colour token would make a transparent surface start painting on a re-theme, which is the opposite of what the variant means. Kept literal deliberately, with this receipt, so the pair is DECIDED rather than pending."
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 2,
+      "usedBy": [
+        "button:{imported.button.root.background-color.ghost}",
+        "card:{imported.card.root.background-color.transparent}"
+      ],
+      "candidates": [],
+      "lightProof": "n/a — no base color token carries this value.",
+      "evidence": [
+        "NO MATCH: the literal equals no color token in the neutral anchor. There is nothing to re-anchor onto; the leaf stays literal by construction."
       ]
     },
     {
@@ -2347,50 +3045,24 @@
       "value": "#0064e0",
       "tuple": "0,100,224,1",
       "leaves": [
-        "imported.button.root.outline-color-state-focus-visible.ghost",
-        "imported.button.root.outline-color-state-focus-visible.primary",
-        "imported.button.root.outline-color-state-focus-visible.secondary"
+        "imported.badge.root.background-color.info"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.button.root.outline-color-state-focus-visible.ghost",
-          "component": "button",
+          "leaf": "imported.badge.root.background-color.info",
+          "component": "badge",
           "part": "root",
-          "channel": "outline-color",
-          "state": "focus-visible",
+          "channel": "background-color",
+          "state": null,
           "axisValues": [
-            "ghost"
-          ],
-          "refs": 0,
-          "aliasedTo": null
-        },
-        {
-          "leaf": "imported.button.root.outline-color-state-focus-visible.primary",
-          "component": "button",
-          "part": "root",
-          "channel": "outline-color",
-          "state": "focus-visible",
-          "axisValues": [
-            "primary"
-          ],
-          "refs": 0,
-          "aliasedTo": null
-        },
-        {
-          "leaf": "imported.button.root.outline-color-state-focus-visible.secondary",
-          "component": "button",
-          "part": "root",
-          "channel": "outline-color",
-          "state": "focus-visible",
-          "axisValues": [
-            "secondary"
+            "info"
           ],
           "refs": 0,
           "aliasedTo": null
         }
       ],
       "channelClasses": [
-        "outline-color"
+        "background-color"
       ],
       "refs": 0,
       "usedBy": [],
@@ -2400,6 +3072,91 @@
         "EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.",
         "Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.",
         "Candidates the value WOULD have matched: color-accent, color-border-blue, color-icon-accent, color-icon-blue, color-text-accent."
+      ]
+    },
+    {
+      "id": "RA-X-unref-0536591a",
+      "disposition": "excluded",
+      "exclusion": "unreferenced-leaf",
+      "value": "#0536591a",
+      "tuple": "5,54,89,0.102",
+      "leaves": [
+        "imported.badge.root.background-color.neutral",
+        "imported.button.root.background-color.secondary"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.neutral",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "neutral"
+          ],
+          "refs": 0,
+          "aliasedTo": null
+        },
+        {
+          "leaf": "imported.button.root.background-color.secondary",
+          "component": "button",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "secondary"
+          ],
+          "refs": 0,
+          "aliasedTo": null
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 0,
+      "usedBy": [],
+      "candidates": [],
+      "lightProof": "n/a — nothing binds these leaves, so no rendered pixel can be proven either way.",
+      "evidence": [
+        "EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.",
+        "Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.",
+        "Candidates the value WOULD have matched: (none)."
+      ]
+    },
+    {
+      "id": "RA-X-unref-0a1317",
+      "disposition": "excluded",
+      "exclusion": "unreferenced-leaf",
+      "value": "#0a1317",
+      "tuple": "10,19,23,1",
+      "leaves": [
+        "imported.badge.root.color.warning"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.color.warning",
+          "component": "badge",
+          "part": "root",
+          "channel": "color",
+          "state": null,
+          "axisValues": [
+            "warning"
+          ],
+          "refs": 0,
+          "aliasedTo": null
+        }
+      ],
+      "channelClasses": [
+        "color"
+      ],
+      "refs": 0,
+      "usedBy": [],
+      "candidates": [],
+      "lightProof": "n/a — nothing binds these leaves, so no rendered pixel can be proven either way.",
+      "evidence": [
+        "EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.",
+        "Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.",
+        "Candidates the value WOULD have matched: color-background-inverted, color-icon-primary, color-on-warning, color-text-gray, color-text-primary."
       ]
     },
     {
@@ -2448,20 +3205,67 @@
       ]
     },
     {
+      "id": "RA-X-unref-0d8626",
+      "disposition": "excluded",
+      "exclusion": "unreferenced-leaf",
+      "value": "#0d8626",
+      "tuple": "13,134,38,1",
+      "leaves": [
+        "imported.badge.root.background-color.success"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.success",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "success"
+          ],
+          "refs": 0,
+          "aliasedTo": null
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 0,
+      "usedBy": [],
+      "candidates": [],
+      "lightProof": "n/a — nothing binds these leaves, so no rendered pixel can be proven either way.",
+      "evidence": [
+        "EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.",
+        "Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.",
+        "Candidates the value WOULD have matched: color-border-green, color-icon-green, color-success."
+      ]
+    },
+    {
       "id": "RA-X-unref-4e606f",
       "disposition": "excluded",
       "exclusion": "unreferenced-leaf",
       "value": "#4e606f",
       "tuple": "78,96,111,1",
       "leaves": [
-        "imported.shared.color-4e606f"
+        "imported.switch.label-2.color",
+        "imported.switch.label.color"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.shared.color-4e606f",
-          "component": "shared",
-          "part": "root",
-          "channel": null,
+          "leaf": "imported.switch.label-2.color",
+          "component": "switch",
+          "part": "label-2",
+          "channel": "color",
+          "state": null,
+          "axisValues": [],
+          "refs": 0,
+          "aliasedTo": null
+        },
+        {
+          "leaf": "imported.switch.label.color",
+          "component": "switch",
+          "part": "label",
+          "channel": "color",
           "state": null,
           "axisValues": [],
           "refs": 0,
@@ -2469,7 +3273,7 @@
         }
       ],
       "channelClasses": [
-        "(none — value-named shared leaf)"
+        "color"
       ],
       "refs": 0,
       "usedBy": [],
@@ -2488,24 +3292,24 @@
       "value": "#e3193b",
       "tuple": "227,25,59,1",
       "leaves": [
-        "imported.button.root.outline-color-state-focus-visible.destructive"
+        "imported.badge.root.background-color.error"
       ],
       "leafDetail": [
         {
-          "leaf": "imported.button.root.outline-color-state-focus-visible.destructive",
-          "component": "button",
+          "leaf": "imported.badge.root.background-color.error",
+          "component": "badge",
           "part": "root",
-          "channel": "outline-color",
-          "state": "focus-visible",
+          "channel": "background-color",
+          "state": null,
           "axisValues": [
-            "destructive"
+            "error"
           ],
           "refs": 0,
           "aliasedTo": null
         }
       ],
       "channelClasses": [
-        "outline-color"
+        "background-color"
       ],
       "refs": 0,
       "usedBy": [],
@@ -2518,16 +3322,91 @@
       ]
     },
     {
+      "id": "RA-X-unref-e9af08",
+      "disposition": "excluded",
+      "exclusion": "unreferenced-leaf",
+      "value": "#e9af08",
+      "tuple": "233,175,8,1",
+      "leaves": [
+        "imported.badge.root.background-color.warning"
+      ],
+      "leafDetail": [
+        {
+          "leaf": "imported.badge.root.background-color.warning",
+          "component": "badge",
+          "part": "root",
+          "channel": "background-color",
+          "state": null,
+          "axisValues": [
+            "warning"
+          ],
+          "refs": 0,
+          "aliasedTo": null
+        }
+      ],
+      "channelClasses": [
+        "background-color"
+      ],
+      "refs": 0,
+      "usedBy": [],
+      "candidates": [],
+      "lightProof": "n/a — nothing binds these leaves, so no rendered pixel can be proven either way.",
+      "evidence": [
+        "EXCLUDED unreferenced-leaf: ZERO axis-expanded {imported.*} refs from any of the 13 contracts reach these leaves.",
+        "Re-anchoring an unbound leaf changes no pixel and no semantics a consumer can observe — it only adds an unverifiable claim to the tree. Receipted here so the choice is visible, not silent.",
+        "Candidates the value WOULD have matched: color-warning."
+      ]
+    },
+    {
       "id": "RA-X-unref-ffffff",
       "disposition": "excluded",
       "exclusion": "unreferenced-leaf",
       "value": "#ffffff",
       "tuple": "255,255,255,1",
       "leaves": [
+        "imported.badge.root.color.error",
+        "imported.badge.root.color.info",
+        "imported.badge.root.color.success",
         "imported.switch.switch-thumb-2.background-color",
         "imported.switch.switch-thumb.background-color"
       ],
       "leafDetail": [
+        {
+          "leaf": "imported.badge.root.color.error",
+          "component": "badge",
+          "part": "root",
+          "channel": "color",
+          "state": null,
+          "axisValues": [
+            "error"
+          ],
+          "refs": 0,
+          "aliasedTo": null
+        },
+        {
+          "leaf": "imported.badge.root.color.info",
+          "component": "badge",
+          "part": "root",
+          "channel": "color",
+          "state": null,
+          "axisValues": [
+            "info"
+          ],
+          "refs": 0,
+          "aliasedTo": null
+        },
+        {
+          "leaf": "imported.badge.root.color.success",
+          "component": "badge",
+          "part": "root",
+          "channel": "color",
+          "state": null,
+          "axisValues": [
+            "success"
+          ],
+          "refs": 0,
+          "aliasedTo": null
+        },
         {
           "leaf": "imported.switch.switch-thumb-2.background-color",
           "component": "switch",
@@ -2550,7 +3429,8 @@
         }
       ],
       "channelClasses": [
-        "background-color"
+        "background-color",
+        "color"
       ],
       "refs": 0,
       "usedBy": [],

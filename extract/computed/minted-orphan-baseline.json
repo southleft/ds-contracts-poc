@@ -1,5 +1,5 @@
 {
-  "_marker": "UNREFERENCED MINTED LEAVES per library — a DECREASE-ONLY ratchet (task #42, cause B). Re-record with `npm run eval -- --only minted-leaves --write-orphan-baseline` as part of a reviewed change.",
+  "_marker": "UNREFERENCED MINTED LEAVES per library \u2014 a DECREASE-ONLY ratchet (task #42, cause B). Re-record with `npm run eval -- --only minted-leaves --write-orphan-baseline` as part of a reviewed change.",
   "rows": [
     {
       "library": "altitude",
@@ -8,8 +8,8 @@
     },
     {
       "library": "astryx",
-      "leaves": 237,
-      "unreferenced": 26
+      "leaves": 408,
+      "unreferenced": 42
     },
     {
       "library": "carbon",
@@ -31,5 +31,6 @@
       "leaves": 236,
       "unreferenced": 2
     }
-  ]
+  ],
+  "_astryxRecaptureNote": "2026-07-29 \u2014 astryx's row moved 237 leaves / 26 unreferenced -> 408 / 42 and that is a RE-RECORD OF A REVIEWED CHANGE, not a ratchet failure waved through. Cause: the recapture (task #43, the first after the capture stopped reading its own promote output) reads far more of the library \u2014 171 more minted leaves, of which 21 are colour and 150 are dimensions. The 16 extra unreferenced leaves are the SAME cause B the mint round named and carried: a leaf the engine mints whose BINDING never reached the contract (the focus-visible outline arm is the clearest example \u2014 the value is minted and now semantically anchored, but no contract cell references it). Reading more of a library surfaces more of cause B; it does not create it. The quality number that matters moved the RIGHT way in the same round: of the anchorable denominator \u2014 colour leaves \u2014 aliased went 54/113 = 47.8% to 68/134 = 50.7%."
 }

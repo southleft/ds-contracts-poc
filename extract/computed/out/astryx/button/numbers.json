@@ -1,11 +1,11 @@
 {
   "component": "Button",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "captures": 96,
   "combos": 24,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 658,
+  "channelsEnumerated": 661,
   "elementsPerCapture": 4,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
@@ -15,7 +15,7 @@
     "part-1": 39
   },
   "folds": {
-    "count": 35,
+    "count": 39,
     "receipts": [
       {
         "part": "root",
@@ -55,6 +55,12 @@
       },
       {
         "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -109,6 +115,12 @@
       },
       {
         "part": "part-0",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -163,6 +175,12 @@
       },
       {
         "part": "label",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -217,6 +235,12 @@
       },
       {
         "part": "part-1",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -228,28 +252,28 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 181,
-    "mintedLeavesFolded": 41
+    "mintedLeavesUnfolded": 207,
+    "mintedLeavesFolded": 51
   },
   "bound": {
-    "cellsChecked": 405,
-    "confirmed": 225,
-    "contradictions": 180,
-    "untriaged": 180
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
   },
   "minted": {
-    "leaves": 41,
-    "baseBindings": 21,
+    "leaves": 51,
+    "baseBindings": 49,
     "stateBindings": 6,
     "byShape": {
-      "uniform": 19,
-      "perAxis": 8,
+      "uniform": 46,
+      "perAxis": 9,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 1,
+    "base": 31,
     "state": 5
   },
   "codeOnly": {
@@ -266,9 +290,9 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 251904,
-    "cellsMatched": 251712,
-    "pct": 99.92378048780488,
+    "cellsCompared": 253056,
+    "cellsMatched": 252864,
+    "pct": 99.92412746585735,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -284,6 +308,12 @@
   },
   "pixel": {
     "pairs": 96,
+    "measured": 96,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
       "mean": 0.0994873046875,
       "max": 2.4055989583333335,
@@ -338,7 +368,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 98.72395833333333,
+    "computedPctEqual": 98.95833333333333,
     "rowsFullyEqual": 0,
     "rows": 96,
     "pixelPerfectExact": 0,

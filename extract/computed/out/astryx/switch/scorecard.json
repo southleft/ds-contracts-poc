@@ -1,14 +1,14 @@
 {
   "component": "Switch",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 4,
   "interactions": 4,
   "computed": {
     "cellsCompared": 1536,
-    "cellsEqual": 1172,
-    "pctEqual": 76.30208333333333,
+    "cellsEqual": 1188,
+    "pctEqual": 77.34375,
     "rowsFullyEqual": 0,
     "rows": 16
   },
@@ -16,70 +16,76 @@
     "pairs": 16,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 6.094563802083335,
-    "meanAA": 2.822672526041667,
-    "maxAA": 4.111328125
+    "measured": 16,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 4.392903645833333,
+    "meanAA": 0.6929524739583335,
+    "maxAA": 1.083984375
   },
   "fusion": {
     "boundConfirmed": 0,
-    "boundCells": 10,
-    "contradictions": 10,
-    "mintedLeaves": 24,
-    "mintedLeavesUnfolded": 24,
-    "baseBindings": 64,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 33,
+    "mintedLeavesUnfolded": 32,
+    "baseBindings": 74,
     "stateBindings": 0,
-    "codeOnlyChannels": 60,
+    "codeOnlyChannels": 56,
     "overflowBindings": 0,
-    "folds": 18
+    "folds": 20
   },
   "worstRows": [
     {
-      "key": "end.no-isDisabled__focus-visible",
-      "pctAA": 4.111328125,
-      "pctExact": 7.008463541666667,
-      "channelsMismatched": 16
+      "key": "start.isDisabled__default",
+      "pctAA": 1.083984375,
+      "pctExact": 4.954427083333333,
+      "channelsMismatched": 28
     },
     {
-      "key": "start.no-isDisabled__focus-visible",
-      "pctAA": 3.9908854166666665,
-      "pctExact": 6.832682291666667,
-      "channelsMismatched": 16
+      "key": "start.isDisabled__hover",
+      "pctAA": 1.083984375,
+      "pctExact": 4.954427083333333,
+      "channelsMismatched": 28
     },
     {
-      "key": "end.no-isDisabled__default",
-      "pctAA": 3.5286458333333335,
-      "pctExact": 6.005859375,
-      "channelsMismatched": 16
+      "key": "start.isDisabled__focus-visible",
+      "pctAA": 1.083984375,
+      "pctExact": 4.954427083333333,
+      "channelsMismatched": 28
     },
     {
-      "key": "end.no-isDisabled__hover",
-      "pctAA": 3.515625,
-      "pctExact": 6.077473958333333,
-      "channelsMismatched": 17
+      "key": "start.isDisabled__active",
+      "pctAA": 1.083984375,
+      "pctExact": 4.954427083333333,
+      "channelsMismatched": 28
     },
     {
-      "key": "end.no-isDisabled__active",
-      "pctAA": 3.515625,
-      "pctExact": 6.077473958333333,
-      "channelsMismatched": 17
+      "key": "end.isDisabled__default",
+      "pctAA": 1.083984375,
+      "pctExact": 4.954427083333333,
+      "channelsMismatched": 28
     },
     {
-      "key": "start.no-isDisabled__hover",
-      "pctAA": 3.3951822916666665,
-      "pctExact": 5.810546875,
-      "channelsMismatched": 17
+      "key": "end.isDisabled__hover",
+      "pctAA": 1.083984375,
+      "pctExact": 4.954427083333333,
+      "channelsMismatched": 28
     },
     {
-      "key": "start.no-isDisabled__active",
-      "pctAA": 3.3951822916666665,
-      "pctExact": 5.810546875,
-      "channelsMismatched": 17
+      "key": "end.isDisabled__focus-visible",
+      "pctAA": 1.083984375,
+      "pctExact": 4.954427083333333,
+      "channelsMismatched": 28
     },
     {
-      "key": "start.no-isDisabled__default",
-      "pctAA": 3.3951822916666665,
-      "pctExact": 5.738932291666667,
-      "channelsMismatched": 16
+      "key": "end.isDisabled__active",
+      "pctAA": 1.083984375,
+      "pctExact": 4.954427083333333,
+      "channelsMismatched": 28
     }
   ],
   "topMismatchedChannels": [
@@ -145,7 +151,6 @@
     ]
   ],
   "namedLosses": [
-    "promotion: static-part-unrendered: reviewed static part \"track\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
     "code-only: part-0-0.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-0-0.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-0-0.column-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -159,7 +164,6 @@
     "code-only: part-0-0.row-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-0-0.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-0-0-0.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: switch-thumb.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-0-1.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-0-1.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-0-1.column-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -173,15 +177,12 @@
     "code-only: part-0-1.row-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-0-1.top — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: part-0-1-0.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: switch-thumb-2.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only[active]: switch-2.background-color — value shape outside mintable kinds and outside the declared vocabulary",
     "code-only[active]: switch.background-color — value shape outside mintable kinds and outside the declared vocabulary",
     "code-only[disabled]: label-2.color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[disabled]: label-2.cursor — declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue",
-    "code-only[disabled]: label-2.row-rule-color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[disabled]: label.color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[disabled]: label.cursor — declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue",
-    "code-only[disabled]: label.row-rule-color — default-state values not kind-compatible for padding — cannot correlate",
     "code-only[disabled]: part-0-0-0.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
     "code-only[disabled]: part-0-0-0.cursor — declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue",
     "code-only[disabled]: part-0-1-0.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
@@ -207,13 +208,22 @@
     "code-only[hover]: switch-2.background-color — value shape outside mintable kinds and outside the declared vocabulary",
     "code-only[hover]: switch.background-color — value shape outside mintable kinds and outside the declared vocabulary"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
+    "leavesAdded": 214,
+    "divergent": []
+  },
   "rows": [
     {
       "key": "start.no-isDisabled__default",
       "channelsCompared": 96,
-      "channelsEqual": 80,
-      "pctExact": 5.738932291666667,
-      "pctAA": 3.3951822916666665,
+      "channelsEqual": 81,
+      "pctExact": 2.4381510416666665,
+      "pctAA": 0.15299479166666666,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -303,22 +313,16 @@
           "part": "part-0-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_3_"
-        },
-        {
-          "part": "switch-thumb-2",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+          "theirs": "--astryx-layer-_r_r_"
         }
       ]
     },
     {
       "key": "start.no-isDisabled__hover",
       "channelsCompared": 96,
-      "channelsEqual": 79,
-      "pctExact": 5.810546875,
-      "pctAA": 3.3951822916666665,
+      "channelsEqual": 80,
+      "pctExact": 4.677734375,
+      "pctAA": 0.15299479166666666,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -408,28 +412,22 @@
           "part": "part-0-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_3_"
+          "theirs": "--astryx-layer-_r_r_"
         },
         {
           "part": "switch-2",
           "channel": "background-color",
           "ours": "rgba(10, 19, 23, 0.2)",
           "theirs": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)"
-        },
-        {
-          "part": "switch-thumb-2",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         }
       ]
     },
     {
       "key": "start.no-isDisabled__focus-visible",
       "channelsCompared": 96,
-      "channelsEqual": 80,
-      "pctExact": 6.832682291666667,
-      "pctAA": 3.9908854166666665,
+      "channelsEqual": 81,
+      "pctExact": 3.5319010416666665,
+      "pctAA": 0.7486979166666666,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -519,22 +517,16 @@
           "part": "part-0-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_3_"
-        },
-        {
-          "part": "switch-thumb-2",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+          "theirs": "--astryx-layer-_r_r_"
         }
       ]
     },
     {
       "key": "start.no-isDisabled__active",
       "channelsCompared": 96,
-      "channelsEqual": 79,
-      "pctExact": 5.810546875,
-      "pctAA": 3.3951822916666665,
+      "channelsEqual": 80,
+      "pctExact": 4.677734375,
+      "pctAA": 0.15299479166666666,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -624,28 +616,22 @@
           "part": "part-0-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_3_"
+          "theirs": "--astryx-layer-_r_r_"
         },
         {
           "part": "switch-2",
           "channel": "background-color",
           "ours": "rgba(10, 19, 23, 0.2)",
           "theirs": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)"
-        },
-        {
-          "part": "switch-thumb-2",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         }
       ]
     },
     {
       "key": "start.isDisabled__default",
       "channelsCompared": 96,
-      "channelsEqual": 67,
-      "pctExact": 5.947265625,
-      "pctAA": 1.9661458333333333,
+      "channelsEqual": 68,
+      "pctExact": 4.954427083333333,
+      "pctAA": 1.083984375,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -807,28 +793,22 @@
           "part": "part-0-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_7_"
+          "theirs": "--astryx-layer-_r_v_"
         },
         {
           "part": "part-0-1-0",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
-        },
-        {
-          "part": "switch-thumb-2",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         }
       ]
     },
     {
       "key": "start.isDisabled__hover",
       "channelsCompared": 96,
-      "channelsEqual": 67,
-      "pctExact": 5.947265625,
-      "pctAA": 1.9661458333333333,
+      "channelsEqual": 68,
+      "pctExact": 4.954427083333333,
+      "pctAA": 1.083984375,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -990,28 +970,22 @@
           "part": "part-0-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_7_"
+          "theirs": "--astryx-layer-_r_v_"
         },
         {
           "part": "part-0-1-0",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
-        },
-        {
-          "part": "switch-thumb-2",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         }
       ]
     },
     {
       "key": "start.isDisabled__focus-visible",
       "channelsCompared": 96,
-      "channelsEqual": 67,
-      "pctExact": 5.947265625,
-      "pctAA": 1.9661458333333333,
+      "channelsEqual": 68,
+      "pctExact": 4.954427083333333,
+      "pctAA": 1.083984375,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -1173,28 +1147,22 @@
           "part": "part-0-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_7_"
+          "theirs": "--astryx-layer-_r_v_"
         },
         {
           "part": "part-0-1-0",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
-        },
-        {
-          "part": "switch-thumb-2",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         }
       ]
     },
     {
       "key": "start.isDisabled__active",
       "channelsCompared": 96,
-      "channelsEqual": 67,
-      "pctExact": 5.947265625,
-      "pctAA": 1.9661458333333333,
+      "channelsEqual": 68,
+      "pctExact": 4.954427083333333,
+      "pctAA": 1.083984375,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -1356,28 +1324,22 @@
           "part": "part-0-1-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_7_"
+          "theirs": "--astryx-layer-_r_v_"
         },
         {
           "part": "part-0-1-0",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
-        },
-        {
-          "part": "switch-thumb-2",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         }
       ]
     },
     {
       "key": "end.no-isDisabled__default",
       "channelsCompared": 96,
-      "channelsEqual": 80,
-      "pctExact": 6.005859375,
-      "pctAA": 3.5286458333333335,
+      "channelsEqual": 81,
+      "pctExact": 2.4381510416666665,
+      "pctAA": 0.15299479166666666,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -1425,13 +1387,7 @@
           "part": "part-0-0-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_b_"
-        },
-        {
-          "part": "switch-thumb",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+          "theirs": "--astryx-layer-_r_13_"
         },
         {
           "part": "part-0-1",
@@ -1480,9 +1436,9 @@
     {
       "key": "end.no-isDisabled__hover",
       "channelsCompared": 96,
-      "channelsEqual": 79,
-      "pctExact": 6.077473958333333,
-      "pctAA": 3.515625,
+      "channelsEqual": 80,
+      "pctExact": 4.677734375,
+      "pctAA": 0.15299479166666666,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -1530,19 +1486,13 @@
           "part": "part-0-0-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_b_"
+          "theirs": "--astryx-layer-_r_13_"
         },
         {
           "part": "switch",
           "channel": "background-color",
           "ours": "rgba(10, 19, 23, 0.2)",
           "theirs": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)"
-        },
-        {
-          "part": "switch-thumb",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         },
         {
           "part": "part-0-1",
@@ -1591,9 +1541,9 @@
     {
       "key": "end.no-isDisabled__focus-visible",
       "channelsCompared": 96,
-      "channelsEqual": 80,
-      "pctExact": 7.008463541666667,
-      "pctAA": 4.111328125,
+      "channelsEqual": 81,
+      "pctExact": 3.5319010416666665,
+      "pctAA": 0.7486979166666666,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -1641,13 +1591,7 @@
           "part": "part-0-0-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_b_"
-        },
-        {
-          "part": "switch-thumb",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
+          "theirs": "--astryx-layer-_r_13_"
         },
         {
           "part": "part-0-1",
@@ -1696,9 +1640,9 @@
     {
       "key": "end.no-isDisabled__active",
       "channelsCompared": 96,
-      "channelsEqual": 79,
-      "pctExact": 6.077473958333333,
-      "pctAA": 3.515625,
+      "channelsEqual": 80,
+      "pctExact": 4.677734375,
+      "pctAA": 0.15299479166666666,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -1746,19 +1690,13 @@
           "part": "part-0-0-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_b_"
+          "theirs": "--astryx-layer-_r_13_"
         },
         {
           "part": "switch",
           "channel": "background-color",
           "ours": "rgba(10, 19, 23, 0.2)",
           "theirs": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)"
-        },
-        {
-          "part": "switch-thumb",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         },
         {
           "part": "part-0-1",
@@ -1807,9 +1745,9 @@
     {
       "key": "end.isDisabled__default",
       "channelsCompared": 96,
-      "channelsEqual": 67,
-      "pctExact": 6.090494791666667,
-      "pctAA": 2.1126302083333335,
+      "channelsEqual": 68,
+      "pctExact": 4.954427083333333,
+      "pctAA": 1.083984375,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -1857,19 +1795,13 @@
           "part": "part-0-0-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_f_"
+          "theirs": "--astryx-layer-_r_17_"
         },
         {
           "part": "part-0-0-0",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
-        },
-        {
-          "part": "switch-thumb",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         },
         {
           "part": "part-0-1",
@@ -1990,9 +1922,9 @@
     {
       "key": "end.isDisabled__hover",
       "channelsCompared": 96,
-      "channelsEqual": 67,
-      "pctExact": 6.090494791666667,
-      "pctAA": 2.1126302083333335,
+      "channelsEqual": 68,
+      "pctExact": 4.954427083333333,
+      "pctAA": 1.083984375,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -2040,19 +1972,13 @@
           "part": "part-0-0-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_f_"
+          "theirs": "--astryx-layer-_r_17_"
         },
         {
           "part": "part-0-0-0",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
-        },
-        {
-          "part": "switch-thumb",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         },
         {
           "part": "part-0-1",
@@ -2173,9 +2099,9 @@
     {
       "key": "end.isDisabled__focus-visible",
       "channelsCompared": 96,
-      "channelsEqual": 67,
-      "pctExact": 6.090494791666667,
-      "pctAA": 2.1126302083333335,
+      "channelsEqual": 68,
+      "pctExact": 4.954427083333333,
+      "pctAA": 1.083984375,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -2223,19 +2149,13 @@
           "part": "part-0-0-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_f_"
+          "theirs": "--astryx-layer-_r_17_"
         },
         {
           "part": "part-0-0-0",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
-        },
-        {
-          "part": "switch-thumb",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         },
         {
           "part": "part-0-1",
@@ -2356,9 +2276,9 @@
     {
       "key": "end.isDisabled__active",
       "channelsCompared": 96,
-      "channelsEqual": 67,
-      "pctExact": 6.090494791666667,
-      "pctAA": 2.1126302083333335,
+      "channelsEqual": 68,
+      "pctExact": 4.954427083333333,
+      "pctAA": 1.083984375,
       "mismatches": [
         {
           "part": "part-0-0",
@@ -2406,19 +2326,13 @@
           "part": "part-0-0-0",
           "channel": "anchor-name",
           "ours": "none",
-          "theirs": "--astryx-layer-_r_f_"
+          "theirs": "--astryx-layer-_r_17_"
         },
         {
           "part": "part-0-0-0",
           "channel": "cursor",
           "ours": "pointer",
           "theirs": "not-allowed"
-        },
-        {
-          "part": "switch-thumb",
-          "channel": "transform",
-          "ours": "none",
-          "theirs": "matrix(1, 0, 0, 1, 0, 0)"
         },
         {
           "part": "part-0-1",
