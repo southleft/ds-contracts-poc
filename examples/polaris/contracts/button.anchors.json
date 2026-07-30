@@ -1,0 +1,230 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "button",
+  "anchors": [
+    {
+      "leaf": "imported.button.root.color-state-active.primary.critical",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.primary.none",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.primary.success",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.secondary.none",
+      "token": "p.color-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-active.tertiary.none",
+      "token": "p.color-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-disabled.primary",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-focus-visible.primary.critical",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-focus-visible.primary.none",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-focus-visible.primary.success",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-focus-visible.secondary.none",
+      "token": "p.color-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-focus-visible.tertiary.none",
+      "token": "p.color-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.primary.critical",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.primary.none",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.primary.success",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.secondary.none",
+      "token": "p.color-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color-state-hover.tertiary.none",
+      "token": "p.color-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.plain.critical",
+      "token": "p.color-text-critical",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-critical",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.plain.none",
+      "token": "p.color-text-link",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-link",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.plain.success",
+      "token": "p.color-text-success",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-success",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.primary.critical",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.primary.none",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.primary.success",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.secondary.critical",
+      "token": "p.color-text-critical",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-critical",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.secondary.none",
+      "token": "p.color-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.secondary.success",
+      "token": "p.color-text-success",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-success",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.tertiary.critical",
+      "token": "p.color-text-critical",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-critical",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.tertiary.none",
+      "token": "p.color-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Button"
+    },
+    {
+      "leaf": "imported.button.root.color.tertiary.success",
+      "token": "p.color-text-success",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-success",
+      "selector": ".Polaris-Button"
+    }
+  ]
+}

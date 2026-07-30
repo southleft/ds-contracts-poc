@@ -1,23 +1,23 @@
 {
   "component": "Avatar",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "captures": 40,
   "combos": 10,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 942,
+  "channelsEnumerated": 961,
   "elementsPerCapture": 6,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 25,
-    "initials": 21,
-    "icon": 14,
-    "label": 19,
-    "part-0-0-0": 18,
-    "part-0-0-1": 20
+    "root": 28,
+    "initials": 24,
+    "icon": 17,
+    "label": 20,
+    "part-0-0-0": 21,
+    "part-0-0-1": 23
   },
   "folds": {
-    "count": 54,
+    "count": 60,
     "receipts": [
       {
         "part": "root",
@@ -63,6 +63,12 @@
       },
       {
         "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -117,6 +123,12 @@
       },
       {
         "part": "initials",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "initials",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -171,6 +183,12 @@
       },
       {
         "part": "icon",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -225,6 +243,12 @@
       },
       {
         "part": "label",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -279,6 +303,12 @@
       },
       {
         "part": "part-0-0-0",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -333,6 +363,12 @@
       },
       {
         "part": "part-0-0-1",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-1",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -344,8 +380,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 59,
-    "mintedLeavesFolded": 23
+    "mintedLeavesUnfolded": 83,
+    "mintedLeavesFolded": 43
   },
   "bound": {
     "cellsChecked": 40,
@@ -354,12 +390,12 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 23,
-    "baseBindings": 15,
+    "leaves": 43,
+    "baseBindings": 19,
     "stateBindings": 0,
     "byShape": {
       "uniform": 10,
-      "perAxis": 5,
+      "perAxis": 9,
       "perPair": 0,
       "refused": 0
     }
@@ -377,17 +413,19 @@
   "anatomyPromotion": {
     "partsCarried": 2,
     "svgAssets": 5,
-    "refusals": 0
+    "refusals": 1
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 169200,
-    "cellsMatched": 169100,
-    "pct": 99.94089834515367,
+    "cellsCompared": 172620,
+    "cellsMatched": 172520,
+    "pct": 99.94206928513498,
     "namedExclusions": [
       "app-region",
-      "text-decoration"
+      "text-decoration",
+      "translate-x",
+      "translate-y"
     ],
     "topMismatchedChannels": [
       [
@@ -414,6 +452,12 @@
   },
   "pixel": {
     "pairs": 40,
+    "measured": 40,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
       "mean": 0.4481404622395832,
       "max": 0.6331380208333334,
@@ -468,7 +512,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 70.65217391304348,
+    "computedPctEqual": 69.79166666666667,
     "rowsFullyEqual": 0,
     "rows": 40,
     "pixelPerfectExact": 0,

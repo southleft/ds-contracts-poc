@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/badge.contract.json (polaris.badge v0.3.2)
+ * Source of truth: contracts/badge.contract.json (polaris.badge v0.4.0)
  * Regenerate with: npm run generate
  */
 
@@ -101,11 +101,13 @@
 
 .label-2 {
   bottom: var(--imported-badge-label-2-bottom);
+  height: var(--imported-shared-size-1);
   left: var(--imported-badge-label-2-left);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   right: var(--imported-badge-label-2-right);
   top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-1);
   display: none;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -120,6 +122,7 @@
   margin-bottom: var(--imported-badge-icon-margin-bottom);
   margin-left: var(--imported-badge-icon-margin-left);
   margin-top: var(--imported-badge-icon-margin-top);
+  width: var(--imported-shared-size-20);
   display: none;
 }
 
@@ -253,6 +256,7 @@
   font-weight: var(--imported-badge-icon-2-font-weight-none);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-20);
   display: none;
   max-height: 100%;
   max-width: 100%;
@@ -386,11 +390,13 @@
   bottom: var(--imported-badge-label-3-bottom);
   color: var(--imported-badge-label-3-color-none);
   font-weight: var(--imported-badge-label-3-font-weight-none);
+  height: var(--imported-shared-size-1);
   left: var(--imported-badge-label-3-left);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   right: var(--imported-badge-label-3-right);
   top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-1);
   display: none;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -517,6 +523,7 @@
   font-weight: var(--imported-badge-icon-3-font-weight-none);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-20);
   display: none;
   overflow-x: hidden;
   overflow-y: hidden;

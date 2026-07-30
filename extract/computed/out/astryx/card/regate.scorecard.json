@@ -2,9 +2,20 @@
   "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
   "component": "Card",
   "config": "extract/computed/configs/astryx.json",
-  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
   "declared": {
-    "base": [],
+    "base": [
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "clip"
+      }
+    ],
     "state": []
   },
   "decisionsReapplied": [
@@ -16,15 +27,15 @@
   "scorecard": {
     "component": "Card",
     "generatedBy": "extract/computed/gate.ts",
-    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 13,
     "interactions": 4,
     "computed": {
       "cellsCompared": 1144,
-      "cellsEqual": 1124,
-      "pctEqual": 98.25174825174825,
-      "rowsFullyEqual": 44,
+      "cellsEqual": 1128,
+      "pctEqual": 98.6013986013986,
+      "rowsFullyEqual": 48,
       "rows": 52
     },
     "pixel": {
@@ -42,12 +53,12 @@
       "maxAA": null
     },
     "fusion": {
-      "boundConfirmed": 138,
-      "boundCells": 247,
-      "contradictions": 109,
-      "mintedLeaves": 53,
-      "mintedLeavesUnfolded": 53,
-      "baseBindings": 5,
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 174,
+      "mintedLeavesUnfolded": 174,
+      "baseBindings": 21,
       "stateBindings": 0,
       "codeOnlyChannels": 0,
       "overflowBindings": 0,
@@ -86,28 +97,28 @@
         "key": "transparent__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 1,
+        "channelsMismatched": 0,
         "unscorable": "no-original"
       },
       {
         "key": "transparent__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 1,
+        "channelsMismatched": 0,
         "unscorable": "no-original"
       },
       {
         "key": "transparent__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 1,
+        "channelsMismatched": 0,
         "unscorable": "no-original"
       },
       {
         "key": "transparent__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 1,
+        "channelsMismatched": 0,
         "unscorable": "no-original"
       }
     ],
@@ -127,10 +138,6 @@
       [
         "root.border-top-width",
         4
-      ],
-      [
-        "root.background-color",
-        4
       ]
     ],
     "namedLosses": [],
@@ -140,8 +147,80 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 185,
+      "leavesAdded": 234,
       "divergent": [
+        {
+          "token": "imported.card.root.background-color.blue",
+          "fresh": "#0171e333",
+          "shipped": "{color-background-blue}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.cyan",
+          "fresh": "#03a7d733",
+          "shipped": "{color-background-cyan}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.default",
+          "fresh": "#ffffff",
+          "shipped": "{color-background-card}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.gray",
+          "fresh": "#0a131733",
+          "shipped": "{color-background-gray}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.green",
+          "fresh": "#24bb5e33",
+          "shipped": "{color-background-green}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.muted",
+          "fresh": "#0536590c",
+          "shipped": "{color-background-muted}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.orange",
+          "fresh": "#f2790233",
+          "shipped": "{color-background-orange}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.pink",
+          "fresh": "#e638b333",
+          "shipped": "{color-background-pink}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.purple",
+          "fresh": "#7952ff33",
+          "shipped": "{color-background-purple}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.red",
+          "fresh": "#e3193b33",
+          "shipped": "{color-background-red}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.teal",
+          "fresh": "#0db7af33",
+          "shipped": "{color-background-teal}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.yellow",
+          "fresh": "#e2a40033",
+          "shipped": "{color-background-yellow}",
+          "resolvedEqual": true
+        },
         {
           "token": "imported.card.root.border-bottom-color.default",
           "fresh": "#ccd3db",
@@ -312,69 +391,41 @@
       {
         "key": "transparent__default",
         "channelsCompared": 22,
-        "channelsEqual": 21,
+        "channelsEqual": 22,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(241, 244, 247, 1)",
-            "theirs": "rgba(0, 0, 0, 0)"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "transparent__hover",
         "channelsCompared": 22,
-        "channelsEqual": 21,
+        "channelsEqual": 22,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(241, 244, 247, 1)",
-            "theirs": "rgba(0, 0, 0, 0)"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "transparent__focus-visible",
         "channelsCompared": 22,
-        "channelsEqual": 21,
+        "channelsEqual": 22,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(241, 244, 247, 1)",
-            "theirs": "rgba(0, 0, 0, 0)"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {
         "key": "transparent__active",
         "channelsCompared": 22,
-        "channelsEqual": 21,
+        "channelsEqual": 22,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "background-color",
-            "ours": "rgba(241, 244, 247, 1)",
-            "theirs": "rgba(0, 0, 0, 0)"
-          }
-        ],
+        "mismatches": [],
         "note": "original screenshot unavailable — pixel not scored"
       },
       {

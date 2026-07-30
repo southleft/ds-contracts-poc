@@ -1,0 +1,186 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "ProgressBar",
+  "varPrefix": "--p-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "small.highlight",
+      "axisValues": {
+        "size": "small",
+        "tone": "highlight"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "small.primary",
+      "axisValues": {
+        "size": "small",
+        "tone": "primary"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "small.success",
+      "axisValues": {
+        "size": "small",
+        "tone": "success"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "small.critical",
+      "axisValues": {
+        "size": "small",
+        "tone": "critical"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "medium.highlight",
+      "axisValues": {
+        "size": "medium",
+        "tone": "highlight"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "medium.primary",
+      "axisValues": {
+        "size": "medium",
+        "tone": "primary"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "medium.success",
+      "axisValues": {
+        "size": "medium",
+        "tone": "success"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "medium.critical",
+      "axisValues": {
+        "size": "medium",
+        "tone": "critical"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.highlight",
+      "axisValues": {
+        "size": "large",
+        "tone": "highlight"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.primary",
+      "axisValues": {
+        "size": "large",
+        "tone": "primary"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.success",
+      "axisValues": {
+        "size": "large",
+        "tone": "success"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.critical",
+      "axisValues": {
+        "size": "large",
+        "tone": "critical"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-ProgressBar"
+      }
+    }
+  ],
+  "skips": [
+    "root.--pc-progress-bar-height-large: source declares `calc(var(--pc-progress-bar-height-base)*2)` — a calc() over var(--pc-progress-bar-height-base). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.--pc-progress-bar-height-small: source declares `calc(var(--pc-progress-bar-height-base)*0.5)` — a calc() over var(--pc-progress-bar-height-base). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 2,
+  "shorthandSkips": [
+    "indicator.border: SHORTHAND carrying var(--pc-progress-bar-height-base) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border: SHORTHAND carrying var(--p-border-width-025) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 2,
+  "calcCeiling": 2
+}

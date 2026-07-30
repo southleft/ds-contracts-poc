@@ -2,7 +2,7 @@
   "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
   "component": "Switch",
   "config": "extract/computed/configs/astryx.json",
-  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -175,7 +175,7 @@
   "scorecard": {
     "component": "Switch",
     "generatedBy": "extract/computed/gate.ts",
-    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 4,
     "interactions": 4,
@@ -202,8 +202,8 @@
     },
     "fusion": {
       "boundConfirmed": 0,
-      "boundCells": 10,
-      "contradictions": 10,
+      "boundCells": 0,
+      "contradictions": 0,
       "mintedLeaves": 33,
       "mintedLeavesUnfolded": 32,
       "baseBindings": 74,
@@ -333,7 +333,6 @@
       ]
     ],
     "namedLosses": [
-      "promotion: static-part-unrendered: reviewed static part \"track\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
       "code-only: part-0-0.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-0.column-gap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -397,7 +396,7 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 214,
+      "leavesAdded": 375,
       "divergent": []
     },
     "rows": [
@@ -497,7 +496,7 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_3_"
+            "theirs": "--astryx-layer-_r_r_"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -598,7 +597,7 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_3_"
+            "theirs": "--astryx-layer-_r_r_"
           },
           {
             "part": "switch-2",
@@ -705,7 +704,7 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_3_"
+            "theirs": "--astryx-layer-_r_r_"
           }
         ],
         "note": "original screenshot unavailable — pixel not scored"
@@ -806,7 +805,7 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_3_"
+            "theirs": "--astryx-layer-_r_r_"
           },
           {
             "part": "switch-2",
@@ -985,7 +984,7 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_7_"
+            "theirs": "--astryx-layer-_r_v_"
           },
           {
             "part": "part-0-1-0",
@@ -1164,7 +1163,7 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_7_"
+            "theirs": "--astryx-layer-_r_v_"
           },
           {
             "part": "part-0-1-0",
@@ -1343,7 +1342,7 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_7_"
+            "theirs": "--astryx-layer-_r_v_"
           },
           {
             "part": "part-0-1-0",
@@ -1522,7 +1521,7 @@
             "part": "part-0-1-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_7_"
+            "theirs": "--astryx-layer-_r_v_"
           },
           {
             "part": "part-0-1-0",
@@ -1587,7 +1586,7 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_b_"
+            "theirs": "--astryx-layer-_r_13_"
           },
           {
             "part": "part-0-1",
@@ -1688,7 +1687,7 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_b_"
+            "theirs": "--astryx-layer-_r_13_"
           },
           {
             "part": "switch",
@@ -1795,7 +1794,7 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_b_"
+            "theirs": "--astryx-layer-_r_13_"
           },
           {
             "part": "part-0-1",
@@ -1896,7 +1895,7 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_b_"
+            "theirs": "--astryx-layer-_r_13_"
           },
           {
             "part": "switch",
@@ -2003,7 +2002,7 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_f_"
+            "theirs": "--astryx-layer-_r_17_"
           },
           {
             "part": "part-0-0-0",
@@ -2182,7 +2181,7 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_f_"
+            "theirs": "--astryx-layer-_r_17_"
           },
           {
             "part": "part-0-0-0",
@@ -2361,7 +2360,7 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_f_"
+            "theirs": "--astryx-layer-_r_17_"
           },
           {
             "part": "part-0-0-0",
@@ -2540,7 +2539,7 @@
             "part": "part-0-0-0",
             "channel": "anchor-name",
             "ours": "none",
-            "theirs": "--astryx-layer-_r_f_"
+            "theirs": "--astryx-layer-_r_17_"
           },
           {
             "part": "part-0-0-0",

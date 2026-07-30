@@ -1,18 +1,18 @@
 {
   "component": "Text",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "captures": 1516,
   "combos": 379,
   "interactions": 4,
   "enumerationPolicy": "per-axis+pairwise",
-  "channelsEnumerated": 942,
+  "channelsEnumerated": 961,
   "elementsPerCapture": 1,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 15
+    "root": 17
   },
   "folds": {
-    "count": 9,
+    "count": 10,
     "receipts": [
       {
         "part": "root",
@@ -58,6 +58,12 @@
       },
       {
         "part": "root",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "root",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -69,8 +75,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 204,
-    "mintedLeavesFolded": 96
+    "mintedLeavesUnfolded": 276,
+    "mintedLeavesFolded": 156
   },
   "bound": {
     "cellsChecked": 1584,
@@ -79,13 +85,13 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 96,
-    "baseBindings": 4,
+    "leaves": 156,
+    "baseBindings": 5,
     "stateBindings": 0,
     "byShape": {
       "uniform": 0,
       "perAxis": 3,
-      "perPair": 1,
+      "perPair": 2,
       "refused": 0
     }
   },
@@ -96,7 +102,7 @@
   "codeOnly": {
     "base": 2,
     "state": 0,
-    "overflowBindings": 1
+    "overflowBindings": 2
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
@@ -107,12 +113,14 @@
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 1425040,
-    "cellsMatched": 1422412,
-    "pct": 99.81558412395441,
+    "cellsCompared": 1453844,
+    "cellsMatched": 1451216,
+    "pct": 99.81923782744228,
     "namedExclusions": [
       "app-region",
-      "text-decoration"
+      "text-decoration",
+      "translate-x",
+      "translate-y"
     ],
     "topMismatchedChannels": [
       [
@@ -131,6 +139,12 @@
   },
   "pixel": {
     "pairs": 1516,
+    "measured": 1516,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
       "mean": 0,
       "max": 0,
@@ -189,7 +203,7 @@
     "rowsFullyEqual": 1516,
     "rows": 1516,
     "pixelPerfectExact": 0,
-    "pixelPerfectAA": 0,
+    "pixelPerfectAA": 120,
     "pairs": 1516
   },
   "focusVisibleDriverMatched": 0,

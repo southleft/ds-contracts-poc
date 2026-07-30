@@ -304,9 +304,10 @@ bundle.*
    forensics behind the claim (docs/07, 2026-07-08) tested exactly three
    overrides: custom label, variant flip, boolean — all three are
    component properties. This applies to greenfield update-in-place too,
-   and **no eval covers it**. The plugin copy at
-   `figma-sync/plugin/ui.html:1157` and `figma-sync/plugin/README.md:30`
-   still states the unqualified version → G12's copy work]**
+   and **no eval covers it**. The plugin copy (ui.html's protected card
+   and apply-success line, README) is qualified as of 2026-07-29 —
+   component-property overrides survive, interior edits are rebuilt — the
+   amend-path fix itself remains → G12]**
 7. After apply, a dismissible highlight on updated nodes for a 30-second
    visual audit. **[GAP → G12]**
 

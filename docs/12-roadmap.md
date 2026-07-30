@@ -41,8 +41,8 @@ Connect **pre-existing** design and code libraries — no rewrite, no regenerati
 - [x] **Generalized design extractor (v0)** — `extract/figma-dump.js`: read-only, any file, API-surface properties only
 - [ ] **Binding inference** — propose `figma`↔`code` name/value mappings with per-field confidence *(started: transparent alias rules + abbreviation mapping in `npm run reconcile`; confidence scoring and value-mapping inference still open)*
 - [ ] **Reconciliation UI** — side-by-side proposal merge in the Contract Hub; extraction → contract v1 in minutes per component
-- [ ] **Foreign token import** — contracts reference an org's *existing* DTCG / Style Dictionary tokens, not this repo's
-- [x] **Public pilot** — Shoelace v2.20.1 (CEM extraction, 58/58) reconciled against the community Shoelace Figma kit (28 sets, dumped read-only): 42 property agreements, 236 human decisions itemized — the drift report is real, committed, and reproducible (`extract/pilots/shoelace/`)
+- [x] **Foreign token import** — contracts reference an org's *existing* DTCG / Style Dictionary tokens, not this repo's *(✅ shipped — `figma bundle --tokens` compiles contracts against an org's own DTCG tree; the contract JSON is the only thing anyone pastes)*
+- [x] **Public pilot** — Shoelace v2.20.1 (CEM extraction, 58/58 components) reconciled against the community Shoelace Figma kit (28 sets, dumped read-only). The extraction stands; the original drift report did not — it was discovered **58/58 false-red**: every name match failed, so zero design properties were ever compared. Post-fix the pilot produces **259 real findings**, cross-checked two independent ways with exact agreement — committed and reproducible (`extract/pilots/shoelace/`)
 
 **Exit criterion:** the diagnostic loop runs green→red→green on two surfaces this repo did not generate *(✅ eval-proven: `diagnose-foreign-green-red-green` — `npm run diagnose` referees foreign code + a design dump)*, and a design system team confirms the pilot drift report is true — every finding real, none missed within declared scope.
 

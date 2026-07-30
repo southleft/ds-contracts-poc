@@ -1,0 +1,14 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "thumbnail",
+  "anchors": [
+    {
+      "leaf": "imported.thumbnail.part-0.color",
+      "token": "p.color-icon-secondary",
+      "part": "part-0",
+      "cssProperty": "color",
+      "varName": "--p-color-icon-secondary",
+      "selector": ".Polaris-Thumbnail > *"
+    }
+  ]
+}

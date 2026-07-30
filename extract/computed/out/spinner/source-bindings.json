@@ -1,0 +1,40 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Spinner",
+  "varPrefix": "--p-",
+  "facts": [
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "p.color-bg-fill-brand",
+      "varName": "--p-color-bg-fill-brand",
+      "anchor": {
+        "selector": ".Polaris-Spinner svg"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "fill",
+      "combo": "large",
+      "axisValues": {
+        "size": "large"
+      },
+      "token": "p.color-bg-fill-brand",
+      "varName": "--p-color-bg-fill-brand",
+      "anchor": {
+        "selector": ".Polaris-Spinner svg"
+      }
+    }
+  ],
+  "skips": [],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "icon.animation: SHORTHAND carrying var(--p-motion-duration-500, --p-motion-keyframes-spin) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
+}

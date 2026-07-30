@@ -4,7 +4,7 @@
   "name": "ProgressBar",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/ProgressBar/ProgressBar.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/ProgressBar/ProgressBar.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -111,25 +111,28 @@
   "anatomy": {
     "root": {
       "tokens": {
-        "border-radius": "{p.border-radius-100}"
+        "border-radius": "{p.border-radius-100}",
+        "width": "{imported.progress-bar.root.width}"
       },
-      "tokensByProp": {
-        "prop": "tone",
-        "map": {
-          "highlight": {
-            "background-color": "{p.color-bg-fill-tertiary}"
-          },
-          "primary": {
-            "background-color": "{p.color-bg-fill-tertiary}"
-          },
-          "success": {
-            "background-color": "{p.color-bg-fill-tertiary}"
-          },
-          "critical": {
-            "background-color": "{p.color-bg-fill-tertiary}"
+      "tokensByProp": [
+        {
+          "prop": "tone",
+          "map": {
+            "highlight": {
+              "background-color": "{p.color-bg-fill-tertiary}"
+            },
+            "primary": {
+              "background-color": "{p.color-bg-fill-tertiary}"
+            },
+            "success": {
+              "background-color": "{p.color-bg-fill-tertiary}"
+            },
+            "critical": {
+              "background-color": "{p.color-bg-fill-tertiary}"
+            }
           }
         }
-      },
+      ],
       "literalsByProp": [
         {
           "prop": "size",
@@ -165,33 +168,51 @@
           },
           "tokens": {
             "bottom": "{imported.progress-bar.progress.bottom}",
+            "height": "{imported.shared.size-1}",
             "left": "{imported.progress-bar.progress.left}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
             "right": "{imported.progress-bar.progress.right}",
             "top": "{imported.shared.size-0}",
-            "vertical-align": "{imported.progress-bar.progress.vertical-align}"
+            "vertical-align": "{imported.progress-bar.progress.vertical-align}",
+            "width": "{imported.shared.size-1}"
           }
         },
         "indicator": {
           "element": "div",
-          "tokensByProp": {
-            "prop": "tone",
-            "map": {
-              "highlight": {
-                "background-color": "{p.color-bg-fill-info}"
-              },
-              "primary": {
-                "background-color": "{p.color-bg-fill-brand}"
-              },
-              "success": {
-                "background-color": "{p.color-bg-fill-success}"
-              },
-              "critical": {
-                "background-color": "{p.color-bg-fill-critical}"
+          "tokensByProp": [
+            {
+              "prop": "tone",
+              "map": {
+                "highlight": {
+                  "background-color": "{p.color-bg-fill-info}"
+                },
+                "primary": {
+                  "background-color": "{p.color-bg-fill-brand}"
+                },
+                "success": {
+                  "background-color": "{p.color-bg-fill-success}"
+                },
+                "critical": {
+                  "background-color": "{p.color-bg-fill-critical}"
+                }
+              }
+            },
+            {
+              "prop": "size",
+              "map": {
+                "large": {
+                  "height": "{imported.progress-bar.indicator.height.large}"
+                },
+                "medium": {
+                  "height": "{imported.progress-bar.indicator.height.medium}"
+                },
+                "small": {
+                  "height": "{imported.progress-bar.indicator.height.small}"
+                }
               }
             }
-          },
+          ],
           "declared": {
             "display": "block",
             "transition-duration": "0.5s",
@@ -210,11 +231,13 @@
                 "text-wrap-mode": "nowrap"
               },
               "tokens": {
+                "height": "{imported.shared.size-1}",
                 "left": "{imported.shared.size-0}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
                 "right": "{imported.progress-bar.label.right}",
-                "top": "{imported.shared.size-0}"
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-1}"
               },
               "tokensByProp": [
                 {
@@ -236,7 +259,8 @@
           },
           "tokens": {
             "min-height": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}"
+            "min-width": "{imported.shared.size-0}",
+            "width": "{imported.progress-bar.indicator.width}"
           }
         }
       }

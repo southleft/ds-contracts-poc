@@ -4,7 +4,7 @@
   "name": "Thumbnail",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Thumbnail/Thumbnail.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Thumbnail/Thumbnail.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "span"
   },
@@ -79,14 +79,33 @@
         "right": "{imported.shared.size-0}",
         "top": "{imported.shared.size-0}"
       },
-      "tokensByProp": {
-        "prop": "size",
-        "map": {
-          "extraSmall": {
-            "border-radius": "{p.border-radius-150}"
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "extraSmall": {
+              "border-radius": "{p.border-radius-150}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "extraSmall": {
+              "height": "{imported.thumbnail.root.height.extraSmall}"
+            },
+            "large": {
+              "height": "{imported.thumbnail.root.height.large}"
+            },
+            "medium": {
+              "height": "{imported.thumbnail.root.height.medium}"
+            },
+            "small": {
+              "height": "{imported.thumbnail.root.height.small}"
+            }
           }
         }
-      },
+      ],
       "literals": {
         "min-width": "24px"
       },
@@ -140,7 +159,30 @@
             "min-width": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}"
-          }
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "extraSmall": {
+                  "height": "{imported.thumbnail.part-0.height.extraSmall}",
+                  "width": "{imported.thumbnail.part-0.width.extraSmall}"
+                },
+                "large": {
+                  "height": "{imported.thumbnail.part-0.height.large}",
+                  "width": "{imported.thumbnail.part-0.width.large}"
+                },
+                "medium": {
+                  "height": "{imported.thumbnail.part-0.height.medium}",
+                  "width": "{imported.thumbnail.part-0.width.medium}"
+                },
+                "small": {
+                  "height": "{imported.thumbnail.part-0.height.small}",
+                  "width": "{imported.thumbnail.part-0.width.small}"
+                }
+              }
+            }
+          ]
         }
       }
     }

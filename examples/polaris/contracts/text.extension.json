@@ -2,7 +2,7 @@
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@shopify/polaris@13.9.5",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
       "text": {
@@ -422,6 +422,272 @@
               "$value": "20px",
               "$type": "dimension"
             }
+          },
+          "width": {
+            "none": {
+              "none": {
+                "$value": "144.75px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "144.75px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "146.328px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "147.906px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "147.906px",
+                "$type": "dimension"
+              }
+            },
+            "headingXs": {
+              "none": {
+                "$value": "136.531px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "136.531px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "136.531px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "133.609px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "135.062px",
+                "$type": "dimension"
+              }
+            },
+            "headingSm": {
+              "none": {
+                "$value": "147.906px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "144.75px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "146.328px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "147.906px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "147.906px",
+                "$type": "dimension"
+              }
+            },
+            "headingMd": {
+              "none": {
+                "$value": "159.281px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "157.578px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "159.281px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "159.281px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "155.875px",
+                "$type": "dimension"
+              }
+            },
+            "headingLg": {
+              "none": {
+                "$value": "219.031px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "219.031px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "212.828px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "215.938px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "219.031px",
+                "$type": "dimension"
+              }
+            },
+            "headingXl": {
+              "none": {
+                "$value": "219.031px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "212.828px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "215.938px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "219.031px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "219.031px",
+                "$type": "dimension"
+              }
+            },
+            "heading2xl": {
+              "none": {
+                "$value": "260.438px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "260.438px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "260.438px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "251.906px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "256.172px",
+                "$type": "dimension"
+              }
+            },
+            "heading3xl": {
+              "none": {
+                "$value": "288px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "288px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "288px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "288px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "288px",
+                "$type": "dimension"
+              }
+            },
+            "bodyXs": {
+              "none": {
+                "$value": "122.484px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "123.812px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "125.141px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "125.141px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "122.484px",
+                "$type": "dimension"
+              }
+            },
+            "bodySm": {
+              "none": {
+                "$value": "133.609px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "136.531px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "133.609px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "135.062px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "136.531px",
+                "$type": "dimension"
+              }
+            },
+            "bodyMd": {
+              "none": {
+                "$value": "144.75px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "144.75px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "146.328px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "147.906px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "147.906px",
+                "$type": "dimension"
+              }
+            },
+            "bodyLg": {
+              "none": {
+                "$value": "155.875px",
+                "$type": "dimension"
+              },
+              "semibold": {
+                "$value": "159.281px",
+                "$type": "dimension"
+              },
+              "bold": {
+                "$value": "159.281px",
+                "$type": "dimension"
+              },
+              "regular": {
+                "$value": "155.875px",
+                "$type": "dimension"
+              },
+              "medium": {
+                "$value": "157.578px",
+                "$type": "dimension"
+              }
+            }
           }
         }
       }
@@ -467,6 +733,12 @@
     {
       "part": "root",
       "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
@@ -518,6 +790,12 @@
       "channel": "font-weight",
       "ref": "{imported.text.root.font-weight.{variant}.{fontWeight}}",
       "refusal": "pair ref over TWO unset axes — no carried spelling; named residue"
+    },
+    {
+      "part": "root",
+      "channel": "width",
+      "ref": "{imported.text.root.width.{variant}.{fontWeight}}",
+      "refusal": "pair ref over TWO unset axes — no carried spelling; named residue"
     }
   ],
   "pairwiseRefusals": [],
@@ -530,12 +808,22 @@
   "interactionOnDisabled": [],
   "structureReceipts": [],
   "styledChannelReceipts": [
+    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
     "control-fallback: no control for <p> — span control used (part root)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "carried-channel-reminted: root.color — observed values vary along the defaultless axis \"tone\" while the reviewed carriage has no tone plane; re-minted so the set planes carry (round 5c — S2 tone maps with the unset base; reviewed bindings win every collision)",
     "carried-channel-reminted: root.font-size — observed values vary along the defaultless axis \"variant\" while the reviewed carriage has no variant plane; re-minted so the set planes carry (round 5c — S2 variant maps with the unset base; reviewed bindings win every collision)",
     "carried-channel-reminted: root.font-weight — observed values vary along the defaultless axis \"variant\" while the reviewed carriage has no variant plane; re-minted so the set planes carry (round 5c — S2 variant maps with the unset base; reviewed bindings win every collision)",
     "carried-channel-reminted: root.letter-spacing — observed values vary along the defaultless axis \"variant\" while the reviewed carriage has no variant plane; re-minted so the set planes carry (round 5c — S2 variant maps with the unset base; reviewed bindings win every collision)",
     "carried-channel-reminted: root.line-height — observed values vary along the defaultless axis \"variant\" while the reviewed carriage has no variant plane; re-minted so the set planes carry (round 5c — S2 variant maps with the unset base; reviewed bindings win every collision)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -554,7 +842,9 @@
       "root"
     ],
     "svgAssets": [],
-    "receipts": [],
+    "receipts": [
+      "root-content-carried: the root holds direct text (\"Online store dashboard\") with no text-holder child part — bound to text prop \"children\" (MUI Card class)"
+    ],
     "refusals": [
       "static-part-unrendered: reviewed static part \"label\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
     ]

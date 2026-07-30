@@ -2,17 +2,25 @@
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@shopify/polaris@13.9.5",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
       "radio-button": {
         "root": {
+          "height": {
+            "$value": "28px",
+            "$type": "dimension"
+          },
           "padding-bottom": {
             "$value": "4px",
             "$type": "dimension"
           },
           "padding-top": {
             "$value": "4px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "166.328px",
             "$type": "dimension"
           }
         },
@@ -23,6 +31,10 @@
           },
           "margin-right": {
             "$value": "8px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "20px",
             "$type": "dimension"
           }
         },
@@ -192,6 +204,12 @@
             }
           }
         },
+        "choice-label": {
+          "width": {
+            "$value": "138.328px",
+            "$type": "dimension"
+          }
+        },
         "label": {
           "font-size": {
             "$value": "13px",
@@ -210,6 +228,10 @@
       "shared": {
         "size-0": {
           "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-18": {
+          "$value": "18px",
           "$type": "dimension"
         },
         "size-1": {
@@ -270,6 +292,12 @@
     },
     {
       "part": "input",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "input",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -288,6 +316,7 @@
     "fold-carries-state-delta: [disabled] input.border-top-color rides its source fact",
     "fold-carries-state-delta: [disabled] input.caret-color rides its source fact",
     "fold-carries-state-delta: [disabled] input.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] input.row-rule-color rides its source fact",
     "fold-carries-state-delta: [disabled] input.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [disabled] input.text-emphasis-color rides its source fact"
   ],
@@ -700,6 +729,13 @@
     },
     {
       "part": "choice__label",
+      "channel": "row-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "choice__label",
       "channel": "text-decoration-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
@@ -764,6 +800,13 @@
     {
       "part": "label",
       "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
@@ -1003,9 +1046,33 @@
   "interactionOnDisabled": [],
   "structureReceipts": [],
   "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: choice__control — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: radiobutton — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: input — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: backdrop — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: choice__label — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "control-fallback: no control for <label> — span control used (part root)",
     "control-fallback: no control for <input> — span control used (part input)",
-    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
+    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (input); -webkit-text-stroke-color (input)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: input.caret-color — values track ancestor \"radiobutton\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: input.color — values track ancestor \"radiobutton\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: input.font-size — values track ancestor \"radiobutton\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: input.font-weight — values track ancestor \"radiobutton\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: input.line-height — values track ancestor \"radiobutton\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::after (1 part(s)), ::before (1 part(s)), ::placeholder (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1059,7 +1126,9 @@
       "pseudo-decor-carried: backdrop::before → shape part \"backdrop-before\" (ellipse 10×10 at 4,4, fill rgba(255, 255, 255, 1); drawn in 2/4 default-interaction combos, hidden-when checked=unchecked; translate + host border folded into top/left; BUBBLED to the host parent (shape leaves cannot nest children; parent content box == host border box, asserted) — round 5c S5)",
       "literal-text-carried: label = \"Accounts are disabled\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
-    "refusals": []
+    "refusals": [
+      "pseudo-decor-outside-grammar: backdrop::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 91, 211, 1) 0px 0px 0px -3px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted"
+    ]
   },
   "enrichmentNotes": [
     "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",

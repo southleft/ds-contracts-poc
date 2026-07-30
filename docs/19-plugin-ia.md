@@ -114,7 +114,8 @@ Check for updates to review."
     in the UI posts `run-send` any more, so those three are unreachable. They
     were left in place deliberately — this pass was a re-housing, and removing
     live network code is a separate, reviewable decision. The message-pair
-    audit lists them as the only asymmetry.
+    audit lists them as the only asymmetry. *(Removed 2026-07-29 — see the
+    closure list below.)*
 - **The tokens-first checkbox** — a footgun dressed as a choice (above).
 - **The duplicated channel row** — the standing channel had a key field and a
   Check button in BOTH Generate and Update library, deliberately duplicated
@@ -194,11 +195,15 @@ anyway. Fixed with an explicit `[hidden] { display: none !important; }`.
 
 ## Still open (named, not hidden)
 
-- The engine's own row warning still says "Review them in the **Drift tab**"
-  — that string is engine-side and pinned; the tab is now called Changes. A
-  one-word copy change belongs with the next engine-touching round.
-- `scripts/build-plugin-zip.mjs` still calls `#dump-source` "the Send to
-  Playground tab" in a refusal message. Cosmetic, outside this pass's file
-  scope.
+Nothing — the three leftovers this section named closed on 2026-07-29:
+
+- The engine's row warning now says "Review them in the **Changes tab**"
+  (`engine/entry.ts`, receipt re-recorded; `plugin-ui-check` asserts no
+  shipped string names the Drift tab).
+- The `scripts/build-plugin-zip.mjs` refusal turned out to already say "the
+  Send tab" when checked — the "Send to Playground tab" wording this list
+  claimed was already gone. Verified, not fixed.
 - The three orphaned `run-send` / `send-status` / `send-result` message types
-  in `code.js` (above).
+  were removed from `code.js` (above), along with the dead
+  `runSendToPlayground` body; the bridge constants stay — the send-to-repo
+  door and receive-by-code still use them.

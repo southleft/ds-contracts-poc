@@ -3,7 +3,9 @@
     "package": "@shopify/polaris",
     "version": "13.9.5",
     "framework": "react",
-    "classPrefix": "Polaris-"
+    "classPrefix": "Polaris-",
+    "varPrefix": "--p-",
+    "tokenGroup": "p"
   },
   "mount": {
     "imports": [

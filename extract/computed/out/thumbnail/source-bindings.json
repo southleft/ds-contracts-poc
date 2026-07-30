@@ -1,0 +1,66 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Thumbnail",
+  "varPrefix": "--p-",
+  "facts": [
+    {
+      "part": "part-0",
+      "channel": "color",
+      "combo": "extraSmall",
+      "axisValues": {
+        "size": "extraSmall"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Thumbnail > *"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "color",
+      "combo": "small",
+      "axisValues": {
+        "size": "small"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Thumbnail > *"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "color",
+      "combo": "medium",
+      "axisValues": {
+        "size": "medium"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Thumbnail > *"
+      }
+    },
+    {
+      "part": "part-0",
+      "channel": "color",
+      "combo": "large",
+      "axisValues": {
+        "size": "large"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Thumbnail > *"
+      }
+    }
+  ],
+  "skips": [],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "root.border-radius: SHORTHAND carrying var(--p-border-radius-150) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
+}

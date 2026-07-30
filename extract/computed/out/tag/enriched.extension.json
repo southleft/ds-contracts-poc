@@ -2,7 +2,7 @@
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@shopify/polaris@13.9.5",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
       "shared": {
@@ -12,6 +12,10 @@
         },
         "size-8": {
           "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-59-9219": {
+          "$value": "59.9219px",
           "$type": "dimension"
         },
         "size-20": {
@@ -24,6 +28,26 @@
         },
         "size-7": {
           "$value": "7px",
+          "$type": "dimension"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "color-8a8a8a": {
+          "$value": "#8a8a8a",
+          "$type": "color"
+        },
+        "num-0": {
+          "$value": "0",
+          "$type": "number"
+        },
+        "size-18": {
+          "$value": "18px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
           "$type": "dimension"
         },
         "color-b5b5b5": {
@@ -41,6 +65,16 @@
             "on": {
               "$value": "400",
               "$type": "number"
+            }
+          },
+          "height": {
+            "none": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "large": {
+              "$value": "24px",
+              "$type": "dimension"
             }
           },
           "outline-color": {
@@ -63,6 +97,52 @@
               "$type": "dimension"
             }
           },
+          "background-color-state-active": {
+            "off": {
+              "off": {
+                "on": {
+                  "$value": "#cccccc",
+                  "$type": "color"
+                },
+                "off": {
+                  "$value": "#e3e3e3",
+                  "$type": "color"
+                }
+              },
+              "on": {
+                "off": {
+                  "$value": "#cccccc",
+                  "$type": "color"
+                },
+                "on": {
+                  "$value": "#cccccc",
+                  "$type": "color"
+                }
+              }
+            },
+            "on": {
+              "off": {
+                "on": {
+                  "$value": "#d4d4d4",
+                  "$type": "color"
+                },
+                "off": {
+                  "$value": "#e3e3e3",
+                  "$type": "color"
+                }
+              },
+              "on": {
+                "off": {
+                  "$value": "#cccccc",
+                  "$type": "color"
+                },
+                "on": {
+                  "$value": "#d4d4d4",
+                  "$type": "color"
+                }
+              }
+            }
+          },
           "outline-color-state-active": {
             "$value": "#303030",
             "$type": "color"
@@ -83,6 +163,98 @@
             "on": {
               "$value": "#00000000",
               "$type": "color"
+            }
+          },
+          "padding-left-state-disabled": {
+            "large": {
+              "off": {
+                "on": {
+                  "$value": "6px",
+                  "$type": "dimension"
+                },
+                "off": {
+                  "$value": "8px",
+                  "$type": "dimension"
+                }
+              },
+              "on": {
+                "off": {
+                  "$value": "8px",
+                  "$type": "dimension"
+                },
+                "on": {
+                  "$value": "8px",
+                  "$type": "dimension"
+                }
+              }
+            },
+            "none": {
+              "off": {
+                "off": {
+                  "$value": "6px",
+                  "$type": "dimension"
+                },
+                "on": {
+                  "$value": "6px",
+                  "$type": "dimension"
+                }
+              },
+              "on": {
+                "off": {
+                  "$value": "6px",
+                  "$type": "dimension"
+                },
+                "on": {
+                  "$value": "6px",
+                  "$type": "dimension"
+                }
+              }
+            }
+          },
+          "padding-right-state-disabled": {
+            "large": {
+              "off": {
+                "on": {
+                  "$value": "6px",
+                  "$type": "dimension"
+                },
+                "off": {
+                  "$value": "8px",
+                  "$type": "dimension"
+                }
+              },
+              "on": {
+                "off": {
+                  "$value": "8px",
+                  "$type": "dimension"
+                },
+                "on": {
+                  "$value": "8px",
+                  "$type": "dimension"
+                }
+              }
+            },
+            "none": {
+              "off": {
+                "off": {
+                  "$value": "6px",
+                  "$type": "dimension"
+                },
+                "on": {
+                  "$value": "6px",
+                  "$type": "dimension"
+                }
+              },
+              "on": {
+                "off": {
+                  "$value": "0px",
+                  "$type": "dimension"
+                },
+                "on": {
+                  "$value": "0px",
+                  "$type": "dimension"
+                }
+              }
             }
           },
           "outline-color-state-focus-visible": {
@@ -120,10 +292,6 @@
           "color": {
             "$value": "#303030",
             "$type": "color"
-          },
-          "grid-template-columns": {
-            "$value": "59.9219px",
-            "$type": "dimension"
           }
         },
         "text-2": {
@@ -145,114 +313,36 @@
           }
         },
         "button": {
-          "bottom": {
-            "none": {
-              "$value": "0px",
-              "$type": "dimension"
+          "background-color": {
+            "off": {
+              "$value": "#e3e3e3",
+              "$type": "color"
             },
-            "large": {
-              "$value": "2px",
-              "$type": "dimension"
+            "on": {
+              "$value": "#d4d4d4",
+              "$type": "color"
             }
-          },
-          "color": {
-            "$value": "#8a8a8a",
-            "$type": "color"
-          },
-          "flex-shrink": {
-            "$value": "0",
-            "$type": "number"
           },
           "font-size": {
             "$value": "13px",
             "$type": "dimension"
           },
           "left": {
-            "none": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "53.9219px",
-              "$type": "dimension"
-            }
-          },
-          "margin-bottom": {
-            "none": {
-              "$value": "1px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "margin-left": {
-            "none": {
-              "$value": "2px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "margin-right": {
-            "none": {
-              "$value": "1px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "margin-top": {
-            "none": {
-              "$value": "1px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "opacity": {
-            "none": {
-              "$value": "1",
-              "$type": "number"
-            },
-            "large": {
-              "$value": "0",
-              "$type": "number"
-            }
-          },
-          "right": {
-            "none": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "2px",
-              "$type": "dimension"
-            }
-          },
-          "top": {
-            "none": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "large": {
-              "$value": "2px",
-              "$type": "dimension"
-            }
+            "$value": "53.9219px",
+            "$type": "dimension"
           }
         },
-        "icon": {
-          "color": {
-            "$value": "#8a8a8a",
+        "button-2": {
+          "background-color": {
+            "$value": "#00000000",
             "$type": "color"
           },
+          "font-size": {
+            "$value": "13px",
+            "$type": "dimension"
+          }
+        },
+        "icon-3": {
           "font-weight": {
             "$value": "400",
             "$type": "number"
@@ -306,6 +396,12 @@
     },
     {
       "part": "link",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "link",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -360,6 +456,12 @@
     },
     {
       "part": "button",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -414,6 +516,12 @@
     },
     {
       "part": "icon",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -468,12 +576,258 @@
     },
     {
       "part": "icon-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
       "part": "icon-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-2-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "button-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-4",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -522,6 +876,12 @@
     },
     {
       "part": "part-1-0-0-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-1-0-0-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -534,24 +894,26 @@
     }
   ],
   "foldedStateSkips": [
-    "fold-carries-state-delta: [focus-visible] button.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] button.border-left-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] button.border-right-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] button.border-top-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] button.caret-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] button.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] button.outline-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] button.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] button.text-emphasis-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] icon.border-bottom-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] icon.border-left-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] icon.border-right-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] icon.border-top-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] icon.caret-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] icon.column-rule-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] icon.outline-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] icon.text-decoration-color rides its source fact",
-    "fold-carries-state-delta: [focus-visible] icon.text-emphasis-color rides its source fact"
+    "fold-carries-state-delta: [focus-visible] button-2.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button-2.border-left-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button-2.border-right-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button-2.border-top-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button-2.caret-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button-2.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button-2.outline-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button-2.row-rule-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button-2.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] button-2.text-emphasis-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-3.border-bottom-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-3.border-left-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-3.border-right-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-3.border-top-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-3.caret-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-3.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-3.outline-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-3.row-rule-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-3.text-decoration-color rides its source fact",
+    "fold-carries-state-delta: [focus-visible] icon-3.text-emphasis-color rides its source fact"
   ],
   "layout": {
     "enriched": [],
@@ -673,32 +1035,72 @@
         "value": "pointer"
       },
       {
-        "part": "icon",
+        "part": "button",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "button-2",
+        "channel": "appearance",
+        "value": "none"
+      },
+      {
+        "part": "button-2",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "button-2",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "button-2",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "button-2",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "button-2",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "icon",
+        "part": "button-2",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "icon-3",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon-3",
         "channel": "font-feature-settings",
         "value": "normal"
       },
       {
-        "part": "icon",
+        "part": "icon-3",
         "channel": "max-height",
         "value": "100%"
       },
       {
-        "part": "icon",
+        "part": "icon-3",
         "channel": "max-width",
         "value": "100%"
       },
       {
-        "part": "icon",
+        "part": "icon-3",
         "channel": "text-align",
         "value": "center"
       },
       {
-        "part": "icon",
+        "part": "icon-3",
         "channel": "text-rendering",
         "value": "auto"
       }
@@ -824,42 +1226,14 @@
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "optimizelegibility",
       "distinctValues": 2
-    },
-    {
-      "part": "button",
-      "channel": "min-height",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "auto",
-      "distinctValues": 2
-    },
-    {
-      "part": "button",
-      "channel": "min-width",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "auto",
-      "distinctValues": 2
-    },
-    {
-      "part": "button",
-      "channel": "position",
-      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
-      "sample": "relative",
-      "distinctValues": 2
     }
   ],
   "stateOverflow": [
     {
       "state": "active",
-      "part": "button",
+      "part": "button-2",
       "channel": "background-color",
       "sample": "rgba(204, 204, 204, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "active",
-      "part": "button",
-      "channel": "opacity",
-      "sample": "1",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
@@ -955,6 +1329,20 @@
     },
     {
       "state": "disabled",
+      "part": "button-2",
+      "channel": "cursor",
+      "sample": "default",
+      "reason": "declared-channel state delta on 2/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "button-2",
+      "channel": "pointer-events",
+      "sample": "none",
+      "reason": "declared-channel state delta on 2/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
       "part": "button",
       "channel": "background-color",
       "sample": "rgba(227, 227, 227, 1)",
@@ -965,28 +1353,28 @@
       "part": "button",
       "channel": "cursor",
       "sample": "default",
-      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+      "reason": "declared-channel state delta on 2/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
       "part": "button",
       "channel": "pointer-events",
       "sample": "none",
-      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+      "reason": "declared-channel state delta on 2/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
-      "part": "icon",
+      "part": "icon-3",
       "channel": "cursor",
       "sample": "default",
-      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+      "reason": "declared-channel state delta on 2/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
-      "part": "icon",
+      "part": "icon-3",
       "channel": "pointer-events",
       "sample": "none",
-      "reason": "declared-channel state delta on 4/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+      "reason": "declared-channel state delta on 2/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
@@ -1057,6 +1445,13 @@
       "channel": "pointer-events",
       "sample": "none",
       "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "label",
+      "channel": "row-rule-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
@@ -1125,6 +1520,13 @@
       "state": "disabled",
       "part": "part-1",
       "channel": "outline-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "disabled",
+      "part": "part-1",
+      "channel": "row-rule-color",
       "sample": "rgba(181, 181, 181, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
@@ -1225,6 +1627,13 @@
       "channel": "pointer-events",
       "sample": "none",
       "reason": "declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "text",
+      "channel": "row-rule-color",
+      "sample": "rgba(181, 181, 181, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "disabled",
@@ -1242,28 +1651,21 @@
     },
     {
       "state": "focus-visible",
-      "part": "button",
+      "part": "button-2",
       "channel": "background-color",
       "sample": "rgba(212, 212, 212, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "focus-visible",
-      "part": "button",
+      "part": "button-2",
       "channel": "color",
       "sample": "rgba(48, 48, 48, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
       "state": "focus-visible",
-      "part": "button",
-      "channel": "opacity",
-      "sample": "1",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "focus-visible",
-      "part": "icon",
+      "part": "icon-3",
       "channel": "color",
       "sample": "rgba(48, 48, 48, 1)",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
@@ -1298,16 +1700,9 @@
     },
     {
       "state": "hover",
-      "part": "button",
+      "part": "button-2",
       "channel": "background-color",
       "sample": "rgba(204, 204, 204, 1)",
-      "reason": "default-state values not kind-compatible for padding — cannot correlate"
-    },
-    {
-      "state": "hover",
-      "part": "button",
-      "channel": "opacity",
-      "sample": "1",
       "reason": "default-state values not kind-compatible for padding — cannot correlate"
     },
     {
@@ -1417,23 +1812,36 @@
     {
       "part": "root",
       "channel": "padding-left",
-      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually"
+      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair/triple) — nothing minted; bind manually"
     },
     {
       "part": "root",
       "channel": "padding-right",
-      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually"
+      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair/triple) — nothing minted; bind manually"
+    },
+    {
+      "part": "root",
+      "channel": "width",
+      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair/triple) — nothing minted; bind manually"
     },
     {
       "part": "button",
       "channel": "background-color",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+      "ref": "{imported.tag.button.background-color.{linked}}",
+      "refusal": "presence-prop-driven styling (linked) — boolean tokensByProp has no spelling (round 4 residue)"
+    },
+    {
+      "part": "icon-3",
+      "channel": "color",
+      "ref": "{imported.shared.color-8a8a8a}",
+      "refusal": "inheritance-only channel with uncarried nested state deltas — the captured value equals this part's ancestor on EVERY plane, and its per-state deltas exceed the nested Part.states vocabulary (plain color-kind refs only); binding the base value would pin all state planes to the resting colour, so the channel stays UNCARRIED and CSS inheritance from the ancestor renders it (leaves exist in the minted tree)"
     },
     {
       "part": "root",
       "channel": "background-color",
       "state": "active",
-      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually"
+      "ref": "{imported.tag.root.background-color-state-active.{removable}.{clickable}.{linked}}",
+      "refusal": "presence-prop state ref — boolean substitution has no spelling (round 4 residue)"
     },
     {
       "part": "root",
@@ -1446,13 +1854,15 @@
       "part": "root",
       "channel": "padding-left",
       "state": "disabled",
-      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually"
+      "ref": "{imported.tag.root.padding-left-state-disabled.{size}.{removable}.{clickable}}",
+      "refusal": "presence-prop state ref — boolean substitution has no spelling (round 4 residue)"
     },
     {
       "part": "root",
       "channel": "padding-right",
       "state": "disabled",
-      "refusal": "resolved values differ across variants without correlating to any variant axis (or axis pair) — nothing minted; bind manually"
+      "ref": "{imported.tag.root.padding-right-state-disabled.{size}.{removable}.{clickable}}",
+      "refusal": "presence-prop state ref — boolean substitution has no spelling (round 4 residue)"
     },
     {
       "part": "root",
@@ -1579,6 +1989,7 @@
           "outline-color": "rgba(0, 0, 0, 0)",
           "outline-style": "solid",
           "outline-width": "1px",
+          "row-rule-color": "rgba(48, 48, 48, 1)",
           "text-decoration-color": "rgba(48, 48, 48, 1)",
           "text-emphasis-color": "rgba(48, 48, 48, 1)"
         }
@@ -1817,6 +2228,10 @@
     "root-signature-varies: large.off.on.on.disabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
     "root-signature-varies: large.off.on.on.disabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
     "root-signature-varies: large.off.on.on.disabled__active: span|Tag → button|Tag (element-varies receipt; root always aligns)",
+    "union-part-added: large.on.off.off.enabled__default @2 (button|Tag__Button|sr-only)",
+    "union-part-added: large.on.off.off.enabled__default @2.0 (span|Icon)",
+    "union-part-added: large.on.off.off.enabled__default @2.0.0 (svg|Icon__Svg)",
+    "union-part-added: large.on.off.off.enabled__default @2.0.0.0 (path|)",
     "root-signature-varies: large.on.on.off.enabled__default: span|Tag → button|Tag (element-varies receipt; root always aligns)",
     "root-signature-varies: large.on.on.off.enabled__hover: span|Tag → button|Tag (element-varies receipt; root always aligns)",
     "root-signature-varies: large.on.on.off.enabled__focus-visible: span|Tag → button|Tag (element-varies receipt; root always aligns)",
@@ -1931,11 +2346,89 @@
     "signature-drift: large.on.on.on.disabled__active root: span|Tag → button|Tag"
   ],
   "styledChannelReceipts": [
+    "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: link — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: text-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: text — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: button — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-2-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: button-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-4 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "text-part-typography-carried: label-2 — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "text-part-typography-carried: label — line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
+    "control-fallback: no control for <path> — span control used (part part-2-0-0-0)",
+    "control-fallback: no control for <svg> — span control used (part icon-4)",
     "control-fallback: no control for <path> — span control used (part part-1-0-0-0)",
-    "set-plane-literal-carried: root.min-height — unmintable at base (auto …) but uniform per defaultless-axis plane over the presence-off slice: size=large → 24px (presence planes stay named residue — round 5c)"
+    "webkit-prefixed-channels-refused: 3 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-decorations-in-effect (link); -webkit-text-fill-color (button, button-2, icon, icon-2, icon-3, icon-4, link, part-1-0-0-0, part-2-0-0-0); -webkit-text-stroke-color (button, button-2, icon, icon-2, icon-3, icon-4, link, part-1-0-0-0, part-2-0-0-0)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "orphan-mint-refused: icon was REFUSED by the anatomy promotion (it is not a part of the promoted contract), so its 21 styled channel(s) do not mint — before this door they minted leaves the contract could never reference, and `figma bundle` shipped them as Figma variables nothing binds (task #42). The named promotion refusal is in anatomyPromotion.refusals.",
+    "set-plane-literal-carried: root.min-height — unmintable at base (auto …) but uniform per defaultless-axis plane over the presence-off slice: size=large → 24px (presence planes stay named residue — round 5c)",
+    "inheritance-check-rejected: button-2.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: button-2.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: button-2.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: button.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: button.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: button.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: icon-3.font-weight — values track ancestor \"button-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"text-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"text\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: link.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: text-2.font-size — values track ancestor \"link\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: text-2.line-height — values track ancestor \"link\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: text.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: text.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: icon-3.caret-color equals ancestor \"button-2\" on all 25 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: icon-3.color equals ancestor \"button-2\" on all 25 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.font-size equals ancestor \"text-2\" on all 16 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-size equals ancestor \"text\" on all 112 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: link.color equals ancestor \"root\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-suspected: Tag:large.on.off.off.disabled__active>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.off.disabled__default>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.off.disabled__focus-visible>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.off.disabled__hover>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.off.enabled__active>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.off.enabled__default>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.off.enabled__focus-visible>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.off.enabled__hover>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.on.disabled__active>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.on.disabled__default>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.on.disabled__focus-visible>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.on.disabled__hover>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.on.enabled__active>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.on.enabled__default>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.on.enabled__focus-visible>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:large.on.off.on.enabled__hover>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 9x9 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.off.disabled__active>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.off.disabled__default>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.off.disabled__focus-visible>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.off.disabled__hover>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.off.enabled__active>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.off.enabled__default>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.off.enabled__focus-visible>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.off.enabled__hover>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.on.disabled__active>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.on.disabled__default>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.on.disabled__focus-visible>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.on.disabled__hover>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.on.enabled__active>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.on.enabled__default>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.on.enabled__focus-visible>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Tag:none.on.off.on.enabled__hover>button>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-limit: 32 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::after (4 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1980,6 +2473,22 @@
         "join": "computed-only"
       },
       {
+        "part": "part-2-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "button-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-3",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-4",
+        "join": "computed-only"
+      },
+      {
         "part": "part-1-0-0-0",
         "join": "computed-only"
       }
@@ -1997,35 +2506,40 @@
       "label",
       "part-1",
       "button",
-      "icon"
+      "button-2",
+      "icon-3"
     ],
     "svgAssets": [
-      "tag-icon-large",
-      "tag-icon-none"
+      "tag-icon-3"
     ],
     "receipts": [
       "presence-prop-added: removable (boolean, default false; library prop onRemove)",
       "presence-prop-added: clickable (boolean, default false; library prop onClick)",
       "presence-prop-added: linked (boolean, default false; library prop url)",
-      "svg-viewbox-reconstructed: Tag.icon@none.on.off.off.enabled — 0 0 18 18 from computed size 18×18 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
-      "svg-viewbox-reconstructed: Tag.icon@none.on.off.on.enabled — 0 0 18 18 from computed size 18×18 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Tag.icon@large.on.off.off.enabled — 0 0 20 20 from computed size 20×20 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
       "svg-viewbox-reconstructed: Tag.icon@large.on.off.on.enabled — 0 0 20 20 from computed size 20×20 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Tag.icon-3@none.on.off.off.enabled — 0 0 18 18 from computed size 18×18 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Tag.icon-3@none.on.off.on.enabled — 0 0 18 18 from computed size 18×18 (path extent 13.8; viewBox is not a computed style — named reconstruction)",
       "root-display-carried: flex (overrides reviewed \"inline-flex\" — computed truth wins display, receipted)",
-      "display-outside-vocabulary: link = \"grid\" — carried by neither layout nor the declared registry (named residue)",
+      "grid-lowering: link grid 1×1 → flex column, cross-axis stretch from justify-items:normal (measured track counts)",
       "presence-carried: link (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
       "presence-carried: text-2 (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
-      "literal-text-carried: label-2 = \"Wholesale\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "child-content-carried: label-2 holds the children sample text — bound to minted text prop \"children\" (MUI CardContent class)",
       "presence-carried: label-2 (4/16 combos) → visibleWhen linked hidden-when clickable, disabled",
       "presence-complement-carried: text absent in 4/32 default-interaction combos — absence factors as a product; carried as ORDERED stylesWhen (hide on linked; cascade-restored on clickable, disabled) — verified against every captured combo (round 5c complement-of-product spelling)",
       "presence-complement-carried: label absent in 4/32 default-interaction combos — absence factors as a product; carried as ORDERED stylesWhen (hide on linked; cascade-restored on clickable, disabled) — verified against every captured combo (round 5c complement-of-product spelling)",
       "presence-carried: part-1 (4/16 combos) →  base-hidden, shown-when size=large hidden-when clickable, disabled",
-      "aspect-carried: button computed width == height in every enabled combo (18/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
-      "presence-carried: button (4/16 combos) → visibleWhen removable hidden-when clickable, disabled",
-      "aspect-carried: icon computed width == height in every enabled combo (18/20px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
-      "presence-carried: icon (4/16 combos) → visibleWhen removable hidden-when clickable, disabled"
+      "sr-only-carried-as-hidden: button is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
+      "presence-carried: button-2 (2/16 combos) → visibleWhen removable hidden-when size=large, clickable, disabled",
+      "presence-carried: icon-3 (2/16 combos) → visibleWhen removable hidden-when size=large, clickable, disabled",
+      "optional-adornment-unset-materialized: size — defaultless enum gates a present-only-when-set part; unset value \"none\" added to the enum as the DEFAULT so a PLAIN (adornment-absent) variant is enumerated and the base-hidden part renders nothing there (round 5f — S2 unset extended from styling to STRUCTURE)"
     ],
-    "refusals": []
+    "refusals": [
+      "pseudo-decor-outside-grammar: link::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 91, 211, 1) 0px 0px 0px -1px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
+      "pseudo-decor-outside-grammar: button-2::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 91, 211, 1) 0px 0px 0px -1px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
+      "pseudo-decor-outside-grammar: root::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 91, 211, 1) 0px 0px 0px -1px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
+      "orphan-asset-dropped: icon asset \"tag-icon\" was reconstructed from the svg subtree of part \"icon\", which this promotion then REFUSED (see the named refusal above) — the asset belongs to no part of the promoted contract and is not carried. Before this door it was committed to the library's assets/icons/ directory and referenced by nothing (measured: examples/mui/assets/icons/autocomplete-autocomplete-clearindicator.svg)."
+    ]
   },
   "enrichmentNotes": [
     "declared fact carried: root.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -2050,15 +2564,31 @@
     "declared fact carried: button.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: button.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: button.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.text-align = center (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: icon.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: button-2.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.text-align = center (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-3.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [disabled] root.transition-property = none (v15 declared vocabulary)",
     "base-plane literal carried: root.padding-left = 6px (uncorrelated across planes — the base combo's exact value; set planes remain named residue)",
     "base-plane literal carried: root.padding-right = 6px (uncorrelated across planes — the base combo's exact value; set planes remain named residue)",
-    "set-plane literals carried: root per size → large:{min-height=24px, padding-left=8px, padding-right=8px} (round 5c — refused/unmintable geometry planes; presence planes stay named residue)"
+    "base-plane literal carried: root.width = 71.9219px (uncorrelated across planes — the base combo's exact value; set planes remain named residue)",
+    "set-plane literals carried: root per size → large:{min-height=24px, padding-left=8px, padding-right=8px, width=75.9219px} (round 5c — refused/unmintable geometry planes; presence planes stay named residue)",
+    "hug-evidence-unmeasurable: root.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
+    "hug-evidence-unmeasurable: icon.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
+    "hug-evidence-unmeasurable: icon-2.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
+    "hug-evidence-unmeasurable: icon-3.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
+    "hug-evidence-unmeasurable: icon-4.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
+    "hug-evidence-absent: root carries max-width but the capture produced no uniform pixel measurement for it — no sizing evidence carried (the max-width lowering is unchanged).",
+    "hug-evidence-absent: icon-3 carries max-width but the capture produced no uniform pixel measurement for it — no sizing evidence carried (the max-width lowering is unchanged)."
   ]
 }

@@ -1183,7 +1183,9 @@
       'its last sync recorded — a set you edited on the canvas is named in the ' +
       'report and its Apply box starts unchecked, so an update never overwrites ' +
       'your edits silently. Applying amends in place: instances keep their ' +
-      'overrides (same nodes, same property ids).';
+      'component-property overrides (same nodes, same property ids), but edits ' +
+      'made INSIDE a variant are rebuilt from the contract — re-apply interior ' +
+      'tweaks after an update, or keep them in instances outside the set.';
     d.appendChild(p);
     return d;
   }
@@ -1372,7 +1374,7 @@
         else created++;
       });
       box.firstChild.textContent = ok
-        ? 'Applied — ' + amended + ' amended in place, ' + created + ' created, ' + skipped + ' already up to date. Instances keep their overrides (same nodes, same property ids).'
+        ? 'Applied — ' + amended + ' amended in place, ' + created + ' created, ' + skipped + ' already up to date. Instances keep their component-property overrides (same nodes, same property ids); edits made inside an amended variant were rebuilt — re-apply interior tweaks.'
         : 'Stopped at the first failure — nothing after it ran; the failed script committed nothing.';
       var state = ctx.state;
       ctx.state = null;

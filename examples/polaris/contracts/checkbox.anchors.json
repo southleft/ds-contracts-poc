@@ -1,0 +1,94 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "checkbox",
+  "anchors": [
+    {
+      "leaf": "imported.checkbox.backdrop.background-color-state-active.checked",
+      "token": "p.color-bg-fill-brand-selected",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "selector": ".Polaris-Checkbox__Input:checked + .Polaris-Checkbox__Backdrop, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate + .Polaris-Checkbox__Backdrop"
+    },
+    {
+      "leaf": "imported.checkbox.backdrop.background-color-state-active.indeterminate",
+      "token": "p.color-bg-fill-brand-selected",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "selector": ".Polaris-Checkbox__Input:checked + .Polaris-Checkbox__Backdrop, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate + .Polaris-Checkbox__Backdrop"
+    },
+    {
+      "leaf": "imported.checkbox.backdrop.background-color-state-focus-visible.checked",
+      "token": "p.color-bg-fill-brand-selected",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "selector": ".Polaris-Checkbox__Input:checked + .Polaris-Checkbox__Backdrop, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate + .Polaris-Checkbox__Backdrop"
+    },
+    {
+      "leaf": "imported.checkbox.backdrop.background-color-state-focus-visible.indeterminate",
+      "token": "p.color-bg-fill-brand-selected",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "selector": ".Polaris-Checkbox__Input:checked + .Polaris-Checkbox__Backdrop, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate + .Polaris-Checkbox__Backdrop"
+    },
+    {
+      "leaf": "imported.checkbox.backdrop.background-color-state-hover.checked",
+      "token": "p.color-bg-fill-brand-selected",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "selector": ".Polaris-Checkbox__Input:checked + .Polaris-Checkbox__Backdrop, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate + .Polaris-Checkbox__Backdrop"
+    },
+    {
+      "leaf": "imported.checkbox.backdrop.background-color-state-hover.indeterminate",
+      "token": "p.color-bg-fill-brand-selected",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "selector": ".Polaris-Checkbox__Input:checked + .Polaris-Checkbox__Backdrop, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate + .Polaris-Checkbox__Backdrop"
+    },
+    {
+      "leaf": "imported.checkbox.backdrop.background-color.checked",
+      "token": "p.color-bg-fill-brand-selected",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "selector": ".Polaris-Checkbox__Input:checked + .Polaris-Checkbox__Backdrop, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate + .Polaris-Checkbox__Backdrop"
+    },
+    {
+      "leaf": "imported.checkbox.backdrop.background-color.indeterminate",
+      "token": "p.color-bg-fill-brand-selected",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "selector": ".Polaris-Checkbox__Input:checked + .Polaris-Checkbox__Backdrop, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate + .Polaris-Checkbox__Backdrop"
+    },
+    {
+      "leaf": "imported.checkbox.backdrop.background-color.unchecked",
+      "token": "p.color-bg-surface",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-surface",
+      "selector": ".Polaris-Checkbox__Backdrop"
+    },
+    {
+      "leaf": "imported.checkbox.icon-6.fill",
+      "token": "p.color-text-brand-on-bg-fill",
+      "part": "icon-6",
+      "cssProperty": "fill",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "selector": ".Polaris-Checkbox__Input:checked ~ .Polaris-Checkbox__Icon svg, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate ~ .Polaris-Checkbox__Icon svg"
+    },
+    {
+      "leaf": "imported.checkbox.input.z-index",
+      "token": "p.z-index-1",
+      "part": "input",
+      "cssProperty": "z-index",
+      "varName": "--p-z-index-1",
+      "selector": ".Polaris-Checkbox__Input"
+    }
+  ]
+}

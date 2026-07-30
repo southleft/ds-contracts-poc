@@ -2,9 +2,15 @@
   "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
   "component": "Badge",
   "config": "extract/computed/configs/astryx.json",
-  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
   "declared": {
-    "base": [],
+    "base": [
+      {
+        "part": "root",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
     "state": []
   },
   "decisionsReapplied": [
@@ -21,7 +27,7 @@
   "scorecard": {
     "component": "Badge",
     "generatedBy": "extract/computed/gate.ts",
-    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 14,
     "interactions": 4,
@@ -47,12 +53,12 @@
       "maxAA": null
     },
     "fusion": {
-      "boundConfirmed": 196,
-      "boundCells": 224,
-      "contradictions": 28,
-      "mintedLeaves": 0,
-      "mintedLeavesUnfolded": 140,
-      "baseBindings": 0,
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 36,
+      "mintedLeavesUnfolded": 176,
+      "baseBindings": 13,
       "stateBindings": 0,
       "codeOnlyChannels": 0,
       "overflowBindings": 0,
@@ -124,8 +130,123 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 237,
-      "divergent": []
+      "leavesAdded": 372,
+      "divergent": [
+        {
+          "token": "imported.badge.root.background-color.blue",
+          "fresh": "#0171e333",
+          "shipped": "{color-background-blue}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.cyan",
+          "fresh": "#03a7d733",
+          "shipped": "{color-background-cyan}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.green",
+          "fresh": "#24bb5e33",
+          "shipped": "{color-background-green}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.orange",
+          "fresh": "#f2790233",
+          "shipped": "{color-background-orange}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.pink",
+          "fresh": "#e638b333",
+          "shipped": "{color-background-pink}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.purple",
+          "fresh": "#7952ff33",
+          "shipped": "{color-background-purple}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.red",
+          "fresh": "#e3193b33",
+          "shipped": "{color-background-red}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.teal",
+          "fresh": "#0db7af33",
+          "shipped": "{color-background-teal}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.background-color.yellow",
+          "fresh": "#e2a40033",
+          "shipped": "{color-background-yellow}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.blue",
+          "fresh": "#042f97",
+          "shipped": "{color-text-blue}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.cyan",
+          "fresh": "#014975",
+          "shipped": "{color-text-cyan}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.green",
+          "fresh": "#09441f",
+          "shipped": "{color-text-green}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.neutral",
+          "fresh": "#0a1317",
+          "shipped": "{color-text-primary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.orange",
+          "fresh": "#6b2203",
+          "shipped": "{color-text-orange}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.pink",
+          "fresh": "#650053",
+          "shipped": "{color-text-pink}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.purple",
+          "fresh": "#3e0697",
+          "shipped": "{color-text-purple}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.red",
+          "fresh": "#7b0210",
+          "shipped": "{color-text-red}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.teal",
+          "fresh": "#083943",
+          "shipped": "{color-text-teal}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.yellow",
+          "fresh": "#753f07",
+          "shipped": "{color-text-yellow}",
+          "resolvedEqual": true
+        }
+      ]
     },
     "rows": [
       {

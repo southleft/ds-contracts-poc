@@ -1,0 +1,14 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "banner",
+  "anchors": [
+    {
+      "leaf": "imported.banner.label-3.font-weight",
+      "token": "p.font-weight-medium",
+      "part": "label-3",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    }
+  ]
+}

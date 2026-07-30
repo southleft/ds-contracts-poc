@@ -46,15 +46,25 @@ const LIBRARIES = {
   astryx: ['--tokens', 'examples/astryx/tokens/astryx.dtcg.json,examples/astryx/tokens/astryx-minted.dtcg.json'],
 };
 
-/** NOT a silent omission — a NAMED hole, printed on every run.
- *  Polaris's committed scripts were emitted by `scripts/generate-figma.ts`
- *  (the repo's own emitter, through the PROVISIONAL-minting path), not by the
- *  CLI `figma` command the other five use, and that command has never been
- *  written down anywhere in the repo. Reproducing it is its own task; until
- *  then polaris's scripts are the one un-freshness-gated surface, and this
- *  gate says so out loud rather than quietly skipping the directory. */
-const NAMED_HOLES = {
-  polaris: 'emitted by scripts/generate-figma.ts through the provisional-minting path, not the CLI `figma` command — the exact invocation is not recorded anywhere in the repo, so a fresh rebuild cannot be reproduced yet',
+/** Libraries whose scripts are rebuilt by a DIFFERENT recorded command than
+ *  the CLI `figma` verb — checked here with that command, not skipped.
+ *
+ *  polaris (task #26 closed the former NAMED hole): its `figma/*.figma.js`
+ *  come from `examples/polaris/generate.ts`, whose `--check` mode re-emits
+ *  EVERY generated surface (react, html, figma scripts, receipts) in memory
+ *  and fails on any byte drift from the committed artifacts. That is a
+ *  STRICTER bar than the CLI-rebuild rows above (it covers 76 files, not just
+ *  the figma dir), and the `polaris-showcase-reproducible` eval runs the same
+ *  command — this row exists so "there is a figma directory" and "there is a
+ *  freshness row" stay the same fact in THIS gate's own output. The old hole
+ *  text ("the exact invocation is not recorded anywhere") had rotted: the
+ *  invocation is generate.ts's own header, and the byte-compare proves it. */
+const CUSTOM_REBUILDS = {
+  polaris: {
+    cmd: ['examples/polaris/generate.ts', '--check'],
+    mustInclude: 'byte-stable',
+    note: 'via generate.ts --check — all generated surfaces incl. figma/*.figma.js byte-compared',
+  },
 };
 
 const failures = [];
@@ -68,8 +78,20 @@ const figmaDirs = readdirSync(path.join(ROOT, 'examples'), { withFileTypes: true
   .sort();
 
 for (const lib of figmaDirs) {
-  if (NAMED_HOLES[lib]) {
-    rows.push([lib, 'NOT GATED', NAMED_HOLES[lib]]);
+  if (CUSTOM_REBUILDS[lib]) {
+    const { cmd, mustInclude, note } = CUSTOM_REBUILDS[lib];
+    try {
+      const out = execFileSync(TSX, cmd, { cwd: ROOT, encoding: 'utf8', stdio: 'pipe' });
+      if (!out.includes(mustInclude)) {
+        failures.push(`${lib}: rebuild check ran but did not report "${mustInclude}":\n${out.slice(0, 800)}`);
+        rows.push([lib, 'STALE?', note]);
+      } else {
+        rows.push([lib, 'fresh', note]);
+      }
+    } catch (err) {
+      failures.push(`${lib}: rebuild check failed (${cmd.join(' ')}) — committed scripts are STALE vs a fresh emission:\n${String(err.stdout ?? err.message).slice(0, 1200)}`);
+      rows.push([lib, 'STALE', note]);
+    }
     continue;
   }
   const args = LIBRARIES[lib];
@@ -105,4 +127,4 @@ if (failures.length > 0) {
   for (const f of failures) console.error(`  ${f}`);
   process.exit(1);
 }
-console.log(`\n✔ figma-scripts-fresh: ${rows.filter((r) => r[1] === 'fresh').length}/${rows.length} libraries byte-fresh vs a rebuild (${Object.keys(NAMED_HOLES).length} named hole: ${Object.keys(NAMED_HOLES).join(', ')})`);
+console.log(`\n✔ figma-scripts-fresh: ${rows.filter((r) => r[1] === 'fresh').length}/${rows.length} libraries byte-fresh vs a rebuild (0 named holes — task #26 closed polaris, the last one)`);

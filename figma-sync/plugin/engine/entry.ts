@@ -1285,7 +1285,7 @@ return { inventory: rows };
         defaultSelected: !canvasEdited,
         canvasEdited,
         warning: canvasEdited
-          ? `${contract.name} has un-proposed canvas edits — applying will overwrite them. Review them in the Drift tab (or propose them) first; its box starts unchecked.`
+          ? `${contract.name} has un-proposed canvas edits — applying will overwrite them. Review them in the Changes tab (or propose them) first; its box starts unchecked.`
           : undefined,
         styleChanges,
         nodeId: found.nodeId,

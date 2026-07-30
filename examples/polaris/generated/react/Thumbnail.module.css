@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/thumbnail.contract.json (polaris.thumbnail v0.3.2)
+ * Source of truth: contracts/thumbnail.contract.json (polaris.thumbnail v0.4.0)
  * Regenerate with: npm run generate
  */
 
@@ -24,19 +24,23 @@
 
 .size-extraSmall {
   border-radius: var(--p-border-radius-150);
+  height: var(--imported-thumbnail-root-height-extraSmall);
   width: 24px;
 }
 
-.size-small {
-  width: 40px;
+.size-large {
+  height: var(--imported-thumbnail-root-height-large);
+  width: 80px;
 }
 
 .size-medium {
+  height: var(--imported-thumbnail-root-height-medium);
   width: 60px;
 }
 
-.size-large {
-  width: 80px;
+.size-small {
+  height: var(--imported-thumbnail-root-height-small);
+  width: 40px;
 }
 
 .part-0 {
@@ -56,4 +60,36 @@
   overflow-y: clip;
   width: 100%;
   height: 100%;
+}
+
+.size-extraSmall .part-0 {
+  height: var(--imported-thumbnail-part-0-height-extraSmall);
+}
+
+.size-extraSmall .part-0 {
+  width: var(--imported-thumbnail-part-0-width-extraSmall);
+}
+
+.size-large .part-0 {
+  height: var(--imported-thumbnail-part-0-height-large);
+}
+
+.size-large .part-0 {
+  width: var(--imported-thumbnail-part-0-width-large);
+}
+
+.size-medium .part-0 {
+  height: var(--imported-thumbnail-part-0-height-medium);
+}
+
+.size-medium .part-0 {
+  width: var(--imported-thumbnail-part-0-width-medium);
+}
+
+.size-small .part-0 {
+  height: var(--imported-thumbnail-part-0-height-small);
+}
+
+.size-small .part-0 {
+  width: var(--imported-thumbnail-part-0-width-small);
 }

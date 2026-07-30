@@ -28,14 +28,16 @@
  *   · REFUSE the whole promotion if any contract `{imported.*}` ref (axis-
  *     expanded) or any alias fails to resolve.
  *
- * NOT GENERALIZED, BY NAME: `examples/polaris/scripts/promote-floor.ts` (a
- * different generation — v0.3.2, no source-alias pass, bespoke per-component
- * provenance prose, ContractSchema.parse enforcement, un-namespaced capture
- * out dirs) and `examples/astryx/scripts/promote-floor.ts` (the re-anchor
- * decisions ledger must be re-applied after the mint merge, and it refuses at
- * HEAD on a stale ledger row — task #43). Both keep their scripts. A partial
- * generalization that says which two it left alone beats a total one that
- * moves artifacts silently.
+ * NOT GENERALIZED, BY NAME: `examples/astryx/scripts/promote-floor.ts` (the
+ * re-anchor decisions ledger must be re-applied after the mint merge — task
+ * #43 closed the staleness, the ledger mechanism remains astryx's own). It
+ * keeps its script. A partial generalization that says which one it left
+ * alone beats a total one that moves artifacts silently. Polaris joined this
+ * pipeline in the task-#26 recapture round (2026-07-29): its bespoke v0.3.2
+ * promoter had no source-alias pass, and the recapture — the round where the
+ * artifacts were moving anyway, with receipts — was the honest moment to
+ * migrate rather than port a sixth copy of the alias pass. Its un-namespaced
+ * capture out dirs ride `captureOut: "extract/computed/out"` + `contractStem`.
  *
  * BYTE DISCIPLINE: every per-library string that reaches a committed artifact
  * (the promoter path in the contract description, the possessive in the
@@ -372,8 +374,23 @@ export function promote(
   const OUT = path.resolve(repoRoot, cfg.captureOut);
   const stemOf = (n: string): string => cfg.contractStem?.[n] ?? n;
 
-  const dtcg = JSON.parse(readFileSync(path.resolve(repoRoot, cfg.dtcg), 'utf8')) as Record<string, { $value?: unknown }>;
-  const tokenValue = (name: string): unknown => dtcg[name]?.$value;
+  // task #26: the DTCG base is flattened by WALKING, not read as a flat
+  // top-level map. The four original libraries ship flat files (top-level key
+  // IS the token name — walking reproduces those keys byte-identically), but
+  // polaris nests every leaf under a `p` wrapper group, and the flat read made
+  // `tokenValue("p.font-weight-medium")` undefined — which silently zeroed the
+  // ENTIRE alias pass (covering-set empty is a pre-receipt break, so 5,201
+  // captured source facts produced "0 source-aliased" with no refusal line).
+  const dtcgTree = JSON.parse(readFileSync(path.resolve(repoRoot, cfg.dtcg), 'utf8')) as Tree;
+  const dtcgFlat = new Map<string, unknown>();
+  (function walkDtcg(n: Tree, p: string[]): void {
+    for (const [k, v] of Object.entries(n)) {
+      if (k.startsWith('$') || k.startsWith('__')) continue;
+      if (isLeaf(v)) dtcgFlat.set([...p, k].join('.'), v.$value);
+      else if (isTree(v)) walkDtcg(v, [...p, k]);
+    }
+  })(dtcgTree, []);
+  const tokenValue = (name: string): unknown => dtcgFlat.get(name);
 
   // Icon map — the referee needs it to validate `icon.asset` refs, and floor-
   // reconstructed assets promoted below are added to it as they land.

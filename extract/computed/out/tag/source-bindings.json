@@ -1,0 +1,3285 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Tag",
+  "varPrefix": "--p-",
+  "facts": [
+    {
+      "part": "button",
+      "channel": "background-color",
+      "combo": "large.on.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag--sizeLarge .Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "background-color",
+      "combo": "large.on.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag--sizeLarge .Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "background-color",
+      "combo": "large.on.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-bg-fill-tertiary-hover",
+      "varName": "--p-color-bg-fill-tertiary-hover",
+      "anchor": {
+        "selector": ".Polaris-Tag--sizeLarge.Polaris-Tag--removable.Polaris-Tag--linkable .Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "background-color",
+      "combo": "large.on.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag--sizeLarge .Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "large.on.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "large.on.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "large.on.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "large.on.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "right",
+      "combo": "large.on.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.space-050",
+      "varName": "--p-space-050",
+      "anchor": {
+        "selector": ".Polaris-Tag--sizeLarge .Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "right",
+      "combo": "large.on.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.space-050",
+      "varName": "--p-space-050",
+      "anchor": {
+        "selector": ".Polaris-Tag--sizeLarge .Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "right",
+      "combo": "large.on.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.space-050",
+      "varName": "--p-space-050",
+      "anchor": {
+        "selector": ".Polaris-Tag--sizeLarge .Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "right",
+      "combo": "large.on.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.space-050",
+      "varName": "--p-space-050",
+      "anchor": {
+        "selector": ".Polaris-Tag--sizeLarge .Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "none.on.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "none.on.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "none.on.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "none.on.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "margin-left",
+      "combo": "none.on.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.space-050",
+      "varName": "--p-space-050",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "margin-left",
+      "combo": "none.on.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.space-050",
+      "varName": "--p-space-050",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "margin-left",
+      "combo": "none.on.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.space-050",
+      "varName": "--p-space-050",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "margin-left",
+      "combo": "none.on.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.space-050",
+      "varName": "--p-space-050",
+      "anchor": {
+        "selector": ".Polaris-Tag__Button"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "large.on.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-icon-disabled",
+      "varName": "--p-color-icon-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled svg"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "large.on.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-icon-disabled",
+      "varName": "--p-color-icon-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled svg"
+      }
+    },
+    {
+      "part": "icon-4",
+      "channel": "fill",
+      "combo": "none.on.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-icon-disabled",
+      "varName": "--p-color-icon-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled svg"
+      }
+    },
+    {
+      "part": "icon-4",
+      "channel": "fill",
+      "combo": "none.on.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-icon-disabled",
+      "varName": "--p-color-icon-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled svg"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.off.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.off.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.off.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.off.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.off.on.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.off.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.off.on.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.on.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.on.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.on.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.on.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.on.on.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.on.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.on.on.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.off.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.off.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.off.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.off.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.off.on.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.off.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.off.on.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.on.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.on.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.on.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.on.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.on.on.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.on.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "large.on.on.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "none.off.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "none.on.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "large.off.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "large.on.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.font-line-height-500",
+      "varName": "--p-font-line-height-500",
+      "anchor": {
+        "selector": ".Polaris-Tag__Text"
+      }
+    },
+    {
+      "part": "link",
+      "channel": "color",
+      "combo": "none.off.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag__Link"
+      }
+    },
+    {
+      "part": "link",
+      "channel": "color",
+      "combo": "none.on.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag__Link"
+      }
+    },
+    {
+      "part": "link",
+      "channel": "color",
+      "combo": "large.off.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag__Link"
+      }
+    },
+    {
+      "part": "link",
+      "channel": "color",
+      "combo": "large.on.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag__Link"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.off.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.off.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.off.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.off.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.on.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.on.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.on.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.on.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.off.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.off.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.off.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.off.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.on.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.on.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.on.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.on.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-bg-fill-tertiary",
+      "varName": "--p-color-bg-fill-tertiary",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.off.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.off.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.off.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.off.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.off.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.off.on.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.off.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.off.on.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.on.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.on.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.on.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.on.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.on.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.on.on.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.on.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.on.on.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.off.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.off.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.off.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.off.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.off.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.off.on.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.off.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.off.on.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.on.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.on.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.on.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.on.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.on.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.on.on.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.on.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Tag"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.on.on.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Tag.Polaris-Tag--disabled"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.off.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.off.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.off.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.off.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.off.on.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.off.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.off.on.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.on.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.on.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.on.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.on.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.on.on.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.on.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "none.on.on.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.off.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.off.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.off.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.off.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.off.on.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.off.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.off.on.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.on.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.on.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.on.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.on.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.on.on.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.on.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-size",
+      "combo": "large.on.on.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.off.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.off.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.off.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.off.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.off.on.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.off.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.off.on.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.on.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.on.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.on.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.on.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.on.on.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.on.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "none.on.on.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.off.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.off.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.off.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.off.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.off.on.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.off.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.off.on.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.on.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.on.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.on.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.on.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.on.on.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.on.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "font-weight",
+      "combo": "large.on.on.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.off.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.off.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.off.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.off.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.off.on.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.off.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.off.on.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.on.off.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.on.off.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.on.off.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.on.on.off.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.on.on.off.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.on.on.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "none.on.on.on.disabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.off.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.off.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.off.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.off.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.off.on.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.off.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.off.on.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.on.off.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.on.off.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.on.off.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.on.on.off.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.on.on.off.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "off"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.on.on.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text",
+      "channel": "line-height",
+      "combo": "large.on.on.on.disabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "on",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "font-size",
+      "combo": "none.off.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "font-size",
+      "combo": "none.on.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "font-size",
+      "combo": "large.off.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "font-size",
+      "combo": "large.on.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "font-weight",
+      "combo": "none.off.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "font-weight",
+      "combo": "none.on.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "font-weight",
+      "combo": "large.off.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "font-weight",
+      "combo": "large.on.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "line-height",
+      "combo": "none.off.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "line-height",
+      "combo": "none.on.off.on.enabled",
+      "axisValues": {
+        "size": "none",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "line-height",
+      "combo": "large.off.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "off",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "text-2",
+      "channel": "line-height",
+      "combo": "large.on.off.on.enabled",
+      "axisValues": {
+        "size": "large",
+        "removable": "on",
+        "clickable": "off",
+        "linked": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    }
+  ],
+  "skips": [
+    "button.font-family: candidate --p-font-family-sans → \"p.font-family-sans\" = \"Inter\",\n    -apple-system,\n    BlinkMacSystemFont,\n    \"San Francisco\",\n    \"Segoe UI\",\n    Roboto,\n    \"Helvetica Neue\",\n    sans-serif names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "button.margin-left: candidate --p-space-050 → \"p.space-050\" = 0.125rem names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "button-2.font-family: candidate --p-font-family-sans → \"p.font-family-sans\" = \"Inter\",\n    -apple-system,\n    BlinkMacSystemFont,\n    \"San Francisco\",\n    \"Segoe UI\",\n    Roboto,\n    \"Helvetica Neue\",\n    sans-serif names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.font-family: candidate --p-font-family-sans → \"p.font-family-sans\" = \"Inter\",\n    -apple-system,\n    BlinkMacSystemFont,\n    \"San Francisco\",\n    \"Segoe UI\",\n    Roboto,\n    \"Helvetica Neue\",\n    sans-serif names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "text.letter-spacing: candidate --p-text-body-sm-font-letter-spacing → \"p.text-body-sm-font-letter-spacing\" = 0rem names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "text-2.letter-spacing: candidate --p-text-body-sm-font-letter-spacing → \"p.text-body-sm-font-letter-spacing\" = 0rem names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "root.background: SHORTHAND carrying var(--p-color-bg-fill-disabled) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
+}

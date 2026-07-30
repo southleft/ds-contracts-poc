@@ -14,7 +14,7 @@ Short version — four phases, each with a falsifiable exit criterion:
 
 ---
 
-## Where it actually stands (2026-07-28)
+## Where it actually stands (2026-07-29)
 
 Updated against the shipped surfaces rather than against commit messages. The full arc since `0.7.0` is in [CHANGELOG.md](CHANGELOG.md); every open item below has its symptom and status in [docs/23](docs/23-known-limitations.md).
 
@@ -40,7 +40,7 @@ Updated against the shipped surfaces rather than against commit messages. The fu
 
 - ✅ **A CSS/DOM conformance fixture exists** ([conformance/](conformance/README.md)) — 53 synthetic cases whose expected dispositions are authored *independently* of the engine, so a construct that is neither carried nor named-refused is a hard failure rather than an absence. 50 green, 3 red, 0 yellow, on a decrease-only ratchet.
 - ⚠️ **It is not Phase 3's conformance kit and should not be read as one.** It measures *this* engine's CSS/DOM frontier; Phase 3 asks for the eval suite repackaged to run against *any* implementation, which is a different artifact. Two things must also close before it could become one: the fixture's **canvas half is declared, not measured** ("carried" means "reached the contract", not "reached the canvas"), and every case is **one combo with no state axes** — precisely where the MUI and Carbon rounds found most of their defects.
-- 🟡 The `spec/` draft, namespacing, normative compatibility rules and the extension model are unstarted. `@ds-contracts/schema` is published at 15 while the repo's document has moved to spec v16: the format is mature enough to specify; the specification does not exist yet.
+- 🟡 The `spec/` draft, namespacing, normative compatibility rules and the extension model are unstarted. `@ds-contracts/schema` is published at 16.0.0 and now matches the repo's spec document: the format is mature enough to specify; the specification does not exist yet.
 
 **Phase 4 — Community & governance.** Unstarted, as designed — it follows a second implementation.
 
@@ -50,4 +50,4 @@ Updated against the shipped surfaces rather than against commit messages. The fu
 
 Not a seventh library. **One library taken to 50%** — because no library here is captured past 11.9%, and the long tail (the data grid, the tree, the virtualized list, the date picker, the rich-text surface) has never been touched. Everything else on this page is a claim about the *engine*; that would be the first claim about a *library*.
 
-Two prerequisites are smaller and blocking: **Polaris needs a committed sandbox** and **Astryx needs its re-anchor ledger closed**, or a third of the example corpus stays un-rebuildable ([docs/23 §3](docs/23-known-limitations.md)).
+Both prerequisites are now closed. Astryx closed on 2026-07-29 — its capture had been reading its own promote output, and that failure mode is now gated for **every** library, not patched for one. **Polaris closed the same day (#26)**: all 12 components recaptured with the CSS-vars reader on, 5,201 verified source facts, 179 minted leaves aliased to Polaris's own `{p.*}` tokens, promotion migrated to the shared pipeline, and the figma-script freshness gate's last named hole closed — 6/6 libraries byte-fresh ([docs/23 §3.2](docs/23-known-limitations.md)). Note that "rebuildable" is two different bars in this repo — (1) the capture→promote→figma-script chain reruns from committed configs and seeds, and (2) a committed npm sandbox recipe reconstructs the extraction environment itself. Polaris now clears both; the other five libraries clear bar 1 but their sandbox recipes remain PROVENANCE prose, the named follow-up. Nothing blocks the 50% round.

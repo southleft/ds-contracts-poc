@@ -1,44 +1,44 @@
 {
   "component": "Banner",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "captures": 64,
   "combos": 16,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 942,
+  "channelsEnumerated": 961,
   "elementsPerCapture": 27,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 12,
-    "box": 0,
-    "blockstack": 5,
-    "box-2": 17,
-    "inlinestack": 17,
-    "inlinestack-2": 15,
-    "part-0-0-0-0-0-0": 10,
-    "icon": 14,
-    "icon-2": 23,
-    "part-0-0-0-0-0-0-0-0-0": 16,
-    "part-0-0-0-0-0-0-0-0-1": 15,
-    "part-0-0-0-0-0-0-0-0-2": 16,
-    "title": 15,
-    "button": 52,
-    "button__icon": 5,
-    "part-0-0-0-0-1-0-0": 6,
-    "icon-3": 8,
-    "icon-4": 16,
-    "part-0-0-0-0-1-0-0-0-0-0": 8,
-    "box-3": 4,
-    "blockstack-2": 6,
-    "part-0-0-1-0-0": 0,
+    "root": 14,
+    "box": 2,
+    "blockstack": 7,
+    "box-2": 20,
+    "inlinestack": 20,
+    "inlinestack-2": 17,
+    "part-0-0-0-0-0-0": 12,
+    "icon": 16,
+    "icon-2": 25,
+    "part-0-0-0-0-0-0-0-0-0": 19,
+    "part-0-0-0-0-0-0-0-0-1": 18,
+    "part-0-0-0-0-0-0-0-0-2": 19,
+    "title": 16,
+    "button": 55,
+    "button__icon": 6,
+    "part-0-0-0-0-1-0-0": 8,
+    "icon-3": 9,
+    "icon-4": 17,
+    "part-0-0-0-0-1-0-0-0-0-0": 10,
+    "box-3": 6,
+    "blockstack-2": 8,
+    "part-0-0-1-0-0": 1,
     "label-2": 6,
-    "buttongroup": 5,
-    "buttongroup__item": 2,
-    "button-2": 49,
+    "buttongroup": 7,
+    "buttongroup__item": 4,
+    "button-2": 52,
     "label-3": 6
   },
   "folds": {
-    "count": 108,
+    "count": 120,
     "receipts": [
       {
         "part": "box-2",
@@ -84,6 +84,12 @@
       },
       {
         "part": "box-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "box-2",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -138,6 +144,12 @@
       },
       {
         "part": "inlinestack",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "inlinestack",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -192,6 +204,12 @@
       },
       {
         "part": "inlinestack-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "inlinestack-2",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -246,6 +264,12 @@
       },
       {
         "part": "part-0-0-0-0-0-0",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0-0-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -300,6 +324,12 @@
       },
       {
         "part": "icon",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -354,6 +384,12 @@
       },
       {
         "part": "icon-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -408,6 +444,12 @@
       },
       {
         "part": "part-0-0-0-0-0-0-0-0-0",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0-0-0-0-0-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -462,6 +504,12 @@
       },
       {
         "part": "part-0-0-0-0-0-0-0-0-1",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0-0-0-0-0-1",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -516,6 +564,12 @@
       },
       {
         "part": "part-0-0-0-0-0-0-0-0-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-0-0-0-0-0-0-0-0-2",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -570,6 +624,12 @@
       },
       {
         "part": "title",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "title",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -624,6 +684,12 @@
       },
       {
         "part": "button",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "button",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -678,6 +744,12 @@
       },
       {
         "part": "button-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "button-2",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -689,8 +761,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 268,
-    "mintedLeavesFolded": 53
+    "mintedLeavesUnfolded": 319,
+    "mintedLeavesFolded": 80
   },
   "bound": {
     "cellsChecked": 96,
@@ -699,13 +771,13 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 53,
-    "baseBindings": 114,
+    "leaves": 80,
+    "baseBindings": 142,
     "stateBindings": 2,
     "byShape": {
-      "uniform": 109,
-      "perAxis": 7,
-      "perPair": 0,
+      "uniform": 130,
+      "perAxis": 11,
+      "perPair": 3,
       "refused": 0
     }
   },
@@ -714,25 +786,27 @@
     "state": 1
   },
   "codeOnly": {
-    "base": 3,
+    "base": 5,
     "state": 0,
-    "overflowBindings": 0
+    "overflowBindings": 7
   },
   "pseudoElementFindings": 16,
   "anatomyPromotion": {
     "partsCarried": 21,
     "svgAssets": 5,
-    "refusals": 1
+    "refusals": 2
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 1293440,
-    "cellsMatched": 1291264,
-    "pct": 99.83176645225136,
+    "cellsCompared": 1319584,
+    "cellsMatched": 1317408,
+    "pct": 99.83509954652375,
     "namedExclusions": [
       "app-region",
-      "text-decoration"
+      "text-decoration",
+      "translate-x",
+      "translate-y"
     ],
     "topMismatchedChannels": [
       [
@@ -751,6 +825,12 @@
   },
   "pixel": {
     "pairs": 64,
+    "measured": 64,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
       "mean": 0.07487504200268817,
       "max": 0.1070228494623656,
@@ -805,7 +885,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 96.90054495912807,
+    "computedPctEqual": 97.01443569553805,
     "rowsFullyEqual": 0,
     "rows": 64,
     "pixelPerfectExact": 0,

@@ -2,41 +2,21 @@
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@shopify/polaris@13.9.5",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
-      "shared": {
-        "size-4": {
-          "$value": "4px",
-          "$type": "dimension"
-        },
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
-        },
-        "size-1": {
-          "$value": "1px",
-          "$type": "dimension"
-        },
-        "color-303030": {
-          "$value": "#303030",
-          "$type": "color"
-        },
-        "color-00000000": {
-          "$value": "#00000000",
-          "$type": "color"
-        },
-        "color-b5b5b5": {
-          "$value": "#b5b5b5",
-          "$type": "color"
-        }
-      },
       "checkbox": {
-        "choice-control": {
-          "flex-shrink": {
-            "$value": "0",
-            "$type": "number"
+        "root": {
+          "height": {
+            "$value": "28px",
+            "$type": "dimension"
           },
+          "width": {
+            "$value": "136.359px",
+            "$type": "dimension"
+          }
+        },
+        "choice-control": {
           "margin-right": {
             "$value": "8px",
             "$type": "dimension"
@@ -53,10 +33,6 @@
           },
           "font-weight": {
             "$value": "400",
-            "$type": "number"
-          },
-          "opacity": {
-            "$value": "0",
             "$type": "number"
           },
           "outline-color": {
@@ -264,148 +240,20 @@
             }
           }
         },
-        "icon": {
-          "bottom": {
-            "unchecked": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "checked": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "indeterminate": {
-              "$value": "-2px",
-              "$type": "dimension"
-            }
-          },
-          "color": {
-            "$value": "#303030",
-            "$type": "color"
-          },
-          "left": {
-            "unchecked": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "checked": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "indeterminate": {
-              "$value": "-2px",
-              "$type": "dimension"
-            }
-          },
-          "margin-bottom": {
-            "unchecked": {
-              "$value": "2px",
-              "$type": "dimension"
-            },
-            "checked": {
-              "$value": "2px",
-              "$type": "dimension"
-            },
-            "indeterminate": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "margin-left": {
-            "unchecked": {
-              "$value": "2px",
-              "$type": "dimension"
-            },
-            "checked": {
-              "$value": "2px",
-              "$type": "dimension"
-            },
-            "indeterminate": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "margin-right": {
-            "unchecked": {
-              "$value": "2px",
-              "$type": "dimension"
-            },
-            "checked": {
-              "$value": "2px",
-              "$type": "dimension"
-            },
-            "indeterminate": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "margin-top": {
-            "unchecked": {
-              "$value": "2px",
-              "$type": "dimension"
-            },
-            "checked": {
-              "$value": "2px",
-              "$type": "dimension"
-            },
-            "indeterminate": {
-              "$value": "0px",
-              "$type": "dimension"
-            }
-          },
-          "opacity": {
-            "unchecked": {
-              "$value": "0",
-              "$type": "number"
-            },
-            "checked": {
-              "$value": "1",
-              "$type": "number"
-            },
-            "indeterminate": {
-              "$value": "1",
-              "$type": "number"
-            }
-          },
-          "right": {
-            "unchecked": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "checked": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "indeterminate": {
-              "$value": "-2px",
-              "$type": "dimension"
-            }
-          },
-          "top": {
-            "unchecked": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "checked": {
-              "$value": "0px",
-              "$type": "dimension"
-            },
-            "indeterminate": {
-              "$value": "-2px",
-              "$type": "dimension"
-            }
-          }
-        },
-        "icon-3": {
-          "color": {
-            "$value": "#303030",
-            "$type": "color"
-          }
-        },
-        "icon-2": {
+        "icon-6": {
           "color": {
             "$value": "#ffffff",
             "$type": "color"
+          },
+          "fill": {
+            "$value": "#ffffff",
+            "$type": "color"
+          }
+        },
+        "choice-label": {
+          "width": {
+            "$value": "108.359px",
+            "$type": "dimension"
           }
         },
         "label": {
@@ -416,11 +264,53 @@
           "font-weight": {
             "$value": "450",
             "$type": "number"
-          },
-          "line-height": {
-            "$value": "20px",
-            "$type": "dimension"
           }
+        }
+      },
+      "shared": {
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "num-0": {
+          "$value": "0",
+          "$type": "number"
+        },
+        "size-20": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-18": {
+          "$value": "18px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "color-303030": {
+          "$value": "#303030",
+          "$type": "color"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "color-00000000": {
+          "$value": "#00000000",
+          "$type": "color"
+        },
+        "color-b5b5b5": {
+          "$value": "#b5b5b5",
+          "$type": "color"
         }
       }
     }
@@ -464,6 +354,12 @@
     },
     {
       "part": "input",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "input",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -475,55 +371,61 @@
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-5",
       "channel": "border-bottom-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-5",
       "channel": "border-left-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-5",
       "channel": "border-right-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-5",
       "channel": "border-top-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-5",
       "channel": "caret-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-5",
       "channel": "column-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-5",
       "channel": "outline-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-5",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-5",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
     {
-      "part": "icon-4",
+      "part": "icon-5",
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -572,6 +474,12 @@
     },
     {
       "part": "part-0-0-2-0-0-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -583,6 +491,126 @@
       "class": "currentColor"
     },
     {
+      "part": "icon-6",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-6",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-6",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-6",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-6",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-6",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-6",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-6",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-6",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-6",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
       "part": "icon-2",
       "channel": "border-bottom-color",
       "foldedInto": "color",
@@ -621,6 +649,12 @@
     {
       "part": "icon-2",
       "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "row-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
@@ -675,6 +709,12 @@
     {
       "part": "part-0-0-2-0-0",
       "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-2-0-0",
+      "channel": "row-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
@@ -698,6 +738,7 @@
     "fold-carries-state-delta: [disabled] input.border-top-color rides its source fact",
     "fold-carries-state-delta: [disabled] input.caret-color rides its source fact",
     "fold-carries-state-delta: [disabled] input.column-rule-color rides its source fact",
+    "fold-carries-state-delta: [disabled] input.row-rule-color rides its source fact",
     "fold-carries-state-delta: [disabled] input.text-decoration-color rides its source fact",
     "fold-carries-state-delta: [disabled] input.text-emphasis-color rides its source fact"
   ],
@@ -768,6 +809,11 @@
       },
       {
         "part": "input",
+        "channel": "position",
+        "value": "absolute"
+      },
+      {
+        "part": "input",
         "channel": "text-rendering",
         "value": "auto"
       },
@@ -803,6 +849,11 @@
       },
       {
         "part": "backdrop",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 0, 0)"
+      },
+      {
+        "part": "backdrop",
         "channel": "transition-delay",
         "value": "0s, 0s, 0s"
       },
@@ -822,59 +873,74 @@
         "value": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
       },
       {
-        "part": "icon",
+        "part": "icon-3",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "icon",
+        "part": "icon-3",
         "channel": "pointer-events",
         "value": "none"
       },
       {
-        "part": "icon-3",
+        "part": "icon-4",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "icon-3",
+        "part": "icon-4",
         "channel": "max-height",
         "value": "100%"
       },
       {
-        "part": "icon-3",
+        "part": "icon-4",
         "channel": "max-width",
         "value": "100%"
       },
       {
-        "part": "icon-3",
+        "part": "icon-4",
         "channel": "pointer-events",
         "value": "none"
       },
       {
-        "part": "icon-2",
+        "part": "icon-6",
         "channel": "cursor",
         "value": "pointer"
       },
       {
-        "part": "icon-2",
+        "part": "icon-6",
         "channel": "overflow-x",
         "value": "hidden"
       },
       {
-        "part": "icon-2",
+        "part": "icon-6",
         "channel": "overflow-y",
         "value": "hidden"
       },
       {
-        "part": "icon-2",
+        "part": "icon-6",
         "channel": "pointer-events",
         "value": "none"
       },
       {
-        "part": "icon-2",
+        "part": "icon-6",
         "channel": "text-rendering",
         "value": "geometricprecision"
+      },
+      {
+        "part": "icon",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "icon",
+        "channel": "pointer-events",
+        "value": "none"
+      },
+      {
+        "part": "icon",
+        "channel": "position",
+        "value": "absolute"
       },
       {
         "part": "choice__label",
@@ -914,12 +980,6 @@
       },
       {
         "state": "disabled",
-        "part": "icon",
-        "channel": "cursor",
-        "value": "default"
-      },
-      {
-        "state": "disabled",
         "part": "label",
         "channel": "cursor",
         "value": "default"
@@ -954,62 +1014,55 @@
     },
     {
       "part": "backdrop",
-      "channel": "transform",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "matrix(1, 0, 0, 1, 0, 0)",
-      "distinctValues": 1
-    },
-    {
-      "part": "backdrop",
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal, normal, normal",
       "distinctValues": 1
     },
     {
-      "part": "icon",
+      "part": "icon-3",
       "channel": "transition-behavior",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "normal",
       "distinctValues": 2
     },
     {
-      "part": "icon",
+      "part": "icon-3",
       "channel": "transition-delay",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "0s",
       "distinctValues": 2
     },
     {
-      "part": "icon",
+      "part": "icon-3",
       "channel": "transition-duration",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "0s",
       "distinctValues": 2
     },
     {
-      "part": "icon",
+      "part": "icon-3",
       "channel": "transition-property",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "all",
       "distinctValues": 2
     },
     {
-      "part": "icon",
+      "part": "icon-3",
       "channel": "transition-timing-function",
       "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "sample": "ease",
       "distinctValues": 2
     },
     {
-      "part": "icon-2",
+      "part": "icon-6",
       "channel": "overflow-clip-margin",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "content-box",
       "distinctValues": 1
     },
     {
-      "part": "icon-2",
+      "part": "icon-6",
       "channel": "shape-rendering",
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "geometricprecision",
@@ -1019,14 +1072,28 @@
   "stateOverflow": [
     {
       "state": "disabled",
-      "part": "icon-2",
+      "part": "icon-3",
       "channel": "cursor",
       "sample": "default",
       "reason": "declared-channel state delta on 2/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
     },
     {
       "state": "disabled",
-      "part": "icon-3",
+      "part": "icon-4",
+      "channel": "cursor",
+      "sample": "default",
+      "reason": "declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "icon-6",
+      "channel": "cursor",
+      "sample": "default",
+      "reason": "declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "disabled",
+      "part": "icon",
       "channel": "cursor",
       "sample": "default",
       "reason": "declared-channel state delta on 1/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
@@ -1034,9 +1101,54 @@
   ],
   "overflowBindings": [
     {
-      "part": "icon-2",
-      "channel": "fill",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+      "part": "icon-3",
+      "channel": "bottom",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    },
+    {
+      "part": "icon-3",
+      "channel": "height",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    },
+    {
+      "part": "icon-3",
+      "channel": "left",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    },
+    {
+      "part": "icon-3",
+      "channel": "margin-bottom",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    },
+    {
+      "part": "icon-3",
+      "channel": "margin-left",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    },
+    {
+      "part": "icon-3",
+      "channel": "margin-right",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    },
+    {
+      "part": "icon-3",
+      "channel": "margin-top",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    },
+    {
+      "part": "icon-3",
+      "channel": "right",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    },
+    {
+      "part": "icon-3",
+      "channel": "top",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    },
+    {
+      "part": "icon-3",
+      "channel": "width",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
     },
     {
       "part": "backdrop",
@@ -1166,6 +1278,13 @@
     },
     {
       "part": "choice__label",
+      "channel": "row-rule-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "choice__label",
       "channel": "text-decoration-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
@@ -1230,6 +1349,13 @@
     {
       "part": "label",
       "channel": "outline-color",
+      "state": "disabled",
+      "ref": "{imported.shared.color-b5b5b5}",
+      "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
       "state": "disabled",
       "ref": "{imported.shared.color-b5b5b5}",
       "refusal": "v13 Part.states carries plain color-kind refs only on non-root parts"
@@ -1482,36 +1608,138 @@
   ],
   "interactionOnDisabled": [],
   "structureReceipts": [
+    "union-part-added: checked.enabled__default @0.0.2 (span|Checkbox__Icon)",
+    "union-part-added: checked.enabled__default @0.0.2.0 (svg|)",
+    "union-part-added: checked.enabled__default @0.0.2.0.0 (path|)",
     "union-part-added: indeterminate.enabled__default @0.0.2.0 (span|Icon)",
     "union-part-added: indeterminate.enabled__default @0.0.2.0.0 (svg|Icon__Svg)",
     "union-part-added: indeterminate.enabled__default @0.0.2.0.0.0 (path|)",
+    "part-missing: checked.enabled__default icon",
+    "part-missing: checked.enabled__default icon-2",
+    "part-missing: checked.enabled__default part-0-0-2-0-0",
+    "part-missing: checked.enabled__hover icon",
+    "part-missing: checked.enabled__hover icon-2",
+    "part-missing: checked.enabled__hover part-0-0-2-0-0",
+    "part-missing: checked.enabled__focus-visible icon",
+    "part-missing: checked.enabled__focus-visible icon-2",
+    "part-missing: checked.enabled__focus-visible part-0-0-2-0-0",
+    "part-missing: checked.enabled__active icon",
+    "part-missing: checked.enabled__active icon-2",
+    "part-missing: checked.enabled__active part-0-0-2-0-0",
+    "part-missing: checked.disabled__default icon",
+    "part-missing: checked.disabled__default icon-2",
+    "part-missing: checked.disabled__default part-0-0-2-0-0",
+    "part-missing: checked.disabled__hover icon",
+    "part-missing: checked.disabled__hover icon-2",
+    "part-missing: checked.disabled__hover part-0-0-2-0-0",
+    "part-missing: checked.disabled__focus-visible icon",
+    "part-missing: checked.disabled__focus-visible icon-2",
+    "part-missing: checked.disabled__focus-visible part-0-0-2-0-0",
+    "part-missing: checked.disabled__active icon",
+    "part-missing: checked.disabled__active icon-2",
+    "part-missing: checked.disabled__active part-0-0-2-0-0",
+    "part-missing: indeterminate.enabled__default icon",
     "part-missing: indeterminate.enabled__default icon-2",
     "part-missing: indeterminate.enabled__default part-0-0-2-0-0",
+    "part-missing: indeterminate.enabled__hover icon",
     "part-missing: indeterminate.enabled__hover icon-2",
     "part-missing: indeterminate.enabled__hover part-0-0-2-0-0",
+    "part-missing: indeterminate.enabled__focus-visible icon",
     "part-missing: indeterminate.enabled__focus-visible icon-2",
     "part-missing: indeterminate.enabled__focus-visible part-0-0-2-0-0",
+    "part-missing: indeterminate.enabled__active icon",
     "part-missing: indeterminate.enabled__active icon-2",
     "part-missing: indeterminate.enabled__active part-0-0-2-0-0",
+    "part-missing: indeterminate.disabled__default icon",
     "part-missing: indeterminate.disabled__default icon-2",
     "part-missing: indeterminate.disabled__default part-0-0-2-0-0",
+    "part-missing: indeterminate.disabled__hover icon",
     "part-missing: indeterminate.disabled__hover icon-2",
     "part-missing: indeterminate.disabled__hover part-0-0-2-0-0",
+    "part-missing: indeterminate.disabled__focus-visible icon",
     "part-missing: indeterminate.disabled__focus-visible icon-2",
     "part-missing: indeterminate.disabled__focus-visible part-0-0-2-0-0",
+    "part-missing: indeterminate.disabled__active icon",
     "part-missing: indeterminate.disabled__active icon-2",
     "part-missing: indeterminate.disabled__active part-0-0-2-0-0"
   ],
   "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: choice__control — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: checkbox — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: input — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: backdrop — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-3 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-4 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-5 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-2-0-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-6 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-2-0-0-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-2-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: choice__label — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "control-fallback: no control for <label> — span control used (part root)",
     "control-fallback: no control for <input> — span control used (part input)",
-    "svg-host-color-carried: icon — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "svg-host-color-carried: icon-3 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
-    "control-fallback: no control for <svg> — span control used (part icon-4)",
+    "svg-host-color-carried: icon-4 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "control-fallback: no control for <svg> — span control used (part icon-5)",
     "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0-0)",
+    "control-fallback: no control for <svg> — span control used (part icon-6)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0-2)",
+    "translate-door-generalized: part-0-0-2-0-0-2 — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "svg-host-color-carried: icon — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
     "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0)",
-    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)"
+    "translate-door-generalized: part-0-0-2-0-0 — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (icon-2, icon-5, icon-6, input, part-0-0-2-0-0, part-0-0-2-0-0-0, part-0-0-2-0-0-2); -webkit-text-stroke-color (icon-2, icon-5, icon-6, input, part-0-0-2-0-0, part-0-0-2-0-0-0, part-0-0-2-0-0-2)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: icon-3.color — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: icon-6.caret-color — values track ancestor \"icon-3\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: icon-6.fill — values track ancestor \"icon-3\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: icon.color — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: input.caret-color — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: input.color — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: input.font-size — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: input.font-weight — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: input.line-height — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: icon-4.color equals ancestor \"icon-3\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-suspected: Checkbox:checked.disabled__active>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:checked.disabled__default>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:checked.disabled__focus-visible>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:checked.disabled__hover>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:checked.enabled__active>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:checked.enabled__default>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:checked.enabled__focus-visible>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:checked.enabled__hover>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:indeterminate.disabled__active>span>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x2 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:indeterminate.disabled__default>span>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x2 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:indeterminate.disabled__focus-visible>span>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x2 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:indeterminate.disabled__hover>span>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x2 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:indeterminate.enabled__active>span>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x2 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:indeterminate.enabled__default>span>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x2 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:indeterminate.enabled__focus-visible>span>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x2 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:indeterminate.enabled__hover>span>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 12x2 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:unchecked.disabled__active>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:unchecked.disabled__default>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:unchecked.disabled__focus-visible>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:unchecked.disabled__hover>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:unchecked.enabled__active>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:unchecked.enabled__default>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:unchecked.enabled__focus-visible>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Checkbox:unchecked.enabled__hover>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-limit: 24 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on ::placeholder (1 part(s)). Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1536,10 +1764,6 @@
         "join": "matched"
       },
       {
-        "part": "icon",
-        "join": "computed-only"
-      },
-      {
         "part": "icon-3",
         "join": "computed-only"
       },
@@ -1548,7 +1772,23 @@
         "join": "computed-only"
       },
       {
+        "part": "icon-5",
+        "join": "computed-only"
+      },
+      {
         "part": "part-0-0-2-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-6",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-2-0-0-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
         "join": "computed-only"
       },
       {
@@ -1578,28 +1818,32 @@
       "checkbox",
       "input",
       "backdrop",
-      "icon",
       "icon-3",
-      "icon-2",
+      "icon-4",
+      "icon-6",
+      "icon",
       "choice__label",
       "label"
     ],
     "svgAssets": [
-      "checkbox-icon-2-checked",
-      "checkbox-icon-2-unchecked",
-      "checkbox-icon-3"
+      "checkbox-icon",
+      "checkbox-icon-4",
+      "checkbox-icon-6"
     ],
     "receipts": [
-      "svg-viewbox-reconstructed: Checkbox.icon-3@indeterminate.enabled — 0 0 22 22 from computed size 22×22 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
-      "svg-dash-channels-dropped: Checkbox.icon-2@unchecked.enabled — stroke-dasharray 2px / stroke-dashoffset 2px are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)",
-      "svg-viewbox-reconstructed: Checkbox.icon-2@unchecked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
-      "svg-dash-channels-dropped: Checkbox.icon-2@checked.enabled — stroke-dasharray 2px / stroke-dashoffset 0px are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)",
-      "svg-viewbox-reconstructed: Checkbox.icon-2@checked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
+      "svg-viewbox-reconstructed: Checkbox.icon-4@indeterminate.enabled — 0 0 22 22 from computed size 22×22 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "svg-dash-channels-dropped: Checkbox.icon-6@checked.enabled — stroke-dasharray 2px / stroke-dashoffset 0px are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)",
+      "svg-viewbox-reconstructed: Checkbox.icon-6@checked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
+      "svg-dash-channels-dropped: Checkbox.icon@unchecked.enabled — stroke-dasharray 2px / stroke-dashoffset 2px are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)",
+      "svg-viewbox-reconstructed: Checkbox.icon@unchecked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
       "root-display-carried: flex",
+      "sr-only-carried-as-hidden: input is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "shape-geometry-recarried: backdrop — reviewed shape 20×20 contradicts the captured computed box 18×18 (uniform across every enabled combo); computed truth wins geometry, the curated numbers retire (round 5c; kind \"rect\" stays the reviewed call)",
-      "aspect-carried: icon computed width == height in every enabled combo (14/22px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
-      "presence-carried: icon-3 (1/3 combos) →  hidden-when checked=unchecked, checked=checked, disabled",
-      "presence-carried: icon-2 (2/3 combos) →  hidden-when checked=indeterminate, disabled",
+      "aspect-carried: icon-3 computed width == height in every enabled combo (14/22px) → declared aspect-ratio 1 / 1 (geometry evidence; the real square rides a pseudo-element padding hack)",
+      "presence-carried: icon-3 (2/3 combos) →  hidden-when checked=unchecked, disabled",
+      "presence-carried: icon-4 (1/3 combos) →  hidden-when checked=unchecked, checked=checked, disabled",
+      "presence-carried: icon-6 (1/3 combos) →  hidden-when checked=unchecked, checked=indeterminate, disabled",
+      "sr-only-carried-as-hidden: icon is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "literal-text-carried: label = \"Save this product\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
     "refusals": []
@@ -1616,6 +1860,7 @@
     "declared fact carried: input.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: input.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: input.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: backdrop.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: backdrop.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1623,31 +1868,37 @@
     "declared fact carried: backdrop.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: backdrop.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: backdrop.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: backdrop.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: backdrop.transition-delay = 0s, 0s, 0s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: backdrop.transition-duration = 0.1s, 0.1s, 0.1s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: backdrop.transition-property = border-color, border-width, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: backdrop.transition-timing-function = cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-3.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-4.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-4.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-4.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-4.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-6.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-6.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-6.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-6.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-6.text-rendering = geometricprecision (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-3.max-height = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-3.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-3.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-2.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-2.text-rendering = geometricprecision (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: choice__label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared state fact carried: [disabled] backdrop.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] checkbox.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] choice__control.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] choice__label.cursor = default (v15 declared vocabulary)",
-    "declared state fact carried: [disabled] icon.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] label.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] root.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [focus-visible] backdrop.outline-style = solid (v15 declared vocabulary)",
-    "declared state fact carried: [focus-visible] input.outline-style = auto (v15 declared vocabulary)"
+    "declared state fact carried: [focus-visible] input.outline-style = auto (v15 declared vocabulary)",
+    "hug-evidence-unmeasurable: icon-4.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
+    "hug-evidence-unmeasurable: icon-5.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
+    "hug-evidence-absent: icon-4 carries max-width but the capture produced no uniform pixel measurement for it — no sizing evidence carried (the max-width lowering is unchanged)."
   ]
 }

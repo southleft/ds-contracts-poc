@@ -556,8 +556,12 @@ async function main() {
     // promote step; this run's own fusion is untouched.
     if (cfg.library.varPrefix) {
       const vp = cfg.library.varPrefix;
+      // task #26: a DTCG tree nested under a wrapper group ("p") spells its
+      // leaves `p.font-weight-medium` — prepend the declared group so the
+      // mechanical mapping lands on the same path every committed ref uses.
+      const groupPrefix = cfg.library.tokenGroup ? `${cfg.library.tokenGroup}.` : '';
       const tokenName = (varName: string): string =>
-        varName.slice(vp.length).replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+        groupPrefix + varName.slice(vp.length).replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
       const dtcgNames = new Set(dtcgLeaves.map((l) => l.path));
       const colorTuple = (v: string): string | null => {
         const ok = oklchToRgba(v.trim());

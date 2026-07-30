@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/banner.contract.json (polaris.banner v0.3.2)
+ * Source of truth: contracts/banner.contract.json (polaris.banner v0.4.0)
  * Regenerate with: npm run generate
  */
 
@@ -16,6 +16,7 @@
   left: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-319-328);
   color: var(--p-color-text);
   position: relative;
 }
@@ -41,6 +42,7 @@
   display: flex;
   flex: 1 1 auto;
   min-width: 0;
+  width: var(--imported-shared-size-319-328);
   display: block;
 }
 
@@ -50,6 +52,7 @@
   justify-content: space-between;
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-319-328);
 }
 
 .box-2 {
@@ -60,6 +63,7 @@
   padding-left: var(--imported-shared-size-12);
   padding-right: var(--imported-shared-size-12);
   padding-top: var(--imported-shared-size-12);
+  width: var(--imported-shared-size-319-328);
   display: block;
 }
 
@@ -103,6 +107,7 @@
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   row-gap: var(--imported-shared-size-8);
+  width: var(--imported-shared-size-295-328);
 }
 
 .tone-critical .inlinestack {
@@ -127,6 +132,7 @@
   justify-content: space-between;
   column-gap: var(--imported-shared-size-4);
   row-gap: var(--imported-shared-size-4);
+  width: var(--imported-banner-inlinestack-2-width);
 }
 
 .tone-critical .inlinestack-2 {
@@ -147,6 +153,7 @@
 
 .part-0-0-0-0-0-0 {
   display: flex;
+  width: var(--imported-shared-size-20);
   display: block;
 }
 
@@ -170,6 +177,7 @@
   display: flex;
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-20);
   display: block;
   max-height: 100%;
   max-width: 100%;
@@ -274,6 +282,7 @@
   column-gap: var(--imported-shared-size-2);
   font-size: var(--imported-shared-size-13);
   font-weight: var(--imported-shared-num-450);
+  height: var(--imported-shared-size-32);
   left: var(--imported-shared-size-0);
   line-height: var(--imported-shared-size-20);
   margin-bottom: var(--imported-shared-size-neg-4);
@@ -289,6 +298,7 @@
   right: var(--imported-shared-size-0);
   row-gap: var(--imported-shared-size-2);
   top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-32);
   appearance: none;
   border-bottom-style: none;
   border-left-style: none;
@@ -306,6 +316,7 @@
   display: flex;
   margin-bottom: var(--imported-banner-button-icon-margin-bottom);
   margin-top: var(--imported-banner-button-icon-margin-top);
+  width: var(--imported-shared-size-20);
   display: block;
   cursor: pointer;
   text-align: center;
@@ -333,6 +344,7 @@
   color: var(--imported-shared-color-303030);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-20);
   display: block;
   cursor: pointer;
   max-height: 100%;
@@ -351,6 +363,7 @@
   padding-left: var(--imported-shared-size-12);
   padding-right: var(--imported-shared-size-12);
   padding-top: var(--imported-shared-size-12);
+  width: var(--imported-shared-size-319-328);
   display: block;
 }
 
@@ -361,10 +374,12 @@
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   row-gap: var(--imported-shared-size-8);
+  width: var(--imported-shared-size-295-328);
 }
 
 .part-0-0-1-0-0 {
   display: flex;
+  width: var(--imported-shared-size-295-328);
   display: block;
 }
 
@@ -380,14 +395,18 @@
 .buttongroup {
   display: flex;
   align-items: center;
+  height: var(--imported-banner-buttongroup-height);
   margin-left: var(--imported-banner-buttongroup-margin-left);
   margin-top: var(--imported-banner-buttongroup-margin-top);
+  width: var(--imported-banner-buttongroup-width);
 }
 
 .buttongroup__item {
   display: flex;
+  height: var(--imported-shared-size-32);
   margin-left: var(--imported-shared-size-8);
   margin-top: var(--imported-shared-size-8);
+  width: var(--imported-banner-buttongroup-item-width);
   display: block;
 }
 
@@ -410,6 +429,7 @@
   column-gap: var(--imported-shared-size-2);
   font-size: var(--imported-shared-size-13);
   font-weight: var(--imported-shared-num-450);
+  height: var(--imported-shared-size-32);
   left: var(--imported-shared-size-0);
   line-height: var(--imported-shared-size-20);
   min-height: var(--imported-shared-size-32);
@@ -421,6 +441,7 @@
   right: var(--imported-shared-size-0);
   row-gap: var(--imported-shared-size-2);
   top: var(--imported-shared-size-0);
+  width: var(--imported-banner-button-2-width);
   appearance: none;
   border-bottom-style: none;
   border-left-style: none;

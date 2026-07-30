@@ -187,6 +187,8 @@ const rep = await page.locator('#gen-result').innerHTML();
 ok(rep.includes('Change report'), 'Build renders the SHARED check report');
 ok(rep.includes('What’s protected'), 'the "What\'s protected" card survives inside the report');
 ok(rep.includes('<details') && rep.includes('<summary'), '…folded into a details whose summary states the promise');
+ok(rep.includes('component-property overrides') && rep.includes('rebuilt from the contract'),
+  'HONEST COPY: the card qualifies overrides-survival — component-property overrides survive, interior nodes are rebuilt on amend');
 ok(rep.includes('input type="checkbox"') || (await page.locator('#gen-result input[type=checkbox]').count()) > 0, 'per-set checkboxes survive');
 ok(rep.includes('report-status'), 'rows carry a right-aligned status word');
 ok(!(!(await shown('#build-apply'))), 'Apply appears once a check produced rows');
@@ -352,6 +354,10 @@ ok(!genHtml.includes('STARTING POINT'), '…and the hand-built warning is gone f
 const uiText = await page.evaluate(() => document.documentElement.innerHTML);
 ok(uiText.indexOf('Paste the contract this set was generated from into the base box') < 0,
   'the old refusal copy ("Paste the contract this set was generated from into the base box — the diff needs both sides") no longer exists anywhere in the UI');
+ok(uiText.indexOf('keep their overrides (same nodes') < 0,
+  'the unqualified "Instances keep their overrides" claim is gone from the shipped UI (overrides on interior nodes do NOT survive an amend)');
+ok(uiText.indexOf('the Drift tab') < 0,
+  'no shipped string still names the "Drift tab" — the tab is called Changes');
 
 console.log('\nconsole/page errors: ' + (errors.length ? '\n  ' + errors.join('\n  ') : 'none'));
 if (errors.length) fails.push('console/page errors');

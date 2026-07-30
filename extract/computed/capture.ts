@@ -206,6 +206,15 @@ export interface CaptureConfig {
      *  bindings (CapturedNode.vrefs). Absent = reader off (every committed
      *  library; captures stay byte-identical). */
     varPrefix?: string;
+    /** POLARIS RECAPTURE (task #26): DTCG wrapper group the library's token
+     *  file nests its leaves under. MUI/Altitude/Carbon/Tailwind DTCG trees
+     *  are FLAT (`palette-primary-main` at root), so a stripped var name IS a
+     *  leaf path; Polaris wraps everything under `p` (`p.font-weight-medium`,
+     *  the spelling every committed `{p.*}` ref uses), so the reader's
+     *  mechanical var→leaf mapping must prepend the group or every candidate
+     *  fails the leaf-existence check with the value RIGHT and the name
+     *  unrecoverable. Absent = no prepend (every flat library, byte-unchanged). */
+    tokenGroup?: string;
     /** SHADOW-DOM ROUND (Altitude): the library ships CUSTOM ELEMENTS, not
      *  React components. `importName` is then a TAG NAME ("al-button") and the
      *  harness mounts `React.createElement('al-button', props, children)`

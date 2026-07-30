@@ -1,24 +1,24 @@
 {
   "component": "RadioButton",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "captures": 16,
   "combos": 4,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 942,
+  "channelsEnumerated": 961,
   "elementsPerCapture": 7,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 6,
-    "choice__control": 5,
-    "radiobutton": 10,
-    "input": 29,
-    "backdrop": 28,
-    "choice__label": 1,
+    "root": 8,
+    "choice__control": 6,
+    "radiobutton": 12,
+    "input": 32,
+    "backdrop": 30,
+    "choice__label": 2,
     "label": 7
   },
   "folds": {
-    "count": 8,
+    "count": 9,
     "receipts": [
       {
         "part": "input",
@@ -58,6 +58,12 @@
       },
       {
         "part": "input",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "input",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -69,8 +75,8 @@
         "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 43,
-    "mintedLeavesFolded": 48
+    "mintedLeavesUnfolded": 48,
+    "mintedLeavesFolded": 53
   },
   "bound": {
     "cellsChecked": 16,
@@ -79,11 +85,11 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 48,
-    "baseBindings": 38,
-    "stateBindings": 51,
+    "leaves": 53,
+    "baseBindings": 48,
+    "stateBindings": 53,
     "byShape": {
-      "uniform": 78,
+      "uniform": 90,
       "perAxis": 11,
       "perPair": 0,
       "refused": 0
@@ -96,23 +102,25 @@
   "codeOnly": {
     "base": 2,
     "state": 0,
-    "overflowBindings": 47
+    "overflowBindings": 49
   },
   "pseudoElementFindings": 12,
   "anatomyPromotion": {
     "partsCarried": 7,
     "svgAssets": 0,
-    "refusals": 0
+    "refusals": 1
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 105280,
-    "cellsMatched": 105120,
-    "pct": 99.84802431610942,
+    "cellsCompared": 107408,
+    "cellsMatched": 107248,
+    "pct": 99.8510353046328,
     "namedExclusions": [
       "app-region",
-      "text-decoration"
+      "text-decoration",
+      "translate-x",
+      "translate-y"
     ],
     "topMismatchedChannels": [
       [
@@ -147,6 +155,12 @@
   },
   "pixel": {
     "pairs": 16,
+    "measured": 16,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
       "mean": 0,
       "max": 0,
@@ -201,7 +215,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 81.68604651162791,
+    "computedPctEqual": 81.32183908045977,
     "rowsFullyEqual": 0,
     "rows": 16,
     "pixelPerfectExact": 0,

@@ -1,0 +1,412 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "RadioButton",
+  "varPrefix": "--p-",
+  "facts": [
+    {
+      "part": "backdrop",
+      "channel": "background-color",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.color-input-bg-surface",
+      "varName": "--p-color-input-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-RadioButton__Backdrop"
+      }
+    },
+    {
+      "part": "backdrop",
+      "channel": "background-color",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.color-radio-button-bg-surface-disabled",
+      "varName": "--p-color-radio-button-bg-surface-disabled",
+      "anchor": {
+        "selector": ".Polaris-RadioButton__Input:disabled + .Polaris-RadioButton__Backdrop, .Polaris-RadioButton__ChoiceLabel:hover .Polaris-RadioButton__Input:disabled + .Polaris-RadioButton__Backdrop"
+      }
+    },
+    {
+      "part": "backdrop",
+      "channel": "background-color",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.color-bg-fill-brand-selected",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "anchor": {
+        "selector": ".Polaris-RadioButton__Input:checked:not([disabled]) + .Polaris-RadioButton__Backdrop, .Polaris-RadioButton__ChoiceLabel:hover .Polaris-RadioButton__Input:checked:not([disabled]) + .Polaris-RadioButton__Backdrop"
+      }
+    },
+    {
+      "part": "backdrop",
+      "channel": "background-color",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.color-radio-button-bg-surface-disabled",
+      "varName": "--p-color-radio-button-bg-surface-disabled",
+      "anchor": {
+        "selector": ".Polaris-RadioButton__Input:disabled + .Polaris-RadioButton__Backdrop, .Polaris-RadioButton__ChoiceLabel:hover .Polaris-RadioButton__Input:disabled + .Polaris-RadioButton__Backdrop"
+      }
+    },
+    {
+      "part": "choice__control",
+      "channel": "margin-right",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-Choice__Control"
+      }
+    },
+    {
+      "part": "choice__control",
+      "channel": "margin-right",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-Choice__Control"
+      }
+    },
+    {
+      "part": "choice__control",
+      "channel": "margin-right",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-Choice__Control"
+      }
+    },
+    {
+      "part": "choice__control",
+      "channel": "margin-right",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-Choice__Control"
+      }
+    },
+    {
+      "part": "choice__label",
+      "channel": "color",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Choice--disabled > .Polaris-Choice__Label"
+      }
+    },
+    {
+      "part": "choice__label",
+      "channel": "color",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Choice--disabled > .Polaris-Choice__Label"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-end",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-end",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-end",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-end",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-start",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-start",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-start",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-start",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    }
+  ],
+  "skips": [
+    "label.letter-spacing: candidate --p-text-body-md-font-letter-spacing → \"p.text-body-md-font-letter-spacing\" = 0rem names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.block-size: source declares `calc(var(--pc-choice-fill, auto) + var(--pc-choice-bleed-block-start, var(--pc-choice-space-0)) + var(--pc-choice-bleed-` — a calc() over var(--pc-choice-bleed-block-end, --pc-choice-bleed-block-start, --pc-choice-fill, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.inline-size: source declares `calc(var(--pc-choice-fill, auto) + var(--pc-choice-bleed-inline-start, var(--pc-choice-space-0)) + var(--pc-choice-bleed` — a calc() over var(--pc-choice-bleed-inline-end, --pc-choice-bleed-inline-start, --pc-choice-fill, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.margin-block-end: source declares `calc(var(--pc-choice-bleed-block-end, var(--pc-choice-space-0))*-1)` — a calc() over var(--pc-choice-bleed-block-end, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.margin-block-start: source declares `calc(var(--pc-choice-bleed-block-start, var(--pc-choice-space-0))*-1)` — a calc() over var(--pc-choice-bleed-block-start, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.margin-inline-end: source declares `calc(var(--pc-choice-bleed-inline-end, var(--pc-choice-space-0))*-1)` — a calc() over var(--pc-choice-bleed-inline-end, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.margin-inline-start: source declares `calc(var(--pc-choice-bleed-inline-start, var(--pc-choice-space-0))*-1)` — a calc() over var(--pc-choice-bleed-inline-start, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "backdrop.border-color: SHORTHAND carrying var(--p-color-border-emphasis) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 8,
+  "calcCeiling": 6
+}

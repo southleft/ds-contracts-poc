@@ -1,4 +1,4 @@
-/* ProgressBar — from polaris.progress-bar v0.3.2 (core/emit-html.ts) */
+/* ProgressBar — from polaris.progress-bar v0.4.0 (core/emit-html.ts) */
 
 .progress-bar, .progress-bar *, .progress-bar *::before, .progress-bar *::after {
   box-sizing: border-box;
@@ -10,6 +10,7 @@
   justify-content: center;
   border: 0;
   border-radius: var(--p-border-radius-100);
+  width: var(--imported-progress-bar-root-width);
   display: block;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -45,12 +46,14 @@
 
 .progress-bar__progress {
   bottom: var(--imported-progress-bar-progress-bottom);
+  height: var(--imported-shared-size-1);
   left: var(--imported-progress-bar-progress-left);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   right: var(--imported-progress-bar-progress-right);
   top: var(--imported-shared-size-0);
   vertical-align: var(--imported-progress-bar-progress-vertical-align);
+  width: var(--imported-shared-size-1);
   display: none;
   appearance: auto;
   overflow-x: hidden;
@@ -63,6 +66,7 @@
   display: flex;
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  width: var(--imported-progress-bar-indicator-width);
   display: block;
   transition-duration: 0.5s;
   transition-property: transform;
@@ -85,12 +89,26 @@
   background-color: var(--p-color-bg-fill-critical);
 }
 
+.progress-bar--size-large .progress-bar__indicator {
+  height: var(--imported-progress-bar-indicator-height-large);
+}
+
+.progress-bar--size-medium .progress-bar__indicator {
+  height: var(--imported-progress-bar-indicator-height-medium);
+}
+
+.progress-bar--size-small .progress-bar__indicator {
+  height: var(--imported-progress-bar-indicator-height-small);
+}
+
 .progress-bar__label {
+  height: var(--imported-shared-size-1);
   left: var(--imported-shared-size-0);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   right: var(--imported-progress-bar-label-right);
   top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-1);
   display: none;
   overflow-x: hidden;
   overflow-y: hidden;

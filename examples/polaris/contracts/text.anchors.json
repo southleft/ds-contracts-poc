@@ -1,0 +1,574 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "text",
+  "anchors": [
+    {
+      "leaf": "imported.text.root.color.base",
+      "token": "p.color-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Text--base"
+    },
+    {
+      "leaf": "imported.text.root.color.caution",
+      "token": "p.color-text-caution",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-caution",
+      "selector": ".Polaris-Text--caution"
+    },
+    {
+      "leaf": "imported.text.root.color.critical",
+      "token": "p.color-text-critical",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-critical",
+      "selector": ".Polaris-Text--critical"
+    },
+    {
+      "leaf": "imported.text.root.color.disabled",
+      "token": "p.color-text-disabled",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-disabled",
+      "selector": ".Polaris-Text--disabled"
+    },
+    {
+      "leaf": "imported.text.root.color.magic",
+      "token": "p.color-text-magic",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-magic",
+      "selector": ".Polaris-Text--magic"
+    },
+    {
+      "leaf": "imported.text.root.color.magic-subdued",
+      "token": "p.color-text-magic-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-magic-secondary",
+      "selector": ".Polaris-Text__magic--subdued"
+    },
+    {
+      "leaf": "imported.text.root.color.none",
+      "token": "p.color-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Text--base"
+    },
+    {
+      "leaf": "imported.text.root.color.subdued",
+      "token": "p.color-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-secondary",
+      "selector": ".Polaris-Text--subdued"
+    },
+    {
+      "leaf": "imported.text.root.color.success",
+      "token": "p.color-text-success",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-success",
+      "selector": ".Polaris-Text--success"
+    },
+    {
+      "leaf": "imported.text.root.color.text-inverse",
+      "token": "p.color-text-inverse",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-inverse",
+      "selector": ".Polaris-Text__text--inverse"
+    },
+    {
+      "leaf": "imported.text.root.color.text-inverse-secondary",
+      "token": "p.color-text-inverse-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-inverse-secondary",
+      "selector": ".Polaris-Text--textInverseSecondary"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyLg.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--bold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyLg.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyLg.none",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyLg.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyLg.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyMd.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--bold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyMd.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyMd.none",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyMd.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyMd.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodySm.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--bold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodySm.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodySm.none",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodySm.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodySm.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyXs.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--bold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyXs.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyXs.none",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyXs.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.bodyXs.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.heading2xl.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--heading2xl"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.heading2xl.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.heading2xl.none",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--heading2xl"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.heading2xl.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.heading2xl.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.heading3xl.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--heading3xl"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.heading3xl.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.heading3xl.none",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--heading3xl"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.heading3xl.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.heading3xl.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingLg.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--bold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingLg.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingLg.none",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingLg.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingLg.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingMd.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--bold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingMd.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingMd.none",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingMd.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingMd.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingSm.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--bold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingSm.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingSm.none",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingSm.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingSm.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingXl.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--bold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingXl.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingXl.none",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--headingXl"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingXl.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingXl.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--headingXl"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingXs.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--bold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingXs.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingXs.none",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingXs.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.headingXs.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.none.bold",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Text--bold"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.none.medium",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.none.none",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.none.regular",
+      "token": "p.font-weight-regular",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-regular",
+      "selector": "h1, h2, h3, h4, h5, h6, p"
+    },
+    {
+      "leaf": "imported.text.root.font-weight.none.semibold",
+      "token": "p.font-weight-semibold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-semibold",
+      "selector": ".Polaris-Text--semibold"
+    }
+  ]
+}

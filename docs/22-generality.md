@@ -489,8 +489,15 @@ captured at all*, and it is the largest qualifier in this document.
   **453 `--p-*`** custom properties exist in Polaris's vocabulary. The CSS-vars
   reader landed in the MUI round (library #4); Polaris (library #2) was never
   re-run with it. Whether Polaris's compiled CSS Modules reference those
-  properties *at the point of use* is not verifiable from committed artifacts
-  (the sandbox is gitignored). **Unmeasured, not ruled out.**
+  properties *at the point of use* is now **measured** (2026-07-29): the
+  published 13.9.5 `styles.css` carries **2,727 `var(--p-*)` occurrences**
+  across **328 distinct** custom properties — Polaris binds through custom
+  properties at point of use (record: [docs/23 §3.2](23-known-limitations.md)).
+  The re-run happened the same day (task #26): all 12 components recaptured
+  with `varPrefix: "--p-"` + `tokenGroup: "p"`, reading **5,201 verified source
+  facts** and landing **179 DTCG aliases** to `{p.*}` names in the minted tree.
+  The zero-source-token state was a missing re-run, not a property of the
+  library — measured, then closed.
 - **Overlay components carry ZERO source-token facts in EVERY library.**
   `portalSweep()` takes no `varPrefix`; `run.ts` calls it with
   `{ screenshots, classAllow }` and nothing else. Verified from committed
@@ -821,4 +828,3 @@ it deliberately, alone, and say what moved.
   [docs/16](16-sync-boundary.md).
   Everything outside degrades gracefully — correct pixels, poorer token names —
   and graduates via a community reader plugin under the open spec.
-- Anything at all about Altitude.

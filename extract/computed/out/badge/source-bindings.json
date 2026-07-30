@@ -1,0 +1,5631 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Badge",
+  "varPrefix": "--p-",
+  "facts": [
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "none.incomplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "none.partiallyComplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "none.complete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "complete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "info.incomplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "incomplete"
+      },
+      "token": "p.color-icon-info",
+      "varName": "--p-color-icon-info",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneInfo svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "info.partiallyComplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-icon-info",
+      "varName": "--p-color-icon-info",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneInfo svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "info.complete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "complete"
+      },
+      "token": "p.color-icon-info",
+      "varName": "--p-color-icon-info",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneInfo svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "success.incomplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "incomplete"
+      },
+      "token": "p.color-icon-success",
+      "varName": "--p-color-icon-success",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneSuccess svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "success.partiallyComplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-icon-success",
+      "varName": "--p-color-icon-success",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneSuccess svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "success.complete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "complete"
+      },
+      "token": "p.color-icon-success",
+      "varName": "--p-color-icon-success",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneSuccess svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "warning.incomplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "incomplete"
+      },
+      "token": "p.color-icon-warning",
+      "varName": "--p-color-icon-warning",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneWarning svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "warning.partiallyComplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-icon-warning",
+      "varName": "--p-color-icon-warning",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneWarning svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "warning.complete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "complete"
+      },
+      "token": "p.color-icon-warning",
+      "varName": "--p-color-icon-warning",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneWarning svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "critical.incomplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "incomplete"
+      },
+      "token": "p.color-icon-critical",
+      "varName": "--p-color-icon-critical",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneCritical svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "critical.partiallyComplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-icon-critical",
+      "varName": "--p-color-icon-critical",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneCritical svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "critical.complete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "complete"
+      },
+      "token": "p.color-icon-critical",
+      "varName": "--p-color-icon-critical",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneCritical svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "attention.incomplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "incomplete"
+      },
+      "token": "p.color-icon-caution",
+      "varName": "--p-color-icon-caution",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneAttention svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "attention.partiallyComplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-icon-caution",
+      "varName": "--p-color-icon-caution",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneAttention svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "attention.complete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "complete"
+      },
+      "token": "p.color-icon-caution",
+      "varName": "--p-color-icon-caution",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneAttention svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "new.incomplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "new.partiallyComplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "new.complete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "complete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "magic.incomplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-magic",
+      "varName": "--p-color-text-magic",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneMagic svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "magic.partiallyComplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-magic",
+      "varName": "--p-color-text-magic",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneMagic svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "magic.complete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "complete"
+      },
+      "token": "p.color-text-magic",
+      "varName": "--p-color-text-magic",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneMagic svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "info-strong.incomplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneInfo--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "info-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneInfo--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "info-strong.complete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneInfo--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "success-strong.incomplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneSuccess--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "success-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneSuccess--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "success-strong.complete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneSuccess--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "warning-strong.incomplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneWarning--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "warning-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneWarning--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "warning-strong.complete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneWarning--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "critical-strong.incomplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneCritical--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "critical-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneCritical--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "critical-strong.complete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneCritical--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "attention-strong.incomplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-caution-on-bg-fill",
+      "varName": "--p-color-text-caution-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneAttention--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "attention-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-caution-on-bg-fill",
+      "varName": "--p-color-text-caution-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneAttention--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "attention-strong.complete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-text-caution-on-bg-fill",
+      "varName": "--p-color-text-caution-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneAttention--strong svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "read-only.incomplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "incomplete"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneRead--only svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "read-only.partiallyComplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneRead--only svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "read-only.complete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "complete"
+      },
+      "token": "p.color-icon-secondary",
+      "varName": "--p-color-icon-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneRead--only svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "enabled.incomplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "incomplete"
+      },
+      "token": "p.color-icon-success",
+      "varName": "--p-color-icon-success",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneEnabled svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "enabled.partiallyComplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-icon-success",
+      "varName": "--p-color-icon-success",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneEnabled svg"
+      }
+    },
+    {
+      "part": "icon-3",
+      "channel": "fill",
+      "combo": "enabled.complete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "complete"
+      },
+      "token": "p.color-icon-success",
+      "varName": "--p-color-icon-success",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneEnabled svg"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "none.none",
+      "axisValues": {
+        "tone": "none",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "none.incomplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "none.partiallyComplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "none.complete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info.none",
+      "axisValues": {
+        "tone": "info",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info.incomplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info.partiallyComplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info.complete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success.none",
+      "axisValues": {
+        "tone": "success",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success.incomplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success.partiallyComplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success.complete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning.none",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning.incomplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning.partiallyComplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning.complete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "critical.none",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "critical.incomplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "critical.partiallyComplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "critical.complete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "attention.none",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "attention.incomplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "attention.partiallyComplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "attention.complete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "new.none",
+      "axisValues": {
+        "tone": "new",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "new.incomplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "new.partiallyComplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "new.complete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "magic.none",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "magic.incomplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "magic.partiallyComplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "magic.complete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info-strong.none",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info-strong.incomplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "info-strong.complete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success-strong.none",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success-strong.incomplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "success-strong.complete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning-strong.none",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning-strong.incomplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "warning-strong.complete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "critical-strong.none",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "critical-strong.incomplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "critical-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "critical-strong.complete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "attention-strong.none",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "attention-strong.incomplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "attention-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "attention-strong.complete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "read-only.none",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "read-only.incomplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "read-only.partiallyComplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "read-only.complete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "enabled.none",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "enabled.incomplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "enabled.partiallyComplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "enabled.complete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "none.none",
+      "axisValues": {
+        "tone": "none",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "none.incomplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "none.partiallyComplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "none.complete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "info.none",
+      "axisValues": {
+        "tone": "info",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "info.incomplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "info.partiallyComplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "info.complete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "success.none",
+      "axisValues": {
+        "tone": "success",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "success.incomplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "success.partiallyComplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "success.complete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "warning.none",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "warning.incomplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "warning.partiallyComplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "warning.complete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "critical.none",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "critical.incomplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "critical.partiallyComplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "critical.complete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "attention.none",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "attention.incomplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "attention.partiallyComplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "attention.complete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "new.none",
+      "axisValues": {
+        "tone": "new",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "new.incomplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "new.partiallyComplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "new.complete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "magic.none",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "magic.incomplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "magic.partiallyComplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "magic.complete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "info-strong.none",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "info-strong.incomplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "info-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "info-strong.complete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "success-strong.none",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "success-strong.incomplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "success-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "success-strong.complete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "warning-strong.none",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "warning-strong.incomplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "warning-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "warning-strong.complete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "critical-strong.none",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "critical-strong.incomplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "critical-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "critical-strong.complete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "attention-strong.none",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "attention-strong.incomplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "attention-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "attention-strong.complete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "read-only.none",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "read-only.incomplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "read-only.partiallyComplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "read-only.complete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "enabled.none",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "enabled.incomplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "enabled.partiallyComplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "enabled.complete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.none",
+      "axisValues": {
+        "tone": "none",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.incomplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.partiallyComplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "none.complete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "info.none",
+      "axisValues": {
+        "tone": "info",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "info.incomplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "info.partiallyComplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "info.complete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "success.none",
+      "axisValues": {
+        "tone": "success",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "success.incomplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "success.partiallyComplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "success.complete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "warning.none",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "warning.incomplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "warning.partiallyComplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "warning.complete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "critical.none",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "critical.incomplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "critical.partiallyComplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "critical.complete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "attention.none",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "attention.incomplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "attention.partiallyComplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "attention.complete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "new.none",
+      "axisValues": {
+        "tone": "new",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "new.incomplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "new.partiallyComplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "new.complete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "magic.none",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "magic.incomplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "magic.partiallyComplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "magic.complete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "info-strong.none",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "info-strong.incomplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "info-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "info-strong.complete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "success-strong.none",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "success-strong.incomplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "success-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "success-strong.complete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "warning-strong.none",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "warning-strong.incomplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "warning-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "warning-strong.complete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "critical-strong.none",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "critical-strong.incomplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "critical-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "critical-strong.complete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "attention-strong.none",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "attention-strong.incomplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "attention-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "attention-strong.complete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "read-only.none",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "read-only.incomplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "read-only.partiallyComplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "read-only.complete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "enabled.none",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "none"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "enabled.incomplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "incomplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "enabled.partiallyComplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "enabled.complete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "complete"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.none",
+      "axisValues": {
+        "tone": "none",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.incomplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.partiallyComplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "none.complete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.none",
+      "axisValues": {
+        "tone": "info",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-info-secondary",
+      "varName": "--p-color-bg-fill-info-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneInfo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.incomplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-info-secondary",
+      "varName": "--p-color-bg-fill-info-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneInfo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.partiallyComplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-info-secondary",
+      "varName": "--p-color-bg-fill-info-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneInfo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.complete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-info-secondary",
+      "varName": "--p-color-bg-fill-info-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneInfo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.none",
+      "axisValues": {
+        "tone": "success",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-success-secondary",
+      "varName": "--p-color-bg-fill-success-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneSuccess"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.incomplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-success-secondary",
+      "varName": "--p-color-bg-fill-success-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneSuccess"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.partiallyComplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-success-secondary",
+      "varName": "--p-color-bg-fill-success-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneSuccess"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.complete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-success-secondary",
+      "varName": "--p-color-bg-fill-success-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneSuccess"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.none",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-warning-secondary",
+      "varName": "--p-color-bg-fill-warning-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneWarning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.incomplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-warning-secondary",
+      "varName": "--p-color-bg-fill-warning-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneWarning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.partiallyComplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-warning-secondary",
+      "varName": "--p-color-bg-fill-warning-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneWarning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.complete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-warning-secondary",
+      "varName": "--p-color-bg-fill-warning-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneWarning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical.none",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-critical-secondary",
+      "varName": "--p-color-bg-fill-critical-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneCritical"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical.incomplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-critical-secondary",
+      "varName": "--p-color-bg-fill-critical-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneCritical"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical.partiallyComplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-critical-secondary",
+      "varName": "--p-color-bg-fill-critical-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneCritical"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical.complete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-critical-secondary",
+      "varName": "--p-color-bg-fill-critical-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneCritical"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "attention.none",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-caution-secondary",
+      "varName": "--p-color-bg-fill-caution-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneAttention"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "attention.incomplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-caution-secondary",
+      "varName": "--p-color-bg-fill-caution-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneAttention"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "attention.partiallyComplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-caution-secondary",
+      "varName": "--p-color-bg-fill-caution-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneAttention"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "attention.complete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-caution-secondary",
+      "varName": "--p-color-bg-fill-caution-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneAttention"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "new.none",
+      "axisValues": {
+        "tone": "new",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "new.incomplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "new.partiallyComplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "new.complete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "magic.none",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-magic-secondary",
+      "varName": "--p-color-bg-fill-magic-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneMagic"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "magic.incomplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-magic-secondary",
+      "varName": "--p-color-bg-fill-magic-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneMagic"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "magic.partiallyComplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-magic-secondary",
+      "varName": "--p-color-bg-fill-magic-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneMagic"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "magic.complete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-magic-secondary",
+      "varName": "--p-color-bg-fill-magic-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneMagic"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info-strong.none",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-info",
+      "varName": "--p-color-bg-fill-info",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneInfo--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info-strong.incomplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-info",
+      "varName": "--p-color-bg-fill-info",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneInfo--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-info",
+      "varName": "--p-color-bg-fill-info",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneInfo--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info-strong.complete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-info",
+      "varName": "--p-color-bg-fill-info",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneInfo--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success-strong.none",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-success",
+      "varName": "--p-color-bg-fill-success",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneSuccess--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success-strong.incomplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-success",
+      "varName": "--p-color-bg-fill-success",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneSuccess--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-success",
+      "varName": "--p-color-bg-fill-success",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneSuccess--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success-strong.complete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-success",
+      "varName": "--p-color-bg-fill-success",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneSuccess--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning-strong.none",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-warning",
+      "varName": "--p-color-bg-fill-warning",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneWarning--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning-strong.incomplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-warning",
+      "varName": "--p-color-bg-fill-warning",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneWarning--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-warning",
+      "varName": "--p-color-bg-fill-warning",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneWarning--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning-strong.complete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-warning",
+      "varName": "--p-color-bg-fill-warning",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneWarning--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical-strong.none",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-critical",
+      "varName": "--p-color-bg-fill-critical",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneCritical--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical-strong.incomplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-critical",
+      "varName": "--p-color-bg-fill-critical",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneCritical--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-critical",
+      "varName": "--p-color-bg-fill-critical",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneCritical--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical-strong.complete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-critical",
+      "varName": "--p-color-bg-fill-critical",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneCritical--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "attention-strong.none",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-caution",
+      "varName": "--p-color-bg-fill-caution",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneAttention--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "attention-strong.incomplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-caution",
+      "varName": "--p-color-bg-fill-caution",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneAttention--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "attention-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-caution",
+      "varName": "--p-color-bg-fill-caution",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneAttention--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "attention-strong.complete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-caution",
+      "varName": "--p-color-bg-fill-caution",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneAttention--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "enabled.none",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "none"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "enabled.incomplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "incomplete"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "enabled.partiallyComplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "enabled.complete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "complete"
+      },
+      "token": "p.color-bg-fill-transparent-secondary",
+      "varName": "--p-color-bg-fill-transparent-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.none",
+      "axisValues": {
+        "tone": "none",
+        "progress": "none"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.incomplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.partiallyComplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "none.complete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "complete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.none",
+      "axisValues": {
+        "tone": "info",
+        "progress": "none"
+      },
+      "token": "p.color-text-info",
+      "varName": "--p-color-text-info",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneInfo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.incomplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-info",
+      "varName": "--p-color-text-info",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneInfo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.partiallyComplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-info",
+      "varName": "--p-color-text-info",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneInfo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.complete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "complete"
+      },
+      "token": "p.color-text-info",
+      "varName": "--p-color-text-info",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneInfo"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success.none",
+      "axisValues": {
+        "tone": "success",
+        "progress": "none"
+      },
+      "token": "p.color-text-success",
+      "varName": "--p-color-text-success",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneSuccess"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success.incomplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-success",
+      "varName": "--p-color-text-success",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneSuccess"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success.partiallyComplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-success",
+      "varName": "--p-color-text-success",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneSuccess"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success.complete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "complete"
+      },
+      "token": "p.color-text-success",
+      "varName": "--p-color-text-success",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneSuccess"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning.none",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "none"
+      },
+      "token": "p.color-text-warning",
+      "varName": "--p-color-text-warning",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneWarning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning.incomplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-warning",
+      "varName": "--p-color-text-warning",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneWarning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning.partiallyComplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-warning",
+      "varName": "--p-color-text-warning",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneWarning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning.complete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "complete"
+      },
+      "token": "p.color-text-warning",
+      "varName": "--p-color-text-warning",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneWarning"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "critical.none",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "none"
+      },
+      "token": "p.color-text-critical",
+      "varName": "--p-color-text-critical",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneCritical"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "critical.incomplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-critical",
+      "varName": "--p-color-text-critical",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneCritical"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "critical.partiallyComplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-critical",
+      "varName": "--p-color-text-critical",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneCritical"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "critical.complete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "complete"
+      },
+      "token": "p.color-text-critical",
+      "varName": "--p-color-text-critical",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneCritical"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "attention.none",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "none"
+      },
+      "token": "p.color-text-caution",
+      "varName": "--p-color-text-caution",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneAttention"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "attention.incomplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-caution",
+      "varName": "--p-color-text-caution",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneAttention"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "attention.partiallyComplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-caution",
+      "varName": "--p-color-text-caution",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneAttention"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "attention.complete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "complete"
+      },
+      "token": "p.color-text-caution",
+      "varName": "--p-color-text-caution",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneAttention"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "new.none",
+      "axisValues": {
+        "tone": "new",
+        "progress": "none"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "new.incomplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "new.partiallyComplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "new.complete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "complete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "magic.none",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "none"
+      },
+      "token": "p.color-text-magic",
+      "varName": "--p-color-text-magic",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneMagic"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "magic.incomplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-magic",
+      "varName": "--p-color-text-magic",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneMagic"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "magic.partiallyComplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-magic",
+      "varName": "--p-color-text-magic",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneMagic"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "magic.complete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "complete"
+      },
+      "token": "p.color-text-magic",
+      "varName": "--p-color-text-magic",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneMagic"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info-strong.none",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "none"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneInfo--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info-strong.incomplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneInfo--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneInfo--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info-strong.complete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneInfo--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success-strong.none",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "none"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneSuccess--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success-strong.incomplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneSuccess--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneSuccess--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success-strong.complete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneSuccess--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning-strong.none",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "none"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneWarning--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning-strong.incomplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneWarning--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneWarning--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning-strong.complete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneWarning--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "critical-strong.none",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "none"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneCritical--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "critical-strong.incomplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneCritical--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "critical-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneCritical--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "critical-strong.complete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneCritical--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "attention-strong.none",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "none"
+      },
+      "token": "p.color-text-caution-on-bg-fill",
+      "varName": "--p-color-text-caution-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneAttention--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "attention-strong.incomplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-caution-on-bg-fill",
+      "varName": "--p-color-text-caution-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneAttention--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "attention-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-caution-on-bg-fill",
+      "varName": "--p-color-text-caution-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneAttention--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "attention-strong.complete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "complete"
+      },
+      "token": "p.color-text-caution-on-bg-fill",
+      "varName": "--p-color-text-caution-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Badge__toneAttention--strong"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "read-only.none",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "none"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "read-only.incomplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "read-only.partiallyComplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "read-only.complete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "complete"
+      },
+      "token": "p.color-text-secondary",
+      "varName": "--p-color-text-secondary",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "enabled.none",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "none"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneEnabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "enabled.incomplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "incomplete"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneEnabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "enabled.partiallyComplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneEnabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "enabled.complete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "complete"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneEnabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "none.none",
+      "axisValues": {
+        "tone": "none",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "none.incomplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "none.partiallyComplete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "none.complete",
+      "axisValues": {
+        "tone": "none",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "info.none",
+      "axisValues": {
+        "tone": "info",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "info.incomplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "info.partiallyComplete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "info.complete",
+      "axisValues": {
+        "tone": "info",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "success.none",
+      "axisValues": {
+        "tone": "success",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "success.incomplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "success.partiallyComplete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "success.complete",
+      "axisValues": {
+        "tone": "success",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "warning.none",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "warning.incomplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "warning.partiallyComplete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "warning.complete",
+      "axisValues": {
+        "tone": "warning",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "critical.none",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "critical.incomplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "critical.partiallyComplete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "critical.complete",
+      "axisValues": {
+        "tone": "critical",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "attention.none",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "attention.incomplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "attention.partiallyComplete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "attention.complete",
+      "axisValues": {
+        "tone": "attention",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "new.none",
+      "axisValues": {
+        "tone": "new",
+        "progress": "none"
+      },
+      "token": "p.font-weight-bold",
+      "varName": "--p-font-weight-bold",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneNew"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "new.incomplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-bold",
+      "varName": "--p-font-weight-bold",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneNew"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "new.partiallyComplete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-bold",
+      "varName": "--p-font-weight-bold",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneNew"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "new.complete",
+      "axisValues": {
+        "tone": "new",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-bold",
+      "varName": "--p-font-weight-bold",
+      "anchor": {
+        "selector": ".Polaris-Badge--toneNew"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "magic.none",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "magic.incomplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "magic.partiallyComplete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "magic.complete",
+      "axisValues": {
+        "tone": "magic",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "info-strong.none",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "info-strong.incomplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "info-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "info-strong.complete",
+      "axisValues": {
+        "tone": "info-strong",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "success-strong.none",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "success-strong.incomplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "success-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "success-strong.complete",
+      "axisValues": {
+        "tone": "success-strong",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "warning-strong.none",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "warning-strong.incomplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "warning-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "warning-strong.complete",
+      "axisValues": {
+        "tone": "warning-strong",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "critical-strong.none",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "critical-strong.incomplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "critical-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "critical-strong.complete",
+      "axisValues": {
+        "tone": "critical-strong",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "attention-strong.none",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "attention-strong.incomplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "attention-strong.partiallyComplete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "attention-strong.complete",
+      "axisValues": {
+        "tone": "attention-strong",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "read-only.none",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "read-only.incomplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "read-only.partiallyComplete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "read-only.complete",
+      "axisValues": {
+        "tone": "read-only",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "enabled.none",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "none"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "enabled.incomplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "incomplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "enabled.partiallyComplete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "partiallyComplete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-weight",
+      "combo": "enabled.complete",
+      "axisValues": {
+        "tone": "enabled",
+        "progress": "complete"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Badge"
+      }
+    }
+  ],
+  "skips": [
+    "label.letter-spacing: candidate --p-text-body-sm-font-letter-spacing → \"p.text-body-sm-font-letter-spacing\" = 0rem names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 2,
+  "shorthandSkips": [
+    "icon.margin: SHORTHAND carrying var(--p-space-050, --p-space-200) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border: SHORTHAND carrying var(--p-border-width-025, --p-color-border) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
+}

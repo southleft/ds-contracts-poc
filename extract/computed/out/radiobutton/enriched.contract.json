@@ -4,7 +4,7 @@
   "name": "RadioButton",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/RadioButton/RadioButton.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: static backdrop bindings (border-color, background-color) removed — the checked axis contests them per value; the floor rebuilds from browser truth. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/RadioButton/RadioButton.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. ROUND 4: static backdrop bindings (border-color, background-color) removed — the checked axis contests them per value; the floor rebuilds from browser truth. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "span"
   },
@@ -158,12 +158,14 @@
                     "color": "{imported.radio-button.input.color}",
                     "font-size": "{imported.radio-button.input.font-size}",
                     "font-weight": "{imported.radio-button.input.font-weight}",
+                    "height": "{imported.shared.size-1}",
                     "left": "{imported.shared.size-0}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "outline-color": "{imported.radio-button.input.outline-color}",
                     "right": "{imported.radio-button.input.right}",
-                    "top": "{imported.shared.size-0}"
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-1}"
                   },
                   "states": {
                     "disabled": {
@@ -181,11 +183,13 @@
                     "border-radius": "{p.border-radius-full}",
                     "border-width": "{p.border-width-0165}",
                     "bottom": "{imported.shared.size-0}",
+                    "height": "{imported.shared.size-18}",
                     "left": "{imported.shared.size-0}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "right": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-0}"
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-18}"
                   },
                   "declared": {
                     "display": "block",
@@ -275,13 +279,15 @@
               },
               "tokens": {
                 "bottom": "{imported.shared.size-0}",
+                "height": "{imported.shared.size-18}",
                 "left": "{imported.shared.size-0}",
                 "margin-bottom": "{imported.shared.size-1}",
                 "margin-left": "{imported.shared.size-1}",
                 "margin-right": "{imported.shared.size-1}",
                 "margin-top": "{imported.shared.size-1}",
                 "right": "{imported.shared.size-0}",
-                "top": "{imported.shared.size-0}"
+                "top": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-18}"
               }
             }
           },
@@ -295,7 +301,8 @@
           },
           "tokens": {
             "flex-shrink": "{imported.radio-button.choice-control.flex-shrink}",
-            "margin-right": "{imported.radio-button.choice-control.margin-right}"
+            "margin-right": "{imported.radio-button.choice-control.margin-right}",
+            "width": "{imported.radio-button.choice-control.width}"
           }
         },
         "choice__label": {
@@ -337,6 +344,9 @@
               "cursor": "default"
             }
           },
+          "tokens": {
+            "width": "{imported.radio-button.choice-label.width}"
+          },
           "states": {
             "disabled": {
               "color": "{imported.shared.color-b5b5b5}"
@@ -353,8 +363,10 @@
         }
       },
       "tokens": {
+        "height": "{imported.radio-button.root.height}",
         "padding-bottom": "{imported.radio-button.root.padding-bottom}",
-        "padding-top": "{imported.radio-button.root.padding-top}"
+        "padding-top": "{imported.radio-button.root.padding-top}",
+        "width": "{imported.radio-button.root.width}"
       }
     }
   },

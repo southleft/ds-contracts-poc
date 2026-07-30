@@ -2,7 +2,7 @@
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@shopify/polaris@13.9.5",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
       "badge": {
@@ -191,6 +191,278 @@
             "enabled": {
               "$value": "550",
               "$type": "number"
+            }
+          },
+          "width": {
+            "none": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "info": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "success": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "warning": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "critical": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "attention": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "new": {
+              "none": {
+                "$value": "61.875px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.875px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.875px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.875px",
+                "$type": "dimension"
+              }
+            },
+            "magic": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "info-strong": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "success-strong": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "warning-strong": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "critical-strong": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "attention-strong": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "read-only": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
+            },
+            "enabled": {
+              "none": {
+                "$value": "61.0312px",
+                "$type": "dimension"
+              },
+              "incomplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "partiallyComplete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              },
+              "complete": {
+                "$value": "73.0312px",
+                "$type": "dimension"
+              }
             }
           }
         },
@@ -934,8 +1206,16 @@
         }
       },
       "shared": {
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
         "size-0": {
           "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-20": {
+          "$value": "20px",
           "$type": "dimension"
         }
       }
@@ -986,6 +1266,12 @@
     },
     {
       "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1040,6 +1326,12 @@
     },
     {
       "part": "label-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1094,6 +1386,12 @@
     },
     {
       "part": "icon",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1148,6 +1446,12 @@
     },
     {
       "part": "icon-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1202,6 +1506,12 @@
     },
     {
       "part": "label-3",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1256,6 +1566,12 @@
     },
     {
       "part": "icon-3",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-3",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1310,6 +1626,12 @@
     },
     {
       "part": "part-0-0-1-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-1-0",
       "channel": "text-decoration-color",
       "foldedInto": "color",
       "class": "currentColor"
@@ -1359,6 +1681,12 @@
     {
       "part": "label",
       "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
       "foldedInto": "color",
       "class": "currentColor"
     },
@@ -1481,14 +1809,20 @@
   "stateOverflow": [],
   "overflowBindings": [
     {
+      "part": "root",
+      "channel": "width",
+      "ref": "{imported.badge.root.width.{tone}.{progress}}",
+      "refusal": "pair ref over TWO unset axes — no carried spelling; named residue"
+    },
+    {
       "part": "label-2",
       "channel": "color",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
     },
     {
       "part": "label-2",
       "channel": "font-weight",
-      "refusal": "resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually"
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
     }
   ],
   "pairwiseRefusals": [],
@@ -1508,8 +1842,225 @@
     "union-part-added: info.none__default @0 (span|Text|sr-only)"
   ],
   "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: label-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: label-3 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: icon-3 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-0-0-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "control-fallback: no control for <svg> — span control used (part icon-3)",
-    "control-fallback: no control for <path> — span control used (part part-0-0-1-0)"
+    "control-fallback: no control for <path> — span control used (part part-0-0-1-0)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (icon, icon-2, icon-3, label, label-2, label-3, part-0-0-1-0, root); -webkit-text-stroke-color (icon, icon-2, icon-3, label, label-2, label-3, part-0-0-1-0, root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: icon-3.fill — values track ancestor \"icon-2\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: icon-2.caret-color equals ancestor \"icon\" on all 180 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: icon-2.color equals ancestor \"icon\" on all 180 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: icon-2.font-weight equals ancestor \"icon\" on all 180 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: icon-3.caret-color equals ancestor \"icon-2\" on all 180 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: icon-3.color equals ancestor \"icon-2\" on all 180 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: icon-3.font-weight equals ancestor \"icon-2\" on all 180 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: icon.caret-color equals ancestor \"root\" on all 180 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: icon.color equals ancestor \"root\" on all 180 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: icon.font-weight equals ancestor \"root\" on all 180 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.caret-color equals ancestor \"root\" on all 52 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"root\" on all 52 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.font-weight equals ancestor \"root\" on all 52 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.caret-color equals ancestor \"icon-2\" on all 180 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.color equals ancestor \"icon-2\" on all 180 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-3.font-weight equals ancestor \"icon-2\" on all 180 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: label.caret-color equals ancestor \"root\" on all 240 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"root\" on all 240 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-suspected: Badge:attention-strong.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention-strong.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention-strong.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention-strong.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention-strong.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention-strong.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention-strong.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention-strong.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention-strong.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention-strong.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention-strong.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention-strong.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:attention.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical-strong.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:critical.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:enabled.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info-strong.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:info.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:magic.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:new.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:none.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:read-only.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success-strong.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:success.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning-strong.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.complete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.complete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.complete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.complete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.incomplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.incomplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.incomplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.incomplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.partiallyComplete__active>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.partiallyComplete__default>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.partiallyComplete__focus-visible>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Badge:warning.partiallyComplete__hover>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-limit: 180 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
   ],
   "anatomyJoin": {
     "computed": [
@@ -1617,7 +2168,8 @@
       "presence-carried: icon-2 (45/60 combos) →  base-hidden, shown-when progress=incomplete, progress=partiallyComplete, progress=complete",
       "literal-text-carried: label-3 = \"Incomplete\" (no text prop sample matches — the mounted value is carried verbatim)",
       "sr-only-carried-as-hidden: label-3 is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
-      "presence-carried: icon-3 (45/60 combos) →  base-hidden, shown-when progress=incomplete, progress=partiallyComplete, progress=complete"
+      "presence-carried: icon-3 (45/60 combos) →  base-hidden, shown-when progress=incomplete, progress=partiallyComplete, progress=complete",
+      "optional-adornment-unset-materialized: progress — defaultless enum gates a present-only-when-set part; unset value \"none\" added to the enum as the DEFAULT so a PLAIN (adornment-absent) variant is enumerated and the base-hidden part renders nothing there (round 5f — S2 unset extended from styling to STRUCTURE)"
     ],
     "refusals": []
   },
@@ -1633,6 +2185,8 @@
     "declared fact carried: label-3.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)"
+    "declared fact carried: icon-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "hug-evidence-unmeasurable: icon-2.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
+    "hug-evidence-absent: icon-2 carries max-width but the capture produced no uniform pixel measurement for it — no sizing evidence carried (the max-width lowering is unchanged)."
   ]
 }

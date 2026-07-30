@@ -281,6 +281,15 @@ rides committed assets reconstructed from the captured `d`/`fill`/`stroke`
 channels; structure-creating optional props (`onDismiss`, `action`, `onRemove`,
 `prefix`, …) are boolean contract props gating the promoted subtrees.
 
+> **SUPERSEDED (2026-07-29) — the canvas column below, and the "fails on all 10"
+> statement after the table, are the historical Round-4 record.** The committed
+> scorecards in `receipts/canvas-gate/` (later Round 5a/5c/5d work, contract
+> v0.3.2) measure **7 of 10 PASS** at the ≤5% masked-mean acceptance — Avatar,
+> RadioButton and Spinner at exactly **0.00** — with three still over the bar:
+> Button **6.46**, ProgressBar **26.22**, Tag **27.04** (masked mean %). The
+> table is kept unchanged as the record of where Round 4 landed; the scorecards
+> are the current numbers.
+
 **Per-component gate table, BOTH surfaces** (html gate: enriched+resolved
 contract → `emit-html` vs the real `@shopify/polaris@13.9.5` render, per
 combo × state, pixelmatch exact / AA point; canvas gate: canvas-engine render

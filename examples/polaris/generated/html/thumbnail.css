@@ -1,4 +1,4 @@
-/* Thumbnail — from polaris.thumbnail v0.3.2 (core/emit-html.ts) */
+/* Thumbnail — from polaris.thumbnail v0.4.0 (core/emit-html.ts) */
 
 .thumbnail, .thumbnail *, .thumbnail *::before, .thumbnail *::after {
   box-sizing: border-box;
@@ -25,19 +25,23 @@
 
 .thumbnail--size-extraSmall {
   border-radius: var(--p-border-radius-150);
+  height: var(--imported-thumbnail-root-height-extraSmall);
   width: 24px;
 }
 
-.thumbnail--size-small {
-  width: 40px;
+.thumbnail--size-large {
+  height: var(--imported-thumbnail-root-height-large);
+  width: 80px;
 }
 
 .thumbnail--size-medium {
+  height: var(--imported-thumbnail-root-height-medium);
   width: 60px;
 }
 
-.thumbnail--size-large {
-  width: 80px;
+.thumbnail--size-small {
+  height: var(--imported-thumbnail-root-height-small);
+  width: 40px;
 }
 
 .thumbnail__part-0 {
@@ -57,6 +61,26 @@
   overflow-y: clip;
   width: 100%;
   height: 100%;
+}
+
+.thumbnail--size-extraSmall .thumbnail__part-0 {
+  height: var(--imported-thumbnail-part-0-height-extraSmall);
+  width: var(--imported-thumbnail-part-0-width-extraSmall);
+}
+
+.thumbnail--size-large .thumbnail__part-0 {
+  height: var(--imported-thumbnail-part-0-height-large);
+  width: var(--imported-thumbnail-part-0-width-large);
+}
+
+.thumbnail--size-medium .thumbnail__part-0 {
+  height: var(--imported-thumbnail-part-0-height-medium);
+  width: var(--imported-thumbnail-part-0-width-medium);
+}
+
+.thumbnail--size-small .thumbnail__part-0 {
+  height: var(--imported-thumbnail-part-0-height-small);
+  width: var(--imported-thumbnail-part-0-width-small);
 }
 
 /* showcase chrome */

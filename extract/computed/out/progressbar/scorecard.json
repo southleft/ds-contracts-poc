@@ -1,7 +1,7 @@
 {
   "component": "ProgressBar",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 12,
   "interactions": 4,
@@ -16,17 +16,23 @@
     "pairs": 48,
     "perfectExact": 0,
     "perfectAA": 0,
-    "meanExact": 17.46744791666666,
-    "meanAA": 17.43815104166666,
-    "maxAA": 29.938151041666668
+    "measured": 48,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 13.123372395833336,
+    "meanAA": 13.094075520833336,
+    "maxAA": 22.469075520833332
   },
   "fusion": {
     "boundConfirmed": 72,
     "boundCells": 72,
     "contradictions": 0,
-    "mintedLeaves": 9,
-    "mintedLeavesUnfolded": 9,
-    "baseBindings": 15,
+    "mintedLeaves": 18,
+    "mintedLeavesUnfolded": 18,
+    "baseBindings": 23,
     "stateBindings": 0,
     "codeOnlyChannels": 3,
     "overflowBindings": 0,
@@ -35,50 +41,50 @@
   "worstRows": [
     {
       "key": "large.highlight__default",
-      "pctAA": 29.938151041666668,
-      "pctExact": 29.967447916666668,
+      "pctAA": 22.469075520833332,
+      "pctExact": 22.498372395833332,
       "channelsMismatched": 3
     },
     {
       "key": "large.highlight__hover",
-      "pctAA": 29.938151041666668,
-      "pctExact": 29.967447916666668,
+      "pctAA": 22.469075520833332,
+      "pctExact": 22.498372395833332,
       "channelsMismatched": 3
     },
     {
       "key": "large.highlight__focus-visible",
-      "pctAA": 29.938151041666668,
-      "pctExact": 29.967447916666668,
+      "pctAA": 22.469075520833332,
+      "pctExact": 22.498372395833332,
       "channelsMismatched": 3
     },
     {
       "key": "large.highlight__active",
-      "pctAA": 29.938151041666668,
-      "pctExact": 29.967447916666668,
+      "pctAA": 22.469075520833332,
+      "pctExact": 22.498372395833332,
       "channelsMismatched": 3
     },
     {
       "key": "large.primary__default",
-      "pctAA": 29.938151041666668,
-      "pctExact": 29.967447916666668,
+      "pctAA": 22.469075520833332,
+      "pctExact": 22.498372395833332,
       "channelsMismatched": 3
     },
     {
       "key": "large.primary__hover",
-      "pctAA": 29.938151041666668,
-      "pctExact": 29.967447916666668,
+      "pctAA": 22.469075520833332,
+      "pctExact": 22.498372395833332,
       "channelsMismatched": 3
     },
     {
       "key": "large.primary__focus-visible",
-      "pctAA": 29.938151041666668,
-      "pctExact": 29.967447916666668,
+      "pctAA": 22.469075520833332,
+      "pctExact": 22.498372395833332,
       "channelsMismatched": 3
     },
     {
       "key": "large.primary__active",
-      "pctAA": 29.938151041666668,
-      "pctExact": 29.967447916666668,
+      "pctAA": 22.469075520833332,
+      "pctExact": 22.498372395833332,
       "channelsMismatched": 3
     }
   ],
@@ -98,16 +104,25 @@
   ],
   "namedLosses": [
     "code-only: progress.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-    "code-only: indicator.transform — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: indicator.transform — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: label.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
+    "leavesAdded": 970,
+    "divergent": []
+  },
   "rows": [
     {
       "key": "small.highlight__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -133,8 +148,8 @@
       "key": "small.highlight__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -154,15 +169,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "small.highlight__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -188,8 +202,8 @@
       "key": "small.highlight__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -209,15 +223,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "small.primary__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -243,8 +256,8 @@
       "key": "small.primary__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -264,15 +277,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "small.primary__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -298,8 +310,8 @@
       "key": "small.primary__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -319,15 +331,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "small.success__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -353,8 +364,8 @@
       "key": "small.success__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -374,15 +385,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "small.success__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -408,8 +418,8 @@
       "key": "small.success__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -429,15 +439,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "small.critical__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -463,8 +472,8 @@
       "key": "small.critical__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -484,15 +493,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "small.critical__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -518,8 +526,8 @@
       "key": "small.critical__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 7.467447916666667,
-      "pctAA": 7.438151041666667,
+      "pctExact": 5.623372395833333,
+      "pctAA": 5.594075520833333,
       "mismatches": [
         {
           "part": "progress",
@@ -539,15 +547,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "medium.highlight__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -573,8 +580,8 @@
       "key": "medium.highlight__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -594,15 +601,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "medium.highlight__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -628,8 +634,8 @@
       "key": "medium.highlight__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -649,15 +655,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "medium.primary__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -683,8 +688,8 @@
       "key": "medium.primary__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -704,15 +709,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "medium.primary__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -738,8 +742,8 @@
       "key": "medium.primary__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -759,15 +763,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "medium.success__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -793,8 +796,8 @@
       "key": "medium.success__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -814,15 +817,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "medium.success__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -848,8 +850,8 @@
       "key": "medium.success__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -869,15 +871,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "medium.critical__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -903,8 +904,8 @@
       "key": "medium.critical__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -924,15 +925,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "medium.critical__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -958,8 +958,8 @@
       "key": "medium.critical__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 14.967447916666666,
-      "pctAA": 14.938151041666666,
+      "pctExact": 11.248372395833334,
+      "pctAA": 11.219075520833334,
       "mismatches": [
         {
           "part": "progress",
@@ -979,15 +979,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.highlight__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1013,8 +1012,8 @@
       "key": "large.highlight__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1034,15 +1033,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.highlight__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1068,8 +1066,8 @@
       "key": "large.highlight__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1089,15 +1087,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.primary__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1123,8 +1120,8 @@
       "key": "large.primary__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1144,15 +1141,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.primary__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1178,8 +1174,8 @@
       "key": "large.primary__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1199,15 +1195,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.success__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1233,8 +1228,8 @@
       "key": "large.success__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1254,15 +1249,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.success__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1288,8 +1282,8 @@
       "key": "large.success__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1309,15 +1303,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.critical__default",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1343,8 +1336,8 @@
       "key": "large.critical__hover",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1364,15 +1357,14 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport"
+      ]
     },
     {
       "key": "large.critical__focus-visible",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1398,8 +1390,8 @@
       "key": "large.critical__active",
       "channelsCompared": 38,
       "channelsEqual": 35,
-      "pctExact": 29.967447916666668,
-      "pctAA": 29.938151041666668,
+      "pctExact": 22.498372395833332,
+      "pctAA": 22.469075520833332,
       "mismatches": [
         {
           "part": "progress",
@@ -1419,8 +1411,7 @@
           "ours": "none",
           "theirs": "inset(50%)"
         }
-      ],
-      "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport"
+      ]
     }
   ]
 }

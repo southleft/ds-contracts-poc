@@ -1,0 +1,38 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "radiobutton",
+  "anchors": [
+    {
+      "leaf": "imported.radio-button.backdrop.background-color-state-active.checked",
+      "token": "p.color-bg-fill-brand-selected",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "selector": ".Polaris-RadioButton__Input:checked:not([disabled]) + .Polaris-RadioButton__Backdrop, .Polaris-RadioButton__ChoiceLabel:hover .Polaris-RadioButton__Input:checked:not([disabled]) + .Polaris-RadioButton__Backdrop"
+    },
+    {
+      "leaf": "imported.radio-button.backdrop.background-color-state-hover.checked",
+      "token": "p.color-bg-fill-brand-selected",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "selector": ".Polaris-RadioButton__Input:checked:not([disabled]) + .Polaris-RadioButton__Backdrop, .Polaris-RadioButton__ChoiceLabel:hover .Polaris-RadioButton__Input:checked:not([disabled]) + .Polaris-RadioButton__Backdrop"
+    },
+    {
+      "leaf": "imported.radio-button.backdrop.background-color.checked",
+      "token": "p.color-bg-fill-brand-selected",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "selector": ".Polaris-RadioButton__Input:checked:not([disabled]) + .Polaris-RadioButton__Backdrop, .Polaris-RadioButton__ChoiceLabel:hover .Polaris-RadioButton__Input:checked:not([disabled]) + .Polaris-RadioButton__Backdrop"
+    },
+    {
+      "leaf": "imported.radio-button.backdrop.background-color.unchecked",
+      "token": "p.color-input-bg-surface",
+      "part": "backdrop",
+      "cssProperty": "background-color",
+      "varName": "--p-color-input-bg-surface",
+      "selector": ".Polaris-RadioButton__Backdrop"
+    }
+  ]
+}

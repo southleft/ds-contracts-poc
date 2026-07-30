@@ -1,0 +1,462 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "badge",
+  "anchors": [
+    {
+      "leaf": "imported.badge.icon-3.fill.attention",
+      "token": "p.color-icon-caution",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-icon-caution",
+      "selector": ".Polaris-Badge--toneAttention svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.attention-strong",
+      "token": "p.color-text-caution-on-bg-fill",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-text-caution-on-bg-fill",
+      "selector": ".Polaris-Badge__toneAttention--strong svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.critical",
+      "token": "p.color-icon-critical",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-icon-critical",
+      "selector": ".Polaris-Badge--toneCritical svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.critical-strong",
+      "token": "p.color-text-critical-on-bg-fill",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "selector": ".Polaris-Badge__toneCritical--strong svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.enabled",
+      "token": "p.color-icon-success",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-icon-success",
+      "selector": ".Polaris-Badge--toneEnabled svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.info",
+      "token": "p.color-icon-info",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-icon-info",
+      "selector": ".Polaris-Badge--toneInfo svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.info-strong",
+      "token": "p.color-text-info-on-bg-fill",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "selector": ".Polaris-Badge__toneInfo--strong svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.magic",
+      "token": "p.color-text-magic",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-text-magic",
+      "selector": ".Polaris-Badge--toneMagic svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.new",
+      "token": "p.color-text-secondary",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-text-secondary",
+      "selector": ".Polaris-Badge svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.none",
+      "token": "p.color-text-secondary",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-text-secondary",
+      "selector": ".Polaris-Badge svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.read-only",
+      "token": "p.color-icon-secondary",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-icon-secondary",
+      "selector": ".Polaris-Badge__toneRead--only svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.success",
+      "token": "p.color-icon-success",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-icon-success",
+      "selector": ".Polaris-Badge--toneSuccess svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.success-strong",
+      "token": "p.color-text-success-on-bg-fill",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "selector": ".Polaris-Badge__toneSuccess--strong svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.warning",
+      "token": "p.color-icon-warning",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-icon-warning",
+      "selector": ".Polaris-Badge--toneWarning svg"
+    },
+    {
+      "leaf": "imported.badge.icon-3.fill.warning-strong",
+      "token": "p.color-text-warning-on-bg-fill",
+      "part": "icon-3",
+      "cssProperty": "fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "selector": ".Polaris-Badge__toneWarning--strong svg"
+    },
+    {
+      "leaf": "imported.badge.label.font-weight.new",
+      "token": "p.font-weight-medium",
+      "part": "label",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Text--medium"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.attention",
+      "token": "p.color-bg-fill-caution-secondary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-caution-secondary",
+      "selector": ".Polaris-Badge--toneAttention"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.attention-strong",
+      "token": "p.color-bg-fill-caution",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-caution",
+      "selector": ".Polaris-Badge__toneAttention--strong"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.critical",
+      "token": "p.color-bg-fill-critical-secondary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-critical-secondary",
+      "selector": ".Polaris-Badge--toneCritical"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.critical-strong",
+      "token": "p.color-bg-fill-critical",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-critical",
+      "selector": ".Polaris-Badge__toneCritical--strong"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.info",
+      "token": "p.color-bg-fill-info-secondary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-info-secondary",
+      "selector": ".Polaris-Badge--toneInfo"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.info-strong",
+      "token": "p.color-bg-fill-info",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-info",
+      "selector": ".Polaris-Badge__toneInfo--strong"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.magic",
+      "token": "p.color-bg-fill-magic-secondary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-magic-secondary",
+      "selector": ".Polaris-Badge--toneMagic"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.success",
+      "token": "p.color-bg-fill-success-secondary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-success-secondary",
+      "selector": ".Polaris-Badge--toneSuccess"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.success-strong",
+      "token": "p.color-bg-fill-success",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-success",
+      "selector": ".Polaris-Badge__toneSuccess--strong"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.warning",
+      "token": "p.color-bg-fill-warning-secondary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-warning-secondary",
+      "selector": ".Polaris-Badge--toneWarning"
+    },
+    {
+      "leaf": "imported.badge.root.background-color.warning-strong",
+      "token": "p.color-bg-fill-warning",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-warning",
+      "selector": ".Polaris-Badge__toneWarning--strong"
+    },
+    {
+      "leaf": "imported.badge.root.color.attention",
+      "token": "p.color-text-caution",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-caution",
+      "selector": ".Polaris-Badge--toneAttention"
+    },
+    {
+      "leaf": "imported.badge.root.color.attention-strong",
+      "token": "p.color-text-caution-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-caution-on-bg-fill",
+      "selector": ".Polaris-Badge__toneAttention--strong"
+    },
+    {
+      "leaf": "imported.badge.root.color.critical",
+      "token": "p.color-text-critical",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-critical",
+      "selector": ".Polaris-Badge--toneCritical"
+    },
+    {
+      "leaf": "imported.badge.root.color.critical-strong",
+      "token": "p.color-text-critical-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "selector": ".Polaris-Badge__toneCritical--strong"
+    },
+    {
+      "leaf": "imported.badge.root.color.enabled",
+      "token": "p.color-text",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Badge--toneEnabled"
+    },
+    {
+      "leaf": "imported.badge.root.color.info",
+      "token": "p.color-text-info",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-info",
+      "selector": ".Polaris-Badge--toneInfo"
+    },
+    {
+      "leaf": "imported.badge.root.color.info-strong",
+      "token": "p.color-text-info-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "selector": ".Polaris-Badge__toneInfo--strong"
+    },
+    {
+      "leaf": "imported.badge.root.color.magic",
+      "token": "p.color-text-magic",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-magic",
+      "selector": ".Polaris-Badge--toneMagic"
+    },
+    {
+      "leaf": "imported.badge.root.color.new",
+      "token": "p.color-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-secondary",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.color.none",
+      "token": "p.color-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-secondary",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.color.read-only",
+      "token": "p.color-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-secondary",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.color.success",
+      "token": "p.color-text-success",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-success",
+      "selector": ".Polaris-Badge--toneSuccess"
+    },
+    {
+      "leaf": "imported.badge.root.color.success-strong",
+      "token": "p.color-text-success-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "selector": ".Polaris-Badge__toneSuccess--strong"
+    },
+    {
+      "leaf": "imported.badge.root.color.warning",
+      "token": "p.color-text-warning",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-warning",
+      "selector": ".Polaris-Badge--toneWarning"
+    },
+    {
+      "leaf": "imported.badge.root.color.warning-strong",
+      "token": "p.color-text-warning-on-bg-fill",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "selector": ".Polaris-Badge__toneWarning--strong"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.attention",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.attention-strong",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.critical",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.critical-strong",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.enabled",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.info",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.info-strong",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.magic",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.new",
+      "token": "p.font-weight-bold",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-bold",
+      "selector": ".Polaris-Badge--toneNew"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.none",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.read-only",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.success",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.success-strong",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.warning",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    },
+    {
+      "leaf": "imported.badge.root.font-weight.warning-strong",
+      "token": "p.font-weight-medium",
+      "part": "root",
+      "cssProperty": "font-weight",
+      "varName": "--p-font-weight-medium",
+      "selector": ".Polaris-Badge"
+    }
+  ]
+}

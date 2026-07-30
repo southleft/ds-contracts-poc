@@ -275,7 +275,14 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
     const v = String(mintedFlat[name].$value);
     const am = /^\{(.+)\}$/.exec(v);
     if (am) {
-      rows.push({ name, type: 'ALIAS', target: am[1] });
+      // The alias TARGET follows the same spelling rule as the base rows
+      // above: dot-paths become slashes, because the runtime resolves targets
+      // through the `existing` map, which is keyed by VARIABLE NAME. Dot-less
+      // targets (MUI/Tailwind flat wraps) pass through unchanged — this fires
+      // only for nested-tree wraps (polaris `{p.color-icon-caution}`, the
+      // task-#26 round's live gate finding, the exact sibling of 7b02b42's
+      // base-name fix).
+      rows.push({ name, type: 'ALIAS', target: am[1].split('.').join('/') });
       aliasCount++;
       continue;
     }

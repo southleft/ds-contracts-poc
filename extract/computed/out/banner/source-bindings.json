@@ -1,0 +1,4109 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Banner",
+  "varPrefix": "--p-",
+  "facts": [
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "color",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-height",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-height",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-height",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-height",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-height",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-height",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-height",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-height",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-width",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-width",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-width",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-width",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-width",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-width",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-width",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button",
+      "channel": "min-width",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "color",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text",
+      "varName": "--p-color-text",
+      "anchor": {
+        "selector": ".Polaris-Button"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-height",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-height",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-height",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-height",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-height",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-height",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-height",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-height",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.height-800",
+      "varName": "--p-height-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-width",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-width",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-width",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-width",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-width",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-width",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-width",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "button-2",
+      "channel": "min-width",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.width-800",
+      "varName": "--p-width-800",
+      "anchor": {
+        "selector": ".Polaris-Button--sizeSlim, .Polaris-Button--sizeMedium"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-left",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-left",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-left",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-left",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-left",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-left",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-left",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-left",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-top",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-top",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-top",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-top",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-top",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-top",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-top",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "buttongroup__item",
+      "channel": "margin-top",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-ButtonGroup__Item"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "success.off.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "info.off.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "warning.off.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "critical.off.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "fill",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-4",
+      "channel": "fill",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-4",
+      "channel": "fill",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-4",
+      "channel": "fill",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-4",
+      "channel": "fill",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-4",
+      "channel": "fill",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-4",
+      "channel": "fill",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-4",
+      "channel": "fill",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "icon-4",
+      "channel": "fill",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "success.off.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "info.off.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "warning.off.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "critical.off.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-size",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "success.off.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "info.off.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "warning.off.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "critical.off.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "font-weight",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "success.off.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "info.off.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "warning.off.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "critical.off.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "line-height",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-size",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-size",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-size",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-size",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-size",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-size",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-size",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-size",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-size",
+      "varName": "--p-text-body-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-weight",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-weight",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-weight",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-weight",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-weight",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-weight",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-weight",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "font-weight",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.font-weight-medium",
+      "varName": "--p-font-weight-medium",
+      "anchor": {
+        "selector": ".Polaris-Text--medium"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "line-height",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "line-height",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "line-height",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "line-height",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "line-height",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "line-height",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "line-height",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "line-height",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-body-sm-font-line-height",
+      "varName": "--p-text-body-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodySm"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "success.off.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "info.off.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "warning.off.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "critical.off.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "info.off.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "warning.off.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "critical.off.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-1",
+      "channel": "fill",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "info.off.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "warning.off.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "critical.off.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-0-0-0-0-2",
+      "channel": "fill",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-1-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-1-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-success-on-bg-fill",
+      "varName": "--p-color-text-success-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill svg, .Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill.Polaris-Banner--textSuccessOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-1-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-1-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-info-on-bg-fill",
+      "varName": "--p-color-text-info-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill svg, .Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill.Polaris-Banner--textInfoOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-1-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-1-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-warning-on-bg-fill",
+      "varName": "--p-color-text-warning-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill svg, .Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill.Polaris-Banner--textWarningOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-1-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "part-0-0-0-0-1-0-0-0-0-0",
+      "channel": "fill",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-text-critical-on-bg-fill",
+      "varName": "--p-color-text-critical-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill svg, .Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill.Polaris-Banner--textCriticalOnBgFill path"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.off.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.off.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.off.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical.off.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Banner"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "success.off.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "info.off.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "warning.off.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "critical.off.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-size",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-size",
+      "varName": "--p-text-heading-sm-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "success.off.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "info.off.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "warning.off.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "critical.off.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "font-weight",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-weight",
+      "varName": "--p-text-heading-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "success.off.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "success.off.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "success.on.off",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "success.on.on",
+      "axisValues": {
+        "tone": "success",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "info.off.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "info.off.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "info.on.off",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "info.on.on",
+      "axisValues": {
+        "tone": "info",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "warning.off.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "warning.off.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "warning.on.off",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "warning.on.on",
+      "axisValues": {
+        "tone": "warning",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "critical.off.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "critical.off.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "off",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "critical.on.off",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "off"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    },
+    {
+      "part": "title",
+      "channel": "line-height",
+      "combo": "critical.on.on",
+      "axisValues": {
+        "tone": "critical",
+        "dismissible": "on",
+        "withAction": "on"
+      },
+      "token": "p.text-heading-sm-font-line-height",
+      "varName": "--p-text-heading-sm-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--headingSm"
+      }
+    }
+  ],
+  "skips": [
+    "button.font-family: candidate --p-font-family-sans → \"p.font-family-sans\" = \"Inter\",\n    -apple-system,\n    BlinkMacSystemFont,\n    \"San Francisco\",\n    \"Segoe UI\",\n    Roboto,\n    \"Helvetica Neue\",\n    sans-serif names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "button-2.box-shadow: candidate --p-shadow-button → \"p.shadow-button\" = 0rem -0.0625rem 0rem 0rem #b5b5b5 inset,\n    0rem 0rem 0rem 0.0625rem rgba(0, 0, 0, 0.1) inset,\n    0rem 0.03125rem 0rem 0.09375rem #FFF inset names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "button-2.font-family: candidate --p-font-family-sans → \"p.font-family-sans\" = \"Inter\",\n    -apple-system,\n    BlinkMacSystemFont,\n    \"San Francisco\",\n    \"Segoe UI\",\n    Roboto,\n    \"Helvetica Neue\",\n    sans-serif names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "buttongroup.margin-left: source declares `calc(var(--p-space-200)*-1)` — a calc() over var(--p-space-200). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "buttongroup.margin-top: source declares `calc(var(--p-space-200)*-1)` — a calc() over var(--p-space-200). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "label-2.letter-spacing: candidate --p-text-body-md-font-letter-spacing → \"p.text-body-md-font-letter-spacing\" = 0rem names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "label-3.letter-spacing: candidate --p-text-body-sm-font-letter-spacing → \"p.text-body-sm-font-letter-spacing\" = 0rem names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.box-shadow: candidate --p-shadow-200 → \"p.shadow-200\" = 0rem 0.1875rem 0.0625rem -0.0625rem rgba(26, 26, 26, 0.07) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "title.letter-spacing: candidate --p-text-heading-sm-font-letter-spacing → \"p.text-heading-sm-font-letter-spacing\" = 0rem names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 6,
+  "shorthandSkips": [
+    "blockstack-2.gap: SHORTHAND carrying var(--pc-block-stack-gap-lg, --pc-block-stack-gap-md, --pc-block-stack-gap-sm, --pc-block-stack-gap-xl, --pc-block-stack-gap-xs) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "blockstack.gap: SHORTHAND carrying var(--pc-block-stack-gap-lg, --pc-block-stack-gap-md, --pc-block-stack-gap-sm, --pc-block-stack-gap-xl, --pc-block-stack-gap-xs) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "button.margin: SHORTHAND carrying var(--pc-button-padding-block, --pc-button-padding-inline) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "button__icon.margin: SHORTHAND carrying var(--p-space-050) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "inlinestack-2.gap: SHORTHAND carrying var(--pc-inline-stack-gap-lg, --pc-inline-stack-gap-md, --pc-inline-stack-gap-sm, --pc-inline-stack-gap-xl, --pc-inline-stack-gap-xs) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "inlinestack.gap: SHORTHAND carrying var(--pc-inline-stack-gap-lg, --pc-inline-stack-gap-md, --pc-inline-stack-gap-sm, --pc-inline-stack-gap-xl, --pc-inline-stack-gap-xs) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 2,
+  "calcCeiling": 2
+}

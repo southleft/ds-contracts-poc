@@ -1,37 +1,43 @@
 {
   "component": "TextField",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "captures": 256,
   "combos": 64,
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
-  "channelsEnumerated": 942,
-  "elementsPerCapture": 20,
+  "channelsEnumerated": 961,
+  "elementsPerCapture": 26,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 0,
-    "labelled__labelwrapper": 9,
-    "label": 2,
-    "label__text": 6,
+    "root": 2,
+    "labelled__labelwrapper": 10,
+    "label": 3,
+    "label__text": 7,
     "label-2": 9,
-    "connected": 9,
-    "connected__item": 7,
-    "textfield": 10,
-    "prefix": 21,
-    "label-3": 18,
-    "input": 23,
-    "suffix": 21,
-    "label-4": 18,
-    "clearbutton": 44,
-    "label-5": 17,
+    "connected": 11,
+    "connected__item": 9,
+    "textfield": 12,
+    "prefix": 23,
+    "label-3": 19,
+    "input": 25,
+    "suffix": 23,
+    "label-4": 19,
+    "clearbutton": 43,
+    "label-5": 16,
     "icon": 11,
-    "icon-2": 29,
-    "part-1-0-0-1-1-0-0": 21,
-    "part-1-0-0-1-1-0-1": 22,
-    "backdrop": 29
+    "icon-2": 30,
+    "part-1-0-0-1-1-0-0": 23,
+    "part-1-0-0-1-1-0-1": 24,
+    "clearbutton-2": 47,
+    "label-6": 19,
+    "icon-3": 12,
+    "icon-4": 31,
+    "part-1-0-0-1-1-0-0-2": 24,
+    "part-1-0-0-1-1-0-1-2": 25,
+    "backdrop": 31
   },
   "folds": {
-    "count": 72,
+    "count": 120,
     "receipts": [
       {
         "part": "prefix",
@@ -77,6 +83,12 @@
       },
       {
         "part": "prefix",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "prefix",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -131,6 +143,12 @@
       },
       {
         "part": "label-3",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label-3",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -185,6 +203,12 @@
       },
       {
         "part": "suffix",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "suffix",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -239,6 +263,12 @@
       },
       {
         "part": "label-4",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label-4",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -293,6 +323,12 @@
       },
       {
         "part": "clearbutton",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "clearbutton",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -347,6 +383,12 @@
       },
       {
         "part": "icon-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-2",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -401,6 +443,12 @@
       },
       {
         "part": "part-1-0-0-1-1-0-0",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -455,6 +503,12 @@
       },
       {
         "part": "part-1-0-0-1-1-0-1",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1",
         "channel": "text-decoration-color",
         "foldedInto": "color",
         "class": "currentColor"
@@ -464,10 +518,250 @@
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
+      },
+      {
+        "part": "clearbutton-2",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "clearbutton-2",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "clearbutton-2",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "clearbutton-2",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "clearbutton-2",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "clearbutton-2",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "clearbutton-2",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "clearbutton-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "clearbutton-2",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "clearbutton-2",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "icon-4",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0-2",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0-2",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0-2",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0-2",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0-2",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0-2",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0-2",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0-2",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-0-2",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1-2",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1-2",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1-2",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1-2",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1-2",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1-2",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1-2",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1-2",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1-2",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "part-1-0-0-1-1-0-1-2",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 35,
-    "mintedLeavesFolded": 38
+    "mintedLeavesUnfolded": 86,
+    "mintedLeavesFolded": 88
   },
   "bound": {
     "cellsChecked": 768,
@@ -476,40 +770,42 @@
     "untriaged": 48
   },
   "minted": {
-    "leaves": 38,
-    "baseBindings": 105,
-    "stateBindings": 97,
+    "leaves": 88,
+    "baseBindings": 113,
+    "stateBindings": 104,
     "byShape": {
-      "uniform": 197,
-      "perAxis": 2,
-      "perPair": 0,
-      "refused": 3
+      "uniform": 199,
+      "perAxis": 8,
+      "perPair": 10,
+      "refused": 0
     }
   },
   "declared": {
-    "base": 48,
+    "base": 35,
     "state": 5
   },
   "codeOnly": {
-    "base": 20,
-    "state": 52,
-    "overflowBindings": 87
+    "base": 17,
+    "state": 10,
+    "overflowBindings": 101
   },
   "pseudoElementFindings": 128,
   "anatomyPromotion": {
-    "partsCarried": 17,
-    "svgAssets": 1,
-    "refusals": 0
+    "partsCarried": 15,
+    "svgAssets": 0,
+    "refusals": 3
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 3609600,
-    "cellsMatched": 3605120,
-    "pct": 99.87588652482269,
+    "cellsCompared": 3682560,
+    "cellsMatched": 3678080,
+    "pct": 99.87834549878346,
     "namedExclusions": [
       "app-region",
-      "text-decoration"
+      "text-decoration",
+      "translate-x",
+      "translate-y"
     ],
     "topMismatchedChannels": [
       [
@@ -528,6 +824,12 @@
   },
   "pixel": {
     "pairs": 256,
+    "measured": 256,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
     "exact": {
       "mean": 2.8895759582519536,
       "max": 7.305501302083333,
@@ -582,7 +884,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 81.86239193083574,
+    "computedPctEqual": 81.96911196911196,
     "rowsFullyEqual": 0,
     "rows": 256,
     "pixelPerfectExact": 0,

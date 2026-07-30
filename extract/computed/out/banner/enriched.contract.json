@@ -4,7 +4,7 @@
   "name": "Banner",
   "version": "0.1.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Banner/Banner.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file.",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Banner/Banner.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div",
     "role": "status",
@@ -118,6 +118,21 @@
           "prop": "withAction"
         }
       }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Use your finance report to get detailed insights.",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
     }
   ],
   "states": [
@@ -138,7 +153,8 @@
         "box-shadow": "{imported.banner.root.box-shadow}",
         "left": "{imported.shared.size-0}",
         "right": "{imported.shared.size-0}",
-        "top": "{imported.shared.size-0}"
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.shared.size-319-328}"
       },
       "tokensByProp": {
         "prop": "tone",
@@ -264,7 +280,8 @@
                                   },
                                   "tokens": {
                                     "min-height": "{imported.shared.size-0}",
-                                    "min-width": "{imported.shared.size-0}"
+                                    "min-width": "{imported.shared.size-0}",
+                                    "width": "{imported.shared.size-20}"
                                   },
                                   "tokensByProp": [
                                     {
@@ -286,6 +303,9 @@
                                     }
                                   ]
                                 }
+                              },
+                              "tokens": {
+                                "width": "{imported.shared.size-20}"
                               },
                               "tokensByProp": [
                                 {
@@ -344,7 +364,8 @@
                           },
                           "tokens": {
                             "column-gap": "{imported.shared.size-4}",
-                            "row-gap": "{imported.shared.size-4}"
+                            "row-gap": "{imported.shared.size-4}",
+                            "width": "{imported.banner.inlinestack-2.width}"
                           },
                           "tokensByProp": [
                             {
@@ -425,7 +446,8 @@
                                       "tokens": {
                                         "color": "{imported.shared.color-303030}",
                                         "min-height": "{imported.shared.size-0}",
-                                        "min-width": "{imported.shared.size-0}"
+                                        "min-width": "{imported.shared.size-0}",
+                                        "width": "{imported.shared.size-20}"
                                       }
                                     }
                                   },
@@ -437,7 +459,8 @@
                               },
                               "tokens": {
                                 "margin-bottom": "{imported.banner.button-icon.margin-bottom}",
-                                "margin-top": "{imported.banner.button-icon.margin-top}"
+                                "margin-top": "{imported.banner.button-icon.margin-top}",
+                                "width": "{imported.shared.size-20}"
                               }
                             }
                           },
@@ -469,6 +492,7 @@
                             "column-gap": "{imported.shared.size-2}",
                             "font-size": "{imported.shared.size-13}",
                             "font-weight": "{imported.shared.num-450}",
+                            "height": "{imported.shared.size-32}",
                             "left": "{imported.shared.size-0}",
                             "line-height": "{imported.shared.size-20}",
                             "margin-bottom": "{imported.shared.size-neg-4}",
@@ -483,7 +507,8 @@
                             "padding-top": "{imported.shared.size-4}",
                             "right": "{imported.shared.size-0}",
                             "row-gap": "{imported.shared.size-2}",
-                            "top": "{imported.shared.size-0}"
+                            "top": "{imported.shared.size-0}",
+                            "width": "{imported.shared.size-32}"
                           }
                         }
                       },
@@ -491,7 +516,8 @@
                         "column-gap": "{imported.shared.size-8}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
-                        "row-gap": "{imported.shared.size-8}"
+                        "row-gap": "{imported.shared.size-8}",
+                        "width": "{imported.shared.size-295-328}"
                       },
                       "tokensByProp": [
                         {
@@ -520,7 +546,8 @@
                     "padding-bottom": "{imported.shared.size-12}",
                     "padding-left": "{imported.shared.size-12}",
                     "padding-right": "{imported.shared.size-12}",
-                    "padding-top": "{imported.shared.size-12}"
+                    "padding-top": "{imported.shared.size-12}",
+                    "width": "{imported.shared.size-319-328}"
                   },
                   "tokensByProp": [
                     {
@@ -566,7 +593,9 @@
                           },
                           "parts": {
                             "label-2": {
-                              "text": "Use your finance report to get detailed insights.",
+                              "content": {
+                                "prop": "children"
+                              },
                               "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text — this element exists in the real component's DOM; the static layer had no part for it.",
                               "declared": {
                                 "display": "inline"
@@ -579,6 +608,9 @@
                                 "min-width": "{imported.shared.size-0}"
                               }
                             }
+                          },
+                          "tokens": {
+                            "width": "{imported.shared.size-295-328}"
                           }
                         },
                         "buttongroup": {
@@ -663,6 +695,7 @@
                                     "column-gap": "{imported.shared.size-2}",
                                     "font-size": "{imported.shared.size-13}",
                                     "font-weight": "{imported.shared.num-450}",
+                                    "height": "{imported.shared.size-32}",
                                     "left": "{imported.shared.size-0}",
                                     "line-height": "{imported.shared.size-20}",
                                     "min-height": "{imported.shared.size-32}",
@@ -673,19 +706,24 @@
                                     "padding-top": "{imported.banner.button-2.padding-top}",
                                     "right": "{imported.shared.size-0}",
                                     "row-gap": "{imported.shared.size-2}",
-                                    "top": "{imported.shared.size-0}"
+                                    "top": "{imported.shared.size-0}",
+                                    "width": "{imported.banner.button-2.width}"
                                   }
                                 }
                               },
                               "tokens": {
+                                "height": "{imported.shared.size-32}",
                                 "margin-left": "{imported.shared.size-8}",
-                                "margin-top": "{imported.shared.size-8}"
+                                "margin-top": "{imported.shared.size-8}",
+                                "width": "{imported.banner.buttongroup-item.width}"
                               }
                             }
                           },
                           "tokens": {
+                            "height": "{imported.banner.buttongroup.height}",
                             "margin-left": "{imported.banner.buttongroup.margin-left}",
-                            "margin-top": "{imported.banner.buttongroup.margin-top}"
+                            "margin-top": "{imported.banner.buttongroup.margin-top}",
+                            "width": "{imported.banner.buttongroup.width}"
                           }
                         }
                       },
@@ -693,7 +731,8 @@
                         "column-gap": "{imported.shared.size-8}",
                         "min-height": "{imported.shared.size-0}",
                         "min-width": "{imported.shared.size-0}",
-                        "row-gap": "{imported.shared.size-8}"
+                        "row-gap": "{imported.shared.size-8}",
+                        "width": "{imported.shared.size-295-328}"
                       }
                     }
                   },
@@ -701,15 +740,20 @@
                     "padding-bottom": "{imported.shared.size-12}",
                     "padding-left": "{imported.shared.size-12}",
                     "padding-right": "{imported.shared.size-12}",
-                    "padding-top": "{imported.shared.size-12}"
+                    "padding-top": "{imported.shared.size-12}",
+                    "width": "{imported.shared.size-319-328}"
                   }
                 }
               },
               "tokens": {
                 "min-height": "{imported.shared.size-0}",
-                "min-width": "{imported.shared.size-0}"
+                "min-width": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-319-328}"
               }
             }
+          },
+          "tokens": {
+            "width": "{imported.shared.size-319-328}"
           }
         }
       },

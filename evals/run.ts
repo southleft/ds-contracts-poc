@@ -5671,7 +5671,10 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // the PROMOTED check glyphs are the floor reconstruction verbatim
       // (promote-floor copies byte-for-byte; a divergence means a stale
       // promotion).
-      for (const f of ['checkbox-icon-2-checked.svg', 'checkbox-icon-2-unchecked.svg']) {
+      // task #26 recapture renamed the reconstructed glyphs: checkbox-icon-6
+      // (visible check), checkbox-icon.svg (the same path at opacity 0 — the
+      // unchecked resting form), checkbox-icon-4 (the indeterminate bar).
+      for (const f of ['checkbox-icon-6.svg', 'checkbox-icon.svg', 'checkbox-icon-4.svg']) {
         const promoted = readFileSync(path.join(iconsDir, f), 'utf8');
         const floor = readFileSync(path.join(ROOT, 'extract/computed/out/checkbox/assets', f), 'utf8');
         if (promoted !== floor) throw new Error(`${f}: promoted asset diverges from the floor reconstruction`);
@@ -5708,7 +5711,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         }
         // (the eval scratch carries extract/ but not examples/ — the floor's
         // own asset is the byte-source promote-floor copies verbatim)
-        const asset = fs.readFileSync('extract/computed/out/checkbox/assets/checkbox-icon-2-unchecked.svg', 'utf8').trim();
+        const asset = fs.readFileSync('extract/computed/out/checkbox/assets/checkbox-icon.svg', 'utf8').trim();
         if (asset !== r.markup) throw new Error('committed asset differs from a fresh reconstruction:\\n' + asset + '\\nvs\\n' + r.markup);
         console.log('dash pin ok: continuous single-path stroke, named receipt, byte-equal committed asset');
       `]);
@@ -7906,11 +7909,21 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
 
       const fresh = atRoot(['scripts/figma-scripts-fresh.mjs']);
       if (fresh.status !== 0) throw new Error(`figma sync scripts are STALE vs a rebuild:\n${fresh.out.slice(0, 1600)}`);
-      if (!fresh.out.includes('NOT GATED')) {
-        throw new Error('the freshness gate stopped naming its own hole — an un-gated library must be printed, never quietly skipped');
+      // Task #26 closed the polaris NAMED hole (the last one): its scripts are
+      // rebuilt by generate.ts --check, a byte-compare over ALL 76 generated
+      // surfaces. The assertion flips accordingly: a NOT GATED row REAPPEARING
+      // is the failure now (a library fell out of the freshness net), and
+      // polaris must carry a real 'fresh' row — the gate itself still hard-fails
+      // on any figma dir with neither a row nor a named hole, so a silent skip
+      // remains structurally impossible.
+      if (fresh.out.includes('NOT GATED')) {
+        throw new Error(`a library has fallen back to a NOT GATED named hole — the freshness net is torn again:\n${fresh.out.slice(0, 1200)}`);
+      }
+      if (!/polaris\s+fresh/.test(fresh.out)) {
+        throw new Error(`polaris lost its freshness row (task #26 added it via generate.ts --check):\n${fresh.out.slice(0, 1200)}`);
       }
       const total = baseline.rows.reduce((n, r) => n + r.overflows, 0);
-      console.log(`child-wider-ratchet-and-script-freshness: ${baseline.rows.length} libraries carry a committed child-wider baseline (${total} real overflows repo-wide, all astryx ProgressBar percent-width; text-caused and margin-box counted SEPARATELY so neither can flatter the first number), the ratchet is two-sided and names an unrecorded improvement, and every rebuildable library's sync scripts are BYTE-FRESH vs a fresh emission — the gap that let MUI's scripts sit three engine fixes stale while the suite stayed green`);
+      console.log(`child-wider-ratchet-and-script-freshness: ${baseline.rows.length} libraries carry a committed child-wider baseline (${total} real overflows repo-wide, all astryx ProgressBar percent-width; text-caused and margin-box counted SEPARATELY so neither can flatter the first number), the ratchet is two-sided and names an unrecorded improvement, and every library's sync scripts are BYTE-FRESH vs a fresh emission (polaris via generate.ts --check since task #26 — zero named holes remain) — the gap that let MUI's scripts sit three engine fixes stale while the suite stayed green`);
     },
   },
   {

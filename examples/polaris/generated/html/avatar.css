@@ -1,4 +1,4 @@
-/* Avatar — from polaris.avatar v0.3.2 (core/emit-html.ts) */
+/* Avatar — from polaris.avatar v0.4.0 (core/emit-html.ts) */
 
 .avatar, .avatar *, .avatar *::before, .avatar *::after {
   box-sizing: border-box;
@@ -29,6 +29,7 @@
   border-bottom-right-radius: var(--imported-avatar-root-border-bottom-right-radius-lg);
   border-top-left-radius: var(--imported-avatar-root-border-top-left-radius-lg);
   border-top-right-radius: var(--imported-avatar-root-border-top-right-radius-lg);
+  height: var(--imported-avatar-root-height-lg);
   width: 32px;
 }
 
@@ -37,6 +38,7 @@
   border-bottom-right-radius: var(--imported-avatar-root-border-bottom-right-radius-md);
   border-top-left-radius: var(--imported-avatar-root-border-top-left-radius-md);
   border-top-right-radius: var(--imported-avatar-root-border-top-right-radius-md);
+  height: var(--imported-avatar-root-height-md);
   width: 28px;
 }
 
@@ -45,6 +47,7 @@
   border-bottom-right-radius: var(--imported-avatar-root-border-bottom-right-radius-sm);
   border-top-left-radius: var(--imported-avatar-root-border-top-left-radius-sm);
   border-top-right-radius: var(--imported-avatar-root-border-top-right-radius-sm);
+  height: var(--imported-avatar-root-height-sm);
   width: 24px;
 }
 
@@ -53,6 +56,7 @@
   border-bottom-right-radius: var(--imported-avatar-root-border-bottom-right-radius-xl);
   border-top-left-radius: var(--imported-avatar-root-border-top-left-radius-xl);
   border-top-right-radius: var(--imported-avatar-root-border-top-right-radius-xl);
+  height: var(--imported-avatar-root-height-xl);
   width: 40px;
 }
 
@@ -61,6 +65,7 @@
   border-bottom-right-radius: var(--imported-avatar-root-border-bottom-right-radius-xs);
   border-top-left-radius: var(--imported-avatar-root-border-top-left-radius-xs);
   border-top-right-radius: var(--imported-avatar-root-border-top-right-radius-xs);
+  height: var(--imported-avatar-root-height-xs);
   width: 20px;
 }
 
@@ -76,6 +81,31 @@
   position: absolute;
   aspect-ratio: 1 / 1;
   user-select: none;
+}
+
+.avatar--size-lg .avatar__initials {
+  height: var(--imported-avatar-initials-height-lg);
+  width: var(--imported-avatar-initials-width-lg);
+}
+
+.avatar--size-md .avatar__initials {
+  height: var(--imported-avatar-initials-height-md);
+  width: var(--imported-avatar-initials-width-md);
+}
+
+.avatar--size-sm .avatar__initials {
+  height: var(--imported-avatar-initials-height-sm);
+  width: var(--imported-avatar-initials-width-sm);
+}
+
+.avatar--size-xl .avatar__initials {
+  height: var(--imported-avatar-initials-height-xl);
+  width: var(--imported-avatar-initials-width-xl);
+}
+
+.avatar--size-xs .avatar__initials {
+  height: var(--imported-avatar-initials-height-xs);
+  width: var(--imported-avatar-initials-width-xs);
 }
 
 .avatar__initials-xs svg {

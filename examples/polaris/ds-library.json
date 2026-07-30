@@ -1,0 +1,38 @@
+{
+  "__note": "LIBRARY MANIFEST — the per-library half of the code→canvas pipeline (docs/21). `ds-contracts promote --config <this>` runs the shared promote stage (packages/cli/src/promote.ts). Written for the task-#26 recapture round, which moved polaris OFF its bespoke v0.3.2 promote-floor (no source-alias pass) and onto the shared pipeline; astryx is now the one library with its own promote script (the re-anchor ledger, docs/23 §3.1).",
+  "library": "polaris",
+  "exampleDir": "examples/polaris",
+  "__note:captureOut": "UN-NAMESPACED — polaris was library #2, captured before per-library out-dir namespacing, so its 12 capture dirs live directly at extract/computed/out/<dir> (LEDGER.md in each names @shopify/polaris). Everything newer nests under out/<library>/.",
+  "captureOut": "extract/computed/out",
+  "dtcg": "examples/polaris/tokens/polaris-light.dtcg.json",
+  "mintedOut": "examples/polaris/tokens/polaris-minted.dtcg.json",
+  "mintedDoc": "examples/polaris/tokens/MINTED.md",
+  "components": [
+    "button",
+    "tag",
+    "badge",
+    "banner",
+    "checkbox",
+    "radiobutton",
+    "avatar",
+    "spinner",
+    "progressbar",
+    "thumbnail",
+    "text",
+    "textfield"
+  ],
+  "contractStem": {
+    "radiobutton": "radio-button",
+    "progressbar": "progress-bar",
+    "textfield": "text-field"
+  },
+  "contractVersion": "0.4.0",
+  "promoterPath": "examples/polaris/scripts/promote-floor.ts",
+  "possessive": "Polaris's",
+  "mintedDocTitle": "Polaris minted tokens",
+  "capture": {
+    "config": "extract/computed/configs/polaris.json",
+    "harness": "examples/polaris/.polaris-sandbox"
+  },
+  "__note:emit": "NO emit/bundle blocks ON PURPOSE: polaris's figma scripts + react/html surfaces come from `npx tsx examples/polaris/generate.ts` (byte-gated by the polaris-showcase-reproducible eval), not the CLI `figma` command. Adding an emit block here would imply a second, different emission path for the same artifacts."
+}

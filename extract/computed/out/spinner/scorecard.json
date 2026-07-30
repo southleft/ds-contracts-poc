@@ -1,7 +1,7 @@
 {
   "component": "Spinner",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 2,
   "interactions": 4,
@@ -16,6 +16,12 @@
     "pairs": 8,
     "perfectExact": 0,
     "perfectAA": 8,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 0.068359375,
     "meanAA": 0,
     "maxAA": 0
@@ -24,9 +30,9 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 1,
-    "mintedLeavesUnfolded": 1,
-    "baseBindings": 1,
+    "mintedLeaves": 3,
+    "mintedLeavesUnfolded": 3,
+    "baseBindings": 2,
     "stateBindings": 0,
     "codeOnlyChannels": 0,
     "overflowBindings": 0,
@@ -87,6 +93,15 @@
     "promotion: static-part-unrendered: reviewed static part \"glyphLarge\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)",
     "promotion: static-part-unrendered: reviewed static part \"glyphSmall\" has no rendered counterpart in ANY captured combo — dropped from the promoted anatomy (named; usually a conditional the sweep never triggered)"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
+    "leavesAdded": 979,
+    "divergent": []
+  },
   "rows": [
     {
       "key": "small__default",

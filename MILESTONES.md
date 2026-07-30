@@ -1043,6 +1043,61 @@ its own measured tolerance.
 Suite: **151/151 → 162/162**. Drift instrument: **46/46**, zero pre-existing
 rows moved.
 
+## 2026-07-29 — Task #26: the last frozen library thaws, and the corpus is whole
+
+Polaris — library #2, the repo's most-cited exemplar — had not been recaptured
+since its original round: 12 contracts frozen, zero source facts, the one
+figma-script surface the freshness gate could not check, and a drift-baseline
+cause that read "PERMANENT HOLE — POLARIS CANNOT BE RECAPTURED." All of that
+is now false, and the corpus has **no frozen libraries left**.
+
+**The recapture:** all 12 components through the committed `.polaris-sandbox`
+(the first library reproducible from committed bytes), double-run
+byte-identical, with the CSS-vars reader ON for the first time — **5,201
+verified source facts** where there had been zero. The predicted alias gain
+landed: **179 minted leaves are now DTCG aliases to Polaris's own `{p.*}`
+tokens** (`imported.button.root.color.plain.none → {p.color-text-link}`),
+101/572 colour leaves = 17.7% aliased, from 0%.
+
+**Three general engine fixes it forced**, each a latent class no flat-tree or
+alias-free library could reach: the reader's var→leaf mapping learned nested
+DTCG wrapper groups (`tokenGroup` config, no-op elsewhere); the shared
+promote's DTCG base is flattened by walking instead of read as a flat map (a
+silent pre-receipt zero of the whole alias pass — proven byte-neutral for
+MUI/Carbon/Tailwind/Altitude by re-promotion); and alias-valued minted leaves
+stopped crashing the provisional preamble (they now upsert **native Figma
+variable aliases** with resolved-literal fallback) and stopped missing the
+token-sync target map (alias targets spell dots as slashes, the exact sibling
+of `7b02b42`'s base-name fix).
+
+**Polaris also left its bespoke promoter** — the last pre-generalization copy,
+which had no source-alias pass — for the shared `packages/cli/src/promote.ts`
+(`ds-library.json` + shim), making astryx genuinely the one library with its
+own promote script. And the **freshness gate's last named hole closed**: the
+"invocation unrecorded" text had rotted (the invocation is `generate.ts`'s own
+header, byte-proven by `--check` over all 76 surfaces); polaris now carries a
+real row and the eval that used to *require* the `NOT GATED` line now fails if
+one reappears. **6/6 libraries byte-fresh, zero named holes.**
+
+**Three instruments moved and were re-recorded with causes, not waved
+through:** the drift baseline (10 polaris rows — the recapture's own
+vocabulary; 2 astryx rows — the #43 rebuild's, whose baseline predated it),
+the minted-orphan ratchet (312→635 unreferenced, the astryx-precedent cause B
+mechanism — reading more surfaces more; the anchorable quality number moved
+the right way in the same round), and the child-wider ratchet (polaris
+text-caused 0→29: **the old zero was staleness, not absence** — the round-5
+artifacts predated the instrument's detection; the corpus-wide wrapping gap
+now counts polaris like every other text-bearing library).
+
+Same round, delegated tracks: the stale-doc sweep (ROADMAP/docs/12/handoff
+snapshot-stamped/SHOWCASE superseded note/scoreboard pins), and the plugin's
+copy made honest — "Instances keep their overrides" now carries the
+interior-node qualifier the amend path has always demanded, the orphaned
+`run-send` handlers are gone, and three new UI pins hold the copy to it.
+
+Suite: **181/181** (three reds en route, each an instrument doing its job).
+Drift: **54/54**. `examples/polaris/PROVENANCE.md` exists at last.
+
 ---
 
 **Standing scoreboard** (updated with each milestone):
@@ -1059,7 +1114,7 @@ rows moved.
 | Enterprise scale (code) | Carbon/Fluent 2/Spectrum/Polaris at pinned SHAs, pipeline unmodified | `extract/pilots/ENTERPRISE-GAUNTLET.md` |
 | Whole-kit census | 1,618/1,618 sets clean, facts/degradations counted | `npm run extract:figma:gauntlet` → `CENSUS.md` |
 | Visual parity | pixel diff vs Figma's own renders, worst-first queue | `npm run extract:figma:visual` → `REPORT.md` |
-| Published spec + CLI | `@ds-contracts/schema` 15.0.0 · `@ds-contracts/cli` 0.1.0 on public npm, stranger-verified | `cli-smoke` eval (byte-stable double run from scratch) |
+| Published spec + CLI | `@ds-contracts/schema` 16.0.0 · `@ds-contracts/cli` 0.3.0 · `@ds-contracts/emitter-web-components` 0.3.0 on public npm (published 2026-07-29, `862b1e0`), stranger-verified | `cli-smoke` eval (byte-stable double run from scratch) |
 | Journey E2E | both product journeys as standing gates, commands read only from the docs seam | `journey-engineer` / `journey-designer` evals · `evals/fixtures/journey-commands.json` |
 | CI executes verbatim | every recipe `run:` step executed locally against the published CLI | `examples/ci/VALIDATION.md` |
 | Plugin engine freshness | zip build refuses a stale engine by committed input-hash receipt | `plugin-engine-bundle` eval (guard fires on a real core mutation) |

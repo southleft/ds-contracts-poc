@@ -1,4 +1,4 @@
-/* Spinner — from polaris.spinner v0.3.2 (core/emit-html.ts) */
+/* Spinner — from polaris.spinner v0.4.0 (core/emit-html.ts) */
 
 .spinner, .spinner *, .spinner *::before, .spinner *::after {
   box-sizing: border-box;
@@ -11,6 +11,14 @@
   border: 0;
   color: var(--imported-spinner-root-color);
   display: block;
+}
+
+.spinner--size-large {
+  width: var(--imported-spinner-root-width-large);
+}
+
+.spinner--size-small {
+  width: var(--imported-spinner-root-width-small);
 }
 
 .spinner__root-small svg {

@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/text-field.contract.json (polaris.text-field v0.3.2)
+ * Source of truth: contracts/text-field.contract.json (polaris.text-field v0.4.0)
  * Regenerate with: npm run generate
  */
 
@@ -16,6 +16,14 @@
   outline-offset: 2px;
 }
 
+.size-medium {
+  height: var(--imported-text-field-root-height-medium);
+}
+
+.size-slim {
+  height: var(--imported-text-field-root-height-slim);
+}
+
 .labelled__labelwrapper {
   display: flex;
   justify-content: space-between;
@@ -30,6 +38,7 @@
 
 .label {
   display: flex;
+  width: var(--imported-text-field-label-width);
   display: block;
 }
 
@@ -42,6 +51,7 @@
   flex-grow: var(--imported-shared-num-1);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  width: var(--imported-text-field-label-text-width);
   display: block;
   cursor: default;
 }
@@ -76,6 +86,14 @@
   position: relative;
 }
 
+.size-medium .connected {
+  height: var(--imported-text-field-connected-height-medium);
+}
+
+.size-slim .connected {
+  height: var(--imported-text-field-connected-height-slim);
+}
+
 .connected__item {
   display: flex;
   flex: 1 1 auto;
@@ -90,6 +108,14 @@
   position: relative;
 }
 
+.size-medium .connected__item {
+  height: var(--imported-text-field-connected-item-height-medium);
+}
+
+.size-slim .connected__item {
+  height: var(--imported-text-field-connected-item-height-slim);
+}
+
 .textfield {
   display: flex;
   align-items: center;
@@ -101,6 +127,14 @@
   top: var(--imported-shared-size-0);
   cursor: text;
   position: relative;
+}
+
+.size-medium .textfield {
+  height: var(--imported-text-field-textfield-height-medium);
+}
+
+.size-slim .textfield {
+  height: var(--imported-text-field-textfield-height-slim);
 }
 
 .root:disabled .textfield {
@@ -121,6 +155,7 @@
   margin-right: var(--imported-text-field-prefix-margin-right);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-text-field-prefix-width);
   z-index: var(--imported-shared-num-20);
   display: block;
   cursor: text;
@@ -189,6 +224,14 @@
   padding-block: var(--p-space-050);
 }
 
+.size-medium .input {
+  height: var(--imported-text-field-input-height-medium);
+}
+
+.size-slim .input {
+  height: var(--imported-text-field-input-height-slim);
+}
+
 .root:disabled .input {
   cursor: default;
 }
@@ -207,6 +250,7 @@
   margin-right: var(--imported-shared-size-12);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-text-field-suffix-width);
   z-index: var(--imported-shared-num-20);
   display: block;
   cursor: text;
@@ -234,15 +278,15 @@
   display: none;
 }
 
-.clearbutton {
-  display: flex;
-  background-color: var(--imported-text-field-clearbutton-background-color);
+.clearbutton-2 {
+  background-color: var(--imported-text-field-clearbutton-2-background-color);
   border-bottom-width: var(--imported-shared-size-0);
   border-left-width: var(--imported-shared-size-0);
   border-right-width: var(--imported-shared-size-0);
   border-top-width: var(--imported-shared-size-0);
-  color: var(--imported-text-field-clearbutton-color);
+  color: var(--imported-text-field-clearbutton-2-color);
   font-size: var(--imported-shared-size-13);
+  height: var(--imported-shared-size-20);
   line-height: var(--imported-shared-size-20);
   margin-left: var(--imported-shared-size-4);
   margin-right: var(--imported-shared-size-12);
@@ -254,87 +298,36 @@
   padding-right: var(--imported-shared-size-0);
   padding-top: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-20);
   z-index: var(--imported-shared-num-20);
-  display: block;
-  position: absolute;
+  display: none;
   appearance: none;
   border-bottom-style: none;
   border-left-style: none;
   border-right-style: none;
   border-top-style: none;
   cursor: pointer;
+  position: absolute;
   transition-delay: 0s, 0s;
   transition-duration: 0.1s, 0.1s;
   transition-property: visibility, opacity;
   transition-timing-function: cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1);
 }
 
-.size-medium .clearbutton {
-  bottom: var(--imported-text-field-clearbutton-bottom-medium);
+.size-medium .clearbutton-2 {
+  bottom: var(--imported-text-field-clearbutton-2-bottom-medium);
 }
 
-.size-medium .clearbutton {
-  top: var(--imported-text-field-clearbutton-top-medium);
+.size-medium .clearbutton-2 {
+  top: var(--imported-text-field-clearbutton-2-top-medium);
 }
 
-.size-slim .clearbutton {
-  bottom: var(--imported-text-field-clearbutton-bottom-slim);
+.size-slim .clearbutton-2 {
+  bottom: var(--imported-text-field-clearbutton-2-bottom-slim);
 }
 
-.size-slim .clearbutton {
-  top: var(--imported-text-field-clearbutton-top-slim);
-}
-
-.root[data-disabled] .clearbutton {
-  display: none;
-}
-
-.label-5 {
-  bottom: var(--imported-text-field-label-5-bottom);
-  font-weight: var(--imported-text-field-label-5-font-weight);
-  left: var(--imported-text-field-label-5-left);
-  min-height: var(--imported-shared-size-0);
-  min-width: var(--imported-shared-size-0);
-  right: var(--imported-text-field-label-5-right);
-  top: var(--imported-shared-size-0);
-  display: none;
-  cursor: pointer;
-  font-feature-settings: normal;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  position: absolute;
-  text-align: center;
-  text-rendering: auto;
-  text-wrap-mode: nowrap;
-}
-
-.icon svg {
-  width: 20px;
-  height: 20px;
-}
-
-.icon {
-  display: inline-flex;
-  flex-shrink: 0;
-  color: var(--imported-text-field-icon-color);
-  font-weight: var(--imported-text-field-icon-font-weight);
-  min-height: var(--imported-shared-size-0);
-  min-width: var(--imported-shared-size-0);
-  display: block;
-  cursor: pointer;
-  font-feature-settings: normal;
-  max-height: 100%;
-  max-width: 100%;
-  text-align: center;
-  text-rendering: auto;
-}
-
-.root[data-disabled] .icon {
-  display: none;
-}
-
-.iconGlyph {
-  display: inline-flex;
+.size-slim .clearbutton-2 {
+  top: var(--imported-text-field-clearbutton-2-top-slim);
 }
 
 .backdrop {
@@ -368,6 +361,14 @@
 
 .size-slim .backdrop {
   padding-block: var(--p-space-050);
+}
+
+.size-medium .backdrop {
+  height: var(--imported-text-field-backdrop-height-medium);
+}
+
+.size-slim .backdrop {
+  height: var(--imported-text-field-backdrop-height-slim);
 }
 
 .root:active:not(:disabled) .backdrop {

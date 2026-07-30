@@ -3071,7 +3071,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
 /** The conditional minted-variable preamble (see FigmaScriptCtx.mintedTokens).
  *  Returns '' when the tree is absent/empty, so contracts without a minted
  *  layer emit byte-identical scripts — the golden guard's invariant. */
-function mintedPreamble(mintedTokens?: Record<string, unknown>): string {
+function mintedPreamble(
+  mintedTokens?: Record<string, unknown>,
+  resolveLiteral?: (dotPath: string) => unknown,
+): string {
   const minted = mintedTokens ? flatten(mintedTokens) : null;
   if (!minted || minted.size === 0) return '';
   // Shadow-typed leaves (box-shadow values, dump v1.2) and gradient-typed
@@ -3079,12 +3082,36 @@ function mintedPreamble(mintedTokens?: Record<string, unknown>): string {
   // skipped here; the limit is NAMED at proposal.
   const vars = [...minted]
     .filter(([, entry]) => entry.type !== 'shadow' && entry.type !== 'gradient')
-    .map(([p, entry]) => ({
-      name: figmaName(p),
-      type: figmaType(entry),
-      value: figmaValue(entry),
-    }));
+    .map(([p, entry]) => {
+      // task #26: a SOURCE-ALIASED minted leaf carries `{p.font-weight-medium}`,
+      // not a literal — px() on the raw ref was the crash class this round
+      // exposed (MUI's aliases never reached this path: the CLI `figma` verb
+      // emits no provisional preamble; only the generate.ts provisional path
+      // does). The provisional upsert becomes a NATIVE VARIABLE ALIAS to the
+      // real token variable when the origin file carries it (polaris's
+      // 00-tokens script upserts the full base set), and falls back to the
+      // resolved literal otherwise (the headless compile receipt runs each
+      // script in an EMPTY file, where the target does not exist).
+      const target = aliasTarget(entry.value);
+      if (target) {
+        const resolved = resolveLiteral?.(target);
+        if (resolved === undefined) {
+          throw new Error(
+            `minted alias {${target}} does not resolve in the token corpus — the provisional preamble has no literal fallback to embed`,
+          );
+        }
+        const rEntry = { ...entry, value: String(resolved) };
+        return {
+          name: figmaName(p),
+          type: figmaType(rEntry),
+          value: figmaValue(rEntry),
+          alias: target.split('.').join('/'),
+        };
+      }
+      return { name: figmaName(p), type: figmaType(entry), value: figmaValue(entry) };
+    });
   if (vars.length === 0) return '';
+  const hasAlias = vars.some((v) => 'alias' in v);
   return `// ---------------------------------------------------------------------------
 // PROVISIONAL VARIABLES — minted from resolved values by a degraded import.
 // This contract binds ${vars.length} provisional token(s) whose real variable names were
@@ -3112,13 +3139,26 @@ const MINTED_VARIABLES = ${JSON.stringify(vars)};
   let col = cols.find((c) => c.name === 'Imported (provisional)');
   if (!col) col = figma.variables.createVariableCollection('Imported (provisional)');
   const modeId = col.modes[0].modeId;
-  const byName = {};
+  const byName = {};${hasAlias ? `
+  // Source-aliased leaves (task #26): when the origin file already carries the
+  // REAL token variable (p/font-weight-medium — polaris's 00-tokens script
+  // upserts the full set), the provisional variable aliases it natively, so it
+  // inherits mode values instead of freezing a literal. In a file without the
+  // target (the headless compile receipt runs in an empty file) the embedded
+  // resolved literal is the named fallback.
+  const allByName = {};` : ''}
   for (const v of await figma.variables.getLocalVariablesAsync()) {
-    if (v.variableCollectionId === col.id) byName[v.name] = v;
+    if (v.variableCollectionId === col.id) byName[v.name] = v;${hasAlias ? `
+    allByName[v.name] = v;` : ''}
   }
   for (const t of MINTED_VARIABLES) {
     let v = byName[t.name];
-    if (!v) { v = figma.variables.createVariable(t.name, col, t.type); byName[t.name] = v; }
+    if (!v) { v = figma.variables.createVariable(t.name, col, t.type); byName[t.name] = v; }${hasAlias ? `
+    const aliasTarget = t.alias ? allByName[t.alias] : null;
+    if (aliasTarget && aliasTarget.id !== v.id) {
+      v.setValueForMode(modeId, { type: 'VARIABLE_ALIAS', id: aliasTarget.id });
+      continue;
+    }` : ''}
     v.setValueForMode(modeId, t.type === 'COLOR' ? hexToRgb(t.value) : t.value);
   }
 }
@@ -3658,7 +3698,7 @@ function buildComponentScript(
 // Source of truth: contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json (${contract.id} v${contract.version})
 // Amend-capable (#60): an existing component (set) carrying our identity
 // marker is reconciled IN PLACE (same node id + key); unchanged specs skip.`,
-    preamble: mintedPreamble(mintedTokens),
+    preamble: mintedPreamble(mintedTokens, resolveLiteral),
   });
 }
 

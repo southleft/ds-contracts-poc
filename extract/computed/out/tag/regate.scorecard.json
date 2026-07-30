@@ -2,7 +2,7 @@
   "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
   "component": "Tag",
   "config": "extract/computed/configs/polaris.json",
-  "capturedBrowser": "Chromium 148.0.7778.96 (playwright-core, headless)",
+  "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -201,14 +201,14 @@
   "scorecard": {
     "component": "Tag",
     "generatedBy": "extract/computed/gate.ts",
-    "browser": "Chromium 148.0.7778.96 (playwright-core, headless)",
+    "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 32,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 7353,
-      "cellsEqual": 5950,
-      "pctEqual": 80.91935264517883,
+      "cellsCompared": 7401,
+      "cellsEqual": 5996,
+      "pctEqual": 81.01607890825564,
       "rowsFullyEqual": 0,
       "rows": 128
     },
@@ -233,17 +233,17 @@
       "mintedLeaves": 66,
       "mintedLeavesUnfolded": 64,
       "baseBindings": 97,
-      "stateBindings": 19,
-      "codeOnlyChannels": 93,
+      "stateBindings": 20,
+      "codeOnlyChannels": 96,
       "overflowBindings": 13,
-      "folds": 81
+      "folds": 90
     },
     "worstRows": [
       {
         "key": "large.on.off.off.enabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 26,
+        "channelsMismatched": 27,
         "unscorable": "no-original"
       },
       {
@@ -423,6 +423,7 @@
       "code-only[disabled]: label.cursor — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
       "code-only[disabled]: label.outline-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: label.pointer-events — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[disabled]: label.row-rule-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: label.text-decoration-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: label.text-emphasis-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: part-1.border-bottom-color — default-state values not kind-compatible for padding — cannot correlate",
@@ -433,6 +434,7 @@
       "code-only[disabled]: part-1.color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: part-1.column-rule-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: part-1.outline-color — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[disabled]: part-1.row-rule-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: part-1.text-decoration-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: part-1.text-emphasis-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: root.cursor — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
@@ -447,6 +449,7 @@
       "code-only[disabled]: text.cursor — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
       "code-only[disabled]: text.outline-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: text.pointer-events — declared-channel state delta on 8/16 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[disabled]: text.row-rule-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: text.text-decoration-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[disabled]: text.text-emphasis-color — default-state values not kind-compatible for padding — cannot correlate",
       "code-only[focus-visible]: button-2.background-color — default-state values not kind-compatible for padding — cannot correlate",
@@ -476,13 +479,43 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 947,
+      "leavesAdded": 1251,
       "divergent": [
         {
-          "token": "imported.tag.button.left",
-          "fresh": "53.9219px",
-          "shipped": "(group)",
-          "resolvedEqual": false
+          "token": "imported.tag.button.background-color.off",
+          "fresh": "#e3e3e3",
+          "shipped": "{p.color-bg-fill-tertiary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.button.background-color.on",
+          "fresh": "#d4d4d4",
+          "shipped": "{p.color-bg-fill-tertiary-hover}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.link.color",
+          "fresh": "#303030",
+          "shipped": "{p.color-text}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.root.background-color-state-active.off.off.off",
+          "fresh": "#e3e3e3",
+          "shipped": "{p.color-bg-fill-tertiary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.root.background-color-state-active.on.off.off",
+          "fresh": "#e3e3e3",
+          "shipped": "{p.color-bg-fill-tertiary}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.tag.root.background-color-state-hover.off.off",
+          "fresh": "#e3e3e3",
+          "shipped": "{p.color-bg-fill-tertiary}",
+          "resolvedEqual": true
         }
       ]
     },
@@ -913,8 +946,8 @@
       },
       {
         "key": "none.off.off.on.enabled__default",
-        "channelsCompared": 63,
-        "channelsEqual": 60,
+        "channelsCompared": 64,
+        "channelsEqual": 61,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -942,8 +975,8 @@
       },
       {
         "key": "none.off.off.on.enabled__hover",
-        "channelsCompared": 63,
-        "channelsEqual": 57,
+        "channelsCompared": 64,
+        "channelsEqual": 58,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -989,8 +1022,8 @@
       },
       {
         "key": "none.off.off.on.enabled__focus-visible",
-        "channelsCompared": 63,
-        "channelsEqual": 58,
+        "channelsCompared": 64,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1030,8 +1063,8 @@
       },
       {
         "key": "none.off.off.on.enabled__active",
-        "channelsCompared": 63,
-        "channelsEqual": 57,
+        "channelsCompared": 64,
+        "channelsEqual": 58,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2473,8 +2506,8 @@
       },
       {
         "key": "none.on.off.off.enabled__default",
-        "channelsCompared": 86,
-        "channelsEqual": 75,
+        "channelsCompared": 87,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2550,8 +2583,8 @@
       },
       {
         "key": "none.on.off.off.enabled__hover",
-        "channelsCompared": 86,
-        "channelsEqual": 75,
+        "channelsCompared": 87,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2627,7 +2660,7 @@
       },
       {
         "key": "none.on.off.off.enabled__focus-visible",
-        "channelsCompared": 86,
+        "channelsCompared": 87,
         "channelsEqual": 68,
         "pctExact": null,
         "pctAA": null,
@@ -2731,6 +2764,12 @@
           },
           {
             "part": "button-2",
+            "channel": "row-rule-color",
+            "ours": "rgba(138, 138, 138, 1)",
+            "theirs": "rgba(48, 48, 48, 1)"
+          },
+          {
+            "part": "button-2",
             "channel": "text-decoration-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(48, 48, 48, 1)"
@@ -2746,8 +2785,8 @@
       },
       {
         "key": "none.on.off.off.enabled__active",
-        "channelsCompared": 86,
-        "channelsEqual": 75,
+        "channelsCompared": 87,
+        "channelsEqual": 76,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2823,8 +2862,8 @@
       },
       {
         "key": "none.on.off.off.disabled__default",
-        "channelsCompared": 86,
-        "channelsEqual": 72,
+        "channelsCompared": 87,
+        "channelsEqual": 73,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2918,8 +2957,8 @@
       },
       {
         "key": "none.on.off.off.disabled__hover",
-        "channelsCompared": 86,
-        "channelsEqual": 72,
+        "channelsCompared": 87,
+        "channelsEqual": 73,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3013,8 +3052,8 @@
       },
       {
         "key": "none.on.off.off.disabled__focus-visible",
-        "channelsCompared": 86,
-        "channelsEqual": 71,
+        "channelsCompared": 87,
+        "channelsEqual": 72,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3114,8 +3153,8 @@
       },
       {
         "key": "none.on.off.off.disabled__active",
-        "channelsCompared": 86,
-        "channelsEqual": 72,
+        "channelsCompared": 87,
+        "channelsEqual": 73,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3209,8 +3248,8 @@
       },
       {
         "key": "none.on.off.on.enabled__default",
-        "channelsCompared": 104,
-        "channelsEqual": 96,
+        "channelsCompared": 106,
+        "channelsEqual": 98,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3268,8 +3307,8 @@
       },
       {
         "key": "none.on.off.on.enabled__hover",
-        "channelsCompared": 104,
-        "channelsEqual": 92,
+        "channelsCompared": 106,
+        "channelsEqual": 94,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3351,8 +3390,8 @@
       },
       {
         "key": "none.on.off.on.enabled__focus-visible",
-        "channelsCompared": 104,
-        "channelsEqual": 93,
+        "channelsCompared": 106,
+        "channelsEqual": 95,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3428,8 +3467,8 @@
       },
       {
         "key": "none.on.off.on.enabled__active",
-        "channelsCompared": 104,
-        "channelsEqual": 92,
+        "channelsCompared": 106,
+        "channelsEqual": 94,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3511,8 +3550,8 @@
       },
       {
         "key": "none.on.off.on.disabled__default",
-        "channelsCompared": 86,
-        "channelsEqual": 71,
+        "channelsCompared": 87,
+        "channelsEqual": 72,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3612,8 +3651,8 @@
       },
       {
         "key": "none.on.off.on.disabled__hover",
-        "channelsCompared": 86,
-        "channelsEqual": 71,
+        "channelsCompared": 87,
+        "channelsEqual": 72,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3713,8 +3752,8 @@
       },
       {
         "key": "none.on.off.on.disabled__focus-visible",
-        "channelsCompared": 86,
-        "channelsEqual": 70,
+        "channelsCompared": 87,
+        "channelsEqual": 71,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3820,8 +3859,8 @@
       },
       {
         "key": "none.on.off.on.disabled__active",
-        "channelsCompared": 86,
-        "channelsEqual": 71,
+        "channelsCompared": 87,
+        "channelsEqual": 72,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5577,8 +5616,8 @@
       },
       {
         "key": "large.off.off.on.enabled__default",
-        "channelsCompared": 63,
-        "channelsEqual": 60,
+        "channelsCompared": 64,
+        "channelsEqual": 61,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5606,8 +5645,8 @@
       },
       {
         "key": "large.off.off.on.enabled__hover",
-        "channelsCompared": 63,
-        "channelsEqual": 57,
+        "channelsCompared": 64,
+        "channelsEqual": 58,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5653,8 +5692,8 @@
       },
       {
         "key": "large.off.off.on.enabled__focus-visible",
-        "channelsCompared": 63,
-        "channelsEqual": 58,
+        "channelsCompared": 64,
+        "channelsEqual": 59,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5694,8 +5733,8 @@
       },
       {
         "key": "large.off.off.on.enabled__active",
-        "channelsCompared": 63,
-        "channelsEqual": 57,
+        "channelsCompared": 64,
+        "channelsEqual": 58,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7281,8 +7320,8 @@
       },
       {
         "key": "large.on.off.off.enabled__default",
-        "channelsCompared": 85,
-        "channelsEqual": 74,
+        "channelsCompared": 86,
+        "channelsEqual": 75,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7358,8 +7397,8 @@
       },
       {
         "key": "large.on.off.off.enabled__hover",
-        "channelsCompared": 86,
-        "channelsEqual": 66,
+        "channelsCompared": 87,
+        "channelsEqual": 67,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7489,7 +7528,7 @@
       },
       {
         "key": "large.on.off.off.enabled__focus-visible",
-        "channelsCompared": 86,
+        "channelsCompared": 87,
         "channelsEqual": 60,
         "pctExact": null,
         "pctAA": null,
@@ -7635,6 +7674,12 @@
           },
           {
             "part": "button-2",
+            "channel": "row-rule-color",
+            "ours": "rgba(138, 138, 138, 1)",
+            "theirs": "rgba(74, 74, 74, 1)"
+          },
+          {
+            "part": "button-2",
             "channel": "text-decoration-color",
             "ours": "rgba(138, 138, 138, 1)",
             "theirs": "rgba(74, 74, 74, 1)"
@@ -7656,8 +7701,8 @@
       },
       {
         "key": "large.on.off.off.enabled__active",
-        "channelsCompared": 86,
-        "channelsEqual": 66,
+        "channelsCompared": 87,
+        "channelsEqual": 67,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7787,8 +7832,8 @@
       },
       {
         "key": "large.on.off.off.disabled__default",
-        "channelsCompared": 85,
-        "channelsEqual": 71,
+        "channelsCompared": 86,
+        "channelsEqual": 72,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7882,8 +7927,8 @@
       },
       {
         "key": "large.on.off.off.disabled__hover",
-        "channelsCompared": 86,
-        "channelsEqual": 63,
+        "channelsCompared": 87,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8031,8 +8076,8 @@
       },
       {
         "key": "large.on.off.off.disabled__focus-visible",
-        "channelsCompared": 85,
-        "channelsEqual": 71,
+        "channelsCompared": 86,
+        "channelsEqual": 72,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8126,8 +8171,8 @@
       },
       {
         "key": "large.on.off.off.disabled__active",
-        "channelsCompared": 86,
-        "channelsEqual": 63,
+        "channelsCompared": 87,
+        "channelsEqual": 64,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8275,8 +8320,8 @@
       },
       {
         "key": "large.on.off.on.enabled__default",
-        "channelsCompared": 103,
-        "channelsEqual": 95,
+        "channelsCompared": 105,
+        "channelsEqual": 97,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8334,8 +8379,8 @@
       },
       {
         "key": "large.on.off.on.enabled__hover",
-        "channelsCompared": 104,
-        "channelsEqual": 84,
+        "channelsCompared": 106,
+        "channelsEqual": 86,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8465,8 +8510,8 @@
       },
       {
         "key": "large.on.off.on.enabled__focus-visible",
-        "channelsCompared": 103,
-        "channelsEqual": 93,
+        "channelsCompared": 105,
+        "channelsEqual": 95,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8536,8 +8581,8 @@
       },
       {
         "key": "large.on.off.on.enabled__active",
-        "channelsCompared": 104,
-        "channelsEqual": 84,
+        "channelsCompared": 106,
+        "channelsEqual": 86,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8667,8 +8712,8 @@
       },
       {
         "key": "large.on.off.on.disabled__default",
-        "channelsCompared": 85,
-        "channelsEqual": 70,
+        "channelsCompared": 86,
+        "channelsEqual": 71,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8768,8 +8813,8 @@
       },
       {
         "key": "large.on.off.on.disabled__hover",
-        "channelsCompared": 86,
-        "channelsEqual": 62,
+        "channelsCompared": 87,
+        "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8923,8 +8968,8 @@
       },
       {
         "key": "large.on.off.on.disabled__focus-visible",
-        "channelsCompared": 85,
-        "channelsEqual": 70,
+        "channelsCompared": 86,
+        "channelsEqual": 71,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9024,8 +9069,8 @@
       },
       {
         "key": "large.on.off.on.disabled__active",
-        "channelsCompared": 86,
-        "channelsEqual": 62,
+        "channelsCompared": 87,
+        "channelsEqual": 63,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

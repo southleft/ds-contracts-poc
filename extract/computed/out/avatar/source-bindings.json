@@ -1,0 +1,506 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Avatar",
+  "varPrefix": "--p-",
+  "facts": [
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "xs.off",
+      "axisValues": {
+        "size": "xs",
+        "withInitials": "off"
+      },
+      "token": "p.color-avatar-one-text-on-bg-fill",
+      "varName": "--p-color-avatar-one-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleOne svg, .Polaris-Avatar--styleOne text"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "xs.on",
+      "axisValues": {
+        "size": "xs",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive svg, .Polaris-Avatar--styleFive text"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "sm.off",
+      "axisValues": {
+        "size": "sm",
+        "withInitials": "off"
+      },
+      "token": "p.color-avatar-one-text-on-bg-fill",
+      "varName": "--p-color-avatar-one-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleOne svg, .Polaris-Avatar--styleOne text"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "sm.on",
+      "axisValues": {
+        "size": "sm",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive svg, .Polaris-Avatar--styleFive text"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "md.off",
+      "axisValues": {
+        "size": "md",
+        "withInitials": "off"
+      },
+      "token": "p.color-avatar-one-text-on-bg-fill",
+      "varName": "--p-color-avatar-one-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleOne svg, .Polaris-Avatar--styleOne text"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "md.on",
+      "axisValues": {
+        "size": "md",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive svg, .Polaris-Avatar--styleFive text"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "lg.off",
+      "axisValues": {
+        "size": "lg",
+        "withInitials": "off"
+      },
+      "token": "p.color-avatar-one-text-on-bg-fill",
+      "varName": "--p-color-avatar-one-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleOne svg, .Polaris-Avatar--styleOne text"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "lg.on",
+      "axisValues": {
+        "size": "lg",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive svg, .Polaris-Avatar--styleFive text"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "xl.off",
+      "axisValues": {
+        "size": "xl",
+        "withInitials": "off"
+      },
+      "token": "p.color-avatar-one-text-on-bg-fill",
+      "varName": "--p-color-avatar-one-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleOne svg, .Polaris-Avatar--styleOne text"
+      }
+    },
+    {
+      "part": "icon",
+      "channel": "color",
+      "combo": "xl.on",
+      "axisValues": {
+        "size": "xl",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive svg, .Polaris-Avatar--styleFive text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "xs.on",
+      "axisValues": {
+        "size": "xs",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive svg, .Polaris-Avatar--styleFive text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "sm.on",
+      "axisValues": {
+        "size": "sm",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive svg, .Polaris-Avatar--styleFive text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "md.on",
+      "axisValues": {
+        "size": "md",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive svg, .Polaris-Avatar--styleFive text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "lg.on",
+      "axisValues": {
+        "size": "lg",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive svg, .Polaris-Avatar--styleFive text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "xl.on",
+      "axisValues": {
+        "size": "xl",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive svg, .Polaris-Avatar--styleFive text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "xs.on",
+      "axisValues": {
+        "size": "xs",
+        "withInitials": "on"
+      },
+      "token": "p.font-size-400",
+      "varName": "--p-font-size-400",
+      "anchor": {
+        "selector": ".Polaris-Avatar__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "sm.on",
+      "axisValues": {
+        "size": "sm",
+        "withInitials": "on"
+      },
+      "token": "p.font-size-400",
+      "varName": "--p-font-size-400",
+      "anchor": {
+        "selector": ".Polaris-Avatar__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "md.on",
+      "axisValues": {
+        "size": "md",
+        "withInitials": "on"
+      },
+      "token": "p.font-size-400",
+      "varName": "--p-font-size-400",
+      "anchor": {
+        "selector": ".Polaris-Avatar__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "lg.on",
+      "axisValues": {
+        "size": "lg",
+        "withInitials": "on"
+      },
+      "token": "p.font-size-400",
+      "varName": "--p-font-size-400",
+      "anchor": {
+        "selector": ".Polaris-Avatar__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "xl.on",
+      "axisValues": {
+        "size": "xl",
+        "withInitials": "on"
+      },
+      "token": "p.font-size-400",
+      "varName": "--p-font-size-400",
+      "anchor": {
+        "selector": ".Polaris-Avatar__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "xs.on",
+      "axisValues": {
+        "size": "xs",
+        "withInitials": "on"
+      },
+      "token": "p.font-weight-regular",
+      "varName": "--p-font-weight-regular",
+      "anchor": {
+        "selector": ".Polaris-Avatar__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "sm.on",
+      "axisValues": {
+        "size": "sm",
+        "withInitials": "on"
+      },
+      "token": "p.font-weight-regular",
+      "varName": "--p-font-weight-regular",
+      "anchor": {
+        "selector": ".Polaris-Avatar__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "md.on",
+      "axisValues": {
+        "size": "md",
+        "withInitials": "on"
+      },
+      "token": "p.font-weight-regular",
+      "varName": "--p-font-weight-regular",
+      "anchor": {
+        "selector": ".Polaris-Avatar__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "lg.on",
+      "axisValues": {
+        "size": "lg",
+        "withInitials": "on"
+      },
+      "token": "p.font-weight-regular",
+      "varName": "--p-font-weight-regular",
+      "anchor": {
+        "selector": ".Polaris-Avatar__Text"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "xl.on",
+      "axisValues": {
+        "size": "xl",
+        "withInitials": "on"
+      },
+      "token": "p.font-weight-regular",
+      "varName": "--p-font-weight-regular",
+      "anchor": {
+        "selector": ".Polaris-Avatar__Text"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "xs.off",
+      "axisValues": {
+        "size": "xs",
+        "withInitials": "off"
+      },
+      "token": "p.color-avatar-one-text-on-bg-fill",
+      "varName": "--p-color-avatar-one-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleOne"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "xs.on",
+      "axisValues": {
+        "size": "xs",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "sm.off",
+      "axisValues": {
+        "size": "sm",
+        "withInitials": "off"
+      },
+      "token": "p.color-avatar-one-text-on-bg-fill",
+      "varName": "--p-color-avatar-one-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleOne"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "sm.on",
+      "axisValues": {
+        "size": "sm",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "md.off",
+      "axisValues": {
+        "size": "md",
+        "withInitials": "off"
+      },
+      "token": "p.color-avatar-one-text-on-bg-fill",
+      "varName": "--p-color-avatar-one-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleOne"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "md.on",
+      "axisValues": {
+        "size": "md",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "lg.off",
+      "axisValues": {
+        "size": "lg",
+        "withInitials": "off"
+      },
+      "token": "p.color-avatar-one-text-on-bg-fill",
+      "varName": "--p-color-avatar-one-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleOne"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "lg.on",
+      "axisValues": {
+        "size": "lg",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "xl.off",
+      "axisValues": {
+        "size": "xl",
+        "withInitials": "off"
+      },
+      "token": "p.color-avatar-one-text-on-bg-fill",
+      "varName": "--p-color-avatar-one-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleOne"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "xl.on",
+      "axisValues": {
+        "size": "xl",
+        "withInitials": "on"
+      },
+      "token": "p.color-avatar-five-text-on-bg-fill",
+      "varName": "--p-color-avatar-five-text-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Avatar--styleFive"
+      }
+    }
+  ],
+  "skips": [],
+  "shorthandCeiling": 3,
+  "shorthandSkips": [
+    "root.background: SHORTHAND carrying var(--p-color-avatar-five-bg-fill) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.background: SHORTHAND carrying var(--p-color-avatar-one-bg-fill) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "root.border: SHORTHAND carrying var(--p-border-width-025) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0
+}

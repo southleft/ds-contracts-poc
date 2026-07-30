@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "polaris.text-field",
   "name": "TextField",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/TextField/TextField.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.3.2 (extract/computed rounds 4 + 5c + 5d): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, contradictions resolved computed-wins per the decisions ledger (extract/computed/out/textfield/decisions.md, human-acked; source resolved.contract.json). Round 5c promotion lifts: complement-of-product presence (a default subtree an alternative replaces carries an ordered hide/restore stylesWhen cascade, verified per combo), root-hosted svg plans, authored-viewBox unification across per-size glyph captures, carried-channel re-mint when a defaultless axis contests the reviewed carriage (S2 maps with the unset base), curated shape geometry re-derived from the captured computed box, and drawn pseudo-element decor boxes carried as shape parts (S5 v1). Round 5d lifts (owner visual review): svg dash channels are DROPPED with a named receipt — they are pathLength-relative and pathLength is not a computed style, so the settled draw-on stroke carries as the continuous resting glyph (the Checkbox check); and a carried CSS SHORTHAND covers every constituent longhand in fusion coverage (border-radius all four corners, border-width/-color all four sides, gap both gaps) — the minted sibling longhands that overrode semantic bindings (Badge radius corners as imported.shared.size-8 over {p.border-radius-200}) are retired. Everything the vocabulary cannot carry is named in contracts/text-field.extension.json. Delta ledger: extract/computed/out/textfield/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md).",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/TextField/TextField.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
   "semantics": {
     "element": "div"
   },
@@ -680,7 +680,8 @@
                   "tokens": {
                     "flex-grow": "{imported.shared.num-1}",
                     "min-height": "{imported.shared.size-0}",
-                    "min-width": "{imported.shared.size-0}"
+                    "min-width": "{imported.shared.size-0}",
+                    "width": "{imported.text-field.label-text.width}"
                   },
                   "states": {
                     "disabled": {
@@ -688,6 +689,9 @@
                     }
                   }
                 }
+              },
+              "tokens": {
+                "width": "{imported.text-field.label.width}"
               },
               "states": {
                 "disabled": {
@@ -789,6 +793,7 @@
                         "margin-right": "{imported.text-field.prefix.margin-right}",
                         "right": "{imported.shared.size-0}",
                         "top": "{imported.shared.size-0}",
+                        "width": "{imported.text-field.prefix.width}",
                         "z-index": "{imported.shared.num-20}"
                       }
                     },
@@ -827,6 +832,17 @@
                           "map": {
                             "slim": {
                               "padding-block": "{p.space-050}"
+                            }
+                          }
+                        },
+                        {
+                          "prop": "size",
+                          "map": {
+                            "medium": {
+                              "height": "{imported.text-field.input.height.medium}"
+                            },
+                            "slim": {
+                              "height": "{imported.text-field.input.height.slim}"
                             }
                           }
                         }
@@ -913,105 +929,36 @@
                         "margin-right": "{imported.shared.size-12}",
                         "right": "{imported.shared.size-0}",
                         "top": "{imported.shared.size-0}",
+                        "width": "{imported.text-field.suffix.width}",
                         "z-index": "{imported.shared.num-20}"
                       }
                     },
-                    "clearbutton": {
+                    "clearbutton-2": {
                       "element": "button",
-                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|TextField__ClearButton — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy button|TextField__ClearButton|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
-                        "display": "block",
-                        "position": "absolute",
+                        "display": "none",
                         "appearance": "none",
                         "border-bottom-style": "none",
                         "border-left-style": "none",
                         "border-right-style": "none",
                         "border-top-style": "none",
                         "cursor": "pointer",
+                        "position": "absolute",
                         "transition-delay": "0s, 0s",
                         "transition-duration": "0.1s, 0.1s",
                         "transition-property": "visibility, opacity",
                         "transition-timing-function": "cubic-bezier(0.19, 0.91, 0.38, 1), cubic-bezier(0.19, 0.91, 0.38, 1)"
                       },
-                      "visibleWhen": {
-                        "prop": "clearButton"
-                      },
-                      "stylesWhen": [
-                        {
-                          "prop": "disabled",
-                          "styles": {
-                            "display": "none"
-                          }
-                        }
-                      ],
-                      "parts": {
-                        "label-5": {
-                          "text": "Clear",
-                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Text|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
-                          "declared": {
-                            "display": "none",
-                            "cursor": "pointer",
-                            "font-feature-settings": "normal",
-                            "overflow-x": "hidden",
-                            "overflow-y": "hidden",
-                            "position": "absolute",
-                            "text-align": "center",
-                            "text-rendering": "auto",
-                            "text-wrap-mode": "nowrap"
-                          },
-                          "tokens": {
-                            "bottom": "{imported.text-field.label-5.bottom}",
-                            "font-weight": "{imported.text-field.label-5.font-weight}",
-                            "left": "{imported.text-field.label-5.left}",
-                            "min-height": "{imported.shared.size-0}",
-                            "min-width": "{imported.shared.size-0}",
-                            "right": "{imported.text-field.label-5.right}",
-                            "top": "{imported.shared.size-0}"
-                          }
-                        },
-                        "icon": {
-                          "element": "span",
-                          "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
-                          "declared": {
-                            "display": "block",
-                            "cursor": "pointer",
-                            "font-feature-settings": "normal",
-                            "max-height": "100%",
-                            "max-width": "100%",
-                            "text-align": "center",
-                            "text-rendering": "auto"
-                          },
-                          "visibleWhen": {
-                            "prop": "clearButton"
-                          },
-                          "stylesWhen": [
-                            {
-                              "prop": "disabled",
-                              "styles": {
-                                "display": "none"
-                              }
-                            }
-                          ],
-                          "icon": {
-                            "asset": "text-field-icon",
-                            "size": 20
-                          },
-                          "tokens": {
-                            "color": "{imported.text-field.icon.color}",
-                            "font-weight": "{imported.text-field.icon.font-weight}",
-                            "min-height": "{imported.shared.size-0}",
-                            "min-width": "{imported.shared.size-0}"
-                          }
-                        }
-                      },
                       "tokens": {
-                        "background-color": "{imported.text-field.clearbutton.background-color}",
+                        "background-color": "{imported.text-field.clearbutton-2.background-color}",
                         "border-bottom-width": "{imported.shared.size-0}",
                         "border-left-width": "{imported.shared.size-0}",
                         "border-right-width": "{imported.shared.size-0}",
                         "border-top-width": "{imported.shared.size-0}",
-                        "color": "{imported.text-field.clearbutton.color}",
+                        "color": "{imported.text-field.clearbutton-2.color}",
                         "font-size": "{imported.shared.size-13}",
+                        "height": "{imported.shared.size-20}",
                         "line-height": "{imported.shared.size-20}",
                         "margin-left": "{imported.shared.size-4}",
                         "margin-right": "{imported.shared.size-12}",
@@ -1023,6 +970,7 @@
                         "padding-right": "{imported.shared.size-0}",
                         "padding-top": "{imported.shared.size-0}",
                         "right": "{imported.shared.size-0}",
+                        "width": "{imported.shared.size-20}",
                         "z-index": "{imported.shared.num-20}"
                       },
                       "tokensByProp": [
@@ -1030,12 +978,12 @@
                           "prop": "size",
                           "map": {
                             "medium": {
-                              "bottom": "{imported.text-field.clearbutton.bottom.medium}",
-                              "top": "{imported.text-field.clearbutton.top.medium}"
+                              "bottom": "{imported.text-field.clearbutton-2.bottom.medium}",
+                              "top": "{imported.text-field.clearbutton-2.top.medium}"
                             },
                             "slim": {
-                              "bottom": "{imported.text-field.clearbutton.bottom.slim}",
-                              "top": "{imported.text-field.clearbutton.top.slim}"
+                              "bottom": "{imported.text-field.clearbutton-2.bottom.slim}",
+                              "top": "{imported.text-field.clearbutton-2.top.slim}"
                             }
                           }
                         }
@@ -1070,6 +1018,17 @@
                           "map": {
                             "slim": {
                               "padding-block": "{p.space-050}"
+                            }
+                          }
+                        },
+                        {
+                          "prop": "size",
+                          "map": {
+                            "medium": {
+                              "height": "{imported.text-field.backdrop.height.medium}"
+                            },
+                            "slim": {
+                              "height": "{imported.text-field.backdrop.height.slim}"
                             }
                           }
                         }
@@ -1132,7 +1091,20 @@
                     "disabled": {
                       "color": "{imported.shared.color-b5b5b5}"
                     }
-                  }
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "medium": {
+                          "height": "{imported.text-field.textfield.height.medium}"
+                        },
+                        "slim": {
+                          "height": "{imported.text-field.textfield.height.slim}"
+                        }
+                      }
+                    }
+                  ]
                 }
               },
               "tokens": {
@@ -1142,7 +1114,20 @@
                 "right": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}",
                 "z-index": "{imported.shared.num-20}"
-              }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "medium": {
+                      "height": "{imported.text-field.connected-item.height.medium}"
+                    },
+                    "slim": {
+                      "height": "{imported.text-field.connected-item.height.slim}"
+                    }
+                  }
+                }
+              ]
             }
           },
           "declared": {
@@ -1155,9 +1140,35 @@
             "min-width": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "medium": {
+                  "height": "{imported.text-field.connected.height.medium}"
+                },
+                "slim": {
+                  "height": "{imported.text-field.connected.height.slim}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "medium": {
+              "height": "{imported.text-field.root.height.medium}"
+            },
+            "slim": {
+              "height": "{imported.text-field.root.height.slim}"
+            }
           }
         }
-      }
+      ]
     }
   },
   "anchors": {

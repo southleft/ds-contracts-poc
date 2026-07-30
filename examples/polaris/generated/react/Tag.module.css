@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/tag.contract.json (polaris.tag v0.3.2)
+ * Source of truth: contracts/tag.contract.json (polaris.tag v0.4.0)
  * Regenerate with: npm run generate
  */
 
@@ -11,11 +11,13 @@
   color: var(--p-color-text);
   border-radius: var(--p-border-radius-200);
   bottom: var(--imported-shared-size-0);
+  height: var(--imported-tag-root-height-none);
   left: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
   padding-left: 6px;
   padding-right: 6px;
+  width: 71.9219px;
   max-width: 100%;
   position: relative;
 }
@@ -26,9 +28,11 @@
 }
 
 .size-large {
+  height: var(--imported-tag-root-height-large);
   min-height: 24px;
   padding-left: 8px;
   padding-right: 8px;
+  width: 75.9219px;
 }
 
 .root:active:not(:disabled) {
@@ -72,6 +76,10 @@
 }
 
 .root:disabled {
+  row-rule-color: var(--imported-shared-color-b5b5b5);
+}
+
+.root:disabled {
   text-decoration-color: var(--imported-shared-color-b5b5b5);
 }
 
@@ -93,17 +101,20 @@
 
 .link {
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
   border-bottom-left-radius: var(--imported-shared-size-8);
   border-bottom-right-radius: var(--imported-shared-size-8);
   border-top-left-radius: var(--imported-shared-size-8);
   border-top-right-radius: var(--imported-shared-size-8);
   bottom: var(--imported-shared-size-0);
   color: var(--imported-tag-link-color);
-  grid-template-columns: var(--imported-tag-link-grid-template-columns);
+  grid-template-columns: var(--imported-shared-size-59-9219);
   grid-template-rows: var(--imported-shared-size-20);
   left: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-59-9219);
   position: relative;
   text-decoration-line: none;
 }
@@ -120,6 +131,7 @@
   display: flex;
   font-size: var(--imported-shared-size-12);
   line-height: var(--imported-tag-text-2-line-height);
+  width: var(--imported-shared-size-59-9219);
   display: block;
   cursor: pointer;
   overflow-x: hidden;
@@ -159,6 +171,7 @@
   display: flex;
   font-size: var(--imported-shared-size-12);
   line-height: var(--imported-tag-text-line-height);
+  width: var(--imported-shared-size-59-9219);
   display: block;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -202,6 +215,8 @@
 }
 
 .part-1 {
+  height: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-0);
   display: none;
 }
 
@@ -218,7 +233,6 @@
 }
 
 .button {
-  display: flex;
   border-bottom-left-radius: var(--imported-shared-size-7);
   border-bottom-right-radius: var(--imported-shared-size-7);
   border-bottom-width: var(--imported-shared-size-0);
@@ -227,85 +241,98 @@
   border-top-left-radius: var(--imported-shared-size-7);
   border-top-right-radius: var(--imported-shared-size-7);
   border-top-width: var(--imported-shared-size-0);
-  bottom: var(--imported-tag-button-bottom-none);
-  color: var(--imported-tag-button-color);
-  flex-shrink: var(--imported-tag-button-flex-shrink);
+  bottom: var(--imported-shared-size-2);
+  color: var(--imported-shared-color-8a8a8a);
+  flex-shrink: var(--imported-shared-num-0);
   font-size: var(--imported-tag-button-font-size);
-  left: var(--imported-tag-button-left-none);
+  height: var(--imported-shared-size-20);
+  left: var(--imported-tag-button-left);
   line-height: var(--imported-shared-size-20);
-  margin-bottom: var(--imported-tag-button-margin-bottom-none);
-  margin-left: var(--imported-tag-button-margin-left-none);
-  margin-right: var(--imported-tag-button-margin-right-none);
-  margin-top: var(--imported-tag-button-margin-top-none);
-  opacity: var(--imported-tag-button-opacity-none);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  opacity: var(--imported-shared-num-0);
   padding-bottom: var(--imported-shared-size-0);
   padding-left: var(--imported-shared-size-0);
   padding-right: var(--imported-shared-size-0);
   padding-top: var(--imported-shared-size-0);
-  right: var(--imported-tag-button-right-none);
-  top: var(--imported-tag-button-top-none);
-  display: block;
-  aspect-ratio: 1 / 1;
+  right: var(--imported-shared-size-2);
+  top: var(--imported-shared-size-2);
+  width: var(--imported-shared-size-20);
+  display: none;
   appearance: none;
   border-bottom-style: none;
   border-left-style: none;
   border-right-style: none;
   border-top-style: none;
   cursor: pointer;
+  position: absolute;
 }
 
-.size-large .button {
-  bottom: var(--imported-tag-button-bottom-large);
-}
-
-.size-large .button {
-  left: var(--imported-tag-button-left-large);
-}
-
-.size-large .button {
-  margin-bottom: var(--imported-tag-button-margin-bottom-large);
-}
-
-.size-large .button {
-  margin-left: var(--imported-tag-button-margin-left-large);
-}
-
-.size-large .button {
-  margin-right: var(--imported-tag-button-margin-right-large);
-}
-
-.size-large .button {
-  margin-top: var(--imported-tag-button-margin-top-large);
-}
-
-.size-large .button {
-  opacity: var(--imported-tag-button-opacity-large);
-}
-
-.size-large .button {
-  right: var(--imported-tag-button-right-large);
-}
-
-.size-large .button {
-  top: var(--imported-tag-button-top-large);
-}
-
-.root[data-clickable] .button {
-  display: none;
-}
-
-.root[data-disabled] .button {
-  display: none;
-}
-
-.icon {
+.button-2 {
   display: flex;
-  color: var(--imported-tag-icon-color);
-  font-weight: var(--imported-tag-icon-font-weight);
+  background-color: var(--imported-tag-button-2-background-color);
+  border-bottom-left-radius: var(--imported-shared-size-7);
+  border-bottom-right-radius: var(--imported-shared-size-7);
+  border-bottom-width: var(--imported-shared-size-0);
+  border-left-width: var(--imported-shared-size-0);
+  border-right-width: var(--imported-shared-size-0);
+  border-top-left-radius: var(--imported-shared-size-7);
+  border-top-right-radius: var(--imported-shared-size-7);
+  border-top-width: var(--imported-shared-size-0);
+  bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-8a8a8a);
+  flex-shrink: var(--imported-shared-num-0);
+  font-size: var(--imported-tag-button-2-font-size);
+  height: var(--imported-shared-size-18);
+  left: var(--imported-shared-size-0);
+  line-height: var(--imported-shared-size-20);
+  margin-bottom: var(--imported-shared-size-1);
+  margin-left: var(--imported-shared-size-2);
+  margin-right: var(--imported-shared-size-1);
+  margin-top: var(--imported-shared-size-1);
+  padding-bottom: var(--imported-shared-size-0);
+  padding-left: var(--imported-shared-size-0);
+  padding-right: var(--imported-shared-size-0);
+  padding-top: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-18);
+  display: block;
+  appearance: none;
+  border-bottom-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.size-large .button-2 {
+  display: none;
+}
+
+.root[data-clickable] .button-2 {
+  display: none;
+}
+
+.root[data-disabled] .button-2 {
+  display: none;
+}
+
+.icon-3 svg {
+  width: 18px;
+  height: 18px;
+}
+
+.icon-3 {
+  display: inline-flex;
+  flex-shrink: 0;
+  font-weight: var(--imported-tag-icon-3-font-weight);
+  height: var(--imported-shared-size-18);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-18);
   display: block;
-  aspect-ratio: 1 / 1;
   cursor: pointer;
   font-feature-settings: normal;
   max-height: 100%;
@@ -314,34 +341,18 @@
   text-rendering: auto;
 }
 
-.root[data-clickable] .icon {
+.size-large .icon-3 {
   display: none;
 }
 
-.root[data-disabled] .icon {
+.root[data-clickable] .icon-3 {
   display: none;
 }
 
-.icon-none svg {
-  width: 18px;
-  height: 18px;
+.root[data-disabled] .icon-3 {
+  display: none;
 }
 
-.icon-none {
+.icon-3Glyph {
   display: inline-flex;
-  flex-shrink: 0;
-}
-
-.size-large .icon-none {
-  display: none;
-}
-
-.icon-large svg {
-  width: 20px;
-  height: 20px;
-}
-
-.icon-large {
-  display: inline-flex;
-  flex-shrink: 0;
 }

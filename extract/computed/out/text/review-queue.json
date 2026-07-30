@@ -3,6 +3,6 @@
   "component": "Text",
   "contract": "examples/polaris/extraction/static-contracts/text.contract.json",
   "generatedBy": "extract/computed/run.ts",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "items": []
 }

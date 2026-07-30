@@ -1,14 +1,14 @@
 {
   "component": "RadioButton",
   "generatedBy": "extract/computed/gate.ts",
-  "browser": "148.0.7778.96",
+  "browser": "151.0.7922.34",
   "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
   "combos": 4,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 1376,
-    "cellsEqual": 1124,
-    "pctEqual": 81.68604651162791,
+    "cellsCompared": 1392,
+    "cellsEqual": 1132,
+    "pctEqual": 81.32183908045977,
     "rowsFullyEqual": 0,
     "rows": 16
   },
@@ -16,6 +16,12 @@
     "pairs": 16,
     "perfectExact": 0,
     "perfectAA": 0,
+    "measured": 16,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
     "meanExact": 2.340901692708334,
     "meanAA": 0.6639607747395833,
     "maxAA": 1.3907877604166667
@@ -24,62 +30,62 @@
     "boundConfirmed": 16,
     "boundCells": 16,
     "contradictions": 0,
-    "mintedLeaves": 48,
-    "mintedLeavesUnfolded": 43,
-    "baseBindings": 38,
-    "stateBindings": 51,
+    "mintedLeaves": 53,
+    "mintedLeavesUnfolded": 48,
+    "baseBindings": 48,
+    "stateBindings": 53,
     "codeOnlyChannels": 2,
-    "overflowBindings": 47,
-    "folds": 8
+    "overflowBindings": 49,
+    "folds": 9
   },
   "worstRows": [
     {
       "key": "checked.disabled__default",
       "pctAA": 1.3907877604166667,
       "pctExact": 2.8352864583333335,
-      "channelsMismatched": 26
+      "channelsMismatched": 27
     },
     {
       "key": "checked.disabled__hover",
       "pctAA": 1.3907877604166667,
       "pctExact": 2.8352864583333335,
-      "channelsMismatched": 26
+      "channelsMismatched": 27
     },
     {
       "key": "checked.disabled__focus-visible",
       "pctAA": 1.3907877604166667,
       "pctExact": 2.8352864583333335,
-      "channelsMismatched": 26
+      "channelsMismatched": 27
     },
     {
       "key": "checked.disabled__active",
       "pctAA": 1.3907877604166667,
       "pctExact": 2.8352864583333335,
-      "channelsMismatched": 26
+      "channelsMismatched": 27
     },
     {
       "key": "unchecked.disabled__default",
       "pctAA": 0.9708658854166666,
       "pctExact": 3.06640625,
-      "channelsMismatched": 30
+      "channelsMismatched": 31
     },
     {
       "key": "unchecked.disabled__hover",
       "pctAA": 0.9708658854166666,
       "pctExact": 3.06640625,
-      "channelsMismatched": 30
+      "channelsMismatched": 31
     },
     {
       "key": "unchecked.disabled__focus-visible",
       "pctAA": 0.9708658854166666,
       "pctExact": 3.06640625,
-      "channelsMismatched": 30
+      "channelsMismatched": 31
     },
     {
       "key": "unchecked.disabled__active",
       "pctAA": 0.9708658854166666,
       "pctExact": 3.06640625,
-      "channelsMismatched": 30
+      "channelsMismatched": 31
     }
   ],
   "topMismatchedChannels": [
@@ -145,6 +151,7 @@
     ]
   ],
   "namedLosses": [
+    "promotion: pseudo-decor-outside-grammar: backdrop::after is painted by a mechanism the grammar cannot read (box-shadow: rgba(0, 91, 211, 1) 0px 0px 0px -3px) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
     "overflow: backdrop.background-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.border-bottom-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -169,6 +176,7 @@
     "overflow: choice__label.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: choice__label.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: choice__label.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: choice__label.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: choice__label.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: choice__label.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: input.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -179,6 +187,7 @@
     "overflow: label.caret-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.column-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.outline-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: label.row-rule-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.text-decoration-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: label.text-emphasis-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
     "overflow: backdrop.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -195,11 +204,20 @@
     "code-only: input.clip-path — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: input.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
   ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
+    "leavesAdded": 933,
+    "divergent": []
+  },
   "rows": [
     {
       "key": "unchecked.enabled__default",
-      "channelsCompared": 86,
-      "channelsEqual": 85,
+      "channelsCompared": 87,
+      "channelsEqual": 86,
       "pctExact": 1.3761393229166667,
       "pctAA": 0.022786458333333332,
       "mismatches": [
@@ -213,8 +231,8 @@
     },
     {
       "key": "unchecked.enabled__hover",
-      "channelsCompared": 86,
-      "channelsEqual": 80,
+      "channelsCompared": 87,
+      "channelsEqual": 81,
       "pctExact": 2.23876953125,
       "pctAA": 0.11393229166666667,
       "mismatches": [
@@ -258,8 +276,8 @@
     },
     {
       "key": "unchecked.enabled__focus-visible",
-      "channelsCompared": 86,
-      "channelsEqual": 84,
+      "channelsCompared": 87,
+      "channelsEqual": 85,
       "pctExact": 1.9327799479166667,
       "pctAA": 0.3841145833333333,
       "mismatches": [
@@ -279,8 +297,8 @@
     },
     {
       "key": "unchecked.enabled__active",
-      "channelsCompared": 86,
-      "channelsEqual": 76,
+      "channelsCompared": 87,
+      "channelsEqual": 77,
       "pctExact": 2.23876953125,
       "pctAA": 0.20345052083333334,
       "mismatches": [
@@ -348,7 +366,7 @@
     },
     {
       "key": "unchecked.disabled__default",
-      "channelsCompared": 86,
+      "channelsCompared": 87,
       "channelsEqual": 56,
       "pctExact": 3.06640625,
       "pctAA": 0.9708658854166666,
@@ -422,6 +440,12 @@
         {
           "part": "input",
           "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
@@ -537,7 +561,7 @@
     },
     {
       "key": "unchecked.disabled__hover",
-      "channelsCompared": 86,
+      "channelsCompared": 87,
       "channelsEqual": 56,
       "pctExact": 3.06640625,
       "pctAA": 0.9708658854166666,
@@ -611,6 +635,12 @@
         {
           "part": "input",
           "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
@@ -726,7 +756,7 @@
     },
     {
       "key": "unchecked.disabled__focus-visible",
-      "channelsCompared": 86,
+      "channelsCompared": 87,
       "channelsEqual": 56,
       "pctExact": 3.06640625,
       "pctAA": 0.9708658854166666,
@@ -800,6 +830,12 @@
         {
           "part": "input",
           "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
@@ -915,7 +951,7 @@
     },
     {
       "key": "unchecked.disabled__active",
-      "channelsCompared": 86,
+      "channelsCompared": 87,
       "channelsEqual": 56,
       "pctExact": 3.06640625,
       "pctAA": 0.9708658854166666,
@@ -989,6 +1025,12 @@
         {
           "part": "input",
           "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
@@ -1104,8 +1146,8 @@
     },
     {
       "key": "checked.enabled__default",
-      "channelsCompared": 86,
-      "channelsEqual": 85,
+      "channelsCompared": 87,
+      "channelsEqual": 86,
       "pctExact": 1.3761393229166667,
       "pctAA": 0.022786458333333332,
       "mismatches": [
@@ -1119,8 +1161,8 @@
     },
     {
       "key": "checked.enabled__hover",
-      "channelsCompared": 86,
-      "channelsEqual": 85,
+      "channelsCompared": 87,
+      "channelsEqual": 86,
       "pctExact": 1.3761393229166667,
       "pctAA": 0.022786458333333332,
       "mismatches": [
@@ -1134,8 +1176,8 @@
     },
     {
       "key": "checked.enabled__focus-visible",
-      "channelsCompared": 86,
-      "channelsEqual": 84,
+      "channelsCompared": 87,
+      "channelsEqual": 85,
       "pctExact": 1.9327799479166667,
       "pctAA": 0.3841145833333333,
       "mismatches": [
@@ -1155,8 +1197,8 @@
     },
     {
       "key": "checked.enabled__active",
-      "channelsCompared": 86,
-      "channelsEqual": 81,
+      "channelsCompared": 87,
+      "channelsEqual": 82,
       "pctExact": 1.3761393229166667,
       "pctAA": 0.022786458333333332,
       "mismatches": [
@@ -1194,7 +1236,7 @@
     },
     {
       "key": "checked.disabled__default",
-      "channelsCompared": 86,
+      "channelsCompared": 87,
       "channelsEqual": 60,
       "pctExact": 2.8352864583333335,
       "pctAA": 1.3907877604166667,
@@ -1268,6 +1310,12 @@
         {
           "part": "input",
           "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
@@ -1359,7 +1407,7 @@
     },
     {
       "key": "checked.disabled__hover",
-      "channelsCompared": 86,
+      "channelsCompared": 87,
       "channelsEqual": 60,
       "pctExact": 2.8352864583333335,
       "pctAA": 1.3907877604166667,
@@ -1433,6 +1481,12 @@
         {
           "part": "input",
           "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
@@ -1524,7 +1578,7 @@
     },
     {
       "key": "checked.disabled__focus-visible",
-      "channelsCompared": 86,
+      "channelsCompared": 87,
       "channelsEqual": 60,
       "pctExact": 2.8352864583333335,
       "pctAA": 1.3907877604166667,
@@ -1598,6 +1652,12 @@
         {
           "part": "input",
           "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },
@@ -1689,7 +1749,7 @@
     },
     {
       "key": "checked.disabled__active",
-      "channelsCompared": 86,
+      "channelsCompared": 87,
       "channelsEqual": 60,
       "pctExact": 2.8352864583333335,
       "pctAA": 1.3907877604166667,
@@ -1763,6 +1823,12 @@
         {
           "part": "input",
           "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 1)",
+          "theirs": "rgba(84, 84, 84, 1)"
+        },
+        {
+          "part": "input",
+          "channel": "row-rule-color",
           "ours": "rgba(0, 0, 0, 1)",
           "theirs": "rgba(84, 84, 84, 1)"
         },

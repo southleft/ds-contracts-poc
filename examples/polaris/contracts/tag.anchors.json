@@ -1,0 +1,54 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "tag",
+  "anchors": [
+    {
+      "leaf": "imported.tag.button.background-color.off",
+      "token": "p.color-bg-fill-tertiary",
+      "part": "button",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-tertiary",
+      "selector": ".Polaris-Tag--sizeLarge .Polaris-Tag__Button"
+    },
+    {
+      "leaf": "imported.tag.button.background-color.on",
+      "token": "p.color-bg-fill-tertiary-hover",
+      "part": "button",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-tertiary-hover",
+      "selector": ".Polaris-Tag--sizeLarge.Polaris-Tag--removable.Polaris-Tag--linkable .Polaris-Tag__Button"
+    },
+    {
+      "leaf": "imported.tag.link.color",
+      "token": "p.color-text",
+      "part": "link",
+      "cssProperty": "color",
+      "varName": "--p-color-text",
+      "selector": ".Polaris-Tag__Link"
+    },
+    {
+      "leaf": "imported.tag.root.background-color-state-active.off.off.off",
+      "token": "p.color-bg-fill-tertiary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-tertiary",
+      "selector": ".Polaris-Tag"
+    },
+    {
+      "leaf": "imported.tag.root.background-color-state-active.on.off.off",
+      "token": "p.color-bg-fill-tertiary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-tertiary",
+      "selector": ".Polaris-Tag"
+    },
+    {
+      "leaf": "imported.tag.root.background-color-state-hover.off.off",
+      "token": "p.color-bg-fill-tertiary",
+      "part": "root",
+      "cssProperty": "background-color",
+      "varName": "--p-color-bg-fill-tertiary",
+      "selector": ".Polaris-Tag"
+    }
+  ]
+}

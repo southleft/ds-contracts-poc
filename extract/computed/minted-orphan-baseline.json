@@ -23,8 +23,8 @@
     },
     {
       "library": "polaris",
-      "leaves": 980,
-      "unreferenced": 312
+      "leaves": 1317,
+      "unreferenced": 635
     },
     {
       "library": "tailwind",
@@ -32,5 +32,5 @@
       "unreferenced": 2
     }
   ],
-  "_astryxRecaptureNote": "2026-07-29 \u2014 astryx's row moved 237 leaves / 26 unreferenced -> 408 / 42 and that is a RE-RECORD OF A REVIEWED CHANGE, not a ratchet failure waved through. Cause: the recapture (task #43, the first after the capture stopped reading its own promote output) reads far more of the library \u2014 171 more minted leaves, of which 21 are colour and 150 are dimensions. The 16 extra unreferenced leaves are the SAME cause B the mint round named and carried: a leaf the engine mints whose BINDING never reached the contract (the focus-visible outline arm is the clearest example \u2014 the value is minted and now semantically anchored, but no contract cell references it). Reading more of a library surfaces more of cause B; it does not create it. The quality number that matters moved the RIGHT way in the same round: of the anchorable denominator \u2014 colour leaves \u2014 aliased went 54/113 = 47.8% to 68/134 = 50.7%."
+  "_polarisRecaptureNote": "2026-07-29 \u2014 polaris's row moved 980 leaves / 312 unreferenced -> 1317 / 635 and that is a RE-RECORD OF A REVIEWED CHANGE, not a ratchet failure waved through. Cause: the task-#26 recapture \u2014 the FIRST since polaris was library #2, run with today's engine \u2014 reads far more of the library than the round-5-era artifacts did (337 more minted leaves), and the reviewed contract bindings reference the same disciplined subset. The extra unreferenced leaves are the SAME cause B the mint round named: a leaf the engine mints whose binding never reached the contract. Reading more of a library surfaces more of cause B; it does not create it (the astryx note above records the identical mechanism one day earlier). The quality number that matters moved the RIGHT way in the same round: polaris had ZERO source-aliased leaves before this round; it now ships 179 aliases to its own {p.*} tokens, and of the anchorable denominator \u2014 colour leaves \u2014 101/572 = 17.7% are aliased (was 0/anything = 0%). Shrinking cause B for every library (a prune-to-referenced pass in the shared promote) is a named candidate round, not a polaris patch."
 }

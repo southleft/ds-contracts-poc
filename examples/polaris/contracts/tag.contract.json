@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "polaris.tag",
   "name": "Tag",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "status": "draft",
-  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Tag/Tag.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 148.0.7778.96; overflow channels in the sibling extension file. FLOOR-PROMOTED v0.3.2 (extract/computed rounds 4 + 5c + 5d): this contract is the computed-floor rebuild — complete browser truth captured from the real @shopify/polaris@13.9.5 npm package rendered in headless Chromium 148.0.7778.96 (every enumerated longhand per element incl. ::before/::after, full state sweep, double-run byte-identity), fused with the static semantic layer (BOUND bindings browser-confirmed, unlabeled channels MINTED as imported.* tokens in tokens/polaris-minted.dtcg.json, uniform registry channels DECLARED), with the round-4 DOM-ANATOMY PROMOTION: every rendered element is a carried part, svg glyph content rides committed icon assets reconstructed from the captured d/fill channels, presence facts gate structure-creating props, contradictions resolved computed-wins per the decisions ledger (extract/computed/out/tag/decisions.md, human-acked; source resolved.contract.json). Round 5c promotion lifts: complement-of-product presence (a default subtree an alternative replaces carries an ordered hide/restore stylesWhen cascade, verified per combo), root-hosted svg plans, authored-viewBox unification across per-size glyph captures, carried-channel re-mint when a defaultless axis contests the reviewed carriage (S2 maps with the unset base), curated shape geometry re-derived from the captured computed box, and drawn pseudo-element decor boxes carried as shape parts (S5 v1). Round 5d lifts (owner visual review): svg dash channels are DROPPED with a named receipt — they are pathLength-relative and pathLength is not a computed style, so the settled draw-on stroke carries as the continuous resting glyph (the Checkbox check); and a carried CSS SHORTHAND covers every constituent longhand in fusion coverage (border-radius all four corners, border-width/-color all four sides, gap both gaps) — the minted sibling longhands that overrode semantic bindings (Badge radius corners as imported.shared.size-8 over {p.border-radius-200}) are retired. Everything the vocabulary cannot carry is named in contracts/tag.extension.json. Delta ledger: extract/computed/out/tag/LEDGER.md (supersedes this component's section of extraction/PROMOTION.md).",
+  "description": "PROPOSED contract extracted from examples/polaris/.polaris-clone/polaris-react/src/components/Tag/Tag.tsx (react-tsx + css-module adapters) — API surface AND anatomy (structure, token bindings, layout, states) read from source; design bindings await reconciliation and human review. PROMOTED showcase contract: API surface extracted mechanically from Shopify/polaris @ 2b1ea88625e0613853ca8577c9acd1980a90f382 (polaris-react 13.10.1, MIT © Shopify, extracted 2026-07-18); styling bindings promoted from the component's own module.css under the reviewed class map in examples/polaris/scripts/curation.ts — every carried binding and every named refusal is listed in examples/polaris/extraction/PROMOTION.md. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @shopify/polaris@13.9.5 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/polaris/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth; minted leaves source-aliased to Polaris's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
   "semantics": {
     "element": "span"
   },
@@ -116,6 +116,21 @@
           "prop": "linked"
         }
       }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Wholesale",
+      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
     }
   ],
   "states": [
@@ -134,6 +149,7 @@
         "color": "{p.color-text}",
         "border-radius": "{p.border-radius-200}",
         "bottom": "{imported.shared.size-0}",
+        "height": "{imported.tag.root.height.none}",
         "left": "{imported.shared.size-0}",
         "right": "{imported.shared.size-0}",
         "top": "{imported.shared.size-0}"
@@ -142,6 +158,11 @@
         "link": {
           "element": "a",
           "description": "Promoted from the computed floor (round 4): rendered anatomy a|Tag__Link — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "stretch"
+          },
           "visibleWhen": {
             "prop": "linked"
           },
@@ -190,7 +211,9 @@
               ],
               "parts": {
                 "label-2": {
-                  "text": "Wholesale",
+                  "content": {
+                    "prop": "children"
+                  },
                   "description": "Promoted from the computed floor (round 4): rendered anatomy span|Tag__Text — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "inline",
@@ -225,7 +248,8 @@
               },
               "tokens": {
                 "font-size": "{imported.shared.size-12}",
-                "line-height": "{imported.tag.text-2.line-height}"
+                "line-height": "{imported.tag.text-2.line-height}",
+                "width": "{imported.shared.size-59-9219}"
               }
             }
           },
@@ -240,11 +264,12 @@
             "border-top-right-radius": "{imported.shared.size-8}",
             "bottom": "{imported.shared.size-0}",
             "color": "{imported.tag.link.color}",
-            "grid-template-columns": "{imported.tag.link.grid-template-columns}",
+            "grid-template-columns": "{imported.shared.size-59-9219}",
             "grid-template-rows": "{imported.shared.size-20}",
             "left": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
-            "top": "{imported.shared.size-0}"
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-59-9219}"
           }
         },
         "text": {
@@ -317,7 +342,8 @@
           },
           "tokens": {
             "font-size": "{imported.shared.size-12}",
-            "line-height": "{imported.tag.text.line-height}"
+            "line-height": "{imported.tag.text.line-height}",
+            "width": "{imported.shared.size-59-9219}"
           }
         },
         "part-1": {
@@ -346,25 +372,77 @@
                 "display": "none"
               }
             }
-          ]
+          ],
+          "tokens": {
+            "height": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-0}"
+          }
         },
         "button": {
           "element": "button",
-          "description": "Promoted from the computed floor (round 4): rendered anatomy button|Tag__Button — this element exists in the real component's DOM; the static layer had no part for it.",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button|Tag__Button|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
-            "display": "block",
-            "aspect-ratio": "1 / 1",
+            "display": "none",
             "appearance": "none",
             "border-bottom-style": "none",
             "border-left-style": "none",
             "border-right-style": "none",
             "border-top-style": "none",
-            "cursor": "pointer"
+            "cursor": "pointer",
+            "position": "absolute"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-7}",
+            "border-bottom-right-radius": "{imported.shared.size-7}",
+            "border-bottom-width": "{imported.shared.size-0}",
+            "border-left-width": "{imported.shared.size-0}",
+            "border-right-width": "{imported.shared.size-0}",
+            "border-top-left-radius": "{imported.shared.size-7}",
+            "border-top-right-radius": "{imported.shared.size-7}",
+            "border-top-width": "{imported.shared.size-0}",
+            "bottom": "{imported.shared.size-2}",
+            "color": "{imported.shared.color-8a8a8a}",
+            "flex-shrink": "{imported.shared.num-0}",
+            "font-size": "{imported.tag.button.font-size}",
+            "height": "{imported.shared.size-20}",
+            "left": "{imported.tag.button.left}",
+            "line-height": "{imported.shared.size-20}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "opacity": "{imported.shared.num-0}",
+            "padding-bottom": "{imported.shared.size-0}",
+            "padding-left": "{imported.shared.size-0}",
+            "padding-right": "{imported.shared.size-0}",
+            "padding-top": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-2}",
+            "top": "{imported.shared.size-2}",
+            "width": "{imported.shared.size-20}"
+          }
+        },
+        "button-2": {
+          "element": "button",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy button|Tag__Button — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "appearance": "none",
+            "border-bottom-style": "none",
+            "border-left-style": "none",
+            "border-right-style": "none",
+            "border-top-style": "none",
+            "cursor": "pointer",
+            "position": "relative"
           },
           "visibleWhen": {
             "prop": "removable"
           },
           "stylesWhen": [
+            {
+              "prop": "size",
+              "equals": "large",
+              "styles": {
+                "display": "none"
+              }
+            },
             {
               "prop": "clickable",
               "styles": {
@@ -379,12 +457,11 @@
             }
           ],
           "parts": {
-            "icon": {
+            "icon-3": {
               "element": "span",
               "description": "Promoted from the computed floor (round 4): rendered anatomy span|Icon — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
-                "aspect-ratio": "1 / 1",
                 "cursor": "pointer",
                 "font-feature-settings": "normal",
                 "max-height": "100%",
@@ -396,6 +473,13 @@
                 "prop": "removable"
               },
               "stylesWhen": [
+                {
+                  "prop": "size",
+                  "equals": "large",
+                  "styles": {
+                    "display": "none"
+                  }
+                },
                 {
                   "prop": "clickable",
                   "styles": {
@@ -409,44 +493,21 @@
                   }
                 }
               ],
-              "parts": {
-                "icon-none": {
-                  "icon": {
-                    "asset": "tag-icon-none",
-                    "size": 18
-                  },
-                  "stylesWhen": [
-                    {
-                      "prop": "size",
-                      "equals": "large",
-                      "styles": {
-                        "display": "none"
-                      }
-                    }
-                  ],
-                  "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=unset (default)."
-                },
-                "icon-large": {
-                  "icon": {
-                    "asset": "tag-icon-large",
-                    "size": 20
-                  },
-                  "visibleWhen": {
-                    "prop": "size",
-                    "equals": "large"
-                  },
-                  "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=large."
-                }
+              "icon": {
+                "asset": "tag-icon-3",
+                "size": 18
               },
               "tokens": {
-                "color": "{imported.tag.icon.color}",
-                "font-weight": "{imported.tag.icon.font-weight}",
+                "font-weight": "{imported.tag.icon-3.font-weight}",
+                "height": "{imported.shared.size-18}",
                 "min-height": "{imported.shared.size-0}",
-                "min-width": "{imported.shared.size-0}"
+                "min-width": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-18}"
               }
             }
           },
           "tokens": {
+            "background-color": "{imported.tag.button-2.background-color}",
             "border-bottom-left-radius": "{imported.shared.size-7}",
             "border-bottom-right-radius": "{imported.shared.size-7}",
             "border-bottom-width": "{imported.shared.size-0}",
@@ -455,42 +516,25 @@
             "border-top-left-radius": "{imported.shared.size-7}",
             "border-top-right-radius": "{imported.shared.size-7}",
             "border-top-width": "{imported.shared.size-0}",
-            "bottom": "{imported.tag.button.bottom.none}",
-            "color": "{imported.tag.button.color}",
-            "flex-shrink": "{imported.tag.button.flex-shrink}",
-            "font-size": "{imported.tag.button.font-size}",
-            "left": "{imported.tag.button.left.none}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-8a8a8a}",
+            "flex-shrink": "{imported.shared.num-0}",
+            "font-size": "{imported.tag.button-2.font-size}",
+            "height": "{imported.shared.size-18}",
+            "left": "{imported.shared.size-0}",
             "line-height": "{imported.shared.size-20}",
-            "margin-bottom": "{imported.tag.button.margin-bottom.none}",
-            "margin-left": "{imported.tag.button.margin-left.none}",
-            "margin-right": "{imported.tag.button.margin-right.none}",
-            "margin-top": "{imported.tag.button.margin-top.none}",
-            "opacity": "{imported.tag.button.opacity.none}",
+            "margin-bottom": "{imported.shared.size-1}",
+            "margin-left": "{imported.shared.size-2}",
+            "margin-right": "{imported.shared.size-1}",
+            "margin-top": "{imported.shared.size-1}",
             "padding-bottom": "{imported.shared.size-0}",
             "padding-left": "{imported.shared.size-0}",
             "padding-right": "{imported.shared.size-0}",
             "padding-top": "{imported.shared.size-0}",
-            "right": "{imported.tag.button.right.none}",
-            "top": "{imported.tag.button.top.none}"
-          },
-          "tokensByProp": [
-            {
-              "prop": "size",
-              "map": {
-                "large": {
-                  "bottom": "{imported.tag.button.bottom.large}",
-                  "left": "{imported.tag.button.left.large}",
-                  "margin-bottom": "{imported.tag.button.margin-bottom.large}",
-                  "margin-left": "{imported.tag.button.margin-left.large}",
-                  "margin-right": "{imported.tag.button.margin-right.large}",
-                  "margin-top": "{imported.tag.button.margin-top.large}",
-                  "opacity": "{imported.tag.button.opacity.large}",
-                  "right": "{imported.tag.button.right.large}",
-                  "top": "{imported.tag.button.top.large}"
-                }
-              }
-            }
-          ]
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-18}"
+          }
         }
       },
       "declared": {
@@ -504,7 +548,8 @@
       },
       "literals": {
         "padding-left": "6px",
-        "padding-right": "6px"
+        "padding-right": "6px",
+        "width": "71.9219px"
       },
       "states": {
         "active": {
@@ -520,6 +565,7 @@
           "caret-color": "{imported.shared.color-b5b5b5}",
           "color": "{imported.shared.color-b5b5b5}",
           "column-rule-color": "{imported.shared.color-b5b5b5}",
+          "row-rule-color": "{imported.shared.color-b5b5b5}",
           "text-decoration-color": "{imported.shared.color-b5b5b5}",
           "text-emphasis-color": "{imported.shared.color-b5b5b5}"
         },
@@ -535,7 +581,18 @@
             "large": {
               "min-height": "24px",
               "padding-left": "8px",
-              "padding-right": "8px"
+              "padding-right": "8px",
+              "width": "75.9219px"
+            }
+          }
+        }
+      ],
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "large": {
+              "height": "{imported.tag.root.height.large}"
             }
           }
         }

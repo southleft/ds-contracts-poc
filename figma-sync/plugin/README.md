@@ -27,8 +27,10 @@ the repo's tokens, contracts and icons baked in (`window.DSC`, built by
   `• Badge 1.4.0 → 1.5.0: +prop Loading.`, `• Switch 2.0.0: new — will be
   created (2 variants).`, `• Tag 1.0.0: unchanged — will be skipped.` Tick
   the rows you want and press **Apply**: changed sets amend IN PLACE (same
-  node ids, same property ids — instances keep their overrides), new ones
-  are created, unchanged ones skip. The report+confirm step is mandatory;
+  node ids, same property ids — instances keep their component-property
+  overrides, but edits on nodes INSIDE an amended variant are rebuilt from
+  the contract; re-apply interior tweaks after an update, or keep them in
+  instances outside the set), new ones are created, unchanged ones skip. The report+confirm step is mandatory;
   the plugin never applies silently.
 - **Propose** — select a generated set (or name it); the plugin dumps it
   with the embedded read-only dump script, proposes a contract from what is
@@ -39,18 +41,15 @@ the repo's tokens, contracts and icons baked in (`window.DSC`, built by
   token (session-only, never stored — closing the plugin forgets it).
   **Dry run** (default) prints the exact 4-step REST plan and sends nothing.
 
-The original three transports are unchanged:
+The original developer transports are unchanged (Send to Playground was
+killed with the 2026-07-26 IA; the read-only dump script it ran —
+`extract/figma/dump.plugin.js`, embedded verbatim in `ui.html`, drift-guarded
+by the plugin-zip build — stays, because the Propose flow reads sets with it):
 
 - **Paste a script** — paste one generated script and run it (the designer
   trust round-trip). On success the plugin selects the built component and
   zooms to it; errors show verbatim; a thrown script is atomic by Figma's
   design, so a failed run never leaves a half-synced file.
-- **Send to Playground** — runs the repo's read-only dump script
-  (`extract/figma/dump.plugin.js`, embedded verbatim in `ui.html`; the
-  plugin-zip build refuses a drifted copy) over the named component sets
-  (empty = your selection; nothing selected = all), then POSTs the dump to
-  the pairing bridge under the code the playground's Figma tab shows.
-  Privacy: held at most 15 minutes, deleted on pickup, never logged.
 - **Local runner** — fetch every script in `figma-sync/` from
   `npm run figma:serve` (port 8765) and run them in dependency order,
   SHA-256-verified against the server manifest, stopping on first failure.
@@ -79,8 +78,9 @@ other three tabs still work).
   the file you have open**. The engine tabs only run scripts the embedded
   engine emitted from a schema-validated contract; the paste tab runs
   whatever you paste — paste only scripts you generated yourself.
-- Network access (see `manifest.json`): the pairing bridge origin (Send to
-  Playground POSTs dumps; Generate/Update poll pushed bundles by code),
+- Network access (see `manifest.json`): the pairing bridge origin (Propose's
+  send-to-repo door POSTs proposal envelopes; Generate/Update poll pushed
+  bundles by code),
   `api.github.com` (ONLY the optional Propose PR flow; dry-run sends
   nothing), plus dev-only `localhost:8765/8787`. The plugin talks to nothing
   else. GitHub tokens live in the window's memory for the session and are

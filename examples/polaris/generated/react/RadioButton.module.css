@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/radio-button.contract.json (polaris.radio-button v0.3.2)
+ * Source of truth: contracts/radio-button.contract.json (polaris.radio-button v0.4.0)
  * Regenerate with: npm run generate
  */
 
@@ -9,8 +9,10 @@
   justify-content: flex-start;
   border: 0;
   position: relative;
+  height: var(--imported-radio-button-root-height);
   padding-bottom: var(--imported-radio-button-root-padding-bottom);
   padding-top: var(--imported-radio-button-root-padding-top);
+  width: var(--imported-radio-button-root-width);
   cursor: pointer;
 }
 
@@ -28,6 +30,7 @@
   align-items: stretch;
   flex-shrink: var(--imported-radio-button-choice-control-flex-shrink);
   margin-right: var(--imported-radio-button-choice-control-margin-right);
+  width: var(--imported-radio-button-choice-control-width);
   cursor: pointer;
 }
 
@@ -38,6 +41,7 @@
 .radiobutton {
   display: flex;
   bottom: var(--imported-shared-size-0);
+  height: var(--imported-shared-size-18);
   left: var(--imported-shared-size-0);
   margin-bottom: var(--imported-shared-size-1);
   margin-left: var(--imported-shared-size-1);
@@ -45,6 +49,7 @@
   margin-top: var(--imported-shared-size-1);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-18);
   display: block;
   cursor: pointer;
   position: relative;
@@ -73,12 +78,14 @@
   color: var(--imported-radio-button-input-color);
   font-size: var(--imported-radio-button-input-font-size);
   font-weight: var(--imported-radio-button-input-font-weight);
+  height: var(--imported-shared-size-1);
   left: var(--imported-shared-size-0);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   outline-color: var(--imported-radio-button-input-outline-color);
   right: var(--imported-radio-button-input-right);
   top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-1);
   display: none;
   appearance: auto;
   cursor: default;
@@ -106,11 +113,13 @@
   border-radius: var(--p-border-radius-full);
   border-width: var(--p-border-width-0165);
   bottom: var(--imported-shared-size-0);
+  height: var(--imported-shared-size-18);
   left: var(--imported-shared-size-0);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-18);
   border-style: solid;
   display: block;
   border-bottom-style: solid;
@@ -200,6 +209,7 @@
 
 .choice__label {
   display: flex;
+  width: var(--imported-radio-button-choice-label-width);
   display: block;
   cursor: pointer;
 }

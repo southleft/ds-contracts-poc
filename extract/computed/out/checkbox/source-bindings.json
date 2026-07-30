@@ -1,0 +1,826 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Checkbox",
+  "varPrefix": "--p-",
+  "facts": [
+    {
+      "part": "backdrop",
+      "channel": "background-color",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.color-bg-surface",
+      "varName": "--p-color-bg-surface",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Backdrop"
+      }
+    },
+    {
+      "part": "backdrop",
+      "channel": "background-color",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.color-checkbox-bg-surface-disabled",
+      "varName": "--p-color-checkbox-bg-surface-disabled",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:disabled + .Polaris-Checkbox__Backdrop"
+      }
+    },
+    {
+      "part": "backdrop",
+      "channel": "background-color",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.color-bg-fill-brand-selected",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:checked + .Polaris-Checkbox__Backdrop, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate + .Polaris-Checkbox__Backdrop"
+      }
+    },
+    {
+      "part": "backdrop",
+      "channel": "background-color",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.color-checkbox-bg-surface-disabled",
+      "varName": "--p-color-checkbox-bg-surface-disabled",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:disabled + .Polaris-Checkbox__Backdrop"
+      }
+    },
+    {
+      "part": "backdrop",
+      "channel": "background-color",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.color-bg-fill-brand-selected",
+      "varName": "--p-color-bg-fill-brand-selected",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:checked + .Polaris-Checkbox__Backdrop, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate + .Polaris-Checkbox__Backdrop"
+      }
+    },
+    {
+      "part": "backdrop",
+      "channel": "background-color",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.color-checkbox-bg-surface-disabled",
+      "varName": "--p-color-checkbox-bg-surface-disabled",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:disabled + .Polaris-Checkbox__Backdrop"
+      }
+    },
+    {
+      "part": "choice__control",
+      "channel": "margin-right",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-Choice__Control"
+      }
+    },
+    {
+      "part": "choice__control",
+      "channel": "margin-right",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-Choice__Control"
+      }
+    },
+    {
+      "part": "choice__control",
+      "channel": "margin-right",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-Choice__Control"
+      }
+    },
+    {
+      "part": "choice__control",
+      "channel": "margin-right",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-Choice__Control"
+      }
+    },
+    {
+      "part": "choice__control",
+      "channel": "margin-right",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-Choice__Control"
+      }
+    },
+    {
+      "part": "choice__control",
+      "channel": "margin-right",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.space-200",
+      "varName": "--p-space-200",
+      "anchor": {
+        "selector": ".Polaris-Choice__Control"
+      }
+    },
+    {
+      "part": "choice__label",
+      "channel": "color",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Choice--disabled > .Polaris-Choice__Label"
+      }
+    },
+    {
+      "part": "choice__label",
+      "channel": "color",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Choice--disabled > .Polaris-Choice__Label"
+      }
+    },
+    {
+      "part": "choice__label",
+      "channel": "color",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.color-text-disabled",
+      "varName": "--p-color-text-disabled",
+      "anchor": {
+        "selector": ".Polaris-Choice--disabled > .Polaris-Choice__Label"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "color",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.color-text-brand-on-bg-fill",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Icon svg"
+      }
+    },
+    {
+      "part": "icon-2",
+      "channel": "color",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.color-checkbox-icon-disabled",
+      "varName": "--p-color-checkbox-icon-disabled",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:disabled ~ .Polaris-Checkbox__Icon svg"
+      }
+    },
+    {
+      "part": "icon-5",
+      "channel": "color",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.color-text-brand-on-bg-fill",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Icon svg"
+      }
+    },
+    {
+      "part": "icon-5",
+      "channel": "color",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.color-checkbox-icon-disabled",
+      "varName": "--p-color-checkbox-icon-disabled",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:disabled ~ .Polaris-Checkbox__Icon svg"
+      }
+    },
+    {
+      "part": "icon-5",
+      "channel": "fill",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.color-text-brand-on-bg-fill",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:checked ~ .Polaris-Checkbox__Icon svg, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate ~ .Polaris-Checkbox__Icon svg"
+      }
+    },
+    {
+      "part": "icon-5",
+      "channel": "fill",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.color-text-brand-on-bg-fill",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:checked ~ .Polaris-Checkbox__Icon svg, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate ~ .Polaris-Checkbox__Icon svg"
+      }
+    },
+    {
+      "part": "icon-6",
+      "channel": "color",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.color-text-brand-on-bg-fill",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Icon svg"
+      }
+    },
+    {
+      "part": "icon-6",
+      "channel": "color",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.color-checkbox-icon-disabled",
+      "varName": "--p-color-checkbox-icon-disabled",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:disabled ~ .Polaris-Checkbox__Icon svg"
+      }
+    },
+    {
+      "part": "icon-6",
+      "channel": "fill",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.color-text-brand-on-bg-fill",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:checked ~ .Polaris-Checkbox__Icon svg, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate ~ .Polaris-Checkbox__Icon svg"
+      }
+    },
+    {
+      "part": "icon-6",
+      "channel": "fill",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.color-text-brand-on-bg-fill",
+      "varName": "--p-color-text-brand-on-bg-fill",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input:checked ~ .Polaris-Checkbox__Icon svg, .Polaris-Checkbox__Input.Polaris-Checkbox__Input--indeterminate ~ .Polaris-Checkbox__Icon svg"
+      }
+    },
+    {
+      "part": "input",
+      "channel": "z-index",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.z-index-1",
+      "varName": "--p-z-index-1",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input"
+      }
+    },
+    {
+      "part": "input",
+      "channel": "z-index",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.z-index-1",
+      "varName": "--p-z-index-1",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input"
+      }
+    },
+    {
+      "part": "input",
+      "channel": "z-index",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.z-index-1",
+      "varName": "--p-z-index-1",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input"
+      }
+    },
+    {
+      "part": "input",
+      "channel": "z-index",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.z-index-1",
+      "varName": "--p-z-index-1",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input"
+      }
+    },
+    {
+      "part": "input",
+      "channel": "z-index",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.z-index-1",
+      "varName": "--p-z-index-1",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input"
+      }
+    },
+    {
+      "part": "input",
+      "channel": "z-index",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.z-index-1",
+      "varName": "--p-z-index-1",
+      "anchor": {
+        "selector": ".Polaris-Checkbox__Input"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-size",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.text-body-md-font-size",
+      "varName": "--p-text-body-md-font-size",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "font-weight",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.text-body-sm-font-weight",
+      "varName": "--p-text-body-sm-font-weight",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "line-height",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.text-body-md-font-line-height",
+      "varName": "--p-text-body-md-font-line-height",
+      "anchor": {
+        "selector": ".Polaris-Text--bodyMd"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-end",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-end",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-end",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-end",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-end",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-end",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-start",
+      "combo": "unchecked.enabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-start",
+      "combo": "unchecked.disabled",
+      "axisValues": {
+        "checked": "unchecked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-start",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-start",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-start",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "padding-block-start",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "p.space-100",
+      "varName": "--p-space-100",
+      "anchor": {
+        "selector": ".Polaris-Choice"
+      }
+    }
+  ],
+  "skips": [
+    "backdrop.box-shadow: candidates --p-border-width-0165 → \"p.border-width-0165\" = 0.04125rem; --p-color-bg-fill-brand-selected → \"p.color-bg-fill-brand-selected\" = rgba(48, 48, 48, 1); --p-color-input-border → \"p.color-input-border\" = rgba(138, 138, 138, 1); --p-space-800 → \"p.space-800\" = 2rem name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "icon.bottom: source declares `calc(var(--p-space-050)*-1)` — a calc() over var(--p-space-050). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "icon.left: source declares `calc(var(--p-space-050)*-1)` — a calc() over var(--p-space-050). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "icon.right: source declares `calc(var(--p-space-050)*-1)` — a calc() over var(--p-space-050). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "icon.top: source declares `calc(var(--p-space-050)*-1)` — a calc() over var(--p-space-050). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "icon-3.bottom: source declares `calc(var(--p-space-050)*-1)` — a calc() over var(--p-space-050). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "icon-3.left: source declares `calc(var(--p-space-050)*-1)` — a calc() over var(--p-space-050). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "icon-3.right: source declares `calc(var(--p-space-050)*-1)` — a calc() over var(--p-space-050). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "icon-3.top: source declares `calc(var(--p-space-050)*-1)` — a calc() over var(--p-space-050). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "label.letter-spacing: candidate --p-text-body-md-font-letter-spacing → \"p.text-body-md-font-letter-spacing\" = 0rem names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "part-0-0-2-0-0-2.animation-duration: candidate --p-motion-duration-150 → \"p.motion-duration-150\" = 150ms names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.block-size: source declares `calc(var(--pc-choice-fill, auto) + var(--pc-choice-bleed-block-start, var(--pc-choice-space-0)) + var(--pc-choice-bleed-` — a calc() over var(--pc-choice-bleed-block-end, --pc-choice-bleed-block-start, --pc-choice-fill, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.inline-size: source declares `calc(var(--pc-choice-fill, auto) + var(--pc-choice-bleed-inline-start, var(--pc-choice-space-0)) + var(--pc-choice-bleed` — a calc() over var(--pc-choice-bleed-inline-end, --pc-choice-bleed-inline-start, --pc-choice-fill, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.margin-block-end: source declares `calc(var(--pc-choice-bleed-block-end, var(--pc-choice-space-0))*-1)` — a calc() over var(--pc-choice-bleed-block-end, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.margin-block-start: source declares `calc(var(--pc-choice-bleed-block-start, var(--pc-choice-space-0))*-1)` — a calc() over var(--pc-choice-bleed-block-start, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.margin-inline-end: source declares `calc(var(--pc-choice-bleed-inline-end, var(--pc-choice-space-0))*-1)` — a calc() over var(--pc-choice-bleed-inline-end, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost.",
+    "root.margin-inline-start: source declares `calc(var(--pc-choice-bleed-inline-start, var(--pc-choice-space-0))*-1)` — a calc() over var(--pc-choice-bleed-inline-start, --pc-choice-space-0). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 2,
+  "shorthandSkips": [
+    "backdrop.border-color: SHORTHAND carrying var(--p-color-bg-fill-brand) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)",
+    "icon-3.transition: SHORTHAND carrying var(--p-motion-duration-150, --p-motion-ease-out) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 16,
+  "calcCeiling": 14
+}

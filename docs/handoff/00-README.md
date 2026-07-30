@@ -11,6 +11,14 @@ related: [01-concept, 02-thesis-and-north-star, 03-determinism]
 
 # ds-contracts-poc — read me first
 
+> **⚠️ DATED SNAPSHOT — frozen 2026-07-21 (banner added 2026-07-29).** This
+> package describes the project as it stood on 2026-07-21; its status numbers
+> (the 146-check suite, the broken composite Modal) are two generations stale
+> and are NOT updated. Live status is `ROADMAP.md`, `docs/23-known-limitations.md`
+> and `MILESTONES.md` at the repo root. What stays durable here are the
+> architectural constraints — agent-driven emitter delivery is a dead end, and
+> the mock-fidelity discipline — not the numbers.
+
 You are being handed a proof-of-concept called **ds-contracts-poc** (repo:
 `github.com/southleft/ds-contracts-poc`, PUBLIC, MIT). This directory is a
 complete, self-contained briefing. Read it in order. Assume the reader (you)
