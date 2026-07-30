@@ -965,6 +965,9 @@ interface StubCapture {
     applied?: Record<string, string | boolean>;
     bbox?: { width: number; height: number };
     fill?: DumpPaint;
+    /** dump v1.7: first visible SOLID inside the instance's subtree — the
+     *  stub-paint channel. The instance's OWN `fill` (when present) wins. */
+    instancePrimaryFill?: DumpPaint;
     stroke?: DumpPaint;
     strokeWeight?: number;
     cornerRadius?: number;
@@ -1611,6 +1614,13 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     return;
   }
   const first = shapes[0].sh;
+  // dump v1.7 tolerance ledger: ellipse arc geometry (sweep/donut) is
+  // captured but NOT carried this round — named, never a throw.
+  if (shapes.some((s) => s.sh.arc !== undefined)) {
+    ctx.notes.push(
+      `${where}: ellipse arc geometry captured (dump v1.7 \`shape.arc\`) — arcs are NOT carried this round (ledgered by name; a later iteration renders sweeps/donuts); the shape renders as a full ellipse`,
+    );
+  }
   const shape: Record<string, unknown> = { kind: first.kind, width: first.width, height: first.height };
   const sizes = [...new Set(shapes.map((s) => `${s.sh.width}×${s.sh.height}`))];
   if (sizes.length > 1) {
@@ -1729,6 +1739,59 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
   ctx.notes.push(
     `${where}: shape placement/rotation differs across variants without correlating to any enum axis — NAMED, not proposed; review`,
   );
+}
+
+/** dump v1.7 plain rect: an UNROTATED RECTANGLE captured because nothing else
+ *  carries its size (parent not auto-layout, or ABSOLUTE). It is an ordinary
+ *  box, not parametric decor — true only when EVERY occurrence agrees (a
+ *  rotated or partially-captured rect keeps the decor-shape path's own
+ *  refusal discipline). */
+const isPlainRectShape = (m: Merged): boolean =>
+  m.occ.every(
+    (o) =>
+      o.node.shape !== undefined &&
+      o.node.shape.kind === 'rect' &&
+      (o.node.shape.rotation === undefined || o.node.shape.rotation === 0),
+  );
+
+/** Carry dump v1.7 plain-rect geometry as ordinary width/height channels —
+ *  mint observations exactly like every other literal channel, so a size
+ *  that varies by variant classifies per axis value (or refuses BY NAME
+ *  through the standard classifier). Fill/radius already ride the existing
+ *  fill/cornerRadius channels; placement (x/y/right/bottom) is LEDGERED by
+ *  name this round — absolute rendering is a later iteration. Field case:
+ *  Untitled UI slider/progress tracks, which collapsed to 0×0. */
+function mintPlainRectGeometry(m: Merged, tokens: Record<string, string>, ctx: Ctx, where: string) {
+  const shapes = m.occ.map((o) => ({ variant: o.variant, sh: o.node.shape! }));
+  const sizes = [...new Set(shapes.map((s) => `${s.sh.width}×${s.sh.height}`))];
+  if (!ctx.mint) {
+    ctx.notes.push(
+      `${where}: plain-rect geometry captured (${sizes.join(', ')}px — dump v1.7) but minting is off — width/height not proposed; bind the drawn size manually`,
+    );
+  } else {
+    for (const dim of ['width', 'height'] as const) {
+      // A dimension already carried (bound variable, or an earlier channel)
+      // is the design's own binding — the literal never overrides it.
+      if (tokens[dim] !== undefined || m.occ.some((o) => o.node.bound?.[dim])) continue;
+      mintObservation(
+        ctx,
+        tokens,
+        where,
+        dim,
+        'px',
+        m.occ.map((o) => ({ variant: o.variant, value: Math.round(o.node.shape![dim] * 100) / 100 })),
+      );
+    }
+    ctx.notes.push(
+      `${where}: plain-rect geometry (dump v1.7) carried as width/height mint observations (${sizes.join('; ')}px) — an in-flow fixed-size box; fill/radius ride the existing channels`,
+    );
+  }
+  const placed = shapes.filter((s) => s.sh.x !== undefined).length;
+  if (placed > 0) {
+    ctx.notes.push(
+      `${where}: rect placement (x/y/right/bottom) captured on ${placed}/${shapes.length} variant(s) — absolute placement is NOT carried this round (ledgered by name; overlay rendering is a later iteration); the rect renders in flow`,
+    );
+  }
 }
 
 /** The contract's padding vocabulary prefers the symmetric shorthands
@@ -2392,6 +2455,7 @@ function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): st
         ...(o.node.componentProperties ? { applied: o.node.componentProperties } : {}),
         bbox: o.node.bbox,
         ...(o.node.fill ? { fill: o.node.fill } : {}),
+        ...(o.node.instancePrimaryFill ? { instancePrimaryFill: o.node.instancePrimaryFill } : {}),
         ...(o.node.stroke ? { stroke: o.node.stroke } : {}),
         ...(o.node.strokeWeight !== undefined ? { strokeWeight: o.node.strokeWeight } : {}),
         ...(o.node.cornerRadius !== undefined ? { cornerRadius: o.node.cornerRadius } : {}),
@@ -2976,6 +3040,19 @@ function buildPart(
   // variants that never carried it.
   if (visibleWhen === OMIT_PART) return null;
 
+  // dump v1.7 tolerance ledger — additive capture channels the proposer does
+  // not carry yet are NAMED once per part, never a throw and never silent.
+  if (m.occ.some((o) => o.node.abs !== undefined)) {
+    ctx.notes.push(
+      `${where}: absolute placement captured (dump v1.7 \`abs\`) — overlay/absolute rendering is NOT carried this round (ledgered by name; a later iteration renders it); the part renders in flow`,
+    );
+  }
+  if (m.occ.some((o) => o.node.imageFill === true)) {
+    ctx.notes.push(
+      `${where}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — image bytes are not exported; the part renders without the image (a later round exports the asset)`,
+    );
+  }
+
   if (m.type === 'TEXT') {
     const byProp: ByPropCollector = { map: {} };
     const tokens = invertTextTokens(m, ctx, where, byProp);
@@ -3122,6 +3199,19 @@ function buildPart(
       );
     }
     // The instance's own geometry/paints belong to the child contract — elided.
+    // dump v1.7: an observed subtree paint on a LINKED instance is ledgered —
+    // the child contract owns its paint, and a per-usage paint override is
+    // not representable on a component ref (field case: Untitled UI's _Dot is
+    // purple inside Badge and white inside Button; whichever proposal claimed
+    // the stub fixed its paint).
+    if (id) {
+      const observedPaint = first(m.occ, (n) => n.instancePrimaryFill);
+      if (observedPaint) {
+        ctx.notes.push(
+          `${where}: observed subtree paint (${observedPaint.var !== undefined ? `var ${observedPaint.var}` : `hex ${observedPaint.hex}`}, dump v1.7 instancePrimaryFill) on an instance LINKED to ${id} — the child contract owns its paint; a per-usage paint override is not representable on a component ref (ledgered, review if the linked contract's paint differs)`,
+        );
+      }
+    }
     part.component = component;
     // A visibility binding on a component-ref part is a boolean prop +
     // visibleWhen, exactly like slot/swap/frame parts (field case: CBDS icon
@@ -3149,10 +3239,15 @@ function buildPart(
 
   // v9 shape (#42, dump v1.3): parametric leaf decor — the part carries the
   // captured geometry, hidden-pattern visibility, and per-variant placement.
+  // dump v1.7 plain rects (unrotated, outside auto-layout — slider/progress
+  // tracks) are NOT decor shapes: their geometry mints as ordinary
+  // width/height channels (per-axis-conditioned like every other minted
+  // channel) and fill/radius ride the existing token channels.
   if (m.occ.some((o) => o.node.shape !== undefined)) {
     if (visibleWhen) part.visibleWhen = visibleWhen;
     invertHiddenVisibility(m, part, ctx, where);
-    invertNodeShape(m, part, ctx, where);
+    if (isPlainRectShape(m)) mintPlainRectGeometry(m, tokens, ctx, where);
+    else invertNodeShape(m, part, ctx, where);
     invertNodeOpacity(m, part, tokens, ctx, where);
     invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
@@ -3585,16 +3680,38 @@ function stubGeometry(
   };
   push('width', 'px', (o) => Math.round(o.bbox!.width * 100) / 100);
   push('height', 'px', (o) => Math.round(o.bbox!.height * 100) / 100);
-  const fills = geo.filter((o) => o.fill !== undefined);
-  if (fills.length > 0 && fills.every((o) => o.fill!.hex !== undefined)) {
+  // Stub paint: the instance's OWN fill first; else the first visible SOLID
+  // observed inside its subtree (dump v1.7 instancePrimaryFill) — the paint
+  // the drawn box actually shows (field case: Untitled UI Badge's _Dot,
+  // observed 6×6 but rendered invisible without its 9e77ed dot paint).
+  const paintOf = (o: StubCapture['observed'][number]): DumpPaint | undefined =>
+    o.fill ?? o.instancePrimaryFill;
+  const fills = geo.filter((o) => paintOf(o) !== undefined);
+  let backgroundVarRef: string | null = null;
+  if (fills.length > 0 && fills.every((o) => paintOf(o)!.hex !== undefined)) {
     // Occurrences without a fill are honestly TRANSPARENT (#00000000 — a
     // legal DTCG color and a CSS color), so a per-variant fill mints per
     // axis instead of dropping the channel.
-    push('background-color', 'color', (o) => (o.fill ? paintCssHex(o.fill) : '#00000000'));
+    push('background-color', 'color', (o) => {
+      const p = paintOf(o);
+      return p ? paintCssHex(p) : '#00000000';
+    });
   } else if (fills.length > 0) {
-    ctx.notes.push(
-      `stub ${capture.id}: fill var-bound on observed occurrence(s) — background not carried on the stub geometry, review`,
-    );
+    // Var-bound observed paint (dump v1.7): when ONE variable serves every
+    // observed occurrence, the stub's background binds the variable's ref
+    // directly — it resolves through the captured-token layer, no literal
+    // minted. Mixed vars / partial presence stays a NAMED limit.
+    const vars = [...new Set(fills.map((o) => paintOf(o)!.var).filter((v): v is string => v !== undefined))];
+    if (vars.length === 1 && fills.length === geo.length && fills.every((o) => paintOf(o)!.var !== undefined)) {
+      backgroundVarRef = ref(vars[0]);
+      ctx.notes.push(
+        `stub ${capture.id}: observed primary paint is bound to variable "${vars[0]}" on every occurrence — background-color carried as ${backgroundVarRef} (resolves through the captured-token layer; dump v1.7 instancePrimaryFill)`,
+      );
+    } else {
+      ctx.notes.push(
+        `stub ${capture.id}: observed paint var-bound on some occurrence(s) but not one variable across all — background not carried on the stub geometry, review`,
+      );
+    }
   }
   if (strokesCarriable) {
     push('border-color', 'color', (o) => (o.stroke ? paintCssHex(o.stroke) : '#00000000'));
@@ -3610,6 +3727,9 @@ function stubGeometry(
     if (binding.ref) tokens[observations[i].cssProperty] = binding.ref;
     else if (binding.reason) ctx.notes.push(`stub ${capture.id} ${observations[i].cssProperty}: ${binding.reason}`);
   });
+  // Uniform var-bound observed paint (dump v1.7) — a captured-token ref, not
+  // a minted leaf; joins the minted geometry bindings on the stub root.
+  if (backgroundVarRef !== null) tokens['background-color'] = backgroundVarRef;
   if (Object.keys(tokens).length === 0) return null;
   return { tokens, tree: minted.tree, count: minted.count, entries: minted.entries };
 }
@@ -4350,6 +4470,13 @@ export function proposeFromDump(
   if (rootByProp) root.layoutByProp = rootByProp;
   const rootTokensByProp: ByPropCollector = { map: {} };
   const rootTokens = invertNodeTokens(merged, true, ctx, where, rootTokensByProp);
+  // dump v1.7 tolerance ledger (root): an IMAGE fill on the variant root
+  // (photo avatars) is captured by name only — named, never a throw.
+  if (merged.occ.some((o) => o.node.imageFill === true)) {
+    ctx.notes.push(
+      `${where}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — image bytes are not exported; the root renders without the image (a later round exports the asset)`,
+    );
+  }
 
   // Generator artifact: a root whose only child is the auto-injected `label`
   // text node (contracts with a `children` text prop and no parts). The node

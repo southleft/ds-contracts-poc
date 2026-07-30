@@ -114,7 +114,8 @@
             "Background": {
               "tokens": {
                 "background-color": "{imported.progress-bar.progress-bar-background.background-color}",
-                "border-radius": "{imported.progress-bar.progress-bar-background.border-radius}"
+                "border-radius": "{imported.progress-bar.progress-bar-background.border-radius}",
+                "height": "{imported.progress-bar.progress-bar-background.height}"
               }
             },
             "Progress": {}

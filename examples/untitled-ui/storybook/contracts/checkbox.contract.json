@@ -163,7 +163,8 @@
       "parts": {},
       "tokens": {
         "width": "{imported.stub-checkbox.root.width}",
-        "height": "{imported.stub-checkbox.root.height}"
+        "height": "{imported.stub-checkbox.root.height}",
+        "background-color": "{imported.stub-checkbox.root.background-color}"
       }
     }
   },

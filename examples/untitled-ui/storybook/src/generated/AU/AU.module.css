@@ -10,4 +10,5 @@
   border: 0;
   width: var(--imported-stub-au-root-width);
   height: var(--imported-stub-au-root-height);
+  background-color: var(--imported-stub-au-root-background-color);
 }

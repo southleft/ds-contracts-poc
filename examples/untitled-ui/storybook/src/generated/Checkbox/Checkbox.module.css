@@ -10,4 +10,5 @@
   border: 0;
   width: var(--imported-stub-checkbox-root-width);
   height: var(--imported-stub-checkbox-root-height);
+  background-color: var(--imported-stub-checkbox-root-background-color);
 }

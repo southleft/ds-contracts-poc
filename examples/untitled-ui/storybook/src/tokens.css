@@ -243,6 +243,7 @@
   --imported-progress-bar-percentage-line-height: 20px;
   --imported-progress-bar-progress-bar-background-background-color: #f5f5f5;
   --imported-progress-bar-progress-bar-background-border-radius: 4px;
+  --imported-progress-bar-progress-bar-background-height: 8px;
   --imported-progress-bar-progress-bar-border-radius: 8px;
   --imported-progress-bar-root-gap-bottom: 8px;
   --imported-progress-bar-root-gap-bottomFloating: 8px;
@@ -290,6 +291,7 @@
   --imported-shared-size-8: 8px;
   --imported-slider-background-background-color: #e5e5e5;
   --imported-slider-background-border-radius: 4px;
+  --imported-slider-background-width: 320px;
   --imported-slider-progress-left-control-left-control-background-color: #ffffff;
   --imported-slider-progress-left-control-left-control-border-width: 1px;
   --imported-slider-progress-left-control-left-number-color: #171717;
@@ -303,7 +305,6 @@
   --imported-slider-progress-right-control-right-number-font-size: 16px;
   --imported-slider-progress-right-control-right-number-font-weight: 500;
   --imported-slider-progress-right-control-right-number-line-height: 24px;
-  --imported-slider-root-border-radius: 8px;
   --imported-social-button-root-background-color-apple-brand-default: #000000;
   --imported-social-button-root-background-color-apple-brand-focused: #000000;
   --imported-social-button-root-background-color-apple-brand-hover: #000000;
@@ -385,6 +386,7 @@
   --imported-stub-arrow-right-root-width: 12px;
   --imported-stub-arrow-up-root-height: 12px;
   --imported-stub-arrow-up-root-width: 12px;
+  --imported-stub-au-root-background-color: #0052b4;
   --imported-stub-au-root-height: 16px;
   --imported-stub-au-root-width: 16px;
   --imported-stub-avatar-company-icon-root-border-radius-2xl: 13.333334922790527px;
@@ -426,12 +428,14 @@
   --imported-stub-avatar-online-indicator-root-width-sm: 8px;
   --imported-stub-avatar-online-indicator-root-width-xl: 14px;
   --imported-stub-avatar-online-indicator-root-width-xs: 6px;
+  --imported-stub-checkbox-root-background-color: #ffffff;
   --imported-stub-checkbox-root-height: 16px;
   --imported-stub-checkbox-root-width: 16px;
   --imported-stub-chevron-down-root-height: 20px;
   --imported-stub-chevron-down-root-width: 20px;
   --imported-stub-circle-root-height: 20px;
   --imported-stub-circle-root-width: 20px;
+  --imported-stub-dot-root-background-color: #9e77ed;
   --imported-stub-dot-root-height: 8px;
   --imported-stub-dot-root-width: 8px;
   --imported-stub-mail-root-height: 20px;

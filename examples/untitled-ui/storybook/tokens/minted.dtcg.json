@@ -459,6 +459,10 @@
         "height": {
           "$value": "16px",
           "$type": "dimension"
+        },
+        "background-color": {
+          "$value": "#0052b4",
+          "$type": "color"
         }
       }
     },
@@ -471,6 +475,10 @@
         "height": {
           "$value": "8px",
           "$type": "dimension"
+        },
+        "background-color": {
+          "$value": "#9e77ed",
+          "$type": "color"
         }
       }
     },
@@ -855,16 +863,16 @@
         "$value": "12px",
         "$type": "dimension"
       },
+      "size-8": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
       "color-7f56d9": {
         "$value": "#7f56d9",
         "$type": "color"
       },
       "size-14": {
         "$value": "14px",
-        "$type": "dimension"
-      },
-      "size-8": {
-        "$value": "8px",
         "$type": "dimension"
       },
       "color-737373": {
@@ -941,12 +949,6 @@
       }
     },
     "slider": {
-      "root": {
-        "border-radius": {
-          "$value": "8px",
-          "$type": "dimension"
-        }
-      },
       "background": {
         "background-color": {
           "$value": "#e5e5e5",
@@ -954,6 +956,10 @@
         },
         "border-radius": {
           "$value": "4px",
+          "$type": "dimension"
+        },
+        "width": {
+          "$value": "320px",
           "$type": "dimension"
         }
       },
@@ -1205,6 +1211,10 @@
         "border-radius": {
           "$value": "4px",
           "$type": "dimension"
+        },
+        "height": {
+          "$value": "8px",
+          "$type": "dimension"
         }
       },
       "percentage": {
@@ -1355,6 +1365,10 @@
         "height": {
           "$value": "16px",
           "$type": "dimension"
+        },
+        "background-color": {
+          "$value": "#ffffff",
+          "$type": "color"
         }
       }
     },

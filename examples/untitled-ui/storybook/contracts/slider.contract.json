@@ -98,7 +98,9 @@
         "Background": {
           "tokens": {
             "background-color": "{imported.slider.background.background-color}",
-            "border-radius": "{imported.slider.background.border-radius}"
+            "border-radius": "{imported.slider.background.border-radius}",
+            "width": "{imported.slider.background.width}",
+            "height": "{imported.shared.size-8}"
           }
         },
         "Progress": {
@@ -106,7 +108,8 @@
             "progressLine": {
               "tokens": {
                 "background-color": "{imported.shared.color-7f56d9}",
-                "border-radius": "{imported.slider.progress-progress-line.border-radius}"
+                "border-radius": "{imported.slider.progress-progress-line.border-radius}",
+                "height": "{imported.shared.size-8}"
               }
             },
             "leftControl": {
@@ -233,7 +236,7 @@
         }
       },
       "tokens": {
-        "border-radius": "{imported.slider.root.border-radius}"
+        "border-radius": "{imported.shared.size-8}"
       }
     }
   },

@@ -37,7 +37,8 @@
       "parts": {},
       "tokens": {
         "width": "{imported.stub-dot.root.width}",
-        "height": "{imported.stub-dot.root.height}"
+        "height": "{imported.stub-dot.root.height}",
+        "background-color": "{imported.stub-dot.root.background-color}"
       }
     }
   },

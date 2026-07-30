@@ -1948,7 +1948,7 @@
      Do not edit here: scripts/build-plugin-zip.mjs refuses to package this
      plugin when the block below differs from the repo file. -->
 <script type="text/plain" id="dump-source">
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.6).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.7).
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -2044,9 +2044,18 @@ function dumpShape(node, parent) {
   const kind = SHAPE_KIND_BY_TYPE[node.type];
   if (!kind) return null;
   const rotation = round2(-(typeof node.rotation === 'number' ? node.rotation : 0));
-  if (kind === 'rect' && rotation === 0) return null; // ordinary box — existing channels
+  if (kind === 'rect' && rotation === 0) {
+    // dump v1.7: an unrotated RECT is 'ordinary' only when auto-layout carries
+    // its size; outside auto-layout (slider tracks, progress bars) or when
+    // ABSOLUTE, nothing else carries width/height — carry it as shape.
+    const parentAuto = parent && 'layoutMode' in parent && parent.layoutMode !== 'NONE';
+    if (parentAuto && node.layoutPositioning !== 'ABSOLUTE') return null;
+  }
   const shape = { kind, width: round2(node.width), height: round2(node.height) };
   if (node.type === 'REGULAR_POLYGON' && typeof node.pointCount === 'number') shape.sides = node.pointCount;
+  if (node.type === 'ELLIPSE' && node.arcData && (Math.abs(node.arcData.endingAngle - node.arcData.startingAngle) < Math.PI * 2 - 1e-6 || node.arcData.innerRadius > 0)) {
+    shape.arc = { start: round2(node.arcData.startingAngle), end: round2(node.arcData.endingAngle), innerRadius: round2(node.arcData.innerRadius) };
+  }
   if (rotation !== 0) shape.rotation = rotation;
   const box = node.absoluteBoundingBox;
   const parentBox = parent && parent.absoluteBoundingBox;
@@ -2175,6 +2184,43 @@ async function dumpNode(node, nodePath, parent) {
   const shape = dumpShape(node, parent);
   if (shape) out.shape = shape;
 
+  // dump v1.7: ABSOLUTE placement for ALL node types (TEXT/FRAME/INSTANCE),
+  // center-preserving, same spelling as dumpShape — the overlay-flattened class.
+  const parentAutoLayout = parent && 'layoutMode' in parent && parent.layoutMode !== 'NONE';
+  const isAbsolutePlaced = node.layoutPositioning === 'ABSOLUTE'
+    // dump v1.7: in a NON-auto-layout parent EVERY child is absolutely
+    // placed by x/y (layoutPositioning only means something inside auto-layout)
+    // — UUI's avatar indicators and floating tooltips live exactly there, which
+    // is why the first rev captured zero abs blocks.
+    || (parent && !parentAutoLayout && typeof node.x === 'number');
+  if (!shape && isAbsolutePlaced && node.absoluteBoundingBox && parent && parent.absoluteBoundingBox) {
+    const bb = node.absoluteBoundingBox, pb = parent.absoluteBoundingBox;
+    const cx = bb.x - pb.x + bb.width / 2, cy = bb.y - pb.y + bb.height / 2;
+    const abs = { x: round2(cx - bb.width / 2), y: round2(cy - bb.height / 2), right: round2(pb.width - cx - bb.width / 2), bottom: round2(pb.height - cy - bb.height / 2), width: round2(bb.width), height: round2(bb.height) };
+    if (node.constraints) {
+      const H = { MIN: 'LEFT', MAX: 'RIGHT', CENTER: 'CENTER' }, V = { MIN: 'TOP', MAX: 'BOTTOM', CENTER: 'CENTER' };
+      const h = H[node.constraints.horizontal], v = V[node.constraints.vertical];
+      if (h && v) abs.constraints = { horizontal: h, vertical: v };
+    }
+    out.abs = abs;
+  }
+
+  // dump v1.7: INSTANCE primary fill — the stub-paint gap: a stub with
+  // observed geometry but no paint renders invisible. Read-only subtree walk,
+  // first node with a visible SOLID, reusing dumpPaint (alias + alpha;
+  // nodePath null suppresses per-node degradation spam).
+  if (node.type === 'INSTANCE' && typeof node.findAll === 'function') {
+    try {
+      const kids = [node].concat(node.findAll(function () { return true; })).slice(0, 60);
+      for (const n of kids) {
+        if (!('fills' in n) || !Array.isArray(n.fills)) continue;
+        if (!n.fills.some(function (p) { return p.visible !== false && p.type === 'SOLID'; })) continue;
+        const paint = await dumpPaint(n.fills, null, 'fill', n);
+        if (paint) { out.instancePrimaryFill = paint; break; }
+      }
+    } catch (e) { /* walk refused — stays a stub-paint degradation */ }
+  }
+
   // dump v1.2: channels with NO dump projection are named receipts.
   if ('blendMode' in node && node.blendMode !== 'NORMAL' && node.blendMode !== 'PASS_THROUGH') {
     degrade('blend-mode-unsupported', nodePath, 'blendMode ' + node.blendMode + ' has no dump v1 projection — node renders as NORMAL');
@@ -2216,6 +2262,9 @@ async function dumpNode(node, nodePath, parent) {
   if (node.type !== 'TEXT') {
     const fill = 'fills' in node ? await dumpPaint(node.fills, nodePath, 'fill', node) : null;
     if (fill) out.fill = fill;
+    // dump v1.7: IMAGE-fill marker — photo avatars were pure degradations;
+    // the flag lets the proposer ledger BY NAME (future rounds export the image).
+    if (!fill && 'fills' in node && Array.isArray(node.fills) && node.fills.some(function (p) { return p.visible !== false && p.type === 'IMAGE'; })) out.imageFill = true;
   }
   const stroke = 'strokes' in node ? await dumpPaint(node.strokes, nodePath, 'stroke', node) : null;
   if (stroke) {
@@ -2384,8 +2433,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.6) for design→contract proposal.',
-    dumpVersion: '1.6',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.7) for design→contract proposal.',
+    dumpVersion: '1.7',
   },
 };
 dumps._degradations = degradations;

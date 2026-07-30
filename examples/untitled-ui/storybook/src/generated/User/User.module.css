@@ -9,3 +9,9 @@
   justify-content: center;
   border: 0;
 }
+
+/* HARNESS PATCH (fix round 1): dashed stub placeholder */
+.root {
+  outline: 1px dashed #98a2b3;
+  outline-offset: -1px;
+}

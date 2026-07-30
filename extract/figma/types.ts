@@ -79,6 +79,11 @@ export interface DumpEffect {
  *  Field case: the CBDS Tooltip "Pointer" triangle (12×12 REGULAR_POLYGON,
  *  rotated per placement, absolutely positioned against the bubble). */
 export interface DumpShape {
+  /** Since dump v1.7 an UNROTATED RECTANGLE is also captured when nothing
+   *  else carries its size — parent not auto-layout, or the node is
+   *  ABSOLUTE (field case: Untitled UI slider/progress tracks, which
+   *  collapsed to 0×0 with only fill+radius surviving). Inside auto-layout
+   *  an unrotated rect still returns no shape (existing channels carry it). */
   kind: 'polygon' | 'ellipse' | 'rect';
   /** Polygon point count (Plugin API pointCount). The REST surface does not
    *  expose it — ABSENT means not captured; the proposer assumes the Figma
@@ -90,6 +95,12 @@ export interface DumpShape {
    *  by the bounding box, NAMED in a degradation receipt. */
   width: number;
   height: number;
+  /** ELLIPSE arc geometry (dump v1.7, additive) — captured when the drawn
+   *  ellipse is not a full disc (partial sweep) or is a donut
+   *  (innerRadius > 0). Angles are the Plugin API's RADIANS, verbatim.
+   *  NOT yet consumed by the proposer (a planned iteration renders arcs);
+   *  presence is ledgered by name, never a throw. */
+  arc?: { start: number; end: number; innerRadius: number };
   /** CSS-clockwise degrees: `transform: rotate(<n>deg)` reproduces the
    *  canvas rendering. The REST `rotation` field rides RADIANS with the same
    *  visual sign (verified against absoluteRenderBounds of the CBDS Tooltip
@@ -158,6 +169,32 @@ export interface DumpNode {
   /** Decor-shape geometry (dump v1.3, additive — see DumpShape). Absence in
    *  older dumps means not captured, never "no shape". */
   shape?: DumpShape;
+  /** ABSOLUTE placement for ALL node types (dump v1.7, additive) — the
+   *  center-preserving spelling DumpShape placement uses, captured when the
+   *  node is layoutPositioning ABSOLUTE or its parent is not auto-layout
+   *  (where every child is placed by x/y). NOT yet consumed by the proposer
+   *  (overlay rendering is a planned iteration); presence is ledgered by
+   *  name, never a throw. Absence in older dumps means not captured. */
+  abs?: {
+    x: number;
+    y: number;
+    right: number;
+    bottom: number;
+    width: number;
+    height: number;
+    constraints?: { horizontal: string; vertical: string };
+  };
+  /** First visible SOLID fill found in an INSTANCE's subtree (dump v1.7,
+   *  additive) — the stub-paint channel: a child stub with observed geometry
+   *  but no paint rendered invisible (field case: Untitled UI Badge's _Dot,
+   *  hex 9e77ed). Same {var|hex, alpha?} shape as paints; the node's OWN
+   *  `fill` (when present) still wins downstream. Absence in older dumps
+   *  means not captured, never "no paint". */
+  instancePrimaryFill?: DumpPaint;
+  /** The node's first visible fill is an IMAGE paint (dump v1.7, additive) —
+   *  captured BY NAME only (no bytes exported yet); consumers ledger it and
+   *  render without the image. Absence means no image fill or not captured. */
+  imageFill?: boolean;
   text?: DumpText;
   /** componentPropertyReferences, property-id suffixes stripped:
    *  characters → TEXT property, mainComponent → INSTANCE_SWAP property,
