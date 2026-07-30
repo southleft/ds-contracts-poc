@@ -1,0 +1,124 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/avatar-label-group.contract.json (ds.avatar-label-group v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+}
+
+.size-md {
+  gap: var(--imported-avatar-label-group-root-gap-md);
+}
+
+.size-lg {
+  gap: var(--imported-avatar-label-group-root-gap-lg);
+}
+
+.size-xl {
+  gap: var(--imported-avatar-label-group-root-gap-xl);
+}
+
+.size-sm {
+  gap: var(--imported-avatar-label-group-root-gap-sm);
+}
+
+.textAndSupportingText {
+  display: flex;
+  flex-direction: column;
+}
+
+.Text {
+  color: var(--imported-avatar-label-group-text-and-supporting-text-text-color);
+  font-weight: var(--imported-avatar-label-group-text-and-supporting-text-text-font-weight);
+}
+
+.size-md .Text {
+  font-size: var(--imported-avatar-label-group-text-and-supporting-text-text-font-size-md);
+}
+
+.size-lg .Text {
+  font-size: var(--imported-avatar-label-group-text-and-supporting-text-text-font-size-lg);
+}
+
+.size-xl .Text {
+  font-size: var(--imported-avatar-label-group-text-and-supporting-text-text-font-size-xl);
+}
+
+.size-sm .Text {
+  font-size: var(--imported-avatar-label-group-text-and-supporting-text-text-font-size-sm);
+}
+
+.size-md .Text {
+  line-height: var(--imported-avatar-label-group-text-and-supporting-text-text-line-height-md);
+}
+
+.size-lg .Text {
+  line-height: var(--imported-avatar-label-group-text-and-supporting-text-text-line-height-lg);
+}
+
+.size-xl .Text {
+  line-height: var(--imported-avatar-label-group-text-and-supporting-text-text-line-height-xl);
+}
+
+.size-sm .Text {
+  line-height: var(--imported-avatar-label-group-text-and-supporting-text-text-line-height-sm);
+}
+
+.supportingText {
+  color: var(--imported-avatar-label-group-text-and-supporting-text-supporting-text-color);
+  font-weight: var(
+    --imported-avatar-label-group-text-and-supporting-text-supporting-text-font-weight
+  );
+}
+
+.size-md .supportingText {
+  font-size: var(
+    --imported-avatar-label-group-text-and-supporting-text-supporting-text-font-size-md
+  );
+}
+
+.size-lg .supportingText {
+  font-size: var(
+    --imported-avatar-label-group-text-and-supporting-text-supporting-text-font-size-lg
+  );
+}
+
+.size-xl .supportingText {
+  font-size: var(
+    --imported-avatar-label-group-text-and-supporting-text-supporting-text-font-size-xl
+  );
+}
+
+.size-sm .supportingText {
+  font-size: var(
+    --imported-avatar-label-group-text-and-supporting-text-supporting-text-font-size-sm
+  );
+}
+
+.size-md .supportingText {
+  line-height: var(
+    --imported-avatar-label-group-text-and-supporting-text-supporting-text-line-height-md
+  );
+}
+
+.size-lg .supportingText {
+  line-height: var(
+    --imported-avatar-label-group-text-and-supporting-text-supporting-text-line-height-lg
+  );
+}
+
+.size-xl .supportingText {
+  line-height: var(
+    --imported-avatar-label-group-text-and-supporting-text-supporting-text-line-height-xl
+  );
+}
+
+.size-sm .supportingText {
+  line-height: var(
+    --imported-avatar-label-group-text-and-supporting-text-supporting-text-line-height-sm
+  );
+}

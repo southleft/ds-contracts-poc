@@ -1,0 +1,185 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/button-base.contract.json (ds.button-base v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  background-color: var(--imported-button-base-root-background-color);
+  border-color: var(--imported-button-base-root-border-color);
+  gap: var(--imported-button-base-root-gap);
+  border-radius: var(--imported-button-base-root-border-radius);
+  border-width: var(--imported-button-base-root-border-width);
+  box-shadow: var(--imported-button-base-root-box-shadow);
+}
+
+.size-md {
+}
+
+.icon-leading {
+}
+
+.size-md.icon-leading {
+  padding-inline: var(--imported-button-base-root-padding-inline-md-leading);
+  padding-block: var(--imported-button-base-root-padding-block-md-leading);
+}
+
+.icon-only {
+}
+
+.size-md.icon-only {
+  padding-inline: var(--imported-button-base-root-padding-inline-md-only);
+  padding-block: var(--imported-button-base-root-padding-block-md-only);
+}
+
+.icon-false {
+}
+
+.size-md.icon-false {
+  padding-inline: var(--imported-button-base-root-padding-inline-md-false);
+  padding-block: var(--imported-button-base-root-padding-block-md-false);
+}
+
+.icon-trailing {
+}
+
+.size-md.icon-trailing {
+  padding-inline: var(--imported-button-base-root-padding-inline-md-trailing);
+  padding-block: var(--imported-button-base-root-padding-block-md-trailing);
+}
+
+.icon-dot {
+}
+
+.size-md.icon-dot {
+  padding-inline: var(--imported-button-base-root-padding-inline-md-dot);
+  padding-block: var(--imported-button-base-root-padding-block-md-dot);
+}
+
+.size-lg {
+}
+
+.size-lg.icon-leading {
+  padding-inline: var(--imported-button-base-root-padding-inline-lg-leading);
+  padding-block: var(--imported-button-base-root-padding-block-lg-leading);
+}
+
+.size-lg.icon-only {
+  padding-inline: var(--imported-button-base-root-padding-inline-lg-only);
+  padding-block: var(--imported-button-base-root-padding-block-lg-only);
+}
+
+.size-lg.icon-false {
+  padding-inline: var(--imported-button-base-root-padding-inline-lg-false);
+  padding-block: var(--imported-button-base-root-padding-block-lg-false);
+}
+
+.size-lg.icon-trailing {
+  padding-inline: var(--imported-button-base-root-padding-inline-lg-trailing);
+  padding-block: var(--imported-button-base-root-padding-block-lg-trailing);
+}
+
+.size-lg.icon-dot {
+  padding-inline: var(--imported-button-base-root-padding-inline-lg-dot);
+  padding-block: var(--imported-button-base-root-padding-block-lg-dot);
+}
+
+.size-xl {
+}
+
+.size-xl.icon-leading {
+  padding-inline: var(--imported-button-base-root-padding-inline-xl-leading);
+  padding-block: var(--imported-button-base-root-padding-block-xl-leading);
+}
+
+.size-xl.icon-only {
+  padding-inline: var(--imported-button-base-root-padding-inline-xl-only);
+  padding-block: var(--imported-button-base-root-padding-block-xl-only);
+}
+
+.size-xl.icon-false {
+  padding-inline: var(--imported-button-base-root-padding-inline-xl-false);
+  padding-block: var(--imported-button-base-root-padding-block-xl-false);
+}
+
+.size-xl.icon-trailing {
+  padding-inline: var(--imported-button-base-root-padding-inline-xl-trailing);
+  padding-block: var(--imported-button-base-root-padding-block-xl-trailing);
+}
+
+.size-xl.icon-dot {
+  padding-inline: var(--imported-button-base-root-padding-inline-xl-dot);
+  padding-block: var(--imported-button-base-root-padding-block-xl-dot);
+}
+
+.size-sm {
+}
+
+.size-sm.icon-leading {
+  padding-inline: var(--imported-button-base-root-padding-inline-sm-leading);
+  padding-block: var(--imported-button-base-root-padding-block-sm-leading);
+}
+
+.size-sm.icon-only {
+  padding-inline: var(--imported-button-base-root-padding-inline-sm-only);
+  padding-block: var(--imported-button-base-root-padding-block-sm-only);
+}
+
+.size-sm.icon-false {
+  padding-inline: var(--imported-button-base-root-padding-inline-sm-false);
+  padding-block: var(--imported-button-base-root-padding-block-sm-false);
+}
+
+.size-sm.icon-trailing {
+  padding-inline: var(--imported-button-base-root-padding-inline-sm-trailing);
+  padding-block: var(--imported-button-base-root-padding-block-sm-trailing);
+}
+
+.size-sm.icon-dot {
+  padding-inline: var(--imported-button-base-root-padding-inline-sm-dot);
+  padding-block: var(--imported-button-base-root-padding-block-sm-dot);
+}
+
+.icon-trailing {
+  flex-direction: row-reverse;
+}
+
+.Text {
+  color: var(--imported-button-base-text-color);
+  font-weight: var(--imported-button-base-text-font-weight);
+}
+
+.size-md .Text {
+  font-size: var(--imported-button-base-text-font-size-md);
+}
+
+.size-lg .Text {
+  font-size: var(--imported-button-base-text-font-size-lg);
+}
+
+.size-xl .Text {
+  font-size: var(--imported-button-base-text-font-size-xl);
+}
+
+.size-sm .Text {
+  font-size: var(--imported-button-base-text-font-size-sm);
+}
+
+.size-md .Text {
+  line-height: var(--imported-button-base-text-line-height-md);
+}
+
+.size-lg .Text {
+  line-height: var(--imported-button-base-text-line-height-lg);
+}
+
+.size-xl .Text {
+  line-height: var(--imported-button-base-text-line-height-xl);
+}
+
+.size-sm .Text {
+  line-height: var(--imported-button-base-text-line-height-sm);
+}

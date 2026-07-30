@@ -1,0 +1,107 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.avatar-add-button",
+  "name": "AvatarAddButton",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md"
+        ]
+      },
+      "default": "xs",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "xs",
+            "sm": "sm",
+            "md": "md"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover",
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Content": {
+          "layout": {
+            "direction": "row",
+            "justify": "center",
+            "align": "center"
+          },
+          "parts": {
+            "plus": {
+              "component": {
+                "id": "ds.plus"
+              }
+            }
+          },
+          "tokens": {
+            "padding-inline": "{imported.avatar-add-button.content.padding-inline}",
+            "padding-block": "{imported.avatar-add-button.content.padding-block}",
+            "border-radius": "{imported.avatar-add-button.content.border-radius}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.avatar-add-button.root.background-color}",
+        "border-color": "{imported.avatar-add-button.root.border-color}",
+        "border-radius": "{imported.avatar-add-button.root.border-radius.{size}}",
+        "border-width": "{imported.avatar-add-button.root.border-width}"
+      },
+      "states": {
+        "hover": {
+          "background-color": "{imported.avatar-add-button.state-hover.background-color}"
+        },
+        "disabled": {
+          "opacity": "{imported.avatar-add-button.state-disabled.opacity}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "ac0be5830a3570e5eed8a905c697473f9926baa7",
+      "nodeId": "1102:4864"
+    },
+    "code": {
+      "importPath": "src/components/AvatarAddButton",
+      "export": "AvatarAddButton"
+    }
+  },
+  "figmaStatePreviews": true
+}

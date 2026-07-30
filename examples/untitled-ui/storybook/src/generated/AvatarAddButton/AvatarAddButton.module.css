@@ -1,0 +1,49 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/avatar-add-button.contract.json (ds.avatar-add-button v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  cursor: pointer;
+  background-color: var(--imported-avatar-add-button-root-background-color);
+  border-color: var(--imported-avatar-add-button-root-border-color);
+  border-width: var(--imported-avatar-add-button-root-border-width);
+}
+
+.root:disabled {
+  cursor: not-allowed;
+}
+
+.size-xs {
+  border-radius: var(--imported-avatar-add-button-root-border-radius-xs);
+}
+
+.size-sm {
+  border-radius: var(--imported-avatar-add-button-root-border-radius-sm);
+}
+
+.size-md {
+  border-radius: var(--imported-avatar-add-button-root-border-radius-md);
+}
+
+.root:hover:not(:disabled) {
+  background-color: var(--imported-avatar-add-button-state-hover-background-color);
+}
+
+.root:disabled {
+  opacity: var(--imported-avatar-add-button-state-disabled-opacity);
+}
+
+.Content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--imported-avatar-add-button-content-padding-inline);
+  padding-block: var(--imported-avatar-add-button-content-padding-block);
+  border-radius: var(--imported-avatar-add-button-content-border-radius);
+}

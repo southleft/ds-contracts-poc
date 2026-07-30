@@ -1,0 +1,177 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.social-button",
+  "name": "SocialButton",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "social",
+      "type": {
+        "enum": [
+          "facebook",
+          "google",
+          "apple",
+          "figma",
+          "dribbble",
+          "x"
+        ]
+      },
+      "default": "facebook",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Social",
+          "values": {
+            "facebook": "Facebook",
+            "google": "Google",
+            "apple": "Apple",
+            "figma": "Figma",
+            "dribbble": "Dribbble",
+            "x": "X"
+          }
+        },
+        "code": {
+          "prop": "social"
+        }
+      }
+    },
+    {
+      "name": "supportingText",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Supporting text",
+          "values": {
+            "true": "True",
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "supportingText"
+        }
+      }
+    },
+    {
+      "name": "theme",
+      "type": {
+        "enum": [
+          "brand",
+          "colorWithBrand",
+          "color"
+        ]
+      },
+      "default": "brand",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Theme",
+          "values": {
+            "brand": "Brand",
+            "colorWithBrand": "Color with brand",
+            "color": "Color"
+          }
+        },
+        "code": {
+          "prop": "theme"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "hover",
+          "focused"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default",
+            "hover": "Hover",
+            "focused": "Focused"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "socialIcon": {
+          "component": {
+            "id": "ds.social-icon",
+            "props": {
+              "platform": {
+                "prop": "social",
+                "map": {
+                  "facebook": "facebook",
+                  "google": "google",
+                  "apple": "apple",
+                  "figma": "figma",
+                  "dribbble": "dribbble",
+                  "x": "x(twitter)"
+                }
+              },
+              "state": "default",
+              "style": "white"
+            }
+          }
+        },
+        "Text": {
+          "text": "Sign in with Facebook",
+          "textByProp": {
+            "prop": "social",
+            "map": {
+              "google": "Sign in with Google",
+              "apple": "Sign in with Apple",
+              "figma": "Sign in with Figma",
+              "dribbble": "Sign in with Dribbble",
+              "x": "Sign in with X"
+            }
+          },
+          "visibleWhen": {
+            "prop": "supportingText"
+          },
+          "tokens": {
+            "font-size": "{imported.social-button.text.font-size}",
+            "font-weight": "{imported.social-button.text.font-weight}",
+            "line-height": "{imported.social-button.text.line-height}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.social-button.root.background-color.{social}.{theme}.{state}}",
+        "padding-block": "{imported.social-button.root.padding-block}",
+        "border-radius": "{imported.social-button.root.border-radius}",
+        "border-width": "{imported.social-button.root.border-width.{social}.{theme}}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "5f75de11cec02b37d986608601d068c9e24d0e47",
+      "nodeId": "1256:130788"
+    },
+    "code": {
+      "importPath": "src/components/SocialButton",
+      "export": "SocialButton"
+    }
+  }
+}

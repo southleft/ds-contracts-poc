@@ -1,0 +1,145 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.progress-circle",
+  "name": "ProgressCircle",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "md",
+          "lg",
+          "sm",
+          "xs"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "md": "md",
+            "lg": "lg",
+            "sm": "sm",
+            "xs": "xs"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "shape",
+      "type": {
+        "enum": [
+          "circle",
+          "halfCircle"
+        ]
+      },
+      "default": "circle",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shape",
+          "values": {
+            "circle": "Circle",
+            "halfCircle": "Half circle"
+          }
+        },
+        "code": {
+          "prop": "shape"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Label",
+          "values": {
+            "true": "True",
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Ring": {
+          "parts": {
+            "Background": {
+              "tokens": {
+                "border-color": "{imported.progress-circle.ring-background.border-color}",
+                "border-width": "{imported.progress-circle.ring-background.border-width.{size}}"
+              }
+            },
+            "Line": {
+              "shape": {
+                "kind": "ellipse",
+                "width": 216,
+                "height": 216
+              },
+              "tokens": {
+                "border-color": "{imported.progress-circle.ring-line.border-color}",
+                "border-width": "{imported.progress-circle.ring-line.border-width.{size}}"
+              }
+            }
+          }
+        },
+        "group3": {
+          "parts": {
+            "Label": {
+              "text": "Active users",
+              "visibleWhen": {
+                "prop": "label"
+              },
+              "tokens": {
+                "color": "{imported.progress-circle.group-3-label.color}",
+                "font-size": "{imported.progress-circle.group-3-label.font-size.{size}}",
+                "font-weight": "{imported.progress-circle.group-3-label.font-weight}",
+                "line-height": "{imported.progress-circle.group-3-label.line-height.{size}}"
+              }
+            },
+            "Number": {
+              "text": "40%",
+              "tokens": {
+                "color": "{imported.progress-circle.group-3-number.color}",
+                "font-size": "{imported.progress-circle.group-3-number.font-size.{size}}",
+                "font-weight": "{imported.progress-circle.group-3-number.font-weight}",
+                "line-height": "{imported.progress-circle.group-3-number.line-height.{size}}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "83a6f5810ff5ec9f0c0b91b0f1c08ba20b394081",
+      "nodeId": "1084:2717"
+    },
+    "code": {
+      "importPath": "src/components/ProgressCircle",
+      "export": "ProgressCircle"
+    }
+  }
+}

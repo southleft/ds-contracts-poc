@@ -1,0 +1,203 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.avatar",
+  "name": "Avatar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xl",
+          "2xl",
+          "lg",
+          "md",
+          "sm",
+          "xs"
+        ]
+      },
+      "default": "xl",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xl": "xl",
+            "2xl": "2xl",
+            "lg": "lg",
+            "md": "md",
+            "sm": "sm",
+            "xs": "xs"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "placeholder",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Placeholder",
+          "values": {
+            "false": "False",
+            "true": "True"
+          }
+        },
+        "code": {
+          "prop": "placeholder"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Text",
+          "values": {
+            "true": "True",
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    },
+    {
+      "name": "statusIcon",
+      "type": {
+        "enum": [
+          "false",
+          "company",
+          "onlineIndicator"
+        ]
+      },
+      "default": "false",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Status icon",
+          "values": {
+            "false": "False",
+            "company": "Company",
+            "onlineIndicator": "Online indicator"
+          }
+        },
+        "code": {
+          "prop": "statusIcon"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "hover",
+          "focused"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default",
+            "hover": "Hover",
+            "focused": "Focused"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "justify": "center",
+        "align": "center"
+      },
+      "parts": {
+        "user": {
+          "component": {
+            "id": "ds.user"
+          },
+          "visibleWhen": {
+            "prop": "placeholder"
+          }
+        },
+        "Text": {
+          "text": "OR",
+          "visibleWhen": {
+            "prop": "text"
+          },
+          "tokens": {
+            "color": "{imported.avatar.text.color}",
+            "font-size": "{imported.avatar.text.font-size.{size}}",
+            "font-weight": "{imported.avatar.text.font-weight}",
+            "line-height": "{imported.avatar.text.line-height.{size}}"
+          }
+        },
+        "AvatarOnlineIndicator": {
+          "component": {
+            "id": "ds.avatar-online-indicator",
+            "props": {
+              "size": "{size}",
+              "online": "true"
+            }
+          },
+          "visibleWhen": {
+            "prop": "statusIcon",
+            "equals": "onlineIndicator"
+          }
+        },
+        "AvatarCompanyIcon": {
+          "component": {
+            "id": "ds.avatar-company-icon",
+            "props": {
+              "size": "{size}"
+            }
+          },
+          "visibleWhen": {
+            "prop": "statusIcon",
+            "equals": "company"
+          }
+        }
+      },
+      "tokens": {
+        "border-radius": "{imported.avatar.root.border-radius}",
+        "border-width": "{imported.avatar.root.border-width.{state}}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "51b12e9702676c93dc4470f0bc0874e378ab6ba2",
+      "nodeId": "19:1012"
+    },
+    "code": {
+      "importPath": "src/components/Avatar",
+      "export": "Avatar"
+    }
+  }
+}

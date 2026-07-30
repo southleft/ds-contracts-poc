@@ -1,0 +1,79 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.payment-method-icon",
+  "name": "PaymentMethodIcon",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"Payment method icon\" instances of _Input field base — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "sm"
+        ]
+      },
+      "default": "sm",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "sm"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "paymentMethod",
+      "type": {
+        "enum": [
+          "mastercard"
+        ]
+      },
+      "default": "mastercard",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Payment method",
+          "values": {
+            "mastercard": "Mastercard"
+          }
+        },
+        "code": {
+          "prop": "paymentMethod"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {},
+      "tokens": {
+        "width": "{imported.stub-payment-method-icon.root.width}",
+        "height": "{imported.stub-payment-method-icon.root.height}",
+        "background-color": "{imported.stub-payment-method-icon.root.background-color}",
+        "border-color": "{imported.stub-payment-method-icon.root.border-color}",
+        "border-width": "{imported.stub-payment-method-icon.root.border-width}",
+        "border-radius": "{imported.stub-payment-method-icon.root.border-radius}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "be2eb8cf6849821f12e0ccf414137e9fabdcb704"
+    },
+    "code": {
+      "importPath": "src/components/PaymentMethodIcon",
+      "export": "PaymentMethodIcon"
+    }
+  }
+}

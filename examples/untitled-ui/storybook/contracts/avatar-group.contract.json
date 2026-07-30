@@ -1,0 +1,253 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.avatar-group",
+  "name": "AvatarGroup",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xs",
+          "sm",
+          "md"
+        ]
+      },
+      "default": "xs",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xs": "xs",
+            "sm": "sm",
+            "md": "md"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "addUserButton",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Add user button",
+          "values": {
+            "true": "True",
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "addUserButton"
+        }
+      }
+    },
+    {
+      "name": "moreUsers",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "More users",
+          "values": {
+            "true": "True",
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "moreUsers"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row"
+      },
+      "parts": {
+        "Avatars": {
+          "layout": {
+            "direction": "row",
+            "overlap": true
+          },
+          "parts": {
+            "Avatar": {
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "{size}",
+                  "placeholder": false,
+                  "text": false,
+                  "statusIcon": "false",
+                  "state": "default"
+                }
+              }
+            },
+            "avatar2": {
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "{size}",
+                  "placeholder": false,
+                  "text": false,
+                  "statusIcon": "false",
+                  "state": "default"
+                }
+              }
+            },
+            "avatar3": {
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "{size}",
+                  "placeholder": false,
+                  "text": false,
+                  "statusIcon": "false",
+                  "state": "default"
+                }
+              }
+            },
+            "avatar4": {
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "{size}",
+                  "placeholder": false,
+                  "text": false,
+                  "statusIcon": "false",
+                  "state": "default"
+                }
+              }
+            },
+            "avatar5": {
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "{size}",
+                  "placeholder": false,
+                  "text": false,
+                  "statusIcon": "false",
+                  "state": "default"
+                }
+              }
+            },
+            "avatar6": {
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "{size}",
+                  "placeholder": false,
+                  "text": false,
+                  "statusIcon": "false",
+                  "state": "default"
+                }
+              }
+            },
+            "avatar7": {
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "{size}",
+                  "placeholder": false,
+                  "text": false,
+                  "statusIcon": "false",
+                  "state": "default"
+                }
+              }
+            },
+            "avatar8": {
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "{size}",
+                  "placeholder": false,
+                  "text": false,
+                  "statusIcon": "false",
+                  "state": "default"
+                }
+              }
+            },
+            "avatar9": {
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "{size}",
+                  "placeholder": false,
+                  "text": false,
+                  "statusIcon": "false",
+                  "state": "default"
+                }
+              }
+            },
+            "avatar10": {
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "{size}",
+                  "placeholder": false,
+                  "text": false,
+                  "statusIcon": "false",
+                  "state": "default"
+                }
+              }
+            },
+            "avatar11": {
+              "component": {
+                "id": "ds.avatar",
+                "props": {
+                  "size": "{size}",
+                  "placeholder": false,
+                  "text": true,
+                  "statusIcon": "false",
+                  "state": "default"
+                }
+              },
+              "visibleWhen": {
+                "prop": "moreUsers"
+              }
+            }
+          },
+          "tokens": {
+            "gap": "{imported.avatar-group.avatars.gap.{size}}"
+          }
+        },
+        "AvatarAddButton": {
+          "component": {
+            "id": "ds.avatar-add-button",
+            "props": {
+              "size": "{size}"
+            }
+          },
+          "visibleWhen": {
+            "prop": "addUserButton"
+          }
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "bfe034bc6ad057c558303ee4015f6526767acd66",
+      "nodeId": "1274:812"
+    },
+    "code": {
+      "importPath": "src/components/AvatarGroup",
+      "export": "AvatarGroup"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.avatar-online-indicator",
+  "name": "AvatarOnlineIndicator",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"_Avatar online indicator\" instances of Avatar — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "xl",
+          "2xl",
+          "lg",
+          "md",
+          "sm",
+          "xs"
+        ]
+      },
+      "default": "xl",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "xl": "xl",
+            "2xl": "2xl",
+            "lg": "lg",
+            "md": "md",
+            "sm": "sm",
+            "xs": "xs"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "online",
+      "type": {
+        "enum": [
+          "true"
+        ]
+      },
+      "default": "true",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Online",
+          "values": {
+            "true": "True"
+          }
+        },
+        "code": {
+          "prop": "online"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {},
+      "tokens": {
+        "width": "{imported.stub-avatar-online-indicator.root.width.{size}}",
+        "height": "{imported.stub-avatar-online-indicator.root.height.{size}}",
+        "background-color": "{imported.stub-avatar-online-indicator.root.background-color}",
+        "border-color": "{imported.stub-avatar-online-indicator.root.border-color}",
+        "border-width": "{imported.stub-avatar-online-indicator.root.border-width}",
+        "border-radius": "{imported.stub-avatar-online-indicator.root.border-radius.{size}}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "d16e2780b9e795cfc315dbd57a2ce60e299d16ca"
+    },
+    "code": {
+      "importPath": "src/components/AvatarOnlineIndicator",
+      "export": "AvatarOnlineIndicator"
+    }
+  }
+}

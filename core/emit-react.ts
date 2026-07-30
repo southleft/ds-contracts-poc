@@ -710,8 +710,32 @@ export function validateContract(
       const vwProp = contract.props.find((pr) => pr.name === part.visibleWhen!.prop);
       if (!vwProp) {
         errors.push(`${contract.id}: part "${name}" visibleWhen references unknown prop "${part.visibleWhen.prop}"`);
-      } else if (part.visibleWhen.equals !== undefined && !(typeof vwProp.type === 'object' && 'enum' in vwProp.type && vwProp.type.enum.includes(part.visibleWhen.equals))) {
-        errors.push(`${contract.id}: part "${name}" visibleWhen.equals "${part.visibleWhen.equals}" is not a value of prop "${part.visibleWhen.prop}"`);
+      } else if (part.visibleWhen.equals !== undefined) {
+        // Single value or value-subset array — every named value must be a
+        // member of the prop's enum.
+        const eqs = Array.isArray(part.visibleWhen.equals) ? part.visibleWhen.equals : [part.visibleWhen.equals];
+        const enumValues = typeof vwProp.type === 'object' && 'enum' in vwProp.type ? vwProp.type.enum : [];
+        for (const eq of eqs) {
+          if (!enumValues.includes(eq)) {
+            errors.push(`${contract.id}: part "${name}" visibleWhen.equals "${eq}" is not a value of prop "${part.visibleWhen.prop}"`);
+          }
+        }
+      }
+    }
+    if (part.textByProp) {
+      const tbProp = contract.props.find((pr) => pr.name === part.textByProp!.prop);
+      if (part.text === undefined) {
+        errors.push(`${contract.id}: part "${name}" textByProp requires a base \`text\``);
+      }
+      if (!tbProp) {
+        errors.push(`${contract.id}: part "${name}" textByProp references unknown prop "${part.textByProp.prop}"`);
+      } else {
+        const tbEnum = typeof tbProp.type === 'object' && 'enum' in tbProp.type ? tbProp.type.enum : [];
+        for (const key of Object.keys(part.textByProp.map)) {
+          if (!tbEnum.includes(key)) {
+            errors.push(`${contract.id}: part "${name}" textByProp map key "${key}" is not a value of prop "${part.textByProp.prop}"`);
+          }
+        }
       }
     }
     if (part.icon) {
@@ -1804,18 +1828,51 @@ const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
 
 function depAttrString(
   dep: Contract,
-  fixedProps: Record<string, string | boolean>,
+  fixedProps: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
   parent?: Contract,
 ): string {
   const parts: string[] = [];
   for (const [propName, value] of Object.entries(fixedProps)) {
     const depProp = dep.props.find((p) => p.name === propName);
     const codeName = depProp?.bindings.code.prop ?? propName;
+    if (typeof value === 'object') {
+      // PropByProp lookup (first-variant-freeze fix): the child prop follows
+      // a per-value map of the parent's enum prop — ternary chain, trailing
+      // undefined applies the child's own default for unmapped values.
+      const parentProp = parent?.props.find((p) => p.name === value.prop);
+      const expr = parentProp?.bindings.code.prop ?? value.prop;
+      const chain = Object.entries(value.map)
+        .map(([k, v]) => `${expr} === '${k}' ? '${v}' : `)
+        .join('');
+      parts.push(` ${codeName}={${chain}undefined}`);
+      continue;
+    }
     if (typeof value === 'boolean') {
-      parts.push(value ? ` ${codeName}` : '');
+      if (depProp && depProp.type !== 'boolean') {
+        throw new Error(
+          `${dep.id}: applied value for prop "${propName}" is a boolean but the dependency types it ${JSON.stringify(depProp.type)} — fix the composing contract (cross-contract prop types are load-bearing)`,
+        );
+      }
+      // An applied `false` must OVERRIDE a dependency whose own default is
+      // true — omitting the attribute would silently re-enable the part
+      // (field case: AvatarGroup applies text:false while Avatar defaults
+      // text:true; the omitted attr rendered "OR" initials on every grouped
+      // avatar). Omission stays the spelling only when it already means
+      // false at the dependency.
+      parts.push(value ? ` ${codeName}` : depProp?.default === false ? '' : ` ${codeName}={false}`);
       continue;
     }
     const parentRef = value.match(PARENT_PROP_REF);
+    // A STRING against a boolean dep prop would emit supportingText="false" —
+    // truthy at runtime, silently rendering a part the canvas hides (audit
+    // class string-boolean-coercion). Composition owns the coercion; the
+    // emitter refuses the mismatch loudly. `{parentProp}` references are the
+    // one legal string spelling for any type.
+    if (depProp?.type === 'boolean' && !(parentRef && parent)) {
+      throw new Error(
+        `${dep.id}: applied value ${JSON.stringify(value)} for prop "${propName}" is a string but the dependency types it boolean — coerce at composition ('False' → false), never pass the spelling through`,
+      );
+    }
     if (parentRef && parent) {
       // Parent→child prop mapping: `density: "{density}"` → density={density}
       const parentProp = parent.props.find((p) => p.name === parentRef[1]);
@@ -2106,8 +2163,13 @@ export function generateTsx(
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
     if (!part.visibleWhen) return jsx;
     const codeName = codePropOf(part.visibleWhen.prop);
+    const eq = part.visibleWhen.equals;
     const cond =
-      part.visibleWhen.equals !== undefined ? `${codeName} === '${part.visibleWhen.equals}'` : codeName;
+      eq === undefined
+        ? codeName
+        : Array.isArray(eq)
+          ? eq.map((v) => `${codeName} === '${v}'`).join(' || ')
+          : `${codeName} === '${eq}'`;
     return `{${cond} ? (${jsx}) : null}`;
   };
 
@@ -2158,9 +2220,16 @@ export function generateTsx(
       const attrs = depAttrString(dep, part.component.props ?? {}, contract);
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
       const text = part.component.text ?? (typeof depChildren?.default === 'string' ? depChildren.default : undefined);
-      return text !== undefined
-        ? `<${dep.name}${attrs}>${text}</${dep.name}>`
-        : `<${dep.name}${attrs} />`;
+      // Presence rules apply to nested-component parts exactly as they do to
+      // icon/repeat parts — this branch used to return bare JSX, silently
+      // dropping contract visibleWhen (AUDIT-ROUND-1: emitter-drops-
+      // visibleWhen-on-component-parts).
+      return wrapVisibleWhen(
+        part,
+        text !== undefined
+          ? `<${dep.name}${attrs}>${text}</${dep.name}>`
+          : `<${dep.name}${attrs} />`,
+      );
     }
     if (part.slot) {
       const el = part.element ?? 'div';
@@ -2180,9 +2249,17 @@ export function generateTsx(
     }
     if (part.text !== undefined) {
       const el = part.element ?? 'span';
+      // textByProp (first-variant-freeze fix): per-enum-value characters as
+      // a ternary chain over the driving prop, base text as the fallback.
+      const tb = part.textByProp;
+      const inner = tb
+        ? `{${Object.entries(tb.map)
+            .map(([v, t]) => `${codePropOf(tb.prop)} === '${v}' ? ${JSON.stringify(t)} : `)
+            .join('')}${JSON.stringify(part.text)}}`
+        : part.text;
       return wrapVisibleWhen(
         part,
-        `<${el} className={${stylesRef(partName)}}${partAttrString(part)}>${part.text}</${el}>`,
+        `<${el} className={${stylesRef(partName)}}${partAttrString(part)}>${inner}</${el}>`,
       );
     }
     if (part.meter) {

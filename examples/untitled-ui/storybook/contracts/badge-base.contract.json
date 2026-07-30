@@ -1,0 +1,165 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.badge-base",
+  "name": "BadgeBase",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "icon",
+      "type": {
+        "enum": [
+          "false",
+          "dot",
+          "country",
+          "avatar",
+          "xClose",
+          "iconRight",
+          "iconLeft",
+          "only"
+        ]
+      },
+      "default": "false",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Icon",
+          "values": {
+            "false": "False",
+            "dot": "Dot",
+            "country": "Country",
+            "avatar": "Avatar",
+            "xClose": "X close",
+            "iconRight": "Icon right",
+            "iconLeft": "Icon left",
+            "only": "Only"
+          }
+        },
+        "code": {
+          "prop": "icon"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "plus": {
+          "component": {
+            "id": "ds.plus"
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": "only"
+          }
+        },
+        "arrowUp": {
+          "component": {
+            "id": "ds.arrow-up"
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": "iconLeft"
+          }
+        },
+        "Avatar": {
+          "component": {
+            "id": "ds.avatar",
+            "props": {
+              "size": "xs",
+              "placeholder": false,
+              "text": false,
+              "statusIcon": "false",
+              "state": "default"
+            }
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": "avatar"
+          }
+        },
+        "AU": {
+          "component": {
+            "id": "ds.au"
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": "country"
+          }
+        },
+        "Dot": {
+          "component": {
+            "id": "ds.dot",
+            "props": {
+              "size": "sm"
+            }
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": "dot"
+          }
+        },
+        "Text": {
+          "text": "Label",
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": [
+              "false",
+              "dot",
+              "country",
+              "avatar",
+              "xClose",
+              "iconRight",
+              "iconLeft"
+            ]
+          },
+          "tokens": {
+            "color": "{imported.badge-base.text.color}",
+            "font-size": "{imported.badge-base.text.font-size}",
+            "font-weight": "{imported.badge-base.text.font-weight}",
+            "line-height": "{imported.badge-base.text.line-height}"
+          }
+        },
+        "arrowRight": {
+          "component": {
+            "id": "ds.arrow-right"
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": "iconRight"
+          }
+        },
+        "x": {
+          "component": {
+            "id": "ds.x"
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": "xClose"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.badge-base.root.background-color}",
+        "padding-block": "{imported.badge-base.root.padding-block.{icon}}",
+        "border-radius": "{imported.badge-base.root.border-radius}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "f6cf0e698e060ee64e268bd7395bfffd6c3c12f3",
+      "nodeId": "1046:28"
+    },
+    "code": {
+      "importPath": "src/components/BadgeBase",
+      "export": "BadgeBase"
+    }
+  }
+}

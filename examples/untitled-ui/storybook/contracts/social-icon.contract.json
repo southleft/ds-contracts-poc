@@ -1,0 +1,108 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.social-icon",
+  "name": "SocialIcon",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"Social icon\" instances of Social button — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "platform",
+      "type": {
+        "enum": [
+          "facebook",
+          "google",
+          "apple",
+          "figma",
+          "dribbble",
+          "x(twitter)"
+        ]
+      },
+      "default": "facebook",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Platform",
+          "values": {
+            "facebook": "Facebook",
+            "google": "Google",
+            "apple": "Apple",
+            "figma": "Figma",
+            "dribbble": "Dribbble",
+            "x(twitter)": "X (Twitter)"
+          }
+        },
+        "code": {
+          "prop": "platform"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "style",
+      "type": {
+        "enum": [
+          "white",
+          "brand"
+        ]
+      },
+      "default": "white",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Style",
+          "values": {
+            "white": "White",
+            "brand": "Brand"
+          }
+        },
+        "code": {
+          "prop": "style"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {},
+      "tokens": {
+        "width": "{imported.stub-social-icon.root.width}",
+        "height": "{imported.stub-social-icon.root.height}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "5a25c1d59da9186f10d26609825dfe77914d9dc6"
+    },
+    "code": {
+      "importPath": "src/components/SocialIcon",
+      "export": "SocialIcon"
+    }
+  }
+}

@@ -594,12 +594,100 @@ const siblingKeys = (children: DumpNode[]): string[] => {
   });
 };
 
+/** Wrapper-union identity fold (audit class duplicate-parts-from-wrapper-
+ *  union): some variants nest children under a pass-through wrapper FRAME/
+ *  GROUP while others draw the same nodes flat at the parent level (field
+ *  cases: Tooltip's `Text and supporting text` vs flat `Text`; ProgressCircle
+ *  `Group 3 → Label, Number` vs flat; DropdownListItem `Content` wrapping
+ *  icon+text only in shortcut variants). A bare-name union mints the SAME
+ *  canvas node twice (doubled text, stub soup) and every duplicate lands in a
+ *  variant subset no axis predicts. Rule: when a container child W exists in
+ *  a strict subset of variants and a flat sibling elsewhere matches one of
+ *  W's members by name+type, synthesize W around the matched flats in those
+ *  variants so the union folds them into ONE part. The synthetic wrapper
+ *  clones the first REAL W occurrence's own channels (a pass-through
+ *  wrapper's styling is invariant structure, not a new observation — the
+ *  fold is ledgered per variant); its children are the variant's REAL flat
+ *  nodes, so every leaf channel stays observed. No-op when every variant
+ *  nests identically. Deterministic: candidates and folds walk in occurrence
+ *  order. */
+function foldWrapperUnion(
+  occ: Occ[],
+  childrenOf: Map<Occ, DumpNode[]>,
+  notes: string[],
+  where: string,
+): void {
+  const keyOf = (n: DumpNode): string => `${n.name} ${n.type}`;
+  interface Candidate {
+    type: string;
+    firstNode: DumpNode;
+    childKeys: Set<string>;
+    present: Set<Occ>;
+  }
+  const candidates = new Map<string, Candidate>();
+  for (const o of occ) {
+    for (const c of childrenOf.get(o)!) {
+      if ((c.type !== 'FRAME' && c.type !== 'GROUP') || (c.children ?? []).length === 0) continue;
+      let e = candidates.get(c.name);
+      if (!e) candidates.set(c.name, (e = { type: c.type, firstNode: c, childKeys: new Set(), present: new Set() }));
+      e.present.add(o);
+      for (const cc of c.children ?? []) e.childKeys.add(keyOf(cc));
+    }
+  }
+  // Ambiguity taint, GLOBAL per level: a member key that some variant draws
+  // flat at the parent level WHILE the owning wrapper is also present there
+  // is not a clean identity split (flat and nested coexist — or the node
+  // hops between wrappers per variant); such a key must not fold into ANY
+  // candidate, or one candidate's pruning leaves the node for another to
+  // grab and a phantom wrapper materializes around it (field case:
+  // InputFieldBase Help icon/alert-circle sit beside `Content` in variants
+  // where other variants nest them under `Text input` — grabbing them
+  // synthesized an empty `Text input` in variants that never drew one).
+  const tainted = new Set<string>();
+  for (const [wName, w] of candidates) {
+    for (const o of w.present) {
+      for (const c of childrenOf.get(o)!) {
+        if (c.name !== wName && w.childKeys.has(keyOf(c))) tainted.add(keyOf(c));
+      }
+    }
+  }
+  for (const [wName, w] of candidates) {
+    if (w.present.size === occ.length || w.present.size === 0) continue;
+    const foldableKeys = new Set([...w.childKeys].filter((k) => !tainted.has(k)));
+    if (foldableKeys.size === 0) continue;
+    for (const o of occ) {
+      if (w.present.has(o)) continue;
+      const kids = childrenOf.get(o)!;
+      // A same-named non-container child here is a different node, not a
+      // fold site.
+      if (kids.some((c) => c.name === wName)) continue;
+      const matched = kids.filter((c) => foldableKeys.has(keyOf(c)));
+      if (matched.length === 0) continue;
+      const at = kids.indexOf(matched[0]);
+      const synthetic = {
+        ...w.firstNode,
+        children: matched,
+        __synthetic: true,
+      } as DumpNode;
+      const rest = kids.filter((c) => !matched.includes(c));
+      rest.splice(Math.min(at, rest.length), 0, synthetic);
+      childrenOf.set(o, rest);
+      notes.push(
+        `${where}: variant "${o.variant}" draws ${matched.map((c) => `"${c.name}"`).join(', ')} flat where other variants nest under wrapper "${wName}" — folded into the wrapper so the union keeps ONE part per canvas node (wrapper-union identity)`,
+      );
+    }
+  }
+}
+
 function mergeOcc(name: string, occ: Occ[], notes: string[], where: string): Merged {
   const types = [...new Set(occ.map((o) => o.node.type))];
   if (types.length > 1) {
     notes.push(`${where}: node type differs across variants (${types.join(', ')}) — using ${types[0]}`);
   }
-  const sequences = occ.map((o) => siblingKeys(o.node.children ?? []));
+  const childrenOf = new Map<Occ, DumpNode[]>();
+  for (const o of occ) childrenOf.set(o, o.node.children ?? []);
+  if (occ.length > 1) foldWrapperUnion(occ, childrenOf, notes, where);
+  const sequences = occ.map((o) => siblingKeys(childrenOf.get(o)!));
   const order = mergeOrders(sequences);
   const nameCount = new Map<string, number>();
   for (const key of order) {
@@ -611,7 +699,7 @@ function mergeOcc(name: string, occ: Occ[], notes: string[], where: string): Mer
     const ord = ordStr ? Number(ordStr) : 0;
     const childOcc: Occ[] = [];
     for (const o of occ) {
-      const child = (o.node.children ?? []).filter((c) => c.name === childName)[ord];
+      const child = childrenOf.get(o)!.filter((c) => c.name === childName)[ord];
       if (child) childOcc.push({ variant: o.variant, node: child });
     }
     // Duplicated sibling names need distinct merged names (they become note
@@ -1999,6 +2087,65 @@ function invertLayoutByProp(
 // Presence → visibleWhen
 // ---------------------------------------------------------------------------
 
+/** First-variant-freeze fix, TEXT half: when a static text part's DRAWN
+ *  characters vary as a pure function of ONE enum axis across every
+ *  observed occurrence (ProgressBar's Percentage '0%'…'100%' tracking the
+ *  progress axis, InputFieldBase's label/'US'/'USD' tracking type), the part
+ *  binds `text` to the axis's default value with `textByProp` carrying the
+ *  deviations — the tokensByProp discipline applied to characters. Values
+ *  that vary WITHOUT a single-axis function keep the first observation with
+ *  a NAMED note (previously this freeze was silent). No-op for uniform
+ *  text. */
+function bindTextByAxis(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string): void {
+  const obs = m.occ
+    .filter((o) => o.node.text?.characters !== undefined)
+    .map((o) => ({ variant: o.variant, chars: o.node.text!.characters! }));
+  if (obs.length < 2 || new Set(obs.map((o) => o.chars)).size <= 1) return;
+  for (const axis of ctx.axes.filter((a) => !isBoolAxis(a.values))) {
+    const byValue = new Map<string, string>();
+    let pure = true;
+    for (const o of obs) {
+      const v = axisValuesOf(o.variant)[axis.property];
+      if (v === undefined) {
+        pure = false;
+        break;
+      }
+      const prev = byValue.get(v);
+      if (prev === undefined) byValue.set(v, o.chars);
+      else if (prev !== o.chars) {
+        pure = false;
+        break;
+      }
+    }
+    if (!pure || byValue.size <= 1) continue;
+    // Base = the axis's first OBSERVED value (axis declaration order); the
+    // other values ride textByProp as deviations.
+    const observedValues = axis.values.filter((v) => byValue.has(v));
+    const baseValue = observedValues[0];
+    const map: Record<string, string> = {};
+    for (const v of observedValues) {
+      const chars = byValue.get(v)!;
+      if (v !== baseValue && chars !== byValue.get(baseValue)) map[camel(v)] = chars;
+    }
+    part.text = byValue.get(baseValue)!;
+    if (Object.keys(map).length > 0) part.textByProp = { prop: axis.propName, map };
+    ctx.notes.push(
+      `${where}: drawn characters are a pure function of the "${axis.property}" axis (${observedValues
+        .map((v) => `${camel(v)}→${JSON.stringify(byValue.get(v))}`)
+        .join(', ')}) — bound as text + textByProp instead of pinning the first variant's value`,
+    );
+    return;
+  }
+  ctx.notes.push(
+    `${where}: drawn characters vary across variants (${[...new Set(obs.map((o) => JSON.stringify(o.chars)))].slice(0, 6).join(', ')}) without tracking any enum axis — first value pinned, review`,
+  );
+}
+
+/** Sentinel: strict-subset presence that no axis predicts — the caller drops
+ *  the part entirely (named degradation) instead of emitting it
+ *  unconditionally. Identity-compared. */
+const OMIT_PART: Record<string, unknown> = { OMIT: true };
+
 function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<string, unknown> | undefined {
   if (m.occ.length === ctx.totalVariants.length) return undefined;
   const present = new Set(m.occ.map((o) => o.variant));
@@ -2030,6 +2177,26 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
       return { prop: axis.propName, equals: camel(value) };
     }
   }
+  // No single value predicts presence — try a value SUBSET of one enum axis
+  // (audit class unconditional-parts; field cases: ButtonBase circle drawn
+  // for Icon leading/only/trailing, InputFieldBase Dropdown drawn for Type
+  // leadingDropdown/trailingDropdown). Membership carries as the array form
+  // of visibleWhen.equals. Subset values keep the axis's declared order.
+  for (const axis of ctx.axes) {
+    if (isBoolAxis(axis.values)) continue;
+    const presentValues = axis.values.filter((value) =>
+      ctx.totalVariants.some((v) => present.has(v) && axisValuesOf(v)[axis.property] === value),
+    );
+    if (presentValues.length < 2 || presentValues.length === axis.values.length) continue;
+    const matches = ctx.totalVariants.every(
+      (v) => presentValues.includes(axisValuesOf(v)[axis.property] ?? '') === present.has(v),
+    );
+    if (!matches) continue;
+    ctx.notes.push(
+      `${where}: present exactly where "${axis.property}" is one of ${presentValues.map((v) => `"${v}"`).join(', ')} — proposed as visibleWhen { prop: ${axis.propName}, equals: [${presentValues.map((v) => camel(v)).join(', ')}] } (value-subset form)`,
+    );
+    return { prop: axis.propName, equals: presentValues.map((v) => camel(v)) };
+  }
   if (boolFalseSide) {
     ctx.notes.push(
       `${where}: present exactly where "${boolFalseSide.property}" is false — the visibleWhen vocabulary has no negated form, so the condition is inexpressible; kept unconditional (declared fidelity limit), review`,
@@ -2045,10 +2212,24 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
     );
     return undefined;
   }
+  // Strict-subset presence with NO predictor: neither spelling is fully
+  // honest, so the proposal takes the lesser error and NAMES it either way.
+  // MAJORITY presence (CBDS field case: _Avatar Indicator in 32/36 variants,
+  // absent only where a sibling ELLIPSE substitutes for it) keeps the part
+  // unconditional — omission would be wrong in more variants than emission.
+  // MINORITY presence (the audit's "everything-at-once" blocker: ProgressBar
+  // floating tooltips in 20/55) OMITS the part as a NAMED degradation —
+  // unconditional emission would draw it in variants that never carried it.
+  if (m.occ.length * 2 > ctx.totalVariants.length) {
+    ctx.notes.push(
+      `${where}: present in ${m.occ.length}/${ctx.totalVariants.length} variants without correlating to any axis value — MAJORITY presence, kept unconditional (the lesser error; named, review)`,
+    );
+    return undefined;
+  }
   ctx.notes.push(
-    `${where}: present in ${m.occ.length}/${ctx.totalVariants.length} variants without correlating to any axis value — kept unconditional, review`,
+    `${where}: DEGRADATION part omitted — present in only ${m.occ.length}/${ctx.totalVariants.length} variants and no single axis (value, subset, or boolean) predicts presence; emitting it unconditionally would render it in the majority of variants that never carried it. Review the set's variant structure or gate it manually.`,
   );
-  return undefined;
+  return OMIT_PART;
 }
 
 // ---------------------------------------------------------------------------
@@ -2234,7 +2415,7 @@ function noteResolution(res: ChildResolution, instanceOf: string, keys: { setKey
  *  canonical value in each variant. Anything that varies WITHOUT an exact
  *  axis match keeps the first value with a named note — never guessed. */
 function threadInstanceProps(
-  base: Record<string, string | boolean>,
+  base: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
   perOccurrence: Array<{ variant: string; canonical: Record<string, string | boolean> }>,
   ctx: Ctx,
   where: string,
@@ -2258,6 +2439,47 @@ function threadInstanceProps(
       base[propName] = `{${axis.propName}}`;
       ctx.notes.push(
         `${where}: applied prop "${propName}" of the nested "${instanceOf}" tracks the "${axis.propName}" axis exactly across all ${values.length} occurrence(s) — threaded as "{${axis.propName}}" (the child follows the parent per variant)`,
+      );
+      continue;
+    }
+    // Not an identity of any axis — a pure FUNCTION of one axis still binds,
+    // as a per-value LOOKUP (first-variant-freeze fix; field case:
+    // SocialButton's icon platform "x(twitter)" under the parent value "x").
+    // String values only (the PropByProp map vocabulary is string→string).
+    let lookup: { axis: Axis; map: Record<string, string> } | undefined;
+    for (const a of enumAxes) {
+      const byValue = new Map<string, string>();
+      let pure = values.length > 0;
+      for (const v of values) {
+        const axisValue = axisValuesOf(v.variant)[a.property];
+        if (axisValue === undefined || typeof v.value !== 'string') {
+          pure = false;
+          break;
+        }
+        const prev = byValue.get(axisValue);
+        if (prev === undefined) byValue.set(axisValue, v.value);
+        else if (prev !== v.value) {
+          pure = false;
+          break;
+        }
+      }
+      if (!pure || byValue.size <= 1) continue;
+      const map: Record<string, string> = {};
+      for (const value of a.values) {
+        const hit = byValue.get(value);
+        if (hit !== undefined) map[camel(value)] = hit;
+      }
+      lookup = { axis: a, map };
+      break;
+    }
+    if (lookup) {
+      base[propName] = { prop: lookup.axis.propName, map: lookup.map };
+      ctx.notes.push(
+        `${where}: applied prop "${propName}" of the nested "${instanceOf}" is a pure function of the "${lookup.axis.propName}" axis (${Object.entries(
+          lookup.map,
+        )
+          .map(([k, v]) => `${k}→${v}`)
+          .join(', ')}) — bound as a per-value lookup instead of pinning the first variant's value`,
       );
     } else {
       ctx.notes.push(
@@ -2720,6 +2942,10 @@ function buildPart(
 ): Record<string, unknown> | null {
   const part: Record<string, unknown> = {};
   const visibleWhen = visibilityFromPresence(m, ctx, where);
+  // Unpredictable strict-subset presence: the part is omitted as a NAMED
+  // degradation (see OMIT_PART) — an unconditional emission would draw it in
+  // variants that never carried it.
+  if (visibleWhen === OMIT_PART) return null;
 
   if (m.type === 'TEXT') {
     const byProp: ByPropCollector = { map: {} };
@@ -2741,6 +2967,7 @@ function buildPart(
       part.content = { prop: canonicalPropName(property) };
     } else {
       part.text = characters;
+      bindTextByAxis(m, part, ctx, where);
     }
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
@@ -3038,7 +3265,13 @@ function canonicalizeInstanceProps(
       const values = (childProp.bindings.figma as { values?: Record<string, string> }).values;
       const canonical = values ? Object.entries(values).find(([, spelled]) => spelled === value)?.[0] : undefined;
       if (canonical !== undefined) {
-        out[childProp.name] = canonical;
+        // Coerce to the child contract's minted type at the composition
+        // boundary: a bool-axis child spells its values "True"/"False" and
+        // canonicalizes to the STRINGS 'true'/'false' — truthy against the
+        // child's boolean prop ("false" renders the part; audit class
+        // string-boolean-coercion). The applied value must land as the type
+        // the child minted.
+        out[childProp.name] = childProp.type === 'boolean' ? canonical === 'true' : canonical;
         mapped++;
         continue;
       }

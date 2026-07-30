@@ -1,0 +1,32 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.circle",
+  "name": "Circle",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"circle\" instances of _Button base — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {},
+      "tokens": {
+        "width": "{imported.stub-circle.root.width}",
+        "height": "{imported.stub-circle.root.height}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "93f75d07a9d9a81e23af6cda238f8f520c35eb5a"
+    },
+    "code": {
+      "importPath": "src/components/Circle",
+      "export": "Circle"
+    }
+  }
+}

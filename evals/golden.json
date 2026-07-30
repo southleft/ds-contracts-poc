@@ -28,7 +28,7 @@
   "src/components/BreadcrumbItem/BreadcrumbItem.tsx": "d9d8ef5dbd8067f78c7390ffbe3b63bf5796ba446f77eff1ee54f78197bf4329",
   "src/components/BreadcrumbItem/index.ts": "6df275792394a67f4ee92e1c01c24e0644692f50cd06932deb0e35e3e2b303f6",
   "src/components/Breadcrumbs/Breadcrumbs.module.css": "e225e32020982a51260d37cb610bc820d878eaea65d571c13f7f7dcbd556dd24",
-  "src/components/Breadcrumbs/Breadcrumbs.stories.tsx": "9e17d3dcc3da2e44d90e6cbb93f3d7ff7a7a5adf165f7564053269a7fb9d9425",
+  "src/components/Breadcrumbs/Breadcrumbs.stories.tsx": "7327c379da830d73c29ed7a55af6d4aaf147a3e30ec8318d7787258cf1fecf79",
   "src/components/Breadcrumbs/Breadcrumbs.tsx": "dd02b2f38922f3c31768c4741b7441287a75495c4e2e0ce799ba8a50042fd066",
   "src/components/Breadcrumbs/index.ts": "efc27b4fb5f1b0a90faf1725fa86f09459d9f52a0a99d5aaef1f062146b3b989",
   "src/components/Button/Button.module.css": "a44d85648888438db77066a9775eba8feabaa685d2985614e24c0a23b4cac664",

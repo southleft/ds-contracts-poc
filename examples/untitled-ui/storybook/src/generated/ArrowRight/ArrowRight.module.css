@@ -1,0 +1,13 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/arrow-right.contract.json (ds.arrow-right v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  width: var(--imported-stub-arrow-right-root-width);
+  height: var(--imported-stub-arrow-right-root-height);
+}

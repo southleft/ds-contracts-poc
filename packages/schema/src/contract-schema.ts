@@ -781,8 +781,12 @@ export const RepeatSchema = z.strictObject({
  *  enum conditions resolve per variant. */
 export const VisibleWhenSchema = z.strictObject({
   prop: z.string(),
-  /** Omit for boolean props (truthy). */
-  equals: z.string().optional(),
+  /** Omit for boolean props (truthy). A single enum value, or — when a
+   *  part's canvas presence is predicted by a value SUBSET of one axis
+   *  (Untitled UI field case: ButtonBase circle drawn for Icon leading/only/
+   *  trailing but not dot/false) — a nonempty array meaning "any of these
+   *  values" (membership, order carries no meaning). */
+  equals: z.union([z.string(), z.array(z.string()).min(1)]).optional(),
 });
 
 /** Design-time default content for a slot (Curtis's fifth slot property).
@@ -823,14 +827,27 @@ export const SlotSchema = z.strictObject({
 });
 
 /** A fixed instance of another contract, embedded in this component. */
+/** An applied child-prop value that is a LOOKUP of one parent enum prop
+ *  (first-variant-freeze fix, Untitled UI field case: SocialButton's nested
+ *  icon platform 'x(twitter)' where the parent axis value is 'x' — identity
+ *  threading "{parentProp}" cannot spell it). `map` is keyed by the PARENT
+ *  prop's canonical values; a parent value absent from the map applies no
+ *  value (the child's own default). */
+export const PropByPropSchema = z.strictObject({
+  prop: z.string(),
+  map: z.record(z.string(), z.string()),
+});
+
 export const ComponentRefSchema = z.strictObject({
   /** The child contract's id, e.g. "ds.avatar". */
   id: z.string(),
   /** Fixed prop values, spelled canonically; mapped through the CHILD
    *  contract's bindings on each surface. A string value of the form
    *  "{parentProp}" maps the PARENT's enum prop into the child per variant
-   *  (code: `childProp={parentProp}`; Figma: resolved per variant combo). */
-  props: z.record(z.string(), z.union([z.string(), z.boolean()])).optional(),
+   *  (code: `childProp={parentProp}`; Figma: resolved per variant combo).
+   *  The object form (PropByPropSchema) is the same idea through a per-value
+   *  LOOKUP when the child's spelling differs from the parent's. */
+  props: z.record(z.string(), z.union([z.string(), z.boolean(), PropByPropSchema])).optional(),
   /** Overrides the child's `children` text prop (code: JSX children;
    *  Figma: TEXT property override on the instance). */
   text: z.string().optional(),
@@ -920,6 +937,13 @@ export interface Part {
   /** Static literal text (a page number, an ellipsis) — same on both
    *  surfaces, not bound to any prop. */
   text?: string;
+  /** Per-enum-value text overrides merged over `text` (first-variant-freeze
+   *  fix): when a drawn text node's characters vary as a pure function of
+   *  ONE enum axis (ProgressBar's Percentage '0%'…'100%', SocialButton's
+   *  'Sign in with <platform>'), the deviating values ride a lookup keyed on
+   *  that prop's canonical values — the tokensByProp discipline applied to
+   *  characters. Requires `text` (the base is the default value's text). */
+  textByProp?: z.infer<typeof PropByPropSchema>;
   /** Progress fill: width = (valueProp / maxProp) as a percentage of the
    *  parent track. Code computes live; the canvas renders the defaults'
    *  fraction (its honest static state). */
@@ -976,6 +1000,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
     content: z.strictObject({ prop: z.string() }).optional(),
     text: z.string().optional(),
+    /** Per-enum-value text overrides merged over `text` (see Part). */
+    textByProp: PropByPropSchema.optional(),
     meter: z.strictObject({ valueProp: z.string(), maxProp: z.string() }).optional(),
     animation: z.enum(['spin', 'pulse']).optional(),
     slot: SlotSchema.optional(),

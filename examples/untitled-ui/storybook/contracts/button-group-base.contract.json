@@ -1,0 +1,151 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.button-group-base",
+  "name": "ButtonGroupBase",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "current",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Current",
+          "values": {
+            "false": "False",
+            "true": "True"
+          }
+        },
+        "code": {
+          "prop": "current"
+        }
+      }
+    },
+    {
+      "name": "icon",
+      "type": {
+        "enum": [
+          "false",
+          "only",
+          "leading",
+          "dot"
+        ]
+      },
+      "default": "false",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Icon",
+          "values": {
+            "false": "False",
+            "only": "Only",
+            "leading": "Leading",
+            "dot": "Dot"
+          }
+        },
+        "code": {
+          "prop": "icon"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "focused",
+          "disabled",
+          "hover"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default",
+            "focused": "Focused",
+            "disabled": "Disabled",
+            "hover": "Hover"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Dot": {
+          "component": {
+            "id": "ds.dot"
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": "dot"
+          }
+        },
+        "circle": {
+          "component": {
+            "id": "ds.circle"
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": "leading"
+          }
+        },
+        "plus": {
+          "component": {
+            "id": "ds.plus"
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": "only"
+          }
+        },
+        "Text": {
+          "text": "Text",
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": [
+              "false",
+              "leading",
+              "dot"
+            ]
+          },
+          "tokens": {
+            "font-size": "{imported.button-group-base.text.font-size}",
+            "font-weight": "{imported.button-group-base.text.font-weight}",
+            "line-height": "{imported.button-group-base.text.line-height}"
+          }
+        }
+      },
+      "tokens": {
+        "border-color": "{imported.button-group-base.root.border-color}",
+        "padding-inline": "{imported.button-group-base.root.padding-inline.{icon}}",
+        "padding-block": "{imported.button-group-base.root.padding-block}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "02a0922ff577f89c5fbd7f95fbcedc28d4d776d7",
+      "nodeId": "1046:9312"
+    },
+    "code": {
+      "importPath": "src/components/ButtonGroupBase",
+      "export": "ButtonGroupBase"
+    }
+  }
+}

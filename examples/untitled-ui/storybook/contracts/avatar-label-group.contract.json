@@ -1,0 +1,128 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.avatar-label-group",
+  "name": "AvatarLabelGroup",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "md",
+          "lg",
+          "xl",
+          "sm"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "md": "md",
+            "lg": "lg",
+            "xl": "xl",
+            "sm": "sm"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "statusIcon",
+      "type": {
+        "enum": [
+          "onlineIndicator",
+          "company",
+          "false"
+        ]
+      },
+      "default": "onlineIndicator",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Status icon",
+          "values": {
+            "onlineIndicator": "Online indicator",
+            "company": "Company",
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "statusIcon"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "parts": {
+        "Avatar": {
+          "component": {
+            "id": "ds.avatar",
+            "props": {
+              "size": "{size}",
+              "placeholder": false,
+              "text": false,
+              "statusIcon": "{statusIcon}",
+              "state": "default"
+            }
+          }
+        },
+        "textAndSupportingText": {
+          "layout": {
+            "direction": "column"
+          },
+          "parts": {
+            "Text": {
+              "text": "Olivia Rhye",
+              "tokens": {
+                "color": "{imported.avatar-label-group.text-and-supporting-text-text.color}",
+                "font-size": "{imported.avatar-label-group.text-and-supporting-text-text.font-size.{size}}",
+                "font-weight": "{imported.avatar-label-group.text-and-supporting-text-text.font-weight}",
+                "line-height": "{imported.avatar-label-group.text-and-supporting-text-text.line-height.{size}}"
+              }
+            },
+            "supportingText": {
+              "text": "olivia@untitledui.com",
+              "tokens": {
+                "color": "{imported.avatar-label-group.text-and-supporting-text-supporting-text.color}",
+                "font-size": "{imported.avatar-label-group.text-and-supporting-text-supporting-text.font-size.{size}}",
+                "font-weight": "{imported.avatar-label-group.text-and-supporting-text-supporting-text.font-weight}",
+                "line-height": "{imported.avatar-label-group.text-and-supporting-text-supporting-text.line-height.{size}}"
+              }
+            }
+          }
+        }
+      },
+      "tokens": {
+        "gap": "{imported.avatar-label-group.root.gap.{size}}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "c79b6838ace2d3f6a017392eaad54fd45ca25bd5",
+      "nodeId": "82:2793"
+    },
+    "code": {
+      "importPath": "src/components/AvatarLabelGroup",
+      "export": "AvatarLabelGroup"
+    }
+  }
+}

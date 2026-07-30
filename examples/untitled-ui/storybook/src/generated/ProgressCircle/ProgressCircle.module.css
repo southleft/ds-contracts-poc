@@ -1,0 +1,139 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/progress-circle.contract.json (ds.progress-circle v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+}
+
+.Ring {
+  display: flex;
+}
+
+.Background {
+  border-color: var(--imported-progress-circle-ring-background-border-color);
+  border-style: solid;
+}
+
+.size-md .Background {
+  border-width: var(--imported-progress-circle-ring-background-border-width-md);
+}
+
+.size-lg .Background {
+  border-width: var(--imported-progress-circle-ring-background-border-width-lg);
+}
+
+.size-sm .Background {
+  border-width: var(--imported-progress-circle-ring-background-border-width-sm);
+}
+
+.size-xs .Background {
+  border-width: var(--imported-progress-circle-ring-background-border-width-xs);
+}
+
+.Line {
+  width: 216px;
+  height: 216px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border-color: var(--imported-progress-circle-ring-line-border-color);
+  border-style: solid;
+}
+
+.size-md .Line {
+  border-width: var(--imported-progress-circle-ring-line-border-width-md);
+}
+
+.size-lg .Line {
+  border-width: var(--imported-progress-circle-ring-line-border-width-lg);
+}
+
+.size-sm .Line {
+  border-width: var(--imported-progress-circle-ring-line-border-width-sm);
+}
+
+.size-xs .Line {
+  border-width: var(--imported-progress-circle-ring-line-border-width-xs);
+}
+
+.group3 {
+  display: flex;
+}
+
+.Label {
+  color: var(--imported-progress-circle-group-3-label-color);
+  font-weight: var(--imported-progress-circle-group-3-label-font-weight);
+}
+
+.size-md .Label {
+  font-size: var(--imported-progress-circle-group-3-label-font-size-md);
+}
+
+.size-lg .Label {
+  font-size: var(--imported-progress-circle-group-3-label-font-size-lg);
+}
+
+.size-sm .Label {
+  font-size: var(--imported-progress-circle-group-3-label-font-size-sm);
+}
+
+.size-xs .Label {
+  font-size: var(--imported-progress-circle-group-3-label-font-size-xs);
+}
+
+.size-md .Label {
+  line-height: var(--imported-progress-circle-group-3-label-line-height-md);
+}
+
+.size-lg .Label {
+  line-height: var(--imported-progress-circle-group-3-label-line-height-lg);
+}
+
+.size-sm .Label {
+  line-height: var(--imported-progress-circle-group-3-label-line-height-sm);
+}
+
+.size-xs .Label {
+  line-height: var(--imported-progress-circle-group-3-label-line-height-xs);
+}
+
+.Number {
+  color: var(--imported-progress-circle-group-3-number-color);
+  font-weight: var(--imported-progress-circle-group-3-number-font-weight);
+}
+
+.size-md .Number {
+  font-size: var(--imported-progress-circle-group-3-number-font-size-md);
+}
+
+.size-lg .Number {
+  font-size: var(--imported-progress-circle-group-3-number-font-size-lg);
+}
+
+.size-sm .Number {
+  font-size: var(--imported-progress-circle-group-3-number-font-size-sm);
+}
+
+.size-xs .Number {
+  font-size: var(--imported-progress-circle-group-3-number-font-size-xs);
+}
+
+.size-md .Number {
+  line-height: var(--imported-progress-circle-group-3-number-line-height-md);
+}
+
+.size-lg .Number {
+  line-height: var(--imported-progress-circle-group-3-number-line-height-lg);
+}
+
+.size-sm .Number {
+  line-height: var(--imported-progress-circle-group-3-number-line-height-sm);
+}
+
+.size-xs .Number {
+  line-height: var(--imported-progress-circle-group-3-number-line-height-xs);
+}

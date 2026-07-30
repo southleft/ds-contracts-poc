@@ -1,0 +1,47 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/dropdown-list-item.contract.json (ds.dropdown-list-item v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  cursor: pointer;
+  padding-inline: var(--imported-dropdown-list-item-root-padding-inline);
+  padding-block: var(--imported-dropdown-list-item-root-padding-block);
+  width: var(--imported-dropdown-list-item-root-width);
+}
+
+.root:disabled {
+  cursor: not-allowed;
+}
+
+.root:hover:not(:disabled) {
+  background-color: var(--imported-dropdown-list-item-state-hover-background-color);
+}
+
+.Content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--imported-dropdown-list-item-content-gap);
+}
+
+.Text {
+  color: var(--imported-dropdown-list-item-content-text-color);
+  font-size: var(--imported-dropdown-list-item-content-text-font-size);
+  line-height: var(--imported-dropdown-list-item-content-text-line-height);
+}
+
+.Shortcut {
+  color: var(--imported-dropdown-list-item-shortcut-color);
+  font-size: var(--imported-dropdown-list-item-shortcut-font-size);
+  font-weight: var(--imported-dropdown-list-item-shortcut-font-weight);
+  line-height: var(--imported-dropdown-list-item-shortcut-line-height);
+}
+
+.root:disabled .Shortcut {
+  color: var(--imported-dropdown-list-item-shortcut-state-disabled-color);
+}

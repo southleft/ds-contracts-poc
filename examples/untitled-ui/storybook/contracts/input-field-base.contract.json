@@ -1,0 +1,323 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.input-field-base",
+  "name": "InputFieldBase",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "default",
+          "paymentInput",
+          "leadingDropdown",
+          "leadingText",
+          "trailingDropdown"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "default": "Default",
+            "paymentInput": "Payment input",
+            "leadingDropdown": "Leading dropdown",
+            "leadingText": "Leading text",
+            "trailingDropdown": "Trailing dropdown"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "destructive",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Destructive",
+          "values": {
+            "false": "False",
+            "true": "True"
+          }
+        },
+        "code": {
+          "prop": "destructive"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "parts": {
+        "inputWithLabel": {
+          "layout": {
+            "direction": "column"
+          },
+          "parts": {
+            "Label": {
+              "text": "Email",
+              "textByProp": {
+                "prop": "type",
+                "map": {
+                  "paymentInput": "Card number",
+                  "leadingDropdown": "Phone number",
+                  "leadingText": "Website",
+                  "trailingDropdown": "Sale amount"
+                }
+              },
+              "tokens": {
+                "color": "{imported.input-field-base.input-with-label-label.color}",
+                "font-size": "{imported.input-field-base.input-with-label-label.font-size}",
+                "font-weight": "{imported.input-field-base.input-with-label-label.font-weight}",
+                "line-height": "{imported.input-field-base.input-with-label-label.line-height}"
+              }
+            },
+            "Input": {
+              "layout": {
+                "direction": "row",
+                "align": "center"
+              },
+              "layoutByProp": {
+                "prop": "type",
+                "map": {
+                  "leadingDropdown": {
+                    "align": "start"
+                  },
+                  "leadingText": {
+                    "align": "start"
+                  },
+                  "trailingDropdown": {
+                    "direction": "row-reverse",
+                    "align": "start"
+                  }
+                }
+              },
+              "parts": {
+                "addOn": {
+                  "layout": {
+                    "direction": "row",
+                    "align": "center"
+                  },
+                  "parts": {
+                    "Text": {
+                      "text": "http://",
+                      "visibleWhen": {
+                        "prop": "type",
+                        "equals": "leadingText"
+                      },
+                      "tokens": {
+                        "color": "{imported.shared.color-737373}",
+                        "font-size": "{imported.shared.size-16}",
+                        "font-weight": "{imported.shared.num-400}",
+                        "line-height": "{imported.shared.size-24}"
+                      }
+                    }
+                  },
+                  "visibleWhen": {
+                    "prop": "type",
+                    "equals": "leadingText"
+                  },
+                  "tokens": {
+                    "padding-block": "{imported.input-field-base.input-with-label-input-add-on.padding-block}"
+                  }
+                },
+                "Dropdown": {
+                  "layout": {
+                    "direction": "row",
+                    "justify": "space-between",
+                    "align": "center"
+                  },
+                  "parts": {
+                    "dropdownText": {
+                      "text": "US",
+                      "textByProp": {
+                        "prop": "type",
+                        "map": {
+                          "trailingDropdown": "USD"
+                        }
+                      },
+                      "visibleWhen": {
+                        "prop": "type",
+                        "equals": [
+                          "leadingDropdown",
+                          "trailingDropdown"
+                        ]
+                      },
+                      "tokens": {
+                        "color": "{imported.input-field-base.input-with-label-input-dropdown-dropdown-text.color}",
+                        "font-size": "{imported.shared.size-16}",
+                        "font-weight": "{imported.shared.num-400}",
+                        "line-height": "{imported.shared.size-24}"
+                      }
+                    },
+                    "chevronDown": {
+                      "component": {
+                        "id": "ds.chevron-down"
+                      },
+                      "visibleWhen": {
+                        "prop": "type",
+                        "equals": [
+                          "leadingDropdown",
+                          "trailingDropdown"
+                        ]
+                      }
+                    }
+                  },
+                  "visibleWhen": {
+                    "prop": "type",
+                    "equals": [
+                      "leadingDropdown",
+                      "trailingDropdown"
+                    ]
+                  },
+                  "tokens": {
+                    "gap": "{imported.input-field-base.input-with-label-input-dropdown.gap}",
+                    "padding-block": "{imported.input-field-base.input-with-label-input-dropdown.padding-block}"
+                  }
+                },
+                "Content": {
+                  "layout": {
+                    "direction": "row",
+                    "align": "center",
+                    "grow": true
+                  },
+                  "parts": {
+                    "paymentMethodIcon": {
+                      "component": {
+                        "id": "ds.payment-method-icon",
+                        "props": {
+                          "size": "sm",
+                          "paymentMethod": "mastercard"
+                        }
+                      },
+                      "visibleWhen": {
+                        "prop": "type",
+                        "equals": "paymentInput"
+                      }
+                    },
+                    "mail": {
+                      "component": {
+                        "id": "ds.mail"
+                      },
+                      "visibleWhen": {
+                        "prop": "type",
+                        "equals": "default"
+                      }
+                    },
+                    "textInput": {
+                      "layout": {
+                        "direction": "row",
+                        "align": "center",
+                        "grow": true
+                      },
+                      "layoutByProp": {
+                        "prop": "type",
+                        "map": {
+                          "trailingDropdown": {
+                            "align": "start"
+                          }
+                        }
+                      },
+                      "parts": {
+                        "leadingText": {
+                          "text": "$",
+                          "visibleWhen": {
+                            "prop": "type",
+                            "equals": "trailingDropdown"
+                          },
+                          "tokens": {
+                            "color": "{imported.shared.color-737373}",
+                            "font-size": "{imported.shared.size-16}",
+                            "font-weight": "{imported.shared.num-400}",
+                            "line-height": "{imported.shared.size-24}"
+                          }
+                        },
+                        "textInputText": {
+                          "text": "olivia@untitledui.com",
+                          "textByProp": {
+                            "prop": "type",
+                            "map": {
+                              "paymentInput": "Card number",
+                              "leadingDropdown": "+1 (555) 000-0000",
+                              "leadingText": "www.untitledui.com",
+                              "trailingDropdown": "1,000.00"
+                            }
+                          },
+                          "tokens": {
+                            "color": "{imported.shared.color-737373}",
+                            "font-size": "{imported.shared.size-16}",
+                            "font-weight": "{imported.shared.num-400}",
+                            "line-height": "{imported.shared.size-24}"
+                          }
+                        }
+                      },
+                      "tokens": {
+                        "padding-block": "{imported.input-field-base.input-with-label-input-content-text-input.padding-block.{type}}",
+                        "border-width": "{imported.input-field-base.input-with-label-input-content-text-input.border-width.{type}}"
+                      }
+                    }
+                  },
+                  "tokens": {
+                    "gap": "{imported.input-field-base.input-with-label-input-content.gap}",
+                    "padding-block": "{imported.input-field-base.input-with-label-input-content.padding-block.{type}}"
+                  }
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.input-field-base.input-with-label-input.background-color}",
+                "gap": "{imported.input-field-base.input-with-label-input.gap.{type}}",
+                "padding-block": "{imported.input-field-base.input-with-label-input.padding-block.{type}}",
+                "border-radius": "{imported.input-field-base.input-with-label-input.border-radius}",
+                "border-width": "{imported.input-field-base.input-with-label-input.border-width}",
+                "box-shadow": "{imported.input-field-base.input-with-label-input.box-shadow}"
+              }
+            }
+          },
+          "tokens": {
+            "gap": "{imported.input-field-base.input-with-label.gap}"
+          }
+        },
+        "hintText": {
+          "text": "This is a hint text to help user.",
+          "tokens": {
+            "font-size": "{imported.input-field-base.hint-text.font-size}",
+            "font-weight": "{imported.shared.num-400}",
+            "line-height": "{imported.input-field-base.hint-text.line-height}"
+          }
+        }
+      },
+      "tokens": {
+        "gap": "{imported.input-field-base.root.gap}",
+        "width": "{imported.input-field-base.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "c259e0e683849e75b72835d1f50c58e3e3f00b10",
+      "nodeId": "1090:57627"
+    },
+    "code": {
+      "importPath": "src/components/InputFieldBase",
+      "export": "InputFieldBase"
+    }
+  }
+}

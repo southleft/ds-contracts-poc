@@ -1,0 +1,70 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/slider.contract.json (ds.slider v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--imported-slider-root-border-radius);
+}
+
+.Background {
+  background-color: var(--imported-slider-background-background-color);
+  border-radius: var(--imported-slider-background-border-radius);
+}
+
+.Progress {
+  display: flex;
+}
+
+.progressLine {
+  background-color: var(--imported-shared-color-7f56d9);
+  border-radius: var(--imported-slider-progress-progress-line-border-radius);
+}
+
+.leftControl {
+  display: flex;
+}
+
+.leftControl2 {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: var(--imported-slider-progress-left-control-left-control-background-color);
+  border-color: var(--imported-shared-color-7f56d9);
+  border-width: var(--imported-slider-progress-left-control-left-control-border-width);
+  border-style: solid;
+}
+
+.leftNumber {
+  color: var(--imported-slider-progress-left-control-left-number-color);
+  font-size: var(--imported-slider-progress-left-control-left-number-font-size);
+  font-weight: var(--imported-slider-progress-left-control-left-number-font-weight);
+  line-height: var(--imported-slider-progress-left-control-left-number-line-height);
+}
+
+.rightControl {
+  display: flex;
+}
+
+.rightControl2 {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: var(--imported-slider-progress-right-control-right-control-background-color);
+  border-color: var(--imported-shared-color-7f56d9);
+  border-width: var(--imported-slider-progress-right-control-right-control-border-width);
+  border-style: solid;
+}
+
+.rightNumber {
+  color: var(--imported-slider-progress-right-control-right-number-color);
+  font-size: var(--imported-slider-progress-right-control-right-number-font-size);
+  font-weight: var(--imported-slider-progress-right-control-right-number-font-weight);
+  line-height: var(--imported-slider-progress-right-control-right-number-line-height);
+}

@@ -1,0 +1,187 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.button-brand-primary",
+  "name": "ButtonBrandPrimary",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "large",
+          "medium",
+          "small"
+        ]
+      },
+      "default": "large",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "large": "large",
+            "medium": "medium",
+            "small": "small"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "default": "Button",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "✏️text"
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    },
+    {
+      "name": "iconLeft",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "↪️icon-left"
+        },
+        "code": {
+          "prop": "iconLeft"
+        }
+      }
+    },
+    {
+      "name": "iconRight",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "↪️icon-right"
+        },
+        "code": {
+          "prop": "iconRight"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Icon": {
+          "component": {
+            "id": "ds.icon",
+            "props": {
+              "size": "large"
+            }
+          },
+          "visibleWhen": {
+            "prop": "iconLeft"
+          }
+        },
+        "Button": {
+          "content": {
+            "prop": "text"
+          },
+          "tokens": {
+            "color": "{text.inverse-primary}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{text.disabled}"
+            }
+          }
+        },
+        "icon2": {
+          "component": {
+            "id": "ds.icon",
+            "props": {
+              "size": "large"
+            }
+          },
+          "visibleWhen": {
+            "prop": "iconRight"
+          }
+        }
+      },
+      "tokensByProp": {
+        "prop": "size",
+        "map": {
+          "small": {
+            "padding-inline": "{spacing.150}",
+            "height": "{component-size.medium}"
+          },
+          "medium": {
+            "height": "{component-size.large}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{bg.brand.default}",
+        "padding-inline": "{spacing.200}",
+        "padding-block": "{spacing.100}",
+        "border-radius": "{corner-radius.100}",
+        "gap": "{spacing.100}",
+        "height": "{component-size.xlarge}"
+      },
+      "states": {
+        "hover": {
+          "background-color": "{bg.brand.hover}"
+        },
+        "active": {
+          "background-color": "{bg.brand.pressed}"
+        },
+        "focus-visible": {
+          "outline-color": "{border.focus}"
+        },
+        "disabled": {
+          "background-color": "{bg.disabled}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "WofZT8xaxXuc2Q6Je9S4XE",
+      "componentSetKey": "7357ff93090290cc02b380fbd2b7c5e3cbb2c27c",
+      "nodeId": "258:1838"
+    },
+    "code": {
+      "importPath": "src/components/ButtonBrandPrimary",
+      "export": "ButtonBrandPrimary"
+    }
+  },
+  "figmaStatePreviews": true
+}

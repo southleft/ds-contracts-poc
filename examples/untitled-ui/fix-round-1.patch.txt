@@ -1,0 +1,988 @@
+diff --git a/contracts/contract.schema.json b/contracts/contract.schema.json
+index 6e2b350..caa3a25 100644
+--- a/contracts/contract.schema.json
++++ b/contracts/contract.schema.json
+@@ -852,6 +852,28 @@
+         "text": {
+           "type": "string"
+         },
++        "textByProp": {
++          "type": "object",
++          "properties": {
++            "prop": {
++              "type": "string"
++            },
++            "map": {
++              "type": "object",
++              "propertyNames": {
++                "type": "string"
++              },
++              "additionalProperties": {
++                "type": "string"
++              }
++            }
++          },
++          "required": [
++            "prop",
++            "map"
++          ],
++          "additionalProperties": false
++        },
+         "meter": {
+           "type": "object",
+           "properties": {
+@@ -969,6 +991,28 @@
+                   },
+                   {
+                     "type": "boolean"
++                  },
++                  {
++                    "type": "object",
++                    "properties": {
++                      "prop": {
++                        "type": "string"
++                      },
++                      "map": {
++                        "type": "object",
++                        "propertyNames": {
++                          "type": "string"
++                        },
++                        "additionalProperties": {
++                          "type": "string"
++                        }
++                      }
++                    },
++                    "required": [
++                      "prop",
++                      "map"
++                    ],
++                    "additionalProperties": false
+                   }
+                 ]
+               }
+@@ -1049,7 +1093,18 @@
+               "type": "string"
+             },
+             "equals": {
+-              "type": "string"
++              "anyOf": [
++                {
++                  "type": "string"
++                },
++                {
++                  "minItems": 1,
++                  "type": "array",
++                  "items": {
++                    "type": "string"
++                  }
++                }
++              ]
+             }
+           },
+           "required": [
+diff --git a/core/emit-figma-script.ts b/core/emit-figma-script.ts
+index 356cab4..558a7f8 100644
+--- a/core/emit-figma-script.ts
++++ b/core/emit-figma-script.ts
+@@ -1898,7 +1898,7 @@ const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
+  *  contract's bindings. `{parentProp}` values resolve through `subst` first. */
+ function mapDepProps(
+   dep: Contract,
+-  props: Record<string, string | boolean>,
++  props: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
+   subst: Record<string, string>,
+   text?: string,
+ ): Record<string, string | boolean> {
+@@ -1907,7 +1907,17 @@ function mapDepProps(
+     const depProp = dep.props.find((p) => p.name === propName);
+     if (!depProp) continue;
+     if (depProp.bindings.figma.kind === 'NONE') continue; // code-only (v7 arrayOf)
+-    let value = rawValue;
++    let value: string | boolean;
++    if (typeof rawValue === 'object') {
++      // PropByProp lookup: resolve against this combo's subst at compile
++      // time; a parent value absent from the map applies nothing (child
++      // default).
++      const resolved = rawValue.map[subst[rawValue.prop] ?? ''];
++      if (resolved === undefined) continue;
++      value = resolved;
++    } else {
++      value = rawValue;
++    }
+     if (typeof value === 'string') {
+       const parentRef = value.match(PARENT_PROP_REF);
+       if (parentRef) {
+@@ -2162,7 +2172,8 @@ function variantParts(
+     const vw = p.visibleWhen;
+     if (vw && vw.equals !== undefined) {
+       const value = subst[vw.prop];
+-      if (value !== undefined && value !== vw.equals) return false;
++      const eqs = Array.isArray(vw.equals) ? vw.equals : [vw.equals];
++      if (value !== undefined && !eqs.includes(value)) return false;
+     }
+     // v9: an enum-conditioned stylesWhen display:none that matches this
+     // combo suppresses the part — the shape-placement spelling for axis
+@@ -2430,10 +2441,16 @@ function partToSpecInner(
+     return frame;
+   };
+   if (part.text !== undefined) {
++    // textByProp (first-variant-freeze fix): per-enum-value characters
++    // resolve at COMPILE time against this combo's subst; unmapped values
++    // keep the base text.
++    const partText = part.textByProp
++      ? (part.textByProp.map[subst[part.textByProp.prop] ?? ''] ?? part.text)
++      : part.text;
+     // A TEXT node has no children — a child-BEARING text part must take the
+     // frame lowering even without box channels (same Tooltip finding).
+     if (textPartHasBox() || Object.keys(part.parts ?? {}).length > 0) {
+-      const textSpec: NodeSpec = { type: 'text', name, characters: part.text };
++      const textSpec: NodeSpec = { type: 'text', name, characters: partText };
+       return wrapTextInBox(textSpec);
+     }
+     const spec: NodeSpec = { type: 'text', name };
+@@ -2447,7 +2464,7 @@ function partToSpecInner(
+     // no residual margin to reserve).
+     if (part.layout?.grow) spec.grow = true;
+     const textCtx = applyStyling(spec, part, subst, ctx);
+-    spec.characters = part.text;
++    spec.characters = partText;
+     spec.fontSize = textCtx.fontSize ?? 14;
+     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
+     spec.textStyle = matchTextStyle(textCtx);
+diff --git a/core/emit-html.ts b/core/emit-html.ts
+index 1b01179..c7a1983 100644
+--- a/core/emit-html.ts
++++ b/core/emit-html.ts
+@@ -720,6 +720,13 @@ function renderComponentHtml(
+           for (const p of boolProps(dep)) depState.bools[p.name] = p.default === true;
+           for (const [pn, v] of Object.entries(part.component!.props ?? {})) {
+             if (typeof v === 'boolean') { depState.bools[pn] = v; continue; }
++            if (typeof v === 'object') {
++              // PropByProp lookup against the live parent value; unmapped →
++              // child default stands.
++              const r = v.map[propValue(v.prop) ?? ''];
++              if (r !== undefined) depState.subst[pn] = r;
++              continue;
++            }
+             const parentRef = v.match(/^\{([a-z][\w-]*)\}$/);
+             depState.subst[pn] = parentRef ? (propValue(parentRef[1]) ?? v) : v;
+           }
+@@ -741,6 +748,13 @@ function renderComponentHtml(
+       for (const p of boolProps(dep)) depState.bools[p.name] = p.default === true;
+       for (const [pn, v] of Object.entries(part.component.props ?? {})) {
+         if (typeof v === 'boolean') { depState.bools[pn] = v; continue; }
++        if (typeof v === 'object') {
++          // PropByProp lookup against the live parent value; unmapped →
++          // child default stands.
++          const r = v.map[propValue(v.prop) ?? ''];
++          if (r !== undefined) depState.subst[pn] = r;
++          continue;
++        }
+         const parentRef = v.match(/^\{([a-z][\w-]*)\}$/);
+         depState.subst[pn] = parentRef ? (propValue(parentRef[1]) ?? v) : v;
+       }
+@@ -782,9 +796,14 @@ function renderComponentHtml(
+     // it. Text and children are siblings inside the part's own box. Childless
+     // text parts emit byte-identical markup.
+     if (part.content || part.text !== undefined) {
++      // textByProp: per-enum-value characters resolve against the LIVE
++      // parent value (first-variant-freeze fix); base text otherwise.
++      const staticText = part.textByProp
++        ? (part.textByProp.map[propValue(part.textByProp.prop) ?? ''] ?? part.text!)
++        : part.text!;
+       const value = part.content
+         ? (part.content.prop === 'children' && extraText !== undefined ? extraText : textValue(part.content.prop))
+-        : part.text!;
++        : staticText;
+       const kids = Object.entries(part.parts ?? {})
+         .map(([childName, child]) => renderPart(childName, child, pad + '  ', textEl))
+         .filter(Boolean)
+diff --git a/core/emit-react-inline.ts b/core/emit-react-inline.ts
+index 016466f..0c76d92 100644
+--- a/core/emit-react-inline.ts
++++ b/core/emit-react-inline.ts
+@@ -549,8 +549,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
+   const wrapVisibleWhen = (part: Part, jsx: string): string => {
+     if (!part.visibleWhen) return jsx;
+     const codeName = codePropOf(part.visibleWhen.prop);
++    const eq = part.visibleWhen.equals;
+     const cond =
+-      part.visibleWhen.equals !== undefined ? `${codeName} === '${part.visibleWhen.equals}'` : codeName;
++      eq === undefined
++        ? codeName
++        : Array.isArray(eq)
++          ? eq.map((v) => `${codeName} === '${v}'`).join(' || ')
++          : `${codeName} === '${eq}'`;
+     return `{${cond} ? (${jsx}) : null}`;
+   };
+ 
+@@ -588,13 +593,26 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
+     ),
+   ];
+ 
+-  const depAttrString = (dep: Contract, fixedProps: Record<string, string | boolean>): string => {
++  const depAttrString = (dep: Contract, fixedProps: Record<string, string | boolean | { prop: string; map: Record<string, string> }>): string => {
+     const parts: string[] = [];
+     for (const [propName, value] of Object.entries(fixedProps)) {
+       const depProp = dep.props.find((p) => p.name === propName);
+       const codeName = depProp?.bindings.code.prop ?? propName;
++      if (typeof value === 'object') {
++        // PropByProp lookup (see emit-react depAttrString).
++        const parentProp = contract.props.find((p) => p.name === value.prop);
++        const expr = parentProp?.bindings.code.prop ?? value.prop;
++        const chain = Object.entries(value.map)
++          .map(([k, v]) => `${expr} === '${k}' ? '${v}' : `)
++          .join('');
++        parts.push(` ${codeName}={${chain}undefined}`);
++        continue;
++      }
+       if (typeof value === 'boolean') {
+-        parts.push(value ? ` ${codeName}` : '');
++        // Applied false must override a true-defaulting dependency prop —
++        // omission only when omission already means false (see emit-react
++        // depAttrString).
++        parts.push(value ? ` ${codeName}` : depProp?.default === false ? '' : ` ${codeName}={false}`);
+         continue;
+       }
+       const parentRef = value.match(/^\{([a-z][\w-]*)\}$/);
+@@ -678,9 +696,16 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
+     }
+     if (part.text !== undefined) {
+       const el = part.element ?? 'span';
++      // textByProp: per-enum-value characters (see emit-react).
++      const tb = part.textByProp;
++      const inner = tb
++        ? `{${Object.entries(tb.map)
++            .map(([v, t]) => `${codePropOf(tb.prop)} === '${v}' ? ${JSON.stringify(t)} : `)
++            .join('')}${JSON.stringify(part.text)}}`
++        : part.text;
+       return wrapVisibleWhen(
+         part,
+-        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}>${part.text}</${el}>`,
++        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}>${inner}</${el}>`,
+       );
+     }
+     if (part.meter) {
+diff --git a/core/emit-react.ts b/core/emit-react.ts
+index 3c57e2f..c82cbf2 100644
+--- a/core/emit-react.ts
++++ b/core/emit-react.ts
+@@ -710,8 +710,32 @@ export function validateContract(
+       const vwProp = contract.props.find((pr) => pr.name === part.visibleWhen!.prop);
+       if (!vwProp) {
+         errors.push(`${contract.id}: part "${name}" visibleWhen references unknown prop "${part.visibleWhen.prop}"`);
+-      } else if (part.visibleWhen.equals !== undefined && !(typeof vwProp.type === 'object' && 'enum' in vwProp.type && vwProp.type.enum.includes(part.visibleWhen.equals))) {
+-        errors.push(`${contract.id}: part "${name}" visibleWhen.equals "${part.visibleWhen.equals}" is not a value of prop "${part.visibleWhen.prop}"`);
++      } else if (part.visibleWhen.equals !== undefined) {
++        // Single value or value-subset array — every named value must be a
++        // member of the prop's enum.
++        const eqs = Array.isArray(part.visibleWhen.equals) ? part.visibleWhen.equals : [part.visibleWhen.equals];
++        const enumValues = typeof vwProp.type === 'object' && 'enum' in vwProp.type ? vwProp.type.enum : [];
++        for (const eq of eqs) {
++          if (!enumValues.includes(eq)) {
++            errors.push(`${contract.id}: part "${name}" visibleWhen.equals "${eq}" is not a value of prop "${part.visibleWhen.prop}"`);
++          }
++        }
++      }
++    }
++    if (part.textByProp) {
++      const tbProp = contract.props.find((pr) => pr.name === part.textByProp!.prop);
++      if (part.text === undefined) {
++        errors.push(`${contract.id}: part "${name}" textByProp requires a base \`text\``);
++      }
++      if (!tbProp) {
++        errors.push(`${contract.id}: part "${name}" textByProp references unknown prop "${part.textByProp.prop}"`);
++      } else {
++        const tbEnum = typeof tbProp.type === 'object' && 'enum' in tbProp.type ? tbProp.type.enum : [];
++        for (const key of Object.keys(part.textByProp.map)) {
++          if (!tbEnum.includes(key)) {
++            errors.push(`${contract.id}: part "${name}" textByProp map key "${key}" is not a value of prop "${part.textByProp.prop}"`);
++          }
++        }
+       }
+     }
+     if (part.icon) {
+@@ -1804,18 +1828,51 @@ const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
+ 
+ function depAttrString(
+   dep: Contract,
+-  fixedProps: Record<string, string | boolean>,
++  fixedProps: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
+   parent?: Contract,
+ ): string {
+   const parts: string[] = [];
+   for (const [propName, value] of Object.entries(fixedProps)) {
+     const depProp = dep.props.find((p) => p.name === propName);
+     const codeName = depProp?.bindings.code.prop ?? propName;
++    if (typeof value === 'object') {
++      // PropByProp lookup (first-variant-freeze fix): the child prop follows
++      // a per-value map of the parent's enum prop — ternary chain, trailing
++      // undefined applies the child's own default for unmapped values.
++      const parentProp = parent?.props.find((p) => p.name === value.prop);
++      const expr = parentProp?.bindings.code.prop ?? value.prop;
++      const chain = Object.entries(value.map)
++        .map(([k, v]) => `${expr} === '${k}' ? '${v}' : `)
++        .join('');
++      parts.push(` ${codeName}={${chain}undefined}`);
++      continue;
++    }
+     if (typeof value === 'boolean') {
+-      parts.push(value ? ` ${codeName}` : '');
++      if (depProp && depProp.type !== 'boolean') {
++        throw new Error(
++          `${dep.id}: applied value for prop "${propName}" is a boolean but the dependency types it ${JSON.stringify(depProp.type)} — fix the composing contract (cross-contract prop types are load-bearing)`,
++        );
++      }
++      // An applied `false` must OVERRIDE a dependency whose own default is
++      // true — omitting the attribute would silently re-enable the part
++      // (field case: AvatarGroup applies text:false while Avatar defaults
++      // text:true; the omitted attr rendered "OR" initials on every grouped
++      // avatar). Omission stays the spelling only when it already means
++      // false at the dependency.
++      parts.push(value ? ` ${codeName}` : depProp?.default === false ? '' : ` ${codeName}={false}`);
+       continue;
+     }
+     const parentRef = value.match(PARENT_PROP_REF);
++    // A STRING against a boolean dep prop would emit supportingText="false" —
++    // truthy at runtime, silently rendering a part the canvas hides (audit
++    // class string-boolean-coercion). Composition owns the coercion; the
++    // emitter refuses the mismatch loudly. `{parentProp}` references are the
++    // one legal string spelling for any type.
++    if (depProp?.type === 'boolean' && !(parentRef && parent)) {
++      throw new Error(
++        `${dep.id}: applied value ${JSON.stringify(value)} for prop "${propName}" is a string but the dependency types it boolean — coerce at composition ('False' → false), never pass the spelling through`,
++      );
++    }
+     if (parentRef && parent) {
+       // Parent→child prop mapping: `density: "{density}"` → density={density}
+       const parentProp = parent.props.find((p) => p.name === parentRef[1]);
+@@ -2106,8 +2163,13 @@ export function generateTsx(
+   const wrapVisibleWhen = (part: Part, jsx: string): string => {
+     if (!part.visibleWhen) return jsx;
+     const codeName = codePropOf(part.visibleWhen.prop);
++    const eq = part.visibleWhen.equals;
+     const cond =
+-      part.visibleWhen.equals !== undefined ? `${codeName} === '${part.visibleWhen.equals}'` : codeName;
++      eq === undefined
++        ? codeName
++        : Array.isArray(eq)
++          ? eq.map((v) => `${codeName} === '${v}'`).join(' || ')
++          : `${codeName} === '${eq}'`;
+     return `{${cond} ? (${jsx}) : null}`;
+   };
+ 
+@@ -2158,9 +2220,16 @@ export function generateTsx(
+       const attrs = depAttrString(dep, part.component.props ?? {}, contract);
+       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
+       const text = part.component.text ?? (typeof depChildren?.default === 'string' ? depChildren.default : undefined);
+-      return text !== undefined
+-        ? `<${dep.name}${attrs}>${text}</${dep.name}>`
+-        : `<${dep.name}${attrs} />`;
++      // Presence rules apply to nested-component parts exactly as they do to
++      // icon/repeat parts — this branch used to return bare JSX, silently
++      // dropping contract visibleWhen (AUDIT-ROUND-1: emitter-drops-
++      // visibleWhen-on-component-parts).
++      return wrapVisibleWhen(
++        part,
++        text !== undefined
++          ? `<${dep.name}${attrs}>${text}</${dep.name}>`
++          : `<${dep.name}${attrs} />`,
++      );
+     }
+     if (part.slot) {
+       const el = part.element ?? 'div';
+@@ -2180,9 +2249,17 @@ export function generateTsx(
+     }
+     if (part.text !== undefined) {
+       const el = part.element ?? 'span';
++      // textByProp (first-variant-freeze fix): per-enum-value characters as
++      // a ternary chain over the driving prop, base text as the fallback.
++      const tb = part.textByProp;
++      const inner = tb
++        ? `{${Object.entries(tb.map)
++            .map(([v, t]) => `${codePropOf(tb.prop)} === '${v}' ? ${JSON.stringify(t)} : `)
++            .join('')}${JSON.stringify(part.text)}}`
++        : part.text;
+       return wrapVisibleWhen(
+         part,
+-        `<${el} className={${stylesRef(partName)}}${partAttrString(part)}>${part.text}</${el}>`,
++        `<${el} className={${stylesRef(partName)}}${partAttrString(part)}>${inner}</${el}>`,
+       );
+     }
+     if (part.meter) {
+diff --git a/core/propose-figma.ts b/core/propose-figma.ts
+index afe970a..22b58f0 100644
+--- a/core/propose-figma.ts
++++ b/core/propose-figma.ts
+@@ -594,12 +594,100 @@ const siblingKeys = (children: DumpNode[]): string[] => {
+   });
+ };
+ 
++/** Wrapper-union identity fold (audit class duplicate-parts-from-wrapper-
++ *  union): some variants nest children under a pass-through wrapper FRAME/
++ *  GROUP while others draw the same nodes flat at the parent level (field
++ *  cases: Tooltip's `Text and supporting text` vs flat `Text`; ProgressCircle
++ *  `Group 3 → Label, Number` vs flat; DropdownListItem `Content` wrapping
++ *  icon+text only in shortcut variants). A bare-name union mints the SAME
++ *  canvas node twice (doubled text, stub soup) and every duplicate lands in a
++ *  variant subset no axis predicts. Rule: when a container child W exists in
++ *  a strict subset of variants and a flat sibling elsewhere matches one of
++ *  W's members by name+type, synthesize W around the matched flats in those
++ *  variants so the union folds them into ONE part. The synthetic wrapper
++ *  clones the first REAL W occurrence's own channels (a pass-through
++ *  wrapper's styling is invariant structure, not a new observation — the
++ *  fold is ledgered per variant); its children are the variant's REAL flat
++ *  nodes, so every leaf channel stays observed. No-op when every variant
++ *  nests identically. Deterministic: candidates and folds walk in occurrence
++ *  order. */
++function foldWrapperUnion(
++  occ: Occ[],
++  childrenOf: Map<Occ, DumpNode[]>,
++  notes: string[],
++  where: string,
++): void {
++  const keyOf = (n: DumpNode): string => `${n.name} ${n.type}`;
++  interface Candidate {
++    type: string;
++    firstNode: DumpNode;
++    childKeys: Set<string>;
++    present: Set<Occ>;
++  }
++  const candidates = new Map<string, Candidate>();
++  for (const o of occ) {
++    for (const c of childrenOf.get(o)!) {
++      if ((c.type !== 'FRAME' && c.type !== 'GROUP') || (c.children ?? []).length === 0) continue;
++      let e = candidates.get(c.name);
++      if (!e) candidates.set(c.name, (e = { type: c.type, firstNode: c, childKeys: new Set(), present: new Set() }));
++      e.present.add(o);
++      for (const cc of c.children ?? []) e.childKeys.add(keyOf(cc));
++    }
++  }
++  // Ambiguity taint, GLOBAL per level: a member key that some variant draws
++  // flat at the parent level WHILE the owning wrapper is also present there
++  // is not a clean identity split (flat and nested coexist — or the node
++  // hops between wrappers per variant); such a key must not fold into ANY
++  // candidate, or one candidate's pruning leaves the node for another to
++  // grab and a phantom wrapper materializes around it (field case:
++  // InputFieldBase Help icon/alert-circle sit beside `Content` in variants
++  // where other variants nest them under `Text input` — grabbing them
++  // synthesized an empty `Text input` in variants that never drew one).
++  const tainted = new Set<string>();
++  for (const [wName, w] of candidates) {
++    for (const o of w.present) {
++      for (const c of childrenOf.get(o)!) {
++        if (c.name !== wName && w.childKeys.has(keyOf(c))) tainted.add(keyOf(c));
++      }
++    }
++  }
++  for (const [wName, w] of candidates) {
++    if (w.present.size === occ.length || w.present.size === 0) continue;
++    const foldableKeys = new Set([...w.childKeys].filter((k) => !tainted.has(k)));
++    if (foldableKeys.size === 0) continue;
++    for (const o of occ) {
++      if (w.present.has(o)) continue;
++      const kids = childrenOf.get(o)!;
++      // A same-named non-container child here is a different node, not a
++      // fold site.
++      if (kids.some((c) => c.name === wName)) continue;
++      const matched = kids.filter((c) => foldableKeys.has(keyOf(c)));
++      if (matched.length === 0) continue;
++      const at = kids.indexOf(matched[0]);
++      const synthetic = {
++        ...w.firstNode,
++        children: matched,
++        __synthetic: true,
++      } as DumpNode;
++      const rest = kids.filter((c) => !matched.includes(c));
++      rest.splice(Math.min(at, rest.length), 0, synthetic);
++      childrenOf.set(o, rest);
++      notes.push(
++        `${where}: variant "${o.variant}" draws ${matched.map((c) => `"${c.name}"`).join(', ')} flat where other variants nest under wrapper "${wName}" — folded into the wrapper so the union keeps ONE part per canvas node (wrapper-union identity)`,
++      );
++    }
++  }
++}
++
+ function mergeOcc(name: string, occ: Occ[], notes: string[], where: string): Merged {
+   const types = [...new Set(occ.map((o) => o.node.type))];
+   if (types.length > 1) {
+     notes.push(`${where}: node type differs across variants (${types.join(', ')}) — using ${types[0]}`);
+   }
+-  const sequences = occ.map((o) => siblingKeys(o.node.children ?? []));
++  const childrenOf = new Map<Occ, DumpNode[]>();
++  for (const o of occ) childrenOf.set(o, o.node.children ?? []);
++  if (occ.length > 1) foldWrapperUnion(occ, childrenOf, notes, where);
++  const sequences = occ.map((o) => siblingKeys(childrenOf.get(o)!));
+   const order = mergeOrders(sequences);
+   const nameCount = new Map<string, number>();
+   for (const key of order) {
+@@ -611,7 +699,7 @@ function mergeOcc(name: string, occ: Occ[], notes: string[], where: string): Mer
+     const ord = ordStr ? Number(ordStr) : 0;
+     const childOcc: Occ[] = [];
+     for (const o of occ) {
+-      const child = (o.node.children ?? []).filter((c) => c.name === childName)[ord];
++      const child = childrenOf.get(o)!.filter((c) => c.name === childName)[ord];
+       if (child) childOcc.push({ variant: o.variant, node: child });
+     }
+     // Duplicated sibling names need distinct merged names (they become note
+@@ -1999,6 +2087,65 @@ function invertLayoutByProp(
+ // Presence → visibleWhen
+ // ---------------------------------------------------------------------------
+ 
++/** First-variant-freeze fix, TEXT half: when a static text part's DRAWN
++ *  characters vary as a pure function of ONE enum axis across every
++ *  observed occurrence (ProgressBar's Percentage '0%'…'100%' tracking the
++ *  progress axis, InputFieldBase's label/'US'/'USD' tracking type), the part
++ *  binds `text` to the axis's default value with `textByProp` carrying the
++ *  deviations — the tokensByProp discipline applied to characters. Values
++ *  that vary WITHOUT a single-axis function keep the first observation with
++ *  a NAMED note (previously this freeze was silent). No-op for uniform
++ *  text. */
++function bindTextByAxis(m: Merged, part: Record<string, unknown>, ctx: Ctx, where: string): void {
++  const obs = m.occ
++    .filter((o) => o.node.text?.characters !== undefined)
++    .map((o) => ({ variant: o.variant, chars: o.node.text!.characters! }));
++  if (obs.length < 2 || new Set(obs.map((o) => o.chars)).size <= 1) return;
++  for (const axis of ctx.axes.filter((a) => !isBoolAxis(a.values))) {
++    const byValue = new Map<string, string>();
++    let pure = true;
++    for (const o of obs) {
++      const v = axisValuesOf(o.variant)[axis.property];
++      if (v === undefined) {
++        pure = false;
++        break;
++      }
++      const prev = byValue.get(v);
++      if (prev === undefined) byValue.set(v, o.chars);
++      else if (prev !== o.chars) {
++        pure = false;
++        break;
++      }
++    }
++    if (!pure || byValue.size <= 1) continue;
++    // Base = the axis's first OBSERVED value (axis declaration order); the
++    // other values ride textByProp as deviations.
++    const observedValues = axis.values.filter((v) => byValue.has(v));
++    const baseValue = observedValues[0];
++    const map: Record<string, string> = {};
++    for (const v of observedValues) {
++      const chars = byValue.get(v)!;
++      if (v !== baseValue && chars !== byValue.get(baseValue)) map[camel(v)] = chars;
++    }
++    part.text = byValue.get(baseValue)!;
++    if (Object.keys(map).length > 0) part.textByProp = { prop: axis.propName, map };
++    ctx.notes.push(
++      `${where}: drawn characters are a pure function of the "${axis.property}" axis (${observedValues
++        .map((v) => `${camel(v)}→${JSON.stringify(byValue.get(v))}`)
++        .join(', ')}) — bound as text + textByProp instead of pinning the first variant's value`,
++    );
++    return;
++  }
++  ctx.notes.push(
++    `${where}: drawn characters vary across variants (${[...new Set(obs.map((o) => JSON.stringify(o.chars)))].slice(0, 6).join(', ')}) without tracking any enum axis — first value pinned, review`,
++  );
++}
++
++/** Sentinel: strict-subset presence that no axis predicts — the caller drops
++ *  the part entirely (named degradation) instead of emitting it
++ *  unconditionally. Identity-compared. */
++const OMIT_PART: Record<string, unknown> = { OMIT: true };
++
+ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<string, unknown> | undefined {
+   if (m.occ.length === ctx.totalVariants.length) return undefined;
+   const present = new Set(m.occ.map((o) => o.variant));
+@@ -2030,6 +2177,26 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
+       return { prop: axis.propName, equals: camel(value) };
+     }
+   }
++  // No single value predicts presence — try a value SUBSET of one enum axis
++  // (audit class unconditional-parts; field cases: ButtonBase circle drawn
++  // for Icon leading/only/trailing, InputFieldBase Dropdown drawn for Type
++  // leadingDropdown/trailingDropdown). Membership carries as the array form
++  // of visibleWhen.equals. Subset values keep the axis's declared order.
++  for (const axis of ctx.axes) {
++    if (isBoolAxis(axis.values)) continue;
++    const presentValues = axis.values.filter((value) =>
++      ctx.totalVariants.some((v) => present.has(v) && axisValuesOf(v)[axis.property] === value),
++    );
++    if (presentValues.length < 2 || presentValues.length === axis.values.length) continue;
++    const matches = ctx.totalVariants.every(
++      (v) => presentValues.includes(axisValuesOf(v)[axis.property] ?? '') === present.has(v),
++    );
++    if (!matches) continue;
++    ctx.notes.push(
++      `${where}: present exactly where "${axis.property}" is one of ${presentValues.map((v) => `"${v}"`).join(', ')} — proposed as visibleWhen { prop: ${axis.propName}, equals: [${presentValues.map((v) => camel(v)).join(', ')}] } (value-subset form)`,
++    );
++    return { prop: axis.propName, equals: presentValues.map((v) => camel(v)) };
++  }
+   if (boolFalseSide) {
+     ctx.notes.push(
+       `${where}: present exactly where "${boolFalseSide.property}" is false — the visibleWhen vocabulary has no negated form, so the condition is inexpressible; kept unconditional (declared fidelity limit), review`,
+@@ -2045,10 +2212,24 @@ function visibilityFromPresence(m: Merged, ctx: Ctx, where: string): Record<stri
+     );
+     return undefined;
+   }
++  // Strict-subset presence with NO predictor: neither spelling is fully
++  // honest, so the proposal takes the lesser error and NAMES it either way.
++  // MAJORITY presence (CBDS field case: _Avatar Indicator in 32/36 variants,
++  // absent only where a sibling ELLIPSE substitutes for it) keeps the part
++  // unconditional — omission would be wrong in more variants than emission.
++  // MINORITY presence (the audit's "everything-at-once" blocker: ProgressBar
++  // floating tooltips in 20/55) OMITS the part as a NAMED degradation —
++  // unconditional emission would draw it in variants that never carried it.
++  if (m.occ.length * 2 > ctx.totalVariants.length) {
++    ctx.notes.push(
++      `${where}: present in ${m.occ.length}/${ctx.totalVariants.length} variants without correlating to any axis value — MAJORITY presence, kept unconditional (the lesser error; named, review)`,
++    );
++    return undefined;
++  }
+   ctx.notes.push(
+-    `${where}: present in ${m.occ.length}/${ctx.totalVariants.length} variants without correlating to any axis value — kept unconditional, review`,
++    `${where}: DEGRADATION part omitted — present in only ${m.occ.length}/${ctx.totalVariants.length} variants and no single axis (value, subset, or boolean) predicts presence; emitting it unconditionally would render it in the majority of variants that never carried it. Review the set's variant structure or gate it manually.`,
+   );
+-  return undefined;
++  return OMIT_PART;
+ }
+ 
+ // ---------------------------------------------------------------------------
+@@ -2234,7 +2415,7 @@ function noteResolution(res: ChildResolution, instanceOf: string, keys: { setKey
+  *  canonical value in each variant. Anything that varies WITHOUT an exact
+  *  axis match keeps the first value with a named note — never guessed. */
+ function threadInstanceProps(
+-  base: Record<string, string | boolean>,
++  base: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
+   perOccurrence: Array<{ variant: string; canonical: Record<string, string | boolean> }>,
+   ctx: Ctx,
+   where: string,
+@@ -2259,6 +2440,47 @@ function threadInstanceProps(
+       ctx.notes.push(
+         `${where}: applied prop "${propName}" of the nested "${instanceOf}" tracks the "${axis.propName}" axis exactly across all ${values.length} occurrence(s) — threaded as "{${axis.propName}}" (the child follows the parent per variant)`,
+       );
++      continue;
++    }
++    // Not an identity of any axis — a pure FUNCTION of one axis still binds,
++    // as a per-value LOOKUP (first-variant-freeze fix; field case:
++    // SocialButton's icon platform "x(twitter)" under the parent value "x").
++    // String values only (the PropByProp map vocabulary is string→string).
++    let lookup: { axis: Axis; map: Record<string, string> } | undefined;
++    for (const a of enumAxes) {
++      const byValue = new Map<string, string>();
++      let pure = values.length > 0;
++      for (const v of values) {
++        const axisValue = axisValuesOf(v.variant)[a.property];
++        if (axisValue === undefined || typeof v.value !== 'string') {
++          pure = false;
++          break;
++        }
++        const prev = byValue.get(axisValue);
++        if (prev === undefined) byValue.set(axisValue, v.value);
++        else if (prev !== v.value) {
++          pure = false;
++          break;
++        }
++      }
++      if (!pure || byValue.size <= 1) continue;
++      const map: Record<string, string> = {};
++      for (const value of a.values) {
++        const hit = byValue.get(value);
++        if (hit !== undefined) map[camel(value)] = hit;
++      }
++      lookup = { axis: a, map };
++      break;
++    }
++    if (lookup) {
++      base[propName] = { prop: lookup.axis.propName, map: lookup.map };
++      ctx.notes.push(
++        `${where}: applied prop "${propName}" of the nested "${instanceOf}" is a pure function of the "${lookup.axis.propName}" axis (${Object.entries(
++          lookup.map,
++        )
++          .map(([k, v]) => `${k}→${v}`)
++          .join(', ')}) — bound as a per-value lookup instead of pinning the first variant's value`,
++      );
+     } else {
+       ctx.notes.push(
+         `${where}: applied prop "${propName}" of the nested "${instanceOf}" varies across variants (${distinct.join(', ')}) without tracking any enum axis — first value "${String(base[propName])}" carried, review`,
+@@ -2720,6 +2942,10 @@ function buildPart(
+ ): Record<string, unknown> | null {
+   const part: Record<string, unknown> = {};
+   const visibleWhen = visibilityFromPresence(m, ctx, where);
++  // Unpredictable strict-subset presence: the part is omitted as a NAMED
++  // degradation (see OMIT_PART) — an unconditional emission would draw it in
++  // variants that never carried it.
++  if (visibleWhen === OMIT_PART) return null;
+ 
+   if (m.type === 'TEXT') {
+     const byProp: ByPropCollector = { map: {} };
+@@ -2741,6 +2967,7 @@ function buildPart(
+       part.content = { prop: canonicalPropName(property) };
+     } else {
+       part.text = characters;
++      bindTextByAxis(m, part, ctx, where);
+     }
+     attachTokens(ctx, part, tokens);
+     if (visibleWhen) part.visibleWhen = visibleWhen;
+@@ -3038,7 +3265,13 @@ function canonicalizeInstanceProps(
+       const values = (childProp.bindings.figma as { values?: Record<string, string> }).values;
+       const canonical = values ? Object.entries(values).find(([, spelled]) => spelled === value)?.[0] : undefined;
+       if (canonical !== undefined) {
+-        out[childProp.name] = canonical;
++        // Coerce to the child contract's minted type at the composition
++        // boundary: a bool-axis child spells its values "True"/"False" and
++        // canonicalizes to the STRINGS 'true'/'false' — truthy against the
++        // child's boolean prop ("false" renders the part; audit class
++        // string-boolean-coercion). The applied value must land as the type
++        // the child minted.
++        out[childProp.name] = childProp.type === 'boolean' ? canonical === 'true' : canonical;
+         mapped++;
+         continue;
+       }
+diff --git a/evals/golden.json b/evals/golden.json
+index 96e2b86..b682aa0 100644
+--- a/evals/golden.json
++++ b/evals/golden.json
+@@ -28,7 +28,7 @@
+   "src/components/BreadcrumbItem/BreadcrumbItem.tsx": "d9d8ef5dbd8067f78c7390ffbe3b63bf5796ba446f77eff1ee54f78197bf4329",
+   "src/components/BreadcrumbItem/index.ts": "6df275792394a67f4ee92e1c01c24e0644692f50cd06932deb0e35e3e2b303f6",
+   "src/components/Breadcrumbs/Breadcrumbs.module.css": "e225e32020982a51260d37cb610bc820d878eaea65d571c13f7f7dcbd556dd24",
+-  "src/components/Breadcrumbs/Breadcrumbs.stories.tsx": "9e17d3dcc3da2e44d90e6cbb93f3d7ff7a7a5adf165f7564053269a7fb9d9425",
++  "src/components/Breadcrumbs/Breadcrumbs.stories.tsx": "7327c379da830d73c29ed7a55af6d4aaf147a3e30ec8318d7787258cf1fecf79",
+   "src/components/Breadcrumbs/Breadcrumbs.tsx": "dd02b2f38922f3c31768c4741b7441287a75495c4e2e0ce799ba8a50042fd066",
+   "src/components/Breadcrumbs/index.ts": "efc27b4fb5f1b0a90faf1725fa86f09459d9f52a0a99d5aaef1f062146b3b989",
+   "src/components/Button/Button.module.css": "a44d85648888438db77066a9775eba8feabaa685d2985614e24c0a23b4cac664",
+diff --git a/figma-sync/plugin/engine.receipt.json b/figma-sync/plugin/engine.receipt.json
+index 5b00846..15cd1cb 100644
+--- a/figma-sync/plugin/engine.receipt.json
++++ b/figma-sync/plugin/engine.receipt.json
+@@ -1,7 +1,7 @@
+ {
+   "note": "Engine-bundle drift guard — scripts/build-plugin-zip.mjs refuses to package when a fresh bundle of figma-sync/plugin/engine/entry.ts (core barrel + baked tokens/contracts/icons) no longer matches this receipt. Re-record deliberately: node scripts/build-plugin-zip.mjs --update-engine-receipt",
+-  "inputHash": "8dcb2c9a55402969178452b5b09761d98ab668d1c73dbb78c7b9c520d5b60398",
+-  "minifiedBytes": 507063,
++  "inputHash": "498637b1fd38a3baff08b853f10f460bb94d72b90c875d23864ebe9ad99c5287",
++  "minifiedBytes": 511984,
+   "inputFiles": 111,
+   "esbuild": "0.28.1"
+ }
+diff --git a/packages/emitter-web-components/src/emit-wc.ts b/packages/emitter-web-components/src/emit-wc.ts
+index 0bfbeb4..5050699 100644
+--- a/packages/emitter-web-components/src/emit-wc.ts
++++ b/packages/emitter-web-components/src/emit-wc.ts
+@@ -799,18 +799,30 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
+     if (!part.visibleWhen) return inner;
+     const vw = part.visibleWhen;
+     const cond =
+-      vw.equals !== undefined
+-        ? `(${acc(vw.prop)} ?? '') === ${JSON.stringify(vw.equals)}`
+-        : `${acc(vw.prop)} === true`;
++      vw.equals === undefined
++        ? `${acc(vw.prop)} === true`
++        : Array.isArray(vw.equals)
++          ? vw.equals.map((v) => `(${acc(vw.prop)} ?? '') === ${JSON.stringify(v)}`).join(' || ')
++          : `(${acc(vw.prop)} ?? '') === ${JSON.stringify(vw.equals)}`;
+     return `\${${cond} ? \`${inner}\` : ''}`;
+   };
+ 
+   /** Attribute fragment for a fixed/threaded prop set on a composed child. */
+-  const childAttrFragment = (dep: Contract, fixedProps: Record<string, string | boolean>): string => {
++  const childAttrFragment = (dep: Contract, fixedProps: Record<string, string | boolean | { prop: string; map: Record<string, string> }>): string => {
+     let out = '';
+     for (const [propName, value] of Object.entries(fixedProps)) {
+       const depProp = dep.props.find((pr) => pr.name === propName);
+       const a = attrOf(depProp?.name ?? propName);
++      if (typeof value === 'object') {
++        // PropByProp lookup: runtime ternary over the parent's live value;
++        // unmapped parent values apply no attribute (child default).
++        const e = acc(value.prop);
++        const chain = Object.entries(value.map)
++          .map(([k, v]) => `(${e} ?? '') === ${JSON.stringify(k)} ? \` ${a}="${escapeHtml(v)}"\` : `)
++          .join('');
++        out += `\${${chain}''}`;
++        continue;
++      }
+       if (typeof value === 'boolean') {
+         if (value) out += ` ${a}=""`;
+         continue;
+@@ -919,7 +931,15 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
+     }
+ 
+     if (part.text !== undefined) {
+-      return visibleWrap(part, `<${textEl}${partAttr}${attrFragment(part)}>${tpl(escapeHtml(part.text))}</${textEl}>`);
++      // textByProp: per-enum-value characters — runtime ternary chain over
++      // the driving prop, base text as fallback (see emit-react).
++      const tb = part.textByProp;
++      const textFrag = tb
++        ? `\${${Object.entries(tb.map)
++            .map(([v, t]) => `(${acc(tb.prop)} ?? '') === ${JSON.stringify(v)} ? ${JSON.stringify(escapeHtml(t))} : `)
++            .join('')}${JSON.stringify(escapeHtml(part.text))}}`
++        : tpl(escapeHtml(part.text));
++      return visibleWrap(part, `<${textEl}${partAttr}${attrFragment(part)}>${textFrag}</${textEl}>`);
+     }
+ 
+     if (part.meter) {
+diff --git a/packages/schema/contract.schema.json b/packages/schema/contract.schema.json
+index 6e2b350..caa3a25 100644
+--- a/packages/schema/contract.schema.json
++++ b/packages/schema/contract.schema.json
+@@ -852,6 +852,28 @@
+         "text": {
+           "type": "string"
+         },
++        "textByProp": {
++          "type": "object",
++          "properties": {
++            "prop": {
++              "type": "string"
++            },
++            "map": {
++              "type": "object",
++              "propertyNames": {
++                "type": "string"
++              },
++              "additionalProperties": {
++                "type": "string"
++              }
++            }
++          },
++          "required": [
++            "prop",
++            "map"
++          ],
++          "additionalProperties": false
++        },
+         "meter": {
+           "type": "object",
+           "properties": {
+@@ -969,6 +991,28 @@
+                   },
+                   {
+                     "type": "boolean"
++                  },
++                  {
++                    "type": "object",
++                    "properties": {
++                      "prop": {
++                        "type": "string"
++                      },
++                      "map": {
++                        "type": "object",
++                        "propertyNames": {
++                          "type": "string"
++                        },
++                        "additionalProperties": {
++                          "type": "string"
++                        }
++                      }
++                    },
++                    "required": [
++                      "prop",
++                      "map"
++                    ],
++                    "additionalProperties": false
+                   }
+                 ]
+               }
+@@ -1049,7 +1093,18 @@
+               "type": "string"
+             },
+             "equals": {
+-              "type": "string"
++              "anyOf": [
++                {
++                  "type": "string"
++                },
++                {
++                  "minItems": 1,
++                  "type": "array",
++                  "items": {
++                    "type": "string"
++                  }
++                }
++              ]
+             }
+           },
+           "required": [
+diff --git a/packages/schema/src/contract-schema.ts b/packages/schema/src/contract-schema.ts
+index fbe90f4..9b1692e 100644
+--- a/packages/schema/src/contract-schema.ts
++++ b/packages/schema/src/contract-schema.ts
+@@ -781,8 +781,12 @@ export const RepeatSchema = z.strictObject({
+  *  enum conditions resolve per variant. */
+ export const VisibleWhenSchema = z.strictObject({
+   prop: z.string(),
+-  /** Omit for boolean props (truthy). */
+-  equals: z.string().optional(),
++  /** Omit for boolean props (truthy). A single enum value, or — when a
++   *  part's canvas presence is predicted by a value SUBSET of one axis
++   *  (Untitled UI field case: ButtonBase circle drawn for Icon leading/only/
++   *  trailing but not dot/false) — a nonempty array meaning "any of these
++   *  values" (membership, order carries no meaning). */
++  equals: z.union([z.string(), z.array(z.string()).min(1)]).optional(),
+ });
+ 
+ /** Design-time default content for a slot (Curtis's fifth slot property).
+@@ -823,14 +827,27 @@ export const SlotSchema = z.strictObject({
+ });
+ 
+ /** A fixed instance of another contract, embedded in this component. */
++/** An applied child-prop value that is a LOOKUP of one parent enum prop
++ *  (first-variant-freeze fix, Untitled UI field case: SocialButton's nested
++ *  icon platform 'x(twitter)' where the parent axis value is 'x' — identity
++ *  threading "{parentProp}" cannot spell it). `map` is keyed by the PARENT
++ *  prop's canonical values; a parent value absent from the map applies no
++ *  value (the child's own default). */
++export const PropByPropSchema = z.strictObject({
++  prop: z.string(),
++  map: z.record(z.string(), z.string()),
++});
++
+ export const ComponentRefSchema = z.strictObject({
+   /** The child contract's id, e.g. "ds.avatar". */
+   id: z.string(),
+   /** Fixed prop values, spelled canonically; mapped through the CHILD
+    *  contract's bindings on each surface. A string value of the form
+    *  "{parentProp}" maps the PARENT's enum prop into the child per variant
+-   *  (code: `childProp={parentProp}`; Figma: resolved per variant combo). */
+-  props: z.record(z.string(), z.union([z.string(), z.boolean()])).optional(),
++   *  (code: `childProp={parentProp}`; Figma: resolved per variant combo).
++   *  The object form (PropByPropSchema) is the same idea through a per-value
++   *  LOOKUP when the child's spelling differs from the parent's. */
++  props: z.record(z.string(), z.union([z.string(), z.boolean(), PropByPropSchema])).optional(),
+   /** Overrides the child's `children` text prop (code: JSX children;
+    *  Figma: TEXT property override on the instance). */
+   text: z.string().optional(),
+@@ -920,6 +937,13 @@ export interface Part {
+   /** Static literal text (a page number, an ellipsis) — same on both
+    *  surfaces, not bound to any prop. */
+   text?: string;
++  /** Per-enum-value text overrides merged over `text` (first-variant-freeze
++   *  fix): when a drawn text node's characters vary as a pure function of
++   *  ONE enum axis (ProgressBar's Percentage '0%'…'100%', SocialButton's
++   *  'Sign in with <platform>'), the deviating values ride a lookup keyed on
++   *  that prop's canonical values — the tokensByProp discipline applied to
++   *  characters. Requires `text` (the base is the default value's text). */
++  textByProp?: z.infer<typeof PropByPropSchema>;
+   /** Progress fill: width = (valueProp / maxProp) as a percentage of the
+    *  parent track. Code computes live; the canvas renders the defaults'
+    *  fraction (its honest static state). */
+@@ -976,6 +1000,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
+     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
+     content: z.strictObject({ prop: z.string() }).optional(),
+     text: z.string().optional(),
++    /** Per-enum-value text overrides merged over `text` (see Part). */
++    textByProp: PropByPropSchema.optional(),
+     meter: z.strictObject({ valueProp: z.string(), maxProp: z.string() }).optional(),
+     animation: z.enum(['spin', 'pulse']).optional(),
+     slot: SlotSchema.optional(),
+diff --git a/src/components/Breadcrumbs/Breadcrumbs.stories.tsx b/src/components/Breadcrumbs/Breadcrumbs.stories.tsx
+index f2e54f7..84a2530 100644
+--- a/src/components/Breadcrumbs/Breadcrumbs.stories.tsx
++++ b/src/components/Breadcrumbs/Breadcrumbs.stories.tsx
+@@ -21,7 +21,7 @@ const meta = {
+   },
+   render: (args) => (
+     <Breadcrumbs {...args}>
+-      <BreadcrumbItem label="Home" />
++      <BreadcrumbItem label="Home" hasSeparator={false} />
+       <BreadcrumbItem label="Components" />
+       <BreadcrumbItem label="ProgressBar" />
+     </Breadcrumbs>

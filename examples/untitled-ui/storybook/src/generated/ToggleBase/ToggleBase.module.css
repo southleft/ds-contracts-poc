@@ -1,0 +1,46 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/toggle-base.contract.json (ds.toggle-base v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  border: 0;
+  cursor: pointer;
+  padding-inline: var(--imported-toggle-base-root-padding-inline);
+  padding-block: var(--imported-toggle-base-root-padding-block);
+  border-radius: var(--imported-toggle-base-root-border-radius);
+}
+
+.root:disabled {
+  cursor: not-allowed;
+}
+
+.size-md {
+  width: var(--imported-toggle-base-root-width-md);
+  height: var(--imported-toggle-base-root-height-md);
+}
+
+.size-sm {
+  width: var(--imported-toggle-base-root-width-sm);
+  height: var(--imported-toggle-base-root-height-sm);
+}
+
+.root:disabled {
+  background-color: var(--imported-toggle-base-state-disabled-background-color);
+}
+
+.Button {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: var(--imported-toggle-base-button-background-color);
+}
+
+.root:disabled .Button {
+  background-color: var(--imported-toggle-base-button-state-disabled-background-color);
+}

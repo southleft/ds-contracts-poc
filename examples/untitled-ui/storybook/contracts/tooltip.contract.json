@@ -1,0 +1,210 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.tooltip",
+  "name": "Tooltip",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div",
+    "role": "tooltip"
+  },
+  "props": [
+    {
+      "name": "supportingText",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Supporting text",
+          "values": {
+            "true": "True",
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "supportingText"
+        }
+      }
+    },
+    {
+      "name": "theme",
+      "type": {
+        "enum": [
+          "light",
+          "dark"
+        ]
+      },
+      "default": "light",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Theme",
+          "values": {
+            "light": "Light",
+            "dark": "Dark"
+          }
+        },
+        "code": {
+          "prop": "theme"
+        }
+      }
+    },
+    {
+      "name": "arrow",
+      "type": {
+        "enum": [
+          "bottomCenter",
+          "none",
+          "topCenter",
+          "bottomLeft",
+          "left",
+          "right",
+          "bottomRight"
+        ]
+      },
+      "default": "bottomCenter",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Arrow",
+          "values": {
+            "bottomCenter": "Bottom center",
+            "none": "None",
+            "topCenter": "Top center",
+            "bottomLeft": "Bottom left",
+            "left": "Left",
+            "right": "Right",
+            "bottomRight": "Bottom right"
+          }
+        },
+        "code": {
+          "prop": "arrow"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "center"
+      },
+      "layoutByProp": {
+        "prop": "arrow",
+        "map": {
+          "topCenter": {
+            "direction": "column-reverse"
+          },
+          "bottomLeft": {
+            "align": "start"
+          },
+          "left": {
+            "direction": "row-reverse"
+          },
+          "right": {
+            "direction": "row"
+          },
+          "bottomRight": {
+            "align": "end"
+          }
+        }
+      },
+      "parts": {
+        "Content": {
+          "layout": {
+            "direction": "column",
+            "align": "stretch"
+          },
+          "parts": {
+            "textAndSupportingText": {
+              "layout": {
+                "direction": "column"
+              },
+              "parts": {
+                "Text": {
+                  "text": "This is a tooltip",
+                  "tokens": {
+                    "color": "{imported.tooltip.content-text-and-supporting-text-text.color.{theme}}",
+                    "font-size": "{imported.shared.size-12}",
+                    "font-weight": "{imported.tooltip.content-text-and-supporting-text-text.font-weight}",
+                    "line-height": "{imported.tooltip.content-text-and-supporting-text-text.line-height}"
+                  }
+                },
+                "supportingText": {
+                  "text": "Tooltips are used to describe or identify an element. In most scenarios, tooltips help the user understand the meaning, function or alt-text of an element.",
+                  "visibleWhen": {
+                    "prop": "supportingText"
+                  },
+                  "tokens": {
+                    "color": "{imported.tooltip.content-text-and-supporting-text-supporting-text.color.{theme}}",
+                    "font-size": "{imported.shared.size-12}",
+                    "font-weight": "{imported.tooltip.content-text-and-supporting-text-supporting-text.font-weight}",
+                    "line-height": "{imported.tooltip.content-text-and-supporting-text-supporting-text.line-height}"
+                  }
+                }
+              },
+              "tokens": {
+                "gap": "{imported.tooltip.content-text-and-supporting-text.gap}"
+              }
+            }
+          },
+          "tokens": {
+            "background-color": "{imported.tooltip.content.background-color.{theme}}",
+            "padding-inline": "{imported.shared.size-12}",
+            "border-radius": "{imported.tooltip.content.border-radius}"
+          }
+        },
+        "Tooltip": {
+          "parts": {
+            "bottomCenter": {
+              "visibleWhen": {
+                "prop": "arrow",
+                "equals": [
+                  "bottomCenter",
+                  "topCenter",
+                  "bottomLeft",
+                  "left",
+                  "right",
+                  "bottomRight"
+                ]
+              },
+              "tokens": {
+                "background-color": "{imported.tooltip.tooltip-bottom-center.background-color.{theme}}",
+                "border-radius": "{imported.tooltip.tooltip-bottom-center.border-radius}"
+              }
+            }
+          },
+          "visibleWhen": {
+            "prop": "arrow",
+            "equals": [
+              "bottomCenter",
+              "topCenter",
+              "bottomLeft",
+              "left",
+              "right",
+              "bottomRight"
+            ]
+          }
+        }
+      },
+      "tokens": {
+        "border-radius": "{imported.tooltip.root.border-radius}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "a14d81db3f136a10a1b8f011bc2894198e92083e",
+      "nodeId": "1052:489"
+    },
+    "code": {
+      "importPath": "src/components/Tooltip",
+      "export": "Tooltip"
+    }
+  }
+}

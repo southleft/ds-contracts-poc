@@ -1,0 +1,52 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/badge-base.contract.json (ds.badge-base v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: var(--imported-badge-base-root-background-color);
+  border-radius: var(--imported-badge-base-root-border-radius);
+}
+
+.icon-false {
+  padding-block: var(--imported-badge-base-root-padding-block-false);
+}
+
+.icon-dot {
+  padding-block: var(--imported-badge-base-root-padding-block-dot);
+}
+
+.icon-country {
+  padding-block: var(--imported-badge-base-root-padding-block-country);
+}
+
+.icon-avatar {
+  padding-block: var(--imported-badge-base-root-padding-block-avatar);
+}
+
+.icon-xClose {
+  padding-block: var(--imported-badge-base-root-padding-block-xClose);
+}
+
+.icon-iconRight {
+  padding-block: var(--imported-badge-base-root-padding-block-iconRight);
+}
+
+.icon-iconLeft {
+  padding-block: var(--imported-badge-base-root-padding-block-iconLeft);
+}
+
+.icon-only {
+  padding-block: var(--imported-badge-base-root-padding-block-only);
+}
+
+.Text {
+  color: var(--imported-badge-base-text-color);
+  font-size: var(--imported-badge-base-text-font-size);
+  font-weight: var(--imported-badge-base-text-font-weight);
+  line-height: var(--imported-badge-base-text-line-height);
+}

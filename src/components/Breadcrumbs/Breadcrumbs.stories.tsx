@@ -21,7 +21,7 @@ const meta = {
   },
   render: (args) => (
     <Breadcrumbs {...args}>
-      <BreadcrumbItem label="Home" />
+      <BreadcrumbItem label="Home" hasSeparator={false} />
       <BreadcrumbItem label="Components" />
       <BreadcrumbItem label="ProgressBar" />
     </Breadcrumbs>

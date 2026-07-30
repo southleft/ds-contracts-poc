@@ -549,8 +549,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
   const wrapVisibleWhen = (part: Part, jsx: string): string => {
     if (!part.visibleWhen) return jsx;
     const codeName = codePropOf(part.visibleWhen.prop);
+    const eq = part.visibleWhen.equals;
     const cond =
-      part.visibleWhen.equals !== undefined ? `${codeName} === '${part.visibleWhen.equals}'` : codeName;
+      eq === undefined
+        ? codeName
+        : Array.isArray(eq)
+          ? eq.map((v) => `${codeName} === '${v}'`).join(' || ')
+          : `${codeName} === '${eq}'`;
     return `{${cond} ? (${jsx}) : null}`;
   };
 
@@ -588,13 +593,26 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     ),
   ];
 
-  const depAttrString = (dep: Contract, fixedProps: Record<string, string | boolean>): string => {
+  const depAttrString = (dep: Contract, fixedProps: Record<string, string | boolean | { prop: string; map: Record<string, string> }>): string => {
     const parts: string[] = [];
     for (const [propName, value] of Object.entries(fixedProps)) {
       const depProp = dep.props.find((p) => p.name === propName);
       const codeName = depProp?.bindings.code.prop ?? propName;
+      if (typeof value === 'object') {
+        // PropByProp lookup (see emit-react depAttrString).
+        const parentProp = contract.props.find((p) => p.name === value.prop);
+        const expr = parentProp?.bindings.code.prop ?? value.prop;
+        const chain = Object.entries(value.map)
+          .map(([k, v]) => `${expr} === '${k}' ? '${v}' : `)
+          .join('');
+        parts.push(` ${codeName}={${chain}undefined}`);
+        continue;
+      }
       if (typeof value === 'boolean') {
-        parts.push(value ? ` ${codeName}` : '');
+        // Applied false must override a true-defaulting dependency prop —
+        // omission only when omission already means false (see emit-react
+        // depAttrString).
+        parts.push(value ? ` ${codeName}` : depProp?.default === false ? '' : ` ${codeName}={false}`);
         continue;
       }
       const parentRef = value.match(/^\{([a-z][\w-]*)\}$/);
@@ -678,9 +696,16 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     }
     if (part.text !== undefined) {
       const el = part.element ?? 'span';
+      // textByProp: per-enum-value characters (see emit-react).
+      const tb = part.textByProp;
+      const inner = tb
+        ? `{${Object.entries(tb.map)
+            .map(([v, t]) => `${codePropOf(tb.prop)} === '${v}' ? ${JSON.stringify(t)} : `)
+            .join('')}${JSON.stringify(part.text)}}`
+        : part.text;
       return wrapVisibleWhen(
         part,
-        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}>${part.text}</${el}>`,
+        `<${el} style=${styleExpr(partName, false, stylesWhenExprs(part))}${partAttrString(part)}>${inner}</${el}>`,
       );
     }
     if (part.meter) {

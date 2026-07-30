@@ -1,0 +1,145 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.button-base",
+  "name": "ButtonBase",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "md",
+          "lg",
+          "xl",
+          "sm"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "md": "md",
+            "lg": "lg",
+            "xl": "xl",
+            "sm": "sm"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "icon",
+      "type": {
+        "enum": [
+          "leading",
+          "only",
+          "false",
+          "trailing",
+          "dot"
+        ]
+      },
+      "default": "leading",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Icon",
+          "values": {
+            "leading": "Leading",
+            "only": "Only",
+            "false": "False",
+            "trailing": "Trailing",
+            "dot": "Dot"
+          }
+        },
+        "code": {
+          "prop": "icon"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layoutByProp": {
+        "prop": "icon",
+        "map": {
+          "trailing": {
+            "direction": "row-reverse"
+          }
+        }
+      },
+      "parts": {
+        "Dot": {
+          "component": {
+            "id": "ds.dot"
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": "dot"
+          }
+        },
+        "circle": {
+          "component": {
+            "id": "ds.circle"
+          },
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": [
+              "leading",
+              "only",
+              "trailing"
+            ]
+          }
+        },
+        "Text": {
+          "text": "Button CTA",
+          "visibleWhen": {
+            "prop": "icon",
+            "equals": [
+              "leading",
+              "false",
+              "trailing",
+              "dot"
+            ]
+          },
+          "tokens": {
+            "color": "{imported.button-base.text.color}",
+            "font-size": "{imported.button-base.text.font-size.{size}}",
+            "font-weight": "{imported.button-base.text.font-weight}",
+            "line-height": "{imported.button-base.text.line-height.{size}}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.button-base.root.background-color}",
+        "border-color": "{imported.button-base.root.border-color}",
+        "gap": "{imported.button-base.root.gap}",
+        "padding-inline": "{imported.button-base.root.padding-inline.{size}.{icon}}",
+        "padding-block": "{imported.button-base.root.padding-block.{size}.{icon}}",
+        "border-radius": "{imported.button-base.root.border-radius}",
+        "border-width": "{imported.button-base.root.border-width}",
+        "box-shadow": "{imported.button-base.root.box-shadow}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "66f3541f42871f76dfbbb73124dcf7088564f456",
+      "nodeId": "1037:37979"
+    },
+    "code": {
+      "importPath": "src/components/ButtonBase",
+      "export": "ButtonBase"
+    }
+  }
+}

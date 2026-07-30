@@ -1,0 +1,180 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.checkbox",
+  "name": "Checkbox",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"Checkbox\" instances of _Dropdown list item — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "false"
+        ]
+      },
+      "default": "false",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "indeterminate",
+      "type": {
+        "enum": [
+          "false"
+        ]
+      },
+      "default": "false",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Indeterminate",
+          "values": {
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "indeterminate"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "sm"
+        ]
+      },
+      "default": "sm",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "sm"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "type",
+      "type": {
+        "enum": [
+          "checkbox"
+        ]
+      },
+      "default": "checkbox",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Type",
+          "values": {
+            "checkbox": "Checkbox"
+          }
+        },
+        "code": {
+          "prop": "type"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": {
+        "enum": [
+          "false"
+        ]
+      },
+      "default": "false",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Text",
+          "values": {
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    },
+    {
+      "name": "supportingText",
+      "type": {
+        "enum": [
+          "false"
+        ]
+      },
+      "default": "false",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Supporting text",
+          "values": {
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "supportingText"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "Default"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {},
+      "tokens": {
+        "width": "{imported.stub-checkbox.root.width}",
+        "height": "{imported.stub-checkbox.root.height}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "34a1467d46c55f1d81b6c91d1fc90924f8fc9a5a"
+    },
+    "code": {
+      "importPath": "src/components/Checkbox",
+      "export": "Checkbox"
+    }
+  }
+}

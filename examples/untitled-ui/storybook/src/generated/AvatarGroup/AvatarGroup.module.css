@@ -1,0 +1,27 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/avatar-group.contract.json (ds.avatar-group v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  border: 0;
+}
+
+.Avatars {
+  display: flex;
+  flex-direction: row;
+}
+
+.size-xs .Avatars > * + * {
+  margin-left: var(--imported-avatar-group-avatars-gap-xs);
+}
+
+.size-sm .Avatars > * + * {
+  margin-left: var(--imported-avatar-group-avatars-gap-sm);
+}
+
+.size-md .Avatars > * + * {
+  margin-left: var(--imported-avatar-group-avatars-gap-md);
+}

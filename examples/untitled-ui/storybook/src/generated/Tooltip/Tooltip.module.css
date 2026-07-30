@@ -1,0 +1,98 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/tooltip.contract.json (ds.tooltip v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0;
+  border-radius: var(--imported-tooltip-root-border-radius);
+}
+
+.arrow-topCenter {
+  flex-direction: column-reverse;
+}
+
+.arrow-bottomLeft {
+  align-items: flex-start;
+}
+
+.arrow-left {
+  flex-direction: row-reverse;
+}
+
+.arrow-right {
+  flex-direction: row;
+}
+
+.arrow-bottomRight {
+  align-items: flex-end;
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-inline: var(--imported-shared-size-12);
+  border-radius: var(--imported-tooltip-content-border-radius);
+}
+
+.theme-light .Content {
+  background-color: var(--imported-tooltip-content-background-color-light);
+}
+
+.theme-dark .Content {
+  background-color: var(--imported-tooltip-content-background-color-dark);
+}
+
+.textAndSupportingText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--imported-tooltip-content-text-and-supporting-text-gap);
+}
+
+.Text {
+  font-size: var(--imported-shared-size-12);
+  font-weight: var(--imported-tooltip-content-text-and-supporting-text-text-font-weight);
+  line-height: var(--imported-tooltip-content-text-and-supporting-text-text-line-height);
+}
+
+.theme-light .Text {
+  color: var(--imported-tooltip-content-text-and-supporting-text-text-color-light);
+}
+
+.theme-dark .Text {
+  color: var(--imported-tooltip-content-text-and-supporting-text-text-color-dark);
+}
+
+.supportingText {
+  font-size: var(--imported-shared-size-12);
+  font-weight: var(--imported-tooltip-content-text-and-supporting-text-supporting-text-font-weight);
+  line-height: var(--imported-tooltip-content-text-and-supporting-text-supporting-text-line-height);
+}
+
+.theme-light .supportingText {
+  color: var(--imported-tooltip-content-text-and-supporting-text-supporting-text-color-light);
+}
+
+.theme-dark .supportingText {
+  color: var(--imported-tooltip-content-text-and-supporting-text-supporting-text-color-dark);
+}
+
+.Tooltip {
+  display: flex;
+}
+
+.bottomCenter {
+  border-radius: var(--imported-tooltip-tooltip-bottom-center-border-radius);
+}
+
+.theme-light .bottomCenter {
+  background-color: var(--imported-tooltip-tooltip-bottom-center-background-color-light);
+}
+
+.theme-dark .bottomCenter {
+  background-color: var(--imported-tooltip-tooltip-bottom-center-background-color-dark);
+}

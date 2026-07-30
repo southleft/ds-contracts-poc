@@ -1,0 +1,35 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/button-group-base.contract.json (ds.button-group-base v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-color: var(--imported-button-group-base-root-border-color);
+  padding-block: var(--imported-button-group-base-root-padding-block);
+}
+
+.icon-false {
+  padding-inline: var(--imported-button-group-base-root-padding-inline-false);
+}
+
+.icon-only {
+  padding-inline: var(--imported-button-group-base-root-padding-inline-only);
+}
+
+.icon-leading {
+  padding-inline: var(--imported-button-group-base-root-padding-inline-leading);
+}
+
+.icon-dot {
+  padding-inline: var(--imported-button-group-base-root-padding-inline-dot);
+}
+
+.Text {
+  font-size: var(--imported-button-group-base-text-font-size);
+  font-weight: var(--imported-button-group-base-text-font-weight);
+  line-height: var(--imported-button-group-base-text-line-height);
+}

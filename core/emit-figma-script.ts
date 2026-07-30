@@ -1898,7 +1898,7 @@ const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
  *  contract's bindings. `{parentProp}` values resolve through `subst` first. */
 function mapDepProps(
   dep: Contract,
-  props: Record<string, string | boolean>,
+  props: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
   subst: Record<string, string>,
   text?: string,
 ): Record<string, string | boolean> {
@@ -1907,7 +1907,17 @@ function mapDepProps(
     const depProp = dep.props.find((p) => p.name === propName);
     if (!depProp) continue;
     if (depProp.bindings.figma.kind === 'NONE') continue; // code-only (v7 arrayOf)
-    let value = rawValue;
+    let value: string | boolean;
+    if (typeof rawValue === 'object') {
+      // PropByProp lookup: resolve against this combo's subst at compile
+      // time; a parent value absent from the map applies nothing (child
+      // default).
+      const resolved = rawValue.map[subst[rawValue.prop] ?? ''];
+      if (resolved === undefined) continue;
+      value = resolved;
+    } else {
+      value = rawValue;
+    }
     if (typeof value === 'string') {
       const parentRef = value.match(PARENT_PROP_REF);
       if (parentRef) {
@@ -2162,7 +2172,8 @@ function variantParts(
     const vw = p.visibleWhen;
     if (vw && vw.equals !== undefined) {
       const value = subst[vw.prop];
-      if (value !== undefined && value !== vw.equals) return false;
+      const eqs = Array.isArray(vw.equals) ? vw.equals : [vw.equals];
+      if (value !== undefined && !eqs.includes(value)) return false;
     }
     // v9: an enum-conditioned stylesWhen display:none that matches this
     // combo suppresses the part — the shape-placement spelling for axis
@@ -2430,10 +2441,16 @@ function partToSpecInner(
     return frame;
   };
   if (part.text !== undefined) {
+    // textByProp (first-variant-freeze fix): per-enum-value characters
+    // resolve at COMPILE time against this combo's subst; unmapped values
+    // keep the base text.
+    const partText = part.textByProp
+      ? (part.textByProp.map[subst[part.textByProp.prop] ?? ''] ?? part.text)
+      : part.text;
     // A TEXT node has no children — a child-BEARING text part must take the
     // frame lowering even without box channels (same Tooltip finding).
     if (textPartHasBox() || Object.keys(part.parts ?? {}).length > 0) {
-      const textSpec: NodeSpec = { type: 'text', name, characters: part.text };
+      const textSpec: NodeSpec = { type: 'text', name, characters: partText };
       return wrapTextInBox(textSpec);
     }
     const spec: NodeSpec = { type: 'text', name };
@@ -2447,7 +2464,7 @@ function partToSpecInner(
     // no residual margin to reserve).
     if (part.layout?.grow) spec.grow = true;
     const textCtx = applyStyling(spec, part, subst, ctx);
-    spec.characters = part.text;
+    spec.characters = partText;
     spec.fontSize = textCtx.fontSize ?? 14;
     spec.fontStyle = textCtx.fontStyle ?? 'Medium';
     spec.textStyle = matchTextStyle(textCtx);

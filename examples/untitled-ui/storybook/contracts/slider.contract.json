@@ -1,0 +1,251 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.slider",
+  "name": "Slider",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "type": {
+        "enum": [
+          "bottom",
+          "bottomFloating",
+          "topFloating",
+          "false"
+        ]
+      },
+      "default": "bottom",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Label",
+          "values": {
+            "bottom": "Bottom",
+            "bottomFloating": "Bottom floating",
+            "topFloating": "Top floating",
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "rightControl",
+      "type": {
+        "enum": [
+          "25%",
+          "50%",
+          "75%",
+          "100%"
+        ]
+      },
+      "default": "25%",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Right control",
+          "values": {
+            "25%": "25%",
+            "50%": "50%",
+            "75%": "75%",
+            "100%": "100%"
+          }
+        },
+        "code": {
+          "prop": "rightControl"
+        }
+      }
+    },
+    {
+      "name": "leftControl",
+      "type": {
+        "enum": [
+          "0%",
+          "25%",
+          "50%",
+          "75%"
+        ]
+      },
+      "default": "0%",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Left control",
+          "values": {
+            "0%": "0%",
+            "25%": "25%",
+            "50%": "50%",
+            "75%": "75%"
+          }
+        },
+        "code": {
+          "prop": "leftControl"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Background": {
+          "tokens": {
+            "background-color": "{imported.slider.background.background-color}",
+            "border-radius": "{imported.slider.background.border-radius}"
+          }
+        },
+        "Progress": {
+          "parts": {
+            "progressLine": {
+              "tokens": {
+                "background-color": "{imported.shared.color-7f56d9}",
+                "border-radius": "{imported.slider.progress-progress-line.border-radius}"
+              }
+            },
+            "leftControl": {
+              "parts": {
+                "leftControl2": {
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 24,
+                    "height": 24
+                  },
+                  "tokens": {
+                    "background-color": "{imported.slider.progress-left-control-left-control.background-color}",
+                    "border-color": "{imported.shared.color-7f56d9}",
+                    "border-width": "{imported.slider.progress-left-control-left-control.border-width}"
+                  }
+                },
+                "Tooltip": {
+                  "component": {
+                    "id": "ds.tooltip",
+                    "props": {
+                      "supportingText": false,
+                      "theme": "light",
+                      "arrow": {
+                        "prop": "label",
+                        "map": {
+                          "bottomFloating": "topCenter",
+                          "topFloating": "bottomCenter"
+                        }
+                      }
+                    }
+                  },
+                  "visibleWhen": {
+                    "prop": "label",
+                    "equals": [
+                      "bottomFloating",
+                      "topFloating"
+                    ]
+                  }
+                },
+                "leftNumber": {
+                  "text": "0%",
+                  "textByProp": {
+                    "prop": "leftControl",
+                    "map": {
+                      "25%": "25%",
+                      "50%": "50%",
+                      "75%": "75%"
+                    }
+                  },
+                  "visibleWhen": {
+                    "prop": "label",
+                    "equals": "bottom"
+                  },
+                  "tokens": {
+                    "color": "{imported.slider.progress-left-control-left-number.color}",
+                    "font-size": "{imported.slider.progress-left-control-left-number.font-size}",
+                    "font-weight": "{imported.slider.progress-left-control-left-number.font-weight}",
+                    "line-height": "{imported.slider.progress-left-control-left-number.line-height}"
+                  }
+                }
+              }
+            },
+            "rightControl": {
+              "parts": {
+                "rightControl2": {
+                  "shape": {
+                    "kind": "ellipse",
+                    "width": 24,
+                    "height": 24
+                  },
+                  "tokens": {
+                    "background-color": "{imported.slider.progress-right-control-right-control.background-color}",
+                    "border-color": "{imported.shared.color-7f56d9}",
+                    "border-width": "{imported.slider.progress-right-control-right-control.border-width}"
+                  }
+                },
+                "rightControlTooltip": {
+                  "component": {
+                    "id": "ds.tooltip",
+                    "props": {
+                      "supportingText": false,
+                      "theme": "light",
+                      "arrow": {
+                        "prop": "label",
+                        "map": {
+                          "bottomFloating": "topCenter",
+                          "topFloating": "bottomCenter"
+                        }
+                      }
+                    }
+                  },
+                  "visibleWhen": {
+                    "prop": "label",
+                    "equals": [
+                      "bottomFloating",
+                      "topFloating"
+                    ]
+                  }
+                },
+                "rightNumber": {
+                  "text": "25%",
+                  "textByProp": {
+                    "prop": "rightControl",
+                    "map": {
+                      "50%": "50%",
+                      "75%": "75%",
+                      "100%": "100%"
+                    }
+                  },
+                  "visibleWhen": {
+                    "prop": "label",
+                    "equals": "bottom"
+                  },
+                  "tokens": {
+                    "color": "{imported.slider.progress-right-control-right-number.color}",
+                    "font-size": "{imported.slider.progress-right-control-right-number.font-size}",
+                    "font-weight": "{imported.slider.progress-right-control-right-number.font-weight}",
+                    "line-height": "{imported.slider.progress-right-control-right-number.line-height}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "tokens": {
+        "border-radius": "{imported.slider.root.border-radius}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "f1853f5958218f60d7733b54b4bd5e47f59abb70",
+      "nodeId": "1086:534"
+    },
+    "code": {
+      "importPath": "src/components/Slider",
+      "export": "Slider"
+    }
+  }
+}

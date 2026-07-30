@@ -1,0 +1,66 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/progress-bar.contract.json (ds.progress-bar v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0;
+  width: var(--imported-progress-bar-root-width);
+}
+
+.label-right {
+  gap: var(--imported-progress-bar-root-gap-right);
+}
+
+.label-bottom {
+  gap: var(--imported-progress-bar-root-gap-bottom);
+}
+
+.label-topFloating {
+  gap: var(--imported-progress-bar-root-gap-topFloating);
+}
+
+.label-bottomFloating {
+  gap: var(--imported-progress-bar-root-gap-bottomFloating);
+}
+
+.label-false {
+  gap: var(--imported-progress-bar-root-gap-false);
+}
+
+.label-bottom {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.label-topFloating {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.label-bottomFloating {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.progressBar {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  border-radius: var(--imported-progress-bar-progress-bar-border-radius);
+}
+
+.Background {
+  background-color: var(--imported-progress-bar-progress-bar-background-background-color);
+  border-radius: var(--imported-progress-bar-progress-bar-background-border-radius);
+}
+
+.Percentage {
+  color: var(--imported-progress-bar-percentage-color);
+  font-size: var(--imported-progress-bar-percentage-font-size);
+  font-weight: var(--imported-progress-bar-percentage-font-weight);
+  line-height: var(--imported-progress-bar-percentage-line-height);
+}

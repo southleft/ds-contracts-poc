@@ -1,0 +1,17 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/payment-method-icon.contract.json (ds.payment-method-icon v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  width: var(--imported-stub-payment-method-icon-root-width);
+  height: var(--imported-stub-payment-method-icon-root-height);
+  background-color: var(--imported-stub-payment-method-icon-root-background-color);
+  border-color: var(--imported-stub-payment-method-icon-root-border-color);
+  border-width: var(--imported-stub-payment-method-icon-root-border-width);
+  border-radius: var(--imported-stub-payment-method-icon-root-border-radius);
+}

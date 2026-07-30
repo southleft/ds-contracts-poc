@@ -1,0 +1,126 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.toggle-base",
+  "name": "ToggleBase",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "pressed",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Pressed",
+          "values": {
+            "true": "True",
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "pressed"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "md",
+          "sm"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "md": "md",
+            "sm": "sm"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled"
+  ],
+  "modes": [
+    "dark",
+    "light"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "justify": "end",
+        "align": "center"
+      },
+      "parts": {
+        "Button": {
+          "shape": {
+            "kind": "ellipse",
+            "width": 20,
+            "height": 20
+          },
+          "tokens": {
+            "background-color": "{imported.toggle-base.button.background-color}"
+          },
+          "states": {
+            "disabled": {
+              "background-color": "{imported.toggle-base.button-state-disabled.background-color}"
+            }
+          }
+        }
+      },
+      "tokens": {
+        "padding-inline": "{imported.toggle-base.root.padding-inline}",
+        "padding-block": "{imported.toggle-base.root.padding-block}",
+        "border-radius": "{imported.toggle-base.root.border-radius}",
+        "width": "{imported.toggle-base.root.width.{size}}",
+        "height": "{imported.toggle-base.root.height.{size}}"
+      },
+      "states": {
+        "disabled": {
+          "background-color": "{imported.toggle-base.state-disabled.background-color}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "4e7eca120745056db4f161cd847d8bb6802ba893",
+      "nodeId": "122:3294"
+    },
+    "code": {
+      "importPath": "src/components/ToggleBase",
+      "export": "ToggleBase"
+    }
+  },
+  "figmaStatePreviews": true
+}

@@ -720,6 +720,13 @@ function renderComponentHtml(
           for (const p of boolProps(dep)) depState.bools[p.name] = p.default === true;
           for (const [pn, v] of Object.entries(part.component!.props ?? {})) {
             if (typeof v === 'boolean') { depState.bools[pn] = v; continue; }
+            if (typeof v === 'object') {
+              // PropByProp lookup against the live parent value; unmapped →
+              // child default stands.
+              const r = v.map[propValue(v.prop) ?? ''];
+              if (r !== undefined) depState.subst[pn] = r;
+              continue;
+            }
             const parentRef = v.match(/^\{([a-z][\w-]*)\}$/);
             depState.subst[pn] = parentRef ? (propValue(parentRef[1]) ?? v) : v;
           }
@@ -741,6 +748,13 @@ function renderComponentHtml(
       for (const p of boolProps(dep)) depState.bools[p.name] = p.default === true;
       for (const [pn, v] of Object.entries(part.component.props ?? {})) {
         if (typeof v === 'boolean') { depState.bools[pn] = v; continue; }
+        if (typeof v === 'object') {
+          // PropByProp lookup against the live parent value; unmapped →
+          // child default stands.
+          const r = v.map[propValue(v.prop) ?? ''];
+          if (r !== undefined) depState.subst[pn] = r;
+          continue;
+        }
         const parentRef = v.match(/^\{([a-z][\w-]*)\}$/);
         depState.subst[pn] = parentRef ? (propValue(parentRef[1]) ?? v) : v;
       }
@@ -782,9 +796,14 @@ function renderComponentHtml(
     // it. Text and children are siblings inside the part's own box. Childless
     // text parts emit byte-identical markup.
     if (part.content || part.text !== undefined) {
+      // textByProp: per-enum-value characters resolve against the LIVE
+      // parent value (first-variant-freeze fix); base text otherwise.
+      const staticText = part.textByProp
+        ? (part.textByProp.map[propValue(part.textByProp.prop) ?? ''] ?? part.text!)
+        : part.text!;
       const value = part.content
         ? (part.content.prop === 'children' && extraText !== undefined ? extraText : textValue(part.content.prop))
-        : part.text!;
+        : staticText;
       const kids = Object.entries(part.parts ?? {})
         .map(([childName, child]) => renderPart(childName, child, pad + '  ', textEl))
         .filter(Boolean)

@@ -1,0 +1,179 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.dropdown-list-item",
+  "name": "DropdownListItem",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "icon",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Icon",
+          "values": {
+            "true": "True",
+            "false": "False"
+          }
+        },
+        "code": {
+          "prop": "icon"
+        }
+      }
+    },
+    {
+      "name": "checkbox",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checkbox",
+          "values": {
+            "false": "False",
+            "true": "True"
+          }
+        },
+        "code": {
+          "prop": "checkbox"
+        }
+      }
+    },
+    {
+      "name": "shortcut",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Shortcut",
+          "values": {
+            "false": "False",
+            "true": "True"
+          }
+        },
+        "code": {
+          "prop": "shortcut"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover",
+    "disabled"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row",
+        "align": "center"
+      },
+      "parts": {
+        "Content": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "parts": {
+            "Checkbox": {
+              "component": {
+                "id": "ds.checkbox",
+                "props": {
+                  "checked": "false",
+                  "indeterminate": "false",
+                  "size": "sm",
+                  "type": "checkbox",
+                  "text": "false",
+                  "supportingText": "false",
+                  "state": "default"
+                }
+              },
+              "visibleWhen": {
+                "prop": "checkbox"
+              }
+            },
+            "circle": {
+              "component": {
+                "id": "ds.circle"
+              },
+              "visibleWhen": {
+                "prop": "icon"
+              }
+            },
+            "Text": {
+              "text": "List item",
+              "tokens": {
+                "color": "{imported.dropdown-list-item.content-text.color}",
+                "font-size": "{imported.dropdown-list-item.content-text.font-size}",
+                "line-height": "{imported.dropdown-list-item.content-text.line-height}"
+              }
+            }
+          },
+          "tokens": {
+            "gap": "{imported.dropdown-list-item.content.gap}"
+          }
+        },
+        "Shortcut": {
+          "text": "⌘C",
+          "visibleWhen": {
+            "prop": "shortcut"
+          },
+          "tokens": {
+            "color": "{imported.dropdown-list-item.shortcut.color}",
+            "font-size": "{imported.dropdown-list-item.shortcut.font-size}",
+            "font-weight": "{imported.dropdown-list-item.shortcut.font-weight}",
+            "line-height": "{imported.dropdown-list-item.shortcut.line-height}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.dropdown-list-item.shortcut-state-disabled.color}"
+            }
+          }
+        }
+      },
+      "tokens": {
+        "padding-inline": "{imported.dropdown-list-item.root.padding-inline}",
+        "padding-block": "{imported.dropdown-list-item.root.padding-block}",
+        "width": "{imported.dropdown-list-item.root.width}"
+      },
+      "states": {
+        "hover": {
+          "background-color": "{imported.dropdown-list-item.state-hover.background-color}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
+      "componentSetKey": "112863d35f4d9bed5e203f0c08a5bd558b49cbe6",
+      "nodeId": "18:319"
+    },
+    "code": {
+      "importPath": "src/components/DropdownListItem",
+      "export": "DropdownListItem"
+    }
+  },
+  "figmaStatePreviews": true
+}

@@ -799,18 +799,30 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
     if (!part.visibleWhen) return inner;
     const vw = part.visibleWhen;
     const cond =
-      vw.equals !== undefined
-        ? `(${acc(vw.prop)} ?? '') === ${JSON.stringify(vw.equals)}`
-        : `${acc(vw.prop)} === true`;
+      vw.equals === undefined
+        ? `${acc(vw.prop)} === true`
+        : Array.isArray(vw.equals)
+          ? vw.equals.map((v) => `(${acc(vw.prop)} ?? '') === ${JSON.stringify(v)}`).join(' || ')
+          : `(${acc(vw.prop)} ?? '') === ${JSON.stringify(vw.equals)}`;
     return `\${${cond} ? \`${inner}\` : ''}`;
   };
 
   /** Attribute fragment for a fixed/threaded prop set on a composed child. */
-  const childAttrFragment = (dep: Contract, fixedProps: Record<string, string | boolean>): string => {
+  const childAttrFragment = (dep: Contract, fixedProps: Record<string, string | boolean | { prop: string; map: Record<string, string> }>): string => {
     let out = '';
     for (const [propName, value] of Object.entries(fixedProps)) {
       const depProp = dep.props.find((pr) => pr.name === propName);
       const a = attrOf(depProp?.name ?? propName);
+      if (typeof value === 'object') {
+        // PropByProp lookup: runtime ternary over the parent's live value;
+        // unmapped parent values apply no attribute (child default).
+        const e = acc(value.prop);
+        const chain = Object.entries(value.map)
+          .map(([k, v]) => `(${e} ?? '') === ${JSON.stringify(k)} ? \` ${a}="${escapeHtml(v)}"\` : `)
+          .join('');
+        out += `\${${chain}''}`;
+        continue;
+      }
       if (typeof value === 'boolean') {
         if (value) out += ` ${a}=""`;
         continue;
@@ -919,7 +931,15 @@ function generateElement(contract: Contract, ctx: WcEmitCtx): string {
     }
 
     if (part.text !== undefined) {
-      return visibleWrap(part, `<${textEl}${partAttr}${attrFragment(part)}>${tpl(escapeHtml(part.text))}</${textEl}>`);
+      // textByProp: per-enum-value characters — runtime ternary chain over
+      // the driving prop, base text as fallback (see emit-react).
+      const tb = part.textByProp;
+      const textFrag = tb
+        ? `\${${Object.entries(tb.map)
+            .map(([v, t]) => `(${acc(tb.prop)} ?? '') === ${JSON.stringify(v)} ? ${JSON.stringify(escapeHtml(t))} : `)
+            .join('')}${JSON.stringify(escapeHtml(part.text))}}`
+        : tpl(escapeHtml(part.text));
+      return visibleWrap(part, `<${textEl}${partAttr}${attrFragment(part)}>${textFrag}</${textEl}>`);
     }
 
     if (part.meter) {

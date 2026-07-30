@@ -1,0 +1,368 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/social-button.contract.json (ds.social-button v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  cursor: pointer;
+  padding-block: var(--imported-social-button-root-padding-block);
+  border-radius: var(--imported-social-button-root-border-radius);
+}
+
+.social-facebook {
+}
+
+.theme-brand {
+}
+
+.state-default {
+}
+
+.social-facebook.theme-brand.state-default {
+  background-color: var(--imported-social-button-root-background-color-facebook-brand-default);
+}
+
+.state-hover {
+}
+
+.social-facebook.theme-brand.state-hover {
+  background-color: var(--imported-social-button-root-background-color-facebook-brand-hover);
+}
+
+.state-focused {
+}
+
+.social-facebook.theme-brand.state-focused {
+  background-color: var(--imported-social-button-root-background-color-facebook-brand-focused);
+}
+
+.theme-colorWithBrand {
+}
+
+.social-facebook.theme-colorWithBrand.state-default {
+  background-color: var(
+    --imported-social-button-root-background-color-facebook-colorWithBrand-default
+  );
+}
+
+.social-facebook.theme-colorWithBrand.state-hover {
+  background-color: var(
+    --imported-social-button-root-background-color-facebook-colorWithBrand-hover
+  );
+}
+
+.social-facebook.theme-colorWithBrand.state-focused {
+  background-color: var(
+    --imported-social-button-root-background-color-facebook-colorWithBrand-focused
+  );
+}
+
+.theme-color {
+}
+
+.social-facebook.theme-color.state-default {
+  background-color: var(--imported-social-button-root-background-color-facebook-color-default);
+}
+
+.social-facebook.theme-color.state-hover {
+  background-color: var(--imported-social-button-root-background-color-facebook-color-hover);
+}
+
+.social-facebook.theme-color.state-focused {
+  background-color: var(--imported-social-button-root-background-color-facebook-color-focused);
+}
+
+.social-google {
+}
+
+.social-google.theme-brand.state-default {
+  background-color: var(--imported-social-button-root-background-color-google-brand-default);
+}
+
+.social-google.theme-brand.state-hover {
+  background-color: var(--imported-social-button-root-background-color-google-brand-hover);
+}
+
+.social-google.theme-brand.state-focused {
+  background-color: var(--imported-social-button-root-background-color-google-brand-focused);
+}
+
+.social-google.theme-colorWithBrand.state-default {
+  background-color: var(
+    --imported-social-button-root-background-color-google-colorWithBrand-default
+  );
+}
+
+.social-google.theme-colorWithBrand.state-hover {
+  background-color: var(--imported-social-button-root-background-color-google-colorWithBrand-hover);
+}
+
+.social-google.theme-colorWithBrand.state-focused {
+  background-color: var(
+    --imported-social-button-root-background-color-google-colorWithBrand-focused
+  );
+}
+
+.social-google.theme-color.state-default {
+  background-color: var(--imported-social-button-root-background-color-google-color-default);
+}
+
+.social-google.theme-color.state-hover {
+  background-color: var(--imported-social-button-root-background-color-google-color-hover);
+}
+
+.social-google.theme-color.state-focused {
+  background-color: var(--imported-social-button-root-background-color-google-color-focused);
+}
+
+.social-apple {
+}
+
+.social-apple.theme-brand.state-default {
+  background-color: var(--imported-social-button-root-background-color-apple-brand-default);
+}
+
+.social-apple.theme-brand.state-hover {
+  background-color: var(--imported-social-button-root-background-color-apple-brand-hover);
+}
+
+.social-apple.theme-brand.state-focused {
+  background-color: var(--imported-social-button-root-background-color-apple-brand-focused);
+}
+
+.social-apple.theme-colorWithBrand.state-default {
+  background-color: var(
+    --imported-social-button-root-background-color-apple-colorWithBrand-default
+  );
+}
+
+.social-apple.theme-colorWithBrand.state-hover {
+  background-color: var(--imported-social-button-root-background-color-apple-colorWithBrand-hover);
+}
+
+.social-apple.theme-colorWithBrand.state-focused {
+  background-color: var(
+    --imported-social-button-root-background-color-apple-colorWithBrand-focused
+  );
+}
+
+.social-apple.theme-color.state-default {
+  background-color: var(--imported-social-button-root-background-color-apple-color-default);
+}
+
+.social-apple.theme-color.state-hover {
+  background-color: var(--imported-social-button-root-background-color-apple-color-hover);
+}
+
+.social-apple.theme-color.state-focused {
+  background-color: var(--imported-social-button-root-background-color-apple-color-focused);
+}
+
+.social-figma {
+}
+
+.social-figma.theme-brand.state-default {
+  background-color: var(--imported-social-button-root-background-color-figma-brand-default);
+}
+
+.social-figma.theme-brand.state-hover {
+  background-color: var(--imported-social-button-root-background-color-figma-brand-hover);
+}
+
+.social-figma.theme-brand.state-focused {
+  background-color: var(--imported-social-button-root-background-color-figma-brand-focused);
+}
+
+.social-figma.theme-colorWithBrand.state-default {
+  background-color: var(
+    --imported-social-button-root-background-color-figma-colorWithBrand-default
+  );
+}
+
+.social-figma.theme-colorWithBrand.state-hover {
+  background-color: var(--imported-social-button-root-background-color-figma-colorWithBrand-hover);
+}
+
+.social-figma.theme-colorWithBrand.state-focused {
+  background-color: var(
+    --imported-social-button-root-background-color-figma-colorWithBrand-focused
+  );
+}
+
+.social-figma.theme-color.state-default {
+  background-color: var(--imported-social-button-root-background-color-figma-color-default);
+}
+
+.social-figma.theme-color.state-hover {
+  background-color: var(--imported-social-button-root-background-color-figma-color-hover);
+}
+
+.social-figma.theme-color.state-focused {
+  background-color: var(--imported-social-button-root-background-color-figma-color-focused);
+}
+
+.social-dribbble {
+}
+
+.social-dribbble.theme-brand.state-default {
+  background-color: var(--imported-social-button-root-background-color-dribbble-brand-default);
+}
+
+.social-dribbble.theme-brand.state-hover {
+  background-color: var(--imported-social-button-root-background-color-dribbble-brand-hover);
+}
+
+.social-dribbble.theme-brand.state-focused {
+  background-color: var(--imported-social-button-root-background-color-dribbble-brand-focused);
+}
+
+.social-dribbble.theme-colorWithBrand.state-default {
+  background-color: var(
+    --imported-social-button-root-background-color-dribbble-colorWithBrand-default
+  );
+}
+
+.social-dribbble.theme-colorWithBrand.state-hover {
+  background-color: var(
+    --imported-social-button-root-background-color-dribbble-colorWithBrand-hover
+  );
+}
+
+.social-dribbble.theme-colorWithBrand.state-focused {
+  background-color: var(
+    --imported-social-button-root-background-color-dribbble-colorWithBrand-focused
+  );
+}
+
+.social-dribbble.theme-color.state-default {
+  background-color: var(--imported-social-button-root-background-color-dribbble-color-default);
+}
+
+.social-dribbble.theme-color.state-hover {
+  background-color: var(--imported-social-button-root-background-color-dribbble-color-hover);
+}
+
+.social-dribbble.theme-color.state-focused {
+  background-color: var(--imported-social-button-root-background-color-dribbble-color-focused);
+}
+
+.social-x {
+}
+
+.social-x.theme-brand.state-default {
+  background-color: var(--imported-social-button-root-background-color-x-brand-default);
+}
+
+.social-x.theme-brand.state-hover {
+  background-color: var(--imported-social-button-root-background-color-x-brand-hover);
+}
+
+.social-x.theme-brand.state-focused {
+  background-color: var(--imported-social-button-root-background-color-x-brand-focused);
+}
+
+.social-x.theme-colorWithBrand.state-default {
+  background-color: var(--imported-social-button-root-background-color-x-colorWithBrand-default);
+}
+
+.social-x.theme-colorWithBrand.state-hover {
+  background-color: var(--imported-social-button-root-background-color-x-colorWithBrand-hover);
+}
+
+.social-x.theme-colorWithBrand.state-focused {
+  background-color: var(--imported-social-button-root-background-color-x-colorWithBrand-focused);
+}
+
+.social-x.theme-color.state-default {
+  background-color: var(--imported-social-button-root-background-color-x-color-default);
+}
+
+.social-x.theme-color.state-hover {
+  background-color: var(--imported-social-button-root-background-color-x-color-hover);
+}
+
+.social-x.theme-color.state-focused {
+  background-color: var(--imported-social-button-root-background-color-x-color-focused);
+}
+
+.social-facebook.theme-brand {
+  border-width: var(--imported-social-button-root-border-width-facebook-brand);
+}
+
+.social-facebook.theme-colorWithBrand {
+  border-width: var(--imported-social-button-root-border-width-facebook-colorWithBrand);
+}
+
+.social-facebook.theme-color {
+  border-width: var(--imported-social-button-root-border-width-facebook-color);
+}
+
+.social-google.theme-brand {
+  border-width: var(--imported-social-button-root-border-width-google-brand);
+}
+
+.social-google.theme-colorWithBrand {
+  border-width: var(--imported-social-button-root-border-width-google-colorWithBrand);
+}
+
+.social-google.theme-color {
+  border-width: var(--imported-social-button-root-border-width-google-color);
+}
+
+.social-apple.theme-brand {
+  border-width: var(--imported-social-button-root-border-width-apple-brand);
+}
+
+.social-apple.theme-colorWithBrand {
+  border-width: var(--imported-social-button-root-border-width-apple-colorWithBrand);
+}
+
+.social-apple.theme-color {
+  border-width: var(--imported-social-button-root-border-width-apple-color);
+}
+
+.social-figma.theme-brand {
+  border-width: var(--imported-social-button-root-border-width-figma-brand);
+}
+
+.social-figma.theme-colorWithBrand {
+  border-width: var(--imported-social-button-root-border-width-figma-colorWithBrand);
+}
+
+.social-figma.theme-color {
+  border-width: var(--imported-social-button-root-border-width-figma-color);
+}
+
+.social-dribbble.theme-brand {
+  border-width: var(--imported-social-button-root-border-width-dribbble-brand);
+}
+
+.social-dribbble.theme-colorWithBrand {
+  border-width: var(--imported-social-button-root-border-width-dribbble-colorWithBrand);
+}
+
+.social-dribbble.theme-color {
+  border-width: var(--imported-social-button-root-border-width-dribbble-color);
+}
+
+.social-x.theme-brand {
+  border-width: var(--imported-social-button-root-border-width-x-brand);
+}
+
+.social-x.theme-colorWithBrand {
+  border-width: var(--imported-social-button-root-border-width-x-colorWithBrand);
+}
+
+.social-x.theme-color {
+  border-width: var(--imported-social-button-root-border-width-x-color);
+}
+
+.Text {
+  font-size: var(--imported-social-button-text-font-size);
+  font-weight: var(--imported-social-button-text-font-weight);
+  line-height: var(--imported-social-button-text-line-height);
+}

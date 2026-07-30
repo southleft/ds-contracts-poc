@@ -1,0 +1,78 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/avatar.contract.json (ds.avatar v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-radius: var(--imported-avatar-root-border-radius);
+}
+
+.state-default {
+  border-width: var(--imported-avatar-root-border-width-default);
+}
+
+.state-hover {
+  border-width: var(--imported-avatar-root-border-width-hover);
+}
+
+.state-focused {
+  border-width: var(--imported-avatar-root-border-width-focused);
+}
+
+.Text {
+  color: var(--imported-avatar-text-color);
+  font-weight: var(--imported-avatar-text-font-weight);
+}
+
+.size-xl .Text {
+  font-size: var(--imported-avatar-text-font-size-xl);
+}
+
+.size-2xl .Text {
+  font-size: var(--imported-avatar-text-font-size-2xl);
+}
+
+.size-lg .Text {
+  font-size: var(--imported-avatar-text-font-size-lg);
+}
+
+.size-md .Text {
+  font-size: var(--imported-avatar-text-font-size-md);
+}
+
+.size-sm .Text {
+  font-size: var(--imported-avatar-text-font-size-sm);
+}
+
+.size-xs .Text {
+  font-size: var(--imported-avatar-text-font-size-xs);
+}
+
+.size-xl .Text {
+  line-height: var(--imported-avatar-text-line-height-xl);
+}
+
+.size-2xl .Text {
+  line-height: var(--imported-avatar-text-line-height-2xl);
+}
+
+.size-lg .Text {
+  line-height: var(--imported-avatar-text-line-height-lg);
+}
+
+.size-md .Text {
+  line-height: var(--imported-avatar-text-line-height-md);
+}
+
+.size-sm .Text {
+  line-height: var(--imported-avatar-text-line-height-sm);
+}
+
+.size-xs .Text {
+  line-height: var(--imported-avatar-text-line-height-xs);
+}
