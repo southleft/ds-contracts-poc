@@ -266,6 +266,108 @@
           "$value": "#f9f5ff",
           "$type": "color"
         },
+        "gap": {
+          "false": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "dot": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "country": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "avatar": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "xClose": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "iconRight": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "iconLeft": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "only": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
+        "padding-left": {
+          "false": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "dot": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "country": {
+            "$value": "3px",
+            "$type": "dimension"
+          },
+          "avatar": {
+            "$value": "3px",
+            "$type": "dimension"
+          },
+          "xClose": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "iconRight": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "iconLeft": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "only": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
+        "padding-right": {
+          "false": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "dot": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "country": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "avatar": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "xClose": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "iconRight": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "iconLeft": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "only": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
         "padding-block": {
           "false": {
             "$value": "2px",
@@ -756,6 +858,14 @@
       "color-7f56d9": {
         "$value": "#7f56d9",
         "$type": "color"
+      },
+      "size-14": {
+        "$value": "14px",
+        "$type": "dimension"
+      },
+      "size-8": {
+        "$value": "8px",
+        "$type": "dimension"
       },
       "color-737373": {
         "$value": "#737373",
@@ -1270,10 +1380,6 @@
           "$value": "#404040",
           "$type": "color"
         },
-        "font-size": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
         "font-weight": {
           "$value": "500",
           "$type": "number"
@@ -1310,6 +1416,50 @@
             "$type": "dimension"
           }
         },
+        "padding-left": {
+          "default": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "paymentInput": {
+            "$value": "10px",
+            "$type": "dimension"
+          },
+          "leadingDropdown": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "leadingText": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "trailingDropdown": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
+        "padding-right": {
+          "default": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "paymentInput": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "leadingDropdown": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "leadingText": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "trailingDropdown": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
         "padding-block": {
           "default": {
             "$value": "10px",
@@ -1332,10 +1482,6 @@
             "$type": "dimension"
           }
         },
-        "border-radius": {
-          "$value": "8px",
-          "$type": "dimension"
-        },
         "border-width": {
           "$value": "1px",
           "$type": "dimension"
@@ -1346,6 +1492,10 @@
         }
       },
       "input-with-label-input-add-on": {
+        "padding-right": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
         "padding-block": {
           "$value": "10px",
           "$type": "dimension"
@@ -1368,9 +1518,27 @@
         }
       },
       "input-with-label-input-content": {
-        "gap": {
-          "$value": "8px",
-          "$type": "dimension"
+        "padding-left": {
+          "default": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "paymentInput": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "leadingDropdown": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "leadingText": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "trailingDropdown": {
+            "$value": "14px",
+            "$type": "dimension"
+          }
         },
         "padding-block": {
           "default": {
@@ -1396,6 +1564,50 @@
         }
       },
       "input-with-label-input-content-text-input": {
+        "padding-left": {
+          "default": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "paymentInput": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "leadingDropdown": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "leadingText": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "trailingDropdown": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
+        "padding-right": {
+          "default": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "paymentInput": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "leadingDropdown": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "leadingText": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "trailingDropdown": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
         "padding-block": {
           "default": {
             "$value": "10px",
@@ -1442,10 +1654,6 @@
         }
       },
       "hint-text": {
-        "font-size": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
         "line-height": {
           "$value": "20px",
           "$type": "dimension"
@@ -2031,6 +2239,10 @@
         "border-color": {
           "$value": "#d4d4d4",
           "$type": "color"
+        },
+        "gap": {
+          "$value": "8px",
+          "$type": "dimension"
         },
         "padding-inline": {
           "false": {

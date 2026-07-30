@@ -1221,15 +1221,27 @@ function invertNodeTokens(
   // pair by identity (same axis, same per-value refs — see refKey).
   const pair = (a?: UnifiedRef, b?: UnifiedRef) =>
     a !== undefined && refKey(a) === refKey(b) ? a : undefined;
-  const inline = pair(f('paddingLeft'), f('paddingRight'));
-  if (inline) carry('padding-inline', inline);
-  else if (fields.has('paddingLeft') || fields.has('paddingRight')) {
-    ctx.notes.push(`${where}: left/right padding bindings differ — padding-inline not representable, review`);
-  }
-  const block = pair(f('paddingTop'), f('paddingBottom'));
-  if (block) carry('padding-block', block);
-  else if (fields.has('paddingTop') || fields.has('paddingBottom')) {
-    ctx.notes.push(`${where}: top/bottom padding bindings differ — padding-block not representable, review`);
+  // Asymmetric pairs (left binding ≠ right binding) carry as the per-side
+  // longhand channels instead of refusing — the same general rule as the
+  // literal path (mintPadding): every padding channel present on a node
+  // either carries or is NAMED; it never silently vanishes (untitled-ui
+  // round 2, style-channel-dropped).
+  const PAD_PAIRS = [
+    { shorthand: 'padding-inline', label: 'left/right', sides: [['padding-left', 'paddingLeft'], ['padding-right', 'paddingRight']] },
+    { shorthand: 'padding-block', label: 'top/bottom', sides: [['padding-top', 'paddingTop'], ['padding-bottom', 'paddingBottom']] },
+  ] as const;
+  for (const { shorthand, label, sides } of PAD_PAIRS) {
+    const refs = sides.map(([, field]) => f(field));
+    const both = pair(refs[0], refs[1]);
+    if (both) {
+      carry(shorthand, both);
+      continue;
+    }
+    if (!sides.some(([, field]) => fields.has(field))) continue;
+    sides.forEach(([cssProp], i) => carry(cssProp, refs[i]));
+    ctx.notes.push(
+      `${where}: ${label} padding bindings differ — ${shorthand} is not representable; carried as separate ${sides.map(([p]) => p).join('/')} channels`,
+    );
   }
   const radii = ['topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius'];
   if (radii.some((r) => fields.has(r))) {
@@ -1293,7 +1305,11 @@ function invertNodeTokens(
     })?.node ?? n0;
   if (
     !fields.has('itemSpacing') &&
-    (n0.children?.length ?? 0) > 1 &&
+    // ANY variant with 2+ children makes the gap a rendered fact — gating on
+    // the FIRST variant's child count let a set whose default variant has a
+    // single child (Badge base Icon=False) drop every other variant's
+    // itemSpacing with no receipt (untitled-ui round 2, style-channel-dropped).
+    m.occ.some((o) => (o.node.children?.length ?? 0) > 1) &&
     m.occ.some((o) => (o.node.layout?.spacing ?? 0) !== 0)
   ) {
     const spacings = m.occ.map((o) => o.node.layout?.spacing ?? 0);
@@ -1715,22 +1731,35 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
   );
 }
 
-/** The contract's padding vocabulary is symmetric (padding-inline/-block):
- *  each symmetric pair mints its own observation; an asymmetric pair mints
- *  nothing (named, the classic unbound entry survives), and an all-zero pair
- *  needs no token at all. */
+/** The contract's padding vocabulary prefers the symmetric shorthands
+ *  (padding-inline/-block): a symmetric pair mints one observation; an
+ *  ASYMMETRIC pair mints the two per-side longhand channels instead
+ *  (padding-left/right, padding-top/bottom) — per-variant observations
+ *  exactly like the shorthand path, so axis-correlated values classify into
+ *  per-axis-value leaves the same way (untitled-ui round 2 exemplar: Badge
+ *  base [2,8,2,6] used to refuse padding-inline here and the pill hugged its
+ *  text). A side that is zero in every variant needs no token; an all-zero
+ *  pair needs none at all. */
 function mintPadding(ctx: Ctx, target: Record<string, string>, m: Merged, where: string) {
   if (!ctx.mint) return;
   const source = `${where}|padding`;
   const pairs = [
-    { cssProperty: 'padding-inline', a: 3, b: 1, label: 'left/right' }, // padding: [top, right, bottom, left]
-    { cssProperty: 'padding-block', a: 0, b: 2, label: 'top/bottom' },
+    // padding: [top, right, bottom, left]
+    { cssProperty: 'padding-inline', a: 3, b: 1, label: 'left/right', sides: [['padding-left', 3], ['padding-right', 1]] },
+    { cssProperty: 'padding-block', a: 0, b: 2, label: 'top/bottom', sides: [['padding-top', 0], ['padding-bottom', 2]] },
   ] as const;
-  for (const { cssProperty, a, b, label } of pairs) {
+  for (const { cssProperty, a, b, label, sides } of pairs) {
     const pad = (n: DumpNode): readonly number[] => n.layout?.padding ?? [0, 0, 0, 0];
     if (!m.occ.every((o) => pad(o.node)[a] === pad(o.node)[b])) {
-      ctx.mint.partialSources.add(source);
-      ctx.notes.push(`${where}: ${label} padding literals differ — ${cssProperty} is not representable, not minted; review`);
+      const minted: string[] = [];
+      for (const [sideProp, idx] of sides) {
+        if (m.occ.every((o) => pad(o.node)[idx] === 0)) continue; // zero side needs no token
+        mintObservation(ctx, target, where, sideProp, 'px', numOccurrences(m, (n) => pad(n)[idx]), source);
+        minted.push(sideProp);
+      }
+      ctx.notes.push(
+        `${where}: ${label} padding literals differ — ${cssProperty} is not representable; carried as per-side ${minted.join('/')} instead (asymmetric padding)`,
+      );
       continue;
     }
     if (m.occ.every((o) => pad(o.node)[a] === 0)) continue; // zero padding needs no token

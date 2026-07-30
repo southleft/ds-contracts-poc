@@ -84,7 +84,7 @@
               },
               "tokens": {
                 "color": "{imported.input-field-base.input-with-label-label.color}",
-                "font-size": "{imported.input-field-base.input-with-label-label.font-size}",
+                "font-size": "{imported.shared.size-14}",
                 "font-weight": "{imported.input-field-base.input-with-label-label.font-weight}",
                 "line-height": "{imported.input-field-base.input-with-label-label.line-height}"
               }
@@ -135,6 +135,8 @@
                     "equals": "leadingText"
                   },
                   "tokens": {
+                    "padding-left": "{imported.shared.size-14}",
+                    "padding-right": "{imported.input-field-base.input-with-label-input-add-on.padding-right}",
                     "padding-block": "{imported.input-field-base.input-with-label-input-add-on.padding-block}"
                   }
                 },
@@ -189,6 +191,7 @@
                   },
                   "tokens": {
                     "gap": "{imported.input-field-base.input-with-label-input-dropdown.gap}",
+                    "padding-left": "{imported.shared.size-14}",
                     "padding-block": "{imported.input-field-base.input-with-label-input-dropdown.padding-block}"
                   }
                 },
@@ -269,13 +272,17 @@
                         }
                       },
                       "tokens": {
+                        "gap": "{imported.shared.size-8}",
+                        "padding-left": "{imported.input-field-base.input-with-label-input-content-text-input.padding-left.{type}}",
+                        "padding-right": "{imported.input-field-base.input-with-label-input-content-text-input.padding-right.{type}}",
                         "padding-block": "{imported.input-field-base.input-with-label-input-content-text-input.padding-block.{type}}",
                         "border-width": "{imported.input-field-base.input-with-label-input-content-text-input.border-width.{type}}"
                       }
                     }
                   },
                   "tokens": {
-                    "gap": "{imported.input-field-base.input-with-label-input-content.gap}",
+                    "gap": "{imported.shared.size-8}",
+                    "padding-left": "{imported.input-field-base.input-with-label-input-content.padding-left.{type}}",
                     "padding-block": "{imported.input-field-base.input-with-label-input-content.padding-block.{type}}"
                   }
                 }
@@ -283,8 +290,10 @@
               "tokens": {
                 "background-color": "{imported.input-field-base.input-with-label-input.background-color}",
                 "gap": "{imported.input-field-base.input-with-label-input.gap.{type}}",
+                "padding-left": "{imported.input-field-base.input-with-label-input.padding-left.{type}}",
+                "padding-right": "{imported.input-field-base.input-with-label-input.padding-right.{type}}",
                 "padding-block": "{imported.input-field-base.input-with-label-input.padding-block.{type}}",
-                "border-radius": "{imported.input-field-base.input-with-label-input.border-radius}",
+                "border-radius": "{imported.shared.size-8}",
                 "border-width": "{imported.input-field-base.input-with-label-input.border-width}",
                 "box-shadow": "{imported.input-field-base.input-with-label-input.box-shadow}"
               }
@@ -297,7 +306,7 @@
         "hintText": {
           "text": "This is a hint text to help user.",
           "tokens": {
-            "font-size": "{imported.input-field-base.hint-text.font-size}",
+            "font-size": "{imported.shared.size-14}",
             "font-weight": "{imported.shared.num-400}",
             "line-height": "{imported.input-field-base.hint-text.line-height}"
           }

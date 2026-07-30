@@ -22,7 +22,9 @@
  *
  *   TOKENS      Variable names use SLASHES on the canvas; contract refs use
  *               DOTS in braces. paddingLeft==paddingRight → padding-inline
- *               (same for -block); four equal radii → border-radius; four
+ *               (same for -block); an asymmetric pair carries as the per-side
+ *               longhand channels (padding-left/right, padding-top/bottom)
+ *               instead of refusing; four equal radii → border-radius; four
  *               equal stroke weights → border-width; itemSpacing → gap; a
  *               bound width on the ROOT → max-width (a component's outer
  *               dimension is fluid-up-to in code; the canvas renders the max),

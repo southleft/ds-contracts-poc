@@ -132,6 +132,7 @@
       },
       "tokens": {
         "border-color": "{imported.button-group-base.root.border-color}",
+        "gap": "{imported.button-group-base.root.gap}",
         "padding-inline": "{imported.button-group-base.root.padding-inline.{icon}}",
         "padding-block": "{imported.button-group-base.root.padding-block}"
       }

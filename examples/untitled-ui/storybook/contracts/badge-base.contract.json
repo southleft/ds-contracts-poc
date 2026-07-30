@@ -146,6 +146,9 @@
       },
       "tokens": {
         "background-color": "{imported.badge-base.root.background-color}",
+        "gap": "{imported.badge-base.root.gap.{icon}}",
+        "padding-left": "{imported.badge-base.root.padding-left.{icon}}",
+        "padding-right": "{imported.badge-base.root.padding-right.{icon}}",
         "padding-block": "{imported.badge-base.root.padding-block.{icon}}",
         "border-radius": "{imported.badge-base.root.border-radius}"
       }

@@ -13,34 +13,58 @@
 }
 
 .icon-false {
+  gap: var(--imported-badge-base-root-gap-false);
+  padding-left: var(--imported-badge-base-root-padding-left-false);
+  padding-right: var(--imported-badge-base-root-padding-right-false);
   padding-block: var(--imported-badge-base-root-padding-block-false);
 }
 
 .icon-dot {
+  gap: var(--imported-badge-base-root-gap-dot);
+  padding-left: var(--imported-badge-base-root-padding-left-dot);
+  padding-right: var(--imported-badge-base-root-padding-right-dot);
   padding-block: var(--imported-badge-base-root-padding-block-dot);
 }
 
 .icon-country {
+  gap: var(--imported-badge-base-root-gap-country);
+  padding-left: var(--imported-badge-base-root-padding-left-country);
+  padding-right: var(--imported-badge-base-root-padding-right-country);
   padding-block: var(--imported-badge-base-root-padding-block-country);
 }
 
 .icon-avatar {
+  gap: var(--imported-badge-base-root-gap-avatar);
+  padding-left: var(--imported-badge-base-root-padding-left-avatar);
+  padding-right: var(--imported-badge-base-root-padding-right-avatar);
   padding-block: var(--imported-badge-base-root-padding-block-avatar);
 }
 
 .icon-xClose {
+  gap: var(--imported-badge-base-root-gap-xClose);
+  padding-left: var(--imported-badge-base-root-padding-left-xClose);
+  padding-right: var(--imported-badge-base-root-padding-right-xClose);
   padding-block: var(--imported-badge-base-root-padding-block-xClose);
 }
 
 .icon-iconRight {
+  gap: var(--imported-badge-base-root-gap-iconRight);
+  padding-left: var(--imported-badge-base-root-padding-left-iconRight);
+  padding-right: var(--imported-badge-base-root-padding-right-iconRight);
   padding-block: var(--imported-badge-base-root-padding-block-iconRight);
 }
 
 .icon-iconLeft {
+  gap: var(--imported-badge-base-root-gap-iconLeft);
+  padding-left: var(--imported-badge-base-root-padding-left-iconLeft);
+  padding-right: var(--imported-badge-base-root-padding-right-iconLeft);
   padding-block: var(--imported-badge-base-root-padding-block-iconLeft);
 }
 
 .icon-only {
+  gap: var(--imported-badge-base-root-gap-only);
+  padding-left: var(--imported-badge-base-root-padding-left-only);
+  padding-right: var(--imported-badge-base-root-padding-right-only);
   padding-block: var(--imported-badge-base-root-padding-block-only);
 }
 

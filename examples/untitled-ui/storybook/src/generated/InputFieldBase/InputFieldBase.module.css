@@ -20,7 +20,7 @@
 
 .Label {
   color: var(--imported-input-field-base-input-with-label-label-color);
-  font-size: var(--imported-input-field-base-input-with-label-label-font-size);
+  font-size: var(--imported-shared-size-14);
   font-weight: var(--imported-input-field-base-input-with-label-label-font-weight);
   line-height: var(--imported-input-field-base-input-with-label-label-line-height);
 }
@@ -30,7 +30,7 @@
   flex-direction: row;
   align-items: center;
   background-color: var(--imported-input-field-base-input-with-label-input-background-color);
-  border-radius: var(--imported-input-field-base-input-with-label-input-border-radius);
+  border-radius: var(--imported-shared-size-8);
   border-width: var(--imported-input-field-base-input-with-label-input-border-width);
   box-shadow: var(--imported-input-field-base-input-with-label-input-box-shadow);
   border-style: solid;
@@ -54,6 +54,54 @@
 
 .type-trailingDropdown .Input {
   gap: var(--imported-input-field-base-input-with-label-input-gap-trailingDropdown);
+}
+
+.type-default .Input {
+  padding-left: var(--imported-input-field-base-input-with-label-input-padding-left-default);
+}
+
+.type-paymentInput .Input {
+  padding-left: var(--imported-input-field-base-input-with-label-input-padding-left-paymentInput);
+}
+
+.type-leadingDropdown .Input {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-padding-left-leadingDropdown
+  );
+}
+
+.type-leadingText .Input {
+  padding-left: var(--imported-input-field-base-input-with-label-input-padding-left-leadingText);
+}
+
+.type-trailingDropdown .Input {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-padding-left-trailingDropdown
+  );
+}
+
+.type-default .Input {
+  padding-right: var(--imported-input-field-base-input-with-label-input-padding-right-default);
+}
+
+.type-paymentInput .Input {
+  padding-right: var(--imported-input-field-base-input-with-label-input-padding-right-paymentInput);
+}
+
+.type-leadingDropdown .Input {
+  padding-right: var(
+    --imported-input-field-base-input-with-label-input-padding-right-leadingDropdown
+  );
+}
+
+.type-leadingText .Input {
+  padding-right: var(--imported-input-field-base-input-with-label-input-padding-right-leadingText);
+}
+
+.type-trailingDropdown .Input {
+  padding-right: var(
+    --imported-input-field-base-input-with-label-input-padding-right-trailingDropdown
+  );
 }
 
 .type-default .Input {
@@ -97,6 +145,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-left: var(--imported-shared-size-14);
+  padding-right: var(--imported-input-field-base-input-with-label-input-add-on-padding-right);
   padding-block: var(--imported-input-field-base-input-with-label-input-add-on-padding-block);
 }
 
@@ -113,6 +163,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--imported-input-field-base-input-with-label-input-dropdown-gap);
+  padding-left: var(--imported-shared-size-14);
   padding-block: var(--imported-input-field-base-input-with-label-input-dropdown-padding-block);
 }
 
@@ -129,7 +180,37 @@
   align-items: center;
   flex: 1 1 auto;
   min-width: 0;
-  gap: var(--imported-input-field-base-input-with-label-input-content-gap);
+  gap: var(--imported-shared-size-8);
+}
+
+.type-default .Content {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-content-padding-left-default
+  );
+}
+
+.type-paymentInput .Content {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-content-padding-left-paymentInput
+  );
+}
+
+.type-leadingDropdown .Content {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-content-padding-left-leadingDropdown
+  );
+}
+
+.type-leadingText .Content {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-content-padding-left-leadingText
+  );
+}
+
+.type-trailingDropdown .Content {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-content-padding-left-trailingDropdown
+  );
 }
 
 .type-default .Content {
@@ -168,7 +249,68 @@
   align-items: center;
   flex: 1 1 auto;
   min-width: 0;
+  gap: var(--imported-shared-size-8);
   border-style: solid;
+}
+
+.type-default .textInput {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-content-text-input-padding-left-default
+  );
+}
+
+.type-paymentInput .textInput {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-content-text-input-padding-left-paymentInput
+  );
+}
+
+.type-leadingDropdown .textInput {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-content-text-input-padding-left-leadingDropdown
+  );
+}
+
+.type-leadingText .textInput {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-content-text-input-padding-left-leadingText
+  );
+}
+
+.type-trailingDropdown .textInput {
+  padding-left: var(
+    --imported-input-field-base-input-with-label-input-content-text-input-padding-left-trailingDropdown
+  );
+}
+
+.type-default .textInput {
+  padding-right: var(
+    --imported-input-field-base-input-with-label-input-content-text-input-padding-right-default
+  );
+}
+
+.type-paymentInput .textInput {
+  padding-right: var(
+    --imported-input-field-base-input-with-label-input-content-text-input-padding-right-paymentInput
+  );
+}
+
+.type-leadingDropdown .textInput {
+  padding-right: var(
+    --imported-input-field-base-input-with-label-input-content-text-input-padding-right-leadingDropdown
+  );
+}
+
+.type-leadingText .textInput {
+  padding-right: var(
+    --imported-input-field-base-input-with-label-input-content-text-input-padding-right-leadingText
+  );
+}
+
+.type-trailingDropdown .textInput {
+  padding-right: var(
+    --imported-input-field-base-input-with-label-input-content-text-input-padding-right-trailingDropdown
+  );
 }
 
 .type-default .textInput {
@@ -250,7 +392,7 @@
 }
 
 .hintText {
-  font-size: var(--imported-input-field-base-hint-text-font-size);
+  font-size: var(--imported-shared-size-14);
   font-weight: var(--imported-shared-num-400);
   line-height: var(--imported-input-field-base-hint-text-line-height);
 }
