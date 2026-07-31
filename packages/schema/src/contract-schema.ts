@@ -676,6 +676,10 @@ export const STYLES_WHEN_ALLOWED = new Set([
   'overflow', 'text-overflow', 'white-space', 'display', 'opacity',
   'pointer-events', 'transform', 'transition', 'flex-direction',
   'justify-content', 'align-items', 'cursor', 'text-decoration',
+  // Round 2 iteration 4 (ellipse arcs): an axis-varying arc sweep rides
+  // per-value conic-gradient masks — the arcMaskCss spelling, literal CSS
+  // with no token vocabulary (exactly the transform/rotation precedent).
+  'mask',
 ]);
 
 /** v7: conditional literal styles — CSS applied only when the prop matches.
@@ -724,6 +728,25 @@ export const ShapeSchema = z.strictObject({
   height: z.number().positive(),
   /** CSS-clockwise degrees (`transform: rotate(<n>deg)`). Omit for 0. */
   rotation: z.number().optional(),
+  /** ELLIPSE arc sweep (dump v1.7 `shape.arc`, round 2 iteration 4) —
+   *  Figma ArcData radians: 0 at 3 o'clock, increasing clockwise on screen.
+   *  Ellipse-only vocabulary. Carried when the sweep is PARTIAL (< 2π) and
+   *  constant across variants — a full sweep is the plain ellipse and an
+   *  axis-varying sweep rides per-value `stylesWhen` mask rules instead (the
+   *  rotation discipline). Code surfaces render the sweep as a
+   *  conic-gradient mask (arcMaskCss below — the ONE spelling) over the
+   *  part's border-drawn ring; the Figma generator sets native arcData.
+   *  innerRadius is Figma's donut-hole fraction, recorded for round-trip
+   *  fidelity: at 1 (the observed class — a pure stroked ring) the
+   *  border-drawn ring already leaves the hole; the proposer NAMES
+   *  innerRadius < 1 (a filled donut) instead of carrying it. */
+  arc: z
+    .strictObject({
+      start: z.number(),
+      end: z.number(),
+      innerRadius: z.number().min(0).max(1),
+    })
+    .optional(),
 });
 
 /** Vertex list for a regular n-gon inscribed in its box, as CSS clip-path
@@ -739,6 +762,22 @@ export function polygonClipPath(sides: number): string {
   return `polygon(${pts.join(', ')})`;
 }
 
+/** CSS conic-gradient mask for an ELLIPSE arc sweep — the ONE spelling every
+ *  code surface uses (shapeCssDecls for a constant arc; the proposer's
+ *  per-axis-value `stylesWhen` mask for a variant-conditioned arc). Figma arc
+ *  radians (0 = 3 o'clock, clockwise on screen) convert to CSS conic degrees
+ *  (0 = 12 o'clock, clockwise) by +90°. Hard color stops render butt caps —
+ *  Figma's stroke cap style is not on the dump surface (named residue).
+ *  Returns null for empty/full sweeps: nothing to mask. */
+export function arcMaskCss(startRad: number, endRad: number): string | null {
+  const deg = (r: number) => (r * 180) / Math.PI;
+  const r2 = (n: number) => Math.round(n * 100) / 100;
+  const sweep = r2(deg(endRad - startRad));
+  if (sweep <= 0 || sweep >= 360) return null;
+  const from = r2((((deg(startRad) + 90) % 360) + 360) % 360);
+  return `conic-gradient(from ${from}deg, #000 0deg ${sweep}deg, transparent ${sweep}deg 360deg)`;
+}
+
 /** The shape's CSS declarations — shared by every code-side surface
  *  (emit-react, emit-html, emit-react-inline, the playground canvas
  *  preview) so the projection cannot fork. A polygon with no captured side
@@ -748,6 +787,10 @@ export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
   const d = [`width: ${shape.width}px`, `height: ${shape.height}px`, 'flex-shrink: 0'];
   if (shape.kind === 'polygon') d.push(`clip-path: ${polygonClipPath(shape.sides ?? 3)}`);
   if (shape.kind === 'ellipse') d.push('border-radius: 50%');
+  if (shape.kind === 'ellipse' && shape.arc) {
+    const mask = arcMaskCss(shape.arc.start, shape.arc.end);
+    if (mask) d.push(`mask: ${mask}`);
+  }
   if (shape.rotation !== undefined && shape.rotation !== 0) d.push(`transform: rotate(${shape.rotation}deg)`);
   return d;
 }

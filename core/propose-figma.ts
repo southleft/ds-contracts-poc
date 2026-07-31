@@ -20,7 +20,7 @@
  * `mintedTokens` — styles survive at literal fidelity, names stay mechanical
  * and reviewable, semantics are never guessed.
  */
-import { ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel } from '../scripts/contract-schema.js';
+import { arcMaskCss, ContractSchema, pascal, STATE_PREVIEW_PROPERTY, statePreviewLabel } from '../scripts/contract-schema.js';
 import { kebab } from '../extract/types.js';
 import { isDumpSet, type DumpEffect, type DumpNode, type DumpPaint, type DumpPreferredValue, type DumpSet } from '../extract/figma/types.js';
 import type { TokenCorpus } from './token-corpus.js';
@@ -1687,14 +1687,58 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     return;
   }
   const first = shapes[0].sh;
-  // dump v1.7 tolerance ledger: ellipse arc geometry (sweep/donut) is
-  // captured but NOT carried this round — named, never a throw.
-  if (shapes.some((s) => s.sh.arc !== undefined)) {
-    ctx.notes.push(
-      `${where}: ellipse arc geometry captured (dump v1.7 \`shape.arc\`) — arcs are NOT carried this round (ledgered by name; a later iteration renders sweeps/donuts); the shape renders as a full ellipse`,
-    );
+  // dump v1.7 ellipse arc (round 2 iteration 4): the sweep IS carried.
+  // Grammar (mirrors the rotation discipline below):
+  //   full sweep (≥ 2π)          → dropped as redundant (the plain ellipse);
+  //   constant partial sweep     → shape.arc (shapeCssDecls' conic-gradient
+  //                                mask; the Figma generator sets arcData);
+  //   axis-correlated sweep      → per-value stylesWhen `mask` (arcMaskCss,
+  //                                the ONE spelling) via the placement
+  //                                machinery below;
+  //   anything else              → NAMED, never guessed. innerRadius < 1 (a
+  //                                filled donut hole) is NAMED — the observed
+  //                                class is 1, a pure stroked ring whose hole
+  //                                the border-drawn ring already leaves.
+  const TAU = Math.PI * 2;
+  const arcOf = (sh: NonNullable<DumpNode['shape']>) =>
+    sh.kind === 'ellipse' && sh.arc !== undefined && sh.arc.end - sh.arc.start > 0 && sh.arc.end - sh.arc.start < TAU - 0.01
+      ? sh.arc
+      : undefined;
+  const anyArcCaptured = shapes.some((s) => s.sh.arc !== undefined);
+  const partialArcs = shapes.map((s) => arcOf(s.sh));
+  const anyArc = partialArcs.some((a) => a !== undefined);
+  const arcVaries = anyArc && new Set(partialArcs.map((a) => (a ? `${a.start}|${a.end}` : 'none'))).size > 1;
+  if (anyArcCaptured) {
+    if (shapes.some((s) => s.sh.arc !== undefined && arcOf(s.sh) === undefined && s.sh.arc.end - s.sh.arc.start >= TAU - 0.01)) {
+      ctx.notes.push(
+        `${where}: ellipse arc with a FULL sweep (≥ 2π — dump v1.7 \`shape.arc\`) — redundant with the plain ellipse, dropped`,
+      );
+    }
+    if (shapes.some((s) => s.sh.kind !== 'ellipse' && s.sh.arc !== undefined)) {
+      ctx.notes.push(`${where}: arc captured on a non-ellipse shape — outside the arc grammar, NOT carried; review`);
+    }
+    if (shapes.some((s) => s.sh.arc !== undefined && s.sh.arc.end - s.sh.arc.start <= 0)) {
+      ctx.notes.push(`${where}: arc with a non-positive sweep (end ≤ start) — outside the arc grammar, NOT carried; review`);
+    }
+    if (shapes.some((s) => arcOf(s.sh) !== undefined && arcOf(s.sh)!.innerRadius !== 1)) {
+      ctx.notes.push(
+        `${where}: arc innerRadius < 1 (a filled donut hole) — the hole fraction is NOT carried (code renders the sweep mask only; the observed ring class is border-drawn); review`,
+      );
+    }
+    if (anyArc) {
+      ctx.notes.push(
+        `${where}: arc ends render square (CSS hard color stops) — stroke cap style is not on the dump surface; a canvas ROUND cap is a named residue`,
+      );
+    }
   }
   const shape: Record<string, unknown> = { kind: first.kind, width: first.width, height: first.height };
+  if (anyArc && !arcVaries && partialArcs.every((a) => a !== undefined)) {
+    const a = partialArcs[0]!;
+    shape.arc = { start: a.start, end: a.end, innerRadius: a.innerRadius };
+    ctx.notes.push(
+      `${where}: constant ellipse arc sweep carried as shape.arc ({${a.start}, ${a.end}} rad — dump v1.7) — code surfaces render a conic-gradient mask; the Figma generator sets native arcData`,
+    );
+  }
   const sizes = [...new Set(shapes.map((s) => `${s.sh.width}×${s.sh.height}`))];
   if (sizes.length > 1) {
     ctx.notes.push(
@@ -1724,21 +1768,34 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
   if (!rotationVaries && distinctRot[0] !== 0) shape.rotation = distinctRot[0];
   part.shape = shape;
 
-  // Placement (+ varying rotation): must be a function of ONE enum axis with
-  // per-value consistency — or uniform (then it rides the part's boolean
-  // visibleWhen condition). Axis values whose variants are ALL hidden get no
-  // entry (nothing renders there).
+  // Placement (+ varying rotation, + varying arc sweep): must be a function
+  // of ONE enum axis with per-value consistency — or uniform (then it rides
+  // the part's boolean visibleWhen condition). Axis values whose variants are
+  // ALL hidden get no entry (nothing renders there).
+  const maskOf = (s: (typeof shapes)[number]): string | null => {
+    const a = arcOf(s.sh);
+    return a ? arcMaskCss(a.start, a.end) : null;
+  };
   const specOf = (s: (typeof shapes)[number]): string => {
     const p = shapePlacementOf(s.sh);
-    return JSON.stringify({ p: p?.styles ?? null, t: p?.translate ?? [], r: rotationVaries ? (s.sh.rotation ?? 0) : 0 });
+    return JSON.stringify({
+      p: p?.styles ?? null,
+      t: p?.translate ?? [],
+      r: rotationVaries ? (s.sh.rotation ?? 0) : 0,
+      a: arcVaries ? maskOf(s) : null,
+    });
   };
   const anyPlacement = shapes.some((s) => shapePlacementOf(s.sh) !== null);
-  if (!anyPlacement && !rotationVaries) return; // in-flow, constant rotation — done
+  if (!anyPlacement && !rotationVaries && !arcVaries) return; // in-flow, constant rotation/arc — done
   const buildStyles = (s: (typeof shapes)[number]): Record<string, string> | null => {
     const p = shapePlacementOf(s.sh);
     const transform: string[] = [...(p?.translate ?? [])];
     if (rotationVaries && (s.sh.rotation ?? 0) !== 0) transform.push(`rotate(${s.sh.rotation}deg)`);
     const styles: Record<string, string> = { ...(p?.styles ?? {}) };
+    if (arcVaries) {
+      const mask = maskOf(s);
+      if (mask) styles.mask = mask; // full-sweep values carry no mask — the plain ring
+    }
     if (transform.length > 0) styles.transform = transform.join(' ');
     if (p?.centerResidue !== undefined) {
       ctx.notes.push(
@@ -1786,7 +1843,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     }
     if (emitted + suppressed > 0) part.stylesWhen = stylesWhen;
     ctx.notes.push(
-      `${where}: ${kinds[0]} decor carried as a shape part (${String(shape.width)}×${String(shape.height)}${shape.sides !== undefined ? `, ${String(shape.sides)} sides` : ''}) with per-variant absolute placement${rotationVaries ? ' + rotation' : ''} as stylesWhen on \`${axis.propName}\` (${emitted} placement(s)${suppressed > 0 ? `; ${suppressed} value(s) where the shape is hidden in every drawn variant carry display: none` : ''}; offsets EXACT from the captured boxes — dump v1.3, #42)`,
+      `${where}: ${kinds[0]} decor carried as a shape part (${String(shape.width)}×${String(shape.height)}${shape.sides !== undefined ? `, ${String(shape.sides)} sides` : ''}) with per-variant absolute placement${rotationVaries ? ' + rotation' : ''}${arcVaries ? ' + arc sweep (conic-gradient mask)' : ''} as stylesWhen on \`${axis.propName}\` (${emitted} placement(s)${suppressed > 0 ? `; ${suppressed} value(s) where the shape is hidden in every drawn variant carry display: none` : ''}; offsets EXACT from the captured boxes — dump v1.3, #42)`,
     );
     return;
   }
@@ -1834,7 +1891,7 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
     return;
   }
   ctx.notes.push(
-    `${where}: shape placement/rotation differs across variants without correlating to any enum axis — NAMED, not proposed; review`,
+    `${where}: shape placement/rotation${arcVaries ? '/arc' : ''} differs across variants without correlating to any enum axis — NAMED, not proposed; review`,
   );
 }
 

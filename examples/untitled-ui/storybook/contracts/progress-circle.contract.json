@@ -144,39 +144,23 @@
               },
               "stylesWhen": [
                 {
-                  "prop": "size",
-                  "equals": "md",
+                  "prop": "shape",
+                  "equals": "circle",
                   "styles": {
                     "position": "absolute",
                     "left": "0px",
-                    "top": "0px"
+                    "top": "0px",
+                    "mask": "conic-gradient(from 359.86deg, #000 0deg 144.39deg, transparent 144.39deg 360deg)"
                   }
                 },
                 {
-                  "prop": "size",
-                  "equals": "lg",
+                  "prop": "shape",
+                  "equals": "halfCircle",
                   "styles": {
                     "position": "absolute",
                     "left": "0px",
-                    "top": "0px"
-                  }
-                },
-                {
-                  "prop": "size",
-                  "equals": "sm",
-                  "styles": {
-                    "position": "absolute",
-                    "left": "0px",
-                    "top": "0px"
-                  }
-                },
-                {
-                  "prop": "size",
-                  "equals": "xs",
-                  "styles": {
-                    "position": "absolute",
-                    "left": "0px",
-                    "top": "0px"
+                    "top": "0px",
+                    "mask": "conic-gradient(from 269.91deg, #000 0deg 143.81deg, transparent 143.81deg 360deg)"
                   }
                 }
               ],

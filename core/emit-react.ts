@@ -655,6 +655,9 @@ export function validateContract(
       if (part.shape.sides !== undefined && part.shape.kind !== 'polygon') {
         errors.push(`${contract.id}: part "${name}" shape kind "${part.shape.kind}" cannot declare sides — side count is polygon vocabulary`);
       }
+      if (part.shape.arc !== undefined && part.shape.kind !== 'ellipse') {
+        errors.push(`${contract.id}: part "${name}" shape kind "${part.shape.kind}" cannot declare arc — sweep is ellipse vocabulary`);
+      }
     }
     // v12 repeat (P9): the item template must be mechanically renderable on
     // every surface — a component-ref template, an arrayOf prop to map, and

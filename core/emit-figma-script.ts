@@ -112,8 +112,12 @@ export interface NodeSpec {
    *  Rectangle node — pointCount from sides, exact resize, NATIVE rotation
    *  (the contract's CSS-clockwise degrees negate into the Plugin API's
    *  counterclockwise degrees). Rotation here is already resolved per combo
-   *  (base shape.rotation, or the stylesWhen rotate for this combo). */
-  shape?: { kind: 'polygon' | 'ellipse' | 'rect'; sides?: number; width: number; height: number; rotation?: number };
+   *  (base shape.rotation, or the stylesWhen rotate for this combo).
+   *  A constant ellipse arc sweep (round 2 iteration 4) sets native arcData
+   *  — the same radians the dump captured. An AXIS-VARYING sweep rides
+   *  stylesWhen `mask` rules, which the canvas slice does not compile — the
+   *  documented canvas stylesWhen fidelity limit. */
+  shape?: { kind: 'polygon' | 'ellipse' | 'rect'; sides?: number; width: number; height: number; rotation?: number; arc?: { start: number; end: number; innerRadius: number } };
   /** v9 shape placement — compiled from the part's stylesWhen entries whose
    *  condition holds for this combo (the proposer's closed placement
    *  grammar: position:absolute + px/50% offsets + translate(-50%)). The
@@ -3331,7 +3335,7 @@ const svgPaintRuntime = (has: boolean): string =>
     }`
     : '';
 
-const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false): string =>
+const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLits = false, hasArc = false): string =>
   has
     ? ` else if (spec.type === 'shape') {
     // v9 shape (#42): a REAL parametric node with native rotation.
@@ -3340,7 +3344,12 @@ const shapeRuntime = (has: boolean, effects: string, alignExpr: string, shapeLit
       : figma.createPolygon();
     if (spec.shape.kind === 'polygon' && spec.shape.sides) node.pointCount = spec.shape.sides;
     node.resize(spec.shape.width, spec.shape.height);
-    // Shape nodes ship a default gray paint — a spec with NO fill channel
+${hasArc ? `    // Constant ellipse arc sweep (round 2 iteration 4): native arcData, the
+    // exact radians the dump captured (Figma ArcData semantics both ways).
+    if (spec.shape.kind === 'ellipse' && spec.shape.arc) {
+      node.arcData = { startingAngle: spec.shape.arc.start, endingAngle: spec.shape.arc.end, innerRadius: spec.shape.arc.innerRadius };
+    }
+` : ''}    // Shape nodes ship a default gray paint — a spec with NO fill channel
     // clears it (a canvas artifact is not contract data; Phase B deviation 3).
     // Round 5f (B5E finding 2): a shape's LITERAL fill (lits.fillColor — the
     // RadioButton checked dot's white, compiled from the decor's
@@ -3744,6 +3753,10 @@ function buildSyncScript(
 ): string {
   const hasOpacity = datas.some(dataHasOpacity);
   const hasShape = datas.some((d) => dataSome(d, (x) => x.shape !== undefined));
+  // Golden-guard conditional (round 2 iteration 4): the arc runtime lines are
+  // emitted ONLY when some spec carries shape.arc — arc-less corpora (all
+  // seven committed libraries) emit byte-identical scripts.
+  const hasArc = datas.some((d) => dataSome(d, (x) => x.shape !== undefined && (x.shape as { arc?: unknown }).arc !== undefined));
   const hasShadow = datas.some((d) => dataSome(d, (x) => x.dropShadow !== undefined));
   const hasLineHeight = datas.some((d) => dataSome(d, (x) => x.lineHeight !== undefined));
   const hasAbsolute = datas.some((d) => dataSome(d, (x) => x.absolute !== undefined));
@@ -4167,7 +4180,7 @@ async function buildNode(spec, registry) {
         registry.slots.push({ spec, wrapper: node, instance: instances[0].inst, defaultId: instances[0].main.id });
       }
     }
-  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits)} else {
+  }${shapeRuntime(hasShape, `${shadowRuntime(hasShadow)}${effectStackRuntime(hasEffectStack)}`, strokeAlignJs(hasStrokeOutside), hasShapeLits, hasArc)} else {
     node = spec.type === 'root' ? figma.createComponent() : figma.createFrame();
     applyFrameSpec(node, spec);
   }

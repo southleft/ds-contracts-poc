@@ -664,6 +664,28 @@
             },
             "rotation": {
               "type": "number"
+            },
+            "arc": {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "number"
+                },
+                "end": {
+                  "type": "number"
+                },
+                "innerRadius": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "start",
+                "end",
+                "innerRadius"
+              ],
+              "additionalProperties": false
             }
           },
           "required": [
