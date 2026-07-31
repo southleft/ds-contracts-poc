@@ -1777,6 +1777,35 @@ function matchTextStyle(ctx: TextCtx): string | undefined {
 const isEnum = (p: Prop): p is Prop & { type: { enum: string[] } } =>
   typeof p.type === 'object' && 'enum' in p.type;
 
+/** RETURN-LEG bool axes (boolean-axis-placeholder fix): a boolean prop whose
+ *  figma binding is kind VARIANT is a variant AXIS on the canvas — exactly
+ *  like an enum — and its `{prop}` minted-path placeholders substitute as the
+ *  two canonical value strings 'true'/'false' (the mint's own spelling:
+ *  imported.avatar.root.background-image.false.true). BOOLEAN-kind props keep
+ *  the component-property lowering byte-identically — measured: every
+ *  committed library binds its booleans as kind BOOLEAN (487/487); the 13
+ *  VARIANT-bound booleans all live in the Untitled UI proposal set. */
+const isVariantBool = (p: Prop): boolean =>
+  p.type === 'boolean' && p.bindings.figma.kind === 'VARIANT';
+
+/** The two bool-axis values, canonical spelling, contract default FIRST (the
+ *  same default-first invariant orderedValues gives enum axes). */
+const boolAxisValues = (p: Prop): string[] =>
+  p.default === true ? ['true', 'false'] : ['false', 'true'];
+
+/** A dependency whose variant axes multiply to ONE combo (every enum axis
+ *  single-valued, no VARIANT-bound booleans, no state previews) emits as a
+ *  STANDALONE component — combineAsVariants never runs, so its VARIANT
+ *  properties DO NOT EXIST on the emitted node (single-variant-dep-collapse).
+ *  Mirrors compileComponentData's isSet computation exactly. */
+const depEmitsStandalone = (dep: Contract): boolean => {
+  const combos = dep.props
+    .filter((p) => isEnum(p) || isVariantBool(p))
+    .reduce((n, p) => n * (isEnum(p) ? p.type.enum.length : 2), 1);
+  const hasPreviews = Boolean(dep.figmaStatePreviews) && dep.states.length > 0;
+  return combos === 1 && !hasPreviews;
+};
+
 // Icon assets (assets/icons/*.svg) — same source the code generator inlines.
 const iconAssets = input.icons;
 
@@ -1905,8 +1934,12 @@ function mapDepProps(
   props: Record<string, string | boolean | { prop: string; map: Record<string, string> }>,
   subst: Record<string, string>,
   text?: string,
+  /** Named-loss sink (single-variant-dep-collapse): the caller appends these
+   *  to the instance spec's channelMiss footnote — never a silent drop. */
+  ledger?: string[],
 ): Record<string, string | boolean> {
   const out: Record<string, string | boolean> = {};
+  const standalone = depEmitsStandalone(dep);
   for (const [propName, rawValue] of Object.entries(props)) {
     const depProp = dep.props.find((p) => p.name === propName);
     if (!depProp) continue;
@@ -1931,8 +1964,41 @@ function mapDepProps(
         value = resolved;
       }
     }
-    if (typeof value === 'boolean') out[depProp.bindings.figma.property!] = value;
-    else out[depProp.bindings.figma.property!] = depProp.bindings.figma.values?.[value] ?? value;
+    const fig = depProp.bindings.figma;
+    // single-variant-dep-collapse fix (parent side): a standalone dep exposes
+    // NO variant properties — a VARIANT binding whose value IS the dep's sole
+    // axis value is already guaranteed by the single-variant form (drop, the
+    // honest no-op); any OTHER value is unrenderable and refuses BY NAME at
+    // compile time instead of the runtime setInstanceProps throw.
+    if (fig.kind === 'VARIANT' && standalone) {
+      // A standalone dep exposes NO variant properties, so the binding cannot
+      // be wired either way. Two dispositions, and the difference matters:
+      //   · the bound value IS the dep's sole axis value — the single form
+      //     already renders exactly it, so dropping the wire is a no-op;
+      //   · any OTHER value is a real LOSS (the icon renders its only form,
+      //     not the requested one) — LEDGERED by name, never a hard refusal.
+      // It is a ledger and not a refusal because the parent still builds
+      // correctly in every other respect: aborting a whole component set over
+      // one unwireable nested property destroys working output and, measured,
+      // regressed the owner's own two-import session (cross-import-check's
+      // dialog + linked button, which compiled before this branch existed).
+      const canonical = typeof value === 'boolean' ? String(value) : value;
+      const sole =
+        isEnum(depProp) && depProp.type.enum.length === 1 ? depProp.type.enum[0] : undefined;
+      if (sole === undefined || canonical !== sole) {
+        ledger?.push(
+          `${dep.name} variant property "${fig.property}" bound to "${canonical}": not wired — the dependency emits standalone (single variant, no variant properties) and renders its only form${sole !== undefined ? ` ("${sole}")` : ''}`,
+        );
+      }
+      continue;
+    }
+    if (typeof value === 'boolean') {
+      // A VARIANT-bound boolean is an axis: the wired value is the axis's
+      // figma value name ('True'/'False'), the same spelling the dep's own
+      // variant names use. BOOLEAN-kind keeps the raw boolean byte-identically.
+      if (fig.kind === 'VARIANT') out[fig.property!] = fig.values?.[String(value)] ?? String(value);
+      else out[fig.property!] = value;
+    } else out[fig.property!] = fig.values?.[value] ?? value;
   }
   if (text !== undefined) {
     const textProp = dep.props.find((p) => p.type === 'text' && p.bindings.code.prop === 'children');
@@ -1948,6 +2014,11 @@ function applyVisibleWhen(spec: NodeSpec, part: Part, contract: Contract): void 
   if (!part.visibleWhen || part.visibleWhen.equals !== undefined) return;
   const prop = contract.props.find((p) => p.name === part.visibleWhen!.prop);
   if (!prop || prop.type !== 'boolean') return;
+  // A VARIANT-bound boolean is a variant axis: presence is compiled per combo
+  // in variantParts, and there is no BOOLEAN component property to bind (the
+  // old binding registered a key the runtime never mints — the visibles loop
+  // silently `continue`d and the node stayed visible in every variant).
+  if (prop.bindings.figma.kind === 'VARIANT') return;
   spec.visibleProp = prop.bindings.figma.property;
   spec.visibleDefault = prop.default === true;
 }
@@ -1972,7 +2043,9 @@ function applyStylesWhenOpacity(
     const applies =
       sw.equals !== undefined
         ? subst[sw.prop] === sw.equals
-        : contract.props.find((p) => p.name === sw.prop)?.default === true;
+        : subst[sw.prop] !== undefined
+          ? subst[sw.prop] === 'true' // VARIANT-bound bool: a compiled axis
+          : contract.props.find((p) => p.name === sw.prop)?.default === true;
     if (!applies) continue;
     const value = Number.parseFloat(raw);
     if (!Number.isNaN(value)) spec.opacity = value;
@@ -1996,7 +2069,9 @@ function shapePlacement(
     const applies =
       sw.equals !== undefined
         ? subst[sw.prop] === sw.equals
-        : contract.props.find((p) => p.name === sw.prop)?.default === true;
+        : subst[sw.prop] !== undefined
+          ? subst[sw.prop] === 'true' // VARIANT-bound bool: a compiled axis
+          : contract.props.find((p) => p.name === sw.prop)?.default === true;
     if (!applies) continue;
     const st = sw.styles;
     if (st['position'] !== 'absolute') {
@@ -2178,6 +2253,13 @@ function variantParts(
       const value = subst[vw.prop];
       const eqs = Array.isArray(vw.equals) ? vw.equals : [vw.equals];
       if (value !== undefined && !eqs.includes(value)) return false;
+    } else if (vw && subst[vw.prop] !== undefined && subst[vw.prop] !== 'true') {
+      // Boolean visibleWhen over a VARIANT-bound bool: the bool is a variant
+      // axis, so its value is in subst — the part exists only in the 'true'
+      // half of the grid, resolved at COMPILE time exactly like enum equals.
+      // BOOLEAN-kind props never enter subst and keep the runtime visibility
+      // binding (absent-bool no-op).
+      return false;
     }
     // v9: an enum-conditioned stylesWhen display:none that matches this
     // combo suppresses the part — the shape-placement spelling for axis
@@ -2367,12 +2449,14 @@ function partToSpecInner(
   }
   if (part.component) {
     const dep = byId.get(part.component.id)!; // resolvability guaranteed by refuseUnresolvableRefs
+    const depLedger: string[] = [];
     const spec: NodeSpec = {
       type: 'instance',
       name,
       dep: dep.name,
-      depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text),
+      depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger),
     };
+    for (const line of depLedger) (spec.channelMiss ??= []).push(line);
     // Round 2 iteration 9 — per-instance overrides (component.overrides):
     // natively a resize / image-fill / paint override on THIS instance, but
     // the canvas lowering is not carried this round — declared-not-drawn,
@@ -2695,16 +2779,21 @@ function annotateFillW(rootSpec: NodeSpec): void {
 
 function compileComponentData(contract: Contract, byId: Map<string, Contract>): ComponentData {
   refuseUnresolvableRefs(contract, byId);
-  const enums = contract.props.filter(isEnum);
+  // Variant axes = enum props AND VARIANT-bound boolean props, in prop
+  // declaration order (see isVariantBool). An enum-only contract's axis list
+  // is exactly the old enum filter — byte-identical substitution space.
+  const axisProps = contract.props.filter((p) => isEnum(p) || isVariantBool(p));
   const textProp = contract.props.find(
     (p) => p.type === 'text' && p.bindings.code.prop === 'children',
   );
+  // VARIANT-bound booleans are axes, not BOOLEAN component properties.
   const boolPropsData = contract.props
-    .filter((p) => p.type === 'boolean')
+    .filter((p) => p.type === 'boolean' && !isVariantBool(p))
     .map((p) => ({ property: p.bindings.figma.property!, default: p.default === true }));
   const label = typeof textProp?.default === 'string' ? textProp.default : contract.name;
 
-  const orderedValues = (p: { type: { enum: string[] }; default?: unknown }) => {
+  const orderedValues = (p: Prop): string[] => {
+    if (!isEnum(p)) return boolAxisValues(p); // bool axis: default first
     const values = [...p.type.enum];
     const i = p.default !== undefined ? values.indexOf(String(p.default)) : -1;
     if (i > 0) {
@@ -2718,15 +2807,17 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
   /** D5: viewport-pinned-scrim bounding notes (code-only facts, never silent). */
   const scrimNotes = new Set<string>();
   const variants: VariantSpec[] = [];
-  // N-axis variant support: EVERY enum prop becomes a variant axis, in prop
-  // declaration order, with each axis's DEFAULT value first (orderedValues).
+  // N-axis variant support: EVERY enum prop AND VARIANT-bound boolean prop
+  // becomes a variant axis, in prop declaration order, with each axis's
+  // DEFAULT value first (orderedValues; a bool axis's values are the two
+  // canonical strings 'true'/'false' — the mint's own minted-path spelling).
   // The cartesian product is enumerated with axis 0 slowest and the last
   // axis fastest, so the FIRST emitted variant is the all-defaults combo —
   // Figma's default variant is positional (first child), and the create +
   // amend paths both rely on that ordering invariant.
   // Grid mapping: rows = axis 0's values; columns = the ordered cartesian
   // product of axes 1..n (a 5×3×2 component renders 5 rows × 6 columns).
-  const axes = enums.map((p) => ({ prop: p, values: orderedValues(p) }));
+  const axes = axisProps.map((p) => ({ prop: p, values: orderedValues(p) }));
   let combos: number[][] = [[]];
   for (const axis of axes) {
     const next: number[][] = [];

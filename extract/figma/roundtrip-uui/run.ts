@@ -90,8 +90,13 @@ type LimitTag =
   | 'vector-glyph' // svg/vector internals — mock renders empty frames; instancePrimaryFill unreadable
   | 'url-image' // url()/IMAGE channels — emitter ledgers gradientMiss by design (EXPECTED)
   | 'text-style-identity' // named text styles need the semantic slot; a foreign tokenSet has none
-  | 'boolean-axis-placeholder' // {prop} minted paths over boolean props never substitute on the figma surface
-  | 'single-variant-dep-collapse' // a 1-variant dependency emits standalone, dropping bound properties
+  | 'boolean-axis-placeholder' // {prop} minted paths over boolean props never substitute on the figma surface (CLOSED: VARIANT-bound bools are axes now)
+  | 'single-variant-dep-collapse' // a 1-variant dependency emits standalone, dropping bound properties (CLOSED: parent drops/refuses at compile)
+  | 'cartesian-fill' // the emit enumerates the FULL axis cartesian; rows the canvas never drew are round-trip-only by construction
+  | 'dup-sibling-names' // the dump reuses ONE layer name for N siblings — their facts collapse to one key, so N-1 uniquely-named round-trip siblings have no dump-side counterpart
+  | 'hug-vs-fixed' // the canvas hugged (no comparable box fact), the emit lowered the captured measure to a FIXED/FILL axis — the mode disagreement is the finding
+  | 'declared-not-drawn' // a component property the contract declares that the drawn instance never carried
+  | 'mixed-stroke-weight' // per-side stroke weights spell 'mixed' in figma, so the dump omits the channel; a uniform RT weight has no dump-side counterpart
   | 'headless-measure'; // mock hug sizes are estimates — excluded, never compared
 
 interface Fact {
@@ -592,7 +597,10 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
   }
   for (const [k, fb] of b) {
     if (onlyB.has(fb.variant)) {
-      if (fb.channel === 'variant') out.invented.push({ ...fb, value: 'extra variant in round trip' });
+      // The emit enumerates the FULL axis cartesian (bool axes included);
+      // a curated canvas grid draws a subset — the extra rows are round-
+      // trip-only BY CONSTRUCTION, named, never silently matched.
+      if (fb.channel === 'variant') out.invented.push({ ...fb, value: 'extra variant in round trip', tag: 'cartesian-fill' });
       continue;
     }
     if (!a.has(k)) out.invented.push(fb);
@@ -609,21 +617,166 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
   out.loss = out.loss.filter((f) => !derivative(f));
   out.invented = out.invented.filter((f) => !derivative(f));
 
-  // RESTRUCTURED pairing: an "invented" fact whose (variant, channel, value)
-  // matches a "loss" fact at a path with the SAME LEAF segment is one node
-  // moved to a different nesting (a wrapper the proposal introduced/removed),
-  // not content invented from nothing — tag both, keep both visible.
+  // RESTRUCTURED pairing — tree alignment between the two nestings. A loss
+  // fact and an invented fact with the SAME (variant, channel, value) whose
+  // paths are RELATED are one node the proposal moved/renamed, not content
+  // invented from nothing — tag both, keep both visible. Related, in pass
+  // order (each pair RECORDS its path mapping for the mapped-prefix pass):
+  //   0. SAME LEAF at any nesting (the original rule — wrapper introduced or
+  //      removed around an unrenamed node);
+  //   1. SAME PARENT, related leaf — the proposer's rename spellings: digit
+  //      dedupe of a child sharing its parent's name (dump 'Left control/
+  //      Left control' → contract leftControl2) and parent-prefixed child
+  //      names (dump 'Tooltip' → contract rightControlTooltip, dump 'Text'
+  //      → contract textInputText);
+  //   2. ANCESTOR/DESCENDANT paths (a wrapper introduced around a node the
+  //      proposal ALSO renamed — AvatarCompanyIcon box ▸
+  //      AvatarCompanyIconInstance vs the dump's flat instance);
+  //   3. MAPPED PREFIX, to fixpoint: rewrite the invented path through the
+  //      longest already-paired ancestor and retry rule 2 relative to the
+  //      mapped location (children of a renamed wrapper).
   const leaf = (p: string): string => p.split('/').pop() ?? p;
+  const stripD = (s: string): string => s.replace(/\d+$/, '');
+  const leafRelated = (x: string, y: string): boolean =>
+    x === y || stripD(x) === stripD(y) || x.endsWith(y) || y.endsWith(x) || x.startsWith(y) || y.startsWith(x);
+  const parentOf = (p: string): string => (p.includes('/') ? p.slice(0, p.lastIndexOf('/')) : '');
+  const isAncestor = (shorter: string, longer: string): boolean =>
+    shorter !== longer && longer.startsWith(shorter === '' ? '' : shorter + '/');
+  const pathMap = new Map<string, string>(); // `${variant} ▸ ${invPath}` → lossPath
+  const pair = (inv: Fact, twin: Fact): void => {
+    inv.tag = 'restructured';
+    twin.tag = 'restructured';
+    if (!pathMap.has(`${inv.variant} ▸ ${inv.path}`)) pathMap.set(`${inv.variant} ▸ ${inv.path}`, twin.path);
+  };
   const lossByKey = new Map<string, Fact[]>();
   for (const f of out.loss) {
     const k = `${f.variant} ▸ ${leaf(f.path)} ▸ ${f.channel} ▸ ${f.value}`;
     (lossByKey.get(k) ?? lossByKey.set(k, []).get(k)!).push(f);
   }
+  const lossByCV = new Map<string, Fact[]>();
+  for (const f of out.loss) {
+    const k = `${f.variant} ▸ ${f.channel} ▸ ${f.value}`;
+    (lossByCV.get(k) ?? lossByCV.set(k, []).get(k)!).push(f);
+  }
+  // Pass 0 — same leaf (the original rule, kept first so prior pairings hold).
   for (const f of out.invented) {
+    if (f.tag !== undefined) continue;
     const twin = lossByKey.get(`${f.variant} ▸ ${leaf(f.path)} ▸ ${f.channel} ▸ ${f.value}`)?.find((t) => t.tag === undefined);
-    if (twin && f.tag === undefined) {
-      f.tag = 'restructured';
-      twin.tag = 'restructured';
+    if (twin) pair(f, twin);
+  }
+  // Pass 1 — same parent, related leaf (rename spellings).
+  for (const f of out.invented) {
+    if (f.tag !== undefined) continue;
+    const twin = lossByCV
+      .get(`${f.variant} ▸ ${f.channel} ▸ ${f.value}`)
+      ?.find((t) => t.tag === undefined && parentOf(t.path) === parentOf(f.path) && leafRelated(leaf(t.path), leaf(f.path)));
+    if (twin) pair(f, twin);
+  }
+  // Pass 2 — ancestor/descendant containment.
+  for (const f of out.invented) {
+    if (f.tag !== undefined) continue;
+    const twin = lossByCV
+      .get(`${f.variant} ▸ ${f.channel} ▸ ${f.value}`)
+      ?.find((t) => t.tag === undefined && (isAncestor(t.path, f.path) || isAncestor(f.path, t.path)));
+    if (twin) pair(f, twin);
+  }
+  // Pass 3 — mapped-prefix containment, to fixpoint.
+  let paired = true;
+  while (paired) {
+    paired = false;
+    for (const f of out.invented) {
+      if (f.tag !== undefined) continue;
+      const segs = f.path.split('/');
+      for (let i = segs.length; i >= 1; i--) {
+        const mapped = pathMap.get(`${f.variant} ▸ ${segs.slice(0, i).join('/')}`);
+        if (mapped === undefined) continue;
+        const rewritten = i === segs.length ? mapped : `${mapped}/${segs.slice(i).join('/')}`;
+        // Retry rules 1 and 2 RELATIVE to the mapped location: containment,
+        // or a rename (related leaf) among the mapped node's siblings.
+        const twin = lossByCV
+          .get(`${f.variant} ▸ ${f.channel} ▸ ${f.value}`)
+          ?.find(
+            (t) =>
+              t.tag === undefined &&
+              (t.path === rewritten ||
+                isAncestor(t.path, rewritten) ||
+                isAncestor(rewritten, t.path) ||
+                (parentOf(t.path) === parentOf(rewritten) && leafRelated(leaf(t.path), leaf(rewritten)))),
+          );
+        if (twin) {
+          pair(f, twin);
+          paired = true;
+        }
+        break; // longest mapped prefix only
+      }
+    }
+  }
+
+  // The MOVED NODE'S OTHER CHANNELS ride the same move: once a (variant,
+  // path) is restructure-paired, that node's remaining untagged facts at the
+  // SAME path are the same finding — the node moved, its channel inventory
+  // came with it (values still ledgered verbatim on both sides).
+  const movedInvPaths = new Set(out.invented.filter((f) => f.tag === 'restructured').map((f) => `${f.variant} ▸ ${f.path}`));
+  const movedLossPaths = new Set(out.loss.filter((f) => f.tag === 'restructured').map((f) => `${f.variant} ▸ ${f.path}`));
+  for (const f of out.invented) {
+    if (f.tag === undefined && movedInvPaths.has(`${f.variant} ▸ ${f.path}`)) f.tag = 'restructured';
+  }
+  for (const f of out.loss) {
+    if (f.tag === undefined && movedLossPaths.has(`${f.variant} ▸ ${f.path}`)) f.tag = 'restructured';
+  }
+
+  // DUP-SIBLING NAMES: the dump reuses one layer name for N siblings (avatar
+  // group draws eight 'Avatar' instances), so their facts collapse onto ONE
+  // key on the original side; the round trip names them uniquely ('avatar',
+  // 'avatar 2', …) and siblings 2..N have no dump-side key BY CONSTRUCTION.
+  // Condition: the invented leaf carries a digit suffix AND the original set
+  // has facts at the digit-stripped path in the SAME variant.
+  const origPaths = new Set(original.map((f) => `${f.variant} ▸ ${f.path}`));
+  const stripDigitsPath = (p: string): string => {
+    const segs = p.split('/');
+    segs[segs.length - 1] = stripD(segs[segs.length - 1]);
+    return segs.join('/');
+  };
+  for (const f of out.invented) {
+    if (f.tag !== undefined) continue;
+    const base = stripDigitsPath(f.path);
+    if (base !== f.path && origPaths.has(`${f.variant} ▸ ${base}`)) f.tag = 'dup-sibling-names';
+  }
+
+  // ONE-SIDED PROBE/SIZING channels at a node BOTH sides carry (the original
+  // has facts at the same variant+path). Named per channel family:
+  //   · hug-vs-fixed — width/height/fillWidth on the round trip only: the
+  //     canvas hugged (hug boxes carry no comparable box fact — the
+  //     headless-measure exclusion), the emit lowered the captured measure
+  //     to a FIXED/FILL axis. The mode disagreement is the finding; the
+  //     pixel compare is already excluded.
+  //   · vector-glyph — instanceInk on the round trip only: the dump's
+  //     primary-ink probe rode STROKE-type vector internals (already
+  //     ledgered vector-glyph as loss), so the RT clone's first-solid probe
+  //     finds different evidence, not new ink.
+  //   · declared-not-drawn — a prop:* the round trip exposes that the drawn
+  //     instance never carried: contract-declared API the canvas lacks.
+  //   · mixed-stroke-weight — strokeWeight on the round trip only while the
+  //     original DOES carry the stroke paint: figma spells per-side weights
+  //     as 'mixed' and the dump omits the channel, so a uniform RT weight
+  //     has no dump-side counterpart by construction.
+  const origChannels = new Map<string, Set<string>>();
+  for (const f of original) {
+    const k = `${f.variant} ▸ ${f.path}`;
+    (origChannels.get(k) ?? origChannels.set(k, new Set()).get(k)!).add(f.channel);
+  }
+  for (const f of out.invented) {
+    if (f.tag !== undefined) continue;
+    const chans = origChannels.get(`${f.variant} ▸ ${f.path}`);
+    if (!chans) continue; // node absent on the original side — a real structural invention, stays unclassified
+    if ((f.channel === 'width' || f.channel === 'height' || f.channel === 'fillWidth') && !chans.has(f.channel)) {
+      f.tag = 'hug-vs-fixed';
+    } else if (f.channel === 'instanceInk' && !chans.has('instanceInk')) {
+      f.tag = 'vector-glyph';
+    } else if (f.channel.startsWith('prop:') && !chans.has(f.channel)) {
+      f.tag = 'declared-not-drawn';
+    } else if (f.channel === 'strokeWeight' && !chans.has('strokeWeight') && chans.has('stroke')) {
+      f.tag = 'mixed-stroke-weight';
     }
   }
 
@@ -769,12 +922,21 @@ async function runComponent(name: string): Promise<ComponentResult> {
 
   const rtFacts = mockFacts(set);
 
-  // Canonical variant grid: an axis the round trip dropped (boolean props
-  // never become figma-surface variant axes) fills from the contract default
-  // on the RT side, so the default half of the original grid still compares;
-  // the non-default half ledgers as loss tagged boolean-axis-drop.
+  // Canonical variant grid: an axis one side does not spell fills from the
+  // contract default. Two default sources, in order:
+  //   · the CONTRACT's VARIANT-bound props (enum AND boolean — bool axes
+  //     emit since the boolean-axis fix, so a contract-backed axis is only
+  //     dropped when the emit surface loses it);
+  //   · an axis the dump draws that the contract does not carry AT ALL
+  //     (avatar-label-group's State rows — proposed away): the dump's own
+  //     default variant (Figma's default is positional-first), so the
+  //     default rows still compare and the non-default rows ledger by name.
   const contract = contractById.get(contractId)!;
-  const axisDefaults = axisDefaultsOf(contract);
+  const contractAxisDefaults = axisDefaultsOf(contract);
+  const axisDefaults = { ...contractAxisDefaults };
+  for (const [axis, value] of Object.entries(axesOf(setEntry.variants[0].name))) {
+    if (!(axis in axisDefaults)) axisDefaults[axis] = value;
+  }
   const origAxes = new Set(setEntry.variants.flatMap((v) => Object.keys(axesOf(v.name))));
   const rtVariantNames = set.type === 'COMPONENT_SET' ? (set.children ?? []).map((c) => c.name) : [set.name];
   const rtAxes = new Set(rtVariantNames.flatMap((n) => Object.keys(axesOf(n))));
@@ -783,7 +945,11 @@ async function runComponent(name: string): Promise<ComponentResult> {
 
   const missingVariantTag = (variant: string): LimitTag | undefined => {
     const axes = axesOf(variant);
-    if (droppedAxes.some((a) => axes[a] !== undefined && axes[a] !== (axisDefaults[a] ?? '?'))) {
+    if (
+      droppedAxes.some(
+        (a) => a in contractAxisDefaults && axes[a] !== undefined && axes[a] !== contractAxisDefaults[a],
+      )
+    ) {
       return 'boolean-axis-drop';
     }
     return variant.includes('State=') ? 'interaction-states' : undefined;
@@ -939,9 +1105,14 @@ async function main(): Promise<void> {
 
   lines.push('## Known-limit classes referenced above');
   lines.push('');
-  lines.push('- `boolean-axis-placeholder` — minted token paths carrying `{prop}` placeholders over **boolean** props never substitute on the figma emit surface (only enum props become variant axes / subst entries). Surfaces twice: compile-time "Cannot resolve token" refusals, and runtime "Missing variable: …/{prop}" throws when the channel defers resolution.');
-  lines.push('- `boolean-axis-drop` — the same boolean-props-are-not-axes rule at the GRID level: a canvas axis backed by a boolean prop (Pressed, Label) emits no figma variant axis, so the non-default half of the drawn grid has no round-trip counterpart.');
-  lines.push('- `single-variant-dep-collapse` — a dependency contract whose every enum axis has ONE value emits as a standalone component whose set exposes no variant properties, so a parent binding those properties refuses at instance wiring.');
+  lines.push('- `boolean-axis-placeholder` — CLOSED by the return-leg fix: VARIANT-bound boolean props are variant axes now, and their `{prop}` minted-path placeholders substitute as the canonical value strings the mint spells (`true`/`false`). The tag remains for any residual surface.');
+  lines.push('- `boolean-axis-drop` — CLOSED at the grid level by the same fix (a VARIANT-bound boolean prop emits a real figma axis). The tag remains for a contract-backed axis the emit surface still drops.');
+  lines.push('- `single-variant-dep-collapse` — CLOSED on the parent side: a dependency whose every variant axis is single-valued emits standalone (no variant properties), and the parent now DROPS a binding the single form already guarantees — or refuses BY NAME at compile time when the bound value is not the sole value.');
+  lines.push('- `cartesian-fill` — the emit enumerates the FULL axis cartesian (bool axes included); a curated canvas grid draws a subset, so the extra rows are round-trip-only BY CONSTRUCTION (e.g. the canvas treats Placeholder/Text as a 3-way exclusive content choice where the contract spells two independent booleans).');
+  lines.push('- `dup-sibling-names` — the dump reuses ONE layer name for N siblings (eight "Avatar" instances), so their facts collapse onto one (variant ▸ path ▸ channel) key on the original side; the round trip names them uniquely and siblings 2..N have no dump-side key by construction.');
+  lines.push('- `hug-vs-fixed` — a width/height/fillWidth fact the round trip carries at a node the canvas HUGGED: hug boxes carry no comparable box fact (the headless-measure exclusion), and the emit lowers the captured measure to a FIXED/FILL axis — the sizing-MODE disagreement is the named finding.');
+  lines.push('- `declared-not-drawn` — a component property the round-trip instance exposes that the drawn instance never carried: contract-declared API the canvas lacks.');
+  lines.push('- `mixed-stroke-weight` — figma spells per-side stroke weights as "mixed" and the dump omits the channel, so the round trip\'s uniform weight has no dump-side counterpart by construction (the stroke PAINT still compares).');
   lines.push('- `interaction-states` — State=… variant rows drawn on the canvas that the round trip renders differently (previews) or not at all (campaign ledger: interaction states).');
   lines.push('- `vector-glyph` — vector/svg internals (instancePrimaryFill probes, glyph geometry): the headless mock renders svg as empty frames; campaign ledger: vector glyphs / baked ink.');
   lines.push('- `url-image` — url()/IMAGE fills; the emitter ledgers them as gradientMiss BY DESIGN (expected).');
