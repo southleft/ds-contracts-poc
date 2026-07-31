@@ -170,9 +170,9 @@ ds-contracts figma claim-channel
 ds-contracts figma publish acme.bundle.json
 ```
 
-</details>
-
 **8. The designer opens the plugin's *Changes* tab and clicks "Check for updates".** They see what changed in plain words, tick the rows they want, and click **Apply selected**. Applying is in-place: same node ids, same component keys, so instances placed around the file keep their component-property overrides. New components land as new sets. A row whose set has been edited on canvas warns that applying would overwrite that edit, and starts unchecked.
+
+</details>
 
 ### Getting the plugin
 
