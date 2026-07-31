@@ -467,44 +467,6 @@
             "$value": "6px",
             "$type": "dimension"
           }
-        },
-        "background-color": {
-          "$value": "#22c55e",
-          "$type": "color"
-        },
-        "border-color": {
-          "$value": "#ffffff",
-          "$type": "color"
-        },
-        "border-width": {
-          "$value": "1.5px",
-          "$type": "dimension"
-        },
-        "border-radius": {
-          "xl": {
-            "$value": "7px",
-            "$type": "dimension"
-          },
-          "2xl": {
-            "$value": "8px",
-            "$type": "dimension"
-          },
-          "lg": {
-            "$value": "6px",
-            "$type": "dimension"
-          },
-          "md": {
-            "$value": "5px",
-            "$type": "dimension"
-          },
-          "sm": {
-            "$value": "4px",
-            "$type": "dimension"
-          },
-          "xs": {
-            "$value": "3px",
-            "$type": "dimension"
-          }
         }
       }
     },
@@ -793,10 +755,6 @@
         "height": {
           "$value": "16px",
           "$type": "dimension"
-        },
-        "background-color": {
-          "$value": "#0052b4",
-          "$type": "color"
         }
       }
     },
@@ -813,6 +771,10 @@
         "background-color": {
           "$value": "#9e77ed",
           "$type": "color"
+        },
+        "border-radius": {
+          "$value": "4px",
+          "$type": "dimension"
         }
       }
     },
@@ -2445,10 +2407,6 @@
         "height": {
           "$value": "16px",
           "$type": "dimension"
-        },
-        "background-color": {
-          "$value": "#ffffff",
-          "$type": "color"
         }
       }
     },
@@ -2774,22 +2732,6 @@
         },
         "height": {
           "$value": "24px",
-          "$type": "dimension"
-        },
-        "background-color": {
-          "$value": "#ffffff",
-          "$type": "color"
-        },
-        "border-color": {
-          "$value": "#e5e5e5",
-          "$type": "color"
-        },
-        "border-width": {
-          "$value": "1px",
-          "$type": "dimension"
-        },
-        "border-radius": {
-          "$value": "4px",
           "$type": "dimension"
         }
       }

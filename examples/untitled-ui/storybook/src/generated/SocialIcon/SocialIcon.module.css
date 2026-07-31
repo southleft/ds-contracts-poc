@@ -11,3 +11,10 @@
   width: var(--imported-stub-social-icon-root-width);
   height: var(--imported-stub-social-icon-root-height);
 }
+
+.glyph {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: var(--imported-stub-social-icon-root-width);
+  height: var(--imported-stub-social-icon-root-height);
+}

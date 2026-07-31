@@ -1,0 +1,154 @@
+{
+ "$note": "ITERATION 8 — SVG glyphs exported from the kit via node.exportAsync({format:\"SVG_STRING\"}) at 1x on each stub source MAIN component (dedup by instanceKey across the 15 dumped sets). Root width/height attrs rewritten to 100% (paths and viewBox verbatim); the consuming stub contract sizes the glyph (minted box, else icon.size = natural). keyToAsset maps every observed nested-instance instanceKey to its exported asset — the propose-side iconAssets input (uui-pipeline.mts). Fills/strokes are BAKED at the source component; per-usage ink divergence stays a named note on the stub. Assets marked `refused` are committed export receipts only (measured against the references); `circleFill` marks a pure-circle-fill export consumed as a geometry witness, not rendered.",
+ "assets": {
+  "avatar-online-indicator": {
+   "sourceComponent": "_Avatar online indicator / Size=xl, Online=True",
+   "sourceKey": "c942f7f478753a0cf29c9bc742289c4a62b98d6a",
+   "naturalWidth": 17,
+   "naturalHeight": 17
+  },
+  "user": {
+   "sourceComponent": "user",
+   "sourceKey": "016b9a0e17faa7a8abf87a5f4e6a7433e48f4e21",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "dot": {
+   "sourceComponent": "_Dot / Size=sm",
+   "sourceKey": "e6bf800f3052d9ece685019b0861853824cbec65",
+   "naturalWidth": 8,
+   "naturalHeight": 8,
+   "circleFill": true
+  },
+  "au": {
+   "sourceComponent": "AU",
+   "sourceKey": "aa4f53734b5cad53a9423957927b459f11380ce7",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "x": {
+   "sourceComponent": "x",
+   "sourceKey": "3fc2f4d17e8cf8cbc820d266fa5fd3107e053b6b",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "arrow-right": {
+   "sourceComponent": "arrow-right",
+   "sourceKey": "cf1e885a752ba2c2e8819c9fa7911521e78d3f9d",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "arrow-up": {
+   "sourceComponent": "arrow-up",
+   "sourceKey": "3161d20ca29bb3bc11483c375e8a288e9fb5bde6",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "plus": {
+   "sourceComponent": "plus",
+   "sourceKey": "8381d8d8585e77a47999ef1dd020f455348c50fb",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "circle": {
+   "sourceComponent": "circle",
+   "sourceKey": "93f75d07a9d9a81e23af6cda238f8f520c35eb5a",
+   "naturalWidth": 24,
+   "naturalHeight": 24,
+   "refused": "baked ink is the source main's #171717 ring, but the references draw the usage ink (Button: WHITE ring on brand purple — var--button-base--*_icon_leading.png) and the existing dump v1.7 ellipse/src ring-witness already renders the observed white ring at the drawn radius; carrying the export would displace correct ink. Ring-witness stands; per-usage ink divergence remains the ledgered _Dot-class note."
+  },
+  "checkbox": {
+   "sourceComponent": "Checkbox / Checked=False, Indeterminate=False, Size=sm, Type=Checkbox, Text=False, Supporting text=False, State=Default",
+   "sourceKey": "731a8ebce58dd463bc6c4db8028225399c114768",
+   "naturalWidth": 16,
+   "naturalHeight": 16
+  },
+  "mail": {
+   "sourceComponent": "mail",
+   "sourceKey": "cdf996719dc8f1975b273296faae58b48adf361e",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "payment-method-icon": {
+   "sourceComponent": "Payment method icon / Size=sm, Payment method=Mastercard",
+   "sourceKey": "6b6b0756931df371a16a632a396b33e91c3f5a9f",
+   "naturalWidth": 34,
+   "naturalHeight": 24
+  },
+  "chevron-down": {
+   "sourceComponent": "chevron-down",
+   "sourceKey": "31fcdcdbaa80e756f8a9d75d632affc6a8e580bc",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "facebook": {
+   "sourceComponent": "Social icon / Platform=Facebook, State=Default, Style=White",
+   "sourceKey": "9a15113ed0dc5f6c5d6cba5ba1a866a5b7c76361",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "google": {
+   "sourceComponent": "Social icon / Platform=Google, State=Default, Style=Brand",
+   "sourceKey": "137015d1769259b4c5d67589725ef2f59e1b6e13",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "apple": {
+   "sourceComponent": "Social icon / Platform=Apple, State=Default, Style=White",
+   "sourceKey": "a346cbff58faa513f62a94b551d201a9077cd186",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "figma": {
+   "sourceComponent": "Social icon / Platform=Figma, State=Default, Style=Brand",
+   "sourceKey": "5b7490eb2e6e71a5f8067d403db6f7c03e9d1fbd",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "dribbble": {
+   "sourceComponent": "Social icon / Platform=Dribbble, State=Default, Style=White",
+   "sourceKey": "0a6959958c8cab126f996e169359db27dbd22a98",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  },
+  "xtwitter": {
+   "sourceComponent": "Social icon / Platform=X (Twitter), State=Default, Style=White",
+   "sourceKey": "e03dd4da442056776d4ed04f17c3af284bf27ba3",
+   "naturalWidth": 24,
+   "naturalHeight": 24
+  }
+ },
+ "keyToAsset": {
+  "c942f7f478753a0cf29c9bc742289c4a62b98d6a": "avatar-online-indicator",
+  "d1d8724468f5df665207469af40975cbbb420941": "avatar-online-indicator",
+  "5ccdce38ecb0c613cb9a7ce3a36b835bf0500e35": "avatar-online-indicator",
+  "f28ce9756a1a623d06962e6673c261455ce3768f": "avatar-online-indicator",
+  "224c979e1d6d6a5766f929c85526480b33acbd0e": "avatar-online-indicator",
+  "74f9ac492d160de300065bf8a855e29505fcd3e2": "avatar-online-indicator",
+  "016b9a0e17faa7a8abf87a5f4e6a7433e48f4e21": "user",
+  "e6bf800f3052d9ece685019b0861853824cbec65": "dot",
+  "f63657eb879d5cefbb9e4d0ccc5f31660c9e0157": "dot",
+  "aa4f53734b5cad53a9423957927b459f11380ce7": "au",
+  "3fc2f4d17e8cf8cbc820d266fa5fd3107e053b6b": "x",
+  "cf1e885a752ba2c2e8819c9fa7911521e78d3f9d": "arrow-right",
+  "3161d20ca29bb3bc11483c375e8a288e9fb5bde6": "arrow-up",
+  "8381d8d8585e77a47999ef1dd020f455348c50fb": "plus",
+  "731a8ebce58dd463bc6c4db8028225399c114768": "checkbox",
+  "a9fbcd347467419dd6d492ca90477103b4df1f1a": "checkbox",
+  "05b93cf56f87c31506fdb18d02299f66e9d1a926": "checkbox",
+  "6b2e7107c5a2dae129904b809a440d17589ca5e0": "checkbox",
+  "cdf996719dc8f1975b273296faae58b48adf361e": "mail",
+  "6b6b0756931df371a16a632a396b33e91c3f5a9f": "payment-method-icon",
+  "31fcdcdbaa80e756f8a9d75d632affc6a8e580bc": "chevron-down",
+  "9a15113ed0dc5f6c5d6cba5ba1a866a5b7c76361": "facebook",
+  "1ad78bb68675c35c0b2d050a1b2678ddf0eb3861": "facebook",
+  "137015d1769259b4c5d67589725ef2f59e1b6e13": "google",
+  "a346cbff58faa513f62a94b551d201a9077cd186": "apple",
+  "9c06b54f5526e58f47125f51bf205dd8d45bf115": "apple",
+  "5b7490eb2e6e71a5f8067d403db6f7c03e9d1fbd": "figma",
+  "0a6959958c8cab126f996e169359db27dbd22a98": "dribbble",
+  "377ee9afa68393fc60ee48d142766bea3dd61d7c": "dribbble",
+  "e03dd4da442056776d4ed04f17c3af284bf27ba3": "xtwitter",
+  "ef452372e47a35349993c2bdcf99c8a9179e205c": "xtwitter"
+ }
+}

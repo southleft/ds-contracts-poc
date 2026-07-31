@@ -4,7 +4,7 @@
   "name": "AvatarOnlineIndicator",
   "version": "0.1.0",
   "status": "draft",
-  "description": "STUB contract auto-proposed for the nested \"_Avatar online indicator\" instances of Avatar — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "description": "STUB contract auto-proposed for the nested \"_Avatar online indicator\" instances of Avatar — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry; the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints. Import the child set to replace this stub.",
   "semantics": {
     "element": "span"
   },
@@ -65,14 +65,20 @@
   "states": [],
   "anatomy": {
     "root": {
-      "parts": {},
+      "parts": {
+        "glyph": {
+          "icon": {
+            "asset": "avatar-online-indicator"
+          },
+          "tokens": {
+            "width": "{imported.stub-avatar-online-indicator.root.width.{size}}",
+            "height": "{imported.stub-avatar-online-indicator.root.height.{size}}"
+          }
+        }
+      },
       "tokens": {
         "width": "{imported.stub-avatar-online-indicator.root.width.{size}}",
-        "height": "{imported.stub-avatar-online-indicator.root.height.{size}}",
-        "background-color": "{imported.stub-avatar-online-indicator.root.background-color}",
-        "border-color": "{imported.stub-avatar-online-indicator.root.border-color}",
-        "border-width": "{imported.stub-avatar-online-indicator.root.border-width}",
-        "border-radius": "{imported.stub-avatar-online-indicator.root.border-radius.{size}}"
+        "height": "{imported.stub-avatar-online-indicator.root.height.{size}}"
       }
     }
   },

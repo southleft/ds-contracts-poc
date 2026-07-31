@@ -7,44 +7,88 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-style: solid;
-  background-color: var(--imported-stub-avatar-online-indicator-root-background-color);
-  border-color: var(--imported-stub-avatar-online-indicator-root-border-color);
-  border-width: var(--imported-stub-avatar-online-indicator-root-border-width);
+  border: 0;
 }
 
 .size-xl {
   width: var(--imported-stub-avatar-online-indicator-root-width-xl);
   height: var(--imported-stub-avatar-online-indicator-root-height-xl);
-  border-radius: var(--imported-stub-avatar-online-indicator-root-border-radius-xl);
 }
 
 .size-2xl {
   width: var(--imported-stub-avatar-online-indicator-root-width-2xl);
   height: var(--imported-stub-avatar-online-indicator-root-height-2xl);
-  border-radius: var(--imported-stub-avatar-online-indicator-root-border-radius-2xl);
 }
 
 .size-lg {
   width: var(--imported-stub-avatar-online-indicator-root-width-lg);
   height: var(--imported-stub-avatar-online-indicator-root-height-lg);
-  border-radius: var(--imported-stub-avatar-online-indicator-root-border-radius-lg);
 }
 
 .size-md {
   width: var(--imported-stub-avatar-online-indicator-root-width-md);
   height: var(--imported-stub-avatar-online-indicator-root-height-md);
-  border-radius: var(--imported-stub-avatar-online-indicator-root-border-radius-md);
 }
 
 .size-sm {
   width: var(--imported-stub-avatar-online-indicator-root-width-sm);
   height: var(--imported-stub-avatar-online-indicator-root-height-sm);
-  border-radius: var(--imported-stub-avatar-online-indicator-root-border-radius-sm);
 }
 
 .size-xs {
   width: var(--imported-stub-avatar-online-indicator-root-width-xs);
   height: var(--imported-stub-avatar-online-indicator-root-height-xs);
-  border-radius: var(--imported-stub-avatar-online-indicator-root-border-radius-xs);
+}
+
+.glyph {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.size-xl .glyph {
+  width: var(--imported-stub-avatar-online-indicator-root-width-xl);
+}
+
+.size-2xl .glyph {
+  width: var(--imported-stub-avatar-online-indicator-root-width-2xl);
+}
+
+.size-lg .glyph {
+  width: var(--imported-stub-avatar-online-indicator-root-width-lg);
+}
+
+.size-md .glyph {
+  width: var(--imported-stub-avatar-online-indicator-root-width-md);
+}
+
+.size-sm .glyph {
+  width: var(--imported-stub-avatar-online-indicator-root-width-sm);
+}
+
+.size-xs .glyph {
+  width: var(--imported-stub-avatar-online-indicator-root-width-xs);
+}
+
+.size-xl .glyph {
+  height: var(--imported-stub-avatar-online-indicator-root-height-xl);
+}
+
+.size-2xl .glyph {
+  height: var(--imported-stub-avatar-online-indicator-root-height-2xl);
+}
+
+.size-lg .glyph {
+  height: var(--imported-stub-avatar-online-indicator-root-height-lg);
+}
+
+.size-md .glyph {
+  height: var(--imported-stub-avatar-online-indicator-root-height-md);
+}
+
+.size-sm .glyph {
+  height: var(--imported-stub-avatar-online-indicator-root-height-sm);
+}
+
+.size-xs .glyph {
+  height: var(--imported-stub-avatar-online-indicator-root-height-xs);
 }

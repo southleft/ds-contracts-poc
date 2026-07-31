@@ -976,6 +976,9 @@ interface Ctx {
    *  variant's ref still resolves here, so the paint survives as per-variant
    *  minted literals instead of dropping entirely. */
   capturedValues?: Map<string, string>;
+  /** instanceKey → exported stub-glyph asset (iteration 8) — see the
+   *  proposeFromDump option of the same name. */
+  iconAssets?: ReadonlyMap<string, StubIconAsset>;
   prefix: string;
   /** The contract id THIS proposal claims — the name-derived slug, suffixed
    *  past session-claimed holders whose componentSetKey CONTRADICTS this
@@ -1012,6 +1015,20 @@ interface Ctx {
   mint?: MintCapture;
 }
 
+/** ITERATION 8 — one exported stub-glyph asset (see proposeFromDump's
+ *  `iconAssets` option). `circleFill` marks an export whose entire drawn ink
+ *  is ONE filled circle — a geometry WITNESS consumed by the solid-fill stub
+ *  path (border-radius derives from the observed box) instead of displacing
+ *  the OBSERVED per-usage ink with the export's baked color (field case:
+ *  _Dot — the kit's main bakes #22C55E, but Badge draws it #9e77ed and the
+ *  references agree with the observation, not the main). */
+export interface StubIconAsset {
+  asset: string;
+  naturalWidth: number;
+  naturalHeight: number;
+  circleFill?: boolean;
+}
+
 /** Captured evidence for one auto-proposed child contract stub. */
 interface StubCapture {
   id: string;
@@ -1028,6 +1045,10 @@ interface StubCapture {
   observed: Array<{
     variant: string;
     applied?: Record<string, string | boolean>;
+    /** The occurrence's main-component publish key (dump v1.5) — the icon-
+     *  asset manifest (iteration 8) is keyed by it, so a stub whose source
+     *  glyph was SVG-exported can carry the real vector ink. */
+    instanceKey?: string;
     bbox?: { width: number; height: number };
     fill?: DumpPaint;
     /** dump v1.7: first visible SOLID inside the instance's subtree — the
@@ -2952,6 +2973,7 @@ function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): st
       capture.observed.push({
         variant: o.variant,
         ...(o.node.componentProperties ? { applied: o.node.componentProperties } : {}),
+        ...(o.node.instanceKey ? { instanceKey: o.node.instanceKey } : {}),
         bbox: o.node.bbox,
         ...(o.node.fill ? { fill: o.node.fill } : {}),
         ...(o.node.instancePrimaryFill ? { instancePrimaryFill: o.node.instancePrimaryFill } : {}),
@@ -4185,8 +4207,14 @@ function stubGeometry(
   capture: StubCapture,
   props: Array<Record<string, unknown>>,
   ctx: Ctx,
+  iconRes: StubIconResolution | null = null,
 ): { tokens: Record<string, string>; tree: Record<string, unknown>; count: number; entries: MintedEntry[] } | null {
   if (!ctx.mint) return null;
+  // ITERATION 8 — when the stub carries its exported glyph (fixed/byProp),
+  // the SVG bakes the drawn ink: every witness-paint channel (solid fill,
+  // ring gradient, border, radius) would double-draw under it, so only the
+  // observed BOX mints. The suppression is named by the caller's glyph note.
+  const glyphCarried = iconRes !== null && iconRes.kind !== 'circleFill';
   const geo = capture.observed.filter((o) => o.bbox !== undefined);
   if (geo.length === 0) return null;
   const enumProps = props.filter(
@@ -4212,9 +4240,10 @@ function stubGeometry(
   // values but not others is not a function of the axes and cannot mint.
   // (Sizes are unaffected either way: border-box, bbox verbatim.)
   const strokesCarriable =
+    !glyphCarried &&
     geo.every((o) => o.stroke?.hex !== undefined && typeof o.strokeWeight === 'number') &&
     new Set(geo.map((o) => o.strokeWeight)).size === 1;
-  if (!strokesCarriable && geo.some((o) => o.stroke !== undefined)) {
+  if (!glyphCarried && !strokesCarriable && geo.some((o) => o.stroke !== undefined)) {
     ctx.notes.push(
       `stub ${capture.id}: stroke drawn on ${geo.filter((o) => o.stroke).length}/${geo.length} observed occurrence(s) (or var-bound/non-uniform) — border not carried on the stub geometry (presence is not a function of the stub's axes), review`,
     );
@@ -4247,7 +4276,8 @@ function stubGeometry(
     o.fill ?? o.instancePrimaryFill;
   const isStrokeObserved = (o: StubCapture['observed'][number]): boolean =>
     o.fill === undefined && o.instancePrimaryFill?.stroke === true;
-  const fills = geo.filter((o) => paintOf(o) !== undefined);
+  // ITERATION 8 — glyph-carried stubs mint no paint channels (see above).
+  const fills = glyphCarried ? [] : geo.filter((o) => paintOf(o) !== undefined);
   const strokeObserved = fills.filter(isStrokeObserved);
   let backgroundVarRef: string | null = null;
   if (strokeObserved.length > 0 && strokeObserved.length < fills.length) {
@@ -4353,14 +4383,30 @@ function stubGeometry(
     push('border-color', 'color', (o) => (o.stroke ? paintCssHex(o.stroke) : '#00000000'));
     push('border-width', 'px', (o) => (o.stroke ? o.strokeWeight! : 0));
   }
-  if (geo.some((o) => (o.cornerRadius ?? 0) !== 0)) {
+  if (!glyphCarried && geo.some((o) => (o.cornerRadius ?? 0) !== 0)) {
     push('border-radius', 'px', (o) => o.cornerRadius ?? 0);
+  }
+  // ITERATION 8 — circle-fill glyph WITNESS (StubIconAsset.circleFill): the
+  // exported SVG's entire drawn ink is one filled circle, so the observed
+  // solid-fill path keeps the per-usage ink (the export's baked color
+  // contradicts the observations — field case _Dot) and the box renders
+  // ROUND: the witnessed radius is half the observed square box. Derived
+  // from the export's own geometry, nothing guessed.
+  if (
+    iconRes?.kind === 'circleFill' &&
+    geo.every((o) => Math.abs(o.bbox!.width - o.bbox!.height) < 0.5) &&
+    !geo.some((o) => (o.cornerRadius ?? 0) !== 0)
+  ) {
+    push('border-radius', 'px', (o) => Math.round((o.bbox!.width / 2) * 100) / 100);
+    ctx.notes.push(
+      `stub ${capture.id}: exported glyph is a PURE CIRCLE FILL (iteration 8 witness) — the observed solid-fill path stays (the export bakes its source component's ink, which the observed per-usage paints contradict) and the circular border-radius derives from the observed box (width/2); the baked SVG is committed as the export receipt, not rendered`,
+    );
   }
   // dump v1.7 `imageFill` on the stub instance — the exported asset (dump
   // v1.9 hash) or the neutral placeholder gradient (boolean marker) renders
   // where the image is drawn ('none' elsewhere); no-op when the field is
   // absent (older dumps).
-  if (geo.some((o) => o.imageFill !== undefined)) {
+  if (!glyphCarried && geo.some((o) => o.imageFill !== undefined)) {
     push('background-image', 'gradient', (o) => imageFillCss(o.imageFill), 'none');
     ctx.notes.push(
       geo.some((o) => typeof o.imageFill === 'string')
@@ -4380,6 +4426,78 @@ function stubGeometry(
   if (backgroundVarRef !== null) tokens['background-color'] = backgroundVarRef;
   if (Object.keys(tokens).length === 0) return null;
   return { tokens, tree: minted.tree, count: minted.count, entries: minted.entries };
+}
+
+/** ITERATION 8 — how a stub renders its exported glyph (or why not). */
+type StubIconResolution =
+  | { kind: 'fixed'; asset: string; natural: { width: number; height: number } }
+  | { kind: 'byProp'; prop: string; natural: { width: number; height: number } }
+  | { kind: 'circleFill' };
+
+/** ITERATION 8 — resolve a stub's exported glyph asset(s) against the
+ *  iconAssets manifest (instanceKey → asset). Carried ONLY when the evidence
+ *  is total and the choice is prop-determined:
+ *    · every observed occurrence maps (partial coverage is a named refusal);
+ *    · one distinct asset → a fixed icon part;
+ *    · several assets → carried only when the choice tracks exactly ONE of
+ *      the stub's own variant axes and every asset is named exactly the
+ *      axis's canonical value — the repo's `{prop}` enum-expansion icon
+ *      convention (contracts/banner.contract.json statusIcon), so the
+ *      emitters key ICONS by the live prop value;
+ *    · a manifest entry flagged `circleFill` is a geometry WITNESS, not a
+ *      carriage — the caller keeps the observed solid-fill path and derives
+ *      the circular radius (the baked export ink contradicts the observed
+ *      per-usage paints; see StubIconAsset). */
+function resolveStubIcon(
+  capture: StubCapture,
+  props: Array<Record<string, unknown>>,
+  ctx: Ctx,
+): StubIconResolution | null {
+  if (!ctx.iconAssets || capture.observed.length === 0) return null;
+  const entries: StubIconAsset[] = [];
+  let mapped = 0;
+  for (const o of capture.observed) {
+    const e = o.instanceKey !== undefined ? ctx.iconAssets.get(o.instanceKey) : undefined;
+    if (e) mapped++;
+    entries.push(e as StubIconAsset);
+  }
+  if (mapped === 0) return null;
+  if (mapped < capture.observed.length) {
+    ctx.notes.push(
+      `stub ${capture.id}: exported glyph assets cover ${mapped}/${capture.observed.length} observed occurrence(s) — glyph not carried (partial evidence), witness geometry stands; review`,
+    );
+    return null;
+  }
+  if (entries.every((e) => e.circleFill === true)) return { kind: 'circleFill' };
+  const natural = { width: entries[0].naturalWidth, height: entries[0].naturalHeight };
+  const distinct = [...new Set(entries.map((e) => e.asset))];
+  if (distinct.length === 1) return { kind: 'fixed', asset: distinct[0], natural };
+  const enumProps = props.filter(
+    (p): p is Record<string, unknown> & { name: string; type: { enum: string[] }; bindings: { figma: { property: string } } } =>
+      typeof p.type === 'object' && p.type !== null && 'enum' in (p.type as object),
+  );
+  const candidates: string[] = [];
+  for (const p of enumProps) {
+    const property = p.bindings.figma.property;
+    let ok = true;
+    for (let i = 0; i < capture.observed.length; i++) {
+      const applied = capture.observed[i].applied ?? {};
+      let value: string | undefined;
+      for (const [key, v] of Object.entries(applied)) {
+        if (key.split('#')[0] === property && typeof v === 'string') value = camel(v);
+      }
+      if (value === undefined || value !== entries[i].asset) {
+        ok = false;
+        break;
+      }
+    }
+    if (ok) candidates.push(String(p.name));
+  }
+  if (candidates.length === 1) return { kind: 'byProp', prop: candidates[0], natural };
+  ctx.notes.push(
+    `stub ${capture.id}: ${distinct.length} exported glyph assets across occurrences but the choice is not a function of exactly one variant axis with value-named assets${candidates.length > 1 ? ` (ambiguous axes: ${candidates.join(', ')})` : ''} — glyph not carried, witness geometry stands; review`,
+  );
+  return null;
 }
 
 function buildChildStub(
@@ -4433,10 +4551,13 @@ function buildChildStub(
     }
   }
   const name = pascalComponentName(capture.instanceOf);
+  // ITERATION 8 — exported stub glyph (SVG) resolution; null keeps the
+  // classic witness-geometry behavior byte-identical.
+  const iconRes = resolveStubIcon(capture, props, ctx);
   // dump v1.5: stub geometry — the observed box binds the root's tokens to
   // minted provisional leaves; a text prop observed on the instances renders
   // as the box's content (the drawn label is real observed content).
-  const geometry = stubGeometry(capture, props, ctx);
+  const geometry = stubGeometry(capture, props, ctx, iconRes);
   const root: Record<string, unknown> = {};
   // Every stub renders its OBSERVED truth and nothing else: a captured TEXT
   // prop becomes the box's content (the drawn label is real observed
@@ -4449,6 +4570,33 @@ function buildChildStub(
   root.parts = textProp
     ? { [String(textProp.name)]: { content: { prop: String(textProp.name) } } }
     : {};
+  // ITERATION 8 — the stub renders its EXPORTED VECTOR GLYPH: an icon part
+  // per the repo's existing convention (assets/icons/<asset>.svg inlined by
+  // the emitters; `{prop}` = enum expansion). With a minted box the glyph
+  // part binds the SAME minted width/height refs as the root, and the
+  // exported svg's root width/height attrs were rewritten to 100% at export
+  // time (paths and viewBox verbatim) — the glyph fills the observed box,
+  // per-variant refs included. Without a minted box it draws at the
+  // export's own 1x size (icon.size). Ink is BAKED at the source
+  // component — per-usage ink divergence stays a named note.
+  if (iconRes && iconRes.kind !== 'circleFill') {
+    const hasBox = geometry !== null && geometry.tokens.width !== undefined && geometry.tokens.height !== undefined;
+    const icon: Record<string, unknown> = {
+      asset: iconRes.kind === 'byProp' ? `{${iconRes.prop}}` : iconRes.asset,
+      ...(hasBox ? {} : { size: iconRes.natural.width }),
+    };
+    (root.parts as Record<string, unknown>).glyph = {
+      icon,
+      ...(hasBox ? { tokens: { width: geometry!.tokens.width, height: geometry!.tokens.height } } : {}),
+    };
+    ctx.notes.push(
+      `stub ${capture.id}: renders the EXPORTED VECTOR GLYPH (iteration 8 — SVG exported at 1x from the stub source's main component, assets/icons/${
+        iconRes.kind === 'byProp' ? `<${iconRes.prop}>` : iconRes.asset
+      }.svg${iconRes.kind === 'byProp' ? `, selected by the stub's "${iconRes.prop}" prop via the {prop} enum-expansion convention` : ''}) ${
+        hasBox ? 'scaled to the minted observed box' : `at the export's own ${iconRes.natural.width}×${iconRes.natural.height}px (no minted box)`
+      }; witness paint channels are NOT minted (the svg bakes the drawn ink) and per-usage ink divergence, if any, stays with the export's baked colors — import the real child set to replace the stub`,
+    );
+  }
   if (geometry) {
     root.tokens = geometry.tokens;
     // dump v1.9: a hash-form image fill on the stub renders the exported
@@ -4468,7 +4616,7 @@ function buildChildStub(
       name,
       version: '0.1.0',
       status: 'draft',
-      description: `STUB contract auto-proposed for the nested "${capture.instanceOf}" instances of ${ctx.setName} — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries)${geometry ? '; the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry' : ''}. Import the child set to replace this stub.`,
+      description: `STUB contract auto-proposed for the nested "${capture.instanceOf}" instances of ${ctx.setName} — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries)${geometry ? '; the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry' : ''}${iconRes && iconRes.kind !== 'circleFill' ? "; the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints" : ''}. Import the child set to replace this stub.`,
       semantics: { element: 'span' },
       props,
       states: [],
@@ -4980,6 +5128,13 @@ export function proposeFromDump(
      *  per-variant minted literals (live-gauntlet class ①) instead of
      *  dropping the channel. Absent → the classic drift note stands. */
     capturedValues?: Map<string, string>;
+    /** ITERATION 8 — stub glyph carriage: instanceKey → exported SVG asset
+     *  (assets/icons/<asset>.svg, exported at 1x from the stub source's MAIN
+     *  component; the caller loads the export manifest). When every observed
+     *  occurrence of a stub maps here, the stub's root carries an icon part
+     *  rendering the REAL vector glyph instead of witness geometry. Absent →
+     *  the classic geometry-stub behavior, byte-identical. */
+    iconAssets?: ReadonlyMap<string, StubIconAsset>;
     /** Contract ids claimed by THIS session's earlier imports — real
      *  contracts AND their child stubs (live-gauntlet class ③). When the
      *  name-derived self id lands on one of these whose componentSetKey
@@ -5089,6 +5244,7 @@ export function proposeFromDump(
     boolDefaults: set.boolDefaults,
     hiddenCaptured: opts.hiddenCaptured,
     capturedValues: opts.capturedValues,
+    iconAssets: opts.iconAssets,
     prefix,
     selfId,
     notes: [],

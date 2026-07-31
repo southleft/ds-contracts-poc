@@ -9,3 +9,13 @@
   justify-content: center;
   border: 0;
 }
+
+.glyph svg {
+  width: 24px;
+  height: 24px;
+}
+
+.glyph {
+  display: inline-flex;
+  flex-shrink: 0;
+}

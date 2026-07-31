@@ -11,3 +11,10 @@
   width: var(--imported-stub-chevron-down-root-width);
   height: var(--imported-stub-chevron-down-root-height);
 }
+
+.glyph {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: var(--imported-stub-chevron-down-root-width);
+  height: var(--imported-stub-chevron-down-root-height);
+}

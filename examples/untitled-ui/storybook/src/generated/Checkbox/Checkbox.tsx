@@ -7,6 +7,11 @@ import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './Checkbox.module.css';
 
+const ICONS: Record<string, string> = {
+  checkbox:
+    '<svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">\n<rect x="0.5" y="0.5" width="15" height="15" rx="3.5" fill="white"/>\n<rect x="0.5" y="0.5" width="15" height="15" rx="3.5" stroke="#D4D4D4"/>\n</svg>',
+};
+
 export interface CheckboxProps extends HTMLAttributes<HTMLSpanElement> {
   checked?: 'false';
   indeterminate?: 'false';
@@ -17,7 +22,7 @@ export interface CheckboxProps extends HTMLAttributes<HTMLSpanElement> {
   state?: 'default';
 }
 
-/** STUB contract auto-proposed for the nested "Checkbox" instances of _Dropdown list item — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub. */
+/** STUB contract auto-proposed for the nested "Checkbox" instances of _Dropdown list item — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry; the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints. Import the child set to replace this stub. */
 export const Checkbox = forwardRef<HTMLSpanElement, CheckboxProps>(function Checkbox(
   {
     checked = 'false',
@@ -46,5 +51,13 @@ export const Checkbox = forwardRef<HTMLSpanElement, CheckboxProps>(function Chec
   ]
     .filter(Boolean)
     .join(' ');
-  return <span ref={ref} className={classes} {...rest}></span>;
+  return (
+    <span ref={ref} className={classes} {...rest}>
+      <span
+        className={styles.glyph}
+        aria-hidden="true"
+        dangerouslySetInnerHTML={{ __html: ICONS['checkbox'] }}
+      />
+    </span>
+  );
 });

@@ -11,4 +11,5 @@
   width: var(--imported-stub-dot-root-width);
   height: var(--imported-stub-dot-root-height);
   background-color: var(--imported-stub-dot-root-background-color);
+  border-radius: var(--imported-stub-dot-root-border-radius);
 }
