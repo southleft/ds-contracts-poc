@@ -83,7 +83,8 @@
     "conformance:report": "tsx conformance/report.ts",
     "child-wider": "node scripts/child-wider.mjs",
     "figma:fresh": "node scripts/figma-scripts-fresh.mjs",
-    "conformance:canvas": "tsx extract/figma/conformance/run.ts"
+    "conformance:canvas": "tsx extract/figma/conformance/run.ts",
+    "extract:figma:roundtrip:uui": "tsx extract/figma/roundtrip-uui/run.ts"
   },
   "engines": {
     "node": ">=20"

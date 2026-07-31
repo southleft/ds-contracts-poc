@@ -1,0 +1,438 @@
+{
+  "generatedBy": "extract/figma/roundtrip-uui/run.ts",
+  "totals": {
+    "components": 1,
+    "roundTripClosed": 1,
+    "matched": 404,
+    "diverged": 32,
+    "loss": 32,
+    "invented": 0
+  },
+  "results": [
+    {
+      "component": "button-base",
+      "contractId": "ds.button-base",
+      "status": "diffed",
+      "originalVariants": 20,
+      "roundTripVariants": 20,
+      "matched": 404,
+      "diverged": [
+        {
+          "variant": "Icon=Leading, Size=md",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Leading, Size=lg",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Leading, Size=xl",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Leading, Size=sm",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Only, Size=md",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Only, Size=lg",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Only, Size=xl",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Only, Size=sm",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Trailing, Size=md",
+          "path": "",
+          "channel": "layout.align",
+          "value": "CENTER/CENTER → MIN/MIN"
+        },
+        {
+          "variant": "Icon=Trailing, Size=md",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Trailing, Size=lg",
+          "path": "",
+          "channel": "layout.align",
+          "value": "CENTER/CENTER → MIN/MIN"
+        },
+        {
+          "variant": "Icon=Trailing, Size=lg",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Trailing, Size=xl",
+          "path": "",
+          "channel": "layout.align",
+          "value": "CENTER/CENTER → MIN/MIN"
+        },
+        {
+          "variant": "Icon=Trailing, Size=xl",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Trailing, Size=sm",
+          "path": "",
+          "channel": "layout.align",
+          "value": "CENTER/CENTER → MIN/MIN"
+        },
+        {
+          "variant": "Icon=Trailing, Size=sm",
+          "path": "circle",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Dot, Size=md",
+          "path": "dot",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Dot, Size=md",
+          "path": "dot",
+          "channel": "width",
+          "value": "10 → 8"
+        },
+        {
+          "variant": "Icon=Dot, Size=md",
+          "path": "dot",
+          "channel": "height",
+          "value": "10 → 8"
+        },
+        {
+          "variant": "Icon=Dot, Size=md",
+          "path": "dot",
+          "channel": "instanceInk",
+          "value": "#ffffff → #9e77ed"
+        },
+        {
+          "variant": "Icon=Dot, Size=lg",
+          "path": "dot",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Dot, Size=lg",
+          "path": "dot",
+          "channel": "width",
+          "value": "10 → 8"
+        },
+        {
+          "variant": "Icon=Dot, Size=lg",
+          "path": "dot",
+          "channel": "height",
+          "value": "10 → 8"
+        },
+        {
+          "variant": "Icon=Dot, Size=lg",
+          "path": "dot",
+          "channel": "instanceInk",
+          "value": "#ffffff → #9e77ed"
+        },
+        {
+          "variant": "Icon=Dot, Size=xl",
+          "path": "dot",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Dot, Size=xl",
+          "path": "dot",
+          "channel": "width",
+          "value": "10 → 8"
+        },
+        {
+          "variant": "Icon=Dot, Size=xl",
+          "path": "dot",
+          "channel": "height",
+          "value": "10 → 8"
+        },
+        {
+          "variant": "Icon=Dot, Size=xl",
+          "path": "dot",
+          "channel": "instanceInk",
+          "value": "#ffffff → #9e77ed"
+        },
+        {
+          "variant": "Icon=Dot, Size=sm",
+          "path": "dot",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Icon=Dot, Size=sm",
+          "path": "dot",
+          "channel": "width",
+          "value": "10 → 8"
+        },
+        {
+          "variant": "Icon=Dot, Size=sm",
+          "path": "dot",
+          "channel": "height",
+          "value": "10 → 8"
+        },
+        {
+          "variant": "Icon=Dot, Size=sm",
+          "path": "dot",
+          "channel": "instanceInk",
+          "value": "#ffffff → #9e77ed"
+        }
+      ],
+      "loss": [
+        {
+          "variant": "Icon=Leading, Size=md",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=Leading, Size=md",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text sm/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Leading, Size=lg",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=Leading, Size=lg",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text md/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Leading, Size=xl",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=Leading, Size=xl",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text md/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Leading, Size=sm",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=Leading, Size=sm",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text sm/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Only, Size=md",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=Only, Size=lg",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=Only, Size=xl",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=Only, Size=sm",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=False, Size=md",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text sm/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=False, Size=lg",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text md/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=False, Size=xl",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text md/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=False, Size=sm",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text sm/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Trailing, Size=md",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text sm/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Trailing, Size=md",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=Trailing, Size=lg",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text md/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Trailing, Size=lg",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=Trailing, Size=xl",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text md/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Trailing, Size=xl",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=Trailing, Size=sm",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text sm/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Trailing, Size=sm",
+          "path": "circle",
+          "channel": "instancePrimaryFill",
+          "value": "{\"hex\":\"ffffff\",\"stroke\":true,\"weight\":1.67,\"ellipse\":true,\"src\":16.67,\"align\":\"CENTER\"}",
+          "tag": "vector-glyph"
+        },
+        {
+          "variant": "Icon=Dot, Size=md",
+          "path": "dot",
+          "channel": "prop:Size",
+          "value": "md"
+        },
+        {
+          "variant": "Icon=Dot, Size=md",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text sm/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Dot, Size=lg",
+          "path": "dot",
+          "channel": "prop:Size",
+          "value": "md"
+        },
+        {
+          "variant": "Icon=Dot, Size=lg",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text md/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Dot, Size=xl",
+          "path": "dot",
+          "channel": "prop:Size",
+          "value": "md"
+        },
+        {
+          "variant": "Icon=Dot, Size=xl",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text md/Semibold",
+          "tag": "text-style-identity"
+        },
+        {
+          "variant": "Icon=Dot, Size=sm",
+          "path": "dot",
+          "channel": "prop:Size",
+          "value": "md"
+        },
+        {
+          "variant": "Icon=Dot, Size=sm",
+          "path": "text",
+          "channel": "text.style",
+          "value": "Text sm/Semibold",
+          "tag": "text-style-identity"
+        }
+      ],
+      "invented": []
+    }
+  ]
+}
