@@ -2,7 +2,7 @@
  {
   "set": "badge-base",
   "variant": "icon_avatar",
-  "score": 76.5
+  "score": 77.15
  },
  {
   "set": "badge-base",
@@ -22,22 +22,22 @@
  {
   "set": "badge-base",
   "variant": "icon_icon_left",
-  "score": 86.88
+  "score": 87.41
  },
  {
   "set": "badge-base",
   "variant": "icon_icon_right",
-  "score": 88.01
+  "score": 88.36
  },
  {
   "set": "badge-base",
   "variant": "icon_only",
-  "score": 92.39
+  "score": 93.62
  },
  {
   "set": "badge-base",
   "variant": "icon_x_close",
-  "score": 87.88
+  "score": 88.23
  },
  {
   "set": "button-base",
@@ -52,17 +52,17 @@
  {
   "set": "button-base",
   "variant": "size_lg_icon_leading",
-  "score": 57.81
+  "score": 57.76
  },
  {
   "set": "button-base",
   "variant": "size_lg_icon_only",
-  "score": 65.25
+  "score": 65.47
  },
  {
   "set": "button-base",
   "variant": "size_lg_icon_trailing",
-  "score": 57.71
+  "score": 57.78
  },
  {
   "set": "button-base",
@@ -77,17 +77,17 @@
  {
   "set": "button-base",
   "variant": "size_md_icon_leading",
-  "score": 55.41
+  "score": 55.57
  },
  {
   "set": "button-base",
   "variant": "size_md_icon_only",
-  "score": 63.62
+  "score": 63.85
  },
  {
   "set": "button-base",
   "variant": "size_md_icon_trailing",
-  "score": 55.38
+  "score": 55.52
  },
  {
   "set": "button-base",
@@ -102,17 +102,17 @@
  {
   "set": "button-base",
   "variant": "size_sm_icon_leading",
-  "score": 52.8
+  "score": 52.97
  },
  {
   "set": "button-base",
   "variant": "size_sm_icon_only",
-  "score": 60.92
+  "score": 61.2
  },
  {
   "set": "button-base",
   "variant": "size_sm_icon_trailing",
-  "score": 53.52
+  "score": 53.7
  },
  {
   "set": "button-base",
@@ -127,373 +127,363 @@
  {
   "set": "button-base",
   "variant": "size_xl_icon_leading",
-  "score": 60.04
+  "score": 60.1
  },
  {
   "set": "button-base",
   "variant": "size_xl_icon_only",
-  "score": 66.61
+  "score": 66.82
  },
  {
   "set": "button-base",
   "variant": "size_xl_icon_trailing",
-  "score": 60.02
+  "score": 60.08
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_dark_state_default",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_dark_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=disabled"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_dark_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=focus"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_dark_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=hover"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_light_state_default",
-  "score": null,
-  "note": "slug→props unmapped"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_light_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=disabled"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_light_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=focus"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_light_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=hover"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_dark_state_default",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_dark_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=disabled"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_dark_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=focus"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_dark_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=hover"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_light_state_default",
-  "score": null,
-  "note": "slug→props unmapped"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_light_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=disabled"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_light_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=focus"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_light_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=hover"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_dark_state_default",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_dark_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=disabled"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_dark_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=focus"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_dark_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=hover"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_light_state_default",
-  "score": null,
-  "note": "slug→props unmapped"
+  "score": 99.93
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_light_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=disabled"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_light_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=focus"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_light_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=hover"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_dark_state_default",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_dark_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=disabled"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_dark_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=focus"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_dark_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: theme=dark,state=hover"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_light_state_default",
-  "score": null,
-  "note": "slug→props unmapped"
+  "score": 99.89
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_light_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=disabled"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_light_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=focus"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_light_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=hover"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_false_state_default",
-  "score": null,
-  "note": "slug→props unmapped"
+  "score": 97.26
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_false_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=disabled"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_false_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=focus"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_false_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=hover"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_true_state_default",
-  "score": null,
-  "note": "slug→props unmapped"
+  "score": 95.76
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_true_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=disabled"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_true_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=focus"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_true_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=hover"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_false_state_default",
-  "score": null,
-  "note": "slug→props unmapped"
+  "score": 97.21
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_false_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=disabled"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_false_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=focus"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_false_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=hover"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_true_state_default",
-  "score": null,
-  "note": "slug→props unmapped"
+  "score": 95.78
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_true_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=disabled"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_true_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=focus"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_true_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=hover"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_false_state_default",
-  "score": null,
-  "note": "slug→props unmapped"
+  "score": 96.24
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_false_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=disabled"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_false_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=focus"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_false_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=hover"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_true_state_default",
-  "score": null,
-  "note": "slug→props unmapped"
+  "score": 94.74
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_true_state_disabled",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=disabled"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_true_state_focus",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=focus"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_true_state_hover",
   "score": null,
-  "note": "slug→props unmapped"
+  "note": "axis not carried: state=hover"
  },
  {
   "set": "input-field-base",
   "variant": "type_default_destructive_false",
-  "score": 87.74
+  "score": 87.73
  },
  {
   "set": "input-field-base",
   "variant": "type_default_destructive_true",
-  "score": 87.76
+  "score": 87.75
  },
  {
   "set": "input-field-base",
   "variant": "type_leading_dropdown_destructive_false",
-  "score": 85.38
+  "score": 85.62
  },
  {
   "set": "input-field-base",
   "variant": "type_leading_dropdown_destructive_true",
-  "score": 85.65
+  "score": 85.89
  },
  {
   "set": "input-field-base",
@@ -508,22 +498,22 @@
  {
   "set": "input-field-base",
   "variant": "type_payment_input_destructive_false",
-  "score": 87.52
+  "score": 87.43
  },
  {
   "set": "input-field-base",
   "variant": "type_payment_input_destructive_true",
-  "score": 87.54
+  "score": 87.46
  },
  {
   "set": "input-field-base",
   "variant": "type_trailing_dropdown_destructive_false",
-  "score": 86.86
+  "score": 86.97
  },
  {
   "set": "input-field-base",
   "variant": "type_trailing_dropdown_destructive_true",
-  "score": 87.1
+  "score": 87.21
  },
  {
   "set": "avatar-group",
@@ -533,17 +523,17 @@
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_false_more_users_true",
-  "score": 54.24
+  "score": 53.83
  },
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_true_more_users_false",
-  "score": 60.61
+  "score": 60.56
  },
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_true_more_users_true",
-  "score": 64.38
+  "score": 64.3
  },
  {
   "set": "avatar-group",
@@ -553,17 +543,17 @@
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_false_more_users_true",
-  "score": 57.31
+  "score": 57.05
  },
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_true_more_users_false",
-  "score": 62.89
+  "score": 62.95
  },
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_true_more_users_true",
-  "score": 67.08
+  "score": 66.96
  },
  {
   "set": "avatar-group",
@@ -573,37 +563,37 @@
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_false_more_users_true",
-  "score": 62.01
+  "score": 61.69
  },
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_true_more_users_false",
-  "score": 65.85
+  "score": 66.09
  },
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_true_more_users_true",
-  "score": 69.99
+  "score": 70.08
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_bottom_center",
-  "score": 56.49
+  "score": 57.35
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_bottom_left",
-  "score": 56.55
+  "score": 56.4
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_bottom_right",
-  "score": 56.45
+  "score": 54.73
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_left",
-  "score": 55.34
+  "score": 55.8
  },
  {
   "set": "tooltip",
@@ -613,22 +603,22 @@
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_right",
-  "score": 55.42
+  "score": 53.34
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_top_center",
-  "score": 64.91
+  "score": 66.1
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_light_arrow_bottom_center",
-  "score": 89.63
+  "score": 90.75
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_light_arrow_bottom_left",
-  "score": 89.61
+  "score": 89.78
  },
  {
   "set": "tooltip",
@@ -638,7 +628,7 @@
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_light_arrow_left",
-  "score": 87.92
+  "score": 88.05
  },
  {
   "set": "tooltip",
@@ -663,12 +653,12 @@
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_dark_arrow_bottom_left",
-  "score": 37.1
+  "score": 37.09
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_dark_arrow_bottom_right",
-  "score": 37.1
+  "score": 37.05
  },
  {
   "set": "tooltip",
@@ -683,12 +673,12 @@
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_dark_arrow_right",
-  "score": 32.8
+  "score": 32.77
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_dark_arrow_top_center",
-  "score": 37.88
+  "score": 37.91
  },
  {
   "set": "tooltip",
@@ -724,5 +714,584 @@
   "set": "tooltip",
   "variant": "supporting_text_true_theme_light_arrow_top_center",
   "score": 90.41
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_floating_right_control_100_left_control_0_",
+  "score": 89.63
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_floating_right_control_100_left_control_25_",
+  "score": 90.22
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_floating_right_control_100_left_control_50_",
+  "score": 92.22
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_floating_right_control_100_left_control_75_",
+  "score": 93.76
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_floating_right_control_25_left_control_0_",
+  "score": 94.77
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_floating_right_control_50_left_control_0_",
+  "score": 92.59
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_floating_right_control_50_left_control_25_",
+  "score": 94.72
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_floating_right_control_75_left_control_0_",
+  "score": 90.51
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_floating_right_control_75_left_control_25_",
+  "score": 92.65
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_floating_right_control_75_left_control_50_",
+  "score": 94.58
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_right_control_100_left_control_0_",
+  "score": 86.28
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_right_control_100_left_control_25_",
+  "score": 83.46
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_right_control_100_left_control_50_",
+  "score": 86.35
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_right_control_100_left_control_75_",
+  "score": 89.96
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_right_control_25_left_control_0_",
+  "score": 95.98
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_right_control_50_left_control_0_",
+  "score": 91.84
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_right_control_50_left_control_25_",
+  "score": 90.8
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_right_control_75_left_control_0_",
+  "score": 88.4
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_right_control_75_left_control_25_",
+  "score": 87.85
+ },
+ {
+  "set": "slider",
+  "variant": "label_bottom_right_control_75_left_control_50_",
+  "score": 90.4
+ },
+ {
+  "set": "slider",
+  "variant": "label_false_right_control_100_left_control_0_",
+  "score": 87.43
+ },
+ {
+  "set": "slider",
+  "variant": "label_false_right_control_100_left_control_25_",
+  "score": 88.15
+ },
+ {
+  "set": "slider",
+  "variant": "label_false_right_control_100_left_control_50_",
+  "score": 90.99
+ },
+ {
+  "set": "slider",
+  "variant": "label_false_right_control_100_left_control_75_",
+  "score": 94.09
+ },
+ {
+  "set": "slider",
+  "variant": "label_false_right_control_25_left_control_0_",
+  "score": 95.56
+ },
+ {
+  "set": "slider",
+  "variant": "label_false_right_control_50_left_control_0_",
+  "score": 92.63
+ },
+ {
+  "set": "slider",
+  "variant": "label_false_right_control_50_left_control_25_",
+  "score": 94.03
+ },
+ {
+  "set": "slider",
+  "variant": "label_false_right_control_75_left_control_0_",
+  "score": 89.65
+ },
+ {
+  "set": "slider",
+  "variant": "label_false_right_control_75_left_control_25_",
+  "score": 90.89
+ },
+ {
+  "set": "slider",
+  "variant": "label_false_right_control_75_left_control_50_",
+  "score": 93.79
+ },
+ {
+  "set": "slider",
+  "variant": "label_top_floating_right_control_100_left_control_0_",
+  "score": 87.64
+ },
+ {
+  "set": "slider",
+  "variant": "label_top_floating_right_control_100_left_control_25_",
+  "score": 87.81
+ },
+ {
+  "set": "slider",
+  "variant": "label_top_floating_right_control_100_left_control_50_",
+  "score": 89.96
+ },
+ {
+  "set": "slider",
+  "variant": "label_top_floating_right_control_100_left_control_75_",
+  "score": 92.56
+ },
+ {
+  "set": "slider",
+  "variant": "label_top_floating_right_control_25_left_control_0_",
+  "score": 93.41
+ },
+ {
+  "set": "slider",
+  "variant": "label_top_floating_right_control_50_left_control_0_",
+  "score": 90.69
+ },
+ {
+  "set": "slider",
+  "variant": "label_top_floating_right_control_50_left_control_25_",
+  "score": 92.8
+ },
+ {
+  "set": "slider",
+  "variant": "label_top_floating_right_control_75_left_control_0_",
+  "score": 88.13
+ },
+ {
+  "set": "slider",
+  "variant": "label_top_floating_right_control_75_left_control_25_",
+  "score": 89.74
+ },
+ {
+  "set": "slider",
+  "variant": "label_top_floating_right_control_75_left_control_50_",
+  "score": 92.5
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_0_label_bottom",
+  "score": 98.36
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_0_label_bottom_floating",
+  "score": 97.77
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_0_label_false",
+  "score": 98.3
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_0_label_right",
+  "score": 98.46
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_0_label_top_floating",
+  "score": 97.79
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_100_label_bottom",
+  "score": 85.69
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_100_label_bottom_floating",
+  "score": 86.8
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_100_label_false",
+  "score": 87.51
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_100_label_right",
+  "score": 88.05
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_100_label_top_floating",
+  "score": 86.66
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_10_label_bottom",
+  "score": 97.25
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_10_label_bottom_floating",
+  "score": 97.14
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_10_label_false",
+  "score": 97.21
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_10_label_right",
+  "score": 97.76
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_10_label_top_floating",
+  "score": 96.58
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_20_label_bottom",
+  "score": 95.85
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_20_label_bottom_floating",
+  "score": 95.8
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_20_label_false",
+  "score": 96.08
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_20_label_right",
+  "score": 96.55
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_20_label_top_floating",
+  "score": 95.16
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_30_label_bottom",
+  "score": 94.56
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_30_label_bottom_floating",
+  "score": 94.77
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_30_label_false",
+  "score": 94.99
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_30_label_right",
+  "score": 95.49
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_30_label_top_floating",
+  "score": 93.94
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_40_label_bottom",
+  "score": 93.3
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_40_label_bottom_floating",
+  "score": 93.7
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_40_label_false",
+  "score": 93.9
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_40_label_right",
+  "score": 94.29
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_40_label_top_floating",
+  "score": 92.74
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_50_label_bottom",
+  "score": 92.09
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_50_label_bottom_floating",
+  "score": 92.69
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_50_label_false",
+  "score": 92.84
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_50_label_right",
+  "score": 93.33
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_50_label_top_floating",
+  "score": 91.41
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_60_label_bottom",
+  "score": 90.75
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_60_label_bottom_floating",
+  "score": 91.64
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_60_label_false",
+  "score": 91.76
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_60_label_right",
+  "score": 92.28
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_60_label_top_floating",
+  "score": 90.18
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_70_label_bottom",
+  "score": 89.74
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_70_label_bottom_floating",
+  "score": 90.9
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_70_label_false",
+  "score": 90.69
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_70_label_right",
+  "score": 91.06
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_70_label_top_floating",
+  "score": 89.09
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_80_label_bottom",
+  "score": 88.25
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_80_label_bottom_floating",
+  "score": 89.75
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_80_label_false",
+  "score": 89.6
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_80_label_right",
+  "score": 90
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_80_label_top_floating",
+  "score": 87.73
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_90_label_bottom",
+  "score": 87.04
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_90_label_bottom_floating",
+  "score": 86.93
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_90_label_false",
+  "score": 88.51
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_90_label_right",
+  "score": 88.95
+ },
+ {
+  "set": "progress-bar",
+  "variant": "progress_90_label_top_floating",
+  "score": 86.45
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_lg_shape_circle_label_false",
+  "score": 65.76
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_lg_shape_circle_label_true",
+  "score": 64.37
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_lg_shape_half_circle_label_false",
+  "score": 76.66
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_lg_shape_half_circle_label_true",
+  "score": 68.8
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_md_shape_circle_label_false",
+  "score": 67.14
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_md_shape_circle_label_true",
+  "score": 67.61
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_md_shape_half_circle_label_false",
+  "score": 76.24
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_md_shape_half_circle_label_true",
+  "score": 66.98
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_sm_shape_circle_label_false",
+  "score": 71.38
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_sm_shape_circle_label_true",
+  "score": 70.31
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_sm_shape_half_circle_label_false",
+  "score": 79.31
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_sm_shape_half_circle_label_true",
+  "score": 75.47
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_xs_shape_circle_label_false",
+  "score": 73.81
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_xs_shape_circle_label_true",
+  "score": 71.95
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_xs_shape_half_circle_label_false",
+  "score": 81.67
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_xs_shape_half_circle_label_true",
+  "score": 80.32
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_xxs_shape_circle_label_false",
+  "score": null,
+  "note": "axis not carried: size=xxs"
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_xxs_shape_circle_label_true",
+  "score": null,
+  "note": "axis not carried: size=xxs"
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_xxs_shape_half_circle_label_false",
+  "score": null,
+  "note": "axis not carried: size=xxs"
+ },
+ {
+  "set": "progress-circle",
+  "variant": "size_xxs_shape_half_circle_label_true",
+  "score": null,
+  "note": "axis not carried: size=xxs"
  }
 ]
