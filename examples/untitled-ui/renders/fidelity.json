@@ -22,22 +22,22 @@
  {
   "set": "badge-base",
   "variant": "icon_icon_left",
-  "score": 92.18
+  "score": 94.95
  },
  {
   "set": "badge-base",
   "variant": "icon_icon_right",
-  "score": 92.3
+  "score": 95.07
  },
  {
   "set": "badge-base",
   "variant": "icon_only",
-  "score": 84.32
+  "score": 93.62
  },
  {
   "set": "badge-base",
   "variant": "icon_x_close",
-  "score": 92.16
+  "score": 94.97
  },
  {
   "set": "button-base",
@@ -52,17 +52,17 @@
  {
   "set": "button-base",
   "variant": "size_lg_icon_leading",
-  "score": 86.74
+  "score": 86.81
  },
  {
   "set": "button-base",
   "variant": "size_lg_icon_only",
-  "score": 95.94
+  "score": 95.7
  },
  {
   "set": "button-base",
   "variant": "size_lg_icon_trailing",
-  "score": 86.97
+  "score": 87.08
  },
  {
   "set": "button-base",
@@ -77,17 +77,17 @@
  {
   "set": "button-base",
   "variant": "size_md_icon_leading",
-  "score": 86.65
+  "score": 86.77
  },
  {
   "set": "button-base",
   "variant": "size_md_icon_only",
-  "score": 94.74
+  "score": 94.48
  },
  {
   "set": "button-base",
   "variant": "size_md_icon_trailing",
-  "score": 87.08
+  "score": 87.23
  },
  {
   "set": "button-base",
@@ -102,17 +102,17 @@
  {
   "set": "button-base",
   "variant": "size_sm_icon_leading",
-  "score": 84.4
+  "score": 84.53
  },
  {
   "set": "button-base",
   "variant": "size_sm_icon_only",
-  "score": 93.24
+  "score": 92.93
  },
  {
   "set": "button-base",
   "variant": "size_sm_icon_trailing",
-  "score": 84.93
+  "score": 85.07
  },
  {
   "set": "button-base",
@@ -127,17 +127,17 @@
  {
   "set": "button-base",
   "variant": "size_xl_icon_leading",
-  "score": 88.27
+  "score": 88.36
  },
  {
   "set": "button-base",
   "variant": "size_xl_icon_only",
-  "score": 96.75
+  "score": 96.59
  },
  {
   "set": "button-base",
   "variant": "size_xl_icon_trailing",
-  "score": 88.13
+  "score": 88.28
  },
  {
   "set": "toggle-base",
@@ -406,12 +406,12 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_false_state_default",
-  "score": 74.91
+  "score": 75.33
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_false_state_disabled",
-  "score": 84.15
+  "score": 59.9
  },
  {
   "set": "dropdown-list-item",
@@ -428,12 +428,12 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_true_state_default",
-  "score": 92.68
+  "score": 92.96
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_true_state_disabled",
-  "score": 84.61
+  "score": 70.54
  },
  {
   "set": "dropdown-list-item",
@@ -450,22 +450,22 @@
  {
   "set": "input-field-base",
   "variant": "type_default_destructive_false",
-  "score": 87.29
+  "score": 87.4
  },
  {
   "set": "input-field-base",
   "variant": "type_default_destructive_true",
-  "score": 85.32
+  "score": 85.44
  },
  {
   "set": "input-field-base",
   "variant": "type_leading_dropdown_destructive_false",
-  "score": 85.75
+  "score": 85.93
  },
  {
   "set": "input-field-base",
   "variant": "type_leading_dropdown_destructive_true",
-  "score": 83.31
+  "score": 83.49
  },
  {
   "set": "input-field-base",
@@ -490,12 +490,12 @@
  {
   "set": "input-field-base",
   "variant": "type_trailing_dropdown_destructive_false",
-  "score": 86.64
+  "score": 86.82
  },
  {
   "set": "input-field-base",
   "variant": "type_trailing_dropdown_destructive_true",
-  "score": 84.71
+  "score": 84.88
  },
  {
   "set": "avatar-group",
@@ -505,17 +505,17 @@
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_false_more_users_true",
-  "score": 59.46
+  "score": 59.5
  },
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_true_more_users_false",
-  "score": 66.98
+  "score": 67.13
  },
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_true_more_users_true",
-  "score": 69.63
+  "score": 69.86
  },
  {
   "set": "avatar-group",
@@ -530,12 +530,12 @@
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_true_more_users_false",
-  "score": 68.29
+  "score": 68.44
  },
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_true_more_users_true",
-  "score": 71.59
+  "score": 71.75
  },
  {
   "set": "avatar-group",
@@ -550,72 +550,72 @@
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_true_more_users_false",
-  "score": 71.1
+  "score": 71.36
  },
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_true_more_users_true",
-  "score": 74.29
+  "score": 74.49
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_bottom_center",
-  "score": 55.25
+  "score": 61.02
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_bottom_left",
-  "score": 53.67
+  "score": 60.83
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_bottom_right",
-  "score": 55.07
+  "score": 61.15
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_left",
-  "score": 43.55
+  "score": 52.24
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_none",
-  "score": 55.03
+  "score": 49.1
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_right",
-  "score": 45.26
+  "score": 52.12
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_dark_arrow_top_center",
-  "score": 57.24
+  "score": 53.78
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_light_arrow_bottom_center",
-  "score": 76.23
+  "score": 73.56
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_light_arrow_bottom_left",
-  "score": 71.9
+  "score": 72.84
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_light_arrow_bottom_right",
-  "score": 72.88
+  "score": 73.08
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_light_arrow_left",
-  "score": 70.55
+  "score": 71.48
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_light_arrow_none",
-  "score": 71.59
+  "score": 72.25
  },
  {
   "set": "tooltip",
@@ -625,127 +625,127 @@
  {
   "set": "tooltip",
   "variant": "supporting_text_false_theme_light_arrow_top_center",
-  "score": 71.66
+  "score": 72.32
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_dark_arrow_bottom_center",
-  "score": 30.85
+  "score": 68.33
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_dark_arrow_bottom_left",
-  "score": 30.6
+  "score": 68.69
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_dark_arrow_bottom_right",
-  "score": 30.99
+  "score": 68.3
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_dark_arrow_left",
-  "score": 31.09
+  "score": 62.96
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_dark_arrow_none",
-  "score": 30.58
+  "score": 62.84
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_dark_arrow_right",
-  "score": 31.17
+  "score": 65.94
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_dark_arrow_top_center",
-  "score": 33.72
+  "score": 65.8
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_light_arrow_bottom_center",
-  "score": 88.44
+  "score": 76.9
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_light_arrow_bottom_left",
-  "score": 88.45
+  "score": 76.9
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_light_arrow_bottom_right",
-  "score": 88.44
+  "score": 76.9
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_light_arrow_left",
-  "score": 88.15
+  "score": 76.27
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_light_arrow_none",
-  "score": 87.35
+  "score": 76
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_light_arrow_right",
-  "score": 88.24
+  "score": 76.33
  },
  {
   "set": "tooltip",
   "variant": "supporting_text_true_theme_light_arrow_top_center",
-  "score": 89.06
+  "score": 75.76
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_100_left_control_0_",
-  "score": 86.88
+  "score": 87.15
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_100_left_control_25_",
-  "score": 90.6
+  "score": 91.07
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_100_left_control_50_",
-  "score": 92.36
+  "score": 92.87
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_100_left_control_75_",
-  "score": 94.27
+  "score": 94.74
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_25_left_control_0_",
-  "score": 94.49
+  "score": 94.54
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_50_left_control_0_",
-  "score": 91.78
+  "score": 91.96
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_50_left_control_25_",
-  "score": 94.07
+  "score": 94.22
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_75_left_control_0_",
-  "score": 89.53
+  "score": 89.69
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_75_left_control_25_",
-  "score": 91.26
+  "score": 91.47
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_75_left_control_50_",
-  "score": 93.9
+  "score": 94.12
  },
  {
   "set": "slider",
@@ -850,52 +850,52 @@
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_100_left_control_0_",
-  "score": 87.5
+  "score": 87.84
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_100_left_control_25_",
-  "score": 87.25
+  "score": 88.63
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_100_left_control_50_",
-  "score": 90
+  "score": 89.78
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_100_left_control_75_",
-  "score": 92.9
+  "score": 92.63
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_25_left_control_0_",
-  "score": 93.09
+  "score": 93.19
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_50_left_control_0_",
-  "score": 90.09
+  "score": 90.39
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_50_left_control_25_",
-  "score": 92.46
+  "score": 92.3
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_75_left_control_0_",
-  "score": 87.34
+  "score": 87.71
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_75_left_control_25_",
-  "score": 89.34
+  "score": 89.18
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_75_left_control_50_",
-  "score": 92.65
+  "score": 92.29
  },
  {
   "set": "progress-bar",
@@ -905,7 +905,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_0_label_bottom_floating",
-  "score": 86.28
+  "score": 90
  },
  {
   "set": "progress-bar",
@@ -920,7 +920,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_0_label_top_floating",
-  "score": 88.71
+  "score": 85.86
  },
  {
   "set": "progress-bar",
@@ -930,7 +930,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_100_label_bottom_floating",
-  "score": 74.71
+  "score": 79.46
  },
  {
   "set": "progress-bar",
@@ -945,7 +945,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_100_label_top_floating",
-  "score": 79.66
+  "score": 79.11
  },
  {
   "set": "progress-bar",
@@ -955,7 +955,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_10_label_bottom_floating",
-  "score": 85.93
+  "score": 88.43
  },
  {
   "set": "progress-bar",
@@ -970,7 +970,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_10_label_top_floating",
-  "score": 87.49
+  "score": 84.84
  },
  {
   "set": "progress-bar",
@@ -980,7 +980,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_20_label_bottom_floating",
-  "score": 84.96
+  "score": 88.04
  },
  {
   "set": "progress-bar",
@@ -995,7 +995,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_20_label_top_floating",
-  "score": 86.4
+  "score": 83.69
  },
  {
   "set": "progress-bar",
@@ -1005,7 +1005,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_30_label_bottom_floating",
-  "score": 83.71
+  "score": 87.04
  },
  {
   "set": "progress-bar",
@@ -1020,7 +1020,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_30_label_top_floating",
-  "score": 85.5
+  "score": 83.24
  },
  {
   "set": "progress-bar",
@@ -1030,7 +1030,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_40_label_bottom_floating",
-  "score": 82.52
+  "score": 85.9
  },
  {
   "set": "progress-bar",
@@ -1045,7 +1045,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_40_label_top_floating",
-  "score": 84.25
+  "score": 82.63
  },
  {
   "set": "progress-bar",
@@ -1055,7 +1055,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_50_label_bottom_floating",
-  "score": 81.32
+  "score": 84.74
  },
  {
   "set": "progress-bar",
@@ -1070,7 +1070,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_50_label_top_floating",
-  "score": 83.15
+  "score": 82.15
  },
  {
   "set": "progress-bar",
@@ -1080,7 +1080,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_60_label_bottom_floating",
-  "score": 80.15
+  "score": 83.5
  },
  {
   "set": "progress-bar",
@@ -1095,7 +1095,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_60_label_top_floating",
-  "score": 81.9
+  "score": 81.69
  },
  {
   "set": "progress-bar",
@@ -1105,7 +1105,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_70_label_bottom_floating",
-  "score": 78.98
+  "score": 82.32
  },
  {
   "set": "progress-bar",
@@ -1120,7 +1120,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_70_label_top_floating",
-  "score": 81.2
+  "score": 81.41
  },
  {
   "set": "progress-bar",
@@ -1130,7 +1130,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_80_label_bottom_floating",
-  "score": 77.89
+  "score": 80.99
  },
  {
   "set": "progress-bar",
@@ -1145,7 +1145,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_80_label_top_floating",
-  "score": 80.26
+  "score": 80.71
  },
  {
   "set": "progress-bar",
@@ -1155,7 +1155,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_90_label_bottom_floating",
-  "score": 76.25
+  "score": 79.75
  },
  {
   "set": "progress-bar",
@@ -1170,7 +1170,7 @@
  {
   "set": "progress-bar",
   "variant": "progress_90_label_top_floating",
-  "score": 78.93
+  "score": 79.36
  },
  {
   "set": "progress-circle",

@@ -13,9 +13,3 @@
   background-image: var(--imported-stub-circle-root-background-image);
   border-radius: var(--imported-stub-circle-root-border-radius);
 }
-
-/* HARNESS PATCH (fix round 1): dashed stub placeholder */
-.root {
-  outline: 1px dashed #98a2b3;
-  outline-offset: -1px;
-}

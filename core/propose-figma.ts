@@ -945,7 +945,9 @@ interface MintCapture {
    *  classification — the round-4 padding precedent (the base plane is
    *  exact) applied to placement: when the mint pass leaves the channel
    *  unbound, the part carries the FIRST occurrence's px value as a literal
-   *  and the fallback is NAMED. Empty when nothing refused. */
+   *  and the fallback is NAMED. Round 2 iteration 6: plain-rect/fixedSize
+   *  width/height and nested-part padding channels ride the same carrier.
+   *  Empty when nothing refused. */
   absFallbacks: Array<{ part: Record<string, unknown>; tokens: Record<string, string>; chan: string; value: number; where: string }>;
 }
 
@@ -1283,6 +1285,10 @@ function invertNodeTokens(
   ctx: Ctx,
   where: string,
   byProp: ByPropCollector,
+  /** Owning part, when the caller has one (nested parts) — enables the
+   *  base-combo literal fallback for padding channels whose per-variant
+   *  values refuse classification (see mintPadding). Absent on the root. */
+  part?: Record<string, unknown>,
 ): Record<string, string> {
   const tokens: Record<string, string> = {};
   const fields = new Set<string>();
@@ -1431,7 +1437,7 @@ function invertNodeTokens(
   ) {
     const padded = m.occ.find((o) => (o.node.layout?.padding ?? [0, 0, 0, 0]).some((pd) => pd !== 0))!;
     reportUnbound(ctx, where, 'padding', padded.node.layout!.padding.join(' '));
-    mintPadding(ctx, tokens, m, where);
+    mintPadding(ctx, tokens, m, where, part);
   }
   if (!radii.some((r) => fields.has(r)) && m.occ.some((o) => o.node.cornerRadius !== undefined)) {
     reportUnbound(ctx, where, 'cornerRadius', firstNode((n) => n.cornerRadius, undefined).cornerRadius ?? 0);
@@ -1956,6 +1962,11 @@ function mintPlainRectGeometry(m: Merged, part: Record<string, unknown>, tokens:
         dim,
         'px',
         m.occ.map((o) => ({ variant: o.variant, value: Math.round(o.node.shape![dim] * 100) / 100 })),
+        undefined,
+        // Presence-shaped coverage — same '0' fill as carryAbsPlacement: a
+        // subset-present part never renders at the unobserved axis values
+        // (visibleWhen) or is already a NAMED lesser error; 0 draws nothing.
+        m.occ.length < ctx.totalVariants.length ? '0' : undefined,
       );
       // Base-combo literal fallback on classification refusal — the same
       // discipline as the abs-placement channels (applied + named in the
@@ -1973,6 +1984,55 @@ function mintPlainRectGeometry(m: Merged, part: Record<string, unknown>, tokens:
   // Placement (shape.x/y/right/bottom on ABSOLUTE rects) rides the SAME
   // overlay carrier every abs-bearing node uses — carryAbsPlacement (round 2
   // iteration 2); the caller invokes it with the shared tokens record.
+}
+
+/** dump v1.8 `fixedSize` (round 2 iteration 6): the drawn box of an IN-FLOW
+ *  non-auto-layout child of an AUTO-layout parent whose layoutSizing is
+ *  FIXED — the one class NO other size channel touches (`layout` needs
+ *  auto-layout on the node, `abs` needs ABSOLUTE or a non-auto parent,
+ *  `shape` is parametric decor, `bbox` is roots/stubs). Field case: the UUI
+ *  tooltip arrow strip (16×6, 6×16 when rotated for Left/Right) captured
+ *  NOTHING, collapsed to a 0-size anchor, and the absolutely-placed arrow
+ *  overlaid the bubble's text. Minted exactly like plain-rect geometry:
+ *  per-variant width/height observations through the standard classifier,
+ *  base-combo literal fallback on refusal, presence-shaped '0' fill for
+ *  subset-present parts. A dimension already carried (bound variable or an
+ *  earlier channel) is never overridden. Absent field — exact no-op. */
+function mintFixedSize(m: Merged, part: Record<string, unknown>, tokens: Record<string, string>, ctx: Ctx, where: string) {
+  const withFixed = m.occ.filter((o) => o.node.fixedSize !== undefined);
+  if (withFixed.length === 0) return;
+  const sparse = m.occ.length < ctx.totalVariants.length ? '0' : undefined;
+  const carried: string[] = [];
+  for (const dim of ['width', 'height'] as const) {
+    const vals = m.occ.map((o) => o.node.fixedSize?.[dim]);
+    if (vals.every((v) => v === undefined)) continue;
+    if (tokens[dim] !== undefined || m.occ.some((o) => o.node.bound?.[dim])) continue;
+    if (vals.some((v) => v === undefined)) {
+      ctx.notes.push(
+        `${where}: fixed in-flow ${dim} captured in ${vals.filter((v) => v !== undefined).length}/${m.occ.length} variant occurrence(s) only (mixed sizing modes across variants) — not carried; review`,
+      );
+      continue;
+    }
+    if (!ctx.mint) {
+      ctx.notes.push(
+        `${where}: fixed in-flow ${dim} captured (dump v1.8 \`fixedSize\`) but minting is off — not proposed; bind the drawn size manually`,
+      );
+      continue;
+    }
+    mintObservation(
+      ctx, tokens, where, dim, 'px',
+      m.occ.map((o) => ({ variant: o.variant, value: o.node.fixedSize![dim]! })),
+      `${where}|fixed-${dim}`,
+      sparse,
+    );
+    ctx.mint.absFallbacks.push({ part, tokens, chan: dim, value: m.occ[0].node.fixedSize![dim]!, where });
+    carried.push(dim);
+  }
+  if (carried.length > 0) {
+    ctx.notes.push(
+      `${where}: fixed-size in-flow box (dump v1.8 \`fixedSize\`) carried as ${carried.join('/')} mint observation(s) — the drawn box of a non-auto-layout child inside auto-layout, which no other channel carries; per-variant values classify through the standard mint machinery`,
+    );
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -2060,12 +2120,24 @@ function carryAbsPlacement(
     return ledger(`constraint ${hs[0]}×${vs[0]} has no carried offset spelling (SCALE/stretch placement is a later iteration)`);
   }
   const px2 = (n: number) => Math.round(n * 100) / 100;
+  // Presence-shaped coverage (round 2 iteration 6): a node ABSENT from some
+  // variants yields no observation there, so a placement channel that is a
+  // clean function of one axis still failed full-coverage classification and
+  // fell back to the base combo's offsets for EVERY axis value (field case:
+  // the UUI tooltip arrow rendered bottom-center offsets in all 7 arrow
+  // directions). By the time this runs buildPart has already resolved subset
+  // presence: the part is either visibleWhen-gated (it never renders at the
+  // unobserved axis values) or kept unconditional as a NAMED lesser error —
+  // either way a '0' fill draws no new ink, it only closes the dangling-ref
+  // hole full coverage protects against (mint-tokens `sparse`).
+  const sparse = m.occ.length < ctx.totalVariants.length ? '0' : undefined;
   const channels: string[] = [];
   const mintChan = (chan: string, pick: (b: AbsBox) => number) => {
     mintObservation(
       ctx, tokens, where, chan, 'px',
       boxes.map((b) => ({ variant: b.variant, value: px2(pick(b.box!)) })),
       `${where}|abs-${chan}`,
+      sparse,
     );
     // Base-combo literal fallback (the round-4 padding precedent): when the
     // per-variant values refuse classification in the mint pass, the FIRST
@@ -2175,9 +2247,26 @@ function declareRelativeIfPositionedChildren(
  *  base [2,8,2,6] used to refuse padding-inline here and the pill hugged its
  *  text). A side that is zero in every variant needs no token; an all-zero
  *  pair needs none at all. */
-function mintPadding(ctx: Ctx, target: Record<string, string>, m: Merged, where: string) {
+function mintPadding(
+  ctx: Ctx,
+  target: Record<string, string>,
+  m: Merged,
+  where: string,
+  /** The owning PART (round 2 iteration 6): with it, a padding channel whose
+   *  per-variant values refuse classification falls back to the base combo's
+   *  literal — the round-4 padding precedent the CODE path already ships
+   *  (LITERAL_CHANNELS: "the base plane is exact"). Field case: UUI Tooltip's
+   *  padding-block is 12/8 as f(supportingText) — a BOOL axis, which nested
+   *  parts cannot classify on (bool conditioning is root-only), so the bubble
+   *  shipped with NO vertical padding at all. Absent (the root call site) —
+   *  refusals stay named-only, exactly as before. */
+  part?: Record<string, unknown>,
+) {
   if (!ctx.mint) return;
   const source = `${where}|padding`;
+  const fallback = (chan: string, value: number) => {
+    if (part && value !== 0) ctx.mint!.absFallbacks.push({ part, tokens: target, chan, value, where });
+  };
   const pairs = [
     // padding: [top, right, bottom, left]
     { cssProperty: 'padding-inline', a: 3, b: 1, label: 'left/right', sides: [['padding-left', 3], ['padding-right', 1]] },
@@ -2189,6 +2278,10 @@ function mintPadding(ctx: Ctx, target: Record<string, string>, m: Merged, where:
       const minted: string[] = [];
       for (const [sideProp, idx] of sides) {
         if (m.occ.every((o) => pad(o.node)[idx] === 0)) continue; // zero side needs no token
+        // Per-side longhands take NO base-combo fallback (round 2 iteration 6,
+        // measured): baking the base side onto IFB's Dropdown regressed its
+        // dropdown variants — asymmetric sides interact with stub-geometry
+        // compensating errors; their refusals stay named-only.
         mintObservation(ctx, target, where, sideProp, 'px', numOccurrences(m, (n) => pad(n)[idx]), source);
         minted.push(sideProp);
       }
@@ -2199,6 +2292,7 @@ function mintPadding(ctx: Ctx, target: Record<string, string>, m: Merged, where:
     }
     if (m.occ.every((o) => pad(o.node)[a] === 0)) continue; // zero padding needs no token
     mintObservation(ctx, target, where, cssProperty, 'px', numOccurrences(m, (n) => pad(n)[a]), source);
+    fallback(cssProperty, pad(m.occ[0].node)[a]);
   }
 }
 
@@ -3623,7 +3717,7 @@ function buildPart(
   }
 
   const partByProp: ByPropCollector = { map: {} };
-  const tokens = invertNodeTokens(m, false, ctx, where, partByProp);
+  const tokens = invertNodeTokens(m, false, ctx, where, partByProp, part);
   attachByProp(part, partByProp);
 
   // dump v1.7 `imageFill` on a FRAME part — the neutral placeholder gradient
@@ -3709,6 +3803,9 @@ function buildPart(
   // Overlay-flattened class: a FRAME/GROUP with a captured abs box becomes a
   // positioned box (position: absolute + minted offsets/size).
   carryAbsPlacement(m, part, tokens, ctx, where, { size: true });
+  // dump v1.8 `fixedSize`: the in-flow fixed-size box (mutually exclusive
+  // with `abs` by dump construction — exact no-op on older dumps).
+  mintFixedSize(m, part, tokens, ctx, where);
   attachTokens(ctx, part, tokens);
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
@@ -4380,8 +4477,42 @@ function invertRootFixedSize(merged: Merged, rootTokens: Record<string, string>,
   // captured-variable convention on the same root — visual-parity receipt:
   // Dialog width minted 272 for a drawn 320 box.)
   for (const dim of ['width', 'height'] as const) {
-    if (!withBox.every((o) => fixedAxis(o, dim))) continue;
+    const fixedIn = withBox.filter((o) => fixedAxis(o, dim));
+    if (fixedIn.length === 0) continue;
     if (rootTokens[dim] !== undefined || merged.occ.some((o) => o.node.bound?.[dim])) continue;
+    if (fixedIn.length !== withBox.length) {
+      // MIXED FIXED/HUG axis (round 2 iteration 6 — UUI Tooltip: width drawn
+      // FIXED 328/320 where Supporting text=True, HUG where False; the
+      // supporting-text bubble rendered at container width). The WIDTH axis
+      // carries the same rigid spelling the all-FIXED case already ships
+      // (CBDS Dialog: minted root `width`): every variant's observed bbox —
+      // EXACT on the fixed planes; hug planes are PINNED at their DRAWN
+      // hugged box, a declared approximation (the hug behavior itself is not
+      // carried — content changes will not reflow those planes). max-width
+      // is NOT the spelling here: the emitters' fluid discipline pairs it
+      // with a fit-content floor, which a long single-line text raises past
+      // the cap and the drawn wrap never happens. A mixed HEIGHT axis stays
+      // a NAMED refusal — a pinned hug height would clip when DOM text
+      // metrics run taller than the canvas.
+      if (dim === 'width') {
+        mintObservation(
+          ctx,
+          rootTokens,
+          where,
+          'width',
+          'px',
+          withBox.map((o) => ({ variant: o.variant, value: Math.round(o.node.bbox![dim] * 100) / 100 })),
+        );
+        ctx.notes.push(
+          `${where}: root width is DRAWN FIXED in ${fixedIn.length}/${withBox.length} variants and HUG in the rest — minted as root width from every variant's observed bbox (exact where fixed; hug planes PINNED at their drawn hugged box, a declared approximation — review)`,
+        );
+      } else {
+        ctx.notes.push(
+          `${where}: root height is DRAWN FIXED in ${fixedIn.length}/${withBox.length} variants and HUG in the rest — NOT proposed (a pinned hug height would clip when DOM text runs taller than the canvas); review`,
+        );
+      }
+      continue;
+    }
     mintObservation(
       ctx,
       rootTokens,
@@ -5331,7 +5462,7 @@ export function proposeFromDump(
       literals[fb.chan] = `${fb.value}px`;
       fb.part.literals = literals;
       ctx.notes.push(
-        `${fb.where} ${fb.chan}: per-variant abs values refused classification (named above) — the FIRST occurrence's ${fb.value}px carried as a base-combo literal fallback (exact for the default rendering; other variants keep the refusal)`,
+        `${fb.where} ${fb.chan}: per-variant captured values refused classification (named above) — the FIRST occurrence's ${fb.value}px carried as a base-combo literal fallback (exact for the default rendering; other variants keep the refusal)`,
       );
     }
     // A fully minted usage site is bound now — no longer an UNBOUND entry.

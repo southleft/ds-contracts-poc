@@ -214,11 +214,9 @@
                   },
                   "tokens": {
                     "left": "{imported.slider.progress-left-control-tooltip.left.{leftControl}}",
+                    "top": "{imported.slider.progress-left-control-tooltip.top.{label}}",
                     "width": "{imported.slider.progress-left-control-tooltip.width.{leftControl}}",
                     "height": "{imported.slider.progress-left-control-tooltip.height}"
-                  },
-                  "literals": {
-                    "top": "28px"
                   }
                 },
                 "leftNumber": {
@@ -343,11 +341,9 @@
                   },
                   "tokens": {
                     "left": "{imported.slider.progress-right-control-tooltip.left.{rightControl}}",
+                    "top": "{imported.slider.progress-right-control-tooltip.top.{label}}",
                     "width": "{imported.slider.progress-right-control-tooltip.width.{rightControl}}",
                     "height": "{imported.slider.progress-right-control-tooltip.height}"
-                  },
-                  "literals": {
-                    "top": "28px"
                   }
                 },
                 "rightNumber": {

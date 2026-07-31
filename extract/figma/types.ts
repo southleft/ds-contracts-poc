@@ -184,6 +184,17 @@ export interface DumpNode {
     height: number;
     constraints?: { horizontal: string; vertical: string };
   };
+  /** Fixed drawn size of an IN-FLOW box no other channel carries (dump v1.8,
+   *  additive): an in-flow child of an AUTO-layout parent that is NOT itself
+   *  auto-layout gets no `layout` (needs auto-layout), no `abs` (needs
+   *  ABSOLUTE or a non-auto parent), no `shape` (parametric decor only) and
+   *  no `bbox` (COMPONENT roots / INSTANCE stubs) — yet its drawn box is a
+   *  hard fact when layoutSizing is FIXED. Values come from
+   *  absoluteBoundingBox (the DRAWN box — rotation-safe; UUI's tooltip arrow
+   *  strip draws 6×16 from a 90°-rotated 16×6 frame). Per-axis: only FIXED
+   *  axes carry (a rotated box carries only when BOTH axes are FIXED).
+   *  Absence in older dumps means not captured, never "no size". */
+  fixedSize?: { width?: number; height?: number };
   /** First visible SOLID fill found in an INSTANCE's subtree (dump v1.7,
    *  additive) — the stub-paint channel: a child stub with observed geometry
    *  but no paint rendered invisible (field case: Untitled UI Badge's _Dot,

@@ -46,9 +46,3 @@
   height: var(--imported-stub-avatar-company-icon-root-height-xs);
   border-radius: var(--imported-stub-avatar-company-icon-root-border-radius-xs);
 }
-
-/* HARNESS PATCH (fix round 1): dashed stub placeholder */
-.root {
-  outline: 1px dashed #98a2b3;
-  outline-offset: -1px;
-}

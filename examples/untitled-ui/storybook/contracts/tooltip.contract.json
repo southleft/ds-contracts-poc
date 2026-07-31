@@ -156,6 +156,9 @@
             "background-color": "{imported.tooltip.content.background-color.{theme}}",
             "padding-inline": "{imported.shared.size-12}",
             "border-radius": "{imported.tooltip.content.border-radius}"
+          },
+          "literals": {
+            "padding-block": "12px"
           }
         },
         "Tooltip": {
@@ -178,12 +181,10 @@
               "tokens": {
                 "background-color": "{imported.tooltip.tooltip-bottom-center.background-color.{theme}}",
                 "border-radius": "{imported.tooltip.tooltip-bottom-center.border-radius}",
+                "left": "{imported.tooltip.tooltip-bottom-center.left.{arrow}}",
+                "bottom": "{imported.tooltip.tooltip-bottom-center.bottom.{arrow}}",
                 "width": "{imported.tooltip.tooltip-bottom-center.width}",
                 "height": "{imported.tooltip.tooltip-bottom-center.height}"
-              },
-              "literals": {
-                "left": "-0.49px",
-                "bottom": "0.03px"
               }
             }
           },
@@ -200,11 +201,16 @@
               "right",
               "bottomRight"
             ]
+          },
+          "tokens": {
+            "width": "{imported.tooltip.tooltip.width.{arrow}}",
+            "height": "{imported.tooltip.tooltip.height.{arrow}}"
           }
         }
       },
       "tokens": {
-        "border-radius": "{imported.tooltip.root.border-radius}"
+        "border-radius": "{imported.tooltip.root.border-radius}",
+        "width": "{imported.tooltip.root.width.{theme}.{arrow}.{supportingText}}"
       }
     }
   },

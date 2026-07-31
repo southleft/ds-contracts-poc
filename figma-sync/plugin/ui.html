@@ -1948,7 +1948,7 @@
      Do not edit here: scripts/build-plugin-zip.mjs refuses to package this
      plugin when the block below differs from the repo file. -->
 <script type="text/plain" id="dump-source">
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.7).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.8).
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -2004,6 +2004,11 @@
 //                      (component keys) → slot `accepts` where the keys resolve
 //   boolDefaults       set-level (dump v1.5): BOOLEAN property defaultValues —
 //                      visibility-bound boolean prop defaults, captured evidence
+//   fixedSize          in-flow fixed-size box (dump v1.8): drawn w/h from
+//                      absoluteBoundingBox, captured for in-flow
+//                      NON-auto-layout children of AUTO-layout parents whose
+//                      layoutSizing is FIXED — the one class no other size
+//                      channel touches (UUI tooltip arrow strip field case)
 //   SLOT nodes         native Figma slots (Schema 2025, dump v1.5): carried
 //                      verbatim (type 'SLOT', children walked) — propose maps
 //                      them to the same contract slot part as INSTANCE_SWAP
@@ -2212,6 +2217,30 @@ async function dumpNode(node, nodePath, parent) {
       if (h && v) abs.constraints = { horizontal: h, vertical: v };
     }
     out.abs = abs;
+  }
+
+  // dump v1.8: fixed-size IN-FLOW box. An in-flow child of an AUTO-layout
+  // parent that is NOT itself auto-layout gets NO size channel from any
+  // other capture (`layout` needs auto-layout on the node, `abs` needs
+  // ABSOLUTE or a non-auto-layout parent, `shape` covers parametric decor,
+  // `bbox` covers COMPONENT roots and INSTANCE stubs) — yet its drawn box is
+  // a hard fact when layoutSizing is FIXED. Carried from absoluteBoundingBox
+  // (the DRAWN box — rotation-safe: UUI's tooltip arrow strip draws 6×16
+  // from a 90°-rotated 16×6 frame; a rotated box carries only when BOTH axes
+  // are FIXED, an unrotated one carries each FIXED axis independently).
+  // Field case: that strip captured NOTHING, its anchor box collapsed to 0,
+  // and the absolutely-placed arrow overlaid the bubble's text.
+  const nodeAutoLayout = 'layoutMode' in node && node.layoutMode !== 'NONE';
+  if (!shape && !out.abs && !out.bbox && node.type !== 'TEXT' && node.type !== 'INSTANCE'
+      && parentAutoLayout && node.layoutPositioning !== 'ABSOLUTE' && !nodeAutoLayout
+      && node.absoluteBoundingBox && 'layoutSizingHorizontal' in node) {
+    const hFixed = node.layoutSizingHorizontal === 'FIXED';
+    const vFixed = node.layoutSizingVertical === 'FIXED';
+    const rotated = 'rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6;
+    const fixed = {};
+    if (hFixed && (vFixed || !rotated)) fixed.width = round2(node.absoluteBoundingBox.width);
+    if (vFixed && (hFixed || !rotated)) fixed.height = round2(node.absoluteBoundingBox.height);
+    if (fixed.width !== undefined || fixed.height !== undefined) out.fixedSize = fixed;
   }
 
   // dump v1.7: INSTANCE primary fill — the stub-paint gap: a stub with
@@ -2504,8 +2533,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.7) for design→contract proposal.',
-    dumpVersion: '1.7',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.8) for design→contract proposal.',
+    dumpVersion: '1.8',
   },
 };
 dumps._degradations = degradations;

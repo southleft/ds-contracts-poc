@@ -4,14 +4,14 @@ Score = % pixels within tolerance, both images content-trimmed then normalized t
 
 | component | variants scored | mean fidelity % | axis-not-carried | interaction-state | unscored |
 |---|---|---|---|---|---|
-| badge-base | 8 | 89.8 | 0 | 0 | 0 |
+| badge-base | 8 | 92.0 | 0 | 0 | 0 |
 | button-base | 20 | 88.4 | 0 | 0 | 0 |
 | toggle-base | 16 | 98.7 | 0 | 16 | 0 |
-| dropdown-list-item | 12 | 77.5 | 0 | 12 | 0 |
-| input-field-base | 10 | 85.2 | 0 | 0 | 0 |
-| avatar-group | 12 | 64.9 | 0 | 0 | 0 |
-| tooltip | 28 | 61.0 | 0 | 0 | 0 |
-| slider | 40 | 90.8 | 0 | 0 | 0 |
-| progress-bar | 55 | 87.0 | 0 | 0 | 0 |
+| dropdown-list-item | 12 | 74.3 | 0 | 12 | 0 |
+| input-field-base | 10 | 85.3 | 0 | 0 | 0 |
+| avatar-group | 12 | 65.0 | 0 | 0 | 0 |
+| tooltip | 28 | 67.7 | 0 | 0 | 0 |
+| slider | 40 | 90.9 | 0 | 0 | 0 |
+| progress-bar | 55 | 87.5 | 0 | 0 | 0 |
 | progress-circle | 16 | 81.6 | 4 | 0 | 0 |
-| **ALL** | 217 | **83.2** | | | |
+| **ALL** | 217 | **84.1** | | | |

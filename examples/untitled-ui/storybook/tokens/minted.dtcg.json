@@ -1119,6 +1119,152 @@
         "border-radius": {
           "$value": "8px",
           "$type": "dimension"
+        },
+        "width": {
+          "light": {
+            "bottomCenter": {
+              "true": {
+                "$value": "328px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "112px",
+                "$type": "dimension"
+              }
+            },
+            "none": {
+              "true": {
+                "$value": "320px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "112px",
+                "$type": "dimension"
+              }
+            },
+            "topCenter": {
+              "true": {
+                "$value": "320px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "112px",
+                "$type": "dimension"
+              }
+            },
+            "bottomLeft": {
+              "true": {
+                "$value": "328px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "112px",
+                "$type": "dimension"
+              }
+            },
+            "left": {
+              "true": {
+                "$value": "326px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "118px",
+                "$type": "dimension"
+              }
+            },
+            "right": {
+              "true": {
+                "$value": "326px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "118px",
+                "$type": "dimension"
+              }
+            },
+            "bottomRight": {
+              "true": {
+                "$value": "328px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "112px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "dark": {
+            "bottomCenter": {
+              "true": {
+                "$value": "320px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "112px",
+                "$type": "dimension"
+              }
+            },
+            "none": {
+              "true": {
+                "$value": "320px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "112px",
+                "$type": "dimension"
+              }
+            },
+            "topCenter": {
+              "true": {
+                "$value": "320px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "112px",
+                "$type": "dimension"
+              }
+            },
+            "bottomLeft": {
+              "true": {
+                "$value": "320px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "112px",
+                "$type": "dimension"
+              }
+            },
+            "left": {
+              "true": {
+                "$value": "326px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "118px",
+                "$type": "dimension"
+              }
+            },
+            "right": {
+              "true": {
+                "$value": "326px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "118px",
+                "$type": "dimension"
+              }
+            },
+            "bottomRight": {
+              "true": {
+                "$value": "320px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "112px",
+                "$type": "dimension"
+              }
+            }
+          }
         }
       },
       "content": {
@@ -1183,6 +1329,68 @@
           "$type": "dimension"
         }
       },
+      "tooltip": {
+        "width": {
+          "bottomCenter": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "topCenter": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "bottomLeft": {
+            "$value": "28px",
+            "$type": "dimension"
+          },
+          "left": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "bottomRight": {
+            "$value": "28px",
+            "$type": "dimension"
+          },
+          "none": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "bottomCenter": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "topCenter": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "bottomLeft": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "left": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "bottomRight": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "none": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        }
+      },
       "tooltip-bottom-center": {
         "background-color": {
           "light": {
@@ -1197,6 +1405,66 @@
         "border-radius": {
           "$value": "1px",
           "$type": "dimension"
+        },
+        "left": {
+          "bottomCenter": {
+            "$value": "-0.49px",
+            "$type": "dimension"
+          },
+          "topCenter": {
+            "$value": "-0.49px",
+            "$type": "dimension"
+          },
+          "bottomLeft": {
+            "$value": "11.51px",
+            "$type": "dimension"
+          },
+          "left": {
+            "$value": "0.03px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "-11px",
+            "$type": "dimension"
+          },
+          "bottomRight": {
+            "$value": "-0.49px",
+            "$type": "dimension"
+          },
+          "none": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
+        "bottom": {
+          "bottomCenter": {
+            "$value": "0.03px",
+            "$type": "dimension"
+          },
+          "topCenter": {
+            "$value": "-11px",
+            "$type": "dimension"
+          },
+          "bottomLeft": {
+            "$value": "0.03px",
+            "$type": "dimension"
+          },
+          "left": {
+            "$value": "-0.49px",
+            "$type": "dimension"
+          },
+          "right": {
+            "$value": "-0.49px",
+            "$type": "dimension"
+          },
+          "bottomRight": {
+            "$value": "0.03px",
+            "$type": "dimension"
+          },
+          "none": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
         },
         "width": {
           "$value": "16.97px",
@@ -1444,6 +1712,24 @@
             "$type": "dimension"
           }
         },
+        "top": {
+          "bottomFloating": {
+            "$value": "28px",
+            "$type": "dimension"
+          },
+          "topFloating": {
+            "$value": "-42px",
+            "$type": "dimension"
+          },
+          "bottom": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "false": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
         "width": {
           "0": {
             "$value": "43px",
@@ -1575,6 +1861,24 @@
           },
           "100": {
             "$value": "-16px",
+            "$type": "dimension"
+          }
+        },
+        "top": {
+          "bottomFloating": {
+            "$value": "28px",
+            "$type": "dimension"
+          },
+          "topFloating": {
+            "$value": "-42px",
+            "$type": "dimension"
+          },
+          "bottom": {
+            "$value": "0px",
+            "$type": "dimension"
+          },
+          "false": {
+            "$value": "0px",
             "$type": "dimension"
           }
         },

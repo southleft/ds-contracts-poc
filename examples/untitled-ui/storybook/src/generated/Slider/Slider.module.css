@@ -120,7 +120,6 @@
 .Tooltip {
   display: flex;
   height: var(--imported-slider-progress-left-control-tooltip-height);
-  top: 28px;
   position: absolute;
 }
 
@@ -138,6 +137,22 @@
 
 .leftControl-75 .Tooltip {
   left: var(--imported-slider-progress-left-control-tooltip-left-75);
+}
+
+.label-bottom .Tooltip {
+  top: var(--imported-slider-progress-left-control-tooltip-top-bottom);
+}
+
+.label-bottomFloating .Tooltip {
+  top: var(--imported-slider-progress-left-control-tooltip-top-bottomFloating);
+}
+
+.label-topFloating .Tooltip {
+  top: var(--imported-slider-progress-left-control-tooltip-top-topFloating);
+}
+
+.label-false .Tooltip {
+  top: var(--imported-slider-progress-left-control-tooltip-top-false);
 }
 
 .leftControl-0 .Tooltip {
@@ -260,7 +275,6 @@
 .rightControlTooltip {
   display: flex;
   height: var(--imported-slider-progress-right-control-tooltip-height);
-  top: 28px;
   position: absolute;
 }
 
@@ -278,6 +292,22 @@
 
 .rightControl-100 .rightControlTooltip {
   left: var(--imported-slider-progress-right-control-tooltip-left-100);
+}
+
+.label-bottom .rightControlTooltip {
+  top: var(--imported-slider-progress-right-control-tooltip-top-bottom);
+}
+
+.label-bottomFloating .rightControlTooltip {
+  top: var(--imported-slider-progress-right-control-tooltip-top-bottomFloating);
+}
+
+.label-topFloating .rightControlTooltip {
+  top: var(--imported-slider-progress-right-control-tooltip-top-topFloating);
+}
+
+.label-false .rightControlTooltip {
+  top: var(--imported-slider-progress-right-control-tooltip-top-false);
 }
 
 .rightControl-25 .rightControlTooltip {
