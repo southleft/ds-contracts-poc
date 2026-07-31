@@ -1,0 +1,63 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "dumpVersion": "1.9",
+  "note": "canvas conformance fixture - hand-authored dump v1.9"
+ },
+ "Case": {
+  "setName": "Case",
+  "type": "COMPONENT",
+  "variants": [
+   {
+    "name": "Case",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "fill": {
+     "var": "color/surface/background"
+    },
+    "children": [
+     {
+      "name": "a",
+      "type": "ELLIPSE",
+      "fill": {
+       "hex": "#12b76a"
+      },
+      "shape": {
+       "kind": "ellipse",
+       "width": 24,
+       "height": 24,
+       "arc": {
+        "start": 0.0,
+        "end": 3.141592653589793,
+        "innerRadius": 0.8
+       }
+      }
+     },
+     {
+      "name": "t",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "style": "badge"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

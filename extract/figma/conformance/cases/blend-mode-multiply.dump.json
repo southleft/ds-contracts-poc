@@ -1,0 +1,59 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "dumpVersion": "1.9",
+  "note": "canvas conformance fixture - hand-authored dump v1.9"
+ },
+ "Case": {
+  "setName": "Case",
+  "type": "COMPONENT",
+  "variants": [
+   {
+    "name": "Case",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "CENTER",
+     "counter": "CENTER",
+     "spacing": 0,
+     "padding": [
+      4,
+      12,
+      4,
+      12
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "paddingLeft": "space/inset-x/sm",
+     "paddingTop": "space/inset-y/sm",
+     "paddingRight": "space/inset-x/sm",
+     "paddingBottom": "space/inset-y/sm"
+    },
+    "fill": {
+     "var": "color/feedback/info/background"
+    },
+    "children": [
+     {
+      "name": "a",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "style": "badge"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "_degradations": [
+  {
+   "code": "blend-mode-unsupported",
+   "nodePath": "Case:Case",
+   "message": "blendMode MULTIPLY has no dump v1 projection - node renders as NORMAL"
+  }
+ ]
+}

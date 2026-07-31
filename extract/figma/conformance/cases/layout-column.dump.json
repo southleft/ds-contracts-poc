@@ -1,0 +1,63 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "dumpVersion": "1.9",
+  "note": "canvas conformance fixture - hand-authored dump v1.9"
+ },
+ "Case": {
+  "setName": "Case",
+  "type": "COMPONENT",
+  "variants": [
+   {
+    "name": "Case",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 8,
+     "padding": [
+      8,
+      8,
+      8,
+      8
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "space/gap/sm",
+     "paddingLeft": "space/inset-x/sm",
+     "paddingRight": "space/inset-x/sm",
+     "paddingTop": "space/inset-y/sm",
+     "paddingBottom": "space/inset-y/sm"
+    },
+    "fill": {
+     "var": "color/feedback/info/background"
+    },
+    "children": [
+     {
+      "name": "a",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "style": "badge"
+      }
+     },
+     {
+      "name": "b",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "style": "badge"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

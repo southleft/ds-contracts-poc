@@ -1,0 +1,60 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "dumpVersion": "1.9",
+  "note": "canvas conformance fixture - hand-authored dump v1.9"
+ },
+ "Case": {
+  "setName": "Case",
+  "type": "COMPONENT",
+  "variants": [
+   {
+    "name": "Case",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "fill": {
+     "var": "color/surface/background"
+    },
+    "children": [
+     {
+      "name": "t",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "style": "badge"
+      }
+     }
+    ],
+    "effects": [
+     {
+      "type": "INNER_SHADOW",
+      "color": {
+       "hex": "#000000",
+       "alpha": 0.2
+      },
+      "offset": {
+       "x": 0,
+       "y": 2
+      },
+      "radius": 4
+     }
+    ]
+   }
+  ]
+ }
+}

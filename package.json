@@ -82,7 +82,8 @@
     "conformance": "tsx conformance/run.ts",
     "conformance:report": "tsx conformance/report.ts",
     "child-wider": "node scripts/child-wider.mjs",
-    "figma:fresh": "node scripts/figma-scripts-fresh.mjs"
+    "figma:fresh": "node scripts/figma-scripts-fresh.mjs",
+    "conformance:canvas": "tsx extract/figma/conformance/run.ts"
   },
   "engines": {
     "node": ">=20"
