@@ -28,6 +28,8 @@ const SETS: Record<string,{comp:string}> = {
   'input-field-base':{comp:'InputFieldBase'}, 'avatar-group':{comp:'AvatarGroup'},
   'tooltip':{comp:'Tooltip'},
   'slider':{comp:'Slider'}, 'progress-bar':{comp:'ProgressBar'}, 'progress-circle':{comp:'ProgressCircle'},
+  'avatar':{comp:'Avatar'}, 'avatar-label-group':{comp:'AvatarLabelGroup'}, 'avatar-add-button':{comp:'AvatarAddButton'},
+  'button-group-base':{comp:'ButtonGroupBase'}, 'social-button':{comp:'SocialButton'},
 };
 type Row={set:string,variant:string,score:number|null,note?:string};
 const results: Row[] = [];
