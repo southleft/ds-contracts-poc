@@ -70,7 +70,7 @@ export interface EmitReactInlineResult {
 }
 
 const ALIGN_CSS: Record<string, string> = {
-  start: 'flex-start', center: 'center', end: 'flex-end', stretch: 'stretch',
+  start: 'flex-start', center: 'center', end: 'flex-end', stretch: 'stretch', baseline: 'baseline',
 };
 const JUSTIFY_CSS: Record<string, string> = {
   start: 'flex-start', center: 'center', end: 'flex-end', 'space-between': 'space-between',

@@ -111,7 +111,11 @@ export const PropSchema = z
 export const LayoutSchema = z.strictObject({
   display: z.enum(['flex', 'inline-flex']).optional(),
   direction: z.enum(['row', 'column']).optional(),
-  align: z.enum(['start', 'center', 'end', 'stretch']).optional(),
+  /** Cross-axis alignment. `baseline` is CARRY-BOTH like the rest: CSS
+   *  `align-items: baseline`, canvas `counterAxisAlignItems: 'BASELINE'`
+   *  (native on HORIZONTAL auto-layout — on a column the canvas falls back
+   *  to MIN, which is what a column baseline draws anyway). */
+  align: z.enum(['start', 'center', 'end', 'stretch', 'baseline']).optional(),
   justify: z.enum(['start', 'center', 'end', 'space-between']).optional(),
   /** Part takes remaining space (code: flex 1 1 auto; Figma: fill container). */
   grow: z.boolean().optional(),
@@ -133,7 +137,7 @@ export const LayoutSchema = z.strictObject({
 export const VariantLayoutSchema = z.strictObject({
   display: z.enum(['flex', 'inline-flex']).optional(),
   direction: z.enum(['row', 'column', 'row-reverse', 'column-reverse']).optional(),
-  align: z.enum(['start', 'center', 'end', 'stretch']).optional(),
+  align: z.enum(['start', 'center', 'end', 'stretch', 'baseline']).optional(),
   justify: z.enum(['start', 'center', 'end', 'space-between']).optional(),
 });
 
@@ -1256,7 +1260,7 @@ export type VariantLayout = z.infer<typeof VariantLayoutSchema>;
 export interface ResolvedLayout {
   display?: 'flex' | 'inline-flex';
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
-  align?: 'start' | 'center' | 'end' | 'stretch';
+  align?: 'start' | 'center' | 'end' | 'stretch' | 'baseline';
   justify?: 'start' | 'center' | 'end' | 'space-between';
   grow?: boolean;
   overlap?: boolean;

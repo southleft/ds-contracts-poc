@@ -168,7 +168,7 @@ const PRIMARY_CSS: Record<string, string> = {
   MAX: 'flex-end',
   SPACE_BETWEEN: 'space-between',
 };
-const COUNTER_CSS: Record<string, string> = { MIN: 'flex-start', CENTER: 'center', MAX: 'flex-end' };
+const COUNTER_CSS: Record<string, string> = { MIN: 'flex-start', CENTER: 'center', MAX: 'flex-end', BASELINE: 'baseline' };
 
 const OVERLAY_CSS: Record<string, string> = {
   top: 'bottom: 100%; left: 0;',

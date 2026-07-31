@@ -168,7 +168,7 @@ const OVERLAY_CSS: Record<string, string[]> = {
   end: ['left: 100%', 'top: 0'],
 };
 const ALIGN_CSS: Record<string, string> = {
-  start: 'flex-start', center: 'center', end: 'flex-end', stretch: 'stretch',
+  start: 'flex-start', center: 'center', end: 'flex-end', stretch: 'stretch', baseline: 'baseline',
 };
 const JUSTIFY_CSS: Record<string, string> = {
   start: 'flex-start', center: 'center', end: 'flex-end', 'space-between': 'space-between',

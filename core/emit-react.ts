@@ -137,6 +137,7 @@ const ALIGN_CSS: Record<string, string> = {
   center: 'center',
   end: 'flex-end',
   stretch: 'stretch',
+  baseline: 'baseline',
 };
 const JUSTIFY_CSS: Record<string, string> = {
   start: 'flex-start',

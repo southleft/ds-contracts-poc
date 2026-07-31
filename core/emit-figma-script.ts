@@ -58,7 +58,9 @@ import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 export interface LayoutSpec {
   mode: 'HORIZONTAL' | 'VERTICAL';
   primary: 'MIN' | 'CENTER' | 'MAX' | 'SPACE_BETWEEN';
-  counter: 'MIN' | 'CENTER' | 'MAX';
+  /** BASELINE is native, but ONLY on HORIZONTAL auto-layout — Figma throws on
+   *  a VERTICAL frame. `layoutSpec` never produces it under mode VERTICAL. */
+  counter: 'MIN' | 'CENTER' | 'MAX' | 'BASELINE';
   stretchChildren?: boolean;
   /** v15 (S4/matrix a.8): flex-wrap: wrap → layoutWrap 'WRAP' (native). */
   wrap?: boolean;
@@ -917,11 +919,13 @@ function parseCssGradient(value: string): NodeSpec['gradient'] | undefined {
   return { angle: ((angle % 360) + 360) % 360, stops };
 }
 
-const ALIGN_FIGMA: Record<string, 'MIN' | 'CENTER' | 'MAX'> = {
+const ALIGN_FIGMA: Record<string, 'MIN' | 'CENTER' | 'MAX' | 'BASELINE'> = {
   start: 'MIN',
   center: 'CENTER',
   end: 'MAX',
   stretch: 'MIN',
+  // Native counterAxisAlignItems value — see the VERTICAL guard in layoutSpec.
+  baseline: 'BASELINE',
 };
 const JUSTIFY_FIGMA: Record<string, LayoutSpec['primary']> = {
   start: 'MIN',
@@ -1063,10 +1067,15 @@ function layoutSpec(part: Part, isRoot: boolean, subst: Record<string, string> =
       return { mode: 'VERTICAL', primary: 'MIN', counter: 'MIN', stretchChildren: true };
     }
   }
+  const mode: 'HORIZONTAL' | 'VERTICAL' = l?.direction?.startsWith('column') ? 'VERTICAL' : 'HORIZONTAL';
+  const counter = l?.align ? ALIGN_FIGMA[l.align] : 'MIN';
   return {
-    mode: l?.direction?.startsWith('column') ? 'VERTICAL' : 'HORIZONTAL',
+    mode,
     primary: l?.justify ? JUSTIFY_FIGMA[l.justify] : 'MIN',
-    counter: l?.align ? ALIGN_FIGMA[l.align] : 'MIN',
+    // counterAxisAlignItems = 'BASELINE' is a runtime THROW on a VERTICAL
+    // auto-layout frame; a column's baseline is its start edge anyway, so the
+    // column projection is MIN. (No-op for every other value.)
+    counter: counter === 'BASELINE' && mode === 'VERTICAL' ? 'MIN' : counter,
     // Round 4 (CSS truth): flex align-items DEFAULTS to stretch — an
     // align-unset flex container stretches children on the counter axis
     // (the Banner ribbon spans the card). Explicit align values behave as

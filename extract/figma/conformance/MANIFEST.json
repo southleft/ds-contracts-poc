@@ -167,16 +167,8 @@
      "\"align\":\"baseline\""
     ]
    },
-   "status": "red",
-   "observed": "SILENT LOSS - the layout block carries direction only; no align, no note anywhere in the naming union",
-   "observedCheck": {
-    "absent": [
-     "\"align\""
-    ],
-    "noteAbsent": [
-     "[Bb]aseline|BASELINE"
-    ]
-   }
+   "status": "green",
+   "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). The SILENT LOSS is closed by CARRIAGE, not by a note. Mechanism: ALIGN_INV (core/propose-figma.ts:2548) held only MIN/CENTER/MAX, so the fourth documented DumpLayout.counter value fell through to undefined and invertLayout emitted direction only — no align, and nothing in the naming union. Fix: ALIGN_INV.BASELINE = 'baseline', and the align fact widened end-to-end on BOTH surfaces so the proposal is legal and renderable: LayoutSchema/VariantLayoutSchema align enum + ResolvedLayout (packages/schema/src/contract-schema.ts:114,140,1263) regenerated into contracts/contract.schema.json and packages/schema/contract.schema.json; ALIGN_CSS -> align-items: baseline (core/emit-react.ts:135, core/emit-html.ts:72, core/emit-react-inline.ts:72, packages/emitter-web-components/src/emit-wc.ts:170); ALIGN_FIGMA -> counterAxisAlignItems BASELINE (core/emit-figma-script.ts:922) with a VERTICAL guard in layoutSpec (:1070) because Figma throws on BASELINE under a column; roundtrip A_MAP (extract/figma/roundtrip.ts:77); COUNTER_CSS previews (extract/figma/canvas-gate/canvas-doc.ts:116, playground/src/engine/canvas-preview.ts:171). MEASURED: the two-text-child row now proposes anatomy.root.layout = {\"display\":\"flex\",\"direction\":\"row\",\"align\":\"baseline\"}. Every edit is a map key addition — zero committed dumps carry counter:BASELINE and zero committed contracts carry align:baseline, so no committed artifact moves."
   },
   {
    "id": "layout-gap-literal",
@@ -633,16 +625,8 @@
      "3ba1c6f0aa"
     ]
    },
-   "status": "red",
-   "observed": "the childless paint-less image frame is eaten by isSpacer (core/propose-figma.ts:3214 checks fill/stroke/bound/text but NOT imageFill/fixedSize) - early spacer return skips the imageFill mint, the part lands empty, and the note still claims 'IMAGE fill carried BY HASH' (a wrong-name: named as carried, actually dropped)",
-   "observedCheck": {
-    "note": "IMAGE fill carried BY HASH",
-    "absent": [
-     "background-image",
-     "3ba1c6f0aa",
-     "imported\\.case\\.a\\.width"
-    ]
-   }
+   "status": "green",
+   "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). The WRONG-NAME is closed at its source. Mechanism: isSpacer (core/propose-figma.ts:3222) tested fill/stroke/bound/text only, so a childless, paint-less image FRAME was classified a spacer; the spacer branch (:3941) carries layout and returns early, the part landed {}, its drawn 32px box was lost — while buildPart's note at :3603 still announced \"IMAGE fill carried BY HASH\". Fix: isSpacer now also refuses any node carrying imageFill or fixedSize (both absent-field no-ops, so a real spacer classifies exactly as before). MEASURED: the part carries tokens background-image = {imported.case.a.background-image} = url('./assets/images/3ba1c6f0aa.png'), width/height = {imported.case.a.width}/{imported.case.a.height} = 32px, and the declared cover triple (background-size: cover, background-position: 50% 50%, background-repeat: no-repeat); the note and the contract finally say the same thing. The CASE FILE was also corrected in the same pass: dump.plugin.js:429 writes figma's raw imageHash and imageFillCss appends the .png, so the old fixture's \"3ba1c6f0aa.png\" mis-modelled the capture surface and produced a .png.png URL; the case now holds the bare hash \"3ba1c6f0aa\". Byte-neutrality: a scan of all 3,982 FRAME nodes in every committed dump found exactly TWO childless paint-less frames carrying imageFill/fixedSize — this case and fill-image-bool."
   },
   {
    "id": "fill-image-bool",
@@ -654,15 +638,8 @@
      "linear-gradient|placeholder"
     ]
    },
-   "status": "red",
-   "observed": "same isSpacer trap as fill-image-hash: the placeholder gradient is never minted, the drawn 32px box is lost, and the note claims a FRAME part renders the placeholder",
-   "observedCheck": {
-    "note": "IMAGE fill captured BY NAME only",
-    "absent": [
-     "gradient",
-     "imported\\.case\\.a\\.width"
-    ]
-   }
+   "status": "green",
+   "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). Same isSpacer trap as fill-image-hash, same one-line fix (core/propose-figma.ts:3222 now also refuses imageFill/fixedSize). MEASURED: the part carries background-image = {imported.case.a.background-image} = linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%) — IMAGE_FILL_PLACEHOLDER_GRADIENT, the one documented spelling — plus the drawn 32px box as width/height mint observations. No cover triple here, by design: declareImageFillCover is hash-only (a placeholder gradient needs no background-size)."
   },
   {
    "id": "fill-gradient",

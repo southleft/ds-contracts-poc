@@ -74,7 +74,7 @@ interface NormLayout {
 }
 
 const J_MAP: Record<string, string> = { start: 'MIN', center: 'CENTER', end: 'MAX', 'space-between': 'SPACE_BETWEEN' };
-const A_MAP: Record<string, string> = { start: 'MIN', center: 'CENTER', end: 'MAX', stretch: 'MIN' };
+const A_MAP: Record<string, string> = { start: 'MIN', center: 'CENTER', end: 'MAX', stretch: 'MIN', baseline: 'BASELINE' };
 
 /** The canvas the generator would draw for this layout — the honest basis of
  *  comparison ("align: start" and no align draw the same node). */

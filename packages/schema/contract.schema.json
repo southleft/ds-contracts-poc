@@ -509,7 +509,8 @@
                 "start",
                 "center",
                 "end",
-                "stretch"
+                "stretch",
+                "baseline"
               ]
             },
             "justify": {
@@ -569,7 +570,8 @@
                       "start",
                       "center",
                       "end",
-                      "stretch"
+                      "stretch",
+                      "baseline"
                     ]
                   },
                   "justify": {

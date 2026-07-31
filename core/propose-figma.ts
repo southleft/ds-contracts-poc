@@ -2549,6 +2549,14 @@ const ALIGN_INV: Record<string, string | undefined> = {
   MIN: undefined,
   CENTER: 'center',
   MAX: 'end',
+  // BASELINE is the fourth documented DumpLayout.counter value (extract/figma/
+  // types.ts) and Figma sets it natively on HORIZONTAL auto-layout. Its CSS
+  // twin is `align-items: baseline` — a fact both surfaces express, so it
+  // CARRIES like the other three rather than dropping. It used to fall
+  // through this map to `undefined` and land nowhere: no `align` in the
+  // layout block and no note in the naming union — the SILENT-LOSS class.
+  // (Canvas conformance: layout-align-baseline.)
+  BASELINE: 'baseline',
 };
 
 /** align:stretch evidence — the exact artifact the generator leaves: a column
@@ -3211,10 +3219,33 @@ function applySlotDefaultContent(
   );
 }
 
+/** A SPACER is a childless FRAME that draws NOTHING — its whole job is
+ *  in-flow growth, so the spacer branch below carries layout only and returns
+ *  early. The predicate must therefore be exhaustive over "draws something":
+ *  a node it claims wrongly loses every channel the early return skips.
+ *
+ *  `imageFill` (dump v1.7 boolean marker / v1.9 hash) and `fixedSize` (dump
+ *  v1.8, the drawn box of a non-auto-layout child inside auto-layout) are
+ *  drawn facts that fill/stroke/bound/text do not cover — an image FRAME
+ *  carries its paint in NEITHER `fill` NOR `stroke`. Before this guard a
+ *  childless, paint-less image frame was eaten here: the part landed `{}`,
+ *  its 32px box was lost, and buildPart's own note (top of the function)
+ *  still announced "IMAGE fill carried BY HASH" — named-as-carried and
+ *  actually dropped, the WRONG-NAME class. (Canvas conformance:
+ *  fill-image-hash, fill-image-bool.) Absent fields are an exact no-op, so a
+ *  real spacer classifies exactly as before. */
 const isSpacer = (m: Merged): boolean =>
   m.type === 'FRAME' &&
   m.children.length === 0 &&
-  m.occ.every((o) => !o.node.fill && !o.node.stroke && !o.node.bound && !o.node.text);
+  m.occ.every(
+    (o) =>
+      !o.node.fill &&
+      !o.node.stroke &&
+      !o.node.bound &&
+      !o.node.text &&
+      o.node.imageFill === undefined &&
+      o.node.fixedSize === undefined,
+  );
 
 /** The generator wraps styled static text in a row/center/center frame with
  *  zero spacing/padding (empty text → the frame alone). Recognize the wrap

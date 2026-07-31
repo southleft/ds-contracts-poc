@@ -68,7 +68,7 @@ export interface ExtractedPart {
   layout?: {
     display?: 'flex' | 'inline-flex';
     direction?: 'row' | 'column';
-    align?: 'start' | 'center' | 'end' | 'stretch';
+    align?: 'start' | 'center' | 'end' | 'stretch' | 'baseline';
     justify?: 'start' | 'center' | 'end' | 'space-between';
     grow?: boolean;
     overlap?: boolean;
