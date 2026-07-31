@@ -1275,5 +1275,1785 @@
   "variant": "size_xxs_shape_half_circle_label_true",
   "score": null,
   "note": "axis not carried: size=xxs"
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_false_status_icon_company_state_default",
+  "score": 57.62
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_false_status_icon_company_state_focused",
+  "score": 47.5
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_false_status_icon_company_state_hover",
+  "score": 57.62
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_false_status_icon_false_state_default",
+  "score": 58.28
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_false_status_icon_false_state_focused",
+  "score": 47.29
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_false_status_icon_false_state_hover",
+  "score": 58.28
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_false_status_icon_online_indicator_state_default",
+  "score": 57.79
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+  "score": 45.69
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+  "score": 57.79
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_true_status_icon_company_state_default",
+  "score": 80.73
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_true_status_icon_company_state_focused",
+  "score": 69.91
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_true_status_icon_company_state_hover",
+  "score": 80.73
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_true_status_icon_false_state_default",
+  "score": 70.87
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_true_status_icon_false_state_focused",
+  "score": 69.72
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_true_status_icon_false_state_hover",
+  "score": 70.87
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_true_status_icon_online_indicator_state_default",
+  "score": 76.09
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+  "score": 69.77
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+  "score": 76.09
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_true_text_false_status_icon_company_state_default",
+  "score": 91.8
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_true_text_false_status_icon_company_state_focused",
+  "score": 72.9
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_true_text_false_status_icon_company_state_hover",
+  "score": 91.8
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_true_text_false_status_icon_false_state_default",
+  "score": 94.92
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_true_text_false_status_icon_false_state_focused",
+  "score": 72.72
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_true_text_false_status_icon_false_state_hover",
+  "score": 94.92
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_true_text_false_status_icon_online_indicator_state_default",
+  "score": 29.02
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+  "score": 72.76
+ },
+ {
+  "set": "avatar",
+  "variant": "size_2xl_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+  "score": 29.02
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_false_status_icon_company_state_default",
+  "score": 57.84
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_false_status_icon_company_state_focused",
+  "score": 44.66
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_false_status_icon_company_state_hover",
+  "score": 57.84
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_false_status_icon_false_state_default",
+  "score": 58.08
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_false_status_icon_false_state_focused",
+  "score": 43.69
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_false_status_icon_false_state_hover",
+  "score": 58.08
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_false_status_icon_online_indicator_state_default",
+  "score": 55.39
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+  "score": 43.77
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+  "score": 55.39
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_true_status_icon_company_state_default",
+  "score": 80.23
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_true_status_icon_company_state_focused",
+  "score": 62.56
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_true_status_icon_company_state_hover",
+  "score": 80.23
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_true_status_icon_false_state_default",
+  "score": 70.03
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_true_status_icon_false_state_focused",
+  "score": 61.34
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_true_status_icon_false_state_hover",
+  "score": 70.03
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_true_status_icon_online_indicator_state_default",
+  "score": 74.73
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+  "score": 61.37
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+  "score": 74.73
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_true_text_false_status_icon_company_state_default",
+  "score": 89.63
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_true_text_false_status_icon_company_state_focused",
+  "score": 65.39
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_true_text_false_status_icon_company_state_hover",
+  "score": 89.63
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_true_text_false_status_icon_false_state_default",
+  "score": 92.87
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_true_text_false_status_icon_false_state_focused",
+  "score": 64.46
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_true_text_false_status_icon_false_state_hover",
+  "score": 92.87
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_true_text_false_status_icon_online_indicator_state_default",
+  "score": 32.45
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+  "score": 64.42
+ },
+ {
+  "set": "avatar",
+  "variant": "size_lg_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+  "score": 32.45
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_false_status_icon_company_state_default",
+  "score": 57.95
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_false_status_icon_company_state_focused",
+  "score": 42.68
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_false_status_icon_company_state_hover",
+  "score": 57.95
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_false_status_icon_false_state_default",
+  "score": 57.98
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_false_status_icon_false_state_focused",
+  "score": 41.16
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_false_status_icon_false_state_hover",
+  "score": 57.98
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_false_status_icon_online_indicator_state_default",
+  "score": 54.92
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+  "score": 41.06
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+  "score": 54.92
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_true_status_icon_company_state_default",
+  "score": 79.28
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_true_status_icon_company_state_focused",
+  "score": 56.3
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_true_status_icon_company_state_hover",
+  "score": 79.28
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_true_status_icon_false_state_default",
+  "score": 70.14
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_true_status_icon_false_state_focused",
+  "score": 54.06
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_true_status_icon_false_state_hover",
+  "score": 70.14
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_true_status_icon_online_indicator_state_default",
+  "score": 74.05
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+  "score": 54.33
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+  "score": 74.05
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_true_text_false_status_icon_company_state_default",
+  "score": 89.03
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_true_text_false_status_icon_company_state_focused",
+  "score": 61.1
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_true_text_false_status_icon_company_state_hover",
+  "score": 89.03
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_true_text_false_status_icon_false_state_default",
+  "score": 92.3
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_true_text_false_status_icon_false_state_focused",
+  "score": 59.56
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_true_text_false_status_icon_false_state_hover",
+  "score": 92.3
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_true_text_false_status_icon_online_indicator_state_default",
+  "score": 35.87
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+  "score": 59.38
+ },
+ {
+  "set": "avatar",
+  "variant": "size_md_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+  "score": 35.87
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_false_status_icon_company_state_default",
+  "score": 58.09
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_false_status_icon_company_state_focused",
+  "score": 39.44
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_false_status_icon_company_state_hover",
+  "score": 58.09
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_false_status_icon_false_state_default",
+  "score": 57.76
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_false_status_icon_false_state_focused",
+  "score": 37.02
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_false_status_icon_false_state_hover",
+  "score": 57.76
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_false_status_icon_online_indicator_state_default",
+  "score": 53.92
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+  "score": 36.77
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+  "score": 53.92
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_true_status_icon_company_state_default",
+  "score": 78.05
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_true_status_icon_company_state_focused",
+  "score": 48.75
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_true_status_icon_company_state_hover",
+  "score": 78.05
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_true_status_icon_false_state_default",
+  "score": 72.23
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_true_status_icon_false_state_focused",
+  "score": 44.24
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_true_status_icon_false_state_hover",
+  "score": 72.23
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_true_status_icon_online_indicator_state_default",
+  "score": 72.23
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+  "score": 44.8
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+  "score": 72.23
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_true_text_false_status_icon_company_state_default",
+  "score": 87.86
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_true_text_false_status_icon_company_state_focused",
+  "score": 54.22
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_true_text_false_status_icon_company_state_hover",
+  "score": 87.86
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_true_text_false_status_icon_false_state_default",
+  "score": 91.39
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_true_text_false_status_icon_false_state_focused",
+  "score": 51.69
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_true_text_false_status_icon_false_state_hover",
+  "score": 91.39
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_true_text_false_status_icon_online_indicator_state_default",
+  "score": 39.68
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+  "score": 51.5
+ },
+ {
+  "set": "avatar",
+  "variant": "size_sm_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+  "score": 39.68
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_false_status_icon_company_state_default",
+  "score": 57.91
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_false_status_icon_company_state_focused",
+  "score": 46.31
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_false_status_icon_company_state_hover",
+  "score": 57.91
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_false_status_icon_false_state_default",
+  "score": 58.28
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_false_status_icon_false_state_focused",
+  "score": 45.76
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_false_status_icon_false_state_hover",
+  "score": 58.28
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_false_status_icon_online_indicator_state_default",
+  "score": 55.98
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+  "score": 45.81
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+  "score": 55.98
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_true_status_icon_company_state_default",
+  "score": 81.48
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_true_status_icon_company_state_focused",
+  "score": 66.37
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_true_status_icon_company_state_hover",
+  "score": 81.48
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_true_status_icon_false_state_default",
+  "score": 71.26
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_true_status_icon_false_state_focused",
+  "score": 65.75
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_true_status_icon_false_state_hover",
+  "score": 71.26
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_true_status_icon_online_indicator_state_default",
+  "score": 75.55
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+  "score": 65.71
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+  "score": 75.55
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_true_text_false_status_icon_company_state_default",
+  "score": 90.36
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_true_text_false_status_icon_company_state_focused",
+  "score": 69.23
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_true_text_false_status_icon_company_state_hover",
+  "score": 90.36
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_true_text_false_status_icon_false_state_default",
+  "score": 93.33
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_true_text_false_status_icon_false_state_focused",
+  "score": 68.71
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_true_text_false_status_icon_false_state_hover",
+  "score": 93.33
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_true_text_false_status_icon_online_indicator_state_default",
+  "score": 31.12
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+  "score": 68.67
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xl_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+  "score": 31.12
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_false_status_icon_company_state_default",
+  "score": 58.18
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_false_status_icon_company_state_focused",
+  "score": 33.12
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_false_status_icon_company_state_hover",
+  "score": 58.18
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_false_status_icon_false_state_default",
+  "score": 57.25
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_false_status_icon_false_state_focused",
+  "score": 30.35
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_false_status_icon_false_state_hover",
+  "score": 57.25
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_false_status_icon_online_indicator_state_default",
+  "score": 52.48
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+  "score": 29.33
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+  "score": 52.48
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_true_status_icon_company_state_default",
+  "score": 72.89
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_true_status_icon_company_state_focused",
+  "score": 39.19
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_true_status_icon_company_state_hover",
+  "score": 72.89
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_true_status_icon_false_state_default",
+  "score": 66.82
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_true_status_icon_false_state_focused",
+  "score": 33.34
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_true_status_icon_false_state_hover",
+  "score": 66.82
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_true_status_icon_online_indicator_state_default",
+  "score": 66.13
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+  "score": 34.09
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+  "score": 66.13
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_true_text_false_status_icon_company_state_default",
+  "score": 85.89
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_true_text_false_status_icon_company_state_focused",
+  "score": 43.25
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_true_text_false_status_icon_company_state_hover",
+  "score": 85.89
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_true_text_false_status_icon_false_state_default",
+  "score": 89.68
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_true_text_false_status_icon_false_state_focused",
+  "score": 39.98
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_true_text_false_status_icon_false_state_hover",
+  "score": 89.68
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_true_text_false_status_icon_online_indicator_state_default",
+  "score": 3.35
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+  "score": 39.25
+ },
+ {
+  "set": "avatar",
+  "variant": "size_xs_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+  "score": 3.35
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_lg_status_icon_company_state_default",
+  "score": 80.19
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_lg_status_icon_company_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_lg_status_icon_company_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_lg_status_icon_false_state_default",
+  "score": 82.15
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_lg_status_icon_false_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_lg_status_icon_false_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_lg_status_icon_online_indicator_state_default",
+  "score": 81.5
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_lg_status_icon_online_indicator_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_lg_status_icon_online_indicator_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_md_status_icon_company_state_default",
+  "score": 79.47
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_md_status_icon_company_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_md_status_icon_company_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_md_status_icon_false_state_default",
+  "score": 79.18
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_md_status_icon_false_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_md_status_icon_false_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_md_status_icon_online_indicator_state_default",
+  "score": 78.43
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_md_status_icon_online_indicator_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_md_status_icon_online_indicator_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_sm_status_icon_company_state_default",
+  "score": 76.62
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_sm_status_icon_company_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_sm_status_icon_company_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_sm_status_icon_false_state_default",
+  "score": 74.79
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_sm_status_icon_false_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_sm_status_icon_false_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_sm_status_icon_online_indicator_state_default",
+  "score": 73.96
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_sm_status_icon_online_indicator_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_sm_status_icon_online_indicator_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_xl_status_icon_company_state_default",
+  "score": 79.11
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_xl_status_icon_company_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_xl_status_icon_company_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_xl_status_icon_false_state_default",
+  "score": 78.84
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_xl_status_icon_false_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_xl_status_icon_false_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_xl_status_icon_online_indicator_state_default",
+  "score": 78.21
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_xl_status_icon_online_indicator_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-label-group",
+  "variant": "size_xl_status_icon_online_indicator_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_md_state_default",
+  "score": 97.52
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_md_state_disabled",
+  "score": 98.66
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_md_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_md_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_sm_state_default",
+  "score": 96.13
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_sm_state_disabled",
+  "score": 98.2
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_sm_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_sm_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_xs_state_default",
+  "score": 93.97
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_xs_state_disabled",
+  "score": 96.85
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_xs_state_focus",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "avatar-add-button",
+  "variant": "size_xs_state_hover",
+  "score": null,
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_dot_state_default",
+  "score": 76.32
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_dot_state_disabled",
+  "score": 78.61
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_dot_state_focused",
+  "score": 77.06
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_dot_state_hover",
+  "score": 77.06
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_false_state_default",
+  "score": 77.13
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_false_state_disabled",
+  "score": 79.46
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_false_state_focused",
+  "score": 78.18
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_false_state_hover",
+  "score": 78.15
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_leading_state_default",
+  "score": 77.72
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_leading_state_disabled",
+  "score": 80.37
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_leading_state_focused",
+  "score": 78.19
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_leading_state_hover",
+  "score": 77.79
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_only_state_default",
+  "score": 81.88
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_only_state_disabled",
+  "score": 83.69
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_only_state_focused",
+  "score": 82.51
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_false_icon_only_state_hover",
+  "score": 82.51
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_dot_state_default",
+  "score": 77
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_dot_state_disabled",
+  "score": 79.7
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_dot_state_focused",
+  "score": 77
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_dot_state_hover",
+  "score": 77
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_false_state_default",
+  "score": 78.15
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_false_state_disabled",
+  "score": 81.03
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_false_state_focused",
+  "score": 78.15
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_false_state_hover",
+  "score": 78.15
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_leading_state_default",
+  "score": 77.79
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_leading_state_disabled",
+  "score": 81.35
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_leading_state_focused",
+  "score": 77.79
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_leading_state_hover",
+  "score": 77.79
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_only_state_default",
+  "score": 82.37
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_only_state_disabled",
+  "score": 84.97
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_only_state_focused",
+  "score": 82.37
+ },
+ {
+  "set": "button-group-base",
+  "variant": "current_true_icon_only_state_hover",
+  "score": 82.37
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_false_theme_brand_state_default",
+  "score": 82
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_false_theme_brand_state_focused",
+  "score": 59.58
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_false_theme_brand_state_hover",
+  "score": 82
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_false_theme_color_state_default",
+  "score": 75.32
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_false_theme_color_state_focused",
+  "score": 74.78
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_false_theme_color_state_hover",
+  "score": 75.36
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_false_theme_color_with_brand_state_default",
+  "score": 74.52
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_false_theme_color_with_brand_state_focused",
+  "score": 74.19
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_false_theme_color_with_brand_state_hover",
+  "score": 74.51
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_true_theme_brand_state_default",
+  "score": 84.32
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_true_theme_brand_state_focused",
+  "score": 83.29
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_true_theme_brand_state_hover",
+  "score": 84.32
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_true_theme_color_state_default",
+  "score": 76.93
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_true_theme_color_state_focused",
+  "score": 73.86
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_true_theme_color_state_hover",
+  "score": 77.04
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_true_theme_color_with_brand_state_default",
+  "score": 76.78
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_true_theme_color_with_brand_state_focused",
+  "score": 73.74
+ },
+ {
+  "set": "social-button",
+  "variant": "social_apple_supporting_text_true_theme_color_with_brand_state_hover",
+  "score": 76.87
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_false_theme_brand_state_default",
+  "score": 85.28
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_false_theme_brand_state_focused",
+  "score": 61.23
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_false_theme_brand_state_hover",
+  "score": 84.16
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_false_theme_color_state_default",
+  "score": 75.87
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_false_theme_color_state_focused",
+  "score": 75.16
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_false_theme_color_state_hover",
+  "score": 76.01
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_false_theme_color_with_brand_state_default",
+  "score": 66.74
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_false_theme_color_with_brand_state_focused",
+  "score": 68.74
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_false_theme_color_with_brand_state_hover",
+  "score": 66.76
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_true_theme_brand_state_default",
+  "score": 82.34
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_true_theme_brand_state_focused",
+  "score": 78.03
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_true_theme_brand_state_hover",
+  "score": 82.52
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_true_theme_color_state_default",
+  "score": 77.26
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_true_theme_color_state_focused",
+  "score": 78.1
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_true_theme_color_state_hover",
+  "score": 77.37
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_true_theme_color_with_brand_state_default",
+  "score": 75.74
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_true_theme_color_with_brand_state_focused",
+  "score": 76.87
+ },
+ {
+  "set": "social-button",
+  "variant": "social_dribbble_supporting_text_true_theme_color_with_brand_state_hover",
+  "score": 75.78
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_false_theme_brand_state_default",
+  "score": 79.8
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_false_theme_brand_state_focused",
+  "score": 57.57
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_false_theme_brand_state_hover",
+  "score": 79.37
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_false_theme_color_state_default",
+  "score": 71.11
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_false_theme_color_state_focused",
+  "score": 71.8
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_false_theme_color_state_hover",
+  "score": 71.22
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_false_theme_color_with_brand_state_default",
+  "score": 70.66
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_false_theme_color_with_brand_state_focused",
+  "score": 71.51
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_false_theme_color_with_brand_state_hover",
+  "score": 70.72
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_true_theme_brand_state_default",
+  "score": 82.35
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_true_theme_brand_state_focused",
+  "score": 77.31
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_true_theme_brand_state_hover",
+  "score": 82.53
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_true_theme_color_state_default",
+  "score": 79.79
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_true_theme_color_state_focused",
+  "score": 75.35
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_true_theme_color_state_hover",
+  "score": 79.78
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_true_theme_color_with_brand_state_default",
+  "score": 79.75
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_true_theme_color_with_brand_state_focused",
+  "score": 75.35
+ },
+ {
+  "set": "social-button",
+  "variant": "social_facebook_supporting_text_true_theme_color_with_brand_state_hover",
+  "score": 79.74
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_false_theme_brand_state_default",
+  "score": 81.63
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_false_theme_brand_state_focused",
+  "score": 59.37
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_false_theme_brand_state_hover",
+  "score": 81.63
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_false_theme_color_state_default",
+  "score": 74.66
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_false_theme_color_state_focused",
+  "score": 74.26
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_false_theme_color_state_hover",
+  "score": 74.7
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_false_theme_color_with_brand_state_default",
+  "score": 74.27
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_false_theme_color_with_brand_state_focused",
+  "score": 74.07
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_false_theme_color_with_brand_state_hover",
+  "score": 74.28
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_true_theme_brand_state_default",
+  "score": 82.7
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_true_theme_brand_state_focused",
+  "score": 82.7
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_true_theme_brand_state_hover",
+  "score": 82.7
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_true_theme_color_state_default",
+  "score": 78.85
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_true_theme_color_state_focused",
+  "score": 77.23
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_true_theme_color_state_hover",
+  "score": 78.91
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_true_theme_color_with_brand_state_default",
+  "score": 78.83
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_true_theme_color_with_brand_state_focused",
+  "score": 77.17
+ },
+ {
+  "set": "social-button",
+  "variant": "social_figma_supporting_text_true_theme_color_with_brand_state_hover",
+  "score": 78.88
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_false_theme_brand_state_default",
+  "score": 73.08
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_false_theme_brand_state_focused",
+  "score": 73.26
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_false_theme_brand_state_hover",
+  "score": 73.12
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_false_theme_color_state_default",
+  "score": 73.59
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_false_theme_color_state_focused",
+  "score": 73.57
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_false_theme_color_state_hover",
+  "score": 73.66
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_false_theme_color_with_brand_state_default",
+  "score": 73.08
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_false_theme_color_with_brand_state_focused",
+  "score": 73.26
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_false_theme_color_with_brand_state_hover",
+  "score": 73.12
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_true_theme_brand_state_default",
+  "score": 78.06
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_true_theme_brand_state_focused",
+  "score": 81.01
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_true_theme_brand_state_hover",
+  "score": 78.08
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_true_theme_color_state_default",
+  "score": 78.13
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_true_theme_color_state_focused",
+  "score": 81.07
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_true_theme_color_state_hover",
+  "score": 78.16
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_true_theme_color_with_brand_state_default",
+  "score": 78.06
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_true_theme_color_with_brand_state_focused",
+  "score": 81.01
+ },
+ {
+  "set": "social-button",
+  "variant": "social_google_supporting_text_true_theme_color_with_brand_state_hover",
+  "score": 78.08
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_false_theme_brand_state_default",
+  "score": 83.95
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_false_theme_brand_state_focused",
+  "score": 61.01
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_false_theme_brand_state_hover",
+  "score": 83.95
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_false_theme_color_state_default",
+  "score": 76.66
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_false_theme_color_state_focused",
+  "score": 75.75
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_false_theme_color_state_hover",
+  "score": 76.66
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_false_theme_color_with_brand_state_default",
+  "score": 76.66
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_false_theme_color_with_brand_state_focused",
+  "score": 75.75
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_false_theme_color_with_brand_state_hover",
+  "score": 76.66
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_true_theme_brand_state_default",
+  "score": 87.66
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_true_theme_brand_state_focused",
+  "score": 80.42
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_true_theme_brand_state_hover",
+  "score": 87.66
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_true_theme_color_state_default",
+  "score": 80.94
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_true_theme_color_state_focused",
+  "score": 75.7
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_true_theme_color_state_hover",
+  "score": 80.95
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_true_theme_color_with_brand_state_default",
+  "score": 80.94
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_true_theme_color_with_brand_state_focused",
+  "score": 75.7
+ },
+ {
+  "set": "social-button",
+  "variant": "social_x_supporting_text_true_theme_color_with_brand_state_hover",
+  "score": 80.95
  }
 ]

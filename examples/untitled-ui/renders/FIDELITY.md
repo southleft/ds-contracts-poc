@@ -14,4 +14,9 @@ Score = % pixels within tolerance, both images content-trimmed then normalized t
 | slider | 40 | 90.9 | 0 | 0 | 0 |
 | progress-bar | 55 | 87.5 | 0 | 0 | 0 |
 | progress-circle | 16 | 81.6 | 4 | 0 | 0 |
-| **ALL** | 217 | **84.1** | | | |
+| avatar | 162 | 62.1 | 0 | 0 | 0 |
+| avatar-label-group | 12 | 78.5 | 0 | 24 | 0 |
+| avatar-add-button | 6 | 96.9 | 0 | 6 | 0 |
+| button-group-base | 32 | 79.4 | 0 | 0 | 0 |
+| social-button | 108 | 76.6 | 0 | 0 | 0 |
+| **ALL** | 537 | **75.7** | | | |
