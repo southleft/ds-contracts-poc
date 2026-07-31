@@ -1042,8 +1042,10 @@ interface StubCapture {
     strokeWeight?: number;
     cornerRadius?: number;
     /** dump v1.7: the node's first visible fill is an IMAGE paint — the stub
-     *  renders the neutral placeholder gradient (bytes stay unexported). */
-    imageFill?: boolean;
+     *  renders the neutral placeholder gradient (bytes stay unexported).
+     *  dump v1.9: the string form carries the image HASH — the exported
+     *  asset's name; the stub renders the asset itself. */
+    imageFill?: boolean | string;
   }>;
 }
 
@@ -1083,6 +1085,37 @@ const partPathOf = (where: string): string => {
  *  placeholder reads as a hole. The image bytes themselves are NOT
  *  exported; the placeholder only keeps the surface from rendering blank. */
 export const IMAGE_FILL_PLACEHOLDER_GRADIENT = 'linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%)';
+
+/** dump v1.9: `imageFill` may carry the image HASH — the name of the asset
+ *  the bridge exported alongside the dump (raw figma.getImageByHash bytes,
+ *  deduped by hash, saved as <hash>.png). A hash renders
+ *  url('./assets/images/<hash>.png') — an asset-NAME reference the consuming
+ *  pipeline resolves (the untitled-ui harness inlines the bytes as a data
+ *  URI when materializing tokens.css; a bundler surface copies the file next
+ *  to the emitted CSS). Boolean true (v1.7/v1.8 dumps, or a hashless paint)
+ *  keeps the placeholder gradient — the documented fallback whenever the
+ *  asset is absent. The hash is sanitized to the exporter's filename
+ *  alphabet, never trusted raw. */
+export const imageFillCss = (v: boolean | string | undefined): string =>
+  typeof v === 'string' && v !== ''
+    ? `url('./assets/images/${v.replace(/[^a-zA-Z0-9._-]+/g, '-')}.png')`
+    : v === true
+      ? IMAGE_FILL_PLACEHOLDER_GRADIENT
+      : 'none';
+
+/** A raster asset needs explicit sizing where a gradient stretched
+ *  implicitly. `cover` is OBSERVED, not assumed: dump v1.9 captures the
+ *  hash form ONLY for scaleMode FILL paints (Figma's FILL = CSS cover);
+ *  FIT/CROP/TILE keep the boolean marker and the placeholder gradient.
+ *  Declared facts (DECLARED_CHANNELS: background-size/position/repeat),
+ *  merged non-destructively — an existing declaration wins. */
+const declareImageFillCover = (holder: Record<string, unknown>): void => {
+  const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+  if (declared['background-size'] === undefined) declared['background-size'] = 'cover';
+  if (declared['background-position'] === undefined) declared['background-position'] = '50% 50%';
+  if (declared['background-repeat'] === undefined) declared['background-repeat'] = 'no-repeat';
+  holder.declared = declared;
+};
 
 function mintObservation(
   ctx: Ctx,
@@ -2925,7 +2958,7 @@ function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): st
         ...(o.node.stroke ? { stroke: o.node.stroke } : {}),
         ...(o.node.strokeWeight !== undefined ? { strokeWeight: o.node.strokeWeight } : {}),
         ...(o.node.cornerRadius !== undefined ? { cornerRadius: o.node.cornerRadius } : {}),
-        ...(o.node.imageFill === true ? { imageFill: true } : {}),
+        ...(o.node.imageFill !== undefined ? { imageFill: o.node.imageFill } : {}),
       });
     }
   }
@@ -3516,9 +3549,11 @@ function buildPart(
   // not carry yet are NAMED once per part, never a throw and never silent.
   // (`abs` is CARRIED since round 2 iteration 2 — carryAbsPlacement per
   // branch below; refusals stay named inside it.)
-  if (m.occ.some((o) => o.node.imageFill === true)) {
+  if (m.occ.some((o) => o.node.imageFill !== undefined)) {
     ctx.notes.push(
-      `${where}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — the image itself is NOT exported (a later round exports the asset); a FRAME part renders the neutral placeholder gradient in its place (stub instances via their stub geometry; other node classes render without the image)`,
+      m.occ.some((o) => typeof o.node.imageFill === 'string')
+        ? `${where}: IMAGE fill carried BY HASH (dump v1.9 \`imageFill\`) — a FRAME part renders the exported asset (url('./assets/images/<hash>.png')); a nested-instance part renders through the child contract's own carriage (a per-instance photo override is NOT carried — named limit); the placeholder gradient remains the fallback when the asset is absent`
+        : `${where}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — the image itself is NOT exported (a later round exports the asset); a FRAME part renders the neutral placeholder gradient in its place (stub instances via their stub geometry; other node classes render without the image)`,
     );
   }
 
@@ -3720,10 +3755,11 @@ function buildPart(
   const tokens = invertNodeTokens(m, false, ctx, where, partByProp, part);
   attachByProp(part, partByProp);
 
-  // dump v1.7 `imageFill` on a FRAME part — the neutral placeholder gradient
-  // renders where the unexported image is drawn ('none' elsewhere), same
-  // carriage as the root site; no-op when the field is absent.
-  if (m.occ.some((o) => o.node.imageFill === true)) {
+  // dump v1.7 `imageFill` on a FRAME part — the exported asset (dump v1.9
+  // hash) or the neutral placeholder gradient (boolean marker) renders where
+  // the image is drawn ('none' elsewhere), same carriage as the root site;
+  // no-op when the field is absent.
+  if (m.occ.some((o) => o.node.imageFill !== undefined)) {
     mintObservation(
       ctx,
       tokens,
@@ -3732,11 +3768,12 @@ function buildPart(
       'gradient',
       m.occ.map((o) => ({
         variant: o.variant,
-        value: o.node.imageFill === true ? IMAGE_FILL_PLACEHOLDER_GRADIENT : 'none',
+        value: imageFillCss(o.node.imageFill),
       })),
       undefined,
       'none', // presence-shaped: undrawn axis combinations draw no image
     );
+    if (m.occ.some((o) => typeof o.node.imageFill === 'string')) declareImageFillCover(part);
   }
 
   // v9 shape (#42, dump v1.3): parametric leaf decor — the part carries the
@@ -4319,13 +4356,16 @@ function stubGeometry(
   if (geo.some((o) => (o.cornerRadius ?? 0) !== 0)) {
     push('border-radius', 'px', (o) => o.cornerRadius ?? 0);
   }
-  // dump v1.7 `imageFill` on the stub instance — the neutral placeholder
-  // gradient renders where the unexported image is drawn ('none' elsewhere);
-  // no-op when the field is absent (older dumps).
-  if (geo.some((o) => o.imageFill === true)) {
-    push('background-image', 'gradient', (o) => (o.imageFill === true ? IMAGE_FILL_PLACEHOLDER_GRADIENT : 'none'), 'none');
+  // dump v1.7 `imageFill` on the stub instance — the exported asset (dump
+  // v1.9 hash) or the neutral placeholder gradient (boolean marker) renders
+  // where the image is drawn ('none' elsewhere); no-op when the field is
+  // absent (older dumps).
+  if (geo.some((o) => o.imageFill !== undefined)) {
+    push('background-image', 'gradient', (o) => imageFillCss(o.imageFill), 'none');
     ctx.notes.push(
-      `stub ${capture.id}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — the image itself is NOT exported; the stub renders the neutral placeholder gradient (${IMAGE_FILL_PLACEHOLDER_GRADIENT}) in its place`,
+      geo.some((o) => typeof o.imageFill === 'string')
+        ? `stub ${capture.id}: IMAGE fill carried BY HASH (dump v1.9 \`imageFill\`) — the stub renders the exported asset (url('./assets/images/<hash>.png')); the placeholder gradient remains the fallback when the asset is absent`
+        : `stub ${capture.id}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — the image itself is NOT exported; the stub renders the neutral placeholder gradient (${IMAGE_FILL_PLACEHOLDER_GRADIENT}) in its place`,
     );
   }
   if (observations.length === 0) return null;
@@ -4411,6 +4451,12 @@ function buildChildStub(
     : {};
   if (geometry) {
     root.tokens = geometry.tokens;
+    // dump v1.9: a hash-form image fill on the stub renders the exported
+    // asset — cover is the observed scaleMode FILL equivalence (the hash
+    // form is captured only for FILL paints).
+    if (geometry.tokens['background-image'] && capture.observed.some((o) => typeof o.imageFill === 'string')) {
+      declareImageFillCover(root);
+    }
     ctx.notes.push(
       `stub ${capture.id}: renders HONEST OBSERVED GEOMETRY (dump v1.5 bounding box${geometry.tokens['background-color'] ? ' + primary paint' : ''}${geometry.tokens['border-color'] ? ' + border' : ''}) via minted imported.stub-* tokens — a correctly-sized box, NOT the child's anatomy (still not captured); import the real child set to replace it`,
     );
@@ -5137,9 +5183,11 @@ export function proposeFromDump(
   // (photo avatars) is captured by name only — the image stays unexported;
   // with minting on, the root renders the neutral placeholder gradient
   // (per-variant: 'none' where no image is drawn) instead of nothing.
-  if (merged.occ.some((o) => o.node.imageFill === true)) {
+  if (merged.occ.some((o) => o.node.imageFill !== undefined)) {
     ctx.notes.push(
-      `${where}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — the image itself is NOT exported (a later round exports the asset); the root renders the neutral placeholder gradient (${IMAGE_FILL_PLACEHOLDER_GRADIENT}) where the image is drawn`,
+      merged.occ.some((o) => typeof o.node.imageFill === 'string')
+        ? `${where}: IMAGE fill carried BY HASH (dump v1.9 \`imageFill\`) — the root renders the exported asset (url('./assets/images/<hash>.png')) where the image is drawn; the placeholder gradient remains the fallback when the asset is absent`
+        : `${where}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — the image itself is NOT exported (a later round exports the asset); the root renders the neutral placeholder gradient (${IMAGE_FILL_PLACEHOLDER_GRADIENT}) where the image is drawn`,
     );
     mintObservation(
       ctx,
@@ -5149,11 +5197,12 @@ export function proposeFromDump(
       'gradient',
       merged.occ.map((o) => ({
         variant: o.variant,
-        value: o.node.imageFill === true ? IMAGE_FILL_PLACEHOLDER_GRADIENT : 'none',
+        value: imageFillCss(o.node.imageFill),
       })),
       undefined,
       'none', // presence-shaped: undrawn axis combinations draw no image
     );
+    if (merged.occ.some((o) => typeof o.node.imageFill === 'string')) declareImageFillCover(root);
   }
 
   // Generator artifact: a root whose only child is the auto-injected `label`

@@ -1,4 +1,4 @@
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.8).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.9).
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -59,6 +59,11 @@
 //                      NON-auto-layout children of AUTO-layout parents whose
 //                      layoutSizing is FIXED — the one class no other size
 //                      channel touches (UUI tooltip arrow strip field case)
+//   imageFill          first visible fill is an IMAGE paint (dump v1.7) —
+//                      dump v1.9 carries the paint's imageHash STRING (the
+//                      exported asset's name, <hash>.png; the bytes export
+//                      rides a separate bridge pass over the same nodes);
+//                      a hashless image paint keeps the v1.7 boolean marker
 //   SLOT nodes         native Figma slots (Schema 2025, dump v1.5): carried
 //                      verbatim (type 'SLOT', children walked) — propose maps
 //                      them to the same contract slot part as INSTANCE_SWAP
@@ -412,9 +417,17 @@ async function dumpNode(node, nodePath, parent) {
   if (node.type !== 'TEXT') {
     const fill = 'fills' in node ? await dumpPaint(node.fills, nodePath, 'fill', node) : null;
     if (fill) out.fill = fill;
-    // dump v1.7: IMAGE-fill marker — photo avatars were pure degradations;
-    // the flag lets the proposer ledger BY NAME (future rounds export the image).
-    if (!fill && 'fills' in node && Array.isArray(node.fills) && node.fills.some(function (p) { return p.visible !== false && p.type === 'IMAGE'; })) out.imageFill = true;
+    // dump v1.7: IMAGE-fill marker — photo avatars were pure degradations.
+    // dump v1.9: the marker carries the paint's imageHash (the exported
+    // asset's name) — ONLY for scaleMode FILL paints, so a hash downstream
+    // IMPLIES CSS background-size: cover as an observed fact. A hashless
+    // paint or any other scaleMode (FIT/CROP/TILE — no cover equivalence)
+    // keeps the boolean marker and downstream renders the documented
+    // placeholder gradient instead.
+    if (!fill && 'fills' in node && Array.isArray(node.fills)) {
+      const img = node.fills.find(function (p) { return p.visible !== false && p.type === 'IMAGE'; });
+      if (img) out.imageFill = typeof img.imageHash === 'string' && img.imageHash !== '' && img.scaleMode === 'FILL' ? img.imageHash : true;
+    }
   }
   const stroke = 'strokes' in node ? await dumpPaint(node.strokes, nodePath, 'stroke', node) : null;
   if (stroke) {
@@ -583,8 +596,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.8) for design→contract proposal.',
-    dumpVersion: '1.8',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.9) for design→contract proposal.',
+    dumpVersion: '1.9',
   },
 };
 dumps._degradations = degradations;

@@ -212,10 +212,13 @@ export interface DumpNode {
    *  `align` (its strokeAlign) so the ring can render at the DRAWN radius.
    *  Absence in older dumps means not captured, never "no paint". */
   instancePrimaryFill?: DumpPaint & { stroke?: boolean; weight?: number; ellipse?: boolean; src?: number; align?: string };
-  /** The node's first visible fill is an IMAGE paint (dump v1.7, additive) —
-   *  captured BY NAME only (no bytes exported yet); consumers ledger it and
-   *  render without the image. Absence means no image fill or not captured. */
-  imageFill?: boolean;
+  /** The node's first visible fill is an IMAGE paint (dump v1.7, additive).
+   *  dump v1.9: the STRING form carries the paint's imageHash — the exported
+   *  asset's name (<hash>.png, exported by the bridge alongside the dump);
+   *  boolean true (v1.7/v1.8 dumps, or a hashless paint) means captured BY
+   *  NAME with no exported bytes — consumers render the documented
+   *  placeholder gradient. Absence means no image fill or not captured. */
+  imageFill?: boolean | string;
   text?: DumpText;
   /** componentPropertyReferences, property-id suffixes stripped:
    *  characters → TEXT property, mainComponent → INSTANCE_SWAP property,

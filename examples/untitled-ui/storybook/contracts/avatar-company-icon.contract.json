@@ -50,6 +50,11 @@
         "height": "{imported.stub-avatar-company-icon.root.height.{size}}",
         "border-radius": "{imported.stub-avatar-company-icon.root.border-radius.{size}}",
         "background-image": "{imported.stub-avatar-company-icon.root.background-image}"
+      },
+      "declared": {
+        "background-size": "cover",
+        "background-position": "50% 50%",
+        "background-repeat": "no-repeat"
       }
     }
   },

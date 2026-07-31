@@ -87,9 +87,11 @@ export interface MintObservation {
    *  'shadow' → a preformatted CSS box-shadow value / $type shadow (a full
    *  shadow stack incl. inset layers and 'none' since v15 — literal-fidelity
    *  stand-in; the canvas emitter parses the stack into native effects);
-   *  'gradient' → a CSS gradient value or 'none' (v15/S4 — background-image
-   *  carriage; CSS surfaces render it verbatim, the canvas emitter parses
-   *  linear-gradient stops into a native GRADIENT_LINEAR paint). */
+   *  'gradient' → a CSS background-image value or 'none' (v15/S4 — CSS
+   *  surfaces render it verbatim, the canvas emitter parses linear-gradient
+   *  stops into a native GRADIENT_LINEAR paint; dump v1.9 image-fill assets
+   *  ride this channel as url('./assets/images/<hash>.png') refs — the
+   *  canvas emitter ledgers those as gradientMiss BY NAME, never a throw). */
   kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient';
   /** One entry per variant the node occurs in. */
   occurrences: MintOccurrence[];

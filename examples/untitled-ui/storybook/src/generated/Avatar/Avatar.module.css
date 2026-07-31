@@ -10,6 +10,9 @@
   justify-content: center;
   border-style: solid;
   border-radius: var(--imported-avatar-root-border-radius);
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
   position: relative;
 }
 

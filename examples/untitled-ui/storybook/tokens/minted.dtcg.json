@@ -27,7 +27,7 @@
               "$type": "gradient"
             },
             "false": {
-              "$value": "linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%)",
+              "$value": "url('./assets/images/67da9fddd372b1b5b44ffef41eed6ceb810ddf8a.png')",
               "$type": "gradient"
             }
           },
@@ -589,7 +589,7 @@
           }
         },
         "background-image": {
-          "$value": "linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%)",
+          "$value": "url('./assets/images/e8aa5d3a3d822909dd3c274e5ac1c80ef63111a4.png')",
           "$type": "gradient"
         }
       }

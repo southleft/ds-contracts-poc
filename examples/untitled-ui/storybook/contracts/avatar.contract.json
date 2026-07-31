@@ -136,6 +136,12 @@
         "justify": "center",
         "align": "center"
       },
+      "declared": {
+        "background-size": "cover",
+        "background-position": "50% 50%",
+        "background-repeat": "no-repeat",
+        "position": "relative"
+      },
       "parts": {
         "user": {
           "declared": {
@@ -230,9 +236,6 @@
             "height": "{imported.avatar.avatar-company-icon.height.{size}}"
           }
         }
-      },
-      "declared": {
-        "position": "relative"
       },
       "tokens": {
         "border-radius": "{imported.avatar.root.border-radius}",
