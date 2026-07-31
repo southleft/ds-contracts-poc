@@ -13,6 +13,50 @@
   padding-block: var(--imported-button-group-base-root-padding-block);
 }
 
+.state-default {
+}
+
+.state-default[data-current] {
+  background-color: var(--imported-button-group-base-root-background-color-default-true);
+}
+
+.state-default:not([data-current]) {
+  background-color: var(--imported-button-group-base-root-background-color-default-false);
+}
+
+.state-focused {
+}
+
+.state-focused[data-current] {
+  background-color: var(--imported-button-group-base-root-background-color-focused-true);
+}
+
+.state-focused:not([data-current]) {
+  background-color: var(--imported-button-group-base-root-background-color-focused-false);
+}
+
+.state-disabled {
+}
+
+.state-disabled[data-current] {
+  background-color: var(--imported-button-group-base-root-background-color-disabled-true);
+}
+
+.state-disabled:not([data-current]) {
+  background-color: var(--imported-button-group-base-root-background-color-disabled-false);
+}
+
+.state-hover {
+}
+
+.state-hover[data-current] {
+  background-color: var(--imported-button-group-base-root-background-color-hover-true);
+}
+
+.state-hover:not([data-current]) {
+  background-color: var(--imported-button-group-base-root-background-color-hover-false);
+}
+
 .icon-false {
   padding-inline: var(--imported-button-group-base-root-padding-inline-false);
 }

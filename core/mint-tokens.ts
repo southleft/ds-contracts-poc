@@ -67,8 +67,9 @@ export const MINT_SHARE_THRESHOLD = 3;
 export interface MintOccurrence {
   /** Figma variant name ("Variant=Info", "Tone=Neutral, Size=Sm"). */
   variant: string;
-  /** enum-axis propName → canonical (camelCase) value for this variant.
-   *  Boolean axes are excluded — token substitution is enum-only. */
+  /** axis propName → canonical (camelCase) value for this variant. Enum
+   *  axes always; two-value True/False (boolean-prop) axes ride along as
+   *  'true'/'false' and condition ROOT observations only (MintAxis.bool). */
   axisValues: Record<string, string>;
   value: string | number;
 }
@@ -100,6 +101,12 @@ export interface MintAxis {
   /** Canonical (camelCase) values, in axis order — substitution expands over
    *  ALL of them, so a per-variant mint must cover every one. */
   values: string[];
+  /** A two-value True/False axis minted as a BOOLEAN prop (values
+   *  ['true','false']). Participates in classification for ROOT
+   *  observations only — the emitters spell bool sides as root
+   *  data-attribute selectors (`[data-x]` / `:not([data-x])`), a spelling
+   *  nested parts do not have. */
+  bool?: boolean;
 }
 
 export interface MintedEntry {
@@ -197,10 +204,14 @@ type Classified =
 const pairKey = (a: string, b: string) => `${a}.${b}`;
 const comboKey = (values: string[]) => values.join('.');
 
-function classify(obs: MintObservation, axes: MintAxis[], nestedPairs: boolean): Classified {
+function classify(obs: MintObservation, allAxes: MintAxis[], nestedPairs: boolean): Classified {
   if (obs.occurrences.length === 0) return { kind: 'none', reason: 'no occurrences observed — nothing minted' };
   const values = obs.occurrences.map((o) => o.value);
   if (values.every((v) => v === values[0])) return { kind: 'uniform', value: values[0] };
+  // Bool conditioning is ROOT-ONLY (data-attribute selectors live on the
+  // root element; nested parts and state-plane observations keep the
+  // enum-only vocabulary — their refusals stay named).
+  const axes = obs.part === '' ? allAxes : allAxes.filter((a) => !a.bool);
   for (const axis of axes) {
     const byValue = new Map<string, string | number>();
     let fits = true;

@@ -236,6 +236,10 @@
             "prop": "addUserButton"
           }
         }
+      },
+      "tokens": {
+        "gap": "{imported.avatar-group.root.gap.{size}.{addUserButton}.{moreUsers}}",
+        "padding-right": "{imported.avatar-group.root.padding-right.{size}.{addUserButton}.{moreUsers}}"
       }
     }
   },

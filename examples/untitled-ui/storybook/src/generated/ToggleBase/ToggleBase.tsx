@@ -10,15 +10,18 @@ import styles from './ToggleBase.module.css';
 export interface ToggleBaseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   pressed?: boolean;
   size?: 'md' | 'sm';
+  theme?: 'dark' | 'light';
   disabled?: boolean;
 }
 
 /** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
 export const ToggleBase = forwardRef<HTMLButtonElement, ToggleBaseProps>(function ToggleBase(
-  { size = 'md', pressed = true, disabled = false, className, children, ...rest },
+  { size = 'md', theme = 'dark', pressed = true, disabled = false, className, children, ...rest },
   ref,
 ) {
-  const classes = [styles.root, styles[`size-${size}`], className].filter(Boolean).join(' ');
+  const classes = [styles.root, styles[`size-${size}`], styles[`theme-${theme}`], className]
+    .filter(Boolean)
+    .join(' ');
   return (
     <button
       ref={ref}

@@ -1216,6 +1216,30 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   const stateRules: string[] = [];
   const rootSubRules: string[] = [];
 
+  // Bool-conditioned ROOT tokens (mint bool-axis carriage — the axis-inert
+  // fix extended to the bool plane): a root-token placeholder may name a
+  // BOOLEAN prop; each side renders as a data-attribute selector on the
+  // root element the TSX already emits for every boolean
+  // (`[data-x]` / `:not([data-x])`; native disabled uses `:disabled`).
+  // Nested parts stay enum-only — their bool refs refuse by name above.
+  const boolNames = new Set(boolProps(contract).map((p) => p.name));
+  const substValues = (p: string): string[] | undefined =>
+    enums.get(p) ?? (boolNames.has(p) ? ['true', 'false'] : undefined);
+  const boolFrag = (p: string, v: string): string => {
+    const nativeDisabled = p === 'disabled' && ELEMENT_META[contract.semantics.element]?.supportsDisabled;
+    const sel = nativeDisabled ? ':disabled' : `[data-${p.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}]`;
+    return v === 'true' ? sel : `:not(${sel})`;
+  };
+  /** Selector key for a value combination: enum values as compound classes
+   *  (the existing `pa-a.pb-b` spelling, byte-identical for all-enum
+   *  combos), bool values as data-attribute fragments appended to the enum
+   *  compound (or to `root` when every participant is a bool). */
+  const comboCls = (pairs: Array<[prop: string, value: string]>): string => {
+    const enumPart = pairs.filter(([p]) => !boolNames.has(p)).map(([p, v]) => `${p}-${v}`).join('.');
+    const boolPart = pairs.filter(([p]) => boolNames.has(p)).map(([p, v]) => boolFrag(p, v)).join('');
+    return (enumPart.length > 0 ? enumPart : 'root') + boolPart;
+  };
+
   for (const [cssProp, ref] of Object.entries(rootTokens)) {
     const refPath = stripBraces(ref);
     // slot-wrapper floor (class ⑤): root max-width mirrors onto min-width.
@@ -1244,7 +1268,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         if (floorMirror) rootDecls.push(`min-width: ${cssVar(refPath)}`);
       }
     } else if (phs.length === 1) {
-      const values = enums.get(phs[0]);
+      const values = substValues(phs[0]);
       if (!values) {
         errors.push(`${contract.id}: root token "${cssProp}" substitutes unknown enum prop "${phs[0]}"`);
         continue;
@@ -1252,7 +1276,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       for (const value of values) {
         const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
         if (!checkToken(resolved, `anatomy.root.tokens.${cssProp}`)) continue;
-        const cls = `${phs[0]}-${value}`;
+        const cls = comboCls([[phs[0], value]]);
         if (!enumRules.has(cls)) enumRules.set(cls, new Map());
         enumRules.get(cls)!.set(cssProp, cssVar(resolved));
         if (floorMirror) enumRules.get(cls)!.set('min-width', cssVar(resolved));
@@ -1264,8 +1288,8 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       // a pair binding wins over any single-axis binding of the same
       // property — deterministic, and both classes always ride the root.
       const [pa, pb] = phs;
-      const va = enums.get(pa);
-      const vb = enums.get(pb);
+      const va = substValues(pa);
+      const vb = substValues(pb);
       if (!va || !vb) {
         errors.push(
           `${contract.id}: root token "${cssProp}" substitutes unknown enum prop "${!va ? pa : pb}"`,
@@ -1278,11 +1302,14 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
           if (!checkToken(resolved, `anatomy.root.tokens.${cssProp}`)) continue;
           // Both single classes must EXIST in the module (the TSX composes
           // styles[`prop-value`]; an unemitted class is undefined and the
-          // compound selector would never match) — claim them, empty is fine.
-          for (const single of [`${pa}-${a}`, `${pb}-${b}`]) {
+          // compound selector would never match) — claim them, empty is
+          // fine. Bool participants ride data attributes, not classes.
+          for (const [sp, sv] of [[pa, a], [pb, b]] as Array<[string, string]>) {
+            if (boolNames.has(sp)) continue;
+            const single = `${sp}-${sv}`;
             if (!enumRules.has(single)) enumRules.set(single, new Map());
           }
-          const cls = `${pa}-${a}.${pb}-${b}`;
+          const cls = comboCls([[pa, a], [pb, b]]);
           if (!enumRules.has(cls)) enumRules.set(cls, new Map());
           enumRules.get(cls)!.set(cssProp, cssVar(resolved));
         }
@@ -1295,7 +1322,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       // outranks pair and single classes — deterministic; all three classes
       // always ride the root.
       const [pa, pb, pc] = phs;
-      const vsets = phs.map((p) => enums.get(p));
+      const vsets = phs.map((p) => substValues(p));
       if (vsets.some((v) => !v)) {
         const missing = phs[vsets.findIndex((v) => !v)];
         errors.push(`${contract.id}: root token "${cssProp}" substitutes unknown enum prop "${missing}"`);
@@ -1309,10 +1336,12 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
               .replaceAll(`{${pb}}`, b)
               .replaceAll(`{${pc}}`, c);
             if (!checkToken(resolved, `anatomy.root.tokens.${cssProp}`)) continue;
-            for (const single of [`${pa}-${a}`, `${pb}-${b}`, `${pc}-${c}`]) {
+            for (const [sp, sv] of [[pa, a], [pb, b], [pc, c]] as Array<[string, string]>) {
+              if (boolNames.has(sp)) continue;
+              const single = `${sp}-${sv}`;
               if (!enumRules.has(single)) enumRules.set(single, new Map());
             }
-            const cls = `${pa}-${a}.${pb}-${b}.${pc}-${c}`;
+            const cls = comboCls([[pa, a], [pb, b], [pc, c]]);
             if (!enumRules.has(cls)) enumRules.set(cls, new Map());
             enumRules.get(cls)!.set(cssProp, cssVar(resolved));
           }

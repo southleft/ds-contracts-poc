@@ -19,6 +19,28 @@
   cursor: not-allowed;
 }
 
+.theme-dark {
+}
+
+.theme-dark[data-pressed] {
+  background-color: var(--imported-toggle-base-root-background-color-dark-true);
+}
+
+.theme-dark:not([data-pressed]) {
+  background-color: var(--imported-toggle-base-root-background-color-dark-false);
+}
+
+.theme-light {
+}
+
+.theme-light[data-pressed] {
+  background-color: var(--imported-toggle-base-root-background-color-light-true);
+}
+
+.theme-light:not([data-pressed]) {
+  background-color: var(--imported-toggle-base-root-background-color-light-false);
+}
+
 .size-md {
   width: var(--imported-toggle-base-root-width-md);
   height: var(--imported-toggle-base-root-height-md);

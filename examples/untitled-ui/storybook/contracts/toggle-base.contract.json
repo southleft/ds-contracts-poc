@@ -51,6 +51,29 @@
       }
     },
     {
+      "name": "theme",
+      "type": {
+        "enum": [
+          "dark",
+          "light"
+        ]
+      },
+      "default": "dark",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Theme",
+          "values": {
+            "dark": "Dark",
+            "light": "Light"
+          }
+        },
+        "code": {
+          "prop": "theme"
+        }
+      }
+    },
+    {
       "name": "disabled",
       "type": "boolean",
       "default": false,
@@ -67,10 +90,6 @@
   ],
   "states": [
     "disabled"
-  ],
-  "modes": [
-    "dark",
-    "light"
   ],
   "anatomy": {
     "root": {
@@ -98,6 +117,7 @@
         }
       },
       "tokens": {
+        "background-color": "{imported.toggle-base.root.background-color.{theme}.{pressed}}",
         "padding-inline": "{imported.toggle-base.root.padding-inline}",
         "padding-block": "{imported.toggle-base.root.padding-block}",
         "border-radius": "{imported.toggle-base.root.border-radius}",

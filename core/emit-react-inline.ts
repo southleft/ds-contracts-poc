@@ -152,6 +152,14 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
     partVariantPairProps.get(partName)!.add(pairs.map(([p]) => p).join('+'));
   };
   const enumsByName = new Map(enums.map((p) => [p.name, p.type.enum]));
+  // Bool-conditioned ROOT tokens (mint bool-axis carriage): a placeholder
+  // may name a BOOLEAN prop — its runtime key stringifies naturally
+  // (`V[`pressed-${pressed}:root`]` → 'pressed-true'/'pressed-false'), so
+  // substitution expands over the two spelled sides.
+  const substByName = new Map<string, readonly string[]>([
+    ...enumsByName,
+    ...bools.map((p) => [p.name, ['true', 'false']] as [string, readonly string[]]),
+  ]);
   const usedAnimations = new Set<string>();
 
   /** Slot-wrapper floor predicate (live-gauntlet class ⑤) — see the root
@@ -269,14 +277,14 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       if (phs.length === 0) {
         s[camel(cssProp)] = resolveValue(refPath);
       } else if (phs.length === 1) {
-        for (const value of enumsByName.get(phs[0]) ?? []) {
+        for (const value of substByName.get(phs[0]) ?? []) {
           const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
           addVariant(phs[0], value, partName, { [camel(cssProp)]: resolveValue(resolved) });
         }
       } else if (phs.length === 2) {
         const [pa, pb] = phs;
-        for (const a of enumsByName.get(pa) ?? []) {
-          for (const b of enumsByName.get(pb) ?? []) {
+        for (const a of substByName.get(pa) ?? []) {
+          for (const b of substByName.get(pb) ?? []) {
             const resolved = refPath.replaceAll(`{${pa}}`, a).replaceAll(`{${pb}}`, b);
             addVariantCompound([[pa, a], [pb, b]], partName, { [camel(cssProp)]: resolveValue(resolved) });
           }
@@ -285,9 +293,9 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
         // Three-axis root token — mirrors the emit-react/emit-html triple
         // compound (live-gauntlet class ①).
         const [pa, pb, pc] = phs;
-        for (const a of enumsByName.get(pa) ?? []) {
-          for (const b of enumsByName.get(pb) ?? []) {
-            for (const c of enumsByName.get(pc) ?? []) {
+        for (const a of substByName.get(pa) ?? []) {
+          for (const b of substByName.get(pb) ?? []) {
+            for (const c of substByName.get(pc) ?? []) {
               const resolved = refPath
                 .replaceAll(`{${pa}}`, a)
                 .replaceAll(`{${pb}}`, b)

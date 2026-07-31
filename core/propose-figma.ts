@@ -359,11 +359,25 @@ export interface ModePromotion {
   defaultValue: string;
 }
 
+/** Tally of HOW a corroborated mode axis's deltas would be carried — filled
+ *  in by modeStructuralDiff while it walks counterpart pairs. `carriers`
+ *  counts variable-bound channels (same variable name across the axis — the
+ *  variable's per-mode values are the carrier); `rawDeltas` counts raw
+ *  color-kind literals that DIFFER across the axis (nothing carries them —
+ *  their per-mode values ride no variable). */
+export interface ModeCarriage {
+  carriers: number;
+  rawDeltas: number;
+}
+
 /** First structural/binding difference between two variants that a token
  *  mode CANNOT explain — or null when the pair corroborates. Raw literals
  *  may differ ONLY on color-kind channels (fill/stroke/effect color); bound
- *  fields must bind the SAME variable names; everything else must be equal. */
-function modeStructuralDiff(a: DumpNode, b: DumpNode, path: string): string | null {
+ *  fields must bind the SAME variable names; everything else must be equal.
+ *  When `carriage` is given, tallies bound carriers vs differing raw
+ *  color literals (see ModeCarriage) so the caller can refuse a promotion
+ *  whose deltas have no variable modes to ride. */
+function modeStructuralDiff(a: DumpNode, b: DumpNode, path: string, carriage?: ModeCarriage): string | null {
   if (a.type !== b.type) return `${path}: node type ${a.type} vs ${b.type}`;
   const aBound = a.bound ?? {};
   const bBound = b.bound ?? {};
@@ -371,10 +385,18 @@ function modeStructuralDiff(a: DumpNode, b: DumpNode, path: string): string | nu
     if (aBound[k] !== bBound[k]) {
       return `${path}: field "${k}" binds "${aBound[k] ?? '(unbound)'}" vs "${bBound[k] ?? '(unbound)'}"`;
     }
+    if (carriage && aBound[k] !== undefined) carriage.carriers++;
   }
   const paintShape = (p?: DumpPaint): string => (p === undefined ? 'none' : p.var !== undefined ? `var:${p.var}` : 'raw');
   if (paintShape(a.fill) !== paintShape(b.fill)) return `${path}: fill ${paintShape(a.fill)} vs ${paintShape(b.fill)}`;
   if (paintShape(a.stroke) !== paintShape(b.stroke)) return `${path}: stroke ${paintShape(a.stroke)} vs ${paintShape(b.stroke)}`;
+  if (carriage) {
+    for (const [pa, pb] of [[a.fill, b.fill], [a.stroke, b.stroke]] as Array<[DumpPaint | undefined, DumpPaint | undefined]>) {
+      if (pa === undefined || pb === undefined) continue; // both undefined (shape 'none' matched)
+      if (pa.var !== undefined) carriage.carriers++;
+      else if (pa.hex !== pb.hex || (pa.alpha ?? 1) !== (pb.alpha ?? 1)) carriage.rawDeltas++;
+    }
+  }
   if (JSON.stringify(a.layout ?? null) !== JSON.stringify(b.layout ?? null)) return `${path}: auto-layout differs`;
   if ((a.cornerRadius ?? null) !== (b.cornerRadius ?? null)) return `${path}: corner radius differs`;
   if ((a.strokeWeight ?? null) !== (b.strokeWeight ?? null)) return `${path}: stroke weight differs`;
@@ -394,10 +416,15 @@ function modeStructuralDiff(a: DumpNode, b: DumpNode, path: string): string | nu
       return `${path}: text/typography differs`;
     }
     if ((at.fillVar ?? null) !== (bt.fillVar ?? null)) return `${path}: text fill binds "${at.fillVar ?? '(raw)'}" vs "${bt.fillVar ?? '(raw)'}"`;
+    if (carriage && at.fillVar !== undefined) carriage.carriers++;
   }
   const effectShape = (e?: DumpEffect[]): string =>
     JSON.stringify((e ?? []).map((x) => ({ t: x.type, o: x.offset ?? null, r: x.radius ?? null, s: x.spread ?? null })));
   if (effectShape(a.effects) !== effectShape(b.effects)) return `${path}: effects differ`;
+  if (carriage) {
+    const effectColors = (e?: DumpEffect[]): string => JSON.stringify((e ?? []).map((x) => x.color ?? null));
+    if (effectColors(a.effects) !== effectColors(b.effects)) carriage.rawDeltas++;
+  }
   if ((a.instanceOf ?? null) !== (b.instanceOf ?? null)) return `${path}: nested instance differs`;
   if (JSON.stringify(a.componentProperties ?? null) !== JSON.stringify(b.componentProperties ?? null)) {
     return `${path}: applied instance props differ`;
@@ -408,7 +435,7 @@ function modeStructuralDiff(a: DumpNode, b: DumpNode, path: string): string | nu
   if (ak.length !== bk.length) return `${path}: ${ak.length} vs ${bk.length} children`;
   for (let i = 0; i < ak.length; i++) {
     if (ak[i].name !== bk[i].name) return `${path}: child "${ak[i].name}" vs "${bk[i].name}"`;
-    const d = modeStructuralDiff(ak[i], bk[i], `${path}/${ak[i].name}`);
+    const d = modeStructuralDiff(ak[i], bk[i], `${path}/${ak[i].name}`, carriage);
     if (d) return d;
   }
   return null;
@@ -443,6 +470,7 @@ function detectModeAxis(axes: Axis[], variants: DumpNode[], setName: string, not
       if (axisValuesOf(v.name)[axis.property] === defaultValue) base.set(residual(v), v);
     }
     let failure: string | null = null;
+    const carriage: ModeCarriage = { carriers: 0, rawDeltas: 0 };
     for (const v of variants) {
       const value = axisValuesOf(v.name)[axis.property];
       if (value === defaultValue) continue;
@@ -452,12 +480,25 @@ function detectModeAxis(axes: Axis[], variants: DumpNode[], setName: string, not
         break;
       }
       // Root names differ by exactly the axis pair — neutralize before the diff.
-      failure = modeStructuralDiff(counterpart, { ...v, name: counterpart.name }, residual(v));
+      failure = modeStructuralDiff(counterpart, { ...v, name: counterpart.name }, residual(v), carriage);
       if (failure) break;
     }
     if (failure) {
       notes.push(
         `variant axis "${axis.property}" (${axis.values.join('|')}): named like a token mode but the variants differ beyond color across its values (${failure}) — NOT promoted; kept as an enum prop (if this is theming, unify the drawn structure), review`,
+      );
+      continue;
+    }
+    // §3 carriage gate: promotion is only honest when the axis's deltas can
+    // actually RIDE variable modes. A kit with no bound variables anywhere
+    // along the diff (carriers === 0) whose counterparts differ in raw
+    // color literals (rawDeltas > 0) has nothing for the mode to switch —
+    // promoting would drop the axis's styling entirely. The axis stays a
+    // REAL enum prop and the standard mint machinery carries the per-axis-
+    // value styles.
+    if (carriage.rawDeltas > 0 && carriage.carriers === 0) {
+      notes.push(
+        `variant axis "${axis.property}" (${axis.values.join('|')}): named like a token mode and structurally corroborated, but its ${carriage.rawDeltas} differing color literal(s) are RAW — the set binds NO variables along the axis, so there are no variable modes for the deltas to ride and promotion would drop the axis's styling entirely — NOT promoted; kept as an enum prop with per-axis-value style carriage (bind the colors to mode-switched variables to make this a token mode), review`,
       );
       continue;
     }
@@ -4693,13 +4734,27 @@ export function proposeFromDump(
     partNames: new Set(['root']),
     mint: opts.mintUnbound
       ? {
-          axes: enumAxes.map((a) => ({ propName: a.propName, values: a.values.map(camel) })),
+          // Enum axes substitute anywhere; two-value True/False axes (minted
+          // as BOOLEAN props) join as flagged conditioning axes so a ROOT
+          // channel that is f(bool) or f(bool × enum) still carries — the
+          // axis-inert fix extended to the bool plane (field case: Toggle
+          // root fill = f(pressed, theme); with pressed excluded the channel
+          // refused classification and the track never painted). The
+          // emitters render bool sides as data-attribute selectors on the
+          // root (`[data-pressed]` / `:not([data-pressed])`), so bool
+          // conditioning stays ROOT-ONLY (enforced in mintTokens classify).
+          axes: [
+            ...enumAxes.map((a) => ({ propName: a.propName, values: a.values.map(camel) })),
+            ...axes
+              .filter((a) => isBoolAxis(a.values))
+              .map((a) => ({ propName: a.propName, values: ['true', 'false'], bool: true as const })),
+          ],
           axisValuesByVariant: new Map(
             variantNames.map((v) => {
               const record: Record<string, string> = {};
               for (const [property, value] of Object.entries(axisValuesOf(v))) {
-                const axis = enumAxes.find((a) => a.property === property);
-                if (axis) record[axis.propName] = camel(value);
+                const axis = axes.find((a) => a.property === property);
+                if (axis) record[axis.propName] = isBoolAxis(axis.values) ? value.trim().toLowerCase() : camel(value);
               }
               return [v, record];
             }),

@@ -1958,6 +1958,28 @@
     },
     "toggle-base": {
       "root": {
+        "background-color": {
+          "dark": {
+            "true": {
+              "$value": "#7f56d9",
+              "$type": "color"
+            },
+            "false": {
+              "$value": "#f5f5f5",
+              "$type": "color"
+            }
+          },
+          "light": {
+            "true": {
+              "$value": "#e9d7fe",
+              "$type": "color"
+            },
+            "false": {
+              "$value": "#f9f5ff",
+              "$type": "color"
+            }
+          }
+        },
         "padding-inline": {
           "$value": "2px",
           "$type": "dimension"
@@ -2714,6 +2736,26 @@
             }
           }
         },
+        "gap": {
+          "true": {
+            "$value": "10px",
+            "$type": "dimension"
+          },
+          "false": {
+            "$value": "12px",
+            "$type": "dimension"
+          }
+        },
+        "padding-inline": {
+          "true": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "false": {
+            "$value": "10px",
+            "$type": "dimension"
+          }
+        },
         "padding-block": {
           "$value": "10px",
           "$type": "dimension"
@@ -2837,6 +2879,144 @@
       }
     },
     "avatar-group": {
+      "root": {
+        "gap": {
+          "xs": {
+            "true": {
+              "true": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "12px",
+                "$type": "dimension"
+              }
+            },
+            "false": {
+              "true": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "8px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "sm": {
+            "true": {
+              "true": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "16px",
+                "$type": "dimension"
+              }
+            },
+            "false": {
+              "true": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "8px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "md": {
+            "true": {
+              "true": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "20px",
+                "$type": "dimension"
+              }
+            },
+            "false": {
+              "true": {
+                "$value": "8px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "8px",
+                "$type": "dimension"
+              }
+            }
+          }
+        },
+        "padding-right": {
+          "xs": {
+            "true": {
+              "true": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "false": {
+              "true": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "4px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "sm": {
+            "true": {
+              "true": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "false": {
+              "true": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "8px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "md": {
+            "true": {
+              "true": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "false": {
+              "true": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "false": {
+                "$value": "12px",
+                "$type": "dimension"
+              }
+            }
+          }
+        }
+      },
       "avatars": {
         "gap": {
           "xs": {
@@ -2970,6 +3150,48 @@
     },
     "button-group-base": {
       "root": {
+        "background-color": {
+          "default": {
+            "false": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "true": {
+              "$value": "#fafafa",
+              "$type": "color"
+            }
+          },
+          "focused": {
+            "false": {
+              "$value": "#fafafa",
+              "$type": "color"
+            },
+            "true": {
+              "$value": "#fafafa",
+              "$type": "color"
+            }
+          },
+          "disabled": {
+            "false": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "true": {
+              "$value": "#fafafa",
+              "$type": "color"
+            }
+          },
+          "hover": {
+            "false": {
+              "$value": "#fafafa",
+              "$type": "color"
+            },
+            "true": {
+              "$value": "#fafafa",
+              "$type": "color"
+            }
+          }
+        },
         "border-color": {
           "$value": "#d4d4d4",
           "$type": "color"

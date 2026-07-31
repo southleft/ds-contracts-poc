@@ -9,6 +9,75 @@
   border: 0;
 }
 
+.size-xs {
+}
+
+.size-xs[data-add-user-button][data-more-users] {
+  gap: var(--imported-avatar-group-root-gap-xs-true-true);
+  padding-right: var(--imported-avatar-group-root-padding-right-xs-true-true);
+}
+
+.size-xs[data-add-user-button]:not([data-more-users]) {
+  gap: var(--imported-avatar-group-root-gap-xs-true-false);
+  padding-right: var(--imported-avatar-group-root-padding-right-xs-true-false);
+}
+
+.size-xs:not([data-add-user-button])[data-more-users] {
+  gap: var(--imported-avatar-group-root-gap-xs-false-true);
+  padding-right: var(--imported-avatar-group-root-padding-right-xs-false-true);
+}
+
+.size-xs:not([data-add-user-button]):not([data-more-users]) {
+  gap: var(--imported-avatar-group-root-gap-xs-false-false);
+  padding-right: var(--imported-avatar-group-root-padding-right-xs-false-false);
+}
+
+.size-sm {
+}
+
+.size-sm[data-add-user-button][data-more-users] {
+  gap: var(--imported-avatar-group-root-gap-sm-true-true);
+  padding-right: var(--imported-avatar-group-root-padding-right-sm-true-true);
+}
+
+.size-sm[data-add-user-button]:not([data-more-users]) {
+  gap: var(--imported-avatar-group-root-gap-sm-true-false);
+  padding-right: var(--imported-avatar-group-root-padding-right-sm-true-false);
+}
+
+.size-sm:not([data-add-user-button])[data-more-users] {
+  gap: var(--imported-avatar-group-root-gap-sm-false-true);
+  padding-right: var(--imported-avatar-group-root-padding-right-sm-false-true);
+}
+
+.size-sm:not([data-add-user-button]):not([data-more-users]) {
+  gap: var(--imported-avatar-group-root-gap-sm-false-false);
+  padding-right: var(--imported-avatar-group-root-padding-right-sm-false-false);
+}
+
+.size-md {
+}
+
+.size-md[data-add-user-button][data-more-users] {
+  gap: var(--imported-avatar-group-root-gap-md-true-true);
+  padding-right: var(--imported-avatar-group-root-padding-right-md-true-true);
+}
+
+.size-md[data-add-user-button]:not([data-more-users]) {
+  gap: var(--imported-avatar-group-root-gap-md-true-false);
+  padding-right: var(--imported-avatar-group-root-padding-right-md-true-false);
+}
+
+.size-md:not([data-add-user-button])[data-more-users] {
+  gap: var(--imported-avatar-group-root-gap-md-false-true);
+  padding-right: var(--imported-avatar-group-root-padding-right-md-false-true);
+}
+
+.size-md:not([data-add-user-button]):not([data-more-users]) {
+  gap: var(--imported-avatar-group-root-gap-md-false-false);
+  padding-right: var(--imported-avatar-group-root-padding-right-md-false-false);
+}
+
 .Avatars {
   display: flex;
   flex-direction: row;

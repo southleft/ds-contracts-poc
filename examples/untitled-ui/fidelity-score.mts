@@ -1,10 +1,16 @@
-/** CANVAS→CODE FIDELITY SCORE v1.1 — the demo-bar number.
+/** CANVAS→CODE FIDELITY SCORE v1.2 — the demo-bar number.
  *  Per per-variant canvas reference: derive props from the variant slug via
  *  the contract's enums/booleans (alnum-normalized), render the generated
  *  component standalone, normalize both images to a common 200px box in a
- *  headless page, pixel-diff. Unknown axes (dropped by the inversion, e.g.
- *  theme/state) are consumed generically: canonical-slice variants score,
- *  the rest count as axis-not-carried — the carriage debt as a column. */
+ *  headless page, pixel-diff. Unknown axes (dropped by the inversion) are
+ *  consumed generically: canonical-slice variants score, the rest count as
+ *  axis-not-carried — the carriage debt as a column. v1.2 honesty split:
+ *  `state=disabled` maps onto the contract's `disabled` boolean (state
+ *  promotion carries it as a prop, so it IS statically scorable);
+ *  `state=hover|focus` refs are their own interaction-state category (the
+ *  carriage is CSS pseudo-class rules — real, but not reachable by a static
+ *  screenshot), NOT axis-not-carried; the debt column therefore counts only
+ *  genuine carriage losses. */
 const ROOT='/Users/tjpitre/Sites/ds-contracts-poc';
 const { chromium } = await import(ROOT+'/node_modules/playwright-core/index.mjs');
 const { chromiumExecutable } = await import(ROOT+'/extract/figma/visual-parity/render.js');
@@ -36,7 +42,7 @@ for (const [slug,{comp}] of Object.entries(SETS)) {
     const varslug = ref.slice(`var--${slug}--`.length, -4);
     const toks = varslug.split('_');
     const props: Record<string,unknown> = {}; let ok=true;
-    const droppedPairs: string[] = [];
+    const droppedPairs: string[] = []; let interaction=false;
     let i=0;
     while (i<toks.length) {
       let bound=false;
@@ -59,12 +65,21 @@ for (const [slug,{comp}] of Object.entries(SETS)) {
           }
         }
       }
+      // v1.2: the promoted state axis. `disabled` rides the contract's
+      // disabled boolean (statically scorable); hover/focus are CSS-rendered
+      // interaction states — their own category, never axis-not-carried.
+      if (!bound && i+1<toks.length && norm(toks[i])==='state') {
+        const sv=norm(toks[i+1]);
+        if (sv==='disabled' && bools.includes('disabled')) { props['disabled']=true; i+=2; bound=true; }
+        else if (sv==='hover'||sv==='focus') { interaction=true; i+=2; bound=true; }
+      }
       if (!bound && i+1<toks.length) { droppedPairs.push(toks[i]+'='+norm(toks[i+1])); i+=2; bound=true; }
       if (!bound){ ok=false; break; }
     }
     const CANON=['default','light','false'];
     const nonCanon=droppedPairs.filter(d=>!CANON.includes(d.split('=')[1]));
     if (nonCanon.length>0){ results.push({set:slug,variant:varslug,score:null,note:'axis not carried: '+nonCanon.join(',')}); continue; }
+    if (interaction){ results.push({set:slug,variant:varslug,score:null,note:'interaction-state (CSS-rendered, not statically scorable)'}); continue; }
     if (!ok){ results.push({set:slug,variant:varslug,score:null,note:'slug→props unmapped'}); continue; }
     const out=`fid--${slug}--${varslug}`;
     try {
@@ -90,16 +105,21 @@ for (const [slug,{comp}] of Object.entries(SETS)) {
   }
 }
 await b.close();
-const bySet: Record<string,{n:number,sum:number,unmapped:number,axisGap:number}> = {};
+const bySet: Record<string,{n:number,sum:number,unmapped:number,axisGap:number,interaction:number}> = {};
 for(const r of results){
-  const s=bySet[r.set]??={n:0,sum:0,unmapped:0,axisGap:0};
-  if(r.score===null){ if((r.note||'').startsWith('axis not carried')) s.axisGap++; else s.unmapped++; continue; }
+  const s=bySet[r.set]??={n:0,sum:0,unmapped:0,axisGap:0,interaction:0};
+  if(r.score===null){
+    if((r.note||'').startsWith('axis not carried')) s.axisGap++;
+    else if((r.note||'').startsWith('interaction-state')) s.interaction++;
+    else s.unmapped++;
+    continue;
+  }
   s.n++; s.sum+=r.score;
 }
-const lines=['| component | variants scored | mean fidelity % | axis-not-carried | unscored |','|---|---|---|---|---|'];
+const lines=['| component | variants scored | mean fidelity % | axis-not-carried | interaction-state | unscored |','|---|---|---|---|---|---|'];
 let gn=0,gs=0;
-for(const [k,v] of Object.entries(bySet)){ if(v.n){gn+=v.n;gs+=v.sum;} lines.push(`| ${k} | ${v.n} | ${v.n?(v.sum/v.n).toFixed(1):'—'} | ${v.axisGap} | ${v.unmapped} |`); }
-lines.push(`| **ALL** | ${gn} | **${gn?(gs/gn).toFixed(1):'—'}** | | |`);
-writeFileSync(`${UI}/renders/FIDELITY.md`, `# Canvas→code fidelity — ${new Date().toISOString().slice(0,10)} @ HEAD\n\nScore = % pixels within tolerance, both images normalized to a common 200px box (canvas ref up to 2x export vs standalone render). v1.1: unknown axes consumed generically; axis-not-carried counts variants unrenderable because the inversion dropped their axis. Trend metric, not the final gate.\n\n${lines.join('\n')}\n`);
+for(const [k,v] of Object.entries(bySet)){ if(v.n){gn+=v.n;gs+=v.sum;} lines.push(`| ${k} | ${v.n} | ${v.n?(v.sum/v.n).toFixed(1):'—'} | ${v.axisGap} | ${v.interaction} | ${v.unmapped} |`); }
+lines.push(`| **ALL** | ${gn} | **${gn?(gs/gn).toFixed(1):'—'}** | | | |`);
+writeFileSync(`${UI}/renders/FIDELITY.md`, `# Canvas→code fidelity — ${new Date().toISOString().slice(0,10)} @ HEAD\n\nScore = % pixels within tolerance, both images normalized to a common 200px box (canvas ref up to 2x export vs standalone render). v1.2: unknown axes consumed generically; axis-not-carried counts variants unrenderable because the inversion dropped their axis (genuine carriage losses only); state=disabled scores through the contract's disabled boolean; state=hover|focus variants are interaction-state (CSS-rendered, not statically scorable). Trend metric, not the final gate.\n\n${lines.join('\n')}\n`);
 writeFileSync(`${UI}/renders/fidelity.json`, JSON.stringify(results,null,1));
 console.log(lines.join('\n'));

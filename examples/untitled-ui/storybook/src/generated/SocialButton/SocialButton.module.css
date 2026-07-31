@@ -289,6 +289,16 @@
   background-color: var(--imported-social-button-root-background-color-x-color-focused);
 }
 
+.root[data-supporting-text] {
+  gap: var(--imported-social-button-root-gap-true);
+  padding-inline: var(--imported-social-button-root-padding-inline-true);
+}
+
+.root:not([data-supporting-text]) {
+  gap: var(--imported-social-button-root-gap-false);
+  padding-inline: var(--imported-social-button-root-padding-inline-false);
+}
+
 .social-facebook.theme-brand {
   border-width: var(--imported-social-button-root-border-width-facebook-brand);
 }

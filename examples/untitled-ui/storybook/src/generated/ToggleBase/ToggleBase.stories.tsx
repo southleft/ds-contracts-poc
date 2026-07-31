@@ -21,11 +21,13 @@ const meta = {
   argTypes: {
     pressed: { control: 'boolean' },
     size: { control: 'select', options: ['md', 'sm'] },
+    theme: { control: 'select', options: ['dark', 'light'] },
     disabled: { control: 'boolean' },
   },
   args: {
     pressed: true,
     size: 'md',
+    theme: 'dark',
     disabled: false,
   },
 } satisfies Meta<typeof ToggleBase>;
@@ -45,7 +47,7 @@ export const Sm: Story = {
 export const Disabled: Story = {
   args: { disabled: true },
 };
-/** Every legal combination the contract defines. */
+/** Every legal combination the contract defines (size × theme). */
 export const Matrix: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
@@ -53,13 +55,15 @@ export const Matrix: Story = {
       style={{
         display: 'grid',
         gap: 16,
-        gridTemplateColumns: 'repeat(1, max-content)',
+        gridTemplateColumns: 'repeat(2, max-content)',
         alignItems: 'center',
         justifyItems: 'start',
       }}
     >
-      <ToggleBase size="md" />
-      <ToggleBase size="sm" />
+      <ToggleBase size="md" theme="dark" />
+      <ToggleBase size="md" theme="light" />
+      <ToggleBase size="sm" theme="dark" />
+      <ToggleBase size="sm" theme="light" />
     </div>
   ),
 };

@@ -142,26 +142,24 @@
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_dark_state_default",
-  "score": null,
-  "note": "axis not carried: theme=dark"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_dark_state_disabled",
-  "score": null,
-  "note": "axis not carried: theme=dark,state=disabled"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_dark_state_focus",
   "score": null,
-  "note": "axis not carried: theme=dark,state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_dark_state_hover",
   "score": null,
-  "note": "axis not carried: theme=dark,state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
@@ -171,44 +169,41 @@
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_light_state_disabled",
-  "score": null,
-  "note": "axis not carried: state=disabled"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_light_state_focus",
   "score": null,
-  "note": "axis not carried: state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_md_theme_light_state_hover",
   "score": null,
-  "note": "axis not carried: state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_dark_state_default",
-  "score": null,
-  "note": "axis not carried: theme=dark"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_dark_state_disabled",
-  "score": null,
-  "note": "axis not carried: theme=dark,state=disabled"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_dark_state_focus",
   "score": null,
-  "note": "axis not carried: theme=dark,state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_dark_state_hover",
   "score": null,
-  "note": "axis not carried: theme=dark,state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
@@ -218,44 +213,41 @@
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_light_state_disabled",
-  "score": null,
-  "note": "axis not carried: state=disabled"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_light_state_focus",
   "score": null,
-  "note": "axis not carried: state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_false_size_sm_theme_light_state_hover",
   "score": null,
-  "note": "axis not carried: state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_dark_state_default",
-  "score": null,
-  "note": "axis not carried: theme=dark"
+  "score": 51.28
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_dark_state_disabled",
-  "score": null,
-  "note": "axis not carried: theme=dark,state=disabled"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_dark_state_focus",
   "score": null,
-  "note": "axis not carried: theme=dark,state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_dark_state_hover",
   "score": null,
-  "note": "axis not carried: theme=dark,state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
@@ -265,44 +257,41 @@
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_light_state_disabled",
-  "score": null,
-  "note": "axis not carried: state=disabled"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_light_state_focus",
   "score": null,
-  "note": "axis not carried: state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_md_theme_light_state_hover",
   "score": null,
-  "note": "axis not carried: state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_dark_state_default",
-  "score": null,
-  "note": "axis not carried: theme=dark"
+  "score": 46.19
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_dark_state_disabled",
-  "score": null,
-  "note": "axis not carried: theme=dark,state=disabled"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_dark_state_focus",
   "score": null,
-  "note": "axis not carried: theme=dark,state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_dark_state_hover",
   "score": null,
-  "note": "axis not carried: theme=dark,state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
@@ -312,20 +301,19 @@
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_light_state_disabled",
-  "score": null,
-  "note": "axis not carried: state=disabled"
+  "score": 100
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_light_state_focus",
   "score": null,
-  "note": "axis not carried: state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "toggle-base",
   "variant": "pressed_true_size_sm_theme_light_state_hover",
   "score": null,
-  "note": "axis not carried: state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
@@ -335,20 +323,19 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_false_state_disabled",
-  "score": null,
-  "note": "axis not carried: state=disabled"
+  "score": 98.24
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_false_state_focus",
   "score": null,
-  "note": "axis not carried: state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_false_state_hover",
   "score": null,
-  "note": "axis not carried: state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
@@ -358,20 +345,19 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_true_state_disabled",
-  "score": null,
-  "note": "axis not carried: state=disabled"
+  "score": 98.24
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_true_state_focus",
   "score": null,
-  "note": "axis not carried: state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_true_state_hover",
   "score": null,
-  "note": "axis not carried: state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
@@ -381,20 +367,19 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_false_state_disabled",
-  "score": null,
-  "note": "axis not carried: state=disabled"
+  "score": 98.28
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_false_state_focus",
   "score": null,
-  "note": "axis not carried: state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_false_state_hover",
   "score": null,
-  "note": "axis not carried: state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
@@ -404,20 +389,19 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_true_state_disabled",
-  "score": null,
-  "note": "axis not carried: state=disabled"
+  "score": 98.08
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_true_state_focus",
   "score": null,
-  "note": "axis not carried: state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_true_state_hover",
   "score": null,
-  "note": "axis not carried: state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
@@ -427,20 +411,19 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_false_state_disabled",
-  "score": null,
-  "note": "axis not carried: state=disabled"
+  "score": 98.21
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_false_state_focus",
   "score": null,
-  "note": "axis not carried: state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_false_state_hover",
   "score": null,
-  "note": "axis not carried: state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
@@ -450,20 +433,19 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_true_state_disabled",
-  "score": null,
-  "note": "axis not carried: state=disabled"
+  "score": 98.16
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_true_state_focus",
   "score": null,
-  "note": "axis not carried: state=focus"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_true_state_hover",
   "score": null,
-  "note": "axis not carried: state=hover"
+  "note": "interaction-state (CSS-rendered, not statically scorable)"
  },
  {
   "set": "input-field-base",
@@ -528,12 +510,12 @@
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_true_more_users_false",
-  "score": 60.56
+  "score": 60.5
  },
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_true_more_users_true",
-  "score": 64.3
+  "score": 64.31
  },
  {
   "set": "avatar-group",
@@ -548,12 +530,12 @@
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_true_more_users_false",
-  "score": 62.95
+  "score": 63.04
  },
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_true_more_users_true",
-  "score": 66.96
+  "score": 66.95
  },
  {
   "set": "avatar-group",
@@ -568,12 +550,12 @@
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_true_more_users_false",
-  "score": 66.09
+  "score": 66.06
  },
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_true_more_users_true",
-  "score": 70.08
+  "score": 69.91
  },
  {
   "set": "tooltip",
