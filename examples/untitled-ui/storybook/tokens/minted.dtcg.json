@@ -20,6 +20,28 @@
             "$type": "dimension"
           }
         },
+        "background-image": {
+          "false": {
+            "true": {
+              "$value": "none",
+              "$type": "gradient"
+            },
+            "false": {
+              "$value": "linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%)",
+              "$type": "gradient"
+            }
+          },
+          "true": {
+            "false": {
+              "$value": "none",
+              "$type": "gradient"
+            },
+            "true": {
+              "$value": "none",
+              "$type": "gradient"
+            }
+          }
+        },
         "width": {
           "xl": {
             "$value": "56px",
@@ -565,6 +587,10 @@
             "$value": "12px",
             "$type": "dimension"
           }
+        },
+        "background-image": {
+          "$value": "linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%)",
+          "$type": "gradient"
         }
       }
     },
@@ -1076,6 +1102,14 @@
         },
         "height": {
           "$value": "20px",
+          "$type": "dimension"
+        },
+        "background-image": {
+          "$value": "radial-gradient(circle, transparent 7.5px, #ffffff 7.5px, #ffffff 9.17px, transparent 9.17px)",
+          "$type": "gradient"
+        },
+        "border-radius": {
+          "$value": "10px",
           "$type": "dimension"
         }
       }

@@ -188,9 +188,19 @@ export interface DumpNode {
    *  additive) — the stub-paint channel: a child stub with observed geometry
    *  but no paint rendered invisible (field case: Untitled UI Badge's _Dot,
    *  hex 9e77ed). Same {var|hex, alpha?} shape as paints; the node's OWN
-   *  `fill` (when present) still wins downstream. Absence in older dumps
-   *  means not captured, never "no paint". */
-  instancePrimaryFill?: DumpPaint;
+   *  `fill` (when present) still wins downstream. Stroke-aware (additive):
+   *  when NO subtree node carries a visible SOLID fill (line icons draw
+   *  with strokes only — field case: Untitled UI Button's leading circle
+   *  icon), the first visible SOLID stroke carries instead, flagged
+   *  `{ stroke: true, weight }` so consumers render a border, never a
+   *  background; a CIRCULAR stroke source (ELLIPSE node, or a VECTOR whose
+   *  network is a pure ring) adds `ellipse: true` — the observed fact that
+   *  makes a circular border-radius DERIVABLE (corner radius inside an
+   *  instance is otherwise uncaptured) — plus, when the source is verified
+   *  CENTERED in the instance, `src` (the source node's own box, px) and
+   *  `align` (its strokeAlign) so the ring can render at the DRAWN radius.
+   *  Absence in older dumps means not captured, never "no paint". */
+  instancePrimaryFill?: DumpPaint & { stroke?: boolean; weight?: number; ellipse?: boolean; src?: number; align?: string };
   /** The node's first visible fill is an IMAGE paint (dump v1.7, additive) —
    *  captured BY NAME only (no bytes exported yet); consumers ledger it and
    *  render without the image. Absence means no image fill or not captured. */

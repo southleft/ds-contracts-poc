@@ -2217,16 +2217,78 @@ async function dumpNode(node, nodePath, parent) {
   // dump v1.7: INSTANCE primary fill — the stub-paint gap: a stub with
   // observed geometry but no paint renders invisible. Read-only subtree walk,
   // first node with a visible SOLID, reusing dumpPaint (alias + alpha;
-  // nodePath null suppresses per-node degradation spam).
+  // nodePath null suppresses per-node degradation spam). Stroke-aware: when
+  // NO node in the subtree carries a visible SOLID fill (line icons draw
+  // with strokes only), the first visible SOLID stroke carries instead,
+  // flagged { stroke: true, weight } (first stroke's weight) so the
+  // inversion renders it as a border, never a background; a CIRCULAR
+  // stroke source adds { ellipse: true } — an OBSERVED-geometry witness
+  // (ELLIPSE node type, or a VECTOR whose network is a pure ring: >= 4
+  // vertices equidistant from their centroid, every segment an arc with
+  // nonzero tangent handles — straight-line icons like x/plus/arrow have
+  // zero tangents and never qualify) that makes a circular border-radius
+  // DERIVABLE downstream (corner radius inside an instance is otherwise
+  // uncaptured; nothing is inferred from names).
+  const isCircularStrokeSource = (n) => {
+    try {
+      if (n.type === 'ELLIPSE') return true;
+      if (n.type !== 'VECTOR' || !n.vectorNetwork) return false;
+      if (typeof n.width !== 'number' || typeof n.height !== 'number' || Math.abs(n.width - n.height) > 0.5) return false;
+      const vs = n.vectorNetwork.vertices, segs = n.vectorNetwork.segments;
+      if (!vs || vs.length < 4 || !segs || segs.length < vs.length) return false;
+      let cx = 0, cy = 0;
+      for (const v of vs) { cx += v.x; cy += v.y; }
+      cx /= vs.length; cy /= vs.length;
+      const r0 = Math.hypot(vs[0].x - cx, vs[0].y - cy);
+      if (r0 <= 0) return false;
+      for (const v of vs) {
+        if (Math.abs(Math.hypot(v.x - cx, v.y - cy) - r0) > 0.02 * r0 + 0.1) return false;
+      }
+      for (const s of segs) {
+        const ts = s.tangentStart, te = s.tangentEnd;
+        if (!ts || !te || Math.hypot(ts.x, ts.y) < 0.1 || Math.hypot(te.x, te.y) < 0.1) return false;
+      }
+      return true;
+    } catch (e) { return false; }
+  };
   if (node.type === 'INSTANCE' && typeof node.findAll === 'function') {
     try {
       const kids = [node].concat(node.findAll(function () { return true; })).slice(0, 60);
+      let strokePaint = null;
       for (const n of kids) {
-        if (!('fills' in n) || !Array.isArray(n.fills)) continue;
-        if (!n.fills.some(function (p) { return p.visible !== false && p.type === 'SOLID'; })) continue;
-        const paint = await dumpPaint(n.fills, null, 'fill', n);
-        if (paint) { out.instancePrimaryFill = paint; break; }
+        if ('fills' in n && Array.isArray(n.fills)
+            && n.fills.some(function (p) { return p.visible !== false && p.type === 'SOLID'; })) {
+          const paint = await dumpPaint(n.fills, null, 'fill', n);
+          if (paint) { out.instancePrimaryFill = paint; break; }
+        }
+        if (!strokePaint && 'strokes' in n && Array.isArray(n.strokes)
+            && n.strokes.some(function (p) { return p.visible !== false && p.type === 'SOLID'; })) {
+          const paint = await dumpPaint(n.strokes, null, 'stroke', n);
+          if (paint) {
+            strokePaint = Object.assign({}, paint, { stroke: true, weight: typeof n.strokeWeight === 'number' ? round2(n.strokeWeight) : 1 });
+            if (isCircularStrokeSource(n)) {
+              strokePaint.ellipse = true;
+              // The ring's OBSERVED geometry: the source node's own box
+              // (`src`) and stroke alignment — captured ONLY when the source
+              // sits centered in the instance (verified via absolute boxes),
+              // so downstream can place the ring at the drawn radius rather
+              // than the instance edge. Observed facts, nothing assumed.
+              try {
+                const ib = node.absoluteBoundingBox, sb = n.absoluteBoundingBox;
+                if (ib && sb) {
+                  const l = sb.x - ib.x, r = (ib.x + ib.width) - (sb.x + sb.width);
+                  const t = sb.y - ib.y, btm = (ib.y + ib.height) - (sb.y + sb.height);
+                  if (Math.abs(l - r) <= 0.5 && Math.abs(t - btm) <= 0.5 && Math.abs(l - t) <= 0.5) {
+                    strokePaint.src = round2(sb.width);
+                    if (typeof n.strokeAlign === 'string') strokePaint.align = n.strokeAlign;
+                  }
+                }
+              } catch (e) { /* src stays uncaptured — border fallback downstream */ }
+            }
+          }
+        }
       }
+      if (!out.instancePrimaryFill && strokePaint) out.instancePrimaryFill = strokePaint;
     } catch (e) { /* walk refused — stays a stub-paint degradation */ }
   }
 

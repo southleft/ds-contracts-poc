@@ -102,6 +102,10 @@
   --imported-avatar-label-group-text-and-supporting-text-text-line-height-md: 20px;
   --imported-avatar-label-group-text-and-supporting-text-text-line-height-sm: 20px;
   --imported-avatar-label-group-text-and-supporting-text-text-line-height-xl: 28px;
+  --imported-avatar-root-background-image-false-false: linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%);
+  --imported-avatar-root-background-image-false-true: none;
+  --imported-avatar-root-background-image-true-false: none;
+  --imported-avatar-root-background-image-true-true: none;
   --imported-avatar-root-border-radius: 200px;
   --imported-avatar-root-border-width-default: 0px;
   --imported-avatar-root-border-width-focused: 4px;
@@ -582,6 +586,7 @@
   --imported-stub-au-root-background-color: #0052b4;
   --imported-stub-au-root-height: 16px;
   --imported-stub-au-root-width: 16px;
+  --imported-stub-avatar-company-icon-root-background-image: linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%);
   --imported-stub-avatar-company-icon-root-border-radius-2xl: 13.333334922790527px;
   --imported-stub-avatar-company-icon-root-border-radius-lg: 12px;
   --imported-stub-avatar-company-icon-root-border-radius-md: 12px;
@@ -626,6 +631,8 @@
   --imported-stub-checkbox-root-width: 16px;
   --imported-stub-chevron-down-root-height: 20px;
   --imported-stub-chevron-down-root-width: 20px;
+  --imported-stub-circle-root-background-image: radial-gradient(circle, transparent 7.5px, #ffffff 7.5px, #ffffff 9.17px, transparent 9.17px);
+  --imported-stub-circle-root-border-radius: 10px;
   --imported-stub-circle-root-height: 20px;
   --imported-stub-circle-root-width: 20px;
   --imported-stub-dot-root-background-color: #9e77ed;

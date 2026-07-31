@@ -25,6 +25,22 @@
   border-width: var(--imported-avatar-root-border-width-focused);
 }
 
+.root[data-placeholder][data-text] {
+  background-image: var(--imported-avatar-root-background-image-true-true);
+}
+
+.root[data-placeholder]:not([data-text]) {
+  background-image: var(--imported-avatar-root-background-image-true-false);
+}
+
+.root:not([data-placeholder])[data-text] {
+  background-image: var(--imported-avatar-root-background-image-false-true);
+}
+
+.root:not([data-placeholder]):not([data-text]) {
+  background-image: var(--imported-avatar-root-background-image-false-false);
+}
+
 .size-xl {
   width: var(--imported-avatar-root-width-xl);
   height: var(--imported-avatar-root-height-xl);

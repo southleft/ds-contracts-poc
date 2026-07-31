@@ -48,7 +48,8 @@
       "tokens": {
         "width": "{imported.stub-avatar-company-icon.root.width.{size}}",
         "height": "{imported.stub-avatar-company-icon.root.height.{size}}",
-        "border-radius": "{imported.stub-avatar-company-icon.root.border-radius.{size}}"
+        "border-radius": "{imported.stub-avatar-company-icon.root.border-radius.{size}}",
+        "background-image": "{imported.stub-avatar-company-icon.root.background-image}"
       }
     }
   },

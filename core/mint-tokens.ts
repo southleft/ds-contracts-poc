@@ -93,6 +93,16 @@ export interface MintObservation {
   kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient';
   /** One entry per variant the node occurs in. */
   occurrences: MintOccurrence[];
+  /** OPT-IN sparse-coverage fill for PRESENCE-shaped channels (canvas→code
+   *  round 2 iteration 5 — the `imageFill` placeholder): the vacuous value
+   *  ('none' for background-image) an UNOBSERVED axis combination fills
+   *  with when per-variant classification otherwise fits. Undrawn
+   *  combinations draw NOTHING extra — the fill never fabricates ink, it
+   *  only closes the dangling-ref hole full-coverage protects against
+   *  (field case: Untitled UI Avatar's photo = f(placeholder=false,
+   *  text=false); the placeholder=true×text=true combination is never
+   *  drawn). Absent (every existing caller) — coverage rules unchanged. */
+  sparse?: string;
 }
 
 export interface MintAxis {
@@ -224,9 +234,16 @@ function classify(obs: MintObservation, allAxes: MintAxis[], nestedPairs: boolea
     }
     // Substituted refs expand over EVERY enum value in the emitters, so a
     // per-variant mint must supply a leaf for each — partial coverage would
-    // fabricate a dangling reference.
-    if (fits && axis.values.every((v) => byValue.has(v))) {
-      return { kind: 'variant', axis, byValue };
+    // fabricate a dangling reference. `sparse` observations (presence-shaped
+    // channels) fill unobserved values with their declared vacuous value
+    // instead — never inventing ink, only closing the dangling-ref hole.
+    if (fits) {
+      const missing = axis.values.filter((v) => !byValue.has(v));
+      if (missing.length === 0) return { kind: 'variant', axis, byValue };
+      if (obs.sparse !== undefined && missing.length < axis.values.length) {
+        for (const v of missing) byValue.set(v, obs.sparse);
+        return { kind: 'variant', axis, byValue };
+      }
     }
   }
   // Two-axis correlation. Axis order = discovery order, deterministic; every
@@ -277,8 +294,16 @@ function classify(obs: MintObservation, allAxes: MintAxis[], nestedPairs: boolea
         if (seen !== undefined && seen !== o.value) { fits = false; break; }
         byValue.set(key, o.value);
       }
-      if (fits && a.values.every((va) => b.values.every((vb) => byValue.has(pairKey(va, vb))))) {
-        return { kind: 'variant2', axes: [a, b], byValue };
+      if (fits) {
+        const missing: string[] = [];
+        for (const va of a.values) for (const vb of b.values) if (!byValue.has(pairKey(va, vb))) missing.push(pairKey(va, vb));
+        if (missing.length === 0) return { kind: 'variant2', axes: [a, b], byValue };
+        // Sparse fill (presence-shaped channels): unobserved combinations
+        // take the declared vacuous value — see the single-axis case.
+        if (obs.sparse !== undefined && byValue.size > 0) {
+          for (const key of missing) byValue.set(key, obs.sparse);
+          return { kind: 'variant2', axes: [a, b], byValue };
+        }
       }
     }
   }
@@ -315,15 +340,18 @@ function classify(obs: MintObservation, allAxes: MintAxis[], nestedPairs: boolea
           if (seen !== undefined && seen !== o.value) { fits = false; break; }
           byValue.set(key, o.value);
         }
-        if (
-          fits &&
-          triple[0].values.every((va) =>
-            triple[1].values.every((vb) =>
-              triple[2].values.every((vc) => byValue.has(comboKey([va, vb, vc]))),
-            ),
-          )
-        ) {
-          return { kind: 'variant3', axes: triple, byValue };
+        if (fits) {
+          const missing: string[] = [];
+          for (const va of triple[0].values)
+            for (const vb of triple[1].values)
+              for (const vc of triple[2].values)
+                if (!byValue.has(comboKey([va, vb, vc]))) missing.push(comboKey([va, vb, vc]));
+          if (missing.length === 0) return { kind: 'variant3', axes: triple, byValue };
+          // Sparse fill (presence-shaped channels) — see the pair case.
+          if (obs.sparse !== undefined && byValue.size > 0) {
+            for (const key of missing) byValue.set(key, obs.sparse);
+            return { kind: 'variant3', axes: triple, byValue };
+          }
         }
       }
     }

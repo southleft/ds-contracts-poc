@@ -1,4 +1,7 @@
-/** CANVAS→CODE FIDELITY SCORE v1.2 — the demo-bar number.
+/** CANVAS→CODE FIDELITY SCORE v1.3 — the demo-bar number.
+ *  v1.3: both images TRIM to content before the 200px normalization —
+ *  margin/aspect mismatch between ref exports and standalone renders
+ *  misaligned the whole comparison (any honest ink scored negative).
  *  Per per-variant canvas reference: derive props from the variant slug via
  *  the contract's enums/booleans (alnum-normalized), render the generated
  *  component standalone, normalize both images to a common 200px box in a
@@ -93,10 +96,21 @@ for (const [slug,{comp}] of Object.entries(SETS)) {
       const a = ${JSON.stringify(refB)}, c = ${JSON.stringify(renB)};
       const load=(b64)=>new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src='data:image/png;base64,'+b64;});
       const [ia,ic]=await Promise.all([load(a),load(c)]);
-      const W=200,H=Math.max(40,Math.round(200*(ia.height/ia.width)));
-      const draw=(im)=>{const cv=document.createElement('canvas');cv.width=W;cv.height=H;const g=cv.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);
-        const sc=Math.min(W/im.width,H/im.height);const w=im.width*sc,h=im.height*sc;g.drawImage(im,(W-w)/2,(H-h)/2,w,h);return g.getImageData(0,0,W,H).data;};
-      const da=draw(ia),dc=draw(ic);
+      // v1.3: TRIM to content before normalizing — the ref exports and the
+      // standalone renders carry DIFFERENT margins, and contain-fit over
+      // unequal margins misaligned every pixel (honest ink scored WORSE
+      // than blank; measured on button-base circle icons).
+      const bbox=(im)=>{const cv=document.createElement('canvas');cv.width=im.width;cv.height=im.height;const g=cv.getContext('2d');
+        g.fillStyle='#fff';g.fillRect(0,0,im.width,im.height);g.drawImage(im,0,0);
+        const d=g.getImageData(0,0,im.width,im.height).data;let x0=im.width,y0=im.height,x1=-1,y1=-1;
+        for(let y=0;y<im.height;y++)for(let x=0;x<im.width;x++){const p=(y*im.width+x)*4;
+          if(d[p]<248||d[p+1]<248||d[p+2]<248){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}}
+        return x1<0?{x:0,y:0,w:im.width,h:im.height}:{x:x0,y:y0,w:x1-x0+1,h:y1-y0+1};};
+      const ba=bbox(ia),bc=bbox(ic);
+      const W=200,H=Math.max(40,Math.round(200*(ba.h/ba.w)));
+      const draw=(im,b)=>{const cv=document.createElement('canvas');cv.width=W;cv.height=H;const g=cv.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);
+        const sc=Math.min(W/b.w,H/b.h);const w=b.w*sc,h=b.h*sc;g.drawImage(im,b.x,b.y,b.w,b.h,(W-w)/2,(H-h)/2,w,h);return g.getImageData(0,0,W,H).data;};
+      const da=draw(ia,ba),dc=draw(ic,bc);
       let bad=0,total=W*H;
       for(let p=0;p<da.length;p+=4){const d=Math.abs(da[p]-dc[p])+Math.abs(da[p+1]-dc[p+1])+Math.abs(da[p+2]-dc[p+2]);if(d>90)bad++;}
       return Math.round(10000*(1-bad/total))/100;
@@ -120,6 +134,6 @@ const lines=['| component | variants scored | mean fidelity % | axis-not-carried
 let gn=0,gs=0;
 for(const [k,v] of Object.entries(bySet)){ if(v.n){gn+=v.n;gs+=v.sum;} lines.push(`| ${k} | ${v.n} | ${v.n?(v.sum/v.n).toFixed(1):'—'} | ${v.axisGap} | ${v.interaction} | ${v.unmapped} |`); }
 lines.push(`| **ALL** | ${gn} | **${gn?(gs/gn).toFixed(1):'—'}** | | | |`);
-writeFileSync(`${UI}/renders/FIDELITY.md`, `# Canvas→code fidelity — ${new Date().toISOString().slice(0,10)} @ HEAD\n\nScore = % pixels within tolerance, both images normalized to a common 200px box (canvas ref up to 2x export vs standalone render). v1.2: unknown axes consumed generically; axis-not-carried counts variants unrenderable because the inversion dropped their axis (genuine carriage losses only); state=disabled scores through the contract's disabled boolean; state=hover|focus variants are interaction-state (CSS-rendered, not statically scorable). Trend metric, not the final gate.\n\n${lines.join('\n')}\n`);
+writeFileSync(`${UI}/renders/FIDELITY.md`, `# Canvas→code fidelity — ${new Date().toISOString().slice(0,10)} @ HEAD\n\nScore = % pixels within tolerance, both images content-trimmed then normalized to a common 200px box (canvas ref up to 2x export vs standalone render; v1.3 trims margins — unequal margins misaligned every pixel). v1.2: unknown axes consumed generically; axis-not-carried counts variants unrenderable because the inversion dropped their axis (genuine carriage losses only); state=disabled scores through the contract's disabled boolean; state=hover|focus variants are interaction-state (CSS-rendered, not statically scorable). Trend metric, not the final gate.\n\n${lines.join('\n')}\n`);
 writeFileSync(`${UI}/renders/fidelity.json`, JSON.stringify(results,null,1));
 console.log(lines.join('\n'));

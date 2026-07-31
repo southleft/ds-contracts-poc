@@ -237,6 +237,7 @@
       "tokens": {
         "border-radius": "{imported.avatar.root.border-radius}",
         "border-width": "{imported.avatar.root.border-width.{state}}",
+        "background-image": "{imported.avatar.root.background-image.{placeholder}.{text}}",
         "width": "{imported.avatar.root.width.{size}}",
         "height": "{imported.avatar.root.height.{size}}"
       }

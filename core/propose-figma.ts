@@ -1029,11 +1029,19 @@ interface StubCapture {
     bbox?: { width: number; height: number };
     fill?: DumpPaint;
     /** dump v1.7: first visible SOLID inside the instance's subtree — the
-     *  stub-paint channel. The instance's OWN `fill` (when present) wins. */
-    instancePrimaryFill?: DumpPaint;
+     *  stub-paint channel. The instance's OWN `fill` (when present) wins.
+     *  Stroke-aware: `{ stroke: true, weight }` marks a stroke-observed
+     *  paint (line icons) — rendered as a border, never a background;
+     *  `ellipse: true` marks a CIRCULAR stroke source (radius derivable);
+     *  `src`/`align` carry the centered source's own box + strokeAlign so
+     *  the ring renders at the DRAWN radius. */
+    instancePrimaryFill?: DumpPaint & { stroke?: boolean; weight?: number; ellipse?: boolean; src?: number; align?: string };
     stroke?: DumpPaint;
     strokeWeight?: number;
     cornerRadius?: number;
+    /** dump v1.7: the node's first visible fill is an IMAGE paint — the stub
+     *  renders the neutral placeholder gradient (bytes stay unexported). */
+    imageFill?: boolean;
   }>;
 }
 
@@ -1064,14 +1072,27 @@ const partPathOf = (where: string): string => {
   return i >= 0 ? where.slice(i + ':root'.length).replace(/^\//, '') : '';
 };
 
+/** dump v1.7 `imageFill` placeholder — the ONE deterministic spelling every
+ *  surface that carries an unexported IMAGE fill renders (a neutral
+ *  LIGHT-gray linear gradient; linear so the canvas emitter can parse it
+ *  back into a native GRADIENT_LINEAR paint — radial/conic fall to
+ *  gradientMiss). Light stops (gray-100 → gray-300) deliberately: photo
+ *  subjects vary but their studio backgrounds skew light, and a dark
+ *  placeholder reads as a hole. The image bytes themselves are NOT
+ *  exported; the placeholder only keeps the surface from rendering blank. */
+export const IMAGE_FILL_PLACEHOLDER_GRADIENT = 'linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%)';
+
 function mintObservation(
   ctx: Ctx,
   target: Record<string, string>,
   where: string,
   cssProperty: string,
-  kind: 'color' | 'px' | 'number' | 'shadow',
+  kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient',
   occ: Array<{ variant: string; value: string | number }>,
   source?: string,
+  /** Presence-shaped channels only (mint-tokens MintObservation.sparse):
+   *  the vacuous value unobserved axis combinations fill with. */
+  sparse?: string,
 ) {
   if (!ctx.mint) return;
   ctx.mint.observations.push({
@@ -1086,6 +1107,7 @@ function mintObservation(
     })),
     target,
     source,
+    ...(sparse !== undefined ? { sparse } : {}),
   });
 }
 
@@ -2809,6 +2831,7 @@ function captureStub(instanceOf: string, m: Merged, ctx: Ctx, where: string): st
         ...(o.node.stroke ? { stroke: o.node.stroke } : {}),
         ...(o.node.strokeWeight !== undefined ? { strokeWeight: o.node.strokeWeight } : {}),
         ...(o.node.cornerRadius !== undefined ? { cornerRadius: o.node.cornerRadius } : {}),
+        ...(o.node.imageFill === true ? { imageFill: true } : {}),
       });
     }
   }
@@ -3401,7 +3424,7 @@ function buildPart(
   // branch below; refusals stay named inside it.)
   if (m.occ.some((o) => o.node.imageFill === true)) {
     ctx.notes.push(
-      `${where}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — image bytes are not exported; the part renders without the image (a later round exports the asset)`,
+      `${where}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — the image itself is NOT exported (a later round exports the asset); a FRAME part renders the neutral placeholder gradient in its place (stub instances via their stub geometry; other node classes render without the image)`,
     );
   }
 
@@ -3602,6 +3625,25 @@ function buildPart(
   const partByProp: ByPropCollector = { map: {} };
   const tokens = invertNodeTokens(m, false, ctx, where, partByProp);
   attachByProp(part, partByProp);
+
+  // dump v1.7 `imageFill` on a FRAME part — the neutral placeholder gradient
+  // renders where the unexported image is drawn ('none' elsewhere), same
+  // carriage as the root site; no-op when the field is absent.
+  if (m.occ.some((o) => o.node.imageFill === true)) {
+    mintObservation(
+      ctx,
+      tokens,
+      where,
+      'background-image',
+      'gradient',
+      m.occ.map((o) => ({
+        variant: o.variant,
+        value: o.node.imageFill === true ? IMAGE_FILL_PLACEHOLDER_GRADIENT : 'none',
+      })),
+      undefined,
+      'none', // presence-shaped: undrawn axis combinations draw no image
+    );
+  }
 
   // v9 shape (#42, dump v1.3): parametric leaf decor — the part carries the
   // captured geometry, hidden-pattern visibility, and per-variant placement.
@@ -4044,7 +4086,7 @@ function stubGeometry(
     );
   }
   const observations: MintObservation[] = [];
-  const push = (cssProperty: string, kind: MintObservation['kind'], value: (o: StubCapture['observed'][number]) => string | number | null) => {
+  const push = (cssProperty: string, kind: MintObservation['kind'], value: (o: StubCapture['observed'][number]) => string | number | null, sparse?: string) => {
     const occ = geo.map((o) => ({ variant: o.variant, axisValues: axisValuesFor(o), value: value(o) }));
     if (occ.some((x) => x.value === null)) return;
     observations.push({
@@ -4053,6 +4095,7 @@ function stubGeometry(
       cssProperty,
       kind,
       occurrences: occ as Array<{ variant: string; axisValues: Record<string, string>; value: string | number }>,
+      ...(sparse !== undefined ? { sparse } : {}),
     });
   };
   push('width', 'px', (o) => Math.round(o.bbox!.width * 100) / 100);
@@ -4061,11 +4104,93 @@ function stubGeometry(
   // observed inside its subtree (dump v1.7 instancePrimaryFill) — the paint
   // the drawn box actually shows (field case: Untitled UI Badge's _Dot,
   // observed 6×6 but rendered invisible without its 9e77ed dot paint).
-  const paintOf = (o: StubCapture['observed'][number]): DumpPaint | undefined =>
+  // Stroke-aware: a `{ stroke: true, weight }`-flagged subtree paint (line
+  // icons — the subtree draws with strokes only) renders as a BORDER on the
+  // stub root (weight px solid color), never a background (field case:
+  // Untitled UI Button's leading circle icon — invisible when its stroke
+  // paint minted nothing).
+  const paintOf = (o: StubCapture['observed'][number]): (DumpPaint & { stroke?: boolean; weight?: number; ellipse?: boolean; src?: number; align?: string }) | undefined =>
     o.fill ?? o.instancePrimaryFill;
+  const isStrokeObserved = (o: StubCapture['observed'][number]): boolean =>
+    o.fill === undefined && o.instancePrimaryFill?.stroke === true;
   const fills = geo.filter((o) => paintOf(o) !== undefined);
+  const strokeObserved = fills.filter(isStrokeObserved);
   let backgroundVarRef: string | null = null;
-  if (fills.length > 0 && fills.every((o) => paintOf(o)!.hex !== undefined)) {
+  if (strokeObserved.length > 0 && strokeObserved.length < fills.length) {
+    ctx.notes.push(
+      `stub ${capture.id}: observed subtree paint is a STROKE on ${strokeObserved.length}/${fills.length} painted occurrence(s) and a FILL on the rest — one channel is not a function of the stub's axes; neither carried, review`,
+    );
+  } else if (strokeObserved.length > 0) {
+    // DRAWN-RADIUS RING (dump v1.7 stroke-aware walk, refined twice on
+    // measurement): a stroke-observed subtree paint renders ONLY when its
+    // drawn geometry is derivable — every occurrence carrying the CIRCULAR
+    // witness (`ellipse`) AND the centered source's own box (`src`). The
+    // ring then renders at the DRAWN radius as an exact radial-gradient
+    // band on the stub root (align-aware: INSIDE [r-w, r], OUTSIDE
+    // [r, r+w], else CENTER [r±w/2]) in the observed literal hex. One stub
+    // is CLAIMED once but instanced across sets with different ink and
+    // size (field case: the kit's circle icon strokes WHITE at 16.67px
+    // inside Button and GRAY at 13.33px inside Dropdown list item) — the
+    // first claimant's observation wins and every LINKED usage carries the
+    // existing per-usage-override note (the _Dot ledger class; currentColor
+    // was tried and measured WORSE — generated components bind text color
+    // on text PARTS, so inheritance delivers the page default, not the
+    // sibling label's ink). A stroke source whose geometry is NOT
+    // derivable (x/plus/arrow line vectors) renders NOTHING and is refused
+    // by name — a box border around a glyph is invented geometry, and it
+    // measured WORSE than absence on every affected variant.
+    const ringable =
+      !strokesCarriable &&
+      strokeObserved.every((o) => {
+        const p = paintOf(o)!;
+        return p.ellipse === true && typeof p.src === 'number' && p.hex !== undefined;
+      });
+    if (strokesCarriable) {
+      ctx.notes.push(
+        `stub ${capture.id}: subtree stroke paint observed but the instance draws its OWN stroke (already carried as the border) — subtree stroke paint not carried, review`,
+      );
+    } else if (ringable) {
+      const f = (x: number) => Math.round(x * 100) / 100;
+      push(
+        'background-image',
+        'gradient',
+        (o) => {
+          const p = paintOf(o);
+          if (p === undefined || !isStrokeObserved(o)) return 'none';
+          const w = p.weight ?? 1;
+          const r = p.src! / 2;
+          const rin = p.align === 'INSIDE' ? r - w : p.align === 'OUTSIDE' ? r : r - w / 2;
+          const rout = p.align === 'INSIDE' ? r : p.align === 'OUTSIDE' ? r + w : r + w / 2;
+          const c = paintCssHex(p);
+          return `radial-gradient(circle, transparent ${f(rin)}px, ${c} ${f(rin)}px, ${c} ${f(rout)}px, transparent ${f(rout)}px)`;
+        },
+        'none',
+      );
+      ctx.notes.push(
+        `stub ${capture.id}: stroke source is a centered CIRCLE with an observed box (dump v1.7 \`ellipse\`/\`src\`) — the ring renders at the DRAWN radius as an exact radial-gradient band on the stub root (align-aware), not a border at the instance edge`,
+      );
+    } else {
+      ctx.notes.push(
+        `stub ${capture.id}: stroke-observed subtree paint (dump v1.7) but the drawn geometry is not derivable (stroke source is not a centered circle with an observed box) — nothing rendered for it; a box border around a glyph is invented geometry (refused by name, review)`,
+      );
+    }
+    // Circle-ish stroke-drawn stub (equal width/height — Untitled UI's
+    // circle icon): a circular border-radius is DERIVED only when the
+    // captured stroke source carries the circular witness on every
+    // stroke-observed occurrence (`ellipse: true`, stroke-aware walk) —
+    // the drawn ink IS circular, so half the observed box is the observed
+    // radius. A non-circular stroke source has no derivable radius; its
+    // refusal is named above (nothing renders for it anyway).
+    const circleIsh =
+      geo.every((o) => Math.abs(o.bbox!.width - o.bbox!.height) < 0.5) &&
+      !geo.some((o) => (o.cornerRadius ?? 0) !== 0);
+    if (circleIsh && strokeObserved.every((o) => paintOf(o)!.ellipse === true)) {
+      push('border-radius', 'px', (o) => Math.round((o.bbox!.width / 2) * 100) / 100);
+      ctx.notes.push(
+        `stub ${capture.id}: circular stroke source on every observed occurrence (dump v1.7 stroke-aware walk) — circular border-radius derived from the observed box (width/2), the stub box renders round`,
+      );
+    }
+  } else if (fills.length > 0 && fills.every((o) => paintOf(o)!.hex !== undefined)) {
     // Occurrences without a fill are honestly TRANSPARENT (#00000000 — a
     // legal DTCG color and a CSS color), so a per-variant fill mints per
     // axis instead of dropping the channel.
@@ -4096,6 +4221,15 @@ function stubGeometry(
   }
   if (geo.some((o) => (o.cornerRadius ?? 0) !== 0)) {
     push('border-radius', 'px', (o) => o.cornerRadius ?? 0);
+  }
+  // dump v1.7 `imageFill` on the stub instance — the neutral placeholder
+  // gradient renders where the unexported image is drawn ('none' elsewhere);
+  // no-op when the field is absent (older dumps).
+  if (geo.some((o) => o.imageFill === true)) {
+    push('background-image', 'gradient', (o) => (o.imageFill === true ? IMAGE_FILL_PLACEHOLDER_GRADIENT : 'none'), 'none');
+    ctx.notes.push(
+      `stub ${capture.id}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — the image itself is NOT exported; the stub renders the neutral placeholder gradient (${IMAGE_FILL_PLACEHOLDER_GRADIENT}) in its place`,
+    );
   }
   if (observations.length === 0) return null;
   const minted = mintTokens(`stub-${capture.id.split('.').slice(1).join('-')}`, observations, axes);
@@ -4869,10 +5003,25 @@ export function proposeFromDump(
   const rootTokensByProp: ByPropCollector = { map: {} };
   const rootTokens = invertNodeTokens(merged, true, ctx, where, rootTokensByProp);
   // dump v1.7 tolerance ledger (root): an IMAGE fill on the variant root
-  // (photo avatars) is captured by name only — named, never a throw.
+  // (photo avatars) is captured by name only — the image stays unexported;
+  // with minting on, the root renders the neutral placeholder gradient
+  // (per-variant: 'none' where no image is drawn) instead of nothing.
   if (merged.occ.some((o) => o.node.imageFill === true)) {
     ctx.notes.push(
-      `${where}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — image bytes are not exported; the root renders without the image (a later round exports the asset)`,
+      `${where}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — the image itself is NOT exported (a later round exports the asset); the root renders the neutral placeholder gradient (${IMAGE_FILL_PLACEHOLDER_GRADIENT}) where the image is drawn`,
+    );
+    mintObservation(
+      ctx,
+      rootTokens,
+      where,
+      'background-image',
+      'gradient',
+      merged.occ.map((o) => ({
+        variant: o.variant,
+        value: o.node.imageFill === true ? IMAGE_FILL_PLACEHOLDER_GRADIENT : 'none',
+      })),
+      undefined,
+      'none', // presence-shaped: undrawn axis combinations draw no image
     );
   }
 
