@@ -138,15 +138,32 @@
       },
       "parts": {
         "user": {
-          "component": {
-            "id": "ds.user"
+          "declared": {
+            "position": "absolute"
           },
           "visibleWhen": {
             "prop": "placeholder"
+          },
+          "parts": {
+            "instance": {
+              "component": {
+                "id": "ds.user"
+              }
+            }
+          },
+          "tokens": {
+            "left": "{imported.avatar.user.left.{size}}",
+            "top": "{imported.avatar.user.top.{size}}",
+            "width": "{imported.avatar.user.width.{size}}",
+            "height": "{imported.avatar.user.height.{size}}"
           }
         },
         "Text": {
           "text": "OR",
+          "declared": {
+            "text-align": "center",
+            "position": "absolute"
+          },
           "visibleWhen": {
             "prop": "text"
           },
@@ -154,38 +171,74 @@
             "color": "{imported.avatar.text.color}",
             "font-size": "{imported.avatar.text.font-size.{size}}",
             "font-weight": "{imported.avatar.text.font-weight}",
-            "line-height": "{imported.avatar.text.line-height.{size}}"
+            "line-height": "{imported.avatar.text.line-height.{size}}",
+            "left": "{imported.avatar.text.left}",
+            "right": "{imported.avatar.text.right}",
+            "top": "{imported.avatar.text.top.{size}}"
           }
         },
         "AvatarOnlineIndicator": {
-          "component": {
-            "id": "ds.avatar-online-indicator",
-            "props": {
-              "size": "{size}",
-              "online": "true"
-            }
+          "declared": {
+            "position": "absolute"
           },
           "visibleWhen": {
             "prop": "statusIcon",
             "equals": "onlineIndicator"
+          },
+          "parts": {
+            "AvatarOnlineIndicatorInstance": {
+              "component": {
+                "id": "ds.avatar-online-indicator",
+                "props": {
+                  "size": "{size}",
+                  "online": "true"
+                }
+              }
+            }
+          },
+          "tokens": {
+            "width": "{imported.avatar.avatar-online-indicator.width.{size}}",
+            "height": "{imported.avatar.avatar-online-indicator.height.{size}}"
+          },
+          "literals": {
+            "right": "0px",
+            "bottom": "0px"
           }
         },
         "AvatarCompanyIcon": {
-          "component": {
-            "id": "ds.avatar-company-icon",
-            "props": {
-              "size": "{size}"
-            }
+          "declared": {
+            "position": "absolute"
           },
           "visibleWhen": {
             "prop": "statusIcon",
             "equals": "company"
+          },
+          "parts": {
+            "AvatarCompanyIconInstance": {
+              "component": {
+                "id": "ds.avatar-company-icon",
+                "props": {
+                  "size": "{size}"
+                }
+              }
+            }
+          },
+          "tokens": {
+            "right": "{imported.avatar.avatar-company-icon.right}",
+            "bottom": "{imported.avatar.avatar-company-icon.bottom}",
+            "width": "{imported.avatar.avatar-company-icon.width.{size}}",
+            "height": "{imported.avatar.avatar-company-icon.height.{size}}"
           }
         }
       },
+      "declared": {
+        "position": "relative"
+      },
       "tokens": {
         "border-radius": "{imported.avatar.root.border-radius}",
-        "border-width": "{imported.avatar.root.border-width.{state}}"
+        "border-width": "{imported.avatar.root.border-width.{state}}",
+        "width": "{imported.avatar.root.width.{size}}",
+        "height": "{imported.avatar.root.height.{size}}"
       }
     }
   },

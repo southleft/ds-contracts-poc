@@ -1,0 +1,728 @@
+[
+ {
+  "set": "badge-base",
+  "variant": "icon_avatar",
+  "score": 76.5
+ },
+ {
+  "set": "badge-base",
+  "variant": "icon_country",
+  "score": 73.72
+ },
+ {
+  "set": "badge-base",
+  "variant": "icon_dot",
+  "score": 85.15
+ },
+ {
+  "set": "badge-base",
+  "variant": "icon_false",
+  "score": 87.49
+ },
+ {
+  "set": "badge-base",
+  "variant": "icon_icon_left",
+  "score": 86.88
+ },
+ {
+  "set": "badge-base",
+  "variant": "icon_icon_right",
+  "score": 88.01
+ },
+ {
+  "set": "badge-base",
+  "variant": "icon_only",
+  "score": 92.39
+ },
+ {
+  "set": "badge-base",
+  "variant": "icon_x_close",
+  "score": 87.88
+ },
+ {
+  "set": "button-base",
+  "variant": "size_lg_icon_dot",
+  "score": 55.65
+ },
+ {
+  "set": "button-base",
+  "variant": "size_lg_icon_false",
+  "score": 56.2
+ },
+ {
+  "set": "button-base",
+  "variant": "size_lg_icon_leading",
+  "score": 57.81
+ },
+ {
+  "set": "button-base",
+  "variant": "size_lg_icon_only",
+  "score": 65.25
+ },
+ {
+  "set": "button-base",
+  "variant": "size_lg_icon_trailing",
+  "score": 57.71
+ },
+ {
+  "set": "button-base",
+  "variant": "size_md_icon_dot",
+  "score": 56.31
+ },
+ {
+  "set": "button-base",
+  "variant": "size_md_icon_false",
+  "score": 57.45
+ },
+ {
+  "set": "button-base",
+  "variant": "size_md_icon_leading",
+  "score": 55.41
+ },
+ {
+  "set": "button-base",
+  "variant": "size_md_icon_only",
+  "score": 63.62
+ },
+ {
+  "set": "button-base",
+  "variant": "size_md_icon_trailing",
+  "score": 55.38
+ },
+ {
+  "set": "button-base",
+  "variant": "size_sm_icon_dot",
+  "score": 54.02
+ },
+ {
+  "set": "button-base",
+  "variant": "size_sm_icon_false",
+  "score": 54.32
+ },
+ {
+  "set": "button-base",
+  "variant": "size_sm_icon_leading",
+  "score": 52.8
+ },
+ {
+  "set": "button-base",
+  "variant": "size_sm_icon_only",
+  "score": 60.92
+ },
+ {
+  "set": "button-base",
+  "variant": "size_sm_icon_trailing",
+  "score": 53.52
+ },
+ {
+  "set": "button-base",
+  "variant": "size_xl_icon_dot",
+  "score": 57.96
+ },
+ {
+  "set": "button-base",
+  "variant": "size_xl_icon_false",
+  "score": 58.46
+ },
+ {
+  "set": "button-base",
+  "variant": "size_xl_icon_leading",
+  "score": 60.04
+ },
+ {
+  "set": "button-base",
+  "variant": "size_xl_icon_only",
+  "score": 66.61
+ },
+ {
+  "set": "button-base",
+  "variant": "size_xl_icon_trailing",
+  "score": 60.02
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_md_theme_dark_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_md_theme_dark_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_md_theme_dark_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_md_theme_dark_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_md_theme_light_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_md_theme_light_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_md_theme_light_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_md_theme_light_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_sm_theme_dark_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_sm_theme_dark_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_sm_theme_dark_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_sm_theme_dark_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_sm_theme_light_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_sm_theme_light_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_sm_theme_light_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_false_size_sm_theme_light_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_md_theme_dark_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_md_theme_dark_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_md_theme_dark_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_md_theme_dark_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_md_theme_light_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_md_theme_light_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_md_theme_light_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_md_theme_light_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_sm_theme_dark_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_sm_theme_dark_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_sm_theme_dark_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_sm_theme_dark_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_sm_theme_light_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_sm_theme_light_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_sm_theme_light_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "toggle-base",
+  "variant": "pressed_true_size_sm_theme_light_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_false_shortcut_false_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_false_shortcut_false_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_false_shortcut_false_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_false_shortcut_false_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_false_shortcut_true_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_false_shortcut_true_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_false_shortcut_true_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_false_shortcut_true_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_true_shortcut_false_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_true_shortcut_false_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_true_shortcut_false_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_true_shortcut_false_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_true_shortcut_true_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_true_shortcut_true_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_true_shortcut_true_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_false_checkbox_true_shortcut_true_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_true_checkbox_false_shortcut_false_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_true_checkbox_false_shortcut_false_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_true_checkbox_false_shortcut_false_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_true_checkbox_false_shortcut_false_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_true_checkbox_false_shortcut_true_state_default",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_true_checkbox_false_shortcut_true_state_disabled",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_true_checkbox_false_shortcut_true_state_focus",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "dropdown-list-item",
+  "variant": "icon_true_checkbox_false_shortcut_true_state_hover",
+  "score": null,
+  "note": "slug→props unmapped"
+ },
+ {
+  "set": "input-field-base",
+  "variant": "type_default_destructive_false",
+  "score": 87.74
+ },
+ {
+  "set": "input-field-base",
+  "variant": "type_default_destructive_true",
+  "score": 87.76
+ },
+ {
+  "set": "input-field-base",
+  "variant": "type_leading_dropdown_destructive_false",
+  "score": 85.38
+ },
+ {
+  "set": "input-field-base",
+  "variant": "type_leading_dropdown_destructive_true",
+  "score": 85.65
+ },
+ {
+  "set": "input-field-base",
+  "variant": "type_leading_text_destructive_false",
+  "score": 84.41
+ },
+ {
+  "set": "input-field-base",
+  "variant": "type_leading_text_destructive_true",
+  "score": 84.48
+ },
+ {
+  "set": "input-field-base",
+  "variant": "type_payment_input_destructive_false",
+  "score": 87.52
+ },
+ {
+  "set": "input-field-base",
+  "variant": "type_payment_input_destructive_true",
+  "score": 87.54
+ },
+ {
+  "set": "input-field-base",
+  "variant": "type_trailing_dropdown_destructive_false",
+  "score": 86.86
+ },
+ {
+  "set": "input-field-base",
+  "variant": "type_trailing_dropdown_destructive_true",
+  "score": 87.1
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_md_add_user_button_false_more_users_false",
+  "score": 47.88
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_md_add_user_button_false_more_users_true",
+  "score": 54.24
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_md_add_user_button_true_more_users_false",
+  "score": 60.61
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_md_add_user_button_true_more_users_true",
+  "score": 64.38
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_sm_add_user_button_false_more_users_false",
+  "score": 50.93
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_sm_add_user_button_false_more_users_true",
+  "score": 57.31
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_sm_add_user_button_true_more_users_false",
+  "score": 62.89
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_sm_add_user_button_true_more_users_true",
+  "score": 67.08
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_xs_add_user_button_false_more_users_false",
+  "score": 55.61
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_xs_add_user_button_false_more_users_true",
+  "score": 62.01
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_xs_add_user_button_true_more_users_false",
+  "score": 65.85
+ },
+ {
+  "set": "avatar-group",
+  "variant": "size_xs_add_user_button_true_more_users_true",
+  "score": 69.99
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_dark_arrow_bottom_center",
+  "score": 56.49
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_dark_arrow_bottom_left",
+  "score": 56.55
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_dark_arrow_bottom_right",
+  "score": 56.45
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_dark_arrow_left",
+  "score": 55.34
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_dark_arrow_none",
+  "score": 56.64
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_dark_arrow_right",
+  "score": 55.42
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_dark_arrow_top_center",
+  "score": 64.91
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_light_arrow_bottom_center",
+  "score": 89.63
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_light_arrow_bottom_left",
+  "score": 89.61
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_light_arrow_bottom_right",
+  "score": 89.58
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_light_arrow_left",
+  "score": 87.92
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_light_arrow_none",
+  "score": 88.24
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_light_arrow_right",
+  "score": 88.07
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_false_theme_light_arrow_top_center",
+  "score": 89.44
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_dark_arrow_bottom_center",
+  "score": 37.1
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_dark_arrow_bottom_left",
+  "score": 37.1
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_dark_arrow_bottom_right",
+  "score": 37.1
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_dark_arrow_left",
+  "score": 37.04
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_dark_arrow_none",
+  "score": 34.83
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_dark_arrow_right",
+  "score": 32.8
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_dark_arrow_top_center",
+  "score": 37.88
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_light_arrow_bottom_center",
+  "score": 89.43
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_light_arrow_bottom_left",
+  "score": 89.43
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_light_arrow_bottom_right",
+  "score": 89.43
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_light_arrow_left",
+  "score": 89.75
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_light_arrow_none",
+  "score": 89.73
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_light_arrow_right",
+  "score": 88.96
+ },
+ {
+  "set": "tooltip",
+  "variant": "supporting_text_true_theme_light_arrow_top_center",
+  "score": 90.41
+ }
+]

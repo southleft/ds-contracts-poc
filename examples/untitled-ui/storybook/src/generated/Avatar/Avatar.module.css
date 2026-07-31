@@ -10,6 +10,7 @@
   justify-content: center;
   border-style: solid;
   border-radius: var(--imported-avatar-root-border-radius);
+  position: relative;
 }
 
 .state-default {
@@ -24,9 +25,144 @@
   border-width: var(--imported-avatar-root-border-width-focused);
 }
 
+.size-xl {
+  width: var(--imported-avatar-root-width-xl);
+  height: var(--imported-avatar-root-height-xl);
+}
+
+.size-2xl {
+  width: var(--imported-avatar-root-width-2xl);
+  height: var(--imported-avatar-root-height-2xl);
+}
+
+.size-lg {
+  width: var(--imported-avatar-root-width-lg);
+  height: var(--imported-avatar-root-height-lg);
+}
+
+.size-md {
+  width: var(--imported-avatar-root-width-md);
+  height: var(--imported-avatar-root-height-md);
+}
+
+.size-sm {
+  width: var(--imported-avatar-root-width-sm);
+  height: var(--imported-avatar-root-height-sm);
+}
+
+.size-xs {
+  width: var(--imported-avatar-root-width-xs);
+  height: var(--imported-avatar-root-height-xs);
+}
+
+.user {
+  display: flex;
+  position: absolute;
+}
+
+.size-xl .user {
+  left: var(--imported-avatar-user-left-xl);
+}
+
+.size-2xl .user {
+  left: var(--imported-avatar-user-left-2xl);
+}
+
+.size-lg .user {
+  left: var(--imported-avatar-user-left-lg);
+}
+
+.size-md .user {
+  left: var(--imported-avatar-user-left-md);
+}
+
+.size-sm .user {
+  left: var(--imported-avatar-user-left-sm);
+}
+
+.size-xs .user {
+  left: var(--imported-avatar-user-left-xs);
+}
+
+.size-xl .user {
+  top: var(--imported-avatar-user-top-xl);
+}
+
+.size-2xl .user {
+  top: var(--imported-avatar-user-top-2xl);
+}
+
+.size-lg .user {
+  top: var(--imported-avatar-user-top-lg);
+}
+
+.size-md .user {
+  top: var(--imported-avatar-user-top-md);
+}
+
+.size-sm .user {
+  top: var(--imported-avatar-user-top-sm);
+}
+
+.size-xs .user {
+  top: var(--imported-avatar-user-top-xs);
+}
+
+.size-xl .user {
+  width: var(--imported-avatar-user-width-xl);
+}
+
+.size-2xl .user {
+  width: var(--imported-avatar-user-width-2xl);
+}
+
+.size-lg .user {
+  width: var(--imported-avatar-user-width-lg);
+}
+
+.size-md .user {
+  width: var(--imported-avatar-user-width-md);
+}
+
+.size-sm .user {
+  width: var(--imported-avatar-user-width-sm);
+}
+
+.size-xs .user {
+  width: var(--imported-avatar-user-width-xs);
+}
+
+.size-xl .user {
+  height: var(--imported-avatar-user-height-xl);
+}
+
+.size-2xl .user {
+  height: var(--imported-avatar-user-height-2xl);
+}
+
+.size-lg .user {
+  height: var(--imported-avatar-user-height-lg);
+}
+
+.size-md .user {
+  height: var(--imported-avatar-user-height-md);
+}
+
+.size-sm .user {
+  height: var(--imported-avatar-user-height-sm);
+}
+
+.size-xs .user {
+  height: var(--imported-avatar-user-height-xs);
+}
+
 .Text {
   color: var(--imported-avatar-text-color);
   font-weight: var(--imported-avatar-text-font-weight);
+  left: var(--imported-avatar-text-left);
+  right: var(--imported-avatar-text-right);
+  text-align: center;
+  position: absolute;
 }
 
 .size-xl .Text {
@@ -75,4 +211,138 @@
 
 .size-xs .Text {
   line-height: var(--imported-avatar-text-line-height-xs);
+}
+
+.size-xl .Text {
+  top: var(--imported-avatar-text-top-xl);
+}
+
+.size-2xl .Text {
+  top: var(--imported-avatar-text-top-2xl);
+}
+
+.size-lg .Text {
+  top: var(--imported-avatar-text-top-lg);
+}
+
+.size-md .Text {
+  top: var(--imported-avatar-text-top-md);
+}
+
+.size-sm .Text {
+  top: var(--imported-avatar-text-top-sm);
+}
+
+.size-xs .Text {
+  top: var(--imported-avatar-text-top-xs);
+}
+
+.AvatarOnlineIndicator {
+  display: flex;
+  right: 0px;
+  bottom: 0px;
+  position: absolute;
+}
+
+.size-xl .AvatarOnlineIndicator {
+  width: var(--imported-avatar-avatar-online-indicator-width-xl);
+}
+
+.size-2xl .AvatarOnlineIndicator {
+  width: var(--imported-avatar-avatar-online-indicator-width-2xl);
+}
+
+.size-lg .AvatarOnlineIndicator {
+  width: var(--imported-avatar-avatar-online-indicator-width-lg);
+}
+
+.size-md .AvatarOnlineIndicator {
+  width: var(--imported-avatar-avatar-online-indicator-width-md);
+}
+
+.size-sm .AvatarOnlineIndicator {
+  width: var(--imported-avatar-avatar-online-indicator-width-sm);
+}
+
+.size-xs .AvatarOnlineIndicator {
+  width: var(--imported-avatar-avatar-online-indicator-width-xs);
+}
+
+.size-xl .AvatarOnlineIndicator {
+  height: var(--imported-avatar-avatar-online-indicator-height-xl);
+}
+
+.size-2xl .AvatarOnlineIndicator {
+  height: var(--imported-avatar-avatar-online-indicator-height-2xl);
+}
+
+.size-lg .AvatarOnlineIndicator {
+  height: var(--imported-avatar-avatar-online-indicator-height-lg);
+}
+
+.size-md .AvatarOnlineIndicator {
+  height: var(--imported-avatar-avatar-online-indicator-height-md);
+}
+
+.size-sm .AvatarOnlineIndicator {
+  height: var(--imported-avatar-avatar-online-indicator-height-sm);
+}
+
+.size-xs .AvatarOnlineIndicator {
+  height: var(--imported-avatar-avatar-online-indicator-height-xs);
+}
+
+.AvatarCompanyIcon {
+  display: flex;
+  right: var(--imported-avatar-avatar-company-icon-right);
+  bottom: var(--imported-avatar-avatar-company-icon-bottom);
+  position: absolute;
+}
+
+.size-xl .AvatarCompanyIcon {
+  width: var(--imported-avatar-avatar-company-icon-width-xl);
+}
+
+.size-2xl .AvatarCompanyIcon {
+  width: var(--imported-avatar-avatar-company-icon-width-2xl);
+}
+
+.size-lg .AvatarCompanyIcon {
+  width: var(--imported-avatar-avatar-company-icon-width-lg);
+}
+
+.size-md .AvatarCompanyIcon {
+  width: var(--imported-avatar-avatar-company-icon-width-md);
+}
+
+.size-sm .AvatarCompanyIcon {
+  width: var(--imported-avatar-avatar-company-icon-width-sm);
+}
+
+.size-xs .AvatarCompanyIcon {
+  width: var(--imported-avatar-avatar-company-icon-width-xs);
+}
+
+.size-xl .AvatarCompanyIcon {
+  height: var(--imported-avatar-avatar-company-icon-height-xl);
+}
+
+.size-2xl .AvatarCompanyIcon {
+  height: var(--imported-avatar-avatar-company-icon-height-2xl);
+}
+
+.size-lg .AvatarCompanyIcon {
+  height: var(--imported-avatar-avatar-company-icon-height-lg);
+}
+
+.size-md .AvatarCompanyIcon {
+  height: var(--imported-avatar-avatar-company-icon-height-md);
+}
+
+.size-sm .AvatarCompanyIcon {
+  height: var(--imported-avatar-avatar-company-icon-height-sm);
+}
+
+.size-xs .AvatarCompanyIcon {
+  height: var(--imported-avatar-avatar-company-icon-height-xs);
 }

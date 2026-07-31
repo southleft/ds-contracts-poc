@@ -8,13 +8,122 @@
   align-items: center;
   justify-content: center;
   border: 0;
+  position: relative;
+}
+
+.size-md {
+  width: var(--imported-progress-circle-root-width-md);
+}
+
+.size-lg {
+  width: var(--imported-progress-circle-root-width-lg);
+}
+
+.size-sm {
+  width: var(--imported-progress-circle-root-width-sm);
+}
+
+.size-xs {
+  width: var(--imported-progress-circle-root-width-xs);
+}
+
+.shape-circle {
+}
+
+.size-md.shape-circle {
+  height: var(--imported-progress-circle-root-height-md-circle);
+}
+
+.shape-halfCircle {
+}
+
+.size-md.shape-halfCircle {
+  height: var(--imported-progress-circle-root-height-md-halfCircle);
+}
+
+.size-lg.shape-circle {
+  height: var(--imported-progress-circle-root-height-lg-circle);
+}
+
+.size-lg.shape-halfCircle {
+  height: var(--imported-progress-circle-root-height-lg-halfCircle);
+}
+
+.size-sm.shape-circle {
+  height: var(--imported-progress-circle-root-height-sm-circle);
+}
+
+.size-sm.shape-halfCircle {
+  height: var(--imported-progress-circle-root-height-sm-halfCircle);
+}
+
+.size-xs.shape-circle {
+  height: var(--imported-progress-circle-root-height-xs-circle);
+}
+
+.size-xs.shape-halfCircle {
+  height: var(--imported-progress-circle-root-height-xs-halfCircle);
 }
 
 .Ring {
   display: flex;
+  left: 12px;
+  position: absolute;
+}
+
+.size-md .Ring {
+  top: var(--imported-progress-circle-ring-top-md);
+}
+
+.size-lg .Ring {
+  top: var(--imported-progress-circle-ring-top-lg);
+}
+
+.size-sm .Ring {
+  top: var(--imported-progress-circle-ring-top-sm);
+}
+
+.size-xs .Ring {
+  top: var(--imported-progress-circle-ring-top-xs);
+}
+
+.size-md .Ring {
+  width: var(--imported-progress-circle-ring-width-md);
+}
+
+.size-lg .Ring {
+  width: var(--imported-progress-circle-ring-width-lg);
+}
+
+.size-sm .Ring {
+  width: var(--imported-progress-circle-ring-width-sm);
+}
+
+.size-xs .Ring {
+  width: var(--imported-progress-circle-ring-width-xs);
+}
+
+.size-md .Ring {
+  height: var(--imported-progress-circle-ring-height-md);
+}
+
+.size-lg .Ring {
+  height: var(--imported-progress-circle-ring-height-lg);
+}
+
+.size-sm .Ring {
+  height: var(--imported-progress-circle-ring-height-sm);
+}
+
+.size-xs .Ring {
+  height: var(--imported-progress-circle-ring-height-xs);
 }
 
 .Background {
+  width: 216px;
+  height: 216px;
+  flex-shrink: 0;
+  border-radius: 50%;
   border-color: var(--imported-progress-circle-ring-background-border-color);
   border-style: solid;
 }
@@ -33,6 +142,30 @@
 
 .size-xs .Background {
   border-width: var(--imported-progress-circle-ring-background-border-width-xs);
+}
+
+.size-md .Background {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.size-lg .Background {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.size-sm .Background {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.size-xs .Background {
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
 
 .Line {
@@ -60,6 +193,30 @@
   border-width: var(--imported-progress-circle-ring-line-border-width-xs);
 }
 
+.size-md .Line {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.size-lg .Line {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.size-sm .Line {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.size-xs .Line {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
 .group3 {
   display: flex;
 }
@@ -67,6 +224,9 @@
 .Label {
   color: var(--imported-progress-circle-group-3-label-color);
   font-weight: var(--imported-progress-circle-group-3-label-font-weight);
+  left: 78.5px;
+  top: 89px;
+  position: absolute;
 }
 
 .size-md .Label {
@@ -104,6 +264,9 @@
 .Number {
   color: var(--imported-progress-circle-group-3-number-color);
   font-weight: var(--imported-progress-circle-group-3-number-font-weight);
+  left: 82px;
+  top: 109px;
+  position: absolute;
 }
 
 .size-md .Number {

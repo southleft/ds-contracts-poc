@@ -31,13 +31,23 @@ import { mintTokens, type MintAxis, type MintObservation, type MintedEntry } fro
 // Shared spellings
 // ---------------------------------------------------------------------------
 
-/** Inverse of extract/types.ts titleCase: "Show Actions" → "showActions". */
-export const camel = (s: string): string =>
-  s
+/** Inverse of extract/types.ts titleCase: "Show Actions" → "showActions".
+ *  Canonical spellings are IDENTIFIERS (enum values become CSS enum classes
+ *  `.progress-40`, TSX union members, token-path map keys), so characters
+ *  outside [A-Za-z0-9] are stripped after case-folding — the field case is
+ *  Untitled UI's percentage axes ("Progress=40%"), whose '%' produced CSS
+ *  selectors (`.progress-40% .Progress`) every browser silently drops.
+ *  A value that sanitizes to NOTHING keeps its trimmed original (the emitters
+ *  refuse it by name — never a silent empty spelling). */
+export const camel = (s: string): string => {
+  const spelled = s
     .trim()
     .split(/[\s_-]+/)
     .map((w, i) => (i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()))
     .join('');
+  const sanitized = spelled.replace(/[^A-Za-z0-9]/g, '');
+  return sanitized.length > 0 ? sanitized : spelled;
+};
 
 const dotPath = (slashName: string) => slashName.split('/').join('.');
 const ref = (slashName: string) => `{${dotPath(slashName)}}`;
@@ -659,8 +669,13 @@ function foldWrapperUnion(
       if (w.present.has(o)) continue;
       const kids = childrenOf.get(o)!;
       // A same-named non-container child here is a different node, not a
-      // fold site.
-      if (kids.some((c) => c.name === wName)) continue;
+      // fold site — UNLESS it is itself a KNOWN MEMBER of the wrapper
+      // (round 2 iteration 2 field case: Progress bar's floating variants
+      // draw `Progress` FRAME wrapping [`Progress` RECT, Tooltip] while the
+      // rest draw the `Progress` RECT flat; the rect IS the wrapper's own
+      // member, and refusing the fold left a RECT/FRAME identity mix that
+      // poisoned every channel of the part).
+      if (kids.some((c) => c.name === wName && !w.childKeys.has(keyOf(c)))) continue;
       const matched = kids.filter((c) => foldableKeys.has(keyOf(c)));
       if (matched.length === 0) continue;
       const at = kids.indexOf(matched[0]);
@@ -884,6 +899,13 @@ interface MintCapture {
   /** tokens records and their holders, so a record whose FIRST key arrives
    *  via minting still lands on the part. */
   attach: Array<{ holder: Record<string, unknown>; tokens: Record<string, string> }>;
+  /** Overlay-flattened class (round 2 iteration 2): base-combo literal
+   *  fallbacks for abs-placement channels whose per-variant values REFUSE
+   *  classification — the round-4 padding precedent (the base plane is
+   *  exact) applied to placement: when the mint pass leaves the channel
+   *  unbound, the part carries the FIRST occurrence's px value as a literal
+   *  and the fallback is NAMED. Empty when nothing refused. */
+  absFallbacks: Array<{ part: Record<string, unknown>; tokens: Record<string, string>; chan: string; value: number; where: string }>;
 }
 
 interface Ctx {
@@ -1602,9 +1624,19 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
   const withShape = m.occ.filter((o) => o.node.shape !== undefined);
   if (withShape.length === 0) return;
   if (withShape.length !== m.occ.length) {
+    // Overlay-flattened class (round 2 iteration 2): a node that is a
+    // parametric shape in SOME variants and an arbitrary-path node in others
+    // (Progress circle's Background: ELLIPSE when Circle, VECTOR when Half
+    // circle) used to refuse outright — and the part rendered as a naked
+    // border box. The captured subset is real observation: carry it with the
+    // SAME first-variant-freeze discipline the size mismatch already uses,
+    // and NAME the approximation (the shapeless variants render the carried
+    // shape — a declared limit, exact where the shape was drawn).
     ctx.notes.push(
-      `${where}: shape geometry captured in ${withShape.length}/${m.occ.length} variants — inconsistent capture, shape not carried; review`,
+      `${where}: shape geometry captured in ${withShape.length}/${m.occ.length} variants (the rest are arbitrary-path nodes) — the CAPTURED variants' shape is carried; the uncaptured variants render the same shape (declared approximation, review)`,
     );
+    const sub: Merged = { ...m, occ: withShape };
+    invertNodeShape(sub, part, ctx, where);
     return;
   }
   const shapes = m.occ.map((o) => ({ variant: o.variant, hidden: o.node.hidden === true, sh: o.node.shape! }));
@@ -1730,9 +1762,33 @@ function invertNodeShape(m: Merged, part: Record<string, unknown>, ctx: Ctx, whe
         `${where}: uniform absolute placement carried as stylesWhen on the part's own visibility boolean \`${vw.prop}\` (the part only renders when it holds) — dump v1.3, #42`,
       );
     } else if (styles) {
-      ctx.notes.push(
-        `${where}: absolute placement is uniform across variants but the stylesWhen vocabulary is conditional — placement NAMED, not proposed (${JSON.stringify(styles)}); review`,
+      // Overlay-flattened class (round 2 iteration 2): UNCONDITIONAL uniform
+      // placement — previously "NAMED, not proposed" because stylesWhen is
+      // conditional vocabulary. Px-spelled offsets now carry as the standard
+      // positioned-part spelling (declared position: absolute + literal
+      // offsets — the Carbon decor-box precedent). CENTER's 50%+translate
+      // spelling stays outside the literal grammar and keeps the named
+      // refusal.
+      const pxSafe = Object.entries(styles).every(
+        ([k, v]) => k === 'position' || (['left', 'right', 'top', 'bottom'].includes(k) && /^-?\d+(\.\d+)?px$/.test(v)),
       );
+      if (pxSafe) {
+        const declared = (part.declared as Record<string, string> | undefined) ?? {};
+        if (declared.position === undefined) declared.position = 'absolute';
+        part.declared = declared;
+        const literals = (part.literals as Record<string, string> | undefined) ?? {};
+        for (const [k, v] of Object.entries(styles)) {
+          if (k !== 'position' && literals[k] === undefined) literals[k] = v;
+        }
+        part.literals = literals;
+        ctx.notes.push(
+          `${where}: uniform unconditional absolute placement carried as position: absolute + literal offsets (${Object.entries(styles).filter(([k]) => k !== 'position').map(([k, v]) => `${k}: ${v}`).join(', ')}) — the overlay-flattened spelling (round 2 iteration 2)`,
+        );
+      } else {
+        ctx.notes.push(
+          `${where}: absolute placement is uniform across variants but rides spellings outside the literal grammar (50% + translate / rotation) — placement NAMED, not proposed (${JSON.stringify(styles)}); review`,
+        );
+      }
     }
     return;
   }
@@ -1761,7 +1817,7 @@ const isPlainRectShape = (m: Merged): boolean =>
  *  fill/cornerRadius channels; placement (x/y/right/bottom) is LEDGERED by
  *  name this round — absolute rendering is a later iteration. Field case:
  *  Untitled UI slider/progress tracks, which collapsed to 0×0. */
-function mintPlainRectGeometry(m: Merged, tokens: Record<string, string>, ctx: Ctx, where: string) {
+function mintPlainRectGeometry(m: Merged, part: Record<string, unknown>, tokens: Record<string, string>, ctx: Ctx, where: string) {
   const shapes = m.occ.map((o) => ({ variant: o.variant, sh: o.node.shape! }));
   const sizes = [...new Set(shapes.map((s) => `${s.sh.width}×${s.sh.height}`))];
   if (!ctx.mint) {
@@ -1781,17 +1837,213 @@ function mintPlainRectGeometry(m: Merged, tokens: Record<string, string>, ctx: C
         'px',
         m.occ.map((o) => ({ variant: o.variant, value: Math.round(o.node.shape![dim] * 100) / 100 })),
       );
+      // Base-combo literal fallback on classification refusal — the same
+      // discipline as the abs-placement channels (applied + named in the
+      // mint pass).
+      ctx.mint.absFallbacks.push({
+        part, tokens, chan: dim,
+        value: Math.round(m.occ[0].node.shape![dim] * 100) / 100,
+        where,
+      });
     }
     ctx.notes.push(
       `${where}: plain-rect geometry (dump v1.7) carried as width/height mint observations (${sizes.join('; ')}px) — an in-flow fixed-size box; fill/radius ride the existing channels`,
     );
   }
-  const placed = shapes.filter((s) => s.sh.x !== undefined).length;
-  if (placed > 0) {
+  // Placement (shape.x/y/right/bottom on ABSOLUTE rects) rides the SAME
+  // overlay carrier every abs-bearing node uses — carryAbsPlacement (round 2
+  // iteration 2); the caller invokes it with the shared tokens record.
+}
+
+// ---------------------------------------------------------------------------
+// Overlay-flattened class (round 2 iteration 2, dump v1.7 `abs`): absolute
+// placement carried into the EXISTING vocabulary — no new schema fields.
+// A positioned part declares `position: absolute` (DECLARED_CHANNELS) and its
+// offsets/size ride the top/right/bottom/left/width/height TOKEN channels as
+// minted px observations — per-axis-conditioned through the standard mint
+// machinery exactly like every other captured literal. The parent side
+// (`position: relative`) is declared by the caller only when at least one
+// child actually carried.
+//
+// DETERMINISTIC OFFSET SPELLING (general rules, documented here):
+//   horizontal  RIGHT → `right: <right>px`; LEFT/CENTER/absent → `left: <x>px`.
+//               A CENTER whose drawn box is off-center (a value-tracking
+//               tooltip) keeps the exact per-variant offset — center-tracking
+//               under parent RESIZE is not carried (named).
+//   vertical    BOTTOM → `bottom: <bottom>px`; TOP/CENTER/absent → `top: <y>px`.
+//   size        width/height minted from the abs box (skipped when the channel
+//               already carries a binding). TEXT parts never bake abs
+//               width/height — text boxes hug. A HORIZONTALLY SYMMETRIC text
+//               box (|x − right| ≤ 1px in every variant) pins BOTH edges and
+//               declares `text-align: center` instead — the center-preserving
+//               spelling: glyphs stay centered even when DOM text metrics
+//               differ from the canvas measurement.
+// REFUSALS (BY NAME, the part renders in flow): partial capture (abs on a
+// strict subset of variants), mixed constraints across variants, constraints
+// outside LEFT/RIGHT/CENTER × TOP/BOTTOM/CENTER (SCALE/stretch), and mint-off
+// runs (the per-variant px offsets have no carrier without minting).
+// ---------------------------------------------------------------------------
+
+type AbsBox = NonNullable<DumpNode['abs']>;
+
+/** The node's absolute box: dump v1.7 `abs` (all node types), else the
+ *  DumpShape placement fields (ABSOLUTE decor/plain rects — same
+ *  center-preserving spelling). */
+const absBoxOf = (n: DumpNode): AbsBox | undefined => {
+  if (n.abs) return n.abs;
+  const sh = n.shape;
+  if (sh && sh.x !== undefined && sh.y !== undefined && sh.right !== undefined && sh.bottom !== undefined) {
+    return { x: sh.x, y: sh.y, right: sh.right, bottom: sh.bottom, width: sh.width, height: sh.height, constraints: sh.constraints };
+  }
+  return undefined;
+};
+
+function carryAbsPlacement(
+  m: Merged,
+  part: Record<string, unknown>,
+  tokens: Record<string, string>,
+  ctx: Ctx,
+  where: string,
+  opts: { text?: boolean; size?: boolean } = {},
+): boolean {
+  const boxes = m.occ.map((o) => ({ variant: o.variant, box: absBoxOf(o.node) }));
+  if (boxes.every((b) => b.box === undefined)) return false;
+  const ledger = (why: string): false => {
     ctx.notes.push(
-      `${where}: rect placement (x/y/right/bottom) captured on ${placed}/${shapes.length} variant(s) — absolute placement is NOT carried this round (ledgered by name; overlay rendering is a later iteration); the rect renders in flow`,
+      `${where}: absolute placement captured (dump v1.7 \`abs\`) but NOT carried — ${why}; the part renders in flow (ledgered by name)`,
+    );
+    return false;
+  };
+  const withBox = boxes.filter((b) => b.box !== undefined);
+  if (withBox.length !== boxes.length) {
+    return ledger(
+      `captured on ${withBox.length}/${boxes.length} variant(s) only (a per-variant in-flow/absolute identity mix has no single spelling)`,
     );
   }
+  // A wrapper-union SYNTHETIC clone is not an observation: its abs box was
+  // copied from another variant's real wrapper, and its members' offsets mix
+  // reference frames (root-frame where drawn flat, wrapper-frame where
+  // nested). The clone-bearing part stays a plain pass-through box — its
+  // children position against the nearest REAL positioned ancestor.
+  if (m.occ.some((o) => (o.node as { __synthetic?: boolean }).__synthetic === true)) {
+    return ledger(
+      'the box rides a wrapper-union SYNTHETIC clone (a clone is not an observation) — the wrapper stays a pass-through in-flow box',
+    );
+  }
+  if (!ctx.mint) return ledger('minting is off — the per-variant px offsets have no carrier');
+  const hs = [...new Set(boxes.map((b) => b.box!.constraints?.horizontal ?? 'LEFT'))];
+  const vs = [...new Set(boxes.map((b) => b.box!.constraints?.vertical ?? 'TOP'))];
+  if (hs.length > 1 || vs.length > 1) {
+    return ledger(`constraints differ across variants (${hs.join('|')} × ${vs.join('|')})`);
+  }
+  if (!['LEFT', 'RIGHT', 'CENTER'].includes(hs[0]) || !['TOP', 'BOTTOM', 'CENTER'].includes(vs[0])) {
+    return ledger(`constraint ${hs[0]}×${vs[0]} has no carried offset spelling (SCALE/stretch placement is a later iteration)`);
+  }
+  const px2 = (n: number) => Math.round(n * 100) / 100;
+  const channels: string[] = [];
+  const mintChan = (chan: string, pick: (b: AbsBox) => number) => {
+    mintObservation(
+      ctx, tokens, where, chan, 'px',
+      boxes.map((b) => ({ variant: b.variant, value: px2(pick(b.box!)) })),
+      `${where}|abs-${chan}`,
+    );
+    // Base-combo literal fallback (the round-4 padding precedent): when the
+    // per-variant values refuse classification in the mint pass, the FIRST
+    // occurrence's value carries as a part literal — applied and NAMED there.
+    ctx.mint!.absFallbacks.push({ part, tokens, chan, value: px2(pick(boxes[0].box!)), where });
+    channels.push(chan);
+  };
+  const declared = (part.declared as Record<string, string> | undefined) ?? {};
+  // TEXT, horizontally symmetric box: pin both edges + center the glyphs —
+  // the center-preserving spelling (see the block comment above).
+  const symmetricText = opts.text === true && boxes.every((b) => Math.abs(b.box!.x - b.box!.right) <= 1);
+  if (symmetricText) {
+    mintChan('left', (b) => b.x);
+    mintChan('right', (b) => b.right);
+    if (declared['text-align'] === undefined) declared['text-align'] = 'center';
+  } else if (hs[0] === 'RIGHT') mintChan('right', (b) => b.right);
+  else mintChan('left', (b) => b.x);
+  if (vs[0] === 'BOTTOM') mintChan('bottom', (b) => b.bottom);
+  else mintChan('top', (b) => b.y);
+  if (opts.size === true && opts.text !== true) {
+    for (const dim of ['width', 'height'] as const) {
+      // A dimension already carried (bound variable or an earlier channel) is
+      // the design's own binding — the abs box never overrides it.
+      if (tokens[dim] !== undefined || m.occ.some((o) => o.node.bound?.[dim])) continue;
+      mintChan(dim, (b) => b[dim]);
+    }
+  }
+  if (declared.position === undefined) declared.position = 'absolute';
+  part.declared = declared;
+  const centered = hs[0] === 'CENTER' || vs[0] === 'CENTER';
+  ctx.notes.push(
+    `${where}: absolute placement carried (dump v1.7 \`abs\`) — position: absolute with minted px channels [${channels.join(', ')}]${
+      symmetricText ? ' + text-align: center (horizontally symmetric text box — the center-preserving spelling)' : ''
+    }${centered && !symmetricText ? ' (CENTER constraint carried as the exact drawn offset — center-tracking under parent resize is not carried, a declared limit)' : ''}; per-variant values classify through the standard mint machinery`,
+  );
+  return true;
+}
+
+/** Positioning for a part that CANNOT carry styling (component ref / slot —
+ *  the child contract / consumer owns it): a component ref's placement rides
+ *  a structural WRAPPER part (position:absolute box; the ref renders inside,
+ *  unchanged; visibleWhen hoists onto the wrapper — the wrapper is what must
+ *  not render when the part is off). A SLOT part's placement is refused BY
+ *  NAME (slot chrome belongs to the consumer; not carried this round). */
+function wrapPositionedRefPart(
+  m: Merged,
+  built: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+  /** The wrapper's claimed part key — the parent-derived-prefix context for
+   *  the inner ref part's own (contract-wide unique) key. */
+  selfKey: string,
+): Record<string, unknown> {
+  if (!built.component && !built.slot) return built;
+  if (m.occ.every((o) => absBoxOf(o.node) === undefined)) return built;
+  if (built.slot) {
+    ctx.notes.push(
+      `${where}: absolute placement captured (dump v1.7 \`abs\`) on a SLOT part — slot parts refuse styling (the consumer owns the content box) and a positioned slot wrapper is not carried this round; ledgered by name, the slot renders in flow`,
+    );
+    return built;
+  }
+  const wrapper: Record<string, unknown> = {};
+  const wTokens: Record<string, string> = {};
+  if (!carryAbsPlacement(m, wrapper, wTokens, ctx, where, { size: true })) return built;
+  attachTokens(ctx, wrapper, wTokens);
+  if (built.visibleWhen !== undefined) {
+    wrapper.visibleWhen = built.visibleWhen;
+    delete built.visibleWhen;
+  }
+  wrapper.parts = { [partKey('instance', ctx, where, selfKey)]: built };
+  ctx.notes.push(
+    `${where}: the positioned part is a component ref — placement rides a structural wrapper part (the child contract owns its own styling; the ref renders inside unchanged, visibility hoisted onto the wrapper)`,
+  );
+  return wrapper;
+}
+
+/** Declare `position: relative` on a holder whose DIRECT parts record carries
+ *  at least one positioned child — unless the holder is itself positioned
+ *  (an absolute box is already a positioning context), or the holder rides a
+ *  wrapper-union SYNTHETIC clone in any variant (`m` provided): a synthetic
+ *  wrapper has no drawn geometry of its own and its members' offsets mix
+ *  reference frames (root-frame where drawn flat, wrapper-frame where
+ *  nested), so it stays unpositioned and its children anchor to the nearest
+ *  REAL positioned ancestor (the base-combo fallback offsets are the flat,
+ *  root-frame drawing — consistent with that anchor). */
+function declareRelativeIfPositionedChildren(
+  holder: Record<string, unknown>,
+  parts: Record<string, unknown>,
+  m: Merged | null,
+): void {
+  const positioned = Object.values(parts).some(
+    (p) => ((p as { declared?: Record<string, string> }).declared?.position) === 'absolute',
+  );
+  if (!positioned) return;
+  if (m && m.occ.some((o) => (o.node as { __synthetic?: boolean }).__synthetic === true)) return;
+  const declared = (holder.declared as Record<string, string> | undefined) ?? {};
+  if (declared.position === undefined) declared.position = 'relative';
+  holder.declared = declared;
 }
 
 /** The contract's padding vocabulary prefers the symmetric shorthands
@@ -3004,6 +3256,11 @@ function buildChildParts(
       if (keyByName && !keyByName.has(child.name)) keyByName.set(child.name, key);
       const repeatPart = buildRepeatPart(run, ctx, `${where}/${child.name}`, key);
       if (repeatPart) {
+        if (run.some((sib) => sib.occ.some((o) => absBoxOf(o.node) !== undefined))) {
+          ctx.notes.push(
+            `${where}/${child.name}: absolute placement captured (dump v1.7 \`abs\`) on a repeated-collection sibling — a repeat template renders its items in flow; placement not carried (ledgered by name)`,
+          );
+        }
         parts[key] = repeatPart;
         i += run.length;
         continue;
@@ -3011,14 +3268,14 @@ function buildChildParts(
       // No carriable field (named above) — the first sibling builds under the
       // already-claimed key; the rest walk as before.
       const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
-      if (built) parts[key] = built;
+      if (built) parts[key] = wrapPositionedRefPart(child, built, ctx, `${where}/${child.name}`, key);
       i++;
       continue;
     }
     const key = partKey(child.name, ctx, `${where}/${child.name}`, selfKey);
     if (keyByName && !keyByName.has(child.name)) keyByName.set(child.name, key);
     const built = buildPart(child, mode, ctx, `${where}/${child.name}`, key);
-    if (built) parts[key] = built;
+    if (built) parts[key] = wrapPositionedRefPart(child, built, ctx, `${where}/${child.name}`, key);
     i++;
   }
   return parts;
@@ -3042,11 +3299,8 @@ function buildPart(
 
   // dump v1.7 tolerance ledger — additive capture channels the proposer does
   // not carry yet are NAMED once per part, never a throw and never silent.
-  if (m.occ.some((o) => o.node.abs !== undefined)) {
-    ctx.notes.push(
-      `${where}: absolute placement captured (dump v1.7 \`abs\`) — overlay/absolute rendering is NOT carried this round (ledgered by name; a later iteration renders it); the part renders in flow`,
-    );
-  }
+  // (`abs` is CARRIED since round 2 iteration 2 — carryAbsPlacement per
+  // branch below; refusals stay named inside it.)
   if (m.occ.some((o) => o.node.imageFill === true)) {
     ctx.notes.push(
       `${where}: IMAGE fill captured BY NAME only (dump v1.7 \`imageFill\`) — image bytes are not exported; the part renders without the image (a later round exports the asset)`,
@@ -3075,6 +3329,10 @@ function buildPart(
       part.text = characters;
       bindTextByAxis(m, part, ctx, where);
     }
+    // Overlay-flattened class: a TEXT node with a captured abs box positions
+    // absolutely (never baking abs width/height — text boxes hug; the
+    // symmetric-box case pins both edges + centers, see carryAbsPlacement).
+    carryAbsPlacement(m, part, tokens, ctx, where, { text: true });
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
@@ -3154,6 +3412,11 @@ function buildPart(
           propNames.length > 0 ? propNames.join(', ') : '(unknown)'
         } not extracted (${reason})`,
       );
+      if (m.occ.some((o) => absBoxOf(o.node) !== undefined)) {
+        ctx.notes.push(
+          `${where}: absolute placement captured (dump v1.7 \`abs\`) on the refused self-instance — not carried (nothing renders here); ledgered by name`,
+        );
+      }
       if (visibleWhen) part.visibleWhen = visibleWhen;
       return part;
     }
@@ -3229,6 +3492,11 @@ function buildPart(
     if (layout) part.layout = layout;
     const byProp = invertLayoutByProp(m, ctx, where);
     if (byProp) part.layoutByProp = byProp;
+    if (m.occ.some((o) => absBoxOf(o.node) !== undefined)) {
+      ctx.notes.push(
+        `${where}: absolute placement captured (dump v1.7 \`abs\`) on a SPACER part — a spacer's job is in-flow growth; placement not carried (ledgered by name)`,
+      );
+    }
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
   }
@@ -3246,8 +3514,13 @@ function buildPart(
   if (m.occ.some((o) => o.node.shape !== undefined)) {
     if (visibleWhen) part.visibleWhen = visibleWhen;
     invertHiddenVisibility(m, part, ctx, where);
-    if (isPlainRectShape(m)) mintPlainRectGeometry(m, tokens, ctx, where);
-    else invertNodeShape(m, part, ctx, where);
+    if (isPlainRectShape(m)) {
+      mintPlainRectGeometry(m, part, tokens, ctx, where);
+      // Overlay-flattened class: an ABSOLUTE plain rect's placement (DumpShape
+      // x/y/right/bottom) rides the shared carrier; width/height were minted
+      // just above, so only the offsets join here.
+      carryAbsPlacement(m, part, tokens, ctx, where, { size: false });
+    } else invertNodeShape(m, part, ctx, where);
     invertNodeOpacity(m, part, tokens, ctx, where);
     invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
@@ -3281,6 +3554,7 @@ function buildPart(
   if (isWrapArtifact(m)) {
     invertNodeOpacity(m, part, tokens, ctx, where);
     invertNodeEffects(m, tokens, ctx, where);
+    carryAbsPlacement(m, part, tokens, ctx, where, { size: true });
     attachTokens(ctx, part, tokens);
     if (visibleWhen) part.visibleWhen = visibleWhen;
     return part;
@@ -3292,6 +3566,9 @@ function buildPart(
   if (byProp) part.layoutByProp = byProp;
   invertNodeOpacity(m, part, tokens, ctx, where);
   invertNodeEffects(m, tokens, ctx, where);
+  // Overlay-flattened class: a FRAME/GROUP with a captured abs box becomes a
+  // positioned box (position: absolute + minted offsets/size).
+  carryAbsPlacement(m, part, tokens, ctx, where, { size: true });
   attachTokens(ctx, part, tokens);
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
@@ -3299,6 +3576,8 @@ function buildPart(
   // Pre-order key claiming + P9 run detection — see buildChildParts.
   const parts = buildChildParts(m.children, mode, ctx, where, selfKey);
   if (Object.keys(parts).length > 0) part.parts = parts;
+  // A parent that owns positioned children is their positioning context.
+  declareRelativeIfPositionedChildren(part, parts, m);
   if (visibleWhen) part.visibleWhen = visibleWhen;
   return part;
 }
@@ -3839,7 +4118,12 @@ function buildChildStub(
  *  and every variant renders hundreds of px too wide. */
 function invertRootFixedSize(merged: Merged, rootTokens: Record<string, string>, ctx: Ctx, where: string) {
   if (!ctx.mint) return;
-  const withBox = merged.occ.filter((o) => o.node.bbox !== undefined && o.node.layout !== undefined);
+  // Overlay-flattened class (round 2 iteration 2): a root WITHOUT auto-layout
+  // is a canvas-positioned frame — it cannot hug, so BOTH axes are drawn
+  // fixed by construction and the bbox is the size witness. (Previously such
+  // roots were skipped entirely; with their children now carried as absolute
+  // overlays the root would collapse to 0×0 without its own box.)
+  const withBox = merged.occ.filter((o) => o.node.bbox !== undefined);
   if (withBox.length === 0) return;
   if (withBox.length !== merged.occ.length) {
     ctx.notes.push(
@@ -3848,7 +4132,8 @@ function invertRootFixedSize(merged: Merged, rootTokens: Record<string, string>,
     return;
   }
   const fixedAxis = (o: Occ, dim: 'width' | 'height'): boolean => {
-    const l = o.node.layout!;
+    const l = o.node.layout;
+    if (!l) return true; // non-auto-layout root: fixed by construction (see above)
     const alongPrimary = (l.mode === 'HORIZONTAL') === (dim === 'width');
     return (alongPrimary ? l.primarySizing : l.counterSizing) === 'FIXED';
   };
@@ -4422,6 +4707,7 @@ export function proposeFromDump(
           observations: [],
           partialSources: new Set(),
           attach: [],
+          absFallbacks: [],
         }
       : undefined,
   };
@@ -4505,6 +4791,10 @@ export function proposeFromDump(
     // the part-level state diff (v13) resolves parts through it.
     const parts = buildChildParts(merged.children, mode, ctx, where, 'root', rootKeyByChildName);
     if (Object.keys(parts).length > 0) root.parts = parts;
+    // Overlay-flattened class: a root that owns positioned children is their
+    // positioning context (position: relative — emit-react folds it into its
+    // own overlay chrome when both apply).
+    declareRelativeIfPositionedChildren(root, parts, null);
   }
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
   invertNodeEffects(merged, rootTokens, ctx, where);
@@ -4767,6 +5057,21 @@ export function proposeFromDump(
     // Token records whose first binding arrived from the mint pass.
     for (const { holder, tokens } of ctx.mint.attach) {
       if (Object.keys(tokens).length > 0 && holder.tokens === undefined) holder.tokens = tokens;
+    }
+    // Overlay-flattened class: abs-placement channels whose values refused
+    // classification fall back to the base combo's captured value as a part
+    // LITERAL (the round-4 padding precedent — the base plane is exact) so
+    // the positioned part never ships position:absolute with a dangling
+    // offset. The per-variant refusal above stays named; the fallback is too.
+    for (const fb of ctx.mint.absFallbacks) {
+      if (fb.tokens[fb.chan] !== undefined) continue; // minted — no fallback needed
+      const literals = (fb.part.literals as Record<string, string> | undefined) ?? {};
+      if (literals[fb.chan] !== undefined) continue;
+      literals[fb.chan] = `${fb.value}px`;
+      fb.part.literals = literals;
+      ctx.notes.push(
+        `${fb.where} ${fb.chan}: per-variant abs values refused classification (named above) — the FIRST occurrence's ${fb.value}px carried as a base-combo literal fallback (exact for the default rendering; other variants keep the refusal)`,
+      );
     }
     // A fully minted usage site is bound now — no longer an UNBOUND entry.
     const partial = ctx.mint.partialSources;

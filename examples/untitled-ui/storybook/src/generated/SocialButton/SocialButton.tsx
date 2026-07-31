@@ -57,7 +57,7 @@ export const SocialButton = forwardRef<HTMLButtonElement, SocialButtonProps>(fun
                   : social === 'dribbble'
                     ? 'dribbble'
                     : social === 'x'
-                      ? 'x(twitter)'
+                      ? 'xtwitter'
                       : undefined
         }
         state="default"

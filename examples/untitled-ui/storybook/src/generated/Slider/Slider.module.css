@@ -8,7 +8,25 @@
   align-items: center;
   justify-content: center;
   border: 0;
+  position: relative;
   border-radius: var(--imported-shared-size-8);
+  width: var(--imported-slider-root-width);
+}
+
+.label-bottom {
+  height: var(--imported-slider-root-height-bottom);
+}
+
+.label-bottomFloating {
+  height: var(--imported-slider-root-height-bottomFloating);
+}
+
+.label-topFloating {
+  height: var(--imported-slider-root-height-topFloating);
+}
+
+.label-false {
+  height: var(--imported-slider-root-height-false);
 }
 
 .Background {
@@ -16,20 +34,52 @@
   border-radius: var(--imported-slider-background-border-radius);
   width: var(--imported-slider-background-width);
   height: var(--imported-shared-size-8);
+  left: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-8);
+  position: absolute;
 }
 
 .Progress {
   display: flex;
+  top: var(--imported-shared-size-8);
+  height: var(--imported-shared-size-8);
+  left: 0px;
+  width: 80px;
+  position: absolute;
 }
 
 .progressLine {
   background-color: var(--imported-shared-color-7f56d9);
   border-radius: var(--imported-slider-progress-progress-line-border-radius);
   height: var(--imported-shared-size-8);
+  left: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: 80px;
+  position: absolute;
 }
 
 .leftControl {
   display: flex;
+  left: var(--imported-slider-progress-left-control-left);
+  top: var(--imported-slider-progress-left-control-top);
+  width: var(--imported-shared-size-24);
+  position: absolute;
+}
+
+.label-bottom .leftControl {
+  height: var(--imported-slider-progress-left-control-height-bottom);
+}
+
+.label-bottomFloating .leftControl {
+  height: var(--imported-slider-progress-left-control-height-bottomFloating);
+}
+
+.label-topFloating .leftControl {
+  height: var(--imported-slider-progress-left-control-height-topFloating);
+}
+
+.label-false .leftControl {
+  height: var(--imported-slider-progress-left-control-height-false);
 }
 
 .leftControl2 {
@@ -43,15 +93,133 @@
   border-style: solid;
 }
 
+.label-bottom .leftControl2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.label-bottomFloating .leftControl2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.label-topFloating .leftControl2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.label-false .leftControl2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.Tooltip {
+  display: flex;
+  height: var(--imported-slider-progress-left-control-tooltip-height);
+  top: 28px;
+  position: absolute;
+}
+
+.leftControl-0 .Tooltip {
+  left: var(--imported-slider-progress-left-control-tooltip-left-0);
+}
+
+.leftControl-25 .Tooltip {
+  left: var(--imported-slider-progress-left-control-tooltip-left-25);
+}
+
+.leftControl-50 .Tooltip {
+  left: var(--imported-slider-progress-left-control-tooltip-left-50);
+}
+
+.leftControl-75 .Tooltip {
+  left: var(--imported-slider-progress-left-control-tooltip-left-75);
+}
+
+.leftControl-0 .Tooltip {
+  width: var(--imported-slider-progress-left-control-tooltip-width-0);
+}
+
+.leftControl-25 .Tooltip {
+  width: var(--imported-slider-progress-left-control-tooltip-width-25);
+}
+
+.leftControl-50 .Tooltip {
+  width: var(--imported-slider-progress-left-control-tooltip-width-50);
+}
+
+.leftControl-75 .Tooltip {
+  width: var(--imported-slider-progress-left-control-tooltip-width-75);
+}
+
 .leftNumber {
   color: var(--imported-slider-progress-left-control-left-number-color);
   font-size: var(--imported-slider-progress-left-control-left-number-font-size);
   font-weight: var(--imported-slider-progress-left-control-left-number-font-weight);
-  line-height: var(--imported-slider-progress-left-control-left-number-line-height);
+  line-height: var(--imported-shared-size-24);
+  top: var(--imported-slider-progress-left-control-left-number-top);
+  text-align: center;
+  position: absolute;
+}
+
+.leftControl-0 .leftNumber {
+  left: var(--imported-slider-progress-left-control-left-number-left-0);
+}
+
+.leftControl-25 .leftNumber {
+  left: var(--imported-slider-progress-left-control-left-number-left-25);
+}
+
+.leftControl-50 .leftNumber {
+  left: var(--imported-slider-progress-left-control-left-number-left-50);
+}
+
+.leftControl-75 .leftNumber {
+  left: var(--imported-slider-progress-left-control-left-number-left-75);
+}
+
+.leftControl-0 .leftNumber {
+  right: var(--imported-slider-progress-left-control-left-number-right-0);
+}
+
+.leftControl-25 .leftNumber {
+  right: var(--imported-slider-progress-left-control-left-number-right-25);
+}
+
+.leftControl-50 .leftNumber {
+  right: var(--imported-slider-progress-left-control-left-number-right-50);
+}
+
+.leftControl-75 .leftNumber {
+  right: var(--imported-slider-progress-left-control-left-number-right-75);
 }
 
 .rightControl {
   display: flex;
+  right: var(--imported-slider-progress-right-control-right);
+  top: var(--imported-slider-progress-right-control-top);
+  width: var(--imported-shared-size-24);
+  position: absolute;
+}
+
+.label-bottom .rightControl {
+  height: var(--imported-slider-progress-right-control-height-bottom);
+}
+
+.label-bottomFloating .rightControl {
+  height: var(--imported-slider-progress-right-control-height-bottomFloating);
+}
+
+.label-topFloating .rightControl {
+  height: var(--imported-slider-progress-right-control-height-topFloating);
+}
+
+.label-false .rightControl {
+  height: var(--imported-slider-progress-right-control-height-false);
 }
 
 .rightControl2 {
@@ -65,9 +233,90 @@
   border-style: solid;
 }
 
+.label-bottom .rightControl2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.label-bottomFloating .rightControl2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.label-topFloating .rightControl2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.label-false .rightControl2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.rightControlTooltip {
+  display: flex;
+  height: var(--imported-slider-progress-right-control-tooltip-height);
+  top: 28px;
+  position: absolute;
+}
+
+.rightControl-25 .rightControlTooltip {
+  left: var(--imported-slider-progress-right-control-tooltip-left-25);
+}
+
+.rightControl-50 .rightControlTooltip {
+  left: var(--imported-slider-progress-right-control-tooltip-left-50);
+}
+
+.rightControl-75 .rightControlTooltip {
+  left: var(--imported-slider-progress-right-control-tooltip-left-75);
+}
+
+.rightControl-100 .rightControlTooltip {
+  left: var(--imported-slider-progress-right-control-tooltip-left-100);
+}
+
+.rightControl-25 .rightControlTooltip {
+  width: var(--imported-slider-progress-right-control-tooltip-width-25);
+}
+
+.rightControl-50 .rightControlTooltip {
+  width: var(--imported-slider-progress-right-control-tooltip-width-50);
+}
+
+.rightControl-75 .rightControlTooltip {
+  width: var(--imported-slider-progress-right-control-tooltip-width-75);
+}
+
+.rightControl-100 .rightControlTooltip {
+  width: var(--imported-slider-progress-right-control-tooltip-width-100);
+}
+
 .rightNumber {
   color: var(--imported-slider-progress-right-control-right-number-color);
   font-size: var(--imported-slider-progress-right-control-right-number-font-size);
   font-weight: var(--imported-slider-progress-right-control-right-number-font-weight);
-  line-height: var(--imported-slider-progress-right-control-right-number-line-height);
+  line-height: var(--imported-shared-size-24);
+  top: var(--imported-slider-progress-right-control-right-number-top);
+  position: absolute;
+}
+
+.rightControl-25 .rightNumber {
+  right: var(--imported-slider-progress-right-control-right-number-right-25);
+}
+
+.rightControl-50 .rightNumber {
+  right: var(--imported-slider-progress-right-control-right-number-right-50);
+}
+
+.rightControl-75 .rightNumber {
+  right: var(--imported-slider-progress-right-control-right-number-right-75);
+}
+
+.rightControl-100 .rightNumber {
+  right: var(--imported-slider-progress-right-control-right-number-right-100);
 }

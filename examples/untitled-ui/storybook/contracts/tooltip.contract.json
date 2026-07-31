@@ -161,6 +161,9 @@
         "Tooltip": {
           "parts": {
             "bottomCenter": {
+              "declared": {
+                "position": "absolute"
+              },
               "visibleWhen": {
                 "prop": "arrow",
                 "equals": [
@@ -174,9 +177,18 @@
               },
               "tokens": {
                 "background-color": "{imported.tooltip.tooltip-bottom-center.background-color.{theme}}",
-                "border-radius": "{imported.tooltip.tooltip-bottom-center.border-radius}"
+                "border-radius": "{imported.tooltip.tooltip-bottom-center.border-radius}",
+                "width": "{imported.tooltip.tooltip-bottom-center.width}",
+                "height": "{imported.tooltip.tooltip-bottom-center.height}"
+              },
+              "literals": {
+                "left": "-0.49px",
+                "bottom": "0.03px"
               }
             }
+          },
+          "declared": {
+            "position": "relative"
           },
           "visibleWhen": {
             "prop": "arrow",

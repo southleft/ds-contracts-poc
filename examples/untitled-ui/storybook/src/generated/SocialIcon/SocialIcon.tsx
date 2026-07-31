@@ -8,7 +8,7 @@ import type { HTMLAttributes } from 'react';
 import styles from './SocialIcon.module.css';
 
 export interface SocialIconProps extends HTMLAttributes<HTMLSpanElement> {
-  platform?: 'facebook' | 'google' | 'apple' | 'figma' | 'dribbble' | 'x(twitter)';
+  platform?: 'facebook' | 'google' | 'apple' | 'figma' | 'dribbble' | 'xtwitter';
   state?: 'default';
   style?: 'white' | 'brand';
 }

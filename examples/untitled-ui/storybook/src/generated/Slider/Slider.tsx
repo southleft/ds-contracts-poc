@@ -10,13 +10,13 @@ import styles from './Slider.module.css';
 
 export interface SliderProps extends HTMLAttributes<HTMLDivElement> {
   label?: 'bottom' | 'bottomFloating' | 'topFloating' | 'false';
-  rightControl?: '25%' | '50%' | '75%' | '100%';
-  leftControl?: '0%' | '25%' | '50%' | '75%';
+  rightControl?: '25' | '50' | '75' | '100';
+  leftControl?: '0' | '25' | '50' | '75';
 }
 
 /** PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption. */
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
-  { label = 'bottom', rightControl = '25%', leftControl = '0%', className, children, ...rest },
+  { label = 'bottom', rightControl = '25', leftControl = '0', className, children, ...rest },
   ref,
 ) {
   const classes = [
@@ -36,25 +36,27 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
         <div className={styles.leftControl}>
           <div className={styles.leftControl2}></div>
           {label === 'bottomFloating' || label === 'topFloating' ? (
-            <Tooltip
-              supportingText={false}
-              theme="light"
-              arrow={
-                label === 'bottomFloating'
-                  ? 'topCenter'
-                  : label === 'topFloating'
-                    ? 'bottomCenter'
-                    : undefined
-              }
-            />
+            <div className={styles.Tooltip}>
+              <Tooltip
+                supportingText={false}
+                theme="light"
+                arrow={
+                  label === 'bottomFloating'
+                    ? 'topCenter'
+                    : label === 'topFloating'
+                      ? 'bottomCenter'
+                      : undefined
+                }
+              />
+            </div>
           ) : null}
           {label === 'bottom' ? (
             <span className={styles.leftNumber}>
-              {leftControl === '25%'
+              {leftControl === '25'
                 ? '25%'
-                : leftControl === '50%'
+                : leftControl === '50'
                   ? '50%'
-                  : leftControl === '75%'
+                  : leftControl === '75'
                     ? '75%'
                     : '0%'}
             </span>
@@ -63,25 +65,27 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
         <div className={styles.rightControl}>
           <div className={styles.rightControl2}></div>
           {label === 'bottomFloating' || label === 'topFloating' ? (
-            <Tooltip
-              supportingText={false}
-              theme="light"
-              arrow={
-                label === 'bottomFloating'
-                  ? 'topCenter'
-                  : label === 'topFloating'
-                    ? 'bottomCenter'
-                    : undefined
-              }
-            />
+            <div className={styles.rightControlTooltip}>
+              <Tooltip
+                supportingText={false}
+                theme="light"
+                arrow={
+                  label === 'bottomFloating'
+                    ? 'topCenter'
+                    : label === 'topFloating'
+                      ? 'bottomCenter'
+                      : undefined
+                }
+              />
+            </div>
           ) : null}
           {label === 'bottom' ? (
             <span className={styles.rightNumber}>
-              {rightControl === '50%'
+              {rightControl === '50'
                 ? '50%'
-                : rightControl === '75%'
+                : rightControl === '75'
                   ? '75%'
-                  : rightControl === '100%'
+                  : rightControl === '100'
                     ? '100%'
                     : '25%'}
             </span>

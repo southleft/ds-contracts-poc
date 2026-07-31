@@ -50,13 +50,32 @@
   display: flex;
   flex: 1 1 auto;
   min-width: 0;
-  border-radius: var(--imported-progress-bar-progress-bar-border-radius);
+  border-radius: var(--imported-shared-size-8);
+  position: relative;
 }
 
 .Background {
   background-color: var(--imported-progress-bar-progress-bar-background-background-color);
   border-radius: var(--imported-progress-bar-progress-bar-background-border-radius);
-  height: var(--imported-progress-bar-progress-bar-background-height);
+  height: var(--imported-shared-size-8);
+  left: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: 287px;
+  position: absolute;
+}
+
+.Progress {
+  display: flex;
+}
+
+.Progress2 {
+  background-color: var(--imported-progress-bar-progress-bar-progress-progress-background-color);
+  border-radius: var(--imported-progress-bar-progress-bar-progress-progress-border-radius);
+  height: var(--imported-shared-size-8);
+  left: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
+  width: 8.08px;
+  position: absolute;
 }
 
 .Percentage {

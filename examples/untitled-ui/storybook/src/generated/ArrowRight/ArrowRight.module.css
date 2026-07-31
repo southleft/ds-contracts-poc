@@ -11,9 +11,3 @@
   width: var(--imported-stub-arrow-right-root-width);
   height: var(--imported-stub-arrow-right-root-height);
 }
-
-/* HARNESS PATCH (fix round 1): dashed stub placeholder */
-.root {
-  outline: 1px dashed #98a2b3;
-  outline-offset: -1px;
-}

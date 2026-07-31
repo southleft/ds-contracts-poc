@@ -18,7 +18,7 @@
           "apple",
           "figma",
           "dribbble",
-          "x(twitter)"
+          "xtwitter"
         ]
       },
       "default": "facebook",
@@ -32,7 +32,7 @@
             "apple": "Apple",
             "figma": "Figma",
             "dribbble": "Dribbble",
-            "x(twitter)": "X (Twitter)"
+            "xtwitter": "X (Twitter)"
           }
         },
         "code": {

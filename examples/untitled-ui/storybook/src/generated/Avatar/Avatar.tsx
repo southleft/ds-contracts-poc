@@ -49,12 +49,22 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       data-text={text || undefined}
       {...rest}
     >
-      {placeholder ? <User /> : null}
+      {placeholder ? (
+        <div className={styles.user}>
+          <User />
+        </div>
+      ) : null}
       {text ? <span className={styles.Text}>OR</span> : null}
       {statusIcon === 'onlineIndicator' ? (
-        <AvatarOnlineIndicator size={size} online="true" />
+        <div className={styles.AvatarOnlineIndicator}>
+          <AvatarOnlineIndicator size={size} online="true" />
+        </div>
       ) : null}
-      {statusIcon === 'company' ? <AvatarCompanyIcon size={size} /> : null}
+      {statusIcon === 'company' ? (
+        <div className={styles.AvatarCompanyIcon}>
+          <AvatarCompanyIcon size={size} />
+        </div>
+      ) : null}
     </div>
   );
 });

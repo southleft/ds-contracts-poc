@@ -83,8 +83,54 @@
     "root": {
       "parts": {
         "Ring": {
+          "declared": {
+            "position": "absolute"
+          },
           "parts": {
             "Background": {
+              "shape": {
+                "kind": "ellipse",
+                "width": 216,
+                "height": 216
+              },
+              "stylesWhen": [
+                {
+                  "prop": "size",
+                  "equals": "md",
+                  "styles": {
+                    "position": "absolute",
+                    "left": "0px",
+                    "top": "0px"
+                  }
+                },
+                {
+                  "prop": "size",
+                  "equals": "lg",
+                  "styles": {
+                    "position": "absolute",
+                    "left": "0px",
+                    "top": "0px"
+                  }
+                },
+                {
+                  "prop": "size",
+                  "equals": "sm",
+                  "styles": {
+                    "position": "absolute",
+                    "left": "0px",
+                    "top": "0px"
+                  }
+                },
+                {
+                  "prop": "size",
+                  "equals": "xs",
+                  "styles": {
+                    "position": "absolute",
+                    "left": "0px",
+                    "top": "0px"
+                  }
+                }
+              ],
               "tokens": {
                 "border-color": "{imported.progress-circle.ring-background.border-color}",
                 "border-width": "{imported.progress-circle.ring-background.border-width.{size}}"
@@ -96,17 +142,66 @@
                 "width": 216,
                 "height": 216
               },
+              "stylesWhen": [
+                {
+                  "prop": "size",
+                  "equals": "md",
+                  "styles": {
+                    "position": "absolute",
+                    "left": "0px",
+                    "top": "0px"
+                  }
+                },
+                {
+                  "prop": "size",
+                  "equals": "lg",
+                  "styles": {
+                    "position": "absolute",
+                    "left": "0px",
+                    "top": "0px"
+                  }
+                },
+                {
+                  "prop": "size",
+                  "equals": "sm",
+                  "styles": {
+                    "position": "absolute",
+                    "left": "0px",
+                    "top": "0px"
+                  }
+                },
+                {
+                  "prop": "size",
+                  "equals": "xs",
+                  "styles": {
+                    "position": "absolute",
+                    "left": "0px",
+                    "top": "0px"
+                  }
+                }
+              ],
               "tokens": {
                 "border-color": "{imported.progress-circle.ring-line.border-color}",
                 "border-width": "{imported.progress-circle.ring-line.border-width.{size}}"
               }
             }
+          },
+          "tokens": {
+            "top": "{imported.progress-circle.ring.top.{size}}",
+            "width": "{imported.progress-circle.ring.width.{size}}",
+            "height": "{imported.progress-circle.ring.height.{size}}"
+          },
+          "literals": {
+            "left": "12px"
           }
         },
         "group3": {
           "parts": {
             "Label": {
               "text": "Active users",
+              "declared": {
+                "position": "absolute"
+              },
               "visibleWhen": {
                 "prop": "label"
               },
@@ -115,19 +210,37 @@
                 "font-size": "{imported.progress-circle.group-3-label.font-size.{size}}",
                 "font-weight": "{imported.progress-circle.group-3-label.font-weight}",
                 "line-height": "{imported.progress-circle.group-3-label.line-height.{size}}"
+              },
+              "literals": {
+                "left": "78.5px",
+                "top": "89px"
               }
             },
             "Number": {
               "text": "40%",
+              "declared": {
+                "position": "absolute"
+              },
               "tokens": {
                 "color": "{imported.progress-circle.group-3-number.color}",
                 "font-size": "{imported.progress-circle.group-3-number.font-size.{size}}",
                 "font-weight": "{imported.progress-circle.group-3-number.font-weight}",
                 "line-height": "{imported.progress-circle.group-3-number.line-height.{size}}"
+              },
+              "literals": {
+                "left": "82px",
+                "top": "109px"
               }
             }
           }
         }
+      },
+      "declared": {
+        "position": "relative"
+      },
+      "tokens": {
+        "width": "{imported.progress-circle.root.width.{size}}",
+        "height": "{imported.progress-circle.root.height.{size}.{shape}}"
       }
     }
   },

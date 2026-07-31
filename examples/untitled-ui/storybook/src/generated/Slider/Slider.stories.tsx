@@ -20,13 +20,13 @@ const meta = {
   },
   argTypes: {
     label: { control: 'select', options: ['bottom', 'bottomFloating', 'topFloating', 'false'] },
-    rightControl: { control: 'select', options: ['25%', '50%', '75%', '100%'] },
-    leftControl: { control: 'select', options: ['0%', '25%', '50%', '75%'] },
+    rightControl: { control: 'select', options: ['25', '50', '75', '100'] },
+    leftControl: { control: 'select', options: ['0', '25', '50', '75'] },
   },
   args: {
     label: 'bottom',
-    rightControl: '25%',
-    leftControl: '0%',
+    rightControl: '25',
+    leftControl: '0',
   },
 } satisfies Meta<typeof Slider>;
 
@@ -63,70 +63,70 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
-      <Slider label="bottom" rightControl="25%" leftControl="0%" />
-      <Slider label="bottom" rightControl="25%" leftControl="25%" />
-      <Slider label="bottom" rightControl="25%" leftControl="50%" />
-      <Slider label="bottom" rightControl="25%" leftControl="75%" />
-      <Slider label="bottom" rightControl="50%" leftControl="0%" />
-      <Slider label="bottom" rightControl="50%" leftControl="25%" />
-      <Slider label="bottom" rightControl="50%" leftControl="50%" />
-      <Slider label="bottom" rightControl="50%" leftControl="75%" />
-      <Slider label="bottom" rightControl="75%" leftControl="0%" />
-      <Slider label="bottom" rightControl="75%" leftControl="25%" />
-      <Slider label="bottom" rightControl="75%" leftControl="50%" />
-      <Slider label="bottom" rightControl="75%" leftControl="75%" />
-      <Slider label="bottom" rightControl="100%" leftControl="0%" />
-      <Slider label="bottom" rightControl="100%" leftControl="25%" />
-      <Slider label="bottom" rightControl="100%" leftControl="50%" />
-      <Slider label="bottom" rightControl="100%" leftControl="75%" />
-      <Slider label="bottomFloating" rightControl="25%" leftControl="0%" />
-      <Slider label="bottomFloating" rightControl="25%" leftControl="25%" />
-      <Slider label="bottomFloating" rightControl="25%" leftControl="50%" />
-      <Slider label="bottomFloating" rightControl="25%" leftControl="75%" />
-      <Slider label="bottomFloating" rightControl="50%" leftControl="0%" />
-      <Slider label="bottomFloating" rightControl="50%" leftControl="25%" />
-      <Slider label="bottomFloating" rightControl="50%" leftControl="50%" />
-      <Slider label="bottomFloating" rightControl="50%" leftControl="75%" />
-      <Slider label="bottomFloating" rightControl="75%" leftControl="0%" />
-      <Slider label="bottomFloating" rightControl="75%" leftControl="25%" />
-      <Slider label="bottomFloating" rightControl="75%" leftControl="50%" />
-      <Slider label="bottomFloating" rightControl="75%" leftControl="75%" />
-      <Slider label="bottomFloating" rightControl="100%" leftControl="0%" />
-      <Slider label="bottomFloating" rightControl="100%" leftControl="25%" />
-      <Slider label="bottomFloating" rightControl="100%" leftControl="50%" />
-      <Slider label="bottomFloating" rightControl="100%" leftControl="75%" />
-      <Slider label="topFloating" rightControl="25%" leftControl="0%" />
-      <Slider label="topFloating" rightControl="25%" leftControl="25%" />
-      <Slider label="topFloating" rightControl="25%" leftControl="50%" />
-      <Slider label="topFloating" rightControl="25%" leftControl="75%" />
-      <Slider label="topFloating" rightControl="50%" leftControl="0%" />
-      <Slider label="topFloating" rightControl="50%" leftControl="25%" />
-      <Slider label="topFloating" rightControl="50%" leftControl="50%" />
-      <Slider label="topFloating" rightControl="50%" leftControl="75%" />
-      <Slider label="topFloating" rightControl="75%" leftControl="0%" />
-      <Slider label="topFloating" rightControl="75%" leftControl="25%" />
-      <Slider label="topFloating" rightControl="75%" leftControl="50%" />
-      <Slider label="topFloating" rightControl="75%" leftControl="75%" />
-      <Slider label="topFloating" rightControl="100%" leftControl="0%" />
-      <Slider label="topFloating" rightControl="100%" leftControl="25%" />
-      <Slider label="topFloating" rightControl="100%" leftControl="50%" />
-      <Slider label="topFloating" rightControl="100%" leftControl="75%" />
-      <Slider label="false" rightControl="25%" leftControl="0%" />
-      <Slider label="false" rightControl="25%" leftControl="25%" />
-      <Slider label="false" rightControl="25%" leftControl="50%" />
-      <Slider label="false" rightControl="25%" leftControl="75%" />
-      <Slider label="false" rightControl="50%" leftControl="0%" />
-      <Slider label="false" rightControl="50%" leftControl="25%" />
-      <Slider label="false" rightControl="50%" leftControl="50%" />
-      <Slider label="false" rightControl="50%" leftControl="75%" />
-      <Slider label="false" rightControl="75%" leftControl="0%" />
-      <Slider label="false" rightControl="75%" leftControl="25%" />
-      <Slider label="false" rightControl="75%" leftControl="50%" />
-      <Slider label="false" rightControl="75%" leftControl="75%" />
-      <Slider label="false" rightControl="100%" leftControl="0%" />
-      <Slider label="false" rightControl="100%" leftControl="25%" />
-      <Slider label="false" rightControl="100%" leftControl="50%" />
-      <Slider label="false" rightControl="100%" leftControl="75%" />
+      <Slider label="bottom" rightControl="25" leftControl="0" />
+      <Slider label="bottom" rightControl="25" leftControl="25" />
+      <Slider label="bottom" rightControl="25" leftControl="50" />
+      <Slider label="bottom" rightControl="25" leftControl="75" />
+      <Slider label="bottom" rightControl="50" leftControl="0" />
+      <Slider label="bottom" rightControl="50" leftControl="25" />
+      <Slider label="bottom" rightControl="50" leftControl="50" />
+      <Slider label="bottom" rightControl="50" leftControl="75" />
+      <Slider label="bottom" rightControl="75" leftControl="0" />
+      <Slider label="bottom" rightControl="75" leftControl="25" />
+      <Slider label="bottom" rightControl="75" leftControl="50" />
+      <Slider label="bottom" rightControl="75" leftControl="75" />
+      <Slider label="bottom" rightControl="100" leftControl="0" />
+      <Slider label="bottom" rightControl="100" leftControl="25" />
+      <Slider label="bottom" rightControl="100" leftControl="50" />
+      <Slider label="bottom" rightControl="100" leftControl="75" />
+      <Slider label="bottomFloating" rightControl="25" leftControl="0" />
+      <Slider label="bottomFloating" rightControl="25" leftControl="25" />
+      <Slider label="bottomFloating" rightControl="25" leftControl="50" />
+      <Slider label="bottomFloating" rightControl="25" leftControl="75" />
+      <Slider label="bottomFloating" rightControl="50" leftControl="0" />
+      <Slider label="bottomFloating" rightControl="50" leftControl="25" />
+      <Slider label="bottomFloating" rightControl="50" leftControl="50" />
+      <Slider label="bottomFloating" rightControl="50" leftControl="75" />
+      <Slider label="bottomFloating" rightControl="75" leftControl="0" />
+      <Slider label="bottomFloating" rightControl="75" leftControl="25" />
+      <Slider label="bottomFloating" rightControl="75" leftControl="50" />
+      <Slider label="bottomFloating" rightControl="75" leftControl="75" />
+      <Slider label="bottomFloating" rightControl="100" leftControl="0" />
+      <Slider label="bottomFloating" rightControl="100" leftControl="25" />
+      <Slider label="bottomFloating" rightControl="100" leftControl="50" />
+      <Slider label="bottomFloating" rightControl="100" leftControl="75" />
+      <Slider label="topFloating" rightControl="25" leftControl="0" />
+      <Slider label="topFloating" rightControl="25" leftControl="25" />
+      <Slider label="topFloating" rightControl="25" leftControl="50" />
+      <Slider label="topFloating" rightControl="25" leftControl="75" />
+      <Slider label="topFloating" rightControl="50" leftControl="0" />
+      <Slider label="topFloating" rightControl="50" leftControl="25" />
+      <Slider label="topFloating" rightControl="50" leftControl="50" />
+      <Slider label="topFloating" rightControl="50" leftControl="75" />
+      <Slider label="topFloating" rightControl="75" leftControl="0" />
+      <Slider label="topFloating" rightControl="75" leftControl="25" />
+      <Slider label="topFloating" rightControl="75" leftControl="50" />
+      <Slider label="topFloating" rightControl="75" leftControl="75" />
+      <Slider label="topFloating" rightControl="100" leftControl="0" />
+      <Slider label="topFloating" rightControl="100" leftControl="25" />
+      <Slider label="topFloating" rightControl="100" leftControl="50" />
+      <Slider label="topFloating" rightControl="100" leftControl="75" />
+      <Slider label="false" rightControl="25" leftControl="0" />
+      <Slider label="false" rightControl="25" leftControl="25" />
+      <Slider label="false" rightControl="25" leftControl="50" />
+      <Slider label="false" rightControl="25" leftControl="75" />
+      <Slider label="false" rightControl="50" leftControl="0" />
+      <Slider label="false" rightControl="50" leftControl="25" />
+      <Slider label="false" rightControl="50" leftControl="50" />
+      <Slider label="false" rightControl="50" leftControl="75" />
+      <Slider label="false" rightControl="75" leftControl="0" />
+      <Slider label="false" rightControl="75" leftControl="25" />
+      <Slider label="false" rightControl="75" leftControl="50" />
+      <Slider label="false" rightControl="75" leftControl="75" />
+      <Slider label="false" rightControl="100" leftControl="0" />
+      <Slider label="false" rightControl="100" leftControl="25" />
+      <Slider label="false" rightControl="100" leftControl="50" />
+      <Slider label="false" rightControl="100" leftControl="75" />
     </div>
   ),
 };

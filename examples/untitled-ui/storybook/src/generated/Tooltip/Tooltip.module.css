@@ -83,10 +83,16 @@
 
 .Tooltip {
   display: flex;
+  position: relative;
 }
 
 .bottomCenter {
   border-radius: var(--imported-tooltip-tooltip-bottom-center-border-radius);
+  width: var(--imported-tooltip-tooltip-bottom-center-width);
+  height: var(--imported-tooltip-tooltip-bottom-center-height);
+  left: -0.49px;
+  bottom: 0.03px;
+  position: absolute;
 }
 
 .theme-light .bottomCenter {

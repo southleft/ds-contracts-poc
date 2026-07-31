@@ -62,6 +62,9 @@
             "justify": "center",
             "align": "center"
           },
+          "declared": {
+            "position": "absolute"
+          },
           "parts": {
             "plus": {
               "component": {
@@ -72,15 +75,24 @@
           "tokens": {
             "padding-inline": "{imported.avatar-add-button.content.padding-inline}",
             "padding-block": "{imported.avatar-add-button.content.padding-block}",
-            "border-radius": "{imported.avatar-add-button.content.border-radius}"
+            "border-radius": "{imported.avatar-add-button.content.border-radius}",
+            "left": "{imported.avatar-add-button.content.left.{size}}",
+            "top": "{imported.avatar-add-button.content.top.{size}}",
+            "width": "{imported.avatar-add-button.content.width}",
+            "height": "{imported.avatar-add-button.content.height}"
           }
         }
+      },
+      "declared": {
+        "position": "relative"
       },
       "tokens": {
         "background-color": "{imported.avatar-add-button.root.background-color}",
         "border-color": "{imported.avatar-add-button.root.border-color}",
         "border-radius": "{imported.avatar-add-button.root.border-radius.{size}}",
-        "border-width": "{imported.avatar-add-button.root.border-width}"
+        "border-width": "{imported.avatar-add-button.root.border-width}",
+        "width": "{imported.avatar-add-button.root.width.{size}}",
+        "height": "{imported.avatar-add-button.root.height.{size}}"
       },
       "states": {
         "hover": {

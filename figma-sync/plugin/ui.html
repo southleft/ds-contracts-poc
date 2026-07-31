@@ -2059,7 +2059,16 @@ function dumpShape(node, parent) {
   if (rotation !== 0) shape.rotation = rotation;
   const box = node.absoluteBoundingBox;
   const parentBox = parent && parent.absoluteBoundingBox;
-  if (node.layoutPositioning === 'ABSOLUTE' && box && parentBox) {
+  // dump v1.7 (overlay-flattened class, round 2 iteration 2): a shape child
+  // of a NON-auto-layout parent is x/y-placed exactly like every other child
+  // there — the same rule the `abs` channel uses (layoutPositioning only
+  // means something inside auto-layout). Previously only ABSOLUTE nodes got
+  // placement, so slider/progress tracks and ring ellipses captured size but
+  // LOST their canvas position and code stacked them in flow.
+  const shapeParentAuto = parent && 'layoutMode' in parent && parent.layoutMode !== 'NONE';
+  const shapePlaced = node.layoutPositioning === 'ABSOLUTE'
+    || (parent && !shapeParentAuto && typeof node.x === 'number');
+  if (shapePlaced && box && parentBox) {
     const cx = box.x - parentBox.x + box.width / 2;
     const cy = box.y - parentBox.y + box.height / 2;
     shape.x = round2(cx - shape.width / 2);
