@@ -124,6 +124,9 @@
         "width": "{imported.toggle-base.root.width.{size}}",
         "height": "{imported.toggle-base.root.height.{size}}"
       },
+      "overridable": [
+        "size"
+      ],
       "states": {
         "disabled": {
           "background-color": "{imported.toggle-base.state-disabled.background-color}"

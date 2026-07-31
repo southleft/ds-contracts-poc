@@ -949,6 +949,12 @@ interface MintCapture {
    *  width/height and nested-part padding channels ride the same carrier.
    *  Empty when nothing refused. */
   absFallbacks: Array<{ part: Record<string, unknown>; tokens: Record<string, string>; chan: string; value: number; where: string }>;
+  /** ROUND 2 ITERATION 9 — per-instance override targets: component-ref
+   *  records whose observed per-occurrence facts PROVABLY diverge from the
+   *  linked child's own minted values. Filled like every other mint target
+   *  after classification; a target that stays empty (every channel
+   *  refused, each refusal named) attaches nothing. */
+  refOverrides: Array<{ component: Record<string, unknown>; target: Record<string, string> }>;
 }
 
 interface Ctx {
@@ -979,6 +985,11 @@ interface Ctx {
   /** instanceKey → exported stub-glyph asset (iteration 8) — see the
    *  proposeFromDump option of the same name. */
   iconAssets?: ReadonlyMap<string, StubIconAsset>;
+  /** ROUND 2 ITERATION 9 — the accumulated minted-value ledger (leaf
+   *  dot-path → resolved literal) from EARLIER proposals in this session —
+   *  see the proposeFromDump option of the same name. Presence opts the
+   *  per-instance override machinery in. */
+  instanceOverrides?: ReadonlyMap<string, string>;
   prefix: string;
   /** The contract id THIS proposal claims — the name-derived slug, suffixed
    *  past session-claimed holders whose componentSetKey CONTRADICTS this
@@ -3734,12 +3745,162 @@ function buildPart(
       );
     }
     // The instance's own geometry/paints belong to the child contract — elided.
+    // ROUND 2 ITERATION 9 — PER-INSTANCE OVERRIDES (component-ref level).
+    // A Figma instance can carry its own image fill, its own box, its own
+    // solid paint; the linked child renders ITS OWN minted facts everywhere.
+    // With the accumulated minted-value ledger in hand (instanceOverrides),
+    // each observed per-occurrence fact is compared against what the child
+    // renders for the occurrence's applied props; a PROVEN divergence mints
+    // an override ref (standard per-variant classification) carried as
+    // component.overrides — but only through channels the child DECLARES
+    // overridable. No ledger / no divergence / undeclared channel → the
+    // classic behavior, byte-identical.
+    let paintOverrideCarried = false;
+    if (ctx.instanceOverrides && ctx.mint && id) {
+      const child = ctx.contractsById?.get(id) as
+        | (MinimalChildContract & { anatomy?: { root?: { tokens?: Record<string, string>; overridable?: string[] } } })
+        | undefined;
+      const childRoot = child?.anatomy?.root;
+      const childOv = new Set(childRoot?.overridable ?? []);
+      const childTokens = childRoot?.tokens ?? {};
+      if (childOv.size > 0) {
+        // An occurrence with NO applied props still resolves placeholder-less
+        // child bindings (a setless glyph stub has no props to apply) — the
+        // empty record only fails resolution when a placeholder NEEDS a value.
+        const canonByOcc: Array<Record<string, string | boolean>> = m.occ.map((o) =>
+          o.node.componentProperties
+            ? canonicalizeInstanceProps(instanceOf, o.node.componentProperties, id, ctx, where, true, keys)
+            : {},
+        );
+        /** The child's own resolved value for one occurrence: the root
+         *  binding's placeholders substituted with the occurrence's
+         *  canonicalized applied props, looked up in the minted-value
+         *  ledger. undefined = divergence not provable for this channel. */
+        const resolveChildValue = (cssProp: string, canon: Record<string, string | boolean>): string | undefined => {
+          const refStr = childTokens[cssProp];
+          if (typeof refStr !== 'string') return undefined;
+          let path = refStr.replace(/^\{|\}$/g, '');
+          for (const ph of [...path.matchAll(/\{([a-z][\w-]*)\}/g)]) {
+            const v = canon[ph[1]];
+            if (v === undefined) return undefined;
+            path = path.replaceAll(ph[0], String(v));
+          }
+          return ctx.instanceOverrides!.get(path);
+        };
+        const ovTarget: Record<string, string> = {};
+        let ovQueued = false;
+        // background-image — per-instance IMAGE identity (dump v1.9).
+        if (childOv.has('background-image')) {
+          const withHash = m.occ.filter((o) => typeof o.node.imageFill === 'string');
+          if (withHash.length > 0) {
+            let proven = false;
+            let unresolved = false;
+            m.occ.forEach((o, i) => {
+              if (typeof o.node.imageFill !== 'string') return;
+              const expected = resolveChildValue('background-image', canonByOcc[i]);
+              if (expected === undefined) unresolved = true;
+              else if (expected !== imageFillCss(o.node.imageFill)) proven = true;
+            });
+            if (proven) {
+              mintObservation(
+                ctx,
+                ovTarget,
+                where,
+                'background-image',
+                'gradient',
+                withHash.map((o) => ({ variant: o.variant, value: imageFillCss(o.node.imageFill) })),
+                undefined,
+                'none',
+              );
+              ovQueued = true;
+              ctx.notes.push(
+                `${where}: PER-INSTANCE IMAGE OVERRIDE proposed (iteration 9) — the instance's own imageFill hash (dump v1.9) diverges from what ${id} renders for the applied props; carried as component.overrides['background-image'] (the child's declared overridable channel)`,
+              );
+            } else if (unresolved) {
+              ctx.notes.push(
+                `${where}: per-instance image observed on the LINKED instance but ${id}'s own value could not be resolved from the minted ledger — divergence unproven, override NOT carried (the instance renders the child's default), review`,
+              );
+            }
+          }
+        }
+        // size — per-instance BOX (Figma instances are freely resizable).
+        if (childOv.has('size')) {
+          const withBox = m.occ.filter((o) => o.node.bbox !== undefined);
+          if (withBox.length === m.occ.length && withBox.length > 0) {
+            if (withBox.some((o) => Math.abs(o.node.bbox!.width - o.node.bbox!.height) > 0.5)) {
+              ctx.notes.push(
+                `${where}: observed instance box is NOT square — the size override channel carries ONE square custom property (glyph-box vocabulary); override not carried, review`,
+              );
+            } else {
+              let proven = false;
+              m.occ.forEach((o, i) => {
+                const expW = resolveChildValue('width', canonByOcc[i]);
+                const expH = resolveChildValue('height', canonByOcc[i]);
+                if (expW === undefined || expH === undefined) return;
+                if (
+                  Math.abs(o.node.bbox!.width - parseFloat(expW)) > 0.5 ||
+                  Math.abs(o.node.bbox!.height - parseFloat(expH)) > 0.5
+                ) {
+                  proven = true;
+                }
+              });
+              if (proven) {
+                mintObservation(
+                  ctx,
+                  ovTarget,
+                  where,
+                  'size',
+                  'px',
+                  m.occ.map((o) => ({ variant: o.variant, value: o.node.bbox!.width })),
+                );
+                ovQueued = true;
+                ctx.notes.push(
+                  `${where}: PER-INSTANCE SIZE OVERRIDE proposed (iteration 9) — the observed box diverges from what ${id} renders for the applied props; carried as component.overrides['size'] (one square custom property driving the child root's width/height and any part bound to the same refs)`,
+                );
+              }
+            }
+          }
+        }
+        // background-color — per-instance solid paint (dump v1.7, stub roots).
+        if (childOv.has('background-color')) {
+          const paints = m.occ.map((o) => {
+            const f = o.node.instancePrimaryFill;
+            return f && f.stroke !== true && f.hex !== undefined && f.var === undefined ? `#${f.hex}` : undefined;
+          });
+          if (paints.length > 0 && paints.every((p) => p !== undefined)) {
+            let proven = false;
+            m.occ.forEach((o, i) => {
+              const expected = resolveChildValue('background-color', canonByOcc[i]);
+              if (expected !== undefined && expected.toLowerCase() !== paints[i]!.toLowerCase()) proven = true;
+            });
+            if (proven) {
+              mintObservation(
+                ctx,
+                ovTarget,
+                where,
+                'background-color',
+                'color',
+                m.occ.map((o, i) => ({ variant: o.variant, value: paints[i]! })),
+              );
+              ovQueued = true;
+              paintOverrideCarried = true;
+              ctx.notes.push(
+                `${where}: PER-INSTANCE PAINT OVERRIDE proposed (iteration 9) — the observed instance paint (dump v1.7 instancePrimaryFill) diverges from ${id}'s own minted paint; carried as component.overrides['background-color']`,
+              );
+            }
+          }
+        }
+        if (ovQueued) ctx.mint.refOverrides.push({ component, target: ovTarget });
+      }
+    }
     // dump v1.7: an observed subtree paint on a LINKED instance is ledgered —
     // the child contract owns its paint, and a per-usage paint override is
-    // not representable on a component ref (field case: Untitled UI's _Dot is
-    // purple inside Badge and white inside Button; whichever proposal claimed
-    // the stub fixed its paint).
-    if (id) {
+    // representable ONLY through a channel the child declares overridable
+    // (iteration 9, carried above when proven); otherwise it stays this
+    // named note (field case: Untitled UI's _Dot is purple inside Badge and
+    // white inside Button; whichever proposal claimed the stub fixed its
+    // paint — and a glyph-carried stub BAKES its exported ink).
+    if (id && !paintOverrideCarried) {
       const observedPaint = first(m.occ, (n) => n.instancePrimaryFill);
       if (observedPaint) {
         ctx.notes.push(
@@ -4208,7 +4369,7 @@ function stubGeometry(
   props: Array<Record<string, unknown>>,
   ctx: Ctx,
   iconRes: StubIconResolution | null = null,
-): { tokens: Record<string, string>; tree: Record<string, unknown>; count: number; entries: MintedEntry[] } | null {
+): { tokens: Record<string, string>; tree: Record<string, unknown>; count: number; entries: MintedEntry[]; circleRadius50?: boolean } | null {
   if (!ctx.mint) return null;
   // ITERATION 8 — when the stub carries its exported glyph (fixed/byProp),
   // the SVG bakes the drawn ink: every witness-paint channel (solid fill,
@@ -4392,15 +4553,27 @@ function stubGeometry(
   // contradicts the observations — field case _Dot) and the box renders
   // ROUND: the witnessed radius is half the observed square box. Derived
   // from the export's own geometry, nothing guessed.
+  let circleRadius50 = false;
   if (
     iconRes?.kind === 'circleFill' &&
     geo.every((o) => Math.abs(o.bbox!.width - o.bbox!.height) < 0.5) &&
     !geo.some((o) => (o.cornerRadius ?? 0) !== 0)
   ) {
-    push('border-radius', 'px', (o) => Math.round((o.bbox!.width / 2) * 100) / 100);
-    ctx.notes.push(
-      `stub ${capture.id}: exported glyph is a PURE CIRCLE FILL (iteration 8 witness) — the observed solid-fill path stays (the export bakes its source component's ink, which the observed per-usage paints contradict) and the circular border-radius derives from the observed box (width/2); the baked SVG is committed as the export receipt, not rendered`,
-    );
+    if (ctx.instanceOverrides) {
+      // ROUND 2 ITERATION 9 — with per-instance size overrides live, the
+      // witnessed "radius = half the box" spells as the parametric 50%
+      // literal: value-identical at the witnessed box, and still a circle
+      // when a host overrides the box (a px radius would square the dot).
+      circleRadius50 = true;
+      ctx.notes.push(
+        `stub ${capture.id}: exported glyph is a PURE CIRCLE FILL (iteration 8 witness) — the observed solid-fill path stays (the export bakes its source component's ink, which the observed per-usage paints contradict); the circular radius is spelled as the parametric border-radius: 50% literal (iteration 9 — value-identical to the witnessed width/2, and correct under a host's per-instance size override); the baked SVG is committed as the export receipt, not rendered`,
+      );
+    } else {
+      push('border-radius', 'px', (o) => Math.round((o.bbox!.width / 2) * 100) / 100);
+      ctx.notes.push(
+        `stub ${capture.id}: exported glyph is a PURE CIRCLE FILL (iteration 8 witness) — the observed solid-fill path stays (the export bakes its source component's ink, which the observed per-usage paints contradict) and the circular border-radius derives from the observed box (width/2); the baked SVG is committed as the export receipt, not rendered`,
+      );
+    }
   }
   // dump v1.7 `imageFill` on the stub instance — the exported asset (dump
   // v1.9 hash) or the neutral placeholder gradient (boolean marker) renders
@@ -4424,8 +4597,8 @@ function stubGeometry(
   // Uniform var-bound observed paint (dump v1.7) — a captured-token ref, not
   // a minted leaf; joins the minted geometry bindings on the stub root.
   if (backgroundVarRef !== null) tokens['background-color'] = backgroundVarRef;
-  if (Object.keys(tokens).length === 0) return null;
-  return { tokens, tree: minted.tree, count: minted.count, entries: minted.entries };
+  if (Object.keys(tokens).length === 0 && !circleRadius50) return null;
+  return { tokens, tree: minted.tree, count: minted.count, entries: minted.entries, circleRadius50 };
 }
 
 /** ITERATION 8 — how a stub renders its exported glyph (or why not). */
@@ -4598,12 +4771,39 @@ function buildChildStub(
     );
   }
   if (geometry) {
-    root.tokens = geometry.tokens;
+    if (Object.keys(geometry.tokens).length > 0) root.tokens = geometry.tokens;
+    if (geometry.circleRadius50) root.literals = { 'border-radius': '50%' };
     // dump v1.9: a hash-form image fill on the stub renders the exported
     // asset — cover is the observed scaleMode FILL equivalence (the hash
     // form is captured only for FILL paints).
     if (geometry.tokens['background-image'] && capture.observed.some((o) => typeof o.imageFill === 'string')) {
       declareImageFillCover(root);
+    }
+    // ROUND 2 ITERATION 9 — a stub's every channel IS an observation of its
+    // usage sites, so later hosts whose own observations diverge may
+    // override: size (the observed box), background-color (the observed
+    // instance paint), background-image (the observed image identity).
+    // NOT declared when a minted value bakes drawn-geometry px inside a
+    // gradient string (the iteration-5 ring witness — scaling its box would
+    // tear the baked radii): that divergence stays a named note.
+    if (ctx.instanceOverrides) {
+      const gradientBaked = geometry.entries.some(
+        (e) => e.ref.includes('.background-image') && !/^(url\(|none$)/.test(String(e.value)),
+      );
+      const declaredOv: string[] = [];
+      if (geometry.tokens.width !== undefined && geometry.tokens.height !== undefined && !gradientBaked) declaredOv.push('size');
+      if (geometry.tokens['background-image'] !== undefined && !gradientBaked) declaredOv.push('background-image');
+      if (geometry.tokens['background-color'] !== undefined) declaredOv.push('background-color');
+      if (declaredOv.length > 0) {
+        root.overridable = declaredOv;
+        ctx.notes.push(
+          `stub ${capture.id}: overridable [${declaredOv.join(', ')}] declared (iteration 9) — a host whose OBSERVED per-instance facts diverge from this stub's minted ones may override them per usage; absent an override the stub renders its own minted values unchanged`,
+        );
+      } else if (gradientBaked) {
+        ctx.notes.push(
+          `stub ${capture.id}: overridable NOT declared — the minted background-image bakes drawn-geometry px (the ring witness); a per-instance size/image override would tear the baked radii, so host divergence stays a named note`,
+        );
+      }
     }
     ctx.notes.push(
       `stub ${capture.id}: renders HONEST OBSERVED GEOMETRY (dump v1.5 bounding box${geometry.tokens['background-color'] ? ' + primary paint' : ''}${geometry.tokens['border-color'] ? ' + border' : ''}) via minted imported.stub-* tokens — a correctly-sized box, NOT the child's anatomy (still not captured); import the real child set to replace it`,
@@ -5135,6 +5335,17 @@ export function proposeFromDump(
      *  rendering the REAL vector glyph instead of witness geometry. Absent →
      *  the classic geometry-stub behavior, byte-identical. */
     iconAssets?: ReadonlyMap<string, StubIconAsset>;
+    /** ROUND 2 ITERATION 9 — per-instance overrides: the accumulated
+     *  minted-value ledger from EARLIER proposals in this session (leaf
+     *  dot-path → resolved literal, e.g. "imported.avatar.root.width.xs" →
+     *  "24px"; build it from each proposal's mintedTokens tree). Presence
+     *  opts the machinery in: child roots declare `overridable` channels,
+     *  and a component ref whose OBSERVED per-occurrence facts (imageFill /
+     *  bbox / instancePrimaryFill) PROVABLY diverge from the linked child's
+     *  own values carries `component.overrides` minted from those
+     *  observations. Absent (every existing caller) — byte-identical
+     *  classic behavior; unprovable divergences stay named notes. */
+    instanceOverrides?: ReadonlyMap<string, string>;
     /** Contract ids claimed by THIS session's earlier imports — real
      *  contracts AND their child stubs (live-gauntlet class ③). When the
      *  name-derived self id lands on one of these whose componentSetKey
@@ -5245,6 +5456,7 @@ export function proposeFromDump(
     hiddenCaptured: opts.hiddenCaptured,
     capturedValues: opts.capturedValues,
     iconAssets: opts.iconAssets,
+    instanceOverrides: opts.instanceOverrides,
     prefix,
     selfId,
     notes: [],
@@ -5287,6 +5499,7 @@ export function proposeFromDump(
           partialSources: new Set(),
           attach: [],
           absFallbacks: [],
+          refOverrides: [],
         }
       : undefined,
   };
@@ -5655,6 +5868,12 @@ export function proposeFromDump(
     for (const { holder, tokens } of ctx.mint.attach) {
       if (Object.keys(tokens).length > 0 && holder.tokens === undefined) holder.tokens = tokens;
     }
+    // ROUND 2 ITERATION 9 — per-instance override targets whose refs
+    // classified attach as component.overrides; an all-refused target
+    // attaches nothing (each refusal already named above).
+    for (const ro of ctx.mint.refOverrides) {
+      if (Object.keys(ro.target).length > 0) ro.component.overrides = ro.target;
+    }
     // Overlay-flattened class: abs-placement channels whose values refused
     // classification fall back to the base combo's captured value as a part
     // LITERAL (the round-4 padding precedent — the base plane is exact) so
@@ -5682,6 +5901,28 @@ export function proposeFromDump(
       );
     }
     mintedTokens = { tree: minted.tree, count: minted.count, entries: minted.entries };
+  }
+
+  // ROUND 2 ITERATION 9 — override CONSUMPTION declaration (root part),
+  // AFTER the mint pass so the root's token record is final. Declared from
+  // the same observed evidence that minted the channels: an image fill is
+  // per-instance identity in Figma (any instance can carry its own), and a
+  // minted root box is the observed box (any instance can be resized).
+  // Opt-in with the instance-override ledger — the option-less path is
+  // byte-identical.
+  if (ctx.instanceOverrides) {
+    const rt = (root.tokens ?? {}) as Record<string, string>;
+    const declaredOv: string[] = [];
+    if (typeof rt['background-image'] === 'string' && merged.occ.some((o) => typeof o.node.imageFill === 'string')) {
+      declaredOv.push('background-image');
+    }
+    if (typeof rt['width'] === 'string' && typeof rt['height'] === 'string') declaredOv.push('size');
+    if (declaredOv.length > 0) {
+      root.overridable = declaredOv;
+      ctx.notes.push(
+        `root: overridable [${declaredOv.join(', ')}] declared (iteration 9) — hosts may carry PROVEN per-instance overrides for these channels; the root's own bindings are the var() fallback, so instances without overrides render identically`,
+      );
+    }
   }
 
   // State-axis promotion, final attach — AFTER the mint pass so minted state

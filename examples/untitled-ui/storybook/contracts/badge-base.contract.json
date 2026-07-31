@@ -76,6 +76,9 @@
               "text": false,
               "statusIcon": "false",
               "state": "default"
+            },
+            "overrides": {
+              "size": "{imported.badge-base.avatar.size}"
             }
           },
           "visibleWhen": {

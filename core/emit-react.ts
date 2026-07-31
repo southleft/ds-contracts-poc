@@ -18,6 +18,8 @@
 import {
   DECLARED_CHANNELS,
   LITERAL_CHANNELS,
+  REF_OVERRIDE_CHANNELS,
+  refOverrideVar,
   TOKEN_CHANNELS,
   STATE_PREVIEW_PROPERTY,
   STYLES_WHEN_ALLOWED,
@@ -282,6 +284,46 @@ export function validateContract(
       }
       if (part.component.text !== undefined && dep && !hasChildrenText(dep)) {
         errors.push(`${contract.id}: part "${name}" sets text but ${dep.id} has no children text prop`);
+      }
+      // Round 2 iteration 9 — per-instance overrides: registry channels
+      // only, and the CHILD must declare each channel overridable on its
+      // root (the child's CSS is what consumes the custom property; a host
+      // setting a var nobody reads is a silent no-op, refused by name).
+      for (const channel of Object.keys(part.component.overrides ?? {})) {
+        if (!REF_OVERRIDE_CHANNELS[channel]) {
+          errors.push(
+            `${contract.id}: part "${name}" component override channel "${channel}" is not registered (REF_OVERRIDE_CHANNELS: ${Object.keys(REF_OVERRIDE_CHANNELS).join(', ')})`,
+          );
+          continue;
+        }
+        if (dep && !(dep.anatomy.root?.overridable ?? []).includes(channel)) {
+          errors.push(
+            `${contract.id}: part "${name}" overrides "${channel}" but ${dep.id} does not declare it overridable — the child's CSS would never consume the custom property (silent no-op refused)`,
+          );
+        }
+      }
+    }
+    // Round 2 iteration 9 — `overridable` is root-only consumption
+    // vocabulary: registry channels, each backed by the root's own bindings.
+    if (part.overridable) {
+      if (!(p.length === 1 && p[0] === 'root')) {
+        errors.push(`${contract.id}: part "${name}" declares overridable — only the root part consumes per-instance overrides`);
+      }
+      for (const channel of part.overridable) {
+        const spec = REF_OVERRIDE_CHANNELS[channel];
+        if (!spec) {
+          errors.push(
+            `${contract.id}: part "${name}" overridable channel "${channel}" is not registered (REF_OVERRIDE_CHANNELS: ${Object.keys(REF_OVERRIDE_CHANNELS).join(', ')})`,
+          );
+          continue;
+        }
+        for (const cssProp of spec.css) {
+          if (!part.tokens?.[cssProp]) {
+            errors.push(
+              `${contract.id}: part "${name}" declares "${channel}" overridable but binds no "${cssProp}" token — nothing to consume the override through`,
+            );
+          }
+        }
       }
     }
     for (const item of part.slot?.defaultContent ?? []) {
@@ -1169,6 +1211,23 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     rootDecls.push('display: inline-flex', 'align-items: center', 'justify-content: center');
   }
   const rootTokens = root.tokens ?? {};
+  // Round 2 iteration 9 — per-instance override CONSUMPTION (root
+  // `overridable`): every declaration of a listed channel becomes
+  // `var(<override var>, <own binding>)` so a host's wrapper can override
+  // this one usage; with no override set, the fallback IS the own binding —
+  // value-identical to the plain spelling. A nested part binding the SAME
+  // ref as the root (a stub's glyph part) consumes the same var, so the
+  // glyph scales with its overridden box.
+  const overrideVarByCssProp = new Map<string, string>();
+  for (const channel of root.overridable ?? []) {
+    for (const cssProp of REF_OVERRIDE_CHANNELS[channel]?.css ?? []) {
+      overrideVarByCssProp.set(cssProp, refOverrideVar(contract.id, channel));
+    }
+  }
+  const ovVal = (cssProp: string, value: string): string => {
+    const ovVar = overrideVarByCssProp.get(cssProp);
+    return ovVar ? `var(${ovVar}, ${value})` : value;
+  };
   // UA-margin neutralization: see UA_MARGIN_ELEMENTS.
   if (rootElementsOf(contract).some((el) => UA_MARGIN_ELEMENTS.has(el))) {
     rootDecls.push('margin: 0');
@@ -1267,7 +1326,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     const phs = placeholdersIn(refPath);
     if (phs.length === 0) {
       if (checkToken(refPath, `anatomy.root.tokens.${cssProp}`)) {
-        rootDecls.push(`${cssProp}: ${cssVar(refPath)}`);
+        rootDecls.push(`${cssProp}: ${ovVal(cssProp, cssVar(refPath))}`);
         if (floorMirror) rootDecls.push(`min-width: ${cssVar(refPath)}`);
       }
     } else if (phs.length === 1) {
@@ -1281,7 +1340,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         if (!checkToken(resolved, `anatomy.root.tokens.${cssProp}`)) continue;
         const cls = comboCls([[phs[0], value]]);
         if (!enumRules.has(cls)) enumRules.set(cls, new Map());
-        enumRules.get(cls)!.set(cssProp, cssVar(resolved));
+        enumRules.get(cls)!.set(cssProp, ovVal(cssProp, cssVar(resolved)));
         if (floorMirror) enumRules.get(cls)!.set('min-width', cssVar(resolved));
       }
     } else if (phs.length === 2) {
@@ -1314,7 +1373,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
           }
           const cls = comboCls([[pa, a], [pb, b]]);
           if (!enumRules.has(cls)) enumRules.set(cls, new Map());
-          enumRules.get(cls)!.set(cssProp, cssVar(resolved));
+          enumRules.get(cls)!.set(cssProp, ovVal(cssProp, cssVar(resolved)));
         }
       }
     } else if (phs.length === 3) {
@@ -1346,7 +1405,7 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
             }
             const cls = comboCls([[pa, a], [pb, b], [pc, c]]);
             if (!enumRules.has(cls)) enumRules.set(cls, new Map());
-            enumRules.get(cls)!.set(cssProp, cssVar(resolved));
+            enumRules.get(cls)!.set(cssProp, ovVal(cssProp, cssVar(resolved)));
           }
         }
       }
@@ -1520,7 +1579,47 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   // Nested parts (no substitutions; validated above).
   for (const { name, part, path: p } of walkAnatomy(contract)) {
     if (p[0] === 'root' && p.length === 1) continue;
-    if (part.component) continue; // instances style themselves via their own contract
+    if (part.component) {
+      // Round 2 iteration 9 — per-instance overrides: the ref part becomes a
+      // structural WRAPPER class (the TSX wraps the instance in a span; the
+      // child contract still owns ALL of its own styling) whose only job is
+      // setting the child's override custom properties, which inherit into
+      // the instance and land in the child's var() fallback chains.
+      // inline-flex hugs the child, so layout (overlap margins included)
+      // sees the same box as the bare instance.
+      const ov = Object.entries(part.component.overrides ?? {});
+      if (ov.length > 0) {
+        const wrapDecls: string[] = ['display: inline-flex'];
+        const wrapSubRules: string[] = [];
+        for (const [channel, ref] of ov) {
+          const ovVar = refOverrideVar(part.component.id, channel);
+          const refPath = stripBraces(ref);
+          const phs = placeholdersIn(refPath);
+          if (phs.length === 1) {
+            // Per-enum-value descendant rule under the root's variant class —
+            // the nested-token-substitution rule shape.
+            for (const value of enums.get(phs[0]) ?? []) {
+              const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
+              if (!checkToken(resolved, `anatomy.${name}.component.overrides.${channel}`)) continue;
+              wrapSubRules.push(`\n.${phs[0]}-${value} .${name} {\n  ${ovVar}: ${cssVar(resolved)};\n}`);
+            }
+            continue;
+          }
+          if (phs.length > 1) {
+            errors.push(
+              `${contract.id}: part "${name}" component override "${channel}" substitutes ${phs.length} enum props — override refs carry at most 1`,
+            );
+            continue;
+          }
+          if (checkToken(refPath, `anatomy.${name}.component.overrides.${channel}`)) {
+            wrapDecls.push(`${ovVar}: ${cssVar(refPath)}`);
+          }
+        }
+        lines.push('', `.${name} {`, ...wrapDecls.map((d) => `  ${d};`), '}');
+        lines.push(...wrapSubRules);
+      }
+      continue; // instances style themselves via their own contract
+    }
     const decls: string[] = [];
     if (isStructural(part)) {
       decls.push(`display: ${part.layout?.display ?? 'flex'}`);
@@ -1633,7 +1732,11 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         continue;
       }
       if (checkToken(refPath, `anatomy.${name}.tokens.${cssProp}`)) {
-        decls.push(`${cssProp}: ${cssVar(refPath)}`);
+        // Round 2 iteration 9 — a nested part binding the SAME ref as the
+        // root's overridable channel (a stub's glyph part) consumes the same
+        // override var, so the part scales with the overridden root box.
+        const sameAsRoot = rootTokens[cssProp] === ref;
+        decls.push(`${cssProp}: ${sameAsRoot ? ovVal(cssProp, cssVar(refPath)) : cssVar(refPath)}`);
       }
     }
     if (
@@ -2256,12 +2359,19 @@ export function generateTsx(
       // icon/repeat parts — this branch used to return bare JSX, silently
       // dropping contract visibleWhen (AUDIT-ROUND-1: emitter-drops-
       // visibleWhen-on-component-parts).
-      return wrapVisibleWhen(
-        part,
+      const instance =
         text !== undefined
           ? `<${dep.name}${attrs}>${text}</${dep.name}>`
-          : `<${dep.name}${attrs} />`,
-      );
+          : `<${dep.name}${attrs} />`;
+      // Round 2 iteration 9 — per-instance overrides ride a structural
+      // wrapper span (its class sets the child's override custom
+      // properties; see generateCss). No overrides → bare instance,
+      // byte-identical.
+      const withOverrides =
+        Object.keys(part.component.overrides ?? {}).length > 0
+          ? `<span className={${stylesRef(partName)}}>${instance}</span>`
+          : instance;
+      return wrapVisibleWhen(part, withOverrides);
     }
     if (part.slot) {
       const el = part.element ?? 'div';

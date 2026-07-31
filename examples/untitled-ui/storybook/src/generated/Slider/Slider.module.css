@@ -10,23 +10,23 @@
   border: 0;
   position: relative;
   border-radius: var(--imported-shared-size-8);
-  width: var(--imported-slider-root-width);
+  width: var(--ds-slider-size, var(--imported-slider-root-width));
 }
 
 .label-bottom {
-  height: var(--imported-slider-root-height-bottom);
+  height: var(--ds-slider-size, var(--imported-slider-root-height-bottom));
 }
 
 .label-bottomFloating {
-  height: var(--imported-slider-root-height-bottomFloating);
+  height: var(--ds-slider-size, var(--imported-slider-root-height-bottomFloating));
 }
 
 .label-topFloating {
-  height: var(--imported-slider-root-height-topFloating);
+  height: var(--ds-slider-size, var(--imported-slider-root-height-topFloating));
 }
 
 .label-false {
-  height: var(--imported-slider-root-height-false);
+  height: var(--ds-slider-size, var(--imported-slider-root-height-false));
 }
 
 .Background {

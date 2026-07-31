@@ -31,15 +31,33 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(function
     >
       <div className={styles.Avatars}>
         <Avatar size={size} text={false} statusIcon="false" state="default" />
-        <Avatar size={size} text={false} statusIcon="false" state="default" />
-        <Avatar size={size} text={false} statusIcon="false" state="default" />
-        <Avatar size={size} text={false} statusIcon="false" state="default" />
-        <Avatar size={size} text={false} statusIcon="false" state="default" />
-        <Avatar size={size} text={false} statusIcon="false" state="default" />
-        <Avatar size={size} text={false} statusIcon="false" state="default" />
-        <Avatar size={size} text={false} statusIcon="false" state="default" />
-        <Avatar size={size} text={false} statusIcon="false" state="default" />
-        <Avatar size={size} text={false} statusIcon="false" state="default" />
+        <span className={styles.avatar2}>
+          <Avatar size={size} text={false} statusIcon="false" state="default" />
+        </span>
+        <span className={styles.avatar3}>
+          <Avatar size={size} text={false} statusIcon="false" state="default" />
+        </span>
+        <span className={styles.avatar4}>
+          <Avatar size={size} text={false} statusIcon="false" state="default" />
+        </span>
+        <span className={styles.avatar5}>
+          <Avatar size={size} text={false} statusIcon="false" state="default" />
+        </span>
+        <span className={styles.avatar6}>
+          <Avatar size={size} text={false} statusIcon="false" state="default" />
+        </span>
+        <span className={styles.avatar7}>
+          <Avatar size={size} text={false} statusIcon="false" state="default" />
+        </span>
+        <span className={styles.avatar8}>
+          <Avatar size={size} text={false} statusIcon="false" state="default" />
+        </span>
+        <span className={styles.avatar9}>
+          <Avatar size={size} text={false} statusIcon="false" state="default" />
+        </span>
+        <span className={styles.avatar10}>
+          <Avatar size={size} text={false} statusIcon="false" state="default" />
+        </span>
         {moreUsers ? <Avatar size={size} text statusIcon="false" state="default" /> : null}
       </div>
       {addUserButton ? <AvatarAddButton size={size} /> : null}

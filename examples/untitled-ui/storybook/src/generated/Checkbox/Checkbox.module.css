@@ -8,13 +8,13 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  width: var(--imported-stub-checkbox-root-width);
-  height: var(--imported-stub-checkbox-root-height);
+  width: var(--ds-checkbox-size, var(--imported-stub-checkbox-root-width));
+  height: var(--ds-checkbox-size, var(--imported-stub-checkbox-root-height));
 }
 
 .glyph {
   display: inline-flex;
   flex-shrink: 0;
-  width: var(--imported-stub-checkbox-root-width);
-  height: var(--imported-stub-checkbox-root-height);
+  width: var(--ds-checkbox-size, var(--imported-stub-checkbox-root-width));
+  height: var(--ds-checkbox-size, var(--imported-stub-checkbox-root-height));
 }

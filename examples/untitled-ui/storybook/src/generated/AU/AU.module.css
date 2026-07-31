@@ -8,13 +8,13 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  width: var(--imported-stub-au-root-width);
-  height: var(--imported-stub-au-root-height);
+  width: var(--ds-au-size, var(--imported-stub-au-root-width));
+  height: var(--ds-au-size, var(--imported-stub-au-root-height));
 }
 
 .glyph {
   display: inline-flex;
   flex-shrink: 0;
-  width: var(--imported-stub-au-root-width);
-  height: var(--imported-stub-au-root-height);
+  width: var(--ds-au-size, var(--imported-stub-au-root-width));
+  height: var(--ds-au-size, var(--imported-stub-au-root-height));
 }

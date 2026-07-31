@@ -147,6 +147,12 @@
   flex-direction: row-reverse;
 }
 
+.Dot {
+  display: inline-flex;
+  --ds-dot-size: var(--imported-button-base-dot-size);
+  --ds-dot-background-color: var(--imported-button-base-dot-background-color);
+}
+
 .Text {
   color: var(--imported-button-base-text-color);
   font-weight: var(--imported-button-base-text-font-weight);

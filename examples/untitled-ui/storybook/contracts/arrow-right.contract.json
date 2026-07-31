@@ -26,7 +26,10 @@
       "tokens": {
         "width": "{imported.stub-arrow-right.root.width}",
         "height": "{imported.stub-arrow-right.root.height}"
-      }
+      },
+      "overridable": [
+        "size"
+      ]
     }
   },
   "anchors": {

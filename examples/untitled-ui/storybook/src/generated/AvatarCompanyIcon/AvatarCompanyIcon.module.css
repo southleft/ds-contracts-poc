@@ -8,44 +8,68 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  background-image: var(--imported-stub-avatar-company-icon-root-background-image);
+  background-image: var(
+    --ds-avatar-company-icon-background-image,
+    var(--imported-stub-avatar-company-icon-root-background-image)
+  );
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
 
 .size-xl {
-  width: var(--imported-stub-avatar-company-icon-root-width-xl);
-  height: var(--imported-stub-avatar-company-icon-root-height-xl);
+  width: var(--ds-avatar-company-icon-size, var(--imported-stub-avatar-company-icon-root-width-xl));
+  height: var(
+    --ds-avatar-company-icon-size,
+    var(--imported-stub-avatar-company-icon-root-height-xl)
+  );
   border-radius: var(--imported-stub-avatar-company-icon-root-border-radius-xl);
 }
 
 .size-2xl {
-  width: var(--imported-stub-avatar-company-icon-root-width-2xl);
-  height: var(--imported-stub-avatar-company-icon-root-height-2xl);
+  width: var(
+    --ds-avatar-company-icon-size,
+    var(--imported-stub-avatar-company-icon-root-width-2xl)
+  );
+  height: var(
+    --ds-avatar-company-icon-size,
+    var(--imported-stub-avatar-company-icon-root-height-2xl)
+  );
   border-radius: var(--imported-stub-avatar-company-icon-root-border-radius-2xl);
 }
 
 .size-lg {
-  width: var(--imported-stub-avatar-company-icon-root-width-lg);
-  height: var(--imported-stub-avatar-company-icon-root-height-lg);
+  width: var(--ds-avatar-company-icon-size, var(--imported-stub-avatar-company-icon-root-width-lg));
+  height: var(
+    --ds-avatar-company-icon-size,
+    var(--imported-stub-avatar-company-icon-root-height-lg)
+  );
   border-radius: var(--imported-stub-avatar-company-icon-root-border-radius-lg);
 }
 
 .size-md {
-  width: var(--imported-stub-avatar-company-icon-root-width-md);
-  height: var(--imported-stub-avatar-company-icon-root-height-md);
+  width: var(--ds-avatar-company-icon-size, var(--imported-stub-avatar-company-icon-root-width-md));
+  height: var(
+    --ds-avatar-company-icon-size,
+    var(--imported-stub-avatar-company-icon-root-height-md)
+  );
   border-radius: var(--imported-stub-avatar-company-icon-root-border-radius-md);
 }
 
 .size-sm {
-  width: var(--imported-stub-avatar-company-icon-root-width-sm);
-  height: var(--imported-stub-avatar-company-icon-root-height-sm);
+  width: var(--ds-avatar-company-icon-size, var(--imported-stub-avatar-company-icon-root-width-sm));
+  height: var(
+    --ds-avatar-company-icon-size,
+    var(--imported-stub-avatar-company-icon-root-height-sm)
+  );
   border-radius: var(--imported-stub-avatar-company-icon-root-border-radius-sm);
 }
 
 .size-xs {
-  width: var(--imported-stub-avatar-company-icon-root-width-xs);
-  height: var(--imported-stub-avatar-company-icon-root-height-xs);
+  width: var(--ds-avatar-company-icon-size, var(--imported-stub-avatar-company-icon-root-width-xs));
+  height: var(
+    --ds-avatar-company-icon-size,
+    var(--imported-stub-avatar-company-icon-root-height-xs)
+  );
   border-radius: var(--imported-stub-avatar-company-icon-root-border-radius-xs);
 }

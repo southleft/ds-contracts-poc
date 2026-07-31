@@ -88,7 +88,11 @@
       "parts": {
         "Dot": {
           "component": {
-            "id": "ds.dot"
+            "id": "ds.dot",
+            "overrides": {
+              "size": "{imported.button-group-base.dot.size}",
+              "background-color": "{imported.button-group-base.dot.background-color.{state}}"
+            }
           },
           "visibleWhen": {
             "prop": "icon",
@@ -106,7 +110,10 @@
         },
         "plus": {
           "component": {
-            "id": "ds.plus"
+            "id": "ds.plus",
+            "overrides": {
+              "size": "{imported.button-group-base.plus.size}"
+            }
           },
           "visibleWhen": {
             "prop": "icon",

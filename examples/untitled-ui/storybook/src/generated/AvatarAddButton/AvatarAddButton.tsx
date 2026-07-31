@@ -20,7 +20,9 @@ export const AvatarAddButton = forwardRef<HTMLButtonElement, AvatarAddButtonProp
     return (
       <button ref={ref} className={classes} disabled={disabled} {...rest}>
         <div className={styles.Content}>
-          <Plus />
+          <span className={styles.plus}>
+            <Plus />
+          </span>
         </div>
       </button>
     );

@@ -664,6 +664,28 @@
             },
             "rotation": {
               "type": "number"
+            },
+            "arc": {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "number"
+                },
+                "end": {
+                  "type": "number"
+                },
+                "innerRadius": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "start",
+                "end",
+                "innerRadius"
+              ],
+              "additionalProperties": false
             }
           },
           "required": [
@@ -756,7 +778,7 @@
           },
           "additionalProperties": {
             "type": "string",
-            "pattern": "^(-?\\d+(\\.\\d+)?(px|rem|em)?|transparent|inherit|currentColor|#[0-9a-fA-F]{3,8}|rgba?\\([\\d ,./%]+\\))$"
+            "pattern": "^(-?\\d+(\\.\\d+)?(px|rem|em|%)?|transparent|inherit|currentColor|#[0-9a-fA-F]{3,8}|rgba?\\([\\d ,./%]+\\))$"
           }
         },
         "literalsByProp": {
@@ -780,7 +802,7 @@
                   },
                   "additionalProperties": {
                     "type": "string",
-                    "pattern": "^(-?\\d+(\\.\\d+)?(px|rem|em)?|transparent|inherit|currentColor|#[0-9a-fA-F]{3,8}|rgba?\\([\\d ,./%]+\\))$"
+                    "pattern": "^(-?\\d+(\\.\\d+)?(px|rem|em|%)?|transparent|inherit|currentColor|#[0-9a-fA-F]{3,8}|rgba?\\([\\d ,./%]+\\))$"
                   }
                 }
               }
@@ -1019,12 +1041,28 @@
             },
             "text": {
               "type": "string"
+            },
+            "overrides": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {
+                "type": "string",
+                "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+              }
             }
           },
           "required": [
             "id"
           ],
           "additionalProperties": false
+        },
+        "overridable": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "repeat": {
           "type": "object",

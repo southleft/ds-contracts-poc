@@ -27,9 +27,17 @@ export const ButtonGroupBase = forwardRef<HTMLDivElement, ButtonGroupBaseProps>(
       .join(' ');
     return (
       <div ref={ref} className={classes} data-current={current || undefined} {...rest}>
-        {icon === 'dot' ? <Dot /> : null}
+        {icon === 'dot' ? (
+          <span className={styles.Dot}>
+            <Dot />
+          </span>
+        ) : null}
         {icon === 'leading' ? <Circle /> : null}
-        {icon === 'only' ? <Plus /> : null}
+        {icon === 'only' ? (
+          <span className={styles.plus}>
+            <Plus />
+          </span>
+        ) : null}
         {icon === 'false' || icon === 'leading' || icon === 'dot' ? (
           <span className={styles.Text}>Text</span>
         ) : null}

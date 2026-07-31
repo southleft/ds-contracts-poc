@@ -73,6 +73,32 @@
   padding-inline: var(--imported-button-group-base-root-padding-inline-dot);
 }
 
+.Dot {
+  display: inline-flex;
+  --ds-dot-size: var(--imported-button-group-base-dot-size);
+}
+
+.state-default .Dot {
+  --ds-dot-background-color: var(--imported-button-group-base-dot-background-color-default);
+}
+
+.state-focused .Dot {
+  --ds-dot-background-color: var(--imported-button-group-base-dot-background-color-focused);
+}
+
+.state-disabled .Dot {
+  --ds-dot-background-color: var(--imported-button-group-base-dot-background-color-disabled);
+}
+
+.state-hover .Dot {
+  --ds-dot-background-color: var(--imported-button-group-base-dot-background-color-hover);
+}
+
+.plus {
+  display: inline-flex;
+  --ds-plus-size: var(--imported-button-group-base-plus-size);
+}
+
 .Text {
   font-size: var(--imported-button-group-base-text-font-size);
   font-weight: var(--imported-button-group-base-text-font-weight);

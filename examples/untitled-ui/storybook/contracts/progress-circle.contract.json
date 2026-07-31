@@ -225,7 +225,10 @@
       "tokens": {
         "width": "{imported.progress-circle.root.width.{size}}",
         "height": "{imported.progress-circle.root.height.{size}.{shape}}"
-      }
+      },
+      "overridable": [
+        "size"
+      ]
     }
   },
   "anchors": {

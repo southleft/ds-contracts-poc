@@ -102,7 +102,10 @@
       "tokens": {
         "width": "{imported.stub-social-icon.root.width}",
         "height": "{imported.stub-social-icon.root.height}"
-      }
+      },
+      "overridable": [
+        "size"
+      ]
     }
   },
   "anchors": {

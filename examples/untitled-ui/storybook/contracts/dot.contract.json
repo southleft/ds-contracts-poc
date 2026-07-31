@@ -38,9 +38,15 @@
       "tokens": {
         "width": "{imported.stub-dot.root.width}",
         "height": "{imported.stub-dot.root.height}",
-        "background-color": "{imported.stub-dot.root.background-color}",
-        "border-radius": "{imported.stub-dot.root.border-radius}"
-      }
+        "background-color": "{imported.stub-dot.root.background-color}"
+      },
+      "literals": {
+        "border-radius": "50%"
+      },
+      "overridable": [
+        "size",
+        "background-color"
+      ]
     }
   },
   "anchors": {

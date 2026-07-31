@@ -21,20 +21,20 @@
 
 .size-xs {
   border-radius: var(--imported-avatar-add-button-root-border-radius-xs);
-  width: var(--imported-avatar-add-button-root-width-xs);
-  height: var(--imported-avatar-add-button-root-height-xs);
+  width: var(--ds-avatar-add-button-size, var(--imported-avatar-add-button-root-width-xs));
+  height: var(--ds-avatar-add-button-size, var(--imported-avatar-add-button-root-height-xs));
 }
 
 .size-sm {
   border-radius: var(--imported-avatar-add-button-root-border-radius-sm);
-  width: var(--imported-avatar-add-button-root-width-sm);
-  height: var(--imported-avatar-add-button-root-height-sm);
+  width: var(--ds-avatar-add-button-size, var(--imported-avatar-add-button-root-width-sm));
+  height: var(--ds-avatar-add-button-size, var(--imported-avatar-add-button-root-height-sm));
 }
 
 .size-md {
   border-radius: var(--imported-avatar-add-button-root-border-radius-md);
-  width: var(--imported-avatar-add-button-root-width-md);
-  height: var(--imported-avatar-add-button-root-height-md);
+  width: var(--ds-avatar-add-button-size, var(--imported-avatar-add-button-root-width-md));
+  height: var(--ds-avatar-add-button-size, var(--imported-avatar-add-button-root-height-md));
 }
 
 .root:hover:not(:disabled) {
@@ -80,4 +80,9 @@
 
 .size-md .Content {
   top: var(--imported-avatar-add-button-content-top-md);
+}
+
+.plus {
+  display: inline-flex;
+  --ds-plus-size: var(--imported-avatar-add-button-content-plus-size);
 }

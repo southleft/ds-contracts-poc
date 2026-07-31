@@ -79,7 +79,10 @@
       "tokens": {
         "width": "{imported.stub-avatar-online-indicator.root.width.{size}}",
         "height": "{imported.stub-avatar-online-indicator.root.height.{size}}"
-      }
+      },
+      "overridable": [
+        "size"
+      ]
     }
   },
   "anchors": {

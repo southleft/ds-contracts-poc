@@ -8,8 +8,8 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  width: var(--imported-stub-dot-root-width);
-  height: var(--imported-stub-dot-root-height);
-  background-color: var(--imported-stub-dot-root-background-color);
-  border-radius: var(--imported-stub-dot-root-border-radius);
+  width: var(--ds-dot-size, var(--imported-stub-dot-root-width));
+  height: var(--ds-dot-size, var(--imported-stub-dot-root-height));
+  background-color: var(--ds-dot-background-color, var(--imported-stub-dot-root-background-color));
+  border-radius: 50%;
 }

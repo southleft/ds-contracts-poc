@@ -68,6 +68,11 @@
   padding-block: var(--imported-badge-base-root-padding-block-only);
 }
 
+.Avatar {
+  display: inline-flex;
+  --ds-avatar-size: var(--imported-badge-base-avatar-size);
+}
+
 .Text {
   color: var(--imported-badge-base-text-color);
   font-size: var(--imported-badge-base-text-font-size);

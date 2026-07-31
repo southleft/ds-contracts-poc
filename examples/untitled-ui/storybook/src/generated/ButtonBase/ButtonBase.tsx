@@ -24,7 +24,11 @@ export const ButtonBase = forwardRef<HTMLDivElement, ButtonBaseProps>(function B
     .join(' ');
   return (
     <div ref={ref} className={classes} {...rest}>
-      {icon === 'dot' ? <Dot /> : null}
+      {icon === 'dot' ? (
+        <span className={styles.Dot}>
+          <Dot />
+        </span>
+      ) : null}
       {icon === 'leading' || icon === 'only' || icon === 'trailing' ? <Circle /> : null}
       {icon === 'leading' || icon === 'false' || icon === 'trailing' || icon === 'dot' ? (
         <span className={styles.Text}>Button CTA</span>

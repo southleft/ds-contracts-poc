@@ -42,13 +42,13 @@
 }
 
 .size-md {
-  width: var(--imported-toggle-base-root-width-md);
-  height: var(--imported-toggle-base-root-height-md);
+  width: var(--ds-toggle-base-size, var(--imported-toggle-base-root-width-md));
+  height: var(--ds-toggle-base-size, var(--imported-toggle-base-root-height-md));
 }
 
 .size-sm {
-  width: var(--imported-toggle-base-root-width-sm);
-  height: var(--imported-toggle-base-root-height-sm);
+  width: var(--ds-toggle-base-size, var(--imported-toggle-base-root-width-sm));
+  height: var(--ds-toggle-base-size, var(--imported-toggle-base-root-height-sm));
 }
 
 .root:disabled {

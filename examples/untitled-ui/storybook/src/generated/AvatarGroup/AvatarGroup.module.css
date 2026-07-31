@@ -94,3 +94,48 @@
 .size-md .Avatars > * + * {
   margin-left: var(--imported-avatar-group-avatars-gap-md);
 }
+
+.avatar2 {
+  display: inline-flex;
+  --ds-avatar-background-image: var(--imported-avatar-group-avatars-avatar-2-background-image);
+}
+
+.avatar3 {
+  display: inline-flex;
+  --ds-avatar-background-image: var(--imported-avatar-group-avatars-avatar-3-background-image);
+}
+
+.avatar4 {
+  display: inline-flex;
+  --ds-avatar-background-image: var(--imported-avatar-group-avatars-avatar-4-background-image);
+}
+
+.avatar5 {
+  display: inline-flex;
+  --ds-avatar-background-image: var(--imported-avatar-group-avatars-avatar-5-background-image);
+}
+
+.avatar6 {
+  display: inline-flex;
+  --ds-avatar-background-image: var(--imported-avatar-group-avatars-avatar-6-background-image);
+}
+
+.avatar7 {
+  display: inline-flex;
+  --ds-avatar-background-image: var(--imported-avatar-group-avatars-avatar-7-background-image);
+}
+
+.avatar8 {
+  display: inline-flex;
+  --ds-avatar-background-image: var(--imported-avatar-group-avatars-avatar-8-background-image);
+}
+
+.avatar9 {
+  display: inline-flex;
+  --ds-avatar-background-image: var(--imported-avatar-group-avatars-avatar-9-background-image);
+}
+
+.avatar10 {
+  display: inline-flex;
+  --ds-avatar-background-image: var(--imported-avatar-group-avatars-avatar-10-background-image);
+}

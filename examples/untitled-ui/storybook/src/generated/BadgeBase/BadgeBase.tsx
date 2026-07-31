@@ -29,7 +29,9 @@ export const BadgeBase = forwardRef<HTMLDivElement, BadgeBaseProps>(function Bad
       {icon === 'only' ? <Plus /> : null}
       {icon === 'iconLeft' ? <ArrowUp /> : null}
       {icon === 'avatar' ? (
-        <Avatar size="xs" text={false} statusIcon="false" state="default" />
+        <span className={styles.Avatar}>
+          <Avatar size="xs" text={false} statusIcon="false" state="default" />
+        </span>
       ) : null}
       {icon === 'country' ? <AU /> : null}
       {icon === 'dot' ? <Dot size="sm" /> : null}

@@ -2373,6 +2373,16 @@ function partToSpecInner(
       dep: dep.name,
       depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text),
     };
+    // Round 2 iteration 9 — per-instance overrides (component.overrides):
+    // natively a resize / image-fill / paint override on THIS instance, but
+    // the canvas lowering is not carried this round — declared-not-drawn,
+    // ledgered through the existing channelMiss footnote (never a silent
+    // drop; the instance renders the child's own defaults).
+    for (const [channel, ref] of Object.entries(part.component.overrides ?? {})) {
+      (spec.channelMiss ??= []).push(
+        `${name} per-instance override "${channel}" (${ref}): canvas emission not carried this round — the instance draws the child's own defaults`,
+      );
+    }
     // Boolean-toggled component-ref parts (CBDS icon toggles): the instance's
     // visibility binds to the BOOLEAN property like every other part kind.
     applyVisibleWhen(spec, part, contract);

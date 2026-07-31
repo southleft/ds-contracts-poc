@@ -11,33 +11,69 @@
 }
 
 .size-xl {
-  width: var(--imported-stub-avatar-online-indicator-root-width-xl);
-  height: var(--imported-stub-avatar-online-indicator-root-height-xl);
+  width: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-width-xl)
+  );
+  height: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-height-xl)
+  );
 }
 
 .size-2xl {
-  width: var(--imported-stub-avatar-online-indicator-root-width-2xl);
-  height: var(--imported-stub-avatar-online-indicator-root-height-2xl);
+  width: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-width-2xl)
+  );
+  height: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-height-2xl)
+  );
 }
 
 .size-lg {
-  width: var(--imported-stub-avatar-online-indicator-root-width-lg);
-  height: var(--imported-stub-avatar-online-indicator-root-height-lg);
+  width: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-width-lg)
+  );
+  height: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-height-lg)
+  );
 }
 
 .size-md {
-  width: var(--imported-stub-avatar-online-indicator-root-width-md);
-  height: var(--imported-stub-avatar-online-indicator-root-height-md);
+  width: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-width-md)
+  );
+  height: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-height-md)
+  );
 }
 
 .size-sm {
-  width: var(--imported-stub-avatar-online-indicator-root-width-sm);
-  height: var(--imported-stub-avatar-online-indicator-root-height-sm);
+  width: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-width-sm)
+  );
+  height: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-height-sm)
+  );
 }
 
 .size-xs {
-  width: var(--imported-stub-avatar-online-indicator-root-width-xs);
-  height: var(--imported-stub-avatar-online-indicator-root-height-xs);
+  width: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-width-xs)
+  );
+  height: var(
+    --ds-avatar-online-indicator-size,
+    var(--imported-stub-avatar-online-indicator-root-height-xs)
+  );
 }
 
 .glyph {

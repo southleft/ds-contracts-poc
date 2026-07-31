@@ -185,10 +185,10 @@ export const TokensByPropFieldSchema = z.union([
  *  into a token. Bounded grammar: px/rem/em/unitless numbers, hex and
  *  rgb()/rgba() colors, and the CSS keywords transparent/inherit/currentColor. */
 export const LITERAL_VALUE_RE =
-  /^(-?\d+(\.\d+)?(px|rem|em)?|transparent|inherit|currentColor|#[0-9a-fA-F]{3,8}|rgba?\([\d ,./%]+\))$/;
+  /^(-?\d+(\.\d+)?(px|rem|em|%)?|transparent|inherit|currentColor|#[0-9a-fA-F]{3,8}|rgba?\([\d ,./%]+\))$/;
 export const LiteralValueSchema = z
   .string()
-  .regex(LITERAL_VALUE_RE, 'Literal value must be a px/rem/em/number, hex or rgb()/rgba() color, or transparent/inherit/currentColor');
+  .regex(LITERAL_VALUE_RE, 'Literal value must be a px/rem/em/%/number, hex or rgb()/rgba() color, or transparent/inherit/currentColor');
 
 /** v14: the channels a literal may ride — geometry and paint channels where
  *  foreign systems keep component-private literals. Everything else refuses
@@ -660,6 +660,36 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
   'text-emphasis-color': annotated('Figma has no text-emphasis marks.'),
 };
 
+/** PER-INSTANCE OVERRIDE CHANNELS (round 2 iteration 9) — THE REGISTRY.
+ *
+ *  A component-ref part may carry `component.overrides` ONLY for these
+ *  channels, and a contract root may declare `overridable` ONLY for these.
+ *  Each entry names the CSS channels of the CHILD it overrides (the child's
+ *  own declarations become `var(<override var>, <own binding>)` fallback
+ *  chains) and the Figma fact the override is observed from — every override
+ *  value is minted from OBSERVED per-occurrence data, never invented.
+ *  An unregistered channel is REFUSED BY NAME by validateContract. */
+export const REF_OVERRIDE_CHANNELS: Record<string, { css: string[]; note: string }> = {
+  'background-image': {
+    css: ['background-image'],
+    note: 'per-instance IMAGE fill identity (a Figma instance carries its own imageHash — dump v1.9 imageFill observed on the instance node).',
+  },
+  'size': {
+    css: ['width', 'height'],
+    note: 'per-instance box (a Figma instance is freely resizable — observed bbox, SQUARE boxes only: one custom property drives width and height, and any nested part binding the same refs, e.g. a stub glyph).',
+  },
+  'background-color': {
+    css: ['background-color'],
+    note: 'per-instance solid paint (dump v1.7 instancePrimaryFill, fill-shaped) — stub roots declare it (their paint IS the observed instance paint); a real child owns its own paint.',
+  },
+};
+
+/** The override custom property a host sets and a child consumes —
+ *  derived from the CHILD contract id, so nesting different children never
+ *  crosses channels ("ds.avatar" + "size" → "--ds-avatar-size"). */
+export const refOverrideVar = (contractId: string, channel: string): string =>
+  `--${contractId.replace(/[^a-zA-Z0-9]+/g, '-')}-${channel}`;
+
 /** Schema-level value guard for declared facts: never a token ref, never a
  *  CSS injection vector. The per-channel grammar refusal lives in
  *  validateContract (generator level) where messages can name the channel. */
@@ -894,6 +924,19 @@ export const ComponentRefSchema = z.strictObject({
   /** Overrides the child's `children` text prop (code: JSX children;
    *  Figma: TEXT property override on the instance). */
   text: z.string().optional(),
+  /** PER-INSTANCE OVERRIDES (round 2 iteration 9): observed per-occurrence
+   *  facts of THIS usage that diverge from what the child contract renders
+   *  on its own — a Figma instance can carry its own image fill, its own
+   *  box, its own solid paint, and the child contract cannot know them.
+   *  Keys are REF_OVERRIDE_CHANNELS entries; values are token refs (minted
+   *  from the OBSERVED per-occurrence values, axis-substitutable). The
+   *  react-css-modules surface carries them as custom properties set by a
+   *  structural wrapper (refOverrideVar naming) that the child's own CSS
+   *  consumes as var() fallback chains — the child must declare the channel
+   *  in its root part's `overridable` list (refused by name otherwise).
+   *  The canvas emitter ledgers overrides as channelMiss (declared-not-
+   *  drawn) this round. Absent — byte-identical classic behavior. */
+  overrides: z.record(z.string(), TokenRefSchema).optional(),
 });
 
 export interface Part {
@@ -996,6 +1039,16 @@ export interface Part {
   animation?: 'spin' | 'pulse';
   slot?: z.infer<typeof SlotSchema>;
   component?: z.infer<typeof ComponentRefSchema>;
+  /** PER-INSTANCE OVERRIDE CONSUMPTION (round 2 iteration 9, ROOT part
+   *  only): the listed REF_OVERRIDE_CHANNELS this contract's own styling
+   *  consumes through the override custom property (refOverrideVar) with
+   *  its own bindings as the var() fallback — absent override, behavior is
+   *  value-identical to the plain bindings. Declared at propose time from
+   *  the same observed evidence that minted the underlying channels (an
+   *  image fill is per-instance identity in Figma; a minted box is the
+   *  observed box). Hosts may carry `component.overrides` only for channels
+   *  declared here. */
+  overridable?: string[];
   /** v12: the part is an item TEMPLATE repeated over an arrayOf prop (P9).
    *  Requires `component` (the template is a component ref); refusal rules
    *  in emit-react validateContract. */
@@ -1049,6 +1102,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     animation: z.enum(['spin', 'pulse']).optional(),
     slot: SlotSchema.optional(),
     component: ComponentRefSchema.optional(),
+    /** Round 2 iteration 9 (root part only — see Part). */
+    overridable: z.array(z.string()).optional(),
     /** v12 (P9). */
     repeat: RepeatSchema.optional(),
     /** Icon part (v4, gap G6): renders assets/icons/<asset>.svg inline on the

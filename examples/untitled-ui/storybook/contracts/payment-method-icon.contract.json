@@ -69,7 +69,10 @@
       "tokens": {
         "width": "{imported.stub-payment-method-icon.root.width}",
         "height": "{imported.stub-payment-method-icon.root.height}"
-      }
+      },
+      "overridable": [
+        "size"
+      ]
     }
   },
   "anchors": {

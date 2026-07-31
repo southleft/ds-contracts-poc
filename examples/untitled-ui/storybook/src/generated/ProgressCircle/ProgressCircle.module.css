@@ -12,57 +12,57 @@
 }
 
 .size-md {
-  width: var(--imported-progress-circle-root-width-md);
+  width: var(--ds-progress-circle-size, var(--imported-progress-circle-root-width-md));
 }
 
 .size-lg {
-  width: var(--imported-progress-circle-root-width-lg);
+  width: var(--ds-progress-circle-size, var(--imported-progress-circle-root-width-lg));
 }
 
 .size-sm {
-  width: var(--imported-progress-circle-root-width-sm);
+  width: var(--ds-progress-circle-size, var(--imported-progress-circle-root-width-sm));
 }
 
 .size-xs {
-  width: var(--imported-progress-circle-root-width-xs);
+  width: var(--ds-progress-circle-size, var(--imported-progress-circle-root-width-xs));
 }
 
 .shape-circle {
 }
 
 .size-md.shape-circle {
-  height: var(--imported-progress-circle-root-height-md-circle);
+  height: var(--ds-progress-circle-size, var(--imported-progress-circle-root-height-md-circle));
 }
 
 .shape-halfCircle {
 }
 
 .size-md.shape-halfCircle {
-  height: var(--imported-progress-circle-root-height-md-halfCircle);
+  height: var(--ds-progress-circle-size, var(--imported-progress-circle-root-height-md-halfCircle));
 }
 
 .size-lg.shape-circle {
-  height: var(--imported-progress-circle-root-height-lg-circle);
+  height: var(--ds-progress-circle-size, var(--imported-progress-circle-root-height-lg-circle));
 }
 
 .size-lg.shape-halfCircle {
-  height: var(--imported-progress-circle-root-height-lg-halfCircle);
+  height: var(--ds-progress-circle-size, var(--imported-progress-circle-root-height-lg-halfCircle));
 }
 
 .size-sm.shape-circle {
-  height: var(--imported-progress-circle-root-height-sm-circle);
+  height: var(--ds-progress-circle-size, var(--imported-progress-circle-root-height-sm-circle));
 }
 
 .size-sm.shape-halfCircle {
-  height: var(--imported-progress-circle-root-height-sm-halfCircle);
+  height: var(--ds-progress-circle-size, var(--imported-progress-circle-root-height-sm-halfCircle));
 }
 
 .size-xs.shape-circle {
-  height: var(--imported-progress-circle-root-height-xs-circle);
+  height: var(--ds-progress-circle-size, var(--imported-progress-circle-root-height-xs-circle));
 }
 
 .size-xs.shape-halfCircle {
-  height: var(--imported-progress-circle-root-height-xs-halfCircle);
+  height: var(--ds-progress-circle-size, var(--imported-progress-circle-root-height-xs-halfCircle));
 }
 
 .Ring {

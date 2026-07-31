@@ -68,7 +68,10 @@
           "parts": {
             "plus": {
               "component": {
-                "id": "ds.plus"
+                "id": "ds.plus",
+                "overrides": {
+                  "size": "{imported.avatar-add-button.content-plus.size}"
+                }
               }
             }
           },
@@ -94,6 +97,9 @@
         "width": "{imported.avatar-add-button.root.width.{size}}",
         "height": "{imported.avatar-add-button.root.height.{size}}"
       },
+      "overridable": [
+        "size"
+      ],
       "states": {
         "hover": {
           "background-color": "{imported.avatar-add-button.state-hover.background-color}"

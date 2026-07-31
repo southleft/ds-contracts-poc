@@ -398,7 +398,10 @@
         "border-radius": "{imported.shared.size-8}",
         "width": "{imported.slider.root.width}",
         "height": "{imported.slider.root.height.{label}}"
-      }
+      },
+      "overridable": [
+        "size"
+      ]
     }
   },
   "anchors": {

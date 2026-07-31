@@ -29,49 +29,61 @@
 }
 
 .root[data-placeholder][data-text] {
-  background-image: var(--imported-avatar-root-background-image-true-true);
+  background-image: var(
+    --ds-avatar-background-image,
+    var(--imported-avatar-root-background-image-true-true)
+  );
 }
 
 .root[data-placeholder]:not([data-text]) {
-  background-image: var(--imported-avatar-root-background-image-true-false);
+  background-image: var(
+    --ds-avatar-background-image,
+    var(--imported-avatar-root-background-image-true-false)
+  );
 }
 
 .root:not([data-placeholder])[data-text] {
-  background-image: var(--imported-avatar-root-background-image-false-true);
+  background-image: var(
+    --ds-avatar-background-image,
+    var(--imported-avatar-root-background-image-false-true)
+  );
 }
 
 .root:not([data-placeholder]):not([data-text]) {
-  background-image: var(--imported-avatar-root-background-image-false-false);
+  background-image: var(
+    --ds-avatar-background-image,
+    var(--imported-avatar-root-background-image-false-false)
+  );
 }
 
 .size-xl {
-  width: var(--imported-avatar-root-width-xl);
-  height: var(--imported-avatar-root-height-xl);
+  width: var(--ds-avatar-size, var(--imported-avatar-root-width-xl));
+  height: var(--ds-avatar-size, var(--imported-avatar-root-height-xl));
 }
 
 .size-2xl {
-  width: var(--imported-avatar-root-width-2xl);
-  height: var(--imported-avatar-root-height-2xl);
+  width: var(--ds-avatar-size, var(--imported-avatar-root-width-2xl));
+  height: var(--ds-avatar-size, var(--imported-avatar-root-height-2xl));
 }
 
 .size-lg {
-  width: var(--imported-avatar-root-width-lg);
-  height: var(--imported-avatar-root-height-lg);
+  width: var(--ds-avatar-size, var(--imported-avatar-root-width-lg));
+  height: var(--ds-avatar-size, var(--imported-avatar-root-height-lg));
 }
 
 .size-md {
-  width: var(--imported-avatar-root-width-md);
-  height: var(--imported-avatar-root-height-md);
+  width: var(--ds-avatar-size, var(--imported-avatar-root-width-md));
+  height: var(--ds-avatar-size, var(--imported-avatar-root-height-md));
 }
 
 .size-sm {
-  width: var(--imported-avatar-root-width-sm);
-  height: var(--imported-avatar-root-height-sm);
+  width: var(--ds-avatar-size, var(--imported-avatar-root-width-sm));
+  height: var(--ds-avatar-size, var(--imported-avatar-root-height-sm));
 }
 
 .size-xs {
-  width: var(--imported-avatar-root-width-xs);
-  height: var(--imported-avatar-root-height-xs);
+  width: var(--ds-avatar-size, var(--imported-avatar-root-width-xs));
+  height: var(--ds-avatar-size, var(--imported-avatar-root-height-xs));
 }
 
 .user {

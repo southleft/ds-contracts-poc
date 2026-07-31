@@ -174,7 +174,10 @@
       "tokens": {
         "width": "{imported.stub-checkbox.root.width}",
         "height": "{imported.stub-checkbox.root.height}"
-      }
+      },
+      "overridable": [
+        "size"
+      ]
     }
   },
   "anchors": {

@@ -80,7 +80,11 @@
       "parts": {
         "Dot": {
           "component": {
-            "id": "ds.dot"
+            "id": "ds.dot",
+            "overrides": {
+              "size": "{imported.button-base.dot.size}",
+              "background-color": "{imported.button-base.dot.background-color}"
+            }
           },
           "visibleWhen": {
             "prop": "icon",

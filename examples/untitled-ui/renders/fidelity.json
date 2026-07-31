@@ -2,7 +2,7 @@
  {
   "set": "badge-base",
   "variant": "icon_avatar",
-  "score": 71.76
+  "score": 95.36
  },
  {
   "set": "badge-base",
@@ -42,7 +42,7 @@
  {
   "set": "button-base",
   "variant": "size_lg_icon_dot",
-  "score": 85.74
+  "score": 87.83
  },
  {
   "set": "button-base",
@@ -67,7 +67,7 @@
  {
   "set": "button-base",
   "variant": "size_md_icon_dot",
-  "score": 86.41
+  "score": 88.16
  },
  {
   "set": "button-base",
@@ -77,7 +77,7 @@
  {
   "set": "button-base",
   "variant": "size_md_icon_leading",
-  "score": 86.66
+  "score": 86.65
  },
  {
   "set": "button-base",
@@ -92,7 +92,7 @@
  {
   "set": "button-base",
   "variant": "size_sm_icon_dot",
-  "score": 83.83
+  "score": 85.73
  },
  {
   "set": "button-base",
@@ -112,12 +112,12 @@
  {
   "set": "button-base",
   "variant": "size_sm_icon_trailing",
-  "score": 84.95
+  "score": 84.93
  },
  {
   "set": "button-base",
   "variant": "size_xl_icon_dot",
-  "score": 87.63
+  "score": 89.54
  },
  {
   "set": "button-base",
@@ -137,7 +137,7 @@
  {
   "set": "button-base",
   "variant": "size_xl_icon_trailing",
-  "score": 88.15
+  "score": 88.13
  },
  {
   "set": "toggle-base",
@@ -500,62 +500,62 @@
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_false_more_users_false",
-  "score": 62.19
+  "score": 95.19
  },
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_false_more_users_true",
-  "score": 61.6
+  "score": 68.18
  },
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_true_more_users_false",
-  "score": 73.79
+  "score": 96.33
  },
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_true_more_users_true",
-  "score": 74.41
+  "score": 94.63
  },
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_false_more_users_false",
-  "score": 64.66
+  "score": 95.51
  },
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_false_more_users_true",
-  "score": 66.11
+  "score": 74.11
  },
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_true_more_users_false",
-  "score": 74.56
+  "score": 95.51
  },
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_true_more_users_true",
-  "score": 76.05
+  "score": 93.53
  },
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_false_more_users_false",
-  "score": 68.66
+  "score": 95.41
  },
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_false_more_users_true",
-  "score": 70.06
+  "score": 77.89
  },
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_true_more_users_false",
-  "score": 76.8
+  "score": 94.78
  },
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_true_more_users_true",
-  "score": 78.61
+  "score": 94.63
  },
  {
   "set": "tooltip",
@@ -2293,12 +2293,12 @@
  {
   "set": "avatar-add-button",
   "variant": "size_md_state_default",
-  "score": 96.92
+  "score": 96.25
  },
  {
   "set": "avatar-add-button",
   "variant": "size_md_state_disabled",
-  "score": 98.52
+  "score": 97.74
  },
  {
   "set": "avatar-add-button",
@@ -2315,12 +2315,12 @@
  {
   "set": "avatar-add-button",
   "variant": "size_sm_state_default",
-  "score": 95.2
+  "score": 94.07
  },
  {
   "set": "avatar-add-button",
   "variant": "size_sm_state_disabled",
-  "score": 97.81
+  "score": 96.69
  },
  {
   "set": "avatar-add-button",
@@ -2337,12 +2337,12 @@
  {
   "set": "avatar-add-button",
   "variant": "size_xs_state_default",
-  "score": 92.2
+  "score": 90.45
  },
  {
   "set": "avatar-add-button",
   "variant": "size_xs_state_disabled",
-  "score": 96.46
+  "score": 94.06
  },
  {
   "set": "avatar-add-button",
@@ -2359,22 +2359,22 @@
  {
   "set": "button-group-base",
   "variant": "current_false_icon_dot_state_default",
-  "score": 76.59
+  "score": 76.14
  },
  {
   "set": "button-group-base",
   "variant": "current_false_icon_dot_state_disabled",
-  "score": 78.87
+  "score": 78.75
  },
  {
   "set": "button-group-base",
   "variant": "current_false_icon_dot_state_focused",
-  "score": 77.29
+  "score": 77.17
  },
  {
   "set": "button-group-base",
   "variant": "current_false_icon_dot_state_hover",
-  "score": 77.29
+  "score": 77.17
  },
  {
   "set": "button-group-base",
@@ -2419,42 +2419,42 @@
  {
   "set": "button-group-base",
   "variant": "current_false_icon_only_state_default",
-  "score": 80.94
+  "score": 82.91
  },
  {
   "set": "button-group-base",
   "variant": "current_false_icon_only_state_disabled",
-  "score": 82.6
+  "score": 84.54
  },
  {
   "set": "button-group-base",
   "variant": "current_false_icon_only_state_focused",
-  "score": 81.49
+  "score": 82.69
  },
  {
   "set": "button-group-base",
   "variant": "current_false_icon_only_state_hover",
-  "score": 81.49
+  "score": 82.69
  },
  {
   "set": "button-group-base",
   "variant": "current_true_icon_dot_state_default",
-  "score": 77.23
+  "score": 77.05
  },
  {
   "set": "button-group-base",
   "variant": "current_true_icon_dot_state_disabled",
-  "score": 79.93
+  "score": 80.11
  },
  {
   "set": "button-group-base",
   "variant": "current_true_icon_dot_state_focused",
-  "score": 77.23
+  "score": 77.05
  },
  {
   "set": "button-group-base",
   "variant": "current_true_icon_dot_state_hover",
-  "score": 77.23
+  "score": 77.05
  },
  {
   "set": "button-group-base",
@@ -2499,22 +2499,22 @@
  {
   "set": "button-group-base",
   "variant": "current_true_icon_only_state_default",
-  "score": 81.35
+  "score": 82.39
  },
  {
   "set": "button-group-base",
   "variant": "current_true_icon_only_state_disabled",
-  "score": 83.86
+  "score": 84.86
  },
  {
   "set": "button-group-base",
   "variant": "current_true_icon_only_state_focused",
-  "score": 81.35
+  "score": 82.39
  },
  {
   "set": "button-group-base",
   "variant": "current_true_icon_only_state_hover",
-  "score": 81.35
+  "score": 82.39
  },
  {
   "set": "social-button",
