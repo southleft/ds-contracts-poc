@@ -1,0 +1,860 @@
+{
+ "meta": {
+  "probe": "pc-ring-fill",
+  "probeCss": "#root [class*=\"Background\"],#root [class*=\"Line\"]{width:100% !important;height:100% !important}",
+  "clipMargin": 8,
+  "sets": [
+   "progress-circle"
+  ]
+ },
+ "rows": [
+  {
+   "set": "progress-circle",
+   "variant": "size_lg_shape_circle_label_false",
+   "comp": "ProgressCircle",
+   "score": 86.59,
+   "committed": 78.79,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    280,
+    280
+   ],
+   "total": 78400,
+   "bad": 10517,
+   "missing": 5910,
+   "extra": 3938,
+   "wrong": 669,
+   "unreachable": 0,
+   "inText": 1754,
+   "inGlyph": 0,
+   "areaText": 6588,
+   "areaGlyph": 0,
+   "drawn": [
+    280,
+    280
+   ],
+   "root": [
+    280,
+    280
+   ],
+   "clip": [
+    296,
+    296
+   ],
+   "refTrue": [
+    281,
+    280
+   ],
+   "refOverflow": [
+    1,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_lg_shape_circle_label_true",
+   "comp": "ProgressCircle",
+   "score": 88.03,
+   "committed": 80.24,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    280,
+    280
+   ],
+   "total": 78400,
+   "bad": 9382,
+   "missing": 5089,
+   "extra": 3374,
+   "wrong": 919,
+   "unreachable": 0,
+   "inText": 619,
+   "inGlyph": 0,
+   "areaText": 8222,
+   "areaGlyph": 0,
+   "drawn": [
+    280,
+    280
+   ],
+   "root": [
+    280,
+    280
+   ],
+   "clip": [
+    296,
+    296
+   ],
+   "refTrue": [
+    281,
+    280
+   ],
+   "refOverflow": [
+    1,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_lg_shape_half_circle_label_false",
+   "comp": "ProgressCircle",
+   "score": 85.99,
+   "committed": 87.52,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    280,
+    266
+   ],
+   "total": 74480,
+   "bad": 10436,
+   "missing": 4136,
+   "extra": 4325,
+   "wrong": 1975,
+   "unreachable": 0,
+   "inText": 1428,
+   "inGlyph": 0,
+   "areaText": 6588,
+   "areaGlyph": 0,
+   "drawn": [
+    280,
+    154
+   ],
+   "root": [
+    280,
+    154
+   ],
+   "clip": [
+    296,
+    282
+   ],
+   "refTrue": [
+    280,
+    266
+   ],
+   "refOverflow": [
+    0,
+    112
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_lg_shape_half_circle_label_true",
+   "comp": "ProgressCircle",
+   "score": 85.9,
+   "committed": 87.42,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    280,
+    266
+   ],
+   "total": 74480,
+   "bad": 10499,
+   "missing": 4046,
+   "extra": 4189,
+   "wrong": 2264,
+   "unreachable": 0,
+   "inText": 2162,
+   "inGlyph": 0,
+   "areaText": 8222,
+   "areaGlyph": 0,
+   "drawn": [
+    280,
+    154
+   ],
+   "root": [
+    280,
+    154
+   ],
+   "clip": [
+    296,
+    282
+   ],
+   "refTrue": [
+    280,
+    170
+   ],
+   "refOverflow": [
+    0,
+    16
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_md_shape_circle_label_false",
+   "comp": "ProgressCircle",
+   "score": 87.05,
+   "committed": 87.05,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    240,
+    240
+   ],
+   "total": 57600,
+   "bad": 7460,
+   "missing": 4242,
+   "extra": 2704,
+   "wrong": 514,
+   "unreachable": 0,
+   "inText": 1002,
+   "inGlyph": 0,
+   "areaText": 3726,
+   "areaGlyph": 0,
+   "drawn": [
+    240,
+    240
+   ],
+   "root": [
+    240,
+    240
+   ],
+   "clip": [
+    256,
+    256
+   ],
+   "refTrue": [
+    240,
+    240
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_md_shape_circle_label_true",
+   "comp": "ProgressCircle",
+   "score": 88.14,
+   "committed": 88.14,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    240,
+    240
+   ],
+   "total": 57600,
+   "bad": 6833,
+   "missing": 3670,
+   "extra": 2415,
+   "wrong": 748,
+   "unreachable": 0,
+   "inText": 428,
+   "inGlyph": 0,
+   "areaText": 5360,
+   "areaGlyph": 0,
+   "drawn": [
+    240,
+    240
+   ],
+   "root": [
+    240,
+    240
+   ],
+   "clip": [
+    256,
+    256
+   ],
+   "refTrue": [
+    240,
+    240
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_md_shape_half_circle_label_false",
+   "comp": "ProgressCircle",
+   "score": 86.64,
+   "committed": 86.64,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    240,
+    228
+   ],
+   "total": 54720,
+   "bad": 7308,
+   "missing": 2905,
+   "extra": 2931,
+   "wrong": 1472,
+   "unreachable": 0,
+   "inText": 752,
+   "inGlyph": 0,
+   "areaText": 3726,
+   "areaGlyph": 0,
+   "drawn": [
+    240,
+    132
+   ],
+   "root": [
+    240,
+    132
+   ],
+   "clip": [
+    256,
+    244
+   ],
+   "refTrue": [
+    240,
+    228
+   ],
+   "refOverflow": [
+    0,
+    96
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_md_shape_half_circle_label_true",
+   "comp": "ProgressCircle",
+   "score": 86.02,
+   "committed": 86.02,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    240,
+    228
+   ],
+   "total": 54720,
+   "bad": 7651,
+   "missing": 3083,
+   "extra": 2919,
+   "wrong": 1649,
+   "unreachable": 0,
+   "inText": 1366,
+   "inGlyph": 0,
+   "areaText": 5360,
+   "areaGlyph": 0,
+   "drawn": [
+    240,
+    132
+   ],
+   "root": [
+    240,
+    132
+   ],
+   "clip": [
+    256,
+    244
+   ],
+   "refTrue": [
+    240,
+    170
+   ],
+   "refOverflow": [
+    0,
+    38
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_sm_shape_circle_label_false",
+   "comp": "ProgressCircle",
+   "score": 87.19,
+   "committed": 85.08,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    200,
+    200
+   ],
+   "total": 40000,
+   "bad": 5125,
+   "missing": 2930,
+   "extra": 1821,
+   "wrong": 374,
+   "unreachable": 0,
+   "inText": 702,
+   "inGlyph": 0,
+   "areaText": 2622,
+   "areaGlyph": 0,
+   "drawn": [
+    200,
+    200
+   ],
+   "root": [
+    200,
+    200
+   ],
+   "clip": [
+    216,
+    216
+   ],
+   "refTrue": [
+    200,
+    200
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_sm_shape_circle_label_true",
+   "comp": "ProgressCircle",
+   "score": 87.83,
+   "committed": 85.59,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    200,
+    200
+   ],
+   "total": 40000,
+   "bad": 4867,
+   "missing": 2611,
+   "extra": 1641,
+   "wrong": 615,
+   "unreachable": 0,
+   "inText": 451,
+   "inGlyph": 0,
+   "areaText": 3880,
+   "areaGlyph": 0,
+   "drawn": [
+    200,
+    200
+   ],
+   "root": [
+    200,
+    200
+   ],
+   "clip": [
+    216,
+    216
+   ],
+   "refTrue": [
+    200,
+    200
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_sm_shape_half_circle_label_false",
+   "comp": "ProgressCircle",
+   "score": 86.79,
+   "committed": 86.11,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    200,
+    190
+   ],
+   "total": 38000,
+   "bad": 5020,
+   "missing": 2027,
+   "extra": 1983,
+   "wrong": 1010,
+   "unreachable": 0,
+   "inText": 461,
+   "inGlyph": 0,
+   "areaText": 2622,
+   "areaGlyph": 0,
+   "drawn": [
+    200,
+    110
+   ],
+   "root": [
+    200,
+    110
+   ],
+   "clip": [
+    216,
+    206
+   ],
+   "refTrue": [
+    200,
+    190
+   ],
+   "refOverflow": [
+    0,
+    80
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_sm_shape_half_circle_label_true",
+   "comp": "ProgressCircle",
+   "score": 86.07,
+   "committed": 85.58,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    200,
+    190
+   ],
+   "total": 38000,
+   "bad": 5293,
+   "missing": 2159,
+   "extra": 1992,
+   "wrong": 1142,
+   "unreachable": 0,
+   "inText": 940,
+   "inGlyph": 0,
+   "areaText": 3880,
+   "areaGlyph": 0,
+   "drawn": [
+    200,
+    110
+   ],
+   "root": [
+    200,
+    110
+   ],
+   "clip": [
+    216,
+    206
+   ],
+   "refTrue": [
+    200,
+    170
+   ],
+   "refOverflow": [
+    0,
+    60
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_xs_shape_circle_label_false",
+   "comp": "ProgressCircle",
+   "score": 87.3,
+   "committed": 86.33,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    160,
+    160
+   ],
+   "total": 25600,
+   "bad": 3250,
+   "missing": 1867,
+   "extra": 1090,
+   "wrong": 293,
+   "unreachable": 0,
+   "inText": 436,
+   "inGlyph": 0,
+   "areaText": 1767,
+   "areaGlyph": 0,
+   "drawn": [
+    160,
+    160
+   ],
+   "root": [
+    160,
+    160
+   ],
+   "clip": [
+    176,
+    176
+   ],
+   "refTrue": [
+    160,
+    160
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_xs_shape_circle_label_true",
+   "comp": "ProgressCircle",
+   "score": 87.61,
+   "committed": 86.49,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    160,
+    160
+   ],
+   "total": 25600,
+   "bad": 3172,
+   "missing": 1668,
+   "extra": 997,
+   "wrong": 507,
+   "unreachable": 0,
+   "inText": 377,
+   "inGlyph": 0,
+   "areaText": 3025,
+   "areaGlyph": 0,
+   "drawn": [
+    160,
+    160
+   ],
+   "root": [
+    160,
+    160
+   ],
+   "clip": [
+    176,
+    176
+   ],
+   "refTrue": [
+    160,
+    160
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_xs_shape_half_circle_label_false",
+   "comp": "ProgressCircle",
+   "score": 87.06,
+   "committed": 88.36,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    160,
+    152
+   ],
+   "total": 24320,
+   "bad": 3146,
+   "missing": 1316,
+   "extra": 1186,
+   "wrong": 644,
+   "unreachable": 0,
+   "inText": 230,
+   "inGlyph": 0,
+   "areaText": 1767,
+   "areaGlyph": 0,
+   "drawn": [
+    160,
+    88
+   ],
+   "root": [
+    160,
+    88
+   ],
+   "clip": [
+    176,
+    168
+   ],
+   "refTrue": [
+    160,
+    152
+   ],
+   "refOverflow": [
+    0,
+    64
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "progress-circle",
+   "variant": "size_xs_shape_half_circle_label_true",
+   "comp": "ProgressCircle",
+   "score": 85.72,
+   "committed": 87.84,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    160,
+    152
+   ],
+   "total": 24320,
+   "bad": 3472,
+   "missing": 1556,
+   "extra": 1199,
+   "wrong": 717,
+   "unreachable": 0,
+   "inText": 556,
+   "inGlyph": 0,
+   "areaText": 3025,
+   "areaGlyph": 0,
+   "drawn": [
+    160,
+    88
+   ],
+   "root": [
+    160,
+    88
+   ],
+   "clip": [
+    176,
+    168
+   ],
+   "refTrue": [
+    160,
+    152
+   ],
+   "refOverflow": [
+    0,
+    64
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  }
+ ]
+}

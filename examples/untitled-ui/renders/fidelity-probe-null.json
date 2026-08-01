@@ -1,0 +1,3618 @@
+{
+ "meta": {
+  "probe": "null",
+  "probeCss": null,
+  "clipMargin": 8,
+  "sets": [
+   "button-group-base",
+   "tooltip",
+   "badge-base"
+  ]
+ },
+ "rows": [
+  {
+   "set": "badge-base",
+   "variant": "icon_avatar",
+   "comp": "BadgeBase",
+   "score": 92.8,
+   "committed": 92.8,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    65,
+    22
+   ],
+   "total": 1430,
+   "bad": 103,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 103,
+   "unreachable": 0,
+   "inText": 88,
+   "inGlyph": 0,
+   "areaText": 578,
+   "areaGlyph": 0,
+   "drawn": [
+    65,
+    22
+   ],
+   "root": [
+    64.09,
+    22
+   ],
+   "clip": [
+    80.09,
+    38
+   ],
+   "refTrue": [
+    65,
+    22
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "badge-base",
+   "variant": "icon_country",
+   "comp": "BadgeBase",
+   "score": 88.18,
+   "committed": 88.18,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    65,
+    22
+   ],
+   "total": 1430,
+   "bad": 169,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 169,
+   "unreachable": 0,
+   "inText": 88,
+   "inGlyph": 81,
+   "areaText": 578,
+   "areaGlyph": 324,
+   "drawn": [
+    65,
+    22
+   ],
+   "root": [
+    64.09,
+    22
+   ],
+   "clip": [
+    80.09,
+    38
+   ],
+   "refTrue": [
+    65,
+    22
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "badge-base",
+   "variant": "icon_dot",
+   "comp": "BadgeBase",
+   "score": 92.73,
+   "committed": 92.73,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    60,
+    22
+   ],
+   "total": 1320,
+   "bad": 96,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 96,
+   "unreachable": 0,
+   "inText": 88,
+   "inGlyph": 0,
+   "areaText": 578,
+   "areaGlyph": 0,
+   "drawn": [
+    60,
+    22
+   ],
+   "root": [
+    59.09,
+    22
+   ],
+   "clip": [
+    75.09,
+    38
+   ],
+   "refTrue": [
+    60,
+    22
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "badge-base",
+   "variant": "icon_false",
+   "comp": "BadgeBase",
+   "score": 91.67,
+   "committed": 91.67,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    22
+   ],
+   "total": 1056,
+   "bad": 88,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 88,
+   "unreachable": 0,
+   "inText": 88,
+   "inGlyph": 0,
+   "areaText": 578,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    22
+   ],
+   "root": [
+    47.09,
+    22
+   ],
+   "clip": [
+    63.09,
+    38
+   ],
+   "refTrue": [
+    48,
+    22
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "badge-base",
+   "variant": "icon_icon_left",
+   "comp": "BadgeBase",
+   "score": 90.32,
+   "committed": 90.32,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    62,
+    22
+   ],
+   "total": 1364,
+   "bad": 132,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 132,
+   "unreachable": 0,
+   "inText": 88,
+   "inGlyph": 44,
+   "areaText": 578,
+   "areaGlyph": 196,
+   "drawn": [
+    62,
+    22
+   ],
+   "root": [
+    61.09,
+    22
+   ],
+   "clip": [
+    77.09,
+    38
+   ],
+   "refTrue": [
+    62,
+    22
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "badge-base",
+   "variant": "icon_icon_right",
+   "comp": "BadgeBase",
+   "score": 90.47,
+   "committed": 90.47,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    62,
+    22
+   ],
+   "total": 1364,
+   "bad": 130,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 130,
+   "unreachable": 0,
+   "inText": 88,
+   "inGlyph": 42,
+   "areaText": 578,
+   "areaGlyph": 210,
+   "drawn": [
+    62,
+    22
+   ],
+   "root": [
+    61.09,
+    22
+   ],
+   "clip": [
+    77.09,
+    38
+   ],
+   "refTrue": [
+    62,
+    22
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "badge-base",
+   "variant": "icon_only",
+   "comp": "BadgeBase",
+   "score": 93,
+   "committed": 93,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    20,
+    20
+   ],
+   "total": 400,
+   "bad": 28,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 28,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 28,
+   "areaText": 0,
+   "areaGlyph": 196,
+   "drawn": [
+    20,
+    20
+   ],
+   "root": [
+    20,
+    20
+   ],
+   "clip": [
+    36,
+    36
+   ],
+   "refTrue": [
+    20,
+    20
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "badge-base",
+   "variant": "icon_x_close",
+   "comp": "BadgeBase",
+   "score": 91.5,
+   "committed": 91.5,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    62,
+    22
+   ],
+   "total": 1364,
+   "bad": 116,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 116,
+   "unreachable": 0,
+   "inText": 88,
+   "inGlyph": 28,
+   "areaText": 578,
+   "areaGlyph": 210,
+   "drawn": [
+    62,
+    22
+   ],
+   "root": [
+    61.09,
+    22
+   ],
+   "clip": [
+    77.09,
+    38
+   ],
+   "refTrue": [
+    62,
+    22
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_bottom_center",
+   "comp": "Tooltip",
+   "score": 90.04,
+   "committed": 90.04,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.829268292682927,
+   "frame": [
+    334,
+    103
+   ],
+   "total": 34402,
+   "bad": 3425,
+   "missing": 1737,
+   "extra": 7,
+   "wrong": 1681,
+   "unreachable": 0,
+   "inText": 1841,
+   "inGlyph": 0,
+   "areaText": 16111,
+   "areaGlyph": 0,
+   "drawn": [
+    328,
+    106
+   ],
+   "root": [
+    328,
+    106
+   ],
+   "clip": [
+    344,
+    122
+   ],
+   "refTrue": [
+    352,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_bottom_left",
+   "comp": "Tooltip",
+   "score": 90.04,
+   "committed": 90.04,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.829268292682927,
+   "frame": [
+    334,
+    103
+   ],
+   "total": 34402,
+   "bad": 3425,
+   "missing": 1737,
+   "extra": 7,
+   "wrong": 1681,
+   "unreachable": 0,
+   "inText": 1841,
+   "inGlyph": 0,
+   "areaText": 16111,
+   "areaGlyph": 0,
+   "drawn": [
+    328,
+    106
+   ],
+   "root": [
+    328,
+    106
+   ],
+   "clip": [
+    344,
+    122
+   ],
+   "refTrue": [
+    352,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_bottom_right",
+   "comp": "Tooltip",
+   "score": 90.04,
+   "committed": 90.04,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.829268292682927,
+   "frame": [
+    334,
+    103
+   ],
+   "total": 34402,
+   "bad": 3425,
+   "missing": 1737,
+   "extra": 7,
+   "wrong": 1681,
+   "unreachable": 0,
+   "inText": 1841,
+   "inGlyph": 0,
+   "areaText": 16111,
+   "areaGlyph": 0,
+   "drawn": [
+    328,
+    106
+   ],
+   "root": [
+    328,
+    106
+   ],
+   "clip": [
+    344,
+    122
+   ],
+   "refTrue": [
+    352,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_left",
+   "comp": "Tooltip",
+   "score": 88.87,
+   "committed": 88.87,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.8404907975460123,
+   "frame": [
+    329,
+    114
+   ],
+   "total": 37506,
+   "bad": 4175,
+   "missing": 701,
+   "extra": 225,
+   "wrong": 3249,
+   "unreachable": 570,
+   "inText": 2769,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    326,
+    100
+   ],
+   "root": [
+    326,
+    100
+   ],
+   "clip": [
+    342,
+    116
+   ],
+   "refTrue": [
+    350,
+    124
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_right",
+   "comp": "Tooltip",
+   "score": 84.79,
+   "committed": 84.79,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.8404907975460123,
+   "frame": [
+    338,
+    114
+   ],
+   "total": 38532,
+   "bad": 5859,
+   "missing": 1405,
+   "extra": 1113,
+   "wrong": 3341,
+   "unreachable": 631,
+   "inText": 2920,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    326,
+    100
+   ],
+   "root": [
+    326,
+    100
+   ],
+   "clip": [
+    345.88,
+    116
+   ],
+   "refTrue": [
+    350,
+    116
+   ],
+   "refOverflow": [
+    24,
+    16
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_left",
+   "comp": "Tooltip",
+   "score": 90.51,
+   "committed": 90.51,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.8404907975460123,
+   "frame": [
+    329,
+    100
+   ],
+   "total": 32900,
+   "bad": 3123,
+   "missing": 1843,
+   "extra": 31,
+   "wrong": 1249,
+   "unreachable": 570,
+   "inText": 2427,
+   "inGlyph": 0,
+   "areaText": 16021,
+   "areaGlyph": 0,
+   "drawn": [
+    326,
+    100
+   ],
+   "root": [
+    326,
+    100
+   ],
+   "clip": [
+    342,
+    116
+   ],
+   "refTrue": [
+    350,
+    124
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_right",
+   "comp": "Tooltip",
+   "score": 91.72,
+   "committed": 91.72,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.8404907975460123,
+   "frame": [
+    329,
+    100
+   ],
+   "total": 32900,
+   "bad": 2725,
+   "missing": 877,
+   "extra": 24,
+   "wrong": 1824,
+   "unreachable": 629,
+   "inText": 2040,
+   "inGlyph": 0,
+   "areaText": 16021,
+   "areaGlyph": 0,
+   "drawn": [
+    326,
+    100
+   ],
+   "root": [
+    326,
+    100
+   ],
+   "clip": [
+    345.88,
+    116
+   ],
+   "refTrue": [
+    350,
+    116
+   ],
+   "refOverflow": [
+    24,
+    16
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_bottom_center",
+   "comp": "Tooltip",
+   "score": 88.57,
+   "committed": 88.57,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    116
+   ],
+   "total": 37816,
+   "bad": 4321,
+   "missing": 1800,
+   "extra": 53,
+   "wrong": 2468,
+   "unreachable": 0,
+   "inText": 2315,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    106
+   ],
+   "root": [
+    320,
+    106
+   ],
+   "clip": [
+    336,
+    122
+   ],
+   "refTrue": [
+    344,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_bottom_left",
+   "comp": "Tooltip",
+   "score": 88.57,
+   "committed": 88.57,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    116
+   ],
+   "total": 37816,
+   "bad": 4321,
+   "missing": 1800,
+   "extra": 53,
+   "wrong": 2468,
+   "unreachable": 0,
+   "inText": 2315,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    106
+   ],
+   "root": [
+    320,
+    106
+   ],
+   "clip": [
+    336,
+    122
+   ],
+   "refTrue": [
+    344,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_bottom_right",
+   "comp": "Tooltip",
+   "score": 88.57,
+   "committed": 88.57,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    116
+   ],
+   "total": 37816,
+   "bad": 4321,
+   "missing": 1800,
+   "extra": 53,
+   "wrong": 2468,
+   "unreachable": 0,
+   "inText": 2315,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    106
+   ],
+   "root": [
+    320,
+    106
+   ],
+   "clip": [
+    336,
+    122
+   ],
+   "refTrue": [
+    344,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_none",
+   "comp": "Tooltip",
+   "score": 90.94,
+   "committed": 90.94,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    114
+   ],
+   "total": 37164,
+   "bad": 3368,
+   "missing": 901,
+   "extra": 60,
+   "wrong": 2407,
+   "unreachable": 613,
+   "inText": 2289,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    100
+   ],
+   "root": [
+    320,
+    100
+   ],
+   "clip": [
+    336,
+    116
+   ],
+   "refTrue": [
+    344,
+    124
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_top_center",
+   "comp": "Tooltip",
+   "score": 90.42,
+   "committed": 90.42,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    120
+   ],
+   "total": 39120,
+   "bad": 3748,
+   "missing": 839,
+   "extra": 148,
+   "wrong": 2761,
+   "unreachable": 549,
+   "inText": 2379,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    106
+   ],
+   "root": [
+    320,
+    106
+   ],
+   "clip": [
+    336,
+    122
+   ],
+   "refTrue": [
+    344,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_none",
+   "comp": "Tooltip",
+   "score": 92.3,
+   "committed": 92.3,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    100
+   ],
+   "total": 32600,
+   "bad": 2509,
+   "missing": 762,
+   "extra": 22,
+   "wrong": 1725,
+   "unreachable": 613,
+   "inText": 1896,
+   "inGlyph": 0,
+   "areaText": 16021,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    100
+   ],
+   "root": [
+    320,
+    100
+   ],
+   "clip": [
+    336,
+    116
+   ],
+   "refTrue": [
+    344,
+    124
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_top_center",
+   "comp": "Tooltip",
+   "score": 92.36,
+   "committed": 92.36,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    101
+   ],
+   "total": 32926,
+   "bad": 2516,
+   "missing": 696,
+   "extra": 22,
+   "wrong": 1798,
+   "unreachable": 549,
+   "inText": 1967,
+   "inGlyph": 0,
+   "areaText": 16111,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    106
+   ],
+   "root": [
+    320,
+    106
+   ],
+   "clip": [
+    336,
+    122
+   ],
+   "refTrue": [
+    344,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    4,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_bottom_center",
+   "comp": "Tooltip",
+   "score": 70.91,
+   "committed": 70.87,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    56
+   ],
+   "total": 6608,
+   "bad": 1922,
+   "missing": 315,
+   "extra": 294,
+   "wrong": 1313,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    127.61,
+    64
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_bottom_left",
+   "comp": "Tooltip",
+   "score": 70.97,
+   "committed": 71,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    56
+   ],
+   "total": 6608,
+   "bad": 1918,
+   "missing": 323,
+   "extra": 296,
+   "wrong": 1299,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    127.61,
+    64
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_bottom_right",
+   "comp": "Tooltip",
+   "score": 70.91,
+   "committed": 70.9,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    56
+   ],
+   "total": 6608,
+   "bad": 1922,
+   "missing": 315,
+   "extra": 304,
+   "wrong": 1303,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    127.61,
+    64
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_left",
+   "comp": "Tooltip",
+   "score": 78.55,
+   "committed": 78.55,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    124,
+    50
+   ],
+   "total": 6200,
+   "bad": 1330,
+   "missing": 76,
+   "extra": 100,
+   "wrong": 1154,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    118,
+    34
+   ],
+   "root": [
+    117.61,
+    42
+   ],
+   "clip": [
+    133.61,
+    58
+   ],
+   "refTrue": [
+    142,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_none",
+   "comp": "Tooltip",
+   "score": 67.28,
+   "committed": 67.2,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    127,
+    50
+   ],
+   "total": 6350,
+   "bad": 2078,
+   "missing": 489,
+   "extra": 506,
+   "wrong": 1083,
+   "unreachable": 190,
+   "inText": 382,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    34
+   ],
+   "root": [
+    111.61,
+    42
+   ],
+   "clip": [
+    127.61,
+    58
+   ],
+   "refTrue": [
+    136,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_right",
+   "comp": "Tooltip",
+   "score": 78.17,
+   "committed": 78.17,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    121,
+    50
+   ],
+   "total": 6050,
+   "bad": 1321,
+   "missing": 90,
+   "extra": 70,
+   "wrong": 1161,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    118,
+    34
+   ],
+   "root": [
+    117.61,
+    42
+   ],
+   "clip": [
+    133.61,
+    58
+   ],
+   "refTrue": [
+    142,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_top_center",
+   "comp": "Tooltip",
+   "score": 79.9,
+   "committed": 79.9,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    56
+   ],
+   "total": 6608,
+   "bad": 1328,
+   "missing": 75,
+   "extra": 119,
+   "wrong": 1134,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    127.61,
+    64
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_bottom_center",
+   "comp": "Tooltip",
+   "score": 66.4,
+   "committed": 66.42,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    45
+   ],
+   "total": 5310,
+   "bad": 1784,
+   "missing": 1443,
+   "extra": 278,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    127.61,
+    64
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_bottom_left",
+   "comp": "Tooltip",
+   "score": 66.44,
+   "committed": 66.52,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    45
+   ],
+   "total": 5310,
+   "bad": 1782,
+   "missing": 1440,
+   "extra": 279,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    127.61,
+    64
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_bottom_right",
+   "comp": "Tooltip",
+   "score": 66.29,
+   "committed": 66.33,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    45
+   ],
+   "total": 5310,
+   "bad": 1790,
+   "missing": 1440,
+   "extra": 287,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    127.61,
+    64
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_left",
+   "comp": "Tooltip",
+   "score": 75.54,
+   "committed": 75.6,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    124,
+    39
+   ],
+   "total": 4836,
+   "bad": 1183,
+   "missing": 1066,
+   "extra": 54,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    118,
+    34
+   ],
+   "root": [
+    117.61,
+    42
+   ],
+   "clip": [
+    133.61,
+    58
+   ],
+   "refTrue": [
+    142,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_none",
+   "comp": "Tooltip",
+   "score": 75.95,
+   "committed": 75.91,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    127,
+    39
+   ],
+   "total": 4953,
+   "bad": 1191,
+   "missing": 1073,
+   "extra": 48,
+   "wrong": 70,
+   "unreachable": 41,
+   "inText": 351,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    34
+   ],
+   "root": [
+    111.61,
+    42
+   ],
+   "clip": [
+    127.61,
+    58
+   ],
+   "refTrue": [
+    136,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_right",
+   "comp": "Tooltip",
+   "score": 73.93,
+   "committed": 74,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    120,
+    39
+   ],
+   "total": 4680,
+   "bad": 1220,
+   "missing": 1103,
+   "extra": 54,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    118,
+    34
+   ],
+   "root": [
+    117.61,
+    42
+   ],
+   "clip": [
+    133.61,
+    58
+   ],
+   "refTrue": [
+    142,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_top_center",
+   "comp": "Tooltip",
+   "score": 74.82,
+   "committed": 74.84,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    39
+   ],
+   "total": 4602,
+   "bad": 1159,
+   "missing": 1042,
+   "extra": 54,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    127.61,
+    64
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    2,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_dot_state_default",
+   "comp": "ButtonGroupBase",
+   "score": 80,
+   "committed": 80,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    85,
+    46
+   ],
+   "total": 3910,
+   "bad": 782,
+   "missing": 162,
+   "extra": 560,
+   "wrong": 60,
+   "unreachable": 0,
+   "inText": 173,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    80,
+    40
+   ],
+   "root": [
+    85.28,
+    46
+   ],
+   "clip": [
+    101.28,
+    62
+   ],
+   "refTrue": [
+    80,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_dot_state_disabled",
+   "comp": "ButtonGroupBase",
+   "score": 81.13,
+   "committed": 81.1,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    85,
+    46
+   ],
+   "total": 3910,
+   "bad": 738,
+   "missing": 134,
+   "extra": 562,
+   "wrong": 42,
+   "unreachable": 0,
+   "inText": 144,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    80,
+    40
+   ],
+   "root": [
+    85.28,
+    46
+   ],
+   "clip": [
+    101.28,
+    62
+   ],
+   "refTrue": [
+    80,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_dot_state_focused",
+   "comp": "ButtonGroupBase",
+   "score": 80.08,
+   "committed": 80.08,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    85,
+    46
+   ],
+   "total": 3910,
+   "bad": 779,
+   "missing": 161,
+   "extra": 559,
+   "wrong": 59,
+   "unreachable": 0,
+   "inText": 172,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    80,
+    40
+   ],
+   "root": [
+    85.28,
+    46
+   ],
+   "clip": [
+    101.28,
+    62
+   ],
+   "refTrue": [
+    80,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_dot_state_hover",
+   "comp": "ButtonGroupBase",
+   "score": 80.08,
+   "committed": 80.08,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    85,
+    46
+   ],
+   "total": 3910,
+   "bad": 779,
+   "missing": 161,
+   "extra": 559,
+   "wrong": 59,
+   "unreachable": 0,
+   "inText": 172,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    80,
+    40
+   ],
+   "root": [
+    85.28,
+    46
+   ],
+   "clip": [
+    101.28,
+    62
+   ],
+   "refTrue": [
+    80,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_false_state_default",
+   "comp": "ButtonGroupBase",
+   "score": 78.94,
+   "committed": 78.94,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    67,
+    46
+   ],
+   "total": 3082,
+   "bad": 649,
+   "missing": 140,
+   "extra": 457,
+   "wrong": 52,
+   "unreachable": 0,
+   "inText": 173,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    62,
+    40
+   ],
+   "root": [
+    67.28,
+    46
+   ],
+   "clip": [
+    83.28,
+    62
+   ],
+   "refTrue": [
+    62,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_false_state_disabled",
+   "comp": "ButtonGroupBase",
+   "score": 79.98,
+   "committed": 79.95,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    67,
+    46
+   ],
+   "total": 3082,
+   "bad": 617,
+   "missing": 120,
+   "extra": 457,
+   "wrong": 40,
+   "unreachable": 0,
+   "inText": 144,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    62,
+    40
+   ],
+   "root": [
+    67.28,
+    46
+   ],
+   "clip": [
+    83.28,
+    62
+   ],
+   "refTrue": [
+    62,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_false_state_focused",
+   "comp": "ButtonGroupBase",
+   "score": 78.97,
+   "committed": 78.97,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    67,
+    46
+   ],
+   "total": 3082,
+   "bad": 648,
+   "missing": 139,
+   "extra": 456,
+   "wrong": 53,
+   "unreachable": 0,
+   "inText": 172,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    62,
+    40
+   ],
+   "root": [
+    67.28,
+    46
+   ],
+   "clip": [
+    83.28,
+    62
+   ],
+   "refTrue": [
+    62,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_false_state_hover",
+   "comp": "ButtonGroupBase",
+   "score": 79.49,
+   "committed": 79.46,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    67,
+    46
+   ],
+   "total": 3082,
+   "bad": 632,
+   "missing": 138,
+   "extra": 456,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 156,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    62,
+    40
+   ],
+   "root": [
+    67.28,
+    46
+   ],
+   "clip": [
+    83.28,
+    62
+   ],
+   "refTrue": [
+    62,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_leading_state_default",
+   "comp": "ButtonGroupBase",
+   "score": 79.66,
+   "committed": 79.66,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    95,
+    46
+   ],
+   "total": 4370,
+   "bad": 889,
+   "missing": 268,
+   "extra": 569,
+   "wrong": 52,
+   "unreachable": 0,
+   "inText": 173,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    90,
+    40
+   ],
+   "root": [
+    95.28,
+    46
+   ],
+   "clip": [
+    111.28,
+    62
+   ],
+   "refTrue": [
+    90,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_leading_state_disabled",
+   "comp": "ButtonGroupBase",
+   "score": 80.76,
+   "committed": 80.73,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    95,
+    46
+   ],
+   "total": 4370,
+   "bad": 841,
+   "missing": 232,
+   "extra": 569,
+   "wrong": 40,
+   "unreachable": 0,
+   "inText": 144,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    90,
+    40
+   ],
+   "root": [
+    95.28,
+    46
+   ],
+   "clip": [
+    111.28,
+    62
+   ],
+   "refTrue": [
+    90,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_leading_state_focused",
+   "comp": "ButtonGroupBase",
+   "score": 79.68,
+   "committed": 79.68,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    95,
+    46
+   ],
+   "total": 4370,
+   "bad": 888,
+   "missing": 267,
+   "extra": 568,
+   "wrong": 53,
+   "unreachable": 0,
+   "inText": 172,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    90,
+    40
+   ],
+   "root": [
+    95.28,
+    46
+   ],
+   "clip": [
+    111.28,
+    62
+   ],
+   "refTrue": [
+    90,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_leading_state_hover",
+   "comp": "ButtonGroupBase",
+   "score": 79.86,
+   "committed": 79.84,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    95,
+    46
+   ],
+   "total": 4370,
+   "bad": 880,
+   "missing": 274,
+   "extra": 568,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 156,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    90,
+    40
+   ],
+   "root": [
+    95.28,
+    46
+   ],
+   "clip": [
+    111.28,
+    62
+   ],
+   "refTrue": [
+    90,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_only_state_default",
+   "comp": "ButtonGroupBase",
+   "score": 80.26,
+   "committed": 80.26,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    50,
+    46
+   ],
+   "total": 2300,
+   "bad": 454,
+   "missing": 80,
+   "extra": 366,
+   "wrong": 8,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 52,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    44,
+    40
+   ],
+   "root": [
+    50,
+    46
+   ],
+   "clip": [
+    66,
+    62
+   ],
+   "refTrue": [
+    44,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_only_state_disabled",
+   "comp": "ButtonGroupBase",
+   "score": 80.26,
+   "committed": 80.26,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    50,
+    46
+   ],
+   "total": 2300,
+   "bad": 454,
+   "missing": 80,
+   "extra": 366,
+   "wrong": 8,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 52,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    44,
+    40
+   ],
+   "root": [
+    50,
+    46
+   ],
+   "clip": [
+    66,
+    62
+   ],
+   "refTrue": [
+    44,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_only_state_focused",
+   "comp": "ButtonGroupBase",
+   "score": 80.26,
+   "committed": 80.26,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    50,
+    46
+   ],
+   "total": 2300,
+   "bad": 454,
+   "missing": 80,
+   "extra": 366,
+   "wrong": 8,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 52,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    44,
+    40
+   ],
+   "root": [
+    50,
+    46
+   ],
+   "clip": [
+    66,
+    62
+   ],
+   "refTrue": [
+    44,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_false_icon_only_state_hover",
+   "comp": "ButtonGroupBase",
+   "score": 80.26,
+   "committed": 80.26,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    50,
+    46
+   ],
+   "total": 2300,
+   "bad": 454,
+   "missing": 80,
+   "extra": 366,
+   "wrong": 8,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 52,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    44,
+    40
+   ],
+   "root": [
+    50,
+    46
+   ],
+   "clip": [
+    66,
+    62
+   ],
+   "refTrue": [
+    44,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_dot_state_default",
+   "comp": "ButtonGroupBase",
+   "score": 80.49,
+   "committed": 80.46,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    85,
+    46
+   ],
+   "total": 3910,
+   "bad": 763,
+   "missing": 160,
+   "extra": 559,
+   "wrong": 44,
+   "unreachable": 0,
+   "inText": 156,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    80,
+    40
+   ],
+   "root": [
+    85.28,
+    46
+   ],
+   "clip": [
+    101.28,
+    62
+   ],
+   "refTrue": [
+    80,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_dot_state_disabled",
+   "comp": "ButtonGroupBase",
+   "score": 81.36,
+   "committed": 81.36,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    85,
+    46
+   ],
+   "total": 3910,
+   "bad": 729,
+   "missing": 131,
+   "extra": 560,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 135,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    80,
+    40
+   ],
+   "root": [
+    85.28,
+    46
+   ],
+   "clip": [
+    101.28,
+    62
+   ],
+   "refTrue": [
+    80,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_dot_state_focused",
+   "comp": "ButtonGroupBase",
+   "score": 80.49,
+   "committed": 80.46,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    85,
+    46
+   ],
+   "total": 3910,
+   "bad": 763,
+   "missing": 160,
+   "extra": 559,
+   "wrong": 44,
+   "unreachable": 0,
+   "inText": 156,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    80,
+    40
+   ],
+   "root": [
+    85.28,
+    46
+   ],
+   "clip": [
+    101.28,
+    62
+   ],
+   "refTrue": [
+    80,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_dot_state_hover",
+   "comp": "ButtonGroupBase",
+   "score": 80.49,
+   "committed": 80.46,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    85,
+    46
+   ],
+   "total": 3910,
+   "bad": 763,
+   "missing": 160,
+   "extra": 559,
+   "wrong": 44,
+   "unreachable": 0,
+   "inText": 156,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    80,
+    40
+   ],
+   "root": [
+    85.28,
+    46
+   ],
+   "clip": [
+    101.28,
+    62
+   ],
+   "refTrue": [
+    80,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_false_state_default",
+   "comp": "ButtonGroupBase",
+   "score": 79.49,
+   "committed": 79.46,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    67,
+    46
+   ],
+   "total": 3082,
+   "bad": 632,
+   "missing": 138,
+   "extra": 456,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 156,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    62,
+    40
+   ],
+   "root": [
+    67.28,
+    46
+   ],
+   "clip": [
+    83.28,
+    62
+   ],
+   "refTrue": [
+    62,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_false_state_disabled",
+   "comp": "ButtonGroupBase",
+   "score": 80.27,
+   "committed": 80.27,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    67,
+    46
+   ],
+   "total": 3082,
+   "bad": 608,
+   "missing": 117,
+   "extra": 457,
+   "wrong": 34,
+   "unreachable": 0,
+   "inText": 135,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    62,
+    40
+   ],
+   "root": [
+    67.28,
+    46
+   ],
+   "clip": [
+    83.28,
+    62
+   ],
+   "refTrue": [
+    62,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_false_state_focused",
+   "comp": "ButtonGroupBase",
+   "score": 79.49,
+   "committed": 79.46,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    67,
+    46
+   ],
+   "total": 3082,
+   "bad": 632,
+   "missing": 138,
+   "extra": 456,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 156,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    62,
+    40
+   ],
+   "root": [
+    67.28,
+    46
+   ],
+   "clip": [
+    83.28,
+    62
+   ],
+   "refTrue": [
+    62,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_false_state_hover",
+   "comp": "ButtonGroupBase",
+   "score": 79.49,
+   "committed": 79.46,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    67,
+    46
+   ],
+   "total": 3082,
+   "bad": 632,
+   "missing": 138,
+   "extra": 456,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 156,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    62,
+    40
+   ],
+   "root": [
+    67.28,
+    46
+   ],
+   "clip": [
+    83.28,
+    62
+   ],
+   "refTrue": [
+    62,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_leading_state_default",
+   "comp": "ButtonGroupBase",
+   "score": 79.86,
+   "committed": 79.84,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    95,
+    46
+   ],
+   "total": 4370,
+   "bad": 880,
+   "missing": 274,
+   "extra": 568,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 156,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    90,
+    40
+   ],
+   "root": [
+    95.28,
+    46
+   ],
+   "clip": [
+    111.28,
+    62
+   ],
+   "refTrue": [
+    90,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_leading_state_disabled",
+   "comp": "ButtonGroupBase",
+   "score": 80.96,
+   "committed": 80.96,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    95,
+    46
+   ],
+   "total": 4370,
+   "bad": 832,
+   "missing": 229,
+   "extra": 569,
+   "wrong": 34,
+   "unreachable": 0,
+   "inText": 135,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    90,
+    40
+   ],
+   "root": [
+    95.28,
+    46
+   ],
+   "clip": [
+    111.28,
+    62
+   ],
+   "refTrue": [
+    90,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_leading_state_focused",
+   "comp": "ButtonGroupBase",
+   "score": 79.86,
+   "committed": 79.84,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    95,
+    46
+   ],
+   "total": 4370,
+   "bad": 880,
+   "missing": 274,
+   "extra": 568,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 156,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    90,
+    40
+   ],
+   "root": [
+    95.28,
+    46
+   ],
+   "clip": [
+    111.28,
+    62
+   ],
+   "refTrue": [
+    90,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_leading_state_hover",
+   "comp": "ButtonGroupBase",
+   "score": 79.86,
+   "committed": 79.84,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    95,
+    46
+   ],
+   "total": 4370,
+   "bad": 880,
+   "missing": 274,
+   "extra": 568,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 156,
+   "inGlyph": 0,
+   "areaText": 608,
+   "areaGlyph": 0,
+   "drawn": [
+    90,
+    40
+   ],
+   "root": [
+    95.28,
+    46
+   ],
+   "clip": [
+    111.28,
+    62
+   ],
+   "refTrue": [
+    90,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_only_state_default",
+   "comp": "ButtonGroupBase",
+   "score": 80.96,
+   "committed": 80.96,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    50,
+    46
+   ],
+   "total": 2300,
+   "bad": 438,
+   "missing": 72,
+   "extra": 366,
+   "wrong": 0,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 36,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    44,
+    40
+   ],
+   "root": [
+    50,
+    46
+   ],
+   "clip": [
+    66,
+    62
+   ],
+   "refTrue": [
+    44,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_only_state_disabled",
+   "comp": "ButtonGroupBase",
+   "score": 80.26,
+   "committed": 80.26,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    50,
+    46
+   ],
+   "total": 2300,
+   "bad": 454,
+   "missing": 80,
+   "extra": 366,
+   "wrong": 8,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 52,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    44,
+    40
+   ],
+   "root": [
+    50,
+    46
+   ],
+   "clip": [
+    66,
+    62
+   ],
+   "refTrue": [
+    44,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_only_state_focused",
+   "comp": "ButtonGroupBase",
+   "score": 80.96,
+   "committed": 80.96,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    50,
+    46
+   ],
+   "total": 2300,
+   "bad": 438,
+   "missing": 72,
+   "extra": 366,
+   "wrong": 0,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 36,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    44,
+    40
+   ],
+   "root": [
+    50,
+    46
+   ],
+   "clip": [
+    66,
+    62
+   ],
+   "refTrue": [
+    44,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "button-group-base",
+   "variant": "current_true_icon_only_state_hover",
+   "comp": "ButtonGroupBase",
+   "score": 80.96,
+   "committed": 80.96,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    50,
+    46
+   ],
+   "total": 2300,
+   "bad": 438,
+   "missing": 72,
+   "extra": 366,
+   "wrong": 0,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 36,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    44,
+    40
+   ],
+   "root": [
+    50,
+    46
+   ],
+   "clip": [
+    66,
+    62
+   ],
+   "refTrue": [
+    44,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  }
+ ]
+}

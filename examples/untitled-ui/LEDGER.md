@@ -14,14 +14,14 @@ Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, capture
 
 | instrument | what it holds the tool to | current reading | artifact |
 |---|---|---|---|
-| Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **87.2%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst button-group-base 80.1%) | `renders/fidelity.json` |
+| Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **87.5%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst button-group-base 80.1%) | `renders/fidelity.json` |
 | Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **82/82** green, 0 pinned red — 64 constructs expected CARRIED, 8 REFUSED, 10 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
 | Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** closed · 10,822 matched · 1,977 diverged · 4,250 loss · 6,419 invented | `extract/figma/roundtrip-uui/report.json` |
 | The named-refusal surface | what the pipeline writes down when it will not carry something | **545** capture receipts in 7 codes · 15 stub contracts · 18 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
 
 ### The one sentence
 
-> **This tool reproduces a component's structure and its token bindings; it approximates its pixels.** Across the 537 variants that can be scored at all, mean agreement with the canvas reference is **87.2%**, only 97 of them (18.1%) reach 95% or better, and 9 reach 100% — so the emitted React is a faithful *specification* of each component and an *approximate* drawing of it. Adopt it to carry API, anatomy, and tokens across the boundary. Do not adopt it expecting pixel-exact output without review.
+> **This tool reproduces a component's structure and its token bindings; it approximates its pixels.** Across the 537 variants that can be scored at all, mean agreement with the canvas reference is **87.5%**, only 103 of them (19.2%) reach 95% or better, and 9 reach 100% — so the emitted React is a faithful *specification* of each component and an *approximate* drawing of it. Adopt it to carry API, anatomy, and tokens across the boundary. Do not adopt it expecting pixel-exact output without review.
 
 A second sentence an adopter should hear before anything else, quoted from the round-trip report rather than paraphrased:
 
@@ -31,11 +31,11 @@ A second sentence an adopter should hear before anything else, quoted from the r
 
 | band | variants | share of scored |
 |---|---|---|
-| ≥ 95 (indistinguishable at a glance) | 97 | 18.1% |
-| 90 – 95 | 149 | 27.7% |
-| 80 – 90 | 201 | 37.4% |
-| 70 – 80 | 59 | 11.0% |
-| < 70 (visibly a different drawing) | 31 | 5.8% |
+| ≥ 95 (indistinguishable at a glance) | 103 | 19.2% |
+| 90 – 95 | 153 | 28.5% |
+| 80 – 90 | 193 | 35.9% |
+| 70 – 80 | 60 | 11.2% |
+| < 70 (visibly a different drawing) | 28 | 5.2% |
 
 Method, quoted from `renders/FIDELITY.md`: *Score = % of pixels REPRODUCED, measured at the reference's own true scale with the two ROOT BOXES anchored. v2.1 stops content-trimming and stops rescaling each image into a common 200px box — the two blindnesses that cost round 5 and round 6 a measurement each: a pure TRANSLATION scored 0.00 change (the trim discards absolute position) and DELETING a wrong full-bleed gray ground LOWERED six rows (#efefef vs #ffffff is 16 per channel, inside v2.0's 90-summed-channel tolerance, so the wrong paint counted as a match AND inflated the trim box, whose loss the 200px normalization then magnified ~4x). v2.1 instead: (1) TRUE SCALE — the canvas export scale is not recorded, so it is derived as s = min(2, 600 / drawn bbox width) and verified over all 595 references that have a dump variant: no reference comes out SMALLER than the box it draws (Figma never trims a node's own box, so a negative would falsify the rule) and every residual is explainable (0 plain, 4/8px focus rings, 24px tooltip shadow, 56–70px floating value tooltips). The reference is resampled to (w/s, h/s); the render is used at 1:1. Nothing is normalized to a common size, so wrong SIZE now scores wrong. (2) ROOT ANCHOR — render-one reports the rendered root's border box on stdout (PNG bytes untouched); inside the reference the root's origin is the export's overflow split in the direction the render's own ink overflows its root box (even split when it does not), so a symmetric ring centres and a one-sided floating tooltip does not. Absolute position is measured. (3) TOLERANCE — a reference pixel is reproduced when some pixel in its 3x3 neighbourhood of the render is within 10 PER CHANNEL (v2.0: 90 summed across three, i.e. up to 30/channel); the 3x3 escape is what makes the tight threshold usable — it forgives Figma-vs-Chrome rasterisation jitter up to one pixel and nothing larger. DELIBERATELY IGNORED: sub-pixel and 1px placement (the 3x3 escape); the component's position on the page (only its root box is anchored — a uniform translation of the whole drawing is not a property of a standalone render); and effect ink beyond the render clip's 8px margin (worst case measured: tooltip, canvas shadow reaches 12px/side, so 4px of it is missing from the render and scores as missing — named, not fixed, because changing the clip would change the committed render bytes and make this metric change unattributable). MEASURED FLOOR — read the numbers with it: at true scale Figma's and Chrome's glyph rasterisation differ by more than the one-pixel escape on nearly every stem, so a frame that is ONLY text tops out near 70 (dropdown-list-item icon_false_checkbox_false_shortcut_false_state_default scores 70.45 with the two drawings indistinguishable by eye — its whole frame is one "List item" run). A text-dominated row is that floor plus its defects, and a fix measured on such a row reads COMPRESSED. The v2.0 table over the SAME renders is FIDELITY-v20.md: both are produced by one run, so the shift between them is the metric and nothing else. v1.2: unknown axes consumed generically; axis-not-carried counts variants unrenderable because the inversion dropped their axis (genuine carriage losses only); state=disabled scores through the contract's disabled boolean; state=hover|focus variants are interaction-state (CSS-rendered, not statically scorable). Trend metric, not the final gate.*
 
@@ -78,7 +78,7 @@ The fixture proves the vocabulary exists. These counts prove the 15 full contrac
 | `textByProp` | 7 | 4 / 30 |
 | `layoutByProp` | 5 | 4 / 30 |
 | `stylesWhen` | 5 | 3 / 30 |
-| `overrides` | 15 | 6 / 30 |
+| `overrides` | 22 | 8 / 30 |
 | `figmaStatePreviews` | 3 | 3 / 30 |
 | `asset` | 12 | 12 / 30 |
 | `mask` | 2 | 1 / 30 |
@@ -160,7 +160,7 @@ The 15 non-stub contracts carry their own standing refusal, which an adopter sho
 
 - `circle` — baked ink is the source main's #171717 ring, but the references draw the usage ink (Button: WHITE ring on brand purple — var--button-base--*_icon_leading.png) and the existing dump v1.7 ellipse/src ring-witness already renders the observed white ring at the drawn radius; carrying the export would displace correct ink. Ring-witness stands; per-usage ink divergence remains the ledgered _Dot-class note.
 
-The manifest's own scope note: *ITERATION 8 — SVG glyphs exported from the kit via node.exportAsync({format:"SVG_STRING"}) at 1x on each stub source MAIN component (dedup by instanceKey across the 15 dumped sets). Root width/height attrs rewritten to 100% (paths and viewBox verbatim); the consuming stub contract sizes the glyph (minted box, else icon.size = natural). keyToAsset maps every observed nested-instance instanceKey to its exported asset — the propose-side iconAssets input (uui-pipeline.mts). Fills/strokes are BAKED at the source component; per-usage ink divergence stays a named note on the stub. Assets marked `refused` are committed export receipts only (measured against the references); `circleFill` marks a pure-circle-fill export consumed as a geometry witness, not rendered.*
+The manifest's own scope note: *ITERATION 8 — SVG glyphs exported from the kit via node.exportAsync({format:"SVG_STRING"}) at 1x on each stub source MAIN component (dedup by instanceKey across the 15 dumped sets). Root width/height attrs rewritten to 100% (paths and viewBox verbatim); the consuming stub contract sizes the glyph (minted box, else icon.size = natural). keyToAsset maps every observed nested-instance instanceKey to its exported asset — the propose-side iconAssets input (uui-pipeline.mts). Fills/strokes were BAKED at the source component; ROUND 8 replaced that for every SINGLE-INK glyph — see $inkNote / $perUsageInkNote below, which supersede this sentence. Assets marked `refused` are committed export receipts only (measured against the references); `circleFill` marks a pure-circle-fill export consumed as a geometry witness, not rendered.*
 
 ---
 
@@ -262,7 +262,7 @@ npm run extract:figma:roundtrip:uui
 
 # 4 · the pixel fidelity table (renders every variant; slow)
 npx tsx examples/untitled-ui/fidelity-score.mts
-#    expect: 537 scored variants, mean 87.2%
+#    expect: 537 scored variants, mean 87.5%
 ```
 
 §2 and §3.3 read `extract/figma/conformance/MANIFEST.json` directly (the hand-authored denominator — the engine never defines its own). §3.1 reads `_degradations` from the 15 dumps. §3.2 reads the `description` field of the 30 contracts. §3.6 reads the icon manifest. §4 reads `report.json` and quotes the glossary lines out of `REPORT.md`. §5.2's probes read the 32 emitted component directories plus the contracts.
@@ -271,14 +271,14 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 
 | artifact | sha256 (12) | bytes | what it supplied |
 |---|---|---|---|
-| `examples/untitled-ui/assets/icons/manifest.json` | `f743d0bd7953` | 6,665 | icon export receipts |
+| `examples/untitled-ui/assets/icons/manifest.json` | `a124d0e50984` | 15,709 | icon export receipts |
 | `examples/untitled-ui/AUDIT-ROUND-1.md` | `0370a1fd3e5f` | 19,789 | round-1 audit |
 | `examples/untitled-ui/dumps-v2/` | `9938409e7b5d` | 870,576 | canvas dumps (15 files) |
-| `examples/untitled-ui/renders/fidelity.json` | `b6aa4e6c4f6a` | 84,445 | fidelity scores |
-| `examples/untitled-ui/renders/FIDELITY.md` | `1bc35d9853b3` | 4,242 | fidelity method |
-| `examples/untitled-ui/storybook/contracts/` | `093fcc97ddf7` | 131,119 | proposed contracts (30 files) |
-| `examples/untitled-ui/storybook/src/generated/` | `d980e177dbe2` | 247,440 | emitted components (32 dirs) |
-| `examples/untitled-ui/storybook/src/tokens.css` | `d9a7ca02d6dc` | 657,975 | emitted global tokens |
+| `examples/untitled-ui/renders/fidelity.json` | `73bcc0ad0b4b` | 84,444 | fidelity scores |
+| `examples/untitled-ui/renders/FIDELITY.md` | `36fa6cc224ae` | 4,242 | fidelity method |
+| `examples/untitled-ui/storybook/contracts/` | `a59918ed3fa8` | 132,709 | proposed contracts (30 files) |
+| `examples/untitled-ui/storybook/src/generated/` | `4d490f74528c` | 249,562 | emitted components (32 dirs) |
+| `examples/untitled-ui/storybook/src/tokens.css` | `67cdcff87644` | 658,821 | emitted global tokens |
 | `extract/figma/conformance/MANIFEST.json` | `c456e46a75a0` | 38,537 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `5544738d920d` | 3,015,602 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `5087a3dbd280` | 91,670 | round-trip narrative |

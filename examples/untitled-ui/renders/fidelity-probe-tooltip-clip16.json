@@ -1,0 +1,1496 @@
+{
+ "meta": {
+  "probe": "tooltip-clip16",
+  "probeCss": null,
+  "clipMargin": 16,
+  "sets": [
+   "tooltip"
+  ]
+ },
+ "rows": [
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_bottom_center",
+   "comp": "Tooltip",
+   "score": 90.04,
+   "committed": 90.04,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.829268292682927,
+   "frame": [
+    334,
+    103
+   ],
+   "total": 34402,
+   "bad": 3425,
+   "missing": 1737,
+   "extra": 7,
+   "wrong": 1681,
+   "unreachable": 0,
+   "inText": 1841,
+   "inGlyph": 0,
+   "areaText": 16111,
+   "areaGlyph": 0,
+   "drawn": [
+    328,
+    106
+   ],
+   "root": [
+    328,
+    106
+   ],
+   "clip": [
+    360,
+    138
+   ],
+   "refTrue": [
+    352,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_bottom_left",
+   "comp": "Tooltip",
+   "score": 90.04,
+   "committed": 90.04,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.829268292682927,
+   "frame": [
+    334,
+    103
+   ],
+   "total": 34402,
+   "bad": 3425,
+   "missing": 1737,
+   "extra": 7,
+   "wrong": 1681,
+   "unreachable": 0,
+   "inText": 1841,
+   "inGlyph": 0,
+   "areaText": 16111,
+   "areaGlyph": 0,
+   "drawn": [
+    328,
+    106
+   ],
+   "root": [
+    328,
+    106
+   ],
+   "clip": [
+    360,
+    138
+   ],
+   "refTrue": [
+    352,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_bottom_right",
+   "comp": "Tooltip",
+   "score": 90.04,
+   "committed": 90.04,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.829268292682927,
+   "frame": [
+    334,
+    103
+   ],
+   "total": 34402,
+   "bad": 3425,
+   "missing": 1737,
+   "extra": 7,
+   "wrong": 1681,
+   "unreachable": 0,
+   "inText": 1841,
+   "inGlyph": 0,
+   "areaText": 16111,
+   "areaGlyph": 0,
+   "drawn": [
+    328,
+    106
+   ],
+   "root": [
+    328,
+    106
+   ],
+   "clip": [
+    360,
+    138
+   ],
+   "refTrue": [
+    352,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_left",
+   "comp": "Tooltip",
+   "score": 90.39,
+   "committed": 88.87,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.8404907975460123,
+   "frame": [
+    329,
+    114
+   ],
+   "total": 37506,
+   "bad": 3605,
+   "missing": 131,
+   "extra": 225,
+   "wrong": 3249,
+   "unreachable": 0,
+   "inText": 2769,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    326,
+    100
+   ],
+   "root": [
+    326,
+    100
+   ],
+   "clip": [
+    358,
+    132
+   ],
+   "refTrue": [
+    350,
+    124
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_right",
+   "comp": "Tooltip",
+   "score": 86.43,
+   "committed": 84.79,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.8404907975460123,
+   "frame": [
+    338,
+    114
+   ],
+   "total": 38532,
+   "bad": 5230,
+   "missing": 776,
+   "extra": 1113,
+   "wrong": 3341,
+   "unreachable": 0,
+   "inText": 2920,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    326,
+    100
+   ],
+   "root": [
+    326,
+    100
+   ],
+   "clip": [
+    361.88,
+    132
+   ],
+   "refTrue": [
+    350,
+    116
+   ],
+   "refOverflow": [
+    24,
+    16
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -16,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_left",
+   "comp": "Tooltip",
+   "score": 92.24,
+   "committed": 90.51,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.8404907975460123,
+   "frame": [
+    329,
+    100
+   ],
+   "total": 32900,
+   "bad": 2553,
+   "missing": 1273,
+   "extra": 31,
+   "wrong": 1249,
+   "unreachable": 0,
+   "inText": 2427,
+   "inGlyph": 0,
+   "areaText": 16021,
+   "areaGlyph": 0,
+   "drawn": [
+    326,
+    100
+   ],
+   "root": [
+    326,
+    100
+   ],
+   "clip": [
+    358,
+    132
+   ],
+   "refTrue": [
+    350,
+    124
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_right",
+   "comp": "Tooltip",
+   "score": 93.63,
+   "committed": 91.72,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.8404907975460123,
+   "frame": [
+    329,
+    100
+   ],
+   "total": 32900,
+   "bad": 2096,
+   "missing": 248,
+   "extra": 24,
+   "wrong": 1824,
+   "unreachable": 0,
+   "inText": 2040,
+   "inGlyph": 0,
+   "areaText": 16021,
+   "areaGlyph": 0,
+   "drawn": [
+    326,
+    100
+   ],
+   "root": [
+    326,
+    100
+   ],
+   "clip": [
+    361.88,
+    132
+   ],
+   "refTrue": [
+    350,
+    116
+   ],
+   "refOverflow": [
+    24,
+    16
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_bottom_center",
+   "comp": "Tooltip",
+   "score": 88.57,
+   "committed": 88.57,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    116
+   ],
+   "total": 37816,
+   "bad": 4321,
+   "missing": 1800,
+   "extra": 53,
+   "wrong": 2468,
+   "unreachable": 0,
+   "inText": 2315,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    106
+   ],
+   "root": [
+    320,
+    106
+   ],
+   "clip": [
+    352,
+    138
+   ],
+   "refTrue": [
+    344,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_bottom_left",
+   "comp": "Tooltip",
+   "score": 88.57,
+   "committed": 88.57,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    116
+   ],
+   "total": 37816,
+   "bad": 4321,
+   "missing": 1800,
+   "extra": 53,
+   "wrong": 2468,
+   "unreachable": 0,
+   "inText": 2315,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    106
+   ],
+   "root": [
+    320,
+    106
+   ],
+   "clip": [
+    352,
+    138
+   ],
+   "refTrue": [
+    344,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_bottom_right",
+   "comp": "Tooltip",
+   "score": 88.57,
+   "committed": 88.57,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    116
+   ],
+   "total": 37816,
+   "bad": 4321,
+   "missing": 1800,
+   "extra": 53,
+   "wrong": 2468,
+   "unreachable": 0,
+   "inText": 2315,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    106
+   ],
+   "root": [
+    320,
+    106
+   ],
+   "clip": [
+    352,
+    138
+   ],
+   "refTrue": [
+    344,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_none",
+   "comp": "Tooltip",
+   "score": 92.59,
+   "committed": 90.94,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    114
+   ],
+   "total": 37164,
+   "bad": 2755,
+   "missing": 288,
+   "extra": 60,
+   "wrong": 2407,
+   "unreachable": 0,
+   "inText": 2289,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    100
+   ],
+   "root": [
+    320,
+    100
+   ],
+   "clip": [
+    352,
+    132
+   ],
+   "refTrue": [
+    344,
+    124
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_dark_arrow_top_center",
+   "comp": "Tooltip",
+   "score": 91.82,
+   "committed": 90.42,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    120
+   ],
+   "total": 39120,
+   "bad": 3199,
+   "missing": 290,
+   "extra": 148,
+   "wrong": 2761,
+   "unreachable": 0,
+   "inText": 2379,
+   "inGlyph": 0,
+   "areaText": 16201,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    106
+   ],
+   "root": [
+    320,
+    106
+   ],
+   "clip": [
+    352,
+    138
+   ],
+   "refTrue": [
+    344,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_none",
+   "comp": "Tooltip",
+   "score": 94.18,
+   "committed": 92.3,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    100
+   ],
+   "total": 32600,
+   "bad": 1896,
+   "missing": 149,
+   "extra": 22,
+   "wrong": 1725,
+   "unreachable": 0,
+   "inText": 1896,
+   "inGlyph": 0,
+   "areaText": 16021,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    100
+   ],
+   "root": [
+    320,
+    100
+   ],
+   "clip": [
+    352,
+    132
+   ],
+   "refTrue": [
+    344,
+    124
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_true_theme_light_arrow_top_center",
+   "comp": "Tooltip",
+   "score": 94.03,
+   "committed": 92.36,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 1.875,
+   "frame": [
+    326,
+    101
+   ],
+   "total": 32926,
+   "bad": 1967,
+   "missing": 147,
+   "extra": 22,
+   "wrong": 1798,
+   "unreachable": 0,
+   "inText": 1967,
+   "inGlyph": 0,
+   "areaText": 16111,
+   "areaGlyph": 0,
+   "drawn": [
+    320,
+    106
+   ],
+   "root": [
+    320,
+    106
+   ],
+   "clip": [
+    352,
+    138
+   ],
+   "refTrue": [
+    344,
+    130
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_bottom_center",
+   "comp": "Tooltip",
+   "score": 72.39,
+   "committed": 70.87,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    59
+   ],
+   "total": 6962,
+   "bad": 1922,
+   "missing": 315,
+   "extra": 294,
+   "wrong": 1313,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    143.61,
+    80
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_bottom_left",
+   "comp": "Tooltip",
+   "score": 72.45,
+   "committed": 71,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    59
+   ],
+   "total": 6962,
+   "bad": 1918,
+   "missing": 323,
+   "extra": 296,
+   "wrong": 1299,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    143.61,
+    80
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_bottom_right",
+   "comp": "Tooltip",
+   "score": 72.39,
+   "committed": 70.9,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    59
+   ],
+   "total": 6962,
+   "bad": 1922,
+   "missing": 315,
+   "extra": 304,
+   "wrong": 1303,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    143.61,
+    80
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_left",
+   "comp": "Tooltip",
+   "score": 79.76,
+   "committed": 78.55,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    124,
+    53
+   ],
+   "total": 6572,
+   "bad": 1330,
+   "missing": 76,
+   "extra": 100,
+   "wrong": 1154,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    118,
+    34
+   ],
+   "root": [
+    117.61,
+    42
+   ],
+   "clip": [
+    149.61,
+    74
+   ],
+   "refTrue": [
+    142,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_none",
+   "comp": "Tooltip",
+   "score": 69.22,
+   "committed": 67.2,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    127,
+    53
+   ],
+   "total": 6731,
+   "bad": 2072,
+   "missing": 483,
+   "extra": 506,
+   "wrong": 1083,
+   "unreachable": 0,
+   "inText": 382,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    34
+   ],
+   "root": [
+    111.61,
+    42
+   ],
+   "clip": [
+    143.61,
+    74
+   ],
+   "refTrue": [
+    136,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -16,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_right",
+   "comp": "Tooltip",
+   "score": 79.4,
+   "committed": 78.17,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    121,
+    53
+   ],
+   "total": 6413,
+   "bad": 1321,
+   "missing": 90,
+   "extra": 70,
+   "wrong": 1161,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    118,
+    34
+   ],
+   "root": [
+    117.61,
+    42
+   ],
+   "clip": [
+    149.61,
+    74
+   ],
+   "refTrue": [
+    142,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_dark_arrow_top_center",
+   "comp": "Tooltip",
+   "score": 80.93,
+   "committed": 79.9,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    59
+   ],
+   "total": 6962,
+   "bad": 1328,
+   "missing": 75,
+   "extra": 119,
+   "wrong": 1134,
+   "unreachable": 0,
+   "inText": 412,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    143.61,
+    80
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_bottom_center",
+   "comp": "Tooltip",
+   "score": 68.5,
+   "committed": 66.42,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    48
+   ],
+   "total": 5664,
+   "bad": 1784,
+   "missing": 1443,
+   "extra": 278,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    143.61,
+    80
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_bottom_left",
+   "comp": "Tooltip",
+   "score": 68.54,
+   "committed": 66.52,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    48
+   ],
+   "total": 5664,
+   "bad": 1782,
+   "missing": 1440,
+   "extra": 279,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    143.61,
+    80
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_bottom_right",
+   "comp": "Tooltip",
+   "score": 68.4,
+   "committed": 66.33,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    48
+   ],
+   "total": 5664,
+   "bad": 1790,
+   "missing": 1440,
+   "extra": 287,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    143.61,
+    80
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_left",
+   "comp": "Tooltip",
+   "score": 77.28,
+   "committed": 75.6,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    124,
+    42
+   ],
+   "total": 5208,
+   "bad": 1183,
+   "missing": 1066,
+   "extra": 54,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    118,
+    34
+   ],
+   "root": [
+    117.61,
+    42
+   ],
+   "clip": [
+    149.61,
+    74
+   ],
+   "refTrue": [
+    142,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_none",
+   "comp": "Tooltip",
+   "score": 77.78,
+   "committed": 75.91,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    127,
+    42
+   ],
+   "total": 5334,
+   "bad": 1185,
+   "missing": 1067,
+   "extra": 48,
+   "wrong": 70,
+   "unreachable": 0,
+   "inText": 351,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    34
+   ],
+   "root": [
+    111.61,
+    42
+   ],
+   "clip": [
+    143.61,
+    74
+   ],
+   "refTrue": [
+    136,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -16,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_right",
+   "comp": "Tooltip",
+   "score": 75.79,
+   "committed": 74,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    120,
+    42
+   ],
+   "total": 5040,
+   "bad": 1220,
+   "missing": 1103,
+   "extra": 54,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    118,
+    34
+   ],
+   "root": [
+    117.61,
+    42
+   ],
+   "clip": [
+    149.61,
+    74
+   ],
+   "refTrue": [
+    142,
+    58
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  },
+  {
+   "set": "tooltip",
+   "variant": "supporting_text_false_theme_light_arrow_top_center",
+   "comp": "Tooltip",
+   "score": 76.61,
+   "committed": 74.84,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    118,
+    42
+   ],
+   "total": 4956,
+   "bad": 1159,
+   "missing": 1042,
+   "extra": 54,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 392,
+   "inGlyph": 0,
+   "areaText": 1530,
+   "areaGlyph": 0,
+   "drawn": [
+    112,
+    40
+   ],
+   "root": [
+    111.61,
+    48
+   ],
+   "clip": [
+    143.61,
+    80
+   ],
+   "refTrue": [
+    136,
+    64
+   ],
+   "refOverflow": [
+    24,
+    24
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -16
+   ]
+  }
+ ]
+}

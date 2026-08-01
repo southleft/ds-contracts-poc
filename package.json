@@ -85,7 +85,8 @@
     "figma:fresh": "node scripts/figma-scripts-fresh.mjs",
     "conformance:canvas": "tsx extract/figma/conformance/run.ts",
     "extract:figma:roundtrip:uui": "tsx extract/figma/roundtrip-uui/run.ts",
-    "ledger:uui": "tsx extract/figma/ledger/build.ts"
+    "ledger:uui": "tsx extract/figma/ledger/build.ts",
+    "residuals:uui": "tsx extract/figma/ledger/residuals.ts"
   },
   "engines": {
     "node": ">=20"
