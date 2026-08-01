@@ -394,8 +394,156 @@
   padding-inline: var(--imported-social-button-root-padding-inline-false);
 }
 
+.socialIcon {
+  display: inline-flex;
+}
+
+.social-facebook.theme-brand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-facebook-brand);
+}
+
+.social-facebook.theme-colorWithBrand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-facebook-colorWithBrand);
+}
+
+.social-facebook.theme-color .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-facebook-color);
+}
+
+.social-google.theme-brand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-google-brand);
+}
+
+.social-google.theme-colorWithBrand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-google-colorWithBrand);
+}
+
+.social-google.theme-color .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-google-color);
+}
+
+.social-apple.theme-brand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-apple-brand);
+}
+
+.social-apple.theme-colorWithBrand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-apple-colorWithBrand);
+}
+
+.social-apple.theme-color .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-apple-color);
+}
+
+.social-figma.theme-brand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-figma-brand);
+}
+
+.social-figma.theme-colorWithBrand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-figma-colorWithBrand);
+}
+
+.social-figma.theme-color .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-figma-color);
+}
+
+.social-dribbble.theme-brand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-dribbble-brand);
+}
+
+.social-dribbble.theme-colorWithBrand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-dribbble-colorWithBrand);
+}
+
+.social-dribbble.theme-color .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-dribbble-color);
+}
+
+.social-x.theme-brand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-x-brand);
+}
+
+.social-x.theme-colorWithBrand .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-x-colorWithBrand);
+}
+
+.social-x.theme-color .socialIcon {
+  --ds-social-icon-color: var(--imported-social-button-social-icon-color-x-color);
+}
+
 .Text {
   font-size: var(--imported-social-button-text-font-size);
   font-weight: var(--imported-social-button-text-font-weight);
   line-height: var(--imported-social-button-text-line-height);
+}
+
+.social-facebook.theme-brand .Text {
+  color: var(--imported-social-button-text-color-facebook-brand);
+}
+
+.social-facebook.theme-colorWithBrand .Text {
+  color: var(--imported-social-button-text-color-facebook-colorWithBrand);
+}
+
+.social-facebook.theme-color .Text {
+  color: var(--imported-social-button-text-color-facebook-color);
+}
+
+.social-google.theme-brand .Text {
+  color: var(--imported-social-button-text-color-google-brand);
+}
+
+.social-google.theme-colorWithBrand .Text {
+  color: var(--imported-social-button-text-color-google-colorWithBrand);
+}
+
+.social-google.theme-color .Text {
+  color: var(--imported-social-button-text-color-google-color);
+}
+
+.social-apple.theme-brand .Text {
+  color: var(--imported-social-button-text-color-apple-brand);
+}
+
+.social-apple.theme-colorWithBrand .Text {
+  color: var(--imported-social-button-text-color-apple-colorWithBrand);
+}
+
+.social-apple.theme-color .Text {
+  color: var(--imported-social-button-text-color-apple-color);
+}
+
+.social-figma.theme-brand .Text {
+  color: var(--imported-social-button-text-color-figma-brand);
+}
+
+.social-figma.theme-colorWithBrand .Text {
+  color: var(--imported-social-button-text-color-figma-colorWithBrand);
+}
+
+.social-figma.theme-color .Text {
+  color: var(--imported-social-button-text-color-figma-color);
+}
+
+.social-dribbble.theme-brand .Text {
+  color: var(--imported-social-button-text-color-dribbble-brand);
+}
+
+.social-dribbble.theme-colorWithBrand .Text {
+  color: var(--imported-social-button-text-color-dribbble-colorWithBrand);
+}
+
+.social-dribbble.theme-color .Text {
+  color: var(--imported-social-button-text-color-dribbble-color);
+}
+
+.social-x.theme-brand .Text {
+  color: var(--imported-social-button-text-color-x-brand);
+}
+
+.social-x.theme-colorWithBrand .Text {
+  color: var(--imported-social-button-text-color-x-colorWithBrand);
+}
+
+.social-x.theme-color .Text {
+  color: var(--imported-social-button-text-color-x-color);
 }

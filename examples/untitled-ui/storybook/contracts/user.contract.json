@@ -4,7 +4,7 @@
   "name": "User",
   "version": "0.1.0",
   "status": "draft",
-  "description": "STUB contract auto-proposed for the nested \"user\" instances of Avatar — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints. Import the child set to replace this stub.",
+  "description": "STUB contract auto-proposed for the nested \"user\" instances of Avatar — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry; the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints. Import the child set to replace this stub.",
   "semantics": {
     "element": "span"
   },
@@ -15,15 +15,21 @@
       "parts": {
         "glyph": {
           "icon": {
-            "asset": "user",
-            "size": 24
+            "asset": "user"
+          },
+          "tokens": {
+            "width": "{imported.stub-user.root.width}",
+            "height": "{imported.stub-user.root.height}"
           }
         }
       },
       "tokens": {
+        "width": "{imported.stub-user.root.width}",
+        "height": "{imported.stub-user.root.height}",
         "color": "{imported.stub-user.root.color}"
       },
       "overridable": [
+        "size",
         "color"
       ]
     }

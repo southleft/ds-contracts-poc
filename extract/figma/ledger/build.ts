@@ -1206,9 +1206,39 @@ p(
 );
 {
   const holes: string[] = [];
-  holes.push(
-    `**Contract-level named notes do not exist.** No \`notes\` (or \`note\`) key appears anywhere in any of the ${contracts.length} contract files. The only prose the contracts carry is the \`description\` field: one standing PROPOSED scope line on each of the ${fullContracts.length} full contracts and one STUB refusal on each of the ${stubContracts.length} stubs, both quoted in §3.2. Per-part refusal notes are a surface this kit does not have.`,
-  );
+  {
+    // GAP-CLOSING ROUND 10 — this hole used to read "per-part refusal notes are
+    // a surface this kit does not have", which stopped being true the moment
+    // the pipeline started committing NOTES.md. The notes were always PRODUCED
+    // (propose returns them); they were just dropped on the floor before being
+    // written anywhere, which is a different defect from not existing. The
+    // contracts still carry no `notes` key — that part of the hole is real and
+    // stays named — but the prose is no longer unreadable, so the hole is
+    // reported at its true size rather than its old one.
+    let notesLine: string;
+    try {
+      const notesMd = readFileSync(path.join(UUI, 'storybook/contracts/NOTES.md'), 'utf8');
+      const lines = notesMd.split('\n').filter((l) => l.startsWith('- ') && !l.startsWith('- **'));
+      const caveated = lines.filter((l) => l.includes('SATURATED')).length;
+      const sets = notesMd.split('\n').filter((l) => l.startsWith('## ')).length;
+      notesLine =
+        `**The contract FILES carry no named notes — but the notes are committed beside them.** No \`notes\` ` +
+        `(or \`note\`) key appears in any of the ${contracts.length} contract files; the only prose inside a contract is ` +
+        `\`description\` (one PROPOSED scope line per full contract, one STUB refusal per stub, both quoted in §3.2). ` +
+        `The inversion's ${fmt(lines.length)} named decisions across ${sets} set(s) live in ` +
+        `\`storybook/contracts/NOTES.md\`, rebuilt and byte-verified by the same drift check as the contracts. ` +
+        `${fmt(lines.length - caveated)} are REFUSALS (nothing bound) and ${caveated} are CARRIED-AND-CAVEATED ` +
+        `(bound, every value measured, but the axis pair is saturated so the correlation is unwitnessed). ` +
+        `What remains a genuine hole: a consumer reading a single contract file still sees no note for the part ` +
+        `in front of them — the mapping from note to part is by node path in a separate document, not a field on the part.`;
+    } catch {
+      notesLine =
+        `**Contract-level named notes do not exist.** No \`notes\` key appears in any of the ${contracts.length} ` +
+        `contract files, and \`storybook/contracts/NOTES.md\` is absent — so the inversion's named decisions are ` +
+        `not readable anywhere in the committed kit.`;
+    }
+    holes.push(notesLine);
+  }
   holes.push(
     `**${fmt(untaggedFacts)} of ${fmt(nonMatched)} non-matching round-trip facts carry no class tag** (${fmt(untagged?.kinds.diverged ?? 0)} diverged + ${fmt(untagged?.kinds.loss ?? 0)} loss, across ${untagged?.components.size ?? 0} of ${rt.results.length} components and ${fmt(untagged?.variants.size ?? 0)} variants). Invention *is* fully classified — ${fmt(inventedTagged)} of ${fmt(rt.totals.invented)} invented facts carry a tag — but divergence and one-way loss are not, so §4's per-class blast radii cover ${pct(nonMatched - untaggedFacts, nonMatched)} of the non-matching facts and no more.`,
   );

@@ -67,8 +67,39 @@
 
 .Ring {
   display: flex;
-  left: 12px;
   position: absolute;
+}
+
+.size-md.shape-circle .Ring {
+  left: var(--imported-progress-circle-ring-left-md-circle);
+}
+
+.size-md.shape-halfCircle .Ring {
+  left: var(--imported-progress-circle-ring-left-md-halfCircle);
+}
+
+.size-lg.shape-circle .Ring {
+  left: var(--imported-progress-circle-ring-left-lg-circle);
+}
+
+.size-lg.shape-halfCircle .Ring {
+  left: var(--imported-progress-circle-ring-left-lg-halfCircle);
+}
+
+.size-sm.shape-circle .Ring {
+  left: var(--imported-progress-circle-ring-left-sm-circle);
+}
+
+.size-sm.shape-halfCircle .Ring {
+  left: var(--imported-progress-circle-ring-left-sm-halfCircle);
+}
+
+.size-xs.shape-circle .Ring {
+  left: var(--imported-progress-circle-ring-left-xs-circle);
+}
+
+.size-xs.shape-halfCircle .Ring {
+  left: var(--imported-progress-circle-ring-left-xs-halfCircle);
 }
 
 .size-md .Ring {
@@ -117,22 +148,6 @@
 
 .size-xs .Ring {
   height: var(--imported-progress-circle-ring-height-xs);
-}
-
-.size-md .Ring {
-  left: 12px;
-}
-
-.size-lg .Ring {
-  left: 13px;
-}
-
-.size-sm .Ring {
-  left: 10px;
-}
-
-.size-xs .Ring {
-  left: 8px;
 }
 
 .Background {
@@ -230,8 +245,6 @@
 .Label {
   color: var(--imported-progress-circle-group-3-label-color);
   font-weight: var(--imported-progress-circle-group-3-label-font-weight);
-  left: 78.5px;
-  top: 89px;
   position: absolute;
 }
 
@@ -267,24 +280,68 @@
   line-height: var(--imported-progress-circle-group-3-label-line-height-xs);
 }
 
-.size-md .Label {
-  left: 78.5px;
-  top: 89px;
+.size-md.shape-circle .Label {
+  left: var(--imported-progress-circle-group-3-label-left-md-circle);
 }
 
-.size-lg .Label {
-  left: 99px;
-  top: 99px;
+.size-md.shape-halfCircle .Label {
+  left: var(--imported-progress-circle-group-3-label-left-md-halfCircle);
 }
 
-.size-sm .Label {
-  left: 63.5px;
-  top: 72px;
+.size-lg.shape-circle .Label {
+  left: var(--imported-progress-circle-group-3-label-left-lg-circle);
 }
 
-.size-xs .Label {
-  left: 43.5px;
-  top: 53px;
+.size-lg.shape-halfCircle .Label {
+  left: var(--imported-progress-circle-group-3-label-left-lg-halfCircle);
+}
+
+.size-sm.shape-circle .Label {
+  left: var(--imported-progress-circle-group-3-label-left-sm-circle);
+}
+
+.size-sm.shape-halfCircle .Label {
+  left: var(--imported-progress-circle-group-3-label-left-sm-halfCircle);
+}
+
+.size-xs.shape-circle .Label {
+  left: var(--imported-progress-circle-group-3-label-left-xs-circle);
+}
+
+.size-xs.shape-halfCircle .Label {
+  left: var(--imported-progress-circle-group-3-label-left-xs-halfCircle);
+}
+
+.size-md.shape-circle .Label {
+  top: var(--imported-progress-circle-group-3-label-top-md-circle);
+}
+
+.size-md.shape-halfCircle .Label {
+  top: var(--imported-progress-circle-group-3-label-top-md-halfCircle);
+}
+
+.size-lg.shape-circle .Label {
+  top: var(--imported-progress-circle-group-3-label-top-lg-circle);
+}
+
+.size-lg.shape-halfCircle .Label {
+  top: var(--imported-progress-circle-group-3-label-top-lg-halfCircle);
+}
+
+.size-sm.shape-circle .Label {
+  top: var(--imported-progress-circle-group-3-label-top-sm-circle);
+}
+
+.size-sm.shape-halfCircle .Label {
+  top: var(--imported-progress-circle-group-3-label-top-sm-halfCircle);
+}
+
+.size-xs.shape-circle .Label {
+  top: var(--imported-progress-circle-group-3-label-top-xs-circle);
+}
+
+.size-xs.shape-halfCircle .Label {
+  top: var(--imported-progress-circle-group-3-label-top-xs-halfCircle);
 }
 
 .Number {

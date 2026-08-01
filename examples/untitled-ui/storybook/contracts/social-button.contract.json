@@ -130,6 +130,9 @@
               },
               "state": "default",
               "style": "white"
+            },
+            "overrides": {
+              "color": "{imported.social-button.social-icon.color.{social}.{theme}}"
             }
           }
         },
@@ -149,6 +152,7 @@
             "prop": "supportingText"
           },
           "tokens": {
+            "color": "{imported.social-button.text.color.{social}.{theme}}",
             "font-size": "{imported.social-button.text.font-size}",
             "font-weight": "{imported.social-button.text.font-weight}",
             "line-height": "{imported.social-button.text.line-height}"

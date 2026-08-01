@@ -13,7 +13,7 @@ const ICONS: Record<string, string> = {
 
 export interface UserProps extends HTMLAttributes<HTMLSpanElement> {}
 
-/** STUB contract auto-proposed for the nested "user" instances of Avatar — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints. Import the child set to replace this stub. */
+/** STUB contract auto-proposed for the nested "user" instances of Avatar — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry; the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints. Import the child set to replace this stub. */
 export const User = forwardRef<HTMLSpanElement, UserProps>(function User(
   { className, children, ...rest },
   ref,

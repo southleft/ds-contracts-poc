@@ -8,15 +8,14 @@
   align-items: center;
   justify-content: center;
   border: 0;
+  width: var(--ds-user-size, var(--imported-stub-user-root-width));
+  height: var(--ds-user-size, var(--imported-stub-user-root-height));
   color: var(--ds-user-color, var(--imported-stub-user-root-color));
-}
-
-.glyph svg {
-  width: 24px;
-  height: 24px;
 }
 
 .glyph {
   display: inline-flex;
   flex-shrink: 0;
+  width: var(--ds-user-size, var(--imported-stub-user-root-width));
+  height: var(--ds-user-size, var(--imported-stub-user-root-height));
 }

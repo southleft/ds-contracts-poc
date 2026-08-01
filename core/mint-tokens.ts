@@ -140,6 +140,13 @@ export interface MintedBinding {
   ref: string | null;
   /** Review-note text when ref is null. */
   reason?: string;
+  /** Review-note text on a binding that IS carried but whose evidence is
+   *  weaker than the ref's shape implies — today: a SATURATED axis pair,
+   *  where every cell holds at most one observation so the correlation is
+   *  unwitnessed. The values are all measured, so they are carried; the
+   *  caveat says the PAIR may be drift rather than intent. Distinct from
+   *  `reason` on purpose: this binding is bound, not refused. */
+  caveat?: string;
 }
 
 export interface MintResult {
@@ -223,7 +230,7 @@ const sharedName = (kind: MintKind, value: string | number): string =>
 type Classified =
   | { kind: 'uniform'; value: string | number }
   | { kind: 'variant'; axis: MintAxis; byValue: Map<string, string | number> }
-  | { kind: 'variant2'; axes: [MintAxis, MintAxis]; byValue: Map<string, string | number> }
+  | { kind: 'variant2'; axes: [MintAxis, MintAxis]; byValue: Map<string, string | number>; unwitnessed?: boolean }
   | { kind: 'variant3'; axes: [MintAxis, MintAxis, MintAxis]; byValue: Map<string, string | number> }
   | { kind: 'none'; reason: string };
 
@@ -291,6 +298,13 @@ function classify(obs: MintObservation, allAxes: MintAxis[], nestedPairs: boolea
   // would emit a two-placeholder ref onto a nested part, which the referee
   // refuses by name. Handing a consumer a ref it cannot carry IS the bug
   // this round is about, so the classifier never offers one.
+  //
+  // GAP-CLOSING ROUND 10 — the design path now DOES declare it, because the
+  // referee stopped refusing: a nested two-placeholder ref emits as the
+  // compound ancestor selector `.social-facebook.theme-color .Text`, the
+  // same expansion the root's own pair already took. The flag stays, and
+  // stays honest — a caller that still cannot spell a pair must not ask for
+  // one — but it is no longer a statement about the DESIGN path.
   const pairsAllowed = obs.part === '' || nestedPairs;
   if (!pairsAllowed) {
     return {
@@ -313,14 +327,31 @@ function classify(obs: MintObservation, allAxes: MintAxis[], nestedPairs: boolea
         byValue.set(key, o.value);
       }
       if (fits) {
+        // GAP-CLOSING ROUND 10 — THE SATURATION CAVEAT (revised, and the
+        // revision is the point). A pair spans |a| x |b| cells; when the
+        // observation count does not EXCEED that, every cell holds at most
+        // one observation and the "fit" is vacuous — ANY values would fit, so
+        // the pair proves no correlation. The first cut REFUSED that case.
+        // Measured, it was worse than the disease: ButtonBase's padding is
+        // Size(4) x Icon(5) = 20 cells over exactly 20 variants, so refusing
+        // discarded twenty MEASURED paddings and rendered a 22px-tall button
+        // where the canvas draws 40 — the same lose-a-measured-fact class as
+        // border-color -> currentColor. Every cell's value here is an
+        // observation, never an interpolation, so the honest act is to CARRY
+        // it and NAME its epistemic status: the values are reproduced, and
+        // the note says the pair is unwitnessed and may be drift rather than
+        // intent. Refusing loses facts; carrying silently overclaims; naming
+        // does neither.
+        const cells = a.values.length * b.values.length;
+        const unwitnessed = obs.occurrences.length <= cells;
         const missing: string[] = [];
         for (const va of a.values) for (const vb of b.values) if (!byValue.has(pairKey(va, vb))) missing.push(pairKey(va, vb));
-        if (missing.length === 0) return { kind: 'variant2', axes: [a, b], byValue };
+        if (missing.length === 0) return { kind: 'variant2', axes: [a, b], byValue, unwitnessed };
         // Sparse fill (presence-shaped channels): unobserved combinations
         // take the declared vacuous value — see the single-axis case.
         if (obs.sparse !== undefined && byValue.size > 0) {
           for (const key of missing) byValue.set(key, obs.sparse);
-          return { kind: 'variant2', axes: [a, b], byValue };
+          return { kind: 'variant2', axes: [a, b], byValue, unwitnessed };
         }
       }
     }
@@ -478,10 +509,28 @@ export function mintTokens(
       for (const [key, value] of c.byValue) {
         claim(`${groupBase}.${key}`, obs.kind, value, `${site} (${siteSuffix(key)})`);
       }
+      const cells2 =
+        c.kind === 'variant2' ? c.axes[0].values.length * c.axes[1].values.length : 0;
       return {
         nodePath: obs.nodePath,
         cssProperty: obs.cssProperty,
         ref: `{${groupBase}.${axisProps.map((p) => `{${p}}`).join('.')}}`,
+        ...(c.kind === 'variant2' && c.unwitnessed
+          ? {
+              caveat:
+                `every value carried here is measured, but the pair "${axisProps[0]}" x "${axisProps[1]}" is SATURATED ` +
+                `(${obs.occurrences.length} observation(s) over ${cells2} cell(s) — at most one per cell, so ANY values would fit): ` +
+                'the per-cell values reproduce the drawing exactly, but the CORRELATION is unwitnessed and may be drift rather than intent — review before treating it as a rule. ' +
+                // The distinct-value count is the reviewer's shortcut. An
+                // arbitrary assignment over N cells tends toward N distinct
+                // values; heavy repetition is structure the fit did not have
+                // to invent. It is a HINT, deliberately not a gate: the engine
+                // does not get to decide intent from a histogram, it just
+                // hands the reader the number it already computed.
+                `Values are ${new Set([...c.byValue.values()].map((v) => formatValue(obs.kind, v))).size} distinct over ${cells2} cell(s)` +
+                `${new Set([...c.byValue.values()]).size < cells2 ? ' — the repetition across cells is structure, which an arbitrary assignment would not show' : ' — one distinct value per cell, which is what uncorrelated drift looks like'}`,
+            }
+          : {}),
       };
     }
   });

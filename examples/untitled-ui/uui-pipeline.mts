@@ -194,6 +194,16 @@ const register = (c: AnyContract): void => {
 const fileKey = (dump._provenance as { fileKey?: string | null } | undefined)?.fileKey ?? null;
 const textOverrideDemand = textOverrideDemandFromDumps(dump);
 
+/** Every proposal's named notes, per set — refusals AND carried-but-caveated
+ *  bindings. These were ephemeral until now: propose produced them, the
+ *  pipeline dropped them, and the only prose that survived into a committed
+ *  file was each contract's one-line `description`. That made half of the
+ *  minting doctrine unreadable — a SATURATED axis pair is carried with a
+ *  caveat saying the correlation is unwitnessed, and a caveat nobody can read
+ *  is indistinguishable from a silent claim. NOTES.md is byte-verified by the
+ *  same drift check as the contracts, so the naming cannot rot. */
+const notesBySet = new Map<string, string[]>();
+
 for (const setName of IMPORT_ORDER) {
   const proposal: FigmaProposalResult = proposeFromDump(dump[setName] as DumpSet, {
     corpus,
@@ -208,6 +218,7 @@ for (const setName of IMPORT_ORDER) {
     iconAssets,
     instanceOverrides: ledger,
   });
+  if ((proposal.notes ?? []).length > 0) notesBySet.set(setName, proposal.notes as string[]);
   register(proposal.contract as AnyContract);
   for (const stub of proposal.childStubs ?? []) {
     register(stub as AnyContract);
@@ -330,6 +341,60 @@ const observedInk = (set: DumpSet, assets: Set<string>): Array<{ variant: string
   return out;
 };
 
+interface AxisSpec {
+  propName: string;
+  figmaProperty: string;
+  values: string[];
+  contractValueOf: Map<string, string>;
+}
+
+/** Round 10 — the SMALLEST subset of the host's enum axes the observed ink is
+ *  a total function of: every occurrence agrees on a value for its
+ *  combination, and every combination in the cartesian is observed. Subsets
+ *  are tried by size and then declared order, so the answer is a function of
+ *  the contract and the observations alone. null = no subset explains it, and
+ *  the ink stays the child's baked default (the round-8 refusal, unchanged). */
+const inkAxisFit = (
+  occurrences: Array<{ variant: string; hex: string }>,
+  specs: AxisSpec[],
+): { axes: AxisSpec[]; byCombo: Map<string, string> } | null => {
+  const comboOf = (variant: string, axes: AxisSpec[]): string | null => {
+    const figma = axesOf(variant);
+    const parts: string[] = [];
+    for (const a of axes) {
+      const v = a.contractValueOf.get(figma[a.figmaProperty]);
+      if (v === undefined) return null;
+      parts.push(v);
+    }
+    return parts.join('.');
+  };
+  const subsets: AxisSpec[][] = [];
+  for (let size = 1; size <= specs.length; size++) {
+    const build = (start: number, acc: AxisSpec[]): void => {
+      if (acc.length === size) { subsets.push([...acc]); return; }
+      for (let i = start; i < specs.length; i++) build(i + 1, [...acc, specs[i]]);
+    };
+    build(0, []);
+  }
+  for (const axes of subsets) {
+    const byCombo = new Map<string, string>();
+    let fits = true;
+    for (const o of occurrences) {
+      const key = comboOf(o.variant, axes);
+      if (key === null) { fits = false; break; }
+      const seen = byCombo.get(key);
+      if (seen !== undefined && seen !== o.hex) { fits = false; break; }
+      byCombo.set(key, o.hex);
+    }
+    if (!fits) continue;
+    let total = 1;
+    for (const a of axes) total *= a.values.length;
+    if (byCombo.size !== total) continue; // partial cartesian → dangling ref
+    return { axes, byCombo };
+  }
+  return null;
+};
+
 for (const setName of IMPORT_ORDER) {
   const set = dump[setName] as DumpSet;
   const host = contracts.get(`ds.${componentIdSlug(setName)}`);
@@ -342,6 +407,18 @@ for (const setName of IMPORT_ORDER) {
       .filter((p: any) => p?.bindings?.figma?.kind === 'VARIANT' && typeof p.bindings.figma.property === 'string')
       .map((p: any) => String(p.bindings.figma.property)),
   );
+  /** The host's enum props that ride a Figma VARIANT axis, in declared order,
+   *  with the Figma value spelling mapped back to the contract's own. */
+  const axisSpecs: AxisSpec[] = (host.props ?? [])
+    .filter((p: any) => p?.bindings?.figma?.kind === 'VARIANT' && typeof p.bindings.figma.property === 'string' && p?.type?.enum)
+    .map((p: any) => ({
+      propName: String(p.name),
+      figmaProperty: String(p.bindings.figma.property),
+      values: p.type.enum as string[],
+      contractValueOf: new Map<string, string>(
+        Object.entries(p.bindings.figma.values ?? {}).map(([contractValue, figmaValue]) => [String(figmaValue), contractValue]),
+      ),
+    }));
   const walk = (part: any, pathSegs: string[]): void => {
     const childId = part?.component?.id;
     if (typeof childId === 'string' && stubInk.has(childId)) {
@@ -354,10 +431,33 @@ for (const setName of IMPORT_ORDER) {
           return Object.keys(axes).every((a) => apiAxes.has(a) || axes[a] === defaults[a]);
         });
         const inks = [...new Set(onDefaultPlane.map((o) => o.hex))];
+        const base = `imported.${componentIdSlug(setName)}.${partSegment(pathSegs)}.color`;
         if (inks.length === 1 && inks[0] !== stubInk.get(childId)) {
-          const dotPath = `imported.${componentIdSlug(setName)}.${partSegment(pathSegs)}.color`;
-          part.component.overrides = { ...(part.component.overrides ?? {}), color: `{${dotPath}}` };
-          putLeaf(dotPath, colorLeaf(inks[0]));
+          part.component.overrides = { ...(part.component.overrides ?? {}), color: `{${base}}` };
+          putLeaf(base, colorLeaf(inks[0]));
+        } else if (inks.length > 1) {
+          // GAP-CLOSING ROUND 10 — PER-USAGE INK THAT IS A FUNCTION OF MORE
+          // THAN ONE AXIS. Round 8 refused this outright ("an override ref
+          // carries at most one placeholder"), and the refusal was not a
+          // named approximation: Social button's icon ink is
+          // f(Social x Theme) — white on the brand grounds, #a3a3a3 on Color,
+          // the platform's own hex on Color-with-brand — so nothing carried
+          // and 48 of its 108 variants drew a WHITE glyph on a WHITE ground.
+          // core/emit-react.ts now expands an override ref's placeholders as
+          // the compound ancestor selector (.social-facebook.theme-color
+          // .socialIcon), so the arity limit is gone and the honest carriage
+          // is the SMALLEST axis subset the ink is a total function of.
+          // Smallest, and every combination OBSERVED: a partial cartesian
+          // would ship a dangling ref, and a bigger subset than the evidence
+          // supports would claim a dependency the canvas does not draw.
+          const fit = inkAxisFit(onDefaultPlane, axisSpecs);
+          if (fit && [...fit.byCombo.values()].some((hex) => hex !== stubInk.get(childId))) {
+            part.component.overrides = {
+              ...(part.component.overrides ?? {}),
+              color: `{${base}.${fit.axes.map((a) => `{${a.propName}}`).join('.')}}`,
+            };
+            for (const [combo, hex] of fit.byCombo) putLeaf(`${base}.${combo}`, colorLeaf(hex));
+          }
         }
       }
     }
@@ -375,8 +475,43 @@ const serialize = (value: unknown): string => `${JSON.stringify(value, null, 2)}
 const built = new Map<string, string>();
 for (const [id, contract] of contracts) built.set(`${id.replace(/^ds\./, '')}.contract.json`, serialize(contract));
 built.set('minted.dtcg.json', serialize(mintedTree));
+built.set('NOTES.md', renderNotes());
 
-const pathFor = (file: string): string => (file === 'minted.dtcg.json' ? MINTED : path.join(CONTRACTS, file));
+function renderNotes(): string {
+  const sets = [...notesBySet.keys()].sort();
+  const total = [...notesBySet.values()].reduce((n, v) => n + v.length, 0);
+  const caveats = [...notesBySet.values()].flat().filter((n) => n.includes('SATURATED')).length;
+  const out: string[] = [
+    '# Proposal notes — every named decision the inversion made',
+    '',
+    'Generated by `npx tsx examples/untitled-ui/uui-pipeline.mts --write`. Byte-verified',
+    'against a rebuild from `dumps-v2/MERGED.dump.json` by the same drift check that',
+    'guards the contracts, so these notes cannot drift from the code that produced them.',
+    '',
+    'Two kinds of note appear here, and the difference is load-bearing:',
+    '',
+    '- **REFUSED** — nothing was bound. The fact was measured but no rule fit it, so the',
+    '  contract carries no ref and an adopter must bind it by hand.',
+    '- **CARRIED, CAVEATED** — the binding EXISTS and reproduces every measured value,',
+    '  but the evidence is weaker than the ref shape implies. Today that means exactly',
+    "  one thing: a SATURATED axis pair, where the pair's cell count is at least the",
+    '  observation count, so every cell holds at most one observation and ANY values',
+    '  would have fit. The values are real; the CORRELATION is unwitnessed. Carrying it',
+    '  reproduces the drawing; naming it stops the ref from reading as a proven rule.',
+    '',
+    `**${total} note(s) across ${sets.length} set(s)** — ${caveats} carried-and-caveated, ${total - caveats} refusals.`,
+    '',
+  ];
+  for (const set of sets) {
+    out.push(`## ${set}`, '');
+    for (const n of notesBySet.get(set)!) out.push(`- ${n}`);
+    out.push('');
+  }
+  return out.join('\n');
+}
+
+const pathFor = (file: string): string =>
+  file === 'minted.dtcg.json' ? MINTED : file === 'NOTES.md' ? path.join(CONTRACTS, file) : path.join(CONTRACTS, file);
 
 const committed = new Set(readdirSync(CONTRACTS).filter((f) => f.endsWith('.contract.json')));
 const orphans = [...committed].filter((f) => !built.has(f));
@@ -394,7 +529,7 @@ for (const [file, text] of built) {
   if (WRITE) writeFileSync(pathFor(file), text);
 }
 
-const nContracts = built.size - 1;
+const nContracts = built.size - 2; // minted.dtcg.json + NOTES.md
 if (WRITE) {
   console.log(
     drift.length === 0

@@ -10,27 +10,27 @@ The hand-built canvas used zero published variables, so captured.dtcg.json is `{
 
 | component | status | variants (orig → rt) | matched | diverged | loss (orig-only) | invented (rt-only) |
 |---|---|---|---|---|---|---|
-| avatar | round trip closed | 162 → 216 | 2085 | 471 | 1140 | 1566 |
+| avatar | round trip closed | 162 → 216 | 2193 | 471 | 1032 | 1728 |
 | avatar-add-button | round trip closed | 12 → 9 | 174 | 45 | 78 | 0 |
-| avatar-group | round trip closed | 12 → 12 | 322 | 56 | 78 | 1722 |
+| avatar-group | round trip closed | 12 → 12 | 328 | 50 | 78 | 1722 |
 | avatar-label-group | round trip closed | 36 → 12 | 422 | 42 | 93 | 8 |
 | badge-base | round trip closed | 8 → 8 | 158 | 8 | 14 | 1 |
-| button-base | round trip closed | 20 → 20 | 404 | 32 | 32 | 0 |
+| button-base | round trip closed | 20 → 20 | 384 | 52 | 32 | 0 |
 | button-group-base | round trip closed | 32 → 32 | 496 | 64 | 72 | 32 |
 | dropdown-list-item | round trip closed | 24 → 12 | 127 | 14 | 125 | 144 |
 | input-field-base | round trip closed | 10 → 10 | 531 | 47 | 277 | 164 |
 | progress-bar | round trip closed | 55 → 55 | 1299 | 285 | 485 | 649 |
-| progress-circle | round trip closed | 16 → 16 | 315 | 94 | 225 | 231 |
-| slider | round trip closed | 40 → 64 | 1184 | 496 | 1180 | 1444 |
-| social-button | round trip closed | 108 → 108 | 2238 | 186 | 216 | 60 |
+| progress-circle | round trip closed | 16 → 16 | 317 | 92 | 225 | 231 |
+| slider | round trip closed | 40 → 64 | 1208 | 472 | 1180 | 1444 |
+| social-button | round trip closed | 108 → 108 | 2292 | 186 | 162 | 60 |
 | toggle-base | round trip closed | 32 → 10 | 157 | 13 | 22 | 0 |
 | tooltip | round trip closed | 28 → 28 | 910 | 124 | 213 | 182 |
 
-**15/15 round trips closed.** Across the closed ones: 10822 matched, 1977 diverged, 4250 one-way loss, 6203 invented.
+**15/15 round trips closed.** Across the closed ones: 10996 matched, 1965 diverged, 4088 one-way loss, 6365 invented.
 
 ## avatar — 162 → 216 variants
 
-matched 2085 · diverged 471 · loss 1140 · invented 1566
+matched 2193 · diverged 471 · loss 1032 · invented 1728
 
 ### DIVERGED (value differs; original → round trip)
 
@@ -46,15 +46,6 @@ matched 2085 · diverged 471 · loss 1140 · invented 1566
 
 ### LOSS (in the original, not the round trip)
 
-- class `(unclassified)` — 168 fact(s):
-  - (root) ▸ fill: #f9f5ff  (×108 variants)
-  - text ▸ abs: 0,13  (×9 variants)
-  - text ▸ abs: 0,14  (×9 variants)
-  - text ▸ abs: 0,10  (×9 variants)
-  - text ▸ abs: 0,8  (×9 variants)
-  - text ▸ abs: 0,6  (×9 variants)
-  - text ▸ abs: 0,4  (×9 variants)
-  - (root) ▸ effects: DROP_SHADOW #f4ebff@1 off=0,0 r=0 s=4  (×6 variants)
 - class `text-style-identity` — 54 fact(s):
   - text ▸ text.style: Text xl/Medium  (×9 variants)
   - text ▸ text.style: Display xs/Medium  (×9 variants)
@@ -62,6 +53,14 @@ matched 2085 · diverged 471 · loss 1140 · invented 1566
   - text ▸ text.style: Text md/Medium  (×9 variants)
   - text ▸ text.style: Text sm/Medium  (×9 variants)
   - text ▸ text.style: Text xs/Medium  (×9 variants)
+- class `(unclassified)` — 60 fact(s):
+  - text ▸ abs: 0,13  (×9 variants)
+  - text ▸ abs: 0,14  (×9 variants)
+  - text ▸ abs: 0,10  (×9 variants)
+  - text ▸ abs: 0,8  (×9 variants)
+  - text ▸ abs: 0,6  (×9 variants)
+  - text ▸ abs: 0,4  (×9 variants)
+  - (root) ▸ effects: DROP_SHADOW #f4ebff@1 off=0,0 r=0 s=4  (×6 variants)
 - class `restructured` — 756 fact(s):
   - avatarcompanyicon ▸ stroke: #ffffff  (×54 variants)
   - avatarcompanyicon ▸ instanceOf: avatarcompanyicon  (×54 variants)
@@ -107,7 +106,7 @@ matched 2085 · diverged 471 · loss 1140 · invented 1566
 
 ### INVENTED (in the round trip, not the original — must be zero or named)
 
-- class `restructured` — 1512 fact(s):
+- class `restructured` — 1620 fact(s):
   - avatarcompanyicon/avatarcompanyiconinstance ▸ kind: instance  (×54 variants)
   - avatarcompanyicon/avatarcompanyiconinstance ▸ layout.mode: HORIZONTAL  (×54 variants)
   - avatarcompanyicon/avatarcompanyiconinstance ▸ layout.align: CENTER/CENTER  (×54 variants)
@@ -132,7 +131,9 @@ matched 2085 · diverged 471 · loss 1140 · invented 1566
   - user/instance ▸ layout.align: CENTER/CENTER  (×54 variants)
   - user/instance ▸ layout.gap: 0  (×54 variants)
   - user/instance ▸ layout.padding: 0,0,0,0  (×54 variants)
-  - user/instance ▸ layout.sizing: AUTO/AUTO  (×54 variants)
+  - user/instance ▸ layout.sizing: FIXED/FIXED  (×54 variants)
+  - user/instance ▸ width: 32  (×54 variants)
+  - user/instance ▸ height: 32  (×54 variants)
   - user/instance ▸ instanceOf: user  (×54 variants)
   - avatarcompanyicon/avatarcompanyiconinstance ▸ prop:Size: xl  (×9 variants)
   - avataronlineindicator/avataronlineindicatorinstance ▸ prop:Size: xl  (×9 variants)
@@ -146,6 +147,8 @@ matched 2085 · diverged 471 · loss 1140 · invented 1566
   - avataronlineindicator/avataronlineindicatorinstance ▸ prop:Size: sm  (×9 variants)
   - avatarcompanyicon/avatarcompanyiconinstance ▸ prop:Size: xs  (×9 variants)
   - avataronlineindicator/avataronlineindicatorinstance ▸ prop:Size: xs  (×9 variants)
+- class `zero-fill` — 54 fact(s):
+  - (root) ▸ fill: #000000@0  (×54 variants)
 - class `cartesian-fill` — 54 fact(s):
   - (root) ▸ variant: extra variant in round trip  (×54 variants)
 
@@ -198,14 +201,13 @@ matched 174 · diverged 45 · loss 78 · invented 0
 
 ## avatar-group — 12 → 12 variants
 
-matched 322 · diverged 56 · loss 78 · invented 1722
+matched 328 · diverged 50 · loss 78 · invented 1722
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 56 fact(s):
+- class `(unclassified)` — 50 fact(s):
   - avatars/avatar ▸ layout.mode: NONE → VERTICAL  (×6 variants)
   - avatars/avatar ▸ prop:Text: true → false  (×6 variants)
-  - avatars/avatar ▸ instanceInk: #f9f5ff → #7f56d9  (×6 variants)
   - avataraddbutton ▸ layout.mode: NONE → HORIZONTAL  (×6 variants)
   - avatars/avatar ▸ width: 24 → 56  (×4 variants)
   - avatars/avatar ▸ height: 24 → 56  (×4 variants)
@@ -251,7 +253,7 @@ matched 322 · diverged 56 · loss 78 · invented 1722
   - avatars/avatar2 ▸ prop:Text: false  (×12 variants)
   - avatars/avatar2 ▸ prop:Status icon: false  (×12 variants)
   - avatars/avatar2 ▸ prop:State: default  (×12 variants)
-  - avatars/avatar2 ▸ instanceInk: #7f56d9  (×12 variants)
+  - avatars/avatar2 ▸ instanceInk: #f9f5ff  (×12 variants)
   - avatars/avatar3 ▸ kind: instance  (×12 variants)
   - avatars/avatar3 ▸ layout.mode: VERTICAL  (×12 variants)
   - avatars/avatar3 ▸ layout.align: CENTER/CENTER  (×12 variants)
@@ -265,7 +267,7 @@ matched 322 · diverged 56 · loss 78 · invented 1722
   - avatars/avatar3 ▸ prop:Text: false  (×12 variants)
   - avatars/avatar3 ▸ prop:Status icon: false  (×12 variants)
   - avatars/avatar3 ▸ prop:State: default  (×12 variants)
-  - avatars/avatar3 ▸ instanceInk: #7f56d9  (×12 variants)
+  - avatars/avatar3 ▸ instanceInk: #f9f5ff  (×12 variants)
   - avatars/avatar4 ▸ kind: instance  (×12 variants)
   - avatars/avatar4 ▸ layout.mode: VERTICAL  (×12 variants)
   - avatars/avatar4 ▸ layout.align: CENTER/CENTER  (×12 variants)
@@ -279,7 +281,7 @@ matched 322 · diverged 56 · loss 78 · invented 1722
   - avatars/avatar4 ▸ prop:Text: false  (×12 variants)
   - avatars/avatar4 ▸ prop:Status icon: false  (×12 variants)
   - avatars/avatar4 ▸ prop:State: default  (×12 variants)
-  - avatars/avatar4 ▸ instanceInk: #7f56d9  (×12 variants)
+  - avatars/avatar4 ▸ instanceInk: #f9f5ff  (×12 variants)
   - avatars/avatar5 ▸ kind: instance  (×12 variants)
   - avatars/avatar5 ▸ layout.mode: VERTICAL  (×12 variants)
   - avatars/avatar5 ▸ layout.align: CENTER/CENTER  (×12 variants)
@@ -293,7 +295,7 @@ matched 322 · diverged 56 · loss 78 · invented 1722
   - avatars/avatar5 ▸ prop:Text: false  (×12 variants)
   - avatars/avatar5 ▸ prop:Status icon: false  (×12 variants)
   - avatars/avatar5 ▸ prop:State: default  (×12 variants)
-  - avatars/avatar5 ▸ instanceInk: #7f56d9  (×12 variants)
+  - avatars/avatar5 ▸ instanceInk: #f9f5ff  (×12 variants)
   - avatars/avatar6 ▸ kind: instance  (×12 variants)
   - avatars/avatar6 ▸ layout.mode: VERTICAL  (×12 variants)
   - avatars/avatar6 ▸ layout.align: CENTER/CENTER  (×12 variants)
@@ -307,7 +309,7 @@ matched 322 · diverged 56 · loss 78 · invented 1722
   - avatars/avatar6 ▸ prop:Text: false  (×12 variants)
   - avatars/avatar6 ▸ prop:Status icon: false  (×12 variants)
   - avatars/avatar6 ▸ prop:State: default  (×12 variants)
-  - avatars/avatar6 ▸ instanceInk: #7f56d9  (×12 variants)
+  - avatars/avatar6 ▸ instanceInk: #f9f5ff  (×12 variants)
   - avatars/avatar7 ▸ kind: instance  (×12 variants)
   - avatars/avatar7 ▸ layout.mode: VERTICAL  (×12 variants)
   - avatars/avatar7 ▸ layout.align: CENTER/CENTER  (×12 variants)
@@ -321,7 +323,7 @@ matched 322 · diverged 56 · loss 78 · invented 1722
   - avatars/avatar7 ▸ prop:Text: false  (×12 variants)
   - avatars/avatar7 ▸ prop:Status icon: false  (×12 variants)
   - avatars/avatar7 ▸ prop:State: default  (×12 variants)
-  - avatars/avatar7 ▸ instanceInk: #7f56d9  (×12 variants)
+  - avatars/avatar7 ▸ instanceInk: #f9f5ff  (×12 variants)
   - avatars/avatar8 ▸ kind: instance  (×12 variants)
   - avatars/avatar8 ▸ layout.mode: VERTICAL  (×12 variants)
   - avatars/avatar8 ▸ layout.align: CENTER/CENTER  (×12 variants)
@@ -335,7 +337,7 @@ matched 322 · diverged 56 · loss 78 · invented 1722
   - avatars/avatar8 ▸ prop:Text: false  (×12 variants)
   - avatars/avatar8 ▸ prop:Status icon: false  (×12 variants)
   - avatars/avatar8 ▸ prop:State: default  (×12 variants)
-  - avatars/avatar8 ▸ instanceInk: #7f56d9  (×12 variants)
+  - avatars/avatar8 ▸ instanceInk: #f9f5ff  (×12 variants)
   - avatars/avatar9 ▸ kind: instance  (×12 variants)
   - avatars/avatar9 ▸ layout.mode: VERTICAL  (×12 variants)
   - avatars/avatar9 ▸ layout.align: CENTER/CENTER  (×12 variants)
@@ -349,7 +351,7 @@ matched 322 · diverged 56 · loss 78 · invented 1722
   - avatars/avatar9 ▸ prop:Text: false  (×12 variants)
   - avatars/avatar9 ▸ prop:Status icon: false  (×12 variants)
   - avatars/avatar9 ▸ prop:State: default  (×12 variants)
-  - avatars/avatar9 ▸ instanceInk: #7f56d9  (×12 variants)
+  - avatars/avatar9 ▸ instanceInk: #f9f5ff  (×12 variants)
   - avatars/avatar10 ▸ kind: instance  (×12 variants)
   - avatars/avatar10 ▸ layout.mode: VERTICAL  (×12 variants)
   - avatars/avatar10 ▸ layout.align: CENTER/CENTER  (×12 variants)
@@ -363,7 +365,7 @@ matched 322 · diverged 56 · loss 78 · invented 1722
   - avatars/avatar10 ▸ prop:Text: false  (×12 variants)
   - avatars/avatar10 ▸ prop:Status icon: false  (×12 variants)
   - avatars/avatar10 ▸ prop:State: default  (×12 variants)
-  - avatars/avatar10 ▸ instanceInk: #7f56d9  (×12 variants)
+  - avatars/avatar10 ▸ instanceInk: #f9f5ff  (×12 variants)
   - avatars/avatar11 ▸ kind: instance  (×6 variants)
   - avatars/avatar11 ▸ layout.mode: VERTICAL  (×6 variants)
   - avatars/avatar11 ▸ layout.align: CENTER/CENTER  (×6 variants)
@@ -377,7 +379,7 @@ matched 322 · diverged 56 · loss 78 · invented 1722
   - avatars/avatar11 ▸ prop:Text: true  (×6 variants)
   - avatars/avatar11 ▸ prop:Status icon: false  (×6 variants)
   - avatars/avatar11 ▸ prop:State: default  (×6 variants)
-  - avatars/avatar11 ▸ instanceInk: #7f56d9  (×6 variants)
+  - avatars/avatar11 ▸ instanceInk: #f9f5ff  (×6 variants)
   - avatars/avatar2 ▸ prop:Size: xs  (×4 variants)
   - avatars/avatar3 ▸ prop:Size: xs  (×4 variants)
   - avatars/avatar4 ▸ prop:Size: xs  (×4 variants)
@@ -411,7 +413,7 @@ matched 322 · diverged 56 · loss 78 · invented 1722
 - class `declared-not-drawn` — 6 fact(s):
   - avataraddbutton ▸ prop:Disabled: false  (×6 variants)
 - class `vector-glyph` — 6 fact(s):
-  - avatars/avatar ▸ instanceInk: #7f56d9  (×6 variants)
+  - avatars/avatar ▸ instanceInk: #f9f5ff  (×6 variants)
 
 ## avatar-label-group — 36 → 12 variants
 
@@ -422,7 +424,7 @@ matched 422 · diverged 42 · loss 93 · invented 8
 - class `(unclassified)` — 42 fact(s):
   - avatar ▸ prop:State: focused → default  (×12 variants)
   - avatar ▸ layout.mode: NONE → VERTICAL  (×8 variants)
-  - avatar ▸ instanceInk: #22c55e → #7f56d9  (×4 variants)
+  - avatar ▸ instanceInk: #22c55e → #f9f5ff  (×4 variants)
   - avatar ▸ width: 40 → 56  (×3 variants)
   - avatar ▸ height: 40 → 56  (×3 variants)
   - avatar ▸ width: 48 → 56  (×3 variants)
@@ -452,7 +454,7 @@ matched 422 · diverged 42 · loss 93 · invented 8
 ### INVENTED (in the round trip, not the original — must be zero or named)
 
 - class `vector-glyph` — 8 fact(s):
-  - avatar ▸ instanceInk: #7f56d9  (×8 variants)
+  - avatar ▸ instanceInk: #f9f5ff  (×8 variants)
 
 ## badge-base — 8 → 8 variants
 
@@ -487,21 +489,29 @@ matched 158 · diverged 8 · loss 14 · invented 1
 ### INVENTED (in the round trip, not the original — must be zero or named)
 
 - class `vector-glyph` — 1 fact(s):
-  - avatar ▸ instanceInk: #7f56d9  (Icon=Avatar)
+  - avatar ▸ instanceInk: #f9f5ff  (Icon=Avatar)
 
 ## button-base — 20 → 20 variants
 
-matched 404 · diverged 32 · loss 32 · invented 0
+matched 384 · diverged 52 · loss 32 · invented 0
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 32 fact(s):
+- class `(unclassified)` — 52 fact(s):
   - circle ▸ layout.mode: NONE → HORIZONTAL  (×12 variants)
+  - (root) ▸ layout.padding: 10,16,10,16 → 0,0,0,0  (×4 variants)
+  - (root) ▸ layout.padding: 10,18,10,18 → 0,0,0,0  (×4 variants)
+  - (root) ▸ layout.padding: 12,20,12,20 → 0,0,0,0  (×4 variants)
+  - (root) ▸ layout.padding: 8,14,8,14 → 0,0,0,0  (×4 variants)
   - (root) ▸ layout.align: CENTER/CENTER → MIN/MIN  (×4 variants)
   - dot ▸ layout.mode: NONE → HORIZONTAL  (×4 variants)
   - dot ▸ width: 10 → 8  (×4 variants)
   - dot ▸ height: 10 → 8  (×4 variants)
   - dot ▸ instanceInk: #ffffff → #9e77ed  (×4 variants)
+  - (root) ▸ layout.padding: 10,10,10,10 → 0,0,0,0  (Icon=Only, Size=md)
+  - (root) ▸ layout.padding: 12,12,12,12 → 0,0,0,0  (Icon=Only, Size=lg)
+  - (root) ▸ layout.padding: 14,14,14,14 → 0,0,0,0  (Icon=Only, Size=xl)
+  - (root) ▸ layout.padding: 8,8,8,8 → 0,0,0,0  (Icon=Only, Size=sm)
 
 ### LOSS (in the original, not the round trip)
 
@@ -990,11 +1000,11 @@ matched 1299 · diverged 285 · loss 485 · invented 649
 
 ## progress-circle — 16 → 16 variants
 
-matched 315 · diverged 94 · loss 225 · invented 231
+matched 317 · diverged 92 · loss 225 · invented 231
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 86 fact(s):
+- class `(unclassified)` — 84 fact(s):
   - (root) ▸ layout.mode: NONE → HORIZONTAL  (×16 variants)
   - ring ▸ layout.mode: NONE → HORIZONTAL  (×16 variants)
   - ring/background ▸ width: 252 → 216  (×4 variants)
@@ -1010,7 +1020,6 @@ matched 315 · diverged 94 · loss 225 · invented 231
   - ring/background ▸ height: 180 → 216  (×2 variants)
   - ring/background ▸ height: 144 → 216  (×2 variants)
   - ring/background ▸ height: 108 → 216  (×2 variants)
-  - ring ▸ abs: 14,14 → 13,14  (×2 variants)
   - ring/background ▸ height: 126 → 216  (×2 variants)
   - ring/background ▸ height: 90 → 216  (×2 variants)
   - group3 ▸ layout.mode: NONE → HORIZONTAL  (×2 variants)
@@ -1121,11 +1130,11 @@ matched 315 · diverged 94 · loss 225 · invented 231
 
 ## slider — 40 → 64 variants
 
-matched 1184 · diverged 496 · loss 1180 · invented 1444
+matched 1208 · diverged 472 · loss 1180 · invented 1444
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 496 fact(s):
+- class `(unclassified)` — 472 fact(s):
   - (root) ▸ layout.mode: NONE → HORIZONTAL  (×40 variants)
   - background ▸ kind: rect → box  (×40 variants)
   - background ▸ layout.mode: NONE → HORIZONTAL  (×40 variants)
@@ -1138,8 +1147,6 @@ matched 1184 · diverged 496 · loss 1180 · invented 1444
   - progress/leftcontrol/tooltip ▸ layout.mode: VERTICAL → HORIZONTAL  (×20 variants)
   - progress/leftcontrol/tooltip ▸ layout.align: MIN/CENTER → MIN/MIN  (×20 variants)
   - progress/leftcontrol/tooltip ▸ layout.sizing: AUTO/AUTO → FIXED/FIXED  (×20 variants)
-  - progress ▸ abs: 80,8 → 0,8  (×12 variants)
-  - progress ▸ abs: 160,8 → 0,8  (×8 variants)
   - progress ▸ width: 80 → 160  (×4 variants)
   - progress/progressline ▸ width: 80 → 160  (×4 variants)
   - progress/rightcontrol ▸ abs: 68,-8 → 148,-8  (×4 variants)
@@ -1158,8 +1165,6 @@ matched 1184 · diverged 496 · loss 1180 · invented 1444
   - progress ▸ width: 80 → 320  (×4 variants)
   - progress/progressline ▸ width: 80 → 320  (×4 variants)
   - progress/rightcontrol ▸ abs: 68,-8 → 308,-8  (×4 variants)
-  - progress ▸ abs: 240,8 → 0,8  (×3 variants)
-  - progress ▸ abs: 248,8 → 0,8  (Label=False, Left control=75%, Right control=100%)
 
 ### LOSS (in the original, not the round trip)
 
@@ -1294,7 +1299,7 @@ matched 1184 · diverged 496 · loss 1180 · invented 1444
 
 ## social-button — 108 → 108 variants
 
-matched 2238 · diverged 186 · loss 216 · invented 60
+matched 2292 · diverged 186 · loss 162 · invented 60
 
 ### DIVERGED (value differs; original → round trip)
 
@@ -1304,11 +1309,9 @@ matched 2238 · diverged 186 · loss 216 · invented 60
 
 ### LOSS (in the original, not the round trip)
 
-- class `(unclassified)` — 162 fact(s):
-  - text ▸ fill: #404040  (×39 variants)
+- class `(unclassified)` — 108 fact(s):
   - socialicon ▸ instanceInk: #a3a3a3  (×30 variants)
   - socialicon ▸ instanceInk: #ffffff  (×24 variants)
-  - text ▸ fill: #ffffff  (×15 variants)
   - socialicon ▸ instanceInk: #4285f4  (×12 variants)
   - socialicon ▸ instanceInk: #24cb71  (×12 variants)
   - socialicon ▸ instanceInk: #242e36  (×12 variants)

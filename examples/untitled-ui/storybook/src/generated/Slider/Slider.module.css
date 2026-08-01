@@ -43,9 +43,72 @@
   display: flex;
   top: var(--imported-shared-size-8);
   height: var(--imported-shared-size-8);
-  left: 0px;
   width: 80px;
   position: absolute;
+}
+
+.label-bottom.leftControl-0 .Progress {
+  left: var(--imported-slider-progress-left-bottom-0);
+}
+
+.label-bottom.leftControl-25 .Progress {
+  left: var(--imported-slider-progress-left-bottom-25);
+}
+
+.label-bottom.leftControl-50 .Progress {
+  left: var(--imported-slider-progress-left-bottom-50);
+}
+
+.label-bottom.leftControl-75 .Progress {
+  left: var(--imported-slider-progress-left-bottom-75);
+}
+
+.label-bottomFloating.leftControl-0 .Progress {
+  left: var(--imported-slider-progress-left-bottomFloating-0);
+}
+
+.label-bottomFloating.leftControl-25 .Progress {
+  left: var(--imported-slider-progress-left-bottomFloating-25);
+}
+
+.label-bottomFloating.leftControl-50 .Progress {
+  left: var(--imported-slider-progress-left-bottomFloating-50);
+}
+
+.label-bottomFloating.leftControl-75 .Progress {
+  left: var(--imported-slider-progress-left-bottomFloating-75);
+}
+
+.label-topFloating.leftControl-0 .Progress {
+  left: var(--imported-slider-progress-left-topFloating-0);
+}
+
+.label-topFloating.leftControl-25 .Progress {
+  left: var(--imported-slider-progress-left-topFloating-25);
+}
+
+.label-topFloating.leftControl-50 .Progress {
+  left: var(--imported-slider-progress-left-topFloating-50);
+}
+
+.label-topFloating.leftControl-75 .Progress {
+  left: var(--imported-slider-progress-left-topFloating-75);
+}
+
+.label-false.leftControl-0 .Progress {
+  left: var(--imported-slider-progress-left-false-0);
+}
+
+.label-false.leftControl-25 .Progress {
+  left: var(--imported-slider-progress-left-false-25);
+}
+
+.label-false.leftControl-50 .Progress {
+  left: var(--imported-slider-progress-left-false-50);
+}
+
+.label-false.leftControl-75 .Progress {
+  left: var(--imported-slider-progress-left-false-75);
 }
 
 .rightControl-25 .Progress {

@@ -171,32 +171,11 @@
             }
           },
           "tokens": {
+            "left": "{imported.progress-circle.ring.left.{size}.{shape}}",
             "top": "{imported.progress-circle.ring.top.{size}}",
             "width": "{imported.progress-circle.ring.width.{size}}",
             "height": "{imported.progress-circle.ring.height.{size}}"
-          },
-          "literals": {
-            "left": "12px"
-          },
-          "literalsByProp": [
-            {
-              "prop": "size",
-              "map": {
-                "md": {
-                  "left": "12px"
-                },
-                "lg": {
-                  "left": "13px"
-                },
-                "sm": {
-                  "left": "10px"
-                },
-                "xs": {
-                  "left": "8px"
-                }
-              }
-            }
-          ]
+          }
         },
         "group3": {
           "parts": {
@@ -212,35 +191,10 @@
                 "color": "{imported.progress-circle.group-3-label.color}",
                 "font-size": "{imported.progress-circle.group-3-label.font-size.{size}}",
                 "font-weight": "{imported.progress-circle.group-3-label.font-weight}",
-                "line-height": "{imported.progress-circle.group-3-label.line-height.{size}}"
-              },
-              "literals": {
-                "left": "78.5px",
-                "top": "89px"
-              },
-              "literalsByProp": [
-                {
-                  "prop": "size",
-                  "map": {
-                    "md": {
-                      "left": "78.5px",
-                      "top": "89px"
-                    },
-                    "lg": {
-                      "left": "99px",
-                      "top": "99px"
-                    },
-                    "sm": {
-                      "left": "63.5px",
-                      "top": "72px"
-                    },
-                    "xs": {
-                      "left": "43.5px",
-                      "top": "53px"
-                    }
-                  }
-                }
-              ]
+                "line-height": "{imported.progress-circle.group-3-label.line-height.{size}}",
+                "left": "{imported.progress-circle.group-3-label.left.{size}.{shape}}",
+                "top": "{imported.progress-circle.group-3-label.top.{size}.{shape}}"
+              }
             },
             "Number": {
               "text": "40%",

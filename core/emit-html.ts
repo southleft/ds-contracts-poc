@@ -54,6 +54,18 @@ import {
 
 const stripBraces = (ref: string) => ref.slice(1, -1);
 const cssVar = (tokenPath: string) => `var(--${tokenPath.split('.').join('-')})`;
+/** Round 10 — cartesian of a substituted ref's placeholder values, declared
+ *  order, so rule order is a function of the contract alone. */
+function enumCombos(phs: string[], enums: Map<string, string[]>): Array<Array<[string, string]>> {
+  let out: Array<Array<[string, string]>> = [[]];
+  for (const ph of phs) {
+    const next: Array<Array<[string, string]>> = [];
+    for (const prefix of out) for (const value of enums.get(ph) ?? []) next.push([...prefix, [ph, value]]);
+    out = next;
+  }
+  return out;
+}
+
 const placeholdersIn = (refPath: string): string[] =>
   [...refPath.matchAll(/\{([a-z][\w-]*)\}/g)].map((m) => m[1]);
 
@@ -516,10 +528,15 @@ function componentCss(contract: Contract): string[] {
         continue;
       }
       const phs = placeholdersIn(refPath);
-      if (phs.length === 1) {
-        for (const value of enums.get(phs[0]) ?? []) {
-          const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
-          subRules.push([`${enumCls(phs[0], value)} ${partCls(name)}`, [`${cssProp}: ${cssVar(resolved)}`]]);
+      if (phs.length >= 1) {
+        // ROUND 10 — N placeholders expand as the cartesian of their values
+        // on a COMPOUND ancestor selector (every enum class rides the root),
+        // the same shape the root's own multi-placeholder tokens take.
+        for (const combo of enumCombos(phs, enums)) {
+          let resolved = refPath;
+          for (const [ph, value] of combo) resolved = resolved.replaceAll(`{${ph}}`, value);
+          const sel = `${combo.map(([ph, value]) => enumCls(ph, value)).join('')} ${partCls(name)}`;
+          subRules.push([sel, [`${cssProp}: ${cssVar(resolved)}`]]);
         }
         continue;
       }

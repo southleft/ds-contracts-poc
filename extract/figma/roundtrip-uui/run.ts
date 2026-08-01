@@ -98,6 +98,7 @@ type LimitTag =
   | 'declared-not-drawn' // a component property the contract declares that the drawn instance never carried
   | 'mixed-stroke-weight' // per-side stroke weights spell 'mixed' in figma, so the dump omits the channel; a uniform RT weight has no dump-side counterpart
   | 'zero-stroke' // a strokeless original round-trips as an EXPLICIT zero-width transparent stroke: a partially stroked node now carries its own absence (border-width 0 + border-color #00000000) so the color channel stops resolving to currentColor — nothing renders at weight 0 with an alpha-0 paint
+  | 'zero-fill' // the FILL twin of zero-stroke (gap-closing round 10): a node whose paint stack is an IMAGE draws no solid under it, and that absence is now carried EXPLICITLY as an alpha-0 background-color so the solid channel classifies over the whole axis instead of dropping (Avatar's #f9f5ff ground never rendered while the mixed stack refused the channel). Nothing renders at alpha 0, so the round-trip-only fill is rendering-neutral by construction
   | 'headless-measure'; // mock hug sizes are estimates — excluded, never compared
 
 interface Fact {
@@ -797,6 +798,13 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
       (f.channel === 'strokeWeight' ? f.value === '0' : /@0$/.test(f.value))
     ) {
       f.tag = 'zero-stroke';
+    } else if (f.channel === 'fill' && !chans.has('fill') && /@0$/.test(f.value)) {
+      // ROUND 10 — the fill twin of zero-stroke, and the same test: the
+      // original drew NO solid at this node (its paint stack is an image),
+      // the round trip carries that absence explicitly, and the carried
+      // paint is at alpha 0 so it renders nothing. Rendering-neutral ONLY —
+      // any opaque invented fill stays untagged.
+      f.tag = 'zero-fill';
     }
   }
 

@@ -44,25 +44,27 @@ export const SocialButton = forwardRef<HTMLButtonElement, SocialButtonProps>(fun
       data-supporting-text={supportingText || undefined}
       {...rest}
     >
-      <SocialIcon
-        platform={
-          social === 'facebook'
-            ? 'facebook'
-            : social === 'google'
-              ? 'google'
-              : social === 'apple'
-                ? 'apple'
-                : social === 'figma'
-                  ? 'figma'
-                  : social === 'dribbble'
-                    ? 'dribbble'
-                    : social === 'x'
-                      ? 'xtwitter'
-                      : undefined
-        }
-        state="default"
-        style="white"
-      />
+      <span className={styles.socialIcon}>
+        <SocialIcon
+          platform={
+            social === 'facebook'
+              ? 'facebook'
+              : social === 'google'
+                ? 'google'
+                : social === 'apple'
+                  ? 'apple'
+                  : social === 'figma'
+                    ? 'figma'
+                    : social === 'dribbble'
+                      ? 'dribbble'
+                      : social === 'x'
+                        ? 'xtwitter'
+                        : undefined
+          }
+          state="default"
+          style="white"
+        />
+      </span>
       {supportingText ? (
         <span className={styles.Text}>
           {social === 'google'

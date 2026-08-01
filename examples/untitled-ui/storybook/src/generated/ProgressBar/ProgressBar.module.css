@@ -74,28 +74,227 @@
   height: var(--imported-shared-size-8);
   left: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
-  width: 287px;
   position: absolute;
 }
 
-.label-right .Background {
-  width: 287px;
+.progress-0.label-right .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-0-right);
 }
 
-.label-bottom .Background {
-  width: 320px;
+.progress-0.label-bottom .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-0-bottom);
 }
 
-.label-topFloating .Background {
-  width: 320px;
+.progress-0.label-topFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-0-topFloating);
 }
 
-.label-bottomFloating .Background {
-  width: 320px;
+.progress-0.label-bottomFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-0-bottomFloating);
 }
 
-.label-false .Background {
-  width: 320px;
+.progress-0.label-false .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-0-false);
+}
+
+.progress-10.label-right .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-10-right);
+}
+
+.progress-10.label-bottom .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-10-bottom);
+}
+
+.progress-10.label-topFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-10-topFloating);
+}
+
+.progress-10.label-bottomFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-10-bottomFloating);
+}
+
+.progress-10.label-false .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-10-false);
+}
+
+.progress-20.label-right .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-20-right);
+}
+
+.progress-20.label-bottom .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-20-bottom);
+}
+
+.progress-20.label-topFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-20-topFloating);
+}
+
+.progress-20.label-bottomFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-20-bottomFloating);
+}
+
+.progress-20.label-false .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-20-false);
+}
+
+.progress-30.label-right .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-30-right);
+}
+
+.progress-30.label-bottom .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-30-bottom);
+}
+
+.progress-30.label-topFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-30-topFloating);
+}
+
+.progress-30.label-bottomFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-30-bottomFloating);
+}
+
+.progress-30.label-false .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-30-false);
+}
+
+.progress-40.label-right .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-40-right);
+}
+
+.progress-40.label-bottom .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-40-bottom);
+}
+
+.progress-40.label-topFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-40-topFloating);
+}
+
+.progress-40.label-bottomFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-40-bottomFloating);
+}
+
+.progress-40.label-false .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-40-false);
+}
+
+.progress-50.label-right .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-50-right);
+}
+
+.progress-50.label-bottom .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-50-bottom);
+}
+
+.progress-50.label-topFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-50-topFloating);
+}
+
+.progress-50.label-bottomFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-50-bottomFloating);
+}
+
+.progress-50.label-false .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-50-false);
+}
+
+.progress-60.label-right .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-60-right);
+}
+
+.progress-60.label-bottom .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-60-bottom);
+}
+
+.progress-60.label-topFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-60-topFloating);
+}
+
+.progress-60.label-bottomFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-60-bottomFloating);
+}
+
+.progress-60.label-false .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-60-false);
+}
+
+.progress-70.label-right .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-70-right);
+}
+
+.progress-70.label-bottom .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-70-bottom);
+}
+
+.progress-70.label-topFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-70-topFloating);
+}
+
+.progress-70.label-bottomFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-70-bottomFloating);
+}
+
+.progress-70.label-false .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-70-false);
+}
+
+.progress-80.label-right .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-80-right);
+}
+
+.progress-80.label-bottom .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-80-bottom);
+}
+
+.progress-80.label-topFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-80-topFloating);
+}
+
+.progress-80.label-bottomFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-80-bottomFloating);
+}
+
+.progress-80.label-false .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-80-false);
+}
+
+.progress-90.label-right .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-90-right);
+}
+
+.progress-90.label-bottom .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-90-bottom);
+}
+
+.progress-90.label-topFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-90-topFloating);
+}
+
+.progress-90.label-bottomFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-90-bottomFloating);
+}
+
+.progress-90.label-false .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-90-false);
+}
+
+.progress-100.label-right .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-100-right);
+}
+
+.progress-100.label-bottom .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-100-bottom);
+}
+
+.progress-100.label-topFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-100-topFloating);
+}
+
+.progress-100.label-bottomFloating .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-100-bottomFloating);
+}
+
+.progress-100.label-false .Background {
+  width: var(--imported-progress-bar-progress-bar-background-width-100-false);
 }
 
 .Progress {
@@ -108,52 +307,227 @@
   height: var(--imported-shared-size-8);
   left: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
-  width: 8.08px;
   position: absolute;
 }
 
-.progress-0 .Progress2 {
-  width: 8.08px;
+.progress-0.label-right .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-0-right);
 }
 
-.progress-10 .Progress2 {
-  width: 28.2px;
+.progress-0.label-bottom .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-0-bottom);
 }
 
-.progress-20 .Progress2 {
-  width: 56.01px;
+.progress-0.label-topFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-0-topFloating);
 }
 
-.progress-30 .Progress2 {
-  width: 84.01px;
+.progress-0.label-bottomFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-0-bottomFloating);
 }
 
-.progress-40 .Progress2 {
-  width: 112.01px;
+.progress-0.label-false .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-0-false);
 }
 
-.progress-50 .Progress2 {
-  width: 140.01px;
+.progress-10.label-right .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-10-right);
 }
 
-.progress-60 .Progress2 {
-  width: 168.02px;
+.progress-10.label-bottom .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-10-bottom);
 }
 
-.progress-70 .Progress2 {
-  width: 196.72px;
+.progress-10.label-topFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-10-topFloating);
 }
 
-.progress-80 .Progress2 {
-  width: 224.02px;
+.progress-10.label-bottomFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-10-bottomFloating);
 }
 
-.progress-90 .Progress2 {
-  width: 252.03px;
+.progress-10.label-false .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-10-false);
 }
 
-.progress-100 .Progress2 {
-  width: 271px;
+.progress-20.label-right .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-20-right);
+}
+
+.progress-20.label-bottom .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-20-bottom);
+}
+
+.progress-20.label-topFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-20-topFloating);
+}
+
+.progress-20.label-bottomFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-20-bottomFloating);
+}
+
+.progress-20.label-false .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-20-false);
+}
+
+.progress-30.label-right .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-30-right);
+}
+
+.progress-30.label-bottom .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-30-bottom);
+}
+
+.progress-30.label-topFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-30-topFloating);
+}
+
+.progress-30.label-bottomFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-30-bottomFloating);
+}
+
+.progress-30.label-false .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-30-false);
+}
+
+.progress-40.label-right .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-40-right);
+}
+
+.progress-40.label-bottom .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-40-bottom);
+}
+
+.progress-40.label-topFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-40-topFloating);
+}
+
+.progress-40.label-bottomFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-40-bottomFloating);
+}
+
+.progress-40.label-false .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-40-false);
+}
+
+.progress-50.label-right .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-50-right);
+}
+
+.progress-50.label-bottom .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-50-bottom);
+}
+
+.progress-50.label-topFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-50-topFloating);
+}
+
+.progress-50.label-bottomFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-50-bottomFloating);
+}
+
+.progress-50.label-false .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-50-false);
+}
+
+.progress-60.label-right .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-60-right);
+}
+
+.progress-60.label-bottom .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-60-bottom);
+}
+
+.progress-60.label-topFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-60-topFloating);
+}
+
+.progress-60.label-bottomFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-60-bottomFloating);
+}
+
+.progress-60.label-false .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-60-false);
+}
+
+.progress-70.label-right .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-70-right);
+}
+
+.progress-70.label-bottom .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-70-bottom);
+}
+
+.progress-70.label-topFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-70-topFloating);
+}
+
+.progress-70.label-bottomFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-70-bottomFloating);
+}
+
+.progress-70.label-false .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-70-false);
+}
+
+.progress-80.label-right .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-80-right);
+}
+
+.progress-80.label-bottom .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-80-bottom);
+}
+
+.progress-80.label-topFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-80-topFloating);
+}
+
+.progress-80.label-bottomFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-80-bottomFloating);
+}
+
+.progress-80.label-false .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-80-false);
+}
+
+.progress-90.label-right .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-90-right);
+}
+
+.progress-90.label-bottom .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-90-bottom);
+}
+
+.progress-90.label-topFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-90-topFloating);
+}
+
+.progress-90.label-bottomFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-90-bottomFloating);
+}
+
+.progress-90.label-false .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-90-false);
+}
+
+.progress-100.label-right .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-100-right);
+}
+
+.progress-100.label-bottom .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-100-bottom);
+}
+
+.progress-100.label-topFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-100-topFloating);
+}
+
+.progress-100.label-bottomFloating .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-100-bottomFloating);
+}
+
+.progress-100.label-false .Progress2 {
+  width: var(--imported-progress-bar-progress-bar-progress-progress-width-100-false);
 }
 
 .Percentage {

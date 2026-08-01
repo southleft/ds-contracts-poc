@@ -1379,11 +1379,38 @@ function unifyPaint(
      *  literal may pass this; a FILL has no such literal (an unpainted frame
      *  is not a transparent frame — it inherits nothing but shows what is
      *  behind it, which is the same thing, but a partial fill is a genuine
-     *  capture gap), so it stays the named refusal. */
-    absentAs?: string;
+     *  capture gap), so it stays the named refusal.
+     *
+     *  GAP-CLOSING ROUND 10 — A FUNCTION, so the reading can be made PER
+     *  OCCURRENCE. The blanket refusal above is right about a fill whose
+     *  absence is unexplained and wrong about one the SAME NODE explains:
+     *  a node carrying an `imageFill` (dump v1.7/1.9) has a fully described
+     *  paint stack — an image, and no solid under it that the capture saw —
+     *  so "no solid" there is an observation, not a gap, and its
+     *  rendering-neutral literal is fully transparent — `#00000000`, the same
+     *  spelling the stroke channel already uses for its vacuous paint (the
+     *  image is painted over
+     *  it by the very same channel pair). Measured: Untitled UI's Avatar
+     *  draws #f9f5ff on 108 of its 162 variants and a photo on the other 54;
+     *  the mixed stack refused the whole channel, so the pale purple ground
+     *  NEVER RENDERED on any variant (probe `av-bg`, +0.58 on the set).
+     *  Everything else — a node with neither a solid nor an image — keeps
+     *  the named refusal, because nothing on it says which of the two it is. */
+    absentAs?: string | ((node: DumpNode) => string | undefined);
+    /** Vacuous value for axis combinations no variant draws, when the channel
+     *  is presence-shaped. Only meaningful together with `absentAs`: the same
+     *  decision that makes an absent paint readable makes an UNOBSERVED one
+     *  readable, and without it a pair/triple classification with a hole in
+     *  its cartesian refuses and the whole channel drops again (Avatar draws
+     *  3 of the 4 placeholder×text combinations). */
+    sparse?: string;
   },
 ): UnifiedRef | undefined {
-  const paints = m.occ.map((o) => ({ variant: o.variant, paint: pick(o.node) }));
+  const paints = m.occ.map((o) => ({ variant: o.variant, paint: pick(o.node), node: o.node }));
+  /** The literal THIS occurrence's absence means, or undefined when its
+   *  absence is a capture gap. */
+  const absentFor = (p: { node: DumpNode }): string | undefined =>
+    typeof mint?.absentAs === 'function' ? mint.absentAs(p.node) : mint?.absentAs;
   if (paints.every((p) => p.paint === undefined)) return undefined;
   const raw = paints.find((p) => p.paint?.hex !== undefined);
   if (raw) {
@@ -1397,19 +1424,21 @@ function unifyPaint(
       const allHex = paints.every((p) => p.paint?.hex !== undefined);
       const hexOrAbsent =
         mint.absentAs !== undefined &&
-        paints.every((p) => p.paint === undefined || p.paint.hex !== undefined);
+        paints.every((p) => (p.paint === undefined ? absentFor(p) !== undefined : p.paint.hex !== undefined));
       if (allHex || hexOrAbsent) {
+        const absentLiterals = [...new Set(paints.filter((p) => p.paint === undefined).map((p) => absentFor(p)!))];
         mintObservation(
           ctx, mint.target, where, mint.cssProperty, 'color',
           paints.map((p) => ({
             variant: p.variant,
-            value: p.paint === undefined ? mint.absentAs! : paintCssHex(p.paint),
+            value: p.paint === undefined ? absentFor(p)! : paintCssHex(p.paint),
           })),
           `${where}|${paintName}`,
+          allHex ? undefined : mint.sparse,
         );
         if (!allHex) {
           ctx.notes.push(
-            `${where} ${paintName}: drawn in ${paints.filter((p) => p.paint !== undefined).length}/${paints.length} variant(s) — the ABSENT variants mint ${mint.absentAs} (a strokeless node is a zero-width transparent stroke, the same reading border-width already takes), so ${mint.cssProperty} carries for the whole axis instead of falling back to currentColor`,
+            `${where} ${paintName}: drawn in ${paints.filter((p) => p.paint !== undefined).length}/${paints.length} variant(s) — the ABSENT variants mint ${absentLiterals.join('/')} (their absence is a DRAWN fact this node explains: a strokeless node is a zero-width transparent stroke, and a node whose paint stack is an imageFill draws no solid under it), so ${mint.cssProperty} carries for the whole axis instead of falling back to currentColor or dropping`,
           );
         }
       } else {
@@ -1554,6 +1583,11 @@ function invertNodeTokens(
     unifyPaint(m, (n) => (n.type === 'TEXT' ? undefined : n.fill), ctx, where, 'fill', {
       cssProperty: 'background-color',
       target: tokens,
+      // A node whose paint stack is an IMAGE draws no solid under it that
+      // the capture saw — absence there is an observation, not a gap. Every
+      // other absent fill keeps the named refusal (see the absentAs doc).
+      absentAs: (n) => (typeof n.imageFill === 'string' ? '#00000000' : undefined),
+      sparse: '#00000000',
     }),
   );
   carry(
@@ -4623,6 +4657,56 @@ function buildPart(
         if (ovQueued) ctx.mint.refOverrides.push({ component, target: ovTarget });
       }
     }
+    if (ctx.mint && id === null && ctx.stubs.has(String(component.id))) {
+        // GAP-CLOSING ROUND 10 — A SET CANNOT SEE THE STUB IT CLAIMS ITSELF.
+        //
+        // Child stubs are built at the END of a proposal (they need every
+        // occurrence first), so while the anatomy is being walked a
+        // SELF-CLAIMED stub is not in `contractsById` and the whole
+        // per-instance override pass above is skipped. Every worked example
+        // of a carried size override in this kit is a stub claimed by an
+        // EARLIER set in the import order; the sole-host case — Avatar's
+        // `user` glyph, drawn at 16/20/24/28/32/32px across the six sizes —
+        // fell through silently and the glyph drew at ONE size everywhere.
+        //
+        // The ledger cannot referee it (the child's value does not exist
+        // yet), but it does not have to: a stub carries exactly ONE
+        // provisional box, so a host that drew MORE THAN ONE has PROVEN the
+        // divergence by construction, whichever box the stub ends up with.
+        // That is the only claim made here — the observed per-usage boxes
+        // are minted exactly as the ledger path mints them. If the stub then
+        // declines to declare `size` overridable, validateContract refuses
+        // this override BY NAME at generate time; it is never a silent no-op.
+        // …and only where the stub could not have explained the box ITSELF.
+        // A stub's only axes are the props the instances apply, so a box that
+        // is already a function of THOSE is one the stub will carry per value
+        // and the host must not restate (measured: Avatar's online-indicator
+        // and company-icon children apply Size, their boxes track it exactly,
+        // and an override there would be a redundant second spelling of the
+        // same observation — plus a wrapper element in the DOM). The `user`
+        // glyph applies NOTHING, so all six of its boxes share one empty
+        // combination and only the host can tell them apart.
+        const boxes = m.occ.map((o) => o.node.bbox);
+        const square = boxes.every((b) => b !== undefined && Math.abs(b.width - b.height) <= 0.5);
+        const distinct = new Set(boxes.map((b) => b?.width)).size;
+        const byApplied = new Map<string, Set<number>>();
+        for (const o of m.occ) {
+          const key = JSON.stringify(o.node.componentProperties ?? {});
+          (byApplied.get(key) ?? byApplied.set(key, new Set()).get(key)!).add(o.node.bbox?.width ?? -1);
+        }
+        const stubCanExplain = [...byApplied.values()].every((w) => w.size === 1);
+        if (square && distinct > 1 && !stubCanExplain) {
+          const ovTarget: Record<string, string> = {};
+          mintObservation(
+            ctx, ovTarget, where, 'size', 'px',
+            m.occ.map((o) => ({ variant: o.variant, value: o.node.bbox!.width })),
+          );
+          ctx.mint.refOverrides.push({ component, target: ovTarget });
+          ctx.notes.push(
+            `${where}: PER-INSTANCE SIZE OVERRIDE proposed (round 10, SELF-CLAIMED stub) — this set is the claimant of "${instanceOf}"'s stub, so the stub does not exist yet and its minted box cannot be consulted; it carries ONE provisional box and this host drew ${distinct} (${[...new Set(boxes.map((b) => `${b!.width}×${b!.height}`))].join(', ')}), which proves the divergence without the ledger. Carried as component.overrides['size']`,
+          );
+        }
+    }
     // dump v1.7: an observed subtree paint on a LINKED instance is ledgered —
     // the child contract owns its paint, and a per-usage paint override is
     // representable ONLY through a channel the child declares overridable
@@ -5351,7 +5435,40 @@ function stubGeometry(
     );
   }
   if (observations.length === 0) return null;
-  const minted = mintTokens(`stub-${capture.id.split('.').slice(1).join('-')}`, observations, axes);
+  const stubName = `stub-${capture.id.split('.').slice(1).join('-')}`;
+  let minted = mintTokens(stubName, observations, axes);
+  // GAP-CLOSING ROUND 10 — A STUB WHOSE BOX REFUSES HAS NOWHERE TO PUT ITS
+  // HOST'S BOX EITHER, AND THE GLYPH THEN DRAWS AT ITS EXPORT SIZE FOREVER.
+  //
+  // A stub's box is a function of the HOST's axes, not its own: Untitled UI's
+  // `user` glyph is drawn 16/20/24/28/32/32px across Avatar's six sizes and
+  // the stub has no `size` prop of its own to explain that, so both box
+  // channels refuse classification, no width/height binds, `size` is never
+  // declared overridable — and the host's per-instance size machinery
+  // (which exists, and which the Social icon stub uses) has no channel to
+  // ride. The glyph then draws at the export's natural 24px inside every one
+  // of those boxes; only md is right, by coincidence.
+  //
+  // The rule: A STUB'S BOX IS PROVISIONAL BY CONSTRUCTION — it is the box
+  // ONE observation was drawn at, and the contract says so in prose already.
+  // When it refuses to be a function of the stub's OWN axes, it falls back
+  // to the BASE occurrence's box (the same base-slice fallback the design
+  // path already takes for a refused padding channel, and the same
+  // "first claimant's observation wins" rule the ring witness takes), so the
+  // channel exists, `size` becomes overridable, and every host's OWN
+  // observed box carries per usage. Nothing is invented: the provisional
+  // value is an observation, and a host whose box differs overrides it.
+  //
+  // The pair rule holds — width and height are ONE square channel — so the
+  // fallback applies only when BOTH refuse, never to half a box.
+  const boxIdx = ['width', 'height'].map((c) => observations.findIndex((o) => o.cssProperty === c));
+  if (boxIdx.every((i) => i >= 0 && !minted.bindings[i].ref)) {
+    for (const i of boxIdx) observations[i] = { ...observations[i], occurrences: [observations[i].occurrences[0]] };
+    minted = mintTokens(stubName, observations, axes);
+    ctx.notes.push(
+      `stub ${capture.id}: the observed box is not a function of the stub's own axes (${[...new Set(geo.map((o) => `${o.bbox!.width}×${o.bbox!.height}`))].join(', ')} across ${geo.length} occurrence(s)) — the PROVISIONAL box falls back to the base occurrence (${observations[boxIdx[0]].occurrences[0].value}×${observations[boxIdx[1]].occurrences[0].value}px), which is what makes the box overridable: a host whose own observation diverges carries it per usage through component.overrides['size']. Without the fallback the channel drops and the glyph draws at its export size in every box`,
+    );
+  }
   const tokens: Record<string, string> = {};
   minted.bindings.forEach((binding, i) => {
     if (binding.ref) tokens[observations[i].cssProperty] = binding.ref;
@@ -6717,12 +6834,21 @@ export function proposeFromDump(
     // The minted-ref component segment must be a legal token-path segment —
     // the same slug the contract id uses (kebab alone lets "/" or "=" leak
     // into `imported.*` refs, which the token-ref grammar refuses).
-    const minted = mintTokens(componentIdSlug(set.setName), observations, ctx.mint.axes);
+    // ROUND 10 — `nestedPairs`: a nested part's two-axis channel is now
+    // spellable (a two-placeholder ref on part.tokens, emitted as the
+    // compound ancestor selector). Before this the classifier refused every
+    // nested pair and the channel DROPPED — Social button's label ink is
+    // f(social × theme) and never reached the contract at all.
+    const minted = mintTokens(componentIdSlug(set.setName), observations, ctx.mint.axes, { nestedPairs: true });
     const bySource = new Map<string, { total: number; bound: number }>();
     minted.bindings.forEach((binding, i) => {
       const obs = observations[i];
       if (binding.ref) obs.target[obs.cssProperty] = binding.ref;
       else if (binding.reason) ctx.notes.push(`${obs.nodePath} ${obs.cssProperty}: ${binding.reason}`);
+      // A carried-but-unwitnessed pair is BOUND, so it takes the ref above —
+      // and its caveat is named here rather than swallowed. Bound and named
+      // are not mutually exclusive; only refusals use `reason`.
+      if (binding.ref && binding.caveat) ctx.notes.push(`${obs.nodePath} ${obs.cssProperty}: ${binding.caveat}`);
       if (obs.source) {
         const s = bySource.get(obs.source) ?? { total: 0, bound: 0 };
         s.total++;

@@ -17,6 +17,38 @@
   position: relative;
 }
 
+.root[data-placeholder][data-text] {
+  background-color: var(--imported-avatar-root-background-color-true-true);
+  background-image: var(
+    --ds-avatar-background-image,
+    var(--imported-avatar-root-background-image-true-true)
+  );
+}
+
+.root[data-placeholder]:not([data-text]) {
+  background-color: var(--imported-avatar-root-background-color-true-false);
+  background-image: var(
+    --ds-avatar-background-image,
+    var(--imported-avatar-root-background-image-true-false)
+  );
+}
+
+.root:not([data-placeholder])[data-text] {
+  background-color: var(--imported-avatar-root-background-color-false-true);
+  background-image: var(
+    --ds-avatar-background-image,
+    var(--imported-avatar-root-background-image-false-true)
+  );
+}
+
+.root:not([data-placeholder]):not([data-text]) {
+  background-color: var(--imported-avatar-root-background-color-false-false);
+  background-image: var(
+    --ds-avatar-background-image,
+    var(--imported-avatar-root-background-image-false-false)
+  );
+}
+
 .state-default {
   outline-color: var(--imported-avatar-root-outline-color-default);
   outline-width: var(--imported-avatar-root-outline-width-default);
@@ -30,34 +62,6 @@
 .state-focused {
   outline-color: var(--imported-avatar-root-outline-color-focused);
   outline-width: var(--imported-avatar-root-outline-width-focused);
-}
-
-.root[data-placeholder][data-text] {
-  background-image: var(
-    --ds-avatar-background-image,
-    var(--imported-avatar-root-background-image-true-true)
-  );
-}
-
-.root[data-placeholder]:not([data-text]) {
-  background-image: var(
-    --ds-avatar-background-image,
-    var(--imported-avatar-root-background-image-true-false)
-  );
-}
-
-.root:not([data-placeholder])[data-text] {
-  background-image: var(
-    --ds-avatar-background-image,
-    var(--imported-avatar-root-background-image-false-true)
-  );
-}
-
-.root:not([data-placeholder]):not([data-text]) {
-  background-image: var(
-    --ds-avatar-background-image,
-    var(--imported-avatar-root-background-image-false-false)
-  );
 }
 
 .size-xl {
@@ -194,6 +198,30 @@
 .instance {
   display: inline-flex;
   --ds-user-color: var(--imported-avatar-user-instance-color);
+}
+
+.size-xl .instance {
+  --ds-user-size: var(--imported-avatar-user-size-xl);
+}
+
+.size-2xl .instance {
+  --ds-user-size: var(--imported-avatar-user-size-2xl);
+}
+
+.size-lg .instance {
+  --ds-user-size: var(--imported-avatar-user-size-lg);
+}
+
+.size-md .instance {
+  --ds-user-size: var(--imported-avatar-user-size-md);
+}
+
+.size-sm .instance {
+  --ds-user-size: var(--imported-avatar-user-size-sm);
+}
+
+.size-xs .instance {
+  --ds-user-size: var(--imported-avatar-user-size-xs);
 }
 
 .Text {

@@ -137,15 +137,47 @@ check(
   byRef.get('{imported.sample.root.background-color.neutral}')?.value === '#eeeeee' &&
     byRef.get('{imported.sample.root.background-color.accent}')?.value === '#112233',
 );
-check('variants: uncorrelated d fill minted NOTHING', parts.d?.tokens === undefined);
+// GAP-CLOSING ROUND 10 — these three pins used to require the opposite: that
+// part `d`'s drifting fill mint NOTHING and survive as an UNBOUND entry. That
+// was right when a nested part had no two-axis vocabulary, so the only
+// alternative was a WRONG single-axis fit. It is wrong now. `d` is drawn with
+// four MEASURED fills; refusing them renders the part unpainted against a
+// canvas that paints it, which is the same lose-a-measured-fact class as
+// border-color -> currentColor. The same refusal, applied to ButtonBase's
+// Size(4) x Icon(5) padding, produced a 22px-tall button where the canvas
+// draws 40. So the doctrine is now CARRY AND NAME, and these pins are
+// STRENGTHENED accordingly: the values must be reproduced exactly, AND the
+// unwitnessed correlation must be named. Silence would now fail two pins,
+// where before it only had to fail one.
 check(
-  'variants: the uncorrelated drift is a named review item',
-  minted.notes.some((n) => n.includes('Sample:root/d') && n.includes('without correlating to any variant axis')),
+  'variants: uncorrelated d fill is CARRIED as a two-axis ref (every value measured)',
+  typeof (parts.d?.tokens as Record<string, string> | undefined)?.['background-color'] === 'string' &&
+    /\{imported\.sample\.d\.background-color\.\{\w+\}\.\{\w+\}\}/.test(
+      (parts.d!.tokens as Record<string, string>)['background-color'],
+    ),
 );
 check(
-  'variants: d fill survives as the one remaining UNBOUND entry',
-  minted.unbound.length === 1 && minted.unbound[0].nodePath === 'Sample:root/d' && minted.unbound[0].property === 'fill',
+  'variants: all four drifting literals survive as leaves',
+  ['#010101', '#020202', '#030303', '#040404'].every((v) => entries.some((e) => e.value === v)),
 );
+check(
+  'variants: the unwitnessed pair is a NAMED review item, not a silent claim',
+  minted.notes.some(
+    (n) => n.includes('Sample:root/d') && n.includes('SATURATED') && n.includes('the CORRELATION is unwitnessed'),
+  ),
+);
+// The DISCRIMINATOR. `d`'s four fills are 010101/020202/030303/040404 — four
+// distinct values over four cells, one per cell, which is the histogram of an
+// arbitrary assignment. Every saturated pair the Untitled UI kit actually
+// produced is the opposite (4-32 distinct over 20-55 cells: heavy repetition
+// no arbitrary assignment would show), which is why refusing them all was
+// wrong. This pin holds the drift end of that contrast, so the hint stays a
+// real signal instead of a sentence that prints on everything.
+check(
+  'variants: the drift fixture reports ONE distinct value per cell (the arbitrary-assignment histogram)',
+  minted.notes.some((n) => n.includes('Sample:root/d') && n.includes('one distinct value per cell')),
+);
+check('variants: nothing remains UNBOUND once the drift is carried', minted.unbound.length === 0);
 
 // 3. Units + the remaining site-named leaves.
 check('gap minted with px units', byRef.get('{imported.sample.root.gap}')?.value === '8px');

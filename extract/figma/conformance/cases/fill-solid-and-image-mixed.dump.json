@@ -1,0 +1,77 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "dumpVersion": "1.11",
+  "note": "canvas conformance fixture - hand-authored dump v1.11"
+ },
+ "Case": {
+  "setName": "Case",
+  "type": "COMPONENT_SET",
+  "variants": [
+   {
+    "name": "Photo=False",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "CENTER",
+     "counter": "CENTER",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "children": [
+     {
+      "name": "t",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "style": "badge"
+      }
+     }
+    ],
+    "fill": {
+     "hex": "f9f5ff"
+    }
+   },
+   {
+    "name": "Photo=True",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "CENTER",
+     "counter": "CENTER",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "children": [
+     {
+      "name": "t",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "style": "badge"
+      }
+     }
+    ],
+    "imageFill": "3ba1c6f0aa"
+   }
+  ]
+ }
+}

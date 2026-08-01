@@ -1,1159 +1,1203 @@
 {
- "note": "CANVAS CONFORMANCE MANIFEST - the hand-authored denominator. Expected dispositions are written from the Figma documentation model's semantics (extract/figma/types.ts + the propose inversion rules' declared intent), NEVER from engine output. status:red = FAIL-EXPECTED-RED (doc model not met today; status quo pinned in observedCheck). A construct neither carried nor named-refused is a hard failure.",
- "cases": [
-  {
-   "id": "fill-solid-var",
-   "construct": "solid fill bound to a color variable on the variant root",
-   "expect": "CARRIED",
-   "why": "a var-bound solid paint is the canonical token binding (slash name inverts to a dot ref)",
-   "check": {
-    "carried": [
-     "\\{color\\.feedback\\.info\\.background\\}"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "fill-solid-raw",
-   "construct": "raw (variable-less) solid hex fill on the root",
-   "expect": "CARRIED",
-   "why": "a raw paint is a hard drawn fact; mintUnbound mints a provisional imported.* token and binds it, never drops it",
-   "check": {
-    "carried": [
-     "imported\\.case\\.root\\.background-color",
-     "0e61ba"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "fill-alpha",
-   "construct": "solid fill with paint alpha (dump v1.1 `alpha`)",
-   "expect": "CARRIED",
-   "why": "effective paint opacity is part of the drawn ink (Eventz 5%-black field case); must survive into the minted value",
-   "check": {
-    "carried": [
-     "0000000d"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "effect-shadow-single",
-   "construct": "exactly one visible DROP_SHADOW in every variant",
-   "expect": "CARRIED",
-   "why": "the one effect form with a declared box-shadow projection (dump v1.2)",
-   "check": {
-    "carried": [
-     "box-shadow",
-     "0px 4px 8px"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "effect-shadow-two",
-   "construct": "a TWO-layer drop-shadow stack on the root",
-   "expect": "CARRIED",
-   "why": "CSS box-shadow is natively a comma-separated LIST and the canvas emitter's stack grammar projects every layer back as its own native DROP_SHADOW, so a DROP_SHADOW-only stack has a lossless projection in both directions; refusing it (the pre-gap-round-4 rule) dropped the only visible edge of a light-on-light surface. BOTH layers must appear, in dump order — a truncation to one layer is still a failure",
-   "check": {
-    "carried": [
-     "box-shadow",
-     "0px 4px 8px [^\"]*, 0px 1px 2px "
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "axis-enum",
-   "construct": "a two-value non-boolean variant axis with axis-correlated token bindings",
-   "expect": "CARRIED",
-   "why": "variant axes are enum props; per-variant refs differing in exactly the axis segment carry as ONE substituted ref",
-   "check": {
-    "carried": [
-     "\"enum\":\\[\"info\",\"success\"\\]",
-     "\\{color\\.feedback\\.\\{variant\\}\\.background\\}"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "text-prop-characters",
-   "construct": "propRefs.characters binding a text node to a TEXT component property",
-   "expect": "CARRIED",
-   "why": "a characters propRef is the canvas spelling of a text prop; default comes from the bound node's characters",
-   "check": {
-    "carried": [
-     "\"kind\":\"TEXT\",\"property\":\"Label\"",
-     "\"content\":\\{\"prop\":\"label\"\\}"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "text-style-token",
-   "construct": "a text node riding the named TextStyle 'badge'",
-   "expect": "CARRIED",
-   "why": "a named TextStyle is a token identity; 'badge' inverts to the font.badge.size ref",
-   "check": {
-    "carried": [
-     "\\{font\\.badge\\.size\\}"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "shape-vector-path",
-   "construct": "a VECTOR child (arbitrary-path geometry) with a fill and a drawn fixed size",
-   "expect": "LEDGERED",
-   "why": "arbitrary paths are outside dump v1 (parametric decor only); the capture receipts vector-geometry-unsupported and the node carries paints + box only",
-   "check": {
-    "note": "vector-geometry-unsupported",
-    "carried": [
-     "imported\\.case\\.a\\.width"
-    ],
-    "absent": [
-     "clip-path"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "blend-mode-multiply",
-   "construct": "a non-NORMAL blendMode on the root (capture-boundary: no dump v1 field)",
-   "expect": "LEDGERED",
-   "why": "blend modes have no dump projection; the capture receipts blend-mode-unsupported and nothing blend-shaped may appear in the contract",
-   "check": {
-    "note": "blend-mode-unsupported",
-    "absent": [
-     "blend"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "layout-column",
-   "construct": "VERTICAL auto-layout with bound itemSpacing and symmetric bound padding",
-   "expect": "CARRIED",
-   "why": "mode VERTICAL inverts to direction column; bound itemSpacing to a gap ref; equal per-side pairs to padding-inline/-block",
-   "check": {
-    "carried": [
-     "\"direction\":\"column\"",
-     "\\{space\\.gap\\.sm\\}",
-     "padding-inline"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "layout-justify-space-between",
-   "construct": "primary axis alignment SPACE_BETWEEN",
-   "expect": "CARRIED",
-   "why": "SPACE_BETWEEN is in the documented JUSTIFY inversion table",
-   "check": {
-    "carried": [
-     "\"justify\":\"space-between\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "layout-align-baseline",
-   "construct": "counter axis alignment BASELINE (a documented DumpLayout value)",
-   "expect": "CARRIED",
-   "why": "BASELINE is on the documented dump surface (DumpLayout.counter); text-and-icon rows drawn baseline-aligned should carry align: baseline (or at minimum a named refusal)",
-   "check": {
-    "carried": [
-     "\"align\":\"baseline\""
-    ]
-   },
-   "status": "green",
-   "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). The SILENT LOSS is closed by CARRIAGE, not by a note. Mechanism: ALIGN_INV (core/propose-figma.ts:2548) held only MIN/CENTER/MAX, so the fourth documented DumpLayout.counter value fell through to undefined and invertLayout emitted direction only — no align, and nothing in the naming union. Fix: ALIGN_INV.BASELINE = 'baseline', and the align fact widened end-to-end on BOTH surfaces so the proposal is legal and renderable: LayoutSchema/VariantLayoutSchema align enum + ResolvedLayout (packages/schema/src/contract-schema.ts:114,140,1263) regenerated into contracts/contract.schema.json and packages/schema/contract.schema.json; ALIGN_CSS -> align-items: baseline (core/emit-react.ts:135, core/emit-html.ts:72, core/emit-react-inline.ts:72, packages/emitter-web-components/src/emit-wc.ts:170); ALIGN_FIGMA -> counterAxisAlignItems BASELINE (core/emit-figma-script.ts:922) with a VERTICAL guard in layoutSpec (:1070) because Figma throws on BASELINE under a column; roundtrip A_MAP (extract/figma/roundtrip.ts:77); COUNTER_CSS previews (extract/figma/canvas-gate/canvas-doc.ts:116, playground/src/engine/canvas-preview.ts:171). MEASURED: the two-text-child row now proposes anatomy.root.layout = {\"display\":\"flex\",\"direction\":\"row\",\"align\":\"baseline\"}. Every edit is a map key addition — zero committed dumps carry counter:BASELINE and zero committed contracts carry align:baseline, so no committed artifact moves."
-  },
-  {
-   "id": "layout-gap-literal",
-   "construct": "literal (unbound) itemSpacing",
-   "expect": "CARRIED",
-   "why": "a drawn gap is a hard fact; mintUnbound mints a provisional gap token",
-   "check": {
-    "carried": [
-     "imported\\.case\\.root\\.gap",
-     "10px"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "layout-padding-asymmetric-bound",
-   "construct": "left/right padding bound to DIFFERENT tokens",
-   "expect": "CARRIED",
-   "why": "an asymmetric pair carries as per-side longhand channels (padding-left/right) with a note, never refuses",
-   "check": {
-    "carried": [
-     "\"padding-left\":\"\\{space\\.inset-x\\.sm\\}\"",
-     "\"padding-right\":\"\\{space\\.inset-x\\.lg\\}\""
-    ],
-    "note": "left/right padding bindings differ"
-   },
-   "status": "green"
-  },
-  {
-   "id": "layout-fill-width-row",
-   "construct": "a child drawn layoutSizingHorizontal FILL inside a ROW parent",
-   "expect": "CARRIED",
-   "why": "fillWidth in a row parent inverts to layout.grow on the part",
-   "check": {
-    "carried": [
-     "\"grow\":true"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "layout-fill-width-column",
-   "construct": "every eligible child drawn FILL inside a COLUMN parent",
-   "expect": "CARRIED",
-   "why": "align: stretch is observable only through its artifact - every eligible child carrying FILL in a column parent",
-   "check": {
-    "carried": [
-     "\"align\":\"stretch\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "layout-root-fixed-bbox",
-   "construct": "root primary axis drawn FIXED with an observed bbox (dump v1.5)",
-   "expect": "CARRIED",
-   "why": "a FIXED root dimension is otherwise unrecoverable (CBDS Dialog field case); the observed width mints as a root token",
-   "check": {
-    "carried": [
-     "imported\\.case\\.root\\.width",
-     "320px"
-    ],
-    "note": "root width is DRAWN FIXED"
-   },
-   "status": "green"
-  },
-  {
-   "id": "layout-root-default-elided",
-   "construct": "root drawn exactly at the generator default (row/center/center)",
-   "expect": "CARRIED",
-   "why": "the generator default is canvas-indistinguishable from no layout block; carriage-by-equivalence proposes NO layout (asserted by absence)",
-   "check": {
-    "absent": [
-     "\"layout\""
-    ],
-    "carried": [
-     "\\{color\\.feedback\\.info\\.background\\}"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "layout-width-bound-root",
-   "construct": "a width variable bound on the ROOT",
-   "expect": "CARRIED",
-   "why": "a component's outer dimension is fluid-up-to in code; a root-bound width inverts to max-width",
-   "check": {
-    "carried": [
-     "\"max-width\":\"\\{size\\.card\\.width\\}\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "minmax-size",
-   "construct": "literal minWidth/minHeight on the root (dump v1.4)",
-   "expect": "CARRIED",
-   "why": "a drawn minHeight 44 is a tap-target fact; carried as min-width/min-height style facts",
-   "check": {
-    "carried": [
-     "min-width",
-     "min-height",
-     "44px"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "stroke-uniform-var",
-   "construct": "uniform stroke bound to a color variable with a literal weight",
-   "expect": "CARRIED",
-   "why": "a var-bound stroke inverts to border-color; the literal uniform weight is a drawn fact and mints border-width",
-   "check": {
-    "carried": [
-     "\"border-color\":\"\\{color\\.border\\.subtle\\}\"",
-     "imported\\.case\\.root\\.border-width"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "stroke-weight-bound",
-   "construct": "four equal stroke-weight bindings to one width variable",
-   "expect": "CARRIED",
-   "why": "four equal bound weights invert to one border-width ref",
-   "check": {
-    "carried": [
-     "\"border-width\":\"\\{border\\.width\\.focus\\}\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "stroke-only-no-fill",
-   "construct": "a stroke-only child (border, no fill at all)",
-   "expect": "CARRIED",
-   "why": "a stroke with no fill must carry as a border without inventing a background",
-   "check": {
-    "carried": [
-     "\"border-color\":\"\\{color\\.border\\.subtle\\}\""
-    ],
-    "absent": [
-     "\"a\":\\{[^}]*background-color"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "stroke-weights-nonuniform",
-   "construct": "per-side (non-uniform) stroke weights (capture-boundary: dump v1 carries a uniform weight only)",
-   "expect": "LEDGERED",
-   "why": "the capture receipts stroke-weights-nonuniform; the proposal must not invent per-side widths",
-   "check": {
-    "note": "stroke-weights-nonuniform",
-    "absent": [
-     "border-top-width|border-bottom-width"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "stroke-align-inside",
-   "construct": "a stroke explicitly aligned INSIDE the node box (dump v1.11 captures the alignment of EVERY stroke)",
-   "expect": "CARRIED",
-   "why": "INSIDE is the alignment a CSS border already has - a border under box-sizing:border-box is drawn inward - so the stroke carries as border-color/border-width and nothing outline-shaped may appear. The case exists because before dump v1.11 this disposition rested on an ASSUMPTION about an absent field rather than a captured fact, and the same assumption was wrong elsewhere on the same canvas",
-   "check": {
-    "carried": [
-     "\"border-color\":\"\\{color\\.border\\.subtle\\}\"",
-     "imported\\.case\\.root\\.border-width"
-    ],
-    "absent": [
-     "outline-color",
-     "outline-width"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "stroke-align-outside",
-   "construct": "a stroke aligned OUTSIDE the node box",
-   "expect": "CARRIED",
-   "why": "an OUTSIDE stroke grows the drawing beyond the node box without moving anything inside it; the only CSS spelling with that behaviour is an outline (drawn outside the border box, taking no layout space), so the pair carries as outline-color/outline-width and border-* must NOT appear - a border would draw the ring INWARD over the content, and growing the box to hold it instead moves the very node the drawing is anchored on",
-   "check": {
-    "carried": [
-     "\"outline-color\":\"\\{color\\.border\\.subtle\\}\"",
-     "imported\\.case\\.root\\.outline-width"
-    ],
-    "absent": [
-     "border-color",
-     "border-width"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "stroke-align-center",
-   "construct": "a stroke aligned CENTER (straddling the node box edge)",
-   "expect": "LEDGERED",
-   "why": "a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither spelling carries it exactly. The capture receipts stroke-align-unsupported under its OWN code - not folded into stroke-style-unsupported, which is what made this boundary uncountable for eight rounds - and the inversion NAMES the approximation instead of proposing an outline it cannot justify",
-   "check": {
-    "note": "stroke-align-unsupported",
-    "carried": [
-     "\"border-color\":\"\\{color\\.border\\.subtle\\}\""
-    ],
-    "absent": [
-     "outline-color",
-     "outline-width"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "stroke-dashed",
-   "construct": "a dashed stroke (dashPattern - capture-boundary)",
-   "expect": "LEDGERED",
-   "why": "dashed strokes have no dump v1 projection; the receipt names it and the stroke renders solid",
-   "check": {
-    "note": "stroke-style-unsupported",
-    "absent": [
-     "dashed|border-style"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "radius-uniform-bound",
-   "construct": "four equal radius bindings to one radius variable",
-   "expect": "CARRIED",
-   "why": "four equal bound radii invert to one border-radius ref",
-   "check": {
-    "carried": [
-     "\"border-radius\":\"\\{radius\\.badge\\}\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "radius-uniform-literal",
-   "construct": "a literal uniform cornerRadius",
-   "expect": "CARRIED",
-   "why": "a drawn radius is a hard fact; mints a provisional border-radius token",
-   "check": {
-    "carried": [
-     "imported\\.case\\.root\\.border-radius",
-     "6px"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "radius-per-corner",
-   "construct": "per-corner (non-uniform) radii (capture-boundary: dump v1 carries a uniform radius only)",
-   "expect": "LEDGERED",
-   "why": "the capture receipts radii-nonuniform; nothing corner-shaped may be invented",
-   "check": {
-    "note": "radii-nonuniform",
-    "absent": [
-     "border-top-left-radius|border-radius"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "text-lineheight-px",
-   "construct": "pixel-unit line height on a text node (dump v1.3)",
-   "expect": "CARRIED",
-   "why": "a px line height is captured verbatim (CBDS Tooltip field case) and mints line-height",
-   "check": {
-    "carried": [
-     "\"line-height\":\"\\{imported\\.case\\.a\\.line-height\\}\"",
-     "16px"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "text-styleless-match",
-   "construct": "style-less text whose (fontSize, fontStyle) matches MULTIPLE derived styles",
-   "expect": "CARRIED",
-   "why": "an ambiguous match must NOT adopt an identity - it is reported by count and the drawn values carry as minted literals",
-   "check": {
-    "note": "matches 2 derived text styles",
-    "carried": [
-     "imported\\.case\\.a\\.font-size"
-    ],
-    "absent": [
-     "\\{font\\.badge\\.size\\}"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "text-styleless-nomatch",
-   "construct": "style-less text matching NO derived style",
-   "expect": "CARRIED",
-   "why": "a zero-match is reported and the drawn typography carries as minted literals, never guessed into a token identity",
-   "check": {
-    "note": "matches 0 derived text styles",
-    "carried": [
-     "imported\\.case\\.a\\.font-size",
-     "13px"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "text-lineheight-percent",
-   "construct": "PERCENT/AUTO line-height unit (capture-boundary: only px is captured)",
-   "expect": "LEDGERED",
-   "why": "non-px line-height units stay named receipts (text-channel-unsupported), never converted",
-   "check": {
-    "note": "text-channel-unsupported",
-    "absent": [
-     "line-height"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "opacity-node",
-   "construct": "node opacity (dump v1.2) on the root",
-   "expect": "CARRIED",
-   "why": "node opacity is distinct from paint alpha (Eventz disabled-variant field case) and mints an opacity binding",
-   "check": {
-    "carried": [
-     "\"opacity\":\"\\{imported\\.case\\.root\\.opacity\\}\"",
-     "0\\.4"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "shape-ellipse",
-   "construct": "an ELLIPSE decor child (parametric shape, dump v1.3)",
-   "expect": "CARRIED",
-   "why": "ellipse is in the closed parametric-decor set; carries as a shape part with kind/width/height",
-   "check": {
-    "carried": [
-     "\"kind\":\"ellipse\"",
-     "\"width\":12"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "shape-polygon",
-   "construct": "a REGULAR_POLYGON decor child with a captured point count",
-   "expect": "CARRIED",
-   "why": "regular polygons are parametric; sides carries verbatim (CBDS Tooltip pointer field case)",
-   "check": {
-    "carried": [
-     "\"kind\":\"polygon\"",
-     "\"sides\":3"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "shape-polygon-no-sides",
-   "construct": "a polygon whose point count was not captured (REST surface)",
-   "expect": "CARRIED",
-   "why": "the Figma default of 3 is assumed WITH a named review note, never silently",
-   "check": {
-    "carried": [
-     "\"sides\":3"
-    ],
-    "note": "sides: 3 \\(the Figma default, a triangle\\) ASSUMED"
-   },
-   "status": "green"
-  },
-  {
-   "id": "shape-rotated-rect",
-   "construct": "a rotated RECTANGLE decor child (intrinsic size + CSS-clockwise rotation)",
-   "expect": "CARRIED",
-   "why": "rotated rects joined the parametric set in dump v1.3 (#42); rotation carries in CSS degrees",
-   "check": {
-    "carried": [
-     "\"kind\":\"rect\"",
-     "\"rotation\":90"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "shape-arc-partial",
-   "construct": "an ellipse with a constant partial arc sweep (dump v1.7 shape.arc)",
-   "expect": "CARRIED",
-   "why": "a constant partial sweep carries as shape.arc (conic-gradient mask on CSS surfaces; native arcData on the canvas)",
-   "check": {
-    "carried": [
-     "\"arc\":\\{\"start\":0,\"end\":3\\.14"
-    ],
-    "note": "constant ellipse arc sweep carried as shape\\.arc"
-   },
-   "status": "green"
-  },
-  {
-   "id": "shape-arc-full",
-   "construct": "an ellipse arc with a FULL (2pi) sweep",
-   "expect": "CARRIED",
-   "why": "a full sweep is redundant with the plain ellipse - dropped BY NAME, the ellipse itself still carries",
-   "check": {
-    "carried": [
-     "\"kind\":\"ellipse\""
-    ],
-    "note": "FULL sweep.*redundant with the plain ellipse, dropped",
-    "absent": [
-     "\"arc\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "shape-arc-donut",
-   "construct": "a partial arc with innerRadius > 0 (a donut/ring segment)",
-   "expect": "CARRIED",
-   "why": "the sweep and innerRadius carry as shape.arc; the filled-hole fraction and cap style are named residues",
-   "check": {
-    "carried": [
-     "\"innerRadius\":0\\.8"
-    ],
-    "note": "arc ends render square"
-   },
-   "status": "green"
-  },
-  {
-   "id": "shape-rect-abs",
-   "construct": "an ABSOLUTE plain rect with DumpShape x/y placement and constraints",
-   "expect": "CARRIED",
-   "why": "an out-of-flow rect carries position:absolute with minted offset channels picked from its constraints (LEFT/TOP -> left/top)",
-   "check": {
-    "carried": [
-     "\"position\":\"absolute\"",
-     "imported\\.case\\.a\\.left",
-     "imported\\.case\\.a\\.top"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "placement-abs-frame",
-   "construct": "a FRAME child with dump v1.7 `abs` (layoutPositioning ABSOLUTE) in an auto-layout root",
-   "expect": "CARRIED",
-   "why": "the overlay-flattened class: position:absolute + offsets chosen from constraints (RIGHT/TOP -> right/top), root declared position:relative",
-   "check": {
-    "carried": [
-     "\"position\":\"absolute\"",
-     "imported\\.case\\.a\\.right",
-     "\"position\":\"relative\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "placement-xy-none-layout",
-   "construct": "a root WITHOUT auto-layout whose children all place by x/y (`abs`)",
-   "expect": "CARRIED",
-   "why": "a NONE-layout root owns positioned children: root carries its drawn box (bbox mints width/height) and each child carries absolute offsets; equal values dedupe into imported.shared.* leaves",
-   "check": {
-    "carried": [
-     "imported\\.case\\.root\\.width",
-     "imported\\.shared\\.size-8",
-     "\"position\":\"absolute\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "placement-constraints-scale",
-   "construct": "an ABSOLUTE child whose constraints are SCALE x SCALE",
-   "expect": "REFUSED",
-   "why": "SCALE placement has no carried offset spelling (a stretch percentage, not an offset); must be a named refusal, the part renders in flow",
-   "check": {
-    "note": "constraint SCALE.SCALE has no carried offset spelling",
-    "absent": [
-     "imported\\.case\\.a\\.left",
-     "imported\\.case\\.a\\.right"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "placement-fixedsize-inflow",
-   "construct": "an in-flow FIXED-size child that is not auto-layout, not abs, not decor (dump v1.8 fixedSize)",
-   "expect": "CARRIED",
-   "why": "the drawn box is a hard fact no other channel carries; width/height mint per axis",
-   "check": {
-    "carried": [
-     "imported\\.case\\.a\\.width",
-     "imported\\.case\\.a\\.height",
-     "24px"
-    ],
-    "note": "fixed-size in-flow box"
-   },
-   "status": "green"
-  },
-  {
-   "id": "fill-image-hash",
-   "construct": "an image-paint FRAME captured BY HASH (dump v1.9 imageFill string) with a drawn fixed size",
-   "expect": "CARRIED",
-   "why": "the hash form names an exported asset; the documented carriage is background-image url + cover declarations on the part",
-   "check": {
-    "carried": [
-     "background-image",
-     "3ba1c6f0aa"
-    ]
-   },
-   "status": "green",
-   "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). The WRONG-NAME is closed at its source. Mechanism: isSpacer (core/propose-figma.ts:3222) tested fill/stroke/bound/text only, so a childless, paint-less image FRAME was classified a spacer; the spacer branch (:3941) carries layout and returns early, the part landed {}, its drawn 32px box was lost — while buildPart's note at :3603 still announced \"IMAGE fill carried BY HASH\". Fix: isSpacer now also refuses any node carrying imageFill or fixedSize (both absent-field no-ops, so a real spacer classifies exactly as before). MEASURED: the part carries tokens background-image = {imported.case.a.background-image} = url('./assets/images/3ba1c6f0aa.png'), width/height = {imported.case.a.width}/{imported.case.a.height} = 32px, and the declared cover triple (background-size: cover, background-position: 50% 50%, background-repeat: no-repeat); the note and the contract finally say the same thing. The CASE FILE was also corrected in the same pass: dump.plugin.js:429 writes figma's raw imageHash and imageFillCss appends the .png, so the old fixture's \"3ba1c6f0aa.png\" mis-modelled the capture surface and produced a .png.png URL; the case now holds the bare hash \"3ba1c6f0aa\". Byte-neutrality: a scan of all 3,982 FRAME nodes in every committed dump found exactly TWO childless paint-less frames carrying imageFill/fixedSize — this case and fill-image-bool."
-  },
-  {
-   "id": "fill-image-bool",
-   "construct": "an image-paint FRAME captured BY NAME only (imageFill: true)",
-   "expect": "CARRIED",
-   "why": "the documented carriage for the boolean marker is the neutral placeholder gradient rendered in the image's place",
-   "check": {
-    "carried": [
-     "linear-gradient|placeholder"
-    ]
-   },
-   "status": "green",
-   "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). Same isSpacer trap as fill-image-hash, same one-line fix (core/propose-figma.ts:3222 now also refuses imageFill/fixedSize). MEASURED: the part carries background-image = {imported.case.a.background-image} = linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%) — IMAGE_FILL_PLACEHOLDER_GRADIENT, the one documented spelling — plus the drawn 32px box as width/height mint observations. No cover triple here, by design: declareImageFillCover is hash-only (a placeholder gradient needs no background-size)."
-  },
-  {
-   "id": "fill-gradient",
-   "construct": "a gradient fill (capture-boundary: dump v1 carries solid paints only)",
-   "expect": "LEDGERED",
-   "why": "the capture receipts paint-unsupported; no paint may be invented in the contract",
-   "check": {
-    "note": "paint-unsupported",
-    "absent": [
-     "background-color"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "fill-multi-paint-stack",
-   "construct": "a multi-paint fill stack (capture carries the first SOLID; the rest receipt paint-stack-truncated)",
-   "expect": "LEDGERED",
-   "why": "truncation to the first solid is a declared limit with a receipt; the surviving solid still carries",
-   "check": {
-    "note": "paint-stack-truncated",
-    "carried": [
-     "0e61ba"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "axis-bool",
-   "construct": "a two-value variant axis whose options are literally true/false",
-   "expect": "CARRIED",
-   "why": "only a literal true/false axis is a boolean modeled the canvas way (isBoolAxis mirror)",
-   "check": {
-    "carried": [
-     "\"name\":\"selected\",\"type\":\"boolean\""
-    ],
-    "note": "true/false variant axis proposed as a boolean"
-   },
-   "status": "green"
-  },
-  {
-   "id": "axis-onoff-enum",
-   "construct": "a two-value Off/On axis (NOT literal true/false)",
-   "expect": "CARRIED",
-   "why": "Off/On stays a two-value enum (both states render truthfully) with a note that a code boolean is a compatible binding",
-   "check": {
-    "carried": [
-     "\"enum\":\\[\"off\",\"on\"\\]"
-    ],
-    "note": "a code boolean is a compatible code-side binding"
-   },
-   "status": "green"
-  },
-  {
-   "id": "axis-state",
-   "construct": "a State=Default|Hover|Disabled axis (interaction-state vocabulary)",
-   "expect": "CARRIED",
-   "why": "interaction states are platform states, not API: hover promotes to a root state override, Disabled to a disabled boolean + state block, and the axis leaves the props",
-   "check": {
-    "carried": [
-     "\"states\":\\[\"hover\",\"disabled\"\\]|\"hover\"",
-     "\"name\":\"disabled\",\"type\":\"boolean\""
-    ],
-    "note": "IS the platform's interaction states, not API",
-    "absent": [
-     "\"name\":\"state\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "axis-state-partial",
-   "construct": "an interaction-state axis where one variant name omits the State pair",
-   "expect": "REFUSED",
-   "why": "promotion with incomplete pairs is unsafe - the near-miss must be a named refusal and the axis stays an enum prop",
-   "check": {
-    "note": "promotion unsafe, axis kept as an enum prop",
-    "carried": [
-     "\"name\":\"state\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "axis-theme-with-carriers",
-   "construct": "a Theme=Light|Dark axis whose bound variables carry per-mode values (dump v1.6 modes)",
-   "expect": "CARRIED",
-   "why": "a corroborated mode axis is a token mode, not API (section 3): excluded from props, anatomy from the default mode only",
-   "check": {
-    "note": "IS a token-mode axis, not API",
-    "absent": [
-     "\"name\":\"theme\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "axis-theme-without-carriers",
-   "construct": "a Theme axis differing only in RAW color literals (no variables to ride)",
-   "expect": "REFUSED",
-   "why": "with no bound variables there are no modes for the deltas to ride - promotion is refused BY NAME and the axis stays an enum with per-value minted leaves",
-   "check": {
-    "note": "binds NO variables along the axis",
-    "carried": [
-     "\"name\":\"theme\"",
-     "\\{imported\\.case\\.root\\.background-color\\.\\{theme\\}\\}"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "sparse-minority-child",
-   "construct": "a child present in exactly ONE value of an enum axis",
-   "expect": "CARRIED",
-   "why": "single-value presence reconstructs visibleWhen { prop, equals } (the Switch thumb-alignment discipline)",
-   "check": {
-    "carried": [
-     "\"visibleWhen\":\\{\"prop\":\"variant\",\"equals\":\"info\"\\}"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "sparse-unpredictable",
-   "construct": "a child present in a strict SUBSET (2 of 3) of an axis's values",
-   "expect": "CARRIED",
-   "why": "subset presence carries as the value-subset visibleWhen form (equals: [..]), named in a note - never a silent omission",
-   "check": {
-    "carried": [
-     "\"equals\":\\[\"info\",\"success\"\\]"
-    ],
-    "note": "value-subset form"
-   },
-   "status": "green"
-  },
-  {
-   "id": "spacer-growth",
-   "construct": "an empty, paint-less, binding-less fill-width frame between siblings",
-   "expect": "CARRIED",
-   "why": "the spacer idiom carries as a grow part (structural alignment, no ink)",
-   "check": {
-    "carried": [
-     "\"s\":\\{\"layout\":\\{\"grow\":true\\}\\}"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "spacer-visiblewhen",
-   "construct": "a spacer present in only one value of an axis",
-   "expect": "CARRIED",
-   "why": "axis-correlated spacer presence reconstructs visibleWhen - how structural thumb alignment survives the round trip",
-   "check": {
-    "carried": [
-     "\"grow\":true",
-     "\"visibleWhen\":\\{\"prop\":\"value\",\"equals\":\"on\"\\}"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "wrapper-label-fold",
-   "construct": "the generator's auto-injected label artifact (root whose sole child is a children-bound text node)",
-   "expect": "CARRIED",
-   "why": "the label node is a generator artifact, not a part: its text tokens hoist to the ROOT and the bound prop proposes as `children`",
-   "check": {
-    "carried": [
-     "\"name\":\"children\""
-    ],
-    "note": "hoisted to root tokens",
-    "absent": [
-     "\"label\":\\{"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "wrapper-static-text",
-   "construct": "the styled-static-text WRAPPER artifact (empty frame at the wrap default with fill + bound size)",
-   "expect": "CARRIED",
-   "why": "the wrap-default layout is elided; the frame proposes as a leaf part with tokens only (the Switch thumb)",
-   "check": {
-    "carried": [
-     "\"width\":\"\\{size\\.switch\\.thumb\\}\""
-    ],
-    "absent": [
-     "\"a\":\\{\"layout\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "nest-three-deep",
-   "construct": "three-deep nested frames each carrying their own facts",
-   "expect": "CARRIED",
-   "why": "nesting is ordinary anatomy: parts nest with their own layout/tokens at each level",
-   "check": {
-    "carried": [
-     "\"a\":\\{\"layout\":\\{\"direction\":\"column\"\\}",
-     "\"b\":\\{\"layout\"",
-     "\"c\":\\{\"text\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "instance-resolvable-name",
-   "construct": "a nested INSTANCE whose main component name matches an in-scope contract (no keys captured)",
-   "expect": "CARRIED",
-   "why": "a name match with no contradicting key evidence links the component ref, flagged verify-the-link",
-   "check": {
-    "carried": [
-     "\"component\":\\{\"id\":\"ds\\.badge\"\\}"
-    ],
-    "note": "linked to ds\\.badge by NAME"
-   },
-   "status": "green"
-  },
-  {
-   "id": "instance-resolvable-key",
-   "construct": "a RENAMED nested instance whose instanceSetKey matches a contract's componentSetKey anchor",
-   "expect": "CARRIED",
-   "why": "key identity survives renames (dump v1.5 session linking) - the key is checked FIRST, the drawn name is irrelevant",
-   "check": {
-    "carried": [
-     "\"component\":\\{\"id\":\"ds\\.badge\"\\}"
-    ],
-    "note": "LINKED to ds\\.badge by componentSetKey"
-   },
-   "status": "green"
-  },
-  {
-   "id": "instance-name-key-contradict",
-   "construct": "an instance named like an in-scope contract whose key CONTRADICTS that contract's anchor",
-   "expect": "REFUSED",
-   "why": "a foreign kit's Badge must not link to ds.badge on name coincidence - the link is refused BY NAME and an honest stub (suffixed id) takes its place",
-   "check": {
-    "note": "name-coincidence link REFUSED",
-    "carried": [
-     "\"component\":\\{\"id\":\"ds\\.badge-2\"\\}"
-    ],
-    "absent": [
-     "\"component\":\\{\"id\":\"ds\\.badge\"\\}"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "instance-absent-stub",
-   "construct": "a nested instance with NO contract in scope, with observed bbox + primary paint",
-   "expect": "CARRIED",
-   "why": "the child ships as a STUB contract rendering the OBSERVED geometry via minted imported.stub-* tokens - a correctly-sized box, never invented anatomy",
-   "check": {
-    "carried": [
-     "\"id\":\"ds\\.zorble\"",
-     "imported\\.stub-zorble\\.root\\.width",
-     "9e77ed"
-    ],
-    "note": "STUB child contract auto-proposed"
-   },
-   "status": "green"
-  },
-  {
-   "id": "instance-stub-no-bbox",
-   "construct": "an unresolvable instance with NO observed geometry (pre-v1.5 dump shape)",
-   "expect": "CARRIED",
-   "why": "the ref + stub still propose; absent geometry stays a declared limit - no witness box may be invented",
-   "check": {
-    "carried": [
-     "\"id\":\"ds\\.zorble\""
-    ],
-    "note": "has no known contract",
-    "absent": [
-     "imported\\.stub-zorble"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "instance-props-thread",
-   "construct": "an applied component property tracking a parent enum axis 1:1 across variants",
-   "expect": "CARRIED",
-   "why": "a value that follows the parent axis threads as the placeholder \"{parentProp}\" instead of freezing one value",
-   "check": {
-    "carried": [
-     "\"props\":\\{\"variant\":\"\\{variant\\}\"\\}"
-    ],
-    "note": "threaded as \"\\{variant\\}\""
-   },
-   "status": "green"
-  },
-  {
-   "id": "instance-props-fixed",
-   "construct": "a constant applied component property on a linked instance",
-   "expect": "CARRIED",
-   "why": "fixed prop values ride componentProperties and canonicalize through the child contract's bindings (Success -> success)",
-   "check": {
-    "carried": [
-     "\"props\":\\{\"variant\":\"success\"\\}"
-    ],
-    "note": "canonicalized through ds\\.badge's bindings"
-   },
-   "status": "green"
-  },
-  {
-   "id": "slot-wrapper-swap",
-   "construct": "a frame whose sole child is a Slot-utility instance bound to an INSTANCE_SWAP property",
-   "expect": "CARRIED",
-   "why": "the wrapper is a slot part; the utility's own styling is elided; first non-optional slot is judged the default (children)",
-   "check": {
-    "carried": [
-     "\"slot\":\\{\"name\":\"children\"",
-     "\"figmaProperty\":\"Content\""
-    ],
-    "note": "Slot-utility instance styling is the utility's own"
-   },
-   "status": "green"
-  },
-  {
-   "id": "slot-optional-show",
-   "construct": "a slot wrapper with a 'Show <Property>' visibility binding",
-   "expect": "CARRIED",
-   "why": "the Show binding marks the part optional and is NOT an API prop",
-   "check": {
-    "carried": [
-     "\"optional\":true",
-     "\"slot\":\\{\"name\":\"content\"\\}"
-    ],
-    "absent": [
-     "\"property\":\"Show Content\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "slot-native-node",
-   "construct": "a NATIVE Figma slot node (Schema 2025, dump v1.5 type SLOT)",
-   "expect": "CARRIED",
-   "why": "native slots map to the same contract slot part with a provenance note so regeneration reproduces the native spelling",
-   "check": {
-    "carried": [
-     "\"slot\":\\{\"name\":\"children\""
-    ],
-    "note": "NATIVE Figma slot node"
-   },
-   "status": "green"
-  },
-  {
-   "id": "slot-preferred-values",
-   "construct": "INSTANCE_SWAP preferredValues resolving to an in-scope contract by key",
-   "expect": "CARRIED",
-   "why": "preferred values resolve through anchors into accepts with acceptsMode prefer",
-   "check": {
-    "carried": [
-     "\"accepts\":\\[\"ds\\.badge\"\\]",
-     "\"acceptsMode\":\"prefer\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "slot-preferred-unresolvable",
-   "construct": "preferredValues naming a key with NO in-scope contract",
-   "expect": "REFUSED",
-   "why": "unresolvable keys are named, never guessed into ids - accepts stays unauthored",
-   "check": {
-    "note": "with no in-scope contract",
-    "absent": [
-     "\"accepts\""
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "bool-default-from-set",
-   "construct": "a visibility-bound part visible in the default variant, with the set's BOOLEAN defaultValue captured (dump v1.5 boolDefaults)",
-   "expect": "CARRIED",
-   "why": "the boolean prop default comes from the captured property definition - the one default variants alone cannot recover",
-   "check": {
-    "carried": [
-     "\"name\":\"showExtra\",\"type\":\"boolean\",\"default\":true"
-    ],
-    "note": "the property definition's defaultValue"
-   },
-   "status": "green"
-  },
-  {
-   "id": "bool-default-hidden",
-   "construct": "a visibility-bound part HIDDEN in the default variant (dump v1.1 hidden, producer stamps dumpVersion)",
-   "expect": "CARRIED",
-   "why": "hidden-in-default is positive evidence for default false (never inverted into true without the producer marker)",
-   "check": {
-    "carried": [
-     "\"name\":\"showExtra\",\"type\":\"boolean\",\"default\":false"
-    ],
-    "note": "hidden in the default variant"
-   },
-   "status": "green"
-  },
-  {
-   "id": "rotation-nonshape",
-   "construct": "rotation on a non-decor node (capture-boundary: rotation rides shape decor only)",
-   "expect": "LEDGERED",
-   "why": "the capture receipts rotation-unsupported; the node renders unrotated and nothing rotation-shaped may be invented",
-   "check": {
-    "note": "rotation-unsupported",
-    "absent": [
-     "rotation"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "instance-override-paint-observed",
-   "construct": "an observed subtree paint on an instance LINKED to a real contract (classic path, no instanceOverrides ledger)",
-   "expect": "LEDGERED",
-   "why": "the child contract owns its paint; a per-usage override is not representable on a component ref without the opt-in override machinery - ledgered by name",
-   "check": {
-    "note": "per-usage paint override is not representable",
-    "absent": [
-     "9e77ed"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "effect-inner-shadow",
-   "construct": "an INNER_SHADOW effect on the root",
-   "expect": "REFUSED",
-   "why": "inner shadows are outside the DROP_SHADOW-stack grammar (a stack of DROP_SHADOW layers carries comma-separated; INNER_SHADOW does not) - the channel is NAMED by kind, not proposed",
-   "check": {
-    "note": "visible effect\\(s\\) \\[INNER_SHADOW\\]",
-    "absent": [
-     "box-shadow"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "effect-layer-blur",
-   "construct": "a LAYER_BLUR effect on the root",
-   "expect": "REFUSED",
-   "why": "blur types carry type/radius only so the gap can be NAMED - no filter/box-shadow may be proposed",
-   "check": {
-    "note": "visible effect\\(s\\) \\[LAYER_BLUR\\]",
-    "absent": [
-     "box-shadow|filter"
-    ]
-   },
-   "status": "green"
-  },
-  {
-   "id": "effect-text-shadow",
-   "construct": "a drop shadow on a TEXT node",
-   "expect": "REFUSED",
-   "why": "a text shadow has no contract vocabulary (box-shadow is a box channel) - named, not proposed",
-   "check": {
-    "note": "a text shadow has no contract vocabulary",
-    "absent": [
-     "box-shadow|text-shadow"
-    ]
-   },
-   "status": "green"
-  }
- ]
+  "note": "CANVAS CONFORMANCE MANIFEST - the hand-authored denominator. Expected dispositions are written from the Figma documentation model's semantics (extract/figma/types.ts + the propose inversion rules' declared intent), NEVER from engine output. status:red = FAIL-EXPECTED-RED (doc model not met today; status quo pinned in observedCheck). A construct neither carried nor named-refused is a hard failure.",
+  "cases": [
+    {
+      "id": "fill-solid-var",
+      "construct": "solid fill bound to a color variable on the variant root",
+      "expect": "CARRIED",
+      "why": "a var-bound solid paint is the canonical token binding (slash name inverts to a dot ref)",
+      "check": {
+        "carried": [
+          "\\{color\\.feedback\\.info\\.background\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "fill-solid-and-image-mixed",
+      "construct": "one node whose fill is a SOLID paint on some variants and an IMAGE on others",
+      "expect": "CARRIED",
+      "why": "absence of a solid is a capture GAP only where nothing on the node explains it. A node carrying an imageFill has a fully described paint stack - an image, and no solid under it that the capture saw - so its solid layer is an observation whose rendering-neutral literal is #00000000, exactly the reading the stroke channel already takes for a strokeless node. Both halves of the pair then carry over the whole axis. Before round 10 the mixed stack refused the WHOLE background-color channel, so Untitled UI's Avatar never rendered the #f9f5ff ground it draws on 108 of its 162 variants",
+      "check": {
+        "carried": [
+          "imported\\.case\\.root\\.background-color\\.\\{photo\\}",
+          "\"false\":\\{\"\\$value\":\"#f9f5ff\"",
+          "\"true\":\\{\"\\$value\":\"#00000000\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "fill-solid-raw",
+      "construct": "raw (variable-less) solid hex fill on the root",
+      "expect": "CARRIED",
+      "why": "a raw paint is a hard drawn fact; mintUnbound mints a provisional imported.* token and binds it, never drops it",
+      "check": {
+        "carried": [
+          "imported\\.case\\.root\\.background-color",
+          "0e61ba"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "fill-alpha",
+      "construct": "solid fill with paint alpha (dump v1.1 `alpha`)",
+      "expect": "CARRIED",
+      "why": "effective paint opacity is part of the drawn ink (Eventz 5%-black field case); must survive into the minted value",
+      "check": {
+        "carried": [
+          "0000000d"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "effect-shadow-single",
+      "construct": "exactly one visible DROP_SHADOW in every variant",
+      "expect": "CARRIED",
+      "why": "the one effect form with a declared box-shadow projection (dump v1.2)",
+      "check": {
+        "carried": [
+          "box-shadow",
+          "0px 4px 8px"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "effect-shadow-two",
+      "construct": "a TWO-layer drop-shadow stack on the root",
+      "expect": "CARRIED",
+      "why": "CSS box-shadow is natively a comma-separated LIST and the canvas emitter's stack grammar projects every layer back as its own native DROP_SHADOW, so a DROP_SHADOW-only stack has a lossless projection in both directions; refusing it (the pre-gap-round-4 rule) dropped the only visible edge of a light-on-light surface. BOTH layers must appear, in dump order \u2014 a truncation to one layer is still a failure",
+      "check": {
+        "carried": [
+          "box-shadow",
+          "0px 4px 8px [^\"]*, 0px 1px 2px "
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "axis-enum",
+      "construct": "a two-value non-boolean variant axis with axis-correlated token bindings",
+      "expect": "CARRIED",
+      "why": "variant axes are enum props; per-variant refs differing in exactly the axis segment carry as ONE substituted ref",
+      "check": {
+        "carried": [
+          "\"enum\":\\[\"info\",\"success\"\\]",
+          "\\{color\\.feedback\\.\\{variant\\}\\.background\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "text-prop-characters",
+      "construct": "propRefs.characters binding a text node to a TEXT component property",
+      "expect": "CARRIED",
+      "why": "a characters propRef is the canvas spelling of a text prop; default comes from the bound node's characters",
+      "check": {
+        "carried": [
+          "\"kind\":\"TEXT\",\"property\":\"Label\"",
+          "\"content\":\\{\"prop\":\"label\"\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "text-style-token",
+      "construct": "a text node riding the named TextStyle 'badge'",
+      "expect": "CARRIED",
+      "why": "a named TextStyle is a token identity; 'badge' inverts to the font.badge.size ref",
+      "check": {
+        "carried": [
+          "\\{font\\.badge\\.size\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "shape-vector-path",
+      "construct": "a VECTOR child (arbitrary-path geometry) with a fill and a drawn fixed size",
+      "expect": "LEDGERED",
+      "why": "arbitrary paths are outside dump v1 (parametric decor only); the capture receipts vector-geometry-unsupported and the node carries paints + box only",
+      "check": {
+        "note": "vector-geometry-unsupported",
+        "carried": [
+          "imported\\.case\\.a\\.width"
+        ],
+        "absent": [
+          "clip-path"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "blend-mode-multiply",
+      "construct": "a non-NORMAL blendMode on the root (capture-boundary: no dump v1 field)",
+      "expect": "LEDGERED",
+      "why": "blend modes have no dump projection; the capture receipts blend-mode-unsupported and nothing blend-shaped may appear in the contract",
+      "check": {
+        "note": "blend-mode-unsupported",
+        "absent": [
+          "blend"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "layout-column",
+      "construct": "VERTICAL auto-layout with bound itemSpacing and symmetric bound padding",
+      "expect": "CARRIED",
+      "why": "mode VERTICAL inverts to direction column; bound itemSpacing to a gap ref; equal per-side pairs to padding-inline/-block",
+      "check": {
+        "carried": [
+          "\"direction\":\"column\"",
+          "\\{space\\.gap\\.sm\\}",
+          "padding-inline"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "layout-justify-space-between",
+      "construct": "primary axis alignment SPACE_BETWEEN",
+      "expect": "CARRIED",
+      "why": "SPACE_BETWEEN is in the documented JUSTIFY inversion table",
+      "check": {
+        "carried": [
+          "\"justify\":\"space-between\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "layout-align-baseline",
+      "construct": "counter axis alignment BASELINE (a documented DumpLayout value)",
+      "expect": "CARRIED",
+      "why": "BASELINE is on the documented dump surface (DumpLayout.counter); text-and-icon rows drawn baseline-aligned should carry align: baseline (or at minimum a named refusal)",
+      "check": {
+        "carried": [
+          "\"align\":\"baseline\""
+        ]
+      },
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). The SILENT LOSS is closed by CARRIAGE, not by a note. Mechanism: ALIGN_INV (core/propose-figma.ts:2548) held only MIN/CENTER/MAX, so the fourth documented DumpLayout.counter value fell through to undefined and invertLayout emitted direction only \u2014 no align, and nothing in the naming union. Fix: ALIGN_INV.BASELINE = 'baseline', and the align fact widened end-to-end on BOTH surfaces so the proposal is legal and renderable: LayoutSchema/VariantLayoutSchema align enum + ResolvedLayout (packages/schema/src/contract-schema.ts:114,140,1263) regenerated into contracts/contract.schema.json and packages/schema/contract.schema.json; ALIGN_CSS -> align-items: baseline (core/emit-react.ts:135, core/emit-html.ts:72, core/emit-react-inline.ts:72, packages/emitter-web-components/src/emit-wc.ts:170); ALIGN_FIGMA -> counterAxisAlignItems BASELINE (core/emit-figma-script.ts:922) with a VERTICAL guard in layoutSpec (:1070) because Figma throws on BASELINE under a column; roundtrip A_MAP (extract/figma/roundtrip.ts:77); COUNTER_CSS previews (extract/figma/canvas-gate/canvas-doc.ts:116, playground/src/engine/canvas-preview.ts:171). MEASURED: the two-text-child row now proposes anatomy.root.layout = {\"display\":\"flex\",\"direction\":\"row\",\"align\":\"baseline\"}. Every edit is a map key addition \u2014 zero committed dumps carry counter:BASELINE and zero committed contracts carry align:baseline, so no committed artifact moves."
+    },
+    {
+      "id": "layout-gap-literal",
+      "construct": "literal (unbound) itemSpacing",
+      "expect": "CARRIED",
+      "why": "a drawn gap is a hard fact; mintUnbound mints a provisional gap token",
+      "check": {
+        "carried": [
+          "imported\\.case\\.root\\.gap",
+          "10px"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "layout-padding-asymmetric-bound",
+      "construct": "left/right padding bound to DIFFERENT tokens",
+      "expect": "CARRIED",
+      "why": "an asymmetric pair carries as per-side longhand channels (padding-left/right) with a note, never refuses",
+      "check": {
+        "carried": [
+          "\"padding-left\":\"\\{space\\.inset-x\\.sm\\}\"",
+          "\"padding-right\":\"\\{space\\.inset-x\\.lg\\}\""
+        ],
+        "note": "left/right padding bindings differ"
+      },
+      "status": "green"
+    },
+    {
+      "id": "layout-fill-width-row",
+      "construct": "a child drawn layoutSizingHorizontal FILL inside a ROW parent",
+      "expect": "CARRIED",
+      "why": "fillWidth in a row parent inverts to layout.grow on the part",
+      "check": {
+        "carried": [
+          "\"grow\":true"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "layout-fill-width-column",
+      "construct": "every eligible child drawn FILL inside a COLUMN parent",
+      "expect": "CARRIED",
+      "why": "align: stretch is observable only through its artifact - every eligible child carrying FILL in a column parent",
+      "check": {
+        "carried": [
+          "\"align\":\"stretch\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "layout-root-fixed-bbox",
+      "construct": "root primary axis drawn FIXED with an observed bbox (dump v1.5)",
+      "expect": "CARRIED",
+      "why": "a FIXED root dimension is otherwise unrecoverable (CBDS Dialog field case); the observed width mints as a root token",
+      "check": {
+        "carried": [
+          "imported\\.case\\.root\\.width",
+          "320px"
+        ],
+        "note": "root width is DRAWN FIXED"
+      },
+      "status": "green"
+    },
+    {
+      "id": "layout-root-default-elided",
+      "construct": "root drawn exactly at the generator default (row/center/center)",
+      "expect": "CARRIED",
+      "why": "the generator default is canvas-indistinguishable from no layout block; carriage-by-equivalence proposes NO layout (asserted by absence)",
+      "check": {
+        "absent": [
+          "\"layout\""
+        ],
+        "carried": [
+          "\\{color\\.feedback\\.info\\.background\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "layout-width-bound-root",
+      "construct": "a width variable bound on the ROOT",
+      "expect": "CARRIED",
+      "why": "a component's outer dimension is fluid-up-to in code; a root-bound width inverts to max-width",
+      "check": {
+        "carried": [
+          "\"max-width\":\"\\{size\\.card\\.width\\}\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "minmax-size",
+      "construct": "literal minWidth/minHeight on the root (dump v1.4)",
+      "expect": "CARRIED",
+      "why": "a drawn minHeight 44 is a tap-target fact; carried as min-width/min-height style facts",
+      "check": {
+        "carried": [
+          "min-width",
+          "min-height",
+          "44px"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "stroke-uniform-var",
+      "construct": "uniform stroke bound to a color variable with a literal weight",
+      "expect": "CARRIED",
+      "why": "a var-bound stroke inverts to border-color; the literal uniform weight is a drawn fact and mints border-width",
+      "check": {
+        "carried": [
+          "\"border-color\":\"\\{color\\.border\\.subtle\\}\"",
+          "imported\\.case\\.root\\.border-width"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "stroke-weight-bound",
+      "construct": "four equal stroke-weight bindings to one width variable",
+      "expect": "CARRIED",
+      "why": "four equal bound weights invert to one border-width ref",
+      "check": {
+        "carried": [
+          "\"border-width\":\"\\{border\\.width\\.focus\\}\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "stroke-only-no-fill",
+      "construct": "a stroke-only child (border, no fill at all)",
+      "expect": "CARRIED",
+      "why": "a stroke with no fill must carry as a border without inventing a background",
+      "check": {
+        "carried": [
+          "\"border-color\":\"\\{color\\.border\\.subtle\\}\""
+        ],
+        "absent": [
+          "\"a\":\\{[^}]*background-color"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "stroke-weights-nonuniform",
+      "construct": "per-side (non-uniform) stroke weights (capture-boundary: dump v1 carries a uniform weight only)",
+      "expect": "LEDGERED",
+      "why": "the capture receipts stroke-weights-nonuniform; the proposal must not invent per-side widths",
+      "check": {
+        "note": "stroke-weights-nonuniform",
+        "absent": [
+          "border-top-width|border-bottom-width"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "stroke-align-inside",
+      "construct": "a stroke explicitly aligned INSIDE the node box (dump v1.11 captures the alignment of EVERY stroke)",
+      "expect": "CARRIED",
+      "why": "INSIDE is the alignment a CSS border already has - a border under box-sizing:border-box is drawn inward - so the stroke carries as border-color/border-width and nothing outline-shaped may appear. The case exists because before dump v1.11 this disposition rested on an ASSUMPTION about an absent field rather than a captured fact, and the same assumption was wrong elsewhere on the same canvas",
+      "check": {
+        "carried": [
+          "\"border-color\":\"\\{color\\.border\\.subtle\\}\"",
+          "imported\\.case\\.root\\.border-width"
+        ],
+        "absent": [
+          "outline-color",
+          "outline-width"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "stroke-align-outside",
+      "construct": "a stroke aligned OUTSIDE the node box",
+      "expect": "CARRIED",
+      "why": "an OUTSIDE stroke grows the drawing beyond the node box without moving anything inside it; the only CSS spelling with that behaviour is an outline (drawn outside the border box, taking no layout space), so the pair carries as outline-color/outline-width and border-* must NOT appear - a border would draw the ring INWARD over the content, and growing the box to hold it instead moves the very node the drawing is anchored on",
+      "check": {
+        "carried": [
+          "\"outline-color\":\"\\{color\\.border\\.subtle\\}\"",
+          "imported\\.case\\.root\\.outline-width"
+        ],
+        "absent": [
+          "border-color",
+          "border-width"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "stroke-align-center",
+      "construct": "a stroke aligned CENTER (straddling the node box edge)",
+      "expect": "LEDGERED",
+      "why": "a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither spelling carries it exactly. The capture receipts stroke-align-unsupported under its OWN code - not folded into stroke-style-unsupported, which is what made this boundary uncountable for eight rounds - and the inversion NAMES the approximation instead of proposing an outline it cannot justify",
+      "check": {
+        "note": "stroke-align-unsupported",
+        "carried": [
+          "\"border-color\":\"\\{color\\.border\\.subtle\\}\""
+        ],
+        "absent": [
+          "outline-color",
+          "outline-width"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "stroke-dashed",
+      "construct": "a dashed stroke (dashPattern - capture-boundary)",
+      "expect": "LEDGERED",
+      "why": "dashed strokes have no dump v1 projection; the receipt names it and the stroke renders solid",
+      "check": {
+        "note": "stroke-style-unsupported",
+        "absent": [
+          "dashed|border-style"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "radius-uniform-bound",
+      "construct": "four equal radius bindings to one radius variable",
+      "expect": "CARRIED",
+      "why": "four equal bound radii invert to one border-radius ref",
+      "check": {
+        "carried": [
+          "\"border-radius\":\"\\{radius\\.badge\\}\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "radius-uniform-literal",
+      "construct": "a literal uniform cornerRadius",
+      "expect": "CARRIED",
+      "why": "a drawn radius is a hard fact; mints a provisional border-radius token",
+      "check": {
+        "carried": [
+          "imported\\.case\\.root\\.border-radius",
+          "6px"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "radius-per-corner",
+      "construct": "per-corner (non-uniform) radii (capture-boundary: dump v1 carries a uniform radius only)",
+      "expect": "LEDGERED",
+      "why": "the capture receipts radii-nonuniform; nothing corner-shaped may be invented",
+      "check": {
+        "note": "radii-nonuniform",
+        "absent": [
+          "border-top-left-radius|border-radius"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "text-lineheight-px",
+      "construct": "pixel-unit line height on a text node (dump v1.3)",
+      "expect": "CARRIED",
+      "why": "a px line height is captured verbatim (CBDS Tooltip field case) and mints line-height",
+      "check": {
+        "carried": [
+          "\"line-height\":\"\\{imported\\.case\\.a\\.line-height\\}\"",
+          "16px"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "text-styleless-match",
+      "construct": "style-less text whose (fontSize, fontStyle) matches MULTIPLE derived styles",
+      "expect": "CARRIED",
+      "why": "an ambiguous match must NOT adopt an identity - it is reported by count and the drawn values carry as minted literals",
+      "check": {
+        "note": "matches 2 derived text styles",
+        "carried": [
+          "imported\\.case\\.a\\.font-size"
+        ],
+        "absent": [
+          "\\{font\\.badge\\.size\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "text-styleless-nomatch",
+      "construct": "style-less text matching NO derived style",
+      "expect": "CARRIED",
+      "why": "a zero-match is reported and the drawn typography carries as minted literals, never guessed into a token identity",
+      "check": {
+        "note": "matches 0 derived text styles",
+        "carried": [
+          "imported\\.case\\.a\\.font-size",
+          "13px"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "token-nested-two-axis",
+      "construct": "a NESTED part's channel that is a function of TWO variant axes (irreducible to either alone)",
+      "expect": "CARRIED",
+      "why": "A nested part's token that is a total function of TWO enum axes carries as a two-axis substituted ref. This fixture is deliberately WITNESSED \u2014 a third axis (Density) gives each Tone x Size cell two observations \u2014 so the correlation is corroborated and the carriage ships with NO caveat. Its saturated twin (token-nested-pair-saturated) holds the same construct at one observation per cell and must carry the SAME ref WITH a caveat; the pair of cases is what makes the caveat meaningful, since a caveat that appears on everything says nothing. Re-authored in gap-closing round 10.",
+      "check": {
+        "carried": [
+          "imported\\.case\\.a\\.color\\.\\{tone\\}\\.\\{size\\}",
+          "\"brand\":\\{\"sm\":\\{\"\\$value\":\"#ffffff\"",
+          "\"gray\":\\{\"sm\":\\{\"\\$value\":\"#404040\""
+        ],
+        "noteAbsent": [
+          "SATURATED"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "token-nested-pair-saturated",
+      "construct": "the SAME two-axis nested channel at exactly one observation per cell (a SATURATED pair)",
+      "expect": "CARRIED",
+      "why": "A pair spanning |a| x |b| cells with no more than that many observations fits ANY values, so the correlation is unwitnessed \u2014 but every per-cell value is still MEASURED. Gap-closing round 10 first refused this case outright; measured against the kit, that discarded ButtonBase's twenty Size x Icon paddings and rendered a 22px-tall button where the canvas draws 40 \u2014 losing measured facts, the same class as border-color -> currentColor. The doctrine is therefore CARRY AND NAME: the ref reproduces the drawing exactly, and a caveat says the correlation is unwitnessed and may be drift rather than intent. This case pins BOTH halves \u2014 carriage and caveat \u2014 so neither a silent overclaim nor a silent loss can pass.",
+      "check": {
+        "carried": [
+          "imported\\.case\\.a\\.color\\.\\{tone\\}\\.\\{size\\}"
+        ],
+        "note": "SATURATED.*the CORRELATION is unwitnessed"
+      },
+      "status": "green"
+    },
+    {
+      "id": "text-lineheight-percent",
+      "construct": "PERCENT/AUTO line-height unit (capture-boundary: only px is captured)",
+      "expect": "LEDGERED",
+      "why": "non-px line-height units stay named receipts (text-channel-unsupported), never converted",
+      "check": {
+        "note": "text-channel-unsupported",
+        "absent": [
+          "line-height"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "opacity-node",
+      "construct": "node opacity (dump v1.2) on the root",
+      "expect": "CARRIED",
+      "why": "node opacity is distinct from paint alpha (Eventz disabled-variant field case) and mints an opacity binding",
+      "check": {
+        "carried": [
+          "\"opacity\":\"\\{imported\\.case\\.root\\.opacity\\}\"",
+          "0\\.4"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "shape-ellipse",
+      "construct": "an ELLIPSE decor child (parametric shape, dump v1.3)",
+      "expect": "CARRIED",
+      "why": "ellipse is in the closed parametric-decor set; carries as a shape part with kind/width/height",
+      "check": {
+        "carried": [
+          "\"kind\":\"ellipse\"",
+          "\"width\":12"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "shape-polygon",
+      "construct": "a REGULAR_POLYGON decor child with a captured point count",
+      "expect": "CARRIED",
+      "why": "regular polygons are parametric; sides carries verbatim (CBDS Tooltip pointer field case)",
+      "check": {
+        "carried": [
+          "\"kind\":\"polygon\"",
+          "\"sides\":3"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "shape-polygon-no-sides",
+      "construct": "a polygon whose point count was not captured (REST surface)",
+      "expect": "CARRIED",
+      "why": "the Figma default of 3 is assumed WITH a named review note, never silently",
+      "check": {
+        "carried": [
+          "\"sides\":3"
+        ],
+        "note": "sides: 3 \\(the Figma default, a triangle\\) ASSUMED"
+      },
+      "status": "green"
+    },
+    {
+      "id": "shape-rotated-rect",
+      "construct": "a rotated RECTANGLE decor child (intrinsic size + CSS-clockwise rotation)",
+      "expect": "CARRIED",
+      "why": "rotated rects joined the parametric set in dump v1.3 (#42); rotation carries in CSS degrees",
+      "check": {
+        "carried": [
+          "\"kind\":\"rect\"",
+          "\"rotation\":90"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "shape-arc-partial",
+      "construct": "an ellipse with a constant partial arc sweep (dump v1.7 shape.arc)",
+      "expect": "CARRIED",
+      "why": "a constant partial sweep carries as shape.arc (conic-gradient mask on CSS surfaces; native arcData on the canvas)",
+      "check": {
+        "carried": [
+          "\"arc\":\\{\"start\":0,\"end\":3\\.14"
+        ],
+        "note": "constant ellipse arc sweep carried as shape\\.arc"
+      },
+      "status": "green"
+    },
+    {
+      "id": "shape-arc-full",
+      "construct": "an ellipse arc with a FULL (2pi) sweep",
+      "expect": "CARRIED",
+      "why": "a full sweep is redundant with the plain ellipse - dropped BY NAME, the ellipse itself still carries",
+      "check": {
+        "carried": [
+          "\"kind\":\"ellipse\""
+        ],
+        "note": "FULL sweep.*redundant with the plain ellipse, dropped",
+        "absent": [
+          "\"arc\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "shape-arc-donut",
+      "construct": "a partial arc with innerRadius > 0 (a donut/ring segment)",
+      "expect": "CARRIED",
+      "why": "the sweep and innerRadius carry as shape.arc; the filled-hole fraction and cap style are named residues",
+      "check": {
+        "carried": [
+          "\"innerRadius\":0\\.8"
+        ],
+        "note": "arc ends render square"
+      },
+      "status": "green"
+    },
+    {
+      "id": "shape-rect-abs",
+      "construct": "an ABSOLUTE plain rect with DumpShape x/y placement and constraints",
+      "expect": "CARRIED",
+      "why": "an out-of-flow rect carries position:absolute with minted offset channels picked from its constraints (LEFT/TOP -> left/top)",
+      "check": {
+        "carried": [
+          "\"position\":\"absolute\"",
+          "imported\\.case\\.a\\.left",
+          "imported\\.case\\.a\\.top"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "placement-abs-frame",
+      "construct": "a FRAME child with dump v1.7 `abs` (layoutPositioning ABSOLUTE) in an auto-layout root",
+      "expect": "CARRIED",
+      "why": "the overlay-flattened class: position:absolute + offsets chosen from constraints (RIGHT/TOP -> right/top), root declared position:relative",
+      "check": {
+        "carried": [
+          "\"position\":\"absolute\"",
+          "imported\\.case\\.a\\.right",
+          "\"position\":\"relative\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "placement-xy-none-layout",
+      "construct": "a root WITHOUT auto-layout whose children all place by x/y (`abs`)",
+      "expect": "CARRIED",
+      "why": "a NONE-layout root owns positioned children: root carries its drawn box (bbox mints width/height) and each child carries absolute offsets; equal values dedupe into imported.shared.* leaves",
+      "check": {
+        "carried": [
+          "imported\\.case\\.root\\.width",
+          "imported\\.shared\\.size-8",
+          "\"position\":\"absolute\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "placement-constraints-scale",
+      "construct": "an ABSOLUTE child whose constraints are SCALE x SCALE",
+      "expect": "REFUSED",
+      "why": "SCALE placement has no carried offset spelling (a stretch percentage, not an offset); must be a named refusal, the part renders in flow",
+      "check": {
+        "note": "constraint SCALE.SCALE has no carried offset spelling",
+        "absent": [
+          "imported\\.case\\.a\\.left",
+          "imported\\.case\\.a\\.right"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "placement-fixedsize-inflow",
+      "construct": "an in-flow FIXED-size child that is not auto-layout, not abs, not decor (dump v1.8 fixedSize)",
+      "expect": "CARRIED",
+      "why": "the drawn box is a hard fact no other channel carries; width/height mint per axis",
+      "check": {
+        "carried": [
+          "imported\\.case\\.a\\.width",
+          "imported\\.case\\.a\\.height",
+          "24px"
+        ],
+        "note": "fixed-size in-flow box"
+      },
+      "status": "green"
+    },
+    {
+      "id": "fill-image-hash",
+      "construct": "an image-paint FRAME captured BY HASH (dump v1.9 imageFill string) with a drawn fixed size",
+      "expect": "CARRIED",
+      "why": "the hash form names an exported asset; the documented carriage is background-image url + cover declarations on the part",
+      "check": {
+        "carried": [
+          "background-image",
+          "3ba1c6f0aa"
+        ]
+      },
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). The WRONG-NAME is closed at its source. Mechanism: isSpacer (core/propose-figma.ts:3222) tested fill/stroke/bound/text only, so a childless, paint-less image FRAME was classified a spacer; the spacer branch (:3941) carries layout and returns early, the part landed {}, its drawn 32px box was lost \u2014 while buildPart's note at :3603 still announced \"IMAGE fill carried BY HASH\". Fix: isSpacer now also refuses any node carrying imageFill or fixedSize (both absent-field no-ops, so a real spacer classifies exactly as before). MEASURED: the part carries tokens background-image = {imported.case.a.background-image} = url('./assets/images/3ba1c6f0aa.png'), width/height = {imported.case.a.width}/{imported.case.a.height} = 32px, and the declared cover triple (background-size: cover, background-position: 50% 50%, background-repeat: no-repeat); the note and the contract finally say the same thing. The CASE FILE was also corrected in the same pass: dump.plugin.js:429 writes figma's raw imageHash and imageFillCss appends the .png, so the old fixture's \"3ba1c6f0aa.png\" mis-modelled the capture surface and produced a .png.png URL; the case now holds the bare hash \"3ba1c6f0aa\". Byte-neutrality: a scan of all 3,982 FRAME nodes in every committed dump found exactly TWO childless paint-less frames carrying imageFill/fixedSize \u2014 this case and fill-image-bool."
+    },
+    {
+      "id": "fill-image-bool",
+      "construct": "an image-paint FRAME captured BY NAME only (imageFill: true)",
+      "expect": "CARRIED",
+      "why": "the documented carriage for the boolean marker is the neutral placeholder gradient rendered in the image's place",
+      "check": {
+        "carried": [
+          "linear-gradient|placeholder"
+        ]
+      },
+      "status": "green",
+      "observed": "RE-RECORDED red -> green (canvas-fidelity gap-closing round 1, HEAD bd3843b). Same isSpacer trap as fill-image-hash, same one-line fix (core/propose-figma.ts:3222 now also refuses imageFill/fixedSize). MEASURED: the part carries background-image = {imported.case.a.background-image} = linear-gradient(135deg, #f2f4f7 0%, #d0d5dd 100%) \u2014 IMAGE_FILL_PLACEHOLDER_GRADIENT, the one documented spelling \u2014 plus the drawn 32px box as width/height mint observations. No cover triple here, by design: declareImageFillCover is hash-only (a placeholder gradient needs no background-size)."
+    },
+    {
+      "id": "fill-gradient",
+      "construct": "a gradient fill (capture-boundary: dump v1 carries solid paints only)",
+      "expect": "LEDGERED",
+      "why": "the capture receipts paint-unsupported; no paint may be invented in the contract",
+      "check": {
+        "note": "paint-unsupported",
+        "absent": [
+          "background-color"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "fill-multi-paint-stack",
+      "construct": "a multi-paint fill stack (capture carries the first SOLID; the rest receipt paint-stack-truncated)",
+      "expect": "LEDGERED",
+      "why": "truncation to the first solid is a declared limit with a receipt; the surviving solid still carries",
+      "check": {
+        "note": "paint-stack-truncated",
+        "carried": [
+          "0e61ba"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "axis-bool",
+      "construct": "a two-value variant axis whose options are literally true/false",
+      "expect": "CARRIED",
+      "why": "only a literal true/false axis is a boolean modeled the canvas way (isBoolAxis mirror)",
+      "check": {
+        "carried": [
+          "\"name\":\"selected\",\"type\":\"boolean\""
+        ],
+        "note": "true/false variant axis proposed as a boolean"
+      },
+      "status": "green"
+    },
+    {
+      "id": "axis-onoff-enum",
+      "construct": "a two-value Off/On axis (NOT literal true/false)",
+      "expect": "CARRIED",
+      "why": "Off/On stays a two-value enum (both states render truthfully) with a note that a code boolean is a compatible binding",
+      "check": {
+        "carried": [
+          "\"enum\":\\[\"off\",\"on\"\\]"
+        ],
+        "note": "a code boolean is a compatible code-side binding"
+      },
+      "status": "green"
+    },
+    {
+      "id": "axis-state",
+      "construct": "a State=Default|Hover|Disabled axis (interaction-state vocabulary)",
+      "expect": "CARRIED",
+      "why": "interaction states are platform states, not API: hover promotes to a root state override, Disabled to a disabled boolean + state block, and the axis leaves the props",
+      "check": {
+        "carried": [
+          "\"states\":\\[\"hover\",\"disabled\"\\]|\"hover\"",
+          "\"name\":\"disabled\",\"type\":\"boolean\""
+        ],
+        "note": "IS the platform's interaction states, not API",
+        "absent": [
+          "\"name\":\"state\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "axis-state-partial",
+      "construct": "an interaction-state axis where one variant name omits the State pair",
+      "expect": "REFUSED",
+      "why": "promotion with incomplete pairs is unsafe - the near-miss must be a named refusal and the axis stays an enum prop",
+      "check": {
+        "note": "promotion unsafe, axis kept as an enum prop",
+        "carried": [
+          "\"name\":\"state\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "axis-theme-with-carriers",
+      "construct": "a Theme=Light|Dark axis whose bound variables carry per-mode values (dump v1.6 modes)",
+      "expect": "CARRIED",
+      "why": "a corroborated mode axis is a token mode, not API (section 3): excluded from props, anatomy from the default mode only",
+      "check": {
+        "note": "IS a token-mode axis, not API",
+        "absent": [
+          "\"name\":\"theme\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "axis-theme-without-carriers",
+      "construct": "a Theme axis differing only in RAW color literals (no variables to ride)",
+      "expect": "REFUSED",
+      "why": "with no bound variables there are no modes for the deltas to ride - promotion is refused BY NAME and the axis stays an enum with per-value minted leaves",
+      "check": {
+        "note": "binds NO variables along the axis",
+        "carried": [
+          "\"name\":\"theme\"",
+          "\\{imported\\.case\\.root\\.background-color\\.\\{theme\\}\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "sparse-minority-child",
+      "construct": "a child present in exactly ONE value of an enum axis",
+      "expect": "CARRIED",
+      "why": "single-value presence reconstructs visibleWhen { prop, equals } (the Switch thumb-alignment discipline)",
+      "check": {
+        "carried": [
+          "\"visibleWhen\":\\{\"prop\":\"variant\",\"equals\":\"info\"\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "sparse-unpredictable",
+      "construct": "a child present in a strict SUBSET (2 of 3) of an axis's values",
+      "expect": "CARRIED",
+      "why": "subset presence carries as the value-subset visibleWhen form (equals: [..]), named in a note - never a silent omission",
+      "check": {
+        "carried": [
+          "\"equals\":\\[\"info\",\"success\"\\]"
+        ],
+        "note": "value-subset form"
+      },
+      "status": "green"
+    },
+    {
+      "id": "spacer-growth",
+      "construct": "an empty, paint-less, binding-less fill-width frame between siblings",
+      "expect": "CARRIED",
+      "why": "the spacer idiom carries as a grow part (structural alignment, no ink)",
+      "check": {
+        "carried": [
+          "\"s\":\\{\"layout\":\\{\"grow\":true\\}\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "spacer-visiblewhen",
+      "construct": "a spacer present in only one value of an axis",
+      "expect": "CARRIED",
+      "why": "axis-correlated spacer presence reconstructs visibleWhen - how structural thumb alignment survives the round trip",
+      "check": {
+        "carried": [
+          "\"grow\":true",
+          "\"visibleWhen\":\\{\"prop\":\"value\",\"equals\":\"on\"\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "wrapper-label-fold",
+      "construct": "the generator's auto-injected label artifact (root whose sole child is a children-bound text node)",
+      "expect": "CARRIED",
+      "why": "the label node is a generator artifact, not a part: its text tokens hoist to the ROOT and the bound prop proposes as `children`",
+      "check": {
+        "carried": [
+          "\"name\":\"children\""
+        ],
+        "note": "hoisted to root tokens",
+        "absent": [
+          "\"label\":\\{"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "wrapper-static-text",
+      "construct": "the styled-static-text WRAPPER artifact (empty frame at the wrap default with fill + bound size)",
+      "expect": "CARRIED",
+      "why": "the wrap-default layout is elided; the frame proposes as a leaf part with tokens only (the Switch thumb)",
+      "check": {
+        "carried": [
+          "\"width\":\"\\{size\\.switch\\.thumb\\}\""
+        ],
+        "absent": [
+          "\"a\":\\{\"layout\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "nest-three-deep",
+      "construct": "three-deep nested frames each carrying their own facts",
+      "expect": "CARRIED",
+      "why": "nesting is ordinary anatomy: parts nest with their own layout/tokens at each level",
+      "check": {
+        "carried": [
+          "\"a\":\\{\"layout\":\\{\"direction\":\"column\"\\}",
+          "\"b\":\\{\"layout\"",
+          "\"c\":\\{\"text\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "instance-resolvable-name",
+      "construct": "a nested INSTANCE whose main component name matches an in-scope contract (no keys captured)",
+      "expect": "CARRIED",
+      "why": "a name match with no contradicting key evidence links the component ref, flagged verify-the-link",
+      "check": {
+        "carried": [
+          "\"component\":\\{\"id\":\"ds\\.badge\"\\}"
+        ],
+        "note": "linked to ds\\.badge by NAME"
+      },
+      "status": "green"
+    },
+    {
+      "id": "instance-resolvable-key",
+      "construct": "a RENAMED nested instance whose instanceSetKey matches a contract's componentSetKey anchor",
+      "expect": "CARRIED",
+      "why": "key identity survives renames (dump v1.5 session linking) - the key is checked FIRST, the drawn name is irrelevant",
+      "check": {
+        "carried": [
+          "\"component\":\\{\"id\":\"ds\\.badge\"\\}"
+        ],
+        "note": "LINKED to ds\\.badge by componentSetKey"
+      },
+      "status": "green"
+    },
+    {
+      "id": "instance-name-key-contradict",
+      "construct": "an instance named like an in-scope contract whose key CONTRADICTS that contract's anchor",
+      "expect": "REFUSED",
+      "why": "a foreign kit's Badge must not link to ds.badge on name coincidence - the link is refused BY NAME and an honest stub (suffixed id) takes its place",
+      "check": {
+        "note": "name-coincidence link REFUSED",
+        "carried": [
+          "\"component\":\\{\"id\":\"ds\\.badge-2\"\\}"
+        ],
+        "absent": [
+          "\"component\":\\{\"id\":\"ds\\.badge\"\\}"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "instance-absent-stub",
+      "construct": "a nested instance with NO contract in scope, with observed bbox + primary paint",
+      "expect": "CARRIED",
+      "why": "the child ships as a STUB contract rendering the OBSERVED geometry via minted imported.stub-* tokens - a correctly-sized box, never invented anatomy",
+      "check": {
+        "carried": [
+          "\"id\":\"ds\\.zorble\"",
+          "imported\\.stub-zorble\\.root\\.width",
+          "9e77ed"
+        ],
+        "note": "STUB child contract auto-proposed"
+      },
+      "status": "green"
+    },
+    {
+      "id": "instance-stub-no-bbox",
+      "construct": "an unresolvable instance with NO observed geometry (pre-v1.5 dump shape)",
+      "expect": "CARRIED",
+      "why": "the ref + stub still propose; absent geometry stays a declared limit - no witness box may be invented",
+      "check": {
+        "carried": [
+          "\"id\":\"ds\\.zorble\""
+        ],
+        "note": "has no known contract",
+        "absent": [
+          "imported\\.stub-zorble"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "instance-props-thread",
+      "construct": "an applied component property tracking a parent enum axis 1:1 across variants",
+      "expect": "CARRIED",
+      "why": "a value that follows the parent axis threads as the placeholder \"{parentProp}\" instead of freezing one value",
+      "check": {
+        "carried": [
+          "\"props\":\\{\"variant\":\"\\{variant\\}\"\\}"
+        ],
+        "note": "threaded as \"\\{variant\\}\""
+      },
+      "status": "green"
+    },
+    {
+      "id": "instance-props-fixed",
+      "construct": "a constant applied component property on a linked instance",
+      "expect": "CARRIED",
+      "why": "fixed prop values ride componentProperties and canonicalize through the child contract's bindings (Success -> success)",
+      "check": {
+        "carried": [
+          "\"props\":\\{\"variant\":\"success\"\\}"
+        ],
+        "note": "canonicalized through ds\\.badge's bindings"
+      },
+      "status": "green"
+    },
+    {
+      "id": "slot-wrapper-swap",
+      "construct": "a frame whose sole child is a Slot-utility instance bound to an INSTANCE_SWAP property",
+      "expect": "CARRIED",
+      "why": "the wrapper is a slot part; the utility's own styling is elided; first non-optional slot is judged the default (children)",
+      "check": {
+        "carried": [
+          "\"slot\":\\{\"name\":\"children\"",
+          "\"figmaProperty\":\"Content\""
+        ],
+        "note": "Slot-utility instance styling is the utility's own"
+      },
+      "status": "green"
+    },
+    {
+      "id": "slot-optional-show",
+      "construct": "a slot wrapper with a 'Show <Property>' visibility binding",
+      "expect": "CARRIED",
+      "why": "the Show binding marks the part optional and is NOT an API prop",
+      "check": {
+        "carried": [
+          "\"optional\":true",
+          "\"slot\":\\{\"name\":\"content\"\\}"
+        ],
+        "absent": [
+          "\"property\":\"Show Content\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "slot-native-node",
+      "construct": "a NATIVE Figma slot node (Schema 2025, dump v1.5 type SLOT)",
+      "expect": "CARRIED",
+      "why": "native slots map to the same contract slot part with a provenance note so regeneration reproduces the native spelling",
+      "check": {
+        "carried": [
+          "\"slot\":\\{\"name\":\"children\""
+        ],
+        "note": "NATIVE Figma slot node"
+      },
+      "status": "green"
+    },
+    {
+      "id": "slot-preferred-values",
+      "construct": "INSTANCE_SWAP preferredValues resolving to an in-scope contract by key",
+      "expect": "CARRIED",
+      "why": "preferred values resolve through anchors into accepts with acceptsMode prefer",
+      "check": {
+        "carried": [
+          "\"accepts\":\\[\"ds\\.badge\"\\]",
+          "\"acceptsMode\":\"prefer\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "slot-preferred-unresolvable",
+      "construct": "preferredValues naming a key with NO in-scope contract",
+      "expect": "REFUSED",
+      "why": "unresolvable keys are named, never guessed into ids - accepts stays unauthored",
+      "check": {
+        "note": "with no in-scope contract",
+        "absent": [
+          "\"accepts\""
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "bool-default-from-set",
+      "construct": "a visibility-bound part visible in the default variant, with the set's BOOLEAN defaultValue captured (dump v1.5 boolDefaults)",
+      "expect": "CARRIED",
+      "why": "the boolean prop default comes from the captured property definition - the one default variants alone cannot recover",
+      "check": {
+        "carried": [
+          "\"name\":\"showExtra\",\"type\":\"boolean\",\"default\":true"
+        ],
+        "note": "the property definition's defaultValue"
+      },
+      "status": "green"
+    },
+    {
+      "id": "bool-default-hidden",
+      "construct": "a visibility-bound part HIDDEN in the default variant (dump v1.1 hidden, producer stamps dumpVersion)",
+      "expect": "CARRIED",
+      "why": "hidden-in-default is positive evidence for default false (never inverted into true without the producer marker)",
+      "check": {
+        "carried": [
+          "\"name\":\"showExtra\",\"type\":\"boolean\",\"default\":false"
+        ],
+        "note": "hidden in the default variant"
+      },
+      "status": "green"
+    },
+    {
+      "id": "rotation-nonshape",
+      "construct": "rotation on a non-decor node (capture-boundary: rotation rides shape decor only)",
+      "expect": "LEDGERED",
+      "why": "the capture receipts rotation-unsupported; the node renders unrotated and nothing rotation-shaped may be invented",
+      "check": {
+        "note": "rotation-unsupported",
+        "absent": [
+          "rotation"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "instance-override-paint-observed",
+      "construct": "an observed subtree paint on an instance LINKED to a real contract (classic path, no instanceOverrides ledger)",
+      "expect": "LEDGERED",
+      "why": "the child contract owns its paint; a per-usage override is not representable on a component ref without the opt-in override machinery - ledgered by name",
+      "check": {
+        "note": "per-usage paint override is not representable",
+        "absent": [
+          "9e77ed"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "effect-inner-shadow",
+      "construct": "an INNER_SHADOW effect on the root",
+      "expect": "REFUSED",
+      "why": "inner shadows are outside the DROP_SHADOW-stack grammar (a stack of DROP_SHADOW layers carries comma-separated; INNER_SHADOW does not) - the channel is NAMED by kind, not proposed",
+      "check": {
+        "note": "visible effect\\(s\\) \\[INNER_SHADOW\\]",
+        "absent": [
+          "box-shadow"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "effect-layer-blur",
+      "construct": "a LAYER_BLUR effect on the root",
+      "expect": "REFUSED",
+      "why": "blur types carry type/radius only so the gap can be NAMED - no filter/box-shadow may be proposed",
+      "check": {
+        "note": "visible effect\\(s\\) \\[LAYER_BLUR\\]",
+        "absent": [
+          "box-shadow|filter"
+        ]
+      },
+      "status": "green"
+    },
+    {
+      "id": "effect-text-shadow",
+      "construct": "a drop shadow on a TEXT node",
+      "expect": "REFUSED",
+      "why": "a text shadow has no contract vocabulary (box-shadow is a box channel) - named, not proposed",
+      "check": {
+        "note": "a text shadow has no contract vocabulary",
+        "absent": [
+          "box-shadow|text-shadow"
+        ]
+      },
+      "status": "green"
+    }
+  ]
 }

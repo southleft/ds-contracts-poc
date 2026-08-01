@@ -67,6 +67,24 @@ function placeholdersIn(refPath: string): string[] {
   return [...refPath.matchAll(/\{([a-z][\w-]*)\}/g)].map((m) => m[1]);
 }
 
+/** Round 10 — the cartesian of a substituted ref's placeholder values, in
+ *  DECLARED placeholder order and then declared enum-value order, so the
+ *  emitted rule order is a function of the contract and nothing else. Every
+ *  combination is one compound ancestor selector; the caller decides what to
+ *  do with a combination whose leaf does not exist. */
+function enumCombos(
+  phs: string[],
+  enums: Map<string, string[]>,
+): Array<Array<[prop: string, value: string]>> {
+  let out: Array<Array<[string, string]>> = [[]];
+  for (const ph of phs) {
+    const next: Array<Array<[string, string]>> = [];
+    for (const prefix of out) for (const value of enums.get(ph) ?? []) next.push([...prefix, [ph, value]]);
+    out = next;
+  }
+  return out;
+}
+
 const STATE_SELECTORS: Record<string, string> = {
   hover: ':hover:not(:disabled)',
   active: ':active:not(:disabled)',
@@ -363,19 +381,33 @@ export function validateContract(
     }
     if (p.length > 1) {
       // Nested parts (path.length > 1 — NOT a top-level root, single- or
-      // multi-root) support single-placeholder substitutions (v4) — emitted
-      // as descendant rules under the root's enum class. Two placeholders on
-      // one nested token stays unsupported.
+      // multi-root) carry substituted tokens as descendant rules under the
+      // root's enum classes.
+      //
+      // GAP-CLOSING ROUND 10 — THE ARITY WAS THE EMITTER'S, NOT THE MODEL'S.
+      // This used to refuse two placeholders on a nested token, and the
+      // refusal propagated all the way back into the mint classifier, which
+      // declines to even OFFER a nested pair to a caller whose binding placer
+      // cannot spell one. The consequence was not a named approximation: the
+      // channel vanished. Untitled UI's Social button draws its label WHITE
+      // on the brand themes and #404040 on the two light ones — ink =
+      // f(social × theme) — so `color` never reached the contract at all and
+      // every one of its 108 variants rendered the UA's black on a blue,
+      // black or pink ground.
+      //
+      // Every enum class rides the ROOT element, so a pair is the compound
+      // ancestor selector `.social-facebook.theme-color .Text` — the exact
+      // shape the ROOT's own two- and three-placeholder tokens already emit
+      // (`.type-brand.style-fill.state-hover`) and the shape the S2
+      // `tokensByProp` map lift already emits one level down. No new
+      // vocabulary; the same rule, one nesting level deeper.
       for (const ref of Object.values(part.tokens ?? {})) {
-        const phs = placeholdersIn(stripBraces(ref));
-        if (phs.length > 1) {
-          errors.push(
-            `${contract.id}: part "${name}" token "${ref}" uses ${phs.length} substitutions — nested parts support at most one`,
-          );
-        } else if (phs.length === 1 && !enumProps(contract).some((pr) => pr.name === phs[0])) {
-          errors.push(
-            `${contract.id}: part "${name}" token "${ref}" substitutes unknown enum prop "${phs[0]}"`,
-          );
+        for (const ph of placeholdersIn(stripBraces(ref))) {
+          if (!enumProps(contract).some((pr) => pr.name === ph)) {
+            errors.push(
+              `${contract.id}: part "${name}" token "${ref}" substitutes unknown enum prop "${ph}"`,
+            );
+          }
         }
       }
     }
@@ -1708,20 +1740,28 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
           const ovVar = refOverrideVar(part.component.id, channel);
           const refPath = stripBraces(ref);
           const phs = placeholdersIn(refPath);
-          if (phs.length === 1) {
+          if (phs.length >= 1) {
             // Per-enum-value descendant rule under the root's variant class —
             // the nested-token-substitution rule shape.
-            for (const value of enums.get(phs[0]) ?? []) {
-              const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
+            //
+            // GAP-CLOSING ROUND 10 — THE ARITY LIFTED, AND THE REASON IS THE
+            // SAME ONE AS THE NESTED TOKEN ABOVE. Round 8 refused a
+            // two-axis per-usage ink here ("override refs carry at most 1")
+            // and the consequence was a glyph drawn in the wrong ink rather
+            // than a named approximation: Untitled UI's Social icon is white
+            // on the brand themes, #a3a3a3 on Color and its own brand hex on
+            // Color-with-brand — ink = f(social × theme) — so nothing carried
+            // and 48 variants drew a WHITE glyph on a WHITE ground. An
+            // override var is set on a wrapper that is a descendant of the
+            // root, and every enum class rides the root, so N placeholders
+            // are the compound ancestor selector, exactly as above.
+            for (const combo of enumCombos(phs, enums)) {
+              let resolved = refPath;
+              for (const [ph, value] of combo) resolved = resolved.replaceAll(`{${ph}}`, value);
               if (!checkToken(resolved, `anatomy.${name}.component.overrides.${channel}`)) continue;
-              wrapSubRules.push(`\n.${phs[0]}-${value} .${name} {\n  ${ovVar}: ${cssVar(resolved)};\n}`);
+              const sel = combo.map(([ph, value]) => `.${ph}-${value}`).join('');
+              wrapSubRules.push(`\n${sel} .${name} {\n  ${ovVar}: ${cssVar(resolved)};\n}`);
             }
-            continue;
-          }
-          if (phs.length > 1) {
-            errors.push(
-              `${contract.id}: part "${name}" component override "${channel}" substitutes ${phs.length} enum props — override refs carry at most 1`,
-            );
             continue;
           }
           if (checkToken(refPath, `anatomy.${name}.component.overrides.${channel}`)) {
@@ -1835,12 +1875,19 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         continue;
       }
       const phs = placeholdersIn(refPath);
-      if (phs.length === 1) {
+      if (phs.length >= 1) {
         // Per-enum-value descendant rule under the root's variant class.
-        for (const value of enums.get(phs[0]) ?? []) {
-          const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
+        // ROUND 10: N placeholders → the cartesian of their values as a
+        // COMPOUND ancestor selector (every enum class rides the root), the
+        // same expansion the root's own multi-placeholder tokens take. A
+        // combination whose leaf is missing is skipped by checkToken, so a
+        // sparse cartesian never emits a dangling var().
+        for (const combo of enumCombos(phs, enums)) {
+          let resolved = refPath;
+          for (const [ph, value] of combo) resolved = resolved.replaceAll(`{${ph}}`, value);
           if (!checkToken(resolved, `anatomy.${name}.tokens.${cssProp}`)) continue;
-          nestedSubRules.push(`\n.${phs[0]}-${value} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
+          const sel = combo.map(([ph, value]) => `.${ph}-${value}`).join('');
+          nestedSubRules.push(`\n${sel} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
         }
         continue;
       }

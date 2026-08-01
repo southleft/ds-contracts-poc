@@ -169,6 +169,7 @@
               "component": {
                 "id": "ds.user",
                 "overrides": {
+                  "size": "{imported.avatar.user.size.{size}}",
                   "color": "{imported.avatar.user-instance.color}"
                 }
               }
@@ -257,6 +258,7 @@
         }
       },
       "tokens": {
+        "background-color": "{imported.avatar.root.background-color.{placeholder}.{text}}",
         "outline-color": "{imported.avatar.root.outline-color.{state}}",
         "border-radius": "{imported.avatar.root.border-radius}",
         "outline-width": "{imported.avatar.root.outline-width.{state}}",

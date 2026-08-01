@@ -421,11 +421,11 @@
             }
           },
           "tokens": {
+            "left": "{imported.slider.progress.left.{label}.{leftControl}}",
             "top": "{imported.shared.size-8}",
             "height": "{imported.shared.size-8}"
           },
           "literals": {
-            "left": "0px",
             "width": "80px"
           },
           "literalsByProp": [

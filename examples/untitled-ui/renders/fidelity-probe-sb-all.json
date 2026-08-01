@@ -1,0 +1,5736 @@
+{
+ "meta": {
+  "probe": "sb-all",
+  "probeCss": "[class~=\"SocialButton_Text\"]{ color:#404040 }\n[class~=\"SocialButton_theme-brand\"] [class~=\"SocialButton_Text\"]{ color:#ffffff }\n[class~=\"SocialButton_social-google\"][class~=\"SocialButton_theme-brand\"] [class~=\"SocialButton_Text\"]{ color:#404040 }\n[class~=\"SocialButton_theme-color\"] [class~=\"SocialIcon_root\"]{ color:#a3a3a3 }\n[class~=\"SocialButton_social-x\"][class~=\"SocialButton_theme-color\"] [class~=\"SocialIcon_root\"]{ color:#242e36 }\n[class~=\"SocialButton_social-facebook\"][class~=\"SocialButton_theme-colorWithBrand\"] [class~=\"SocialIcon_root\"]{ color:#1877f2 }\n[class~=\"SocialButton_social-apple\"][class~=\"SocialButton_theme-colorWithBrand\"] [class~=\"SocialIcon_root\"]{ color:#000000 }\n[class~=\"SocialButton_social-dribbble\"][class~=\"SocialButton_theme-colorWithBrand\"] [class~=\"SocialIcon_root\"]{ color:#ea4c89 }\n[class~=\"SocialButton_social-x\"][class~=\"SocialButton_theme-colorWithBrand\"] [class~=\"SocialIcon_root\"]{ color:#242e36 }\n[class~=\"SocialButton_root\"]{ border-width:0 !important }\n[class~=\"SocialButton_theme-color\"],[class~=\"SocialButton_theme-colorWithBrand\"],[class~=\"SocialButton_social-google\"][class~=\"SocialButton_theme-brand\"]{ outline:1px solid #d4d4d4; outline-offset:-1px }",
+  "clipMargin": 8,
+  "sets": [
+   "social-button"
+  ]
+ },
+ "rows": [
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_false_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 94.82,
+   "committed": 94.82,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 87,
+   "missing": 19,
+   "extra": 30,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 47,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_false_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 97.48,
+   "committed": 97.4,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 58,
+   "missing": 4,
+   "extra": 0,
+   "wrong": 54,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 46,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_false_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 94.76,
+   "committed": 94.82,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 88,
+   "missing": 20,
+   "extra": 30,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 47,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_false_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 99.05,
+   "committed": 86.21,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 16,
+   "missing": 8,
+   "extra": 0,
+   "wrong": 8,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 16,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_false_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 99.44,
+   "committed": 86.6,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 13,
+   "missing": 6,
+   "extra": 0,
+   "wrong": 7,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 13,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_false_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 99.05,
+   "committed": 86.16,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 16,
+   "missing": 8,
+   "extra": 0,
+   "wrong": 8,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 16,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_false_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 97.2,
+   "committed": 85.99,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 47,
+   "missing": 21,
+   "extra": 0,
+   "wrong": 26,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 47,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_false_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 98,
+   "committed": 86.44,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 46,
+   "missing": 12,
+   "extra": 0,
+   "wrong": 34,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 46,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_false_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 97.2,
+   "committed": 85.94,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 47,
+   "missing": 21,
+   "extra": 0,
+   "wrong": 26,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 47,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_true_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 90.02,
+   "committed": 86.81,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    202,
+    46
+   ],
+   "total": 9292,
+   "bad": 927,
+   "missing": 206,
+   "extra": 245,
+   "wrong": 476,
+   "unreachable": 0,
+   "inText": 605,
+   "inGlyph": 47,
+   "areaText": 2679,
+   "areaGlyph": 484,
+   "drawn": [
+    202,
+    44
+   ],
+   "root": [
+    200.06,
+    44
+   ],
+   "clip": [
+    216.06,
+    60
+   ],
+   "refTrue": [
+    206,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_true_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 94.48,
+   "committed": 90.52,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    210,
+    52
+   ],
+   "total": 10920,
+   "bad": 603,
+   "missing": 143,
+   "extra": 3,
+   "wrong": 457,
+   "unreachable": 0,
+   "inText": 492,
+   "inGlyph": 46,
+   "areaText": 2679,
+   "areaGlyph": 484,
+   "drawn": [
+    202,
+    44
+   ],
+   "root": [
+    200.06,
+    44
+   ],
+   "clip": [
+    216.06,
+    60
+   ],
+   "refTrue": [
+    210,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_true_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 90.02,
+   "committed": 86.81,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    202,
+    46
+   ],
+   "total": 9292,
+   "bad": 927,
+   "missing": 206,
+   "extra": 245,
+   "wrong": 476,
+   "unreachable": 0,
+   "inText": 605,
+   "inGlyph": 47,
+   "areaText": 2679,
+   "areaGlyph": 484,
+   "drawn": [
+    202,
+    44
+   ],
+   "root": [
+    200.06,
+    44
+   ],
+   "clip": [
+    216.06,
+    60
+   ],
+   "refTrue": [
+    206,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_true_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 93.09,
+   "committed": 89.3,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    202,
+    46
+   ],
+   "total": 9292,
+   "bad": 642,
+   "missing": 308,
+   "extra": 46,
+   "wrong": 288,
+   "unreachable": 0,
+   "inText": 560,
+   "inGlyph": 16,
+   "areaText": 2679,
+   "areaGlyph": 484,
+   "drawn": [
+    202,
+    44
+   ],
+   "root": [
+    200.06,
+    44
+   ],
+   "clip": [
+    216.06,
+    60
+   ],
+   "refTrue": [
+    206,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_true_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 95.51,
+   "committed": 87.91,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    210,
+    52
+   ],
+   "total": 10920,
+   "bad": 490,
+   "missing": 147,
+   "extra": 5,
+   "wrong": 338,
+   "unreachable": 0,
+   "inText": 434,
+   "inGlyph": 13,
+   "areaText": 2679,
+   "areaGlyph": 484,
+   "drawn": [
+    202,
+    44
+   ],
+   "root": [
+    200.06,
+    44
+   ],
+   "clip": [
+    216.06,
+    60
+   ],
+   "refTrue": [
+    210,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_true_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 93.08,
+   "committed": 89.31,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    202,
+    46
+   ],
+   "total": 9292,
+   "bad": 643,
+   "missing": 299,
+   "extra": 44,
+   "wrong": 300,
+   "unreachable": 0,
+   "inText": 560,
+   "inGlyph": 16,
+   "areaText": 2679,
+   "areaGlyph": 484,
+   "drawn": [
+    202,
+    44
+   ],
+   "root": [
+    200.06,
+    44
+   ],
+   "clip": [
+    216.06,
+    60
+   ],
+   "refTrue": [
+    206,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_true_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 92.76,
+   "committed": 89.26,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    202,
+    46
+   ],
+   "total": 9292,
+   "bad": 673,
+   "missing": 321,
+   "extra": 46,
+   "wrong": 306,
+   "unreachable": 0,
+   "inText": 560,
+   "inGlyph": 47,
+   "areaText": 2679,
+   "areaGlyph": 484,
+   "drawn": [
+    202,
+    44
+   ],
+   "root": [
+    200.06,
+    44
+   ],
+   "clip": [
+    216.06,
+    60
+   ],
+   "refTrue": [
+    206,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_true_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 95.21,
+   "committed": 87.87,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    210,
+    52
+   ],
+   "total": 10920,
+   "bad": 523,
+   "missing": 153,
+   "extra": 5,
+   "wrong": 365,
+   "unreachable": 0,
+   "inText": 434,
+   "inGlyph": 46,
+   "areaText": 2679,
+   "areaGlyph": 484,
+   "drawn": [
+    202,
+    44
+   ],
+   "root": [
+    200.06,
+    44
+   ],
+   "clip": [
+    216.06,
+    60
+   ],
+   "refTrue": [
+    210,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_apple_supporting_text_true_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 92.76,
+   "committed": 89.27,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    202,
+    46
+   ],
+   "total": 9292,
+   "bad": 673,
+   "missing": 312,
+   "extra": 43,
+   "wrong": 318,
+   "unreachable": 0,
+   "inText": 560,
+   "inGlyph": 47,
+   "areaText": 2679,
+   "areaGlyph": 484,
+   "drawn": [
+    202,
+    44
+   ],
+   "root": [
+    200.06,
+    44
+   ],
+   "clip": [
+    216.06,
+    60
+   ],
+   "refTrue": [
+    206,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_false_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 90.95,
+   "committed": 91.07,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 152,
+   "missing": 40,
+   "extra": 30,
+   "wrong": 82,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 116,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_false_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 94.49,
+   "committed": 94.36,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 127,
+   "missing": 14,
+   "extra": 0,
+   "wrong": 113,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 119,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_false_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 90.83,
+   "committed": 90.83,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 154,
+   "missing": 41,
+   "extra": 30,
+   "wrong": 83,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 116,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_false_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 98.21,
+   "committed": 85.55,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 30,
+   "missing": 12,
+   "extra": 0,
+   "wrong": 18,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 30,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_false_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 98.65,
+   "committed": 86.12,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 31,
+   "missing": 1,
+   "extra": 0,
+   "wrong": 30,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 31,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_false_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 98.51,
+   "committed": 85.49,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 25,
+   "missing": 10,
+   "extra": 0,
+   "wrong": 15,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 25,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_false_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 84.94,
+   "committed": 79.35,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 253,
+   "missing": 100,
+   "extra": 0,
+   "wrong": 153,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 253,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_false_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 88.76,
+   "committed": 81.64,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 259,
+   "missing": 57,
+   "extra": 0,
+   "wrong": 202,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 259,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_false_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 84.94,
+   "committed": 79.29,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 253,
+   "missing": 100,
+   "extra": 0,
+   "wrong": 153,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 253,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_true_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 90.21,
+   "committed": 85.68,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    222,
+    46
+   ],
+   "total": 10212,
+   "bad": 1000,
+   "missing": 190,
+   "extra": 275,
+   "wrong": 535,
+   "unreachable": 0,
+   "inText": 656,
+   "inGlyph": 116,
+   "areaText": 3078,
+   "areaGlyph": 484,
+   "drawn": [
+    222,
+    44
+   ],
+   "root": [
+    221.11,
+    44
+   ],
+   "clip": [
+    237.11,
+    60
+   ],
+   "refTrue": [
+    226,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_true_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 94.75,
+   "committed": 89.86,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    230,
+    52
+   ],
+   "total": 11960,
+   "bad": 628,
+   "missing": 160,
+   "extra": 3,
+   "wrong": 465,
+   "unreachable": 0,
+   "inText": 498,
+   "inGlyph": 119,
+   "areaText": 3078,
+   "areaGlyph": 484,
+   "drawn": [
+    222,
+    44
+   ],
+   "root": [
+    221.11,
+    44
+   ],
+   "clip": [
+    237.11,
+    60
+   ],
+   "refTrue": [
+    230,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_true_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 89.89,
+   "committed": 85.64,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    222,
+    46
+   ],
+   "total": 10212,
+   "bad": 1032,
+   "missing": 193,
+   "extra": 277,
+   "wrong": 562,
+   "unreachable": 0,
+   "inText": 685,
+   "inGlyph": 116,
+   "areaText": 3078,
+   "areaGlyph": 484,
+   "drawn": [
+    222,
+    44
+   ],
+   "root": [
+    221.11,
+    44
+   ],
+   "clip": [
+    237.11,
+    60
+   ],
+   "refTrue": [
+    226,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_true_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 93.15,
+   "committed": 88.77,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    222,
+    46
+   ],
+   "total": 10212,
+   "bad": 700,
+   "missing": 308,
+   "extra": 51,
+   "wrong": 341,
+   "unreachable": 0,
+   "inText": 658,
+   "inGlyph": 30,
+   "areaText": 3078,
+   "areaGlyph": 484,
+   "drawn": [
+    222,
+    44
+   ],
+   "root": [
+    221.11,
+    44
+   ],
+   "clip": [
+    237.11,
+    60
+   ],
+   "refTrue": [
+    226,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_true_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 95.52,
+   "committed": 87.32,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    230,
+    52
+   ],
+   "total": 11960,
+   "bad": 536,
+   "missing": 163,
+   "extra": 5,
+   "wrong": 368,
+   "unreachable": 0,
+   "inText": 502,
+   "inGlyph": 31,
+   "areaText": 3078,
+   "areaGlyph": 484,
+   "drawn": [
+    222,
+    44
+   ],
+   "root": [
+    221.11,
+    44
+   ],
+   "clip": [
+    237.11,
+    60
+   ],
+   "refTrue": [
+    230,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_true_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 93.19,
+   "committed": 88.69,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    222,
+    46
+   ],
+   "total": 10212,
+   "bad": 695,
+   "missing": 297,
+   "extra": 49,
+   "wrong": 349,
+   "unreachable": 0,
+   "inText": 657,
+   "inGlyph": 25,
+   "areaText": 3078,
+   "areaGlyph": 484,
+   "drawn": [
+    222,
+    44
+   ],
+   "root": [
+    221.11,
+    44
+   ],
+   "clip": [
+    237.11,
+    60
+   ],
+   "refTrue": [
+    226,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_true_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 90.96,
+   "committed": 87.7,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    222,
+    46
+   ],
+   "total": 10212,
+   "bad": 923,
+   "missing": 396,
+   "extra": 51,
+   "wrong": 476,
+   "unreachable": 0,
+   "inText": 658,
+   "inGlyph": 253,
+   "areaText": 3078,
+   "areaGlyph": 484,
+   "drawn": [
+    222,
+    44
+   ],
+   "root": [
+    221.11,
+    44
+   ],
+   "clip": [
+    237.11,
+    60
+   ],
+   "refTrue": [
+    226,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_true_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 93.61,
+   "committed": 86.42,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    230,
+    52
+   ],
+   "total": 11960,
+   "bad": 764,
+   "missing": 219,
+   "extra": 5,
+   "wrong": 540,
+   "unreachable": 0,
+   "inText": 502,
+   "inGlyph": 259,
+   "areaText": 3078,
+   "areaGlyph": 484,
+   "drawn": [
+    222,
+    44
+   ],
+   "root": [
+    221.11,
+    44
+   ],
+   "clip": [
+    237.11,
+    60
+   ],
+   "refTrue": [
+    230,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_dribbble_supporting_text_true_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 90.96,
+   "committed": 87.63,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    222,
+    46
+   ],
+   "total": 10212,
+   "bad": 923,
+   "missing": 387,
+   "extra": 49,
+   "wrong": 487,
+   "unreachable": 0,
+   "inText": 657,
+   "inGlyph": 253,
+   "areaText": 3078,
+   "areaGlyph": 484,
+   "drawn": [
+    222,
+    44
+   ],
+   "root": [
+    221.11,
+    44
+   ],
+   "clip": [
+    237.11,
+    60
+   ],
+   "refTrue": [
+    226,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_false_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 92.5,
+   "committed": 92.56,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 126,
+   "missing": 33,
+   "extra": 30,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 85,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_false_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 95.79,
+   "committed": 95.7,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 97,
+   "missing": 7,
+   "extra": 0,
+   "wrong": 90,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 85,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_false_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 92.5,
+   "committed": 92.5,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 126,
+   "missing": 33,
+   "extra": 30,
+   "wrong": 63,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 85,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_false_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 98.87,
+   "committed": 82.17,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 19,
+   "missing": 5,
+   "extra": 0,
+   "wrong": 14,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 19,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_false_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 99.22,
+   "committed": 83.68,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 18,
+   "missing": 4,
+   "extra": 0,
+   "wrong": 14,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 18,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_false_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 99.4,
+   "committed": 82.34,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 10,
+   "missing": 2,
+   "extra": 0,
+   "wrong": 8,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 10,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_false_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 95.06,
+   "committed": 82,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 83,
+   "missing": 23,
+   "extra": 0,
+   "wrong": 60,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 83,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_false_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 96.4,
+   "committed": 83.56,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 83,
+   "missing": 7,
+   "extra": 0,
+   "wrong": 76,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 83,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_false_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 95.12,
+   "committed": 82.06,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 82,
+   "missing": 23,
+   "extra": 0,
+   "wrong": 59,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 82,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_true_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 87.02,
+   "committed": 83.46,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    234,
+    46
+   ],
+   "total": 10764,
+   "bad": 1397,
+   "missing": 386,
+   "extra": 461,
+   "wrong": 550,
+   "unreachable": 0,
+   "inText": 842,
+   "inGlyph": 125,
+   "areaText": 3249,
+   "areaGlyph": 484,
+   "drawn": [
+    232,
+    44
+   ],
+   "root": [
+    230.91,
+    44
+   ],
+   "clip": [
+    246.91,
+    60
+   ],
+   "refTrue": [
+    236,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_true_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 94.72,
+   "committed": 90.12,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    240,
+    52
+   ],
+   "total": 12480,
+   "bad": 659,
+   "missing": 152,
+   "extra": 9,
+   "wrong": 498,
+   "unreachable": 0,
+   "inText": 560,
+   "inGlyph": 85,
+   "areaText": 3249,
+   "areaGlyph": 484,
+   "drawn": [
+    232,
+    44
+   ],
+   "root": [
+    230.91,
+    44
+   ],
+   "clip": [
+    246.91,
+    60
+   ],
+   "refTrue": [
+    240,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_true_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 86.89,
+   "committed": 83.44,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    234,
+    46
+   ],
+   "total": 10764,
+   "bad": 1411,
+   "missing": 385,
+   "extra": 462,
+   "wrong": 564,
+   "unreachable": 0,
+   "inText": 855,
+   "inGlyph": 125,
+   "areaText": 3249,
+   "areaGlyph": 484,
+   "drawn": [
+    232,
+    44
+   ],
+   "root": [
+    230.91,
+    44
+   ],
+   "clip": [
+    246.91,
+    60
+   ],
+   "refTrue": [
+    236,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_true_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 90.66,
+   "committed": 89.01,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    234,
+    46
+   ],
+   "total": 10764,
+   "bad": 1005,
+   "missing": 570,
+   "extra": 138,
+   "wrong": 297,
+   "unreachable": 0,
+   "inText": 797,
+   "inGlyph": 93,
+   "areaText": 3249,
+   "areaGlyph": 484,
+   "drawn": [
+    232,
+    44
+   ],
+   "root": [
+    230.91,
+    44
+   ],
+   "clip": [
+    246.91,
+    60
+   ],
+   "refTrue": [
+    236,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_true_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 95.77,
+   "committed": 87.24,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    240,
+    52
+   ],
+   "total": 12480,
+   "bad": 528,
+   "missing": 194,
+   "extra": 9,
+   "wrong": 325,
+   "unreachable": 0,
+   "inText": 507,
+   "inGlyph": 18,
+   "areaText": 3249,
+   "areaGlyph": 484,
+   "drawn": [
+    232,
+    44
+   ],
+   "root": [
+    230.91,
+    44
+   ],
+   "clip": [
+    246.91,
+    60
+   ],
+   "refTrue": [
+    240,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_true_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 90.73,
+   "committed": 89.12,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    234,
+    46
+   ],
+   "total": 10764,
+   "bad": 998,
+   "missing": 555,
+   "extra": 130,
+   "wrong": 313,
+   "unreachable": 0,
+   "inText": 794,
+   "inGlyph": 87,
+   "areaText": 3249,
+   "areaGlyph": 484,
+   "drawn": [
+    232,
+    44
+   ],
+   "root": [
+    230.91,
+    44
+   ],
+   "clip": [
+    246.91,
+    60
+   ],
+   "refTrue": [
+    236,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_true_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 90.38,
+   "committed": 88.98,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    234,
+    46
+   ],
+   "total": 10764,
+   "bad": 1036,
+   "missing": 584,
+   "extra": 138,
+   "wrong": 314,
+   "unreachable": 0,
+   "inText": 797,
+   "inGlyph": 124,
+   "areaText": 3249,
+   "areaGlyph": 484,
+   "drawn": [
+    232,
+    44
+   ],
+   "root": [
+    230.91,
+    44
+   ],
+   "clip": [
+    246.91,
+    60
+   ],
+   "refTrue": [
+    236,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_true_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 95.25,
+   "committed": 87.22,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    240,
+    52
+   ],
+   "total": 12480,
+   "bad": 593,
+   "missing": 197,
+   "extra": 9,
+   "wrong": 387,
+   "unreachable": 0,
+   "inText": 507,
+   "inGlyph": 83,
+   "areaText": 3249,
+   "areaGlyph": 484,
+   "drawn": [
+    232,
+    44
+   ],
+   "root": [
+    230.91,
+    44
+   ],
+   "clip": [
+    246.91,
+    60
+   ],
+   "refTrue": [
+    240,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_facebook_supporting_text_true_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 90.39,
+   "committed": 89.07,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    234,
+    46
+   ],
+   "total": 10764,
+   "bad": 1034,
+   "missing": 572,
+   "extra": 128,
+   "wrong": 334,
+   "unreachable": 0,
+   "inText": 794,
+   "inGlyph": 123,
+   "areaText": 3249,
+   "areaGlyph": 484,
+   "drawn": [
+    232,
+    44
+   ],
+   "root": [
+    230.91,
+    44
+   ],
+   "clip": [
+    246.91,
+    60
+   ],
+   "refTrue": [
+    236,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_false_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 94.94,
+   "committed": 95,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 85,
+   "missing": 6,
+   "extra": 30,
+   "wrong": 49,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 44,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_false_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 97.48,
+   "committed": 97.48,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 58,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 58,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 44,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_false_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 95,
+   "committed": 95,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 84,
+   "missing": 5,
+   "extra": 30,
+   "wrong": 49,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 44,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_false_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 87.2,
+   "committed": 85.83,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 215,
+   "missing": 22,
+   "extra": 0,
+   "wrong": 193,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 215,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_false_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 90.67,
+   "committed": 86.32,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 215,
+   "missing": 2,
+   "extra": 0,
+   "wrong": 213,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 215,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_false_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 87.2,
+   "committed": 85.77,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 215,
+   "missing": 22,
+   "extra": 0,
+   "wrong": 193,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 215,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_false_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 97.56,
+   "committed": 95.46,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 41,
+   "missing": 14,
+   "extra": 0,
+   "wrong": 27,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 41,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_false_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 98.22,
+   "committed": 93.36,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 41,
+   "missing": 4,
+   "extra": 0,
+   "wrong": 37,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 41,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_false_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 97.62,
+   "committed": 95.46,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 40,
+   "missing": 14,
+   "extra": 0,
+   "wrong": 26,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 40,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_true_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 90.62,
+   "committed": 87.23,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    203,
+    46
+   ],
+   "total": 9338,
+   "bad": 876,
+   "missing": 142,
+   "extra": 256,
+   "wrong": 478,
+   "unreachable": 0,
+   "inText": 604,
+   "inGlyph": 44,
+   "areaText": 2736,
+   "areaGlyph": 484,
+   "drawn": [
+    203,
+    44
+   ],
+   "root": [
+    203.33,
+    44
+   ],
+   "clip": [
+    219.33,
+    60
+   ],
+   "refTrue": [
+    207,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_true_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 95.01,
+   "committed": 90.87,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    211,
+    52
+   ],
+   "total": 10972,
+   "bad": 548,
+   "missing": 135,
+   "extra": 8,
+   "wrong": 405,
+   "unreachable": 0,
+   "inText": 484,
+   "inGlyph": 44,
+   "areaText": 2736,
+   "areaGlyph": 484,
+   "drawn": [
+    203,
+    44
+   ],
+   "root": [
+    203.33,
+    44
+   ],
+   "clip": [
+    219.33,
+    60
+   ],
+   "refTrue": [
+    211,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_true_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 90.61,
+   "committed": 87.23,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    203,
+    46
+   ],
+   "total": 9338,
+   "bad": 877,
+   "missing": 143,
+   "extra": 256,
+   "wrong": 478,
+   "unreachable": 0,
+   "inText": 604,
+   "inGlyph": 44,
+   "areaText": 2736,
+   "areaGlyph": 484,
+   "drawn": [
+    203,
+    44
+   ],
+   "root": [
+    203.33,
+    44
+   ],
+   "clip": [
+    219.33,
+    60
+   ],
+   "refTrue": [
+    207,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_true_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 91.6,
+   "committed": 88.33,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    203,
+    46
+   ],
+   "total": 9338,
+   "bad": 784,
+   "missing": 311,
+   "extra": 49,
+   "wrong": 424,
+   "unreachable": 0,
+   "inText": 545,
+   "inGlyph": 215,
+   "areaText": 2736,
+   "areaGlyph": 484,
+   "drawn": [
+    203,
+    44
+   ],
+   "root": [
+    203.33,
+    44
+   ],
+   "clip": [
+    219.33,
+    60
+   ],
+   "refTrue": [
+    207,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_true_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 94.26,
+   "committed": 86.76,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    211,
+    52
+   ],
+   "total": 10972,
+   "bad": 630,
+   "missing": 181,
+   "extra": 9,
+   "wrong": 440,
+   "unreachable": 0,
+   "inText": 409,
+   "inGlyph": 215,
+   "areaText": 2736,
+   "areaGlyph": 484,
+   "drawn": [
+    203,
+    44
+   ],
+   "root": [
+    203.33,
+    44
+   ],
+   "clip": [
+    219.33,
+    60
+   ],
+   "refTrue": [
+    211,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_true_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 91.56,
+   "committed": 88.35,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    203,
+    46
+   ],
+   "total": 9338,
+   "bad": 788,
+   "missing": 304,
+   "extra": 47,
+   "wrong": 437,
+   "unreachable": 0,
+   "inText": 548,
+   "inGlyph": 215,
+   "areaText": 2736,
+   "areaGlyph": 484,
+   "drawn": [
+    203,
+    44
+   ],
+   "root": [
+    203.33,
+    44
+   ],
+   "clip": [
+    219.33,
+    60
+   ],
+   "refTrue": [
+    207,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_true_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 93.47,
+   "committed": 90.14,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    203,
+    46
+   ],
+   "total": 9338,
+   "bad": 610,
+   "missing": 303,
+   "extra": 49,
+   "wrong": 258,
+   "unreachable": 0,
+   "inText": 545,
+   "inGlyph": 41,
+   "areaText": 2736,
+   "areaGlyph": 484,
+   "drawn": [
+    203,
+    44
+   ],
+   "root": [
+    203.33,
+    44
+   ],
+   "clip": [
+    219.33,
+    60
+   ],
+   "refTrue": [
+    207,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_true_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 95.84,
+   "committed": 88.29,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    211,
+    52
+   ],
+   "total": 10972,
+   "bad": 456,
+   "missing": 183,
+   "extra": 9,
+   "wrong": 264,
+   "unreachable": 0,
+   "inText": 409,
+   "inGlyph": 41,
+   "areaText": 2736,
+   "areaGlyph": 484,
+   "drawn": [
+    203,
+    44
+   ],
+   "root": [
+    203.33,
+    44
+   ],
+   "clip": [
+    219.33,
+    60
+   ],
+   "refTrue": [
+    211,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_figma_supporting_text_true_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 93.45,
+   "committed": 90.19,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    203,
+    46
+   ],
+   "total": 9338,
+   "bad": 612,
+   "missing": 296,
+   "extra": 46,
+   "wrong": 270,
+   "unreachable": 0,
+   "inText": 548,
+   "inGlyph": 40,
+   "areaText": 2736,
+   "areaGlyph": 484,
+   "drawn": [
+    203,
+    44
+   ],
+   "root": [
+    203.33,
+    44
+   ],
+   "clip": [
+    219.33,
+    60
+   ],
+   "refTrue": [
+    207,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_false_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 95.48,
+   "committed": 93.58,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 76,
+   "missing": 32,
+   "extra": 0,
+   "wrong": 44,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 76,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_false_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 96.74,
+   "committed": 91.92,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 75,
+   "missing": 14,
+   "extra": 0,
+   "wrong": 61,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 75,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_false_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 95.48,
+   "committed": 93.52,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 76,
+   "missing": 32,
+   "extra": 0,
+   "wrong": 44,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 76,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_false_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 85.83,
+   "committed": 84.55,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 238,
+   "missing": 42,
+   "extra": 0,
+   "wrong": 196,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 238,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_false_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 89.67,
+   "committed": 85.4,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 238,
+   "missing": 8,
+   "extra": 0,
+   "wrong": 230,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 238,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_false_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 85.83,
+   "committed": 84.5,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 238,
+   "missing": 42,
+   "extra": 0,
+   "wrong": 196,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 238,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_false_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 95.48,
+   "committed": 93.58,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 76,
+   "missing": 32,
+   "extra": 0,
+   "wrong": 44,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 76,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_false_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 96.74,
+   "committed": 91.92,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 75,
+   "missing": 14,
+   "extra": 0,
+   "wrong": 61,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 75,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_false_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 95.48,
+   "committed": 93.52,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 76,
+   "missing": 32,
+   "extra": 0,
+   "wrong": 44,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 76,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_true_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 92.7,
+   "committed": 89.69,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    211,
+    46
+   ],
+   "total": 9706,
+   "bad": 709,
+   "missing": 337,
+   "extra": 60,
+   "wrong": 312,
+   "unreachable": 0,
+   "inText": 609,
+   "inGlyph": 76,
+   "areaText": 2888,
+   "areaGlyph": 484,
+   "drawn": [
+    211,
+    44
+   ],
+   "root": [
+    211.33,
+    44
+   ],
+   "clip": [
+    227.33,
+    60
+   ],
+   "refTrue": [
+    215,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_true_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 95.43,
+   "committed": 88.11,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    219,
+    52
+   ],
+   "total": 11388,
+   "bad": 520,
+   "missing": 185,
+   "extra": 9,
+   "wrong": 326,
+   "unreachable": 0,
+   "inText": 439,
+   "inGlyph": 75,
+   "areaText": 2888,
+   "areaGlyph": 484,
+   "drawn": [
+    211,
+    44
+   ],
+   "root": [
+    211.33,
+    44
+   ],
+   "clip": [
+    227.33,
+    60
+   ],
+   "refTrue": [
+    219,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_true_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 92.67,
+   "committed": 89.63,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    211,
+    46
+   ],
+   "total": 9706,
+   "bad": 711,
+   "missing": 332,
+   "extra": 56,
+   "wrong": 323,
+   "unreachable": 0,
+   "inText": 610,
+   "inGlyph": 76,
+   "areaText": 2888,
+   "areaGlyph": 484,
+   "drawn": [
+    211,
+    44
+   ],
+   "root": [
+    211.33,
+    44
+   ],
+   "clip": [
+    227.33,
+    60
+   ],
+   "refTrue": [
+    215,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_true_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 91.03,
+   "committed": 88.06,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    211,
+    46
+   ],
+   "total": 9706,
+   "bad": 871,
+   "missing": 347,
+   "extra": 60,
+   "wrong": 464,
+   "unreachable": 0,
+   "inText": 609,
+   "inGlyph": 238,
+   "areaText": 2888,
+   "areaGlyph": 484,
+   "drawn": [
+    211,
+    44
+   ],
+   "root": [
+    211.33,
+    44
+   ],
+   "clip": [
+    227.33,
+    60
+   ],
+   "refTrue": [
+    215,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_true_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 94,
+   "committed": 86.74,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    219,
+    52
+   ],
+   "total": 11388,
+   "bad": 683,
+   "missing": 179,
+   "extra": 9,
+   "wrong": 495,
+   "unreachable": 0,
+   "inText": 439,
+   "inGlyph": 238,
+   "areaText": 2888,
+   "areaGlyph": 484,
+   "drawn": [
+    211,
+    44
+   ],
+   "root": [
+    211.33,
+    44
+   ],
+   "clip": [
+    227.33,
+    60
+   ],
+   "refTrue": [
+    219,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_true_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 91.01,
+   "committed": 88.02,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    211,
+    46
+   ],
+   "total": 9706,
+   "bad": 873,
+   "missing": 342,
+   "extra": 56,
+   "wrong": 475,
+   "unreachable": 0,
+   "inText": 610,
+   "inGlyph": 238,
+   "areaText": 2888,
+   "areaGlyph": 484,
+   "drawn": [
+    211,
+    44
+   ],
+   "root": [
+    211.33,
+    44
+   ],
+   "clip": [
+    227.33,
+    60
+   ],
+   "refTrue": [
+    215,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_true_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 92.7,
+   "committed": 89.69,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    211,
+    46
+   ],
+   "total": 9706,
+   "bad": 709,
+   "missing": 337,
+   "extra": 60,
+   "wrong": 312,
+   "unreachable": 0,
+   "inText": 609,
+   "inGlyph": 76,
+   "areaText": 2888,
+   "areaGlyph": 484,
+   "drawn": [
+    211,
+    44
+   ],
+   "root": [
+    211.33,
+    44
+   ],
+   "clip": [
+    227.33,
+    60
+   ],
+   "refTrue": [
+    215,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_true_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 95.43,
+   "committed": 88.11,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    219,
+    52
+   ],
+   "total": 11388,
+   "bad": 520,
+   "missing": 185,
+   "extra": 9,
+   "wrong": 326,
+   "unreachable": 0,
+   "inText": 439,
+   "inGlyph": 75,
+   "areaText": 2888,
+   "areaGlyph": 484,
+   "drawn": [
+    211,
+    44
+   ],
+   "root": [
+    211.33,
+    44
+   ],
+   "clip": [
+    227.33,
+    60
+   ],
+   "refTrue": [
+    219,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_google_supporting_text_true_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 92.67,
+   "committed": 89.65,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    211,
+    46
+   ],
+   "total": 9706,
+   "bad": 711,
+   "missing": 332,
+   "extra": 56,
+   "wrong": 323,
+   "unreachable": 0,
+   "inText": 610,
+   "inGlyph": 76,
+   "areaText": 2888,
+   "areaGlyph": 484,
+   "drawn": [
+    211,
+    44
+   ],
+   "root": [
+    211.33,
+    44
+   ],
+   "clip": [
+    227.33,
+    60
+   ],
+   "refTrue": [
+    215,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_false_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 91.31,
+   "committed": 91.31,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 146,
+   "missing": 40,
+   "extra": 30,
+   "wrong": 76,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 106,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_false_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 94.88,
+   "committed": 94.79,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 118,
+   "missing": 15,
+   "extra": 0,
+   "wrong": 103,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 106,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_false_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 91.31,
+   "committed": 91.31,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 146,
+   "missing": 40,
+   "extra": 30,
+   "wrong": 76,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 106,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_false_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 94.76,
+   "committed": 86.88,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 88,
+   "missing": 32,
+   "extra": 0,
+   "wrong": 56,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 88,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_false_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 96.18,
+   "committed": 87.08,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 88,
+   "missing": 13,
+   "extra": 0,
+   "wrong": 75,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 88,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_false_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 94.94,
+   "committed": 86.82,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 85,
+   "missing": 31,
+   "extra": 0,
+   "wrong": 54,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 85,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_false_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 94.76,
+   "committed": 86.88,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 88,
+   "missing": 32,
+   "extra": 0,
+   "wrong": 56,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 88,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_false_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 96.18,
+   "committed": 87.08,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 88,
+   "missing": 13,
+   "extra": 0,
+   "wrong": 75,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 88,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_false_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 94.94,
+   "committed": 86.82,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    42
+   ],
+   "total": 1680,
+   "bad": 85,
+   "missing": 31,
+   "extra": 0,
+   "wrong": 54,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 85,
+   "areaText": 0,
+   "areaGlyph": 484,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -6,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_true_theme_brand_state_default",
+   "comp": "SocialButton",
+   "score": 87.9,
+   "committed": 85.85,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    169,
+    46
+   ],
+   "total": 7774,
+   "bad": 941,
+   "missing": 234,
+   "extra": 308,
+   "wrong": 399,
+   "unreachable": 0,
+   "inText": 499,
+   "inGlyph": 129,
+   "areaText": 2033,
+   "areaGlyph": 484,
+   "drawn": [
+    167,
+    44
+   ],
+   "root": [
+    166.89,
+    44
+   ],
+   "clip": [
+    182.89,
+    60
+   ],
+   "refTrue": [
+    171,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_true_theme_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 94.8,
+   "committed": 91.32,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    175,
+    52
+   ],
+   "total": 9100,
+   "bad": 473,
+   "missing": 114,
+   "extra": 3,
+   "wrong": 356,
+   "unreachable": 0,
+   "inText": 353,
+   "inGlyph": 106,
+   "areaText": 2033,
+   "areaGlyph": 484,
+   "drawn": [
+    167,
+    44
+   ],
+   "root": [
+    166.89,
+    44
+   ],
+   "clip": [
+    182.89,
+    60
+   ],
+   "refTrue": [
+    175,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_true_theme_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 87.9,
+   "committed": 85.85,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    169,
+    46
+   ],
+   "total": 7774,
+   "bad": 941,
+   "missing": 234,
+   "extra": 308,
+   "wrong": 399,
+   "unreachable": 0,
+   "inText": 499,
+   "inGlyph": 129,
+   "areaText": 2033,
+   "areaGlyph": 484,
+   "drawn": [
+    167,
+    44
+   ],
+   "root": [
+    166.89,
+    44
+   ],
+   "clip": [
+    182.89,
+    60
+   ],
+   "refTrue": [
+    171,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_true_theme_color_state_default",
+   "comp": "SocialButton",
+   "score": 91.32,
+   "committed": 90.08,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    169,
+    46
+   ],
+   "total": 7774,
+   "bad": 675,
+   "missing": 391,
+   "extra": 62,
+   "wrong": 222,
+   "unreachable": 0,
+   "inText": 460,
+   "inGlyph": 118,
+   "areaText": 2033,
+   "areaGlyph": 484,
+   "drawn": [
+    167,
+    44
+   ],
+   "root": [
+    166.89,
+    44
+   ],
+   "clip": [
+    182.89,
+    60
+   ],
+   "refTrue": [
+    171,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_true_theme_color_state_focused",
+   "comp": "SocialButton",
+   "score": 95.62,
+   "committed": 87.71,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    175,
+    52
+   ],
+   "total": 9100,
+   "bad": 399,
+   "missing": 136,
+   "extra": 4,
+   "wrong": 259,
+   "unreachable": 0,
+   "inText": 308,
+   "inGlyph": 88,
+   "areaText": 2033,
+   "areaGlyph": 484,
+   "drawn": [
+    167,
+    44
+   ],
+   "root": [
+    166.89,
+    44
+   ],
+   "clip": [
+    182.89,
+    60
+   ],
+   "refTrue": [
+    175,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_true_theme_color_state_hover",
+   "comp": "SocialButton",
+   "score": 91.3,
+   "committed": 90.15,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    169,
+    46
+   ],
+   "total": 7774,
+   "bad": 676,
+   "missing": 386,
+   "extra": 59,
+   "wrong": 231,
+   "unreachable": 0,
+   "inText": 461,
+   "inGlyph": 116,
+   "areaText": 2033,
+   "areaGlyph": 484,
+   "drawn": [
+    167,
+    44
+   ],
+   "root": [
+    166.89,
+    44
+   ],
+   "clip": [
+    182.89,
+    60
+   ],
+   "refTrue": [
+    171,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_true_theme_color_with_brand_state_default",
+   "comp": "SocialButton",
+   "score": 91.32,
+   "committed": 90.08,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    169,
+    46
+   ],
+   "total": 7774,
+   "bad": 675,
+   "missing": 391,
+   "extra": 62,
+   "wrong": 222,
+   "unreachable": 0,
+   "inText": 460,
+   "inGlyph": 118,
+   "areaText": 2033,
+   "areaGlyph": 484,
+   "drawn": [
+    167,
+    44
+   ],
+   "root": [
+    166.89,
+    44
+   ],
+   "clip": [
+    182.89,
+    60
+   ],
+   "refTrue": [
+    171,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_true_theme_color_with_brand_state_focused",
+   "comp": "SocialButton",
+   "score": 95.62,
+   "committed": 87.71,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    175,
+    52
+   ],
+   "total": 9100,
+   "bad": 399,
+   "missing": 136,
+   "extra": 4,
+   "wrong": 259,
+   "unreachable": 0,
+   "inText": 308,
+   "inGlyph": 88,
+   "areaText": 2033,
+   "areaGlyph": 484,
+   "drawn": [
+    167,
+    44
+   ],
+   "root": [
+    166.89,
+    44
+   ],
+   "clip": [
+    182.89,
+    60
+   ],
+   "refTrue": [
+    175,
+    52
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "social-button",
+   "variant": "social_x_supporting_text_true_theme_color_with_brand_state_hover",
+   "comp": "SocialButton",
+   "score": 91.3,
+   "committed": 90.15,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    169,
+    46
+   ],
+   "total": 7774,
+   "bad": 676,
+   "missing": 386,
+   "extra": 59,
+   "wrong": 231,
+   "unreachable": 0,
+   "inText": 461,
+   "inGlyph": 116,
+   "areaText": 2033,
+   "areaGlyph": 484,
+   "drawn": [
+    167,
+    44
+   ],
+   "root": [
+    166.89,
+    44
+   ],
+   "clip": [
+    182.89,
+    60
+   ],
+   "refTrue": [
+    171,
+    48
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  }
+ ]
+}

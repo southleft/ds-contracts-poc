@@ -1,0 +1,8598 @@
+{
+ "meta": {
+  "probe": "av-bg",
+  "probeCss": "[class~=\"Avatar_root\"][data-placeholder],[class~=\"Avatar_root\"][data-text]{ background-color:#f9f5ff }",
+  "clipMargin": 8,
+  "sets": [
+   "avatar"
+  ]
+ },
+ "rows": [
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 97.68,
+   "committed": 97.75,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    66,
+    66
+   ],
+   "total": 4356,
+   "bad": 101,
+   "missing": 0,
+   "extra": 31,
+   "wrong": 70,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    82,
+    82
+   ],
+   "refTrue": [
+    68,
+    68
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 97.13,
+   "committed": 97.16,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    72,
+    72
+   ],
+   "total": 5184,
+   "bad": 149,
+   "missing": 0,
+   "extra": 41,
+   "wrong": 108,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    82,
+    82
+   ],
+   "refTrue": [
+    72,
+    72
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 97.68,
+   "committed": 97.75,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    66,
+    66
+   ],
+   "total": 4356,
+   "bad": 101,
+   "missing": 0,
+   "extra": 31,
+   "wrong": 70,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    82,
+    82
+   ],
+   "refTrue": [
+    68,
+    68
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 98.71,
+   "committed": 98.75,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 53,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 53,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 98.21,
+   "committed": 98.21,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    72,
+    72
+   ],
+   "total": 5184,
+   "bad": 93,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 93,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    72,
+    72
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 98.71,
+   "committed": 98.75,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 53,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 53,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 80.06,
+   "committed": 80.08,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    67,
+    67
+   ],
+   "total": 4489,
+   "bad": 895,
+   "missing": 164,
+   "extra": 21,
+   "wrong": 710,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 56,
+   "areaText": 0,
+   "areaGlyph": 324,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    76,
+    76
+   ],
+   "refOverflow": [
+    12,
+    12
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -2,
+    -2
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 96.74,
+   "committed": 96.76,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    72,
+    72
+   ],
+   "total": 5184,
+   "bad": 169,
+   "missing": 71,
+   "extra": 0,
+   "wrong": 98,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 62,
+   "areaText": 0,
+   "areaGlyph": 324,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    80,
+    80
+   ],
+   "refOverflow": [
+    16,
+    16
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    0,
+    0
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 80.06,
+   "committed": 80.08,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    67,
+    67
+   ],
+   "total": 4489,
+   "bad": 895,
+   "missing": 164,
+   "extra": 21,
+   "wrong": 710,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 56,
+   "areaText": 0,
+   "areaGlyph": 324,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    76,
+    76
+   ],
+   "refOverflow": [
+    12,
+    12
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -2,
+    -2
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_true_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 98.51,
+   "committed": 98.03,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    66,
+    66
+   ],
+   "total": 4356,
+   "bad": 65,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 65,
+   "unreachable": 0,
+   "inText": 65,
+   "inGlyph": 0,
+   "areaText": 1116,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    82,
+    82
+   ],
+   "refTrue": [
+    68,
+    68
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_true_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 98.67,
+   "committed": 98.26,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    72,
+    72
+   ],
+   "total": 5184,
+   "bad": 69,
+   "missing": 0,
+   "extra": 4,
+   "wrong": 65,
+   "unreachable": 0,
+   "inText": 65,
+   "inGlyph": 0,
+   "areaText": 1116,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    82,
+    82
+   ],
+   "refTrue": [
+    72,
+    72
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_true_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 98.51,
+   "committed": 98.03,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    66,
+    66
+   ],
+   "total": 4356,
+   "bad": 65,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 65,
+   "unreachable": 0,
+   "inText": 65,
+   "inGlyph": 0,
+   "areaText": 1116,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    82,
+    82
+   ],
+   "refTrue": [
+    68,
+    68
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_true_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 98.41,
+   "committed": 97.9,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 65,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 65,
+   "unreachable": 0,
+   "inText": 65,
+   "inGlyph": 0,
+   "areaText": 1116,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_true_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 98.75,
+   "committed": 98.34,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    72,
+    72
+   ],
+   "total": 5184,
+   "bad": 65,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 65,
+   "unreachable": 0,
+   "inText": 65,
+   "inGlyph": 0,
+   "areaText": 1116,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    72,
+    72
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_true_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 98.41,
+   "committed": 97.9,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 65,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 65,
+   "unreachable": 0,
+   "inText": 65,
+   "inGlyph": 0,
+   "areaText": 1116,
+   "areaGlyph": 0,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_true_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 96.5,
+   "committed": 96.26,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    65,
+    65
+   ],
+   "total": 4225,
+   "bad": 148,
+   "missing": 37,
+   "extra": 0,
+   "wrong": 111,
+   "unreachable": 0,
+   "inText": 92,
+   "inGlyph": 56,
+   "areaText": 1116,
+   "areaGlyph": 289,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    66,
+    66
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 98.05,
+   "committed": 97.65,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    72,
+    72
+   ],
+   "total": 5184,
+   "bad": 101,
+   "missing": 31,
+   "extra": 0,
+   "wrong": 70,
+   "unreachable": 0,
+   "inText": 65,
+   "inGlyph": 36,
+   "areaText": 1116,
+   "areaGlyph": 324,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    72,
+    72
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 96.5,
+   "committed": 96.26,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    65,
+    65
+   ],
+   "total": 4225,
+   "bad": 148,
+   "missing": 37,
+   "extra": 0,
+   "wrong": 111,
+   "unreachable": 0,
+   "inText": 92,
+   "inGlyph": 56,
+   "areaText": 1116,
+   "areaGlyph": 289,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    66,
+    66
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_true_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 95.73,
+   "committed": 95.27,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    66,
+    66
+   ],
+   "total": 4356,
+   "bad": 186,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 186,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 153,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    82,
+    82
+   ],
+   "refTrue": [
+    68,
+    68
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_true_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 96.33,
+   "committed": 95.95,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    72,
+    72
+   ],
+   "total": 5184,
+   "bad": 190,
+   "missing": 0,
+   "extra": 4,
+   "wrong": 186,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 153,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    82,
+    82
+   ],
+   "refTrue": [
+    72,
+    72
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_true_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 95.73,
+   "committed": 95.27,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    66,
+    66
+   ],
+   "total": 4356,
+   "bad": 186,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 186,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 153,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    82,
+    82
+   ],
+   "refTrue": [
+    68,
+    68
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_true_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 95.46,
+   "committed": 94.97,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 186,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 186,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 153,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_true_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 96.41,
+   "committed": 96.03,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    72,
+    72
+   ],
+   "total": 5184,
+   "bad": 186,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 186,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 153,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    72,
+    72
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_true_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 95.46,
+   "committed": 94.97,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 186,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 186,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 153,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_true_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 94.91,
+   "committed": 94.37,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    65,
+    65
+   ],
+   "total": 4225,
+   "bad": 215,
+   "missing": 37,
+   "extra": 0,
+   "wrong": 178,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 182,
+   "areaText": 0,
+   "areaGlyph": 965,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    66,
+    66
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 95.72,
+   "committed": 95.33,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    72,
+    72
+   ],
+   "total": 5184,
+   "bad": 222,
+   "missing": 31,
+   "extra": 0,
+   "wrong": 191,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 189,
+   "areaText": 0,
+   "areaGlyph": 1000,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    72,
+    72
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_2xl_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 94.91,
+   "committed": 94.37,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    65,
+    65
+   ],
+   "total": 4225,
+   "bad": 215,
+   "missing": 37,
+   "extra": 0,
+   "wrong": 178,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 182,
+   "areaText": 0,
+   "areaGlyph": 965,
+   "drawn": [
+    64,
+    64
+   ],
+   "root": [
+    64,
+    64
+   ],
+   "clip": [
+    80,
+    80
+   ],
+   "refTrue": [
+    66,
+    66
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 93.85,
+   "committed": 93.85,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    51,
+    51
+   ],
+   "total": 2601,
+   "bad": 160,
+   "missing": 15,
+   "extra": 23,
+   "wrong": 122,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    66,
+    66
+   ],
+   "refTrue": [
+    52,
+    52
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 97.39,
+   "committed": 97.45,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 82,
+   "missing": 0,
+   "extra": 30,
+   "wrong": 52,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    66,
+    66
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 93.85,
+   "committed": 93.85,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    51,
+    51
+   ],
+   "total": 2601,
+   "bad": 160,
+   "missing": 15,
+   "extra": 23,
+   "wrong": 122,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    66,
+    66
+   ],
+   "refTrue": [
+    52,
+    52
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 99.26,
+   "committed": 99.26,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 17,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 17,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 98.66,
+   "committed": 98.72,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 42,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 42,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 99.26,
+   "committed": 99.26,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 17,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 17,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 91.84,
+   "committed": 91.75,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    49,
+    49
+   ],
+   "total": 2401,
+   "bad": 196,
+   "missing": 15,
+   "extra": 19,
+   "wrong": 162,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 55,
+   "areaText": 0,
+   "areaGlyph": 169,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    50,
+    50
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 97.23,
+   "committed": 97.29,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 87,
+   "missing": 9,
+   "extra": 6,
+   "wrong": 72,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 38,
+   "areaText": 0,
+   "areaGlyph": 196,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 91.84,
+   "committed": 91.75,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    49,
+    49
+   ],
+   "total": 2401,
+   "bad": 196,
+   "missing": 15,
+   "extra": 19,
+   "wrong": 162,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 55,
+   "areaText": 0,
+   "areaGlyph": 169,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    50,
+    50
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_true_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 97.65,
+   "committed": 97.19,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    51,
+    51
+   ],
+   "total": 2601,
+   "bad": 61,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 61,
+   "unreachable": 0,
+   "inText": 43,
+   "inGlyph": 0,
+   "areaText": 644,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    66,
+    66
+   ],
+   "refTrue": [
+    52,
+    52
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_true_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 97.99,
+   "committed": 97.45,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 63,
+   "missing": 0,
+   "extra": 4,
+   "wrong": 59,
+   "unreachable": 0,
+   "inText": 59,
+   "inGlyph": 0,
+   "areaText": 644,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    66,
+    66
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_true_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 97.65,
+   "committed": 97.19,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    51,
+    51
+   ],
+   "total": 2601,
+   "bad": 61,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 61,
+   "unreachable": 0,
+   "inText": 43,
+   "inGlyph": 0,
+   "areaText": 644,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    66,
+    66
+   ],
+   "refTrue": [
+    52,
+    52
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_true_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 97.44,
+   "committed": 96.7,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 59,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 59,
+   "unreachable": 0,
+   "inText": 59,
+   "inGlyph": 0,
+   "areaText": 644,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_true_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 98.12,
+   "committed": 97.58,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 59,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 59,
+   "unreachable": 0,
+   "inText": 59,
+   "inGlyph": 0,
+   "areaText": 644,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_true_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 97.44,
+   "committed": 96.7,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 59,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 59,
+   "unreachable": 0,
+   "inText": 59,
+   "inGlyph": 0,
+   "areaText": 644,
+   "areaGlyph": 0,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_true_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 95.88,
+   "committed": 95.5,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    49,
+    49
+   ],
+   "total": 2401,
+   "bad": 99,
+   "missing": 18,
+   "extra": 0,
+   "wrong": 81,
+   "unreachable": 0,
+   "inText": 51,
+   "inGlyph": 48,
+   "areaText": 644,
+   "areaGlyph": 169,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    50,
+    50
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 97.03,
+   "committed": 96.49,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 93,
+   "missing": 13,
+   "extra": 2,
+   "wrong": 78,
+   "unreachable": 0,
+   "inText": 59,
+   "inGlyph": 34,
+   "areaText": 644,
+   "areaGlyph": 196,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 95.88,
+   "committed": 95.5,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    49,
+    49
+   ],
+   "total": 2401,
+   "bad": 99,
+   "missing": 18,
+   "extra": 0,
+   "wrong": 81,
+   "unreachable": 0,
+   "inText": 51,
+   "inGlyph": 48,
+   "areaText": 644,
+   "areaGlyph": 169,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    50,
+    50
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_true_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 95.23,
+   "committed": 94.04,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    51,
+    51
+   ],
+   "total": 2601,
+   "bad": 124,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 124,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 106,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    66,
+    66
+   ],
+   "refTrue": [
+    52,
+    52
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_true_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 96.08,
+   "committed": 95.76,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 123,
+   "missing": 0,
+   "extra": 4,
+   "wrong": 119,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 119,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    66,
+    66
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_true_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 95.23,
+   "committed": 94.04,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    51,
+    51
+   ],
+   "total": 2601,
+   "bad": 124,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 124,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 106,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    66,
+    66
+   ],
+   "refTrue": [
+    52,
+    52
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_true_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 94.84,
+   "committed": 94.4,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 119,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 119,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 119,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_true_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 96.21,
+   "committed": 95.89,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 119,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 119,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 119,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_true_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 94.84,
+   "committed": 94.4,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 119,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 119,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 119,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_true_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 93.79,
+   "committed": 92.29,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    49,
+    49
+   ],
+   "total": 2401,
+   "bad": 149,
+   "missing": 18,
+   "extra": 0,
+   "wrong": 131,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 149,
+   "areaText": 0,
+   "areaGlyph": 845,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    50,
+    50
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 95.22,
+   "committed": 94.87,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 150,
+   "missing": 11,
+   "extra": 2,
+   "wrong": 137,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 150,
+   "areaText": 0,
+   "areaGlyph": 872,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_lg_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 93.79,
+   "committed": 92.29,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    49,
+    49
+   ],
+   "total": 2401,
+   "bad": 149,
+   "missing": 18,
+   "extra": 0,
+   "wrong": 131,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 149,
+   "areaText": 0,
+   "areaGlyph": 845,
+   "drawn": [
+    48,
+    48
+   ],
+   "root": [
+    48,
+    48
+   ],
+   "clip": [
+    64,
+    64
+   ],
+   "refTrue": [
+    50,
+    50
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 93.13,
+   "committed": 93.24,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    43,
+    43
+   ],
+   "total": 1849,
+   "bad": 127,
+   "missing": 13,
+   "extra": 14,
+   "wrong": 100,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    58,
+    58
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 97.27,
+   "committed": 97.27,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 63,
+   "missing": 0,
+   "extra": 28,
+   "wrong": 35,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    58,
+    58
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 93.13,
+   "committed": 93.24,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    43,
+    43
+   ],
+   "total": 1849,
+   "bad": 127,
+   "missing": 13,
+   "extra": 14,
+   "wrong": 100,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    58,
+    58
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 99.88,
+   "committed": 99.88,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 2,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 2,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 99.05,
+   "committed": 99,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 22,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 22,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 99.88,
+   "committed": 99.88,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 2,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 2,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 90.84,
+   "committed": 90.78,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    41,
+    41
+   ],
+   "total": 1681,
+   "bad": 154,
+   "missing": 2,
+   "extra": 17,
+   "wrong": 135,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 29,
+   "areaText": 0,
+   "areaGlyph": 121,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    42,
+    42
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 97.61,
+   "committed": 97.57,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 55,
+   "missing": 1,
+   "extra": 16,
+   "wrong": 38,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 28,
+   "areaText": 0,
+   "areaGlyph": 144,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 90.84,
+   "committed": 90.78,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    41,
+    41
+   ],
+   "total": 1681,
+   "bad": 154,
+   "missing": 2,
+   "extra": 17,
+   "wrong": 135,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 29,
+   "areaText": 0,
+   "areaGlyph": 121,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    42,
+    42
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_true_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 96.54,
+   "committed": 95.62,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    43,
+    43
+   ],
+   "total": 1849,
+   "bad": 64,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 64,
+   "unreachable": 0,
+   "inText": 52,
+   "inGlyph": 0,
+   "areaText": 572,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    58,
+    58
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_true_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 98.26,
+   "committed": 97.7,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 40,
+   "missing": 0,
+   "extra": 4,
+   "wrong": 36,
+   "unreachable": 0,
+   "inText": 31,
+   "inGlyph": 0,
+   "areaText": 572,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    58,
+    58
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_true_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 96.54,
+   "committed": 95.62,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    43,
+    43
+   ],
+   "total": 1849,
+   "bad": 64,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 64,
+   "unreachable": 0,
+   "inText": 52,
+   "inGlyph": 0,
+   "areaText": 572,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    58,
+    58
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_true_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 98.06,
+   "committed": 97.13,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 31,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 31,
+   "unreachable": 0,
+   "inText": 31,
+   "inGlyph": 0,
+   "areaText": 572,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_true_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 98.65,
+   "committed": 98,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 31,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 31,
+   "unreachable": 0,
+   "inText": 31,
+   "inGlyph": 0,
+   "areaText": 572,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_true_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 98.06,
+   "committed": 97.13,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 31,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 31,
+   "unreachable": 0,
+   "inText": 31,
+   "inGlyph": 0,
+   "areaText": 572,
+   "areaGlyph": 0,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_true_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 94.94,
+   "committed": 93.93,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    41,
+    41
+   ],
+   "total": 1681,
+   "bad": 85,
+   "missing": 4,
+   "extra": 0,
+   "wrong": 81,
+   "unreachable": 0,
+   "inText": 63,
+   "inGlyph": 22,
+   "areaText": 572,
+   "areaGlyph": 113,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    42,
+    42
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 98,
+   "committed": 97.44,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 46,
+   "missing": 2,
+   "extra": 4,
+   "wrong": 40,
+   "unreachable": 0,
+   "inText": 32,
+   "inGlyph": 14,
+   "areaText": 572,
+   "areaGlyph": 136,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 94.94,
+   "committed": 93.93,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    41,
+    41
+   ],
+   "total": 1681,
+   "bad": 85,
+   "missing": 4,
+   "extra": 0,
+   "wrong": 81,
+   "unreachable": 0,
+   "inText": 63,
+   "inGlyph": 22,
+   "areaText": 572,
+   "areaGlyph": 113,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    42,
+    42
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_true_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 97.08,
+   "committed": 95.84,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    43,
+    43
+   ],
+   "total": 1849,
+   "bad": 54,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 54,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 42,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    58,
+    58
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_true_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 98.52,
+   "committed": 98.09,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 34,
+   "missing": 0,
+   "extra": 4,
+   "wrong": 30,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 27,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    58,
+    58
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_true_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 97.08,
+   "committed": 95.84,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    43,
+    43
+   ],
+   "total": 1849,
+   "bad": 54,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 54,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 42,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    58,
+    58
+   ],
+   "refTrue": [
+    44,
+    44
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_true_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 98.38,
+   "committed": 97.63,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 26,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 26,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 26,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_true_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 98.87,
+   "committed": 98.35,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 26,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 26,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 26,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_true_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 98.38,
+   "committed": 97.63,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 26,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 26,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 26,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_true_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 95.3,
+   "committed": 94.65,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    41,
+    41
+   ],
+   "total": 1681,
+   "bad": 79,
+   "missing": 5,
+   "extra": 0,
+   "wrong": 74,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 79,
+   "areaText": 0,
+   "areaGlyph": 781,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    42,
+    42
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 98.05,
+   "committed": 97.61,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    48,
+    48
+   ],
+   "total": 2304,
+   "bad": 45,
+   "missing": 4,
+   "extra": 4,
+   "wrong": 37,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 45,
+   "areaText": 0,
+   "areaGlyph": 804,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    48,
+    48
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_md_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 95.3,
+   "committed": 94.65,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    41,
+    41
+   ],
+   "total": 1681,
+   "bad": 79,
+   "missing": 5,
+   "extra": 0,
+   "wrong": 74,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 79,
+   "areaText": 0,
+   "areaGlyph": 781,
+   "drawn": [
+    40,
+    40
+   ],
+   "root": [
+    40,
+    40
+   ],
+   "clip": [
+    56,
+    56
+   ],
+   "refTrue": [
+    42,
+    42
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 92,
+   "committed": 91.67,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    35,
+    35
+   ],
+   "total": 1225,
+   "bad": 98,
+   "missing": 11,
+   "extra": 17,
+   "wrong": 70,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    50,
+    50
+   ],
+   "refTrue": [
+    36,
+    36
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 95.56,
+   "committed": 95.31,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 71,
+   "missing": 0,
+   "extra": 23,
+   "wrong": 48,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    50,
+    50
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 92,
+   "committed": 91.67,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    35,
+    35
+   ],
+   "total": 1225,
+   "bad": 98,
+   "missing": 11,
+   "extra": 17,
+   "wrong": 70,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    50,
+    50
+   ],
+   "refTrue": [
+    36,
+    36
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 97.36,
+   "committed": 96.78,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 27,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 27,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 97.69,
+   "committed": 97.38,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 37,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 37,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 97.36,
+   "committed": 96.78,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 27,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 27,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 88.61,
+   "committed": 88.15,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    33,
+    33
+   ],
+   "total": 1089,
+   "bad": 124,
+   "missing": 4,
+   "extra": 13,
+   "wrong": 107,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 28,
+   "areaText": 0,
+   "areaGlyph": 81,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    34,
+    34
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 95.38,
+   "committed": 95.06,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 74,
+   "missing": 0,
+   "extra": 15,
+   "wrong": 59,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 31,
+   "areaText": 0,
+   "areaGlyph": 100,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 88.61,
+   "committed": 88.15,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    33,
+    33
+   ],
+   "total": 1089,
+   "bad": 124,
+   "missing": 4,
+   "extra": 13,
+   "wrong": 107,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 28,
+   "areaText": 0,
+   "areaGlyph": 81,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    34,
+    34
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_true_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 96.73,
+   "committed": 95.27,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    35,
+    35
+   ],
+   "total": 1225,
+   "bad": 40,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 40,
+   "unreachable": 0,
+   "inText": 29,
+   "inGlyph": 0,
+   "areaText": 418,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    50,
+    50
+   ],
+   "refTrue": [
+    36,
+    36
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_true_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 97.5,
+   "committed": 97.13,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 40,
+   "missing": 0,
+   "extra": 4,
+   "wrong": 36,
+   "unreachable": 0,
+   "inText": 34,
+   "inGlyph": 0,
+   "areaText": 418,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    50,
+    50
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_true_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 96.73,
+   "committed": 95.27,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    35,
+    35
+   ],
+   "total": 1225,
+   "bad": 40,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 40,
+   "unreachable": 0,
+   "inText": 29,
+   "inGlyph": 0,
+   "areaText": 418,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    50,
+    50
+   ],
+   "refTrue": [
+    36,
+    36
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_true_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 96.58,
+   "committed": 96.09,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 35,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 35,
+   "unreachable": 0,
+   "inText": 35,
+   "inGlyph": 0,
+   "areaText": 418,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_true_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 97.81,
+   "committed": 97.5,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 35,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 35,
+   "unreachable": 0,
+   "inText": 35,
+   "inGlyph": 0,
+   "areaText": 418,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_true_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 96.58,
+   "committed": 96.09,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 35,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 35,
+   "unreachable": 0,
+   "inText": 35,
+   "inGlyph": 0,
+   "areaText": 418,
+   "areaGlyph": 0,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_true_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 94.77,
+   "committed": 93.66,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    33,
+    33
+   ],
+   "total": 1089,
+   "bad": 57,
+   "missing": 3,
+   "extra": 0,
+   "wrong": 54,
+   "unreachable": 0,
+   "inText": 36,
+   "inGlyph": 21,
+   "areaText": 418,
+   "areaGlyph": 73,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    34,
+    34
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 96.81,
+   "committed": 96.5,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 51,
+   "missing": 0,
+   "extra": 2,
+   "wrong": 49,
+   "unreachable": 0,
+   "inText": 36,
+   "inGlyph": 15,
+   "areaText": 418,
+   "areaGlyph": 92,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 94.77,
+   "committed": 93.66,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    33,
+    33
+   ],
+   "total": 1089,
+   "bad": 57,
+   "missing": 3,
+   "extra": 0,
+   "wrong": 54,
+   "unreachable": 0,
+   "inText": 36,
+   "inGlyph": 21,
+   "areaText": 418,
+   "areaGlyph": 73,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    34,
+    34
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_true_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 94.78,
+   "committed": 92.98,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    35,
+    35
+   ],
+   "total": 1225,
+   "bad": 64,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 64,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 58,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    50,
+    50
+   ],
+   "refTrue": [
+    36,
+    36
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_true_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 95.44,
+   "committed": 95.06,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 73,
+   "missing": 0,
+   "extra": 4,
+   "wrong": 69,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 69,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    50,
+    50
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_true_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 94.78,
+   "committed": 92.98,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    35,
+    35
+   ],
+   "total": 1225,
+   "bad": 64,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 64,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 58,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    50,
+    50
+   ],
+   "refTrue": [
+    36,
+    36
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_true_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 93.16,
+   "committed": 92.48,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 70,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 70,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 70,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_true_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 95.63,
+   "committed": 95.19,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 70,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 70,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 70,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_true_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 93.16,
+   "committed": 92.48,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 70,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 70,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 70,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_true_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 91.18,
+   "committed": 90.27,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    33,
+    33
+   ],
+   "total": 1089,
+   "bad": 96,
+   "missing": 2,
+   "extra": 0,
+   "wrong": 94,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 96,
+   "areaText": 0,
+   "areaGlyph": 709,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    34,
+    34
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 94.5,
+   "committed": 94.13,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    40,
+    40
+   ],
+   "total": 1600,
+   "bad": 88,
+   "missing": 0,
+   "extra": 2,
+   "wrong": 86,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 88,
+   "areaText": 0,
+   "areaGlyph": 728,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    40,
+    40
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_sm_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 91.28,
+   "committed": 90.27,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    33,
+    33
+   ],
+   "total": 1089,
+   "bad": 95,
+   "missing": 2,
+   "extra": 0,
+   "wrong": 93,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 95,
+   "areaText": 0,
+   "areaGlyph": 709,
+   "drawn": [
+    32,
+    32
+   ],
+   "root": [
+    32,
+    32
+   ],
+   "clip": [
+    48,
+    48
+   ],
+   "refTrue": [
+    34,
+    34
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 94.66,
+   "committed": 94.66,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    59,
+    59
+   ],
+   "total": 3481,
+   "bad": 186,
+   "missing": 19,
+   "extra": 23,
+   "wrong": 144,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    74,
+    74
+   ],
+   "refTrue": [
+    60,
+    60
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 97.71,
+   "committed": 97.71,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 94,
+   "missing": 0,
+   "extra": 35,
+   "wrong": 59,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    74,
+    74
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 94.66,
+   "committed": 94.66,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    59,
+    59
+   ],
+   "total": 3481,
+   "bad": 186,
+   "missing": 19,
+   "extra": 23,
+   "wrong": 144,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    74,
+    74
+   ],
+   "refTrue": [
+    60,
+    60
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 99.23,
+   "committed": 99.23,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 24,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 24,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 98.93,
+   "committed": 98.93,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 44,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 44,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 99.23,
+   "committed": 99.23,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 24,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 24,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 93.32,
+   "committed": 93.35,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    57,
+    57
+   ],
+   "total": 3249,
+   "bad": 217,
+   "missing": 20,
+   "extra": 21,
+   "wrong": 176,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 55,
+   "areaText": 0,
+   "areaGlyph": 225,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    66,
+    66
+   ],
+   "refOverflow": [
+    10,
+    10
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -3,
+    -3
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 97.73,
+   "committed": 97.8,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 93,
+   "missing": 17,
+   "extra": 5,
+   "wrong": 71,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 41,
+   "areaText": 0,
+   "areaGlyph": 256,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    72,
+    72
+   ],
+   "refOverflow": [
+    16,
+    16
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    0,
+    0
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 93.32,
+   "committed": 93.35,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    57,
+    57
+   ],
+   "total": 3249,
+   "bad": 217,
+   "missing": 20,
+   "extra": 21,
+   "wrong": 176,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 55,
+   "areaText": 0,
+   "areaGlyph": 225,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    66,
+    66
+   ],
+   "refOverflow": [
+    10,
+    10
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -3,
+    -3
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_true_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 97.82,
+   "committed": 97.18,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    59,
+    59
+   ],
+   "total": 3481,
+   "bad": 76,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 76,
+   "unreachable": 0,
+   "inText": 61,
+   "inGlyph": 0,
+   "areaText": 832,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    74,
+    74
+   ],
+   "refTrue": [
+    60,
+    60
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_true_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 99.1,
+   "committed": 98.63,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 37,
+   "missing": 0,
+   "extra": 2,
+   "wrong": 35,
+   "unreachable": 0,
+   "inText": 29,
+   "inGlyph": 0,
+   "areaText": 832,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    74,
+    74
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_true_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 97.82,
+   "committed": 97.18,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    59,
+    59
+   ],
+   "total": 3481,
+   "bad": 76,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 76,
+   "unreachable": 0,
+   "inText": 61,
+   "inGlyph": 0,
+   "areaText": 832,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    74,
+    74
+   ],
+   "refTrue": [
+    60,
+    60
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_true_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 99.08,
+   "committed": 98.47,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 29,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 29,
+   "unreachable": 0,
+   "inText": 29,
+   "inGlyph": 0,
+   "areaText": 832,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_true_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 99.29,
+   "committed": 98.83,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 29,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 29,
+   "unreachable": 0,
+   "inText": 29,
+   "inGlyph": 0,
+   "areaText": 832,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_true_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 99.08,
+   "committed": 98.47,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 29,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 29,
+   "unreachable": 0,
+   "inText": 29,
+   "inGlyph": 0,
+   "areaText": 832,
+   "areaGlyph": 0,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_true_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 96.46,
+   "committed": 96.03,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    57,
+    57
+   ],
+   "total": 3249,
+   "bad": 115,
+   "missing": 23,
+   "extra": 0,
+   "wrong": 92,
+   "unreachable": 0,
+   "inText": 69,
+   "inGlyph": 46,
+   "areaText": 832,
+   "areaGlyph": 225,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    58,
+    58
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 98.44,
+   "committed": 97.97,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 64,
+   "missing": 19,
+   "extra": 0,
+   "wrong": 45,
+   "unreachable": 0,
+   "inText": 29,
+   "inGlyph": 35,
+   "areaText": 832,
+   "areaGlyph": 256,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 96.46,
+   "committed": 96.03,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    57,
+    57
+   ],
+   "total": 3249,
+   "bad": 115,
+   "missing": 23,
+   "extra": 0,
+   "wrong": 92,
+   "unreachable": 0,
+   "inText": 69,
+   "inGlyph": 46,
+   "areaText": 832,
+   "areaGlyph": 225,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    58,
+    58
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_true_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 94.57,
+   "committed": 93.94,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    59,
+    59
+   ],
+   "total": 3481,
+   "bad": 189,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 189,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 136,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    74,
+    74
+   ],
+   "refTrue": [
+    60,
+    60
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_true_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 95.26,
+   "committed": 94.78,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 194,
+   "missing": 0,
+   "extra": 2,
+   "wrong": 192,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 153,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    74,
+    74
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_true_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 94.57,
+   "committed": 93.94,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    59,
+    59
+   ],
+   "total": 3481,
+   "bad": 189,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 189,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 136,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    74,
+    74
+   ],
+   "refTrue": [
+    60,
+    60
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_true_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 94.07,
+   "committed": 93.43,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 186,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 186,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 153,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_true_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 95.46,
+   "committed": 94.97,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 186,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 186,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 153,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_true_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 94.07,
+   "committed": 93.43,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    56,
+    56
+   ],
+   "total": 3136,
+   "bad": 186,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 186,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 153,
+   "areaText": 0,
+   "areaGlyph": 676,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    56,
+    56
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_true_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 93.69,
+   "committed": 92.98,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    57,
+    57
+   ],
+   "total": 3249,
+   "bad": 205,
+   "missing": 23,
+   "extra": 0,
+   "wrong": 182,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 172,
+   "areaText": 0,
+   "areaGlyph": 901,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    58,
+    58
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 94.6,
+   "committed": 94.12,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    64,
+    64
+   ],
+   "total": 4096,
+   "bad": 221,
+   "missing": 19,
+   "extra": 0,
+   "wrong": 202,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 188,
+   "areaText": 0,
+   "areaGlyph": 932,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    64,
+    64
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xl_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 93.69,
+   "committed": 92.98,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    57,
+    57
+   ],
+   "total": 3249,
+   "bad": 205,
+   "missing": 23,
+   "extra": 0,
+   "wrong": 182,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 172,
+   "areaText": 0,
+   "areaGlyph": 901,
+   "drawn": [
+    56,
+    56
+   ],
+   "root": [
+    56,
+    56
+   ],
+   "clip": [
+    72,
+    72
+   ],
+   "refTrue": [
+    58,
+    58
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 87.79,
+   "committed": 87.93,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    27,
+    27
+   ],
+   "total": 729,
+   "bad": 89,
+   "missing": 9,
+   "extra": 14,
+   "wrong": 66,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    42,
+    42
+   ],
+   "refTrue": [
+    28,
+    28
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 94.92,
+   "committed": 95.02,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 52,
+   "missing": 0,
+   "extra": 23,
+   "wrong": 29,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    42,
+    42
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 87.79,
+   "committed": 87.93,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    27,
+    27
+   ],
+   "total": 729,
+   "bad": 89,
+   "missing": 9,
+   "extra": 14,
+   "wrong": 66,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    42,
+    42
+   ],
+   "refTrue": [
+    28,
+    28
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 97.74,
+   "committed": 97.92,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    24,
+    24
+   ],
+   "total": 576,
+   "bad": 13,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 13,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    24,
+    24
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 97.75,
+   "committed": 97.75,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 23,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 23,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 97.74,
+   "committed": 97.92,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    24,
+    24
+   ],
+   "total": 576,
+   "bad": 13,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 13,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 0,
+   "areaText": 0,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    24,
+    24
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 84.48,
+   "committed": 84.48,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    25,
+    25
+   ],
+   "total": 625,
+   "bad": 97,
+   "missing": 1,
+   "extra": 11,
+   "wrong": 85,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 16,
+   "areaText": 0,
+   "areaGlyph": 49,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    26,
+    26
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 94.24,
+   "committed": 94.24,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 59,
+   "missing": 0,
+   "extra": 17,
+   "wrong": 42,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 34,
+   "areaText": 0,
+   "areaGlyph": 64,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 84.48,
+   "committed": 84.48,
+   "agrees": true,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    25,
+    25
+   ],
+   "total": 625,
+   "bad": 97,
+   "missing": 1,
+   "extra": 11,
+   "wrong": 85,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 16,
+   "areaText": 0,
+   "areaGlyph": 49,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    26,
+    26
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_true_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 93.69,
+   "committed": 90.4,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    27,
+    27
+   ],
+   "total": 729,
+   "bad": 46,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 46,
+   "unreachable": 0,
+   "inText": 34,
+   "inGlyph": 0,
+   "areaText": 340,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    42,
+    42
+   ],
+   "refTrue": [
+    28,
+    28
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_true_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 96.97,
+   "committed": 95.8,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 31,
+   "missing": 0,
+   "extra": 6,
+   "wrong": 25,
+   "unreachable": 0,
+   "inText": 25,
+   "inGlyph": 0,
+   "areaText": 340,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    42,
+    42
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_true_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 93.69,
+   "committed": 90.4,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    27,
+    27
+   ],
+   "total": 729,
+   "bad": 46,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 46,
+   "unreachable": 0,
+   "inText": 34,
+   "inGlyph": 0,
+   "areaText": 340,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    42,
+    42
+   ],
+   "refTrue": [
+    28,
+    28
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_true_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 95.66,
+   "committed": 92.88,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    24,
+    24
+   ],
+   "total": 576,
+   "bad": 25,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 25,
+   "unreachable": 0,
+   "inText": 25,
+   "inGlyph": 0,
+   "areaText": 340,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    24,
+    24
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_true_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 97.56,
+   "committed": 96,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 25,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 25,
+   "unreachable": 0,
+   "inText": 25,
+   "inGlyph": 0,
+   "areaText": 340,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_true_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 95.66,
+   "committed": 92.88,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    24,
+    24
+   ],
+   "total": 576,
+   "bad": 25,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 25,
+   "unreachable": 0,
+   "inText": 25,
+   "inGlyph": 0,
+   "areaText": 340,
+   "areaGlyph": 0,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    24,
+    24
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_true_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 92.32,
+   "committed": 89.92,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    25,
+    25
+   ],
+   "total": 625,
+   "bad": 48,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 48,
+   "unreachable": 0,
+   "inText": 40,
+   "inGlyph": 8,
+   "areaText": 340,
+   "areaGlyph": 29,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    26,
+    26
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_true_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 95.7,
+   "committed": 94.04,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 44,
+   "missing": 0,
+   "extra": 4,
+   "wrong": 40,
+   "unreachable": 0,
+   "inText": 30,
+   "inGlyph": 14,
+   "areaText": 340,
+   "areaGlyph": 44,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_false_text_true_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 92.32,
+   "committed": 89.92,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    25,
+    25
+   ],
+   "total": 625,
+   "bad": 48,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 48,
+   "unreachable": 0,
+   "inText": 40,
+   "inGlyph": 8,
+   "areaText": 340,
+   "areaGlyph": 29,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    40,
+    40
+   ],
+   "refTrue": [
+    26,
+    26
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -7,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_true_text_false_status_icon_company_state_default",
+   "comp": "Avatar",
+   "score": 91.36,
+   "committed": 89.3,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    27,
+    27
+   ],
+   "total": 729,
+   "bad": 63,
+   "missing": 0,
+   "extra": 3,
+   "wrong": 60,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 63,
+   "areaText": 0,
+   "areaGlyph": 600,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    44,
+    42
+   ],
+   "refTrue": [
+    28,
+    28
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_true_text_false_status_icon_company_state_focused",
+   "comp": "Avatar",
+   "score": 93.85,
+   "committed": 93.65,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 63,
+   "missing": 0,
+   "extra": 10,
+   "wrong": 53,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 61,
+   "areaText": 0,
+   "areaGlyph": 650,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    44,
+    42
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_true_text_false_status_icon_company_state_hover",
+   "comp": "Avatar",
+   "score": 91.36,
+   "committed": 89.3,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    27,
+    27
+   ],
+   "total": 729,
+   "bad": 63,
+   "missing": 0,
+   "extra": 3,
+   "wrong": 60,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 63,
+   "areaText": 0,
+   "areaGlyph": 600,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    44,
+    42
+   ],
+   "refTrue": [
+    28,
+    28
+   ],
+   "refOverflow": [
+    4,
+    4
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_true_text_false_status_icon_false_state_default",
+   "comp": "Avatar",
+   "score": 89.67,
+   "committed": 89,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    25,
+    24
+   ],
+   "total": 600,
+   "bad": 62,
+   "missing": 0,
+   "extra": 4,
+   "wrong": 58,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 62,
+   "areaText": 0,
+   "areaGlyph": 528,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    44,
+    40
+   ],
+   "refTrue": [
+    24,
+    24
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_true_text_false_status_icon_false_state_focused",
+   "comp": "Avatar",
+   "score": 94.34,
+   "committed": 93.95,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 58,
+   "missing": 0,
+   "extra": 0,
+   "wrong": 58,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 58,
+   "areaText": 0,
+   "areaGlyph": 650,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    44,
+    40
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_true_text_false_status_icon_false_state_hover",
+   "comp": "Avatar",
+   "score": 89.67,
+   "committed": 89,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    25,
+    24
+   ],
+   "total": 600,
+   "bad": 62,
+   "missing": 0,
+   "extra": 4,
+   "wrong": 58,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 62,
+   "areaText": 0,
+   "areaGlyph": 528,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    44,
+    40
+   ],
+   "refTrue": [
+    24,
+    24
+   ],
+   "refOverflow": [
+    0,
+    0
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -8
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_true_text_false_status_icon_online_indicator_state_default",
+   "comp": "Avatar",
+   "score": 88.64,
+   "committed": 86.56,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    25,
+    25
+   ],
+   "total": 625,
+   "bad": 71,
+   "missing": 0,
+   "extra": 3,
+   "wrong": 68,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 71,
+   "areaText": 0,
+   "areaGlyph": 550,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    44,
+    40
+   ],
+   "refTrue": [
+    26,
+    26
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -7
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_true_text_false_status_icon_online_indicator_state_focused",
+   "comp": "Avatar",
+   "score": 92.29,
+   "committed": 91.89,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    32,
+    32
+   ],
+   "total": 1024,
+   "bad": 79,
+   "missing": 0,
+   "extra": 6,
+   "wrong": 73,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 79,
+   "areaText": 0,
+   "areaGlyph": 650,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    44,
+    40
+   ],
+   "refTrue": [
+    32,
+    32
+   ],
+   "refOverflow": [
+    8,
+    8
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -4,
+    -4
+   ]
+  },
+  {
+   "set": "avatar",
+   "variant": "size_xs_placeholder_true_text_false_status_icon_online_indicator_state_hover",
+   "comp": "Avatar",
+   "score": 88.64,
+   "committed": 86.56,
+   "agrees": false,
+   "ceiling": null,
+   "ceilingAnchored": null,
+   "scale": 2,
+   "frame": [
+    25,
+    25
+   ],
+   "total": 625,
+   "bad": 71,
+   "missing": 0,
+   "extra": 3,
+   "wrong": 68,
+   "unreachable": 0,
+   "inText": 0,
+   "inGlyph": 71,
+   "areaText": 0,
+   "areaGlyph": 550,
+   "drawn": [
+    24,
+    24
+   ],
+   "root": [
+    24,
+    24
+   ],
+   "clip": [
+    44,
+    40
+   ],
+   "refTrue": [
+    26,
+    26
+   ],
+   "refOverflow": [
+    2,
+    2
+   ],
+   "anchorErr": [
+    0,
+    0
+   ],
+   "placeRef": [
+    -8,
+    -7
+   ]
+  }
+ ]
+}
