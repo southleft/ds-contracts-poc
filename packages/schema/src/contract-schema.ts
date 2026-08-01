@@ -187,12 +187,25 @@ export const TokensByPropFieldSchema = z.union([
  *  is a component-private literal (Polaris `--pc-*` pixel geometry), resolved
  *  deterministically through a var() chain — never invented, never minted
  *  into a token. Bounded grammar: px/rem/em/unitless numbers, hex and
- *  rgb()/rgba() colors, and the CSS keywords transparent/inherit/currentColor. */
+ *  rgb()/rgba() colors, the CSS keywords transparent/inherit/currentColor,
+ *  and (v16, gap-closing round 6) the CONTENT-SIZED keyword `fit-content`.
+ *
+ *  `fit-content` earns its place because a HUG axis is a FACT, not a number.
+ *  A Figma frame that hugs on an axis has no design-authored measure there —
+ *  its drawn box is a MEASUREMENT OF ITS DEFAULT CONTENT. Pinning that
+ *  measurement as a literal px is a wrong-name: the host that overrides the
+ *  content gets a box sized for content it no longer holds (field case: the
+ *  UUI Tooltip's hug plane pinned at 112px, drawn from "This is a tooltip",
+ *  reused by ProgressBar whose label says "40%" — a 52px bubble adrift in a
+ *  112px root whose shadow, the bubble's only edge, drew the wrong
+ *  rectangle). `fit-content` is the exact CSS twin of Figma HUG, and it is
+ *  the one sizing keyword this grammar admits: `auto`/`max-content`/
+ *  `stretch` are NOT synonyms for HUG in a flex context and stay out. */
 export const LITERAL_VALUE_RE =
-  /^(-?\d+(\.\d+)?(px|rem|em|%)?|transparent|inherit|currentColor|#[0-9a-fA-F]{3,8}|rgba?\([\d ,./%]+\))$/;
+  /^(-?\d+(\.\d+)?(px|rem|em|%)?|transparent|inherit|currentColor|fit-content|#[0-9a-fA-F]{3,8}|rgba?\([\d ,./%]+\))$/;
 export const LiteralValueSchema = z
   .string()
-  .regex(LITERAL_VALUE_RE, 'Literal value must be a px/rem/em/%/number, hex or rgb()/rgba() color, or transparent/inherit/currentColor');
+  .regex(LITERAL_VALUE_RE, 'Literal value must be a px/rem/em/%/number, hex or rgb()/rgba() color, fit-content, or transparent/inherit/currentColor');
 
 /** v14: the channels a literal may ride — geometry and paint channels where
  *  foreign systems keep component-private literals. Everything else refuses

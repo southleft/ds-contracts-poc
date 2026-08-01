@@ -137,6 +137,10 @@
           }
         }
       },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
       "tokens": {
         "background-color": "{imported.button-group-base.root.background-color.{state}.{current}}",
         "border-color": "{imported.button-group-base.root.border-color}",

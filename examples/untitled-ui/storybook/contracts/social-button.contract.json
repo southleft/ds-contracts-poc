@@ -155,6 +155,10 @@
           }
         }
       },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
       "tokens": {
         "background-color": "{imported.social-button.root.background-color.{social}.{theme}.{state}}",
         "border-color": "{imported.social-button.root.border-color.{social}.{theme}}",

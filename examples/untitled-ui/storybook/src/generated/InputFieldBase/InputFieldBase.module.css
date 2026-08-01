@@ -10,6 +10,7 @@
   border: 0;
   gap: var(--imported-input-field-base-root-gap);
   width: var(--imported-input-field-base-root-width);
+  height: fit-content;
 }
 
 .inputWithLabel {

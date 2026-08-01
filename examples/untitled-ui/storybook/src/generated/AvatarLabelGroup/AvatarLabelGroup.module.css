@@ -8,6 +8,8 @@
   flex-direction: row;
   align-items: center;
   border: 0;
+  width: fit-content;
+  height: fit-content;
 }
 
 .size-md {

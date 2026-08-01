@@ -9,6 +9,7 @@
   align-items: center;
   border: 0;
   width: var(--imported-progress-bar-root-width);
+  height: fit-content;
 }
 
 .label-right {
@@ -53,6 +54,18 @@
   border-radius: var(--imported-shared-size-8);
   height: var(--imported-shared-size-8);
   position: relative;
+}
+
+.label-bottom .progressBar {
+  width: 100%;
+}
+
+.label-topFloating .progressBar {
+  width: 100%;
+}
+
+.label-bottomFloating .progressBar {
+  width: 100%;
 }
 
 .Background {

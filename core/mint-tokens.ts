@@ -92,7 +92,7 @@ export interface MintObservation {
    *  stops into a native GRADIENT_LINEAR paint; dump v1.9 image-fill assets
    *  ride this channel as url('./assets/images/<hash>.png') refs — the
    *  canvas emitter ledgers those as gradientMiss BY NAME, never a throw). */
-  kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient';
+  kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient' | 'size';
   /** One entry per variant the node occurs in. */
   occurrences: MintOccurrence[];
   /** OPT-IN sparse-coverage fill for PRESENCE-shaped channels (canvas→code
@@ -181,9 +181,25 @@ const formatValue = (kind: MintKind, value: string | number): string =>
     ? `#${String(value).replace(/^#/, '').toLowerCase()}`
     : kind === 'px'
       ? `${value}px`
-      : String(value);
+      : // GAP-CLOSING ROUND 6 — 'size' is 'px' that may also carry a SIZING
+        // KEYWORD. A Figma axis is FIXED (a number) or HUG (content-sized);
+        // one channel can be both across variants (UUI Tooltip: width FIXED
+        // where Supporting text=True, HUG where False), so the observation
+        // stream is mixed and a numeric-only formatter would spell the
+        // keyword '<kw>px'. Numbers format exactly like 'px'.
+        kind === 'size' && typeof value === 'number'
+        ? `${value}px`
+        : String(value);
 
-const DTCG_TYPE: Record<MintKind, string> = {
+/** DTCG $type for a claimed leaf — a FUNCTION of the value, not only the
+ *  kind: a 'size' leaf holding a number is a dimension, one holding a sizing
+ *  keyword (`fit-content`) is not a DTCG type at all, and the repo's
+ *  standing rule (core/wrap-plain-tokens.ts) is that an unnameable shape gets
+ *  NO invented `$type` rather than a wrong one. */
+const dtcgType = (kind: MintKind, value: string | number): string | undefined =>
+  kind === 'size' ? (typeof value === 'number' ? 'dimension' : undefined) : DTCG_TYPE[kind];
+
+const DTCG_TYPE: Record<Exclude<MintKind, 'size'>, string> = {
   color: 'color',
   px: 'dimension',
   number: 'number',
@@ -398,7 +414,9 @@ export function mintTokens(
   // Leaf ledger: path → { value, type, entry }. A path claim with the SAME
   // value merges usage sites; a different value takes a numeric suffix —
   // names stay mechanical, values are never overwritten.
-  const leaves = new Map<string, MintedEntry & { type: string }>();
+  // ROUND 6: `type` is OPTIONAL — a leaf whose value shape has no DTCG type
+  // (a sizing keyword) ships `{ $value }` alone rather than a wrong one.
+  const leaves = new Map<string, MintedEntry & { type?: string }>();
   /** A leaf may not sit on another leaf's path (a group under a leaf, or a
    *  leaf on a group's prefix, would corrupt the DTCG tree). */
   const hasDescendants = (path: string) => [...leaves.keys()].some((k) => k.startsWith(`${path}.`));
@@ -414,7 +432,7 @@ export function mintTokens(
       const existing = leaves.get(path);
       if (!existing) {
         if (hasDescendants(path)) continue;
-        leaves.set(path, { ref: `{${path}}`, value: formatted, usageSites: [usageSite], type: DTCG_TYPE[kind] });
+        leaves.set(path, { ref: `{${path}}`, value: formatted, usageSites: [usageSite], type: dtcgType(kind, value) });
         return path;
       }
       if (existing.value === formatted) {
@@ -468,7 +486,8 @@ export function mintTokens(
     }
   });
 
-  // Leaves → nested DTCG tree (each leaf carries its claim's $type).
+  // Leaves → nested DTCG tree (each leaf carries its claim's $type — omitted
+  // where the value's shape has no DTCG type to name, see dtcgType).
   const tree: Record<string, unknown> = {};
   for (const [path, entry] of leaves) {
     const segs = path.split('.');
@@ -476,7 +495,7 @@ export function mintTokens(
     for (const seg of segs.slice(0, -1)) {
       node = (node[seg] ??= {}) as Record<string, unknown>;
     }
-    node[segs[segs.length - 1]] = { $value: entry.value, $type: entry.type };
+    node[segs[segs.length - 1]] = { $value: entry.value, ...(entry.type !== undefined ? { $type: entry.type } : {}) };
   }
 
   return {

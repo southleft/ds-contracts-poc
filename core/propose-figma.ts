@@ -1166,7 +1166,7 @@ function mintObservation(
   target: Record<string, string>,
   where: string,
   cssProperty: string,
-  kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient',
+  kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient' | 'size',
   occ: Array<{ variant: string; value: string | number }>,
   source?: string,
   /** Presence-shaped channels only (mint-tokens MintObservation.sparse):
@@ -2719,10 +2719,120 @@ function stretchEvidence(m: Merged): boolean {
   return eligible.every((c) => c.occ.every((o) => o.node.fillWidth === true));
 }
 
+/** GAP-CLOSING ROUND 6 — the parent's auto-layout MODE is not one scalar when
+ *  the parent's own direction is a FUNCTION of an axis. Figma's FILL is one
+ *  flag with two meanings: along the parent's PRIMARY axis it grows, ACROSS
+ *  that axis it stretches. `buildChildParts`/`buildPart` used to hand every
+ *  child ONE mode — the default variant's — so a child drawn fillWidth under
+ *  a parent that is a ROW in the default variant and a COLUMN in others got
+ *  the row meaning everywhere and filled the wrong dimension. (Field case:
+ *  UUI ProgressBar — root HORIZONTAL for label=right|false, VERTICAL for
+ *  bottom|topFloating|bottomFloating; the 320px track shrink-wrapped to
+ *  112px and `align-items: flex-end` pushed it 208px right.)
+ *
+ *  `base` is the DEFAULT variant's mode — every pre-existing rule reads it
+ *  and its meaning is unchanged, so a parent with ONE mode across every
+ *  variant proposes exactly the bytes it always did. */
+interface ParentModes {
+  base: 'HORIZONTAL' | 'VERTICAL' | null;
+  /** variant name → that variant's parent auto-layout mode. */
+  byVariant: Map<string, 'HORIZONTAL' | 'VERTICAL' | null>;
+}
+
+/** The per-variant parent-mode witness for a parent's children. */
+function parentModesOf(m: Merged): ParentModes {
+  const byVariant = new Map<string, 'HORIZONTAL' | 'VERTICAL' | null>();
+  for (const o of m.occ) byVariant.set(o.variant, o.node.layout?.mode ?? null);
+  return { base: m.occ[0]?.node.layout?.mode ?? null, byVariant };
+}
+
+/** The CROSS-AXIS half of a per-variant FILL, carried inside the EXISTING
+ *  `literalsByProp` vocabulary.
+ *
+ *  Fires ONLY when the parent's mode is MIXED across this part's own
+ *  occurrences and the part draws fillWidth in every one of them. The
+ *  variants whose parent is a COLUMN are a cross-axis stretch — `width:
+ *  100%` — while the ROW variants keep the `layout.grow` the base plane
+ *  already carries. The split must be a pure function of ONE declared ENUM
+ *  axis with full value coverage (the layoutByProp discipline); anything
+ *  less correlated is a NAMED refusal, never a silent guess.
+ *
+ *  Not re-spelled in the emitter on purpose: `layout.grow` has TWO
+ *  provenances — Figma FILL on the design leg and an OBSERVED `flex: 1 1
+ *  auto` on the code leg (examples/astryx dialog `inner`) — so changing what
+ *  grow emits would drift a leg that never saw a Figma parent at all. The
+ *  fact splits HERE, at the only place that knows the parent's mode per
+ *  variant. Uniform parents are untouched: an all-ROW parent already carries
+ *  grow, an all-COLUMN parent already carries the parent-side
+ *  `align: stretch` (stretchEvidence / conformance layout-fill-width-column). */
+function crossAxisFillByProp(
+  m: Merged,
+  parentModes: ParentModes | null,
+  part: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+): void {
+  if (!parentModes) return;
+  const modes = m.occ.map((o) => ({
+    variant: o.variant,
+    mode: parentModes.byVariant.get(o.variant) ?? parentModes.base,
+  }));
+  const columns = modes.filter((x) => x.mode === 'VERTICAL');
+  const rows = modes.filter((x) => x.mode === 'HORIZONTAL');
+  if (columns.length === 0 || rows.length === 0) return; // uniform — the existing rules own it
+  if (!m.occ.every((o) => o.node.fillWidth === true)) return;
+  for (const axis of ctx.axes) {
+    if (isBoolAxis(axis.values)) continue;
+    const byValue = new Map<string, 'HORIZONTAL' | 'VERTICAL' | null>();
+    let fits = true;
+    for (const x of modes) {
+      const value = axisValuesOf(x.variant)[axis.property];
+      if (value === undefined) {
+        fits = false;
+        break;
+      }
+      const seen = byValue.get(value);
+      if (seen !== undefined && seen !== x.mode) {
+        fits = false;
+        break;
+      }
+      byValue.set(value, x.mode);
+    }
+    if (!fits || !axis.values.every((v) => byValue.has(v))) continue;
+    const lbp =
+      (part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
+    // The referee's channel+prop rule: a second claimant on `width` would
+    // make the cascade order the meaning.
+    if (lbp.some((e) => e.prop !== axis.propName && Object.values(e.map).some((o) => 'width' in o))) break;
+    let entry = lbp.find((e) => e.prop === axis.propName);
+    if (!entry) {
+      entry = { prop: axis.propName, map: {} };
+      lbp.push(entry);
+    }
+    const stretched: string[] = [];
+    for (const [value, mode] of byValue) {
+      if (mode !== 'VERTICAL') continue;
+      const key = camel(value);
+      if ((entry.map[key] ??= {}).width !== undefined) continue; // an observed width already claims it
+      entry.map[key].width = '100%';
+      stretched.push(key);
+    }
+    if (stretched.length === 0) return;
+    part.literalsByProp = lbp;
+    ctx.notes.push(
+      `${where}: drawn FILL-width under a parent whose auto-layout mode is a function of axis "${axis.property}" — a Figma FILL is a GROW along the parent's primary axis and a cross-axis STRETCH across it, so the two meanings split by variant: \`layout.grow\` carries the ROW plane(s) and the COLUMN plane(s) (${stretched.join(', ')}) carry width: 100% through literalsByProp on \`${axis.propName}\` (the cross-axis stretch). Carrying the default variant's meaning everywhere filled the wrong dimension`,
+    );
+    return;
+  }
+  ctx.notes.push(
+    `${where}: drawn FILL-width under a parent whose auto-layout mode CHANGES across variants (${rows.length} row, ${columns.length} column) without correlating to any variant axis — the cross-axis stretch is NOT carried (the row meaning, \`layout.grow\`, stands for every variant); review`,
+  );
+}
+
 function invertLayout(
   m: Merged,
   isRoot: boolean,
-  parentMode: 'HORIZONTAL' | 'VERTICAL' | null,
+  parentModes: ParentModes | null,
   ctx: Ctx,
   where: string,
 ): Record<string, unknown> | undefined {
@@ -2730,6 +2840,11 @@ function invertLayout(
   const l = layouts[0];
   // Per-variant layout differences are handled by invertLayoutByProp (which
   // notes an uncorrelated spread); the base layout is the default variant's.
+  // `base` is likewise the DEFAULT variant's parent mode — the ROW meaning of
+  // FILL. Where the parent's mode is MIXED the COLUMN planes' cross-axis
+  // stretch rides crossAxisFillByProp instead (called next to every
+  // invertLayout site that owns a stylable part).
+  const parentMode = parentModes?.base ?? null;
   const grow =
     parentMode === 'HORIZONTAL' && m.occ.every((o) => o.node.fillWidth === true) ? true : undefined;
   if (!l) return grow ? { grow } : undefined;
@@ -2785,12 +2900,50 @@ function invertLayout(
  *  both already implemented for layoutByProp). Differences must be a
  *  function of exactly ONE enum axis with full value coverage; only the
  *  values that deviate from the default variant's tuple appear in the map.
- *  Anything less correlated keeps the named collapse note. */
+ *  Anything less correlated keeps the named collapse note.
+ *
+ *  GAP-CLOSING ROUND 6 — THE BOOLEAN HALF. `layoutByProp` is an ENUM-keyed
+ *  map (the emitters' referee says so by name: "layoutByProp prop must be an
+ *  enum prop"), so this search has always skipped boolean axes — and a
+ *  layout that is a pure function of a BOOLEAN was collapsing to the default
+ *  variant's with only a note. Field case: UUI DropdownListItem draws its
+ *  root `SPACE_BETWEEN` where Shortcut=True and `MIN` where False; the ⌘C
+ *  glyph rendered 135px left of where the canvas puts it in 6 of 12 scored
+ *  variants (masked until this round by a UA grey ground that made the
+ *  render's trimmed box the full 240px either way).
+ *
+ *  The fact has an EXISTING boolean carrier — `stylesWhen`, whose literal
+ *  whitelist already holds exactly the three channels this tuple carries
+ *  (flex-direction / justify-content / align-items) and whose boolean form
+ *  emits `.root[data-<prop>] { … }`. Nothing new is invented: the enum axis
+ *  keeps layoutByProp, the boolean axis takes stylesWhen. The one shape a
+ *  boolean cannot spell is a deviation on its FALSE value (stylesWhen's
+ *  boolean form is truthy-only, `equals` is enum-only) — that stays a NAMED
+ *  refusal. */
+type LayoutSplit =
+  | { kind: 'byProp'; byProp: Record<string, unknown> }
+  | { kind: 'stylesWhen'; stylesWhen: Array<{ prop: string; styles: Record<string, string> }> };
+
+const JUSTIFY_LITERAL: Record<string, string> = {
+  start: 'flex-start', center: 'center', end: 'flex-end', 'space-between': 'space-between',
+};
+const ALIGN_LITERAL: Record<string, string> = {
+  start: 'flex-start', center: 'center', end: 'flex-end', stretch: 'stretch', baseline: 'baseline',
+};
+
+/** Attach whichever spelling the split resolved to (absent = no-op). */
+function applyLayoutSplit(holder: Record<string, unknown>, split: LayoutSplit | undefined): void {
+  if (!split) return;
+  if (split.kind === 'byProp') { holder.layoutByProp = split.byProp; return; }
+  const existing = (holder.stylesWhen as Array<{ prop: string; styles: Record<string, string> }> | undefined) ?? [];
+  holder.stylesWhen = [...existing, ...split.stylesWhen];
+}
+
 function invertLayoutByProp(
   m: Merged,
   ctx: Ctx,
   where: string,
-): Record<string, unknown> | undefined {
+): LayoutSplit | undefined {
   interface Tuple {
     direction: string;
     justify: string;
@@ -2852,7 +3005,43 @@ function invertLayoutByProp(
     ctx.notes.push(
       `${where}: auto-layout differs across variants as a function of axis "${axis.property}" — proposed layoutByProp on \`${axis.propName}\` (${Object.keys(map).length} override(s); reversed child order spelled as -reverse directions)`,
     );
-    return { prop: axis.propName, map };
+    return { kind: 'byProp', byProp: { prop: axis.propName, map } };
+  }
+  // ROUND 6 — the BOOLEAN axis, carried through stylesWhen (see the header).
+  for (const axis of ctx.axes) {
+    if (!isBoolAxis(axis.values)) continue;
+    const byValue = new Map<string, Tuple>();
+    let fits = true;
+    for (const t of tuples) {
+      const value = axisValuesOf(t.variant)[axis.property];
+      if (value === undefined) { fits = false; break; }
+      const seen = byValue.get(value);
+      if (seen && key(seen) !== key(t.tuple!)) { fits = false; break; }
+      byValue.set(value, t.tuple!);
+    }
+    if (!fits || byValue.size !== 2) continue;
+    // Which drawn value spells TRUE? isBoolAxis guarantees a literal
+    // true/false pair; the variant-name spelling is the axis's own casing.
+    const trueValue = [...byValue.keys()].find((v) => /^true$/i.test(v));
+    if (trueValue === undefined) continue;
+    const onTrue = byValue.get(trueValue)!;
+    if (key(onTrue) === key(base)) {
+      // The deviation sits on the FALSE plane and stylesWhen's boolean form
+      // is truthy-only — no spelling exists, so it is named, not guessed.
+      ctx.notes.push(
+        `${where}: auto-layout differs across variants as a function of the BOOLEAN axis "${axis.property}", but the deviating plane is its FALSE value — stylesWhen's boolean condition is truthy-only (\`equals\` is enum-only) and layoutByProp needs an enum prop, so the difference is NOT carried; the default variant's layout stands for both planes. Re-draw the axis with the deviating plane as TRUE, or promote it to an enum, to carry it`,
+      );
+      break;
+    }
+    const styles: Record<string, string> = {};
+    if (onTrue.direction !== base.direction) styles['flex-direction'] = onTrue.direction;
+    if (onTrue.justify !== base.justify) styles['justify-content'] = JUSTIFY_LITERAL[onTrue.justify] ?? onTrue.justify;
+    if (onTrue.align !== base.align) styles['align-items'] = ALIGN_LITERAL[onTrue.align] ?? onTrue.align;
+    if (Object.keys(styles).length === 0) break;
+    ctx.notes.push(
+      `${where}: auto-layout differs across variants as a function of the BOOLEAN axis "${axis.property}" — layoutByProp is an ENUM-keyed map, so the same fact carries through \`stylesWhen\` on \`${axis.propName}\` (${Object.entries(styles).map(([k, v]) => `${k}: ${v}`).join('; ')}), the existing boolean-conditioned literal-CSS vocabulary; the code leg emits \`.root[data-${axis.propName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}]\`, the canvas leg does not represent conditional restyling (standing documented limit)`,
+    );
+    return { kind: 'stylesWhen', stylesWhen: [{ prop: axis.propName, styles }] };
   }
   ctx.notes.push(
     `${where}: auto-layout differs across variants without correlating to any variant axis — using the default variant's`,
@@ -3923,7 +4112,7 @@ function buildRepeatPart(run: Merged[], ctx: Ctx, where: string, selfKey: string
  *  walk (ONE walker serves buildPart's frame branch and the root). */
 function buildChildParts(
   children: Merged[],
-  mode: 'HORIZONTAL' | 'VERTICAL' | null,
+  mode: ParentModes | null,
   ctx: Ctx,
   where: string,
   selfKey: string,
@@ -3970,7 +4159,7 @@ function buildChildParts(
 
 function buildPart(
   m: Merged,
-  parentMode: 'HORIZONTAL' | 'VERTICAL' | null,
+  parentMode: ParentModes | null,
   ctx: Ctx,
   where: string,
   /** This part's own claimed key — the parent-derived-prefix context for its
@@ -4345,8 +4534,7 @@ function buildPart(
   if (isSpacer(m)) {
     const layout = invertLayout(m, false, parentMode, ctx, where);
     if (layout) part.layout = layout;
-    const byProp = invertLayoutByProp(m, ctx, where);
-    if (byProp) part.layoutByProp = byProp;
+    applyLayoutSplit(part, invertLayoutByProp(m, ctx, where));
     if (m.occ.some((o) => absBoxOf(o.node) !== undefined)) {
       ctx.notes.push(
         `${where}: absolute placement captured (dump v1.7 \`abs\`) on a SPACER part — a spacer's job is in-flow growth; placement not carried (ledgered by name)`,
@@ -4409,8 +4597,7 @@ function buildPart(
   if (soleChild && soleSwap) {
     const layout = invertLayout(m, false, parentMode, ctx, where);
     if (layout) part.layout = layout;
-    const byProp = invertLayoutByProp(m, ctx, where);
-    if (byProp) part.layoutByProp = byProp;
+    applyLayoutSplit(part, invertLayoutByProp(m, ctx, where));
     invertNodeOpacity(m, part, tokens, ctx, where);
     invertNodeEffects(m, tokens, ctx, where);
     attachTokens(ctx, part, tokens);
@@ -4438,8 +4625,10 @@ function buildPart(
 
   const layout = invertLayout(m, false, parentMode, ctx, where);
   if (layout) part.layout = layout;
-  const byProp = invertLayoutByProp(m, ctx, where);
-  if (byProp) part.layoutByProp = byProp;
+  applyLayoutSplit(part, invertLayoutByProp(m, ctx, where));
+  // The COLUMN half of a per-variant FILL (round 6) — no-op unless the
+  // parent's mode is a function of an axis and this part draws fillWidth.
+  crossAxisFillByProp(m, parentMode, part, ctx, where);
   invertNodeOpacity(m, part, tokens, ctx, where);
   invertNodeEffects(m, tokens, ctx, where);
   // Overlay-flattened class: a FRAME/GROUP with a captured abs box becomes a
@@ -4451,7 +4640,7 @@ function buildPart(
   attachTokens(ctx, part, tokens);
   const visibleRef = unifiedPropRef(m, 'visible', ctx, where);
   if (visibleRef) applyVisibleBinding(part, visibleRef, ctx, where, m);
-  const mode = m.occ[0].node.layout?.mode ?? null;
+  const mode = parentModesOf(m);
   // Pre-order key claiming + P9 run detection — see buildChildParts.
   const parts = buildChildParts(m.children, mode, ctx, where, selfKey);
   if (Object.keys(parts).length > 0) part.parts = parts;
@@ -5261,7 +5450,7 @@ function buildChildStub(
  *  to a variable stays the variable's. Field case: the CBDS Dialog's
  *  per-size widths (320/496/800) — without them the body text never wraps
  *  and every variant renders hundreds of px too wide. */
-function invertRootFixedSize(merged: Merged, rootTokens: Record<string, string>, ctx: Ctx, where: string) {
+function invertRootFixedSize(merged: Merged, root: Record<string, unknown>, rootTokens: Record<string, string>, ctx: Ctx, where: string) {
   if (!ctx.mint) return;
   // Overlay-flattened class (round 2 iteration 2): a root WITHOUT auto-layout
   // is a canvas-positioned frame — it cannot hug, so BOTH axes are drawn
@@ -5294,39 +5483,72 @@ function invertRootFixedSize(merged: Merged, rootTokens: Record<string, string>,
   // Dialog width minted 272 for a drawn 320 box.)
   for (const dim of ['width', 'height'] as const) {
     const fixedIn = withBox.filter((o) => fixedAxis(o, dim));
-    if (fixedIn.length === 0) continue;
     if (rootTokens[dim] !== undefined || merged.occ.some((o) => o.node.bound?.[dim])) continue;
+    // GAP-CLOSING ROUND 6 — A HUG AXIS IS A FACT, NOT A NUMBER.
+    //
+    // A hugging axis has no design-authored measure: its drawn box is a
+    // MEASUREMENT OF THE DEFAULT CONTENT. Two carriage bugs came out of
+    // treating it as a number (or as nothing at all), and both are the same
+    // mistake with different blast radii:
+    //
+    //  · ALL-HUG (this branch) used to propose NOTHING, so the emitted root
+    //    got the CSS default `auto`. `auto` is not HUG: as a flex child it
+    //    CROSS-STRETCHES. The UUI Tooltip hugs on both axes, and inside
+    //    ProgressBar's 8px-tall track its root stretched to 8px tall — the
+    //    box-shadow that is the light bubble's ONLY edge drew a 112×8 sliver
+    //    and no bubble appeared at all.
+    //  · MIXED fixed/hug pinned the hug planes at their drawn box. The same
+    //    Tooltip's hug plane pinned 112px, measured from "This is a
+    //    tooltip"; the host overrides the text to "40%", so a 52px bubble
+    //    sat in a 112px root.
+    //
+    // Both now carry `fit-content` — the exact CSS twin of Figma HUG, and
+    // one the canvas leg reads BACK as HUG (emit-figma-script: a
+    // fit-content width/height sets no fixedWidth/fixedHeight, which leaves
+    // primary/counterAxisSizingMode at their AUTO default, and NEVER bakes a
+    // NaN literal). The carriers differ because the FACTS differ: a uniform
+    // hug is one literal, a mixed axis is a per-variant channel and rides
+    // the mint's `size` kind (px on the fixed planes, the keyword on the hug
+    // planes) so the whole channel keeps ONE spelling.
+    if (fixedIn.length === 0) {
+      const literals = (root.literals as Record<string, string> | undefined) ?? {};
+      if (literals[dim] !== undefined) continue;
+      literals[dim] = 'fit-content';
+      root.literals = literals;
+      ctx.notes.push(
+        `${where}: root ${dim} HUGS in every variant — carried as the literal \`${dim}: fit-content\` (v16 grammar), the CSS twin of Figma HUG. The drawn ${[...new Set(withBox.map((o) => o.node.bbox![dim]))].join('/')}px is a measurement of the DEFAULT content, not a design value, so it is NOT minted; the emitted box is content-sized and no longer cross-stretches when this component is nested inside another`,
+      );
+      continue;
+    }
     if (fixedIn.length !== withBox.length) {
       // MIXED FIXED/HUG axis (round 2 iteration 6 — UUI Tooltip: width drawn
       // FIXED 328/320 where Supporting text=True, HUG where False; the
-      // supporting-text bubble rendered at container width). The WIDTH axis
-      // carries the same rigid spelling the all-FIXED case already ships
-      // (CBDS Dialog: minted root `width`): every variant's observed bbox —
-      // EXACT on the fixed planes; hug planes are PINNED at their DRAWN
-      // hugged box, a declared approximation (the hug behavior itself is not
-      // carried — content changes will not reflow those planes). max-width
-      // is NOT the spelling here: the emitters' fluid discipline pairs it
-      // with a fit-content floor, which a long single-line text raises past
-      // the cap and the drawn wrap never happens. A mixed HEIGHT axis stays
-      // a NAMED refusal — a pinned hug height would clip when DOM text
-      // metrics run taller than the canvas.
-      if (dim === 'width') {
-        mintObservation(
-          ctx,
-          rootTokens,
-          where,
-          'width',
-          'px',
-          withBox.map((o) => ({ variant: o.variant, value: Math.round(o.node.bbox![dim] * 100) / 100 })),
-        );
-        ctx.notes.push(
-          `${where}: root width is DRAWN FIXED in ${fixedIn.length}/${withBox.length} variants and HUG in the rest — minted as root width from every variant's observed bbox (exact where fixed; hug planes PINNED at their drawn hugged box, a declared approximation — review)`,
-        );
-      } else {
-        ctx.notes.push(
-          `${where}: root height is DRAWN FIXED in ${fixedIn.length}/${withBox.length} variants and HUG in the rest — NOT proposed (a pinned hug height would clip when DOM text runs taller than the canvas); review`,
-        );
-      }
+      // supporting-text bubble rendered at container width). Every variant's
+      // observed bbox carries on the FIXED planes — EXACT, the same rigid
+      // spelling the all-FIXED case already ships (CBDS Dialog: minted root
+      // `width`). Round 6: the HUG planes carry `fit-content` instead of the
+      // pinned drawn box, so the channel states the sizing MODE it actually
+      // observed on every plane. max-width is still NOT the spelling here:
+      // the emitters' fluid discipline pairs it with a fit-content floor,
+      // which a long single-line text raises past the cap and the drawn wrap
+      // never happens. A mixed HEIGHT axis now carries too — the old refusal
+      // ("a pinned hug height would clip when DOM text runs taller than the
+      // canvas") was a refusal of the PIN, and `fit-content` is exactly the
+      // spelling that cannot clip.
+      mintObservation(
+        ctx,
+        rootTokens,
+        where,
+        dim,
+        'size',
+        withBox.map((o) => ({
+          variant: o.variant,
+          value: fixedAxis(o, dim) ? Math.round(o.node.bbox![dim] * 100) / 100 : 'fit-content',
+        })),
+      );
+      ctx.notes.push(
+        `${where}: root ${dim} is DRAWN FIXED in ${fixedIn.length}/${withBox.length} variants and HUG in the rest — minted as root ${dim} with the fixed planes' observed bbox and \`fit-content\` on the hug planes (the sizing MODE each plane actually draws; a pinned hug measure would freeze a box sized for the DEFAULT content and clip or float whatever a host puts in it)`,
+      );
       continue;
     }
     mintObservation(
@@ -5987,8 +6209,7 @@ export function proposeFromDump(
   const rootKeyByChildName = new Map<string, string>();
   const rootLayout = invertLayout(merged, true, null, ctx, where);
   if (rootLayout) root.layout = rootLayout;
-  const rootByProp = invertLayoutByProp(merged, ctx, where);
-  if (rootByProp) root.layoutByProp = rootByProp;
+  applyLayoutSplit(root, invertLayoutByProp(merged, ctx, where));
   const rootTokensByProp: ByPropCollector = { map: {} };
   const rootTokens = invertNodeTokens(merged, true, ctx, where, rootTokensByProp);
   // dump v1.7 tolerance ledger (root): an IMAGE fill on the variant root
@@ -6038,7 +6259,7 @@ export function proposeFromDump(
       `${where}/label: sole root text node named "label" is the generator's auto-injected children label — hoisted to root tokens, bound prop proposed as \`children\``,
     );
   } else {
-    const mode = merged.occ[0].node.layout?.mode ?? null;
+    const mode = parentModesOf(merged);
     // Pre-order key claiming + P9 run detection — see buildChildParts.
     // rootKeyByChildName maps drawn depth-1 names onto their claimed keys —
     // the part-level state diff (v13) resolves parts through it.
@@ -6051,7 +6272,7 @@ export function proposeFromDump(
   }
   invertNodeOpacity(merged, root, rootTokens, ctx, where);
   invertNodeEffects(merged, rootTokens, ctx, where);
-  invertRootFixedSize(merged, rootTokens, ctx, where);
+  invertRootFixedSize(merged, root, rootTokens, ctx, where);
   attachByProp(root, rootTokensByProp);
   attachTokens(ctx, root, rootTokens);
 
@@ -6395,8 +6616,14 @@ export function proposeFromDump(
       return !(s && s.bound === s.total && !partial.has(`${u.nodePath}|${u.property}`));
     });
     for (const e of minted.entries) {
+      // ROUND 6: a `size`-kind leaf may hold the CONTENT-SIZED keyword rather
+      // than a measure. "Rename it against your real tokens" would be a
+      // wrong-name — there is no design token for HUG — so a keyword leaf
+      // says what it actually is.
       ctx.notes.push(
-        `MINTED ${e.ref} = ${e.value} — machine-named from a resolved value — rename against your real tokens (provisional); bound at: ${e.usageSites.join(', ')}`,
+        e.value === 'fit-content'
+          ? `MINTED ${e.ref} = fit-content — a SIZING MODE, not a measure: this plane HUGS its content on the canvas, so the leaf states the mode instead of freezing a measurement of the default content. Nothing to rename (no design token names HUG); the canvas leg reads it back as Figma HUG sizing and upserts no variable for it; bound at: ${e.usageSites.join(', ')}`
+          : `MINTED ${e.ref} = ${e.value} — machine-named from a resolved value — rename against your real tokens (provisional); bound at: ${e.usageSites.join(', ')}`,
       );
     }
     mintedTokens = { tree: minted.tree, count: minted.count, entries: minted.entries };

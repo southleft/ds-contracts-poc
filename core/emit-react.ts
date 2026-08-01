@@ -91,6 +91,23 @@ export const UA_MARGIN_ELEMENTS = new Set([
   'p', 'blockquote', 'figure', 'hr', 'ul', 'ol', 'dl', 'dd', 'pre', 'fieldset',
 ]);
 
+/** GAP-CLOSING ROUND 6 — elements the UA stylesheet gives a default PAINT
+ *  (Chrome's `buttonface` ground plus the native control chrome behind
+ *  `appearance: auto`). Same reasoning as UA_MARGIN_ELEMENTS one block up:
+ *  the component's box is contract-governed, and a Figma frame with no fill
+ *  is transparent — so a root whose contract states NO background channel at
+ *  all must render with none, not with the user agent's. Deliberately just
+ *  `button`: the emitters' own nested-part chrome resets exactly this
+ *  element (see the `part.element === 'button'` branch), and the reset is
+ *  the paint half of that same spelling. Inputs/selects are NOT listed —
+ *  `appearance: none` on a checkbox erases the glyph, a different fact. */
+export const UA_PAINTED_ROOT_ELEMENTS = new Set(['button']);
+
+/** Channels that count as "this root states its own paint" — any one of them
+ *  means the UA default is already overridden and the reset is a no-op that
+ *  would only move bytes. */
+export const UA_PAINT_CHANNELS = ['background', 'background-color', 'background-image'] as const;
+
 /** Every element the contract's root can render as. */
 export function rootElementsOf(contract: Contract): string[] {
   const ebp = contract.semantics.elementByProp;
@@ -1249,6 +1266,40 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
     'border-width' in (root.literals ?? {});
   if (hasBorder) rootDecls.push('border-style: solid');
   else rootDecls.push('border: 0');
+  // GAP-CLOSING ROUND 6 — THE OTHER HALF OF THAT RESET.
+  //
+  // The line above already knows the principle: a contract that declares no
+  // border must not be finished by a UA one. The SAME contract declaring no
+  // BACKGROUND was left to the user agent, and on a `<button>` root that
+  // means Chrome's `buttonface` — an opaque #efefef ground (and
+  // rgba(239,239,239,0.3) when disabled) painted over the entire component
+  // box. A Figma frame with no fill is TRANSPARENT; the absence IS the drawn
+  // fact (the round-5 border-colour precedent, one asymmetry down).
+  //
+  // Measured: UUI DropdownListItem draws no root fill in any of its 24
+  // variants, and every emitted variant rendered on a full-bleed grey
+  // rectangle the canvas never had — 12 scored variants, 100% of the box.
+  //
+  // The reset is the SAME spelling this file already emits for a nested
+  // `element: 'button'` PART (appearance/background/border/font/color) — the
+  // paint half of it. It is gated on the root carrying NO background channel
+  // of any kind, so a button root that DOES paint (Social Button, Toggle
+  // base, Avatar add button) keeps exactly the bytes it had: this closes a
+  // hole, it does not restyle anything that was already stated.
+  const rootPaints = (holder: { tokens?: Record<string, string>; literals?: Record<string, string> } | undefined): boolean =>
+    UA_PAINT_CHANNELS.some((c) => c in (holder?.tokens ?? {}) || c in (holder?.literals ?? {}));
+  const hasBackground =
+    UA_PAINT_CHANNELS.some((c) => c in rootTokens) ||
+    rootPaints(root as never) ||
+    (Array.isArray(root.tokensByProp) ? root.tokensByProp : root.tokensByProp ? [root.tokensByProp] : []).some((e) =>
+      Object.values(e.map).some((o) => UA_PAINT_CHANNELS.some((c) => c in o)),
+    ) ||
+    (Array.isArray(root.literalsByProp) ? root.literalsByProp : root.literalsByProp ? [root.literalsByProp] : []).some((e) =>
+      Object.values(e.map).some((o) => UA_PAINT_CHANNELS.some((c) => c in o)),
+    );
+  if (UA_PAINTED_ROOT_ELEMENTS.has(contract.semantics.element) && !hasBackground) {
+    rootDecls.push('appearance: none', 'background: none');
+  }
   // Fluid components: a max-width binding means "fill available space up to
   // the token" — components are never rigid (fixed `width` is reserved for
   // genuinely fixed shapes like Avatar). min-width: fit-content keeps the

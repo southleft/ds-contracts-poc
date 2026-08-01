@@ -8,10 +8,13 @@
   flex-direction: row;
   align-items: center;
   border: 0;
+  appearance: none;
+  background: none;
   cursor: pointer;
   padding-inline: var(--imported-dropdown-list-item-root-padding-inline);
   padding-block: var(--imported-dropdown-list-item-root-padding-block);
   width: var(--imported-dropdown-list-item-root-width);
+  height: fit-content;
 }
 
 .root:disabled {
@@ -20,6 +23,10 @@
 
 .root:hover:not(:disabled) {
   background-color: var(--imported-dropdown-list-item-state-hover-background-color);
+}
+
+.root[data-shortcut] {
+  justify-content: space-between;
 }
 
 .Content {

@@ -110,6 +110,22 @@
           "layout": {
             "grow": true
           },
+          "literalsByProp": [
+            {
+              "prop": "label",
+              "map": {
+                "bottom": {
+                  "width": "100%"
+                },
+                "topFloating": {
+                  "width": "100%"
+                },
+                "bottomFloating": {
+                  "width": "100%"
+                }
+              }
+            }
+          ],
           "parts": {
             "Background": {
               "declared": {
@@ -286,6 +302,9 @@
             "line-height": "{imported.progress-bar.percentage.line-height}"
           }
         }
+      },
+      "literals": {
+        "height": "fit-content"
       },
       "tokens": {
         "gap": "{imported.progress-bar.root.gap.{label}}",

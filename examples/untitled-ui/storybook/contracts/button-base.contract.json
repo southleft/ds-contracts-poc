@@ -123,6 +123,10 @@
           }
         }
       },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
       "tokens": {
         "background-color": "{imported.button-base.root.background-color}",
         "border-color": "{imported.button-base.root.border-color}",

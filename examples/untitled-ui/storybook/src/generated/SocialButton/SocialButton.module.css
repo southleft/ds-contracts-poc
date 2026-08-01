@@ -11,6 +11,8 @@
   cursor: pointer;
   padding-block: var(--imported-social-button-root-padding-block);
   border-radius: var(--imported-social-button-root-border-radius);
+  width: fit-content;
+  height: fit-content;
 }
 
 .social-facebook {

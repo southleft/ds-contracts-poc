@@ -147,6 +147,10 @@
           }
         }
       },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
       "tokens": {
         "background-color": "{imported.badge-base.root.background-color}",
         "gap": "{imported.badge-base.root.gap.{icon}}",

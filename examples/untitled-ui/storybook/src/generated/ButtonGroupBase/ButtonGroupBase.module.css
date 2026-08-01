@@ -11,6 +11,8 @@
   border-color: var(--imported-button-group-base-root-border-color);
   gap: var(--imported-button-group-base-root-gap);
   padding-block: var(--imported-button-group-base-root-padding-block);
+  width: fit-content;
+  height: fit-content;
 }
 
 .state-default {

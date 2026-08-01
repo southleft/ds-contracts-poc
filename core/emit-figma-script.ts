@@ -1339,9 +1339,22 @@ function applyTokens(
         }
         break;
       }
-      case 'width':
+      // GAP-CLOSING ROUND 6 — a size channel may resolve to the CONTENT-SIZED
+      // keyword `fit-content` (a HUG axis: the inversion states the sizing
+      // MODE it observed instead of pinning a measurement of the default
+      // content). Figma's twin is HUG, and HUG is exactly what these two
+      // runtimes do when no fixedWidth/fixedHeight is compiled:
+      // primaryAxisSizingMode / counterAxisSizingMode are initialised to
+      // 'AUTO' and only forced FIXED inside `if (spec.fixedWidth ||
+      // spec.fixedHeight)`. So the fact goes back as HUG by carrying
+      // NOTHING here — and, crucially, we never reach `px('fit-content')`,
+      // which would have compiled `node.resize(NaN, …)` plus a bound
+      // variable whose value is the string 'fit-content'.
+      case 'width': {
+        if (isHugKeyword(resolveLiteral(tokenPath))) break;
         spec.fixedWidth = { px: px(resolveLiteral(tokenPath)), varName };
         break;
+      }
       case 'max-width': {
         // ROUND 6 (live paste): max-width is a CEILING, not a width.
         //
@@ -1400,9 +1413,11 @@ function applyTokens(
           spec.bindings = { ...spec.bindings, minHeight: varName };
         }
         break;
-      case 'height':
+      case 'height': {
+        if (isHugKeyword(resolveLiteral(tokenPath))) break; // see `width` above
         spec.fixedHeight = { px: px(resolveLiteral(tokenPath)), varName };
         break;
+      }
       case 'opacity': {
         // Only reachable via state-preview overrides today (no base token
         // uses it). NOT bound as a variable: Figma's opacity field is
@@ -1470,6 +1485,12 @@ function miss(spec: NodeSpec, cssProp: string, why: string): void {
   (spec.channelMiss ??= []).push(`${cssProp}: ${why}`);
 }
 
+/** GAP-CLOSING ROUND 6 — the CONTENT-SIZED keyword a HUG axis carries
+ *  (v16 literal grammar / mint `size` kind). Its canvas twin is Figma HUG,
+ *  which both frame runtimes express by leaving primary/counterAxisSizingMode
+ *  at their 'AUTO' default — i.e. by compiling no fixed size at all. */
+const isHugKeyword = (value: unknown): boolean => String(value ?? '').trim() === 'fit-content';
+
 /** v14 literals: parse a bounded literal dimension to px (rem/em at the
  *  documented 1rem = 16px base — same conversion the engine tree applies). */
 function parseLitPx(value: string): number | undefined {
@@ -1526,8 +1547,33 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
         if (c) li().fillColor = c;
         break;
       }
-      case 'width': { const n = parseLitPx(value); if (n !== undefined) li().width = n; break; }
-      case 'height': { const n = parseLitPx(value); if (n !== undefined) li().height = n; break; }
+      case 'width': {
+        // GAP-CLOSING ROUND 6 — a percentage width is a RELATION to the
+        // parent, not a measure, and `parseLitPx` cannot spell one, so it
+        // used to fall out of this switch and vanish on the return leg. The
+        // only percentage the inversion emits is `100%`: the CROSS-AXIS half
+        // of a Figma FILL (crossAxisFillByProp — a child drawn fillWidth
+        // under a parent whose auto-layout mode is a function of an axis).
+        // Its canvas twin is layoutSizingHorizontal = FILL, which is exactly
+        // what `grow` lowers to (annotateFillW), so the fact goes back the
+        // way it came instead of being baked into a bogus literal. Any OTHER
+        // percentage refuses BY NAME through the channelMiss registry rather
+        // than falling out of the switch.
+        if (value.trim() === '100%') { spec.grow = true; break; }
+        if (isHugKeyword(value)) break; // HUG = no fixed size compiled (see applyTokens)
+        const n = parseLitPx(value);
+        if (n !== undefined) li().width = n;
+        else if (value.trim().endsWith('%')) {
+          (spec.channelMiss ??= []).push(`width: ${value.trim()} — a fractional width has no canvas twin (Figma sizing is FIXED / HUG / FILL; only 100% lowers, as FILL)`);
+        }
+        break;
+      }
+      case 'height': {
+        if (isHugKeyword(value)) break; // HUG = no fixed size compiled (see applyTokens)
+        const n = parseLitPx(value);
+        if (n !== undefined) li().height = n;
+        break;
+      }
       case 'min-width': { const n = parseLitPx(value); if (n !== undefined) li().minWidth = n; break; }
       case 'min-height': { const n = parseLitPx(value); if (n !== undefined) li().minHeight = n; break; }
       case 'padding-block': { const n = parseLitPx(value); if (n !== undefined) { li().paddingTop = n; li().paddingBottom = n; } break; }
@@ -3232,8 +3278,17 @@ function mintedPreamble(
   // Shadow-typed leaves (box-shadow values, dump v1.2) and gradient-typed
   // leaves (background-image stacks, v15) have no Figma variable projection —
   // skipped here; the limit is NAMED at proposal.
+  // GAP-CLOSING ROUND 6: nor does a SIZING KEYWORD. A minted `size` leaf may
+  // hold `fit-content` (a HUG plane of a mixed fixed/hug axis). Figma
+  // variables are COLOR / FLOAT / STRING, and no STRING variable can bind
+  // `width` — so there is nothing to upsert, and `figmaValue` would have run
+  // px('fit-content'), which THROWS ("Not a numeric token value") and takes
+  // the whole component script down. The fact is not lost by skipping: the
+  // sizing MODE it states is applied structurally (applyTokens leaves
+  // primary/counterAxisSizingMode at AUTO = HUG), and the value never needed
+  // a variable to say so.
   const vars = [...minted]
-    .filter(([, entry]) => entry.type !== 'shadow' && entry.type !== 'gradient')
+    .filter(([, entry]) => entry.type !== 'shadow' && entry.type !== 'gradient' && !isHugKeyword(entry.value))
     .map(([p, entry]) => {
       // task #26: a SOURCE-ALIASED minted leaf carries `{p.font-weight-medium}`,
       // not a literal — px() on the raw ref was the crash class this round

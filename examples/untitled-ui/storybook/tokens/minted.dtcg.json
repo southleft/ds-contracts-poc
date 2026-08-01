@@ -1120,8 +1120,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "112px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "none": {
@@ -1130,8 +1129,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "112px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "topCenter": {
@@ -1140,8 +1138,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "112px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "bottomLeft": {
@@ -1150,8 +1147,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "112px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "left": {
@@ -1160,8 +1156,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "118px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "right": {
@@ -1170,8 +1165,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "118px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "bottomRight": {
@@ -1180,8 +1174,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "112px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             }
           },
@@ -1192,8 +1185,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "112px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "none": {
@@ -1202,8 +1194,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "112px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "topCenter": {
@@ -1212,8 +1203,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "112px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "bottomLeft": {
@@ -1222,8 +1212,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "112px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "left": {
@@ -1232,8 +1221,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "118px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "right": {
@@ -1242,8 +1230,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "118px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             },
             "bottomRight": {
@@ -1252,8 +1239,7 @@
                 "$type": "dimension"
               },
               "false": {
-                "$value": "112px",
-                "$type": "dimension"
+                "$value": "fit-content"
               }
             }
           }

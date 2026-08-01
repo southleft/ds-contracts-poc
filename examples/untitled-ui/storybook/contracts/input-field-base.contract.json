@@ -312,6 +312,9 @@
           }
         }
       },
+      "literals": {
+        "height": "fit-content"
+      },
       "tokens": {
         "gap": "{imported.input-field-base.root.gap}",
         "width": "{imported.input-field-base.root.width}"

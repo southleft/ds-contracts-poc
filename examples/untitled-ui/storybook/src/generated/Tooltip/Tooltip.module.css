@@ -10,6 +10,7 @@
   border: 0;
   border-radius: var(--imported-tooltip-root-border-radius);
   box-shadow: var(--imported-tooltip-root-box-shadow);
+  height: fit-content;
 }
 
 .theme-light {

@@ -223,6 +223,9 @@
           }
         }
       },
+      "literals": {
+        "height": "fit-content"
+      },
       "tokens": {
         "border-radius": "{imported.tooltip.root.border-radius}",
         "box-shadow": "{imported.tooltip.root.box-shadow}",

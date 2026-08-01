@@ -10,6 +10,8 @@
   border: 0;
   background-color: var(--imported-badge-base-root-background-color);
   border-radius: var(--imported-badge-base-root-border-radius);
+  width: fit-content;
+  height: fit-content;
 }
 
 .icon-false {

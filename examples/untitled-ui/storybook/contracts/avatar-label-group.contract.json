@@ -109,6 +109,10 @@
           }
         }
       },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
       "tokens": {
         "gap": "{imported.avatar-label-group.root.gap.{size}}"
       }

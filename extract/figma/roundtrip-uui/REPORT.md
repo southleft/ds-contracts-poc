@@ -24,9 +24,9 @@ The hand-built canvas used zero published variables, so captured.dtcg.json is `{
 | slider | round trip closed | 40 → 64 | 1184 | 496 | 1180 | 1444 |
 | social-button | round trip closed | 108 → 108 | 2238 | 186 | 216 | 60 |
 | toggle-base | round trip closed | 32 → 10 | 157 | 13 | 22 | 0 |
-| tooltip | round trip closed | 28 → 28 | 896 | 138 | 213 | 196 |
+| tooltip | round trip closed | 28 → 28 | 910 | 124 | 213 | 182 |
 
-**15/15 round trips closed.** Across the closed ones: 10808 matched, 1991 diverged, 4250 one-way loss, 6433 invented.
+**15/15 round trips closed.** Across the closed ones: 10822 matched, 1977 diverged, 4250 one-way loss, 6419 invented.
 
 ## avatar — 162 → 216 variants
 
@@ -1345,18 +1345,16 @@ matched 157 · diverged 13 · loss 22 · invented 0
 
 ## tooltip — 28 → 28 variants
 
-matched 896 · diverged 138 · loss 213 · invented 196
+matched 910 · diverged 124 · loss 213 · invented 182
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 114 fact(s):
+- class `(unclassified)` — 100 fact(s):
   - content ▸ layout.sizing: AUTO/FIXED → AUTO/AUTO  (×24 variants)
   - tooltip ▸ layout.mode: NONE → HORIZONTAL  (×24 variants)
   - tooltip/bottomcenter ▸ layout.mode: NONE → HORIZONTAL  (×24 variants)
   - content/textandsupportingtext ▸ layout.sizing: AUTO/FIXED → AUTO/AUTO  (×14 variants)
   - content ▸ layout.padding: 8,12,8,12 → 12,12,12,12  (×14 variants)
-  - (root) ▸ layout.sizing: AUTO/AUTO → AUTO/FIXED  (×10 variants)
-  - (root) ▸ layout.sizing: AUTO/AUTO → FIXED/AUTO  (×4 variants)
 - class `vector-glyph` — 24 fact(s):
   - tooltip/bottomcenter ▸ kind: vector → box  (×24 variants)
 
@@ -1384,9 +1382,6 @@ matched 896 · diverged 138 · loss 213 · invented 196
 
 ### INVENTED (in the round trip, not the original — must be zero or named)
 
-- class `hug-vs-fixed` — 14 fact(s):
-  - (root) ▸ width: 112  (×10 variants)
-  - (root) ▸ width: 118  (×4 variants)
 - class `restructured` — 182 fact(s):
   - content/textandsupportingtext ▸ kind: box  (×14 variants)
   - content/textandsupportingtext ▸ layout.mode: VERTICAL  (×14 variants)

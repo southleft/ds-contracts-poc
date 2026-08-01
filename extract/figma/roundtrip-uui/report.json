@@ -3,10 +3,10 @@
   "totals": {
     "components": 15,
     "roundTripClosed": 15,
-    "matched": 10808,
-    "diverged": 1991,
+    "matched": 10822,
+    "diverged": 1977,
     "loss": 4250,
-    "invented": 6433
+    "invented": 6419
   },
   "results": [
     {
@@ -82498,7 +82498,7 @@
       "status": "diffed",
       "originalVariants": 28,
       "roundTripVariants": 28,
-      "matched": 896,
+      "matched": 910,
       "diverged": [
         {
           "variant": "Arrow=Bottom center, Supporting text=True, Theme=Light",
@@ -82545,12 +82545,6 @@
         },
         {
           "variant": "Arrow=Bottom center, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → AUTO/FIXED"
-        },
-        {
-          "variant": "Arrow=Bottom center, Supporting text=False, Theme=Light",
           "path": "content",
           "channel": "layout.padding",
           "value": "8,12,8,12 → 12,12,12,12"
@@ -82579,12 +82573,6 @@
           "path": "tooltip/bottomcenter",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Arrow=None, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → AUTO/FIXED"
         },
         {
           "variant": "Arrow=None, Supporting text=False, Theme=Light",
@@ -82631,12 +82619,6 @@
         },
         {
           "variant": "Arrow=Top center, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → AUTO/FIXED"
-        },
-        {
-          "variant": "Arrow=Top center, Supporting text=False, Theme=Light",
           "path": "tooltip",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -82696,12 +82678,6 @@
           "path": "tooltip/bottomcenter",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Arrow=Bottom left, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → AUTO/FIXED"
         },
         {
           "variant": "Arrow=Bottom left, Supporting text=False, Theme=Light",
@@ -82767,12 +82743,6 @@
         },
         {
           "variant": "Arrow=Left, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → FIXED/AUTO"
-        },
-        {
-          "variant": "Arrow=Left, Supporting text=False, Theme=Light",
           "path": "tooltip",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -82829,12 +82799,6 @@
         },
         {
           "variant": "Arrow=Right, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → FIXED/AUTO"
-        },
-        {
-          "variant": "Arrow=Right, Supporting text=False, Theme=Light",
           "path": "content",
           "channel": "layout.padding",
           "value": "8,12,8,12 → 12,12,12,12"
@@ -82888,12 +82852,6 @@
           "path": "tooltip/bottomcenter",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Arrow=Bottom right, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → AUTO/FIXED"
         },
         {
           "variant": "Arrow=Bottom right, Supporting text=False, Theme=Light",
@@ -82971,12 +82929,6 @@
         },
         {
           "variant": "Arrow=Bottom center, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → AUTO/FIXED"
-        },
-        {
-          "variant": "Arrow=Bottom center, Supporting text=False, Theme=Dark",
           "path": "content",
           "channel": "layout.padding",
           "value": "8,12,8,12 → 12,12,12,12"
@@ -83005,12 +82957,6 @@
           "path": "tooltip/bottomcenter",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Arrow=None, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → AUTO/FIXED"
         },
         {
           "variant": "Arrow=None, Supporting text=False, Theme=Dark",
@@ -83057,12 +83003,6 @@
         },
         {
           "variant": "Arrow=Top center, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → AUTO/FIXED"
-        },
-        {
-          "variant": "Arrow=Top center, Supporting text=False, Theme=Dark",
           "path": "tooltip",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -83122,12 +83062,6 @@
           "path": "tooltip/bottomcenter",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Arrow=Bottom left, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → AUTO/FIXED"
         },
         {
           "variant": "Arrow=Bottom left, Supporting text=False, Theme=Dark",
@@ -83193,12 +83127,6 @@
         },
         {
           "variant": "Arrow=Left, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → FIXED/AUTO"
-        },
-        {
-          "variant": "Arrow=Left, Supporting text=False, Theme=Dark",
           "path": "tooltip",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -83255,12 +83183,6 @@
         },
         {
           "variant": "Arrow=Right, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → FIXED/AUTO"
-        },
-        {
-          "variant": "Arrow=Right, Supporting text=False, Theme=Dark",
           "path": "content",
           "channel": "layout.padding",
           "value": "8,12,8,12 → 12,12,12,12"
@@ -83314,12 +83236,6 @@
           "path": "tooltip/bottomcenter",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Arrow=Bottom right, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "layout.sizing",
-          "value": "AUTO/AUTO → AUTO/FIXED"
         },
         {
           "variant": "Arrow=Bottom right, Supporting text=False, Theme=Dark",
@@ -84776,13 +84692,6 @@
       "invented": [
         {
           "variant": "Arrow=Bottom center, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "width",
-          "value": "112",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Arrow=Bottom center, Supporting text=False, Theme=Light",
           "path": "content/textandsupportingtext",
           "channel": "kind",
           "value": "box",
@@ -84871,13 +84780,6 @@
           "channel": "text.lineHeight",
           "value": "18",
           "tag": "restructured"
-        },
-        {
-          "variant": "Arrow=None, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "width",
-          "value": "112",
-          "tag": "hug-vs-fixed"
         },
         {
           "variant": "Arrow=None, Supporting text=False, Theme=Light",
@@ -84972,13 +84874,6 @@
         },
         {
           "variant": "Arrow=Top center, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "width",
-          "value": "112",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Arrow=Top center, Supporting text=False, Theme=Light",
           "path": "content/textandsupportingtext",
           "channel": "kind",
           "value": "box",
@@ -85067,13 +84962,6 @@
           "channel": "text.lineHeight",
           "value": "18",
           "tag": "restructured"
-        },
-        {
-          "variant": "Arrow=Bottom left, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "width",
-          "value": "112",
-          "tag": "hug-vs-fixed"
         },
         {
           "variant": "Arrow=Bottom left, Supporting text=False, Theme=Light",
@@ -85168,13 +85056,6 @@
         },
         {
           "variant": "Arrow=Left, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "width",
-          "value": "118",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Arrow=Left, Supporting text=False, Theme=Light",
           "path": "content/textandsupportingtext",
           "channel": "kind",
           "value": "box",
@@ -85263,13 +85144,6 @@
           "channel": "text.lineHeight",
           "value": "18",
           "tag": "restructured"
-        },
-        {
-          "variant": "Arrow=Right, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "width",
-          "value": "118",
-          "tag": "hug-vs-fixed"
         },
         {
           "variant": "Arrow=Right, Supporting text=False, Theme=Light",
@@ -85364,13 +85238,6 @@
         },
         {
           "variant": "Arrow=Bottom right, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "width",
-          "value": "112",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Arrow=Bottom right, Supporting text=False, Theme=Light",
           "path": "content/textandsupportingtext",
           "channel": "kind",
           "value": "box",
@@ -85459,13 +85326,6 @@
           "channel": "text.lineHeight",
           "value": "18",
           "tag": "restructured"
-        },
-        {
-          "variant": "Arrow=Bottom center, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "width",
-          "value": "112",
-          "tag": "hug-vs-fixed"
         },
         {
           "variant": "Arrow=Bottom center, Supporting text=False, Theme=Dark",
@@ -85560,13 +85420,6 @@
         },
         {
           "variant": "Arrow=None, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "width",
-          "value": "112",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Arrow=None, Supporting text=False, Theme=Dark",
           "path": "content/textandsupportingtext",
           "channel": "kind",
           "value": "box",
@@ -85655,13 +85508,6 @@
           "channel": "text.lineHeight",
           "value": "18",
           "tag": "restructured"
-        },
-        {
-          "variant": "Arrow=Top center, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "width",
-          "value": "112",
-          "tag": "hug-vs-fixed"
         },
         {
           "variant": "Arrow=Top center, Supporting text=False, Theme=Dark",
@@ -85756,13 +85602,6 @@
         },
         {
           "variant": "Arrow=Bottom left, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "width",
-          "value": "112",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Arrow=Bottom left, Supporting text=False, Theme=Dark",
           "path": "content/textandsupportingtext",
           "channel": "kind",
           "value": "box",
@@ -85851,13 +85690,6 @@
           "channel": "text.lineHeight",
           "value": "18",
           "tag": "restructured"
-        },
-        {
-          "variant": "Arrow=Left, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "width",
-          "value": "118",
-          "tag": "hug-vs-fixed"
         },
         {
           "variant": "Arrow=Left, Supporting text=False, Theme=Dark",
@@ -85952,13 +85784,6 @@
         },
         {
           "variant": "Arrow=Right, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "width",
-          "value": "118",
-          "tag": "hug-vs-fixed"
-        },
-        {
-          "variant": "Arrow=Right, Supporting text=False, Theme=Dark",
           "path": "content/textandsupportingtext",
           "channel": "kind",
           "value": "box",
@@ -86047,13 +85872,6 @@
           "channel": "text.lineHeight",
           "value": "18",
           "tag": "restructured"
-        },
-        {
-          "variant": "Arrow=Bottom right, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "width",
-          "value": "112",
-          "tag": "hug-vs-fixed"
         },
         {
           "variant": "Arrow=Bottom right, Supporting text=False, Theme=Dark",

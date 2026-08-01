@@ -14,6 +14,8 @@
   border-radius: var(--imported-button-base-root-border-radius);
   border-width: var(--imported-button-base-root-border-width);
   box-shadow: var(--imported-button-base-root-box-shadow);
+  width: fit-content;
+  height: fit-content;
 }
 
 .size-md {

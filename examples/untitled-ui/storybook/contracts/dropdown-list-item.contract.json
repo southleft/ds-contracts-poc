@@ -89,6 +89,14 @@
         "direction": "row",
         "align": "center"
       },
+      "stylesWhen": [
+        {
+          "prop": "shortcut",
+          "styles": {
+            "justify-content": "space-between"
+          }
+        }
+      ],
       "parts": {
         "Content": {
           "layout": {
@@ -151,6 +159,9 @@
             }
           }
         }
+      },
+      "literals": {
+        "height": "fit-content"
       },
       "tokens": {
         "padding-inline": "{imported.dropdown-list-item.root.padding-inline}",
