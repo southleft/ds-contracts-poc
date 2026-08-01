@@ -1095,10 +1095,6 @@
         "background-image": {
           "$value": "radial-gradient(circle, transparent 7.5px, #ffffff 7.5px, #ffffff 9.17px, transparent 9.17px)",
           "$type": "gradient"
-        },
-        "border-radius": {
-          "$value": "10px",
-          "$type": "dimension"
         }
       }
     },
@@ -2384,6 +2380,16 @@
       "content": {
         "gap": {
           "$value": "12px",
+          "$type": "dimension"
+        }
+      },
+      "content-circle": {
+        "background-image": {
+          "$value": "radial-gradient(circle, transparent 5.92px, #404040 5.92px, #404040 7.42px, transparent 7.42px)",
+          "$type": "gradient"
+        },
+        "size": {
+          "$value": "16px",
           "$type": "dimension"
         }
       },

@@ -36,6 +36,12 @@
   gap: var(--imported-dropdown-list-item-content-gap);
 }
 
+.circle {
+  display: inline-flex;
+  --ds-circle-background-image: var(--imported-dropdown-list-item-content-circle-background-image);
+  --ds-circle-size: var(--imported-dropdown-list-item-content-circle-size);
+}
+
 .Text {
   color: var(--imported-dropdown-list-item-content-text-color);
   font-size: var(--imported-dropdown-list-item-content-text-font-size);

@@ -8,8 +8,11 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  width: var(--imported-stub-circle-root-width);
-  height: var(--imported-stub-circle-root-height);
-  background-image: var(--imported-stub-circle-root-background-image);
-  border-radius: var(--imported-stub-circle-root-border-radius);
+  width: var(--ds-circle-size, var(--imported-stub-circle-root-width));
+  height: var(--ds-circle-size, var(--imported-stub-circle-root-height));
+  background-image: var(
+    --ds-circle-background-image,
+    var(--imported-stub-circle-root-background-image)
+  );
+  border-radius: 50%;
 }

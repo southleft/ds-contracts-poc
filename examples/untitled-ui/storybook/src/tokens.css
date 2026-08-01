@@ -302,6 +302,8 @@
   --imported-button-group-base-text-font-size: 14px;
   --imported-button-group-base-text-font-weight: 600;
   --imported-button-group-base-text-line-height: 20px;
+  --imported-dropdown-list-item-content-circle-background-image: radial-gradient(circle, transparent 5.92px, #404040 5.92px, #404040 7.42px, transparent 7.42px);
+  --imported-dropdown-list-item-content-circle-size: 16px;
   --imported-dropdown-list-item-content-gap: 12px;
   --imported-dropdown-list-item-content-text-color: #404040;
   --imported-dropdown-list-item-content-text-font-size: 14px;
@@ -674,7 +676,6 @@
   --imported-stub-chevron-down-root-height: 20px;
   --imported-stub-chevron-down-root-width: 20px;
   --imported-stub-circle-root-background-image: radial-gradient(circle, transparent 7.5px, #ffffff 7.5px, #ffffff 9.17px, transparent 9.17px);
-  --imported-stub-circle-root-border-radius: 10px;
   --imported-stub-circle-root-height: 20px;
   --imported-stub-circle-root-width: 20px;
   --imported-stub-dot-root-background-color: #9e77ed;

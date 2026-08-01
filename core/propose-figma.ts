@@ -4400,8 +4400,54 @@ function buildPart(
         };
         const ovTarget: Record<string, string> = {};
         let ovQueued = false;
-        // background-image — per-instance IMAGE identity (dump v1.9).
+        // GAP-CLOSING ROUND 7 — PER-INSTANCE RING (the stub glyph's own ink
+        // AND its box). A stroke-drawn glyph stub renders the ring witness
+        // its FIRST claimant observed; every other host observes its own
+        // (`instancePrimaryFill` with stroke/ellipse/src, dump v1.7) and, when
+        // the two differ, mints the ring RECOMPUTED FROM ITS OWN observation
+        // through the same ringGradientCss the stub minted with — so equal
+        // paints produce equal bytes and only a real divergence overrides.
+        // The ring and the box are one fact: the baked radii come from the
+        // same paint as the measured box, so they carry together or not at
+        // all (a box override alone would tear the ring off its radius).
+        let ringOverrideCarried = false;
         if (childOv.has('background-image')) {
+          const rings = m.occ.map((o) => (isRingPaint(o.node.instancePrimaryFill) ? ringGradientCss(o.node.instancePrimaryFill) : undefined));
+          if (rings.length > 0 && rings.every((r) => r !== undefined)) {
+            let proven = false;
+            let unresolved = false;
+            m.occ.forEach((o, i) => {
+              const expected = resolveChildValue('background-image', canonByOcc[i]);
+              if (expected === undefined) unresolved = true;
+              else if (expected !== rings[i]) proven = true;
+            });
+            if (proven && !childOv.has('size')) {
+              ctx.notes.push(
+                `${where}: the nested "${instanceOf}" draws a DIFFERENT ring than ${id} mints (dump v1.7 stroke/ellipse witness) but the child declares no size channel — ring and box carry together or not at all; per-usage ring NOT carried, review`,
+              );
+            } else if (proven) {
+              mintObservation(
+                ctx,
+                ovTarget,
+                where,
+                'background-image',
+                'gradient',
+                m.occ.map((o, i) => ({ variant: o.variant, value: rings[i]! })),
+              );
+              ovQueued = true;
+              ringOverrideCarried = true;
+              ctx.notes.push(
+                `${where}: PER-INSTANCE RING OVERRIDE proposed (round 7) — this host's observed stroke ring (${[...new Set(m.occ.map((o) => (isRingPaint(o.node.instancePrimaryFill) ? `#${o.node.instancePrimaryFill.hex} @ ${o.node.instancePrimaryFill.src}px` : '')))].join(', ')}) diverges from the ring ${id} minted for its first claimant; carried as component.overrides['background-image'], recomputed at THIS host's drawn radius`,
+              );
+            } else if (unresolved) {
+              ctx.notes.push(
+                `${where}: per-instance ring observed on the LINKED instance but ${id}'s own value could not be resolved from the minted ledger — divergence unproven, ring override NOT carried (the instance renders the child's default), review`,
+              );
+            }
+          }
+        }
+        // background-image — per-instance IMAGE identity (dump v1.9).
+        if (childOv.has('background-image') && !ringOverrideCarried) {
           const withHash = m.occ.filter((o) => typeof o.node.imageFill === 'string');
           if (withHash.length > 0) {
             let proven = false;
@@ -4455,7 +4501,17 @@ function buildPart(
                   proven = true;
                 }
               });
-              if (proven) {
+              // GAP-CLOSING ROUND 7 — the ring/box PAIR rule, host side. When
+              // the child's own background-image IS a ring (baked radii), a
+              // box override without the matching ring override would stretch
+              // the box off its own radius. Refused BY NAME rather than
+              // shipped half.
+              const childRing = canonByOcc.some((c) => (resolveChildValue('background-image', c) ?? '').startsWith('radial-gradient('));
+              if (proven && childRing && !ringOverrideCarried) {
+                ctx.notes.push(
+                  `${where}: the observed box of the nested "${instanceOf}" diverges from ${id}'s minted box, but ${id} paints the RING WITNESS (baked radii) and this host's ring could not be recomputed from its own observation — box and ring carry together or not at all; size override NOT carried, review`,
+                );
+              } else if (proven) {
                 mintObservation(
                   ctx,
                   ovTarget,
@@ -4501,6 +4557,9 @@ function buildPart(
             }
           }
         }
+        // A carried ring IS a carried per-usage paint — the trailing ledger
+        // note below must not claim the divergence went unrepresented.
+        if (ringOverrideCarried) paintOverrideCarried = true;
         if (ovQueued) ctx.mint.refOverrides.push({ component, target: ovTarget });
       }
     }
@@ -4964,6 +5023,30 @@ function mergeMintTree(into: Record<string, unknown>, from: Record<string, unkno
   }
 }
 
+/** THE RING WITNESS, IN ONE SPELLING (iteration 5 minted it; GAP-CLOSING
+ *  ROUND 7 lets a HOST override it per usage). A stroke-drawn subtree paint
+ *  whose source is a centered circle with an observed box renders as an exact
+ *  radial-gradient band at the DRAWN radius, align-aware. The stub mints it
+ *  from the FIRST claimant's observation and every other host recomputes it
+ *  from its OWN — same function, same bytes for the same paint, so a host's
+ *  override is provably a divergence and never a re-spelling. */
+type RingPaint = DumpPaint & { stroke: true; ellipse: true; src: number; weight?: number; align?: string };
+const isRingPaint = (p: unknown): p is RingPaint =>
+  typeof p === 'object' && p !== null &&
+  (p as { stroke?: unknown }).stroke === true &&
+  (p as { ellipse?: unknown }).ellipse === true &&
+  typeof (p as { src?: unknown }).src === 'number' &&
+  (p as { hex?: unknown }).hex !== undefined;
+function ringGradientCss(p: RingPaint): string {
+  const f = (x: number) => Math.round(x * 100) / 100;
+  const w = p.weight ?? 1;
+  const r = p.src / 2;
+  const rin = p.align === 'INSIDE' ? r - w : p.align === 'OUTSIDE' ? r : r - w / 2;
+  const rout = p.align === 'INSIDE' ? r : p.align === 'OUTSIDE' ? r + w : r + w / 2;
+  const c = paintCssHex(p);
+  return `radial-gradient(circle, transparent ${f(rin)}px, ${c} ${f(rin)}px, ${c} ${f(rout)}px, transparent ${f(rout)}px)`;
+}
+
 /** STUB GEOMETRY (dump v1.5): mint the stub's OBSERVED bounding box and
  *  primary paints into provisional `imported.stub-<id>.*` leaves and bind
  *  the stub's root tokens to them — a correctly-sized, correctly-colored
@@ -4980,7 +5063,7 @@ function stubGeometry(
   props: Array<Record<string, unknown>>,
   ctx: Ctx,
   iconRes: StubIconResolution | null = null,
-): { tokens: Record<string, string>; tree: Record<string, unknown>; count: number; entries: MintedEntry[]; circleRadius50?: boolean } | null {
+): { tokens: Record<string, string>; tree: Record<string, unknown>; count: number; entries: MintedEntry[]; circleRadius50?: boolean; ringWitness?: boolean } | null {
   if (!ctx.mint) return null;
   // ITERATION 8 — when the stub carries its exported glyph (fixed/byProp),
   // the SVG bakes the drawn ink: every witness-paint channel (solid fill,
@@ -5052,6 +5135,11 @@ function stubGeometry(
   const fills = glyphCarried ? [] : geo.filter((o) => paintOf(o) !== undefined);
   const strokeObserved = fills.filter(isStrokeObserved);
   let backgroundVarRef: string | null = null;
+  // GAP-CLOSING ROUND 7 — the ring witness and the parametric circular radius
+  // are decided in two places (stroke-ring path, circle-fill path) and read by
+  // the caller, so both flags live here.
+  let ringWitness = false;
+  let circleRadius50 = false;
   if (strokeObserved.length > 0 && strokeObserved.length < fills.length) {
     ctx.notes.push(
       `stub ${capture.id}: observed subtree paint is a STROKE on ${strokeObserved.length}/${fills.length} painted occurrence(s) and a FILL on the rest — one channel is not a function of the stub's axes; neither carried, review`,
@@ -5086,19 +5174,14 @@ function stubGeometry(
         `stub ${capture.id}: subtree stroke paint observed but the instance draws its OWN stroke (already carried as the border) — subtree stroke paint not carried, review`,
       );
     } else if (ringable) {
-      const f = (x: number) => Math.round(x * 100) / 100;
+      ringWitness = true;
       push(
         'background-image',
         'gradient',
         (o) => {
           const p = paintOf(o);
-          if (p === undefined || !isStrokeObserved(o)) return 'none';
-          const w = p.weight ?? 1;
-          const r = p.src! / 2;
-          const rin = p.align === 'INSIDE' ? r - w : p.align === 'OUTSIDE' ? r : r - w / 2;
-          const rout = p.align === 'INSIDE' ? r : p.align === 'OUTSIDE' ? r + w : r + w / 2;
-          const c = paintCssHex(p);
-          return `radial-gradient(circle, transparent ${f(rin)}px, ${c} ${f(rin)}px, ${c} ${f(rout)}px, transparent ${f(rout)}px)`;
+          if (p === undefined || !isStrokeObserved(o) || !isRingPaint(p)) return 'none';
+          return ringGradientCss(p);
         },
         'none',
       );
@@ -5121,9 +5204,15 @@ function stubGeometry(
       geo.every((o) => Math.abs(o.bbox!.width - o.bbox!.height) < 0.5) &&
       !geo.some((o) => (o.cornerRadius ?? 0) !== 0);
     if (circleIsh && strokeObserved.every((o) => paintOf(o)!.ellipse === true)) {
-      push('border-radius', 'px', (o) => Math.round((o.bbox!.width / 2) * 100) / 100);
+      // GAP-CLOSING ROUND 7 — with per-instance overrides live the witnessed
+      // "radius = half the box" spells as the parametric 50% literal, exactly
+      // as the circle-fill witness already does below: value-identical at the
+      // witnessed box, and still a circle when a host overrides the box (a px
+      // radius baked at 20px would square a 16px usage).
+      if (ctx.instanceOverrides) circleRadius50 = true;
+      else push('border-radius', 'px', (o) => Math.round((o.bbox!.width / 2) * 100) / 100);
       ctx.notes.push(
-        `stub ${capture.id}: circular stroke source on every observed occurrence (dump v1.7 stroke-aware walk) — circular border-radius derived from the observed box (width/2), the stub box renders round`,
+        `stub ${capture.id}: circular stroke source on every observed occurrence (dump v1.7 stroke-aware walk) — circular border-radius derived from the observed box (${ctx.instanceOverrides ? 'spelled as the parametric 50% literal, correct under a host size override' : 'width/2'}), the stub box renders round`,
       );
     }
   } else if (fills.length > 0 && fills.every((o) => paintOf(o)!.hex !== undefined)) {
@@ -5164,7 +5253,6 @@ function stubGeometry(
   // contradicts the observations — field case _Dot) and the box renders
   // ROUND: the witnessed radius is half the observed square box. Derived
   // from the export's own geometry, nothing guessed.
-  let circleRadius50 = false;
   if (
     iconRes?.kind === 'circleFill' &&
     geo.every((o) => Math.abs(o.bbox!.width - o.bbox!.height) < 0.5) &&
@@ -5209,7 +5297,7 @@ function stubGeometry(
   // a minted leaf; joins the minted geometry bindings on the stub root.
   if (backgroundVarRef !== null) tokens['background-color'] = backgroundVarRef;
   if (Object.keys(tokens).length === 0 && !circleRadius50) return null;
-  return { tokens, tree: minted.tree, count: minted.count, entries: minted.entries, circleRadius50 };
+  return { tokens, tree: minted.tree, count: minted.count, entries: minted.entries, circleRadius50, ringWitness };
 }
 
 /** ITERATION 8 — how a stub renders its exported glyph (or why not). */
@@ -5398,21 +5486,40 @@ function buildChildStub(
     // gradient string (the iteration-5 ring witness — scaling its box would
     // tear the baked radii): that divergence stays a named note.
     if (ctx.instanceOverrides) {
+      // GAP-CLOSING ROUND 7 — THE RING WITNESS BECOMES OVERRIDABLE.
+      //
+      // Iteration 9 refused it: a minted `radial-gradient` bakes drawn-radius
+      // px, so overriding the BOX alone would tear the ring off its own
+      // radii. That refusal cost the kit its most visible stub defect — the
+      // shared `circle` stub is claimed by _Button base (20px box, WHITE ring
+      // at src 16.67) and instanced by _Dropdown list item (16px box, gray
+      // ring at src 13.33) and _Button group base (20px box, three state
+      // inks), so the dropdown drew a white ring on white paper: an icon that
+      // is not there, plus 4px of extra box shoving its label sideways.
+      //
+      // The tear is only possible when the two channels move APART. Both are
+      // functions of the SAME observation (ringGradientCss reads the paint the
+      // box was measured with), so the ring stub declares them as a PAIR and
+      // the host side mints them as a pair — the geometry inside the gradient
+      // is then the overriding host's own, not the claimant's stretched.
       const gradientBaked = geometry.entries.some(
         (e) => e.ref.includes('.background-image') && !/^(url\(|none$)/.test(String(e.value)),
       );
+      const ringPair = Boolean(geometry.ringWitness) && geometry.tokens['background-image'] !== undefined;
       const declaredOv: string[] = [];
-      if (geometry.tokens.width !== undefined && geometry.tokens.height !== undefined && !gradientBaked) declaredOv.push('size');
-      if (geometry.tokens['background-image'] !== undefined && !gradientBaked) declaredOv.push('background-image');
+      if (geometry.tokens.width !== undefined && geometry.tokens.height !== undefined && (!gradientBaked || ringPair)) declaredOv.push('size');
+      if (geometry.tokens['background-image'] !== undefined && (!gradientBaked || ringPair)) declaredOv.push('background-image');
       if (geometry.tokens['background-color'] !== undefined) declaredOv.push('background-color');
       if (declaredOv.length > 0) {
         root.overridable = declaredOv;
         ctx.notes.push(
-          `stub ${capture.id}: overridable [${declaredOv.join(', ')}] declared (iteration 9) — a host whose OBSERVED per-instance facts diverge from this stub's minted ones may override them per usage; absent an override the stub renders its own minted values unchanged`,
+          ringPair
+            ? `stub ${capture.id}: overridable [${declaredOv.join(', ')}] declared (round 7) — the minted background-image is the RING WITNESS, whose baked radii are a function of the same observation as the box, so a host overrides the ring and the box TOGETHER (either alone is refused by name on the host side); absent an override the stub renders its own minted values unchanged`
+            : `stub ${capture.id}: overridable [${declaredOv.join(', ')}] declared (iteration 9) — a host whose OBSERVED per-instance facts diverge from this stub's minted ones may override them per usage; absent an override the stub renders its own minted values unchanged`,
         );
       } else if (gradientBaked) {
         ctx.notes.push(
-          `stub ${capture.id}: overridable NOT declared — the minted background-image bakes drawn-geometry px (the ring witness); a per-instance size/image override would tear the baked radii, so host divergence stays a named note`,
+          `stub ${capture.id}: overridable NOT declared — the minted background-image bakes drawn-geometry px and is NOT the ring witness (whose radii are recomputable per usage); a per-instance size/image override would tear the baked geometry, so host divergence stays a named note`,
         );
       }
     }

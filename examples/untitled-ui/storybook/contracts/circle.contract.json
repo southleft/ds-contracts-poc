@@ -16,9 +16,15 @@
       "tokens": {
         "width": "{imported.stub-circle.root.width}",
         "height": "{imported.stub-circle.root.height}",
-        "background-image": "{imported.stub-circle.root.background-image}",
-        "border-radius": "{imported.stub-circle.root.border-radius}"
-      }
+        "background-image": "{imported.stub-circle.root.background-image}"
+      },
+      "literals": {
+        "border-radius": "50%"
+      },
+      "overridable": [
+        "size",
+        "background-image"
+      ]
     }
   },
   "anchors": {

@@ -53,7 +53,11 @@ export const DropdownListItem = forwardRef<HTMLButtonElement, DropdownListItemPr
               state="default"
             />
           ) : null}
-          {icon ? <Circle /> : null}
+          {icon ? (
+            <span className={styles.circle}>
+              <Circle />
+            </span>
+          ) : null}
           <span className={styles.Text}>List item</span>
         </div>
         {shortcut ? <span className={styles.Shortcut}>⌘C</span> : null}

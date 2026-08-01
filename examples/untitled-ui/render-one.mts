@@ -85,5 +85,11 @@ if (box && box.width > 4 && box.height > 4) await p.screenshot({ path: out, clip
 else await p.screenshot({ path: out });
 const errs = [];
 p.on('console', m => { if (m.type() === 'error') errs.push(m.text()); });
-console.log(JSON.stringify({ out: path.basename(out), clip: CLIP, box }));
+// SCORER v2.1 — the ROOT's own border box in the same page coordinates as the
+// clip box, so a scorer can place the component's box inside the PNG. Reported
+// on STDOUT ONLY: the PNG bytes are untouched by this addition, which is what
+// lets a metric change be measured over byte-identical renders.
+const root = await p.evaluate(`(() => { const c = document.querySelector('#root').firstElementChild; if (!c) return null;
+  const r = c.getBoundingClientRect(); return { x: r.x, y: r.y, width: r.width, height: r.height }; })()`);
+console.log(JSON.stringify({ out: path.basename(out), clip: CLIP, box, root }));
 await b.close();

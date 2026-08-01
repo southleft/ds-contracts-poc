@@ -123,7 +123,11 @@
             },
             "circle": {
               "component": {
-                "id": "ds.circle"
+                "id": "ds.circle",
+                "overrides": {
+                  "background-image": "{imported.dropdown-list-item.content-circle.background-image}",
+                  "size": "{imported.dropdown-list-item.content-circle.size}"
+                }
               },
               "visibleWhen": {
                 "prop": "icon"
