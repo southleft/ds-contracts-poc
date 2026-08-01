@@ -10,6 +10,7 @@
   border: 0;
   width: var(--ds-mail-size, var(--imported-stub-mail-root-width));
   height: var(--ds-mail-size, var(--imported-stub-mail-root-height));
+  color: var(--ds-mail-color, var(--imported-stub-mail-root-color));
 }
 
 .glyph {

@@ -9,7 +9,7 @@ import styles from './ArrowRight.module.css';
 
 const ICONS: Record<string, string> = {
   'arrow-right':
-    '<svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n<path d="M5 12H19M12 19L19 12L12 5" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>\n</svg>',
+    '<svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n<path d="M5 12H19M12 19L19 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>\n</svg>',
 };
 
 export interface ArrowRightProps extends HTMLAttributes<HTMLSpanElement> {}

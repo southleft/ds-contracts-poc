@@ -166,7 +166,10 @@
           "parts": {
             "instance": {
               "component": {
-                "id": "ds.user"
+                "id": "ds.user",
+                "overrides": {
+                  "color": "{imported.avatar.user-instance.color}"
+                }
               }
             }
           },

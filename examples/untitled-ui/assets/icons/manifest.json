@@ -1,121 +1,228 @@
 {
- "$note": "ITERATION 8 — SVG glyphs exported from the kit via node.exportAsync({format:\"SVG_STRING\"}) at 1x on each stub source MAIN component (dedup by instanceKey across the 15 dumped sets). Root width/height attrs rewritten to 100% (paths and viewBox verbatim); the consuming stub contract sizes the glyph (minted box, else icon.size = natural). keyToAsset maps every observed nested-instance instanceKey to its exported asset — the propose-side iconAssets input (uui-pipeline.mts). Fills/strokes are BAKED at the source component; per-usage ink divergence stays a named note on the stub. Assets marked `refused` are committed export receipts only (measured against the references); `circleFill` marks a pure-circle-fill export consumed as a geometry witness, not rendered.",
+ "$note": "ITERATION 8 — SVG glyphs exported from the kit via node.exportAsync({format:\"SVG_STRING\"}) at 1x on each stub source MAIN component (dedup by instanceKey across the 15 dumped sets). Root width/height attrs rewritten to 100% (paths and viewBox verbatim); the consuming stub contract sizes the glyph (minted box, else icon.size = natural). keyToAsset maps every observed nested-instance instanceKey to its exported asset — the propose-side iconAssets input (uui-pipeline.mts). Fills/strokes were BAKED at the source component; ROUND 8 replaced that for every SINGLE-INK glyph — see $inkNote / $perUsageInkNote below, which supersede this sentence. Assets marked `refused` are committed export receipts only (measured against the references); `circleFill` marks a pure-circle-fill export consumed as a geometry witness, not rendered.",
  "assets": {
   "avatar-online-indicator": {
    "sourceComponent": "_Avatar online indicator / Size=xl, Online=True",
    "sourceKey": "c942f7f478753a0cf29c9bc742289c4a62b98d6a",
    "naturalWidth": 17,
-   "naturalHeight": 17
+   "naturalHeight": 17,
+   "ink": {
+    "drawn": [
+     "#22c55e",
+     "#ffffff"
+    ],
+    "refused": "2 distinct drawn inks — one part colour cannot carry them; left exactly as exported"
+   }
   },
   "user": {
    "sourceComponent": "user",
    "sourceKey": "016b9a0e17faa7a8abf87a5f4e6a7433e48f4e21",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "baked": "#171717",
+    "draws": "currentColor"
+   }
   },
   "dot": {
    "sourceComponent": "_Dot / Size=sm",
    "sourceKey": "e6bf800f3052d9ece685019b0861853824cbec65",
    "naturalWidth": 8,
    "naturalHeight": 8,
-   "circleFill": true
+   "circleFill": true,
+   "ink": {
+    "drawn": [
+     "#22c55e"
+    ],
+    "refused": "single-ink, but NOT NORMALISED: geometry witness — no contract draws it"
+   }
   },
   "au": {
    "sourceComponent": "AU",
    "sourceKey": "aa4f53734b5cad53a9423957927b459f11380ce7",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "drawn": [
+     "#0052b4",
+     "#d80027",
+     "#f0f0f0"
+    ],
+    "refused": "3 distinct drawn inks — one part colour cannot carry them; left exactly as exported"
+   }
   },
   "x": {
    "sourceComponent": "x",
    "sourceKey": "3fc2f4d17e8cf8cbc820d266fa5fd3107e053b6b",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "baked": "#171717",
+    "draws": "currentColor"
+   }
   },
   "arrow-right": {
    "sourceComponent": "arrow-right",
    "sourceKey": "cf1e885a752ba2c2e8819c9fa7911521e78d3f9d",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "baked": "#171717",
+    "draws": "currentColor"
+   }
   },
   "arrow-up": {
    "sourceComponent": "arrow-up",
    "sourceKey": "3161d20ca29bb3bc11483c375e8a288e9fb5bde6",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "baked": "#171717",
+    "draws": "currentColor"
+   }
   },
   "plus": {
    "sourceComponent": "plus",
    "sourceKey": "8381d8d8585e77a47999ef1dd020f455348c50fb",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "baked": "#171717",
+    "draws": "currentColor"
+   }
   },
   "circle": {
    "sourceComponent": "circle",
    "sourceKey": "93f75d07a9d9a81e23af6cda238f8f520c35eb5a",
    "naturalWidth": 24,
    "naturalHeight": 24,
-   "refused": "baked ink is the source main's #171717 ring, but the references draw the usage ink (Button: WHITE ring on brand purple — var--button-base--*_icon_leading.png) and the existing dump v1.7 ellipse/src ring-witness already renders the observed white ring at the drawn radius; carrying the export would displace correct ink. Ring-witness stands; per-usage ink divergence remains the ledgered _Dot-class note."
+   "refused": "baked ink is the source main's #171717 ring, but the references draw the usage ink (Button: WHITE ring on brand purple — var--button-base--*_icon_leading.png) and the existing dump v1.7 ellipse/src ring-witness already renders the observed white ring at the drawn radius; carrying the export would displace correct ink. Ring-witness stands; per-usage ink divergence remains the ledgered _Dot-class note.",
+   "ink": {
+    "drawn": [
+     "#171717"
+    ],
+    "refused": "single-ink, but NOT NORMALISED: export receipt (refused for carriage) — no contract draws it"
+   }
   },
   "checkbox": {
    "sourceComponent": "Checkbox / Checked=False, Indeterminate=False, Size=sm, Type=Checkbox, Text=False, Supporting text=False, State=Default",
    "sourceKey": "731a8ebce58dd463bc6c4db8028225399c114768",
    "naturalWidth": 16,
-   "naturalHeight": 16
+   "naturalHeight": 16,
+   "ink": {
+    "drawn": [
+     "#d4d4d4",
+     "#ffffff"
+    ],
+    "refused": "2 distinct drawn inks — one part colour cannot carry them; left exactly as exported"
+   }
   },
   "mail": {
    "sourceComponent": "mail",
    "sourceKey": "cdf996719dc8f1975b273296faae58b48adf361e",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "baked": "#171717",
+    "draws": "currentColor"
+   }
   },
   "payment-method-icon": {
    "sourceComponent": "Payment method icon / Size=sm, Payment method=Mastercard",
    "sourceKey": "6b6b0756931df371a16a632a396b33e91c3f5a9f",
    "naturalWidth": 34,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "drawn": [
+     "#e5e5e5",
+     "#ed0006",
+     "#f9a000",
+     "#ff5e00",
+     "#ffffff"
+    ],
+    "refused": "5 distinct drawn inks — one part colour cannot carry them; left exactly as exported"
+   }
   },
   "chevron-down": {
    "sourceComponent": "chevron-down",
    "sourceKey": "31fcdcdbaa80e756f8a9d75d632affc6a8e580bc",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "baked": "#171717",
+    "draws": "currentColor"
+   }
   },
   "facebook": {
    "sourceComponent": "Social icon / Platform=Facebook, State=Default, Style=White",
    "sourceKey": "9a15113ed0dc5f6c5d6cba5ba1a866a5b7c76361",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "baked": "#ffffff",
+    "draws": "currentColor"
+   }
   },
   "google": {
    "sourceComponent": "Social icon / Platform=Google, State=Default, Style=Brand",
    "sourceKey": "137015d1769259b4c5d67589725ef2f59e1b6e13",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "drawn": [
+     "#34a853",
+     "#4285f4",
+     "#ea4335",
+     "#fbbc04"
+    ],
+    "refused": "4 distinct drawn inks — one part colour cannot carry them; left exactly as exported"
+   }
   },
   "apple": {
    "sourceComponent": "Social icon / Platform=Apple, State=Default, Style=White",
    "sourceKey": "a346cbff58faa513f62a94b551d201a9077cd186",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "baked": "#ffffff",
+    "draws": "currentColor"
+   }
   },
   "figma": {
    "sourceComponent": "Social icon / Platform=Figma, State=Default, Style=Brand",
    "sourceKey": "5b7490eb2e6e71a5f8067d403db6f7c03e9d1fbd",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "drawn": [
+     "#00b6ff",
+     "#24cb71",
+     "#874fff",
+     "#ff3737",
+     "#ff7237"
+    ],
+    "refused": "5 distinct drawn inks — one part colour cannot carry them; left exactly as exported"
+   }
   },
   "dribbble": {
    "sourceComponent": "Social icon / Platform=Dribbble, State=Default, Style=White",
    "sourceKey": "0a6959958c8cab126f996e169359db27dbd22a98",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "baked": "#ffffff",
+    "draws": "currentColor"
+   }
   },
   "xtwitter": {
    "sourceComponent": "Social icon / Platform=X (Twitter), State=Default, Style=White",
    "sourceKey": "e03dd4da442056776d4ed04f17c3af284bf27ba3",
    "naturalWidth": 24,
-   "naturalHeight": 24
+   "naturalHeight": 24,
+   "ink": {
+    "baked": "#ffffff",
+    "draws": "currentColor"
+   }
   }
  },
  "keyToAsset": {
@@ -150,5 +257,233 @@
   "377ee9afa68393fc60ee48d142766bea3dd61d7c": "dribbble",
   "e03dd4da442056776d4ed04f17c3af284bf27ba3": "xtwitter",
   "ef452372e47a35349993c2bdcf99c8a9179e205c": "xtwitter"
+ },
+ "$inkNote": "ROUND 8 — THE SINGLE-INK TEST (examples/untitled-ui/glyph-ink.mts, re-runnable offline). Each asset's `ink` field is computed from the SVG's own markup: the drawn ink set is every fill/stroke presentation value on a PAINTED element (outside <defs> — a clipPath rect paints nothing), minus none/currentColor/url(). Exactly one drawn ink → the glyph carries that hex as its part's `color` binding and the markup draws `currentColor`, so per-usage ink rides the REF_OVERRIDE_CHANNELS `color` channel; the rendering is value-identical when no host overrides. Two or more → REFUSED BY NAME and left EXACTLY as exported. An asset no contract draws is a committed export receipt and is never rewritten, whatever the test says.",
+ "$perUsageInkNote": "ROUND 8 — PER-USAGE INK CARRIAGE, one row per (host set ▸ asset), every field READ from dumps-v2 instancePrimaryFill and the committed contracts; nothing typed in. `occurrences` counts the nested instances the dump records. `observed` is the distinct ink set at that site. `axes` is the SMALLEST set of the host's own variant axes the ink is a function of. An override ref substitutes at most ONE enum axis (core/emit-react.ts: \"override refs carry at most 1\"), so `carried` is true only for 0 or 1 axis AND only when the glyph itself passed the single-ink test; every false carries its reason. A refused site keeps drawing the glyph's own baked ink — the absent-field no-op, never a silent guess.",
+ "perUsageInk": {
+  "badge-base ▸ (not drawn as a glyph) dot": {
+   "occurrences": 1,
+   "assets": [
+    "dot"
+   ],
+   "observed": [
+    "#9e77ed"
+   ],
+   "axes": [],
+   "refused": "the host nests a NON-GLYPH stub (dot is a geometry witness, not an icon part) — this class is out of the baked-ink scope; its ink rides whatever channel that stub already declares"
+  },
+  "button-base ▸ (not drawn as a glyph) dot": {
+   "occurrences": 4,
+   "assets": [
+    "dot"
+   ],
+   "observed": [
+    "#ffffff"
+   ],
+   "axes": [],
+   "refused": "the host nests a NON-GLYPH stub (dot is a geometry witness, not an icon part) — this class is out of the baked-ink scope; its ink rides whatever channel that stub already declares"
+  },
+  "button-group-base ▸ (not drawn as a glyph) dot": {
+   "occurrences": 8,
+   "assets": [
+    "dot"
+   ],
+   "observed": [
+    "#22c55e",
+    "#d4d4d4"
+   ],
+   "axes": [
+    "State"
+   ],
+   "refused": "the host nests a NON-GLYPH stub (dot is a geometry witness, not an icon part) — this class is out of the baked-ink scope; its ink rides whatever channel that stub already declares"
+  },
+  "badge-base ▸ arrow-right": {
+   "occurrences": 1,
+   "assets": [
+    "arrow-right"
+   ],
+   "observed": [
+    "#9e77ed"
+   ],
+   "axes": [],
+   "carried": "{imported.badge-base.arrow-right.color}"
+  },
+  "badge-base ▸ arrow-up": {
+   "occurrences": 1,
+   "assets": [
+    "arrow-up"
+   ],
+   "observed": [
+    "#9e77ed"
+   ],
+   "axes": [],
+   "carried": "{imported.badge-base.arrow-up.color}"
+  },
+  "badge-base ▸ au": {
+   "occurrences": 1,
+   "assets": [
+    "au"
+   ],
+   "observed": [
+    "#0052b4"
+   ],
+   "axes": [],
+   "refused": "glyph refused by the single-ink test (3 drawn inks) — nothing to recolour without destroying the mark"
+  },
+  "avatar ▸ avatar-online-indicator": {
+   "occurrences": 54,
+   "assets": [
+    "avatar-online-indicator"
+   ],
+   "observed": [
+    "#22c55e"
+   ],
+   "axes": [],
+   "refused": "glyph refused by the single-ink test (2 drawn inks) — nothing to recolour without destroying the mark"
+  },
+  "dropdown-list-item ▸ checkbox": {
+   "occurrences": 8,
+   "assets": [
+    "checkbox"
+   ],
+   "observed": [
+    "#f5f5f5",
+    "#f9f5ff",
+    "#ffffff"
+   ],
+   "axes": [
+    "State"
+   ],
+   "refused": "glyph refused by the single-ink test (2 drawn inks) — nothing to recolour without destroying the mark"
+  },
+  "input-field-base ▸ chevron-down": {
+   "occurrences": 4,
+   "assets": [
+    "chevron-down"
+   ],
+   "observed": [
+    "#737373"
+   ],
+   "axes": [],
+   "carried": "{imported.input-field-base.input-with-label-input-dropdown-chevron-down.color}"
+  },
+  "input-field-base ▸ mail": {
+   "occurrences": 2,
+   "assets": [
+    "mail"
+   ],
+   "observed": [
+    "#737373"
+   ],
+   "axes": [],
+   "carried": "{imported.input-field-base.input-with-label-input-content-mail.color}"
+  },
+  "input-field-base ▸ payment-method-icon": {
+   "occurrences": 2,
+   "assets": [
+    "payment-method-icon"
+   ],
+   "observed": [
+    "#ffffff"
+   ],
+   "axes": [],
+   "refused": "glyph refused by the single-ink test (5 drawn inks) — nothing to recolour without destroying the mark"
+  },
+  "avatar-add-button ▸ plus": {
+   "occurrences": 12,
+   "assets": [
+    "plus"
+   ],
+   "observed": [
+    "#737373",
+    "#a3a3a3"
+   ],
+   "axes": [
+    "State"
+   ],
+   "carried": "{imported.avatar-add-button.content-plus.color}",
+   "partial": "the override ref is CONSTANT, so 3 of 12 occurrences keep an ink the contract does not carry — the divergence rides a host axis that is not a declared enum prop (a CSS interaction state), which a 1-placeholder override cannot express",
+   "uncarried": {
+    "Size=xs, State=Hover": "#737373",
+    "Size=sm, State=Hover": "#737373",
+    "Size=md, State=Hover": "#737373"
+   }
+  },
+  "badge-base ▸ plus": {
+   "occurrences": 1,
+   "assets": [
+    "plus"
+   ],
+   "observed": [
+    "#9e77ed"
+   ],
+   "axes": [],
+   "carried": "{imported.badge-base.plus.color}"
+  },
+  "button-group-base ▸ plus": {
+   "occurrences": 8,
+   "assets": [
+    "plus"
+   ],
+   "observed": [
+    "#262626",
+    "#404040",
+    "#737373",
+    "#d4d4d4"
+   ],
+   "axes": [
+    "Current",
+    "State"
+   ],
+   "refused": "observed ink is a function of 2 host axes (Current × State) — an override ref substitutes at most 1 (core/emit-react.ts); the glyph keeps its own baked ink"
+  },
+  "social-button ▸ social-icon": {
+   "occurrences": 108,
+   "assets": [
+    "apple",
+    "dribbble",
+    "facebook",
+    "figma",
+    "google",
+    "xtwitter"
+   ],
+   "observed": [
+    "#000000",
+    "#1877f2",
+    "#242e36",
+    "#24cb71",
+    "#4285f4",
+    "#a3a3a3",
+    "#ea4c89",
+    "#ffffff"
+   ],
+   "axes": [
+    "Social",
+    "Theme"
+   ],
+   "refused": "glyph refused by the single-ink test (5 drawn inks) — nothing to recolour without destroying the mark"
+  },
+  "avatar ▸ user": {
+   "occurrences": 54,
+   "assets": [
+    "user"
+   ],
+   "observed": [
+    "#7f56d9"
+   ],
+   "axes": [],
+   "carried": "{imported.avatar.user-instance.color}"
+  },
+  "badge-base ▸ x": {
+   "occurrences": 1,
+   "assets": [
+    "x"
+   ],
+   "observed": [
+    "#9e77ed"
+   ],
+   "axes": [],
+   "carried": "{imported.badge-base.x.color}"
+  }
  }
 }

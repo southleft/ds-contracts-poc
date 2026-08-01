@@ -10,6 +10,7 @@
   border: 0;
   width: var(--ds-chevron-down-size, var(--imported-stub-chevron-down-root-width));
   height: var(--ds-chevron-down-size, var(--imported-stub-chevron-down-root-height));
+  color: var(--ds-chevron-down-color, var(--imported-stub-chevron-down-root-color));
 }
 
 .glyph {

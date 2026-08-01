@@ -19,7 +19,13 @@
             "size": 24
           }
         }
-      }
+      },
+      "tokens": {
+        "color": "{imported.stub-user.root.color}"
+      },
+      "overridable": [
+        "color"
+      ]
     }
   },
   "anchors": {

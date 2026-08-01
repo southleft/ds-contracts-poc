@@ -10,6 +10,7 @@
   border: 0;
   width: var(--ds-plus-size, var(--imported-stub-plus-root-width));
   height: var(--ds-plus-size, var(--imported-stub-plus-root-height));
+  color: var(--ds-plus-color, var(--imported-stub-plus-root-color));
 }
 
 .glyph {

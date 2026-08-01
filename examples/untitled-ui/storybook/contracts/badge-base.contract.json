@@ -51,7 +51,10 @@
       "parts": {
         "plus": {
           "component": {
-            "id": "ds.plus"
+            "id": "ds.plus",
+            "overrides": {
+              "color": "{imported.badge-base.plus.color}"
+            }
           },
           "visibleWhen": {
             "prop": "icon",
@@ -60,7 +63,10 @@
         },
         "arrowUp": {
           "component": {
-            "id": "ds.arrow-up"
+            "id": "ds.arrow-up",
+            "overrides": {
+              "color": "{imported.badge-base.arrow-up.color}"
+            }
           },
           "visibleWhen": {
             "prop": "icon",
@@ -130,7 +136,10 @@
         },
         "arrowRight": {
           "component": {
-            "id": "ds.arrow-right"
+            "id": "ds.arrow-right",
+            "overrides": {
+              "color": "{imported.badge-base.arrow-right.color}"
+            }
           },
           "visibleWhen": {
             "prop": "icon",
@@ -139,7 +148,10 @@
         },
         "x": {
           "component": {
-            "id": "ds.x"
+            "id": "ds.x",
+            "overrides": {
+              "color": "{imported.badge-base.x.color}"
+            }
           },
           "visibleWhen": {
             "prop": "icon",

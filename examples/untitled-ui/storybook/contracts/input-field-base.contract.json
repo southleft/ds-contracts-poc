@@ -171,7 +171,10 @@
                     },
                     "chevronDown": {
                       "component": {
-                        "id": "ds.chevron-down"
+                        "id": "ds.chevron-down",
+                        "overrides": {
+                          "color": "{imported.input-field-base.input-with-label-input-dropdown-chevron-down.color}"
+                        }
                       },
                       "visibleWhen": {
                         "prop": "type",
@@ -217,7 +220,10 @@
                     },
                     "mail": {
                       "component": {
-                        "id": "ds.mail"
+                        "id": "ds.mail",
+                        "overrides": {
+                          "color": "{imported.input-field-base.input-with-label-input-content-mail.color}"
+                        }
                       },
                       "visibleWhen": {
                         "prop": "type",

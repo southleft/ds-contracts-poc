@@ -70,7 +70,8 @@
               "component": {
                 "id": "ds.plus",
                 "overrides": {
-                  "size": "{imported.avatar-add-button.content-plus.size}"
+                  "size": "{imported.avatar-add-button.content-plus.size}",
+                  "color": "{imported.avatar-add-button.content-plus.color}"
                 }
               }
             }

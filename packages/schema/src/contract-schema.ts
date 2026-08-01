@@ -699,6 +699,10 @@ export const REF_OVERRIDE_CHANNELS: Record<string, { css: string[]; note: string
     css: ['background-color'],
     note: 'per-instance solid paint (dump v1.7 instancePrimaryFill, fill-shaped) — stub roots declare it (their paint IS the observed instance paint); a real child owns its own paint.',
   },
+  'color': {
+    css: ['color'],
+    note: 'per-instance GLYPH INK (gap-closing round 8; dump v1.7 instancePrimaryFill, stroke- or fill-shaped, observed on the nested instance node). The twin of background-color for a vector child: an exported glyph whose whole drawing is ONE ink draws `currentColor`, its own contract binds that ink as `color`, and a host that draws the same glyph in its own ink sets this channel. A glyph with two or more distinct inks is refused by the single-ink test (examples/untitled-ui/glyph-ink.mts) and never reaches this channel — one custom property cannot honestly serve two paints.',
+  },
 };
 
 /** The override custom property a host sets and a child consumes —

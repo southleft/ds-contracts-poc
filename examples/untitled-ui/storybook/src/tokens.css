@@ -7,6 +7,7 @@
   --imported-avatar-add-button-content-left-xs: 0px;
   --imported-avatar-add-button-content-padding-block: 4px;
   --imported-avatar-add-button-content-padding-inline: 4px;
+  --imported-avatar-add-button-content-plus-color: #a3a3a3;
   --imported-avatar-add-button-content-plus-size: 16px;
   --imported-avatar-add-button-content-top-md: 8px;
   --imported-avatar-add-button-content-top-sm: 4px;
@@ -163,6 +164,7 @@
   --imported-avatar-user-height-sm: 20px;
   --imported-avatar-user-height-xl: 32px;
   --imported-avatar-user-height-xs: 16px;
+  --imported-avatar-user-instance-color: #7f56d9;
   --imported-avatar-user-left-2xl: 16px;
   --imported-avatar-user-left-lg: 10px;
   --imported-avatar-user-left-md: 8px;
@@ -181,7 +183,10 @@
   --imported-avatar-user-width-sm: 20px;
   --imported-avatar-user-width-xl: 32px;
   --imported-avatar-user-width-xs: 16px;
+  --imported-badge-base-arrow-right-color: #9e77ed;
+  --imported-badge-base-arrow-up-color: #9e77ed;
   --imported-badge-base-avatar-size: 16px;
+  --imported-badge-base-plus-color: #9e77ed;
   --imported-badge-base-root-background-color: #f9f5ff;
   --imported-badge-base-root-border-radius: 16px;
   --imported-badge-base-root-gap-avatar: 6px;
@@ -220,6 +225,7 @@
   --imported-badge-base-text-font-size: 12px;
   --imported-badge-base-text-font-weight: 500;
   --imported-badge-base-text-line-height: 18px;
+  --imported-badge-base-x-color: #9e77ed;
   --imported-button-base-dot-background-color: #ffffff;
   --imported-button-base-dot-size: 10px;
   --imported-button-base-root-background-color: #7f56d9;
@@ -324,6 +330,7 @@
   --imported-input-field-base-input-with-label-input-background-color: #ffffff;
   --imported-input-field-base-input-with-label-input-border-width: 1px;
   --imported-input-field-base-input-with-label-input-box-shadow: 0px 1px 2px #0000000d;
+  --imported-input-field-base-input-with-label-input-content-mail-color: #737373;
   --imported-input-field-base-input-with-label-input-content-padding-block-default: 0px;
   --imported-input-field-base-input-with-label-input-content-padding-block-leadingDropdown: 0px;
   --imported-input-field-base-input-with-label-input-content-padding-block-leadingText: 0px;
@@ -354,6 +361,7 @@
   --imported-input-field-base-input-with-label-input-content-text-input-padding-right-leadingText: 14px;
   --imported-input-field-base-input-with-label-input-content-text-input-padding-right-paymentInput: 14px;
   --imported-input-field-base-input-with-label-input-content-text-input-padding-right-trailingDropdown: 0px;
+  --imported-input-field-base-input-with-label-input-dropdown-chevron-down-color: #737373;
   --imported-input-field-base-input-with-label-input-dropdown-dropdown-text-color: #171717;
   --imported-input-field-base-input-with-label-input-dropdown-gap: 4px;
   --imported-input-field-base-input-with-label-input-dropdown-padding-block: 10px;
@@ -634,8 +642,10 @@
   --imported-social-button-text-font-size: 16px;
   --imported-social-button-text-font-weight: 600;
   --imported-social-button-text-line-height: 24px;
+  --imported-stub-arrow-right-root-color: #171717;
   --imported-stub-arrow-right-root-height: 12px;
   --imported-stub-arrow-right-root-width: 12px;
+  --imported-stub-arrow-up-root-color: #171717;
   --imported-stub-arrow-up-root-height: 12px;
   --imported-stub-arrow-up-root-width: 12px;
   --imported-stub-au-root-height: 16px;
@@ -673,6 +683,7 @@
   --imported-stub-avatar-online-indicator-root-width-xs: 6px;
   --imported-stub-checkbox-root-height: 16px;
   --imported-stub-checkbox-root-width: 16px;
+  --imported-stub-chevron-down-root-color: #171717;
   --imported-stub-chevron-down-root-height: 20px;
   --imported-stub-chevron-down-root-width: 20px;
   --imported-stub-circle-root-background-image: radial-gradient(circle, transparent 7.5px, #ffffff 7.5px, #ffffff 9.17px, transparent 9.17px);
@@ -681,14 +692,19 @@
   --imported-stub-dot-root-background-color: #9e77ed;
   --imported-stub-dot-root-height: 8px;
   --imported-stub-dot-root-width: 8px;
+  --imported-stub-mail-root-color: #171717;
   --imported-stub-mail-root-height: 20px;
   --imported-stub-mail-root-width: 20px;
   --imported-stub-payment-method-icon-root-height: 24px;
   --imported-stub-payment-method-icon-root-width: 34px;
+  --imported-stub-plus-root-color: #171717;
   --imported-stub-plus-root-height: 12px;
   --imported-stub-plus-root-width: 12px;
+  --imported-stub-social-icon-root-color: #ffffff;
   --imported-stub-social-icon-root-height: 20px;
   --imported-stub-social-icon-root-width: 20px;
+  --imported-stub-user-root-color: #171717;
+  --imported-stub-x-root-color: #171717;
   --imported-stub-x-root-height: 12px;
   --imported-stub-x-root-width: 12px;
   --imported-toggle-base-button-background-color: #ffffff;

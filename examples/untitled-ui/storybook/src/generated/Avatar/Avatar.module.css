@@ -190,6 +190,11 @@
   height: var(--imported-avatar-user-height-xs);
 }
 
+.instance {
+  display: inline-flex;
+  --ds-user-color: var(--imported-avatar-user-instance-color);
+}
+
 .Text {
   color: var(--imported-avatar-text-color);
   font-weight: var(--imported-avatar-text-font-weight);

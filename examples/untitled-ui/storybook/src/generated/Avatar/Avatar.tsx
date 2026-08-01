@@ -51,7 +51,9 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
     >
       {placeholder ? (
         <div className={styles.user}>
-          <User />
+          <span className={styles.instance}>
+            <User />
+          </span>
         </div>
       ) : null}
       {text ? <span className={styles.Text}>{children}</span> : null}

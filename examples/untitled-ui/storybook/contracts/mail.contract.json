@@ -25,10 +25,12 @@
       },
       "tokens": {
         "width": "{imported.stub-mail.root.width}",
-        "height": "{imported.stub-mail.root.height}"
+        "height": "{imported.stub-mail.root.height}",
+        "color": "{imported.stub-mail.root.color}"
       },
       "overridable": [
-        "size"
+        "size",
+        "color"
       ]
     }
   },

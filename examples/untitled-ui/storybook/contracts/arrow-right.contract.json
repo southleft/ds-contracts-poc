@@ -25,10 +25,12 @@
       },
       "tokens": {
         "width": "{imported.stub-arrow-right.root.width}",
-        "height": "{imported.stub-arrow-right.root.height}"
+        "height": "{imported.stub-arrow-right.root.height}",
+        "color": "{imported.stub-arrow-right.root.color}"
       },
       "overridable": [
-        "size"
+        "size",
+        "color"
       ]
     }
   },

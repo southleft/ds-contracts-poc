@@ -175,6 +175,13 @@
   line-height: var(--imported-shared-size-24);
 }
 
+.chevronDown {
+  display: inline-flex;
+  --ds-chevron-down-color: var(
+    --imported-input-field-base-input-with-label-input-dropdown-chevron-down-color
+  );
+}
+
 .Content {
   display: flex;
   flex-direction: row;
@@ -242,6 +249,11 @@
   padding-block: var(
     --imported-input-field-base-input-with-label-input-content-padding-block-trailingDropdown
   );
+}
+
+.mail {
+  display: inline-flex;
+  --ds-mail-color: var(--imported-input-field-base-input-with-label-input-content-mail-color);
 }
 
 .textInput {

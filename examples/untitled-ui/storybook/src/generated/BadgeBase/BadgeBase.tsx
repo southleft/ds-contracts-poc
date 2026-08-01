@@ -26,8 +26,16 @@ export const BadgeBase = forwardRef<HTMLDivElement, BadgeBaseProps>(function Bad
   const classes = [styles.root, styles[`icon-${icon}`], className].filter(Boolean).join(' ');
   return (
     <div ref={ref} className={classes} {...rest}>
-      {icon === 'only' ? <Plus /> : null}
-      {icon === 'iconLeft' ? <ArrowUp /> : null}
+      {icon === 'only' ? (
+        <span className={styles.plus}>
+          <Plus />
+        </span>
+      ) : null}
+      {icon === 'iconLeft' ? (
+        <span className={styles.arrowUp}>
+          <ArrowUp />
+        </span>
+      ) : null}
       {icon === 'avatar' ? (
         <span className={styles.Avatar}>
           <Avatar size="xs" text={false} statusIcon="false" state="default" />
@@ -44,8 +52,16 @@ export const BadgeBase = forwardRef<HTMLDivElement, BadgeBaseProps>(function Bad
       icon === 'iconLeft' ? (
         <span className={styles.Text}>Label</span>
       ) : null}
-      {icon === 'iconRight' ? <ArrowRight /> : null}
-      {icon === 'xClose' ? <X /> : null}
+      {icon === 'iconRight' ? (
+        <span className={styles.arrowRight}>
+          <ArrowRight />
+        </span>
+      ) : null}
+      {icon === 'xClose' ? (
+        <span className={styles.x}>
+          <X />
+        </span>
+      ) : null}
     </div>
   );
 });

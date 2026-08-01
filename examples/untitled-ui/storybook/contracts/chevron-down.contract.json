@@ -25,10 +25,12 @@
       },
       "tokens": {
         "width": "{imported.stub-chevron-down.root.width}",
-        "height": "{imported.stub-chevron-down.root.height}"
+        "height": "{imported.stub-chevron-down.root.height}",
+        "color": "{imported.stub-chevron-down.root.color}"
       },
       "overridable": [
-        "size"
+        "size",
+        "color"
       ]
     }
   },

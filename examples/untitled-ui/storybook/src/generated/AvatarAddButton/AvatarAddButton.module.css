@@ -85,4 +85,5 @@
 .plus {
   display: inline-flex;
   --ds-plus-size: var(--imported-avatar-add-button-content-plus-size);
+  --ds-plus-color: var(--imported-avatar-add-button-content-plus-color);
 }

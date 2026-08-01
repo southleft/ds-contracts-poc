@@ -101,10 +101,12 @@
       },
       "tokens": {
         "width": "{imported.stub-social-icon.root.width}",
-        "height": "{imported.stub-social-icon.root.height}"
+        "height": "{imported.stub-social-icon.root.height}",
+        "color": "{imported.stub-social-icon.root.color}"
       },
       "overridable": [
-        "size"
+        "size",
+        "color"
       ]
     }
   },

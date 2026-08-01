@@ -70,6 +70,16 @@
   padding-block: var(--imported-badge-base-root-padding-block-only);
 }
 
+.plus {
+  display: inline-flex;
+  --ds-plus-color: var(--imported-badge-base-plus-color);
+}
+
+.arrowUp {
+  display: inline-flex;
+  --ds-arrow-up-color: var(--imported-badge-base-arrow-up-color);
+}
+
 .Avatar {
   display: inline-flex;
   --ds-avatar-size: var(--imported-badge-base-avatar-size);
@@ -80,4 +90,14 @@
   font-size: var(--imported-badge-base-text-font-size);
   font-weight: var(--imported-badge-base-text-font-weight);
   line-height: var(--imported-badge-base-text-line-height);
+}
+
+.arrowRight {
+  display: inline-flex;
+  --ds-arrow-right-color: var(--imported-badge-base-arrow-right-color);
+}
+
+.x {
+  display: inline-flex;
+  --ds-x-color: var(--imported-badge-base-x-color);
 }

@@ -8,7 +8,7 @@ import type { HTMLAttributes } from 'react';
 import styles from './Mail.module.css';
 
 const ICONS: Record<string, string> = {
-  mail: '<svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n<path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>\n</svg>',
+  mail: '<svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\n<path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>\n</svg>',
 };
 
 export interface MailProps extends HTMLAttributes<HTMLSpanElement> {}

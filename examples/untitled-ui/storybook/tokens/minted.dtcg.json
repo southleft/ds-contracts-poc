@@ -426,6 +426,12 @@
             "$type": "dimension"
           }
         }
+      },
+      "user-instance": {
+        "color": {
+          "$value": "#7f56d9",
+          "$type": "color"
+        }
       }
     },
     "stub-avatar-online-indicator": {
@@ -740,6 +746,30 @@
           "$value": "18px",
           "$type": "dimension"
         }
+      },
+      "plus": {
+        "color": {
+          "$value": "#9e77ed",
+          "$type": "color"
+        }
+      },
+      "arrow-up": {
+        "color": {
+          "$value": "#9e77ed",
+          "$type": "color"
+        }
+      },
+      "arrow-right": {
+        "color": {
+          "$value": "#9e77ed",
+          "$type": "color"
+        }
+      },
+      "x": {
+        "color": {
+          "$value": "#9e77ed",
+          "$type": "color"
+        }
       }
     },
     "stub-plus": {
@@ -751,6 +781,10 @@
         "height": {
           "$value": "12px",
           "$type": "dimension"
+        },
+        "color": {
+          "$value": "#171717",
+          "$type": "color"
         }
       }
     },
@@ -763,6 +797,10 @@
         "height": {
           "$value": "12px",
           "$type": "dimension"
+        },
+        "color": {
+          "$value": "#171717",
+          "$type": "color"
         }
       }
     },
@@ -803,6 +841,10 @@
         "height": {
           "$value": "12px",
           "$type": "dimension"
+        },
+        "color": {
+          "$value": "#171717",
+          "$type": "color"
         }
       }
     },
@@ -815,6 +857,10 @@
         "height": {
           "$value": "12px",
           "$type": "dimension"
+        },
+        "color": {
+          "$value": "#171717",
+          "$type": "color"
         }
       }
     },
@@ -1599,6 +1645,10 @@
         "size": {
           "$value": "16px",
           "$type": "dimension"
+        },
+        "color": {
+          "$value": "#a3a3a3",
+          "$type": "color"
         }
       },
       "state-hover": {
@@ -2750,6 +2800,18 @@
           "$value": "20px",
           "$type": "dimension"
         }
+      },
+      "input-with-label-input-dropdown-chevron-down": {
+        "color": {
+          "$value": "#737373",
+          "$type": "color"
+        }
+      },
+      "input-with-label-input-content-mail": {
+        "color": {
+          "$value": "#737373",
+          "$type": "color"
+        }
       }
     },
     "stub-chevron-down": {
@@ -2761,6 +2823,10 @@
         "height": {
           "$value": "20px",
           "$type": "dimension"
+        },
+        "color": {
+          "$value": "#171717",
+          "$type": "color"
         }
       }
     },
@@ -2785,6 +2851,10 @@
         "height": {
           "$value": "20px",
           "$type": "dimension"
+        },
+        "color": {
+          "$value": "#171717",
+          "$type": "color"
         }
       }
     },
@@ -3295,6 +3365,10 @@
         "height": {
           "$value": "20px",
           "$type": "dimension"
+        },
+        "color": {
+          "$value": "#ffffff",
+          "$type": "color"
         }
       }
     },
@@ -3739,6 +3813,14 @@
         "line-height": {
           "$value": "20px",
           "$type": "dimension"
+        }
+      }
+    },
+    "stub-user": {
+      "root": {
+        "color": {
+          "$value": "#171717",
+          "$type": "color"
         }
       }
     }

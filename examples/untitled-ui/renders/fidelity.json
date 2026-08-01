@@ -26,26 +26,26 @@
  {
   "set": "badge-base",
   "variant": "icon_icon_left",
-  "score": 90.18,
-  "score20": 94.73
+  "score": 90.32,
+  "score20": 95.77
  },
  {
   "set": "badge-base",
   "variant": "icon_icon_right",
-  "score": 90.18,
-  "score20": 94.73
+  "score": 90.47,
+  "score20": 95.75
  },
  {
   "set": "badge-base",
   "variant": "icon_only",
-  "score": 91,
-  "score20": 92.8
+  "score": 93,
+  "score20": 97.4
  },
  {
   "set": "badge-base",
   "variant": "icon_x_close",
-  "score": 90.62,
-  "score20": 94.4
+  "score": 91.5,
+  "score20": 96.14
  },
  {
   "set": "button-base",
@@ -506,26 +506,26 @@
  {
   "set": "input-field-base",
   "variant": "type_default_destructive_false",
-  "score": 91.29,
-  "score20": 87.13
+  "score": 91.34,
+  "score20": 87.17
  },
  {
   "set": "input-field-base",
   "variant": "type_default_destructive_true",
-  "score": 91.42,
-  "score20": 85.18
+  "score": 91.47,
+  "score20": 85.26
  },
  {
   "set": "input-field-base",
   "variant": "type_leading_dropdown_destructive_false",
-  "score": 91.86,
-  "score20": 85.85
+  "score": 91.93,
+  "score20": 85.87
  },
  {
   "set": "input-field-base",
   "variant": "type_leading_dropdown_destructive_true",
-  "score": 91.32,
-  "score20": 83.41
+  "score": 91.39,
+  "score20": 83.44
  },
  {
   "set": "input-field-base",
@@ -555,13 +555,13 @@
   "set": "input-field-base",
   "variant": "type_trailing_dropdown_destructive_false",
   "score": 92.38,
-  "score20": 86.71
+  "score20": 86.73
  },
  {
   "set": "input-field-base",
   "variant": "type_trailing_dropdown_destructive_true",
   "score": 91.85,
-  "score20": 84.79
+  "score20": 84.8
  },
  {
   "set": "avatar-group",
@@ -578,14 +578,14 @@
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_true_more_users_false",
-  "score": 86.67,
-  "score20": 96.33
+  "score": 86.77,
+  "score20": 96.31
  },
  {
   "set": "avatar-group",
   "variant": "size_md_add_user_button_true_more_users_true",
-  "score": 87.51,
-  "score20": 94.95
+  "score": 87.71,
+  "score20": 94.98
  },
  {
   "set": "avatar-group",
@@ -602,14 +602,14 @@
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_true_more_users_false",
-  "score": 84.7,
-  "score20": 95.51
+  "score": 84.8,
+  "score20": 95.61
  },
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_true_more_users_true",
-  "score": 84.93,
-  "score20": 93.9
+  "score": 85.09,
+  "score20": 93.93
  },
  {
   "set": "avatar-group",
@@ -626,14 +626,14 @@
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_true_more_users_false",
-  "score": 81.84,
-  "score20": 94.78
+  "score": 82.01,
+  "score20": 94.85
  },
  {
   "set": "avatar-group",
   "variant": "size_xs_add_user_button_true_more_users_true",
-  "score": 83.13,
-  "score20": 95.16
+  "score": 83.48,
+  "score20": 95.25
  },
  {
   "set": "tooltip",
@@ -1010,7 +1010,7 @@
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_25_left_control_0_",
-  "score": 82.13,
+  "score": 82.14,
   "score20": 96.33
  },
  {
@@ -1604,56 +1604,56 @@
  {
   "set": "avatar",
   "variant": "size_2xl_placeholder_true_text_false_status_icon_company_state_default",
-  "score": 93.96,
-  "score20": 81.73
+  "score": 95.27,
+  "score20": 82.76
  },
  {
   "set": "avatar",
   "variant": "size_2xl_placeholder_true_text_false_status_icon_company_state_focused",
-  "score": 79.59,
-  "score20": 91.47
+  "score": 80.32,
+  "score20": 92.21
  },
  {
   "set": "avatar",
   "variant": "size_2xl_placeholder_true_text_false_status_icon_company_state_hover",
-  "score": 93.96,
-  "score20": 81.73
+  "score": 95.27,
+  "score20": 82.76
  },
  {
   "set": "avatar",
   "variant": "size_2xl_placeholder_true_text_false_status_icon_false_state_default",
-  "score": 93.58,
-  "score20": 61.47
+  "score": 94.97,
+  "score20": 68.21
  },
  {
   "set": "avatar",
   "variant": "size_2xl_placeholder_true_text_false_status_icon_false_state_focused",
-  "score": 83.85,
-  "score20": 93.38
+  "score": 84.59,
+  "score20": 94.12
  },
  {
   "set": "avatar",
   "variant": "size_2xl_placeholder_true_text_false_status_icon_false_state_hover",
-  "score": 93.58,
-  "score20": 61.47
+  "score": 94.97,
+  "score20": 68.21
  },
  {
   "set": "avatar",
   "variant": "size_2xl_placeholder_true_text_false_status_icon_online_indicator_state_default",
-  "score": 92.64,
-  "score20": 81.91
+  "score": 94.37,
+  "score20": 83.17
  },
  {
   "set": "avatar",
   "variant": "size_2xl_placeholder_true_text_false_status_icon_online_indicator_state_focused",
-  "score": 81.87,
-  "score20": 91.46
+  "score": 82.6,
+  "score20": 92.2
  },
  {
   "set": "avatar",
   "variant": "size_2xl_placeholder_true_text_false_status_icon_online_indicator_state_hover",
-  "score": 92.64,
-  "score20": 81.91
+  "score": 94.37,
+  "score20": 83.17
  },
  {
   "set": "avatar",
@@ -1766,56 +1766,56 @@
  {
   "set": "avatar",
   "variant": "size_lg_placeholder_true_text_false_status_icon_company_state_default",
-  "score": 90.97,
-  "score20": 77.58
+  "score": 94.04,
+  "score20": 79.67
  },
  {
   "set": "avatar",
   "variant": "size_lg_placeholder_true_text_false_status_icon_company_state_focused",
-  "score": 74.23,
-  "score20": 88.08
+  "score": 75.41,
+  "score20": 89.54
  },
  {
   "set": "avatar",
   "variant": "size_lg_placeholder_true_text_false_status_icon_company_state_hover",
-  "score": 90.97,
-  "score20": 77.58
+  "score": 94.04,
+  "score20": 79.67
  },
  {
   "set": "avatar",
   "variant": "size_lg_placeholder_true_text_false_status_icon_false_state_default",
-  "score": 91.36,
-  "score20": 60.77
+  "score": 94.4,
+  "score20": 68.12
  },
  {
   "set": "avatar",
   "variant": "size_lg_placeholder_true_text_false_status_icon_false_state_focused",
-  "score": 79.05,
-  "score20": 90.16
+  "score": 80.33,
+  "score20": 91.8
  },
  {
   "set": "avatar",
   "variant": "size_lg_placeholder_true_text_false_status_icon_false_state_hover",
-  "score": 91.36,
-  "score20": 60.77
+  "score": 94.4,
+  "score20": 68.12
  },
  {
   "set": "avatar",
   "variant": "size_lg_placeholder_true_text_false_status_icon_online_indicator_state_default",
-  "score": 88.92,
-  "score20": 76.69
+  "score": 92.29,
+  "score20": 79
  },
  {
   "set": "avatar",
   "variant": "size_lg_placeholder_true_text_false_status_icon_online_indicator_state_focused",
-  "score": 76.5,
-  "score20": 88.12
+  "score": 77.84,
+  "score20": 89.71
  },
  {
   "set": "avatar",
   "variant": "size_lg_placeholder_true_text_false_status_icon_online_indicator_state_hover",
-  "score": 88.92,
-  "score20": 76.69
+  "score": 92.29,
+  "score20": 79
  },
  {
   "set": "avatar",
@@ -1827,7 +1827,7 @@
   "set": "avatar",
   "variant": "size_md_placeholder_false_text_false_status_icon_company_state_focused",
   "score": 54.95,
-  "score20": 91.29
+  "score20": 91.3
  },
  {
   "set": "avatar",
@@ -1863,7 +1863,7 @@
   "set": "avatar",
   "variant": "size_md_placeholder_false_text_false_status_icon_online_indicator_state_focused",
   "score": 57.29,
-  "score20": 92.38
+  "score20": 92.39
  },
  {
   "set": "avatar",
@@ -1928,56 +1928,56 @@
  {
   "set": "avatar",
   "variant": "size_md_placeholder_true_text_false_status_icon_company_state_default",
-  "score": 90.91,
-  "score20": 74.24
+  "score": 95.84,
+  "score20": 77.13
  },
  {
   "set": "avatar",
   "variant": "size_md_placeholder_true_text_false_status_icon_company_state_focused",
-  "score": 73,
-  "score20": 85.37
+  "score": 74.39,
+  "score20": 87.4
  },
  {
   "set": "avatar",
   "variant": "size_md_placeholder_true_text_false_status_icon_company_state_hover",
-  "score": 90.91,
-  "score20": 74.24
+  "score": 95.84,
+  "score20": 77.13
  },
  {
   "set": "avatar",
   "variant": "size_md_placeholder_true_text_false_status_icon_false_state_default",
-  "score": 91.5,
-  "score20": 60.58
+  "score": 97.63,
+  "score20": 68.09
  },
  {
   "set": "avatar",
   "variant": "size_md_placeholder_true_text_false_status_icon_false_state_focused",
-  "score": 78.04,
-  "score20": 87.18
+  "score": 79.77,
+  "score20": 89.71
  },
  {
   "set": "avatar",
   "variant": "size_md_placeholder_true_text_false_status_icon_false_state_hover",
-  "score": 91.5,
-  "score20": 60.58
+  "score": 97.63,
+  "score20": 68.09
  },
  {
   "set": "avatar",
   "variant": "size_md_placeholder_true_text_false_status_icon_online_indicator_state_default",
-  "score": 89.05,
-  "score20": 72.92
+  "score": 94.65,
+  "score20": 76.25
  },
  {
   "set": "avatar",
   "variant": "size_md_placeholder_true_text_false_status_icon_online_indicator_state_focused",
-  "score": 75.3,
-  "score20": 85.81
+  "score": 76.95,
+  "score20": 88.04
  },
  {
   "set": "avatar",
   "variant": "size_md_placeholder_true_text_false_status_icon_online_indicator_state_hover",
-  "score": 89.05,
-  "score20": 72.92
+  "score": 94.65,
+  "score20": 76.25
  },
  {
   "set": "avatar",
@@ -2090,56 +2090,56 @@
  {
   "set": "avatar",
   "variant": "size_sm_placeholder_true_text_false_status_icon_company_state_default",
-  "score": 88.98,
-  "score20": 71.2
+  "score": 92.98,
+  "score20": 74.8
  },
  {
   "set": "avatar",
   "variant": "size_sm_placeholder_true_text_false_status_icon_company_state_focused",
-  "score": 67.88,
-  "score20": 80.46
+  "score": 69.25,
+  "score20": 83.6
  },
  {
   "set": "avatar",
   "variant": "size_sm_placeholder_true_text_false_status_icon_company_state_hover",
-  "score": 88.98,
-  "score20": 71.2
+  "score": 92.98,
+  "score20": 74.8
  },
  {
   "set": "avatar",
   "variant": "size_sm_placeholder_true_text_false_status_icon_false_state_default",
-  "score": 87.7,
-  "score20": 60.29
+  "score": 92.48,
+  "score20": 68.05
  },
  {
   "set": "avatar",
   "variant": "size_sm_placeholder_true_text_false_status_icon_false_state_focused",
-  "score": 71.94,
-  "score20": 81.3
+  "score": 73.38,
+  "score20": 84.76
  },
  {
   "set": "avatar",
   "variant": "size_sm_placeholder_true_text_false_status_icon_false_state_hover",
-  "score": 87.7,
-  "score20": 60.29
+  "score": 92.48,
+  "score20": 68.05
  },
  {
   "set": "avatar",
   "variant": "size_sm_placeholder_true_text_false_status_icon_online_indicator_state_default",
-  "score": 87.05,
-  "score20": 68.41
+  "score": 90.27,
+  "score20": 73.1
  },
  {
   "set": "avatar",
   "variant": "size_sm_placeholder_true_text_false_status_icon_online_indicator_state_focused",
-  "score": 69.5,
-  "score20": 79.69
+  "score": 70.75,
+  "score20": 82.82
  },
  {
   "set": "avatar",
   "variant": "size_sm_placeholder_true_text_false_status_icon_online_indicator_state_hover",
-  "score": 87.05,
-  "score20": 68.41
+  "score": 90.27,
+  "score20": 73.1
  },
  {
   "set": "avatar",
@@ -2252,56 +2252,56 @@
  {
   "set": "avatar",
   "variant": "size_xl_placeholder_true_text_false_status_icon_company_state_default",
-  "score": 92.24,
-  "score20": 79.73
+  "score": 93.94,
+  "score20": 81.28
  },
  {
   "set": "avatar",
   "variant": "size_xl_placeholder_true_text_false_status_icon_company_state_focused",
-  "score": 76.39,
-  "score20": 89.17
+  "score": 77.32,
+  "score20": 90.3
  },
  {
   "set": "avatar",
   "variant": "size_xl_placeholder_true_text_false_status_icon_company_state_hover",
-  "score": 92.24,
-  "score20": 79.73
+  "score": 93.94,
+  "score20": 81.28
  },
  {
   "set": "avatar",
   "variant": "size_xl_placeholder_true_text_false_status_icon_false_state_default",
-  "score": 91.61,
-  "score20": 60.92
+  "score": 93.43,
+  "score20": 68.01
  },
  {
   "set": "avatar",
   "variant": "size_xl_placeholder_true_text_false_status_icon_false_state_focused",
-  "score": 80.91,
-  "score20": 91.46
+  "score": 81.84,
+  "score20": 92.59
  },
  {
   "set": "avatar",
   "variant": "size_xl_placeholder_true_text_false_status_icon_false_state_hover",
-  "score": 91.61,
-  "score20": 60.92
+  "score": 93.43,
+  "score20": 68.01
  },
  {
   "set": "avatar",
   "variant": "size_xl_placeholder_true_text_false_status_icon_online_indicator_state_default",
-  "score": 90.74,
-  "score20": 79.01
+  "score": 92.98,
+  "score20": 80.65
  },
  {
   "set": "avatar",
   "variant": "size_xl_placeholder_true_text_false_status_icon_online_indicator_state_focused",
-  "score": 78.74,
-  "score20": 89.3
+  "score": 79.66,
+  "score20": 90.43
  },
  {
   "set": "avatar",
   "variant": "size_xl_placeholder_true_text_false_status_icon_online_indicator_state_hover",
-  "score": 90.74,
-  "score20": 79.01
+  "score": 92.98,
+  "score20": 80.65
  },
  {
   "set": "avatar",
@@ -2414,56 +2414,56 @@
  {
   "set": "avatar",
   "variant": "size_xs_placeholder_true_text_false_status_icon_company_state_default",
-  "score": 85.73,
-  "score20": 66.67
+  "score": 89.3,
+  "score20": 73.02
  },
  {
   "set": "avatar",
   "variant": "size_xs_placeholder_true_text_false_status_icon_company_state_focused",
-  "score": 68.55,
-  "score20": 78.12
+  "score": 69.73,
+  "score20": 81.32
  },
  {
   "set": "avatar",
   "variant": "size_xs_placeholder_true_text_false_status_icon_company_state_hover",
-  "score": 85.73,
-  "score20": 66.67
+  "score": 89.3,
+  "score20": 73.02
  },
  {
   "set": "avatar",
   "variant": "size_xs_placeholder_true_text_false_status_icon_false_state_default",
-  "score": 85.33,
-  "score20": 59.79
+  "score": 89,
+  "score20": 67.96
  },
  {
   "set": "avatar",
   "variant": "size_xs_placeholder_true_text_false_status_icon_false_state_focused",
-  "score": 68.65,
-  "score20": 78.35
+  "score": 70.8,
+  "score20": 81.96
  },
  {
   "set": "avatar",
   "variant": "size_xs_placeholder_true_text_false_status_icon_false_state_hover",
-  "score": 85.33,
-  "score20": 59.79
+  "score": 89,
+  "score20": 67.96
  },
  {
   "set": "avatar",
   "variant": "size_xs_placeholder_true_text_false_status_icon_online_indicator_state_default",
-  "score": 83.04,
-  "score20": 60.01
+  "score": 86.56,
+  "score20": 67.81
  },
  {
   "set": "avatar",
   "variant": "size_xs_placeholder_true_text_false_status_icon_online_indicator_state_focused",
-  "score": 68.85,
-  "score20": 75.4
+  "score": 70.21,
+  "score20": 78.46
  },
  {
   "set": "avatar",
   "variant": "size_xs_placeholder_true_text_false_status_icon_online_indicator_state_hover",
-  "score": 83.04,
-  "score20": 60.01
+  "score": 86.56,
+  "score20": 67.81
  },
  {
   "set": "avatar-label-group",
@@ -2684,14 +2684,14 @@
  {
   "set": "avatar-add-button",
   "variant": "size_md_state_default",
-  "score": 96.37,
-  "score20": 96.25
+  "score": 96.91,
+  "score20": 96.99
  },
  {
   "set": "avatar-add-button",
   "variant": "size_md_state_disabled",
-  "score": 98.51,
-  "score20": 97.74
+  "score": 99.05,
+  "score20": 99.06
  },
  {
   "set": "avatar-add-button",
@@ -2708,14 +2708,14 @@
  {
   "set": "avatar-add-button",
   "variant": "size_sm_state_default",
-  "score": 94.77,
-  "score20": 94.07
+  "score": 95.59,
+  "score20": 95.17
  },
  {
   "set": "avatar-add-button",
   "variant": "size_sm_state_disabled",
-  "score": 97.7,
-  "score20": 96.69
+  "score": 98.53,
+  "score20": 98.58
  },
  {
   "set": "avatar-add-button",
@@ -2732,14 +2732,14 @@
  {
   "set": "avatar-add-button",
   "variant": "size_xs_state_default",
-  "score": 91.2,
-  "score20": 90.45
+  "score": 92.64,
+  "score20": 92.47
  },
  {
   "set": "avatar-add-button",
   "variant": "size_xs_state_disabled",
-  "score": 96,
-  "score20": 94.06
+  "score": 97.44,
+  "score20": 97.52
  },
  {
   "set": "avatar-add-button",
@@ -3110,7 +3110,7 @@
  {
   "set": "social-button",
   "variant": "social_dribbble_supporting_text_true_theme_brand_state_default",
-  "score": 85.68,
+  "score": 85.69,
   "score20": 85.49
  },
  {
@@ -3272,7 +3272,7 @@
  {
   "set": "social-button",
   "variant": "social_figma_supporting_text_false_theme_brand_state_default",
-  "score": 95,
+  "score": 94.94,
   "score20": 95.74
  },
  {
@@ -3332,13 +3332,13 @@
  {
   "set": "social-button",
   "variant": "social_figma_supporting_text_true_theme_brand_state_focused",
-  "score": 90.9,
+  "score": 90.87,
   "score20": 88.16
  },
  {
   "set": "social-button",
   "variant": "social_figma_supporting_text_true_theme_brand_state_hover",
-  "score": 87.23,
+  "score": 87.25,
   "score20": 89.89
  },
  {
@@ -3356,7 +3356,7 @@
  {
   "set": "social-button",
   "variant": "social_figma_supporting_text_true_theme_color_state_hover",
-  "score": 88.38,
+  "score": 88.35,
   "score20": 82.9
  },
  {
@@ -3446,7 +3446,7 @@
  {
   "set": "social-button",
   "variant": "social_google_supporting_text_true_theme_brand_state_hover",
-  "score": 89.65,
+  "score": 89.63,
   "score20": 84.1
  },
  {
@@ -3464,7 +3464,7 @@
  {
   "set": "social-button",
   "variant": "social_google_supporting_text_true_theme_color_state_hover",
-  "score": 88,
+  "score": 88.02,
   "score20": 83.36
  },
  {
@@ -3554,8 +3554,8 @@
  {
   "set": "social-button",
   "variant": "social_x_supporting_text_true_theme_brand_state_hover",
-  "score": 85.85,
-  "score20": 87.14
+  "score": 85.88,
+  "score20": 87.12
  },
  {
   "set": "social-button",

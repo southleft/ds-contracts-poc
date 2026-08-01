@@ -49,14 +49,22 @@ export const InputFieldBase = forwardRef<HTMLDivElement, InputFieldBaseProps>(
                     {type === 'trailingDropdown' ? 'USD' : 'US'}
                   </span>
                 ) : null}
-                {type === 'leadingDropdown' || type === 'trailingDropdown' ? <ChevronDown /> : null}
+                {type === 'leadingDropdown' || type === 'trailingDropdown' ? (
+                  <span className={styles.chevronDown}>
+                    <ChevronDown />
+                  </span>
+                ) : null}
               </div>
             ) : null}
             <div className={styles.Content}>
               {type === 'paymentInput' ? (
                 <PaymentMethodIcon size="sm" paymentMethod="mastercard" />
               ) : null}
-              {type === 'default' ? <Mail /> : null}
+              {type === 'default' ? (
+                <span className={styles.mail}>
+                  <Mail />
+                </span>
+              ) : null}
               <div className={styles.textInput}>
                 {type === 'trailingDropdown' ? <span className={styles.leadingText}>$</span> : null}
                 <span className={styles.textInputText}>

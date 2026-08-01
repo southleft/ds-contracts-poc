@@ -4,19 +4,19 @@ Score = % of pixels REPRODUCED, measured at the reference's own true scale with 
 
 | component | variants scored | mean fidelity % | axis-not-carried | interaction-state | unscored |
 |---|---|---|---|---|---|
-| badge-base | 8 | 90.9 | 0 | 0 | 0 |
+| badge-base | 8 | 91.3 | 0 | 0 | 0 |
 | button-base | 20 | 92.0 | 0 | 0 | 0 |
 | toggle-base | 16 | 98.0 | 0 | 16 | 0 |
 | dropdown-list-item | 12 | 87.3 | 0 | 12 | 0 |
 | input-field-base | 10 | 91.6 | 0 | 0 | 0 |
-| avatar-group | 12 | 84.2 | 0 | 0 | 0 |
+| avatar-group | 12 | 84.3 | 0 | 0 | 0 |
 | tooltip | 28 | 81.2 | 0 | 0 | 0 |
 | slider | 40 | 87.5 | 0 | 0 | 0 |
 | progress-bar | 55 | 91.1 | 0 | 0 | 0 |
 | progress-circle | 16 | 85.8 | 4 | 0 | 0 |
-| avatar | 162 | 85.1 | 0 | 0 | 0 |
+| avatar | 162 | 85.9 | 0 | 0 | 0 |
 | avatar-label-group | 12 | 91.5 | 0 | 24 | 0 |
-| avatar-add-button | 6 | 95.8 | 0 | 6 | 0 |
+| avatar-add-button | 6 | 96.7 | 0 | 6 | 0 |
 | button-group-base | 32 | 80.1 | 0 | 0 | 0 |
 | social-button | 108 | 88.5 | 0 | 0 | 0 |
-| **ALL** | 537 | **87.2** | | | |
+| **ALL** | 537 | **87.5** | | | |
