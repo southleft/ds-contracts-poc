@@ -1,0 +1,139 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.atoms-badge",
+  "name": "AtomsBadge",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "accent",
+          "info",
+          "warning",
+          "featured",
+          "brand"
+        ]
+      },
+      "default": "accent",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "variant",
+          "values": {
+            "accent": "accent",
+            "info": "info",
+            "warning": "warning",
+            "featured": "featured",
+            "brand": "brand"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "hasIcon",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "hasIcon",
+          "values": {
+            "true": "true",
+            "false": "false"
+          }
+        },
+        "code": {
+          "prop": "hasIcon"
+        }
+      }
+    },
+    {
+      "name": "hasLabel",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "hasLabel",
+          "values": {
+            "true": "true",
+            "false": "false"
+          }
+        },
+        "code": {
+          "prop": "hasLabel"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "default": "Label",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Icon": {
+          "component": {
+            "id": "ds.icons-placeholder",
+            "props": {
+              "size": "20"
+            }
+          },
+          "visibleWhen": {
+            "prop": "hasIcon"
+          }
+        },
+        "Label": {
+          "content": {
+            "prop": "label"
+          },
+          "visibleWhen": {
+            "prop": "hasLabel"
+          },
+          "tokens": {
+            "font-size": "{imported.atoms-badge.label.font-size}",
+            "font-weight": "{imported.atoms-badge.label.font-weight}",
+            "line-height": "{imported.atoms-badge.label.line-height}"
+          }
+        }
+      },
+      "tokens": {
+        "border-radius": "{component.border.radius.rounded}",
+        "width": "{imported.atoms-badge.root.width.{hasLabel}}",
+        "height": "{imported.atoms-badge.root.height.{hasLabel}}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": "f94a876aad30083433e12119de1a5393008c492f",
+      "nodeId": "2369:2993"
+    },
+    "code": {
+      "importPath": "src/components/AtomsBadge",
+      "export": "AtomsBadge"
+    }
+  }
+}

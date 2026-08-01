@@ -1,0 +1,124 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.atoms-text-link",
+  "name": "AtomsTextLink",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"Atoms/Text Link\" instances of Molecules/Alert — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "hasStartIcon",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasStartIcon"
+        },
+        "code": {
+          "prop": "hasStartIcon"
+        }
+      }
+    },
+    {
+      "name": "hasEndIcon",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasEndIcon"
+        },
+        "code": {
+          "prop": "hasEndIcon"
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "default": "Label",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "text"
+        },
+        "code": {
+          "prop": "text"
+        }
+      }
+    },
+    {
+      "name": "emphasis",
+      "type": {
+        "enum": [
+          "inverted"
+        ]
+      },
+      "default": "inverted",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "emphasis",
+          "values": {
+            "inverted": "inverted"
+          }
+        },
+        "code": {
+          "prop": "emphasis"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "state",
+          "values": {
+            "default": "default"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "text": {
+          "content": {
+            "prop": "text"
+          }
+        }
+      },
+      "tokens": {
+        "width": "{imported.stub-atoms-text-link.root.width}",
+        "height": "{imported.stub-atoms-text-link.root.height}",
+        "background-color": "{comp.button.primary.color.content.default}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": "2aeeb787afbdf535d2d864b30c279afbe07767c0"
+    },
+    "code": {
+      "importPath": "src/components/AtomsTextLink",
+      "export": "AtomsTextLink"
+    }
+  }
+}

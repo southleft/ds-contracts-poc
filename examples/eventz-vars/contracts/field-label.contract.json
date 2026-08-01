@@ -1,0 +1,68 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.field-label",
+  "name": "FieldLabel",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \".Field label\" instances of Atoms/Input — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "hasTooltip",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasTooltip"
+        },
+        "code": {
+          "prop": "hasTooltip"
+        }
+      }
+    },
+    {
+      "name": "labelText",
+      "type": "text",
+      "default": "Label",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "labelText"
+        },
+        "code": {
+          "prop": "labelText"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "labelText": {
+          "content": {
+            "prop": "labelText"
+          }
+        }
+      },
+      "tokens": {
+        "width": "{imported.stub-field-label.root.width}",
+        "height": "{imported.stub-field-label.root.height}",
+        "background-color": "{color.background.default}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": "d66a0be49a66f26437e973eaff5e16f170e2b305"
+    },
+    "code": {
+      "importPath": "src/components/FieldLabel",
+      "export": "FieldLabel"
+    }
+  }
+}

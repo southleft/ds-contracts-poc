@@ -1,0 +1,54 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.inline-hint",
+  "name": "InlineHint",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \".Inline hint\" instances of Atoms/Checkbox — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "supportingText",
+      "type": "text",
+      "default": "Hint text",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "supportingText"
+        },
+        "code": {
+          "prop": "supportingText"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "supportingText": {
+          "content": {
+            "prop": "supportingText"
+          }
+        }
+      },
+      "tokens": {
+        "width": "{imported.stub-inline-hint.root.width}",
+        "height": "{imported.stub-inline-hint.root.height}",
+        "background-color": "{color.background.default}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": "f36998ba91948f5337a78544a49eeec99236e3d7"
+    },
+    "code": {
+      "importPath": "src/components/InlineHint",
+      "export": "InlineHint"
+    }
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.atoms-checkbox",
+  "name": "AtomsCheckbox",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "input"
+  },
+  "props": [
+    {
+      "name": "isChecked",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "isChecked",
+          "values": {
+            "false": "false",
+            "true": "true"
+          }
+        },
+        "code": {
+          "prop": "isChecked"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "isDisabled",
+          "values": {
+            "false": "false",
+            "true": "true"
+          }
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "default": "Label",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "hasHint",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasHint"
+        },
+        "code": {
+          "prop": "hasHint"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row"
+      },
+      "parts": {
+        "iconscheckbox": {
+          "component": {
+            "id": "ds.icons-checkbox",
+            "props": {
+              "state": "unselected"
+            }
+          }
+        },
+        "content": {
+          "layout": {
+            "direction": "column",
+            "justify": "center",
+            "align": "stretch",
+            "grow": true
+          },
+          "tokens": {
+            "padding-inline": "{spacing.0}",
+            "padding-block": "{spacing.0}",
+            "gap": "{spacing.0}"
+          },
+          "parts": {
+            "Label": {
+              "content": {
+                "prop": "label"
+              },
+              "tokens": {
+                "color": "{color.content.default}",
+                "font-size": "{imported.atoms-checkbox.content-label.font-size}",
+                "font-weight": "{imported.atoms-checkbox.content-label.font-weight}",
+                "line-height": "{imported.atoms-checkbox.content-label.line-height}"
+              }
+            },
+            "inlineHint": {
+              "component": {
+                "id": "ds.inline-hint",
+                "props": {
+                  "supportingText": "Hint text"
+                }
+              },
+              "visibleWhen": {
+                "prop": "hasHint"
+              }
+            }
+          }
+        }
+      },
+      "literals": {
+        "height": "fit-content"
+      },
+      "tokens": {
+        "padding-inline": "{spacing.0}",
+        "padding-block": "{spacing.0}",
+        "gap": "{spacing.1}",
+        "width": "{imported.atoms-checkbox.root.width}"
+      },
+      "states": {
+        "focus-visible": {
+          "outline-color": "{comp.border.focus-ring}",
+          "outline-width": "{imported.atoms-checkbox.state-focus-visible.outline-width}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": "17f8473be2cf48e57a40ceaa97e23516af0d6ad6",
+      "nodeId": "2323:181"
+    },
+    "code": {
+      "importPath": "src/components/AtomsCheckbox",
+      "export": "AtomsCheckbox"
+    }
+  },
+  "figmaStatePreviews": true
+}

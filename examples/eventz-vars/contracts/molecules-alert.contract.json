@@ -1,0 +1,257 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.molecules-alert",
+  "name": "MoleculesAlert",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "success",
+          "info",
+          "warning",
+          "danger"
+        ]
+      },
+      "default": "success",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "variant",
+          "values": {
+            "success": "success",
+            "info": "info",
+            "warning": "warning",
+            "danger": "danger"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "titleText",
+      "type": "text",
+      "default": "Title",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "titleText"
+        },
+        "code": {
+          "prop": "titleText"
+        }
+      }
+    },
+    {
+      "name": "descriptionText",
+      "type": "text",
+      "default": "Description",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "descriptionText"
+        },
+        "code": {
+          "prop": "descriptionText"
+        }
+      }
+    },
+    {
+      "name": "hasIcon",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasIcon"
+        },
+        "code": {
+          "prop": "hasIcon"
+        }
+      }
+    },
+    {
+      "name": "hasLink",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasLink"
+        },
+        "code": {
+          "prop": "hasLink"
+        }
+      }
+    },
+    {
+      "name": "isDismissible",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "isDismissible"
+        },
+        "code": {
+          "prop": "isDismissible"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "row"
+      },
+      "parts": {
+        "container": {
+          "layout": {
+            "direction": "row",
+            "justify": "center",
+            "align": "center"
+          },
+          "tokens": {
+            "padding-inline": "{spacing.0}",
+            "padding-block": "{spacing.0}",
+            "gap": "{spacing.2}"
+          },
+          "visibleWhen": {
+            "prop": "hasIcon"
+          },
+          "parts": {
+            "Icon": {
+              "component": {
+                "id": "ds.icons-check-circle",
+                "props": {
+                  "size": "20"
+                }
+              }
+            }
+          }
+        },
+        "horizontalStack": {
+          "layout": {
+            "direction": "column",
+            "align": "stretch",
+            "grow": true
+          },
+          "tokens": {
+            "padding-inline": "{spacing.0}",
+            "padding-block": "{spacing.0}"
+          },
+          "parts": {
+            "horizontalStack2": {
+              "layout": {
+                "direction": "column",
+                "align": "stretch"
+              },
+              "tokens": {
+                "padding-inline": "{spacing.0}",
+                "padding-block": "{spacing.0}",
+                "gap": "{spacing.0}"
+              },
+              "parts": {
+                "Title": {
+                  "content": {
+                    "prop": "titleText"
+                  },
+                  "tokens": {
+                    "color": "{color.content.inverse}",
+                    "font-size": "{imported.molecules-alert.horizontal-stack-horizontal-stack-title.font-size}",
+                    "font-weight": "{imported.molecules-alert.horizontal-stack-horizontal-stack-title.font-weight}",
+                    "line-height": "{imported.molecules-alert.horizontal-stack-horizontal-stack-title.line-height}"
+                  }
+                },
+                "Description": {
+                  "content": {
+                    "prop": "descriptionText"
+                  },
+                  "tokens": {
+                    "color": "{color.content.inverse}",
+                    "font-size": "{imported.molecules-alert.horizontal-stack-horizontal-stack-description.font-size}",
+                    "font-weight": "{imported.molecules-alert.horizontal-stack-horizontal-stack-description.font-weight}",
+                    "line-height": "{imported.molecules-alert.horizontal-stack-horizontal-stack-description.line-height}"
+                  }
+                }
+              }
+            },
+            "atomstextLink": {
+              "component": {
+                "id": "ds.atoms-text-link",
+                "props": {
+                  "hasStartIcon": false,
+                  "hasEndIcon": false,
+                  "text": "Label",
+                  "emphasis": "inverted",
+                  "state": "default"
+                }
+              },
+              "visibleWhen": {
+                "prop": "hasLink"
+              }
+            }
+          }
+        },
+        "container2": {
+          "layout": {
+            "direction": "row",
+            "justify": "center",
+            "align": "center"
+          },
+          "tokens": {
+            "padding-inline": "{spacing.0}",
+            "padding-block": "{spacing.0}",
+            "gap": "{spacing.2}"
+          },
+          "visibleWhen": {
+            "prop": "isDismissible"
+          },
+          "parts": {
+            "container2Icon": {
+              "component": {
+                "id": "ds.icons-close",
+                "props": {
+                  "size": "20"
+                }
+              }
+            }
+          }
+        }
+      },
+      "literals": {
+        "height": "fit-content"
+      },
+      "tokens": {
+        "padding-inline": "{spacing.4}",
+        "padding-block": "{spacing.3}",
+        "border-radius": "{component.border.radius.rounded-md}",
+        "gap": "{spacing.2}",
+        "max-width": "{imported.molecules-alert.root.max-width}",
+        "box-shadow": "{imported.molecules-alert.root.box-shadow}",
+        "width": "{imported.molecules-alert.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": "53f012e948c652da736a2fe49cf135e255df1eba",
+      "nodeId": "2629:56948"
+    },
+    "code": {
+      "importPath": "src/components/MoleculesAlert",
+      "export": "MoleculesAlert"
+    }
+  }
+}

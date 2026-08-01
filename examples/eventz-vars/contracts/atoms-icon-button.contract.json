@@ -1,0 +1,127 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.atoms-icon-button",
+  "name": "AtomsIconButton",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "primary",
+          "knockout",
+          "secondary",
+          "bare",
+          "bareKnockout"
+        ]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "variant",
+          "values": {
+            "primary": "primary",
+            "knockout": "knockout",
+            "secondary": "secondary",
+            "bare": "bare",
+            "bareKnockout": "bare knockout"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "isDisabled",
+          "values": {
+            "false": "false",
+            "true": "true"
+          }
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Icon": {
+          "slot": {
+            "name": "children",
+            "defaultContent": [
+              {
+                "id": "ds.icons-placeholder",
+                "props": {
+                  "size": "20"
+                }
+              }
+            ],
+            "figmaProperty": "icon"
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
+      "tokensByProp": {
+        "prop": "variant",
+        "map": {
+          "knockout": {
+            "background-color": "{comp.button.color.background.knockout}"
+          },
+          "secondary": {
+            "background-color": "{comp.button.color.background.default}"
+          },
+          "bare": {
+            "background-color": "{color.background.none}"
+          },
+          "bareKnockout": {
+            "background-color": "{color.background.none}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{comp.button.primary.color.background.default}",
+        "border-radius": "{border.radius.8}",
+        "gap": "{spacing.2}"
+      },
+      "states": {
+        "focus-visible": {
+          "outline-color": "{comp.border.focus-ring}",
+          "outline-width": "{imported.atoms-icon-button.state-focus-visible.outline-width}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": "da80f9ad219208d90e1be6e85c9bbed280fb88a7",
+      "nodeId": "2319:88"
+    },
+    "code": {
+      "importPath": "src/components/AtomsIconButton",
+      "export": "AtomsIconButton"
+    }
+  },
+  "figmaStatePreviews": true
+}

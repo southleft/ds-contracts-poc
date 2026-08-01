@@ -1,0 +1,302 @@
+{
+  "imported": {
+    "atoms-badge": {
+      "label": {
+        "font-size": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "700",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "18px",
+          "$type": "dimension"
+        }
+      },
+      "root": {
+        "width": {
+          "true": {
+            "$value": "fit-content"
+          },
+          "false": {
+            "$value": "22px",
+            "$type": "dimension"
+          }
+        },
+        "height": {
+          "true": {
+            "$value": "fit-content"
+          },
+          "false": {
+            "$value": "22px",
+            "$type": "dimension"
+          }
+        }
+      }
+    },
+    "stub-icons-placeholder": {
+      "root": {
+        "width": {
+          "$value": "15px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "15px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "atoms-icon-button": {
+      "state-focus-visible": {
+        "outline-width": {
+          "$value": "2px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "atoms-button": {
+      "label": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "500",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      },
+      "state-focus-visible": {
+        "outline-width": {
+          "$value": "2px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-icons-play": {
+      "root": {
+        "width": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-icons-pause": {
+      "root": {
+        "width": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "atoms-checkbox": {
+      "content-label": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "500",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      },
+      "root": {
+        "width": {
+          "$value": "240px",
+          "$type": "dimension"
+        }
+      },
+      "state-focus-visible": {
+        "outline-width": {
+          "$value": "2px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-icons-checkbox": {
+      "root": {
+        "width": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-inline-hint": {
+      "root": {
+        "width": {
+          "$value": "216px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "18px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "atoms-input": {
+      "horizontal-stack-input-content": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "500",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      },
+      "root": {
+        "width": {
+          "$value": "268px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-field-label": {
+      "root": {
+        "width": {
+          "$value": "268px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "18px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-inline-danger": {
+      "root": {
+        "width": {
+          "$value": "268px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "18px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "atoms-tag": {
+      "label": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      },
+      "state-focus-visible": {
+        "outline-width": {
+          "$value": "2px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "molecules-alert": {
+      "root": {
+        "max-width": {
+          "$value": "880px",
+          "$type": "dimension"
+        },
+        "box-shadow": {
+          "$value": "0px 12px 60px #00000026, 0px 12px 32px -16px #0009321f",
+          "$type": "shadow"
+        },
+        "width": {
+          "$value": "390px",
+          "$type": "dimension"
+        }
+      },
+      "horizontal-stack-horizontal-stack-title": {
+        "font-size": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "700",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      },
+      "horizontal-stack-horizontal-stack-description": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "500",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-icons-check-circle": {
+      "root": {
+        "width": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-atoms-text-link": {
+      "root": {
+        "width": {
+          "$value": "37px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "stub-icons-close": {
+      "root": {
+        "width": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "16px",
+          "$type": "dimension"
+        }
+      }
+    }
+  }
+}

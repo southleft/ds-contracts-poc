@@ -1,0 +1,54 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.icons-play",
+  "name": "IconsPlay",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "STUB contract auto-proposed for the nested \"Icons/Play\" instances of Atoms/Button — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "20"
+        ]
+      },
+      "default": "20",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "size",
+          "values": {
+            "20": "20"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {},
+      "tokens": {
+        "width": "{imported.stub-icons-play.root.width}",
+        "height": "{imported.stub-icons-play.root.height}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": "1dd7e9116372ea5855573d0e9eaf10ed43b51d94"
+    },
+    "code": {
+      "importPath": "src/components/IconsPlay",
+      "export": "IconsPlay"
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.atoms-tag",
+  "name": "AtomsTag",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "isInteractive",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "isInteractive",
+          "values": {
+            "true": "true",
+            "false": "false"
+          }
+        },
+        "code": {
+          "prop": "isInteractive"
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "parent",
+          "child"
+        ]
+      },
+      "default": "parent",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "variant",
+          "values": {
+            "parent": "parent",
+            "child": "child"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "isActive",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "isActive",
+          "values": {
+            "true": "true",
+            "false": "false"
+          }
+        },
+        "code": {
+          "prop": "isActive"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "default": "Label",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "Label": {
+          "content": {
+            "prop": "label"
+          },
+          "tokens": {
+            "font-size": "{imported.atoms-tag.label.font-size}",
+            "line-height": "{imported.atoms-tag.label.line-height}"
+          }
+        },
+        "Icon": {
+          "component": {
+            "id": "ds.icons-placeholder",
+            "props": {
+              "size": "20"
+            }
+          }
+        }
+      },
+      "literals": {
+        "width": "fit-content",
+        "height": "fit-content"
+      },
+      "states": {
+        "focus-visible": {
+          "outline-color": "{comp.border.focus-ring}",
+          "outline-width": "{imported.atoms-tag.state-focus-visible.outline-width}"
+        }
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": "571c89f9c19968f485e8fea81cd081ebbe91f9b8",
+      "nodeId": "2600:5023"
+    },
+    "code": {
+      "importPath": "src/components/AtomsTag",
+      "export": "AtomsTag"
+    }
+  },
+  "figmaStatePreviews": true
+}

@@ -1,0 +1,270 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.atoms-input",
+  "name": "AtomsInput",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "input"
+  },
+  "props": [
+    {
+      "name": "isFilled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "isFilled",
+          "values": {
+            "false": "false",
+            "true": "true"
+          }
+        },
+        "code": {
+          "prop": "isFilled"
+        }
+      }
+    },
+    {
+      "name": "hasError",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "hasError",
+          "values": {
+            "false": "false",
+            "true": "true"
+          }
+        },
+        "code": {
+          "prop": "hasError"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "isDisabled",
+          "values": {
+            "false": "false",
+            "true": "true"
+          }
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "content",
+      "type": "text",
+      "default": "Input content",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "content"
+        },
+        "code": {
+          "prop": "content"
+        }
+      }
+    },
+    {
+      "name": "hasLabel",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasLabel"
+        },
+        "code": {
+          "prop": "hasLabel"
+        }
+      }
+    },
+    {
+      "name": "hasStartIcon",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasStartIcon"
+        },
+        "code": {
+          "prop": "hasStartIcon"
+        }
+      }
+    },
+    {
+      "name": "hasEndIcon",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasEndIcon"
+        },
+        "code": {
+          "prop": "hasEndIcon"
+        }
+      }
+    },
+    {
+      "name": "hasHint",
+      "type": "boolean",
+      "default": true,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "hasHint"
+        },
+        "code": {
+          "prop": "hasHint"
+        }
+      }
+    }
+  ],
+  "states": [
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "align": "stretch"
+      },
+      "parts": {
+        "fieldLabel": {
+          "component": {
+            "id": "ds.field-label",
+            "props": {
+              "hasTooltip": true,
+              "labelText": "Label"
+            }
+          },
+          "visibleWhen": {
+            "prop": "hasLabel"
+          }
+        },
+        "horizontalStack": {
+          "layout": {
+            "direction": "row",
+            "align": "center"
+          },
+          "tokens": {
+            "background-color": "{comp.form.color.background.default}",
+            "padding-inline": "{spacing.3}",
+            "border-radius": "{component.border.radius.rounded-lg}",
+            "border-width": "{border.width.1}",
+            "gap": "{spacing.2}"
+          },
+          "parts": {
+            "startIcon": {
+              "slot": {
+                "name": "startIcon",
+                "defaultContent": [
+                  {
+                    "id": "ds.icons-placeholder",
+                    "props": {
+                      "size": "20"
+                    }
+                  }
+                ],
+                "figmaProperty": "startIcon"
+              },
+              "visibleWhen": {
+                "prop": "hasStartIcon"
+              }
+            },
+            "inputContent": {
+              "content": {
+                "prop": "content"
+              },
+              "tokens": {
+                "font-size": "{imported.atoms-input.horizontal-stack-input-content.font-size}",
+                "font-weight": "{imported.atoms-input.horizontal-stack-input-content.font-weight}",
+                "line-height": "{imported.atoms-input.horizontal-stack-input-content.line-height}"
+              }
+            },
+            "endIcon": {
+              "slot": {
+                "name": "endIcon",
+                "defaultContent": [
+                  {
+                    "id": "ds.icons-placeholder",
+                    "props": {
+                      "size": "20"
+                    }
+                  }
+                ],
+                "figmaProperty": "endIcon"
+              },
+              "visibleWhen": {
+                "prop": "hasEndIcon"
+              }
+            }
+          },
+          "states": {
+            "hover": {
+              "background-color": "{comp.form.color.background.hover}"
+            }
+          }
+        },
+        "inlineDanger": {
+          "component": {
+            "id": "ds.inline-danger",
+            "props": {
+              "supportingText": "Danger text"
+            }
+          },
+          "visibleWhen": {
+            "prop": "hasError"
+          }
+        },
+        "inlineHint": {
+          "component": {
+            "id": "ds.inline-hint",
+            "props": {
+              "supportingText": "Hint text"
+            }
+          },
+          "visibleWhen": {
+            "prop": "hasHint"
+          }
+        }
+      },
+      "literals": {
+        "height": "fit-content"
+      },
+      "tokens": {
+        "padding-inline": "{spacing.0}",
+        "padding-block": "{spacing.0}",
+        "gap": "{spacing.1}",
+        "width": "{imported.atoms-input.root.width}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+      "componentSetKey": "d03495f1e159b5aa11cb1bc35aa7d355ad626d66",
+      "nodeId": "2365:108"
+    },
+    "code": {
+      "importPath": "src/components/AtomsInput",
+      "export": "AtomsInput"
+    }
+  },
+  "figmaStatePreviews": true
+}
