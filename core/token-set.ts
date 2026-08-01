@@ -83,6 +83,30 @@ export function parseTokenSet(
       if (v !== undefined && !isPlainObject(v)) {
         return { ok: false, error: `the tokenSet "modes.${m}" must be a flat DTCG object — ${SHAPE}.` };
       }
+      // FLAT means flat, and this used to go unchecked. `base` is flattened to
+      // dot-path names; a mode object that is still a NESTED tree has no key
+      // matching any of them, so every lookup misses and every variable
+      // silently keeps its base value — a two-mode collection whose dark mode
+      // equals its light mode, reported as a success the whole way down. The
+      // shape was documented and unenforced, so the only thing standing
+      // between an adopter and a wrong dark mode was the accident that this
+      // repo's own mode files happen to be flat. Refuse it by name instead,
+      // and name the offending key so the fix is obvious.
+      if (isPlainObject(v)) {
+        const nested = Object.entries(v).find(
+          ([, leaf]) => isPlainObject(leaf) && !('$value' in leaf),
+        );
+        if (nested !== undefined) {
+          return {
+            ok: false,
+            error:
+              `the tokenSet "modes.${m}" is a NESTED DTCG tree — its entry "${nested[0]}" holds a group, not a ` +
+              `{ "$value" } leaf. Mode objects must be FLAT and use the SAME dot-path names as "base" ` +
+              `(e.g. "color.background.brand"), or every lookup misses and the mode silently renders as base — ` +
+              `${SHAPE}.`,
+          };
+        }
+      }
     }
     modes = raw.modes as TokenSetPayload['modes'];
   }

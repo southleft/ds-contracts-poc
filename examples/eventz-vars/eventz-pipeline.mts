@@ -193,9 +193,22 @@ const built = new Map<string, string>();
 for (const [id, c] of contracts) built.set(`${id.replace(/^ds\./, '')}.contract.json`, serialize(c));
 
 const pathFor = (f: string): string =>
-  f === 'minted.dtcg.json' || f === 'captured.dtcg.json' ? path.join(TOKENS, f) : f === 'NOTES.md' ? path.join(HERE, f) : path.join(CONTRACTS, f);
+  f.endsWith('.dtcg.json') ? path.join(TOKENS, f) : f === 'NOTES.md' ? path.join(HERE, f) : path.join(CONTRACTS, f);
 built.set('minted.dtcg.json', serialize(mintedTree));
 built.set('captured.dtcg.json', serialize(captured.tree));
+
+// THE MODE PLANE. 43 of the 70 resolved variables genuinely differ between
+// Light and Dark, and a bundle built from `base` alone flattens them: the
+// generated variable table carries light===dark for every entry, which is a
+// silently WRONG two-mode collection rather than a missing one. The per-mode
+// trees come out of the same capture, so they are written beside base and fed
+// to `figma bundle --modes light,dark`. Figma's own mode NAMES are arbitrary
+// ("Light"/"Dark" here, but a file may spell them anything) while the bundle
+// vocabulary knows exactly two slots — so the mapping is positional and
+// stated here rather than inferred from the spelling.
+for (const [mode, m] of Object.entries(captured.modes ?? {})) {
+  built.set(`${mode.toLowerCase()}.dtcg.json`, serialize(m.tree));
+}
 
 // Every named decision, committed. The classes below are counted rather than
 // described so the artifact reports its own shape: a refusal class that grows

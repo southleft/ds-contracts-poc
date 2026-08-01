@@ -5287,6 +5287,11 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (check.status !== 0) throw new Error(`plugin-engine-check failed:\n${check.out}`);
       for (const want of [
         '✔ engine bundle fresh vs committed receipt',
+        // The tokenSet modes SHAPE pin (found by the first nested mode input —
+        // a captured Figma variable collection). A nested modes tree used to
+        // parse and then silently render Dark as Light; every committed bundle
+        // is flat, so no library pin could have caught it.
+        '✔ tokenSet modes: a FLAT modes object parses and a NESTED one is REFUSED BY NAME',
         '✔ headless generate: Badge v',
         'stored specHash equals the engine mirror',
         // G9 — the sample-library cold start: the baked bundle builds with

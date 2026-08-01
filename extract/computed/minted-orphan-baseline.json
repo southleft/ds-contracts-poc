@@ -1,5 +1,5 @@
 {
-  "_marker": "UNREFERENCED MINTED LEAVES per library \u2014 a DECREASE-ONLY ratchet (task #42, cause B). Re-record with `npm run eval -- --only minted-leaves --write-orphan-baseline` as part of a reviewed change.",
+  "_marker": "UNREFERENCED MINTED LEAVES per library — a DECREASE-ONLY ratchet (task #42, cause B). Re-record with `npm run eval -- --only minted-leaves --write-orphan-baseline` as part of a reviewed change.",
   "rows": [
     {
       "library": "altitude",
@@ -17,6 +17,11 @@
       "unreferenced": 92
     },
     {
+      "library": "eventz-vars",
+      "leaves": 53,
+      "unreferenced": 4
+    },
+    {
       "library": "mui",
       "leaves": 1393,
       "unreferenced": 355
@@ -31,6 +36,5 @@
       "leaves": 236,
       "unreferenced": 2
     }
-  ],
-  "_polarisRecaptureNote": "2026-07-29 \u2014 polaris's row moved 980 leaves / 312 unreferenced -> 1317 / 635 and that is a RE-RECORD OF A REVIEWED CHANGE, not a ratchet failure waved through. Cause: the task-#26 recapture \u2014 the FIRST since polaris was library #2, run with today's engine \u2014 reads far more of the library than the round-5-era artifacts did (337 more minted leaves), and the reviewed contract bindings reference the same disciplined subset. The extra unreferenced leaves are the SAME cause B the mint round named: a leaf the engine mints whose binding never reached the contract. Reading more of a library surfaces more of cause B; it does not create it (the astryx note above records the identical mechanism one day earlier). The quality number that matters moved the RIGHT way in the same round: polaris had ZERO source-aliased leaves before this round; it now ships 179 aliases to its own {p.*} tokens, and of the anchorable denominator \u2014 colour leaves \u2014 101/572 = 17.7% are aliased (was 0/anything = 0%). Shrinking cause B for every library (a prune-to-referenced pass in the shared promote) is a named candidate round, not a polaris patch."
+  ]
 }

@@ -207,8 +207,18 @@ async function bundleCommand(argv: string[]): Promise<number> {
   };
   const base = flattenDtcg(readJsonObject(path.resolve(tokenFiles[0])));
   const minted = tokenFiles[1] ? readJsonObject(path.resolve(tokenFiles[1])) : undefined;
-  const light = modeFiles[0] ? readJsonObject(path.resolve(modeFiles[0])) : undefined;
-  const dark = modeFiles[1] ? readJsonObject(path.resolve(modeFiles[1])) : undefined;
+  // The mode trees flatten by the SAME rule as base, and for the same reason.
+  // They did not, and the failure was silent rather than loud: a NESTED mode
+  // file has no key matching base's dot-path names, so every variable fell
+  // back to its base value and the plugin built a two-mode collection whose
+  // dark mode equalled its light mode — while the CLI line said "modes:
+  // light/dark" and the generated script header said "Light/Dark modes". The
+  // repo's own mode files are flat by convention, which is why five committed
+  // library bundles are unaffected and nothing caught it; the first NESTED
+  // mode input (a real captured Figma variable tree — DTCG is nested by
+  // nature) exposed it. Same fix, same flattener, both halves now closed.
+  const light = modeFiles[0] ? flattenDtcg(readJsonObject(path.resolve(modeFiles[0]))) : undefined;
+  const dark = modeFiles[1] ? flattenDtcg(readJsonObject(path.resolve(modeFiles[1]))) : undefined;
   const name = flagString(parsed, 'name') ?? 'Tokens';
 
   const bundle = {

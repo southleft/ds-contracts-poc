@@ -1,0 +1,2951 @@
+{
+  "type": "CONTRACTS-BUNDLE",
+  "version": 1,
+  "tokenSet": {
+    "name": "Eventz",
+    "base": {
+      "8": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "component.border.radius.rounded": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "component.border.radius.rounded-lg": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "component.border.radius.rounded-xl": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "component.border.radius.rounded-full": {
+        "$value": "9999px",
+        "$type": "dimension"
+      },
+      "component.border.radius.rounded-md": {
+        "$value": "6px",
+        "$type": "dimension"
+      },
+      "component.border.width.sm": {
+        "$value": "1px",
+        "$type": "dimension"
+      },
+      "spacing.0": {
+        "$value": "0px",
+        "$type": "dimension"
+      },
+      "spacing.1": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "spacing.2": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "spacing.3": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "spacing.4": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "spacing.6": {
+        "$value": "6px",
+        "$type": "dimension"
+      },
+      "color.content.inverse": {
+        "$value": "#252729",
+        "$type": "color"
+      },
+      "color.content.weak": {
+        "$value": "#5b5d5e",
+        "$type": "color"
+      },
+      "color.content.default": {
+        "$value": "#252729",
+        "$type": "color"
+      },
+      "color.content.weak-hover": {
+        "$value": "#2c2e30",
+        "$type": "color"
+      },
+      "color.content.brand": {
+        "$value": "#224b60",
+        "$type": "color"
+      },
+      "color.content.default-hover": {
+        "$value": "#000002",
+        "$type": "color"
+      },
+      "color.content.utility.success-strong": {
+        "$value": "#329b40",
+        "$type": "color"
+      },
+      "color.content.utility.info-strong": {
+        "$value": "#326e9b",
+        "$type": "color"
+      },
+      "color.content.utility.warning-strong": {
+        "$value": "#9b6e31",
+        "$type": "color"
+      },
+      "color.content.utility.danger-strong": {
+        "$value": "#9b3232",
+        "$type": "color"
+      },
+      "color.neutral.950": {
+        "$value": "#252729",
+        "$type": "color"
+      },
+      "color.background.brand": {
+        "$value": "#3d7a95",
+        "$type": "color"
+      },
+      "color.background.none": {
+        "$value": "#00000200",
+        "$type": "color"
+      },
+      "color.background.inverted": {
+        "$value": "#c6c7c6",
+        "$type": "color"
+      },
+      "color.background.default": {
+        "$value": "#ffffff",
+        "$type": "color"
+      },
+      "color.background.weak": {
+        "$value": "#0000020d",
+        "$type": "color"
+      },
+      "color.background.brand-hover": {
+        "$value": "#2d6079",
+        "$type": "color"
+      },
+      "color.background.subtle-hover": {
+        "$value": "#0000024d",
+        "$type": "color"
+      },
+      "color.background.weak-hover": {
+        "$value": "#00000233",
+        "$type": "color"
+      },
+      "border.width.1": {
+        "$value": "1px",
+        "$type": "dimension"
+      },
+      "border.width.2": {
+        "$value": "2px",
+        "$type": "dimension"
+      },
+      "border.radius.4": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "border.radius.8": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "border.radius.lg": {
+        "$value": "11px",
+        "$type": "dimension"
+      },
+      "border.radius.md": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "theme.opacity.default": {
+        "$value": "100",
+        "$type": "number"
+      },
+      "theme.opacity.disabled": {
+        "$value": "40",
+        "$type": "number"
+      },
+      "comp.button.primary.color.background.default": {
+        "$value": "#3d7a95",
+        "$type": "color"
+      },
+      "comp.button.primary.color.background.hover": {
+        "$value": "#2d6079",
+        "$type": "color"
+      },
+      "comp.button.primary.color.background.active": {
+        "$value": "#2d6079",
+        "$type": "color"
+      },
+      "comp.button.primary.color.content.default": {
+        "$value": "#ffffff",
+        "$type": "color"
+      },
+      "comp.button.primary.color.content.hover": {
+        "$value": "#ffffff",
+        "$type": "color"
+      },
+      "comp.button.primary.color.content.active": {
+        "$value": "#ffffff",
+        "$type": "color"
+      },
+      "comp.button.color.background.knockout": {
+        "$value": "#f7f8f7",
+        "$type": "color"
+      },
+      "comp.button.color.background.default": {
+        "$value": "#0000020d",
+        "$type": "color"
+      },
+      "comp.button.color.background.knockout-hover": {
+        "$value": "#c6c7c6",
+        "$type": "color"
+      },
+      "comp.button.color.background.hover": {
+        "$value": "#00000233",
+        "$type": "color"
+      },
+      "comp.button.color.background.knockout-active": {
+        "$value": "#f7f8f7",
+        "$type": "color"
+      },
+      "comp.button.color.content.default": {
+        "$value": "#252729",
+        "$type": "color"
+      },
+      "comp.button.color.content.hover": {
+        "$value": "#252729",
+        "$type": "color"
+      },
+      "comp.button.color.content.active": {
+        "$value": "#252729",
+        "$type": "color"
+      },
+      "comp.button.color.border.default": {
+        "$value": "#0000021a",
+        "$type": "color"
+      },
+      "comp.button.color.border.hover": {
+        "$value": "#0000021a",
+        "$type": "color"
+      },
+      "comp.button.color.border.active": {
+        "$value": "#0000021a",
+        "$type": "color"
+      },
+      "comp.border.none": {
+        "$value": "#0000021a",
+        "$type": "color"
+      },
+      "comp.border.focus-ring": {
+        "$value": "#2d6079",
+        "$type": "color"
+      },
+      "comp.form.color.background.default": {
+        "$value": "#0000020d",
+        "$type": "color"
+      },
+      "comp.form.color.background.hover": {
+        "$value": "#00000226",
+        "$type": "color"
+      },
+      "comp.form.color.border.default": {
+        "$value": "#00000233",
+        "$type": "color"
+      },
+      "comp.form.color.border.utility.danger": {
+        "$value": "#c23737",
+        "$type": "color"
+      },
+      "comp.form.color.border.hover": {
+        "$value": "#0000024d",
+        "$type": "color"
+      },
+      "space.xs": {
+        "$value": "8px",
+        "$type": "dimension"
+      },
+      "opacity.disabled": {
+        "$value": "40",
+        "$type": "number"
+      },
+      "opacity.full": {
+        "$value": "100",
+        "$type": "number"
+      },
+      "button.color.content.default": {
+        "$value": "#ffffff",
+        "$type": "color"
+      }
+    },
+    "modes": {
+      "light": {
+        "8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "component.border.radius.rounded": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "component.border.radius.rounded-lg": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "component.border.radius.rounded-xl": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "component.border.radius.rounded-full": {
+          "$value": "9999px",
+          "$type": "dimension"
+        },
+        "component.border.radius.rounded-md": {
+          "$value": "6px",
+          "$type": "dimension"
+        },
+        "component.border.width.sm": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "color.content.inverse": {
+          "$value": "#252729",
+          "$type": "color"
+        },
+        "color.content.weak": {
+          "$value": "#5b5d5e",
+          "$type": "color"
+        },
+        "color.content.default": {
+          "$value": "#252729",
+          "$type": "color"
+        },
+        "color.content.weak-hover": {
+          "$value": "#2c2e30",
+          "$type": "color"
+        },
+        "color.content.brand": {
+          "$value": "#224b60",
+          "$type": "color"
+        },
+        "color.content.default-hover": {
+          "$value": "#000002",
+          "$type": "color"
+        },
+        "color.content.utility.success-strong": {
+          "$value": "#329b40",
+          "$type": "color"
+        },
+        "color.content.utility.info-strong": {
+          "$value": "#326e9b",
+          "$type": "color"
+        },
+        "color.content.utility.warning-strong": {
+          "$value": "#9b6e31",
+          "$type": "color"
+        },
+        "color.content.utility.danger-strong": {
+          "$value": "#9b3232",
+          "$type": "color"
+        },
+        "color.background.brand": {
+          "$value": "#3d7a95",
+          "$type": "color"
+        },
+        "color.background.none": {
+          "$value": "#00000200",
+          "$type": "color"
+        },
+        "color.background.inverted": {
+          "$value": "#c6c7c6",
+          "$type": "color"
+        },
+        "color.background.default": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "color.background.weak": {
+          "$value": "#0000020d",
+          "$type": "color"
+        },
+        "color.background.brand-hover": {
+          "$value": "#2d6079",
+          "$type": "color"
+        },
+        "color.background.subtle-hover": {
+          "$value": "#0000024d",
+          "$type": "color"
+        },
+        "color.background.weak-hover": {
+          "$value": "#00000233",
+          "$type": "color"
+        },
+        "comp.button.primary.color.background.default": {
+          "$value": "#3d7a95",
+          "$type": "color"
+        },
+        "comp.button.primary.color.background.hover": {
+          "$value": "#2d6079",
+          "$type": "color"
+        },
+        "comp.button.primary.color.background.active": {
+          "$value": "#2d6079",
+          "$type": "color"
+        },
+        "comp.button.primary.color.content.default": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "comp.button.primary.color.content.hover": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "comp.button.primary.color.content.active": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "comp.button.color.background.knockout": {
+          "$value": "#f7f8f7",
+          "$type": "color"
+        },
+        "comp.button.color.background.default": {
+          "$value": "#0000020d",
+          "$type": "color"
+        },
+        "comp.button.color.background.knockout-hover": {
+          "$value": "#c6c7c6",
+          "$type": "color"
+        },
+        "comp.button.color.background.hover": {
+          "$value": "#00000233",
+          "$type": "color"
+        },
+        "comp.button.color.background.knockout-active": {
+          "$value": "#f7f8f7",
+          "$type": "color"
+        },
+        "comp.button.color.content.default": {
+          "$value": "#252729",
+          "$type": "color"
+        },
+        "comp.button.color.content.hover": {
+          "$value": "#252729",
+          "$type": "color"
+        },
+        "comp.button.color.content.active": {
+          "$value": "#252729",
+          "$type": "color"
+        },
+        "comp.button.color.border.default": {
+          "$value": "#0000021a",
+          "$type": "color"
+        },
+        "comp.button.color.border.hover": {
+          "$value": "#0000021a",
+          "$type": "color"
+        },
+        "comp.button.color.border.active": {
+          "$value": "#0000021a",
+          "$type": "color"
+        },
+        "comp.border.none": {
+          "$value": "#0000021a",
+          "$type": "color"
+        },
+        "comp.border.focus-ring": {
+          "$value": "#2d6079",
+          "$type": "color"
+        },
+        "comp.form.color.background.default": {
+          "$value": "#0000020d",
+          "$type": "color"
+        },
+        "comp.form.color.background.hover": {
+          "$value": "#00000226",
+          "$type": "color"
+        },
+        "comp.form.color.border.default": {
+          "$value": "#00000233",
+          "$type": "color"
+        },
+        "comp.form.color.border.utility.danger": {
+          "$value": "#c23737",
+          "$type": "color"
+        },
+        "comp.form.color.border.hover": {
+          "$value": "#0000024d",
+          "$type": "color"
+        },
+        "border.radius.lg": {
+          "$value": "11px",
+          "$type": "dimension"
+        },
+        "border.radius.md": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "space.xs": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "opacity.disabled": {
+          "$value": "40",
+          "$type": "number"
+        },
+        "opacity.full": {
+          "$value": "100",
+          "$type": "number"
+        },
+        "button.color.content.default": {
+          "$value": "#252729",
+          "$type": "color"
+        }
+      },
+      "dark": {
+        "8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "component.border.radius.rounded": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "component.border.radius.rounded-lg": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "component.border.radius.rounded-xl": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "component.border.radius.rounded-full": {
+          "$value": "9999px",
+          "$type": "dimension"
+        },
+        "component.border.radius.rounded-md": {
+          "$value": "6px",
+          "$type": "dimension"
+        },
+        "component.border.width.sm": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "color.content.inverse": {
+          "$value": "#252729",
+          "$type": "color"
+        },
+        "color.content.weak": {
+          "$value": "#c6c7c6",
+          "$type": "color"
+        },
+        "color.content.default": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "color.content.weak-hover": {
+          "$value": "#f7f8f7",
+          "$type": "color"
+        },
+        "color.content.brand": {
+          "$value": "#9ec2d2",
+          "$type": "color"
+        },
+        "color.content.default-hover": {
+          "$value": "#c6c7c6",
+          "$type": "color"
+        },
+        "color.content.utility.success-strong": {
+          "$value": "#26602e",
+          "$type": "color"
+        },
+        "color.content.utility.info-strong": {
+          "$value": "#264460",
+          "$type": "color"
+        },
+        "color.content.utility.warning-strong": {
+          "$value": "#78542e",
+          "$type": "color"
+        },
+        "color.content.utility.danger-strong": {
+          "$value": "#60262a",
+          "$type": "color"
+        },
+        "color.background.brand": {
+          "$value": "#6ba0b8",
+          "$type": "color"
+        },
+        "color.background.none": {
+          "$value": "#ffffff00",
+          "$type": "color"
+        },
+        "color.background.inverted": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "color.background.default": {
+          "$value": "#252729",
+          "$type": "color"
+        },
+        "color.background.weak": {
+          "$value": "#ffffff0d",
+          "$type": "color"
+        },
+        "color.background.brand-hover": {
+          "$value": "#9ec2d2",
+          "$type": "color"
+        },
+        "color.background.subtle-hover": {
+          "$value": "#ffffff4d",
+          "$type": "color"
+        },
+        "color.background.weak-hover": {
+          "$value": "#ffffff33",
+          "$type": "color"
+        },
+        "comp.button.primary.color.background.default": {
+          "$value": "#6ba0b8",
+          "$type": "color"
+        },
+        "comp.button.primary.color.background.hover": {
+          "$value": "#9ec2d2",
+          "$type": "color"
+        },
+        "comp.button.primary.color.background.active": {
+          "$value": "#9ec2d2",
+          "$type": "color"
+        },
+        "comp.button.primary.color.content.default": {
+          "$value": "#0a1a24",
+          "$type": "color"
+        },
+        "comp.button.primary.color.content.hover": {
+          "$value": "#0a1a24",
+          "$type": "color"
+        },
+        "comp.button.primary.color.content.active": {
+          "$value": "#0a1a24",
+          "$type": "color"
+        },
+        "comp.button.color.background.knockout": {
+          "$value": "#252729",
+          "$type": "color"
+        },
+        "comp.button.color.background.default": {
+          "$value": "#ffffff1a",
+          "$type": "color"
+        },
+        "comp.button.color.background.knockout-hover": {
+          "$value": "#2c2e30",
+          "$type": "color"
+        },
+        "comp.button.color.background.hover": {
+          "$value": "#ffffff4d",
+          "$type": "color"
+        },
+        "comp.button.color.background.knockout-active": {
+          "$value": "#252729",
+          "$type": "color"
+        },
+        "comp.button.color.content.default": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "comp.button.color.content.hover": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "comp.button.color.content.active": {
+          "$value": "#ffffff",
+          "$type": "color"
+        },
+        "comp.button.color.border.default": {
+          "$value": "#ffffff1a",
+          "$type": "color"
+        },
+        "comp.button.color.border.hover": {
+          "$value": "#ffffff1a",
+          "$type": "color"
+        },
+        "comp.button.color.border.active": {
+          "$value": "#ffffff1a",
+          "$type": "color"
+        },
+        "comp.border.none": {
+          "$value": "#00000200",
+          "$type": "color"
+        },
+        "comp.border.focus-ring": {
+          "$value": "#3d7a95",
+          "$type": "color"
+        },
+        "comp.form.color.background.default": {
+          "$value": "#ffffff0d",
+          "$type": "color"
+        },
+        "comp.form.color.background.hover": {
+          "$value": "#ffffff26",
+          "$type": "color"
+        },
+        "comp.form.color.border.default": {
+          "$value": "#ffffff33",
+          "$type": "color"
+        },
+        "comp.form.color.border.utility.danger": {
+          "$value": "#ff8092",
+          "$type": "color"
+        },
+        "comp.form.color.border.hover": {
+          "$value": "#ffffff4d",
+          "$type": "color"
+        },
+        "border.radius.lg": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "border.radius.md": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "space.xs": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "opacity.disabled": {
+          "$value": "40",
+          "$type": "number"
+        },
+        "opacity.full": {
+          "$value": "100",
+          "$type": "number"
+        },
+        "button.color.content.default": {
+          "$value": "#ffffff",
+          "$type": "color"
+        }
+      }
+    },
+    "minted": {
+      "imported": {
+        "atoms-badge": {
+          "label": {
+            "font-size": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "700",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "18px",
+              "$type": "dimension"
+            }
+          },
+          "root": {
+            "width": {
+              "true": {
+                "$value": "fit-content"
+              },
+              "false": {
+                "$value": "22px",
+                "$type": "dimension"
+              }
+            },
+            "height": {
+              "true": {
+                "$value": "fit-content"
+              },
+              "false": {
+                "$value": "22px",
+                "$type": "dimension"
+              }
+            }
+          }
+        },
+        "stub-icons-placeholder": {
+          "root": {
+            "width": {
+              "$value": "15px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "15px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "atoms-icon-button": {
+          "state-focus-visible": {
+            "outline-width": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "atoms-button": {
+          "label": {
+            "font-size": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "500",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "state-focus-visible": {
+            "outline-width": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "stub-icons-play": {
+          "root": {
+            "width": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "stub-icons-pause": {
+          "root": {
+            "width": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "atoms-checkbox": {
+          "content-label": {
+            "font-size": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "500",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "root": {
+            "width": {
+              "$value": "240px",
+              "$type": "dimension"
+            }
+          },
+          "state-focus-visible": {
+            "outline-width": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "stub-icons-checkbox": {
+          "root": {
+            "width": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "stub-inline-hint": {
+          "root": {
+            "width": {
+              "$value": "216px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "18px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "atoms-input": {
+          "horizontal-stack-input-content": {
+            "font-size": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "500",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "root": {
+            "width": {
+              "$value": "268px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "stub-field-label": {
+          "root": {
+            "width": {
+              "$value": "268px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "18px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "stub-inline-danger": {
+          "root": {
+            "width": {
+              "$value": "268px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "18px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "atoms-tag": {
+          "label": {
+            "font-size": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "line-height": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "state-focus-visible": {
+            "outline-width": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "molecules-alert": {
+          "root": {
+            "max-width": {
+              "$value": "880px",
+              "$type": "dimension"
+            },
+            "box-shadow": {
+              "$value": "0px 12px 60px #00000026, 0px 12px 32px -16px #0009321f",
+              "$type": "shadow"
+            },
+            "width": {
+              "$value": "390px",
+              "$type": "dimension"
+            }
+          },
+          "horizontal-stack-horizontal-stack-title": {
+            "font-size": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "700",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "horizontal-stack-horizontal-stack-description": {
+            "font-size": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "font-weight": {
+              "$value": "500",
+              "$type": "number"
+            },
+            "line-height": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "stub-icons-check-circle": {
+          "root": {
+            "width": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "stub-atoms-text-link": {
+          "root": {
+            "width": {
+              "$value": "37px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "20px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "stub-icons-close": {
+          "root": {
+            "width": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "16px",
+              "$type": "dimension"
+            }
+          }
+        }
+      }
+    }
+  },
+  "contracts": [
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.atoms-badge",
+      "name": "AtomsBadge",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": {
+            "enum": [
+              "accent",
+              "info",
+              "warning",
+              "featured",
+              "brand"
+            ]
+          },
+          "default": "accent",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "variant",
+              "values": {
+                "accent": "accent",
+                "info": "info",
+                "warning": "warning",
+                "featured": "featured",
+                "brand": "brand"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        },
+        {
+          "name": "hasIcon",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "hasIcon",
+              "values": {
+                "true": "true",
+                "false": "false"
+              }
+            },
+            "code": {
+              "prop": "hasIcon"
+            }
+          }
+        },
+        {
+          "name": "hasLabel",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "hasLabel",
+              "values": {
+                "true": "true",
+                "false": "false"
+              }
+            },
+            "code": {
+              "prop": "hasLabel"
+            }
+          }
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "default": "Label",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "parts": {
+            "Icon": {
+              "component": {
+                "id": "ds.icons-placeholder",
+                "props": {
+                  "size": "20"
+                }
+              },
+              "visibleWhen": {
+                "prop": "hasIcon"
+              }
+            },
+            "Label": {
+              "content": {
+                "prop": "label"
+              },
+              "visibleWhen": {
+                "prop": "hasLabel"
+              },
+              "tokens": {
+                "font-size": "{imported.atoms-badge.label.font-size}",
+                "font-weight": "{imported.atoms-badge.label.font-weight}",
+                "line-height": "{imported.atoms-badge.label.line-height}"
+              }
+            }
+          },
+          "tokens": {
+            "border-radius": "{component.border.radius.rounded}",
+            "width": "{imported.atoms-badge.root.width.{hasLabel}}",
+            "height": "{imported.atoms-badge.root.height.{hasLabel}}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "f94a876aad30083433e12119de1a5393008c492f",
+          "nodeId": "2369:2993"
+        },
+        "code": {
+          "importPath": "src/components/AtomsBadge",
+          "export": "AtomsBadge"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.atoms-button",
+      "name": "AtomsButton",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+      "semantics": {
+        "element": "button"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": {
+            "enum": [
+              "primary",
+              "knockout",
+              "secondary",
+              "bare"
+            ]
+          },
+          "default": "primary",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "variant",
+              "values": {
+                "primary": "primary",
+                "knockout": "knockout",
+                "secondary": "secondary",
+                "bare": "bare"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "isDisabled",
+              "values": {
+                "false": "false",
+                "true": "true"
+              }
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        },
+        {
+          "name": "text",
+          "type": "text",
+          "default": "Label",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "text"
+            },
+            "code": {
+              "prop": "text"
+            }
+          }
+        },
+        {
+          "name": "hasStartIcon",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasStartIcon"
+            },
+            "code": {
+              "prop": "hasStartIcon"
+            }
+          }
+        },
+        {
+          "name": "hasEndIcon",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasEndIcon"
+            },
+            "code": {
+              "prop": "hasEndIcon"
+            }
+          }
+        }
+      ],
+      "states": [
+        "focus-visible"
+      ],
+      "anatomy": {
+        "root": {
+          "parts": {
+            "startIcon": {
+              "slot": {
+                "name": "startIcon",
+                "defaultContent": [
+                  {
+                    "id": "ds.icons-play"
+                  }
+                ],
+                "figmaProperty": "startIcon"
+              },
+              "visibleWhen": {
+                "prop": "hasStartIcon"
+              }
+            },
+            "Label": {
+              "tokensByProp": {
+                "prop": "variant",
+                "map": {
+                  "knockout": {
+                    "color": "{comp.button.color.content.default}"
+                  },
+                  "secondary": {
+                    "color": "{comp.button.color.content.default}"
+                  },
+                  "bare": {
+                    "color": "{comp.button.color.content.default}"
+                  }
+                }
+              },
+              "content": {
+                "prop": "text"
+              },
+              "tokens": {
+                "color": "{comp.button.primary.color.content.default}",
+                "font-size": "{imported.atoms-button.label.font-size}",
+                "font-weight": "{imported.atoms-button.label.font-weight}",
+                "line-height": "{imported.atoms-button.label.line-height}"
+              }
+            },
+            "endIcon": {
+              "slot": {
+                "name": "endIcon",
+                "defaultContent": [
+                  {
+                    "id": "ds.icons-pause"
+                  }
+                ],
+                "figmaProperty": "endIcon"
+              },
+              "visibleWhen": {
+                "prop": "hasEndIcon"
+              }
+            }
+          },
+          "literals": {
+            "width": "fit-content",
+            "height": "fit-content"
+          },
+          "tokensByProp": {
+            "prop": "variant",
+            "map": {
+              "knockout": {
+                "background-color": "{comp.button.color.background.knockout}"
+              },
+              "secondary": {
+                "background-color": "{comp.button.color.background.default}"
+              },
+              "bare": {
+                "background-color": "{color.background.none}"
+              }
+            }
+          },
+          "tokens": {
+            "background-color": "{comp.button.primary.color.background.default}",
+            "padding-inline": "{spacing.3}",
+            "border-radius": "{component.border.radius.rounded-lg}",
+            "gap": "{spacing.1}"
+          },
+          "states": {
+            "focus-visible": {
+              "outline-color": "{comp.border.focus-ring}",
+              "outline-width": "{imported.atoms-button.state-focus-visible.outline-width}"
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "e480cd07dbf6ddbefd4e2c35cb16581b09285391",
+          "nodeId": "2313:42"
+        },
+        "code": {
+          "importPath": "src/components/AtomsButton",
+          "export": "AtomsButton"
+        }
+      },
+      "figmaStatePreviews": true
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.atoms-checkbox",
+      "name": "AtomsCheckbox",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+      "semantics": {
+        "element": "input"
+      },
+      "props": [
+        {
+          "name": "isChecked",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "isChecked",
+              "values": {
+                "false": "false",
+                "true": "true"
+              }
+            },
+            "code": {
+              "prop": "isChecked"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "isDisabled",
+              "values": {
+                "false": "false",
+                "true": "true"
+              }
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "default": "Label",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          }
+        },
+        {
+          "name": "hasHint",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasHint"
+            },
+            "code": {
+              "prop": "hasHint"
+            }
+          }
+        }
+      ],
+      "states": [
+        "focus-visible"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "row"
+          },
+          "parts": {
+            "iconscheckbox": {
+              "component": {
+                "id": "ds.icons-checkbox",
+                "props": {
+                  "state": "unselected"
+                }
+              }
+            },
+            "content": {
+              "layout": {
+                "direction": "column",
+                "justify": "center",
+                "align": "stretch",
+                "grow": true
+              },
+              "tokens": {
+                "padding-inline": "{spacing.0}",
+                "padding-block": "{spacing.0}",
+                "gap": "{spacing.0}"
+              },
+              "parts": {
+                "Label": {
+                  "content": {
+                    "prop": "label"
+                  },
+                  "tokens": {
+                    "color": "{color.content.default}",
+                    "font-size": "{imported.atoms-checkbox.content-label.font-size}",
+                    "font-weight": "{imported.atoms-checkbox.content-label.font-weight}",
+                    "line-height": "{imported.atoms-checkbox.content-label.line-height}"
+                  }
+                },
+                "inlineHint": {
+                  "component": {
+                    "id": "ds.inline-hint",
+                    "props": {
+                      "supportingText": "Hint text"
+                    }
+                  },
+                  "visibleWhen": {
+                    "prop": "hasHint"
+                  }
+                }
+              }
+            }
+          },
+          "literals": {
+            "height": "fit-content"
+          },
+          "tokens": {
+            "padding-inline": "{spacing.0}",
+            "padding-block": "{spacing.0}",
+            "gap": "{spacing.1}",
+            "width": "{imported.atoms-checkbox.root.width}"
+          },
+          "states": {
+            "focus-visible": {
+              "outline-color": "{comp.border.focus-ring}",
+              "outline-width": "{imported.atoms-checkbox.state-focus-visible.outline-width}"
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "17f8473be2cf48e57a40ceaa97e23516af0d6ad6",
+          "nodeId": "2323:181"
+        },
+        "code": {
+          "importPath": "src/components/AtomsCheckbox",
+          "export": "AtomsCheckbox"
+        }
+      },
+      "figmaStatePreviews": true
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.atoms-icon-button",
+      "name": "AtomsIconButton",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+      "semantics": {
+        "element": "button"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": {
+            "enum": [
+              "primary",
+              "knockout",
+              "secondary",
+              "bare",
+              "bareKnockout"
+            ]
+          },
+          "default": "primary",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "variant",
+              "values": {
+                "primary": "primary",
+                "knockout": "knockout",
+                "secondary": "secondary",
+                "bare": "bare",
+                "bareKnockout": "bare knockout"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "isDisabled",
+              "values": {
+                "false": "false",
+                "true": "true"
+              }
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        }
+      ],
+      "states": [
+        "focus-visible"
+      ],
+      "anatomy": {
+        "root": {
+          "parts": {
+            "Icon": {
+              "slot": {
+                "name": "children",
+                "defaultContent": [
+                  {
+                    "id": "ds.icons-placeholder",
+                    "props": {
+                      "size": "20"
+                    }
+                  }
+                ],
+                "figmaProperty": "icon"
+              }
+            }
+          },
+          "literals": {
+            "width": "fit-content",
+            "height": "fit-content"
+          },
+          "tokensByProp": {
+            "prop": "variant",
+            "map": {
+              "knockout": {
+                "background-color": "{comp.button.color.background.knockout}"
+              },
+              "secondary": {
+                "background-color": "{comp.button.color.background.default}"
+              },
+              "bare": {
+                "background-color": "{color.background.none}"
+              },
+              "bareKnockout": {
+                "background-color": "{color.background.none}"
+              }
+            }
+          },
+          "tokens": {
+            "background-color": "{comp.button.primary.color.background.default}",
+            "border-radius": "{border.radius.8}",
+            "gap": "{spacing.2}"
+          },
+          "states": {
+            "focus-visible": {
+              "outline-color": "{comp.border.focus-ring}",
+              "outline-width": "{imported.atoms-icon-button.state-focus-visible.outline-width}"
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "da80f9ad219208d90e1be6e85c9bbed280fb88a7",
+          "nodeId": "2319:88"
+        },
+        "code": {
+          "importPath": "src/components/AtomsIconButton",
+          "export": "AtomsIconButton"
+        }
+      },
+      "figmaStatePreviews": true
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.atoms-input",
+      "name": "AtomsInput",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+      "semantics": {
+        "element": "input"
+      },
+      "props": [
+        {
+          "name": "isFilled",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "isFilled",
+              "values": {
+                "false": "false",
+                "true": "true"
+              }
+            },
+            "code": {
+              "prop": "isFilled"
+            }
+          }
+        },
+        {
+          "name": "hasError",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "hasError",
+              "values": {
+                "false": "false",
+                "true": "true"
+              }
+            },
+            "code": {
+              "prop": "hasError"
+            }
+          }
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "isDisabled",
+              "values": {
+                "false": "false",
+                "true": "true"
+              }
+            },
+            "code": {
+              "prop": "isDisabled"
+            }
+          }
+        },
+        {
+          "name": "content",
+          "type": "text",
+          "default": "Input content",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "content"
+            },
+            "code": {
+              "prop": "content"
+            }
+          }
+        },
+        {
+          "name": "hasLabel",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasLabel"
+            },
+            "code": {
+              "prop": "hasLabel"
+            }
+          }
+        },
+        {
+          "name": "hasStartIcon",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasStartIcon"
+            },
+            "code": {
+              "prop": "hasStartIcon"
+            }
+          }
+        },
+        {
+          "name": "hasEndIcon",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasEndIcon"
+            },
+            "code": {
+              "prop": "hasEndIcon"
+            }
+          }
+        },
+        {
+          "name": "hasHint",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasHint"
+            },
+            "code": {
+              "prop": "hasHint"
+            }
+          }
+        }
+      ],
+      "states": [
+        "hover"
+      ],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "column",
+            "align": "stretch"
+          },
+          "parts": {
+            "fieldLabel": {
+              "component": {
+                "id": "ds.field-label",
+                "props": {
+                  "hasTooltip": true,
+                  "labelText": "Label"
+                }
+              },
+              "visibleWhen": {
+                "prop": "hasLabel"
+              }
+            },
+            "horizontalStack": {
+              "layout": {
+                "direction": "row",
+                "align": "center"
+              },
+              "tokens": {
+                "background-color": "{comp.form.color.background.default}",
+                "padding-inline": "{spacing.3}",
+                "border-radius": "{component.border.radius.rounded-lg}",
+                "border-width": "{border.width.1}",
+                "gap": "{spacing.2}"
+              },
+              "parts": {
+                "startIcon": {
+                  "slot": {
+                    "name": "startIcon",
+                    "defaultContent": [
+                      {
+                        "id": "ds.icons-placeholder",
+                        "props": {
+                          "size": "20"
+                        }
+                      }
+                    ],
+                    "figmaProperty": "startIcon"
+                  },
+                  "visibleWhen": {
+                    "prop": "hasStartIcon"
+                  }
+                },
+                "inputContent": {
+                  "content": {
+                    "prop": "content"
+                  },
+                  "tokens": {
+                    "font-size": "{imported.atoms-input.horizontal-stack-input-content.font-size}",
+                    "font-weight": "{imported.atoms-input.horizontal-stack-input-content.font-weight}",
+                    "line-height": "{imported.atoms-input.horizontal-stack-input-content.line-height}"
+                  }
+                },
+                "endIcon": {
+                  "slot": {
+                    "name": "endIcon",
+                    "defaultContent": [
+                      {
+                        "id": "ds.icons-placeholder",
+                        "props": {
+                          "size": "20"
+                        }
+                      }
+                    ],
+                    "figmaProperty": "endIcon"
+                  },
+                  "visibleWhen": {
+                    "prop": "hasEndIcon"
+                  }
+                }
+              },
+              "states": {
+                "hover": {
+                  "background-color": "{comp.form.color.background.hover}"
+                }
+              }
+            },
+            "inlineDanger": {
+              "component": {
+                "id": "ds.inline-danger",
+                "props": {
+                  "supportingText": "Danger text"
+                }
+              },
+              "visibleWhen": {
+                "prop": "hasError"
+              }
+            },
+            "inlineHint": {
+              "component": {
+                "id": "ds.inline-hint",
+                "props": {
+                  "supportingText": "Hint text"
+                }
+              },
+              "visibleWhen": {
+                "prop": "hasHint"
+              }
+            }
+          },
+          "literals": {
+            "height": "fit-content"
+          },
+          "tokens": {
+            "padding-inline": "{spacing.0}",
+            "padding-block": "{spacing.0}",
+            "gap": "{spacing.1}",
+            "width": "{imported.atoms-input.root.width}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "d03495f1e159b5aa11cb1bc35aa7d355ad626d66",
+          "nodeId": "2365:108"
+        },
+        "code": {
+          "importPath": "src/components/AtomsInput",
+          "export": "AtomsInput"
+        }
+      },
+      "figmaStatePreviews": true
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.atoms-tag",
+      "name": "AtomsTag",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+      "semantics": {
+        "element": "button"
+      },
+      "props": [
+        {
+          "name": "isInteractive",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "isInteractive",
+              "values": {
+                "true": "true",
+                "false": "false"
+              }
+            },
+            "code": {
+              "prop": "isInteractive"
+            }
+          }
+        },
+        {
+          "name": "variant",
+          "type": {
+            "enum": [
+              "parent",
+              "child"
+            ]
+          },
+          "default": "parent",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "variant",
+              "values": {
+                "parent": "parent",
+                "child": "child"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        },
+        {
+          "name": "isActive",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "isActive",
+              "values": {
+                "true": "true",
+                "false": "false"
+              }
+            },
+            "code": {
+              "prop": "isActive"
+            }
+          }
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "default": "Label",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "label"
+            },
+            "code": {
+              "prop": "label"
+            }
+          }
+        }
+      ],
+      "states": [
+        "focus-visible"
+      ],
+      "anatomy": {
+        "root": {
+          "parts": {
+            "Label": {
+              "content": {
+                "prop": "label"
+              },
+              "tokens": {
+                "font-size": "{imported.atoms-tag.label.font-size}",
+                "line-height": "{imported.atoms-tag.label.line-height}"
+              }
+            },
+            "Icon": {
+              "component": {
+                "id": "ds.icons-placeholder",
+                "props": {
+                  "size": "20"
+                }
+              }
+            }
+          },
+          "literals": {
+            "width": "fit-content",
+            "height": "fit-content"
+          },
+          "states": {
+            "focus-visible": {
+              "outline-color": "{comp.border.focus-ring}",
+              "outline-width": "{imported.atoms-tag.state-focus-visible.outline-width}"
+            }
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "571c89f9c19968f485e8fea81cd081ebbe91f9b8",
+          "nodeId": "2600:5023"
+        },
+        "code": {
+          "importPath": "src/components/AtomsTag",
+          "export": "AtomsTag"
+        }
+      },
+      "figmaStatePreviews": true
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.atoms-text-link",
+      "name": "AtomsTextLink",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "STUB contract auto-proposed for the nested \"Atoms/Text Link\" instances of Molecules/Alert — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "hasStartIcon",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasStartIcon"
+            },
+            "code": {
+              "prop": "hasStartIcon"
+            }
+          }
+        },
+        {
+          "name": "hasEndIcon",
+          "type": "boolean",
+          "default": false,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasEndIcon"
+            },
+            "code": {
+              "prop": "hasEndIcon"
+            }
+          }
+        },
+        {
+          "name": "text",
+          "type": "text",
+          "default": "Label",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "text"
+            },
+            "code": {
+              "prop": "text"
+            }
+          }
+        },
+        {
+          "name": "emphasis",
+          "type": {
+            "enum": [
+              "inverted"
+            ]
+          },
+          "default": "inverted",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "emphasis",
+              "values": {
+                "inverted": "inverted"
+              }
+            },
+            "code": {
+              "prop": "emphasis"
+            }
+          }
+        },
+        {
+          "name": "state",
+          "type": {
+            "enum": [
+              "default"
+            ]
+          },
+          "default": "default",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "state",
+              "values": {
+                "default": "default"
+              }
+            },
+            "code": {
+              "prop": "state"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "parts": {
+            "text": {
+              "content": {
+                "prop": "text"
+              }
+            }
+          },
+          "tokens": {
+            "width": "{imported.stub-atoms-text-link.root.width}",
+            "height": "{imported.stub-atoms-text-link.root.height}",
+            "background-color": "{comp.button.primary.color.content.default}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "2aeeb787afbdf535d2d864b30c279afbe07767c0"
+        },
+        "code": {
+          "importPath": "src/components/AtomsTextLink",
+          "export": "AtomsTextLink"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.field-label",
+      "name": "FieldLabel",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "STUB contract auto-proposed for the nested \".Field label\" instances of Atoms/Input — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "hasTooltip",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasTooltip"
+            },
+            "code": {
+              "prop": "hasTooltip"
+            }
+          }
+        },
+        {
+          "name": "labelText",
+          "type": "text",
+          "default": "Label",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "labelText"
+            },
+            "code": {
+              "prop": "labelText"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "parts": {
+            "labelText": {
+              "content": {
+                "prop": "labelText"
+              }
+            }
+          },
+          "tokens": {
+            "width": "{imported.stub-field-label.root.width}",
+            "height": "{imported.stub-field-label.root.height}",
+            "background-color": "{color.background.default}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "d66a0be49a66f26437e973eaff5e16f170e2b305"
+        },
+        "code": {
+          "importPath": "src/components/FieldLabel",
+          "export": "FieldLabel"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.icons-check-circle",
+      "name": "IconsCheckCircle",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "STUB contract auto-proposed for the nested \"Icons/Check Circle\" instances of Molecules/Alert — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "20"
+            ]
+          },
+          "default": "20",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "size",
+              "values": {
+                "20": "20"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "parts": {},
+          "tokens": {
+            "width": "{imported.stub-icons-check-circle.root.width}",
+            "height": "{imported.stub-icons-check-circle.root.height}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "c1535e65d4061909a6158e9661b126c77a1fe26b"
+        },
+        "code": {
+          "importPath": "src/components/IconsCheckCircle",
+          "export": "IconsCheckCircle"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.icons-checkbox",
+      "name": "IconsCheckbox",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "STUB contract auto-proposed for the nested \"Icons/Checkbox\" instances of Atoms/Checkbox — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "state",
+          "type": {
+            "enum": [
+              "unselected",
+              "selected"
+            ]
+          },
+          "default": "unselected",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "state",
+              "values": {
+                "unselected": "unselected",
+                "selected": "selected"
+              }
+            },
+            "code": {
+              "prop": "state"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "parts": {},
+          "tokens": {
+            "width": "{imported.stub-icons-checkbox.root.width}",
+            "height": "{imported.stub-icons-checkbox.root.height}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "26b295290cb6c5182183f2daf4453c868a9ddba4"
+        },
+        "code": {
+          "importPath": "src/components/IconsCheckbox",
+          "export": "IconsCheckbox"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.icons-close",
+      "name": "IconsClose",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "STUB contract auto-proposed for the nested \"Icons/Close\" instances of Molecules/Alert — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "20"
+            ]
+          },
+          "default": "20",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "size",
+              "values": {
+                "20": "20"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "parts": {},
+          "tokens": {
+            "width": "{imported.stub-icons-close.root.width}",
+            "height": "{imported.stub-icons-close.root.height}",
+            "background-color": "{color.content.inverse}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "139e6a8cb445c8667beee1e949878ce532178690"
+        },
+        "code": {
+          "importPath": "src/components/IconsClose",
+          "export": "IconsClose"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.icons-pause",
+      "name": "IconsPause",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "STUB contract auto-proposed for the nested \"Icons/Pause\" instances of Atoms/Button — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "20"
+            ]
+          },
+          "default": "20",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "size",
+              "values": {
+                "20": "20"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "parts": {},
+          "tokens": {
+            "width": "{imported.stub-icons-pause.root.width}",
+            "height": "{imported.stub-icons-pause.root.height}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "673bd6a7b8ccecc6331afb92bd9ad1bc9ecd216e"
+        },
+        "code": {
+          "importPath": "src/components/IconsPause",
+          "export": "IconsPause"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.icons-placeholder",
+      "name": "IconsPlaceholder",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "STUB contract auto-proposed for the nested \"Icons/Placeholder\" instances of Atoms/Badge — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "20"
+            ]
+          },
+          "default": "20",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "size",
+              "values": {
+                "20": "20"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "parts": {},
+          "tokens": {
+            "width": "{imported.stub-icons-placeholder.root.width}",
+            "height": "{imported.stub-icons-placeholder.root.height}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "8f0ab06f0098a262cb887252f56e0ecbe530cca0"
+        },
+        "code": {
+          "importPath": "src/components/IconsPlaceholder",
+          "export": "IconsPlaceholder"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.icons-play",
+      "name": "IconsPlay",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "STUB contract auto-proposed for the nested \"Icons/Play\" instances of Atoms/Button — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "size",
+          "type": {
+            "enum": [
+              "20"
+            ]
+          },
+          "default": "20",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "size",
+              "values": {
+                "20": "20"
+              }
+            },
+            "code": {
+              "prop": "size"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "parts": {},
+          "tokens": {
+            "width": "{imported.stub-icons-play.root.width}",
+            "height": "{imported.stub-icons-play.root.height}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "1dd7e9116372ea5855573d0e9eaf10ed43b51d94"
+        },
+        "code": {
+          "importPath": "src/components/IconsPlay",
+          "export": "IconsPlay"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.inline-danger",
+      "name": "InlineDanger",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "STUB contract auto-proposed for the nested \".Inline danger\" instances of Atoms/Input — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "supportingText",
+          "type": "text",
+          "default": "Danger text",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "supportingText"
+            },
+            "code": {
+              "prop": "supportingText"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "parts": {
+            "supportingText": {
+              "content": {
+                "prop": "supportingText"
+              }
+            }
+          },
+          "tokens": {
+            "width": "{imported.stub-inline-danger.root.width}",
+            "height": "{imported.stub-inline-danger.root.height}",
+            "background-color": "{color.background.default}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "4a8c99c2339b315b4e9f13ceeff0f48694f6070d"
+        },
+        "code": {
+          "importPath": "src/components/InlineDanger",
+          "export": "InlineDanger"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.inline-hint",
+      "name": "InlineHint",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "STUB contract auto-proposed for the nested \".Inline hint\" instances of Atoms/Checkbox — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry. Import the child set to replace this stub.",
+      "semantics": {
+        "element": "span"
+      },
+      "props": [
+        {
+          "name": "supportingText",
+          "type": "text",
+          "default": "Hint text",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "supportingText"
+            },
+            "code": {
+              "prop": "supportingText"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "parts": {
+            "supportingText": {
+              "content": {
+                "prop": "supportingText"
+              }
+            }
+          },
+          "tokens": {
+            "width": "{imported.stub-inline-hint.root.width}",
+            "height": "{imported.stub-inline-hint.root.height}",
+            "background-color": "{color.background.default}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "f36998ba91948f5337a78544a49eeec99236e3d7"
+        },
+        "code": {
+          "importPath": "src/components/InlineHint",
+          "export": "InlineHint"
+        }
+      }
+    },
+    {
+      "$schema": "./contract.schema.json",
+      "id": "ds.molecules-alert",
+      "name": "MoleculesAlert",
+      "version": "0.1.0",
+      "status": "draft",
+      "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+      "semantics": {
+        "element": "div"
+      },
+      "props": [
+        {
+          "name": "variant",
+          "type": {
+            "enum": [
+              "success",
+              "info",
+              "warning",
+              "danger"
+            ]
+          },
+          "default": "success",
+          "bindings": {
+            "figma": {
+              "kind": "VARIANT",
+              "property": "variant",
+              "values": {
+                "success": "success",
+                "info": "info",
+                "warning": "warning",
+                "danger": "danger"
+              }
+            },
+            "code": {
+              "prop": "variant"
+            }
+          }
+        },
+        {
+          "name": "titleText",
+          "type": "text",
+          "default": "Title",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "titleText"
+            },
+            "code": {
+              "prop": "titleText"
+            }
+          }
+        },
+        {
+          "name": "descriptionText",
+          "type": "text",
+          "default": "Description",
+          "bindings": {
+            "figma": {
+              "kind": "TEXT",
+              "property": "descriptionText"
+            },
+            "code": {
+              "prop": "descriptionText"
+            }
+          }
+        },
+        {
+          "name": "hasIcon",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasIcon"
+            },
+            "code": {
+              "prop": "hasIcon"
+            }
+          }
+        },
+        {
+          "name": "hasLink",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "hasLink"
+            },
+            "code": {
+              "prop": "hasLink"
+            }
+          }
+        },
+        {
+          "name": "isDismissible",
+          "type": "boolean",
+          "default": true,
+          "bindings": {
+            "figma": {
+              "kind": "BOOLEAN",
+              "property": "isDismissible"
+            },
+            "code": {
+              "prop": "isDismissible"
+            }
+          }
+        }
+      ],
+      "states": [],
+      "anatomy": {
+        "root": {
+          "layout": {
+            "display": "flex",
+            "direction": "row"
+          },
+          "parts": {
+            "container": {
+              "layout": {
+                "direction": "row",
+                "justify": "center",
+                "align": "center"
+              },
+              "tokens": {
+                "padding-inline": "{spacing.0}",
+                "padding-block": "{spacing.0}",
+                "gap": "{spacing.2}"
+              },
+              "visibleWhen": {
+                "prop": "hasIcon"
+              },
+              "parts": {
+                "Icon": {
+                  "component": {
+                    "id": "ds.icons-check-circle",
+                    "props": {
+                      "size": "20"
+                    }
+                  }
+                }
+              }
+            },
+            "horizontalStack": {
+              "layout": {
+                "direction": "column",
+                "align": "stretch",
+                "grow": true
+              },
+              "tokens": {
+                "padding-inline": "{spacing.0}",
+                "padding-block": "{spacing.0}"
+              },
+              "parts": {
+                "horizontalStack2": {
+                  "layout": {
+                    "direction": "column",
+                    "align": "stretch"
+                  },
+                  "tokens": {
+                    "padding-inline": "{spacing.0}",
+                    "padding-block": "{spacing.0}",
+                    "gap": "{spacing.0}"
+                  },
+                  "parts": {
+                    "Title": {
+                      "content": {
+                        "prop": "titleText"
+                      },
+                      "tokens": {
+                        "color": "{color.content.inverse}",
+                        "font-size": "{imported.molecules-alert.horizontal-stack-horizontal-stack-title.font-size}",
+                        "font-weight": "{imported.molecules-alert.horizontal-stack-horizontal-stack-title.font-weight}",
+                        "line-height": "{imported.molecules-alert.horizontal-stack-horizontal-stack-title.line-height}"
+                      }
+                    },
+                    "Description": {
+                      "content": {
+                        "prop": "descriptionText"
+                      },
+                      "tokens": {
+                        "color": "{color.content.inverse}",
+                        "font-size": "{imported.molecules-alert.horizontal-stack-horizontal-stack-description.font-size}",
+                        "font-weight": "{imported.molecules-alert.horizontal-stack-horizontal-stack-description.font-weight}",
+                        "line-height": "{imported.molecules-alert.horizontal-stack-horizontal-stack-description.line-height}"
+                      }
+                    }
+                  }
+                },
+                "atomstextLink": {
+                  "component": {
+                    "id": "ds.atoms-text-link",
+                    "props": {
+                      "hasStartIcon": false,
+                      "hasEndIcon": false,
+                      "text": "Label",
+                      "emphasis": "inverted",
+                      "state": "default"
+                    }
+                  },
+                  "visibleWhen": {
+                    "prop": "hasLink"
+                  }
+                }
+              }
+            },
+            "container2": {
+              "layout": {
+                "direction": "row",
+                "justify": "center",
+                "align": "center"
+              },
+              "tokens": {
+                "padding-inline": "{spacing.0}",
+                "padding-block": "{spacing.0}",
+                "gap": "{spacing.2}"
+              },
+              "visibleWhen": {
+                "prop": "isDismissible"
+              },
+              "parts": {
+                "container2Icon": {
+                  "component": {
+                    "id": "ds.icons-close",
+                    "props": {
+                      "size": "20"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "literals": {
+            "height": "fit-content"
+          },
+          "tokens": {
+            "padding-inline": "{spacing.4}",
+            "padding-block": "{spacing.3}",
+            "border-radius": "{component.border.radius.rounded-md}",
+            "gap": "{spacing.2}",
+            "max-width": "{imported.molecules-alert.root.max-width}",
+            "box-shadow": "{imported.molecules-alert.root.box-shadow}",
+            "width": "{imported.molecules-alert.root.width}"
+          }
+        }
+      },
+      "anchors": {
+        "figma": {
+          "fileKey": "E7oXr98i91HYQGZxA2USOQ",
+          "componentSetKey": "53f012e948c652da736a2fe49cf135e255df1eba",
+          "nodeId": "2629:56948"
+        },
+        "code": {
+          "importPath": "src/components/MoleculesAlert",
+          "export": "MoleculesAlert"
+        }
+      }
+    }
+  ]
+}

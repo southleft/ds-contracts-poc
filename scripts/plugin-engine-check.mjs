@@ -795,6 +795,48 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
     `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 1543 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
 
+  // --- NESTED MODES ARE REFUSED, NOT SILENTLY FLATTENED TO BASE -----------
+  // The tokenSet's `base` is FLAT (dot-path names); its `modes` must use the
+  // SAME flat names. Nothing enforced that. A nested mode tree — which is what
+  // DTCG looks like by default, and exactly what a captured Figma variable
+  // collection produces — has no key matching any base name, so every lookup
+  // missed, every variable kept its base value, and the plugin built a
+  // two-mode collection whose Dark mode WAS its Light mode. Reported as
+  // success the whole way: the CLI printed "modes: light/dark" and the
+  // generated script header printed "Light/Dark modes, N variables".
+  //
+  // Carbon's pin above already requires light !== dark, and it did not catch
+  // this: every committed bundle happens to carry FLAT modes, so the nested
+  // path was never exercised. The guard therefore belongs on the REFEREE,
+  // where shape is decided, rather than on any one library's values.
+  {
+    // Driven through parseIncomingValue — the SAME entrypoint the Generate tab
+    // calls on a paste — so the pin covers the door a user actually hits.
+    const mkBundle = (modes) => ({
+      type: 'CONTRACTS-BUNDLE',
+      version: 1,
+      contracts: [badge],
+      tokenSet: { name: 'ShapePin', base: { 'color.bg': { $type: 'color', $value: '#ffffff' } }, modes },
+    });
+    const okFlat = DSC.parseIncomingValue(
+      mkBundle({ light: { 'color.bg': { $value: '#ffffff' } }, dark: { 'color.bg': { $value: '#000000' } } }),
+    );
+    assert(okFlat.ok, `a FLAT modes object still parses (got: ${okFlat.ok ? '' : okFlat.issue.headline})`);
+
+    const bad = DSC.parseIncomingValue(
+      mkBundle({ light: { color: { bg: { $value: '#ffffff' } } }, dark: { color: { bg: { $value: '#000000' } } } }),
+    );
+    assert(!bad.ok, 'a NESTED modes object is REFUSED (it used to parse, then silently render as base)');
+    const msg = bad.ok ? '' : bad.issue.headline;
+    assert(
+      msg.includes('NESTED') && msg.includes('"color"') && msg.includes('FLAT'),
+      `the refusal names the offending key and the required shape (got: ${msg})`,
+    );
+  }
+  console.log(
+    '✔ tokenSet modes: a FLAT modes object parses and a NESTED one is REFUSED BY NAME — the shape was documented and unenforced, so a nested mode tree (what DTCG and a captured Figma collection both look like) silently rendered Dark as Light while every layer reported success',
+  );
+
   // --- PROTOTYPE WIRING: the State axis is LIVE, and its limits are named --
   // MUI Button declares states ["disabled","active","focus-visible","hover"]
   // and opts into figmaStatePreviews, so its State=Default cells on the

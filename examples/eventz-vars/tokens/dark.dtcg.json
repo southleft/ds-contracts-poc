@@ -1,0 +1,284 @@
+{
+  "8": {
+    "$value": "8px",
+    "$type": "dimension"
+  },
+  "component": {
+    "border": {
+      "radius": {
+        "rounded": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "rounded-lg": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "rounded-xl": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "rounded-full": {
+          "$value": "9999px",
+          "$type": "dimension"
+        },
+        "rounded-md": {
+          "$value": "6px",
+          "$type": "dimension"
+        }
+      },
+      "width": {
+        "sm": {
+          "$value": "1px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "color": {
+    "content": {
+      "inverse": {
+        "$value": "#252729",
+        "$type": "color"
+      },
+      "weak": {
+        "$value": "#c6c7c6",
+        "$type": "color"
+      },
+      "default": {
+        "$value": "#ffffff",
+        "$type": "color"
+      },
+      "weak-hover": {
+        "$value": "#f7f8f7",
+        "$type": "color"
+      },
+      "brand": {
+        "$value": "#9ec2d2",
+        "$type": "color"
+      },
+      "default-hover": {
+        "$value": "#c6c7c6",
+        "$type": "color"
+      },
+      "utility": {
+        "success-strong": {
+          "$value": "#26602e",
+          "$type": "color"
+        },
+        "info-strong": {
+          "$value": "#264460",
+          "$type": "color"
+        },
+        "warning-strong": {
+          "$value": "#78542e",
+          "$type": "color"
+        },
+        "danger-strong": {
+          "$value": "#60262a",
+          "$type": "color"
+        }
+      }
+    },
+    "background": {
+      "brand": {
+        "$value": "#6ba0b8",
+        "$type": "color"
+      },
+      "none": {
+        "$value": "#ffffff00",
+        "$type": "color"
+      },
+      "inverted": {
+        "$value": "#ffffff",
+        "$type": "color"
+      },
+      "default": {
+        "$value": "#252729",
+        "$type": "color"
+      },
+      "weak": {
+        "$value": "#ffffff0d",
+        "$type": "color"
+      },
+      "brand-hover": {
+        "$value": "#9ec2d2",
+        "$type": "color"
+      },
+      "subtle-hover": {
+        "$value": "#ffffff4d",
+        "$type": "color"
+      },
+      "weak-hover": {
+        "$value": "#ffffff33",
+        "$type": "color"
+      }
+    }
+  },
+  "comp": {
+    "button": {
+      "primary": {
+        "color": {
+          "background": {
+            "default": {
+              "$value": "#6ba0b8",
+              "$type": "color"
+            },
+            "hover": {
+              "$value": "#9ec2d2",
+              "$type": "color"
+            },
+            "active": {
+              "$value": "#9ec2d2",
+              "$type": "color"
+            }
+          },
+          "content": {
+            "default": {
+              "$value": "#0a1a24",
+              "$type": "color"
+            },
+            "hover": {
+              "$value": "#0a1a24",
+              "$type": "color"
+            },
+            "active": {
+              "$value": "#0a1a24",
+              "$type": "color"
+            }
+          }
+        }
+      },
+      "color": {
+        "background": {
+          "knockout": {
+            "$value": "#252729",
+            "$type": "color"
+          },
+          "default": {
+            "$value": "#ffffff1a",
+            "$type": "color"
+          },
+          "knockout-hover": {
+            "$value": "#2c2e30",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "#ffffff4d",
+            "$type": "color"
+          },
+          "knockout-active": {
+            "$value": "#252729",
+            "$type": "color"
+          }
+        },
+        "content": {
+          "default": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "active": {
+            "$value": "#ffffff",
+            "$type": "color"
+          }
+        },
+        "border": {
+          "default": {
+            "$value": "#ffffff1a",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "#ffffff1a",
+            "$type": "color"
+          },
+          "active": {
+            "$value": "#ffffff1a",
+            "$type": "color"
+          }
+        }
+      }
+    },
+    "border": {
+      "none": {
+        "$value": "#00000200",
+        "$type": "color"
+      },
+      "focus-ring": {
+        "$value": "#3d7a95",
+        "$type": "color"
+      }
+    },
+    "form": {
+      "color": {
+        "background": {
+          "default": {
+            "$value": "#ffffff0d",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "#ffffff26",
+            "$type": "color"
+          }
+        },
+        "border": {
+          "default": {
+            "$value": "#ffffff33",
+            "$type": "color"
+          },
+          "utility": {
+            "danger": {
+              "$value": "#ff8092",
+              "$type": "color"
+            }
+          },
+          "hover": {
+            "$value": "#ffffff4d",
+            "$type": "color"
+          }
+        }
+      }
+    }
+  },
+  "border": {
+    "radius": {
+      "lg": {
+        "$value": "12px",
+        "$type": "dimension"
+      },
+      "md": {
+        "$value": "8px",
+        "$type": "dimension"
+      }
+    }
+  },
+  "space": {
+    "xs": {
+      "$value": "8px",
+      "$type": "dimension"
+    }
+  },
+  "opacity": {
+    "disabled": {
+      "$value": "40",
+      "$type": "number"
+    },
+    "full": {
+      "$value": "100",
+      "$type": "number"
+    }
+  },
+  "button": {
+    "color": {
+      "content": {
+        "default": {
+          "$value": "#ffffff",
+          "$type": "color"
+        }
+      }
+    }
+  }
+}
