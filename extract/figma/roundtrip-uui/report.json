@@ -3,8 +3,8 @@
   "totals": {
     "components": 15,
     "roundTripClosed": 15,
-    "matched": 10289,
-    "diverged": 2045,
+    "matched": 10343,
+    "diverged": 1991,
     "loss": 4660,
     "invented": 6077
   },
@@ -43972,7 +43972,7 @@
       "status": "diffed",
       "originalVariants": 55,
       "roundTripVariants": 55,
-      "matched": 1200,
+      "matched": 1244,
       "diverged": [
         {
           "variant": "Label=Right, Progress=0%",
@@ -44024,12 +44024,6 @@
         },
         {
           "variant": "Label=Bottom, Progress=0%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom, Progress=0%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -44060,12 +44054,6 @@
         },
         {
           "variant": "Label=Top floating, Progress=0%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Top floating, Progress=0%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -44096,12 +44084,6 @@
         },
         {
           "variant": "Label=Bottom floating, Progress=0%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom floating, Progress=0%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -44129,12 +44111,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Progress=0%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=False, Progress=0%",
@@ -44204,12 +44180,6 @@
         },
         {
           "variant": "Label=Bottom, Progress=10%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom, Progress=10%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -44240,12 +44210,6 @@
         },
         {
           "variant": "Label=Top floating, Progress=10%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Top floating, Progress=10%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -44276,12 +44240,6 @@
         },
         {
           "variant": "Label=Bottom floating, Progress=10%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom floating, Progress=10%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -44312,12 +44270,6 @@
         },
         {
           "variant": "Label=False, Progress=10%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=False, Progress=10%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -44384,12 +44336,6 @@
         },
         {
           "variant": "Label=Bottom, Progress=20%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom, Progress=20%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -44420,12 +44366,6 @@
         },
         {
           "variant": "Label=Top floating, Progress=20%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Top floating, Progress=20%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -44456,12 +44396,6 @@
         },
         {
           "variant": "Label=Bottom floating, Progress=20%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom floating, Progress=20%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -44492,12 +44426,6 @@
         },
         {
           "variant": "Label=False, Progress=20%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=False, Progress=20%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -44564,12 +44492,6 @@
         },
         {
           "variant": "Label=Bottom, Progress=30%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom, Progress=30%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -44600,12 +44522,6 @@
         },
         {
           "variant": "Label=Top floating, Progress=30%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Top floating, Progress=30%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -44636,12 +44552,6 @@
         },
         {
           "variant": "Label=Bottom floating, Progress=30%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom floating, Progress=30%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -44672,12 +44582,6 @@
         },
         {
           "variant": "Label=False, Progress=30%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=False, Progress=30%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -44744,12 +44648,6 @@
         },
         {
           "variant": "Label=Bottom, Progress=40%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom, Progress=40%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -44777,12 +44675,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Progress=40%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=Top floating, Progress=40%",
@@ -44816,12 +44708,6 @@
         },
         {
           "variant": "Label=Bottom floating, Progress=40%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom floating, Progress=40%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -44849,12 +44735,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Progress=40%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=False, Progress=40%",
@@ -44924,12 +44804,6 @@
         },
         {
           "variant": "Label=Bottom, Progress=50%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom, Progress=50%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -44957,12 +44831,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Progress=50%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=Top floating, Progress=50%",
@@ -44996,12 +44864,6 @@
         },
         {
           "variant": "Label=Bottom floating, Progress=50%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom floating, Progress=50%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -45029,12 +44891,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Progress=50%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=False, Progress=50%",
@@ -45104,12 +44960,6 @@
         },
         {
           "variant": "Label=Bottom, Progress=60%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom, Progress=60%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -45137,12 +44987,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Progress=60%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=Top floating, Progress=60%",
@@ -45176,12 +45020,6 @@
         },
         {
           "variant": "Label=Bottom floating, Progress=60%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom floating, Progress=60%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -45209,12 +45047,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Progress=60%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=False, Progress=60%",
@@ -45284,12 +45116,6 @@
         },
         {
           "variant": "Label=Bottom, Progress=70%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom, Progress=70%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -45317,12 +45143,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Progress=70%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=Top floating, Progress=70%",
@@ -45356,12 +45176,6 @@
         },
         {
           "variant": "Label=Bottom floating, Progress=70%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom floating, Progress=70%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -45389,12 +45203,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Progress=70%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=False, Progress=70%",
@@ -45464,12 +45272,6 @@
         },
         {
           "variant": "Label=Bottom, Progress=80%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom, Progress=80%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -45497,12 +45299,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Progress=80%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=Top floating, Progress=80%",
@@ -45536,12 +45332,6 @@
         },
         {
           "variant": "Label=Bottom floating, Progress=80%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom floating, Progress=80%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -45569,12 +45359,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Progress=80%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=False, Progress=80%",
@@ -45644,12 +45428,6 @@
         },
         {
           "variant": "Label=Bottom, Progress=90%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom, Progress=90%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -45677,12 +45455,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Progress=90%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=Top floating, Progress=90%",
@@ -45716,12 +45488,6 @@
         },
         {
           "variant": "Label=Bottom floating, Progress=90%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom floating, Progress=90%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -45749,12 +45515,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Progress=90%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=False, Progress=90%",
@@ -45824,12 +45584,6 @@
         },
         {
           "variant": "Label=Bottom, Progress=100%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom, Progress=100%",
           "path": "progressbar/progress",
           "channel": "kind",
           "value": "rect → box"
@@ -45857,12 +45611,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Progress=100%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=Top floating, Progress=100%",
@@ -45896,12 +45644,6 @@
         },
         {
           "variant": "Label=Bottom floating, Progress=100%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
-        },
-        {
-          "variant": "Label=Bottom floating, Progress=100%",
           "path": "progressbar/progress",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -45929,12 +45671,6 @@
           "path": "progressbar/background",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Progress=100%",
-          "path": "progressbar/background",
-          "channel": "width",
-          "value": "320 → 287"
         },
         {
           "variant": "Label=False, Progress=100%",
@@ -49847,7 +49583,7 @@
           "variant": "Label=Right, Progress=10%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "28.2",
           "tag": "restructured"
         },
         {
@@ -49924,7 +49660,7 @@
           "variant": "Label=Bottom, Progress=10%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "28.2",
           "tag": "restructured"
         },
         {
@@ -50008,7 +49744,7 @@
           "variant": "Label=Top floating, Progress=10%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "28.2",
           "tag": "restructured"
         },
         {
@@ -50092,7 +49828,7 @@
           "variant": "Label=Bottom floating, Progress=10%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "28.2",
           "tag": "restructured"
         },
         {
@@ -50169,7 +49905,7 @@
           "variant": "Label=False, Progress=10%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "28.2",
           "tag": "restructured"
         },
         {
@@ -50246,7 +49982,7 @@
           "variant": "Label=Right, Progress=20%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "56",
           "tag": "restructured"
         },
         {
@@ -50323,7 +50059,7 @@
           "variant": "Label=Bottom, Progress=20%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "56",
           "tag": "restructured"
         },
         {
@@ -50407,7 +50143,7 @@
           "variant": "Label=Top floating, Progress=20%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "56",
           "tag": "restructured"
         },
         {
@@ -50491,7 +50227,7 @@
           "variant": "Label=Bottom floating, Progress=20%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "56",
           "tag": "restructured"
         },
         {
@@ -50568,7 +50304,7 @@
           "variant": "Label=False, Progress=20%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "56",
           "tag": "restructured"
         },
         {
@@ -50645,7 +50381,7 @@
           "variant": "Label=Right, Progress=30%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "84",
           "tag": "restructured"
         },
         {
@@ -50722,7 +50458,7 @@
           "variant": "Label=Bottom, Progress=30%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "84",
           "tag": "restructured"
         },
         {
@@ -50806,7 +50542,7 @@
           "variant": "Label=Top floating, Progress=30%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "84",
           "tag": "restructured"
         },
         {
@@ -50890,7 +50626,7 @@
           "variant": "Label=Bottom floating, Progress=30%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "84",
           "tag": "restructured"
         },
         {
@@ -50967,7 +50703,7 @@
           "variant": "Label=False, Progress=30%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "84",
           "tag": "restructured"
         },
         {
@@ -51044,7 +50780,7 @@
           "variant": "Label=Right, Progress=40%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "112",
           "tag": "restructured"
         },
         {
@@ -51121,7 +50857,7 @@
           "variant": "Label=Bottom, Progress=40%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "112",
           "tag": "restructured"
         },
         {
@@ -51205,7 +50941,7 @@
           "variant": "Label=Top floating, Progress=40%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "112",
           "tag": "restructured"
         },
         {
@@ -51289,7 +51025,7 @@
           "variant": "Label=Bottom floating, Progress=40%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "112",
           "tag": "restructured"
         },
         {
@@ -51366,7 +51102,7 @@
           "variant": "Label=False, Progress=40%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "112",
           "tag": "restructured"
         },
         {
@@ -51443,7 +51179,7 @@
           "variant": "Label=Right, Progress=50%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "140",
           "tag": "restructured"
         },
         {
@@ -51520,7 +51256,7 @@
           "variant": "Label=Bottom, Progress=50%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "140",
           "tag": "restructured"
         },
         {
@@ -51604,7 +51340,7 @@
           "variant": "Label=Top floating, Progress=50%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "140",
           "tag": "restructured"
         },
         {
@@ -51688,7 +51424,7 @@
           "variant": "Label=Bottom floating, Progress=50%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "140",
           "tag": "restructured"
         },
         {
@@ -51765,7 +51501,7 @@
           "variant": "Label=False, Progress=50%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "140",
           "tag": "restructured"
         },
         {
@@ -51842,7 +51578,7 @@
           "variant": "Label=Right, Progress=60%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "168",
           "tag": "restructured"
         },
         {
@@ -51919,7 +51655,7 @@
           "variant": "Label=Bottom, Progress=60%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "168",
           "tag": "restructured"
         },
         {
@@ -52003,7 +51739,7 @@
           "variant": "Label=Top floating, Progress=60%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "168",
           "tag": "restructured"
         },
         {
@@ -52087,7 +51823,7 @@
           "variant": "Label=Bottom floating, Progress=60%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "168",
           "tag": "restructured"
         },
         {
@@ -52164,7 +51900,7 @@
           "variant": "Label=False, Progress=60%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "168",
           "tag": "restructured"
         },
         {
@@ -52241,7 +51977,7 @@
           "variant": "Label=Right, Progress=70%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "196.7",
           "tag": "restructured"
         },
         {
@@ -52318,7 +52054,7 @@
           "variant": "Label=Bottom, Progress=70%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "196.7",
           "tag": "restructured"
         },
         {
@@ -52402,7 +52138,7 @@
           "variant": "Label=Top floating, Progress=70%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "196.7",
           "tag": "restructured"
         },
         {
@@ -52486,7 +52222,7 @@
           "variant": "Label=Bottom floating, Progress=70%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "196.7",
           "tag": "restructured"
         },
         {
@@ -52563,7 +52299,7 @@
           "variant": "Label=False, Progress=70%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "196.7",
           "tag": "restructured"
         },
         {
@@ -52640,7 +52376,7 @@
           "variant": "Label=Right, Progress=80%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "224",
           "tag": "restructured"
         },
         {
@@ -52717,7 +52453,7 @@
           "variant": "Label=Bottom, Progress=80%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "224",
           "tag": "restructured"
         },
         {
@@ -52801,7 +52537,7 @@
           "variant": "Label=Top floating, Progress=80%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "224",
           "tag": "restructured"
         },
         {
@@ -52885,7 +52621,7 @@
           "variant": "Label=Bottom floating, Progress=80%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "224",
           "tag": "restructured"
         },
         {
@@ -52962,7 +52698,7 @@
           "variant": "Label=False, Progress=80%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "224",
           "tag": "restructured"
         },
         {
@@ -53039,7 +52775,7 @@
           "variant": "Label=Right, Progress=90%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "252",
           "tag": "restructured"
         },
         {
@@ -53116,7 +52852,7 @@
           "variant": "Label=Bottom, Progress=90%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "252",
           "tag": "restructured"
         },
         {
@@ -53200,7 +52936,7 @@
           "variant": "Label=Top floating, Progress=90%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "252",
           "tag": "restructured"
         },
         {
@@ -53284,7 +53020,7 @@
           "variant": "Label=Bottom floating, Progress=90%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "252",
           "tag": "restructured"
         },
         {
@@ -53361,7 +53097,7 @@
           "variant": "Label=False, Progress=90%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "252",
           "tag": "restructured"
         },
         {
@@ -53438,7 +53174,7 @@
           "variant": "Label=Right, Progress=100%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "271",
           "tag": "restructured"
         },
         {
@@ -53515,7 +53251,7 @@
           "variant": "Label=Bottom, Progress=100%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "271",
           "tag": "restructured"
         },
         {
@@ -53599,7 +53335,7 @@
           "variant": "Label=Top floating, Progress=100%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "271",
           "tag": "restructured"
         },
         {
@@ -53683,7 +53419,7 @@
           "variant": "Label=Bottom floating, Progress=100%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "271",
           "tag": "restructured"
         },
         {
@@ -53760,7 +53496,7 @@
           "variant": "Label=False, Progress=100%",
           "path": "progressbar/progress/progress2",
           "channel": "width",
-          "value": "8.1",
+          "value": "271",
           "tag": "restructured"
         },
         {
@@ -53778,7 +53514,7 @@
       "status": "diffed",
       "originalVariants": 16,
       "roundTripVariants": 16,
-      "matched": 305,
+      "matched": 315,
       "diverged": [
         {
           "variant": "Label=True, Shape=Circle, Size=md",
@@ -53818,12 +53554,6 @@
         },
         {
           "variant": "Label=True, Shape=Circle, Size=lg",
-          "path": "ring",
-          "channel": "abs",
-          "value": "13,14 → 12,14"
-        },
-        {
-          "variant": "Label=True, Shape=Circle, Size=lg",
           "path": "ring/background",
           "channel": "width",
           "value": "252 → 216"
@@ -53857,12 +53587,6 @@
           "path": "ring",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Shape=Circle, Size=lg",
-          "path": "ring",
-          "channel": "abs",
-          "value": "13,14 → 12,14"
         },
         {
           "variant": "Label=False, Shape=Circle, Size=lg",
@@ -53902,12 +53626,6 @@
         },
         {
           "variant": "Label=True, Shape=Circle, Size=sm",
-          "path": "ring",
-          "channel": "abs",
-          "value": "10,10 → 12,10"
-        },
-        {
-          "variant": "Label=True, Shape=Circle, Size=sm",
           "path": "ring/background",
           "channel": "width",
           "value": "180 → 216"
@@ -53941,12 +53659,6 @@
           "path": "ring",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Shape=Circle, Size=sm",
-          "path": "ring",
-          "channel": "abs",
-          "value": "10,10 → 12,10"
         },
         {
           "variant": "Label=False, Shape=Circle, Size=sm",
@@ -53983,12 +53695,6 @@
           "path": "ring",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=True, Shape=Circle, Size=xs",
-          "path": "ring",
-          "channel": "abs",
-          "value": "8,8 → 12,8"
         },
         {
           "variant": "Label=True, Shape=Circle, Size=xs",
@@ -54025,12 +53731,6 @@
           "path": "ring",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Shape=Circle, Size=xs",
-          "path": "ring",
-          "channel": "abs",
-          "value": "8,8 → 12,8"
         },
         {
           "variant": "Label=False, Shape=Circle, Size=xs",
@@ -54122,7 +53822,7 @@
           "variant": "Label=False, Shape=Half circle, Size=lg",
           "path": "ring",
           "channel": "abs",
-          "value": "14,14 → 12,14"
+          "value": "14,14 → 13,14"
         },
         {
           "variant": "Label=False, Shape=Half circle, Size=lg",
@@ -54171,7 +53871,7 @@
           "variant": "Label=True, Shape=Half circle, Size=lg",
           "path": "ring",
           "channel": "abs",
-          "value": "14,14 → 12,14"
+          "value": "14,14 → 13,14"
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=lg",
@@ -54215,12 +53915,6 @@
           "path": "ring",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Shape=Half circle, Size=sm",
-          "path": "ring",
-          "channel": "abs",
-          "value": "10,10 → 12,10"
         },
         {
           "variant": "Label=False, Shape=Half circle, Size=sm",
@@ -54273,12 +53967,6 @@
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=sm",
-          "path": "ring",
-          "channel": "abs",
-          "value": "10,10 → 12,10"
-        },
-        {
-          "variant": "Label=True, Shape=Half circle, Size=sm",
           "path": "ring/background",
           "channel": "kind",
           "value": "vector → ellipse",
@@ -54325,12 +54013,6 @@
           "path": "ring",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Shape=Half circle, Size=xs",
-          "path": "ring",
-          "channel": "abs",
-          "value": "8,8 → 12,8"
         },
         {
           "variant": "Label=False, Shape=Half circle, Size=xs",
@@ -54374,12 +54056,6 @@
           "path": "ring",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=True, Shape=Half circle, Size=xs",
-          "path": "ring",
-          "channel": "abs",
-          "value": "8,8 → 12,8"
         },
         {
           "variant": "Label=True, Shape=Half circle, Size=xs",
@@ -57803,12 +57479,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=0%, Right control=50%",
-          "path": "progress",
-          "channel": "width",
-          "value": "160 → 80"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=50%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -57821,12 +57491,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=0%, Right control=50%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "160 → 80"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=50%",
           "path": "progress/leftcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -57836,12 +57500,6 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=50%",
-          "path": "progress/rightcontrol",
-          "channel": "abs",
-          "value": "148,-8 → 68,-8"
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=50%",
@@ -57869,12 +57527,6 @@
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=50%",
-          "path": "progress",
-          "channel": "width",
-          "value": "160 → 80"
-        },
-        {
-          "variant": "Label=Bottom floating, Left control=0%, Right control=50%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -57884,12 +57536,6 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Bottom floating, Left control=0%, Right control=50%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "160 → 80"
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=50%",
@@ -57928,12 +57574,6 @@
           "value": "NONE → HORIZONTAL"
         },
         {
-          "variant": "Label=Bottom floating, Left control=0%, Right control=50%",
-          "path": "progress/rightcontrol",
-          "channel": "abs",
-          "value": "148,-8 → 68,-8"
-        },
-        {
           "variant": "Label=Top floating, Left control=0%, Right control=50%",
           "path": "",
           "channel": "layout.mode",
@@ -57959,12 +57599,6 @@
         },
         {
           "variant": "Label=Top floating, Left control=0%, Right control=50%",
-          "path": "progress",
-          "channel": "width",
-          "value": "160 → 80"
-        },
-        {
-          "variant": "Label=Top floating, Left control=0%, Right control=50%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -57974,12 +57608,6 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Left control=0%, Right control=50%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "160 → 80"
         },
         {
           "variant": "Label=Top floating, Left control=0%, Right control=50%",
@@ -58016,12 +57644,6 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Left control=0%, Right control=50%",
-          "path": "progress/rightcontrol",
-          "channel": "abs",
-          "value": "148,-8 → 68,-8"
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=50%",
@@ -58055,6 +57677,12 @@
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=50%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 160"
+        },
+        {
+          "variant": "Label=Bottom, Left control=25%, Right control=50%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -58067,6 +57695,12 @@
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=50%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 160"
+        },
+        {
+          "variant": "Label=Bottom, Left control=25%, Right control=50%",
           "path": "progress/leftcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -58076,6 +57710,12 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=Bottom, Left control=25%, Right control=50%",
+          "path": "progress/rightcontrol",
+          "channel": "abs",
+          "value": "68,-8 → 148,-8"
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=50%",
@@ -58109,6 +57749,12 @@
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=50%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 160"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=25%, Right control=50%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -58118,6 +57764,12 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=25%, Right control=50%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 160"
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=50%",
@@ -58154,6 +57806,12 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=25%, Right control=50%",
+          "path": "progress/rightcontrol",
+          "channel": "abs",
+          "value": "68,-8 → 148,-8"
         },
         {
           "variant": "Label=Top floating, Left control=25%, Right control=50%",
@@ -58187,6 +57845,12 @@
         },
         {
           "variant": "Label=Top floating, Left control=25%, Right control=50%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 160"
+        },
+        {
+          "variant": "Label=Top floating, Left control=25%, Right control=50%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -58196,6 +57860,12 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=Top floating, Left control=25%, Right control=50%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 160"
         },
         {
           "variant": "Label=Top floating, Left control=25%, Right control=50%",
@@ -58234,6 +57904,12 @@
           "value": "NONE → HORIZONTAL"
         },
         {
+          "variant": "Label=Top floating, Left control=25%, Right control=50%",
+          "path": "progress/rightcontrol",
+          "channel": "abs",
+          "value": "68,-8 → 148,-8"
+        },
+        {
           "variant": "Label=Bottom, Left control=0%, Right control=75%",
           "path": "",
           "channel": "layout.mode",
@@ -58259,12 +57935,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=0%, Right control=75%",
-          "path": "progress",
-          "channel": "width",
-          "value": "240 → 80"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=75%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -58274,12 +57944,6 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=75%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "240 → 80"
         },
         {
           "variant": "Label=Bottom, Left control=0%, Right control=75%",
@@ -58294,12 +57958,6 @@
           "value": "NONE → HORIZONTAL"
         },
         {
-          "variant": "Label=Bottom, Left control=0%, Right control=75%",
-          "path": "progress/rightcontrol",
-          "channel": "abs",
-          "value": "228,-8 → 68,-8"
-        },
-        {
           "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
           "path": "",
           "channel": "layout.mode",
@@ -58325,12 +57983,6 @@
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
-          "path": "progress",
-          "channel": "width",
-          "value": "240 → 80"
-        },
-        {
-          "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -58340,12 +57992,6 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "240 → 80"
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
@@ -58384,12 +58030,6 @@
           "value": "NONE → HORIZONTAL"
         },
         {
-          "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
-          "path": "progress/rightcontrol",
-          "channel": "abs",
-          "value": "228,-8 → 68,-8"
-        },
-        {
           "variant": "Label=Top floating, Left control=0%, Right control=75%",
           "path": "",
           "channel": "layout.mode",
@@ -58415,12 +58055,6 @@
         },
         {
           "variant": "Label=Top floating, Left control=0%, Right control=75%",
-          "path": "progress",
-          "channel": "width",
-          "value": "240 → 80"
-        },
-        {
-          "variant": "Label=Top floating, Left control=0%, Right control=75%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -58430,12 +58064,6 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Left control=0%, Right control=75%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "240 → 80"
         },
         {
           "variant": "Label=Top floating, Left control=0%, Right control=75%",
@@ -58472,12 +58100,6 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Left control=0%, Right control=75%",
-          "path": "progress/rightcontrol",
-          "channel": "abs",
-          "value": "228,-8 → 68,-8"
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=75%",
@@ -58513,7 +58135,7 @@
           "variant": "Label=Bottom, Left control=25%, Right control=75%",
           "path": "progress",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 240"
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=75%",
@@ -58531,7 +58153,7 @@
           "variant": "Label=Bottom, Left control=25%, Right control=75%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 240"
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=75%",
@@ -58549,7 +58171,7 @@
           "variant": "Label=Bottom, Left control=25%, Right control=75%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "148,-8 → 68,-8"
+          "value": "148,-8 → 228,-8"
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=75%",
@@ -58585,7 +58207,7 @@
           "variant": "Label=Bottom floating, Left control=25%, Right control=75%",
           "path": "progress",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 240"
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=75%",
@@ -58603,7 +58225,7 @@
           "variant": "Label=Bottom floating, Left control=25%, Right control=75%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 240"
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=75%",
@@ -58645,7 +58267,7 @@
           "variant": "Label=Bottom floating, Left control=25%, Right control=75%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "148,-8 → 68,-8"
+          "value": "148,-8 → 228,-8"
         },
         {
           "variant": "Label=Top floating, Left control=25%, Right control=75%",
@@ -58681,7 +58303,7 @@
           "variant": "Label=Top floating, Left control=25%, Right control=75%",
           "path": "progress",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 240"
         },
         {
           "variant": "Label=Top floating, Left control=25%, Right control=75%",
@@ -58699,7 +58321,7 @@
           "variant": "Label=Top floating, Left control=25%, Right control=75%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 240"
         },
         {
           "variant": "Label=Top floating, Left control=25%, Right control=75%",
@@ -58741,7 +58363,7 @@
           "variant": "Label=Top floating, Left control=25%, Right control=75%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "148,-8 → 68,-8"
+          "value": "148,-8 → 228,-8"
         },
         {
           "variant": "Label=Bottom, Left control=50%, Right control=75%",
@@ -58775,6 +58397,12 @@
         },
         {
           "variant": "Label=Bottom, Left control=50%, Right control=75%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 240"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=75%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -58787,6 +58415,12 @@
         },
         {
           "variant": "Label=Bottom, Left control=50%, Right control=75%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 240"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=75%",
           "path": "progress/leftcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -58796,6 +58430,12 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=75%",
+          "path": "progress/rightcontrol",
+          "channel": "abs",
+          "value": "68,-8 → 228,-8"
         },
         {
           "variant": "Label=Bottom floating, Left control=50%, Right control=75%",
@@ -58829,6 +58469,12 @@
         },
         {
           "variant": "Label=Bottom floating, Left control=50%, Right control=75%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 240"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=50%, Right control=75%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -58838,6 +58484,12 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=50%, Right control=75%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 240"
         },
         {
           "variant": "Label=Bottom floating, Left control=50%, Right control=75%",
@@ -58874,6 +58526,12 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=50%, Right control=75%",
+          "path": "progress/rightcontrol",
+          "channel": "abs",
+          "value": "68,-8 → 228,-8"
         },
         {
           "variant": "Label=Top floating, Left control=50%, Right control=75%",
@@ -58907,6 +58565,12 @@
         },
         {
           "variant": "Label=Top floating, Left control=50%, Right control=75%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 240"
+        },
+        {
+          "variant": "Label=Top floating, Left control=50%, Right control=75%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -58916,6 +58580,12 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=Top floating, Left control=50%, Right control=75%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 240"
         },
         {
           "variant": "Label=Top floating, Left control=50%, Right control=75%",
@@ -58954,6 +58624,12 @@
           "value": "NONE → HORIZONTAL"
         },
         {
+          "variant": "Label=Top floating, Left control=50%, Right control=75%",
+          "path": "progress/rightcontrol",
+          "channel": "abs",
+          "value": "68,-8 → 228,-8"
+        },
+        {
           "variant": "Label=Bottom, Left control=0%, Right control=100%",
           "path": "",
           "channel": "layout.mode",
@@ -58979,12 +58655,6 @@
         },
         {
           "variant": "Label=Bottom, Left control=0%, Right control=100%",
-          "path": "progress",
-          "channel": "width",
-          "value": "320 → 80"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=100%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -58994,12 +58664,6 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Bottom, Left control=0%, Right control=100%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "320 → 80"
         },
         {
           "variant": "Label=Bottom, Left control=0%, Right control=100%",
@@ -59014,12 +58678,6 @@
           "value": "NONE → HORIZONTAL"
         },
         {
-          "variant": "Label=Bottom, Left control=0%, Right control=100%",
-          "path": "progress/rightcontrol",
-          "channel": "abs",
-          "value": "308,-8 → 68,-8"
-        },
-        {
           "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
           "path": "",
           "channel": "layout.mode",
@@ -59045,12 +58703,6 @@
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
-          "path": "progress",
-          "channel": "width",
-          "value": "320 → 80"
-        },
-        {
-          "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -59060,12 +58712,6 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "320 → 80"
         },
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
@@ -59104,12 +58750,6 @@
           "value": "NONE → HORIZONTAL"
         },
         {
-          "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
-          "path": "progress/rightcontrol",
-          "channel": "abs",
-          "value": "308,-8 → 68,-8"
-        },
-        {
           "variant": "Label=Top floating, Left control=0%, Right control=100%",
           "path": "",
           "channel": "layout.mode",
@@ -59135,12 +58775,6 @@
         },
         {
           "variant": "Label=Top floating, Left control=0%, Right control=100%",
-          "path": "progress",
-          "channel": "width",
-          "value": "320 → 80"
-        },
-        {
-          "variant": "Label=Top floating, Left control=0%, Right control=100%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -59150,12 +58784,6 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Left control=0%, Right control=100%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "320 → 80"
         },
         {
           "variant": "Label=Top floating, Left control=0%, Right control=100%",
@@ -59192,12 +58820,6 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=Top floating, Left control=0%, Right control=100%",
-          "path": "progress/rightcontrol",
-          "channel": "abs",
-          "value": "308,-8 → 68,-8"
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=100%",
@@ -59233,7 +58855,7 @@
           "variant": "Label=Bottom, Left control=25%, Right control=100%",
           "path": "progress",
           "channel": "width",
-          "value": "240 → 80"
+          "value": "240 → 320"
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=100%",
@@ -59251,7 +58873,7 @@
           "variant": "Label=Bottom, Left control=25%, Right control=100%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "240 → 80"
+          "value": "240 → 320"
         },
         {
           "variant": "Label=Bottom, Left control=25%, Right control=100%",
@@ -59269,7 +58891,7 @@
           "variant": "Label=Bottom, Left control=25%, Right control=100%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "228,-8 → 68,-8"
+          "value": "228,-8 → 308,-8"
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=100%",
@@ -59305,7 +58927,7 @@
           "variant": "Label=Bottom floating, Left control=25%, Right control=100%",
           "path": "progress",
           "channel": "width",
-          "value": "240 → 80"
+          "value": "240 → 320"
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=100%",
@@ -59323,7 +58945,7 @@
           "variant": "Label=Bottom floating, Left control=25%, Right control=100%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "240 → 80"
+          "value": "240 → 320"
         },
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=100%",
@@ -59365,7 +58987,7 @@
           "variant": "Label=Bottom floating, Left control=25%, Right control=100%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "228,-8 → 68,-8"
+          "value": "228,-8 → 308,-8"
         },
         {
           "variant": "Label=Top floating, Left control=25%, Right control=100%",
@@ -59401,7 +59023,7 @@
           "variant": "Label=Top floating, Left control=25%, Right control=100%",
           "path": "progress",
           "channel": "width",
-          "value": "240 → 80"
+          "value": "240 → 320"
         },
         {
           "variant": "Label=Top floating, Left control=25%, Right control=100%",
@@ -59419,7 +59041,7 @@
           "variant": "Label=Top floating, Left control=25%, Right control=100%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "240 → 80"
+          "value": "240 → 320"
         },
         {
           "variant": "Label=Top floating, Left control=25%, Right control=100%",
@@ -59461,7 +59083,7 @@
           "variant": "Label=Top floating, Left control=25%, Right control=100%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "228,-8 → 68,-8"
+          "value": "228,-8 → 308,-8"
         },
         {
           "variant": "Label=Bottom, Left control=50%, Right control=100%",
@@ -59497,7 +59119,7 @@
           "variant": "Label=Bottom, Left control=50%, Right control=100%",
           "path": "progress",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 320"
         },
         {
           "variant": "Label=Bottom, Left control=50%, Right control=100%",
@@ -59515,7 +59137,7 @@
           "variant": "Label=Bottom, Left control=50%, Right control=100%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 320"
         },
         {
           "variant": "Label=Bottom, Left control=50%, Right control=100%",
@@ -59533,7 +59155,7 @@
           "variant": "Label=Bottom, Left control=50%, Right control=100%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "148,-8 → 68,-8"
+          "value": "148,-8 → 308,-8"
         },
         {
           "variant": "Label=Bottom floating, Left control=50%, Right control=100%",
@@ -59569,7 +59191,7 @@
           "variant": "Label=Bottom floating, Left control=50%, Right control=100%",
           "path": "progress",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 320"
         },
         {
           "variant": "Label=Bottom floating, Left control=50%, Right control=100%",
@@ -59587,7 +59209,7 @@
           "variant": "Label=Bottom floating, Left control=50%, Right control=100%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 320"
         },
         {
           "variant": "Label=Bottom floating, Left control=50%, Right control=100%",
@@ -59629,7 +59251,7 @@
           "variant": "Label=Bottom floating, Left control=50%, Right control=100%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "148,-8 → 68,-8"
+          "value": "148,-8 → 308,-8"
         },
         {
           "variant": "Label=Top floating, Left control=50%, Right control=100%",
@@ -59665,7 +59287,7 @@
           "variant": "Label=Top floating, Left control=50%, Right control=100%",
           "path": "progress",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 320"
         },
         {
           "variant": "Label=Top floating, Left control=50%, Right control=100%",
@@ -59683,7 +59305,7 @@
           "variant": "Label=Top floating, Left control=50%, Right control=100%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 320"
         },
         {
           "variant": "Label=Top floating, Left control=50%, Right control=100%",
@@ -59725,7 +59347,7 @@
           "variant": "Label=Top floating, Left control=50%, Right control=100%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "148,-8 → 68,-8"
+          "value": "148,-8 → 308,-8"
         },
         {
           "variant": "Label=Bottom, Left control=75%, Right control=100%",
@@ -59759,6 +59381,12 @@
         },
         {
           "variant": "Label=Bottom, Left control=75%, Right control=100%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 320"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=100%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -59771,6 +59399,12 @@
         },
         {
           "variant": "Label=Bottom, Left control=75%, Right control=100%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 320"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=100%",
           "path": "progress/leftcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -59780,6 +59414,12 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=100%",
+          "path": "progress/rightcontrol",
+          "channel": "abs",
+          "value": "68,-8 → 308,-8"
         },
         {
           "variant": "Label=Bottom floating, Left control=75%, Right control=100%",
@@ -59813,6 +59453,12 @@
         },
         {
           "variant": "Label=Bottom floating, Left control=75%, Right control=100%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 320"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=75%, Right control=100%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -59822,6 +59468,12 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=75%, Right control=100%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 320"
         },
         {
           "variant": "Label=Bottom floating, Left control=75%, Right control=100%",
@@ -59860,6 +59512,12 @@
           "value": "NONE → HORIZONTAL"
         },
         {
+          "variant": "Label=Bottom floating, Left control=75%, Right control=100%",
+          "path": "progress/rightcontrol",
+          "channel": "abs",
+          "value": "68,-8 → 308,-8"
+        },
+        {
           "variant": "Label=Top floating, Left control=75%, Right control=100%",
           "path": "",
           "channel": "layout.mode",
@@ -59891,6 +59549,12 @@
         },
         {
           "variant": "Label=Top floating, Left control=75%, Right control=100%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 320"
+        },
+        {
+          "variant": "Label=Top floating, Left control=75%, Right control=100%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -59900,6 +59564,12 @@
           "path": "progress/progressline",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=Top floating, Left control=75%, Right control=100%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 320"
         },
         {
           "variant": "Label=Top floating, Left control=75%, Right control=100%",
@@ -59938,118 +59608,106 @@
           "value": "NONE → HORIZONTAL"
         },
         {
-          "variant": "Label=False, Left control=0%, Right control=25%",
-          "path": "",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=25%",
-          "path": "background",
-          "channel": "kind",
-          "value": "rect → box"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=25%",
-          "path": "background",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=25%",
-          "path": "progress",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=25%",
-          "path": "progress/progressline",
-          "channel": "kind",
-          "value": "rect → box"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=25%",
-          "path": "progress/progressline",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=25%",
-          "path": "progress/leftcontrol",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=25%",
-          "path": "progress/rightcontrol",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=50%",
-          "path": "",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=50%",
-          "path": "background",
-          "channel": "kind",
-          "value": "rect → box"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=50%",
-          "path": "background",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=50%",
-          "path": "progress",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=50%",
-          "path": "progress",
-          "channel": "width",
-          "value": "160 → 80"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=50%",
-          "path": "progress/progressline",
-          "channel": "kind",
-          "value": "rect → box"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=50%",
-          "path": "progress/progressline",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=50%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "160 → 80"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=50%",
-          "path": "progress/leftcontrol",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=50%",
-          "path": "progress/rightcontrol",
-          "channel": "layout.mode",
-          "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=50%",
+          "variant": "Label=Top floating, Left control=75%, Right control=100%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "148,-8 → 68,-8"
+          "value": "68,-8 → 308,-8"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=25%",
+          "path": "",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=25%",
+          "path": "background",
+          "channel": "kind",
+          "value": "rect → box"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=25%",
+          "path": "background",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=25%",
+          "path": "progress",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=25%",
+          "path": "progress/progressline",
+          "channel": "kind",
+          "value": "rect → box"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=25%",
+          "path": "progress/progressline",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=25%",
+          "path": "progress/leftcontrol",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=25%",
+          "path": "progress/rightcontrol",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=50%",
+          "path": "",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=50%",
+          "path": "background",
+          "channel": "kind",
+          "value": "rect → box"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=50%",
+          "path": "background",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=50%",
+          "path": "progress",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=50%",
+          "path": "progress/progressline",
+          "channel": "kind",
+          "value": "rect → box"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=50%",
+          "path": "progress/progressline",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=50%",
+          "path": "progress/leftcontrol",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=50%",
+          "path": "progress/rightcontrol",
+          "channel": "layout.mode",
+          "value": "NONE → HORIZONTAL"
         },
         {
           "variant": "Label=False, Left control=25%, Right control=50%",
@@ -60083,6 +59741,12 @@
         },
         {
           "variant": "Label=False, Left control=25%, Right control=50%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 160"
+        },
+        {
+          "variant": "Label=False, Left control=25%, Right control=50%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -60095,6 +59759,12 @@
         },
         {
           "variant": "Label=False, Left control=25%, Right control=50%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 160"
+        },
+        {
+          "variant": "Label=False, Left control=25%, Right control=50%",
           "path": "progress/leftcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -60104,6 +59774,12 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=25%, Right control=50%",
+          "path": "progress/rightcontrol",
+          "channel": "abs",
+          "value": "68,-8 → 148,-8"
         },
         {
           "variant": "Label=False, Left control=0%, Right control=75%",
@@ -60131,12 +59807,6 @@
         },
         {
           "variant": "Label=False, Left control=0%, Right control=75%",
-          "path": "progress",
-          "channel": "width",
-          "value": "240 → 80"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=75%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -60149,12 +59819,6 @@
         },
         {
           "variant": "Label=False, Left control=0%, Right control=75%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "240 → 80"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=75%",
           "path": "progress/leftcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -60164,12 +59828,6 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=75%",
-          "path": "progress/rightcontrol",
-          "channel": "abs",
-          "value": "228,-8 → 68,-8"
         },
         {
           "variant": "Label=False, Left control=25%, Right control=75%",
@@ -60205,7 +59863,7 @@
           "variant": "Label=False, Left control=25%, Right control=75%",
           "path": "progress",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 240"
         },
         {
           "variant": "Label=False, Left control=25%, Right control=75%",
@@ -60223,7 +59881,7 @@
           "variant": "Label=False, Left control=25%, Right control=75%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 240"
         },
         {
           "variant": "Label=False, Left control=25%, Right control=75%",
@@ -60241,7 +59899,7 @@
           "variant": "Label=False, Left control=25%, Right control=75%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "148,-8 → 68,-8"
+          "value": "148,-8 → 228,-8"
         },
         {
           "variant": "Label=False, Left control=50%, Right control=75%",
@@ -60275,6 +59933,12 @@
         },
         {
           "variant": "Label=False, Left control=50%, Right control=75%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 240"
+        },
+        {
+          "variant": "Label=False, Left control=50%, Right control=75%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -60287,6 +59951,12 @@
         },
         {
           "variant": "Label=False, Left control=50%, Right control=75%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 240"
+        },
+        {
+          "variant": "Label=False, Left control=50%, Right control=75%",
           "path": "progress/leftcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -60296,6 +59966,12 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=50%, Right control=75%",
+          "path": "progress/rightcontrol",
+          "channel": "abs",
+          "value": "68,-8 → 228,-8"
         },
         {
           "variant": "Label=False, Left control=0%, Right control=100%",
@@ -60323,12 +59999,6 @@
         },
         {
           "variant": "Label=False, Left control=0%, Right control=100%",
-          "path": "progress",
-          "channel": "width",
-          "value": "320 → 80"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=100%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -60341,12 +60011,6 @@
         },
         {
           "variant": "Label=False, Left control=0%, Right control=100%",
-          "path": "progress/progressline",
-          "channel": "width",
-          "value": "320 → 80"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=100%",
           "path": "progress/leftcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -60356,12 +60020,6 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
-        },
-        {
-          "variant": "Label=False, Left control=0%, Right control=100%",
-          "path": "progress/rightcontrol",
-          "channel": "abs",
-          "value": "308,-8 → 68,-8"
         },
         {
           "variant": "Label=False, Left control=25%, Right control=100%",
@@ -60397,7 +60055,7 @@
           "variant": "Label=False, Left control=25%, Right control=100%",
           "path": "progress",
           "channel": "width",
-          "value": "240 → 80"
+          "value": "240 → 320"
         },
         {
           "variant": "Label=False, Left control=25%, Right control=100%",
@@ -60415,7 +60073,7 @@
           "variant": "Label=False, Left control=25%, Right control=100%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "240 → 80"
+          "value": "240 → 320"
         },
         {
           "variant": "Label=False, Left control=25%, Right control=100%",
@@ -60433,7 +60091,7 @@
           "variant": "Label=False, Left control=25%, Right control=100%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "228,-8 → 68,-8"
+          "value": "228,-8 → 308,-8"
         },
         {
           "variant": "Label=False, Left control=50%, Right control=100%",
@@ -60469,7 +60127,7 @@
           "variant": "Label=False, Left control=50%, Right control=100%",
           "path": "progress",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 320"
         },
         {
           "variant": "Label=False, Left control=50%, Right control=100%",
@@ -60487,7 +60145,7 @@
           "variant": "Label=False, Left control=50%, Right control=100%",
           "path": "progress/progressline",
           "channel": "width",
-          "value": "160 → 80"
+          "value": "160 → 320"
         },
         {
           "variant": "Label=False, Left control=50%, Right control=100%",
@@ -60505,7 +60163,7 @@
           "variant": "Label=False, Left control=50%, Right control=100%",
           "path": "progress/rightcontrol",
           "channel": "abs",
-          "value": "148,-8 → 68,-8"
+          "value": "148,-8 → 308,-8"
         },
         {
           "variant": "Label=False, Left control=75%, Right control=100%",
@@ -60539,6 +60197,12 @@
         },
         {
           "variant": "Label=False, Left control=75%, Right control=100%",
+          "path": "progress",
+          "channel": "width",
+          "value": "80 → 320"
+        },
+        {
+          "variant": "Label=False, Left control=75%, Right control=100%",
           "path": "progress/progressline",
           "channel": "kind",
           "value": "rect → box"
@@ -60551,6 +60215,12 @@
         },
         {
           "variant": "Label=False, Left control=75%, Right control=100%",
+          "path": "progress/progressline",
+          "channel": "width",
+          "value": "80 → 320"
+        },
+        {
+          "variant": "Label=False, Left control=75%, Right control=100%",
           "path": "progress/leftcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
@@ -60560,6 +60230,12 @@
           "path": "progress/rightcontrol",
           "channel": "layout.mode",
           "value": "NONE → HORIZONTAL"
+        },
+        {
+          "variant": "Label=False, Left control=75%, Right control=100%",
+          "path": "progress/rightcontrol",
+          "channel": "abs",
+          "value": "68,-8 → 308,-8"
         }
       ],
       "loss": [

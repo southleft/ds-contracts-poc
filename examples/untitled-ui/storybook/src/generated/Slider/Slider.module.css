@@ -48,6 +48,22 @@
   position: absolute;
 }
 
+.rightControl-25 .Progress {
+  width: 80px;
+}
+
+.rightControl-50 .Progress {
+  width: 160px;
+}
+
+.rightControl-75 .Progress {
+  width: 240px;
+}
+
+.rightControl-100 .Progress {
+  width: 320px;
+}
+
 .progressLine {
   background-color: var(--imported-shared-color-7f56d9);
   border-radius: var(--imported-slider-progress-progress-line-border-radius);
@@ -56,6 +72,22 @@
   top: var(--imported-shared-size-0);
   width: 80px;
   position: absolute;
+}
+
+.rightControl-25 .progressLine {
+  width: 80px;
+}
+
+.rightControl-50 .progressLine {
+  width: 160px;
+}
+
+.rightControl-75 .progressLine {
+  width: 240px;
+}
+
+.rightControl-100 .progressLine {
+  width: 320px;
 }
 
 .leftControl {

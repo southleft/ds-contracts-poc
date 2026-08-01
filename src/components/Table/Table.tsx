@@ -18,7 +18,13 @@ export const Table = forwardRef<HTMLDivElement, TableProps>(function Table(
   { density = 'comfortable', className, children, ...rest },
   ref,
 ) {
-  const classes = [styles.root, styles[`density-${density}`], className].filter(Boolean).join(' ');
+  // axis-inert (ledgered, not a throw): density — no `.<axis>-*` rule
+  // exists in Table.module.css, so no class is composed for it. A reference
+  // to an unemitted class resolves to `undefined` and is filtered out, so emitting
+  // one only made a style-less axis LOOK styled. Whatever this axis carries rides
+  // structure (a gated part, a per-value text/icon lookup, a child's own props) —
+  // or, where the source drew no difference at all, nothing.
+  const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
     <div ref={ref} className={classes} role="table" {...rest}>
       <div className={styles.header}>

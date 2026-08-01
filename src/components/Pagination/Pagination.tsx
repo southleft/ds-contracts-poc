@@ -28,7 +28,13 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
   { variant = 'pages', pageLabel = 'Page 2 of 10', label, className, children, ...rest },
   ref,
 ) {
-  const classes = [styles.root, styles[`variant-${variant}`], className].filter(Boolean).join(' ');
+  // axis-inert (ledgered, not a throw): variant — no `.<axis>-*` rule
+  // exists in Pagination.module.css, so no class is composed for it. A reference
+  // to an unemitted class resolves to `undefined` and is filtered out, so emitting
+  // one only made a style-less axis LOOK styled. Whatever this axis carries rides
+  // structure (a gated part, a per-value text/icon lookup, a child's own props) —
+  // or, where the source drew no difference at all, nothing.
+  const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
     <nav ref={ref} className={classes} {...rest}>
       <button className={styles.prevButton} aria-label="Previous page" type="button">

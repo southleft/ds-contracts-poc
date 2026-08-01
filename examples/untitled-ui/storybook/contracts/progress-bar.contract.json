@@ -124,7 +124,29 @@
               },
               "literals": {
                 "width": "287px"
-              }
+              },
+              "literalsByProp": [
+                {
+                  "prop": "label",
+                  "map": {
+                    "right": {
+                      "width": "287px"
+                    },
+                    "bottom": {
+                      "width": "320px"
+                    },
+                    "topFloating": {
+                      "width": "320px"
+                    },
+                    "bottomFloating": {
+                      "width": "320px"
+                    },
+                    "false": {
+                      "width": "320px"
+                    }
+                  }
+                }
+              ]
             },
             "Progress": {
               "parts": {
@@ -141,7 +163,47 @@
                   },
                   "literals": {
                     "width": "8.08px"
-                  }
+                  },
+                  "literalsByProp": [
+                    {
+                      "prop": "progress",
+                      "map": {
+                        "0": {
+                          "width": "8.08px"
+                        },
+                        "10": {
+                          "width": "28.2px"
+                        },
+                        "20": {
+                          "width": "56.01px"
+                        },
+                        "30": {
+                          "width": "84.01px"
+                        },
+                        "40": {
+                          "width": "112.01px"
+                        },
+                        "50": {
+                          "width": "140.01px"
+                        },
+                        "60": {
+                          "width": "168.02px"
+                        },
+                        "70": {
+                          "width": "196.72px"
+                        },
+                        "80": {
+                          "width": "224.02px"
+                        },
+                        "90": {
+                          "width": "252.03px"
+                        },
+                        "100": {
+                          "width": "271px"
+                        }
+                      }
+                    }
+                  ]
                 },
                 "Tooltip": {
                   "component": {

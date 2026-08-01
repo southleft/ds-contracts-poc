@@ -177,7 +177,26 @@
           },
           "literals": {
             "left": "12px"
-          }
+          },
+          "literalsByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "md": {
+                  "left": "12px"
+                },
+                "lg": {
+                  "left": "13px"
+                },
+                "sm": {
+                  "left": "10px"
+                },
+                "xs": {
+                  "left": "8px"
+                }
+              }
+            }
+          ]
         },
         "group3": {
           "parts": {
@@ -198,7 +217,30 @@
               "literals": {
                 "left": "78.5px",
                 "top": "89px"
-              }
+              },
+              "literalsByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "md": {
+                      "left": "78.5px",
+                      "top": "89px"
+                    },
+                    "lg": {
+                      "left": "99px",
+                      "top": "99px"
+                    },
+                    "sm": {
+                      "left": "63.5px",
+                      "top": "72px"
+                    },
+                    "xs": {
+                      "left": "43.5px",
+                      "top": "53px"
+                    }
+                  }
+                }
+              ]
             },
             "Number": {
               "text": "40%",
@@ -214,7 +256,30 @@
               "literals": {
                 "left": "82px",
                 "top": "109px"
-              }
+              },
+              "literalsByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "md": {
+                      "left": "82px",
+                      "top": "109px"
+                    },
+                    "lg": {
+                      "left": "89.5px",
+                      "top": "121px"
+                    },
+                    "sm": {
+                      "left": "67px",
+                      "top": "89px"
+                    },
+                    "xs": {
+                      "left": "54px",
+                      "top": "72px"
+                    }
+                  }
+                }
+              ]
             }
           }
         }

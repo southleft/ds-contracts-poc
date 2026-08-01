@@ -168,7 +168,7 @@ export async function generateComponents(
     writeFileSync(path.join(dir, `${contract.name}.module.css`), await formatCss(css));
     writeFileSync(
       path.join(dir, `${contract.name}.tsx`),
-      await formatTsx(generateTsx(contract, byId, iconAssets)),
+      await formatTsx(generateTsx(contract, byId, iconAssets, css)),
     );
     if (stories) {
       writeFileSync(

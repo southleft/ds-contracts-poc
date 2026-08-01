@@ -38,19 +38,13 @@ export const Checkbox = forwardRef<HTMLSpanElement, CheckboxProps>(function Chec
   },
   ref,
 ) {
-  const classes = [
-    styles.root,
-    styles[`checked-${checked}`],
-    styles[`indeterminate-${indeterminate}`],
-    styles[`size-${size}`],
-    styles[`type-${type}`],
-    styles[`text-${text}`],
-    styles[`supportingText-${supportingText}`],
-    styles[`state-${state}`],
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  // axis-inert (ledgered, not a throw): checked, indeterminate, size, type, text, supportingText, state — no `.<axis>-*` rule
+  // exists in Checkbox.module.css, so no class is composed for them. A reference
+  // to an unemitted class resolves to `undefined` and is filtered out, so emitting
+  // one only made a style-less axis LOOK styled. Whatever these axes carry rides
+  // structure (a gated part, a per-value text/icon lookup, a child's own props) —
+  // or, where the source drew no difference at all, nothing.
+  const classes = [styles.root, className].filter(Boolean).join(' ');
   return (
     <span ref={ref} className={classes} {...rest}>
       <span

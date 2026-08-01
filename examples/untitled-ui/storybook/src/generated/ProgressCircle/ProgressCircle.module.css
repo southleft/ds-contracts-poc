@@ -119,6 +119,22 @@
   height: var(--imported-progress-circle-ring-height-xs);
 }
 
+.size-md .Ring {
+  left: 12px;
+}
+
+.size-lg .Ring {
+  left: 13px;
+}
+
+.size-sm .Ring {
+  left: 10px;
+}
+
+.size-xs .Ring {
+  left: 8px;
+}
+
 .Background {
   width: 216px;
   height: 216px;
@@ -251,6 +267,26 @@
   line-height: var(--imported-progress-circle-group-3-label-line-height-xs);
 }
 
+.size-md .Label {
+  left: 78.5px;
+  top: 89px;
+}
+
+.size-lg .Label {
+  left: 99px;
+  top: 99px;
+}
+
+.size-sm .Label {
+  left: 63.5px;
+  top: 72px;
+}
+
+.size-xs .Label {
+  left: 43.5px;
+  top: 53px;
+}
+
 .Number {
   color: var(--imported-progress-circle-group-3-number-color);
   font-weight: var(--imported-progress-circle-group-3-number-font-weight);
@@ -289,4 +325,24 @@
 
 .size-xs .Number {
   line-height: var(--imported-progress-circle-group-3-number-line-height-xs);
+}
+
+.size-md .Number {
+  left: 82px;
+  top: 109px;
+}
+
+.size-lg .Number {
+  left: 89.5px;
+  top: 121px;
+}
+
+.size-sm .Number {
+  left: 67px;
+  top: 89px;
+}
+
+.size-xs .Number {
+  left: 54px;
+  top: 72px;
 }

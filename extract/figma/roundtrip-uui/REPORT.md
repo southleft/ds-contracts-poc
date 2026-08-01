@@ -19,14 +19,14 @@ The hand-built canvas used zero published variables, so captured.dtcg.json is `{
 | button-group-base | round trip closed | 32 → 32 | 496 | 64 | 72 | 32 |
 | dropdown-list-item | round trip closed | 24 → 12 | 127 | 14 | 125 | 144 |
 | input-field-base | round trip closed | 10 → 10 | 531 | 47 | 277 | 164 |
-| progress-bar | round trip closed | 55 → 55 | 1200 | 329 | 485 | 649 |
-| progress-circle | round trip closed | 16 → 16 | 305 | 104 | 225 | 231 |
+| progress-bar | round trip closed | 55 → 55 | 1244 | 285 | 485 | 649 |
+| progress-circle | round trip closed | 16 → 16 | 315 | 94 | 225 | 231 |
 | slider | round trip closed | 40 → 64 | 1184 | 496 | 1180 | 1364 |
 | social-button | round trip closed | 108 → 108 | 1974 | 186 | 480 | 0 |
 | toggle-base | round trip closed | 32 → 10 | 147 | 13 | 32 | 0 |
 | tooltip | round trip closed | 28 → 28 | 868 | 138 | 241 | 196 |
 
-**15/15 round trips closed.** Across the closed ones: 10289 matched, 2045 diverged, 4660 one-way loss, 6077 invented.
+**15/15 round trips closed.** Across the closed ones: 10343 matched, 1991 diverged, 4660 one-way loss, 6077 invented.
 
 ## avatar — 162 → 216 variants
 
@@ -827,16 +827,15 @@ matched 531 · diverged 47 · loss 277 · invented 164
 
 ## progress-bar — 55 → 55 variants
 
-matched 1200 · diverged 329 · loss 485 · invented 649
+matched 1244 · diverged 285 · loss 485 · invented 649
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 329 fact(s):
+- class `(unclassified)` — 285 fact(s):
   - progressbar ▸ layout.mode: NONE → HORIZONTAL  (×55 variants)
   - progressbar/background ▸ kind: rect → box  (×55 variants)
   - progressbar/background ▸ layout.mode: NONE → HORIZONTAL  (×55 variants)
   - progressbar/progress ▸ layout.mode: NONE → HORIZONTAL  (×55 variants)
-  - progressbar/background ▸ width: 320 → 287  (×44 variants)
   - progressbar/progress ▸ kind: rect → box  (×35 variants)
   - progressbar/progress/tooltip ▸ layout.sizing: AUTO/AUTO → AUTO/FIXED  (×20 variants)
   - progressbar/background ▸ width: 278 → 287  (×7 variants)
@@ -964,8 +963,18 @@ matched 1200 · diverged 329 · loss 485 · invented 649
   - progressbar/progress/progress2 ▸ radius: 4  (×55 variants)
   - progressbar/progress/progress2 ▸ fill: #7f56d9  (×55 variants)
   - progressbar/progress/progress2 ▸ abs: 0,0  (×55 variants)
-  - progressbar/progress/progress2 ▸ width: 8.1  (×55 variants)
   - progressbar/progress/progress2 ▸ height: 8  (×55 variants)
+  - progressbar/progress/progress2 ▸ width: 8.1  (×5 variants)
+  - progressbar/progress/progress2 ▸ width: 28.2  (×5 variants)
+  - progressbar/progress/progress2 ▸ width: 56  (×5 variants)
+  - progressbar/progress/progress2 ▸ width: 84  (×5 variants)
+  - progressbar/progress/progress2 ▸ width: 112  (×5 variants)
+  - progressbar/progress/progress2 ▸ width: 140  (×5 variants)
+  - progressbar/progress/progress2 ▸ width: 168  (×5 variants)
+  - progressbar/progress/progress2 ▸ width: 196.7  (×5 variants)
+  - progressbar/progress/progress2 ▸ width: 224  (×5 variants)
+  - progressbar/progress/progress2 ▸ width: 252  (×5 variants)
+  - progressbar/progress/progress2 ▸ width: 271  (×5 variants)
   - progressbar/progress/tooltip ▸ kind: instance  (×2 variants)
   - progressbar/progress/tooltip ▸ layout.mode: VERTICAL  (×2 variants)
   - progressbar/progress/tooltip ▸ layout.align: MIN/CENTER  (×2 variants)
@@ -984,30 +993,27 @@ matched 1200 · diverged 329 · loss 485 · invented 649
 
 ## progress-circle — 16 → 16 variants
 
-matched 305 · diverged 104 · loss 225 · invented 231
+matched 315 · diverged 94 · loss 225 · invented 231
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 96 fact(s):
+- class `(unclassified)` — 86 fact(s):
   - (root) ▸ layout.mode: NONE → HORIZONTAL  (×16 variants)
   - ring ▸ layout.mode: NONE → HORIZONTAL  (×16 variants)
   - ring/background ▸ width: 252 → 216  (×4 variants)
   - ring/line ▸ width: 252 → 216  (×4 variants)
   - ring/line ▸ height: 252 → 216  (×4 variants)
-  - ring ▸ abs: 10,10 → 12,10  (×4 variants)
   - ring/background ▸ width: 180 → 216  (×4 variants)
   - ring/line ▸ width: 180 → 216  (×4 variants)
   - ring/line ▸ height: 180 → 216  (×4 variants)
-  - ring ▸ abs: 8,8 → 12,8  (×4 variants)
   - ring/background ▸ width: 144 → 216  (×4 variants)
   - ring/line ▸ width: 144 → 216  (×4 variants)
   - ring/line ▸ height: 144 → 216  (×4 variants)
-  - ring ▸ abs: 13,14 → 12,14  (×2 variants)
   - ring/background ▸ height: 252 → 216  (×2 variants)
   - ring/background ▸ height: 180 → 216  (×2 variants)
   - ring/background ▸ height: 144 → 216  (×2 variants)
   - ring/background ▸ height: 108 → 216  (×2 variants)
-  - ring ▸ abs: 14,14 → 12,14  (×2 variants)
+  - ring ▸ abs: 14,14 → 13,14  (×2 variants)
   - ring/background ▸ height: 126 → 216  (×2 variants)
   - ring/background ▸ height: 90 → 216  (×2 variants)
   - group3 ▸ layout.mode: NONE → HORIZONTAL  (×2 variants)
@@ -1135,17 +1141,26 @@ matched 1184 · diverged 496 · loss 1180 · invented 1364
   - progress/leftcontrol/tooltip ▸ layout.mode: VERTICAL → HORIZONTAL  (×20 variants)
   - progress/leftcontrol/tooltip ▸ layout.align: MIN/CENTER → MIN/MIN  (×20 variants)
   - progress/leftcontrol/tooltip ▸ layout.sizing: AUTO/AUTO → FIXED/FIXED  (×20 variants)
-  - progress ▸ width: 160 → 80  (×12 variants)
-  - progress/progressline ▸ width: 160 → 80  (×12 variants)
-  - progress/rightcontrol ▸ abs: 148,-8 → 68,-8  (×12 variants)
   - progress ▸ abs: 80,8 → 0,8  (×12 variants)
-  - progress ▸ width: 240 → 80  (×8 variants)
-  - progress/progressline ▸ width: 240 → 80  (×8 variants)
-  - progress/rightcontrol ▸ abs: 228,-8 → 68,-8  (×8 variants)
   - progress ▸ abs: 160,8 → 0,8  (×8 variants)
-  - progress ▸ width: 320 → 80  (×4 variants)
-  - progress/progressline ▸ width: 320 → 80  (×4 variants)
-  - progress/rightcontrol ▸ abs: 308,-8 → 68,-8  (×4 variants)
+  - progress ▸ width: 80 → 160  (×4 variants)
+  - progress/progressline ▸ width: 80 → 160  (×4 variants)
+  - progress/rightcontrol ▸ abs: 68,-8 → 148,-8  (×4 variants)
+  - progress ▸ width: 160 → 240  (×4 variants)
+  - progress/progressline ▸ width: 160 → 240  (×4 variants)
+  - progress/rightcontrol ▸ abs: 148,-8 → 228,-8  (×4 variants)
+  - progress ▸ width: 80 → 240  (×4 variants)
+  - progress/progressline ▸ width: 80 → 240  (×4 variants)
+  - progress/rightcontrol ▸ abs: 68,-8 → 228,-8  (×4 variants)
+  - progress ▸ width: 240 → 320  (×4 variants)
+  - progress/progressline ▸ width: 240 → 320  (×4 variants)
+  - progress/rightcontrol ▸ abs: 228,-8 → 308,-8  (×4 variants)
+  - progress ▸ width: 160 → 320  (×4 variants)
+  - progress/progressline ▸ width: 160 → 320  (×4 variants)
+  - progress/rightcontrol ▸ abs: 148,-8 → 308,-8  (×4 variants)
+  - progress ▸ width: 80 → 320  (×4 variants)
+  - progress/progressline ▸ width: 80 → 320  (×4 variants)
+  - progress/rightcontrol ▸ abs: 68,-8 → 308,-8  (×4 variants)
   - progress ▸ abs: 240,8 → 0,8  (×3 variants)
   - progress ▸ abs: 248,8 → 0,8  (Label=False, Left control=75%, Right control=100%)
 

@@ -2067,10 +2067,35 @@ function sampleDeps(
   return out;
 }
 
+/** Every class name that appears in a SELECTOR of an emitted module sheet.
+ *  Comments are stripped first: the generated header carries the contract id
+ *  ("ds.progress-bar"), which a naive scan reads as a class called
+ *  `progress-bar` — the false negative that hid `axis-inert` from an
+ *  unanchored probe. Compound selectors (`.variant-primary.state-hover`) and
+ *  descendant rules (`.progress-40 .Progress2`) both contribute every class
+ *  they name, because the TSX must compose all of them for the rule to
+ *  match. */
+export function cssClassSelectors(css: string): Set<string> {
+  const out = new Set<string>();
+  for (const rule of css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/([^{}]+)\{/g)) {
+    for (const c of rule[1].matchAll(/\.(-?[A-Za-z_][A-Za-z0-9_-]*)/g)) out.add(c[1]);
+  }
+  return out;
+}
+
 export function generateTsx(
   contract: Contract,
   byId: Map<string, Contract>,
   iconAssets: Map<string, string>,
+  /** GAP-CLOSING ROUND 2 (`axis-inert`) — the module sheet this component
+   *  will ship with (generateCss's output for the SAME contract). With it the
+   *  emitter refuses to compose a class template for an axis the sheet never
+   *  gives a rule: `styles['statusIcon-company']` on a module with no
+   *  `.statusIcon-*` rule is `undefined`, is filtered out of the className
+   *  string, and leaves an axis that looks styled and is not. Omitted (no
+   *  caller in this repo) — the historical unconditional spelling, so an
+   *  out-of-tree caller cannot silently change. */
+  emittedCss?: string,
 ): string {
   // elementByProp renders a dynamic tag — the ref/attrs generalize to the
   // shared HTMLElement surface (the concrete element varies per prop value).
@@ -2217,11 +2242,38 @@ export function generateTsx(
     return s;
   };
 
+  // GAP-CLOSING ROUND 2 (`axis-inert`) — an enum axis whose module sheet
+  // carries no `.<axis>-*` rule composes NO class. The dead reference used to
+  // ship unconditionally, which is exactly what an inert axis looks like from
+  // the outside: the prop exists, the class is composed, and every value
+  // renders the same drawing. Suppression is a LEDGER, not a throw — 41 of
+  // the 133 axis class templates in this repo's committed generated output
+  // were dead when this landed, spread over EVERY generated surface (this
+  // library's own 51 components, untitled-ui, polaris, astryx, the fidelity
+  // matrix, the eventz pilot), so a hard failure would have refused all of
+  // them at once. The suppressed axes are NAMED in the emitted file instead.
+  const definedClasses = emittedCss === undefined ? null : cssClassSelectors(emittedCss);
+  const inertAxes: string[] = [];
+  const classedEnums = enums.filter((p) => {
+    if (definedClasses === null) return true;
+    for (const c of definedClasses) if (c.startsWith(`${p.name}-`)) return true;
+    inertAxes.push(p.name);
+    return false;
+  });
   const classParts = [
     'styles.root',
-    ...enums.map((p) => `styles[\`${p.name}-\${${p.bindings.code.prop}}\`]`),
+    ...classedEnums.map((p) => `styles[\`${p.name}-\${${p.bindings.code.prop}}\`]`),
     'className',
   ];
+  const inertNote =
+    inertAxes.length === 0
+      ? ''
+      : `  // axis-inert (ledgered, not a throw): ${inertAxes.join(', ')} — no \`.<axis>-*\` rule\n` +
+        `  // exists in ${name}.module.css, so no class is composed for ${inertAxes.length === 1 ? 'it' : 'them'}. A reference\n` +
+        `  // to an unemitted class resolves to \`undefined\` and is filtered out, so emitting\n` +
+        `  // one only made a style-less axis LOOK styled. Whatever ${inertAxes.length === 1 ? 'this axis carries' : 'these axes carry'} rides\n` +
+        `  // structure (a gated part, a per-value text/icon lookup, a child's own props) —\n` +
+        `  // or, where the source drew no difference at all, nothing.\n`;
 
   const nativeDisabled = meta.supportsDisabled && bools.some((p) => p.name === 'disabled');
   const elementAttrs: string[] = ['ref={ref}', 'className={classes}'];
@@ -2503,7 +2555,7 @@ export const ${name} = forwardRef<${meta.el}, ${name}Props>(function ${name}(
   { ${destructured.join(', ')} },
   ref,
 ) {
-${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}  const classes = [${classParts.join(', ')}].filter(Boolean).join(' ');
+${prelude.length > 0 ? prelude.join('\n') + '\n' : ''}${inertNote}  const classes = [${classParts.join(', ')}].filter(Boolean).join(' ');
   return (
     <${el} ${elementAttrs.join(' ')}>
       ${rootInner}
@@ -2783,7 +2835,7 @@ export function emitReact(contract: Contract, ctx: EmitCtx): EmitReactResult {
     throw new Error(`Refused — ${errors.length} contract violation(s):\n${errors.map((e) => `  - ${e}`).join('\n')}`);
   }
   return {
-    tsx: generateTsx(contract, ctx.contracts, ctx.icons),
+    tsx: generateTsx(contract, ctx.contracts, ctx.icons, css),
     css,
     stories: generateStories(contract, ctx.contracts),
   };

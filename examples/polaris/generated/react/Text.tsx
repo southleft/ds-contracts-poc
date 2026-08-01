@@ -33,7 +33,13 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(function Text(
   { alignment = 'undefined', as = 'undefined', tone = 'undefined', fontWeight = 'undefined', variant = 'undefined', breakWord = false, numeric = false, truncate = false, visuallyHidden = false, className, children, ...rest },
   ref,
 ) {
-  const classes = [styles.root, styles[`alignment-${alignment}`], styles[`as-${as}`], styles[`tone-${tone}`], styles[`fontWeight-${fontWeight}`], styles[`variant-${variant}`], className].filter(Boolean).join(' ');
+  // axis-inert (ledgered, not a throw): alignment, as — no `.<axis>-*` rule
+  // exists in Text.module.css, so no class is composed for them. A reference
+  // to an unemitted class resolves to `undefined` and is filtered out, so emitting
+  // one only made a style-less axis LOOK styled. Whatever these axes carry rides
+  // structure (a gated part, a per-value text/icon lookup, a child's own props) —
+  // or, where the source drew no difference at all, nothing.
+  const classes = [styles.root, styles[`tone-${tone}`], styles[`fontWeight-${fontWeight}`], styles[`variant-${variant}`], className].filter(Boolean).join(' ');
   return (
     <p ref={ref} className={classes} data-break-word={breakWord || undefined} data-numeric={numeric || undefined} data-truncate={truncate || undefined} data-visually-hidden={visuallyHidden || undefined} {...rest}>
       {children}

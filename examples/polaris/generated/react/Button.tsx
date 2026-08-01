@@ -35,7 +35,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   { size = 'medium', textAlign = 'center', tone = 'undefined', variant = 'secondary', fullWidth = false, removeUnderline = false, dataPrimaryLink = false, withIcon = false, className, children, ...rest },
   ref,
 ) {
-  const classes = [styles.root, styles[`size-${size}`], styles[`textAlign-${textAlign}`], styles[`tone-${tone}`], styles[`variant-${variant}`], className].filter(Boolean).join(' ');
+  // axis-inert (ledgered, not a throw): textAlign — no `.<axis>-*` rule
+  // exists in Button.module.css, so no class is composed for it. A reference
+  // to an unemitted class resolves to `undefined` and is filtered out, so emitting
+  // one only made a style-less axis LOOK styled. Whatever this axis carries rides
+  // structure (a gated part, a per-value text/icon lookup, a child's own props) —
+  // or, where the source drew no difference at all, nothing.
+  const classes = [styles.root, styles[`size-${size}`], styles[`tone-${tone}`], styles[`variant-${variant}`], className].filter(Boolean).join(' ');
   return (
     <button ref={ref} className={classes} data-full-width={fullWidth || undefined} data-remove-underline={removeUnderline || undefined} data-data-primary-link={dataPrimaryLink || undefined} data-with-icon={withIcon || undefined} {...rest}>
       {withIcon ? (<span className={styles.icon}>

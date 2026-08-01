@@ -7,16 +7,16 @@ Score = % pixels within tolerance, both images content-trimmed then normalized t
 | badge-base | 8 | 94.4 | 0 | 0 | 0 |
 | button-base | 20 | 88.8 | 0 | 0 | 0 |
 | toggle-base | 16 | 98.7 | 0 | 16 | 0 |
-| dropdown-list-item | 12 | 79.8 | 0 | 12 | 0 |
+| dropdown-list-item | 12 | 76.7 | 0 | 12 | 0 |
 | input-field-base | 10 | 85.1 | 0 | 0 | 0 |
 | avatar-group | 12 | 89.6 | 0 | 0 | 0 |
 | tooltip | 28 | 67.7 | 0 | 0 | 0 |
-| slider | 40 | 90.9 | 0 | 0 | 0 |
-| progress-bar | 55 | 87.5 | 0 | 0 | 0 |
-| progress-circle | 16 | 81.6 | 4 | 0 | 0 |
-| avatar | 162 | 72.0 | 0 | 0 | 0 |
-| avatar-label-group | 12 | 86.9 | 0 | 24 | 0 |
+| slider | 40 | 88.8 | 0 | 0 | 0 |
+| progress-bar | 55 | 84.4 | 0 | 0 | 0 |
+| progress-circle | 16 | 80.9 | 4 | 0 | 0 |
+| avatar | 162 | 72.5 | 0 | 0 | 0 |
+| avatar-label-group | 12 | 87.0 | 0 | 24 | 0 |
 | avatar-add-button | 6 | 94.9 | 0 | 6 | 0 |
-| button-group-base | 32 | 79.3 | 0 | 0 | 0 |
+| button-group-base | 32 | 79.5 | 0 | 0 | 0 |
 | social-button | 108 | 77.9 | 0 | 0 | 0 |
-| **ALL** | 537 | **79.8** | | | |
+| **ALL** | 537 | **79.4** | | | |

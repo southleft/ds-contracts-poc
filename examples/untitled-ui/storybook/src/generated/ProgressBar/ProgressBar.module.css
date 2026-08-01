@@ -64,6 +64,26 @@
   position: absolute;
 }
 
+.label-right .Background {
+  width: 287px;
+}
+
+.label-bottom .Background {
+  width: 320px;
+}
+
+.label-topFloating .Background {
+  width: 320px;
+}
+
+.label-bottomFloating .Background {
+  width: 320px;
+}
+
+.label-false .Background {
+  width: 320px;
+}
+
 .Progress {
   display: flex;
 }
@@ -76,6 +96,50 @@
   top: var(--imported-shared-size-0);
   width: 8.08px;
   position: absolute;
+}
+
+.progress-0 .Progress2 {
+  width: 8.08px;
+}
+
+.progress-10 .Progress2 {
+  width: 28.2px;
+}
+
+.progress-20 .Progress2 {
+  width: 56.01px;
+}
+
+.progress-30 .Progress2 {
+  width: 84.01px;
+}
+
+.progress-40 .Progress2 {
+  width: 112.01px;
+}
+
+.progress-50 .Progress2 {
+  width: 140.01px;
+}
+
+.progress-60 .Progress2 {
+  width: 168.02px;
+}
+
+.progress-70 .Progress2 {
+  width: 196.72px;
+}
+
+.progress-80 .Progress2 {
+  width: 224.02px;
+}
+
+.progress-90 .Progress2 {
+  width: 252.03px;
+}
+
+.progress-100 .Progress2 {
+  width: 271px;
 }
 
 .Percentage {

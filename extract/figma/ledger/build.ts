@@ -722,10 +722,24 @@ const danglingAxes = axisRows.filter((r) => !r.cssRule).sort((a, b) => a.set.loc
 const fullyInert = danglingAxes.filter((r) => !r.tsxBranch);
 const danglingSets = [...new Set(danglingAxes.map((r) => r.set))].sort();
 const danglingVariants = danglingSets.reduce((a, s) => a + (fidBySet.get(s) ?? []).length, 0);
+// GAP-CLOSING ROUND 2: the emitter now SUPPRESSES a class template whose
+// module sheet has no rule for it and NAMES the axis in the emitted file. A
+// suppressed axis therefore leaves the `styles[…]` denominator entirely, so
+// counting dangling templates alone would report the class closed by making
+// it invisible. The named receipts are counted here too — they are the
+// axes this kit declares style-less, and an adopter should read the number.
+const namedInert: string[] = [];
+for (const c of fullContracts) {
+  const e = emittedFor(contractStem(c.name));
+  if (!e) continue;
+  const m = /axis-inert \(ledgered, not a throw\): ([^\n—]+?)\s*—/.exec(e.tsx);
+  if (m) for (const axis of m[1].split(',')) namedInert.push(`${contractStem(c.name)}.${axis.trim()}`);
+}
+namedInert.sort();
 setProbe('axis-inert', {
   verdict: danglingAxes.length === 0 ? 'CLOSED' : 'OPEN',
   basis: 'this kit',
-  evidence: `${danglingAxes.length} of ${axisRows.length} axis class templates in the ${fullContracts.length} full sets resolve to no CSS rule (${danglingAxes.map((r) => `${r.set}.${r.axis}`).join(', ') || 'none'}); ${fullyInert.length} of those ${fullyInert.length === 1 ? 'drives' : 'drive'} no TSX branch either. Blast radius ${danglingVariants} of ${fidelity.length} enumerated variants across ${danglingSets.length} sets.`,
+  evidence: `${danglingAxes.length} of ${axisRows.length} axis class templates in the ${fullContracts.length} full sets resolve to no CSS rule (${danglingAxes.map((r) => `${r.set}.${r.axis}`).join(', ') || 'none'}); ${fullyInert.length} of those ${fullyInert.length === 1 ? 'drives' : 'drive'} no TSX branch either. Blast radius ${danglingVariants} of ${fidelity.length} enumerated variants across ${danglingSets.length} sets. ${plural(namedInert.length, 'axis', 'axes')} ${namedInert.length === 1 ? 'is' : 'are'} NAMED style-less by the emitter instead of composing a dead class${namedInert.length > 0 ? ` (${namedInert.join(', ')}) — ${namedInert.length === 1 ? 'its' : 'their'} consequence is structural (visibleWhen / a child component's own props), not this element's CSS` : ''}.`,
 });
 
 /* 6 · first-variant-freeze — is the axis-correlated literal bound to the axis now? */
@@ -1126,11 +1140,13 @@ p(
 /* --------------------------------------------------- §5 reds + work order */
 
 p(
-  '## 5. The three pinned reds, and the work order',
+  redCases.length > 0 ? '## 5. The pinned reds, and the work order' : '## 5. The work order',
   '',
   '### 5.1 The pinned reds',
   '',
-  `${redCases.length} of the ${cases.length} conformance cases are FAIL-EXPECTED-RED: the documentation model says CARRIED, the engine does not deliver it, and the gap is pinned so it cannot be forgotten or quietly closed. Each is verbatim from the manifest.`,
+  redCases.length > 0
+    ? `${redCases.length} of the ${cases.length} conformance cases are FAIL-EXPECTED-RED: the documentation model says CARRIED, the engine does not deliver it, and the gap is pinned so it cannot be forgotten or quietly closed. Each is verbatim from the manifest.`
+    : `NONE. All ${cases.length} conformance cases are green: every construct the documentation model says is CARRIED is carried, and every refusal is named. This section stays in the ledger because an empty pinned-red list is a reading, not a formatting accident — when a red returns it is printed here verbatim from the manifest.`,
   '',
 );
 for (const c of redCases) {
@@ -1226,10 +1242,12 @@ p(
   items.push(
     `1. **Open the paste door** (§3.4) — every one of the ${fullContracts.length} sets is blocked from the shipping bundle path today by an empty \`base\` tokenSet and by \`social-button\`'s \`{platform}\` icon ref. Nothing else in this list matters to an adopter until a bundle can actually be pasted.`,
   );
-  items.push(
-    `2. **The ${redCases.length} pinned reds** (§5.1) — ${redCases.map((c) => `\`${c.id}\``).join(', ')}. Two share one root cause (the \`isSpacer\` early return in \`core/propose-figma.ts\` swallowing image-paint frames) and the third is a silent loss, the only kind this project treats as a bug rather than a boundary.`,
-  );
-  let n = 3;
+  if (redCases.length > 0) {
+    items.push(
+      `2. **The ${plural(redCases.length, 'pinned red')}** (§5.1) — ${redCases.map((c) => `\`${c.id}\``).join(', ')}. A pinned red outranks every OPEN class below it: the documentation model says the construct is CARRIED and the engine does not deliver it, which is the one failure this project treats as a bug rather than a boundary.`,
+    );
+  }
+  let n = items.length + 1;
   for (const x of open.sort((a, b) => (a.v === b.v ? 0 : a.v === 'OPEN' ? -1 : 1))) {
     items.push(`${n}. **${x.a.name.split(' (')[0]}** — ${x.v}, ${x.a.stage} stage (${sideOfStage(x.a.stage)}). ${cell(x.e)}`);
     n++;

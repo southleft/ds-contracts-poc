@@ -126,7 +126,26 @@
               },
               "literals": {
                 "width": "80px"
-              }
+              },
+              "literalsByProp": [
+                {
+                  "prop": "rightControl",
+                  "map": {
+                    "25": {
+                      "width": "80px"
+                    },
+                    "50": {
+                      "width": "160px"
+                    },
+                    "75": {
+                      "width": "240px"
+                    },
+                    "100": {
+                      "width": "320px"
+                    }
+                  }
+                }
+              ]
             },
             "leftControl": {
               "declared": {
@@ -388,7 +407,26 @@
           "literals": {
             "left": "0px",
             "width": "80px"
-          }
+          },
+          "literalsByProp": [
+            {
+              "prop": "rightControl",
+              "map": {
+                "25": {
+                  "width": "80px"
+                },
+                "50": {
+                  "width": "160px"
+                },
+                "75": {
+                  "width": "240px"
+                },
+                "100": {
+                  "width": "320px"
+                }
+              }
+            }
+          ]
         }
       },
       "declared": {

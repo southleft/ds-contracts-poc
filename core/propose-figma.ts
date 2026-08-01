@@ -1181,6 +1181,86 @@ function mintObservation(
 const numOccurrences = (m: Merged, valueOf: (n: DumpNode) => number | undefined) =>
   m.occ.map((o) => ({ variant: o.variant, value: valueOf(o.node) ?? 0 }));
 
+/** GAP-CLOSING ROUND 2 (`axis-inert`) — BASE-SLICE PROJECTION of a refused
+ *  literal channel onto ONE axis.
+ *
+ *  A channel whose captured values are a clean function of a PAIR of axes
+ *  (ProgressBar's bar width = f(progress × label): 8.08px at 0%/Right,
+ *  271px at 100%/Right, 320px at 100%/Bottom) refuses classification on a
+ *  NESTED part — mintTokens offers pairs to ROOT observations only, because
+ *  a two-placeholder ref has no nested spelling. Before this round the whole
+ *  channel then collapsed to the FIRST occurrence's single number, which is
+ *  what made the axis inert: eleven Progress values, one 8.08px bar.
+ *
+ *  The projection carries the base SLICE instead of the base POINT. Pin
+ *  every other axis at the base combination (the first occurrence's variant)
+ *  and read the channel along one axis; if two or more DISTINCT values
+ *  survive, that slice is a per-value literal map. Deterministic by
+ *  construction: axes are tried in declared order, the winner is the axis
+ *  whose slice SPANS the most (max − min — the axis that explains the most
+ *  of the channel's observed variation), ties broken by distinct count,
+ *  then coverage, then declared order; the map is keyed in the axis's own
+ *  value order. Span, not distinct count, decides: ProgressBar's track
+ *  `width` reads 287→271px across `progress` (five near-identical numbers,
+ *  hand-drawn jitter) and 287→320px across `label` (the real cause — the
+ *  track shortens only to make room for the right-hand percentage). Counting
+ *  distinct values picked the jitter; spanning picks the cause. Nothing is
+ *  interpolated or derived — every number is a captured observation, and
+ *  combinations off the base slice keep the refusal that was already named.
+ *
+ *  Returns null when no axis explains two distinct values on its slice (the
+ *  channel really is one number — today's single-literal fallback stands),
+ *  when the observation is missing, or when another `literalsByProp` entry
+ *  already claims this channel for a different prop (the referee's
+ *  channel+prop conflict rule; a second claimant would make the cascade
+ *  order the meaning). BOOL axes are excluded: `literalsByProp` requires a
+ *  declared ENUM prop. */
+function projectRefusedOnAxis(
+  ctx: Ctx,
+  fb: { part: Record<string, unknown>; chan: string; where: string },
+): { prop: string; byValue: Map<string, number>; baseCombo: string } | null {
+  const mc = ctx.mint;
+  if (!mc) return null;
+  const obs = mc.observations.find((o) => o.nodePath === fb.where && o.cssProperty === fb.chan);
+  if (!obs || obs.occurrences.length < 2) return null;
+  const existing =
+    (fb.part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ?? [];
+  const claimedElsewhere = existing.filter((e) =>
+    Object.values(e.map).some((o) => fb.chan in o),
+  );
+  const base = obs.occurrences[0].axisValues;
+  interface Cand { prop: string; byValue: Map<string, number>; span: number; distinct: number; baseCombo: string }
+  let best: Cand | null = null;
+  for (const axis of mc.axes) {
+    if (axis.bool) continue; // literalsByProp needs a declared enum prop
+    if (claimedElsewhere.some((e) => e.prop !== axis.propName)) continue;
+    const others = mc.axes.filter((a) => a.propName !== axis.propName);
+    const slice = new Map<string, number>();
+    for (const o of obs.occurrences) {
+      if (others.some((a) => o.axisValues[a.propName] !== base[a.propName])) continue;
+      const v = o.axisValues[axis.propName];
+      if (v === undefined || slice.has(v) || typeof o.value !== 'number') continue;
+      slice.set(v, o.value);
+    }
+    const values = [...slice.values()];
+    const distinct = new Set(values).size;
+    if (distinct < 2) continue;
+    const span = Math.max(...values) - Math.min(...values);
+    const ordered = new Map<string, number>();
+    for (const v of axis.values) if (slice.has(v)) ordered.set(v, slice.get(v)!);
+    for (const [v, n] of slice) if (!ordered.has(v)) ordered.set(v, n); // any value outside the declared list, stable
+    const cand: Cand = { prop: axis.propName, byValue: ordered, span, distinct, baseCombo: others.map((a) => `${a.propName}=${base[a.propName] ?? '∅'}`).join(', ') };
+    const beats =
+      best === null ||
+      cand.span > best.span ||
+      (cand.span === best.span &&
+        (cand.distinct > best.distinct ||
+          (cand.distinct === best.distinct && cand.byValue.size > best.byValue.size)));
+    if (beats) best = cand;
+  }
+  return best === null ? null : { prop: best.prop, byValue: best.byValue, baseCombo: best.baseCombo };
+}
+
 // ---------------------------------------------------------------------------
 // Bindings → tokens
 // ---------------------------------------------------------------------------
@@ -5916,8 +5996,37 @@ export function proposeFromDump(
       if (literals[fb.chan] !== undefined) continue;
       literals[fb.chan] = `${fb.value}px`;
       fb.part.literals = literals;
+      // GAP-CLOSING ROUND 2 (axis-inert) — the base-combo literal is ONE
+      // number for a channel the canvas drew differently at every value of
+      // an axis, which is exactly the flat-row symptom: ProgressBar's bar
+      // was 8.08px wide in all eleven Progress stories. When the refused
+      // channel IS a clean function of one axis along the base slice (every
+      // other axis pinned at the base combination), the whole slice carries
+      // as a per-value literal map instead of its first element. Every
+      // number is an OBSERVED capture — the projection chooses which
+      // observations to carry, it never derives one. Combinations off the
+      // base slice keep the refusal named above.
+      const proj = projectRefusedOnAxis(ctx, fb);
+      if (!proj) {
+        ctx.notes.push(
+          `${fb.where} ${fb.chan}: per-variant captured values refused classification (named above) — the FIRST occurrence's ${fb.value}px carried as a base-combo literal fallback (exact for the default rendering; other variants keep the refusal)`,
+        );
+        continue;
+      }
+      const lbp =
+        (fb.part.literalsByProp as Array<{ prop: string; map: Record<string, Record<string, string>> }> | undefined) ??
+        [];
+      let entry = lbp.find((e) => e.prop === proj.prop);
+      if (!entry) {
+        entry = { prop: proj.prop, map: {} };
+        lbp.push(entry);
+      }
+      for (const [value, px] of proj.byValue) {
+        (entry.map[value] ??= {})[fb.chan] = `${px}px`;
+      }
+      fb.part.literalsByProp = lbp;
       ctx.notes.push(
-        `${fb.where} ${fb.chan}: per-variant captured values refused classification (named above) — the FIRST occurrence's ${fb.value}px carried as a base-combo literal fallback (exact for the default rendering; other variants keep the refusal)`,
+        `${fb.where} ${fb.chan}: per-variant captured values refused classification (named above) — PROJECTED onto the "${proj.prop}" axis and carried as a per-value literal map (${proj.byValue.size} observed value(s): ${[...proj.byValue].map(([v, px]) => `${v}=${px}px`).join(', ')}), each one measured at the base combination of every OTHER axis (${proj.baseCombo || 'no other axis'}); the base combo's ${fb.value}px stays the part literal for axis values the capture never drew. The channel also varies with the other axes at combinations off that slice — those keep the refusal named above`,
       );
     }
     // A fully minted usage site is bound now — no longer an UNBOUND entry.

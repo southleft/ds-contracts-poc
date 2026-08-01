@@ -23,14 +23,13 @@ export const PaymentMethodIcon = forwardRef<HTMLSpanElement, PaymentMethodIconPr
     { size = 'sm', paymentMethod = 'mastercard', className, children, ...rest },
     ref,
   ) {
-    const classes = [
-      styles.root,
-      styles[`size-${size}`],
-      styles[`paymentMethod-${paymentMethod}`],
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+    // axis-inert (ledgered, not a throw): size, paymentMethod — no `.<axis>-*` rule
+    // exists in PaymentMethodIcon.module.css, so no class is composed for them. A reference
+    // to an unemitted class resolves to `undefined` and is filtered out, so emitting
+    // one only made a style-less axis LOOK styled. Whatever these axes carry rides
+    // structure (a gated part, a per-value text/icon lookup, a child's own props) —
+    // or, where the source drew no difference at all, nothing.
+    const classes = [styles.root, className].filter(Boolean).join(' ');
     return (
       <span ref={ref} className={classes} {...rest}>
         <span

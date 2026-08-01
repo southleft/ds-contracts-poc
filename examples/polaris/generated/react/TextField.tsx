@@ -90,7 +90,13 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(function Tex
   ref,
 ) {
   const handleFocus = () => { onFocus?.(); };
-  const classes = [styles.root, styles[`type-${type}`], styles[`inputMode-${inputMode}`], styles[`align-${align}`], styles[`variant-${variant}`], styles[`size-${size}`], className].filter(Boolean).join(' ');
+  // axis-inert (ledgered, not a throw): type, inputMode, align — no `.<axis>-*` rule
+  // exists in TextField.module.css, so no class is composed for them. A reference
+  // to an unemitted class resolves to `undefined` and is filtered out, so emitting
+  // one only made a style-less axis LOOK styled. Whatever these axes carry rides
+  // structure (a gated part, a per-value text/icon lookup, a child's own props) —
+  // or, where the source drew no difference at all, nothing.
+  const classes = [styles.root, styles[`variant-${variant}`], styles[`size-${size}`], className].filter(Boolean).join(' ');
   return (
     <div ref={ref} className={classes} data-label-hidden={labelHidden || undefined} data-disabled={disabled || undefined} data-clear-button={clearButton || undefined} data-select-text-on-focus={selectTextOnFocus || undefined} data-read-only={readOnly || undefined} data-auto-focus={autoFocus || undefined} data-focused={focused || undefined} data-spell-check={spellCheck || undefined} data-aria-expanded={ariaExpanded || undefined} data-show-character-count={showCharacterCount || undefined} data-required-indicator={requiredIndicator || undefined} data-monospaced={monospaced || undefined} data-auto-size={autoSize || undefined} data-loading={loading || undefined} data-with-prefix={withPrefix || undefined} data-with-suffix={withSuffix || undefined} onClick={handleFocus} {...rest}>
       <div className={styles.labelled__labelwrapper}>

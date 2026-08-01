@@ -23,9 +23,13 @@ export const AvatarOnlineIndicator = forwardRef<HTMLSpanElement, AvatarOnlineInd
     { size = 'xl', online = 'true', className, children, ...rest },
     ref,
   ) {
-    const classes = [styles.root, styles[`size-${size}`], styles[`online-${online}`], className]
-      .filter(Boolean)
-      .join(' ');
+    // axis-inert (ledgered, not a throw): online — no `.<axis>-*` rule
+    // exists in AvatarOnlineIndicator.module.css, so no class is composed for it. A reference
+    // to an unemitted class resolves to `undefined` and is filtered out, so emitting
+    // one only made a style-less axis LOOK styled. Whatever this axis carries rides
+    // structure (a gated part, a per-value text/icon lookup, a child's own props) —
+    // or, where the source drew no difference at all, nothing.
+    const classes = [styles.root, styles[`size-${size}`], className].filter(Boolean).join(' ');
     return (
       <span ref={ref} className={classes} {...rest}>
         <span
