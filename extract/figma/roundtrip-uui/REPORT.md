@@ -10,7 +10,7 @@ The hand-built canvas used zero published variables, so captured.dtcg.json is `{
 
 | component | status | variants (orig → rt) | matched | diverged | loss (orig-only) | invented (rt-only) |
 |---|---|---|---|---|---|---|
-| avatar | round trip closed | 162 → 216 | 1977 | 471 | 1248 | 1566 |
+| avatar | round trip closed | 162 → 216 | 2085 | 471 | 1140 | 1782 |
 | avatar-add-button | round trip closed | 12 → 9 | 174 | 45 | 78 | 0 |
 | avatar-group | round trip closed | 12 → 12 | 322 | 56 | 78 | 1722 |
 | avatar-label-group | round trip closed | 36 → 12 | 422 | 42 | 93 | 8 |
@@ -22,15 +22,15 @@ The hand-built canvas used zero published variables, so captured.dtcg.json is `{
 | progress-bar | round trip closed | 55 → 55 | 1299 | 285 | 485 | 649 |
 | progress-circle | round trip closed | 16 → 16 | 315 | 94 | 225 | 231 |
 | slider | round trip closed | 40 → 64 | 1184 | 496 | 1180 | 1444 |
-| social-button | round trip closed | 108 → 108 | 2082 | 186 | 372 | 0 |
+| social-button | round trip closed | 108 → 108 | 2238 | 186 | 216 | 60 |
 | toggle-base | round trip closed | 32 → 10 | 157 | 13 | 22 | 0 |
 | tooltip | round trip closed | 28 → 28 | 896 | 138 | 213 | 196 |
 
-**15/15 round trips closed.** Across the closed ones: 10544 matched, 1991 diverged, 4514 one-way loss, 6157 invented.
+**15/15 round trips closed.** Across the closed ones: 10808 matched, 1991 diverged, 4250 one-way loss, 6433 invented.
 
 ## avatar — 162 → 216 variants
 
-matched 1977 · diverged 471 · loss 1248 · invented 1566
+matched 2085 · diverged 471 · loss 1140 · invented 1782
 
 ### DIVERGED (value differs; original → round trip)
 
@@ -62,9 +62,6 @@ matched 1977 · diverged 471 · loss 1248 · invented 1566
   - text ▸ text.style: Text md/Medium  (×9 variants)
   - text ▸ text.style: Text sm/Medium  (×9 variants)
   - text ▸ text.style: Text xs/Medium  (×9 variants)
-- class `interaction-states` — 108 fact(s):
-  - (root) ▸ stroke: #f4ebff  (×54 variants)
-  - (root) ▸ strokeWeight: 4  (×54 variants)
 - class `restructured` — 756 fact(s):
   - avatarcompanyicon ▸ stroke: #ffffff  (×54 variants)
   - avatarcompanyicon ▸ instanceOf: avatarcompanyicon  (×54 variants)
@@ -110,6 +107,9 @@ matched 1977 · diverged 471 · loss 1248 · invented 1566
 
 ### INVENTED (in the round trip, not the original — must be zero or named)
 
+- class `zero-stroke` — 216 fact(s):
+  - (root) ▸ stroke: #000000@0  (×108 variants)
+  - (root) ▸ strokeWeight: 0  (×108 variants)
 - class `restructured` — 1512 fact(s):
   - avatarcompanyicon/avatarcompanyiconinstance ▸ kind: instance  (×54 variants)
   - avatarcompanyicon/avatarcompanyiconinstance ▸ layout.mode: HORIZONTAL  (×54 variants)
@@ -1297,7 +1297,7 @@ matched 1184 · diverged 496 · loss 1180 · invented 1444
 
 ## social-button — 108 → 108 variants
 
-matched 2082 · diverged 186 · loss 372 · invented 0
+matched 2238 · diverged 186 · loss 216 · invented 60
 
 ### DIVERGED (value differs; original → round trip)
 
@@ -1307,9 +1307,7 @@ matched 2082 · diverged 186 · loss 372 · invented 0
 
 ### LOSS (in the original, not the round trip)
 
-- class `(unclassified)` — 318 fact(s):
-  - (root) ▸ stroke: #d4d4d4  (×78 variants)
-  - (root) ▸ strokeWeight: 1  (×78 variants)
+- class `(unclassified)` — 162 fact(s):
   - text ▸ fill: #404040  (×39 variants)
   - socialicon ▸ instanceInk: #a3a3a3  (×30 variants)
   - socialicon ▸ instanceInk: #ffffff  (×24 variants)
@@ -1322,6 +1320,12 @@ matched 2082 · diverged 186 · loss 372 · invented 0
   - socialicon ▸ instanceInk: #000000  (×6 variants)
 - class `text-style-identity` — 54 fact(s):
   - text ▸ text.style: Text md/Semibold  (×54 variants)
+
+### INVENTED (in the round trip, not the original — must be zero or named)
+
+- class `zero-stroke` — 60 fact(s):
+  - (root) ▸ stroke: #000000@0  (×30 variants)
+  - (root) ▸ strokeWeight: 0  (×30 variants)
 
 ## toggle-base — 32 → 10 variants
 

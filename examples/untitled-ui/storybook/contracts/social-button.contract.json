@@ -157,6 +157,7 @@
       },
       "tokens": {
         "background-color": "{imported.social-button.root.background-color.{social}.{theme}.{state}}",
+        "border-color": "{imported.social-button.root.border-color.{social}.{theme}}",
         "gap": "{imported.social-button.root.gap.{supportingText}}",
         "padding-inline": "{imported.social-button.root.padding-inline.{supportingText}}",
         "padding-block": "{imported.social-button.root.padding-block}",

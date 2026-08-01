@@ -17,14 +17,17 @@
 }
 
 .state-default {
+  border-color: var(--imported-avatar-root-border-color-default);
   border-width: var(--imported-avatar-root-border-width-default);
 }
 
 .state-hover {
+  border-color: var(--imported-avatar-root-border-color-hover);
   border-width: var(--imported-avatar-root-border-width-hover);
 }
 
 .state-focused {
+  border-color: var(--imported-avatar-root-border-color-focused);
   border-width: var(--imported-avatar-root-border-width-focused);
 }
 

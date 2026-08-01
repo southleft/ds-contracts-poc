@@ -222,10 +222,32 @@ check(
   rParts.Label?.tokens?.color === '{imported.button.label.color.{variant}}',
 );
 check(`minted layer is not empty (${real.mintedTokens?.count ?? 0} leaves ≥ 25)`, (real.mintedTokens?.count ?? 0) >= 25);
+// GAP-CLOSING ROUND 5 — re-recorded, because the pinned behaviour WAS the
+// defect. This check used to call the refused stroke "the ONE honest
+// refusal". It was not honest in effect: the check directly above asserts
+// `border-width` carries per-variant (1px on primary/secondary, 0 on
+// knockout/bare), so the contract ASSERTED a border and said nothing about
+// its colour — CSS resolves an unset border-color to `currentColor`, and the
+// button drew a 1px border in label ink instead of #000002. The same
+// asymmetry drew a black focus ring on Untitled UI's Avatar (54 variants) and
+// a black card edge on its Social Button (78). The mint now reads ABSENCE as
+// the drawn fact it is (`absentAs: '#00000000'`), the reading the child-stub
+// geometry path already used. The pin is now STRONGER than the one it
+// replaces: it requires the colour plane to mirror the width plane
+// fact-for-fact, so a regression to currentColor (missing ref) or to an
+// invented opaque black (wrong literal) both fail here.
+const rBorderColorPlane = ((real.mintedTokens?.tree as J | undefined)?.imported as J)?.button?.root?.[
+  'border-color'
+] as Record<string, { $value?: string }> | undefined;
 check(
-  'the ONE honest refusal survives: root stroke (absent on knockout/bare) stays a NAMED unbound entry',
-  real.unbound.length === 1 && real.unbound[0].property === 'stroke',
+  'root stroke CARRIES per variant — drawn hex where stroked, transparent where absent (was a refusal that let CSS paint currentColor)',
+  rRootTokens['border-color'] === '{imported.button.root.border-color.{variant}}' &&
+    rBorderColorPlane?.primary?.$value === '#000002' &&
+    rBorderColorPlane?.secondary?.$value === '#000002' &&
+    rBorderColorPlane?.knockout?.$value === '#00000000' &&
+    rBorderColorPlane?.bare?.$value === '#00000000',
 );
+check('no unbound entry survives on the real dump (the stroke was the last one)', real.unbound.length === 0);
 
 // 7. Flatten + promotion notes are NAMED. (The 4 wrapped variants are all
 //    state=focus, isDisabled=true — they live in the promoted focus group

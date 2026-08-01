@@ -97,6 +97,7 @@ type LimitTag =
   | 'hug-vs-fixed' // the canvas hugged (no comparable box fact), the emit lowered the captured measure to a FIXED/FILL axis — the mode disagreement is the finding
   | 'declared-not-drawn' // a component property the contract declares that the drawn instance never carried
   | 'mixed-stroke-weight' // per-side stroke weights spell 'mixed' in figma, so the dump omits the channel; a uniform RT weight has no dump-side counterpart
+  | 'zero-stroke' // a strokeless original round-trips as an EXPLICIT zero-width transparent stroke: a partially stroked node now carries its own absence (border-width 0 + border-color #00000000) so the color channel stops resolving to currentColor — nothing renders at weight 0 with an alpha-0 paint
   | 'headless-measure'; // mock hug sizes are estimates — excluded, never compared
 
 interface Fact {
@@ -760,6 +761,17 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
   //     original DOES carry the stroke paint: figma spells per-side weights
   //     as 'mixed' and the dump omits the channel, so a uniform RT weight
   //     has no dump-side counterpart by construction.
+  //   · zero-stroke — the stroke/strokeWeight PAIR on the round trip only, at
+  //     a node the original drew with NO stroke at all, and whose round-trip
+  //     value is a zero weight / a fully transparent paint. A partially
+  //     stroked node (Avatar: State=Focused only; Social button: every theme
+  //     but Brand) now carries its own ABSENCE explicitly — border-width 0
+  //     paired with border-color #00000000 — because the two halves of one
+  //     stroke fact must agree: carrying only the width let CSS resolve the
+  //     unset border-color to `currentColor` and the ring drew in text ink
+  //     (round 5). Nothing renders at weight 0 with an alpha-0 paint, so the
+  //     round trip is pixel-identical to the original here; the fact is new,
+  //     the drawing is not.
   const origChannels = new Map<string, Set<string>>();
   for (const f of original) {
     const k = `${f.variant} ▸ ${f.path}`;
@@ -777,6 +789,14 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
       f.tag = 'declared-not-drawn';
     } else if (f.channel === 'strokeWeight' && !chans.has('strokeWeight') && chans.has('stroke')) {
       f.tag = 'mixed-stroke-weight';
+    } else if (
+      (f.channel === 'stroke' || f.channel === 'strokeWeight') &&
+      !chans.has('stroke') &&
+      !chans.has('strokeWeight') &&
+      // Rendering-neutral ONLY: weight exactly 0, or a paint at alpha 0.
+      (f.channel === 'strokeWeight' ? f.value === '0' : /@0$/.test(f.value))
+    ) {
+      f.tag = 'zero-stroke';
     }
   }
 

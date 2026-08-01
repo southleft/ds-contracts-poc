@@ -292,6 +292,96 @@
   background-color: var(--imported-social-button-root-background-color-x-color-focused);
 }
 
+.social-facebook.theme-brand {
+  border-color: var(--imported-social-button-root-border-color-facebook-brand);
+  border-width: var(--imported-social-button-root-border-width-facebook-brand);
+}
+
+.social-facebook.theme-colorWithBrand {
+  border-color: var(--imported-social-button-root-border-color-facebook-colorWithBrand);
+  border-width: var(--imported-social-button-root-border-width-facebook-colorWithBrand);
+}
+
+.social-facebook.theme-color {
+  border-color: var(--imported-social-button-root-border-color-facebook-color);
+  border-width: var(--imported-social-button-root-border-width-facebook-color);
+}
+
+.social-google.theme-brand {
+  border-color: var(--imported-social-button-root-border-color-google-brand);
+  border-width: var(--imported-social-button-root-border-width-google-brand);
+}
+
+.social-google.theme-colorWithBrand {
+  border-color: var(--imported-social-button-root-border-color-google-colorWithBrand);
+  border-width: var(--imported-social-button-root-border-width-google-colorWithBrand);
+}
+
+.social-google.theme-color {
+  border-color: var(--imported-social-button-root-border-color-google-color);
+  border-width: var(--imported-social-button-root-border-width-google-color);
+}
+
+.social-apple.theme-brand {
+  border-color: var(--imported-social-button-root-border-color-apple-brand);
+  border-width: var(--imported-social-button-root-border-width-apple-brand);
+}
+
+.social-apple.theme-colorWithBrand {
+  border-color: var(--imported-social-button-root-border-color-apple-colorWithBrand);
+  border-width: var(--imported-social-button-root-border-width-apple-colorWithBrand);
+}
+
+.social-apple.theme-color {
+  border-color: var(--imported-social-button-root-border-color-apple-color);
+  border-width: var(--imported-social-button-root-border-width-apple-color);
+}
+
+.social-figma.theme-brand {
+  border-color: var(--imported-social-button-root-border-color-figma-brand);
+  border-width: var(--imported-social-button-root-border-width-figma-brand);
+}
+
+.social-figma.theme-colorWithBrand {
+  border-color: var(--imported-social-button-root-border-color-figma-colorWithBrand);
+  border-width: var(--imported-social-button-root-border-width-figma-colorWithBrand);
+}
+
+.social-figma.theme-color {
+  border-color: var(--imported-social-button-root-border-color-figma-color);
+  border-width: var(--imported-social-button-root-border-width-figma-color);
+}
+
+.social-dribbble.theme-brand {
+  border-color: var(--imported-social-button-root-border-color-dribbble-brand);
+  border-width: var(--imported-social-button-root-border-width-dribbble-brand);
+}
+
+.social-dribbble.theme-colorWithBrand {
+  border-color: var(--imported-social-button-root-border-color-dribbble-colorWithBrand);
+  border-width: var(--imported-social-button-root-border-width-dribbble-colorWithBrand);
+}
+
+.social-dribbble.theme-color {
+  border-color: var(--imported-social-button-root-border-color-dribbble-color);
+  border-width: var(--imported-social-button-root-border-width-dribbble-color);
+}
+
+.social-x.theme-brand {
+  border-color: var(--imported-social-button-root-border-color-x-brand);
+  border-width: var(--imported-social-button-root-border-width-x-brand);
+}
+
+.social-x.theme-colorWithBrand {
+  border-color: var(--imported-social-button-root-border-color-x-colorWithBrand);
+  border-width: var(--imported-social-button-root-border-width-x-colorWithBrand);
+}
+
+.social-x.theme-color {
+  border-color: var(--imported-social-button-root-border-color-x-color);
+  border-width: var(--imported-social-button-root-border-width-x-color);
+}
+
 .root[data-supporting-text] {
   gap: var(--imported-social-button-root-gap-true);
   padding-inline: var(--imported-social-button-root-padding-inline-true);
@@ -300,78 +390,6 @@
 .root:not([data-supporting-text]) {
   gap: var(--imported-social-button-root-gap-false);
   padding-inline: var(--imported-social-button-root-padding-inline-false);
-}
-
-.social-facebook.theme-brand {
-  border-width: var(--imported-social-button-root-border-width-facebook-brand);
-}
-
-.social-facebook.theme-colorWithBrand {
-  border-width: var(--imported-social-button-root-border-width-facebook-colorWithBrand);
-}
-
-.social-facebook.theme-color {
-  border-width: var(--imported-social-button-root-border-width-facebook-color);
-}
-
-.social-google.theme-brand {
-  border-width: var(--imported-social-button-root-border-width-google-brand);
-}
-
-.social-google.theme-colorWithBrand {
-  border-width: var(--imported-social-button-root-border-width-google-colorWithBrand);
-}
-
-.social-google.theme-color {
-  border-width: var(--imported-social-button-root-border-width-google-color);
-}
-
-.social-apple.theme-brand {
-  border-width: var(--imported-social-button-root-border-width-apple-brand);
-}
-
-.social-apple.theme-colorWithBrand {
-  border-width: var(--imported-social-button-root-border-width-apple-colorWithBrand);
-}
-
-.social-apple.theme-color {
-  border-width: var(--imported-social-button-root-border-width-apple-color);
-}
-
-.social-figma.theme-brand {
-  border-width: var(--imported-social-button-root-border-width-figma-brand);
-}
-
-.social-figma.theme-colorWithBrand {
-  border-width: var(--imported-social-button-root-border-width-figma-colorWithBrand);
-}
-
-.social-figma.theme-color {
-  border-width: var(--imported-social-button-root-border-width-figma-color);
-}
-
-.social-dribbble.theme-brand {
-  border-width: var(--imported-social-button-root-border-width-dribbble-brand);
-}
-
-.social-dribbble.theme-colorWithBrand {
-  border-width: var(--imported-social-button-root-border-width-dribbble-colorWithBrand);
-}
-
-.social-dribbble.theme-color {
-  border-width: var(--imported-social-button-root-border-width-dribbble-color);
-}
-
-.social-x.theme-brand {
-  border-width: var(--imported-social-button-root-border-width-x-brand);
-}
-
-.social-x.theme-colorWithBrand {
-  border-width: var(--imported-social-button-root-border-width-x-colorWithBrand);
-}
-
-.social-x.theme-color {
-  border-width: var(--imported-social-button-root-border-width-x-color);
 }
 
 .Text {

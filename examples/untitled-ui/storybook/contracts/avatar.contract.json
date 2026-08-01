@@ -253,6 +253,7 @@
         }
       },
       "tokens": {
+        "border-color": "{imported.avatar.root.border-color.{state}}",
         "border-radius": "{imported.avatar.root.border-radius}",
         "border-width": "{imported.avatar.root.border-width.{state}}",
         "background-image": "{imported.avatar.root.background-image.{placeholder}.{text}}",

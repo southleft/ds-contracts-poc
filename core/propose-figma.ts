@@ -1360,7 +1360,28 @@ function unifyPaint(
   ctx: Ctx,
   where: string,
   paintName: string,
-  mint?: { cssProperty: string; target: Record<string, string> },
+  mint?: {
+    cssProperty: string;
+    target: Record<string, string>;
+    /** The literal an ABSENT paint means on this channel, when absence is
+     *  itself a drawn fact rather than a missing observation. A node with no
+     *  stroke is not a node whose stroke was not captured — it is a node
+     *  drawn with a ZERO-WIDTH TRANSPARENT stroke, exactly the reading the
+     *  companion border-width channel already takes (`numOccurrences` mints
+     *  0 for the strokeless variants) and the one the child-stub geometry
+     *  path has always taken (`o.stroke ? paintCssHex(o.stroke) : '#00000000'`
+     *  paired with `o.stroke ? o.strokeWeight : 0`). Absent here → the two
+     *  halves of ONE fact disagree: the width channel carries "there is a
+     *  4px border" while the color channel refuses, and CSS resolves the
+     *  unset `border-color` to `currentColor` — a partially drawn stroke
+     *  renders as a ring of TEXT INK, strictly worse than not carrying the
+     *  stroke at all. Only channels whose absence has a rendering-neutral
+     *  literal may pass this; a FILL has no such literal (an unpainted frame
+     *  is not a transparent frame — it inherits nothing but shows what is
+     *  behind it, which is the same thing, but a partial fill is a genuine
+     *  capture gap), so it stays the named refusal. */
+    absentAs?: string;
+  },
 ): UnifiedRef | undefined {
   const paints = m.occ.map((o) => ({ variant: o.variant, paint: pick(o.node) }));
   if (paints.every((p) => p.paint === undefined)) return undefined;
@@ -1370,12 +1391,27 @@ function unifyPaint(
     if (ctx.mint && mint) {
       // Mintable only when EVERY variant resolved to a raw hex — a paint
       // missing in some variants, or half-bound, stays a report entry.
-      if (paints.every((p) => p.paint?.hex !== undefined)) {
+      // EXCEPT on a channel that declares `absentAs`: there the missing
+      // occurrences are not missing, they are the neutral literal, and the
+      // channel mints complete (see the absentAs doc above).
+      const allHex = paints.every((p) => p.paint?.hex !== undefined);
+      const hexOrAbsent =
+        mint.absentAs !== undefined &&
+        paints.every((p) => p.paint === undefined || p.paint.hex !== undefined);
+      if (allHex || hexOrAbsent) {
         mintObservation(
           ctx, mint.target, where, mint.cssProperty, 'color',
-          paints.map((p) => ({ variant: p.variant, value: paintCssHex(p.paint!) })),
+          paints.map((p) => ({
+            variant: p.variant,
+            value: p.paint === undefined ? mint.absentAs! : paintCssHex(p.paint),
+          })),
           `${where}|${paintName}`,
         );
+        if (!allHex) {
+          ctx.notes.push(
+            `${where} ${paintName}: drawn in ${paints.filter((p) => p.paint !== undefined).length}/${paints.length} variant(s) — the ABSENT variants mint ${mint.absentAs} (a strokeless node is a zero-width transparent stroke, the same reading border-width already takes), so ${mint.cssProperty} carries for the whole axis instead of falling back to currentColor`,
+          );
+        }
       } else {
         ctx.mint.partialSources.add(`${where}|${paintName}`);
       }
@@ -1465,6 +1501,9 @@ function invertNodeTokens(
     unifyPaint(m, (n) => n.stroke, ctx, where, 'stroke', {
       cssProperty: 'border-color',
       target: tokens,
+      // A strokeless variant is a ZERO-WIDTH stroke, not an uncaptured one —
+      // the width channel below already mints 0 for exactly these nodes.
+      absentAs: '#00000000',
     }),
   );
 
@@ -1608,8 +1647,11 @@ function invertNodeTokens(
     const stroked = m.occ.find((o) => o.node.strokeWeight !== undefined && o.node.stroke !== undefined)!;
     reportUnbound(ctx, where, 'strokeWeight', stroked.node.strokeWeight!);
     // Variants without a stroke mint width 0 — faithful (nothing renders at
-    // width 0); a PARTIAL stroke's COLOR stays the named refusal
-    // (base-instance-check pins exactly this split).
+    // width 0). Round 5: the COLOR channel now reads the same absence the
+    // same way (`absentAs: '#00000000'` on the border-color carry above)
+    // instead of refusing on partiality — the two halves of one stroke fact
+    // must agree, or the width lands with `border-color: currentColor` and
+    // the ring draws in text ink.
     mintObservation(ctx, tokens, where, 'border-width', 'px', numOccurrences(m, (n) => n.strokeWeight), `${where}|strokeWeight`);
   }
   // Literal min/max sizing (dump v1.4): bounded, exact px facts — a drawn

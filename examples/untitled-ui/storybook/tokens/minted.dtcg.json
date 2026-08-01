@@ -2,6 +2,20 @@
   "imported": {
     "avatar": {
       "root": {
+        "border-color": {
+          "default": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "hover": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
+          "focused": {
+            "$value": "#f4ebff",
+            "$type": "color"
+          }
+        },
         "border-radius": {
           "$value": "200px",
           "$type": "dimension"
@@ -3047,6 +3061,92 @@
                 "$value": "#ffffff",
                 "$type": "color"
               }
+            }
+          }
+        },
+        "border-color": {
+          "facebook": {
+            "brand": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "colorWithBrand": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            },
+            "color": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            }
+          },
+          "google": {
+            "brand": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            },
+            "colorWithBrand": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            },
+            "color": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            }
+          },
+          "apple": {
+            "brand": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "colorWithBrand": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            },
+            "color": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            }
+          },
+          "figma": {
+            "brand": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "colorWithBrand": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            },
+            "color": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            }
+          },
+          "dribbble": {
+            "brand": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "colorWithBrand": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            },
+            "color": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            }
+          },
+          "x": {
+            "brand": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "colorWithBrand": {
+              "$value": "#d4d4d4",
+              "$type": "color"
+            },
+            "color": {
+              "$value": "#d4d4d4",
+              "$type": "color"
             }
           }
         },
