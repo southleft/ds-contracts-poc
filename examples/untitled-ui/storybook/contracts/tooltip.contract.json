@@ -225,6 +225,7 @@
       },
       "tokens": {
         "border-radius": "{imported.tooltip.root.border-radius}",
+        "box-shadow": "{imported.tooltip.root.box-shadow}",
         "width": "{imported.tooltip.root.width.{theme}.{arrow}.{supportingText}}"
       }
     }

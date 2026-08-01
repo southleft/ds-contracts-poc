@@ -122,6 +122,7 @@
   background-color: var(--imported-slider-progress-left-control-left-control-background-color);
   border-color: var(--imported-shared-color-7f56d9);
   border-width: var(--imported-slider-progress-left-control-left-control-border-width);
+  box-shadow: var(--imported-slider-progress-left-control-left-control-box-shadow);
   border-style: solid;
 }
 
@@ -277,6 +278,7 @@
   background-color: var(--imported-slider-progress-right-control-right-control-background-color);
   border-color: var(--imported-shared-color-7f56d9);
   border-width: var(--imported-slider-progress-right-control-right-control-border-width);
+  box-shadow: var(--imported-slider-progress-right-control-right-control-box-shadow);
   border-style: solid;
 }
 

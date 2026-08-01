@@ -61,6 +61,7 @@
   flex-shrink: 0;
   border-radius: 50%;
   background-color: var(--imported-toggle-base-button-background-color);
+  box-shadow: var(--imported-toggle-base-button-box-shadow);
 }
 
 .root:disabled .Button {

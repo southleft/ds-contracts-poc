@@ -54,12 +54,12 @@
   {
    "id": "effect-shadow-two",
    "construct": "a TWO-layer drop-shadow stack on the root",
-   "expect": "REFUSED",
-   "why": "only a single DROP_SHADOW maps to box-shadow; a stack must be NAMED, not proposed and not truncated to one layer",
+   "expect": "CARRIED",
+   "why": "CSS box-shadow is natively a comma-separated LIST and the canvas emitter's stack grammar projects every layer back as its own native DROP_SHADOW, so a DROP_SHADOW-only stack has a lossless projection in both directions; refusing it (the pre-gap-round-4 rule) dropped the only visible edge of a light-on-light surface. BOTH layers must appear, in dump order — a truncation to one layer is still a failure",
    "check": {
-    "note": "only a single DROP_SHADOW present in every variant maps to box-shadow",
-    "absent": [
-     "box-shadow"
+    "carried": [
+     "box-shadow",
+     "0px 4px 8px [^\"]*, 0px 1px 2px "
     ]
    },
    "status": "green"
@@ -1069,7 +1069,7 @@
    "id": "effect-inner-shadow",
    "construct": "an INNER_SHADOW effect on the root",
    "expect": "REFUSED",
-   "why": "inner shadows are outside the single-DROP_SHADOW grammar - the channel is NAMED by kind, not proposed",
+   "why": "inner shadows are outside the DROP_SHADOW-stack grammar (a stack of DROP_SHADOW layers carries comma-separated; INNER_SHADOW does not) - the channel is NAMED by kind, not proposed",
    "check": {
     "note": "visible effect\\(s\\) \\[INNER_SHADOW\\]",
     "absent": [

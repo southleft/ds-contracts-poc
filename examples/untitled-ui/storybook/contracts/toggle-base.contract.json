@@ -107,7 +107,8 @@
             "height": 20
           },
           "tokens": {
-            "background-color": "{imported.toggle-base.button.background-color}"
+            "background-color": "{imported.toggle-base.button.background-color}",
+            "box-shadow": "{imported.toggle-base.button.box-shadow}"
           },
           "states": {
             "disabled": {

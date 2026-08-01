@@ -1094,6 +1094,10 @@
           "$value": "8px",
           "$type": "dimension"
         },
+        "box-shadow": {
+          "$value": "0px 4px 6px -2px #00000008, 0px 12px 16px -4px #00000014",
+          "$type": "shadow"
+        },
         "width": {
           "light": {
             "bottomCenter": {
@@ -1671,6 +1675,10 @@
         "border-width": {
           "$value": "1px",
           "$type": "dimension"
+        },
+        "box-shadow": {
+          "$value": "0px 2px 4px -2px #0000000f, 0px 4px 8px -2px #0000001a",
+          "$type": "shadow"
         }
       },
       "progress-left-control-tooltip": {
@@ -1823,6 +1831,10 @@
         "border-width": {
           "$value": "1px",
           "$type": "dimension"
+        },
+        "box-shadow": {
+          "$value": "0px 2px 4px -2px #0000000f, 0px 4px 8px -2px #0000001a",
+          "$type": "shadow"
         }
       },
       "progress-right-control-tooltip": {
@@ -2335,6 +2347,10 @@
         "background-color": {
           "$value": "#ffffff",
           "$type": "color"
+        },
+        "box-shadow": {
+          "$value": "0px 1px 2px #0000000f, 0px 1px 3px #00000000",
+          "$type": "shadow"
         }
       },
       "state-disabled": {
@@ -3146,6 +3162,20 @@
               "$value": "1px",
               "$type": "dimension"
             }
+          }
+        },
+        "box-shadow": {
+          "default": {
+            "$value": "0px 1px 2px #0000000d",
+            "$type": "shadow"
+          },
+          "hover": {
+            "$value": "0px 1px 2px #0000000d",
+            "$type": "shadow"
+          },
+          "focused": {
+            "$value": "0px 0px 0px 4px #f5f5f5, 0px 1px 2px #0000000d",
+            "$type": "shadow"
           }
         }
       },

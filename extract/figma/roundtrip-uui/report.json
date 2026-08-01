@@ -3,10 +3,10 @@
   "totals": {
     "components": 15,
     "roundTripClosed": 15,
-    "matched": 10398,
+    "matched": 10544,
     "diverged": 1991,
-    "loss": 4660,
-    "invented": 6077
+    "loss": 4514,
+    "invented": 6157
   },
   "results": [
     {
@@ -68519,6 +68519,13 @@
         {
           "variant": "Label=Bottom, Left control=0%, Right control=25%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=0%, Right control=25%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -68570,6 +68577,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=0%, Right control=25%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -68652,6 +68666,13 @@
         {
           "variant": "Label=Bottom, Left control=0%, Right control=50%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=0%, Right control=50%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -68708,6 +68729,13 @@
         {
           "variant": "Label=Bottom, Left control=0%, Right control=50%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=0%, Right control=50%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -68764,6 +68792,13 @@
         {
           "variant": "Label=Bottom, Left control=25%, Right control=50%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=25%, Right control=50%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -68815,6 +68850,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=25%, Right control=50%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -68890,6 +68932,13 @@
         {
           "variant": "Label=Bottom, Left control=0%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=0%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -68946,6 +68995,13 @@
         {
           "variant": "Label=Bottom, Left control=0%, Right control=75%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=0%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -69002,6 +69058,13 @@
         {
           "variant": "Label=Bottom, Left control=25%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=25%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -69058,6 +69121,13 @@
         {
           "variant": "Label=Bottom, Left control=25%, Right control=75%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=25%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -69114,6 +69184,13 @@
         {
           "variant": "Label=Bottom, Left control=50%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -69165,6 +69242,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -69233,6 +69317,13 @@
         {
           "variant": "Label=Bottom, Left control=0%, Right control=100%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=0%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -69289,6 +69380,13 @@
         {
           "variant": "Label=Bottom, Left control=0%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=0%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -69345,6 +69443,13 @@
         {
           "variant": "Label=Bottom, Left control=25%, Right control=100%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=25%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -69401,6 +69506,13 @@
         {
           "variant": "Label=Bottom, Left control=25%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=25%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -69457,6 +69569,13 @@
         {
           "variant": "Label=Bottom, Left control=50%, Right control=100%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -69513,6 +69632,13 @@
         {
           "variant": "Label=Bottom, Left control=50%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=50%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -69569,6 +69695,13 @@
         {
           "variant": "Label=Bottom, Left control=75%, Right control=100%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -69620,6 +69753,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom, Left control=75%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -69676,6 +69816,13 @@
           "path": "progress/leftcontrol/leftcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=0%, Right control=25%",
+          "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -69830,6 +69977,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=0%, Right control=25%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -70059,6 +70213,13 @@
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=50%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=0%, Right control=50%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -70208,6 +70369,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=0%, Right control=50%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -70416,6 +70584,13 @@
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=50%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=25%, Right control=50%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -70565,6 +70740,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=25%, Right control=50%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -70787,6 +70969,13 @@
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -70941,6 +71130,13 @@
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=0%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -71144,6 +71340,13 @@
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=25%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -71293,6 +71496,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=25%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -71501,6 +71711,13 @@
         {
           "variant": "Label=Bottom floating, Left control=50%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=50%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -71650,6 +71867,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=50%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -71865,6 +72089,13 @@
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -72019,6 +72250,13 @@
         {
           "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=0%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -72217,6 +72455,13 @@
           "path": "progress/leftcontrol/leftcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=25%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -72376,6 +72621,13 @@
         {
           "variant": "Label=Bottom floating, Left control=25%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=25%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -72574,6 +72826,13 @@
           "path": "progress/leftcontrol/leftcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=50%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -72733,6 +72992,13 @@
         {
           "variant": "Label=Bottom floating, Left control=50%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=50%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -72931,6 +73197,13 @@
           "path": "progress/leftcontrol/leftcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=75%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -73090,6 +73363,13 @@
         {
           "variant": "Label=Bottom floating, Left control=75%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Bottom floating, Left control=75%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -73293,6 +73573,13 @@
         {
           "variant": "Label=Top floating, Left control=0%, Right control=25%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=0%, Right control=25%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -73442,6 +73729,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=0%, Right control=25%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -73671,6 +73965,13 @@
         {
           "variant": "Label=Top floating, Left control=0%, Right control=50%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=0%, Right control=50%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -73820,6 +74121,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=0%, Right control=50%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -74028,6 +74336,13 @@
         {
           "variant": "Label=Top floating, Left control=25%, Right control=50%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=25%, Right control=50%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -74177,6 +74492,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=25%, Right control=50%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -74399,6 +74721,13 @@
         {
           "variant": "Label=Top floating, Left control=0%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=0%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -74553,6 +74882,13 @@
         {
           "variant": "Label=Top floating, Left control=0%, Right control=75%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=0%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -74756,6 +75092,13 @@
         {
           "variant": "Label=Top floating, Left control=25%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=25%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -74905,6 +75248,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=25%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -75113,6 +75463,13 @@
         {
           "variant": "Label=Top floating, Left control=50%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=50%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -75262,6 +75619,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=50%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -75477,6 +75841,13 @@
         {
           "variant": "Label=Top floating, Left control=0%, Right control=100%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=0%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -75631,6 +76002,13 @@
         {
           "variant": "Label=Top floating, Left control=0%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=0%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -75829,6 +76207,13 @@
           "path": "progress/leftcontrol/leftcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=25%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -75988,6 +76373,13 @@
         {
           "variant": "Label=Top floating, Left control=25%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=25%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -76186,6 +76578,13 @@
           "path": "progress/leftcontrol/leftcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=50%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -76345,6 +76744,13 @@
         {
           "variant": "Label=Top floating, Left control=50%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=50%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -76543,6 +76949,13 @@
           "path": "progress/leftcontrol/leftcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=75%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -76702,6 +77115,13 @@
         {
           "variant": "Label=Top floating, Left control=75%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=Top floating, Left control=75%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -76905,6 +77325,13 @@
         {
           "variant": "Label=False, Left control=0%, Right control=25%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=25%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -76956,6 +77383,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=25%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -77038,6 +77472,13 @@
         {
           "variant": "Label=False, Left control=0%, Right control=50%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=50%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77094,6 +77535,13 @@
         {
           "variant": "Label=False, Left control=0%, Right control=50%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=50%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77150,6 +77598,13 @@
         {
           "variant": "Label=False, Left control=25%, Right control=50%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=25%, Right control=50%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77201,6 +77656,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=25%, Right control=50%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -77276,6 +77738,13 @@
         {
           "variant": "Label=False, Left control=0%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77332,6 +77801,13 @@
         {
           "variant": "Label=False, Left control=0%, Right control=75%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77388,6 +77864,13 @@
         {
           "variant": "Label=False, Left control=25%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=25%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77444,6 +77927,13 @@
         {
           "variant": "Label=False, Left control=25%, Right control=75%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=25%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77500,6 +77990,13 @@
         {
           "variant": "Label=False, Left control=50%, Right control=75%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=50%, Right control=75%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77551,6 +78048,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=50%, Right control=75%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -77619,6 +78123,13 @@
         {
           "variant": "Label=False, Left control=0%, Right control=100%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77675,6 +78186,13 @@
         {
           "variant": "Label=False, Left control=0%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=0%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77731,6 +78249,13 @@
         {
           "variant": "Label=False, Left control=25%, Right control=100%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=25%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77787,6 +78312,13 @@
         {
           "variant": "Label=False, Left control=25%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=25%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77843,6 +78375,13 @@
         {
           "variant": "Label=False, Left control=50%, Right control=100%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=50%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77899,6 +78438,13 @@
         {
           "variant": "Label=False, Left control=50%, Right control=100%",
           "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=50%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -77955,6 +78501,13 @@
         {
           "variant": "Label=False, Left control=75%, Right control=100%",
           "path": "progress/leftcontrol/leftcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=75%, Right control=100%",
+          "path": "progress/leftcontrol/leftcontrol2",
           "channel": "abs",
           "value": "0,0",
           "tag": "restructured"
@@ -78006,6 +78559,13 @@
           "path": "progress/rightcontrol/rightcontrol2",
           "channel": "strokeWeight",
           "value": "1",
+          "tag": "restructured"
+        },
+        {
+          "variant": "Label=False, Left control=75%, Right control=100%",
+          "path": "progress/rightcontrol/rightcontrol2",
+          "channel": "effects",
+          "value": "DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2",
           "tag": "restructured"
         },
         {
@@ -78037,7 +78597,7 @@
       "status": "diffed",
       "originalVariants": 108,
       "roundTripVariants": 108,
-      "matched": 1974,
+      "matched": 2082,
       "diverged": [
         {
           "variant": "Social=Facebook, State=Default, Supporting text=True, Theme=Brand",
@@ -79159,12 +79719,6 @@
       "loss": [
         {
           "variant": "Social=Facebook, State=Default, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Facebook, State=Default, Supporting text=True, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
@@ -79184,12 +79738,6 @@
         },
         {
           "variant": "Social=Facebook, State=Hover, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Facebook, State=Hover, Supporting text=True, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
@@ -79206,12 +79754,6 @@
           "channel": "text.style",
           "value": "Text md/Semibold",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Social=Facebook, State=Focused, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Facebook, State=Focused, Supporting text=True, Theme=Brand",
@@ -79243,12 +79785,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Facebook, State=Default, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Facebook, State=Default, Supporting text=True, Theme=Color with brand",
@@ -79283,12 +79819,6 @@
         },
         {
           "variant": "Social=Facebook, State=Hover, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Facebook, State=Hover, Supporting text=True, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#1877f2"
@@ -79320,12 +79850,6 @@
         },
         {
           "variant": "Social=Facebook, State=Focused, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Facebook, State=Focused, Supporting text=True, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#1877f2"
@@ -79354,12 +79878,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Facebook, State=Default, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Facebook, State=Default, Supporting text=True, Theme=Color",
@@ -79394,12 +79912,6 @@
         },
         {
           "variant": "Social=Facebook, State=Hover, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Facebook, State=Hover, Supporting text=True, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -79428,12 +79940,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Facebook, State=Focused, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Facebook, State=Focused, Supporting text=True, Theme=Color",
@@ -79456,33 +79962,15 @@
         },
         {
           "variant": "Social=Facebook, State=Default, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Facebook, State=Default, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
         },
         {
           "variant": "Social=Facebook, State=Hover, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Facebook, State=Hover, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
-        },
-        {
-          "variant": "Social=Facebook, State=Focused, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Facebook, State=Focused, Supporting text=False, Theme=Brand",
@@ -79504,12 +79992,6 @@
         },
         {
           "variant": "Social=Facebook, State=Default, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Facebook, State=Default, Supporting text=False, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#1877f2"
@@ -79525,12 +80007,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Facebook, State=Hover, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Facebook, State=Hover, Supporting text=False, Theme=Color with brand",
@@ -79552,12 +80028,6 @@
         },
         {
           "variant": "Social=Facebook, State=Focused, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Facebook, State=Focused, Supporting text=False, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#1877f2"
@@ -79576,12 +80046,6 @@
         },
         {
           "variant": "Social=Facebook, State=Default, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Facebook, State=Default, Supporting text=False, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -79597,12 +80061,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Facebook, State=Hover, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Facebook, State=Hover, Supporting text=False, Theme=Color",
@@ -79624,12 +80082,6 @@
         },
         {
           "variant": "Social=Facebook, State=Focused, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Facebook, State=Focused, Supporting text=False, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -79645,12 +80097,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Default, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Default, Supporting text=True, Theme=Brand",
@@ -79685,12 +80131,6 @@
         },
         {
           "variant": "Social=Google, State=Hover, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Google, State=Hover, Supporting text=True, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#4285f4"
@@ -79722,12 +80162,6 @@
         },
         {
           "variant": "Social=Google, State=Focused, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Google, State=Focused, Supporting text=True, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#4285f4"
@@ -79756,12 +80190,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Default, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Default, Supporting text=True, Theme=Color with brand",
@@ -79793,12 +80221,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Hover, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Hover, Supporting text=True, Theme=Color with brand",
@@ -79830,12 +80252,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Focused, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Focused, Supporting text=True, Theme=Color with brand",
@@ -79867,12 +80283,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Default, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Default, Supporting text=True, Theme=Color",
@@ -79904,12 +80314,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Hover, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Hover, Supporting text=True, Theme=Color",
@@ -79941,12 +80345,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Focused, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Focused, Supporting text=True, Theme=Color",
@@ -79981,12 +80379,6 @@
         },
         {
           "variant": "Social=Google, State=Default, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Google, State=Default, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#4285f4"
@@ -80002,12 +80394,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Hover, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Hover, Supporting text=False, Theme=Brand",
@@ -80029,12 +80415,6 @@
         },
         {
           "variant": "Social=Google, State=Focused, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Google, State=Focused, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#4285f4"
@@ -80050,12 +80430,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Default, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Default, Supporting text=False, Theme=Color with brand",
@@ -80074,12 +80448,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Hover, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Hover, Supporting text=False, Theme=Color with brand",
@@ -80098,12 +80466,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Focused, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Focused, Supporting text=False, Theme=Color with brand",
@@ -80122,12 +80484,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Google, State=Default, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Google, State=Default, Supporting text=False, Theme=Color",
@@ -80149,12 +80505,6 @@
         },
         {
           "variant": "Social=Google, State=Hover, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Google, State=Hover, Supporting text=False, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -80173,21 +80523,9 @@
         },
         {
           "variant": "Social=Google, State=Focused, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Google, State=Focused, Supporting text=False, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
-        },
-        {
-          "variant": "Social=Apple, State=Default, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Apple, State=Default, Supporting text=True, Theme=Brand",
@@ -80210,12 +80548,6 @@
         },
         {
           "variant": "Social=Apple, State=Hover, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Apple, State=Hover, Supporting text=True, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
@@ -80235,12 +80567,6 @@
         },
         {
           "variant": "Social=Apple, State=Focused, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Apple, State=Focused, Supporting text=True, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
@@ -80257,12 +80583,6 @@
           "channel": "text.style",
           "value": "Text md/Semibold",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Social=Figma, State=Default, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Figma, State=Default, Supporting text=True, Theme=Brand",
@@ -80285,12 +80605,6 @@
         },
         {
           "variant": "Social=Figma, State=Hover, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Figma, State=Hover, Supporting text=True, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#24cb71"
@@ -80307,12 +80621,6 @@
           "channel": "text.style",
           "value": "Text md/Semibold",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Social=Figma, State=Focused, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Figma, State=Focused, Supporting text=True, Theme=Brand",
@@ -80347,12 +80655,6 @@
         },
         {
           "variant": "Social=Figma, State=Default, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Figma, State=Default, Supporting text=True, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#24cb71"
@@ -80381,12 +80683,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Figma, State=Hover, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Figma, State=Hover, Supporting text=True, Theme=Color with brand",
@@ -80421,12 +80717,6 @@
         },
         {
           "variant": "Social=Figma, State=Focused, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Figma, State=Focused, Supporting text=True, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#24cb71"
@@ -80458,12 +80748,6 @@
         },
         {
           "variant": "Social=Figma, State=Default, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Figma, State=Default, Supporting text=True, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -80492,12 +80776,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Figma, State=Hover, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Figma, State=Hover, Supporting text=True, Theme=Color",
@@ -80532,12 +80810,6 @@
         },
         {
           "variant": "Social=Figma, State=Focused, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Figma, State=Focused, Supporting text=True, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -80557,12 +80829,6 @@
         },
         {
           "variant": "Social=Dribbble, State=Default, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Dribbble, State=Default, Supporting text=True, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
@@ -80582,12 +80848,6 @@
         },
         {
           "variant": "Social=Dribbble, State=Hover, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Dribbble, State=Hover, Supporting text=True, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
@@ -80604,12 +80864,6 @@
           "channel": "text.style",
           "value": "Text md/Semibold",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Social=Dribbble, State=Focused, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Dribbble, State=Focused, Supporting text=True, Theme=Brand",
@@ -80641,12 +80895,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Dribbble, State=Default, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Dribbble, State=Default, Supporting text=True, Theme=Color with brand",
@@ -80681,12 +80929,6 @@
         },
         {
           "variant": "Social=Dribbble, State=Hover, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Dribbble, State=Hover, Supporting text=True, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ea4c89"
@@ -80715,12 +80957,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Dribbble, State=Focused, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Dribbble, State=Focused, Supporting text=True, Theme=Color with brand",
@@ -80755,12 +80991,6 @@
         },
         {
           "variant": "Social=Dribbble, State=Default, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Dribbble, State=Default, Supporting text=True, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -80789,12 +81019,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Dribbble, State=Hover, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Dribbble, State=Hover, Supporting text=True, Theme=Color",
@@ -80829,12 +81053,6 @@
         },
         {
           "variant": "Social=Dribbble, State=Focused, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Dribbble, State=Focused, Supporting text=True, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -80854,12 +81072,6 @@
         },
         {
           "variant": "Social=X, State=Default, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=X, State=Default, Supporting text=True, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
@@ -80879,12 +81091,6 @@
         },
         {
           "variant": "Social=X, State=Hover, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=X, State=Hover, Supporting text=True, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
@@ -80901,12 +81107,6 @@
           "channel": "text.style",
           "value": "Text md/Semibold",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Social=X, State=Focused, Supporting text=True, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=X, State=Focused, Supporting text=True, Theme=Brand",
@@ -80938,12 +81138,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=X, State=Default, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=X, State=Default, Supporting text=True, Theme=Color with brand",
@@ -80978,12 +81172,6 @@
         },
         {
           "variant": "Social=X, State=Hover, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=X, State=Hover, Supporting text=True, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#242e36"
@@ -81015,12 +81203,6 @@
         },
         {
           "variant": "Social=X, State=Focused, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=X, State=Focused, Supporting text=True, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#242e36"
@@ -81049,12 +81231,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=X, State=Default, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=X, State=Default, Supporting text=True, Theme=Color",
@@ -81086,12 +81262,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=X, State=Hover, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=X, State=Hover, Supporting text=True, Theme=Color",
@@ -81123,12 +81293,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=X, State=Focused, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=X, State=Focused, Supporting text=True, Theme=Color",
@@ -81160,12 +81324,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Apple, State=Default, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Apple, State=Default, Supporting text=True, Theme=Color with brand",
@@ -81200,12 +81358,6 @@
         },
         {
           "variant": "Social=Apple, State=Hover, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Apple, State=Hover, Supporting text=True, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#000000"
@@ -81234,12 +81386,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Apple, State=Focused, Supporting text=True, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Apple, State=Focused, Supporting text=True, Theme=Color with brand",
@@ -81274,12 +81420,6 @@
         },
         {
           "variant": "Social=Apple, State=Default, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Apple, State=Default, Supporting text=True, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -81311,12 +81451,6 @@
         },
         {
           "variant": "Social=Apple, State=Hover, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Apple, State=Hover, Supporting text=True, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -81345,12 +81479,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Apple, State=Focused, Supporting text=True, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Apple, State=Focused, Supporting text=True, Theme=Color",
@@ -81373,21 +81501,9 @@
         },
         {
           "variant": "Social=Apple, State=Default, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Apple, State=Default, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
-        },
-        {
-          "variant": "Social=Apple, State=Hover, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Apple, State=Hover, Supporting text=False, Theme=Brand",
@@ -81397,21 +81513,9 @@
         },
         {
           "variant": "Social=Apple, State=Focused, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Apple, State=Focused, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
-        },
-        {
-          "variant": "Social=Figma, State=Default, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Figma, State=Default, Supporting text=False, Theme=Brand",
@@ -81421,24 +81525,12 @@
         },
         {
           "variant": "Social=Figma, State=Hover, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Figma, State=Hover, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#24cb71"
         },
         {
           "variant": "Social=Figma, State=Focused, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Figma, State=Focused, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#24cb71"
@@ -81454,12 +81546,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Figma, State=Default, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Figma, State=Default, Supporting text=False, Theme=Color with brand",
@@ -81481,12 +81567,6 @@
         },
         {
           "variant": "Social=Figma, State=Hover, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Figma, State=Hover, Supporting text=False, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#24cb71"
@@ -81502,12 +81582,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Figma, State=Focused, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Figma, State=Focused, Supporting text=False, Theme=Color with brand",
@@ -81526,12 +81600,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Figma, State=Default, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Figma, State=Default, Supporting text=False, Theme=Color",
@@ -81553,12 +81621,6 @@
         },
         {
           "variant": "Social=Figma, State=Hover, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Figma, State=Hover, Supporting text=False, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -81574,12 +81636,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Figma, State=Focused, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Figma, State=Focused, Supporting text=False, Theme=Color",
@@ -81589,33 +81645,15 @@
         },
         {
           "variant": "Social=Dribbble, State=Default, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Dribbble, State=Default, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
         },
         {
           "variant": "Social=Dribbble, State=Hover, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Dribbble, State=Hover, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
-        },
-        {
-          "variant": "Social=Dribbble, State=Focused, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Dribbble, State=Focused, Supporting text=False, Theme=Brand",
@@ -81637,12 +81675,6 @@
         },
         {
           "variant": "Social=Dribbble, State=Default, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Dribbble, State=Default, Supporting text=False, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ea4c89"
@@ -81658,12 +81690,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Dribbble, State=Hover, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Dribbble, State=Hover, Supporting text=False, Theme=Color with brand",
@@ -81685,12 +81711,6 @@
         },
         {
           "variant": "Social=Dribbble, State=Focused, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Dribbble, State=Focused, Supporting text=False, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ea4c89"
@@ -81706,12 +81726,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Dribbble, State=Default, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Dribbble, State=Default, Supporting text=False, Theme=Color",
@@ -81733,12 +81747,6 @@
         },
         {
           "variant": "Social=Dribbble, State=Hover, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Dribbble, State=Hover, Supporting text=False, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -81754,12 +81762,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Dribbble, State=Focused, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Dribbble, State=Focused, Supporting text=False, Theme=Color",
@@ -81769,33 +81771,15 @@
         },
         {
           "variant": "Social=X, State=Default, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=X, State=Default, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
         },
         {
           "variant": "Social=X, State=Hover, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=X, State=Hover, Supporting text=False, Theme=Brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#ffffff"
-        },
-        {
-          "variant": "Social=X, State=Focused, Supporting text=False, Theme=Brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=X, State=Focused, Supporting text=False, Theme=Brand",
@@ -81817,12 +81801,6 @@
         },
         {
           "variant": "Social=X, State=Default, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=X, State=Default, Supporting text=False, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#242e36"
@@ -81838,12 +81816,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=X, State=Hover, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=X, State=Hover, Supporting text=False, Theme=Color with brand",
@@ -81865,12 +81837,6 @@
         },
         {
           "variant": "Social=X, State=Focused, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=X, State=Focused, Supporting text=False, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#242e36"
@@ -81886,12 +81852,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=X, State=Default, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=X, State=Default, Supporting text=False, Theme=Color",
@@ -81910,12 +81870,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=X, State=Hover, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=X, State=Hover, Supporting text=False, Theme=Color",
@@ -81934,12 +81888,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=X, State=Focused, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=X, State=Focused, Supporting text=False, Theme=Color",
@@ -81958,12 +81906,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Apple, State=Default, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Apple, State=Default, Supporting text=False, Theme=Color with brand",
@@ -81985,12 +81927,6 @@
         },
         {
           "variant": "Social=Apple, State=Hover, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Apple, State=Hover, Supporting text=False, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#000000"
@@ -82009,12 +81945,6 @@
         },
         {
           "variant": "Social=Apple, State=Focused, Supporting text=False, Theme=Color with brand",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Apple, State=Focused, Supporting text=False, Theme=Color with brand",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#000000"
@@ -82030,12 +81960,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Apple, State=Default, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Apple, State=Default, Supporting text=False, Theme=Color",
@@ -82057,12 +81981,6 @@
         },
         {
           "variant": "Social=Apple, State=Hover, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
-        },
-        {
-          "variant": "Social=Apple, State=Hover, Supporting text=False, Theme=Color",
           "path": "socialicon",
           "channel": "instanceInk",
           "value": "#a3a3a3"
@@ -82078,12 +81996,6 @@
           "path": "",
           "channel": "strokeWeight",
           "value": "1"
-        },
-        {
-          "variant": "Social=Apple, State=Focused, Supporting text=False, Theme=Color",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0"
         },
         {
           "variant": "Social=Apple, State=Focused, Supporting text=False, Theme=Color",
@@ -82100,7 +82012,7 @@
       "status": "diffed",
       "originalVariants": 32,
       "roundTripVariants": 10,
-      "matched": 147,
+      "matched": 157,
       "diverged": [
         {
           "variant": "Pressed=True, Size=sm, State=Default, Theme=Dark",
@@ -82239,41 +82151,6 @@
           "tag": "interaction-states"
         },
         {
-          "variant": "Pressed=True, Size=md, State=Default, Theme=Dark",
-          "path": "button",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.06 off=0,1 r=2 s=0 | DROP_SHADOW #000000@0 off=0,1 r=3 s=0",
-          "tag": "interaction-states"
-        },
-        {
-          "variant": "Pressed=True, Size=sm, State=Default, Theme=Dark",
-          "path": "button",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.06 off=0,1 r=2 s=0 | DROP_SHADOW #000000@0 off=0,1 r=3 s=0",
-          "tag": "interaction-states"
-        },
-        {
-          "variant": "Pressed=True, Size=md, State=Default, Theme=Light",
-          "path": "button",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.06 off=0,1 r=2 s=0 | DROP_SHADOW #000000@0 off=0,1 r=3 s=0",
-          "tag": "interaction-states"
-        },
-        {
-          "variant": "Pressed=True, Size=sm, State=Default, Theme=Light",
-          "path": "button",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.06 off=0,1 r=2 s=0 | DROP_SHADOW #000000@0 off=0,1 r=3 s=0",
-          "tag": "interaction-states"
-        },
-        {
-          "variant": "Pressed=True, Size=md, State=Disabled, Theme=Dark",
-          "path": "button",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.06 off=0,1 r=2 s=0 | DROP_SHADOW #000000@0 off=0,1 r=3 s=0",
-          "tag": "interaction-states"
-        },
-        {
           "variant": "Pressed=True, Size=sm, State=Disabled, Theme=Dark",
           "path": "",
           "channel": "variant",
@@ -82351,41 +82228,6 @@
           "tag": "interaction-states"
         },
         {
-          "variant": "Pressed=False, Size=md, State=Default, Theme=Dark",
-          "path": "button",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.06 off=0,1 r=2 s=0 | DROP_SHADOW #000000@0 off=0,1 r=3 s=0",
-          "tag": "interaction-states"
-        },
-        {
-          "variant": "Pressed=False, Size=sm, State=Default, Theme=Dark",
-          "path": "button",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.06 off=0,1 r=2 s=0 | DROP_SHADOW #000000@0 off=0,1 r=3 s=0",
-          "tag": "interaction-states"
-        },
-        {
-          "variant": "Pressed=False, Size=md, State=Default, Theme=Light",
-          "path": "button",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.06 off=0,1 r=2 s=0 | DROP_SHADOW #000000@0 off=0,1 r=3 s=0",
-          "tag": "interaction-states"
-        },
-        {
-          "variant": "Pressed=False, Size=sm, State=Default, Theme=Light",
-          "path": "button",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.06 off=0,1 r=2 s=0 | DROP_SHADOW #000000@0 off=0,1 r=3 s=0",
-          "tag": "interaction-states"
-        },
-        {
-          "variant": "Pressed=False, Size=md, State=Disabled, Theme=Dark",
-          "path": "button",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.06 off=0,1 r=2 s=0 | DROP_SHADOW #000000@0 off=0,1 r=3 s=0",
-          "tag": "interaction-states"
-        },
-        {
           "variant": "Pressed=False, Size=sm, State=Disabled, Theme=Dark",
           "path": "",
           "channel": "variant",
@@ -82415,7 +82257,7 @@
       "status": "diffed",
       "originalVariants": 28,
       "roundTripVariants": 28,
-      "matched": 868,
+      "matched": 896,
       "diverged": [
         {
           "variant": "Arrow=Bottom center, Supporting text=True, Theme=Light",
@@ -83273,12 +83115,6 @@
       "loss": [
         {
           "variant": "Arrow=Bottom center, Supporting text=True, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Bottom center, Supporting text=True, Theme=Light",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -83323,12 +83159,6 @@
         },
         {
           "variant": "Arrow=None, Supporting text=True, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=None, Supporting text=True, Theme=Light",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -83370,12 +83200,6 @@
           "path": "content/textandsupportingtext/supportingtext",
           "channel": "fillWidth",
           "value": "true"
-        },
-        {
-          "variant": "Arrow=Bottom center, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Bottom center, Supporting text=False, Theme=Light",
@@ -83441,12 +83265,6 @@
         },
         {
           "variant": "Arrow=None, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=None, Supporting text=False, Theme=Light",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -83506,12 +83324,6 @@
           "channel": "text.style",
           "value": "Text xs/Semibold",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Arrow=Top center, Supporting text=True, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Top center, Supporting text=True, Theme=Light",
@@ -83559,12 +83371,6 @@
         },
         {
           "variant": "Arrow=Top center, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Top center, Supporting text=False, Theme=Light",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -83624,12 +83430,6 @@
           "channel": "text.style",
           "value": "Text xs/Semibold",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Arrow=Bottom left, Supporting text=True, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Bottom left, Supporting text=True, Theme=Light",
@@ -83677,12 +83477,6 @@
         },
         {
           "variant": "Arrow=Bottom left, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Bottom left, Supporting text=False, Theme=Light",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -83742,12 +83536,6 @@
           "channel": "text.style",
           "value": "Text xs/Semibold",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Arrow=Left, Supporting text=True, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Left, Supporting text=True, Theme=Light",
@@ -83795,12 +83583,6 @@
         },
         {
           "variant": "Arrow=Left, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Left, Supporting text=False, Theme=Light",
           "path": "content/text",
           "channel": "kind",
           "value": "text",
@@ -83854,12 +83636,6 @@
           "channel": "text.style",
           "value": "Text xs/Semibold",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Arrow=Right, Supporting text=True, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Right, Supporting text=True, Theme=Light",
@@ -83907,12 +83683,6 @@
         },
         {
           "variant": "Arrow=Right, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Right, Supporting text=False, Theme=Light",
           "path": "content/text",
           "channel": "kind",
           "value": "text",
@@ -83966,12 +83736,6 @@
           "channel": "text.style",
           "value": "Text xs/Semibold",
           "tag": "text-style-identity"
-        },
-        {
-          "variant": "Arrow=Bottom right, Supporting text=True, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Bottom right, Supporting text=True, Theme=Light",
@@ -84019,12 +83783,6 @@
         },
         {
           "variant": "Arrow=Bottom right, Supporting text=False, Theme=Light",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Bottom right, Supporting text=False, Theme=Light",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -84087,12 +83845,6 @@
         },
         {
           "variant": "Arrow=Bottom center, Supporting text=True, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Bottom center, Supporting text=True, Theme=Dark",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -84131,12 +83883,6 @@
         },
         {
           "variant": "Arrow=None, Supporting text=True, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=None, Supporting text=True, Theme=Dark",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -84172,12 +83918,6 @@
           "path": "content/textandsupportingtext/supportingtext",
           "channel": "fillWidth",
           "value": "true"
-        },
-        {
-          "variant": "Arrow=Bottom center, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Bottom center, Supporting text=False, Theme=Dark",
@@ -84243,12 +83983,6 @@
         },
         {
           "variant": "Arrow=None, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=None, Supporting text=False, Theme=Dark",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -84311,12 +84045,6 @@
         },
         {
           "variant": "Arrow=Top center, Supporting text=True, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Top center, Supporting text=True, Theme=Dark",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -84352,12 +84080,6 @@
           "path": "content/textandsupportingtext/supportingtext",
           "channel": "fillWidth",
           "value": "true"
-        },
-        {
-          "variant": "Arrow=Top center, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Top center, Supporting text=False, Theme=Dark",
@@ -84423,12 +84145,6 @@
         },
         {
           "variant": "Arrow=Bottom left, Supporting text=True, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Bottom left, Supporting text=True, Theme=Dark",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -84464,12 +84180,6 @@
           "path": "content/textandsupportingtext/supportingtext",
           "channel": "fillWidth",
           "value": "true"
-        },
-        {
-          "variant": "Arrow=Bottom left, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Bottom left, Supporting text=False, Theme=Dark",
@@ -84535,12 +84245,6 @@
         },
         {
           "variant": "Arrow=Left, Supporting text=True, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Left, Supporting text=True, Theme=Dark",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -84576,12 +84280,6 @@
           "path": "content/textandsupportingtext/supportingtext",
           "channel": "fillWidth",
           "value": "true"
-        },
-        {
-          "variant": "Arrow=Left, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Left, Supporting text=False, Theme=Dark",
@@ -84641,12 +84339,6 @@
         },
         {
           "variant": "Arrow=Right, Supporting text=True, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Right, Supporting text=True, Theme=Dark",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -84682,12 +84374,6 @@
           "path": "content/textandsupportingtext/supportingtext",
           "channel": "fillWidth",
           "value": "true"
-        },
-        {
-          "variant": "Arrow=Right, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Right, Supporting text=False, Theme=Dark",
@@ -84747,12 +84433,6 @@
         },
         {
           "variant": "Arrow=Bottom right, Supporting text=True, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
-        },
-        {
-          "variant": "Arrow=Bottom right, Supporting text=True, Theme=Dark",
           "path": "content",
           "channel": "fillWidth",
           "value": "true"
@@ -84788,12 +84468,6 @@
           "path": "content/textandsupportingtext/supportingtext",
           "channel": "fillWidth",
           "value": "true"
-        },
-        {
-          "variant": "Arrow=Bottom right, Supporting text=False, Theme=Dark",
-          "path": "",
-          "channel": "effects",
-          "value": "DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4"
         },
         {
           "variant": "Arrow=Bottom right, Supporting text=False, Theme=Dark",

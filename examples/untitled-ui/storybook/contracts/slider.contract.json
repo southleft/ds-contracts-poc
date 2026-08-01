@@ -199,7 +199,8 @@
                   "tokens": {
                     "background-color": "{imported.slider.progress-left-control-left-control.background-color}",
                     "border-color": "{imported.shared.color-7f56d9}",
-                    "border-width": "{imported.slider.progress-left-control-left-control.border-width}"
+                    "border-width": "{imported.slider.progress-left-control-left-control.border-width}",
+                    "box-shadow": "{imported.slider.progress-left-control-left-control.box-shadow}"
                   }
                 },
                 "Tooltip": {
@@ -335,7 +336,8 @@
                   "tokens": {
                     "background-color": "{imported.slider.progress-right-control-right-control.background-color}",
                     "border-color": "{imported.shared.color-7f56d9}",
-                    "border-width": "{imported.slider.progress-right-control-right-control.border-width}"
+                    "border-width": "{imported.slider.progress-right-control-right-control.border-width}",
+                    "box-shadow": "{imported.slider.progress-right-control-right-control.box-shadow}"
                   }
                 },
                 "rightControlTooltip": {

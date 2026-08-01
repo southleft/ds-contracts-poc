@@ -1,4 +1,18 @@
-/** CANVAS→CODE FIDELITY SCORE v1.3 — the demo-bar number.
+/** CANVAS→CODE FIDELITY SCORE v2.0 — the demo-bar number.
+ *  v2.0: the RENDER CLIP is the union bounding box of the root and all its
+ *  visible descendants (render-one.mts, FIDELITY_CLIP=union — the default),
+ *  not the root's border box. Under v1.3 every absolutely-positioned overflow
+ *  — the slider's and progress bar's floating value tooltips, a badge hanging
+ *  off a corner, any popover — was cropped out of the screenshot before the
+ *  comparison, so a variant that drew it CORRECTLY was scored against a
+ *  reference that shows it and a render that cannot. The metric was punishing
+ *  correctness. The union clip makes the screenshot and the canvas reference
+ *  cover the same content; the v1.3 content-trim + 200px normalization run
+ *  unchanged AFTER it, which is also why over-inclusion is safe (surplus white
+ *  is trimmed; ink destroyed at render time is gone for good).
+ *  v2.0 CHANGES THE DENOMINATOR of every number in this table. Run with
+ *  FIDELITY_CLIP=root to reproduce the v1.3 harness exactly (root border box,
+ *  16px page gutter, 900x700 viewport) — that run writes fidelity-v13.json.
  *  v1.3: both images TRIM to content before the 200px normalization —
  *  margin/aspect mismatch between ref exports and standalone renders
  *  misaligned the whole comparison (any honest ink scored negative).
@@ -19,8 +33,14 @@ const { chromium } = await import(ROOT+'/node_modules/playwright-core/index.mjs'
 const { chromiumExecutable } = await import(ROOT+'/extract/figma/visual-parity/render.js');
 import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 const UI=`${ROOT}/examples/untitled-ui`;
 const SCRATCH=process.env.SCRATCH || '/tmp';
+const CLIP=process.env.FIDELITY_CLIP === 'root' ? 'root' : 'union';
+// The renderer lives next to this file (committed pair); SCRATCH copies stay
+// usable through RENDER_ONE.
+const RENDER_ONE=process.env.RENDER_ONE || path.join(path.dirname(fileURLToPath(import.meta.url)), 'render-one.mts');
 const norm=(s:string)=>s.toLowerCase().replace(/[^a-z0-9]+/g,'');
 const SETS: Record<string,{comp:string}> = {
   'badge-base':{comp:'BadgeBase'}, 'button-base':{comp:'ButtonBase'},
@@ -31,11 +51,15 @@ const SETS: Record<string,{comp:string}> = {
   'avatar':{comp:'Avatar'}, 'avatar-label-group':{comp:'AvatarLabelGroup'}, 'avatar-add-button':{comp:'AvatarAddButton'},
   'button-group-base':{comp:'ButtonGroupBase'}, 'social-button':{comp:'SocialButton'},
 };
+// FIDELITY_ONLY=tooltip,slider restricts the run to those sets (per-lever
+// measurement); the table it prints is then a SLICE, never the demo-bar number.
+const ONLY=(process.env.FIDELITY_ONLY ?? '').split(',').map(s=>s.trim()).filter(Boolean);
 type Row={set:string,variant:string,score:number|null,note?:string};
 const results: Row[] = [];
 const b = await chromium.launch({ executablePath: chromiumExecutable(), headless: true });
 const page = await b.newPage();
 for (const [slug,{comp}] of Object.entries(SETS)) {
+  if (ONLY.length && !ONLY.includes(slug)) continue;
   const contract = JSON.parse(readFileSync(`${UI}/storybook/contracts/${slug}.contract.json`,'utf8'));
   const enums: Record<string,string[]> = {}; const bools: string[] = [];
   for (const p of contract.props ?? []) {
@@ -88,7 +112,7 @@ for (const [slug,{comp}] of Object.entries(SETS)) {
     if (!ok){ results.push({set:slug,variant:varslug,score:null,note:'slug→props unmapped'}); continue; }
     const out=`fid--${slug}--${varslug}`;
     try {
-      execFileSync('npx',['tsx',`${SCRATCH}/render-one.mts`,comp,JSON.stringify(props),out],{cwd:ROOT,env:{...process.env,SCRATCH},stdio:'pipe',timeout:60000});
+      execFileSync('npx',['tsx',RENDER_ONE,comp,JSON.stringify(props),out],{cwd:ROOT,env:{...process.env,SCRATCH,FIDELITY_CLIP:CLIP},stdio:'pipe',timeout:60000});
     } catch(e){ results.push({set:slug,variant:varslug,score:null,note:'render failed'}); continue; }
     const rp=`${UI}/renders/${out}.png`;
     if(!existsSync(rp)){ results.push({set:slug,variant:varslug,score:null,note:'no render'}); continue; }
@@ -136,6 +160,13 @@ const lines=['| component | variants scored | mean fidelity % | axis-not-carried
 let gn=0,gs=0;
 for(const [k,v] of Object.entries(bySet)){ if(v.n){gn+=v.n;gs+=v.sum;} lines.push(`| ${k} | ${v.n} | ${v.n?(v.sum/v.n).toFixed(1):'—'} | ${v.axisGap} | ${v.interaction} | ${v.unmapped} |`); }
 lines.push(`| **ALL** | ${gn} | **${gn?(gs/gn).toFixed(1):'—'}** | | | |`);
-writeFileSync(`${UI}/renders/FIDELITY.md`, `# Canvas→code fidelity — ${new Date().toISOString().slice(0,10)} @ HEAD\n\nScore = % pixels within tolerance, both images content-trimmed then normalized to a common 200px box (canvas ref up to 2x export vs standalone render; v1.3 trims margins — unequal margins misaligned every pixel). v1.2: unknown axes consumed generically; axis-not-carried counts variants unrenderable because the inversion dropped their axis (genuine carriage losses only); state=disabled scores through the contract's disabled boolean; state=hover|focus variants are interaction-state (CSS-rendered, not statically scorable). Trend metric, not the final gate.\n\n${lines.join('\n')}\n`);
-writeFileSync(`${UI}/renders/fidelity.json`, JSON.stringify(results,null,1));
+const METHOD = CLIP === 'union'
+  ? `Score = % pixels within tolerance. v2.0 clips the render to the UNION bounding box of the root and all its VISIBLE descendants (clamped to the viewport, +8px margin) instead of the root's border box: absolutely-positioned overflow — the slider's and progress bar's floating value tooltips, a badge hanging off a corner — used to be cropped out of the screenshot before scoring, so a variant that drew it correctly was measured against a reference that shows it and a render that could not. The union is a deliberate superset (an overflow:hidden ancestor clips visually, not geometrically); surplus white is removed by the trim that follows, whereas ink destroyed at render time was unrecoverable. v2.0 CHANGES THE DENOMINATOR of every number below — it is not comparable to a v1.3 table; \`FIDELITY_CLIP=root\` reproduces the v1.3 harness (fidelity-v13.json). Both images are then content-trimmed and normalized to a common 200px box (canvas ref up to 2x export vs standalone render; v1.3 trims margins — unequal margins misaligned every pixel).`
+  : `Score = % pixels within tolerance, both images content-trimmed then normalized to a common 200px box (canvas ref up to 2x export vs standalone render; v1.3 trims margins — unequal margins misaligned every pixel).`;
+const TAIL = ` v1.2: unknown axes consumed generically; axis-not-carried counts variants unrenderable because the inversion dropped their axis (genuine carriage losses only); state=disabled scores through the contract's disabled boolean; state=hover|focus variants are interaction-state (CSS-rendered, not statically scorable). Trend metric, not the final gate.`;
+const stem = CLIP === 'union' ? 'fidelity' : 'fidelity-v13';
+if (!ONLY.length) {
+  writeFileSync(`${UI}/renders/${CLIP === 'union' ? 'FIDELITY' : 'FIDELITY-v13'}.md`, `# Canvas→code fidelity — ${new Date().toISOString().slice(0,10)} @ HEAD\n\n${METHOD}${TAIL}\n\n${lines.join('\n')}\n`);
+}
+writeFileSync(`${UI}/renders/${stem}${ONLY.length?'-slice':''}.json`, JSON.stringify(results,null,1));
 console.log(lines.join('\n'));

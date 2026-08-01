@@ -1722,31 +1722,43 @@ const shadowCss = (e: DumpEffect): string => {
   return `${px(e.offset?.x ?? 0)} ${px(e.offset?.y ?? 0)} ${px(e.radius ?? 0)}${spread} ${paintCssHex(e.color ?? { hex: '000000' })}`;
 };
 
-/** VISIBLE effects (dump v1.2). Exactly ONE DROP_SHADOW in EVERY variant →
- *  an unbound report + (with minting) a `box-shadow` shadow-kind mint (enum
- *  correlation handled by the classifier). Anything else — inner shadows,
- *  blurs, effect stacks, partial presence across variants — is a NAMED note
- *  carrying the effect types: the channel never drops silently. The canvas
- *  preview has no box-shadow projection in v1; that limit is named here at
- *  proposal (the minted preamble also skips shadow-typed leaves). */
+/** VISIBLE effects (dump v1.2; MULTI-LAYER since gap round 4). DROP_SHADOW
+ *  layers — one or many — present in EVERY variant become an unbound report +
+ *  (with minting) a `box-shadow` shadow-kind mint whose value is the layers
+ *  comma-joined in dump order (enum correlation handled by the classifier).
+ *  CSS takes a comma-separated shadow list natively, and the canvas emitter's
+ *  stack grammar (parseShadowStack, emit-figma-script) projects EVERY layer
+ *  back as its own native DROP_SHADOW — so neither direction truncates.
+ *  Field case: Untitled UI's Tooltip draws its only visible edge with a
+ *  two-layer stack (0/4/6/-2 black 3% + 0/12/16/-4 black 8%); the old
+ *  single-layer rule refused the pair, so the light-theme bubble rendered
+ *  white-on-white with no edge at all — the correct value was NAMED and the
+ *  drawing was wrong. Anything else — inner shadows, blurs, mixed kinds,
+ *  partial presence across variants (a node shadowed in some variants and
+ *  bare in others: "absent" would have to be read as `none`, which no
+ *  observation states) — is still a NAMED note carrying the effect types: the
+ *  channel never drops silently. The canvas preview has no box-shadow
+ *  projection in v1; that limit is named here at proposal (the minted
+ *  preamble also skips shadow-typed leaves). */
 function invertNodeEffects(m: Merged, tokens: Record<string, string>, ctx: Ctx, where: string) {
   if (m.occ.every((o) => (o.node.effects?.length ?? 0) === 0)) return;
   const kinds = [...new Set(m.occ.flatMap((o) => (o.node.effects ?? []).map((e) => e.type)))];
-  const singleDropShadowEverywhere = m.occ.every((o) => {
+  const dropShadowStackEverywhere = m.occ.every((o) => {
     const eff = o.node.effects ?? [];
-    return eff.length === 1 && eff[0].type === 'DROP_SHADOW';
+    return eff.length >= 1 && eff.every((e) => e.type === 'DROP_SHADOW');
   });
-  if (!singleDropShadowEverywhere) {
+  if (!dropShadowStackEverywhere) {
     ctx.notes.push(
-      `${where}: visible effect(s) [${kinds.join(', ')}] — only a single DROP_SHADOW present in every variant maps to box-shadow (dump v1.2); channel NAMED, not proposed`,
+      `${where}: visible effect(s) [${kinds.join(', ')}] — only DROP_SHADOW layers present in every variant map to box-shadow (dump v1.2; a multi-layer stack carries comma-separated); channel NAMED, not proposed`,
     );
     return;
   }
-  const occ = m.occ.map((o) => ({ variant: o.variant, value: shadowCss(o.node.effects![0]) }));
+  const occ = m.occ.map((o) => ({ variant: o.variant, value: o.node.effects!.map(shadowCss).join(', ') }));
+  const depth = Math.max(...m.occ.map((o) => (o.node.effects ?? []).length));
   reportUnbound(ctx, where, 'effects', occ[0].value);
   mintObservation(ctx, tokens, where, 'box-shadow', 'shadow', occ, `${where}|effects`);
   ctx.notes.push(
-    `${where}: DROP_SHADOW proposed as a box-shadow value (dump v1.2) — CSS surfaces render it; the canvas preview and the Figma sync script project it as a native DROP_SHADOW effect (dump v1.3)`,
+    `${where}: ${depth > 1 ? `a DROP_SHADOW stack (up to ${depth} layers) proposed as a comma-separated box-shadow value` : 'DROP_SHADOW proposed as a box-shadow value'} (dump v1.2) — CSS surfaces render it; the canvas preview and the Figma sync script project it as a native DROP_SHADOW effect (dump v1.3)`,
   );
 }
 

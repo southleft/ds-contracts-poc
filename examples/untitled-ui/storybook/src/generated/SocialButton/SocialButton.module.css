@@ -20,6 +20,7 @@
 }
 
 .state-default {
+  box-shadow: var(--imported-social-button-root-box-shadow-default);
 }
 
 .social-facebook.theme-brand.state-default {
@@ -27,6 +28,7 @@
 }
 
 .state-hover {
+  box-shadow: var(--imported-social-button-root-box-shadow-hover);
 }
 
 .social-facebook.theme-brand.state-hover {
@@ -34,6 +36,7 @@
 }
 
 .state-focused {
+  box-shadow: var(--imported-social-button-root-box-shadow-focused);
 }
 
 .social-facebook.theme-brand.state-focused {

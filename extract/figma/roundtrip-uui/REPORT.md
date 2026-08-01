@@ -21,12 +21,12 @@ The hand-built canvas used zero published variables, so captured.dtcg.json is `{
 | input-field-base | round trip closed | 10 → 10 | 531 | 47 | 277 | 164 |
 | progress-bar | round trip closed | 55 → 55 | 1299 | 285 | 485 | 649 |
 | progress-circle | round trip closed | 16 → 16 | 315 | 94 | 225 | 231 |
-| slider | round trip closed | 40 → 64 | 1184 | 496 | 1180 | 1364 |
-| social-button | round trip closed | 108 → 108 | 1974 | 186 | 480 | 0 |
-| toggle-base | round trip closed | 32 → 10 | 147 | 13 | 32 | 0 |
-| tooltip | round trip closed | 28 → 28 | 868 | 138 | 241 | 196 |
+| slider | round trip closed | 40 → 64 | 1184 | 496 | 1180 | 1444 |
+| social-button | round trip closed | 108 → 108 | 2082 | 186 | 372 | 0 |
+| toggle-base | round trip closed | 32 → 10 | 157 | 13 | 22 | 0 |
+| tooltip | round trip closed | 28 → 28 | 896 | 138 | 213 | 196 |
 
-**15/15 round trips closed.** Across the closed ones: 10398 matched, 1991 diverged, 4660 one-way loss, 6077 invented.
+**15/15 round trips closed.** Across the closed ones: 10544 matched, 1991 diverged, 4514 one-way loss, 6157 invented.
 
 ## avatar — 162 → 216 variants
 
@@ -1124,7 +1124,7 @@ matched 315 · diverged 94 · loss 225 · invented 231
 
 ## slider — 40 → 64 variants
 
-matched 1184 · diverged 496 · loss 1180 · invented 1364
+matched 1184 · diverged 496 · loss 1180 · invented 1444
 
 ### DIVERGED (value differs; original → round trip)
 
@@ -1226,12 +1226,13 @@ matched 1184 · diverged 496 · loss 1180 · invented 1364
 
 ### INVENTED (in the round trip, not the original — must be zero or named)
 
-- class `restructured` — 1300 fact(s):
+- class `restructured` — 1380 fact(s):
   - progress/leftcontrol/leftcontrol2 ▸ kind: ellipse  (×40 variants)
   - progress/leftcontrol/leftcontrol2 ▸ layout.mode: NONE  (×40 variants)
   - progress/leftcontrol/leftcontrol2 ▸ fill: #ffffff  (×40 variants)
   - progress/leftcontrol/leftcontrol2 ▸ stroke: #7f56d9  (×40 variants)
   - progress/leftcontrol/leftcontrol2 ▸ strokeWeight: 1  (×40 variants)
+  - progress/leftcontrol/leftcontrol2 ▸ effects: DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2  (×40 variants)
   - progress/leftcontrol/leftcontrol2 ▸ abs: 0,0  (×40 variants)
   - progress/leftcontrol/leftcontrol2 ▸ width: 24  (×40 variants)
   - progress/leftcontrol/leftcontrol2 ▸ height: 24  (×40 variants)
@@ -1240,6 +1241,7 @@ matched 1184 · diverged 496 · loss 1180 · invented 1364
   - progress/rightcontrol/rightcontrol2 ▸ fill: #ffffff  (×40 variants)
   - progress/rightcontrol/rightcontrol2 ▸ stroke: #7f56d9  (×40 variants)
   - progress/rightcontrol/rightcontrol2 ▸ strokeWeight: 1  (×40 variants)
+  - progress/rightcontrol/rightcontrol2 ▸ effects: DROP_SHADOW #000000@0.06 off=0,2 r=4 s=-2 | DROP_SHADOW #000000@0.1 off=0,4 r=8 s=-2  (×40 variants)
   - progress/rightcontrol/rightcontrol2 ▸ abs: 0,0  (×40 variants)
   - progress/rightcontrol/rightcontrol2 ▸ width: 24  (×40 variants)
   - progress/rightcontrol/rightcontrol2 ▸ height: 24  (×40 variants)
@@ -1295,7 +1297,7 @@ matched 1184 · diverged 496 · loss 1180 · invented 1364
 
 ## social-button — 108 → 108 variants
 
-matched 1974 · diverged 186 · loss 480 · invented 0
+matched 2082 · diverged 186 · loss 372 · invented 0
 
 ### DIVERGED (value differs; original → round trip)
 
@@ -1305,12 +1307,10 @@ matched 1974 · diverged 186 · loss 480 · invented 0
 
 ### LOSS (in the original, not the round trip)
 
-- class `(unclassified)` — 426 fact(s):
+- class `(unclassified)` — 318 fact(s):
   - (root) ▸ stroke: #d4d4d4  (×78 variants)
   - (root) ▸ strokeWeight: 1  (×78 variants)
-  - (root) ▸ effects: DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0  (×72 variants)
   - text ▸ fill: #404040  (×39 variants)
-  - (root) ▸ effects: DROP_SHADOW #f5f5f5@1 off=0,0 r=0 s=4 | DROP_SHADOW #000000@0.05 off=0,1 r=2 s=0  (×36 variants)
   - socialicon ▸ instanceInk: #a3a3a3  (×30 variants)
   - socialicon ▸ instanceInk: #ffffff  (×24 variants)
   - text ▸ fill: #ffffff  (×15 variants)
@@ -1325,7 +1325,7 @@ matched 1974 · diverged 186 · loss 480 · invented 0
 
 ## toggle-base — 32 → 10 variants
 
-matched 147 · diverged 13 · loss 32 · invented 0
+matched 157 · diverged 13 · loss 22 · invented 0
 
 ### DIVERGED (value differs; original → round trip)
 
@@ -1336,13 +1336,12 @@ matched 147 · diverged 13 · loss 32 · invented 0
 
 ### LOSS (in the original, not the round trip)
 
-- class `interaction-states` — 32 fact(s):
+- class `interaction-states` — 22 fact(s):
   - (root) ▸ variant: missing in round trip  (×22 variants)
-  - button ▸ effects: DROP_SHADOW #000000@0.06 off=0,1 r=2 s=0 | DROP_SHADOW #000000@0 off=0,1 r=3 s=0  (×10 variants)
 
 ## tooltip — 28 → 28 variants
 
-matched 868 · diverged 138 · loss 241 · invented 196
+matched 896 · diverged 138 · loss 213 · invented 196
 
 ### DIVERGED (value differs; original → round trip)
 
@@ -1359,8 +1358,7 @@ matched 868 · diverged 138 · loss 241 · invented 196
 
 ### LOSS (in the original, not the round trip)
 
-- class `(unclassified)` — 101 fact(s):
-  - (root) ▸ effects: DROP_SHADOW #000000@0.03 off=0,4 r=6 s=-2 | DROP_SHADOW #000000@0.08 off=0,12 r=16 s=-4  (×28 variants)
+- class `(unclassified)` — 73 fact(s):
   - content ▸ fillWidth: true  (×24 variants)
   - content/textandsupportingtext ▸ fillWidth: true  (×14 variants)
   - content/textandsupportingtext/text ▸ fillWidth: true  (×14 variants)
