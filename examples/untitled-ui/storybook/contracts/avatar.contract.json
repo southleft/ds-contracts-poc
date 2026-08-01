@@ -150,6 +150,7 @@
         "align": "center"
       },
       "declared": {
+        "outline-style": "solid",
         "background-size": "cover",
         "background-position": "50% 50%",
         "background-repeat": "no-repeat",
@@ -256,9 +257,9 @@
         }
       },
       "tokens": {
-        "border-color": "{imported.avatar.root.border-color.{state}}",
+        "outline-color": "{imported.avatar.root.outline-color.{state}}",
         "border-radius": "{imported.avatar.root.border-radius}",
-        "border-width": "{imported.avatar.root.border-width.{state}}",
+        "outline-width": "{imported.avatar.root.outline-width.{state}}",
         "background-image": "{imported.avatar.root.background-image.{placeholder}.{text}}",
         "width": "{imported.avatar.root.width.{size}}",
         "height": "{imported.avatar.root.height.{size}}"

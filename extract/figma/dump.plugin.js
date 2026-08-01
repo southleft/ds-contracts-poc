@@ -1,4 +1,4 @@
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.10).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.11).
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -33,6 +33,16 @@
 //                      paint's effective opacity < 1 (dump v1.1) — raw paints
 //                      are REPORTED by propose.ts, never silently tokenized
 //   strokeWeight       literal stroke weight (bound weights appear in `bound`)
+//   strokeAlign        INSIDE | CENTER | OUTSIDE (dump v1.11) — where the
+//                      weight is drawn relative to the node box. Captured on
+//                      EVERY stroke, INSIDE included: an absent field was
+//                      being read as INSIDE by assumption, and the assumption
+//                      was wrong on Untitled UI's Avatar focus ring. OUTSIDE
+//                      lowers to the CSS outline vocabulary (which draws
+//                      outside the border box and does not affect layout),
+//                      INSIDE to border; CENTER is refused BY NAME
+//                      (stroke-align-unsupported) because CSS has no
+//                      straddling spelling.
 //   fillWidth          layoutSizingHorizontal === 'FILL' — canvas projection of
 //                      grow (row parents) / align:stretch (column parents)
 //   text               characters, fontSize, fontStyle, named TextStyle (token
@@ -455,6 +465,19 @@ async function dumpNode(node, nodePath, parent) {
   if (stroke) {
     out.stroke = stroke;
     if (typeof node.strokeWeight === 'number') out.strokeWeight = node.strokeWeight;
+    // dump v1.11: EVERY stroke carries its ALIGNMENT — the channel that
+    // decides whether the weight is drawn inside the node box, centred on
+    // its edge, or outside it. INSIDE is captured too, explicitly, because
+    // the alternative is what this channel cost the kit for eight rounds: an
+    // absent field read as "INSIDE" by assumption. Untitled UI's Avatar
+    // focus ring is OUTSIDE, so every focused reference export is exactly
+    // 8px larger than the box the dump recorded (4px ring x 2 sides) while
+    // the CSS `border` it lowered to, under the emitted global
+    // `box-sizing: border-box`, drew INWARD and ate the photo. That was
+    // 2.686 kit points of pixel loss with a receipt so generic
+    // (`stroke-style-unsupported`, shared with dashPattern) that no gate,
+    // ledger or fixture could see the alignment was the cause.
+    if (typeof node.strokeAlign === 'string') out.strokeAlign = node.strokeAlign;
     // Stroke DETAIL on an INSTANCE is elided by design downstream (instance
     // styling belongs to the child contract; the Slot utility's dashed
     // border is the utility's own) — no receipt for an unconsumed channel.
@@ -465,8 +488,14 @@ async function dumpNode(node, nodePath, parent) {
       if (Array.isArray(node.dashPattern) && node.dashPattern.length > 0) {
         degrade('stroke-style-unsupported', nodePath, 'dashPattern [' + node.dashPattern.join(', ') + '] — dashed strokes have no dump v1 projection; stroke renders solid');
       }
-      if ('strokeAlign' in node && node.strokeAlign !== 'INSIDE') {
-        degrade('stroke-style-unsupported', nodePath, 'strokeAlign ' + node.strokeAlign + ' — dump consumers render INSIDE strokes (CSS borders); alignment dropped');
+      // OUTSIDE and INSIDE both LOWER (outline / border). CENTER does not:
+      // it straddles the edge, half the weight each side, and CSS has no
+      // spelling for that — `border` draws wholly inward and `outline`
+      // wholly outward. The FACT is carried above either way; what is
+      // refused is the lowering, and it is refused under its OWN code so
+      // the boundary is countable rather than folded into a shared one.
+      if (node.strokeAlign === 'CENTER') {
+        degrade('stroke-align-unsupported', nodePath, 'strokeAlign CENTER — a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border');
       }
     }
   }
@@ -661,8 +690,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.10) for design→contract proposal.',
-    dumpVersion: '1.10',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.11) for design→contract proposal.',
+    dumpVersion: '1.11',
   },
 };
 dumps._degradations = degradations;

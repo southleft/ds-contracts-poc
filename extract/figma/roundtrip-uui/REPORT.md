@@ -10,7 +10,7 @@ The hand-built canvas used zero published variables, so captured.dtcg.json is `{
 
 | component | status | variants (orig → rt) | matched | diverged | loss (orig-only) | invented (rt-only) |
 |---|---|---|---|---|---|---|
-| avatar | round trip closed | 162 → 216 | 2085 | 471 | 1140 | 1782 |
+| avatar | round trip closed | 162 → 216 | 2085 | 471 | 1140 | 1566 |
 | avatar-add-button | round trip closed | 12 → 9 | 174 | 45 | 78 | 0 |
 | avatar-group | round trip closed | 12 → 12 | 322 | 56 | 78 | 1722 |
 | avatar-label-group | round trip closed | 36 → 12 | 422 | 42 | 93 | 8 |
@@ -26,11 +26,11 @@ The hand-built canvas used zero published variables, so captured.dtcg.json is `{
 | toggle-base | round trip closed | 32 → 10 | 157 | 13 | 22 | 0 |
 | tooltip | round trip closed | 28 → 28 | 910 | 124 | 213 | 182 |
 
-**15/15 round trips closed.** Across the closed ones: 10822 matched, 1977 diverged, 4250 one-way loss, 6419 invented.
+**15/15 round trips closed.** Across the closed ones: 10822 matched, 1977 diverged, 4250 one-way loss, 6203 invented.
 
 ## avatar — 162 → 216 variants
 
-matched 2085 · diverged 471 · loss 1140 · invented 1782
+matched 2085 · diverged 471 · loss 1140 · invented 1566
 
 ### DIVERGED (value differs; original → round trip)
 
@@ -107,9 +107,6 @@ matched 2085 · diverged 471 · loss 1140 · invented 1782
 
 ### INVENTED (in the round trip, not the original — must be zero or named)
 
-- class `zero-stroke` — 216 fact(s):
-  - (root) ▸ stroke: #000000@0  (×108 variants)
-  - (root) ▸ strokeWeight: 0  (×108 variants)
 - class `restructured` — 1512 fact(s):
   - avatarcompanyicon/avatarcompanyiconinstance ▸ kind: instance  (×54 variants)
   - avatarcompanyicon/avatarcompanyiconinstance ▸ layout.mode: HORIZONTAL  (×54 variants)

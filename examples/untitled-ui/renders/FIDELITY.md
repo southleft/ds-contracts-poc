@@ -14,9 +14,9 @@ Score = % of pixels REPRODUCED, measured at the reference's own true scale with 
 | slider | 40 | 87.5 | 0 | 0 | 0 |
 | progress-bar | 55 | 91.1 | 0 | 0 | 0 |
 | progress-circle | 16 | 85.8 | 4 | 0 | 0 |
-| avatar | 162 | 85.9 | 0 | 0 | 0 |
+| avatar | 162 | 94.8 | 0 | 0 | 0 |
 | avatar-label-group | 12 | 91.5 | 0 | 24 | 0 |
 | avatar-add-button | 6 | 96.7 | 0 | 6 | 0 |
-| button-group-base | 32 | 80.1 | 0 | 0 | 0 |
+| button-group-base | 32 | 92.2 | 0 | 0 | 0 |
 | social-button | 108 | 88.5 | 0 | 0 | 0 |
-| **ALL** | 537 | **87.5** | | | |
+| **ALL** | 537 | **90.9** | | | |

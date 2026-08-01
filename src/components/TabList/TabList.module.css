@@ -10,6 +10,7 @@
   border-style: solid;
   gap: var(--space-inset-y-sm);
   border-color: var(--color-border-subtle);
+  border-width: var(--border-width-100);
   padding-block: var(--space-inset-y-xs);
 }
 

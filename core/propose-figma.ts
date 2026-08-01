@@ -1469,6 +1469,50 @@ function unifyPaint(
   return undefined;
 }
 
+/** dump v1.11 — WHICH CSS VOCABULARY CARRIES A STROKE IS DECIDED BY WHERE THE
+ *  CANVAS DRAWS IT, and until v1.11 nothing here could ask.
+ *
+ *  A Figma stroke is INSIDE (default), CENTER or OUTSIDE. Only INSIDE is a
+ *  CSS `border`: under the emitted global `box-sizing: border-box` a border
+ *  is drawn INWARD, eating the content box. An OUTSIDE stroke grows the
+ *  drawing beyond the node box without moving anything, which is exactly
+ *  `outline` (outside the border box, out of flow, no layout effect) — and
+ *  NOT `border` on a grown box: growing the box moves the root the scorer
+ *  anchors on, which was measured and FALSIFIED (probe avatar-ring-outside,
+ *  -0.67).
+ *
+ *  Returns the vocabulary prefix. CENTER straddles the edge and has no exact
+ *  CSS spelling; it is refused BY NAME here and renders as the INSIDE border
+ *  it already rendered as — a named approximation, not a silent one. Mixed
+ *  alignment across the variants of one node is likewise refused by name.
+ *
+ *  An ABSENT strokeAlign is NOT read as INSIDE-the-fact: it is read as
+ *  not-captured (a pre-v1.11 dump), which lands on the same border spelling
+ *  those dumps already produced. Same bytes for old dumps, new truth for new
+ *  ones. */
+function strokeVocabulary(m: Merged, ctx: Ctx, where: string): 'border' | 'outline' {
+  const drawn = m.occ.filter((o) => o.node.stroke !== undefined);
+  const aligns = new Set(
+    drawn.map((o) => o.node.strokeAlign).filter((a): a is NonNullable<typeof a> => a !== undefined),
+  );
+  if (aligns.size === 0) return 'border'; // not captured, or nothing drawn
+  if (aligns.size > 1) {
+    ctx.notes.push(
+      `${where}: stroke alignment differs across variants [${[...aligns].sort().join(', ')}] — one node lowers to ONE border/outline vocabulary, so the mixed case is REFUSED BY NAME and the stroke carries as an INSIDE border (review)`,
+    );
+    return 'border';
+  }
+  const [align] = aligns;
+  if (align === 'OUTSIDE') return 'outline';
+  if (align === 'CENTER') {
+    ctx.notes.push(
+      `${where}: strokeAlign CENTER — half the weight is drawn inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. REFUSED BY NAME (capture receipt stroke-align-unsupported); the stroke carries as an INSIDE border, off by half its weight per side (review)`,
+    );
+    return 'border';
+  }
+  return 'border';
+}
+
 /** Invert a node's variable bindings + paints into contract token refs.
  *  Value-level correlations (v10) collect into `byProp` — the caller
  *  attaches them to the part via attachByProp. */
@@ -1482,12 +1526,28 @@ function invertNodeTokens(
    *  base-combo literal fallback for padding channels whose per-variant
    *  values refuse classification (see mintPadding). Absent on the root. */
   part?: Record<string, unknown>,
+  /** DECLARED keyword facts this inversion decides (dump v1.11: an
+   *  OUTSIDE-aligned stroke lowers to the outline vocabulary, and a CSS
+   *  outline paints nothing without `outline-style`). Written here and
+   *  attached by the caller, because the keyword must be CARRIED — no
+   *  emitter may infer it from outline-width, which is a resting
+   *  focus-ring-reservation idiom in CSS-extracted contracts. */
+  declaredOut?: Record<string, string>,
 ): Record<string, string> {
   const tokens: Record<string, string> = {};
   const fields = new Set<string>();
   for (const o of m.occ) for (const f of Object.keys(o.node.bound ?? {})) fields.add(f);
   const f = (name: string) => (fields.has(name) ? unifyField(m, name, ctx, where) : undefined);
   const carry = (cssProp: string, u: UnifiedRef | undefined) => carryRef(tokens, byProp, cssProp, u, ctx, where);
+  // dump v1.11: an OUTSIDE stroke is not a border. Decided once, used by
+  // BOTH halves of the stroke fact (colour and width) so they can never
+  // disagree about which box edge they are describing.
+  const strokeVocab = strokeVocabulary(m, ctx, where);
+  const strokeColorProp = `${strokeVocab}-color`;
+  const strokeWidthProp = `${strokeVocab}-width`;
+  // The keyword that makes the outline paint at all. Declared, never
+  // inferred downstream — see strokeVocabulary's note.
+  if (strokeVocab === 'outline' && declaredOut) declaredOut['outline-style'] = 'solid';
 
   carry(
     'background-color',
@@ -1497,9 +1557,9 @@ function invertNodeTokens(
     }),
   );
   carry(
-    'border-color',
+    strokeColorProp,
     unifyPaint(m, (n) => n.stroke, ctx, where, 'stroke', {
-      cssProperty: 'border-color',
+      cssProperty: strokeColorProp,
       target: tokens,
       // A strokeless variant is a ZERO-WIDTH stroke, not an uncaptured one —
       // the width channel below already mints 0 for exactly these nodes.
@@ -1547,8 +1607,8 @@ function invertNodeTokens(
           const ws = weights.map((x) => f(x));
           return ws[0] !== undefined && ws.every((x) => refKey(x) === refKey(ws[0])) ? ws[0] : undefined;
         })();
-    if (w) carry('border-width', w);
-    else ctx.notes.push(`${where}: stroke weight bindings are not uniform — border-width not representable, review`);
+    if (w) carry(strokeWidthProp, w);
+    else ctx.notes.push(`${where}: stroke weight bindings are not uniform — ${strokeWidthProp} not representable, review`);
   }
   carry('gap', f('itemSpacing'));
   carry(isRoot ? 'max-width' : 'width', f('width'));
@@ -1652,7 +1712,7 @@ function invertNodeTokens(
     // instead of refusing on partiality — the two halves of one stroke fact
     // must agree, or the width lands with `border-color: currentColor` and
     // the ring draws in text ink.
-    mintObservation(ctx, tokens, where, 'border-width', 'px', numOccurrences(m, (n) => n.strokeWeight), `${where}|strokeWeight`);
+    mintObservation(ctx, tokens, where, strokeWidthProp, 'px', numOccurrences(m, (n) => n.strokeWeight), `${where}|strokeWeight`);
   }
   // Literal min/max sizing (dump v1.4): bounded, exact px facts — a drawn
   // minHeight 44 is a tap-target fact that belongs in the render. Bound
@@ -4604,7 +4664,11 @@ function buildPart(
   }
 
   const partByProp: ByPropCollector = { map: {} };
-  const tokens = invertNodeTokens(m, false, ctx, where, partByProp, part);
+  const partDeclared: Record<string, string> = {};
+  const tokens = invertNodeTokens(m, false, ctx, where, partByProp, part, partDeclared);
+  if (Object.keys(partDeclared).length > 0) {
+    part.declared = { ...(part.declared as Record<string, string> | undefined), ...partDeclared };
+  }
   attachByProp(part, partByProp);
 
   // dump v1.7 `imageFill` on a FRAME part — the exported asset (dump v1.9
@@ -6318,7 +6382,11 @@ export function proposeFromDump(
   if (rootLayout) root.layout = rootLayout;
   applyLayoutSplit(root, invertLayoutByProp(merged, ctx, where));
   const rootTokensByProp: ByPropCollector = { map: {} };
-  const rootTokens = invertNodeTokens(merged, true, ctx, where, rootTokensByProp);
+  const rootDeclared: Record<string, string> = {};
+  const rootTokens = invertNodeTokens(merged, true, ctx, where, rootTokensByProp, undefined, rootDeclared);
+  if (Object.keys(rootDeclared).length > 0) {
+    root.declared = { ...(root.declared as Record<string, string> | undefined), ...rootDeclared };
+  }
   // dump v1.7 tolerance ledger (root): an IMAGE fill on the variant root
   // (photo avatars) is captured by name only — the image stays unexported;
   // with minting on, the root renders the neutral placeholder gradient

@@ -2,7 +2,7 @@
   "imported": {
     "avatar": {
       "root": {
-        "border-color": {
+        "outline-color": {
           "default": {
             "$value": "#00000000",
             "$type": "color"
@@ -20,7 +20,7 @@
           "$value": "200px",
           "$type": "dimension"
         },
-        "border-width": {
+        "outline-width": {
           "default": {
             "$value": "0px",
             "$type": "dimension"

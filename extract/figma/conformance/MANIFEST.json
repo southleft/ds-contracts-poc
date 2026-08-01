@@ -330,6 +330,57 @@
    "status": "green"
   },
   {
+   "id": "stroke-align-inside",
+   "construct": "a stroke explicitly aligned INSIDE the node box (dump v1.11 captures the alignment of EVERY stroke)",
+   "expect": "CARRIED",
+   "why": "INSIDE is the alignment a CSS border already has - a border under box-sizing:border-box is drawn inward - so the stroke carries as border-color/border-width and nothing outline-shaped may appear. The case exists because before dump v1.11 this disposition rested on an ASSUMPTION about an absent field rather than a captured fact, and the same assumption was wrong elsewhere on the same canvas",
+   "check": {
+    "carried": [
+     "\"border-color\":\"\\{color\\.border\\.subtle\\}\"",
+     "imported\\.case\\.root\\.border-width"
+    ],
+    "absent": [
+     "outline-color",
+     "outline-width"
+    ]
+   },
+   "status": "green"
+  },
+  {
+   "id": "stroke-align-outside",
+   "construct": "a stroke aligned OUTSIDE the node box",
+   "expect": "CARRIED",
+   "why": "an OUTSIDE stroke grows the drawing beyond the node box without moving anything inside it; the only CSS spelling with that behaviour is an outline (drawn outside the border box, taking no layout space), so the pair carries as outline-color/outline-width and border-* must NOT appear - a border would draw the ring INWARD over the content, and growing the box to hold it instead moves the very node the drawing is anchored on",
+   "check": {
+    "carried": [
+     "\"outline-color\":\"\\{color\\.border\\.subtle\\}\"",
+     "imported\\.case\\.root\\.outline-width"
+    ],
+    "absent": [
+     "border-color",
+     "border-width"
+    ]
+   },
+   "status": "green"
+  },
+  {
+   "id": "stroke-align-center",
+   "construct": "a stroke aligned CENTER (straddling the node box edge)",
+   "expect": "LEDGERED",
+   "why": "a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither spelling carries it exactly. The capture receipts stroke-align-unsupported under its OWN code - not folded into stroke-style-unsupported, which is what made this boundary uncountable for eight rounds - and the inversion NAMES the approximation instead of proposing an outline it cannot justify",
+   "check": {
+    "note": "stroke-align-unsupported",
+    "carried": [
+     "\"border-color\":\"\\{color\\.border\\.subtle\\}\""
+    ],
+    "absent": [
+     "outline-color",
+     "outline-width"
+    ]
+   },
+   "status": "green"
+  },
+  {
    "id": "stroke-dashed",
    "construct": "a dashed stroke (dashPattern - capture-boundary)",
    "expect": "LEDGERED",

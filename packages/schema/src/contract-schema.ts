@@ -647,14 +647,23 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
   'font-weight': drawn('the font STYLE name (Regular/Medium/Semi Bold/Bold).'),
   'line-height': drawn('pixel lineHeight on text nodes.'),
   'letter-spacing': drawn('pixel letterSpacing on text nodes.'),
-  // -- state-only ------------------------------------------------------------
+  // -- outline: the OUTSIDE-aligned stroke vocabulary -------------------------
+  // ROUND 9: these two stopped being state-preview-only. dump v1.11 captures
+  // strokeAlign, and an OUTSIDE-aligned Figma stroke has exactly one faithful
+  // CSS twin — an outline, which draws outside the border box and takes no
+  // layout space (a border under box-sizing:border-box draws INWARD, and
+  // growing the box to hold the ring instead was measured and falsified).
+  // They draw on the canvas as an OUTSIDE stroke when carried AS A PAIR;
+  // either one alone stays inert and is refused by name, because a CSS
+  // outline with no width paints nothing and a width with no colour has
+  // nothing to paint.
   'outline-color': {
-    canvas: 'state-only', css: 'verbatim',
-    note: 'a RESTING CSS outline has outline-style:none and paints nothing, so the base plane deliberately draws it nowhere; the state-preview stamp lowers it to an OUTSIDE-aligned stroke.',
+    canvas: 'draw', css: 'verbatim',
+    note: 'the strokes paint of an OUTSIDE-aligned stroke — drawn only when outline-width is carried too (a resting outline with no width paints nothing in CSS, and the toned base cells must not gain a ring).',
   },
   'outline-width': {
-    canvas: 'state-only', css: 'verbatim',
-    note: 'state-preview only — the base plane draws no resting outline (drawing it inflated every toned base cell by the ring).',
+    canvas: 'draw', css: 'verbatim',
+    note: 'strokeWeight of an OUTSIDE-aligned stroke — drawn only when outline-color is carried too. emit-react supplies the outline-style:solid the pair needs; without a width no outline-style is written at all.',
   },
   'outline-offset': annotated('Figma strokes have no offset field — an outside-aligned stroke sits flush against the box.'),
   // -- annotate: carried by the contract, NO canvas field --------------------

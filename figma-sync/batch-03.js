@@ -1949,6 +1949,7 @@ const COMPONENTS = [
           },
           "bindings": {
             "itemSpacing": "space/inset-y/sm",
+            "strokeWeight": "border-width/100",
             "paddingTop": "space/inset-y/xs",
             "paddingBottom": "space/inset-y/xs"
           },

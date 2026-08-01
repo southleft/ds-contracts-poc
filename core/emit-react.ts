@@ -1261,11 +1261,61 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
   if (rootElementsOf(contract).some((el) => UA_MARGIN_ELEMENTS.has(el))) {
     rootDecls.push('margin: 0');
   }
-  const hasBorder =
-    'border-width' in rootTokens || 'border-color' in rootTokens ||
-    'border-width' in (root.literals ?? {});
-  if (hasBorder) rootDecls.push('border-style: solid');
+  // GAP-CLOSING ROUND 9 — A STYLE KEYWORD IS NOT A BORDER; A WIDTH IS.
+  //
+  // This test used to read `border-width OR border-color`, so a contract
+  // carrying only a COLOUR emitted `border-style: solid` with no width — and
+  // CSS finished the claim with the UA default, `medium`, which Chrome
+  // resolves to 3px. UUI's ButtonGroupBase is exactly that shape: the canvas
+  // draws per-side weights [0,1,0,0], the capture REFUSES them BY NAME
+  // (`stroke-weights-nonuniform`, dump v1 carries a uniform weight only), so
+  // no width reaches the contract — and every one of its 32 variants then
+  // rendered 5–6px too wide and too tall, scoring 80.15 against a 98.91
+  // ceiling.
+  //
+  // That is round 5's bug with the halves swapped. There, border-WIDTH
+  // carried while border-COLOUR was refused, and CSS completed the pair with
+  // `currentColor` — painting black focus rings across three libraries. Same
+  // asymmetry, same mechanism, same lesson, stated once as a rule:
+  //
+  //   A REFUSED CHANNEL WHOSE CSS SIBLING IS STILL EMITTED MUST EITHER
+  //   WITHHOLD BOTH OR CARRY BOTH. A half-declaration is not a partial
+  //   truth — the user agent completes it into a whole falsehood.
+  //
+  // So the style keyword now rides the WIDTH alone. With the width refused,
+  // the root falls to `border: 0` and the carried colour paints nothing:
+  // measured at 92.26 on button-group-base (from 80.15). Two spellings score
+  // higher and neither is ours to write: a uniform `1px` (95.35) INVENTS
+  // three edges the canvas does not draw, and the exact per-side `0 1px 0 0`
+  // (94.42) is the very spelling the capture receipt refuses — the
+  // conformance case `stroke-weights-nonuniform` pins "the proposal must not
+  // invent per-side widths". Carrying per-side weights is a CAPTURE change,
+  // not an emitter licence; until the dump carries them, withholding is the
+  // honest half of the rule and 3.09 points stay named rather than guessed.
+  const hasBorderWidth =
+    'border-width' in rootTokens || 'border-width' in (root.literals ?? {});
+  if (hasBorderWidth) rootDecls.push('border-style: solid');
   else rootDecls.push('border: 0');
+  // The OTHER stroke vocabulary gets NO such synthesis, and the reason is
+  // this round's own lesson pointed at itself. dump v1.11 lowers an
+  // OUTSIDE-aligned Figma stroke to `outline-*`, and a CSS outline paints
+  // nothing without `outline-style` — so the temptation is to make the
+  // keyword ride `outline-width` exactly as `border-style` rides
+  // `border-width` above. That is WRONG, and it was measured wrong: a
+  // resting `outline: Npx solid transparent` is a standard CSS idiom for
+  // reserving focus-ring space, and CSS-extracted contracts are full of it.
+  // Carbon's Tag carries a resting outline-width with OPAQUE per-tone
+  // colours (#a2191f red, #0043ce blue, …); synthesising the keyword drew a
+  // 2px ring around every Tag in the library at rest.
+  //
+  // A border-width means "draw a border" because Figma has no other reason
+  // to carry one. An outline-width does NOT mean "draw an outline" — the
+  // fact that decides it is `outline-style`, which is already a DECLARED
+  // channel and is emitted verbatim below. So the inversion DECLARES it
+  // (core/propose-figma.ts, strokeVocabulary) and the emitter never guesses
+  // it. Infer a keyword from its sibling in one direction and you get round
+  // 5's black focus rings; infer it in the other and you get rings on
+  // everything. Carry it.
   // GAP-CLOSING ROUND 6 — THE OTHER HALF OF THAT RESET.
   //
   // The line above already knows the principle: a contract that declares no
@@ -1802,8 +1852,14 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         decls.push(`${cssProp}: ${sameAsRoot ? ovVal(cssProp, cssVar(refPath)) : cssVar(refPath)}`);
       }
     }
+    // ROUND 9: the same carry-both-or-withhold-both rule as the root above —
+    // a nested part with a border COLOUR and no width used to emit the style
+    // keyword and let the UA's `medium` (3px) finish it. A part has no
+    // `border: 0` reset to fall back to, so withholding here is simply not
+    // writing the keyword: with no style, a border paints nothing whatever
+    // the UA's width is.
     if (
-      (part.tokens && ('border-width' in part.tokens || 'border-color' in part.tokens)) ||
+      (part.tokens && 'border-width' in part.tokens) ||
       (part.literals && 'border-width' in part.literals)
     ) {
       decls.push('border-style: solid');

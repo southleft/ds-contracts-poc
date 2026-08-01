@@ -8,8 +8,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-style: solid;
+  border: 0;
   border-radius: var(--imported-avatar-root-border-radius);
+  outline-style: solid;
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -17,18 +18,18 @@
 }
 
 .state-default {
-  border-color: var(--imported-avatar-root-border-color-default);
-  border-width: var(--imported-avatar-root-border-width-default);
+  outline-color: var(--imported-avatar-root-outline-color-default);
+  outline-width: var(--imported-avatar-root-outline-width-default);
 }
 
 .state-hover {
-  border-color: var(--imported-avatar-root-border-color-hover);
-  border-width: var(--imported-avatar-root-border-width-hover);
+  outline-color: var(--imported-avatar-root-outline-color-hover);
+  outline-width: var(--imported-avatar-root-outline-width-hover);
 }
 
 .state-focused {
-  border-color: var(--imported-avatar-root-border-color-focused);
-  border-width: var(--imported-avatar-root-border-width-focused);
+  outline-color: var(--imported-avatar-root-outline-color-focused);
+  outline-width: var(--imported-avatar-root-outline-width-focused);
 }
 
 .root[data-placeholder][data-text] {

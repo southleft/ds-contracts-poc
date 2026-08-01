@@ -189,7 +189,13 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       // component's box is contract-governed — h1-h6/p/hr/ul/… UA margins
       // never leak into the composing layout.
       if (rootElementsOf(contract).some((el) => UA_MARGIN_ELEMENTS.has(el))) s.margin = 0;
-      if ('border-width' in rootTokens || 'border-color' in rootTokens) s.borderStyle = 'solid';
+      // ROUND 9 — carry both or withhold both (emit-react's root rule, same
+      // words): a border COLOUR with no width used to emit the style keyword
+      // and let the UA's `medium` (3px) complete it. The keyword rides the
+      // WIDTH. `outline-style` is deliberately NOT synthesised the same way —
+      // see the long note in core/emit-react.ts; it is a DECLARED fact the
+      // inversion carries, never one the emitter infers.
+      if ('border-width' in rootTokens) s.borderStyle = 'solid';
       else s.border = 0;
       // Slot-wrapper floor (live-gauntlet class ⑤): a SLOT-ONLY root with
       // BOTH height and max-width is a drawn FIXED wrapper — an empty slot's
@@ -266,7 +272,7 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
           : `ds-inline-pulse 1.6s ease-in-out infinite`;
         usedAnimations.add(part.animation);
       }
-      if (part.tokens && ('border-width' in part.tokens || 'border-color' in part.tokens)) {
+      if (part.tokens && 'border-width' in part.tokens) {
         s.borderStyle = 'solid';
       }
     }

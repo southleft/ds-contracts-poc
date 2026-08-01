@@ -1101,8 +1101,26 @@ function applyTokens(
   /** task #37: the part's MEASURED sizing evidence for its max-width
    *  channel — see the `max-width` case below and Part.hugsBelowMaxWidth. */
   hugsBelowMaxWidth?: boolean,
+  /** The part's DECLARED keyword facts. Only `outline-style` is read here,
+   *  and it is the fact that decides whether the outline pair is a drawn
+   *  ring (an OUTSIDE-aligned canvas stroke) or a resting CSS
+   *  focus-ring reservation that paints nothing — see the outline cases. */
+  declared?: Record<string, string>,
 ): TextCtx {
   const next: TextCtx = { ...ctx };
+  // ROUND 9 — DOES THIS OUTLINE ACTUALLY PAINT?
+  //
+  // A CSS outline with no `outline-style` draws NOTHING, and `outline: Npx
+  // solid transparent` is a standard idiom for reserving focus-ring space,
+  // so CSS-extracted contracts carry resting outline pairs in bulk — Carbon
+  // alone has them on Tabs, TextInput, InlineNotification and Tag, the last
+  // with OPAQUE per-tone colours. None of those is a drawn ring, and turning
+  // them into canvas strokes put a 2px outline around every Tag in the
+  // library. The pair alone therefore cannot decide; the declared KEYWORD
+  // can, and dump v1.11's inversion declares it for exactly the strokes that
+  // are drawn OUTSIDE.
+  const outlinePaints =
+    declared?.['outline-style'] !== undefined && declared['outline-style'] !== 'none';
   // Round 5c (canvas-gate finding): the floor promotes border-COLOR
   // longhands (border-top/right/bottom/left-color — the RadioButton ring
   // rode them and silently dropped, so the unchecked circle never drew).
@@ -1125,6 +1143,37 @@ function applyTokens(
   const hasWidthSource = ['border-width', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width']
     .some((chn) => tokens[chn] !== undefined);
   const uniformSideStroke = sidePaths.length > 0 && sideValues.size === 1 && hasWidthSource ? figmaName(sidePaths[0]) : null;
+  // Decided BEFORE the loop so it cannot depend on which channel the switch
+  // happens to reach first: a Figma node has ONE strokes paint, so a drawn
+  // outline and a drawn border compete for it, and the winner must not be
+  // whichever key `Object.entries` yields last. The BORDER wins — it is the
+  // resting fact — and the outline is then refused by name.
+  const borderClaimsStroke = tokens['border-color'] !== undefined || uniformSideStroke !== null;
+  // …and the colour has to actually paint. `outline: 2px solid transparent`
+  // is the focus-ring-reservation idiom, so a CSS-extracted contract really
+  // does declare outline-style: solid over a fully transparent colour
+  // (Carbon's InlineNotification close button, TextInput, Tabs). This is the
+  // SAME value test `hasWidthSource` above already applies to the border
+  // pair — the file does not lower stroke facts that render nothing — and it
+  // is evaluated per variant-combination, so Avatar's per-state ring draws a
+  // canvas stroke on its FOCUSED variants and none on default/hover, which
+  // is exactly what the canvas draws.
+  const outlineColorPaints = (() => {
+    const ref = tokens['outline-color'];
+    if (ref === undefined) return false;
+    let path = ref.slice(1, -1);
+    for (const [propName, value] of Object.entries(subst)) path = path.replaceAll(`{${propName}}`, value);
+    const v = String(resolveLiteral(path)).trim().toLowerCase();
+    if (v === 'transparent' || v === 'none') return false;
+    if (/^#[0-9a-f]{6}00$/.test(v) || /^#[0-9a-f]{3}0$/.test(v)) return false;
+    const rgba = v.match(/^rgba?\([^)]*?,\s*0*(?:\.0+)?\s*\)$/);
+    return rgba === null;
+  })();
+  const outlineDrawsStroke =
+    outlinePaints &&
+    outlineColorPaints &&
+    tokens['outline-width'] !== undefined &&
+    !borderClaimsStroke;
   for (const [cssProp, ref] of Object.entries(tokens)) {
     let tokenPath = ref.slice(1, -1);
     for (const [propName, value] of Object.entries(subst)) {
@@ -1286,6 +1335,42 @@ function applyTokens(
         break;
       case 'outline-width:outline-preview':
         spec.bindings = { ...spec.bindings, strokeWeight: varName };
+        break;
+      // ROUND 9 — THE RETURN LEG FOR AN OUTSIDE-ALIGNED STROKE.
+      //
+      // dump v1.11 captures strokeAlign, and propose lowers an OUTSIDE
+      // stroke to the outline vocabulary because that is its only exact CSS
+      // twin. This is where that spelling has to survive the trip BACK: the
+      // canvas fact it came from is `strokeAlign = 'OUTSIDE'`, and emitting
+      // it as a default INSIDE stroke would silently return a different
+      // drawing than the one captured — the ring would move 4px inward and
+      // the round trip would report a match.
+      //
+      // The machinery is the state-preview path's, unchanged: spec.stroke +
+      // spec.strokeOutside, which strokeAlignJs lowers to a literal
+      // `'OUTSIDE'` at every stroke site (frame, shape, boxed-text wrapper).
+      //
+      // PAIR-GATED, exactly as translateStateOverrides gates the preview
+      // stamp, and for the reason the comment above records: a LONE resting
+      // outline channel must stay inert. A CSS outline with no width paints
+      // nothing, emit-react only writes `outline-style: solid` when the
+      // WIDTH is carried, and the Button tone maps carry resting outline
+      // colours that must not become canvas rings. Both halves or neither —
+      // the same rule the border pair got this round.
+      case 'outline-color':
+        if (outlineDrawsStroke) {
+          spec.stroke = varName;
+          spec.strokeOutside = true;
+        } else {
+          miss(spec, cssProp, outlineRefusal(outlinePaints && outlineColorPaints, borderClaimsStroke, 'outline-width'));
+        }
+        break;
+      case 'outline-width':
+        if (outlineDrawsStroke) {
+          spec.bindings = { ...spec.bindings, strokeWeight: varName };
+        } else {
+          miss(spec, cssProp, outlineRefusal(outlinePaints && outlineColorPaints, borderClaimsStroke, 'outline-color'));
+        }
         break;
       case 'border-radius':
         spec.bindings = {
@@ -1477,6 +1562,19 @@ function applyTokens(
     }
   }
   return next;
+}
+
+/** ROUND 9: why an outline channel did not become a canvas stroke. Three
+ *  distinct reasons, each named rather than collapsed into one, because they
+ *  are three different things an adopter would fix differently. */
+function outlineRefusal(paints: boolean, borderWins: boolean, sibling: string): string {
+  if (!paints) {
+    return 'a resting outline with no drawn `outline-style` paints nothing in CSS — this is the focus-ring-reservation idiom (`outline: Npx solid transparent`), so it correctly draws no canvas stroke either. An OUTSIDE-aligned canvas stroke declares outline-style and DOES draw.';
+  }
+  if (borderWins) {
+    return 'a Figma node carries ONE strokes paint and a border already claims it — a drawn border and a drawn outline cannot both be strokes, so the BORDER (the resting fact) wins and the outline is named here.';
+  }
+  return `a drawn outline needs BOTH halves and ${sibling} is not carried — carry the pair and it returns as an OUTSIDE-aligned stroke.`;
 }
 
 /** SILENT-LOSS ROUND (task #33, fix 3): record a carried-but-undrawable
@@ -1708,7 +1806,7 @@ function applyStyling(
   subst: Record<string, string>,
   ctx: TextCtx,
 ): TextCtx {
-  const t = applyTokens(spec, resolveTokens(part, subst), subst, ctx, part.hugsBelowMaxWidth);
+  const t = applyTokens(spec, resolveTokens(part, subst), subst, ctx, part.hugsBelowMaxWidth, part.declared);
   const l = applyLiterals(spec, resolveLiterals(part, subst), t);
   // absolute-position round: content-box geometry means captured width/
   // height EXCLUDE padding — a canvas frame resize is border-box, so the

@@ -138,6 +138,14 @@ export interface DumpNode {
   fill?: DumpPaint;
   stroke?: DumpPaint;
   strokeWeight?: number;
+  /** Where the stroke weight is drawn relative to the node box (dump v1.11,
+   *  additive). Captured on EVERY stroke, INSIDE included — an ABSENT field
+   *  means "not captured" (dump ≤ v1.10), which is NOT the same fact as
+   *  INSIDE and must not be read as one; that conflation is what let
+   *  Untitled UI's OUTSIDE Avatar focus ring lower to an inward CSS border
+   *  for eight rounds. OUTSIDE inverts to the outline vocabulary, INSIDE to
+   *  border, CENTER is refused BY NAME (stroke-align-unsupported). */
+  strokeAlign?: 'INSIDE' | 'CENTER' | 'OUTSIDE';
   /** Literal min/max sizing in px (dump v1.4, additive) — carried as
    *  min-width/min-height/max-width/max-height style facts (a drawn
    *  minHeight 44 is a tap-target fact). Bound min/max variables ride

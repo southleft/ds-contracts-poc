@@ -6,7 +6,7 @@
     "matched": 10822,
     "diverged": 1977,
     "loss": 4250,
-    "invented": 6419
+    "invented": 6203
   },
   "results": [
     {
@@ -10660,48 +10660,6 @@
       ],
       "invented": [
         {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Company, Text=True",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -10770,20 +10728,6 @@
           "channel": "prop:Size",
           "value": "xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Company, Text=True",
@@ -10924,20 +10868,6 @@
           "channel": "prop:Size",
           "value": "xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Online indicator, Text=True",
@@ -11015,20 +10945,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Online indicator, Text=True",
@@ -11185,48 +11101,6 @@
           "tag": "restructured"
         },
         {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Company, Text=False",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -11295,20 +11169,6 @@
           "channel": "prop:Size",
           "value": "xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Company, Text=False",
@@ -11449,20 +11309,6 @@
           "channel": "prop:Size",
           "value": "xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xl, State=Default, Status icon=Online indicator, Text=False",
@@ -11540,20 +11386,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xl, State=Hover, Status icon=Online indicator, Text=False",
@@ -11774,20 +11606,6 @@
         },
         {
           "variant": "Placeholder=True, Size=xl, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Default, Status icon=False, Text=False",
           "path": "user/instance",
           "channel": "kind",
           "value": "instance",
@@ -11834,20 +11652,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=xl, State=Hover, Status icon=False, Text=False",
@@ -11946,20 +11750,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=xl, State=Default, Status icon=Company, Text=False",
@@ -12079,20 +11869,6 @@
           "channel": "prop:Size",
           "value": "xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=xl, State=Hover, Status icon=Company, Text=False",
@@ -12331,20 +12107,6 @@
           "channel": "prop:Size",
           "value": "xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=xl, State=Default, Status icon=Online indicator, Text=False",
@@ -12471,20 +12233,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xl, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=xl, State=Hover, Status icon=Online indicator, Text=False",
@@ -12739,48 +12487,6 @@
           "tag": "restructured"
         },
         {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Company, Text=True",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -12849,20 +12555,6 @@
           "channel": "prop:Size",
           "value": "2xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Company, Text=True",
@@ -13003,20 +12695,6 @@
           "channel": "prop:Size",
           "value": "2xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Online indicator, Text=True",
@@ -13094,20 +12772,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Online indicator, Text=True",
@@ -13264,48 +12928,6 @@
           "tag": "restructured"
         },
         {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Company, Text=False",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -13374,20 +12996,6 @@
           "channel": "prop:Size",
           "value": "2xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Company, Text=False",
@@ -13528,20 +13136,6 @@
           "channel": "prop:Size",
           "value": "2xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=2xl, State=Default, Status icon=Online indicator, Text=False",
@@ -13619,20 +13213,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=2xl, State=Hover, Status icon=Online indicator, Text=False",
@@ -13853,20 +13433,6 @@
         },
         {
           "variant": "Placeholder=True, Size=2xl, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Default, Status icon=False, Text=False",
           "path": "user/instance",
           "channel": "kind",
           "value": "instance",
@@ -13913,20 +13479,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=2xl, State=Hover, Status icon=False, Text=False",
@@ -14025,20 +13577,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=2xl, State=Default, Status icon=Company, Text=False",
@@ -14158,20 +13696,6 @@
           "channel": "prop:Size",
           "value": "2xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=2xl, State=Hover, Status icon=Company, Text=False",
@@ -14410,20 +13934,6 @@
           "channel": "prop:Size",
           "value": "2xl",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=2xl, State=Default, Status icon=Online indicator, Text=False",
@@ -14550,20 +14060,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=2xl, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=2xl, State=Hover, Status icon=Online indicator, Text=False",
@@ -14818,48 +14314,6 @@
           "tag": "restructured"
         },
         {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Company, Text=True",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -14928,20 +14382,6 @@
           "channel": "prop:Size",
           "value": "lg",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Company, Text=True",
@@ -15082,20 +14522,6 @@
           "channel": "prop:Size",
           "value": "lg",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Online indicator, Text=True",
@@ -15173,20 +14599,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Online indicator, Text=True",
@@ -15343,48 +14755,6 @@
           "tag": "restructured"
         },
         {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Company, Text=False",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -15453,20 +14823,6 @@
           "channel": "prop:Size",
           "value": "lg",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Company, Text=False",
@@ -15607,20 +14963,6 @@
           "channel": "prop:Size",
           "value": "lg",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=lg, State=Default, Status icon=Online indicator, Text=False",
@@ -15698,20 +15040,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=lg, State=Hover, Status icon=Online indicator, Text=False",
@@ -15932,20 +15260,6 @@
         },
         {
           "variant": "Placeholder=True, Size=lg, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Default, Status icon=False, Text=False",
           "path": "user/instance",
           "channel": "kind",
           "value": "instance",
@@ -15992,20 +15306,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=lg, State=Hover, Status icon=False, Text=False",
@@ -16104,20 +15404,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=lg, State=Default, Status icon=Company, Text=False",
@@ -16237,20 +15523,6 @@
           "channel": "prop:Size",
           "value": "lg",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=lg, State=Hover, Status icon=Company, Text=False",
@@ -16489,20 +15761,6 @@
           "channel": "prop:Size",
           "value": "lg",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=lg, State=Default, Status icon=Online indicator, Text=False",
@@ -16629,20 +15887,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=lg, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=lg, State=Hover, Status icon=Online indicator, Text=False",
@@ -16897,48 +16141,6 @@
           "tag": "restructured"
         },
         {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=md, State=Default, Status icon=Company, Text=True",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -17007,20 +16209,6 @@
           "channel": "prop:Size",
           "value": "md",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Company, Text=True",
@@ -17161,20 +16349,6 @@
           "channel": "prop:Size",
           "value": "md",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=md, State=Default, Status icon=Online indicator, Text=True",
@@ -17252,20 +16426,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Online indicator, Text=True",
@@ -17422,48 +16582,6 @@
           "tag": "restructured"
         },
         {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=md, State=Default, Status icon=Company, Text=False",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -17532,20 +16650,6 @@
           "channel": "prop:Size",
           "value": "md",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Company, Text=False",
@@ -17686,20 +16790,6 @@
           "channel": "prop:Size",
           "value": "md",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=md, State=Default, Status icon=Online indicator, Text=False",
@@ -17777,20 +16867,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=md, State=Hover, Status icon=Online indicator, Text=False",
@@ -18011,20 +17087,6 @@
         },
         {
           "variant": "Placeholder=True, Size=md, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Default, Status icon=False, Text=False",
           "path": "user/instance",
           "channel": "kind",
           "value": "instance",
@@ -18071,20 +17133,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=md, State=Hover, Status icon=False, Text=False",
@@ -18183,20 +17231,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=md, State=Default, Status icon=Company, Text=False",
@@ -18316,20 +17350,6 @@
           "channel": "prop:Size",
           "value": "md",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=md, State=Hover, Status icon=Company, Text=False",
@@ -18568,20 +17588,6 @@
           "channel": "prop:Size",
           "value": "md",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=md, State=Default, Status icon=Online indicator, Text=False",
@@ -18708,20 +17714,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=md, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=md, State=Hover, Status icon=Online indicator, Text=False",
@@ -18976,48 +17968,6 @@
           "tag": "restructured"
         },
         {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Company, Text=True",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -19086,20 +18036,6 @@
           "channel": "prop:Size",
           "value": "sm",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Company, Text=True",
@@ -19240,20 +18176,6 @@
           "channel": "prop:Size",
           "value": "sm",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Online indicator, Text=True",
@@ -19331,20 +18253,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Online indicator, Text=True",
@@ -19501,48 +18409,6 @@
           "tag": "restructured"
         },
         {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Company, Text=False",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -19611,20 +18477,6 @@
           "channel": "prop:Size",
           "value": "sm",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Company, Text=False",
@@ -19765,20 +18617,6 @@
           "channel": "prop:Size",
           "value": "sm",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=sm, State=Default, Status icon=Online indicator, Text=False",
@@ -19856,20 +18694,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=sm, State=Hover, Status icon=Online indicator, Text=False",
@@ -20090,20 +18914,6 @@
         },
         {
           "variant": "Placeholder=True, Size=sm, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Default, Status icon=False, Text=False",
           "path": "user/instance",
           "channel": "kind",
           "value": "instance",
@@ -20150,20 +18960,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=sm, State=Hover, Status icon=False, Text=False",
@@ -20262,20 +19058,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=sm, State=Default, Status icon=Company, Text=False",
@@ -20395,20 +19177,6 @@
           "channel": "prop:Size",
           "value": "sm",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=sm, State=Hover, Status icon=Company, Text=False",
@@ -20647,20 +19415,6 @@
           "channel": "prop:Size",
           "value": "sm",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=sm, State=Default, Status icon=Online indicator, Text=False",
@@ -20787,20 +19541,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=sm, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=sm, State=Hover, Status icon=Online indicator, Text=False",
@@ -21055,48 +19795,6 @@
           "tag": "restructured"
         },
         {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=False, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Company, Text=True",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -21165,20 +19863,6 @@
           "channel": "prop:Size",
           "value": "xs",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Company, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Company, Text=True",
@@ -21319,20 +20003,6 @@
           "channel": "prop:Size",
           "value": "xs",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Online indicator, Text=True",
@@ -21410,20 +20080,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Online indicator, Text=True",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Online indicator, Text=True",
@@ -21580,48 +20236,6 @@
           "tag": "restructured"
         },
         {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
           "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Company, Text=False",
           "path": "avatarcompanyicon/avatarcompanyiconinstance",
           "channel": "kind",
@@ -21690,20 +20304,6 @@
           "channel": "prop:Size",
           "value": "xs",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Company, Text=False",
@@ -21844,20 +20444,6 @@
           "channel": "prop:Size",
           "value": "xs",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xs, State=Default, Status icon=Online indicator, Text=False",
@@ -21935,20 +20521,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=False, Size=xs, State=Hover, Status icon=Online indicator, Text=False",
@@ -22169,20 +20741,6 @@
         },
         {
           "variant": "Placeholder=True, Size=xs, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Default, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Default, Status icon=False, Text=False",
           "path": "user/instance",
           "channel": "kind",
           "value": "instance",
@@ -22229,20 +20787,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Hover, Status icon=False, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=xs, State=Hover, Status icon=False, Text=False",
@@ -22341,20 +20885,6 @@
           "channel": "instanceOf",
           "value": "user",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Default, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=xs, State=Default, Status icon=Company, Text=False",
@@ -22474,20 +21004,6 @@
           "channel": "prop:Size",
           "value": "xs",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Hover, Status icon=Company, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=xs, State=Hover, Status icon=Company, Text=False",
@@ -22726,20 +21242,6 @@
           "channel": "prop:Size",
           "value": "xs",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Default, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=xs, State=Default, Status icon=Online indicator, Text=False",
@@ -22866,20 +21368,6 @@
           "channel": "prop:Online",
           "value": "true",
           "tag": "restructured"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "stroke",
-          "value": "#000000@0",
-          "tag": "zero-stroke"
-        },
-        {
-          "variant": "Placeholder=True, Size=xs, State=Hover, Status icon=Online indicator, Text=False",
-          "path": "",
-          "channel": "strokeWeight",
-          "value": "0",
-          "tag": "zero-stroke"
         },
         {
           "variant": "Placeholder=True, Size=xs, State=Hover, Status icon=Online indicator, Text=False",

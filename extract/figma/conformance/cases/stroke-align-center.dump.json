@@ -1,0 +1,58 @@
+{
+ "_provenance": {
+  "fileKey": null,
+  "dumpVersion": "1.11",
+  "note": "canvas conformance fixture - hand-authored dump v1.11"
+ },
+ "Case": {
+  "setName": "Case",
+  "type": "COMPONENT",
+  "variants": [
+   {
+    "name": "Case",
+    "type": "COMPONENT",
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "stroke": {
+     "var": "color/border/subtle"
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "CENTER",
+    "fill": {
+     "var": "color/surface/background"
+    },
+    "children": [
+     {
+      "name": "a",
+      "type": "TEXT",
+      "text": {
+       "characters": "Case",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "style": "badge"
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "_degradations": [
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Case:Case",
+   "message": "strokeAlign CENTER - a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  }
+ ]
+}

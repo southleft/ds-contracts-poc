@@ -16,9 +16,9 @@ Score = % pixels within tolerance. v2.0 clips the render to the UNION bounding b
 | slider | 40 | 93.5 | 0 | 0 | 0 |
 | progress-bar | 55 | 94.6 | 0 | 0 | 0 |
 | progress-circle | 16 | 86.5 | 4 | 0 | 0 |
-| avatar | 162 | 84.0 | 0 | 0 | 0 |
+| avatar | 162 | 86.3 | 0 | 0 | 0 |
 | avatar-label-group | 12 | 87.0 | 0 | 24 | 0 |
 | avatar-add-button | 6 | 96.6 | 0 | 6 | 0 |
-| button-group-base | 32 | 79.5 | 0 | 0 | 0 |
+| button-group-base | 32 | 69.8 | 0 | 0 | 0 |
 | social-button | 108 | 88.5 | 0 | 0 | 0 |
-| **ALL** | 537 | **87.4** | | | |
+| **ALL** | 537 | **87.6** | | | |
