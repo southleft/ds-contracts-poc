@@ -27,7 +27,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
     placeholder = false,
     text = true,
     className,
-    children,
+    children = 'OR',
     ...rest
   },
   ref,
@@ -54,7 +54,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
           <User />
         </div>
       ) : null}
-      {text ? <span className={styles.Text}>OR</span> : null}
+      {text ? <span className={styles.Text}>{children}</span> : null}
       {statusIcon === 'onlineIndicator' ? (
         <div className={styles.AvatarOnlineIndicator}>
           <AvatarOnlineIndicator size={size} online="true" />

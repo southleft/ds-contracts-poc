@@ -1,4 +1,4 @@
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.9).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.10).
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -43,6 +43,28 @@
 //   instanceOf         INSTANCE nodes: the main component's owning set name
 //   componentProperties INSTANCE nodes (dump v1.1, additive): applied property
 //                      values, so nested component refs keep their fixed props
+//                      — VARIANT and TEXT-property values alike (a TEXT
+//                      component property's characters ride here, keyed with
+//                      the Plugin API's "#id" suffix). A component set with NO
+//                      TEXT property has nothing to carry in this channel:
+//                      its hosts override characters DIRECTLY, which is
+//                      `textOverrides` below.
+//   textOverrides      INSTANCE nodes (dump v1.10): the characters a HOST sets
+//                      on this instance's text descendants when the child
+//                      component exposes NO TEXT property — the field case
+//                      dump v1.1–v1.9 dropped entirely (Untitled UI's Tooltip
+//                      and Avatar have zero TEXT properties, so a slider's
+//                      "0%" and an avatar group's "+5" chip were invisible and
+//                      the child's own default characters rendered instead).
+//                      Source: InstanceNode.overrides, filtered to entries
+//                      whose overriddenFields include 'characters' — Figma's
+//                      own answer to "what did this host change?", never a
+//                      diff we compute. Keyed by the overridden node's NAME
+//                      PATH inside the instance ("Content/Text"), value = the
+//                      drawn characters. This is the ONE targeted read-only
+//                      walk into instance internals (dump v1 otherwise never
+//                      recurses); an override the walk cannot locate is a
+//                      named degradation, never a guess.
 //   instanceKey /      INSTANCE nodes (dump v1.5): the main component's publish
 //   instanceSetKey     key and its owning set's key — rename-safe identity the
 //                      session-linking resolver matches against in-scope
@@ -559,6 +581,49 @@ async function dumpNode(node, nodePath, parent) {
       // componentProperties can throw on detached/broken instances — dump v1
       // fixtures shipped without this field, so absence is always tolerated.
     }
+    // dump v1.10: TEXT OVERRIDES — the one channel a child component with no
+    // TEXT property leaves nowhere else to land. InstanceNode.overrides is
+    // Figma's OWN record of what this host changed; we filter it to
+    // 'characters' and resolve each reported id against this instance's TEXT
+    // descendants (the single targeted walk — names only, no styling, no
+    // structure). Nothing is diffed against the main component: an entry
+    // present here is an override BY FIGMA'S ACCOUNT.
+    try {
+      const overridden = {};
+      let overriddenCount = 0;
+      for (const o of node.overrides || []) {
+        if (o && o.id && Array.isArray(o.overriddenFields) && o.overriddenFields.indexOf('characters') >= 0) {
+          overridden[o.id] = true;
+          overriddenCount++;
+        }
+      }
+      if (overriddenCount > 0 && typeof node.findAll === 'function') {
+        const textOverrides = {};
+        let located = 0;
+        for (const t of node.findAll(function (n) { return n.type === 'TEXT'; }).slice(0, 60)) {
+          if (!overridden[t.id]) continue;
+          const seg = [];
+          for (let p = t; p && p.id !== node.id; p = p.parent) seg.unshift(p.name);
+          // A duplicate name path is ambiguous — the LAST writer would win
+          // silently, so the whole path is refused by name instead.
+          if (Object.prototype.hasOwnProperty.call(textOverrides, seg.join('/'))) {
+            degrade('text-override-ambiguous-path', nodePath, 'two text descendants of this instance share the name path "' + seg.join('/') + '" — both character overrides refused (a name path must identify one node)');
+            textOverrides[seg.join('/')] = null;
+            located++;
+            continue;
+          }
+          textOverrides[seg.join('/')] = t.characters;
+          located++;
+        }
+        for (const k of Object.keys(textOverrides)) if (textOverrides[k] === null) delete textOverrides[k];
+        if (Object.keys(textOverrides).length > 0) out.textOverrides = textOverrides;
+        if (located < overriddenCount) {
+          degrade('text-override-unlocated', nodePath, (overriddenCount - located) + ' of ' + overriddenCount + ' character override(s) reported by InstanceNode.overrides could not be matched to a TEXT descendant of this instance (hidden branch, or past the 60-node walk cap) — not captured');
+        }
+      }
+    } catch (e) {
+      degrade('text-override-unreadable', nodePath, 'InstanceNode.overrides threw — per-instance character overrides not captured for this instance (the child renders its own default characters)');
+    }
   }
 
   if ('children' in node && node.type !== 'INSTANCE') {
@@ -596,8 +661,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.9) for design→contract proposal.',
-    dumpVersion: '1.9',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.10) for design→contract proposal.',
+    dumpVersion: '1.10',
   },
 };
 dumps._degradations = degradations;

@@ -47,6 +47,17 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
                       ? 'bottomCenter'
                       : undefined
                 }
+                children={
+                  leftControl === '0'
+                    ? '0%'
+                    : leftControl === '25'
+                      ? '25%'
+                      : leftControl === '50'
+                        ? '50%'
+                        : leftControl === '75'
+                          ? '75%'
+                          : undefined
+                }
               />
             </div>
           ) : null}
@@ -75,6 +86,17 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
                     : label === 'topFloating'
                       ? 'bottomCenter'
                       : undefined
+                }
+                children={
+                  rightControl === '25'
+                    ? '25%'
+                    : rightControl === '50'
+                      ? '50%'
+                      : rightControl === '75'
+                        ? '75%'
+                        : rightControl === '100'
+                          ? '100%'
+                          : undefined
                 }
               />
             </div>

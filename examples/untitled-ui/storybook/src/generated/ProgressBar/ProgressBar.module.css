@@ -51,6 +51,7 @@
   flex: 1 1 auto;
   min-width: 0;
   border-radius: var(--imported-shared-size-8);
+  height: var(--imported-shared-size-8);
   position: relative;
 }
 

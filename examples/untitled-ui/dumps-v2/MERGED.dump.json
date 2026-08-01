@@ -1,9 +1,9 @@
 {
  "_provenance": {
   "fileKey": "FVZZLlnv0FCdN44wfo0JeG",
-  "extractedAt": "2026-07-31",
-  "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.7) for design→contract proposal.",
-  "dumpVersion": "1.7"
+  "extractedAt": "2026-08-01",
+  "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.10) for design→contract proposal.",
+  "dumpVersion": "1.10"
  },
  "_Avatar add button": {
   "setName": "_Avatar add button",
@@ -742,6 +742,9 @@
        "Supporting text": "False",
        "Theme": "Dark",
        "Arrow": "Bottom center"
+      },
+      "textOverrides": {
+       "Content/Text": "Add user"
       }
      },
      {
@@ -899,6 +902,9 @@
        "Supporting text": "False",
        "Theme": "Dark",
        "Arrow": "Bottom center"
+      },
+      "textOverrides": {
+       "Content/Text": "Add user"
       }
      },
      {
@@ -1056,6 +1062,9 @@
        "Supporting text": "False",
        "Theme": "Dark",
        "Arrow": "Bottom center"
+      },
+      "textOverrides": {
+       "Content/Text": "Add user"
       }
      },
      {
@@ -1590,6 +1599,9 @@
          "Text": "True",
          "Status icon": "False",
          "State": "Default"
+        },
+        "textOverrides": {
+         "Text": "+5"
         }
        }
       ]
@@ -2619,6 +2631,9 @@
          "Text": "True",
          "Status icon": "False",
          "State": "Default"
+        },
+        "textOverrides": {
+         "Text": "+5"
         }
        }
       ]
@@ -3596,6 +3611,9 @@
          "Text": "True",
          "Status icon": "False",
          "State": "Default"
+        },
+        "textOverrides": {
+         "Text": "+5"
         }
        }
       ]
@@ -4625,6 +4643,9 @@
          "Text": "True",
          "Status icon": "False",
          "State": "Default"
+        },
+        "textOverrides": {
+         "Text": "+5"
         }
        }
       ]
@@ -5602,6 +5623,9 @@
          "Text": "True",
          "Status icon": "False",
          "State": "Default"
+        },
+        "textOverrides": {
+         "Text": "+5"
         }
        }
       ]
@@ -6631,6 +6655,9 @@
          "Text": "True",
          "Status icon": "False",
          "State": "Default"
+        },
+        "textOverrides": {
+         "Text": "+5"
         }
        }
       ]
@@ -28440,6 +28467,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -28520,6 +28550,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -28600,6 +28633,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -28709,6 +28745,9 @@
          "Supporting text": "False",
          "Theme": "Light",
          "Arrow": "Bottom center"
+        },
+        "textOverrides": {
+         "Content/Text": "0%"
         }
        }
       ]
@@ -28740,6 +28779,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -28849,6 +28891,9 @@
          "Supporting text": "False",
          "Theme": "Light",
          "Arrow": "Top center"
+        },
+        "textOverrides": {
+         "Content/Text": "0%"
         }
        }
       ]
@@ -28880,6 +28925,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -28946,6 +28994,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -29026,6 +29077,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -29106,6 +29160,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -29227,6 +29284,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "10%"
           }
          }
         ]
@@ -29260,6 +29320,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -29381,6 +29444,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "10%"
           }
          }
         ]
@@ -29414,6 +29480,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -29480,6 +29549,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -29560,6 +29632,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -29640,6 +29715,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -29761,6 +29839,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "20%"
           }
          }
         ]
@@ -29794,6 +29875,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -29915,6 +29999,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "20%"
           }
          }
         ]
@@ -29948,6 +30035,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -30014,6 +30104,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -30094,6 +30187,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -30174,6 +30270,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -30295,6 +30394,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "30%"
           }
          }
         ]
@@ -30328,6 +30430,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -30449,6 +30554,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "30%"
           }
          }
         ]
@@ -30482,6 +30590,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -30548,6 +30659,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -30628,6 +30742,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -30708,6 +30825,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -30829,6 +30949,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "40%"
           }
          }
         ]
@@ -30862,6 +30985,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -30983,6 +31109,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "40%"
           }
          }
         ]
@@ -31016,6 +31145,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -31082,6 +31214,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -31162,6 +31297,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -31242,6 +31380,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -31363,6 +31504,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "50%"
           }
          }
         ]
@@ -31396,6 +31540,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -31517,6 +31664,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "50%"
           }
          }
         ]
@@ -31550,6 +31700,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -31616,6 +31769,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -31696,6 +31852,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -31776,6 +31935,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -31897,6 +32059,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "60%"
           }
          }
         ]
@@ -31930,6 +32095,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -32051,6 +32219,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "60%"
           }
          }
         ]
@@ -32084,6 +32255,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -32150,6 +32324,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -32230,6 +32407,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -32310,6 +32490,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -32431,6 +32614,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "70%"
           }
          }
         ]
@@ -32464,6 +32650,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -32585,6 +32774,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "70%"
           }
          }
         ]
@@ -32618,6 +32810,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -32684,6 +32879,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -32764,6 +32962,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -32844,6 +33045,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -32965,6 +33169,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "80%"
           }
          }
         ]
@@ -32998,6 +33205,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -33119,6 +33329,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "80%"
           }
          }
         ]
@@ -33152,6 +33365,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -33218,6 +33434,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -33298,6 +33517,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -33378,6 +33600,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -33499,6 +33724,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "90%"
           }
          }
         ]
@@ -33532,6 +33760,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -33653,6 +33884,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "90%"
           }
          }
         ]
@@ -33686,6 +33920,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -33752,6 +33989,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -33832,6 +34072,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -33912,6 +34155,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -34033,6 +34279,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "100%"
           }
          }
         ]
@@ -34066,6 +34315,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -34187,6 +34439,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "100%"
           }
          }
         ]
@@ -34220,6 +34475,9 @@
      {
       "name": "Progress bar",
       "type": "FRAME",
+      "fixedSize": {
+       "height": 8
+      },
       "cornerRadius": 8,
       "fillWidth": true,
       "children": [
@@ -36415,6 +36673,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "0%"
           }
          }
         ]
@@ -36559,6 +36820,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "25%"
           }
          }
         ]
@@ -36762,6 +37026,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "0%"
           }
          }
         ]
@@ -36906,6 +37173,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "25%"
           }
          }
         ]
@@ -37360,6 +37630,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "0%"
           }
          }
         ]
@@ -37504,6 +37777,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "50%"
           }
          }
         ]
@@ -37707,6 +37983,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "0%"
           }
          }
         ]
@@ -37851,6 +38130,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "50%"
           }
          }
         ]
@@ -38305,6 +38587,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "25%"
           }
          }
         ]
@@ -38449,6 +38734,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "50%"
           }
          }
         ]
@@ -38652,6 +38940,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "25%"
           }
          }
         ]
@@ -38796,6 +39087,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "50%"
           }
          }
         ]
@@ -39250,6 +39544,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "0%"
           }
          }
         ]
@@ -39394,6 +39691,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "75%"
           }
          }
         ]
@@ -39597,6 +39897,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "0%"
           }
          }
         ]
@@ -39741,6 +40044,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "75%"
           }
          }
         ]
@@ -40195,6 +40501,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "25%"
           }
          }
         ]
@@ -40339,6 +40648,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "75%"
           }
          }
         ]
@@ -40542,6 +40854,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "25%"
           }
          }
         ]
@@ -40686,6 +41001,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "75%"
           }
          }
         ]
@@ -41140,6 +41458,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "50%"
           }
          }
         ]
@@ -41284,6 +41605,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "75%"
           }
          }
         ]
@@ -41487,6 +41811,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "50%"
           }
          }
         ]
@@ -41631,6 +41958,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "75%"
           }
          }
         ]
@@ -42085,6 +42415,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "0%"
           }
          }
         ]
@@ -42229,6 +42562,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "100%"
           }
          }
         ]
@@ -42432,6 +42768,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "0%"
           }
          }
         ]
@@ -42576,6 +42915,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "100%"
           }
          }
         ]
@@ -43030,6 +43372,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "25%"
           }
          }
         ]
@@ -43174,6 +43519,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "100%"
           }
          }
         ]
@@ -43377,6 +43725,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "25%"
           }
          }
         ]
@@ -43521,6 +43872,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "100%"
           }
          }
         ]
@@ -43975,6 +44329,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "50%"
           }
          }
         ]
@@ -44119,6 +44476,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "100%"
           }
          }
         ]
@@ -44322,6 +44682,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "50%"
           }
          }
         ]
@@ -44466,6 +44829,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "100%"
           }
          }
         ]
@@ -44920,6 +45286,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "75%"
           }
          }
         ]
@@ -45064,6 +45433,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Top center"
+          },
+          "textOverrides": {
+           "Content/Text": "100%"
           }
          }
         ]
@@ -45267,6 +45639,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "75%"
           }
          }
         ]
@@ -45411,6 +45786,9 @@
            "Supporting text": "False",
            "Theme": "Light",
            "Arrow": "Bottom center"
+          },
+          "textOverrides": {
+           "Content/Text": "100%"
           }
          }
         ]

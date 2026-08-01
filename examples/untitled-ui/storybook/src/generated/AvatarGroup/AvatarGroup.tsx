@@ -58,7 +58,9 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(function
         <span className={styles.avatar10}>
           <Avatar size={size} text={false} statusIcon="false" state="default" />
         </span>
-        {moreUsers ? <Avatar size={size} text statusIcon="false" state="default" /> : null}
+        {moreUsers ? (
+          <Avatar size={size} text statusIcon="false" state="default" children="+5" />
+        ) : null}
       </div>
       {addUserButton ? <AvatarAddButton size={size} /> : null}
     </div>

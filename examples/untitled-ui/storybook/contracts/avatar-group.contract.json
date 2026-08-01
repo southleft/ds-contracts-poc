@@ -240,7 +240,8 @@
                   "placeholder": false,
                   "text": true,
                   "statusIcon": "false",
-                  "state": "default"
+                  "state": "default",
+                  "children": "+5"
                 }
               },
               "visibleWhen": {

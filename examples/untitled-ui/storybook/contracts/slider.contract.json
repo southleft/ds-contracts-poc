@@ -226,6 +226,15 @@
                               "bottomFloating": "topCenter",
                               "topFloating": "bottomCenter"
                             }
+                          },
+                          "children": {
+                            "prop": "leftControl",
+                            "map": {
+                              "0": "0%",
+                              "25": "25%",
+                              "50": "50%",
+                              "75": "75%"
+                            }
                           }
                         }
                       }
@@ -352,6 +361,15 @@
                             "map": {
                               "bottomFloating": "topCenter",
                               "topFloating": "bottomCenter"
+                            }
+                          },
+                          "children": {
+                            "prop": "rightControl",
+                            "map": {
+                              "25": "25%",
+                              "50": "50%",
+                              "75": "75%",
+                              "100": "100%"
                             }
                           }
                         }

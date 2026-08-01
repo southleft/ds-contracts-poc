@@ -19,14 +19,14 @@ The hand-built canvas used zero published variables, so captured.dtcg.json is `{
 | button-group-base | round trip closed | 32 → 32 | 496 | 64 | 72 | 32 |
 | dropdown-list-item | round trip closed | 24 → 12 | 127 | 14 | 125 | 144 |
 | input-field-base | round trip closed | 10 → 10 | 531 | 47 | 277 | 164 |
-| progress-bar | round trip closed | 55 → 55 | 1244 | 285 | 485 | 649 |
+| progress-bar | round trip closed | 55 → 55 | 1299 | 285 | 485 | 649 |
 | progress-circle | round trip closed | 16 → 16 | 315 | 94 | 225 | 231 |
 | slider | round trip closed | 40 → 64 | 1184 | 496 | 1180 | 1364 |
 | social-button | round trip closed | 108 → 108 | 1974 | 186 | 480 | 0 |
 | toggle-base | round trip closed | 32 → 10 | 147 | 13 | 32 | 0 |
 | tooltip | round trip closed | 28 → 28 | 868 | 138 | 241 | 196 |
 
-**15/15 round trips closed.** Across the closed ones: 10343 matched, 1991 diverged, 4660 one-way loss, 6077 invented.
+**15/15 round trips closed.** Across the closed ones: 10398 matched, 1991 diverged, 4660 one-way loss, 6077 invented.
 
 ## avatar — 162 → 216 variants
 
@@ -827,7 +827,7 @@ matched 531 · diverged 47 · loss 277 · invented 164
 
 ## progress-bar — 55 → 55 variants
 
-matched 1244 · diverged 285 · loss 485 · invented 649
+matched 1299 · diverged 285 · loss 485 · invented 649
 
 ### DIVERGED (value differs; original → round trip)
 

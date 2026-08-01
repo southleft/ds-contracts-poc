@@ -16,12 +16,12 @@ Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, capture
 |---|---|---|---|
 | Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **79.4%** mean over 537 scored variants in 15 sets (best toggle-base 98.7%, worst tooltip 67.7%) | `renders/fidelity.json` |
 | Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **82/82** green, 0 pinned red — 63 constructs expected CARRIED, 9 REFUSED, 10 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
-| Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** closed · 10,343 matched · 1,991 diverged · 4,660 loss · 6,077 invented | `extract/figma/roundtrip-uui/report.json` |
+| Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** closed · 10,398 matched · 1,991 diverged · 4,660 loss · 6,077 invented | `extract/figma/roundtrip-uui/report.json` |
 | The named-refusal surface | what the pipeline writes down when it will not carry something | **545** capture receipts in 7 codes · 15 stub contracts · 19 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
 
 ### The one sentence
 
-> **This tool reproduces a component's structure and its token bindings; it approximates its pixels.** Across the 537 variants that can be scored at all, mean agreement with the canvas reference is **79.4%**, only 76 of them (14.2%) reach 95% or better, and 13 reach 100% — so the emitted React is a faithful *specification* of each component and an *approximate* drawing of it. Adopt it to carry API, anatomy, and tokens across the boundary. Do not adopt it expecting pixel-exact output without review.
+> **This tool reproduces a component's structure and its token bindings; it approximates its pixels.** Across the 537 variants that can be scored at all, mean agreement with the canvas reference is **79.4%**, only 87 of them (16.2%) reach 95% or better, and 13 reach 100% — so the emitted React is a faithful *specification* of each component and an *approximate* drawing of it. Adopt it to carry API, anatomy, and tokens across the boundary. Do not adopt it expecting pixel-exact output without review.
 
 A second sentence an adopter should hear before anything else, quoted from the round-trip report rather than paraphrased:
 
@@ -31,11 +31,11 @@ A second sentence an adopter should hear before anything else, quoted from the r
 
 | band | variants | share of scored |
 |---|---|---|
-| ≥ 95 (indistinguishable at a glance) | 76 | 14.2% |
-| 90 – 95 | 55 | 10.2% |
-| 80 – 90 | 125 | 23.3% |
-| 70 – 80 | 177 | 33.0% |
-| < 70 (visibly a different drawing) | 104 | 19.4% |
+| ≥ 95 (indistinguishable at a glance) | 87 | 16.2% |
+| 90 – 95 | 51 | 9.5% |
+| 80 – 90 | 118 | 22.0% |
+| 70 – 80 | 171 | 31.8% |
+| < 70 (visibly a different drawing) | 110 | 20.5% |
 
 Method, quoted from `renders/FIDELITY.md`: *Score = % pixels within tolerance, both images content-trimmed then normalized to a common 200px box (canvas ref up to 2x export vs standalone render; v1.3 trims margins — unequal margins misaligned every pixel). v1.2: unknown axes consumed generically; axis-not-carried counts variants unrenderable because the inversion dropped their axis (genuine carriage losses only); state=disabled scores through the contract's disabled boolean; state=hover|focus variants are interaction-state (CSS-rendered, not statically scorable). Trend metric, not the final gate.*
 
@@ -83,7 +83,7 @@ The fixture proves the vocabulary exists. These counts prove the 15 full contrac
 | `asset` | 12 | 12 / 30 |
 | `mask` | 2 | 1 / 30 |
 
-And on the return leg, 10,343 facts came back from Figma identical to the way they were drawn — 44.8% of every fact compared.
+And on the return leg, 10,398 facts came back from Figma identical to the way they were drawn — 45.0% of every fact compared.
 
 ---
 
@@ -93,7 +93,7 @@ A refusal is a construct the pipeline will not carry **and says so**. Refusals a
 
 ### 3.1 Capture receipts — channels the dump has no projection for
 
-*Capture-side.* The dump writes a `_degradations` receipt whenever it meets a channel it cannot spell. Across the 15 committed dumps (dump versions 1.7×10, 1.8×1, 1.9×4) there are **545 receipts in 7 codes**:
+*Capture-side.* The dump writes a `_degradations` receipt whenever it meets a channel it cannot spell. Across the 15 committed dumps (dump versions 1.10×15) there are **545 receipts in 7 codes**:
 
 | receipt code | records | sets hit | variants hit | the message the dump writes |
 |---|---|---|---|---|
@@ -233,7 +233,6 @@ Named holes, so that no reader mistakes an absence for a zero.
 - **3,078 of 12,728 non-matching round-trip facts carry no class tag** (1,959 diverged + 1,119 loss, across 15 of 15 components and 503 variants). Invention *is* fully classified — 6,077 of 6,077 invented facts carry a tag — but divergence and one-way loss are not, so §4's per-class blast radii cover 75.8% of the non-matching facts and no more.
 - **The conformance runner writes no machine-readable result file.** `npm run conformance:canvas` prints its table to stdout and exits; there is no committed run output. Every conformance number in this ledger therefore comes from the *manifest's pinned* `status` field, which the live run is expected to reproduce exactly. Run the command to confirm; this build cannot.
 - **The two instruments disagree on the variant denominator.** Round trip counts 595 original variants; the fidelity harness enumerates 599. The delta is §3.5.
-- **The dumps are not one capture generation.** 10 dumps at v1.7, 1 dump at v1.8, 4 dumps at v1.9. Receipt codes and channel availability differ between them, so a receipt absent from a v1.7 dump does not prove the construct was carried — only that that generation did not look for it.
 - **No probe here measures accessibility, events, or semantics.** The contracts say so themselves ("Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable"); there is no artifact in this kit that measures them, so this ledger reports nothing about them.
 
 ### 5.4 The work order, in the order it pays
@@ -274,14 +273,14 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 |---|---|---|---|
 | `examples/untitled-ui/assets/icons/manifest.json` | `f743d0bd7953` | 6,665 | icon export receipts |
 | `examples/untitled-ui/AUDIT-ROUND-1.md` | `0370a1fd3e5f` | 19,789 | round-1 audit |
-| `examples/untitled-ui/dumps-v2/` | `3bf3ab54bf90` | 866,441 | canvas dumps (15 files) |
-| `examples/untitled-ui/renders/fidelity.json` | `82e808077f8b` | 73,793 | fidelity scores |
-| `examples/untitled-ui/renders/FIDELITY.md` | `d2b44d63ac94` | 1,399 | fidelity method |
-| `examples/untitled-ui/storybook/contracts/` | `cde8160d2e99` | 126,952 | proposed contracts (30 files) |
-| `examples/untitled-ui/storybook/src/generated/` | `671e562b6560` | 240,393 | emitted components (32 dirs) |
+| `examples/untitled-ui/dumps-v2/` | `9938409e7b5d` | 870,576 | canvas dumps (15 files) |
+| `examples/untitled-ui/renders/fidelity.json` | `5308009e657f` | 73,795 | fidelity scores |
+| `examples/untitled-ui/renders/FIDELITY.md` | `23518fdff327` | 1,399 | fidelity method |
+| `examples/untitled-ui/storybook/contracts/` | `78371a597805` | 128,897 | proposed contracts (30 files) |
+| `examples/untitled-ui/storybook/src/generated/` | `143d4131efa1` | 244,332 | emitted components (32 dirs) |
 | `examples/untitled-ui/storybook/src/tokens.css` | `e8c46f54ac76` | 655,590 | emitted global tokens |
 | `extract/figma/conformance/MANIFEST.json` | `c27df53c2e40` | 38,209 | conformance denominator |
-| `extract/figma/roundtrip-uui/report.json` | `7e913302c236` | 3,023,909 | round-trip facts |
-| `extract/figma/roundtrip-uui/REPORT.md` | `023c9bf63b8f` | 91,967 | round-trip narrative |
+| `extract/figma/roundtrip-uui/report.json` | `e518ca27601f` | 3,023,909 | round-trip facts |
+| `extract/figma/roundtrip-uui/REPORT.md` | `fe3633bbfc83` | 91,967 | round-trip narrative |
 
 Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering. Rebuild twice and diff to confirm.

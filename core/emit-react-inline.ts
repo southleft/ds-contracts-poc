@@ -681,7 +681,15 @@ export function emitReactInline(contract: Contract, ctx: EmitReactInlineCtx): Em
       const dep = ctx.contracts.get(part.component.id)!;
       const attrs = depAttrString(dep, part.component.props ?? {});
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
-      const text = part.component.text ?? (typeof depChildren?.default === 'string' ? depChildren.default : undefined);
+      // ROUND 3 — see emit-react: an APPLIED children prop must not be
+      // clobbered by the child's default re-emitted as JSX children.
+      const childrenApplied = depChildren !== undefined && part.component.props?.[depChildren.name] !== undefined;
+      const depSelfDefaults = depChildren?.bindings.figma.kind === 'NONE';
+      const text =
+        part.component.text ??
+        (!childrenApplied && !depSelfDefaults && typeof depChildren?.default === 'string'
+          ? depChildren.default
+          : undefined);
       return text !== undefined
         ? `<${dep.name}${attrs}>${text}</${dep.name}>`
         : `<${dep.name}${attrs} />`;

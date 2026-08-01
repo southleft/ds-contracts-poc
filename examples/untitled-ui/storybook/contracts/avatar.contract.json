@@ -125,6 +125,19 @@
           "prop": "state"
         }
       }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "OR",
+      "bindings": {
+        "figma": {
+          "kind": "NONE"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
     }
   ],
   "states": [],
@@ -165,7 +178,9 @@
           }
         },
         "Text": {
-          "text": "OR",
+          "content": {
+            "prop": "children"
+          },
           "declared": {
             "text-align": "center",
             "position": "absolute"

@@ -83,6 +83,19 @@
           "prop": "arrow"
         }
       }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "This is a tooltip",
+      "bindings": {
+        "figma": {
+          "kind": "NONE"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
     }
   ],
   "states": [],
@@ -126,7 +139,9 @@
               },
               "parts": {
                 "Text": {
-                  "text": "This is a tooltip",
+                  "content": {
+                    "prop": "children"
+                  },
                   "tokens": {
                     "color": "{imported.tooltip.content-text-and-supporting-text-text.color.{theme}}",
                     "font-size": "{imported.shared.size-12}",

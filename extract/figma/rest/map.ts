@@ -52,6 +52,13 @@
  *   componentPropertyDefinitions BOOLEAN            set.boolDefaults (dump v1.5 — visibility-bound boolean prop defaults)
  *     .defaultValue
  *   SLOT documents (native slots, Schema 2025)      carried verbatim (type 'SLOT') — propose maps them to slot parts
+ *   (no REST equivalent)                            textOverrides (dump v1.10) — PLUGIN-ONLY. The channel's source is
+ *                                                     InstanceNode.overrides, Figma's own record of what a host changed;
+ *                                                     the REST file response has no such field, and reconstructing it
+ *                                                     would mean diffing every instance subtree against its main
+ *                                                     component (a guess where the plugin has an answer). A REST-mapped
+ *                                                     dump therefore carries NO character overrides and the child's own
+ *                                                     default characters stand — a declared limit of this surface.
  *
  * Refusals are receipts, not silence: every place the REST surface cannot
  * yield the dump fact lands in MapReport.degradations with a named code and

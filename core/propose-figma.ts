@@ -990,6 +990,18 @@ interface Ctx {
    *  see the proposeFromDump option of the same name. Presence opts the
    *  per-instance override machinery in. */
   instanceOverrides?: ReadonlyMap<string, string>;
+  /** ROUND 3 — INSTANCE TEXT OVERRIDES (child side). Merged-tree node path
+   *  (relative to `${setName}:root/`) → the text prop name to promote it to.
+   *  Built by resolveTextOverrideDemand from the cross-set demand: a HOST
+   *  observed itself setting characters on this set's node, which proves the
+   *  characters are per-usage API even though the canvas models them with no
+   *  TEXT component property. Empty/absent — byte-identical classic
+   *  behavior (the node keeps its literal `text`). */
+  textPromote?: ReadonlyMap<string, string>;
+  /** ROUND 3 — every `${path} ${characters}` a built part actually reached
+   *  (carried OR refused by name). The completeness check at the end of
+   *  proposeFromDump names whatever the dump holds and this set does not. */
+  textOverridesVisited?: Set<string>;
   prefix: string;
   /** The contract id THIS proposal claims — the name-derived slug, suffixed
    *  past session-claimed holders whose componentSetKey CONTRADICTS this
@@ -1002,7 +1014,7 @@ interface Ctx {
   selfId: string;
   notes: string[];
   unbound: UnboundValue[];
-  textProps: Array<{ name: string; property: string; default: string }>;
+  textProps: Array<{ name: string; property: string; default: string; figmaless?: boolean }>;
   boolProps: Array<{ name: string; property: string; default?: boolean }>;
   /** P9 repeated-children collections: one arrayOf prop per repeat part,
    *  emitted after text/bool props (code-only, bindings.figma.kind NONE). */
@@ -3203,6 +3215,106 @@ function threadInstanceProps(
   }
 }
 
+/** ROUND 3 — instance TEXT overrides, HOST half. The characters this host
+ *  set on the nested child's text nodes (dump v1.10) become applied values
+ *  on the component ref, through the child's OWN text prop:
+ *    · every occurrence agrees        → a fixed string
+ *    · a pure function of one enum axis → a PropByProp lookup (the slider's
+ *      two tooltips track Left/Right control; the progress bar's tracks
+ *      Progress) — the same vocabulary applied props already use
+ *    · anything else                  → a NAMED refusal; the child renders
+ *      its own default characters and the loss is on the record.
+ *  Pairing is deliberately narrow: exactly one overridden path against
+ *  exactly one host-settable text prop on the child. Anything ambiguous
+ *  refuses rather than guessing which label the host meant. */
+function carryTextOverrides(
+  m: Merged,
+  component: Record<string, unknown>,
+  id: string | null,
+  instanceOf: string,
+  ctx: Ctx,
+  where: string,
+): void {
+  const occWithText = m.occ.filter((o) => o.node.textOverrides !== undefined);
+  if (occWithText.length === 0) return;
+  const visited = (ctx.textOverridesVisited ??= new Set<string>());
+  for (const o of occWithText) {
+    for (const [p, chars] of Object.entries(o.node.textOverrides!)) visited.add(`${p} ${chars}`);
+  }
+  const paths = [...new Set(occWithText.flatMap((o) => Object.keys(o.node.textOverrides!)))].sort();
+  const observed = paths
+    .map((p) => `"${p}" = ${[...new Set(occWithText.map((o) => o.node.textOverrides![p]).filter((v) => v !== undefined))].map((v) => JSON.stringify(v)).join('/')}`)
+    .join('; ');
+  if (!id) {
+    ctx.notes.push(
+      `${where}: this host overrides the characters of the nested "${instanceOf}" (${observed}, dump v1.10) but the child is an auto-proposed STUB with no anatomy — the override is NOT carried (import the real child set); named, never invented`,
+    );
+    return;
+  }
+  const child = ctx.contractsById?.get(id) as
+    | (MinimalChildContract & { props: Array<{ name: string; type?: unknown; default?: unknown; bindings: { figma: { kind?: string; property?: string }; code?: { prop?: string } } }> })
+    | undefined;
+  const textProps = (child?.props ?? []).filter((p) => p.type === 'text') as Array<{
+    name: string;
+    default?: unknown;
+  }>;
+  if (paths.length !== 1 || textProps.length !== 1) {
+    ctx.notes.push(
+      `${where}: this host overrides the characters of the nested "${instanceOf}" (${observed}, dump v1.10) but the pairing is not unambiguous — ${paths.length} overridden path(s) against ${textProps.length} text prop(s) on ${id}; NOT carried (a wrong pairing would put the host's label on the wrong node)`,
+    );
+    return;
+  }
+  const propName = textProps[0].name;
+  const path = paths[0];
+  const values = m.occ
+    .map((o) => ({ variant: o.variant, value: o.node.textOverrides?.[path] }))
+    .filter((v): v is { variant: string; value: string } => typeof v.value === 'string');
+  const distinct = [...new Set(values.map((v) => v.value))];
+  const applied = (component.props ?? {}) as Record<string, string | boolean | { prop: string; map: Record<string, string> }>;
+  if (applied[propName] !== undefined) {
+    ctx.notes.push(
+      `${where}: character override "${path}" of the nested "${instanceOf}" collides with an applied "${propName}" the drawn properties already set — the DRAWN property wins, the override is not carried (named)`,
+    );
+    return;
+  }
+  if (distinct.length === 1) {
+    applied[propName] = distinct[0];
+    component.props = applied;
+    ctx.notes.push(
+      `${where}: the nested "${instanceOf}" carries a HOST character override (dump v1.10) — "${path}" reads ${JSON.stringify(distinct[0])} in all ${values.length} occurrence(s), carried as component.props.${propName} (the child's own default ${JSON.stringify(String(textProps[0].default ?? ''))} would otherwise render)`,
+    );
+    return;
+  }
+  // Varying: a pure function of one enum axis binds as a per-value lookup —
+  // the same classification threadInstanceProps applies to applied props.
+  for (const axis of ctx.axes.filter((a) => !isBoolAxis(a.values))) {
+    const byValue = new Map<string, string>();
+    let pure = true;
+    for (const v of values) {
+      const axisValue = axisValuesOf(v.variant)[axis.property];
+      if (axisValue === undefined) { pure = false; break; }
+      const prev = byValue.get(axisValue);
+      if (prev === undefined) byValue.set(axisValue, v.value);
+      else if (prev !== v.value) { pure = false; break; }
+    }
+    if (!pure || byValue.size <= 1) continue;
+    const map: Record<string, string> = {};
+    for (const value of axis.values) {
+      const hit = byValue.get(value);
+      if (hit !== undefined) map[camel(value)] = hit;
+    }
+    applied[propName] = { prop: axis.propName, map };
+    component.props = applied;
+    ctx.notes.push(
+      `${where}: the nested "${instanceOf}" carries a HOST character override that VARIES (dump v1.10) — "${path}" is a pure function of the "${axis.propName}" axis (${Object.entries(map).map(([k, v]) => `${k}→${JSON.stringify(v)}`).join(', ')}), carried as a per-value lookup on component.props.${propName}`,
+    );
+    return;
+  }
+  ctx.notes.push(
+    `${where}: the nested "${instanceOf}" carries a HOST character override that varies across variants (${distinct.map((d) => JSON.stringify(d)).join(', ')}, dump v1.10) without tracking any enum axis — NOT carried (pinning one variant's label would be wrong everywhere else); the child renders its own default`,
+  );
+}
+
 /** Slot `accepts` from captured INSTANCE_SWAP preferredValues (dump v1.5):
  *  keys that resolve through the session-linking index become accepts ids
  *  (acceptsMode 'prefer' — Figma's own preferredValues tier); unresolved
@@ -3413,6 +3525,135 @@ function attachTokens(ctx: Ctx, holder: Record<string, unknown>, tokens: Record<
 function registerTextProp(ctx: Ctx, property: string, characters: string, name = canonicalPropName(property)) {
   if (ctx.textProps.some((p) => p.property === property)) return;
   ctx.textProps.push({ name, property, default: characters });
+}
+
+// ---------------------------------------------------------------------------
+// ROUND 3 — INSTANCE TEXT OVERRIDES (dump v1.10 `textOverrides`)
+//
+// The gap this closes: a child component with NO Figma TEXT property still
+// gets its characters changed per usage — hosts override the text node
+// directly. Untitled UI's Tooltip and Avatar are exactly this shape, so a
+// slider's "0%", a progress bar's "40%" and an avatar group's "+5" chip all
+// rendered the child's OWN default characters ("This is a tooltip", "OR").
+//
+// The carriage is two-sided and each side stays inside existing vocabulary:
+//   CHILD  the overridden text node stops being a literal `text` part and
+//          becomes a `content` part bound to a text prop (code prop
+//          "children"), default = the characters the child itself draws. The
+//          prop binds figma kind NONE — the canvas has no property here, and
+//          claiming one would invent a design API nobody drew.
+//   HOST   the observed characters ride `component.props` on the nested
+//          part — a constant when every occurrence agrees, a PropByProp
+//          lookup when they are a pure function of one enum axis. Both
+//          shapes already exist for applied props; nothing new is emitted.
+// Anything else (varies without tracking an axis, child has no such prop,
+// path unresolvable) is a NAMED refusal — never invented text.
+// ---------------------------------------------------------------------------
+
+/** Cross-set text-override demand: child set identity (componentSetKey AND
+ *  set name, both registered) → the node NAME PATHS hosts were observed
+ *  overriding inside it. Build it ONCE over every dump in scope (the merged
+ *  corpus), before any set is proposed — a child is proposed before its
+ *  hosts, so the demand cannot be discovered during the child's own pass. */
+export type TextOverrideDemand = ReadonlyMap<string, ReadonlySet<string>>;
+
+/** Collect the demand from a merged multi-set dump (or any object holding
+ *  DumpSets). Read-only; unknown shapes are skipped, never thrown on. */
+export function textOverrideDemandFromDumps(dumps: Record<string, unknown>): Map<string, Set<string>> {
+  const demand = new Map<string, Set<string>>();
+  const add = (key: string | undefined, path: string): void => {
+    if (!key) return;
+    const set = demand.get(key) ?? new Set<string>();
+    set.add(path);
+    demand.set(key, set);
+  };
+  const walk = (node: DumpNode): void => {
+    if (node.type === 'INSTANCE' && node.textOverrides) {
+      for (const path of Object.keys(node.textOverrides)) {
+        add(node.instanceSetKey, path);
+        add(node.instanceKey, path);
+        add(node.instanceOf, path);
+      }
+    }
+    for (const child of node.children ?? []) walk(child);
+  };
+  for (const value of Object.values(dumps)) {
+    if (!isDumpSet(value)) continue;
+    for (const variant of value.variants) walk(variant);
+  }
+  return demand;
+}
+
+/** Resolve the demand against THIS set's merged tree: demanded node path →
+ *  the text prop name the node's part will bind. The host's path is the RAW
+ *  drawn path inside its instance; the child's merged tree may spell the
+ *  same node differently (a wrapper union folds a flat variant under the
+ *  wrapper other variants nest in — the Tooltip field case: hosts see
+ *  "Content/Text", the merged tree carries
+ *  "Content/Text and supporting text/Text"). So: exact path first, then a
+ *  UNIQUE node-name match. Ambiguous or absent → a named refusal. */
+function resolveTextOverrideDemand(
+  merged: Merged,
+  demanded: ReadonlySet<string>,
+  ctx: Ctx,
+): Map<string, string> {
+  const texts: Array<{ path: string; name: string }> = [];
+  const collect = (m: Merged, path: string[]): void => {
+    if (m.type === 'TEXT') texts.push({ path: path.join('/'), name: m.name });
+    for (const c of m.children) collect(c, [...path, c.name]);
+  };
+  for (const c of merged.children) collect(c, [c.name]);
+
+  const promote = new Map<string, string>();
+  // Names the DRAWN API will claim later in the walk — axes, and every real
+  // TEXT-property binding anywhere in the tree. Collected up front because
+  // promotion decides its names before a single part is built, and two props
+  // called "children" would be a silent API collision.
+  const taken = new Set<string>([...ctx.axes.map((a) => a.propName), ...ctx.textProps.map((t) => t.name)]);
+  const collectDrawn = (m: Merged): void => {
+    for (const o of m.occ) {
+      const p = o.node.propRefs?.characters;
+      if (p) taken.add(canonicalPropName(p));
+    }
+    for (const c of m.children) collectDrawn(c);
+  };
+  collectDrawn(merged);
+  for (const wanted of [...demanded].sort()) {
+    const leaf = wanted.split('/').pop()!;
+    const exact = texts.filter((t) => t.path === wanted);
+    const byName = exact.length > 0 ? exact : texts.filter((t) => t.name === leaf);
+    if (byName.length === 0) {
+      ctx.notes.push(
+        `${ctx.setName}: a host was observed overriding the characters of "${wanted}" inside an instance of this set (dump v1.10 \`textOverrides\`), but no TEXT node in this set's merged tree matches that path or the node name "${leaf}" — the override is REFUSED, not invented; this set's own characters stand`,
+      );
+      continue;
+    }
+    if (byName.length > 1) {
+      ctx.notes.push(
+        `${ctx.setName}: a host overrides the characters of "${wanted}" inside an instance of this set, but ${byName.length} TEXT nodes here answer to the name "${leaf}" (${byName.map((t) => `"${t.path}"`).join(', ')}) — ambiguous, so NO text prop is promoted (a wrong node would silently take the host's label)`,
+      );
+      continue;
+    }
+    const target = byName[0];
+    if (promote.has(target.path)) continue;
+    // The main-content convention: the FIRST promoted node takes "children"
+    // (ds.button convention, the one hasChildrenText recognizes); a second
+    // takes its own node name, and a name already claimed by an axis or a
+    // real TEXT-property prop yields (the drawn API always wins).
+    const preferred = promote.size === 0 && !taken.has('children') ? 'children' : canonicalPropName(target.name);
+    if (taken.has(preferred)) {
+      ctx.notes.push(
+        `${ctx.setName}: the host-overridden text node "${target.path}" would need prop name "${preferred}", which this set's drawn API already claims — no promotion (the drawn property wins; rename the node or the axis to carry the override)`,
+      );
+      continue;
+    }
+    taken.add(preferred);
+    promote.set(target.path, preferred);
+    ctx.notes.push(
+      `${ctx.setName}: text node "${target.path}"${target.path === wanted ? '' : ` (matched by node name from the host's drawn path "${wanted}" — a wrapper union folds this node differently in this set's own tree)`} is OVERRIDDEN by at least one host instance (dump v1.10 \`textOverrides\`) — promoted from a literal to text prop \`${preferred}\` with the drawn characters as its default; bindings.figma.kind is NONE because this set exposes NO TEXT component property for it (the canvas carries the override as a raw instance override, which the contract vocabulary does not model — declared limit, named here)`,
+    );
+  }
+  return promote;
 }
 
 function unifiedPropRef(m: Merged, kind: string, ctx: Ctx, where: string): string | undefined {
@@ -3713,12 +3954,24 @@ function buildPart(
     }
     const property = unifiedPropRef(m, 'characters', ctx, where);
     const characters = first(m.occ, (n) => n.text?.characters) ?? '';
+    // ROUND 3 — a node a HOST overrides is per-usage API even with no drawn
+    // TEXT property (see resolveTextOverrideDemand). A real drawn property
+    // always wins: promotion only fires where `property` is absent.
+    const promoted = property ? undefined : ctx.textPromote?.get(where.slice(`${ctx.setName}:root/`.length));
     if (property) {
       registerTextProp(ctx, property, characters);
       // The SAME canonical spelling registerTextProp names the prop with —
       // camel() alone would leak illegal characters ("✏️text") into the
       // content binding and break the prop↔content pairing.
       part.content = { prop: canonicalPropName(property) };
+    } else if (promoted) {
+      // The synthetic `property` is the node path: unique within the set (so
+      // registerTextProp's dedup holds) and never emitted — a figmaless prop
+      // binds kind NONE, which the schema requires to carry no property.
+      registerTextProp(ctx, ` textOverride:${where}`, characters, promoted);
+      const entry = ctx.textProps.find((t) => t.name === promoted);
+      if (entry) entry.figmaless = true;
+      part.content = { prop: promoted };
     } else {
       part.text = characters;
       bindTextByAxis(m, part, ctx, where);
@@ -3855,6 +4108,10 @@ function buildPart(
         `${where}: fixed prop values of the nested "${instanceOf}" instance are not captured in dump v1 — declared fidelity limit, author them if the instance is configured`,
       );
     }
+    // ROUND 3 — instance TEXT overrides, HOST half. The characters THIS host
+    // set on the child's text nodes (dump v1.10) become applied prop values
+    // on the component ref, through the child's own promoted text prop.
+    carryTextOverrides(m, component, id, instanceOf, ctx, where);
     // The instance's own geometry/paints belong to the child contract — elided.
     // ROUND 2 ITERATION 9 — PER-INSTANCE OVERRIDES (component-ref level).
     // A Figma instance can carry its own image fill, its own box, its own
@@ -5457,6 +5714,15 @@ export function proposeFromDump(
      *  observations. Absent (every existing caller) — byte-identical
      *  classic behavior; unprovable divergences stay named notes. */
     instanceOverrides?: ReadonlyMap<string, string>;
+    /** ROUND 3 — instance TEXT overrides (dump v1.10 `textOverrides`), the
+     *  CHILD half. Cross-set demand built ONCE over every dump in scope with
+     *  textOverrideDemandFromDumps: child set key / name → the node paths
+     *  hosts were observed overriding. A demanded node in THIS set stops
+     *  being a literal and becomes a text prop the hosts can set (see
+     *  resolveTextOverrideDemand). Absent — byte-identical classic
+     *  behavior. The HOST half needs no option: an instance's own
+     *  `textOverrides` plus the linked child's props are enough. */
+    textOverrideDemand?: TextOverrideDemand;
     /** Contract ids claimed by THIS session's earlier imports — real
      *  contracts AND their child stubs (live-gauntlet class ③). When the
      *  name-derived self id lands on one of these whose componentSetKey
@@ -5651,6 +5917,18 @@ export function proposeFromDump(
   );
   const where = `${set.setName}:root`;
 
+  // ROUND 3 — instance TEXT overrides, child half: resolve the cross-set
+  // demand against the tree that actually merged (a wrapper union can fold
+  // the host's drawn path). Runs BEFORE any part is built so the TEXT branch
+  // finds its promotion already decided.
+  if (opts.textOverrideDemand) {
+    const demanded = new Set<string>([
+      ...(set.key ? (opts.textOverrideDemand.get(set.key) ?? []) : []),
+      ...(opts.textOverrideDemand.get(set.setName) ?? []),
+    ]);
+    if (demanded.size > 0) ctx.textPromote = resolveTextOverrideDemand(merged, demanded, ctx);
+  }
+
   const root: Record<string, unknown> = {};
   const rootKeyByChildName = new Map<string, string>();
   const rootLayout = invertLayout(merged, true, null, ctx, where);
@@ -5722,6 +6000,29 @@ export function proposeFromDump(
   invertRootFixedSize(merged, rootTokens, ctx, where);
   attachByProp(root, rootTokensByProp);
   attachTokens(ctx, root, rootTokens);
+
+  // ROUND 3 — instance TEXT overrides, the completeness check. Every
+  // character override in the DUMP that no built part ever reached is named
+  // here. Without it the loud losses (a part dropped by state promotion, a
+  // variant filtered out upstream) would look exactly like "there was
+  // nothing to carry" — the silence this whole channel exists to end.
+  {
+    const seen = ctx.textOverridesVisited;
+    const unreached = new Map<string, Set<string>>();
+    const scan = (node: DumpNode): void => {
+      for (const [path, chars] of Object.entries(node.textOverrides ?? {})) {
+        if (seen?.has(`${path} ${chars}`)) continue;
+        (unreached.get(path) ?? unreached.set(path, new Set()).get(path)!).add(chars);
+      }
+      for (const c of node.children ?? []) scan(c);
+    };
+    for (const v of set.variants) scan(v);
+    if (unreached.size > 0) {
+      ctx.notes.push(
+        `${set.setName}: ${[...unreached.values()].reduce((n, s) => n + s.size, 0)} observed character override(s) in this set's dump were NOT carried because no proposed part reaches the instance that holds them (${[...unreached].map(([p, vs]) => `"${p}" = ${[...vs].sort().map((v) => JSON.stringify(v)).join('/')}`).join('; ')}) — the usual cause is a part that lives only in variants the proposal excludes (an interaction-state group, a filtered mode); named here so the absence is never read as "nothing was drawn"`,
+      );
+    }
+  }
 
   // Promotion from the flattened base instance(s) — after the anatomy, so
   // structure discovered from drawn nodes wins and promotion fills the gaps.
@@ -5842,7 +6143,11 @@ export function proposeFromDump(
       type: 'text',
       default: t.default,
       bindings: {
-        figma: { kind: 'TEXT', property: t.property },
+        // ROUND 3: a prop promoted from a HOST's raw character override has
+        // no drawn TEXT property to bind — kind NONE (code-only), the same
+        // honesty the arrayOf props use. Claiming a TEXT property here would
+        // invent a design API the set does not have.
+        figma: t.figmaless ? { kind: 'NONE' } : { kind: 'TEXT', property: t.property },
         code: { prop: t.name },
       },
     });

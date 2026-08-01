@@ -25,11 +25,13 @@ const meta = {
       control: 'select',
       options: ['bottomCenter', 'none', 'topCenter', 'bottomLeft', 'left', 'right', 'bottomRight'],
     },
+    children: { control: 'text' },
   },
   args: {
     supportingText: true,
     theme: 'light',
     arrow: 'bottomCenter',
+    children: 'This is a tooltip',
   },
 } satisfies Meta<typeof Tooltip>;
 
@@ -58,20 +60,48 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
-      <Tooltip theme="light" arrow="bottomCenter" />
-      <Tooltip theme="light" arrow="none" />
-      <Tooltip theme="light" arrow="topCenter" />
-      <Tooltip theme="light" arrow="bottomLeft" />
-      <Tooltip theme="light" arrow="left" />
-      <Tooltip theme="light" arrow="right" />
-      <Tooltip theme="light" arrow="bottomRight" />
-      <Tooltip theme="dark" arrow="bottomCenter" />
-      <Tooltip theme="dark" arrow="none" />
-      <Tooltip theme="dark" arrow="topCenter" />
-      <Tooltip theme="dark" arrow="bottomLeft" />
-      <Tooltip theme="dark" arrow="left" />
-      <Tooltip theme="dark" arrow="right" />
-      <Tooltip theme="dark" arrow="bottomRight" />
+      <Tooltip theme="light" arrow="bottomCenter">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="light" arrow="none">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="light" arrow="topCenter">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="light" arrow="bottomLeft">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="light" arrow="left">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="light" arrow="right">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="light" arrow="bottomRight">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="dark" arrow="bottomCenter">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="dark" arrow="none">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="dark" arrow="topCenter">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="dark" arrow="bottomLeft">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="dark" arrow="left">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="dark" arrow="right">
+        This is a tooltip
+      </Tooltip>
+      <Tooltip theme="dark" arrow="bottomRight">
+        This is a tooltip
+      </Tooltip>
     </div>
   ),
 };

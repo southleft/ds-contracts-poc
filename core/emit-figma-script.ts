@@ -1952,7 +1952,17 @@ function mapDepProps(
   for (const [propName, rawValue] of Object.entries(props)) {
     const depProp = dep.props.find((p) => p.name === propName);
     if (!depProp) continue;
-    if (depProp.bindings.figma.kind === 'NONE') continue; // code-only (v7 arrayOf)
+    if (depProp.bindings.figma.kind === 'NONE') {
+      // code-only (v7 arrayOf; ROUND 3 promoted character overrides). An
+      // arrayOf value never reaches here (the emitter refuses it in
+      // anatomy); a fixed text value is a REAL canvas loss — ledgered.
+      if (typeof rawValue === 'string' || typeof rawValue === 'object') {
+        ledger?.push(
+          `${dep.name} prop "${propName}" set to ${typeof rawValue === 'object' ? `a per-value lookup on "${rawValue.prop}"` : JSON.stringify(rawValue)}: not wired — the dependency binds it figma kind NONE (code-only), so the canvas instance renders ${dep.name}'s own default`,
+        );
+      }
+      continue;
+    }
     let value: string | boolean;
     if (typeof rawValue === 'object') {
       // PropByProp lookup: resolve against this combo's subst at compile
@@ -2011,7 +2021,14 @@ function mapDepProps(
   }
   if (text !== undefined) {
     const textProp = dep.props.find((p) => p.type === 'text' && p.bindings.code.prop === 'children');
-    if (textProp) out[textProp.bindings.figma.property!] = text;
+    // ROUND 3: a text prop promoted from a raw instance character override
+    // binds figma kind NONE — there is no component property to write, and
+    // `out[undefined]` would have minted a garbage key. Named loss instead.
+    if (textProp && textProp.bindings.figma.kind === 'NONE') {
+      ledger?.push(
+        `${dep.name} children text "${text}": not wired — ${dep.id} exposes no TEXT component property for it (the canvas carries such labels as raw instance overrides, which the contract vocabulary does not model)`,
+      );
+    } else if (textProp) out[textProp.bindings.figma.property!] = text;
   }
   return out;
 }
@@ -3076,6 +3093,10 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
     .filter(
       (p) =>
         (p.type === 'text' || p.type === 'number') &&
+        // ROUND 3: kind NONE carries NO property name — declaring one here
+        // would mint a Figma property literally named "undefined". Such a
+        // prop is code-only by construction (a promoted raw-override label).
+        p.bindings.figma.kind !== 'NONE' &&
         !boundTextProps.has(p.bindings.figma.property!),
     )
     .map((p) => ({

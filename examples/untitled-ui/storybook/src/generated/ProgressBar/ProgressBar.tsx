@@ -38,6 +38,31 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(function
                     ? 'topCenter'
                     : undefined
               }
+              children={
+                progress === '0'
+                  ? '0%'
+                  : progress === '10'
+                    ? '10%'
+                    : progress === '20'
+                      ? '20%'
+                      : progress === '30'
+                        ? '30%'
+                        : progress === '40'
+                          ? '40%'
+                          : progress === '50'
+                            ? '50%'
+                            : progress === '60'
+                              ? '60%'
+                              : progress === '70'
+                                ? '70%'
+                                : progress === '80'
+                                  ? '80%'
+                                  : progress === '90'
+                                    ? '90%'
+                                    : progress === '100'
+                                      ? '100%'
+                                      : undefined
+              }
             />
           ) : null}
         </div>

@@ -24,6 +24,7 @@ const meta = {
     text: { control: 'boolean' },
     statusIcon: { control: 'select', options: ['false', 'company', 'onlineIndicator'] },
     state: { control: 'select', options: ['default', 'hover', 'focused'] },
+    children: { control: 'text' },
   },
   args: {
     size: 'xl',
@@ -31,6 +32,7 @@ const meta = {
     text: true,
     statusIcon: 'false',
     state: 'default',
+    children: 'OR',
   },
 } satisfies Meta<typeof Avatar>;
 
@@ -75,60 +77,168 @@ export const Matrix: Story = {
         justifyItems: 'start',
       }}
     >
-      <Avatar size="xl" statusIcon="false" state="default" />
-      <Avatar size="xl" statusIcon="false" state="hover" />
-      <Avatar size="xl" statusIcon="false" state="focused" />
-      <Avatar size="xl" statusIcon="company" state="default" />
-      <Avatar size="xl" statusIcon="company" state="hover" />
-      <Avatar size="xl" statusIcon="company" state="focused" />
-      <Avatar size="xl" statusIcon="onlineIndicator" state="default" />
-      <Avatar size="xl" statusIcon="onlineIndicator" state="hover" />
-      <Avatar size="xl" statusIcon="onlineIndicator" state="focused" />
-      <Avatar size="2xl" statusIcon="false" state="default" />
-      <Avatar size="2xl" statusIcon="false" state="hover" />
-      <Avatar size="2xl" statusIcon="false" state="focused" />
-      <Avatar size="2xl" statusIcon="company" state="default" />
-      <Avatar size="2xl" statusIcon="company" state="hover" />
-      <Avatar size="2xl" statusIcon="company" state="focused" />
-      <Avatar size="2xl" statusIcon="onlineIndicator" state="default" />
-      <Avatar size="2xl" statusIcon="onlineIndicator" state="hover" />
-      <Avatar size="2xl" statusIcon="onlineIndicator" state="focused" />
-      <Avatar size="lg" statusIcon="false" state="default" />
-      <Avatar size="lg" statusIcon="false" state="hover" />
-      <Avatar size="lg" statusIcon="false" state="focused" />
-      <Avatar size="lg" statusIcon="company" state="default" />
-      <Avatar size="lg" statusIcon="company" state="hover" />
-      <Avatar size="lg" statusIcon="company" state="focused" />
-      <Avatar size="lg" statusIcon="onlineIndicator" state="default" />
-      <Avatar size="lg" statusIcon="onlineIndicator" state="hover" />
-      <Avatar size="lg" statusIcon="onlineIndicator" state="focused" />
-      <Avatar size="md" statusIcon="false" state="default" />
-      <Avatar size="md" statusIcon="false" state="hover" />
-      <Avatar size="md" statusIcon="false" state="focused" />
-      <Avatar size="md" statusIcon="company" state="default" />
-      <Avatar size="md" statusIcon="company" state="hover" />
-      <Avatar size="md" statusIcon="company" state="focused" />
-      <Avatar size="md" statusIcon="onlineIndicator" state="default" />
-      <Avatar size="md" statusIcon="onlineIndicator" state="hover" />
-      <Avatar size="md" statusIcon="onlineIndicator" state="focused" />
-      <Avatar size="sm" statusIcon="false" state="default" />
-      <Avatar size="sm" statusIcon="false" state="hover" />
-      <Avatar size="sm" statusIcon="false" state="focused" />
-      <Avatar size="sm" statusIcon="company" state="default" />
-      <Avatar size="sm" statusIcon="company" state="hover" />
-      <Avatar size="sm" statusIcon="company" state="focused" />
-      <Avatar size="sm" statusIcon="onlineIndicator" state="default" />
-      <Avatar size="sm" statusIcon="onlineIndicator" state="hover" />
-      <Avatar size="sm" statusIcon="onlineIndicator" state="focused" />
-      <Avatar size="xs" statusIcon="false" state="default" />
-      <Avatar size="xs" statusIcon="false" state="hover" />
-      <Avatar size="xs" statusIcon="false" state="focused" />
-      <Avatar size="xs" statusIcon="company" state="default" />
-      <Avatar size="xs" statusIcon="company" state="hover" />
-      <Avatar size="xs" statusIcon="company" state="focused" />
-      <Avatar size="xs" statusIcon="onlineIndicator" state="default" />
-      <Avatar size="xs" statusIcon="onlineIndicator" state="hover" />
-      <Avatar size="xs" statusIcon="onlineIndicator" state="focused" />
+      <Avatar size="xl" statusIcon="false" state="default">
+        OR
+      </Avatar>
+      <Avatar size="xl" statusIcon="false" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="xl" statusIcon="false" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="xl" statusIcon="company" state="default">
+        OR
+      </Avatar>
+      <Avatar size="xl" statusIcon="company" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="xl" statusIcon="company" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="xl" statusIcon="onlineIndicator" state="default">
+        OR
+      </Avatar>
+      <Avatar size="xl" statusIcon="onlineIndicator" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="xl" statusIcon="onlineIndicator" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="2xl" statusIcon="false" state="default">
+        OR
+      </Avatar>
+      <Avatar size="2xl" statusIcon="false" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="2xl" statusIcon="false" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="2xl" statusIcon="company" state="default">
+        OR
+      </Avatar>
+      <Avatar size="2xl" statusIcon="company" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="2xl" statusIcon="company" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="2xl" statusIcon="onlineIndicator" state="default">
+        OR
+      </Avatar>
+      <Avatar size="2xl" statusIcon="onlineIndicator" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="2xl" statusIcon="onlineIndicator" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="lg" statusIcon="false" state="default">
+        OR
+      </Avatar>
+      <Avatar size="lg" statusIcon="false" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="lg" statusIcon="false" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="lg" statusIcon="company" state="default">
+        OR
+      </Avatar>
+      <Avatar size="lg" statusIcon="company" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="lg" statusIcon="company" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="lg" statusIcon="onlineIndicator" state="default">
+        OR
+      </Avatar>
+      <Avatar size="lg" statusIcon="onlineIndicator" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="lg" statusIcon="onlineIndicator" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="md" statusIcon="false" state="default">
+        OR
+      </Avatar>
+      <Avatar size="md" statusIcon="false" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="md" statusIcon="false" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="md" statusIcon="company" state="default">
+        OR
+      </Avatar>
+      <Avatar size="md" statusIcon="company" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="md" statusIcon="company" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="md" statusIcon="onlineIndicator" state="default">
+        OR
+      </Avatar>
+      <Avatar size="md" statusIcon="onlineIndicator" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="md" statusIcon="onlineIndicator" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="sm" statusIcon="false" state="default">
+        OR
+      </Avatar>
+      <Avatar size="sm" statusIcon="false" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="sm" statusIcon="false" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="sm" statusIcon="company" state="default">
+        OR
+      </Avatar>
+      <Avatar size="sm" statusIcon="company" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="sm" statusIcon="company" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="sm" statusIcon="onlineIndicator" state="default">
+        OR
+      </Avatar>
+      <Avatar size="sm" statusIcon="onlineIndicator" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="sm" statusIcon="onlineIndicator" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="xs" statusIcon="false" state="default">
+        OR
+      </Avatar>
+      <Avatar size="xs" statusIcon="false" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="xs" statusIcon="false" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="xs" statusIcon="company" state="default">
+        OR
+      </Avatar>
+      <Avatar size="xs" statusIcon="company" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="xs" statusIcon="company" state="focused">
+        OR
+      </Avatar>
+      <Avatar size="xs" statusIcon="onlineIndicator" state="default">
+        OR
+      </Avatar>
+      <Avatar size="xs" statusIcon="onlineIndicator" state="hover">
+        OR
+      </Avatar>
+      <Avatar size="xs" statusIcon="onlineIndicator" state="focused">
+        OR
+      </Avatar>
     </div>
   ),
 };

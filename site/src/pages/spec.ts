@@ -316,7 +316,7 @@ function propsPage(replays: Awaited<ReturnType<typeof loadReplays>>): { route: s
           'two props binding the same design property — the canvas cannot host both',
           'an enum default outside the enum; type-mismatched defaults',
           'a figma <code>values</code> map missing an enum value, or carrying a key that is not one',
-          '<code>kind: "NONE"</code> on a non-<code>arrayOf</code> prop — every scalar prop has a canvas manifestation',
+          '<code>kind: "NONE"</code> on a prop that is neither <code>arrayOf</code> nor <code>text</code> — every other scalar prop has a canvas manifestation (a <code>text</code> prop may be code-only: a label the canvas carries as a raw per-instance character override, which has no component property to bind; it must declare a string default, since that default is what the canvas draws)',
           '<code>bindings.figma.property</code> required unless kind is <code>"NONE"</code> — and refused when it is',
         ]) +
         shippingExample('button.contract.json', { paths: ['props'], limit: { props: 1 } }),

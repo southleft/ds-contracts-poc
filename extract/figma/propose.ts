@@ -128,7 +128,9 @@ export {
   figmaProposalsReport,
   mergeOrders,
   proposeFromDump,
+  textOverrideDemandFromDumps,
   type FigmaProposalResult,
+  type TextOverrideDemand,
   type UnboundValue,
 } from '../../core/propose-figma.js';
 

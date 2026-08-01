@@ -1622,7 +1622,19 @@ const cases: Case[] = [
       if (report.findings.some((x: any) => x.subject.startsWith('CrumbTrail.'))) throw new Error('NONE prop reported as drift');
       editJson('contracts/array-prop.contract.json', (c) => { c.props[1].type = 'text'; });
       const r = generate();
-      if (r.status === 0 || !r.out.includes('but is not an arrayOf prop')) throw new Error('scalar NONE not refused by name');
+      // ROUND 3 widened the NONE-binding rule: code-only is legal for arrayOf
+      // props AND for text props promoted from raw per-instance character
+      // overrides — the latter only WITH a string default, because that
+      // default is the only record of what the canvas draws. A scalar NONE
+      // is therefore still refused BY NAME; this fixture (type flipped to
+      // `text`, no default) now trips the more precise second rule, so the
+      // pin accepts either refusal wording and still requires the prop name.
+      const refusedByName =
+        r.out.includes('but is not an arrayOf prop') ||
+        (r.out.includes('binds figma kind "NONE"') && r.out.includes('declares no string default'));
+      if (r.status === 0 || !refusedByName || !r.out.includes('"items"')) {
+        throw new Error('scalar NONE not refused by name');
+      }
       rmSync(path.join(SCRATCH, 'contracts', 'array-prop.contract.json'));
     },
   },

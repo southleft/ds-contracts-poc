@@ -880,8 +880,19 @@ export function validateContract(
       if (Object.keys(p.type.arrayOf).length === 0) {
         errors.push(`${contract.id}: arrayOf prop "${p.name}" must declare at least one field`);
       }
-    } else if (p.bindings.figma.kind === 'NONE') {
-      errors.push(`${contract.id}: prop "${p.name}" binds figma kind "NONE" but is not an arrayOf prop — every scalar prop has a canvas manifestation`);
+    } else if (p.bindings.figma.kind === 'NONE' && p.type !== 'text') {
+      errors.push(`${contract.id}: prop "${p.name}" binds figma kind "NONE" but is neither an arrayOf prop nor a text prop — every other scalar prop has a canvas manifestation`);
+    } else if (p.bindings.figma.kind === 'NONE' && typeof p.default !== 'string') {
+      // ROUND 3 — the SECOND legitimate canvas-less scalar, found in the
+      // field: a text prop promoted from a raw per-instance CHARACTER
+      // override (Untitled UI's Tooltip and Avatar expose no TEXT component
+      // property, yet hosts retype their labels). The canvas carries such a
+      // label as an instance override, which the contract vocabulary does
+      // not model — so the prop is code-only BY DECLARATION, and the canvas
+      // emitter ledgers every host value it therefore cannot wire. The one
+      // hard requirement is a default: it is what the canvas actually draws,
+      // and without it the canvas would render the component NAME.
+      errors.push(`${contract.id}: text prop "${p.name}" binds figma kind "NONE" (code-only) but declares no string default — the default IS what the canvas draws for it`);
     }
     // Required text props need a default: it is the canvas TEXT property's
     // default value AND the sample every generated story/matrix cell uses.
@@ -2178,7 +2189,19 @@ export function generateTsx(
   for (const p of arrayProps(contract)) destructured.push(p.bindings.code.prop);
   for (const { slot } of slots) destructured.push(slot.name);
   for (const ev of events) destructured.push(ev.bindings.code.prop);
-  destructured.push('className', 'children', '...rest');
+  // ROUND 3: `children` normally has no destructure default — a JSX-children
+  // label is the consumer's, and the contract default is only story/canvas
+  // sample text the canvas TEXT property already carries. A text prop bound
+  // figma kind NONE has no such property: the contract default is the ONLY
+  // record of the characters the component draws, so the component must
+  // render them when nothing is passed — otherwise the promotion would turn
+  // a drawn label into empty ink. Every other contract is byte-identical.
+  const childrenText = textProps(contract).find((p) => p.bindings.code.prop === 'children');
+  const childrenDefault =
+    childrenText && childrenText.bindings.figma.kind === 'NONE' && typeof childrenText.default === 'string'
+      ? `children = ${JSON.stringify(childrenText.default)}`
+      : 'children';
+  destructured.push('className', childrenDefault, '...rest');
 
   // Body prelude: uncontrolled state + handlers for declared events.
   const prelude: string[] = [];
@@ -2407,7 +2430,22 @@ export function generateTsx(
       const dep = byId.get(part.component.id)!;
       const attrs = depAttrString(dep, part.component.props ?? {}, contract);
       const depChildren = textProps(dep).find((p) => p.bindings.code.prop === 'children');
-      const text = part.component.text ?? (typeof depChildren?.default === 'string' ? depChildren.default : undefined);
+      // ROUND 3 — instance text overrides: when the host APPLIES the child's
+      // children prop (component.props), the child's own default must not be
+      // re-emitted as JSX children — React resolves JSX children AFTER the
+      // `children` attribute, so the default would silently win and the
+      // host's observed label would never render. No applied children prop →
+      // byte-identical to the default-echoing behavior.
+      const childrenApplied = depChildren !== undefined && part.component.props?.[depChildren.name] !== undefined;
+      // …and a dep whose children prop binds kind NONE already defaults
+      // ITSELF in its own signature (the promoted-override class), so
+      // echoing the default here would only add redundant JSX children.
+      const depSelfDefaults = depChildren?.bindings.figma.kind === 'NONE';
+      const text =
+        part.component.text ??
+        (!childrenApplied && !depSelfDefaults && typeof depChildren?.default === 'string'
+          ? depChildren.default
+          : undefined);
       // Presence rules apply to nested-component parts exactly as they do to
       // icon/repeat parts — this branch used to return bare JSX, silently
       // dropping contract visibleWhen (AUDIT-ROUND-1: emitter-drops-

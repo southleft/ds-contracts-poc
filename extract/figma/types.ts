@@ -257,6 +257,15 @@ export interface DumpNode {
    *  suffix, so bare string keys stay VARIANT/TEXT-ambiguous. Consumers
    *  split on '#' for the property NAME either way. */
   componentProperties?: Record<string, string | boolean>;
+  /** For INSTANCE nodes (dump v1.10): the characters this HOST set on the
+   *  instance's text descendants, keyed by the overridden node's NAME PATH
+   *  inside the instance ("Content/Text"). Source: InstanceNode.overrides
+   *  filtered to 'characters' — Figma's own record, not a computed diff.
+   *  The channel exists because a child component with NO TEXT property has
+   *  nowhere else to carry a per-usage label: `componentProperties` is empty
+   *  of it by construction. Absence = no override observed (or a pre-v1.10
+   *  producer); consumers never invent text from it. */
+  textOverrides?: Record<string, string>;
   children?: DumpNode[];
 }
 
