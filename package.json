@@ -88,7 +88,8 @@
     "ledger:uui": "tsx extract/figma/ledger/build.ts",
     "residuals:uui": "tsx extract/figma/ledger/residuals.ts",
     "paste:check": "tsx extract/figma/paste-door-check.ts",
-    "gauntlet:intake": "tsx extract/figma/gauntlet/intake.ts"
+    "gauntlet:intake": "tsx extract/figma/gauntlet/intake.ts",
+    "seed:gen": "tsx extract/computed/seed-gen.ts"
   },
   "engines": {
     "node": ">=20"
