@@ -987,6 +987,18 @@ values; that is caught one layer later, and precisely — the emitter refuses
 with `prop "size" figma values map is missing enum value "md"` for each missing
 value, verified by probe against an all-values-named control.
 
+**The prune rate is MEASURED, not estimated.** The ten seeds record what a
+human actually did with each proposable axis — kept it or left it out — so the
+ratio is observed behaviour rather than a guess about what a reviewer would
+want. Of **20 axes proposed, a human kept 11 and dropped 9: a 45% prune rate**,
+plus **0.3 axes per component** still authored by hand. The denominator is ten
+components and that number should never be quoted without it.
+
+Extrapolating to Carbon's full breadth — explicitly an extrapolation from n=10
+— the 112 sweep axes would yield roughly 60 kept, 50 pruned, and about 18 axes
+authored from scratch. Against hand-authoring all ~130, that is a real
+reduction and not an elimination.
+
 **What this still does not buy.** Those are the ENUM half of a seed. Every
 component continues to need its parts, its semantics, and any axis a human
 models out of booleans. Tier L is now *reachable*, not *reached*: the

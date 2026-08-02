@@ -415,6 +415,17 @@ if (VERIFY) {
   console.log(
     `THE REVIEW IS NOT FREE: ${surplus} further axes are proposed that the human seed omits. They are read correctly from the declarations and are still work — the reviewer PRUNES ${surplus} and AUTHORS ${judgment}, instead of authoring all ${exact + surplus + judgment}.`,
   );
+
+  // THE PRUNE RATE, measured rather than estimated. These ten seeds record what
+  // a human actually DID with each proposable axis — kept it or left it out —
+  // so the ratio is observed behaviour, not my guess about what a reviewer
+  // would want. The sample is ten components; it is quoted with that
+  // denominator attached and should not be reported without it.
+  const proposed = exact + surplus;
+  const n = config.components.filter((c) => c.contract).length;
+  console.log(
+    `\nPRUNE RATE (n=${n} components, the only ones with a human decision on record): of ${proposed} axes proposed, a human KEPT ${exact} and DROPPED ${surplus} — ${Math.round((surplus / proposed) * 100)}%. Authoring still required: ${judgment} axes over ${n} components, ${(judgment / n).toFixed(1)} per component.`,
+  );
   process.exit(partial === 0 ? 0 : 1);
 }
 
