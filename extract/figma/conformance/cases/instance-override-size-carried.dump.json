@@ -1,0 +1,99 @@
+{
+  "_provenance": {
+    "fileKey": null,
+    "dumpVersion": "1.9",
+    "note": "canvas conformance fixture - hand-authored dump v1.9 (per-instance SIZE override on a self-claimed stub)"
+  },
+  "Case": {
+    "setName": "Case",
+    "type": "COMPONENT",
+    "variants": [
+      {
+        "name": "Size=Sm",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "fill": {
+          "var": "color/surface/background"
+        },
+        "children": [
+          {
+            "name": "a",
+            "type": "INSTANCE",
+            "instanceOf": "Zorble",
+            "instanceKey": "cafe0123456789",
+            "bbox": {
+              "width": 16,
+              "height": 16
+            }
+          },
+          {
+            "name": "t",
+            "type": "TEXT",
+            "text": {
+              "characters": "Case",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "style": "badge"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Size=Lg",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "fill": {
+          "var": "color/surface/background"
+        },
+        "children": [
+          {
+            "name": "a",
+            "type": "INSTANCE",
+            "instanceOf": "Zorble",
+            "instanceKey": "cafe0123456789",
+            "bbox": {
+              "width": 32,
+              "height": 32
+            }
+          },
+          {
+            "name": "t",
+            "type": "TEXT",
+            "text": {
+              "characters": "Case",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "style": "badge"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

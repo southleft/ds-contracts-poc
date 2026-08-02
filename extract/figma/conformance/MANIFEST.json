@@ -1197,6 +1197,19 @@
       "status": "green"
     },
     {
+      "id": "instance-override-size-carried",
+      "construct": "a per-instance SIZE override on a self-claimed child stub (the same instance drawn at two different square boxes)",
+      "expect": "CARRIED",
+      "why": "The fixture pinned the REFUSAL side of per-instance overrides (instance-override-paint-observed: a per-usage paint the child does not declare overridable stays LEDGERED) and never pinned the CARRIAGE, so  \u2014 the whole per-instance override vocabulary \u2014 was exercised by the kits and by nothing failable. This holds the carriage: the host draws ONE child at two different SQUARE boxes while the instance applies NO component properties, so the stub has no axis that could explain the divergence and only the host can tell the two apart. The size is carried as component.overrides[\"size\"] and the divergence is named. Both sides of the vocabulary are now pinned, which is what makes either one meaningful.",
+      "check": {
+        "carried": [
+          "\"component\":\\{\"id\":\"ds\\.zorble\",\"overrides\":\\{\"size\":\"\\{imported\\.case\\.a\\.size\\.\\{size\\}\\}\"\\}\\}"
+        ],
+        "note": "PER-INSTANCE SIZE OVERRIDE proposed"
+      },
+      "status": "green"
+    },
+    {
       "id": "effect-inner-shadow",
       "construct": "an INNER_SHADOW effect on the root",
       "expect": "REFUSED",

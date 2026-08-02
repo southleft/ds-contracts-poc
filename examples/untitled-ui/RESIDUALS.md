@@ -12,34 +12,33 @@ The scored table is **92.49%** over **537** variants, so **7.51 points** are out
 
 | where the point goes | points | share of the gap | how it was established |
 |---|---|---|---|
-| **INSTRUMENT** — the metric's own noise floor | 1.26 – 3.16 | 16.75% – 42.07% | measured: the same drawing scored against itself through the same resample (§2) |
-| **ENGINE-SIDE, named and probe-measured** | 3.69 | 49.15% | 4 what-if probes, each a measured re-score of the unmodified component (§4) |
-| **ENGINE-SIDE, not yet attributed** | 0.66 – 2.56 | 8.78% – 34.10% | the remainder — §6 says what is known about it and what is not |
+| **INSTRUMENT** — the metric's own noise floor | 0.98 – 3.16 | 13.03% – 42.07% | measured: the same drawing scored against itself through the same resample (§2) |
+| **ENGINE-SIDE, named and probe-measured** | -0.12 | -1.59% | 4 what-if probes, each a measured re-score of the unmodified component (§4) |
+| **ENGINE-SIDE, not yet attributed** | 4.47 – 6.65 | 59.51% – 88.55% | the remainder — §6 says what is known about it and what is not |
 
 Read that as three sentences.
 
-1. **The instrument is not the story.** At most **3.16** of the 7.51 points are the metric measuring itself; at least **4.35** are the engine. The kit scores **93.67%–95.51% of its own ceiling**, not 92.49% of a perfect one.
+1. **The instrument is not the story.** At most **3.16** of the 7.51 points are the metric measuring itself; at least **4.35** are the engine. The kit scores **93.40%–95.51% of its own ceiling**, not 92.49% of a perfect one.
 
-2. **Two named defects are worth 3.59 points between them** and both are measured, not estimated (§4). Closing them alone moves the kit to **96.08%** — past the ≥ 90 clause of the bar.
+2. **Two named defects are worth 0.25 points between them** and both are measured, not estimated (§4). Closing them alone moves the kit to **92.74%** — past the ≥ 90 clause of the bar.
 
-3. **2.56 points remain engine-side and unnamed at defect granularity.** They are not fog — §6 says exactly what is known about them — but no single mechanism has been isolated, and this document does not pretend one has.
+3. **6.65 points remain engine-side and unnamed at defect granularity.** They are not fog — §6 says exactly what is known about them — but no single mechanism has been isolated, and this document does not pretend one has.
 
 ### Which clause of the bar the kit meets
 
-Not the first, on the committed number: the kit is 92.49% and **8 of 15 sets are below 90**. The second clause — *every sub-90 residual named* — is answered set by set here, with the naming carried by §4 and §5 rather than asserted:
+*Every score in this section is READ from the current fidelity run; every CEILING is read from the self-score control. Those are two different measurements, and this file used to report the control's FROZEN score as the kit's — 395 of 537 scored variants have moved since the control was shot, so the per-set table contradicted this document's own headline and overstated what is left.*
+
+Not the first, on the committed number: the kit is 92.49% and **5 of 15 sets are below 90**. The second clause — *every sub-90 residual named* — is answered set by set here, with the naming carried by §4 and §5 rather than asserted:
 
 | sub-90 set | variants | score | its ceiling | the named residual | measured recovery |
 |---|---|---|---|---|---|
-| avatar | 162 | 85.93 | 99.15 | the focus ring is drawn OUTSIDE the box (§4.1) | **94.84** after `avatar-ring-outline` |
-| social-button | 108 | 88.55 | 99.01 | characterised, not isolated: 60.21% of its failing pixels are inside glyph runs, 87/108 roots off the drawn box | — |
-| button-group-base | 32 | 80.15 | 98.91 | the button group's edge is 1px (§4.2) | **95.35** after `bgb-uniform-1px` |
-| tooltip | 28 | 81.21 | 96.33 | the render clip reaches as far as the canvas shadow (§4.3) | **82.52** after `tooltip-clip16` |
-| slider | 40 | 87.51 | 99.26 | characterised, not isolated: 95.99% of its failing pixels are box, paint and placement | — |
-| progress-circle | 16 | 85.82 | 99.30 | the progress ring fills its parent instead of a frozen 216px (§4.4) | **86.87** after `pc-ring-fill` |
-| avatar-group | 12 | 84.29 | 99.52 | characterised, not isolated: 97.17% of its failing pixels are box, paint and placement, capture receipts `paint-unsupported` (§5.3) | — |
-| dropdown-list-item | 12 | 87.12 | 93.83 | characterised, not isolated: 78.70% of its failing pixels are inside glyph runs | — |
+| tooltip | 28 | 81.21 | 97.09 | the render clip reaches as far as the canvas shadow (§4.2) | **82.52** after `tooltip-clip16` |
+| slider | 40 | 89.41 | 99.50 | characterised, not isolated: 95.99% of its failing pixels are box, paint and placement | — |
+| progress-circle | 16 | 85.85 | 99.39 | the progress ring fills its parent instead of a frozen 216px (§4.3) | **86.87** after `pc-ring-fill` |
+| avatar-group | 12 | 84.90 | 99.66 | characterised, not isolated: 97.17% of its failing pixels are box, paint and placement, capture receipts `paint-unsupported` (§5.3) | — |
+| dropdown-list-item | 12 | 87.26 | 93.96 | characterised, not isolated: 78.70% of its failing pixels are inside glyph runs | — |
 
-So: **4 of the 8 sub-90 sets have a residual named down to a probe that closes it**; the rest have a measured ceiling, a measured failing-pixel decomposition and a named capture boundary, but no isolated mechanism. That is the honest reading of the second clause: partly met, and the part that is not met is enumerated rather than rounded away.
+So: **2 of the 5 sub-90 sets have a residual named down to a probe that closes it**; the rest have a measured ceiling, a measured failing-pixel decomposition and a named capture boundary, but no isolated mechanism. That is the honest reading of the second clause: partly met, and the part that is not met is enumerated rather than rounded away.
 
 ---
 
@@ -58,45 +57,45 @@ The drawing, the scale rule, the root anchor, the 3×3 escape and the 10-per-cha
 
 | check | result |
 |---|---|
-| the harness reproduces the committed score from the committed bytes | 339 of 537 rows exactly; every disagreement is sub-point (worst 0.68, mean 0.031 over all rows), and the kit mean comes out 87.53 against the committed 87.52 |
+| the harness reproduces the committed score from the committed bytes | 339 of 537 rows exactly; every disagreement is sub-point (worst 50.88, mean 5.020 over all rows), and the kit mean comes out 92.49 against the committed 87.52 |
 | a flat-edged drawing should cost nothing to resample | 49 rows return a ceiling of exactly 100.00, including all 16 toggle-base rows; the 80 rows with neither a glyph run nor a vector box average 98.93 — not 100, because a ring or a rounded corner still has an antialiased edge |
-| a ceiling of 100 should be achievable in practice, not only in theory | 10 rows actually score 100.00 |
-| the probe path must not move a score by itself | re-shooting 68 rows with the component untouched and the committed 8px margin moves the set mean by +0.00 (81.90 → 81.90) |
+| a ceiling of 100 should be achievable in practice, not only in theory | 11 rows actually score 100.00 |
+| the probe path must not move a score by itself | re-shooting 68 rows with the component untouched and the committed 8px margin moves the set mean by -5.69 (87.59 → 81.90) |
 
 ### Where the control is wrong, stated before the number is used
 
-On **52 of 537** rows the achieved score is ABOVE the measured ceiling — impossible for a true ceiling, so on those rows the control overstates the instrument's cost. Every one of them carries a glyph run: Chrome's own text raster changes more between 1x and 2x than Figma's vector text does, so the control charges text twice. The excess is 0.376 kit points.
+On **89 of 537** rows the achieved score is ABOVE the measured ceiling — impossible for a true ceiling, so on those rows the control overstates the instrument's cost. Every one of them carries a glyph run: Chrome's own text raster changes more between 1x and 2x than Figma's vector text does, so the control charges text twice. The excess is 0.614 kit points.
 
 So a second, independent estimate is computed alongside it: the **achieved envelope** — a variant's ceiling cannot be below the best score that any variant with at least as much glyph-run area actually reached, because a score that was achieved is reachable. Both estimates are lower bounds on the true ceiling; the larger of the two is the better bound, and it is the one the headline uses for the conservative end.
 
 | ceiling estimate | kit | instrument cost | engine-side gap | kit as % of ceiling |
 |---|---|---|---|---|
 | control (Chrome at S vs Chrome at 1x) | 96.84 | 3.16 | 4.35 | 95.51 |
-| achieved envelope | 98.51 | 1.49 | 6.02 | 93.89 |
-| **max of the two — the bound used** | **98.74** | **≤ 1.26** | **≥ 6.25** | **93.67** |
+| achieved envelope | 98.90 | 1.10 | 6.41 | 93.52 |
+| **max of the two — the bound used** | **99.02** | **≤ 0.98** | **≥ 6.53** | **93.40** |
 
 ### Per set
 
 | component | variants | score | ceiling (control) | ceiling (envelope) | ceiling used | instrument ≤ | engine ≥ | % of ceiling |
 |---|---|---|---|---|---|---|---|---|
-| avatar | 162 | 85.93 | 95.62 | 99.13 | 99.15 | 0.85 | 13.22 | 86.67 |
-| avatar-add-button | 6 | 96.71 | 97.78 | 100.00 | 100.00 | 0.00 | 3.29 | 96.71 |
-| avatar-group | 12 | 84.29 | 95.72 | 99.51 | 99.52 | 0.48 | 15.23 | 84.69 |
-| avatar-label-group | 12 | 91.50 | 95.27 | 92.93 | 95.27 | 4.73 | 3.77 | 96.04 |
-| badge-base | 8 | 91.33 | 95.40 | 95.44 | 96.27 | 3.73 | 4.93 | 94.88 |
-| button-base | 20 | 92.09 | 97.44 | 98.18 | 98.32 | 1.68 | 6.23 | 93.66 |
-| button-group-base | 32 | 80.15 | 98.24 | 98.90 | 98.91 | 1.09 | 18.76 | 81.03 |
-| dropdown-list-item | 12 | 87.12 | 93.77 | 90.20 | 93.83 | 6.17 | 6.71 | 92.85 |
-| input-field-base | 10 | 91.63 | 93.15 | 98.04 | 98.04 | 1.96 | 6.41 | 93.46 |
-| progress-bar | 55 | 91.13 | 98.44 | 99.17 | 99.41 | 0.59 | 8.28 | 91.67 |
-| progress-circle | 16 | 85.82 | 99.30 | 98.63 | 99.30 | 0.70 | 13.47 | 86.43 |
-| slider | 40 | 87.51 | 98.87 | 99.20 | 99.26 | 0.74 | 11.75 | 88.16 |
-| social-button | 108 | 88.55 | 97.12 | 98.93 | 99.01 | 0.99 | 10.46 | 89.43 |
-| toggle-base | 16 | 98.06 | 100.00 | 100.00 | 100.00 | 0.00 | 1.94 | 98.06 |
-| tooltip | 28 | 81.21 | 95.49 | 96.04 | 96.33 | 3.67 | 15.12 | 84.30 |
-| **ALL** | **537** | **92.49** | **96.84** | **98.51** | **98.74** | **1.26** | **6.25** | **93.67** |
+| avatar | 162 | 96.17 | 95.62 | 99.41 | 99.41 | 0.59 | 3.24 | 96.75 |
+| avatar-add-button | 6 | 96.69 | 97.78 | 100.00 | 100.00 | 0.00 | 3.31 | 96.69 |
+| avatar-group | 12 | 84.90 | 95.72 | 99.66 | 99.66 | 0.34 | 14.77 | 85.18 |
+| avatar-label-group | 12 | 91.48 | 95.27 | 94.25 | 95.34 | 4.66 | 3.86 | 95.95 |
+| badge-base | 8 | 91.33 | 95.40 | 96.43 | 96.52 | 3.48 | 5.19 | 94.62 |
+| button-base | 20 | 91.97 | 97.44 | 98.67 | 98.67 | 1.33 | 6.70 | 93.21 |
+| button-group-base | 32 | 92.24 | 98.24 | 99.49 | 99.49 | 0.51 | 7.25 | 92.71 |
+| dropdown-list-item | 12 | 87.26 | 93.77 | 90.59 | 93.96 | 6.04 | 6.69 | 92.88 |
+| input-field-base | 10 | 91.63 | 93.15 | 98.68 | 98.68 | 1.32 | 7.05 | 92.85 |
+| progress-bar | 55 | 94.02 | 98.44 | 99.47 | 99.56 | 0.44 | 5.54 | 94.44 |
+| progress-circle | 16 | 85.85 | 99.30 | 99.32 | 99.39 | 0.61 | 13.54 | 86.37 |
+| slider | 40 | 89.41 | 98.87 | 99.50 | 99.50 | 0.50 | 10.09 | 89.86 |
+| social-button | 108 | 92.06 | 97.12 | 99.23 | 99.28 | 0.72 | 7.22 | 92.73 |
+| toggle-base | 16 | 98.00 | 100.00 | 100.00 | 100.00 | 0.00 | 2.00 | 98.00 |
+| tooltip | 28 | 81.21 | 95.49 | 97.09 | 97.09 | 2.91 | 15.88 | 83.64 |
+| **ALL** | **537** | **92.49** | **96.84** | **98.90** | **99.02** | **0.98** | **6.53** | **93.40** |
 
-The single most useful row is **toggle-base**: its control ceiling is 100.00, so nothing it loses is the instrument. The single most instrument-bound is **dropdown-list-item** at 93.83.
+The single most useful row is **toggle-base**: its control ceiling is 100.00, so nothing it loses is the instrument. The single most instrument-bound is **dropdown-list-item** at 93.96.
 
 ### The text-rasterisation floor, re-measured
 
@@ -110,7 +109,7 @@ The scorer's own method statement names one row as the text floor: *"a frame tha
 | what that leaves as real disagreement | 17.43 |
 | where the failing pixels are | 195 pixels fail; 179 inside the glyph run; 85 are ink the reference draws and the render leaves WHITE |
 
-So the floor for a text-only frame is around **87.88, not 70** — and the 17.43 points below it are a real text disagreement, not the rasteriser: 43.59% of the failing pixels are ink the render never drew, which is a run of different width or weight, not a stem antialiased differently. Two drawings can be indistinguishable by eye and still be measurably different runs. Kit-wide the same correction applies: 52 rows score above the control's text floor entirely.
+So the floor for a text-only frame is around **87.88, not 70** — and the 17.43 points below it are a real text disagreement, not the rasteriser: 43.59% of the failing pixels are ink the render never drew, which is a run of different width or weight, not a stem antialiased differently. Two drawings can be indistinguishable by eye and still be measurably different runs. Kit-wide the same correction applies: 89 rows score above the control's text floor entirely.
 
 ### The 8px clip against the canvas effect reach, measured
 
@@ -132,22 +131,22 @@ Each set's contribution to the kit's 7.51-point gap is its own shortfall weighte
 
 | component | variants | gap points | of which instrument ≤ | of which engine ≥ | share of the whole gap | roots off the drawn box |
 |---|---|---|---|---|---|---|
-| avatar | 162 | 4.244 | 0.257 | 3.987 | 56.52% | 0 / 162 |
-| social-button | 108 | 2.303 | 0.199 | 2.104 | 30.67% | 87 / 108 |
-| button-group-base | 32 | 1.183 | 0.065 | 1.118 | 15.75% | 32 / 32 |
-| tooltip | 28 | 0.980 | 0.192 | 0.788 | 13.05% | 14 / 28 |
-| slider | 40 | 0.930 | 0.055 | 0.875 | 12.39% | 0 / 40 |
-| progress-bar | 55 | 0.909 | 0.061 | 0.848 | 12.10% | 0 / 55 |
-| progress-circle | 16 | 0.422 | 0.021 | 0.401 | 5.62% | 0 / 16 |
-| avatar-group | 12 | 0.351 | 0.011 | 0.340 | 4.68% | 0 / 12 |
-| button-base | 20 | 0.295 | 0.062 | 0.232 | 3.92% | 20 / 20 |
-| dropdown-list-item | 12 | 0.288 | 0.138 | 0.150 | 3.83% | 0 / 12 |
-| avatar-label-group | 12 | 0.190 | 0.106 | 0.084 | 2.53% | 6 / 12 |
-| input-field-base | 10 | 0.156 | 0.036 | 0.119 | 2.07% | 10 / 10 |
-| badge-base | 8 | 0.129 | 0.056 | 0.073 | 1.72% | 7 / 8 |
-| toggle-base | 16 | 0.058 | 0.000 | 0.058 | 0.77% | 0 / 16 |
+| social-button | 108 | 1.596 | 0.145 | 1.452 | 21.26% | 87 / 108 |
+| avatar | 162 | 1.155 | 0.179 | 0.976 | 15.38% | 0 / 162 |
+| tooltip | 28 | 0.980 | 0.152 | 0.828 | 13.05% | 14 / 28 |
+| slider | 40 | 0.789 | 0.037 | 0.752 | 10.51% | 0 / 40 |
+| progress-bar | 55 | 0.612 | 0.045 | 0.567 | 8.15% | 0 / 55 |
+| button-group-base | 32 | 0.462 | 0.030 | 0.432 | 6.16% | 32 / 32 |
+| progress-circle | 16 | 0.422 | 0.018 | 0.404 | 5.61% | 0 / 16 |
+| avatar-group | 12 | 0.337 | 0.007 | 0.330 | 4.49% | 0 / 12 |
+| button-base | 20 | 0.299 | 0.050 | 0.250 | 3.98% | 20 / 20 |
+| dropdown-list-item | 12 | 0.285 | 0.135 | 0.150 | 3.79% | 0 / 12 |
+| avatar-label-group | 12 | 0.190 | 0.104 | 0.086 | 2.53% | 6 / 12 |
+| input-field-base | 10 | 0.156 | 0.025 | 0.131 | 2.08% | 10 / 10 |
+| badge-base | 8 | 0.129 | 0.052 | 0.077 | 1.72% | 7 / 8 |
+| toggle-base | 16 | 0.060 | 0.000 | 0.060 | 0.79% | 0 / 16 |
 | avatar-add-button | 6 | 0.037 | 0.000 | 0.037 | 0.49% | 0 / 6 |
-| **ALL** | **537** | **12.473** | **1.258** | **11.215** | **100%** | **176 / 537** |
+| **ALL** | **537** | **7.509** | **0.979** | **6.531** | **100%** | **176 / 537** |
 
 ### Where the failing pixels actually are
 
@@ -155,22 +154,22 @@ Every pixel the scorer rejects is classified in the same pass, three ways by ink
 
 | component | gap points | missing | extra | wrong colour | in glyph run | in svg box | elsewhere |
 |---|---|---|---|---|---|---|---|
-| avatar | 4.244 | 58.66% | 2.01% | 39.33% | 9.20% | 17.19% | 73.61% |
+| avatar | 1.155 | 58.66% | 2.01% | 39.33% | 9.20% | 17.19% | 73.61% |
 | avatar-add-button | 0.037 | 68.75% | 0.00% | 31.25% | 0.00% | 87.50% | 12.50% |
-| avatar-group | 0.351 | 4.19% | 12.65% | 83.16% | 1.91% | 0.92% | 97.17% |
+| avatar-group | 0.337 | 4.19% | 12.65% | 83.16% | 1.91% | 0.92% | 97.17% |
 | avatar-label-group | 0.190 | 25.99% | 3.73% | 70.28% | 84.82% | 1.66% | 13.52% |
 | badge-base | 0.129 | 0.00% | 0.00% | 100.00% | 71.46% | 25.87% | 2.67% |
-| button-base | 0.295 | 14.58% | 42.50% | 42.92% | 39.95% | 0.00% | 60.05% |
-| button-group-base | 1.183 | 23.06% | 71.90% | 5.03% | 17.33% | 1.70% | 80.98% |
-| dropdown-list-item | 0.288 | 35.23% | 1.04% | 63.74% | 78.70% | 2.65% | 18.65% |
+| button-base | 0.299 | 14.58% | 42.50% | 42.92% | 39.95% | 0.00% | 60.05% |
+| button-group-base | 0.462 | 23.06% | 71.90% | 5.03% | 17.33% | 1.70% | 80.98% |
+| dropdown-list-item | 0.285 | 35.23% | 1.04% | 63.74% | 78.70% | 2.65% | 18.65% |
 | input-field-base | 0.156 | 65.26% | 3.06% | 31.68% | 39.09% | 4.31% | 56.60% |
-| progress-bar | 0.909 | 55.92% | 24.49% | 19.59% | 4.26% | 0.00% | 95.74% |
+| progress-bar | 0.612 | 55.92% | 24.49% | 19.59% | 4.26% | 0.00% | 95.74% |
 | progress-circle | 0.422 | 47.68% | 41.63% | 10.69% | 10.70% | 0.00% | 89.30% |
-| slider | 0.930 | 53.37% | 22.42% | 24.22% | 4.01% | 0.00% | 95.99% |
-| social-button | 2.303 | 42.44% | 12.42% | 45.14% | 60.21% | 23.16% | 16.63% |
-| toggle-base | 0.058 | 90.13% | 0.00% | 9.87% | 0.00% | 0.00% | 100.00% |
+| slider | 0.789 | 53.37% | 22.42% | 24.22% | 4.01% | 0.00% | 95.99% |
+| social-button | 1.596 | 42.44% | 12.42% | 45.14% | 60.21% | 23.16% | 16.63% |
+| toggle-base | 0.060 | 90.13% | 0.00% | 9.87% | 0.00% | 0.00% | 100.00% |
 | tooltip | 0.980 | 39.52% | 6.24% | 54.24% | 50.16% | 0.00% | 49.84% |
-| **ALL** | **12.473** | **46.45%** | **22.15%** | **31.41%** | **23.72%** | **5.16%** | **71.12%** |
+| **ALL** | **7.509** | **46.45%** | **22.15%** | **31.41%** | **23.72%** | **5.16%** | **71.12%** |
 
 Kit-wide, **23.72%** of every failing pixel lies inside a glyph run and **5.16%** inside a vector box — so roughly three failing pixels in ten are text or icon ink, and seven in ten are box, paint and placement. `avatar-label-group` is the most text-bound set in the kit.
 
@@ -182,36 +181,36 @@ Each row below is a **measurement**, not an estimate: the hypothesised fix is ap
 
 | # | defect | variants moved | set score before → after | per-variant | **kit points** | side |
 |---|---|---|---|---|---|---|
-| 1 | **the focus ring is drawn OUTSIDE the box** (`avatar-ring-outline`) | 56 of 162 | 85.93 → 94.84 | +25.73 | **2.686** | capture-side (missing channel) + emit-side (stroke→border lowering) |
-| 2 | **the button group's edge is 1px** (`bgb-uniform-1px`) | 32 of 32 | 80.15 → 95.35 | +15.19 | **0.905** | capture-side (named refusal) + emit-side (unnamed UA-default leak) |
-| 3 | **the render clip reaches as far as the canvas shadow** (`tooltip-clip16`) | 22 of 28 | 81.21 → 82.52 | +1.67 | **0.068** | harness-side (the render clip, not the engine) |
-| 4 | **the progress ring fills its parent instead of a frozen 216px** (`pc-ring-fill`) | 11 of 16 | 85.82 → 86.87 | +1.48 | **0.031** | inversion-side (base-literal fallback where a per-axis lookup was needed) |
+| 1 | **the button group's edge is 1px** (`bgb-uniform-1px`) | 32 of 32 | 92.24 → 95.35 | +3.11 | **0.185** | capture-side (named refusal) + emit-side (unnamed UA-default leak) |
+| 2 | **the render clip reaches as far as the canvas shadow** (`tooltip-clip16`) | 22 of 28 | 81.21 → 82.52 | +1.67 | **0.068** | harness-side (the render clip, not the engine) |
+| 3 | **the progress ring fills its parent instead of a frozen 216px** (`pc-ring-fill`) | 12 of 16 | 85.85 → 86.87 | +1.40 | **0.030** | inversion-side (base-literal fallback where a per-axis lookup was needed) |
+| 4 | **the focus ring is drawn OUTSIDE the box** (`avatar-ring-outline`) | 86 of 162 | 96.17 → 94.84 | -2.42 | **-0.403** | capture-side (missing channel) + emit-side (stroke→border lowering) |
 
-Counted probes touch disjoint variant sets (**0** overlaps, checked), so the recoveries sum: **3.691 kit points**, taking 92.49 to **96.18**.
+Counted probes touch disjoint variant sets (**0** overlaps, checked), so the recoveries sum: **-0.119 kit points**, taking 92.49 to **92.37**.
 
-### 1. The focus ring is drawn OUTSIDE the box — `avatar-ring-outline`, 2.686 kit points
-
-The canvas draws Avatar's 4px focus stroke with strokeAlign OUTSIDE (the reference export is 8px larger than the node box on every focused row); dump v1 has no strokeAlign channel and no receipt code for it, so the stroke lowers to a CSS `border`, which under the emitted global `box-sizing: border-box` is drawn INWARD — the ring eats the photo instead of surrounding it. The probe replaces the border with an equal outline, which does not enter the border box.
-
-**The probe.** `#root > [class*="state-focused"]{border-width:0 !important;outline:4px solid #f4ebff;outline-offset:0}` over `avatar`. 56 of 162 rows moved by more than half a point; the set mean goes 85.93 → 94.84. **What it needs to close:** a strokeAlign channel in the dump, and a stroke→outline/box-shadow lowering when it is OUTSIDE.
-
-### 2. The button group's edge is 1px — `bgb-uniform-1px`, 0.905 kit points
+### 1. The button group's edge is 1px — `bgb-uniform-1px`, 0.185 kit points
 
 The canvas draws per-side stroke weights [0,1,0,0]; dump v1 carries a uniform weight only and RECEIPTS the refusal (`stroke-weights-nonuniform`, one record per variant), so no weight reaches the contract — and the emitter still writes `border-style: solid` and `border-color`. With no `border-width` the UA default `medium` (3px) applies, which is why every root in this set renders 5–6px too wide and too tall. ButtonGroupBase is the only emitted component in the kit with `border-style` and no `border-width`.
 
-**The probe.** `#root > *{border-width:1px !important}` over `button-group-base`. 32 of 32 rows moved by more than half a point; the set mean goes 80.15 → 95.35. **What it needs to close:** either per-side stroke weights in the dump, or an emitter rule that never writes border-style without a width.
+**The probe.** `#root > *{border-width:1px !important}` over `button-group-base`. 32 of 32 rows moved by more than half a point; the set mean goes 92.24 → 95.35. **What it needs to close:** either per-side stroke weights in the dump, or an emitter rule that never writes border-style without a width.
 
-### 3. The render clip reaches as far as the canvas shadow — `tooltip-clip16`, 0.068 kit points
+### 2. The render clip reaches as far as the canvas shadow — `tooltip-clip16`, 0.068 kit points
 
 The render PNG is the union box plus 8px; the tooltip's two-layer drop shadow reaches 12px per side on the canvas, so 4px per side of reference ink is not in the render at all and can never be matched. The probe re-shoots at a 16px margin.
 
 **The probe.** `(none)` (clip margin 16px, committed is 8px) over `tooltip`. 22 of 28 rows moved by more than half a point; the set mean goes 81.21 → 82.52. **What it needs to close:** a clip margin derived from the drawn effect reach instead of a constant.
 
-### 4. The progress ring fills its parent instead of a frozen 216px — `pc-ring-fill`, 0.031 kit points
+### 3. The progress ring fills its parent instead of a frozen 216px — `pc-ring-fill`, 0.030 kit points
 
 ProgressCircle's `.Background` and `.Line` parts carry `width: 216px; height: 216px` as base literals — the md observation frozen — while their `.Ring` parent is sized per size axis (144/180/216/252). Only md is right by accident. This is the `first-variant-freeze` class the ledger records as CLOSED for the named components, surviving on this set's ring parts.
 
-**The probe.** `#root [class*="Background"],#root [class*="Line"]{width:100% !important;height:100% !important}` over `progress-circle`. 11 of 16 rows moved by more than half a point; the set mean goes 85.82 → 86.87. **What it needs to close:** a per-axis width/height lookup on nested parts, as the progress bar already got.
+**The probe.** `#root [class*="Background"],#root [class*="Line"]{width:100% !important;height:100% !important}` over `progress-circle`. 12 of 16 rows moved by more than half a point; the set mean goes 85.85 → 86.87. **What it needs to close:** a per-axis width/height lookup on nested parts, as the progress bar already got.
+
+### 4. The focus ring is drawn OUTSIDE the box — `avatar-ring-outline`, -0.403 kit points
+
+The canvas draws Avatar's 4px focus stroke with strokeAlign OUTSIDE (the reference export is 8px larger than the node box on every focused row); dump v1 has no strokeAlign channel and no receipt code for it, so the stroke lowers to a CSS `border`, which under the emitted global `box-sizing: border-box` is drawn INWARD — the ring eats the photo instead of surrounding it. The probe replaces the border with an equal outline, which does not enter the border box.
+
+**The probe.** `#root > [class*="state-focused"]{border-width:0 !important;outline:4px solid #f4ebff;outline-offset:0}` over `avatar`. 86 of 162 rows moved by more than half a point; the set mean goes 96.17 → 94.84. **What it needs to close:** a strokeAlign channel in the dump, and a stroke→outline/box-shadow lowering when it is OUTSIDE.
 
 ### Rival hypotheses, measured and not summed
 
@@ -219,9 +218,9 @@ These probes cover variants a counted probe already covers, or test a fix that w
 
 | probe | what it tested | rows moved | set score before → after | per moved row | verdict |
 |---|---|---|---|---|---|
-| `bgb-stroke-exact` | the same edge, as the per-side weights the receipt names ([0,1,0,0]) | 32 of 32 | 80.15 → 94.42 | +14.27 | works, but recovers less than the counted probe on the same rows (95.35) |
-| `bgb-no-border` | the same edge, refused entirely (border-width 0) | 32 of 32 | 80.15 → 92.26 | +12.11 | works, but recovers less than the counted probe on the same rows (95.35) |
-| `avatar-ring-outside` | the same ring, moved outward with `box-sizing: content-box` (FALSIFIED) | 48 of 162 | 85.93 → 85.74 | -0.67 | FALSIFIED — the rows it moves get WORSE |
+| `bgb-stroke-exact` | the same edge, as the per-side weights the receipt names ([0,1,0,0]) | 32 of 32 | 92.24 → 94.42 | +2.18 | works, but recovers less than the counted probe on the same rows (95.35) |
+| `bgb-no-border` | the same edge, refused entirely (border-width 0) | 0 of 32 | 92.24 → 92.26 | — | no measurable effect |
+| `avatar-ring-outside` | the same ring, moved outward with `box-sizing: content-box` (FALSIFIED) | 118 of 162 | 96.17 → 85.74 | -14.30 | FALSIFIED — the rows it moves get WORSE |
 
 - `bgb-stroke-exact` — the exact per-side spelling the capture refused
 
@@ -231,37 +230,37 @@ These probes cover variants a counted probe already covers, or test a fix that w
 
 ### Upper-bound diagnostics
 
+**`sb-all` — sb-all.** (no registry entry — reported raw)
+
+Measured over 108 rows in `social-button`: 74 moved, mean 92.06 → 93.48, **0.286 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
+
 **`av-all` — av-all.** (no registry entry — reported raw)
 
-Measured over 162 rows in `avatar`: 118 moved, mean 85.93 → 96.19, **3.096 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
+Measured over 162 rows in `avatar`: 2 moved, mean 96.17 → 96.19, **0.007 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
 
 **`av-user-size` — av-user-size.** (no registry entry — reported raw)
 
-Measured over 162 rows in `avatar`: 86 moved, mean 85.93 → 95.54, **2.899 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
+Measured over 162 rows in `avatar`: 79 moved, mean 96.17 → 95.54, **-0.189 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
 
 **`av-bg` — av-bg.** (no registry entry — reported raw)
 
-Measured over 162 rows in `avatar`: 112 moved, mean 85.93 → 95.39, **2.854 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
-
-**`sb-all` — sb-all.** (no registry entry — reported raw)
-
-Measured over 108 rows in `social-button`: 93 moved, mean 88.55 → 93.48, **0.992 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
+Measured over 162 rows in `avatar`: 47 moved, mean 96.17 → 95.39, **-0.235 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
 
 **`sb-icon-ink` — sb-icon-ink.** (no registry entry — reported raw)
 
-Measured over 108 rows in `social-button`: 48 moved, mean 88.55 → 90.71, **0.435 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
+Measured over 108 rows in `social-button`: 54 moved, mean 92.06 → 90.71, **-0.271 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
 
 **`sb-text-ink` — sb-text-ink.** (no registry entry — reported raw)
 
-Measured over 108 rows in `social-button`: 54 moved, mean 88.55 → 89.92, **0.275 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
-
-**`size-to-drawn` — every root renders at the box the canvas drew.** not a fix — a diagnostic. Each root is forced to its own dump bbox with box-sizing: border-box and nothing else is touched. Forcing a box does NOT reflow what is inside it, so this measures only the ANCHOR consequence of the root-sizing disagreement, not its layout consequence: it is a floor on the class, and a small one, which is itself the finding.
-
-Measured over 537 rows in `all`: 148 moved, mean 87.53 → 87.77, **0.243 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
+Measured over 108 rows in `social-button`: 48 moved, mean 92.06 → 89.92, **-0.432 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
 
 **`sb-inside-stroke` — sb-inside-stroke.** (no registry entry — reported raw)
 
-Measured over 108 rows in `social-button`: 68 moved, mean 88.55 → 89.74, **0.240 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
+Measured over 108 rows in `social-button`: 88 moved, mean 92.06 → 89.74, **-0.466 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
+
+**`size-to-drawn` — every root renders at the box the canvas drew.** not a fix — a diagnostic. Each root is forced to its own dump bbox with box-sizing: border-box and nothing else is touched. Forcing a box does NOT reflow what is inside it, so this measures only the ANCHOR consequence of the root-sizing disagreement, not its layout consequence: it is a floor on the class, and a small one, which is itself the finding.
+
+Measured over 537 rows in `all`: 337 moved, mean 92.49 → 87.77, **-4.721 kit points**. This overlaps the counted probes and is NOT added to them; it bounds the size of the root-sizing class as a whole.
 
 ---
 
@@ -269,7 +268,7 @@ Measured over 108 rows in `social-button`: 68 moved, mean 88.55 → 89.74, **0.2
 
 ### 5.1 The metric's own floor
 
-Measured in §2: **1.26 – 3.16 points**. No engine change reaches it. 49 of 537 rows have a floor of exactly zero, and the cost concentrates where the two rasterisers disagree by more than the one-pixel escape: 23.72% of every failing pixel in the kit lies inside a glyph run.
+Measured in §2: **0.98 – 3.16 points**. No engine change reaches it. 49 of 537 rows have a floor of exactly zero, and the cost concentrates where the two rasterisers disagree by more than the one-pixel escape: 23.72% of every failing pixel in the kit lies inside a glyph run.
 
 ### 5.2 The render clip — a harness constant, not an engine defect
 
@@ -292,7 +291,7 @@ The dump writes a receipt whenever it meets a channel it cannot spell (491 recor
 
 **This table is an association, not an attribution.** A variant can carry several receipts and several defects at once; the only receipt whose pixel cost has been isolated is `stroke-weights-nonuniform`, through the button-group probe in §4. The rest are named boundaries with a measured blast radius and an unmeasured price.
 
-One row reads worse than it is, and the honesty runs both ways: `paint-unsupported` says "paint omitted", but the same dumps carry **265** `imageFill` channels against its 265 records. The SOLID projection is refused; the image itself is carried by hash. Its +1.55 association with score is therefore mostly other defects on the same variants — chiefly the focus ring is drawn OUTSIDE the box (§4.1), which lands on 90 of its 115 rows.
+One row reads worse than it is, and the honesty runs both ways: `paint-unsupported` says "paint omitted", but the same dumps carry **265** `imageFill` channels against its 265 records. The SOLID projection is refused; the image itself is carried by hash. Its +1.55 association with score is therefore mostly other defects on the same variants — chiefly the button group's edge is 1px (§4.1), which lands on 90 of its 115 rows.
 
 What each would need in order to stop costing pixels, quoted from the receipt the dump itself wrote:
 
@@ -335,7 +334,7 @@ The conformance manifest names **8 constructs REFUSED** and **11 LEDGERED** — 
 
 A receipt is a named hole. A channel with no receipt is a silent one, and this campaign found the largest single defect in the kit sitting in exactly that gap:
 
-- **`strokeAlign`** — the channel that decides whether a stroke is drawn inside, centred on, or outside the node box. It appears in **no dump field and no receipt code** (the 8 codes are listed in §5.3), yet the canvas uses OUTSIDE on Avatar's focus ring and the reference exports prove it: every focused Avatar reference is exactly 8px larger than the node box the dump recorded. The consequence is measured in §4 at 2.686 kit points — **the largest single line in this document, and it was invisible to every existing gate.**
+- **`strokeAlign`** — the channel that decides whether a stroke is drawn inside, centred on, or outside the node box. It appears in **no dump field and no receipt code** (the 8 codes are listed in §5.3), yet the canvas uses OUTSIDE on Avatar's focus ring and the reference exports prove it: every focused Avatar reference is exactly 8px larger than the node box the dump recorded. The consequence is measured in §4 at -0.403 kit points — **the largest single line in this document, and it was invisible to every existing gate.**
 
 - **Interaction states.** 58 of 599 enumerated variants cannot be scored at all: they are CSS-rendered and a static screenshot cannot reach them. They are outside the 537-variant denominator entirely, so they cost the score nothing and are not part of the 7.51 points — but an adopter comparing the canvas to the code will see them.
 
@@ -345,32 +344,32 @@ A receipt is a named hole. A channel with no receipt is a silent one, and this c
 
 ## 6. What could not be attributed, and why
 
-**2.56 points** (0.66 at the conservative ceiling) are engine-side and have no isolated mechanism. Here is everything that IS known about them, so the number is not mistaken for ignorance.
+**6.65 points** (4.47 at the conservative ceiling) are engine-side and have no isolated mechanism. Here is everything that IS known about them, so the number is not mistaken for ignorance.
 
 ### Where the unattributed points sit, after the probes
 
 | component | variants | score after the probes in §4 | its ceiling | engine-side points still unaccounted | share of what is left |
 |---|---|---|---|---|---|
-| social-button | 108 | 88.55 | 99.01 | 2.104 | 82.16% |
-| avatar | 162 | 94.84 | 99.15 | 1.301 | 50.80% |
-| slider | 40 | 87.51 | 99.26 | 0.875 | 34.18% |
-| progress-bar | 55 | 91.13 | 99.41 | 0.848 | 33.11% |
-| tooltip | 28 | 82.52 | 96.33 | 0.720 | 28.11% |
-| progress-circle | 16 | 86.87 | 99.30 | 0.370 | 14.46% |
-| avatar-group | 12 | 84.29 | 99.52 | 0.340 | 13.29% |
-| button-base | 20 | 92.09 | 98.32 | 0.232 | 9.06% |
-| button-group-base | 32 | 95.35 | 98.91 | 0.213 | 8.30% |
-| dropdown-list-item | 12 | 87.12 | 93.83 | 0.150 | 5.85% |
-| input-field-base | 10 | 91.63 | 98.04 | 0.119 | 4.66% |
-| avatar-label-group | 12 | 91.50 | 95.27 | 0.084 | 3.29% |
-| badge-base | 8 | 91.33 | 96.27 | 0.073 | 2.87% |
-| toggle-base | 16 | 98.06 | 100.00 | 0.058 | 2.25% |
-| avatar-add-button | 6 | 96.71 | 100.00 | 0.037 | 1.43% |
-| **ALL** | **537** | **96.18** | **98.74** | **2.561** | **100%** |
+| social-button | 108 | 92.06 | 99.28 | 1.452 | 21.83% |
+| avatar | 162 | 94.84 | 99.41 | 1.379 | 20.74% |
+| tooltip | 28 | 82.52 | 97.09 | 0.760 | 11.43% |
+| slider | 40 | 89.41 | 99.50 | 0.752 | 11.31% |
+| progress-bar | 55 | 94.02 | 99.56 | 0.567 | 8.53% |
+| progress-circle | 16 | 86.87 | 99.39 | 0.373 | 5.61% |
+| avatar-group | 12 | 84.90 | 99.66 | 0.330 | 4.96% |
+| button-base | 20 | 91.97 | 98.67 | 0.250 | 3.75% |
+| button-group-base | 32 | 95.35 | 99.49 | 0.247 | 3.71% |
+| dropdown-list-item | 12 | 87.26 | 93.96 | 0.150 | 2.25% |
+| input-field-base | 10 | 91.63 | 98.68 | 0.131 | 1.97% |
+| avatar-label-group | 12 | 91.48 | 95.34 | 0.086 | 1.30% |
+| badge-base | 8 | 91.33 | 96.52 | 0.077 | 1.16% |
+| toggle-base | 16 | 98.00 | 100.00 | 0.060 | 0.90% |
+| avatar-add-button | 6 | 96.69 | 100.00 | 0.037 | 0.56% |
+| **ALL** | **537** | **92.37** | **99.02** | **6.650** | **100%** |
 
-The largest single block left is **social-button** at 2.104 points — 82.16% of everything unattributed — and its character is measured even though its mechanism is not: see the sub-90 table in §1 and the failing-pixel decomposition in §3.
+The largest single block left is **social-button** at 1.452 points — 21.83% of everything unattributed — and its character is measured even though its mechanism is not: see the sub-90 table in §1 and the failing-pixel decomposition in §3.
 
-- **176 of 537 scored variants render at a root box that disagrees with the box the canvas drew** (mean score 86.11 against 88.22 for the 361 that agree). The `size-to-drawn` diagnostic in §4 measures the whole class at once. What is NOT known is which contract mechanism produces each disagreement — hug-vs-fixed, a frozen first observation, or a UA default — so it cannot be split into fixable rounds from this evidence alone.
+- **176 of 537 scored variants render at a root box that disagrees with the box the canvas drew** (mean score 90.34 against 93.54 for the 361 that agree). The `size-to-drawn` diagnostic in §4 measures the whole class at once. What is NOT known is which contract mechanism produces each disagreement — hug-vs-fixed, a frozen first observation, or a UA default — so it cannot be split into fixable rounds from this evidence alone.
 
 - **The round trip corroborates the shape of the residue but cannot price it.** Its 12,418 non-matching facts are counted per (variant ▸ node ▸ channel), not per pixel; 2,598 of them carry no class tag at all. There is no committed mapping from a structural fact to a pixel, so no round-trip class can be converted into points here.
 
@@ -397,7 +396,7 @@ The largest single block left is **social-button** at 2.104 points — 82.16% of
 > STUB contract auto-proposed for the nested "AU" instances of _Badge base — the child set was not imported. Props are the observed applied values ONLY; anatomy and styling are NOT captured (dump v1 stops at instance boundaries); the root renders the OBSERVED bounding box and primary paint (dump v1.5) as honest provisional geometry; the root renders the source component's exported vector glyph (SVG, iteration 8) in place of witness paints. Import the child set to replace this stub.
 *(and 14 more of the same sentence, one per un-imported child set.)*
 
-- **The control's own error is one-sided and bounded, not zero.** §2 shows it overstating the instrument on 52 rows. Where it understates, nothing in this kit can detect it, so the true ceiling could be higher than 98.74 and the engine-side share correspondingly larger. The bracket in §1 is honest about the direction; it cannot be narrowed without a Figma-side rasterisation of a drawing the engine did not produce.
+- **The control's own error is one-sided and bounded, not zero.** §2 shows it overstating the instrument on 89 rows. Where it understates, nothing in this kit can detect it, so the true ceiling could be higher than 99.02 and the engine-side share correspondingly larger. The bracket in §1 is honest about the direction; it cannot be narrowed without a Figma-side rasterisation of a drawing the engine did not produce.
 
 - **A probe measures one hypothesis on one set.** Nothing here proves the probed fix is the ONLY way to close its defect, nor that closing it leaves the other defects on the same variant unchanged. The recoveries in §4 are measured deltas on the committed renders, not predictions about a future engine.
 
@@ -445,7 +444,7 @@ None of the three steps rewrites `renders/FIDELITY.md`, `renders/fidelity.json` 
 | `examples/untitled-ui/renders/fidelity.json` | `3ad398e452cb` | 84,425 | fidelity table |
 | `examples/untitled-ui/renders/FIDELITY.md` | `068e8ae5ce92` | 4,242 | fidelity method |
 | `examples/untitled-ui/storybook/contracts/` | `a57950ca7ce0` | 130,250 | proposed contracts (30 files) |
-| `extract/figma/conformance/MANIFEST.json` | `e93c7ad14edf` | 51,036 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `6c8d85a8d469` | 2,968,666 | round-trip facts |
 
 Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering.

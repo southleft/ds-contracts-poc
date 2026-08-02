@@ -108,7 +108,36 @@ const mean = (xs: number[]): number => (xs.length ? xs.reduce((a, b) => a + b, 0
 const fid = readJson<FidRow[]>('fidelity table', path.join(RENDERS, 'fidelity.json'));
 const fidMd = readText('fidelity method', path.join(RENDERS, 'FIDELITY.md'));
 const selfFile = readJson<ProbeFile>('self-score control', path.join(RENDERS, 'fidelity-selfscore.json'));
-const self = selfFile.rows.filter((r) => r.score !== null && r.ceiling !== null);
+// THE SCORE IS READ FROM THE CURRENT RUN; ONLY THE CEILING COMES FROM THE
+// CONTROL. These are two different measurements and this file used to conflate
+// them. `fidelity-selfscore.json` is the instrument control — it substitutes
+// the RASTERISER to establish what a variant COULD score — and it also happens
+// to carry the kit's score at the moment the control was shot. Reading that
+// frozen score as the kit's current one made §3 contradict its own headline:
+// the total came from fidelity.json (current) while the per-set table came
+// from a control shot 2026-08-01 06:44, so avatar still read 85.93 after being
+// fixed to 96.17 and button-group-base 80.15 after 92.24 — and the document
+// announced "8 of 15 sets are below 90" when five were. A residuals report
+// that overstates what is left is exactly as dishonest as one that understates
+// it. The CEILING is a property of the reference and does not move when the
+// engine improves, so it legitimately stays from the control; the SCORE is
+// joined per (set, variant) from the current table.
+const fidScore = new Map(fid.filter((r) => typeof r.score === 'number').map((r) => [`${r.set}|${r.variant}`, r.score]));
+const selfRaw = selfFile.rows.filter((r) => r.score !== null && r.ceiling !== null);
+const unjoined = selfRaw.filter((r) => !fidScore.has(`${r.set}|${r.variant}`));
+if (unjoined.length > 0) {
+  console.error(
+    `RESIDUALS REFUSED: ${unjoined.length} row(s) in the self-score control have no counterpart in the current ` +
+      `fidelity table (first: ${unjoined[0].set}/${unjoined[0].variant}). The control is stale against the run it is ` +
+      'being paired with, so every ceiling-vs-score number below would compare two different kits. Re-shoot it:\n' +
+      '  npx tsx examples/untitled-ui/selfscore.mts --write',
+  );
+  process.exit(1);
+}
+const movedSinceControl = selfRaw.filter(
+  (r) => Math.abs((fidScore.get(`${r.set}|${r.variant}`) as number) - (r.score as number)) > 0.005,
+).length;
+const self = selfRaw.map((r) => ({ ...r, score: fidScore.get(`${r.set}|${r.variant}`) as number }));
 const probeNames = readdirSync(RENDERS).filter((f) => /^fidelity-probe-.*\.json$/.test(f)).sort();
 const probes = probeNames.map((name) => ({
   name: name.replace(/^fidelity-probe-/, '').replace(/\.json$/, ''),
@@ -346,6 +375,9 @@ P(`2. **Two named defects are worth ${f2(counted.slice(0, 2).reduce((a, p) => a 
 P(`3. **${f2(ENG_HI - RECOVERED)} points remain engine-side and unnamed at defect granularity.** They are not fog — §6 says exactly what is known about them — but no single mechanism has been isolated, and this document does not pretend one has.`);
 P('### Which clause of the bar the kit meets');
 const sub90 = setStat.slice().filter((s) => s.score < 90).sort((a, b) => b.gapPts - a.gapPts);
+P(
+  `*Every score in this section is READ from the current fidelity run; every CEILING is read from the self-score control. Those are two different measurements, and this file used to report the control's FROZEN score as the kit's — ${movedSinceControl} of ${self.length} scored variants have moved since the control was shot, so the per-set table contradicted this document's own headline and overstated what is left.*`,
+);
 P(`Not the first, on the committed number: the kit is ${f2(KIT)}% and **${sub90.length} of ${setStat.length} sets are below 90**. The second clause — *every sub-90 residual named* — is answered set by set here, with the naming carried by §4 and §5 rather than asserted:`);
 P(...table(
   ['sub-90 set', 'variants', 'score', 'its ceiling', 'the named residual', 'measured recovery'],
