@@ -905,6 +905,45 @@ These will not be fixed, and saying so is the point
 
 ---
 
+## 6b. THE SCALE WALL — intake cost is linear in component count, and human
+
+*Found 2026-08-02, while starting a full-breadth Carbon ingest. The ingest did
+not start; the recon answered the question first.*
+
+Every code-side number this repo publishes is a **slice** number: MUI 14 of
+~100+ components, Polaris 12 of ~80, Carbon 10 of ~40, Tailwind 5, Astryx 5.
+That is not an accident of effort, and it is not the engine — the gauntlet
+census has already run **1,618 sets** through the receive pipeline in one go.
+It is the INTAKE.
+
+Adoption is the nine-step path in [docs/21](21-bring-your-own-design-system.md),
+and **step 4 is a seed contract per component** — described there as *"the prop
+space, **never re-derived from the library**"*. Carbon's ten seeds total 654
+lines, roughly 65 each, hand-authored: props, enum values, and per-value Figma
+`VARIANT` display names. So the cost of onboarding a design system is linear in
+its component count and paid by a human, before the tool does anything.
+
+**What that means for size.** A small or medium system is affordable. A large
+or extra-large one is not: an adopter with 100 components hand-writes 100 seeds
+plus a capture config first. The engine's ability to handle a big system and a
+team's ability to GET a big system into it are different questions, and only
+the first one has been measured.
+
+**The unlock, named and not yet built.** Generate seeds from the library's own
+type information (react-docgen, TypeScript types, propTypes) into a seed a
+human REVIEWS — turning O(n) authoring into O(1) tooling plus n reviews.
+
+**Why the existing rule deserves respect on the way past it.** "Never
+re-derived from the library" is not laziness: a prop space inferred at capture
+time silently admits props that are not design-relevant, and makes the captured
+output depend on the library's internals rather than on a declared contract. A
+GENERATED, human-reviewed seed is a different object from inference-at-capture.
+That distinction should be argued in the open before the rule changes.
+
+Until then: tier L (51–200 sets) is **unmeasured** on the code side, tier XL is
+measured only on our own kit, and the honest word for both is *unmeasured* —
+not *passing*. See `npm run gauntlet:intake`.
+
 ## 7. How to check this document yourself
 
 ```bash
