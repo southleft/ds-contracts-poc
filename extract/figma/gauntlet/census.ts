@@ -70,11 +70,21 @@ const read = (p: string) => JSON.parse(readFileSync(path.join(ROOT, p), 'utf8'))
 // Inputs — repo corpus/contracts/icons/tokens (emitters-check composition)
 // ---------------------------------------------------------------------------
 
-const dumpPath = process.argv[2] ?? DEFAULT_DUMP;
-/** Committed outputs (CENSUS.md, census.json, fixtures/) regenerate only for
- *  the default dump — a custom dump argument gets the stdout report without
- *  clobbering the committed census. */
-const writeOutputs = dumpPath === DEFAULT_DUMP;
+const argv = process.argv.slice(2).filter((a) => !a.startsWith('--'));
+const outFlagIdx = process.argv.indexOf('--out');
+/** THE INTAKE HOOK. The census was built for ONE kit and could only write its
+ *  outputs for that one dump; every other dump got a stdout report that
+ *  nothing could read back. `--out <dir>` lets the multi-system intake
+ *  (gauntlet/intake.ts) run this SAME census per system and collect each
+ *  one's failure classes — which is the whole convergence measurement: a new
+ *  system is only interesting for the classes it introduces that no earlier
+ *  system did. Fixtures still only regenerate for the default dump, so an
+ *  intake run cannot clobber the committed class fixtures. */
+const outDirFlag = outFlagIdx >= 0 ? process.argv[outFlagIdx + 1] : undefined;
+const dumpPath = argv[0] ?? DEFAULT_DUMP;
+const writeOutputs = outDirFlag !== undefined || dumpPath === DEFAULT_DUMP;
+const writeFixtures = outDirFlag === undefined && dumpPath === DEFAULT_DUMP;
+const outDir = outDirFlag !== undefined ? path.resolve(ROOT, outDirFlag) : OUT_DIR;
 const dump = read(dumpPath);
 const corpus = loadTokenCorpus(ROOT);
 const loaded = loadContracts(path.resolve(ROOT, 'contracts'));
@@ -173,6 +183,36 @@ for (const d of (dump._degradations as Array<{ code: string; nodePath: string; m
  *  classes listed here are ranked with a "fix in flight" marker instead of
  *  counted as unknowns. */
 const FIX_IN_FLIGHT = new Set(['duplicate-part-name']);
+
+/** A named NOTE → its class. Same idea as violationClass and deliberately
+ *  coarser: notes are prose, so the stem drops node paths, quoted spellings,
+ *  refs and numbers, keeping the RULE that fired. Two notes about different
+ *  parts hitting the same rule must land in one bucket or the count measures
+ *  kit size instead of vocabulary gaps. */
+function noteClassOf(note: string): string {
+  // The RULE that fired, not the instance it fired on. A first cut kept the
+  // whole stem and produced 1,703 "classes" over three systems — that is not a
+  // taxonomy, it is one bucket per note, and a number like that can never
+  // trend to zero. Notes are written as "<where>: <rule> — <explanation>", so
+  // the class is the RULE clause: everything before the first em-dash, with
+  // paths, quoted spellings, refs and measurements removed.
+  // Notes carry MULTIPLE colons ("Atoms/Button:root/Label fill (state hover):
+  // bindings are …"), so stripping to the first one left the node path in the
+  // key and every part got its own bucket. Take the text after the LAST ': '
+  // that still leaves a sentence, then the rule clause before the em-dash.
+  const parts = note.split(': ');
+  const afterWhere = parts.length > 1 ? parts.slice(1).join(': ') : note;
+  const rule = afterWhere.split(' — ')[0];
+  return rule
+    .replace(/\{[^{}]*\}/g, '{…}')
+    .replace(/"[^"]*"/g, '"…"')
+    .replace(/\([^)]*\)/g, '')
+    .replace(/\b[a-z-]+\.[a-z0-9.-]+\b/gi, '…')
+    .replace(/\b\d+(\.\d+)?(px|%)?\b/g, 'N')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 70);
+}
 
 function violationClass(message: string): string {
   if (message.includes('does not exist in tokens/')) return 'token-ref-unknown';
@@ -339,6 +379,14 @@ interface SetRecord {
   emitterRefusals: Array<{ emitter: string; classes: string[]; message: string }>;
   emittedSurfaces: string[];
   noteCount: number;
+  /** THE LOSSES THAT ARE NOT REFUSALS. `clean` means refusal-free — every
+   *  surface emitted — and a set can be clean while the proposal DROPPED a
+   *  fact it read, because that loss is a NAMED NOTE and not a violation.
+   *  Measured: Eventz was 100% clean while losing its entire hover plane. A
+   *  convergence metric that counts only hard refusals would therefore
+   *  declare victory over a tool that silently stops carrying things, so the
+   *  note classes ride alongside the violation classes. */
+  noteClasses: string[];
   unboundCount: number;
   mintedCount: number;
   tokenRefsCarried: number;
@@ -388,6 +436,7 @@ for (const setName of setKeys) {
     emitterRefusals: [],
     emittedSurfaces: [],
     noteCount: 0,
+    noteClasses: [],
     unboundCount: 0,
     mintedCount: 0,
     tokenRefsCarried: 0,
@@ -408,6 +457,7 @@ for (const setName of setKeys) {
       if (!proposal) throw new Error('set neither proposed nor skipped — batch invariant broken');
       rec.proposed = true;
       rec.noteCount = proposal.notes.length;
+      rec.noteClasses = [...new Set(proposal.notes.map(noteClassOf))].sort();
       rec.unboundCount = proposal.unbound.length;
       rec.mintedCount = proposal.mintedTokens?.count ?? 0;
       rec.tokenRefsCarried = (JSON.stringify(proposal.contract).match(TOKEN_REF) ?? []).length;
@@ -598,7 +648,7 @@ const allDegradations = (dump._degradations ?? []) as Array<{ code: string; node
 const fixtures: Array<{ cls: string; setName: string; file: string }> = [];
 const fixtureSets = new Set<string>();
 function writeFixture(cls: string, setName: string) {
-  if (!writeOutputs || fixtures.length >= TOP_CLASS_FIXTURES) return;
+  if (!writeFixtures || fixtures.length >= TOP_CLASS_FIXTURES) return;
   const set = dump[setName];
   if (!set) return;
   const slice: Record<string, unknown> = {};
@@ -692,7 +742,7 @@ const summary = {
 
 if (writeOutputs)
 writeFileSync(
-  path.join(OUT_DIR, 'census.json'),
+  path.join(outDir, 'census.json'),
   JSON.stringify(
     {
       _provenance: {
@@ -897,7 +947,7 @@ if (fixedNow.length > 0) {
   for (const f of fixedNow) md.push(`- \`${f.fixture}\` — class \`${f.cls}\` (fixed), set **${f.fixtureSet}**`);
   md.push('');
 }
-if (writeOutputs) writeFileSync(path.join(OUT_DIR, 'CENSUS.md'), md.join('\n') + '\n');
+if (writeOutputs) writeFileSync(path.join(outDir, 'CENSUS.md'), md.join('\n') + '\n');
 
 console.log(`\nclean ${clean.length}/${records.length} (${pct(clean.length)}) — COMPONENT_SETs ${cleanComponentSets.length}/${componentSets.length} (${pct(cleanComponentSets.length, componentSets.length)})`);
 for (const agg of rankedClasses.slice(0, 12)) console.log(`  ${String(agg.sets.length).padStart(5)}  ${agg.cls}  [${[...agg.surfaces].sort().join(', ')}]`);

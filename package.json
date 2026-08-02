@@ -87,7 +87,8 @@
     "extract:figma:roundtrip:uui": "tsx extract/figma/roundtrip-uui/run.ts",
     "ledger:uui": "tsx extract/figma/ledger/build.ts",
     "residuals:uui": "tsx extract/figma/ledger/residuals.ts",
-    "paste:check": "tsx extract/figma/paste-door-check.ts"
+    "paste:check": "tsx extract/figma/paste-door-check.ts",
+    "gauntlet:intake": "tsx extract/figma/gauntlet/intake.ts"
   },
   "engines": {
     "node": ">=20"
