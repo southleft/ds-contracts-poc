@@ -192,9 +192,9 @@
                 "prop": "content"
               },
               "tokens": {
-                "font-size": "{imported.atoms-input.horizontal-stack-input-content.font-size}",
-                "font-weight": "{imported.atoms-input.horizontal-stack-input-content.font-weight}",
-                "line-height": "{imported.atoms-input.horizontal-stack-input-content.line-height}"
+                "font-size": "{imported.text.body-sm.font-size}",
+                "font-weight": "{imported.text.body-sm.font-weight}",
+                "line-height": "{imported.text.body-sm.line-height}"
               }
             },
             "endIcon": {

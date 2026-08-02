@@ -197,8 +197,8 @@
 
 .Text {
   font-size: var(--imported-shared-size-12);
-  font-weight: var(--imported-tooltip-content-text-and-supporting-text-text-font-weight);
-  line-height: var(--imported-tooltip-content-text-and-supporting-text-text-line-height);
+  font-weight: var(--imported-text-text-xs-semibold-font-weight);
+  line-height: var(--imported-text-text-xs-semibold-line-height);
 }
 
 .theme-light .Text {
@@ -211,8 +211,8 @@
 
 .supportingText {
   font-size: var(--imported-shared-size-12);
-  font-weight: var(--imported-tooltip-content-text-and-supporting-text-supporting-text-font-weight);
-  line-height: var(--imported-tooltip-content-text-and-supporting-text-supporting-text-line-height);
+  font-weight: var(--imported-text-text-xs-regular-font-weight);
+  line-height: var(--imported-text-text-xs-regular-line-height);
 }
 
 .theme-light .supportingText {

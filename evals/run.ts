@@ -2412,7 +2412,12 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         '✔ Main text ("Semi Bold") font-weight resolves to 600 EXACTLY (weight-name table)',
         '✔ Main text line-height resolves to 16px EXACTLY (dump v1.3 PIXELS)',
         '✔ Supporting text ("Regular") font-weight resolves to 400 + line-height 16px',
-        '✔ emitReact CSS: font-weight + line-height declarations on both text parts',
+        // v17 re-record (justified in extract/figma/tooltip-check.ts): typography
+        // mints under the TEXT STYLE's name, not the anatomy path. Values are
+        // unchanged and still asserted; the second line is the new distinctness
+        // guard — style-naming must never collapse two styles onto one leaf.
+        '✔ emitReact CSS: font-weight + line-height on both text parts, named for their TEXT STYLES (Label/Small, Body/Small)',
+        '✔ the two text parts bind DIFFERENT style groups (style-naming must not collapse distinct styles)',
         '✔ canvas spec: text nodes carry Semi Bold + lineHeight 16 (weight table + dump v1.3)',
       ]) {
         if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);

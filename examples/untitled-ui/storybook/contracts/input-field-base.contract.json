@@ -85,8 +85,8 @@
               "tokens": {
                 "color": "{imported.input-field-base.input-with-label-label.color}",
                 "font-size": "{imported.shared.size-14}",
-                "font-weight": "{imported.input-field-base.input-with-label-label.font-weight}",
-                "line-height": "{imported.input-field-base.input-with-label-label.line-height}"
+                "font-weight": "{imported.text.text-sm-medium.font-weight}",
+                "line-height": "{imported.text.text-sm-medium.line-height}"
               }
             },
             "Input": {
@@ -314,7 +314,7 @@
           "tokens": {
             "font-size": "{imported.shared.size-14}",
             "font-weight": "{imported.shared.num-400}",
-            "line-height": "{imported.input-field-base.hint-text.line-height}"
+            "line-height": "{imported.text.text-sm-regular.line-height}"
           }
         }
       },

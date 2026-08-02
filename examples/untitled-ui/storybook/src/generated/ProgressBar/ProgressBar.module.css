@@ -532,7 +532,7 @@
 
 .Percentage {
   color: var(--imported-progress-bar-percentage-color);
-  font-size: var(--imported-progress-bar-percentage-font-size);
-  font-weight: var(--imported-progress-bar-percentage-font-weight);
-  line-height: var(--imported-progress-bar-percentage-line-height);
+  font-size: var(--imported-text-text-sm-medium-font-size);
+  font-weight: var(--imported-text-text-sm-medium-font-weight);
+  line-height: var(--imported-text-text-sm-medium-line-height);
 }

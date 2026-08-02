@@ -231,9 +231,9 @@
           },
           "tokens": {
             "color": "{imported.progress-bar.percentage.color}",
-            "font-size": "{imported.progress-bar.percentage.font-size}",
-            "font-weight": "{imported.progress-bar.percentage.font-weight}",
-            "line-height": "{imported.progress-bar.percentage.line-height}"
+            "font-size": "{imported.text.text-sm-medium.font-size}",
+            "font-weight": "{imported.text.text-sm-medium.font-weight}",
+            "line-height": "{imported.text.text-sm-medium.line-height}"
           }
         }
       },

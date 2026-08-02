@@ -168,9 +168,9 @@
                   },
                   "tokens": {
                     "color": "{color.content.inverse}",
-                    "font-size": "{imported.molecules-alert.horizontal-stack-horizontal-stack-title.font-size}",
-                    "font-weight": "{imported.molecules-alert.horizontal-stack-horizontal-stack-title.font-weight}",
-                    "line-height": "{imported.molecules-alert.horizontal-stack-horizontal-stack-title.line-height}"
+                    "font-size": "{imported.text.body-md-bold.font-size}",
+                    "font-weight": "{imported.text.body-md-bold.font-weight}",
+                    "line-height": "{imported.text.body-md-bold.line-height}"
                   }
                 },
                 "Description": {
@@ -179,9 +179,9 @@
                   },
                   "tokens": {
                     "color": "{color.content.inverse}",
-                    "font-size": "{imported.molecules-alert.horizontal-stack-horizontal-stack-description.font-size}",
-                    "font-weight": "{imported.molecules-alert.horizontal-stack-horizontal-stack-description.font-weight}",
-                    "line-height": "{imported.molecules-alert.horizontal-stack-horizontal-stack-description.line-height}"
+                    "font-size": "{imported.text.body-sm.font-size}",
+                    "font-weight": "{imported.text.body-sm.font-weight}",
+                    "line-height": "{imported.text.body-sm.line-height}"
                   }
                 }
               }

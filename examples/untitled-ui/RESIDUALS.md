@@ -132,7 +132,7 @@ Each set's contribution to the kit's 7.51-point gap is its own shortfall weighte
 
 | component | variants | gap points | of which instrument ≤ | of which engine ≥ | share of the whole gap | roots off the drawn box |
 |---|---|---|---|---|---|---|
-| avatar | 162 | 4.244 | 0.257 | 3.987 | 56.51% | 0 / 162 |
+| avatar | 162 | 4.244 | 0.257 | 3.987 | 56.52% | 0 / 162 |
 | social-button | 108 | 2.303 | 0.199 | 2.104 | 30.67% | 87 / 108 |
 | button-group-base | 32 | 1.183 | 0.065 | 1.118 | 15.75% | 32 / 32 |
 | tooltip | 28 | 0.980 | 0.192 | 0.788 | 13.05% | 14 / 28 |
@@ -351,10 +351,10 @@ A receipt is a named hole. A channel with no receipt is a silent one, and this c
 
 | component | variants | score after the probes in §4 | its ceiling | engine-side points still unaccounted | share of what is left |
 |---|---|---|---|---|---|
-| social-button | 108 | 88.55 | 99.01 | 2.104 | 82.15% |
-| avatar | 162 | 94.84 | 99.15 | 1.301 | 50.79% |
+| social-button | 108 | 88.55 | 99.01 | 2.104 | 82.16% |
+| avatar | 162 | 94.84 | 99.15 | 1.301 | 50.80% |
 | slider | 40 | 87.51 | 99.26 | 0.875 | 34.18% |
-| progress-bar | 55 | 91.13 | 99.41 | 0.848 | 33.10% |
+| progress-bar | 55 | 91.13 | 99.41 | 0.848 | 33.11% |
 | tooltip | 28 | 82.52 | 96.33 | 0.720 | 28.11% |
 | progress-circle | 16 | 86.87 | 99.30 | 0.370 | 14.46% |
 | avatar-group | 12 | 84.29 | 99.52 | 0.340 | 13.29% |
@@ -368,7 +368,7 @@ A receipt is a named hole. A channel with no receipt is a silent one, and this c
 | avatar-add-button | 6 | 96.71 | 100.00 | 0.037 | 1.43% |
 | **ALL** | **537** | **96.18** | **98.74** | **2.561** | **100%** |
 
-The largest single block left is **social-button** at 2.104 points — 82.15% of everything unattributed — and its character is measured even though its mechanism is not: see the sub-90 table in §1 and the failing-pixel decomposition in §3.
+The largest single block left is **social-button** at 2.104 points — 82.16% of everything unattributed — and its character is measured even though its mechanism is not: see the sub-90 table in §1 and the failing-pixel decomposition in §3.
 
 - **176 of 537 scored variants render at a root box that disagrees with the box the canvas drew** (mean score 86.11 against 88.22 for the 361 that agree). The `size-to-drawn` diagnostic in §4 measures the whole class at once. What is NOT known is which contract mechanism produces each disagreement — hug-vs-fixed, a frozen first observation, or a UA default — so it cannot be split into fixable rounds from this evidence alone.
 
@@ -442,10 +442,10 @@ None of the three steps rewrites `renders/FIDELITY.md`, `renders/fidelity.json` 
 | `examples/untitled-ui/renders/fidelity-probe-size-to-drawn.json` | `62d9ab6ece76` | 389,147 | probe size-to-drawn |
 | `examples/untitled-ui/renders/fidelity-probe-tooltip-clip16.json` | `1c52a0f21dfb` | 20,665 | probe tooltip-clip16 |
 | `examples/untitled-ui/renders/fidelity-selfscore.json` | `50340fc184c6` | 391,229 | self-score control |
-| `examples/untitled-ui/renders/fidelity.json` | `28f6c0cb54fa` | 84,426 | fidelity table |
-| `examples/untitled-ui/renders/FIDELITY.md` | `3c2dcaee434e` | 4,242 | fidelity method |
-| `examples/untitled-ui/storybook/contracts/` | `5ef714f9a302` | 130,519 | proposed contracts (30 files) |
-| `extract/figma/conformance/MANIFEST.json` | `4fab450f1750` | 48,130 | conformance denominator |
+| `examples/untitled-ui/renders/fidelity.json` | `3ad398e452cb` | 84,425 | fidelity table |
+| `examples/untitled-ui/renders/FIDELITY.md` | `068e8ae5ce92` | 4,242 | fidelity method |
+| `examples/untitled-ui/storybook/contracts/` | `a57950ca7ce0` | 130,250 | proposed contracts (30 files) |
+| `extract/figma/conformance/MANIFEST.json` | `e93c7ad14edf` | 51,036 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `6c8d85a8d469` | 2,968,666 | round-trip facts |
 
 Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering.

@@ -269,8 +269,8 @@
 
 .leftNumber {
   color: var(--imported-slider-progress-left-control-left-number-color);
-  font-size: var(--imported-slider-progress-left-control-left-number-font-size);
-  font-weight: var(--imported-slider-progress-left-control-left-number-font-weight);
+  font-size: var(--imported-text-text-md-medium-font-size);
+  font-weight: var(--imported-text-text-md-medium-font-weight);
   line-height: var(--imported-shared-size-24);
   top: var(--imported-slider-progress-left-control-left-number-top);
   text-align: center;
@@ -425,8 +425,8 @@
 
 .rightNumber {
   color: var(--imported-slider-progress-right-control-right-number-color);
-  font-size: var(--imported-slider-progress-right-control-right-number-font-size);
-  font-weight: var(--imported-slider-progress-right-control-right-number-font-weight);
+  font-size: var(--imported-text-text-md-medium-font-size);
+  font-weight: var(--imported-text-text-md-medium-font-weight);
   line-height: var(--imported-shared-size-24);
   top: var(--imported-slider-progress-right-control-right-number-top);
   position: absolute;

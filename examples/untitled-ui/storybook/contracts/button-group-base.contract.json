@@ -131,9 +131,9 @@
             ]
           },
           "tokens": {
-            "font-size": "{imported.button-group-base.text.font-size}",
-            "font-weight": "{imported.button-group-base.text.font-weight}",
-            "line-height": "{imported.button-group-base.text.line-height}"
+            "font-size": "{imported.text.text-sm-semibold.font-size}",
+            "font-weight": "{imported.text.text-sm-semibold.font-weight}",
+            "line-height": "{imported.text.text-sm-semibold.line-height}"
           }
         }
       },

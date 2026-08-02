@@ -153,9 +153,9 @@
           },
           "tokens": {
             "color": "{imported.social-button.text.color.{social}.{theme}}",
-            "font-size": "{imported.social-button.text.font-size}",
-            "font-weight": "{imported.social-button.text.font-weight}",
-            "line-height": "{imported.social-button.text.line-height}"
+            "font-size": "{imported.text.text-md-semibold.font-size}",
+            "font-weight": "{imported.text.text-md-semibold.font-weight}",
+            "line-height": "{imported.text.text-md-semibold.line-height}"
           }
         }
       },

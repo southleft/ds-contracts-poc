@@ -112,9 +112,9 @@
             "prop": "hasLabel"
           },
           "tokens": {
-            "font-size": "{imported.atoms-badge.label.font-size}",
-            "font-weight": "{imported.atoms-badge.label.font-weight}",
-            "line-height": "{imported.atoms-badge.label.line-height}"
+            "font-size": "{imported.text.caption-lg-allcaps-bold.font-size}",
+            "font-weight": "{imported.text.caption-lg-allcaps-bold.font-weight}",
+            "line-height": "{imported.text.caption-lg-allcaps-bold.line-height}"
           }
         }
       },

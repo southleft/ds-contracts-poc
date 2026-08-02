@@ -22,8 +22,8 @@
 .Label {
   color: var(--imported-input-field-base-input-with-label-label-color);
   font-size: var(--imported-shared-size-14);
-  font-weight: var(--imported-input-field-base-input-with-label-label-font-weight);
-  line-height: var(--imported-input-field-base-input-with-label-label-line-height);
+  font-weight: var(--imported-text-text-sm-medium-font-weight);
+  line-height: var(--imported-text-text-sm-medium-line-height);
 }
 
 .Input {
@@ -407,5 +407,5 @@
 .hintText {
   font-size: var(--imported-shared-size-14);
   font-weight: var(--imported-shared-num-400);
-  line-height: var(--imported-input-field-base-hint-text-line-height);
+  line-height: var(--imported-text-text-sm-regular-line-height);
 }

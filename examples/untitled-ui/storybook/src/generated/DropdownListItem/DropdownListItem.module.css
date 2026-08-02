@@ -50,9 +50,9 @@
 
 .Shortcut {
   color: var(--imported-dropdown-list-item-shortcut-color);
-  font-size: var(--imported-dropdown-list-item-shortcut-font-size);
-  font-weight: var(--imported-dropdown-list-item-shortcut-font-weight);
-  line-height: var(--imported-dropdown-list-item-shortcut-line-height);
+  font-size: var(--imported-text-text-xs-regular-font-size);
+  font-weight: var(--imported-text-text-xs-regular-font-weight);
+  line-height: var(--imported-text-text-xs-regular-line-height);
 }
 
 .root:disabled .Shortcut {

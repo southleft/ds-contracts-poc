@@ -153,9 +153,9 @@
           },
           "tokens": {
             "color": "{imported.dropdown-list-item.shortcut.color}",
-            "font-size": "{imported.dropdown-list-item.shortcut.font-size}",
-            "font-weight": "{imported.dropdown-list-item.shortcut.font-weight}",
-            "line-height": "{imported.dropdown-list-item.shortcut.line-height}"
+            "font-size": "{imported.text.text-xs-regular.font-size}",
+            "font-weight": "{imported.text.text-xs-regular.font-weight}",
+            "line-height": "{imported.text.text-xs-regular.line-height}"
           },
           "states": {
             "disabled": {

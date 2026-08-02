@@ -554,7 +554,7 @@
  {
   "set": "input-field-base",
   "variant": "type_trailing_dropdown_destructive_false",
-  "score": 92.38,
+  "score": 92.37,
   "score20": 86.73
  },
  {
@@ -1010,7 +1010,7 @@
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_25_left_control_0_",
-  "score": 82.14,
+  "score": 82.13,
   "score20": 96.33
  },
  {
@@ -1971,7 +1971,7 @@
   "set": "avatar",
   "variant": "size_md_placeholder_true_text_false_status_icon_online_indicator_state_focused",
   "score": 98.05,
-  "score20": 97.86
+  "score20": 97.85
  },
  {
   "set": "avatar",
@@ -2133,7 +2133,7 @@
   "set": "avatar",
   "variant": "size_sm_placeholder_true_text_false_status_icon_online_indicator_state_focused",
   "score": 97.44,
-  "score20": 97.78
+  "score20": 97.76
  },
  {
   "set": "avatar",
@@ -2948,8 +2948,8 @@
  {
   "set": "social-button",
   "variant": "social_apple_supporting_text_false_theme_brand_state_default",
-  "score": 94.76,
-  "score20": 93.61
+  "score": 94.82,
+  "score20": 93.6
  },
  {
   "set": "social-button",
@@ -2960,8 +2960,8 @@
  {
   "set": "social-button",
   "variant": "social_apple_supporting_text_false_theme_brand_state_hover",
-  "score": 94.76,
-  "score20": 93.61
+  "score": 94.82,
+  "score20": 93.6
  },
  {
   "set": "social-button",
@@ -3002,8 +3002,8 @@
  {
   "set": "social-button",
   "variant": "social_apple_supporting_text_true_theme_brand_state_default",
-  "score": 90.03,
-  "score20": 87.62
+  "score": 90.06,
+  "score20": 87.59
  },
  {
   "set": "social-button",
@@ -3363,7 +3363,7 @@
   "set": "social-button",
   "variant": "social_figma_supporting_text_true_theme_color_with_brand_state_default",
   "score": 91.94,
-  "score20": 84.47
+  "score20": 84.45
  },
  {
   "set": "social-button",
@@ -3489,13 +3489,13 @@
   "set": "social-button",
   "variant": "social_x_supporting_text_false_theme_brand_state_default",
   "score": 91.31,
-  "score20": 90.7
+  "score20": 90.71
  },
  {
   "set": "social-button",
   "variant": "social_x_supporting_text_false_theme_brand_state_focused",
-  "score": 94.79,
-  "score20": 92.14
+  "score": 94.88,
+  "score20": 92.13
  },
  {
   "set": "social-button",
@@ -3590,7 +3590,7 @@
  {
   "set": "social-button",
   "variant": "social_x_supporting_text_true_theme_color_with_brand_state_hover",
-  "score": 94.55,
+  "score": 94.56,
   "score20": 85.62
  }
 ]

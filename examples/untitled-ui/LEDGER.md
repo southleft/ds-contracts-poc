@@ -15,7 +15,7 @@ Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, capture
 | instrument | what it holds the tool to | current reading | artifact |
 |---|---|---|---|
 | Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **92.5%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst tooltip 81.2%) | `renders/fidelity.json` |
-| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **89/89** green, 0 pinned red — 70 constructs expected CARRIED, 8 REFUSED, 11 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
+| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **90/90** green, 0 pinned red — 71 constructs expected CARRIED, 8 REFUSED, 11 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
 | Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** closed · 10,996 matched · 1,965 diverged · 4,088 loss · 6,365 invented | `extract/figma/roundtrip-uui/report.json` |
 | The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 19 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
 
@@ -43,7 +43,7 @@ Method, quoted from `renders/FIDELITY.md`: *Score = % of pixels REPRODUCED, meas
 
 ## 2. What carries
 
-The document-model fixture is the answer to "will it survive the boundary at all". It is 89 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **70 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
+The document-model fixture is the answer to "will it survive the boundary at all". It is 90 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **71 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
 
 | construct family | carried | case ids |
 |---|---|---|
@@ -63,7 +63,7 @@ The document-model fixture is the answer to "will it survive the boundary at all
 | Spacers and growth | 2 | `spacer-growth` `spacer-visiblewhen` |
 | Sparse / minority children | 2 | `sparse-minority-child` `sparse-unpredictable` |
 | Strokes | 5 | `stroke-align-inside` `stroke-align-outside` `stroke-only-no-fill` `stroke-uniform-var` `stroke-weight-bound` |
-| Text and typography | 5 | `text-lineheight-px` `text-prop-characters` `text-style-token` `text-styleless-match` `text-styleless-nomatch` |
+| Text and typography | 6 | `text-lineheight-px` `text-prop-characters` `text-style-named-untokened` `text-style-token` `text-styleless-match` `text-styleless-nomatch` |
 | `token-*` | 2 | `token-nested-pair-saturated` `token-nested-two-axis` |
 | Pass-through wrapper folding | 2 | `wrapper-label-fold` `wrapper-static-text` |
 
@@ -203,7 +203,7 @@ Carried, but not carried perfectly. These are the classes an adopter will actual
 
 ### 5.1 The pinned reds
 
-NONE. All 89 conformance cases are green: every construct the documentation model says is CARRIED is carried, and every refusal is named. This section stays in the ledger because an empty pinned-red list is a reading, not a formatting accident — when a red returns it is printed here verbatim from the manifest.
+NONE. All 90 conformance cases are green: every construct the documentation model says is CARRIED is carried, and every refusal is named. This section stays in the ledger because an empty pinned-red list is a reading, not a formatting accident — when a red returns it is printed here verbatim from the manifest.
 
 ### 5.2 The round-1 audit, re-checked
 
@@ -233,7 +233,7 @@ Tally: **10** CLOSED · **1** NAMED-BY-DESIGN · **3** PARTIAL · **1** OPEN, of
 
 Named holes, so that no reader mistakes an absence for a zero.
 
-- **The contract FILES carry no named notes — but the notes are committed beside them.** No `notes` (or `note`) key appears in any of the 30 contract files; the only prose inside a contract is `description` (one PROPOSED scope line per full contract, one STUB refusal per stub, both quoted in §3.2). The inversion's 1,579 named decisions across 15 set(s) live in `storybook/contracts/NOTES.md`, rebuilt and byte-verified by the same drift check as the contracts. 1,573 are REFUSALS (nothing bound) and 6 are CARRIED-AND-CAVEATED (bound, every value measured, but the axis pair is saturated so the correlation is unwitnessed). What remains a genuine hole: a consumer reading a single contract file still sees no note for the part in front of them — the mapping from note to part is by node path in a separate document, not a field on the part.
+- **The contract FILES carry no named notes — but the notes are committed beside them.** No `notes` (or `note`) key appears in any of the 30 contract files; the only prose inside a contract is `description` (one PROPOSED scope line per full contract, one STUB refusal per stub, both quoted in §3.2). The inversion's 1,577 named decisions across 15 set(s) live in `storybook/contracts/NOTES.md`, rebuilt and byte-verified by the same drift check as the contracts. 1,571 are REFUSALS (nothing bound) and 6 are CARRIED-AND-CAVEATED (bound, every value measured, but the axis pair is saturated so the correlation is unwitnessed). What remains a genuine hole: a consumer reading a single contract file still sees no note for the part in front of them — the mapping from note to part is by node path in a separate document, not a field on the part.
 - **2,598 of 12,418 non-matching round-trip facts carry no class tag** (1,933 diverged + 665 loss, across 15 of 15 components and 507 variants). Invention *is* fully classified — 6,365 of 6,365 invented facts carry a tag — but divergence and one-way loss are not, so §4's per-class blast radii cover 79.1% of the non-matching facts and no more.
 - **The conformance runner writes no machine-readable result file.** `npm run conformance:canvas` prints its table to stdout and exits; there is no committed run output. Every conformance number in this ledger therefore comes from the *manifest's pinned* `status` field, which the live run is expected to reproduce exactly. Run the command to confirm; this build cannot.
 - **The two instruments disagree on the variant denominator.** Round trip counts 595 original variants; the fidelity harness enumerates 599. The delta is §3.5.
@@ -258,7 +258,7 @@ npx tsx extract/figma/ledger/build.ts
 
 # 2 · the document-model fixture — fast, read-only, no engine changes
 npm run conformance:canvas
-#    expect: 89 case(s): 89 PASS, 0 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
+#    expect: 90 case(s): 90 PASS, 0 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
 
 # 3 · the canvas→code→canvas round trip (rewrites REPORT.md + report.json)
 npm run extract:figma:roundtrip:uui
@@ -278,12 +278,12 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/assets/icons/manifest.json` | `a124d0e50984` | 15,709 | icon export receipts |
 | `examples/untitled-ui/AUDIT-ROUND-1.md` | `0370a1fd3e5f` | 19,789 | round-1 audit |
 | `examples/untitled-ui/dumps-v2/` | `bd05944e2685` | 887,477 | canvas dumps (15 files) |
-| `examples/untitled-ui/renders/fidelity.json` | `28f6c0cb54fa` | 84,426 | fidelity scores |
-| `examples/untitled-ui/renders/FIDELITY.md` | `3c2dcaee434e` | 4,242 | fidelity method |
-| `examples/untitled-ui/storybook/contracts/` | `5ef714f9a302` | 130,519 | proposed contracts (30 files) |
-| `examples/untitled-ui/storybook/src/generated/` | `b9644312d096` | 272,560 | emitted components (32 dirs) |
-| `examples/untitled-ui/storybook/src/tokens.css` | `f93e432a7108` | 673,005 | emitted global tokens |
-| `extract/figma/conformance/MANIFEST.json` | `7975d492c093` | 49,560 | conformance denominator |
+| `examples/untitled-ui/renders/fidelity.json` | `3ad398e452cb` | 84,425 | fidelity scores |
+| `examples/untitled-ui/renders/FIDELITY.md` | `068e8ae5ce92` | 4,242 | fidelity method |
+| `examples/untitled-ui/storybook/contracts/` | `a57950ca7ce0` | 130,250 | proposed contracts (30 files) |
+| `examples/untitled-ui/storybook/src/generated/` | `50cb95ff05b4` | 272,291 | emitted components (32 dirs) |
+| `examples/untitled-ui/storybook/src/tokens.css` | `c8159802e7e5` | 672,427 | emitted global tokens |
+| `extract/figma/conformance/MANIFEST.json` | `e93c7ad14edf` | 51,036 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `6c8d85a8d469` | 2,968,666 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `2ac653435daf` | 91,799 | round-trip narrative |
 

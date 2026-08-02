@@ -1,4 +1,4 @@
-# Canvas→code fidelity, v2.0 metric — 2026-08-01 @ HEAD
+# Canvas→code fidelity, v2.0 metric — 2026-08-02 @ HEAD
 
 The SUPERSEDED metric, kept so the v2.1 shift is attributable: this table is scored from the SAME renders in the SAME run as FIDELITY.md, so every difference between the two is the measuring rule and nothing else.
 

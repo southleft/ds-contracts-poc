@@ -117,6 +117,23 @@
       "status": "green"
     },
     {
+      "id": "text-style-named-untokened",
+      "construct": "a TEXT node riding a NAMED Figma text style that the token corpus does not derive",
+      "expect": "CARRIED",
+      "why": "`text-style-token` covers the good case: a style whose name matches a derived `font.<group>.size` token binds that token. This is the case a real kit actually hits \u2014 the designer named a text style and bound no VARIABLE to its typography, so nothing is derivable. That used to end at 'typography not proposed' and the size/weight/line-height minted under the COMPONENT/PART path, which turned ONE style into as many unrelated token families as there were parts drawing it (measured on Eventz: `body/sm` on 52 nodes across five sets produced five copies of 14px/500/20px under names like `atoms-tag.label.font-size`; Untitled UI has 17 styles over 288 nodes). A named text style IS design-system vocabulary, so v17 mints it under `imported.text.<style>` \u2014 component-independent, so every part riding the style shares one leaf and the name is the designer's. The style is still not TOKEN-derived and the note still says so.",
+      "check": {
+        "carried": [
+          "imported\\.text\\.body-sm\\.font-size",
+          "imported\\.text\\.body-sm\\.line-height"
+        ],
+        "absent": [
+          "imported\\.case\\.a\\.font-size"
+        ],
+        "note": "rides text style \"body/sm\" which is not a token-derived style"
+      },
+      "status": "green"
+    },
+    {
       "id": "shape-vector-path",
       "construct": "a VECTOR child (arbitrary-path geometry) with a fill and a drawn fixed size",
       "expect": "LEDGERED",

@@ -86,7 +86,7 @@ const ROOT='/Users/tjpitre/Sites/ds-contracts-poc';
 const { chromium } = await import(ROOT+'/node_modules/playwright-core/index.mjs');
 const { chromiumExecutable } = await import(ROOT+'/extract/figma/visual-parity/render.js');
 import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const UI=`${ROOT}/examples/untitled-ui`;
@@ -95,6 +95,31 @@ const CLIP=process.env.FIDELITY_CLIP === 'root' ? 'root' : 'union';
 // The renderer lives next to this file (committed pair); SCRATCH copies stay
 // usable through RENDER_ONE.
 const RENDER_ONE=process.env.RENDER_ONE || path.join(path.dirname(fileURLToPath(import.meta.url)), 'render-one.mts');
+// PREFLIGHT — REFUSE to score against a STALE STYLESHEET.
+// `src/tokens.css` is generated from the committed DTCG trees by a SEPARATE
+// script (tokens-css.mts), so any round that RENAMES a minted token updates
+// the contracts and the components while tokens.css still declares the OLD
+// custom properties. Every new var() then resolves to nothing, text reflows,
+// and this table reports a REGRESSION that is an artifact of the harness and
+// not of the engine. Measured, on the round that added this guard: the
+// text-style rename scored 92.5 -> 91.2 (tooltip -6.6, social-button -4.7)
+// from contracts whose token VALUES were byte-identical; with the stylesheet
+// rebuilt the same inputs scored 92.5 with not one row moved. A number that
+// wrong is worse than no number, so the run refuses instead.
+{
+  const r = spawnSync('npx', ['tsx', path.join(UI, 'tokens-css.mts')], { cwd: ROOT, encoding: 'utf8' });
+  if (r.status !== 0) {
+    console.error(
+      'REFUSED: examples/untitled-ui/storybook/src/tokens.css is STALE relative to the committed DTCG trees.\n' +
+        'Every var() this run would render resolves against that file, so the score would measure the\n' +
+        'stylesheet and not the kit. Rebuild it first:\n' +
+        '  npx tsx examples/untitled-ui/tokens-css.mts --write\n' +
+        (r.stderr || r.stdout || '').trim(),
+    );
+    process.exit(1);
+  }
+}
+
 const norm=(s:string)=>s.toLowerCase().replace(/[^a-z0-9]+/g,'');
 const SETS: Record<string,{comp:string}> = {
   'badge-base':{comp:'BadgeBase'}, 'button-base':{comp:'ButtonBase'},

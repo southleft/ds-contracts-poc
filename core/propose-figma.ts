@@ -1172,11 +1172,16 @@ function mintObservation(
   /** Presence-shaped channels only (mint-tokens MintObservation.sparse):
    *  the vacuous value unobserved axis combinations fill with. */
   sparse?: string,
+  /** v17 — a non-token-derived Figma TEXT STYLE this node rides; mints under
+   *  a component-independent `imported.text.<style>` group (see
+   *  MintObservation.styleName). */
+  styleName?: string,
 ) {
   if (!ctx.mint) return;
   ctx.mint.observations.push({
     nodePath: where,
     part: partPathOf(where),
+    ...(styleName !== undefined ? { styleName } : {}),
     cssProperty,
     kind,
     occurrences: occ.map((o) => ({
@@ -2651,6 +2656,8 @@ function mintTextChannels(
   ctx: Ctx,
   where: string,
   opts: { weight: boolean },
+  /** v17 — see mintObservation.styleName. */
+  styleName?: string,
 ) {
   const textOcc = m.occ.filter((o) => o.node.text !== undefined);
   if (textOcc.length === 0) return;
@@ -2671,6 +2678,8 @@ function mintTextChannels(
         ctx, tokens, where, 'font-weight', 'number',
         parsed.map((p) => ({ variant: p.variant, value: p.weight! })),
         `${where}|fontWeight`,
+        undefined,
+        styleName,
       );
     }
     const italics = parsed.filter((p) => p.italic);
@@ -2694,6 +2703,8 @@ function mintTextChannels(
     ctx, tokens, where, 'line-height', 'px',
     withLh.map((o) => ({ variant: o.variant, value: o.node.text!.lineHeight! })),
     `${where}|lineHeight`,
+    undefined,
+    styleName,
   );
 }
 
@@ -2735,8 +2746,20 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
     ctx.notes.push(`${where}: text style differs across variants (${styleNames.join(', ')}) — using ${styleNames[0]}`);
   }
   let style = styleNames[0] ? ctx.corpus.textStyleByName.get(styleNames[0]) : undefined;
-  if (styleNames[0] && !style) {
-    ctx.notes.push(`${where}: rides text style "${styleNames[0]}" which is not a token-derived style — typography not proposed`);
+  // v17 — a NAMED Figma text style with no token-derived counterpart. This
+  // used to end the road ("typography not proposed") and the size/weight/
+  // line-height then minted under the component/part path, so ONE style became
+  // as many unrelated token families as there were parts drawing it: Eventz
+  // draws `body/sm` on 52 nodes across five sets and got five copies of
+  // 14px/500/20px under names like `atoms-tag.label.font-size`. A text style
+  // IS design-system vocabulary — the designer named it — so the typography
+  // now mints under `imported.text.<style>`, shared across every component
+  // that rides it. The style still is not TOKEN-derived, and that stays named.
+  const unresolvedStyle = styleNames[0] && !style ? styleNames[0] : undefined;
+  if (unresolvedStyle) {
+    ctx.notes.push(
+      `${where}: rides text style "${unresolvedStyle}" which is not a token-derived style (the kit binds no variable to its typography) — minted under the STYLE's own name as \`imported.text.${unresolvedStyle.replace(/[^a-zA-Z0-9-]+/g, '-').toLowerCase()}\`, shared by every part riding it; rename against your real type tokens (provisional)`,
+    );
   }
   if (!style) {
     // Style-less text: adopt a derived style's identity only on a UNIQUE
@@ -2762,8 +2785,12 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
       ctx.notes.push(`${where}: node weight "${t.fontStyle}" overrides style "${style.name}" — override not token-recoverable, review`);
     }
   } else if (ctx.mint && t.fontSize > 0) {
-    // No token-derived style identity — mint the literal size.
-    mintObservation(ctx, tokens, where, 'font-size', 'px', numOccurrences(m, (n) => n.text?.fontSize));
+    // No token-derived style identity — mint the literal size, under the
+    // style's name when the node rides one (v17).
+    mintObservation(
+      ctx, tokens, where, 'font-size', 'px', numOccurrences(m, (n) => n.text?.fontSize),
+      undefined, undefined, unresolvedStyle,
+    );
   }
   // Channels OUTSIDE the style identity: font-weight through the bounded
   // weight-name table when no derived style matched (the identity path stays
@@ -2771,7 +2798,7 @@ function invertTextTokens(m: Merged, ctx: Ctx, where: string, byProp: ByPropColl
   // PIXEL line-height always (a text style's definition does not carry it).
   // Field case: the CBDS Tooltip title drawn "Semi Bold" at 12/16 rendered
   // un-bold and mis-proportioned when both channels were note-only.
-  mintTextChannels(m, tokens, ctx, where, { weight: !style });
+  mintTextChannels(m, tokens, ctx, where, { weight: !style }, unresolvedStyle);
   return tokens;
 }
 

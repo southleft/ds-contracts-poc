@@ -268,8 +268,8 @@
                   },
                   "tokens": {
                     "color": "{imported.slider.progress-left-control-left-number.color}",
-                    "font-size": "{imported.slider.progress-left-control-left-number.font-size}",
-                    "font-weight": "{imported.slider.progress-left-control-left-number.font-weight}",
+                    "font-size": "{imported.text.text-md-medium.font-size}",
+                    "font-weight": "{imported.text.text-md-medium.font-weight}",
                     "line-height": "{imported.shared.size-24}",
                     "left": "{imported.slider.progress-left-control-left-number.left.{leftControl}}",
                     "right": "{imported.slider.progress-left-control-left-number.right.{leftControl}}",
@@ -404,8 +404,8 @@
                   },
                   "tokens": {
                     "color": "{imported.slider.progress-right-control-right-number.color}",
-                    "font-size": "{imported.slider.progress-right-control-right-number.font-size}",
-                    "font-weight": "{imported.slider.progress-right-control-right-number.font-weight}",
+                    "font-size": "{imported.text.text-md-medium.font-size}",
+                    "font-weight": "{imported.text.text-md-medium.font-weight}",
                     "line-height": "{imported.shared.size-24}",
                     "right": "{imported.slider.progress-right-control-right-number.right.{rightControl}}",
                     "top": "{imported.slider.progress-right-control-right-number.top}"

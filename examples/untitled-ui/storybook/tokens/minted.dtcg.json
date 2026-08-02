@@ -797,18 +797,6 @@
         "color": {
           "$value": "#6941c6",
           "$type": "color"
-        },
-        "font-size": {
-          "$value": "12px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "500",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "18px",
-          "$type": "dimension"
         }
       },
       "plus": {
@@ -833,6 +821,104 @@
         "color": {
           "$value": "#9e77ed",
           "$type": "color"
+        }
+      }
+    },
+    "text": {
+      "text-xs-medium": {
+        "font-size": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "500",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "18px",
+          "$type": "dimension"
+        }
+      },
+      "text-xs-semibold": {
+        "font-weight": {
+          "$value": "600",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "18px",
+          "$type": "dimension"
+        }
+      },
+      "text-xs-regular": {
+        "font-weight": {
+          "$value": "400",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "18px",
+          "$type": "dimension"
+        },
+        "font-size": {
+          "$value": "12px",
+          "$type": "dimension"
+        }
+      },
+      "text-md-medium": {
+        "font-size": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "500",
+          "$type": "number"
+        }
+      },
+      "text-sm-medium": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "500",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      },
+      "text-sm-regular": {
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      },
+      "text-md-semibold": {
+        "font-size": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "600",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "24px",
+          "$type": "dimension"
+        }
+      },
+      "text-sm-semibold": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "600",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
         }
       }
     },
@@ -1383,14 +1469,6 @@
             "$value": "#ffffff",
             "$type": "color"
           }
-        },
-        "font-weight": {
-          "$value": "600",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "18px",
-          "$type": "dimension"
         }
       },
       "content-text-and-supporting-text-supporting-text": {
@@ -1403,14 +1481,6 @@
             "$value": "#ffffff",
             "$type": "color"
           }
-        },
-        "font-weight": {
-          "$value": "400",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "18px",
-          "$type": "dimension"
         }
       },
       "tooltip": {
@@ -1932,14 +2002,6 @@
           "$value": "#171717",
           "$type": "color"
         },
-        "font-size": {
-          "$value": "16px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "500",
-          "$type": "number"
-        },
         "left": {
           "0": {
             "$value": "0px",
@@ -2087,14 +2149,6 @@
         "color": {
           "$value": "#171717",
           "$type": "color"
-        },
-        "font-size": {
-          "$value": "16px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "500",
-          "$type": "number"
         },
         "right": {
           "25": {
@@ -3071,18 +3125,6 @@
         "color": {
           "$value": "#404040",
           "$type": "color"
-        },
-        "font-size": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "500",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "20px",
-          "$type": "dimension"
         }
       }
     },
@@ -3215,18 +3257,6 @@
         "color": {
           "$value": "#737373",
           "$type": "color"
-        },
-        "font-size": {
-          "$value": "12px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "400",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "18px",
-          "$type": "dimension"
         }
       },
       "state-hover": {
@@ -3275,14 +3305,6 @@
         "color": {
           "$value": "#404040",
           "$type": "color"
-        },
-        "font-weight": {
-          "$value": "500",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "20px",
-          "$type": "dimension"
         }
       },
       "input-with-label-input": {
@@ -3547,12 +3569,6 @@
             "$value": "0px",
             "$type": "dimension"
           }
-        }
-      },
-      "hint-text": {
-        "line-height": {
-          "$value": "20px",
-          "$type": "dimension"
         }
       },
       "input-with-label-input-dropdown-chevron-down": {
@@ -4181,18 +4197,6 @@
               "$type": "color"
             }
           }
-        },
-        "font-size": {
-          "$value": "16px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "600",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "24px",
-          "$type": "dimension"
         }
       },
       "social-icon": {
@@ -4725,20 +4729,6 @@
       },
       "plus": {
         "size": {
-          "$value": "20px",
-          "$type": "dimension"
-        }
-      },
-      "text": {
-        "font-size": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "600",
-          "$type": "number"
-        },
-        "line-height": {
           "$value": "20px",
           "$type": "dimension"
         }

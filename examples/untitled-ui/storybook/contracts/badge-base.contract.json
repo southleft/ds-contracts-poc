@@ -129,9 +129,9 @@
           },
           "tokens": {
             "color": "{imported.badge-base.text.color}",
-            "font-size": "{imported.badge-base.text.font-size}",
-            "font-weight": "{imported.badge-base.text.font-weight}",
-            "line-height": "{imported.badge-base.text.line-height}"
+            "font-size": "{imported.text.text-xs-medium.font-size}",
+            "font-weight": "{imported.text.text-xs-medium.font-weight}",
+            "line-height": "{imported.text.text-xs-medium.line-height}"
           }
         },
         "arrowRight": {

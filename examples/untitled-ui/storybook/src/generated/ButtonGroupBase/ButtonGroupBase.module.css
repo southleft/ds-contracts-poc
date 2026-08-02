@@ -102,7 +102,7 @@
 }
 
 .Text {
-  font-size: var(--imported-button-group-base-text-font-size);
-  font-weight: var(--imported-button-group-base-text-font-weight);
-  line-height: var(--imported-button-group-base-text-line-height);
+  font-size: var(--imported-text-text-sm-semibold-font-size);
+  font-weight: var(--imported-text-text-sm-semibold-font-weight);
+  line-height: var(--imported-text-text-sm-semibold-line-height);
 }

@@ -145,8 +145,8 @@
                   "tokens": {
                     "color": "{imported.tooltip.content-text-and-supporting-text-text.color.{theme}}",
                     "font-size": "{imported.shared.size-12}",
-                    "font-weight": "{imported.tooltip.content-text-and-supporting-text-text.font-weight}",
-                    "line-height": "{imported.tooltip.content-text-and-supporting-text-text.line-height}"
+                    "font-weight": "{imported.text.text-xs-semibold.font-weight}",
+                    "line-height": "{imported.text.text-xs-semibold.line-height}"
                   }
                 },
                 "supportingText": {
@@ -157,8 +157,8 @@
                   "tokens": {
                     "color": "{imported.tooltip.content-text-and-supporting-text-supporting-text.color.{theme}}",
                     "font-size": "{imported.shared.size-12}",
-                    "font-weight": "{imported.tooltip.content-text-and-supporting-text-supporting-text.font-weight}",
-                    "line-height": "{imported.tooltip.content-text-and-supporting-text-supporting-text.line-height}"
+                    "font-weight": "{imported.text.text-xs-regular.font-weight}",
+                    "line-height": "{imported.text.text-xs-regular.line-height}"
                   }
                 }
               },

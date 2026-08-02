@@ -93,6 +93,18 @@ export interface MintObservation {
    *  ride this channel as url('./assets/images/<hash>.png') refs — the
    *  canvas emitter ledgers those as gradientMiss BY NAME, never a throw). */
   kind: 'color' | 'px' | 'number' | 'shadow' | 'gradient' | 'size';
+  /** v17 — the Figma TEXT STYLE this observation's node rides, when the style
+   *  is NOT token-derived (the designer named a style but bound no variable to
+   *  its typography). A text style is a design-system vocabulary word exactly
+   *  like a variable name, and it is SHARED ACROSS COMPONENTS: Eventz draws
+   *  `body/sm` on 52 nodes in five different sets. Minted under the usual
+   *  `<component>.<part>` path that one style became FIVE unrelated token
+   *  families (atoms-button.label.font-size, atoms-tag.label.font-size, …),
+   *  each a machine path carrying none of the designer's vocabulary. An
+   *  observation carrying a styleName mints under a COMPONENT-INDEPENDENT
+   *  `imported.text.<style>` group instead, so every part riding the style
+   *  binds the same leaf and the name is the designer's own. */
+  styleName?: string;
   /** One entry per variant the node occurs in. */
   occurrences: MintOccurrence[];
   /** OPT-IN sparse-coverage fill for PRESENCE-shaped channels (canvas→code
@@ -478,7 +490,12 @@ export function mintTokens(
     if (c.kind === 'none') {
       return { nodePath: obs.nodePath, cssProperty: obs.cssProperty, ref: null, reason: c.reason };
     }
-    const base = `${MINT_NAMESPACE}.${comp}.${partSegment(obs.part)}.${obs.cssProperty}`;
+    // v17: a style-riding typography observation is named for the STYLE and
+    // not for the component/part that happens to draw it (see styleName).
+    const base =
+      obs.styleName !== undefined
+        ? `${MINT_NAMESPACE}.text.${sanitizeSegment(obs.styleName)}.${obs.cssProperty}`
+        : `${MINT_NAMESPACE}.${comp}.${partSegment(obs.part)}.${obs.cssProperty}`;
     const site = `${obs.nodePath} ${obs.cssProperty}`;
     if (c.kind === 'uniform') {
       const key = `${obs.kind}|${formatValue(obs.kind, c.value)}`;

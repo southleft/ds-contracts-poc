@@ -139,9 +139,9 @@
           },
           "tokens": {
             "color": "{comp.button.primary.color.content.default}",
-            "font-size": "{imported.atoms-button.label.font-size}",
-            "font-weight": "{imported.atoms-button.label.font-weight}",
-            "line-height": "{imported.atoms-button.label.line-height}"
+            "font-size": "{imported.text.body-sm.font-size}",
+            "font-weight": "{imported.text.body-sm.font-weight}",
+            "line-height": "{imported.text.body-sm.line-height}"
           },
           "statesByProp": [
             {

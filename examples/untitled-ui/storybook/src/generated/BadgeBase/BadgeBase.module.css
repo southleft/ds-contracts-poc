@@ -87,9 +87,9 @@
 
 .Text {
   color: var(--imported-badge-base-text-color);
-  font-size: var(--imported-badge-base-text-font-size);
-  font-weight: var(--imported-badge-base-text-font-weight);
-  line-height: var(--imported-badge-base-text-line-height);
+  font-size: var(--imported-text-text-xs-medium-font-size);
+  font-weight: var(--imported-text-text-xs-medium-font-weight);
+  line-height: var(--imported-text-text-xs-medium-line-height);
 }
 
 .arrowRight {

@@ -195,11 +195,32 @@ check(
   resolve(supportPart?.tokens?.['font-weight']) === '400' &&
     resolve(supportPart?.tokens?.['line-height']) === `${supportText.text!.lineHeight}px`,
 );
+// v17 RE-RECORD, justified. This pinned the per-ANATOMY-PATH spelling
+// (--imported-tooltip-main-text-font-weight). The two text parts ride two
+// DISTINCT named Figma text styles — "Label/Small" and "Body/Small" — and
+// typography now mints under the STYLE's name, shared by every part riding it,
+// instead of under the component/part path. The values are unchanged and the
+// checks directly above still assert them (400, 16px); what moved is the NAME,
+// from a machine path to the designer's own vocabulary.
+// The pin is STRENGTHENED rather than merely retargeted: it also requires the
+// two parts to stay DISTINCT. That is the property worth protecting — if
+// style-naming ever collapsed two different styles onto one leaf, the values
+// would still resolve and only this check would notice.
+const styleVars = [
+  'label-small-font-weight',
+  'label-small-line-height',
+  'body-small-font-weight',
+  'body-small-line-height',
+];
 check(
-  'emitReact CSS: font-weight + line-height declarations on both text parts',
-  ['main-text-font-weight', 'main-text-line-height', 'supporting-text-font-weight', 'supporting-text-line-height'].every((t) =>
-    css.includes(`var(--imported-tooltip-${t})`),
-  ),
+  'emitReact CSS: font-weight + line-height on both text parts, named for their TEXT STYLES (Label/Small, Body/Small)',
+  styleVars.every((t) => css.includes(`var(--imported-text-${t})`)),
+);
+check(
+  'the two text parts bind DIFFERENT style groups (style-naming must not collapse distinct styles)',
+  css.includes('var(--imported-text-label-small-font-weight)') &&
+    css.includes('var(--imported-text-body-small-font-weight)') &&
+    resolve(mainPart?.tokens?.['font-weight']) !== resolve(supportPart?.tokens?.['font-weight']),
 );
 
 // ---------------------------------------------------------------------------

@@ -111,9 +111,9 @@
               },
               "tokens": {
                 "color": "{color.content.default}",
-                "font-size": "{imported.atoms-checkbox.content-label.font-size}",
-                "font-weight": "{imported.atoms-checkbox.content-label.font-weight}",
-                "line-height": "{imported.atoms-checkbox.content-label.line-height}"
+                "font-size": "{imported.text.body-sm.font-size}",
+                "font-weight": "{imported.text.body-sm.font-weight}",
+                "line-height": "{imported.text.body-sm.line-height}"
               }
             },
             "inlineHint": {

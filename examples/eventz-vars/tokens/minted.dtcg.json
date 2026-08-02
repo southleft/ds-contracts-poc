@@ -1,7 +1,7 @@
 {
   "imported": {
-    "atoms-badge": {
-      "label": {
+    "text": {
+      "caption-lg-allcaps-bold": {
         "font-size": {
           "$value": "12px",
           "$type": "dimension"
@@ -15,6 +15,36 @@
           "$type": "dimension"
         }
       },
+      "body-sm": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "500",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      },
+      "body-md-bold": {
+        "font-size": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "font-weight": {
+          "$value": "700",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "20px",
+          "$type": "dimension"
+        }
+      }
+    },
+    "atoms-badge": {
       "root": {
         "width": {
           "true": {
@@ -57,20 +87,6 @@
       }
     },
     "atoms-button": {
-      "label": {
-        "font-size": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "500",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "20px",
-          "$type": "dimension"
-        }
-      },
       "state-focus-visible": {
         "outline-width": {
           "$value": "2px",
@@ -103,20 +119,6 @@
       }
     },
     "atoms-checkbox": {
-      "content-label": {
-        "font-size": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "500",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "20px",
-          "$type": "dimension"
-        }
-      },
       "root": {
         "width": {
           "$value": "240px",
@@ -155,20 +157,6 @@
       }
     },
     "atoms-input": {
-      "horizontal-stack-input-content": {
-        "font-size": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "500",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "20px",
-          "$type": "dimension"
-        }
-      },
       "root": {
         "width": {
           "$value": "268px",
@@ -230,34 +218,6 @@
         },
         "width": {
           "$value": "390px",
-          "$type": "dimension"
-        }
-      },
-      "horizontal-stack-horizontal-stack-title": {
-        "font-size": {
-          "$value": "16px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "700",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "20px",
-          "$type": "dimension"
-        }
-      },
-      "horizontal-stack-horizontal-stack-description": {
-        "font-size": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "font-weight": {
-          "$value": "500",
-          "$type": "number"
-        },
-        "line-height": {
-          "$value": "20px",
           "$type": "dimension"
         }
       }
