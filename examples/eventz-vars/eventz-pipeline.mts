@@ -214,6 +214,10 @@ for (const [mode, m] of Object.entries(captured.modes ?? {})) {
 // described so the artifact reports its own shape: a refusal class that grows
 // shows up as a number, not as prose someone has to re-read.
 const CLASSES: Array<[string, RegExp]> = [
+  // CARRIED, not refused — counted first because it used to be the largest
+  // refusal in this table. A non-zero "per-state-per-variant" row below would
+  // mean the v17 carry regressed, so the refusal class is deliberately kept.
+  ['CARRIED as statesByProp — a state binding that is also a function of an enum axis (v17)', /carried as statesByProp/],
   ['per-state-per-variant — a state block holds ONE ref per channel', /a state block holds ONE ref per channel/],
   ['state promoted but nothing recoverable', /promoted from the axis but no root or part override was recoverable/],
   ['state override cannot unset a channel', /a state override cannot unset a channel/],
@@ -247,13 +251,17 @@ const notesMd = [
   '|---|---|',
   ...CLASSES.filter(([l]) => (classCount.get(l) ?? 0) > 0).map(([l]) => `| ${classCount.get(l)} | ${l} |`),
   '',
-  'The first three are one story: Eventz encodes interaction state as a variant axis',
-  '(`state=default|hover|active|focus`) CROSSED with `variant=primary|knockout|secondary|bare`,',
-  'so its hover background is a function of TWO axes. `tokensByProp` carries a per-variant',
-  'ref and `states` carries a per-state ref, but the vocabulary has no per-state-PER-VARIANT',
-  'form — so the hover and active planes are refused by name and land empty. That is the',
-  'largest single finding of this round and it is a vocabulary gap, not a capture gap: the',
-  'values are in the dump, bound to real variables, and named in full below.',
+  'Eventz encodes interaction state as a variant axis (`state=default|hover|active|focus`)',
+  'CROSSED with `variant=primary|knockout|secondary|bare`, so its hover background is a',
+  'function of TWO axes. That combination used to be the largest refusal in this table:',
+  '`tokensByProp` carries a per-variant ref and `states` carries a per-state ref, and there',
+  'was no per-state-PER-VARIANT form, so Button and Icon Button lost their ENTIRE hover and',
+  'active planes. v17 adds `statesByProp` and they carry — with the designer\'s own unrelated',
+  'token names (comp/button/primary/…/hover for primary, …/knockout-hover for knockout),',
+  'which is exactly why a substituted ref could never have reached them.',
+  '',
+  'The `per-state-per-variant` refusal row is kept in the table on purpose: it should read',
+  'zero, and a non-zero count means the carry regressed.',
   '',
   ...[...notesBySet.keys()].sort().flatMap((s) => [`## ${s}`, '', ...notesBySet.get(s)!.map((n) => `- ${n}`), '']),
 ].join('\n');

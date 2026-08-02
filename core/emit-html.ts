@@ -428,6 +428,21 @@ function componentCss(contract: Contract): string[] {
       }
     }
   }
+  // v17 statesByProp on the root — the map form of the placeholder branch
+  // above, for a state binding that is a function of an enum axis whose
+  // per-value refs are UNRELATED names. Emitted after the plain state rules
+  // so the per-value binding wins at equal specificity, mirroring
+  // core/emit-react.ts. Without this the HTML surface would silently drop a
+  // plane the React surface renders.
+  for (const entry of root.statesByProp ?? []) {
+    const sel = STATE_SELECTORS[entry.state];
+    if (!sel) continue; // refused by validateContract
+    for (const [value, overrides] of Object.entries(entry.map)) {
+      for (const [cssProp, ref] of Object.entries(overrides)) {
+        rule(`${enumCls(entry.prop, value)}${sel}`, [`${cssProp}: ${cssVar(stripBraces(ref))}`]);
+      }
+    }
+  }
   // v15 declaredStates on the root: verbatim state-selector rules, emitted
   // after the token state rules (disjoint channels by the validateContract
   // ambiguity rule) — mirrors core/emit-react.ts generateCss.
@@ -633,6 +648,18 @@ function componentCss(contract: Contract): string[] {
             const resolved = refPath.replaceAll(`{${phs[0]}}`, value);
             rule(`${enumCls(phs[0], value)}${sel} ${partCls(name)}`, [`${cssProp}: ${cssVar(resolved)}`]);
           }
+        }
+      }
+    }
+    // v17 statesByProp on a nested part — the descendant twin of the root
+    // rules above (.variant-primary:hover .badge__label), after the plain
+    // part-state rules so the per-value binding wins.
+    for (const entry of part.statesByProp ?? []) {
+      const sel = STATE_SELECTORS[entry.state];
+      if (!sel) continue; // refused by validateContract
+      for (const [value, overrides] of Object.entries(entry.map)) {
+        for (const [cssProp, ref] of Object.entries(overrides)) {
+          rule(`${enumCls(entry.prop, value)}${sel} ${partCls(name)}`, [`${cssProp}: ${cssVar(stripBraces(ref))}`]);
         }
       }
     }

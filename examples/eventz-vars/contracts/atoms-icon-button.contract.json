@@ -58,6 +58,8 @@
     }
   ],
   "states": [
+    "hover",
+    "active",
     "focus-visible"
   ],
   "anatomy": {
@@ -109,7 +111,51 @@
           "outline-color": "{comp.border.focus-ring}",
           "outline-width": "{imported.atoms-icon-button.state-focus-visible.outline-width}"
         }
-      }
+      },
+      "statesByProp": [
+        {
+          "prop": "variant",
+          "state": "hover",
+          "map": {
+            "primary": {
+              "background-color": "{comp.button.primary.color.background.hover}"
+            },
+            "knockout": {
+              "background-color": "{comp.button.color.background.knockout-hover}"
+            },
+            "secondary": {
+              "background-color": "{comp.button.color.background.hover}"
+            },
+            "bare": {
+              "background-color": "{comp.button.color.background.hover}"
+            },
+            "bareKnockout": {
+              "background-color": "{comp.button.color.background.hover}"
+            }
+          }
+        },
+        {
+          "prop": "variant",
+          "state": "active",
+          "map": {
+            "primary": {
+              "background-color": "{comp.button.primary.color.background.active}"
+            },
+            "knockout": {
+              "background-color": "{comp.button.color.background.knockout-active}"
+            },
+            "secondary": {
+              "background-color": "{comp.button.color.background.default}"
+            },
+            "bare": {
+              "background-color": "{color.background.none}"
+            },
+            "bareKnockout": {
+              "background-color": "{color.background.none}"
+            }
+          }
+        }
+      ]
     }
   },
   "anchors": {

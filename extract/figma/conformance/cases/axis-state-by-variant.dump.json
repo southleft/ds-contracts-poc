@@ -1,0 +1,145 @@
+{
+  "_provenance": {
+    "fileKey": null,
+    "dumpVersion": "1.9",
+    "note": "canvas conformance fixture - hand-authored dump v1.11 (state axis CROSSED with a variant axis; per-value hover refs are UNRELATED names)"
+  },
+  "Case": {
+    "setName": "Case",
+    "type": "COMPONENT_SET",
+    "variants": [
+      {
+        "name": "Variant=Primary, State=Default",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "fill": {
+          "var": "comp/button/primary/color/background/default"
+        },
+        "children": [
+          {
+            "name": "t",
+            "type": "TEXT",
+            "text": {
+              "characters": "Case",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "style": "badge"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Variant=Knockout, State=Default",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "fill": {
+          "var": "comp/button/color/background/knockout"
+        },
+        "children": [
+          {
+            "name": "t",
+            "type": "TEXT",
+            "text": {
+              "characters": "Case",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "style": "badge"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Variant=Primary, State=Hover",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "fill": {
+          "var": "comp/button/primary/color/background/hover"
+        },
+        "children": [
+          {
+            "name": "t",
+            "type": "TEXT",
+            "text": {
+              "characters": "Case",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "style": "badge"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Variant=Knockout, State=Hover",
+        "type": "COMPONENT",
+        "layout": {
+          "mode": "HORIZONTAL",
+          "primary": "MIN",
+          "counter": "MIN",
+          "spacing": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "primarySizing": "AUTO",
+          "counterSizing": "AUTO"
+        },
+        "fill": {
+          "var": "comp/button/color/background/knockout-hover"
+        },
+        "children": [
+          {
+            "name": "t",
+            "type": "TEXT",
+            "text": {
+              "characters": "Case",
+              "fontSize": 12,
+              "fontStyle": "Medium",
+              "style": "badge"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

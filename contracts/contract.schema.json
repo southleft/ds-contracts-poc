@@ -861,6 +861,43 @@
             }
           }
         },
+        "statesByProp": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "prop": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "map": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {
+                    "type": "string",
+                    "pattern": "^\\{[a-z0-9.{}-]+\\}$"
+                  }
+                }
+              }
+            },
+            "required": [
+              "prop",
+              "state",
+              "map"
+            ],
+            "additionalProperties": false
+          }
+        },
         "content": {
           "type": "object",
           "properties": {

@@ -5904,7 +5904,18 @@ export interface PartStateTarget {
   part: Record<string, unknown>;
   state: string;
   target: Record<string, string>;
+  /** v17 — the per-enum-value half of this (part, state) override. A state
+   *  block holds ONE ref per channel, so a binding that is a FUNCTION of a
+   *  variant axis had nowhere to go and was refused by name; it lands here and
+   *  becomes `statesByProp`. Keyed prop → value → channel → ref. */
+  byProp: StateByPropCollector;
 }
+
+/** v17: prop → value → (CSS channel → token ref), the shape both the root and
+ *  the part collectors fill before `statesByProp` entries are built from it.
+ *  Unlike tokensByProp there is no default-value elision: a state override has
+ *  no per-state base to deviate FROM, so every observed value is carried. */
+type StateByPropCollector = Record<string, Record<string, Record<string, string>>>;
 
 /** Diff ONE promoted state's (flattened) variants against the matching
  *  default-state variants and propose root `states` overrides: bound facts as
@@ -5935,6 +5946,8 @@ function proposeStateDiffs(
   rootParts?: Record<string, unknown>,
   keyByChildName?: Map<string, string>,
   partStates?: PartStateTarget[],
+  /** v17 — the root's per-enum-value collector for THIS state. */
+  rootByProp?: StateByPropCollector,
 ) {
   const where = `${ctx.setName}:root`;
   const missing = group.filter((v) => !baseByName.get(v.name));
@@ -5969,9 +5982,25 @@ function proposeStateDiffs(
       if (u.kind === 'ref') {
         if (u.ref !== baseRootTokens[cssProp]) target[cssProp] = u.ref;
       } else if (u.kind === 'per-value') {
-        ctx.notes.push(
-          `${where} ${paintName} (state ${state}): bindings are a function of an enum axis by value — a state block holds ONE ref per channel (tokensByProp has no per-state form); NAMED, not proposed (review)`,
-        );
+        // v17 — this used to be a flat refusal, and it cost Eventz's Button
+        // its whole hover plane: the per-variant hover colours are UNRELATED
+        // names (comp/button/primary/…/hover vs …/knockout-hover), so no
+        // substituted ref can reach them and `states` holds one ref per
+        // channel. They are carried as `statesByProp` now — every value, no
+        // default elision, because a state override has no per-state base to
+        // deviate from.
+        if (rootByProp) {
+          for (const [value, ref] of Object.entries(u.perValue.byValue)) {
+            ((rootByProp[u.perValue.propName] ??= {})[value] ??= {})[cssProp] = ref;
+          }
+          ctx.notes.push(
+            `${where} ${paintName} (state ${state}): bindings are a function of variant axis "${u.perValue.propName}" by VALUE (${Object.entries(u.perValue.byValue).map(([v, r]) => `${v}=${r}`).join(', ')}) — carried as statesByProp (v17; the token names do not spell the axis values, so neither a substituted ref nor a single state ref can carry them)`,
+          );
+        } else {
+          ctx.notes.push(
+            `${where} ${paintName} (state ${state}): bindings are a function of an enum axis by value and no statesByProp collector was supplied — NAMED, not proposed (review)`,
+          );
+        }
       } else if (u.kind === 'drift') {
         ctx.notes.push(`${where} ${paintName} (state ${state}): ${u.detail}`);
       }
@@ -6158,7 +6187,7 @@ function proposeStateDiffs(
       // the part AFTER the mint pass, the root stateOverrides lifecycle.
       let rec = partStates.find((r) => r.part === partRec && r.state === state);
       if (!rec) {
-        rec = { part: partRec, state, target: {} };
+        rec = { part: partRec, state, target: {}, byProp: {} };
         partStates.push(rec);
       }
       const paints = childOccs.map((x) => ({ variant: x.variant, paint: ch.pick(x.node) }));
@@ -6177,8 +6206,12 @@ function proposeStateDiffs(
         if (u.kind === 'ref') {
           if (u.ref !== partBaseTokens[ch.cssProp]) rec.target[ch.cssProp] = u.ref;
         } else if (u.kind === 'per-value') {
+          // v17 — the part-level twin of the root carry above.
+          for (const [value, ref] of Object.entries(u.perValue.byValue)) {
+            ((rec.byProp[u.perValue.propName] ??= {})[value] ??= {})[ch.cssProp] = ref;
+          }
           ctx.notes.push(
-            `${at} ${ch.paintName} (state ${state}): bindings are a function of an enum axis by value — a state block holds ONE ref per channel; NAMED, not proposed (review)`,
+            `${at} ${ch.paintName} (state ${state}): bindings are a function of variant axis "${u.perValue.propName}" by VALUE (${Object.entries(u.perValue.byValue).map(([v, r]) => `${v}=${r}`).join(', ')}) — carried as statesByProp (v17)`,
           );
         } else if (u.kind === 'drift') {
           ctx.notes.push(`${at} ${ch.paintName} (state ${state}): ${u.detail}`);
@@ -6604,6 +6637,9 @@ export function proposeFromDump(
   // observations resolved in the mint pass below, writing straight into
   // these records). Attached to the contract AFTER the mint pass.
   const stateOverrides: Record<string, Record<string, string>> = {};
+  /** v17 — state → prop → value → channel → ref, the root's per-enum-value
+   *  state bindings (see StateByPropCollector). */
+  const stateByProp: Record<string, StateByPropCollector> = {};
   const partStateTargets: PartStateTarget[] = [];
   if (statePromo) {
     const baseByName = new Map(variants.map((v) => [v.name, v]));
@@ -6613,11 +6649,13 @@ export function proposeFromDump(
     if (disabledGroup.length > 0) groups.push(['disabled', disabledGroup]);
     for (const [state, group] of groups) {
       const target = (stateOverrides[state] ??= {});
+      const byProp = (stateByProp[state] ??= {});
       proposeStateDiffs(
         ctx, state, group, baseByName, baseChildNames, rootTokens, target,
         (root.parts as Record<string, unknown> | undefined) ?? {},
         rootKeyByChildName,
         partStateTargets,
+        byProp,
       );
     }
     // The disabled axis value → a REAL boolean prop (native attribute on
@@ -6965,10 +7003,17 @@ export function proposeFromDump(
     // like root ones — the disabled label color alone is a real state.
     const partPresent = new Set<string>();
     for (const rec of partStateTargets) {
-      if (Object.keys(rec.target).length > 0) partPresent.add(rec.state);
+      // v17: a per-value-only override DECLARES the state exactly like a
+      // single-ref one. Before, a state whose every channel was a function of
+      // a variant axis counted as "nothing recoverable" and was dropped —
+      // which is precisely how Button's hover plane disappeared.
+      if (Object.keys(rec.target).length > 0 || Object.keys(rec.byProp).length > 0) partPresent.add(rec.state);
     }
     const present = declared.filter(
-      (s) => Object.keys(stateOverrides[s]).length > 0 || partPresent.has(s),
+      (s) =>
+        Object.keys(stateOverrides[s]).length > 0 ||
+        Object.keys(stateByProp[s] ?? {}).length > 0 ||
+        partPresent.has(s),
     );
     for (const s of declared) {
       if (!present.includes(s)) {
@@ -6981,7 +7026,15 @@ export function proposeFromDump(
     // `states`, and each landing is a NAMED note (the B7 receipt's
     // replacement — the channel now CARRIES).
     for (const rec of partStateTargets) {
-      if (!present.includes(rec.state) || Object.keys(rec.target).length === 0) continue;
+      if (!present.includes(rec.state)) continue;
+      // v17: the per-enum-value half lands as statesByProp entries, one per
+      // driving prop, and can be the ONLY thing this record carries.
+      for (const [prop, map] of Object.entries(rec.byProp)) {
+        const list = (rec.part.statesByProp ?? []) as Array<{ prop: string; state: string; map: unknown }>;
+        list.push({ prop, state: rec.state, map });
+        rec.part.statesByProp = list;
+      }
+      if (Object.keys(rec.target).length === 0) continue;
       const states = (rec.part.states ?? {}) as Record<string, Record<string, string>>;
       states[rec.state] = { ...(states[rec.state] ?? {}), ...rec.target };
       rec.part.states = states;
@@ -6997,6 +7050,15 @@ export function proposeFromDump(
       if (rootPresent.length > 0) {
         root.states = Object.fromEntries(rootPresent.map((s) => [s, stateOverrides[s]]));
       }
+      // v17 — the root's per-enum-value state bindings, in declared state
+      // order so the emitted sheet is a function of the contract alone.
+      const rootByPropEntries: Array<{ prop: string; state: string; map: unknown }> = [];
+      for (const st of present) {
+        for (const [prop, map] of Object.entries(stateByProp[st] ?? {})) {
+          rootByPropEntries.push({ prop, state: st, map });
+        }
+      }
+      if (rootByPropEntries.length > 0) root.statesByProp = rootByPropEntries;
       contract.states = present;
       const enumNames = new Set(
         props.filter((p) => typeof p.type === 'object' && 'enum' in (p.type as object)).map((p) => p.name as string),

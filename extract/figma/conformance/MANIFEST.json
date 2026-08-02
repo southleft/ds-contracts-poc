@@ -806,6 +806,25 @@
       "status": "green"
     },
     {
+      "id": "axis-state-by-variant",
+      "construct": "an interaction-state axis CROSSED with a variant axis, where the per-value state refs are UNRELATED token names",
+      "expect": "CARRIED",
+      "why": "`states` holds ONE ref per channel, and a root state ref carrying a single {prop} placeholder expands per enum value \u2014 which covers a token FAMILY parameterised by the axis. It cannot cover the commoner case this fixture holds: per-variant state colours that share no stem (comp/button/primary/color/background/hover vs comp/button/color/background/knockout-hover), so no substituted ref can reach them. Before v17 this was refused by name and the whole hover plane landed empty \u2014 measured on Eventz, it cost Button and Icon Button every hover and active binding they had. v17 carries it as `statesByProp`. The case pins BOTH halves: the per-value refs must appear, and the state must be DECLARED (a state carried only this way used to count as 'nothing recoverable' and be dropped).",
+      "check": {
+        "carried": [
+          "statesByProp",
+          "\"state\":\\s*\"hover\"",
+          "comp\\.button\\.primary\\.color\\.background\\.hover",
+          "comp\\.button\\.color\\.background\\.knockout-hover",
+          "\"states\":\\s*\\[[^\\]]*\"hover\""
+        ],
+        "noteAbsent": [
+          "a state block holds ONE ref per channel"
+        ]
+      },
+      "status": "green"
+    },
+    {
       "id": "axis-state-partial",
       "construct": "an interaction-state axis where one variant name omits the State pair",
       "expect": "REFUSED",

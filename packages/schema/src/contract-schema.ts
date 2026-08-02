@@ -183,6 +183,37 @@ export const TokensByPropFieldSchema = z.union([
   z.array(TokensByPropSchema).min(1),
 ]);
 
+/** v17 (the hover-plane round) — an interaction state whose binding is ALSO a
+ *  function of an enum axis: `statesByProp`.
+ *
+ *  `states` holds ONE ref per channel, and root `states` already expands a ref
+ *  carrying a single {prop} placeholder into per-enum-value state rules. That
+ *  covers a token FAMILY parameterised by the axis
+ *  ({button.bg.hover.{variant}}). It cannot cover the far commoner case: a
+ *  design system whose per-variant state colours are UNRELATED NAMES. Eventz's
+ *  hover backgrounds are comp/button/primary/color/background/hover for
+ *  primary and comp/button/color/background/knockout-hover for knockout —
+ *  no family, no shared stem, nothing a placeholder can reach. Measured, that
+ *  refusal cost Button and Icon Button their ENTIRE hover and active planes
+ *  (6 refusals → 7 states promoted with nothing recoverable), and a state
+ *  crossed with a variant axis is the single most common pattern in a real
+ *  design system.
+ *
+ *  So the shape is `tokensByProp`'s, plus the state it applies to: `map`
+ *  is value → (CSS property → token ref), identical to TokensByPropSchema's,
+ *  which keeps ONE map grammar in the vocabulary rather than two. Entries are
+ *  ordered like tokensByProp entries; refs are PLAIN (no placeholders — the
+ *  axis is already pinned by the map key, and a second axis would need a
+ *  second pin the map has nowhere to put). Rendered as enum-class state rules
+ *  (.variant-primary:hover), emitted after the plain `states` rules so the
+ *  per-value binding wins at equal specificity — the tokensByProp cascade
+ *  discipline applied to a state selector. */
+export const StatesByPropSchema = z.strictObject({
+  prop: z.string(),
+  state: z.string(),
+  map: z.record(z.string(), z.record(z.string(), TokenRefSchema)),
+});
+
 /** v14: a literal styling value a contract may carry where the SOURCE style
  *  is a component-private literal (Polaris `--pc-*` pixel geometry), resolved
  *  deterministically through a var() chain — never invented, never minted
@@ -1048,6 +1079,10 @@ export interface Part {
    *  State-preview variants. Unknown state names, undeclared states, ref/
    *  slot parts, and non-color channels refuse by name (validateContract). */
   states?: Record<string, Record<string, string>>;
+  /** v17: per-state bindings that are ALSO a function of an enum axis, where
+   *  the per-value refs are unrelated names a placeholder cannot reach (see
+   *  StatesByPropSchema). Same state/channel discipline as `states`. */
+  statesByProp?: Array<z.infer<typeof StatesByPropSchema>>;
   /** Text content bound to a text prop: { prop: "title" }. */
   content?: { prop: string };
   /** Static literal text (a page number, an ellipsis) — same on both
@@ -1124,6 +1159,8 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** Root: full state vocabulary. v13: non-ref parts, color-kind channels
      *  only — see the Part interface doc + emit-react validateContract. */
     states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
+    /** v17 — see StatesByPropSchema. */
+    statesByProp: z.array(StatesByPropSchema).min(1).optional(),
     content: z.strictObject({ prop: z.string() }).optional(),
     text: z.string().optional(),
     /** Per-enum-value text overrides merged over `text` (see Part). */

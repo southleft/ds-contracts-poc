@@ -98,6 +98,8 @@
     }
   ],
   "states": [
+    "hover",
+    "active",
     "focus-visible"
   ],
   "anatomy": {
@@ -140,7 +142,45 @@
             "font-size": "{imported.atoms-button.label.font-size}",
             "font-weight": "{imported.atoms-button.label.font-weight}",
             "line-height": "{imported.atoms-button.label.line-height}"
-          }
+          },
+          "statesByProp": [
+            {
+              "prop": "variant",
+              "state": "hover",
+              "map": {
+                "primary": {
+                  "color": "{comp.button.primary.color.content.hover}"
+                },
+                "knockout": {
+                  "color": "{comp.button.color.content.hover}"
+                },
+                "secondary": {
+                  "color": "{comp.button.color.content.hover}"
+                },
+                "bare": {
+                  "color": "{comp.button.color.content.hover}"
+                }
+              }
+            },
+            {
+              "prop": "variant",
+              "state": "active",
+              "map": {
+                "primary": {
+                  "color": "{comp.button.primary.color.content.active}"
+                },
+                "knockout": {
+                  "color": "{comp.button.color.content.active}"
+                },
+                "secondary": {
+                  "color": "{comp.button.color.content.default}"
+                },
+                "bare": {
+                  "color": "{comp.button.color.content.active}"
+                }
+              }
+            }
+          ]
         },
         "endIcon": {
           "slot": {
@@ -186,7 +226,45 @@
           "outline-color": "{comp.border.focus-ring}",
           "outline-width": "{imported.atoms-button.state-focus-visible.outline-width}"
         }
-      }
+      },
+      "statesByProp": [
+        {
+          "prop": "variant",
+          "state": "hover",
+          "map": {
+            "primary": {
+              "background-color": "{comp.button.primary.color.background.hover}"
+            },
+            "knockout": {
+              "background-color": "{comp.button.color.background.knockout-hover}"
+            },
+            "secondary": {
+              "background-color": "{comp.button.color.background.hover}"
+            },
+            "bare": {
+              "background-color": "{comp.button.color.background.hover}"
+            }
+          }
+        },
+        {
+          "prop": "variant",
+          "state": "active",
+          "map": {
+            "primary": {
+              "background-color": "{comp.button.primary.color.background.active}"
+            },
+            "knockout": {
+              "background-color": "{comp.button.color.background.knockout-active}"
+            },
+            "secondary": {
+              "background-color": "{comp.button.color.background.default}"
+            },
+            "bare": {
+              "background-color": "{color.background.none}"
+            }
+          }
+        }
+      ]
     }
   },
   "anchors": {

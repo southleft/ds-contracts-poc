@@ -1897,15 +1897,29 @@ function translateStateOverrides(overrides: Record<string, string>): Record<stri
  *  Disabled preview shows the disabled label color, not the default one
  *  (owner field case: #556275 on the #dfe3eb disabled fill). Returns the
  *  SAME object when nothing overrides, so base compiles stay byte-identical. */
-function withPartStateOverrides(parts: Record<string, Part>, stateName: string): Record<string, Part> {
+function withPartStateOverrides(
+  parts: Record<string, Part>,
+  stateName: string,
+  /** v17 — the preview variant's own combo, so a per-enum-value state binding
+   *  resolves to THIS cell's value. Without it a statesByProp-only state would
+   *  draw its preview identically to Default while the CSS surfaces render it,
+   *  which is the canvas half of the same silent loss. */
+  subst: Record<string, string> = {},
+): Record<string, Part> {
   let changed = false;
   const out: Record<string, Part> = {};
   for (const [key, part] of Object.entries(parts)) {
     let next = part;
-    const nested = part.parts ? withPartStateOverrides(part.parts, stateName) : undefined;
+    const nested = part.parts ? withPartStateOverrides(part.parts, stateName, subst) : undefined;
     if (nested && nested !== part.parts) next = { ...next, parts: nested };
-    const overrides = part.states?.[stateName];
-    if (overrides && Object.keys(overrides).length > 0 && !part.component && !part.slot) {
+    const byPropOverrides: Record<string, string> = {};
+    for (const e of part.statesByProp ?? []) {
+      if (e.state !== stateName) continue;
+      const v = subst[e.prop];
+      if (v !== undefined) Object.assign(byPropOverrides, e.map[v] ?? {});
+    }
+    const overrides = { ...(part.states?.[stateName] ?? {}), ...byPropOverrides };
+    if (Object.keys(overrides).length > 0 && !part.component && !part.slot) {
       next = { ...next, tokens: { ...(next.tokens ?? {}), ...translateStateOverrides(overrides) } };
     }
     if (next !== part) changed = true;
@@ -3135,9 +3149,17 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
         // Same resolveTokens rule as the base loop: per-combo tokensByProp
         // overrides apply BEFORE the state overrides layer on top.
         const baseCtx = applyStyling(rootSpec, root, subst, {});
+        // v17 — the root's per-enum-value state bindings resolved for THIS
+        // preview cell, layered over the single-ref state overrides.
+        const byPropState: Record<string, string> = {};
+        for (const e of root.statesByProp ?? []) {
+          if (e.state !== stateName) continue;
+          const v = subst[e.prop];
+          if (v !== undefined) Object.assign(byPropState, e.map[v] ?? {});
+        }
         const ctx = applyTokens(
           rootSpec,
-          translateStateOverrides(overrides[stateName] ?? {}),
+          translateStateOverrides({ ...(overrides[stateName] ?? {}), ...byPropState }),
           subst,
           baseCtx,
           root.hugsBelowMaxWidth,
@@ -3158,7 +3180,7 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           // (withPartStateOverrides) — the State=Disabled cell draws the
           // disabled label color, mirroring .root:disabled .label on the CSS
           // surfaces.
-          const stateParts = withPartStateOverrides(root.parts, stateName);
+          const stateParts = withPartStateOverrides(root.parts, stateName, subst);
           rootSpec.children = variantParts(stateParts, subst).flatMap(([childName, child]) =>
             partToSpecs(childName, child, contract, byId, ctx, subst),
           );

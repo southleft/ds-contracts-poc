@@ -687,6 +687,55 @@ export function validateContract(
         }
       }
     }
+    // v17 statesByProp — the SAME discipline `states` is held to, because a
+    // per-value state binding is a state binding. Unknown/undeclared states
+    // refuse, ref/slot parts refuse, non-root parts keep the color-kind
+    // whitelist, the prop must be a declared enum and every map key one of its
+    // canonical values, and a channel bound for the same state by BOTH
+    // `states` and `statesByProp` is AMBIGUOUS — refused by name rather than
+    // silently resolved by sheet order (the tokens/literals precedent).
+    for (const entry of part.statesByProp ?? []) {
+      const where = `statesByProp[${entry.prop}/${entry.state}]`;
+      if (part.component) {
+        errors.push(`${contract.id}: part "${name}" is a component instance — ${where} cannot restyle it (the child contract owns its styling)`);
+      }
+      if (part.slot) {
+        errors.push(`${contract.id}: part "${name}" is a slot — ${where} cannot restyle its content (the consumer owns it)`);
+      }
+      if (!(entry.state in STATE_SELECTORS)) {
+        errors.push(`${contract.id}: part "${name}" ${where} declares unknown state "${entry.state}" — must be one of ${Object.keys(STATE_SELECTORS).join(', ')}`);
+        continue;
+      }
+      if (!contract.states.includes(entry.state as Contract['states'][number])) {
+        errors.push(`${contract.id}: part "${name}" ${where} declares "${entry.state}" but the contract's \`states\` does not — declare it or drop the override`);
+      }
+      const declared = contract.props?.find((pr) => pr.name === entry.prop);
+      const values = (declared?.type as { enum?: string[] } | undefined)?.enum;
+      if (!values) {
+        errors.push(`${contract.id}: part "${name}" ${where} keys on "${entry.prop}" which is not a declared enum prop`);
+      } else {
+        for (const key of Object.keys(entry.map)) {
+          if (!values.includes(key)) {
+            errors.push(`${contract.id}: part "${name}" ${where} maps "${key}" which is not one of "${entry.prop}"'s values (${values.join(', ')})`);
+          }
+        }
+      }
+      for (const overrides of Object.values(entry.map)) {
+        for (const cssProp of Object.keys(overrides)) {
+          if (p.length > 1 && !PART_STATE_CHANNELS.has(cssProp)) {
+            errors.push(
+              `${contract.id}: part "${name}" ${where} sets "${cssProp}" which is not a part-state channel (${[...PART_STATE_CHANNELS].join(', ')} — color-kind only, v13)`,
+            );
+          }
+          if (p.length === 1) checkTokenChannel(cssProp, where);
+          if (part.states?.[entry.state]?.[cssProp] !== undefined) {
+            errors.push(
+              `${contract.id}: part "${name}" binds "${cssProp}" for state "${entry.state}" in BOTH states and ${where} — ambiguous; keep the per-value map or the single ref, not both`,
+            );
+          }
+        }
+      }
+    }
     // v7 overlay: out-of-flow parts must stay out of the flow arithmetic —
     // grow/overlap are in-flow sizing semantics, and the root cannot attach
     // to its own edge. Minimal, named refusals.
@@ -1042,7 +1091,15 @@ export function validateContract(
       const partCarries = walkAnatomy(contract).some(
         (w) => w.path.length > 1 && Object.keys(w.part.states?.[state] ?? {}).length > 0,
       );
-      if (!rootCarries && !partCarries) {
+      // v17: … or ONLY by per-enum-value bindings. A state whose every channel
+      // is a function of a variant axis carries in `statesByProp` and nowhere
+      // else, and it very much does not render identically to Default — that
+      // is Eventz's Button hover exactly. Reading only `states` here would
+      // call the newly-carried plane "kit noise" and refuse the contract.
+      const byPropCarries = walkAnatomy(contract).some((w) =>
+        (w.part.statesByProp ?? []).some((e) => e.state === state && Object.keys(e.map).length > 0),
+      );
+      if (!rootCarries && !partCarries && !byPropCarries) {
         errors.push(
           `${contract.id}: figmaStatePreviews — state "${state}" declares no token overrides on anatomy.root.states (or any part's states), so its preview variant would render identically to Default`,
         );
@@ -1707,6 +1764,22 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       }
     }
   }
+  // v17 statesByProp on the ROOT — the per-enum-value state rules. Emitted
+  // into stateRules AFTER the plain `states` rules above, so where both bind a
+  // channel for the same state the per-value rule wins at equal specificity
+  // (identical to how tokensByProp's enum-class rules follow .root). Refs are
+  // plain by schema, so there is no placeholder branch to mirror here.
+  for (const entry of root.statesByProp ?? []) {
+    const sel = STATE_SELECTORS[entry.state];
+    if (!sel) continue; // unknown state already refused in validateContract
+    for (const [value, overrides] of Object.entries(entry.map)) {
+      for (const [cssProp, ref] of Object.entries(overrides)) {
+        const refPath = stripBraces(ref);
+        if (!checkToken(refPath, `anatomy.root.statesByProp.${entry.prop}.${value}.${entry.state}.${cssProp}`)) continue;
+        stateRules.push(`\n.${entry.prop}-${value}${sel} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
+      }
+    }
+  }
   lines.push(...stateRules);
   // v15 declaredStates on the root: verbatim state-selector rules, emitted
   // after the token state rules (a declared fact never shadows a binding —
@@ -1969,6 +2042,12 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
       const dDecls = Object.entries(overrides).map(([cssProp, value]) => `  ${cssProp}: ${value};`);
       if (dDecls.length > 0) nestedSubRules.push(`\n.root${sel} .${name} {\n${dDecls.join('\n')}\n}`);
     }
+    // v17 statesByProp on a NESTED part — the map form of the placeholder
+    // branch just below: a descendant rule under the root's enum class AND
+    // state selector (.variant-primary:hover .label). Emitted BEFORE the
+    // plain `states` loop would be wrong (the per-value binding must win), so
+    // it is pushed after it — see the block following this one.
+    const partStatesByProp = part.statesByProp ?? [];
     // v13 part-level states (P18 second half): descendant rules under the
     // root's STATE selector — .root:disabled .label { color: … } — the same
     // STATE_SELECTORS the root states ride (native :disabled; hover/active
@@ -1990,6 +2069,19 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
             if (!checkToken(resolved, `anatomy.${name}.states.${state}.${cssProp}`)) continue;
             nestedSubRules.push(`\n.${phs[0]}-${value}${sel} .${name} {\n  ${cssProp}: ${cssVar(resolved)};\n}`);
           }
+        }
+      }
+    }
+    // v17: the per-value state rules land AFTER the plain ones, so where both
+    // bind a channel for the same state the map wins at equal specificity.
+    for (const entry of partStatesByProp) {
+      const sel = STATE_SELECTORS[entry.state];
+      if (!sel) continue; // refused by validateContract
+      for (const [value, overrides] of Object.entries(entry.map)) {
+        for (const [cssProp, ref] of Object.entries(overrides)) {
+          const refPath = stripBraces(ref);
+          if (!checkToken(refPath, `anatomy.${name}.statesByProp.${entry.prop}.${value}.${entry.state}.${cssProp}`)) continue;
+          nestedSubRules.push(`\n.${entry.prop}-${value}${sel} .${name} {\n  ${cssProp}: ${cssVar(refPath)};\n}`);
         }
       }
     }

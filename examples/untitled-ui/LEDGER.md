@@ -15,7 +15,7 @@ Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, capture
 | instrument | what it holds the tool to | current reading | artifact |
 |---|---|---|---|
 | Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **92.5%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst tooltip 81.2%) | `renders/fidelity.json` |
-| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **88/88** green, 0 pinned red — 69 constructs expected CARRIED, 8 REFUSED, 11 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
+| Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **89/89** green, 0 pinned red — 70 constructs expected CARRIED, 8 REFUSED, 11 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
 | Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** closed · 10,996 matched · 1,965 diverged · 4,088 loss · 6,365 invented | `extract/figma/roundtrip-uui/report.json` |
 | The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 19 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
 
@@ -43,11 +43,11 @@ Method, quoted from `renders/FIDELITY.md`: *Score = % of pixels REPRODUCED, meas
 
 ## 2. What carries
 
-The document-model fixture is the answer to "will it survive the boundary at all". It is 88 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **69 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
+The document-model fixture is the answer to "will it survive the boundary at all". It is 89 hand-authored cases whose expected disposition was written from the Figma documentation model, never from engine output; a construct that is neither carried nor named-refused is a hard failure. **70 constructs are proven CARRIED and green.** Grouped, with the case ids you can re-run:
 
 | construct family | carried | case ids |
 |---|---|---|
-| Variant axes (enum, boolean, on/off, state, theme) | 5 | `axis-bool` `axis-enum` `axis-onoff-enum` `axis-state` `axis-theme-with-carriers` |
+| Variant axes (enum, boolean, on/off, state, theme) | 6 | `axis-bool` `axis-enum` `axis-onoff-enum` `axis-state` `axis-state-by-variant` `axis-theme-with-carriers` |
 | Boolean property defaults | 2 | `bool-default-from-set` `bool-default-hidden` |
 | Effects (shadows, blurs) | 2 | `effect-shadow-single` `effect-shadow-two` |
 | Fills and paints | 6 | `fill-alpha` `fill-image-bool` `fill-image-hash` `fill-solid-and-image-mixed` `fill-solid-raw` `fill-solid-var` |
@@ -203,7 +203,7 @@ Carried, but not carried perfectly. These are the classes an adopter will actual
 
 ### 5.1 The pinned reds
 
-NONE. All 88 conformance cases are green: every construct the documentation model says is CARRIED is carried, and every refusal is named. This section stays in the ledger because an empty pinned-red list is a reading, not a formatting accident — when a red returns it is printed here verbatim from the manifest.
+NONE. All 89 conformance cases are green: every construct the documentation model says is CARRIED is carried, and every refusal is named. This section stays in the ledger because an empty pinned-red list is a reading, not a formatting accident — when a red returns it is printed here verbatim from the manifest.
 
 ### 5.2 The round-1 audit, re-checked
 
@@ -258,7 +258,7 @@ npx tsx extract/figma/ledger/build.ts
 
 # 2 · the document-model fixture — fast, read-only, no engine changes
 npm run conformance:canvas
-#    expect: 88 case(s): 88 PASS, 0 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
+#    expect: 89 case(s): 89 PASS, 0 RED-EXPECTED (pinned findings), 0 FAIL, 0 UNEXPECTED-GREEN, 0 UNLISTED, 0 MISSING
 
 # 3 · the canvas→code→canvas round trip (rewrites REPORT.md + report.json)
 npm run extract:figma:roundtrip:uui
@@ -283,7 +283,7 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/storybook/contracts/` | `5ef714f9a302` | 130,519 | proposed contracts (30 files) |
 | `examples/untitled-ui/storybook/src/generated/` | `b9644312d096` | 272,560 | emitted components (32 dirs) |
 | `examples/untitled-ui/storybook/src/tokens.css` | `f93e432a7108` | 673,005 | emitted global tokens |
-| `extract/figma/conformance/MANIFEST.json` | `4fab450f1750` | 48,130 | conformance denominator |
+| `extract/figma/conformance/MANIFEST.json` | `7975d492c093` | 49,560 | conformance denominator |
 | `extract/figma/roundtrip-uui/report.json` | `6c8d85a8d469` | 2,968,666 | round-trip facts |
 | `extract/figma/roundtrip-uui/REPORT.md` | `2ac653435daf` | 91,799 | round-trip narrative |
 
