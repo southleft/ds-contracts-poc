@@ -28,6 +28,7 @@
  */
 import { readdirSync, readFileSync, statSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
+import { validateContract } from '@ds-contracts/schema';
 
 const ROOT = process.cwd();
 const VERIFY = process.argv.includes('--verify');
@@ -254,6 +255,51 @@ const display = (v: string): string =>
 
 interface Proposed { name: string; values: string[] }
 
+/**
+ * The full seed ENVELOPE, not just the props. My first pass emitted `id`,
+ * `name`, `semantics` and `props` and stopped — which agreed with the human on
+ * every value and would not have parsed, because a contract also carries
+ * `$schema`, `version`, `status`, `anatomy`, `anchors` and `states`. Agreement
+ * on values and a file the pipeline can read are two different claims.
+ *
+ * `anatomy` is deliberately `{ root: {} }`: parts are PROMOTED from captured
+ * DOM truth (docs/21), never guessed from a type declaration. `states` is empty
+ * for the same reason. This tool proposes the enum half of a seed and says so.
+ */
+function buildSeed(name: string, props: Proposed[]): Record<string, unknown> {
+  return {
+    $schema: './contract.schema.json',
+    id: `${config.library.package.replace(/^@/, '').split('/')[0]}.${name.toLowerCase()}`,
+    name,
+    version: '0.1.0',
+    status: 'draft',
+    description:
+      `PROPOSED seed — generated from ${config.library.package}'s shipped .d.ts by extract/computed/seed-gen.ts. ` +
+      'REVIEW BEFORE USE: the enum axes below are read from the library\'s type declarations, which is not the same as the axes a designer wants on the canvas. ' +
+      'Prune what does not belong, and add any axis a human models out of booleans — the generator is silent there ON PURPOSE (see `--verify`). ' +
+      'Anatomy is left empty because parts are promoted from captured DOM truth, never inferred from types (docs/21 step 4).',
+    semantics: { element: 'div' },
+    anatomy: { root: {} },
+    anchors: {
+      figma: { fileKey: null, componentSetKey: null },
+      code: { importPath: config.library.package, export: name },
+    },
+    states: [],
+    props: props.map((p) => ({
+      name: p.name,
+      type: { enum: p.values },
+      bindings: {
+        figma: {
+          kind: 'VARIANT',
+          property: display(p.name),
+          values: Object.fromEntries(p.values.map((v) => [v, display(v)])),
+        },
+        code: { prop: p.name },
+      },
+    })),
+  };
+}
+
 function propsOf(componentName: string): Proposed[] {
   const decl = declFor(componentName);
   if (!decl) return [];
@@ -383,15 +429,23 @@ if (process.argv.includes('--all')) {
   const names = readdirSync(dir).filter((n) => statSync(path.join(dir, n)).isDirectory()).sort();
   let withAxes = 0, axes = 0, noDecl = 0, noAxes = 0;
   const rows: string[] = [];
+  const rejected: string[] = [];
   for (const name of names) {
     if (!declFor(name)) { noDecl++; continue; }
     const props = propsOf(name);
     if (props.length === 0) { noAxes++; continue; }
     withAxes++;
     axes += props.length;
-    rows.push(`  ${name.padEnd(26)} ${props.map((p) => `${p.name}(${p.values.length})`).join(', ')}`);
+    // Every proposal in the sweep goes through the real referee too. Nine
+    // hand-picked components passing says little; 61 arbitrary ones, with
+    // props Carbon calls `dir`, `default`, `min` and `max`, is the test.
+    const verdict = validateContract(buildSeed(name, props));
+    if (!verdict.ok) rejected.push(`  ${name}: ${verdict.errors.join('; ')}`);
+    rows.push(`  ${verdict.ok ? '✔' : '✖'} ${name.padEnd(26)} ${props.map((p) => `${p.name}(${p.values.length})`).join(', ')}`);
   }
   console.log(rows.join('\n'));
+  if (rejected.length > 0) console.log(`\n${rejected.length} of ${withAxes} proposal(s) FAIL the contract referee:\n${rejected.join('\n')}`);
+  else console.log(`\nAll ${withAxes} proposals pass validateContract — the same referee the pipeline runs.`);
   console.log(`\nSWEEP of ${names.length} shipped components:`);
   console.log(`  ${withAxes} have at least one enum axis the generator can read — ${axes} axes total, proposed rather than authored.`);
   console.log(`  ${noAxes} declare no readable enum axis (many genuinely have none — a Layer or a Grid has no variant plane).`);
@@ -409,26 +463,25 @@ if (process.argv.includes('--all')) {
 const outDir = path.join(ROOT, 'examples', 'carbon', 'contracts-seed-proposed');
 if (WRITE) mkdirSync(outDir, { recursive: true });
 let written = 0;
+const invalid: string[] = [];
 for (const c of config.components) {
   const props = propsOf(c.importName ?? c.name);
   if (props.length === 0) continue;
-  const seed = {
-    $proposed: `GENERATED from ${config.library.package}'s shipped .d.ts by extract/computed/seed-gen.ts — REVIEW before use. The prop space a capture reads must be a committed, human-reviewed file (docs/21 step 4); this is a starting point for that review, never an input to capture.`,
-    id: `carbon.${c.name.toLowerCase()}`,
-    name: c.name,
-    semantics: { element: 'div' },
-    props: props.map((p) => ({
-      name: p.name,
-      type: { enum: p.values },
-      bindings: {
-        figma: { kind: 'VARIANT', property: display(p.name), values: Object.fromEntries(p.values.map((v) => [v, display(v)])) },
-        code: { prop: p.name },
-      },
-    })),
-  };
+  const seed = buildSeed(c.name, props);
+  // A PROPOSAL THAT DOES NOT PARSE IS WORTH NOTHING. Agreement with the human
+  // says the VALUES are right; only the referee says the FILE is usable. This
+  // runs the same validateContract the pipeline runs, on every proposal,
+  // whether or not anything is written.
+  const verdict = validateContract(seed);
+  if (!verdict.ok) invalid.push(`  ${c.name}: ${verdict.errors.join('; ')}`);
   if (WRITE) writeFileSync(path.join(outDir, `${c.name.toLowerCase()}.contract.json`), `${JSON.stringify(seed, null, 2)}\n`);
   written++;
-  console.log(`  ${c.name}: ${props.length} enum axis/axes — ${props.map((p) => `${p.name}(${p.values.length})`).join(', ')}`);
+  console.log(`  ${verdict.ok ? '✔' : '✖'} ${c.name}: ${props.length} enum axis/axes — ${props.map((p) => `${p.name}(${p.values.length})`).join(', ')}`);
 }
 console.log(`\n${written} seed(s) ${WRITE ? `written to ${path.relative(ROOT, outDir)}` : 'proposed (dry run — pass --write)'}.`);
+if (invalid.length > 0) {
+  console.error(`\n✘ ${invalid.length} of ${written} proposal(s) FAIL the contract referee — a seed that agrees with the human and does not parse is worth nothing:\n${invalid.join('\n')}`);
+  process.exit(1);
+}
+console.log(`✔ all ${written} pass validateContract — the same referee the pipeline runs.`);
 console.log(`Type index: ${unions.size} union alias(es) + ${constKeys.size} const map(s) across ${dts.length} .d.ts files.`);

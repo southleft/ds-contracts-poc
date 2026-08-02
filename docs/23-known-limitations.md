@@ -971,6 +971,22 @@ declare no readable enum axis — many genuinely have none, since a `Layer` or a
 `Grid` has no variant plane — and 9 have no locatable props declaration and
 still cost a full hand-author.
 
+**Every proposal is run through the real referee**, not just eyeballed:
+`validateContract` — the same one the pipeline runs — on all 61 sweep
+proposals and all 9 config components. All pass. That check earned its keep
+immediately: the first version of the generator emitted `id`/`name`/
+`semantics`/`props` and nothing else, which agreed with the human on every
+value and **would not have parsed**, because a contract also carries
+`$schema`, `version`, `status`, `anatomy`, `anchors` and `states`. Agreement on
+values and a file the pipeline can read are two different claims.
+
+The referee was falsified rather than trusted — of seven deliberate mutations
+it refuses five, including each envelope field above and any unknown top-level
+key. It *accepts* a `VARIANT` values map that names only some of an enum's
+values; that is caught one layer later, and precisely — the emitter refuses
+with `prop "size" figma values map is missing enum value "md"` for each missing
+value, verified by probe against an all-values-named control.
+
 **What this still does not buy.** Those are the ENUM half of a seed. Every
 component continues to need its parts, its semantics, and any axis a human
 models out of booleans. Tier L is now *reachable*, not *reached*: the
