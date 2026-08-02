@@ -63,8 +63,27 @@ export function parseTokenSet(
   if (typeof name !== 'string' || name.trim() === '') {
     return { ok: false, error: `the tokenSet has no collection "name" (a non-empty string) — ${SHAPE}.` };
   }
-  if (!isPlainObject(raw.base) || Object.keys(raw.base).length === 0) {
-    return { ok: false, error: `the tokenSet "base" must be a non-empty flat DTCG object — ${SHAPE}.` };
+  if (!isPlainObject(raw.base)) {
+    return { ok: false, error: `the tokenSet "base" must be a flat DTCG object — ${SHAPE}.` };
+  }
+  // A tokenSet must carry SOME tokens — but they do not all have to be in
+  // `base`. A kit that publishes ZERO Figma variables mints every styled fact
+  // instead, so its base is legitimately `{}` and its whole vocabulary is the
+  // `minted` tree. Requiring a non-empty base refused that shape outright, and
+  // it is not a hypothetical: it is Untitled UI, a real Figma Community kit,
+  // whose 989 minted leaves are all LITERALS with zero aliases into base — a
+  // complete, self-sufficient token set that the plugin can build a collection
+  // from. LEDGER §3.4 recorded the resulting refusal as "the largest single
+  // refusal for an adopter". Refuse only when there is nothing to sync AT ALL.
+  const mintedEmpty =
+    raw.minted === undefined || raw.minted === null || (isPlainObject(raw.minted) && Object.keys(raw.minted).length === 0);
+  if (Object.keys(raw.base).length === 0 && mintedEmpty) {
+    return {
+      ok: false,
+      error:
+        `the tokenSet carries no tokens — "base" is empty and there is no "minted" tree, so there is nothing to sync. ` +
+        `A kit with no published Figma variables may ship an empty "base" as long as "minted" holds its vocabulary; ${SHAPE}.`,
+    };
   }
   let modes: TokenSetPayload['modes'];
   if (raw.modes !== undefined) {

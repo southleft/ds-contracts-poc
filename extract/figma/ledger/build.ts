@@ -1040,10 +1040,26 @@ p(
 );
 
 /* R4 — the bundle door */
+/** The kit's minted vocabulary size, READ from the committed tree — §3.4
+ *  quotes it as both the reason the old referee was wrong and the number of
+ *  variables the paste now syncs, so it must never be typed in. */
+const mintedLeafCount = ((): number => {
+  const count = (n: Record<string, unknown>): number => {
+    let c = 0;
+    for (const v of Object.values(n)) {
+      if (v !== null && typeof v === 'object') {
+        c += '$value' in (v as object) ? 1 : count(v as Record<string, unknown>);
+      }
+    }
+    return c;
+  };
+  return count(JSON.parse(readFileSync(path.join(UUI, 'storybook/tokens/minted.dtcg.json'), 'utf8')));
+})();
+
 p(
-  `### 3.4 The paste door — this kit cannot round-trip through the shipping bundle`,
+  `### 3.4 The paste door — CLOSED for two rounds, now OPEN`,
   '',
-  `*Emitter-side, and the largest single refusal for an adopter.* The round-trip runner had to bypass the plugin's paste referee to measure anything at all. Quoted in §1; the operative facts are that \`captured.dtcg.json\` for this hand-built canvas is \`{}\` (it used zero published Figma variables), so the bundle's \`base\` tokenSet is empty and the referee refuses it, and \`figma bundle\` separately refuses the set because \`social-button\`'s per-variant icon ref \`{platform}\` is read as a literal asset name. **Blast radius: all ${fullContracts.length} sets / all ${fmt(fidelity.length)} variants — no set in this kit can be pasted back through the shipping path today.** MEASURED SINCE (2026-08-01): the empty-\`base\` half of this refusal is a property of THIS KIT, not of the engine. The same door, driven with no bypass on a library that publishes real variables (Eventz — 68 base tokens, \`examples/eventz-vars/paste-door.mts\`), accepts the paste and plans tokens-first + 17 component scripts. So the honest reading of this row is "a kit that publishes zero variables cannot use the shipping path", not "the shipping path does not work" — \`social-button\`'s \`{platform}\` icon ref remains a real second blocker for this kit either way.`,
+  `*Emitter-side, and for two rounds the largest single refusal for an adopter — now closed, and the receipt runs on every gate (\`npm run paste:check\`).* The round-trip runner had to BYPASS the plugin's paste referee to measure anything at all, because this kit hit BOTH of its blockers at once. **(1) An empty \`base\`.** \`captured.dtcg.json\` for this hand-built canvas is \`{}\` — it used zero published Figma variables — so the bundle's base tokenSet was empty and the referee refused the shape outright. It was refusing a kit whose vocabulary is entirely MINTED: ${fmt(mintedLeafCount)} literal leaves with zero aliases into base, a complete and self-sufficient token set. The referee now refuses only when there is nothing to sync AT ALL. **(2) A per-variant icon ref.** \`figma bundle\` read \`ds.social-icon\`'s \`{"asset":"{platform}"}\` as a LITERAL filename, went looking for an icon named \`{platform}\`, and refused — with all six platform SVGs present in the assets directory. Every emitter already expanded that ref; the bundler did not. The refusal was real and the cause was a missing expansion, not a missing asset. **Blast radius, now: zero.** All ${fullContracts.length} sets bundle, the paste is ACCEPTED with no bypass, and the plan syncs one \"Untitled UI\" collection of ${fmt(mintedLeafCount)} variables before building all ${fullContracts.length} component scripts. The developer path — contract → CLI bundle → paste → variables + component sets — runs end to end for this kit, and \`paste:check\` pins it for a variable-publishing kit (Eventz, Light/Dark) in the same run.`,
   '',
 );
 
@@ -1270,7 +1286,7 @@ p(
     .filter((x) => x.v === 'OPEN' || x.v === 'PARTIAL');
   const items: string[] = [];
   items.push(
-    `1. **Open the paste door** (§3.4) — every one of the ${fullContracts.length} sets is blocked from the shipping bundle path today by an empty \`base\` tokenSet and by \`social-button\`'s \`{platform}\` icon ref. Nothing else in this list matters to an adopter until a bundle can actually be pasted.`,
+    `1. **The paste door is OPEN** (§3.4) — closed for two rounds, and the two blockers that held it (an empty \`base\` tokenSet refused outright, and \`social-button\`'s \`{platform}\` icon ref read as a literal filename) are both fixed and pinned by \`npm run paste:check\`, which drives the REAL referee for this kit and for a variable-publishing one. An adopter can now take these ${fullContracts.length} contracts through the shipping path unaided. What ranks first NOW is below.`,
   );
   if (redCases.length > 0) {
     items.push(

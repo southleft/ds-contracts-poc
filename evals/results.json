@@ -1,6 +1,6 @@
 {
-  "passed": 181,
-  "total": 181,
+  "passed": 182,
+  "total": 182,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -695,6 +695,11 @@
     {
       "id": "promote-generalization",
       "claim": "C1-determinism",
+      "pass": true
+    },
+    {
+      "id": "paste-door-open",
+      "claim": "C4-convergence",
       "pass": true
     },
     {

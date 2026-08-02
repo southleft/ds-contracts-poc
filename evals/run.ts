@@ -5285,6 +5285,45 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // never silently drift from the emitted runtime; (b) mutating core makes
     // the NEXT zip build refuse BY NAME (stale receipt) — the same
     // discipline as the embedded-dump-script guard.
+    // THE PASTE DOOR (the adopter's path). LEDGER §3.4 called the plugin's
+    // paste referee "the largest single refusal for an adopter" for two
+    // rounds: the round-trip runner had to BYPASS it because Untitled UI hit
+    // both blockers at once — an empty `base` tokenSet refused outright (its
+    // vocabulary is entirely MINTED, 989 self-sufficient literal leaves), and
+    // a per-variant icon ref (`{"asset":"{platform}"}`) read as a literal
+    // filename with all six SVGs present. Both fixed; this drives the REAL
+    // referee (parseIncomingText → planGenerate, no bypass) for a Community
+    // kit that publishes ZERO variables AND for one that publishes real ones
+    // with Light/Dark, and requires a mode DIFFERENCE rather than a mode
+    // count. If this goes red, an outside adopter cannot use the tool.
+    id: 'paste-door-open',
+    claim: 'C4-convergence',
+    run: () => {
+      // Runs at the REPO ROOT, not in SCRATCH: the subject IS the committed
+      // kits (examples/untitled-ui, examples/eventz-vars), which the scratch
+      // copy filters out. Safe to do — the check only READS the repo and
+      // writes its bundle into an OS temp dir, so it mutates nothing here.
+      const r = spawnSync('npx', ['tsx', 'extract/figma/paste-door-check.ts'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const check = { status: r.status ?? -1, out: `${r.stdout ?? ''}${r.stderr ?? ''}` };
+      if (check.status !== 0) throw new Error(`paste-door-check failed:\n${check.out}`);
+      for (const want of [
+        '✔ GATE 1 — the plugin ACCEPTS the paste (30 contracts)',
+        '✔ GATE 2 — generate plans without refusal',
+        'the collection plans ≥900 variables (989)',
+        'genuinely DIFFER between Light and Dark (43)',
+        '✔ THE PASTE DOOR IS OPEN for both kits',
+      ]) {
+        if (!check.out.includes(want)) throw new Error(`paste-door-check missing receipt: ${want}\n${check.out}`);
+      }
+      console.log(
+        'paste-door-open: the developer path (contract → CLI bundle → paste → variable collection + component sets) runs END TO END through the REAL referee, with no bypass, for BOTH a Figma Community kit that publishes ZERO variables (Untitled UI — 30 contracts, 989 minted variables, 17 icon assets incl. the per-variant {platform} glyph) and a kit that publishes real ones (Eventz — 17 contracts, 112 variables, 43 genuinely differing between Light and Dark). LEDGER §3.4 recorded this door SHUT for two rounds.',
+      );
+    },
+  },
+  {
     id: 'plugin-engine-bundle',
     claim: 'C1-determinism',
     run: () => {

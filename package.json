@@ -86,7 +86,8 @@
     "conformance:canvas": "tsx extract/figma/conformance/run.ts",
     "extract:figma:roundtrip:uui": "tsx extract/figma/roundtrip-uui/run.ts",
     "ledger:uui": "tsx extract/figma/ledger/build.ts",
-    "residuals:uui": "tsx extract/figma/ledger/residuals.ts"
+    "residuals:uui": "tsx extract/figma/ledger/residuals.ts",
+    "paste:check": "tsx extract/figma/paste-door-check.ts"
   },
   "engines": {
     "node": ">=20"

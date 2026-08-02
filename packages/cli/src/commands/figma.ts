@@ -170,14 +170,51 @@ async function bundleCommand(argv: string[]): Promise<number> {
   // asset missing from --icons, or refs with no --icons at all, refuses BY
   // NAME (a bundle that cannot render its own icons is not a bundle).
   const iconRefs = new Set<string>();
-  const collectIconRefs = (v: unknown): void => {
+  /** A contract's declared enum props — an icon asset may be a FUNCTION of
+   *  one (see below), and resolving it needs the prop's values. */
+  const enumsOf = (c: Record<string, unknown>): Map<string, string[]> => {
+    const m = new Map<string, string[]>();
+    for (const p of (c.props as Array<Record<string, unknown>> | undefined) ?? []) {
+      const values = (p?.type as { enum?: unknown } | undefined)?.enum;
+      if (Array.isArray(values) && typeof p.name === 'string') m.set(p.name, values as string[]);
+    }
+    return m;
+  };
+  /** LEDGER §3.4's second blocker, and the last thing keeping Untitled UI —
+   *  a real Figma Community kit — off the shipping paste path.
+   *
+   *  A per-variant icon is spelled as a SUBSTITUTED ref, exactly like a
+   *  per-variant token: ds.social-icon's glyph is `{ "asset": "{platform}" }`
+   *  over platform = facebook|google|apple|figma|dribbble|xtwitter. Every
+   *  emitter already expands that (the React and canvas surfaces render all
+   *  six), but the BUNDLER read the ref as a LITERAL filename, went looking
+   *  for an icon called "{platform}", and refused the whole bundle by name —
+   *  with all six SVGs sitting in the assets directory. So the refusal was
+   *  real and the cause was a missing expansion, not a missing asset.
+   *
+   *  Placeholders expand against the declaring contract's enum values. A
+   *  placeholder naming a prop the contract does not declare as an enum is
+   *  left VERBATIM, so it still refuses by name downstream — an unresolvable
+   *  ref must not be silently dropped from the bundle. */
+  const expandAsset = (asset: string, enums: Map<string, string[]>): string[] => {
+    const phs = [...asset.matchAll(/\{([a-z][\w-]*)\}/gi)].map((m) => m[1]);
+    if (phs.length === 0) return [asset];
+    let out = [asset];
+    for (const ph of phs) {
+      const values = enums.get(ph);
+      if (!values) continue; // unresolvable — keep it verbatim so it refuses BY NAME
+      out = out.flatMap((a) => values.map((v) => a.replaceAll(`{${ph}}`, v)));
+    }
+    return out;
+  };
+  const collectIconRefs = (v: unknown, enums: Map<string, string[]>): void => {
     if (v && typeof v === 'object') {
       const asset = (v as { icon?: { asset?: unknown } }).icon?.asset;
-      if (typeof asset === 'string') iconRefs.add(asset);
-      for (const x of Object.values(v)) collectIconRefs(x);
+      if (typeof asset === 'string') for (const name of expandAsset(asset, enums)) iconRefs.add(name);
+      for (const x of Object.values(v)) collectIconRefs(x, enums);
     }
   };
-  for (const c of contracts) collectIconRefs(c);
+  for (const c of contracts) collectIconRefs(c, enumsOf(c));
   const iconsDir = flagString(parsed, 'icons');
   let icons: Record<string, string> | undefined;
   if (iconRefs.size > 0) {
