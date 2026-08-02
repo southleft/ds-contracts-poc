@@ -76,12 +76,21 @@ walk(PKG);
 const unions = new Map<string, string[]>();
 /** const-map name → its keys */
 const constKeys = new Map<string, string[]>();
+/**
+ * alias name → its RAW body, for aliases that do not spell literals themselves.
+ * Carbon never writes `type ButtonKind = 'primary' | …`; it writes a const array
+ * and then `type ButtonKind = (typeof ButtonKinds)[number]`. Indexing only the
+ * aliases that contain quotes made every such axis invisible — the values were
+ * two lines above the alias, fully readable, and simply never looked at.
+ */
+const aliasBody = new Map<string, string>();
 
 const LITERALS = /'([^']+)'(?:\s*\|\s*'([^']+)')+/;
 for (const f of dts) {
   const text = readFileSync(f, 'utf8');
   for (const m of text.matchAll(/(?:export\s+)?(?:declare\s+)?type\s+(\w+)\s*=\s*([^;]+);/g)) {
     const [, name, body] = m;
+    if (!aliasBody.has(name)) aliasBody.set(name, body.trim());
     if (!LITERALS.test(body)) continue;
     const values = [...body.matchAll(/'([^']+)'/g)].map((x) => x[1]);
     if (values.length >= 2) unions.set(name, [...new Set(values)]);
@@ -98,31 +107,130 @@ for (const f of dts) {
   }
 }
 
-/** A prop's declared type → its enum values, or null when it is not an enum. */
-function resolve(typeExpr: string): string[] | null {
-  const t = typeExpr.trim().replace(/;$/, '');
-  const direct = [...t.matchAll(/'([^']+)'/g)].map((x) => x[1]);
-  if (direct.length >= 2) return [...new Set(direct)];
-  const keyof = /^keyof\s+typeof\s+(\w+)$/.exec(t);
-  if (keyof && constKeys.has(keyof[1])) return constKeys.get(keyof[1])!;
-  const arrIdx = /^\(?typeof\s+(\w+)\)?\[number\]$/.exec(t);
-  if (arrIdx && unions.has(arrIdx[1])) return unions.get(arrIdx[1])!;
+/**
+ * Split a type expression on its TOP-LEVEL `|` only. A naive split tears
+ * `Extract<A | B, C>` in half and resolves neither side.
+ */
+function splitUnion(t: string): string[] {
+  const parts: string[] = [];
+  let depth = 0, quote = '', start = 0;
+  for (let i = 0; i < t.length; i++) {
+    const c = t[i];
+    if (quote) { if (c === quote) quote = ''; continue; }
+    if (c === "'" || c === '"') { quote = c; continue; }
+    if (c === '<' || c === '(' || c === '[' || c === '{') depth++;
+    else if (c === '>' || c === ')' || c === ']' || c === '}') depth--;
+    else if (c === '|' && depth === 0) { parts.push(t.slice(start, i)); start = i + 1; }
+  }
+  parts.push(t.slice(start));
+  return parts.map((p) => p.trim()).filter(Boolean);
+}
+
+/** The two arguments of a single generic, split on its top-level comma. */
+function genericArgs(inner: string): string[] {
+  let depth = 0, start = 0;
+  const out: string[] = [];
+  for (let i = 0; i < inner.length; i++) {
+    const c = inner[i];
+    if (c === '<' || c === '(' || c === '[' || c === '{') depth++;
+    else if (c === '>' || c === ')' || c === ']' || c === '}') depth--;
+    else if (c === ',' && depth === 0) { out.push(inner.slice(start, i)); start = i + 1; }
+  }
+  out.push(inner.slice(start));
+  return out.map((s) => s.trim());
+}
+
+/**
+ * Strip a paren that wraps the WHOLE expression. A greedy `^\(.*\)$` turns
+ * `(A) | (B)` into `A) | (B`, so the depth must actually return to zero only
+ * at the final character.
+ */
+function stripWrappingParens(t: string): string {
+  let s = t.trim();
+  while (s.startsWith('(') && s.endsWith(')')) {
+    let depth = 0, wraps = true;
+    for (let i = 0; i < s.length; i++) {
+      if (s[i] === '(') depth++;
+      else if (s[i] === ')') { depth--; if (depth === 0 && i < s.length - 1) { wraps = false; break; } }
+    }
+    if (!wraps || depth !== 0) return s;
+    s = s.slice(1, -1).trim();
+  }
+  return s;
+}
+
+/**
+ * A prop's declared type → its enum values, or null when it is not an enum.
+ *
+ * `seen` breaks alias cycles; without it a self-referential declaration in some
+ * future library would hang the generator rather than decline the axis.
+ */
+function resolve(typeExpr: string, seen: Set<string> = new Set()): string[] | null {
+  const t = stripWrappingParens(typeExpr.trim().replace(/;$/, ''));
+
+  // Extract<A, B> / Exclude<A, B> — explicit, because the LOOSE literal scan
+  // below gets Extract right by luck and Exclude exactly backwards: it would
+  // return the values being REMOVED as though they were the enum.
+  const setOp = /^(Extract|Exclude|NonNullable)<([\s\S]+)>$/.exec(t);
+  if (setOp) {
+    const [, op, inner] = setOp;
+    const args = genericArgs(inner);
+    const base = resolve(args[0], seen);
+    if (!base) return null;
+    if (op === 'NonNullable') return base.length >= 2 ? base : null;
+    const other = args[1] !== undefined ? resolve(args[1], seen) : null;
+    if (!other) return null;
+    const out = op === 'Extract' ? base.filter((v) => other.includes(v)) : base.filter((v) => !other.includes(v));
+    return out.length >= 2 ? out : null;
+  }
+
   // A CONDITIONAL type (Carbon's Button.kind is
   // `… extends true ? IconButtonKind : ButtonKind`) has no single answer, so
   // the proposal is the UNION of every branch it can resolve — a reviewer
   // narrows it. Widening is the safe direction: an extra value is visible in
   // review, a missing one is silently never captured.
-  if (t.includes('?') && t.includes(':')) {
-    const branches = [...t.matchAll(/\b([A-Z]\w+)\b/g)].map((x) => x[1]).filter((n) => unions.has(n) || constKeys.has(n));
-    if (branches.length > 0) {
-      const merged = [...new Set(branches.flatMap((n) => unions.get(n) ?? constKeys.get(n) ?? []))];
+  const cond = /\bextends\b[\s\S]+\?[\s\S]+:/.test(t);
+  if (cond) {
+    const branches = [...t.matchAll(/\b([A-Z]\w+)\b/g)]
+      .map((x) => x[1])
+      .filter((n) => !seen.has(n) && (unions.has(n) || constKeys.has(n) || aliasBody.has(n)));
+    // Recurse with `seen` UNCHANGED — the alias arm below is what marks a name
+    // visited. Adding it here instead made every branch refuse itself on entry.
+    const merged = [...new Set(branches.flatMap((n) => resolve(n, seen) ?? []))];
+    if (merged.length >= 2) return merged;
+    return null;
+  }
+
+  // A union of ALIASES (`type X = A | B`) — resolve every arm or decline the
+  // whole thing; a partly-resolved union is a silently truncated enum.
+  const arms = splitUnion(t);
+  if (arms.length >= 2 && arms.some((a) => /^[A-Z]\w*$/.test(a))) {
+    const resolved = arms.map((a) => (/^(null|undefined)$/.test(a) ? [] : resolve(a, seen)));
+    if (resolved.every((r) => r !== null)) {
+      const merged = [...new Set(resolved.flat() as string[])];
       if (merged.length >= 2) return merged;
     }
+    return null;
   }
+
+  const direct = [...t.matchAll(/'([^']+)'/g)].map((x) => x[1]);
+  if (direct.length >= 2 && arms.every((a) => /^'[^']*'$/.test(a))) return [...new Set(direct)];
+
+  const keyof = /^keyof\s+typeof\s+(\w+)$/.exec(t);
+  if (keyof && constKeys.has(keyof[1])) return constKeys.get(keyof[1])!;
+
+  const arrIdx = /^\(?typeof\s+(\w+)\)?\[number\]$/.exec(t);
+  if (arrIdx && unions.has(arrIdx[1])) return unions.get(arrIdx[1])!;
+
   const alias = /^(\w+)$/.exec(t);
   if (alias) {
-    if (unions.has(alias[1])) return unions.get(alias[1])!;
-    if (constKeys.has(alias[1])) return constKeys.get(alias[1])!;
+    const name = alias[1];
+    if (unions.has(name)) return unions.get(name)!;
+    if (constKeys.has(name)) return constKeys.get(name)!;
+    // THE MECHANICAL UNLOCK: follow an alias whose body spells no literals of
+    // its own. `ButtonKind` → `(typeof ButtonKinds)[number]` → the const array.
+    const body = aliasBody.get(name);
+    if (body !== undefined && !seen.has(name)) return resolve(body, new Set([...seen, name]));
   }
   return null;
 }
@@ -165,8 +273,28 @@ function propsOf(componentName: string): Proposed[] {
 // Verify against the hand-authored seeds — the only honest quality claim
 // ---------------------------------------------------------------------------
 
+/**
+ * For a MISSED axis, the library's own declared type for that prop name — the
+ * difference between a resolver gap and a modelling decision.
+ *
+ * A miss is MECHANICAL when the library declares something enum-shaped and the
+ * resolver could not read it; that is a bug with an address. A miss is
+ * JUDGMENT when the library declares a `boolean`, or declares no prop by that
+ * name at all, and a human chose to model it as a variant axis anyway
+ * (Carbon's `lowContrast?: boolean` became a `contrast: high|low` axis —
+ * renamed AND polarity-inverted). No amount of resolver work reaches those,
+ * and a generator that produced them would be inventing the design space.
+ */
+function declaredType(componentName: string, prop: string): string | null {
+  const decl = declFor(componentName);
+  if (!decl) return null;
+  const text = readFileSync(decl, 'utf8');
+  const m = new RegExp(`^\\s{2,}${prop}\\?\\??:\\s*([^;\\n]+);`, 'm').exec(text);
+  return m ? m[1].trim() : null;
+}
+
 if (VERIFY) {
-  let exact = 0, partial = 0, missed = 0;
+  let exact = 0, partial = 0, missed = 0, judgment = 0;
   const lines: string[] = [];
   for (const c of config.components) {
     if (!c.contract) continue;
@@ -179,7 +307,19 @@ if (VERIFY) {
     const gen = new Map(propsOf(c.importName ?? c.name).map((p) => [p.name, p.values]));
     for (const [prop, want] of human) {
       const got = gen.get(prop);
-      if (!got) { missed++; lines.push(`  ✖ ${c.name}.${prop} — NOT proposed (human: ${want.join('|')})`); continue; }
+      if (!got) {
+        missed++;
+        const decl = declaredType(c.importName ?? c.name, prop);
+        const isJudgment = decl === null || /^boolean$/.test(decl);
+        if (isJudgment) judgment++;
+        const why = isJudgment
+          ? decl === null
+            ? 'JUDGMENT — the library declares NO prop by this name; a human modelled the axis'
+            : `JUDGMENT — the library declares \`${decl}\`; a human named the states`
+          : `MECHANICAL — the library declares \`${decl}\` and the resolver could not read it`;
+        lines.push(`  ✖ ${c.name}.${prop} — NOT proposed (human: ${want.join('|')}) — ${why}`);
+        continue;
+      }
       const same = want.length === got.length && want.every((v) => got.includes(v));
       if (same) { exact++; lines.push(`  ✔ ${c.name}.${prop} — ${got.length} values, EXACT match`); }
       else {
@@ -192,9 +332,72 @@ if (VERIFY) {
   }
   console.log(lines.join('\n'));
   const total = exact + partial + missed;
+  // THE OTHER HALF OF AGREEMENT, and the one it is easy not to ask. The loop
+  // above walks the HUMAN's axes and asks whether the generator found them.
+  // It never asks the reverse: how many axes does the generator propose that
+  // the human, holding the same declarations, deliberately LEFT OUT? Those are
+  // not wrong — `align` really is a 20-value union in Carbon's types — but
+  // every one is review the human still pays, and a "0 differ" headline that
+  // omits them overstates the tool.
+  let surplus = 0;
+  const surplusLines: string[] = [];
+  for (const c of config.components) {
+    if (!c.contract) continue;
+    const seed = JSON.parse(readFileSync(path.join(ROOT, c.contract), 'utf8')) as {
+      props?: Array<{ name: string }>;
+    };
+    const humanProps = new Set((seed.props ?? []).map((p) => p.name));
+    for (const p of propsOf(c.importName ?? c.name)) {
+      if (humanProps.has(p.name)) continue;
+      surplus++;
+      surplusLines.push(`  + ${c.name}.${p.name} (${p.values.length} values) — proposed, human omitted`);
+    }
+  }
+  if (surplusLines.length > 0) console.log(`\nPROPOSED BUT NOT IN THE HUMAN SEED:\n${surplusLines.join('\n')}`);
+
+  const mechanical = missed - judgment;
   console.log(`\nAGREEMENT vs hand-authored seeds: ${exact}/${total} enum axes reproduced EXACTLY, ${partial} differ, ${missed} not proposed.`);
   console.log(
-    'An axis the generator MISSES is one a reviewer must still author by hand; one it gets EXACTLY is authoring the human never has to do again. Both numbers are the honest cost model.',
+    `Of the ${missed} not proposed, ${judgment} are JUDGMENT (unreachable by construction) and ${mechanical} are MECHANICAL resolver gaps.`,
+  );
+  console.log(
+    `The honest ceiling is therefore ${exact + mechanical}/${total}, not ${total}/${total}: part of a seed is design modelling — Carbon declares \`lowContrast?: boolean\` and a human turned it into a \`contrast: high|low\` axis, renamed and polarity-inverted. A generator that produced THAT would be inventing the design space, not reading it.`,
+  );
+  console.log(
+    `${partial === 0 ? 'ZERO axes DIFFER' : `${partial} axes DIFFER`} — the load-bearing number. A proposal a reviewer must fact-check is worth less than no proposal at all; silence where it cannot resolve is what makes the output reviewable.`,
+  );
+  console.log(
+    `THE REVIEW IS NOT FREE: ${surplus} further axes are proposed that the human seed omits. They are read correctly from the declarations and are still work — the reviewer PRUNES ${surplus} and AUTHORS ${judgment}, instead of authoring all ${exact + surplus + judgment}.`,
+  );
+  process.exit(partial === 0 ? 0 : 1);
+}
+
+// ---------------------------------------------------------------------------
+// `--all` — the SCALE figure. The config names ten components; the package
+// ships 122. Agreement on ten says the generator is trustworthy; only a sweep
+// of all 122 says whether it moves the intake cost enough to matter.
+// ---------------------------------------------------------------------------
+
+if (process.argv.includes('--all')) {
+  const dir = path.join(PKG, 'es', 'components');
+  const names = readdirSync(dir).filter((n) => statSync(path.join(dir, n)).isDirectory()).sort();
+  let withAxes = 0, axes = 0, noDecl = 0, noAxes = 0;
+  const rows: string[] = [];
+  for (const name of names) {
+    if (!declFor(name)) { noDecl++; continue; }
+    const props = propsOf(name);
+    if (props.length === 0) { noAxes++; continue; }
+    withAxes++;
+    axes += props.length;
+    rows.push(`  ${name.padEnd(26)} ${props.map((p) => `${p.name}(${p.values.length})`).join(', ')}`);
+  }
+  console.log(rows.join('\n'));
+  console.log(`\nSWEEP of ${names.length} shipped components:`);
+  console.log(`  ${withAxes} have at least one enum axis the generator can read — ${axes} axes total, proposed rather than authored.`);
+  console.log(`  ${noAxes} declare no readable enum axis (many genuinely have none — a Layer or a Grid has no variant plane).`);
+  console.log(`  ${noDecl} have no locatable props declaration; those are UNTOUCHED by this tool and still cost a full hand-author.`);
+  console.log(
+    `\nWhat this does NOT buy: the axes above are the ENUM half of a seed. Every component still needs its parts, its semantics, and — per the ${'`'}--verify${'`'} run — any axis a human models from booleans. The claim is a shorter review, not an eliminated one.`,
   );
   process.exit(0);
 }

@@ -929,9 +929,53 @@ plus a capture config first. The engine's ability to handle a big system and a
 team's ability to GET a big system into it are different questions, and only
 the first one has been measured.
 
-**The unlock, named and not yet built.** Generate seeds from the library's own
-type information (react-docgen, TypeScript types, propTypes) into a seed a
-human REVIEWS — turning O(n) authoring into O(1) tooling plus n reviews.
+**The unlock, now BUILT and MEASURED — `npm run seed:gen`.** Generate seeds
+from the library's own type information into a seed a human REVIEWS, turning
+O(n) authoring into O(1) tooling plus n reviews. Measured against the ten
+hand-authored Carbon seeds as ground truth (`-- --verify`):
+
+| | |
+|---|---|
+| enum axes reproduced EXACTLY | **11 of 14** |
+| axes proposed that DIFFER from the human | **0** |
+| axes not proposed, MECHANICAL (a resolver gap) | **0** |
+| axes not proposed, JUDGMENT (unreachable by construction) | **3** |
+| axes proposed that the human seed OMITS | **9** |
+
+Read the zero first. The generator never once proposed an enum, or a value,
+that the human did not write. It is silent wherever it cannot resolve, and that
+silence is the whole property that makes the output *reviewable* rather than a
+second thing to fact-check.
+
+**The ceiling is 11/14, not 14/14, and that is a finding rather than a
+shortfall.** The three it misses are not resolver gaps — the tool now proves
+this by reading the library's own declaration for each missed prop. Carbon
+declares `toggled?: boolean`; a human named the two states `untoggled|toggled`.
+Carbon declares `checked` and `indeterminate` as two separate booleans; a human
+collapsed them into one three-value axis. Carbon declares `lowContrast?:
+boolean`; a human renamed it to `contrast` with values `high|low` and inverted
+the polarity. **That half of a seed is design modelling, not code reading.** A
+generator that produced it would be inventing the design space.
+
+**The review is not free, and the honest ratio says so.** Nine further axes are
+proposed that the human omitted — `IconButton.align` really is a 20-value union
+in Carbon's types, and a human declined to make it a Figma variant plane. Those
+are read correctly and are still work. So the reviewer **prunes 9 and authors
+3**, against **authoring all 23**. Pruning is much cheaper than authoring, but
+it is not nothing, and a cost model that quoted only 11/14 would be overstating
+the tool.
+
+**At Carbon's full breadth** (`-- --all`, all 122 shipped components): **61
+components carry at least one readable enum axis, 112 axes in total.** 52
+declare no readable enum axis — many genuinely have none, since a `Layer` or a
+`Grid` has no variant plane — and 9 have no locatable props declaration and
+still cost a full hand-author.
+
+**What this still does not buy.** Those are the ENUM half of a seed. Every
+component continues to need its parts, its semantics, and any axis a human
+models out of booleans. Tier L is now *reachable*, not *reached*: the
+authoring-hours estimate has dropped by roughly half, and no full-breadth
+capture has yet been run.
 
 **Why the existing rule deserves respect on the way past it.** "Never
 re-derived from the library" is not laziness: a prop space inferred at capture
