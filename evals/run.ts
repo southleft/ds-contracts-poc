@@ -3144,13 +3144,44 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    // The CSS-vars reader walks document.styleSheets and BOTH of its reads
+    // swallowed a throw (`catch {}` and `catch { continue; }`). A cross-origin
+    // <link> — how a great many design systems ship CSS — exposes no cssRules
+    // at all, so the whole sheet vanished from the reader while
+    // source-bindings.json printed `skips: []`: the artifact asserting
+    // completeness over a read it never made. THIRD instance of this class in
+    // that one file (the calc blanket skip and the shorthand ceiling were the
+    // first two, and both of their comments say the same thing). The gate
+    // evaluates the REAL reader source against a genuinely cross-origin sheet,
+    // not a re-implementation of the catch.
+    id: 'reader-names-what-it-could-not-read',
+    claim: 'C2-refusal',
+    run: () => {
+      const r = run(TSX, ['extract/computed/stylesheet-ceiling-check.ts']);
+      if (r.status !== 0) throw new Error(`read-boundary receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ the unreadable sheet is COUNTED, not swallowed',
+        '✔ and the receipt NAMES the sheet by href (so a reader can tell WHICH CSS was missed)',
+        '✔ a fully readable page records ZERO skips — the ceiling tracks the READ, not the page',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+      console.log(
+        'reader-names-what-it-could-not-read: a cross-origin stylesheet throws on .cssRules and used to vanish from the CSS-vars reader in total silence, while source-bindings.json printed `skips: []` and the console printed `0 named skip(s)`. It is now a counted, href-named ceiling (stylesheetCeiling / stylesheetSkips) beside the shorthand and calc ceilings, so "the library declared no token names" and "the reader could not look" are different, visible facts. Proven against the REAL reader source (the exported captureJs) driven at a genuinely cross-origin sheet; restoring the silent catch fails three of the four pins while the control still passes.',
+      );
+    },
+  },
+
+  {
     // Figma's ConstraintType is MIN|CENTER|MAX|STRETCH|SCALE; both dump capture
     // sites mapped only the first three, so a STRETCH/SCALE node had its WHOLE
     // constraints field dropped — and propose reads an absent field as
-    // `?? 'LEFT'` / `?? 'TOP'`. That does not lose a fact, it SUBSTITUTES one:
-    // Untitled UI's Progress-circle ring (x:12 y:12 right:12 bottom:12 in a
-    // 240px box — the signature of STRETCH x STRETCH) shipped as a FIXED
-    // 216x216 box pinned top-left. propose has always carried a refusal for
+    // `?? 'LEFT'` / `?? 'TOP'`. That does not lose a fact, it SUBSTITUTES one.
+    // MEASURED: of 811 absBoxOf-visible boxes in the committed dumps, 352 carry
+    // no constraints field. (Untitled UI's Progress-circle ring is the
+    // CANDIDATE that surfaced it — equal insets in 6 of its 16 occurrences —
+    // but that is consistent with a stretch, not proof: STRETCH permits ANY
+    // fixed insets.) propose has always carried a refusal for
     // this and a plugin dump could NEVER reach it; the only fixture that does
     // is a HAND-AUTHORED conformance case containing a value the real capture
     // cannot emit — a green gate over a dead path, the POLYGON shape again.

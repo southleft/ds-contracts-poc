@@ -184,6 +184,11 @@ async function main() {
       captures,
       controls: truth.controls,
       allProps: truth._provenance.channels,
+      // Same rule as the read-boundary receipts below: an offline re-fuse has
+      // no browser to ask which stylesheets were unreadable, so this is EMPTY,
+      // never faked. It is a statement about this run's read boundary, and this
+      // run did not read the page.
+      stylesheetSkips: [],
       browserVersion: String(truth._provenance.browser ?? 'committed'),
       fontChecks: {},
       pinnedAnimations: [],

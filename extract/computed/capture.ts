@@ -874,7 +874,12 @@ export function preScriptTag(cfg: CaptureConfig): string {
 // ---------------------------------------------------------------------------
 /** In-page capture (STRING evaluate — the tsx __name serialization trap,
  *  see visual-parity/render.ts). */
-const captureJs = (selector: string, classAllow?: string, varPrefix?: string) => `(() => {
+/** Exported so the READ-BOUNDARY gate can run this exact source against a page
+ *  carrying a cross-origin stylesheet. Testing a hand-written replica of the
+ *  reader is precisely the failure this round keeps finding (a fixture written
+ *  to contain what the real path cannot produce), so the gate evaluates the
+ *  reader itself. */
+export const captureJs = (selector: string, classAllow?: string, varPrefix?: string) => `(() => {
   ${SHADOW_HELPERS_JS}
   const stage = document.querySelector(${JSON.stringify(selector)});
   if (!stage || !stage.firstElementChild) return null;
@@ -916,6 +921,13 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
   // the collected rule list — and therefore every captured \`vrefs\` array —
   // is identical.
   const VRULES_BY_ROOT = new Map();
+  // Hoisted so the unreadable-stylesheet count survives past buildVrules and
+  // reaches the artifact — a per-call local would have been the silence again,
+  // one layer up.
+  const SHEET_SKIPS = [];
+  // Published on the page so the Node side can read the count out after the
+  // capture — the array is shared by reference, so later pushes are visible.
+  try { window.__DSC_SHEET_SKIPS = SHEET_SKIPS; } catch {}
   const buildVrules = (root) => {
     // Two declaration classes per rule (MUI v9 indirection: the combo rule
     // sets --variant-containedBg: var(--mui-palette-primary-main) and the
@@ -929,10 +941,25 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
     // — grouping rules have no selectorText and must be RECURSED into, or
     // the reader sees ~zero style rules.
     const flatRules = [];
+    // SILENT-LOSS ROUND: both reads below THROW on a stylesheet the document
+    // cannot see into (a cross-origin <link> exposes no cssRules at all), and
+    // both used to swallow it — \`catch {}\` and \`catch { continue; }\`. A whole
+    // stylesheet then vanished from the reader while source-bindings.json
+    // printed \`skips: []\` and the console printed \`0 named skip(s)\`: the
+    // artifact ASSERTED COMPLETENESS over a read it never made. That is the
+    // same defect this file already fixed twice (the calc blanket skip, the
+    // shorthand ceiling) — third instance, same shape. The loss is now
+    // COUNTED and carried out to the artifact as its own named ceiling.
     const collectRules = (list) => {
       for (const r of list) {
         if (r.selectorText && r.style) flatRules.push(r);
-        else if (r.cssRules) { try { collectRules(r.cssRules); } catch {} }
+        else if (r.cssRules) {
+          try {
+            collectRules(r.cssRules);
+          } catch (e) {
+            SHEET_SKIPS.push({ kind: 'group', href: null, reason: String((e && e.message) || e) });
+          }
+        }
       }
     };
     const sheets = [];
@@ -947,7 +974,17 @@ const captureJs = (selector: string, classAllow?: string, varPrefix?: string) =>
       for (const sh of (root.styleSheets || [])) sheets.push(sh);
     }
     for (const sh of sheets) {
-      let rules; try { rules = sh.cssRules; } catch { continue; }
+      let rules;
+      try {
+        rules = sh.cssRules;
+      } catch (e) {
+        // The whole sheet is unreadable. NAME it — a cross-origin stylesheet
+        // carrying the library's real token declarations is exactly the case
+        // where "the reader found no source facts" and "the reader could not
+        // look" must be different, visible outcomes.
+        SHEET_SKIPS.push({ kind: 'sheet', href: sh.href || null, reason: String((e && e.message) || e) });
+        continue;
+      }
       collectRules(rules);
     }
     {
@@ -1273,6 +1310,15 @@ export interface SweepResult {
   captures: Capture[];
   controls: Record<string, CapturedNode>;
   allProps: string[];
+  /** SILENT-LOSS ROUND — the READ BOUNDARY of the CSS-vars reader. Every
+   *  stylesheet (or nested grouping rule) whose `cssRules` THREW, quoted
+   *  `kind href: reason`. A cross-origin `<link>` exposes no rules at all, so
+   *  it vanished from the reader entirely while source-bindings.json printed
+   *  `skips: []` — the artifact asserting completeness over a read it never
+   *  made. Empty on every committed library (all same-origin), which is why
+   *  their bytes do not move; non-empty is the receipt that "found no source
+   *  facts" and "could not look" are different outcomes. */
+  stylesheetSkips: string[];
   browserVersion: string;
   fontChecks: Record<string, boolean>;
   /** Keyframe names of infinite CSS animations pinned at currentTime 0
@@ -1551,10 +1597,19 @@ export async function sweep(
     controls[t] = normalizeNode(raw);
   }
 
+  // SILENT-LOSS ROUND: the reader's two `catch`es used to swallow an entire
+  // unreadable stylesheet (a cross-origin <link> exposes no cssRules) while
+  // source-bindings.json printed `skips: []`. The count is read back here so
+  // "found no source facts" and "could not look" are different, visible facts.
+  const stylesheetSkips = (await page.evaluate(
+    `(() => (window.__DSC_SHEET_SKIPS || []).map((s) => s.kind + (s.href ? ' ' + s.href : '') + ': ' + s.reason))()`,
+  )) as string[];
+
   return {
     captures,
     controls,
     allProps,
+    stylesheetSkips: [...new Set(stylesheetSkips)].sort(),
     browserVersion: page.context().browser()!.version(),
     fontChecks,
     pinnedAnimations: [...pinnedAnimations].sort(),

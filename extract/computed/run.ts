@@ -728,8 +728,17 @@ async function main() {
         // calc()-carried var() on, and how many of those lost the name.
         calcDeclarations: calcSeen,
         calcCeiling: calcLost,
+        // SILENT-LOSS ROUND — the READ BOUNDARY. Both of the reader's
+        // stylesheet reads used to swallow a throw (`catch {}` and
+        // `catch { continue; }`), so a cross-origin <link> — which exposes no
+        // cssRules at all — vanished whole while this file printed `skips: []`.
+        // "The reader found no source facts" and "the reader could not look"
+        // are different facts, and only one of them is the library's fault.
+        // Empty on every committed library (all same-origin), so no bytes move.
+        stylesheetCeiling: run1.stylesheetSkips.length,
+        stylesheetSkips: run1.stylesheetSkips,
       }, null, 2) + '\n');
-      console.log(`    source-bindings: ${srcFacts.length} verified fact(s) over ${new Set(srcFacts.map((f) => `${f.part}.${f.channel}`)).size} channel(s), ${srcSkips.length} named skip(s), ${shorthandSkipList.length} shorthand-ceiling skip(s), ${calcSeen} calc() declaration(s) (${calcLost} lost the token name)`);
+      console.log(`    source-bindings: ${srcFacts.length} verified fact(s) over ${new Set(srcFacts.map((f) => `${f.part}.${f.channel}`)).size} channel(s), ${srcSkips.length} named skip(s), ${shorthandSkipList.length} shorthand-ceiling skip(s), ${calcSeen} calc() declaration(s) (${calcLost} lost the token name), ${run1.stylesheetSkips.length} UNREADABLE stylesheet(s)`);
     }
 
     const controlStyles = Object.fromEntries(Object.entries(run1.controls).map(([t, n]) => [t, n.style]));
