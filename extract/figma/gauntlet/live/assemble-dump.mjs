@@ -18,6 +18,10 @@ const roster = JSON.parse(fs.readFileSync(path.join(dir, 'roster.json'), 'utf8')
 const chunkFiles = fs.readdirSync(dir).filter((f) => /^v16-chunk-\d+\.json$/.test(f)).sort();
 const dump = {};
 const degradations = [];
+/** Receipts owned by a named set — last-writer-wins, exactly like `dump[name]`. */
+const degradationsBySet = new Map();
+/** Sets whose receipts a later chunk REPLACED. Reported, never silent. */
+const replacedReceiptSets = [];
 const variables = {};
 const collisions = [];
 const missing = [];
@@ -32,7 +36,31 @@ for (const f of chunkFiles) {
     dump[name] = rec;
     setCount++;
   }
-  degradations.push(...chunk.degradations);
+  // A RE-CAPTURED CHUNK USED TO DOUBLE ITS RECEIPTS. `dump[name] = rec` above
+  // is last-writer-wins, so a set captured twice appears ONCE — but this line
+  // concatenated unconditionally, so its degradations appeared TWICE. Measured
+  // effect on the committed v14 dump: 1,521 of 3,109 vector-geometry records
+  // were exact duplicates (the tree holds only 1,588 vector nodes), inflating
+  // the headline degradation total by ~85%. Attribute receipts to their set
+  // and apply the SAME last-writer-wins rule, so the two can never disagree.
+  const thisChunkBySet = new Map();
+  for (const d of chunk.degradations) {
+    const colon = String(d.nodePath ?? '').indexOf(':');
+    const owner = colon > 0 ? String(d.nodePath).slice(0, colon) : null;
+    if (owner !== null && owner in chunk.sets) {
+      const list = thisChunkBySet.get(owner) ?? [];
+      list.push(d);
+      thisChunkBySet.set(owner, list);
+    } else {
+      degradations.push(d);
+    }
+  }
+  // Assign per SET, replacing any earlier chunk's receipts for that set —
+  // accumulating here instead would re-create the very doubling this fixes.
+  for (const [owner, list] of thisChunkBySet) {
+    if (degradationsBySet.has(owner)) replacedReceiptSets.push(owner);
+    degradationsBySet.set(owner, list);
+  }
   for (const [vname, vrec] of Object.entries(chunk.variables)) {
     if (!(vname in variables)) variables[vname] = vrec; // first-wins, the committed convention
   }
@@ -44,6 +72,16 @@ for (const f of chunkFiles) {
 const rosterNames = new Map();
 for (const r of roster.roster) rosterNames.set(r.name, (rosterNames.get(r.name) ?? 0) + 1);
 const dupNames = [...rosterNames.entries()].filter(([, n]) => n > 1).map(([name, n]) => ({ name, rosterCount: n }));
+
+// Fold the per-set receipts back in, in the order their sets appear. Dropping
+// them here instead would be a SILENT loss introduced by the fix for a
+// double-count — strictly worse than the bug it replaces.
+for (const [, list] of degradationsBySet) degradations.push(...list);
+if (replacedReceiptSets.length > 0) {
+  console.log(
+    `receipts REPLACED (a later chunk re-captured the set): ${replacedReceiptSets.length} — ${[...new Set(replacedReceiptSets)].join(', ')}`,
+  );
+}
 
 const assembled = {
   _provenance: {

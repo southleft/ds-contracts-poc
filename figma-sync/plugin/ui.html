@@ -2071,8 +2071,21 @@ const degradations = [];
 const degrade = (code, nodePath, message) => degradations.push({ code, nodePath, message });
 // Arbitrary-path vectors — still #42 receipts. REGULAR_POLYGON / ELLIPSE /
 // rotated RECTANGLE are CARRIED since dump v1.3 (see dumpShape below).
-const VECTOR_TYPES = ['VECTOR', 'STAR', 'POLYGON', 'LINE', 'BOOLEAN_OPERATION'];
-const SHAPE_KIND_BY_TYPE = { REGULAR_POLYGON: 'polygon', ELLIPSE: 'ellipse', RECTANGLE: 'rect' };
+// TWO APIs, TWO SPELLINGS, AND THIS FILE SPOKE THE WRONG ONE. A polygon is
+// `REGULAR_POLYGON` in the REST API and `POLYGON` in the Plugin API. This
+// script runs INSIDE the plugin, so every polygon missed SHAPE_KIND_BY_TYPE,
+// dumpShape returned null, and the node fell through to BOTH the
+// vector-geometry and rotation degradations — carrying paints only and
+// rendering as a box. The field case is the CBDS Tooltip pointer, which
+// extract/figma/visual-parity/triage.ts still reports as a live Δ19-device-px
+// defect and attributes to "the plugin channel does not carry it". It would
+// have carried it. The REST mapper spells it correctly, the eval covers the
+// REST path, and scripts/plugin-engine-mock-figma.mjs returned the REST
+// spelling from createPolygon() — so the test agreed with the bug.
+// Both spellings are accepted here rather than swapped, because this file is
+// diffed against REST-derived fixtures and must read either.
+const VECTOR_TYPES = ['VECTOR', 'STAR', 'LINE', 'BOOLEAN_OPERATION'];
+const SHAPE_KIND_BY_TYPE = { REGULAR_POLYGON: 'polygon', POLYGON: 'polygon', ELLIPSE: 'ellipse', RECTANGLE: 'rect' };
 const round2 = (n) => Math.round(n * 100) / 100;
 
 // Decor-shape capture (dump v1.3, #42) — the plugin mirror of
@@ -2094,7 +2107,7 @@ function dumpShape(node, parent) {
     if (parentAuto && node.layoutPositioning !== 'ABSOLUTE') return null;
   }
   const shape = { kind, width: round2(node.width), height: round2(node.height) };
-  if (node.type === 'REGULAR_POLYGON' && typeof node.pointCount === 'number') shape.sides = node.pointCount;
+  if ((node.type === 'REGULAR_POLYGON' || node.type === 'POLYGON') && typeof node.pointCount === 'number') shape.sides = node.pointCount;
   if (node.type === 'ELLIPSE' && node.arcData && (Math.abs(node.arcData.endingAngle - node.arcData.startingAngle) < Math.PI * 2 - 1e-6 || node.arcData.innerRadius > 0)) {
     shape.arc = { start: round2(node.arcData.startingAngle), end: round2(node.arcData.endingAngle), innerRadius: round2(node.arcData.innerRadius) };
   }

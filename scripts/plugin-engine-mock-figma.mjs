@@ -598,7 +598,13 @@ export function createFigmaMock() {
     createRectangle: () => new MockNode('RECTANGLE'),
     createEllipse: () => new MockNode('ELLIPSE'),
     createPolygon: () => {
-      const n = new MockNode('REGULAR_POLYGON');
+      // The REAL Plugin API returns type 'POLYGON' here; 'REGULAR_POLYGON' is
+      // the REST spelling. The mock used to return the REST one, which is
+      // precisely why extract/figma/dump.plugin.js could key its shape map on
+      // REGULAR_POLYGON for six dump versions without a single test failing:
+      // the mock agreed with the bug. A mock that speaks a dialect the real
+      // API does not is worse than no mock — it manufactures confidence.
+      const n = new MockNode('POLYGON');
       n.pointCount = 3;
       return n;
     },

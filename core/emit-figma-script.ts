@@ -1633,6 +1633,27 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
   const next: TextCtx = { ...ctx };
   const li = () => (spec.lits ??= {});
   for (const [cssProp, value] of Object.entries(lits)) {
+    // THE CLOSURE CHECK — a literal that changes NOTHING must say so.
+    //
+    // The silent-loss round (#33) gave applyTokens a reporting `default:` and
+    // left applyLiterals ending in a bare `break`. Worse, ~20 of its cases are
+    // `const n = parseLitPx(value); if (n !== undefined) …` with no `else`,
+    // and parseLitPx accepts only `<num>px|rem|em` while the schema's
+    // LITERAL_VALUE_RE admits `%`, `currentColor` and `inherit`. So the schema
+    // issued values the compiler discarded without a trace. `width` alone got
+    // an explicit `%` miss in a later round; its ~20 siblings never did.
+    //
+    // MEASURED, on the committed examples/untitled-ui/.../circle.contract.json:
+    // `border-radius: 50%` emitted a canvas spec BYTE-IDENTICAL to carrying no
+    // literal at all — a contract that says circle drew a square, with no
+    // channelMiss and no `†` dagger for the adopter to see.
+    //
+    // Rather than bolt an `else` onto every case (and miss the next one added),
+    // snapshot the spec and report any literal that passed through inert. This
+    // closes the whole class, including the `default:`, and stays closed for
+    // channels nobody has written yet.
+    const before = JSON.stringify([spec, next]);
+    const missesBefore = spec.channelMiss?.length ?? 0;
     switch (cssProp) {
       case 'background':
       case 'background-color': {
@@ -1740,6 +1761,18 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
       case 'line-height': { const n = parseLitPx(value); if (n !== undefined) next.lineHeight = n; break; }
       default:
         break;
+    }
+    // A literal that neither changed the spec nor named its own refusal was
+    // read from the contract and dropped. Name it. `fillClear`-style no-ops
+    // that legitimately compile to nothing already mutate the spec, so they
+    // do not reach here; a genuinely inert channel does.
+    if (
+      (spec.channelMiss?.length ?? 0) === missesBefore &&
+      JSON.stringify([spec, next]) === before
+    ) {
+      (spec.channelMiss ??= []).push(
+        `${cssProp}: ${String(value).trim()} — carried by the contract but not compiled to any canvas field (no literal lowering for this property/value shape)`,
+      );
     }
   }
   if (spec.lits && Object.keys(spec.lits).length === 0) delete spec.lits;

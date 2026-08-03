@@ -273,6 +273,10 @@ const KIND: Record<string, string> = {
   INSTANCE: 'instance',
   ELLIPSE: 'ellipse',
   REGULAR_POLYGON: 'polygon',
+  // The Plugin API's spelling. Absent here, a plugin-captured polygon fell to
+  // the 'box' default and read as a `kind` DIVERGENCE against the emitter's
+  // 'polygon' — the round-trip report blaming the engine for a dictionary gap.
+  POLYGON: 'polygon',
   RECTANGLE: 'rect',
   VECTOR: 'vector',
   BOOLEAN_OPERATION: 'vector',
