@@ -999,6 +999,14 @@ async function main() {
       },
       bindingContradictions: contradictions,
       interactionOnDisabled: [...new Set(prep.inertOnDisabled)].slice(0, 20),
+      // SILENT-LOSS ROUND: parts observed only on an INTERACTION plane. The
+      // base pass refuses them as "interaction-only"; the state round has no
+      // default-plane counterpart to diff against and drops them. Neither end
+      // carries the channel, so the loss is stated at both — the base receipt
+      // used to say "state rounds own it", which sent the reader to the door
+      // that discards it.
+      interactionOnlyPlaneDrops: prep.planeAbsentDrops.slice(0, 20),
+      interactionOnlyPlaneDropCount: prep.planeAbsentDrops.length,
       structureReceipts: [...new Set([...aligned.structureReceipts, ...(portalReceipts.get(comp.name) ?? [])])],
       styledChannelReceipts: styledReceipts,
       // CONFORMANCE FRONTIER (task #36): the read-boundary receipts — the

@@ -99,6 +99,7 @@ type LimitTag =
   | 'mixed-stroke-weight' // per-side stroke weights spell 'mixed' in figma, so the dump omits the channel; a uniform RT weight has no dump-side counterpart
   | 'zero-stroke' // a strokeless original round-trips as an EXPLICIT zero-width transparent stroke: a partially stroked node now carries its own absence (border-width 0 + border-color #00000000) so the color channel stops resolving to currentColor — nothing renders at weight 0 with an alpha-0 paint
   | 'zero-fill' // the FILL twin of zero-stroke (gap-closing round 10): a node whose paint stack is an IMAGE draws no solid under it, and that absence is now carried EXPLICITLY as an alpha-0 background-color so the solid channel classifies over the whole axis instead of dropping (Avatar's #f9f5ff ground never rendered while the mixed stack refused the channel). Nothing renders at alpha 0, so the round-trip-only fill is rendering-neutral by construction
+  | 'auto-layout-inert' // a frame drawn with NO auto-layout returns WITH one, and every child is ABSOLUTELY placed — figma auto-layout excludes absolute children, so the mode changes nothing drawn (437/437 such frames in the kit)
   | 'headless-measure'; // mock hug sizes are estimates — excluded, never compared
 
 interface Fact {
@@ -285,7 +286,34 @@ const KIND: Record<string, string> = {
 };
 const kindOf = (type: string): string => KIND[type] ?? 'box';
 
+/** Every (variant ▸ path) in the ORIGINAL whose node has children but NO
+ *  auto-layout, and whose children are ALL absolutely placed. Figma auto-layout
+ *  EXCLUDES absolutely-positioned children, so when the round trip adds a mode
+ *  to such a frame the mode changes NOTHING that is drawn — the divergence is
+ *  real in the tree comparison and inert on the canvas. Measured across the
+ *  committed kit: 437 of 437 non-auto-layout frames with children are in this
+ *  state, i.e. EVERY ONE of the 940 `NONE → auto` divergences. Reporting them
+ *  undifferentiated made the single largest number in the round trip read as
+ *  940 broken facts. */
+const inertModeSites = new Set<string>();
+const absolutelyPlaced = (n: DumpNode): boolean => {
+  if (n.abs) return true;
+  // This file's local DumpNode narrows `shape` to kind/width/height; the dump
+  // also writes the center-preserving placement fields onto it for ABSOLUTE
+  // decor and plain rects (see propose-figma's absBoxOf, which reads the same
+  // four). Read them through the wider shape rather than widening the type.
+  const sh = n.shape as { x?: number; y?: number; right?: number; bottom?: number } | undefined;
+  return !!sh && sh.x !== undefined && sh.y !== undefined && sh.right !== undefined && sh.bottom !== undefined;
+};
+
 function dumpFacts(setEntry: { variants: DumpNode[] }): Fact[] {
+  // PER SET. The key is `variant ▸ path`, which is NOT unique across component
+  // sets — two sets can both draw a variant called "Size=md, State=Default"
+  // with the same child path. Left module-scoped and uncleared, a frame that is
+  // inert in one set would tag a DIFFERENT set's divergence: exactly the
+  // cross-set leakage `capture-scope-independence` exists to forbid. The differ
+  // processes one set at a time, so the map is reset here.
+  inertModeSites.clear();
   const facts: Fact[] = [];
   const put = (variant: string, p: string, channel: string, value: string, tag?: LimitTag): void => {
     facts.push({ variant, path: p, channel, value, ...(tag ? { tag } : {}) });
@@ -295,6 +323,11 @@ function dumpFacts(setEntry: { variants: DumpNode[] }): Fact[] {
     put(variant, p, 'kind', kindOf(node.type));
     const l = node.layout;
     put(variant, p, 'layout.mode', l ? l.mode : 'NONE');
+    const kids = node.children ?? [];
+    // Childless frames count too: an auto-layout mode on a frame with NOTHING
+    // to lay out is inert by definition. (The first cut required children and
+    // left 494 of the 940 NONE→auto divergences untagged for that reason.)
+    if (!l && (kids.length === 0 || kids.every(absolutelyPlaced))) inertModeSites.add(`${variant} ▸ ${p}`);
     if (l) {
       put(variant, p, 'layout.align', `${l.primary}/${l.counter}`);
       put(variant, p, 'layout.gap', String(l.spacing));
@@ -829,6 +862,22 @@ function diffFacts(original: Fact[], roundTrip: Fact[], missingVariantTag?: (var
   // vector-glyph limit (arbitrary paths have no emit projection).
   for (const f of out.diverged) {
     if (f.channel === 'kind' && f.tag === undefined && f.value.startsWith('vector')) f.tag = 'vector-glyph';
+    // AN ADDED AUTO-LAYOUT MODE THAT CHANGES NOTHING DRAWN. Figma auto-layout
+    // EXCLUDES absolutely-positioned children, so a `NONE → HORIZONTAL/VERTICAL`
+    // divergence on a frame whose children are ALL absolutely placed is inert:
+    // the tree comparison differs, the canvas does not. Measured on the
+    // committed kit, that is 437 of 437 such frames — every one of the 940
+    // NONE→auto divergences, and the single largest number in this report.
+    // Left untagged it reads as 940 broken facts; the DIFFERENCE is still
+    // reported, only its consequence is now named.
+    if (
+      f.channel === 'layout.mode' &&
+      f.tag === undefined &&
+      f.value.startsWith('NONE →') &&
+      inertModeSites.has(`${f.variant} ▸ ${f.path}`)
+    ) {
+      f.tag = 'auto-layout-inert';
+    }
   }
   return out;
 }
@@ -1150,6 +1199,7 @@ async function main(): Promise<void> {
   lines.push('- `url-image` — url()/IMAGE fills; the emitter ledgers them as gradientMiss BY DESIGN (expected).');
   lines.push('- `text-style-identity` — named text styles need the semantic token slot; a foreign tokenSet has none, so style identities (e.g. "Text sm/Semibold") ledger as loss while the raw typography (size/weight/line-height) still compares.');
   lines.push('- `restructured` — the same content (variant, channel, value) at a different part nesting: a wrapper the proposal introduced or removed. Ledgered on BOTH sides (loss + invented), never silently matched.');
+  lines.push('- `auto-layout-inert` — a frame drawn with NO auto-layout returns WITH one, and every child is ABSOLUTELY placed (or the frame has no children). Figma auto-layout EXCLUDES absolutely-positioned children, so the added mode changes NOTHING that is drawn: the tree comparison differs, the canvas does not. 940 of the 960 `layout.mode` divergences are this. The remaining 20 are a REAL axis flip (VERTICAL → HORIZONTAL) and are all one part — slider ▸ progress/leftcontrol/tooltip, which the dump draws VERTICAL in the floating-label variants while the contract carries no layout for it at all. Reported undifferentiated, the 940 buried those 20.');
   lines.push('- `headless-measure` — hug-sized boxes are excluded from width/height compare (the mock measures text by estimate); named exclusion, not a loss.');
   lines.push('');
 

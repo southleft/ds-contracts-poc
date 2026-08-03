@@ -1,6 +1,6 @@
 {
-  "passed": 185,
-  "total": 185,
+  "passed": 187,
+  "total": 187,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -570,6 +570,16 @@
     {
       "id": "repeated-children-collection",
       "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "ledger-and-residuals-are-fresh",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "no-receipt-names-a-door-that-drops-it",
+      "claim": "C2-refusal",
       "pass": true
     },
     {

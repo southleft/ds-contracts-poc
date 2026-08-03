@@ -1023,6 +1023,12 @@ export interface MintPrep {
   /** v15: full-coverage uniform declared state deltas → Part.declaredStates. */
   declaredStates: DeclaredStateEnrichment[];
   inertOnDisabled: string[];
+  /** SILENT-LOSS ROUND: parts observed on an INTERACTION plane but absent from
+   *  that combo's DEFAULT plane. The base pass refuses their channels as
+   *  "interaction-only — state rounds own it"; this is the state round, and it
+   *  has no default-plane counterpart to diff against, so nothing is carried.
+   *  Named here so the base receipt stops pointing at a door that drops them. */
+  planeAbsentDrops: string[];
   pairwiseRefusals: string[];
   /** ORPHAN-LEAF ROUND (task #42) — one named line per union part the anatomy
    *  promotion refused, with the styled-channel count that therefore did NOT
@@ -1361,7 +1367,15 @@ export function prepareMint(
           // MUI round: interaction-only union parts (-active, -focusVisible
           // thumbs) have NO element in any __default alignment — zero
           // observations is a named refusal, not a mintable base fact.
-          codeOnly.push({ part: partName, channel, reason: 'part absent in every default-state combo (interaction-only part) — state rounds own it', sample: '<no default-state observation>', distinctValues: 0 });
+          // "state rounds own it" WAS FALSE. The state round diffs an
+          // interaction plane against the DEFAULT plane, and a part with no
+          // default-plane element fails that guard and is dropped there — so
+          // this sentence sent every reviewer to a door that discards the fact.
+          // Measured on carbon's `accordion__wrapper-2`: 10 channels refused
+          // here, nothing carried anywhere, and the part ships with
+          // `description` + `declared` only. The drop is now named at the state
+          // round too (`planeAbsentDrops`), and this says what is true.
+          codeOnly.push({ part: partName, channel, reason: 'part absent in every default-state combo — NOT carried at base, and NO combo plane (default or interaction) observes this part at all, so this channel is carried NOWHERE. It reached the anatomy from the BASE capture alone. (This used to read "interaction-only part — state rounds own it", which was false twice over: the part is not interaction-only, and the state round drops it too. See planeAbsentDrops.)', sample: '<no default-state observation>', distinctValues: 0 });
           continue;
         }
         if (unk !== null) {
@@ -1488,6 +1502,9 @@ export function prepareMint(
   const stateCodeOnly: CodeOnlyEntry[] = [];
   const declaredStates: DeclaredStateEnrichment[] = [];
   const inertOnDisabled: string[] = [];
+  // Deduped at the end: one entry per (part, interaction), not per combo —
+  // a 40-combo component would otherwise bury the finding in noise.
+  const planeAbsentDrops: string[] = [];
   const foldedStateSkips: string[] = [];
 
   /** PSEUDO-DECOR v2 ROUND — the STATE observation path is the THIRD consumer
@@ -1528,7 +1545,38 @@ export function prepareMint(
         if (!mintablePart(a.partNames[pi])) continue;
         const d0 = defaults[pi];
         const d1 = els[pi];
-        if (!d0 || !d1) continue;
+        if (!d0 || !d1) {
+          // SILENT-LOSS ROUND — THE RECEIPT POINTED AT THIS DOOR.
+          //
+          // When a part has no DEFAULT-plane element, the base pass refuses its
+          // channels with "part absent in every default-state combo
+          // (interaction-only part) — state rounds own it". This is the state
+          // round, and it dropped exactly those parts on this line, silently.
+          // So the refusal named a destination that discards the fact: worse
+          // than no receipt, because it tells a reviewer the case is handled.
+          //
+          // MEASURED: carbon's `accordion__wrapper-2` carries 10 such receipts
+          // and ships in the anatomy with `description` + `declared` only — no
+          // tokens, no states, nothing.
+          //
+          // The delta is still NOT carried (a state value diffed against a
+          // default that does not exist is not an observation of a change), but
+          // the loss is now named WHERE IT HAPPENS and the base receipt no
+          // longer promises someone else handled it.
+          // MEASURED, not assumed: a probe over carbon's Accordion found that
+          // EVERY part reaching this guard has BOTH planes absent (3 parts —
+          // accordion__wrapper, accordion__wrapper-2, label-2). The first cut
+          // of this receipt fired only on `!d0 && d1` and was therefore dead
+          // code; the case it imagined does not occur here.
+          planeAbsentDrops.push(
+            !d0 && !d1
+              ? `${a.partNames[pi]}: absent from BOTH the default and ${interaction} planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only`
+              : !d0
+                ? `${a.partNames[pi]}: observed on the ${interaction} plane but ABSENT from the default plane — no counterpart to diff against, so no state delta is carried`
+                : `${a.partNames[pi]}: present at default but ABSENT from the ${interaction} plane — the part does not render in that interaction, so no delta is carried`,
+          );
+          continue;
+        }
         for (const p of allProps) {
           if (!isFusable(p)) continue;
           const pv0 = planeValue(d0.node.style, p);
@@ -1646,6 +1694,7 @@ export function prepareMint(
     declared: folded.declared,
     declaredStates,
     inertOnDisabled,
+    planeAbsentDrops: [...new Set(planeAbsentDrops)].sort(),
     pairwiseRefusals: folded.pairwiseRefusals,
     orphanRefusals,
     unfoldedLeafCount: unfoldedMint.count,

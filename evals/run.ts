@@ -3144,6 +3144,96 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    // NEITHER LEDGER.md NOR RESIDUALS.md WAS GATED BY ANYTHING. Both are
+    // AGGREGATORS — every number in them is read from a committed artifact —
+    // so the moment a fidelity round moved fidelity.json, the residual
+    // accounting went stale in silence. Measured this round: after the
+    // ragged-matrix fix, RESIDUALS.md still reported slider 89.41 (actual
+    // 91.18) and dropdown-list-item 87.26 (actual 90.91), and still charged
+    // the engine 10.09 points for the slider it had just stopped losing.
+    //
+    // That matters more than any single number, because RESIDUALS.md is the
+    // document that decides which points are ENGINE-fixable and which are
+    // INSTRUMENT artifact — a stale copy misdirects the NEXT round's
+    // priorities. This is the same guard `figma:fresh` already provides for
+    // the emitted figma scripts, and it exists there for the same reason
+    // ("MUI's scripts sat three engine fixes stale while the suite stayed
+    // green").
+    id: 'ledger-and-residuals-are-fresh',
+    claim: 'C3-detection',
+    run: () => {
+      // RUN IN THE REAL REPO, NOT THE SCRATCH COPY. `run()` executes in
+      // evals/.scratch, which does not carry examples/untitled-ui/renders/
+      // (595 committed PNGs) — so both aggregators crashed on a missing
+      // fidelity.json there. The claim is about the bytes COMMITTED in this
+      // repo, so the check belongs in this repo.
+      for (const [script, doc] of [
+        ['extract/figma/ledger/build.ts', 'LEDGER.md'],
+        ['extract/figma/ledger/residuals.ts', 'RESIDUALS.md'],
+      ]) {
+        const r = spawnSync(TSX, [script, '--check'], { cwd: ROOT, encoding: 'utf8' });
+        const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+        if ((r.status ?? -1) !== 0) throw new Error(`${doc} is STALE vs a rebuild from its committed sources:\n${out}`);
+        if (!out.includes(`${doc} is byte-identical`)) throw new Error(`${doc} freshness check did not report`);
+      }
+
+      console.log(
+        'ledger-and-residuals-are-fresh: both aggregators re-derive byte-identically from their committed sources. Neither was gated before, and this round proved why — the ragged-matrix fix moved fidelity.json and RESIDUALS.md went on reporting slider 89.41 / engine 10.09 (actually 91.18 / 8.32) with nothing noticing. A one-digit edit makes the check refuse.',
+      );
+    },
+  },
+
+  {
+    // A REFUSAL THAT NAMES THE WRONG DESTINATION is worse than no refusal: it
+    // tells a reviewer the case is handled. fuse.ts refused a part with no
+    // default-plane observations as "interaction-only part — state rounds own
+    // it". The state round diffs an interaction plane AGAINST the default
+    // plane, so a part with no default-plane element fails its guard and is
+    // dropped there too — the receipt pointed straight at the door that
+    // discards the fact.
+    //
+    // MEASURED on carbon's Accordion (offline re-fuse, extract:computed:regate
+    // --component Accordion): 10 such receipts on `accordion__wrapper-2`, and
+    // the part ships in the anatomy with `description` + `declared` only — no
+    // tokens, no states. A probe at the drop site found the sentence wrong
+    // TWICE: the part is not interaction-only, it is absent from BOTH the
+    // default and every interaction plane (3 parts × 3 interactions = 9 drops).
+    // The first cut of the fix fired only on `!d0 && d1` and was DEAD CODE for
+    // a case that does not occur; the corrected receipt reports the measured
+    // one.
+    //
+    // The behavioural check is the on-demand regate (Chromium, deliberately
+    // not in this suite — see shipped-contract-refs-resolve). This is the cheap
+    // regression half: the false promise must not come back, and both writers
+    // must keep surfacing the drop.
+    id: 'no-receipt-names-a-door-that-drops-it',
+    claim: 'C2-refusal',
+    run: () => {
+      const fuse = readFileSync(path.join(ROOT, 'extract/computed/fuse.ts'), 'utf8');
+      // Match the retired receipt AS A STRING LITERAL — note the trailing
+      // apostrophe. fuse.ts's own comments quote the old wording (twice) to
+      // explain why it was wrong, and two successive attempts at a plainer
+      // substring match tripped on those quotations rather than on a
+      // reintroduction. A comment never ends the phrase with a closing quote;
+      // the receipt literal always does.
+      if (fuse.includes("— state rounds own it'")) {
+        throw new Error('fuse.ts reintroduced the retired receipt "(interaction-only part) — state rounds own it" — a refusal naming a destination that drops the fact');
+      }
+      if (!fuse.includes('planeAbsentDrops')) throw new Error('fuse.ts no longer records planeAbsentDrops');
+      if (!/absent from BOTH the default and \$\{interaction\} planes/.test(fuse)) {
+        throw new Error('fuse.ts no longer names the MEASURED case (both planes absent)');
+      }
+      for (const w of ['extract/computed/run.ts', 'extract/computed/regate.ts']) {
+        const src = readFileSync(path.join(ROOT, w), 'utf8');
+        if (!src.includes('interactionOnlyPlaneDrops')) throw new Error(`${w} stopped surfacing interactionOnlyPlaneDrops`);
+      }
+      console.log(
+        'no-receipt-names-a-door-that-drops-it: fuse.ts refused parts with no default-plane observation as "interaction-only — state rounds own it", and the state round drops exactly those parts (it diffs against the default plane, which they have no element in). Measured on carbon Accordion: 10 receipts on accordion__wrapper-2, which ships with declared facts only; a probe showed the sentence wrong twice over — the part is absent from BOTH planes, 3 parts × 3 interactions = 9 drops now named at the door where they happen. COMMITTED ARTIFACTS STILL CARRY THE OLD TEXT until their library is re-captured (the harness needs each library\'s dev server); this pin guards the source so the false promise cannot return.',
+      );
+    },
+  },
+
+  {
     // The CSS-vars reader walks document.styleSheets and BOTH of its reads
     // swallowed a throw (`catch {}` and `catch { continue; }`). A cross-origin
     // <link> — how a great many design systems ship CSS — exposes no cssRules
@@ -3209,7 +3299,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
       }
       console.log(
-        'constraints-reach-the-decision: dump v1.12 spells all FIVE ConstraintType values, so STRETCH/SCALE stop being dropped at capture. STRETCH is CARRIED as both edges with no baked size (CSS left+right — the box tracks its parent, which a frozen width destroyed); SCALE keeps its named refusal (CSS has no proportional resize on a positioned box); an ABSENT field keeps today\'s LEFT×TOP geometry — no corpus moves — but the ASSUMPTION IS NAMED. NAMED LIMITS: (1) a dump already taken cannot be repaired — of 811 absBoxOf-visible boxes in the committed corpora, 352 carry no constraints field and need a RE-CAPTURE at v1.13+ before a STRETCH box can be told from a real top-left pin; (2) a STRETCH axis whose size is ALREADY BOUND is a contradiction, so the design\'s binding wins and the stretch is refused on that axis, BY NAME; (3) with STRETCH now reaching the mixed-constraint check, a set mixing STRETCH with another value refuses the whole placement rather than carrying a wrong one — correct, but a behaviour no committed corpus can exercise until a re-capture exists.',
+        'constraints-reach-the-decision: dump v1.13 spells all FIVE ConstraintType values, so STRETCH/SCALE stop being dropped at capture. STRETCH is CARRIED as both edges with no baked size (CSS left+right — the box tracks its parent, which a frozen width destroyed); SCALE keeps its named refusal (CSS has no proportional resize on a positioned box); an ABSENT field keeps today\'s LEFT×TOP geometry — no corpus moves — but the ASSUMPTION IS NAMED. NAMED LIMITS: (1) a dump already taken cannot be repaired — of 811 absBoxOf-visible boxes in the committed corpora, 352 carry no constraints field and need a RE-CAPTURE at v1.13+ before a STRETCH box can be told from a real top-left pin; (2) a STRETCH axis whose size is ALREADY BOUND is a contradiction, so the design\'s binding wins and the stretch is refused on that axis, BY NAME; (3) with STRETCH now reaching the mixed-constraint check, a set mixing STRETCH with another value refuses the whole placement rather than carrying a wrong one — correct, but a behaviour no committed corpus can exercise until a re-capture exists.',
       );
     },
   },

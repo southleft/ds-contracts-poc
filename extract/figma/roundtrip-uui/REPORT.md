@@ -30,14 +30,15 @@ matched 2193 · diverged 471 · loss 1032 · invented 1728
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 471 fact(s):
+- class `auto-layout-inert` — 252 fact(s):
   - (root) ▸ layout.mode: NONE → VERTICAL  (×144 variants)
+  - avataronlineindicator ▸ layout.mode: NONE → HORIZONTAL  (×54 variants)
+  - user ▸ layout.mode: NONE → HORIZONTAL  (×54 variants)
+- class `(unclassified)` — 219 fact(s):
   - avatarcompanyicon ▸ kind: instance → box  (×54 variants)
   - avatarcompanyicon ▸ layout.align: CENTER/CENTER → MIN/MIN  (×54 variants)
   - avataronlineindicator ▸ kind: instance → box  (×54 variants)
-  - avataronlineindicator ▸ layout.mode: NONE → HORIZONTAL  (×54 variants)
   - user ▸ kind: instance → box  (×54 variants)
-  - user ▸ layout.mode: NONE → HORIZONTAL  (×54 variants)
   - avataronlineindicator ▸ abs: 50,50 → 48,48  (×3 variants)
 
 ### LOSS (in the original, not the round trip)
@@ -154,10 +155,11 @@ matched 174 · diverged 45 · loss 78 · invented 0
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 45 fact(s):
+- class `auto-layout-inert` — 18 fact(s):
   - (root) ▸ layout.mode: NONE → HORIZONTAL  (×9 variants)
-  - content ▸ layout.sizing: AUTO/AUTO → FIXED/FIXED  (×9 variants)
   - content/plus ▸ layout.mode: NONE → HORIZONTAL  (×9 variants)
+- class `(unclassified)` — 27 fact(s):
+  - content ▸ layout.sizing: AUTO/AUTO → FIXED/FIXED  (×9 variants)
   - content/plus ▸ width: 16 → 12  (×9 variants)
   - content/plus ▸ height: 16 → 12  (×9 variants)
 
@@ -201,10 +203,11 @@ matched 328 · diverged 50 · loss 78 · invented 1722
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 50 fact(s):
+- class `auto-layout-inert` — 12 fact(s):
   - avatars/avatar ▸ layout.mode: NONE → VERTICAL  (×6 variants)
-  - avatars/avatar ▸ prop:Text: true → false  (×6 variants)
   - avataraddbutton ▸ layout.mode: NONE → HORIZONTAL  (×6 variants)
+- class `(unclassified)` — 38 fact(s):
+  - avatars/avatar ▸ prop:Text: true → false  (×6 variants)
   - avatars/avatar ▸ width: 24 → 56  (×4 variants)
   - avatars/avatar ▸ height: 24 → 56  (×4 variants)
   - avatars/avatar ▸ width: 32 → 56  (×4 variants)
@@ -417,9 +420,10 @@ matched 422 · diverged 42 · loss 93 · invented 8
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 42 fact(s):
-  - avatar ▸ prop:State: focused → default  (×12 variants)
+- class `auto-layout-inert` — 8 fact(s):
   - avatar ▸ layout.mode: NONE → VERTICAL  (×8 variants)
+- class `(unclassified)` — 34 fact(s):
+  - avatar ▸ prop:State: focused → default  (×12 variants)
   - avatar ▸ instanceInk: #22c55e → #f9f5ff  (×4 variants)
   - avatar ▸ width: 40 → 56  (×3 variants)
   - avatar ▸ height: 40 → 56  (×3 variants)
@@ -458,15 +462,16 @@ matched 158 · diverged 8 · loss 14 · invented 1
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 8 fact(s):
+- class `auto-layout-inert` — 6 fact(s):
   - dot ▸ layout.mode: NONE → HORIZONTAL  (Icon=Dot)
   - au ▸ layout.mode: NONE → HORIZONTAL  (Icon=Country)
-  - avatar ▸ width: 16 → 56  (Icon=Avatar)
-  - avatar ▸ height: 16 → 56  (Icon=Avatar)
   - x ▸ layout.mode: NONE → HORIZONTAL  (Icon=X close)
   - arrowright ▸ layout.mode: NONE → HORIZONTAL  (Icon=Icon right)
   - arrowup ▸ layout.mode: NONE → HORIZONTAL  (Icon=Icon left)
   - plus ▸ layout.mode: NONE → HORIZONTAL  (Icon=Only)
+- class `(unclassified)` — 2 fact(s):
+  - avatar ▸ width: 16 → 56  (Icon=Avatar)
+  - avatar ▸ height: 16 → 56  (Icon=Avatar)
 
 ### LOSS (in the original, not the round trip)
 
@@ -493,10 +498,11 @@ matched 404 · diverged 32 · loss 32 · invented 0
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 32 fact(s):
+- class `auto-layout-inert` — 16 fact(s):
   - circle ▸ layout.mode: NONE → HORIZONTAL  (×12 variants)
-  - (root) ▸ layout.align: CENTER/CENTER → MIN/MIN  (×4 variants)
   - dot ▸ layout.mode: NONE → HORIZONTAL  (×4 variants)
+- class `(unclassified)` — 16 fact(s):
+  - (root) ▸ layout.align: CENTER/CENTER → MIN/MIN  (×4 variants)
   - dot ▸ width: 10 → 8  (×4 variants)
   - dot ▸ height: 10 → 8  (×4 variants)
   - dot ▸ instanceInk: #ffffff → #9e77ed  (×4 variants)
@@ -517,12 +523,13 @@ matched 496 · diverged 64 · loss 72 · invented 32
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 64 fact(s):
+- class `auto-layout-inert` — 24 fact(s):
   - plus ▸ layout.mode: NONE → HORIZONTAL  (×8 variants)
-  - plus ▸ width: 20 → 12  (×8 variants)
-  - plus ▸ height: 20 → 12  (×8 variants)
   - circle ▸ layout.mode: NONE → HORIZONTAL  (×8 variants)
   - dot ▸ layout.mode: NONE → HORIZONTAL  (×8 variants)
+- class `(unclassified)` — 40 fact(s):
+  - plus ▸ width: 20 → 12  (×8 variants)
+  - plus ▸ height: 20 → 12  (×8 variants)
   - dot ▸ width: 10 → 8  (×8 variants)
   - dot ▸ height: 10 → 8  (×8 variants)
   - dot ▸ instanceInk: #22c55e → #9e77ed  (×6 variants)
@@ -557,13 +564,14 @@ matched 133 · diverged 8 · loss 125 · invented 144
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 8 fact(s):
+- class `(unclassified)` — 7 fact(s):
   - (root) ▸ layout.align: SPACE_BETWEEN/CENTER → MIN/CENTER  (×3 variants)
-  - content/circle ▸ layout.mode: NONE → HORIZONTAL  (Checkbox=False, Icon=True, Shortcut=True, State=Default)
   - content/circle ▸ width: 16 → 20  (Checkbox=False, Icon=True, Shortcut=True, State=Default)
   - content/circle ▸ height: 16 → 20  (Checkbox=False, Icon=True, Shortcut=True, State=Default)
   - content/checkbox ▸ layout.sizing: AUTO/AUTO → FIXED/FIXED  (Checkbox=True, Icon=False, Shortcut=True, State=Default)
   - content/text ▸ text.fontStyle: Regular → Medium  (Checkbox=True, Icon=False, Shortcut=True, State=Default)
+- class `auto-layout-inert` — 1 fact(s):
+  - content/circle ▸ layout.mode: NONE → HORIZONTAL  (Checkbox=False, Icon=True, Shortcut=True, State=Default)
 
 ### LOSS (in the original, not the round trip)
 
@@ -663,18 +671,19 @@ matched 531 · diverged 47 · loss 277 · invented 164
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 47 fact(s):
+- class `(unclassified)` — 39 fact(s):
   - inputwithlabel ▸ layout.sizing: AUTO/FIXED → AUTO/AUTO  (×10 variants)
   - inputwithlabel/input ▸ layout.sizing: FIXED/AUTO → AUTO/AUTO  (×10 variants)
   - inputwithlabel/input/content ▸ layout.sizing: FIXED/AUTO → AUTO/AUTO  (×6 variants)
   - hinttext ▸ text.characters: This is an error message. → This is a hint text to help user.  (×5 variants)
-  - inputwithlabel/input/dropdown/chevrondown ▸ layout.mode: NONE → HORIZONTAL  (×4 variants)
-  - inputwithlabel/input/content/mail ▸ layout.mode: NONE → HORIZONTAL  (×2 variants)
-  - inputwithlabel/input/content/paymentmethodicon ▸ layout.mode: NONE → HORIZONTAL  (×2 variants)
   - inputwithlabel/input/dropdown ▸ layout.padding: 10,12,10,14 → 10,0,10,14  (×2 variants)
   - inputwithlabel/input/dropdown ▸ layout.sizing: AUTO/FIXED → AUTO/AUTO  (×2 variants)
   - inputwithlabel/input/content/textinput ▸ layout.sizing: FIXED/AUTO → AUTO/AUTO  (×2 variants)
   - inputwithlabel/input/dropdown ▸ layout.padding: 10,14,10,14 → 10,0,10,14  (×2 variants)
+- class `auto-layout-inert` — 8 fact(s):
+  - inputwithlabel/input/dropdown/chevrondown ▸ layout.mode: NONE → HORIZONTAL  (×4 variants)
+  - inputwithlabel/input/content/mail ▸ layout.mode: NONE → HORIZONTAL  (×2 variants)
+  - inputwithlabel/input/content/paymentmethodicon ▸ layout.mode: NONE → HORIZONTAL  (×2 variants)
 
 ### LOSS (in the original, not the round trip)
 
@@ -826,11 +835,12 @@ matched 1309 · diverged 275 · loss 485 · invented 649
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 275 fact(s):
+- class `auto-layout-inert` — 165 fact(s):
   - progressbar ▸ layout.mode: NONE → HORIZONTAL  (×55 variants)
-  - progressbar/background ▸ kind: rect → box  (×55 variants)
   - progressbar/background ▸ layout.mode: NONE → HORIZONTAL  (×55 variants)
   - progressbar/progress ▸ layout.mode: NONE → HORIZONTAL  (×55 variants)
+- class `(unclassified)` — 110 fact(s):
+  - progressbar/background ▸ kind: rect → box  (×55 variants)
   - progressbar/progress ▸ kind: rect → box  (×35 variants)
   - progressbar/progress/tooltip ▸ layout.sizing: AUTO/AUTO → AUTO/FIXED  (×20 variants)
 
@@ -1008,9 +1018,11 @@ matched 317 · diverged 92 · loss 225 · invented 231
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 84 fact(s):
+- class `auto-layout-inert` — 34 fact(s):
   - (root) ▸ layout.mode: NONE → HORIZONTAL  (×16 variants)
   - ring ▸ layout.mode: NONE → HORIZONTAL  (×16 variants)
+  - group3 ▸ layout.mode: NONE → HORIZONTAL  (×2 variants)
+- class `(unclassified)` — 50 fact(s):
   - ring/background ▸ width: 252 → 216  (×4 variants)
   - ring/line ▸ width: 252 → 216  (×4 variants)
   - ring/line ▸ height: 252 → 216  (×4 variants)
@@ -1026,7 +1038,6 @@ matched 317 · diverged 92 · loss 225 · invented 231
   - ring/background ▸ height: 108 → 216  (×2 variants)
   - ring/background ▸ height: 126 → 216  (×2 variants)
   - ring/background ▸ height: 90 → 216  (×2 variants)
-  - group3 ▸ layout.mode: NONE → HORIZONTAL  (×2 variants)
   - ring/background ▸ height: 72 → 216  (×2 variants)
 - class `vector-glyph` — 8 fact(s):
   - ring/background ▸ kind: vector → ellipse  (×8 variants)
@@ -1138,15 +1149,16 @@ matched 1280 · diverged 400 · loss 1180 · invented 1444
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 400 fact(s):
+- class `auto-layout-inert` — 240 fact(s):
   - (root) ▸ layout.mode: NONE → HORIZONTAL  (×40 variants)
-  - background ▸ kind: rect → box  (×40 variants)
   - background ▸ layout.mode: NONE → HORIZONTAL  (×40 variants)
   - progress ▸ layout.mode: NONE → HORIZONTAL  (×40 variants)
-  - progress/progressline ▸ kind: rect → box  (×40 variants)
   - progress/progressline ▸ layout.mode: NONE → HORIZONTAL  (×40 variants)
   - progress/leftcontrol ▸ layout.mode: NONE → HORIZONTAL  (×40 variants)
   - progress/rightcontrol ▸ layout.mode: NONE → HORIZONTAL  (×40 variants)
+- class `(unclassified)` — 160 fact(s):
+  - background ▸ kind: rect → box  (×40 variants)
+  - progress/progressline ▸ kind: rect → box  (×40 variants)
   - progress/leftcontrol/tooltip ▸ kind: instance → box  (×20 variants)
   - progress/leftcontrol/tooltip ▸ layout.mode: VERTICAL → HORIZONTAL  (×20 variants)
   - progress/leftcontrol/tooltip ▸ layout.align: MIN/CENTER → MIN/MIN  (×20 variants)
@@ -1289,8 +1301,9 @@ matched 2292 · diverged 186 · loss 162 · invented 60
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 186 fact(s):
+- class `auto-layout-inert` — 108 fact(s):
   - socialicon ▸ layout.mode: NONE → HORIZONTAL  (×108 variants)
+- class `(unclassified)` — 78 fact(s):
   - socialicon ▸ prop:Style: brand → white  (×78 variants)
 
 ### LOSS (in the original, not the round trip)
@@ -1335,12 +1348,13 @@ matched 910 · diverged 124 · loss 213 · invented 182
 
 ### DIVERGED (value differs; original → round trip)
 
-- class `(unclassified)` — 100 fact(s):
+- class `(unclassified)` — 52 fact(s):
   - content ▸ layout.sizing: AUTO/FIXED → AUTO/AUTO  (×24 variants)
-  - tooltip ▸ layout.mode: NONE → HORIZONTAL  (×24 variants)
-  - tooltip/bottomcenter ▸ layout.mode: NONE → HORIZONTAL  (×24 variants)
   - content/textandsupportingtext ▸ layout.sizing: AUTO/FIXED → AUTO/AUTO  (×14 variants)
   - content ▸ layout.padding: 8,12,8,12 → 12,12,12,12  (×14 variants)
+- class `auto-layout-inert` — 48 fact(s):
+  - tooltip ▸ layout.mode: NONE → HORIZONTAL  (×24 variants)
+  - tooltip/bottomcenter ▸ layout.mode: NONE → HORIZONTAL  (×24 variants)
 - class `vector-glyph` — 24 fact(s):
   - tooltip/bottomcenter ▸ kind: vector → box  (×24 variants)
 
@@ -1399,5 +1413,6 @@ matched 910 · diverged 124 · loss 213 · invented 182
 - `url-image` — url()/IMAGE fills; the emitter ledgers them as gradientMiss BY DESIGN (expected).
 - `text-style-identity` — named text styles need the semantic token slot; a foreign tokenSet has none, so style identities (e.g. "Text sm/Semibold") ledger as loss while the raw typography (size/weight/line-height) still compares.
 - `restructured` — the same content (variant, channel, value) at a different part nesting: a wrapper the proposal introduced or removed. Ledgered on BOTH sides (loss + invented), never silently matched.
+- `auto-layout-inert` — a frame drawn with NO auto-layout returns WITH one, and every child is ABSOLUTELY placed (or the frame has no children). Figma auto-layout EXCLUDES absolutely-positioned children, so the added mode changes NOTHING that is drawn: the tree comparison differs, the canvas does not. 940 of the 960 `layout.mode` divergences are this. The remaining 20 are a REAL axis flip (VERTICAL → HORIZONTAL) and are all one part — slider ▸ progress/leftcontrol/tooltip, which the dump draws VERTICAL in the floating-label variants while the contract carries no layout for it at all. Reported undifferentiated, the 940 buried those 20.
 - `headless-measure` — hug-sized boxes are excluded from width/height compare (the mock measures text by estimate); named exclusion, not a loss.
 

@@ -14,27 +14,27 @@ Fifteen Untitled UI component sets were drawn by hand on a Figma canvas, capture
 
 | instrument | what it holds the tool to | current reading | artifact |
 |---|---|---|---|
-| Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **92.5%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst tooltip 81.2%) | `renders/fidelity.json` |
+| Pixel fidelity | a render of the emitted React vs the canvas reference, per variant | **92.7%** mean over 537 scored variants in 15 sets (best toggle-base 98.0%, worst tooltip 81.2%) | `renders/fidelity.json` |
 | Document-model conformance | one hand-authored case per Figma construct, with a hand-authored expected disposition | **91/91** green, 0 pinned red — 72 constructs expected CARRIED, 8 REFUSED, 11 LEDGERED | `extract/figma/conformance/MANIFEST.json` |
-| Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** closed · 10,996 matched · 1,965 diverged · 4,088 loss · 6,365 invented | `extract/figma/roundtrip-uui/report.json` |
+| Canvas→code→canvas round trip | every (variant ▸ node ▸ channel) fact, four ways | **15/15** closed · 11,104 matched · 1,857 diverged · 4,088 loss · 6,365 invented | `extract/figma/roundtrip-uui/report.json` |
 | The named-refusal surface | what the pipeline writes down when it will not carry something | **491** capture receipts in 8 codes · 15 stub contracts · 19 named conformance limits · 1 refused icon export | dumps, contracts, icon manifest |
 
 ### The one sentence
 
-> **This tool reproduces a component's structure and its token bindings; it approximates its pixels.** Across the 537 variants that can be scored at all, mean agreement with the canvas reference is **92.5%**, only 212 of them (39.5%) reach 95% or better, and 11 reach 100% — so the emitted React is a faithful *specification* of each component and an *approximate* drawing of it. Adopt it to carry API, anatomy, and tokens across the boundary. Do not adopt it expecting pixel-exact output without review.
+> **This tool reproduces a component's structure and its token bindings; it approximates its pixels.** Across the 537 variants that can be scored at all, mean agreement with the canvas reference is **92.7%**, only 225 of them (41.9%) reach 95% or better, and 11 reach 100% — so the emitted React is a faithful *specification* of each component and an *approximate* drawing of it. Adopt it to carry API, anatomy, and tokens across the boundary. Do not adopt it expecting pixel-exact output without review.
 
 A second sentence an adopter should hear before anything else, quoted from the round-trip report rather than paraphrased:
 
-> The hand-built canvas used zero published variables, so captured.dtcg.json is `{}` and every fact is minted. The bundle the CLI would build for this library is REFUSED by the plugin paste referee: “the tokenSet "base" must be a non-empty flat DTCG object — a tokenSet is { "name": "<collection>", "base": { "<token>": { "$type", "$value" } }, "modes"?: { "light"?, "dark"? }, "minted"?: <nested DTCG tree> } — ds-contracts figma bundle builds one.” This runner bypasses the shape referee (the minted layer is what actually syncs) to measure the emit engine anyway. Related: `figma bundle` also refuses this contract set outright — social-button's per-variant icon ref `{platform}` is read as a literal asset name by the bundle's icon collector (“icon asset(s) referenced but not in …: {platform}”).
+> *(REPORT.md carries no "Named pipeline finding" section — nothing to quote.)*
 
 ### Where the fidelity actually lands
 
 | band | variants | share of scored |
 |---|---|---|
-| ≥ 95 (indistinguishable at a glance) | 212 | 39.5% |
-| 90 – 95 | 208 | 38.7% |
-| 80 – 90 | 92 | 17.1% |
-| 70 – 80 | 19 | 3.5% |
+| ≥ 95 (indistinguishable at a glance) | 225 | 41.9% |
+| 90 – 95 | 204 | 38.0% |
+| 80 – 90 | 84 | 15.6% |
+| 70 – 80 | 18 | 3.4% |
 | < 70 (visibly a different drawing) | 6 | 1.1% |
 
 Method, quoted from `renders/FIDELITY.md`: *Score = % of pixels REPRODUCED, measured at the reference's own true scale with the two ROOT BOXES anchored. v2.1 stops content-trimming and stops rescaling each image into a common 200px box — the two blindnesses that cost round 5 and round 6 a measurement each: a pure TRANSLATION scored 0.00 change (the trim discards absolute position) and DELETING a wrong full-bleed gray ground LOWERED six rows (#efefef vs #ffffff is 16 per channel, inside v2.0's 90-summed-channel tolerance, so the wrong paint counted as a match AND inflated the trim box, whose loss the 200px normalization then magnified ~4x). v2.1 instead: (1) TRUE SCALE — the canvas export scale is not recorded, so it is derived as s = min(2, 600 / drawn bbox width) and verified over all 595 references that have a dump variant: no reference comes out SMALLER than the box it draws (Figma never trims a node's own box, so a negative would falsify the rule) and every residual is explainable (0 plain, 4/8px focus rings, 24px tooltip shadow, 56–70px floating value tooltips). The reference is resampled to (w/s, h/s); the render is used at 1:1. Nothing is normalized to a common size, so wrong SIZE now scores wrong. (2) ROOT ANCHOR — render-one reports the rendered root's border box on stdout (PNG bytes untouched); inside the reference the root's origin is the export's overflow split in the direction the render's own ink overflows its root box (even split when it does not), so a symmetric ring centres and a one-sided floating tooltip does not. Absolute position is measured. (3) TOLERANCE — a reference pixel is reproduced when some pixel in its 3x3 neighbourhood of the render is within 10 PER CHANNEL (v2.0: 90 summed across three, i.e. up to 30/channel); the 3x3 escape is what makes the tight threshold usable — it forgives Figma-vs-Chrome rasterisation jitter up to one pixel and nothing larger. DELIBERATELY IGNORED: sub-pixel and 1px placement (the 3x3 escape); the component's position on the page (only its root box is anchored — a uniform translation of the whole drawing is not a property of a standalone render); and effect ink beyond the render clip's 8px margin (worst case measured: tooltip, canvas shadow reaches 12px/side, so 4px of it is missing from the render and scores as missing — named, not fixed, because changing the clip would change the committed render bytes and make this metric change unattributable). MEASURED FLOOR — read the numbers with it: at true scale Figma's and Chrome's glyph rasterisation differ by more than the one-pixel escape on nearly every stem, so a frame that is ONLY text tops out near 70 (dropdown-list-item icon_false_checkbox_false_shortcut_false_state_default scores 70.45 with the two drawings indistinguishable by eye — its whole frame is one "List item" run). A text-dominated row is that floor plus its defects, and a fix measured on such a row reads COMPRESSED. The v2.0 table over the SAME renders is FIDELITY-v20.md: both are produced by one run, so the shift between them is the metric and nothing else. v1.2: unknown axes consumed generically; axis-not-carried counts variants unrenderable because the inversion dropped their axis (genuine carriage losses only); state=disabled scores through the contract's disabled boolean; state=hover|focus variants are interaction-state (CSS-rendered, not statically scorable). Trend metric, not the final gate.*
@@ -84,7 +84,7 @@ The fixture proves the vocabulary exists. These counts prove the 15 full contrac
 | `asset` | 12 | 12 / 30 |
 | `mask` | 2 | 1 / 30 |
 
-And on the return leg, 10,996 facts came back from Figma identical to the way they were drawn — 47.0% of every fact compared.
+And on the return leg, 11,104 facts came back from Figma identical to the way they were drawn — 47.4% of every fact compared.
 
 ---
 
@@ -147,7 +147,7 @@ The 15 non-stub contracts carry their own standing refusal, which an adopter sho
 
 ### 3.4 The paste door — CLOSED for two rounds, now OPEN
 
-*Emitter-side, and for two rounds the largest single refusal for an adopter — now closed, and the receipt runs on every gate (`npm run paste:check`).* The round-trip runner had to BYPASS the plugin's paste referee to measure anything at all, because this kit hit BOTH of its blockers at once. **(1) An empty `base`.** `captured.dtcg.json` for this hand-built canvas is `{}` — it used zero published Figma variables — so the bundle's base tokenSet was empty and the referee refused the shape outright. It was refusing a kit whose vocabulary is entirely MINTED: 989 literal leaves with zero aliases into base, a complete and self-sufficient token set. The referee now refuses only when there is nothing to sync AT ALL. **(2) A per-variant icon ref.** `figma bundle` read `ds.social-icon`'s `{"asset":"{platform}"}` as a LITERAL filename, went looking for an icon named `{platform}`, and refused — with all six platform SVGs present in the assets directory. Every emitter already expanded that ref; the bundler did not. The refusal was real and the cause was a missing expansion, not a missing asset. **Blast radius, now: zero.** All 15 sets bundle, the paste is ACCEPTED with no bypass, and the plan syncs one "Untitled UI" collection of 989 variables before building all 15 component scripts. The developer path — contract → CLI bundle → paste → variables + component sets — runs end to end for this kit, and `paste:check` pins it for a variable-publishing kit (Eventz, Light/Dark) in the same run.
+*Emitter-side, and for two rounds the largest single refusal for an adopter — now closed, and the receipt runs on every gate (`npm run paste:check`).* The round-trip runner had to BYPASS the plugin's paste referee to measure anything at all, because this kit hit BOTH of its blockers at once. **(1) An empty `base`.** `captured.dtcg.json` for this hand-built canvas is `{}` — it used zero published Figma variables — so the bundle's base tokenSet was empty and the referee refused the shape outright. It was refusing a kit whose vocabulary is entirely MINTED: 1,026 literal leaves with zero aliases into base, a complete and self-sufficient token set. The referee now refuses only when there is nothing to sync AT ALL. **(2) A per-variant icon ref.** `figma bundle` read `ds.social-icon`'s `{"asset":"{platform}"}` as a LITERAL filename, went looking for an icon named `{platform}`, and refused — with all six platform SVGs present in the assets directory. Every emitter already expanded that ref; the bundler did not. The refusal was real and the cause was a missing expansion, not a missing asset. **Blast radius, now: zero.** All 15 sets bundle, the paste is ACCEPTED with no bypass, and the plan syncs one "Untitled UI" collection of 1,026 variables before building all 15 component scripts. The developer path — contract → CLI bundle → paste → variables + component sets — runs end to end for this kit, and `paste:check` pins it for a variable-publishing kit (Eventz, Light/Dark) in the same run.
 
 ### 3.5 Set members the capture never saw
 
@@ -175,6 +175,7 @@ Carried, but not carried perfectly. These are the classes an adopter will actual
 |---|---|---|---|---|---|
 | `restructured` | 7,041 | 0 / 2,705 / 4,336 | 7 / 15 | 267 | the same content (variant, channel, value) at a different part nesting: a wrapper the proposal introduced or removed. Ledgered on BOTH sides (loss + invented), never silently matched. |
 | `dup-sibling-names` | 1,710 | 0 / 0 / 1,710 | 1 / 15 | 12 | the dump reuses ONE layer name for N siblings (eight "Avatar" instances), so their facts collapse onto one (variant ▸ path ▸ channel) key on the original side; the round trip names them uniquely and siblings 2..N have no dump-side key by construction. |
+| `auto-layout-inert` | 940 | 940 / 0 / 0 | 14 / 15 | 468 | a frame drawn with NO auto-layout returns WITH one, and every child is ABSOLUTELY placed (or the frame has no children). Figma auto-layout EXCLUDES absolutely-positioned children, so the added mode changes NOTHING that is drawn: the tree comparison differs, the canvas does not. 940 of the 960 `layout.mode` divergences are this. The remaining 20 are a REAL axis flip (VERTICAL → HORIZONTAL) and are all one part — slider ▸ progress/leftcontrol/tooltip, which the dump draws VERTICAL in the floating-label variants while the contract carries no layout for it at all. Reported undifferentiated, the 940 buried those 20. |
 | `text-style-identity` | 338 | 0 / 338 / 0 | 12 / 15 | 263 | named text styles need the semantic token slot; a foreign tokenSet has none, so style identities (e.g. "Text sm/Semibold") ledger as loss while the raw typography (size/weight/line-height) still compares. |
 | `vector-glyph` | 236 | 32 / 189 / 15 | 11 / 15 | 198 | vector/svg internals (instancePrimaryFill probes, glyph geometry): the headless mock renders svg as empty frames; campaign ledger: vector glyphs / baked ink. |
 | `interaction-states` | 137 | 0 / 137 / 0 | 4 / 15 | 67 | State=… variant rows drawn on the canvas that the round trip renders differently (previews) or not at all (campaign ledger: interaction states). |
@@ -233,8 +234,8 @@ Tally: **10** CLOSED · **1** NAMED-BY-DESIGN · **3** PARTIAL · **1** OPEN, of
 
 Named holes, so that no reader mistakes an absence for a zero.
 
-- **The contract FILES carry no named notes — but the notes are committed beside them.** No `notes` (or `note`) key appears in any of the 30 contract files; the only prose inside a contract is `description` (one PROPOSED scope line per full contract, one STUB refusal per stub, both quoted in §3.2). The inversion's 1,577 named decisions across 15 set(s) live in `storybook/contracts/NOTES.md`, rebuilt and byte-verified by the same drift check as the contracts. 1,571 are REFUSALS (nothing bound) and 6 are CARRIED-AND-CAVEATED (bound, every value measured, but the axis pair is saturated so the correlation is unwitnessed). What remains a genuine hole: a consumer reading a single contract file still sees no note for the part in front of them — the mapping from note to part is by node path in a separate document, not a field on the part.
-- **2,598 of 12,418 non-matching round-trip facts carry no class tag** (1,933 diverged + 665 loss, across 15 of 15 components and 507 variants). Invention *is* fully classified — 6,365 of 6,365 invented facts carry a tag — but divergence and one-way loss are not, so §4's per-class blast radii cover 79.1% of the non-matching facts and no more.
+- **The contract FILES carry no named notes — but the notes are committed beside them.** No `notes` (or `note`) key appears in any of the 30 contract files; the only prose inside a contract is `description` (one PROPOSED scope line per full contract, one STUB refusal per stub, both quoted in §3.2). The inversion's 1,619 named decisions across 15 set(s) live in `storybook/contracts/NOTES.md`, rebuilt and byte-verified by the same drift check as the contracts. 1,613 are REFUSALS (nothing bound) and 6 are CARRIED-AND-CAVEATED (bound, every value measured, but the axis pair is saturated so the correlation is unwitnessed). What remains a genuine hole: a consumer reading a single contract file still sees no note for the part in front of them — the mapping from note to part is by node path in a separate document, not a field on the part.
+- **1,550 of 12,310 non-matching round-trip facts carry no class tag** (885 diverged + 665 loss, across 15 of 15 components and 487 variants). Invention *is* fully classified — 6,365 of 6,365 invented facts carry a tag — but divergence and one-way loss are not, so §4's per-class blast radii cover 87.4% of the non-matching facts and no more.
 - **The conformance runner writes no machine-readable result file.** `npm run conformance:canvas` prints its table to stdout and exits; there is no committed run output. Every conformance number in this ledger therefore comes from the *manifest's pinned* `status` field, which the live run is expected to reproduce exactly. Run the command to confirm; this build cannot.
 - **The two instruments disagree on the variant denominator.** Round trip counts 595 original variants; the fidelity harness enumerates 599. The delta is §3.5.
 - **No probe here measures accessibility, events, or semantics.** The contracts say so themselves ("Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable"); there is no artifact in this kit that measures them, so this ledger reports nothing about them.
@@ -246,7 +247,7 @@ Named holes, so that no reader mistakes an absence for a zero.
 3. **duplicate-parts-from-wrapper-union** — PARTIAL, propose-invert stage (inversion-side). 3 numbered part names whose base name is also a part of the same contract (progress-bar.Progress2, slider.leftControl2, slider.rightControl2); the audited duplicates (ProgressCircle's four label parts, DropdownListItem's Text2/Checkbox×2/circle×2, InputFieldBase's tripled trailing icons) are all absent. The probe cannot prove the residuals are not genuine sibling nodes.
 4. **ua-default-leakage** — PARTIAL, emit-react stage (emitter-side). global `box-sizing: border-box` reset in tokens.css: present; 8/32 emitted `.root` rules set a background explicitly. No `appearance:` reset exists anywhere in the emitted CSS (1 files).
 5. **story-space-mismatch** — PARTIAL, story-gen stage (emitter-side). 14/15 sets enumerate exactly the variants the capture holds; disagreements: progress-circle 20 enumerated vs 16 captured. Story files are generated per set (30 of 32 emitted components ship stories).
-6. **Classify the 2,598 untagged round-trip facts** (§5.3) — until divergence and loss are classified the way invention already is, no blast-radius number in §4 can claim to be complete.
+6. **Classify the 1,550 untagged round-trip facts** (§5.3) — until divergence and loss are classified the way invention already is, no blast-radius number in §4 can claim to be complete.
 
 ---
 
@@ -266,7 +267,7 @@ npm run extract:figma:roundtrip:uui
 
 # 4 · the pixel fidelity table (renders every variant; slow)
 npx tsx examples/untitled-ui/fidelity-score.mts
-#    expect: 537 scored variants, mean 92.5%
+#    expect: 537 scored variants, mean 92.7%
 ```
 
 §2 and §3.3 read `extract/figma/conformance/MANIFEST.json` directly (the hand-authored denominator — the engine never defines its own). §3.1 reads `_degradations` from the 15 dumps. §3.2 reads the `description` field of the 30 contracts. §3.6 reads the icon manifest. §4 reads `report.json` and quotes the glossary lines out of `REPORT.md`. §5.2's probes read the 32 emitted component directories plus the contracts.
@@ -278,13 +279,13 @@ npx tsx examples/untitled-ui/fidelity-score.mts
 | `examples/untitled-ui/assets/icons/manifest.json` | `a124d0e50984` | 15,709 | icon export receipts |
 | `examples/untitled-ui/AUDIT-ROUND-1.md` | `0370a1fd3e5f` | 19,789 | round-1 audit |
 | `examples/untitled-ui/dumps-v2/` | `bd05944e2685` | 887,477 | canvas dumps (15 files) |
-| `examples/untitled-ui/renders/fidelity.json` | `3ad398e452cb` | 84,425 | fidelity scores |
-| `examples/untitled-ui/renders/FIDELITY.md` | `068e8ae5ce92` | 4,242 | fidelity method |
-| `examples/untitled-ui/storybook/contracts/` | `a57950ca7ce0` | 130,250 | proposed contracts (30 files) |
-| `examples/untitled-ui/storybook/src/generated/` | `50cb95ff05b4` | 272,291 | emitted components (32 dirs) |
-| `examples/untitled-ui/storybook/src/tokens.css` | `c8159802e7e5` | 672,427 | emitted global tokens |
+| `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | fidelity scores |
+| `examples/untitled-ui/renders/FIDELITY.md` | `3b0532cd2de8` | 4,242 | fidelity method |
+| `examples/untitled-ui/storybook/contracts/` | `d1088260bab2` | 129,563 | proposed contracts (30 files) |
+| `examples/untitled-ui/storybook/src/generated/` | `256e2627c802` | 275,910 | emitted components (32 dirs) |
+| `examples/untitled-ui/storybook/src/tokens.css` | `382f2ec19c51` | 674,510 | emitted global tokens |
 | `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | conformance denominator |
-| `extract/figma/roundtrip-uui/report.json` | `6c8d85a8d469` | 2,968,666 | round-trip facts |
-| `extract/figma/roundtrip-uui/REPORT.md` | `2ac653435daf` | 91,799 | round-trip narrative |
+| `extract/figma/roundtrip-uui/report.json` | `8280517ef895` | 2,983,543 | round-trip facts |
+| `extract/figma/roundtrip-uui/REPORT.md` | `61a87750b0e9` | 91,756 | round-trip narrative |
 
 Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering. Rebuild twice and diff to confirm.

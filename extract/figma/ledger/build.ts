@@ -1341,7 +1341,29 @@ p(
   '',
 );
 
-writeFileSync(OUT, `${L.join('\n').replace(/\n{3,}/g, '\n\n').trimEnd()}\n`, 'utf8');
+// FRESHNESS. `--check` re-derives the document and REFUSES if the committed
+// bytes differ, instead of writing. Neither this file nor its sibling was gated
+// by anything, so the moment a fidelity round moved fidelity.json the residual
+// accounting went stale in silence — and this is the document that decides
+// which points are ENGINE and which are INSTRUMENT, so a stale copy misdirects
+// the next round's priorities. Exactly the shape `figma:fresh` already guards
+// for the emitted figma scripts ("MUI's scripts sat three engine fixes stale
+// while the suite stayed green").
+const rendered = `${L.join('\n').replace(/\n{3,}/g, '\n\n').trimEnd()}\n`;
+if (process.argv.includes('--check')) {
+  const committed = existsSync(OUT) ? readFileSync(OUT, 'utf8') : '';
+  if (committed !== rendered) {
+    console.error(
+      `STALE: ${'LEDGER.md'} does not match a rebuild from its committed sources.\n` +
+        'Every number in it is READ from an artifact; one of those artifacts moved.\n' +
+        'Rebuild it and commit:  npm run ledger:uui',
+    );
+    process.exit(1);
+  }
+  console.log(`\u2714 ${'LEDGER.md'} is byte-identical to a rebuild from its committed sources.`);
+  process.exit(0);
+}
+writeFileSync(OUT, rendered, 'utf8');
 
 const rel = path.relative(ROOT, OUT).split(path.sep).join('/');
 process.stdout.write(

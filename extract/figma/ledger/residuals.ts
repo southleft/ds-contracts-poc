@@ -30,7 +30,7 @@
  *   extract/figma/roundtrip-uui/report.json               canvas→code→canvas facts
  */
 import { createHash } from 'node:crypto';
-import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -591,5 +591,27 @@ P('### Sources this build read');
 P(...table(['artifact', 'sha256 (12)', 'bytes', 'what it supplied'], sources.slice().sort((a, b) => a.rel.localeCompare(b.rel)).map((s) => [`\`${s.rel}\``, `\`${s.hash}\``, fmt(s.bytes), s.label])));
 P('Same bytes in, same file out: this build reads no clock, no git state and no environment, and sorts every collection before rendering.');
 
-writeFileSync(OUT, `${L.join('\n').replace(/\n{3,}/g, '\n\n').trimEnd()}\n`, 'utf8');
+// FRESHNESS. `--check` re-derives the document and REFUSES if the committed
+// bytes differ, instead of writing. Neither this file nor its sibling was gated
+// by anything, so the moment a fidelity round moved fidelity.json the residual
+// accounting went stale in silence — and this is the document that decides
+// which points are ENGINE and which are INSTRUMENT, so a stale copy misdirects
+// the next round's priorities. Exactly the shape `figma:fresh` already guards
+// for the emitted figma scripts ("MUI's scripts sat three engine fixes stale
+// while the suite stayed green").
+const rendered = `${L.join('\n').replace(/\n{3,}/g, '\n\n').trimEnd()}\n`;
+if (process.argv.includes('--check')) {
+  const committed = existsSync(OUT) ? readFileSync(OUT, 'utf8') : '';
+  if (committed !== rendered) {
+    console.error(
+      `STALE: ${'RESIDUALS.md'} does not match a rebuild from its committed sources.\n` +
+        'Every number in it is READ from an artifact; one of those artifacts moved.\n' +
+        'Rebuild it and commit:  npm run residuals:uui',
+    );
+    process.exit(1);
+  }
+  console.log(`\u2714 ${'RESIDUALS.md'} is byte-identical to a rebuild from its committed sources.`);
+  process.exit(0);
+}
+writeFileSync(OUT, rendered, 'utf8');
 console.log(`RESIDUALS.md — ${fmt(N)} scored variants, gap ${f2(GAP)} pts: instrument ${f2(INSTR_LO)}–${f2(INSTR_HI)}, engine ${f2(ENG_LO)}–${f2(ENG_HI)} (of which ${f3(RECOVERED)} measured recoverable over ${counted.length} probes)`);
