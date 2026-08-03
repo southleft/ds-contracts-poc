@@ -1,6 +1,6 @@
 {
-  "passed": 182,
-  "total": 182,
+  "passed": 183,
+  "total": 183,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -569,6 +569,11 @@
     },
     {
       "id": "repeated-children-collection",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "wrapping-survives-the-round-trip",
       "claim": "C5-extraction",
       "pass": true
     },

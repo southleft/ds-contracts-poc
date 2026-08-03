@@ -2991,10 +2991,23 @@ function invertLayout(
   const direction = l.mode === 'VERTICAL' ? 'column' : 'row';
   const justify = JUSTIFY_INV[l.primary];
   const align = ALIGN_INV[l.counter] ?? (stretchEvidence(m) ? 'stretch' : undefined);
+  // WRAPPING (dump v1.12) — COUNTED BEFORE THE isRoot EARLY RETURN, and that
+  // ordering is the whole point. The emitter has written `node.layoutWrap =
+  // 'WRAP'` from `layout.wrap` since v15 while the dump never read it back, so
+  // a wrapping chip row returned as one overflowing line. The first cut of this
+  // fix appended the carry BELOW the early return — where an adversarial probe
+  // caught it doing nothing at all for a CENTERED wrapping root, which is the
+  // motivating case: layoutWrap is HORIZONTAL-only in Figma, so every wrapping
+  // root is `row` by construction and needs only centered justify+align to hit
+  // the return. The guard already listed `!overlap` for exactly this reason —
+  // a per-part invariant must not be swallowed by the "drawn at the default"
+  // shortcut — and `wrap` simply had to join it.
+  const wrapping = m.occ.filter((o) => o.node.layout?.wrap === true).length;
+  const wrapsEverywhere = wrapping > 0 && wrapping === m.occ.filter((o) => o.node.layout !== undefined).length;
   if (isRoot) {
     // The generator's root default is row/center/center — a root drawn
     // exactly there proposes no layout block.
-    if (direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap) {
+    if (direction === 'row' && justify === 'center' && align === 'center' && !grow && !overlap && wrapping === 0) {
       return undefined;
     }
     out.display = 'flex';
@@ -3004,6 +3017,31 @@ function invertLayout(
   if (align && hasChildren) out.align = align;
   if (grow) out.grow = grow;
   if (overlap) out.overlap = overlap;
+  // `wrap` is a per-part invariant like `overlap`: carried when every
+  // AUTO-LAYOUT occurrence wraps, refused BY NAME when only some do
+  // (layoutByProp's tuple is direction/justify/align and cannot spell it).
+  // The denominator counts occurrences that HAVE auto-layout — counting all of
+  // them blamed `wrap` for a variant whose layoutMode is NONE. It is NOT gated
+  // on hasChildren: a childless wrapping stack is a strange drawing, but
+  // dropping an observed fact because the drawing is strange is the silence
+  // this round exists to remove.
+  if (wrapping > 0) {
+    if (wrapsEverywhere) {
+      out.wrap = true;
+      // A DISTINCT row gap has no layout spelling — `gap` is one value on both
+      // axes in the schema, as it is in Figma when counterAxisSpacing follows.
+      const rowSpacings = new Set(m.occ.map((o) => o.node.layout?.rowSpacing).filter((v) => v !== undefined));
+      if (rowSpacings.size > 0) {
+        ctx.notes.push(
+          `${where}: wrapping stack whose ROW gap (${[...rowSpacings].join(', ')}px) differs from its column gap — carried as layout.wrap with the single \`gap\` channel holding the COLUMN spacing; the distinct row spacing is not carried (the schema's gap is one value on both axes, and CSS row-gap would need its own channel). The wrapped LINES sit at the column gap`,
+        );
+      }
+    } else {
+      ctx.notes.push(
+        `${where}: auto-layout WRAPS in ${wrapping} of ${m.occ.filter((o) => o.node.layout !== undefined).length} auto-layout variant(s) — wrap is a per-part invariant here (layoutByProp carries direction/justify/align only), so it is NOT carried and every variant renders as a single line; split the part or make the wrap uniform`,
+      );
+    }
+  }
   return Object.keys(out).length > 0 ? out : undefined;
 }
 

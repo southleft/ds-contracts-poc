@@ -82,6 +82,25 @@ export function createFigmaMock() {
       this.primaryAxisSizingMode = 'AUTO';
       this.counterAxisSizingMode = 'AUTO';
       this.itemSpacing = 0;
+      // REAL Plugin API defaults, spelled exactly as Figma spells them. The
+      // POLYGON incident (this mock returned REST's 'REGULAR_POLYGON', so the
+      // test agreed with the bug for six dump versions) is why these are
+      // written from the API docs and not from what the dump happens to read:
+      // layoutWrap is 'NO_WRAP' | 'WRAP', counterAxisSpacing is null when it
+      // FOLLOWS itemSpacing, counterAxisAlignContent is 'AUTO' | 'SPACE_BETWEEN'.
+      this._layoutWrap = 'NO_WRAP';
+      // NOT null. `null` is WRITE-ONLY on counterAxisSpacing — the Plugin API
+      // says "Set this property to null to have it sync with itemSpacing. This
+      // will never return null." A read always yields a number, and the SYNC
+      // state reads as a number EQUAL to itemSpacing. The first cut of this
+      // mock defaulted it to null, which made the dump's "following spacing"
+      // branch untestable: `typeof null !== 'number'` passed for a state Figma
+      // cannot produce, so the assertion proved nothing about the real one.
+      // That is the POLYGON incident exactly (this mock returned REST's
+      // 'REGULAR_POLYGON' and the test agreed with the bug for six dump
+      // versions) — in the very field whose comment claims to have learned it.
+      this.counterAxisSpacing = 0;
+      this.counterAxisAlignContent = 'AUTO';
       this.paddingTop = 0;
       this.paddingRight = 0;
       this.paddingBottom = 0;
@@ -163,6 +182,27 @@ export function createFigmaMock() {
 
     resizeWithoutConstraints(w, h) {
       this.resize(w, h);
+    }
+
+    // --- layoutWrap ENFORCES the Plugin API's own precondition --------------
+    // "This property can only be set on layers with layoutMode === 'HORIZONTAL'.
+    // Setting it on layers without this property will throw an Error."
+    // A plain assignable field let core/emit-figma-script.ts write layoutWrap
+    // onto a VERTICAL stack from v15 onward with every gate green — the
+    // contract `layout: { direction: 'column', wrap: true }` is legal CSS and
+    // schema-valid, and it killed the whole generate run on a real canvas.
+    // A mock that accepts what Figma refuses is not a test, it is an alibi.
+    set layoutWrap(value) {
+      if (value === 'WRAP' && this.layoutMode !== 'HORIZONTAL') {
+        throw new Error(
+          `layoutWrap can only be set on layers with layoutMode === "HORIZONTAL" (got "${this.layoutMode}")`,
+        );
+      }
+      this._layoutWrap = value;
+    }
+
+    get layoutWrap() {
+      return this._layoutWrap ?? 'NO_WRAP';
     }
 
     // --- computed auto-layout sizing (see the fidelity note above) ----------

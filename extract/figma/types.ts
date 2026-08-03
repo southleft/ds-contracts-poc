@@ -22,6 +22,12 @@ export interface DumpLayout {
   spacing: number;
   /** Literal padding in CSS order: [top, right, bottom, left]. */
   padding: [number, number, number, number];
+  /** dump v1.12: layoutWrap === 'WRAP'. Absent means a single line. */
+  wrap?: true;
+  /** dump v1.12: counterAxisSpacing, captured ONLY when it differs from
+   *  `spacing` — Figma leaves it null to follow itemSpacing, which is exactly
+   *  what a single CSS `gap` already says. */
+  rowSpacing?: number;
   primarySizing: 'FIXED' | 'AUTO';
   counterSizing: 'FIXED' | 'AUTO';
 }

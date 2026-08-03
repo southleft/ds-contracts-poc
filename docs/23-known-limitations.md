@@ -837,7 +837,7 @@ Its own list of what it cannot yet test, quoted rather than paraphrased:
 54 rows across 6 libraries pin `pctEqual` within tolerance, `cellsCompared`
 exactly, `unresolvedTokenRefs` exactly, and hard-fail if a component stops
 fusing. It renders a real headless Chromium per component (~8–20s each, ~5–6
-minutes total), so it is an **on-demand script**, not one of the 181 evals. CI
+minutes total), so it is an **on-demand script**, not one of the 183 evals. CI
 can call it; `npm run eval` does not.
 
 It also skips any capture config with no committed scorecard — currently

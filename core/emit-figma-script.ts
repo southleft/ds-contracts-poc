@@ -3811,11 +3811,31 @@ const gradientRuntime = (has: boolean): string =>
   }`
     : '';
 
-/** v15 (S4/matrix a.8): flex-wrap → native layoutWrap (auto-layout only). */
-const wrapRuntime = (has: boolean): string =>
+/** v15 (S4/matrix a.8): flex-wrap → native layoutWrap (auto-layout only).
+ *
+ *  HORIZONTAL-ONLY, AND FIGMA THROWS OTHERWISE. The Plugin API states it
+ *  plainly: layoutWrap "can only be set on layers with layoutMode ===
+ *  'HORIZONTAL'. Setting it on layers without this property will throw an
+ *  Error." This line had no guard from v15 until an adversarial probe replayed
+ *  a compiled script and got exactly that throw. `layout: { direction:
+ *  'column', wrap: true }` is legal CSS AND schema-valid (both are independent
+ *  optional fields, and a `layoutByProp` column override merged over a base
+ *  `wrap: true` reaches the same spec), so a contract nobody would call
+ *  malformed KILLED the whole generate run. CSS wraps a column happily; Figma
+ *  has no such thing, so the honest projection is to skip the unsettable field
+ *  and SAY SO rather than crash or pretend it applied. */
+const wrapRuntime = (has: boolean, columnWrap: boolean): string =>
   has
-    ? `
-  if (l.wrap) node.layoutWrap = 'WRAP';`
+    ? `${
+        columnWrap
+          ? `
+  // † layout.wrap on a COLUMN stack is NOT applied — Figma's layoutWrap is
+  // HORIZONTAL-only and setting it on a column THROWS, so the guard below skips
+  // it and the column renders as a single unwrapped stack. CSS wraps a column
+  // happily; the canvas has no such thing.`
+          : ''
+      }
+  if (l.wrap && node.layoutMode === 'HORIZONTAL') node.layoutWrap = 'WRAP';`
     : '';
 
 /** v15 (S4/matrix a.2/a.6/a.9): declared text facts with native fields —
@@ -4117,6 +4137,11 @@ function buildSyncScript(
     dataSome(d, (x) => x.shape !== undefined && (x.lits?.strokeColor !== undefined || x.lits?.strokeWeight !== undefined || x.lits?.strokeSides !== undefined || x.lits?.radius !== undefined)),
   );
   const hasWrap = datas.some((d) => dataSome(d, (x) => x.layout?.wrap === true));
+  // A COLUMN stack carrying `wrap` is schema-valid and legal CSS, and Figma
+  // THROWS on it (layoutWrap is HORIZONTAL-only). Detected statically so the
+  // dropped fact is a `†` receipt in the emitted script — the channel the
+  // dagger census already counts — rather than a silent skip at runtime.
+  const hasColumnWrap = datas.some((d) => dataSome(d, (x) => x.layout?.wrap === true && x.layout?.mode !== 'HORIZONTAL'));
   const hasEffectStack = datas.some((d) => dataSome(d, (x) => x.effectStack !== undefined));
   const hasGradient = datas.some((d) => dataSome(d, (x) => x.gradient !== undefined));
   const hasInsetOverlay = datas.some((d) => dataSome(d, (x) => x.insetOverlay === true));
@@ -4388,7 +4413,7 @@ function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
-  node.counterAxisAlignItems = l.counter;${wrapRuntime(hasWrap)}
+  node.counterAxisAlignItems = l.counter;${wrapRuntime(hasWrap, hasColumnWrap)}
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   if (node.type === 'FRAME') node.fills = [];

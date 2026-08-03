@@ -336,6 +336,76 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log(
     `✔ propose: mock canvas dumped through the embedded dump script → proposal + bounded diff; a base missing "${enumProp.name}" surfaces "+prop ${enumProp.name}" by name`,
   );
+
+  // --- dump v1.12: WRAPPING is READ BACK ------------------------------------
+  // core/emit-figma-script.ts has written `node.layoutWrap = 'WRAP'` from a
+  // contract's `layout.wrap` since v15, and NOTHING read it back — a wrapping
+  // chip row went to the canvas correctly and returned as a single line with no
+  // receipt at all. Zero of 804 committed contracts use `layout.wrap`, which is
+  // exactly why it survived: invisible until an adopter's tag group is the
+  // first thing they try. Proven here against the REAL dump source (the
+  // ui.html block, drift-guarded), not a paraphrase of it.
+  const setNode = markerOf(badge.id);
+  const variantNode = (setNode.children || []).find((c) => c.layoutMode && c.layoutMode !== 'NONE');
+  assert(variantNode, 'the mock Badge set has an auto-layout variant to wrap');
+  assert(
+    variantNode.layoutWrap === 'NO_WRAP',
+    `the mock defaults layoutWrap to the REAL Plugin API default (got ${variantNode.layoutWrap})`,
+  );
+  const noWrap = await runScript(scoped);
+  const layoutOf = (d) => (d.Badge.variants.find((v) => v.layout) || {}).layout;
+  assert(layoutOf(noWrap) && layoutOf(noWrap).wrap === undefined,
+    'a NON-wrapping stack carries no `wrap` key (absence means one line — the key is not written as false)');
+
+  variantNode.layoutWrap = 'WRAP';
+  variantNode.itemSpacing = 4;
+  variantNode.counterAxisSpacing = 12;
+  const wrapped = layoutOf(await runScript(scoped));
+  assert(wrapped.wrap === true, `layoutWrap 'WRAP' is captured as layout.wrap (got ${JSON.stringify(wrapped)})`);
+  assert(wrapped.rowSpacing === 12, `a DISTINCT counterAxisSpacing is captured as rowSpacing (got ${wrapped.rowSpacing})`);
+
+  // THE SYNC STATE READS AS A NUMBER EQUAL TO itemSpacing — it does NOT read as
+  // null. `null` is write-only ("This will never return null"), so an earlier
+  // cut of this pin set null and tested a branch Figma cannot reach: it proved
+  // nothing about the state that actually occurs. This is the real one.
+  variantNode.counterAxisSpacing = variantNode.itemSpacing;
+  const followed = layoutOf(await runScript(scoped));
+  assert(followed.wrap === true && followed.rowSpacing === undefined,
+    `a SYNCED counterAxisSpacing (a number EQUAL to itemSpacing — the state Figma actually returns) invents no rowSpacing fact (got ${followed.rowSpacing})`);
+
+  // The one wrap fact with no vocabulary anywhere is REFUSED BY NAME rather
+  // than silently rendering as packed lines.
+  variantNode.counterAxisAlignContent = 'SPACE_BETWEEN';
+  const distributed = await runScript(scoped);
+  const degradations = distributed._degradations || [];
+  assert(
+    degradations.some((d) => d.code === 'wrap-align-content-unsupported'),
+    `counterAxisAlignContent SPACE_BETWEEN is named as a degradation (got ${degradations.map((d) => d.code).join(', ')})`,
+  );
+  variantNode.counterAxisAlignContent = 'AUTO';
+  variantNode.layoutWrap = 'NO_WRAP';
+
+  // THE CRASH THE MOCK USED TO ABSORB. layoutWrap is HORIZONTAL-only and Figma
+  // THROWS otherwise; `layout: { direction: 'column', wrap: true }` is legal
+  // CSS and schema-valid, so an ordinary contract killed the generate run from
+  // v15 until this round. The mock now enforces the precondition, and
+  // emit-figma-script guards the write.
+  let columnThrew = false;
+  try {
+    variantNode.layoutMode = 'VERTICAL';
+    variantNode.layoutWrap = 'WRAP';
+  } catch {
+    columnThrew = true;
+  }
+  variantNode.layoutMode = 'HORIZONTAL';
+  variantNode.layoutWrap = 'NO_WRAP';
+  assert(columnThrew, 'the mock ENFORCES the API precondition: setting layoutWrap on a VERTICAL stack throws, as Figma does');
+  console.log(
+    "✔ layoutWrap precondition: the mock throws on a VERTICAL stack exactly as Figma does, and emit-figma-script now guards the write (`l.wrap && node.layoutMode === 'HORIZONTAL'`) and leaves a † receipt naming the dropped column wrap — a contract spelling `direction: column, wrap: true` is legal CSS, schema-valid, and used to kill the whole run",
+  );
+  console.log(
+    '✔ dump v1.12 wrap: layoutWrap WRAP → layout.wrap, a DISTINCT counterAxisSpacing → rowSpacing, a SYNCED one (a number EQUAL to itemSpacing — null is write-only and never read back) invents nothing, and counterAxisAlignContent SPACE_BETWEEN is refused BY NAME — the return leg the emitter has been writing to since v15',
+  );
 }
 
 // --- 6. PR dry-run plan ----------------------------------------------------

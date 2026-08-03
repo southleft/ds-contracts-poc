@@ -46,6 +46,7 @@
     "extract:figma:partstate:check": "tsx extract/figma/part-state-check.ts",
     "extract:figma:tooltip:check": "tsx extract/figma/tooltip-check.ts",
     "extract:figma:overlap:check": "tsx extract/figma/overlap-check.ts",
+    "extract:figma:wrap:check": "tsx extract/figma/wrap-check.ts",
     "extract:figma:repeat:check": "tsx extract/figma/repeat-collection-check.ts",
     "extract:figma:theme:check": "tsx extract/figma/theme-mode-check.ts",
     "extract:figma:gauntlet": "tsx extract/figma/gauntlet/census.ts",

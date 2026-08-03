@@ -3144,6 +3144,46 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    id: 'wrapping-survives-the-round-trip',
+    claim: 'C5-extraction',
+    // core/emit-figma-script.ts has written `node.layoutWrap = 'WRAP'` from a
+    // contract's `layout.wrap` since v15, and the dump never read the field
+    // back — so code→design carried wrapping and design→code silently deleted
+    // it, with no degradation and no note. Exactly ONE of 804 committed
+    // contracts uses `layout.wrap` (ds.composite-modal's tags row — the very
+    // archetype), so it was reproducible against a committed artifact all
+    // along; what was missing was a GATE. dump v1.12 reads it; this pins both
+    // legs, including the CENTERED root an adversarial probe caught the first
+    // cut silently dropping.
+    run: () => {
+      const r = run(TSX, ['extract/figma/wrap-check.ts']);
+      if (r.status !== 0) throw new Error(`wrap receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ root proposes layout.wrap: true (the fact the return leg used to delete)',
+        '✔ CSS emits `flex-wrap: wrap` on the root',
+        "✔ the figma script writes layoutWrap 'WRAP' (code→design still carries it)",
+        '✔ the un-carriable ROW gap is a NAMED note (one `gap` covers both axes, as it does in Figma)',
+        '✔ layout.wrap is NOT set (wrap holds in only half the variants — never guessed)',
+        '✔ the mixed-wrap limit is a NAMED note',
+        '✔ no wrap key on a non-wrapping stack',
+        // THE REGRESSION PIN. The first cut of this fix appended the wrap carry
+        // BELOW invertLayout's isRoot early return, so a CENTERED wrapping root
+        // — the motivating case, and the only shape a wrapping root can take,
+        // since layoutWrap is HORIZONTAL-only — produced no layout, no note and
+        // no degradation. The gate certified a leg it never tested.
+        '✔ a CENTERED wrapping root still carries layout.wrap (the early return no longer swallows it)',
+        '✔ and a CENTERED non-wrapping root still proposes NO layout block (the early return is intact)',
+        '✔ a NESTED wrapping part carries layout.wrap',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+      console.log(
+        'wrapping-survives-the-round-trip: layoutWrap is READ BACK (dump v1.12) — uniform wrap carries as layout.wrap and closes the loop through CSS `flex-wrap: wrap` and the canvas script; a MIXED wrap is a per-part invariant that is refused BY NAME rather than resolved by the default variant; a DISTINCT counterAxisSpacing has no schema spelling and is NAMED. The capture half is pinned against the REAL dump source in plugin-engine-check (a falsification probe that deletes the capture fails it).',
+      );
+    },
+  },
+
+  {
     // P21 (overlap collections): negative auto-layout spacing must NEVER
     // mint a plain negative-px gap token (`gap: -8px` is invalid CSS and the
     // overlap silently vanished — the pre-P21 bug). Uniform negative spacing

@@ -1948,7 +1948,7 @@
      Do not edit here: scripts/build-plugin-zip.mjs refuses to package this
      plugin when the block below differs from the repo file. -->
 <script type="text/plain" id="dump-source">
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.11).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.12).
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -1960,7 +1960,13 @@
 //
 //   name / type        node identity ("track", FRAME) — part names come from here
 //   layout             auto-layout: mode/primary/counter (direction/justify/align),
-//                      literal spacing + padding [top,right,bottom,left], sizing modes
+//                      literal spacing + padding [top,right,bottom,left], sizing modes.
+//                      dump v1.12: `wrap` (layoutWrap === 'WRAP') and `rowSpacing`
+//                      (counterAxisSpacing, ONLY when it differs from itemSpacing —
+//                      Figma leaves it null to follow, which is what one CSS `gap`
+//                      already means). The emitter has written layoutWrap from a
+//                      contract's `layout.wrap` since v15 and nothing read it back,
+//                      so a wrapping row returned as a single line with no receipt.
 //   bound              variable bindings: Plugin-API field → variable name
 //                      (slash-form, e.g. paddingLeft: "space/inset-x/sm")
 //   minWidth/minHeight/maxWidth/maxHeight
@@ -2392,6 +2398,29 @@ async function dumpNode(node, nodePath, parent) {
       primarySizing: node.primaryAxisSizingMode,
       counterSizing: node.counterAxisSizingMode,
     };
+    // dump v1.12: WRAPPING. `core/emit-figma-script.ts` has written
+    // `node.layoutWrap = 'WRAP'` from a contract's `layout.wrap` since v15, and
+    // nothing here ever read it back — so a wrapping row went to the canvas
+    // correctly, came back as a single non-wrapping line, and NOTHING said so.
+    // It survived because it is RARE, not absent: exactly ONE of 804 committed
+    // contracts carries layout.wrap (ds.composite-modal's tags row — the very
+    // archetype), so it was reproducible against a committed artifact the whole
+    // time. An earlier draft of this comment claimed ZERO, which was a bad
+    // walker of mine, not a fact.
+    if (node.layoutWrap === 'WRAP') {
+      out.layout.wrap = true;
+      // Figma's counterAxisSpacing is null when it FOLLOWS itemSpacing, which
+      // is the same shape as a single CSS `gap`. Only a distinct row gap is a
+      // separate fact, so only that is captured.
+      if (typeof node.counterAxisSpacing === 'number' && node.counterAxisSpacing !== node.itemSpacing) {
+        out.layout.rowSpacing = node.counterAxisSpacing;
+      }
+      // counterAxisAlignContent has NO dump projection and no contract
+      // vocabulary — say so rather than let the default pass for the drawing.
+      if (node.counterAxisAlignContent === 'SPACE_BETWEEN') {
+        degrade('wrap-align-content-unsupported', nodePath, 'counterAxisAlignContent SPACE_BETWEEN on a WRAPPING stack is not captured (dump v1.12 carries layoutWrap and a distinct counterAxisSpacing only) — the wrapped LINES render packed rather than distributed');
+      }
+    }
   }
   if ('cornerRadius' in node && typeof node.cornerRadius === 'number' && node.cornerRadius !== 0) {
     out.cornerRadius = node.cornerRadius;
@@ -2669,8 +2698,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.11) for design→contract proposal.',
-    dumpVersion: '1.11',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.12) for design→contract proposal.',
+    dumpVersion: '1.12',
   },
 };
 dumps._degradations = degradations;

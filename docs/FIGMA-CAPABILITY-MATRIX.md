@@ -66,7 +66,7 @@ Repo references: [R1] `docs/STYLE-FIDELITY.md` · [R2] `scripts/contract-schema.
 | `display: block \| none` | **approx** — block ≈ vertical AL; none ≈ `visible=false` | `visible` (BOOLEAN) [S5] | whitelisted (`display` in stylesWhen) [R2] | CARRY-WITH-NAMED-LIMIT |
 | `flex-direction: row \| column` | **native** — `layoutMode` [S1] | — | carried | CARRY-BOTH |
 | `flex-direction: *-reverse` | **approx** — no native reverse; compiled child-order reversal per variant (shipped, A15) [R1][R3] | — | carried (VariantLayoutSchema) [R2] | CARRY-WITH-NAMED-LIMIT |
-| `flex-wrap: wrap` | **native** — `layoutWrap: 'WRAP'` [S1] | — | absent | CARRY-BOTH (add — § a.8) |
+| `flex-wrap: wrap` | **native** — `layoutWrap: 'WRAP'` [S1] | `layout.wrap` (dump v1.12) | carried | CARRIED BOTH WAYS — HORIZONTAL only (Figma THROWS on a column; a column wrap is a named `†` drop) |
 | `justify-content: start\|center\|end\|space-between` | **native** — `primaryAxisAlignItems` [S1][S12] | — | carried | CARRY-BOTH |
 | `justify-content: space-around\|space-evenly` | **approx** — no native value; padding+spacing arithmetic | — | absent | CARRY-WITH-NAMED-LIMIT (when observed) |
 | `align-items: start\|center\|end\|stretch` | **native** — `counterAxisAlignItems` + `layoutAlign: STRETCH` [S1] | — | carried | CARRY-BOTH |
@@ -255,9 +255,16 @@ Biggest visual impact first; field evidence cited.
 7. **Image fills** (A5). Field evidence: Phase B Thumbnail read as an invisible
    white box because the image slot placeholder was never a carried channel
    [R4]. `ImagePaint` + `figma.createImage` is native [S4].
-8. **`flex-wrap` + `counterAxisSpacing`** (no A-row — never captured because
-   the vocabulary refused it). Tag groups and chip rows wrap in every target
-   system; native + gap bindable on both axes [S1][S5].
+8. ~~**`flex-wrap` + `counterAxisSpacing`**~~ — **CLOSED (dump v1.12).** The
+   write leg had carried `layoutWrap` since v15; the READ leg never existed, so
+   a wrapping tag row returned as one unwrapped line with no receipt. The dump
+   now captures `wrap`, plus `rowSpacing` when `counterAxisSpacing` DIFFERS from
+   `itemSpacing` (null is write-only in the Plugin API and never read back, so
+   the sync state reads as an equal number). Remaining, and named: a DISTINCT
+   row gap has no schema spelling — one `gap` covers both axes — and
+   `counterAxisAlignContent: SPACE_BETWEEN` is refused by name
+   (`wrap-align-content-unsupported`). Pinned by `extract:figma:wrap:check` and
+   by the capture half in `plugin-engine-check`.
 9. **Text truncation** (`textTruncation`/`maxLines`) — code side already
    whitelists `text-overflow`; the canvas can now say the same thing natively
    [S2].
