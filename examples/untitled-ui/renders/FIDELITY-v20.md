@@ -1,4 +1,4 @@
-# Canvas→code fidelity, v2.0 metric — 2026-08-02 @ HEAD
+# Canvas→code fidelity, v2.0 metric — 2026-08-03 @ HEAD
 
 The SUPERSEDED metric, kept so the v2.1 shift is attributable: this table is scored from the SAME renders in the SAME run as FIDELITY.md, so every difference between the two is the measuring rule and nothing else.
 
@@ -9,11 +9,11 @@ Score = % pixels within tolerance. v2.0 clips the render to the UNION bounding b
 | badge-base | 8 | 95.5 | 0 | 0 | 0 |
 | button-base | 20 | 88.8 | 0 | 0 | 0 |
 | toggle-base | 16 | 98.7 | 0 | 16 | 0 |
-| dropdown-list-item | 12 | 81.5 | 0 | 12 | 0 |
+| dropdown-list-item | 12 | 89.5 | 0 | 12 | 0 |
 | input-field-base | 10 | 85.1 | 0 | 0 | 0 |
 | avatar-group | 12 | 95.5 | 0 | 0 | 0 |
 | tooltip | 28 | 81.1 | 0 | 0 | 0 |
-| slider | 40 | 94.0 | 0 | 0 | 0 |
+| slider | 40 | 96.5 | 0 | 0 | 0 |
 | progress-bar | 55 | 94.9 | 0 | 0 | 0 |
 | progress-circle | 16 | 86.5 | 4 | 0 | 0 |
 | avatar | 162 | 97.6 | 0 | 0 | 0 |
@@ -21,4 +21,4 @@ Score = % pixels within tolerance. v2.0 clips the render to the UNION bounding b
 | avatar-add-button | 6 | 96.6 | 0 | 6 | 0 |
 | button-group-base | 32 | 69.8 | 0 | 0 | 0 |
 | social-button | 108 | 90.2 | 0 | 0 | 0 |
-| **ALL** | 537 | **91.5** | | | |
+| **ALL** | 537 | **91.9** | | | |

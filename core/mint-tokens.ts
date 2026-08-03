@@ -242,7 +242,16 @@ const sharedName = (kind: MintKind, value: string | number): string =>
 type Classified =
   | { kind: 'uniform'; value: string | number }
   | { kind: 'variant'; axis: MintAxis; byValue: Map<string, string | number> }
-  | { kind: 'variant2'; axes: [MintAxis, MintAxis]; byValue: Map<string, string | number>; unwitnessed?: boolean }
+  | {
+      kind: 'variant2';
+      axes: [MintAxis, MintAxis];
+      byValue: Map<string, string | number>;
+      unwitnessed?: boolean;
+      /** Cells the VARIANT SET never realizes, filled from the base observation
+       *  so the pair can carry at all (see the ragged-matrix branch below).
+       *  Named on the binding — never silent. */
+      undrawn?: string[];
+    }
   | { kind: 'variant3'; axes: [MintAxis, MintAxis, MintAxis]; byValue: Map<string, string | number> }
   | { kind: 'none'; reason: string };
 
@@ -251,7 +260,15 @@ type Classified =
 const pairKey = (a: string, b: string) => `${a}.${b}`;
 const comboKey = (values: string[]) => values.join('.');
 
-function classify(obs: MintObservation, allAxes: MintAxis[], nestedPairs: boolean): Classified {
+function classify(
+  obs: MintObservation,
+  allAxes: MintAxis[],
+  nestedPairs: boolean,
+  /** Every axis-value combination the component's variant set ACTUALLY
+   *  realizes. Absent → the ragged-matrix branch stays off and full cartesian
+   *  coverage is required, exactly as before. */
+  realizedCombos?: Array<Record<string, string>>,
+): Classified {
   if (obs.occurrences.length === 0) return { kind: 'none', reason: 'no occurrences observed — nothing minted' };
   const values = obs.occurrences.map((o) => o.value);
   if (values.every((v) => v === values[0])) return { kind: 'uniform', value: values[0] };
@@ -324,21 +341,40 @@ function classify(obs: MintObservation, allAxes: MintAxis[], nestedPairs: boolea
       reason: 'resolved values differ across variants without correlating to any variant axis — nothing minted; bind manually',
     };
   }
+  /** One pair's fit: the observed cells, or null when two observations
+   *  contradict inside a cell (or an occurrence is missing an axis value). */
+  const fitPair = (a: MintAxis, b: MintAxis): Map<string, string | number> | null => {
+    const byValue = new Map<string, string | number>();
+    for (const o of obs.occurrences) {
+      const va = o.axisValues[a.propName];
+      const vb = o.axisValues[b.propName];
+      if (va === undefined || vb === undefined) return null;
+      const key = pairKey(va, vb);
+      const seen = byValue.get(key);
+      if (seen !== undefined && seen !== o.value) return null;
+      byValue.set(key, o.value);
+    }
+    return byValue;
+  };
+  const cellsMissing = (a: MintAxis, b: MintAxis, byValue: Map<string, string | number>): string[] => {
+    const missing: string[] = [];
+    for (const va of a.values) for (const vb of b.values) if (!byValue.has(pairKey(va, vb))) missing.push(pairKey(va, vb));
+    return missing;
+  };
+  // PASS 1 — the FULLY COVERED pairs, exactly as before the ragged branch
+  // existed. This pass must run over EVERY pair before the relaxed one is
+  // tried: an adversarial fuzz found that letting a ragged fit return from
+  // inside a single combined loop lets an earlier-sorting pair that needs a
+  // FABRICATED cell pre-empt a later pair every one of whose cells is
+  // MEASURED. Trading a measured binding for a supplied one on nothing but
+  // axis order is a straight loss, and it silently dropped the saturation
+  // caveat with it.
   for (let i = 0; i < axes.length; i++) {
     for (let j = i + 1; j < axes.length; j++) {
       const [a, b] = [axes[i], axes[j]];
-      const byValue = new Map<string, string | number>();
-      let fits = true;
-      for (const o of obs.occurrences) {
-        const va = o.axisValues[a.propName];
-        const vb = o.axisValues[b.propName];
-        if (va === undefined || vb === undefined) { fits = false; break; }
-        const key = pairKey(va, vb);
-        const seen = byValue.get(key);
-        if (seen !== undefined && seen !== o.value) { fits = false; break; }
-        byValue.set(key, o.value);
-      }
-      if (fits) {
+      const byValue = fitPair(a, b);
+      if (byValue !== null) {
+        const missing = cellsMissing(a, b, byValue);
         // GAP-CLOSING ROUND 10 — THE SATURATION CAVEAT (revised, and the
         // revision is the point). A pair spans |a| x |b| cells; when the
         // observation count does not EXCEED that, every cell holds at most
@@ -356,15 +392,102 @@ function classify(obs: MintObservation, allAxes: MintAxis[], nestedPairs: boolea
         // does neither.
         const cells = a.values.length * b.values.length;
         const unwitnessed = obs.occurrences.length <= cells;
-        const missing: string[] = [];
-        for (const va of a.values) for (const vb of b.values) if (!byValue.has(pairKey(va, vb))) missing.push(pairKey(va, vb));
         if (missing.length === 0) return { kind: 'variant2', axes: [a, b], byValue, unwitnessed };
-        // Sparse fill (presence-shaped channels): unobserved combinations
-        // take the declared vacuous value — see the single-axis case.
+        // Sparse fill (presence-shaped channels): unobserved combinations take
+        // the declared vacuous value — see the single-axis case. It belongs in
+        // THIS pass, not the ragged one: a vacuous value draws nothing, so it
+        // fabricates no ink and is strictly more honest than a supplied
+        // measurement.
         if (obs.sparse !== undefined && byValue.size > 0) {
           for (const key of missing) byValue.set(key, obs.sparse);
           return { kind: 'variant2', axes: [a, b], byValue, unwitnessed };
         }
+      }
+    }
+  }
+  // PASS 2 — THE RAGGED MATRIX. Full cartesian coverage is required because the
+  // emitters expand a substituted ref over EVERY declared enum value and
+  // `checkToken` (emit-react.ts) makes a missing leaf a hard error, so a hole
+  // would refuse the whole contract. But a Figma variant set is frequently NOT
+  // a rectangle: Untitled UI's Slider is a RANGE control, so only
+  // `rightControl > leftControl` is drawn (10 of 16 cells), _Dropdown list item
+  // never draws icon+checkbox together (3 of 4), and Avatar realizes 162 of 216
+  // — 3 of the kit's 14 multi-axis sets. Those cells are not missing data; they
+  // are combinations the design does not have.
+  //
+  // MEASURED COST OF REFUSING THEM (Slider `Progress`/`Progress line` width, 40
+  // variants): the pair leftControl x rightControl fits all ten drawn cells
+  // exactly, but six unrealized cells sank it — so the channel fell to the
+  // one-axis base-slice projection, which pinned leftControl at 0 and asserted
+  // width by rightControl alone. That drew 320px where the canvas draws 80px in
+  // 24 of 40 variants, overrunning the 320px track by up to 248px of ink
+  // OUTSIDE the component box. The projection's own note claimed off-slice
+  // combinations "keep the refusal"; the emitted per-value map applied
+  // unconditionally, so the receipt was false as well as the geometry.
+  //
+  // SECOND PASS, NOT A BRANCH INSIDE THE FIRST. An adversarial fuzz over
+  // a(2) x b(2) x c(3) found that relaxing coverage inline lets an
+  // earlier-sorting pair that needs a FABRICATED cell pre-empt a later pair
+  // whose every cell is MEASURED — a straight loss decided by nothing but axis
+  // order. Every fully-covered pair is therefore tried first, and this pass
+  // runs only when none fits.
+  //
+  // Strict by default: without `realizedCombos` the caller keeps the old
+  // full-coverage rule, and a single combination missing an axis value abandons
+  // the pair rather than guessing the matrix.
+  if (realizedCombos !== undefined) {
+    for (let i = 0; i < axes.length; i++) {
+      for (let j = i + 1; j < axes.length; j++) {
+        const [a, b] = [axes[i], axes[j]];
+        const byValue = fitPair(a, b);
+        if (byValue === null || byValue.size === 0) continue;
+        const missing = cellsMissing(a, b, byValue);
+        if (missing.length === 0) continue; // pass 1 already returned it
+        const realized = new Set<string>();
+        let judgeable = true;
+        for (const c of realizedCombos) {
+          const va = c[a.propName];
+          const vb = c[b.propName];
+          if (va === undefined || vb === undefined) { judgeable = false; break; }
+          realized.add(pairKey(va, vb));
+        }
+        // EVERY hole must be unrealized. One genuinely-drawn-but-unobserved
+        // cell means the observation really is incomplete, and that keeps the
+        // refusal — the dangling-ref protection is relaxed ONLY for cells the
+        // variant set proves cannot occur.
+        if (!judgeable || !missing.every((k) => !realized.has(k))) continue;
+        // THE FILL VALUE IS THE BASE COMBINATION, NOT `occurrences[0]`. Those
+        // differ: occurrences[0] is whichever variant the DUMP happened to list
+        // first, so a designer reordering the variant set would silently
+        // rewrite these token values — probed, and it moved Slider's supplied
+        // width from 80px to 320px, which is the overrun this change exists to
+        // remove. Ordering every occurrence by its axis values' DECLARED index
+        // makes the choice a function of the contract's own vocabulary and
+        // nothing else. (The all-first combination may itself be undrawn — a
+        // ragged matrix is exactly where that happens — so this takes the
+        // smallest combination actually OBSERVED, never a fabricated one.)
+        const rank = (o: MintOccurrence): string =>
+          allAxes
+            .map((ax) => {
+              const idx = ax.values.indexOf(o.axisValues[ax.propName] ?? '');
+              return String(idx < 0 ? ax.values.length : idx).padStart(4, '0');
+            })
+            .join('.');
+        const base = [...obs.occurrences].sort((x, y) => (rank(x) < rank(y) ? -1 : rank(x) > rank(y) ? 1 : 0))[0].value;
+        for (const key of missing) byValue.set(key, base);
+        const cells = a.values.length * b.values.length;
+        // Saturation is judged against the cells that can actually HOLD an
+        // observation. Counting the supplied cells in the denominator
+        // under-reported saturation (a 4-observation/6-cell pair stopped
+        // warning at all once two cells were filled).
+        const drawnCells = cells - missing.length;
+        return {
+          kind: 'variant2',
+          axes: [a, b],
+          byValue,
+          unwitnessed: obs.occurrences.length <= drawnCells,
+          undrawn: missing,
+        };
       }
     }
   }
@@ -435,6 +558,13 @@ export interface MintOptions {
    *  other axis. `extract/computed`'s `applyMintToContract` can; the design
    *  path's direct `part.tokens` write cannot. */
   nestedPairs?: boolean;
+  /** Every axis-value combination the component's variant set REALIZES, one
+   *  record per variant. Supplying it lets a two-axis fit survive holes that
+   *  the variant set proves cannot occur (a RAGGED matrix — a range slider
+   *  draws only `right > left`); the unrealized cells fill from the base
+   *  observation and are named on the binding. Omit it and full cartesian
+   *  coverage is required, exactly as before. */
+  realizedCombos?: Array<Record<string, string>>;
 }
 
 export function mintTokens(
@@ -444,7 +574,9 @@ export function mintTokens(
   opts?: MintOptions,
 ): MintResult {
   const comp = sanitizeSegment(component);
-  const classified = observations.map((o) => classify(o, axes, opts?.nestedPairs === true));
+  const classified = observations.map((o) =>
+    classify(o, axes, opts?.nestedPairs === true, opts?.realizedCombos),
+  );
 
   // Dedupe count: identical (kind, value) across UNIFORM usage sites.
   const siteCount = new Map<string, number>();
@@ -523,31 +655,73 @@ export function mintTokens(
           return !hasDescendants(`${groupBase}.${key}`);
         });
       if (!compatible) continue;
+      // A ragged-matrix fill is not a usage SITE — no variant renders it. Say
+      // so on the leaf, so a reader renaming these tokens against a real
+      // system can see which cells the design never drew.
+      const undrawnKeys = new Set(c.kind === 'variant2' ? (c.undrawn ?? []) : []);
       for (const [key, value] of c.byValue) {
-        claim(`${groupBase}.${key}`, obs.kind, value, `${site} (${siteSuffix(key)})`);
+        claim(
+          `${groupBase}.${key}`,
+          obs.kind,
+          value,
+          undrawnKeys.has(key)
+            ? `${site} (${siteSuffix(key)} — NOT DRAWN in the variant set; base value supplied so the pair can carry)`
+            : `${site} (${siteSuffix(key)})`,
+        );
       }
       const cells2 =
         c.kind === 'variant2' ? c.axes[0].values.length * c.axes[1].values.length : 0;
+      // Both caveats can apply to one binding; they are different facts, so
+      // they are both said rather than one shadowing the other.
+      const caveats: string[] = [];
+      const undrawnCount = c.kind === 'variant2' ? (c.undrawn?.length ?? 0) : 0;
+      if (c.kind === 'variant2' && c.undrawn !== undefined && undrawnCount > 0) {
+        const drawn = cells2 - undrawnCount;
+        const supplied = c.byValue.get(c.undrawn[0])!;
+        caveats.push(
+          `the pair "${axisProps[0]}" x "${axisProps[1]}" is RAGGED — the variant set draws ${drawn} of its ${cells2} cell(s), ` +
+            `and each of those ${drawn} is a measured observation. The ${undrawnCount} cell(s) the set never draws ` +
+            `(${c.undrawn.map((k) => siteSuffix(k)).join('; ')}) carry ${formatValue(obs.kind, supplied)} — the value of the ` +
+            'lowest DECLARED axis combination that is drawn — so the substituted ref resolves at every combination the ' +
+            'prop types allow. Those cells are SUPPLIED, not measured. NOTHING IN THE DESIGN DRAWS THEM, but the ' +
+            'generated component still RENDERS them if it is called with that prop combination (the emitted prop types ' +
+            'permit every combination; the Figma variant set does not have every combination). Give them a reviewed ' +
+            'value or constrain the props — the drawn cells are the contract.',
+        );
+      }
+      if (c.kind === 'variant2' && c.unwitnessed) {
+        // Saturation is a statement about the DRAWN evidence, so its
+        // denominator and its histogram both exclude the supplied cells — the
+        // fill would otherwise manufacture the very repetition this sentence
+        // offers the reader as a sign of structure.
+        const drawnValues =
+          c.undrawn === undefined || undrawnCount === 0
+            ? [...c.byValue.values()]
+            : [...c.byValue.entries()].filter(([k]) => !c.undrawn!.includes(k)).map(([, v]) => v);
+        const denom = cells2 - undrawnCount;
+        caveats.push(
+          // "every value carried here is measured" would CONTRADICT the ragged
+          // sentence above, which just said some are supplied. Say it only when
+          // it is true.
+          `${undrawnCount > 0 ? 'every DRAWN cell here is measured' : 'every value carried here is measured'}` +
+            `, but the pair "${axisProps[0]}" x "${axisProps[1]}" is SATURATED ` +
+            `(${obs.occurrences.length} observation(s) over ${denom} drawn cell(s) — at most one per cell, so ANY values would fit): ` +
+            'the per-cell values reproduce the drawing exactly, but the CORRELATION is unwitnessed and may be drift rather than intent — review before treating it as a rule. ' +
+            // The distinct-value count is the reviewer's shortcut. An
+            // arbitrary assignment over N cells tends toward N distinct
+            // values; heavy repetition is structure the fit did not have
+            // to invent. It is a HINT, deliberately not a gate: the engine
+            // does not get to decide intent from a histogram, it just
+            // hands the reader the number it already computed.
+            `Values are ${new Set(drawnValues.map((v) => formatValue(obs.kind, v))).size} distinct over ${denom} drawn cell(s)` +
+            `${new Set(drawnValues).size < denom ? ' — the repetition across cells is structure, which an arbitrary assignment would not show' : ' — one distinct value per cell, which is what uncorrelated drift looks like'}`,
+        );
+      }
       return {
         nodePath: obs.nodePath,
         cssProperty: obs.cssProperty,
         ref: `{${groupBase}.${axisProps.map((p) => `{${p}}`).join('.')}}`,
-        ...(c.kind === 'variant2' && c.unwitnessed
-          ? {
-              caveat:
-                `every value carried here is measured, but the pair "${axisProps[0]}" x "${axisProps[1]}" is SATURATED ` +
-                `(${obs.occurrences.length} observation(s) over ${cells2} cell(s) — at most one per cell, so ANY values would fit): ` +
-                'the per-cell values reproduce the drawing exactly, but the CORRELATION is unwitnessed and may be drift rather than intent — review before treating it as a rule. ' +
-                // The distinct-value count is the reviewer's shortcut. An
-                // arbitrary assignment over N cells tends toward N distinct
-                // values; heavy repetition is structure the fit did not have
-                // to invent. It is a HINT, deliberately not a gate: the engine
-                // does not get to decide intent from a histogram, it just
-                // hands the reader the number it already computed.
-                `Values are ${new Set([...c.byValue.values()].map((v) => formatValue(obs.kind, v))).size} distinct over ${cells2} cell(s)` +
-                `${new Set([...c.byValue.values()]).size < cells2 ? ' — the repetition across cells is structure, which an arbitrary assignment would not show' : ' — one distinct value per cell, which is what uncorrelated drift looks like'}`,
-            }
-          : {}),
+        ...(caveats.length > 0 ? { caveat: caveats.join(' ALSO: ') } : {}),
       };
     }
   });

@@ -43,7 +43,6 @@
   display: flex;
   top: var(--imported-shared-size-8);
   height: var(--imported-shared-size-8);
-  width: 80px;
   position: absolute;
 }
 
@@ -111,20 +110,68 @@
   left: var(--imported-slider-progress-left-false-75);
 }
 
-.rightControl-25 .Progress {
-  width: 80px;
+.rightControl-25.leftControl-0 .Progress {
+  width: var(--imported-slider-progress-width-25-0);
 }
 
-.rightControl-50 .Progress {
-  width: 160px;
+.rightControl-25.leftControl-25 .Progress {
+  width: var(--imported-slider-progress-width-25-25);
 }
 
-.rightControl-75 .Progress {
-  width: 240px;
+.rightControl-25.leftControl-50 .Progress {
+  width: var(--imported-slider-progress-width-25-50);
 }
 
-.rightControl-100 .Progress {
-  width: 320px;
+.rightControl-25.leftControl-75 .Progress {
+  width: var(--imported-slider-progress-width-25-75);
+}
+
+.rightControl-50.leftControl-0 .Progress {
+  width: var(--imported-slider-progress-width-50-0);
+}
+
+.rightControl-50.leftControl-25 .Progress {
+  width: var(--imported-slider-progress-width-50-25);
+}
+
+.rightControl-50.leftControl-50 .Progress {
+  width: var(--imported-slider-progress-width-50-50);
+}
+
+.rightControl-50.leftControl-75 .Progress {
+  width: var(--imported-slider-progress-width-50-75);
+}
+
+.rightControl-75.leftControl-0 .Progress {
+  width: var(--imported-slider-progress-width-75-0);
+}
+
+.rightControl-75.leftControl-25 .Progress {
+  width: var(--imported-slider-progress-width-75-25);
+}
+
+.rightControl-75.leftControl-50 .Progress {
+  width: var(--imported-slider-progress-width-75-50);
+}
+
+.rightControl-75.leftControl-75 .Progress {
+  width: var(--imported-slider-progress-width-75-75);
+}
+
+.rightControl-100.leftControl-0 .Progress {
+  width: var(--imported-slider-progress-width-100-0);
+}
+
+.rightControl-100.leftControl-25 .Progress {
+  width: var(--imported-slider-progress-width-100-25);
+}
+
+.rightControl-100.leftControl-50 .Progress {
+  width: var(--imported-slider-progress-width-100-50);
+}
+
+.rightControl-100.leftControl-75 .Progress {
+  width: var(--imported-slider-progress-width-100-75);
 }
 
 .progressLine {
@@ -133,24 +180,71 @@
   height: var(--imported-shared-size-8);
   left: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
-  width: 80px;
   position: absolute;
 }
 
-.rightControl-25 .progressLine {
-  width: 80px;
+.rightControl-25.leftControl-0 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-25-0);
 }
 
-.rightControl-50 .progressLine {
-  width: 160px;
+.rightControl-25.leftControl-25 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-25-25);
 }
 
-.rightControl-75 .progressLine {
-  width: 240px;
+.rightControl-25.leftControl-50 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-25-50);
 }
 
-.rightControl-100 .progressLine {
-  width: 320px;
+.rightControl-25.leftControl-75 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-25-75);
+}
+
+.rightControl-50.leftControl-0 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-50-0);
+}
+
+.rightControl-50.leftControl-25 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-50-25);
+}
+
+.rightControl-50.leftControl-50 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-50-50);
+}
+
+.rightControl-50.leftControl-75 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-50-75);
+}
+
+.rightControl-75.leftControl-0 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-75-0);
+}
+
+.rightControl-75.leftControl-25 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-75-25);
+}
+
+.rightControl-75.leftControl-50 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-75-50);
+}
+
+.rightControl-75.leftControl-75 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-75-75);
+}
+
+.rightControl-100.leftControl-0 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-100-0);
+}
+
+.rightControl-100.leftControl-25 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-100-25);
+}
+
+.rightControl-100.leftControl-50 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-100-50);
+}
+
+.rightControl-100.leftControl-75 .progressLine {
+  width: var(--imported-slider-progress-progress-line-width-100-75);
 }
 
 .leftControl {

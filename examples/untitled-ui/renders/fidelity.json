@@ -368,8 +368,8 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_false_state_disabled",
-  "score": 79.09,
-  "score20": 56.16
+  "score": 95.87,
+  "score20": 100
  },
  {
   "set": "dropdown-list-item",
@@ -392,8 +392,8 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_false_shortcut_true_state_disabled",
-  "score": 94.42,
-  "score20": 96.71
+  "score": 98.9,
+  "score20": 100
  },
  {
   "set": "dropdown-list-item",
@@ -416,8 +416,8 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_false_state_disabled",
-  "score": 87.35,
-  "score20": 78.65
+  "score": 95.76,
+  "score20": 99.25
  },
  {
   "set": "dropdown-list-item",
@@ -440,8 +440,8 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_false_checkbox_true_shortcut_true_state_disabled",
-  "score": 95.71,
-  "score20": 96.94
+  "score": 98.58,
+  "score20": 100
  },
  {
   "set": "dropdown-list-item",
@@ -464,8 +464,8 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_false_state_disabled",
-  "score": 85.27,
-  "score20": 72.09
+  "score": 93.68,
+  "score20": 93.45
  },
  {
   "set": "dropdown-list-item",
@@ -488,8 +488,8 @@
  {
   "set": "dropdown-list-item",
   "variant": "icon_true_checkbox_false_shortcut_true_state_disabled",
-  "score": 94.87,
-  "score20": 95.9
+  "score": 97.74,
+  "score20": 99.1
  },
  {
   "set": "dropdown-list-item",
@@ -525,7 +525,7 @@
   "set": "input-field-base",
   "variant": "type_leading_dropdown_destructive_true",
   "score": 91.39,
-  "score20": 83.44
+  "score20": 83.43
  },
  {
   "set": "input-field-base",
@@ -554,7 +554,7 @@
  {
   "set": "input-field-base",
   "variant": "type_trailing_dropdown_destructive_false",
-  "score": 92.37,
+  "score": 92.38,
   "score20": 86.73
  },
  {
@@ -602,7 +602,7 @@
  {
   "set": "avatar-group",
   "variant": "size_sm_add_user_button_true_more_users_false",
-  "score": 84.8,
+  "score": 84.79,
   "score20": 95.61
  },
  {
@@ -812,20 +812,20 @@
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_100_left_control_25_",
-  "score": 92.86,
-  "score20": 90.34
+  "score": 95.07,
+  "score20": 96.12
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_100_left_control_50_",
-  "score": 92.87,
-  "score20": 90.72
+  "score": 95.09,
+  "score20": 96.69
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_100_left_control_75_",
-  "score": 92.88,
-  "score20": 93.39
+  "score": 95.08,
+  "score20": 97.41
  },
  {
   "set": "slider",
@@ -842,8 +842,8 @@
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_50_left_control_25_",
-  "score": 90.41,
-  "score20": 93.98
+  "score": 94.91,
+  "score20": 97.03
  },
  {
   "set": "slider",
@@ -854,14 +854,14 @@
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_75_left_control_25_",
-  "score": 91.56,
-  "score20": 92.61
+  "score": 94.94,
+  "score20": 96.1
  },
  {
   "set": "slider",
   "variant": "label_bottom_floating_right_control_75_left_control_50_",
-  "score": 91.97,
-  "score20": 92.05
+  "score": 94.96,
+  "score20": 97.14
  },
  {
   "set": "slider",
@@ -872,20 +872,20 @@
  {
   "set": "slider",
   "variant": "label_bottom_right_control_100_left_control_25_",
-  "score": 92.94,
-  "score20": 90.28
+  "score": 95.14,
+  "score20": 93.25
  },
  {
   "set": "slider",
   "variant": "label_bottom_right_control_100_left_control_50_",
-  "score": 92.79,
-  "score20": 90.65
+  "score": 96.05,
+  "score20": 94.56
  },
  {
   "set": "slider",
   "variant": "label_bottom_right_control_100_left_control_75_",
-  "score": 92.66,
-  "score20": 91.3
+  "score": 96.92,
+  "score20": 95.8
  },
  {
   "set": "slider",
@@ -902,8 +902,8 @@
  {
   "set": "slider",
   "variant": "label_bottom_right_control_50_left_control_25_",
-  "score": 91.51,
-  "score20": 91.34
+  "score": 97.4,
+  "score20": 95.74
  },
  {
   "set": "slider",
@@ -914,14 +914,14 @@
  {
   "set": "slider",
   "variant": "label_bottom_right_control_75_left_control_25_",
-  "score": 91.67,
-  "score20": 92.38
+  "score": 96.53,
+  "score20": 94.71
  },
  {
   "set": "slider",
   "variant": "label_bottom_right_control_75_left_control_50_",
-  "score": 92.02,
-  "score20": 89.55
+  "score": 97.44,
+  "score20": 95.89
  },
  {
   "set": "slider",
@@ -932,20 +932,20 @@
  {
   "set": "slider",
   "variant": "label_false_right_control_100_left_control_25_",
-  "score": 89.25,
-  "score20": 96.4
+  "score": 92.31,
+  "score20": 99.73
  },
  {
   "set": "slider",
   "variant": "label_false_right_control_100_left_control_50_",
-  "score": 87.64,
-  "score20": 95.44
+  "score": 92.32,
+  "score20": 99.76
  },
  {
   "set": "slider",
   "variant": "label_false_right_control_100_left_control_75_",
-  "score": 86.56,
-  "score20": 95.51
+  "score": 92.32,
+  "score20": 99.7
  },
  {
   "set": "slider",
@@ -962,8 +962,8 @@
  {
   "set": "slider",
   "variant": "label_false_right_control_50_left_control_25_",
-  "score": 84.54,
-  "score20": 95.35
+  "score": 92.48,
+  "score20": 99.7
  },
  {
   "set": "slider",
@@ -974,14 +974,14 @@
  {
   "set": "slider",
   "variant": "label_false_right_control_75_left_control_25_",
-  "score": 85.75,
-  "score20": 95.59
+  "score": 92.47,
+  "score20": 99.7
  },
  {
   "set": "slider",
   "variant": "label_false_right_control_75_left_control_50_",
-  "score": 84.97,
-  "score20": 94.71
+  "score": 92.47,
+  "score20": 99.69
  },
  {
   "set": "slider",
@@ -992,25 +992,25 @@
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_100_left_control_25_",
-  "score": 81.17,
-  "score20": 88.49
+  "score": 79.67,
+  "score20": 92.55
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_100_left_control_50_",
-  "score": 83.1,
-  "score20": 89.04
+  "score": 80.36,
+  "score20": 94.14
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_100_left_control_75_",
-  "score": 84.58,
-  "score20": 92.79
+  "score": 81.15,
+  "score20": 95.9
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_25_left_control_0_",
-  "score": 82.13,
+  "score": 82.14,
   "score20": 96.33
  },
  {
@@ -1022,8 +1022,8 @@
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_50_left_control_25_",
-  "score": 79.73,
-  "score20": 92.01
+  "score": 80.62,
+  "score20": 95.84
  },
  {
   "set": "slider",
@@ -1034,14 +1034,14 @@
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_75_left_control_25_",
-  "score": 79.99,
-  "score20": 89.91
+  "score": 79.93,
+  "score20": 94.59
  },
  {
   "set": "slider",
   "variant": "label_top_floating_right_control_75_left_control_50_",
-  "score": 82.03,
-  "score20": 91.01
+  "score": 80.68,
+  "score20": 95.91
  },
  {
   "set": "progress-bar",
@@ -3002,8 +3002,8 @@
  {
   "set": "social-button",
   "variant": "social_apple_supporting_text_true_theme_brand_state_default",
-  "score": 90.06,
-  "score20": 87.59
+  "score": 90.03,
+  "score20": 87.62
  },
  {
   "set": "social-button",
@@ -3062,8 +3062,8 @@
  {
   "set": "social-button",
   "variant": "social_dribbble_supporting_text_false_theme_brand_state_focused",
-  "score": 94.36,
-  "score20": 98.76
+  "score": 94.49,
+  "score20": 98.77
  },
  {
   "set": "social-button",
@@ -3164,7 +3164,7 @@
  {
   "set": "social-button",
   "variant": "social_facebook_supporting_text_false_theme_brand_state_default",
-  "score": 92.56,
+  "score": 92.5,
   "score20": 98.41
  },
  {
@@ -3279,7 +3279,7 @@
   "set": "social-button",
   "variant": "social_figma_supporting_text_false_theme_brand_state_focused",
   "score": 97.48,
-  "score20": 95.82
+  "score20": 95.81
  },
  {
   "set": "social-button",
@@ -3326,7 +3326,7 @@
  {
   "set": "social-button",
   "variant": "social_figma_supporting_text_true_theme_brand_state_default",
-  "score": 90.6,
+  "score": 90.61,
   "score20": 87.08
  },
  {
@@ -3363,7 +3363,7 @@
   "set": "social-button",
   "variant": "social_figma_supporting_text_true_theme_color_with_brand_state_default",
   "score": 91.94,
-  "score20": 84.45
+  "score20": 84.47
  },
  {
   "set": "social-button",
@@ -3489,13 +3489,13 @@
   "set": "social-button",
   "variant": "social_x_supporting_text_false_theme_brand_state_default",
   "score": 91.31,
-  "score20": 90.71
+  "score20": 90.7
  },
  {
   "set": "social-button",
   "variant": "social_x_supporting_text_false_theme_brand_state_focused",
-  "score": 94.88,
-  "score20": 92.13
+  "score": 94.79,
+  "score20": 92.14
  },
  {
   "set": "social-button",
@@ -3548,8 +3548,8 @@
  {
   "set": "social-button",
   "variant": "social_x_supporting_text_true_theme_brand_state_focused",
-  "score": 94.8,
-  "score20": 89.78
+  "score": 94.77,
+  "score20": 89.81
  },
  {
   "set": "social-button",

@@ -120,32 +120,11 @@
               "tokens": {
                 "background-color": "{imported.shared.color-7f56d9}",
                 "border-radius": "{imported.slider.progress-progress-line.border-radius}",
+                "width": "{imported.slider.progress-progress-line.width.{rightControl}.{leftControl}}",
                 "height": "{imported.shared.size-8}",
                 "left": "{imported.shared.size-0}",
                 "top": "{imported.shared.size-0}"
-              },
-              "literals": {
-                "width": "80px"
-              },
-              "literalsByProp": [
-                {
-                  "prop": "rightControl",
-                  "map": {
-                    "25": {
-                      "width": "80px"
-                    },
-                    "50": {
-                      "width": "160px"
-                    },
-                    "75": {
-                      "width": "240px"
-                    },
-                    "100": {
-                      "width": "320px"
-                    }
-                  }
-                }
-              ]
+              }
             },
             "leftControl": {
               "declared": {
@@ -423,30 +402,9 @@
           "tokens": {
             "left": "{imported.slider.progress.left.{label}.{leftControl}}",
             "top": "{imported.shared.size-8}",
+            "width": "{imported.slider.progress.width.{rightControl}.{leftControl}}",
             "height": "{imported.shared.size-8}"
-          },
-          "literals": {
-            "width": "80px"
-          },
-          "literalsByProp": [
-            {
-              "prop": "rightControl",
-              "map": {
-                "25": {
-                  "width": "80px"
-                },
-                "50": {
-                  "width": "160px"
-                },
-                "75": {
-                  "width": "240px"
-                },
-                "100": {
-                  "width": "320px"
-                }
-              }
-            }
-          ]
+          }
         }
       },
       "declared": {

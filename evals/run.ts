@@ -5312,14 +5312,19 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       for (const want of [
         '✔ GATE 1 — the plugin ACCEPTS the paste (30 contracts)',
         '✔ GATE 2 — generate plans without refusal',
-        'the collection plans ≥900 variables (990)',
+        // 990 -> 1026 when the RAGGED-MATRIX pass landed (core/mint-tokens.ts):
+        // Slider's Progress/Progress line width and _Dropdown list item's root
+        // gap stopped being refused and now mint 16+16+4 leaves. The exact
+        // number is pinned, not just the >=900 floor, so a channel silently
+        // ceasing to mint is a failure and not a quiet pass.
+        'the collection plans ≥900 variables (1026)',
         'genuinely DIFFER between Light and Dark (43)',
         '✔ THE PASTE DOOR IS OPEN for both kits',
       ]) {
         if (!check.out.includes(want)) throw new Error(`paste-door-check missing receipt: ${want}\n${check.out}`);
       }
       console.log(
-        'paste-door-open: the developer path (contract → CLI bundle → paste → variable collection + component sets) runs END TO END through the REAL referee, with no bypass, for BOTH a Figma Community kit that publishes ZERO variables (Untitled UI — 30 contracts, 990 minted variables, 17 icon assets incl. the per-variant {platform} glyph) and a kit that publishes real ones (Eventz — 17 contracts, 112 variables, 43 genuinely differing between Light and Dark). LEDGER §3.4 recorded this door SHUT for two rounds.',
+        'paste-door-open: the developer path (contract → CLI bundle → paste → variable collection + component sets) runs END TO END through the REAL referee, with no bypass, for BOTH a Figma Community kit that publishes ZERO variables (Untitled UI — 30 contracts, 1026 minted variables, 17 icon assets incl. the per-variant {platform} glyph) and a kit that publishes real ones (Eventz — 17 contracts, 112 variables, 43 genuinely differing between Light and Dark). LEDGER §3.4 recorded this door SHUT for two rounds.',
       );
     },
   },

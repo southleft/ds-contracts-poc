@@ -173,6 +173,7 @@
         "height": "fit-content"
       },
       "tokens": {
+        "gap": "{imported.dropdown-list-item.root.gap.{icon}.{checkbox}}",
         "padding-inline": "{imported.dropdown-list-item.root.padding-inline}",
         "padding-block": "{imported.dropdown-list-item.root.padding-block}",
         "width": "{imported.dropdown-list-item.root.width}"

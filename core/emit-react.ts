@@ -1953,8 +1953,13 @@ export function generateCss(contract: Contract, tokenInventory: Set<string>, err
         // ROUND 10: N placeholders → the cartesian of their values as a
         // COMPOUND ancestor selector (every enum class rides the root), the
         // same expansion the root's own multi-placeholder tokens take. A
-        // combination whose leaf is missing is skipped by checkToken, so a
-        // sparse cartesian never emits a dangling var().
+        // combination whose leaf is missing is REFUSED BY NAME — `checkToken`
+        // pushes a hard error and returns false, so the `continue` below only
+        // stops this one rule from being written; the contract still fails.
+        // (This comment used to say the combination was merely "skipped", which
+        // read as though a sparse cartesian were tolerated. It is not, and that
+        // is the whole reason `mintTokens` must supply a leaf for EVERY
+        // declared combination — see the ragged-matrix pass there.)
         for (const combo of enumCombos(phs, enums)) {
           let resolved = refPath;
           for (const [ph, value] of combo) resolved = resolved.replaceAll(`{${ph}}`, value);

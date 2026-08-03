@@ -25,7 +25,7 @@ import { ContractSchema, type Contract } from '../scripts/contract-schema.js';
 import type { DumpNode, DumpSet } from '../extract/figma/types.js';
 import { loadTokenCorpus } from '../extract/figma/tokens.js';
 import { proposeFromDump } from './propose-figma.js';
-import { MINT_NAMESPACE, mintedTokenCss } from './mint-tokens.js';
+import { MINT_NAMESPACE, mintTokens, mintedTokenCss } from './mint-tokens.js';
 import { emitReact } from './emit-react.js';
 import { emitHtml } from './emit-html.js';
 import { tokenInventoryFromJson } from './tokens.js';
@@ -227,6 +227,117 @@ check(
   'mintedTokenCss carries every literal the bindings resolve to',
   entries.every((e) => cssVars.includes(`--${e.ref.slice(1, -1).split('.').join('-')}: ${e.value};`)),
 );
+
+// ---------------------------------------------------------------------------
+// THE RAGGED MATRIX (mintTokens `realizedCombos`)
+// ---------------------------------------------------------------------------
+//
+// A Figma variant set is often NOT a rectangle. Untitled UI's Slider is a RANGE
+// control, so only `rightControl > leftControl` is drawn — 10 of 16 cells — and
+// the two-axis fit used to require the full cartesian, so the channel collapsed
+// to a ONE-axis projection that drew 320px where the canvas draws 80px in 24 of
+// 40 variants (248px of ink outside a 320px track). This pins the three things
+// that make the relaxation safe rather than merely permissive.
+{
+  const axes = [
+    { propName: 'left', values: ['0', '25', '50'] },
+    { propName: 'right', values: ['25', '50', '75'] },
+  ];
+  // A triangular matrix: right > left. (0,25) (0,50) (0,75) (25,50) (25,75)
+  // (50,75) are drawn; the other three cells cannot exist.
+  const drawn: Array<[string, string, number]> = [
+    ['0', '25', 25], ['0', '50', 50], ['0', '75', 75],
+    ['25', '50', 25], ['25', '75', 50], ['50', '75', 25],
+  ];
+  const obs = {
+    nodePath: 'root/Fill', part: 'Fill', cssProperty: 'width', kind: 'px' as const,
+    occurrences: drawn.map(([l, r, v]) => ({ variant: `${l}/${r}`, axisValues: { left: l, right: r }, value: v })),
+    target: {} as Record<string, string>,
+  };
+  const realizedCombos = drawn.map(([left, right]) => ({ left, right }));
+  const strict = mintTokens('s', [obs], axes, { nestedPairs: true });
+  const ragged = mintTokens('s', [obs], axes, { nestedPairs: true, realizedCombos });
+  check(
+    'WITHOUT realizedCombos a ragged pair is still REFUSED (the relaxation is opt-in, so every existing caller is unchanged)',
+    strict.bindings[0].ref === null,
+  );
+  check(
+    'WITH realizedCombos the ragged pair CARRIES as a two-axis ref',
+    ragged.bindings[0].ref === '{imported.s.fill.width.{left}.{right}}',
+  );
+  const leaf = (l: string, r: string) =>
+    ragged.entries.find((e) => e.ref === `{${MINT_NAMESPACE}.s.fill.width.${l}.${r}}`);
+  check(
+    'every DRAWN cell carries its own measured value (not one axis projected over the other)',
+    drawn.every(([l, r, v]) => leaf(l, r)?.value === `${v}px`),
+  );
+  check(
+    'every SUPPLIED cell is named as NOT DRAWN on the leaf itself',
+    ['25.25', '50.25', '50.50'].every((k) => {
+      const [l, r] = k.split('.');
+      return leaf(l, r)?.usageSites.some((s) => s.includes('NOT DRAWN')) === true;
+    }),
+  );
+  check(
+    'the binding NAMES the fill (ragged caveat), and says the values are supplied rather than measured',
+    (ragged.bindings[0].caveat ?? '').includes('RAGGED') &&
+      (ragged.bindings[0].caveat ?? '').includes('SUPPLIED, not measured'),
+  );
+  // THE FALSIFICATION, and the reason this is a gate and not a demo. A hole the
+  // variant set DOES realize is a genuinely incomplete observation — exactly
+  // the dangling-ref hazard full coverage protects against — so it must keep
+  // refusing. Same observation, same axes; only the claim about what exists
+  // changes.
+  const claimsAllSixteen = [] as Array<Record<string, string>>;
+  for (const left of axes[0].values) for (const right of axes[1].values) claimsAllSixteen.push({ left, right });
+  check(
+    'a hole the variant set DOES realize still REFUSES (an incomplete observation is not a ragged matrix)',
+    mintTokens('s', [obs], axes, { nestedPairs: true, realizedCombos: claimsAllSixteen }).bindings[0].ref === null,
+  );
+  // A combination that cannot be judged (missing an axis value) must not be
+  // guessed — it abandons the pair rather than assuming the cell is undrawn.
+  check(
+    'an unjudgeable realized combination (missing an axis) REFUSES rather than guessing the matrix',
+    mintTokens('s', [obs], axes, {
+      nestedPairs: true,
+      realizedCombos: [...realizedCombos, { left: '0' } as Record<string, string>],
+    }).bindings[0].ref === null,
+  );
+  // ORDERING. An adversarial fuzz found that relaxing coverage INSIDE the pair
+  // loop lets an earlier-sorting pair needing a FABRICATED cell pre-empt a
+  // later pair whose every cell is MEASURED — a loss decided by axis order
+  // alone. The relaxation therefore runs as a SECOND pass.
+  const axes3 = [
+    { propName: 'a', values: ['a1', 'a2'] },
+    { propName: 'b', values: ['b1', 'b2'] },
+    { propName: 'c', values: ['c1', 'c2', 'c3'] },
+  ];
+  const rows: Array<[string, string, string, number]> = [
+    ['a1', 'b1', 'c1', 10], ['a1', 'b1', 'c2', 20], ['a1', 'b2', 'c2', 20],
+    ['a1', 'b2', 'c3', 30], ['a2', 'b1', 'c3', 20], ['a2', 'b2', 'c1', 10],
+  ];
+  const obs3 = {
+    nodePath: 'root', part: '', cssProperty: 'gap', kind: 'px' as const,
+    occurrences: rows.map(([a, b, c, v]) => ({ variant: `${a}${b}${c}`, axisValues: { a, b, c }, value: v })),
+    target: {} as Record<string, string>,
+  };
+  const combos3 = rows.map(([a, b, c]) => ({ a, b, c }));
+  check(
+    'a FULLY MEASURED pair still wins over a ragged one that sorts earlier (the relaxation is a second pass)',
+    mintTokens('x', [obs3], axes3, { nestedPairs: true, realizedCombos: combos3 }).bindings[0].ref ===
+      mintTokens('x', [obs3], axes3, { nestedPairs: true }).bindings[0].ref,
+  );
+  // The supplied value must be a function of the CONTRACT's declared value
+  // order, never of the order the dump happened to list variants in — probed
+  // on the real Slider, reversing the dump moved the supplied width from 80px
+  // to 320px, which is the overrun this whole change exists to remove.
+  const reversed = { ...obs, occurrences: [...obs.occurrences].reverse() };
+  check(
+    'the SUPPLIED value is independent of dump variant ORDER (declared-axis order decides, not occurrences[0])',
+    JSON.stringify(mintTokens('s', [reversed], axes, { nestedPairs: true, realizedCombos }).tree) ===
+      JSON.stringify(ragged.tree),
+  );
+}
 
 if (failures.length > 0) {
   console.error(`\n✖ ${failures.length} minting invariant(s) failed`);

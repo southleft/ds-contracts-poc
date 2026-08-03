@@ -6944,7 +6944,19 @@ export function proposeFromDump(
     // compound ancestor selector). Before this the classifier refused every
     // nested pair and the channel DROPPED — Social button's label ink is
     // f(social × theme) and never reached the contract at all.
-    const minted = mintTokens(componentIdSlug(set.setName), observations, ctx.mint.axes, { nestedPairs: true });
+    // `realizedCombos` — THE RAGGED MATRIX (see mint-tokens `classify`). A
+    // Figma variant set is often not a rectangle: Slider is a RANGE control, so
+    // only `rightControl > leftControl` is drawn (10 of 16 cells) and Avatar
+    // realizes 162 of 216. Handing the classifier the combinations that ACTUALLY
+    // exist lets a two-axis fit survive the cells the design never drew, instead
+    // of collapsing to the one-axis base-slice projection below — which asserted
+    // Slider's progress width by rightControl alone and drew 320px where the
+    // canvas draws 80px in 24 of 40 variants.
+    const realizedCombos = [...ctx.mint.axisValuesByVariant.values()];
+    const minted = mintTokens(componentIdSlug(set.setName), observations, ctx.mint.axes, {
+      nestedPairs: true,
+      realizedCombos,
+    });
     const bySource = new Map<string, { total: number; bound: number }>();
     minted.bindings.forEach((binding, i) => {
       const obs = observations[i];

@@ -1887,12 +1887,160 @@
               "$type": "dimension"
             }
           }
+        },
+        "width": {
+          "25": {
+            "0": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "25": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "50": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "75": {
+              "$value": "80px",
+              "$type": "dimension"
+            }
+          },
+          "50": {
+            "0": {
+              "$value": "160px",
+              "$type": "dimension"
+            },
+            "25": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "50": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "75": {
+              "$value": "80px",
+              "$type": "dimension"
+            }
+          },
+          "75": {
+            "0": {
+              "$value": "240px",
+              "$type": "dimension"
+            },
+            "25": {
+              "$value": "160px",
+              "$type": "dimension"
+            },
+            "50": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "75": {
+              "$value": "80px",
+              "$type": "dimension"
+            }
+          },
+          "100": {
+            "0": {
+              "$value": "320px",
+              "$type": "dimension"
+            },
+            "25": {
+              "$value": "240px",
+              "$type": "dimension"
+            },
+            "50": {
+              "$value": "160px",
+              "$type": "dimension"
+            },
+            "75": {
+              "$value": "80px",
+              "$type": "dimension"
+            }
+          }
         }
       },
       "progress-progress-line": {
         "border-radius": {
           "$value": "4px",
           "$type": "dimension"
+        },
+        "width": {
+          "25": {
+            "0": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "25": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "50": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "75": {
+              "$value": "80px",
+              "$type": "dimension"
+            }
+          },
+          "50": {
+            "0": {
+              "$value": "160px",
+              "$type": "dimension"
+            },
+            "25": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "50": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "75": {
+              "$value": "80px",
+              "$type": "dimension"
+            }
+          },
+          "75": {
+            "0": {
+              "$value": "240px",
+              "$type": "dimension"
+            },
+            "25": {
+              "$value": "160px",
+              "$type": "dimension"
+            },
+            "50": {
+              "$value": "80px",
+              "$type": "dimension"
+            },
+            "75": {
+              "$value": "80px",
+              "$type": "dimension"
+            }
+          },
+          "100": {
+            "0": {
+              "$value": "320px",
+              "$type": "dimension"
+            },
+            "25": {
+              "$value": "240px",
+              "$type": "dimension"
+            },
+            "50": {
+              "$value": "160px",
+              "$type": "dimension"
+            },
+            "75": {
+              "$value": "80px",
+              "$type": "dimension"
+            }
+          }
         }
       },
       "progress-left-control": {
@@ -3210,6 +3358,28 @@
     },
     "dropdown-list-item": {
       "root": {
+        "gap": {
+          "true": {
+            "false": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "true": {
+              "$value": "12px",
+              "$type": "dimension"
+            }
+          },
+          "false": {
+            "true": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "false": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          }
+        },
         "padding-inline": {
           "$value": "16px",
           "$type": "dimension"
