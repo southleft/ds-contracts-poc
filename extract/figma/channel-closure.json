@@ -1,0 +1,110 @@
+{
+  "generatedBy": "extract/figma/channel-closure-check.ts",
+  "rows": [
+    {
+      "channel": "aspect-ratio",
+      "verdict": "NAMED",
+      "properties": [
+        "targetAspectRatio"
+      ],
+      "readBy": [],
+      "degradation": "aspect-ratio-unsupported",
+      "detail": "NOT carried — named by `aspect-ratio-unsupported`"
+    },
+    {
+      "channel": "box-sizing",
+      "verdict": "READ",
+      "properties": [
+        "strokeAlign"
+      ],
+      "readBy": [
+        "extract/figma/dump.plugin.js",
+        "extract/figma/rest/map.ts"
+      ],
+      "detail": "read as strokeAlign"
+    },
+    {
+      "channel": "font-family",
+      "verdict": "READ",
+      "properties": [
+        "fontName"
+      ],
+      "readBy": [
+        "extract/figma/dump.plugin.js"
+      ],
+      "detail": "read as fontName"
+    },
+    {
+      "channel": "text-align",
+      "verdict": "NAMED",
+      "properties": [
+        "textAlignHorizontal",
+        "textAlignVertical"
+      ],
+      "readBy": [],
+      "degradation": "text-channel-unsupported",
+      "detail": "NOT carried — named by `text-channel-unsupported`"
+    },
+    {
+      "channel": "text-decoration-line",
+      "verdict": "NAMED",
+      "properties": [
+        "textDecoration"
+      ],
+      "readBy": [],
+      "degradation": "text-channel-unsupported",
+      "detail": "NOT carried — named by `text-channel-unsupported`"
+    },
+    {
+      "channel": "text-overflow",
+      "verdict": "NAMED",
+      "properties": [
+        "textTruncation",
+        "maxLines"
+      ],
+      "readBy": [],
+      "degradation": "text-channel-unsupported",
+      "detail": "NOT carried — named by `text-channel-unsupported`"
+    },
+    {
+      "channel": "text-transform",
+      "verdict": "NAMED",
+      "properties": [
+        "textCase"
+      ],
+      "readBy": [],
+      "degradation": "text-channel-unsupported",
+      "detail": "NOT carried — named by `text-channel-unsupported`"
+    },
+    {
+      "channel": "transform",
+      "verdict": "READ",
+      "properties": [
+        "absoluteBoundingBox",
+        "relativeTransform"
+      ],
+      "readBy": [
+        "extract/figma/dump.plugin.js",
+        "extract/figma/rest/map.ts"
+      ],
+      "detail": "read as absoluteBoundingBox / relativeTransform"
+    },
+    {
+      "channel": "translate",
+      "verdict": "READ",
+      "properties": [
+        "absoluteBoundingBox",
+        "relativeTransform"
+      ],
+      "readBy": [
+        "extract/figma/dump.plugin.js",
+        "extract/figma/rest/map.ts"
+      ],
+      "detail": "read as absoluteBoundingBox / relativeTransform"
+    }
+  ],
+  "summary": {
+    "total": 9,
+    "silent": 0
+  }
+}

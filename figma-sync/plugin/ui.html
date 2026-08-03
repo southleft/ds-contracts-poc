@@ -2378,6 +2378,19 @@ async function dumpNode(node, nodePath, parent) {
   if (!shape && 'rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
     degrade('rotation-unsupported', nodePath, 'rotation ' + node.rotation + ' on a ' + node.type + ' has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)');
   }
+  // CLOSURE GATE: `aspect-ratio` is a DECLARED_CHANNELS entry the canvas DRAWS
+  // (emit-figma-script lowers it natively) fed only from the CSS side — no
+  // reader mentioned targetAspectRatio, so a designer's aspect-ratio lock was
+  // a one-directional fact. Named, not yet carried.
+  if (node.targetAspectRatio) {
+    var _ar = node.targetAspectRatio;
+    degrade(
+      'aspect-ratio-unsupported',
+      nodePath,
+      'targetAspectRatio ' + (typeof _ar === 'object' && _ar ? _ar.x + ':' + _ar.y : String(_ar)) +
+        ' has no dump v1 projection — the node carries its measured width/height and loses the RATIO LOCK (the canvas draws aspect-ratio natively, so this is a read-side gap only)',
+    );
+  }
   if (VECTOR_TYPES.indexOf(node.type) >= 0) {
     degrade('vector-geometry-unsupported', nodePath, node.type + ' geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)');
   }
@@ -2514,6 +2527,22 @@ async function dumpNode(node, nodePath, parent) {
     if (node.textDecoration !== figma.mixed && node.textDecoration && node.textDecoration !== 'NONE') channels.push('textDecoration ' + node.textDecoration);
     if (node.lineHeight !== figma.mixed && node.lineHeight && node.lineHeight.unit !== 'AUTO' && node.lineHeight.unit !== 'PIXELS') {
       channels.push('lineHeight ' + node.lineHeight.value + node.lineHeight.unit + ' — only PIXELS carries, dump v1.3');
+    }
+    // CLOSURE GATE (extract/figma/channel-closure-check.ts). `text-align` and
+    // `text-overflow` are DECLARED_CHANNELS the canvas DRAWS — the emitter
+    // writes textAlignHorizontal and textTruncation back to Figma — and no
+    // reader mentioned either property, so a designer's centred label or
+    // authored ellipsis vanished on the return leg with no receipt. Named here
+    // rather than carried: naming closes the SILENT hole, which is the bar;
+    // carrying them is a follow-up with its own measured value.
+    if (node.textAlignHorizontal && node.textAlignHorizontal !== 'LEFT') {
+      channels.push('textAlignHorizontal ' + node.textAlignHorizontal);
+    }
+    if (node.textAlignVertical && node.textAlignVertical !== 'TOP') {
+      channels.push('textAlignVertical ' + node.textAlignVertical);
+    }
+    if (node.textTruncation && node.textTruncation !== 'DISABLED') {
+      channels.push('textTruncation ' + node.textTruncation + (typeof node.maxLines === 'number' ? ' maxLines ' + node.maxLines : ''));
     }
     if (channels.length > 0) {
       degrade('text-channel-unsupported', nodePath, 'text channel(s) with no dump v1 projection: ' + channels.join('; ') + ' — typography carries (fontSize, fontStyle, style identity) only');
