@@ -3144,6 +3144,46 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
+    // Figma's ConstraintType is MIN|CENTER|MAX|STRETCH|SCALE; both dump capture
+    // sites mapped only the first three, so a STRETCH/SCALE node had its WHOLE
+    // constraints field dropped — and propose reads an absent field as
+    // `?? 'LEFT'` / `?? 'TOP'`. That does not lose a fact, it SUBSTITUTES one:
+    // Untitled UI's Progress-circle ring (x:12 y:12 right:12 bottom:12 in a
+    // 240px box — the signature of STRETCH x STRETCH) shipped as a FIXED
+    // 216x216 box pinned top-left. propose has always carried a refusal for
+    // this and a plugin dump could NEVER reach it; the only fixture that does
+    // is a HAND-AUTHORED conformance case containing a value the real capture
+    // cannot emit — a green gate over a dead path, the POLYGON shape again.
+    id: 'constraints-reach-the-decision',
+    claim: 'C5-extraction',
+    run: () => {
+      const r = run(TSX, ['extract/figma/constraints-check.ts']);
+      if (r.status !== 0) throw new Error(`constraints receipt failed:\n${r.out}`);
+      for (const line of [
+        '✔ STRETCH pins BOTH edges on both axes (left+right / top+bottom)',
+        '✔ a STRETCHED axis bakes NO width/height (a size would freeze the resize the constraint expresses)',
+        '✔ SCALE is REFUSED BY NAME, and the reason says why CSS cannot spell it',
+        '✔ the LEFT×TOP assumption is NAMED (it used to be silent)',
+        '✔ geometry is UNCHANGED (top-left + baked size) — naming the assumption moves no corpus',
+        '✔ an EXPLICIT LEFT×TOP emits no assumption note (the note tracks the missing field, not the value)',
+        // The contradiction an adversarial probe caught: skipping only the size
+        // MINT let a BOUND width survive beside left+right, and CSS resolves an
+        // over-constrained box by DROPPING an edge — which edge flips under
+        // `direction: rtl` — so the box froze at its drawn size while the note
+        // still claimed it tracked its parent, and the canvas leg disagreed.
+        '✔ and the box does NOT ship left+right+width together (CSS would silently drop an edge)',
+        '✔ the contradiction is NAMED',
+        '✔ the VERTICAL axis (unbound) still stretches — the refusal is per-axis, not whole-part',
+      ]) {
+        if (!r.out.includes(line)) throw new Error(`missing check: ${line}`);
+      }
+      console.log(
+        'constraints-reach-the-decision: dump v1.12 spells all FIVE ConstraintType values, so STRETCH/SCALE stop being dropped at capture. STRETCH is CARRIED as both edges with no baked size (CSS left+right — the box tracks its parent, which a frozen width destroyed); SCALE keeps its named refusal (CSS has no proportional resize on a positioned box); an ABSENT field keeps today\'s LEFT×TOP geometry — no corpus moves — but the ASSUMPTION IS NAMED. NAMED LIMITS: (1) a dump already taken cannot be repaired — of 811 absBoxOf-visible boxes in the committed corpora, 352 carry no constraints field and need a RE-CAPTURE at v1.13+ before a STRETCH box can be told from a real top-left pin; (2) a STRETCH axis whose size is ALREADY BOUND is a contradiction, so the design\'s binding wins and the stretch is refused on that axis, BY NAME; (3) with STRETCH now reaching the mixed-constraint check, a set mixing STRETCH with another value refuses the whole placement rather than carrying a wrong one — correct, but a behaviour no committed corpus can exercise until a re-capture exists.',
+      );
+    },
+  },
+
+  {
     id: 'wrapping-survives-the-round-trip',
     claim: 'C5-extraction',
     // core/emit-figma-script.ts has written `node.layoutWrap = 'WRAP'` from a

@@ -385,6 +385,54 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   variantNode.counterAxisAlignContent = 'AUTO';
   variantNode.layoutWrap = 'NO_WRAP';
 
+  // --- dump v1.12: ALL FIVE CONSTRAINT VALUES ------------------------------
+  // Figma's ConstraintType is MIN|CENTER|MAX|STRETCH|SCALE and both capture
+  // sites mapped only three, so `H['STRETCH']` was undefined and the `if (h &&
+  // v)` guard dropped the WHOLE field — which propose then reads as
+  // `?? 'LEFT'` / `?? 'TOP'`. A substituted constraint, not a lost one.
+  // The abs block needs an ABSOLUTELY-PLACED child (layoutPositioning
+  // 'ABSOLUTE', or any child of a non-auto-layout parent) — constraints only
+  // ride an absolute box.
+  const constrained = (variantNode.children || []).find((c) => c.constraints);
+  if (constrained) {
+    const priorC = constrained.constraints;
+    const priorPos = constrained.layoutPositioning;
+    constrained.layoutPositioning = 'ABSOLUTE';
+    constrained.constraints = { horizontal: 'STRETCH', vertical: 'STRETCH' };
+    const stretchDump = await runScript(scoped);
+    const findBox = (node) => {
+      if (!node || typeof node !== 'object') return undefined;
+      if (node.abs && node.abs.constraints && node.abs.constraints.horizontal === 'STRETCH') return node.abs;
+      for (const ch of node.children || []) {
+        const hit = findBox(ch);
+        if (hit) return hit;
+      }
+      return undefined;
+    };
+    const stretched = stretchDump.Badge.variants.map(findBox).find(Boolean);
+    assert(
+      stretched && stretched.constraints.vertical === 'STRETCH',
+      `STRETCH survives the capture (got ${stretched ? JSON.stringify(stretched.constraints) : 'the field DROPPED — the pre-v1.12 bug'})`,
+    );
+    constrained.constraints = { horizontal: 'SCALE', vertical: 'SCALE' };
+    const scaleDump = await runScript(scoped);
+    const findScale = (node) => {
+      if (!node || typeof node !== 'object') return undefined;
+      if (node.abs && node.abs.constraints && node.abs.constraints.horizontal === 'SCALE') return node.abs;
+      for (const ch of node.children || []) {
+        const hit = findScale(ch);
+        if (hit) return hit;
+      }
+      return undefined;
+    };
+    assert(scaleDump.Badge.variants.map(findScale).find(Boolean), 'SCALE survives the capture too (it is refused later, BY NAME — but the fact must reach the decision)');
+    constrained.constraints = priorC;
+    constrained.layoutPositioning = priorPos;
+    console.log(
+      '✔ dump v1.12 constraints: STRETCH and SCALE survive the capture — both were silently dropped by a 3-of-5 value map, and propose reads an absent field as LEFT×TOP, so the engine substituted a constraint rather than losing one',
+    );
+  }
+
   // THE CRASH THE MOCK USED TO ABSORB. layoutWrap is HORIZONTAL-only and Figma
   // THROWS otherwise; `layout: { direction: 'column', wrap: true }` is legal
   // CSS and schema-valid, so an ordinary contract killed the generate run from

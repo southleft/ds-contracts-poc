@@ -1948,7 +1948,7 @@
      Do not edit here: scripts/build-plugin-zip.mjs refuses to package this
      plugin when the block below differs from the repo file. -->
 <script type="text/plain" id="dump-source">
-// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.12).
+// Design-side ANATOMY dump — the canonical node-tree capture (dump v1.13).
 //
 // Transport-agnostic Plugin API script (same boundary as extract/figma-dump.js
 // and parity/extract-figma.plugin.js): run it through any console/plugin-runner
@@ -2065,6 +2065,35 @@ const TARGET_SETS = ['Badge', 'Switch', 'Card'];
 
 await figma.loadAllPagesAsync();
 
+// dump v1.13: ALL FIVE Figma constraint values, not three.
+//
+// The Plugin API's ConstraintType is MIN | CENTER | MAX | STRETCH | SCALE.
+// Both capture sites mapped only the first three, so `H['STRETCH']` was
+// undefined and the `if (h && v)` guard DROPPED THE WHOLE FIELD. That is not a
+// lost fact, it is a SUBSTITUTED one: core/propose-figma.ts reads an absent
+// field as `?? 'LEFT'` / `?? 'TOP'` and then bakes confident pinned-top-left
+// geometry. Untitled UI's `Progress circle/Ring` is the
+// candidate that surfaced it: 6 of its 16 occurrences are drawn with EQUAL
+// insets on all four sides (12/12/12/12 in two), which is consistent with a
+// stretched box — though NOT proof, since STRETCH permits ANY fixed insets and
+// the other occurrences are unequal or have negative bottoms. What IS measured:
+// 352 positioned boxes across the committed dumps carry NO constraints field,
+// and until v1.13 a STRETCH or SCALE node was INDISTINGUISHABLE there from a
+// genuine top-left pin.
+//
+// propose-figma.ts already carries a refusal for exactly this
+// ("constraint AxB has no carried offset spelling"), and a plugin dump could
+// NEVER trigger it — the only fixture that does is a HAND-AUTHORED conformance
+// case (placement-constraints-scale.dump.json) written to contain a value the
+// real capture cannot emit. The gate was green over a dead path, the same
+// shape as the POLYGON incident.
+//
+// STRETCH is exactly CSS `left + right` (or `top + bottom`) with no size, so it
+// is CARRIABLE; SCALE (proportional resize) has no CSS spelling and keeps the
+// named refusal. Either way the fact now REACHES the decision.
+const CONSTRAINT_H = { MIN: 'LEFT', MAX: 'RIGHT', CENTER: 'CENTER', STRETCH: 'STRETCH', SCALE: 'SCALE' };
+const CONSTRAINT_V = { MIN: 'TOP', MAX: 'BOTTOM', CENTER: 'CENTER', STRETCH: 'STRETCH', SCALE: 'SCALE' };
+
 const rgbToHex = (c) => {
   const h = (x) => Math.round(x * 255).toString(16).padStart(2, '0');
   return h(c.r) + h(c.g) + h(c.b);
@@ -2137,11 +2166,10 @@ function dumpShape(node, parent) {
     shape.right = round2(parentBox.width - cx - shape.width / 2);
     shape.bottom = round2(parentBox.height - cy - shape.height / 2);
     if (node.constraints) {
-      const H = { MIN: 'LEFT', MAX: 'RIGHT', CENTER: 'CENTER' };
-      const V = { MIN: 'TOP', MAX: 'BOTTOM', CENTER: 'CENTER' };
-      const h = H[node.constraints.horizontal];
-      const v = V[node.constraints.vertical];
+      const h = CONSTRAINT_H[node.constraints.horizontal];
+      const v = CONSTRAINT_V[node.constraints.vertical];
       if (h && v) shape.constraints = { horizontal: h, vertical: v };
+      else degrade('constraint-spelling-unknown', nodePath, 'constraints ' + node.constraints.horizontal + 'x' + node.constraints.vertical + ' has no dump spelling — the field is OMITTED, and propose reads an absent field as LEFTxTOP');
     }
   }
   return shape;
@@ -2268,9 +2296,9 @@ async function dumpNode(node, nodePath, parent) {
     const cx = bb.x - pb.x + bb.width / 2, cy = bb.y - pb.y + bb.height / 2;
     const abs = { x: round2(cx - bb.width / 2), y: round2(cy - bb.height / 2), right: round2(pb.width - cx - bb.width / 2), bottom: round2(pb.height - cy - bb.height / 2), width: round2(bb.width), height: round2(bb.height) };
     if (node.constraints) {
-      const H = { MIN: 'LEFT', MAX: 'RIGHT', CENTER: 'CENTER' }, V = { MIN: 'TOP', MAX: 'BOTTOM', CENTER: 'CENTER' };
-      const h = H[node.constraints.horizontal], v = V[node.constraints.vertical];
+      const h = CONSTRAINT_H[node.constraints.horizontal], v = CONSTRAINT_V[node.constraints.vertical];
       if (h && v) abs.constraints = { horizontal: h, vertical: v };
+      else degrade('constraint-spelling-unknown', nodePath, 'constraints ' + node.constraints.horizontal + 'x' + node.constraints.vertical + ' has no dump spelling — the field is OMITTED, and propose reads an absent field as LEFTxTOP');
     }
     out.abs = abs;
   }
@@ -2698,8 +2726,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.12) for design→contract proposal.',
-    dumpVersion: '1.12',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.13) for design→contract proposal.',
+    dumpVersion: '1.13',
   },
 };
 dumps._degradations = degradations;

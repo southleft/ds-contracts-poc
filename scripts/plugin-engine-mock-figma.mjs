@@ -246,6 +246,24 @@ export function createFigmaMock() {
       return Math.min(Math.max(content + pad, min ?? 0), max ?? Infinity);
     }
 
+    // The mock had NO absoluteBoundingBox at all, so the dump's `abs` block —
+    // and with it EVERY absolutely-placed fact: offsets, sizes and constraints
+    // — could never fire here. A whole capture path was untestable, which is
+    // how a 3-of-5 constraint map (STRETCH and SCALE silently dropped) lived
+    // behind a green plugin gate. Absolute position is the accumulated x/y up
+    // the parent chain, which is what Figma reports.
+    get absoluteBoundingBox() {
+      let x = this.x;
+      let y = this.y;
+      let p = this.parent;
+      while (p && typeof p.x === 'number') {
+        x += p.x;
+        y += p.y;
+        p = p.parent;
+      }
+      return { x, y, width: this.width, height: this.height };
+    }
+
     get width() {
       // REAL-FIGMA CONTRACT (round 6, live Dialog finding): an ABSOLUTELY
       // POSITIONED child is OUT of the auto-layout flow — FILL sizing does

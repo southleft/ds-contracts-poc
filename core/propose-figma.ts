@@ -2421,13 +2421,83 @@ function carryAbsPlacement(
     );
   }
   if (!ctx.mint) return ledger('minting is off — the per-variant px offsets have no carrier');
+  // THE ABSENT-CONSTRAINTS ASSUMPTION, NAMED. `?? 'LEFT'` / `?? 'TOP'` is a
+  // guess, and until dump v1.12 it was a guess the capture MADE UNAVOIDABLE:
+  // both dump sites mapped only MIN/MAX/CENTER, so a STRETCH or SCALE node had
+  // its whole `constraints` field dropped and arrived here indistinguishable
+  // from a genuine top-left pin. This does not lose a fact, it SUBSTITUTES one
+  // — the part then bakes confident pinned-top-left geometry.
+  //
+  // MEASURED: of 811 absBoxOf-visible boxes across the committed dumps, 352
+  // carry NO constraints field (354 including GROUP, which has no such property
+  // at all). Untitled UI's `Progress circle/Ring` is the candidate that
+  // surfaced it — 6 of its 16 occurrences are drawn with EQUAL insets on four
+  // sides — but that is consistent with a stretch, NOT proof of one: STRETCH
+  // permits any fixed insets, and the ring's other occurrences are unequal or
+  // have negative bottoms. The claim here is only what can be shown: those 352
+  // boxes are read as LEFT×TOP by assumption, and a STRETCH/SCALE node is
+  // INDISTINGUISHABLE from a real top-left pin in a pre-v1.13 dump.
+  //
+  // The capture is fixed, but a dump ALREADY TAKEN cannot be repaired: the
+  // field was destroyed at capture time, so every pre-v1.13 dump needs a
+  // RE-CAPTURE. Until then the assumption stands — and now it is at least
+  // stated instead of silent.
+  // GROUP has NO `constraints` property in the Plugin API at all ("you must
+  // iterate through the group's children"), so an absent field there is not a
+  // dropped fact and a re-capture would not produce one. Blaming the capture
+  // for it would be a false receipt in a round about false receipts.
+  const NO_CONSTRAINTS_NODE = new Set(['GROUP']);
+  const assumed = m.occ.filter(
+    (o) => absBoxOf(o.node)?.constraints === undefined && !NO_CONSTRAINTS_NODE.has(o.node.type ?? ''),
+  ).length;
+  if (assumed > 0) {
+    ctx.notes.push(
+      `${where}: ${assumed} of ${boxes.length} occurrence(s) carry NO constraints field, so the placement is read as LEFT×TOP — an ASSUMPTION, not an observation. A pre-v1.13 dump also omitted the field for STRETCH/SCALE nodes (only MIN/MAX/CENTER had a spelling), so a box drawn pinned to all four edges is indistinguishable here from one pinned top-left; re-capture with dump v1.13+ to tell them apart`,
+    );
+  }
   const hs = [...new Set(boxes.map((b) => b.box!.constraints?.horizontal ?? 'LEFT'))];
   const vs = [...new Set(boxes.map((b) => b.box!.constraints?.vertical ?? 'TOP'))];
   if (hs.length > 1 || vs.length > 1) {
     return ledger(`constraints differ across variants (${hs.join('|')} × ${vs.join('|')})`);
   }
-  if (!['LEFT', 'RIGHT', 'CENTER'].includes(hs[0]) || !['TOP', 'BOTTOM', 'CENTER'].includes(vs[0])) {
-    return ledger(`constraint ${hs[0]}×${vs[0]} has no carried offset spelling (SCALE/stretch placement is a later iteration)`);
+  // STRETCH IS EXACTLY REPRESENTABLE — SCALE IS NOT. A Figma STRETCH pins BOTH
+  // edges on its axis, which is CSS `left + right` (or `top + bottom`) with no
+  // size: the box grows with its parent. The both-edges spelling already exists
+  // here for symmetric text, so carrying it costs no new vocabulary. SCALE
+  // resizes PROPORTIONALLY with the parent — CSS has no such thing on a
+  // positioned box — so it keeps the named refusal it always had.
+  //
+  // Before dump v1.12 neither could reach this line: the capture dropped the
+  // field for both, so they arrived as an absent value read as LEFT×TOP and
+  // were carried as a fixed top-left box. The refusal below was reachable ONLY
+  // from a hand-authored fixture.
+  // A STRETCH axis and an ALREADY-BOUND size on that axis CONTRADICT each
+  // other: the constraint says "both edges, size follows the parent", the
+  // binding says "this exact width". Skipping the size MINT is not enough —
+  // a width already in `tokens` (the design's own bound variable) survives,
+  // and then CSS resolves left+right+width by DROPPING one edge, so the box
+  // freezes at its drawn size and which edge dies flips under `direction: rtl`.
+  // The design's explicit binding wins (it is an observation, not an
+  // inference); the stretch is NOT carried on that axis and the conflict is
+  // named. Silently emitting all three was the first cut of this fix.
+  const sizeBound = (dim: 'width' | 'height') =>
+    tokens[dim] !== undefined || m.occ.some((o) => o.node.bound?.[dim]);
+  const hStretchRaw = hs[0] === 'STRETCH';
+  const vStretchRaw = vs[0] === 'STRETCH';
+  const hStretch = hStretchRaw && !sizeBound('width');
+  const vStretch = vStretchRaw && !sizeBound('height');
+  if ((hStretchRaw && !hStretch) || (vStretchRaw && !vStretch)) {
+    ctx.notes.push(
+      `${where}: constraint ${hs[0]}×${vs[0]} STRETCHes an axis whose size is ALREADY BOUND (${[hStretchRaw && !hStretch ? 'width' : null, vStretchRaw && !vStretch ? 'height' : null].filter(Boolean).join(', ')}) — the two contradict (a stretch sizes from the parent, a bound size does not), so the design's own binding is kept and the stretch is NOT carried on that axis; the part pins ONE edge and holds its bound size`,
+    );
+  }
+  if (hs[0] === 'SCALE' || vs[0] === 'SCALE') {
+    return ledger(
+      `constraint ${hs[0]}×${vs[0]} has no carried offset spelling — SCALE resizes the box PROPORTIONALLY with its parent and CSS has no equivalent on a positioned element (STRETCH is carried as both edges; SCALE is not)`,
+    );
+  }
+  if (!['LEFT', 'RIGHT', 'CENTER', 'STRETCH'].includes(hs[0]) || !['TOP', 'BOTTOM', 'CENTER', 'STRETCH'].includes(vs[0])) {
+    return ledger(`constraint ${hs[0]}×${vs[0]} has no carried offset spelling`);
   }
   const px2 = (n: number) => Math.round(n * 100) / 100;
   // Presence-shaped coverage (round 2 iteration 6): a node ABSENT from some
@@ -2459,21 +2529,40 @@ function carryAbsPlacement(
   // TEXT, horizontally symmetric box: pin both edges + center the glyphs —
   // the center-preserving spelling (see the block comment above).
   const symmetricText = opts.text === true && boxes.every((b) => Math.abs(b.box!.x - b.box!.right) <= 1);
-  if (symmetricText) {
+  if (symmetricText || hStretch) {
+    // Both edges pinned: the box's width is the PARENT's, minus two fixed
+    // insets. That is what Figma STRETCH means and what CSS left+right (with no
+    // width) does — the one case where the canvas's resize behaviour survives
+    // into code rather than being frozen at the drawn size.
     mintChan('left', (b) => b.x);
     mintChan('right', (b) => b.right);
-    if (declared['text-align'] === undefined) declared['text-align'] = 'center';
+    if (symmetricText && declared['text-align'] === undefined) declared['text-align'] = 'center';
   } else if (hs[0] === 'RIGHT') mintChan('right', (b) => b.right);
   else mintChan('left', (b) => b.x);
-  if (vs[0] === 'BOTTOM') mintChan('bottom', (b) => b.bottom);
+  if (vStretch) {
+    mintChan('top', (b) => b.y);
+    mintChan('bottom', (b) => b.bottom);
+  } else if (vs[0] === 'BOTTOM') mintChan('bottom', (b) => b.bottom);
   else mintChan('top', (b) => b.y);
   if (opts.size === true && opts.text !== true) {
     for (const dim of ['width', 'height'] as const) {
+      // A STRETCHED axis takes NO size: both edges already determine it, and a
+      // baked width would freeze the very resize the constraint expresses.
+      // (`hStretch` is false when a size is already BOUND on that axis — that
+      // contradiction is resolved and named above, so this cannot leave
+      // left+right+width all present, which CSS resolves by dropping an edge.)
+      if (dim === 'width' && hStretch) continue;
+      if (dim === 'height' && vStretch) continue;
       // A dimension already carried (bound variable or an earlier channel) is
       // the design's own binding — the abs box never overrides it.
       if (tokens[dim] !== undefined || m.occ.some((o) => o.node.bound?.[dim])) continue;
       mintChan(dim, (b) => b[dim]);
     }
+  }
+  if (hStretch || vStretch) {
+    ctx.notes.push(
+      `${where}: constraint ${hs[0]}×${vs[0]} — the ${[hStretch ? 'HORIZONTAL' : null, vStretch ? 'VERTICAL' : null].filter(Boolean).join(' and ')} axis is STRETCH, carried as BOTH edges with NO size on that axis (CSS left+right / top+bottom), so the box tracks its parent exactly as the canvas draws it; a baked width/height would have frozen it at the drawn size`,
+    );
   }
   if (declared.position === undefined) declared.position = 'absolute';
   part.declared = declared;

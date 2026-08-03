@@ -1,6 +1,6 @@
 {
-  "passed": 183,
-  "total": 183,
+  "passed": 184,
+  "total": 184,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -569,6 +569,11 @@
     },
     {
       "id": "repeated-children-collection",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "constraints-reach-the-decision",
       "claim": "C5-extraction",
       "pass": true
     },
