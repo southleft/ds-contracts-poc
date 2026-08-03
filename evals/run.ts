@@ -5289,7 +5289,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     // paste referee "the largest single refusal for an adopter" for two
     // rounds: the round-trip runner had to BYPASS it because Untitled UI hit
     // both blockers at once — an empty `base` tokenSet refused outright (its
-    // vocabulary is entirely MINTED, 989 self-sufficient literal leaves), and
+    // vocabulary is entirely MINTED, 990 self-sufficient literal leaves), and
     // a per-variant icon ref (`{"asset":"{platform}"}`) read as a literal
     // filename with all six SVGs present. Both fixed; this drives the REAL
     // referee (parseIncomingText → planGenerate, no bypass) for a Community
@@ -5312,14 +5312,14 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       for (const want of [
         '✔ GATE 1 — the plugin ACCEPTS the paste (30 contracts)',
         '✔ GATE 2 — generate plans without refusal',
-        'the collection plans ≥900 variables (989)',
+        'the collection plans ≥900 variables (990)',
         'genuinely DIFFER between Light and Dark (43)',
         '✔ THE PASTE DOOR IS OPEN for both kits',
       ]) {
         if (!check.out.includes(want)) throw new Error(`paste-door-check missing receipt: ${want}\n${check.out}`);
       }
       console.log(
-        'paste-door-open: the developer path (contract → CLI bundle → paste → variable collection + component sets) runs END TO END through the REAL referee, with no bypass, for BOTH a Figma Community kit that publishes ZERO variables (Untitled UI — 30 contracts, 989 minted variables, 17 icon assets incl. the per-variant {platform} glyph) and a kit that publishes real ones (Eventz — 17 contracts, 112 variables, 43 genuinely differing between Light and Dark). LEDGER §3.4 recorded this door SHUT for two rounds.',
+        'paste-door-open: the developer path (contract → CLI bundle → paste → variable collection + component sets) runs END TO END through the REAL referee, with no bypass, for BOTH a Figma Community kit that publishes ZERO variables (Untitled UI — 30 contracts, 990 minted variables, 17 icon assets incl. the per-variant {platform} glyph) and a kit that publishes real ones (Eventz — 17 contracts, 112 variables, 43 genuinely differing between Light and Dark). LEDGER §3.4 recorded this door SHUT for two rounds.',
       );
     },
   },

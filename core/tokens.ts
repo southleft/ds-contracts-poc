@@ -74,8 +74,9 @@ export const pxOrNull = (v: unknown): number | null => {
   const s = String(v).trim();
   const n = parseFloat(s);
   if (Number.isNaN(n)) return null;
-  if (/^-?[\d.]+(rem|em)$/.test(s)) return n * 16;
-  return /^-?[\d.]+(px)?$/.test(s) ? n : null;
+  if (/^[+-]?[\d.]+(rem|em)$/.test(s)) return n * 16;
+  // `+5px` is valid CSS; a leading plus used to fall out as a non-dimension.
+  return /^[+-]?\d*\.?\d+(px)?$/.test(s) ? n : null;
 };
 
 export const px = (v: unknown): number => {
@@ -89,25 +90,18 @@ export const px = (v: unknown): number => {
   // never fired before a rem-scaled foreign system). rem/em convert at the
   // CSS root ratio; px and unitless pass through unchanged.
   if (/^-?[\d.]+(rem|em)$/.test(s)) return n * 16;
-  // THE SAME BUG, FOR EVERY OTHER UNIT. The rem/em branch above exists because
-  // a live canvas caught '0.875rem' becoming 0.875 — and it was fixed for two
-  // units and left silent for all the rest. parseFloat happily returns 100 for
-  // '100%', 200 for '200ms', 12 for '12pt', 4 for '4px 8px' and 0 for '0 auto',
-  // and figmaType() then publishes each as a Figma FLOAT variable that the
-  // canvas reads as PIXELS. A '100%' token becomes a hard 100px.
+  // DELIBERATELY STILL PERMISSIVE. I briefly made this THROW for every other
+  // unit, on the reasoning that '100%' silently becoming the FLOAT 100 is a lie
+  // — which it is. But `px` has ~20 callers, and an adversarial probe found a
+  // reachable one (boundFullBleedScrimRoot, below) where a SCHEMA-VALID literal
+  // `left: 50%` then crashed the whole component's compile with a message that
+  // blamed a "token". Killing a compile is worse than the lie it replaced, and
+  // it inverted this round's own principle: carriage, not refusal.
   //
-  // Reachable from core/wrap-plain-tokens.ts — the advertised bring-your-own
-  // on-ramp, which copies scalar values verbatim — so this is an adopter-facing
-  // path, not an internal one. Refuse BY NAME instead: a loud failure at build
-  // time beats a plausible wrong number on somebody's canvas.
-  if (!/^-?[\d.]+(px)?$/.test(s)) {
-    throw new Error(
-      `Token value "${s}" is not a canvas dimension — only unitless, px, rem and em lower to a Figma FLOAT. ` +
-        'Percentages, times, angles, pt and multi-value shorthands have no numeric canvas twin; parseFloat would ' +
-        'silently strip the unit and publish the bare number as PIXELS. Give the token a px value, or carry the ' +
-        'fact on a channel that can express it.',
-    );
-  }
+  // The real defect was upstream — figmaType() typed EVERYTHING non-colour as
+  // FLOAT. That is fixed at the type boundary with `pxOrNull` above, so a
+  // non-dimension token now becomes a Figma STRING and keeps its unit. Callers
+  // that genuinely need a number keep the old permissive behaviour.
   return n;
 };
 

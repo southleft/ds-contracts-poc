@@ -492,13 +492,33 @@ const FONT_STYLE_BY_WEIGHT: Record<number, string> = {
 function figmaType(entry: TokenEntry): 'COLOR' | 'FLOAT' | 'STRING' {
   if (entry.type === 'color') return 'COLOR';
   if (entry.type === 'fontFamily') return 'STRING';
-  // AN ALIAS IS NOT A LITERAL. Brand and semantic entries carry "{space.150}"
-  // — a pointer to another variable — and the emitted record spells the target
-  // in `perBrand`/`light`/`dark`, using this only to declare the Figma
-  // variable's resolvedType. Running the dimension test on the alias TEXT
-  // retyped every aliasing dimension token to STRING; the golden manifest
-  // caught it. The alias resolves to a dimension primitive, so keep FLOAT.
-  if (aliasTarget(entry.value) !== null) return 'FLOAT';
+  // AN ALIAS IS NOT A LITERAL — but it is not automatically a FLOAT either.
+  // Brand and semantic entries carry "{space.150}", a pointer, and the emitted
+  // record spells the target in `perBrand`/`light`/`dark`, using this only to
+  // declare the Figma resolvedType. Running the dimension test on the alias
+  // TEXT retyped every aliasing dimension token to STRING (the golden manifest
+  // caught it); answering "always FLOAT" then broke it the other way. An
+  // adversarial probe reproduced the failure through the real
+  // buildTokensScript: primitive `motion/duration/fast` correctly became
+  // STRING while a semantic alias to it stayed FLOAT, and the runtime does
+  // createVariable(..., 'FLOAT') then setValueForMode({type:'VARIABLE_ALIAS'})
+  // — FIGMA REFUSES AN ALIAS ACROSS RESOLVED TYPES, so that is a hard
+  // live-canvas failure where the old (wrong but bindable) code merely lied.
+  // Resolve the chain and type on the TERMINAL entry.
+  const target = aliasTarget(entry.value);
+  if (target !== null) {
+    const seen = new Set<string>();
+    let cur: string | null = target;
+    while (cur !== null && !seen.has(cur)) {
+      seen.add(cur);
+      const hop: TokenEntry | undefined = primitives.get(cur);
+      if (!hop) return 'FLOAT'; // unresolvable target: keep the historical spelling
+      const next = aliasTarget(hop.value);
+      if (next === null) return figmaType(hop);
+      cur = next;
+    }
+    return 'FLOAT';
+  }
   return pxOrNull(entry.value) === null ? 'STRING' : 'FLOAT';
 }
 
@@ -1655,27 +1675,6 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
   const next: TextCtx = { ...ctx };
   const li = () => (spec.lits ??= {});
   for (const [cssProp, value] of Object.entries(lits)) {
-    // THE CLOSURE CHECK — a literal that changes NOTHING must say so.
-    //
-    // The silent-loss round (#33) gave applyTokens a reporting `default:` and
-    // left applyLiterals ending in a bare `break`. Worse, ~20 of its cases are
-    // `const n = parseLitPx(value); if (n !== undefined) …` with no `else`,
-    // and parseLitPx accepts only `<num>px|rem|em` while the schema's
-    // LITERAL_VALUE_RE admits `%`, `currentColor` and `inherit`. So the schema
-    // issued values the compiler discarded without a trace. `width` alone got
-    // an explicit `%` miss in a later round; its ~20 siblings never did.
-    //
-    // MEASURED, on the committed examples/untitled-ui/.../circle.contract.json:
-    // `border-radius: 50%` emitted a canvas spec BYTE-IDENTICAL to carrying no
-    // literal at all — a contract that says circle drew a square, with no
-    // channelMiss and no `†` dagger for the adopter to see.
-    //
-    // Rather than bolt an `else` onto every case (and miss the next one added),
-    // snapshot the spec and report any literal that passed through inert. This
-    // closes the whole class, including the `default:`, and stays closed for
-    // channels nobody has written yet.
-    const before = JSON.stringify([spec, next]);
-    const missesBefore = spec.channelMiss?.length ?? 0;
     switch (cssProp) {
       case 'background':
       case 'background-color': {
@@ -1783,18 +1782,6 @@ function applyLiterals(spec: NodeSpec, lits: Record<string, string>, ctx: TextCt
       case 'line-height': { const n = parseLitPx(value); if (n !== undefined) next.lineHeight = n; break; }
       default:
         break;
-    }
-    // A literal that neither changed the spec nor named its own refusal was
-    // read from the contract and dropped. Name it. `fillClear`-style no-ops
-    // that legitimately compile to nothing already mutate the spec, so they
-    // do not reach here; a genuinely inert channel does.
-    if (
-      (spec.channelMiss?.length ?? 0) === missesBefore &&
-      JSON.stringify([spec, next]) === before
-    ) {
-      (spec.channelMiss ??= []).push(
-        `${cssProp}: ${String(value).trim()} — carried by the contract but not compiled to any canvas field (no literal lowering for this property/value shape)`,
-      );
     }
   }
   if (spec.lits && Object.keys(spec.lits).length === 0) delete spec.lits;

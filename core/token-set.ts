@@ -243,7 +243,18 @@ function colorOf(v: unknown): Rgba01 | null {
   m = /^hsla?\(\s*([^)]+)\)$/i.exec(s);
   if (m) {
     const parts = m[1].split(/[,/]|\s+/).filter(Boolean).map((x) => x.trim());
-    const h = parseFloat(parts[0]);
+    // ANGLE UNITS, because parseFloat('0.5turn') is 0.5 DEGREES and the first
+    // version of this shipped that as a plausible wrong colour with no receipt
+    // — a new instance of the very class this round exists to remove. CSS
+    // allows deg (default), turn, rad and grad on the hue.
+    const rawH = parts[0];
+    const hNum = parseFloat(rawH);
+    // `grad` BEFORE `rad` — "200grad" ends with "rad", so testing rad first
+    // matched it and returned 11459deg. Suffix tests must run longest-first.
+    const h = /turn$/i.test(rawH) ? hNum * 360
+      : /grad$/i.test(rawH) ? hNum * 0.9
+      : /rad$/i.test(rawH) ? (hNum * 180) / Math.PI
+      : hNum;
     const sat = parseFloat(parts[1]) / 100;
     const l = parseFloat(parts[2]) / 100;
     if (![h, sat, l].some(Number.isNaN)) {

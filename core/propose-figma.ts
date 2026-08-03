@@ -6197,7 +6197,47 @@ function proposeStateDiffs(
       if (!childOccs.some((x) => paintKey(ch.pick(x.node)) !== paintKey(ch.pick(x.base)))) continue;
       const at = `${where}/${childName}`;
       const key = keyByChildName?.get(childName);
-      const partRec = key !== undefined && rootParts ? (rootParts[key] as Record<string, unknown> | undefined) : undefined;
+      let partRec = key !== undefined && rootParts ? (rootParts[key] as Record<string, unknown> | undefined) : undefined;
+      // THE FLAT MAP CANNOT SPELL A NESTED PART, and that is the whole defect.
+      // `keyByChildName` is Map<drawnName, depth1Key>, built from the POST-FOLD
+      // anatomy; this loop reads the PRE-FOLD dump. When foldWrapperUnion
+      // synthesizes a wrapper — Untitled UI's dropdown-list-item draws `Text`
+      // flat in 16 of 24 variants and nested under a real `Content` frame in
+      // the other 8, so the union folds it to `Content.parts.Text` — the lookup
+      // misses and the state override is never proposed. The sibling
+      // `Shortcut` survives only because it is genuinely depth-1 on both sides.
+      //
+      // Measured: the disabled render was BYTE-IDENTICAL to default (same sha1)
+      // while the dump carried the fact exactly (fill 404040 → e5e5e5).
+      //
+      // Resolve by walking the anatomy for a UNIQUELY named part. Uniqueness is
+      // the safety condition: two parts sharing a name would make the match a
+      // guess, and a wrong state override is worse than a named refusal, so an
+      // ambiguous name falls through to the refusal below.
+      let resolvedKey = key;
+      if (!partRec && rootParts) {
+        const hits: Array<{ rec: Record<string, unknown>; path: string }> = [];
+        const findNamed = (parts: Record<string, unknown> | undefined, trail: string[]): void => {
+          for (const [k, v] of Object.entries(parts ?? {})) {
+            const rec = v as Record<string, unknown>;
+            if (k === childName) hits.push({ rec, path: [...trail, k].join('/') });
+            findNamed(rec?.parts as Record<string, unknown> | undefined, [...trail, k]);
+          }
+        };
+        findNamed(rootParts as Record<string, unknown>, []);
+        if (hits.length === 1) {
+          partRec = hits[0].rec;
+          // The PATH, not just the record — `mintStateObservation` names the
+          // minted token `<partKey>-state-<state>`, and an undefined partKey
+          // falls back to the ROOT spelling `state-<state>`. Passing the record
+          // without its path carried the fact and then minted it under a name
+          // that collides with the root's own state tokens: the first pass of
+          // this fix produced `imported.dropdown-list-item.state-disabled.color`
+          // beside the correctly-named `shortcut-state-disabled`. Depth has to
+          // travel with the record.
+          resolvedKey = hits[0].path;
+        }
+      }
       if (!partRec || !partStates) {
         ctx.notes.push(
           `${at}: ${ch.paintName} differs in state "${state}" but no anatomy part maps to this drawn child — NAMED, not proposed (review)`,
@@ -6251,7 +6291,7 @@ function proposeStateDiffs(
           ctx, rec.target, state, ch.cssProp, 'color',
           paints.map((p) => ({ variant: p.variant, value: paintCssHex(p.paint!) })),
           `${at} (state ${state})|${ch.paintName}`,
-          key,
+          resolvedKey,
         );
         if (!ctx.mint) {
           ctx.notes.push(
@@ -7065,7 +7105,22 @@ export function proposeFromDump(
       const states = (rec.part.states ?? {}) as Record<string, Record<string, string>>;
       states[rec.state] = { ...(states[rec.state] ?? {}), ...rec.target };
       rec.part.states = states;
-      const partKeyName = Object.entries((root.parts as Record<string, unknown>) ?? {}).find(([, v]) => v === rec.part)?.[0] ?? '(part)';
+      // THE SAME FLAT LOOKUP, one layer on. The ATTACHMENT above is fine — it
+      // holds the part object by reference, so a nested part gets its `states`
+      // correctly — but naming it by scanning only `root.parts` printed the
+      // literal placeholder "(part)" for every nested one, so the carry receipt
+      // could not say WHAT it had carried. Walk for the object instead, and
+      // spell the path so a nested part is distinguishable from a depth-1 one.
+      const findPartPath = (parts: Record<string, unknown> | undefined, trail: string[]): string | undefined => {
+        for (const [k, v] of Object.entries(parts ?? {})) {
+          const cand = v as Record<string, unknown>;
+          if (cand === rec.part) return [...trail, k].join('/');
+          const deeper = findPartPath(cand?.parts as Record<string, unknown> | undefined, [...trail, k]);
+          if (deeper !== undefined) return deeper;
+        }
+        return undefined;
+      };
+      const partKeyName = findPartPath((root.parts as Record<string, unknown>) ?? {}, []) ?? '(part)';
       ctx.notes.push(
         `${set.setName}:root/${partKeyName}: state "${rec.state}" part-level override proposed — ${Object.entries(rec.target)
           .map(([k, v]) => `${k}: ${v}`)

@@ -139,6 +139,11 @@
                 "color": "{imported.dropdown-list-item.content-text.color}",
                 "font-size": "{imported.dropdown-list-item.content-text.font-size}",
                 "line-height": "{imported.dropdown-list-item.content-text.line-height}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.dropdown-list-item.content-text-state-disabled.color}"
+                }
               }
             }
           },

@@ -3265,6 +3265,12 @@
           "$type": "color"
         }
       },
+      "content-text-state-disabled": {
+        "color": {
+          "$value": "#e5e5e5",
+          "$type": "color"
+        }
+      },
       "shortcut-state-disabled": {
         "color": {
           "$value": "#e5e5e5",

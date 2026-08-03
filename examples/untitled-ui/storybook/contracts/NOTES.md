@@ -15,7 +15,7 @@ Two kinds of note appear here, and the difference is load-bearing:
   would have fit. The values are real; the CORRELATION is unwitnessed. Carrying it
   reproduces the drawing; naming it stops the ref from reading as a proven rule.
 
-**1577 note(s) across 15 set(s)** — 6 carried-and-caveated, 1571 refusals.
+**1578 note(s) across 15 set(s)** — 6 carried-and-caveated, 1572 refusals.
 
 ## Avatar
 
@@ -1411,7 +1411,6 @@ Two kinds of note appear here, and the difference is load-bearing:
 - _Dropdown list item:root/Shortcut: rides text style "Text xs/Regular" which is not a token-derived style (the kit binds no variable to its typography) — minted under the STYLE's own name as `imported.text.text-xs-regular`, shared by every part riding it; rename against your real type tokens (provisional)
 - _Dropdown list item:root: root width is DRAWN FIXED in every variant — the observed dimension (240px, dump v1.5 bbox) is proposed as a minted root token (the drawn value is the only witness; rename against your real tokens)
 - _Dropdown list item:root: root height HUGS in every variant — carried as the literal `height: fit-content` (v16 grammar), the CSS twin of Figma HUG. The drawn 40px is a measurement of the DEFAULT content, not a design value, so it is NOT minted; the emitted box is content-sized and no longer cross-stretches when this component is nested inside another
-- _Dropdown list item:root/Text: fill differs in state "disabled" but no anatomy part maps to this drawn child — NAMED, not proposed (review)
 - prop `disabled`: promoted from axis value "State=Disabled" — a BOOLEAN prop (native disabled attribute on interactive elements), bound to design property "Disabled" (the forward generator's spelling; the imported set spelled it as an axis value — rename consequence documented here)
 - prop `icon`: true/false variant axis proposed as a boolean (extract/reconcile.ts bool⇄axis rule)
 - prop `checkbox`: true/false variant axis proposed as a boolean (extract/reconcile.ts bool⇄axis rule)
@@ -1434,8 +1433,10 @@ Two kinds of note appear here, and the difference is load-bearing:
 - MINTED {imported.text.text-xs-regular.line-height} = 18px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: _Dropdown list item:root/Shortcut line-height
 - MINTED {imported.dropdown-list-item.root.width} = 240px — machine-named from a resolved value — rename against your real tokens (provisional); bound at: _Dropdown list item:root width
 - MINTED {imported.dropdown-list-item.state-hover.background-color} = #fafafa — machine-named from a resolved value — rename against your real tokens (provisional); bound at: _Dropdown list item:root (state hover) background-color
+- MINTED {imported.dropdown-list-item.content-text-state-disabled.color} = #e5e5e5 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: _Dropdown list item:root/Content/Text (state disabled) color
 - MINTED {imported.dropdown-list-item.shortcut-state-disabled.color} = #e5e5e5 — machine-named from a resolved value — rename against your real tokens (provisional); bound at: _Dropdown list item:root/Shortcut (state disabled) color
 - state "focus-visible": promoted from the axis but no root or part override was recoverable — state not declared (its variants render identically to default, or every channel refused by name above)
+- _Dropdown list item:root/Content/Text: state "disabled" part-level override proposed — color: {imported.dropdown-list-item.content-text-state-disabled.color} (P18 v13; formerly the STYLE-FIDELITY B7 named gap)
 - _Dropdown list item:root/Shortcut: state "disabled" part-level override proposed — color: {imported.dropdown-list-item.shortcut-state-disabled.color} (P18 v13; formerly the STYLE-FIDELITY B7 named gap)
 - figmaStatePreviews: true — regenerating the canvas draws the promoted states as a "State" preview axis (values Default|Hover, the shared spelling rules) — a RENAME relative to the imported axis "State" (Focus|Disabled|Hover|Default); the contract vocabulary carries no custom state-axis spellings, so the original spelling lives in this note and in the anchors' set
 - stub ds.checkbox: renders the EXPORTED VECTOR GLYPH (iteration 8 — SVG exported at 1x from the stub source's main component, assets/icons/checkbox.svg) scaled to the minted observed box; witness paint channels are NOT minted (the svg bakes the drawn ink) and per-usage ink divergence, if any, stays with the export's baked colors — import the real child set to replace the stub

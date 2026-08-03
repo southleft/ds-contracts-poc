@@ -428,19 +428,6 @@ async function dumpNode(node, nodePath, parent) {
   if (!shape && 'rotation' in node && typeof node.rotation === 'number' && Math.abs(node.rotation) > 1e-6) {
     degrade('rotation-unsupported', nodePath, 'rotation ' + node.rotation + ' on a ' + node.type + ' has no dump projection (rotation is carried only on shape decor — dump v1.3) — node renders unrotated (#42 residue)');
   }
-  // CLOSURE GATE: `aspect-ratio` is a DECLARED_CHANNELS entry the canvas DRAWS
-  // (emit-figma-script lowers it natively) fed only from the CSS side — no
-  // reader mentioned targetAspectRatio, so a designer's aspect-ratio lock was
-  // a one-directional fact. Named, not yet carried.
-  if (node.targetAspectRatio) {
-    var _ar = node.targetAspectRatio;
-    degrade(
-      'aspect-ratio-unsupported',
-      nodePath,
-      'targetAspectRatio ' + (typeof _ar === 'object' && _ar ? _ar.x + ':' + _ar.y : String(_ar)) +
-        ' has no dump v1 projection — the node carries its measured width/height and loses the RATIO LOCK (the canvas draws aspect-ratio natively, so this is a read-side gap only)',
-    );
-  }
   if (VECTOR_TYPES.indexOf(node.type) >= 0) {
     degrade('vector-geometry-unsupported', nodePath, node.type + ' geometry (arbitrary paths) is not captured — parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)');
   }

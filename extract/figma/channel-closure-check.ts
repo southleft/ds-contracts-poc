@@ -30,7 +30,7 @@
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { DECLARED_CHANNELS } from '@ds-contracts/schema';
+import { DECLARED_CHANNELS, TOKEN_CHANNELS, LITERAL_CHANNELS } from '@ds-contracts/schema';
 
 const ROOT = process.cwd();
 const JSON_OUT = process.argv.includes('--json');
@@ -71,7 +71,16 @@ const CHANNEL_TO_FIGMA: Record<string, ChannelMap> = {
   translate: { properties: ['absoluteBoundingBox', 'relativeTransform'], structural: 'lowered into absolute x/y; read back as geometry' },
   // Figma's box model is fixed; strokeAlign is the nearest analogue and IS read.
   'box-sizing': { properties: ['strokeAlign'], structural: "Figma has no box-sizing; strokeAlign carries the inside/outside distinction" },
-  'aspect-ratio': { properties: ['targetAspectRatio'], degradation: 'aspect-ratio-unsupported' },
+  // NOT `targetAspectRatio`. An adversarial probe checked what the emitter
+  // actually writes: nothing in core/ or figma-sync/ ever calls
+  // lockAspectRatio or sets targetAspectRatio — emit-figma-script BAKES A
+  // HEIGHT from the ratio into fixedHeight/lits.height. So the ratio returns
+  // as a captured height and the round trip never lost it. My first mapping
+  // invented the hole this gate then "found", and the degradation I added for
+  // it fired on 16 of 291 ordinary icon INSTANCEs in a real fixture (proportion
+  // lock on) — noise in the same ledger the previous commit just deflated by
+  // 1,521 phantom records. Structural: the fact rides the height channel.
+  'aspect-ratio': { properties: ['height'], structural: 'lowered by BAKING a height from the ratio; read back as the captured height, never as a Figma ratio field' },
   'text-overflow': { properties: ['textTruncation', 'maxLines'], degradation: 'text-channel-unsupported' },
   'text-transform': { properties: ['textCase'], degradation: 'text-channel-unsupported' },
   'text-decoration-line': { properties: ['textDecoration'], degradation: 'text-channel-unsupported' },
@@ -79,7 +88,18 @@ const CHANNEL_TO_FIGMA: Record<string, ChannelMap> = {
   'font-family': { properties: ['fontName'] },
 };
 
-const sources = new Map(READERS.map((r) => [r, readFileSync(path.join(ROOT, r), 'utf8')]));
+/**
+ * Reader source with COMMENTS STRIPPED. An adversarial probe deleted every
+ * non-comment line mentioning `strokeAlign` from both readers, left only the
+ * documentation comment, and this gate still reported `box-sizing` as READ and
+ * printed "CLOSURE HOLDS". A gate that is satisfied by prose about a channel
+ * is measuring documentation, not code — and my own falsification had exercised
+ * only the NAMED and UNMAPPED paths, never READ, which is why I missed it.
+ */
+const stripComments = (src: string): string =>
+  src.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|[^:])\/\/.*$/gm, '$1');
+
+const sources = new Map(READERS.map((r) => [r, stripComments(readFileSync(path.join(ROOT, r), 'utf8'))]));
 
 /**
  * MENTIONED ANYWHERE — including inside a refusal message.
@@ -148,10 +168,14 @@ for (const [channel, spec] of Object.entries(DECLARED_CHANNELS)) {
         ? { channel, verdict: 'NAMED', properties: map.properties, readBy: [], degradation: map.degradation, detail: `NOT carried — named by \`${map.degradation}\`` }
         : { channel, verdict: 'SILENT', properties: map.properties, readBy: [], degradation: map.degradation, detail: `claims degradation \`${map.degradation}\` but NO reader raises that code` },
     );
+  } else if (map.structural) {
+    // Declared intent outranks a substring match, for the same reason the
+    // degradation branch does: `aspect-ratio` maps to `height`, and every
+    // reader mentions "height", so the loose test would report READ and hide
+    // that the ratio itself is never a field on either side.
+    rows.push({ channel, verdict: 'STRUCTURAL', properties: map.properties, readBy: [], detail: map.structural });
   } else if (readBy.length > 0) {
     rows.push({ channel, verdict: 'READ', properties: map.properties, readBy, detail: `read as ${map.properties.join(' / ')}` });
-  } else if (map.structural) {
-    rows.push({ channel, verdict: 'STRUCTURAL', properties: map.properties, readBy: [], detail: map.structural });
   } else {
     rows.push({
       channel, verdict: 'SILENT', properties: map.properties, readBy: [],
@@ -172,6 +196,27 @@ if (JSON_OUT) {
 const MARK: Record<Verdict, string> = { READ: '✔', NAMED: '✔', STRUCTURAL: '✔', SILENT: '✖', UNMAPPED: '✖' };
 for (const r of rows) console.log(`  ${MARK[r.verdict]} ${r.channel.padEnd(22)} ${r.verdict.padEnd(11)} ${r.detail}`);
 
+// THE DENOMINATOR, STATED. This gate enumerates DECLARED_CHANNELS entries with
+// canvas:'draw' — and that is a MINORITY of what a contract can carry. I
+// described it as converting "find every edge case" into a finite property; an
+// adversarial review measured the real coverage and the claim was overstated.
+// Channels drawn but NOT enumerated here include box-shadow, background-image,
+// opacity, outline-*, max-width, per-side stroke weights and per-corner radii,
+// plus pure-layout facts (layoutWrap, clipsContent) that live in no channel
+// registry at all and so are structurally invisible to this check. Printing the
+// fraction keeps a green run from reading as whole-surface closure.
+const asNames = (v: unknown): string[] =>
+  Array.isArray(v) ? v.map(String) : v instanceof Set ? [...v].map(String) : Object.keys(v as object);
+const universe = new Set<string>([
+  ...Object.keys(DECLARED_CHANNELS),
+  ...asNames(TOKEN_CHANNELS),
+  ...asNames(LITERAL_CHANNELS),
+]);
+console.log(
+  `\nCOVERAGE: this gate enforces ${rows.length} of ${universe.size} channel(s) a contract can carry ` +
+    `(${Math.round((rows.length / universe.size) * 100)}%). The rest are drawn and UNCHECKED by this invariant — ` +
+    'a green run here is not whole-surface closure.',
+);
 console.log(
   `\n${rows.length} channel(s) the canvas can DRAW. READ ${rows.filter((r) => r.verdict === 'READ').length} · ` +
     `NAMED ${rows.filter((r) => r.verdict === 'NAMED').length} · STRUCTURAL ${rows.filter((r) => r.verdict === 'STRUCTURAL').length} · ` +
