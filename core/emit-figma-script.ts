@@ -50,7 +50,7 @@ import {
   type Part,
   type Prop,
 } from '../scripts/contract-schema.js';
-import { flattenTokens, aliasTarget, px, type TokenEntry, type TokenTreeInput } from './tokens.js';
+import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
 import { FINGERPRINT_SRC } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 
@@ -476,15 +476,37 @@ const FONT_STYLE_BY_WEIGHT: Record<number, string> = {
   900: 'Black',
 };
 
+/**
+ * EVERYTHING THAT WAS NOT A COLOUR OR A FONT STACK USED TO BECOME A FLOAT, and
+ * `figmaValue` forced it through `px()`, which strips the unit. Polaris ships a
+ * `0ms` duration token: it was published as the Figma FLOAT 0, i.e. as ZERO
+ * PIXELS — a different fact from "no delay", and nothing said so. `100%` would
+ * have become a hard 100px the same way.
+ *
+ * `core/token-set.ts` — the sibling that compiles a foreign token set — already
+ * had this right: try a numeric read, fall back to STRING. A Figma STRING
+ * variable holds "0ms" losslessly. Two doors into the same product disagreeing
+ * about a token's type is worse than either rule alone, so they now agree.
+ * Carriage, not refusal: the fact survives, it just stops claiming to be px.
+ */
 function figmaType(entry: TokenEntry): 'COLOR' | 'FLOAT' | 'STRING' {
   if (entry.type === 'color') return 'COLOR';
   if (entry.type === 'fontFamily') return 'STRING';
-  return 'FLOAT';
+  // AN ALIAS IS NOT A LITERAL. Brand and semantic entries carry "{space.150}"
+  // — a pointer to another variable — and the emitted record spells the target
+  // in `perBrand`/`light`/`dark`, using this only to declare the Figma
+  // variable's resolvedType. Running the dimension test on the alias TEXT
+  // retyped every aliasing dimension token to STRING; the golden manifest
+  // caught it. The alias resolves to a dimension primitive, so keep FLOAT.
+  if (aliasTarget(entry.value) !== null) return 'FLOAT';
+  return pxOrNull(entry.value) === null ? 'STRING' : 'FLOAT';
 }
 
 function figmaValue(entry: TokenEntry): unknown {
   if (entry.type === 'color' || entry.type === 'fontFamily') return entry.value;
-  return px(entry.value);
+  if (aliasTarget(entry.value) !== null) return entry.value;
+  const n = pxOrNull(entry.value);
+  return n === null ? String(entry.value) : n;
 }
 
 function scopesFor(dotPath: string, entry: TokenEntry): string[] {

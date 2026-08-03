@@ -233,6 +233,30 @@ function colorOf(v: unknown): Rgba01 | null {
     const p = m[1].split(',').map((x) => parseFloat(x.trim()));
     return { r: (p[0] || 0) / 255, g: (p[1] || 0) / 255, b: (p[2] || 0) / 255, a: p[3] === undefined ? 1 : p[3] };
   }
+  // hsl()/hsla() — NOT an exotic case. shadcn/ui and Tailwind v3 are hsl-native,
+  // so an adopter on either published a `$type: "color"` token that failed every
+  // branch above, fell through to null, and was emitted as a Figma STRING
+  // variable holding the raw text. `counts` reported a STRING total and never
+  // that these were DECLARED COLOURS THAT FAILED TO PARSE, so the adopter got an
+  // unbindable STRING where a fill was expected, with nothing naming the cause.
+  // Both comma and space syntax; `/ <alpha>` and a 4th comma argument.
+  m = /^hsla?\(\s*([^)]+)\)$/i.exec(s);
+  if (m) {
+    const parts = m[1].split(/[,/]|\s+/).filter(Boolean).map((x) => x.trim());
+    const h = parseFloat(parts[0]);
+    const sat = parseFloat(parts[1]) / 100;
+    const l = parseFloat(parts[2]) / 100;
+    if (![h, sat, l].some(Number.isNaN)) {
+      const a = parts[3] === undefined ? 1 : (parts[3].endsWith('%') ? parseFloat(parts[3]) / 100 : parseFloat(parts[3]));
+      const c = (1 - Math.abs(2 * l - 1)) * sat;
+      const hp = (((h % 360) + 360) % 360) / 60;
+      const x = c * (1 - Math.abs((hp % 2) - 1));
+      const [r1, g1, b1] =
+        hp < 1 ? [c, x, 0] : hp < 2 ? [x, c, 0] : hp < 3 ? [0, c, x] : hp < 4 ? [0, x, c] : hp < 5 ? [x, 0, c] : [c, 0, x];
+      const mm = l - c / 2;
+      return { r: r1 + mm, g: g1 + mm, b: b1 + mm, a: Number.isNaN(a) ? 1 : a };
+    }
+  }
   return null;
 }
 
@@ -262,6 +286,13 @@ export interface CompiledTokenSet {
   /** Rows per type — the receipt numbers. */
   counts: Record<string, number>;
   aliasCount: number;
+  /** `$type: "color"` values no colour syntax could read — emitted as STRING.
+   *  A STRING total alone cannot tell these from tokens meant to be text. */
+  unparsedColors: string[];
+  /** `$type: "dimension"` values no numeric branch could read. */
+  unparsedDimensions: string[];
+  /** Mode keys matching no base key — their mode silently renders as base. */
+  orphanModes: string[];
 }
 
 /** Classify every base + minted token into the upsert payload — the exact
@@ -287,6 +318,8 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
   if (tokenSet.minted) walk(tokenSet.minted, []);
 
   const rows: TokenSetRow[] = [];
+  const unparsedColors: string[] = [];
+  const unparsedDimensions: string[] = [];
   // base first (alias targets must exist before minted alias rows apply —
   // the script does two passes, but ordering keeps the payload readable)
   for (const dotName of Object.keys(base).sort()) {
@@ -311,8 +344,31 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
       rows.push({ name, type: 'FLOAT', light: lf, dark: df });
       continue;
     }
+    // A DECLARED COLOUR THAT REACHES HERE DID NOT PARSE. Downgrading it to a
+    // STRING variable is not carriage — the adopter gets an unbindable STRING
+    // where a fill was expected, and `counts` reports only a STRING total, so
+    // nothing distinguishes it from a token that was always meant to be text.
+    // Same for a `dimension` that no numeric branch could read. Count and name
+    // them; STRING stays the payload so nothing is dropped, but the shape is
+    // no longer reported as if it were intended.
+    if (entry.$type === 'color') {
+      unparsedColors.push(`${name} = ${lv}`);
+    } else if (entry.$type === 'dimension') {
+      unparsedDimensions.push(`${name} = ${lv}`);
+    }
     rows.push({ name, type: 'STRING', light: lv, dark: dv });
   }
+  // MODE KEYS THAT MATCH NO BASE KEY. The loop above walks `Object.keys(base)`
+  // and looks each mode up by that name, so a mode entry whose key is spelled
+  // differently (slash vs dot) or that exists ONLY in dark is never visited —
+  // and the dark mode silently renders as light. parseTokenSet already refuses
+  // a NESTED mode tree with exactly that reasoning ("every lookup misses and
+  // the mode silently renders as base"); it never checked MEMBERSHIP, which
+  // produces the identical outcome by a different route.
+  const orphanModes = [
+    ...Object.keys(light).filter((k) => !(k in base)).map((k) => `light:${k}`),
+    ...Object.keys(dark).filter((k) => !(k in base)).map((k) => `dark:${k}`),
+  ];
   let aliasCount = 0;
   for (const name of Object.keys(mintedFlat).sort()) {
     const v = String(mintedFlat[name].$value);
@@ -342,7 +398,7 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
     rows.push({ name, type: 'STRING', light: v, dark: v });
   }
   const counts = rows.reduce<Record<string, number>>((a, r) => ((a[r.type] = (a[r.type] ?? 0) + 1), a), {});
-  return { rows, counts, aliasCount };
+  return { rows, counts, aliasCount, unparsedColors, unparsedDimensions, orphanModes };
 }
 
 // ---------------------------------------------------------------------------
@@ -354,12 +410,30 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
  *  then Figma-NATIVE VARIABLE ALIASES for the minted {alias} leaves) —
  *  re-run safe. Run BEFORE the component scripts; they bind by name. */
 export function emitTokenSetScript(tokenSet: TokenSetPayload, fileKey: string | null): string {
-  const { rows, aliasCount } = compileTokenSetRows(tokenSet);
+  const { rows, aliasCount, unparsedColors, unparsedDimensions, orphanModes } = compileTokenSetRows(tokenSet);
   const col = tokenSet.name;
+  // THE RECEIPTS RIDE THE ARTIFACT. A count returned by compileTokenSetRows and
+  // read by nobody is the same silent loss one layer up, so the three classes
+  // that used to vanish are stamped into the script an adopter actually opens.
+  const caveats = [
+    unparsedColors.length > 0
+      ? `// ⚠ ${unparsedColors.length} token(s) DECLARED $type "color" that no colour syntax could read — emitted as STRING\n` +
+        `//   variables, which cannot bind to a fill: ${unparsedColors.slice(0, 6).join(', ')}${unparsedColors.length > 6 ? ', …' : ''}`
+      : '',
+    unparsedDimensions.length > 0
+      ? `// ⚠ ${unparsedDimensions.length} token(s) DECLARED $type "dimension" that no numeric branch could read — emitted as\n` +
+        `//   STRING: ${unparsedDimensions.slice(0, 6).join(', ')}${unparsedDimensions.length > 6 ? ', …' : ''}`
+      : '',
+    orphanModes.length > 0
+      ? `// ⚠ ${orphanModes.length} MODE key(s) match no base token, so their override never applies and that mode\n` +
+        `//   renders as base: ${orphanModes.slice(0, 6).join(', ')}${orphanModes.length > 6 ? ', …' : ''}`
+      : '',
+  ].filter(Boolean).join('\n');
   return `// GENERATED by the ds-contracts engine from a CONTRACTS-BUNDLE tokenSet — DO NOT EDIT.
 // Deterministic variable UPSERT (re-run safe): one ${JSON.stringify(col)} collection,
 // Light/Dark modes, ${rows.length} variables (${aliasCount} Figma-native aliases from
 // the library's own token references). Runs BEFORE the component scripts.
+${caveats ? `${caveats}\n` : ''}
 const TOKENS = ${JSON.stringify(rows)};
 
 // File guard: multi-file bridge routing has been observed to hit the wrong

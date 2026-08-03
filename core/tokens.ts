@@ -62,6 +62,22 @@ const ALIAS = /^\{([^}]+)\}$/;
 export const aliasTarget = (v: unknown): string | null =>
   typeof v === 'string' ? (v.match(ALIAS)?.[1] ?? null) : null;
 
+/**
+ * The non-throwing half of `px`: a canvas dimension, or null when the value is
+ * not one. Callers that can carry the fact another way (a Figma STRING
+ * variable holds "0ms" losslessly) should branch on this rather than let `px`
+ * strip the unit — publishing `0ms` as the FLOAT 0 says "zero pixels", which is
+ * a different and wrong fact.
+ */
+export const pxOrNull = (v: unknown): number | null => {
+  if (typeof v === 'number') return v;
+  const s = String(v).trim();
+  const n = parseFloat(s);
+  if (Number.isNaN(n)) return null;
+  if (/^-?[\d.]+(rem|em)$/.test(s)) return n * 16;
+  return /^-?[\d.]+(px)?$/.test(s) ? n : null;
+};
+
 export const px = (v: unknown): number => {
   if (typeof v === 'number') return v;
   const s = String(v).trim();
@@ -73,6 +89,25 @@ export const px = (v: unknown): number => {
   // never fired before a rem-scaled foreign system). rem/em convert at the
   // CSS root ratio; px and unitless pass through unchanged.
   if (/^-?[\d.]+(rem|em)$/.test(s)) return n * 16;
+  // THE SAME BUG, FOR EVERY OTHER UNIT. The rem/em branch above exists because
+  // a live canvas caught '0.875rem' becoming 0.875 — and it was fixed for two
+  // units and left silent for all the rest. parseFloat happily returns 100 for
+  // '100%', 200 for '200ms', 12 for '12pt', 4 for '4px 8px' and 0 for '0 auto',
+  // and figmaType() then publishes each as a Figma FLOAT variable that the
+  // canvas reads as PIXELS. A '100%' token becomes a hard 100px.
+  //
+  // Reachable from core/wrap-plain-tokens.ts — the advertised bring-your-own
+  // on-ramp, which copies scalar values verbatim — so this is an adopter-facing
+  // path, not an internal one. Refuse BY NAME instead: a loud failure at build
+  // time beats a plausible wrong number on somebody's canvas.
+  if (!/^-?[\d.]+(px)?$/.test(s)) {
+    throw new Error(
+      `Token value "${s}" is not a canvas dimension — only unitless, px, rem and em lower to a Figma FLOAT. ` +
+        'Percentages, times, angles, pt and multi-value shorthands have no numeric canvas twin; parseFloat would ' +
+        'silently strip the unit and publish the bare number as PIXELS. Give the token a px value, or carry the ' +
+        'fact on a channel that can express it.',
+    );
+  }
   return n;
 };
 
