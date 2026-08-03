@@ -1,0 +1,90 @@
+{
+  "generatedBy": "extract/figma/dagger-census.ts",
+  "census": {
+    "untitled-ui": {
+      "ds.avatar-add-button": 1,
+      "ds.avatar-company-icon": 1,
+      "ds.avatar": 1,
+      "ds.avatar-group": 1,
+      "ds.badge-base": 1,
+      "ds.circle": 1,
+      "ds.button-base": 1,
+      "ds.button-group-base": 1,
+      "ds.dropdown-list-item": 1,
+      "ds.input-field-base": 1,
+      "ds.tooltip": 1,
+      "ds.progress-bar": 1,
+      "ds.progress-circle": 1,
+      "ds.slider": 1,
+      "ds.social-button": 1
+    },
+    "eventz-vars": {},
+    "mui": {
+      "mui.accordion": 1,
+      "mui.autocomplete": 1,
+      "mui.button": 1,
+      "mui.card": 1,
+      "mui.checkbox": 1,
+      "mui.chip": 1,
+      "mui.dialog": 1,
+      "mui.menu": 1,
+      "mui.slider": 1,
+      "mui.switch": 1,
+      "mui.table-pagination": 1,
+      "mui.table": 1,
+      "mui.tabs": 1,
+      "mui.tooltip": 1
+    },
+    "carbon": {
+      "carbon.accordion": 1,
+      "carbon.button": 1,
+      "carbon.checkbox": 1,
+      "carbon.iconbutton": 1,
+      "carbon.inlinenotification": 1,
+      "carbon.modal": 1,
+      "carbon.tabs": 1,
+      "carbon.tag": 1,
+      "carbon.textinput": 1,
+      "carbon.toggle": 1
+    },
+    "altitude": {
+      "altitude.avatar": 1,
+      "altitude.badge": 1,
+      "altitude.button": 1,
+      "altitude.chip": 1,
+      "altitude.divider": 1,
+      "altitude.heading": 1,
+      "altitude.iconclose": 1,
+      "altitude.link": 1
+    },
+    "tailwind": {
+      "flowbite.alert": 1,
+      "flowbite.badge": 1,
+      "flowbite.button": 1,
+      "flowbite.card": 1,
+      "flowbite.toggleswitch": 1
+    },
+    "astryx": {
+      "astryx.badge": 1,
+      "astryx.button": 1,
+      "astryx.card": 1,
+      "astryx.dropdown-menu": 1,
+      "astryx.slider": 1,
+      "astryx.toast": 1
+    },
+    "polaris": {
+      "polaris.avatar": 1,
+      "polaris.badge": 1,
+      "polaris.banner": 1,
+      "polaris.button": 1,
+      "polaris.checkbox": 1,
+      "polaris.progress-bar": 1,
+      "polaris.radio-button": 1,
+      "polaris.spinner": 1,
+      "polaris.tag": 1,
+      "polaris.text-field": 1,
+      "polaris.text": 1,
+      "polaris.thumbnail": 1
+    }
+  }
+}

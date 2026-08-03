@@ -91,6 +91,7 @@
     "paste:check": "tsx extract/figma/paste-door-check.ts",
     "gauntlet:intake": "tsx extract/figma/gauntlet/intake.ts",
     "closure:check": "tsx extract/figma/channel-closure-check.ts",
+    "dagger:census": "tsx extract/figma/dagger-census.ts",
     "seed:gen": "tsx extract/computed/seed-gen.ts",
     "seed:verify": "tsx extract/computed/seed-gen.ts extract/computed/configs/carbon.json --verify && tsx extract/computed/seed-gen.ts extract/computed/configs/mui.json --verify"
   },
