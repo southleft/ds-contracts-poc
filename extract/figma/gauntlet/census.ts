@@ -162,7 +162,25 @@ const batch = proposeBatchFromDump(dump, {
 // Capture-side degradations, attributed per set (nodePath = "Set:variant/…").
 const degradationsBySet = new Map<string, Array<{ code: string; message: string }>>();
 const batchDegradations: Array<{ code: string; message: string }> = [];
+// DE-DUPLICATE ON READ. A chunked live capture that re-shot a set kept ONE copy
+// of the set (`dump[name] = rec`, last-writer-wins) and TWO copies of its
+// receipts (`degradations.push(...)`, unconditional). Measured on the committed
+// v14 dump: 1,521 of 3,109 `vector-geometry-unsupported` records are exact
+// duplicates — the node tree holds only 1,588 vector nodes — so the headline
+// over-stated that class by ~96% and `degradationsTotal` by ~85%.
+//
+// assemble-dump.mjs no longer creates them, but the committed dump was built
+// BEFORE that fix and cannot be re-captured without the Figma file. Deduping
+// here makes the artifact report honestly today rather than after a re-shoot.
+// A (code, nodePath, message) triple is unique per node by construction: the
+// nodePath identifies the node, so a second identical triple is a re-capture,
+// never a second real fact about the same node.
+const seenDegradations = new Set<string>();
+let duplicateDegradations = 0;
 for (const d of (dump._degradations as Array<{ code: string; nodePath: string; message: string }> | undefined) ?? []) {
+  const fingerprint = `${d.code} ${d.nodePath} ${d.message}`;
+  if (seenDegradations.has(fingerprint)) { duplicateDegradations++; continue; }
+  seenDegradations.add(fingerprint);
   const colon = d.nodePath.indexOf(':');
   const setName = colon > 0 ? d.nodePath.slice(0, colon) : null;
   if (setName && setName in dump) {
@@ -172,6 +190,12 @@ for (const d of (dump._degradations as Array<{ code: string; nodePath: string; m
   } else {
     batchDegradations.push({ code: d.code, message: d.message });
   }
+}
+if (duplicateDegradations > 0) {
+  console.log(
+    `capture receipts: dropped ${duplicateDegradations} EXACT duplicate degradation record(s) — a re-captured chunk ` +
+      'used to double its receipts while the set itself deduped (fixed in gauntlet/live/assemble-dump.mjs; this dump predates it).',
+  );
 }
 
 // ---------------------------------------------------------------------------
