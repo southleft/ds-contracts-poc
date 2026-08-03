@@ -929,33 +929,57 @@ plus a capture config first. The engine's ability to handle a big system and a
 team's ability to GET a big system into it are different questions, and only
 the first one has been measured.
 
-**The unlock, now BUILT and MEASURED — `npm run seed:gen`.** Generate seeds
-from the library's own type information into a seed a human REVIEWS, turning
-O(n) authoring into O(1) tooling plus n reviews. Measured against the ten
-hand-authored Carbon seeds as ground truth (`-- --verify`):
+**The unlock, now BUILT and MEASURED on TWO libraries — `npm run seed:gen`.**
+Generate seeds from the library's own type information into a seed a human
+REVIEWS, turning O(n) authoring into O(1) tooling plus n reviews. Measured
+against hand-authored seeds as ground truth (`-- --verify`):
 
-| | |
-|---|---|
-| enum axes reproduced EXACTLY | **11 of 14** |
-| axes proposed that DIFFER from the human | **0** |
-| axes not proposed, MECHANICAL (a resolver gap) | **0** |
-| axes not proposed, JUDGMENT (unreachable by construction) | **3** |
-| axes proposed that the human seed OMITS | **9** |
+| | Carbon (n=10) | MUI (n=14) |
+|---|---|---|
+| enum axes reproduced EXACTLY | **11 of 14** | **15 of 20** |
+| axes proposed that DIFFER from the human | **0** | **0** |
+| axes not proposed, MECHANICAL (a resolver gap) | **0** | **0** |
+| axes not proposed, JUDGMENT (unreachable by construction) | **3** | **5** |
+| axes proposed that the human seed OMITS | **9** | **12** |
+| measured prune rate | **45%** | **44%** |
+
+**The second library is in this table because the first one alone proved
+nothing, and it very nearly proved the opposite.** The resolver was written by
+reading Carbon's four spellings of an enum. Run unchanged against MUI it scored
+**0 of 20** — a Carbon-shaped hack, not a general tool. What survived that run
+is the reason it was recoverable: it still had **zero DIFFER**, because it stays
+silent rather than guessing, and its own miss-classifier named the mechanism on
+sight. MUI wraps nearly every enum in
+`OverridableStringUnion<'a' | 'b', XPropsColorOverrides>`, declares `Breakpoint`
+in the *sibling* `@mui/system` package, and trails `| undefined` — which my own
+over-tightening ("decline unless every arm is a literal") had turned into a
+refusal. Four fixes took it 0 → 15, with Carbon unmoved at 11/14.
+
+Any agreement figure from a single library should be read as unvalidated. This
+one replicated; the next library may not.
 
 Read the zero first. The generator never once proposed an enum, or a value,
 that the human did not write. It is silent wherever it cannot resolve, and that
 silence is the whole property that makes the output *reviewable* rather than a
 second thing to fact-check.
 
-**The ceiling is 11/14, not 14/14, and that is a finding rather than a
-shortfall.** The three it misses are not resolver gaps — the tool now proves
-this by reading the library's own declaration for each missed prop. Carbon
-declares `toggled?: boolean`; a human named the two states `untoggled|toggled`.
-Carbon declares `checked` and `indeterminate` as two separate booleans; a human
-collapsed them into one three-value axis. Carbon declares `lowContrast?:
-boolean`; a human renamed it to `contrast` with values `high|low` and inverted
-the polarity. **That half of a seed is design modelling, not code reading.** A
-generator that produced it would be inventing the design space.
+**The ceiling is 11/14 and 15/20, not 14/14 and 20/20, and that is a finding
+rather than a shortfall.** Every remaining miss on both libraries is JUDGMENT,
+and the tool proves it by reading the library's own declaration for each missed
+prop rather than taking my word. Carbon declares `toggled?: boolean`; a human
+named the two states. Carbon declares `checked` and `indeterminate` as two
+separate booleans; a human collapsed them into one three-value axis. Carbon
+declares `lowContrast?: boolean`; a human renamed it to `contrast: high|low`
+and inverted the polarity. MUI declares `expanded?: boolean | undefined` and
+`checked?: SwitchBaseProps['checked']` — a human named the states in both.
+**That half of a seed is design modelling, not code reading.** A generator that
+produced it would be inventing the design space.
+
+That classifier had to be fixed before it could be believed: a bare
+`/^boolean$/` test filed MUI's `boolean | undefined` and its indexed-access
+`SwitchBaseProps['checked']` as *resolver gaps*, which understated the ceiling
+by describing modelling decisions as bugs. It now strips nullish arms and
+follows indexed access and aliases before deciding.
 
 **The review is not free, and the honest ratio says so.** Nine further axes are
 proposed that the human omitted — `IconButton.align` really is a 20-value union
@@ -965,15 +989,47 @@ are read correctly and are still work. So the reviewer **prunes 9 and authors
 it is not nothing, and a cost model that quoted only 11/14 would be overstating
 the tool.
 
-**At Carbon's full breadth** (`-- --all`, all 122 shipped components): **61
-components carry at least one readable enum axis, 112 axes in total.** 52
-declare no readable enum axis — many genuinely have none, since a `Layer` or a
-`Grid` has no variant plane — and 9 have no locatable props declaration and
-still cost a full hand-author.
+**At full breadth across ALL SIX libraries** (`-- --all`). Only Carbon and MUI
+have hand-authored seeds to check agreement against; the other four measure
+whether the *reader* generalises:
+
+| library | components swept | carry ≥1 readable axis | axes proposed |
+|---|---|---|---|
+| Carbon | 122 | **61** | **112** |
+| MUI | 135 | **66** | **128** |
+| Polaris | 121 | **52** | **125** |
+| Astryx | 95 | **60** | **118** |
+| flowbite-react | 46 | **0** | **0** |
+| altitude | 65 | **0** | **0** |
+
+Every proposal in every non-zero sweep passes `validateContract`. Components
+with no readable axis are mostly not failures — a `Layer` or a `Grid` has no
+variant plane.
+
+**THE TWO ZEROS ARE REFUSALS, NOT COVERAGE, and the tool now says so in those
+words.** A sweep that reads nothing across a whole library printed "All 0
+proposals pass validateContract" — a vacuous truth that reads exactly like a
+clean pass. It now prints the failure and names the idiom:
+
+- **flowbite-react** — props live in a type alias over
+  `PolymorphicComponentPropWithRef`, and each "enum" is an interface carrying
+  `[key: string]: string`. The types say *any string is valid*, so proposing a
+  closed enum would assert something the library explicitly denies. This one is
+  declined on principle, not only on effort.
+- **altitude** — Lit web components. Props are class `accessor` fields; there
+  is no props interface to read at all.
+
+Finding where a library keeps its components is also discovered rather than
+listed: Carbon uses `es/components`, MUI the package root, Polaris
+`build/ts/src/components`, flowbite `dist/components`. A hardcoded list is
+always one library out of date, so the sweep picks the directory holding the
+most `<Name>/<Name>.d.ts` declarations — and **refuses** if no directory holds
+three, because a sweep that reported 0 would look identical to a library with
+no components.
 
 **Every proposal is run through the real referee**, not just eyeballed:
-`validateContract` — the same one the pipeline runs — on all 61 sweep
-proposals and all 9 config components. All pass. That check earned its keep
+`validateContract` — the same one the pipeline runs — on **all 61 Carbon sweep
+proposals and all 66 MUI ones**. All pass. That check earned its keep
 immediately: the first version of the generator emitted `id`/`name`/
 `semantics`/`props` and nothing else, which agreed with the human on every
 value and **would not have parsed**, because a contract also carries
@@ -987,17 +1043,23 @@ values; that is caught one layer later, and precisely — the emitter refuses
 with `prop "size" figma values map is missing enum value "md"` for each missing
 value, verified by probe against an all-values-named control.
 
-**The prune rate is MEASURED, not estimated.** The ten seeds record what a
-human actually did with each proposable axis — kept it or left it out — so the
-ratio is observed behaviour rather than a guess about what a reviewer would
-want. Of **20 axes proposed, a human kept 11 and dropped 9: a 45% prune rate**,
-plus **0.3 axes per component** still authored by hand. The denominator is ten
-components and that number should never be quoted without it.
+**The prune rate is MEASURED, not estimated — and it REPLICATED.** The seeds
+record what a human actually did with each proposable axis, kept it or left it
+out, so the ratio is observed behaviour rather than a guess about what a
+reviewer would want.
 
-Extrapolating to Carbon's full breadth — explicitly an extrapolation from n=10
-— the 112 sweep axes would yield roughly 60 kept, 50 pruned, and about 18 axes
-authored from scratch. Against hand-authoring all ~130, that is a real
-reduction and not an elimination.
+- Carbon: of 20 axes proposed, a human kept 11 and dropped 9 — **45%**
+- MUI: of 27 axes proposed, a human kept 15 and dropped 12 — **44%**
+
+Two libraries, different type idioms, different authors, one point apart. That
+is the first thing here that looks like a general property rather than a
+per-library accident — though n is still 24 components, and the denominator
+travels with the number.
+
+Extrapolating to full breadth — explicitly an extrapolation — Carbon's 112
+sweep axes yield roughly 62 kept and 50 pruned; MUI's 128 yield roughly 72 and
+56. Against hand-authoring all of them, that is a real reduction and not an
+elimination.
 
 **What this still does not buy.** Those are the ENUM half of a seed. Every
 component continues to need its parts, its semantics, and any axis a human

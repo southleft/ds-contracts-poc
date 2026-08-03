@@ -21,10 +21,16 @@
  * committed seed. Generated-then-reviewed and inferred-at-capture are
  * different objects, and only the second one breaks determinism.
  *
- * IT IS MEASURED AGAINST GROUND TRUTH, not asserted: ten Carbon components
- * already have hand-authored seeds, so `--verify` regenerates those and reports
- * exactly where the proposal agrees with the human and where it does not. A
- * generator whose agreement is unmeasured would just move the guessing.
+ * IT IS MEASURED AGAINST GROUND TRUTH, not asserted: Carbon and MUI both have
+ * hand-authored seeds, so `--verify` regenerates those and reports exactly
+ * where the proposal agrees with the human and where it does not. A generator
+ * whose agreement is unmeasured would just move the guessing.
+ *
+ * AND IT IS MEASURED ON MORE THAN ONE LIBRARY, because one proved nothing.
+ * Tuned on Carbon it scored 11/14 there and **0 of 20** on MUI — a hack fitted
+ * to one library's type conventions, which a single-library number would have
+ * reported as success. It now reads 11/14 and 15/20 with zero DIFFER on both.
+ * Any figure here from a single library should be treated as unvalidated.
  */
 import { readdirSync, readFileSync, statSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
@@ -50,16 +56,30 @@ const config = JSON.parse(readFileSync(path.join(ROOT, configArg), 'utf8')) as {
 // so a generator that understood only one would silently miss half the axes.
 // ---------------------------------------------------------------------------
 
-const SANDBOX = path.join(ROOT, path.dirname(configArg).replace(/extract\/computed\/configs$/, ''), '');
-const pkgRoots = [
-  path.join(ROOT, 'examples', 'carbon', '.carbon-sandbox', 'node_modules', config.library.package),
-  path.join(ROOT, 'node_modules', config.library.package),
-].filter((p) => existsSync(p));
+/**
+ * Find the installed package for WHATEVER library the config names. The first
+ * version of this hardcoded Carbon's sandbox path, which meant the tool could
+ * only ever be run against the library it was written for — and a generator
+ * measured on exactly one library is indistinguishable from a hack fitted to
+ * that library's type conventions.
+ */
+const sandboxes = readdirSync(path.join(ROOT, 'examples'))
+  .flatMap((ex) => {
+    const dir = path.join(ROOT, 'examples', ex);
+    try {
+      return readdirSync(dir)
+        .filter((d) => d.startsWith('.') && d.endsWith('-sandbox'))
+        .map((d) => path.join(dir, d, 'node_modules', config.library.package));
+    } catch { return []; }
+  });
+const pkgRoots = [...sandboxes, path.join(ROOT, 'node_modules', config.library.package)].filter((p) => existsSync(p));
 if (pkgRoots.length === 0) {
-  console.error(`REFUSED: no installed copy of ${config.library.package} found — the sandbox is git-ignored; install it first.`);
+  console.error(`REFUSED: no installed copy of ${config.library.package} found — the sandboxes are git-ignored; install it first.`);
   process.exit(1);
 }
 const PKG = pkgRoots[0];
+/** `@carbon/react` → `carbon`, `@mui/material` → `mui`, `polaris` → `polaris`. */
+const LIB = config.library.package.replace(/^@/, '').split('/')[0];
 
 const dts: string[] = [];
 const walk = (dir: string): void => {
@@ -73,6 +93,27 @@ const walk = (dir: string): void => {
 };
 walk(PKG);
 
+/**
+ * A DESIGN SYSTEM IS OFTEN SPLIT ACROSS SIBLING PACKAGES, and the type index
+ * has to follow it there. MUI declares `Dialog.maxWidth` as `Breakpoint`, and
+ * `Breakpoint` lives in `@mui/system` — a different package from
+ * `@mui/material`. Walking only the named package left that alias unresolvable
+ * and the axis silently unproposed. Index the whole npm scope.
+ */
+const scope = /^@[^/]+/.exec(config.library.package)?.[0];
+const indexedPkgs = [path.relative(ROOT, PKG)];
+if (scope) {
+  const scopeDir = path.join(PKG, '..');
+  for (const sib of readdirSync(scopeDir)) {
+    const full = path.join(scopeDir, sib);
+    if (full === PKG) continue;
+    // `@mui/icons-material` alone ships ~10k declarations and contributes no
+    // component enum; skipping it is a stated exclusion, not a silent cap.
+    if (/icons?/.test(sib)) { indexedPkgs.push(`${scope}/${sib} (SKIPPED — icon package)`); continue; }
+    try { if (statSync(full).isDirectory()) { walk(full); indexedPkgs.push(path.relative(ROOT, full)); } } catch { /* not a package */ }
+  }
+}
+
 /** alias name → literal union values */
 const unions = new Map<string, string[]>();
 /** const-map name → its keys */
@@ -85,6 +126,8 @@ const constKeys = new Map<string, string[]>();
  * two lines above the alias, fully readable, and simply never looked at.
  */
 const aliasBody = new Map<string, string>();
+/** `InterfaceName.propName` → its declared type, for indexed access. */
+const ifaceProps = new Map<string, string>();
 
 const LITERALS = /'([^']+)'(?:\s*\|\s*'([^']+)')+/;
 for (const f of dts) {
@@ -105,6 +148,20 @@ for (const f of dts) {
     const [, name, body] = m;
     const keys = [...body.matchAll(/^\s*'?([\w-]+)'?\??:/gm)].map((x) => x[1]);
     if (keys.length >= 2) constKeys.set(name, [...new Set(keys)]);
+  }
+  // INTERFACE MEMBERS, for indexed access. MUI writes
+  // `checked?: SwitchBaseProps['checked']`, and without this the resolver
+  // cannot see that it lands on a `boolean` — so the miss got filed as a
+  // resolver gap when it is really a human modelling decision. A classifier
+  // that misreads WHY it failed overstates its own ceiling.
+  let current: string | null = null;
+  for (const line of text.split('\n')) {
+    const open = /^\s*(?:export\s+)?(?:declare\s+)?interface\s+(\w+)/.exec(line);
+    if (open) { current = open[1]; continue; }
+    if (/^\}/.test(line)) { current = null; continue; }
+    if (!current) continue;
+    const prop = /^\s{2,}(\w+)\??:\s*([^;\n]+);/.exec(line);
+    if (prop) ifaceProps.set(`${current}.${prop[1]}`, prop[2].trim());
   }
 }
 
@@ -167,7 +224,42 @@ function stripWrappingParens(t: string): string {
  * future library would hang the generator rather than decline the axis.
  */
 function resolve(typeExpr: string, seen: Set<string> = new Set()): string[] | null {
-  const t = stripWrappingParens(typeExpr.trim().replace(/;$/, ''));
+  let t = stripWrappingParens(typeExpr.trim().replace(/;$/, ''));
+
+  // A TRAILING `| undefined` IS NOT PART OF THE ENUM. MUI writes
+  // `'secondary' | 'primary' | 'inherit' | undefined`; my own tightening —
+  // "decline unless EVERY arm is a literal" — then refused a plain three-value
+  // union. Strip the nullish arms once, here, instead of at each arm site.
+  const live = splitUnion(t).filter((a) => !/^(undefined|null|never)$/.test(a));
+  if (live.length === 0) return null;
+  if (live.length < splitUnion(t).length) t = live.length === 1 ? stripWrappingParens(live[0]) : live.join(' | ');
+
+  // `OverridableStringUnion<'a' | 'b', XPropsColorOverrides>` is MUI's idiom
+  // for nearly every enum it ships, and the reason a Carbon-tuned resolver
+  // scored 0/20 against it. The second parameter is an open augmentation
+  // interface a consumer may extend; the enum the LIBRARY ships is the first.
+  const overridable = /^Overridable(?:StringUnion|Component)<([\s\S]+)>$/.exec(t);
+  if (overridable) return resolve(genericArgs(overridable[1])[0], seen);
+
+  // Indexed access — `SwitchBaseProps['checked']`.
+  const indexed = /^(\w+)\[\s*'([^']+)'\s*\]$/.exec(t);
+  if (indexed) {
+    const key = `${indexed[1]}.${indexed[2]}`;
+    const body = ifaceProps.get(key);
+    if (body === undefined || seen.has(key)) return null;
+    return resolve(body, new Set([...seen, key]));
+  }
+
+  // A BOOLEAN SENTINEL IS NOT AN ENUM MEMBER. MUI's `Breakpoint | false` uses
+  // `false` to mean "no maximum width" — an escape hatch, not a design
+  // variant, and "False" is not a Figma VARIANT value anyone wants. Strip
+  // `true`/`false` arms only when something else in the union survives.
+  // HEURISTIC, and labelled as one: the evidence is a single human decision
+  // (Dialog.maxWidth, where the human kept exactly the five breakpoints).
+  const nonSentinel = splitUnion(t).filter((a) => !/^(true|false)$/.test(a));
+  if (nonSentinel.length >= 1 && nonSentinel.length < splitUnion(t).length) {
+    return resolve(nonSentinel.length === 1 ? nonSentinel[0] : nonSentinel.join(' | '), seen);
+  }
 
   // Extract<A, B> / Exclude<A, B> — explicit, because the LOOSE literal scan
   // below gets Extract right by luck and Exclude exactly backwards: it would
@@ -269,7 +361,7 @@ interface Proposed { name: string; values: string[] }
 function buildSeed(name: string, props: Proposed[]): Record<string, unknown> {
   return {
     $schema: './contract.schema.json',
-    id: `${config.library.package.replace(/^@/, '').split('/')[0]}.${name.toLowerCase()}`,
+    id: `${LIB}.${name.toLowerCase()}`,
     name,
     version: '0.1.0',
     status: 'draft',
@@ -339,6 +431,30 @@ function declaredType(componentName: string, prop: string): string | null {
   return m ? m[1].trim() : null;
 }
 
+/**
+ * Is a missed axis a modelling decision rather than a resolver gap?
+ *
+ * This has to see THROUGH the declaration's surface form or it overstates the
+ * ceiling. MUI declares `expanded?: boolean | undefined` and
+ * `checked?: SwitchBaseProps['checked']`; both land on `boolean`, both were
+ * filed as resolver gaps by a bare `/^boolean$/` test, and both are really a
+ * human naming two states. Follow indexed access and strip nullish first.
+ */
+function landsOnBoolean(decl: string, depth = 0): boolean {
+  if (depth > 4) return false;
+  const live = splitUnion(decl).filter((a) => !/^(undefined|null)$/.test(a));
+  if (live.length !== 1) return false;
+  const one = stripWrappingParens(live[0]);
+  if (/^boolean$/.test(one)) return true;
+  const indexed = /^(\w+)\[\s*'([^']+)'\s*\]$/.exec(one);
+  if (indexed) {
+    const body = ifaceProps.get(`${indexed[1]}.${indexed[2]}`);
+    return body !== undefined && landsOnBoolean(body, depth + 1);
+  }
+  const body = aliasBody.get(one);
+  return body !== undefined && landsOnBoolean(body, depth + 1);
+}
+
 if (VERIFY) {
   let exact = 0, partial = 0, missed = 0, judgment = 0;
   const lines: string[] = [];
@@ -356,12 +472,12 @@ if (VERIFY) {
       if (!got) {
         missed++;
         const decl = declaredType(c.importName ?? c.name, prop);
-        const isJudgment = decl === null || /^boolean$/.test(decl);
+        const isJudgment = decl === null || landsOnBoolean(decl);
         if (isJudgment) judgment++;
         const why = isJudgment
           ? decl === null
             ? 'JUDGMENT — the library declares NO prop by this name; a human modelled the axis'
-            : `JUDGMENT — the library declares \`${decl}\`; a human named the states`
+            : `JUDGMENT — the library declares \`${decl}\`, which lands on a boolean; a human named the states`
           : `MECHANICAL — the library declares \`${decl}\` and the resolver could not read it`;
         lines.push(`  ✖ ${c.name}.${prop} — NOT proposed (human: ${want.join('|')}) — ${why}`);
         continue;
@@ -424,7 +540,9 @@ if (VERIFY) {
   const proposed = exact + surplus;
   const n = config.components.filter((c) => c.contract).length;
   console.log(
-    `\nPRUNE RATE (n=${n} components, the only ones with a human decision on record): of ${proposed} axes proposed, a human KEPT ${exact} and DROPPED ${surplus} — ${Math.round((surplus / proposed) * 100)}%. Authoring still required: ${judgment} axes over ${n} components, ${(judgment / n).toFixed(1)} per component.`,
+    proposed === 0
+      ? `\nPRUNE RATE: UNDEFINED — the generator proposed NOTHING for these ${n} components, so there is no rate to report. That is a resolver failure, not a 0% prune.`
+      : `\nPRUNE RATE (n=${n} components, the only ones with a human decision on record): of ${proposed} axes proposed, a human KEPT ${exact} and DROPPED ${surplus} — ${Math.round((surplus / proposed) * 100)}%. Authoring still required: ${judgment} axes over ${n} components, ${(judgment / n).toFixed(1)} per component.`,
   );
   process.exit(partial === 0 ? 0 : 1);
 }
@@ -436,8 +554,34 @@ if (VERIFY) {
 // ---------------------------------------------------------------------------
 
 if (process.argv.includes('--all')) {
-  const dir = path.join(PKG, 'es', 'components');
-  const names = readdirSync(dir).filter((n) => statSync(path.join(dir, n)).isDirectory()).sort();
+  // WHERE a package keeps its components is a per-library fact, and a list of
+  // known layouts is a list that is always one library out of date: Carbon
+  // uses `es/components`, MUI the package root, Polaris
+  // `build/esm/components`, flowbite-react `dist/components`. DISCOVER it
+  // instead — the components directory is the one with the most children
+  // following the `<Name>/<Name>.d.ts` convention.
+  const byParent = new Map<string, number>();
+  for (const f of dts) {
+    const base = path.basename(f, '.d.ts');
+    const own = path.dirname(f);
+    if (path.basename(own) !== base) continue;
+    const parent = path.dirname(own);
+    byParent.set(parent, (byParent.get(parent) ?? 0) + 1);
+  }
+  const best = [...byParent.entries()].sort((a, b) => b[1] - a[1])[0];
+  if (!best || best[1] < 3) {
+    console.error(
+      `REFUSED: no component directory found under ${path.relative(ROOT, PKG)} — no directory holds 3+ declarations following the <Name>/<Name>.d.ts convention. ` +
+        'A sweep that reported 0 here would look identical to a library with no components, so it refuses instead. ' +
+        'A library that ships no per-component type declarations (web components, for instance) is genuinely out of scope for this tool.',
+    );
+    process.exit(1);
+  }
+  const dir = best[0];
+  console.log(`Sweeping ${path.relative(ROOT, dir)} (${best[1]} component declarations)\n`);
+  const names = readdirSync(dir).filter((n) => {
+    try { return /^[A-Z]/.test(n) && statSync(path.join(dir, n)).isDirectory(); } catch { return false; }
+  }).sort();
   let withAxes = 0, axes = 0, noDecl = 0, noAxes = 0;
   const rows: string[] = [];
   const rejected: string[] = [];
@@ -456,7 +600,19 @@ if (process.argv.includes('--all')) {
   }
   console.log(rows.join('\n'));
   if (rejected.length > 0) console.log(`\n${rejected.length} of ${withAxes} proposal(s) FAIL the contract referee:\n${rejected.join('\n')}`);
-  else console.log(`\nAll ${withAxes} proposals pass validateContract — the same referee the pipeline runs.`);
+  else if (withAxes > 0) console.log(`\nAll ${withAxes} proposals pass validateContract — the same referee the pipeline runs.`);
+  // "All 0 proposals pass" is a vacuous truth that READS LIKE SUCCESS. A sweep
+  // that finds nothing across a whole library is the loudest result this tool
+  // can produce and must not be reported in the same voice as a clean pass.
+  else {
+    console.log(
+      `\n✖ ZERO axes read across ${names.length} components — the resolver does not understand this library's declaration idiom at all.\n` +
+        '  This is a REFUSAL, not a clean sweep. Known unsupported idioms:\n' +
+        '   - flowbite-react: props live in a type alias over `PolymorphicComponentPropWithRef`, and each "enum" is an INTERFACE carrying `[key: string]: string` — the types say any string is valid, so proposing a closed enum would assert something the library explicitly denies.\n' +
+        '   - Lit web components (altitude): props are class `accessor` fields, not interface members; there is no props interface to read.\n' +
+        '  Add the idiom or leave the library to hand-authoring — but do not read this as coverage.',
+    );
+  }
   console.log(`\nSWEEP of ${names.length} shipped components:`);
   console.log(`  ${withAxes} have at least one enum axis the generator can read — ${axes} axes total, proposed rather than authored.`);
   console.log(`  ${noAxes} declare no readable enum axis (many genuinely have none — a Layer or a Grid has no variant plane).`);
@@ -471,7 +627,7 @@ if (process.argv.includes('--all')) {
 // Emit proposed seeds — PROPOSED, and the file says so
 // ---------------------------------------------------------------------------
 
-const outDir = path.join(ROOT, 'examples', 'carbon', 'contracts-seed-proposed');
+const outDir = path.join(ROOT, 'examples', LIB, 'contracts-seed-proposed');
 if (WRITE) mkdirSync(outDir, { recursive: true });
 let written = 0;
 const invalid: string[] = [];
