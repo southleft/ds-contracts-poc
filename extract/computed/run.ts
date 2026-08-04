@@ -1309,6 +1309,14 @@ async function main() {
       '',
     ];
 
+    // MIRROR of the quarantine path's stale-artifact rule (2026-08-03, walked
+    // live): a SUCCESS must delete a stale refusal.json/REFUSAL.md from a
+    // previous run, or the component stays "quarantined" forever — onboard
+    // --continue gates on existsSync(refusal.json) and re-prints the old
+    // reason as if current, with no recovery short of an out-of-band rm. A
+    // refusal that no longer describes reality is a false receipt.
+    rmSync(path.join(outDir, 'refusal.json'), { force: true });
+    rmSync(path.join(outDir, 'REFUSAL.md'), { force: true });
     writeFileSync(path.join(outDir, 'enriched.contract.json'), JSON.stringify(enriched, null, 2) + '\n');
     writeFileSync(path.join(outDir, 'enriched.extension.json'), JSON.stringify(extension, null, 2) + '\n');
     writeFileSync(path.join(outDir, 'review-queue.json'), JSON.stringify(reviewQueue, null, 2) + '\n');

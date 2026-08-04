@@ -12,7 +12,7 @@
  * REQUIRED self-check (asserted by the orchestrator, extract/computed/run.ts).
  */
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import type { Page } from 'playwright-core';
 import { ContractSchema, CONTRACT_STATES, type Contract } from '../../scripts/contract-schema.js';
@@ -329,6 +329,12 @@ export function loadConfig(repoRoot: string, configPath: string): CaptureConfig 
   if ((cfg as unknown as Record<string, unknown>)[DRAFT_MARKER_KEY] !== undefined) {
     throw new Error(`REFUSED: ${draftRefusalMessage(configPath)}`);
   }
+  // TOKENS.CSS: deliberately NOT validated here (2026-08-03, second pass). A
+  // load-time refusal broke two legitimate loads — a DRAFT config carries ''
+  // at rest, and eval scratch environments load configs whose css lives
+  // outside the copy. The named refusals live where the value is USED:
+  // onboard --continue preflights it (the walked burned-browser-time case),
+  // and gate.ts gateInventory refuses by name before the gate renders.
   // GATE-INVENTORY FIX (task #21): a MISSING shipped minted tree would drop
   // the gate silently back to fresh-mint-only inventory — the exact defect —
   // so a declared path that does not exist is refused by name at load.

@@ -43,6 +43,7 @@
       "name": "label",
       "description": "Always rendered.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {

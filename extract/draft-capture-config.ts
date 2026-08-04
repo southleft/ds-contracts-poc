@@ -145,8 +145,13 @@ export function draftCaptureConfig(extracted: ExtractedComponent[], opts: DraftO
     library,
     mount: {
       imports: [],
-      wrapperOpen: '',
-      wrapperClose: '',
+      // A FRAGMENT, not '' — the harness template interpolates these around
+      // the mounted component, and empty strings emit INVALID JSX that kills
+      // esbuild with the opaque "Expected } but found ." two stages later
+      // (walked live, 2026-08-03). Every committed config uses a fragment or a
+      // provider; the draft now starts from the shape that compiles.
+      wrapperOpen: '<>',
+      wrapperClose: '</>',
       '__review:mount':
         'the mount recipe the library needs on EVERY stage — stylesheet import (Tailwind: the built CSS, inlined by the harness), ThemeProvider/locale wrappers (MUI: createTheme({cssVariables:true})); see extract/computed/configs/{mui,tailwind}.json for worked examples',
     },

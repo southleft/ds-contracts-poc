@@ -63,6 +63,7 @@
       "name": "label",
       "description": "Always rendered — users must know what they are toggling.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {

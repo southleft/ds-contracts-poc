@@ -37,6 +37,7 @@
       "name": "sourceTitle",
       "description": "The source's display title (label variant).",
       "type": "text",
+      "default": "Source Title",
       "required": true,
       "bindings": {
         "figma": {

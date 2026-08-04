@@ -24,14 +24,21 @@ Usage: ds-contracts <command> [options]
 
 Commands:
   onboard <package-or-path>                   PHASE 1 of the code → canvas pipeline: detect the
-          [--components a,b,c]                adapter/styling, create or reuse a sandbox, seed
-          [--workspace <dir>] [--force]       contracts from the static pass, DRAFT the capture
+          [--components a,b,c]                adapter/styling, create or reuse a sandbox (a PATH
+          [--workspace <dir>] [--force]       is npm-packed to a tarball so its deps really
+                                              install; an npm PACKAGE is extracted from its
+                                              INSTALLED copy — a dist-only package is refused by
+                                              name, the cwd's own repo is never extracted), seed
+                                              contracts from the static pass, DRAFT the capture
                                               config — then STOP at the review gate and print
-                                              what a human must decide and why. A directory that
-                                              already carries a ds-library.json is ADOPTED.
-                                              (--force starts a NEW onboarding over a workspace
-                                              that already has one in flight; it does NOT skip
-                                              the phase-2 review gate — nothing does.)
+                                              what a human must decide and why. A target with no
+                                              token file gets a SKELETON DTCG (author it before
+                                              phase 2's promote; flat leaf names = css var minus
+                                              "--"). A directory that already carries a
+                                              ds-library.json is ADOPTED. (--force starts a NEW
+                                              onboarding over a workspace that already has one
+                                              in flight; it does NOT skip the phase-2 review
+                                              gate — nothing does.)
   onboard --continue                          PHASE 2: capture → promote → emit → bundle →
           [--channel-key K] [--dry-run]       publish to the standing channel. The designer
           [--bridge <url>]                    clicks "Check for updates" — NO JSON ON A CLIPBOARD.
@@ -97,8 +104,7 @@ Commands:
                                               "generate" block of ds-contracts.config.json, else
                                               the contract alone AND the body says so)
 
---tokens on generate / figma / propose-pr (NOT on "figma bundle", where it is
-positional: base first, minted second) takes any mix of:
+--tokens on generate / figma / propose-pr takes any mix of:
   path/to/file.dtcg.json    a DTCG file
   path/to/dir               a DIRECTORY — every *.tokens.json / *.dtcg.json
                             inside it, recursive and sorted
@@ -110,6 +116,10 @@ convention (brand.<n>.tokens.json, *.light.*, *.dark.*, *semantic*,
 Two files that define the SAME token differently inside ONE slot are refused
 by name — a light tree merged over a dark one emits a dark component whose
 own header says light, so the merge that would hide it is not allowed.
+
+On "figma bundle", --tokens is the same FLAG (never positional) but takes
+EXACTLY <base[,minted]> — one flat DTCG base file, optionally the minted
+tree second; no slots, no directories.
 
 ds-contracts <command> --help shows nothing extra yet — this block is the reference.
 `;

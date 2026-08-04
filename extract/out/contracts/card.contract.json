@@ -13,6 +13,7 @@
       "name": "title",
       "description": "Card heading, bound to the header title part on both surfaces.",
       "type": "text",
+      "default": "Title",
       "required": true,
       "bindings": {
         "figma": {

@@ -69,6 +69,7 @@
       "name": "label",
       "description": "Field label — always rendered; placeholders are not labels.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {

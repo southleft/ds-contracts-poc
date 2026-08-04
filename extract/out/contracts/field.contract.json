@@ -28,6 +28,7 @@
       "name": "label",
       "description": "Always rendered — even custom controls need names.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {
@@ -43,6 +44,7 @@
       "name": "inputID",
       "description": "The wrapped control's id, used for the label's htmlFor association.",
       "type": "text",
+      "default": "Input ID",
       "required": true,
       "bindings": {
         "figma": {

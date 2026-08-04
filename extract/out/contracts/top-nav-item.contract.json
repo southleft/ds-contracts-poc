@@ -37,6 +37,7 @@
       "name": "label",
       "description": "Visible item text.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {

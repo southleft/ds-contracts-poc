@@ -7,9 +7,9 @@
  * CI exit codes: 0 clean · 1 drift (findings named on stderr, report JSON
  * written) · 2 configuration/input error.
  */
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { runDiagnose } from '../../../../parity/diagnose.js';
-import { flagString, parseFlags } from '../lib.js';
+import { CliUsageError, flagString, parseFlags } from '../lib.js';
 import { CONFIG_FILENAME } from './init.js';
 
 export function diffCommand(argv: string[]): number {
@@ -18,5 +18,26 @@ export function diffCommand(argv: string[]): number {
     parsed.positionals[0] ??
     flagString(parsed, 'config') ??
     (existsSync(CONFIG_FILENAME) ? CONFIG_FILENAME : undefined);
-  return runDiagnose(configArg);
+  // The header above (and three docs, and examples/ci/design-led.yml) promise
+  // exit 2 for a configuration/input error — but diagnose throws plain Errors,
+  // which the shell maps to 1, so a malformed config and REAL drift were
+  // indistinguishable to CI (verified by execution, 2026-08-03). Config-shaped
+  // failures become usage errors here; genuine drift/runtime keeps exit 1.
+  if (configArg !== undefined) {
+    if (!existsSync(configArg)) throw new CliUsageError(`diff: config file not found: ${configArg}`);
+    try {
+      JSON.parse(readFileSync(configArg, 'utf8'));
+    } catch (e) {
+      throw new CliUsageError(`diff: config file is not valid JSON (${configArg}): ${(e as Error).message}`);
+    }
+  }
+  try {
+    return runDiagnose(configArg);
+  } catch (e) {
+    const err = e as NodeJS.ErrnoException;
+    if (err?.code === 'ENOENT') {
+      throw new CliUsageError(`diff: a path the config names does not exist — ${err.message}`);
+    }
+    throw e;
+  }
 }

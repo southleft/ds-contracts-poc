@@ -13,6 +13,7 @@
       "name": "keys",
       "description": "The shortcut text, e.g. \"⌘K\".",
       "type": "text",
+      "default": "Keys",
       "required": true,
       "bindings": {
         "figma": {

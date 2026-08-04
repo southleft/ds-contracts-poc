@@ -41,7 +41,7 @@ css-module anatomy adapter: **round-trip identity**. Verdicts:
 | `semantics.element` | MATCHED | label |
 | `states` | MATCHED | [] |
 | `props.value` | MATCHED | type + default |
-| `props.label.default` | CODE-ABSENT | required text default "Enable notifications" is the canvas default + story sample — code has no destructure default for a required prop |
+| `props.label.default` | CODE-ABSENT | required text default "Enable notifications" is the canvas default + story sample — code has no destructure default; the proposal carries the SEEDED sample "Label" (marked in its notes), which the contract's canvas default supersedes |
 | `props.label` | MATCHED | type + required |
 | `props.description` | MATCHED | type + default |
 | `events.toggle` | MATCHED | trigger "input", toggles value [off, on], aria-checked |
@@ -67,7 +67,7 @@ css-module anatomy adapter: **round-trip identity**. Verdicts:
 | `props.*.bindings.figma` | CODE-ABSENT | design-side spellings — extraction infers TitleCase, reconcile confirms |
 | `semantics.element` | MATCHED | article |
 | `states` | MATCHED | [] |
-| `props.title.default` | CODE-ABSENT | required text default "Card title" is the canvas default + story sample — code has no destructure default for a required prop |
+| `props.title.default` | CODE-ABSENT | required text default "Card title" is the canvas default + story sample — code has no destructure default; the proposal carries the SEEDED sample "Title" (marked in its notes), which the contract's canvas default supersedes |
 | `props.title` | MATCHED | type + required |
 | `anatomy.root` | MATCHED | 5 token binding(s) |
 | `anatomy.root.header` | MATCHED | 3 token binding(s) |

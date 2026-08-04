@@ -1,6 +1,6 @@
 # Proposed contracts — extraction report
 
-51 component(s) extracted, 51 with extracted anatomy. Every proposal parses against the contract schema, but a proposal is a STARTING POINT: confirm inferred design bindings via `npm run reconcile`, then review the notes below per component.
+51 component(s) extracted, 51 with extracted anatomy. Every proposal parses against the contract schema, but a proposal is a STARTING POINT: confirm inferred design bindings via `ds-contracts extract --reconcile` (`npm run reconcile` in the reference repo), then review the notes below per component.
 
 ## AccordionItem
 
@@ -10,6 +10,7 @@
 - props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `state`: figma binding INFERRED as VARIANT "State" — confirm against the design library (reconcile step)
 - prop `state`: default 'closed' read from the uncontrolled useState initializer
+- prop `title`: required text prop declared no default — sample default "Title" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - event `onToggle`: trigger 'trigger' read from the onClick wiring; toggles state between [closed, open]
 - jsx: part "chevron" renders an inline SVG glyph — icon asset not extracted (review item)
 - css: selector `.chevron svg` — icon glyph sizing, not extracted (icon parts are review items)
@@ -48,6 +49,7 @@
 - props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `status`: figma binding INFERRED as VARIANT "Status" — confirm against the design library (reconcile step)
 - prop `container`: figma binding INFERRED as VARIANT "Container" — confirm against the design library (reconcile step)
+- prop `title`: required text prop declared no default — sample default "Title" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `endContent`: ReactNode — extracted as anatomy slot "endContent"
 - jsx: <div> attribute role={…} — expression not extractable, skipped
 - jsx: part "statusIcon" renders an inline SVG glyph — icon asset not extracted (review item)
@@ -69,6 +71,8 @@
 - proposed: 3 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 3 part(s), 5 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
+- prop `href`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `href` in the anatomy or drop the prop
 - jsx: part "separatorIcon" renders an inline SVG glyph — icon asset not extracted (review item)
 - css: selector `.separatorIcon svg` — icon glyph sizing, not extracted (icon parts are review items)
 - css: .separatorIcon { flex-shrink: 0 } — no inversion rule, not extracted
@@ -79,6 +83,8 @@
 - proposed: 1 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 2 part(s), 2 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
+- prop `label`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `label` in the anatomy or drop the prop
 
 ## Button
 
@@ -100,6 +106,7 @@
 - proposed: 1 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 6 part(s), 21 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried
+- prop `title`: required text prop declared no default — sample default "Title" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `actions`: ReactNode — extracted as anatomy slot "actions"
 - anatomy: component ref `<Avatar>` mapped to contract id `ds.avatar` — confirm that contract exists (or adjust the id) before adoption
 
@@ -134,6 +141,7 @@
 - anatomy EXTRACTED from JSX + CSS Module — 5 part(s), 9 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: figma binding INFERRED as VARIANT "Variant" — confirm against the design library (reconcile step)
+- prop `message`: required text prop declared no default — sample default "Message" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `icon`: ReactNode — extracted as anatomy slot "icon"
 
 ## Checkbox
@@ -145,6 +153,7 @@
 - prop `value`: figma binding INFERRED as VARIANT "Value" — confirm against the design library (reconcile step)
 - prop `value`: default 'unchecked' read from the uncontrolled useState initializer
 - prop `size`: figma binding INFERRED as VARIANT "Size" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - event `onToggle`: trigger 'input' read from the onClick wiring; toggles value between [unchecked, checked]
 - RAW VALUE (not tokenized): `.input { width: 100% }` — no token in the tree has this value. A raw value is reported, never turned into an invented token; bind it to a real token and re-extract.
 - RAW VALUE (not tokenized): `.input { height: 100% }` — no token in the tree has this value. A raw value is reported, never turned into an invented token; bind it to a real token and re-extract.
@@ -166,6 +175,8 @@
 - anatomy EXTRACTED from JSX + CSS Module — 3 part(s), 8 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends AnchorHTMLAttributes<HTMLAnchorElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: figma binding INFERRED as VARIANT "Variant" — confirm against the design library (reconcile step)
+- prop `sourceTitle`: required text prop declared no default — sample default "Source Title" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
+- prop `href`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `href` in the anatomy or drop the prop
 
 ## Code
 
@@ -190,6 +201,7 @@
 - proposed: 2 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 5 part(s), 12 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
+- prop `title`: required text prop declared no default — sample default "Title" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `icon`: ReactNode — extracted as anatomy slot "icon"
 - prop `actions`: ReactNode — extracted as anatomy slot "actions"
 
@@ -199,6 +211,9 @@
 - proposed: 4 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 6 part(s), 10 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
+- prop `inputID`: required text prop declared no default — sample default "Input ID" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
+- prop `inputID`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `inputID` in the anatomy or drop the prop
 - jsx: part "requiredMark" renders an inline SVG glyph — icon asset not extracted (review item)
 - css: selector `.requiredMark svg` — icon glyph sizing, not extracted (icon parts are review items)
 - css: .requiredMark { flex-shrink: 0 } — no inversion rule, not extracted
@@ -226,7 +241,9 @@
 - props type extends ButtonHTMLAttributes<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: figma binding INFERRED as VARIANT "Variant" — confirm against the design library (reconcile step)
 - prop `size`: figma binding INFERRED as VARIANT "Size" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `icon`: ReactNode — extracted as anatomy slot "icon"
+- prop `label`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `label` in the anatomy or drop the prop
 
 ## Inline
 
@@ -243,6 +260,7 @@
 - proposed: 1 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 2 part(s), 9 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried
+- prop `keys`: required text prop declared no default — sample default "Keys" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 
 ## List
 
@@ -258,6 +276,7 @@
 - proposed: 2 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 6 part(s), 10 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends LiHTMLAttributes<HTMLLIElement> — parent members are outside single-file extraction and are NOT carried
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `startContent`: ReactNode — extracted as anatomy slot "startContent"
 - prop `endContent`: ReactNode — extracted as anatomy slot "endContent"
 
@@ -274,6 +293,7 @@
 - proposed: 2 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 4 part(s), 7 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `icon`: ReactNode — extracted as anatomy slot "icon"
 
 ## Pagination
@@ -283,6 +303,8 @@
 - anatomy EXTRACTED from JSX + CSS Module — 16 part(s), 40 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: figma binding INFERRED as VARIANT "Variant" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
+- prop `label`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `label` in the anatomy or drop the prop
 - jsx: part "prevButtonGlyph" renders an inline SVG glyph — icon asset not extracted (review item)
 - jsx: part "nextButtonGlyph" renders an inline SVG glyph — icon asset not extracted (review item)
 - css: selector `.prevButton svg` — icon glyph sizing, not extracted (icon parts are review items)
@@ -297,6 +319,8 @@
 - anatomy EXTRACTED from JSX + CSS Module — 3 part(s), 8 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: figma binding INFERRED as VARIANT "Variant" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
+- prop `label`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `label` in the anatomy or drop the prop
 
 ## Section
 
@@ -313,8 +337,10 @@
 - anatomy EXTRACTED from JSX + CSS Module — 4 part(s), 10 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends AnchorHTMLAttributes<HTMLAnchorElement> — parent members are outside single-file extraction and are NOT carried
 - prop `state`: figma binding INFERRED as VARIANT "State" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `icon`: ReactNode — extracted as anatomy slot "icon"
 - prop `endContent`: ReactNode — extracted as anatomy slot "endContent"
+- prop `href`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `href` in the anatomy or drop the prop
 
 ## Skeleton
 
@@ -330,6 +356,7 @@
 - proposed: 3 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 6 part(s), 19 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 
 ## Spinner
 
@@ -337,6 +364,8 @@
 - proposed: 1 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 2 part(s), 1 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
+- prop `label`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `label` in the anatomy or drop the prop
 - jsx: part "arc" renders an inline SVG glyph — icon asset not extracted (review item)
 - css: .arc { flex-shrink: 0 } — no inversion rule, not extracted
 
@@ -356,6 +385,8 @@
 - anatomy EXTRACTED from JSX + CSS Module — 1 part(s), 4 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried
 - prop `variant`: figma binding INFERRED as VARIANT "Variant" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
+- prop `label`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `label` in the anatomy or drop the prop
 - jsx: root renders {children} directly — children channel (text prop vs default slot) is not decidable from code
 
 ## Switch
@@ -366,6 +397,7 @@
 - props type extends LabelHTMLAttributes<HTMLLabelElement> — parent members are outside single-file extraction and are NOT carried
 - prop `value`: figma binding INFERRED as VARIANT "Value" — confirm against the design library (reconcile step)
 - prop `value`: default 'off' read from the uncontrolled useState initializer
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - event `onToggle`: trigger 'input' read from the onClick wiring; toggles value between [off, on]
 - RAW VALUE (not tokenized): `.input { width: 100% }` — no token in the tree has this value. A raw value is reported, never turned into an invented token; bind it to a real token and re-extract.
 - RAW VALUE (not tokenized): `.input { height: 100% }` — no token in the tree has this value. A raw value is reported, never turned into an invented token; bind it to a real token and re-extract.
@@ -381,6 +413,7 @@
 - anatomy EXTRACTED from JSX + CSS Module — 4 part(s), 9 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends ButtonHTMLAttributes<HTMLButtonElement> — parent members are outside single-file extraction and are NOT carried
 - prop `state`: figma binding INFERRED as VARIANT "State" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `icon`: ReactNode — extracted as anatomy slot "icon"
 - prop `endContent`: ReactNode — extracted as anatomy slot "endContent"
 
@@ -427,7 +460,7 @@
 
 - source: `src/components/TabList/TabList.tsx` (react-tsx)
 - proposed: 0 props, 0 events
-- anatomy EXTRACTED from JSX + CSS Module — 2 part(s), 4 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
+- anatomy EXTRACTED from JSX + CSS Module — 2 part(s), 5 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type has NO OWN members (extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction): zero own props is what this module declares — review
 
 ## TextArea
@@ -437,6 +470,8 @@
 - anatomy EXTRACTED from JSX + CSS Module — 6 part(s), 19 token binding(s), 1 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends LabelHTMLAttributes<HTMLLabelElement> — parent members are outside single-file extraction and are NOT carried
 - prop `size`: figma binding INFERRED as VARIANT "Size" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
+- prop `placeholder`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `placeholder` in the anatomy or drop the prop
 - RAW VALUE (not tokenized): `.input { background: transparent }` — no token in the tree has this value. A raw value is reported, never turned into an invented token; bind it to a real token and re-extract.
 - jsx: part "requiredMark" renders an inline SVG glyph — icon asset not extracted (review item)
 - css: selector `.requiredMark svg` — icon glyph sizing, not extracted (icon parts are review items)
@@ -451,6 +486,8 @@
 - anatomy EXTRACTED from JSX + CSS Module — 6 part(s), 19 token binding(s), 1 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends LabelHTMLAttributes<HTMLLabelElement> — parent members are outside single-file extraction and are NOT carried
 - prop `size`: figma binding INFERRED as VARIANT "Size" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
+- prop `placeholder`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `placeholder` in the anatomy or drop the prop
 - RAW VALUE (not tokenized): `.input { background: transparent }` — no token in the tree has this value. A raw value is reported, never turned into an invented token; bind it to a real token and re-extract.
 - jsx: part "requiredMark" renders an inline SVG glyph — icon asset not extracted (review item)
 - css: selector `.root[data-is-disabled]` — not extractable into anatomy, skipped by name
@@ -477,6 +514,7 @@
 - props type extends HTMLAttributes<HTMLSpanElement> — parent members are outside single-file extraction and are NOT carried
 - prop `color`: figma binding INFERRED as VARIANT "Color" — confirm against the design library (reconcile step)
 - prop `size`: figma binding INFERRED as VARIANT "Size" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `icon`: ReactNode — extracted as anatomy slot "icon"
 - prop `endContent`: ReactNode — extracted as anatomy slot "endContent"
 - css: .size-sm — "size" classes cover 2/3 values for "padding-inline"; md filled from the base rule (the cascade's default)
@@ -493,9 +531,11 @@
 - anatomy EXTRACTED from JSX + CSS Module — 4 part(s), 12 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
 - prop `size`: figma binding INFERRED as VARIANT "Size" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `startContent`: ReactNode — extracted as anatomy slot "startContent"
 - prop `centerContent`: ReactNode — extracted as anatomy slot "centerContent"
 - prop `endContent`: ReactNode — extracted as anatomy slot "endContent"
+- prop `label`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `label` in the anatomy or drop the prop
 
 ## TopNav
 
@@ -503,9 +543,11 @@
 - proposed: 1 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 4 part(s), 10 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLElement> — parent members are outside single-file extraction and are NOT carried
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `heading`: ReactNode — extracted as anatomy slot "heading"
 - prop `startContent`: ReactNode — extracted as anatomy slot "startContent"
 - prop `endContent`: ReactNode — extracted as anatomy slot "endContent"
+- prop `label`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `label` in the anatomy or drop the prop
 
 ## TopNavItem
 
@@ -514,7 +556,9 @@
 - anatomy EXTRACTED from JSX + CSS Module — 3 part(s), 9 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends AnchorHTMLAttributes<HTMLAnchorElement> — parent members are outside single-file extraction and are NOT carried
 - prop `state`: figma binding INFERRED as VARIANT "State" — confirm against the design library (reconcile step)
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `icon`: ReactNode — extracted as anatomy slot "icon"
+- prop `href`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to `href` in the anatomy or drop the prop
 
 ## TypeaheadItem
 
@@ -522,5 +566,6 @@
 - proposed: 2 props, 0 events
 - anatomy EXTRACTED from JSX + CSS Module — 5 part(s), 13 token binding(s), 0 raw value(s) reported. Anatomy is human-REVIEWED: check it against design intent before adoption.
 - props type extends HTMLAttributes<HTMLDivElement> — parent members are outside single-file extraction and are NOT carried
+- prop `label`: required text prop declared no default — sample default "Label" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)
 - prop `icon`: ReactNode — extracted as anatomy slot "icon"
 

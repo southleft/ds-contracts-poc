@@ -96,6 +96,7 @@
       "name": "label",
       "description": "Text label inside the token.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {

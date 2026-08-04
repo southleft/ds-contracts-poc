@@ -73,6 +73,7 @@
       "name": "label",
       "description": "Accessible name — screen readers must know what is progressing.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {

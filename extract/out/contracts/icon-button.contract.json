@@ -82,6 +82,7 @@
       "name": "label",
       "description": "Accessible name (aria-label). Be specific: \"Delete conversation\", not \"Delete\".",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {

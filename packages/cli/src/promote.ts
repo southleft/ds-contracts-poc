@@ -381,7 +381,16 @@ export function promote(
   // `tokenValue("p.font-weight-medium")` undefined — which silently zeroed the
   // ENTIRE alias pass (covering-set empty is a pre-receipt break, so 5,201
   // captured source facts produced "0 source-aliased" with no refusal line).
-  const dtcgTree = JSON.parse(readFileSync(path.resolve(repoRoot, cfg.dtcg), 'utf8')) as Tree;
+  const dtcgPath = path.resolve(repoRoot, cfg.dtcg);
+  if (!existsSync(dtcgPath)) {
+    // Named refusal, not a bare ENOENT: onboard names this file in
+    // ds-library.json and (since 2026-08-03) writes a skeleton — but example
+    // shims and hand-edited manifests reach promote directly.
+    throw new Error(
+      `promote REFUSED: the base DTCG token file the manifest names does not exist (${cfg.dtcg}, resolved ${dtcgPath}). Author it — leaf names must equal the CSS custom property minus the "--" prefix (flat, not nested; nested trees verify 0 facts) — or re-run onboard, which writes a skeleton to start from.`,
+    );
+  }
+  const dtcgTree = JSON.parse(readFileSync(dtcgPath, 'utf8')) as Tree;
   const dtcgFlat = new Map<string, unknown>();
   (function walkDtcg(n: Tree, p: string[]): void {
     for (const [k, v] of Object.entries(n)) {

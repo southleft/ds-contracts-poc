@@ -28,6 +28,7 @@
       "name": "label",
       "description": "The crumb text.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {

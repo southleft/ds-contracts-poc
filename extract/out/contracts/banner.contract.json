@@ -80,6 +80,7 @@
       "name": "title",
       "description": "Prominent header text.",
       "type": "text",
+      "default": "Title",
       "required": true,
       "bindings": {
         "figma": {

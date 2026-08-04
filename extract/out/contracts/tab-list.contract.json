@@ -21,6 +21,7 @@
       "tokens": {
         "gap": "{space.inset-y.sm}",
         "border-color": "{color.border.subtle}",
+        "border-width": "{border-width.100}",
         "padding-block": "{space.inset-y.xs}"
       },
       "parts": {

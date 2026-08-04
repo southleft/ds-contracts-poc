@@ -40,6 +40,7 @@
       "name": "label",
       "description": "Accessible label for the toolbar.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {

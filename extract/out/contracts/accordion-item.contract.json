@@ -37,6 +37,7 @@
       "name": "title",
       "description": "The always-visible trigger text.",
       "type": "text",
+      "default": "Title",
       "required": true,
       "bindings": {
         "figma": {

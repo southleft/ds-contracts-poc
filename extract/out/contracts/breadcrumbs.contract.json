@@ -13,6 +13,7 @@
       "name": "label",
       "description": "Accessible label for the navigation landmark.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {

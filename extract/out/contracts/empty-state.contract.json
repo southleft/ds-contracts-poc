@@ -13,6 +13,7 @@
       "name": "title",
       "description": "Primary message.",
       "type": "text",
+      "default": "Title",
       "required": true,
       "bindings": {
         "figma": {

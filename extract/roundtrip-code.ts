@@ -205,7 +205,7 @@ function compareParts(component: string, partPath: string, contract: Json, propo
 // Component comparison
 // ---------------------------------------------------------------------------
 
-function compareComponent(contract: Json, proposal: Json) {
+function compareComponent(contract: Json, proposal: Json, proposalNotes: string[]) {
   const name = contract.name as string;
 
   // Governance / design-side contract fields: genuinely not in code.
@@ -248,7 +248,18 @@ function compareComponent(contract: Json, proposal: Json) {
     if (!deepEqual(cp.type, pp.type)) issues.push(`type ${JSON.stringify(cp.type)} vs ${JSON.stringify(pp.type)}`);
     if (Boolean(cp.required) !== Boolean(pp.required)) issues.push(`required ${Boolean(cp.required)} vs ${Boolean(pp.required)}`);
     if (cp.default !== pp.default) {
-      if (cp.type === 'text' && cp.required && pp.default === undefined) {
+      // A SEEDED sample default is not an extracted fact: since 2026-08-03 the
+      // static pass seeds required text props with titleCase(name) (so the
+      // onboard path stops quarantining the mainstream Chip-with-label case)
+      // and marks it with a note. The canvas default still lives in the
+      // CONTRACT — a differing seeded sample is the same CODE-ABSENT fact it
+      // always was, now with the sample named rather than silently absent.
+      const seedNote = `sample default ${JSON.stringify(pp.default)} seeded from the prop name`;
+      const isSeeded = typeof pp.default === 'string' && proposalNotes.some((n) => n.includes(`prop \`${cp.name}\`:`) && n.includes(seedNote));
+      if (cp.type === 'text' && cp.required && isSeeded) {
+        add(name, `props.${cp.name}.default`, 'CODE-ABSENT',
+          `required text default ${JSON.stringify(cp.default)} is the canvas default + story sample — code has no destructure default; the proposal carries the SEEDED sample ${JSON.stringify(pp.default)} (marked in its notes), which the contract's canvas default supersedes`);
+      } else if (cp.type === 'text' && cp.required && pp.default === undefined) {
         add(name, `props.${cp.name}.default`, 'CODE-ABSENT',
           `required text default ${JSON.stringify(cp.default)} is the canvas default + story sample — code has no destructure default for a required prop`);
       } else {
@@ -308,7 +319,8 @@ for (const id of TRIO) {
     add(contract.name, '(extraction)', 'MISMATCH', 'adapter yielded no anatomy for a component with a co-located CSS Module');
     continue;
   }
-  compareComponent(contract, proposeContract(component, 'ds').contract as Json);
+  const proposed = proposeContract(component, 'ds');
+  compareComponent(contract, proposed.contract as Json, proposed.notes ?? []);
 }
 
 const counts = { MATCHED: 0, 'CODE-ABSENT': 0, MISMATCH: 0 } as Record<Verdict, number>;

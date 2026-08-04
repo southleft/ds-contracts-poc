@@ -16,7 +16,7 @@
  * here as honest mismatch rows. Numbers are quoted at two fixed operating
  * points (exact / the AA point) and never widened.
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { statSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import type { Page } from 'playwright-core';
 import { PNG } from 'pngjs';
@@ -228,7 +228,21 @@ export async function runGate(opts: {
   const { page, repoRoot, cfg, comp, space, aligned, enriched, mintedTree, styled, origShotsDir, outDir } = opts;
   const iconAssets = opts.iconAssets ?? new Map<string, string>();
   const k = kebab(enriched.name);
-  const tokensCss = readFileSync(path.join(repoRoot, cfg.tokens.css), 'utf8');
+  // NAMED refusal, not a bare EISDIR: an empty tokens.css joins to the
+  // repo-root DIRECTORY and used to die mid-run after ~30s of real browser
+  // time with an error blaming readFileSync. Refuse before spending anything.
+  if (!cfg.tokens.css || cfg.tokens.css.trim() === '') {
+    throw new Error(
+      'gate REFUSED: capture config tokens.css is empty — the gate page renders against the library token stylesheet, so name the built CSS file (see any committed config under extract/computed/configs/) or run without the gate.',
+    );
+  }
+  const tokensCssPath = path.join(repoRoot, cfg.tokens.css);
+  if (!existsSync(tokensCssPath) || !statSync(tokensCssPath).isFile()) {
+    throw new Error(
+      `gate REFUSED: tokens.css "${cfg.tokens.css}" is not a readable file (resolved ${tokensCssPath}) — the gate page renders against the library token stylesheet; fix the path in the capture config.`,
+    );
+  }
+  const tokensCss = readFileSync(tokensCssPath, 'utf8');
   const { inventory, merged, baseTrees } = gateInventory(repoRoot, cfg, mintedTree);
 
   // A divergence between the fresh and shipped spellings of the same leaf is

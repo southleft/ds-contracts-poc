@@ -185,16 +185,36 @@ export function proposeContract(
         },
       });
     } else if (p.kind === 'string' || p.kind === 'number') {
+      // A REQUIRED text prop with no default is a proposal the generator's own
+      // validator quarantines ("required text prop must declare a string
+      // default" — core/emit-react.ts): the default is the canvas TEXT
+      // property's value and every story/matrix sample. Seed one from the
+      // prop name so the mainstream shape (Chip with required `label`)
+      // onboards, and say so — a seeded sample is a placeholder, not a guess
+      // presented as truth.
+      // `children` is EXCLUDED from seeding: it is the JSX conduit — code
+      // renders {children} and the canvas TEXT default lives in the CONTRACT,
+      // not in code (the round-trip identity eval states exactly this; seeding
+      // "Children" here turned a tolerated CODE-ABSENT into a mismatch).
+      const seeded =
+        p.kind === 'string' && !p.optional && p.default === undefined && p.name !== 'children'
+          ? titleCase(p.name)
+          : undefined;
       props.push({
         ...base,
         type: p.kind === 'number' ? 'number' : 'text',
-        ...(p.default !== undefined ? { default: p.default } : {}),
+        ...(p.default !== undefined ? { default: p.default } : seeded !== undefined ? { default: seeded } : {}),
         ...(p.kind === 'string' && !p.optional ? { required: true } : {}),
         bindings: {
           figma: { kind: 'TEXT', property: titleCase(p.name) },
           code: { prop: p.name },
         },
       });
+      if (seeded !== undefined) {
+        notes.push(
+          `prop \`${p.name}\`: required text prop declared no default — sample default "${seeded}" seeded from the prop name; replace with your canonical sample text (it is the canvas default and the story sample)`,
+        );
+      }
     } else if (p.kind === 'event') {
       // isEventCallbackName is THE shared function-prop rule — the referee
       // (parity/diagnose.ts) applies the same predicate, so this skip is
@@ -227,6 +247,30 @@ export function proposeContract(
       );
     } else {
       notes.push(`prop \`${p.name}\`: unclassified type — not proposed, review manually`);
+    }
+  }
+
+  // UNCONSUMED TEXT PROP (walked defect): a contract can declare a required
+  // text prop whose value no part ever renders — the generated component
+  // takes `label` and draws {children}. Naming only, never auto-wiring:
+  // content binding is an anatomy decision the human owns.
+  {
+    const consumed = new Set<string>();
+    if (anatomy) {
+      const walkContent = (p: ExtractedPart) => {
+        if (p.content?.prop) consumed.add(p.content.prop);
+        const tb = (p as { textByProp?: { prop?: string } }).textByProp;
+        if (tb?.prop) consumed.add(tb.prop);
+        for (const child of Object.values(p.parts ?? {})) walkContent(child);
+      };
+      walkContent(anatomy.root);
+    }
+    // `children` is the JSX conduit itself — "renders children" is its JOB,
+    // not an unwired prop; the note would be noise on nearly every component.
+    for (const tp of props.filter((pr) => pr.type === 'text' && pr.name !== 'children' && !consumed.has(pr.name as string))) {
+      notes.push(
+        `prop \`${tp.name}\`: declared as text but no part's content (or textByProp) binds it — the generated component renders children; wire content.prop to \`${tp.name}\` in the anatomy or drop the prop`,
+      );
     }
   }
 
@@ -397,7 +441,7 @@ export function proposalsReport(
   const lines = [
     '# Proposed contracts — extraction report',
     '',
-    `${results.length} component(s) extracted${withAnatomy > 0 ? `, ${withAnatomy} with extracted anatomy` : ''}. Every proposal parses against the contract schema, but a proposal is a STARTING POINT: confirm inferred design bindings via \`npm run reconcile\`, then review the notes below per component.`,
+    `${results.length} component(s) extracted${withAnatomy > 0 ? `, ${withAnatomy} with extracted anatomy` : ''}. Every proposal parses against the contract schema, but a proposal is a STARTING POINT: confirm inferred design bindings via \`ds-contracts extract --reconcile\` (\`npm run reconcile\` in the reference repo), then review the notes below per component.`,
     '',
   ];
   for (const { component, proposal } of results) {

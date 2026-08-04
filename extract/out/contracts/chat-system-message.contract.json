@@ -37,6 +37,7 @@
       "name": "message",
       "description": "Short factual string — a date, a join notice, a status change.",
       "type": "text",
+      "default": "Message",
       "required": true,
       "bindings": {
         "figma": {

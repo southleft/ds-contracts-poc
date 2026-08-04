@@ -13,6 +13,7 @@
       "name": "label",
       "description": "Primary text.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {

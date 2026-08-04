@@ -995,7 +995,7 @@ export function validateContract(
     // Required text props need a default: it is the canvas TEXT property's
     // default value AND the sample every generated story/matrix cell uses.
     if (p.type === 'text' && p.required && typeof p.default !== 'string') {
-      errors.push(`${contract.id}: required text prop "${p.name}" must declare a string default (canvas default + story sample)`);
+      errors.push(`${contract.id}: required text prop "${p.name}" must declare a string default (canvas default + story sample) — add "default": "<sample text>" to the "${p.name}" prop in the seed contract`);
     }
     // The figma values map, when present, must cover the enum exactly.
     if (isEnum(p) && p.bindings.figma.values) {

@@ -38,6 +38,7 @@
       "name": "label",
       "description": "Visible tab text.",
       "type": "text",
+      "default": "Label",
       "required": true,
       "bindings": {
         "figma": {
