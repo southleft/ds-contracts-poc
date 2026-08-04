@@ -712,6 +712,12 @@ export function styledChannels(
       }
       if (!admit(p)) continue;
       if (a.baseFlat[pi].node.style[p] !== ctrl[p]) set.add(p);
+      else if (resetSuppliedBorderStyle(p, a.baseFlat[pi].node.style, ctrl)) {
+        set.add(p);
+        receipts.push(
+          `reset-supplied-border-style-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-style', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-style', '-width')]}) and the style comes from the library's GLOBAL CSS (Tailwind preflight's \`* { border-style: solid }\` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.`,
+        );
+      }
     }
     for (const combo of space.enumeration.combos) {
       if (!isEnabled(combo)) continue;
@@ -1426,6 +1432,48 @@ export const stateOfMintProperty = (cssProperty: string): { channel: string; sta
  *  are identical, because an undetected divergence would silently change which
  *  refusals get the fallback qualifier below. */
 export const CONTROL_TAGS_MIRROR = new Set(['button', 'span', 'a', 'div']);
+
+/** A BORDER THAT PAINTS ONLY BECAUSE THE LIBRARY'S GLOBAL CSS SUPPLIES THE STYLE.
+ *
+ *  The styled-channel door asks "does this differ from the control?", and the
+ *  control is rendered INSIDE the harness with the library's own stylesheet
+ *  loaded. That is the right question — it subtracts the user agent's defaults
+ *  AND the library's reset, leaving what the COMPONENT authored. But the
+ *  emitted CSS reproduces the component's rules and NOT the library's reset, so
+ *  a fact the reset supplies is subtracted at capture and absent at emission.
+ *  The round trip loses it.
+ *
+ *  MEASURED across the corpus, exactly two roots are in this shape:
+ *    tailwind/card  <div>  border-top-width 1px, border-top-style solid,
+ *                          control style ALSO solid (Tailwind preflight's
+ *                          `* { border-style: solid }`), control width 0px
+ *    astryx/card    <div>  the same shape
+ *  and they are precisely the two components an earlier, cruder fix improved
+ *  (astryx Card 98.601 → 100.000, tailwind Card 72.414 → 86.207) before it was
+ *  reverted for regressing two others. Those two — altitude Chip and Button —
+ *  are NOT in this class: their style DIFFERS from the control (`none` vs the
+ *  button UA's `outset`), so `none` is already carried and their borders
+ *  correctly paint nothing on both surfaces.
+ *
+ *  The condition is therefore narrow and all three clauses are load-bearing:
+ *  the channel is a border-*-style, the same side carries a NON-ZERO width, the
+ *  style is not `none`, and the control agrees (which is what proves the value
+ *  came from the reset rather than from this component). Drop any one and the
+ *  door either misses these two or re-admits the noise the control exists to
+ *  remove. */
+export const resetSuppliedBorderStyle = (
+  channel: string,
+  style: Record<string, string | undefined>,
+  ctrl: Record<string, string | undefined>,
+): boolean => {
+  const m = /^border-(top|right|bottom|left)-style$/.exec(channel);
+  if (!m) return false;
+  const value = style[channel];
+  if (!value || value === 'none') return false;
+  if (ctrl[channel] !== value) return false; // it differs — the ordinary door already admits it
+  const width = style[`border-${m[1]}-width`];
+  return width !== undefined && width !== '0px' && width !== '0';
+};
 
 export function prepareMint(
   a: AlignedSweep,

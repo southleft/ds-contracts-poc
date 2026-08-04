@@ -4,7 +4,28 @@
   "config": "extract/computed/configs/tailwind.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
-    "base": [],
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      }
+    ],
     "state": []
   },
   "decisionsReapplied": [],
@@ -16,9 +37,9 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 116,
-      "cellsEqual": 84,
-      "pctEqual": 72.41379310344827,
+      "cellsCompared": 132,
+      "cellsEqual": 116,
+      "pctEqual": 87.87878787878788,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -53,50 +74,34 @@
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       },
       {
         "key": "__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 4,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
         "root.--tw-shadow",
-        4
-      ],
-      [
-        "root.border-bottom-width",
-        4
-      ],
-      [
-        "root.border-left-width",
-        4
-      ],
-      [
-        "root.border-right-width",
-        4
-      ],
-      [
-        "root.border-top-width",
         4
       ],
       [
@@ -113,7 +118,7 @@
       ]
     ],
     "namedLosses": [
-      "code-only: root.--tw-shadow — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: root.--tw-shadow — CSS custom property, not a styled channel — `--tw-shadow` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one."
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -134,8 +139,8 @@
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 29,
-        "channelsEqual": 21,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -145,30 +150,6 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
           },
           {
             "part": "label",
@@ -193,8 +174,8 @@
       },
       {
         "key": "__hover",
-        "channelsCompared": 29,
-        "channelsEqual": 21,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -204,30 +185,6 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
           },
           {
             "part": "label",
@@ -252,8 +209,8 @@
       },
       {
         "key": "__focus-visible",
-        "channelsCompared": 29,
-        "channelsEqual": 21,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -263,30 +220,6 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
           },
           {
             "part": "label",
@@ -311,8 +244,8 @@
       },
       {
         "key": "__active",
-        "channelsCompared": 29,
-        "channelsEqual": 21,
+        "channelsCompared": 33,
+        "channelsEqual": 29,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -322,30 +255,6 @@
             "channel": "--tw-shadow",
             "ours": "",
             "theirs": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
           },
           {
             "part": "label",

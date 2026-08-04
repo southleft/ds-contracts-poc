@@ -42,7 +42,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CONTROL_TAGS, loadConfig, propSpaceFor, stageFor, type CaptureConfig, type ComponentConfig, type SweepResult } from './capture.js';
-import { CONTROL_TAGS_MIRROR, alignSweep, styledChannels, detectFolds, enrichLayout, prepareMint } from './fuse.js';
+import { CONTROL_TAGS_MIRROR, resetSuppliedBorderStyle, alignSweep, styledChannels, detectFolds, enrichLayout, prepareMint } from './fuse.js';
 import { promoteAnatomy } from './anatomy.js';
 import { reconstructCaptures, type CapturedTruthFile } from './replay.js';
 import { kebab } from '../types.js';
@@ -161,6 +161,42 @@ console.log('\n4. the fallback is real and worth naming — the census that moti
   if (unc.length === 0) bad('no uncontrolled tags found in the corpus — either every tag now has a control (then delete this gate) or the tag census broke');
   else ok(`${uncontrolledParts.size} of ${allParts} captured parts sit on ${unc.length} tag(s) with no control: ${unc.map((t) => `<${t}>`).join(' ')}`);
   if (uncontrolledParts.size > 0 && fellBack === 0) bad('parts fall back to the <span> control but no refusal says so');
+}
+
+console.log('\n5. the reset-supplied border style — a fact the control correctly subtracts and the emitter cannot reproduce');
+{
+  // The control is rendered with the library's OWN stylesheet loaded, so it
+  // subtracts the library's reset as well as the UA's. That is right for
+  // deciding what the COMPONENT authored — and wrong for emission, because the
+  // emitted CSS reproduces the component's rules and not the reset. A border
+  // whose `style` comes from Tailwind preflight's `* { border-style: solid }`
+  // therefore ships its width and colour and paints NOTHING.
+  //
+  // Exactly two roots in the corpus are in this shape, and they are the two an
+  // earlier cruder fix improved before it was reverted for regressing two
+  // others. Pin the discriminator, not the outcome.
+  const style = { 'border-top-style': 'solid', 'border-top-width': '1px' };
+  const ctrlSolid = { 'border-top-style': 'solid', 'border-top-width': '0px' };
+  if (!resetSuppliedBorderStyle('border-top-style', style, ctrlSolid)) {
+    bad('a 1px border whose style EQUALS the control (reset-supplied) was NOT admitted — tailwind/card and astryx/card would ship a border that paints nothing');
+  } else ok('reset-supplied border-style on a real border → admitted');
+
+  // altitude Chip/Button: style DIFFERS from the control, so the ordinary door
+  // already carries it. Admitting again here would double-handle it.
+  if (resetSuppliedBorderStyle('border-top-style', { 'border-top-style': 'none', 'border-top-width': '0px' }, { 'border-top-style': 'outset', 'border-top-width': '2px' })) {
+    bad('a style that DIFFERS from the control was admitted by the reset door — that is the ordinary door\'s job, and altitude Chip/Button live here');
+  } else ok('style differing from the control → left to the ordinary door');
+
+  // Every clause is load-bearing.
+  if (resetSuppliedBorderStyle('border-top-style', { 'border-top-style': 'solid', 'border-top-width': '0px' }, ctrlSolid)) {
+    bad('a ZERO-width border was admitted — there is no border to paint, so the style is not load-bearing');
+  } else ok('zero width → not admitted');
+  if (resetSuppliedBorderStyle('border-top-style', { 'border-top-style': 'none', 'border-top-width': '1px' }, { 'border-top-style': 'none' })) {
+    bad('style `none` was admitted — nothing paints either way');
+  } else ok('style none → not admitted');
+  if (resetSuppliedBorderStyle('border-top-color', { 'border-top-color': 'red', 'border-top-width': '1px' }, { 'border-top-color': 'red' })) {
+    bad('a non-style channel was admitted by the border-style door');
+  } else ok('only border-*-style passes this door');
 }
 
 if (failures.length > 0) {
