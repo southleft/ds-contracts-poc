@@ -379,6 +379,51 @@ export function validateContract(
         );
       }
     }
+    // SLOT CARDINALITY AND THE RESTRICT TIER — declared by the schema since v?,
+    // refereed by nothing until now.
+    //
+    // MEASURED over every committed contract (48 slots): `acceptsMode` is
+    // declared 38 times, `accepts` 19, `defaultContent` 12, `required` 3 — and
+    // `min`, `max` and `acceptsMode: 'restrict'` are declared ZERO times. So
+    // this closes a promise, not a live bug: contracts/contract.schema.json
+    // accepts `min`, `max` and `restrict`, and an author who wrote one got
+    // SILENCE — no carry, no refusal. That is the failure this repo is built
+    // to refuse, sitting in the schema itself.
+    //
+    // The fixtures are therefore synthetic (core/slot-constraints-check.ts);
+    // there is nothing in the corpus to point at, and saying so is part of the
+    // measurement.
+    if (part.slot) {
+      const s = part.slot;
+      const n = (s.defaultContent ?? []).length;
+      if (s.min !== undefined && s.max !== undefined && s.min > s.max) {
+        errors.push(`${contract.id}: slot "${s.name}" declares min ${s.min} > max ${s.max} — no content can satisfy it`);
+      }
+      if (s.required === true && s.min !== undefined && s.min < 1) {
+        errors.push(`${contract.id}: slot "${s.name}" is required but declares min ${s.min} — a required slot cannot accept emptiness`);
+      }
+      // defaultContent is what the contract SHIPS in the slot, so it is the one
+      // occupancy this file can check statically. A consumer may pass more at
+      // runtime; that is the consumer's contract to keep, and no emitter sees it.
+      if (s.max !== undefined && n > s.max) {
+        errors.push(`${contract.id}: slot "${s.name}" declares max ${s.max} but its defaultContent ships ${n} item(s)`);
+      }
+      if (s.min !== undefined && n > 0 && n < s.min) {
+        errors.push(`${contract.id}: slot "${s.name}" declares min ${s.min} but its defaultContent ships only ${n} item(s)`);
+      }
+      if (s.acceptsMode === 'restrict') {
+        if (!s.accepts || s.accepts.length === 0) {
+          errors.push(`${contract.id}: slot "${s.name}" is acceptsMode "restrict" but lists no accepts — restricting to nothing admits nothing`);
+        }
+        for (const item of s.defaultContent ?? []) {
+          if (s.accepts && !s.accepts.includes(item.id)) {
+            errors.push(
+              `${contract.id}: slot "${s.name}" is acceptsMode "restrict" but its defaultContent ships "${item.id}", which is not in accepts [${(s.accepts ?? []).join(', ')}] — the contract violates its own restriction`,
+            );
+          }
+        }
+      }
+    }
     if (p.length > 1) {
       // Nested parts (path.length > 1 — NOT a top-level root, single- or
       // multi-root) carry substituted tokens as descendant rules under the
