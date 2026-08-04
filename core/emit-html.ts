@@ -203,7 +203,17 @@ function componentCss(contract: Contract): string[] {
   if (rootElementsOf(contract).some((el) => UA_MARGIN_ELEMENTS.has(el))) {
     rootDecls.push('margin: 0');
   }
-  if ('border-width' in rootTokens || 'border-color' in rootTokens) rootDecls.push('border-style: solid');
+  // GAP-CLOSING ROUND 9, APPLIED HERE AT LAST. This read `border-width OR
+  // border-color`, which is verbatim the spelling emit-react.ts:1355 records as
+  // round 9's BUG: a contract carrying only a COLOUR emits the keyword with no
+  // width, and CSS finishes the claim with the UA's `medium` (3px) — UUI's
+  // ButtonGroupBase rendered 5-6px too wide across all 32 variants, 80.15
+  // against a 98.91 ceiling. Round 9 fixed core/emit-react.ts and left this
+  // file, so the two CSS emitters have disagreed ever since — and THIS is the
+  // one the computed gate renders through (scorecard.method: "enriched contract
+  // -> core/emit-html"), so the instrument kept scoring a surface the shipped
+  // emitter no longer produced. The keyword rides the WIDTH alone, both sides.
+  if ('border-width' in rootTokens) rootDecls.push('border-style: solid');
   else rootDecls.push('border: 0');
   // Live-gauntlet class ⑤ (linked-icon-wrapper-collapses): a SLOT-ONLY root
   // that carries BOTH height and max-width is a drawn FIXED wrapper (CBDS
@@ -557,8 +567,9 @@ function componentCss(contract: Contract): string[] {
       }
       decls.push(`${cssProp}: ${cssVar(refPath)}`);
     }
+    // Round 9 again — this branch also let a COLOUR earn the keyword.
     if (
-      (part.tokens && ('border-width' in part.tokens || 'border-color' in part.tokens)) ||
+      (part.tokens && 'border-width' in part.tokens) ||
       (part.literals && 'border-width' in part.literals)
     ) {
       decls.push('border-style: solid');

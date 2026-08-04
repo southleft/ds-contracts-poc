@@ -163,6 +163,17 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:color:check
 
+      # Pure functions over synthetic contracts + a census of the committed
+      # corpus, no browser, ~0.3s. It pins the three rules border-style
+      # synthesis obeys, each learned from a measured field failure: the
+      # keyword rides a WIDTH never a colour (the UUI ButtonGroupBase 80.15),
+      # it reads every spelling and holder a width can live in (the longhand
+      # blindness that left 14 parts drawing on canvas and painting nothing in
+      # CSS), and it never argues with a DECLARED style.
+      - name: border-style:check (the keyword rides a width, per side, and never argues)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run border-style:check
+
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.
       - name: test:onboarding (packages/cli node:test suite)
