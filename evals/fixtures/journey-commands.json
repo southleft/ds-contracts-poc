@@ -14,7 +14,7 @@
       ]
     },
     "designer": {
-      "persona": "Designer on a code-led team — code is truth; she never touches a terminal (CI and a colleague's push do).",
+      "persona": "Designer on a code-led team — code is truth; she never touches a terminal. Both command lines below are typed on the ENGINEER's side (or run by CI): figma-emit produces the sync artifact, and figma-push is the engineer sending the bundle — the designer's whole part is entering the pairing code in the plugin.",
       "eval": "journey-designer",
       "steps": [
         {

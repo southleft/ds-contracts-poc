@@ -1,5 +1,7 @@
 # 13 · Try It With Your Own Design System
 
+> **Path:** this is the hands-on walkthrough for **path C — reconcile** ([Choose Your Path](00-choose-your-path.md)): extract both sides, get the disagreement report, run the referee.
+
 The contract model is not specific to this repo's components, React, CSS Modules, or any design tool. This page is the hands-on path for anyone who cloned the repo and wants to point the machinery at **their own** library — the first shipped slice of [brownfield adoption](11-brownfield-adoption.md).
 
 What you get today:
@@ -35,7 +37,7 @@ Read `extract/out/reconciliation.md` first — it's the artifact everything else
 
 ## 1 · Point it at your code library
 
-Create `extract.config.json` in the repo root:
+Create `extract.config.json` in the repo root (this is the **in-clone** flow's config — `extract/config.ts` reads exactly this filename; the *published CLI* flow uses `ds-contracts.config.json` instead, and the two are not interchangeable):
 
 ```jsonc
 {

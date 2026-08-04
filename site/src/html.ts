@@ -160,7 +160,7 @@ export function layout(opts: PageOpts, body: string): string {
       </div>
       <div>
         <p class="footer__label">Toolchain</p>
-        <a href="/get-started/">Get started — the two journeys</a>
+        <a href="/get-started/">Get started — choose your path</a>
         <a href="/cli/">CLI reference</a>
         <a href="/emitters/">Writing an emitter</a>
         <a href="${REPO_URL}/tree/main/examples/ci">CI recipes</a>

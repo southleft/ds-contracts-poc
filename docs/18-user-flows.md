@@ -1,5 +1,7 @@
 # 18 — User Flows
 
+> **Path:** this page cuts by **persona** (designer / engineer / lead), not by journey — for the path-shaped cut, see [Choose Your Path](00-choose-your-path.md).
+
 *The code↔design loop as two people actually live it: every step named,
 every step marked as built or missing, and a ranked gap list that drives
 the build phase.*
@@ -98,8 +100,12 @@ terminal."*
    (`ui.html:962`, `protectedCard()`). Nobody edits a component they think
    a robot might stomp.
 
-**Honest summary:** the first hour is genuinely no-terminal once someone
-has imported the manifest for the file (step 1). Step 4's synchronous
+**Honest summary:** the first hour is no-terminal *for the designer* —
+but only after someone **with** a terminal has produced and handed over
+the plugin (built `plugin-dist/` via `npm run plugin:zip`, or downloaded
+the playground's zip) and imported the manifest for the file (step 1).
+"Genuinely no-terminal" overstated it; the terminal is upstream, not
+absent. Step 4's synchronous
 courier is no longer the only door — G1's standing channel means CI can
 publish and the plugin checks on open — but the *pairing-code* path in
 this walkthrough still requires two humans online at once.
@@ -290,7 +296,11 @@ bundle.*
    identity markers only and **never runs the drift check** — Apply on a
    canvas-edited set silently overwrites the designer's work, right now,
    in the shipped plugin. **[GAP → G2 — the live covenant violation, and
-   a days-scale fix]**
+   a days-scale fix]** *(Flow bodies are frozen snapshots of the day they
+   were written — 2026-07-25. G2 has since **SHIPPED** (`c0aed6f`): the
+   drift check now runs in `upd-check`, drifted rows warn by name and
+   default unchecked. Read the Status column in the ranked gap list for
+   what is true now; this paragraph is the finding that drove the fix.)*
 6. Apply selected: sets update in place, variables re-sync, no
    duplicates, instances keep their overrides. **[EXISTS with a NAMED
    CAVEAT — deterministic apply; the apply-success line "Instances keep
@@ -425,7 +435,8 @@ These are the product; the gap list below exists to protect them.
 - *Designer:* Apply over a drifted set eats her edit with zero warning
   (G2). Her own words: "the first time an apply eats my work is the
   last time I use the tool." This state is reachable in the shipped
-  plugin.
+  plugin. *(Frozen snapshot, 2026-07-25 — G2 has since **SHIPPED** in
+  `c0aed6f`; the ranked gap list's Status column is the current truth.)*
 - *Designer:* a recolor reported as "interior/style changes (no API
   change)" (G8) — the one thing she needs to decide apply/hold is the
   one thing the report refuses to say.

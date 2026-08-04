@@ -35,17 +35,24 @@ The plugin **is** the deterministic Figma runtime: the engine (`window.DSC`) is
 baked in, so you feed it a small contract and it emits + builds locally.
 
 - **Install (dev):** Figma desktop → Plugins → Development → Import plugin from
-  manifest → select `figma-sync/plugin/` (or the unzipped
-  `playground/public/ds-contracts-sync-runner-plugin.zip`). A clean-install /
-  publishing guide is at `figma-sync/plugin/GET-STARTED.md` and
+  manifest → select `figma-sync/plugin-dist/manifest.json` (refreshed by
+  `npm run plugin:zip`), or the `manifest.json` inside the unzipped
+  `playground/public/ds-contracts-sync-runner-plugin.zip`. **Never import
+  `figma-sync/plugin/manifest.json` — that copy is a stub with no engine and
+  the plugin header reads "engine: NOT INJECTED".** (This bullet originally
+  pointed at the stub; corrected 2026-08-03.) A clean-install / publishing
+  guide is at `figma-sync/plugin/GET-STARTED.md` and
   `figma-sync/plugin/PUBLISHING.md`.
-- **The deterministic core path (Generate tab):** paste a contract JSON (or a
-  CONTRACTS-BUNDLE) → "Sync token variables first" (checked) → **Generate in this
-  file**. It resolves child components from the baked repo contracts, plans
-  tokens-first + dependency-ordered, and builds the set. **No network, no AI.**
-- **Other tabs:** *Update library* (receive a bundle, plain-words change report,
-  amend in place), *Propose* (dump the drawn set → contract diff → export/PR),
-  *Paste a script*, *Send to Playground*, *Local runner*.
+- **The deterministic core path (Build tab):** paste a contract JSON (or a
+  CONTRACTS-BUNDLE) → **Generate in this file**. It resolves child components
+  from the baked repo contracts, plans tokens-first + dependency-ordered, and
+  builds the set. **No network, no AI.** (The old "Sync token variables first"
+  checkbox was removed as a footgun — tokens-first is simply how it plans.)
+- **Other surfaces (IA re-housed 2026-07-26, docs/19):** *Changes* (standing
+  channel — Check for updates, drift check, apply with a named overwrite
+  warning), *Send* (scan the file → read & diff a drawn set → export the
+  proposal / open a PR), *Advanced* (Paste a script — the one surface NOT
+  read-only guarded — plus the Local runner and the engine stamp).
 - **Build the packaged zip:** `node scripts/build-plugin-zip.mjs` (add
   `--update-engine-receipt` only when core changed, deliberately).
 

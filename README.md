@@ -57,21 +57,55 @@ That one file produces a typed React component **and** a real Figma component se
 
 ## Which journey are you on?
 
-Three situations bring people here. They are genuinely different amounts of work, so find yours first.
+Three situations bring people here. They are genuinely different amounts of work, so find yours first. **The canonical statement of the three paths — prerequisites, verbs, honest expectations and costs — is [docs/00-choose-your-path.md](docs/00-choose-your-path.md)**; the table below is the summary, and if any page disagrees with that one, that one wins.
 
 | | Your situation | What you actually run | Ends with |
 |---|---|---|---|
-| **A** | *"I have components in code. I want them in Figma."* | [Journey A](#journey-a--i-have-components-in-code-i-want-them-in-figma) — a config, a real-browser capture, a bundle, a publish | A designer clicks **Check for updates** and your components appear on their canvas, token-bound |
-| **B** | *"I have a component on the canvas. I want code."* | [Journey B](#journey-b--i-have-a-component-on-the-canvas-i-want-code) — the plugin's **Send** tab, then `generate` | A typed React component + CSS Modules + Storybook stories in your repo |
-| **C** | *"I already have a mature Figma library **and** a mature codebase."* | [Journey C](#journey-c--i-already-have-both) — scan, reconcile, referee | A property-by-property disagreement report, and a CI gate that keeps it from getting worse |
+| **A — design-first** | *"I have a component on the canvas. I want code."* | [Journey A](#journey-a--i-have-a-component-on-the-canvas-i-want-code) — the plugin's **Send** tab, then `generate` | A typed React component + CSS Modules + Storybook stories in your repo |
+| **B — code-first** | *"I have components in code. I want them in Figma."* | [Journey B](#journey-b--i-have-components-in-code-i-want-them-in-figma) — a config, a real-browser capture, a bundle, a publish | A designer clicks **Check for updates** and your components appear on their canvas, token-bound |
+| **C — reconcile** | *"I already have a mature Figma library **and** a mature codebase."* | [Journey C](#journey-c--i-already-have-both) — scan, reconcile, referee | A property-by-property disagreement report, and a CI gate that keeps it from getting worse |
 
 One rule spans all three: **the surfaces never sync side-to-side.** A designer's change and an engineer's change both travel *through the contract*, as a reviewable diff. Nothing writes to your repo without a pull request, and nothing writes to the canvas without a human clicking Apply.
 
 ---
 
-## Journey A — "I have components in code; I want them in Figma"
+## Journey A — "I have a component on the canvas; I want code"
 
-The goal: your real Button, with its real padding, its real colors, and its real variants, as a native Figma component set — built by a machine, not redrawn by a person.
+The goal: a designer has a component set in Figma; you want a real, typed React component in your repo. *(Design-first — [the canonical path page](docs/00-choose-your-path.md) is the full statement.)*
+
+1. **In the plugin, open the *Send* tab.** Select the set (or find it with *Scan this file*), leave the base-contract box empty if this tool did not build it, and click **Read the set & diff**. The engine reads the live set and proposes a contract from what is actually drawn — variants become props, layers become anatomy, bound variables become token refs.
+2. **Get that contract into the repo — with the code already in it.** Three doors, all reviewable, and **none of them ends at a document nobody can run**. The contract and the component it generates travel together, in the same change:
+   - **GitHub PR** — fill in `owner/repo` and a fine-grained token (session-only, never stored; leave *Dry run* ticked to see the exact plan first). The PR carries **both halves**: the contract *and* the emitted component files next to it. Which target it emits is never guessed — `--target` wins, otherwise the `generate` section of `ds-contracts.config.json` decides, and with neither recorded the PR carries the contract alone **and says so in the body**.
+   - **Send to repo** — the developer runs `ds-contracts figma receive --out contracts` on their machine, which prints a 6-character code; the designer types it in. The CLI **writes nothing without `--apply`** — and with `--apply` it writes the generated component too, from the same config.
+   - **Copy the JSON out** and commit it yourself, then run `generate` (below).
+3. **Generate the component** — the explicit form, and what the two doors above run for you:
+
+```bash
+ds-contracts generate contracts/button.contract.json --out src/generated \
+  --target react --tokens tokens/captured.dtcg.json --stories
+```
+
+`--target` accepts `react` (typed TSX + CSS Modules + stories), `html`, `react-inline`, `figma-script`, or any emitter you register with `--emitter`. An unknown target is refused with the list of registered names.
+
+`--tokens` takes DTCG files, **a directory** (every `*.tokens.json` / `*.dtcg.json` inside it), or slot-named entries — `--tokens light=<file>,dark=<file>` — when your token set is layered. Two files that fight over the same token inside one slot are refused by name rather than silently merged, because a light tree merged over a dark one produces a dark component that reports itself as light.
+
+Generation is **fully deterministic**: the same contract produces byte-identical output, every time, on any machine. No model is in the path.
+
+### The honest asymmetry
+
+Every PR states which of these it is, in the body — the tool does not let you find out later.
+
+For a set **this tool generated** (it carries a `ds_contracts/contractId` marker), Journey A is a **true round trip**: re-running the emitters reproduces the component **byte for byte** from the contract in the PR, and this repo's own components re-extract to zero mismatches in both directions.
+
+For a **hand-built** set, it is **an inversion**, not a reproduction. The proposal is what can be read off the canvas: real structure, real variants, real bound variables — but a canvas cannot tell you about a `useEffect`, a keyboard handler, or why a value is what it is. **Treat the generated component as a reviewable starting point, not as your finished component**, and review it as new code. The measured shape of that claim, on a real kit this project does not own: all 15 Untitled UI sets that were run closed the round trip, and the set-level fact diff across them is **11,104 matched · 1,857 diverged · 4,088 lost · 6,365 invented** — with 940 of the 960 `layout.mode` divergences reclassified as `auto-layout-inert`, changing nothing that is drawn ([the full report](extract/figma/roundtrip-uui/REPORT.md)). The end-to-end proof of this path is [`examples/untitled-ui`](examples/untitled-ui/LEDGER.md) — 15 sets driven through [`uui-pipeline.mts`](examples/untitled-ui/uui-pipeline.mts), pixel fidelity **92.7% mean over 537 scored variants** — and it is exactly what "reviewable starting point" means: a faithful specification, an approximate drawing.
+
+When a contract arrives with no canvas provenance at all (a document straight out of the repo), the PR says exactly that rather than picking a side.
+
+---
+
+## Journey B — "I have components in code; I want them in Figma"
+
+The goal: your real Button, with its real padding, its real colors, and its real variants, as a native Figma component set — built by a machine, not redrawn by a person. *(Code-first — [the canonical path page](docs/00-choose-your-path.md) is the full statement.)*
 
 **There is no copy-paste step and no manual redraw.** There is also, for most libraries, no shortcut: the tool has to *run* your components in a browser to learn what they look like (see [the hard limit](#the-hard-limit-you-cannot-point-this-at-a-github-url), below).
 
@@ -176,7 +210,12 @@ ds-contracts figma publish acme.bundle.json
 
 ### Getting the plugin
 
-The Sync Runner plugin is **not on the Figma Community**, and that is a decision rather than a pending task. Distribution is the manifest-upload developer-plugin path: `npm run plugin:zip` in this repo refreshes `figma-sync/plugin-dist/`, and in the **Figma desktop app** you use **Plugins → Development → Import plugin from manifest…** and pick `figma-sync/plugin-dist/manifest.json`. Import from that folder — never from `figma-sync/plugin/`, which is a stub with no engine. Development plugins only load in the desktop app, not on figma.com; any plan works and no admin approval is needed. The consequence, stated as a property of the model rather than a task: someone with repo access does this once per file owner.
+The Sync Runner plugin is **not on the Figma Community**, and that is a decision rather than a pending task. Distribution is the manifest-upload developer-plugin path, with two real routes to the manifest:
+
+- **No clone:** download the packaged zip the playground serves — [ds-contracts-playground.pages.dev/ds-contracts-sync-runner-plugin.zip](https://ds-contracts-playground.pages.dev/ds-contracts-sync-runner-plugin.zip) — unzip it, and import the `manifest.json` inside the unzipped `ds-contracts-sync-runner/` folder.
+- **From a clone:** `npm run plugin:zip` refreshes `figma-sync/plugin-dist/`; import `figma-sync/plugin-dist/manifest.json`. Never import from `figma-sync/plugin/`, which is a stub with no engine (its header reads "engine: NOT INJECTED").
+
+Either way, in the **Figma desktop app** use **Plugins → Development → Import plugin from manifest…**. Development plugins only load in the desktop app, not on figma.com; any plan works and no admin approval is needed. The consequence, stated as a property of the model rather than a task: someone does this once per file owner — and only the clone route requires repo access.
 
 ### Two other ways to deliver the same bundle
 
@@ -211,49 +250,15 @@ The static path is still worth running first for any library: it is the seed the
 
 ---
 
-## Journey B — "I have a component on the canvas; I want code"
-
-The goal: a designer has a component set in Figma; you want a real, typed React component in your repo.
-
-1. **In the plugin, open the *Send* tab.** Select the set (or find it with *Scan this file*), leave the base-contract box empty if this tool did not build it, and click **Read the set & diff**. The engine reads the live set and proposes a contract from what is actually drawn — variants become props, layers become anatomy, bound variables become token refs.
-2. **Get that contract into the repo — with the code already in it.** Three doors, all reviewable, and **none of them ends at a document nobody can run**. The contract and the component it generates travel together, in the same change:
-   - **GitHub PR** — fill in `owner/repo` and a fine-grained token (session-only, never stored; leave *Dry run* ticked to see the exact plan first). The PR carries **both halves**: the contract *and* the emitted component files next to it. Which target it emits is never guessed — `--target` wins, otherwise the `generate` section of `ds-contracts.config.json` decides, and with neither recorded the PR carries the contract alone **and says so in the body**.
-   - **Send to repo** — the developer runs `ds-contracts figma receive --out contracts` on their machine, which prints a 6-character code; the designer types it in. The CLI **writes nothing without `--apply`** — and with `--apply` it writes the generated component too, from the same config.
-   - **Copy the JSON out** and commit it yourself, then run `generate` (below).
-3. **Generate the component** — the explicit form, and what the two doors above run for you:
-
-```bash
-ds-contracts generate contracts/button.contract.json --out src/generated \
-  --target react --tokens tokens/captured.dtcg.json --stories
-```
-
-`--target` accepts `react` (typed TSX + CSS Modules + stories), `html`, `react-inline`, `figma-script`, or any emitter you register with `--emitter`. An unknown target is refused with the list of registered names.
-
-`--tokens` takes DTCG files, **a directory** (every `*.tokens.json` / `*.dtcg.json` inside it), or slot-named entries — `--tokens light=<file>,dark=<file>` — when your token set is layered. Two files that fight over the same token inside one slot are refused by name rather than silently merged, because a light tree merged over a dark one produces a dark component that reports itself as light.
-
-Generation is **fully deterministic**: the same contract produces byte-identical output, every time, on any machine. No model is in the path.
-
-### The honest asymmetry
-
-Every PR states which of these it is, in the body — the tool does not let you find out later.
-
-For a set **this tool generated** (it carries a `ds_contracts/contractId` marker), Journey B is a **true round trip**: re-running the emitters reproduces the component **byte for byte** from the contract in the PR, and this repo's own components re-extract to zero mismatches in both directions.
-
-For a **hand-built** set, it is **an inversion**, not a reproduction. The proposal is what can be read off the canvas: real structure, real variants, real bound variables — but a canvas cannot tell you about a `useEffect`, a keyboard handler, or why a value is what it is. **Treat the generated component as a strong, correct-by-construction starting point, not as your finished component**, and review it as new code.
-
-When a contract arrives with no canvas provenance at all (a document straight out of the repo), the PR says exactly that rather than picking a side.
-
----
-
 ## Journey C — "I already have both"
 
-Brownfield: a mature Figma library your team drew by hand, and a mature codebase, and no idea how far apart they are.
+Brownfield: a mature Figma library your team drew by hand, and a mature codebase, and no idea how far apart they are. *(Reconcile — [the canonical path page](docs/00-choose-your-path.md) is the full statement, including the honest cost.)*
 
 - **Look at the Figma side first.** The plugin's **Send → Scan this file** does a read-only pass over every local component set — *including ones this tool never made* — and tells you what is there and which sets could come under contract. Nothing is changed.
 - **Get the disagreement report.** `ds-contracts extract --reconcile` compares your code-side contracts against a Figma dump and classifies every property: *agree*, *options-differ*, *code-only*, *design-only*. This is the artifact that ends the "which one is right" argument, because it is per-property and mechanical.
 - **Then hold the line.** `ds-contracts diff` is the referee — exit `0` clean, `1` drift (findings named), `2` config error. Wire it into CI and the gap stops growing while you close it.
 
-**What is not supported yet, stated plainly:** *adopting* an existing set — stamping a hand-built Figma component as contract-backed so future syncs amend it in place — is **not a verb this tool has**. Coexistence inside a foreign kit is proven, and amending a set *this tool created* inside a foreign kit is proven; amending a hand-built set is not. See the non-destructive-sync row in [What this proves](#what-this-proves).
+**What is not supported yet, stated plainly:** the reconciliation phase itself — a merge view, accept-left/accept-right, any tooling that turns the disagreement report into contracts — has **no tooling** ([docs/11's phase table](docs/11-brownfield-adoption.md)); today a human reads the report and hand-writes each contract. And *adopting* an existing set — stamping a hand-built Figma component as contract-backed so future syncs amend it in place — is **not a verb this tool has**. Coexistence inside a foreign kit is proven, and amending a set *this tool created* inside a foreign kit is proven; amending a hand-built set is not. See the non-destructive-sync row in [What this proves](#what-this-proves).
 
 ---
 
@@ -357,7 +362,7 @@ All of it is gated by **187 executable checks** (`npm run eval`) that run the re
 
 ## Working in this repository
 
-*This section is for people who want to run or extend the reference implementation. To use the tool on your own library you do not need to clone anything — see [the journeys](#which-journey-are-you-on) above; they run on the published `@ds-contracts/cli`.*
+*This section is for people who want to run or extend the reference implementation. To use the tool on your own library, the **CLI half** needs no clone — see [the journeys](#which-journey-are-you-on) above; they run on the published `@ds-contracts/cli`. The **plugin half** does need one of two things: download the packaged zip the playground serves at [`/ds-contracts-sync-runner-plugin.zip`](https://ds-contracts-playground.pages.dev/ds-contracts-sync-runner-plugin.zip) and import the `manifest.json` inside it, or clone this repo and run `npm run plugin:zip` ([Getting the plugin](#getting-the-plugin)).*
 
 Requires Node ≥ 20. (Two checks drive a real Chromium — one eval and the visual-parity instrument; if none is found on your machine, the error names the fix: `npx playwright install chromium`, or point `PLAYWRIGHT_CHROMIUM_PATH` at any Chrome/Chromium binary.)
 
@@ -371,13 +376,15 @@ npm run storybook    # the generated component library
 Prove the loop to yourself in two minutes:
 
 ```bash
-npm run parity   # ① clean — code, canvas, and tokens all match the contracts
+npm run parity   # ① code, canvas, and tokens checked against the contracts
 # ② edit any contract in contracts/ — add an enum value, change a token binding
 npm run build && npm run parity
 #    ③ the differ reports exactly what is now behind, and how to fix it
 npm run eval     # ④ 187 checks that detection, refusal, and convergence still hold
 npm run docs:check # ⑤ every number these docs quote, re-derived from the repo (seconds, no browser)
 ```
+
+**What step ① actually prints on a fresh clone:** likely *not* an all-green report. The design-side inputs are committed Figma snapshots, and the differ refuses to trust one older than 14 days (`MAX_SNAPSHOT_AGE_DAYS`) — **by design**, because an untouched snapshot would otherwise report green forever. So expect `snapshot-stale` findings naming each old snapshot and its age: that is the staleness gate working, not drift in the components. Contract-vs-code checks still run and should be clean; re-extract the snapshots (or override `MAX_SNAPSHOT_AGE_DAYS`) if you want the canvas half re-verified against a live file.
 
 That honest red state in step ③ is the product. Most design-system tooling shows you the happy path; this one is built to tell you precisely when and where the surfaces have stopped agreeing. (Point a token binding at a token that doesn't exist and the *build itself* fails — the contract↔token integrity gate.)
 
@@ -389,7 +396,7 @@ The model isn't specific to these components, React, or any tool — and you can
 
 **→ [docs/21 — Bring Your Own Design System](docs/21-bring-your-own-design-system.md)** is the recipe those seven followed: the nine steps with real commands, the full capture-config reference, and — the honest core — the decision guide for the three things that still take craft (`classAllow`, `varPrefix`, axis-vs-state), each of which fails *silently* when answered wrong. It ends with a section naming where the recipe is genuinely harder than a guide can make it.
 
-No clone required for the static path: the published CLI runs the same extraction in your own repo (`npx @ds-contracts/cli init`, then `npx @ds-contracts/cli extract`) — the [two journeys on the spec site](https://ds-contracts-spec.pages.dev/get-started/) walk both directions, and [`examples/ci/`](examples/ci/) carries the executed-verbatim CI recipes. From this repository, the same code path is:
+No clone required for the static path: the published CLI runs the same extraction in your own repo (`npx @ds-contracts/cli init`, then `npx @ds-contracts/cli extract`) — the [three paths](docs/00-choose-your-path.md) (also walked on [the spec site](https://ds-contracts-spec.pages.dev/get-started/)) cover both directions plus reconciliation, and [`examples/ci/`](examples/ci/) carries the executed-verbatim CI recipes. From this repository, the same code path is:
 
 ```bash
 npm run extract:code   # your components → schema-valid PROPOSED contracts (API surface always;
@@ -409,33 +416,34 @@ That is a claim about the future, so it's held to the same standard as everythin
 
 ## Documentation
 
-**If you are new, read these three in this order:** [Getting Started](docs/00-getting-started.md) (the five-minute orientation) → [User Flows](docs/18-user-flows.md) (the loop as two people actually live it, every step tagged built or missing) → [Bring Your Own Design System](docs/21-bring-your-own-design-system.md) (the recipe, when you're ready to run it on your library).
+**If you are new, read these in this order:** [Choose Your Path](docs/00-choose-your-path.md) (which of the three situations is yours) → [Getting Started](docs/00-getting-started.md) (the five-minute orientation) → [User Flows](docs/18-user-flows.md) (the loop as two people actually live it, every step tagged built or missing) → [Bring Your Own Design System](docs/21-bring-your-own-design-system.md) (the recipe, when you're ready to run it on your library).
 
 **If you are deciding whether to adopt this, read [Known Limitations](docs/23-known-limitations.md) alongside them.** Everything the tool cannot do, in one place, sourced to a measurement.
 
-1. [Getting Started — What, Why, and How](docs/00-getting-started.md) · the five-minute orientation, per-persona usage, and the workflow schematic
-2. [The Bridge — Why This Exists](docs/00-the-bridge.md) · the narrative case
-3. [Architecture & the Contract Model](docs/01-architecture.md) · generative-first, diagnostic-forever
-4. [Contract Specification](docs/02-contract-spec.md) · every field, with examples
-5. [Token Pipeline](docs/03-token-pipeline.md) · DTCG dialect, modes, zero-dependency build
-6. [Code Generation](docs/04-code-generation.md) · what gets emitted, and how to add a component
-7. [The Parity Loop](docs/06-parity-loop.md) · drift detection and the executed both-directions demo
-8. [Validation — Claims, Evals, Evidence](docs/07-validation.md) · what's proven and how
-9. [Composition & the Road to a Contributable Spec](docs/08-composition-and-spec.md)
-10. [Advanced Components — the DataTable Round](docs/09-advanced-components.md) · compound, data-shaped components and the npm package build
-11. [Honest Generation](docs/10-honest-generation.md) · the catalog, the deterministic judge, and the 100-vs-69 A/B result
-12. [Brownfield Adoption](docs/11-brownfield-adoption.md) · connecting pre-existing design + code libraries — extraction, reconciliation, diagnostic-first
-13. [Roadmap](docs/12-roadmap.md) · four phases toward a component contract spec, each with a falsifiable exit criterion
-14. [Try It With Your Own System](docs/13-try-it-with-your-system.md) · extraction adapters, the design dump, and the disagreement report
-15. [Questions & Objections](docs/14-questions-and-objections.md) · every hard question, asked the skeptic's way, answered with receipts
-16. [The Engine Is a Library](docs/15-engine-as-library.md) · pure-function core, pluggable emitters, browser receipts
-17. [The Sync Boundary](docs/16-sync-boundary.md) · what a contract carries, what it never will — deterministic core, bounded assist, named gaps
-18. [Run the Gauntlet](docs/17-run-the-gauntlet.md) · the to-and-from sequence packaged for an outside tester — commands, expected outcomes, honest gaps
-19. [User Flows](docs/18-user-flows.md) · the two disciplines' first hour and daily loop, every step tagged built-or-missing, plus the ranked gap list that drives the build order
-20. [Bring Your Own Design System](docs/21-bring-your-own-design-system.md) · the nine-step recipe eight library rounds actually followed, the full capture-config reference, the decision guide for the parts that are still craft, and a troubleshooting table built from real failures
-21. [Generality — general engine, or just these libraries?](docs/22-generality.md) · the evidence behind the recipe: the styling-architecture matrix, the cross-library fix record (a defect found via one library repairing another's bytes in the same commit), the adversarial engine audit, and the honest ledger of where the claim leaks
-22. [**Known Limitations**](docs/23-known-limitations.md) · the adoption-decision document: measured coverage per library, the component classes captured nowhere, what a captured component does not reproduce, which examples are frozen and why, the journey verbs that do not exist, and what every gate leaves out of its denominator
-23. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
+1. [Choose Your Path](docs/00-choose-your-path.md) · the canonical statement of the three adoption paths — prerequisites, verbs, honest expectations, costs
+2. [Getting Started — What, Why, and How](docs/00-getting-started.md) · the five-minute orientation, per-persona usage, and the workflow schematic
+3. [The Bridge — Why This Exists](docs/00-the-bridge.md) · the narrative case
+4. [Architecture & the Contract Model](docs/01-architecture.md) · generative-first, diagnostic-forever
+5. [Contract Specification](docs/02-contract-spec.md) · every field, with examples
+6. [Token Pipeline](docs/03-token-pipeline.md) · DTCG dialect, modes, zero-dependency build
+7. [Code Generation](docs/04-code-generation.md) · what gets emitted, and how to add a component
+8. [The Parity Loop](docs/06-parity-loop.md) · drift detection and the executed both-directions demo
+9. [Validation — Claims, Evals, Evidence](docs/07-validation.md) · what's proven and how
+10. [Composition & the Road to a Contributable Spec](docs/08-composition-and-spec.md)
+11. [Advanced Components — the DataTable Round](docs/09-advanced-components.md) · compound, data-shaped components and the npm package build
+12. [Honest Generation](docs/10-honest-generation.md) · the catalog, the deterministic judge, and the 100-vs-69 A/B result
+13. [Brownfield Adoption](docs/11-brownfield-adoption.md) · connecting pre-existing design + code libraries — extraction, reconciliation, diagnostic-first
+14. [Roadmap](docs/12-roadmap.md) · four phases toward a component contract spec, each with a falsifiable exit criterion
+15. [Try It With Your Own System](docs/13-try-it-with-your-system.md) · extraction adapters, the design dump, and the disagreement report
+16. [Questions & Objections](docs/14-questions-and-objections.md) · every hard question, asked the skeptic's way, answered with receipts
+17. [The Engine Is a Library](docs/15-engine-as-library.md) · pure-function core, pluggable emitters, browser receipts
+18. [The Sync Boundary](docs/16-sync-boundary.md) · what a contract carries, what it never will — deterministic core, bounded assist, named gaps
+19. [Run the Gauntlet](docs/17-run-the-gauntlet.md) · the to-and-from sequence packaged for an outside tester — commands, expected outcomes, honest gaps
+20. [User Flows](docs/18-user-flows.md) · the two disciplines' first hour and daily loop, every step tagged built-or-missing, plus the ranked gap list that drives the build order
+21. [Bring Your Own Design System](docs/21-bring-your-own-design-system.md) · the nine-step recipe eight library rounds actually followed, the full capture-config reference, the decision guide for the parts that are still craft, and a troubleshooting table built from real failures
+22. [Generality — general engine, or just these libraries?](docs/22-generality.md) · the evidence behind the recipe: the styling-architecture matrix, the cross-library fix record (a defect found via one library repairing another's bytes in the same commit), the adversarial engine audit, and the honest ledger of where the claim leaks
+23. [**Known Limitations**](docs/23-known-limitations.md) · the adoption-decision document: measured coverage per library, the component classes captured nowhere, what a captured component does not reproduce, which examples are frozen and why, the journey verbs that do not exist, and what every gate leaves out of its denominator
+24. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
 
 ## Honesty as a design principle
 

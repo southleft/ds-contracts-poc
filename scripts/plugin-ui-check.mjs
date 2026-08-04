@@ -4,6 +4,7 @@
  * code.js SIMULATOR and assert the re-housed IA behaves.
  */
 import { chromium } from 'playwright-core';
+import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -12,6 +13,48 @@ const FILE = 'file://' + path.join(ROOT, 'figma-sync', 'plugin-dist', 'ui.html')
 const fails = [];
 const shown = async (sel) => !(await page.locator(sel).evaluate((e) => e.hidden));
 const ok = (cond, what) => { console.log((cond ? '✔ ' : '✖ ') + what); if (!cond) fails.push(what); };
+
+// --- 0. STATIC DEAD-NAME GATE ---------------------------------------------
+// The plugin README ships INSIDE the plugin zip (scripts/build-plugin-zip.mjs
+// FILES list) — it is the first file a designer reads after unzipping, and
+// until 2026-08-03 no gate watched it: it described the six-tab IA deleted on
+// 2026-07-26 for a week. This sweep runs on the SOURCE files (README + the
+// source ui.html), so it goes red before any zip is built.
+{
+  const readme = readFileSync(path.join(ROOT, 'figma-sync', 'plugin', 'README.md'), 'utf8');
+  const srcUi = readFileSync(path.join(ROOT, 'figma-sync', 'plugin', 'ui.html'), 'utf8');
+  // Labels of surfaces the 2026-07-26 IA deleted. Their presence means the
+  // text describes a plugin that no longer exists.
+  const DEAD_LABELS = ['Generate tab', 'Update library', 'Propose tab', 'six tabs', 'seven tabs'];
+  for (const [name, text] of [['plugin README (ships in the zip)', readme], ['source ui.html', srcUi]]) {
+    for (const label of DEAD_LABELS) {
+      ok(!text.includes(label), `${name} does not name the dead pre-2026-07-26 surface "${label}"`);
+    }
+    // "Send to Playground" was killed with that IA. A HISTORICAL mention (one
+    // that names the killing) is legal; naming it as a live feature is not.
+    let i = -1;
+    let liveMentions = 0;
+    while ((i = text.indexOf('Send to Playground', i + 1)) >= 0) {
+      const ctx = text.slice(Math.max(0, i - 160), i + 240);
+      if (!/kill|remov|gone|dead|no longer/i.test(ctx)) liveMentions += 1;
+    }
+    ok(liveMentions === 0, `${name}: "Send to Playground" appears only as a named killing, never as a live feature (${liveMentions} live mention(s))`);
+  }
+  // The README must describe the REAL IA — all four surfaces, by name…
+  for (const tab of ['Build', 'Changes', 'Send', 'Advanced']) {
+    ok(new RegExp(`\\*\\*${tab}\\*\\*`).test(readme), `plugin README names the real "${tab}" surface`);
+  }
+  // …and the standing channel (the primary delivery route), which the stale
+  // README omitted entirely: the claim verb, the read-key shape, the button.
+  ok(readme.includes('claim-channel'), 'plugin README tells the standing-channel story: ds-contracts figma claim-channel');
+  ok(readme.includes('dscr_'), 'plugin README names the dscr_ read key the designer pastes');
+  ok(readme.includes('Check for updates'), 'plugin README names the Check for updates button');
+  // The read-only guarantee and its one exception, said out loud.
+  ok(/read-only/i.test(readme) && readme.includes('Paste a script'), 'plugin README states the read-only guarantee and names Paste a script as the one unguarded surface');
+  // The pre-rewrite README claimed the bridge refuses plugin-origin GETs — a
+  // gap workers/assist/src/bridge.ts closed. That claim must not return.
+  ok(!/refuses?\s+plugin-origin/i.test(readme), 'plugin README no longer carries the stale plugin-origin-GET known gap');
+}
 
 const browser = await chromium.launch({ channel: 'chrome' });
 const page = await browser.newPage({ viewport: { width: 640, height: 680 } });

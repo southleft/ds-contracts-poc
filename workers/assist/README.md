@@ -133,28 +133,45 @@ and the client re-runs the exact same schema + generator referee over the
 proposal, so a stale mirror produces refused proposals, never accepted bad
 ones. Keep the two in sync when the contract shape changes.
 
-## Plugin bridge (`/bridge/*`) — "Send to Playground"
+## Plugin bridge (`/bridge/*`) — the pairing-code transports
 
-A second, Anthropic-free surface on the same Worker (`src/bridge.ts`): the
-Sync Runner Figma plugin (`figma-sync/plugin`) POSTs a dump v1 JSON here
-under a short-lived pairing code; the playground's Figma tab polls the code
-and imports on arrival — the plugin-transport replacement for copying a dump
-out of Figma and pasting it into the JSON tab. Because the Plugin API
-resolves bound variable **names** on any Figma plan, this route closes the
-Enterprise-only REST variables gap.
+A second, Anthropic-free surface on the same Worker (`src/bridge.ts`): a
+deliver-once mailbox keyed by a short-lived 6-character pairing code. Three
+flows ride it today — the tab it was built for, *Send to Playground*, was
+**killed** with the plugin's 2026-07-26 IA re-housing (docs/19), but the
+transport outlived it in both directions:
+
+- **`ds-contracts figma push <file> --code <CODE>`** — code → canvas, ad
+  hoc. A developer POSTs a CONTRACTS-BUNDLE under the code; the designer's
+  *Receive by code* (folded into "Other ways to receive" in the plugin's
+  **Build** tab) polls the same code and imports on arrival. Both people,
+  same fifteen minutes; the envelope (and only the envelope) is checked.
+  For the standing route that needs neither person present — CI publishes
+  on merge, the designer checks whenever — see the channel section below.
+- **`ds-contracts figma receive --out <dir>`** — canvas → code, the dev
+  door. The CLI mints the session, prints the code and waits; the designer
+  types it into *Send to repo* in the plugin's **Send** tab, and the
+  CONTRACT-PROPOSAL envelope lands as a reviewed local diff (the CLI writes
+  nothing without `--apply`).
+- **Playground dump import** — the original direction: a dump v1 JSON
+  travels from the plugin to the playground's Figma tab. The plugin UI for
+  it is gone; the route remains for the playground side, and because the
+  Plugin API resolves bound variable **names** on any Figma plan, it still
+  closes the Enterprise-only REST variables gap.
 
 | Route | Who | What |
 |---|---|---|
-| `POST /bridge/session` | playground (origin-gated like assist) | mints `{ code, ttlSeconds: 900 }` — 6 chars, crypto-random, alphabet `ABCDEFGHJKMNPQRSTUVWXYZ23456789` (no I/L/O/0/1), ~890M codes |
-| `POST /bridge/:code` | the plugin — **any** origin, including `null` | uploads the dump while the session is open; last write wins; `404` on wrong/expired code, `413` over 4MB, `400` non-JSON |
-| `GET /bridge/:code` | playground (origin-gated) | `{ status: "waiting" }` until upload; then `{ status: "delivered", dump }` **once** — both KV keys are deleted on delivery; afterwards `410` |
+| `POST /bridge/session` | anyone, any origin (per-IP capped) — the code is minted where the human is looking, and that now includes the CLI's terminal | mints `{ code, ttlSeconds: 900 }` — 6 chars, crypto-random, alphabet `ABCDEFGHJKMNPQRSTUVWXYZ23456789` (no I/L/O/0/1), ~890M codes |
+| `POST /bridge/:code` | the sender — **any** origin, including the plugin's `null` and the CLI's none | uploads the payload while the session is open, kind-tagged by envelope (`dump` / `contracts-bundle` / `proposal` — envelope checked, contents never inspected); last write wins; `404` on wrong/expired code, `413` over 4MB, `400` non-JSON or malformed envelope |
+| `GET /bridge/:code` | the receiver — **any** origin for bundle and proposal payloads (the plugin fetches with `Origin: null`, `figma receive` with none); `dump` payloads stay playground-origin-gated (the sensitive direction) | `{ status: "waiting" }` until upload; then `{ status: "delivered", kind, dump }` **once** — the KV keys are deleted on delivery; afterwards `410` |
 
-Deliberate asymmetry: a Figma plugin's fetch arrives with `Origin: null`
-(sandboxed plugin iframe), so the upload route cannot be origin-gated — the
-**pairing code is the auth**: unguessable at 15-minute one-time-read scale,
-minted only for the playground origin, rendered only where the human is
-looking. Wrong-code and expired-code uploads share one code path (a single
-KV read, one message), so the errors are not timing-distinguishable.
+On every leg the **pairing code is the auth**: unguessable at 15-minute
+one-time-read scale, rendered only where a human is looking. An origin gate
+would gate nothing on the routes that dropped it — a Figma plugin's fetch
+arrives with `Origin: null` (sandboxed plugin iframe) and a CLI's with no
+`Origin` at all — so only the design-dump read keeps its playground gate.
+Wrong-code and expired-code uploads share one code path (a single KV read,
+one message), so the errors are not timing-distinguishable.
 
 Privacy: dump contents are never logged, never inspected beyond "is JSON /
 under 4MB", and never persisted past one delivery or the 15-minute TTL,
@@ -166,9 +183,9 @@ these routes.
 Caps: its own kill switch (`BRIDGE_ENABLED`, independent of
 `ASSIST_ENABLED` — the bridge costs KV operations only, never model
 tokens) and per-IP daily caps (`BRIDGE_IP_DAILY_LIMIT`, default 40, session
-creation and uploads counted as separate classes). Playground polls are
-deliberately uncounted: origin-gated KV reads against an unguessable code,
-one every 2.5s for at most 15 minutes.
+creation and uploads counted as separate classes). Receiver polls (the
+playground's and the plugin's alike) are deliberately uncounted: KV reads
+against an unguessable code, one every 2.5s for at most 15 minutes.
 
 ## Standing CI↔Figma channel (`/channel/*`) — the async delivery route
 
@@ -396,8 +413,10 @@ network. Covered:
   malformed codes by name, expired-session refusal, the 15-minute
   `expirationTtl` on every write, the 4MB cap, non-JSON refusal, per-IP
   caps per class with uncounted polls, the asymmetric origin gates
-  (playground-only session/read vs. any-origin upload, `*` preflight), the
-  independent kill switch, and 405s. Bridge routes never touch the
+  (playground-only DUMP reads vs. any-origin sessions, uploads and
+  bundle/proposal reads, `*` preflight), the kind-tagged deliveries
+  (contracts-bundle and proposal envelopes checked, byte-identical arrival),
+  the independent kill switch, and 405s. Bridge routes never touch the
   Anthropic transport (the mock throws if reached).
 - Standing channel (`test/channel.test.ts`, 24 cases): write-key shape and
   uniqueness, `readKey === sha256(writeKey)` against node's own crypto, the

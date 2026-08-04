@@ -1,5 +1,7 @@
 # 17 — Run the Gauntlet
 
+> **Path:** the two sequences below are **path B — code-first** (Sequence B: your code → a Figma library) and **path A — design-first** (Sequence A: canvas → code), packaged as a runbook — [Choose Your Path](00-choose-your-path.md) is the canonical statement of both.
+
 *The to-and-from sequence, packaged for someone who has never seen this repo —
 run it against your own component codebase, then try to break it.*
 
@@ -15,7 +17,7 @@ it's a one-time manifest import).
 
 ---
 
-## Sequence A — your code → contracts → a Figma library (one paste)
+## Sequence A — your code → contracts → a Figma library (one paste) — *canonical path B, code-first*
 
 This is the direction that replaces agentic extract flows: your components
 become schema-valid contracts, and the contracts build a real Figma library —
@@ -44,8 +46,9 @@ npx @ds-contracts/cli figma bundle <your-contracts-dir> \
   [--modes <light.json[,dark.json]>] --name <YourLibrary> --out ./my-library.bundle.json
 ```
 
-Open a blank Figma file → DS Contracts plugin → **Generate** tab → paste the
-bundle JSON → Generate. The plugin syncs the token set first (one variable
+Open a blank Figma file → DS Contracts plugin → **Build** tab → paste the
+bundle JSON into the box → click **Generate in this file** (there is no
+"Generate tab"). The plugin syncs the token set first (one variable
 collection named after your library, Light/Dark modes, Figma-native aliases
 for `{alias}` minted leaves), then builds every component set against it.
 **The contract JSON is the only thing you ever paste** — no compiled
@@ -69,16 +72,17 @@ budget real time; or hand me the repo and I'll write the config with you.
 contract, each set on its own page in a labeled section; variant grids
 matching your prop axes; fills/radii/spacing bound to variables (inspect a
 fill and follow the alias). For the reference experience without your own
-code, paste `examples/mui/figma/mui.bundle.json` into the **Generate** tab of
-a blank file: MUI's default theme, 5 sets, 121 variants, 982 variables (61
-Figma-native source aliases), ~30 seconds — one JSON paste.
+code, paste `examples/mui/figma/mui.bundle.json` into the **Build** tab's
+paste box in a blank file and click **Generate in this file**: MUI's default
+theme, 5 sets, 121 variants, 982 variables (61 Figma-native source aliases),
+~30 seconds — one JSON paste.
 
-## Sequence B — canvas → contract → code
+## Sequence B — canvas → contract → code — *canonical path A, design-first*
 
 The reverse leg, for a component that exists (or was just built) on canvas:
 
 ```bash
-npm run extract:figma           # canvas dump → PROPOSED contract (in this repo)
+npm run extract:figma -- <dump.json>   # canvas dump → PROPOSED contract (in this repo)
 npx @ds-contracts/cli generate <contract> --out ./generated --target react --stories   # contract → React + story
 ```
 

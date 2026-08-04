@@ -1,6 +1,6 @@
-# CI recipes — the "no burden" automation for the two journeys
+# CI recipes — the "no burden" automation for the two shipped directions (paths A and B of [Choose your path](../../docs/00-choose-your-path.md))
 
-Two GitHub Actions workflows that make contracts carry the design/code sync
+Two GitHub Actions workflows (one per direction) that make contracts carry the design/code sync
 so neither side has to. Both run the **published** CLI
 (`npx --yes @ds-contracts/cli@0.3.0`) — they work in any repo today, no clone
 of this reference repo required.

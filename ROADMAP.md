@@ -1,6 +1,6 @@
 # Roadmap
 
-*Looking for how to **use** this rather than where it's going? Start at [which journey are you on](README.md#which-journey-are-you-on) — code into Figma, canvas into code, or a brownfield pair reconciled. Deciding whether to **adopt** it? Start at [Known Limitations](docs/23-known-limitations.md) instead — it is the honest counterweight to this page.*
+*Looking for how to **use** this rather than where it's going? Start at [Choose Your Path](docs/00-choose-your-path.md) — design-first (canvas into code), code-first (code into Figma), or a brownfield pair reconciled. Deciding whether to **adopt** it? Start at [Known Limitations](docs/23-known-limitations.md) instead — it is the honest counterweight to this page.*
 
 The public roadmap lives in the documentation: **[docs/12-roadmap.md](docs/12-roadmap.md)**.
 

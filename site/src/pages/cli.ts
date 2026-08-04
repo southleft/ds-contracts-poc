@@ -59,7 +59,7 @@ export function cliPage(): { route: string; html: string } {
   const body = `
 <p class="eyebrow">Reference</p>
 <h1>The CLI — <code>@ds-contracts/cli</code></h1>
-<p class="lede">Every verb is a thin shell over the same engine the reference repository runs — esbuild-bundled, zero required runtime dependencies, Node ≥ 20. Install it globally or run it with <code>npx</code>; the two journeys on <a href="/get-started/">Get started</a> are built from these verbs.</p>
+<p class="lede">Every verb is a thin shell over the same engine the reference repository runs — esbuild-bundled, zero required runtime dependencies, Node ≥ 20. Install it globally or run it with <code>npx</code>; the three paths on <a href="/get-started/">Get started</a> are built from these verbs.</p>
 ${codeBlock(`npm i -g @ds-contracts/cli     # or: npx --yes @ds-contracts/cli@${cliVersion} <command>`, 'bash')}
 
 <h2 id="usage">Usage ${badge('generated', 'Extracted verbatim from packages/cli/src/cli.ts at build time — the CLI names this block its own reference.')}</h2>

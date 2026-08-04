@@ -1,8 +1,10 @@
 /**
  * Get started — goal-first. A visitor arrives with one of three situations
- * ("my components are in code and I want them in Figma", "there's a component
- * on the canvas and I want code", "I already have both"), so the page is
- * organised by situation, not by persona or by machinery.
+ * ("there's a component on the canvas and I want code", "my components are in
+ * code and I want them in Figma", "I already have both"), so the page is
+ * organised by situation, not by persona or by machinery. The lettering is
+ * canonical — docs/00-choose-your-path.md owns it: A = design-first,
+ * B = code-first, C = reconcile.
  *
  * Every `npx @ds-contracts/cli` command line on this page is rendered from
  * evals/fixtures/journey-commands.json through site/src/journeys.ts — the same
@@ -42,8 +44,8 @@ export function getStartedPage(): { route: string; html: string } {
 <div class="table-wrap"><table>
 <thead><tr><th></th><th>Your situation</th><th>Ends with</th></tr></thead>
 <tbody>
-<tr><td><strong><a href="#a">A</a></strong></td><td>“I have components in <strong>code</strong>. I want them in <strong>Figma</strong>.”</td><td>A designer clicks <strong>Check for updates</strong> and your real components appear on their canvas, token-bound.</td></tr>
-<tr><td><strong><a href="#b">B</a></strong></td><td>“I have a component on the <strong>canvas</strong>. I want <strong>code</strong>.”</td><td>A typed React component, CSS Modules and Storybook stories, in your repo.</td></tr>
+<tr><td><strong><a href="#a">A</a></strong></td><td>“I have a component on the <strong>canvas</strong>. I want <strong>code</strong>.”</td><td>A typed React component, CSS Modules and Storybook stories, in your repo.</td></tr>
+<tr><td><strong><a href="#b">B</a></strong></td><td>“I have components in <strong>code</strong>. I want them in <strong>Figma</strong>.”</td><td>A designer clicks <strong>Check for updates</strong> and your real components appear on their canvas, token-bound.</td></tr>
 <tr><td><strong><a href="#c">C</a></strong></td><td>“I already have a mature Figma library <em>and</em> a mature codebase.”</td><td>A property-by-property disagreement report, and a CI gate that stops the gap growing.</td></tr>
 </tbody></table></div>
 
@@ -56,10 +58,38 @@ export function getStartedPage(): { route: string; html: string } {
 
 <hr>
 
-<h2 id="a">A · “I have components in code; I want them in Figma”</h2>
+<h2 id="a">A · “I have a component on the canvas; I want code”</h2>
+<p class="lede">A designer has a component set in Figma; you want a real, typed React component in your repo. The generation half of this is fully deterministic — the same contract produces byte-identical output on any machine, with no model in the path.</p>
+
+<ol class="steps">
+<li><h3>Read the set</h3><p>In the plugin, open the <strong>Send</strong> tab. Select the set on canvas (or find it with <em>Scan this file</em>), leave the base-contract box empty if this tool did not build it, and click <strong>Read the set &amp; diff</strong>. The engine reads the live set and proposes a contract from what is actually drawn: variants become props, layers become anatomy, bound variables become token refs. With a base contract you get a <em>diff</em> (what changed); without one you get a <em>proposal</em> (what this set is).</p></li>
+
+<li><h3>Get the contract into the repo — three doors, all reviewable, and the code comes with it</h3>
+<p>The PR carries <strong>both halves: the contract AND the component it generates</strong>. It used to carry a document nobody could run, with an invisible second hop where a human had to know to go away and run <code>generate</code>. Which target it emits is never guessed — the plugin's <code>--target</code> wins, otherwise the <code>generate</code> section of <code>ds-contracts.config.json</code> decides; with neither recorded the change carries the contract alone <strong>and says so</strong>.</p>
+<ul>
+<li><strong>GitHub PR.</strong> Fill in <code>owner/repo</code> and a fine-grained token scoped to that one repo (session-only, never stored; closing the plugin forgets it). Leave <em>Dry run</em> ticked first to see the exact plan — every file, both diffs, the provenance sentence — and send nothing.</li>
+<li><strong>Send to repo, no GitHub token.</strong> The developer runs <code>ds-contracts figma receive --out contracts</code>, which prints a 6-character code; the designer types it into the plugin. The proposal travels the pairing bridge and lands as a reviewed local diff — <strong>the CLI writes nothing without <code>--apply</code></strong>, and with <code>--apply</code> it writes the generated component alongside the contract from that same config.</li>
+<li><strong>Copy the JSON out</strong> and commit it yourself, then run <code>generate</code> (next step).</li>
+</ul></li>
+
+<li><h3>Generate</h3>${codeBlock(engineerGenerate.command, 'bash', engineerGenerate.doc)}<p>Typed React + CSS Modules + CSF3 Storybook stories, prettier-formatted — the same byte-guarded generator the reference repo ships. Styles are token names compiled to <code>var(--…)</code> custom properties; <a href="/how-it-works/styles/">how styles are applied</a> walks the whole chain. <code>--target</code> also accepts <code>html</code>, <code>react-inline</code>, <code>figma-script</code>, or any emitter you register with <code>--emitter</code>; an unknown target is refused with the list of registered names.</p></li>
+
+<li><h3>Review in Storybook, beside the frame</h3><p>The emitted stories cover the default plus every enum value and boolean. Open them next to the Figma frame — you are reviewing two renderings of one contract, not a translation.</p></li>
+
+<li><h3>CI holds the line</h3><p>On every PR that touches <code>contracts/</code>, the <a href="${REPO_URL}/blob/main/examples/ci/design-led.yml">design-led workflow</a> regenerates and then runs the referee: <code>ds-contracts diff</code> exits <code>0</code> clean · <code>1</code> drift (findings named) · <code>2</code> config error. A PR that would leave code and contracts disagreeing cannot merge. Full flag-by-flag detail: <a href="/cli/">the CLI reference</a>.</p></li>
+</ol>
+
+<h3 id="a-asymmetry">The honest asymmetry — and the change states which one it is</h3>
+<p>For a set <strong>this tool generated</strong> — it carries a <code>ds_contracts/contractId</code> marker — journey A is a <strong>true round trip</strong>: re-running the emitters reproduces the component <strong>byte for byte</strong> from the contract in the PR, the proposal is measured against the contract that built it, and the reference repo's own components re-extract to zero mismatches in both directions, red-tested.</p>
+<p>For a <strong>hand-built</strong> set — no marker — it is <strong>an inversion, not a reproduction</strong>. The proposal is what can be read off the canvas — real structure, real variants, real bound variables — but a canvas cannot tell you about a <code>useEffect</code>, a keyboard handler, or why a value is what it is. <strong>Treat the generated component as a strong, correct-by-construction starting point, not as your finished component</strong>, and review it as new code. That boundary is deliberate and permanent: see <a href="${REPO_URL}/blob/main/docs/16-sync-boundary.md">the sync boundary</a>.</p>
+<p>You do not have to remember which case you are in. The plugin stamps the provenance into the proposal envelope and the PR body prints the matching sentence; when a contract arrives with no canvas provenance recorded, the body says <em>that</em> rather than picking a side. Both surfaces read one module, so the preview a designer sees and the sentence a reviewer reads cannot drift apart.</p>
+
+<hr>
+
+<h2 id="b">B · “I have components in code; I want them in Figma”</h2>
 <p class="lede">Your real Button — its real padding, its real colors, its real variants — as a native Figma component set, built by a machine rather than redrawn by a person. <strong>No copy-paste, no manual redraw.</strong></p>
 
-<h3 id="a-limit">Read this before you start: what you cannot do</h3>
+<h3 id="b-limit">Read this before you start: what you cannot do</h3>
 <p><strong>You cannot point the Figma plugin at a GitHub URL or an npm package name and get components.</strong> This is structural, not a missing feature:</p>
 <ul>
 <li>To know what your component looks like, the tool has to <strong>run</strong> it in a real browser and read the computed styles. That is what makes the result true rather than guessed.</li>
@@ -67,7 +97,7 @@ export function getStartedPage(): { route: string; html: string } {
 </ul>
 <p>So the browser step happens on a machine you control — your laptop or your CI — and what travels to Figma is a finished JSON bundle. Which is fine: it means the slow, fallible step is on the side that can debug it.</p>
 
-<h3 id="a-static">The fast check: does your library even need the browser step?</h3>
+<h3 id="b-static">The fast check: does your library even need the browser step?</h3>
 <p>Static extraction (<code>ds-contracts extract</code>, no <code>--computed</code>) runs anywhere in seconds and always proposes schema-valid contracts carrying your <strong>API surface</strong> — props, enum values, defaults, events. Whether it <em>also</em> gives you anatomy — the parts, their layout, and which token paints each channel — depends on how your library is styled:</p>
 <div class="table-wrap"><table>
 <thead><tr><th>Your library</th><th>What static extraction produces</th></tr></thead>
@@ -80,7 +110,7 @@ export function getStartedPage(): { route: string; html: string } {
 <p>Each proposal says which one you got: <em>“API surface AND anatomy … read from source”</em> versus <em>“API surface only; anatomy, tokens, and design bindings await reconciliation and human review.”</em></p>
 <p class="section-note"><strong>The quiet failure, named.</strong> A stub anatomy is schema-valid, so nothing refuses it — and the Figma emitter will build the set anyway. What lands on the canvas is a correctly <em>named</em> component with the right variant axes and <strong>blank frames inside</strong>: no fills, no padding, no bound variables. The tool is not lying; it is faithfully rendering a contract that says nothing about appearance. If your canvas sets come out empty, this is why, and the fix is the computed capture below.</p>
 
-<h3 id="a-path">The path</h3>
+<h3 id="b-path">The path</h3>
 <p><strong>One command, two phases.</strong> ${codeBlock(`npm i -g @ds-contracts/cli
 
 ds-contracts onboard @acme/ui       # detect · sandbox · seed · draft · STOP
@@ -113,7 +143,7 @@ ds-contracts figma publish acme.bundle.json`, 'bash', 'claim-channel mints a wri
 <li><h3>The designer reviews and applies</h3><p>In the plugin's <strong>Changes</strong> tab: <strong>Check for updates</strong> → a per-set report in plain words (“interior/style changes, no API change”) → tick the rows you want → <strong>Apply selected</strong>. Applying is <em>in place</em>: same node ids, same component keys, so instances placed around the file keep their component-property overrides (text, variant, boolean). New components land as new sets. Rows whose set has been edited on canvas warn that applying would overwrite that edit, and start unchecked.</p></li>
 </ol>
 
-<h3 id="a-other-doors">Two other ways to deliver the same bundle</h3>
+<h3 id="b-other-doors">Two other ways to deliver the same bundle</h3>
 <p><strong>Ad-hoc, both people online.</strong> The one-time 6-character pairing code, folded into “Other ways to receive” in the plugin's <strong>Build</strong> tab:</p>
 ${codeBlock(designerPush.command, 'bash', designerPush.doc)}
 <p>Deliver-once, 15-minute TTL, and you both have to be there in that minute. It carries no ordering, so it gets no freshness warning — a limit we state rather than paper over. Good for a one-off from a laptop; bad as a daily habit.</p>
@@ -121,34 +151,6 @@ ${codeBlock(designerPush.command, 'bash', designerPush.doc)}
 <p><strong>First landing from a single contract.</strong> A contract can also be compiled directly to a Figma Plugin API sync script — the same emitter the reference repo built its entire canvas library with:</p>
 ${codeBlock(designerEmit.command, 'bash', designerEmit.doc)}
 <p class="section-note">This is the older, lower-level door. Prefer <code>figma bundle</code> unless you are debugging the emitter.</p>
-
-<hr>
-
-<h2 id="b">B · “I have a component on the canvas; I want code”</h2>
-<p class="lede">A designer has a component set in Figma; you want a real, typed React component in your repo. The generation half of this is fully deterministic — the same contract produces byte-identical output on any machine, with no model in the path.</p>
-
-<ol class="steps">
-<li><h3>Read the set</h3><p>In the plugin, open the <strong>Send</strong> tab. Select the set on canvas (or find it with <em>Scan this file</em>), leave the base-contract box empty if this tool did not build it, and click <strong>Read the set &amp; diff</strong>. The engine reads the live set and proposes a contract from what is actually drawn: variants become props, layers become anatomy, bound variables become token refs. With a base contract you get a <em>diff</em> (what changed); without one you get a <em>proposal</em> (what this set is).</p></li>
-
-<li><h3>Get the contract into the repo — three doors, all reviewable, and the code comes with it</h3>
-<p>The PR carries <strong>both halves: the contract AND the component it generates</strong>. It used to carry a document nobody could run, with an invisible second hop where a human had to know to go away and run <code>generate</code>. Which target it emits is never guessed — the plugin's <code>--target</code> wins, otherwise the <code>generate</code> section of <code>ds-contracts.config.json</code> decides; with neither recorded the change carries the contract alone <strong>and says so</strong>.</p>
-<ul>
-<li><strong>GitHub PR.</strong> Fill in <code>owner/repo</code> and a fine-grained token scoped to that one repo (session-only, never stored; closing the plugin forgets it). Leave <em>Dry run</em> ticked first to see the exact plan — every file, both diffs, the provenance sentence — and send nothing.</li>
-<li><strong>Send to repo, no GitHub token.</strong> The developer runs <code>ds-contracts figma receive --out contracts</code>, which prints a 6-character code; the designer types it into the plugin. The proposal travels the pairing bridge and lands as a reviewed local diff — <strong>the CLI writes nothing without <code>--apply</code></strong>, and with <code>--apply</code> it writes the generated component alongside the contract from that same config.</li>
-<li><strong>Copy the JSON out</strong> and commit it yourself, then run <code>generate</code> (next step).</li>
-</ul></li>
-
-<li><h3>Generate</h3>${codeBlock(engineerGenerate.command, 'bash', engineerGenerate.doc)}<p>Typed React + CSS Modules + CSF3 Storybook stories, prettier-formatted — the same byte-guarded generator the reference repo ships. Styles are token names compiled to <code>var(--…)</code> custom properties; <a href="/how-it-works/styles/">how styles are applied</a> walks the whole chain. <code>--target</code> also accepts <code>html</code>, <code>react-inline</code>, <code>figma-script</code>, or any emitter you register with <code>--emitter</code>; an unknown target is refused with the list of registered names.</p></li>
-
-<li><h3>Review in Storybook, beside the frame</h3><p>The emitted stories cover the default plus every enum value and boolean. Open them next to the Figma frame — you are reviewing two renderings of one contract, not a translation.</p></li>
-
-<li><h3>CI holds the line</h3><p>On every PR that touches <code>contracts/</code>, the <a href="${REPO_URL}/blob/main/examples/ci/design-led.yml">design-led workflow</a> regenerates and then runs the referee: <code>ds-contracts diff</code> exits <code>0</code> clean · <code>1</code> drift (findings named) · <code>2</code> config error. A PR that would leave code and contracts disagreeing cannot merge. Full flag-by-flag detail: <a href="/cli/">the CLI reference</a>.</p></li>
-</ol>
-
-<h3 id="b-asymmetry">The honest asymmetry — and the change states which one it is</h3>
-<p>For a set <strong>this tool generated</strong> — it carries a <code>ds_contracts/contractId</code> marker — journey B is a <strong>true round trip</strong>: re-running the emitters reproduces the component <strong>byte for byte</strong> from the contract in the PR, the proposal is measured against the contract that built it, and the reference repo's own components re-extract to zero mismatches in both directions, red-tested.</p>
-<p>For a <strong>hand-built</strong> set — no marker — it is <strong>an inversion, not a reproduction</strong>. The proposal is what can be read off the canvas — real structure, real variants, real bound variables — but a canvas cannot tell you about a <code>useEffect</code>, a keyboard handler, or why a value is what it is. <strong>Treat the generated component as a strong, correct-by-construction starting point, not as your finished component</strong>, and review it as new code. That boundary is deliberate and permanent: see <a href="${REPO_URL}/blob/main/docs/16-sync-boundary.md">the sync boundary</a>.</p>
-<p>You do not have to remember which case you are in. The plugin stamps the provenance into the proposal envelope and the PR body prints the matching sentence; when a contract arrives with no canvas provenance recorded, the body says <em>that</em> rather than picking a side. Both surfaces read one module, so the preview a designer sees and the sentence a reviewer reads cannot drift apart.</p>
 
 <hr>
 
@@ -188,14 +190,14 @@ ds-contracts diff            # the continuous referee: contracts vs code (and de
 <p>If you just want the <em>contract format</em>: point your editor's <code>$schema</code> at the published JSON Schema — <code>@ds-contracts/schema/contract.schema.json</code> — and read <a href="/spec/">the reference</a>, which is generated from the same source. Running the full reference machinery (evals, instruments, the census) still means cloning <a href="${REPO_URL}">the repository</a>: <code>npm install &amp;&amp; npm run build &amp;&amp; npm run eval</code>.</p>
 
 <h2 id="plugin">Installing the Figma plugin</h2>
-<p>The plugin is <strong>not on the Figma Community</strong>, and that is a decision rather than a pending task. Distribution is the manifest-upload developer-plugin path: in the reference repo, <code>npm run plugin:zip</code> refreshes <code>figma-sync/plugin-dist/</code>, and in Figma desktop you use <strong>Plugins → Development → Import plugin from manifest…</strong> and select <code>figma-sync/plugin-dist/manifest.json</code>. Import from that folder — never from <code>figma-sync/plugin/</code>, which is a stub with no engine. The consequence, stated as a property: someone with repo access imports the manifest once per file owner.</p>
+<p>The plugin is <strong>not on the Figma Community</strong>, and that is a decision rather than a pending task. Distribution is the manifest-upload developer-plugin path, with two routes to the manifest: <strong>no clone</strong> — download the packaged zip the playground serves at <a href="${PLAYGROUND_URL}/ds-contracts-sync-runner-plugin.zip">/ds-contracts-sync-runner-plugin.zip</a>, unzip it, and import the <code>manifest.json</code> inside; or <strong>from a clone</strong> — <code>npm run plugin:zip</code> refreshes <code>figma-sync/plugin-dist/</code> and you import <code>figma-sync/plugin-dist/manifest.json</code>. Either way, in Figma desktop use <strong>Plugins → Development → Import plugin from manifest…</strong>. Never import from <code>figma-sync/plugin/</code>, which is a stub with no engine. The consequence, stated as a property: someone imports the manifest once per file owner — only the clone route requires repo access.</p>
 `;
   const html = layout(
     {
       path: '/get-started/',
       title: 'Get started — Design System Contracts',
       description:
-        'Three situations, three paths: code components into Figma, a canvas component into code, or a brownfield pair reconciled. Real commands, the structural limits stated up front, and every CLI line rendered from the manifest the evals execute.',
+        'Three situations, three paths: a canvas component into code, code components into Figma, or a brownfield pair reconciled. Real commands, the structural limits stated up front, and every CLI line rendered from the manifest the evals execute.',
     },
     body,
   );

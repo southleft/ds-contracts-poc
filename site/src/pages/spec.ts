@@ -26,12 +26,15 @@ import {
   LayoutByPropSchema,
   TokensByPropSchema,
   LiteralsByPropSchema,
+  StatesByPropSchema,
+  PropByPropSchema,
   StylesWhenSchema,
   OverlaySchema,
   ShapeSchema,
   VisibleWhenSchema,
   EventSchema,
   STYLES_WHEN_ALLOWED,
+  REF_OVERRIDE_CHANNELS,
 } from '../../../scripts/contract-schema.js';
 import { layout, codeBlock, badge, esc, REPO_URL, type Provenance } from '../html.js';
 import { fieldsOf, resolveLazy, unwrap, typeText } from '../introspect.js';
@@ -348,8 +351,11 @@ function anatomyPage(): { route: string; html: string } {
           tokens: 'CSS property → token reference — see <a href="/spec/tokens/">Token bindings</a>.',
           tokensByProp: 'Per-enum-value token overrides — see <a href="/spec/tokens/#tokens-by-prop">Token bindings</a>.',
           states: 'Interaction-state token overrides — see <a href="/spec/states/">States</a>.',
+          statesByProp: 'Per-state token overrides that also vary by an enum axis — see <a href="/spec/states/#states-by-prop">States</a>.',
           content: 'Text content bound to a declared text prop — see below.',
           text: 'Static literal text — see below.',
+          textByProp: 'Per-enum-value text overrides merged over <code>text</code> — see <a href="#text-by-prop">text by prop</a>.',
+          overridable: 'Root-part consent to per-instance overrides — see <a href="/spec/composition/#ref-overrides">Composition</a>.',
           meter: 'Progress fill geometry — see below.',
           animation: 'CSS-side motion — see <a href="/spec/conditionals/#animation">Conditionals</a>.',
           slot: 'Constrained insertion point — see <a href="/spec/composition/#slots">Composition</a>.',
@@ -380,6 +386,29 @@ function anatomyPage(): { route: string; html: string } {
           '<code>content.prop</code> must name a declared text prop (checked against the prop’s <em>code binding</em> name)',
         ]) +
         shippingExample('banner.contract.json', { paths: ['anatomy.root.parts.body.parts.title'] }),
+    ),
+    section(
+      'text-by-prop',
+      'Text by prop',
+      ['generated', 'curated'],
+      `<p><code>textByProp: { prop, map }</code> — static text selected by an enum value. When a drawn text node’s characters vary as a pure function of <em>one</em> enum axis, the deviating values ride a lookup keyed on that prop’s canonical values — the <a href="/spec/tokens/#tokens-by-prop">tokensByProp</a> discipline applied to characters. Requires a base <code>text</code> (the default value’s text); a value absent from the map renders the base. Field cases: the Untitled UI Slider’s value labels (<code>"25%"</code>/<code>"50%"</code>/<code>"75%"</code> keyed on <code>leftControl</code>/<code>rightControl</code>), ProgressBar’s percentage text, SocialButton’s “Sign in with …”.</p>` +
+        fieldList(PropByPropSchema as AnySchema, {
+          prop: 'The driving enum prop, by canonical name.',
+          map: 'enum value → literal text, merged over the base <code>text</code>.',
+        }) +
+        refusals('Refusals:', [
+          '<code>textByProp</code> without a base <code>text</code>',
+          'an unknown driving prop; a map key outside its canonical values',
+        ]) +
+        illustrativeExample(
+          PartSchema,
+          {
+            element: 'span',
+            text: '25%',
+            textByProp: { prop: 'leftControl', map: { '25': '25%', '50': '50%', '75': '75%' } },
+          },
+          'the Slider’s left value label (committed usage: examples/untitled-ui/storybook/contracts/slider.contract.json)',
+        ),
     ),
     section(
       'icon',
@@ -588,6 +617,39 @@ function statesPage(): { route: string; html: string } {
         `<p class="section-note">No shipping contract in <code>contracts/</code> uses part-level state overrides yet — the capability came from a brownfield field case (a disabled table row washing out its label) and is exercised by <code>npm run extract:figma:partstate:check</code> against committed fixtures. The example above is validated against the live schema at build time.</p>`,
     ),
     section(
+      'states-by-prop',
+      'States by prop',
+      ['generated', 'curated'],
+      `<p><code>statesByProp</code> (v17, the hover-plane round) — an interaction state whose binding is <em>also</em> a function of an enum axis. <code>states</code> holds one ref per channel, and a root ref carrying a single <code>{prop}</code> placeholder already expands into per-value state rules — but that reaches only a token <em>family</em> (<code>{button.bg.hover.{variant}}</code>). The far commoner case is a design system whose per-variant state colours are <strong>unrelated names</strong>: Eventz’s hover backgrounds are <code>comp/button/primary/color/background/hover</code> on primary and <code>comp/button/color/background/knockout-hover</code> on knockout — no family, no shared stem, nothing a placeholder can reach. Measured, refusing that shape cost Button and Icon&nbsp;Button their entire hover and active planes, and a state crossed with a variant axis is the single most common pattern in a real design system.</p><p>The shape is <a href="/spec/tokens/#tokens-by-prop">tokensByProp</a>’s plus the state it applies to — one map grammar in the vocabulary, not two. Entries are ordered like tokensByProp entries; refs are <em>plain</em> (the axis is already pinned by the map key). Code renders enum-class state rules (<code>.variant-primary:hover</code>), emitted after the plain <code>states</code> rules so the per-value binding wins at equal specificity — the tokensByProp cascade discipline applied to a state selector.</p>` +
+        fieldList(StatesByPropSchema as AnySchema, {
+          prop: 'The driving enum prop, by canonical name.',
+          state: 'The declared interaction state the map applies to.',
+          map: 'enum value → (CSS property → plain TokenRef).',
+        }) +
+        refusals('Refusals — the same discipline <code>states</code> is held to:', [
+          'unknown state names; a state the contract’s <code>states</code> does not declare',
+          'component-instance and slot parts; non-color channels on non-root parts',
+          'the driving prop must be a declared enum; every map key one of its canonical values',
+          'a channel bound for the same state by BOTH <code>states</code> and <code>statesByProp</code> — ambiguous, refused by name rather than resolved by sheet order',
+        ]) +
+        illustrativeExample(
+          PartSchema,
+          {
+            statesByProp: [
+              {
+                prop: 'variant',
+                state: 'hover',
+                map: {
+                  primary: { 'background-color': '{comp.button.primary.color.background.hover}' },
+                  knockout: { 'background-color': '{comp.button.color.background.knockout-hover}' },
+                },
+              },
+            ],
+          },
+          'per-variant hover backgrounds with unrelated token names (committed usage: examples/eventz-vars/contracts/atoms-button.contract.json)',
+        ),
+    ),
+    section(
       'state-previews',
       'Canvas state previews (figmaStatePreviews)',
       ['generated', 'curated'],
@@ -693,6 +755,7 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): { route: s
           width: 'Intrinsic (pre-rotation) width, px.',
           height: 'Intrinsic (pre-rotation) height, px.',
           rotation: 'CSS-clockwise degrees. Omit for 0.',
+          arc: 'Ellipse-only partial sweep — see <a href="#arc">ellipse arcs</a>.',
         }) +
         `<p>Projections: code surfaces render width/height + <code>clip-path: polygon(…)</code> (or <code>border-radius: 50%</code>) + <code>transform: rotate(…)</code> — one shared implementation (<code>shapeCssDecls</code> in the schema module) so the projection cannot fork across emitters; the canvas generator constructs a <em>real</em> RegularPolygon/Ellipse/Rectangle node with native rotation.</p>` +
         refusals('Refusals:', [
@@ -704,6 +767,32 @@ function shapePage(replays: Awaited<ReturnType<typeof loadReplays>>): { route: s
           'proposed at build time by the import engine from the committed live capture extract/figma/fixtures/cbds-tooltip.rest-dump.json — the CBDS Tooltip pointer: a real triangle with per-placement stylesWhen insets and rotation',
         ) +
         `<p class="section-note">Every value above — the 12×12 intrinsic size, each inset, each rotation — comes from the captured file, not from this page. The standing receipt for this field case is <code>npm run extract:figma:tooltip:check</code>.</p>`,
+    ),
+    section(
+      'arc',
+      'Ellipse arcs',
+      ['generated', 'curated'],
+      `<p><code>shape.arc</code> — partial-sweep geometry for an <strong>ellipse</strong> shape (a spinner’s three-quarter ring, a donut gauge), carried as Figma Plugin-API <strong>ArcData radians, verbatim</strong>: 0 at 3 o’clock, increasing clockwise on screen. Ellipse-only vocabulary, and carried only when the sweep is <em>partial</em> (&lt;&nbsp;2π) and constant across variants — a full sweep is the plain ellipse, and an axis-varying sweep rides per-value <code>stylesWhen</code> <code>mask</code> rules instead (the rotation discipline).</p>` +
+        fieldList(unwrap((ShapeSchema.shape as unknown as Record<string, AnySchema>).arc).schema, {
+          start: 'Sweep start, radians — 0 at 3 o’clock, increasing clockwise on screen.',
+          end: 'Sweep end, same convention.',
+          innerRadius: 'Figma’s donut-hole fraction, 0–1 — recorded for round-trip fidelity, see below.',
+        }) +
+        `<p>Projections: code surfaces render the sweep as a conic-gradient mask over the part’s border-drawn ring — one spelling, <code>arcMaskCss</code> in the schema module, shared by every emitter so the projection cannot fork; the canvas generator sets native <code>arcData</code> (<code>core/emit-figma-script.ts</code>).</p>` +
+        refusals('Refusals:', [
+          '<code>arc</code> on a non-ellipse shape — sweep is ellipse vocabulary',
+        ]) +
+        fidelity(
+          `<p><strong>Honest carriage:</strong> the mask’s hard color stops render <em>butt</em> caps — Figma’s stroke-cap style is not on the dump surface, a named residue. <code>innerRadius</code> at <code>1</code> (the observed class — a pure stroked ring) costs nothing: the border-drawn ring already leaves the hole. The proposer <em>names</em> <code>innerRadius &lt; 1</code> (a filled donut) instead of carrying it.</p>`,
+        ) +
+        illustrativeExample(
+          PartSchema,
+          {
+            shape: { kind: 'ellipse', width: 16, height: 16, arc: { start: -1.5708, end: 3.1416, innerRadius: 1 } },
+            tokens: { 'border-color': '{color.icon.brand}' },
+          },
+          'a three-quarter stroked ring — the sweep in ArcData radians',
+        ),
     ),
   ].join('');
   return specPage(
@@ -758,6 +847,7 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): { ro
           id: 'The child contract’s id, e.g. <code>ds.avatar</code>.',
           props: 'Fixed prop values; <code>"{parentProp}"</code> threads a parent enum through.',
           text: 'Overrides the child’s <code>children</code> text prop (code: JSX children; canvas: text override on the instance).',
+          overrides: 'Per-instance channel overrides — see <a href="#ref-overrides">below</a>.',
         }) +
         refusals('Refusals:', [
           'unknown child contracts; cycles (<code>a contract cannot compose itself</code>)',
@@ -766,6 +856,39 @@ function compositionPage(replays: Awaited<ReturnType<typeof loadReplays>>): { ro
           '<code>text</code> on a child with no children text prop',
         ]) +
         shippingExample('card.contract.json', { paths: ['anatomy.root.parts.header.parts.avatar'] }),
+    ),
+    section(
+      'ref-overrides',
+      'Per-instance overrides',
+      ['generated', 'curated'],
+      `<p><code>component.overrides</code> carries observed per-occurrence facts of <em>this</em> usage that diverge from what the child contract renders on its own — a Figma instance can carry its own image fill, its own box, its own solid paint or glyph ink, and the child contract cannot know them. Keys come from the <code>REF_OVERRIDE_CHANNELS</code> registry (below); values are token refs <strong>minted from the observed per-occurrence values</strong>, never invented, and axis-substitutable. Field case: the Avatar host drawing its glyph stub’s silhouette in its own ink and box.</p><p>Consent is two-sided. The child must list each channel in its <strong>root part’s <code>overridable</code></strong> — the channels its own styling consumes through the override custom property (<code>--&lt;child-id&gt;-&lt;channel&gt;</code>, derived from the child contract id so nesting different children never crosses channels) with its own bindings as the <code>var()</code> fallback. Absent an override, behavior is value-identical to the plain bindings. <code>overridable</code> is declared at propose time from the same observed evidence that minted the underlying channels — it grants exactly this: which registered channels a host may set on an instance of this contract.</p><div class="table-wrap"><table><thead><tr><th>Channel</th><th>CSS it overrides</th><th>The observed Figma fact</th></tr></thead><tbody>${Object.entries(
+        REF_OVERRIDE_CHANNELS,
+      )
+        .map(
+          ([channel, def]) =>
+            `<tr><td><code>${channel}</code></td><td>${def.css.map((c) => `<code>${c}</code>`).join(', ')}</td><td>${esc(def.note)}</td></tr>`,
+        )
+        .join('')}</tbody></table></div>` +
+        refusals('Refusals:', [
+          'an override channel outside the registry',
+          'overriding a channel the child’s root does not declare <code>overridable</code> — the child’s CSS would never consume the custom property, and a silent no-op is refused by name',
+          '<code>overridable</code> on a non-root part — only the root consumes per-instance overrides',
+          'an <code>overridable</code> channel whose CSS properties the root binds no token for — nothing to consume the override through',
+        ]) +
+        fidelity(
+          `<p><strong>Honest carriage:</strong> the react-css-modules surface carries overrides as custom properties set by a structural wrapper, consumed by the child’s own <code>var()</code> fallback chains. The canvas emitter ledgers overrides as <code>channelMiss</code> (declared-not-drawn) this round — carried and named, not yet drawn.</p>`,
+        ) +
+        illustrativeExample(
+          ComponentRefSchema,
+          {
+            id: 'imported.user',
+            overrides: {
+              size: '{imported.avatar.user.size.{size}}',
+              color: '{imported.avatar.user-instance.color}',
+            },
+          },
+          'the Avatar host’s glyph stub, drawn in the host’s observed ink and box (committed usage: examples/untitled-ui/storybook/contracts/avatar.contract.json)',
+        ),
     ),
     section(
       'repeat',

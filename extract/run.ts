@@ -80,7 +80,16 @@ export function runExtractCommand(command: string, configArg?: string): void {
           ? `⚠ ${skipped.length} component(s) seen but not extractable — listed in ${out}/proposals.md\n`
           : '') +
         `✔ Review notes → ${out}/proposals.md\n` +
-        `Next: dump your design library with extract/figma-dump.js, then npm run reconcile`,
+        // The next-step verb depends on the shell: inside this repo the npm
+        // script exists; a standalone adopter (the bundled ds-contracts CLI)
+        // has no `npm run reconcile` — their verb is `extract --reconcile`.
+        // Same filename test as the direct-run shell at the bottom of this
+        // file: bundling into the CLI changes argv[1] away from extract/run.*.
+        `Next: dump your design library with extract/figma-dump.js, point design.source at it, then reconcile: ${
+          process.argv[1] && /extract[\\/]run\.(m?[tj]s)$/.test(path.resolve(process.argv[1]))
+            ? 'npm run reconcile'
+            : 'ds-contracts extract --reconcile'
+        }`,
     );
   } else if (command === 'reconcile') {
     console.log(`Config: ${from}`);

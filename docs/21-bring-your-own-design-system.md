@@ -1,5 +1,7 @@
 # 21 · Bring Your Own Design System
 
+> **Path:** this is the deep recipe for **path B — code-first** ([Choose Your Path](00-choose-your-path.md)): your code, captured in a real browser, into contracts and Figma sets.
+
 *The onboarding path for a stranger's library. Seven distinct libraries across
 eight rounds have now gone through this pipeline — five styling methods —
 and **not one of them was special-cased in the engine**. This page is the recipe
@@ -624,7 +626,7 @@ is a **measurement**, not a shrug. Carbon's, verbatim, is the model:
 > | SPACING | **0 defined** — the utilities carry literal `rem` | minted literals |
 > | MOTION | **0 defined** | minted literals |
 
-With that table in hand, Carbon's "94 source aliases vs 987 literals" reads
+With that table in hand, Carbon's "94 source aliases vs 987 kept literals" (the promote round's receipt, `examples/carbon/PROVENANCE.md`; a later dedupe round shrank the shipped minted tree to 868 leaves — the *ratio* is the point, and it barely moved) reads
 correctly: **not a reader shortfall — the library's own shape.** Without it, the
 same number reads as a broken extraction, and someone spends a week "fixing" a
 reader that is working perfectly.
@@ -720,7 +722,7 @@ Defect-first, because a smooth guide that hides these costs you a week:
 
 1. **The three §4 decisions are judgement, not procedure.** `classAllow` in
    particular has no mechanical derivation: Carbon's one-rule BEM regex and
-   MUI's stack of nine enumerated lookaheads are both *correct*, and nothing in
+   MUI's stack of eleven enumerated lookaheads are both *correct*, and nothing in
    the repo can tell you which shape your library needs. The method in §4.1
    (diff class lists across combos) narrows it; it does not decide it.
 2. **Every one of the three fails silently.** Wrong `varPrefix` → perfect

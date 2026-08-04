@@ -141,19 +141,19 @@ Same file, two faithful renderings, and the differ can mechanically prove both �
 
 ## Which journey are you on?
 
-Before the per-role advice below, find your situation. These are genuinely different amounts of work, and people get stuck by starting on the wrong one.
+Before the per-role advice below, find your situation. These are genuinely different amounts of work, and people get stuck by starting on the wrong one. **The canonical statement of the three paths — prerequisites, verbs, honest expectations and costs — is [docs/00-choose-your-path.md](./00-choose-your-path.md)**; this table is only the pointer, and that page wins any disagreement.
 
-| | Your situation | The path | Ends with |
-|---|---|---|---|
-| **A** | *"I have components in **code**. I want them in **Figma**."* | `ds-contracts onboard <package-or-path>` → **review the drafted capture config** → `ds-contracts onboard --continue` (the two commands run `init` → `extract --draft-capture-config` → `extract --computed` → `promote` → `figma bundle` → `figma publish` for you; the individual verbs still exist) | A designer clicks **Check for updates** in the plugin's Changes tab and your real components land on their canvas, token-bound |
-| **B** | *"I have a component on the **canvas**. I want **code**."* | plugin **Send** tab reads the set and proposes a contract → deliver it (PR, `figma receive --apply`, or copy the JSON) — **the change carries the contract *and* the generated component** | A typed React component, CSS Modules and Storybook stories, in your repo |
-| **C** | *"I already have a mature Figma library **and** a mature codebase."* | plugin **Send → Scan this file** → `extract --reconcile` → `ds-contracts diff` in CI | A property-by-property disagreement report, and a gate that stops the gap growing |
+| | Your situation | Ends with |
+|---|---|---|
+| **A — design-first** | *"I have a component on the **canvas**. I want **code**."* | A typed React component, CSS Modules and Storybook stories, in your repo |
+| **B — code-first** | *"I have components in **code**. I want them in **Figma**."* — `onboard` → review the drafted capture config → `onboard --continue`; the capture step **requires a Chromium** (`npm i playwright-core && npx playwright-core install chromium`, or `PLAYWRIGHT_CHROMIUM_PATH`) | A designer clicks **Check for updates** in the plugin's Changes tab and your real components land on their canvas, token-bound |
+| **C — reconcile** | *"I already have a mature Figma library **and** a mature codebase."* — today this means running A and B where each applies and reconciling **by hand**; the merge phase has no tooling ([docs/11](./11-brownfield-adoption.md)) | A property-by-property disagreement report, and a gate that stops the gap growing |
 
-Full walkthroughs with every command and every failure message: **[the get-started journeys on the spec site](https://ds-contracts-spec.pages.dev/get-started/)** and the [README](../README.md#which-journey-are-you-on). The same loop written as two people actually live it, hour by hour, with every step tagged built-or-missing: [docs/18 — User Flows](./18-user-flows.md).
+Also walked, with every CLI line rendered from the eval-executed manifest: **[the get-started journeys on the spec site](https://ds-contracts-spec.pages.dev/get-started/)** and the [README](../README.md#which-journey-are-you-on). The same loop written as two people actually live it, hour by hour, with every step tagged built-or-missing: [docs/18 — User Flows](./18-user-flows.md).
 
-### Three things to know before you start journey A
+### Three things to know before you start the code-first path (B)
 
-**Journey A is two commands with one human step wedged between them, on purpose.** `ds-contracts onboard <package-or-path>` does everything a machine can decide and then **stops**, printing the fields a person must answer. `ds-contracts onboard --continue` runs the rest. The stop is not a convenience prompt: `--continue` refuses an unreviewed capture config **by name**, there is no flag that skips it, and even `--from <stage>` re-runs the gate first. A capture driven by a guessed mount recipe or a wrong `classAllow` does not error — it produces a confident, wrong contract.
+**The code-first path is two commands with one human step wedged between them, on purpose.** `ds-contracts onboard <package-or-path>` does everything a machine can decide and then **stops**, printing the fields a person must answer. `ds-contracts onboard --continue` runs the rest. The stop is not a convenience prompt: `--continue` refuses an unreviewed capture config **by name**, there is no flag that skips it, and even `--from <stage>` re-runs the gate first. A capture driven by a guessed mount recipe or a wrong `classAllow` does not error — it produces a confident, wrong contract.
 
 **You cannot point the Figma plugin at a GitHub URL or an npm package.** The tool has to *run* your components in a real browser to read their computed styles — that is what makes the result true rather than guessed — and a Figma plugin is a sandboxed iframe with no Node, no npm and no browser engine of its own. So the browser step happens on your laptop or in your CI, and what travels to Figma is a finished JSON bundle.
 
@@ -177,14 +177,22 @@ Three known gaps you will meet, written down rather than discovered: overlay com
 
 ## Running the reference implementation
 
-*This is for people who want to run or extend **this repository**. To use the tool on your own library you do not need to clone anything — see [which journey are you on](#which-journey-are-you-on) above; those run on the published `@ds-contracts/cli` and the Sync Runner plugin.*
+*This is for people who want to run or extend **this repository**. To use the tool on your own library you do not need to clone anything — see [which journey are you on](#which-journey-are-you-on) above; those run on the published `@ds-contracts/cli` and the Sync Runner plugin (install routes — playground zip download or clone + `npm run plugin:zip` — in [choose your path](./00-choose-your-path.md#prerequisites-by-path)).*
 
 ```bash
-git clone <repo> && cd ds-contracts-poc
+git clone https://github.com/southleft/ds-contracts-poc.git && cd ds-contracts-poc
 npm install
 npm run build        # tokens → schema → generated components (validated)
-npm run dashboard    # the Contract Hub, http://localhost:5180
-npm run storybook    # the generated component library
+```
+
+Then, each in **its own terminal** — both are blocking dev servers that hold the terminal until you Ctrl-C, so pasting them as one block stops at the first:
+
+```bash
+npm run dashboard    # the Contract Hub, http://localhost:5180 — blocks
+```
+
+```bash
+npm run storybook    # the generated component library — blocks
 ```
 
 Then prove the loop to yourself in about two minutes:

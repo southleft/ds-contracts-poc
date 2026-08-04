@@ -425,6 +425,69 @@ Collected from the PROVENANCE files, because a designer will spot these:
 - **Breakpoint-conditional styling** (`@media (--p-breakpoints-*)`) — no
   contract channel; verification renders sub-breakpoint.
 
+### 2.13 The canvas→code round trip is measured, and it is not lossless
+
+"The round trip closed" means the loop **ran to completion**, not that it was
+faithful — the two claims were conflated once in this repo's own reporting,
+so this section states the measured numbers plainly. On Untitled UI, a real
+community kit this project does not own, all **15 sets that were run closed
+the round trip** (canvas dump → contract → the plugin engine's Generate path
+→ re-dump → set-level fact diff), and the totals across them are:
+
+> **11,104 matched · 1,857 diverged · 4,088 lost (in the original, not the
+> round trip) · 6,365 invented (in the round trip, not the original)**
+
+Two qualifiers, one in each direction
+([the full report](../extract/figma/roundtrip-uui/REPORT.md)):
+
+- **940 of the 960 `layout.mode` divergences are `auto-layout-inert`** — a
+  frame drawn with *no* auto-layout comes back *with* one, but every child is
+  absolutely placed (or there are no children), and Figma auto-layout excludes
+  absolutely-positioned children — so the tree differs while the drawing does
+  not.
+- **The remaining 20 are a REAL axis flip** — `VERTICAL → HORIZONTAL`, all on
+  one part (`slider ▸ progress/leftcontrol/tooltip`), which the dump draws
+  VERTICAL in the floating-label variants while the contract carries no layout
+  for that part at all. Reported undifferentiated, the 940 inert rows buried
+  these 20 real ones — which is why the classes are now separated.
+
+The loss and invention columns are dominated by named structural classes
+(`restructured`, `text-style-identity`), itemised per set in the report.
+Read the totals as the honest price of "reviewable starting point" in path A.
+
+### 2.14 Constraints: five values exist, two were never read, and pre-v1.13 dumps cannot be repaired
+
+Figma's `ConstraintType` is `MIN | CENTER | MAX | STRETCH | SCALE`. Until dump
+v1.13, both capture sites mapped only the first three, so a STRETCH or SCALE
+node **dropped the whole `constraints` field** — and `core/propose-figma.ts`
+reads an absent field as `LEFT`/`TOP`, so the engine *substituted* a
+confident top-left pin rather than losing a fact. Now:
+
+- **STRETCH is CARRIED**, as both edges pinned (CSS `left`+`right` /
+  `top`+`bottom` with no size) — browser-proven to track its parent through
+  both emitters.
+- **SCALE is REFUSED by name** — proportional resize has no CSS spelling.
+- **Measured, with the method stated:** of 811 positioned boxes across the
+  committed dumps, **352 carry no `constraints` field** — and in a pre-v1.13
+  dump those 352 are **unrepairable**: nothing in the bytes distinguishes a
+  genuine top-left pin from a dropped STRETCH/SCALE. The only fix is a
+  re-capture with dump v1.13 or later; re-processing the old dump cannot
+  recover what was never written.
+
+### 2.15 The stylesheet ceiling — a sheet the reader could not open is now a counted fact
+
+A cross-origin `<link>` stylesheet **throws on `.cssRules`**, and the CSS-vars
+reader used to swallow that whole-sheet failure in total silence:
+`source-bindings.json` printed `skips: []` and the console printed "0 named
+skip(s)" over a stylesheet that was never opened. This was the **third
+instance of exactly this class in one file** — the shorthand ceiling (§2.7)
+and the calc ceiling are its earlier siblings, and their own comments say so.
+It is now a **counted, href-named ceiling** (`stylesheetCeiling` /
+`stylesheetSkips`, `extract/computed/stylesheet-ceiling-check.ts`), so "the
+library declared no token names" and "the reader could not look" are
+different, visible facts. Pinned by an eval driving the real reader source at
+a genuinely cross-origin sheet; restoring the silent catch fails the pins.
+
 ---
 
 ## 3. Per-library status — which examples are fresh, and which are frozen

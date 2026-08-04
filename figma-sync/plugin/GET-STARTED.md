@@ -9,17 +9,31 @@ conversion.** (AI may author contracts or build this tooling; it never runs the 
 
 ## Install
 
-### Option A — from the Figma Community (once published)
-Search "DS Contracts Sync Runner" in Community → **Install**. Normal one-click install.
-See [PUBLISHING.md](./PUBLISHING.md) to publish it.
+The plugin is **not on the Figma Community, by decision** (see docs/18, gap
+G0 — Community publication may never happen; [PUBLISHING.md](./PUBLISHING.md)
+stays as the checklist if that decision is ever revisited). There are exactly
+two real routes, and both need the **Figma desktop app** — development
+plugins never load on figma.com. Any plan works; no admin approval needed.
 
-### Option B — dev install (works today, no publishing needed)
+### Route A — download the zip from the playground (no clone)
+1. Download
+   [ds-contracts-playground.pages.dev/ds-contracts-sync-runner-plugin.zip](https://ds-contracts-playground.pages.dev/ds-contracts-sync-runner-plugin.zip)
+   (also linked from the playground's plugin panel) and unzip it.
+2. In Figma desktop: **Plugins → Development → Import plugin from manifest…**
+3. Select the `manifest.json` inside the unzipped `ds-contracts-sync-runner/`
+   folder.
+4. It now appears under **Plugins → Development → DS Contracts Sync Runner**.
+   Note: an unzipped copy goes stale when the repo's core changes —
+   re-download after updates, or use Route B, whose import stays pointed at a
+   folder `plugin:zip` refreshes in place.
+
+### Route B — from a clone of this repo
 1. In the repo: `npm run plugin:zip`. This packages the zip **and** refreshes the
    unpacked dev folder `figma-sync/plugin-dist/`.
 2. In Figma desktop: **Plugins → Development → Import plugin from manifest…**
 3. Select `figma-sync/plugin-dist/manifest.json`. **Import from this folder — never
-   from `figma-sync/plugin/` directly** (that copy is a stub with no engine) and never
-   from a hand-unzipped copy (it goes stale the moment core changes).
+   from `figma-sync/plugin/` directly** — that copy is a stub with no engine, and
+   the plugin header will read **"engine: NOT INJECTED"**.
 4. It now appears under **Plugins → Development → DS Contracts Sync Runner**.
 
 **After any repo update: re-run `npm run plugin:zip`.** The import stays pointed at
@@ -94,6 +108,15 @@ repo token.
 
 Both directions run the same deterministic engine (`window.DSC`) — the CLI
 (`ds-contracts extract` / `generate`) runs the identical functions outside Figma.
+
+**If you run the raw dump script instead of the Send tab, edit `TARGET_SETS`
+first.** `extract/figma/dump.plugin.js` hard-codes its target list at line
+114 — `const TARGET_SETS = ['Badge', 'Switch', 'Card']`, the repo's shipped
+fixtures. The plugin's own **Send** flow rewrites that list at runtime to the
+set you selected; the copy-paste-the-script path (console, Advanced drawer)
+does **not** — pasted unedited, it dumps those three fixture names (or
+nothing, in a file that doesn't have them) instead of your sets. An empty
+array means "every local set/component except the Slot utility".
 
 ---
 

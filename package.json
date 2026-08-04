@@ -29,6 +29,8 @@
     "build:dashboard": "vite build --config dashboard/vite.config.ts",
     "playground": "vite --config playground/vite.config.ts",
     "build:playground": "vite build --config playground/vite.config.ts",
+    "deploy": "node scripts/deploy.mjs",
+    "deploy:check": "node scripts/deploy-check.mjs",
     "verify:catalog": "node scripts/verify-catalog-shards.mjs",
     "adherence:aggregate": "tsx evals/adherence/aggregate.ts",
     "extract:code": "tsx extract/run.ts code",

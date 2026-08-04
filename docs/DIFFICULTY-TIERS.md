@@ -149,7 +149,11 @@ Stage E (component-aware readiness) *and* accepting the static-projection bounda
 
 ## 2. Journey × tier matrix — what works TODAY (with receipts) vs what the depth build unlocks
 
-Two journeys:
+Two directions (NOTE — this pre-canonical doc letters them OPPOSITE to
+[Choose your path](00-choose-your-path.md): its "Journey A" is the canonical
+**Path B (code-first)** and its "Journey B" is the canonical **Path A
+(design-first)**; the letters below are kept because the matrix's receipts
+reference them):
 
 - **Journey A — code → contract → Figma** (the dev/CI journey: extract from npm/source, propose a
   contract, emit a Figma component set).

@@ -111,7 +111,7 @@ Counted from the committed token trees (`examples/<lib>/tokens/*.dtcg.json`):
 
 | library | base tokens | minted leaves | source-aliased | literal | why the literals are literal |
 |---|---|---|---|---|---|
-| polaris | 453 | 980 | **0** | 980 | no `varPrefix` configured — see §8.1, this is a gap, not a library property |
+| polaris | 453 | 1,317 | **179** | 1,138 | recaptured 2026-07-29 with `varPrefix: "--p-"` (task #26, §8.1) — the original round configured no `varPrefix` and shipped 0 aliases; the residual literals are values Polaris's compiled CSS carries without a `var(--p-*)` at the point of use |
 | astryx | 186 | 237 | 54* | 183 | StyleX **compiles the token name away** into a literal hex in the atomic class; there is no `source-bindings.json` to read |
 | mui | 150 | 1,498 | 73 | 1,425 | shadows serialize differently (value verification refuses); `calc(var(--mui-spacing)*N)` excluded by name |
 | tailwind | 68 | 276 | 21 | 255 | Flowbite's `primary` palette is `@theme inline` — utilities compile to literal `#1A56DB`, by the library's own choice |
@@ -122,6 +122,19 @@ Counted from the committed token trees (`examples/<lib>/tokens/*.dtcg.json`):
 (`examples/astryx/tokens/reanchor-decisions.json`, 19 acked alias rows + 2
 kept-literal receipts, orchestrator-reviewed under owner delegation) — the
 provenance is a decision, and the file says so.
+
+**Dated qualifier (2026-08-03):** the minted/literal totals above are each
+library's *promote-round receipts*, and later rounds moved the shipped
+trees — the census-dedupe round shrank four of them, the Astryx
+re-anchoring grew one. Re-measured from the committed `*-minted.dtcg.json`
+files today: astryx **408** leaves, mui **1,393**, tailwind **236**, carbon
+**868**, altitude **315** (polaris's row above is already the fresh
+2026-07-29 measurement). The source-aliased columns keep their round
+receipts because that provenance is not mechanically re-derivable from the
+DTCG alone. The *ratios* — which are what this table argues from — did not
+materially move. Re-derive any minted count by counting `"$value"` leaves in
+`examples/<lib>/tokens/<lib>-minted.dtcg.json`, e.g.
+`node -e "const w=n=>Object.entries(n).reduce((a,[k,v])=>k[0]==='$'||typeof v!=='object'?a:a+('$value'in v?1:w(v)),0);console.log(w(require('./examples/carbon/tokens/carbon-minted.dtcg.json')))"`.
 
 **The family-split doctrine** is the correct way to read every alias count, and
 Carbon states it most sharply (`examples/carbon/PROVENANCE.md`). Measured on
@@ -438,7 +451,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 
 | instrument | what it pins | how to run |
 |---|---|---|
-| **Eval suite** | 173/173 as of `evals/results.json` — 24 refusal, 29 determinism, 44 detection, 56 extraction, 3 convergence, 4 CLI, 12 journey, 1 theming | `npm run eval` |
+| **Eval suite** | 187/187 evals as of `evals/results.json` — by claim family: 29 refusal, 32 determinism, 45 detection, 58 extraction, 4 convergence, 5 CLI, 13 journey, 1 theming (derive it: `python3 -c "import json,collections; print(collections.Counter(x['claim'] for x in json.load(open('evals/results.json'))['results']))"`) | `npm run eval` |
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
 | **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |
@@ -480,9 +493,15 @@ captured at all*, and it is the largest qualifier in this document.
 
 ### 8.1 Named residuals that qualify the generality claim
 
-- **L1 — the BEM modifier grammar in `stems()` silently strips every Carbon
-  class** (§3). The single most important qualifier in this document, and
-  previously undocumented anywhere in the repo. Config cannot fix it.
+- **L1 — the BEM modifier grammar in `stems()` silently stripped every Carbon
+  class** (§3). The single most important qualifier in this document when it
+  was found, and previously undocumented anywhere in the repo; no config key
+  could fix it. **Since CLOSED** — the prefix strip now precedes the modifier
+  filter (`extract/computed/lib.ts`, "ORDER IS LOAD-BEARING"), the order is
+  pinned by the `class-stem-prefix-order` eval, and Carbon was re-captured
+  (root signature `button|btn` in the committed truth). It stays in this
+  ledger as the record of *what kind* of library knowledge can hide in the
+  engine, not as an open residual.
 - **Polaris carries zero source-token facts.** Its config declares no
   `varPrefix`, so no `source-bindings.json` exists for any Polaris component and
   all **980** minted leaves are anonymous literals — while the token wrap shows
@@ -715,7 +734,7 @@ Figma account or a network call except `npm install`.
 npm install
 
 # ── the claim's own numbers ────────────────────────────────────────────────
-npm run eval                       # 173/173 as of evals/results.json
+npm run eval                       # 187/187 as of evals/results.json
 node -e "const r=require('./evals/results.json');console.log(r.passed+'/'+r.total)"
 
 # 54 drift rows, per library
@@ -812,8 +831,11 @@ it deliberately, alone, and say what moved.
   pipeline, sharing one CSS-vars reader across four of them — including a
   shadow-DOM library, where the same reader was made per-root rather than
   replaced.
-- Engine-change cost per library trends down, and the newest library
-  (10 components, a fifth architecture) cost one expression — a latent bug.
+- Engine-change cost per library trends down: the control case, Carbon
+  (10 components, the *fourth* architecture), cost one expression — a latent
+  bug — and the newest library, Altitude (8 components, the fifth
+  architecture: open shadow DOM), cost one engine file of *general* per-root
+  reader rules, not library-specific ones.
 - Fixes found via one library demonstrably repaired others in the same commit,
   with the sibling diffs reviewed rather than blind-repinned.
 - 54 drift rows and the eval suite make cross-library damage a number.

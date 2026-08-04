@@ -1,5 +1,5 @@
 ---
-title: "Users and the two journeys"
+title: "Users and the journeys (now THREE paths — see docs/00-choose-your-path.md)"
 doc_id: 04-users-and-journeys
 audience: "Another AI platform with ZERO prior knowledge of this project"
 status: authoritative
@@ -10,6 +10,8 @@ related: [05-architecture, 06-tooling, 07-status-what-works]
 ---
 
 # Who the users are, and the two journeys
+
+> **2026-08-03:** the canonical framing is now **three paths** (design-first / code-first / reconcile) — see [Choose your path](../00-choose-your-path.md). This handoff packet predates that and is kept as a point-in-time record.
 
 The whole product is two mirror-image journeys. Each serves a person who lives in
 *one* tool and should never be forced into the other.

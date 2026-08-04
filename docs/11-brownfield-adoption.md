@@ -1,5 +1,7 @@
 # 11 · Brownfield Adoption — Connecting Pre-Existing Libraries
 
+> **Path:** this is the plan and phase status behind **path C — reconcile** ([Choose Your Path](00-choose-your-path.md)). Phase 2 — the reconciliation merge — has no tooling; the table below says so by name.
+
 > **Status, per phase (2026-07-26).** This document proposes a four-phase sequence. Read the status *before* the plan, because "extraction v0 shipped" was doing a lot of work in the old one-line version of this banner.
 >
 > | phase | what it needs | status |

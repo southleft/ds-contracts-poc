@@ -28,7 +28,7 @@
 const BASE = 'http://localhost:8765';
 const TOKEN_STORAGE_KEY = 'ds_contracts_runner_token';
 
-// Send to Playground — the pairing bridge (workers/assist/src/bridge.ts).
+// Pairing bridge (workers/assist/src/bridge.ts) — used by `figma push --code` / receive.
 // The plugin POSTs one dump under a short-lived code; the playground tab
 // polls the same code and imports on arrival. Must stay in manifest.json's
 // networkAccess.allowedDomains.
@@ -282,7 +282,7 @@ function reportSubject(report) {
 let busy = false; // one run at a time, across both modes
 
 // The current selection's component set name(s) — the empty-names-box default
-// for Send to Playground (a real UI kit's ALL-SETS dump is a megadump; the
+// for the pairing bridge (a real UI kit's ALL-SETS dump is a megadump; the
 // selection is almost always what the designer means). Each selected node
 // resolves to the nearest component identity: an ancestor COMPONENT_SET, an
 // ancestor COMPONENT (its owning set when it has one), or — for instances —
@@ -427,7 +427,7 @@ figma.ui.onmessage = async (msg) => {
     }
   }
   if (msg.type === 'push-proposal') {
-    // Send-to-repo (the dev door): POST the Propose tab's export envelope to
+    // Send-to-repo (the dev door): POST the Send tab's export envelope to
     // the bridge under the pairing code `ds-contracts figma receive` printed.
     // Network-only — nothing in this file changes, nothing is stored; the
     // envelope leaves for the bridge and nowhere else. Allowed anytime.

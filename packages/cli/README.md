@@ -13,7 +13,7 @@ ds-contracts generate <contracts..> --out <dir>        # contract → code
 ds-contracts figma <contracts..> --out <dir>           # contract → Figma sync scripts
 ds-contracts figma bundle <contracts..> --out <file>   # contracts + tokens → ONE self-contained
     --tokens <base.dtcg.json[,minted.dtcg.json]>       # CONTRACTS-BUNDLE JSON (paste it into the
-    [--modes <light.json[,dark.json]>] [--name <col>]  # plugin's Generate tab; deterministic bytes)
+    [--modes <light.json[,dark.json]>] [--name <col>]  # plugin's Build tab; deterministic bytes)
 ds-contracts figma push <file> --code <CODE>           # send a CONTRACTS-BUNDLE to the plugin bridge
 ds-contracts diff [config]                             # parity referee — exit 0 clean · 1 drift · 2 error
 ds-contracts propose-pr <file> --repo owner/name [--dry-run]

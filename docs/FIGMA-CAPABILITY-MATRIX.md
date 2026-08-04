@@ -66,14 +66,14 @@ Repo references: [R1] `docs/STYLE-FIDELITY.md` · [R2] `scripts/contract-schema.
 | `display: block \| none` | **approx** — block ≈ vertical AL; none ≈ `visible=false` | `visible` (BOOLEAN) [S5] | whitelisted (`display` in stylesWhen) [R2] | CARRY-WITH-NAMED-LIMIT |
 | `flex-direction: row \| column` | **native** — `layoutMode` [S1] | — | carried | CARRY-BOTH |
 | `flex-direction: *-reverse` | **approx** — no native reverse; compiled child-order reversal per variant (shipped, A15) [R1][R3] | — | carried (VariantLayoutSchema) [R2] | CARRY-WITH-NAMED-LIMIT |
-| `flex-wrap: wrap` | **native** — `layoutWrap: 'WRAP'` [S1] | `layout.wrap` (dump v1.12) | carried | CARRIED BOTH WAYS — HORIZONTAL only (Figma THROWS on a column; a column wrap is a named `†` drop) |
+| `flex-wrap: wrap` | **native** — `layoutWrap: 'WRAP'` [S1] | `layout.wrap` (since dump v1.12; the dump is at v1.13) | carried | CARRIED BOTH WAYS — HORIZONTAL only (Figma THROWS on a column; a column wrap is a named `†` drop) |
 | `justify-content: start\|center\|end\|space-between` | **native** — `primaryAxisAlignItems` [S1][S12] | — | carried | CARRY-BOTH |
 | `justify-content: space-around\|space-evenly` | **approx** — no native value; padding+spacing arithmetic | — | absent | CARRY-WITH-NAMED-LIMIT (when observed) |
 | `align-items: start\|center\|end\|stretch` | **native** — `counterAxisAlignItems` + `layoutAlign: STRETCH` [S1] | — | carried | CARRY-BOTH |
 | `align-items: baseline` | **native** — `counterAxisAlignItems: 'BASELINE'` (horizontal AL only) [S12] | — | absent | CARRY-BOTH (when observed) |
-| `align-content` (wrapped counter-axis distribution) | **VERIFY-BY-SPIKE** — `counterAxisAlignContent` exists in typings but values/behavior unverified this pass | — | absent | pending spike |
+| `align-content` (wrapped counter-axis distribution) | **verified** — `counterAxisAlignContent` is read by the dump; `SPACE_BETWEEN` on a wrapping stack has no contract vocabulary and degrades **by name** as `wrap-align-content-unsupported` (`extract/figma/dump.plugin.js`) | — | absent | REFUSED-BY-NAME (spike landed; wrapped lines render packed rather than distributed) |
 | `gap` | **native** — `itemSpacing` [S1] | `itemSpacing` (FLOAT) [S5] | carried | CARRY-BOTH |
-| `row-gap` ≠ `column-gap` | **native** — `counterAxisSpacing` (wrap mode) [S1] | `counterAxisSpacing` (FLOAT) [S5] | absent | CARRY-BOTH (with wrap) |
+| `row-gap` ≠ `column-gap` | **native** — `counterAxisSpacing` (wrap mode) [S1] | `counterAxisSpacing` (FLOAT) [S5] | captured as `rowSpacing` since dump v1.12 (only when it differs from `itemSpacing`), carried as a **named note** — the schema has one `gap` covering both axes, so a distinct row gap has no contract spelling | CARRY-WITH-NAMED-LIMIT |
 | `flex-grow` / `flex: 1` | **native** — `layoutGrow` / `layoutSizingHorizontal\|Vertical: 'FILL'` [S8] | — | carried (`layout.grow`) | CARRY-BOTH |
 | `flex-shrink`, `flex-basis` | **no** — only FIXED/HUG/FILL sizing model | — | absent | CARRY-CODE-ONLY |
 | `order` | **approx** — child index, compiled per variant | — | absent | CARRY-WITH-NAMED-LIMIT (when observed) |
@@ -255,7 +255,7 @@ Biggest visual impact first; field evidence cited.
 7. **Image fills** (A5). Field evidence: Phase B Thumbnail read as an invisible
    white box because the image slot placeholder was never a carried channel
    [R4]. `ImagePaint` + `figma.createImage` is native [S4].
-8. ~~**`flex-wrap` + `counterAxisSpacing`**~~ — **CLOSED (dump v1.12).** The
+8. ~~**`flex-wrap` + `counterAxisSpacing`**~~ — **CLOSED (dump v1.12; the dump is at v1.13 today).** The
    write leg had carried `layoutWrap` since v15; the READ leg never existed, so
    a wrapping tag row returned as one unwrapped line with no receipt. The dump
    now captures `wrap`, plus `rowSpacing` when `counterAxisSpacing` DIFFERS from
@@ -317,8 +317,10 @@ Fidelity raisers available today, unused by `core/emit-figma-script.ts`:
    content tokens/variables instead of literals.
 7. **Per-side stroke-weight bindings** [S5] — the emitter binds only uniform
    `strokeWeight`.
-8. **`layoutWrap` + `counterAxisSpacing` + GRID mode** [S1] — the layout
-   vocabulary stops at single-axis no-wrap flex.
+8. **GRID mode** [S1] — still unused. (`layoutWrap` and `counterAxisSpacing`
+   no longer belong on this list: the emitter writes `layoutWrap`
+   (`core/emit-figma-script.ts:3838`) and the dump captures both — `wrap` and
+   `rowSpacing` — since v1.12.)
 9. **`createNodeFromSvg` for icon glyph truth** [S8] — field evidence: Phase B
    divergence (B), Spinner glyphs baked `#000` because SVG paint isn't
    re-bound; importing via `createNodeFromSvg` and binding fills on the
@@ -377,9 +379,11 @@ typings release: **`@figma/plugin-typings` 1.131.0** (npm registry; published
 | R1–R4 | repo: `docs/STYLE-FIDELITY.md`, `scripts/contract-schema.ts`, `core/emit-figma-script.ts`, `examples/polaris/figma/PHASE-B-RECEIPT.md` |
 
 Open VERIFY-BY-SPIKE items (each ≤ one plugin-console session): exact
-`VariableBindableEffectField` spellings · `counterAxisAlignContent` values ·
+`VariableBindableEffectField` spellings ·
 `textAlignVertical` spelling · opacity-binding percent-scale retest ·
 `setVariableCodeSyntax` signature · vector-bake path for skew.
+(`counterAxisAlignContent` left this list: the spike landed as the named
+refusal `wrap-align-content-unsupported` in `extract/figma/dump.plugin.js`.)
 
 ---
 

@@ -158,6 +158,12 @@ reg('anatomy', 'content', [
   'part.content.prop',
   'part.text',
 ]);
+// Per-enum-value text overrides merged over `text` (first-variant-freeze fix).
+reg('anatomy', 'text-by-prop', [
+  'part.textByProp',
+  'part.textByProp.prop',
+  'part.textByProp.map',
+]);
 reg('anatomy', 'icon', ['part.icon', 'part.icon.asset', 'part.icon.size']);
 reg('anatomy', 'attrs', ['part.attrs']);
 reg('anatomy', 'meter', ['part.meter', 'part.meter.valueProp', 'part.meter.maxProp']);
@@ -209,6 +215,14 @@ reg('tokens', 'declared-facts', ['part.declared', 'part.declaredStates']);
 
 // --- States ----------------------------------------------------------------
 reg('states', 'root-states', ['part.states']);
+// v17 (the hover-plane round): per-state bindings that are ALSO a function of
+// an enum axis — unrelated per-value token names a placeholder cannot reach.
+reg('states', 'states-by-prop', [
+  'part.statesByProp',
+  'part.statesByProp.prop',
+  'part.statesByProp.state',
+  'part.statesByProp.map',
+]);
 
 // --- Conditionals, overlays & motion --------------------------------------
 reg('conditionals', 'visible-when', [
@@ -234,6 +248,13 @@ reg('shape', 'shape', [
   'shape.height',
   'shape.rotation',
 ]);
+// Round 2 iteration 4: ellipse arc sweep — Figma ArcData radians, verbatim.
+reg('shape', 'arc', [
+  'shape.arc',
+  'shape.arc.start',
+  'shape.arc.end',
+  'shape.arc.innerRadius',
+]);
 
 // --- Composition -----------------------------------------------------------
 reg('composition', 'slots', [
@@ -258,6 +279,8 @@ reg('composition', 'component-refs', [
   'componentRef.props',
   'componentRef.text',
 ]);
+// Round 2 iteration 9: per-instance overrides + the root-only consumption list.
+reg('composition', 'ref-overrides', ['componentRef.overrides', 'part.overridable']);
 reg('composition', 'repeat', [
   'part.repeat',
   'repeat.itemsProp',
