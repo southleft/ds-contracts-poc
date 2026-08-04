@@ -129,7 +129,44 @@ The differ verifies the **contracted API surface** on every component: props and
 
 It does **not** inspect anatomy internals: part-level layout and alignment, icon glyphs, meter geometry, static text parts, or `visibleWhen` wiring inside variants. Those are generated from the contract, but post-generation damage to them is invisible to the differ. This is not hypothetical: a July 2026 visual audit found a canvas-only defect (a chat bubble collapsing to hug-width because canvas and CSS have different `align` defaults) on a component the differ reported clean, because the defect lived below the API surface. The honest statement is therefore: *parity clean means the API contract holds on all three surfaces; anatomy fidelity is enforced at generation time and re-verified visually, not continuously.* Extending the differ one level down — an anatomy checksum per variant — is the identified next engineering round.
 
-**Snapshot provenance:** the token snapshot the differ reads (`parity/snapshots/figma-tokens.json`) has been *derived* from `tokens/` since the token pipeline stabilized, rather than re-extracted from the design tool on every run. A full live extraction of all 264 variables (names, per-mode values, alias targets) was diffed against the derived snapshot on July 3, 2026: **264/264 exact matches, zero differences**. Derivation is safe today, but a periodic live re-extraction belongs in the loop so the check never becomes self-referential.
+**Snapshot provenance — corrected 2026-08-04, the previous version of this paragraph was wrong.** It said the token snapshot "has been *derived* from `tokens/`", and warned about self-reference. Measured: `parity/snapshots/figma-tokens.json` carries `fileKey: 8nim1d0IPnehMxA7B7SYxC` and `extractedAt: 1783527446758` (2026-07-08T16:17:26.758Z) — the same file key the contracts anchor, and a timestamp **identical to the millisecond** to the one in `figma-components.json`. Both fields are written by `parity/extract-figma.plugin.js` (`:84-85`) and appear in no token file. The snapshot is a **live plugin extraction**, not a derivation, and the two snapshots were taken in the same run.
+
+The risk is therefore the reverse of the one that was documented. There is no self-reference to worry about; there is **staleness**. That extraction is 27.2 days old as of 2026-08-04, against a `MAX_SNAPSHOT_AGE_DAYS` of 14, and only a human running the plugin inside the live Figma file can move the date.
+
+**The comparison is now automatic — `npm run tokens:snapshot:check`** (`parity/tokens-snapshot-check.ts`, fast lane). It derives the variable table `tokens/` implies and diffs it against that extracted snapshot on variable name, every mode value, and every alias target. Current result, re-derived rather than quoted:
+
+```
+  Primitives  tokens/  94   snapshot  94   modes [Value]
+  Brand       tokens/  10   snapshot  10   modes [Default, Aurora]
+  Semantic    tokens/ 178   snapshot 178   modes [Light, Dark]
+  TOTAL       tokens/ 282   snapshot 282
+  compared 282 variable name(s), 470 mode value(s) = 94 literal(s) + 376 alias target(s)
+✔ 282/282 variables match … — against a snapshot 27.2 days old (see the STALE line above).
+```
+
+The historical **264** was not a different measurement — it was the same table when it was smaller: at commit `ec86ab8` the snapshot held Primitives 86 + Semantic 178 = 264, with no Brand collection and no `extractedAt` stamp at all. It is 282 today.
+
+Two things keep this gate from decaying into the tautology the old paragraph feared. It **refuses** a snapshot without `fileKey`/`extractedAt` — a file that cannot say where it came from could have been derived from `tokens/`, and comparing `tokens/` to itself proves nothing. And it **prints the age on every run** rather than hiding it: a green result is evidence about the Figma file as it was on the extraction date, nothing more. `--strict-age` turns that into an exit code; it is not the default because the fast lane has no Figma session.
+
+Two normalization rules make the comparison possible, and both are falsifiable — with either one removed, the gate reports phantom drifts on a clean tree:
+
+| Rule | Why | Remove it with | Result on a clean tree |
+|---|---|---|---|
+| **px-strip** | DTCG carries dimensions as unit-strings (`'1px'`, `'2px'`, `'12px'`, `'640px'`, `'999px'`); the Figma FLOAT variable carries the number | `--no-rule=px` | `✖ 26 drift(s) — value:26` |
+| **alias spelling** | DTCG spells a reference `{space.150}`, Figma spells it `{space/150}` | `--no-rule=alias` | `✖ 376 drift(s) — alias:376` |
+
+<!-- The flag takes the rule's SHORT name (`px`, `alias`), not the display name
+     in the first column — an earlier version of this table implied
+     `--no-rule=px-strip`, which the script rejects by name:
+     "✖ --no-rule=px-strip names no rule. Known rules: px, alias." -->
+
+The gate also refuses a corpus too small to be evidence. Blanking `tokens/`
+made an earlier cut print `✔ 0/0 variables match` and exit 0 — the shape this
+repo keeps finding, a check that is green because it compared nothing. It now
+requires at least 200 variables across 3 collections and says so when it
+refuses.
+
+And over-application is falsified in the other direction — a scratch copy of the snapshot with **one** value changed (`color/gray/500` `#6B7280` → `#6B7281`) and another with **one** alias re-pointed (`space/inset-x/md [Dark]` → `{space/300}`) each go red naming exactly that token, `✖ 1 drift(s)`. A rule loose enough to absorb a real change would have kept them green.
 
 ## AI adherence (the PRD's headline metric) — designed, then executed
 

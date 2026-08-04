@@ -24,7 +24,19 @@ correct; a differ scoring a month-old snapshot would be reporting on a file
 that no longer exists.
 
 **What stands in:** the differ's logic is covered by the C3-detection eval
-family in the full lane. Running it needs no snapshot.
+family in the full lane. Running it needs no snapshot. And since 2026-08-04
+the **token half runs on every push** — `npm run tokens:snapshot:check` (fast
+lane) derives the variable table `tokens/` implies and diffs it against the
+extracted snapshot on name, every mode value and every alias target
+(**282/282** today). It does not refuse on age, but it prints it on every run,
+so the staleness is on the record instead of hidden:
+
+```
+  age          27.2 days — max 14 (MAX_SNAPSHOT_AGE_DAYS)  ⚠ STALE
+```
+
+That number only moves when someone does the step above. `--strict-age` turns
+it into an exit code.
 
 ---
 
@@ -107,6 +119,54 @@ defaults, `absoluteBoundingBox`. It has caught bugs the live app would have
 
 **Why a human:** it is a publishing act tied to the owner's account, and it is
 deliberately held until last.
+
+---
+
+## 6. Mint a scoped PAT and run one curl · settles a claim two docs made for a year
+
+**What:** create a Figma personal access token with **Variables: read**
+(`file_variables:read`) ticked, then run exactly this:
+
+```bash
+curl -s -o /dev/null -w '%{http_code}\n' \
+  -H "X-Figma-Token: $SCOPED_PAT" \
+  https://api.figma.com/v1/files/8nim1d0IPnehMxA7B7SYxC/variables/local
+```
+
+**Why a human:** minting a PAT is an account action behind the owner's login.
+No agent, and no CI secret, can do it.
+
+**Why it matters — the measurement that made this necessary.** Two places in
+this repo asserted the Variables REST API is *Enterprise-plan-only*
+(`extract/figma/rest/fetch.ts:119-123`, `docs/internal/figma-sync.md:26`), and
+`fetchVariables` degraded every 403 identically on that basis. On 2026-08-04
+the call was actually made with this repo's existing PAT:
+
+```
+403 {"status":403,"error":true,"message":"Invalid scope(s): files:read,
+ file_comments:write, file_dev_resources:read, file_dev_resources:write,
+ webhooks:write. This endpoint requires the file_variables:read scope"}
+```
+
+Control on the same token: `GET /v1/files/:key` → **200**. So the refusal on
+record is a **missing token scope**, not a plan tier — and nobody could have
+learned that from the tool, because it swallowed the body. The code now
+separates the two (`npm run figma:rest:refusal:check`).
+
+**The fork.** This probe is the only thing that settles what the plan limit
+actually is on this file:
+
+- **200** → the "Enterprise-only" line was wrong outright. The REST import path
+  can resolve variable NAMES on an ordinary plan, and `fetchVariables`'
+  degraded path stops being the normal case. Delete the plan claim from both
+  places and say "requires a token with `file_variables:read`".
+- **403 again**, with a body that does *not* name a scope → the plan limit is
+  real and now has evidence behind it for the first time. Quote that body next
+  to the claim, and `classifyVariablesRefusal`'s `kind: 'unknown'` branch gets
+  a third kind with the measured wording.
+
+Either way the answer is one line of curl and it replaces an inherited belief
+with a receipt. Until then the code says "UNVERIFIED" and names this file.
 
 ---
 

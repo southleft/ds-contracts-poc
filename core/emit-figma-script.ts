@@ -51,7 +51,7 @@ import {
   type Prop,
 } from '../scripts/contract-schema.js';
 import { flattenTokens, aliasTarget, px, pxOrNull, type TokenEntry, type TokenTreeInput } from './tokens.js';
-import { FINGERPRINT_SRC } from './canvas-fingerprint.js';
+import { FINGERPRINT_SRC, FINGERPRINT_VERSION } from './canvas-fingerprint.js';
 import { isMultiRoot, topRoots, validateContract } from './emit-react.js';
 
 
@@ -4605,6 +4605,12 @@ async function buildNode(spec, registry) {
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
 ${FINGERPRINT_SRC}
+// v6: bindings are fingerprinted by variable NAME, and every Figma variable
+// API that survives dynamic-page loading is async — so the id→name map is
+// filled ONCE here, from the emitted script's top-level await, and the sync
+// walk reads it. This runs AFTER the source above on purpose: the
+// dsVarNames initializer would clobber an earlier fill.
+await dsLoadVarNames();
 
 // DRIFT ROUND: stamp the node — and, for a SET, each VARIANT child — so
 // Check Drift can LOCALIZE an edit to the exact variant (live finding:
@@ -4649,7 +4655,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('${FINGERPRINT_VERSION}') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -4833,7 +4839,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('${FINGERPRINT_VERSION}') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };

@@ -633,7 +633,24 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   const fpModule = read('core/canvas-fingerprint.ts');
   const srcMatch = fpModule.match(/FINGERPRINT_SRC: string = `([\s\S]*?)`;/);
   assert(srcMatch, 'drift gate: FINGERPRINT_SRC extractable from core/canvas-fingerprint.ts');
-  const fp = new Function(`${srcMatch[1]}; return dsCanvasFingerprint;`)();
+  // THE HARNESS MUST PRELOAD EXACTLY AS THE EMITTED SCRIPT DOES. v6 refuses to
+  // compute over an unloaded name map (core/canvas-fingerprint.ts) so that a
+  // forgotten preload cannot masquerade as a canvas edit — and this gate was
+  // one of the three call sites that forgot, reading 'canvas-edited' on an
+  // untouched tree. Declaring an EMPTY map here would be equally wrong in the
+  // other direction: the mock DOES serve variables, the stamp was computed
+  // with their names resolved, and hashing the recompute over (unresolved)
+  // would manufacture the very mismatch this pin exists to disprove. So the
+  // harness awaits the real loader against the same mock the stamp came from.
+  const fpApi = new Function(
+    `${srcMatch[1]}; return { fp: dsCanvasFingerprint, load: dsLoadVarNames, setNames: dsSetVarNames };`,
+  )();
+  await (async () => {
+    const prev = globalThis.figma;
+    globalThis.figma = figma;
+    try { await fpApi.load(); } finally { globalThis.figma = prev; }
+  })();
+  const fp = fpApi.fp;
   // LOCKSTEP, BY BYTES (this round): the old gate only EVALUATED the module
   // copy — code.js's hand-maintained twin could silently diverge while every
   // assertion stayed green. Pin the actual bytes.
@@ -647,7 +664,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(withStamp.length === sets.length, `drift gate: every generated set carries a canvasFingerprint stamp (${withStamp.length}/${sets.length})`);
   const subject = withStamp[0];
   const stored = subject.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-  assert(stored.startsWith('v5:'), 'drift gate: stamps carry the v5 version prefix (reaction-bearing scheme)');
+  assert(stored.startsWith('v6:'), 'drift gate: stamps carry the v6 version prefix (binding-bearing scheme)');
   assert(fp(subject) === stored, 'drift gate: recomputing the fingerprint over the untouched tree MATCHES the stamp (module ≡ emitted copy)');
   // simulate a designer edit: swap a fill somewhere in the tree
   const victim = subject.findAll((n) => (n.fills ?? []).some((f) => f.type === 'SOLID'))[0];
@@ -655,7 +672,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // LOCALIZATION (live finding: "which of the 63 buttons?"): per-variant
   // stamps exist and the edit resolves to EXACTLY the containing variant.
   const variants = subject.children ?? [];
-  assert(variants.length > 0 && variants.every((v) => (v.getSharedPluginData('ds_contracts', 'canvasFingerprint') || '').startsWith('v5:')), 'drift gate: every VARIANT carries its own v5 fingerprint stamp');
+  assert(variants.length > 0 && variants.every((v) => (v.getSharedPluginData('ds_contracts', 'canvasFingerprint') || '').startsWith('v6:')), 'drift gate: every VARIANT carries its own v6 fingerprint stamp');
   const owner = (() => { let n = victim; while (n && n.parent !== subject) n = n.parent; return n; })();
   assert(owner, 'drift gate: the edited node resolves to a variant of the set');
   const priorFills = victim.fills;
@@ -1077,20 +1094,20 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
     const lines = snapFn(src).filter((l) => l.includes('|reaction|'));
     assert(
       lines.length === 2 && lines[0].includes('ON_HOVER') && lines[0].includes('State=Hover') && !/\d+:\d+/.test(lines[0].split('|reaction|')[1]),
-      `prototype wiring: the v5 snapshot records reactions by DESTINATION NAME, never node id (got ${JSON.stringify(lines[0] ?? '(none)')})`,
+      `prototype wiring: the fingerprint snapshot records reactions by DESTINATION NAME, never node id (got ${JSON.stringify(lines[0] ?? '(none)')})`,
     );
     await src.setReactionsAsync([src.reactions[0]]); // a designer strips the press wiring
     assert(
       fpFn(src) !== beforeFp,
-      'prototype wiring: STRIPPING a reaction changes the v5 fingerprint — the drift signal v4 was blind to',
+      'prototype wiring: STRIPPING a reaction changes the fingerprint — the drift signal v4 was blind to',
     );
     assert(
-      beforeFp.startsWith('v5:') && fpFn(src).startsWith('v5:'),
-      'prototype wiring: fingerprints carry the v5 prefix',
+      beforeFp.startsWith('v6:') && fpFn(src).startsWith('v6:'),
+      'prototype wiring: fingerprints carry the v6 prefix',
     );
 
     console.log(
-      `✔ prototype wiring (MUI Button, 75 variants): ${wiringA.length} State=Default cells carry [ON_HOVER→Hover, ON_PRESS→Active] CHANGE_TO their State= siblings, transition null; State=Focus Visible + State=Disabled are destinations of NOTHING (no Figma trigger exists — EXCLUDED BY NAME); off-default-axis bases and all previews carry ZERO; bundle path ≡ script path; the mock refuses plain assignment AND a cross-set CHANGE_TO by name; v5 fingerprint catches a stripped reaction`,
+      `✔ prototype wiring (MUI Button, 75 variants): ${wiringA.length} State=Default cells carry [ON_HOVER→Hover, ON_PRESS→Active] CHANGE_TO their State= siblings, transition null; State=Focus Visible + State=Disabled are destinations of NOTHING (no Figma trigger exists — EXCLUDED BY NAME); off-default-axis bases and all previews carry ZERO; bundle path ≡ script path; the mock refuses plain assignment AND a cross-set CHANGE_TO by name; the fingerprint catches a stripped reaction`,
     );
   }
 }

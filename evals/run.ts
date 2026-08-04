@@ -1781,7 +1781,7 @@ const cases: Case[] = [
       if (!script.includes(`navigation: 'CHANGE_TO', transition: null`)) {
         throw new Error('Action must be CHANGE_TO with transition: null');
       }
-      if (!script.includes(`return 'v5:' + String(h);`)) throw new Error('Fingerprint must be v5 (reaction-aware)');
+      if (!script.includes(`return 'v6:' + String(h);`)) throw new Error('Fingerprint must be v6 (binding-aware)');
 
       // A NON-OPTED contract carries no stateReactions field at all — the
       // omit-when-empty rule that keeps its specHash stable.

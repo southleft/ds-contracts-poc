@@ -721,13 +721,73 @@ async function buildNode(spec, registry) {
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
 
+var dsVarNames = {};
+var dsVarNamesLoaded = false;
+function dsSetVarNames(m) { dsVarNames = m || {}; dsVarNamesLoaded = true; return dsVarNames; }
+// Callers with an async prologue (the emitted script's top-level await, the
+// plugin's check-drift handler) populate the map ONCE; the sync walk reads it.
+async function dsLoadVarNames() {
+  var m = {};
+  try {
+    var all = await figma.variables.getLocalVariablesAsync();
+    for (var i = 0; i < all.length; i++) m[all[i].id] = all[i].name;
+  } catch (e) {}
+  return dsSetVarNames(m);
+}
+// THE UNLOADED MAP IS A REFUSAL, NOT A DIFFERENT ANSWER.
+//
+// v6 spells bindings by NAME, and the name map can only be filled from an
+// ASYNC api. A call site that forgets to await dsLoadVarNames() used to get a
+// perfectly well-formed hash -- computed over (unresolved) everywhere -- that
+// simply did not equal the stamp. Three separate sites hit that in one round
+// (the emitted script, the plugin's inventory walk, and the engine gate's own
+// new-Function harness), and every one reported a FALSE 'canvas-edited'
+// verdict on an untouched file rather than an error. Telling a designer that
+// applying would overwrite edits that do not exist is a louder wrong answer
+// than the missed detach v6 was built to catch.
+//
+// So the unloaded state now refuses BY NAME at the first binding it is asked
+// to resolve. A forgotten preload becomes an immediate, located error instead
+// of a plausible hash -- the same reason styledChannels takes a REQUIRED
+// FusionEnv rather than an optional one. dsSetVarNames({}) is the way to say
+// deliberately that no names are available.
+function dsVarName(id) {
+  if (!id) return '(none)';
+  if (!dsVarNamesLoaded) {
+    throw new Error(
+      'dsCanvasFingerprint: the variable-name map was never loaded. v6 spells bindings by NAME, so every path that COMPUTES a fingerprint must ' +
+      'await dsLoadVarNames() (or call dsSetVarNames({}) to state deliberately that no names are available) before walking. ' +
+      'Without it every bound field resolves to (unresolved) and the hash silently disagrees with the stamp.',
+    );
+  }
+  if (dsVarNames[id]) return dsVarNames[id];
+  // Real Figma (non-dynamic-page documents) still answers synchronously;
+  // where it does not, the preloaded map above is the answer.
+  try {
+    if (typeof figma !== 'undefined' && figma.variables && figma.variables.getVariableById) {
+      var v = figma.variables.getVariableById(id);
+      if (v && v.name) { dsVarNames[id] = v.name; return v.name; }
+    }
+  } catch (e) {}
+  return '(unresolved)';
+}
+// Paints serialize with aliases as NAMES: a run-scoped VariableID makes the
+// line unusable across files, which is the whole defect v6 closes.
+function dsPaints(paints) {
+  return JSON.stringify(paints, function (k, v) {
+    if (v && typeof v === 'object' && v.type === 'VARIABLE_ALIAS' && typeof v.id === 'string') {
+      return { var: dsVarName(v.id) };
+    }
+    return v;
+  });
+}
 function dsCanvasSnapshot(root) {
   var lines = [];
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var factsOf = function (n, id) {
     var out = [];
-    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + JSON.stringify(n.fills)); } catch (e) {}
-    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + JSON.stringify(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + dsPaints(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + dsPaints(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
     try { out.push(id + '|radius|' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') out.push(id + '|layout|' + n.layoutMode + ' ' + n.primaryAxisAlignItems + '/' + n.counterAxisAlignItems + ' gap ' + r1(n.itemSpacing) + ' pad ' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
     try { out.push(id + '|sizing|' + (n.layoutSizingHorizontal || '') + '/' + (n.layoutSizingVertical || '') + ' ' + (n.layoutPositioning || '')); } catch (e) {}
@@ -735,6 +795,21 @@ function dsCanvasSnapshot(root) {
     try { if (n.opacity !== undefined && n.opacity !== 1) out.push(id + '|opacity|' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) out.push(id + '|effects|' + n.effects.length); } catch (e) {}
     try { if (n.visible === false) out.push(id + '|hidden|true'); } catch (e) {}
+    // v6: DIRECT variable bindings, one channel per field so the drift
+    // reporter can pair each independently. Array-valued aliases
+    // (fills/strokes/characters) are skipped — they ride their own channel,
+    // the same split dump.plugin.js makes.
+    try {
+      var bv = n.boundVariables;
+      if (bv) {
+        var bf = Object.keys(bv).sort();
+        for (var bi = 0; bi < bf.length; bi++) {
+          var al = bv[bf[bi]];
+          if (!al || Object.prototype.toString.call(al) === '[object Array]' || !al.id) continue;
+          out.push(id + '|bound:' + bf[bi] + '|' + dsVarName(al.id));
+        }
+      }
+    } catch (e) {}
     // v4 (live finding: description + added property were invisible):
     try { if (n.description) out.push(id + '|description|' + n.description); } catch (e) {}
     try {
@@ -808,9 +883,15 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v5:' + String(h);
+  return 'v6:' + String(h);
 }
 
+// v6: bindings are fingerprinted by variable NAME, and every Figma variable
+// API that survives dynamic-page loading is async — so the id→name map is
+// filled ONCE here, from the emitted script's top-level await, and the sync
+// walk reads it. This runs AFTER the source above on purpose: the
+// dsVarNames initializer would clobber an earlier fill.
+await dsLoadVarNames();
 
 // DRIFT ROUND: stamp the node — and, for a SET, each VARIANT child — so
 // Check Drift can LOCALIZE an edit to the exact variant (live finding:
@@ -855,7 +936,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v6:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -1039,7 +1120,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v6:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -2782,13 +2863,73 @@ async function buildNode(spec, registry) {
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
 
+var dsVarNames = {};
+var dsVarNamesLoaded = false;
+function dsSetVarNames(m) { dsVarNames = m || {}; dsVarNamesLoaded = true; return dsVarNames; }
+// Callers with an async prologue (the emitted script's top-level await, the
+// plugin's check-drift handler) populate the map ONCE; the sync walk reads it.
+async function dsLoadVarNames() {
+  var m = {};
+  try {
+    var all = await figma.variables.getLocalVariablesAsync();
+    for (var i = 0; i < all.length; i++) m[all[i].id] = all[i].name;
+  } catch (e) {}
+  return dsSetVarNames(m);
+}
+// THE UNLOADED MAP IS A REFUSAL, NOT A DIFFERENT ANSWER.
+//
+// v6 spells bindings by NAME, and the name map can only be filled from an
+// ASYNC api. A call site that forgets to await dsLoadVarNames() used to get a
+// perfectly well-formed hash -- computed over (unresolved) everywhere -- that
+// simply did not equal the stamp. Three separate sites hit that in one round
+// (the emitted script, the plugin's inventory walk, and the engine gate's own
+// new-Function harness), and every one reported a FALSE 'canvas-edited'
+// verdict on an untouched file rather than an error. Telling a designer that
+// applying would overwrite edits that do not exist is a louder wrong answer
+// than the missed detach v6 was built to catch.
+//
+// So the unloaded state now refuses BY NAME at the first binding it is asked
+// to resolve. A forgotten preload becomes an immediate, located error instead
+// of a plausible hash -- the same reason styledChannels takes a REQUIRED
+// FusionEnv rather than an optional one. dsSetVarNames({}) is the way to say
+// deliberately that no names are available.
+function dsVarName(id) {
+  if (!id) return '(none)';
+  if (!dsVarNamesLoaded) {
+    throw new Error(
+      'dsCanvasFingerprint: the variable-name map was never loaded. v6 spells bindings by NAME, so every path that COMPUTES a fingerprint must ' +
+      'await dsLoadVarNames() (or call dsSetVarNames({}) to state deliberately that no names are available) before walking. ' +
+      'Without it every bound field resolves to (unresolved) and the hash silently disagrees with the stamp.',
+    );
+  }
+  if (dsVarNames[id]) return dsVarNames[id];
+  // Real Figma (non-dynamic-page documents) still answers synchronously;
+  // where it does not, the preloaded map above is the answer.
+  try {
+    if (typeof figma !== 'undefined' && figma.variables && figma.variables.getVariableById) {
+      var v = figma.variables.getVariableById(id);
+      if (v && v.name) { dsVarNames[id] = v.name; return v.name; }
+    }
+  } catch (e) {}
+  return '(unresolved)';
+}
+// Paints serialize with aliases as NAMES: a run-scoped VariableID makes the
+// line unusable across files, which is the whole defect v6 closes.
+function dsPaints(paints) {
+  return JSON.stringify(paints, function (k, v) {
+    if (v && typeof v === 'object' && v.type === 'VARIABLE_ALIAS' && typeof v.id === 'string') {
+      return { var: dsVarName(v.id) };
+    }
+    return v;
+  });
+}
 function dsCanvasSnapshot(root) {
   var lines = [];
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var factsOf = function (n, id) {
     var out = [];
-    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + JSON.stringify(n.fills)); } catch (e) {}
-    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + JSON.stringify(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + dsPaints(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + dsPaints(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
     try { out.push(id + '|radius|' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') out.push(id + '|layout|' + n.layoutMode + ' ' + n.primaryAxisAlignItems + '/' + n.counterAxisAlignItems + ' gap ' + r1(n.itemSpacing) + ' pad ' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
     try { out.push(id + '|sizing|' + (n.layoutSizingHorizontal || '') + '/' + (n.layoutSizingVertical || '') + ' ' + (n.layoutPositioning || '')); } catch (e) {}
@@ -2796,6 +2937,21 @@ function dsCanvasSnapshot(root) {
     try { if (n.opacity !== undefined && n.opacity !== 1) out.push(id + '|opacity|' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) out.push(id + '|effects|' + n.effects.length); } catch (e) {}
     try { if (n.visible === false) out.push(id + '|hidden|true'); } catch (e) {}
+    // v6: DIRECT variable bindings, one channel per field so the drift
+    // reporter can pair each independently. Array-valued aliases
+    // (fills/strokes/characters) are skipped — they ride their own channel,
+    // the same split dump.plugin.js makes.
+    try {
+      var bv = n.boundVariables;
+      if (bv) {
+        var bf = Object.keys(bv).sort();
+        for (var bi = 0; bi < bf.length; bi++) {
+          var al = bv[bf[bi]];
+          if (!al || Object.prototype.toString.call(al) === '[object Array]' || !al.id) continue;
+          out.push(id + '|bound:' + bf[bi] + '|' + dsVarName(al.id));
+        }
+      }
+    } catch (e) {}
     // v4 (live finding: description + added property were invisible):
     try { if (n.description) out.push(id + '|description|' + n.description); } catch (e) {}
     try {
@@ -2869,9 +3025,15 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v5:' + String(h);
+  return 'v6:' + String(h);
 }
 
+// v6: bindings are fingerprinted by variable NAME, and every Figma variable
+// API that survives dynamic-page loading is async — so the id→name map is
+// filled ONCE here, from the emitted script's top-level await, and the sync
+// walk reads it. This runs AFTER the source above on purpose: the
+// dsVarNames initializer would clobber an earlier fill.
+await dsLoadVarNames();
 
 // DRIFT ROUND: stamp the node — and, for a SET, each VARIANT child — so
 // Check Drift can LOCALIZE an edit to the exact variant (live finding:
@@ -2916,7 +3078,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v6:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -3100,7 +3262,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v6:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -6305,13 +6467,73 @@ async function buildNode(spec, registry) {
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
 
+var dsVarNames = {};
+var dsVarNamesLoaded = false;
+function dsSetVarNames(m) { dsVarNames = m || {}; dsVarNamesLoaded = true; return dsVarNames; }
+// Callers with an async prologue (the emitted script's top-level await, the
+// plugin's check-drift handler) populate the map ONCE; the sync walk reads it.
+async function dsLoadVarNames() {
+  var m = {};
+  try {
+    var all = await figma.variables.getLocalVariablesAsync();
+    for (var i = 0; i < all.length; i++) m[all[i].id] = all[i].name;
+  } catch (e) {}
+  return dsSetVarNames(m);
+}
+// THE UNLOADED MAP IS A REFUSAL, NOT A DIFFERENT ANSWER.
+//
+// v6 spells bindings by NAME, and the name map can only be filled from an
+// ASYNC api. A call site that forgets to await dsLoadVarNames() used to get a
+// perfectly well-formed hash -- computed over (unresolved) everywhere -- that
+// simply did not equal the stamp. Three separate sites hit that in one round
+// (the emitted script, the plugin's inventory walk, and the engine gate's own
+// new-Function harness), and every one reported a FALSE 'canvas-edited'
+// verdict on an untouched file rather than an error. Telling a designer that
+// applying would overwrite edits that do not exist is a louder wrong answer
+// than the missed detach v6 was built to catch.
+//
+// So the unloaded state now refuses BY NAME at the first binding it is asked
+// to resolve. A forgotten preload becomes an immediate, located error instead
+// of a plausible hash -- the same reason styledChannels takes a REQUIRED
+// FusionEnv rather than an optional one. dsSetVarNames({}) is the way to say
+// deliberately that no names are available.
+function dsVarName(id) {
+  if (!id) return '(none)';
+  if (!dsVarNamesLoaded) {
+    throw new Error(
+      'dsCanvasFingerprint: the variable-name map was never loaded. v6 spells bindings by NAME, so every path that COMPUTES a fingerprint must ' +
+      'await dsLoadVarNames() (or call dsSetVarNames({}) to state deliberately that no names are available) before walking. ' +
+      'Without it every bound field resolves to (unresolved) and the hash silently disagrees with the stamp.',
+    );
+  }
+  if (dsVarNames[id]) return dsVarNames[id];
+  // Real Figma (non-dynamic-page documents) still answers synchronously;
+  // where it does not, the preloaded map above is the answer.
+  try {
+    if (typeof figma !== 'undefined' && figma.variables && figma.variables.getVariableById) {
+      var v = figma.variables.getVariableById(id);
+      if (v && v.name) { dsVarNames[id] = v.name; return v.name; }
+    }
+  } catch (e) {}
+  return '(unresolved)';
+}
+// Paints serialize with aliases as NAMES: a run-scoped VariableID makes the
+// line unusable across files, which is the whole defect v6 closes.
+function dsPaints(paints) {
+  return JSON.stringify(paints, function (k, v) {
+    if (v && typeof v === 'object' && v.type === 'VARIABLE_ALIAS' && typeof v.id === 'string') {
+      return { var: dsVarName(v.id) };
+    }
+    return v;
+  });
+}
 function dsCanvasSnapshot(root) {
   var lines = [];
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var factsOf = function (n, id) {
     var out = [];
-    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + JSON.stringify(n.fills)); } catch (e) {}
-    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + JSON.stringify(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + dsPaints(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + dsPaints(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
     try { out.push(id + '|radius|' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') out.push(id + '|layout|' + n.layoutMode + ' ' + n.primaryAxisAlignItems + '/' + n.counterAxisAlignItems + ' gap ' + r1(n.itemSpacing) + ' pad ' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
     try { out.push(id + '|sizing|' + (n.layoutSizingHorizontal || '') + '/' + (n.layoutSizingVertical || '') + ' ' + (n.layoutPositioning || '')); } catch (e) {}
@@ -6319,6 +6541,21 @@ function dsCanvasSnapshot(root) {
     try { if (n.opacity !== undefined && n.opacity !== 1) out.push(id + '|opacity|' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) out.push(id + '|effects|' + n.effects.length); } catch (e) {}
     try { if (n.visible === false) out.push(id + '|hidden|true'); } catch (e) {}
+    // v6: DIRECT variable bindings, one channel per field so the drift
+    // reporter can pair each independently. Array-valued aliases
+    // (fills/strokes/characters) are skipped — they ride their own channel,
+    // the same split dump.plugin.js makes.
+    try {
+      var bv = n.boundVariables;
+      if (bv) {
+        var bf = Object.keys(bv).sort();
+        for (var bi = 0; bi < bf.length; bi++) {
+          var al = bv[bf[bi]];
+          if (!al || Object.prototype.toString.call(al) === '[object Array]' || !al.id) continue;
+          out.push(id + '|bound:' + bf[bi] + '|' + dsVarName(al.id));
+        }
+      }
+    } catch (e) {}
     // v4 (live finding: description + added property were invisible):
     try { if (n.description) out.push(id + '|description|' + n.description); } catch (e) {}
     try {
@@ -6392,9 +6629,15 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v5:' + String(h);
+  return 'v6:' + String(h);
 }
 
+// v6: bindings are fingerprinted by variable NAME, and every Figma variable
+// API that survives dynamic-page loading is async — so the id→name map is
+// filled ONCE here, from the emitted script's top-level await, and the sync
+// walk reads it. This runs AFTER the source above on purpose: the
+// dsVarNames initializer would clobber an earlier fill.
+await dsLoadVarNames();
 
 // DRIFT ROUND: stamp the node — and, for a SET, each VARIANT child — so
 // Check Drift can LOCALIZE an edit to the exact variant (live finding:
@@ -6439,7 +6682,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v6:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -6623,7 +6866,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v6:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -7505,13 +7748,73 @@ async function buildNode(spec, registry) {
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
 
+var dsVarNames = {};
+var dsVarNamesLoaded = false;
+function dsSetVarNames(m) { dsVarNames = m || {}; dsVarNamesLoaded = true; return dsVarNames; }
+// Callers with an async prologue (the emitted script's top-level await, the
+// plugin's check-drift handler) populate the map ONCE; the sync walk reads it.
+async function dsLoadVarNames() {
+  var m = {};
+  try {
+    var all = await figma.variables.getLocalVariablesAsync();
+    for (var i = 0; i < all.length; i++) m[all[i].id] = all[i].name;
+  } catch (e) {}
+  return dsSetVarNames(m);
+}
+// THE UNLOADED MAP IS A REFUSAL, NOT A DIFFERENT ANSWER.
+//
+// v6 spells bindings by NAME, and the name map can only be filled from an
+// ASYNC api. A call site that forgets to await dsLoadVarNames() used to get a
+// perfectly well-formed hash -- computed over (unresolved) everywhere -- that
+// simply did not equal the stamp. Three separate sites hit that in one round
+// (the emitted script, the plugin's inventory walk, and the engine gate's own
+// new-Function harness), and every one reported a FALSE 'canvas-edited'
+// verdict on an untouched file rather than an error. Telling a designer that
+// applying would overwrite edits that do not exist is a louder wrong answer
+// than the missed detach v6 was built to catch.
+//
+// So the unloaded state now refuses BY NAME at the first binding it is asked
+// to resolve. A forgotten preload becomes an immediate, located error instead
+// of a plausible hash -- the same reason styledChannels takes a REQUIRED
+// FusionEnv rather than an optional one. dsSetVarNames({}) is the way to say
+// deliberately that no names are available.
+function dsVarName(id) {
+  if (!id) return '(none)';
+  if (!dsVarNamesLoaded) {
+    throw new Error(
+      'dsCanvasFingerprint: the variable-name map was never loaded. v6 spells bindings by NAME, so every path that COMPUTES a fingerprint must ' +
+      'await dsLoadVarNames() (or call dsSetVarNames({}) to state deliberately that no names are available) before walking. ' +
+      'Without it every bound field resolves to (unresolved) and the hash silently disagrees with the stamp.',
+    );
+  }
+  if (dsVarNames[id]) return dsVarNames[id];
+  // Real Figma (non-dynamic-page documents) still answers synchronously;
+  // where it does not, the preloaded map above is the answer.
+  try {
+    if (typeof figma !== 'undefined' && figma.variables && figma.variables.getVariableById) {
+      var v = figma.variables.getVariableById(id);
+      if (v && v.name) { dsVarNames[id] = v.name; return v.name; }
+    }
+  } catch (e) {}
+  return '(unresolved)';
+}
+// Paints serialize with aliases as NAMES: a run-scoped VariableID makes the
+// line unusable across files, which is the whole defect v6 closes.
+function dsPaints(paints) {
+  return JSON.stringify(paints, function (k, v) {
+    if (v && typeof v === 'object' && v.type === 'VARIABLE_ALIAS' && typeof v.id === 'string') {
+      return { var: dsVarName(v.id) };
+    }
+    return v;
+  });
+}
 function dsCanvasSnapshot(root) {
   var lines = [];
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var factsOf = function (n, id) {
     var out = [];
-    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + JSON.stringify(n.fills)); } catch (e) {}
-    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + JSON.stringify(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + dsPaints(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + dsPaints(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
     try { out.push(id + '|radius|' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') out.push(id + '|layout|' + n.layoutMode + ' ' + n.primaryAxisAlignItems + '/' + n.counterAxisAlignItems + ' gap ' + r1(n.itemSpacing) + ' pad ' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
     try { out.push(id + '|sizing|' + (n.layoutSizingHorizontal || '') + '/' + (n.layoutSizingVertical || '') + ' ' + (n.layoutPositioning || '')); } catch (e) {}
@@ -7519,6 +7822,21 @@ function dsCanvasSnapshot(root) {
     try { if (n.opacity !== undefined && n.opacity !== 1) out.push(id + '|opacity|' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) out.push(id + '|effects|' + n.effects.length); } catch (e) {}
     try { if (n.visible === false) out.push(id + '|hidden|true'); } catch (e) {}
+    // v6: DIRECT variable bindings, one channel per field so the drift
+    // reporter can pair each independently. Array-valued aliases
+    // (fills/strokes/characters) are skipped — they ride their own channel,
+    // the same split dump.plugin.js makes.
+    try {
+      var bv = n.boundVariables;
+      if (bv) {
+        var bf = Object.keys(bv).sort();
+        for (var bi = 0; bi < bf.length; bi++) {
+          var al = bv[bf[bi]];
+          if (!al || Object.prototype.toString.call(al) === '[object Array]' || !al.id) continue;
+          out.push(id + '|bound:' + bf[bi] + '|' + dsVarName(al.id));
+        }
+      }
+    } catch (e) {}
     // v4 (live finding: description + added property were invisible):
     try { if (n.description) out.push(id + '|description|' + n.description); } catch (e) {}
     try {
@@ -7592,9 +7910,15 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v5:' + String(h);
+  return 'v6:' + String(h);
 }
 
+// v6: bindings are fingerprinted by variable NAME, and every Figma variable
+// API that survives dynamic-page loading is async — so the id→name map is
+// filled ONCE here, from the emitted script's top-level await, and the sync
+// walk reads it. This runs AFTER the source above on purpose: the
+// dsVarNames initializer would clobber an earlier fill.
+await dsLoadVarNames();
 
 // DRIFT ROUND: stamp the node — and, for a SET, each VARIANT child — so
 // Check Drift can LOCALIZE an edit to the exact variant (live finding:
@@ -7639,7 +7963,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v6:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -7823,7 +8147,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v6:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
@@ -9020,13 +9344,73 @@ async function buildNode(spec, registry) {
 // djb2 over the compiled spec — stored on the set so unchanged components
 // skip cheaply and CHANGED ones amend in place.
 
+var dsVarNames = {};
+var dsVarNamesLoaded = false;
+function dsSetVarNames(m) { dsVarNames = m || {}; dsVarNamesLoaded = true; return dsVarNames; }
+// Callers with an async prologue (the emitted script's top-level await, the
+// plugin's check-drift handler) populate the map ONCE; the sync walk reads it.
+async function dsLoadVarNames() {
+  var m = {};
+  try {
+    var all = await figma.variables.getLocalVariablesAsync();
+    for (var i = 0; i < all.length; i++) m[all[i].id] = all[i].name;
+  } catch (e) {}
+  return dsSetVarNames(m);
+}
+// THE UNLOADED MAP IS A REFUSAL, NOT A DIFFERENT ANSWER.
+//
+// v6 spells bindings by NAME, and the name map can only be filled from an
+// ASYNC api. A call site that forgets to await dsLoadVarNames() used to get a
+// perfectly well-formed hash -- computed over (unresolved) everywhere -- that
+// simply did not equal the stamp. Three separate sites hit that in one round
+// (the emitted script, the plugin's inventory walk, and the engine gate's own
+// new-Function harness), and every one reported a FALSE 'canvas-edited'
+// verdict on an untouched file rather than an error. Telling a designer that
+// applying would overwrite edits that do not exist is a louder wrong answer
+// than the missed detach v6 was built to catch.
+//
+// So the unloaded state now refuses BY NAME at the first binding it is asked
+// to resolve. A forgotten preload becomes an immediate, located error instead
+// of a plausible hash -- the same reason styledChannels takes a REQUIRED
+// FusionEnv rather than an optional one. dsSetVarNames({}) is the way to say
+// deliberately that no names are available.
+function dsVarName(id) {
+  if (!id) return '(none)';
+  if (!dsVarNamesLoaded) {
+    throw new Error(
+      'dsCanvasFingerprint: the variable-name map was never loaded. v6 spells bindings by NAME, so every path that COMPUTES a fingerprint must ' +
+      'await dsLoadVarNames() (or call dsSetVarNames({}) to state deliberately that no names are available) before walking. ' +
+      'Without it every bound field resolves to (unresolved) and the hash silently disagrees with the stamp.',
+    );
+  }
+  if (dsVarNames[id]) return dsVarNames[id];
+  // Real Figma (non-dynamic-page documents) still answers synchronously;
+  // where it does not, the preloaded map above is the answer.
+  try {
+    if (typeof figma !== 'undefined' && figma.variables && figma.variables.getVariableById) {
+      var v = figma.variables.getVariableById(id);
+      if (v && v.name) { dsVarNames[id] = v.name; return v.name; }
+    }
+  } catch (e) {}
+  return '(unresolved)';
+}
+// Paints serialize with aliases as NAMES: a run-scoped VariableID makes the
+// line unusable across files, which is the whole defect v6 closes.
+function dsPaints(paints) {
+  return JSON.stringify(paints, function (k, v) {
+    if (v && typeof v === 'object' && v.type === 'VARIABLE_ALIAS' && typeof v.id === 'string') {
+      return { var: dsVarName(v.id) };
+    }
+    return v;
+  });
+}
 function dsCanvasSnapshot(root) {
   var lines = [];
   var r1 = function (n) { return typeof n === 'number' ? Math.round(n * 10) / 10 : n; };
   var factsOf = function (n, id) {
     var out = [];
-    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + JSON.stringify(n.fills)); } catch (e) {}
-    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + JSON.stringify(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
+    try { if (n.fills && n.fills !== undefined) out.push(id + '|fill|' + dsPaints(n.fills)); } catch (e) {}
+    try { if (n.strokes && n.strokes.length) out.push(id + '|stroke|' + dsPaints(n.strokes) + ' w' + (n.strokeWeight || 0)); } catch (e) {}
     try { out.push(id + '|radius|' + r1(n.topLeftRadius || n.cornerRadius || 0) + ',' + r1(n.topRightRadius || 0) + ',' + r1(n.bottomLeftRadius || 0) + ',' + r1(n.bottomRightRadius || 0)); } catch (e) {}
     try { if (n.layoutMode && n.layoutMode !== 'NONE') out.push(id + '|layout|' + n.layoutMode + ' ' + n.primaryAxisAlignItems + '/' + n.counterAxisAlignItems + ' gap ' + r1(n.itemSpacing) + ' pad ' + r1(n.paddingTop) + ',' + r1(n.paddingRight) + ',' + r1(n.paddingBottom) + ',' + r1(n.paddingLeft)); } catch (e) {}
     try { out.push(id + '|sizing|' + (n.layoutSizingHorizontal || '') + '/' + (n.layoutSizingVertical || '') + ' ' + (n.layoutPositioning || '')); } catch (e) {}
@@ -9034,6 +9418,21 @@ function dsCanvasSnapshot(root) {
     try { if (n.opacity !== undefined && n.opacity !== 1) out.push(id + '|opacity|' + r1(n.opacity)); } catch (e) {}
     try { if (n.effects && n.effects.length) out.push(id + '|effects|' + n.effects.length); } catch (e) {}
     try { if (n.visible === false) out.push(id + '|hidden|true'); } catch (e) {}
+    // v6: DIRECT variable bindings, one channel per field so the drift
+    // reporter can pair each independently. Array-valued aliases
+    // (fills/strokes/characters) are skipped — they ride their own channel,
+    // the same split dump.plugin.js makes.
+    try {
+      var bv = n.boundVariables;
+      if (bv) {
+        var bf = Object.keys(bv).sort();
+        for (var bi = 0; bi < bf.length; bi++) {
+          var al = bv[bf[bi]];
+          if (!al || Object.prototype.toString.call(al) === '[object Array]' || !al.id) continue;
+          out.push(id + '|bound:' + bf[bi] + '|' + dsVarName(al.id));
+        }
+      }
+    } catch (e) {}
     // v4 (live finding: description + added property were invisible):
     try { if (n.description) out.push(id + '|description|' + n.description); } catch (e) {}
     try {
@@ -9107,9 +9506,15 @@ function dsCanvasFingerprint(root) {
   var s = dsCanvasSnapshot(root).join(String.fromCharCode(10));
   var h = 5381;
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
-  return 'v5:' + String(h);
+  return 'v6:' + String(h);
 }
 
+// v6: bindings are fingerprinted by variable NAME, and every Figma variable
+// API that survives dynamic-page loading is async — so the id→name map is
+// filled ONCE here, from the emitted script's top-level await, and the sync
+// walk reads it. This runs AFTER the source above on purpose: the
+// dsVarNames initializer would clobber an earlier fill.
+await dsLoadVarNames();
 
 // DRIFT ROUND: stamp the node — and, for a SET, each VARIANT child — so
 // Check Drift can LOCALIZE an edit to the exact variant (live finding:
@@ -9154,7 +9559,7 @@ async function amendSet(set, C) {
     // current-version stamp is never overwritten on skip: canvas edits stay
     // detectable.
     var fpSkip = set.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkip || fpSkip.indexOf('v5:') !== 0) {
+    if (!fpSkip || fpSkip.indexOf('v6:') !== 0) {
       dsStampFingerprints(set);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
@@ -9339,7 +9744,7 @@ async function amendComponent(comp, C) {
   const hash = specHash(C);
   if (comp.getSharedPluginData('ds_contracts', 'specHash') === hash) {
     var fpSkipC = comp.getSharedPluginData('ds_contracts', 'canvasFingerprint');
-    if (!fpSkipC || fpSkipC.indexOf('v5:') !== 0) {
+    if (!fpSkipC || fpSkipC.indexOf('v6:') !== 0) {
       dsStampFingerprints(comp);
     }
     return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };

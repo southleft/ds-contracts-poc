@@ -23,7 +23,9 @@ Node IDs and component-set keys were **written back into each contract's `anchor
 
 ## Bridge setup for figma-console-mcp (one-time)
 
-The MCP talks to Figma through a **companion plugin over WebSocket** (ports 9223–9232), not Chrome DevTools — writes execute Plugin API JavaScript inside Figma's sandbox. This deliberately avoids the Variables **REST** API, which is Enterprise-plan-only; the Plugin API path works on any plan.
+The MCP talks to Figma through a **companion plugin over WebSocket** (ports 9223–9232), not Chrome DevTools — writes execute Plugin API JavaScript inside Figma's sandbox. This deliberately avoids the Variables **REST** API; the Plugin API path works on any plan, and it can WRITE variables, which the REST endpoint cannot at all.
+
+> **Correction (2026-08-04).** This paragraph used to justify that choice with "the Variables REST API … is Enterprise-plan-only". That attribution is not something this project ever measured, and the one measurement it does have points elsewhere. `GET /v1/files/8nim1d0IPnehMxA7B7SYxC/variables/local` with this repo's PAT returns **403 — "Invalid scope(s): … This endpoint requires the `file_variables:read` scope"**, while `GET /v1/files/:key` on the same token returns 200. The refusal observed was a **token scope**, which the user can fix by re-minting a PAT (step 2 below already asks for "Variables: read" — for the MCP's benefit, not the REST client's). Whether a correctly-scoped token then succeeds on this non-Enterprise file is **untested**; it needs a human to mint one. The one-curl probe and both branches of its outcome are in [docs/HANDOFF.md](../HANDOFF.md). `extract/figma/rest/fetch.ts` now separates the two 403s so the user-fixable one is reported as such (`npm run figma:rest:refusal:check`).
 
 1. Figma **Desktop** app (not web), with the target file open and edit access.
 2. Run the local MCP server (`npx -y figma-console-mcp@latest` registered in your MCP client) with a `FIGMA_ACCESS_TOKEN` (File content: read, Variables: read, Comments: read/write).

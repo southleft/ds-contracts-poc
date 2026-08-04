@@ -174,6 +174,54 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run border-style:check
 
+      # The real compile path over synthetic contracts + the committed
+      # chat-message, no browser, ~0.3s. It pins the ONE July-audit defect
+      # class (c6e909e) that was later closed AT THE ENGINE and had no test:
+      # CSS's `align-items` initial value is `stretch` and Figma auto-layout's
+      # counter default is not, so an `align`-UNSET column drew a full-width
+      # bubble in the browser and a 71px one on canvas. 31 of 130 layout
+      # holders across 13 contracts leave `align` unset. Ten assertions, and
+      # all three ways of getting it wrong are red: reverting the default,
+      # stretching an EXPLICIT align, and stretching on a row's wrong axis.
+      - name: stretch:check (align unset ≡ align stretch, on canvas and both CSS emitters)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run stretch:check
+
+      # The real engine bundle (in-memory — the zip is never written) against
+      # the mocked Figma, over a COMMITTED contract, ~0.5s. It pins the third
+      # of the roadmap's "part tree, layout, AND bindings": v5 scored
+      # `grep -c boundVariables` = 0, so a designer who DETACHED a variable
+      # and typed the same literal back recomputed the IDENTICAL hash with
+      # zero diff lines — the file's meaning changed and the differ said
+      # "in-sync". Six pins, and the three ways of getting it wrong are red:
+      # dropping the bound channel, resolving to the run-scoped VariableID
+      # instead of the slash-form NAME (which is what made v5's one binding
+      # useless across files), and collapsing every field into one shared
+      # channel so the drift reporter's prefix pairing collides.
+      - name: canvas:binding:check (the v6 fingerprint carries bindings BY NAME)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run canvas:binding:check
+
+      # The TOKEN half of `npm run parity`, split out so it can be automated.
+      # parity itself is excluded from every lane (it needs a snapshot younger
+      # than 14 days and it rewrites parity/report.json); this reads the same
+      # extracted snapshot, writes nothing, and PRINTS the age instead of dying
+      # on it — 282/282 on name, every mode value and every alias target, in
+      # milliseconds. It refuses a snapshot with no `fileKey`/`extractedAt`,
+      # which is what stops it degrading into tokens/ vs tokens/.
+      - name: tokens:snapshot:check (tokens/ vs the extracted Figma variable table)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run tokens:snapshot:check
+
+      # Recorded HTTP bodies through an injected fetch, no credential, no
+      # network. It pins that the 403 measured on 2026-08-04 — a token missing
+      # `file_variables:read`, which the user can fix in a minute — is reported
+      # as such and not folded into the same silent degradation as every other
+      # refusal, and that the split is narrow enough to refuse a decoy body.
+      - name: figma:rest:refusal:check (the scope 403 is not the plan 403)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run figma:rest:refusal:check
+
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.
       - name: test:onboarding (packages/cli node:test suite)

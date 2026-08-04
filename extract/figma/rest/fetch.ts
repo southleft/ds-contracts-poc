@@ -90,6 +90,13 @@ export interface ClientOptions {
   /** Injectable for tests / non-browser runtimes. Defaults to global fetch. */
   fetchImpl?: FetchLike;
   apiBase?: string;
+  /**
+   * Called when the variables endpoint refuses. The refusal is still swallowed
+   * (the import degrades, as it always has) but the CALLER can now tell the
+   * user-fixable case from the one they cannot fix — see
+   * `classifyVariablesRefusal`.
+   */
+  onVariablesUnavailable?: (info: VariablesRefusal) => void;
 }
 
 async function get(path: string, token: string, opts: ClientOptions): Promise<unknown> {
@@ -100,7 +107,8 @@ async function get(path: string, token: string, opts: ClientOptions): Promise<un
   if (!res.ok) {
     const body = await res.text().catch(() => '');
     const err = new Error(`Figma API ${res.status} on ${path}${body ? ` — ${body.slice(0, 200)}` : ''}`);
-    (err as Error & { status?: number }).status = res.status;
+    (err as Error & { status?: number; body?: string }).status = res.status;
+    (err as Error & { status?: number; body?: string }).body = body;
     throw err;
   }
   return res.json();
@@ -117,9 +125,94 @@ export async function fetchNodes(
 }
 
 /**
- * Local variables — Enterprise-only. A 403 (plan) or 404 is the EXPECTED
- * degraded path: returns undefined and the mapper names every consequence as
- * a variable-unresolved report entry with the resolved value used instead.
+ * Why the variables endpoint refused, and — the part that matters — whether
+ * the person running the import can do anything about it.
+ */
+export interface VariablesRefusal {
+  status: number;
+  /**
+   * `scope`   — the token is missing `file_variables:read`. USER-FIXABLE: mint
+   *             a new PAT with that scope ticked.
+   * `unknown` — a 403 that names no scope, or a 404. Not user-fixable from
+   *             here; the plan tier is one candidate cause and it is NOT
+   *             something this code has verified (see below).
+   */
+  kind: 'scope' | 'unknown';
+  userFixable: boolean;
+  /** Ready to print at a CLI. */
+  message: string;
+  /** The API's own words, truncated — never paraphrased away. */
+  body: string;
+}
+
+/**
+ * MEASURED 2026-08-04, and the reason this function exists.
+ *
+ * The old comment above `fetchVariables` said the endpoint is "Enterprise-only"
+ * and that "a 403 (plan) or 404 is the EXPECTED degraded path". A real call was
+ * made with this repo's own PAT against this repo's own file:
+ *
+ *   GET https://api.figma.com/v1/files/8nim1d0IPnehMxA7B7SYxC/variables/local
+ *   → 403
+ *   {"status":403,"error":true,"message":"Invalid scope(s): files:read,
+ *    file_comments:write, file_dev_resources:read, file_dev_resources:write,
+ *    webhooks:write. This endpoint requires the file_variables:read scope"}
+ *
+ * (Control, same token, same file: GET /v1/files/:key → 200. The credential is
+ * good; only the SCOPE is missing.)
+ *
+ * That is not a plan refusal. It is a token the user minted without ticking
+ * one checkbox, and they can fix it in about a minute — but the old code
+ * degraded it identically to every other 403 and said nothing, so nobody ever
+ * learned that. Hence `kind: 'scope'` and `userFixable: true`.
+ *
+ * WHAT IS NOT CLAIMED. This does NOT establish that the plan limit is
+ * fictional. Whether a PAT that DOES carry `file_variables:read` then succeeds
+ * on a non-Enterprise file is UNTESTED — it needs a human to mint a scoped
+ * token. docs/HANDOFF.md carries that one-curl probe, and its two outcomes
+ * fork the design. Until someone runs it, a 403 with no scope wording stays
+ * `kind: 'unknown'` and this file does not guess why.
+ */
+export function classifyVariablesRefusal(status: number, body: string): VariablesRefusal {
+  const b = body ?? '';
+  // Match on the scope the endpoint NAMES, not on the word "scope" alone —
+  // "Invalid scope(s): …" also appears in the same body, and a future error
+  // that merely mentions scopes must not be read as this one.
+  if (status === 403 && /file_variables:read/.test(b)) {
+    return {
+      status,
+      kind: 'scope',
+      userFixable: true,
+      message:
+        'Figma refused /variables/local: your personal access token is missing the ' +
+        '`file_variables:read` scope. This is fixable — mint a new token at ' +
+        'figma.com → Settings → Security → Personal access tokens with "Variables: read" ' +
+        'enabled, and re-run. (Variable NAMES will be unresolved until you do; the import ' +
+        'still works, using resolved values.)',
+      body: b.slice(0, 300),
+    };
+  }
+  return {
+    status,
+    kind: 'unknown',
+    userFixable: false,
+    message:
+      `Figma refused /variables/local with ${status} and did not name a missing scope. ` +
+      'Possible causes include the file\'s plan tier — UNVERIFIED by this project, see ' +
+      'docs/HANDOFF.md. Importing without variable names; resolved values are used instead.',
+    body: b.slice(0, 300),
+  };
+}
+
+/**
+ * Local variables. A 403 or 404 is a DEGRADATION, not a failure: this returns
+ * undefined and the mapper names every consequence as a variable-unresolved
+ * report entry with the resolved value used instead.
+ *
+ * The two 403s are no longer identical. `opts.onVariablesUnavailable` receives
+ * a classified refusal so a caller can tell the user "tick one checkbox on
+ * your token" instead of silently dropping variable names — see
+ * `classifyVariablesRefusal` for the measurement behind that split.
  */
 export async function fetchVariables(
   fileKey: string,
@@ -129,8 +222,11 @@ export async function fetchVariables(
   try {
     return (await get(`/v1/files/${fileKey}/variables/local`, token, opts)) as RestVariablesResponse;
   } catch (e) {
-    const status = (e as Error & { status?: number }).status;
-    if (status === 403 || status === 404) return undefined;
+    const err = e as Error & { status?: number; body?: string };
+    if (err.status === 403 || err.status === 404) {
+      opts.onVariablesUnavailable?.(classifyVariablesRefusal(err.status, err.body ?? err.message ?? ''));
+      return undefined;
+    }
     throw e;
   }
 }

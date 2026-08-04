@@ -28,7 +28,7 @@
  * same fact, or this gate rots the way the artifacts did.
  */
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, readdirSync, existsSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, readdirSync, existsSync, rmSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -69,6 +69,47 @@ const CUSTOM_REBUILDS = {
 
 const failures = [];
 const rows = [];
+const genesisRows = [];
+
+/** GENESIS-BATCH.figma.js — THE PASTE ARTIFACT, and until 2026-08-04 the one
+ *  emitted surface no gate compared.
+ *
+ *  It is the script a designer actually pastes into a blank file, and it
+ *  inlines core/canvas-fingerprint.ts's FINGERPRINT_SRC verbatim like every
+ *  other emitted script. It was excluded from this file's byte-compare by name
+ *  — the same `f !== 'GENESIS-BATCH.figma.js'` clause that (correctly) keeps it
+ *  out of the SET comparison, because the CLI `figma` verb does not emit it.
+ *  Conflating "not emitted by this command" with "not checked" left five
+ *  artifacts (altitude, astryx, carbon, mui, tailwind) carrying a stale v5
+ *  fingerprint while `figma:fresh` reported 6/6 green.
+ *
+ *  Its builder is deterministic — verified by re-running it twice and
+ *  comparing sha256 — so the same rebuild-and-byte-compare that guards every
+ *  other script works here. Rebuilt into a temp copy so a check never mutates
+ *  the tree it is checking. */
+function checkGenesis(lib, committedDir) {
+  const name = 'GENESIS-BATCH.figma.js';
+  const committedPath = path.join(committedDir, name);
+  const builder = path.join(ROOT, 'examples', lib, 'scripts', 'build-genesis-batch.mjs');
+  if (!existsSync(committedPath) && !existsSync(builder)) return [];
+  if (existsSync(committedPath) !== existsSync(builder)) {
+    failures.push(`${lib}: ${existsSync(builder) ? 'has a genesis builder but no committed GENESIS-BATCH.figma.js' : 'commits GENESIS-BATCH.figma.js but has no builder to rebuild it from — an ungated paste artifact'}`);
+    return [[lib, 'UNPAIRED', name]];
+  }
+  const before = readFileSync(committedPath);
+  execFileSync(process.execPath, [builder], { cwd: ROOT, stdio: 'pipe' });
+  const after = readFileSync(committedPath);
+  if (before.compare(after) !== 0) {
+    // Restore, so a red gate never leaves the tree dirty.
+    writeFileSync(committedPath, before);
+    failures.push(
+      `${lib}: GENESIS-BATCH.figma.js is STALE vs a fresh build — re-run examples/${lib}/scripts/build-genesis-batch.mjs and commit it. ` +
+        `This is the artifact a designer PASTES, and it inlines the fingerprint source like every other emitted script.`,
+    );
+    return [[lib, 'STALE', name]];
+  }
+  return [[lib, 'fresh', name]];
+}
 
 const figmaDirs = readdirSync(path.join(ROOT, 'examples'), { withFileTypes: true })
   .filter((e) => e.isDirectory())
@@ -105,6 +146,13 @@ for (const lib of figmaDirs) {
     const committedDir = path.join(ROOT, 'examples', lib, 'figma');
     const emitted = readdirSync(tmp).filter((f) => f.endsWith('.figma.js')).sort();
     const committed = readdirSync(committedDir).filter((f) => f.endsWith('.figma.js') && f !== '00-tokens.figma.js' && f !== 'GENESIS-BATCH.figma.js').sort();
+    // GENESIS-BATCH.figma.js is excluded from the SET comparison above because
+    // the CLI `figma` verb does not emit it — a separate
+    // examples/<lib>/scripts/build-genesis-batch.mjs does. It is NOT excluded
+    // from freshness: see the block below. The two exclusions used to be one,
+    // and that is how five committed artifacts carrying an inlined copy of
+    // core/canvas-fingerprint.ts went stale with every gate green.
+    genesisRows.push(...checkGenesis(lib, committedDir));
     if (emitted.join(',') !== committed.join(',')) {
       failures.push(`${lib}: the committed script SET differs from a fresh emission (committed: ${committed.join(', ')} | fresh: ${emitted.join(', ')})`);
     }
@@ -121,7 +169,7 @@ for (const lib of figmaDirs) {
   }
 }
 
-for (const [lib, status, note] of rows) console.log(`  ${lib.padEnd(10)} ${status.padEnd(10)} ${note}`);
+for (const [lib, status, note] of [...rows, ...genesisRows]) console.log(`  ${lib.padEnd(10)} ${status.padEnd(10)} ${note}`);
 if (failures.length > 0) {
   console.error(`\n✖ figma-scripts-fresh: ${failures.length} failure(s)\n`);
   for (const f of failures) console.error(`  ${f}`);

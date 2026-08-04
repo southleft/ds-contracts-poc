@@ -183,7 +183,7 @@ export interface InventoryRow {
    *  recompute the Drift tab runs, joined into the update check so Apply
    *  can never silently overwrite a designer's edit. null = no stamp. */
   /** 'version-changed': the stamp predates the current fingerprint scheme
-   *  (v4→v5 with the prototype-wiring round) — regenerate to re-baseline.
+   *  (v4→v5 prototype wiring, v5→v6 resolved bindings) — regenerate to re-baseline.
    *  Deliberately NOT 'canvas-edited': that would be a false alarm. */
   drift: 'in-sync' | 'canvas-edited' | 'unstamped' | 'version-changed' | null;
   /** BROWNFIELD: false only on rows a `scanScriptSource()` run kept because
@@ -798,6 +798,18 @@ return { marker: 'version', contractId: ${JSON.stringify(contractId)}, version: 
     return `// ds-contracts plugin: read-only marker inventory (nothing changes).
 ${FINGERPRINT_SRC}
 await figma.loadAllPagesAsync();
+// v6 REQUIRES THIS, AND ITS ABSENCE WAS A FALSE ALARM, NOT A MISSING FEATURE.
+// The v6 snapshot spells bindings by NAME (\`|bound:paddingLeft|space/inset-x/sm\`)
+// via an id→name map that only an ASYNC Figma API can fill, so every path that
+// COMPUTES a fingerprint must preload it — not merely the paths that STAMP one.
+// This path recomputes to compare against the stamp. Without the preload every
+// bound field resolved to \`(unresolved)\`, the recompute could never equal the
+// stamp, and the verdict below read 'canvas-edited' for every stamped set on an
+// UNTOUCHED file — telling a designer that applying would overwrite edits that
+// do not exist. Caught by plugin:check's update-report pin, which read
+// "1 set has un-proposed canvas edits" where it expected
+// "1 to update · 1 new · 0 unchanged."
+await dsLoadVarNames();
 const rows = [];
 for (const page of figma.root.children) {
   for (const node of page.findAllWithCriteria({ types: ['COMPONENT_SET', 'COMPONENT'] })) {
@@ -824,10 +836,10 @@ ${skipUnmarked}
     try {
       const stored = node.getSharedPluginData('ds_contracts', 'canvasFingerprint');
       if (stored) {
-        // VERSION HONESTY (prototype-wiring round, v4→v5): a stamp from an
+        // VERSION HONESTY (v4→v5 prototype wiring, v5→v6 resolved bindings): a stamp from an
         // older scheme is not comparable — reporting 'canvas-edited' would
         // be a false alarm on an untouched file. 'version-changed' names it.
-        drift = stored.indexOf('v5:') !== 0 ? (/^v\\d+:/.test(stored) ? 'version-changed' : 'unstamped')
+        drift = stored.indexOf('v6:') !== 0 ? (/^v\\d+:/.test(stored) ? 'version-changed' : 'unstamped')
           : stored === dsCanvasFingerprint(node) ? 'in-sync' : 'canvas-edited';
       }
     } catch (e) { /* recompute threw — no drift verdict, never a blocker */ }
