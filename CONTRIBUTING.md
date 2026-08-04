@@ -28,11 +28,28 @@ Every change must leave these green:
 
 ```bash
 npm run build      # tokens → schema → all components, contract-validated
-npm run parity     # three-way differ: code, canvas, tokens vs contracts
 npm run eval       # the full deterministic suite (see docs/07)
 npm run docs:check # every number the docs quote, re-derived from the repo
 npx tsc --noEmit   # src, scripts, extract, parity, evals
 ```
+
+Or run a whole CI lane locally, which is what the workflows run:
+`npm run ci:lane fast` (~8s, 10 gates) and `npm run ci:lane full` (~15 min, 28
+gates). [docs/25](docs/25-reading-a-red-ci.md) maps every red gate to the local
+command that reproduces it.
+
+**`npm run parity` is deliberately NOT in that list, and it used to be.** The
+differ compares contracts against committed *snapshots* of the live Figma file,
+and those snapshots expire by design (`MAX_SNAPSHOT_AGE_DAYS`, default 14). At
+the time of writing they are 27 days old, so `parity` exits 1 with two
+`snapshot-stale` findings on a completely healthy tree — which meant this
+section instructed every contributor to reach a green that only the file's owner
+could produce. **A `snapshot-stale` finding is not your change**; refreshing the
+snapshots means running `parity/extract-figma.plugin.js` inside the live Figma
+file, which needs Figma desktop and file access. Any OTHER parity finding *is* a
+real three-way drift and should block. CI excludes `parity` by name for the same
+reason (`.github/scripts/lane-coverage.ts` carries the exclusion and its
+justification, so the exclusion itself cannot rot silently).
 
 Depending on what you touched, also: `npm run plugin:check` (the plugin engine against the mocked canvas), `npm run core:browser-check` (the engine stays browser-safe), `npm run verify:package`, `npm run test:onboarding`.
 

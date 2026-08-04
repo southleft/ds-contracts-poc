@@ -1,0 +1,162 @@
+# FAST LANE — the signal a contributor gets in under a minute.
+#
+# WHY THIS FILE EXISTS. Until 2026-08-04 this repository had no .github/
+# directory at all: 33 gate scripts, every one of them fired only when a human
+# typed it. That is the same shape as the two incidents the gates themselves
+# were written for — `deploy-check.mjs` (the live playground served a plugin
+# build from mid-July for three weeks while every BUILD-time guard was green)
+# and `publish-check.mjs` (a 332-line `onboard` rewrite landed under a version
+# the registry already served). In both, the machinery was fresh and nothing
+# COMPARED it to what the world could see. A pull request from an outside
+# contributor was in exactly that position: zero automated verification.
+#
+# WHAT THIS LANE IS FOR. Everything here is cheap enough that a contributor can
+# also run it locally before pushing — `npm run ci:lane fast` runs exactly these
+# steps out of this file (see docs/25-reading-a-red-ci.md). Measured by that
+# runner on the author's machine (node v20.19.4, macOS arm64) at 8a5c455:
+#
+#   npm run ci:lanes                                 0.2s
+#   npm run typecheck                                3.1s
+#   npm --prefix packages/cli run typecheck          1.4s
+#   npx tsc --noEmit -p .github/scripts/tsconfig...  1.3s
+#   npm run docs:check                               0.1s
+#   npm run capability:fresh                         0.2s
+#   npm run ledger:fresh                             0.4s
+#   npm run publish:check                            0.7s
+#   npm run verify:catalog                           0.1s
+#   npm run test:onboarding                          0.7s
+#                                                   ------
+#                                                    8.2s, 10/10 green. The
+#   packages/cli build below adds 0.5s. The rest of the wall clock is checkout
+#   and npm ci.
+#
+# FIVE OF THE 33 NAMED GATES LIVE HERE — typecheck, docs:check,
+# capability:fresh, ledger:fresh, publish:check. The other five steps are the
+# packages/cli and .github typechecks, ci:lanes, verify:catalog and
+# test:onboarding (the last two are named in CONTRIBUTING.md § "The gates" and
+# cost under a second between them). 27 gates run in full.yml; deploy:check is
+# scheduled.
+#
+# WHY publish:check IS IN THE FAST LANE AND SAFE HERE. It reads the public npm
+# registry and never writes: `npm view` + a curl of the published tarball, then
+# a sha256 against the tree's own build. Publishing needs the owner's OTP and
+# stays a human act. Its "not published yet" branch is a PASS, verified by
+# execution at this commit:
+#
+#     ✔ @ds-contracts/cli@0.4.0 is NOT on the registry yet — this tree is
+#       ahead of what adopters can install.
+#
+# THE PREREQUISITE THAT IS EASY TO MISS: `packages/cli/dist/` is gitignored
+# (.gitignore:3 `dist/`), so on a fresh checkout publish-check.mjs exits 1 with
+# "REFUSED: packages/cli/dist/cli.js is not built". Falsified deliberately —
+# running the script in a directory holding only packages/cli/package.json
+# reproduces that exact refusal. Hence the build step below; if you remove it,
+# this lane goes red at publish:check.
+#
+# HOW A FAILURE REPORTS. Each gate is its own step guarded by
+# `if: !cancelled() && steps.setup.outcome == 'success'`, so ONE red gate never
+# hides the others — every gate still runs and reports its own conclusion, and
+# the job fails at the end. `continue-on-error` is deliberately NOT used: it
+# would paint a failing gate green in the checks list.
+name: fast
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fast-${{ github.ref }}
+  # Never cancel a main-branch run — main's result is the record of what the
+  # default branch is worth. Feature branches supersede themselves freely.
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  fast:
+    name: fast gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Node is pinned to the exact version the gates were verified on, not to
+      # `20.x`: docs and packages/cli both declare `engines.node >= 20`, and
+      # 20.19.4 is what produced every measurement in this file.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.4'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: npm ci
+        run: npm ci
+
+      # THE ONLY HARD STOP. Without the install nothing below can be attempted,
+      # so `setup` sits directly after it: a failed `npm ci` skips `setup`, every
+      # guarded step below evaluates false, and the job stops honestly.
+      - name: install complete
+        id: setup
+        run: echo "Every step below runs even if an earlier one fails; the job fails at the end."
+
+      # publish:check compares the tree's BUILT cli.js against the registry's
+      # bytes; dist/ is gitignored, so it must be built here (see the header).
+      # Guarded like a gate so that a broken CLI build costs you publish:check
+      # — which will refuse by name — and not the other nine results.
+      # CI_LANE_STEP: prep keeps `npm run ci:lane fast` from running it locally.
+      - name: build @ds-contracts/cli (publish:check prerequisite)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/cli run build
+
+      # ---------------------------------------------------------------- gates
+      # A GATE ON THE GATES. Refuses when a gate-shaped script in package.json
+      # is in no lane and on no exclusion list, when a lane names a script that
+      # does not exist, or when a gate step loses its independent-reporting
+      # guard. Without it, the way this repo's CI defect returns is: gate #34
+      # is written, never wired, and the checks list stays green.
+      - name: ci:lanes (every gate script is wired into a lane or excluded by name)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run ci:lanes
+
+      - name: typecheck (src, scripts, core, extract, parity, evals, conformance)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run typecheck
+
+      - name: typecheck packages/cli
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm --prefix packages/cli run typecheck
+
+      # The root tsconfig's `include` does not name .github, so this directory's
+      # TypeScript would otherwise be checked for the first time by CI itself.
+      - name: typecheck .github/scripts
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npx tsc --noEmit -p .github/scripts/tsconfig.json
+
+      - name: docs:check (every number and link the docs quote, re-derived)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run docs:check
+
+      - name: capability:fresh (docs/24 is byte-identical to a rebuild)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run capability:fresh
+
+      - name: ledger:fresh (LEDGER.md + RESIDUALS.md byte-identical to a rebuild)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run ledger:fresh
+
+      - name: publish:check (registry bytes vs this tree's CLI build)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run publish:check
+
+      - name: verify:catalog (every shard identical to catalog.json)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run verify:catalog
+
+      # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
+      # contributors to run it and it costs under a second with no extra build.
+      - name: test:onboarding (packages/cli node:test suite)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:onboarding

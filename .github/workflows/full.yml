@@ -1,0 +1,347 @@
+# FULL LANE — the 33-gate sweep. Runs on every pull request and on every push
+# to main. Slower than `fast`, and the one that has to be green before a merge.
+#
+# WHAT IT COVERS, and what it deliberately does NOT — read this before assuming
+# a green run means "everything was checked".
+#
+# THE ARITHMETIC, so no lane can quietly shrink. Of the 33 gate scripts:
+#   27 run here · 5 run in the fast lane · 1 (deploy:check) is scheduled.
+#
+# RUNS HERE — 28 steps: the 27 named gates plus verify:package, which is not
+#   one of the 33 but is named in CONTRIBUTING.md and needs the library build
+#   this job already does:
+#     eval, plugin:check, plugin:ui-check, paste:check, mint:check,
+#     emitters:check, dagger:census, closure:check, site:build, figma:fresh,
+#     core:browser-check, extract:computed:ceiling:check, verify:package,
+#     and the fifteen extract:figma:*:check gates
+#     (base, cbds, cbds:batch, cbds:bridge, canvas, dialog, composite, cross,
+#      partstate, tooltip, overlap, wrap, constraints, repeat, theme).
+#
+# RUNS IN THE FAST LANE — 10 steps: the 5 named gates typecheck, docs:check,
+#   capability:fresh, ledger:fresh, publish:check, plus packages/cli typecheck,
+#   .github/scripts typecheck, ci:lanes, verify:catalog and test:onboarding.
+#
+# `npm run ci:lanes` (fast lane) re-derives this split from package.json and
+# these files on every run and refuses when a gate is in neither.
+#
+# EXCLUDED BY NAME — no gate in this repository is left to silently not-run:
+#
+#   · deploy:check — asserts LOCAL build artifacts against the LIVE Cloudflare
+#     Pages bytes (ds-contracts-playground.pages.dev, ds-contracts-spec.pages.dev).
+#     Both projects are direct-upload: nothing deploys unless a human runs
+#     `npm run deploy`. So this gate is RED for every commit that has not yet
+#     been deployed — which is every PR, by construction. Putting it in a merge
+#     lane would train people to ignore a red check. It lives in
+#     deploy-check.yml as a scheduled + manually-triggered job instead, which is
+#     the question it actually answers: "is what the world sees still what main
+#     says?"  See that file's header for the schedule and the reasoning.
+#
+#   · parity — `npm run parity` is RED at 8a5c455 and not because of any code:
+#     parity/figma-components.json and parity/figma-tokens.json are 27.0 days
+#     old and the differ refuses snapshots older than 14 days
+#     (MAX_SNAPSHOT_AGE_DAYS). Refreshing them requires a human running
+#     parity/extract-figma.plugin.js inside the live Figma file — not
+#     automatable from a runner. It also REWRITES parity/report.json on every
+#     run, so it would dirty the checkout. Covered instead by: the three-way
+#     differ's logic is exercised by the C3-detection eval family, which runs
+#     above. If someone refreshes the snapshots and wants this gated, the honest
+#     home is the scheduled workflow, not the PR lane.
+#
+#   · npm run build + `git diff --exit-code` (generated output is
+#     committed-fresh) — measured byte-inert on macOS/arm64/node 20.19.4 at this
+#     commit, but NOT verified on linux, and a false red here would be a
+#     generator-vs-platform difference wearing a contributor's name. Left out
+#     until someone confirms it on ubuntu. Determinism itself is not unguarded:
+#     the eval suite's C1-determinism family regenerates in a scratch copy and
+#     byte-compares.
+#
+#   · conformance / conformance:capture, extract:figma:gauntlet:live*,
+#     extract:figma:visual, extract:figma:rest, extract:figma:mcp,
+#     roundtrip:code, adherence:aggregate — not among the 33 gate scripts; they
+#     are capture/replay instruments that need either a live Figma file, a
+#     Figma token, or a banked artifact directory that is gitignored. Named
+#     here so their absence is a decision on the record rather than an
+#     oversight.
+#
+# BROWSERS. Three gates need one, and they need two DIFFERENT browsers:
+#   · eval (4 launches) and extract:computed:ceiling:check resolve through
+#     chromiumExecutable() in extract/figma/visual-parity/render.ts —
+#     PLAYWRIGHT_CHROMIUM_PATH, else the ms-playwright cache, else system
+#     Chrome. This repo depends on playwright-core, which ships no browser, so
+#     the cache must be populated: `npx playwright-core install chromium`.
+#   · plugin:ui-check calls chromium.launch({ channel: 'chrome' })
+#     (scripts/plugin-ui-check.mjs:77) — a real Google Chrome, which GitHub's
+#     ubuntu runner images preinstall at /opt/google/chrome/chrome. Installing
+#     playwright's chromium does NOT satisfy a channel.
+#   .github/scripts/resolve-browsers.ts proves BOTH by launching them before
+#   any gate runs, and fails naming which gates a missing browser takes down.
+#   It imports the real chromiumExecutable() rather than reimplementing the
+#   search order.
+#
+# HOW A FAILURE REPORTS. Every gate is its own step guarded by
+# `if: !cancelled() && steps.setup.outcome == 'success'`, so one red gate never
+# hides the twenty-seven behind it: all of them run, each reports its own
+# conclusion in the checks list, and the job fails at the end.
+# `continue-on-error` is deliberately NOT used — it would paint a failing gate
+# green.
+#
+# MEASURED locally with `npm run ci:lane full` (node v20.19.4, macOS arm64) at
+# 8a5c455 — 28 of 28 green:
+#   npm run eval                              883.1s  (188 of 188 cases)
+#   npm run plugin:check                       11.7s
+#   npm run dagger:census                      10.5s
+#   npm run plugin:ui-check                     9.0s
+#   npm run figma:fresh                         3.8s
+#   npm run extract:computed:ceiling:check      1.9s
+#   npm run site:build                          1.4s
+#   npm run paste:check                         1.2s
+#   npm run core:browser-check                  0.7s
+#   the 15 extract:figma:*:check gates          0.2-0.4s each (3.7s total)
+#   mint:check / emitters:check / closure:check / verify:package  ≤0.3s each
+#                                            --------
+#                                             926.7s wall (~15.5 min), of which
+# eval is 95%. The 60-minute job timeout is ~4x that; a GitHub runner is slower
+# than this machine, and the headroom is deliberate.
+name: full
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: full-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  full:
+    name: full gate sweep
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.4'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: npm ci
+        run: npm ci
+
+      # THE ONLY HARD STOP IN THIS JOB. `npm ci` is the one step without which
+      # nothing below can even be attempted, so `setup` sits directly after it:
+      # if the install fails, `setup` is skipped, every guarded step below
+      # evaluates its condition to false, and the job stops honestly.
+      #
+      # Everything AFTER this point — browsers, the three artifact builds, and
+      # all 28 gates — carries the same guard, so a failing preparation step
+      # takes down only the gates that genuinely depend on it. An earlier cut of
+      # this file put `setup` after the builds; a broken `plugin:zip` would then
+      # have blanked all 28 results and reported nothing about the 26 gates that
+      # never touch the plugin.
+      - name: install complete
+        id: setup
+        run: echo "Every step below runs even if an earlier one fails; the job fails at the end."
+
+      # ----------------------------------------------------------- browsers
+      # Cache the downloaded Chromium, keyed on the lockfile (playwright-core's
+      # pinned version decides the revision). The install command runs
+      # UNCONDITIONALLY below — a cache hit makes it a no-op, a partial or
+      # corrupt cache gets repaired, and resolve-browsers.ts then proves the
+      # binary actually launches. A cache that hides a broken install is worse
+      # than a slow job.
+      - name: cache playwright browsers
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-ms-playwright-
+
+      - name: install chromium (playwright-core ships no browser)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npx playwright-core install --with-deps chromium
+
+      - name: resolve + prove both browsers
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npx tsx .github/scripts/resolve-browsers.ts
+
+      # -------------------------------------------------- artifact builds
+      # All three targets are gitignored, so a fresh checkout does not have
+      # them and the gate that consumes each one would refuse BY NAME. That
+      # refusal is correct behaviour, which is exactly why these builds are
+      # guarded rather than fail-fast: if one breaks, its consumer goes red
+      # naming the missing file and the rest of the sweep still reports.
+
+      # packages/cli/dist/ (.gitignore:3) — dagger:census and paste:check both
+      # EXECUTE the built cli.js. dagger-census.ts:72 refuses by name
+      # ("REFUSED: packages/cli/dist/cli.js is not built") and paste-door-check
+      # spawns it directly.
+      #
+      # NOT for the eval suite: the cli-smoke case builds its OWN copy inside
+      # evals/.scratch (evals/run.ts:4403 runs packages/cli/build.mjs there),
+      # so it is independent of this step. Stated because an earlier draft of
+      # this comment credited the step to the wrong gates.
+      #
+      # Equivalent spellings: `npm run build -w @ds-contracts/cli`, or
+      # `cd packages/cli && node build.mjs` (what publish-check.mjs prints).
+      - name: build @ds-contracts/cli
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/cli run build
+
+      # dist/index.js (.gitignore:3) — verify:package imports the BUILT package.
+      - name: build the library bundle (verify:package prerequisite)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm run build:lib
+
+      # figma-sync/plugin-dist/ (.gitignore:45) — plugin:ui-check drives the
+      # REAL packaged ui.html from that directory. Without this step the gate
+      # cannot find the file it is supposed to be checking.
+      #
+      # NOT run with --update-engine-receipt: the default REFUSES when the
+      # committed figma-sync/plugin/engine.receipt.json disagrees with a fresh
+      # engine bundle, and never rewrites it. The refusal path is not
+      # theoretical — it is the same comparison plugin:check flow 1 makes.
+      - name: package the Figma plugin (plugin:ui-check prerequisite)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm run plugin:zip
+
+      # ----------------------------------------------------- the eval suite
+      # Longest gate by a wide margin. It runs the REAL pipeline in a scratch
+      # copy of the repo (evals/.scratch) per case.
+      - name: eval (the full deterministic suite)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run eval
+
+      # ------------------------------------------------- engine + plugin
+      - name: plugin:check (engine bundle + every plugin flow vs the mocked canvas)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run plugin:check
+
+      - name: plugin:ui-check (the packaged ui.html driven in real Chrome)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run plugin:ui-check
+
+      - name: paste:check (contract → CLI bundle → paste door, both kits)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run paste:check
+
+      - name: mint:check
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run mint:check
+
+      - name: emitters:check
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run emitters:check
+
+      - name: core:browser-check (the core barrel stays browser-safe)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run core:browser-check
+
+      - name: verify:package (the built package imports and SSRs)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run verify:package
+
+      # ------------------------------------------------- receipts + census
+      - name: dagger:census (every corpus reports the dropped facts it last reported)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run dagger:census
+
+      - name: closure:check (every channel the canvas can draw is read back or named lost)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run closure:check
+
+      - name: figma:fresh (committed *.figma.js byte-identical to a re-emission)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run figma:fresh
+
+      - name: site:build (the spec site + schema-coverage + journey commands)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run site:build
+
+      - name: extract:computed:ceiling:check (an unreadable stylesheet is a counted ceiling)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:ceiling:check
+
+      # ------------------------------------------- the extract:figma family
+      # Fifteen separate steps on purpose. They cost ~0.3s each, and a single
+      # `npm run a && npm run b && …` chain would stop at the first refusal and
+      # hide which of the other fourteen also broke.
+      - name: 'extract:figma:base:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:base:check
+
+      # The carriage-gap TAXONOMY itself. Its stems are what a human reads to
+      # see what the engine could not carry; over-merging two distinct failure
+      # modes under one stem would be a false receipt, so the check pins both
+      # directions (same mode collapses, different modes stay apart).
+      - name: 'extract:figma:gauntlet:noteclass:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:gauntlet:noteclass:check
+
+      - name: 'extract:figma:cbds:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:cbds:check
+
+      - name: 'extract:figma:cbds:batch:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:cbds:batch:check
+
+      - name: 'extract:figma:cbds:bridge:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:cbds:bridge:check
+
+      - name: 'extract:figma:canvas:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:canvas:check
+
+      - name: 'extract:figma:dialog:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:dialog:check
+
+      - name: 'extract:figma:composite:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:composite:check
+
+      - name: 'extract:figma:cross:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:cross:check
+
+      - name: 'extract:figma:partstate:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:partstate:check
+
+      - name: 'extract:figma:tooltip:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:tooltip:check
+
+      - name: 'extract:figma:overlap:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:overlap:check
+
+      - name: 'extract:figma:wrap:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:wrap:check
+
+      - name: 'extract:figma:constraints:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:constraints:check
+
+      - name: 'extract:figma:repeat:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:repeat:check
+
+      - name: 'extract:figma:theme:check'
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:figma:theme:check

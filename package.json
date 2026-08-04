@@ -8,6 +8,8 @@
   "type": "module",
   "description": "Proof of concept: a machine-readable component contract as the single source of truth between the Figma canvas and code.",
   "scripts": {
+    "ci:lanes": "tsx .github/scripts/lane-coverage.ts",
+    "ci:lane": "tsx .github/scripts/run-lane.ts",
     "tokens": "node scripts/build-tokens.mjs",
     "schema": "tsx scripts/emit-schema.ts",
     "generate": "tsx scripts/generate-components.ts",
@@ -54,6 +56,7 @@
     "extract:figma:repeat:check": "tsx extract/figma/repeat-collection-check.ts",
     "extract:figma:theme:check": "tsx extract/figma/theme-mode-check.ts",
     "extract:figma:gauntlet": "tsx extract/figma/gauntlet/census.ts",
+    "extract:figma:gauntlet:noteclass:check": "tsx extract/figma/gauntlet/note-class-check.ts",
     "extract:figma:gauntlet:classfix": "tsx extract/figma/gauntlet/class-fix-check.ts",
     "extract:figma:gauntlet:live": "tsx extract/figma/gauntlet/live/gauntlet.ts",
     "extract:figma:gauntlet:live:visual": "tsx extract/figma/gauntlet/live/visual-live.ts",

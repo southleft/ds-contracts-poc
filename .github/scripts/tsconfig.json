@@ -1,0 +1,6 @@
+{
+  "//": "The root tsconfig's `include` list names src/scripts/core/extract/parity/evals/conformance — it does NOT name .github, so `npm run typecheck` would leave this directory's TypeScript unchecked and a type error here would first appear as a red CI run. This project file closes that hole; the FAST lane runs it as its own step.",
+  "extends": "../../tsconfig.json",
+  "include": ["."],
+  "exclude": []
+}

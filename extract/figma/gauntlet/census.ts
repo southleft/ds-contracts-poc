@@ -57,6 +57,10 @@ import { proposeBatchFromDump } from '../../../core/propose-figma.js';
 import { kebab } from '../../types.js';
 import { loadTokenCorpus } from '../tokens.js';
 import { loadContracts } from '../propose.js';
+/** A named NOTE → its class: the RULE that fired, never the place it fired on.
+ *  Same idea as violationClass and deliberately coarser (notes are prose); the
+ *  measured before/after and the mechanism live in that file's header. */
+import { noteClassOf } from './note-class.js';
 
 const ROOT = process.cwd();
 const OUT_DIR = path.join(ROOT, 'extract', 'figma', 'gauntlet');
@@ -207,36 +211,6 @@ if (duplicateDegradations > 0) {
  *  classes listed here are ranked with a "fix in flight" marker instead of
  *  counted as unknowns. */
 const FIX_IN_FLIGHT = new Set(['duplicate-part-name']);
-
-/** A named NOTE → its class. Same idea as violationClass and deliberately
- *  coarser: notes are prose, so the stem drops node paths, quoted spellings,
- *  refs and numbers, keeping the RULE that fired. Two notes about different
- *  parts hitting the same rule must land in one bucket or the count measures
- *  kit size instead of vocabulary gaps. */
-function noteClassOf(note: string): string {
-  // The RULE that fired, not the instance it fired on. A first cut kept the
-  // whole stem and produced 1,703 "classes" over three systems — that is not a
-  // taxonomy, it is one bucket per note, and a number like that can never
-  // trend to zero. Notes are written as "<where>: <rule> — <explanation>", so
-  // the class is the RULE clause: everything before the first em-dash, with
-  // paths, quoted spellings, refs and measurements removed.
-  // Notes carry MULTIPLE colons ("Atoms/Button:root/Label fill (state hover):
-  // bindings are …"), so stripping to the first one left the node path in the
-  // key and every part got its own bucket. Take the text after the LAST ': '
-  // that still leaves a sentence, then the rule clause before the em-dash.
-  const parts = note.split(': ');
-  const afterWhere = parts.length > 1 ? parts.slice(1).join(': ') : note;
-  const rule = afterWhere.split(' — ')[0];
-  return rule
-    .replace(/\{[^{}]*\}/g, '{…}')
-    .replace(/"[^"]*"/g, '"…"')
-    .replace(/\([^)]*\)/g, '')
-    .replace(/\b[a-z-]+\.[a-z0-9.-]+\b/gi, '…')
-    .replace(/\b\d+(\.\d+)?(px|%)?\b/g, 'N')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 70);
-}
 
 function violationClass(message: string): string {
   if (message.includes('does not exist in tokens/')) return 'token-ref-unknown';
@@ -481,7 +455,7 @@ for (const setName of setKeys) {
       if (!proposal) throw new Error('set neither proposed nor skipped — batch invariant broken');
       rec.proposed = true;
       rec.noteCount = proposal.notes.length;
-      rec.noteClasses = [...new Set(proposal.notes.map(noteClassOf))].sort();
+      rec.noteClasses = [...new Set(proposal.notes.map((n) => noteClassOf(n, setName)))].sort();
       rec.unboundCount = proposal.unbound.length;
       rec.mintedCount = proposal.mintedTokens?.count ?? 0;
       rec.tokenRefsCarried = (JSON.stringify(proposal.contract).match(TOKEN_REF) ?? []).length;

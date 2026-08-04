@@ -12,11 +12,11 @@ introducing new classes. Until then, "done" is not available at any score.
 
 | # | system | origin | tier | sets | clean | NEW refusals | NEW carriage gaps | total classes |
 |---|---|---|---|---:|---:|---:|---:|---:|
-| 1 | cbds | ours | XL | 1618 | 100.0% | **0** | **705** | 705 |
-| 2 | untitled-ui | third-party | M | 15 | 93.3% | **1** | **287** | 336 |
-| 3 | eventz | ours | S | 7 | 100.0% | **0** | **46** | 93 |
+| 1 | cbds | ours | XL | 1618 | 100.0% | **0** | **94** | 94 |
+| 2 | untitled-ui | third-party | M | 15 | 93.3% | **1** | **52** | 98 |
+| 3 | eventz | ours | S | 7 | 100.0% | **0** | **12** | 61 |
 
-**1 distinct refusal class(es) and 1038 distinct CARRIAGE-GAP class(es)
+**1 distinct refusal class(es) and 158 distinct CARRIAGE-GAP class(es)
 across 3 system(s).** Both NEW columns must reach zero.
 
 A REFUSAL is loud — a surface declined to emit. A CARRIAGE GAP is quiet: every
@@ -32,17 +32,28 @@ census and the counts are small and nameable. On its first run it caught a real 
 — Untitled UI's Avatar overrides a child's `size` that the child never declares
 overridable, so all four surfaces refuse that set.
 
-**The CARRIAGE-GAP column is not a taxonomy yet, and should not be read as one.**
-It is normalised to the rule clause of each note, which took the distinct count from
-1,703 to the numbers above — real progress, and still far too many to trend to zero.
-Eventz at 46 is close to nameable; CBDS at 705 is dominated by per-icon variation
-across 1,542 single-variant components and is measuring kit size as much as
-vocabulary. The column is committed anyway because the DIMENSION is the point: a
-convergence metric that counted only refusals would have called Eventz converged on
-the same round it silently lost its hover plane. Sharpening the normaliser until
-these counts are nameable classes is the next piece of work, and until then the
-honest reading of the second column is "this many distinct note shapes", not "this
-many vocabulary gaps".
+**The CARRIAGE-GAP column is a taxonomy now — read it as one, with one caveat.**
+It was not. Measured over these same three systems (8,199 notes), the normaliser
+produced **1,068 classes, 660 of them singletons (61.8%)**, because it took the text
+after the first `": "` in a note: fine for `"<where>: <rule>"`, and for the mint
+receipts — whose first `": "` is `bound at: ` — it made the LIST OF BOUND NODE PATHS
+the class name. 851 classes still carried a `:root` path. Two of three classes being
+singletons is not a taxonomy, it is a list.
+
+The stem is now positional (`extract/figma/gauntlet/note-class.ts`): node paths are
+redacted wherever they appear, the class is the rule clause before the em-dash, and
+repeated markers collapse. Same corpus: **158 classes, 27 singletons (17.1%)**. The
+surviving singletons are one-off ENGINE behaviours that genuinely fired once (square
+arc caps, negative itemSpacing, a self-claimed stub box) — not one bucket per part.
+Both directions are pinned on hand-built pairs in `note-class-check.ts`, because
+over-merging is the worse failure: two different defects under one name is a false
+receipt, and the second defect vanishes from the count meant to drive the next round.
+
+THE CAVEAT: the class drops the CSS channel and the part path, so `gap` and
+`border-radius` refused for the same reason are one class. That is deliberate — it is
+the vocabulary gap that must trend to zero, not the number of places it shows up —
+but it means this column counts RULES, never occurrences. The occurrence count lives
+in each census.json.
 
 ## Size coverage
 
@@ -61,10 +72,10 @@ simply unmeasured — the honest word for it is not "passing".
 
 - **cbds** (XL, 1618 sets) — the owner's kit — the breadth case: 1,618 sets, 95% single-variant icons, real composites.
   - no new refusal classes.
-  - 705 NEW carriage-gap class(es), e.g. ``; `Accordion Group Test:root background-color, Accordion Group Test:root/`; `Accordion Group Test:root border-radius`; `Accordion Group Test:root gap`; `Accordion Group Test:root padding-block`
+  - 94 NEW carriage-gap class(es), e.g. `DEGRADATION part omitted`; `DROP_SHADOW proposed as a box-shadow value`; `INSTANCE_SWAP-bound instance without a dedicated wrapper frame`; `MINTED {…} = … — machine-named from a resolved value`; `N adjacent sibling instances of "…" but no per-item field is carriable`
 - **untitled-ui** (M, 15 sets) — a real Figma Community kit — the only PIXEL-VERIFIED system (537 variants scored), publishes ZERO variables.
   - 1 NEW refusal class(es): `part "…" overrides "…" but ds.… does not declare it overridable — the child's CSS would ne`
-  - 287 NEW carriage-gap class(es), e.g. `Avatar group:root gap`; `Avatar group:root padding-right`; `Avatar group:root/Avatars gap`; `Avatar label group:root gap`; `Avatar label group:root/Text and supporting text/Supporting text color`
+  - 52 NEW carriage-gap class(es), e.g. `IMAGE fill carried BY HASH`; `MINTED {…} = … — a SIZING MODE, not a measure: this plane HUGS its content on the canvas, `; `MINTED {…} = … — stub geometry`; `N observed character override in this set's dump were NOT carried because no proposed part`; `N of N occurrence … is read as LEFT×TOP`
 - **eventz** (S, 7 sets) — a variables-based system — 376 variables, 3 collections, Light/Dark; the real-token-name path.
   - no new refusal classes.
-  - 46 NEW carriage-gap class(es), e.g. `Atoms/Badge:root height`; `Atoms/Badge:root width`; `Atoms/Badge:root/Label color`; `Atoms/Badge:root/Label font-size`; `Atoms/Badge:root/Label font-weight`
+  - 12 NEW carriage-gap class(es), e.g. `N state-axis variant wrapped an instance of the set's own base component`; `base instance "…": property "…" is one of the set's own variant axes`; `bound variable on "…" has no contract vocabulary`; `observed N -N carried as a PROVISIONAL minted token`; `opacity differs in state "…" with bound variables in play`

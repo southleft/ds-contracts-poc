@@ -1,0 +1,91 @@
+# DEPLOY FRESHNESS — deliberately NOT in the fast or full lane.
+#
+# WHY IT IS NOT A PR GATE. `npm run deploy:check` compares locally built
+# artifacts against the bytes Cloudflare Pages is serving right now:
+#
+#   playground/dist/ds-contracts-sync-runner-plugin.zip  vs  ds-contracts-playground.pages.dev
+#   playground/dist/index.html (hashed asset names)      vs  the live index.html
+#   site/dist/get-started/index.html (sha256)            vs  ds-contracts-spec.pages.dev
+#
+# Both Pages projects are DIRECT UPLOAD — nothing deploys unless a human runs
+# `npm run deploy`. So the check is red for every commit that has not yet been
+# deployed, which is every pull request by construction, and every push to main
+# until someone deploys. Wiring that into a merge lane would produce a check
+# that is red for reasons the contributor cannot fix, and the first thing a
+# permanently-red check teaches people is to stop reading checks. That is the
+# opposite of what this repo's deploy incident asked for.
+#
+# WHAT IT IS INSTEAD, and why BOTH triggers:
+#
+#   · workflow_dispatch — run it by hand right after `npm run deploy`, from any
+#     ref, to confirm the upload actually landed. `npm run deploy` already runs
+#     the check itself; this is the second pair of eyes when the deploy was run
+#     from a different machine.
+#
+#   · schedule (daily, 13:00 UTC) — this is the trigger that answers the
+#     question the incident actually raised. On 2026-08-03 the live playground
+#     had been serving a mid-July plugin build for three weeks: six tabs deleted
+#     on 2026-07-26, an engine eleven dump revisions behind. Every build-time
+#     guard was green the whole time, because the failure was one step later.
+#     A daily run on the default branch turns "main has drifted ahead of what
+#     the world can see" from a thing someone eventually notices into a dated,
+#     named red. It is EXPECTED to be red between a merge and a deploy; that is
+#     the signal, not a bug. If it is red, the fix is `npm run deploy`, not a
+#     code change.
+#
+# Scheduled runs always use the default branch (main). It needs no credentials
+# — public URLs plus local files.
+#
+# UNVERIFIED, AND SAY SO: this job was never executed before being committed —
+# there is no way to trigger GitHub Actions from the machine that wrote it, and
+# `npm run deploy:check` is not something to fire at the live surfaces on a whim.
+# The specific risk is CROSS-PLATFORM BUILD IDENTITY: the comparison assumes the
+# artifacts this runner builds on ubuntu are byte-identical to the ones the
+# owner's macOS `npm run deploy` uploaded. The zip is deterministic by
+# construction (build-plugin-zip pins its timestamps), but the vite content
+# hashes and the site HTML are not proven platform-independent. So the FIRST red
+# from this job is a claim to triage, not a fact: reproduce with a local
+# `npm run deploy:check` before believing the live surfaces are stale. If it
+# turns out platform-sensitive, the honest fix is to have `npm run deploy`
+# publish the sha it uploaded and compare against that instead.
+name: deploy-check
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 13:00 UTC daily. Cron on GitHub is best-effort and can be delayed under
+    # load; that is fine for a freshness question measured in days.
+    - cron: '0 13 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-check:
+    name: live surfaces match this ref
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.4'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: npm ci
+        run: npm ci
+
+      # deploy-check.mjs REFUSES BY NAME when a local artifact is missing
+      # rather than silently passing, so all three must be built first. These
+      # are exactly the three commands its own header prescribes.
+      - name: build the three deployed artifacts
+        run: |
+          npm run plugin:zip
+          npm run build:playground
+          npm run site:build
+
+      - name: deploy:check
+        run: npm run deploy:check
