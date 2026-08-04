@@ -1,0 +1,105 @@
+# CATALOG-VISUAL LANE — the cross-surface pixel gate.
+#
+# WHY IT IS ITS OWN LANE AND NOT A STEP IN `full`. This gate drives a real
+# Chromium over 390 screenshots (195 variant cells × two surfaces). Measured by
+# `npm run ci:lane catalog-visual` on the author's machine (node v20.19.4,
+# macOS arm64): 20.8s — more than twice the whole 8.2s fast lane, and it needs
+# a browser the fast lane deliberately does not install. Putting it in `full` would also mean two
+# tracks editing the same workflow file. It runs on the same triggers as
+# `full` (every pull request, every push to main), so nothing about its
+# coverage is weaker for living here; `npm run ci:lanes` re-derives the split
+# from package.json and these files and refuses if a gate is in no lane at all.
+#
+# WHAT IT PROVES. `npm run catalog:visual:check` renders every variant cell of
+# every contract in contracts/ through BOTH emitters — core/emit-html.ts (CSS)
+# and the canvas renderer over core/emit-figma-script.ts's compiled
+# ComponentData — in one browser at one deviceScaleFactor over one token
+# stylesheet, and compares each pair against
+# extract/figma/catalog-visual/baseline.json (scores, not images: ε 0.1pp,
+# two-sided). It also runs a non-pixel invariant that a screenshot diff cannot
+# express — see that directory's README.md.
+#
+# WHAT MAKES IT REPRODUCIBLE ON A RUNNER. The committed reference is a table of
+# NUMBERS regenerated from the tree at any commit, not a set of blessed PNGs
+# and not a live Figma file. A stranger's clone runs this and gets the same
+# rows. The pinned inputs are: node 20.19.4, playwright-core's own Chromium
+# revision (from package-lock.json), deviceScaleFactor 2, a 1400×1200 viewport,
+# colorScheme light, animations frozen.
+#
+# THE ONE ENVIRONMENT-SENSITIVE INPUT is the font face. The gate prints
+# `Inter <true|false>`; text regions are excluded from the MASKED score for
+# exactly this reason, and the masked point is the one the summary reports.
+# The unmasked point is compared too and IS font-sensitive: if this lane goes
+# red on a runner with unmasked-only deltas on text-bearing cells and no
+# masked or painted-box movement, read the Inter line before reading the diff.
+#
+# HOW A FAILURE REPORTS. The single gate step carries the
+# `steps.setup.outcome == 'success'` guard so `npm run ci:lane catalog-visual`
+# can execute it locally, and so a failed `npm ci` skips it honestly instead of
+# reporting a green nothing.
+name: catalog-visual
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-visual-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  catalog-visual:
+    name: cross-surface catalog gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.4'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: npm ci
+        run: npm ci
+
+      # The one hard stop: without the install nothing below can be attempted.
+      - name: install complete
+        id: setup
+        run: echo "The gate below runs even if a later prep step fails; the job fails at the end."
+
+      # Same cache key and same install command as full.yml — playwright-core
+      # ships no browser, and chromiumExecutable() (visual-parity/render.ts,
+      # which shots.ts imports) resolves PLAYWRIGHT_CHROMIUM_PATH, then this
+      # cache, then a system Chrome. A cache hit makes the install a no-op; a
+      # corrupt cache gets repaired rather than hidden.
+      - name: cache playwright browsers
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-ms-playwright-
+
+      - name: install chromium (playwright-core ships no browser)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npx playwright-core install --with-deps chromium
+
+      # Inter is the one input this gate needs that is NOT in the repository or the
+      # lockfile. Both surfaces request `Inter, system-ui, sans-serif`, and measured,
+      # 119 of 195 cells move their painted box without it — so the run would report
+      # a corpus-wide regression that is entirely typography. The gate REFUSES when
+      # it is absent (exit 2); this step is what stops that refusal from firing.
+      - name: install Inter (a load-bearing input the repo cannot carry)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-inter || sudo apt-get install -y -qq fonts-inter-variable
+
+      - name: catalog:visual:check
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run catalog:visual:check

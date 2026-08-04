@@ -105,6 +105,7 @@
     "child-wider": "node scripts/child-wider.mjs",
     "figma:fresh": "node scripts/figma-scripts-fresh.mjs",
     "conformance:canvas": "tsx extract/figma/conformance/run.ts",
+    "catalog:visual:check": "tsx extract/figma/catalog-visual/run.ts",
     "extract:figma:roundtrip:uui": "tsx extract/figma/roundtrip-uui/run.ts",
     "ledger:uui": "tsx extract/figma/ledger/build.ts",
     "residuals:uui": "tsx extract/figma/ledger/residuals.ts",

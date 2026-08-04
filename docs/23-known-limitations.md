@@ -573,6 +573,37 @@ component, and each is stated with the number that produced it.
   own rules is in this shape, and each would need its own load-bearing test
   before the same admission could be justified.
 
+- **`max-width` becomes a FIXED WIDTH on canvas — 69 of 195 catalog cells
+  disagree on the painted box, by up to 1,164 device pixels.** Found by the
+  cross-surface catalog gate (`npm run catalog:visual:check`), which renders
+  every catalog cell through both emitters and compares them. 21 of 51
+  contracts declare `max-width` on their root;
+  `packages/schema/src/contract-schema.ts` records the intent plainly — "a
+  root/text part bakes it as a fixed width" — and the canvas emitter does
+  exactly that, while `emit-html` keeps it a ceiling so a hugging component
+  collapses to its content. Worst cells:
+
+  | cell | CSS box | canvas box | Δ |
+  |---|---|---|---|
+  | `ds.toolbar :: Size=Small` | 116×56 | **1280×56** | 1164px |
+  | `ds.chat-message :: Sender=Assistant` | 109×65 | **1264×65** | 1155px |
+  | `ds.top-nav :: TopNav` | 132×36 | **1280×36** | 1148px |
+
+  **A pixel diff alone cannot see this.** The pair is centre-padded onto a
+  union canvas and text regions are masked, so what remains on both sides is
+  white: 29 of the 69 score **0.00% masked** and carry no invariant. Until
+  2026-08-04 the triage classifier tested `text-raster` before `size-delta`
+  and filed 29 of them as glyph-rasterisation noise — a receipt naming the
+  wrong cause for a divergence three orders of magnitude past the ε band. The
+  order is now reversed and all 69 read `size-delta`, with the box receipt
+  (`sizeCss` vs `sizeCanvas`) as the finding rather than the percentage.
+
+  **What it would take — an engine decision, not a bug fix.** Either the canvas
+  emitter learns a hug-with-ceiling (Figma auto-layout can express `HUG` plus a
+  max, so this is expressible) or the contract stops overloading `max-width`
+  for two different intents. The 69 are recorded in the gate's committed
+  baseline and any growth fails the lane.
+
 - **`slot.acceptsMode: 'restrict'` has no canvas spelling.** Figma's
   `INSTANCE_SWAP` carries `preferredValues`, a picker HINT that sorts entries
   and prevents nothing. So `prefer` maps exactly, `open` maps by carrying
