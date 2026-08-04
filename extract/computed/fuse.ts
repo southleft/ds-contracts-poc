@@ -1417,6 +1417,16 @@ export const stateOfMintProperty = (cssProperty: string): { channel: string; sta
   return null;
 };
 
+/** The tags the harness renders a CONTROL for (capture.ts CONTROL_TAGS).
+ *
+ *  DUPLICATED DELIBERATELY, AND GATED. fuse.ts must not import capture.ts —
+ *  capture.ts pulls playwright and node:fs, and fusion runs offline over
+ *  committed truth (regate, the eval lane, every check in this directory). So
+ *  the list is restated here and `npm run ua-baseline:check` asserts the two
+ *  are identical, because an undetected divergence would silently change which
+ *  refusals get the fallback qualifier below. */
+export const CONTROL_TAGS_MIRROR = new Set(['button', 'span', 'a', 'div']);
+
 export function prepareMint(
   a: AlignedSweep,
   comp: ComponentConfig,
@@ -1674,8 +1684,54 @@ export function prepareMint(
             codeOnly.push({ part: partName, channel, reason: 'declared-channel value outside the bounded grammar — named residue (v15)', sample: uniform, distinctValues: values.size });
           } else if (spec) {
             codeOnly.push({ part: partName, channel, reason: 'declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue', sample: unk, distinctValues: values.size });
+          } else if (channel.startsWith('--')) {
+            // A CSS CUSTOM PROPERTY IS NOT A STYLED CHANNEL, and the generic
+            // receipt was factually wrong about these. Measured over the
+            // committed corpus: 14 of the 351 "no schema channel today"
+            // refusals are custom properties, and the reason it gave —
+            // "value shape outside mintable kinds (color/px/number/shadow/
+            // gradient)" — is FALSE for most of them. `--cds-border-subtle`
+            // is `#c6c6c6` (a colour) and `--tw-shadow` is
+            // `0 4px 6px -1px rgb(0 0 0 / 0.1), …` (a shadow); both kinds are
+            // mintable. What they are is the library's own TOKEN PLUMBING
+            // observed on the element — Carbon's `--cds-*` are Carbon's design
+            // tokens, already in its token system — not a styled fact of this
+            // component. Counting them as losses says a fact was dropped when
+            // nothing was, and blames a value shape that is perfectly mintable.
+            codeOnly.push({ part: partName, channel, reason: `CSS custom property, not a styled channel — \`${channel}\` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is \`${unk}\`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for "declares a custom property" and should not invent one.`, sample: unk, distinctValues: values.size });
           } else {
-            codeOnly.push({ part: partName, channel, reason: 'value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today', sample: unk, distinctValues: values.size });
+            // CONTROL-FALLBACK QUALIFIER. The styled-channel door admits a
+            // channel when it DIFFERS FROM THE CONTROL for this part's tag —
+            // but the harness renders controls for only four tags
+            // (CONTROL_TAGS: button/span/a/div) and every other tag falls back
+            // to the <span> control (already named by `control-fallback:` in
+            // styledChannelReceipts). Measured: 147 of 403 captured parts
+            // (36.5%) across 21 tags fall back, and 138 of these 351 refusals
+            // sit on one of them.
+            //
+            // For those the difference from the control may be the USER
+            // AGENT's, not the library's: a <td> is measured against a <span>,
+            // so `unicode-bidi: isolate`, `border-collapse: collapse` and
+            // `vertical-align: middle` — the UA's own table defaults — read as
+            // authored facts. Same for `<li> list-style-type: none` and
+            // `<svg> overflow-clip-margin`. The refusal itself does not change
+            // (nothing is carried either way), but a reader must not be told
+            // the library declared something the browser did. Widening
+            // CONTROL_TAGS is the real fix and it is a CAPTURE change — see
+            // docs/HANDOFF.md.
+            const tag = a.baseFlat[pi]?.node.tag ?? '';
+            const fellBack = tag !== '' && !CONTROL_TAGS_MIRROR.has(tag);
+            codeOnly.push({
+              part: partName,
+              channel,
+              reason:
+                'value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today' +
+                (fellBack
+                  ? `. NOTE — UNRELIABLE BASELINE: this part is a <${tag}>, and the harness renders a control for ${[...CONTROL_TAGS_MIRROR].join('/')} only, so it was measured against the <span> control (see the \`control-fallback\` receipt). The difference from that control may be the USER AGENT's default for <${tag}> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.`
+                  : ''),
+              sample: unk,
+              distinctValues: values.size,
+            });
           }
           continue;
         }

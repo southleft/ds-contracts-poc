@@ -291,6 +291,16 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:viewport:check
 
+      # Full lane, not fast: it re-fuses all 54 committed captured-truth files
+      # through the live engine (~40s, no browser). It pins that every "no
+      # schema channel today" refusal states whether its baseline was the right
+      # tag's control or the <span> fallback — 147 of 403 captured parts sit on
+      # a tag the harness renders no control for, so 138 of those refusals were
+      # silently presenting a USER-AGENT default as a fact the library authored.
+      - name: ua-baseline:check (a refusal may only claim what its baseline supports)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run ua-baseline:check
+
       # ------------------------------------------- the extract:figma family
       # Fifteen separate steps on purpose. They cost ~0.3s each, and a single
       # `npm run a && npm run b && …` chain would stop at the first refusal and
