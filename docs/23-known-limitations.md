@@ -332,6 +332,26 @@ spelling. `conformance/EXPECTATIONS.md` lines 72/73/98 still show exactly three
 - **`stage-box-equal`** — a captured box exactly equal to the harness stage box
   (100% × 100%) is carried as a component fact. This is the general form of the
   100vh-scrim defect: a measurement artefact promoted into a contract.
+  **The VIEWPORT half of this is now closed (2026-08-04, `a2c4c19`), and
+  closing it corrected this entry's own diagnosis.** The measured artefacts
+  were not equal to the *stage* box (320×96) — they were equal to the
+  *browser window* (900×1000), reached by two chains the stage never bounds:
+  an out-of-flow box resolved against the initial containing block, and an
+  in-flow block child of `<body>` (the capture page sets `body { margin: 0 }`,
+  so the body content box **is** the window). Fusion is now told what the
+  window and the stage were, and refuses a channel only when BOTH the
+  structure (out of flow, no containing-block ancestor in the captured tree)
+  and the CSS 2.1 over-constrained arithmetic say the box was laid out against
+  the window — quoting that arithmetic in the receipt. That withdrew 39 minted
+  leaves across 7 components in 4 of the 6 libraries, including `carbon`
+  Toggle's hidden input at `top: 22656px`. A value-matching rule could not
+  have done it: `mui/dialog` mints `root.width = 900px` (the window) and
+  `dialog-paper.max-width.md = 900px` (MUI's real `md` breakpoint) in the
+  **same file**. Still open in this class: a value resolved from a viewport
+  *unit* rather than a containing block — Flowbite's `max-h-[90dvh]` computes
+  to `max-height: 900px`, which no box identity can see and which needs a
+  second capture at a different viewport height to distinguish from a real
+  900px token.
 
 **What you'd observe** — a responsive component's desktop values baked into a
 canvas variant with no note that a mobile branch exists.
