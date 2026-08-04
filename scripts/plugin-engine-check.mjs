@@ -1598,6 +1598,67 @@ return { ok: true };
   console.log(
     '✔ canvas→code (task #40): a proposal states what code it becomes (react → Badge/Badge.module.css, Badge/Badge.tsx, Badge/index.ts; html + react-inline named as alternatives) and stamps the round-trip fact into the CONTRACT-PROPOSAL envelope — tool-generated says "byte for byte", hand-built says "STARTING POINT, NOT A REPRODUCTION", and an unknown marker says "not recorded" rather than either',
   );
+
+  // (e) ENVELOPE v2 — THE EXPORT CARRIES ALL THREE ENGINE OUTPUTS (ranked
+  // item #5). proposeFromDump has always returned { contract, notes,
+  // unbound, mintedTokens?, childStubs? }; the CONTRACT-PROPOSAL export used
+  // to carry only the contract, so the engine's own "auto-proposed alongside
+  // (childStubs…)" note was a false receipt on every export surface and the
+  // received contract's refs refused by name. THIS PIN IS THE FALSIFICATION
+  // GATE: it fails if either payload ever goes missing from the envelope
+  // again. The set below is engineered to force BOTH payloads — a nested
+  // INSTANCE of a component with no contract in scope (→ childStubs) and a
+  // raw, token-less fill (→ mintedTokens via mintUnbound).
+  await runScript(`
+const page = figma.root.children[0];
+const foreign = figma.createComponent(); foreign.name = 'ForeignChip';
+foreign.resize(24, 24);
+foreign.fills = [{ type: 'SOLID', color: { r: 0.5, g: 0.1, b: 0.9 } }];
+page.appendChild(foreign);
+const mk = (state) => {
+  const c = figma.createComponent(); c.name = 'State=' + state;
+  c.fills = [{ type: 'SOLID', color: { r: 0.97, g: 0.32, b: 0.11 } }];
+  c.appendChild(foreign.createInstance());
+  page.appendChild(c);
+  return c;
+};
+const set = figma.combineAsVariants([mk('rest'), mk('busy')], page);
+set.name = 'HostCard';
+return { ok: true };
+`);
+  const hostDump = await runScript(
+    source.replace(/^const TARGET_SETS = \[[^\n]*\];$/m, `const TARGET_SETS = ${JSON.stringify(['HostCard'])};`),
+  );
+  assert(hostDump && hostDump.HostCard, 'envelope v2: the dump captures the HostCard set (foreign instance + raw fill)');
+  const withStub = DSC.proposeDiff(hostDump, 'HostCard', null, { toolGenerated: false });
+  assert(withStub.ok, `envelope v2: HostCard proposes (${withStub.ok ? '' : withStub.issue.headline})`);
+  const v2 = JSON.parse(withStub.exportJson);
+  assert(
+    Array.isArray(v2.childStubs) && v2.childStubs.length >= 1 && v2.childStubs.every((s) => s && typeof s.id === 'string'),
+    'ENVELOPE v2 REGRESSION: the CONTRACT-PROPOSAL export no longer carries childStubs — the received contract ships dangling component refs that generate refuses by name (ranked #5)',
+  );
+  assert(
+    v2.mintedTokens && v2.mintedTokens.tree && typeof v2.mintedTokens.tree === 'object' &&
+      !Array.isArray(v2.mintedTokens.tree) && Object.keys(v2.mintedTokens.tree).length >= 1 &&
+      typeof v2.mintedTokens.count === 'number' && v2.mintedTokens.count >= 1,
+    'ENVELOPE v2 REGRESSION: the CONTRACT-PROPOSAL export no longer carries mintedTokens — the proposal\'s {imported.*} refs have nothing to resolve through (ranked #5)',
+  );
+  const stubIds = v2.childStubs.map((s) => s.id);
+  const proposedJson2 = JSON.stringify(v2.proposedContract);
+  assert(
+    stubIds.some((id) => proposedJson2.includes(`"${id}"`)),
+    `envelope v2: the proposed contract references a carried stub (${stubIds.join(', ')}) — the stub is a payload the contract needs, not a passenger`,
+  );
+  // The typed result mirrors the envelope — the Send tab reads these fields
+  // off proposeDiff directly.
+  assert(
+    Array.isArray(withStub.childStubs) && withStub.childStubs.length === v2.childStubs.length &&
+      withStub.mintedTokens && withStub.mintedTokens.count === v2.mintedTokens.count,
+    'envelope v2: proposeDiff\'s typed result carries the same childStubs/mintedTokens the exportJson does',
+  );
+  console.log(
+    `✔ envelope v2: the CONTRACT-PROPOSAL export carries ALL THREE engine outputs — proposedContract + ${v2.childStubs.length} childStub(s) (${stubIds.join(', ')}) + mintedTokens (${v2.mintedTokens.count} token(s)); this pin fails the build if either payload is ever dropped again`,
+  );
   if (process.argv.includes('--show-brownfield')) {
     console.log('\n--- scan rows (plain words) ---\n  ' + report.lines.join('\n  '));
     console.log('\n--- base-less proposal for "HandBuilt" ---\n  ' + baseless.summaryLines.join('\n  ') + '\n');

@@ -355,7 +355,20 @@ export interface DumpFile {
    *  visibility-bound node NOT hidden in the default variant recovers a
    *  boolean default of true only when the producer is known to capture
    *  `hidden` (absent marker → absence stays "not captured"). */
-  _provenance?: { fileKey?: string | null; extractedAt?: string | number; note?: string; dumpVersion?: string };
+  _provenance?: {
+    fileKey?: string | null;
+    extractedAt?: string | number;
+    note?: string;
+    dumpVersion?: string;
+    /** READ-LIMIT receipts (REST route, 2026-08-03): channels this dump's
+     *  PRODUCER cannot capture, one human-readable entry each. Stamped by
+     *  extract/figma/rest/map.ts; the propose pass surfaces them as a named
+     *  note so "absent from the dump" and "absent from the design" stay
+     *  different facts. Absent on plugin dumps (full capture) and on
+     *  hand-authored fixtures — absence adds no note, so committed corpora
+     *  are byte-stable. */
+    captureGaps?: string[];
+  };
   /** dump v1.2, additive — absent in older dumps (their captures were run
    *  before the channel existed; absence means "not receipted", not clean). */
   _degradations?: DumpDegradation[];

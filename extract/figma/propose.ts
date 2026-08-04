@@ -117,7 +117,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { DumpFile } from './types.js';
 import { isDumpSet } from './types.js';
-import { loadTokenCorpus, NoTokenCorpusError } from './tokens.js';
+import { loadTokenCorpus, mergeTokenTrees, NoTokenCorpusError } from './tokens.js';
 import { loadConfig } from '../config.js';
 import { componentIdSlug, dumpCapturesHidden, figmaProposalsReport, proposeFromDump, type FigmaProposalResult } from '../../core/propose-figma.js';
 
@@ -216,6 +216,16 @@ function main() {
   const tokenFiles = tokensFlag
     ? tokensFlag.split(',').map((s) => s.trim()).filter(Boolean)
     : configTokens;
+  /** Mirror of tokens.ts REPO_LAYOUT — the fallback corpus loadTokenCorpus
+   *  reaches for when nothing was supplied. Named here so the printed
+   *  generate command and the fallback warning can state the exact files. */
+  const REPO_FALLBACK_FILES = [
+    'tokens/primitives.tokens.json',
+    'tokens/semantic.tokens.json',
+    'tokens/modes/semantic.light.tokens.json',
+    'tokens/modes/brand.default.tokens.json',
+  ];
+  const usedFallbackCorpus = !tokenFiles || tokenFiles.length === 0;
   let corpus;
   try {
     corpus = loadTokenCorpus(root, {
@@ -229,12 +239,30 @@ function main() {
     }
     throw e;
   }
+  if (usedFallbackCorpus) {
+    // MEASURED HAZARD (the export-envelope round): with no supplied corpus a
+    // FOREIGN kit's canvas values silently bind this repo's demo tokens
+    // (e.g. {font.control.size.md}) wherever the raw values coincide —
+    // wrong by construction. Named, never silent.
+    console.warn(
+      `⚠ No token corpus was supplied (--tokens / extract.config.json "tokens") — the repo-demo reference tokens (${REPO_FALLBACK_FILES.join(', ')}) are the matching corpus. ` +
+        'For a FOREIGN design kit this binds its canvas values to THIS repo\'s token names wherever the raw values coincide (e.g. {font.control.size.md}) — wrong by construction. Pass the kit\'s own DTCG files instead.',
+    );
+  }
+  const corpusFiles = usedFallbackCorpus ? REPO_FALLBACK_FILES : (tokenFiles as string[]);
   const loaded = loadContracts(path.resolve(root, contractsDir));
   const contractIdByName = loaded.byName;
   const fileKey = dump._provenance?.fileKey ?? null;
 
   const results: Array<{ setName: string; proposal: FigmaProposalResult }> = [];
   mkdirSync(path.resolve(root, outDir), { recursive: true });
+  const proposalFiles: string[] = [];
+  /** ENVELOPE v2 at the CLI door: the engine's other two outputs land as
+   *  files instead of being dropped. Stubs dedupe by id across sets; minted
+   *  trees merge into ONE DTCG file (the uui-pipeline convention). */
+  const stubById = new Map<string, Record<string, unknown>>();
+  const mintedTree: Record<string, unknown> = {};
+  let mintedCount = 0;
   for (const [name, value] of Object.entries(dump)) {
     if (name === '_provenance' || !isDumpSet(value)) continue;
     const proposal = proposeFromDump(value, {
@@ -243,6 +271,10 @@ function main() {
       contractsById: loaded.byId,
       contractIdByKey: loaded.byKey,
       fileKey,
+      // The engine has always been able to mint the unbound values it names;
+      // this door just never asked, then exported contracts whose {imported.*}
+      // refs had nothing to resolve through.
+      mintUnbound: true,
       hiddenCaptured: dumpCapturesHidden(dump._provenance),
     });
     results.push({ setName: name, proposal });
@@ -250,10 +282,83 @@ function main() {
     // Medium" must not turn the output filename into a directory walk.
     const file = path.resolve(root, outDir, `${componentIdSlug(name)}.contract.proposed.json`);
     writeFileSync(file, JSON.stringify(proposal.contract, null, 2) + '\n');
+    proposalFiles.push(path.relative(root, file));
     console.log(`✔ ${name} → ${path.relative(root, file)} (${proposal.notes.length} notes, ${proposal.unbound.length} unbound value(s))`);
+    for (const stub of proposal.childStubs ?? []) {
+      const stubId = String((stub as { id?: unknown }).id ?? '');
+      if (stubId) stubById.set(stubId, stub);
+    }
+    if (proposal.mintedTokens) {
+      Object.assign(mintedTree, mergeTokenTrees([mintedTree, proposal.mintedTokens.tree]));
+    }
   }
-  writeFileSync(path.resolve(root, outDir, 'figma-proposals.md'), figmaProposalsReport(results) + '\n');
+  // Count the MERGED tree's leaves — summing per-set counts would double-
+  // count a leaf two sets both minted, and a wrong count is a wrong receipt.
+  const countLeaves = (node: Record<string, unknown>): number =>
+    Object.entries(node).reduce((n, [k, v]) => {
+      if (k.startsWith('$')) return n;
+      if (v && typeof v === 'object' && '$value' in (v as object)) return n + 1;
+      if (v && typeof v === 'object') return n + countLeaves(v as Record<string, unknown>);
+      return n;
+    }, 0);
+  mintedCount = countLeaves(mintedTree);
+  // A stub whose id a REAL proposal (or an in-scope contract) already claims
+  // is not written — the real document wins, and the skip is named.
+  const proposedIds = new Set(results.map(({ proposal }) => String((proposal.contract as { id?: unknown }).id ?? '')));
+  const stubFiles: string[] = [];
+  const stubSkips: string[] = [];
+  for (const [stubId, stub] of stubById) {
+    if (proposedIds.has(stubId) || loaded.byId.has(stubId)) {
+      stubSkips.push(`stub ${stubId}: skipped — a real contract with this id is already in scope`);
+      continue;
+    }
+    const file = path.resolve(root, outDir, `${componentIdSlug(stubId)}.stub.contract.proposed.json`);
+    writeFileSync(file, JSON.stringify(stub, null, 2) + '\n');
+    stubFiles.push(path.relative(root, file));
+    console.log(`✔ stub ${stubId} → ${path.relative(root, file)} (auto-proposed; replace by importing the real child set)`);
+  }
+  for (const line of stubSkips) console.log(`  ${line}`);
+  let mintedFile: string | null = null;
+  if (Object.keys(mintedTree).length > 0) {
+    const file = path.resolve(root, outDir, 'minted.dtcg.json');
+    writeFileSync(file, JSON.stringify(mintedTree, null, 2) + '\n');
+    mintedFile = path.relative(root, file);
+    console.log(`✔ minted token tree (${mintedCount} token(s), provisional names) → ${mintedFile}`);
+  }
+
+  // The runnable next step — the exact generate invocation whose --tokens
+  // carries the corpus this run matched against PLUS the minted tree, so the
+  // first generate resolves every ref instead of refusing one by name.
+  const generateCommand =
+    proposalFiles.length > 0
+      ? `npx ds-contracts generate ${[...proposalFiles, ...stubFiles].join(' ')} --out ${path.join(outDir, 'generated')} --stories --tokens ${[...corpusFiles, ...(mintedFile ? [mintedFile] : [])].join(',')}`
+      : null;
+
+  const reportExtras = [
+    '',
+    '## Export envelope (v2) — everything this run wrote',
+    '',
+    ...proposalFiles.map((f) => `- contract: ${f}`),
+    ...stubFiles.map((f) => `- stub contract: ${f} (auto-proposed; replace by importing the real child set)`),
+    ...stubSkips.map((l) => `- ${l}`),
+    ...(mintedFile
+      ? [`- minted token tree: ${mintedFile} (${mintedCount} token(s); machine-derived provisional names)`]
+      : ['- no minted token tree (nothing needed minting)']),
+    ...(usedFallbackCorpus
+      ? [
+          `- ⚠ corpus fallback: no token corpus was supplied, so the repo-demo reference tokens (${REPO_FALLBACK_FILES.join(', ')}) matched the canvas values — for a foreign kit this binds their values to this repo's token names, wrong by construction.`,
+        ]
+      : [`- token corpus: ${corpusFiles.join(', ')}`]),
+    ...(generateCommand ? ['', 'Next — generate the code:', '', '```', generateCommand, '```'] : []),
+  ];
+  writeFileSync(
+    path.resolve(root, outDir, 'figma-proposals.md'),
+    figmaProposalsReport(results) + reportExtras.join('\n') + '\n',
+  );
   console.log(`✔ report → ${path.join(outDir, 'figma-proposals.md')}`);
+  if (generateCommand) {
+    console.log(`\nNext — generate the code (the minted tree rides --tokens so every ref resolves):\n  ${generateCommand}`);
+  }
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {

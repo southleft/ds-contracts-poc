@@ -40,15 +40,20 @@
  *
  *   figma receive --out <contracts-dir> [--bridge <url>] [--apply]
  *       the DEV DOOR: open a bridge session, print the pairing code, wait
- *       for the plugin's Propose tab to send its CONTRACT-PROPOSAL under
+ *       for the plugin's Send tab to send its CONTRACT-PROPOSAL under
  *       that code, then land it as a REVIEWED LOCAL DIFF. Without --apply
  *       nothing but the proposal artifact (<out>/.proposals/<id>.proposal.json)
  *       is written — the contract file is never touched silently. With
- *       --apply the contract file is written too, AND the component code that
- *       contract generates (the same resolveCodeConfig/generateCodeFiles
- *       propose-pr uses — the target comes from ds-contracts.config.json and
- *       is never guessed; with none recorded the refusal is printed and no
- *       code is written). git stays yours.
+ *       --apply the contract file is written too, PLUS the envelope's other
+ *       two engine outputs (v2): each auto-proposed childStub as its own
+ *       contract file and the minted DTCG tree as <id>.minted.dtcg.json —
+ *       then the exact runnable `generate` command (minted tree on --tokens)
+ *       is printed so the first generate succeeds instead of refusing the
+ *       stubs' refs by name. AND the component code that contract generates
+ *       (the same resolveCodeConfig/generateCodeFiles propose-pr uses — the
+ *       target comes from ds-contracts.config.json and is never guessed;
+ *       with none recorded the refusal is printed and no code is written).
+ *       git stays yours.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -276,7 +281,7 @@ async function bundleCommand(argv: string[]): Promise<number> {
   writeFileSync(outPath, text);
   const baseCount = Object.keys(base).length;
   console.log(
-    `✔ Bundle written: ${out} — ${contracts.length} contract(s) + tokenSet "${name}" (${baseCount} base tokens${minted ? ', minted tree' : ''}${light || dark ? `, modes: ${[light && 'light', dark && 'dark'].filter(Boolean).join('/')}` : ''}${icons ? `, ${Object.keys(icons).length} icon asset(s)` : ''}; ${text.length} bytes). Paste it into the plugin's Generate tab — JSON is the only thing a user ever pastes.`,
+    `✔ Bundle written: ${out} — ${contracts.length} contract(s) + tokenSet "${name}" (${baseCount} base tokens${minted ? ', minted tree' : ''}${light || dark ? `, modes: ${[light && 'light', dark && 'dark'].filter(Boolean).join('/')}` : ''}${icons ? `, ${Object.keys(icons).length} icon asset(s)` : ''}; ${text.length} bytes). Paste it into the plugin's Build tab — JSON is the only thing a user ever pastes.`,
   );
   return 0;
 }
@@ -288,7 +293,7 @@ async function pushCommand(argv: string[]): Promise<number> {
   const code = flagString(parsed, 'code');
   if (!code) {
     throw new CliUsageError(
-      'figma push needs --code <PAIRING-CODE> — the 6-character code shown in the Figma plugin’s Receive panel',
+      'figma push needs --code <PAIRING-CODE> — the 6-character code the designer TYPES into the Build tab’s "Receive by code" box in the Figma plugin (the plugin never displays a code; you and the designer share one from a bridge session)',
     );
   }
   const base = (
@@ -443,7 +448,7 @@ async function claimChannelCommand(argv: string[]): Promise<number> {
   console.log(`       (GitHub: Settings → Secrets and variables → Actions → New repository secret)\n`);
   console.log(`  READ KEY (the designer's half — it only READS; paste it into the Figma plugin):`);
   console.log(`    ${answer.readKey}`);
-  console.log(`    → Figma plugin → Generate or Update library → the channel key field\n`);
+  console.log(`    → Figma plugin → Changes tab → the channel key field\n`);
   console.log(
     `  The read key is sha256(write key): holding the write key you can compute the read key, but a\n` +
       `  leaked read key can never publish. That is why a shared Figma file cannot inject into your\n` +
@@ -530,12 +535,12 @@ async function publishCommand(argv: string[]): Promise<number> {
 }
 
 // ---------------------------------------------------------------------------
-// figma receive — the dev door (plugin Propose tab → reviewed local diff).
+// figma receive — the dev door (plugin Send tab → reviewed local diff).
 // PURE CORE below (parse / plan / diff — unit-pinned, no I/O), thin shell at
 // the bottom (network + filesystem, executes exactly what the plan says).
 // ---------------------------------------------------------------------------
 
-/** The proposal envelope the plugin's Propose tab exports (engine
+/** The proposal envelope the plugin's Send tab exports (engine
  *  proposeDiff's exportJson) and the bridge tags as kind 'proposal'. */
 export const CONTRACT_PROPOSAL_TYPE = 'CONTRACT-PROPOSAL';
 
@@ -547,6 +552,15 @@ export interface ProposalEnvelope {
   summary: string[];
   proposedContract: Record<string, unknown>;
   proposalNotes: string[];
+  /** ENVELOPE v2: auto-proposed STUB contracts for nested instances with no
+   *  contract in scope. The engine always produced these; the export doors
+   *  used to drop them, leaving the proposed contract with dangling
+   *  component refs that `generate` refuses by name. Absent on envelopes
+   *  from older plugin builds — that absence is accepted, never an error. */
+  childStubs?: Array<Record<string, unknown>>;
+  /** ENVELOPE v2: the minted DTCG tree the proposal's `{imported.*}` refs
+   *  resolve through, plus per-leaf entries. Absent on older envelopes. */
+  mintedTokens?: { tree: Record<string, unknown>; count?: number; entries?: unknown[] };
 }
 
 /** Envelope referee — refusals by name, never a guess. PURE. */
@@ -566,6 +580,47 @@ export function parseProposal(raw: unknown): { ok: true; proposal: ProposalEnvel
   if (typeof id !== 'string' || id.length === 0) {
     return { ok: false, error: 'neither proposedContract.id nor baseContractId names the contract — the proposal cannot be matched to a file' };
   }
+  // ENVELOPE v2 payloads. ABSENT fields are the old envelope shape and pass
+  // untouched (backward compatible); a PRESENT-but-malformed field is a
+  // named refusal — silently dropping a payload is exactly the defect this
+  // round closes.
+  let childStubs: Array<Record<string, unknown>> | undefined;
+  if (o.childStubs !== undefined && o.childStubs !== null) {
+    if (!Array.isArray(o.childStubs) || o.childStubs.some((s) => s === null || typeof s !== 'object' || Array.isArray(s))) {
+      return { ok: false, error: 'the proposal\'s "childStubs" is not an array of contract objects — re-export the proposal from the plugin\'s Send tab' };
+    }
+    childStubs = o.childStubs as Array<Record<string, unknown>>;
+  }
+  let mintedTokens: ProposalEnvelope['mintedTokens'];
+  if (o.mintedTokens !== undefined && o.mintedTokens !== null) {
+    const mt = o.mintedTokens as { tree?: unknown; count?: unknown; entries?: unknown };
+    if (typeof o.mintedTokens !== 'object' || Array.isArray(o.mintedTokens) || mt.tree === null || typeof mt.tree !== 'object' || Array.isArray(mt.tree)) {
+      return { ok: false, error: 'the proposal\'s "mintedTokens" has no DTCG "tree" object — re-export the proposal from the plugin\'s Send tab' };
+    }
+    // DEPTH GUARD (2026-08-03, adversarial verifier): a hostile deeply-nested
+    // tree used to blow the stack as an uncaught RangeError in planReceive —
+    // AFTER deliver-once had burned the payload, so the failure looked like a
+    // vanished delivery. A real DTCG tree is a few levels deep; 64 is far past
+    // any legitimate shape. Iterative, so the guard itself cannot overflow.
+    {
+      const MAX_DEPTH = 64;
+      const stack: Array<{ n: Record<string, unknown>; d: number }> = [{ n: mt.tree as Record<string, unknown>, d: 1 }];
+      while (stack.length > 0) {
+        const { n, d } = stack.pop()!;
+        if (d > MAX_DEPTH) {
+          return { ok: false, error: `the proposal's "mintedTokens.tree" nests deeper than ${MAX_DEPTH} levels — no DTCG token tree has that shape; the delivery is refused as malformed` };
+        }
+        for (const v of Object.values(n)) {
+          if (v !== null && typeof v === 'object' && !Array.isArray(v)) stack.push({ n: v as Record<string, unknown>, d: d + 1 });
+        }
+      }
+    }
+    mintedTokens = {
+      tree: mt.tree as Record<string, unknown>,
+      count: typeof mt.count === 'number' ? mt.count : undefined,
+      entries: Array.isArray(mt.entries) ? mt.entries : undefined,
+    };
+  }
   return {
     ok: true,
     proposal: {
@@ -576,15 +631,24 @@ export function parseProposal(raw: unknown): { ok: true; proposal: ProposalEnvel
       summary: Array.isArray(o.summary) ? o.summary.filter((s): s is string => typeof s === 'string') : [],
       proposedContract: proposed as Record<string, unknown>,
       proposalNotes: Array.isArray(o.proposalNotes) ? o.proposalNotes.filter((s): s is string => typeof s === 'string') : [],
+      ...(childStubs && childStubs.length > 0 ? { childStubs } : {}),
+      ...(mintedTokens ? { mintedTokens } : {}),
     },
   };
 }
 
 /** id → filename convention: the namespace prefix drops
  *  (`polaris.badge` → `badge.contract.json`) — the same convention the
- *  plugin's PR path pre-fills. PURE. */
+ *  plugin's PR path pre-fills. PURE.
+ *
+ *  TRAVERSAL-PROOF (2026-08-03, adversarial verifier): the id arrives inside a
+ *  pasted/received envelope, i.e. from OUTSIDE this process's trust boundary,
+ *  and the old form let `ds.../../x` walk the write out of --out (executed:
+ *  ESCAPED-STUB.contract.json landed one directory above the target). Every
+ *  character outside the schema's own id alphabet is replaced, path separators
+ *  included, so the result is always a single flat filename. */
 export const contractFileNameForId = (id: string): string =>
-  `${id.replace(/^[^.]+\./, '')}.contract.json`;
+  `${id.replace(/^[^.]+\./, '').replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/\.\.+/g, '.').replace(/^[.-]+|[.-]+$/g, '') || 'stub'}.contract.json`;
 
 /** Minimal unified diff (LCS over lines, 3 lines of context) — zero-dep by
  *  repo culture; contract files are small so O(n·m) is fine. PURE. */
@@ -653,21 +717,106 @@ export interface ReceivePlan {
    *  MUST NOT touch the contract file (the no-silent-write guarantee lives
    *  here, in the pure core, where it is unit-pinned). */
   contractWrite: { fileName: string; contents: string } | null;
+  /** ENVELOPE v2 — stub contracts landing as their own files. Empty without
+   *  --apply (the covenant: nothing but the proposal artifact is written)
+   *  and empty when the envelope carries none (old plugin builds). */
+  stubWrites: Array<{ contractId: string; fileName: string; contents: string }>;
+  /** Stubs NOT written, each with its named reason (e.g. a REAL contract
+   *  with that id already sits in --out — a stub must never overwrite it). */
+  stubSkips: Array<{ contractId: string; reason: string }>;
+  /** ENVELOPE v2 — the minted DTCG tree as its own token file. null without
+   *  --apply or when the envelope minted nothing. */
+  mintedWrite: { fileName: string; contents: string } | null;
+  /** The exact runnable generate invocation for everything this plan writes
+   *  (contract + stubs, --tokens including the minted tree), or null when
+   *  nothing lands (no --apply). */
+  nextCommand: string | null;
+}
+
+/** What the shell knows about the destination — planReceive stays PURE. */
+export interface ReceiveContext {
+  /** Contract ids among the envelope's childStubs that already have a REAL
+   *  contract file in --out (matched by id). Those stubs are skipped BY
+   *  NAME — a stub must never overwrite an adopted contract. */
+  existingStubIds?: ReadonlySet<string>;
+  /** ds-contracts.config.json `generate.tokens` — carried into the printed
+   *  generate command ahead of the minted tree. */
+  configTokens?: string[];
+  /** `generate.out` from the config; the printed command falls back to
+   *  "generated" so it stays runnable. */
+  codeOutDir?: string | null;
+  /** The --out directory as the user typed it (for printable paths). */
+  outDirLabel?: string;
 }
 
 /** Decide everything about landing a delivered proposal — PURE. The shell
  *  supplies the delivered envelope, the existing file (matched by contract
- *  id, or null), and whether --apply was given. */
+ *  id, or null), whether --apply was given, and the destination facts. */
 export function planReceive(
   proposal: ProposalEnvelope,
   existing: { fileName: string; text: string } | null,
   apply: boolean,
+  ctx: ReceiveContext = {},
 ): ReceivePlan {
   const contractId = String(proposal.proposedContract.id ?? proposal.baseContractId);
   const fileName = existing ? existing.fileName : contractFileNameForId(contractId);
   const newText = JSON.stringify(proposal.proposedContract, null, 2) + '\n';
   const oldText = existing ? existing.text : null;
   const changed = oldText !== newText;
+
+  // ENVELOPE v2 payloads — planned ONLY under --apply (the no-silent-write
+  // covenant covers every file, not just the headline contract; without
+  // --apply the proposal artifact carries all three payloads verbatim).
+  const stubWrites: ReceivePlan['stubWrites'] = [];
+  const stubSkips: ReceivePlan['stubSkips'] = [];
+  const seenStubIds = new Set<string>([contractId]);
+  for (const stub of proposal.childStubs ?? []) {
+    const stubId = typeof stub.id === 'string' ? stub.id : null;
+    if (!stubId) {
+      stubSkips.push({ contractId: '(unnamed)', reason: 'this stub carries no "id" — it cannot be filed and is kept only inside the proposal artifact' });
+      continue;
+    }
+    if (seenStubIds.has(stubId)) {
+      stubSkips.push({ contractId: stubId, reason: 'a contract with this id is already part of this delivery' });
+      continue;
+    }
+    seenStubIds.add(stubId);
+    if (ctx.existingStubIds?.has(stubId)) {
+      stubSkips.push({
+        contractId: stubId,
+        reason: `a contract with id "${stubId}" already exists in --out — the auto-proposed stub is NOT written over it (the real contract wins; the stub stays in the proposal artifact)`,
+      });
+      continue;
+    }
+    if (!apply) continue; // named below via nextCommand/printout, never written silently
+    stubWrites.push({
+      contractId: stubId,
+      fileName: contractFileNameForId(stubId),
+      contents: JSON.stringify(stub, null, 2) + '\n',
+    });
+  }
+  const mintedTree = proposal.mintedTokens?.tree;
+  // Same trust boundary as the stub ids: contractId is envelope-supplied, so
+  // it is flattened to a single filename (no separators can survive).
+  const mintedFileName = `${contractId.replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/\.\.+/g, '.').replace(/^[.-]+|[.-]+$/g, '') || 'proposal'}.minted.dtcg.json`;
+  const mintedWrite =
+    apply && mintedTree && Object.keys(mintedTree).length > 0
+      ? { fileName: mintedFileName, contents: JSON.stringify(mintedTree, null, 2) + '\n' }
+      : null;
+
+  // The runnable next step: generate over EVERYTHING this plan writes, with
+  // --tokens naming the minted tree (plus the repo's configured token files)
+  // so the first generate resolves every {imported.*} ref instead of
+  // refusing it by name.
+  const outLabel = ctx.outDirLabel ?? '.';
+  const inDir = (f: string) => path.join(outLabel, f);
+  const contractArgs = [inDir(fileName), ...stubWrites.map((s) => inDir(s.fileName))];
+  const tokenArgs = [...(ctx.configTokens ?? []), ...(mintedWrite ? [inDir(mintedFileName)] : [])];
+  const nextCommand =
+    apply
+      ? `npx ds-contracts generate ${contractArgs.join(' ')} --out ${ctx.codeOutDir ?? 'generated'} --stories${tokenArgs.length > 0 ? ` --tokens ${tokenArgs.join(',')}` : ''}`
+      : null;
+
   return {
     contractId,
     fileName,
@@ -678,6 +827,10 @@ export function planReceive(
     changed,
     diff: unifiedDiff(oldText ?? '', newText, fileName),
     contractWrite: apply && changed ? { fileName, contents: newText } : null,
+    stubWrites,
+    stubSkips,
+    mintedWrite,
+    nextCommand,
   };
 }
 
@@ -697,6 +850,25 @@ export function findExistingContractFile(outDir: string, contractId: string): { 
 }
 
 const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
+/** The two `generate` facts the printed next-command needs, read directly so
+ *  this module never statically imports propose-pr (which imports THIS file;
+ *  see the lazy-import note at the top). Absent/unreadable → empty facts and
+ *  the command falls back to runnable defaults. */
+function loadReceiveDsConfig(cwd: string): { tokens: string[]; out: string | null } {
+  try {
+    const raw = JSON.parse(readFileSync(path.join(cwd, 'ds-contracts.config.json'), 'utf8')) as {
+      generate?: { tokens?: unknown; out?: unknown };
+    };
+    const gen = raw.generate ?? {};
+    return {
+      tokens: Array.isArray(gen.tokens) ? gen.tokens.filter((t): t is string => typeof t === 'string') : [],
+      out: typeof gen.out === 'string' && gen.out.trim() !== '' ? gen.out.trim() : null,
+    };
+  } catch {
+    return { tokens: [], out: null };
+  }
+}
 
 async function receiveCommand(argv: string[]): Promise<number> {
   const parsed = parseFlags(argv, { value: ['out', 'bridge'], bool: ['apply'] });
@@ -721,7 +893,7 @@ async function receiveCommand(argv: string[]): Promise<number> {
   const ttlSeconds = session.ttlSeconds ?? 15 * 60;
   console.log(`Pairing code: ${code}`);
   console.log(
-    `In the Figma plugin's Propose tab, run "Read the set & diff", then enter this code under "Send to repo". Waiting (code expires in ${Math.round(ttlSeconds / 60)} minutes; Ctrl-C to stop)…`,
+    `In the Figma plugin's Send tab, run "Read the set & diff", then enter this code under "Send to repo". Waiting (code expires in ${Math.round(ttlSeconds / 60)} minutes; Ctrl-C to stop)…`,
   );
 
   // 2. Poll politely — the same 2.5s cadence the plugin and playground use.
@@ -748,7 +920,7 @@ async function receiveCommand(argv: string[]): Promise<number> {
   const kind = delivered.kind ?? 'dump';
   if (kind !== 'proposal') {
     console.error(
-      `✘ Refused — that code carried a ${kind === 'dump' ? 'canvas dump' : kind}, not a ${CONTRACT_PROPOSAL_TYPE}. figma receive only lands proposals from the plugin's Propose tab; deliver-once means this payload is now gone — send again to a fresh code.`,
+      `✘ Refused — that code carried a ${kind === 'dump' ? 'canvas dump' : kind}, not a ${CONTRACT_PROPOSAL_TYPE}. figma receive only lands proposals from the plugin's Send tab; deliver-once means this payload is now gone — send again to a fresh code.`,
     );
     return 1;
   }
@@ -760,7 +932,25 @@ async function receiveCommand(argv: string[]): Promise<number> {
 
   // 3. Plan (pure), then execute EXACTLY the plan.
   const proposal = envelope.proposal;
-  const plan = planReceive(proposal, findExistingContractFile(outDir, String(proposal.proposedContract.id ?? proposal.baseContractId)), apply);
+  // ENVELOPE v2 context: which stub ids already have a real contract in
+  // --out, and the repo's recorded generate facts for the printed command.
+  const existingStubIds = new Set<string>();
+  for (const stub of proposal.childStubs ?? []) {
+    const stubId = typeof stub.id === 'string' ? stub.id : null;
+    if (stubId && findExistingContractFile(outDir, stubId)) existingStubIds.add(stubId);
+  }
+  const dsConfig = loadReceiveDsConfig(process.cwd());
+  const plan = planReceive(
+    proposal,
+    findExistingContractFile(outDir, String(proposal.proposedContract.id ?? proposal.baseContractId)),
+    apply,
+    {
+      existingStubIds,
+      configTokens: dsConfig.tokens,
+      codeOutDir: dsConfig.out,
+      outDirLabel: out,
+    },
+  );
 
   mkdirSync(path.dirname(path.join(outDir, plan.proposalFileName)), { recursive: true });
   writeFileSync(path.join(outDir, plan.proposalFileName), plan.proposalText);
@@ -770,8 +960,58 @@ async function receiveCommand(argv: string[]): Promise<number> {
     console.log(`\nProposed change — ${proposal.setName ?? plan.contractId}:`);
     for (const line of proposal.summary) console.log(`  ${line}`);
   }
+  // ENVELOPE v2 payloads, named whether or not they land this run.
+  const stubCount = (proposal.childStubs ?? []).length;
+  const mintedCount =
+    proposal.mintedTokens && proposal.mintedTokens.tree && Object.keys(proposal.mintedTokens.tree).length > 0
+      ? proposal.mintedTokens.count ?? Object.keys(proposal.mintedTokens.tree).length
+      : 0;
+  if (stubCount > 0 || mintedCount > 0) {
+    console.log(
+      `\nThis proposal also carries ${[
+        stubCount > 0 ? `${stubCount} auto-proposed stub contract(s) (${(proposal.childStubs ?? []).map((s) => String((s as { id?: unknown }).id ?? '?')).join(', ')})` : null,
+        mintedCount > 0 ? `a minted token tree (${mintedCount} token(s))` : null,
+      ]
+        .filter(Boolean)
+        .join(' and ')} — the contract's component/token refs resolve through them.`,
+    );
+  }
+  for (const skip of plan.stubSkips) console.log(`  stub ${skip.contractId}: ${skip.reason}`);
+
+  const writeExtras = () => {
+    // Belt over contractFileNameForId: whatever produced the plan, a write
+    // may not escape --out. Refused by name, never a silent clamp.
+    const insideOut = (fileName: string): string => {
+      const resolved = path.resolve(outDir, fileName);
+      if (resolved !== outDir && !resolved.startsWith(outDir + path.sep)) {
+        throw new CliUsageError(
+          `receive REFUSED: planned write "${fileName}" resolves OUTSIDE --out (${resolved}) — the delivery carries a hostile or malformed id; nothing was written.`,
+        );
+      }
+      return resolved;
+    };
+    for (const s of plan.stubWrites) {
+      writeFileSync(insideOut(s.fileName), s.contents);
+      console.log(`✔ Wrote stub contract ${path.join(out, s.fileName)} (${s.contractId}) — replace it by importing the real child set.`);
+    }
+    if (plan.mintedWrite) {
+      writeFileSync(insideOut(plan.mintedWrite.fileName), plan.mintedWrite.contents);
+      console.log(`✔ Wrote minted token tree ${path.join(out, plan.mintedWrite.fileName)} — provisional names; review before adopting.`);
+    }
+    if (plan.nextCommand) {
+      // The banner must not claim a minted tree the delivery did not carry
+      // (old envelopes have none — verified live, 2026-08-03).
+      console.log(
+        plan.mintedWrite
+          ? `\nNext — generate the code (the minted tree rides --tokens so every ref resolves):\n  ${plan.nextCommand}`
+          : `\nNext — generate the code:\n  ${plan.nextCommand}`,
+      );
+    }
+  };
+
   if (!plan.changed) {
-    console.log(`\n${plan.fileName} already matches the proposal byte-for-byte — nothing to apply.`);
+    console.log(`\n${plan.fileName} already matches the proposal byte-for-byte — nothing to apply to it.`);
+    writeExtras();
     return 0;
   }
   console.log(plan.oldText === null ? `\nNew contract (no ${plan.fileName} in ${out} yet):` : '');
@@ -779,7 +1019,7 @@ async function receiveCommand(argv: string[]): Promise<number> {
 
   if (plan.contractWrite === null) {
     console.log(
-      `\nNothing written to ${plan.fileName} — review the diff above, then re-run with --apply to write it (or apply by hand from ${path.join(out, plan.proposalFileName)}).`,
+      `\nNothing written to ${plan.fileName}${stubCount > 0 || mintedCount > 0 ? ' (nor the stub/minted files above)' : ''} — review the diff, then re-run with --apply to write ${stubCount > 0 || mintedCount > 0 ? 'all of it' : 'it'} (or apply by hand from ${path.join(out, plan.proposalFileName)}).`,
     );
     return 0;
   }
@@ -787,6 +1027,7 @@ async function receiveCommand(argv: string[]): Promise<number> {
   console.log(
     `\n✔ Wrote ${path.join(out, plan.contractWrite.fileName)} — review the diff and commit it yourself (ds-contracts never touches git).`,
   );
+  writeExtras();
 
   // The landed contract is only half of what the proposal is worth: a
   // contract nobody can run is a document. `propose-pr` already carries both
@@ -799,7 +1040,13 @@ async function receiveCommand(argv: string[]): Promise<number> {
   const rc = resolveCodeConfig({ noCode: false }, loadDsConfig(process.cwd()), 'ds-contracts.config.json');
   if (!rc.ok) console.log(`\nNo component code generated — ${rc.reason}`);
   else {
-    const { files, notes } = await generateCodeFiles(plan.contractWrite.contents, rc.config, process.cwd());
+    // ENVELOPE v2: the stubs ride into the generation scope and the minted
+    // tree rides the token inventory — without them a foreign-kit proposal's
+    // component/token refs refuse by name and the door dead-ends.
+    const { files, notes } = await generateCodeFiles(plan.contractWrite.contents, rc.config, process.cwd(), {
+      stubs: proposal.childStubs ?? [],
+      mintedTree: proposal.mintedTokens?.tree ?? null,
+    });
     for (const f of files) {
       mkdirSync(path.dirname(f.destPath), { recursive: true });
       writeFileSync(f.destPath, f.contents);

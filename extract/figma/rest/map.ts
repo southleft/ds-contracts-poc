@@ -812,6 +812,26 @@ function mapNode(
 // Whole-response mapping
 // ---------------------------------------------------------------------------
 
+/** READ-LIMIT RECEIPTS (REST-route honesty): every dump channel the plugin
+ *  captures (v1.6–v1.13) that the REST surface CANNOT yield, one entry per
+ *  absent channel — fact class + consequence, human-readable. The MAPPER
+ *  knows what it cannot read, so it stamps these into `_provenance` on every
+ *  dump it produces; core/propose-figma.ts (proposeBatchFromDump) surfaces
+ *  them as ONE note per proposed set, so absence is a NAMED read limit of
+ *  this route, never silent evidence about the design. Plugin dumps and
+ *  hand-authored fixtures carry NO captureGaps field → zero new notes there
+ *  (byte-identity preserved); nothing keys on dumpVersion comparisons. */
+const REST_CAPTURE_GAPS: readonly string[] = [
+  'multi-mode variable values (dump v1.6 modes): not captured on this route — only one mode’s resolved values are readable, so a theme/mode axis resolves single-mode and the other modes’ values are absent',
+  'absolute placement on non-shape nodes (dump v1.7): not captured on this route — an out-of-flow FRAME/TEXT (e.g. a corner-pinned badge) re-enters the flow and renders in-line',
+  'image fills (dump v1.7 imageFill / v1.9 imageHash): not captured on this route — an IMAGE paint (e.g. an avatar photo) is read as no fill and renders as an empty box',
+  'fixed sizes on plain rectangles (dump v1.8 fixedSize): not captured on this route — a drawn width/height is lost and the node sizes to content',
+  'instance text overrides (dump v1.10 textOverrides): not captured on this route — a host’s edited label is read as the child’s own default characters',
+  'strokeAlign (dump v1.11): not captured on this route — an OUTSIDE stroke (focus ring) will be read as an inward border',
+  'layout wrap + row spacing (dump v1.12 layout.wrap/rowSpacing): not captured on this route — a wrapping row is read as a single non-wrapping line',
+  'the full constraints map (dump v1.13): not captured on this route — MIN/MAX/CENTER/STRETCH/SCALE pinning carries only on shape decor, not on other node types',
+];
+
 export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOptions = {}): MapResult {
   const report: MapReport = { fileName: nodesResponse.name, sets: [], degradations: [], notes: [] };
 
@@ -820,13 +840,18 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     varNameById.set(v.id ?? id, v.name);
   }
 
+  // `captureGaps` is additive provenance this mapper alone stamps (the
+  // DumpFile type's `_provenance` predates it) — typed locally so the extra
+  // field is deliberate, not a cast.
+  const provenance: NonNullable<DumpFile['_provenance']> & { captureGaps: string[] } = {
+    fileKey: options.fileKey ?? null,
+    extractedAt: new Date().toISOString().slice(0, 10),
+    note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.5) for design→contract proposal.',
+    dumpVersion: '1.5',
+    captureGaps: [...REST_CAPTURE_GAPS],
+  };
   const dump: DumpFile = {
-    _provenance: {
-      fileKey: options.fileKey ?? null,
-      extractedAt: new Date().toISOString().slice(0, 10),
-      note: 'Node-tree dump mapped from the Figma REST API (extract/figma/rest/map.ts, dump v1.5) for design→contract proposal.',
-      dumpVersion: '1.5',
-    },
+    _provenance: provenance,
   };
 
   for (const entry of Object.values(nodesResponse.nodes ?? {})) {

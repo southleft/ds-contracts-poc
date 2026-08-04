@@ -1130,7 +1130,25 @@ export function Playground() {
 
   const handleImportResult = (result: FigmaImportResult, origin: string) => {
     const batch = proposalsFromDump(result.dump);
-    const groups = [...importReportGroups(result.report), ...batchReceiptGroups(batch)];
+    // ROUTE HONESTY: name the dump revision this route produced. Both callers
+    // are the REST routes (URL import + demo fixture) — the mapper stamps
+    // dump v1.5, a PARTIAL capture; the per-set read-limit note ("this
+    // dump's reader could not see: …") rides the proposal notes verbatim.
+    const dumpVersion = result.dump._provenance?.dumpVersion;
+    const routeGroups: ReceiptGroup[] = dumpVersion
+      ? [
+          {
+            title: 'Import route',
+            kind: 'note',
+            entries: [
+              {
+                message: `REST-mapped dump v${dumpVersion} — a partial capture; the plugin dump (v1.13) is the full one. Every channel this route cannot read is named per set in the proposal notes ("this dump's reader could not see: …").`,
+              },
+            ],
+          },
+        ]
+      : [];
+    const groups = [...routeGroups, ...importReportGroups(result.report), ...batchReceiptGroups(batch)];
     if (batch.proposals.length === 0) {
       setFigmaError(
         batch.skipped.length > 0
@@ -2257,9 +2275,13 @@ export function Playground() {
               <p className="hint">
                 Two ways in, and a third that is currently switched off. <strong>Start with
                 the URL route below</strong> — paste a component URL and a token and you get a
-                proposed contract. If your plan gates the variables endpoint you still get
-                every value exactly right; only the token <em>names</em> degrade, and each one
-                is receipted rather than invented. For native token names on any plan, paste a{' '}
+                proposed contract. Know the ladder: this route is a <em>partial</em> capture
+                (REST, dump v1.5) — the plugin dump (v1.13, via the <strong>JSON</strong> tab)
+                is the full one. What the REST reader cannot see (image fills, flex wrap,
+                strokeAlign, instance text overrides, multi-mode variable values, fixed sizes,
+                absolute placement, constraints) is NAMED in the proposal notes rather than
+                guessed; token <em>names</em> additionally degrade outside Enterprise plans,
+                each one receipted. For full capture on any plan, paste a{' '}
                 <code>extract/figma/dump.plugin.js</code> dump into the <strong>JSON</strong>{' '}
                 tab instead.
               </p>
@@ -2268,10 +2290,13 @@ export function Playground() {
             <div className="rail__group" style={{ marginTop: 16 }}>
               <div className="rail__group-title">From a figma.com URL + token — quick</div>
               <p className="hint">
-                No install. Variable (token) <em>names</em> are unavailable outside Enterprise
-                plans on this route — values still come through exactly, and every unresolved
-                name is receipted, never invented. For true-to-form token names, use the JSON
-                dump route named above.
+                No install, partial capture. The style facts this route CAN read come through
+                exactly; the channels it cannot read at all (the proposal notes name them:
+                &ldquo;this dump&rsquo;s reader could not see: &hellip;&rdquo;) are absent as a
+                read limit of the route, not evidence about the design. Variable (token){' '}
+                <em>names</em> additionally degrade outside Enterprise plans — receipted,
+                never invented. For the full capture (dump v1.13) and true-to-form token
+                names, use the JSON dump route named above.
               </p>
             </div>
             <div className="field">
@@ -3041,9 +3066,12 @@ export function Playground() {
                             mintedLayer.count === 1 ? '' : 's'
                           } (imported.*) the script creates first — rename against your real tokens. `
                         : ''}
-                      Paste back into the source Figma file (Sync Runner plugin): builds the
-                      contract&rsquo;s version beside your original for A/B — or takes you to the
-                      existing one.
+                      Run it in the source Figma file through the Sync Runner plugin&rsquo;s{' '}
+                      <b>Advanced → Paste a script</b> drawer (a developer surface — it runs raw
+                      scripts with full plugin permissions): builds the contract&rsquo;s version
+                      beside your original for A/B — or takes you to the existing one. The
+                      plugin&rsquo;s everyday door is <b>Build</b>, which takes a contracts file
+                      rather than a script.
                     </p>
                   </InfoPopover>
                 ) : null}

@@ -68,9 +68,11 @@ export interface PrFile {
   /** Repository-relative destination path. */
   destPath: string;
   contents: string;
-  /** 'contract' = the source of truth; 'code' = an emitter projection. */
-  kind: 'contract' | 'code';
-  /** Emit target for code files (react, html, …); undefined for the contract. */
+  /** 'contract' = the source of truth (the proposal AND any auto-proposed
+   *  stub contract); 'tokens' = the minted DTCG tree the proposal's refs
+   *  resolve through; 'code' = an emitter projection. */
+  kind: 'contract' | 'tokens' | 'code';
+  /** Emit target for code files (react, html, …); undefined otherwise. */
   target?: string;
 }
 
@@ -103,6 +105,13 @@ export interface ProposalInput {
   provenance: CanvasProvenance;
   /** True when a CONTRACT-PROPOSAL envelope was unwrapped to its contract. */
   unwrapped: boolean;
+  /** ENVELOPE v2: the envelope's auto-proposed stub contracts (each files as
+   *  its own *.contract.json next to the proposal). Empty for old envelopes
+   *  and bare contract documents. */
+  childStubs: Array<Record<string, unknown>>;
+  /** ENVELOPE v2: the minted DTCG tree the proposal's {imported.*} refs
+   *  resolve through. null when the envelope minted nothing. */
+  mintedTree: Record<string, unknown> | null;
   /** Plain-words notes about how the input was read — always surfaced. */
   notes: string[];
 }
@@ -143,20 +152,65 @@ export function readProposalInput(file: string): ProposalInput {
     let provenance: CanvasProvenance = 'unrecorded';
     if (stamped && typeof stamped.toolGenerated === 'boolean') {
       provenance = stamped.toolGenerated ? 'tool-generated' : 'hand-built';
+    } else if (stamped) {
+      // A CURRENT envelope can legitimately carry provenance with no verdict
+      // (kind 'unrecorded' — the exporter did not know). Blaming "an older
+      // plugin build" here was false for a fresh v2 envelope (verified live,
+      // 2026-08-03); say what is actually known.
+      notes.push(
+        'The proposal envelope carries a provenance object with NO tool-generated/hand-built verdict — the exporter did not record one. The PR says "not recorded" rather than picking a side.',
+      );
     } else {
       notes.push(
-        'The proposal envelope carries no canvas provenance — it came from a plugin build older than the round-trip stamp. The PR says "not recorded" rather than picking a side.',
+        'The proposal envelope carries no canvas provenance at all — it came from a plugin build older than the round-trip stamp. The PR says "not recorded" rather than picking a side.',
       );
     }
     notes.push(
       `Input is a ${CONTRACT_PROPOSAL_TYPE} envelope — the contract inside it is what gets committed (the envelope itself is not a contract).`,
     );
+    // ENVELOPE v2 payloads: absent on older plugin builds (accepted as-is);
+    // present-but-malformed is a named refusal — dropping a payload silently
+    // is the exact defect the export-envelope round closes.
+    let childStubs: Array<Record<string, unknown>> = [];
+    if (doc.childStubs !== undefined && doc.childStubs !== null) {
+      if (!Array.isArray(doc.childStubs) || doc.childStubs.some((s) => s === null || typeof s !== 'object' || Array.isArray(s))) {
+        throw new CliUsageError(
+          `${path.basename(file)}: the envelope's "childStubs" is not an array of contract objects — re-export the proposal from the plugin's Send tab.`,
+        );
+      }
+      childStubs = doc.childStubs as Array<Record<string, unknown>>;
+    }
+    let mintedTree: Record<string, unknown> | null = null;
+    if (doc.mintedTokens !== undefined && doc.mintedTokens !== null) {
+      const tree = (doc.mintedTokens as { tree?: unknown }).tree;
+      if (typeof doc.mintedTokens !== 'object' || Array.isArray(doc.mintedTokens) || tree === null || typeof tree !== 'object' || Array.isArray(tree)) {
+        throw new CliUsageError(
+          `${path.basename(file)}: the envelope's "mintedTokens" has no DTCG "tree" object — re-export the proposal from the plugin's Send tab.`,
+        );
+      }
+      mintedTree = tree as Record<string, unknown>;
+      if (Object.keys(mintedTree).length === 0) mintedTree = null;
+    }
+    if (childStubs.length > 0) {
+      notes.push(
+        `The envelope carries ${childStubs.length} auto-proposed STUB contract(s) (${childStubs
+          .map((s) => String((s as { id?: unknown }).id ?? '?'))
+          .join(', ')}) — each is committed as its own contract file so the proposal's component refs resolve; replace each stub by importing the real child set.`,
+      );
+    }
+    if (mintedTree) {
+      notes.push(
+        'The envelope carries a minted token tree — committed as a DTCG file so the proposal\'s {imported.*} refs resolve; every name in it is machine-derived and provisional.',
+      );
+    }
     return {
       content: JSON.stringify(contract, null, 2) + '\n',
       parsed: contract,
       contract,
       provenance,
       unwrapped: true,
+      childStubs,
+      mintedTree,
       notes,
     };
   }
@@ -169,6 +223,8 @@ export function readProposalInput(file: string): ProposalInput {
     contract: looksLikeContract ? doc : null,
     provenance: 'unrecorded',
     unwrapped: false,
+    childStubs: [],
+    mintedTree: null,
     notes: looksLikeContract
       ? []
       : ['Input is not a contract document — it is committed verbatim and no code is generated from it.'],
@@ -302,6 +358,12 @@ export async function generateCodeFiles(
   contractText: string,
   cfg: CodeConfig,
   cwd: string,
+  /** ENVELOPE v2: the proposal's other two engine outputs. The stubs join
+   *  the generation scope (their refs must resolve — and their geometry
+   *  renders); the minted tree joins the token inventory. Omitting them for
+   *  a foreign-kit proposal reproduces the old dead end: `generate` refuses
+   *  the dangling refs by name. */
+  extras: { stubs?: Array<Record<string, unknown>>; mintedTree?: Record<string, unknown> | null } = {},
 ): Promise<{ files: PrFile[]; notes: string[] }> {
   const tmp = mkdtempSync(path.join(tmpdir(), 'ds-contracts-propose-'));
   const notes: string[] = [];
@@ -309,6 +371,17 @@ export async function generateCodeFiles(
   try {
     const contractFile = path.join(tmp, 'proposed.contract.json');
     writeFileSync(contractFile, contractText);
+    const stubFiles: string[] = [];
+    (extras.stubs ?? []).forEach((stub, i) => {
+      const f = path.join(tmp, `stub-${i}.contract.json`);
+      writeFileSync(f, JSON.stringify(stub, null, 2) + '\n');
+      stubFiles.push(f);
+    });
+    let mintedFile: string | null = null;
+    if (extras.mintedTree && Object.keys(extras.mintedTree).length > 0) {
+      mintedFile = path.join(tmp, 'minted.dtcg.json');
+      writeFileSync(mintedFile, JSON.stringify(extras.mintedTree, null, 2) + '\n');
+    }
     // Token entries may carry an explicit `slot=` prefix (see lib.ts) — resolve
     // the PATH half against cwd and keep the slot attached.
     const named = cfg.tokenFiles.map((e) => {
@@ -327,7 +400,20 @@ export async function generateCodeFiles(
           'fix `generate.tokens` in ds-contracts.config.json (or pass --tokens), or pass --no-code to propose the contract alone.',
       );
     }
-    const tokenEntries = expandTokenArgs(named);
+    // ENVELOPE v2: with a minted tree in play the corpus must not shrink to
+    // JUST that tree — when the config names no token files, the generator's
+    // own default layout (the files it would have used anyway) rides along
+    // explicitly, so the proposal's repo-bound refs keep resolving.
+    const defaultCorpus =
+      named.length === 0 && mintedFile
+        ? [
+            path.join(cwd, 'tokens', 'primitives.tokens.json'),
+            path.join(cwd, 'tokens', 'semantic.tokens.json'),
+            path.join(cwd, 'tokens', 'modes', 'semantic.light.tokens.json'),
+            path.join(cwd, 'tokens', 'modes', 'semantic.dark.tokens.json'),
+          ].filter(existsSync)
+        : [];
+    const tokenEntries = expandTokenArgs(mintedFile ? [...named, ...defaultCorpus, mintedFile] : named);
     const tokenFiles = tokenPathsOf(tokenEntries);
     const iconsDir = cfg.iconsDir ? path.resolve(cwd, cfg.iconsDir) : undefined;
 
@@ -335,7 +421,7 @@ export async function generateCodeFiles(
       if (target === 'react') {
         const outDir = path.join(tmp, 'out-react');
         await generateComponents({
-          contractFiles: [contractFile],
+          contractFiles: [contractFile, ...stubFiles],
           tokenFiles: tokenFiles.length > 0 ? tokenFiles : undefined,
           iconsDir,
           outDir,
@@ -359,7 +445,7 @@ export async function generateCodeFiles(
       }
       const emitter = emitterByName.get(target);
       if (!emitter) throw new CliUsageError(`Unknown --target "${target}"`);
-      const contracts = loadContracts([contractFile]);
+      const contracts = loadContracts([contractFile, ...stubFiles]);
       const { ctx, routing } = buildEmitterCtxWithRouting(contracts, tokenEntries, iconsDir);
       for (const contract of contracts.values()) {
         for (const f of withTokenDiagnostics(routing, () => emitter.emit(contract, ctx))) {
@@ -472,10 +558,32 @@ export function buildPlan(
   const destDir = (opts.dir ?? 'contracts').replace(/\/+$/, '');
   const destPath = `${destDir}/${basename}`;
   const code = opts.code ?? [];
-  const files: PrFile[] = [{ destPath, contents: content, kind: 'contract' }, ...code];
+  // ENVELOPE v2: the stubs and the minted tree land NEXT TO the contract —
+  // without them the committed proposal carries refs `generate` refuses by
+  // name, and the PR is a document nobody can run.
+  const stubFiles: PrFile[] = input.childStubs.map((stub, i) => ({
+    destPath: `${destDir}/${typeof stub.id === 'string' ? contractFileNameForId(stub.id) : `stub-${i}.contract.json`}`,
+    contents: JSON.stringify(stub, null, 2) + '\n',
+    kind: 'contract' as const,
+  }));
+  const contractId = typeof input.contract?.id === 'string' ? input.contract.id : basename.replace(/\.contract\.json$/, '');
+  const mintedFiles: PrFile[] = input.mintedTree
+    ? [{
+        destPath: `${destDir}/${contractId}.minted.dtcg.json`,
+        contents: JSON.stringify(input.mintedTree, null, 2) + '\n',
+        kind: 'tokens' as const,
+      }]
+    : [];
+  const files: PrFile[] = [{ destPath, contents: content, kind: 'contract' }, ...stubFiles, ...mintedFiles, ...code];
+  const sidecars = stubFiles.length + mintedFiles.length;
   const touches =
-    code.length > 0
-      ? `The ${code.length} generated file(s) are its projection — nothing else in the repository is touched.`
+    code.length > 0 || sidecars > 0
+      ? `The ${[
+          sidecars > 0 ? `${sidecars} envelope sidecar file(s) (stub contracts / minted tokens)` : null,
+          code.length > 0 ? `${code.length} generated file(s)` : null,
+        ]
+          .filter(Boolean)
+          .join(' and ')} are its companions — nothing else in the repository is touched.`
       : 'Nothing else in the repository is touched.';
   const plan: PrPlan = {
     repo,
@@ -630,7 +738,10 @@ export async function proposePrCommand(argv: string[]): Promise<number> {
         'The input is not a contract document (no id/name), so there is nothing to emit from — it is committed verbatim.';
     } else {
       try {
-        const gen = await generateCodeFiles(input.content, resolved.config, cwd);
+        const gen = await generateCodeFiles(input.content, resolved.config, cwd, {
+          stubs: input.childStubs,
+          mintedTree: input.mintedTree,
+        });
         code = gen.files;
         codeNotes = gen.notes;
         codeConfig = resolved.config;
@@ -669,7 +780,7 @@ export async function proposePrCommand(argv: string[]): Promise<number> {
     console.log(`  ${++step}. POST /repos/${plan.repo}/git/refs  { ref: "refs/heads/${plan.branch}" }`);
     for (const f of plan.files) {
       console.log(
-        `  ${++step}. PUT  /repos/${plan.repo}/contents/${f.destPath}  (${Buffer.byteLength(f.contents)} bytes, branch ${plan.branch}, ${f.kind === 'contract' ? 'contract' : `code/${f.target}`})`,
+        `  ${++step}. PUT  /repos/${plan.repo}/contents/${f.destPath}  (${Buffer.byteLength(f.contents)} bytes, branch ${plan.branch}, ${f.kind === 'contract' ? 'contract' : f.kind === 'tokens' ? 'minted tokens' : `code/${f.target}`})`,
       );
     }
     console.log(
@@ -679,7 +790,7 @@ export async function proposePrCommand(argv: string[]): Promise<number> {
 
     console.log(`\nFiles this PR would contain (${plan.files.length}):`);
     for (const f of plan.files) {
-      console.log(`  ${f.destPath}  ${bytes(f.contents)}  ${f.kind === 'contract' ? '(contract — the source of truth)' : `(generated code — ${f.target})`}`);
+      console.log(`  ${f.destPath}  ${bytes(f.contents)}  ${f.kind === 'contract' ? '(contract — the source of truth)' : f.kind === 'tokens' ? '(minted token tree — provisional names)' : `(generated code — ${f.target})`}`);
     }
     if (codeReason && code.length === 0) console.log(`  NO CODE — ${codeReason}`);
     if (code.length > 0) {

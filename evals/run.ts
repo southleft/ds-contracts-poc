@@ -1933,7 +1933,20 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
     },
   },
   {
-    // Unbound fills are REPORTED with nearest-token candidates, never invented.
+    // Unbound fills: the OBSERVED value is carried as a PROVISIONAL imported.*
+    // token — never a real corpus token the canvas did not use — and the
+    // nearest-real-token rename hint survives the minting.
+    //
+    // HISTORY, because this eval flipped meaning once (2026-08-03): it used to
+    // pin the CLI door's mint-OFF behavior (`tokens['background-color']` must
+    // be ABSENT). When the door turned minting on — the fix that made a
+    // designer's first `generate` succeed instead of refusing on dangling
+    // refs — this eval red-flagged the provisional binding as "fabricated".
+    // Minting the observed literal under a machine name is CARRIAGE, not
+    // fabrication; what "never invented" must protect is (a) no REAL-name
+    // guess, and (b) the human's rename hint. Both are pinned below, harder
+    // than before: the old assertion could not tell a provisional carry from
+    // a real-name guess — it just banned both.
     id: 'design-propose-unbound-fill-named-never-invented',
     claim: 'C5-extraction',
     run: () => {
@@ -1943,10 +1956,23 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const r = run(TSX, ['extract/figma/propose.ts', 'extract/figma/fixtures/main-file-dumps.json', '--out', 'extract/out/figma']);
       if (r.status !== 0) throw new Error(`Proposal failed on an unbound fill:\n${r.out}`);
       const proposed = JSON.parse(readFileSync(path.join(SCRATCH, 'extract', 'out', 'figma', 'badge.contract.proposed.json'), 'utf8'));
-      if (proposed.anatomy.root.tokens?.['background-color']) throw new Error('Proposal fabricated a token for an unbound fill');
+      const ref = proposed.anatomy.root.tokens?.['background-color'];
+      if (typeof ref !== 'string' || !/^\{imported\./.test(ref)) {
+        throw new Error(`Unbound fill must be carried as a PROVISIONAL imported.* ref — got ${JSON.stringify(ref)}`);
+      }
+      if (ref.includes('color.blue.500')) throw new Error('Proposal bound a REAL corpus token the canvas never used — that is invention');
+      // The provisional leaf must hold the OBSERVED hex, verbatim.
+      const minted = JSON.parse(readFileSync(path.join(SCRATCH, 'extract', 'out', 'figma', 'minted.dtcg.json'), 'utf8'));
+      const leaf = ref.slice(1, -1).split('.').reduce((n, k) => (n ?? {})[k], minted);
+      if (leaf?.$value !== '#3b82f6') {
+        throw new Error(`Minted leaf must carry the observed #3b82f6, got ${JSON.stringify(leaf?.$value)} — a value not drawn on the canvas would be invention`);
+      }
+      // The rename hint survives the mint: provenance + nearest real token.
       const report = readFileSync(path.join(SCRATCH, 'extract', 'out', 'figma', 'figma-proposals.md'), 'utf8');
-      if (!report.includes('UNBOUND Badge:root fill = #3b82f6')) throw new Error('Unbound fill not named in the report');
-      if (!report.includes('{color.blue.500}')) throw new Error('Nearest-token suggestions missing');
+      if (!report.includes('observed #3b82f6 carried as a PROVISIONAL minted token')) {
+        throw new Error('Minted carriage lost the unbound provenance note');
+      }
+      if (!report.includes('{color.blue.500}')) throw new Error('Nearest-token rename hint missing — dropping the entry silently also dropped the hint');
     },
   },
   {
@@ -5058,7 +5084,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
   },
   {
     // REVERSE BRIDGE (the dev door, no GitHub): a designer's proposed
-    // contract change leaves the plugin's Propose tab and lands in a
+    // contract change leaves the plugin's Send tab and lands in a
     // developer's working tree as a REVIEWED LOCAL DIFF — plugin → pairing
     // bridge (kind 'proposal') → `figma receive` → unified diff + saved
     // .proposals artifact; the contract file NEVER moves without --apply.
@@ -5139,7 +5165,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (trip.status !== 0 || !trip.out.includes('dev-door ok:')) {
         throw new Error(`reverse-bridge round trip failed:\n${trip.out}`);
       }
-      console.log('reverse-bridge-dev-door: plugin exportJson envelope → real worker pipeline (kind proposal, deliver-once) → CLI referee + plan (no write without --apply) — plus the 12-case figma-receive unit suite incl. the live shell against a fake bridge');
+      console.log('reverse-bridge-dev-door: plugin exportJson envelope → real worker pipeline (kind proposal, deliver-once) → CLI referee + plan (no write without --apply) — plus the figma-receive unit suite (19 cases incl. envelope-v2 stubs+minted) incl. the live shell against a fake bridge');
     },
   },
   {

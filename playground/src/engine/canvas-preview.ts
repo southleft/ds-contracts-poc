@@ -204,6 +204,12 @@ function nodeStyle(spec: NodeSpec, ctx: RenderCtx): string {
     d.push(`flex-direction: ${spec.layout.mode === 'VERTICAL' ? 'column' : 'row'}`);
     d.push(`justify-content: ${PRIMARY_CSS[spec.layout.primary]}`);
     d.push(`align-items: ${spec.layout.stretchChildren ? 'stretch' : COUNTER_CSS[spec.layout.counter]}`);
+    // v15 layout.wrap (emit-figma-script LayoutSpec — the sync runtime sets
+    // native layoutWrap 'WRAP'): without this line a wrapping contract drew
+    // as ONE unwrapped line in the canvas view — the mirror of the round-trip
+    // wrap bug (8b2d60f). NodeSpec carries no distinct rowSpacing; the single
+    // gap (itemSpacing binding/literal) applies to both axes, as CSS gap does.
+    if (spec.layout.wrap) d.push('flex-wrap: wrap');
   }
   if (spec.fill) d.push(`background-color: ${cssVarOf(spec.fill)}`);
   // Round 4 (canvas-gate finding): effect STACKS render — the runtime

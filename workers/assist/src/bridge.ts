@@ -42,7 +42,7 @@ export const CODE_LENGTH = 6;
  *  this envelope type so the receiver can branch WITHOUT the bridge ever
  *  inspecting contract contents — the transport stays a dumb pipe, it only
  *  checks the envelope is well-formed and remembers which kind it carried.
- *  A CONTRACT-PROPOSAL (plugin → CLI, the dev door: the Propose tab's export
+ *  A CONTRACT-PROPOSAL (plugin → CLI, the dev door: the Send tab's export
  *  envelope sent to `ds-contracts figma receive`) rides the same mechanics:
  *  envelope-tagged, envelope-only validation, kind recorded at upload. */
 export const CONTRACTS_BUNDLE_TYPE = 'CONTRACTS-BUNDLE';
@@ -55,19 +55,19 @@ export const BRIDGE_MESSAGES = {
     'the bridge only answers the ds-contracts playground — this origin is not allowed',
   sessionLimit: 'bridge limit reached for today from this network — try again tomorrow',
   badCode:
-    'that is not a bridge code — codes are 6 letters/digits shown in the playground’s “Receive from plugin” panel',
+    'that is not a bridge code — codes are 6 letters/digits (letters I, L, O and digits 0, 1 are never used); `ds-contracts figma receive` prints one',
   noSession:
-    'nothing is waiting under that code — check the characters against the playground, or press “Receive from plugin” there for a fresh code (codes expire after 15 minutes)',
+    'nothing is waiting under that code — check the characters against the code your receiver printed (e.g. `ds-contracts figma receive`), or mint a fresh one there (codes expire after 15 minutes)',
   tooLarge:
     'that dump is too large for the bridge (over 4 MB) — narrow the target sets in the plugin and send again, or fall back to copy/paste',
   notJson:
     'the bridge only carries JSON — this usually means a truncated send; try Send again',
   expired:
-    'this code has expired or its dump was already delivered — press “Receive from plugin” for a fresh code',
+    'this code has expired or its payload was already delivered — deliver-once is the design; mint a fresh code (e.g. run `ds-contracts figma receive` again) and re-send',
   badBundle:
     'that is tagged CONTRACTS-BUNDLE but is not a well-formed bundle — it needs a non-empty "contracts" array of contract documents (ds-contracts figma push builds one for you)',
   badProposal:
-    'that is tagged CONTRACT-PROPOSAL but is not a well-formed proposal — it needs a "proposedContract" object (the plugin’s Propose tab builds one for you)',
+    'that is tagged CONTRACT-PROPOSAL but is not a well-formed proposal — it needs a "proposedContract" object (the plugin’s Send tab builds one for you)',
 } as const;
 
 const sessKey = (code: string) => `bridge:sess:${code}`;
@@ -203,7 +203,7 @@ export async function handleBridge(
 
   // Envelope kind: a payload tagged CONTRACTS-BUNDLE gets its envelope (and
   // ONLY its envelope) checked — a non-empty contracts array of objects.
-  // A payload tagged CONTRACT-PROPOSAL (the Propose tab's export, sent to
+  // A payload tagged CONTRACT-PROPOSAL (the Send tab's export, sent to
   // `ds-contracts figma receive`) gets the same envelope-only treatment: a
   // proposedContract object must be present. Contract contents are never
   // inspected here; the receiver's schema referee owns that. Everything

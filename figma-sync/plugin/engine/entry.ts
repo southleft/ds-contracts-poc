@@ -1369,6 +1369,16 @@ return { inventory: rows };
     /** Canvas values that bound to no token, with the corpus's nearest
      *  candidates. Reported, never applied. */
     unbound: Array<{ nodePath: string; property: string; value: string | number; suggestions: string[] }>;
+    /** ENVELOPE v2 (the export-envelope round): auto-proposed STUB contracts
+     *  for nested instances with no contract in scope. The engine has always
+     *  produced these; the export doors used to DROP them — which made the
+     *  engine's own "auto-proposed alongside (childStubs…)" note a false
+     *  receipt on every surface. Absent when the proposal needed none. */
+    childStubs?: Array<Record<string, unknown>>;
+    /** ENVELOPE v2: the provisional DTCG tree the proposal's minted refs
+     *  resolve through (mintUnbound is always on here), plus one entry per
+     *  minted leaf. Absent when nothing was minted. */
+    mintedTokens?: { tree: Record<string, unknown>; count: number; entries: unknown[] };
     /** THE ASYMMETRY. 'tool-generated' when the set carries a
      *  ds_contracts/contractId marker (this tool drew it, so code comes back
      *  byte for byte); 'hand-built' when it does not (the contract is an
@@ -1517,6 +1527,16 @@ return { inventory: rows };
         summary: summaryLines,
         proposedContract: proposal.contract,
         proposalNotes: proposal.notes,
+        // ENVELOPE v2 — the two payloads the export doors used to DROP: the
+        // stub contracts and the minted DTCG tree ride the SAME envelope the
+        // proposal does, so `figma receive` / `propose-pr` can land a set
+        // whose generate actually succeeds. Fields are absent when empty;
+        // old parsers ignore unknown fields, new parsers accept old
+        // envelopes without them.
+        ...(proposal.childStubs && proposal.childStubs.length > 0
+          ? { childStubs: proposal.childStubs }
+          : {}),
+        ...(proposal.mintedTokens ? { mintedTokens: proposal.mintedTokens } : {}),
         // THE ASYMMETRY, carried to the code side. `propose-pr` reads this
         // and prints the matching sentence in the PR body; without it the
         // PR would have to say "not recorded".
@@ -1540,6 +1560,10 @@ return { inventory: rows };
       baseless,
       tokenSource,
       unbound: proposal.unbound,
+      ...(proposal.childStubs && proposal.childStubs.length > 0
+        ? { childStubs: proposal.childStubs }
+        : {}),
+      ...(proposal.mintedTokens ? { mintedTokens: proposal.mintedTokens } : {}),
       provenance: canvasProvenance,
       codePlan,
     };
@@ -1731,7 +1755,7 @@ return { inventory: rows };
 
   /** G9 — the sample-library cold start: a curated CONTRACTS-BUNDLE built
    *  from the contracts already baked into this build (Card + the components
-   *  it composes). One click on the Generate tab feeds it straight into the
+   *  it composes). One click on the Build tab feeds it straight into the
    *  existing generate path — no paste, no repo, no CLI. */
   const SAMPLE_IDS = ['ds.card', 'ds.badge', 'ds.avatar', 'ds.button'];
 

@@ -7155,10 +7155,23 @@ export function proposeFromDump(
       );
     }
     // A fully minted usage site is bound now — no longer an UNBOUND entry.
+    // BUT its nearest-real-token candidates must not vanish with it: dropping
+    // the entry silently also dropped the rename hint the human uses to
+    // replace the provisional name (caught by the eval that pins "named,
+    // never invented" when the CLI door turned minting on, 2026-08-03). The
+    // hint survives as a note tied to the minted carriage. Only entries that
+    // HAD suggestions gain a note, so an empty-corpus proposal (untitled-ui:
+    // captured.dtcg.json is {}) emits nothing new and stays byte-identical.
     const partial = ctx.mint.partialSources;
     ctx.unbound = ctx.unbound.filter((u) => {
       const s = bySource.get(`${u.nodePath}|${u.property}`);
-      return !(s && s.bound === s.total && !partial.has(`${u.nodePath}|${u.property}`));
+      const fullyMinted = !!(s && s.bound === s.total && !partial.has(`${u.nodePath}|${u.property}`));
+      if (fullyMinted && u.suggestions.length > 0) {
+        ctx.notes.push(
+          `${u.nodePath} ${u.property}: observed ${u.value} carried as a PROVISIONAL minted token (rename against your real system) — nearest real tokens by value: ${u.suggestions.map((t) => `{${t}}`).join(', ')}; the proposal binds the provisional name, never a real token the canvas did not use`,
+        );
+      }
+      return !fullyMinted;
     });
     for (const e of minted.entries) {
       // ROUND 6: a `size`-kind leaf may hold the CONTENT-SIZED keyword rather
@@ -7457,10 +7470,25 @@ export function proposeBatchFromDump(
     opts.capturedValues ??
     new Map((capturedTokensFromDump(dump)?.entries ?? []).map((e) => [e.path, e.value] as const));
   const setOpts = { ...opts, capturedValues };
+  // READ-LIMIT NOTE (dump `_provenance.captureGaps` — REST-route honesty):
+  // the REST mapper (extract/figma/rest/map.ts) stamps one entry per dump
+  // channel its surface cannot read (v1.6–v1.13). Surfaced here as ONE note
+  // per proposed set, so the absence of those facts reads as a limit of the
+  // import route, never as evidence about the design. Plugin dumps and
+  // hand-authored fixtures carry no captureGaps → no note, byte-identical
+  // output. Deliberately NOT keyed on dumpVersion: the mapper that knows
+  // what it cannot read is the only authority.
+  const rawGaps = (dump as { _provenance?: { captureGaps?: unknown } })._provenance?.captureGaps;
+  const captureGaps = Array.isArray(rawGaps) ? rawGaps.filter((g): g is string => typeof g === 'string') : [];
+  const captureGapNote =
+    captureGaps.length > 0
+      ? `this dump's reader could not see: ${captureGaps.join('; ')} — absence of these facts is a READ limit of the import route, not evidence about the design; re-import via the plugin dump (extract/figma/dump.plugin.js, dump v1.13) to capture them`
+      : null;
   for (const [name, value] of Object.entries(dump)) {
     if (name === '_provenance' || !isDumpSet(value)) continue;
     try {
       const proposal = { setName: name, ...proposeFromDump(value, setOpts) };
+      if (captureGapNote) proposal.notes.unshift(captureGapNote);
       const id = (proposal.contract as { id?: unknown }).id;
       if (typeof id === 'string') {
         const holder = claimedIds.get(id);
