@@ -122,14 +122,6 @@ The goal: your real Button, with its real padding, its real colors, and its real
 
 ### The path
 
-> **The published CLI is behind this repository.** `@ds-contracts/cli@0.3.0` on
-> npm predates the 2026-08-03 round (the review gate that had never printed,
-> the phase-2 runner that could never resolve, the export envelope that carried
-> one of three payloads, and two sealed security guards). The tree is at
-> `0.4.0`; publishing needs the owner's OTP and has not happened yet. Until it
-> does, install from a clone for the fixed behaviour, and run
-> `npm run publish:check` to see the current state.
-
 ```bash
 npm i -g @ds-contracts/cli
 
