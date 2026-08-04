@@ -521,9 +521,68 @@ Two named holes remain:
 - **The read half does not exist.** A headless fingerprint-drift recompute off a
   REST file dump, so CI can referee drift without a human clicking a tab, is not
   started.
+  - **The SIGNAL is now complete; the gap is transport (measured 2026-08-04).**
+    The fingerprint could not see bindings — `boundVariables` appeared zero
+    times in `core/canvas-fingerprint.ts`, so a designer who DETACHED a variable
+    and typed the identical literal recomputed the same hash with no diff lines.
+    v6 adds `|bound:<field>|<slash/name>` per field and stops the fill line
+    leaking a run-scoped `VariableID:` into the hash. What is still missing is
+    the read path: **neither `parity/extract-figma.plugin.js` nor
+    `extract/figma/dump.plugin.js` calls `getSharedPluginData`** (0 occurrences
+    in both), so the stamp is written to the canvas and never read back out.
+    Separately, `parity/extract-code.ts` computes `cssVars` which
+    `parity/diff.ts` references **zero** times — the code-side extractor
+    already reads the stylesheet and the differ discards the result.
 
 **What it would take — an engine change** for the read half; the signing half
 is not buildable in-plugin.
+
+## B.14a Three limitations this repo measured about its own instruments
+
+Recorded 2026-08-04. Each was found by measuring an instrument rather than a
+component, and each is stated with the number that produced it.
+
+- **The control baseline covers 4 tags of the 22 the corpus captures.** The
+  styled-channel door admits a channel when it differs from a CONTROL element
+  rendered inside the harness with the library's own CSS loaded — the right
+  instrument, because it subtracts both the user agent's defaults and the
+  library's reset. `capture.ts` renders controls for `button`, `span`, `a`,
+  `div`; **147 of 403 captured parts (36.5%)** sit on one of 22 other tags and
+  fall back to the `<span>` control. A `<td>` measured against a `<span>`
+  reports `unicode-bidi: isolate`, `border-collapse: collapse` and
+  `vertical-align: middle` — the UA's own table defaults, authored by no design
+  system. **138 of the 351** `no schema channel today` refusals sit on such a
+  part and now carry an explicit `UNRELIABLE BASELINE` qualifier naming the tag
+  and the fallback. Nothing is carried differently; the refusal simply stops
+  being presented as evidence the library declared something the browser did.
+  Widening `CONTROL_TAGS` is a CAPTURE change — see
+  [docs/HANDOFF.md](HANDOFF.md) §2 — and it cannot be priced offline, because
+  `regate` replays committed truth and committed truth has no control for a tag
+  that was never rendered.
+
+- **A fact supplied by the library's GLOBAL CSS is lost on the round trip.**
+  The control correctly subtracts the reset (it is not a component fact) and the
+  emitted CSS does not reproduce it, so the value is absent at both ends.
+  Measured instance: `tailwind/card` and `astryx/card` each draw a 1px border
+  whose `border-style: solid` comes from Tailwind preflight's
+  `* { border-style: solid }` — the width and colour shipped and the border
+  painted nothing. Closed for this case by an admission gated on a non-zero
+  width proving the style is load-bearing (`tailwind/Card 72.414 → 87.879`,
+  `astryx/Card 98.601 → 100.000`). **The general form is open**: any channel
+  whose value comes from the library's global CSS rather than the component's
+  own rules is in this shape, and each would need its own load-bearing test
+  before the same admission could be justified.
+
+- **`slot.acceptsMode: 'restrict'` has no canvas spelling.** Figma's
+  `INSTANCE_SWAP` carries `preferredValues`, a picker HINT that sorts entries
+  and prevents nothing. So `prefer` maps exactly, `open` maps by carrying
+  nothing, and the one tier with teeth cannot be expressed. Proven rather than
+  asserted: `npm run slot-constraints:check` §4 drives the real engine over
+  `ds.avatar-group` with only `acceptsMode` flipped and the two emitted scripts
+  are **byte-identical**. The restriction is enforced on the code surface by
+  `validateContract` and is absent on canvas. No committed contract uses
+  `restrict` today (all 38 `acceptsMode` declarations are `open` or `prefer`),
+  so this constrains the first author who reaches for it.
 
 ## B.15 The static (no-browser) path silently produces empty canvas sets
 
