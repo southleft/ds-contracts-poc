@@ -2422,7 +2422,7 @@ function carryAbsPlacement(
   }
   if (!ctx.mint) return ledger('minting is off — the per-variant px offsets have no carrier');
   // THE ABSENT-CONSTRAINTS ASSUMPTION, NAMED. `?? 'LEFT'` / `?? 'TOP'` is a
-  // guess, and until dump v1.12 it was a guess the capture MADE UNAVOIDABLE:
+  // guess, and until dump v1.13 it was a guess the capture MADE UNAVOIDABLE:
   // both dump sites mapped only MIN/MAX/CENTER, so a STRETCH or SCALE node had
   // its whole `constraints` field dropped and arrived here indistinguishable
   // from a genuine top-left pin. This does not lose a fact, it SUBSTITUTES one

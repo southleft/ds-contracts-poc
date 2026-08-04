@@ -451,7 +451,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 
 | instrument | what it pins | how to run |
 |---|---|---|
-| **Eval suite** | 187/187 evals as of `evals/results.json` — by claim family: 29 refusal, 32 determinism, 45 detection, 58 extraction, 4 convergence, 5 CLI, 13 journey, 1 theming (derive it: `python3 -c "import json,collections; print(collections.Counter(x['claim'] for x in json.load(open('evals/results.json'))['results']))"`) | `npm run eval` |
+| **Eval suite** | 188/188 evals as of `evals/results.json` — by claim family: 29 refusal, 32 determinism, 45 detection, 58 extraction, 4 convergence, 5 CLI, 13 journey, 1 theming (derive it: `python3 -c "import json,collections; print(collections.Counter(x['claim'] for x in json.load(open('evals/results.json'))['results']))"`) | `npm run eval` |
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
 | **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |
@@ -663,13 +663,14 @@ left out:**
   MUI's `Table`, and the hardest classes (data grid, tree, virtualized list,
   date picker, rich text, charts) are captured **nowhere**. Read every floor
   percentage as "on the easy 6.9%".
-- **The denominators lean against us, deliberately.** MUI's 135 counts every
-  capitalised directory including utilities (`NoSsr`, `ClickAwayListener`,
-  `TextareaAutosize`), and Carbon's 243 / Polaris's 180 / Astryx's 222 are
-  *whatever this repo's extractor could see*, helpers included. The true
-  component denominators are smaller and the true percentages therefore a
-  little higher. The order of magnitude is the finding; no row is rounded in
-  our favour.
+- **The denominators do not lean against us. They are INCOHERENT** — which is
+  a different thing, and this document said the wrong one until 2026-08-03.
+  MUI's 135 counts every capitalised directory including utilities (`NoSsr`,
+  `ClickAwayListener`, `TextareaAutosize`), and Carbon's 243 / Polaris's 180 /
+  Astryx's 222 are *whatever this repo's extractor could see*, helpers
+  included. That much was true. What was **not** true is the conclusion drawn
+  from it — that the numbers are merely conservative. §8.3a below shows the
+  column mixes three units against two different artifacts, and re-measures it.
 - **The gap between 62 and 54** is Astryx: 13 committed contracts, only 5 of
   which went through the computed-capture pipeline and are pinned by
   `regate-baseline.json`. The other 8 came from the static Phase-A path and
@@ -678,6 +679,116 @@ left out:**
 
 The next honest step is not a seventh library. It is **one library taken to
 50%** — which would test the long tail this table shows has never been touched.
+
+### 8.3a The published denominator is incoherent — re-measured, both columns kept
+
+*Added 2026-08-03. The table in §8.3 is unchanged and stays the published
+number; nothing below replaces it. This subsection states what is wrong with it
+and measures the same thing again a second way, so a reader can hold both.*
+
+The §8.3 total sums numerators and denominators measured in **three different
+units against two different artifacts**:
+
+- The **numerator is FAMILY-level everywhere** — one contract per component
+  family.
+- **Four of the six denominators are PART-level** — anatomy sub-parts counted
+  as whole components. Two are family-level.
+- **Two of the six** (Polaris, Carbon) were measured against a **GitHub clone
+  at a SHA, not the package the capture actually ran against**, and their name
+  lists are not in this repo. They cannot be audited from a clone, so no
+  exclusion rule can even be applied to them.
+
+Mechanical proof of the unit defect, from a committed artifact. Astryx's 222
+extracted names live in exactly **98 source directories, 97 of which are public
+subpath exports** — and `Table` alone contributes **29 of the 222**, so a
+component captured in **zero** libraries inflates Astryx's denominator by more
+than twice that library's entire numerator (13):
+
+```bash
+node -e "const ext=require('./examples/astryx/out/code-extraction.json');
+const pkg=require('./examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/package.json');
+const subs=new Set(Object.keys(pkg.exports).filter(k=>/^\.\/[A-Z][^/]*\$/.test(k)).map(k=>k.slice(2)));
+const f=new Map();for(const e of ext){const d=e.source.match(/\/src\/([^/]+)\//)[1];f.set(d,(f.get(d)||0)+1)}
+console.log(f.size,[...f.keys()].filter(d=>subs.has(d)).length,f.get('Table'))"   # → 98 97 29
+```
+
+**The exclusion rule.** A named export / component directory is excluded from
+the filtered denominator if and only if it is (X1) a behaviour-only wrapper,
+(X2) a provider / context / theme-config object, (X3) a transition or animation
+primitive, (X4) a type-only or constant-only export, (X5) an alternate build
+target or deprecated alias of something already counted, (X6) an unstyled
+utility, or (X7) a barrel/bundle aggregate. Anatomy sub-parts are **not**
+excluded. Layout primitives (`Box`, `Stack`, `Grid`, `Container`) are **not**
+excluded — this repo's own contracts include `stack` and `section`, so calling
+them non-components would be self-serving. Every excluded name is listed, by
+clause, in [docs/23 §C.1.3](23-known-limitations.md#c13-the-per-library-fraction-with-both-denominators).
+
+| library | contracts | published denominator | unit | auditable from a clone? | **published** | filtered denominator | **filtered** |
+|---|---|---|---|---|---|---|---|
+| MUI (`@mui/material@9.2.0`) | 14 | 135 | PART | yes | **10.4%** | 116 | **12.1%** |
+| Flowbite (`flowbite-react@0.12.17`) | 5 | 46 | FAMILY | yes | **10.9%** | 45 | **11.1%** |
+| Altitude (`altitude-web-components@1.0.2`) | 8 | 67 | FAMILY | yes | **11.9%** | 64 | **12.5%** |
+| Polaris (`@shopify/polaris@13.9.5`) | 12 | 180 | PART | **NO** — clone `Shopify/polaris@2b1ea88` | **6.7%** | 98 *(substitute: the captured package's `build/esm/components`, 121 dirs)* | **12.2%** |
+| Carbon (`@carbon/react@1.112.0`) | 10 | 243 | PART | **NO** — clone `carbon-design-system/carbon@bc66fc71` | **4.1%** | 110 *(substitute: the captured package's `es/components`, 122 dirs)* | **9.1%** |
+| Astryx (`@astryxdesign/core@0.1.6`) | 13 | 222 | PART | yes | **5.9%** | 96 *(the package's own capitalised subpath exports, 99)* | **13.5%** |
+| **totals** | **62** | **893** | mixed | — | **6.9%** | **529** | **11.7%** |
+
+**The Polaris and Carbon rows are a SUBSTITUTION, not a filtering,** and must
+be read as such: their published denominators come from a clone whose
+extraction output is not committed, so the rule cannot be applied to them at
+all. What is offered beside them is the same measurement taken against the
+pinned sandbox — the artifact every capture, scorecard and drift row in this
+repo was measured against. That is a better denominator for the reason §9's
+Altitude round proved (capturing the *published artifact* is what made
+`al-toggle`'s purgecss defect visible), but it is a different measurement.
+
+**Independent cross-check on MUI.** MUI emits a `<name>Classes` descriptor
+module only for components with styled slots. Filtering on that signal alone —
+no judgement — also excludes exactly **19** of 135. The two sets differ by two
+names in each direction. Two independent rules, same count:
+
+```bash
+node -e "const fs=require('fs');const d='examples/mui/.mui-sandbox/node_modules/@mui/material';
+const dirs=fs.readdirSync(d,{withFileTypes:true}).filter(e=>e.isDirectory()&&/^[A-Z]/.test(e.name)).map(e=>e.name);
+const no=dirs.filter(n=>!fs.readdirSync(d+'/'+n).includes(n[0].toLowerCase()+n.slice(1)+'Classes.js'));
+console.log(dirs.length-no.length, no.length)"   # → 116 19
+```
+
+### 8.3b Like-for-like — the only column where numerator and denominator match
+
+The filtered column still mixes units: MUI's 116 counts anatomy sub-parts while
+the other five count families. Since the numerator is family-level everywhere,
+this is the corrected comparison. MUI's 116 filtered parts collapse to **62
+families** under a mechanical rule (a name is a sub-part when another kept name
+is a prefix of it *and* the remainder starts with an uppercase letter). One fold
+the rule still gets wrong is named rather than patched — `IconButton→Icon`;
+counted separately the row is 14/63 = 22.2%, and the conservative 21.0% is what
+is published.
+
+| library | numerator (families) | denominator (families, filtered) | **coverage** |
+|---|---|---|---|
+| MUI | 13 | 62 | **21.0%** |
+| Flowbite | 5 | 45 | **11.1%** |
+| Altitude | 8 | 64 | **12.5%** |
+| Polaris | 12 | 98 | **12.2%** |
+| Carbon | 10 | 110 | **9.1%** |
+| Astryx | 12 | 96 | **12.5%** |
+| **total** | **60** | **475** | **12.6%** |
+
+**The finding.** Corrected for unit and for non-components, coverage is not a
+4%-to-12% spread with an embarrassing floor. It is a **9%–21% band whose floor
+is Carbon at 9.1%**, remarkably uniform across six vendors and five styling
+architectures — and that uniformity is itself evidence for the
+engine-generality claim of §1: how much of a library one hand-configured round
+reaches does not depend much on which library it is.
+
+**What does not change.** Nobody has taken a library past ~21%. The slice was
+hand-picked for tractability, so every floor percentage in this document is
+still *"on the easy slice"*. The next honest step is still one library taken to
+50%. None of those three sentences depends on which denominator you use — and
+per-archetype, the actionable cut of the same data (twelve proven primitives,
+six attempted-and-bounded, two never attempted) is in
+[docs/23 §C.1.1](23-known-limitations.md#c11-which-component-archetypes-are-proven--the-actionable-cut).
 
 ---
 
@@ -734,7 +845,7 @@ Figma account or a network call except `npm install`.
 npm install
 
 # ── the claim's own numbers ────────────────────────────────────────────────
-npm run eval                       # 187/187 as of evals/results.json
+npm run eval                       # 188/188 as of evals/results.json
 node -e "const r=require('./evals/results.json');console.log(r.passed+'/'+r.total)"
 
 # 54 drift rows, per library

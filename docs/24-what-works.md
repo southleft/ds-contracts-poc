@@ -1,0 +1,476 @@
+# 24 — What Works
+
+*The success-side counterpart to [23 — Known Limitations](23-known-limitations.md). Written for a design engineer deciding whether to adopt this: what is **proven**, and **how it was measured**.*
+
+> **This file is generated. Do not edit it.** `npm run capability:report` rebuilds it; `npm run capability:fresh` refuses if the committed bytes differ from a rebuild, and one of the 188 evals runs that refusal.
+
+This is the most dangerous document in the repository, because its output is
+flattering numbers, and it is built to be read with that in mind. Every number
+below is **read from a committed artifact** and carries the path it came from.
+Nothing is typed in. Where a source cannot answer, §7 says so instead of
+estimating. And the denominator comes **first** — §2, before any mean — because
+a fidelity average over a hand-picked slice, printed without the slice, is the
+single most misleading thing this repo could publish. The companion document
+is not optional reading: [23 — Known Limitations](23-known-limitations.md) is
+the complete inventory of what this does not do, and it is longer than this one.
+
+---
+
+## 1. The one-paragraph version
+
+Six third-party component libraries — Altitude, Astryx, Carbon, Flowbite / Tailwind, MUI, Polaris — across five styling
+architectures were run through one pipeline. 54 components came out with a measured floor:
+**89.6% mean computed-style equality** against the original npm package rendering in the same pinned
+Chromium, exact string comparison with no tolerance, over 379,861 compared style cells
+(31 of 54 components at ≥90%, 47 of 54 at ≥80%).
+In the other direction, a 599-variant Figma kit converted to code scores
+**92.70% visual fidelity** over the 537 statically scorable variants, and the
+canvas→code→canvas round trip closes on **15 of 15** components with every
+one of 23,414 facts classified as matched, diverged, lost or invented rather than dropped in silence.
+The whole thing is pinned by 188 executable claim gates and a 265-file byte-identical
+generation manifest. **What that does not say:** those 54 components are
+6.0% of the six libraries they came from, and they were picked because they were the tractable ones.
+
+---
+
+## 2. The denominator, first
+
+Every mean in this document is an average over captured components. This is
+which components, and what fraction of each library they are. It is printed
+before the results, not after them, and repeated under each table that
+averages.
+
+| library | contracts committed | measured (has a scorecard) | library size | **coverage** | source of the size |
+|---|---|---|---|---|---|
+| Altitude (`altitude-web-components@1.0.2`) | 8 | 8 | 67 | **11.9%** | `docs/22-generality.md` §8.3 |
+| Astryx (`@astryxdesign/core@0.1.6`) | 13 | 5 | 222 | **2.3%** | `docs/22-generality.md` §8.3 |
+| Carbon (`@carbon/react@1.112.0`) | 10 | 10 | 243 | **4.1%** | `docs/22-generality.md` §8.3 |
+| MUI (`@mui/material@9.2.0`) | 14 | 14 | 135 | **10.4%** | `docs/22-generality.md` §8.3 |
+| Polaris (`@shopify/polaris@13.9.5`) | 12 | 12 | 180 | **6.7%** | `docs/22-generality.md` §8.3 |
+| Flowbite / Tailwind (`flowbite-react@0.12.17`) | 5 | 5 | 46 | **10.9%** | `docs/22-generality.md` §8.3 |
+| **total** | **62** | **54** | **893** | **6.0%** |  |
+
+**Read every percentage on this page as "on the easy 6.0%."** The 54 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the six libraries they are 54 of 893 components (6.0%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
+
+**This table's coverage column is stricter than the one in docs/22 and docs/23, on purpose.**
+Those two print 62/893 = **6.9%** — *contracts committed* over library size.
+This page prints 54/893 = **6.0%** — *components with a measured scorecard* over library size,
+because this is the document quoting the fidelity numbers and the only components
+those numbers describe are the measured ones. The 8-contract gap is Astryx, whose other
+contracts came from the static path and carry no captured floor. A contract
+existing is not the same as a contract being measured; where the two differ this
+page uses the smaller number.
+
+**The size denominators lean against us on purpose** and are the one set of
+numbers here that is not machine-derived: they were produced by one-off
+extractor runs and recorded in prose in
+[docs/22 §8.3](22-generality.md#83-the-coverage-fraction--how-much-of-each-library-is-actually-captured),
+which this build parses rather than retypes. MUI's counts every capitalised
+directory including utilities; Carbon's, Polaris's and Astryx's are whatever
+this repo's own extractor could see, helpers included. The true denominators
+are smaller and the true percentages a little higher. The order of magnitude
+is the finding.
+
+Beyond the six foreign libraries, the corpus also holds contracts that are **not** captured from a third party and are not counted above:
+
+| corpus | contracts | what it is | source |
+|---|---|---|---|
+| this repo's own library | 51 | hand-authored here; the code→design direction's fixture | `contracts/*.contract.json` |
+| Untitled UI (Figma kit) | 30 | proposed FROM a canvas, not extracted from code — see §4 | `examples/untitled-ui/storybook/contracts/` |
+| Eventz (Figma kit) | 17 | a designer's own file with real variable names | `examples/eventz-vars/contracts/` |
+
+---
+
+## 3. Fidelity — code → contract → rendering
+
+The measurement: an enriched contract is emitted to HTML by `core/emit-html`
+and compared against **the original npm package rendering** in the same pinned
+Chromium, per combination × interaction state. Computed-style equality is an
+**exact string match over the styled channel set, with no tolerance and no
+whitelist** — the browser's full longhand set is enumerated. A channel the
+pipeline never opened still counts against it.
+
+| library | components | mean %equal | median | ≥90% | ≥80% | cells compared | cell-weighted | source |
+|---|---|---|---|---|---|---|---|---|
+| Altitude | 8 | **91.7** | 94.0 | 5/8 | 8/8 | 6,224 | 90.2 | `extract/computed/out/altitude/<comp>/scorecard.json` |
+| Astryx | 5 | **93.1** | 98.6 | 4/5 | 4/5 | 18,656 | 95.9 | `extract/computed/out/astryx/<comp>/scorecard.json` |
+| Carbon | 10 | **87.5** | 86.7 | 4/10 | 8/10 | 54,297 | 82.8 | `extract/computed/out/carbon/<comp>/scorecard.json` |
+| MUI | 14 | **89.7** | 91.3 | 9/14 | 12/14 | 89,851 | 85.4 | `extract/computed/out/mui/<comp>/scorecard.json` |
+| Polaris | 12 | **89.4** | 91.5 | 7/12 | 11/12 | 200,405 | 90.5 | `extract/computed/out/<comp>/scorecard.json` |
+| Flowbite / Tailwind | 5 | **86.8** | 88.9 | 2/5 | 4/5 | 10,428 | 94.2 | `extract/computed/out/tailwind/<comp>/scorecard.json` |
+| **all six** | **54** | **89.6** | 90.7 | **31/54** | **47/54** | **379,861** | **88.6** |  |
+
+**Read every percentage on this page as "on the easy 6.0%."** The 54 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the six libraries they are 54 of 893 components (6.0%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
+
+**Two means, both printed, because they answer different questions.** The
+unweighted mean (89.6%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
+the cell-weighted figure (88.6%) is what fraction of every style cell in the corpus
+actually matched. Neither is quoted alone. Whole-row exactness is the harshest
+cut of the same data: **2,456 of 6,156** rendered rows
+(39.9%) match the original on *every* channel at once.
+
+### 3.1 Every measured component, worst first
+
+No component is omitted. The worst row in the corpus is at the top.
+
+| component | library | %equal | combos × states | cells | source |
+|---|---|---|---|---|---|
+| `Avatar` | Polaris | 69.8 | 10 × 4 | 1,920 | `extract/computed/out/avatar/scorecard.json` |
+| `Card` | Flowbite / Tailwind | 72.4 | 1 × 4 | 116 | `extract/computed/out/tailwind/card/scorecard.json` |
+| `Checkbox` | MUI | 72.5 | 6 × 4 | 1,656 | `extract/computed/out/mui/checkbox/scorecard.json` |
+| `Switch` | Astryx | 77.3 | 4 × 4 | 1,536 | `extract/computed/out/astryx/switch/scorecard.json` |
+| `Accordion` | Carbon | 77.6 | 16 × 4 | 5,472 | `extract/computed/out/carbon/accordion/scorecard.json` |
+| `Switch` | MUI | 77.7 | 56 × 4 | 25,088 | `extract/computed/out/mui/switch/scorecard.json` |
+| `Button` | Carbon | 79.0 | 112 × 4 | 20,608 | `extract/computed/out/carbon/button/scorecard.json` |
+| `Tag` | Carbon | 80.5 | 52 × 4 | 12,896 | `extract/computed/out/carbon/tag/scorecard.json` |
+| `Checkbox` | Polaris | 81.0 | 6 × 4 | 2,464 | `extract/computed/out/checkbox/scorecard.json` |
+| `Tag` | Polaris | 81.0 | 32 × 4 | 7,401 | `extract/computed/out/tag/scorecard.json` |
+| `RadioButton` | Polaris | 81.3 | 4 × 4 | 1,392 | `extract/computed/out/radiobutton/scorecard.json` |
+| `Button` | Altitude | 81.5 | 5 × 4 | 1,280 | `extract/computed/out/altitude/button/scorecard.json` |
+| `Avatar` | Altitude | 81.7 | 4 × 4 | 568 | `extract/computed/out/altitude/avatar/scorecard.json` |
+| `TextField` | Polaris | 82.0 | 64 × 4 | 41,440 | `extract/computed/out/textfield/scorecard.json` |
+| `Link` | Altitude | 82.4 | 4 × 4 | 432 | `extract/computed/out/altitude/link/scorecard.json` |
+| `Checkbox` | Carbon | 84.3 | 6 × 4 | 1,776 | `extract/computed/out/carbon/checkbox/scorecard.json` |
+| `Toggle` | Carbon | 84.3 | 4 × 4 | 1,376 | `extract/computed/out/carbon/toggle/scorecard.json` |
+| `Alert` | Flowbite / Tailwind | 84.5 | 4 × 4 | 880 | `extract/computed/out/tailwind/alert/scorecard.json` |
+| `Table` | MUI | 85.2 | 2 × 4 | 6,176 | `extract/computed/out/mui/table/scorecard.json` |
+| `Button` | MUI | 86.4 | 126 × 4 | 27,216 | `extract/computed/out/mui/button/scorecard.json` |
+| `ToggleSwitch` | Flowbite / Tailwind | 88.9 | 6 × 4 | 864 | `extract/computed/out/tailwind/toggleswitch/scorecard.json` |
+| `TextInput` | Carbon | 89.0 | 10 × 4 | 3,560 | `extract/computed/out/carbon/textinput/scorecard.json` |
+| `Slider` | MUI | 89.4 | 12 × 4 | 7,392 | `extract/computed/out/mui/slider/scorecard.json` |
+| `Modal` | Carbon | 90.0 | 5 × 4 | 1,305 | `extract/computed/out/carbon/modal/scorecard.json` |
+| `Chip` | MUI | 90.2 | 28 × 4 | 6,832 | `extract/computed/out/mui/chip/scorecard.json` |
+| `Slider` | Astryx | 90.4 | 6 × 4 | 2,944 | `extract/computed/out/astryx/slider/scorecard.json` |
+| `Badge` | Flowbite / Tailwind | 90.7 | 12 × 4 | 1,968 | `extract/computed/out/tailwind/badge/scorecard.json` |
+| `Tooltip` | MUI | 90.7 | 2 × 4 | 129 | `extract/computed/out/mui/tooltip/scorecard.json` |
+| `Button` | Polaris | 90.8 | 240 × 4 | 83,520 | `extract/computed/out/button/scorecard.json` |
+| `Accordion` | MUI | 91.8 | 8 × 4 | 6,400 | `extract/computed/out/mui/accordion/scorecard.json` |
+| `ProgressBar` | Polaris | 92.1 | 12 × 4 | 1,824 | `extract/computed/out/progressbar/scorecard.json` |
+| `Tabs` | Carbon | 93.2 | 1 × 4 | 1,240 | `extract/computed/out/carbon/tabs/scorecard.json` |
+| `Badge` | Altitude | 93.8 | 10 × 4 | 1,280 | `extract/computed/out/altitude/badge/scorecard.json` |
+| `Tabs` | MUI | 93.8 | 6 × 4 | 4,320 | `extract/computed/out/mui/tabs/scorecard.json` |
+| `Pagination` | MUI | 94.0 | 1 × 4 | 796 | `extract/computed/out/mui/pagination/scorecard.json` |
+| `Menu` | MUI | 94.2 | 1 × 4 | 171 | `extract/computed/out/mui/menu/scorecard.json` |
+| `Chip` | Altitude | 94.3 | 12 × 4 | 1,968 | `extract/computed/out/altitude/chip/scorecard.json` |
+| `Autocomplete` | MUI | 95.1 | 2 × 4 | 2,536 | `extract/computed/out/mui/autocomplete/scorecard.json` |
+| `Dialog` | MUI | 95.4 | 5 × 4 | 435 | `extract/computed/out/mui/dialog/scorecard.json` |
+| `Banner` | Polaris | 97.0 | 16 × 4 | 12,192 | `extract/computed/out/banner/scorecard.json` |
+| `InlineNotification` | Carbon | 97.1 | 12 × 4 | 4,944 | `extract/computed/out/carbon/inlinenotification/scorecard.json` |
+| `Badge` | Polaris | 97.5 | 60 × 4 | 23,396 | `extract/computed/out/badge/scorecard.json` |
+| `Button` | Flowbite / Tailwind | 97.6 | 50 × 4 | 6,600 | `extract/computed/out/tailwind/button/scorecard.json` |
+| `Card` | Astryx | 98.6 | 13 × 4 | 1,144 | `extract/computed/out/astryx/card/scorecard.json` |
+| `Button` | Astryx | 99.0 | 24 × 4 | 11,520 | `extract/computed/out/astryx/button/scorecard.json` |
+| `Divider` | Altitude | 100.0 | 2 × 4 | 144 | `extract/computed/out/altitude/divider/scorecard.json` |
+| `Heading` | Altitude | 100.0 | 14 × 4 | 392 | `extract/computed/out/altitude/heading/scorecard.json` |
+| `IconClose` | Altitude | 100.0 | 8 × 4 | 160 | `extract/computed/out/altitude/iconclose/scorecard.json` |
+| `Badge` | Astryx | 100.0 | 14 × 4 | 1,512 | `extract/computed/out/astryx/badge/scorecard.json` |
+| `IconButton` | Carbon | 100.0 | 40 × 4 | 1,120 | `extract/computed/out/carbon/iconbutton/scorecard.json` |
+| `Card` | MUI | 100.0 | 4 × 4 | 704 | `extract/computed/out/mui/card/scorecard.json` |
+| `Spinner` | Polaris | 100.0 | 2 × 4 | 8 | `extract/computed/out/spinner/scorecard.json` |
+| `Text` | Polaris | 100.0 | 379 × 4 | 24,256 | `extract/computed/out/text/scorecard.json` |
+| `Thumbnail` | Polaris | 100.0 | 4 × 4 | 592 | `extract/computed/out/thumbnail/scorecard.json` |
+
+### 3.2 The frontier fixture — held out of every average above
+
+`extract/computed/out/conformance/` holds **50** more scorecards with a mean of
+**96.1%** over 2,500 cells. They are **excluded from §3 entirely** and
+must never be folded into a library mean: they are *synthetic single-construct
+cases* built by this repo to probe one CSS or DOM feature each, not components
+from anyone's design system. Including them would raise the headline number by
+averaging in a fixture we wrote ourselves to be measurable. That is the shape
+of every overclaim this repo has caught, so the split is structural here — the
+corpus is partitioned by directory before any mean is taken, and §8 checks that
+no scorecard escaped classification.
+
+| fixture | cases | mean %equal | counted in §3? | source |
+|---|---|---|---|---|
+| synthetic CSS/DOM constructs | 50 | 96.1 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
+| real third-party components | 54 | 89.6 | yes | `extract/computed/out/**/scorecard.json` |
+
+---
+
+## 4. Fidelity — canvas → code
+
+The reverse journey, measured on a real Figma community kit (Untitled UI).
+Variants are proposed from the canvas into contracts, emitted as static HTML,
+rendered, and scored against the exported reference image of the same variant.
+
+| measure | value | source |
+|---|---|---|
+| rows in the scored table | 599 | `examples/untitled-ui/renders/fidelity.json` |
+| statically scorable | 537 | same file, rows with a numeric `score` |
+| **mean fidelity over those** | **92.70%** | same file |
+| component sets | 15 | same file, distinct `set` |
+| unscored | 62 | same file, rows with `score: null` — itemised below |
+
+**The 62 unscored rows are named, not dropped**, and they are not all one thing:
+
+| why a row is unscored | rows | source |
+|---|---|---|
+| interaction-state (CSS-rendered, not statically scorable) | 58 | `fidelity.json`, `note` field |
+| axis not carried: size=xxs | 4 | `fidelity.json`, `note` field |
+
+Only 58 of them are the interaction-state exclusion
+(a hover or focus rendering is produced by CSS at runtime and a static export
+cannot be scored against it). The rest are a **carriage gap, not an instrument
+limit** — an axis the pipeline did not carry — and they are counted here as
+such rather than folded into the same excuse.
+
+### 4.1 Per component set
+
+| set | variants scored | mean fidelity | source |
+|---|---|---|---|
+| `toggle-base` | 16 | 98.00 | `examples/untitled-ui/renders/fidelity.json` |
+| `avatar-add-button` | 6 | 96.69 | `examples/untitled-ui/renders/fidelity.json` |
+| `avatar` | 162 | 96.17 | `examples/untitled-ui/renders/fidelity.json` |
+| `progress-bar` | 55 | 94.02 | `examples/untitled-ui/renders/fidelity.json` |
+| `button-group-base` | 32 | 92.24 | `examples/untitled-ui/renders/fidelity.json` |
+| `social-button` | 108 | 92.06 | `examples/untitled-ui/renders/fidelity.json` |
+| `button-base` | 20 | 91.97 | `examples/untitled-ui/renders/fidelity.json` |
+| `input-field-base` | 10 | 91.63 | `examples/untitled-ui/renders/fidelity.json` |
+| `avatar-label-group` | 12 | 91.48 | `examples/untitled-ui/renders/fidelity.json` |
+| `badge-base` | 8 | 91.33 | `examples/untitled-ui/renders/fidelity.json` |
+| `slider` | 40 | 91.18 | `examples/untitled-ui/renders/fidelity.json` |
+| `dropdown-list-item` | 12 | 90.91 | `examples/untitled-ui/renders/fidelity.json` |
+| `progress-circle` | 16 | 85.85 | `examples/untitled-ui/renders/fidelity.json` |
+| `avatar-group` | 12 | 84.90 | `examples/untitled-ui/renders/fidelity.json` |
+| `tooltip` | 28 | 81.21 | `examples/untitled-ui/renders/fidelity.json` |
+
+**Denominator for this table:** these are the sets in one community kit that
+were imported at all. The kit's un-imported sets do not appear as low scores;
+they do not appear. See [23 §1](23-known-limitations.md#1-coverage--how-much-of-a-library-is-actually-captured).
+
+---
+
+## 5. Reproducibility — the part that is not a percentage
+
+A fidelity number you cannot reproduce is an anecdote. These are the pins that
+make the numbers above re-derivable, and each is enforced by a gate rather than
+asserted in prose.
+
+| pin | value | what it forbids | source |
+|---|---|---|---|
+| generated source, byte-identical | 265 files hashed | a contract change altering generated code without review | `evals/golden.json` |
+| capture double-sweep identity | 104/104 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
+| browser captures behind the corpus | 6,317 | a floor quoted from a sample smaller than it claims | same files, `captures` |
+| executable claims | 188 gates | a documented behaviour with no test | `evals/results.json` |
+| dropped-fact receipt count | 70 pinned exactly | honesty being switched off unnoticed — see §6 | `extract/figma/dagger-census.json` |
+| doc numbers vs the repo | gated | a doc quoting a number the repo no longer produces | `scripts/docs-numbers-check.mjs` |
+| this document vs its sources | `--check` | this page going stale while still reading as current | `scripts/build-capability-report.mjs` |
+
+### 5.1 The claim suite by class
+
+The 188 evals are not all "does it work". They are classified by what they
+claim, and the largest classes after extraction are **detection** and
+**refusal** — gates that fail if the engine *stops* saying no. That balance is
+the point: an engine that carries everything is not a better engine, it is one
+that has stopped telling you what it could not do.
+
+| claim class | gates | what the class asserts | source |
+|---|---|---|---|
+| `C1-determinism` | 32 | same input, same bytes out | `evals/results.json` |
+| `C2-refusal` | 29 | the engine refuses BY NAME rather than guessing | `evals/results.json` |
+| `C3-detection` | 46 | a defect or drift is caught, not silently absorbed | `evals/results.json` |
+| `C4-convergence` | 4 | a round trip settles instead of oscillating | `evals/results.json` |
+| `C5-extraction` | 58 | a fact is carried out of a real library correctly | `evals/results.json` |
+| `C6-theming` | 1 | a mode/brand switch resolves to the right values | `evals/results.json` |
+| `C7-cli` | 5 | the command-line surface behaves as documented | `evals/results.json` |
+| `C8-journey` | 13 | an end-to-end adopter path completes | `evals/results.json` |
+
+---
+
+## 6. The honesty instruments, counted as features
+
+These are the numbers this repo is least tempted to publish and most needs to.
+Each one counts something the engine **could not do and said so**. They belong
+in a capability report because a conversion tool without them is not more
+capable — it is just quieter.
+
+### 6.1 Dropped-fact receipts (`†`)
+
+When the plugin engine compiles a contract and cannot carry a fact onto the
+canvas, it emits a receipt naming the fact. Across 8 committed corpora there are
+**70** such receipts, and the count is pinned **exactly** — in both directions.
+Fewer receipts is not automatically progress: it is either a real fix or a
+refusal path that quietly stopped firing, and both require a human to look.
+
+| corpus | dropped-fact receipts | contracts carrying one | source |
+|---|---|---|---|
+| `untitled-ui` | 15 | 15 | `extract/figma/dagger-census.json` |
+| `mui` | 14 | 14 | `extract/figma/dagger-census.json` |
+| `polaris` | 12 | 12 | `extract/figma/dagger-census.json` |
+| `carbon` | 10 | 10 | `extract/figma/dagger-census.json` |
+| `altitude` | 8 | 8 | `extract/figma/dagger-census.json` |
+| `astryx` | 6 | 6 | `extract/figma/dagger-census.json` |
+| `tailwind` | 5 | 5 | `extract/figma/dagger-census.json` |
+| `eventz-vars` | 0 | 0 | `extract/figma/dagger-census.json` |
+| **total** | **70** |  |  |
+
+### 6.2 Named refusals — the construct vocabularies
+
+Two hand-authored manifests are the independent denominators for "what can the
+engine be asked to do". Both are deliberately **not** derived from the code that
+decides carriage — every instrument that derives its denominator from the same
+filter that decides carriage scores 100% on a channel it never opened.
+
+| manifest | cases | breakdown | source |
+|---|---|---|---|
+| canvas constructs | 91 | CARRIED 72 · LEDGERED 11 · REFUSED 8 | `extract/figma/conformance/MANIFEST.json` |
+| CSS / DOM frontier | 53 | CARRIED 22 · UNSUPPORTED 18 · REFUSED 11 · LOWERED 2 | `conformance/MANIFEST.json` |
+
+Of the 91 canvas constructs, **91** are `green`.
+A construct that is neither carried nor named-refused is a hard failure of that
+suite — "it silently did nothing" is not an allowed outcome.
+
+### 6.3 The round trip closes, and every fact is classified
+
+Canvas → code → canvas, on the Untitled UI kit. The claim is **not** that the
+round trip is lossless. It is that it **closes** — it runs to completion on
+every component and every fact lands in exactly one of four buckets, so a loss
+is a row in a table rather than an absence.
+
+| bucket | facts | share of all facts | source |
+|---|---|---|---|
+| matched | 11,104 | 47.4% | `extract/figma/roundtrip-uui/report.json` |
+| diverged | 1,857 | 7.9% | same file |
+| loss | 4,088 | 17.5% | same file |
+| invented | 6,365 | 27.2% | same file |
+| **components closed** | **15 / 15** |  | same file, `totals` |
+
+**47.4% matched is the honest headline, and it is not high.** The value of this
+instrument is the classification, not the ratio — and the largest single
+category is an artifact of the comparison rather than a loss:
+
+- **`auto-layout-inert` — 940 of the 960 `layout.mode` divergences**
+  (50.6% of all divergence). A frame with one child, or with children the
+  designer positioned absolutely, has no observable auto-layout direction to
+  read back; the engine writes a direction that the original canvas did not
+  record. It is tagged as its own class precisely so it cannot be counted as a
+  fidelity loss. The remaining 20 `layout.mode` divergences are real.
+
+Every bucket is tagged, and the untagged remainder is reported as untagged:
+
+| bucket | tag | facts | source |
+|---|---|---|---|
+| diverged | `auto-layout-inert` | 940 | `extract/figma/roundtrip-uui/report.json` |
+| diverged | `(untagged)` | 885 | `extract/figma/roundtrip-uui/report.json` |
+| diverged | `vector-glyph` | 32 | `extract/figma/roundtrip-uui/report.json` |
+| loss | `restructured` | 2,705 | `extract/figma/roundtrip-uui/report.json` |
+| loss | `(untagged)` | 665 | `extract/figma/roundtrip-uui/report.json` |
+| loss | `text-style-identity` | 338 | `extract/figma/roundtrip-uui/report.json` |
+| loss | `vector-glyph` | 189 | `extract/figma/roundtrip-uui/report.json` |
+| loss | `interaction-states` | 137 | `extract/figma/roundtrip-uui/report.json` |
+| loss | `url-image` | 54 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `restructured` | 4,336 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `dup-sibling-names` | 1,710 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `cartesian-fill` | 80 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `hug-vs-fixed` | 72 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `zero-stroke` | 60 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `zero-fill` | 54 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `mixed-stroke-weight` | 32 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `vector-glyph` | 15 | `extract/figma/roundtrip-uui/report.json` |
+| invented | `declared-not-drawn` | 6 | `extract/figma/roundtrip-uui/report.json` |
+
+The `(untagged)` rows are the honest hole in this instrument: those facts are
+classified into a bucket but carry no *reason*, so nothing here can say whether
+they are engine defects or comparison artifacts. They are printed rather than
+excluded from the denominator.
+
+---
+
+## 7. What the sources cannot answer
+
+Questions a reader of this page will reasonably ask, for which no committed
+artifact holds an answer. They are listed instead of estimated, and instead of
+quietly omitted — an omission reads as "nothing to report here", which is a
+stronger claim than the evidence supports.
+
+| question | why this document does not answer it |
+|---|---|
+| a pass/fail count for `npm run paste:check` | `extract/figma/paste-door-check.ts` asserts against strings it prints and writes no machine-readable receipt. Its result is a green or red exit code inside `npm run eval`, counted there and nowhere else. This document does not transcribe a console. |
+| a pass/fail count for `npm run plugin:check` | `scripts/plugin-engine-check.mjs` asserts against strings it prints and writes no machine-readable receipt. Its result is a green or red exit code inside `npm run eval`, counted there and nowhere else. This document does not transcribe a console. |
+
+**Also not measured anywhere, and therefore not claimed:** how long a library
+takes to onboard, how much of the work is expert-configured rather than
+automatic, and whether any of this holds past the coverage fraction in §2.
+Those are the questions [23 — Known Limitations](23-known-limitations.md)
+exists to answer, and it answers them against this tool.
+
+---
+
+## 8. Cross-checks — two artifacts that must agree
+
+Every row is a number this build derived twice, from independent files. A
+disagreement is printed here and is never resolved toward the more flattering
+value. This section is the reason to trust §3 more than a hand-written table:
+the corpus is counted by the filesystem and again by a document written months
+earlier for a different purpose.
+
+| what must agree | derived here | and here | result |
+|---|---|---|---|
+| components with a computed scorecard = components pinned by the drift instrument | 54 — `extract/computed/out/**/scorecard.json` | 54 — `docs/22-generality.md §8.3, "pinned" total` | ✔ |
+| contracts committed under `examples/<lib>/contracts` = the coverage table's committed column | 62 — `examples/*/contracts/*.contract.json` | 62 — `docs/22-generality.md §8.3, "contracts committed" total` | ✔ |
+| the eval suite has as many result rows as it claims | 188 — `evals/results.json → results.length` | 188 — `same file → total` | ✔ |
+| every capture run carries the two-sweep determinism receipt | 104 — `extract/computed/out/**/numbers.json` | 104 — `count of numbers.json files` | ✔ |
+| every scorecard falls in a known corpus | 0 — `extract/computed/out/**/scorecard.json` | 0 — `the library registry in this script` | ✔ |
+| the round trip closed every component it opened | 15 — `extract/figma/roundtrip-uui/report.json → totals.roundTripClosed` | 15 — `same file → totals.components` | ✔ |
+| Altitude — contracts on disk = the coverage table's committed column | 8 — `examples/altitude/contracts/*.contract.json` | 8 — `docs/22-generality.md §8.3` | ✔ |
+| Altitude — components with a scorecard = the coverage table's pinned column | 8 — `extract/computed/out/altitude/<comp>/scorecard.json` | 8 — `docs/22-generality.md §8.3` | ✔ |
+| Astryx — contracts on disk = the coverage table's committed column | 13 — `examples/astryx/contracts/*.contract.json` | 13 — `docs/22-generality.md §8.3` | ✔ |
+| Astryx — components with a scorecard = the coverage table's pinned column | 5 — `extract/computed/out/astryx/<comp>/scorecard.json` | 5 — `docs/22-generality.md §8.3` | ✔ |
+| Carbon — contracts on disk = the coverage table's committed column | 10 — `examples/carbon/contracts/*.contract.json` | 10 — `docs/22-generality.md §8.3` | ✔ |
+| Carbon — components with a scorecard = the coverage table's pinned column | 10 — `extract/computed/out/carbon/<comp>/scorecard.json` | 10 — `docs/22-generality.md §8.3` | ✔ |
+| MUI — contracts on disk = the coverage table's committed column | 14 — `examples/mui/contracts/*.contract.json` | 14 — `docs/22-generality.md §8.3` | ✔ |
+| MUI — components with a scorecard = the coverage table's pinned column | 14 — `extract/computed/out/mui/<comp>/scorecard.json` | 14 — `docs/22-generality.md §8.3` | ✔ |
+| Polaris — contracts on disk = the coverage table's committed column | 12 — `examples/polaris/contracts/*.contract.json` | 12 — `docs/22-generality.md §8.3` | ✔ |
+| Polaris — components with a scorecard = the coverage table's pinned column | 12 — `extract/computed/out/<comp>/scorecard.json` | 12 — `docs/22-generality.md §8.3` | ✔ |
+| Flowbite / Tailwind — contracts on disk = the coverage table's committed column | 5 — `examples/tailwind/contracts/*.contract.json` | 5 — `docs/22-generality.md §8.3` | ✔ |
+| Flowbite / Tailwind — components with a scorecard = the coverage table's pinned column | 5 — `extract/computed/out/tailwind/<comp>/scorecard.json` | 5 — `docs/22-generality.md §8.3` | ✔ |
+
+All 18 agree.
+
+---
+
+## 9. How to reproduce every number on this page
+
+```bash
+# rebuild this document from the committed artifacts (no browser, no network,
+# no capture run — it only reads files that are already in the repo)
+npm run capability:report
+
+# refuse if the committed copy differs from a rebuild (this is also an eval)
+npm run capability:fresh
+```
+
+### Sources this build read
+
+| artifact | sha256 (12) | bytes | what it supplied |
+|---|---|---|---|
+| `conformance/MANIFEST.json` | `dec8d63f851b` | 35,169 | CSS/DOM frontier vocabulary |
+| `docs/22-generality.md` | `8923f769dec3` | 68,406 | coverage denominators (docs/22 §8.3 table) |
+| `evals/golden.json` | `6c17accc8645` | 29,223 | generated-source golden manifest |
+| `evals/results.json` | `377277e72f6c` | 20,089 | executable claim suite |
+| `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
+| `extract/computed/out/**/numbers.json` | `bfd68d5ab7de` | 656,956 | capture counts + determinism receipts — 104 files |
+| `extract/computed/out/**/scorecard.json` | `afddc730e04c` | 8,788,999 | computed-equality per component — 104 files |
+| `extract/figma/conformance/MANIFEST.json` | `a2c4c7a04db7` | 52,259 | canvas construct vocabulary |
+| `extract/figma/dagger-census.json` | `bf9540c3ae2b` | 2,159 | dropped-fact receipt census |
+| `extract/figma/roundtrip-uui/report.json` | `8280517ef895` | 2,983,543 | canvas→code→canvas round trip |
+
+Same bytes in, same file out: this build reads no clock, no git state and no
+environment, and sorts every collection before rendering.
+
+---
+
+## 10. What it costs
+
+Not restated here, deliberately — a summary of the limitations written by the
+success document is a summary written by the interested party. The complete
+inventory is **[23 — Known Limitations](23-known-limitations.md)**, and it is
+the longer document. Start with its §1, which holds the same coverage
+denominator this page opens with.
+
+Further reading: [22 — Generality](22-generality.md) (the evidence behind the
+engine claim and where it leaks) ·
+[conformance/EXPECTATIONS.md](../conformance/EXPECTATIONS.md) (the measured CSS/DOM frontier) ·
+[18 — User Flows](18-user-flows.md) (the ranked gap list).

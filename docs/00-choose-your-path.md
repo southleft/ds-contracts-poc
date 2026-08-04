@@ -19,6 +19,14 @@ human clicking Apply.
 | **B — code-first** | *"I have components in **code**. I want them in Figma."* | React/CSS → `onboard` / computed capture → contracts → Figma sets | `onboard` → review the draft config → `onboard --continue` → publish/paste | A designer clicks **Check for updates** (or pastes one JSON) and your components land on the canvas, token-bound |
 | **C — reconcile** | *"I already have a mature Figma library **and** a mature codebase, and they disagree."* | both surfaces → disagreement report → CI referee | plugin **Send → Scan this file** · `extract --reconcile` · `diff`/`diagnose` in CI | A property-by-property disagreement report, and a gate that stops the gap growing |
 
+**Every path below carries the same two citations, and neither is optional.**
+[24 — What Works](24-what-works.md) is what the path *delivers*, measured, with
+every number carrying the artifact it was read from.
+[23 — Known Limitations](23-known-limitations.md) is what it *costs*. They
+share one denominator — the 54 measured components are **6.0%** of the 893 in
+the six libraries they came from ([24 §2](24-what-works.md)) — so read every
+percentage on either page as *"on the easy 6.0%."*
+
 ---
 
 ## Prerequisites, by path
@@ -86,6 +94,19 @@ in your repo — plus the contract that produced them, in the same change.
 
 **Honest expectations.**
 
+- **What it delivers, measured** ([24 §4](24-what-works.md), [§5](24-what-works.md)):
+  **92.70% mean visual fidelity** over the 537 statically scorable variants of
+  a 599-variant community kit (best set 98.0%, worst 81.2%); the
+  canvas→code→canvas round trip **closes on 15 of 15** components with every
+  one of 23,414 facts classified rather than dropped in silence; and the
+  generate step is **byte-identical on any machine** — 265 generated files
+  hashed against a golden manifest, no model in the path.
+- **What it costs** ([23](23-known-limitations.md)): only the sets you import
+  exist — the kit's un-imported sets do not appear as low scores, they do not
+  appear; 62 of 599 rows are unscored and named as such (58 interaction-state,
+  4 a carriage gap); and 47.4% of round-trip facts *matched* — "closes" is not
+  "lossless", and the bucket-by-bucket accounting is
+  [24 §6.3](24-what-works.md).
 - **What "review" means here:** nothing writes without `--apply` or a PR.
   The PR body states the provenance — true round trip (a set this tool
   generated), inversion (a hand-built set), or no canvas provenance at all.
@@ -135,6 +156,14 @@ channel key for the standing publish channel.
 
 **The verbs.**
 
+> **The published CLI is behind this repository.** `@ds-contracts/cli@0.3.0` on
+> npm predates the 2026-08-03 round (the review gate that had never printed,
+> the phase-2 runner that could never resolve, the export envelope that carried
+> one of three payloads, and two sealed security guards). The tree is at
+> `0.4.0`; publishing needs the owner's OTP and has not happened yet. Until it
+> does, install from a clone for the fixed behaviour, and run
+> `npm run publish:check` to see the current state.
+
 ```bash
 npm i -g @ds-contracts/cli
 
@@ -156,6 +185,16 @@ their component-property overrides.
 
 **Honest expectations.**
 
+- **What it delivers, measured** ([24 §3](24-what-works.md)): **89.6% mean
+  computed-style equality** for a captured component, against the original npm
+  package rendering in the same pinned Chromium — an exact string match over
+  the browser's full longhand set, no tolerance, no whitelist, so a channel the
+  pipeline never opened still counts against it. 54 components across six
+  libraries and five styling architectures: 88.6% cell-weighted over 379,861
+  cells, 31 of 54 at ≥90%, 47 of 54 at ≥80%. Every one of the 54 is listed
+  worst-first in [24 §3.1](24-what-works.md) — the worst is 69.8%.
+- **What it costs** ([23](23-known-limitations.md)): hours of expert
+  configuration per library (below), and breadth — see the coverage bullet.
 - **The STOP is the design, not friction.** The drafted capture config
   carries `__review:*` markers on every field static source cannot infer —
   `classAllow`, `varPrefix`, `mount`, `fixedProps`. `onboard --continue`
@@ -167,11 +206,17 @@ their component-property overrides.
   anatomy is schema-valid and the emitter will faithfully build a correctly
   *named* set with **blank frames inside**. If your canvas sets come out
   empty, that is why, and the fix is the computed capture.
-- **Coverage per library is partial.** Each foreign-library round in this
-  repo committed a dozen or so components out of libraries of one to two
-  hundred — measured coverage about 4% to 12% per library
-  ([docs/22 §8.3](22-generality.md)). Fidelity per *captured* component is
-  high (the browser's own computed truth); breadth is the honest limit.
+- **Coverage per library is partial, and it is the number that decides
+  whether this is worth it.** Each foreign-library round in this repo
+  committed a dozen or so components out of libraries of one to two hundred.
+  On the *contracts committed* denominator that is about 4% to 12% per library
+  ([docs/22 §8.3](22-generality.md)); on the stricter *components with a
+  measured scorecard* denominator it is **2.3% to 11.9%**, and **6.0%** across
+  all six libraries ([24 §2](24-what-works.md), which prints that table before
+  any fidelity average, for exactly this reason). Data grid, tree, virtualized
+  list, date picker, rich text and charts appear in **zero** committed
+  contracts. Fidelity per *captured* component is high; breadth is the honest
+  limit, and the 89.6% above describes only the tractable 6.0%.
 - **What will look broken but is a named limit:** text wrapping is not
   implemented (a hugging text node inside a narrower fixed ancestor clips);
   no webfonts load in the harness; overlay components declare `states: []`
@@ -210,6 +255,14 @@ artifact that ends the "which one is right" argument — and a CI gate.
 
 **Honest expectations — read this before choosing C.**
 
+- **What it delivers:** a mechanical, per-property disagreement report and a CI
+  referee — and **no fidelity number, because there is nothing rendered to
+  score.** [24](24-what-works.md) carries no measurement for this path, and
+  that is stated rather than filled in: its §7 is the list of questions no
+  committed artifact answers. The one measured fact about path C is the *size*
+  of the human work it hands you — see the next bullet.
+- **What it costs** ([23](23-known-limitations.md)): the arbitration, and it is
+  unassisted.
 - **The reconciliation phase has NO tooling.** Stated plainly: there is no
   merge view, no CLI verb, no accept-left/accept-right surface — [docs/11's
   phase table](11-brownfield-adoption.md) marks Phase 2 as *NO TOOLING
@@ -221,11 +274,13 @@ artifact that ends the "which one is right" argument — and a CI gate.
   component.
 - **Reconciliation compares API surfaces only** — props, variants,
   defaults. Token and anatomy disagreement is out of its scope
-  ([docs/23 §4.3](23-known-limitations.md)).
+  (the reconciliation-scope entry in
+  [docs/23](23-known-limitations.md)).
 - **Adopting a hand-built set is not a verb this tool has.** Stamping an
   existing Figma set as contract-backed so future syncs amend it in place
   does not exist; coexistence in a foreign kit is proven, amendment of
-  hand-built sets is not ([docs/23 §4.2](23-known-limitations.md)).
+  hand-built sets is not (the adopting-a-hand-built-set entry in
+  [docs/23](23-known-limitations.md)).
 
 **The cost.** The scan and the report are minutes. The arbitration is the
 real cost, it is human, and today it is unassisted.
@@ -246,5 +301,9 @@ real cost, it is human, and today it is unassisted.
   the path-C walkthrough: extract, reconcile, diagnose.
 - [docs/18 — User Flows](18-user-flows.md) — the same loop cut by
   *persona* (designer / engineer / lead), not by journey.
-- [docs/23 — Known Limitations](23-known-limitations.md) — read it before
-  committing to any path.
+- [docs/24 — What Works](24-what-works.md) — the measured success side, every
+  number carrying the artifact it was read from. Generated; `npm run
+  capability:fresh` refuses it if it has gone stale.
+- [docs/23 — Known Limitations](23-known-limitations.md) — its companion, and
+  the longer of the two. Read it before committing to any path; read neither
+  alone.

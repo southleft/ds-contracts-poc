@@ -6,11 +6,15 @@
  */
 import { layout, codeBlock, themedImage, PLAYGROUND_URL, REPO_URL } from '../html.js';
 import { shippingExample } from '../examples.js';
+import { whatWorksData, docUrl, LIMITS_REL } from '../what-works.js';
 import type { SiteStats } from '../stats.js';
 import type { CoverageReceipt } from '../coverage.js';
 
 export function homePage(stats: SiteStats, receipt: CoverageReceipt): { route: string; html: string } {
   const fmt = (n: number | undefined): string => (n === undefined ? '—' : n.toLocaleString('en-US'));
+  // The measured pair. Read from the generated capability report — the front
+  // door quotes a fidelity number only with the denominator it was taken over.
+  const w = whatWorksData().n;
 
   const numbers = `
 <div class="numbers">
@@ -72,6 +76,12 @@ export function homePage(stats: SiteStats, receipt: CoverageReceipt): { route: s
 <section id="numbers">
   <h2>The proof, counted</h2>
   ${numbers}
+  <h3>What it does, and what that costs — the pair</h3>
+  <p>Those counts are about this repository. The question an adopter actually asks is what the tool does to <em>their</em> library, and that has two halves which are only honest together. <strong>What it does:</strong> ${w.measured} components from ${w.libraries} third-party libraries score <strong>${w.meanEqual}% mean computed-style equality</strong> against the original package rendering (exact string match, no tolerance, ${w.cells} cells), and in the other direction a Figma kit converts to code at <strong>${w.canvasMean}</strong> over ${w.canvasScored} scored variants. <strong>What that costs:</strong> those ${w.measured} components are <strong>${w.coverage}</strong> of the ${w.librarySize} in the libraries they came from, and they were picked because they were the tractable ones.</p>
+  <div class="doors">
+    <a class="door" href="/what-works/">What works — measured, denominator first <span class="door__arrow">→</span></a>
+    <a class="door" href="${docUrl(LIMITS_REL)}">Known limitations — what it costs <span class="door__arrow">→</span></a>
+  </div>
 </section>
 
 <section id="doors-again">

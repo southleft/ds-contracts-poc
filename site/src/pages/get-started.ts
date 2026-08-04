@@ -21,6 +21,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { layout, codeBlock, PLAYGROUND_URL, REPO_URL } from '../html.js';
 import { journeyStep, MANIFEST_REL } from '../journeys.js';
+import { whatWorksData, docUrl, LIMITS_REL } from '../what-works.js';
 
 function pkgVersion(rel: string): string {
   const pkg = JSON.parse(readFileSync(path.join(process.cwd(), rel), 'utf8')) as { version?: string };
@@ -31,6 +32,10 @@ function pkgVersion(rel: string): string {
 export function getStartedPage(): { route: string; html: string } {
   const cliVersion = pkgVersion('packages/cli/package.json');
   const schemaVersion = pkgVersion('packages/schema/package.json');
+  // The expectations section quotes the measured pair; both halves are read
+  // from the generated report, never typed in here.
+  const w = whatWorksData().n;
+  const limits = docUrl(LIMITS_REL);
 
   const designerPush = journeyStep('designer', 'figma-push');
   const designerEmit = journeyStep('designer', 'figma-emit');
@@ -166,15 +171,15 @@ ${codeBlock(designerEmit.command, 'bash', designerEmit.doc)}
 <hr>
 
 <h2 id="expect">What can I expect?</h2>
-<p>Two numbers pull in opposite directions, and both are true.</p>
-<p><strong>Fidelity per captured component is high.</strong> What lands on the canvas is the browser's own computed truth for your real component — not an approximation, not a screenshot, not a guess.</p>
-<p><strong>Coverage per library is partial.</strong> A first pass will not be your whole library. Each foreign-library round in the reference repo committed a dozen or so components out of a library of one to two hundred — measured per-library coverage runs from about 4% to about 12%. Budget hours per library for the recon and the config; the capture itself is machine time. The measured per-library table with its denominators is <a href="${REPO_URL}/blob/main/docs/22-generality.md">docs/22 §8.3</a>.</p>
+<p>Two numbers pull in opposite directions, both are true, and neither is publishable without the other. The measured answers live on <a href="/what-works/">What works</a> (what it does) and in <a href="${limits}">Known Limitations</a> (what it costs).</p>
+<p><strong>Fidelity per captured component is high — ${w.meanEqual}% mean.</strong> What lands on the canvas is the browser's own computed truth for your real component: not an approximation, not a screenshot, not a guess. Measured against the original npm package rendering in the same pinned Chromium, as an exact string match with no tolerance, ${w.measured} components across ${w.libraries} libraries score <strong>${w.meanEqual}% mean computed-style equality</strong> (${w.cellWeighted}% cell-weighted over ${w.cells} cells; ${w.over90} at ≥90%, ${w.over80} at ≥80%). <a href="/what-works/#worst-first">All ${w.measured} are listed worst-first</a>, none omitted.</p>
+<p><strong>Coverage per library is partial — and it is ${w.coverage}.</strong> A first pass will not be your whole library. Each foreign-library round in the reference repo committed a dozen or so components out of a library of one to two hundred: about 4% to 12% per library on the contracts-committed denominator, and <strong>${w.measured} of ${w.librarySize} = ${w.coverage}</strong> on the stricter measured-scorecard one. Read the fidelity number above as “on the easy ${w.coverage}” — that is why <a href="/what-works/#denominator">the denominator is printed first</a>. Budget hours per library for the recon and the config; the capture itself is machine time. The size denominators come from <a href="${REPO_URL}/blob/main/docs/22-generality.md">docs/22 §8.3</a>.</p>
 <p>Beyond that, four properties you can rely on:</p>
 <ul>
 <li><strong>It refuses rather than guesses.</strong> A token ref outside the inventory, an illegal contract, an unreviewed draft config, a state preview that would render identically to Default — each stops with a message naming the thing. A plausible substituted value is treated as worse than a crash.</li>
 <li><strong>Everything it cannot carry, it names.</strong> Every extraction writes a <code>*.extension.json</code> sidecar listing each captured fact the vocabulary refuses, with the reason. Nothing is dropped on the floor.</li>
 <li><strong>Re-running is always safe.</strong> Same input, same bytes; applying an update preserves node ids, component keys and instance overrides.</li>
-<li><strong>The known gaps are written down, not discovered.</strong> Three you will meet soon: <strong>overlay components</strong> (Dialog, Menu, Tooltip) have no hover/focus/active planes in the captured truth, so those contracts declare <code>states: []</code> by design; <strong>text wrapping is not implemented</strong>, so a hugging text node inside a narrower fixed-width ancestor clips; <strong>the capture harness loads no webfonts</strong>, so absolute text widths are fallback-font widths. The full ledger is <a href="${REPO_URL}/blob/main/docs/22-generality.md">docs/22 §8</a>.</li>
+<li><strong>The known gaps are written down, not discovered.</strong> Three you will meet soon: <strong>overlay components</strong> (Dialog, Menu, Tooltip) have no hover/focus/active planes in the captured truth, so those contracts declare <code>states: []</code> by design; <strong>text wrapping is not implemented</strong>, so a hugging text node inside a narrower fixed-width ancestor clips; <strong>the capture harness loads no webfonts</strong>, so absolute text widths are fallback-font widths. The complete inventory is <a href="${limits}">docs/23 — Known Limitations</a>, whose counterpart is <a href="/what-works/">What works</a>; the evidence behind the generality claim and where it leaks is <a href="${REPO_URL}/blob/main/docs/22-generality.md">docs/22 §8</a>.</li>
 </ul>
 
 <h2 id="tested">These commands are tested, literally</h2>

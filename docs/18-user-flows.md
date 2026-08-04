@@ -86,7 +86,7 @@ terminal."*
    channel it must never become (see Flow 5).
 5. "Generate in this file" with tokens-first sync. Real component sets
    appear, dependency-ordered, bound to variables with the team's token
-   names. **[EXISTS — Generate tab, tokens-first, composite resolution]**
+   names. **[EXISTS — Build tab, tokens-first, composite resolution]**
 6. Inspect a generated Button: real variants in the properties panel,
    fills bound to recognizable variables. Where token matching degraded,
    the plugin explains it in designer words ("3 colors couldn't match a
@@ -200,7 +200,7 @@ the canvas, like a normal person.*
 3. The drift language must be the designer's — "padding," "new variant,"
    "fill changed" — but the shipped Drift hint leads with "contract hash"
    and "canvas fingerprint" (`ui.html:297`). **[GAP → G12]**
-4. "→ Propose this change" lands in the Propose tab with the set name and
+4. "→ Propose this change" lands in the Send tab with the set name and
    base contract pre-filled from baked contracts. **[EXISTS — Drift→
    Propose glue; this is the zero-ticket spine and it is built]**
 5. "Read the set & diff" shows the change as a per-channel diff. The
@@ -390,7 +390,7 @@ Button on canvas Tuesday; the bundle arrives Wednesday.*
    last main state (the G1 courier unrun for weeks), the designer's
    "drift" is actually the engineer's merged change, and her Propose PR
    becomes a revert that `diff` then blames on her. The merge — and the
-   Propose tab before it — must verify the base is an ancestor of main
+   Send tab before it — must verify the base is an ancestor of main
    and refuse otherwise: "canvas is 3 syncs behind — deliver before
    proposing." **[GAP → G3, downstream of G1]**
 5. CI backstop: the `diff` exit-code gate blocks the contract PR until
@@ -415,9 +415,9 @@ These are the product; the gap list below exists to protect them.
   The idempotence demo is the single most persuasive 60 seconds
   available; the lead performs it live, twice, in front of the design
   team. Byte-identical re-runs are the precondition for automation.
-- *Designer, Update tab:* "Change report — nothing applied yet," apply
+- *Designer, Changes tab:* "Change report — nothing applied yet," apply
   Button, hold Card. Review-before-write on the canvas.
-- *Designer, Propose tab:* dry-run default-on shows the exact plan;
+- *Designer, Send tab:* dry-run default-on shows the exact plan;
   token is session-only; the refusal copy offers the dry run instead of
   demanding the credential.
 - *Lead, playground:* the degradation example in the gallery — a tool
@@ -489,7 +489,7 @@ was found" and the Status column as "what is true now"; where a body says
 | **G6** | **Runtime-styled onboarding: draft capture-config generation + coverage scorecard.** Emotion/MUI/Tailwind capture configs are expert work with a history of needing core engine changes per styling method. Propose a draft config from the extract pass; aggregate refusal reports into a library scorecard that honestly counts "N components unmeasurable without computed capture"; playground routes runtime-styled pastes to a cost explanation, not raw refusals. | **PARTIAL** — CLI halves shipped `c0aed6f`; playground routing OPEN | engineer, lead (brownfield default path) | ENGINE (config gen) + SMALL (scorecard rollup) |
 | **G7** | **Brownfield write-back suggested diffs.** Design-led merges leave hand-written components stale. Emit anchor-derived suggested patches on the PR ("`Badge.module.css:14`: `var(--radius-md)` → `var(--radius-lg)`") — human applies, ideally as GitHub suggested changes; never auto-write. | OPEN | engineer | ENGINE |
 | **G8** | **Plain-words style diffs in the update report.** Every recolor and token rename collapses into "interior/style changes (no API change)" — exactly what a designer needs to decide apply/hold. Both compiled specs are in hand at plan time; diff per channel and reuse the drift pretty-printer so both reports speak one language. | **SHIPPED** `c0aed6f` | designer | SMALL |
-| **G9** | **Sample-library cold start.** The Generate tab greets a repo-less designer with an empty textarea and CLI text. Add "Build the sample library" feeding the baked bundle straight into the existing generate path. Gates trust moments one and two for anyone without an engineer beside them. | **SHIPPED** `c0aed6f` | designer | SMALL |
+| **G9** | **Sample-library cold start.** The Build tab greets a repo-less designer with an empty textarea and CLI text. Add "Build the sample library" feeding the baked bundle straight into the existing generate path. Gates trust moments one and two for anyone without an engineer beside them. | **SHIPPED** `c0aed6f` | designer | SMALL |
 | **G10** | **PR-first CI defaults + config split.** code-led.yml commits contracts to main; default must open/append a PR. Split `code.root` (extract/diff = real components) from `generate.out`; after design-led merges, run a second diff against real components as a named expected-red status so brownfield debt is tracked by the tool. Defaults are trust statements. | OPEN | engineer | SMALL (wiring) |
 | **G11** | **Contract-diff English summarizer (`diff --summarize --base <ref>`).** Channel-level "Button: +variant size.xl; padding: space.300 → space.400" for PR comments and job summaries — new CLI surface, not reordering (plus the extract-on-PR walls: fork tokens, bot-loop guards, contract races). Feeds G8's language too. | OPEN | engineer; feeds designer reports | ENGINE |
 | **G12** | **Designer-language safety narration bundle.** "Re-ran: 0 changes"; the "What's protected" card; per-node degradation callouts; Drift hint rewritten without "hash"/"fingerprint"; spec-sheet (not JSON) diff in Propose; post-apply change highlights; token naming in drift detail on exact value match (full reverse lookup is ENGINE — do not budget it as copy). Style model: the shipped apply-success line. The engine is already safe; this makes it *believed* safe. | **PARTIAL** — narration shipped `c0aed6f`; 3 sub-items OPEN | designer | SMALL |

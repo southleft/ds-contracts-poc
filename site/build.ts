@@ -17,6 +17,7 @@ import { buildSpecPages } from './src/pages/spec.js';
 import { homePage } from './src/pages/home.js';
 import { buildHowPages } from './src/pages/how.js';
 import { getStartedPage } from './src/pages/get-started.js';
+import { whatWorksPage } from './src/pages/what-works.js';
 import { contributePage } from './src/pages/contribute.js';
 import { cliPage } from './src/pages/cli.js';
 import { emittersPage } from './src/pages/emitters.js';
@@ -64,6 +65,7 @@ const pages: Array<{ route: string; html: string }> = [
   homePage(stats, receipt),
   ...(await buildSpecPages(receipt)),
   ...buildHowPages(stats, replays),
+  whatWorksPage(),
   getStartedPage(),
   cliPage(),
   emittersPage(),

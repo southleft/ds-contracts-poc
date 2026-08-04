@@ -375,7 +375,7 @@ npx tsx packages/cli/src/cli.ts figma bundle examples/carbon/contracts \
 ```
 
 This is the artifact a stranger consumes: **contracts + token set in one
-self-contained JSON**, pasted into the plugin's Generate tab. Deterministic —
+self-contained JSON**, pasted into the plugin's Build tab. Deterministic —
 same inputs, identical bytes.
 
 ### 2.9 Gates

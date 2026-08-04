@@ -4,7 +4,7 @@
  * code.js SIMULATOR and assert the re-housed IA behaves.
  */
 import { chromium } from 'playwright-core';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -26,9 +26,27 @@ const ok = (cond, what) => { console.log((cond ? '✔ ' : '✖ ') + what); if (!
   // Labels of surfaces the 2026-07-26 IA deleted. Their presence means the
   // text describes a plugin that no longer exists.
   const DEAD_LABELS = ['Generate tab', 'Update library', 'Propose tab', 'six tabs', 'seven tabs'];
-  for (const [name, text] of [['plugin README (ships in the zip)', readme], ['source ui.html', srcUi]]) {
+  // DOCS ARE IN THE SWEEP TOO (2026-08-03): the round that added this gate
+  // scoped it to the plugin's own two files, and an audit immediately found
+  // `Generate tab` still live in docs/18 — outside the gate by construction.
+  // Any markdown under docs/ that names a deleted surface misdirects a reader
+  // exactly as the shipped README did. Historical mentions stay legal via the
+  // same killing-context rule used for "Send to Playground" below.
+  const docFiles = readdirSync(path.join(ROOT, 'docs'))
+    .filter((f) => f.endsWith('.md'))
+    .map((f) => [`docs/${f}`, readFileSync(path.join(ROOT, 'docs', f), 'utf8')]);
+  for (const [name, text] of [['plugin README (ships in the zip)', readme], ['source ui.html', srcUi], ...docFiles]) {
     for (const label of DEAD_LABELS) {
-      ok(!text.includes(label), `${name} does not name the dead pre-2026-07-26 surface "${label}"`);
+      // A doc may narrate the rename ("Generate tab → Build tab", the IA
+      // record in docs/19); a LIVE instruction may not. Same discipline as
+      // the Send-to-Playground rule: killing-context is legal.
+      let j = -1;
+      let live = 0;
+      while ((j = text.indexOf(label, j + 1)) >= 0) {
+        const ctx = text.slice(Math.max(0, j - 200), j + 240);
+        if (!/renamed|re-hous|deleted|removed|no longer|was |used to|→|->|historical|KEPT/i.test(ctx)) live += 1;
+      }
+      ok(live === 0, `${name} does not name the dead pre-2026-07-26 surface "${label}" as a live instruction (${live} live mention(s))`);
     }
     // "Send to Playground" was killed with that IA. A HISTORICAL mention (one
     // that names the killing) is legal; naming it as a live feature is not.

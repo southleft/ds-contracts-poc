@@ -53,6 +53,7 @@ export interface NavItem {
 const NAV: NavItem[] = [
   { label: 'Spec', href: '/spec/', match: '/spec' },
   { label: 'How it works', href: '/how-it-works/', match: '/how-it-works' },
+  { label: 'What works', href: '/what-works/', match: '/what-works' },
   { label: 'Get started', href: '/get-started/', match: '/get-started' },
   { label: 'Contribute', href: '/contribute/', match: '/contribute' },
 ];
@@ -147,6 +148,8 @@ export function layout(opts: PageOpts, body: string): string {
         <p class="footer__label">Project</p>
         <a href="${REPO_URL}">Repository</a>
         <a href="${PLAYGROUND_URL}">Playground</a>
+        <a href="/what-works/">What works — the measured wins</a>
+        <a href="${REPO_URL}/blob/main/docs/23-known-limitations.md">Known limitations — what it costs</a>
         <a href="/contribute/">Contribute</a>
         <a href="${REPO_URL}/blob/main/MILESTONES.md">Milestones</a>
         <a href="${REPO_URL}/blob/main/CHANGELOG.md">Changelog</a>

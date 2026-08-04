@@ -161,9 +161,11 @@ Also walked, with every CLI line rendered from the eval-executed manifest: **[th
 
 ### What to expect
 
-Two facts pull in opposite directions, and both are true. **Fidelity per captured component is high** — what lands on the canvas is the browser's own computed truth for your real component. **Coverage per library is partial** — each foreign-library round here committed a dozen or so components out of a library of one to two hundred, measured coverage running from about 4% to about 12%. Budget hours per library for the recon and config; the capture itself is machine time. The measured table with denominators is [docs/22 §8.3](./22-generality.md).
+**Read the pair, not one half.** [docs/24 — What Works](./24-what-works.md) is what this provably does, generated from the committed artifacts with every number carrying the file it was read from; [docs/23 — Known Limitations](./23-known-limitations.md) is what it costs, and it is the longer of the two.
 
-Three known gaps you will meet, written down rather than discovered: overlay components (Dialog, Menu, Tooltip) have no hover/focus/active planes in the captured truth and declare `states: []` by design; text wrapping is not implemented, so a hugging text node inside a narrower fixed-width ancestor clips; the capture harness loads no webfonts, so absolute text widths are fallback-font widths. Full ledger: [docs/22 §8](./22-generality.md).
+Two facts pull in opposite directions, and both are true. **Fidelity per captured component is high** — what lands on the canvas is the browser's own computed truth for your real component: **89.6% mean computed-style equality** against the original npm package rendering across 54 components in six libraries, exact string match, no tolerance ([docs/24 §3](./24-what-works.md), which lists all 54 worst-first). **Coverage per library is partial** — each foreign-library round here committed a dozen or so components out of a library of one to two hundred, measured coverage running from about 4% to about 12% on the contracts-committed denominator and **6.0% overall** on the stricter measured-scorecard one ([docs/24 §2](./24-what-works.md), printed there *before* any average; the size denominators come from [docs/22 §8.3](./22-generality.md)). Budget hours per library for the recon and config; the capture itself is machine time.
+
+Three known gaps you will meet, written down rather than discovered: overlay components (Dialog, Menu, Tooltip) have no hover/focus/active planes in the captured truth and declare `states: []` by design; text wrapping is not implemented, so a hugging text node inside a narrower fixed-width ancestor clips; the capture harness loads no webfonts, so absolute text widths are fallback-font widths. Full inventory: [docs/23](./23-known-limitations.md); the evidence behind the generality claim and where it leaks: [docs/22 §8](./22-generality.md).
 
 ## How do I use it?
 
@@ -201,6 +203,6 @@ Then prove the loop to yourself in about two minutes:
 2. Open a contract in `contracts/` and change something small — add an enum value, tweak a token binding.
 3. `npm run build && npm run parity` — the differ now reports the canvas **behind**, naming exactly what's missing and how to fix it. That honest red state *is* the product: nothing pretends to be in sync when it isn't.
 4. Revert, or carry the change through — regenerate, sync the canvas, and watch it go green again.
-5. `npm run eval` — 187 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
+5. `npm run eval` — 188 deterministic checks that the machinery itself (detection, refusal, convergence, byte-identical regeneration) still holds.
 
 From there: [The Bridge](./00-the-bridge.md) for the narrative, [Architecture](./01-architecture.md) for the model, [Contract Specification](./02-contract-spec.md) when you're ready to write one.

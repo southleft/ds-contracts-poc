@@ -3208,6 +3208,68 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       );
     },
   },
+  {
+    // THE SUCCESS DOCUMENT IS THE ONE MOST DANGEROUS TO LEAVE UNGATED.
+    // `docs/24-what-works.md` is a third aggregator, built on the same rule as
+    // LEDGER.md and RESIDUALS.md — every number READ from a committed artifact,
+    // nothing typed in. It differs from them in one respect that decides how it
+    // must be gated: its output is FLATTERING NUMBERS, and it is the document
+    // an adopter is most likely to read and least likely to re-derive.
+    //
+    // A stale RESIDUALS.md misdirects the next round's priorities, which is
+    // bad. A stale 24-what-works.md makes favourable claims the repo can no
+    // longer support, to an outside reader, in this repo's own voice. It reads
+    // as current because it has no date on it — that is deliberate (a clock
+    // would break determinism) and it is exactly what makes the freshness gate
+    // load-bearing rather than tidy.
+    //
+    // The gate also covers the document's CROSS-CHECK section: §8 derives
+    // eighteen numbers twice from independent artifacts (the filesystem, and
+    // the coverage table in docs/22 §8.3 written months earlier for another
+    // purpose) and PRINTS disagreements instead of resolving them. Because a
+    // disagreement changes the rendered bytes, this check goes red when two
+    // sources drift apart — not only when a number moves.
+    id: 'capability-report-is-fresh',
+    claim: 'C3-detection',
+    run: () => {
+      // RUN IN THE REAL REPO, NOT THE SCRATCH COPY — same reason as the
+      // ledger check above: `run()` executes in evals/.scratch, which does not
+      // carry examples/untitled-ui/renders/. The claim is about the bytes
+      // COMMITTED in this repo, so the check belongs in this repo.
+      const r = spawnSync('node', ['scripts/build-capability-report.mjs', '--check'], { cwd: ROOT, encoding: 'utf8' });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) throw new Error(`docs/24-what-works.md is STALE vs a rebuild from its committed sources:\n${out}`);
+      if (!out.includes('docs/24-what-works.md is byte-identical')) throw new Error('capability report freshness check did not report');
+
+      // A GREEN FRESHNESS CHECK ON A DOCUMENT THAT SILENTLY DROPPED ITS
+      // HONESTY SECTIONS WOULD STILL BE GREEN. The freshness gate only proves
+      // the bytes match a rebuild; it cannot notice that the rebuild stopped
+      // printing the denominator. So assert the load-bearing sentences are
+      // present, by name. These are the ones whose ABSENCE turns this file
+      // from a measurement into marketing.
+      const doc = readFileSync(path.join(ROOT, 'docs/24-what-works.md'), 'utf8');
+      for (const required of [
+        'Read every percentage on this page as "on the easy', // the denominator caveat, inline
+        '## 2. The denominator, first',                        // and printed BEFORE the means
+        '## 7. What the sources cannot answer',                // sources that cannot answer say so
+        '## 8. Cross-checks',                                  // derived twice, disagreements printed
+        'is never resolved toward the more flattering',        // the tie-break rule, stated
+        '23-known-limitations.md',                             // the cost document, linked
+      ]) {
+        if (!doc.includes(required)) throw new Error(`docs/24-what-works.md no longer contains its honesty guard: ${JSON.stringify(required)}`);
+      }
+      // THE CAVEAT MUST APPEAR MORE THAN ONCE — under §2 and again under the
+      // fidelity table in §3. A single mention at the top is the shape a reader
+      // scrolls past.
+      const caveats = doc.split('Read every percentage on this page as "on the easy').length - 1;
+      if (caveats < 2) throw new Error(`the coverage caveat appears ${caveats}×; it must be printed inline under EVERY table that averages over captured components`);
+      if (doc.includes('**✘ DISAGREE**')) throw new Error('docs/24-what-works.md reports a cross-check DISAGREEMENT — two artifacts that must agree do not. Reconcile the artifacts.');
+
+      console.log(
+        `capability-report-is-fresh: docs/24-what-works.md re-derives byte-identically from its committed sources, prints the coverage denominator ${caveats}× inline, names what its sources cannot answer, and reports no cross-check disagreement. It is the success-side counterpart to the 23 doc and the only aggregator here whose output is flattering — so it is gated on its honesty sections, not just its bytes.`,
+      );
+    },
+  },
 
   {
     // A REFUSAL THAT NAMES THE WRONG DESTINATION is worse than no refusal: it

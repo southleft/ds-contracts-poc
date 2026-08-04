@@ -1,6 +1,6 @@
 {
-  "passed": 187,
-  "total": 187,
+  "passed": 188,
+  "total": 188,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -574,6 +574,11 @@
     },
     {
       "id": "ledger-and-residuals-are-fresh",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "capability-report-is-fresh",
       "claim": "C3-detection",
       "pass": true
     },

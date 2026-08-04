@@ -20,7 +20,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { DRAFT_MARKER_KEY, DRAFT_MARKER_MESSAGE } from '../../../extract/draft-capture-config.js';
@@ -294,4 +294,65 @@ test('the review gate warns when a queued component can capture its trigger inst
   // advisory's only job is to be right when it speaks.
   const noSeed = { components: [{ name: 'Ghost', contract: 'seeds/absent.contract.json' }] };
   assert.deepEqual(mountAdvisories(noSeed, root, ['Ghost']), []);
+});
+
+// ---------------------------------------------------------------------------
+// ADVERSARIAL PIN (2026-08-03) — THE SYMLINK ESCAPE.
+//
+// An adversarial verifier EXECUTED this: with sandbox/node_modules/<pkg> a
+// SYMLINK to a directory outside the sandbox, `onboard <pkg>` printed
+// "✔ Extracted 1 component(s)" and wrote contracts cut from the HOST repo's
+// own sources under the target package's name. `within()` was
+// path.relative string containment, which a symlink satisfies while every
+// read follows the link. This is not exotic: `npm i <dir>`, `npm link` and
+// workspaces all symlink, and a sandbox left by an older CLI is REUSED.
+//
+// The traversal and deep-tree attacks from the same round are pinned in
+// figma-receive.test.ts; this one had no pin until now.
+// ---------------------------------------------------------------------------
+
+test('ATTACK: a SYMLINKED sandbox package entry is refused by name — it can never extract the host repo', async () => {
+  const ws = mkdtempSync(path.join(tmpdir(), 'ds-symlink-'));
+  const host = path.join(ws, 'host');
+  mkdirSync(path.join(host, 'src', 'components'), { recursive: true });
+  writeFileSync(path.join(host, 'src', 'components', 'HostSecret.tsx'), 'export const HostSecret = () => <div className="s">secret</div>;\n');
+  writeFileSync(path.join(host, 'package.json'), JSON.stringify({ name: 'acme-ui', version: '1.0.0' }) + '\n');
+
+  const sandboxModules = path.join(ws, 'wsdir', '.ds-contracts', 'onboard', 'sandbox', 'node_modules');
+  mkdirSync(sandboxModules, { recursive: true });
+  writeFileSync(path.join(sandboxModules, '..', 'package.json'), JSON.stringify({ name: 'acme-ui-sandbox', private: true }) + '\n');
+  symlinkSync(host, path.join(sandboxModules, 'acme-ui'), 'dir');
+
+  const cwd = process.cwd();
+  const logs: string[] = [];
+  const errs: string[] = [];
+  const log = console.log;
+  const error = console.error;
+  console.log = (...a: unknown[]) => void logs.push(a.join(' '));
+  console.error = (...a: unknown[]) => void errs.push(a.join(' '));
+  let refusal = '';
+  let code: number | undefined;
+  try {
+    process.chdir(path.join(ws, 'wsdir'));
+    // onboardCommand is async and the guard throws — a CliUsageError the shell
+    // maps to exit 2. Either shape counts as a refusal; a clean 0 does not.
+    code = await onboardCommand(['acme-ui']);
+  } catch (e) {
+    refusal = (e as Error).message;
+  } finally {
+    console.log = log;
+    console.error = error;
+    process.chdir(cwd);
+  }
+  const out = [refusal, ...logs, ...errs].join('\n');
+
+  assert.ok(refusal !== '' || (code !== undefined && code !== 0), `onboard must REFUSE a symlinked package entry — exited ${code}\n${out}`);
+  assert.match(out, /SYMLINK/i, `the refusal must name the symlink:\n${out}`);
+  // and nothing may have been extracted from the host
+  const walk = (dir: string): string[] =>
+    readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+      e.name === 'node_modules' ? [] : e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)],
+    );
+  const leaked = walk(path.join(ws, 'wsdir')).filter((f) => /contract\.json$/.test(f) && readFileSync(f, 'utf8').includes('HostSecret'));
+  assert.deepEqual(leaked, [], `host sources leaked into ${leaked.join(', ')}`);
 });
