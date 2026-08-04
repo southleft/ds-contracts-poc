@@ -60,6 +60,30 @@ async function fetchBytes(url, tries = 4) {
 /** vite content-hashes every chunk, so the asset filenames ARE the version. */
 const assetRefs = (html) => [...html.matchAll(/\/assets\/[A-Za-z0-9._-]+\.(?:js|css)/g)].map((m) => m[0]).sort();
 
+/** Cloudflare Pages serves the previous deployment for a short window after
+ *  the upload returns. The first cut retried only HTTP FAILURES, not STALE
+ *  CONTENT — so `npm run deploy` reported red on a perfectly good deploy twice
+ *  (2026-08-03), and a human re-running the check 60-90s later saw green. A
+ *  gate that cries wolf on success is a gate people learn to ignore. Each
+ *  surface now re-fetches until it matches or the window closes; only then is
+ *  it a finding. Verified against a real deploy: the spec site converged on a
+ *  later attempt and the run went green without human intervention. */
+const PROPAGATION_MS = 240_000;
+const POLL_MS = 15_000;
+async function settle(label, fetchOnce) {
+  const deadline = Date.now() + PROPAGATION_MS;
+  let last = await fetchOnce();
+  let waited = 0;
+  while (!last.ok && Date.now() < deadline) {
+    await new Promise((r) => setTimeout(r, POLL_MS));
+    waited += POLL_MS;
+    process.stdout.write(`    … ${label}: still serving the previous deployment, re-checking (${Math.round(waited / 1000)}s)\n`);
+    last = await fetchOnce();
+  }
+  if (last.ok && waited > 0) console.log(`    (${label} converged after ${Math.round(waited / 1000)}s of CDN propagation)`);
+  return last;
+}
+
 const findings = [];
 const ok = [];
 
@@ -80,8 +104,12 @@ if (missing.length > 0) {
 // --- 1. plugin zip: exact byte identity -------------------------------------
 {
   const local = readFileSync(zipLocal);
-  const live = await fetchBytes(`${PLAYGROUND}/ds-contracts-sync-runner-plugin.zip`);
-  if (sha(local) === sha(live)) ok.push(`plugin zip: live == local build (${local.length} bytes, sha ${sha(local).slice(0, 12)}…)`);
+  const r = await settle('plugin zip', async () => {
+    const live = await fetchBytes(`${PLAYGROUND}/ds-contracts-sync-runner-plugin.zip`);
+    return { ok: sha(local) === sha(live), live };
+  });
+  const live = r.live;
+  if (r.ok) ok.push(`plugin zip: live == local build (${local.length} bytes, sha ${sha(local).slice(0, 12)}…)`);
   else
     findings.push(
       `plugin zip STALE: live is ${live.length} bytes (sha ${sha(live).slice(0, 12)}…), local build is ${local.length} bytes (sha ${sha(local).slice(0, 12)}…) — a designer downloading today gets a different engine than this repo builds`,
@@ -91,8 +119,12 @@ if (missing.length > 0) {
 // --- 2. playground: hashed asset references ---------------------------------
 {
   const local = assetRefs(readFileSync(idxLocal, 'utf8'));
-  const live = assetRefs((await fetchBytes(`${PLAYGROUND}/`)).toString('utf8'));
-  if (JSON.stringify(local) === JSON.stringify(live)) ok.push(`playground: live index references the same ${local.length} content-hashed asset(s)`);
+  const r = await settle('playground', async () => {
+    const live = assetRefs((await fetchBytes(`${PLAYGROUND}/`)).toString('utf8'));
+    return { ok: JSON.stringify(local) === JSON.stringify(live), live };
+  });
+  const live = r.live;
+  if (r.ok) ok.push(`playground: live index references the same ${local.length} content-hashed asset(s)`);
   else
     findings.push(
       `playground STALE: live index references [${live.join(', ')}], local build references [${local.join(', ')}] — vite renames every chunk on any content change, so these are different builds`,
@@ -102,8 +134,12 @@ if (missing.length > 0) {
 // --- 3. spec site: byte identity of a representative page -------------------
 {
   const local = readFileSync(siteLocal);
-  const live = await fetchBytes(`${SPEC}/get-started/`);
-  if (sha(local) === sha(live)) ok.push(`spec site: /get-started/ live == local build (${local.length} bytes)`);
+  const r = await settle('spec site', async () => {
+    const live = await fetchBytes(`${SPEC}/get-started/`);
+    return { ok: sha(local) === sha(live), live };
+  });
+  const live = r.live;
+  if (r.ok) ok.push(`spec site: /get-started/ live == local build (${local.length} bytes)`);
   else
     findings.push(
       `spec site STALE: /get-started/ live is ${live.length} bytes (sha ${sha(live).slice(0, 12)}…), local build is ${local.length} bytes (sha ${sha(local).slice(0, 12)}…)`,
