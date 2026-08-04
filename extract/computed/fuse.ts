@@ -341,12 +341,210 @@ export function tableGeometry(a: AlignedSweep, space: PropSpace): TableGeometry 
   return out;
 }
 
+// ---------------------------------------------------------------------------
+// VIEWPORT-DERIVED GEOMETRY — a measurement of the capture WINDOW is not a
+// library fact (task #20, defects A + B)
+// ---------------------------------------------------------------------------
+/** The harness facts fusion must know in order to tell a measurement OF THE
+ *  LIBRARY from a measurement OF THE CAPTURE WINDOW.
+ *
+ *  Every number in a capture is read out of one browser window at one stage
+ *  size. Almost all of them are library facts anyway (a 4px radius is 4px in
+ *  any window). Geometry is the exception: a box laid out against the INITIAL
+ *  CONTAINING BLOCK measures the window, and the window is the harness's
+ *  choice, not the library's. Fusion cannot make that distinction without
+ *  being told what the window and the stage were — so it is told, explicitly,
+ *  and the receipts quote the arithmetic they judged on.
+ *
+ *  Required (not optional) on purpose: an env-less call would silently
+ *  re-open the door this closes, and a door that is not wired must not look
+ *  like a door that found nothing. */
+export interface FusionEnv {
+  /** cfg.browser.viewport — the initial containing block of the capture page. */
+  viewport: { width: number; height: number };
+  /** capture.stageFor(cfg, comp) — the mount stage for THIS component (a
+   *  per-component override is normal: Heading/Accordion stage at 360). */
+  stage: { width: number; height: number; padding: number };
+  /** comp.portalCapture — the component is captured by the baseline-diff
+   *  portal reader, so its root may be mounted OUTSIDE the stage entirely
+   *  (a child of <body>, whose content box is the window: the capture page
+   *  sets `body { margin: 0 }`). */
+  portaled: boolean;
+}
+
+/** Which axes of a part were laid out against the browser window. */
+export interface ViewportResolution {
+  /** left + margin + border + padding + width + … + right closes on viewport.width. */
+  x: boolean;
+  y: boolean;
+  /** The arithmetic that proves it, quoted into the receipt. */
+  witnessX: string;
+  witnessY: string;
+}
+
+const OWN_CB_TRIGGERS = ['transform', 'filter', 'backdrop-filter', 'perspective', 'translate', 'rotate', 'scale'] as const;
+
+/** Does this ancestor establish the containing block for a descendant with
+ *  the given position? `absolute` is contained by the nearest POSITIONED
+ *  ancestor; `fixed` ignores positioning and is contained only by an ancestor
+ *  that creates a containing block for fixed descendants (transform/filter/
+ *  perspective/will-change/contain/container-type). */
+const establishesContainingBlock = (st: StyleMap, forFixed: boolean): boolean => {
+  if (!forFixed && st['position'] !== undefined && st['position'] !== 'static') return true;
+  for (const p of OWN_CB_TRIGGERS) {
+    const v = st[p];
+    if (v !== undefined && v !== 'none') return true;
+  }
+  const wc = st['will-change'];
+  if (wc !== undefined && /transform|filter|perspective/.test(wc)) return true;
+  const contain = st['contain'];
+  if (contain !== undefined && /\b(layout|paint|strict|content)\b/.test(contain)) return true;
+  const ct = st['container-type'];
+  if (ct !== undefined && ct !== 'normal') return true;
+  return false;
+};
+
+/** CSS 2.1 §10.3.7/§10.6.4 — for an out-of-flow box the OVER-CONSTRAINED
+ *  identity holds exactly: start + margin + border + padding + width +
+ *  padding + border + margin + end == the containing block's inner size. */
+const axisSpan = (st: StyleMap, axis: 'x' | 'y'): number | null => {
+  const [start, end, size] = axis === 'x' ? ['left', 'right', 'width'] : ['top', 'bottom', 'height'];
+  const sides = axis === 'x' ? ['left', 'right'] : ['top', 'bottom'];
+  const s = pxNum(st[start]);
+  const e = pxNum(st[end]);
+  const base = pxNum(st[size]);
+  if (s === null || e === null || base === null) return null;
+  let box = base;
+  if (st['box-sizing'] !== 'border-box') {
+    for (const side of sides) {
+      box += pxNum(st[`padding-${side}`]) ?? 0;
+      box += pxNum(st[`border-${side}-width`]) ?? 0;
+    }
+  }
+  for (const side of sides) box += pxNum(st[`margin-${side}`]) ?? 0;
+  return Math.round((s + box + e) * 1000) / 1000;
+};
+
+/** THE PART'S BOX WAS LAID OUT AGAINST THE BROWSER WINDOW.
+ *
+ *  Two conditions, both measured, both quoted:
+ *    1. STRUCTURE — the part is out of flow (position absolute/fixed) and
+ *       NOTHING inside the captured tree establishes its containing block,
+ *       so its containing block is the initial containing block: the window.
+ *       (Above the captured root sit only the harness's own nodes — the
+ *       stage div, #root, body — none of which is positioned or transformed;
+ *       that is a fact about capture.ts's page, not about the library.)
+ *    2. ARITHMETIC — the axis identity closes on the viewport dimension:
+ *       left + width(+box) + right == viewport.width. This is what makes the
+ *       claim falsifiable per part instead of assumed per component.
+ *  Both must hold in EVERY enabled default-plane combo, or the part is not
+ *  called viewport-resolved. */
+export function viewportResolvedParts(
+  a: AlignedSweep,
+  space: PropSpace,
+  env: FusionEnv,
+): Map<number, ViewportResolution> {
+  const out = new Map<number, ViewportResolution>();
+  const idxByPath = new Map<string, number>(a.baseFlat.map((e, i) => [e.path, i]));
+  const ancestorsOf = (pi: number): number[] => {
+    const p = a.baseFlat[pi].path;
+    if (p === '') return [];
+    const segs = p.split('.');
+    const out2: number[] = [];
+    for (let k = 0; k < segs.length; k++) {
+      const j = idxByPath.get(segs.slice(0, k).join('.'));
+      if (j !== undefined) out2.push(j);
+    }
+    return out2;
+  };
+  for (let pi = 0; pi < a.baseFlat.length; pi++) {
+    const anc = ancestorsOf(pi);
+    let seen = 0;
+    let x = true;
+    let y = true;
+    let witnessX = '';
+    let witnessY = '';
+    for (const combo of space.enumeration.combos) {
+      if (!isEnabled(combo)) continue;
+      const els = a.getAligned(`${combo.key}__default`);
+      const el = els[pi];
+      if (!el) continue;
+      seen++;
+      const st = el.node.style;
+      const pos = st['position'];
+      if (pos !== 'absolute' && pos !== 'fixed') { x = false; y = false; break; }
+      const contained = anc.some((ai) => {
+        const ae = els[ai];
+        return ae ? establishesContainingBlock(ae.node.style, pos === 'fixed') : false;
+      });
+      if (contained) { x = false; y = false; break; }
+      const sx = axisSpan(st, 'x');
+      const sy = axisSpan(st, 'y');
+      if (sx === null || Math.abs(sx - env.viewport.width) > 0.5) x = false;
+      else if (!witnessX) witnessX = `left ${st['left']} + box ${st['width']} + right ${st['right']} = ${sx}px = browser.viewport.width (${env.viewport.width}px)`;
+      if (sy === null || Math.abs(sy - env.viewport.height) > 0.5) y = false;
+      else if (!witnessY) witnessY = `top ${st['top']} + box ${st['height']} + bottom ${st['bottom']} = ${sy}px = browser.viewport.height (${env.viewport.height}px)`;
+      if (!x && !y) break;
+    }
+    if (seen > 0 && (x || y)) out.set(pi, { x, y, witnessX, witnessY });
+  }
+  return out;
+}
+
+/** The geometry channels a viewport-resolved part must NOT mint, per part.
+ *
+ *  Both ends of a resolved axis go together. Chromium reports the USED value
+ *  of an `auto` inset — the window-size residue — and a specified inset with
+ *  the same syntax, so the capture CANNOT say which end the library authored
+ *  and which end the window supplied. Refusing the residue and keeping the
+ *  author's end would require a guess; refusing the pair states exactly what
+ *  is known. The size channel joins the refusal only when the box IS the
+ *  window (width == viewport.width), which is the `inset: 0` overlay layer. */
+export function viewportDerivedRefusals(
+  a: AlignedSweep,
+  space: PropSpace,
+  env: FusionEnv,
+): { refused: Map<number, Set<string>>; receipts: string[] } {
+  const refused = new Map<number, Set<string>>();
+  const receipts: string[] = [];
+  const res = viewportResolvedParts(a, space, env);
+  for (const [pi, r] of [...res].sort((p, q) => p[0] - q[0])) {
+    const st = a.baseFlat[pi].node.style;
+    const set = new Set<string>();
+    const why: string[] = [];
+    if (r.x) {
+      set.add('left');
+      set.add('right');
+      if (pxNum(st['width']) === env.viewport.width) set.add('width');
+      why.push(r.witnessX);
+    }
+    if (r.y) {
+      set.add('top');
+      set.add('bottom');
+      if (pxNum(st['height']) === env.viewport.height) set.add('height');
+      why.push(r.witnessY);
+    }
+    if (set.size === 0) continue;
+    refused.set(pi, set);
+    receipts.push(
+      `viewport-derived-geometry-refused: ${a.partNames[pi]} (position:${st['position']}) — ${[...set].sort().join(', ')} NOT minted. The part is out of flow and no ancestor in the captured tree establishes its containing block, so its box was laid out against the INITIAL CONTAINING BLOCK — the capture window: ${why.join('; ')}. These numbers are a function of the harness viewport, not of the library; a canvas frame has no window, and Chromium reports a resolved \`auto\` inset with the same syntax as an authored one, so the pair is refused together rather than half-guessed.`,
+    );
+    if (st['translate-x'] !== undefined || st['translate-y'] !== undefined) {
+      receipts.push(
+        `viewport-anchored-translate-carried: ${a.partNames[pi]} — translate-x/${st['translate-x'] ?? '—'} translate-y/${st['translate-y'] ?? '—'} is a POSITIONING offset written by the library's own positioner (floating-ui/popper) against where the anchor happened to sit in the capture stage. It is harness-coupled by the same argument as the refused insets, but no arithmetic in one capture proves it, so it is CARRIED and named here rather than refused on a hunch.`,
+      );
+    }
+  }
+  return { refused, receipts };
+}
+
 export function styledChannels(
   a: AlignedSweep,
   space: PropSpace,
   controls: Record<string, StyleMap>,
   allProps: string[],
   receipts: string[],
+  env: FusionEnv,
 ): Map<string, Set<string>> {
   const out = new Map<string, Set<string>>();
   // ABSOLUTE-POSITION ROUND (MUI Slider/Switch live finding): geometry
@@ -380,18 +578,48 @@ export function styledChannels(
     if (table.lowered.has(pi)) continue;
     receipts.push(`absolute-geometry-excluded: ${a.partNames[pi]} — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)`);
   }
+  // VIEWPORT-DERIVED GEOMETRY (task #20): the parts whose boxes were laid out
+  // against the capture WINDOW, and the geometry channels they must not mint.
+  // Computed once and applied at EVERY door below — Carbon's Modal reaches
+  // fusion through the absolute/overlay-cluster door, MUI's Dialog through the
+  // block-root door, and Polaris' Badge through the plain `isFusable` path
+  // (insets were never in GEOMETRY_CHANNELS at all); all three minted the
+  // window.
+  const vpDerived = viewportDerivedRefusals(a, space, env);
+  receipts.push(...vpDerived.receipts);
   for (const pi of [...absAdmit, ...parentAdmit].sort((x, y) => x - y)) {
     if (table.lowered.has(pi)) {
       receipts.push(`table-geometry-excluded: ${a.partNames[pi]} (display:${table.lowered.get(pi)}) — table-box parts keep the geometry exclusion even inside an overlay-anatomy component; the lowered flex stack sizes them (organism round)`);
       continue;
     }
-    receipts.push(`absolute-geometry-admitted: ${a.partNames[pi]} — ${absAdmit.has(pi) ? 'uniformly position:absolute' : 'overlay-cluster member (component contains absolute parts)'}; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)`);
+    // The admission is real, but for a viewport-resolved part it is
+    // immediately subtracted from — say so HERE, where the reader is told the
+    // channels "join fusion", instead of leaving two receipts that read as a
+    // contradiction (Carbon's Modal root is admitted by this door and then
+    // keeps nothing but its translates).
+    const sub = vpDerived.refused.get(pi);
+    receipts.push(`absolute-geometry-admitted: ${a.partNames[pi]} — ${absAdmit.has(pi) ? 'uniformly position:absolute' : 'overlay-cluster member (component contains absolute parts)'}; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)${
+      sub ? ` — EXCEPT ${[...sub].sort().join(', ')}, which this part's box took from the capture WINDOW (see viewport-derived-geometry-refused: ${a.partNames[pi]})` : ''
+    }`);
   }
   // BLOCK-ROOT WIDTH (Card live finding, live-paste-3): a block-display root
   // fills its container in CSS — the canvas hug reads as "not a card." The
   // captured stage width IS the rendered truth of the capture (same
   // stage-dependent receipt as the slider root); admit the root's width
   // channel when its computed display is uniformly block.
+  //
+  // WHERE THAT CONTAINER ACTUALLY IS (task #20, defect B). The receipt above
+  // says "the captured stage width" and for an in-stage root that is true —
+  // MEASURED: mui Card 288px, altitude Divider 288px, carbon Accordion 328px
+  // (its own 360-wide stage), each exactly stage.width − 2×padding. For a
+  // PORTALED root it is false twice over: the root is a child of <body>
+  // (`body { margin: 0 }` on the capture page), so the stage — 288px wide,
+  // sitting in a sibling subtree — never bounds it, and MUI's Dialog root is
+  // additionally `position: fixed; inset: 0`, i.e. STRETCHED by the initial
+  // containing block rather than filling anything as a block. Both roads end
+  // at browser.viewport.width. The committed corpus shipped the result:
+  // imported.dialog.root.width = 900px, and the same defect in Carbon's Modal
+  // through the other door.
   const rootPi = a.baseFlat.findIndex((e) => e.path === '');
   const blockRootAdmit = new Set<number>();
   if (rootPi >= 0 && !absAdmit.has(rootPi) && !parentAdmit.has(rootPi)) {
@@ -405,8 +633,36 @@ export function styledChannels(
       if (el.node.style['display'] !== 'block') { block = false; break; }
     }
     if (seen > 0 && block) {
-      blockRootAdmit.add(rootPi);
-      receipts.push(`block-root-width-admitted: ${a.partNames[rootPi]} — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)`);
+      const rootStyle = a.baseFlat[rootPi].node.style;
+      const rootW = pxNum(rootStyle['width']);
+      const stageContent = env.stage.width - 2 * env.stage.padding;
+      // (1) out-of-flow root stretched by the window (`inset: 0`) — proven by
+      // the axis identity in viewportResolvedParts, already refused above.
+      const stretched = vpDerived.refused.get(rootPi)?.has('width') === true;
+      // (2) in-flow block root whose containing block is the BODY, not the
+      // stage: it measures the window exactly while the stage measures
+      // something else. This is the flowbite-react shape — @floating-ui's
+      // `<div data-floating-ui-portal>` (position:static, display:block,
+      // zero-height) sits between <body> and the overlay and is what the
+      // single-root portal policy hands to fusion.
+      const bodyWide = rootW !== null && rootW === env.viewport.width && stageContent !== env.viewport.width;
+      if (stretched || bodyWide) {
+        receipts.push(
+          `block-root-width-refused: ${a.partNames[rootPi]} — display:block root, width ${rootStyle['width']} = browser.viewport.width (${env.viewport.width}px), NOT the stage content box (stage ${env.stage.width}px − 2×${env.stage.padding}px = ${stageContent}px). ${
+            stretched
+              ? `The root is position:${rootStyle['position']} pinned to the initial containing block, so the window STRETCHED it; it is not "filling its container" in any sense the library chose.`
+              : `The root is in normal flow but measures the window exactly, so its containing block is the document body (\`body { margin: 0 }\` on the capture page) — it was mounted OUTSIDE the stage${env.portaled ? ' (this component is captured through the portal reader, whose root is a child of <body>)' : ''}.`
+          } A width that is a function of the capture window is a fact about the harness, not about the library: it is REFUSED here rather than minted with a warning, because the emitters read the token and not the receipt — a 900px token draws a 900px frame on canvas whatever the receipt says. The component's own drawn box is a DIFFERENT element (the dialog paper); choosing it is capture's root decision (demoteFullBleedScrim), not fusion's to fabricate.`,
+        );
+      } else {
+        blockRootAdmit.add(rootPi);
+        receipts.push(`block-root-width-admitted: ${a.partNames[rootPi]} — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)`);
+        if (rootW !== null && rootW !== stageContent) {
+          receipts.push(
+            `block-root-width-source: ${a.partNames[rootPi]} — the admitted width ${rootStyle['width']} is NOT the stage content box (${stageContent}px) and NOT the viewport (${env.viewport.width}px); this block root did not fill anything, it took its own intrinsic/shrink-to-fit size (a flex stage makes a block child a flex item). The admission stands — the number is the library's — but the sentence above names a container this measurement did not come from.`,
+          );
+        }
+      }
     }
   }
   /** CONFORMANCE FRONTIER (R4) — THE `-webkit-` BLANKET STOPS BEING SILENT.
@@ -428,11 +684,23 @@ export function styledChannels(
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
     const set = new Set<string>();
     const inTableBox = table.lowered.has(pi);
+    // task #20: a geometry channel the window supplied is refused at EVERY
+    // door, so the leading `!vpRefused` guard sits outside the whole
+    // disjunction. It has to: MEASURED while building this — `isFusable`
+    // excludes only GEOMETRY_CHANNELS = width/height/inline-size/block-size/
+    // *-origin, and `top`/`right`/`bottom`/`left` ARE NOT IN THAT SET. The
+    // insets were never gated by the geometry door at all (which is why
+    // `absolute-geometry-admitted`'s "every other component keeps the
+    // geometry exclusion" is true of sizes and false of offsets), so
+    // Polaris Badge's sr-only span minted `bottom: 799px` — 800px window
+    // minus a 1px box — through the ordinary fusable path.
+    const vpRefused = vpDerived.refused.get(pi);
     const admit = (p: string): boolean =>
-      isFusable(p) ||
-      (GEOM_ADMIT.has(p) && !inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) ||
-      ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) ||
-      (p === 'width' && blockRootAdmit.has(pi));
+      !vpRefused?.has(p) &&
+      (isFusable(p) ||
+        (GEOM_ADMIT.has(p) && !inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) ||
+        ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) ||
+        (p === 'width' && blockRootAdmit.has(pi)));
     const tag = a.baseFlat[pi].node.tag;
     const ctrl = controls[tag] ?? controls['span'];
     if (!controls[tag]) receipts.push(`control-fallback: no control for <${tag}> — span control used (part ${a.partNames[pi]})`);

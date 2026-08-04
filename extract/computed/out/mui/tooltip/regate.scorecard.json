@@ -77,9 +77,9 @@
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 129,
-      "cellsEqual": 117,
-      "pctEqual": 90.69767441860465,
+      "cellsCompared": 121,
+      "cellsEqual": 110,
+      "pctEqual": 90.9090909090909,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -101,12 +101,12 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 30,
-      "mintedLeavesUnfolded": 29,
-      "baseBindings": 44,
+      "mintedLeaves": 27,
+      "mintedLeavesUnfolded": 26,
+      "baseBindings": 40,
       "stateBindings": 0,
       "codeOnlyChannels": 9,
-      "overflowBindings": 3,
+      "overflowBindings": 2,
       "folds": 20
     },
     "worstRows": [
@@ -121,7 +121,7 @@
         "key": "off__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 4,
+        "channelsMismatched": 3,
         "unscorable": "no-original"
       },
       {
@@ -177,10 +177,6 @@
         2
       ],
       [
-        "root.bottom",
-        1
-      ],
-      [
         "label.margin-bottom",
         1
       ],
@@ -211,7 +207,6 @@
     ],
     "namedLosses": [
       "promotion: pseudo-decor-outside-grammar: tooltip-arrow::before paints at position:static (11x7.79688, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
-      "overflow: root.bottom — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue)",
       "overflow: root.height — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue)",
       "overflow: label.margin-bottom — presence-prop-driven styling (arrow) — boolean tokensByProp has no spelling (round 4 residue)",
       "code-only: label.bottom — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -230,24 +225,18 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1363,
+      "leavesAdded": 1366,
       "divergent": []
     },
     "rows": [
       {
         "key": "off__default",
-        "channelsCompared": 51,
-        "channelsEqual": 47,
+        "channelsCompared": 47,
+        "channelsEqual": 44,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "bottom",
-            "ours": "963px",
-            "theirs": "961px"
-          },
           {
             "part": "label",
             "channel": "margin-bottom",
@@ -301,8 +290,8 @@
       },
       {
         "key": "on__default",
-        "channelsCompared": 78,
-        "channelsEqual": 70,
+        "channelsCompared": 74,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

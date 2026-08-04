@@ -322,9 +322,9 @@
     "combos": 5,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 1305,
-      "cellsEqual": 1175,
-      "pctEqual": 90.03831417624521,
+      "cellsCompared": 1285,
+      "cellsEqual": 1155,
+      "pctEqual": 89.88326848249027,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -346,9 +346,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 78,
-      "mintedLeavesUnfolded": 78,
-      "baseBindings": 190,
+      "mintedLeaves": 76,
+      "mintedLeavesUnfolded": 76,
+      "baseBindings": 184,
       "stateBindings": 0,
       "codeOnlyChannels": 29,
       "overflowBindings": 0,
@@ -514,14 +514,14 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 790,
+      "leavesAdded": 792,
       "divergent": []
     },
     "rows": [
       {
         "key": "unset__default",
-        "channelsCompared": 261,
-        "channelsEqual": 235,
+        "channelsCompared": 257,
+        "channelsEqual": 231,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -717,8 +717,8 @@
       },
       {
         "key": "xs__default",
-        "channelsCompared": 261,
-        "channelsEqual": 235,
+        "channelsCompared": 257,
+        "channelsEqual": 231,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -914,8 +914,8 @@
       },
       {
         "key": "sm__default",
-        "channelsCompared": 261,
-        "channelsEqual": 235,
+        "channelsCompared": 257,
+        "channelsEqual": 231,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1111,8 +1111,8 @@
       },
       {
         "key": "md__default",
-        "channelsCompared": 261,
-        "channelsEqual": 235,
+        "channelsCompared": 257,
+        "channelsEqual": 231,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1308,8 +1308,8 @@
       },
       {
         "key": "lg__default",
-        "channelsCompared": 261,
-        "channelsEqual": 235,
+        "channelsCompared": 257,
+        "channelsEqual": 231,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

@@ -503,8 +503,8 @@ const rgbaRe = /^rgba\((\d+), (\d+), (\d+), ([\d.]+)\)$/;
  *  Tailwind color is unmintable. MOVED to core/token-set.ts (the foreign-
  *  tokenSet bundle path classifies colors with the same math) — re-exported
  *  here so every existing importer keeps its path; ONE implementation. */
-export { oklchToRgba } from '../../core/token-set.js';
-import { oklchToRgba } from '../../core/token-set.js';
+export { okColorToRgba, oklabToRgba, oklchToRgba } from '../../core/token-set.js';
+import { okColorToRgba } from '../../core/token-set.js';
 const pxRe = /^(-?\d+(?:\.\d+)?)px$/;
 const numRe = /^\d*\.?\d+$/;
 
@@ -520,7 +520,14 @@ export function kindOf(prop: string, value: string): Kindled {
   }
   // Tailwind round: oklch computed colors mint as hex through the shared
   // deterministic conversion (same value every run — a pure function).
-  const ok = oklchToRgba(value);
+  // SCRIM ROUND: `oklab()` too, because Tailwind v4 compiles every ALPHA-
+  // MODIFIED utility (`bg-gray-900/50`) to `color-mix(in oklab, …)` and
+  // Chromium computes THAT to the cartesian spelling. With only oklch
+  // accepted, Flowbite's Modal scrim left the run as
+  // `code-only: part-0.background-color — value shape outside mintable kinds`
+  // and the overlay painted transparent. The alpha rides through as the 8th
+  // hex digit; a scrim minted OPAQUE would be a worse answer than a refusal.
+  const ok = okColorToRgba(value);
   if (ok) {
     const hex = (x: number) => x.toString(16).padStart(2, '0');
     const base = `${hex(ok.r)}${hex(ok.g)}${hex(ok.b)}`;

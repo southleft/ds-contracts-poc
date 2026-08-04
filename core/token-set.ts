@@ -178,20 +178,12 @@ export function tokenSetTokenTrees(tokenSet: TokenSetPayload): TokenTreeInput {
 // Value converters (the example scripts' policy, verbatim + oklch)
 // ---------------------------------------------------------------------------
 
-/** Deterministic oklch() → sRGB (the OKLab reference matrices, closed-form,
- *  fixed rounding) — MOVED here from extract/computed/lib.ts (which now
- *  re-exports it) so the browser core carries the one implementation.
- *  Accepts L as % or decimal, optional `/ alpha`. Out-of-gamut clamps
- *  channel-wise (the browser's own fallback behavior for sRGB surfaces). */
-export function oklchToRgba(v: string): { r: number; g: number; b: number; a: number } | null {
-  const m = /^oklch\(\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)(?:deg)?\s*(?:\/\s*([\d.]+%?)\s*)?\)$/.exec(v.trim());
-  if (!m) return null;
-  const L = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
-  const C = parseFloat(m[2]);
-  const H = (parseFloat(m[3]) * Math.PI) / 180;
-  const alpha = m[4] === undefined ? 1 : m[4].endsWith('%') ? parseFloat(m[4]) / 100 : parseFloat(m[4]);
-  const a = C * Math.cos(H);
-  const b = C * Math.sin(H);
+/** THE SHARED STEP — OKLab (L, a, b) → sRGB 0–255. oklch IS oklab in polar
+ *  form, so both spellings converge here and the reference matrices exist
+ *  ONCE. Out-of-gamut clamps channel-wise (the browser's own fallback
+ *  behavior for sRGB surfaces). Rounding is fixed (Math.round on 0–255) so
+ *  the conversion is a pure function: same value every run. */
+function oklabToSrgb255(L: number, a: number, b: number): { r: number; g: number; b: number } {
   const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
   const m_ = L - 0.1055613458 * a - 0.0638541728 * b;
   const s_ = L - 0.0894841775 * a - 1.291485548 * b;
@@ -205,16 +197,76 @@ export function oklchToRgba(v: string): { r: number; g: number; b: number; a: nu
     const x = Math.min(1, Math.max(0, c));
     return x <= 0.0031308 ? 12.92 * x : 1.055 * x ** (1 / 2.4) - 0.055;
   };
-  return { r: Math.round(gamma(lin[0]) * 255), g: Math.round(gamma(lin[1]) * 255), b: Math.round(gamma(lin[2]) * 255), a: alpha };
+  return { r: Math.round(gamma(lin[0]) * 255), g: Math.round(gamma(lin[1]) * 255), b: Math.round(gamma(lin[2]) * 255) };
+}
+
+/** `/ <alpha>` (percent or decimal); absent → 1. Shared by both spellings so
+ *  an alpha-modified colour can never lose its alpha in one and keep it in
+ *  the other — a scrim painted at FULL opacity is a worse wrong answer than
+ *  a named refusal. */
+const okAlpha = (raw: string | undefined): number =>
+  raw === undefined ? 1 : raw.endsWith('%') ? parseFloat(raw) / 100 : parseFloat(raw);
+
+/** ONE spelling of a CSS <number>, shared by both colour functions. It is the
+ *  CSS grammar's number, not a loose character class: an optional sign, digits
+ *  with an optional fraction (or a leading `.`), and an OPTIONAL EXPONENT.
+ *  The exponent is not pedantry — `oklab(0.999 8.09e-11 3.72e-8)` is a legal
+ *  and reachable value (near-neutral colours land there), and the first cut of
+ *  this parser refused it, which is the same class of silent drop the round is
+ *  closing. The previous `[\d.]+` also admitted nonsense like `1.2.3`; every
+ *  oklch value in the committed corpora parses IDENTICALLY under both. */
+const OK_NUM = String.raw`[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?`;
+const OKLCH_RE = new RegExp(String.raw`^oklch\(\s*(${OK_NUM}%?)\s+(${OK_NUM})\s+(${OK_NUM})(?:deg)?\s*(?:/\s*(${OK_NUM}%?)\s*)?\)$`);
+const OKLAB_RE = new RegExp(String.raw`^oklab\(\s*(${OK_NUM}%?)\s+(${OK_NUM})\s+(${OK_NUM})\s*(?:/\s*(${OK_NUM}%?)\s*)?\)$`);
+
+/** Deterministic oklch() → sRGB (the OKLab reference matrices, closed-form,
+ *  fixed rounding) — MOVED here from extract/computed/lib.ts (which now
+ *  re-exports it) so the browser core carries the one implementation.
+ *  Accepts L as % or decimal, optional `/ alpha`. */
+export function oklchToRgba(v: string): { r: number; g: number; b: number; a: number } | null {
+  const m = OKLCH_RE.exec(v.trim());
+  if (!m) return null;
+  const L = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
+  const C = parseFloat(m[2]);
+  const H = (parseFloat(m[3]) * Math.PI) / 180;
+  return { ...oklabToSrgb255(L, C * Math.cos(H), C * Math.sin(H)), a: okAlpha(m[4]) };
+}
+
+/** Deterministic oklab() → sRGB, the CARTESIAN spelling of the same space.
+ *
+ *  WHY THIS EXISTS: Tailwind v4 compiles every ALPHA-MODIFIED colour utility
+ *  (`bg-gray-900/50`) to `color-mix(in oklab, …)`, and Chromium computes that
+ *  to an `oklab(L a b / alpha)` value — NOT oklch. Flowbite's Modal scrim is
+ *  exactly that shape, and with only the polar spelling accepted the parser
+ *  returned null, kindOf() found no kind, and a real painted fact left the
+ *  run as `code-only: part-0.background-color — value shape outside mintable
+ *  kinds`. The scrim was DROPPED: the overlay rendered fully transparent.
+ *
+ *  a and b are SIGNED by construction (the two chroma axes straddle zero), so
+ *  unlike oklch's C and H every numeric slot here accepts a leading sign. */
+export function oklabToRgba(v: string): { r: number; g: number; b: number; a: number } | null {
+  const m = OKLAB_RE.exec(v.trim());
+  if (!m) return null;
+  const L = m[1].endsWith('%') ? parseFloat(m[1]) / 100 : parseFloat(m[1]);
+  return { ...oklabToSrgb255(L, parseFloat(m[2]), parseFloat(m[3])), a: okAlpha(m[4]) };
+}
+
+/** Either OKLab spelling → sRGB, or null. The ONE entry point every colour
+ *  call site uses, so a new spelling is accepted everywhere at once instead
+ *  of in whichever module happened to be edited. Anything that is not one of
+ *  these two spellings still returns null and is REFUSED BY NAME downstream —
+ *  guessing a colour is the failure this function exists to prevent. */
+export function okColorToRgba(v: string): { r: number; g: number; b: number; a: number } | null {
+  return oklchToRgba(v) ?? oklabToRgba(v);
 }
 
 interface Rgba01 { r: number; g: number; b: number; a: number }
 
-/** hex (#rgb/#rgba/#rrggbb/#rrggbbaa) / rgb() / rgba() / oklch() → 0–1 RGBA,
- *  or null when the value is not a parseable color (→ STRING). */
+/** hex (#rgb/#rgba/#rrggbb/#rrggbbaa) / rgb() / rgba() / oklch() / oklab() →
+ *  0–1 RGBA, or null when the value is not a parseable color (→ STRING). */
 function colorOf(v: unknown): Rgba01 | null {
   let s = String(v).trim();
-  const ok = oklchToRgba(s);
+  const ok = okColorToRgba(s);
   if (ok) return { r: ok.r / 255, g: ok.g / 255, b: ok.b / 255, a: ok.a };
   const h3 = /^#([0-9a-f]{3,4})$/i.exec(s);
   if (h3) s = '#' + [...h3[1]].map((c) => c + c).join('');

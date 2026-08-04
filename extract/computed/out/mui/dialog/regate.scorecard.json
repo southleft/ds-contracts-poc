@@ -77,9 +77,9 @@
     "combos": 5,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 435,
-      "cellsEqual": 415,
-      "pctEqual": 95.40229885057471,
+      "cellsCompared": 395,
+      "cellsEqual": 375,
+      "pctEqual": 94.9367088607595,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -101,9 +101,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 22,
-      "mintedLeavesUnfolded": 21,
-      "baseBindings": 43,
+      "mintedLeaves": 21,
+      "mintedLeavesUnfolded": 20,
+      "baseBindings": 34,
       "stateBindings": 0,
       "codeOnlyChannels": 5,
       "overflowBindings": 0,
@@ -198,14 +198,14 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1371,
+      "leavesAdded": 1372,
       "divergent": []
     },
     "rows": [
       {
         "key": "xs__default",
-        "channelsCompared": 87,
-        "channelsEqual": 83,
+        "channelsCompared": 79,
+        "channelsEqual": 75,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -269,8 +269,8 @@
       },
       {
         "key": "sm__default",
-        "channelsCompared": 87,
-        "channelsEqual": 83,
+        "channelsCompared": 79,
+        "channelsEqual": 75,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -334,8 +334,8 @@
       },
       {
         "key": "md__default",
-        "channelsCompared": 87,
-        "channelsEqual": 83,
+        "channelsCompared": 79,
+        "channelsEqual": 75,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -399,8 +399,8 @@
       },
       {
         "key": "lg__default",
-        "channelsCompared": 87,
-        "channelsEqual": 83,
+        "channelsCompared": 79,
+        "channelsEqual": 75,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -464,8 +464,8 @@
       },
       {
         "key": "xl__default",
-        "channelsCompared": 87,
-        "channelsEqual": 83,
+        "channelsCompared": 79,
+        "channelsEqual": 75,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

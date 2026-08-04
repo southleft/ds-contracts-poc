@@ -155,6 +155,14 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run verify:catalog
 
+      # Pure functions, no browser, 0.2s — it belongs in the fast lane. It pins
+      # the OKLab colour parser against an INDEPENDENT implementation written
+      # from the published forward matrices, and pins that unknown colour
+      # functions still refuse BY NAME instead of guessing.
+      - name: extract:computed:color:check (oklab/oklch vs a second implementation)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:color:check
+
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.
       - name: test:onboarding (packages/cli node:test suite)

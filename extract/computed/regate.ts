@@ -39,7 +39,7 @@ import { mintTokens } from '../../core/mint-tokens.js';
 import { flattenTokens } from '../../core/tokens.js';
 import { ContractSchema, type Contract } from '../../scripts/contract-schema.js';
 import { validateContract } from '../../core/emit-react.js';
-import { loadConfig, propSpaceFor, INTERACTIONS, type SweepResult } from './capture.js';
+import { loadConfig, propSpaceFor, stageFor, INTERACTIONS, type SweepResult } from './capture.js';
 import { applyDecisions, type AckedDecision } from './decisions.js';
 import {
   alignSweep,
@@ -209,7 +209,14 @@ async function main() {
     const svgConsumedParts = new Set([...promotion.consumed].map((i) => aligned.partNames[i]));
     const controlStyles = Object.fromEntries(Object.entries(truth.controls).map(([t, n]) => [t, n.style]));
     const styledReceipts: string[] = [];
-    const styled = styledChannels(aligned, space, controlStyles, sweep.allProps, styledReceipts);
+    // task #20: fusion is told what the capture WINDOW and the stage were, so
+    // a measurement of the harness cannot pass for a measurement of the
+    // library (viewport-derived geometry is refused by name in styledChannels).
+    const styled = styledChannels(aligned, space, controlStyles, sweep.allProps, styledReceipts, {
+      viewport: cfg.browser.viewport,
+      stage: stageFor(cfg, comp),
+      portaled: comp.portalCapture === true,
+    });
 
     const folds = detectFolds(aligned, styled, styledReceipts);
     const { rows: boundRows } = await boundCheck(aligned, comp, space, probeToken, promotion.contract);

@@ -147,9 +147,9 @@
     "combos": 1,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 171,
-      "cellsEqual": 161,
-      "pctEqual": 94.15204678362574,
+      "cellsCompared": 167,
+      "cellsEqual": 157,
+      "pctEqual": 94.0119760479042,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -171,9 +171,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 18,
-      "mintedLeavesUnfolded": 18,
-      "baseBindings": 76,
+      "mintedLeaves": 16,
+      "mintedLeavesUnfolded": 16,
+      "baseBindings": 72,
       "stateBindings": 0,
       "codeOnlyChannels": 14,
       "overflowBindings": 0,
@@ -273,14 +273,14 @@
     },
     "shippedMinted": {
       "path": "examples/mui/tokens/mui-minted.dtcg.json",
-      "leavesAdded": 1375,
+      "leavesAdded": 1377,
       "divergent": []
     },
     "rows": [
       {
         "key": "__default",
-        "channelsCompared": 171,
-        "channelsEqual": 161,
+        "channelsCompared": 167,
+        "channelsEqual": 157,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",

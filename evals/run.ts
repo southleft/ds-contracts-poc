@@ -48,7 +48,7 @@ import { emitHtml as coreEmitHtml } from '../core/emit-html.js';
 import { tokenInventoryFromJson } from '../core/tokens.js';
 // DEPTH BUILD Stage A+B pins (pure — production capture/anatomy over committed
 // receipts; the evals NEVER launch a browser).
-import { loadConfig as loadCaptureConfig, propSpaceFor } from '../extract/computed/capture.js';
+import { loadConfig as loadCaptureConfig, propSpaceFor, stageFor } from '../extract/computed/capture.js';
 import {
   buildUnion as depthBuildUnion,
   buildMultiRootUnion,
@@ -7803,7 +7803,18 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       const promotion = depthPromoteAnatomy(space, comp, aligned.union, depthKebab(space.contract.name));
       const svgConsumed = new Set([...promotion.consumed].map((i) => aligned.partNames[i]));
       const controlStyles = Object.fromEntries(Object.entries(truth.controls as Record<string, { style: Record<string, string> }>).map(([t, n]) => [t, n.style]));
-      const styled = fuseStyledChannels(aligned, space, controlStyles, truth._provenance.channels, []);
+      const styled = fuseStyledChannels(aligned, space, controlStyles, truth._provenance.channels, [], {
+        // task #20: the harness box fusion judges viewport-derived geometry
+        // against (Polaris Button is in-stage and unaffected — its root is
+        // display:inline-flex and nothing in it is ICB-resolved).
+        viewport: cfg.browser.viewport,
+        // stageFor(), not a second spelling of `comp.stage ?? cfg.stage` —
+        // run.ts and regate.ts call the function, and fuse.ts's own comment
+        // records that two spellings of one rule is how the base door and the
+        // state door drifted apart. They agree today; this keeps them agreeing.
+        stage: stageFor(cfg, comp),
+        portaled: comp.portalCapture === true,
+      });
       const folds = fuseDetectFolds(aligned, styled);
       const layout = fuseEnrichLayout(aligned, space, styled, promotion.contract);
       const prep = fusePrepareMint(aligned, comp, space, styled, folds, layout.handled, promotion.contract, svgConsumed);

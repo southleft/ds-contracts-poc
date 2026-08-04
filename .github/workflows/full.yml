@@ -274,6 +274,23 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:ceiling:check
 
+      # Full lane, not fast: it launches Chromium and one of its four cases is
+      # a real 10s Playwright screenshot timeout (the un-shootable root), so it
+      # costs ~20s — the same reason the ceiling check above lives here.
+      - name: extract:computed:portal:check (the portal root pick — wrapper unwrap + un-shootable root)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:portal:check
+
+      # Full lane because it re-fuses the COMMITTED captured-truth files under
+      # extract/computed/out/** and conformance/ — no browser, ~2s, but it
+      # needs the corpus the fast lane does not touch. It pins that a
+      # measurement of the capture WINDOW (a 900px root width, an 852px
+      # popover offset) is refused by name while an in-stage measurement is
+      # carried unchanged.
+      - name: extract:computed:viewport:check (the capture window is not a design token)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:viewport:check
+
       # ------------------------------------------- the extract:figma family
       # Fifteen separate steps on purpose. They cost ~0.3s each, and a single
       # `npm run a && npm run b && …` chain would stop at the first refusal and

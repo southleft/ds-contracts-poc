@@ -1641,6 +1641,25 @@ export async function sweep(
 // untouched, so their captures stay byte-identical.
 // ===========================================================================
 
+/** PORTAL-WRAPPER UNWRAP (flowbite/@floating-ui round) — the MEASUREMENTS that
+ *  made one pass-through element between document.body and the overlay an
+ *  unwrappable wrapper. Evidence, not anatomy: nothing here is ever carried
+ *  into a contract; it exists so the receipt can NAME what was measured and
+ *  which element stopped being the captured root. `attrs` carries attribute
+ *  NAMES only — `data-floating-ui-portal` is reported because it was seen, and
+ *  is never part of the test. */
+export interface PortalWrapperNote {
+  tag: string;
+  id: string;
+  attrs: string[];
+  position: string;
+  display: string;
+  width: number;
+  height: number;
+  elementChildren: number;
+  drawsBox: boolean;
+}
+
 /** A new root the component added, read as a full production CapturedNode
  *  (same longhand read as the census, plus role/aria-modal for root descent). */
 export interface CapturedRoot {
@@ -1650,6 +1669,9 @@ export interface CapturedRoot {
   /** outerHTML byte length (the portal-DOM-bytes receipt, vs the spike). */
   bytes: number;
   node: CapturedNode;
+  /** Outermost-first chain of portal wrappers unwrapped to reach `node`.
+   *  Absent (never `[]`) when no wrapper was found — the committed corpora. */
+  unwrapped?: PortalWrapperNote[];
 }
 
 /** What one portalCapture combo yields: the new roots + what the CURRENT
@@ -1941,10 +1963,83 @@ const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
   // were always in body.)
   const all = [...document.body.querySelectorAll('*')];
   const newRoots = all.filter((el) => !baseline.has(el) && (!el.parentElement || baseline.has(el.parentElement)));
+  // PORTAL-WRAPPER UNWRAP (flowbite/@floating-ui round) — see the
+  // \`PortalWrapperNote\` header in this file for the whole argument. A portal
+  // implementation may insert a PASS-THROUGH element between document.body and
+  // the overlay (measured live on flowbite-react 0.12.17, whose overlays go
+  // through @floating-ui/react's FloatingPortal: \`position:static;
+  // display:block\`, rect 900×0 — ZERO AREA — with the dialog as its one
+  // element child). Left standing it becomes THE captured root: nothing can be
+  // screenshotted (a zero-area box is never "visible") and everything
+  // downstream measures the wrapper instead of the dialog.
+  //
+  // The test is MEASURED, never keyed on an attribute name (\`data-floating-ui-
+  // portal\` is this vendor's; the next one's will differ, and a name-keyed rule
+  // is a receipt that works for exactly one library):
+  //   1. it draws no box of its own (no opaque background / image / border /
+  //      shadow) — so unwrapping it cannot lose ink;
+  //   2. it has exactly ONE element child and no non-whitespace text — so
+  //      there is exactly one candidate and nothing else is dropped;
+  //   3. it is ZERO-AREA, or \`position: static\` — a PORTALED root that
+  //      positions nothing is not an overlay layer, it is a pass-through.
+  // PORTALED roots only: an in-stage root is the component's own rendered DOM.
+  // Every unwrap is RECEIPTED with its measurements (silently changing which
+  // node is the root is the invisible substitution this rule exists to avoid).
+  // Committed portal corpora do NOT trip it (the check asserts this): MUI's
+  // Tooltip popper is the near miss — boxless with one element child — and it
+  // is kept because it is \`position:absolute\` and 72.6×39, i.e. it really is
+  // doing the positioning.
+  const measureWrapper = (el) => {
+    const wcs = getComputedStyle(el);
+    const r = el.getBoundingClientRect();
+    const bg = wcs.getPropertyValue('background-color');
+    const drawsBox =
+      (bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') ||
+      wcs.getPropertyValue('background-image') !== 'none' ||
+      ['border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width']
+        .some((p) => wcs.getPropertyValue(p) !== '0px') ||
+      wcs.getPropertyValue('box-shadow') !== 'none';
+    const textish = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim() !== '');
+    const round = (v) => Math.round(v * 100) / 100;
+    return {
+      tag: el.tagName.toLowerCase(),
+      id: el.id || '',
+      attrs: [...el.attributes].map((a) => a.name).filter((n) => n !== 'data-portal-root'),
+      position: wcs.getPropertyValue('position'),
+      display: wcs.getPropertyValue('display'),
+      width: round(r.width),
+      height: round(r.height),
+      elementChildren: el.children.length,
+      drawsBox: drawsBox,
+      fires: !drawsBox && el.children.length === 1 && !textish && (r.width === 0 || r.height === 0 || wcs.getPropertyValue('position') === 'static'),
+    };
+  };
+  const unwrapRoot = (el) => {
+    const chain = [];
+    let node = el;
+    // Bounded: a portal implementation that nests four pass-through wrappers
+    // stops here and keeps the fourth as the root rather than descending
+    // forever.
+    for (let d = 0; d < 4; d++) {
+      const m = measureWrapper(node);
+      if (!m.fires) break;
+      delete m.fires;
+      chain.push(m);
+      node = node.children[0];
+    }
+    return { el: node, chain: chain };
+  };
+  const rootInfo = newRoots.map((el) => {
+    const inStage = !!(stage && stage.contains(el));
+    const u = inStage ? { el: el, chain: [] } : unwrapRoot(el);
+    return { el: u.el, chain: u.chain, location: inStage ? 'in-stage' : 'portaled' };
+  });
   // MOLECULE round: tag each new root so callers can locate/screenshot it
   // before the reset (attributes are never part of the captured node — only
   // tag/classes/styles/role/aria-modal are read, and reads happen above).
-  newRoots.forEach((el, i) => el.setAttribute('data-portal-root', String(i)));
+  // The tag lands on the UNWRAPPED element, so the screenshot and the captured
+  // node are the same element by construction.
+  rootInfo.forEach((r, i) => r.el.setAttribute('data-portal-root', String(i)));
   const cur = stage && stage.firstElementChild;
   const currentReader = cur
     ? { present: true, sig: cur.tagName.toLowerCase() + '|' + stemsOf([...cur.classList]).join('.'), descendantEls: cur.querySelectorAll('*').length }
@@ -1953,10 +2048,11 @@ const capturePortalJs = (classAllow?: string, classPrefix?: string) => `(() => {
     preBytes: window.__preBytes,
     postBytes: document.body.innerHTML.length,
     currentReader,
-    roots: newRoots.map((el) => ({
-      location: stage && stage.contains(el) ? 'in-stage' : 'portaled',
-      bytes: el.outerHTML.length,
-      node: readEl(el),
+    roots: rootInfo.map((r) => ({
+      location: r.location,
+      bytes: r.el.outerHTML.length,
+      node: readEl(r.el),
+      ...(r.chain.length > 0 ? { unwrapped: r.chain } : {}),
     })),
   };
 })()`;
@@ -2000,14 +2096,19 @@ export async function capturePortalRoots(
     preBytes: number;
     postBytes: number;
     currentReader: PortalCapture['currentReader'];
-    roots: Array<{ location: 'in-stage' | 'portaled'; bytes: number; node: CapturedNode }>;
+    roots: Array<{ location: 'in-stage' | 'portaled'; bytes: number; node: CapturedNode; unwrapped?: PortalWrapperNote[] }>;
   };
   const result: PortalCapture = {
     combo: comboKey,
     preBytes: raw.preBytes,
     postBytes: raw.postBytes,
     currentReader: raw.currentReader,
-    roots: raw.roots.map((r) => ({ location: r.location, bytes: r.bytes, node: normalizeNode(r.node) })),
+    roots: raw.roots.map((r) => ({
+      location: r.location,
+      bytes: r.bytes,
+      node: normalizeNode(r.node),
+      ...(r.unwrapped && r.unwrapped.length > 0 ? { unwrapped: r.unwrapped } : {}),
+    })),
     ...(blurred !== '' ? { blurred } : {}),
   };
   if (beforeReset) await beforeReset(result);
@@ -2125,8 +2226,27 @@ export async function portalSweep(
       const portaledIdx = raw.roots.map((r, j) => (r.location === 'portaled' ? j : -1)).filter((j) => j >= 0);
       const pickIdx = portaledIdx.length === 1 ? portaledIdx[0] : raw.roots.length === 1 ? 0 : -1;
       if (pickIdx < 0) return; // the refusal below names it; nothing to shoot
-      const shot = await page.locator(`[data-portal-root="${pickIdx}"]`).screenshot({ timeout: 10_000 });
-      writeFileSync(path.join(opts.screenshots!, `${comp.name}--${combo.key}__default.png`), shot);
+      // A SCREENSHOT IS EVIDENCE, NOT A PRECONDITION (flowbite round). This
+      // used to be an unguarded await: one un-shootable root threw
+      // `locator.screenshot: Timeout 9987ms exceeded … waiting for element to
+      // be stable - element is not visible` out of the hook, out of
+      // capturePortalRoots, out of the whole run — a MULTI-COMPONENT capture
+      // died with NO artifacts because one PNG could not be taken. The pixel
+      // roll-ups already understand a missing original (`no-original`, §C.6.6:
+      // never a pair, excluded from the denominator, never scored 100), so the
+      // failure degrades to that NAMED row and the capture continues. The
+      // capture itself — computed styles, anatomy, the gate — never depended
+      // on the PNG.
+      try {
+        const shot = await page.locator(`[data-portal-root="${pickIdx}"]`).screenshot({ timeout: 10_000 });
+        writeFileSync(path.join(opts.screenshots!, `${comp.name}--${combo.key}__default.png`), shot);
+      } catch (e) {
+        const msg = (e instanceof Error ? e.message : String(e)).split('\n')[0];
+        const r = raw.roots[pickIdx];
+        receipts.push(
+          `portal-screenshot-unavailable: ${combo.key} — the captured root (${r.node.tag}|${r.node.classes.join('.')}) could NOT be screenshotted: ${msg}. No original PNG was written, so this combo's pixel row is a named no-original row (never a scored pair) instead of a fabricated score. The computed-style capture for this combo is unaffected and the sweep continues.`,
+        );
+      }
     }, opts.classPrefix);
     const portaled = pc.roots.filter((r) => r.location === 'portaled');
     const inStage = pc.roots.filter((r) => r.location === 'in-stage');
@@ -2143,6 +2263,16 @@ export async function portalSweep(
     } else {
       throw new Error(
         `${comp.name}:${combo.key}: MULTI-ROOT-CAPTURE refusal — ${portaled.length} portaled + ${inStage.length} in-stage new roots; single-root fusion carries exactly one root (multi-root fusion is a named future class)`,
+      );
+    }
+    if (picked.unwrapped && picked.unwrapped.length > 0) {
+      receipts.push(
+        `portal-wrapper-unwrapped: ${combo.key} — ${picked.unwrapped.length} pass-through portal WRAPPER element(s) between document.body and the overlay were unwrapped BEFORE the single-root policy ran; the captured root is the wrapper's one element child (${picked.node.tag}|${picked.node.classes.join('.')}). Decided by MEASUREMENT, never by attribute name: ${picked.unwrapped
+          .map(
+            (w) =>
+              `<${w.tag}${w.id ? ` id="${w.id}"` : ''}${w.attrs.length ? ` [${w.attrs.join(' ')}]` : ''}> position:${w.position}; display:${w.display}; ${w.width}×${w.height}; ${w.elementChildren} element child; draws no box`,
+          )
+          .join(' · ')}`,
       );
     }
     let root = picked.node;

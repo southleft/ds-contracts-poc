@@ -79,7 +79,7 @@ import { labeledPair } from './label-png.js';
 import { applyDecisions, type AckedDecision } from './decisions.js';
 import { mountSanity, type MountRow } from './mount-sanity.js';
 import { kebab } from '../types.js';
-import { calcVarSkip, DECOR_PSEUDOS, flatten, normalizeValue, READ_PSEUDOS, REFUSED_PSEUDOS, shorthandVarSkip, type Capture, type CapturedNode, type FlatEl, type StyleMap, oklchToRgba,
+import { calcVarSkip, DECOR_PSEUDOS, flatten, normalizeValue, READ_PSEUDOS, REFUSED_PSEUDOS, shorthandVarSkip, type Capture, type CapturedNode, type FlatEl, type StyleMap, okColorToRgba,
 } from './lib.js';
 
 const HERE = path.resolve(new URL('.', import.meta.url).pathname);
@@ -564,7 +564,11 @@ async function main() {
         groupPrefix + varName.slice(vp.length).replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
       const dtcgNames = new Set(dtcgLeaves.map((l) => l.path));
       const colorTuple = (v: string): string | null => {
-        const ok = oklchToRgba(v.trim());
+        // SCRIM ROUND: oklch AND oklab — a var whose value Chromium computes
+        // to the cartesian spelling (every Tailwind v4 alpha-modified colour)
+        // could not verify against its own declaration before, so the token
+        // NAME was lost alongside the value.
+        const ok = okColorToRgba(v.trim());
         if (ok) return `${ok.r},${ok.g},${ok.b},${ok.a}`;
         const m = /^rgba?\((\d+), (\d+), (\d+)(?:, ([\d.]+))?\)$/.exec(v);
         if (m) return `${m[1]},${m[2]},${m[3]},${Number(m[4] ?? 1)}`;
@@ -743,7 +747,14 @@ async function main() {
 
     const controlStyles = Object.fromEntries(Object.entries(run1.controls).map(([t, n]) => [t, n.style]));
     const styledReceipts: string[] = [];
-    const styled = styledChannels(aligned, space, controlStyles, run1.allProps, styledReceipts);
+    // task #20: fusion is told what the capture WINDOW and the stage were, so
+    // a measurement of the harness cannot pass for a measurement of the
+    // library (viewport-derived geometry is refused by name in styledChannels).
+    const styled = styledChannels(aligned, space, controlStyles, run1.allProps, styledReceipts, {
+      viewport: cfg.browser.viewport,
+      stage: stageFor(cfg, comp),
+      portaled: comp.portalCapture === true,
+    });
 
     // ---- fusion (against the PROMOTED contract) ----
     console.log('  phase 2 — fusion…');

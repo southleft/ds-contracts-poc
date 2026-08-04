@@ -65,6 +65,8 @@ export { tokenCorpusFromJson, type TokenCorpus, type TokenCorpusInput, type Deri
 export {
   compileTokenSetRows,
   emitTokenSetScript,
+  okColorToRgba,
+  oklabToRgba,
   oklchToRgba,
   parseTokenSet,
   tokenSetTokenTrees,
