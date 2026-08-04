@@ -79,6 +79,7 @@
     "ua-baseline:check": "tsx extract/computed/ua-baseline-check.ts",
     "border-style:check": "tsx core/border-style-check.ts",
     "slot-constraints:check": "tsx core/slot-constraints-check.ts",
+    "composition-props:check": "tsx core/composition-props-check.ts",
     "stretch:check": "tsx core/stretch-default-check.ts",
     "extract:computed:portal:check": "tsx extract/computed/portal-wrapper-check.ts",
     "extract:computed:viewport:check": "tsx extract/computed/viewport-geometry-check.ts",

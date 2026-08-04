@@ -185,6 +185,17 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run slot-constraints:check
 
+      # Reads committed artifacts only, no browser. docs/12 listed
+      # "parent→child prop mapping" as an OPEN gap; it is implemented on both
+      # surfaces and was guarded by nothing. mapDepProps resolves the
+      # {parentProp} placeholder at COMPILE time, so a grep for it in the
+      # emitted script returns nothing and absence cannot be inferred from
+      # that. Break the one regex and the canvas silently renders the child's
+      # default on every parent variant while every other gate stays green.
+      - name: composition-props:check (parent→child prop mapping, both surfaces)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run composition-props:check
+
       # The real compile path over synthetic contracts + the committed
       # chat-message, no browser, ~0.3s. It pins the ONE July-audit defect
       # class (c6e909e) that was later closed AT THE ENGINE and had no test:
