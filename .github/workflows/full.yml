@@ -301,6 +301,17 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run ua-baseline:check
 
+      # Pure functions over CapturedNode, no browser. A portaled overlay root
+      # is not the component's box: capture the modal LAYER and every
+      # downstream measurement is of the browser window (task #20 measured a
+      # Modal shipping root.width = 900px where the dialog is 448). Two
+      # libraries present two shapes — MUI paints the scrim on a separate
+      # Backdrop, Flowbite paints it on the fixed layer itself — and the
+      # discriminator is the PAINT, not the child count.
+      - name: scrim-demotion:check (both overlay shapes demote to the dialog)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run scrim-demotion:check
+
       # ------------------------------------------- the extract:figma family
       # Fifteen separate steps on purpose. They cost ~0.3s each, and a single
       # `npm run a && npm run b && …` chain would stop at the first refusal and

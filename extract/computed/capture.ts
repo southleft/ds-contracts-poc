@@ -2157,6 +2157,50 @@ function capturedFullBleed(n: CapturedNode): boolean {
   return (['top', 'right', 'bottom', 'left'] as const).every((p) => s[p] === '0px');
 }
 
+/** A layer whose ONLY paint is a translucent fill — the signature of a scrim.
+ *
+ *  A component's own box does not look like this: a full-bleed OPAQUE fill, or
+ *  any fill carrying a border or a shadow, is a surface. A semi-transparent
+ *  fill with nothing else covering the viewport is a scrim, and the thing the
+ *  designer means by "the component" is underneath it. Alpha is read from the
+ *  captured `background-color`; a value the parser cannot read is NOT treated
+ *  as a scrim (refuse rather than guess). */
+function paintsOnlyAScrim(n: CapturedNode): boolean {
+  const s = n.style;
+  const border = ['border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width']
+    .some((p) => s[p] !== undefined && s[p] !== '0px');
+  if (border) return false;
+  if (s['box-shadow'] && s['box-shadow'] !== 'none') return false;
+  const bg = s['background-color'];
+  if (!bg) return false;
+  const rgba = /^rgba?\(([^)]+)\)$/.exec(bg.trim());
+  if (rgba) {
+    const parts = rgba[1].split(',').map((x) => x.trim());
+    const a = parts.length >= 4 ? Number(parts[3]) : 1;
+    return Number.isFinite(a) && a > 0 && a < 1;
+  }
+  // oklab()/oklch() with a `/ alpha` component — Tailwind v4 compiles every
+  // alpha-modified utility to this shape (see core/token-set.ts).
+  const ok = /^okl(?:ab|ch)\([^)]*\/\s*([\d.]+%?)\s*\)$/.exec(bg.trim());
+  if (ok) {
+    const a = ok[1].endsWith('%') ? Number(ok[1].slice(0, -1)) / 100 : Number(ok[1]);
+    return Number.isFinite(a) && a > 0 && a < 1;
+  }
+  return false;
+}
+
+/** The first descendant that draws a box, descending through transparent
+ *  wrappers. Flowbite nests the dialog inside a `div.relative` that paints
+ *  nothing; MUI's paper is a direct child. Returns null if nothing paints. */
+function firstBoxDescendant(n: CapturedNode): CapturedNode | null {
+  for (const k of capturedChildEls(n)) {
+    if (capturedDrawsBox(k)) return k;
+    const deeper = firstBoxDescendant(k);
+    if (deeper) return deeper;
+  }
+  return null;
+}
+
 /** MOLECULE LIVE-DEFECT ROUND (round 6) — FULL-BLEED SCRIM DEMOTION.
  *
  *  A portaled overlay root is not always the component's visual box. MUI's
@@ -2182,10 +2226,39 @@ export function demoteFullBleedScrim(
 ): { root: CapturedNode; dropped: string[] } | null {
   if (n.style['position'] !== 'fixed') return null;
   if (!(['top', 'right', 'bottom', 'left'] as const).every((p) => n.style[p] === '0px')) return null;
-  if (capturedDrawsBox(n)) return null;
   const kids = capturedChildEls(n);
-  if (kids.length < 2) return null;
   const boxed = kids.filter((k) => capturedDrawsBox(k));
+  // TWO SHAPES OF THE SAME OVERLAY, AND THE FIRST CUT ONLY KNEW MUI'S.
+  //
+  // MUI paints the scrim on a SEPARATE Backdrop sibling, so its fixed layer
+  // draws nothing and carries >=2 children — the two tests below in their
+  // original form. Flowbite (and any library using a single overlay div)
+  // paints the scrim ON THE FIXED LAYER ITSELF and nests ONE child. Measured
+  // live on flowbite-react@0.12.17's Modal: the layer is 900x1000 fixed
+  // inset:0 with background oklab(0.210081 -0.00294439 -0.0316202 / 0.5) —
+  // gray-900 at half alpha — and its single child chain is
+  // div.relative 448x173 (transparent) -> panel 416x141 (white).
+  // `capturedDrawsBox(n)` was therefore true and `kids.length < 2` also true,
+  // so the demotion refused twice and the captured root stayed the 900x1000
+  // LAYER instead of the 448-wide dialog.
+  //
+  // THE DISCRIMINATOR IS THE PAINT, NOT THE CHILD COUNT. A layer that draws
+  // ONLY a scrim has a SEMI-TRANSPARENT background and no other paint (no
+  // border, no shadow) — a component's own box does not present that way,
+  // because a full-bleed opaque fill with a border or a shadow is a surface,
+  // not a scrim. So: if the layer draws only a translucent fill, it is a
+  // scrim layer and demotion proceeds on its single boxed descendant;
+  // otherwise the original MUI path applies unchanged.
+  if (capturedDrawsBox(n)) {
+    if (!paintsOnlyAScrim(n)) return null;
+    // The dialog can sit under one or more transparent wrappers (flowbite's
+    // div.relative). Descend to the first descendant that draws a box.
+    const target = firstBoxDescendant(n);
+    if (!target || target === n) return null;
+    if (capturedFullBleed(target)) return null;
+    return { root: target, dropped: kids.filter((k) => k !== target).map((k) => `${k.tag}|${k.classes.join('.')}`) };
+  }
+  if (kids.length < 2) return null;
   if (boxed.length !== 1) return null;
   if (capturedFullBleed(boxed[0])) return null;
   const sigOf = (k: CapturedNode): string => `${k.tag}|${k.classes.join('.')}`;
