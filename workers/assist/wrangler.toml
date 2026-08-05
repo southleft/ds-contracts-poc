@@ -17,9 +17,19 @@ kv_namespaces = [
   { binding = "ASSIST_KV", id = "25f6a5bff555477db14c8e14730e3577" },
 ]
 
+[durable_objects]
+bindings = [
+  { name = "BUDGET_COORDINATOR", class_name = "BudgetCoordinator" },
+]
+
+[[migrations]]
+tag = "v1-budget-coordinator"
+new_sqlite_classes = ["BudgetCoordinator"]
+
 [vars]
-# Kill switch. The Worker answers 503 to everything until this is "true".
-ASSIST_ENABLED = "true"
+# Kill switch. Committed configuration is fail-closed; enable only in the
+# deployment environment after budget approval.
+ASSIST_ENABLED = "false"
 
 # Per-IP daily request cap, per endpoint class (fetch-plan / name-tokens /
 # repo-profile / fix-contract each count separately). Cache hits do not count.
@@ -31,21 +41,25 @@ ASSIST_IP_DAILY_LIMIT = "5"
 # See README "Budget math" for the translation.
 ASSIST_DAILY_TOKEN_BUDGET = "600000"
 
-# Plugin bridge ("Send to Playground") — its own kill switch: the bridge
-# costs KV reads/writes only, never Anthropic tokens. See README "Plugin
-# bridge" and src/bridge.ts.
-BRIDGE_ENABLED = "true"
+# Plugin bridge ("Send to Playground") — independent fail-closed switch.
+# Although it spends no model tokens, it stores user payloads and exposes a
+# public transport, so committed configuration does not enable it implicitly.
+BRIDGE_ENABLED = "false"
 
 # Per-IP daily cap for bridge session creation and uploads (each counted as
-# its own class). Playground polls are uncounted by design.
+# its own class).
 BRIDGE_IP_DAILY_LIMIT = "40"
+
+# Per active code + source IP poll cap. 600 permits a 2.5-second poll loop for
+# the full 15-minute session (360 polls) with retry headroom.
+BRIDGE_POLL_DAILY_LIMIT = "600"
 
 # Standing CI↔Figma channel ("Check for updates" in the plugin, `ds-contracts
 # figma publish` in CI) — its own kill switch, independent of the bridge and
-# of assist. Ships "true" for the SAME reason BRIDGE_ENABLED does: the channel
-# costs KV reads/writes only and never an Anthropic token, so there is no
-# budget for the owner to approve first. See src/channel.ts.
-CHANNEL_ENABLED = "true"
+# of assist. Committed configuration is fail-closed because this public
+# transport stores repository contract payloads even though it spends no
+# model tokens. Enable deliberately in the deployment environment.
+CHANNEL_ENABLED = "false"
 
 # Per-IP daily cap on MINTING channels (POST /channel/claim). A channel is
 # claimed once per repository, not per build.

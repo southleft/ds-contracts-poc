@@ -36,3 +36,20 @@ Canvas-only contract concepts (`figmaStatePreviews`, `modes`,
 file's header — never silently dropped.
 
 Part of the [ds-contracts](https://ds-contracts-spec.pages.dev) open spec. MIT.
+
+## Release status
+
+This source tree stages
+`@ds-contracts/emitter-web-components@0.4.0-rc.1`. It is source-only until a
+release owner publishes it. The npm registry check on 2026-08-04 reported
+`0.3.0` as `latest`; installing without an exact version therefore installs
+`0.3.0`, not this RC.
+
+After publication, evaluate it without moving the stable tag:
+
+```sh
+npm install @ds-contracts/emitter-web-components@0.4.0-rc.1
+```
+
+See the repository [release process](../../docs/27-release-process.md) for the
+package compatibility check and coordinated release approvals.

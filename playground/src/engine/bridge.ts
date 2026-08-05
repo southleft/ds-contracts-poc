@@ -4,8 +4,8 @@
  *
  *   createBridgeSession() → a 6-char pairing code the visitor types into the
  *   Sync Runner plugin's "Send to Playground" tab → the plugin POSTs the
- *   dump v1 JSON to the bridge → pollBridge(code) picks it up ONCE (the
- *   bridge deletes on delivery; 15-minute TTL either way) → the dump feeds
+ *   dump v1 JSON to the bridge → pollBridge(code, readCapability) picks it
+ *   up ONCE (the bridge deletes on delivery; 15-minute TTL either way) → the dump feeds
  *   the SAME proposal path a pasted dump takes. The bridge is transport
  *   only — no new proposal logic lives on either side of it.
  *
@@ -21,7 +21,7 @@
 import { ASSIST_BASE_URL } from './assist';
 
 export const BRIDGE_BASE_URL: string =
-  (import.meta.env.VITE_BRIDGE_BASE_URL as string | undefined) ?? ASSIST_BASE_URL;
+  (import.meta.env?.VITE_BRIDGE_BASE_URL as string | undefined) ?? ASSIST_BASE_URL;
 
 export const BRIDGE_POLL_INTERVAL_MS = 2500;
 
@@ -32,6 +32,8 @@ export const BRIDGE_ORIGIN_NOTE =
 
 export interface BridgeSession {
   code: string;
+  /** Secret bearer capability for dump reads. Keep in session memory only. */
+  readCapability: string;
   ttlSeconds: number;
 }
 
@@ -55,6 +57,12 @@ const workerError = async (res: Response): Promise<string> => {
   return `the bridge answered ${res.status} with no named message`;
 };
 
+const READ_CAPABILITY_PATTERN = /^[0-9a-f]{48}$/;
+const READ_CAPABILITY_HEADER = 'X-Bridge-Read-Capability';
+
+const withoutCapability = (message: string, readCapability: string): string =>
+  message.split(readCapability).join('[redacted]');
+
 /** Ask the Worker for a pairing session (code + TTL). */
 export async function createBridgeSession(): Promise<BridgeSessionResult> {
   let res: Response;
@@ -67,27 +75,63 @@ export async function createBridgeSession(): Promise<BridgeSessionResult> {
     };
   }
   if (!res.ok) return { ok: false, message: await workerError(res) };
-  const body = (await res.json()) as { code?: unknown; ttlSeconds?: unknown };
-  if (typeof body.code !== 'string' || typeof body.ttlSeconds !== 'number') {
+  const body = (await res.json()) as {
+    code?: unknown;
+    readCapability?: unknown;
+    ttlSeconds?: unknown;
+  };
+  if (
+    typeof body.code !== 'string' ||
+    typeof body.readCapability !== 'string' ||
+    !READ_CAPABILITY_PATTERN.test(body.readCapability) ||
+    typeof body.ttlSeconds !== 'number'
+  ) {
     return { ok: false, message: 'the bridge answered with an unexpected shape — try again' };
   }
-  return { ok: true, session: { code: body.code, ttlSeconds: body.ttlSeconds } };
+  return {
+    ok: true,
+    session: {
+      code: body.code,
+      readCapability: body.readCapability,
+      ttlSeconds: body.ttlSeconds,
+    },
+  };
 }
 
 /** One poll. Delivery is one-time — a 'delivered' answer means the bridge
  *  has already deleted its copy. */
-export async function pollBridge(code: string): Promise<BridgePollResult> {
+export async function pollBridge(
+  code: string,
+  readCapability: string,
+): Promise<BridgePollResult> {
+  if (!READ_CAPABILITY_PATTERN.test(readCapability)) {
+    return {
+      status: 'error',
+      fatal: true,
+      message: 'the bridge read capability is missing or malformed — press Receive from plugin again',
+    };
+  }
   let res: Response;
   try {
-    res = await fetch(`${BRIDGE_BASE_URL}/bridge/${encodeURIComponent(code)}`, { method: 'GET' });
+    res = await fetch(`${BRIDGE_BASE_URL}/bridge/${encodeURIComponent(code)}`, {
+      method: 'GET',
+      headers: { [READ_CAPABILITY_HEADER]: readCapability },
+    });
   } catch (e) {
+    const detail = withoutCapability(e instanceof Error ? e.message : String(e), readCapability);
     return {
       status: 'error',
       fatal: false,
-      message: `network hiccup while waiting (${e instanceof Error ? e.message : String(e)}) — still listening`,
+      message: `network hiccup while waiting (${detail}) — still listening`,
     };
   }
-  if (!res.ok) return { status: 'error', fatal: true, message: await workerError(res) };
+  if (!res.ok) {
+    return {
+      status: 'error',
+      fatal: true,
+      message: withoutCapability(await workerError(res), readCapability),
+    };
+  }
   const body = (await res.json()) as { status?: unknown; dump?: unknown };
   if (body.status === 'delivered') return { status: 'delivered', dump: body.dump };
   if (body.status === 'waiting') return { status: 'waiting' };

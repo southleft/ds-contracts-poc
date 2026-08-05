@@ -1,6 +1,6 @@
 {
   "name": "@ds-contracts/emitter-web-components",
-  "version": "0.3.0",
+  "version": "0.4.0-rc.1",
   "publishConfig": {
     "access": "public"
   },
@@ -21,7 +21,8 @@
   ],
   "scripts": {
     "build": "node build.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "package:smoke": "npm pack --dry-run --json"
   },
   "engines": {
     "node": ">=20"

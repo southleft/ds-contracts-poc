@@ -14,9 +14,17 @@ Short version — four phases, each with a falsifiable exit criterion:
 
 ---
 
-## Where it actually stands (2026-07-29)
+## Where it actually stands (2026-08-04)
 
-Updated against the shipped surfaces rather than against commit messages. The full arc since `0.7.0` is in [CHANGELOG.md](CHANGELOG.md); every open item below has its symptom and status in [docs/23](docs/23-known-limitations.md).
+Updated against source, registry, and deployed surfaces separately rather than
+treating a manifest edit as a release. The tree stages repository
+`1.0.0-rc.1`, CLI `0.5.0-rc.1`, schema `16.1.0-rc.1`, and emitter
+`0.4.0-rc.1`; those RCs are source-only until human publication. npm `latest`
+still reports CLI `0.4.0`, schema `16.0.0`, and emitter `0.3.0` as of this
+update. The coordinated verification and approval sequence is
+[docs/27](docs/27-release-process.md).
+Every open product limitation below has its symptom and status in
+[docs/23](docs/23-known-limitations.md).
 
 **Phase 1 — Harden the loop.** *In progress, and the instruments moved further than the parity work did.*
 
@@ -40,7 +48,7 @@ Updated against the shipped surfaces rather than against commit messages. The fu
 
 - ✅ **A CSS/DOM conformance fixture exists** ([conformance/](conformance/README.md)) — 53 synthetic cases whose expected dispositions are authored *independently* of the engine, so a construct that is neither carried nor named-refused is a hard failure rather than an absence. 50 green, 3 red, 0 yellow, on a decrease-only ratchet.
 - ⚠️ **It is not Phase 3's conformance kit and should not be read as one.** It measures *this* engine's CSS/DOM frontier; Phase 3 asks for the eval suite repackaged to run against *any* implementation, which is a different artifact. Two things must also close before it could become one: the fixture's **canvas half is declared, not measured** ("carried" means "reached the contract", not "reached the canvas"), and every case is **one combo with no state axes** — precisely where the MUI and Carbon rounds found most of their defects.
-- 🟡 The `spec/` draft, namespacing, normative compatibility rules and the extension model are unstarted. `@ds-contracts/schema` is published at 16.0.0 and now matches the repo's spec document: the format is mature enough to specify; the specification does not exist yet.
+- 🟡 The `spec/` draft, namespacing, normative compatibility rules and the extension model are unstarted. `@ds-contracts/schema@16.0.0` is the latest published stable schema; the source tree's `16.1.0-rc.1` is not registry evidence until publication. The format is mature enough to specify; the specification does not exist yet.
 
 **Phase 4 — Community & governance.** Unstarted, as designed — it follows a second implementation.
 

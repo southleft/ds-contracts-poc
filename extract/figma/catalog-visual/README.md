@@ -73,7 +73,7 @@ The 12 state-preview cells are `ds.button` × 3 states × 4 variants. Cells come
 from `canvas-gate/compile.ts` `deriveCells`, which re-runs the engine's own
 enumeration and **throws** if its derivation disagrees with the compiled
 variant names — the denominator cannot drift away from the engine without the
-gate refusing. `baseline.json` records the denominator, and a run whose cell
+gate refusing. `baseline.<platform>.json` records the denominator, and a run whose cell
 count differs from the recorded one fails before any score is compared.
 
 A contract state with no CSS-surface driver (`world.ts` `CSS_STATE_DRIVER`)
@@ -138,8 +138,10 @@ cells carry one at HEAD.
 
 ## 4. Scores, not images, are the gate
 
-`baseline.json` reuses `visual-parity/baseline.json`'s proven shape, one row
-per cell:
+`baseline.darwin.json` and `baseline.linux.json` reuse
+`visual-parity/baseline.json`'s proven shape, one row per cell. Separate
+references are required because pinned Chromium and an installed Inter still
+produce different text metrics/rasterization across operating systems:
 
 ```json
 "ds.button :: Variant=Primary, Size=Medium": {
@@ -152,7 +154,8 @@ per cell:
 `--write-baseline` is the only thing that moves it. **This is what makes the
 reference regeneratable by a stranger's clone at any commit** — the single
 property `visual-parity`'s live-Figma reference can never have. Only the
-worst-N triptychs are committed as PNGs (`receipts/`, six of them), and a
+worst-N triptychs are committed as PNGs (`receipts/<platform>/`, six per
+platform), and a
 receipt with no row behind it is deleted on the next write.
 
 A run fails when any of these moves:
@@ -365,7 +368,8 @@ remains on both sides is white. The percentage is silent; the box is not.
   a saturated fill that survives masking.
 * **`ds.button` focus-visible** (4 cells, 28.7–33.3%) — the two surfaces
   disagree on focus-ring geometry (CSS 180×88 vs canvas 172×78); see
-  `receipts/ds-button--Variant-Primary-Size-Medium-State-Focus-Visible.png`.
+  `receipts/darwin/ds-button--Variant-Primary-Size-Medium-State-Focus-Visible.png`
+  or the corresponding `receipts/linux/` evidence.
 * **`ds.pagination :: Variant=Pages`** (26.4%), **`ds.divider :: Variant=Strong`**
   (11.3%), **`ds.slider`** (9.9%, unclassified).
 

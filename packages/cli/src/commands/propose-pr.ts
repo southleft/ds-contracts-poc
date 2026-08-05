@@ -41,13 +41,32 @@
  * --dry-run prints the exact REST steps, every file, both diffs and the
  * provenance sentence — no token, no network. The eval pins this plan.
  */
-import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
-import path from 'node:path';
-import { provenanceSentence, type CanvasProvenance } from '../../../../core/canvas-code-plan.js';
-import { emitterByName, getEmitters } from '../../../../core/emitter.js';
-import { generateComponents } from '../../../../scripts/generate-components.js';
-import { contractFileNameForId, unifiedDiff } from './figma.js';
+import {
+  existsSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import {
+  provenanceSentence,
+  type CanvasProvenance,
+} from "../../../../core/canvas-code-plan.js";
+import {
+  assertContractProvenance,
+  type ProvenancedContract,
+} from "../../../../core/contract-provenance.js";
+import { emitterByName, getEmitters } from "../../../../core/emitter.js";
+import { generateComponents } from "../../../../scripts/generate-components.js";
+import {
+  contractFileNameForId,
+  proposalFileNameForId,
+  unifiedDiff,
+} from "./figma.js";
 import {
   buildEmitterCtxWithRouting,
   CliUsageError,
@@ -59,9 +78,9 @@ import {
   splitList,
   tokenPathsOf,
   withTokenDiagnostics,
-} from '../lib.js';
+} from "../lib.js";
 
-const API = 'https://api.github.com';
+const API = "https://api.github.com";
 
 /** One file the PR would contain. */
 export interface PrFile {
@@ -71,9 +90,12 @@ export interface PrFile {
   /** 'contract' = the source of truth (the proposal AND any auto-proposed
    *  stub contract); 'tokens' = the minted DTCG tree the proposal's refs
    *  resolve through; 'code' = an emitter projection. */
-  kind: 'contract' | 'tokens' | 'code';
+  kind: "contract" | "tokens" | "code";
   /** Emit target for code files (react, html, …); undefined otherwise. */
   target?: string;
+  /** Proposal origin, used to preserve an existing real contract instead of
+   * replacing it with an auto-proposed stub. */
+  proposalRole?: "main" | "stub";
 }
 
 interface PrPlan {
@@ -93,7 +115,7 @@ interface PrPlan {
 // Input: contract document, CONTRACT-PROPOSAL envelope, or diff report
 // ---------------------------------------------------------------------------
 
-const CONTRACT_PROPOSAL_TYPE = 'CONTRACT-PROPOSAL';
+const CONTRACT_PROPOSAL_TYPE = "CONTRACT-PROPOSAL";
 
 export interface ProposalInput {
   /** Exactly the bytes that get committed at the contract path. */
@@ -116,6 +138,77 @@ export interface ProposalInput {
   notes: string[];
 }
 
+function validateProposalChildren(
+  contract: Record<string, unknown>,
+  childStubs: Array<Record<string, unknown>>,
+): void {
+  const mainId = typeof contract.id === "string" ? contract.id : null;
+  const mainFile = mainId ? contractFileNameForId(mainId) : null;
+  const seenIds = new Set<string>();
+  const seenFiles = new Map<string, string>();
+  for (const [i, stub] of childStubs.entries()) {
+    const stubId =
+      typeof stub.id === "string" && stub.id.length > 0 ? stub.id : null;
+    if (!stubId) {
+      throw new CliUsageError(
+        `childStubs[${i}] has no non-empty string id — propose-pr refuses an unidentifiable contract before planning any write.`,
+      );
+    }
+    if (stubId === mainId) {
+      throw new CliUsageError(
+        `child stub "${stubId}" collides with the main proposed contract id — no files or requests were written.`,
+      );
+    }
+    if (seenIds.has(stubId)) {
+      throw new CliUsageError(
+        `duplicate child stub id "${stubId}" — no files or requests were written.`,
+      );
+    }
+    seenIds.add(stubId);
+    const stubFile = contractFileNameForId(stubId);
+    if (stubFile === mainFile) {
+      throw new CliUsageError(
+        `child stub "${stubId}" resolves to the main contract destination "${stubFile}" — no files or requests were written.`,
+      );
+    }
+    const prior = seenFiles.get(stubFile);
+    if (prior) {
+      throw new CliUsageError(
+        `child stubs "${prior}" and "${stubId}" resolve to the same destination "${stubFile}" — no files or requests were written.`,
+      );
+    }
+    seenFiles.set(stubFile, stubId);
+  }
+}
+
+function assertSafeRepoPath(destPath: string): void {
+  const segments = destPath.split("/");
+  if (
+    destPath.length === 0 ||
+    path.isAbsolute(destPath) ||
+    path.win32.isAbsolute(destPath) ||
+    destPath.includes("\\") ||
+    segments.some((segment) => segment === "" || segment === "." || segment === "..")
+  ) {
+    throw new CliUsageError(
+      `propose-pr REFUSED unsafe repository destination "${destPath}" — destinations must be relative, normalized paths.`,
+    );
+  }
+}
+
+function assertUniqueDestinations(files: PrFile[]): void {
+  const seen = new Set<string>();
+  for (const file of files) {
+    assertSafeRepoPath(file.destPath);
+    if (seen.has(file.destPath)) {
+      throw new CliUsageError(
+        `propose-pr REFUSED duplicate destination "${file.destPath}" — no files or requests were written.`,
+      );
+    }
+    seen.add(file.destPath);
+  }
+}
+
 /**
  * Read <file> and decide what is actually being proposed.
  *
@@ -129,29 +222,36 @@ export function readProposalInput(file: string): ProposalInput {
   let raw: string;
   let parsed: unknown;
   try {
-    raw = readFileSync(file, 'utf8');
+    raw = readFileSync(file, "utf8");
     parsed = JSON.parse(raw);
   } catch (err) {
-    throw new CliUsageError(`${file}: not readable JSON — ${String(err instanceof Error ? err.message : err)}`);
+    throw new CliUsageError(
+      `${file}: not readable JSON — ${String(err instanceof Error ? err.message : err)}`,
+    );
   }
   const notes: string[] = [];
   const doc = parsed as Record<string, unknown>;
-  const isEnvelope = !!doc && typeof doc === 'object' && doc.type === CONTRACT_PROPOSAL_TYPE;
+  const isEnvelope =
+    !!doc && typeof doc === "object" && doc.type === CONTRACT_PROPOSAL_TYPE;
 
   if (isEnvelope) {
     const proposed = doc.proposedContract;
-    if (!proposed || typeof proposed !== 'object' || Array.isArray(proposed)) {
+    if (!proposed || typeof proposed !== "object" || Array.isArray(proposed)) {
       throw new CliUsageError(
         `${path.basename(file)}: a ${CONTRACT_PROPOSAL_TYPE} with no "proposedContract" object — re-run "Read the set & diff" in the plugin and download again.`,
       );
     }
     const contract = proposed as Record<string, unknown>;
+    assertContractProvenance(
+      contract as ProvenancedContract,
+      String(contract.id ?? path.basename(file)),
+    );
     // The plugin stamps { toolGenerated } from the set's marker. An older
     // build sends no provenance at all — that is 'unrecorded', never a guess.
     const stamped = doc.provenance as { toolGenerated?: unknown } | undefined;
-    let provenance: CanvasProvenance = 'unrecorded';
-    if (stamped && typeof stamped.toolGenerated === 'boolean') {
-      provenance = stamped.toolGenerated ? 'tool-generated' : 'hand-built';
+    let provenance: CanvasProvenance = "unrecorded";
+    if (stamped && typeof stamped.toolGenerated === "boolean") {
+      provenance = stamped.toolGenerated ? "tool-generated" : "hand-built";
     } else if (stamped) {
       // A CURRENT envelope can legitimately carry provenance with no verdict
       // (kind 'unrecorded' — the exporter did not know). Blaming "an older
@@ -173,7 +273,12 @@ export function readProposalInput(file: string): ProposalInput {
     // is the exact defect the export-envelope round closes.
     let childStubs: Array<Record<string, unknown>> = [];
     if (doc.childStubs !== undefined && doc.childStubs !== null) {
-      if (!Array.isArray(doc.childStubs) || doc.childStubs.some((s) => s === null || typeof s !== 'object' || Array.isArray(s))) {
+      if (
+        !Array.isArray(doc.childStubs) ||
+        doc.childStubs.some(
+          (s) => s === null || typeof s !== "object" || Array.isArray(s),
+        )
+      ) {
         throw new CliUsageError(
           `${path.basename(file)}: the envelope's "childStubs" is not an array of contract objects — re-export the proposal from the plugin's Send tab.`,
         );
@@ -183,7 +288,13 @@ export function readProposalInput(file: string): ProposalInput {
     let mintedTree: Record<string, unknown> | null = null;
     if (doc.mintedTokens !== undefined && doc.mintedTokens !== null) {
       const tree = (doc.mintedTokens as { tree?: unknown }).tree;
-      if (typeof doc.mintedTokens !== 'object' || Array.isArray(doc.mintedTokens) || tree === null || typeof tree !== 'object' || Array.isArray(tree)) {
+      if (
+        typeof doc.mintedTokens !== "object" ||
+        Array.isArray(doc.mintedTokens) ||
+        tree === null ||
+        typeof tree !== "object" ||
+        Array.isArray(tree)
+      ) {
         throw new CliUsageError(
           `${path.basename(file)}: the envelope's "mintedTokens" has no DTCG "tree" object — re-export the proposal from the plugin's Send tab.`,
         );
@@ -194,17 +305,20 @@ export function readProposalInput(file: string): ProposalInput {
     if (childStubs.length > 0) {
       notes.push(
         `The envelope carries ${childStubs.length} auto-proposed STUB contract(s) (${childStubs
-          .map((s) => String((s as { id?: unknown }).id ?? '?'))
-          .join(', ')}) — each is committed as its own contract file so the proposal's component refs resolve; replace each stub by importing the real child set.`,
+          .map((s) => String((s as { id?: unknown }).id ?? "?"))
+          .join(
+            ", ",
+          )}) — each is committed as its own contract file so the proposal's component refs resolve; replace each stub by importing the real child set.`,
       );
     }
     if (mintedTree) {
       notes.push(
-        'The envelope carries a minted token tree — committed as a DTCG file so the proposal\'s {imported.*} refs resolve; every name in it is machine-derived and provisional.',
+        "The envelope carries a minted token tree — committed as a DTCG file so the proposal's {imported.*} refs resolve; every name in it is machine-derived and provisional.",
       );
     }
+    validateProposalChildren(contract, childStubs);
     return {
-      content: JSON.stringify(contract, null, 2) + '\n',
+      content: JSON.stringify(contract, null, 2) + "\n",
       parsed: contract,
       contract,
       provenance,
@@ -216,18 +330,25 @@ export function readProposalInput(file: string): ProposalInput {
   }
 
   const looksLikeContract =
-    !!doc && typeof doc === 'object' && typeof doc.id === 'string' && typeof doc.name === 'string';
+    !!doc &&
+    typeof doc === "object" &&
+    typeof doc.id === "string" &&
+    typeof doc.name === "string";
+  if (looksLikeContract)
+    assertContractProvenance(doc as ProvenancedContract, String(doc.id));
   return {
     content: raw,
     parsed,
     contract: looksLikeContract ? doc : null,
-    provenance: 'unrecorded',
+    provenance: "unrecorded",
     unwrapped: false,
     childStubs: [],
     mintedTree: null,
     notes: looksLikeContract
       ? []
-      : ['Input is not a contract document — it is committed verbatim and no code is generated from it.'],
+      : [
+          "Input is not a contract document — it is committed verbatim and no code is generated from it.",
+        ],
   };
 }
 
@@ -243,7 +364,7 @@ export interface CodeConfig {
   iconsDir?: string;
   stories: boolean;
   /** Where the targets came from — printed, so nothing looks like a guess. */
-  source: 'flag' | 'config';
+  source: "flag" | "config";
 }
 
 interface GenerateSection {
@@ -257,50 +378,74 @@ interface GenerateSection {
 /** PURE: flags + the repo's config → the code plan inputs, or a named
  *  reason there is no code to generate. */
 export function resolveCodeConfig(
-  flags: { target?: string; codePath?: string; tokens?: string; icons?: string; stories?: boolean; noCode: boolean },
+  flags: {
+    target?: string;
+    codePath?: string;
+    tokens?: string;
+    icons?: string;
+    stories?: boolean;
+    noCode: boolean;
+  },
   config: { generate?: GenerateSection } | null,
   configPath: string,
 ): { ok: true; config: CodeConfig } | { ok: false; reason: string } {
   if (flags.noCode) {
-    return { ok: false, reason: '--no-code was given — this PR carries the contract only.' };
+    return {
+      ok: false,
+      reason: "--no-code was given — this PR carries the contract only.",
+    };
   }
   const gen = config?.generate ?? undefined;
-  const configTarget = typeof gen?.target === 'string' && gen.target.trim() !== '' ? gen.target.trim() : undefined;
+  const configTarget =
+    typeof gen?.target === "string" && gen.target.trim() !== ""
+      ? gen.target.trim()
+      : undefined;
   const flagTargets = splitList(flags.target);
-  const targets = flagTargets.length > 0 ? flagTargets : configTarget ? [configTarget] : [];
+  const targets =
+    flagTargets.length > 0 ? flagTargets : configTarget ? [configTarget] : [];
   if (targets.length === 0) {
     return {
       ok: false,
       reason:
         `No emit target: --target was not given and ${configPath} ` +
-        (config ? 'has no `generate.target`' : 'does not exist') +
-        '. This PR carries the CONTRACT ONLY — a framework is not something to guess. ' +
-        'Run `ds-contracts init --detect` to record your repo\'s target, or pass --target react|html|react-inline.',
+        (config ? "has no `generate.target`" : "does not exist") +
+        ". This PR carries the CONTRACT ONLY — a framework is not something to guess. " +
+        "Run `ds-contracts init --detect` to record your repo's target, or pass --target react|html|react-inline.",
     };
   }
-  const unknown = targets.filter((t) => t !== 'react' && !emitterByName.has(t));
+  const unknown = targets.filter((t) => t !== "react" && !emitterByName.has(t));
   if (unknown.length > 0) {
     return {
       ok: false,
-      reason: `Unknown --target ${unknown.join(', ')} — registered emitters: react, ${getEmitters()
+      reason: `Unknown --target ${unknown.join(", ")} — registered emitters: react, ${getEmitters()
         .map((e) => e.name)
-        .filter((n) => n !== 'react')
-        .join(', ')}.`,
+        .filter((n) => n !== "react")
+        .join(", ")}.`,
     };
   }
-  const configOut = typeof gen?.out === 'string' && gen.out.trim() !== '' ? gen.out.trim() : undefined;
-  const outDir = (flags.codePath ?? configOut ?? '').replace(/\/+$/, '');
+  const configOut =
+    typeof gen?.out === "string" && gen.out.trim() !== ""
+      ? gen.out.trim()
+      : undefined;
+  const outDir = (flags.codePath ?? configOut ?? "").replace(/\/+$/, "");
   if (!outDir) {
     return {
       ok: false,
       reason:
-        `--target ${targets.join(', ')} needs somewhere to put the code: pass --code-path <dir>, or record ` +
+        `--target ${targets.join(", ")} needs somewhere to put the code: pass --code-path <dir>, or record ` +
         `\`generate.out\` in ${configPath}. Guessing a directory would scatter files into a repo layout this command cannot see.`,
     };
   }
-  const configTokens = Array.isArray(gen?.tokens) ? (gen.tokens as unknown[]).filter((t): t is string => typeof t === 'string') : [];
+  const configTokens = Array.isArray(gen?.tokens)
+    ? (gen.tokens as unknown[]).filter(
+        (t): t is string => typeof t === "string",
+      )
+    : [];
   const flagTokens = splitList(flags.tokens);
-  const configIcons = typeof gen?.icons === 'string' && gen.icons.trim() !== '' ? gen.icons.trim() : undefined;
+  const configIcons =
+    typeof gen?.icons === "string" && gen.icons.trim() !== ""
+      ? gen.icons.trim()
+      : undefined;
   return {
     ok: true,
     config: {
@@ -309,18 +454,22 @@ export function resolveCodeConfig(
       tokenFiles: flagTokens.length > 0 ? flagTokens : configTokens,
       iconsDir: flags.icons ?? configIcons,
       stories: flags.stories ?? gen?.stories === true,
-      source: flagTargets.length > 0 ? 'flag' : 'config',
+      source: flagTargets.length > 0 ? "flag" : "config",
     },
   };
 }
 
 /** Read ds-contracts.config.json from cwd. Absent/unreadable → null (the
  *  caller turns that into a named "no target" reason, never a default). */
-export function loadDsConfig(cwd: string): { generate?: GenerateSection } | null {
-  const file = path.join(cwd, 'ds-contracts.config.json');
+export function loadDsConfig(
+  cwd: string,
+): { generate?: GenerateSection } | null {
+  const file = path.join(cwd, "ds-contracts.config.json");
   if (!existsSync(file)) return null;
   try {
-    return JSON.parse(readFileSync(file, 'utf8')) as { generate?: GenerateSection };
+    return JSON.parse(readFileSync(file, "utf8")) as {
+      generate?: GenerateSection;
+    };
   } catch {
     return null;
   }
@@ -330,7 +479,7 @@ export function loadDsConfig(cwd: string): { generate?: GenerateSection } | null
 // Generation: the SAME emitters `ds-contracts generate` runs
 // ---------------------------------------------------------------------------
 
-const walk = (dir: string, prefix = ''): string[] => {
+const walk = (dir: string, prefix = ""): string[] => {
   const out: string[] = [];
   for (const entry of readdirSync(dir).sort()) {
     const abs = path.join(dir, entry);
@@ -363,24 +512,30 @@ export async function generateCodeFiles(
    *  renders); the minted tree joins the token inventory. Omitting them for
    *  a foreign-kit proposal reproduces the old dead end: `generate` refuses
    *  the dangling refs by name. */
-  extras: { stubs?: Array<Record<string, unknown>>; mintedTree?: Record<string, unknown> | null } = {},
+  extras: {
+    stubs?: Array<Record<string, unknown>>;
+    mintedTree?: Record<string, unknown> | null;
+  } = {},
 ): Promise<{ files: PrFile[]; notes: string[] }> {
-  const tmp = mkdtempSync(path.join(tmpdir(), 'ds-contracts-propose-'));
+  const tmp = mkdtempSync(path.join(tmpdir(), "ds-contracts-propose-"));
   const notes: string[] = [];
   const files: PrFile[] = [];
   try {
-    const contractFile = path.join(tmp, 'proposed.contract.json');
+    const contractFile = path.join(tmp, "proposed.contract.json");
     writeFileSync(contractFile, contractText);
     const stubFiles: string[] = [];
     (extras.stubs ?? []).forEach((stub, i) => {
       const f = path.join(tmp, `stub-${i}.contract.json`);
-      writeFileSync(f, JSON.stringify(stub, null, 2) + '\n');
+      writeFileSync(f, JSON.stringify(stub, null, 2) + "\n");
       stubFiles.push(f);
     });
     let mintedFile: string | null = null;
     if (extras.mintedTree && Object.keys(extras.mintedTree).length > 0) {
-      mintedFile = path.join(tmp, 'minted.dtcg.json');
-      writeFileSync(mintedFile, JSON.stringify(extras.mintedTree, null, 2) + '\n');
+      mintedFile = path.join(tmp, "minted.dtcg.json");
+      writeFileSync(
+        mintedFile,
+        JSON.stringify(extras.mintedTree, null, 2) + "\n",
+      );
     }
     // Token entries may carry an explicit `slot=` prefix (see lib.ts) — resolve
     // the PATH half against cwd and keep the slot attached.
@@ -393,11 +548,13 @@ export async function generateCodeFiles(
     // surfaces as a raw ENOENT with an absolute path — true, but not an
     // answer. Tokens are the referee for every var(--x) binding, so a
     // missing tree is a real refusal, not a warning.
-    const missing = cfg.tokenFiles.filter((f, i) => !existsSync(tokenPathsOf(named)[i]));
+    const missing = cfg.tokenFiles.filter(
+      (f, i) => !existsSync(tokenPathsOf(named)[i]),
+    );
     if (missing.length > 0) {
       throw new CliUsageError(
-        `the token file(s) ${missing.join(', ')} named for code generation do not exist — ` +
-          'fix `generate.tokens` in ds-contracts.config.json (or pass --tokens), or pass --no-code to propose the contract alone.',
+        `the token file(s) ${missing.join(", ")} named for code generation do not exist — ` +
+          "fix `generate.tokens` in ds-contracts.config.json (or pass --tokens), or pass --no-code to propose the contract alone.",
       );
     }
     // ENVELOPE v2: with a minted tree in play the corpus must not shrink to
@@ -407,19 +564,21 @@ export async function generateCodeFiles(
     const defaultCorpus =
       named.length === 0 && mintedFile
         ? [
-            path.join(cwd, 'tokens', 'primitives.tokens.json'),
-            path.join(cwd, 'tokens', 'semantic.tokens.json'),
-            path.join(cwd, 'tokens', 'modes', 'semantic.light.tokens.json'),
-            path.join(cwd, 'tokens', 'modes', 'semantic.dark.tokens.json'),
+            path.join(cwd, "tokens", "primitives.tokens.json"),
+            path.join(cwd, "tokens", "semantic.tokens.json"),
+            path.join(cwd, "tokens", "modes", "semantic.light.tokens.json"),
+            path.join(cwd, "tokens", "modes", "semantic.dark.tokens.json"),
           ].filter(existsSync)
         : [];
-    const tokenEntries = expandTokenArgs(mintedFile ? [...named, ...defaultCorpus, mintedFile] : named);
+    const tokenEntries = expandTokenArgs(
+      mintedFile ? [...named, ...defaultCorpus, mintedFile] : named,
+    );
     const tokenFiles = tokenPathsOf(tokenEntries);
     const iconsDir = cfg.iconsDir ? path.resolve(cwd, cfg.iconsDir) : undefined;
 
     for (const target of cfg.targets) {
-      if (target === 'react') {
-        const outDir = path.join(tmp, 'out-react');
+      if (target === "react") {
+        const outDir = path.join(tmp, "out-react");
         await generateComponents({
           contractFiles: [contractFile, ...stubFiles],
           tokenFiles: tokenFiles.length > 0 ? tokenFiles : undefined,
@@ -428,16 +587,16 @@ export async function generateCodeFiles(
           stories: cfg.stories,
         });
         for (const rel of walk(outDir)) {
-          if (rel === 'index.ts') {
+          if (rel === "index.ts") {
             notes.push(
-              'The react root barrel (index.ts) is NOT in this PR — it lists every component in the library and this proposal knows one. Add the export by hand when the component lands.',
+              "The react root barrel (index.ts) is NOT in this PR — it lists every component in the library and this proposal knows one. Add the export by hand when the component lands.",
             );
             continue;
           }
           files.push({
             destPath: `${cfg.outDir}/${rel}`,
-            contents: readFileSync(path.join(outDir, rel), 'utf8'),
-            kind: 'code',
+            contents: readFileSync(path.join(outDir, rel), "utf8"),
+            kind: "code",
             target,
           });
         }
@@ -446,10 +605,21 @@ export async function generateCodeFiles(
       const emitter = emitterByName.get(target);
       if (!emitter) throw new CliUsageError(`Unknown --target "${target}"`);
       const contracts = loadContracts([contractFile, ...stubFiles]);
-      const { ctx, routing } = buildEmitterCtxWithRouting(contracts, tokenEntries, iconsDir);
+      const { ctx, routing } = buildEmitterCtxWithRouting(
+        contracts,
+        tokenEntries,
+        iconsDir,
+      );
       for (const contract of contracts.values()) {
-        for (const f of withTokenDiagnostics(routing, () => emitter.emit(contract, ctx))) {
-          files.push({ destPath: `${cfg.outDir}/${f.path}`, contents: f.contents, kind: 'code', target });
+        for (const f of withTokenDiagnostics(routing, () =>
+          emitter.emit(contract, ctx),
+        )) {
+          files.push({
+            destPath: `${cfg.outDir}/${f.path}`,
+            contents: f.contents,
+            kind: "code",
+            target,
+          });
         }
       }
     }
@@ -470,59 +640,82 @@ export async function generateCodeFiles(
  * Falls back to nothing for non-contract diff reports.
  */
 export function summarize(parsed: unknown): string {
-  if (!parsed || typeof parsed !== 'object') return '';
+  if (!parsed || typeof parsed !== "object") return "";
   const c = parsed as Record<string, unknown>;
-  const id = typeof c.id === 'string' ? c.id : undefined;
-  const name = typeof c.name === 'string' ? c.name : undefined;
-  const version = typeof c.version === 'string' ? c.version : undefined;
-  const status = typeof c.status === 'string' ? c.status : undefined;
-  const changelog = typeof c.changelog === 'string' ? c.changelog : undefined;
-  if (!id && !name && !version) return '';
-  const lines: string[] = ['**What changed**', ''];
-  const head = [name ?? id, version ? `v${version}` : undefined, status ? `(${status})` : undefined]
+  const id = typeof c.id === "string" ? c.id : undefined;
+  const name = typeof c.name === "string" ? c.name : undefined;
+  const version = typeof c.version === "string" ? c.version : undefined;
+  const status = typeof c.status === "string" ? c.status : undefined;
+  const changelog = typeof c.changelog === "string" ? c.changelog : undefined;
+  if (!id && !name && !version) return "";
+  const lines: string[] = ["**What changed**", ""];
+  const head = [
+    name ?? id,
+    version ? `v${version}` : undefined,
+    status ? `(${status})` : undefined,
+  ]
     .filter(Boolean)
-    .join(' ');
-  if (head) lines.push(`- Contract: ${head}${id && name ? ` — \`${id}\`` : ''}`);
+    .join(" ");
+  if (head)
+    lines.push(`- Contract: ${head}${id && name ? ` — \`${id}\`` : ""}`);
   if (changelog) lines.push(`- ${changelog}`);
-  lines.push('', '');
-  return lines.join('\n');
+  lines.push("", "");
+  return lines.join("\n");
 }
 
-const bytes = (s: string): string => `${Buffer.byteLength(s).toLocaleString('en-US')} bytes`;
+const bytes = (s: string): string =>
+  `${Buffer.byteLength(s).toLocaleString("en-US")} bytes`;
 
 /** The code half of the body: what was emitted, by which target, from what. */
-export function codeSection(files: PrFile[], cfg: CodeConfig | null, reason: string | null, notes: string[]): string {
-  const lines: string[] = ['**The code this contract generates**', ''];
+export function codeSection(
+  files: PrFile[],
+  cfg: CodeConfig | null,
+  reason: string | null,
+  notes: string[],
+): string {
+  const lines: string[] = ["**The code this contract generates**", ""];
   if (!cfg || files.length === 0) {
-    lines.push(`- No component code is in this PR. ${reason ?? 'No emit target was resolved.'}`);
     lines.push(
-      '- Generate it yourself from the merged contract: `ds-contracts generate <contract> --out <dir> --target react`.',
+      `- No component code is in this PR. ${reason ?? "No emit target was resolved."}`,
+    );
+    lines.push(
+      "- Generate it yourself from the merged contract: `ds-contracts generate <contract> --out <dir> --target react`.",
     );
   } else {
     lines.push(
-      `- Target${cfg.targets.length > 1 ? 's' : ''}: ${cfg.targets.join(', ')} — ` +
-        (cfg.source === 'flag' ? 'requested with `--target`.' : 'read from `ds-contracts.config.json` (`generate.target`).'),
+      `- Target${cfg.targets.length > 1 ? "s" : ""}: ${cfg.targets.join(", ")} — ` +
+        (cfg.source === "flag"
+          ? "requested with `--target`."
+          : "read from `ds-contracts.config.json` (`generate.target`)."),
     );
-    for (const f of files) lines.push(`- \`${f.destPath}\` — ${bytes(f.contents)} (${f.target})`);
+    for (const f of files)
+      lines.push(`- \`${f.destPath}\` — ${bytes(f.contents)} (${f.target})`);
     lines.push(
-      '',
-      'These files are NOT hand-written and must not be hand-edited: they are exactly what ' +
-        `\`ds-contracts generate <contract> --out ${cfg.outDir} --target ${cfg.targets.join(',')}\`` +
-        ' emits from the contract in this PR. Change the contract, re-run, commit.',
+      "",
+      "These files are NOT hand-written and must not be hand-edited: they are exactly what " +
+        `\`ds-contracts generate <contract> --out ${cfg.outDir} --target ${cfg.targets.join(",")}\`` +
+        " emits from the contract in this PR. Change the contract, re-run, commit.",
     );
   }
   for (const n of notes) lines.push(`- ${n}`);
-  lines.push('', '');
-  return lines.join('\n');
+  lines.push("", "");
+  return lines.join("\n");
 }
 
 /** Overwrite notice — appended once the live run has looked at the branch.
  *  A PR that replaces someone's component must SAY that on its face. */
 export function overwriteSection(existing: string[]): string {
-  if (existing.length === 0) return '';
-  return (
-    ['', '**Overwrites existing files**', '', ...existing.map((p) => `- \`${p}\` already exists on the base branch and is REPLACED by this PR.`), ''].join('\n')
-  );
+  if (existing.length === 0) return "";
+  return [
+    "",
+    "**Overwrites existing files**",
+    "",
+    ...existing.map(
+      (p) =>
+        `- \`${p}\` already exists on the base branch and is REPLACED by this PR.`,
+    ),
+    "",
+  ].join("\n");
 }
 
 export function buildPlan(
@@ -550,41 +743,66 @@ export function buildPlan(
   // repo cannot disagree about where a contract lives. Anything else keeps
   // its own basename.
   const basename =
-    input.unwrapped && typeof input.contract?.id === 'string'
+    input.unwrapped && typeof input.contract?.id === "string"
       ? contractFileNameForId(input.contract.id)
       : path.basename(file);
-  const slug = basename.replace(/\.json$/, '').replace(/[^a-zA-Z0-9-]+/g, '-').toLowerCase();
-  const stamp = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
-  const destDir = (opts.dir ?? 'contracts').replace(/\/+$/, '');
+  const slug = basename
+    .replace(/\.json$/, "")
+    .replace(/[^a-zA-Z0-9-]+/g, "-")
+    .toLowerCase();
+  const stamp = new Date().toISOString().replace(/[-:T]/g, "").slice(0, 14);
+  const destDir = (opts.dir ?? "contracts").replace(/\/+$/, "");
+  assertSafeRepoPath(destDir);
   const destPath = `${destDir}/${basename}`;
   const code = opts.code ?? [];
   // ENVELOPE v2: the stubs and the minted tree land NEXT TO the contract —
   // without them the committed proposal carries refs `generate` refuses by
   // name, and the PR is a document nobody can run.
   const stubFiles: PrFile[] = input.childStubs.map((stub, i) => ({
-    destPath: `${destDir}/${typeof stub.id === 'string' ? contractFileNameForId(stub.id) : `stub-${i}.contract.json`}`,
-    contents: JSON.stringify(stub, null, 2) + '\n',
-    kind: 'contract' as const,
+    destPath: `${destDir}/${typeof stub.id === "string" ? contractFileNameForId(stub.id) : `stub-${i}.contract.json`}`,
+    contents: JSON.stringify(stub, null, 2) + "\n",
+    kind: "contract" as const,
+    proposalRole: "stub" as const,
   }));
-  const contractId = typeof input.contract?.id === 'string' ? input.contract.id : basename.replace(/\.contract\.json$/, '');
+  const contractId =
+    typeof input.contract?.id === "string"
+      ? input.contract.id
+      : basename.replace(/\.contract\.json$/, "");
   const mintedFiles: PrFile[] = input.mintedTree
-    ? [{
-        destPath: `${destDir}/${contractId}.minted.dtcg.json`,
-        contents: JSON.stringify(input.mintedTree, null, 2) + '\n',
-        kind: 'tokens' as const,
-      }]
+    ? [
+        {
+          destPath: `${destDir}/${proposalFileNameForId(contractId).replace(/\.proposal\.json$/, "")}.minted.dtcg.json`,
+          contents: JSON.stringify(input.mintedTree, null, 2) + "\n",
+          kind: "tokens" as const,
+        },
+      ]
     : [];
-  const files: PrFile[] = [{ destPath, contents: content, kind: 'contract' }, ...stubFiles, ...mintedFiles, ...code];
+  const files: PrFile[] = [
+    {
+      destPath,
+      contents: content,
+      kind: "contract",
+      proposalRole: "main",
+    },
+    ...stubFiles,
+    ...mintedFiles,
+    ...code,
+  ];
+  assertUniqueDestinations(files);
   const sidecars = stubFiles.length + mintedFiles.length;
   const touches =
     code.length > 0 || sidecars > 0
       ? `The ${[
-          sidecars > 0 ? `${sidecars} envelope sidecar file(s) (stub contracts / minted tokens)` : null,
+          sidecars > 0
+            ? `${sidecars} envelope sidecar file(s) (stub contracts / minted tokens)`
+            : null,
           code.length > 0 ? `${code.length} generated file(s)` : null,
         ]
           .filter(Boolean)
-          .join(' and ')} are its companions — nothing else in the repository is touched.`
-      : 'Nothing else in the repository is touched.';
+          .join(
+            " and ",
+          )} are its companions — nothing else in the repository is touched.`
+      : "Nothing else in the repository is touched.";
   const plan: PrPlan = {
     repo,
     base: opts.base ?? null,
@@ -594,12 +812,21 @@ export function buildPlan(
     body:
       `This PR was opened by \`ds-contracts propose-pr\`.\n\n` +
       `It carries a proposed contract change as a reviewable diff: \`${destPath}\`` +
-      (code.length > 0 ? `, plus the component code that contract generates.` : '.') +
+      (code.length > 0
+        ? `, plus the component code that contract generates.`
+        : ".") +
       `\n\n` +
       summarize(input.parsed) +
       `**Provenance**\n\n${provenanceSentence(input.provenance)}\n\n` +
-      (input.notes.length > 0 ? input.notes.map((n) => `- ${n}`).join('\n') + '\n\n' : '') +
-      codeSection(code, opts.codeConfig ?? null, opts.codeReason ?? null, opts.codeNotes ?? []) +
+      (input.notes.length > 0
+        ? input.notes.map((n) => `- ${n}`).join("\n") + "\n\n"
+        : "") +
+      codeSection(
+        code,
+        opts.codeConfig ?? null,
+        opts.codeReason ?? null,
+        opts.codeNotes ?? [],
+      ) +
       `Review it like any code change — the contract is the single source of truth; ` +
       `merging it is the adoption decision. ${touches}`,
     contentBytes: Buffer.byteLength(content),
@@ -609,20 +836,29 @@ export function buildPlan(
   return { plan, content, input };
 }
 
-async function gh<T>(token: string, method: string, url: string, body?: unknown): Promise<T> {
+async function gh<T>(
+  token: string,
+  method: string,
+  url: string,
+  body?: unknown,
+): Promise<T> {
   const res = await fetch(`${API}${url}`, {
     method,
     headers: {
       authorization: `Bearer ${token}`,
-      accept: 'application/vnd.github+json',
-      'user-agent': 'ds-contracts-cli',
-      ...(body !== undefined ? { 'content-type': 'application/json' } : {}),
+      accept: "application/vnd.github+json",
+      "user-agent": "ds-contracts-cli",
+      ...(body !== undefined ? { "content-type": "application/json" } : {}),
     },
     body: body !== undefined ? JSON.stringify(body) : undefined,
   });
   if (!res.ok) {
-    const detail = ((await res.json().catch(() => ({}))) as { message?: string }).message ?? '';
-    throw new Error(`GitHub ${method} ${url} → ${res.status}${detail ? ` (${detail})` : ''}`);
+    const detail =
+      ((await res.json().catch(() => ({}))) as { message?: string }).message ??
+      "";
+    throw new Error(
+      `GitHub ${method} ${url} → ${res.status}${detail ? ` (${detail})` : ""}`,
+    );
   }
   return (await res.json()) as T;
 }
@@ -631,17 +867,21 @@ async function gh<T>(token: string, method: string, url: string, body?: unknown)
 // up whether a destination file already exists on the branch.
 async function ghMaybe<T>(token: string, url: string): Promise<T | null> {
   const res = await fetch(`${API}${url}`, {
-    method: 'GET',
+    method: "GET",
     headers: {
       authorization: `Bearer ${token}`,
-      accept: 'application/vnd.github+json',
-      'user-agent': 'ds-contracts-cli',
+      accept: "application/vnd.github+json",
+      "user-agent": "ds-contracts-cli",
     },
   });
   if (res.status === 404) return null;
   if (!res.ok) {
-    const detail = ((await res.json().catch(() => ({}))) as { message?: string }).message ?? '';
-    throw new Error(`GitHub GET ${url} → ${res.status}${detail ? ` (${detail})` : ''}`);
+    const detail =
+      ((await res.json().catch(() => ({}))) as { message?: string }).message ??
+      "";
+    throw new Error(
+      `GitHub GET ${url} → ${res.status}${detail ? ` (${detail})` : ""}`,
+    );
   }
   return (await res.json()) as T;
 }
@@ -660,8 +900,11 @@ export function contentsPutBody(
   destPath?: string,
 ): { message: string; content: string; branch: string; sha?: string } {
   return {
-    message: destPath && destPath !== plan.destPath ? `${plan.title} — ${destPath}` : plan.title,
-    content: Buffer.from(content).toString('base64'),
+    message:
+      destPath && destPath !== plan.destPath
+        ? `${plan.title} — ${destPath}`
+        : plan.title,
+    content: Buffer.from(content).toString("base64"),
     branch: plan.branch,
     ...(existingSha ? { sha: existingSha } : {}),
   };
@@ -678,43 +921,63 @@ const PREVIEW_LINES = 16;
  *  checkout, and a head-of-file preview when there is no local counterpart. */
 function printFileDiff(f: PrFile, cwd: string): void {
   const local = path.resolve(cwd, f.destPath);
-  const existing = existsSync(local) && statSync(local).isFile() ? readFileSync(local, 'utf8') : null;
+  const existing =
+    existsSync(local) && statSync(local).isFile()
+      ? readFileSync(local, "utf8")
+      : null;
   if (existing !== null) {
     if (existing === f.contents) {
-      console.log(`--- ${f.destPath} — identical to the file in this checkout, no diff`);
+      console.log(
+        `--- ${f.destPath} — identical to the file in this checkout, no diff`,
+      );
       return;
     }
-    for (const line of unifiedDiff(existing, f.contents, f.destPath)) console.log(line);
+    for (const line of unifiedDiff(existing, f.contents, f.destPath))
+      console.log(line);
     return;
   }
-  const lines = f.contents.split('\n');
-  console.log(`--- ${f.destPath} (NEW here — first ${Math.min(PREVIEW_LINES, lines.length)} of ${lines.length} lines)`);
+  const lines = f.contents.split("\n");
+  console.log(
+    `--- ${f.destPath} (NEW here — first ${Math.min(PREVIEW_LINES, lines.length)} of ${lines.length} lines)`,
+  );
   for (const line of lines.slice(0, PREVIEW_LINES)) console.log(`+${line}`);
-  if (lines.length > PREVIEW_LINES) console.log(`… ${lines.length - PREVIEW_LINES} more line(s)`);
+  if (lines.length > PREVIEW_LINES)
+    console.log(`… ${lines.length - PREVIEW_LINES} more line(s)`);
 }
 
 export async function proposePrCommand(argv: string[]): Promise<number> {
   const parsed = parseFlags(argv, {
-    value: ['repo', 'token', 'base', 'path', 'title', 'target', 'code-path', 'tokens', 'icons'],
-    bool: ['dry-run', 'no-code', 'stories'],
+    value: [
+      "repo",
+      "token",
+      "base",
+      "path",
+      "title",
+      "target",
+      "code-path",
+      "tokens",
+      "icons",
+    ],
+    bool: ["dry-run", "no-code", "stories"],
   });
   const file = parsed.positionals[0];
-  if (!file) throw new CliUsageError('propose-pr needs a contract or diff JSON file');
-  const repo = flagString(parsed, 'repo');
-  if (!repo) throw new CliUsageError('propose-pr needs --repo owner/name');
+  if (!file)
+    throw new CliUsageError("propose-pr needs a contract or diff JSON file");
+  const repo = flagString(parsed, "repo");
+  if (!repo) throw new CliUsageError("propose-pr needs --repo owner/name");
 
   const cwd = process.cwd();
   const input = readProposalInput(file);
-  const configPath = 'ds-contracts.config.json';
-  const explicitTarget = flagString(parsed, 'target');
+  const configPath = "ds-contracts.config.json";
+  const explicitTarget = flagString(parsed, "target");
   const resolved = resolveCodeConfig(
     {
       target: explicitTarget,
-      codePath: flagString(parsed, 'code-path'),
-      tokens: flagString(parsed, 'tokens'),
-      icons: flagString(parsed, 'icons'),
-      stories: parsed.flags.get('stories') === true ? true : undefined,
-      noCode: parsed.flags.get('no-code') === true,
+      codePath: flagString(parsed, "code-path"),
+      tokens: flagString(parsed, "tokens"),
+      icons: flagString(parsed, "icons"),
+      stories: parsed.flags.get("stories") === true ? true : undefined,
+      noCode: parsed.flags.get("no-code") === true,
     },
     loadDsConfig(cwd),
     configPath,
@@ -725,7 +988,7 @@ export async function proposePrCommand(argv: string[]): Promise<number> {
   // answers to, must stop rather than quietly open a contract-only PR the
   // user did not ask for. A target inferred from the config degrades loudly
   // instead (the contract is still worth proposing).
-  if (!resolved.ok && explicitTarget && parsed.flags.get('no-code') !== true) {
+  if (!resolved.ok && explicitTarget && parsed.flags.get("no-code") !== true) {
     throw new CliUsageError(resolved.reason);
   }
   let code: PrFile[] = [];
@@ -735,13 +998,18 @@ export async function proposePrCommand(argv: string[]): Promise<number> {
   if (resolved.ok) {
     if (!input.contract) {
       codeReason =
-        'The input is not a contract document (no id/name), so there is nothing to emit from — it is committed verbatim.';
+        "The input is not a contract document (no id/name), so there is nothing to emit from — it is committed verbatim.";
     } else {
       try {
-        const gen = await generateCodeFiles(input.content, resolved.config, cwd, {
-          stubs: input.childStubs,
-          mintedTree: input.mintedTree,
-        });
+        const gen = await generateCodeFiles(
+          input.content,
+          resolved.config,
+          cwd,
+          {
+            stubs: input.childStubs,
+            mintedTree: input.mintedTree,
+          },
+        );
         code = gen.files;
         codeNotes = gen.notes;
         codeConfig = resolved.config;
@@ -763,36 +1031,49 @@ export async function proposePrCommand(argv: string[]): Promise<number> {
   }
 
   const { plan, content } = buildPlan(file, repo, {
-    base: flagString(parsed, 'base'),
-    dir: flagString(parsed, 'path'),
-    title: flagString(parsed, 'title'),
+    base: flagString(parsed, "base"),
+    dir: flagString(parsed, "path"),
+    title: flagString(parsed, "title"),
     code,
     codeConfig,
     codeReason,
     codeNotes,
   });
 
-  if (parsed.flags.get('dry-run') === true) {
+  if (parsed.flags.get("dry-run") === true) {
     let step = 0;
-    console.log('DRY RUN — no network calls, no token required. The live run would:');
-    console.log(`  ${++step}. GET  /repos/${plan.repo}${plan.base ? '' : '  (resolve the default branch)'}`);
-    console.log(`  ${++step}. GET  /repos/${plan.repo}/git/ref/heads/${plan.base ?? '<default-branch>'}  (base sha)`);
-    console.log(`  ${++step}. POST /repos/${plan.repo}/git/refs  { ref: "refs/heads/${plan.branch}" }`);
+    console.log(
+      "DRY RUN — no network calls, no token required. The live run would:",
+    );
+    console.log(
+      `  ${++step}. GET  /repos/${plan.repo}${plan.base ? "" : "  (resolve the default branch)"}`,
+    );
+    console.log(
+      `  ${++step}. GET  /repos/${plan.repo}/git/ref/heads/${plan.base ?? "<default-branch>"}  (base sha)`,
+    );
+    console.log(
+      `  ${++step}. POST /repos/${plan.repo}/git/refs  { ref: "refs/heads/${plan.branch}" }`,
+    );
     for (const f of plan.files) {
       console.log(
-        `  ${++step}. PUT  /repos/${plan.repo}/contents/${f.destPath}  (${Buffer.byteLength(f.contents)} bytes, branch ${plan.branch}, ${f.kind === 'contract' ? 'contract' : f.kind === 'tokens' ? 'minted tokens' : `code/${f.target}`})`,
+        `  ${++step}. PUT  /repos/${plan.repo}/contents/${f.destPath}  (${Buffer.byteLength(f.contents)} bytes, branch ${plan.branch}, ${f.kind === "contract" ? "contract" : f.kind === "tokens" ? "minted tokens" : `code/${f.target}`})`,
       );
     }
     console.log(
-      `  ${++step}. POST /repos/${plan.repo}/pulls  { title: ${JSON.stringify(plan.title)}, head: "${plan.branch}", base: "${plan.base ?? '<default-branch>'}" }`,
+      `  ${++step}. POST /repos/${plan.repo}/pulls  { title: ${JSON.stringify(plan.title)}, head: "${plan.branch}", base: "${plan.base ?? "<default-branch>"}" }`,
     );
-    console.log('  Token source at run time: --token, else DS_CONTRACTS_GITHUB_TOKEN, else GITHUB_TOKEN — never persisted.');
+    console.log(
+      "  Token source at run time: --token, else DS_CONTRACTS_GITHUB_TOKEN, else GITHUB_TOKEN — never persisted.",
+    );
 
     console.log(`\nFiles this PR would contain (${plan.files.length}):`);
     for (const f of plan.files) {
-      console.log(`  ${f.destPath}  ${bytes(f.contents)}  ${f.kind === 'contract' ? '(contract — the source of truth)' : f.kind === 'tokens' ? '(minted token tree — provisional names)' : `(generated code — ${f.target})`}`);
+      console.log(
+        `  ${f.destPath}  ${bytes(f.contents)}  ${f.kind === "contract" ? "(contract — the source of truth)" : f.kind === "tokens" ? "(minted token tree — provisional names)" : `(generated code — ${f.target})`}`,
+      );
     }
-    if (codeReason && code.length === 0) console.log(`  NO CODE — ${codeReason}`);
+    if (codeReason && code.length === 0)
+      console.log(`  NO CODE — ${codeReason}`);
     if (code.length > 0) {
       console.log(
         '  Every destination is checked against the branch before it is written; anything already there is REPLACED and named in the PR body under "Overwrites existing files".',
@@ -803,28 +1084,53 @@ export async function proposePrCommand(argv: string[]): Promise<number> {
     for (const n of input.notes) console.log(`  - ${n}`);
     for (const n of codeNotes) console.log(`  - ${n}`);
 
-    console.log('\nDiffs (against this checkout — the live run diffs against the target repo):');
+    console.log(
+      "\nDiffs (against this checkout — the live run diffs against the target repo):",
+    );
     for (const f of plan.files) printFileDiff(f, cwd);
 
-    console.log('\nPR body:');
+    console.log("\nPR body:");
     console.log(plan.body);
     return 0;
   }
 
   const token =
-    flagString(parsed, 'token') ??
+    flagString(parsed, "token") ??
     process.env.DS_CONTRACTS_GITHUB_TOKEN ??
     process.env.GITHUB_TOKEN;
   if (!token) {
     throw new CliUsageError(
-      'propose-pr needs a fine-grained GitHub token: --token, DS_CONTRACTS_GITHUB_TOKEN, or GITHUB_TOKEN (contents:write + pull-requests:write on the target repo). It is used in memory only — never stored.',
+      "propose-pr needs a fine-grained GitHub token: --token, DS_CONTRACTS_GITHUB_TOKEN, or GITHUB_TOKEN (contents:write + pull-requests:write on the target repo). It is used in memory only — never stored.",
     );
   }
 
   const base =
-    plan.base ?? (await gh<{ default_branch: string }>(token, 'GET', `/repos/${plan.repo}`)).default_branch;
-  const ref = await gh<{ object: { sha: string } }>(token, 'GET', `/repos/${plan.repo}/git/ref/heads/${base}`);
-  await gh(token, 'POST', `/repos/${plan.repo}/git/refs`, {
+    plan.base ??
+    (await gh<{ default_branch: string }>(token, "GET", `/repos/${plan.repo}`))
+      .default_branch;
+  // Preserve adopted contracts: an auto-proposed stub is only a fallback.
+  // Resolve every stub against the BASE branch before creating the branch or
+  // issuing any PUT, then omit destinations that already contain a contract.
+  const preservedStubs: string[] = [];
+  const activeFiles: PrFile[] = [];
+  for (const f of plan.files) {
+    if (f.proposalRole !== "stub") {
+      activeFiles.push(f);
+      continue;
+    }
+    const existingBase = await ghMaybe<{ sha: string }>(
+      token,
+      `/repos/${plan.repo}/contents/${f.destPath}?ref=${encodeURIComponent(base)}`,
+    );
+    if (existingBase) preservedStubs.push(f.destPath);
+    else activeFiles.push(f);
+  }
+  const ref = await gh<{ object: { sha: string } }>(
+    token,
+    "GET",
+    `/repos/${plan.repo}/git/ref/heads/${base}`,
+  );
+  await gh(token, "POST", `/repos/${plan.repo}/git/refs`, {
     ref: `refs/heads/${plan.branch}`,
     sha: ref.object.sha,
   });
@@ -834,7 +1140,7 @@ export async function proposePrCommand(argv: string[]): Promise<number> {
   // to replace it. Every replacement is COLLECTED and named in the PR body:
   // a PR that overwrites someone's component says so on its face.
   const overwritten: string[] = [];
-  for (const f of plan.files) {
+  for (const f of activeFiles) {
     const existing = await ghMaybe<{ sha: string }>(
       token,
       `/repos/${plan.repo}/contents/${f.destPath}?ref=${encodeURIComponent(plan.branch)}`,
@@ -842,18 +1148,33 @@ export async function proposePrCommand(argv: string[]): Promise<number> {
     if (existing?.sha) overwritten.push(f.destPath);
     await gh(
       token,
-      'PUT',
+      "PUT",
       `/repos/${plan.repo}/contents/${f.destPath}`,
       contentsPutBody(plan, f.contents, existing?.sha ?? null, f.destPath),
     );
-    console.log(`  ${existing?.sha ? 'updated' : 'created'} ${f.destPath}`);
+    console.log(`  ${existing?.sha ? "updated" : "created"} ${f.destPath}`);
   }
-  const pr = await gh<{ html_url: string; number: number }>(token, 'POST', `/repos/${plan.repo}/pulls`, {
-    title: plan.title,
-    head: plan.branch,
-    base,
-    body: plan.body + overwriteSection(overwritten),
-  });
+  const pr = await gh<{ html_url: string; number: number }>(
+    token,
+    "POST",
+    `/repos/${plan.repo}/pulls`,
+    {
+      title: plan.title,
+      head: plan.branch,
+      base,
+      body:
+        plan.body +
+        (preservedStubs.length > 0
+          ? `\n\n**Preserved existing contracts**\n\n${preservedStubs
+              .map(
+                (p) =>
+                  `- \`${p}\` already exists on the base branch; the auto-proposed stub was NOT written over it.`,
+              )
+              .join("\n")}\n`
+          : "") +
+        overwriteSection(overwritten),
+    },
+  );
   console.log(`✔ Opened PR #${pr.number}: ${pr.html_url}`);
   return 0;
 }

@@ -256,7 +256,9 @@ async function publishChannel(
   const readKey = await deriveReadKey(rawKey);
 
   const raw = await request.text();
-  if (raw.length > CHANNEL_MAX_BYTES) return json(413, { error: CHANNEL_MESSAGES.tooLarge }, cors);
+  if (new TextEncoder().encode(raw).byteLength > CHANNEL_MAX_BYTES) {
+    return json(413, { error: CHANNEL_MESSAGES.tooLarge }, cors);
+  }
   let parsed: unknown;
   try {
     parsed = JSON.parse(raw);
@@ -296,6 +298,7 @@ async function publishChannel(
   }
   const seq = (Number.isFinite(Number(previous.seq)) ? Number(previous.seq) : 0) + 1;
   const bundleText = JSON.stringify(body.bundle);
+  const bundleBytes = new TextEncoder().encode(bundleText).byteLength;
   const publishedAt = deps.now().toISOString();
 
   await env.ASSIST_KV.put(bundleKey(readKey), bundleText, { expirationTtl: CHANNEL_TTL_SECONDS });
@@ -310,14 +313,14 @@ async function publishChannel(
   }
   const meta: ChannelMeta = {
     seq,
-    bytes: bundleText.length,
+    bytes: bundleBytes,
     publishedAt,
     claimedAt: typeof previous.claimedAt === 'string' ? previous.claimedAt : publishedAt,
   };
   await env.ASSIST_KV.put(metaKey(readKey), JSON.stringify(meta), {
     expirationTtl: CHANNEL_TTL_SECONDS,
   });
-  return json(200, { ok: true, seq, bytes: bundleText.length, publishedAt }, cors);
+  return json(200, { ok: true, seq, bytes: bundleBytes, publishedAt }, cors);
 }
 
 // ---------------------------------------------------------------------------
@@ -373,11 +376,12 @@ async function readChannel(
   // Head without a body: KV consistency lag, or a partially expired channel.
   // Same message as "nothing published" — the remedy is identical.
   if (bundleText === null) return json(404, { error: CHANNEL_MESSAGES.noChannel }, cors);
+  const bundleBytes = new TextEncoder().encode(bundleText).byteLength;
 
   // Both were validated as JSON at publish — splice them in verbatim so the
   // bundle the designer applies is byte-for-byte what CI published.
   return new Response(
-    `{"status":"update","seq":${seq},"publishedAt":${JSON.stringify(publishedAt)},"bytes":${bundleText.length}${
+    `{"status":"update","seq":${seq},"publishedAt":${JSON.stringify(publishedAt)},"bytes":${bundleBytes}${
       provText !== null ? `,"provenance":${provText}` : ''
     },"bundle":${bundleText}}`,
     { status: 200, headers: { 'content-type': 'application/json', ...cors } },

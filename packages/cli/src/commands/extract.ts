@@ -24,47 +24,65 @@
  * package or its Chromium is absent the verb degrades with a named message
  * (exit 3) instead of an unnamed module crash.
  */
-import { existsSync } from 'node:fs';
-import { runExtractCommand } from '../../../../extract/run.js';
-import { runDraftCaptureConfig } from '../../../../extract/draft-capture-config.js';
-import { runAcceptCommand } from '../../../../extract/accept-candidates.js';
-import { CliUsageError, flagString, parseFlags } from '../lib.js';
-import { CONFIG_FILENAME } from './init.js';
+import { existsSync } from "node:fs";
+import { runExtractCommand } from "../../../../extract/run.js";
+import { runDraftCaptureConfig } from "../../../../extract/draft-capture-config.js";
+import { runAcceptCommand } from "../../../../extract/accept-candidates.js";
+import { CliUsageError, flagString, parseFlags } from "../lib.js";
+import { CONFIG_FILENAME } from "./init.js";
 
 export const COMPUTED_DEGRADE_MESSAGE =
-  '✘ extract --computed needs the real-browser capture harness, which is not available here:\n' +
-  '  playwright-core (an optional dependency) or its Chromium binary is missing.\n' +
-  '  Install them:  npm i playwright-core && npx playwright-core install chromium\n' +
-  '  (or set PLAYWRIGHT_CHROMIUM_PATH to an existing Chromium).\n' +
-  '  Every other verb works without a browser — only computed-style capture degrades.';
+  "✘ extract --computed needs the real-browser capture harness, which is not available here:\n" +
+  "  playwright-core (an optional dependency) or its Chromium binary is missing.\n" +
+  "  Install them:  npm i playwright-core && npx playwright-core install chromium\n" +
+  "  (or set PLAYWRIGHT_CHROMIUM_PATH to an existing Chromium).\n" +
+  "  Every other verb works without a browser — only computed-style capture degrades.";
 
 export async function extractCommand(argv: string[]): Promise<number> {
   const parsed = parseFlags(argv, {
-    value: ['config', 'harness', 'out', 'root', 'component', 'accept-candidates'],
-    bool: ['computed', 'reconcile', 'draft-capture-config'],
+    value: [
+      "config",
+      "harness",
+      "out",
+      "root",
+      "component",
+      "accept-candidates",
+      "canonical",
+    ],
+    bool: [
+      "computed",
+      "reconcile",
+      "draft-capture-config",
+      "acknowledge-unprovenanced-mismatch",
+    ],
   });
 
-  if (parsed.flags.get('computed') === true) {
-    const config = flagString(parsed, 'config');
+  if (parsed.flags.get("computed") === true) {
+    const config = flagString(parsed, "config");
     if (!config) {
       throw new CliUsageError(
-        'extract --computed needs --config <capture-config.json> (the CaptureConfig shape — see extract/computed/configs/polaris.json in the reference repo)',
+        "extract --computed needs --config <capture-config.json> (the CaptureConfig shape — see extract/computed/configs/polaris.json in the reference repo)",
       );
     }
-    if (!existsSync(config)) throw new CliUsageError(`--config not found: ${config}`);
+    if (!existsSync(config))
+      throw new CliUsageError(`--config not found: ${config}`);
     // process.argv already carries --config/--harness/--out/--root/--component;
     // the computed runner reads them itself (one arg surface, two shells).
     // Non-literal specifier: dist/computed.js is a SEPARATE esbuild chunk
     // (playwright-core external) resolved beside dist/cli.js at runtime — the
     // lazy boundary that keeps the CLI itself browser-free.
-    const computedChunk = new URL('./computed.js', import.meta.url).href;
+    const computedChunk = new URL("./computed.js", import.meta.url).href;
     try {
       await import(computedChunk);
     } catch (err) {
       const msg = String(err instanceof Error ? err.message : err);
-      if (/playwright-core|Chromium|browser cache|ERR_MODULE_NOT_FOUND|Cannot find (module|package)/i.test(msg)) {
+      if (
+        /playwright-core|Chromium|browser cache|ERR_MODULE_NOT_FOUND|Cannot find (module|package)/i.test(
+          msg,
+        )
+      ) {
         console.error(COMPUTED_DEGRADE_MESSAGE);
-        console.error(`  (underlying: ${msg.split('\n')[0]})`);
+        console.error(`  (underlying: ${msg.split("\n")[0]})`);
         return 3;
       }
       throw err;
@@ -74,19 +92,32 @@ export async function extractCommand(argv: string[]): Promise<number> {
 
   const configArg =
     parsed.positionals[0] ??
-    flagString(parsed, 'config') ??
+    flagString(parsed, "config") ??
     (existsSync(CONFIG_FILENAME) ? CONFIG_FILENAME : undefined);
-  runExtractCommand(parsed.flags.get('reconcile') === true ? 'reconcile' : 'code', configArg);
+  runExtractCommand(
+    parsed.flags.get("reconcile") === true ? "reconcile" : "code",
+    configArg,
+    {
+      canonicalDir: flagString(parsed, "canonical"),
+      acknowledgeUnprovenancedMismatch:
+        parsed.flags.get("acknowledge-unprovenanced-mismatch") === true,
+    },
+  );
   // Post-extract onboarding steps ride the SAME run (both read the
   // code-extraction.json this invocation just wrote — no staleness window).
-  if (parsed.flags.get('reconcile') !== true) {
-    if (parsed.flags.get('draft-capture-config') === true) {
-      runDraftCaptureConfig(configArg, flagString(parsed, 'out'));
+  if (parsed.flags.get("reconcile") !== true) {
+    if (parsed.flags.get("draft-capture-config") === true) {
+      runDraftCaptureConfig(configArg, flagString(parsed, "out"));
     }
-    const acceptMode = flagString(parsed, 'accept-candidates');
+    const acceptMode = flagString(parsed, "accept-candidates");
     if (acceptMode) runAcceptCommand(acceptMode, configArg);
-  } else if (parsed.flags.get('draft-capture-config') === true || parsed.flags.get('accept-candidates') !== undefined) {
-    throw new CliUsageError('--draft-capture-config / --accept-candidates run on the code pass, not with --reconcile');
+  } else if (
+    parsed.flags.get("draft-capture-config") === true ||
+    parsed.flags.get("accept-candidates") !== undefined
+  ) {
+    throw new CliUsageError(
+      "--draft-capture-config / --accept-candidates run on the code pass, not with --reconcile",
+    );
   }
   return 0;
 }

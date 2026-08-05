@@ -11,47 +11,33 @@
 # contributor was in exactly that position: zero automated verification.
 #
 # WHAT THIS LANE IS FOR. Everything here is cheap enough that a contributor can
-# also run it locally before pushing — `npm run ci:lane fast` runs exactly these
-# steps out of this file (see docs/25-reading-a-red-ci.md). Measured by that
-# runner on the author's machine (node v20.19.4, macOS arm64) at 8a5c455:
+# also run it locally before pushing — `npm run ci:lane fast` executes the
+# guarded commands directly from this file (see docs/25-reading-a-red-ci.md).
+# It prints, but deliberately does not run, prep commands such as npm ci and
+# clean-checkout builds. Run the printed package builds first on a cold tree.
 #
-#   npm run ci:lanes                                 0.2s
-#   npm run typecheck                                3.1s
-#   npm --prefix packages/cli run typecheck          1.4s
-#   npx tsc --noEmit -p .github/scripts/tsconfig...  1.3s
-#   npm run docs:check                               0.1s
-#   npm run capability:fresh                         0.2s
-#   npm run ledger:fresh                             0.4s
-#   npm run publish:check                            0.7s
-#   npm run verify:catalog                           0.1s
-#   npm run test:onboarding                          0.7s
-#                                                   ------
-#                                                    8.2s, 10/10 green. The
-#   packages/cli build below adds 0.5s. The rest of the wall clock is checkout
-#   and npm ci.
-#
-# FIVE OF THE 33 NAMED GATES LIVE HERE — typecheck, docs:check,
-# capability:fresh, ledger:fresh, publish:check. The other five steps are the
-# packages/cli and .github typechecks, ci:lanes, verify:catalog and
-# test:onboarding (the last two are named in CONTRIBUTING.md § "The gates" and
-# cost under a second between them). 27 gates run in full.yml; deploy:check is
-# scheduled.
+# In addition to the established contract gates, this lane closes package and
+# application surfaces that were previously invisible: every tracked CLI and
+# Worker test, measured CLI-source coverage, schema/emitter build + pack smoke,
+# Worker/package/app typechecks, and scoped lint/format checks.
 #
 # WHY publish:check IS IN THE FAST LANE AND SAFE HERE. It reads the public npm
-# registry and never writes: `npm view` + a curl of the published tarball, then
-# a sha256 against the tree's own build. Publishing needs the owner's OTP and
-# stays a human act. Its "not published yet" branch is a PASS, verified by
-# execution at this commit:
+# registry and never writes: `npm view` + an HTTPS fetch of each published
+# tarball, then a byte comparison of every locally packed file. Publishing
+# needs the owner's OTP and stays a human act. Each package's "not published
+# yet" branch is a PASS while the other package versions are still checked:
 #
-#     ✔ @ds-contracts/cli@0.4.0 is NOT on the registry yet — this tree is
-#       ahead of what adopters can install.
+#     ✔ SOURCE AHEAD — @ds-contracts/cli@0.5.0-rc.1 is not published;
+#       registry byte comparison skipped.
+#     ✔ SOURCE AHEAD — @ds-contracts/schema@16.1.0-rc.1 is not published;
+#       registry byte comparison skipped.
+#     REFUSED: @ds-contracts/emitter-web-components@0.3.0 registry contents
+#       differ (...). The unpublished RCs did not hide the published claim.
 #
-# THE PREREQUISITE THAT IS EASY TO MISS: `packages/cli/dist/` is gitignored
-# (.gitignore:3 `dist/`), so on a fresh checkout publish-check.mjs exits 1 with
-# "REFUSED: packages/cli/dist/cli.js is not built". Falsified deliberately —
-# running the script in a directory holding only packages/cli/package.json
-# reproduces that exact refusal. Hence the build step below; if you remove it,
-# this lane goes red at publish:check.
+# THE PREREQUISITE THAT IS EASY TO MISS: every package's `dist/` is gitignored
+# (.gitignore:3 `dist/`), so a fresh checkout has nothing honest to pack and
+# compare. Hence the three guarded prep builds below; if one is removed,
+# publish:check refuses that package by name instead of blessing partial bytes.
 #
 # HOW A FAILURE REPORTS. Each gate is its own step guarded by
 # `if: !cancelled() && steps.setup.outcome == 'success'`, so ONE red gate never
@@ -80,14 +66,14 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       # Node is pinned to the exact version the gates were verified on, not to
       # `20.x`: docs and packages/cli both declare `engines.node >= 20`, and
       # 20.19.4 is what produced every measurement in this file.
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: '20.19.4'
+          node-version: "20.19.4"
           cache: npm
           cache-dependency-path: package-lock.json
 
@@ -101,17 +87,34 @@ jobs:
         id: setup
         run: echo "Every step below runs even if an earlier one fails; the job fails at the end."
 
-      # publish:check compares the tree's BUILT cli.js against the registry's
-      # bytes; dist/ is gitignored, so it must be built here (see the header).
-      # Guarded like a gate so that a broken CLI build costs you publish:check
-      # — which will refuse by name — and not the other nine results.
+      # Root consumers import @ds-contracts/schema through its package exports,
+      # which point at gitignored dist/. A clean checkout therefore must build
+      # the workspace before any root typecheck/test can resolve it. The local
+      # lane runner prints (but does not execute) this prep command.
+      - name: build @ds-contracts/schema (resolution + publish:check prerequisite)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/schema run build
+
+      # publish:check packs all three BUILT packages and compares every file
+      # against the registry; dist/ is gitignored, so each must be built here.
+      # Guarded like gates so a broken build does not hide unrelated results.
       # CI_LANE_STEP: prep keeps `npm run ci:lane fast` from running it locally.
       - name: build @ds-contracts/cli (publish:check prerequisite)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         env: { CI_LANE_STEP: prep }
         run: npm --prefix packages/cli run build
 
+      - name: build @ds-contracts/emitter-web-components (publish:check prerequisite)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/emitter-web-components run build
+
       # ---------------------------------------------------------------- gates
+      - name: falsify lane setup cardinality
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npx tsx .github/scripts/lane-coverage.ts --self-test
+
       # A GATE ON THE GATES. Refuses when a gate-shaped script in package.json
       # is in no lane and on no exclusion list, when a lane names a script that
       # does not exist, or when a gate step loses its independent-reporting
@@ -135,9 +138,89 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npx tsc --noEmit -p .github/scripts/tsconfig.json
 
+      - name: lint hand-maintained source
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run lint
+
+      - name: prettier check (hand-maintained source only)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run format:check
+
+      - name: typecheck @ds-contracts/schema
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm --prefix packages/schema run typecheck
+
+      - name: package smoke @ds-contracts/schema
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm --prefix packages/schema run package:smoke
+
+      - name: typecheck @ds-contracts/emitter-web-components
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm --prefix packages/emitter-web-components run typecheck
+
+      - name: package smoke @ds-contracts/emitter-web-components
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm --prefix packages/emitter-web-components run package:smoke
+
+      - name: typecheck playground
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run typecheck:playground
+
+      - name: typecheck dashboard
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run typecheck:dashboard
+
+      - name: typecheck site
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run typecheck:site
+
+      - name: test Worker
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm --prefix workers/assist run test
+
+      - name: typecheck Worker
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm --prefix workers/assist run typecheck
+
+      - name: test playground bridge capability
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:playground
+
       - name: docs:check (every number and link the docs quote, re-derived)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run docs:check
+
+      - name: test v1 definition gate falsifications
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:v1-definition
+
+      - name: v1:definition:check (requirements, evidence, exclusions, and claim drift)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run v1:definition:check
+
+      - name: generation:atomic:check (a late refusal leaves output untouched)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run generation:atomic:check
+
+      - name: provenance:check (stale source cannot silently revert an approved design change)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run provenance:check
+
+      - name: snapshot:schema:check (malformed and future parity snapshots refuse by path)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run snapshot:schema:check
+
+      - name: static:empty-content:check (geometry-only roots invent no visible text)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run static:empty-content:check
+
+      - name: static:html-security:check (unsafe names and values refuse before output)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run static:html-security:check
+
+      - name: release:package-allowlist:check (RC tarballs reject unexpected files)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run release:package-allowlist:check
 
       - name: capability:fresh (docs/24 is byte-identical to a rebuild)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
@@ -147,7 +230,7 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run ledger:fresh
 
-      - name: publish:check (registry bytes vs this tree's CLI build)
+      - name: publish:check (registry bytes vs all three packed packages)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run publish:check
 
@@ -224,6 +307,32 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run canvas:binding:check
 
+      # THE PHASE 1 EXIT CRITERION, as a test. docs/12-roadmap.md:43 exits
+      # Phase 1 when "the differ (not a human with a screenshot) catches a
+      # hand-made change to a part's layout inside one variant".
+      #
+      # canvas:binding:check above pins the SIGNAL — the v6 hash sees part
+      # tree, layout and bindings. This pins the TRANSPORT, which was the
+      # actual gap: `grep -c getSharedPluginData parity/extract-figma.plugin.js`
+      # scored 0, so the stamp was written to the canvas and never read back,
+      # and a four-way part-layout edit inside ONE variant projected to a
+      # BYTE-IDENTICAL snapshot entry under "✔ Parity clean".
+      #
+      # It spawns the REAL parity/diff.ts over a committed fixture PAIR
+      # (pristine / hand-edited) via PARITY_SNAPSHOT_DIR + PARITY_REPORT —
+      # offline, no Figma, nothing in the working tree touched. Four ways of
+      # getting it wrong are red: dropping the stamp-vs-recompute comparison
+      # (the edited fixture goes green — that green is the defect), firing it
+      # on equality (the untouched fixture goes red with 9 findings),
+      # reporting a snapshot with NO `variants` as clean instead of NOT
+      # EXTRACTED, and calling an older stamp 'canvas-edited'. It also
+      # byte-compares the FINGERPRINT_SRC the plugin inlines against
+      # core/canvas-fingerprint.ts, so the transport can never start hashing
+      # with a private twin of the stamper.
+      - name: variant-drift:check (the differ catches a hand edit inside ONE variant)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run variant-drift:check
+
       # The TOKEN half of `npm run parity`, split out so it can be automated.
       # parity itself is excluded from every lane (it needs a snapshot younger
       # than 14 days and it rewrites parity/report.json); this reads the same
@@ -246,6 +355,18 @@ jobs:
 
       # Not one of the 33 named gates, but CONTRIBUTING.md § "The gates" tells
       # contributors to run it and it costs under a second with no extra build.
-      - name: test:onboarding (packages/cli node:test suite)
+      - name: test packages/cli (all node:test files)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run test:onboarding
+        run: npm --prefix packages/cli run test
+
+      - name: coverage packages/cli source
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm --prefix packages/cli run coverage
+
+      - name: upload CLI coverage JSON
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: cli-source-coverage
+          path: coverage/cli/coverage-final.json
+          if-no-files-found: warn

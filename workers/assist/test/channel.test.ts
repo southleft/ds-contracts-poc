@@ -452,6 +452,22 @@ test('size cap: an over-4MB publish is refused 413 by name and nothing is stored
   assert.ok(!env.ASSIST_KV.store.has(`chan:${c.readKey}:bundle`));
 });
 
+test('size cap: publish limits use UTF-8 bytes', async () => {
+  const env = makeEnv();
+  const c = await claim(env);
+  const multibyte =
+    '{"bundle":{"pad":"' + '💥'.repeat(Math.ceil(CHANNEL_MAX_BYTES / 3)) + '"}}';
+  assert.ok(multibyte.length < CHANNEL_MAX_BYTES);
+  assert.ok(Buffer.byteLength(multibyte, 'utf8') > CHANNEL_MAX_BYTES);
+  const res = await handleRequest(
+    req(`/channel/${c.writeKey}`, { body: multibyte }),
+    env,
+    deps,
+  );
+  assert.equal(res.status, 413);
+  assert.equal(((await res.json()) as { error: string }).error, CHANNEL_MESSAGES.tooLarge);
+});
+
 test('malformed: non-JSON, no bundle, bad bundle envelope, bad provenance — 400 each, BY NAME, nothing stored', async () => {
   const env = makeEnv();
   const c = await claim(env);

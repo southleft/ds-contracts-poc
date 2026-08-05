@@ -45,9 +45,23 @@
  * four generalized libraries reproduce their committed bytes exactly, quirks
  * included (see `examples/tailwind/promote.config.json`).
  */
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import path from 'node:path';
-import { validateContract } from '../../../core/emit-react.js';
+import {
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  renameSync,
+  unlinkSync,
+  writeFileSync,
+} from "node:fs";
+import path from "node:path";
+import { validateContract } from "../../../core/emit-react.js";
+import {
+  assertContractProvenance,
+  revisionOf,
+  type ProvenancedContract,
+} from "../../../core/contract-provenance.js";
+import { promoteStaticArtifact } from "../../../extract/static-promotion.js";
 
 // ---------------------------------------------------------------------------
 // Config
@@ -90,24 +104,37 @@ export interface PromoteConfig {
 }
 
 const REQUIRED: Array<keyof PromoteConfig> = [
-  'library', 'exampleDir', 'captureOut', 'dtcg', 'mintedOut', 'mintedDoc',
-  'components', 'contractVersion', 'promoterPath', 'possessive', 'mintedDocTitle',
+  "library",
+  "exampleDir",
+  "captureOut",
+  "dtcg",
+  "mintedOut",
+  "mintedDoc",
+  "components",
+  "contractVersion",
+  "promoterPath",
+  "possessive",
+  "mintedDocTitle",
 ];
 
 /** PURE referee: unknown JSON → PromoteConfig, refusing every missing field BY
  *  NAME (`__`-prefixed keys are notes and are ignored, the capture-config
  *  convention). */
 export function parsePromoteConfig(raw: unknown, from: string): PromoteConfig {
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
     throw new Error(`${from}: promote config must be a JSON object`);
   }
   const obj = raw as Record<string, unknown>;
   const missing = REQUIRED.filter((k) => obj[k] === undefined);
   if (missing.length > 0) {
-    throw new Error(`${from}: promote config is missing required field(s): ${missing.join(', ')}`);
+    throw new Error(
+      `${from}: promote config is missing required field(s): ${missing.join(", ")}`,
+    );
   }
   if (!Array.isArray(obj.components) || obj.components.length === 0) {
-    throw new Error(`${from}: "components" must be a non-empty array of capture out-dir names`);
+    throw new Error(
+      `${from}: "components" must be a non-empty array of capture out-dir names`,
+    );
   }
   return obj as unknown as PromoteConfig;
 }
@@ -118,16 +145,18 @@ export function parsePromoteConfig(raw: unknown, from: string): PromoteConfig {
 
 type Leaf = { $value: unknown; [k: string]: unknown };
 type Tree = Record<string, unknown>;
-const isLeaf = (v: unknown): v is Leaf => !!v && typeof v === 'object' && '$value' in (v as object);
-const isTree = (v: unknown): v is Tree => !!v && typeof v === 'object' && !('$value' in (v as object));
+const isLeaf = (v: unknown): v is Leaf =>
+  !!v && typeof v === "object" && "$value" in (v as object);
+const isTree = (v: unknown): v is Tree =>
+  !!v && typeof v === "object" && !("$value" in (v as object));
 
 /** PURE: colour literal → comparable `r,g,b,a` tuple, or null when the value is
  *  not a colour (lengths compare as strings). */
 export const colorTuple = (v: unknown): string | null => {
-  if (typeof v !== 'string') return null;
+  if (typeof v !== "string") return null;
   let s = v.trim();
   const h3 = /^#([0-9a-f]{3,4})$/i.exec(s);
-  if (h3) s = '#' + [...h3[1]].map((c) => c + c).join('');
+  if (h3) s = "#" + [...h3[1]].map((c) => c + c).join("");
   let m = /^#([0-9a-f]{6})([0-9a-f]{2})?$/i.exec(s);
   if (m) {
     const n = parseInt(m[1], 16);
@@ -171,21 +200,23 @@ export const valueEq = (a: unknown, b: unknown): boolean => {
  */
 export const mintSegment = (s: string): string =>
   s
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
     .toLowerCase()
-    .replace(/[^a-z0-9-]+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
+    .replace(/[^a-z0-9-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 
 /** PURE: merge one component's minted tree into the accumulator; two
  *  components minting different values under one path is a hard refusal. */
-export function mergeInto(target: Tree, src: Tree, prefix = ''): void {
+export function mergeInto(target: Tree, src: Tree, prefix = ""): void {
   for (const [k, v] of Object.entries(src)) {
     if (isTree(v)) {
       if (!(k in target)) target[k] = {};
       mergeInto(target[k] as Tree, v, `${prefix}${k}.`);
     } else if (k in target && JSON.stringify(target[k]) !== JSON.stringify(v)) {
-      throw new Error(`minted-token collision at "${prefix}${k}" — two components minted different values under one path`);
+      throw new Error(
+        `minted-token collision at "${prefix}${k}" — two components minted different values under one path`,
+      );
     } else {
       target[k] = v;
     }
@@ -240,13 +271,20 @@ export function aliasPass(
       // are the axis values the leaf is conditioned on. Join on the MINTED
       // spelling of the fact's part (see mintSegment).
       const byChannel = new Set<string>();
-      for (const f of facts) byChannel.add(`${mintSegment(f.part)}|${f.channel}`);
-      let matched: { token: string; part: string; channel: string; varName: string; selector: string } | null = null;
+      for (const f of facts)
+        byChannel.add(`${mintSegment(f.part)}|${f.channel}`);
+      let matched: {
+        token: string;
+        part: string;
+        channel: string;
+        varName: string;
+        selector: string;
+      } | null = null;
       for (let ci = leafPath.length - 1; ci >= 2; ci--) {
         // a state-plane leaf spells the channel with a -state-<x> suffix
         // (background-color-state-disabled) — same source channel.
-        const channel = leafPath[ci].replace(/-state-[a-z-]+$/, '');
-        const part = leafPath.slice(2, ci).join('.') || 'root';
+        const channel = leafPath[ci].replace(/-state-[a-z-]+$/, "");
+        const part = leafPath.slice(2, ci).join(".") || "root";
         if (!byChannel.has(`${part}|${channel}`)) continue;
         const axisVals = leafPath.slice(ci + 1);
         // VALUE AGREEMENT is the plane selector: state facts and base facts
@@ -254,23 +292,35 @@ export function aliasPass(
         // plane this leaf belongs to (equality was verified at capture, so
         // this drops only other-plane facts, never the leaf's own).
         const covering = facts.filter(
-          (f) => mintSegment(f.part) === part && f.channel === channel &&
+          (f) =>
+            mintSegment(f.part) === part &&
+            f.channel === channel &&
             axisVals.every((av) => Object.values(f.axisValues).includes(av)) &&
             valueEq(v.$value, tokenValue(f.token)),
         );
         if (covering.length === 0) break;
         const toks = new Set(covering.map((f) => f.token));
         if (toks.size !== 1) {
-          out.receipts.push(`kept literal ${leafPath.join('.')}: covering combos disagree (${[...toks].sort().join(', ')})`);
+          out.receipts.push(
+            `kept literal ${leafPath.join(".")}: covering combos disagree (${[...toks].sort().join(", ")})`,
+          );
           break;
         }
         const tok = [...toks][0];
         if (!valueEq(v.$value, tokenValue(tok))) {
-          out.receipts.push(`kept literal ${leafPath.join('.')}: minted value ${v.$value} ≠ ${tok} value ${tokenValue(tok)}`);
+          out.receipts.push(
+            `kept literal ${leafPath.join(".")}: minted value ${v.$value} ≠ ${tok} value ${tokenValue(tok)}`,
+          );
           break;
         }
         const witness = covering[0];
-        matched = { token: tok, part, channel, varName: witness.varName ?? '', selector: witness.anchor?.selector ?? '' };
+        matched = {
+          token: tok,
+          part,
+          channel,
+          varName: witness.varName ?? "",
+          selector: witness.anchor?.selector ?? "",
+        };
         out.joined.add(`${part}|${channel}`);
         break;
       }
@@ -278,7 +328,7 @@ export function aliasPass(
         v.$value = `{${matched.token}}`;
         out.aliased++;
         out.anchors.push({
-          leaf: leafPath.join('.'),
+          leaf: leafPath.join("."),
           token: matched.token,
           part: matched.part,
           cssProperty: matched.channel,
@@ -297,7 +347,7 @@ export function leafPaths(tree: Tree): Set<string> {
   const set = new Set<string>();
   (function walk(n: Tree, p: string[]) {
     for (const [k, v] of Object.entries(n)) {
-      if (isLeaf(v)) set.add([...p, k].join('.'));
+      if (isLeaf(v)) set.add([...p, k].join("."));
       else if (isTree(v)) walk(v as Tree, [...p, k]);
     }
   })(tree, []);
@@ -319,18 +369,25 @@ export function resolutionGuard(
   const dangling: string[] = [];
   for (const { name, contract } of contracts) {
     const enums: Record<string, string[]> = {};
-    for (const pr of (contract.props ?? []) as Array<{ name: string; type?: { enum?: string[] } }>) {
+    for (const pr of (contract.props ?? []) as Array<{
+      name: string;
+      type?: { enum?: string[] };
+    }>) {
       if (pr.type?.enum) enums[pr.name] = pr.type.enum;
     }
     const expand = (ref: string): string[] => {
       let refs = [ref];
       for (const [prop, vals] of Object.entries(enums)) {
         if (!ref.includes(`{${prop}}`)) continue;
-        refs = refs.flatMap((r) => vals.map((v) => r.replaceAll(`{${prop}}`, v)));
+        refs = refs.flatMap((r) =>
+          vals.map((v) => r.replaceAll(`{${prop}}`, v)),
+        );
       }
       return refs;
     };
-    for (const m of JSON.stringify(contract).matchAll(/"\{(imported\.[^"]+)\}"/g)) {
+    for (const m of JSON.stringify(contract).matchAll(
+      /"\{(imported\.[^"]+)\}"/g,
+    )) {
       for (const r of expand(m[1])) {
         if (!leafSet.has(r)) dangling.push(`${name}: {${r}} (from {${m[1]}})`);
       }
@@ -341,7 +398,8 @@ export function resolutionGuard(
     for (const [k, v] of Object.entries(n)) {
       if (isLeaf(v)) {
         const mm = /^\{(.+)\}$/.exec(String(v.$value));
-        if (mm && tokenValue(mm[1]) === undefined) badAliases.push([...p, k].join('.') + ' -> ' + String(v.$value));
+        if (mm && tokenValue(mm[1]) === undefined)
+          badAliases.push([...p, k].join(".") + " -> " + String(v.$value));
       } else if (isTree(v)) walk(v as Tree, [...p, k]);
     }
   })(minted, []);
@@ -362,6 +420,105 @@ export interface PromoteResult {
   stateRefusals: string[];
 }
 
+export interface PromotionCommitOptions {
+  /** Deterministic fault-injection seam for rollback falsification. Called
+   * after an existing destination has moved to its backup and immediately
+   * before the staged replacement is installed. */
+  beforeInstall?: (index: number, destination: string) => void;
+  /** Deterministic fault-injection seam for recovery-path tests. Called
+   * immediately before an original backup is restored. */
+  beforeRestore?: (index: number, destination: string, backup: string) => void;
+}
+
+interface CommitRecord {
+  destination: string;
+  temporary: string;
+  backup: string;
+  commitIndex: number;
+  originalMoved: boolean;
+  replacementInstalled: boolean;
+}
+
+function commitPlannedWrites(
+  plannedWrites: Map<string, string>,
+  options: PromotionCommitOptions,
+): void {
+  const records: CommitRecord[] = [];
+  let index = 0;
+  try {
+    for (const [destination, body] of plannedWrites) {
+      mkdirSync(path.dirname(destination), { recursive: true });
+      const suffix = `.promotion-${process.pid}-${index}`;
+      const record: CommitRecord = {
+        destination,
+        temporary: `${destination}${suffix}.tmp`,
+        backup: `${destination}${suffix}.bak`,
+        commitIndex: index,
+        originalMoved: false,
+        replacementInstalled: false,
+      };
+      writeFileSync(record.temporary, body);
+      records.push(record);
+      index++;
+    }
+
+    for (const [commitIndex, record] of records.entries()) {
+      if (existsSync(record.destination)) {
+        renameSync(record.destination, record.backup);
+        record.originalMoved = true;
+      }
+      options.beforeInstall?.(commitIndex, record.destination);
+      renameSync(record.temporary, record.destination);
+      record.replacementInstalled = true;
+    }
+  } catch (error) {
+    const rollbackErrors: unknown[] = [];
+    for (const record of [...records].reverse()) {
+      try {
+        if (record.replacementInstalled && existsSync(record.destination)) {
+          unlinkSync(record.destination);
+        }
+        if (record.originalMoved && existsSync(record.backup)) {
+          options.beforeRestore?.(
+            record.commitIndex,
+            record.destination,
+            record.backup,
+          );
+          renameSync(record.backup, record.destination);
+        }
+      } catch (rollbackError) {
+        rollbackErrors.push(rollbackError);
+      }
+    }
+    if (rollbackErrors.length > 0) {
+      // An incomplete rollback is a recovery event, not a cleanup event.
+      // Preserve every surviving staged file and backup: deleting any of
+      // them could destroy the only remaining copy of an original artifact.
+      const recoveryPaths = records.flatMap((record) =>
+        [record.backup, record.temporary].filter((artifact) =>
+          existsSync(artifact),
+        ),
+      );
+      throw new AggregateError(
+        [error, ...rollbackErrors],
+        "promotion commit failed and rollback was incomplete; manual recovery artifacts preserved at:\n" +
+          recoveryPaths.map((artifact) => `  ${artifact}`).join("\n"),
+      );
+    }
+    for (const record of records) {
+      if (existsSync(record.temporary)) unlinkSync(record.temporary);
+      if (existsSync(record.backup)) unlinkSync(record.backup);
+    }
+    throw error;
+  }
+
+  // The destination set is fully committed. Backups are no longer part of
+  // rollback state; remove them after every replacement has landed.
+  for (const record of records) {
+    if (existsSync(record.backup)) unlinkSync(record.backup);
+  }
+}
+
 /** The full promotion, against a repo root. Writes contracts, extension
  *  sidecars, anchors, the minted tree and MINTED.md; THROWS on an unresolvable
  *  ref (the resolution guard) or a minted collision. */
@@ -369,6 +526,7 @@ export function promote(
   repoRoot: string,
   cfg: PromoteConfig,
   log: (line: string) => void = console.log,
+  commitOptions: PromotionCommitOptions = {},
 ): PromoteResult {
   const EX = path.resolve(repoRoot, cfg.exampleDir);
   const OUT = path.resolve(repoRoot, cfg.captureOut);
@@ -390,12 +548,12 @@ export function promote(
       `promote REFUSED: the base DTCG token file the manifest names does not exist (${cfg.dtcg}, resolved ${dtcgPath}). Author it — leaf names must equal the CSS custom property minus the "--" prefix (flat, not nested; nested trees verify 0 facts) — or re-run onboard, which writes a skeleton to start from.`,
     );
   }
-  const dtcgTree = JSON.parse(readFileSync(dtcgPath, 'utf8')) as Tree;
+  const dtcgTree = JSON.parse(readFileSync(dtcgPath, "utf8")) as Tree;
   const dtcgFlat = new Map<string, unknown>();
   (function walkDtcg(n: Tree, p: string[]): void {
     for (const [k, v] of Object.entries(n)) {
-      if (k.startsWith('$') || k.startsWith('__')) continue;
-      if (isLeaf(v)) dtcgFlat.set([...p, k].join('.'), v.$value);
+      if (k.startsWith("$") || k.startsWith("__")) continue;
+      if (isLeaf(v)) dtcgFlat.set([...p, k].join("."), v.$value);
       else if (isTree(v)) walkDtcg(v, [...p, k]);
     }
   })(dtcgTree, []);
@@ -403,15 +561,34 @@ export function promote(
 
   // Icon map — the referee needs it to validate `icon.asset` refs, and floor-
   // reconstructed assets promoted below are added to it as they land.
-  const ICON_DIR = path.join(EX, 'assets', 'icons');
+  const ICON_DIR = path.join(EX, "assets", "icons");
   const icons = new Map<string, string>(
     existsSync(ICON_DIR)
       ? readdirSync(ICON_DIR)
-          .filter((f) => f.endsWith('.svg'))
+          .filter((f) => f.endsWith(".svg"))
           .sort()
-          .map((f) => [f.replace(/\.svg$/, ''), readFileSync(path.join(ICON_DIR, f), 'utf8').trim()] as [string, string])
+          .map(
+            (f) =>
+              [
+                f.replace(/\.svg$/, ""),
+                readFileSync(path.join(ICON_DIR, f), "utf8").trim(),
+              ] as [string, string],
+          )
       : [],
   );
+  const plannedAssets = new Map<string, string>();
+  const promotedAssets: string[] = [];
+  for (const name of cfg.components) {
+    const floorAssets = path.join(OUT, name, "assets");
+    if (!existsSync(floorAssets)) continue;
+    for (const file of readdirSync(floorAssets).sort()) {
+      if (!file.endsWith(".svg")) continue;
+      const body = readFileSync(path.join(floorAssets, file), "utf8");
+      plannedAssets.set(file, body);
+      icons.set(file.replace(/\.svg$/, ""), body.trim());
+      promotedAssets.push(file);
+    }
+  }
 
   const stateRefusals: string[] = [];
   const statePreviewsOn: string[] = [];
@@ -428,53 +605,77 @@ export function promote(
     const probe = structuredClone(contract) as Record<string, unknown>;
     probe.figmaStatePreviews = true;
     const probeErrors: string[] = [];
-    validateContract(probe as never, new Map([[probe.id as string, probe as never]]), probeErrors, icons);
+    validateContract(
+      probe as never,
+      new Map([[probe.id as string, probe as never]]),
+      probeErrors,
+      icons,
+    );
     if (probeErrors.length === 0) {
       contract.figmaStatePreviews = true;
-      statePreviewsOn.push(`${contract.id} (${states.join(', ')})`);
-      log(`  · ${contract.id}: figmaStatePreviews ON (${states.join(', ')})`);
+      statePreviewsOn.push(`${contract.id} (${states.join(", ")})`);
+      log(`  · ${contract.id}: figmaStatePreviews ON (${states.join(", ")})`);
     } else {
       stateRefusals.push(`${contract.id}: ${probeErrors[0]}`);
-      log(`  · ${contract.id}: figmaStatePreviews REFUSED by the referee (named): ${probeErrors[0]}`);
+      log(
+        `  · ${contract.id}: figmaStatePreviews REFUSED by the referee (named): ${probeErrors[0]}`,
+      );
     }
   };
 
   // ---- promotion ----
   const promoted: string[] = [];
-  const promotedAssets: string[] = [];
+  const prepared = new Map<
+    string,
+    {
+      contract: Record<string, unknown>;
+      extension: unknown;
+    }
+  >();
+  // Plan and provenance-referee the whole set before copying an asset or
+  // writing a contract. Existing unprovenanced floor artifacts retain their
+  // legacy behavior; once provenance exists, the stale-source guard applies.
   for (const name of cfg.components) {
     const dir = path.join(OUT, name);
-    // Floor-reconstructed svg assets → committed icon assets; the figma
-    // compile (`--icons examples/<lib>/assets/icons`) emits them, and a
-    // contract referencing an uncopied asset refuses by name there.
-    const floorAssets = path.join(dir, 'assets');
-    if (existsSync(floorAssets)) {
-      mkdirSync(ICON_DIR, { recursive: true });
-      for (const f of readdirSync(floorAssets).sort()) {
-        if (!f.endsWith('.svg')) continue;
-        const body = readFileSync(path.join(floorAssets, f), 'utf8');
-        writeFileSync(path.join(ICON_DIR, f), body);
-        icons.set(f.replace(/\.svg$/, ''), body.trim());
-        promotedAssets.push(f);
-      }
-    }
-    const resolvedPath = path.join(dir, 'resolved.contract.json');
-    const enrichedPath = path.join(dir, 'enriched.contract.json');
+    const resolvedPath = path.join(dir, "resolved.contract.json");
+    const enrichedPath = path.join(dir, "enriched.contract.json");
     const src = existsSync(resolvedPath) ? resolvedPath : enrichedPath;
-    if (!existsSync(src)) throw new Error(`${name}: no computed artifact (${src})`);
-    const contract = JSON.parse(readFileSync(src, 'utf8')) as Record<string, unknown>;
-    const extension = JSON.parse(readFileSync(path.join(dir, 'enriched.extension.json'), 'utf8')) as unknown;
-
+    if (!existsSync(src))
+      throw new Error(`${name}: no computed artifact (${src})`);
+    const sourceContract = JSON.parse(readFileSync(src, "utf8")) as Record<
+      string,
+      unknown
+    >;
+    let contract = structuredClone(sourceContract) as ProvenancedContract;
+    const extension = JSON.parse(
+      readFileSync(path.join(dir, "enriched.extension.json"), "utf8"),
+    ) as unknown;
     contract.version = cfg.contractVersion;
     contract.description =
       `${contract.description} FLOOR-PROMOTED (${cfg.promoterPath}): ` +
       `${path.basename(src)} — computed-capture truth; minted leaves source-aliased to ${cfg.possessive} ` +
       `own CSS-variable references where verified (source-bindings.json); extension sidecar ` +
       `carries the named overflow.`;
-
     statePreviewProbe(contract);
-    writeFileSync(path.join(EX, 'contracts', `${stemOf(name)}.contract.json`), JSON.stringify(contract, null, 2) + '\n');
-    writeFileSync(path.join(EX, 'contracts', `${stemOf(name)}.extension.json`), JSON.stringify(extension, null, 2) + '\n');
+    const destination = path.join(
+      EX,
+      "contracts",
+      `${stemOf(name)}.contract.json`,
+    );
+    if (existsSync(destination)) {
+      const canonical = JSON.parse(
+        readFileSync(destination, "utf8"),
+      ) as ProvenancedContract;
+      assertContractProvenance(canonical, String(canonical.id ?? name));
+      if (canonical.provenance) {
+        contract = promoteStaticArtifact(canonical, contract, {
+          adapter: "computed-capture",
+          revision: revisionOf(sourceContract),
+        });
+      }
+    }
+    assertContractProvenance(contract, String(contract.id ?? name));
+    prepared.set(name, { contract, extension });
     promoted.push(name);
   }
 
@@ -485,17 +686,26 @@ export function promote(
   const aliasReceipts: string[] = [];
   const anchorsByComponent = new Map<string, Anchor[]>();
   for (const name of cfg.mintSources ?? cfg.components) {
-    const extPath = path.join(OUT, name, 'enriched.extension.json');
+    const extPath = path.join(OUT, name, "enriched.extension.json");
     if (!existsSync(extPath)) continue;
-    const extension = JSON.parse(readFileSync(extPath, 'utf8')) as { mintedTokens?: Tree };
+    const extension = JSON.parse(readFileSync(extPath, "utf8")) as {
+      mintedTokens?: Tree;
+    };
     const minted = extension.mintedTokens ?? {};
-    const sbPath = path.join(OUT, name, 'source-bindings.json');
+    const sbPath = path.join(OUT, name, "source-bindings.json");
     const facts: SourceFact[] = existsSync(sbPath)
-      ? ((JSON.parse(readFileSync(sbPath, 'utf8')) as { facts?: SourceFact[] }).facts ?? [])
+      ? ((JSON.parse(readFileSync(sbPath, "utf8")) as { facts?: SourceFact[] })
+          .facts ?? [])
       : [];
     if (facts.length > 0 && minted.imported) {
-      const out: AliasOutcome = { aliased: 0, literalKept: 0, receipts: [], anchors: [], joined: new Set() };
-      aliasPass(minted.imported as Tree, ['imported'], facts, tokenValue, out);
+      const out: AliasOutcome = {
+        aliased: 0,
+        literalKept: 0,
+        receipts: [],
+        anchors: [],
+        joined: new Set(),
+      };
+      aliasPass(minted.imported as Tree, ["imported"], facts, tokenValue, out);
       aliased += out.aliased;
       literalKept += out.literalKept;
       aliasReceipts.push(...out.receipts);
@@ -505,9 +715,13 @@ export function promote(
       // part-name/mint-path spelling mismatch cost four aliases without a word.
       // Naming it here means the next spelling divergence is loud.
       if (cfg.unjoinedFactReceipts) {
-        for (const key of new Set(facts.map((f) => `${mintSegment(f.part)}|${f.channel}`))) {
+        for (const key of new Set(
+          facts.map((f) => `${mintSegment(f.part)}|${f.channel}`),
+        )) {
           if (!out.joined.has(key)) {
-            aliasReceipts.push(`fact NOT JOINED ${name}: (part "${key.split('|')[0]}", channel "${key.split('|')[1]}") verified at capture but reached no minted leaf — either the leaf's value disagrees with the token (a plane split) or the part spelling diverged from the minted path`);
+            aliasReceipts.push(
+              `fact NOT JOINED ${name}: (part "${key.split("|")[0]}", channel "${key.split("|")[1]}") verified at capture but reached no minted leaf — either the leaf's value disagrees with the token (a plane split) or the part spelling diverged from the minted path`,
+            );
           }
         }
       }
@@ -515,65 +729,136 @@ export function promote(
     mergeInto(mintedMerged, minted);
   }
 
-  // ---- provenance-anchor sidecars ----
-  for (const [name, anchors] of [...anchorsByComponent].sort()) {
-    writeFileSync(
-      path.join(EX, 'contracts', `${name}.anchors.json`),
-      JSON.stringify({
-        _marker: 'PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).',
-        component: name,
-        anchors: anchors.sort((a, b) => a.leaf.localeCompare(b.leaf)),
-      }, null, 2) + '\n',
-    );
-  }
-
   // ---- resolution guard ----
   {
     const contracts = cfg.components.map((name) => ({
       name,
-      contract: JSON.parse(readFileSync(path.join(EX, 'contracts', `${stemOf(name)}.contract.json`), 'utf8')) as Record<string, unknown>,
+      contract: prepared.get(name)!.contract,
     }));
-    const { dangling, badAliases } = resolutionGuard(mintedMerged, contracts, tokenValue);
+    const { dangling, badAliases } = resolutionGuard(
+      mintedMerged,
+      contracts,
+      tokenValue,
+    );
     if (dangling.length > 0 || badAliases.length > 0) {
       const lines = [
-        '✘ promotion REFUSED — unresolvable refs:',
-        ...dangling.slice(0, 20).map((d) => '  dangling: ' + d),
-        ...badAliases.slice(0, 20).map((b) => '  bad alias: ' + b),
+        "✘ promotion REFUSED — unresolvable refs:",
+        ...dangling.slice(0, 20).map((d) => "  dangling: " + d),
+        ...badAliases.slice(0, 20).map((b) => "  bad alias: " + b),
       ];
-      throw new Error(lines.join('\n'));
+      throw new Error(lines.join("\n"));
     }
-    log('✔ resolution guard: every contract {imported.*} ref (axis-expanded) resolves; every alias resolves in the DTCG base');
+    log(
+      "✔ resolution guard: every contract {imported.*} ref (axis-expanded) resolves; every alias resolves in the DTCG base",
+    );
   }
 
-  writeFileSync(path.resolve(repoRoot, cfg.mintedOut), JSON.stringify(mintedMerged, null, 2) + '\n');
-  writeFileSync(
+  // Every destination byte is planned only after the full logical referee
+  // succeeds. Temporary siblings are then written before any destination is
+  // replaced, preventing a late dangling ref/alias refusal (or a temp-write
+  // failure) from changing committed artifacts.
+  const plannedWrites = new Map<string, string>();
+  const planWrite = (destination: string, body: string): void => {
+    if (plannedWrites.has(destination)) {
+      throw new Error(
+        `promotion REFUSED — two planned artifacts target ${destination}`,
+      );
+    }
+    plannedWrites.set(destination, body);
+  };
+  for (const name of cfg.components) {
+    const { contract, extension } = prepared.get(name)!;
+    planWrite(
+      path.join(EX, "contracts", `${stemOf(name)}.contract.json`),
+      JSON.stringify(contract, null, 2) + "\n",
+    );
+    planWrite(
+      path.join(EX, "contracts", `${stemOf(name)}.extension.json`),
+      JSON.stringify(extension, null, 2) + "\n",
+    );
+  }
+  for (const [file, body] of plannedAssets) {
+    planWrite(path.join(ICON_DIR, file), body);
+  }
+  for (const [name, anchors] of [...anchorsByComponent].sort()) {
+    planWrite(
+      path.join(EX, "contracts", `${name}.anchors.json`),
+      JSON.stringify(
+        {
+          _marker:
+            "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+          component: name,
+          anchors: anchors.sort((a, b) => a.leaf.localeCompare(b.leaf)),
+        },
+        null,
+        2,
+      ) + "\n",
+    );
+  }
+  planWrite(
+    path.resolve(repoRoot, cfg.mintedOut),
+    JSON.stringify(mintedMerged, null, 2) + "\n",
+  );
+  planWrite(
     path.resolve(repoRoot, cfg.mintedDoc),
     `# ${cfg.mintedDocTitle} — promotion receipt\n\nGenerated by \`${cfg.promoterPath}\`.\n\n` +
       `- **${aliased} leaves source-aliased** to ${cfg.possessive} own CSS-variable-named tokens (value-verified twice: capture + promotion)\n` +
       `- **${literalKept} leaves kept literal** (no verified source reference)\n` +
-      `- **${aliasReceipts.length} named alias refusals**${aliasReceipts.length ? ':' : ''}\n` +
-      aliasReceipts.map((r) => `  - ${r}`).join('\n') + '\n',
-  );
-  log(`✔ floor-promoted ${promoted.length} contract(s) → ${cfg.exampleDir}/contracts (v${cfg.contractVersion}): ${promoted.join(', ')}`);
-  if (promotedAssets.length > 0) log(`✔ ${promotedAssets.length} floor-reconstructed icon asset(s) → ${cfg.exampleDir}/assets/icons/: ${promotedAssets.join(', ')}`);
-  log(`✔ minted tree → ${cfg.mintedOut} (${aliased} source-aliased, ${literalKept} literal, ${aliasReceipts.length} named refusals)`);
-  log(
-    `✔ figmaStatePreviews: ${statePreviewsOn.length} accepted by the referee` +
-      (statePreviewsOn.length ? ` (${statePreviewsOn.join('; ')})` : '') +
-      `, ${stateRefusals.length} REFUSED BY NAME` +
-      (stateRefusals.length ? `:\n${stateRefusals.map((r) => `    - ${r}`).join('\n')}` : ''),
+      `- **${aliasReceipts.length} named alias refusals**${aliasReceipts.length ? ":" : ""}\n` +
+      aliasReceipts.map((r) => `  - ${r}`).join("\n") +
+      "\n",
   );
 
-  return { promoted, promotedAssets, aliased, literalKept, receipts: aliasReceipts, statePreviewsOn, stateRefusals };
+  commitPlannedWrites(plannedWrites, commitOptions);
+  log(
+    `✔ floor-promoted ${promoted.length} contract(s) → ${cfg.exampleDir}/contracts (v${cfg.contractVersion}): ${promoted.join(", ")}`,
+  );
+  if (promotedAssets.length > 0)
+    log(
+      `✔ ${promotedAssets.length} floor-reconstructed icon asset(s) → ${cfg.exampleDir}/assets/icons/: ${promotedAssets.join(", ")}`,
+    );
+  log(
+    `✔ minted tree → ${cfg.mintedOut} (${aliased} source-aliased, ${literalKept} literal, ${aliasReceipts.length} named refusals)`,
+  );
+  log(
+    `✔ figmaStatePreviews: ${statePreviewsOn.length} accepted by the referee` +
+      (statePreviewsOn.length ? ` (${statePreviewsOn.join("; ")})` : "") +
+      `, ${stateRefusals.length} REFUSED BY NAME` +
+      (stateRefusals.length
+        ? `:\n${stateRefusals.map((r) => `    - ${r}`).join("\n")}`
+        : ""),
+  );
+
+  return {
+    promoted,
+    promotedAssets,
+    aliased,
+    literalKept,
+    receipts: aliasReceipts,
+    statePreviewsOn,
+    stateRefusals,
+  };
 }
 
 /** Shell entry used by the example shims and the `promote` verb. */
-export function promoteFromConfigFile(configPath: string, repoRoot?: string): PromoteResult {
+export function promoteFromConfigFile(
+  configPath: string,
+  repoRoot?: string,
+): PromoteResult {
   const abs = path.resolve(configPath);
-  if (!existsSync(abs)) throw new Error(`promote config not found: ${configPath}`);
-  const cfg = parsePromoteConfig(JSON.parse(readFileSync(abs, 'utf8')), configPath);
+  if (!existsSync(abs))
+    throw new Error(`promote config not found: ${configPath}`);
+  const cfg = parsePromoteConfig(
+    JSON.parse(readFileSync(abs, "utf8")),
+    configPath,
+  );
   // Config paths are repo-relative; the repo root defaults to the directory
   // two levels above the example dir the config names.
-  const root = repoRoot ?? path.resolve(path.dirname(abs), ...cfg.exampleDir.split('/').map(() => '..'));
+  const root =
+    repoRoot ??
+    path.resolve(
+      path.dirname(abs),
+      ...cfg.exampleDir.split("/").map(() => ".."),
+    );
   return promote(root, cfg);
 }

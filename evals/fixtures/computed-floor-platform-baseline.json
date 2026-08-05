@@ -1,0 +1,38 @@
+{
+  "_note": "Real Chromium computed-style replay is platform-sensitive even at the same pinned browser revision. These are measured run-of-record values, not interchangeable thresholds. Drift in either direction requires review.",
+  "darwin": {
+    "pct": 99.97537944618236,
+    "tolerancePp": 0.05,
+    "cellsCompared": 4142880,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "extraExclusions": [],
+    "source": "macOS arm64 run-of-record in extract/computed/out/button/numbers.json"
+  },
+  "linux": {
+    "pct": 99.97527632344386,
+    "tolerancePp": 0.05,
+    "cellsCompared": 4125600,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y",
+      "flex-line-count",
+      "position-anchor",
+      "ruby-overhang",
+      "text-fit"
+    ],
+    "extraExclusions": [
+      "flex-line-count",
+      "position-anchor",
+      "ruby-overhang",
+      "text-fit"
+    ],
+    "source": "Ubuntu 24.04 x64 replay, node 20.19.4, lockfile Chromium, after named computed-only exclusions"
+  }
+}

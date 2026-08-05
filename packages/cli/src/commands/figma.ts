@@ -55,9 +55,20 @@
  *       with none recorded the refusal is printed and no code is written).
  *       git stays yours.
  */
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import path from 'node:path';
-import { figmaScriptEmitter } from '../../../../core/emitter.js';
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+} from "node:fs";
+import path from "node:path";
+import { figmaScriptEmitter } from "../../../../core/emitter.js";
+import {
+  assertContractProvenance,
+  markAwaitingCodeAdoption,
+  type ProvenancedContract,
+} from "../../../../core/contract-provenance.js";
 import {
   buildEmitterCtxWithRouting,
   CliUsageError,
@@ -69,7 +80,7 @@ import {
   parseFlags,
   splitList,
   withTokenDiagnostics,
-} from '../lib.js';
+} from "../lib.js";
 // propose-pr's three code-plan functions are imported LAZILY, inside the
 // --apply branch of receive (see below) — not here. Statically, this module
 // would pull in scripts/generate-components.ts, whose direct-run shell ends
@@ -77,10 +88,11 @@ import {
 // (CJS), where a top-level await is a hard transform error. The dev door
 // needs the generator only when it is actually about to generate.
 
-export const DEFAULT_BRIDGE_URL = 'https://ds-contracts-assist.southleft-llc.workers.dev';
+export const DEFAULT_BRIDGE_URL =
+  "https://ds-contracts-assist.southleft-llc.workers.dev";
 
 /** The bundle envelope the bridge and the plugin agree on. */
-export const CONTRACTS_BUNDLE_TYPE = 'CONTRACTS-BUNDLE';
+export const CONTRACTS_BUNDLE_TYPE = "CONTRACTS-BUNDLE";
 
 export interface ContractsBundle {
   type: typeof CONTRACTS_BUNDLE_TYPE;
@@ -100,17 +112,31 @@ export interface ContractsBundle {
 export function toBundle(filePath: string): ContractsBundle {
   let raw: unknown;
   try {
-    raw = JSON.parse(readFileSync(filePath, 'utf8'));
+    raw = JSON.parse(readFileSync(filePath, "utf8"));
   } catch (err) {
-    throw new CliUsageError(`${filePath}: not JSON — ${String(err instanceof Error ? err.message : err)}`);
+    throw new CliUsageError(
+      `${filePath}: not JSON — ${String(err instanceof Error ? err.message : err)}`,
+    );
   }
-  if (raw && typeof raw === 'object' && (raw as { type?: unknown }).type === CONTRACTS_BUNDLE_TYPE) {
+  if (
+    raw &&
+    typeof raw === "object" &&
+    (raw as { type?: unknown }).type === CONTRACTS_BUNDLE_TYPE
+  ) {
     const contracts = (raw as { contracts?: unknown }).contracts;
     if (!Array.isArray(contracts) || contracts.length === 0) {
-      throw new CliUsageError(`${filePath}: a ${CONTRACTS_BUNDLE_TYPE} needs a non-empty "contracts" array`);
+      throw new CliUsageError(
+        `${filePath}: a ${CONTRACTS_BUNDLE_TYPE} needs a non-empty "contracts" array`,
+      );
     }
     const tokenSet = (raw as { tokenSet?: unknown }).tokenSet;
     const icons = (raw as { icons?: unknown }).icons;
+    for (const [i, contract] of contracts.entries()) {
+      assertContractProvenance(
+        contract as ProvenancedContract,
+        `bundle contract ${i + 1}`,
+      );
+    }
     return {
       type: CONTRACTS_BUNDLE_TYPE,
       version: 1,
@@ -119,7 +145,15 @@ export function toBundle(filePath: string): ContractsBundle {
       ...(icons !== undefined && icons !== null ? { icons } : {}),
     };
   }
-  if (raw && typeof raw === 'object' && typeof (raw as { id?: unknown }).id === 'string') {
+  if (
+    raw &&
+    typeof raw === "object" &&
+    typeof (raw as { id?: unknown }).id === "string"
+  ) {
+    assertContractProvenance(
+      raw as ProvenancedContract,
+      String((raw as { id: string }).id),
+    );
     return { type: CONTRACTS_BUNDLE_TYPE, version: 1, contracts: [raw] };
   }
   throw new CliUsageError(
@@ -134,32 +168,40 @@ export function toBundle(filePath: string): ContractsBundle {
 const readJsonObject = (filePath: string): Record<string, unknown> => {
   let raw: unknown;
   try {
-    raw = JSON.parse(readFileSync(filePath, 'utf8'));
+    raw = JSON.parse(readFileSync(filePath, "utf8"));
   } catch (err) {
-    throw new CliUsageError(`${filePath}: not JSON — ${String(err instanceof Error ? err.message : err)}`);
+    throw new CliUsageError(
+      `${filePath}: not JSON — ${String(err instanceof Error ? err.message : err)}`,
+    );
   }
-  if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) {
-    throw new CliUsageError(`${filePath}: expected a JSON object (a DTCG token file)`);
+  if (raw === null || typeof raw !== "object" || Array.isArray(raw)) {
+    throw new CliUsageError(
+      `${filePath}: expected a JSON object (a DTCG token file)`,
+    );
   }
   return raw as Record<string, unknown>;
 };
 
 async function bundleCommand(argv: string[]): Promise<number> {
-  const parsed = parseFlags(argv, { value: ['tokens', 'modes', 'name', 'out', 'icons'] });
+  const parsed = parseFlags(argv, {
+    value: ["tokens", "modes", "name", "out", "icons"],
+  });
   if (parsed.positionals.length === 0) {
-    throw new CliUsageError('figma bundle needs contract files/directories');
+    throw new CliUsageError("figma bundle needs contract files/directories");
   }
-  const out = flagString(parsed, 'out');
-  if (!out) throw new CliUsageError('figma bundle needs --out <file.json>');
-  const tokenFiles = splitList(flagString(parsed, 'tokens'));
+  const out = flagString(parsed, "out");
+  if (!out) throw new CliUsageError("figma bundle needs --out <file.json>");
+  const tokenFiles = splitList(flagString(parsed, "tokens"));
   if (tokenFiles.length === 0 || tokenFiles.length > 2) {
     throw new CliUsageError(
-      'figma bundle needs --tokens <base.dtcg.json[,minted.dtcg.json]> — the flat DTCG base first, the minted tree (optional) second',
+      "figma bundle needs --tokens <base.dtcg.json[,minted.dtcg.json]> — the flat DTCG base first, the minted tree (optional) second",
     );
   }
-  const modeFiles = splitList(flagString(parsed, 'modes'));
+  const modeFiles = splitList(flagString(parsed, "modes"));
   if (modeFiles.length > 2) {
-    throw new CliUsageError('figma bundle takes --modes <light.json[,dark.json]> — light first, dark (optional) second');
+    throw new CliUsageError(
+      "figma bundle takes --modes <light.json[,dark.json]> — light first, dark (optional) second",
+    );
   }
 
   // Contract referee first (loadContracts refuses violations by name), then
@@ -167,7 +209,15 @@ async function bundleCommand(argv: string[]): Promise<number> {
   // schema-normalized copy ($schema keys and field order survive verbatim).
   const files = expandContractArgs(parsed.positionals);
   loadContracts(files);
-  const contracts = files.map((f) => JSON.parse(readFileSync(f, 'utf8')) as Record<string, unknown>);
+  const contracts = files.map(
+    (f) => JSON.parse(readFileSync(f, "utf8")) as Record<string, unknown>,
+  );
+  contracts.forEach((contract, i) =>
+    assertContractProvenance(
+      contract as ProvenancedContract,
+      String(contract.id ?? files[i]),
+    ),
+  );
 
   // MOLECULE round: contracts referencing icon assets (icon.asset) make the
   // bundle carry the SVGs — JSON stays the only thing a user pastes. Exactly
@@ -179,9 +229,11 @@ async function bundleCommand(argv: string[]): Promise<number> {
    *  one (see below), and resolving it needs the prop's values. */
   const enumsOf = (c: Record<string, unknown>): Map<string, string[]> => {
     const m = new Map<string, string[]>();
-    for (const p of (c.props as Array<Record<string, unknown>> | undefined) ?? []) {
+    for (const p of (c.props as Array<Record<string, unknown>> | undefined) ??
+      []) {
       const values = (p?.type as { enum?: unknown } | undefined)?.enum;
-      if (Array.isArray(values) && typeof p.name === 'string') m.set(p.name, values as string[]);
+      if (Array.isArray(values) && typeof p.name === "string")
+        m.set(p.name, values as string[]);
     }
     return m;
   };
@@ -201,7 +253,10 @@ async function bundleCommand(argv: string[]): Promise<number> {
    *  placeholder naming a prop the contract does not declare as an enum is
    *  left VERBATIM, so it still refuses by name downstream — an unresolvable
    *  ref must not be silently dropped from the bundle. */
-  const expandAsset = (asset: string, enums: Map<string, string[]>): string[] => {
+  const expandAsset = (
+    asset: string,
+    enums: Map<string, string[]>,
+  ): string[] => {
     const phs = [...asset.matchAll(/\{([a-z][\w-]*)\}/gi)].map((m) => m[1]);
     if (phs.length === 0) return [asset];
     let out = [asset];
@@ -213,42 +268,55 @@ async function bundleCommand(argv: string[]): Promise<number> {
     return out;
   };
   const collectIconRefs = (v: unknown, enums: Map<string, string[]>): void => {
-    if (v && typeof v === 'object') {
+    if (v && typeof v === "object") {
       const asset = (v as { icon?: { asset?: unknown } }).icon?.asset;
-      if (typeof asset === 'string') for (const name of expandAsset(asset, enums)) iconRefs.add(name);
+      if (typeof asset === "string")
+        for (const name of expandAsset(asset, enums)) iconRefs.add(name);
       for (const x of Object.values(v)) collectIconRefs(x, enums);
     }
   };
   for (const c of contracts) collectIconRefs(c, enumsOf(c));
-  const iconsDir = flagString(parsed, 'icons');
+  const iconsDir = flagString(parsed, "icons");
   let icons: Record<string, string> | undefined;
   if (iconRefs.size > 0) {
     if (!iconsDir) {
       throw new CliUsageError(
-        `these contracts reference ${iconRefs.size} icon asset(s) (${[...iconRefs].sort().join(', ')}) — pass --icons <dir> so the bundle can carry them`,
+        `these contracts reference ${iconRefs.size} icon asset(s) (${[...iconRefs].sort().join(", ")}) — pass --icons <dir> so the bundle can carry them`,
       );
     }
     const available = loadIcons(iconsDir);
     const missing = [...iconRefs].sort().filter((n) => !available.has(n));
     if (missing.length > 0) {
-      throw new CliUsageError(`icon asset(s) referenced but not in ${iconsDir}: ${missing.join(', ')}`);
+      throw new CliUsageError(
+        `icon asset(s) referenced but not in ${iconsDir}: ${missing.join(", ")}`,
+      );
     }
-    icons = Object.fromEntries([...iconRefs].sort().map((n) => [n, available.get(n)!]));
+    icons = Object.fromEntries(
+      [...iconRefs].sort().map((n) => [n, available.get(n)!]),
+    );
   }
 
   // Nested DTCG trees (Polaris's wrap) flatten to dot-path names — the
   // tokenSet base is flat by format; a nested wrap collapsing to one "token"
   // was the live finding this closes. Flat inputs pass through unchanged.
-  const flattenDtcg = (node: Record<string, unknown>, prefix: string[] = [], out: Record<string, unknown> = {}): Record<string, unknown> => {
+  const flattenDtcg = (
+    node: Record<string, unknown>,
+    prefix: string[] = [],
+    out: Record<string, unknown> = {},
+  ): Record<string, unknown> => {
     for (const [k, v] of Object.entries(node)) {
-      if (k.startsWith('$')) continue;
-      if (v && typeof v === 'object' && '$value' in (v as object)) out[[...prefix, k].join('.')] = v;
-      else if (v && typeof v === 'object') flattenDtcg(v as Record<string, unknown>, [...prefix, k], out);
+      if (k.startsWith("$")) continue;
+      if (v && typeof v === "object" && "$value" in (v as object))
+        out[[...prefix, k].join(".")] = v;
+      else if (v && typeof v === "object")
+        flattenDtcg(v as Record<string, unknown>, [...prefix, k], out);
     }
     return out;
   };
   const base = flattenDtcg(readJsonObject(path.resolve(tokenFiles[0])));
-  const minted = tokenFiles[1] ? readJsonObject(path.resolve(tokenFiles[1])) : undefined;
+  const minted = tokenFiles[1]
+    ? readJsonObject(path.resolve(tokenFiles[1]))
+    : undefined;
   // The mode trees flatten by the SAME rule as base, and for the same reason.
   // They did not, and the failure was silent rather than loud: a NESTED mode
   // file has no key matching base's dot-path names, so every variable fell
@@ -259,9 +327,13 @@ async function bundleCommand(argv: string[]): Promise<number> {
   // library bundles are unaffected and nothing caught it; the first NESTED
   // mode input (a real captured Figma variable tree — DTCG is nested by
   // nature) exposed it. Same fix, same flattener, both halves now closed.
-  const light = modeFiles[0] ? flattenDtcg(readJsonObject(path.resolve(modeFiles[0]))) : undefined;
-  const dark = modeFiles[1] ? flattenDtcg(readJsonObject(path.resolve(modeFiles[1]))) : undefined;
-  const name = flagString(parsed, 'name') ?? 'Tokens';
+  const light = modeFiles[0]
+    ? flattenDtcg(readJsonObject(path.resolve(modeFiles[0])))
+    : undefined;
+  const dark = modeFiles[1]
+    ? flattenDtcg(readJsonObject(path.resolve(modeFiles[1])))
+    : undefined;
+  const name = flagString(parsed, "name") ?? "Tokens";
 
   const bundle = {
     type: CONTRACTS_BUNDLE_TYPE,
@@ -269,48 +341,60 @@ async function bundleCommand(argv: string[]): Promise<number> {
     tokenSet: {
       name,
       base,
-      ...(light || dark ? { modes: { ...(light ? { light } : {}), ...(dark ? { dark } : {}) } } : {}),
+      ...(light || dark
+        ? { modes: { ...(light ? { light } : {}), ...(dark ? { dark } : {}) } }
+        : {}),
       ...(minted ? { minted } : {}),
     },
     ...(icons ? { icons } : {}),
     contracts,
   };
-  const text = JSON.stringify(bundle, null, 2) + '\n';
+  const text = JSON.stringify(bundle, null, 2) + "\n";
   const outPath = path.resolve(out);
   mkdirSync(path.dirname(outPath), { recursive: true });
   writeFileSync(outPath, text);
   const baseCount = Object.keys(base).length;
   console.log(
-    `✔ Bundle written: ${out} — ${contracts.length} contract(s) + tokenSet "${name}" (${baseCount} base tokens${minted ? ', minted tree' : ''}${light || dark ? `, modes: ${[light && 'light', dark && 'dark'].filter(Boolean).join('/')}` : ''}${icons ? `, ${Object.keys(icons).length} icon asset(s)` : ''}; ${text.length} bytes). Paste it into the plugin's Build tab — JSON is the only thing a user ever pastes.`,
+    `✔ Bundle written: ${out} — ${contracts.length} contract(s) + tokenSet "${name}" (${baseCount} base tokens${minted ? ", minted tree" : ""}${light || dark ? `, modes: ${[light && "light", dark && "dark"].filter(Boolean).join("/")}` : ""}${icons ? `, ${Object.keys(icons).length} icon asset(s)` : ""}; ${text.length} bytes). Paste it into the plugin's Build tab — JSON is the only thing a user ever pastes.`,
   );
   return 0;
 }
 
 async function pushCommand(argv: string[]): Promise<number> {
-  const parsed = parseFlags(argv, { value: ['code', 'bridge'] });
+  const parsed = parseFlags(argv, { value: ["code", "bridge"] });
   const file = parsed.positionals[0];
-  if (!file) throw new CliUsageError('figma push needs a bundle or contract JSON file');
-  const code = flagString(parsed, 'code');
+  if (!file)
+    throw new CliUsageError("figma push needs a bundle or contract JSON file");
+  const code = flagString(parsed, "code");
   if (!code) {
     throw new CliUsageError(
       'figma push needs --code <PAIRING-CODE> — the 6-character code the designer TYPES into the Build tab’s "Receive by code" box in the Figma plugin (the plugin never displays a code; you and the designer share one from a bridge session)',
     );
   }
   const base = (
-    flagString(parsed, 'bridge') ??
+    flagString(parsed, "bridge") ??
     process.env.DS_CONTRACTS_BRIDGE_URL ??
     DEFAULT_BRIDGE_URL
-  ).replace(/\/$/, '');
+  ).replace(/\/$/, "");
   const bundle = toBundle(file);
   const body = JSON.stringify(bundle);
-  const res = await fetch(`${base}/bridge/${encodeURIComponent(code.toUpperCase())}`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body,
-  });
-  const answer = (await res.json().catch(() => ({}))) as { error?: string; ok?: boolean; bytes?: number };
+  const res = await fetch(
+    `${base}/bridge/${encodeURIComponent(code.toUpperCase())}`,
+    {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body,
+    },
+  );
+  const answer = (await res.json().catch(() => ({}))) as {
+    error?: string;
+    ok?: boolean;
+    bytes?: number;
+  };
   if (!res.ok) {
-    console.error(`✘ bridge refused (${res.status}): ${answer.error ?? 'unnamed error'}`);
+    console.error(
+      `✘ bridge refused (${res.status}): ${answer.error ?? "unnamed error"}`,
+    );
     return 1;
   }
   console.log(
@@ -363,7 +447,7 @@ export function detectProvenance(
   const runId = overrides.runId ?? env.GITHUB_RUN_ID;
   const commit = overrides.commit ?? env.GITHUB_SHA;
   const ref = overrides.ref ?? env.GITHUB_REF;
-  const server = env.GITHUB_SERVER_URL ?? 'https://github.com';
+  const server = env.GITHUB_SERVER_URL ?? "https://github.com";
   const runUrl =
     overrides.runUrl ??
     env.GITHUB_RUN_URL ??
@@ -390,7 +474,7 @@ export function buildPublishBody(
 /** Everything a log line may ever show of a channel key: its kind prefix and
  *  four characters. Enough to tell two channels apart, useless to a reader. */
 export const maskChannelKey = (key: string): string =>
-  key.length <= 9 ? '…' : `${key.slice(0, 9)}…`;
+  key.length <= 9 ? "…" : `${key.slice(0, 9)}…`;
 
 /** The --dry-run text — the exact plan, no network, no key needed. PURE. */
 export function publishDryRunLines(
@@ -401,9 +485,9 @@ export function publishDryRunLines(
   bytes: number,
 ): string[] {
   return [
-    'DRY RUN — no request leaves this machine, no channel key required. The live run would:',
+    "DRY RUN — no request leaves this machine, no channel key required. The live run would:",
     `  1. POST ${base}/channel/<writeKey>`,
-    `     body: { "bundle": <CONTRACTS-BUNDLE from ${file}>${provenance ? ', "provenance": {…}' : ''} }`,
+    `     body: { "bundle": <CONTRACTS-BUNDLE from ${file}>${provenance ? ', "provenance": {…}' : ""} }`,
     `     ${bundle.contracts.length} contract(s), ${bytes} bytes of bundle JSON (cap 4 MB)`,
     provenance
       ? `  2. Provenance sibling (auto-detected, rides UNREAD through the worker): ${[
@@ -413,40 +497,55 @@ export function publishDryRunLines(
           provenance.ref && `ref ${provenance.ref}`,
         ]
           .filter(Boolean)
-          .join(', ')}`
-      : '  2. No provenance — not a GitHub Actions run and no --repo/--commit given. The plugin will show the delivery as unattributed.',
+          .join(", ")}`
+      : "  2. No provenance — not a GitHub Actions run and no --repo/--commit given. The plugin will show the delivery as unattributed.",
     '  3. The worker assigns the next seq and refreshes the channel\'s 30-day TTL. Nothing is delivered anywhere until the designer presses "Check for updates".',
-    '  Key source at run time: --channel-key, else DS_CONTRACTS_CHANNEL_KEY — used in memory only, never persisted, never logged.',
+    "  Key source at run time: --channel-key, else DS_CONTRACTS_CHANNEL_KEY — used in memory only, never persisted, never logged.",
   ];
 }
 
 const channelBase = (parsed: ReturnType<typeof parseFlags>): string =>
-  (flagString(parsed, 'bridge') ?? process.env.DS_CONTRACTS_BRIDGE_URL ?? DEFAULT_BRIDGE_URL).replace(
-    /\/$/,
-    '',
-  );
+  (
+    flagString(parsed, "bridge") ??
+    process.env.DS_CONTRACTS_BRIDGE_URL ??
+    DEFAULT_BRIDGE_URL
+  ).replace(/\/$/, "");
 
 async function claimChannelCommand(argv: string[]): Promise<number> {
-  const parsed = parseFlags(argv, { value: ['bridge'] });
+  const parsed = parseFlags(argv, { value: ["bridge"] });
   const base = channelBase(parsed);
-  const res = await fetch(`${base}/channel/claim`, { method: 'POST' });
+  const res = await fetch(`${base}/channel/claim`, { method: "POST" });
   const answer = (await res.json().catch(() => ({}))) as {
     writeKey?: string;
     readKey?: string;
     ttlSeconds?: number;
     error?: string;
   };
-  if (!res.ok || typeof answer.writeKey !== 'string' || typeof answer.readKey !== 'string') {
-    console.error(`✘ the channel refused the claim (${res.status}): ${answer.error ?? 'unnamed error'}`);
+  if (
+    !res.ok ||
+    typeof answer.writeKey !== "string" ||
+    typeof answer.readKey !== "string"
+  ) {
+    console.error(
+      `✘ the channel refused the claim (${res.status}): ${answer.error ?? "unnamed error"}`,
+    );
     return 1;
   }
   const days = Math.round((answer.ttlSeconds ?? 30 * 24 * 60 * 60) / 86400);
-  console.log('✔ Channel claimed. Two keys, two different jobs — do not mix them up:\n');
-  console.log(`  WRITE KEY (a CI secret — it PUBLISHES; keep it out of Figma and out of git):`);
+  console.log(
+    "✔ Channel claimed. Two keys, two different jobs — do not mix them up:\n",
+  );
+  console.log(
+    `  WRITE KEY (a CI secret — it PUBLISHES; keep it out of Figma and out of git):`,
+  );
   console.log(`    ${answer.writeKey}`);
   console.log(`    → store as the repository secret DS_CONTRACTS_CHANNEL_KEY`);
-  console.log(`       (GitHub: Settings → Secrets and variables → Actions → New repository secret)\n`);
-  console.log(`  READ KEY (the designer's half — it only READS; paste it into the Figma plugin):`);
+  console.log(
+    `       (GitHub: Settings → Secrets and variables → Actions → New repository secret)\n`,
+  );
+  console.log(
+    `  READ KEY (the designer's half — it only READS; paste it into the Figma plugin):`,
+  );
   console.log(`    ${answer.readKey}`);
   console.log(`    → Figma plugin → Changes tab → the channel key field\n`);
   console.log(
@@ -463,48 +562,66 @@ async function claimChannelCommand(argv: string[]): Promise<number> {
 
 async function publishCommand(argv: string[]): Promise<number> {
   const parsed = parseFlags(argv, {
-    value: ['channel-key', 'bridge', 'repo', 'run-id', 'run-url', 'commit', 'ref'],
-    bool: ['dry-run', 'no-provenance'],
+    value: [
+      "channel-key",
+      "bridge",
+      "repo",
+      "run-id",
+      "run-url",
+      "commit",
+      "ref",
+    ],
+    bool: ["dry-run", "no-provenance"],
   });
   const file = parsed.positionals[0];
-  if (!file) throw new CliUsageError('figma publish needs a bundle or contract JSON file');
+  if (!file)
+    throw new CliUsageError(
+      "figma publish needs a bundle or contract JSON file",
+    );
   const base = channelBase(parsed);
   const bundle = toBundle(file);
   const bundleBytes = JSON.stringify(bundle).length;
 
   const provenance =
-    parsed.flags.get('no-provenance') === true
+    parsed.flags.get("no-provenance") === true
       ? null
       : detectProvenance(
           process.env,
           {
-            repo: flagString(parsed, 'repo'),
-            runId: flagString(parsed, 'run-id'),
-            runUrl: flagString(parsed, 'run-url'),
-            commit: flagString(parsed, 'commit'),
-            ref: flagString(parsed, 'ref'),
+            repo: flagString(parsed, "repo"),
+            runId: flagString(parsed, "run-id"),
+            runUrl: flagString(parsed, "run-url"),
+            commit: flagString(parsed, "commit"),
+            ref: flagString(parsed, "ref"),
           },
           new Date(),
         );
 
-  if (parsed.flags.get('dry-run') === true) {
-    for (const line of publishDryRunLines(file, base, bundle, provenance, bundleBytes)) {
+  if (parsed.flags.get("dry-run") === true) {
+    for (const line of publishDryRunLines(
+      file,
+      base,
+      bundle,
+      provenance,
+      bundleBytes,
+    )) {
       console.log(line);
     }
     return 0;
   }
 
-  const key = flagString(parsed, 'channel-key') ?? process.env.DS_CONTRACTS_CHANNEL_KEY;
+  const key =
+    flagString(parsed, "channel-key") ?? process.env.DS_CONTRACTS_CHANNEL_KEY;
   if (!key) {
     throw new CliUsageError(
-      'figma publish needs the channel WRITE key: --channel-key, or the DS_CONTRACTS_CHANNEL_KEY env var (in CI: a repository secret). Run `ds-contracts figma claim-channel` once to mint a pair. It is used in memory only — never stored, never logged.',
+      "figma publish needs the channel WRITE key: --channel-key, or the DS_CONTRACTS_CHANNEL_KEY env var (in CI: a repository secret). Run `ds-contracts figma claim-channel` once to mint a pair. It is used in memory only — never stored, never logged.",
     );
   }
 
   const body = JSON.stringify(buildPublishBody(bundle, provenance));
   const res = await fetch(`${base}/channel/${encodeURIComponent(key)}`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    method: "POST",
+    headers: { "content-type": "application/json" },
     body,
   });
   const answer = (await res.json().catch(() => ({}))) as {
@@ -518,17 +635,21 @@ async function publishCommand(argv: string[]): Promise<number> {
     // The worker's refusals are plain words already — echo them verbatim, and
     // never the key itself.
     console.error(
-      `✘ the channel refused the publish to ${maskChannelKey(key)} (${res.status}): ${answer.error ?? 'unnamed error'}`,
+      `✘ the channel refused the publish to ${maskChannelKey(key)} (${res.status}): ${answer.error ?? "unnamed error"}`,
     );
     return 1;
   }
   console.log(
-    `✔ Published delivery #${answer.seq} to channel ${maskChannelKey(key)} — ${bundle.contracts.length} contract(s), ${answer.bytes ?? bundleBytes} bytes, at ${answer.publishedAt ?? 'now'}.` +
+    `✔ Published delivery #${answer.seq} to channel ${maskChannelKey(key)} — ${bundle.contracts.length} contract(s), ${answer.bytes ?? bundleBytes} bytes, at ${answer.publishedAt ?? "now"}.` +
       (provenance
-        ? `\n  Provenance: ${[provenance.repo, provenance.runId && `run #${provenance.runId}`, provenance.commit && `commit ${provenance.commit.slice(0, 7)}`]
+        ? `\n  Provenance: ${[
+            provenance.repo,
+            provenance.runId && `run #${provenance.runId}`,
+            provenance.commit && `commit ${provenance.commit.slice(0, 7)}`,
+          ]
             .filter(Boolean)
-            .join(' · ')}`
-        : '\n  No provenance attached (not a GitHub Actions run) — the plugin will show this delivery as unattributed.') +
+            .join(" · ")}`
+        : "\n  No provenance attached (not a GitHub Actions run) — the plugin will show this delivery as unattributed.") +
       `\n  The designer's plugin finds it on its next "Check for updates". Nothing applies without their review.`,
   );
   return 0;
@@ -542,7 +663,7 @@ async function publishCommand(argv: string[]): Promise<number> {
 
 /** The proposal envelope the plugin's Send tab exports (engine
  *  proposeDiff's exportJson) and the bridge tags as kind 'proposal'. */
-export const CONTRACT_PROPOSAL_TYPE = 'CONTRACT-PROPOSAL';
+export const CONTRACT_PROPOSAL_TYPE = "CONTRACT-PROPOSAL";
 
 export interface ProposalEnvelope {
   type: typeof CONTRACT_PROPOSAL_TYPE;
@@ -560,25 +681,46 @@ export interface ProposalEnvelope {
   childStubs?: Array<Record<string, unknown>>;
   /** ENVELOPE v2: the minted DTCG tree the proposal's `{imported.*}` refs
    *  resolve through, plus per-leaf entries. Absent on older envelopes. */
-  mintedTokens?: { tree: Record<string, unknown>; count?: number; entries?: unknown[] };
+  mintedTokens?: {
+    tree: Record<string, unknown>;
+    count?: number;
+    entries?: unknown[];
+  };
 }
 
 /** Envelope referee — refusals by name, never a guess. PURE. */
-export function parseProposal(raw: unknown): { ok: true; proposal: ProposalEnvelope } | { ok: false; error: string } {
-  if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) {
-    return { ok: false, error: 'the delivered payload is not a JSON object' };
+export function parseProposal(
+  raw: unknown,
+): { ok: true; proposal: ProposalEnvelope } | { ok: false; error: string } {
+  if (raw === null || typeof raw !== "object" || Array.isArray(raw)) {
+    return { ok: false, error: "the delivered payload is not a JSON object" };
   }
   const o = raw as Record<string, unknown>;
   if (o.type !== CONTRACT_PROPOSAL_TYPE) {
-    return { ok: false, error: `the payload is not tagged ${CONTRACT_PROPOSAL_TYPE} (got type ${JSON.stringify(o.type ?? null)})` };
+    return {
+      ok: false,
+      error: `the payload is not tagged ${CONTRACT_PROPOSAL_TYPE} (got type ${JSON.stringify(o.type ?? null)})`,
+    };
   }
   const proposed = o.proposedContract;
-  if (proposed === null || typeof proposed !== 'object' || Array.isArray(proposed)) {
-    return { ok: false, error: 'the proposal has no "proposedContract" object — re-run Read the set & diff in the plugin and send again' };
+  if (
+    proposed === null ||
+    typeof proposed !== "object" ||
+    Array.isArray(proposed)
+  ) {
+    return {
+      ok: false,
+      error:
+        'the proposal has no "proposedContract" object — re-run Read the set & diff in the plugin and send again',
+    };
   }
   const id = (proposed as { id?: unknown }).id ?? o.baseContractId;
-  if (typeof id !== 'string' || id.length === 0) {
-    return { ok: false, error: 'neither proposedContract.id nor baseContractId names the contract — the proposal cannot be matched to a file' };
+  if (typeof id !== "string" || id.length === 0) {
+    return {
+      ok: false,
+      error:
+        "neither proposedContract.id nor baseContractId names the contract — the proposal cannot be matched to a file",
+    };
   }
   // ENVELOPE v2 payloads. ABSENT fields are the old envelope shape and pass
   // untouched (backward compatible); a PRESENT-but-malformed field is a
@@ -586,16 +728,39 @@ export function parseProposal(raw: unknown): { ok: true; proposal: ProposalEnvel
   // round closes.
   let childStubs: Array<Record<string, unknown>> | undefined;
   if (o.childStubs !== undefined && o.childStubs !== null) {
-    if (!Array.isArray(o.childStubs) || o.childStubs.some((s) => s === null || typeof s !== 'object' || Array.isArray(s))) {
-      return { ok: false, error: 'the proposal\'s "childStubs" is not an array of contract objects — re-export the proposal from the plugin\'s Send tab' };
+    if (
+      !Array.isArray(o.childStubs) ||
+      o.childStubs.some(
+        (s) => s === null || typeof s !== "object" || Array.isArray(s),
+      )
+    ) {
+      return {
+        ok: false,
+        error:
+          "the proposal's \"childStubs\" is not an array of contract objects — re-export the proposal from the plugin's Send tab",
+      };
     }
     childStubs = o.childStubs as Array<Record<string, unknown>>;
   }
-  let mintedTokens: ProposalEnvelope['mintedTokens'];
+  let mintedTokens: ProposalEnvelope["mintedTokens"];
   if (o.mintedTokens !== undefined && o.mintedTokens !== null) {
-    const mt = o.mintedTokens as { tree?: unknown; count?: unknown; entries?: unknown };
-    if (typeof o.mintedTokens !== 'object' || Array.isArray(o.mintedTokens) || mt.tree === null || typeof mt.tree !== 'object' || Array.isArray(mt.tree)) {
-      return { ok: false, error: 'the proposal\'s "mintedTokens" has no DTCG "tree" object — re-export the proposal from the plugin\'s Send tab' };
+    const mt = o.mintedTokens as {
+      tree?: unknown;
+      count?: unknown;
+      entries?: unknown;
+    };
+    if (
+      typeof o.mintedTokens !== "object" ||
+      Array.isArray(o.mintedTokens) ||
+      mt.tree === null ||
+      typeof mt.tree !== "object" ||
+      Array.isArray(mt.tree)
+    ) {
+      return {
+        ok: false,
+        error:
+          'the proposal\'s "mintedTokens" has no DTCG "tree" object — re-export the proposal from the plugin\'s Send tab',
+      };
     }
     // DEPTH GUARD (2026-08-03, adversarial verifier): a hostile deeply-nested
     // tree used to blow the stack as an uncaught RangeError in planReceive —
@@ -604,20 +769,26 @@ export function parseProposal(raw: unknown): { ok: true; proposal: ProposalEnvel
     // any legitimate shape. Iterative, so the guard itself cannot overflow.
     {
       const MAX_DEPTH = 64;
-      const stack: Array<{ n: Record<string, unknown>; d: number }> = [{ n: mt.tree as Record<string, unknown>, d: 1 }];
+      const stack: Array<{ n: Record<string, unknown>; d: number }> = [
+        { n: mt.tree as Record<string, unknown>, d: 1 },
+      ];
       while (stack.length > 0) {
         const { n, d } = stack.pop()!;
         if (d > MAX_DEPTH) {
-          return { ok: false, error: `the proposal's "mintedTokens.tree" nests deeper than ${MAX_DEPTH} levels — no DTCG token tree has that shape; the delivery is refused as malformed` };
+          return {
+            ok: false,
+            error: `the proposal's "mintedTokens.tree" nests deeper than ${MAX_DEPTH} levels — no DTCG token tree has that shape; the delivery is refused as malformed`,
+          };
         }
         for (const v of Object.values(n)) {
-          if (v !== null && typeof v === 'object' && !Array.isArray(v)) stack.push({ n: v as Record<string, unknown>, d: d + 1 });
+          if (v !== null && typeof v === "object" && !Array.isArray(v))
+            stack.push({ n: v as Record<string, unknown>, d: d + 1 });
         }
       }
     }
     mintedTokens = {
       tree: mt.tree as Record<string, unknown>,
-      count: typeof mt.count === 'number' ? mt.count : undefined,
+      count: typeof mt.count === "number" ? mt.count : undefined,
       entries: Array.isArray(mt.entries) ? mt.entries : undefined,
     };
   }
@@ -625,12 +796,18 @@ export function parseProposal(raw: unknown): { ok: true; proposal: ProposalEnvel
     ok: true,
     proposal: {
       type: CONTRACT_PROPOSAL_TYPE,
-      baseContractId: typeof o.baseContractId === 'string' ? o.baseContractId : id,
-      baseVersion: typeof o.baseVersion === 'string' ? o.baseVersion : undefined,
-      setName: typeof o.setName === 'string' ? o.setName : undefined,
-      summary: Array.isArray(o.summary) ? o.summary.filter((s): s is string => typeof s === 'string') : [],
+      baseContractId:
+        typeof o.baseContractId === "string" ? o.baseContractId : id,
+      baseVersion:
+        typeof o.baseVersion === "string" ? o.baseVersion : undefined,
+      setName: typeof o.setName === "string" ? o.setName : undefined,
+      summary: Array.isArray(o.summary)
+        ? o.summary.filter((s): s is string => typeof s === "string")
+        : [],
       proposedContract: proposed as Record<string, unknown>,
-      proposalNotes: Array.isArray(o.proposalNotes) ? o.proposalNotes.filter((s): s is string => typeof s === 'string') : [],
+      proposalNotes: Array.isArray(o.proposalNotes)
+        ? o.proposalNotes.filter((s): s is string => typeof s === "string")
+        : [],
       ...(childStubs && childStubs.length > 0 ? { childStubs } : {}),
       ...(mintedTokens ? { mintedTokens } : {}),
     },
@@ -647,53 +824,113 @@ export function parseProposal(raw: unknown): { ok: true; proposal: ProposalEnvel
  *  ESCAPED-STUB.contract.json landed one directory above the target). Every
  *  character outside the schema's own id alphabet is replaced, path separators
  *  included, so the result is always a single flat filename. */
+const flatIdStem = (id: string, fallback: string): string =>
+  id
+    .normalize("NFKC")
+    .replace(/[^a-zA-Z0-9._-]+/g, "-")
+    .replace(/\.\.+/g, ".")
+    .replace(/^[.-]+|[.-]+$/g, "") || fallback;
+
 export const contractFileNameForId = (id: string): string =>
-  `${id.replace(/^[^.]+\./, '').replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/\.\.+/g, '.').replace(/^[.-]+|[.-]+$/g, '') || 'stub'}.contract.json`;
+  `${flatIdStem(id.replace(/^[^.]+\./, ""), "stub")}.contract.json`;
+
+/** Proposal artifacts retain valid ids verbatim for backward-compatible
+ * filenames, while hostile ids collapse to one flat basename. */
+export const proposalFileNameForId = (id: string): string =>
+  `${flatIdStem(id, "proposal")}.proposal.json`;
+
+/** Resolve a planned output below a trusted root. Both native and Windows
+ * absolute forms are rejected so a plan remains safe across platforms. */
+export function containedOutputPath(root: string, plannedPath: string): string {
+  if (
+    plannedPath.length === 0 ||
+    path.isAbsolute(plannedPath) ||
+    path.win32.isAbsolute(plannedPath)
+  ) {
+    throw new CliUsageError(
+      `receive REFUSED: planned write "${plannedPath}" is not a relative path inside --out; nothing was written.`,
+    );
+  }
+  const resolvedRoot = path.resolve(root);
+  const resolved = path.resolve(resolvedRoot, plannedPath);
+  if (
+    resolved === resolvedRoot ||
+    !resolved.startsWith(resolvedRoot + path.sep)
+  ) {
+    throw new CliUsageError(
+      `receive REFUSED: planned write "${plannedPath}" resolves OUTSIDE --out (${resolved}) — the delivery carries a hostile or malformed id; nothing was written.`,
+    );
+  }
+  return resolved;
+}
 
 /** Minimal unified diff (LCS over lines, 3 lines of context) — zero-dep by
  *  repo culture; contract files are small so O(n·m) is fine. PURE. */
-export function unifiedDiff(oldText: string, newText: string, filePath: string): string[] {
+export function unifiedDiff(
+  oldText: string,
+  newText: string,
+  filePath: string,
+): string[] {
   if (oldText === newText) return [];
-  const a = oldText.split('\n');
-  const b = newText.split('\n');
+  const a = oldText.split("\n");
+  const b = newText.split("\n");
   // LCS table.
-  const lcs: number[][] = Array.from({ length: a.length + 1 }, () => new Array<number>(b.length + 1).fill(0));
+  const lcs: number[][] = Array.from({ length: a.length + 1 }, () =>
+    new Array<number>(b.length + 1).fill(0),
+  );
   for (let i = a.length - 1; i >= 0; i--) {
     for (let j = b.length - 1; j >= 0; j--) {
-      lcs[i][j] = a[i] === b[j] ? lcs[i + 1][j + 1] + 1 : Math.max(lcs[i + 1][j], lcs[i][j + 1]);
+      lcs[i][j] =
+        a[i] === b[j]
+          ? lcs[i + 1][j + 1] + 1
+          : Math.max(lcs[i + 1][j], lcs[i][j + 1]);
     }
   }
   // Walk into ops: ' ' keep, '-' del, '+' add.
-  const ops: Array<{ tag: ' ' | '-' | '+'; line: string; ai: number; bi: number }> = [];
+  const ops: Array<{
+    tag: " " | "-" | "+";
+    line: string;
+    ai: number;
+    bi: number;
+  }> = [];
   let i = 0;
   let j = 0;
   while (i < a.length && j < b.length) {
-    if (a[i] === b[j]) ops.push({ tag: ' ', line: a[i], ai: i++, bi: j++ });
-    else if (lcs[i + 1][j] >= lcs[i][j + 1]) ops.push({ tag: '-', line: a[i], ai: i++, bi: j });
-    else ops.push({ tag: '+', line: b[j], ai: i, bi: j++ });
+    if (a[i] === b[j]) ops.push({ tag: " ", line: a[i], ai: i++, bi: j++ });
+    else if (lcs[i + 1][j] >= lcs[i][j + 1])
+      ops.push({ tag: "-", line: a[i], ai: i++, bi: j });
+    else ops.push({ tag: "+", line: b[j], ai: i, bi: j++ });
   }
-  while (i < a.length) ops.push({ tag: '-', line: a[i], ai: i++, bi: j });
-  while (j < b.length) ops.push({ tag: '+', line: b[j], ai: i, bi: j++ });
+  while (i < a.length) ops.push({ tag: "-", line: a[i], ai: i++, bi: j });
+  while (j < b.length) ops.push({ tag: "+", line: b[j], ai: i, bi: j++ });
   // Group into hunks with 3 lines of context.
   const CONTEXT = 3;
-  const changed = ops.map((op) => op.tag !== ' ');
+  const changed = ops.map((op) => op.tag !== " ");
   const keep = new Array<boolean>(ops.length).fill(false);
   for (let k = 0; k < ops.length; k++) {
     if (!changed[k]) continue;
-    for (let c = Math.max(0, k - CONTEXT); c <= Math.min(ops.length - 1, k + CONTEXT); c++) keep[c] = true;
+    for (
+      let c = Math.max(0, k - CONTEXT);
+      c <= Math.min(ops.length - 1, k + CONTEXT);
+      c++
+    )
+      keep[c] = true;
   }
   const out: string[] = [`--- a/${filePath}`, `+++ b/${filePath}`];
   let k = 0;
   while (k < ops.length) {
-    if (!keep[k]) { k++; continue; }
+    if (!keep[k]) {
+      k++;
+      continue;
+    }
     const start = k;
     let end = k;
     while (end < ops.length && keep[end]) end++;
     const hunk = ops.slice(start, end);
-    const aStart = (hunk.find((h) => h.tag !== '+')?.ai ?? hunk[0].ai) + 1;
-    const bStart = (hunk.find((h) => h.tag !== '-')?.bi ?? hunk[0].bi) + 1;
-    const aCount = hunk.filter((h) => h.tag !== '+').length;
-    const bCount = hunk.filter((h) => h.tag !== '-').length;
+    const aStart = (hunk.find((h) => h.tag !== "+")?.ai ?? hunk[0].ai) + 1;
+    const bStart = (hunk.find((h) => h.tag !== "-")?.bi ?? hunk[0].bi) + 1;
+    const aCount = hunk.filter((h) => h.tag !== "+").length;
+    const bCount = hunk.filter((h) => h.tag !== "-").length;
     out.push(`@@ -${aStart},${aCount} +${bStart},${bCount} @@`);
     for (const h of hunk) out.push(h.tag + h.line);
     k = end;
@@ -758,26 +995,51 @@ export function planReceive(
   apply: boolean,
   ctx: ReceiveContext = {},
 ): ReceivePlan {
-  const contractId = String(proposal.proposedContract.id ?? proposal.baseContractId);
-  const fileName = existing ? existing.fileName : contractFileNameForId(contractId);
-  const newText = JSON.stringify(proposal.proposedContract, null, 2) + '\n';
+  let proposedContract = structuredClone(
+    proposal.proposedContract,
+  ) as ProvenancedContract;
+  if (existing) {
+    const base = JSON.parse(existing.text) as ProvenancedContract;
+    assertContractProvenance(base, String(base.id ?? existing.fileName));
+    if (!proposedContract.provenance && base.provenance) {
+      proposedContract = markAwaitingCodeAdoption(base, proposedContract);
+    }
+  }
+  assertContractProvenance(
+    proposedContract,
+    String(proposedContract.id ?? proposal.baseContractId),
+  );
+  const preparedProposal = { ...proposal, proposedContract };
+  const contractId = String(proposedContract.id ?? proposal.baseContractId);
+  const fileName = existing
+    ? existing.fileName
+    : contractFileNameForId(contractId);
+  const newText = JSON.stringify(proposedContract, null, 2) + "\n";
   const oldText = existing ? existing.text : null;
   const changed = oldText !== newText;
 
   // ENVELOPE v2 payloads — planned ONLY under --apply (the no-silent-write
   // covenant covers every file, not just the headline contract; without
   // --apply the proposal artifact carries all three payloads verbatim).
-  const stubWrites: ReceivePlan['stubWrites'] = [];
-  const stubSkips: ReceivePlan['stubSkips'] = [];
+  const stubWrites: ReceivePlan["stubWrites"] = [];
+  const stubSkips: ReceivePlan["stubSkips"] = [];
   const seenStubIds = new Set<string>([contractId]);
+  const seenWriteNames = new Set<string>([fileName]);
   for (const stub of proposal.childStubs ?? []) {
-    const stubId = typeof stub.id === 'string' ? stub.id : null;
+    const stubId = typeof stub.id === "string" ? stub.id : null;
     if (!stubId) {
-      stubSkips.push({ contractId: '(unnamed)', reason: 'this stub carries no "id" — it cannot be filed and is kept only inside the proposal artifact' });
+      stubSkips.push({
+        contractId: "(unnamed)",
+        reason:
+          'this stub carries no "id" — it cannot be filed and is kept only inside the proposal artifact',
+      });
       continue;
     }
     if (seenStubIds.has(stubId)) {
-      stubSkips.push({ contractId: stubId, reason: 'a contract with this id is already part of this delivery' });
+      stubSkips.push({
+        contractId: stubId,
+        reason: "a contract with this id is already part of this delivery",
+      });
       continue;
     }
     seenStubIds.add(stubId);
@@ -789,43 +1051,63 @@ export function planReceive(
       continue;
     }
     if (!apply) continue; // named below via nextCommand/printout, never written silently
+    const stubFileName = contractFileNameForId(stubId);
+    if (seenWriteNames.has(stubFileName)) {
+      stubSkips.push({
+        contractId: stubId,
+        reason: `its destination "${stubFileName}" collides with another contract in this delivery — it is NOT written over it and stays in the proposal artifact`,
+      });
+      continue;
+    }
+    seenWriteNames.add(stubFileName);
     stubWrites.push({
       contractId: stubId,
-      fileName: contractFileNameForId(stubId),
-      contents: JSON.stringify(stub, null, 2) + '\n',
+      fileName: stubFileName,
+      contents: JSON.stringify(stub, null, 2) + "\n",
     });
   }
   const mintedTree = proposal.mintedTokens?.tree;
   // Same trust boundary as the stub ids: contractId is envelope-supplied, so
   // it is flattened to a single filename (no separators can survive).
-  const mintedFileName = `${contractId.replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/\.\.+/g, '.').replace(/^[.-]+|[.-]+$/g, '') || 'proposal'}.minted.dtcg.json`;
+  const mintedFileName = `${flatIdStem(contractId, "proposal")}.minted.dtcg.json`;
   const mintedWrite =
     apply && mintedTree && Object.keys(mintedTree).length > 0
-      ? { fileName: mintedFileName, contents: JSON.stringify(mintedTree, null, 2) + '\n' }
+      ? {
+          fileName: mintedFileName,
+          contents: JSON.stringify(mintedTree, null, 2) + "\n",
+        }
       : null;
 
   // The runnable next step: generate over EVERYTHING this plan writes, with
   // --tokens naming the minted tree (plus the repo's configured token files)
   // so the first generate resolves every {imported.*} ref instead of
   // refusing it by name.
-  const outLabel = ctx.outDirLabel ?? '.';
+  const outLabel = ctx.outDirLabel ?? ".";
   const inDir = (f: string) => path.join(outLabel, f);
-  const contractArgs = [inDir(fileName), ...stubWrites.map((s) => inDir(s.fileName))];
-  const tokenArgs = [...(ctx.configTokens ?? []), ...(mintedWrite ? [inDir(mintedFileName)] : [])];
-  const nextCommand =
-    apply
-      ? `npx ds-contracts generate ${contractArgs.join(' ')} --out ${ctx.codeOutDir ?? 'generated'} --stories${tokenArgs.length > 0 ? ` --tokens ${tokenArgs.join(',')}` : ''}`
-      : null;
+  const contractArgs = [
+    inDir(fileName),
+    ...stubWrites.map((s) => inDir(s.fileName)),
+  ];
+  const tokenArgs = [
+    ...(ctx.configTokens ?? []),
+    ...(mintedWrite ? [inDir(mintedFileName)] : []),
+  ];
+  const nextCommand = apply
+    ? `npx ds-contracts generate ${contractArgs.join(" ")} --out ${ctx.codeOutDir ?? "generated"} --stories${tokenArgs.length > 0 ? ` --tokens ${tokenArgs.join(",")}` : ""}`
+    : null;
 
   return {
     contractId,
     fileName,
-    proposalFileName: path.join('.proposals', `${contractId}.proposal.json`),
-    proposalText: JSON.stringify(proposal, null, 2) + '\n',
+    proposalFileName: path.join(
+      ".proposals",
+      proposalFileNameForId(contractId),
+    ),
+    proposalText: JSON.stringify(preparedProposal, null, 2) + "\n",
     newText,
     oldText,
     changed,
-    diff: unifiedDiff(oldText ?? '', newText, fileName),
+    diff: unifiedDiff(oldText ?? "", newText, fileName),
     contractWrite: apply && changed ? { fileName, contents: newText } : null,
     stubWrites,
     stubSkips,
@@ -836,12 +1118,18 @@ export function planReceive(
 
 /** Find the *.contract.json in outDir whose document id matches — the id is
  *  the identity, the filename only the convention. Thin I/O helper. */
-export function findExistingContractFile(outDir: string, contractId: string): { fileName: string; text: string } | null {
+export function findExistingContractFile(
+  outDir: string,
+  contractId: string,
+): { fileName: string; text: string } | null {
   if (!existsSync(outDir)) return null;
-  for (const f of readdirSync(outDir).filter((f) => f.endsWith('.contract.json')).sort()) {
+  for (const f of readdirSync(outDir)
+    .filter((f) => f.endsWith(".contract.json"))
+    .sort()) {
     try {
-      const text = readFileSync(path.join(outDir, f), 'utf8');
-      if ((JSON.parse(text) as { id?: unknown }).id === contractId) return { fileName: f, text };
+      const text = readFileSync(path.join(outDir, f), "utf8");
+      if ((JSON.parse(text) as { id?: unknown }).id === contractId)
+        return { fileName: f, text };
     } catch {
       /* unreadable/non-JSON neighbors are not this command's problem */
     }
@@ -849,21 +1137,32 @@ export function findExistingContractFile(outDir: string, contractId: string): { 
   return null;
 }
 
-const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number) =>
+  new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 /** The two `generate` facts the printed next-command needs, read directly so
  *  this module never statically imports propose-pr (which imports THIS file;
  *  see the lazy-import note at the top). Absent/unreadable → empty facts and
  *  the command falls back to runnable defaults. */
-function loadReceiveDsConfig(cwd: string): { tokens: string[]; out: string | null } {
+function loadReceiveDsConfig(cwd: string): {
+  tokens: string[];
+  out: string | null;
+} {
   try {
-    const raw = JSON.parse(readFileSync(path.join(cwd, 'ds-contracts.config.json'), 'utf8')) as {
+    const raw = JSON.parse(
+      readFileSync(path.join(cwd, "ds-contracts.config.json"), "utf8"),
+    ) as {
       generate?: { tokens?: unknown; out?: unknown };
     };
     const gen = raw.generate ?? {};
     return {
-      tokens: Array.isArray(gen.tokens) ? gen.tokens.filter((t): t is string => typeof t === 'string') : [],
-      out: typeof gen.out === 'string' && gen.out.trim() !== '' ? gen.out.trim() : null,
+      tokens: Array.isArray(gen.tokens)
+        ? gen.tokens.filter((t): t is string => typeof t === "string")
+        : [],
+      out:
+        typeof gen.out === "string" && gen.out.trim() !== ""
+          ? gen.out.trim()
+          : null,
     };
   } catch {
     return { tokens: [], out: null };
@@ -871,22 +1170,34 @@ function loadReceiveDsConfig(cwd: string): { tokens: string[]; out: string | nul
 }
 
 async function receiveCommand(argv: string[]): Promise<number> {
-  const parsed = parseFlags(argv, { value: ['out', 'bridge'], bool: ['apply'] });
-  const out = flagString(parsed, 'out');
-  if (!out) throw new CliUsageError('figma receive needs --out <contracts-dir> — where the reviewed diff lands');
-  const apply = parsed.flags.get('apply') === true;
+  const parsed = parseFlags(argv, {
+    value: ["out", "bridge"],
+    bool: ["apply"],
+  });
+  const out = flagString(parsed, "out");
+  if (!out)
+    throw new CliUsageError(
+      "figma receive needs --out <contracts-dir> — where the reviewed diff lands",
+    );
+  const apply = parsed.flags.get("apply") === true;
   const base = (
-    flagString(parsed, 'bridge') ??
+    flagString(parsed, "bridge") ??
     process.env.DS_CONTRACTS_BRIDGE_URL ??
     DEFAULT_BRIDGE_URL
-  ).replace(/\/$/, '');
+  ).replace(/\/$/, "");
   const outDir = path.resolve(out);
 
   // 1. Mint the pairing code.
-  const created = await fetch(`${base}/bridge/session`, { method: 'POST' });
-  const session = (await created.json().catch(() => ({}))) as { code?: string; ttlSeconds?: number; error?: string };
-  if (!created.ok || typeof session.code !== 'string') {
-    console.error(`✘ bridge refused the session (${created.status}): ${session.error ?? 'unnamed error'}`);
+  const created = await fetch(`${base}/bridge/session`, { method: "POST" });
+  const session = (await created.json().catch(() => ({}))) as {
+    code?: string;
+    ttlSeconds?: number;
+    error?: string;
+  };
+  if (!created.ok || typeof session.code !== "string") {
+    console.error(
+      `✘ bridge refused the session (${created.status}): ${session.error ?? "unnamed error"}`,
+    );
     return 1;
   }
   const code = session.code;
@@ -907,20 +1218,35 @@ async function receiveCommand(argv: string[]): Promise<number> {
       await sleep(2500); // transient network blip — keep polling
       continue;
     }
-    const body = (await res.json().catch(() => ({}))) as { status?: string; kind?: string; dump?: unknown; error?: string };
-    if (res.ok && body.status === 'delivered') { delivered = body; break; }
-    if (res.ok && body.status === 'waiting') { await sleep(2500); continue; }
-    console.error(`✘ bridge refused (${res.status}): ${body.error ?? 'unnamed error'}`);
+    const body = (await res.json().catch(() => ({}))) as {
+      status?: string;
+      kind?: string;
+      dump?: unknown;
+      error?: string;
+    };
+    if (res.ok && body.status === "delivered") {
+      delivered = body;
+      break;
+    }
+    if (res.ok && body.status === "waiting") {
+      await sleep(2500);
+      continue;
+    }
+    console.error(
+      `✘ bridge refused (${res.status}): ${body.error ?? "unnamed error"}`,
+    );
     return 1;
   }
   if (!delivered) {
-    console.error('✘ Nothing arrived before the code expired — run figma receive again for a fresh code.');
+    console.error(
+      "✘ Nothing arrived before the code expired — run figma receive again for a fresh code.",
+    );
     return 1;
   }
-  const kind = delivered.kind ?? 'dump';
-  if (kind !== 'proposal') {
+  const kind = delivered.kind ?? "dump";
+  if (kind !== "proposal") {
     console.error(
-      `✘ Refused — that code carried a ${kind === 'dump' ? 'canvas dump' : kind}, not a ${CONTRACT_PROPOSAL_TYPE}. figma receive only lands proposals from the plugin's Send tab; deliver-once means this payload is now gone — send again to a fresh code.`,
+      `✘ Refused — that code carried a ${kind === "dump" ? "canvas dump" : kind}, not a ${CONTRACT_PROPOSAL_TYPE}. figma receive only lands proposals from the plugin's Send tab; deliver-once means this payload is now gone — send again to a fresh code.`,
     );
     return 1;
   }
@@ -936,13 +1262,17 @@ async function receiveCommand(argv: string[]): Promise<number> {
   // --out, and the repo's recorded generate facts for the printed command.
   const existingStubIds = new Set<string>();
   for (const stub of proposal.childStubs ?? []) {
-    const stubId = typeof stub.id === 'string' ? stub.id : null;
-    if (stubId && findExistingContractFile(outDir, stubId)) existingStubIds.add(stubId);
+    const stubId = typeof stub.id === "string" ? stub.id : null;
+    if (stubId && findExistingContractFile(outDir, stubId))
+      existingStubIds.add(stubId);
   }
   const dsConfig = loadReceiveDsConfig(process.cwd());
   const plan = planReceive(
     proposal,
-    findExistingContractFile(outDir, String(proposal.proposedContract.id ?? proposal.baseContractId)),
+    findExistingContractFile(
+      outDir,
+      String(proposal.proposedContract.id ?? proposal.baseContractId),
+    ),
     apply,
     {
       existingStubIds,
@@ -952,8 +1282,34 @@ async function receiveCommand(argv: string[]): Promise<number> {
     },
   );
 
-  mkdirSync(path.dirname(path.join(outDir, plan.proposalFileName)), { recursive: true });
-  writeFileSync(path.join(outDir, plan.proposalFileName), plan.proposalText);
+  // Validate the COMPLETE write set before the first mkdir/write. This keeps
+  // a hostile late entry from leaving an earlier artifact or contract behind.
+  const plannedOutputs = [
+    plan.proposalFileName,
+    ...(plan.contractWrite ? [plan.contractWrite.fileName] : []),
+    ...plan.stubWrites.map((s) => s.fileName),
+    ...(plan.mintedWrite ? [plan.mintedWrite.fileName] : []),
+  ];
+  const outputPaths = new Map(
+    plannedOutputs.map((fileName) => [
+      fileName,
+      containedOutputPath(outDir, fileName),
+    ]),
+  );
+  const outputPath = (fileName: string): string => {
+    const resolved = outputPaths.get(fileName);
+    if (!resolved) {
+      throw new CliUsageError(
+        `receive REFUSED: unvalidated planned write "${fileName}"; nothing was written.`,
+      );
+    }
+    return resolved;
+  };
+
+  mkdirSync(path.dirname(outputPath(plan.proposalFileName)), {
+    recursive: true,
+  });
+  writeFileSync(outputPath(plan.proposalFileName), plan.proposalText);
   console.log(`✔ Proposal saved: ${path.join(out, plan.proposalFileName)}`);
 
   if (proposal.summary.length > 0) {
@@ -963,40 +1319,46 @@ async function receiveCommand(argv: string[]): Promise<number> {
   // ENVELOPE v2 payloads, named whether or not they land this run.
   const stubCount = (proposal.childStubs ?? []).length;
   const mintedCount =
-    proposal.mintedTokens && proposal.mintedTokens.tree && Object.keys(proposal.mintedTokens.tree).length > 0
-      ? proposal.mintedTokens.count ?? Object.keys(proposal.mintedTokens.tree).length
+    proposal.mintedTokens &&
+    proposal.mintedTokens.tree &&
+    Object.keys(proposal.mintedTokens.tree).length > 0
+      ? (proposal.mintedTokens.count ??
+        Object.keys(proposal.mintedTokens.tree).length)
       : 0;
   if (stubCount > 0 || mintedCount > 0) {
     console.log(
       `\nThis proposal also carries ${[
-        stubCount > 0 ? `${stubCount} auto-proposed stub contract(s) (${(proposal.childStubs ?? []).map((s) => String((s as { id?: unknown }).id ?? '?')).join(', ')})` : null,
-        mintedCount > 0 ? `a minted token tree (${mintedCount} token(s))` : null,
+        stubCount > 0
+          ? `${stubCount} auto-proposed stub contract(s) (${(proposal.childStubs ?? []).map((s) => String((s as { id?: unknown }).id ?? "?")).join(", ")})`
+          : null,
+        mintedCount > 0
+          ? `a minted token tree (${mintedCount} token(s))`
+          : null,
       ]
         .filter(Boolean)
-        .join(' and ')} — the contract's component/token refs resolve through them.`,
+        .join(
+          " and ",
+        )} — the contract's component/token refs resolve through them.`,
     );
   }
-  for (const skip of plan.stubSkips) console.log(`  stub ${skip.contractId}: ${skip.reason}`);
+  for (const skip of plan.stubSkips)
+    console.log(`  stub ${skip.contractId}: ${skip.reason}`);
 
   const writeExtras = () => {
-    // Belt over contractFileNameForId: whatever produced the plan, a write
-    // may not escape --out. Refused by name, never a silent clamp.
-    const insideOut = (fileName: string): string => {
-      const resolved = path.resolve(outDir, fileName);
-      if (resolved !== outDir && !resolved.startsWith(outDir + path.sep)) {
-        throw new CliUsageError(
-          `receive REFUSED: planned write "${fileName}" resolves OUTSIDE --out (${resolved}) — the delivery carries a hostile or malformed id; nothing was written.`,
-        );
-      }
-      return resolved;
-    };
     for (const s of plan.stubWrites) {
-      writeFileSync(insideOut(s.fileName), s.contents);
-      console.log(`✔ Wrote stub contract ${path.join(out, s.fileName)} (${s.contractId}) — replace it by importing the real child set.`);
+      writeFileSync(outputPath(s.fileName), s.contents);
+      console.log(
+        `✔ Wrote stub contract ${path.join(out, s.fileName)} (${s.contractId}) — replace it by importing the real child set.`,
+      );
     }
     if (plan.mintedWrite) {
-      writeFileSync(insideOut(plan.mintedWrite.fileName), plan.mintedWrite.contents);
-      console.log(`✔ Wrote minted token tree ${path.join(out, plan.mintedWrite.fileName)} — provisional names; review before adopting.`);
+      writeFileSync(
+        outputPath(plan.mintedWrite.fileName),
+        plan.mintedWrite.contents,
+      );
+      console.log(
+        `✔ Wrote minted token tree ${path.join(out, plan.mintedWrite.fileName)} — provisional names; review before adopting.`,
+      );
     }
     if (plan.nextCommand) {
       // The banner must not claim a minted tree the delivery did not carry
@@ -1010,20 +1372,29 @@ async function receiveCommand(argv: string[]): Promise<number> {
   };
 
   if (!plan.changed) {
-    console.log(`\n${plan.fileName} already matches the proposal byte-for-byte — nothing to apply to it.`);
+    console.log(
+      `\n${plan.fileName} already matches the proposal byte-for-byte — nothing to apply to it.`,
+    );
     writeExtras();
     return 0;
   }
-  console.log(plan.oldText === null ? `\nNew contract (no ${plan.fileName} in ${out} yet):` : '');
+  console.log(
+    plan.oldText === null
+      ? `\nNew contract (no ${plan.fileName} in ${out} yet):`
+      : "",
+  );
   for (const line of plan.diff) console.log(line);
 
   if (plan.contractWrite === null) {
     console.log(
-      `\nNothing written to ${plan.fileName}${stubCount > 0 || mintedCount > 0 ? ' (nor the stub/minted files above)' : ''} — review the diff, then re-run with --apply to write ${stubCount > 0 || mintedCount > 0 ? 'all of it' : 'it'} (or apply by hand from ${path.join(out, plan.proposalFileName)}).`,
+      `\nNothing written to ${plan.fileName}${stubCount > 0 || mintedCount > 0 ? " (nor the stub/minted files above)" : ""} — review the diff, then re-run with --apply to write ${stubCount > 0 || mintedCount > 0 ? "all of it" : "it"} (or apply by hand from ${path.join(out, plan.proposalFileName)}).`,
     );
     return 0;
   }
-  writeFileSync(path.join(outDir, plan.contractWrite.fileName), plan.contractWrite.contents);
+  writeFileSync(
+    outputPath(plan.contractWrite.fileName),
+    plan.contractWrite.contents,
+  );
   console.log(
     `\n✔ Wrote ${path.join(out, plan.contractWrite.fileName)} — review the diff and commit it yourself (ds-contracts never touches git).`,
   );
@@ -1036,59 +1407,81 @@ async function receiveCommand(argv: string[]): Promise<number> {
   // (the shipping generator), same named refusal printed when there is no
   // recorded target. Reached only under --apply: without it, plan.contractWrite
   // is null and this command's whole contract is that it writes nothing.
-  const { generateCodeFiles, loadDsConfig, resolveCodeConfig } = await import('./propose-pr.js');
-  const rc = resolveCodeConfig({ noCode: false }, loadDsConfig(process.cwd()), 'ds-contracts.config.json');
+  const { generateCodeFiles, loadDsConfig, resolveCodeConfig } =
+    await import("./propose-pr.js");
+  const rc = resolveCodeConfig(
+    { noCode: false },
+    loadDsConfig(process.cwd()),
+    "ds-contracts.config.json",
+  );
   if (!rc.ok) console.log(`\nNo component code generated — ${rc.reason}`);
   else {
     // ENVELOPE v2: the stubs ride into the generation scope and the minted
     // tree rides the token inventory — without them a foreign-kit proposal's
     // component/token refs refuse by name and the door dead-ends.
-    const { files, notes } = await generateCodeFiles(plan.contractWrite.contents, rc.config, process.cwd(), {
-      stubs: proposal.childStubs ?? [],
-      mintedTree: proposal.mintedTokens?.tree ?? null,
-    });
+    const { files, notes } = await generateCodeFiles(
+      plan.contractWrite.contents,
+      rc.config,
+      process.cwd(),
+      {
+        stubs: proposal.childStubs ?? [],
+        mintedTree: proposal.mintedTokens?.tree ?? null,
+      },
+    );
     for (const f of files) {
       mkdirSync(path.dirname(f.destPath), { recursive: true });
       writeFileSync(f.destPath, f.contents);
     }
-    console.log(`✔ Generated ${files.length} file(s): ${files.map((f) => f.destPath).join(', ')}`);
+    console.log(
+      `✔ Generated ${files.length} file(s): ${files.map((f) => f.destPath).join(", ")}`,
+    );
     for (const n of notes) console.log(`  ${n}`);
   }
   return 0;
 }
 
 export async function figmaCommand(argv: string[]): Promise<number> {
-  if (argv[0] === 'bundle') return bundleCommand(argv.slice(1));
-  if (argv[0] === 'push') return pushCommand(argv.slice(1));
-  if (argv[0] === 'claim-channel') return claimChannelCommand(argv.slice(1));
-  if (argv[0] === 'publish') return publishCommand(argv.slice(1));
-  if (argv[0] === 'receive') return receiveCommand(argv.slice(1));
+  if (argv[0] === "bundle") return bundleCommand(argv.slice(1));
+  if (argv[0] === "push") return pushCommand(argv.slice(1));
+  if (argv[0] === "claim-channel") return claimChannelCommand(argv.slice(1));
+  if (argv[0] === "publish") return publishCommand(argv.slice(1));
+  if (argv[0] === "receive") return receiveCommand(argv.slice(1));
 
-  const parsed = parseFlags(argv, { value: ['out', 'tokens', 'icons', 'file-key'] });
+  const parsed = parseFlags(argv, {
+    value: ["out", "tokens", "icons", "file-key"],
+  });
   if (parsed.positionals.length === 0) {
     throw new CliUsageError(
-      'figma needs contract files/directories (or the `bundle` / `push` / `publish` / `claim-channel` / `receive` subcommands)',
+      "figma needs contract files/directories (or the `bundle` / `push` / `publish` / `claim-channel` / `receive` subcommands)",
     );
   }
-  const out = flagString(parsed, 'out');
-  if (!out) throw new CliUsageError('figma needs --out <dir>');
+  const out = flagString(parsed, "out");
+  if (!out) throw new CliUsageError("figma needs --out <dir>");
   const files = expandContractArgs(parsed.positionals);
+  files.forEach((file) => {
+    const raw = JSON.parse(readFileSync(file, "utf8")) as ProvenancedContract;
+    assertContractProvenance(raw, String(raw.id ?? file));
+  });
   const contracts = loadContracts(files);
   const { ctx, routing } = buildEmitterCtxWithRouting(
     contracts,
-    expandTokenArgs(flagString(parsed, 'tokens')),
-    flagString(parsed, 'icons'),
-    flagString(parsed, 'file-key'),
+    expandTokenArgs(flagString(parsed, "tokens")),
+    flagString(parsed, "icons"),
+    flagString(parsed, "file-key"),
   );
   const outDir = path.resolve(out);
   mkdirSync(outDir, { recursive: true });
   const written: string[] = [];
   for (const contract of contracts.values()) {
-    for (const file of withTokenDiagnostics(routing, () => figmaScriptEmitter.emit(contract, ctx))) {
+    for (const file of withTokenDiagnostics(routing, () =>
+      figmaScriptEmitter.emit(contract, ctx),
+    )) {
       writeFileSync(path.join(outDir, file.path), file.contents);
       written.push(file.path);
     }
   }
-  console.log(`✔ Emitted ${written.length} Figma sync script(s) → ${outDir}: ${written.join(', ')}`);
+  console.log(
+    `✔ Emitted ${written.length} Figma sync script(s) → ${outDir}: ${written.join(", ")}`,
+  );
   return 0;
 }

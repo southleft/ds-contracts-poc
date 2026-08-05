@@ -9,15 +9,16 @@
  * Gate order (cheapest refusal first):
  *   CORS → kill switch → route/method → body parse → input validation
  *   → cache (repo-profile only; hits cost zero tokens and no quota)
- *   → per-IP daily cap → global daily token budget → one model call.
+ *   → per-IP daily cap → conservative global budget reservation → one model call.
  */
 import type { Deps, Env } from './env';
 import { corsHeaders, resolveOrigin } from './cors';
-import { budgetSpent, chargeBudget, clientIp, reserveIpSlot } from './limits';
+import { clientIp, reserveBudget, reserveIpSlot } from './limits';
 import { AssistUpstreamError, callClaude, MODEL } from './anthropic';
 import { ENDPOINTS } from './endpoints';
 import { handleBridge } from './bridge';
 import { handleChannel } from './channel';
+export { BudgetCoordinator } from './budget-coordinator';
 
 export const MESSAGES = {
   disabled: 'assist is switched off — the owner has not enabled the shared budget yet',
@@ -44,9 +45,9 @@ export async function handleRequest(
   env: Env,
   deps: Deps = { fetchImpl: (...args: Parameters<typeof fetch>) => fetch(...args), now: () => new Date() },
 ): Promise<Response> {
-  // The plugin bridge routes first: it has its own (asymmetric) origin gate —
-  // the Figma plugin's upload arrives with `Origin: null` — and its own kill
-  // switch. Nothing below (assist CORS, ASSIST_ENABLED, Anthropic) applies.
+  // The plugin bridge routes first: it has its own CORS policy and explicit
+  // capabilities (Origin is never authorization), plus its own kill switch.
+  // Nothing below (assist CORS, ASSIST_ENABLED, Anthropic) applies.
   const url = new URL(request.url);
   if (url.pathname === '/bridge/session' || url.pathname.startsWith('/bridge/')) {
     return handleBridge(request, url, env, deps);
@@ -59,7 +60,8 @@ export async function handleRequest(
     return handleChannel(request, url, env, deps);
   }
 
-  // CORS first: an origin we do not serve learns nothing else about us.
+  // Browser CORS policy first for this anonymous surface. Origin is spoofable
+  // by non-browser callers and is not treated as authentication.
   const origin = resolveOrigin(request, env);
   if (!origin) return json(403, { error: MESSAGES.forbiddenOrigin });
   const cors = corsHeaders(origin);
@@ -74,7 +76,7 @@ export async function handleRequest(
   if (request.method !== 'POST') return json(405, { error: 'POST only' }, cors);
 
   const raw = await request.text();
-  if (raw.length > MAX_BODY_BYTES) {
+  if (new TextEncoder().encode(raw).byteLength > MAX_BODY_BYTES) {
     return json(413, { error: 'request body too large — trim the listing/samples' }, cors);
   }
   let input: unknown;
@@ -87,6 +89,7 @@ export async function handleRequest(
   const invalid = endpoint.validate(input);
   if (invalid) return json(400, { error: invalid }, cors);
   const data = input as Record<string, unknown>;
+  const userMessage = endpoint.buildUserMessage(data);
 
   const now = deps.now();
 
@@ -107,7 +110,15 @@ export async function handleRequest(
   if (!(await reserveIpSlot(env, endpoint.name, clientIp(request), now))) {
     return json(429, { error: MESSAGES.ipLimit }, cors);
   }
-  if (await budgetSpent(env, now)) {
+  // One token cannot represent less than one UTF-8 byte, so input bytes plus
+  // max_tokens is a conservative per-request ceiling. Include compiled prompt
+  // and tool schema plus fixed envelope headroom. The per-day Durable Object
+  // atomically admits or refuses the global reservation before the model call.
+  const reservationTokens =
+    new TextEncoder().encode(endpoint.system + JSON.stringify(endpoint.tool) + userMessage).byteLength +
+    endpoint.maxTokens +
+    1024;
+  if (!(await reserveBudget(env, reservationTokens, now))) {
     return json(429, { error: MESSAGES.budget }, cors);
   }
 
@@ -118,12 +129,11 @@ export async function handleRequest(
       tool: endpoint.tool,
       toolName: endpoint.toolName,
       maxTokens: endpoint.maxTokens,
-      userMessage: endpoint.buildUserMessage(data),
+      userMessage,
       apiKey: env.ANTHROPIC_API_KEY,
       fetchImpl: deps.fetchImpl,
       expectedKeys: endpoint.expectedKeys,
     });
-    await chargeBudget(env, result.usage.input_tokens + result.usage.output_tokens, now);
     output = result.output;
 
     const proposal = endpoint.postprocess(output);

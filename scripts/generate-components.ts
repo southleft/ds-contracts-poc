@@ -61,6 +61,11 @@ export class ContractViolationError extends Error {
   }
 }
 
+interface PlannedFile {
+  path: string;
+  contents: string;
+}
+
 const defaultTokenFiles = (root: string) => [
   path.join(root, 'tokens', 'primitives.tokens.json'),
   path.join(root, 'tokens', 'semantic.tokens.json'),
@@ -104,7 +109,6 @@ export async function generateComponents(
       .filter((f) => f.endsWith('.contract.json'))
       .map((f) => path.join(contractsDir, f));
   const errors: string[] = [];
-  const generated: string[] = [];
 
   const parsedContracts: Contract[] = [];
   for (const filePath of contractFiles) {
@@ -155,46 +159,61 @@ export async function generateComponents(
     throw new ContractViolationError(`✘ Refused — ${errors.length} contract violation(s):`, errors);
   }
 
+  // Complete contract validation before emission. Emitters and formatters may
+  // fail, and none of those failures may leave a partially updated outDir.
   for (const contract of ordered) {
     validateContract(contract, byId, errors, iconAssets);
-    if (errors.length > 0 && errors.some((e) => e.startsWith(contract.id))) continue;
-
-    const css = generateCss(contract, tokenInventory, errors);
-    if (errors.some((e) => e.startsWith(contract.id))) continue;
-
-    const dir = path.join(outDir, contract.name);
-    mkdirSync(dir, { recursive: true });
-
-    writeFileSync(path.join(dir, `${contract.name}.module.css`), await formatCss(css));
-    writeFileSync(
-      path.join(dir, `${contract.name}.tsx`),
-      await formatTsx(generateTsx(contract, byId, iconAssets, css)),
-    );
-    if (stories) {
-      writeFileSync(
-        path.join(dir, `${contract.name}.stories.tsx`),
-        await formatTsx(generateStories(contract, byId)),
-      );
-    }
-    writeFileSync(
-      path.join(dir, 'index.ts'),
-      `export { ${contract.name} } from './${contract.name}';\nexport type { ${contract.name}Props } from './${contract.name}';\n`,
-    );
-    generated.push(contract.name);
   }
 
   if (errors.length > 0) {
     throw new ContractViolationError('✖ Contract validation failed:\n', errors);
   }
 
-  mkdirSync(outDir, { recursive: true });
-  writeFileSync(
-    path.join(outDir, 'index.ts'),
-    generated
-      .sort()
-      .map((n) => `export * from './${n}';`)
-      .join('\n') + '\n',
-  );
+  const cssById = new Map<string, string>();
+  for (const contract of ordered) {
+    cssById.set(contract.id, generateCss(contract, tokenInventory, errors));
+  }
+
+  if (errors.length > 0) {
+    throw new ContractViolationError('✖ Contract validation failed:\n', errors);
+  }
+
+  const plan: PlannedFile[] = [];
+  const generated = ordered.map((contract) => contract.name).sort();
+  for (const contract of ordered) {
+    const css = cssById.get(contract.id)!;
+    const dir = path.join(outDir, contract.name);
+    plan.push({
+      path: path.join(dir, `${contract.name}.module.css`),
+      contents: await formatCss(css),
+    });
+    plan.push({
+      path: path.join(dir, `${contract.name}.tsx`),
+      contents: await formatTsx(generateTsx(contract, byId, iconAssets, css)),
+    });
+    if (stories) {
+      plan.push({
+        path: path.join(dir, `${contract.name}.stories.tsx`),
+        contents: await formatTsx(generateStories(contract, byId)),
+      });
+    }
+    plan.push({
+      path: path.join(dir, 'index.ts'),
+      contents: `export { ${contract.name} } from './${contract.name}';\nexport type { ${contract.name}Props } from './${contract.name}';\n`,
+    });
+  }
+
+  plan.push({
+    path: path.join(outDir, 'index.ts'),
+    contents: generated.map((n) => `export * from './${n}';`).join('\n') + '\n',
+  });
+
+  // The destination remains untouched until every contract has been parsed,
+  // validated, sorted, emitted, and formatted successfully.
+  for (const file of plan) {
+    mkdirSync(path.dirname(file.path), { recursive: true });
+    writeFileSync(file.path, file.contents);
+  }
 
   return { generated, outDir };
 }

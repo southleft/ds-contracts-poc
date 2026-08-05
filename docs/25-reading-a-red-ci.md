@@ -1,7 +1,8 @@
 # Reading a red CI
 
-Until 2026-08-04 this repository had no `.github/` directory. Thirty-three gate
-scripts existed and every one of them fired only when a human typed it — which
+Until 2026-08-04 this repository had no `.github/` directory. In that historical
+snapshot, thirty-three gate scripts existed and every one of them fired only
+when a human typed it — which
 is exactly how the live playground served a three-week-old plugin build behind
 green build guards, and how the published CLI drifted from this tree under the
 same version number. A pull request got zero automated verification.
@@ -12,22 +13,19 @@ machine.
 
 ## The lanes
 
-| Lane | Triggers | Gate steps | Measured gate time |
-| --- | --- | --- | --- |
-| [`fast`](../.github/workflows/fast.yml) | every push, every PR | 10 | 8.2s, 10/10 green — plus checkout and `npm ci` |
-| [`full`](../.github/workflows/full.yml) | every PR, every push to `main` | 28 | 926.7s, 28/28 green — `npm run eval` is 883.1s of it; the other 27 total 43.6s |
-| [`deploy-check`](../.github/workflows/deploy-check.yml) | daily at 13:00 UTC, and on demand | 1 | not measured here — it depends on three builds and on live network |
+| Lane | Triggers | Purpose |
+| --- | --- | --- |
+| [`fast`](../.github/workflows/fast.yml) | every push, every PR | source, package, docs, v1-definition, provenance, and cheap deterministic gates |
+| [`full`](../.github/workflows/full.yml) | every PR, every push to `main` | browser-backed evals, plugin/package builds, corpus and extraction gates |
+| [`catalog-visual`](../.github/workflows/catalog-visual.yml) | every PR, every push to `main` | cross-surface pixel regression with pinned Chromium and Inter |
+| [`security`](../.github/workflows/security.yml) | PRs, pushes to `main`, weekly, and on demand | dependency review, npm audits, and secret scanning |
+| [`deploy-check`](../.github/workflows/deploy-check.yml) | daily and on demand | live Cloudflare bytes versus a fresh build |
 
-Of the 33 gate scripts, 5 run in `fast`, 27 run in `full`, and `deploy:check` is
-the scheduled one. The remaining steps in the two lanes are the `packages/cli`
-and `.github/scripts` typechecks, `ci:lanes`, `verify:catalog`,
-`test:onboarding` and `verify:package` — not among the 33, but named in
-[CONTRIBUTING.md](../CONTRIBUTING.md) and cheap. `npm run ci:lanes` re-derives
-that split on every run and refuses if a gate ends up in neither lane.
-
-Measurements: `npm run ci:lane <lane>` on Node v20.19.4, macOS arm64, at commit
-8a5c455. A GitHub runner will be slower; the job timeouts (15 and 60 minutes)
-are set with room for that.
+Do not copy a gate count from this page. Run `npm run ci:lanes`; it derives the
+current coverage from package scripts and workflow files, names exclusions,
+and refuses a gate that belongs to no lane. Historical timings in workflow
+comments are measurements at the named commit and platform, not current step
+counts or service-level promises.
 
 Every gate is its own step, guarded so it runs even when an earlier gate failed.
 One red gate never hides the ones behind it — you get the whole picture from a
@@ -45,14 +43,15 @@ This reads the workflow file rather than keeping its own copy of the list, so
 the local run and CI cannot drift apart. It prints a pass/fail line and a wall
 time per gate, and — like CI — it runs every gate even after one fails.
 
-It does **not** run the lane's preparation steps (`npm ci`, the browser install,
-the three artifact builds); it prints them instead, because on a developer
-machine they want sudo or would blow away a working `node_modules`. If a gate
+It does **not** run a lane's preparation steps (`npm ci`, browser/font installs,
+or artifact builds); it prints them instead, because on a developer
+machine they may need sudo or would blow away a working `node_modules`. If a gate
 fails on a missing artifact, run the preparation step it printed.
 
 In CI those preparation steps carry the same guard the gates do, so a broken
 `plugin:zip` costs you `plugin:ui-check` — which refuses naming the file it
-could not find — and not the other 27 results. Only `npm ci` is a hard stop.
+could not find — without hiding unrelated results. Only `npm ci` is a hard
+stop.
 
 ## What CI builds that your checkout does not have
 
@@ -85,6 +84,12 @@ lost its build step, not that the registry comparison found something.
 | `publish:check` | The version in `packages/cli/package.json` **is** on the npm registry and the bytes differ from this tree's build — so `npm i -g @ds-contracts/cli`, the first command in every doc, hands adopters something this repo does not test. Fix by bumping the version, or by reverting the tree. A version that is *not* published yet is a **pass**, and says so. | `npm run publish:check` |
 | `verify:catalog` | The sharded catalog no longer matches `catalog.json`. | `npm run verify:catalog` |
 | `test:onboarding` | The CLI's `node:test` suite (draft-capture-config, accept-candidates, init-detect, library-scorecard, onboard). | `npm run test:onboarding` |
+| `test:v1-definition` / `v1:definition:check` | The pinned v1 requirement IDs, evidence commands, exclusions, compatibility floors, and links drifted. | `npm run test:v1-definition && npm run v1:definition:check` |
+| `generation:atomic:check` | A late generation refusal left partial output behind. | `npm run generation:atomic:check` |
+| `provenance:check` | A stale source could overwrite a newer approved contract change, or provenance was not preserved. | `npm run provenance:check` |
+| `static:empty-content:check` | Static extraction invented visible content for a geometry-only root. | `npm run static:empty-content:check` |
+| `variant-drift:check` / `canvas:binding:check` | The offline fixture no longer detects a one-variant part/layout/binding edit, or the fingerprint stopped carrying binding names. | `npm run canvas:binding:check && npm run variant-drift:check` |
+| `tokens:snapshot:check` | The extracted Figma variable table no longer agrees with the committed token corpus. Snapshot age is printed separately from token parity. | `npm run tokens:snapshot:check` |
 
 ### Full lane
 
@@ -103,7 +108,26 @@ lost its build step, not that the registry comparison found something.
 | `figma:fresh` | A library's committed `figma/*.figma.js` is no longer byte-identical to a fresh emission — the engine moved and the artifacts did not. | `npm run figma:fresh` |
 | `site:build` | The spec site stopped building, or schema coverage or the journey commands stopped agreeing with their manifests. | `npm run site:build` |
 | `extract:computed:ceiling:check` | The computed reader stopped naming a stylesheet it could not read — the silent-`skips` defect. | `npm run extract:computed:ceiling:check` |
-| `extract:figma:*:check` (fifteen) | One canvas-to-contract behaviour regressed: `base`, `cbds`, `cbds:batch`, `cbds:bridge`, `canvas`, `dialog`, `composite`, `cross`, `partstate`, `tooltip`, `overlap`, `wrap`, `constraints`, `repeat`, `theme`. They are separate steps precisely so a chain does not stop at the first one. | `npm run extract:figma:<name>:check` |
+| `extract:computed:portal:check` / `extract:computed:viewport:check` | Portal root selection regressed, or capture-window geometry leaked into a contract. | `npm run extract:computed:portal:check && npm run extract:computed:viewport:check` |
+| `ua-baseline:check` / `scrim-demotion:check` | A refusal overclaims what its control proves, or an overlay layer is again treated as the component box. | `npm run ua-baseline:check && npm run scrim-demotion:check` |
+| `extract:figma:*:check` | A canvas-to-contract behaviour or note taxonomy regressed. Each current member is a separate workflow step so one failure does not hide another. Run `npm run ci:lane full` to execute the exact current set. | `npm run ci:lane full` |
+
+### Catalog-visual lane
+
+`catalog:visual:check` compares the HTML and canvas renderers across the
+committed catalog. It requires the Playwright Chromium revision from the
+lockfile and the Inter font. A missing font is an environment refusal; a
+masked painted-box delta is a rendering change. Reproduce with
+`npm run ci:lane catalog-visual` after satisfying the printed prerequisites.
+
+### Security workflow
+
+- `dependency review` examines dependency changes on pull requests and blocks
+  high-severity additions.
+- `npm audit` runs both the repository-wide and production-only audit commands.
+- `secret scan` examines changed commit history. Treat a verified or unknown
+  credential finding as a release blocker; do not paste the secret into an
+  issue while triaging it.
 
 ### The scheduled lane
 
@@ -113,13 +137,11 @@ both Pages projects are direct-upload, so nothing ships until a human runs
 `npm run deploy`. A red here means the world is looking at an older tree than
 `main`; the fix is to deploy, not to change code.
 
-This job has **never been executed** — GitHub Actions cannot be triggered from
-the machine that wrote it. Its one unproven assumption is that the artifacts a
-Linux runner builds are byte-identical to the ones a macOS `npm run deploy`
-uploaded. The plugin zip is deterministic by construction; the vite content
-hashes and the site HTML are not proven platform-independent. Treat its first
-red as a claim to triage — reproduce with a local `npm run deploy:check` before
-believing the live surfaces are stale.
+The cross-platform assumption still needs release evidence: artifacts built on
+the Linux runner must agree with the macOS release rehearsal. The plugin zip is
+deterministic by construction; Vite hashes and site HTML must be verified, not
+assumed. Treat an unexplained platform-only red as a claim to triage and record
+the disposition in the release checklist.
 
 ## What is not in CI, and why
 

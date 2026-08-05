@@ -1,22 +1,25 @@
 /**
  * Hard caps, backed by Workers KV.
  *
- * Two counters, both keyed by UTC day:
+ * Counters keyed by UTC day:
  *   ip:<endpoint>:<ip>:<yyyy-mm-dd>   per-IP requests per endpoint class
- *   budget:<yyyy-mm-dd>               global tokens spent (input + output)
+ *   bridge-poll:<code>:<ip>:<day>     bridge polls per active code and IP
+ * Model budget reservations use one Durable Object instance per UTC day.
  *
- * KV is eventually consistent and read-modify-write here is not atomic —
- * a burst of parallel requests can slip a few past the line. That is
- * accepted: these are abuse dampeners with a bounded overshoot (max_tokens
- * caps every call), not billing-grade accounting. The per-IP counter is
- * reserved BEFORE the model call so retries and races err on the side of
- * refusing; the budget is checked before and charged after with actual usage.
+ * KV counters are eventually consistent abuse dampeners. The model budget is
+ * different: its Durable Object storage transaction is billing-grade atomic.
+ * It is conservatively reserved BEFORE each call (input bytes plus the
+ * endpoint's max output tokens).
  */
 import type { Env, KVNamespaceLite } from './env';
 
 export const DEFAULT_IP_DAILY_LIMIT = 5;
 export const DEFAULT_DAILY_TOKEN_BUDGET = 600_000;
 export const DEFAULT_BRIDGE_IP_DAILY_LIMIT = 40;
+/** One poll every 2.5s for 15 minutes is 360. 600 leaves retry/headroom while
+ * bounding a caller's reads. The key includes code + IP, so one abusive
+ * network cannot consume another receiver's allowance. */
+export const DEFAULT_BRIDGE_POLL_DAILY_LIMIT = 600;
 /** Minting a standing channel is a once-per-repository act, not a per-build
  *  one — 10/day/IP is generous for a team setting several up in one sitting
  *  and still stops a mint loop. */
@@ -71,8 +74,7 @@ export async function reserveIpSlot(
 /**
  * Same counter, bridge classes (`bridge-session` / `bridge-upload`), its own
  * higher default: pairing retries are cheap KV writes, not model calls.
- * Playground polls (GET) are deliberately uncounted — origin-gated reads
- * against an unguessable code.
+ * GET polling has the separate per-code + IP counter below.
  */
 export async function reserveBridgeSlot(
   env: Env,
@@ -82,6 +84,25 @@ export async function reserveBridgeSlot(
 ): Promise<boolean> {
   const limit = intVar(env.BRIDGE_IP_DAILY_LIMIT, DEFAULT_BRIDGE_IP_DAILY_LIMIT);
   const key = `ip:bridge-${kind}:${ip}:${utcDay(now)}`;
+  const used = await readCount(env.ASSIST_KV, key);
+  if (used >= limit) return false;
+  await env.ASSIST_KV.put(key, String(used + 1), { expirationTtl: DAY_TTL_SECONDS });
+  return true;
+}
+
+/**
+ * Reserve one GET /bridge/:code poll for this code + IP today. Call only
+ * after proving the session/payload exists, so random codes cannot create
+ * unbounded counter keys. KV read-modify-write is explicitly non-atomic.
+ */
+export async function reserveBridgePollSlot(
+  env: Env,
+  code: string,
+  ip: string,
+  now: Date,
+): Promise<boolean> {
+  const limit = intVar(env.BRIDGE_POLL_DAILY_LIMIT, DEFAULT_BRIDGE_POLL_DAILY_LIMIT);
+  const key = `bridge-poll:${code}:${ip}:${utcDay(now)}`;
   const used = await readCount(env.ASSIST_KV, key);
   if (used >= limit) return false;
   await env.ASSIST_KV.put(key, String(used + 1), { expirationTtl: DAY_TTL_SECONDS });
@@ -121,19 +142,37 @@ export async function reserveChannelPublishSlot(
   return true;
 }
 
-/** True when today's global token budget is already spent. */
-export async function budgetSpent(env: Env, now: Date): Promise<boolean> {
+/**
+ * Conservatively reserve this request's maximum token exposure before the
+ * model call. `tokens` includes one token per UTF-8 input byte plus the
+ * endpoint's max_tokens output cap; this intentionally over-reserves rather
+ * than relying on a tokenizer in the Worker.
+ *
+ * The per-day Durable Object serializes this check-and-increment. Reservations
+ * are not refunded on low usage or upstream failure: conservative retained
+ * reservations keep the hard cap simple and monotonic.
+ *
+ * Missing bindings, transport errors, malformed coordinator responses, and
+ * invalid reservations all fail closed.
+ */
+export async function reserveBudget(env: Env, tokens: number, now: Date): Promise<boolean> {
   const budget = intVar(env.ASSIST_DAILY_TOKEN_BUDGET, DEFAULT_DAILY_TOKEN_BUDGET);
-  const used = await readCount(env.ASSIST_KV, `budget:${utcDay(now)}`);
-  return used >= budget;
-}
-
-/** Charge actual usage (input + output tokens) against today's budget. */
-export async function chargeBudget(env: Env, tokens: number, now: Date): Promise<void> {
-  if (!Number.isFinite(tokens) || tokens <= 0) return;
-  const key = `budget:${utcDay(now)}`;
-  const used = await readCount(env.ASSIST_KV, key);
-  await env.ASSIST_KV.put(key, String(used + Math.round(tokens)), {
-    expirationTtl: DAY_TTL_SECONDS,
-  });
+  const reservation = Number.isFinite(tokens) && tokens > 0 ? Math.ceil(tokens) : 0;
+  if (!Number.isSafeInteger(reservation) || reservation === 0 || !env.BUDGET_COORDINATOR) {
+    return false;
+  }
+  try {
+    const id = env.BUDGET_COORDINATOR.idFromName(`budget:${utcDay(now)}`);
+    const stub = env.BUDGET_COORDINATOR.get(id);
+    const response = await stub.fetch('https://budget.internal/reserve', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ reservation, budget }),
+    });
+    if (!response.ok) return false;
+    const result = (await response.json()) as { admitted?: unknown };
+    return result.admitted === true;
+  } catch {
+    return false;
+  }
 }

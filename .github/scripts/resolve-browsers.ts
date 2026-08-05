@@ -2,7 +2,7 @@
  * CI BROWSER RESOLUTION RECEIPT — run by .github/workflows/full.yml before any
  * browser-dependent gate.
  *
- * WHY THIS EXISTS. Three of the 33 gates need a browser, and they need TWO
+ * WHY THIS EXISTS. Three gates in the standing census need a browser, and they need TWO
  * DIFFERENT ONES:
  *
  *   · `npm run eval` (4 launches) and `npm run extract:computed:ceiling:check`

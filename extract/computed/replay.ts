@@ -202,6 +202,7 @@ export function buildReplayHtml(
   specs: ReplaySpec[],
   stage: { width: number; height: number; padding: number },
   colorScheme: 'light' | 'dark' = 'light',
+  extraExclusions: string[] = [],
 ): string {
   return `<!doctype html><html><head><meta charset="utf-8">
 <style>
@@ -218,7 +219,7 @@ function build(node) {
   const el = document.createElement(node.tag);
   const cls = 'u' + (uid++);
   el.className = cls;
-  const EXCLUDE = ${JSON.stringify([...REPLAY_APPLY_EXCLUDE])};
+  const EXCLUDE = ${JSON.stringify([...REPLAY_APPLY_EXCLUDE, ...extraExclusions])};
   for (const [p, v] of Object.entries(node.style)) { if (!EXCLUDE.includes(p)) el.style.setProperty(p, v); }
   for (const [pe, style] of Object.entries(node.pseudo)) {
     pseudoRules.push('.' + cls + pe + ' { ' + Object.entries(style).map(([p, v]) => p + ': ' + v.replaceAll(';', '\\\\3b') + ' !important;').join(' ') + ' }');
@@ -260,6 +261,7 @@ export async function rereadEquality(
   evaluateJs: (js: string) => Promise<unknown>,
   specs: ReplaySpec[],
   allProps: string[],
+  extraExclusions: string[] = [],
 ): Promise<RereadResult> {
   const reread = (await evaluateJs(`(() => {
     const KEYS = ${JSON.stringify(specs.map((s) => s.key))};
@@ -276,6 +278,7 @@ export async function rereadEquality(
     });
   })()`)) as Array<{ key: string; root: { style: StyleMap; children: unknown[] } | null }>;
 
+  const exclusions = new Set([...REPLAY_APPLY_EXCLUDE, ...extraExclusions]);
   let cellsCompared = 0;
   let cellsMatched = 0;
   const mismatchByProp = new Map<string, number>();
@@ -289,7 +292,7 @@ export async function rereadEquality(
     const got = reread[i].root ? flatStyles(reread[i].root!) : [];
     for (let j = 0; j < Math.min(want.length, got.length); j++) {
       for (const p of allProps) {
-        if (REPLAY_APPLY_EXCLUDE.has(p)) continue;
+        if (exclusions.has(p)) continue;
         cellsCompared++;
         if (normalizeValue(got[j][p]) === want[j][p]) cellsMatched++;
         else mismatchByProp.set(p, (mismatchByProp.get(p) ?? 0) + 1);
@@ -300,7 +303,7 @@ export async function rereadEquality(
     cellsCompared,
     cellsMatched,
     pct: cellsCompared === 0 ? 100 : (100 * cellsMatched) / cellsCompared,
-    namedExclusions: [...REPLAY_APPLY_EXCLUDE],
+    namedExclusions: [...exclusions],
     topMismatchedChannels: [...mismatchByProp.entries()].sort((a, b) => b[1] - a[1]).slice(0, 15),
   };
 }

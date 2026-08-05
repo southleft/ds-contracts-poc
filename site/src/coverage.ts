@@ -90,6 +90,18 @@ reg('contract', 'anchors', [
   'contract.anchors.code.importPath',
   'contract.anchors.code.export',
 ]);
+reg('contract', 'provenance', [
+  'contract.provenance',
+  'contract.provenance.version',
+  'contract.provenance.canonicalRevision',
+  'contract.provenance.source',
+  'contract.provenance.source.kind',
+  'contract.provenance.source.adapter',
+  'contract.provenance.source.revision',
+  'contract.provenance.awaitingCodeAdoption',
+  'contract.provenance.awaitingCodeAdoption.designRevision',
+  'contract.provenance.awaitingCodeAdoption.sourceRevision',
+]);
 reg('contract', 'a11y', [
   'contract.a11y',
   'contract.a11y.focusVisible',

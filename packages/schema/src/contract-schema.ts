@@ -25,7 +25,7 @@
  *      the child contract's own bindings). Composition never duplicates a
  *      child's definition.
  */
-import * as z from 'zod';
+import * as z from "zod";
 
 /** THE CLOSED INTERACTION-STATE VOCABULARY. A `state` is a PSEUDO-CLASS
  *  PLANE — a rendering the same component instance takes without any prop
@@ -40,7 +40,12 @@ import * as z from 'zod';
  *  spellings, and a config that named a state outside the list (MUI Switch's
  *  `checked`) minted channels — `background-color-state-checked` — that
  *  re-parsed as nothing and that NO emitter rendered. */
-export const CONTRACT_STATES = ['hover', 'active', 'focus-visible', 'disabled'] as const;
+export const CONTRACT_STATES = [
+  "hover",
+  "active",
+  "focus-visible",
+  "disabled",
+] as const;
 export type ContractState = (typeof CONTRACT_STATES)[number];
 
 /** A DTCG token reference, optionally containing `{propName}` substitution
@@ -64,7 +69,7 @@ const EnumTypeSchema = z.strictObject({
  *  Code renders `Array<{ field: type; … }>` with no default (an optional
  *  array — undefined means "not provided", never a silent []). */
 const ArrayTypeSchema = z.strictObject({
-  arrayOf: z.record(z.string(), z.enum(['text', 'number', 'boolean'])),
+  arrayOf: z.record(z.string(), z.enum(["text", "number", "boolean"])),
 });
 
 export const PropSchema = z
@@ -73,9 +78,9 @@ export const PropSchema = z
     description: z.string().optional(),
     /** "boolean" | "text" | "number" | { enum: [...] } | { arrayOf: {...} } */
     type: z.union([
-      z.literal('boolean'),
-      z.literal('text'),
-      z.literal('number'),
+      z.literal("boolean"),
+      z.literal("text"),
+      z.literal("number"),
       EnumTypeSchema,
       ArrayTypeSchema,
     ]),
@@ -88,7 +93,7 @@ export const PropSchema = z
       figma: z.strictObject({
         /** 'NONE' (v7): the prop has no canvas manifestation — a declared
          *  fidelity limit; only legal (and required) for arrayOf props. */
-        kind: z.enum(['VARIANT', 'BOOLEAN', 'TEXT', 'INSTANCE_SWAP', 'NONE']),
+        kind: z.enum(["VARIANT", "BOOLEAN", "TEXT", "INSTANCE_SWAP", "NONE"]),
         /** Required unless kind is 'NONE' (enforced below). */
         property: z.string().optional(),
         /** canonical value → Figma variant value, e.g. { "primary": "Primary" } */
@@ -99,24 +104,35 @@ export const PropSchema = z
       }),
     }),
   })
-  .refine((p) => p.bindings.figma.kind === 'NONE' || typeof p.bindings.figma.property === 'string', {
-    message: 'bindings.figma.property is required unless kind is "NONE"',
-    path: ['bindings', 'figma', 'property'],
-  })
-  .refine((p) => p.bindings.figma.kind !== 'NONE' || p.bindings.figma.property === undefined, {
-    message: 'kind "NONE" declares no canvas property — omit bindings.figma.property',
-    path: ['bindings', 'figma', 'property'],
-  });
+  .refine(
+    (p) =>
+      p.bindings.figma.kind === "NONE" ||
+      typeof p.bindings.figma.property === "string",
+    {
+      message: 'bindings.figma.property is required unless kind is "NONE"',
+      path: ["bindings", "figma", "property"],
+    },
+  )
+  .refine(
+    (p) =>
+      p.bindings.figma.kind !== "NONE" ||
+      p.bindings.figma.property === undefined,
+    {
+      message:
+        'kind "NONE" declares no canvas property — omit bindings.figma.property',
+      path: ["bindings", "figma", "property"],
+    },
+  );
 
 export const LayoutSchema = z.strictObject({
-  display: z.enum(['flex', 'inline-flex']).optional(),
-  direction: z.enum(['row', 'column']).optional(),
+  display: z.enum(["flex", "inline-flex"]).optional(),
+  direction: z.enum(["row", "column"]).optional(),
   /** Cross-axis alignment. `baseline` is CARRY-BOTH like the rest: CSS
    *  `align-items: baseline`, canvas `counterAxisAlignItems: 'BASELINE'`
    *  (native on HORIZONTAL auto-layout — on a column the canvas falls back
    *  to MIN, which is what a column baseline draws anyway). */
-  align: z.enum(['start', 'center', 'end', 'stretch', 'baseline']).optional(),
-  justify: z.enum(['start', 'center', 'end', 'space-between']).optional(),
+  align: z.enum(["start", "center", "end", "stretch", "baseline"]).optional(),
+  justify: z.enum(["start", "center", "end", "space-between"]).optional(),
   /** Part takes remaining space (code: flex 1 1 auto; Figma: fill container). */
   grow: z.boolean().optional(),
   /** Children overlap (AvatarGroup): the gap token is applied as a NEGATIVE
@@ -135,10 +151,12 @@ export const LayoutSchema = z.strictObject({
  *  enum class; the canvas (which has no reverse) reverses the compiled
  *  child order per variant instead. grow/overlap stay per-part invariants. */
 export const VariantLayoutSchema = z.strictObject({
-  display: z.enum(['flex', 'inline-flex']).optional(),
-  direction: z.enum(['row', 'column', 'row-reverse', 'column-reverse']).optional(),
-  align: z.enum(['start', 'center', 'end', 'stretch', 'baseline']).optional(),
-  justify: z.enum(['start', 'center', 'end', 'space-between']).optional(),
+  display: z.enum(["flex", "inline-flex"]).optional(),
+  direction: z
+    .enum(["row", "column", "row-reverse", "column-reverse"])
+    .optional(),
+  align: z.enum(["start", "center", "end", "stretch", "baseline"]).optional(),
+  justify: z.enum(["start", "center", "end", "space-between"]).optional(),
 });
 
 /** v7: layout driven by an enum prop. `map` values are OVERRIDES merged over
@@ -236,27 +254,49 @@ export const LITERAL_VALUE_RE =
   /^(-?\d+(\.\d+)?(px|rem|em|%)?|transparent|inherit|currentColor|fit-content|#[0-9a-fA-F]{3,8}|rgba?\([\d ,./%]+\))$/;
 export const LiteralValueSchema = z
   .string()
-  .regex(LITERAL_VALUE_RE, 'Literal value must be a px/rem/em/%/number, hex or rgb()/rgba() color, fit-content, or transparent/inherit/currentColor');
+  .regex(
+    LITERAL_VALUE_RE,
+    "Literal value must be a px/rem/em/%/number, hex or rgb()/rgba() color, fit-content, or transparent/inherit/currentColor",
+  );
 
 /** v14: the channels a literal may ride — geometry and paint channels where
  *  foreign systems keep component-private literals. Everything else refuses
  *  by name (validateContract). */
 export const LITERAL_CHANNELS = new Set([
-  'background', 'background-color', 'color',
-  'height', 'width', 'min-width', 'min-height',
-  'padding-block', 'padding-inline', 'gap', 'border-radius', 'border-width',
-  'font-size', 'line-height', 'letter-spacing',
+  "background",
+  "background-color",
+  "color",
+  "height",
+  "width",
+  "min-width",
+  "min-height",
+  "padding-block",
+  "padding-inline",
+  "gap",
+  "border-radius",
+  "border-width",
+  "font-size",
+  "line-height",
+  "letter-spacing",
   // v15 (S4/matrix a.4–a.5): per-corner radii and per-side border widths are
   // natively CARRY-BOTH (each corner/side field is independently
   // variable-bindable) — the literal grammar carries them like their
   // uniform shorthands.
-  'border-top-left-radius', 'border-top-right-radius',
-  'border-bottom-left-radius', 'border-bottom-right-radius',
-  'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width',
+  "border-top-left-radius",
+  "border-top-right-radius",
+  "border-bottom-left-radius",
+  "border-bottom-right-radius",
+  "border-top-width",
+  "border-right-width",
+  "border-bottom-width",
+  "border-left-width",
   // Round 4: padding longhands — the base-plane literal fallback carries the
   // base combo's captured paddings when per-plane values refuse correlation
   // (Tag's remove-×/link planes shift them; the base plane is exact).
-  'padding-left', 'padding-right', 'padding-top', 'padding-bottom',
+  "padding-left",
+  "padding-right",
+  "padding-top",
+  "padding-bottom",
   // CARBON LIVE-DEFECT ROUND (pseudo-decor v2): placement OFFSETS and border
   // COLOURS. An UNCONDITIONAL absolute decor box (Carbon's checkbox square,
   // its toggle knob) declares `position: absolute` and carries its own
@@ -265,8 +305,15 @@ export const LITERAL_CHANNELS = new Set([
   // registry allowed it. Border colours join for the same reason: an
   // unchecked checkbox box is a transparent square with a 1px RING, and a
   // ring is a colour, not only a width.
-  'top', 'right', 'bottom', 'left',
-  'border-color', 'border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color',
+  "top",
+  "right",
+  "bottom",
+  "left",
+  "border-color",
+  "border-top-color",
+  "border-right-color",
+  "border-bottom-color",
+  "border-left-color",
 ]);
 
 /** v14: per-enum-value literal overrides — the literals sibling of
@@ -293,12 +340,12 @@ export interface DeclaredChannelSpec {
   value: RegExp;
   /** Canvas verdict per the capability matrix: 'draw' = a native node field
    *  expresses it; 'annotate' = declared-not-drawn (CARRY-CODE-ONLY). */
-  canvas: 'draw' | 'annotate';
+  canvas: "draw" | "annotate";
   /** Plain-language annotation copy (matrix §b) for the canvas description. */
   note: string;
 }
 
-const kw = (...words: string[]) => new RegExp(`^(${words.join('|')})$`);
+const kw = (...words: string[]) => new RegExp(`^(${words.join("|")})$`);
 
 export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
   // -- absolute-position round (MUI Slider/Switch): overlay-anatomy facts ---
@@ -308,8 +355,8 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
     // sized box. Scales/rotations/skews stay outside the grammar (named
     // residue) — the canvas lowering folds tx/ty into absolute offsets.
     value: /^matrix\(1, 0, 0, 1, -?[\d.]+, -?[\d.]+\)$/,
-    canvas: 'draw',
-    note: 'Identity-translate transform on an absolute part — folded into the canvas absolute offsets (tx/ty).',
+    canvas: "draw",
+    note: "Identity-translate transform on an absolute part — folded into the canvas absolute offsets (tx/ty).",
   },
   // PSEUDO-DECOR v2 ROUND: the INDEPENDENT `translate` longhand — what
   // Tailwind v4's translate-x-full actually compiles to (the toggle knob),
@@ -320,76 +367,83 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
   // offsets through the very same synthetic translate-x/y channels.
   translate: {
     value: /^(none|-?[\d.]+(px|%)( -?[\d.]+(px|%))?)$/,
-    canvas: 'draw',
-    note: 'Independent translate longhand on an absolute part — folded into the canvas absolute offsets (tx/ty).',
+    canvas: "draw",
+    note: "Independent translate longhand on an absolute part — folded into the canvas absolute offsets (tx/ty).",
   },
-  'box-sizing': {
-    value: kw('border-box', 'content-box'),
-    canvas: 'draw',
-    note: 'Box-sizing changes what captured width/height mean — content-box geometry gets padding added when lowered to canvas frame sizes.',
+  "box-sizing": {
+    value: kw("border-box", "content-box"),
+    canvas: "draw",
+    note: "Box-sizing changes what captured width/height mean — content-box geometry gets padding added when lowered to canvas frame sizes.",
   },
   // -- interaction-only channels (matrix §9: no canvas concept) -------------
   cursor: {
     value: /^[a-z-]+$/,
-    canvas: 'annotate',
-    note: 'Cursor changes (pointer on hover) exist only in the coded component.',
+    canvas: "annotate",
+    note: "Cursor changes (pointer on hover) exist only in the coded component.",
   },
-  'user-select': {
-    value: kw('none', 'auto', 'text', 'all', 'contain'),
-    canvas: 'annotate',
-    note: 'Text-selection behavior (user-select) exists only in the coded component.',
+  "user-select": {
+    value: kw("none", "auto", "text", "all", "contain"),
+    canvas: "annotate",
+    note: "Text-selection behavior (user-select) exists only in the coded component.",
   },
-  'pointer-events': {
-    value: kw('none', 'auto'),
-    canvas: 'annotate',
-    note: 'Pointer-event gating exists only in the coded component.',
+  "pointer-events": {
+    value: kw("none", "auto"),
+    canvas: "annotate",
+    note: "Pointer-event gating exists only in the coded component.",
   },
-  'touch-action': {
-    value: /^(auto|none|manipulation|(pan-(x|y|left|right|up|down)|pinch-zoom)( (pan-(x|y|left|right|up|down)|pinch-zoom))*)$/,
-    canvas: 'annotate',
-    note: 'Touch gesture handling (touch-action) exists only in the coded component.',
+  "touch-action": {
+    value:
+      /^(auto|none|manipulation|(pan-(x|y|left|right|up|down)|pinch-zoom)( (pan-(x|y|left|right|up|down)|pinch-zoom))*)$/,
+    canvas: "annotate",
+    note: "Touch gesture handling (touch-action) exists only in the coded component.",
   },
   // -- form-control / rendering hints ---------------------------------------
   appearance: {
-    value: kw('none', 'auto'),
-    canvas: 'annotate',
-    note: 'Native form-control appearance is reset only in the coded component.',
+    value: kw("none", "auto"),
+    canvas: "annotate",
+    note: "Native form-control appearance is reset only in the coded component.",
   },
-  'text-rendering': {
-    value: kw('auto', 'optimizespeed', 'optimizelegibility', 'geometricprecision'),
-    canvas: 'annotate',
-    note: 'Text rasterization hints (text-rendering) apply only in code.',
+  "text-rendering": {
+    value: kw(
+      "auto",
+      "optimizespeed",
+      "optimizelegibility",
+      "geometricprecision",
+    ),
+    canvas: "annotate",
+    note: "Text rasterization hints (text-rendering) apply only in code.",
   },
-  'font-feature-settings': {
-    value: /^(normal|"[a-z0-9]{4}"( (on|off|\d+))?(, "[a-z0-9]{4}"( (on|off|\d+))?)*)$/i,
-    canvas: 'annotate',
+  "font-feature-settings": {
+    value:
+      /^(normal|"[a-z0-9]{4}"( (on|off|\d+))?(, "[a-z0-9]{4}"( (on|off|\d+))?)*)$/i,
+    canvas: "annotate",
     note: "Tabular figures / ligature settings apply only in code — Figma's plugin API cannot set OpenType features.",
   },
   // -- motion (standing CODE-ONLY class, now a declared fact) ---------------
   transition: {
     value: /^[a-z0-9 .,()%-]+$/i,
-    canvas: 'annotate',
-    note: 'Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.',
+    canvas: "annotate",
+    note: "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
   },
-  'transition-property': {
+  "transition-property": {
     value: /^(none|all|[a-z-]+(, [a-z-]+)*)$/,
-    canvas: 'annotate',
-    note: 'Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.',
+    canvas: "annotate",
+    note: "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
   },
-  'transition-duration': {
+  "transition-duration": {
     value: /^-?[\d.]+m?s(, -?[\d.]+m?s)*$/,
-    canvas: 'annotate',
-    note: 'Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.',
+    canvas: "annotate",
+    note: "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
   },
-  'transition-timing-function': {
+  "transition-timing-function": {
     value: /^[a-z0-9 .,()-]+$/i,
-    canvas: 'annotate',
-    note: 'Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.',
+    canvas: "annotate",
+    note: "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
   },
-  'transition-delay': {
+  "transition-delay": {
     value: /^-?[\d.]+m?s(, -?[\d.]+m?s)*$/,
-    canvas: 'annotate',
-    note: 'Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.',
+    canvas: "annotate",
+    note: "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
   },
   // -- positioning context. Round 4: 'absolute' joins the grammar for
   //    PROMOTED inset overlays (Thumbnail's img, TextField's backdrop) — the
@@ -397,30 +451,32 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
   //    inset-0 pattern to layoutPositioning ABSOLUTE (emit-figma-script
   //    isInsetOverlay). fixed/sticky still refuse. --------------------------
   position: {
-    value: kw('relative', 'static', 'absolute'),
-    canvas: 'annotate',
-    note: 'Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.',
+    value: kw("relative", "static", "absolute"),
+    canvas: "annotate",
+    note: "Positioning context (relative) or an inset overlay (absolute, lowered to absolute positioning on canvas); fixed/sticky have no carried spelling.",
   },
   // -- intrinsic aspect (round 4): the real component keeps a square (or
   //    fixed-ratio) box via pseudo-element padding hacks the anatomy cannot
   //    carry — the RATIO is the fact (Avatar/Thumbnail 1:1), observed as
   //    equal computed width/height in every combo. Code renders CSS
   //    aspect-ratio; the canvas resolves height from the bound width. ------
-  'aspect-ratio': {
+  "aspect-ratio": {
     value: /^\d+(\.\d+)?( \/ \d+(\.\d+)?)?$/,
-    canvas: 'draw', // emit-figma-script sizes height = width / ratio when only width is bound
-    note: 'The intrinsic aspect ratio renders natively (height follows the bound width).',
+    canvas: "draw", // emit-figma-script sizes height = width / ratio when only width is bound
+    note: "The intrinsic aspect ratio renders natively (height follows the bound width).",
   },
   // -- box constraints outside the token grammar ----------------------------
-  'max-width': {
-    value: /^(none|-?\d+(\.\d+)?(px|rem|em|%)|fit-content|max-content|min-content)$/,
-    canvas: 'annotate',
-    note: 'Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).',
+  "max-width": {
+    value:
+      /^(none|-?\d+(\.\d+)?(px|rem|em|%)|fit-content|max-content|min-content)$/,
+    canvas: "annotate",
+    note: "Fluid max-width constraints live in code; the canvas draws the component at its real size (standing choice).",
   },
-  'max-height': {
-    value: /^(none|-?\d+(\.\d+)?(px|rem|em|%)|fit-content|max-content|min-content)$/,
-    canvas: 'annotate',
-    note: 'Fluid max-height constraints live in code; the canvas draws the component at its real size (standing choice).',
+  "max-height": {
+    value:
+      /^(none|-?\d+(\.\d+)?(px|rem|em|%)|fit-content|max-content|min-content)$/,
+    canvas: "annotate",
+    note: "Fluid max-height constraints live in code; the canvas draws the component at its real size (standing choice).",
   },
   // -- display keywords outside the flex layout vocabulary ------------------
   display: {
@@ -430,140 +486,157 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
     // `<li class="cds--accordion__item">` carried no display fact at all, so
     // the canvas fell through to the emitter's row default and drew the 472px
     // panel beside the 174px heading inside a 328px item.
-    value: kw('inline', 'inline-block', 'block', 'flow-root', 'list-item', 'contents', 'none'),
-    canvas: 'annotate',
-    note: 'CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).',
+    value: kw(
+      "inline",
+      "inline-block",
+      "block",
+      "flow-root",
+      "list-item",
+      "contents",
+      "none",
+    ),
+    canvas: "annotate",
+    note: "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
   },
   // -- wrapping & overflow --------------------------------------------------
-  'text-wrap-mode': {
-    value: kw('wrap', 'nowrap'),
-    canvas: 'annotate',
-    note: 'Line-breaking rules differ: Figma wraps by box width only.',
+  "text-wrap-mode": {
+    value: kw("wrap", "nowrap"),
+    canvas: "annotate",
+    note: "Line-breaking rules differ: Figma wraps by box width only.",
   },
-  'white-space': {
-    value: kw('normal', 'nowrap', 'pre', 'pre-wrap', 'pre-line', 'break-spaces'),
-    canvas: 'annotate',
-    note: 'Line-breaking rules differ: Figma wraps by box width only.',
+  "white-space": {
+    value: kw(
+      "normal",
+      "nowrap",
+      "pre",
+      "pre-wrap",
+      "pre-line",
+      "break-spaces",
+    ),
+    canvas: "annotate",
+    note: "Line-breaking rules differ: Figma wraps by box width only.",
   },
-  'overflow-x': {
-    value: kw('visible', 'hidden', 'clip', 'auto', 'scroll'),
-    canvas: 'annotate',
-    note: 'Scrolling behavior and overflow clipping on this axis exist only in code.',
+  "overflow-x": {
+    value: kw("visible", "hidden", "clip", "auto", "scroll"),
+    canvas: "annotate",
+    note: "Scrolling behavior and overflow clipping on this axis exist only in code.",
   },
-  'overflow-y': {
-    value: kw('visible', 'hidden', 'clip', 'auto', 'scroll'),
-    canvas: 'annotate',
-    note: 'Scrolling behavior and overflow clipping on this axis exist only in code.',
+  "overflow-y": {
+    value: kw("visible", "hidden", "clip", "auto", "scroll"),
+    canvas: "annotate",
+    note: "Scrolling behavior and overflow clipping on this axis exist only in code.",
   },
-  'text-overflow': {
-    value: kw('clip', 'ellipsis'),
-    canvas: 'draw', // textTruncation: 'ENDING' on text nodes (matrix a.9)
-    note: 'Text truncation renders natively on the canvas (textTruncation).',
+  "text-overflow": {
+    value: kw("clip", "ellipsis"),
+    canvas: "draw", // textTruncation: 'ENDING' on text nodes (matrix a.9)
+    note: "Text truncation renders natively on the canvas (textTruncation).",
   },
   // -- the A22 text channels (matrix a.2 — natively drawable) ---------------
-  'text-transform': {
-    value: kw('none', 'uppercase', 'lowercase', 'capitalize'),
-    canvas: 'draw', // textCase: UPPER | LOWER | TITLE
-    note: 'Text case renders natively on the canvas (textCase).',
+  "text-transform": {
+    value: kw("none", "uppercase", "lowercase", "capitalize"),
+    canvas: "draw", // textCase: UPPER | LOWER | TITLE
+    note: "Text case renders natively on the canvas (textCase).",
   },
-  'text-decoration-line': {
-    value: kw('none', 'underline', 'line-through', 'overline'),
-    canvas: 'draw', // textDecoration: UNDERLINE | STRIKETHROUGH; overline has no enum value — annotated when observed
-    note: 'Underline/strikethrough render natively (textDecoration); overline exists only in code.',
+  "text-decoration-line": {
+    value: kw("none", "underline", "line-through", "overline"),
+    canvas: "draw", // textDecoration: UNDERLINE | STRIKETHROUGH; overline has no enum value — annotated when observed
+    note: "Underline/strikethrough render natively (textDecoration); overline exists only in code.",
   },
-  'text-decoration-style': {
-    value: kw('solid', 'dashed', 'dotted', 'wavy', 'double'),
-    canvas: 'annotate', // granular textDecorationStyle exists (SOLID|WAVY|DOTTED); carried in code, canvas upgrade deferred by name
-    note: 'This decoration style variant exists only in code (canvas draws a solid decoration).',
+  "text-decoration-style": {
+    value: kw("solid", "dashed", "dotted", "wavy", "double"),
+    canvas: "annotate", // granular textDecorationStyle exists (SOLID|WAVY|DOTTED); carried in code, canvas upgrade deferred by name
+    note: "This decoration style variant exists only in code (canvas draws a solid decoration).",
   },
-  'text-decoration-thickness': {
+  "text-decoration-thickness": {
     value: /^(auto|from-font|-?\d+(\.\d+)?(px|rem|em|%))$/,
-    canvas: 'annotate',
-    note: 'Decoration thickness exists only in code (canvas draws the default thickness).',
+    canvas: "annotate",
+    note: "Decoration thickness exists only in code (canvas draws the default thickness).",
   },
-  'text-align': {
-    value: kw('left', 'right', 'center', 'justify', 'start', 'end'),
-    canvas: 'draw', // textAlignHorizontal (start/end map LTR — named limit)
-    note: 'Text alignment renders natively on the canvas (textAlignHorizontal).',
+  "text-align": {
+    value: kw("left", "right", "center", "justify", "start", "end"),
+    canvas: "draw", // textAlignHorizontal (start/end map LTR — named limit)
+    note: "Text alignment renders natively on the canvas (textAlignHorizontal).",
   },
-  'font-family': {
+  "font-family": {
     value: /^[^;{}]+$/,
-    canvas: 'draw', // fontName.family = first stack entry (named limit: no fallback chain on canvas)
-    note: 'The first font-family stack entry renders on the canvas; fallback chains exist only in code.',
+    canvas: "draw", // fontName.family = first stack entry (named limit: no fallback chain on canvas)
+    note: "The first font-family stack entry renders on the canvas; fallback chains exist only in code.",
   },
   // -- border styles --------------------------------------------------------
-  'border-style': {
-    value: kw('none', 'solid', 'dashed', 'dotted'),
-    canvas: 'annotate', // solid is the emitter's standing stroke; dashed/dotted dashPattern upgrade deferred by name
-    note: 'Non-solid border styles exist only in code; the canvas shows a solid stroke of the same width.',
+  "border-style": {
+    value: kw("none", "solid", "dashed", "dotted"),
+    canvas: "annotate", // solid is the emitter's standing stroke; dashed/dotted dashPattern upgrade deferred by name
+    note: "Non-solid border styles exist only in code; the canvas shows a solid stroke of the same width.",
   },
-  'border-top-style': {
-    value: kw('none', 'solid', 'dashed', 'dotted'),
-    canvas: 'annotate',
+  "border-top-style": {
+    value: kw("none", "solid", "dashed", "dotted"),
+    canvas: "annotate",
     note: "This part's borders use different styles per side in code; Figma strokes share one style.",
   },
-  'border-right-style': {
-    value: kw('none', 'solid', 'dashed', 'dotted'),
-    canvas: 'annotate',
+  "border-right-style": {
+    value: kw("none", "solid", "dashed", "dotted"),
+    canvas: "annotate",
     note: "This part's borders use different styles per side in code; Figma strokes share one style.",
   },
-  'border-bottom-style': {
-    value: kw('none', 'solid', 'dashed', 'dotted'),
-    canvas: 'annotate',
+  "border-bottom-style": {
+    value: kw("none", "solid", "dashed", "dotted"),
+    canvas: "annotate",
     note: "This part's borders use different styles per side in code; Figma strokes share one style.",
   },
-  'border-left-style': {
-    value: kw('none', 'solid', 'dashed', 'dotted'),
-    canvas: 'annotate',
+  "border-left-style": {
+    value: kw("none", "solid", "dashed", "dotted"),
+    canvas: "annotate",
     note: "This part's borders use different styles per side in code; Figma strokes share one style.",
   },
   // -- background sub-channels beyond the color+gradient carriage -----------
-  'background-attachment': {
+  "background-attachment": {
     value: /^(scroll|fixed|local)(, (scroll|fixed|local))*$/,
-    canvas: 'annotate',
-    note: 'Background attachment exists only in code.',
+    canvas: "annotate",
+    note: "Background attachment exists only in code.",
   },
-  'background-blend-mode': {
+  "background-blend-mode": {
     value: /^[a-z-]+(, [a-z-]+)*$/,
-    canvas: 'annotate',
-    note: 'Background blend modes exist only in code (per-paint blendMode upgrade deferred by name).',
+    canvas: "annotate",
+    note: "Background blend modes exist only in code (per-paint blendMode upgrade deferred by name).",
   },
-  'background-clip': {
-    value: /^(border-box|padding-box|content-box|text)(, (border-box|padding-box|content-box|text))*$/,
-    canvas: 'annotate',
-    note: 'Background clipping exists only in code.',
+  "background-clip": {
+    value:
+      /^(border-box|padding-box|content-box|text)(, (border-box|padding-box|content-box|text))*$/,
+    canvas: "annotate",
+    note: "Background clipping exists only in code.",
   },
-  'background-origin': {
-    value: /^(border-box|padding-box|content-box)(, (border-box|padding-box|content-box))*$/,
-    canvas: 'annotate',
-    note: 'Background origin exists only in code.',
+  "background-origin": {
+    value:
+      /^(border-box|padding-box|content-box)(, (border-box|padding-box|content-box))*$/,
+    canvas: "annotate",
+    note: "Background origin exists only in code.",
   },
-  'background-position': {
+  "background-position": {
     value: /^[a-z0-9.% -]+(, [a-z0-9.% -]+)*$/,
-    canvas: 'annotate',
-    note: 'Background positioning exists only in code.',
+    canvas: "annotate",
+    note: "Background positioning exists only in code.",
   },
-  'background-repeat': {
+  "background-repeat": {
     value: /^[a-z-]+( [a-z-]+)?(, [a-z-]+( [a-z-]+)?)*$/,
-    canvas: 'annotate',
-    note: 'Background repetition exists only in code (uniform TILE approximation deferred by name).',
+    canvas: "annotate",
+    note: "Background repetition exists only in code (uniform TILE approximation deferred by name).",
   },
-  'background-size': {
+  "background-size": {
     value: /^[a-z0-9.% -]+(, [a-z0-9.% -]+)*$/,
-    canvas: 'annotate',
-    note: 'Background sizing exists only in code.',
+    canvas: "annotate",
+    note: "Background sizing exists only in code.",
   },
   // -- compositing ----------------------------------------------------------
   isolation: {
-    value: kw('auto', 'isolate'),
-    canvas: 'annotate',
-    note: 'Stacking-context isolation exists only in code.',
+    value: kw("auto", "isolate"),
+    canvas: "annotate",
+    note: "Stacking-context isolation exists only in code.",
   },
   // -- focus-ring styling (the C5 stroke approximation stands on canvas) ----
-  'outline-style': {
-    value: kw('none', 'solid', 'dashed', 'dotted', 'auto'),
-    canvas: 'annotate',
-    note: 'Focus outlines render as a bound stroke approximation on canvas state previews (standing C5 approximation).',
+  "outline-style": {
+    value: kw("none", "solid", "dashed", "dotted", "auto"),
+    canvas: "annotate",
+    note: "Focus outlines render as a bound stroke approximation on canvas state previews (standing C5 approximation).",
   },
 };
 
@@ -603,64 +676,112 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
  *  channel is a deliberate act: you must say what each surface does with it.
  */
 export interface TokenChannelSpec {
-  canvas: 'draw' | 'annotate' | 'state-only';
-  css: 'verbatim' | 'canvas-only';
+  canvas: "draw" | "annotate" | "state-only";
+  css: "verbatim" | "canvas-only";
   /** Why this verdict — quoted into the channelMiss note / the refusal. */
   note: string;
 }
 
-const drawn = (note: string): TokenChannelSpec => ({ canvas: 'draw', css: 'verbatim', note });
-const annotated = (note: string): TokenChannelSpec => ({ canvas: 'annotate', css: 'verbatim', note });
+const drawn = (note: string): TokenChannelSpec => ({
+  canvas: "draw",
+  css: "verbatim",
+  note,
+});
+const annotated = (note: string): TokenChannelSpec => ({
+  canvas: "annotate",
+  css: "verbatim",
+  note,
+});
 
 export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
   // -- paint -----------------------------------------------------------------
-  'background': drawn('fills[0] (the CSS shorthand colour layer).'),
-  'background-color': drawn('fills[0].'),
-  'background-image': drawn('a parsed linear gradient appends as a GRADIENT_LINEAR paint; radial/conic/unparseable values fall to gradientMiss.'),
-  'box-shadow': drawn('DROP_SHADOW effect / effect stack; values outside the stack grammar fall to shadowMiss.'),
-  'color': drawn('the text node fill.'),
-  'fill': drawn('baked into the promoted glyph markup (iconSvg), like currentColor bakes the text colour.'),
-  'opacity': drawn('the node opacity (literal — Figma opacity is percent-scaled, so the 0-1 token is not bound).'),
+  background: drawn("fills[0] (the CSS shorthand colour layer)."),
+  "background-color": drawn("fills[0]."),
+  "background-image": drawn(
+    "a parsed linear gradient appends as a GRADIENT_LINEAR paint; radial/conic/unparseable values fall to gradientMiss.",
+  ),
+  "box-shadow": drawn(
+    "DROP_SHADOW effect / effect stack; values outside the stack grammar fall to shadowMiss.",
+  ),
+  color: drawn("the text node fill."),
+  fill: drawn(
+    "baked into the promoted glyph markup (iconSvg), like currentColor bakes the text colour.",
+  ),
+  opacity: drawn(
+    "the node opacity (literal — Figma opacity is percent-scaled, so the 0-1 token is not bound).",
+  ),
   // -- border ----------------------------------------------------------------
-  'border-color': drawn('the strokes paint.'),
-  'border-top-color': drawn('one strokes paint serves all four sides — lowered only when every carried side agrees.'),
-  'border-right-color': drawn('one strokes paint serves all four sides — lowered only when every carried side agrees.'),
-  'border-bottom-color': drawn('one strokes paint serves all four sides — lowered only when every carried side agrees.'),
-  'border-left-color': drawn('one strokes paint serves all four sides — lowered only when every carried side agrees.'),
-  'border-width': drawn('strokeWeight.'),
-  'border-top-width': drawn('strokeTopWeight.'),
-  'border-right-width': drawn('strokeRightWeight.'),
-  'border-bottom-width': drawn('strokeBottomWeight.'),
-  'border-left-width': drawn('strokeLeftWeight.'),
-  'border-radius': drawn('all four corner radius fields.'),
-  'border-top-left-radius': drawn('topLeftRadius.'),
-  'border-top-right-radius': drawn('topRightRadius.'),
-  'border-bottom-left-radius': drawn('bottomLeftRadius.'),
-  'border-bottom-right-radius': drawn('bottomRightRadius.'),
+  "border-color": drawn("the strokes paint."),
+  "border-top-color": drawn(
+    "one strokes paint serves all four sides — lowered only when every carried side agrees.",
+  ),
+  "border-right-color": drawn(
+    "one strokes paint serves all four sides — lowered only when every carried side agrees.",
+  ),
+  "border-bottom-color": drawn(
+    "one strokes paint serves all four sides — lowered only when every carried side agrees.",
+  ),
+  "border-left-color": drawn(
+    "one strokes paint serves all four sides — lowered only when every carried side agrees.",
+  ),
+  "border-width": drawn("strokeWeight."),
+  "border-top-width": drawn("strokeTopWeight."),
+  "border-right-width": drawn("strokeRightWeight."),
+  "border-bottom-width": drawn("strokeBottomWeight."),
+  "border-left-width": drawn("strokeLeftWeight."),
+  "border-radius": drawn("all four corner radius fields."),
+  "border-top-left-radius": drawn("topLeftRadius."),
+  "border-top-right-radius": drawn("topRightRadius."),
+  "border-bottom-left-radius": drawn("bottomLeftRadius."),
+  "border-bottom-right-radius": drawn("bottomRightRadius."),
   // -- box -------------------------------------------------------------------
-  'width': drawn('a fixed width.'),
-  'height': drawn('a fixed height.'),
-  'min-width': drawn('minWidth.'),
-  'min-height': drawn('minHeight (suppressed when the same part carries height — a fixed height is the drawn design truth).'),
-  'max-width': drawn('a root/text part bakes it as a fixed width; any other part binds the real maxWidth ceiling and hugs beneath it.'),
-  'padding-inline': drawn('paddingLeft + paddingRight.'),
-  'padding-block': drawn('paddingTop + paddingBottom.'),
-  'padding-left': drawn('paddingLeft.'),
-  'padding-right': drawn('paddingRight.'),
-  'padding-top': drawn('paddingTop.'),
-  'padding-bottom': drawn('paddingBottom.'),
-  'gap': drawn('itemSpacing.'),
-  'column-gap': drawn('itemSpacing on a HORIZONTAL stack; on a VERTICAL stack it is the CROSS axis and only matters under wrap — CSS-side there.'),
-  'row-gap': drawn('itemSpacing on a VERTICAL stack; on a HORIZONTAL stack it is the CROSS axis — CSS-side there.'),
-  'margin-top': drawn('the margin-box wrapper / sibling-gap itemSpacing lowering.'),
-  'margin-right': drawn('the margin-box wrapper / sibling-gap itemSpacing lowering.'),
-  'margin-bottom': drawn('the margin-box wrapper / sibling-gap itemSpacing lowering.'),
-  'margin-left': drawn('the margin-box wrapper / sibling-gap itemSpacing lowering.'),
+  width: drawn("a fixed width."),
+  height: drawn("a fixed height."),
+  "min-width": drawn("minWidth."),
+  "min-height": drawn(
+    "minHeight (suppressed when the same part carries height — a fixed height is the drawn design truth).",
+  ),
+  "max-width": drawn(
+    "a root/text part bakes it as a fixed width; any other part binds the real maxWidth ceiling and hugs beneath it.",
+  ),
+  "padding-inline": drawn("paddingLeft + paddingRight."),
+  "padding-block": drawn("paddingTop + paddingBottom."),
+  "padding-left": drawn("paddingLeft."),
+  "padding-right": drawn("paddingRight."),
+  "padding-top": drawn("paddingTop."),
+  "padding-bottom": drawn("paddingBottom."),
+  gap: drawn("itemSpacing."),
+  "column-gap": drawn(
+    "itemSpacing on a HORIZONTAL stack; on a VERTICAL stack it is the CROSS axis and only matters under wrap — CSS-side there.",
+  ),
+  "row-gap": drawn(
+    "itemSpacing on a VERTICAL stack; on a HORIZONTAL stack it is the CROSS axis — CSS-side there.",
+  ),
+  "margin-top": drawn(
+    "the margin-box wrapper / sibling-gap itemSpacing lowering.",
+  ),
+  "margin-right": drawn(
+    "the margin-box wrapper / sibling-gap itemSpacing lowering.",
+  ),
+  "margin-bottom": drawn(
+    "the margin-box wrapper / sibling-gap itemSpacing lowering.",
+  ),
+  "margin-left": drawn(
+    "the margin-box wrapper / sibling-gap itemSpacing lowering.",
+  ),
   // -- absolute placement (lowered OUTSIDE applyTokens) ----------------------
-  'top': drawn('absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot — absolute offsets, not a switch case.'),
-  'right': drawn('absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot.'),
-  'bottom': drawn('absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot.'),
-  'left': drawn('absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot.'),
+  top: drawn(
+    "absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot — absolute offsets, not a switch case.",
+  ),
+  right: drawn(
+    "absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot.",
+  ),
+  bottom: drawn(
+    "absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot.",
+  ),
+  left: drawn(
+    "absolutePartPlacement / insetOverlayOffsets / boundFullBleedScrimRoot.",
+  ),
   // -- SYNTHETIC: minted by decomposeTranslate, canvas-only ------------------
   //  CSS has NO per-component translate longhand — `translate` is ONE
   //  property taking 1-3 values. The repo's own contracts condition the two
@@ -670,14 +791,24 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
   //  lowering (absolutePartPlacement) folds them into x/y offsets, which is
   //  exactly where a per-axis-conditioned offset belongs; the code emitters
   //  refuse the declaration BY NAME in the stylesheet.
-  'translate-x': { canvas: 'draw', css: 'canvas-only', note: 'SYNTHETIC (decomposeTranslate) — folded into absolute x placement on canvas; CSS has no translate-x longhand.' },
-  'translate-y': { canvas: 'draw', css: 'canvas-only', note: 'SYNTHETIC (decomposeTranslate) — folded into absolute y placement on canvas; CSS has no translate-y longhand.' },
+  "translate-x": {
+    canvas: "draw",
+    css: "canvas-only",
+    note: "SYNTHETIC (decomposeTranslate) — folded into absolute x placement on canvas; CSS has no translate-x longhand.",
+  },
+  "translate-y": {
+    canvas: "draw",
+    css: "canvas-only",
+    note: "SYNTHETIC (decomposeTranslate) — folded into absolute y placement on canvas; CSS has no translate-y longhand.",
+  },
   // -- type ------------------------------------------------------------------
-  'font-family': drawn('the text node family (falls back to Inter when unavailable — named limit).'),
-  'font-size': drawn('fontSize.'),
-  'font-weight': drawn('the font STYLE name (Regular/Medium/Semi Bold/Bold).'),
-  'line-height': drawn('pixel lineHeight on text nodes.'),
-  'letter-spacing': drawn('pixel letterSpacing on text nodes.'),
+  "font-family": drawn(
+    "the text node family (falls back to Inter when unavailable — named limit).",
+  ),
+  "font-size": drawn("fontSize."),
+  "font-weight": drawn("the font STYLE name (Regular/Medium/Semi Bold/Bold)."),
+  "line-height": drawn("pixel lineHeight on text nodes."),
+  "letter-spacing": drawn("pixel letterSpacing on text nodes."),
   // -- outline: the OUTSIDE-aligned stroke vocabulary -------------------------
   // ROUND 9: these two stopped being state-preview-only. dump v1.11 captures
   // strokeAlign, and an OUTSIDE-aligned Figma stroke has exactly one faithful
@@ -688,33 +819,57 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
   // either one alone stays inert and is refused by name, because a CSS
   // outline with no width paints nothing and a width with no colour has
   // nothing to paint.
-  'outline-color': {
-    canvas: 'draw', css: 'verbatim',
-    note: 'the strokes paint of an OUTSIDE-aligned stroke — drawn only when outline-width is carried too (a resting outline with no width paints nothing in CSS, and the toned base cells must not gain a ring).',
+  "outline-color": {
+    canvas: "draw",
+    css: "verbatim",
+    note: "the strokes paint of an OUTSIDE-aligned stroke — drawn only when outline-width is carried too (a resting outline with no width paints nothing in CSS, and the toned base cells must not gain a ring).",
   },
-  'outline-width': {
-    canvas: 'draw', css: 'verbatim',
-    note: 'strokeWeight of an OUTSIDE-aligned stroke — drawn only when outline-color is carried too. emit-react supplies the outline-style:solid the pair needs; without a width no outline-style is written at all.',
+  "outline-width": {
+    canvas: "draw",
+    css: "verbatim",
+    note: "strokeWeight of an OUTSIDE-aligned stroke — drawn only when outline-color is carried too. emit-react supplies the outline-style:solid the pair needs; without a width no outline-style is written at all.",
   },
-  'outline-offset': annotated('Figma strokes have no offset field — an outside-aligned stroke sits flush against the box.'),
+  "outline-offset": annotated(
+    "Figma strokes have no offset field — an outside-aligned stroke sits flush against the box.",
+  ),
   // -- annotate: carried by the contract, NO canvas field --------------------
-  'flex-basis': annotated('Figma auto-layout has no flex-basis; sizing is hug/fill/fixed.'),
-  'flex-grow': annotated('the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.'),
-  'flex-shrink': annotated('Figma auto-layout children do not shrink below their content — there is no shrink factor.'),
-  'grid-template-columns': annotated('Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.'),
-  'grid-template-rows': annotated('Figma has no grid track sizing.'),
-  'grid-column-start': annotated('Figma has no grid placement.'),
-  'grid-row-start': annotated('Figma has no grid placement.'),
-  'grid-row-end': annotated('Figma has no grid placement.'),
-  'max-height': annotated('Figma has no maxHeight field (maxWidth exists; its height twin does not).'),
-  'text-indent': annotated('Figma text nodes have no first-line indent.'),
-  'vertical-align': annotated('Figma has no inline baseline alignment; auto-layout counterAxisAlignItems is the nearest, coarser, fact.'),
-  'z-index': annotated('paint order on canvas is CHILD ORDER — a z-index a part carries independently of its DOM order has no field.'),
-  'row-rule-color': annotated('a Chromium GAP-DECORATION longhand (CSS gap decorations) that the computed sweep enumerates for every element — nobody authored it, and neither surface paints it. Registered so it is CARRIED and NAMED rather than silently believed.'),
-  'column-rule-color': annotated('a column-rule longhand the computed sweep enumerates; the canvas has no column rules.'),
-  'caret-color': annotated('the text caret is runtime UI, not canvas ink.'),
-  'text-decoration-color': annotated('Figma textDecoration is an enum with no independent colour.'),
-  'text-emphasis-color': annotated('Figma has no text-emphasis marks.'),
+  "flex-basis": annotated(
+    "Figma auto-layout has no flex-basis; sizing is hug/fill/fixed.",
+  ),
+  "flex-grow": annotated(
+    "the canvas approximates growth with layoutGrow/FILL, which is a boolean, not a ratio.",
+  ),
+  "flex-shrink": annotated(
+    "Figma auto-layout children do not shrink below their content — there is no shrink factor.",
+  ),
+  "grid-template-columns": annotated(
+    "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
+  ),
+  "grid-template-rows": annotated("Figma has no grid track sizing."),
+  "grid-column-start": annotated("Figma has no grid placement."),
+  "grid-row-start": annotated("Figma has no grid placement."),
+  "grid-row-end": annotated("Figma has no grid placement."),
+  "max-height": annotated(
+    "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
+  ),
+  "text-indent": annotated("Figma text nodes have no first-line indent."),
+  "vertical-align": annotated(
+    "Figma has no inline baseline alignment; auto-layout counterAxisAlignItems is the nearest, coarser, fact.",
+  ),
+  "z-index": annotated(
+    "paint order on canvas is CHILD ORDER — a z-index a part carries independently of its DOM order has no field.",
+  ),
+  "row-rule-color": annotated(
+    "a Chromium GAP-DECORATION longhand (CSS gap decorations) that the computed sweep enumerates for every element — nobody authored it, and neither surface paints it. Registered so it is CARRIED and NAMED rather than silently believed.",
+  ),
+  "column-rule-color": annotated(
+    "a column-rule longhand the computed sweep enumerates; the canvas has no column rules.",
+  ),
+  "caret-color": annotated("the text caret is runtime UI, not canvas ink."),
+  "text-decoration-color": annotated(
+    "Figma textDecoration is an enum with no independent colour.",
+  ),
+  "text-emphasis-color": annotated("Figma has no text-emphasis marks."),
 };
 
 /** PER-INSTANCE OVERRIDE CHANNELS (round 2 iteration 9) — THE REGISTRY.
@@ -726,22 +881,25 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
  *  chains) and the Figma fact the override is observed from — every override
  *  value is minted from OBSERVED per-occurrence data, never invented.
  *  An unregistered channel is REFUSED BY NAME by validateContract. */
-export const REF_OVERRIDE_CHANNELS: Record<string, { css: string[]; note: string }> = {
-  'background-image': {
-    css: ['background-image'],
-    note: 'per-instance IMAGE fill identity (a Figma instance carries its own imageHash — dump v1.9 imageFill observed on the instance node).',
+export const REF_OVERRIDE_CHANNELS: Record<
+  string,
+  { css: string[]; note: string }
+> = {
+  "background-image": {
+    css: ["background-image"],
+    note: "per-instance IMAGE fill identity (a Figma instance carries its own imageHash — dump v1.9 imageFill observed on the instance node).",
   },
-  'size': {
-    css: ['width', 'height'],
-    note: 'per-instance box (a Figma instance is freely resizable — observed bbox, SQUARE boxes only: one custom property drives width and height, and any nested part binding the same refs, e.g. a stub glyph).',
+  size: {
+    css: ["width", "height"],
+    note: "per-instance box (a Figma instance is freely resizable — observed bbox, SQUARE boxes only: one custom property drives width and height, and any nested part binding the same refs, e.g. a stub glyph).",
   },
-  'background-color': {
-    css: ['background-color'],
-    note: 'per-instance solid paint (dump v1.7 instancePrimaryFill, fill-shaped) — stub roots declare it (their paint IS the observed instance paint); a real child owns its own paint.',
+  "background-color": {
+    css: ["background-color"],
+    note: "per-instance solid paint (dump v1.7 instancePrimaryFill, fill-shaped) — stub roots declare it (their paint IS the observed instance paint); a real child owns its own paint.",
   },
-  'color': {
-    css: ['color'],
-    note: 'per-instance GLYPH INK (gap-closing round 8; dump v1.7 instancePrimaryFill, stroke- or fill-shaped, observed on the nested instance node). The twin of background-color for a vector child: an exported glyph whose whole drawing is ONE ink draws `currentColor`, its own contract binds that ink as `color`, and a host that draws the same glyph in its own ink sets this channel. A glyph with two or more distinct inks is refused by the single-ink test (examples/untitled-ui/glyph-ink.mts) and never reaches this channel — one custom property cannot honestly serve two paints.',
+  color: {
+    css: ["color"],
+    note: "per-instance GLYPH INK (gap-closing round 8; dump v1.7 instancePrimaryFill, stroke- or fill-shaped, observed on the nested instance node). The twin of background-color for a vector child: an exported glyph whose whole drawing is ONE ink draws `currentColor`, its own contract binds that ink as `color`, and a host that draws the same glyph in its own ink sets this channel. A glyph with two or more distinct inks is refused by the single-ink test (examples/untitled-ui/glyph-ink.mts) and never reaches this channel — one custom property cannot honestly serve two paints.",
   },
 };
 
@@ -749,28 +907,46 @@ export const REF_OVERRIDE_CHANNELS: Record<string, { css: string[]; note: string
  *  derived from the CHILD contract id, so nesting different children never
  *  crosses channels ("ds.avatar" + "size" → "--ds-avatar-size"). */
 export const refOverrideVar = (contractId: string, channel: string): string =>
-  `--${contractId.replace(/[^a-zA-Z0-9]+/g, '-')}-${channel}`;
+  `--${contractId.replace(/[^a-zA-Z0-9]+/g, "-")}-${channel}`;
 
 /** Schema-level value guard for declared facts: never a token ref, never a
  *  CSS injection vector. The per-channel grammar refusal lives in
  *  validateContract (generator level) where messages can name the channel. */
 export const DeclaredValueSchema = z
   .string()
-  .regex(/^[^;{}!]+$/, 'Declared value must be a plain CSS value (no token refs, no "!important", no rule injection)');
+  .regex(
+    /^[^;{}!]+$/,
+    'Declared value must be a plain CSS value (no token refs, no "!important", no rule injection)',
+  );
 
 /** v7 stylesWhen: the tight whitelist of literal CSS properties a
  *  conditional style may set. Deliberately NOT tokens — these are
  *  behavioral/positional properties with no token vocabulary (a color or a
  *  dimension belongs in `tokens`, and the generator refuses it here). */
 export const STYLES_WHEN_ALLOWED = new Set([
-  'position', 'top', 'right', 'bottom', 'left', 'z-index',
-  'overflow', 'text-overflow', 'white-space', 'display', 'opacity',
-  'pointer-events', 'transform', 'transition', 'flex-direction',
-  'justify-content', 'align-items', 'cursor', 'text-decoration',
+  "position",
+  "top",
+  "right",
+  "bottom",
+  "left",
+  "z-index",
+  "overflow",
+  "text-overflow",
+  "white-space",
+  "display",
+  "opacity",
+  "pointer-events",
+  "transform",
+  "transition",
+  "flex-direction",
+  "justify-content",
+  "align-items",
+  "cursor",
+  "text-decoration",
   // Round 2 iteration 4 (ellipse arcs): an axis-varying arc sweep rides
   // per-value conic-gradient masks — the arcMaskCss spelling, literal CSS
   // with no token vocabulary (exactly the transform/rotation precedent).
-  'mask',
+  "mask",
 ]);
 
 /** v7: conditional literal styles — CSS applied only when the prop matches.
@@ -793,7 +969,7 @@ export const StylesWhenSchema = z.strictObject({
  *  layoutPositioning ABSOLUTE with placement-derived constraints. Four
  *  placements in v1; offset/alignment tuning is a later axis. */
 export const OverlaySchema = z.strictObject({
-  placement: z.enum(['top', 'bottom', 'start', 'end']),
+  placement: z.enum(["top", "bottom", "start", "end"]),
 });
 
 /** v9 shape: a LEAF decor part that is a parametric vector, not a box —
@@ -811,7 +987,7 @@ export const OverlaySchema = z.strictObject({
  *  rules (emit-react validateContract): a shape part must be a leaf (no
  *  parts/slot/component/content/text/icon/meter), sides only on polygons. */
 export const ShapeSchema = z.strictObject({
-  kind: z.enum(['polygon', 'ellipse', 'rect']),
+  kind: z.enum(["polygon", "ellipse", "rect"]),
   /** Polygon point count, ≥3. Figma's REGULAR_POLYGON default is 3. */
   sides: z.number().int().min(3).optional(),
   /** Intrinsic (pre-rotation) size, px. */
@@ -850,7 +1026,7 @@ export function polygonClipPath(sides: number): string {
     const a = ((-90 + (k * 360) / sides) * Math.PI) / 180;
     pts.push(`${fmt(50 + 50 * Math.cos(a))} ${fmt(50 + 50 * Math.sin(a))}`);
   }
-  return `polygon(${pts.join(', ')})`;
+  return `polygon(${pts.join(", ")})`;
 }
 
 /** CSS conic-gradient mask for an ELLIPSE arc sweep — the ONE spelling every
@@ -875,14 +1051,20 @@ export function arcMaskCss(startRad: number, endRad: number): string | null {
  *  count renders the Figma default (3) — the proposer NAMES that assumption
  *  in its notes. */
 export function shapeCssDecls(shape: z.infer<typeof ShapeSchema>): string[] {
-  const d = [`width: ${shape.width}px`, `height: ${shape.height}px`, 'flex-shrink: 0'];
-  if (shape.kind === 'polygon') d.push(`clip-path: ${polygonClipPath(shape.sides ?? 3)}`);
-  if (shape.kind === 'ellipse') d.push('border-radius: 50%');
-  if (shape.kind === 'ellipse' && shape.arc) {
+  const d = [
+    `width: ${shape.width}px`,
+    `height: ${shape.height}px`,
+    "flex-shrink: 0",
+  ];
+  if (shape.kind === "polygon")
+    d.push(`clip-path: ${polygonClipPath(shape.sides ?? 3)}`);
+  if (shape.kind === "ellipse") d.push("border-radius: 50%");
+  if (shape.kind === "ellipse" && shape.arc) {
     const mask = arcMaskCss(shape.arc.start, shape.arc.end);
     if (mask) d.push(`mask: ${mask}`);
   }
-  if (shape.rotation !== undefined && shape.rotation !== 0) d.push(`transform: rotate(${shape.rotation}deg)`);
+  if (shape.rotation !== undefined && shape.rotation !== 0)
+    d.push(`transform: rotate(${shape.rotation}deg)`);
   return d;
 }
 
@@ -907,7 +1089,9 @@ export const RepeatSchema = z.strictObject({
    *  the arrayOf fields. Required: the canvas/static projection IS the
    *  sample; a sample-less collection would render nothing everywhere but
    *  React. */
-  sample: z.array(z.record(z.string(), z.union([z.string(), z.boolean(), z.number()]))).min(1),
+  sample: z
+    .array(z.record(z.string(), z.union([z.string(), z.boolean(), z.number()])))
+    .min(1),
 });
 
 /** Conditional part visibility (schema v4, gap G1): the part renders only
@@ -945,7 +1129,7 @@ export const SlotSchema = z.strictObject({
   /** prefer (default): accepts guides pickers/generators. restrict: only
    *  accepts is legal. open: explicitly anything (the Subframe escape hatch).
    *  Compatibility rule: widening is a minor version; narrowing is major. */
-  acceptsMode: z.enum(['prefer', 'restrict', 'open']).optional(),
+  acceptsMode: z.enum(["prefer", "restrict", "open"]).optional(),
   /** Arity bounds (map to Figma SlotSettings min/maxChildren). */
   min: z.number().int().min(0).optional(),
   max: z.number().int().min(1).optional(),
@@ -981,7 +1165,9 @@ export const ComponentRefSchema = z.strictObject({
    *  (code: `childProp={parentProp}`; Figma: resolved per variant combo).
    *  The object form (PropByPropSchema) is the same idea through a per-value
    *  LOOKUP when the child's spelling differs from the parent's. */
-  props: z.record(z.string(), z.union([z.string(), z.boolean(), PropByPropSchema])).optional(),
+  props: z
+    .record(z.string(), z.union([z.string(), z.boolean(), PropByPropSchema]))
+    .optional(),
   /** Overrides the child's `children` text prop (code: JSX children;
    *  Figma: TEXT property override on the instance). */
   text: z.string().optional(),
@@ -1101,7 +1287,7 @@ export interface Part {
   meter?: { valueProp: string; maxProp: string };
   /** CSS-side motion (spin for spinners, pulse for skeletons). Not
    *  representable on the canvas — documented fidelity scope. */
-  animation?: 'spin' | 'pulse';
+  animation?: "spin" | "pulse";
   slot?: z.infer<typeof SlotSchema>;
   component?: z.infer<typeof ComponentRefSchema>;
   /** PER-INSTANCE OVERRIDE CONSUMPTION (round 2 iteration 9, ROOT part
@@ -1153,20 +1339,26 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** v15 (S4): declared facts — DECLARED_CHANNELS registry channels. */
     declared: z.record(z.string(), DeclaredValueSchema).optional(),
     /** v15 (S4): per-state declared facts (state → channel → value). */
-    declaredStates: z.record(z.string(), z.record(z.string(), DeclaredValueSchema)).optional(),
+    declaredStates: z
+      .record(z.string(), z.record(z.string(), DeclaredValueSchema))
+      .optional(),
     /** v16 (task #37): MEASURED sizing evidence — see the Part interface. */
     hugsBelowMaxWidth: z.boolean().optional(),
     /** Root: full state vocabulary. v13: non-ref parts, color-kind channels
      *  only — see the Part interface doc + emit-react validateContract. */
-    states: z.record(z.string(), z.record(z.string(), TokenRefSchema)).optional(),
+    states: z
+      .record(z.string(), z.record(z.string(), TokenRefSchema))
+      .optional(),
     /** v17 — see StatesByPropSchema. */
     statesByProp: z.array(StatesByPropSchema).min(1).optional(),
     content: z.strictObject({ prop: z.string() }).optional(),
     text: z.string().optional(),
     /** Per-enum-value text overrides merged over `text` (see Part). */
     textByProp: PropByPropSchema.optional(),
-    meter: z.strictObject({ valueProp: z.string(), maxProp: z.string() }).optional(),
-    animation: z.enum(['spin', 'pulse']).optional(),
+    meter: z
+      .strictObject({ valueProp: z.string(), maxProp: z.string() })
+      .optional(),
+    animation: z.enum(["spin", "pulse"]).optional(),
     slot: SlotSchema.optional(),
     component: ComponentRefSchema.optional(),
     /** Round 2 iteration 9 (root part only — see Part). */
@@ -1176,7 +1368,9 @@ export const PartSchema: z.ZodType<Part> = z.lazy(() =>
     /** Icon part (v4, gap G6): renders assets/icons/<asset>.svg inline on the
      *  code side and as a vector in Figma. '{prop}' substitutes an enum prop
      *  (icon-by-status). Icons are always decorative (aria-hidden). */
-    icon: z.strictObject({ asset: z.string(), size: z.number().optional() }).optional(),
+    icon: z
+      .strictObject({ asset: z.string(), size: z.number().optional() })
+      .optional(),
     /** v4, gap G2: HTML/ARIA attributes on this part's element — literal
      *  strings or '{prop}' references. Code-side surface; Figma ignores. */
     attrs: z.record(z.string(), z.string()).optional(),
@@ -1213,7 +1407,26 @@ export const EventSchema = z.strictObject({
       /** [offValue, onValue] — activation flips to the other member; any
        *  non-member value flips to onValue (indeterminate → checked). */
       between: z.tuple([z.string(), z.string()]),
-      aria: z.enum(['expanded', 'checked', 'pressed', 'selected']).optional(),
+      aria: z.enum(["expanded", "checked", "pressed", "selected"]).optional(),
+    })
+    .optional(),
+});
+
+/** Optional artifact provenance. Old contracts remain valid without it.
+ * Cross-field/content hash verification lives at promotion/publication
+ * boundaries in core/contract-provenance.ts. */
+export const ContractProvenanceSchema = z.strictObject({
+  version: z.literal(1),
+  canonicalRevision: z.string().regex(/^sha256:[0-9a-f]{64}$/),
+  source: z.strictObject({
+    kind: z.enum(["code", "design"]),
+    adapter: z.string().min(1),
+    revision: z.string().regex(/^sha256:[0-9a-f]{64}$/),
+  }),
+  awaitingCodeAdoption: z
+    .strictObject({
+      designRevision: z.string().regex(/^sha256:[0-9a-f]{64}$/),
+      sourceRevision: z.string().regex(/^sha256:[0-9a-f]{64}$/),
     })
     .optional(),
 });
@@ -1227,14 +1440,40 @@ export const ContractSchema = z.strictObject({
   id: z.string().regex(/^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*$/),
   /** Display / export name. e.g. "Button" */
   name: z.string(),
-  version: z.string().regex(/^\d+\.\d+\.\d+$/, 'version must be semver (MAJOR.MINOR.PATCH)'),
-  status: z.enum(['draft', 'stable', 'deprecated']).default('draft'),
+  version: z
+    .string()
+    .regex(/^\d+\.\d+\.\d+$/, "version must be semver (MAJOR.MINOR.PATCH)"),
+  status: z.enum(["draft", "stable", "deprecated"]).default("draft"),
   description: z.string(),
   semantics: z.strictObject({
     element: z.enum([
-      'button', 'span', 'div', 'a', 'input', 'article', 'section', 'header', 'footer',
-      'label', 'nav', 'hr', 'ul', 'li', 'p', 'textarea', 'select', 'fieldset',
-      'blockquote', 'code', 'kbd', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+      "button",
+      "span",
+      "div",
+      "a",
+      "input",
+      "article",
+      "section",
+      "header",
+      "footer",
+      "label",
+      "nav",
+      "hr",
+      "ul",
+      "li",
+      "p",
+      "textarea",
+      "select",
+      "fieldset",
+      "blockquote",
+      "code",
+      "kbd",
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
     ]),
     role: z.string().optional(),
     /** v11: DECLARED exception to the native-semantics lint for ROOT-level
@@ -1267,7 +1506,7 @@ export const ContractSchema = z.strictObject({
    *  capability (e.g. layout primitives ARE auto-layout) — no Figma component
    *  is generated and parity does not expect one; the code surface is still
    *  fully generated and checked. */
-  figmaRepresentation: z.enum(['component', 'native']).optional(),
+  figmaRepresentation: z.enum(["component", "native"]).optional(),
   /** v12 (§3 theme-mode promotion): RECEIPT-GRADE metadata naming the token
    *  modes a drawn theme/mode variant axis carried (e.g. ['light','dark']).
    *  The axis is NEVER a prop — theming lives in the token collection's
@@ -1290,7 +1529,7 @@ export const ContractSchema = z.strictObject({
     .object({
       focusVisible: z.boolean().optional(),
       minHitArea: z.number().optional(),
-      contrast: z.enum(['AA', 'AAA']).optional(),
+      contrast: z.enum(["AA", "AAA"]).optional(),
     })
     .optional(),
   /** Per-side identity anchors. Written back after first generation on each
@@ -1306,9 +1545,12 @@ export const ContractSchema = z.strictObject({
       export: z.string(),
     }),
   }),
+  /** v1 provenance is optional for backward compatibility. */
+  provenance: ContractProvenanceSchema.optional(),
 });
 
 export type Contract = z.infer<typeof ContractSchema>;
+export type ContractProvenance = z.infer<typeof ContractProvenanceSchema>;
 export type Prop = z.infer<typeof PropSchema>;
 export type ContractEvent = z.infer<typeof EventSchema>;
 export type Slot = z.infer<typeof SlotSchema>;
@@ -1321,10 +1563,10 @@ export type VariantLayout = z.infer<typeof VariantLayoutSchema>;
  *  override (if the combo's value has one) merged over the base layout.
  *  With an empty subst (code side / no enum context) the base layout wins. */
 export interface ResolvedLayout {
-  display?: 'flex' | 'inline-flex';
-  direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
-  align?: 'start' | 'center' | 'end' | 'stretch' | 'baseline';
-  justify?: 'start' | 'center' | 'end' | 'space-between';
+  display?: "flex" | "inline-flex";
+  direction?: "row" | "column" | "row-reverse" | "column-reverse";
+  align?: "start" | "center" | "end" | "stretch" | "baseline";
+  justify?: "start" | "center" | "end" | "space-between";
   grow?: boolean;
   overlap?: boolean;
   /** v15: flex-wrap: wrap (Figma layoutWrap 'WRAP'). */
@@ -1337,7 +1579,7 @@ export function resolveLayout(
 ): ResolvedLayout | undefined {
   const base = part.layout as ResolvedLayout | undefined;
   const byProp = part.layoutByProp;
-  const override = byProp ? byProp.map[subst[byProp.prop] ?? ''] : undefined;
+  const override = byProp ? byProp.map[subst[byProp.prop] ?? ""] : undefined;
   if (!override) return base;
   return { ...base, ...override };
 }
@@ -1349,14 +1591,17 @@ export function resolveLayout(
  *  that compiles per variant (figma script, inline emitter, canvas preview);
  *  the static CSS emitters render the map as enum-class/descendant rules
  *  instead. */
-export function resolveTokens(part: Part, subst: Record<string, string>): Record<string, string> {
+export function resolveTokens(
+  part: Part,
+  subst: Record<string, string>,
+): Record<string, string> {
   let out = part.tokens ?? {};
   // v14: entries merge IN ORDER — later entries win per channel (the CSS
   // source-order cascade the values were extracted from). An axis with no
   // value in `subst` contributes nothing (a defaultless enum prop left unset
   // applies no override — the same rule the React surface renders live).
   for (const entry of tokensByPropEntries(part)) {
-    const override = entry.map[subst[entry.prop] ?? ''];
+    const override = entry.map[subst[entry.prop] ?? ""];
     if (override) out = { ...out, ...override };
   }
   return out;
@@ -1365,7 +1610,9 @@ export function resolveTokens(part: Part, subst: Record<string, string>): Record
 /** v14: normalize the single-or-array tokensByProp field to an ordered list.
  *  The ONE reader every surface goes through — the single-object spelling
  *  and the array spelling cannot diverge. */
-export function tokensByPropEntries(part: Part): Array<z.infer<typeof TokensByPropSchema>> {
+export function tokensByPropEntries(
+  part: Part,
+): Array<z.infer<typeof TokensByPropSchema>> {
   const tbp = part.tokensByProp;
   if (!tbp) return [];
   return Array.isArray(tbp) ? tbp : [tbp];
@@ -1373,10 +1620,13 @@ export function tokensByPropEntries(part: Part): Array<z.infer<typeof TokensByPr
 
 /** v14: the literal record a part carries under one concrete variant combo —
  *  literalsByProp overrides merged over `literals`, resolveTokens semantics. */
-export function resolveLiterals(part: Part, subst: Record<string, string>): Record<string, string> {
+export function resolveLiterals(
+  part: Part,
+  subst: Record<string, string>,
+): Record<string, string> {
   let out = part.literals ?? {};
   for (const entry of part.literalsByProp ?? []) {
-    const override = entry.map[subst[entry.prop] ?? ''];
+    const override = entry.map[subst[entry.prop] ?? ""];
     if (override) out = { ...out, ...override };
   }
   return out;
@@ -1394,8 +1644,8 @@ export function resolveLiterals(part: Part, subst: Record<string, string>): Reco
  *      it — the box and glyphs are the visual; semantics don't draw. */
 export function isNativeCheckablePart(part: Part): boolean {
   return (
-    part.element === 'input' &&
-    (part.attrs?.type === 'checkbox' || part.attrs?.type === 'radio')
+    part.element === "input" &&
+    (part.attrs?.type === "checkbox" || part.attrs?.type === "radio")
   );
 }
 
@@ -1418,12 +1668,15 @@ export function walkAnatomy(contract: Contract): WalkedPart[] {
       visit(childName, child, [...path, childName]);
     }
   };
-  for (const [name, part] of Object.entries(contract.anatomy)) visit(name, part, [name]);
+  for (const [name, part] of Object.entries(contract.anatomy))
+    visit(name, part, [name]);
   return out;
 }
 
 export const slotsOf = (contract: Contract) =>
-  walkAnatomy(contract).filter((w) => w.part.slot).map((w) => ({ ...w, slot: w.part.slot! }));
+  walkAnatomy(contract)
+    .filter((w) => w.part.slot)
+    .map((w) => ({ ...w, slot: w.part.slot! }));
 
 export const componentRefsOf = (contract: Contract) =>
   walkAnatomy(contract)
@@ -1440,12 +1693,13 @@ export const pascal = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 // ---------------------------------------------------------------------------
 
 /** The reserved variant-axis property name for canvas state previews. */
-export const STATE_PREVIEW_PROPERTY = 'State';
+export const STATE_PREVIEW_PROPERTY = "State";
 /** The axis value carried by every base (non-preview) variant. */
-export const STATE_PREVIEW_DEFAULT = 'Default';
+export const STATE_PREVIEW_DEFAULT = "Default";
 /** Canonical state → axis value: "hover" → "Hover", "focus-visible" →
  *  "Focus Visible". Deterministic — the differ recomputes the same labels. */
-export const statePreviewLabel = (state: string) => state.split('-').map(pascal).join(' ');
+export const statePreviewLabel = (state: string) =>
+  state.split("-").map(pascal).join(" ");
 
 // --- base ↔ preview variant NAME pairing -----------------------------------
 // ONE rule, one place. The Figma generator builds preview names with it, the
@@ -1467,7 +1721,10 @@ export function withStateSegment(axisPart: string, label: string): string {
 /** Split a variant name into its axis segments and its State= value.
  *  `state` is null when the name carries no State segment (a set that does
  *  not opt into previews). */
-export function splitStateSegment(variantName: string): { axisPart: string; state: string | null } {
+export function splitStateSegment(variantName: string): {
+  axisPart: string;
+  state: string | null;
+} {
   const m = /^(.*?)(?:, )?State=([^,]*)$/.exec(variantName);
   if (!m) return { axisPart: variantName, state: null };
   return { axisPart: m[1], state: m[2] };
@@ -1491,7 +1748,7 @@ export function baseTwinName(previewVariantName: string): string | null {
 export function statePreviewSubstProps(contract: Contract): string[] {
   const enumNames = new Set(
     contract.props
-      .filter((p) => typeof p.type === 'object' && 'enum' in p.type)
+      .filter((p) => typeof p.type === "object" && "enum" in p.type)
       .map((p) => p.name),
   );
   const out = new Set<string>();
@@ -1510,31 +1767,38 @@ export function statePreviewSubstProps(contract: Contract): string[] {
   return [...out];
 }
 
-export const slotFigmaProperty = (slot: Slot) => slot.figmaProperty ?? pascal(slot.name);
-export const slotVisibilityProperty = (slot: Slot) => `Show ${slotFigmaProperty(slot)}`;
+export const slotFigmaProperty = (slot: Slot) =>
+  slot.figmaProperty ?? pascal(slot.name);
+export const slotVisibilityProperty = (slot: Slot) =>
+  `Show ${slotFigmaProperty(slot)}`;
 
 /** Topologically sort contracts by composition dependencies; throws on
  *  cycles and unknown references — invalid states are refused, not rendered. */
 export function sortByDependencies(contracts: Contract[]): Contract[] {
   const byId = new Map(contracts.map((c) => [c.id, c]));
   const sorted: Contract[] = [];
-  const state = new Map<string, 'visiting' | 'done'>();
+  const state = new Map<string, "visiting" | "done">();
   const visit = (c: Contract, chain: string[]) => {
-    if (state.get(c.id) === 'done') return;
-    if (state.get(c.id) === 'visiting') {
-      throw new Error(`Circular contract dependency: ${[...chain, c.id].join(' → ')}`);
+    if (state.get(c.id) === "done") return;
+    if (state.get(c.id) === "visiting") {
+      throw new Error(
+        `Circular contract dependency: ${[...chain, c.id].join(" → ")}`,
+      );
     }
-    state.set(c.id, 'visiting');
+    state.set(c.id, "visiting");
     for (const { ref } of componentRefsOf(c)) {
       const dep = byId.get(ref.id);
-      if (!dep) throw new Error(`${c.id}: references unknown contract "${ref.id}"`);
+      if (!dep)
+        throw new Error(`${c.id}: references unknown contract "${ref.id}"`);
       visit(dep, [...chain, c.id]);
     }
     for (const { slot } of slotsOf(c)) {
       for (const acceptedId of slot.accepts ?? []) {
         const dep = byId.get(acceptedId);
         if (!dep) {
-          throw new Error(`${c.id}: slot "${slot.name}" accepts unknown contract "${acceptedId}"`);
+          throw new Error(
+            `${c.id}: slot "${slot.name}" accepts unknown contract "${acceptedId}"`,
+          );
         }
         // accepts is a BUILD-ORDER dependency: the canvas slot's preferred
         // values resolve through the accepted component's key, so it must
@@ -1545,9 +1809,15 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
       for (const item of slot.defaultContent ?? []) {
         const dep = byId.get(item.id);
         if (!dep) {
-          throw new Error(`${c.id}: slot "${slot.name}" defaultContent references unknown contract "${item.id}"`);
+          throw new Error(
+            `${c.id}: slot "${slot.name}" defaultContent references unknown contract "${item.id}"`,
+          );
         }
-        if (slot.accepts && slot.accepts.length > 0 && !slot.accepts.includes(item.id)) {
+        if (
+          slot.accepts &&
+          slot.accepts.length > 0 &&
+          !slot.accepts.includes(item.id)
+        ) {
           throw new Error(
             `${c.id}: slot "${slot.name}" defaultContent includes "${item.id}" which is not in accepts`,
           );
@@ -1555,7 +1825,7 @@ export function sortByDependencies(contracts: Contract[]): Contract[] {
         visit(dep, [...chain, c.id]);
       }
     }
-    state.set(c.id, 'done');
+    state.set(c.id, "done");
     sorted.push(c);
   };
   for (const c of contracts) visit(c, []);

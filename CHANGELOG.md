@@ -6,6 +6,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Coordinated release candidate
+
+The source tree stages repository `1.0.0-rc.1`,
+`@ds-contracts/cli@0.5.0-rc.1`, and
+`@ds-contracts/schema@16.1.0-rc.1`, and
+`@ds-contracts/emitter-web-components@0.4.0-rc.1`. These are source versions,
+not publication claims. Registry checks on 2026-08-04 reported npm `latest` as
+CLI `0.4.0`, schema `16.0.0`, and emitter `0.3.0`.
+
+The RC adds release gates for deterministic v1 evidence, atomic generation,
+contract provenance, static empty-content refusal, per-variant canvas drift,
+cross-surface catalog visuals, dependency/security review, package smoke and
+coverage, and live deployment freshness. The exact release mechanics,
+migration review, cross-platform verification, human approvals, and rollback
+procedure are in [docs/27](docs/27-release-process.md).
+
+**Repository history note:** no `v0.7.0` tag currently exists. The repository
+version was introduced at commit
+[`cd886e97`](https://github.com/southleft/ds-contracts-poc/commit/cd886e97a2f45464d1b0883a2adce3efab6acdaa)
+on 2026-07-20. The release owner must either approve a signed historical tag
+pointing to that exact commit or record in the GitHub release notes that the
+tag was intentionally omitted. This changelog does not invent or imply an
+existing tag.
+
 The eight-day arc from `0.7.0` (2026-07-20) to HEAD (`f3b9bbf`, 2026-07-28): **110 commits** and the eval suite **129 → 176**. Four libraries joined the corpus in this window — MUI, Flowbite/Tailwind, Carbon and Altitude — taking it to **seven distinct libraries across five styling architectures**. A standing offline drift instrument was built and grew to **54 rows across six libraries**. And the project gained the first instrument it owns that can be *surprised*: a synthetic CSS/DOM conformance fixture whose denominator is authored independently of the engine.
 
 Two things characterise the arc more than any feature. The first is that **the round that measures and the round that repairs were deliberately separated** — the conformance fixture landed with an empty `git diff --stat` over `extract/ core/ figma-sync/ scripts/`, on the stated principle that *"a round that both measures and repairs cannot be trusted to have measured honestly."* The second is the size of the **Fixed** section below, and specifically how many entries are corrections of this project's own published claims. Read that section first.
@@ -14,11 +38,14 @@ Two things characterise the arc more than any feature. The first is that **the r
 
 ---
 
-### ⚠️ Release readiness — the case for `1.0.0` versus `0.8.0`
+### Historical release-readiness snapshot — `1.0.0` versus `0.8.0`
 
 *No version number is changed by this entry. This is the argument; the call is the owner's.*
 
-**Where the numbers stand today.** The repo is `0.7.0`. `@ds-contracts/schema` is published at **16.0.0**, `@ds-contracts/cli` at **0.3.0**, `@ds-contracts/emitter-web-components` at **0.3.0** — all three published 2026-07-29 and all three matching this tree. *(This section was written before that publish; points 1 and 2 are annotated where it changed the argument. It did not change the conclusion.)*
+**Historical context.** This argument captured the state around the 2026-07-29
+stable publication and is retained as decision history, not as a current
+registry or tree claim. See the coordinated-RC section above for current
+source and registry state.
 
 **What a version number promises, taken one promise at a time:**
 
@@ -402,8 +429,8 @@ First public release: the contract-as-source-of-truth loop, proven end-to-end an
 - Three contract defects found by the visual canvas audit.
 - Extractor gaps found by self-audit: cva/`VariantProps` support; skipped components are always reported, never silent.
 
-[Unreleased]: https://github.com/southleft/ds-contracts-poc/compare/v0.7.0...HEAD
-[0.7.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.6.0...v0.7.0
+[Unreleased]: https://github.com/southleft/ds-contracts-poc/compare/cd886e97a2f45464d1b0883a2adce3efab6acdaa...HEAD
+[0.7.0]: https://github.com/southleft/ds-contracts-poc/commit/cd886e97a2f45464d1b0883a2adce3efab6acdaa
 [0.6.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/southleft/ds-contracts-poc/compare/v0.3.0...v0.4.0

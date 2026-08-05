@@ -1,10 +1,10 @@
 {
   "name": "@ds-contracts/cli",
-  "version": "0.4.0",
+  "version": "0.5.0-rc.1",
   "publishConfig": {
     "access": "public"
   },
-  "description": "ds-contracts \u2014 contracts as the deterministic bridge between design and code. onboard / init / extract / generate / promote / figma / diff / propose-pr over the same engine the reference repo ships.",
+  "description": "ds-contracts — contracts as the deterministic bridge between design and code. onboard / init / extract / generate / promote / figma / diff / propose-pr over the same engine the reference repo ships.",
   "license": "MIT",
   "type": "module",
   "bin": {
@@ -16,7 +16,9 @@
   ],
   "scripts": {
     "build": "node build.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsx --test test/draft-capture-config.test.ts test/accept-candidates.test.ts test/init-detect.test.ts test/library-scorecard.test.ts test/onboard.test.ts test/figma-receive.test.ts test/token-routing.test.ts test/promotion-integrity.test.ts",
+    "coverage": "c8 --all --include='src/**/*.ts' --reporter=text --reporter=json --reports-dir=../../coverage/cli --check-coverage --statements=55 --branches=60 --functions=55 --lines=55 npm test"
   },
   "engines": {
     "node": ">=20"

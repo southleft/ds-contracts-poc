@@ -701,6 +701,91 @@ function componentCss(contract: Contract): string[] {
 const escapeHtml = (s: string) =>
   s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 
+const HTML_NAME = /^[A-Za-z][A-Za-z0-9-]*$/;
+const HTML_ATTR_NAME = /^[A-Za-z_:][A-Za-z0-9_.:-]*$/;
+const CLASS_FRAGMENT = /^[A-Za-z0-9_-]+$/;
+const ARIA_ROLE = /^[a-z][a-z0-9-]*$/;
+
+const refuseUnsafe = (kind: string, value: string, location: string): never => {
+  throw new Error(
+    `Refused — unsafe static HTML ${kind} ${JSON.stringify(value)} at ${location}`,
+  );
+};
+
+const safeRole = (value: string, location: string): string => {
+  if (!ARIA_ROLE.test(value)) refuseUnsafe('role', value, location);
+  return value;
+};
+
+/** Contract text embedded in comments must not be able to terminate them. */
+const escapeHtmlComment = (s: string) =>
+  s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('--', '&#45;&#45;');
+
+/**
+ * Identity-bearing contract fields cannot be entity-encoded without changing
+ * selectors, semantics, or tag identity. Refuse them before producing bytes;
+ * ordinary values remain contextually escaped at their final HTML sink.
+ */
+function validateStaticHtmlIdentity(contract: Contract, ctx: EmitCtx): void {
+  const seen = new Set<string>();
+  const visit = (c: Contract) => {
+    if (seen.has(c.id)) return;
+    seen.add(c.id);
+
+    const componentClass = kebab(c.name);
+    if (!CLASS_FRAGMENT.test(componentClass)) {
+      refuseUnsafe('component class fragment', componentClass, `${c.id}.name`);
+    }
+    if (!HTML_NAME.test(c.semantics.element)) {
+      refuseUnsafe('element name', c.semantics.element, `${c.id}.semantics.element`);
+    }
+    if (c.semantics.role) safeRole(c.semantics.role, `${c.id}.semantics.role`);
+    for (const [key, role] of Object.entries(c.semantics.roleByProp?.map ?? {})) {
+      safeRole(role, `${c.id}.semantics.roleByProp.map.${key}`);
+    }
+    for (const [key, element] of Object.entries(c.semantics.elementByProp?.map ?? {})) {
+      if (!HTML_NAME.test(element)) {
+        refuseUnsafe('element name', element, `${c.id}.semantics.elementByProp.map.${key}`);
+      }
+    }
+    for (const prop of enumProps(c)) {
+      if (!CLASS_FRAGMENT.test(prop.name)) {
+        refuseUnsafe('class fragment', prop.name, `${c.id}.props.${prop.name}.name`);
+      }
+      for (const value of prop.type.enum) {
+        if (!CLASS_FRAGMENT.test(value)) {
+          refuseUnsafe('enum class fragment', value, `${c.id}.props.${prop.name}.type.enum`);
+        }
+      }
+    }
+
+    for (const { name, part, path } of walkAnatomy(c)) {
+      const location = `${c.id}.anatomy.${path.join('.')}`;
+      if (!CLASS_FRAGMENT.test(name)) refuseUnsafe('part class fragment', name, location);
+      if (part.element && !HTML_NAME.test(part.element)) {
+        refuseUnsafe('element name', part.element, `${location}.element`);
+      }
+      for (const [attr, value] of Object.entries(part.attrs ?? {})) {
+        if (!HTML_ATTR_NAME.test(attr) || /^on/i.test(attr)) {
+          refuseUnsafe('attribute name', attr, `${location}.attrs`);
+        }
+        if (attr.toLowerCase() === 'role' && !/^\{[a-z][\w-]*\}$/.test(value)) {
+          safeRole(value, `${location}.attrs.role`);
+        }
+      }
+      if (part.component) {
+        const dep = ctx.contracts.get(part.component.id);
+        if (dep) visit(dep);
+      }
+      for (const item of part.slot?.defaultContent ?? []) {
+        const dep = ctx.contracts.get(item.id);
+        if (dep) visit(dep);
+      }
+    }
+  };
+  visit(contract);
+}
+
 interface RenderState {
   subst: Record<string, string>;          // enum prop → showcased value
   bools: Record<string, boolean>;         // boolean prop → showcased value
@@ -717,7 +802,13 @@ function renderComponentHtml(
   const root = contract.anatomy.root;
   const textDefaultOf = (c: Contract): string => {
     const t = textProps(c).find((p) => p.bindings.code.prop === 'children');
-    return typeof t?.default === 'string' ? t.default : c.name;
+    // A contract name is a useful showcase fallback only when the component
+    // actually exposes a visible children-text channel. Geometry-only roots
+    // (StatusDot, Inline, Stack) otherwise gain invented ink that neither the
+    // React nor canvas surface renders. Text props used solely by attrs (for
+    // example StatusDot's required aria-label) remain attributes, not content.
+    if (!t) return '';
+    return typeof t.default === 'string' ? t.default : c.name;
   };
   const propValue = (name: string): string | undefined => state.subst[name];
   const textValue = (propName: string): string => {
@@ -739,10 +830,14 @@ function renderComponentHtml(
     Object.entries(part.attrs ?? {})
       .map(([attr, value]) => {
         const ref = value.match(/^\{([a-z][\w-]*)\}$/);
-        if (!ref) return ` ${attr}="${escapeHtml(value)}"`;
+        if (!ref) {
+          const v = attr.toLowerCase() === 'role' ? safeRole(value, `${contract.id}.attrs.${attr}`) : value;
+          return ` ${attr}="${escapeHtml(v)}"`;
+        }
         const prop = contract.props.find((p) => p.name === ref[1]);
         const v = propValue(ref[1]) ?? (prop?.default !== undefined ? String(prop.default) : '');
-        return ` ${attr}="${escapeHtml(v)}"`;
+        const safe = attr.toLowerCase() === 'role' ? safeRole(v, `${contract.id}.attrs.${attr}`) : v;
+        return ` ${attr}="${escapeHtml(safe)}"`;
       })
       .join('');
 
@@ -825,7 +920,7 @@ function renderComponentHtml(
       // every visual-parity row 55-97%). The absence is named in the emitted
       // header comment, never painted.
       if (items.length === 0) {
-        return `${pad}<${el} class="${cls}"${attrString(part)}><!-- ${part.slot.name} slot: no content --></${el}>`;
+        return `${pad}<${el} class="${cls}"${attrString(part)}><!-- ${escapeHtmlComment(part.slot.name)} slot: no content --></${el}>`;
       }
       const inner = items
         .map((item) => {
@@ -890,7 +985,7 @@ function renderComponentHtml(
         const v = propValue(ev.toggles.prop);
         if (v === on) checked = ' checked';
         else if (v !== undefined && v !== off) {
-          note = `\n${pad}<!-- value "${v}" is a DOM property (el.indeterminate = true), not an attribute — static HTML shows it via the glyph only. AT reads this input as unchecked here: a script-less surface cannot set the property (declared fidelity limit); the React surface sets it via callback ref -->`;
+          note = `\n${pad}<!-- value "${escapeHtmlComment(v)}" is a DOM property (el.indeterminate = true), not an attribute — static HTML shows it via the glyph only. AT reads this input as unchecked here: a script-less surface cannot set the property (declared fidelity limit); the React surface sets it via callback ref -->`;
         }
       }
       return `${pad}<input class="${cls}"${attrString(part)}${checked}>${note}`;
@@ -954,7 +1049,7 @@ function renderComponentHtml(
       (inferredEl === 'select' && rootParts.some(([, p]) => hostsStructure(p))));
   const el = projected ? 'div' : inferredEl;
   const projectionComment = projected
-    ? `${indent}<!-- root element "${inferredEl}" cannot host the drawn anatomy (${
+    ? `${indent}<!-- root element "${escapeHtmlComment(inferredEl)}" cannot host the drawn anatomy (${
         inferredEl === 'textarea' ? 'raw-text content model — child markup would render as literal text' : VOID_ELEMENTS.has(inferredEl) ? 'void element — children would hoist out of the box' : 'select drops non-option children'
       }); box projected as <div>, element inference stays on the contract -->\n`
     : '';
@@ -970,6 +1065,20 @@ function renderComponentHtml(
       .map((p) => `${k}--${p.name}-${state.subst[p.name]}`),
   ];
   const attrs: string[] = [`class="${classes.join(' ')}"`];
+  for (const [attr, value] of Object.entries(root.attrs ?? {})) {
+    const ref = value.match(/^\{([a-z][\w-]*)\}$/);
+    if (!ref) {
+      const v = attr.toLowerCase() === 'role' ? safeRole(value, `${contract.id}.anatomy.root.attrs.role`) : value;
+      attrs.push(`${attr}="${escapeHtml(v)}"`);
+      continue;
+    }
+    const prop = contract.props.find((p) => p.name === ref[1]);
+    const v = propValue(ref[1]) ?? (prop?.default !== undefined ? String(prop.default) : '');
+    const safe = attr.toLowerCase() === 'role'
+      ? safeRole(v, `${contract.id}.anatomy.root.attrs.role`)
+      : v;
+    attrs.push(`${attr}="${escapeHtml(safe)}"`);
+  }
   const supportsDisabled = ['button', 'input', 'textarea', 'select', 'fieldset'].includes(el);
   for (const p of boolProps(contract)) {
     if (!state.bools[p.name]) continue;
@@ -980,9 +1089,9 @@ function renderComponentHtml(
   const roleByProp = contract.semantics.roleByProp;
   if (roleByProp) {
     const role = roleByProp.map[propValue(roleByProp.prop) ?? ''];
-    if (role) attrs.push(`role="${role}"`);
+    if (role) attrs.push(`role="${escapeHtml(safeRole(role, `${contract.id}.semantics.roleByProp`))}"`);
   } else if (contract.semantics.role && contract.semantics.role !== contract.semantics.element) {
-    attrs.push(`role="${contract.semantics.role}"`);
+    attrs.push(`role="${escapeHtml(safeRole(contract.semantics.role, `${contract.id}.semantics.role`))}"`);
   }
 
   // Bare text directly inside a <select> is DROPPED by HTML parsers — the
@@ -1011,6 +1120,7 @@ export interface EmitHtmlResult {
 }
 
 export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
+  validateStaticHtmlIdentity(contract, ctx);
   const errors: string[] = [];
   validateContract(contract, ctx.contracts, errors, ctx.icons);
   if (errors.length > 0) {
@@ -1070,7 +1180,7 @@ export function emitHtml(contract: Contract, ctx: EmitCtx): EmitHtmlResult {
   }
 
   const header = `<!--
-  ${contract.name} — static HTML+CSS emitted from contract ${contract.id} v${contract.version} by core/emit-html.ts.
+  ${escapeHtmlComment(contract.name)} — static HTML+CSS emitted from contract ${contract.id} v${contract.version} by core/emit-html.ts.
   Token values arrive via CSS custom properties (the same custom-property names the CSS Modules
   bind) — include the token stylesheet (src/styles/tokens.css) on the page or nothing resolves.
   Fidelity: no events, no interactivity beyond CSS states (:hover/:focus-visible/:disabled).

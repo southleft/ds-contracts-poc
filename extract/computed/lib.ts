@@ -383,12 +383,16 @@ export const LOGICAL_ALIASES = new Set([
 export const isFusable = (prop: string): boolean =>
   !prop.startsWith('-webkit-') && !GEOMETRY_CHANNELS.has(prop) && !LOGICAL_ALIASES.has(prop);
 
-/** Channels the replay cannot apply/serialize faithfully via inline styles —
- *  named, excluded from BOTH replay application and the re-read equality
- *  metric (never silently): app-region is unsettable outside app contexts;
- *  text-decoration is a SHORTHAND Chromium enumerates whose re-serialization
- *  reorders (its longhands are captured, applied, and compared individually). */
-export const REPLAY_APPLY_EXCLUDE = new Set(['app-region', 'text-decoration', 'translate-x', 'translate-y']);
+/** Channels the production replay cannot apply/serialize faithfully via
+ * inline styles — named and excluded from BOTH application and re-read
+ * equality (never silently). Platform- or fixture-specific exclusions are
+ * passed explicitly by the caller and never added to this shared set. */
+export const REPLAY_APPLY_EXCLUDE = new Set([
+  'app-region',
+  'text-decoration',
+  'translate-x',
+  'translate-y',
+]);
 
 // ---------------------------------------------------------------------------
 // GATE INVENTORY — fresh mint over the SHIPPED minted tree (task #21)

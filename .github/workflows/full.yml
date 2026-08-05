@@ -1,28 +1,28 @@
-# FULL LANE — the 33-gate sweep. Runs on every pull request and on every push
+# FULL LANE — the comprehensive sweep. Runs on every pull request and every push
 # to main. Slower than `fast`, and the one that has to be green before a merge.
 #
 # WHAT IT COVERS, and what it deliberately does NOT — read this before assuming
 # a green run means "everything was checked".
 #
-# THE ARITHMETIC, so no lane can quietly shrink. Of the 33 gate scripts:
-#   27 run here · 5 run in the fast lane · 1 (deploy:check) is scheduled.
+# THE INVENTORY IS EXECUTABLE, not copied into this comment. `npm run ci:lanes`
+# enumerates the root and every configured workspace manifest, prints each
+# package-qualified gate and its lane(s), and refuses uncovered or stale
+# exclusions. That derived receipt is the authoritative arithmetic.
 #
-# RUNS HERE — 28 steps: the 27 named gates plus verify:package, which is not
-#   one of the 33 but is named in CONTRIBUTING.md and needs the library build
-#   this job already does:
+# RUNS HERE include:
 #     eval, plugin:check, plugin:ui-check, paste:check, mint:check,
 #     emitters:check, dagger:census, closure:check, site:build, figma:fresh,
 #     core:browser-check, extract:computed:ceiling:check, verify:package,
-#     and the fifteen extract:figma:*:check gates
+#     and the extract:figma:*:check family
 #     (base, cbds, cbds:batch, cbds:bridge, canvas, dialog, composite, cross,
 #      partstate, tooltip, overlap, wrap, constraints, repeat, theme).
 #
-# RUNS IN THE FAST LANE — 10 steps: the 5 named gates typecheck, docs:check,
-#   capability:fresh, ledger:fresh, publish:check, plus packages/cli typecheck,
-#   .github/scripts typecheck, ci:lanes, verify:catalog and test:onboarding.
+# THE FAST LANE also owns package closure: CLI + Worker tests, measured CLI
+#   source coverage, schema/emitter package checks, Worker/app typechecks, and
+#   scoped lint/format gates. Those checks are not duplicated here.
 #
-# `npm run ci:lanes` (fast lane) re-derives this split from package.json and
-# these files on every run and refuses when a gate is in neither.
+# The fast lane runs `npm run ci:lanes`, which re-derives this split from the
+# manifests and workflow files on every run and refuses when a gate is absent.
 #
 # EXCLUDED BY NAME — no gate in this repository is left to silently not-run:
 #
@@ -57,7 +57,7 @@
 #
 #   · conformance / conformance:capture, extract:figma:gauntlet:live*,
 #     extract:figma:visual, extract:figma:rest, extract:figma:mcp,
-#     roundtrip:code, adherence:aggregate — not among the 33 gate scripts; they
+#     roundtrip:code, adherence:aggregate — not gate-shaped scripts; they
 #     are capture/replay instruments that need either a live Figma file, a
 #     Figma token, or a banked artifact directory that is gitignored. Named
 #     here so their absence is a decision on the record rather than an
@@ -80,13 +80,13 @@
 #
 # HOW A FAILURE REPORTS. Every gate is its own step guarded by
 # `if: !cancelled() && steps.setup.outcome == 'success'`, so one red gate never
-# hides the twenty-seven behind it: all of them run, each reports its own
+# hides the later gates behind it: all of them run, each reports its own
 # conclusion in the checks list, and the job fails at the end.
 # `continue-on-error` is deliberately NOT used — it would paint a failing gate
 # green.
 #
-# MEASURED locally with `npm run ci:lane full` (node v20.19.4, macOS arm64) at
-# 8a5c455 — 28 of 28 green:
+# HISTORICAL TIMING measured locally with `npm run ci:lane full` (node
+# v20.19.4, macOS arm64) at 8a5c455:
 #   npm run eval                              883.1s  (188 of 188 cases)
 #   npm run plugin:check                       11.7s
 #   npm run dagger:census                      10.5s
@@ -123,11 +123,11 @@ jobs:
     timeout-minutes: 60
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: '20.19.4'
+          node-version: "20.19.4"
           cache: npm
           cache-dependency-path: package-lock.json
 
@@ -139,11 +139,11 @@ jobs:
       # if the install fails, `setup` is skipped, every guarded step below
       # evaluates its condition to false, and the job stops honestly.
       #
-      # Everything AFTER this point — browsers, the three artifact builds, and
-      # all 28 gates — carries the same guard, so a failing preparation step
+      # Everything AFTER this point — browsers, artifact builds, and
+      # every later gate — carries the same guard, so a failing preparation step
       # takes down only the gates that genuinely depend on it. An earlier cut of
       # this file put `setup` after the builds; a broken `plugin:zip` would then
-      # have blanked all 28 results and reported nothing about the 26 gates that
+      # have blanked the sweep and reported nothing about the unrelated gates that
       # never touch the plugin.
       - name: install complete
         id: setup
@@ -158,7 +158,7 @@ jobs:
       # than a slow job.
       - name: cache playwright browsers
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        uses: actions/cache@v4
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/ms-playwright
           key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
@@ -175,11 +175,19 @@ jobs:
         run: npx tsx .github/scripts/resolve-browsers.ts
 
       # -------------------------------------------------- artifact builds
-      # All three targets are gitignored, so a fresh checkout does not have
+      # These targets are gitignored, so a fresh checkout does not have
       # them and the gate that consumes each one would refuse BY NAME. That
       # refusal is correct behaviour, which is exactly why these builds are
       # guarded rather than fail-fast: if one breaks, its consumer goes red
       # naming the missing file and the rest of the sweep still reports.
+
+      # Root consumers resolve @ds-contracts/schema through package exports
+      # that point at gitignored dist/. Build it explicitly on clean checkout;
+      # `npm run ci:lane full` prints this prerequisite for local cold trees.
+      - name: build @ds-contracts/schema (clean-checkout resolution)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        env: { CI_LANE_STEP: prep }
+        run: npm --prefix packages/schema run build
 
       # packages/cli/dist/ (.gitignore:3) — dagger:census and paste:check both
       # EXECUTE the built cli.js. dagger-census.ts:72 refuses by name
@@ -316,7 +324,7 @@ jobs:
       # Fifteen separate steps on purpose. They cost ~0.3s each, and a single
       # `npm run a && npm run b && …` chain would stop at the first refusal and
       # hide which of the other fourteen also broke.
-      - name: 'extract:figma:base:check'
+      - name: "extract:figma:base:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:base:check
 
@@ -324,62 +332,62 @@ jobs:
       # see what the engine could not carry; over-merging two distinct failure
       # modes under one stem would be a false receipt, so the check pins both
       # directions (same mode collapses, different modes stay apart).
-      - name: 'extract:figma:gauntlet:noteclass:check'
+      - name: "extract:figma:gauntlet:noteclass:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:gauntlet:noteclass:check
 
-      - name: 'extract:figma:cbds:check'
+      - name: "extract:figma:cbds:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:cbds:check
 
-      - name: 'extract:figma:cbds:batch:check'
+      - name: "extract:figma:cbds:batch:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:cbds:batch:check
 
-      - name: 'extract:figma:cbds:bridge:check'
+      - name: "extract:figma:cbds:bridge:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:cbds:bridge:check
 
-      - name: 'extract:figma:canvas:check'
+      - name: "extract:figma:canvas:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:canvas:check
 
-      - name: 'extract:figma:dialog:check'
+      - name: "extract:figma:dialog:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:dialog:check
 
-      - name: 'extract:figma:composite:check'
+      - name: "extract:figma:composite:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:composite:check
 
-      - name: 'extract:figma:cross:check'
+      - name: "extract:figma:cross:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:cross:check
 
-      - name: 'extract:figma:partstate:check'
+      - name: "extract:figma:partstate:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:partstate:check
 
-      - name: 'extract:figma:tooltip:check'
+      - name: "extract:figma:tooltip:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:tooltip:check
 
-      - name: 'extract:figma:overlap:check'
+      - name: "extract:figma:overlap:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:overlap:check
 
-      - name: 'extract:figma:wrap:check'
+      - name: "extract:figma:wrap:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:wrap:check
 
-      - name: 'extract:figma:constraints:check'
+      - name: "extract:figma:constraints:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:constraints:check
 
-      - name: 'extract:figma:repeat:check'
+      - name: "extract:figma:repeat:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:repeat:check
 
-      - name: 'extract:figma:theme:check'
+      - name: "extract:figma:theme:check"
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:figma:theme:check

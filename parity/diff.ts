@@ -5,6 +5,13 @@
  *   code   ⟷ contract   (React source parsed by parity/extract-code.ts)
  *   figma  ⟷ contract   (snapshots in parity/snapshots/, refreshed by running
  *                        parity/extract-figma.plugin.js in the Figma file)
+ *   figma-canvas ⟷ canvas + contract
+ *                       (per-VARIANT v6 fingerprints — see parity/variant-drift.ts.
+ *                        This is the surface Phase 1's exit criterion names:
+ *                        a hand-made change to a part's layout inside ONE
+ *                        variant. The property-definition sweep below cannot
+ *                        see it — variant axes, booleans and instance swaps
+ *                        are all unchanged by dragging a padding handle.)
  *   figma variables ⟷ tokens/ (the token half of the contract)
  *
  * Classification:
@@ -17,7 +24,7 @@
  *
  * Exit code 1 when drift exists (CI-able). Full report at parity/report.json.
  */
-import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import {
   ContractSchema,
@@ -32,16 +39,53 @@ import {
   type Prop,
 } from '../scripts/contract-schema.js';
 import { extractCode, type CodeExtract } from './extract-code.js';
+import {
+  compileVariantFingerprints,
+  compareSetVariants,
+  notExtractedFinding,
+  type CompiledSet,
+  type FigmaVariantRow,
+  type SnapshotChange,
+} from './variant-drift.js';
+import {
+  SnapshotInputError,
+  parseFigmaComponentsSnapshot,
+  parseFigmaTokensSnapshot,
+} from './snapshot-schema.js';
 
 const ROOT = process.cwd();
 
+/** SNAPSHOT SOURCE + REPORT DESTINATION are overridable so a GATE can drive
+ *  this exact differ over committed fixtures without touching
+ *  parity/snapshots/ or rewriting parity/report.json (which would dirty the
+ *  checkout on every run — the reason `npm run parity` is excluded from every
+ *  lane). Both are PRINTED when set: a knob that silently changes what the
+ *  differ compared is the shape of a false receipt. */
+const SNAPSHOT_DIR_OVERRIDE = process.env.PARITY_SNAPSHOT_DIR ?? null;
+const REPORT_PATH = process.env.PARITY_REPORT ?? path.join(ROOT, 'parity', 'report.json');
+const snapshotPath = (file: string) => {
+  if (SNAPSHOT_DIR_OVERRIDE) {
+    const candidate = path.resolve(ROOT, SNAPSHOT_DIR_OVERRIDE, file);
+    if (existsSync(candidate)) return candidate;
+  }
+  return path.join(ROOT, 'parity', 'snapshots', file);
+};
+if (SNAPSHOT_DIR_OVERRIDE) {
+  console.warn(`⚠ PARITY_SNAPSHOT_DIR=${SNAPSHOT_DIR_OVERRIDE} — snapshots resolved from there first, falling back to parity/snapshots/.`);
+}
+if (process.env.PARITY_REPORT) console.warn(`⚠ PARITY_REPORT=${REPORT_PATH}`);
+
 interface Finding {
-  surface: 'code' | 'figma' | 'figma-tokens';
+  surface: 'code' | 'figma' | 'figma-canvas' | 'figma-tokens';
   classification: 'ahead' | 'behind' | 'mismatch';
   subject: string;
   detail: string;
   proposedPatch?: unknown;
   remedy: string;
+  /** figma-canvas only: the paired snapshot line changes behind the verdict. */
+  lines?: SnapshotChange[];
+  /** figma-canvas only: the machine-readable drift kind. */
+  driftKind?: string;
 }
 
 const findings: Finding[] = [];
@@ -54,6 +98,16 @@ const add = (f: Finding) => findings.push(f);
  *  sync. Reported in its own section, excluded from the exit code — the
  *  moment anchors exist, a missing set is a hard BEHIND again. */
 const pending: Array<{ subject: string; detail: string; remedy: string }> = [];
+
+/** UNMEASURED (v8): a surface the differ could not look at, as distinct from
+ *  a surface it looked at and found clean. Today that is exactly one thing —
+ *  a Figma snapshot taken before parity/extract-figma.plugin.js read the
+ *  canvas fingerprint back, so per-variant drift was never compared. Excluded
+ *  from the exit code (it is not drift, and its remedy is a human running the
+ *  plugin, not a regeneration) but it BLOCKS the "✔ Parity clean" banner:
+ *  saying "clean" over a surface nobody looked at is the false receipt this
+ *  bucket exists to prevent. */
+const unmeasured: Array<{ subject: string; detail: string; remedy: string; driftKind: string }> = [];
 
 const isEnum = (p: Prop): p is Prop & { type: { enum: string[] } } =>
   typeof p.type === 'object' && 'enum' in p.type;
@@ -82,10 +136,43 @@ interface FigmaSet {
   variantCount: number;
   properties: Record<string, FigmaPropertyDef>;
   nestedInstances?: string[];
+  /** v4 transport (parity/extract-figma.plugin.js): the per-variant v6 stamp
+   *  read back off the canvas plus a same-session recompute. ABSENT on every
+   *  snapshot taken before that version — absence is reported as NOT
+   *  EXTRACTED, never as "no drift". */
+  variants?: FigmaVariantRow[];
+  /** v5 trust transport: component-set metadata stamp + same-session read. */
+  setFingerprint?: string | null;
+  setSnapshot?: string[] | null;
+  setLive?: string | null;
+  setLiveSnapshot?: string[] | null;
+  setMeasurementError?: string | null;
+  /** v4 transport: `ds_contracts/contractId` off the set, when marked. */
+  contractId?: string | null;
 }
-const figmaComponents: { sets: FigmaSet[]; fileKey?: string; extractedAt?: number } = JSON.parse(
-  readFileSync(path.join(ROOT, 'parity', 'snapshots', 'figma-components.json'), 'utf8'),
-);
+const loadSnapshot = <T>(
+  file: string,
+  parse: (text: string, file: string) => { value: T; sourceVersion: 'legacy-unversioned' | 1 },
+): T => {
+  const source = snapshotPath(file);
+  try {
+    const parsed = parse(readFileSync(source, 'utf8'), source);
+    if (parsed.sourceVersion === 'legacy-unversioned') {
+      console.warn(`⚠ ${source}: normalized legacy unversioned snapshot to snapshotVersion 1`);
+    }
+    return parsed.value;
+  } catch (error) {
+    const refusal =
+      error instanceof SnapshotInputError
+        ? error.message
+        : `SNAPSHOT_INPUT_REFUSAL: ${source} at $: ${error instanceof Error ? error.message : String(error)}`;
+    console.error(`✖ ${refusal}`);
+    process.exit(2);
+  }
+};
+
+const figmaComponents: { sets: FigmaSet[]; fileKey?: string | null; extractedAt?: number } =
+  loadSnapshot('figma-components.json', parseFigmaComponentsSnapshot);
 interface FigmaVariable {
   name: string;
   type: string;
@@ -93,9 +180,9 @@ interface FigmaVariable {
 }
 const figmaTokens: {
   collections: Array<{ name: string; variables: FigmaVariable[] }>;
-  fileKey?: string;
+  fileKey?: string | null;
   extractedAt?: number;
-} = JSON.parse(readFileSync(path.join(ROOT, 'parity', 'snapshots', 'figma-tokens.json'), 'utf8'));
+} = loadSnapshot('figma-tokens.json', parseFigmaTokensSnapshot);
 
 // ---------------------------------------------------------------------------
 // 0 · snapshot provenance — are these snapshots from the right file, recently?
@@ -555,6 +642,110 @@ for (const contract of contracts) {
 }
 
 // ---------------------------------------------------------------------------
+// 2.5 · figma CANVAS ⟷ canvas stamp + contract — THE PHASE 1 EXIT CRITERION
+// ---------------------------------------------------------------------------
+// Section 2 above compares property DEFINITIONS. A designer who drags a
+// padding handle inside one variant moves none of them, which is why the
+// four-way part-layout edit this section exists for used to project to a
+// byte-identical snapshot entry under "✔ Parity clean".
+//
+// The rules, in full, live in parity/variant-drift.ts. The two that matter
+// here: `live` ≠ `fingerprint` is a HAND EDIT (both computed by the same
+// source in the same Figma session, so no cross-environment noise), and a set
+// with no `variants` array at all is reported as NOT EXTRACTED — an
+// unmeasured surface — never as agreement.
+
+const canvasSets = figmaComponents.sets;
+const withVariants = canvasSets.filter((s) => Array.isArray(s.variants));
+const withoutVariants = canvasSets.filter((s) => !Array.isArray(s.variants));
+
+// ABSENCE IS A NAMED GAP, AND IT IS NOT DRIFT.
+//
+// It goes in its own bucket — the same shape `pending` uses — for a reason
+// worth stating: the exit code of this script answers "is there drift between
+// the surfaces?", and "the differ cannot SEE this surface" is a different
+// question with a different remedy (a human running the plugin in Figma, not
+// a regeneration). Counting it as drift would make `npm run parity` red for a
+// wall-clock reason on every checkout, which is the exact shape that already
+// got this script excluded from every CI lane.
+//
+// What it must NEVER do is disappear into the "✔ Parity clean" banner. So the
+// banner below refuses the word "clean" while this bucket is non-empty, the
+// summary carries the count, and report.json carries the whole finding.
+const gap = notExtractedFinding(withoutVariants.map((s) => s.name), canvasSets.length);
+if (gap) unmeasured.push({ subject: gap.subject, detail: gap.detail, remedy: gap.remedy, driftKind: gap.kind });
+
+if (withVariants.length > 0) {
+  // THE COMPILE IS OPTIONAL AND THE HAND-EDIT COMPARISON IS NOT.
+  //
+  // `live` vs `fingerprint` — the exit criterion — needs no contract at all;
+  // both numbers arrive on the wire. The contract axis needs the engine
+  // bundle, which esbuilds from figma-sync/plugin/engine/entry.ts. Two
+  // callers run this differ in a partial scratch copy that carries
+  // contracts/tokens/scripts/core/parity/src/packages and NOT figma-sync
+  // (site/src/how-replays.ts:135 and evals/run.ts), so the bundle throws
+  // there. Exiting would take the whole differ — including the hand-edit
+  // comparison it does not need — down with it.
+  //
+  // So a failed compile becomes a NAMED unmeasured surface and the rest of
+  // the section runs. What it must not become is a silent skip: without the
+  // bucket entry, an unbuildable engine would read as "the contract agrees
+  // with every variant".
+  let compiled: Map<string, CompiledSet> | null = null;
+  try {
+    compiled = await compileVariantFingerprints(path.join(ROOT, 'contracts'));
+  } catch (e) {
+    unmeasured.push({
+      subject: 'canvas-variant-contract-compile',
+      detail: `the offline contract compile could not run, so canvas stamps were NOT compared against the contracts (the hand-edit comparison below is unaffected — it needs no compile): ${(e as Error).message}`,
+      remedy: 'Run this differ from a full checkout (the engine bundle esbuilds from figma-sync/plugin/engine/entry.ts)',
+      driftKind: 'compile-unavailable',
+    });
+  }
+  const compiledById = new Map<string, CompiledSet>();
+  for (const cs of compiled?.values() ?? []) if (cs.contractId) compiledById.set(cs.contractId, cs);
+
+  for (const set of withVariants) {
+    const match = (set.contractId ? compiledById.get(set.contractId) : undefined) ?? compiled?.get(set.name);
+    for (const f of compareSetVariants({
+      setName: set.name,
+      variants: set.variants,
+      compiled: match,
+      setFingerprint: set.setFingerprint,
+      setSnapshot: set.setSnapshot,
+      setLive: set.setLive,
+      setLiveSnapshot: set.setLiveSnapshot,
+      setMeasurementError: set.setMeasurementError,
+    })) {
+      // Mock-compiled vs live-Figma equality has not yet earned a
+      // compatibility receipt. Keep that axis visible but non-blocking;
+      // stamped-vs-live edits and failed live measurements remain findings.
+      if (f.blocking === false) {
+        unmeasured.push({
+          subject: f.subject,
+          detail: f.detail,
+          remedy: f.remedy,
+          driftKind: 'contract-divergent-informational',
+        });
+        continue;
+      }
+      add({
+        surface: 'figma-canvas',
+        // A hand edit is the canvas holding a fact the contract does not —
+        // AHEAD, the promotion direction. Everything else is a mismatch the
+        // contract is canonical over.
+        classification: f.kind === 'canvas-edited' ? 'ahead' : 'mismatch',
+        subject: f.subject,
+        detail: f.detail,
+        remedy: f.remedy,
+        driftKind: f.kind,
+        ...(f.lines && f.lines.length > 0 ? { lines: f.lines } : {}),
+      });
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // 3 · figma variables ⟷ tokens/
 // ---------------------------------------------------------------------------
 
@@ -701,12 +892,18 @@ for (const f of active) {
   bySurface[f.surface] ??= {};
   bySurface[f.surface][f.classification] = (bySurface[f.surface][f.classification] ?? 0) + 1;
 }
-const summary = { total: active.length, acknowledged: acknowledged.length, pending: pending.length, bySurface };
+const summary = {
+  total: active.length,
+  acknowledged: acknowledged.length,
+  pending: pending.length,
+  unmeasured: unmeasured.length,
+  bySurface,
+};
 
 writeFileSync(
-  path.join(ROOT, 'parity', 'report.json'),
+  REPORT_PATH,
   JSON.stringify(
-    { summary, findings: active, acknowledged, pending, checkedContracts: contracts.map((c) => `${c.id}@${c.version}`) },
+    { summary, findings: active, acknowledged, pending, unmeasured, checkedContracts: contracts.map((c) => `${c.id}@${c.version}`) },
     null,
     2,
   ) + '\n',
@@ -715,6 +912,9 @@ writeFileSync(
 const printFinding = (f: Finding) => {
   console.log(`  [${f.surface} ${f.classification.toUpperCase()}] ${f.subject}`);
   console.log(`    ${f.detail}`);
+  // The snapshot line diff, one line per changed channel — the thing that
+  // makes "canvas-edited" actionable rather than an accusation.
+  for (const c of f.lines ?? []) console.log(`      ${c.what}: ${c.was} → ${c.now}`);
   if (f.proposedPatch) console.log(`    proposed patch: ${JSON.stringify(f.proposedPatch)}`);
   console.log(`    → ${f.remedy}\n`);
 };
@@ -729,8 +929,30 @@ const printPending = () => {
   }
 };
 
+/** The unmeasured section. Printed BEFORE the verdict on purpose: a reader
+ *  who stops at the first line must not stop at a word that overstates what
+ *  was compared. */
+const printUnmeasured = () => {
+  if (unmeasured.length === 0) return;
+  console.log(`  — NOT MEASURED (the differ could not look at this surface; does not fail the check) —\n`);
+  for (const u of unmeasured) {
+    console.log(`  [${u.driftKind.toUpperCase()}] ${u.subject}`);
+    console.log(`    ${u.detail}`);
+    console.log(`    → ${u.remedy}\n`);
+  }
+};
+
 if (active.length === 0 && acknowledged.length === 0) {
-  console.log(`✔ Parity clean — code, Figma, and tokens all match the contract.${pending.length > 0 ? ` (${pending.length} contract(s) pending first sync.)` : ''}`);
+  // "Clean" is a claim about what was COMPARED. While anything sits in the
+  // unmeasured bucket, this line says what it did and did not look at.
+  if (unmeasured.length > 0) {
+    console.log(
+      `⚠ No drift on the surfaces the differ could compare — but ${unmeasured.length} surface(s) were NOT MEASURED, so this is not a clean bill of health:`,
+    );
+    printUnmeasured();
+  } else {
+    console.log(`✔ Parity clean — code, Figma, and tokens all match the contract.${pending.length > 0 ? ` (${pending.length} contract(s) pending first sync.)` : ''}`);
+  }
   printPending();
   process.exit(0);
 }
@@ -760,6 +982,7 @@ if (acknowledged.length > 0) {
     console.log(`  …and ${acknowledged.length - MAX_CONSOLE_FINDINGS} more acknowledged (see parity/report.json)\n`);
   }
 }
+printUnmeasured();
 printPending();
 
 process.exit(active.length > 0 ? 1 : 0);

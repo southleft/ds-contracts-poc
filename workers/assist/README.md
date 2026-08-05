@@ -161,31 +161,47 @@ transport outlived it in both directions:
 
 | Route | Who | What |
 |---|---|---|
-| `POST /bridge/session` | anyone, any origin (per-IP capped) — the code is minted where the human is looking, and that now includes the CLI's terminal | mints `{ code, ttlSeconds: 900 }` — 6 chars, crypto-random, alphabet `ABCDEFGHJKMNPQRSTUVWXYZ23456789` (no I/L/O/0/1), ~890M codes |
-| `POST /bridge/:code` | the sender — **any** origin, including the plugin's `null` and the CLI's none | uploads the payload while the session is open, kind-tagged by envelope (`dump` / `contracts-bundle` / `proposal` — envelope checked, contents never inspected); last write wins; `404` on wrong/expired code, `413` over 4MB, `400` non-JSON or malformed envelope |
-| `GET /bridge/:code` | the receiver — **any** origin for bundle and proposal payloads (the plugin fetches with `Origin: null`, `figma receive` with none); `dump` payloads stay playground-origin-gated (the sensitive direction) | `{ status: "waiting" }` until upload; then `{ status: "delivered", kind, dump }` **once** — the KV keys are deleted on delivery; afterwards `410` |
+| `POST /bridge/session` | anyone, any origin (per-IP capped) — the code is minted where the human is looking, and that now includes the CLI's terminal | mints `{ code, readCapability, ttlSeconds: 900 }`; the code is 6 crypto-random chars and `readCapability` is an independent 192-bit secret used only for design-dump reads |
+| `POST /bridge/:code` | the sender — **any** origin, including the plugin's `null` and the CLI's none | uploads the payload while the session is open; payload text and kind share one atomic KV envelope (`dump` / `contracts-bundle` / `proposal` — envelope checked, contents never inspected); last write wins; `404` on wrong/expired code, `413` over 4MB, `400` non-JSON or malformed envelope |
+| `GET /bridge/:code` | the receiver; bundle/proposal reads need the pairing code, while design-dump reads additionally send `X-Bridge-Read-Capability` | `{ status: "waiting" }` until upload; then `{ status: "delivered", kind, dump }` **once** — all payload/session/capability keys are deleted on delivery; afterwards `410` |
 
-On every leg the **pairing code is the auth**: unguessable at 15-minute
-one-time-read scale, rendered only where a human is looking. An origin gate
-would gate nothing on the routes that dropped it — a Figma plugin's fetch
-arrives with `Origin: null` (sandboxed plugin iframe) and a CLI's with no
-`Origin` at all — so only the design-dump read keeps its playground gate.
+The pairing code authorizes uploads and bundle/proposal reads. A design dump
+has a separate 192-bit read capability returned only to the session creator;
+the Worker stores only its SHA-256 digest. **Origin is CORS metadata, never
+authorization**: a non-browser attacker can spoof it. Consequently, even a
+spoofed playground Origin plus a disclosed short code cannot retrieve a dump.
+Bundle/proposal flows remain code-only because their Figma/CLI receivers are
+origin-less and already target a human-displayed one-time code.
+
+Client integration requirement: the playground dump receiver must retain
+`readCapability` from `POST /bridge/session` and send it as
+`X-Bridge-Read-Capability` on `GET /bridge/:code`. This lane owns only
+`workers/assist/**`, so the existing playground caller is not changed here;
+deploying this Worker first intentionally fails closed with the named `403`.
+
 Wrong-code and expired-code uploads share one code path (a single KV read,
 one message), so the errors are not timing-distinguishable.
 
 Privacy: dump contents are never logged, never inspected beyond "is JSON /
-under 4MB", and never persisted past one delivery or the 15-minute TTL,
-whichever comes first (KV deletes are best-effort under eventual
-consistency; the TTL bounds any residue). The bridge holds no secrets — the
-plugin never sends a Figma token, and the Anthropic key is untouched by
-these routes.
+under 4MB", and never intentionally persisted past one delivery or the
+15-minute TTL. Payload and kind are one KV value, preventing cross-generation
+kind confusion on resend. Backward-compatible old-key reads infer the kind
+from the payload; stale or unknown markers always take the capability-protected
+dump path. **Low-severity residual:** KV has no compare-and-delete transaction,
+so simultaneous authorized GETs can both observe a payload before either
+best-effort delete becomes visible. The 15-minute TTL bounds residue, and both
+callers already possess the required code/capability. Moving bridge mailboxes
+to a second Durable Object would remove this availability/privacy edge but is
+not justified for this short-lived transport. The bridge holds no secrets — the
+plugin never sends a Figma token, the read capability is stored only as a
+short-lived SHA-256 digest, and the Anthropic key is untouched by these routes.
 
-Caps: its own kill switch (`BRIDGE_ENABLED`, independent of
+Caps: its own fail-closed kill switch (`BRIDGE_ENABLED`, independent of
 `ASSIST_ENABLED` — the bridge costs KV operations only, never model
 tokens) and per-IP daily caps (`BRIDGE_IP_DAILY_LIMIT`, default 40, session
-creation and uploads counted as separate classes). Receiver polls (the
-playground's and the plugin's alike) are deliberately uncounted: KV reads
-against an unguessable code, one every 2.5s for at most 15 minutes.
+creation and uploads counted as separate classes). Receiver polls are capped
+per active code + source IP (`BRIDGE_POLL_DAILY_LIMIT`, default 600): normal
+2.5-second polling for the full 15-minute lifetime uses 360.
 
 ## Standing CI↔Figma channel (`/channel/*`) — the async delivery route
 
@@ -256,8 +272,8 @@ key is the only authentication, so anyone holding it can publish any
 `provenance` they like and the plugin will render it. HMAC-verified
 deliveries with a "verified" badge are docs/18 G1 slice S3, excluded by name
 (the Figma plugin sandbox has no WebCrypto for an end-to-end in-plugin
-check). Also absent by design: no Durable Objects, no cron, no server push,
-no webhook out, no multi-channel management or revoke endpoint (revoking =
+check). Also absent from the channel by design: no Durable Object coordination,
+no cron, no server push, no webhook out, no multi-channel management or revoke endpoint (revoking =
 stop publishing and let the 30 days run out, or claim a new pair).
 
 ## Hard caps & abuse resistance
@@ -267,35 +283,39 @@ stop publishing and let the 30 days run out, or claim a new pair).
 | Kill switch (`ASSIST_ENABLED`) | ships `"false"` | `503` — "assist is switched off — the owner has not enabled the shared budget yet" |
 | CORS | playground origin + `*.pages.dev` previews only; no-Origin (curl) refused | `403` |
 | Per-IP daily cap (`ASSIST_IP_DAILY_LIMIT`) | 5/day per endpoint class (each endpoint is its own class) | `429` |
-| Global daily token budget (`ASSIST_DAILY_TOKEN_BUDGET`) | 600,000 tokens/day (input+output, all visitors) | `429` — "daily assist budget spent — bring your own key in the Describe tab pattern, or try tomorrow" |
+| Global daily token reservation budget (`ASSIST_DAILY_TOKEN_BUDGET`) | 600,000 conservative tokens/day (UTF-8 input bytes + endpoint `max_tokens`) | `429` — "daily assist budget spent — bring your own key in the Describe tab pattern, or try tomorrow" |
 | Per-call output cap | `max_tokens` 1024 / 4096 / 2048 / 8192 | enforced by the API |
 | Body size | 320KB (repo-profile samples cap separately at 200KB; fix-contract contracts at 64KB serialized) | `413` / `400` |
-| Bridge kill switch (`BRIDGE_ENABLED`) | ships `"true"` — KV only, no model tokens | `503` |
-| Bridge per-IP daily cap (`BRIDGE_IP_DAILY_LIMIT`) | 40/day, session + upload as separate classes; polls uncounted | `429` |
-| Channel kill switch (`CHANNEL_ENABLED`) | ships `"true"` — KV only, no model tokens; independent of both switches above | `503` |
+| Bridge kill switch (`BRIDGE_ENABLED`) | ships `"false"` — public payload transport is enabled deliberately | `503` |
+| Bridge per-IP daily cap (`BRIDGE_IP_DAILY_LIMIT`) | 40/day, session + upload as separate classes | `429` |
+| Bridge poll cap (`BRIDGE_POLL_DAILY_LIMIT`) | 600/day per active code + source IP | `429` |
+| Channel kill switch (`CHANNEL_ENABLED`) | ships `"false"` — public payload transport is enabled deliberately | `503` |
 | Channel claim cap (`CHANNEL_CLAIM_IP_DAILY_LIMIT`) | 10/day **per IP** — the only IP-keyed channel counter (no channel exists yet at claim time) | `429` |
 | Channel publish cap (`CHANNEL_PUBLISH_DAILY_LIMIT`) | 200/day **per channel**, never per IP (CI runners churn addresses); reads uncounted | `429` |
 | Bridge / channel body size | 4MB of JSON text each | `413` |
 
 Ordering: CORS → kill switch → route → validation → **cache** (repo-profile
 hits cost zero tokens and burn no quota) → per-IP → budget → one model call.
-The per-IP slot is reserved *before* the call; the budget is checked before
-and charged with *actual* usage after, so the worst overshoot is one request's
-`max_tokens`. KV counters are read-modify-write (not atomic) and eventually
-consistent — a parallel burst can slip a few requests past a line. Accepted:
-these are abuse dampeners with bounded overshoot, not billing-grade metering.
+The per-IP slot and a conservative maximum request reservation are written
+*before* the call. The reservation is UTF-8 bytes for the compiled prompt,
+tool, and user data (one token per byte is deliberately conservative), plus
+the endpoint's hard `max_tokens` and envelope headroom. Reservations are not
+refunded, so accounting is monotonic and conservative. A per-UTC-day
+`BudgetCoordinator` Durable Object admits each reservation inside a storage
+transaction. Concurrent requests therefore cannot push admitted reservations
+past `ASSIST_DAILY_TOKEN_BUDGET`. A missing binding, coordinator error, or
+malformed response fails closed with the existing named budget refusal.
 
 ### Budget math
 
-`ASSIST_DAILY_TOKEN_BUDGET = 600000` is the **~$10/day equivalent the owner
-approved**, at Opus 4.8 pricing ($5/MTok input, $25/MTok output), counting
-input + output against one counter:
+`ASSIST_DAILY_TOKEN_BUDGET = 600000` is the owner-approved ceiling in
+**conservative reservation units**, not an exact usage meter. At Opus 4.8
+pricing ($5/MTok input, $25/MTok output), 600K actual tokens would cost:
 
 - Even input/output mix: 600K × $15/MTok ≈ **$9/day**.
 - Typical assist traffic is input-heavy (listings and samples in, small
   forced-tool JSON out), so most days land nearer **$5–7**.
-- Theoretical ceiling (every token an output token — impossible given the
-  per-call `max_tokens` vs. large inputs): $15.
+- Theoretical ceiling (every actual token an output token): $15.
 
 Per-request estimates at the same pricing:
 
@@ -306,7 +326,8 @@ Per-request estimates at the same pricing:
 | repo-profile | ~15–30K in + ≤2K out ≈ **$0.10–0.20** | 200KB samples + full tree ≈ $0.45 — then cached 7 days: **$0** |
 | fix-contract | ~8–20K in + 2–6K out ≈ **$0.08–0.25** | 64KB contract + 3000 paths + 8K out ≈ **$0.45** |
 
-At the defaults, the budget covers roughly 30–100 fresh Opus calls/day.
+Because one UTF-8 byte is reserved as one token, admitted throughput is lower
+than these actual-token estimates; that over-reservation is the safety margin.
 
 ## Prompt-injection posture
 
@@ -343,7 +364,11 @@ npx wrangler kv namespace create ASSIST_KV
 # 2. Put the server-held key (Worker secret — never in wrangler.toml or vars)
 npx wrangler secret put ANTHROPIC_API_KEY
 
-# 3. Deploy
+# 3. First rollout only: keep ASSIST_ENABLED=false through the next UTC day
+#    boundary. The old day's ephemeral `budget:<day>` KV counter is not copied
+#    into Durable Object storage; waiting prevents a same-day budget reset.
+#    Deploy. Wrangler applies the committed v1-budget-coordinator Durable
+#    Object SQLite migration and creates the BUDGET_COORDINATOR binding.
 npx wrangler deploy
 
 # 4. Enable — owner has approved flipping this immediately at deploy time:
@@ -358,13 +383,15 @@ Config surface, all optional except the first two:
 |---|---|---|---|
 | `ANTHROPIC_API_KEY` | secret | — | server-held key |
 | `ASSIST_KV` | KV binding | — | counters + profile cache |
+| `BUDGET_COORDINATOR` | Durable Object binding | — | atomic per-day global model-budget reservations; migration tag `v1-budget-coordinator` |
 | `ASSIST_ENABLED` | var | `"false"` | kill switch; only `"true"` serves |
 | `ASSIST_IP_DAILY_LIMIT` | var | `"5"` | per-IP, per-endpoint-class, per UTC day |
-| `ASSIST_DAILY_TOKEN_BUDGET` | var | `"600000"` | global tokens/day ≈ $10 (see budget math) |
+| `ASSIST_DAILY_TOKEN_BUDGET` | var | `"600000"` | conservative reservation units/day (see budget math) |
 | `ASSIST_DEV_ORIGIN` | var | unset | exact-match extra origin for local dev, e.g. `http://localhost:5173` |
-| `BRIDGE_ENABLED` | var | `"true"` | pairing-bridge kill switch, independent of assist |
+| `BRIDGE_ENABLED` | var | `"false"` | pairing-bridge kill switch, independent of assist |
 | `BRIDGE_IP_DAILY_LIMIT` | var | `"40"` | per-IP, per bridge class, per UTC day |
-| `CHANNEL_ENABLED` | var | `"true"` | standing-channel kill switch, independent of both above |
+| `BRIDGE_POLL_DAILY_LIMIT` | var | `"600"` | GET polls per active code + source IP |
+| `CHANNEL_ENABLED` | var | `"false"` | standing-channel kill switch, independent of both above |
 | `CHANNEL_CLAIM_IP_DAILY_LIMIT` | var | `"10"` | per-IP channel MINTS per UTC day |
 | `CHANNEL_PUBLISH_DAILY_LIMIT` | var | `"200"` | publishes per CHANNEL per UTC day (not per IP) |
 
@@ -394,8 +421,9 @@ network. Covered:
 - Kill switch: unset and `"false"` both answer the named 503.
 - Routing/validation: 404, 405, non-JSON 400, named 400s, sample-size cap.
 - Per-IP cap: N+1 → 429 (named), other IPs unaffected.
-- Budget: pre-spent day → named 429 with no model call; usage accrual from
-  mocked `usage`; the bounded-overshoot semantics.
+- Budget: pre-spent day → named 429 with no model call; missing/unavailable
+  coordinator fails closed; parallel requests contend through a race-capable
+  transactional fake and prove admitted reservations never exceed the budget.
 - Happy paths for all four endpoints: exact Anthropic request shape (model,
   `max_tokens`, forced `tool_choice`, `thinking: disabled`, key in header
   only), response shape, the `{ wrapper }` tool-input envelope unwrapping,
@@ -406,15 +434,17 @@ network. Covered:
   `{ contract: { contract } }` unwrapping and flat-contract salvage, the
   named-400/413 refusal table, per-IP class isolation from the other
   endpoints, the spent-budget short-circuit (zero model calls), and the
-  non-object-output 502 with usage still charged.
-- Plugin bridge (`test/bridge.test.ts`): code shape/alphabet, the full
+  non-object-output 502 with its conservative reservation retained.
+- Plugin bridge (`test/bridge.test.ts`): code shape/alphabet plus independent
+  192-bit read-capability shape/uniqueness, the full
   session lifecycle (create → waiting → null-origin upload → delivered once
   → 410), lowercase-code normalization, last-write-wins re-send, wrong and
   malformed codes by name, expired-session refusal, the 15-minute
   `expirationTtl` on every write, the 4MB cap, non-JSON refusal, per-IP
-  caps per class with uncounted polls, the asymmetric origin gates
-  (playground-only DUMP reads vs. any-origin sessions, uploads and
-  bundle/proposal reads, `*` preflight), the kind-tagged deliveries
+  caps per class plus bounded per-code/IP polling, adversarial spoofed-Origin
+  and missing/wrong-capability dump reads, code-only bundle/proposal reads,
+  any-origin CORS and `*` preflight, atomic payload+kind envelopes,
+  stale/unknown legacy kind downgrade guards, the kind-tagged deliveries
   (contracts-bundle and proposal envelopes checked, byte-identical arrival),
   the independent kill switch, and 405s. Bridge routes never touch the
   Anthropic transport (the mock throws if reached).
@@ -439,9 +469,13 @@ network. Covered:
   surfaces share one KV without disturbing each other. Channel routes never
   touch the Anthropic transport (the mock throws if reached).
 
+The configured model identifier is asserted from the mocked Anthropic request
+shape (`claude-opus-4-8`); tests do not use or request a live secret.
+
 **Not covered — needs live infra:** real workerd runtime behavior
 (`wrangler dev` locally / `wrangler deploy` + smoke request are the check),
 real KV consistency/TTL expiry, Cloudflare's actual `CF-Connecting-IP`
-injection, and real Anthropic responses (tool-call quality, actual token
-counts, real envelope behavior). The `usage`-driven budget accounting is
-tested against mocked numbers only.
+injection, and real Anthropic responses (model availability, tool-call
+quality, actual token counts, real envelope behavior). Live model verification
+is a manual deploy smoke requiring the owner's secret and is deliberately not
+performed here.

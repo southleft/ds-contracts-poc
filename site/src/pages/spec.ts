@@ -169,6 +169,7 @@ function contractPage(): { route: string; html: string } {
           anatomy: `The named part tree where all styling decisions live — see <a href="/spec/anatomy/">Anatomy &amp; parts</a>.`,
           a11y: 'Executable accessibility requirements — see below.',
           anchors: 'Per-side identity anchors — see below.',
+          provenance: 'Optional deterministic source/canonical revision evidence and stale-source adoption state — see below.',
         }),
     ),
     section(
@@ -183,6 +184,21 @@ function contractPage(): { route: string; html: string } {
         shippingExample('button.contract.json', {
           paths: ['id', 'name', 'version', 'status', 'anchors'],
         }),
+    ),
+    section(
+      'provenance',
+      'Provenance — stale-source protection',
+      ['generated', 'curated'],
+      `<p><code>provenance</code> is optional so pre-RC contracts remain valid. Once present, it makes an approved design change impossible to overwrite silently with an unchanged code extraction. <code>canonicalRevision</code> is a SHA-256 of the contract with the provenance block removed; <code>source.revision</code> hashes normalized, contract-relevant extraction facts rather than filesystem paths.</p>` +
+        fieldList(unwrap((ContractSchema.shape as Record<string, AnySchema>).provenance).schema, {
+          version: 'Provenance record version. v1 is the only accepted spelling.',
+          canonicalRevision: 'Deterministic <code>sha256:…</code> of the canonical contract content, excluding this provenance block.',
+          source: '<code>{ kind, adapter, revision }</code> identifies whether code or design produced the current canonical revision and pins the normalized source facts.',
+          awaitingCodeAdoption: 'Present after a reviewed design-led change. It records the accepted design revision and the last code-source revision; an unchanged code extraction that would revert the design change is refused by name.',
+        }) +
+        fidelity(
+          `<p><strong>Boundary:</strong> the schema validates the record shape. Content hashes and stale-source transitions are verified at promotion, proposal, bundle, and publication boundaries by <code>core/contract-provenance.ts</code>. Removing provenance from an adopted contract is not a supported way to bypass a refusal.</p>`,
+        ),
     ),
     section(
       'a11y',
