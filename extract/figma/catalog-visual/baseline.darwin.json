@@ -1,4 +1,6 @@
 {
+ "platform": "darwin",
+ "architecture": "arm64",
  "generatedAt": "2026-08-05T01:36:33.307Z",
  "headCommit": "014ce3b293e4aab9e8a09d0ae10bbecac17bb094",
  "epsilonPp": 0.1,

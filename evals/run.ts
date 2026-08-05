@@ -4066,6 +4066,12 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         if (errs.length) throw new Error('committed enriched contract fails validateContract: ' + errs[0]);
         const numbers = j(path.join(dir, 'numbers.json'));
         const scorecard = j(path.join(dir, 'scorecard.json'));
+        const platformBaselines = j('evals/fixtures/computed-floor-platform-baseline.json');
+        const platformBaseline = platformBaselines[process.platform];
+        if (!platformBaseline) {
+          throw new Error('computed-floor has no reviewed baseline for platform ' + process.platform);
+        }
+        const replayExtraExclusions = platformBaseline.extraExclusions ?? [];
         for (const [a, b, what] of [
           [scorecard.fusion.contradictions, numbers.bound.contradictions, 'contradictions'],
           [scorecard.fusion.mintedLeaves, numbers.minted.leaves, 'minted leaves'],
@@ -4079,7 +4085,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         const captures = reconstructCaptures(truth);
         if (captures.length !== numbers.captures) throw new Error('reconstruction count ' + captures.length + ' != committed ' + numbers.captures);
         const specs = captures.map((c) => ({ key: c.combo + '__' + c.interaction, root: c.root }));
-        const html = buildReplayHtml(specs, truth._provenance.stage, 'light');
+        const html = buildReplayHtml(specs, truth._provenance.stage, 'light', replayExtraExclusions);
         const tmp = path.join('evals', '.computed-replay.html');
         fs.writeFileSync(tmp, html);
         (async () => {
@@ -4089,18 +4095,53 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
             await page.goto('file://' + path.resolve(tmp));
             await page.waitForFunction('window.__READY === true');
             await page.evaluate('document.fonts.ready');
-            const reread = await rereadEquality((js) => page.evaluate(js), specs, truth._provenance.channels);
-            if (reread.pct < 99.9) throw new Error('replay computed equality ' + reread.pct.toFixed(3) + '% below the 99.9% floor');
-            if (reread.pct < numbers.replayComputedEquality.pct - 0.05) {
-              throw new Error('replay equality regressed vs committed: ' + reread.pct.toFixed(3) + '% vs ' + numbers.replayComputedEquality.pct.toFixed(3) + '%');
+            const reread = await rereadEquality(
+              (js) => page.evaluate(js),
+              specs,
+              truth._provenance.channels,
+              replayExtraExclusions,
+            );
+            if (reread.cellsCompared !== platformBaseline.cellsCompared) {
+              throw new Error(
+                'replay denominator drifted on ' + process.platform + ': ' +
+                reread.cellsCompared + ' vs reviewed ' + platformBaseline.cellsCompared,
+              );
             }
-            console.log('computed-floor replay: ' + reread.cellsMatched + '/' + reread.cellsCompared + ' cells (' + reread.pct.toFixed(3) + '%) across ' + specs.length + ' captures');
+            if (JSON.stringify(reread.namedExclusions) !== JSON.stringify(platformBaseline.namedExclusions)) {
+              throw new Error(
+                'replay exclusion inventory drifted on ' + process.platform + ': ' +
+                JSON.stringify(reread.namedExclusions) + ' vs reviewed ' +
+                JSON.stringify(platformBaseline.namedExclusions),
+              );
+            }
+            if (reread.pct < 99.9) {
+              throw new Error(
+                'replay computed equality ' + reread.pct.toFixed(6) +
+                '% below the platform-independent 99.9% correctness floor; mismatches ' +
+                JSON.stringify(reread.topMismatchedChannels),
+              );
+            }
+            const platformDelta = Math.abs(reread.pct - platformBaseline.pct);
+            if (platformDelta > platformBaseline.tolerancePp) {
+              throw new Error(
+                'replay equality drifted on ' + process.platform + ': ' + reread.pct.toFixed(3) +
+                '% vs reviewed ' + Number(platformBaseline.pct).toFixed(3) +
+                '% (delta ' + platformDelta.toFixed(3) + 'pp, tolerance ' + platformBaseline.tolerancePp + 'pp)',
+              );
+            }
+            console.log(
+              'computed-floor replay: ' + reread.cellsMatched + '/' + reread.cellsCompared +
+              ' cells (' + reread.pct.toFixed(6) + '%) across ' + specs.length +
+              ' captures on ' + process.platform + '; mismatches ' +
+              JSON.stringify(reread.topMismatchedChannels),
+            );
           } finally { await browser.close(); fs.rmSync(tmp, { force: true }); }
         })().catch((e) => { console.error(e); process.exit(1); });
       `]);
       if (probe.status !== 0 || !probe.out.includes('computed-floor replay:')) {
         throw new Error(`computed-floor gate failed:\n${probe.out}`);
       }
+      console.log(probe.out.split('\n').find((line) => line.includes('computed-floor replay:')));
     },
   },
   {

@@ -40,7 +40,7 @@
  *   2. An INVARIANT pixels cannot express (see § THE INVARIANT below), which
  *      is what catches the both-surfaces-wrong class.
  *
- * WHAT IS COMMITTED. Scores, not images: baseline.json carries one row per
+ * WHAT IS COMMITTED. Scores, not images: baseline.<platform>.json carries one row per
  * cell — {status, masked, unmasked, sizeCss, sizeCanvas, causeClass,
  * invariant} — at ε 0.1pp, and `--write-baseline` is the only thing that
  * moves it. That is what makes the reference REGENERATABLE by a stranger's
@@ -84,14 +84,26 @@ import { loadCatalogWorld, catalogCells, REPO, type CatalogCell } from './world.
 import type { ComponentData } from '../../../core/emit-figma-script.js';
 
 const HERE = path.resolve(new URL('.', import.meta.url).pathname);
-const BASELINE = path.join(HERE, 'baseline.json');
-const RECEIPTS = path.join(HERE, 'receipts');
+const runtimePlatform = process.platform;
+if (runtimePlatform !== 'darwin' && runtimePlatform !== 'linux') {
+  throw new Error(`catalog-visual: no reviewed baseline platform for ${runtimePlatform}`);
+}
+const PLATFORM: 'darwin' | 'linux' = runtimePlatform;
+const ARCHITECTURE = process.arch;
+if (
+  (PLATFORM === 'darwin' && ARCHITECTURE !== 'arm64') ||
+  (PLATFORM === 'linux' && ARCHITECTURE !== 'x64')
+) {
+  throw new Error(`catalog-visual: no reviewed baseline for ${PLATFORM}/${ARCHITECTURE}`);
+}
+const BASELINE = path.join(HERE, `baseline.${PLATFORM}.json`);
+const RECEIPTS = path.join(HERE, 'receipts', PLATFORM);
 
-/** Allowed per-row masked-score drift vs baseline.json, in percentage points.
- *  Same machine, same Chromium, same fonts → scores reproduce; this absorbs
- *  antialiasing jitter only. It is NOT a fidelity tolerance, and it is
- *  two-sided: an IMPROVEMENT beyond ε fails too, so a fix has to be recorded
- *  rather than silently widening the band it was measured against. */
+/** Allowed per-row score drift vs the current platform's baseline, in
+ *  percentage points. Linux and macOS use separate committed references:
+ *  pinned Chromium + Inter still produce different font metrics/rasterization
+ *  across operating systems. Within one platform this absorbs antialiasing
+ *  jitter only. It is NOT a fidelity tolerance, and it is two-sided. */
 const EPSILON_PP = 0.1;
 
 /** Ink floors for the blank-cell invariant (canvas-gate run.ts:401-409). */
@@ -343,6 +355,8 @@ interface BaselineRow {
   invariant: string[];
 }
 interface Baseline {
+  platform: 'darwin' | 'linux';
+  architecture: string;
   generatedAt: string;
   headCommit: string | null;
   epsilonPp: number;
@@ -705,6 +719,8 @@ async function main(): Promise<void> {
   // ------------------------------------------------------------ baseline
   if (write) {
     const baseline: Baseline = {
+      platform: PLATFORM,
+      architecture: ARCHITECTURE,
       generatedAt: new Date().toISOString(),
       headCommit: headCommit(),
       epsilonPp: EPSILON_PP,
@@ -751,10 +767,20 @@ async function main(): Promise<void> {
 
   // 2. the scores, against the committed baseline.
   if (!existsSync(BASELINE)) {
-    console.error(`\n✖ no baseline.json at ${BASELINE} — run once with --write-baseline`);
+    console.error(`\n✖ no ${PLATFORM} baseline at ${BASELINE} — run once on that platform with --write-baseline`);
     process.exit(1);
   }
   const baseline = JSON.parse(readFileSync(BASELINE, 'utf8')) as Baseline;
+  if (baseline.platform !== PLATFORM) {
+    console.error(`\n✖ baseline platform ${String(baseline.platform)} does not match runtime ${PLATFORM}`);
+    process.exit(1);
+  }
+  if (baseline.architecture !== ARCHITECTURE) {
+    console.error(
+      `\n✖ baseline architecture ${String(baseline.architecture)} does not match runtime ${ARCHITECTURE}`,
+    );
+    process.exit(1);
+  }
   const eps = baseline.epsilonPp ?? EPSILON_PP;
   console.log(
     `\n── vs baseline ${baseline.generatedAt} (${baseline.headCommit?.slice(0, 7) ?? 'no commit'}), ε ${eps}pp, ` +

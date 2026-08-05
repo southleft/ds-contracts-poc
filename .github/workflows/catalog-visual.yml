@@ -15,7 +15,7 @@
 # and the canvas renderer over core/emit-figma-script.ts's compiled
 # ComponentData — in one browser at one deviceScaleFactor over one token
 # stylesheet, and compares each pair against
-# extract/figma/catalog-visual/baseline.json (scores, not images: ε 0.1pp,
+# extract/figma/catalog-visual/baseline.linux.json (scores, not images: ε 0.1pp,
 # two-sided). It also runs a non-pixel invariant that a screenshot diff cannot
 # express — see that directory's README.md.
 #

@@ -1,0 +1,1787 @@
+{
+ "platform": "linux",
+ "architecture": "x64",
+ "generatedAt": "2026-08-05T03:51:37.503Z",
+ "headCommit": "6f09ba8ca79850a9b32523cda0ee0c1e744db3cc",
+ "epsilonPp": 0.1,
+ "denominator": {
+  "contracts": 51,
+  "cells": 195,
+  "refusals": []
+ },
+ "rows": {
+  "ds.accordion-item :: State=Closed": {
+   "status": "diffed",
+   "masked": 0.08,
+   "unmasked": 3.54,
+   "sizeCss": "254x70",
+   "sizeCanvas": "640x70",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.accordion-item :: State=Open": {
+   "status": "diffed",
+   "masked": 0.04,
+   "unmasked": 2.43,
+   "sizeCss": "254x102",
+   "sizeCanvas": "640x102",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.avatar :: Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.42,
+   "sizeCss": "64x64",
+   "sizeCanvas": "64x64",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.avatar :: Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 6.94,
+   "sizeCss": "48x48",
+   "sizeCanvas": "48x48",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.avatar-group :: AvatarGroup": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.76,
+   "sizeCss": "240x64",
+   "sizeCanvas": "272x64",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.badge :: Variant=Danger": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 7.64,
+   "sizeCss": "122x46",
+   "sizeCanvas": "122x46",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.badge :: Variant=Error": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.55,
+   "sizeCss": "122x46",
+   "sizeCanvas": "122x44",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.badge :: Variant=Info": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.64,
+   "sizeCss": "122x46",
+   "sizeCanvas": "122x44",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.badge :: Variant=Success": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 7.82,
+   "sizeCss": "122x46",
+   "sizeCanvas": "122x46",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.badge :: Variant=Warning": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.3,
+   "sizeCss": "122x46",
+   "sizeCanvas": "122x44",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.banner :: Status=Error, Container=Card": {
+   "status": "diffed",
+   "masked": 0.25,
+   "unmasked": 5.54,
+   "sizeCss": "1028x130",
+   "sizeCanvas": "1280x128",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.banner :: Status=Error, Container=Section": {
+   "status": "diffed",
+   "masked": 0.25,
+   "unmasked": 5.54,
+   "sizeCss": "1028x130",
+   "sizeCanvas": "1280x128",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.banner :: Status=Info, Container=Card": {
+   "status": "diffed",
+   "masked": 0.2,
+   "unmasked": 5.62,
+   "sizeCss": "1028x130",
+   "sizeCanvas": "1280x128",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.banner :: Status=Info, Container=Section": {
+   "status": "diffed",
+   "masked": 0.2,
+   "unmasked": 5.62,
+   "sizeCss": "1028x130",
+   "sizeCanvas": "1280x128",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.banner :: Status=Success, Container=Card": {
+   "status": "diffed",
+   "masked": 0.21,
+   "unmasked": 5.58,
+   "sizeCss": "1028x130",
+   "sizeCanvas": "1280x128",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.banner :: Status=Success, Container=Section": {
+   "status": "diffed",
+   "masked": 0.21,
+   "unmasked": 5.58,
+   "sizeCss": "1028x130",
+   "sizeCanvas": "1280x128",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.banner :: Status=Warning, Container=Card": {
+   "status": "diffed",
+   "masked": 0.18,
+   "unmasked": 5.43,
+   "sizeCss": "1028x130",
+   "sizeCanvas": "1280x128",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.banner :: Status=Warning, Container=Section": {
+   "status": "diffed",
+   "masked": 0.18,
+   "unmasked": 5.43,
+   "sizeCss": "1028x130",
+   "sizeCanvas": "1280x128",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.blockquote :: Blockquote": {
+   "status": "diffed",
+   "masked": 5.94,
+   "unmasked": 5.94,
+   "sizeCss": "160x144",
+   "sizeCanvas": "74x60",
+   "causeClass": "size-delta",
+   "invariant": [
+    "one-surface-blank: css ink 0% vs canvas ink 30.81% (each of its OWN painted box)"
+   ]
+  },
+  "ds.breadcrumb-item :: BreadcrumbItem": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 7,
+   "sizeCss": "92x27",
+   "sizeCanvas": "91x27",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.breadcrumbs :: Breadcrumbs": {
+   "status": "diffed",
+   "masked": 1.98,
+   "unmasked": 20.68,
+   "sizeCss": "490x27",
+   "sizeCanvas": "494x27",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Danger, Size=Large": {
+   "status": "diffed",
+   "masked": 2.87,
+   "unmasked": 2.13,
+   "sizeCss": "208x90",
+   "sizeCanvas": "208x92",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Danger, Size=Medium": {
+   "status": "diffed",
+   "masked": 4.37,
+   "unmasked": 2.75,
+   "sizeCss": "164x72",
+   "sizeCanvas": "164x70",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Danger, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": 4.37,
+   "unmasked": 2.67,
+   "sizeCss": "164x72",
+   "sizeCanvas": "164x70",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Danger, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 28.01,
+   "unmasked": 18.65,
+   "sizeCss": "180x88",
+   "sizeCanvas": "172x75",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.button :: Variant=Danger, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 4.45,
+   "unmasked": 2.76,
+   "sizeCss": "164x72",
+   "sizeCanvas": "164x70",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Danger, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 4.34,
+   "sizeCss": "136x50",
+   "sizeCanvas": "136x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.button :: Variant=Ghost, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "208x90",
+   "sizeCanvas": "208x90",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Ghost, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.33,
+   "sizeCss": "164x72",
+   "sizeCanvas": "164x70",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.button :: Variant=Ghost, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "97x25",
+   "sizeCanvas": "97x25",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Ghost, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 32.69,
+   "unmasked": 21.79,
+   "sizeCss": "180x88",
+   "sizeCanvas": "172x78",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.button :: Variant=Ghost, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.32,
+   "sizeCss": "164x72",
+   "sizeCanvas": "164x70",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.button :: Variant=Ghost, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 4.35,
+   "sizeCss": "136x50",
+   "sizeCanvas": "136x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.button :: Variant=Primary, Size=Large": {
+   "status": "diffed",
+   "masked": 2.87,
+   "unmasked": 2.14,
+   "sizeCss": "208x90",
+   "sizeCanvas": "208x92",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Primary, Size=Medium": {
+   "status": "diffed",
+   "masked": 4.37,
+   "unmasked": 2.72,
+   "sizeCss": "164x72",
+   "sizeCanvas": "164x70",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Primary, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": 4.37,
+   "unmasked": 2.69,
+   "sizeCss": "164x72",
+   "sizeCanvas": "164x70",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Primary, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 32.28,
+   "unmasked": 21.72,
+   "sizeCss": "180x88",
+   "sizeCanvas": "172x78",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.button :: Variant=Primary, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.99,
+   "sizeCss": "164x72",
+   "sizeCanvas": "164x72",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.button :: Variant=Primary, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 4.01,
+   "sizeCss": "136x50",
+   "sizeCanvas": "136x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.button :: Variant=Secondary, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "208x90",
+   "sizeCanvas": "208x90",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Secondary, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.37,
+   "sizeCss": "164x72",
+   "sizeCanvas": "164x70",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.button :: Variant=Secondary, Size=Medium, State=Disabled": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0.32,
+   "sizeCss": "164x72",
+   "sizeCanvas": "164x70",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.button :: Variant=Secondary, Size=Medium, State=Focus Visible": {
+   "status": "diffed",
+   "masked": 31.9,
+   "unmasked": 21.74,
+   "sizeCss": "180x88",
+   "sizeCanvas": "172x78",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.button :: Variant=Secondary, Size=Medium, State=Hover": {
+   "status": "diffed",
+   "masked": 4.35,
+   "unmasked": 2.73,
+   "sizeCss": "164x72",
+   "sizeCanvas": "164x70",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.button :: Variant=Secondary, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 4.46,
+   "sizeCss": "136x50",
+   "sizeCanvas": "136x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.card :: Card": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.96,
+   "sizeCss": "272x148",
+   "sizeCanvas": "640x148",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.chat-message :: Sender=Assistant": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.19,
+   "sizeCss": "109x65",
+   "sizeCanvas": "1264x65",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.chat-message :: Sender=System": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.19,
+   "sizeCss": "109x65",
+   "sizeCanvas": "1264x65",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.chat-message :: Sender=User": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 4.07,
+   "sizeCss": "109x65",
+   "sizeCanvas": "110x67",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.chat-message-metadata :: Status=Delivered": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 14.33,
+   "sizeCss": "120x18",
+   "sizeCanvas": "121x18",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.chat-message-metadata :: Status=Error": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 12.31,
+   "sizeCss": "120x20",
+   "sizeCanvas": "121x20",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.chat-message-metadata :: Status=Read": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 14.33,
+   "sizeCss": "120x18",
+   "sizeCanvas": "121x18",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.chat-message-metadata :: Status=Sending": {
+   "status": "diffed",
+   "masked": 12.59,
+   "unmasked": 18.29,
+   "sizeCss": "120x20",
+   "sizeCanvas": "121x22",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.chat-message-metadata :: Status=Sent": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 14.57,
+   "sizeCss": "118x18",
+   "sizeCanvas": "119x18",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.chat-system-message :: Variant=Default": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 7.89,
+   "sizeCss": "70x23",
+   "sizeCanvas": "70x23",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.chat-system-message :: Variant=Divider": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.49,
+   "sizeCss": "70x23",
+   "sizeCanvas": "640x23",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.checkbox :: Value=Checked, Size=Medium": {
+   "status": "diffed",
+   "masked": 2.89,
+   "unmasked": 12.43,
+   "sizeCss": "480x70",
+   "sizeCanvas": "486x68",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.checkbox :: Value=Checked, Size=Small": {
+   "status": "diffed",
+   "masked": 2.47,
+   "unmasked": 12.46,
+   "sizeCss": "472x70",
+   "sizeCanvas": "478x68",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.checkbox :: Value=Indeterminate, Size=Medium": {
+   "status": "diffed",
+   "masked": 2.63,
+   "unmasked": 12.36,
+   "sizeCss": "480x70",
+   "sizeCanvas": "486x68",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.checkbox :: Value=Indeterminate, Size=Small": {
+   "status": "diffed",
+   "masked": 2.25,
+   "unmasked": 12.4,
+   "sizeCss": "472x70",
+   "sizeCanvas": "478x68",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.checkbox :: Value=Unchecked, Size=Medium": {
+   "status": "diffed",
+   "masked": 3.52,
+   "unmasked": 12.62,
+   "sizeCss": "480x70",
+   "sizeCanvas": "486x68",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.checkbox :: Value=Unchecked, Size=Small": {
+   "status": "diffed",
+   "masked": 3.37,
+   "unmasked": 13.72,
+   "sizeCss": "472x70",
+   "sizeCanvas": "478x66",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.citation :: Variant=Label": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 8.26,
+   "sizeCss": "186x38",
+   "sizeCanvas": "186x36",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.citation :: Variant=Number": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 2.69,
+   "sizeCss": "42x38",
+   "sizeCanvas": "42x38",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.code :: Code": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 13.71,
+   "sizeCss": "214x44",
+   "sizeCanvas": "216x42",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.divider :: Variant=Strong": {
+   "status": "diffed",
+   "masked": 3.03,
+   "unmasked": 3.03,
+   "sizeCss": "96x132",
+   "sizeCanvas": "640x4",
+   "causeClass": "size-delta",
+   "invariant": [
+    "one-surface-blank: css ink 0% vs canvas ink 100% (each of its OWN painted box)"
+   ]
+  },
+  "ds.divider :: Variant=Subtle": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "96x132",
+   "sizeCanvas": "640x2",
+   "causeClass": "size-delta",
+   "invariant": [
+    "one-surface-blank: css ink 0% vs canvas ink 100% (each of its OWN painted box)"
+   ]
+  },
+  "ds.empty-state :: EmptyState": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 11.75,
+   "sizeCss": "672x81",
+   "sizeCanvas": "538x108",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.field :: Field": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 8.87,
+   "sizeCss": "471x70",
+   "sizeCanvas": "476x70",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.heading :: Level=H1, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "142x36",
+   "sizeCanvas": "142x36",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H1, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "127x32",
+   "sizeCanvas": "127x32",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H1, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "112x28",
+   "sizeCanvas": "112x28",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H2, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "142x36",
+   "sizeCanvas": "142x36",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H2, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "127x32",
+   "sizeCanvas": "127x32",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H2, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "112x28",
+   "sizeCanvas": "112x28",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H3, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "142x36",
+   "sizeCanvas": "142x36",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H3, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "127x32",
+   "sizeCanvas": "127x32",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H3, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "112x28",
+   "sizeCanvas": "112x28",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H4, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "142x36",
+   "sizeCanvas": "142x36",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H4, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "127x32",
+   "sizeCanvas": "127x32",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H4, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "112x28",
+   "sizeCanvas": "112x28",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H5, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "142x36",
+   "sizeCanvas": "142x36",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H5, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "127x32",
+   "sizeCanvas": "127x32",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H5, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "112x28",
+   "sizeCanvas": "112x28",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H6, Size=Large": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "142x36",
+   "sizeCanvas": "142x36",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H6, Size=Medium": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "127x32",
+   "sizeCanvas": "127x32",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.heading :: Level=H6, Size=Small": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "112x28",
+   "sizeCanvas": "112x28",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Destructive, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "88x88",
+   "sizeCanvas": "88x88",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Destructive, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "72x72",
+   "sizeCanvas": "72x72",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Destructive, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "56x56",
+   "sizeCanvas": "56x56",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Ghost, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "88x88",
+   "sizeCanvas": "88x88",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Ghost, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "72x72",
+   "sizeCanvas": "72x72",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Ghost, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "56x56",
+   "sizeCanvas": "56x56",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Primary, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "88x88",
+   "sizeCanvas": "88x88",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Primary, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "72x72",
+   "sizeCanvas": "72x72",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Primary, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "56x56",
+   "sizeCanvas": "56x56",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Secondary, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "88x88",
+   "sizeCanvas": "88x88",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Secondary, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "72x72",
+   "sizeCanvas": "72x72",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.icon-button :: Variant=Secondary, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "56x56",
+   "sizeCanvas": "56x56",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.inline :: Gap=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "96x96",
+   "sizeCanvas": "96x96",
+   "causeClass": null,
+   "invariant": [
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
+   ]
+  },
+  "ds.inline :: Gap=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "96x96",
+   "sizeCanvas": "96x96",
+   "causeClass": null,
+   "invariant": [
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
+   ]
+  },
+  "ds.inline :: Gap=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "96x96",
+   "sizeCanvas": "96x96",
+   "causeClass": null,
+   "invariant": [
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
+   ]
+  },
+  "ds.kbd :: Kbd": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 10.01,
+   "sizeCss": "72x46",
+   "sizeCanvas": "76x40",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.list :: Density=Balanced": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.27,
+   "sizeCss": "496x364",
+   "sizeCanvas": "640x362",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.list :: Density=Compact": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.55,
+   "sizeCss": "496x348",
+   "sizeCanvas": "640x346",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.list :: Density=Spacious": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.03,
+   "sizeCss": "496x380",
+   "sizeCanvas": "640x376",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.list-item :: ListItem": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 10.7,
+   "sizeCss": "396x66",
+   "sizeCanvas": "402x66",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.metadata-list :: MetadataList": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.24,
+   "sizeCss": "587x178",
+   "sizeCanvas": "587x176",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.metadata-list-item :: MetadataListItem": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 16.41,
+   "sizeCss": "346x22",
+   "sizeCanvas": "262x22",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.pagination :: Variant=Compact": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 2.55,
+   "sizeCss": "234x28",
+   "sizeCanvas": "234x28",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.pagination :: Variant=Dots": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "134x16",
+   "sizeCanvas": "134x16",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.pagination :: Variant=Pages": {
+   "status": "diffed",
+   "masked": 24.99,
+   "unmasked": 19.34,
+   "sizeCss": "344x54",
+   "sizeCanvas": "316x50",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.progress-bar :: Variant=Accent": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "640x16",
+   "sizeCanvas": "640x16",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.progress-bar :: Variant=Error": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "640x16",
+   "sizeCanvas": "640x16",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.progress-bar :: Variant=Neutral": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "640x16",
+   "sizeCanvas": "640x16",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.progress-bar :: Variant=Success": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "640x16",
+   "sizeCanvas": "640x16",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.progress-bar :: Variant=Warning": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "640x16",
+   "sizeCanvas": "640x16",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.section :: Variant=Muted": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "68x68",
+   "sizeCanvas": "640x68",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.section :: Variant=Section": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "68x68",
+   "sizeCanvas": "640x68",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.side-nav-item :: State=Default": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 6.49,
+   "sizeCss": "209x28",
+   "sizeCanvas": "206x28",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.side-nav-item :: State=Selected": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.49,
+   "sizeCss": "288x66",
+   "sizeCanvas": "640x66",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.skeleton :: Variant=Circle": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "64x64",
+   "sizeCanvas": "64x64",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.skeleton :: Variant=Rect": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "640x64",
+   "sizeCanvas": "640x64",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.skeleton :: Variant=Text": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "240x24",
+   "sizeCanvas": "240x24",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.slider :: Slider": {
+   "status": "diffed",
+   "masked": 9.68,
+   "unmasked": 9.15,
+   "sizeCss": "640x69",
+   "sizeCanvas": "640x71",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.spinner :: Spinner": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "19x19",
+   "sizeCanvas": "19x19",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.stack :: Gap=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "96x96",
+   "sizeCanvas": "96x96",
+   "causeClass": null,
+   "invariant": [
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
+   ]
+  },
+  "ds.stack :: Gap=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "96x96",
+   "sizeCanvas": "96x96",
+   "causeClass": null,
+   "invariant": [
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
+   ]
+  },
+  "ds.stack :: Gap=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "96x96",
+   "sizeCanvas": "96x96",
+   "causeClass": null,
+   "invariant": [
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
+   ]
+  },
+  "ds.status-dot :: Variant=Accent": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "16x16",
+   "sizeCanvas": "16x16",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.status-dot :: Variant=Error": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "16x16",
+   "sizeCanvas": "16x16",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.status-dot :: Variant=Neutral": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "16x16",
+   "sizeCanvas": "16x16",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.status-dot :: Variant=Success": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "16x16",
+   "sizeCanvas": "16x16",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.status-dot :: Variant=Warning": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "16x16",
+   "sizeCanvas": "16x16",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.switch :: Value=Off": {
+   "status": "diffed",
+   "masked": 2.06,
+   "unmasked": 12.89,
+   "sizeCss": "415x70",
+   "sizeCanvas": "420x68",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.switch :: Value=On": {
+   "status": "diffed",
+   "masked": 3.69,
+   "unmasked": 15.03,
+   "sizeCss": "415x70",
+   "sizeCanvas": "420x66",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.tab :: State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 2.25,
+   "sizeCss": "114x66",
+   "sizeCanvas": "114x66",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.tab :: State=Selected": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.74,
+   "sizeCss": "114x66",
+   "sizeCanvas": "114x66",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.tab-list :: TabList": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 2.63,
+   "sizeCss": "608x78",
+   "sizeCanvas": "608x78",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.table :: Density=Comfortable": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 4.03,
+   "sizeCss": "724x332",
+   "sizeCanvas": "960x330",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.table :: Density=Compact": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 4.43,
+   "sizeCss": "724x300",
+   "sizeCanvas": "960x298",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.table-cell :: Density=Comfortable": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 7.73,
+   "sizeCss": "48x22",
+   "sizeCanvas": "50x22",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.table-cell :: Density=Compact": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 7.73,
+   "sizeCss": "48x22",
+   "sizeCanvas": "50x22",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.table-header-cell :: Density=Comfortable": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "98x22",
+   "sizeCanvas": "98x22",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.table-header-cell :: Density=Compact": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 0,
+   "sizeCss": "98x22",
+   "sizeCanvas": "98x22",
+   "causeClass": null,
+   "invariant": []
+  },
+  "ds.table-row :: State=Default": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 13.08,
+   "sizeCss": "563x27",
+   "sizeCanvas": "564x28",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.table-row :: State=Selected": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 4.49,
+   "sizeCss": "720x82",
+   "sizeCanvas": "720x82",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.text-area :: Size=Large": {
+   "status": "diffed",
+   "masked": 1.51,
+   "unmasked": 5.55,
+   "sizeCss": "618x257",
+   "sizeCanvas": "640x175",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.text-area :: Size=Medium": {
+   "status": "diffed",
+   "masked": 1.28,
+   "unmasked": 5.82,
+   "sizeCss": "618x235",
+   "sizeCanvas": "640x155",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.text-area :: Size=Small": {
+   "status": "diffed",
+   "masked": 0.64,
+   "unmasked": 6.5,
+   "sizeCss": "618x201",
+   "sizeCanvas": "640x133",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.text-field :: Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.61,
+   "sizeCss": "628x173",
+   "sizeCanvas": "640x175",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.text-field :: Size=Medium": {
+   "status": "diffed",
+   "masked": 0.02,
+   "unmasked": 6.58,
+   "sizeCss": "588x155",
+   "sizeCanvas": "640x155",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.text-field :: Size=Small": {
+   "status": "diffed",
+   "masked": 0.02,
+   "unmasked": 7.36,
+   "sizeCss": "588x133",
+   "sizeCanvas": "640x133",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.toast :: Type=Error": {
+   "status": "diffed",
+   "masked": 86.91,
+   "unmasked": 86.91,
+   "sizeCss": "80x32",
+   "sizeCanvas": "640x32",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.toast :: Type=Info": {
+   "status": "diffed",
+   "masked": 86.91,
+   "unmasked": 86.91,
+   "sizeCss": "80x32",
+   "sizeCanvas": "640x32",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.token :: Color=Blue, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.85,
+   "sizeCss": "146x50",
+   "sizeCanvas": "146x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Blue, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "118x38",
+   "sizeCanvas": "118x34",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.token :: Color=Blue, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 7.92,
+   "sizeCss": "102x38",
+   "sizeCanvas": "102x38",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Cyan, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.79,
+   "sizeCss": "146x50",
+   "sizeCanvas": "146x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Cyan, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 6.96,
+   "sizeCss": "118x38",
+   "sizeCanvas": "118x38",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Cyan, Size=Small": {
+   "status": "diffed",
+   "masked": 9.49,
+   "unmasked": 7.95,
+   "sizeCss": "102x38",
+   "sizeCanvas": "102x36",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.token :: Color=Default, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.75,
+   "sizeCss": "146x50",
+   "sizeCanvas": "146x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Default, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.21,
+   "sizeCss": "118x38",
+   "sizeCanvas": "118x36",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Default, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 8.1,
+   "sizeCss": "102x38",
+   "sizeCanvas": "102x38",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Gray, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1,
+   "sizeCss": "146x50",
+   "sizeCanvas": "146x48",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Gray, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.17,
+   "sizeCss": "118x38",
+   "sizeCanvas": "118x36",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Gray, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 8.08,
+   "sizeCss": "102x38",
+   "sizeCanvas": "102x38",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Green, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.84,
+   "sizeCss": "146x50",
+   "sizeCanvas": "146x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Green, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 6.96,
+   "sizeCss": "118x38",
+   "sizeCanvas": "118x38",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Green, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.59,
+   "sizeCss": "102x38",
+   "sizeCanvas": "102x36",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Orange, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.74,
+   "sizeCss": "146x50",
+   "sizeCanvas": "146x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Orange, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 6.78,
+   "sizeCss": "118x38",
+   "sizeCanvas": "118x38",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Orange, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.69,
+   "sizeCss": "102x38",
+   "sizeCanvas": "102x36",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Pink, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.66,
+   "sizeCss": "146x50",
+   "sizeCanvas": "146x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Pink, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 6.78,
+   "sizeCss": "118x38",
+   "sizeCanvas": "118x38",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Pink, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.64,
+   "sizeCss": "102x38",
+   "sizeCanvas": "102x36",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Purple, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.78,
+   "sizeCss": "146x50",
+   "sizeCanvas": "146x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Purple, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.14,
+   "sizeCss": "118x38",
+   "sizeCanvas": "118x36",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Purple, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.64,
+   "sizeCss": "102x38",
+   "sizeCanvas": "102x36",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Red, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.78,
+   "sizeCss": "146x50",
+   "sizeCanvas": "146x50",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Red, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.32,
+   "sizeCss": "118x38",
+   "sizeCanvas": "118x36",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Red, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.84,
+   "sizeCss": "102x38",
+   "sizeCanvas": "102x36",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Teal, Size=Large": {
+   "status": "diffed",
+   "masked": 7.64,
+   "unmasked": 4.62,
+   "sizeCss": "146x50",
+   "sizeCanvas": "146x48",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.token :: Color=Teal, Size=Medium": {
+   "status": "diffed",
+   "masked": 8.01,
+   "unmasked": 7.63,
+   "sizeCss": "118x38",
+   "sizeCanvas": "118x36",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.token :: Color=Teal, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 8.05,
+   "sizeCss": "102x38",
+   "sizeCanvas": "102x38",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Yellow, Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 1.01,
+   "sizeCss": "146x50",
+   "sizeCanvas": "146x48",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Yellow, Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 3.01,
+   "sizeCss": "118x38",
+   "sizeCanvas": "118x36",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.token :: Color=Yellow, Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 7.77,
+   "sizeCss": "102x38",
+   "sizeCanvas": "102x38",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.toolbar :: Size=Large": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "116x88",
+   "sizeCanvas": "1280x88",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.toolbar :: Size=Medium": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "116x72",
+   "sizeCanvas": "1280x72",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.toolbar :: Size=Small": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "116x56",
+   "sizeCanvas": "1280x56",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.top-nav :: TopNav": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "132x36",
+   "sizeCanvas": "1280x36",
+   "causeClass": "size-delta",
+   "invariant": []
+  },
+  "ds.top-nav-item :: State=Default": {
+   "status": "diffed",
+   "masked": null,
+   "unmasked": 11.83,
+   "sizeCss": "118x26",
+   "sizeCanvas": "116x23",
+   "causeClass": "empty-slot-geometry",
+   "invariant": []
+  },
+  "ds.top-nav-item :: State=Selected": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 5.51,
+   "sizeCss": "174x66",
+   "sizeCanvas": "174x66",
+   "causeClass": "text-raster",
+   "invariant": []
+  },
+  "ds.typeahead-item :: TypeaheadItem": {
+   "status": "diffed",
+   "masked": 0,
+   "unmasked": 11.08,
+   "sizeCss": "453x65",
+   "sizeCanvas": "460x65",
+   "causeClass": "size-delta",
+   "invariant": []
+  }
+ }
+}

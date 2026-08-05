@@ -270,6 +270,14 @@ export const identityTokens = (id: string, exportName: string): string[] => [
 
 export function namingUnion(outDir: string, log: string): string {
   const parts: string[] = [log];
+  // Quarantined components intentionally have no enriched contract/ledger.
+  // Their refusal survives as these two committed artifacts; excluding them
+  // made clean CI report silent loss while a developer tree passed only
+  // because an ignored capture log happened to name the channel.
+  const refusalMd = path.join(outDir, 'REFUSAL.md');
+  if (existsSync(refusalMd)) parts.push(readFileSync(refusalMd, 'utf8'));
+  const refusalJson = readJson<unknown>(path.join(outDir, 'refusal.json'));
+  if (refusalJson) parts.push(JSON.stringify(refusalJson));
   const ledger = path.join(outDir, 'LEDGER.md');
   if (existsSync(ledger)) parts.push(readFileSync(ledger, 'utf8'));
   const ext = readJson<Record<string, unknown>>(path.join(outDir, 'enriched.extension.json'));
