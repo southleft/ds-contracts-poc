@@ -36,6 +36,7 @@
 import {
   CODE_TARGET_LABELS,
   ContractSchema,
+  assertContractProvenance,
   componentRefsOf,
   createFigmaEngine,
   dumpCapturesHidden,
@@ -43,6 +44,7 @@ import {
   parseTokenSet,
   plannedCodePaths,
   proposeBatchFromDump,
+  markAwaitingCodeAdoption,
   provenanceHeadline,
   provenanceSentence,
   slotsOf,
@@ -53,8 +55,8 @@ import {
   type Contract,
   type TokenCorpus,
   type TokenSetPayload,
-} from '../../../core/index.js';
-import { FINGERPRINT_SRC } from '../../../core/canvas-fingerprint.js';
+} from "../../../core/index.js";
+import { FINGERPRINT_SRC } from "../../../core/canvas-fingerprint.js";
 
 // ---------------------------------------------------------------------------
 // Data baked in at bundle time (scripts/build-plugin-zip.mjs).
@@ -89,14 +91,18 @@ export interface PlainIssue {
 const plain = (headline: string, detail?: string): PlainIssue =>
   detail && detail !== headline ? { headline, detail } : { headline };
 
-const errText = (e: unknown): string => (e instanceof Error ? e.message : String(e));
+const errText = (e: unknown): string =>
+  e instanceof Error ? e.message : String(e);
 
 /** Engine refusals are already named sentences; anything JSON-shaped or
  *  enormous is demoted to detail (the playground's plain-error rule). */
 const plainFromThrow = (prefix: string, e: unknown): PlainIssue => {
   const message = errText(e);
   if (/^\s*[[{"]/.test(message) || message.length > 600) {
-    return plain(`${prefix} failed with a technical error (full text below).`, message);
+    return plain(
+      `${prefix} failed with a technical error (full text below).`,
+      message,
+    );
   }
   return plain(`${prefix}: ${message}`);
 };
@@ -106,7 +112,7 @@ const plainFromThrow = (prefix: string, e: unknown): PlainIssue => {
 // ---------------------------------------------------------------------------
 
 export interface GenerateStep {
-  kind: 'tokens' | 'component' | 'version-marker';
+  kind: "tokens" | "component" | "version-marker";
   /** Plain-words step title for the run log. */
   title: string;
   contractId?: string;
@@ -116,7 +122,7 @@ export interface GenerateStep {
 export type ParsedIncoming =
   | {
       ok: true;
-      kind: 'contract' | 'bundle';
+      kind: "contract" | "bundle";
       contracts: unknown[];
       /** The bundle's foreign token set (name + flat DTCG base + optional
        *  modes/minted) — null when the paste rides the baked repo tokens. */
@@ -145,7 +151,7 @@ export interface UpdateRow {
   contractId: string;
   setName: string;
   version: string;
-  action: 'create' | 'amend' | 'skip' | 'refused';
+  action: "create" | "amend" | "skip" | "refused";
   /** The exact plain-words report line for this contract. */
   line: string;
   nodeId?: string;
@@ -185,7 +191,7 @@ export interface InventoryRow {
   /** 'version-changed': the stamp predates the current fingerprint scheme
    *  (v4→v5 prototype wiring, v5→v6 resolved bindings) — regenerate to re-baseline.
    *  Deliberately NOT 'canvas-edited': that would be a false alarm. */
-  drift: 'in-sync' | 'canvas-edited' | 'unstamped' | 'version-changed' | null;
+  drift: "in-sync" | "canvas-edited" | "unstamped" | "version-changed" | null;
   /** BROWNFIELD: false only on rows a `scanScriptSource()` run kept because
    *  the file made them by hand. The marked-only inventory every existing
    *  caller runs emits `true` on every row. */
@@ -229,7 +235,7 @@ export interface ChannelProvenance {
 
 /** One `GET /channel/<readKey>` answer, as the UI receives it. */
 export interface ChannelDelivery {
-  status: 'current' | 'update';
+  status: "current" | "update";
   seq: number;
   publishedAt: string | null;
   bytes?: number;
@@ -251,7 +257,7 @@ export interface ChannelDelivery {
 export interface ApplyLogEntry {
   /** How the bundle arrived. 'channel' is new this round; the pairing-code
    *  and paste paths are unchanged and do not write entries yet. */
-  source: 'channel' | 'bridge' | 'paste';
+  source: "channel" | "bridge" | "paste";
   /** First 12 characters of the read key — enough to tell two channels
    *  apart, useless as a credential. null for non-channel sources. */
   channel: string | null;
@@ -271,13 +277,14 @@ export interface ApplyLog {
 }
 
 /** Root pluginData key under the ds_contracts namespace. */
-export const APPLY_LOG_KEY = 'applyLog';
+export const APPLY_LOG_KEY = "applyLog";
 /** Entries are capped so the record cannot grow without bound in a file
  *  synced daily for a year. Newest first; the tail falls off. */
 export const APPLY_LOG_MAX_ENTRIES = 50;
 
 /** Channel identity WITHOUT the credential. */
-export const channelFingerprint = (readKey: string): string => String(readKey || '').slice(0, 12);
+export const channelFingerprint = (readKey: string): string =>
+  String(readKey || "").slice(0, 12);
 
 export function emptyApplyLog(): ApplyLog {
   return { version: 1, entries: [] };
@@ -293,29 +300,44 @@ export function parseApplyLog(raw: string | null | undefined): ApplyLog {
   } catch {
     return emptyApplyLog();
   }
-  if (parsed === null || typeof parsed !== 'object' || Array.isArray(parsed)) return emptyApplyLog();
+  if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed))
+    return emptyApplyLog();
   const entries = (parsed as { entries?: unknown }).entries;
   if (!Array.isArray(entries)) return emptyApplyLog();
   const clean: ApplyLogEntry[] = [];
   for (const e of entries) {
-    if (e === null || typeof e !== 'object' || Array.isArray(e)) continue;
+    if (e === null || typeof e !== "object" || Array.isArray(e)) continue;
     const o = e as Record<string, unknown>;
     clean.push({
-      source: o.source === 'channel' || o.source === 'bridge' || o.source === 'paste' ? o.source : 'paste',
-      channel: typeof o.channel === 'string' ? o.channel : null,
-      seq: typeof o.seq === 'number' && Number.isFinite(o.seq) ? o.seq : null,
-      publishedAt: typeof o.publishedAt === 'string' ? o.publishedAt : null,
-      appliedAt: typeof o.appliedAt === 'string' ? o.appliedAt : '',
-      contractIds: Array.isArray(o.contractIds) ? o.contractIds.filter((x): x is string => typeof x === 'string') : [],
-      bytes: typeof o.bytes === 'number' && Number.isFinite(o.bytes) ? o.bytes : null,
+      source:
+        o.source === "channel" || o.source === "bridge" || o.source === "paste"
+          ? o.source
+          : "paste",
+      channel: typeof o.channel === "string" ? o.channel : null,
+      seq: typeof o.seq === "number" && Number.isFinite(o.seq) ? o.seq : null,
+      publishedAt: typeof o.publishedAt === "string" ? o.publishedAt : null,
+      appliedAt: typeof o.appliedAt === "string" ? o.appliedAt : "",
+      contractIds: Array.isArray(o.contractIds)
+        ? o.contractIds.filter((x): x is string => typeof x === "string")
+        : [],
+      bytes:
+        typeof o.bytes === "number" && Number.isFinite(o.bytes)
+          ? o.bytes
+          : null,
     });
   }
   return { version: 1, entries: clean };
 }
 
 /** Newest first, capped. PURE — returns a new log. */
-export function appendApplyEntry(log: ApplyLog, entry: ApplyLogEntry): ApplyLog {
-  return { version: 1, entries: [entry, ...log.entries].slice(0, APPLY_LOG_MAX_ENTRIES) };
+export function appendApplyEntry(
+  log: ApplyLog,
+  entry: ApplyLogEntry,
+): ApplyLog {
+  return {
+    version: 1,
+    entries: [entry, ...log.entries].slice(0, APPLY_LOG_MAX_ENTRIES),
+  };
 }
 
 /** The highest delivery this FILE has applied from THIS channel. null = it
@@ -323,11 +345,15 @@ export function appendApplyEntry(log: ApplyLog, entry: ApplyLogEntry): ApplyLog 
  *  nothing is claimed. Seq numbers from a DIFFERENT channel are deliberately
  *  ignored: two channels number independently, so comparing them would
  *  manufacture a warning out of nothing. */
-export function lastAppliedSeq(log: ApplyLog, channel: string | null): number | null {
+export function lastAppliedSeq(
+  log: ApplyLog,
+  channel: string | null,
+): number | null {
   if (!channel) return null;
   let best: number | null = null;
   for (const e of log.entries) {
-    if (e.source !== 'channel' || e.channel !== channel || e.seq === null) continue;
+    if (e.source !== "channel" || e.channel !== channel || e.seq === null)
+      continue;
     if (best === null || e.seq > best) best = e.seq;
   }
   return best;
@@ -361,7 +387,7 @@ export function channelFreshness(
   const last = lastAppliedSeq(log, channel);
   const seq = Number.isFinite(delivery.seq) ? delivery.seq : 0;
   if (last === null || seq > last) {
-    return { stale: false, line: '', lastAppliedSeq: last, seq };
+    return { stale: false, line: "", lastAppliedSeq: last, seq };
   }
   const line =
     seq === last
@@ -372,19 +398,22 @@ export function channelFreshness(
 
 /** "4 minutes ago" / "2 days ago". Presentation only — never an artifact,
  *  so a clock difference can never change a byte anyone commits. */
-export function relativeWhen(iso: string | null | undefined, now: Date): string {
-  if (!iso) return 'at an unrecorded time';
+export function relativeWhen(
+  iso: string | null | undefined,
+  now: Date,
+): string {
+  if (!iso) return "at an unrecorded time";
   const then = Date.parse(iso);
-  if (!Number.isFinite(then)) return 'at an unrecorded time';
+  if (!Number.isFinite(then)) return "at an unrecorded time";
   const secs = Math.round((now.getTime() - then) / 1000);
-  if (secs < 0) return 'just now';
-  if (secs < 60) return 'just now';
+  if (secs < 0) return "just now";
+  if (secs < 60) return "just now";
   const mins = Math.round(secs / 60);
-  if (mins < 60) return `${mins} minute${mins === 1 ? '' : 's'} ago`;
+  if (mins < 60) return `${mins} minute${mins === 1 ? "" : "s"} ago`;
   const hours = Math.round(mins / 60);
-  if (hours < 24) return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+  if (hours < 24) return `${hours} hour${hours === 1 ? "" : "s"} ago`;
   const days = Math.round(hours / 24);
-  return `${days} day${days === 1 ? '' : 's'} ago`;
+  return `${days} day${days === 1 ? "" : "s"} ago`;
 }
 
 /**
@@ -399,20 +428,22 @@ export function provenanceLine(
   now: Date,
 ): string {
   const when = `published ${relativeWhen(publishedAt ?? provenance?.publishedAt ?? null, now)}`;
-  if (!provenance || typeof provenance !== 'object') {
+  if (!provenance || typeof provenance !== "object") {
     return `Unattributed delivery (no CI provenance was published with it) — ${when}.`;
   }
   const parts: string[] = [];
   if (provenance.repo) parts.push(provenance.repo);
   const tail: string[] = [];
   if (provenance.runId) tail.push(`CI run #${provenance.runId}`);
-  if (provenance.commit) tail.push(`commit ${String(provenance.commit).slice(0, 7)}`);
-  if (provenance.ref) tail.push(String(provenance.ref).replace(/^refs\/heads\//, 'branch '));
+  if (provenance.commit)
+    tail.push(`commit ${String(provenance.commit).slice(0, 7)}`);
+  if (provenance.ref)
+    tail.push(String(provenance.ref).replace(/^refs\/heads\//, "branch "));
   tail.push(when);
   if (parts.length === 0 && tail.length === 1) {
     return `Unattributed delivery (no CI provenance was published with it) — ${when}.`;
   }
-  return `${parts.length > 0 ? `${parts.join(' ')} — ` : ''}${tail.join(', ')}.`;
+  return `${parts.length > 0 ? `${parts.join(" ")} — ` : ""}${tail.join(", ")}.`;
 }
 
 /** Read-only script: hand the UI this file's apply log. Runs through the
@@ -464,7 +495,12 @@ export function createPluginEngine(data: PluginEngineData) {
 
   function parseIncomingText(text: string): ParsedIncoming {
     if (!text.trim()) {
-      return { ok: false, issue: plain('Nothing to read — paste a contract or bundle JSON first.') };
+      return {
+        ok: false,
+        issue: plain(
+          "Nothing to read — paste a contract or bundle JSON first.",
+        ),
+      };
     }
     let raw: unknown;
     try {
@@ -482,7 +518,11 @@ export function createPluginEngine(data: PluginEngineData) {
   }
 
   function parseIncomingValue(raw: unknown): ParsedIncoming {
-    if (raw && typeof raw === 'object' && (raw as { type?: unknown }).type === 'CONTRACTS-BUNDLE') {
+    if (
+      raw &&
+      typeof raw === "object" &&
+      (raw as { type?: unknown }).type === "CONTRACTS-BUNDLE"
+    ) {
       const contracts = (raw as { contracts?: unknown }).contracts;
       if (!Array.isArray(contracts) || contracts.length === 0) {
         return {
@@ -499,7 +539,12 @@ export function createPluginEngine(data: PluginEngineData) {
       if (rawTokenSet !== undefined && rawTokenSet !== null) {
         const parsedSet = parseTokenSet(rawTokenSet);
         if (!parsedSet.ok) {
-          return { ok: false, issue: plain(`This bundle's token set does not parse — ${parsedSet.error}`) };
+          return {
+            ok: false,
+            issue: plain(
+              `This bundle's token set does not parse — ${parsedSet.error}`,
+            ),
+          };
         }
         tokenSet = parsedSet.tokenSet;
       }
@@ -510,19 +555,41 @@ export function createPluginEngine(data: PluginEngineData) {
       const rawIcons = (raw as { icons?: unknown }).icons;
       let icons: Record<string, string> | null = null;
       if (rawIcons !== undefined && rawIcons !== null) {
-        if (typeof rawIcons !== 'object' || Array.isArray(rawIcons)) {
-          return { ok: false, issue: plain('This bundle\'s "icons" section must be an object of {name: "<svg…>"} entries.') };
+        if (typeof rawIcons !== "object" || Array.isArray(rawIcons)) {
+          return {
+            ok: false,
+            issue: plain(
+              'This bundle\'s "icons" section must be an object of {name: "<svg…>"} entries.',
+            ),
+          };
         }
-        const bad = Object.entries(rawIcons as Record<string, unknown>).find(([, v]) => typeof v !== 'string');
+        const bad = Object.entries(rawIcons as Record<string, unknown>).find(
+          ([, v]) => typeof v !== "string",
+        );
         if (bad) {
-          return { ok: false, issue: plain(`This bundle's "icons" entry "${bad[0]}" is not SVG text — every value must be a string.`) };
+          return {
+            ok: false,
+            issue: plain(
+              `This bundle's "icons" entry "${bad[0]}" is not SVG text — every value must be a string.`,
+            ),
+          };
         }
         icons = rawIcons as Record<string, string>;
       }
-      return { ok: true, kind: 'bundle', contracts, tokenSet, icons };
+      return { ok: true, kind: "bundle", contracts, tokenSet, icons };
     }
-    if (raw && typeof raw === 'object' && typeof (raw as { id?: unknown }).id === 'string') {
-      return { ok: true, kind: 'contract', contracts: [raw], tokenSet: null, icons: null };
+    if (
+      raw &&
+      typeof raw === "object" &&
+      typeof (raw as { id?: unknown }).id === "string"
+    ) {
+      return {
+        ok: true,
+        kind: "contract",
+        contracts: [raw],
+        tokenSet: null,
+        icons: null,
+      };
     }
     return {
       ok: false,
@@ -533,26 +600,40 @@ export function createPluginEngine(data: PluginEngineData) {
   }
 
   /** Schema referee, zod issues in words ("path: message" lines). */
-  function validateOne(raw: unknown, label: string):
-    | { ok: true; contract: Contract }
-    | { ok: false; issues: PlainIssue[] } {
+  function validateOne(
+    raw: unknown,
+    label: string,
+  ): { ok: true; contract: Contract } | { ok: false; issues: PlainIssue[] } {
+    try {
+      assertContractProvenance(raw as Record<string, unknown>, label);
+    } catch (e) {
+      return { ok: false, issues: [plain(errText(e))] };
+    }
     const parsed = ContractSchema.safeParse(raw);
     if (parsed.success) return { ok: true, contract: parsed.data };
-    const issues = parsed.error.issues.slice(0, 8).map((i) =>
-      plain(`${label} — ${i.path.length ? i.path.join('.') : '(root)'}: ${i.message}`),
-    );
+    const issues = parsed.error.issues
+      .slice(0, 8)
+      .map((i) =>
+        plain(
+          `${label} — ${i.path.length ? i.path.join(".") : "(root)"}: ${i.message}`,
+        ),
+      );
     if (parsed.error.issues.length > 8) {
-      issues.push(plain(`${label} — …and ${parsed.error.issues.length - 8} more schema issue(s).`));
+      issues.push(
+        plain(
+          `${label} — …and ${parsed.error.issues.length - 8} more schema issue(s).`,
+        ),
+      );
     }
     return { ok: false, issues };
   }
 
   const labelOf = (raw: unknown, index: number): string => {
-    if (raw && typeof raw === 'object') {
+    if (raw && typeof raw === "object") {
       const id = (raw as { id?: unknown }).id;
-      if (typeof id === 'string' && id) return id;
+      if (typeof id === "string" && id) return id;
       const name = (raw as { name?: unknown }).name;
-      if (typeof name === 'string' && name) return name;
+      if (typeof name === "string" && name) return name;
     }
     return `contract ${index + 1}`;
   };
@@ -599,11 +680,16 @@ export function createPluginEngine(data: PluginEngineData) {
   // stored marker, so drift between the two fails a pinned eval by name.
   // -------------------------------------------------------------------------
 
-  function specHashOf(contract: Contract, byId: Map<string, Contract>, eng: typeof engine = engine): string {
+  function specHashOf(
+    contract: Contract,
+    byId: Map<string, Contract>,
+    eng: typeof engine = engine,
+  ): string {
     const compiled = eng.compileComponentData(contract, byId);
     const s = JSON.stringify(compiled);
     let h = 5381;
-    for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+    for (let i = 0; i < s.length; i++)
+      h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
     return String(h);
   }
 
@@ -616,10 +702,18 @@ export function createPluginEngine(data: PluginEngineData) {
    *  baked repo icons (`figma bundle --icons` embeds them — Autocomplete's
    *  floor-reconstructed SVGs); a missing asset keeps the emitter's named
    *  "needs icon asset" refusal. */
-  const mergedIcons = (bundleIcons: Record<string, string> | null | undefined): Map<string, string> =>
+  const mergedIcons = (
+    bundleIcons: Record<string, string> | null | undefined,
+  ): Map<string, string> =>
     bundleIcons ? new Map([...icons, ...Object.entries(bundleIcons)]) : icons;
-  const foreignEngineFor = (tokenSet: TokenSetPayload, bundleIcons?: Record<string, string> | null): typeof engine =>
-    createFigmaEngine({ tokens: tokenSetTokenTrees(tokenSet), icons: mergedIcons(bundleIcons) });
+  const foreignEngineFor = (
+    tokenSet: TokenSetPayload,
+    bundleIcons?: Record<string, string> | null,
+  ): typeof engine =>
+    createFigmaEngine({
+      tokens: tokenSetTokenTrees(tokenSet),
+      icons: mergedIcons(bundleIcons),
+    });
 
   // -------------------------------------------------------------------------
   // Generate from contract
@@ -643,7 +737,10 @@ export function createPluginEngine(data: PluginEngineData) {
     icons?: Record<string, string> | null;
   }
 
-  function planGenerate(rawContracts: unknown[], opts: PlanOptions = {}):
+  function planGenerate(
+    rawContracts: unknown[],
+    opts: PlanOptions = {},
+  ):
     | { ok: true; steps: GenerateStep[]; notes: string[] }
     | { ok: false; issues: PlainIssue[] } {
     const issues: PlainIssue[] = [];
@@ -656,7 +753,11 @@ export function createPluginEngine(data: PluginEngineData) {
         return;
       }
       if (seen.has(v.contract.id)) {
-        issues.push(plain(`This bundle carries "${v.contract.id}" twice — each contract id must appear once.`));
+        issues.push(
+          plain(
+            `This bundle carries "${v.contract.id}" twice — each contract id must appear once.`,
+          ),
+        );
         return;
       }
       seen.add(v.contract.id);
@@ -668,16 +769,19 @@ export function createPluginEngine(data: PluginEngineData) {
     try {
       ordered = orderedClosure(incoming);
     } catch (e) {
-      return { ok: false, issues: [plainFromThrow('Could not order the contracts', e)] };
+      return {
+        ok: false,
+        issues: [plainFromThrow("Could not order the contracts", e)],
+      };
     }
     const byId = scopeFor(incoming);
-    const fileKey = opts.fileKey ?? '';
+    const fileKey = opts.fileKey ?? "";
     const notes: string[] = [];
     const incomingIds = new Set(incoming.map((c) => c.id));
     const deps = ordered.filter((c) => !incomingIds.has(c.id));
     if (deps.length > 0) {
       notes.push(
-        `Also syncing ${deps.length} referenced component(s) first: ${deps.map((c) => c.name).join(', ')}.`,
+        `Also syncing ${deps.length} referenced component(s) first: ${deps.map((c) => c.name).join(", ")}.`,
       );
     }
 
@@ -690,14 +794,17 @@ export function createPluginEngine(data: PluginEngineData) {
     const foreign = tokenSet
       ? foreignEngineFor(tokenSet, bundleIcons)
       : bundleIcons
-        ? createFigmaEngine({ tokens: data.tokens, icons: mergedIcons(bundleIcons) })
+        ? createFigmaEngine({
+            tokens: data.tokens,
+            icons: mergedIcons(bundleIcons),
+          })
         : null;
 
     const steps: GenerateStep[] = [];
     if (opts.withTokens !== false) {
       if (tokenSet) {
         steps.push({
-          kind: 'tokens',
+          kind: "tokens",
           title: `Token variables — "${tokenSet.name}" collection from the bundle's token set (upserted — safe to re-run)`,
           code: emitTokenSetScript(tokenSet, fileKey || null),
         });
@@ -706,8 +813,8 @@ export function createPluginEngine(data: PluginEngineData) {
         // The repo collections: always for a repo paste; for a foreign
         // bundle only when baked dependencies ride along (they bind these).
         steps.push({
-          kind: 'tokens',
-          title: 'Token variables (collections upserted — safe to re-run)',
+          kind: "tokens",
+          title: "Token variables (collections upserted — safe to re-run)",
           code: engine.buildTokensScript(fileKey || null),
         });
       }
@@ -720,16 +827,19 @@ export function createPluginEngine(data: PluginEngineData) {
       } catch (e) {
         // The emitter's referee refusal (named violations) or an
         // unresolvable token — both are the engine's own words.
-        return { ok: false, issues: [plainFromThrow(`${contract.name} refused`, e)] };
+        return {
+          ok: false,
+          issues: [plainFromThrow(`${contract.name} refused`, e)],
+        };
       }
       steps.push({
-        kind: 'component',
+        kind: "component",
         title: `${contract.name} (${contract.id} v${contract.version})`,
         contractId: contract.id,
         code,
       });
       steps.push({
-        kind: 'version-marker',
+        kind: "version-marker",
         title: `${contract.name}: record version ${contract.version}`,
         contractId: contract.id,
         code: versionMarkerScript(contract.id, contract.version),
@@ -791,10 +901,12 @@ return { marker: 'version', contractId: ${JSON.stringify(contractId)}, version: 
    *  extract/figma-dump.js reads, from the walk that was already running.
    *  Default OFF: every existing caller (the update check, the Send tab's
    *  base pre-fill) keeps exactly today's marked-only rows. */
-  function inventoryScriptSource(opts: { includeUnmarked?: boolean } = {}): string {
+  function inventoryScriptSource(
+    opts: { includeUnmarked?: boolean } = {},
+  ): string {
     const skipUnmarked = opts.includeUnmarked
-      ? '    const contractBacked = !!(contractId || specHash);'
-      : '    if (!contractId && !specHash) continue;\n    const contractBacked = true;';
+      ? "    const contractBacked = !!(contractId || specHash);"
+      : "    if (!contractId && !specHash) continue;\n    const contractBacked = true;";
     return `// ds-contracts plugin: read-only marker inventory (nothing changes).
 ${FINGERPRINT_SRC}
 await figma.loadAllPagesAsync();
@@ -884,42 +996,59 @@ return { inventory: rows };
     const total = rows.length;
     const backed = rows.filter((r) => r.contractBacked).length;
     const foreign = total - backed;
-    const axisCount = (r: InventoryRow) => Object.keys(r.variantAxes ?? {}).length;
+    const axisCount = (r: InventoryRow) =>
+      Object.keys(r.variantAxes ?? {}).length;
     const headline =
       total === 0
-        ? 'No component sets in this file.'
+        ? "No component sets in this file."
         : foreign === 0
-          ? `${total} component set${total === 1 ? '' : 's'} — all contract-backed.`
+          ? `${total} component set${total === 1 ? "" : "s"} — all contract-backed.`
           : backed === 0
-            ? `${total} component set${total === 1 ? '' : 's'} — none contract-backed yet.`
-            : `${total} component set${total === 1 ? '' : 's'} — ${backed} contract-backed, ${foreign} not yet.`;
+            ? `${total} component set${total === 1 ? "" : "s"} — none contract-backed yet.`
+            : `${total} component set${total === 1 ? "" : "s"} — ${backed} contract-backed, ${foreign} not yet.`;
     const lines = rows
       .slice()
-      .sort((a, b) => (a.page ?? '').localeCompare(b.page ?? '') || a.name.localeCompare(b.name))
+      .sort(
+        (a, b) =>
+          (a.page ?? "").localeCompare(b.page ?? "") ||
+          a.name.localeCompare(b.name),
+      )
       .map((r) => {
         const axes = Object.entries(r.variantAxes ?? {})
           .map(([name, options]) => `${name} (${options.length})`)
-          .join(', ');
-        const kinds = r.propKinds ?? { variant: 0, boolean: 0, text: 0, swap: 0 };
+          .join(", ");
+        const kinds = r.propKinds ?? {
+          variant: 0,
+          boolean: 0,
+          text: 0,
+          swap: 0,
+        };
         const bits = [
-          `${r.variants} variant${r.variants === 1 ? '' : 's'}`,
-          axes ? `axes: ${axes}` : 'no variant axes',
+          `${r.variants} variant${r.variants === 1 ? "" : "s"}`,
+          axes ? `axes: ${axes}` : "no variant axes",
           `${kinds.boolean} boolean · ${kinds.text} text · ${kinds.swap} swap`,
         ];
-        return `${r.name} — ${r.contractBacked ? `contract-backed (${r.contractId ?? 'no id'})` : 'not under contract'} · ${bits.join(' · ')} · ${r.page ?? 'unknown page'}`;
+        return `${r.name} — ${r.contractBacked ? `contract-backed (${r.contractId ?? "no id"})` : "not under contract"} · ${bits.join(" · ")} · ${r.page ?? "unknown page"}`;
       });
     return { total, backed, foreign, headline, lines, rows };
   }
 
   /** The downloadable/copyable scan artifact — the same rows, as JSON. */
-  function scanExportJson(rows: InventoryRow[], fileKey: string | null = null): string {
+  function scanExportJson(
+    rows: InventoryRow[],
+    fileKey: string | null = null,
+  ): string {
     const s = scanReport(rows);
     return JSON.stringify(
       {
-        type: 'FIGMA-FILE-SCAN',
+        type: "FIGMA-FILE-SCAN",
         version: 1,
         fileKey: fileKey || null,
-        totals: { sets: s.total, contractBacked: s.backed, notUnderContract: s.foreign },
+        totals: {
+          sets: s.total,
+          contractBacked: s.backed,
+          notUnderContract: s.foreign,
+        },
         sets: s.rows.map((r) => ({
           name: r.name,
           page: r.page ?? null,
@@ -931,7 +1060,12 @@ return { inventory: rows };
           version: r.version,
           variants: r.variants,
           variantAxes: r.variantAxes ?? {},
-          propKinds: r.propKinds ?? { variant: 0, boolean: 0, text: 0, swap: 0 },
+          propKinds: r.propKinds ?? {
+            variant: 0,
+            boolean: 0,
+            text: 0,
+            swap: 0,
+          },
           props: r.props,
         })),
       },
@@ -943,12 +1077,18 @@ return { inventory: rows };
   /** Expected property-name surface of a compiled contract (variant axes,
    *  boolean/text props, slot swap + visibility props) — the API the file's
    *  componentPropertyDefinitions should carry after a sync. */
-  function expectedProps(contract: Contract, byId: Map<string, Contract>, eng: typeof engine = engine): string[] {
+  function expectedProps(
+    contract: Contract,
+    byId: Map<string, Contract>,
+    eng: typeof engine = engine,
+  ): string[] {
     const compiled = eng.compileComponentData(contract, byId);
     const names = new Set<string>();
     for (const bp of compiled.boolProps) names.add(bp.property);
     for (const tp of compiled.textProps) names.add(tp.property);
-    const collect = (spec: import('../../../core/emit-figma-script.js').NodeSpec) => {
+    const collect = (
+      spec: import("../../../core/emit-figma-script.js").NodeSpec,
+    ) => {
       if (spec.contentProp) names.add(spec.contentProp);
       if (spec.slotProperty) {
         names.add(spec.slotProperty);
@@ -961,8 +1101,8 @@ return { inventory: rows };
     // Variant axes ride the variant names ("Size=sm, Tone=critical") — the
     // State preview axis included (stateVariants carry ", State=…").
     for (const v of [...compiled.variants, ...(compiled.stateVariants ?? [])]) {
-      for (const seg of v.name.split(',')) {
-        const axis = seg.split('=')[0]?.trim();
+      for (const seg of v.name.split(",")) {
+        const axis = seg.split("=")[0]?.trim();
         if (axis) names.add(axis);
       }
     }
@@ -977,110 +1117,155 @@ return { inventory: rows };
   // at plan time.
   // -------------------------------------------------------------------------
 
-  type SpecNode = import('../../../core/emit-figma-script.js').NodeSpec;
+  type SpecNode = import("../../../core/emit-figma-script.js").NodeSpec;
   type CompiledData = ReturnType<typeof engine.compileComponentData>;
 
   /** Plugin-API binding fields → the designer's words. */
   const FIELD_WORDS: Record<string, string> = {
-    paddingLeft: 'padding left',
-    paddingRight: 'padding right',
-    paddingTop: 'padding top',
-    paddingBottom: 'padding bottom',
-    itemSpacing: 'gap',
-    strokeWeight: 'border width',
-    strokeTopWeight: 'border width (top)',
-    strokeRightWeight: 'border width (right)',
-    strokeBottomWeight: 'border width (bottom)',
-    strokeLeftWeight: 'border width (left)',
-    cornerRadius: 'radius',
-    topLeftRadius: 'radius (top left)',
-    topRightRadius: 'radius (top right)',
-    bottomLeftRadius: 'radius (bottom left)',
-    bottomRightRadius: 'radius (bottom right)',
-    minWidth: 'min width',
-    minHeight: 'min height',
-    maxWidth: 'max width',
-    maxHeight: 'max height',
-    width: 'width',
-    height: 'height',
-    radius: 'radius',
+    paddingLeft: "padding left",
+    paddingRight: "padding right",
+    paddingTop: "padding top",
+    paddingBottom: "padding bottom",
+    itemSpacing: "gap",
+    strokeWeight: "border width",
+    strokeTopWeight: "border width (top)",
+    strokeRightWeight: "border width (right)",
+    strokeBottomWeight: "border width (bottom)",
+    strokeLeftWeight: "border width (left)",
+    cornerRadius: "radius",
+    topLeftRadius: "radius (top left)",
+    topRightRadius: "radius (top right)",
+    bottomLeftRadius: "radius (bottom left)",
+    bottomRightRadius: "radius (bottom right)",
+    minWidth: "min width",
+    minHeight: "min height",
+    maxWidth: "max width",
+    maxHeight: "max height",
+    width: "width",
+    height: "height",
+    radius: "radius",
   };
   const fieldWord = (field: string): string => FIELD_WORDS[field] ?? field;
 
-  const hexOfRgba = (c: { r: number; g: number; b: number; a?: number }): string => {
-    const h = (x: number) => Math.round((x || 0) * 255).toString(16).padStart(2, '0');
-    const alpha = c.a !== undefined && c.a < 1 ? h(c.a) : '';
+  const hexOfRgba = (c: {
+    r: number;
+    g: number;
+    b: number;
+    a?: number;
+  }): string => {
+    const h = (x: number) =>
+      Math.round((x || 0) * 255)
+        .toString(16)
+        .padStart(2, "0");
+    const alpha = c.a !== undefined && c.a < 1 ? h(c.a) : "";
     return `#${h(c.r)}${h(c.g)}${h(c.b)}${alpha}`;
   };
   const djb2 = (s: string): string => {
     let h = 5381;
-    for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+    for (let i = 0; i < s.length; i++)
+      h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
     return String(h);
   };
   /** Names ride inside `variant>path|channel|value` lines — keep the
    *  separators out of them. */
-  const cleanSeg = (s: string): string => s.replace(/[|>]/g, '/');
+  const cleanSeg = (s: string): string => s.replace(/[|>]/g, "/");
 
   function specStyleLines(compiled: CompiledData): string[] {
     const lines: string[] = [];
     const push = (id: string, channel: string, value: unknown) => {
-      if (value === undefined || value === null || value === '') return;
+      if (value === undefined || value === null || value === "") return;
       lines.push(`${id}|${channel}|${String(value)}`);
     };
     const walk = (spec: SpecNode, id: string) => {
-      if (spec.fill) push(id, 'fill', spec.fill);
-      if (spec.lits?.fillClear) push(id, 'fill', 'transparent');
-      if (spec.lits?.fillColor) push(id, 'fill', hexOfRgba(spec.lits.fillColor));
-      if (spec.stroke) push(id, 'stroke', spec.stroke);
+      if (spec.fill) push(id, "fill", spec.fill);
+      if (spec.lits?.fillClear) push(id, "fill", "transparent");
+      if (spec.lits?.fillColor)
+        push(id, "fill", hexOfRgba(spec.lits.fillColor));
+      if (spec.stroke) push(id, "stroke", spec.stroke);
       if (spec.layout) {
         push(
           id,
-          'layout',
-          `${spec.layout.mode === 'HORIZONTAL' ? 'row' : 'column'} ${spec.layout.primary}/${spec.layout.counter}${spec.layout.wrap ? ' wrap' : ''}`,
+          "layout",
+          `${spec.layout.mode === "HORIZONTAL" ? "row" : "column"} ${spec.layout.primary}/${spec.layout.counter}${spec.layout.wrap ? " wrap" : ""}`,
         );
       }
-      for (const [field, varName] of Object.entries(spec.bindings ?? {})) push(id, fieldWord(field), varName);
+      for (const [field, varName] of Object.entries(spec.bindings ?? {}))
+        push(id, fieldWord(field), varName);
       for (const [key, value] of Object.entries(spec.lits ?? {})) {
-        if (typeof value === 'number') push(id, fieldWord(key), value);
+        if (typeof value === "number") push(id, fieldWord(key), value);
       }
-      if (spec.lits?.radiusCorners) push(id, 'radius', JSON.stringify(spec.lits.radiusCorners));
-      if (spec.lits?.strokeSides) push(id, 'border widths', JSON.stringify(spec.lits.strokeSides));
-      if (spec.characters !== undefined) push(id, 'text', `"${spec.characters}"`);
-      if (spec.fontSize !== undefined) push(id, 'text size', spec.fontSize);
-      if (spec.fontStyle) push(id, 'text weight', spec.fontStyle);
-      if (spec.textStyle) push(id, 'text style', spec.textStyle);
-      if (spec.fontFamily) push(id, 'font', spec.fontFamily);
-      if (spec.textFill) push(id, 'text color', spec.textFill);
-      if (spec.lineHeight !== undefined) push(id, 'line height', spec.lineHeight);
-      if (spec.opacity !== undefined) push(id, 'opacity', spec.opacity);
-      if (spec.fixedWidth) push(id, 'width', `${spec.fixedWidth.px}px (${spec.fixedWidth.varName})`);
+      if (spec.lits?.radiusCorners)
+        push(id, "radius", JSON.stringify(spec.lits.radiusCorners));
+      if (spec.lits?.strokeSides)
+        push(id, "border widths", JSON.stringify(spec.lits.strokeSides));
+      if (spec.characters !== undefined)
+        push(id, "text", `"${spec.characters}"`);
+      if (spec.fontSize !== undefined) push(id, "text size", spec.fontSize);
+      if (spec.fontStyle) push(id, "text weight", spec.fontStyle);
+      if (spec.textStyle) push(id, "text style", spec.textStyle);
+      if (spec.fontFamily) push(id, "font", spec.fontFamily);
+      if (spec.textFill) push(id, "text color", spec.textFill);
+      if (spec.lineHeight !== undefined)
+        push(id, "line height", spec.lineHeight);
+      if (spec.opacity !== undefined) push(id, "opacity", spec.opacity);
+      if (spec.fixedWidth)
+        push(
+          id,
+          "width",
+          `${spec.fixedWidth.px}px (${spec.fixedWidth.varName})`,
+        );
       if (spec.fixedHeight) {
-        push(id, 'height', `${spec.fixedHeight.px}px${spec.fixedHeight.varName ? ` (${spec.fixedHeight.varName})` : ''}`);
+        push(
+          id,
+          "height",
+          `${spec.fixedHeight.px}px${spec.fixedHeight.varName ? ` (${spec.fixedHeight.varName})` : ""}`,
+        );
       }
-      if (spec.dropShadow) push(id, 'shadow', JSON.stringify(spec.dropShadow));
-      if (spec.effectStack) push(id, 'shadow', `${spec.effectStack.length} layer(s) · ${djb2(JSON.stringify(spec.effectStack))}`);
-      if (spec.gradient) push(id, 'gradient', JSON.stringify(spec.gradient));
-      if (spec.svg) push(id, 'icon', `svg·${djb2(spec.svg)}`);
-      if (spec.visibleProp) push(id, 'shown when', `${spec.visibleProp}${spec.visibleDefault === false ? ' (off by default)' : ''}`);
-      for (const child of spec.children ?? []) walk(child, `${id}/${cleanSeg(child.name)}`);
+      if (spec.dropShadow) push(id, "shadow", JSON.stringify(spec.dropShadow));
+      if (spec.effectStack)
+        push(
+          id,
+          "shadow",
+          `${spec.effectStack.length} layer(s) · ${djb2(JSON.stringify(spec.effectStack))}`,
+        );
+      if (spec.gradient) push(id, "gradient", JSON.stringify(spec.gradient));
+      if (spec.svg) push(id, "icon", `svg·${djb2(spec.svg)}`);
+      if (spec.visibleProp)
+        push(
+          id,
+          "shown when",
+          `${spec.visibleProp}${spec.visibleDefault === false ? " (off by default)" : ""}`,
+        );
+      for (const child of spec.children ?? [])
+        walk(child, `${id}/${cleanSeg(child.name)}`);
     };
     for (const v of [...compiled.variants, ...(compiled.stateVariants ?? [])]) {
       walk(v.spec, `${cleanSeg(v.name)}>${cleanSeg(v.spec.name)}`);
     }
     const setId = `set>${cleanSeg(compiled.setName)}`;
-    push(setId, 'description', compiled.description.replace(/\s+/g, ' ').slice(0, 120));
-    for (const bp of compiled.boolProps) push(setId, `${bp.property} default`, String(bp.default));
-    for (const tp of compiled.textProps) push(setId, `${tp.property} default`, `"${tp.default}"`);
+    push(
+      setId,
+      "description",
+      compiled.description.replace(/\s+/g, " ").slice(0, 120),
+    );
+    for (const bp of compiled.boolProps)
+      push(setId, `${bp.property} default`, String(bp.default));
+    for (const tp of compiled.textProps)
+      push(setId, `${tp.property} default`, `"${tp.default}"`);
     return lines;
   }
 
   /** Pair-diff two flattenings (the Drift tab's prefix-pairing rule), then
    *  aggregate identical changes across variants. */
-  function styleDiffOf(beforeLines: string[], afterLines: string[], variantCount: number): StyleChange[] {
+  function styleDiffOf(
+    beforeLines: string[],
+    afterLines: string[],
+    variantCount: number,
+  ): StyleChange[] {
     const cut = (l: string): [string, string] => {
-      const i = l.indexOf('|');
-      const j = l.indexOf('|', i + 1);
-      return j > 0 ? [l.slice(0, j), l.slice(j + 1)] : [l, ''];
+      const i = l.indexOf("|");
+      const j = l.indexOf("|", i + 1);
+      return j > 0 ? [l.slice(0, j), l.slice(j + 1)] : [l, ""];
     };
     const inA = new Set(beforeLines);
     const inB = new Set(afterLines);
@@ -1102,34 +1287,41 @@ return { inventory: rows };
         used.add(candidates[0]);
         raw.push({ prefix: p, was: cut(candidates[0])[1], now: v });
       } else {
-        raw.push({ prefix: p, was: '(absent)', now: v });
+        raw.push({ prefix: p, was: "(absent)", now: v });
       }
     }
     for (const l of removed) {
       if (used.has(l)) continue;
       const [p, v] = cut(l);
-      raw.push({ prefix: p, was: v, now: '(removed)' });
+      raw.push({ prefix: p, was: v, now: "(removed)" });
     }
     const agg = new Map<string, { change: StyleChange; vnames: string[] }>();
     for (const r of raw) {
-      const gt = r.prefix.indexOf('>');
-      const variant = gt >= 0 ? r.prefix.slice(0, gt) : '';
+      const gt = r.prefix.indexOf(">");
+      const variant = gt >= 0 ? r.prefix.slice(0, gt) : "";
       const rest = gt >= 0 ? r.prefix.slice(gt + 1) : r.prefix;
-      const bar = rest.lastIndexOf('|');
+      const bar = rest.lastIndexOf("|");
       const pathPart = bar >= 0 ? rest.slice(0, bar) : rest;
-      const channel = bar >= 0 ? rest.slice(bar + 1) : '';
-      const part = pathPart.split('/').pop() ?? pathPart;
+      const channel = bar >= 0 ? rest.slice(bar + 1) : "";
+      const part = pathPart.split("/").pop() ?? pathPart;
       const key = `${pathPart}|${channel}|${r.was}|${r.now}`;
       const entry = agg.get(key);
       if (entry) {
         if (!entry.vnames.includes(variant)) entry.vnames.push(variant);
       } else {
-        agg.set(key, { change: { part, channel, was: r.was, now: r.now, variants: null }, vnames: [variant] });
+        agg.set(key, {
+          change: { part, channel, was: r.was, now: r.now, variants: null },
+          vnames: [variant],
+        });
       }
     }
     return [...agg.values()].map(({ change, vnames }) => ({
       ...change,
-      variants: vnames.length >= variantCount || (vnames.length === 1 && vnames[0] === 'set') ? null : vnames,
+      variants:
+        vnames.length >= variantCount ||
+        (vnames.length === 1 && vnames[0] === "set")
+          ? null
+          : vnames,
     }));
   }
 
@@ -1151,7 +1343,10 @@ return { inventory: rows };
     const foreign = tokenSet
       ? foreignEngineFor(tokenSet, bundleIcons)
       : bundleIcons
-        ? createFigmaEngine({ tokens: data.tokens, icons: mergedIcons(bundleIcons) })
+        ? createFigmaEngine({
+            tokens: data.tokens,
+            icons: mergedIcons(bundleIcons),
+          })
         : null;
     const eng = foreign ?? engine;
     const rows: UpdateRow[] = [];
@@ -1175,7 +1370,7 @@ return { inventory: rows };
             contractId: contract.id,
             setName: contract.name,
             version: contract.version,
-            action: 'refused',
+            action: "refused",
             defaultSelected: false,
             line: `• ${contract.name}: refused — this bundle carries "${contract.id}" twice; each contract id must appear once.`,
           });
@@ -1185,12 +1380,12 @@ return { inventory: rows };
       }
       if (!contract) {
         const v = validateOne(raw, labelOf(raw, i));
-        const first = v.ok ? plain('unknown') : v.issues[0];
+        const first = v.ok ? plain("unknown") : v.issues[0];
         rows.push({
           contractId: labelOf(raw, i),
           setName: labelOf(raw, i),
-          version: '',
-          action: 'refused',
+          version: "",
+          action: "refused",
           defaultSelected: false,
           line: `• ${labelOf(raw, i)}: refused — ${first.headline}`,
         });
@@ -1212,7 +1407,9 @@ return { inventory: rows };
       let compiledIncoming: CompiledData | null = null;
       try {
         compiledIncoming = eng.compileComponentData(contract, byId);
-        compiledVariants = compiledIncoming.variants.length + (compiledIncoming.stateVariants?.length ?? 0);
+        compiledVariants =
+          compiledIncoming.variants.length +
+          (compiledIncoming.stateVariants?.length ?? 0);
         hash = specHashOf(contract, byId, eng);
         expected = expectedProps(contract, byId, eng);
       } catch (e) {
@@ -1220,9 +1417,9 @@ return { inventory: rows };
           contractId: contract.id,
           setName: contract.name,
           version: contract.version,
-          action: 'refused',
+          action: "refused",
           defaultSelected: false,
-          line: `• ${contract.name}: refused — ${plainFromThrow('the contract cannot compile', e).headline}`,
+          line: `• ${contract.name}: refused — ${plainFromThrow("the contract cannot compile", e).headline}`,
         });
         return;
       }
@@ -1232,9 +1429,9 @@ return { inventory: rows };
           contractId: contract.id,
           setName: contract.name,
           version: contract.version,
-          action: 'create',
+          action: "create",
           defaultSelected: true,
-          line: `• ${contract.name} ${contract.version}: new — will be created (${compiledVariants} variant${compiledVariants === 1 ? '' : 's'}).`,
+          line: `• ${contract.name} ${contract.version}: new — will be created (${compiledVariants} variant${compiledVariants === 1 ? "" : "s"}).`,
         });
         return;
       }
@@ -1243,7 +1440,7 @@ return { inventory: rows };
           contractId: contract.id,
           setName: contract.name,
           version: contract.version,
-          action: 'skip',
+          action: "skip",
           defaultSelected: false,
           nodeId: found.nodeId,
           line: `• ${contract.name} ${contract.version}: unchanged — will be skipped.`,
@@ -1251,12 +1448,15 @@ return { inventory: rows };
         return;
       }
       const from = found.version ?? null;
-      const fromText = from ? `${from} → ` : '(installed version not recorded) → ';
+      const fromText = from
+        ? `${from} → `
+        : "(installed version not recorded) → ";
       const added = expected.filter((p) => !found.props.includes(p));
       const removed = found.props.filter((p) => !expected.includes(p));
       const segments: string[] = [];
       for (const p of added) segments.push(`+prop ${p}`);
-      for (const p of removed) segments.push(`prop ${p} left the contract (kept — retire by hand)`);
+      for (const p of removed)
+        segments.push(`prop ${p} left the contract (kept — retire by hand)`);
 
       // G8: itemize the interior per channel. The installed spec is in hand
       // exactly when the recorded installed version is a baked contract's
@@ -1266,7 +1466,10 @@ return { inventory: rows };
       const baked = bakedById.get(contract.id) ?? null;
       if (baked && found.version !== null && baked.version === found.version) {
         try {
-          const installed = engine.compileComponentData(baked, new Map(bakedById));
+          const installed = engine.compileComponentData(
+            baked,
+            new Map(bakedById),
+          );
           styleChanges = styleDiffOf(
             specStyleLines(installed),
             specStyleLines(compiledIncoming),
@@ -1278,22 +1481,26 @@ return { inventory: rows };
       }
       if (segments.length === 0) {
         if (styleChanges && styleChanges.length > 0) {
-          segments.push(`${styleChanges.length} style change${styleChanges.length === 1 ? '' : 's'} inside — listed below`);
+          segments.push(
+            `${styleChanges.length} style change${styleChanges.length === 1 ? "" : "s"} inside — listed below`,
+          );
         } else if (styleChanges) {
-          segments.push('changes inside that this report cannot itemize — apply to see them, or hold this set');
+          segments.push(
+            "changes inside that this report cannot itemize — apply to see them, or hold this set",
+          );
         } else {
-          segments.push('style changes inside the component (no prop changes)');
+          segments.push("style changes inside the component (no prop changes)");
         }
       }
 
       // G2 (covenant repair): a canvas-edited target gets a NAMED overwrite
       // warning and starts UNCHECKED. Warn and default-safe — never block.
-      const canvasEdited = found.drift === 'canvas-edited';
+      const canvasEdited = found.drift === "canvas-edited";
       rows.push({
         contractId: contract.id,
         setName: contract.name,
         version: contract.version,
-        action: 'amend',
+        action: "amend",
         defaultSelected: !canvasEdited,
         canvasEdited,
         warning: canvasEdited
@@ -1301,7 +1508,7 @@ return { inventory: rows };
           : undefined,
         styleChanges,
         nodeId: found.nodeId,
-        line: `• ${contract.name} ${fromText}${contract.version}: ${segments.join('; ')}.`,
+        line: `• ${contract.name} ${fromText}${contract.version}: ${segments.join("; ")}.`,
       });
     });
 
@@ -1311,13 +1518,16 @@ return { inventory: rows };
     // click per component away.
     if (freshness && freshness.stale) {
       for (const row of rows) {
-        if (row.action !== 'amend' && row.action !== 'create') continue;
+        if (row.action !== "amend" && row.action !== "create") continue;
         row.defaultSelected = false;
-        row.warning = row.warning ? `${row.warning} Also: ${freshness.line}` : freshness.line;
+        row.warning = row.warning
+          ? `${row.warning} Also: ${freshness.line}`
+          : freshness.line;
       }
     }
 
-    const count = (a: UpdateRow['action']) => rows.filter((r) => r.action === a).length;
+    const count = (a: UpdateRow["action"]) =>
+      rows.filter((r) => r.action === a).length;
     const canvasWarned = rows.filter((r) => r.canvasEdited);
     const lines = [
       ...rows.map((r) => r.line),
@@ -1326,11 +1536,11 @@ return { inventory: rows };
         : []),
       ...(canvasWarned.length > 0
         ? [
-            `⚠ ${canvasWarned.length} set${canvasWarned.length === 1 ? ' has' : 's have'} un-proposed canvas edits — applying overwrites the edits, so ${canvasWarned.length === 1 ? 'its box starts' : 'their boxes start'} unchecked.`,
+            `⚠ ${canvasWarned.length} set${canvasWarned.length === 1 ? " has" : "s have"} un-proposed canvas edits — applying overwrites the edits, so ${canvasWarned.length === 1 ? "its box starts" : "their boxes start"} unchecked.`,
           ]
         : []),
-      `${count('amend')} to update · ${count('create')} new · ${count('skip')} unchanged${count('refused') ? ` · ${count('refused')} refused` : ''}.`,
-      'Nothing has been applied — review the list, then Apply.',
+      `${count("amend")} to update · ${count("create")} new · ${count("skip")} unchanged${count("refused") ? ` · ${count("refused")} refused` : ""}.`,
+      "Nothing has been applied — review the list, then Apply.",
     ];
     return { rows, lines };
   }
@@ -1344,11 +1554,18 @@ return { inventory: rows };
   ): ReturnType<typeof planGenerate> {
     const selected: unknown[] = [];
     for (const raw of rawContracts) {
-      const id = raw && typeof raw === 'object' ? (raw as { id?: unknown }).id : null;
-      if (typeof id === 'string' && selectedContractIds.includes(id)) selected.push(raw);
+      const id =
+        raw && typeof raw === "object" ? (raw as { id?: unknown }).id : null;
+      if (typeof id === "string" && selectedContractIds.includes(id))
+        selected.push(raw);
     }
     if (selected.length === 0) {
-      return { ok: false, issues: [plain('Nothing selected — tick at least one component to apply.')] };
+      return {
+        ok: false,
+        issues: [
+          plain("Nothing selected — tick at least one component to apply."),
+        ],
+      };
     }
     return planGenerate(selected, opts);
   }
@@ -1358,10 +1575,10 @@ return { inventory: rows };
   // -------------------------------------------------------------------------
 
   const DIFF_SCOPE_NOTE =
-    'Scope: this diff covers the API surface (version, props, slots, variant axes) and names when anatomy/style bytes differ — interior style changes are summarized, not itemized.';
+    "Scope: this diff covers the API surface (version, props, slots, variant axes) and names when anatomy/style bytes differ — interior style changes are summarized, not itemized.";
 
   const BASELESS_SCOPE_NOTE =
-    'Scope: this is a proposal READ FROM THE CANVAS, not a diff — there is no base contract to compare against, so nothing here is called a change. Review it, then adopt it into your repo as the contract for this set.';
+    "Scope: this is a proposal READ FROM THE CANVAS, not a diff — there is no base contract to compare against, so nothing here is called a change. Review it, then adopt it into your repo as the contract for this set.";
 
   interface ProposeDiffResult {
     ok: true;
@@ -1380,7 +1597,12 @@ return { inventory: rows };
     tokenSource: string;
     /** Canvas values that bound to no token, with the corpus's nearest
      *  candidates. Reported, never applied. */
-    unbound: Array<{ nodePath: string; property: string; value: string | number; suggestions: string[] }>;
+    unbound: Array<{
+      nodePath: string;
+      property: string;
+      value: string | number;
+      suggestions: string[];
+    }>;
     /** ENVELOPE v2 (the export-envelope round): auto-proposed STUB contracts
      *  for nested instances with no contract in scope. The engine has always
      *  produced these; the export doors used to DROP them — which made the
@@ -1390,7 +1612,11 @@ return { inventory: rows };
     /** ENVELOPE v2: the provisional DTCG tree the proposal's minted refs
      *  resolve through (mintUnbound is always on here), plus one entry per
      *  minted leaf. Absent when nothing was minted. */
-    mintedTokens?: { tree: Record<string, unknown>; count: number; entries: unknown[] };
+    mintedTokens?: {
+      tree: Record<string, unknown>;
+      count: number;
+      entries: unknown[];
+    };
     /** THE ASYMMETRY. 'tool-generated' when the set carries a
      *  ds_contracts/contractId marker (this tool drew it, so code comes back
      *  byte for byte); 'hand-built' when it does not (the contract is an
@@ -1420,8 +1646,11 @@ return { inventory: rows };
   /** The plugin cannot see a repo's ds-contracts.config.json, so it shows
    *  the DEFAULT target and names the alternatives rather than guessing
    *  which one a given repo picked. */
-  function codePlanFor(contractName: string, provenance: CanvasProvenance): CodePlanView {
-    const target = 'react';
+  function codePlanFor(
+    contractName: string,
+    provenance: CanvasProvenance,
+  ): CodePlanView {
+    const target = "react";
     return {
       target,
       targetLabel: CODE_TARGET_LABELS[target] ?? target,
@@ -1430,7 +1659,7 @@ return { inventory: rows };
       // registry here would drag three code generators (+76 KB minified)
       // into the plugin zip to print two words.
       altTargets: Object.keys(CODE_TARGET_LABELS).filter(
-        (n) => n !== target && n !== 'figma-script',
+        (n) => n !== target && n !== "figma-script",
       ),
       headline: provenanceHeadline(provenance),
       sentence: provenanceSentence(provenance),
@@ -1446,7 +1675,8 @@ return { inventory: rows };
     corpus: TokenCorpus;
     label: string;
   } {
-    if (!tokenSet) return { corpus, label: 'the tokens baked into this plugin build' };
+    if (!tokenSet)
+      return { corpus, label: "the tokens baked into this plugin build" };
     const trees = tokenSetTokenTrees(tokenSet);
     return {
       corpus: tokenCorpusFromJson({
@@ -1479,25 +1709,38 @@ return { inventory: rows };
       return {
         ok: false,
         issue: plain(
-          'The base contract does not parse against the schema — paste the contract this set was generated from.',
-          base.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('\n'),
+          "The base contract does not parse against the schema — paste the contract this set was generated from.",
+          base.error.issues
+            .map((i) => `${i.path.join(".")}: ${i.message}`)
+            .join("\n"),
         ),
       };
     }
     const baseData = base && base.success ? base.data : null;
-    const { corpus: activeCorpus, label: tokenSource } = proposalCorpus(opts.tokenSet);
-    const provenance = (dump as { _provenance?: { fileKey?: string | null } })._provenance;
+    const { corpus: activeCorpus, label: tokenSource } = proposalCorpus(
+      opts.tokenSet,
+    );
+    const provenance = (dump as { _provenance?: { fileKey?: string | null } })
+      ._provenance;
     let batch;
     try {
       batch = proposeBatchFromDump(dump as never, {
         corpus: activeCorpus,
         contractIdByName: new Map(
-          [...bakedById.values()].map((c) => [c.name, c.id] as [string, string]),
+          [...bakedById.values()].map(
+            (c) => [c.name, c.id] as [string, string],
+          ),
         ),
         contractIdByKey: new Map(
           [...bakedById.values()]
             .filter((c) => c.anchors.figma.componentSetKey !== null)
-            .map((c) => [c.anchors.figma.componentSetKey as string, c.id] as [string, string]),
+            .map(
+              (c) =>
+                [c.anchors.figma.componentSetKey as string, c.id] as [
+                  string,
+                  string,
+                ],
+            ),
         ),
         contractsById: new Map(bakedById),
         fileKey: provenance?.fileKey ?? null,
@@ -1505,11 +1748,13 @@ return { inventory: rows };
         hiddenCaptured: dumpCapturesHidden(provenance as never),
       });
     } catch (e) {
-      return { ok: false, issue: plainFromThrow('The proposal failed', e) };
+      return { ok: false, issue: plainFromThrow("The proposal failed", e) };
     }
-    const proposal = batch.proposals.find((p) => p.setName === setName) ?? batch.proposals[0];
+    const proposal =
+      batch.proposals.find((p) => p.setName === setName) ?? batch.proposals[0];
     if (!proposal) {
-      const skip = batch.skipped.find((s) => s.setName === setName) ?? batch.skipped[0];
+      const skip =
+        batch.skipped.find((s) => s.setName === setName) ?? batch.skipped[0];
       return {
         ok: false,
         issue: skip
@@ -1517,27 +1762,38 @@ return { inventory: rows };
           : plain(`No component set named "${setName}" was in the dump.`),
       };
     }
+    const proposedContract = baseData?.provenance
+      ? markAwaitingCodeAdoption(
+          baseData as unknown as Record<string, unknown>,
+          proposal.contract,
+        )
+      : proposal.contract;
+    if (baseData && !baseData.provenance) {
+      proposal.notes.push(
+        "Awaiting-code-adoption provenance was not stamped: the base is an old unprovenanced contract. Run one matching code extraction to bootstrap it before accepting this design-led proposal.",
+      );
+    }
     const summaryLines = baseData
-      ? boundedContractDiff(baseData, proposal.contract)
+      ? boundedContractDiff(baseData, proposedContract)
       : baselessProposalLines(proposal.contract, proposal.unbound, tokenSource);
     const canvasProvenance: CanvasProvenance =
       opts.toolGenerated === true
-        ? 'tool-generated'
+        ? "tool-generated"
         : opts.toolGenerated === false
-          ? 'hand-built'
-          : 'unrecorded';
+          ? "hand-built"
+          : "unrecorded";
     const contractName = String(
       (proposal.contract as { name?: unknown }).name ?? proposal.setName,
     );
     const codePlan = codePlanFor(contractName, canvasProvenance);
     const exportJson = JSON.stringify(
       {
-        type: 'CONTRACT-PROPOSAL',
+        type: "CONTRACT-PROPOSAL",
         baseContractId: baseData ? baseData.id : null,
         baseVersion: baseData ? baseData.version : null,
         setName: proposal.setName,
         summary: summaryLines,
-        proposedContract: proposal.contract,
+        proposedContract,
         proposalNotes: proposal.notes,
         // ENVELOPE v2 — the two payloads the export doors used to DROP: the
         // stub contracts and the minted DTCG tree ride the SAME envelope the
@@ -1548,13 +1804,17 @@ return { inventory: rows };
         ...(proposal.childStubs && proposal.childStubs.length > 0
           ? { childStubs: proposal.childStubs }
           : {}),
-        ...(proposal.mintedTokens ? { mintedTokens: proposal.mintedTokens } : {}),
+        ...(proposal.mintedTokens
+          ? { mintedTokens: proposal.mintedTokens }
+          : {}),
         // THE ASYMMETRY, carried to the code side. `propose-pr` reads this
         // and prints the matching sentence in the PR body; without it the
         // PR would have to say "not recorded".
         provenance: {
           toolGenerated:
-            canvasProvenance === 'unrecorded' ? null : canvasProvenance === 'tool-generated',
+            canvasProvenance === "unrecorded"
+              ? null
+              : canvasProvenance === "tool-generated",
           kind: canvasProvenance,
           note: provenanceSentence(canvasProvenance),
         },
@@ -1565,7 +1825,7 @@ return { inventory: rows };
     return {
       ok: true,
       setName: proposal.setName,
-      proposal: proposal.contract,
+      proposal: proposedContract,
       summaryLines,
       exportJson,
       proposalNotes: proposal.notes,
@@ -1586,35 +1846,50 @@ return { inventory: rows };
    *  corpus the suggestions came from, and counts the unbound values. */
   function baselessProposalLines(
     proposedRaw: Record<string, unknown>,
-    unbound: Array<{ property: string; value: string | number; suggestions: string[] }>,
+    unbound: Array<{
+      property: string;
+      value: string | number;
+      suggestions: string[];
+    }>,
     tokenSource: string,
   ): string[] {
     const lines: string[] = [];
     const parsed = ContractSchema.safeParse(proposedRaw);
     if (!parsed.success) {
       return [
-        'The proposed contract did not parse against the schema — see the export for the raw proposal.',
+        "The proposed contract did not parse against the schema — see the export for the raw proposal.",
         BASELESS_SCOPE_NOTE,
       ];
     }
     const p = parsed.data;
-    lines.push(`No base contract — proposing "${p.id}" v${p.version} from what is drawn.`);
+    lines.push(
+      `No base contract — proposing "${p.id}" v${p.version} from what is drawn.`,
+    );
     for (const prop of p.props) {
       const t = propTypeText(prop.type);
-      const dflt = prop.default === undefined ? '' : ` (default ${JSON.stringify(prop.default)})`;
+      const dflt =
+        prop.default === undefined
+          ? ""
+          : ` (default ${JSON.stringify(prop.default)})`;
       lines.push(`prop ${prop.name} (${t})${dflt}`);
     }
-    if (!p.props.length) lines.push('no component properties — this set draws a single fixed variant.');
+    if (!p.props.length)
+      lines.push(
+        "no component properties — this set draws a single fixed variant.",
+      );
     const slotNames = [...slotsOf(p)].map((s) => s.slot.name);
-    if (slotNames.length) lines.push(`slots: ${slotNames.join(', ')}`);
+    if (slotNames.length) lines.push(`slots: ${slotNames.join(", ")}`);
     lines.push(`nearest-token suggestions come from ${tokenSource}.`);
     lines.push(
       unbound.length === 0
-        ? 'every drawn value resolved to a token — nothing unbound.'
-        : `${unbound.length} drawn value${unbound.length === 1 ? '' : 's'} bound to no token (reported, never invented) — e.g. ${unbound
+        ? "every drawn value resolved to a token — nothing unbound."
+        : `${unbound.length} drawn value${unbound.length === 1 ? "" : "s"} bound to no token (reported, never invented) — e.g. ${unbound
             .slice(0, 3)
-            .map((u) => `${u.property} ${String(u.value)}${u.suggestions.length ? ` → nearest: ${u.suggestions[0]}` : ' → no candidate'}`)
-            .join('; ')}.`,
+            .map(
+              (u) =>
+                `${u.property} ${String(u.value)}${u.suggestions.length ? ` → nearest: ${u.suggestions[0]}` : " → no candidate"}`,
+            )
+            .join("; ")}.`,
     );
     lines.push(BASELESS_SCOPE_NOTE);
     return lines;
@@ -1622,19 +1897,22 @@ return { inventory: rows };
 
   /** Plain-words spelling of a prop's declared type — shared by the diff and
    *  the base-less proposal summary so both reports speak one language. */
-  function propTypeText(t: Contract['props'][number]['type']): string {
-    if (typeof t === 'string') return t;
-    if ('enum' in t) return `enum(${t.enum.join('|')})`;
-    return 'arrayOf';
+  function propTypeText(t: Contract["props"][number]["type"]): string {
+    if (typeof t === "string") return t;
+    if ("enum" in t) return `enum(${t.enum.join("|")})`;
+    return "arrayOf";
   }
 
   /** Bounded API-level contract diff, plain words. */
-  function boundedContractDiff(base: Contract, proposedRaw: Record<string, unknown>): string[] {
+  function boundedContractDiff(
+    base: Contract,
+    proposedRaw: Record<string, unknown>,
+  ): string[] {
     const lines: string[] = [];
     const proposed = ContractSchema.safeParse(proposedRaw);
     if (!proposed.success) {
       return [
-        'The proposed contract did not parse against the schema — see the export for the raw proposal.',
+        "The proposed contract did not parse against the schema — see the export for the raw proposal.",
         DIFF_SCOPE_NOTE,
       ];
     }
@@ -1649,25 +1927,35 @@ return { inventory: rows };
         continue;
       }
       if (typeText(b.type) !== typeText(prop.type)) {
-        lines.push(`prop ${name}: type ${typeText(b.type)} → ${typeText(prop.type)}`);
+        lines.push(
+          `prop ${name}: type ${typeText(b.type)} → ${typeText(prop.type)}`,
+        );
       }
       if (JSON.stringify(b.default) !== JSON.stringify(prop.default)) {
         lines.push(
-          `prop ${name}: default ${b.default === undefined ? '(none)' : JSON.stringify(b.default)} → ${prop.default === undefined ? '(none)' : JSON.stringify(prop.default)}`,
+          `prop ${name}: default ${b.default === undefined ? "(none)" : JSON.stringify(b.default)} → ${prop.default === undefined ? "(none)" : JSON.stringify(prop.default)}`,
         );
       }
     }
     for (const [name] of baseProps) {
-      if (!propProps.has(name)) lines.push(`-prop ${name} (not observed in the drawn set)`);
+      if (!propProps.has(name))
+        lines.push(`-prop ${name} (not observed in the drawn set)`);
     }
     const baseSlots = new Set([...slotsOf(base)].map((s) => s.slot.name));
     const propSlots = new Set([...slotsOf(p)].map((s) => s.slot.name));
     for (const s of propSlots) if (!baseSlots.has(s)) lines.push(`+slot ${s}`);
-    for (const s of baseSlots) if (!propSlots.has(s)) lines.push(`-slot ${s} (not observed in the drawn set)`);
+    for (const s of baseSlots)
+      if (!propSlots.has(s))
+        lines.push(`-slot ${s} (not observed in the drawn set)`);
     if (JSON.stringify(base.anatomy) !== JSON.stringify(p.anatomy)) {
-      lines.push('anatomy/style changes (see the exported proposal for the full trees)');
+      lines.push(
+        "anatomy/style changes (see the exported proposal for the full trees)",
+      );
     }
-    if (lines.length === 0) lines.push('No API-level differences — the drawn set matches its contract.');
+    if (lines.length === 0)
+      lines.push(
+        "No API-level differences — the drawn set matches its contract.",
+      );
     lines.push(DIFF_SCOPE_NOTE);
     return lines;
   }
@@ -1679,7 +1967,7 @@ return { inventory: rows };
   interface PrRequest {
     /** Plain-words step name shown in dry-run and live logs. */
     title: string;
-    method: 'GET' | 'POST' | 'PUT';
+    method: "GET" | "POST" | "PUT";
     url: string;
     /** null for GETs; a template for writes (dry-run shows it verbatim). */
     body: Record<string, unknown> | null;
@@ -1700,55 +1988,65 @@ return { inventory: rows };
     branchSuffix?: string;
   }
 
-  function prPlan(input: PrPlanInput): { branch: string; title: string; body: string; requests: PrRequest[] } {
-    const api = 'https://api.github.com';
+  function prPlan(input: PrPlanInput): {
+    branch: string;
+    title: string;
+    body: string;
+    requests: PrRequest[];
+  } {
+    const api = "https://api.github.com";
     const suffix =
       input.branchSuffix ??
-      new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '').toLowerCase();
-    const branch = `ds-contracts/propose-${input.contractId.replace(/[^a-z0-9.-]+/gi, '-')}-${suffix}`;
+      new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "").toLowerCase();
+    const branch = `ds-contracts/propose-${input.contractId.replace(/[^a-z0-9.-]+/gi, "-")}-${suffix}`;
     const repoUrl = `${api}/repos/${input.owner}/${input.repo}`;
     const title = `Proposed contract change: ${input.contractId} (from Figma)`;
     const body = [
       `A designer proposed this change from Figma via the DS Contracts Sync Runner plugin.`,
-      '',
+      "",
       `Base: ${input.contractId} v${input.baseVersion}`,
-      '',
-      '## Summary',
+      "",
+      "## Summary",
       ...input.summaryLines.map((l) => `- ${l}`),
-      '',
-      '_The contract file in this PR is the proposed document; review it like any other contract diff._',
-    ].join('\n');
+      "",
+      "_The contract file in this PR is the proposed document; review it like any other contract diff._",
+    ].join("\n");
     const requests: PrRequest[] = [
       {
         title: input.base
           ? `Confirm base branch "${input.base}" exists`
-          : 'Resolve the default branch',
-        method: 'GET',
+          : "Resolve the default branch",
+        method: "GET",
         url: input.base ? `${repoUrl}/git/ref/heads/${input.base}` : repoUrl,
         body: null,
       },
       {
         title: `Create branch ${branch}`,
-        method: 'POST',
+        method: "POST",
         url: `${repoUrl}/git/refs`,
-        body: { ref: `refs/heads/${branch}`, sha: '<base branch head sha>' },
+        body: { ref: `refs/heads/${branch}`, sha: "<base branch head sha>" },
       },
       {
         title: `Commit ${input.path} on ${branch}`,
-        method: 'PUT',
+        method: "PUT",
         url: `${repoUrl}/contents/${input.path}`,
         body: {
           message: `propose: ${input.contractId} contract change from Figma`,
           branch,
-          content: '<base64 of the proposed contract>',
-          sha: '<existing file sha, when the file already exists>',
+          content: "<base64 of the proposed contract>",
+          sha: "<existing file sha, when the file already exists>",
         },
       },
       {
-        title: 'Open the pull request',
-        method: 'POST',
+        title: "Open the pull request",
+        method: "POST",
         url: `${repoUrl}/pulls`,
-        body: { title, head: branch, base: input.base || '<default branch>', body },
+        body: {
+          title,
+          head: branch,
+          base: input.base || "<default branch>",
+          body,
+        },
       },
     ];
     return { branch, title, body, requests };
@@ -1769,7 +2067,7 @@ return { inventory: rows };
    *  from the contracts already baked into this build (Card + the components
    *  it composes). One click on the Build tab feeds it straight into the
    *  existing generate path — no paste, no repo, no CLI. */
-  const SAMPLE_IDS = ['ds.card', 'ds.badge', 'ds.avatar', 'ds.button'];
+  const SAMPLE_IDS = ["ds.card", "ds.badge", "ds.avatar", "ds.button"];
 
   return {
     contractCount: bakedById.size,
@@ -1782,13 +2080,15 @@ return { inventory: rows };
     /** The baked sample bundle (G9) — null when this build carries none of
      *  the curated contracts (a stripped custom build). */
     sampleBundleJson: (): string | null => {
-      const picked = SAMPLE_IDS.map((id) => bakedById.get(id)).filter((c): c is Contract => !!c);
+      const picked = SAMPLE_IDS.map((id) => bakedById.get(id)).filter(
+        (c): c is Contract => !!c,
+      );
       if (picked.length === 0) return null;
       return JSON.stringify(
         {
-          type: 'CONTRACTS-BUNDLE',
+          type: "CONTRACTS-BUNDLE",
           version: 1,
-          note: 'Sample library — the reference contracts baked into this plugin build.',
+          note: "Sample library — the reference contracts baked into this plugin build.",
           contracts: picked,
         },
         null,

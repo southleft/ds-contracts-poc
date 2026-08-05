@@ -13,7 +13,17 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { handleRequest, MESSAGES } from '../src/index';
 import { MODEL, ANTHROPIC_URL } from '../src/anthropic';
-import type { Env, KVNamespaceLite, Deps } from '../src/env';
+import { BudgetCoordinator } from '../src/budget-coordinator';
+import type {
+  Deps,
+  DurableObjectIdLite,
+  DurableObjectNamespaceLite,
+  DurableObjectStateLite,
+  DurableObjectStorageLite,
+  DurableObjectStorageTransactionLite,
+  Env,
+  KVNamespaceLite,
+} from '../src/env';
 
 // ---------------------------------------------------------------------------
 // Mocks
@@ -29,6 +39,73 @@ class MemoryKV implements KVNamespaceLite {
   }
   async delete(key: string): Promise<void> {
     this.store.delete(key);
+  }
+}
+
+class RaceStorage implements DurableObjectStorageLite {
+  values = new Map<string, unknown>();
+  private tail: Promise<void> = Promise.resolve();
+
+  async transaction<T>(
+    closure: (txn: DurableObjectStorageTransactionLite) => Promise<T>,
+  ): Promise<T> {
+    // Yield before taking the lock so parallel requests genuinely contend.
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    const previous = this.tail;
+    let release!: () => void;
+    this.tail = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    await previous;
+    try {
+      const txn: DurableObjectStorageTransactionLite = {
+        get: async <V>(key: string) => {
+          await new Promise<void>((resolve) => setTimeout(resolve, 0));
+          return this.values.get(key) as V | undefined;
+        },
+        put: async <V>(key: string, value: V) => {
+          await new Promise<void>((resolve) => setTimeout(resolve, 0));
+          this.values.set(key, value);
+        },
+      };
+      return await closure(txn);
+    } finally {
+      release();
+    }
+  }
+}
+
+interface NamedId extends DurableObjectIdLite {
+  name: string;
+}
+
+class RaceBudgetNamespace implements DurableObjectNamespaceLite {
+  private readonly storages = new Map<string, RaceStorage>();
+  private readonly coordinators = new Map<string, BudgetCoordinator>();
+
+  idFromName(name: string): DurableObjectIdLite {
+    return { name } as NamedId;
+  }
+
+  get(id: DurableObjectIdLite) {
+    const name = (id as NamedId).name;
+    let coordinator = this.coordinators.get(name);
+    if (!coordinator) {
+      const storage = new RaceStorage();
+      this.storages.set(name, storage);
+      coordinator = new BudgetCoordinator({ storage } as DurableObjectStateLite);
+      this.coordinators.set(name, coordinator);
+    }
+    return { fetch: (input: RequestInfo | URL, init?: RequestInit) => coordinator.fetch(new Request(input, init)) };
+  }
+
+  used(name = 'budget:2026-07-08'): number {
+    return Number(this.storages.get(name)?.values.get('used') ?? 0);
+  }
+
+  seed(used: number, name = 'budget:2026-07-08'): void {
+    this.get(this.idFromName(name));
+    this.storages.get(name)?.values.set('used', used);
   }
 }
 
@@ -63,13 +140,16 @@ function mockAnthropic(toolInputsByName: Record<string, unknown>, opts: { status
   return { fetchImpl, calls };
 }
 
-function makeEnv(overrides: Partial<Env> = {}): Env & { ASSIST_KV: MemoryKV } {
+type TestEnv = Env & { ASSIST_KV: MemoryKV; BUDGET_COORDINATOR: RaceBudgetNamespace };
+
+function makeEnv(overrides: Partial<Env> = {}): TestEnv {
   return {
     ANTHROPIC_API_KEY: 'sk-ant-test-not-a-real-key',
     ASSIST_KV: new MemoryKV(),
+    BUDGET_COORDINATOR: new RaceBudgetNamespace(),
     ASSIST_ENABLED: 'true',
     ...overrides,
-  } as Env & { ASSIST_KV: MemoryKV };
+  } as TestEnv;
 }
 
 const ORIGIN = 'https://ds-contracts-playground.pages.dev';
@@ -228,6 +308,19 @@ test('routing: unknown endpoint 404, GET 405, non-JSON 400, invalid input names 
   assert.match(((await invalid.json()) as { error: string }).error, /entryUrl/);
 });
 
+test('request body cap counts UTF-8 bytes', async () => {
+  const body = { ...FETCH_PLAN_BODY, entryUrl: '💥'.repeat(90_000) };
+  const raw = JSON.stringify(body);
+  assert.ok(raw.length < 320_000);
+  assert.ok(Buffer.byteLength(raw, 'utf8') > 320_000);
+  const response = await handleRequest(
+    req('/v1/assist/fetch-plan', body),
+    makeEnv(),
+    deps(mockAnthropic({}).fetchImpl),
+  );
+  assert.equal(response.status, 413);
+});
+
 // ---------------------------------------------------------------------------
 // Per-IP limit
 // ---------------------------------------------------------------------------
@@ -257,7 +350,7 @@ test('per-IP limit: request N+1 on the same endpoint class answers 429; other IP
 test('budget: a spent day answers 429 with the user-facing message; no model call is made', async () => {
   const { fetchImpl, calls } = mockAnthropic({ propose_fetch_plan: FETCH_PLAN_OUTPUT });
   const env = makeEnv({ ASSIST_DAILY_TOKEN_BUDGET: '500' });
-  env.ASSIST_KV.store.set('budget:2026-07-08', '500'); // pre-spent
+  env.BUDGET_COORDINATOR.seed(500);
   const res = await handleRequest(req('/v1/assist/fetch-plan', FETCH_PLAN_BODY), env, deps(fetchImpl));
   assert.equal(res.status, 429);
   const body = (await res.json()) as { error: string };
@@ -266,17 +359,80 @@ test('budget: a spent day answers 429 with the user-facing message; no model cal
   assert.equal(calls.length, 0);
 });
 
-test('budget: actual usage accrues; the next request over the line is refused', async () => {
-  const { fetchImpl } = mockAnthropic({ propose_fetch_plan: FETCH_PLAN_OUTPUT }); // 1200 tokens/call
-  const env = makeEnv({ ASSIST_DAILY_TOKEN_BUDGET: '2000' });
+test('budget: conservative reservations land before calls and prevent sequential overshoot', async () => {
+  const { fetchImpl, calls } = mockAnthropic({ propose_fetch_plan: FETCH_PLAN_OUTPUT });
+  const env = makeEnv({ ASSIST_DAILY_TOKEN_BUDGET: '200000' });
   const d = deps(fetchImpl);
   assert.equal((await handleRequest(req('/v1/assist/fetch-plan', FETCH_PLAN_BODY), env, d)).status, 200);
-  assert.equal(env.ASSIST_KV.store.get('budget:2026-07-08'), '1200');
-  // 1200 < 2000: still open — the charge lands after the call (bounded overshoot).
+  const reservation = env.BUDGET_COORDINATOR.used();
+  assert.ok(reservation > 1200, 'reservation must conservatively exceed mocked actual usage');
+  env.ASSIST_DAILY_TOKEN_BUDGET = String(reservation * 2);
   assert.equal((await handleRequest(req('/v1/assist/fetch-plan', FETCH_PLAN_BODY), env, d)).status, 200);
-  assert.equal(env.ASSIST_KV.store.get('budget:2026-07-08'), '2400');
+  assert.equal(env.BUDGET_COORDINATOR.used(), reservation * 2);
   const res = await handleRequest(req('/v1/assist/fetch-plan', FETCH_PLAN_BODY), env, d);
   assert.equal(res.status, 429);
+  assert.equal(calls.length, 2, 'the refused request never reaches the model');
+});
+
+test('budget: parallel reservations are atomic and admitted total never exceeds the daily budget', async () => {
+  const { fetchImpl, calls } = mockAnthropic({ propose_fetch_plan: FETCH_PLAN_OUTPUT });
+  const probe = makeEnv({ ASSIST_DAILY_TOKEN_BUDGET: '200000' });
+  assert.equal(
+    (await handleRequest(req('/v1/assist/fetch-plan', FETCH_PLAN_BODY), probe, deps(fetchImpl))).status,
+    200,
+  );
+  const reservation = probe.BUDGET_COORDINATOR.used();
+  assert.ok(reservation > 0);
+
+  calls.length = 0;
+  const budget = reservation * 3;
+  const env = makeEnv({
+    ASSIST_DAILY_TOKEN_BUDGET: String(budget),
+    ASSIST_IP_DAILY_LIMIT: '20',
+  });
+  const requests = Array.from({ length: 12 }, (_, i) =>
+    handleRequest(
+      req('/v1/assist/fetch-plan', FETCH_PLAN_BODY, { ip: `198.51.100.${i + 1}` }),
+      env,
+      deps(fetchImpl),
+    ),
+  );
+  const responses = await Promise.all(requests);
+  const admitted = responses.filter((response) => response.status === 200).length;
+  const refused = responses.filter((response) => response.status === 429).length;
+
+  assert.equal(admitted, 3);
+  assert.equal(refused, 9);
+  assert.equal(calls.length, admitted);
+  assert.equal(env.BUDGET_COORDINATOR.used(), admitted * reservation);
+  assert.ok(admitted * reservation <= budget);
+});
+
+test('budget: missing or unavailable coordinator fails closed with the named refusal', async () => {
+  const { fetchImpl, calls } = mockAnthropic({ propose_fetch_plan: FETCH_PLAN_OUTPUT });
+  const environments = [
+    makeEnv({ BUDGET_COORDINATOR: undefined }),
+    makeEnv({
+      BUDGET_COORDINATOR: {
+        idFromName: () => ({}),
+        get: () => ({
+          fetch: async () => {
+            throw new Error('coordinator unavailable');
+          },
+        }),
+      },
+    }),
+  ];
+  for (const env of environments) {
+    const response = await handleRequest(
+      req('/v1/assist/fetch-plan', FETCH_PLAN_BODY),
+      env,
+      deps(fetchImpl),
+    );
+    assert.equal(response.status, 429);
+    assert.equal(((await response.json()) as { error: string }).error, MESSAGES.budget);
+  }
+  assert.equal(calls.length, 0);
 });
 
 // ---------------------------------------------------------------------------
@@ -293,7 +449,8 @@ test('fetch-plan: forced-tool request shape, key stays in the header, proposal c
   // Anthropic request shape
   assert.equal(calls.length, 1);
   assert.equal(calls[0].url, ANTHROPIC_URL);
-  assert.equal(calls[0].body.model, MODEL);
+  assert.equal(MODEL, 'claude-opus-4-8');
+  assert.equal(calls[0].body.model, 'claude-opus-4-8');
   assert.equal(calls[0].body.max_tokens, 1024);
   assert.deepEqual(calls[0].body.thinking, { type: 'disabled' });
   assert.deepEqual(calls[0].body.tool_choice, { type: 'tool', name: 'propose_fetch_plan' });
@@ -417,6 +574,22 @@ test('repo-profile: oversized samples are refused with a named 400', async () =>
   // Body cap (320KB) or sample cap (200KB) both refuse loudly; this one trips the sample cap.
   assert.equal(res.status, 400);
   assert.match(((await res.json()) as { error: string }).error, /200KB/);
+});
+
+test('repo-profile: sample content cap counts UTF-8 bytes', async () => {
+  const content = '💥'.repeat(60_000);
+  assert.ok(content.length < 200_000);
+  assert.ok(Buffer.byteLength(content, 'utf8') > 200_000);
+  const response = await handleRequest(
+    req('/v1/assist/repo-profile', {
+      ...REPO_PROFILE_BODY,
+      samples: [{ path: 'theme.css', content }],
+    }),
+    makeEnv(),
+    deps(mockAnthropic({}).fetchImpl),
+  );
+  assert.equal(response.status, 400);
+  assert.match(((await response.json()) as { error: string }).error, /200KB/);
 });
 
 // ---------------------------------------------------------------------------
@@ -587,6 +760,20 @@ test('fix-contract: every input violation is refused by name; the oversized body
   assert.equal(calls.length, 0); // refusals are free — no model call, no quota
 });
 
+test('fix-contract: serialized contract cap counts UTF-8 bytes', async () => {
+  const multibyteContract = { ...FIX_CONTRACT, description: '💥'.repeat(20_000) };
+  const serialized = JSON.stringify(multibyteContract);
+  assert.ok(serialized.length < 64_000);
+  assert.ok(Buffer.byteLength(serialized, 'utf8') > 64_000);
+  const response = await handleRequest(
+    req('/v1/assist/fix-contract', { ...FIX_CONTRACT_BODY, contract: multibyteContract }),
+    makeEnv(),
+    deps(mockAnthropic({}).fetchImpl),
+  );
+  assert.equal(response.status, 400);
+  assert.match(((await response.json()) as { error: string }).error, /under 64KB/);
+});
+
 test('fix-contract: per-IP cap refuses with 429 and is its own endpoint class', async () => {
   const { fetchImpl } = mockAnthropic({
     propose_contract_fix: { contract: FIXED_CONTRACT },
@@ -605,22 +792,22 @@ test('fix-contract: per-IP cap refuses with 429 and is its own endpoint class', 
 test('fix-contract: a spent budget answers 429 before any model call', async () => {
   const { fetchImpl, calls } = mockAnthropic({ propose_contract_fix: { contract: FIXED_CONTRACT } });
   const env = makeEnv({ ASSIST_DAILY_TOKEN_BUDGET: '500' });
-  env.ASSIST_KV.store.set('budget:2026-07-08', '500'); // pre-spent
+  env.BUDGET_COORDINATOR.seed(500);
   const res = await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), env, deps(fetchImpl));
   assert.equal(res.status, 429);
   assert.equal(((await res.json()) as { error: string }).error, MESSAGES.budget);
   assert.equal(calls.length, 0);
 });
 
-test('fix-contract: a non-object contract in the tool output answers 502 — with usage still charged', async () => {
+test('fix-contract: a non-object contract in the tool output answers 502 — with its reservation retained', async () => {
   const { fetchImpl, calls } = mockAnthropic({ propose_contract_fix: { contract: 'not an object' } });
   const env = makeEnv();
   const res = await handleRequest(req('/v1/assist/fix-contract', FIX_CONTRACT_BODY), env, deps(fetchImpl));
   assert.equal(res.status, 502);
   assert.match(((await res.json()) as { error: string }).error, /no contract object/);
   assert.equal(calls.length, 1);
-  // The model was called and answered, so the tokens are real: budget charged.
-  assert.equal(env.ASSIST_KV.store.get('budget:2026-07-08'), '1200');
+  // The model was called, so the conservative pre-call reservation remains.
+  assert.ok(env.BUDGET_COORDINATOR.used() > 8192);
 });
 
 test('fix-contract: upstream mapping — no tool_use 502, 429/529 retryable 429, other errors 502', async () => {

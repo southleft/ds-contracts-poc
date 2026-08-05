@@ -5122,13 +5122,14 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           const sent = await handleRequest(req('/bridge/' + code, { origin: null, body: JSON.stringify(bundle) }), env, deps);
           const sentBody = await sent.json();
           if (sent.status !== 200 || sentBody.ok !== true) throw new Error('bridge refused the push: ' + sent.status + ' ' + JSON.stringify(sentBody));
-          if (store.get('bridge:kind:' + code) !== 'contracts-bundle') throw new Error('payload kind not recorded as contracts-bundle');
+          const stored = JSON.parse(store.get('bridge:payload:' + code));
+          if (stored.kind !== 'contracts-bundle') throw new Error('payload kind not recorded as contracts-bundle');
           const delivered = await handleRequest(req('/bridge/' + code, { method: 'GET' }), env, deps);
           const body = await delivered.json();
           if (body.status !== 'delivered' || body.kind !== 'contracts-bundle') throw new Error('delivery wrong: ' + JSON.stringify(body).slice(0, 200));
           if (JSON.stringify(body.dump) !== JSON.stringify(bundle)) throw new Error('bundle not byte-identical through the bridge');
           if (body.dump.contracts[0].id !== 'polaris.badge') throw new Error('wrong contract delivered: ' + body.dump.contracts[0].id);
-          if (store.has('bridge:dump:' + code) || store.has('bridge:sess:' + code)) throw new Error('deliver-once keys not deleted after delivery');
+          if (store.has('bridge:payload:' + code) || store.has('bridge:dump:' + code) || store.has('bridge:sess:' + code)) throw new Error('deliver-once keys not deleted after delivery');
           // Referee: a malformed envelope refuses BY NAME (the bridge schema).
           const s2 = await handleRequest(req('/bridge/session'), env, deps);
           const code2 = (await s2.json()).code;
@@ -5200,13 +5201,14 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
           // The plugin uploads — the literal "null" origin a plugin iframe sends.
           const sent = await handleRequest(req('/bridge/' + code, { origin: 'null', body: JSON.stringify(envelope) }), env, deps);
           if (sent.status !== 200) throw new Error('bridge refused the proposal upload: ' + sent.status);
-          if (store.get('bridge:kind:' + code) !== 'proposal') throw new Error('payload kind not recorded as proposal');
+          const stored = JSON.parse(store.get('bridge:payload:' + code));
+          if (stored.kind !== 'proposal') throw new Error('payload kind not recorded as proposal');
           // The CLI polls — no Origin at all; the pairing code is the auth.
           const delivered = await handleRequest(req('/bridge/' + code, { method: 'GET', origin: null }), env, deps);
           const body = await delivered.json();
           if (body.status !== 'delivered' || body.kind !== 'proposal') throw new Error('delivery wrong: ' + JSON.stringify(body).slice(0, 200));
           if (JSON.stringify(body.dump) !== JSON.stringify(envelope)) throw new Error('proposal not byte-identical through the bridge');
-          if (store.has('bridge:dump:' + code) || store.has('bridge:sess:' + code) || store.has('bridge:kind:' + code)) throw new Error('deliver-once keys not deleted after delivery');
+          if (store.has('bridge:payload:' + code) || store.has('bridge:dump:' + code) || store.has('bridge:sess:' + code) || store.has('bridge:kind:' + code)) throw new Error('deliver-once keys not deleted after delivery');
           // The CLI side over the DELIVERED bytes: referee → plan; without
           // --apply the plan forbids the contract write, diff still renders.
           const parsed = parseProposal(body.dump);

@@ -1173,7 +1173,11 @@ export function Playground() {
   // "Receive from plugin": mint a pairing code, poll until the Sync Runner
   // plugin sends the dump, then feed the SAME dump→proposal path a pasted
   // dump takes (engine/bridge.ts is transport only).
-  const [bridge, setBridge] = useState<{ code: string; expiresAt: number } | null>(null);
+  const [bridge, setBridge] = useState<{
+    code: string;
+    readCapability: string;
+    expiresAt: number;
+  } | null>(null);
   const [bridgeRemaining, setBridgeRemaining] = useState(0);
   const [bridgeBusy, setBridgeBusy] = useState(false);
   const [bridgeError, setBridgeError] = useState<PlainError | null>(null);
@@ -1261,7 +1265,7 @@ export function Playground() {
     }
   };
 
-  const bridgeTick = async (code: string, expiresAt: number) => {
+  const bridgeTick = async (code: string, readCapability: string, expiresAt: number) => {
     const remaining = Math.max(0, Math.round((expiresAt - Date.now()) / 1000));
     setBridgeRemaining(remaining);
     if (remaining <= 0) {
@@ -1272,7 +1276,7 @@ export function Playground() {
     if (bridgeInFlight.current) return; // one in-flight poll at a time
     bridgeInFlight.current = true;
     try {
-      const poll = await pollBridge(code);
+      const poll = await pollBridge(code, readCapability);
       if (poll.status === 'delivered') {
         // One-time read by design (the bridge already deleted its copy) —
         // the CODE is spent, not the listener. Process the dump, then
@@ -1304,7 +1308,11 @@ export function Playground() {
       return;
     }
     const expiresAt = Date.now() + result.session.ttlSeconds * 1000;
-    setBridge({ code: result.session.code, expiresAt });
+    setBridge({
+      code: result.session.code,
+      readCapability: result.session.readCapability,
+      expiresAt,
+    });
     setBridgeDelivered(
       deliveredNames === undefined
         ? null
@@ -1312,7 +1320,12 @@ export function Playground() {
     );
     setBridgeRemaining(result.session.ttlSeconds);
     bridgeTimer.current = window.setInterval(
-      () => void bridgeTick(result.session.code, expiresAt),
+      () =>
+        void bridgeTick(
+          result.session.code,
+          result.session.readCapability,
+          expiresAt,
+        ),
       BRIDGE_POLL_INTERVAL_MS,
     );
   };

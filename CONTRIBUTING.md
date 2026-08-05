@@ -33,10 +33,11 @@ npm run docs:check # every number the docs quote, re-derived from the repo
 npx tsc --noEmit   # src, scripts, extract, parity, evals
 ```
 
-Or run a whole CI lane locally, which is what the workflows run:
-`npm run ci:lane fast` (~8s, 10 gates) and `npm run ci:lane full` (~15 min, 28
-gates). [docs/25](docs/25-reading-a-red-ci.md) maps every red gate to the local
-command that reproduces it.
+Or run a whole CI lane locally, which reads the current workflow instead of a
+second hard-coded command list: `npm run ci:lane fast`, `npm run ci:lane full`,
+and `npm run ci:lane catalog-visual`. `npm run ci:lanes` derives current gate
+coverage and refuses an unwired check. [docs/25](docs/25-reading-a-red-ci.md)
+maps each lane and red gate to its local reproducer.
 
 **`npm run parity` is deliberately NOT in that list, and it used to be.** The
 differ compares contracts against committed *snapshots* of the live Figma file,
@@ -52,6 +53,14 @@ reason (`.github/scripts/lane-coverage.ts` carries the exclusion and its
 justification, so the exclusion itself cannot rot silently).
 
 Depending on what you touched, also: `npm run plugin:check` (the plugin engine against the mocked canvas), `npm run core:browser-check` (the engine stays browser-safe), `npm run verify:package`, `npm run test:onboarding`.
+
+Release candidates have a separate, approval-gated procedure. Follow
+[docs/27 — Release Process](docs/27-release-process.md) and record each result
+in [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md). A manifest version is not
+evidence that npm, a GitHub release, a tag, or the deployed sites contain that
+version. Contributors may prepare packs and evidence; only the designated
+owners approve tags, GitHub releases, npm publication, dist-tag changes, and
+Cloudflare deployment.
 
 **`npm run docs:check` is the anti-rot gate for prose.** Eval counts, the contract count, the token count, the capture-config count, and every relative link in `README.md` / `ROADMAP.md` / `CONTRIBUTING.md` / `docs/*.md` are re-derived from the repo and compared to what the docs say; a disagreement fails by name. It reads `evals/results.json` and never runs the suite, so it costs seconds. If you add or remove an eval case, run `npm run eval` (which rewrites `evals/results.json`) and then `npm run docs:check` will tell you exactly which lines to update. A number that is deliberately historical — "Round 5 shipped with 24/24 evals" — gets `<!-- docs-check:ignore -->` on its line, and nothing else does.
 

@@ -1,10 +1,10 @@
 {
   "name": "@ds-contracts/schema",
-  "version": "16.0.0",
+  "version": "16.1.0-rc.1",
   "publishConfig": {
     "access": "public"
   },
-  "description": "The ds-contracts component contract schema \u2014 the single Zod document (spec v16), its generated JSON Schema, and the schema-level validateContract referee.",
+  "description": "The ds-contracts component contract schema — the single Zod document (spec v16), its generated JSON Schema, and the schema-level validateContract referee.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -23,7 +23,8 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json && node emit-json-schema.mjs",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "package:smoke": "npm pack --dry-run --json"
   },
   "dependencies": {
     "zod": "^4.4.3"

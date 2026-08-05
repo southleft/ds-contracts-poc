@@ -325,7 +325,7 @@ const repoProfile: AssistEndpoint = {
       return 'every sample needs a string path and content';
     }
     const sampleBytes = (input.samples as Array<{ content: string }>).reduce(
-      (n, s) => n + s.content.length,
+      (n, s) => n + new TextEncoder().encode(s.content).byteLength,
       0,
     );
     if (sampleBytes > 200_000) return 'samples are too large — keep total content under 200KB';
@@ -702,7 +702,7 @@ const fixContract: AssistEndpoint = {
   validate(input) {
     if (!isObj(input)) return 'body must be a JSON object';
     if (!isObj(input.contract)) return 'contract (object) is required';
-    if (JSON.stringify(input.contract).length > MAX_CONTRACT_BYTES) {
+    if (new TextEncoder().encode(JSON.stringify(input.contract)).byteLength > MAX_CONTRACT_BYTES) {
       return 'contract is too large — keep it under 64KB serialized';
     }
     if (!isStrArray(input.refusals) || input.refusals.length === 0) {

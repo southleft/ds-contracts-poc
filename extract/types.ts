@@ -19,7 +19,8 @@
  * (raw CSS values never become invented tokens).
  */
 
-export type PropKind = 'enum' | 'boolean' | 'string' | 'number' | 'node' | 'event' | 'other';
+export type PropKind =
+  "enum" | "boolean" | "string" | "number" | "node" | "event" | "other";
 
 export interface ExtractedProp {
   name: string;
@@ -32,7 +33,7 @@ export interface ExtractedProp {
   /** 'declared' — read directly from source syntax. 'inferred' — a heuristic
    *  filled a gap (e.g. one-hop type-alias resolution). Reconciliation and
    *  the proposal report surface anything below 'declared' for human review. */
-  confidence: 'declared' | 'inferred';
+  confidence: "declared" | "inferred";
 }
 
 export interface ExtractedComponent {
@@ -54,6 +55,14 @@ export interface ExtractedComponent {
   anatomy?: ExtractedAnatomy;
 }
 
+/** The normalized input to source.revision. Paths and adapter labels are
+ * metadata, not contract-relevant source facts; the adapter is recorded
+ * alongside the revision in contract provenance. */
+export type ContractRelevantExtraction = Omit<
+  ExtractedComponent,
+  "source" | "adapter"
+>;
+
 // ---------------------------------------------------------------------------
 // Anatomy extraction IR (css-module adapter → propose.ts)
 // ---------------------------------------------------------------------------
@@ -66,23 +75,27 @@ export interface ExtractedComponent {
 export interface ExtractedPart {
   element?: string;
   layout?: {
-    display?: 'flex' | 'inline-flex';
-    direction?: 'row' | 'column';
-    align?: 'start' | 'center' | 'end' | 'stretch' | 'baseline';
-    justify?: 'start' | 'center' | 'end' | 'space-between';
+    display?: "flex" | "inline-flex";
+    direction?: "row" | "column";
+    align?: "start" | "center" | "end" | "stretch" | "baseline";
+    justify?: "start" | "center" | "end" | "space-between";
     grow?: boolean;
     overlap?: boolean;
   };
-  overlay?: { placement: 'top' | 'bottom' | 'start' | 'end' };
+  overlay?: { placement: "top" | "bottom" | "start" | "end" };
   tokens?: Record<string, string>;
   /** Root-level interaction states: state → (css prop → token ref). */
   states?: Record<string, Record<string, string>>;
   content?: { prop: string };
   text?: string;
-  animation?: 'spin' | 'pulse';
+  animation?: "spin" | "pulse";
   slot?: { name: string };
   /** Code component name (e.g. "Avatar") — id-mapped by propose.ts. */
-  component?: { name: string; props?: Record<string, string | boolean>; text?: string };
+  component?: {
+    name: string;
+    props?: Record<string, string | boolean>;
+    text?: string;
+  };
   /** Phase B (Astryx composition tier): the part is a template mapped over an
    *  array prop (`items.map(item => <X/>)`) — the code-side spelling of the
    *  contract's repeat channel. The design-time `sample` is NOT decidable
@@ -129,7 +142,7 @@ export interface ExtractedAnatomy {
    *  + foreign var()s, each with part/state/axis context) — the input for
    *  OPT-IN provisional minting (core/mint-code.ts). The report channels
    *  above are unchanged; nothing here binds unless a proposer mints. */
-  mintables?: import('../core/mint-code.js').CodeMintFinding[];
+  mintables?: import("../core/mint-code.js").CodeMintFinding[];
 }
 
 /** A design-side component set, from extract/figma-dump.js or the parity
@@ -144,7 +157,7 @@ export interface DesignComponent {
 
 export interface ExtractConfig {
   code: {
-    adapter: 'react-tsx' | 'cem';
+    adapter: "react-tsx" | "cem";
     /** react-tsx: directory to scan recursively for components */
     root?: string;
     /** cem: path to custom-elements.json */
@@ -180,20 +193,21 @@ export interface ExtractConfig {
  *  and diagnose treats it as outside declared scope — NOT [code AHEAD]
  *  drift. Two sides, one classification; the referee never flags the
  *  pipeline's own documented skip. */
-export const isEventCallbackName = (name: string): boolean => /^on[A-Z]/.test(name);
+export const isEventCallbackName = (name: string): boolean =>
+  /^on[A-Z]/.test(name);
 
 export const normalizeName = (s: string): string =>
-  s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  s.toLowerCase().replace(/[^a-z0-9]/g, "");
 
 export const kebab = (s: string): string =>
   s
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-    .replace(/[\s_]+/g, '-')
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/[\s_]+/g, "-")
     .toLowerCase();
 
 export const titleCase = (s: string): string =>
   s
-    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
-    .replace(/[-_]/g, ' ')
+    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .replace(/[-_]/g, " ")
     .replace(/\b\w/g, (c) => c.toUpperCase())
     .trim();

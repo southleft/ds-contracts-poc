@@ -226,10 +226,10 @@ const TRIAGE: TriageRule[] = [
  *  it appears. Keep this list SHORT and specific — it is the one place a
  *  both-surfaces-wrong defect can hide, so every entry names the cell. */
 const INVARIANT_TRIAGE: Record<string, string> = {
-  // ---- 12 verdicts standing at the commit this baseline was written -------
+  // ---- 9 verdicts standing at the RC baseline -----------------------------
   // Every one is a REAL cross-surface divergence, not an artefact. They are
   // named here so the gate can be wired into a lane while they are open; a
-  // 13th verdict, or any change to these twelve, fails immediately.
+  // tenth verdict, or any change to these nine, fails immediately.
 
   // 1) ds.blockquote — the CSS surface paints NOTHING (0% ink of its own box)
   //    while the canvas draws the left rule + inset padding. The emitted
@@ -241,40 +241,36 @@ const INVARIANT_TRIAGE: Record<string, string> = {
     'no run to draw, while the canvas frame keeps the contract inset padding and draws the rule. ' +
     'Cross-surface, real, open.',
 
-  // 2-7) ds.inline / ds.stack — the CSS emitter writes the CONTRACT NAME as
-  //    the root's text ("Inline", "Stack") for a root with no parts and no
-  //    content prop; the canvas draws the empty auto-layout frame. Six cells.
-  'ds.inline :: Gap=Large :: one-surface-blank': INLINE_STACK_CAUSE(),
-  'ds.inline :: Gap=Medium :: one-surface-blank': INLINE_STACK_CAUSE(),
-  'ds.inline :: Gap=Small :: one-surface-blank': INLINE_STACK_CAUSE(),
-  'ds.stack :: Gap=Large :: one-surface-blank': INLINE_STACK_CAUSE(),
-  'ds.stack :: Gap=Medium :: one-surface-blank': INLINE_STACK_CAUSE(),
-  'ds.stack :: Gap=Small :: one-surface-blank': INLINE_STACK_CAUSE(),
+  // 2-3) ds.divider — no sample content exists on either surface. The canvas
+  //    draws the explicit line geometry; the CSS <hr> remains ink-blank in
+  //    this fixture. Divider is outside the v1 PROVEN archetype list, so the
+  //    release records the measured residual rather than inventing text.
+  'ds.divider :: Variant=Strong :: one-surface-blank': DIVIDER_CAUSE(),
+  'ds.divider :: Variant=Subtle :: one-surface-blank': DIVIDER_CAUSE(),
 
-  // 8-12) ds.status-dot — THE AVATAR-GROUP CLASS, alive at HEAD. The CSS
-  //    surface renders the literal string "StatusDot" inside an 8×8 pill; the
-  //    text escapes its own root's border box by 31.14 device px. The canvas
-  //    draws the 8×8 dot and no text at all. A pixel diff alone prices this at
-  //    26% and calls it a size delta; the invariant names it.
-  'ds.status-dot :: Variant=Accent :: text-overflows-root-css': STATUS_DOT_CAUSE(),
-  'ds.status-dot :: Variant=Error :: text-overflows-root-css': STATUS_DOT_CAUSE(),
-  'ds.status-dot :: Variant=Neutral :: text-overflows-root-css': STATUS_DOT_CAUSE(),
-  'ds.status-dot :: Variant=Success :: text-overflows-root-css': STATUS_DOT_CAUSE(),
-  'ds.status-dot :: Variant=Warning :: text-overflows-root-css': STATUS_DOT_CAUSE(),
+  // 4-9) ds.inline / ds.stack — these are empty layout primitives in this
+  //    fixture: neither contract declares children/default content. Both
+  //    surfaces now render the same empty box after the emitter stopped
+  //    inventing the contract name. A 0-vs-0 measurement remains named void.
+  'ds.inline :: Gap=Large :: both-surfaces-blank': INLINE_STACK_CAUSE(),
+  'ds.inline :: Gap=Medium :: both-surfaces-blank': INLINE_STACK_CAUSE(),
+  'ds.inline :: Gap=Small :: both-surfaces-blank': INLINE_STACK_CAUSE(),
+  'ds.stack :: Gap=Large :: both-surfaces-blank': INLINE_STACK_CAUSE(),
+  'ds.stack :: Gap=Medium :: both-surfaces-blank': INLINE_STACK_CAUSE(),
+  'ds.stack :: Gap=Small :: both-surfaces-blank': INLINE_STACK_CAUSE(),
 };
 
 function INLINE_STACK_CAUSE(): string {
   return (
-    'the CSS emitter writes the CONTRACT NAME as the root\'s text for a root with no parts and no content ' +
-    'prop (emitted markup: <div class="inline">Inline</div>), while the canvas draws the empty auto-layout ' +
-    'frame the contract actually describes. Cross-surface, real, open.'
+    'the catalog fixture supplies no children to this layout primitive, so both surfaces are intentionally ' +
+    'ink-blank. The invariant keeps the denominator honest: empty-vs-empty is void evidence, not a fidelity ' +
+    'pass. Cross-surface, measured, explicitly outside the v1 supported archetype list.'
   );
 }
-function STATUS_DOT_CAUSE(): string {
+function DIVIDER_CAUSE(): string {
   return (
-    'THE AVATAR-GROUP CLASS, alive at HEAD: the CSS surface renders the literal string "StatusDot" inside ' +
-    'an 8×8 pill and the glyphs escape the root border box by 31.14 device px; the canvas draws the 8×8 ' +
-    'dot with no text. Caught by the invariant, not by the percentage. Cross-surface, real, open.'
+    'the empty CSS <hr> paints no measurable ink in this fixture while the canvas draws the contract line. ' +
+    'Divider is not a v1-supported archetype; the residual stays named instead of adding fabricated sample text.'
   );
 }
 

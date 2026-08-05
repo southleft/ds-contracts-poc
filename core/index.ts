@@ -48,7 +48,7 @@ export {
   type Prop,
   type Slot,
   type WalkedPart,
-} from '../scripts/contract-schema.js';
+} from "../scripts/contract-schema.js";
 
 // Token loading from JSON objects (never paths).
 export {
@@ -58,8 +58,13 @@ export {
   tokenInventoryFromJson,
   type TokenEntry,
   type TokenTreeInput,
-} from './tokens.js';
-export { tokenCorpusFromJson, type TokenCorpus, type TokenCorpusInput, type DerivedTextStyle } from './token-corpus.js';
+} from "./tokens.js";
+export {
+  tokenCorpusFromJson,
+  type TokenCorpus,
+  type TokenCorpusInput,
+  type DerivedTextStyle,
+} from "./token-corpus.js";
 // Foreign token sets — the CONTRACTS-BUNDLE tokenSet section (the literal-
 // set sync the MUI/Tailwind example scripts established, engine-owned).
 export {
@@ -73,8 +78,13 @@ export {
   type CompiledTokenSet,
   type TokenSetPayload,
   type TokenSetRow,
-} from './token-set.js';
-export { inferDtcgType, wrapPlainTokensAsDtcg, type PlainWrapResult, type PlainWrapSkip } from './wrap-plain-tokens.js';
+} from "./token-set.js";
+export {
+  inferDtcgType,
+  wrapPlainTokensAsDtcg,
+  type PlainWrapResult,
+  type PlainWrapSkip,
+} from "./wrap-plain-tokens.js";
 // StyleX defineVars + light-dark() reader (Astryx round — BYO-token layer).
 export {
   splitLightDark,
@@ -82,7 +92,7 @@ export {
   type StylexTokenEntry,
   type StylexTokenLayer,
   type StylexTokenSkip,
-} from './stylex-tokens.js';
+} from "./stylex-tokens.js";
 
 // Provisional token minting (unresolvable variable names → imported.* tree).
 export {
@@ -96,7 +106,7 @@ export {
   type MintResult,
   type MintedBinding,
   type MintedEntry,
-} from './mint-tokens.js';
+} from "./mint-tokens.js";
 
 // Captured tokens (dump v1.4 _variables → the designer's real token layer).
 export {
@@ -104,7 +114,7 @@ export {
   type CapturedTokenEntry,
   type CapturedTokenLayer,
   type CapturedTokenSkip,
-} from './captured-tokens.js';
+} from "./captured-tokens.js";
 
 // Code-import twin: raw literals + foreign var()s → imported.* tree.
 export {
@@ -114,7 +124,7 @@ export {
   type CodeMintBinding,
   type CodeMintFinding,
   type CodeMintResult,
-} from './mint-code.js';
+} from "./mint-code.js";
 
 // Contract → code (the shipping generator's core).
 export {
@@ -125,12 +135,16 @@ export {
   validateContract,
   type EmitCtx,
   type EmitReactResult,
-} from './emit-react.js';
-export { formatCss, formatTsx, PRETTIER_BASE } from './format.js';
+} from "./emit-react.js";
+export { formatCss, formatTsx, PRETTIER_BASE } from "./format.js";
 
 // Contract → static HTML+CSS and inline-styles React (new emitters).
-export { emitHtml, type EmitHtmlResult } from './emit-html.js';
-export { emitReactInline, type EmitReactInlineCtx, type EmitReactInlineResult } from './emit-react-inline.js';
+export { emitHtml, type EmitHtmlResult } from "./emit-html.js";
+export {
+  emitReactInline,
+  type EmitReactInlineCtx,
+  type EmitReactInlineResult,
+} from "./emit-react-inline.js";
 
 // Contract → Figma sync script.
 export {
@@ -140,7 +154,7 @@ export {
   type FigmaEngine,
   type FigmaEngineInput,
   type FigmaScriptCtx,
-} from './emit-figma-script.js';
+} from "./emit-figma-script.js";
 
 // The emitter registry — pluggability as a type. registerEmitter() opens it
 // to plugin emitters (CLI --emitter, @ds-contracts/emitter-* packages).
@@ -156,7 +170,7 @@ export {
   type EmittedFile,
   type Emitter,
   type EmitterCtx,
-} from './emitter.js';
+} from "./emitter.js";
 
 // Canvas → code: the shared file plan + the provenance sentence the plugin
 // panel and `propose-pr` must both print (core/canvas-code-plan.ts).
@@ -169,7 +183,20 @@ export {
   type CanvasProvenance,
   type CodePathOptions,
   type CodePlan,
-} from './canvas-code-plan.js';
+} from "./canvas-code-plan.js";
+
+// Optional provenance + stale-source state machine (browser-safe).
+export {
+  assertContractProvenance,
+  canonicalJson,
+  canonicalRevisionOf,
+  markAwaitingCodeAdoption,
+  revisionOf,
+  type AwaitingCodeAdoption,
+  type ContractProvenance,
+  type ContractSourceProvenance,
+  type ProvenancedContract,
+} from "./contract-provenance.js";
 
 // Design → contract (proposals from a canvas dump).
 export {
@@ -185,10 +212,28 @@ export {
   type FigmaProposalResult,
   type SkippedSet,
   type UnboundValue,
-} from './propose-figma.js';
+} from "./propose-figma.js";
 
 // Code → contract (proposals from React/TSX + CSS Module source text).
-export { proposeFromCode, type ProposeCodeCtx, type ProposeCodeResult } from './propose-code.js';
-export { extractFromSource, type SkippedComponent, type SourceFileInput } from './extract-react-tsx.js';
-export { extractAnatomy, tokenIndexFromJson, type AnatomyInput, type TokenIndex } from './extract-css-module.js';
-export { proposeContract, proposalsReport, type ProposalResult, type ProposeMintOptions } from '../extract/propose.js';
+export {
+  proposeFromCode,
+  type ProposeCodeCtx,
+  type ProposeCodeResult,
+} from "./propose-code.js";
+export {
+  extractFromSource,
+  type SkippedComponent,
+  type SourceFileInput,
+} from "./extract-react-tsx.js";
+export {
+  extractAnatomy,
+  tokenIndexFromJson,
+  type AnatomyInput,
+  type TokenIndex,
+} from "./extract-css-module.js";
+export {
+  proposeContract,
+  proposalsReport,
+  type ProposalResult,
+  type ProposeMintOptions,
+} from "../extract/propose.js";

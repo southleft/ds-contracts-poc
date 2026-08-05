@@ -1,9 +1,9 @@
 /**
- * CORS gate. The Worker serves exactly one client: the playground on
+ * Browser CORS policy. The assist surface is exposed to the playground on
  * Cloudflare Pages (plus its *.pages.dev preview deployments, one label
- * deep). Everything else — including requests with no Origin at all, i.e.
- * curl — is refused with 403. This is a browser-only API on purpose: the
- * origin check is one of the abuse-resistance layers, not a formality.
+ * deep). This limits which browser pages can read responses; it is NOT
+ * authentication or authorization because non-browser callers can omit or
+ * spoof Origin. Sensitive bridge data uses an explicit capability instead.
  */
 import type { Env } from './env';
 
@@ -20,8 +20,8 @@ export function resolveOrigin(request: Request, env: Env): string | null {
 export function corsHeaders(origin: string): Record<string, string> {
   return {
     'access-control-allow-origin': origin,
-    'access-control-allow-methods': 'POST, OPTIONS',
-    'access-control-allow-headers': 'content-type',
+    'access-control-allow-methods': 'GET, POST, OPTIONS',
+    'access-control-allow-headers': 'content-type, x-bridge-read-capability',
     'access-control-max-age': '86400',
     vary: 'Origin',
   };

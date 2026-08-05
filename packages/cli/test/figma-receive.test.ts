@@ -11,19 +11,22 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, readdirSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import {
   CONTRACT_PROPOSAL_TYPE,
+  containedOutputPath,
   contractFileNameForId,
   figmaCommand,
   findExistingContractFile,
   parseProposal,
   planReceive,
+  proposalFileNameForId,
   unifiedDiff,
   type ProposalEnvelope,
 } from '../src/commands/figma.js';
+import { buildPlan, proposePrCommand } from '../src/commands/propose-pr.js';
 
 // The envelope exactly as an OLDER plugin engine's proposeDiff exportJson
 // built it (no childStubs / mintedTokens) — kept as-is so backward
@@ -415,6 +418,31 @@ test('ATTACK: a stub id carrying path separators cannot walk a write out of --ou
   }
 });
 
+test('ATTACK: proposal artifact names are flat for traversal, absolute, Windows, and Unicode separator ids while valid names stay unchanged', () => {
+  assert.equal(proposalFileNameForId('polaris.badge'), 'polaris.badge.proposal.json');
+  for (const hostile of [
+    '../../ESCAPE',
+    '/tmp/ESCAPE',
+    String.raw`C:\temp\ESCAPE`,
+    'ds.a/b',
+    'ds.a\u2215b',
+    'ds.a\uFF0Fb',
+    '...',
+  ]) {
+    const name = proposalFileNameForId(hostile);
+    assert.equal(path.basename(name), name, `${hostile} did not produce a flat basename`);
+    assert.ok(!name.includes('/') && !name.includes('\\') && !name.includes('..'), `${hostile} → ${name}`);
+  }
+});
+
+test('ATTACK: output containment rejects traversal and both native/Windows absolute planned writes', () => {
+  const root = path.resolve('/tmp/contracts');
+  assert.equal(containedOutputPath(root, path.join('.proposals', 'safe.proposal.json')), path.join(root, '.proposals', 'safe.proposal.json'));
+  for (const hostile of ['../escape.json', '/tmp/escape.json', String.raw`C:\temp\escape.json`]) {
+    assert.throws(() => containedOutputPath(root, hostile), /REFUSED/);
+  }
+});
+
 test('ATTACK: a hostile stub id flows through planReceive to a FLAT in-out filename', () => {
   const raw = JSON.parse(JSON.stringify(ENVELOPE_V2));
   raw.childStubs[0].id = 'ds.../../ESCAPED-STUB';
@@ -424,6 +452,166 @@ test('ATTACK: a hostile stub id flows through planReceive to a FLAT in-out filen
   const plan = planReceive(r.proposal, null, true, { outDirLabel: 'ctr' });
   for (const w of plan.stubWrites) {
     assert.ok(!w.fileName.includes('/') && !w.fileName.includes('..'), `planned write escapes: ${w.fileName}`);
+  }
+});
+
+test('ATTACK: no-apply receive with a traversal contract id writes only a contained sanitized proposal artifact', async () => {
+  const hostile = {
+    ...ENVELOPE,
+    baseContractId: '../../ESCAPE',
+    proposedContract: { ...ENVELOPE.proposedContract, id: '../../ESCAPE' },
+  };
+  const dump = JSON.stringify(hostile);
+  const server = createServer((req, res) => {
+    res.setHeader('content-type', 'application/json');
+    if (req.method === 'POST' && req.url === '/bridge/session') {
+      res.end(JSON.stringify({ code: 'ABC234', ttlSeconds: 900 }));
+    } else {
+      res.end(`{"status":"delivered","kind":"proposal","dump":${dump}}`);
+    }
+  });
+  await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
+  const addr = server.address();
+  const bridge = `http://127.0.0.1:${typeof addr === 'object' && addr ? addr.port : 0}`;
+  const parent = mkdtempSync(path.join(tmpdir(), 'dsc-receive-traversal-'));
+  const out = path.join(parent, 'out');
+  try {
+    assert.equal(await figmaCommand(['receive', '--out', out, '--bridge', bridge]), 0);
+    const parsed = parseProposal(hostile);
+    assert.ok(parsed.ok);
+    if (!parsed.ok) return;
+    const plan = planReceive(parsed.proposal, null, false);
+    assert.ok(existsSync(path.join(out, plan.proposalFileName)));
+    assert.ok(!existsSync(path.join(parent, 'ESCAPE.proposal.json')), 'artifact escaped --out');
+  } finally {
+    server.close();
+    rmSync(parent, { recursive: true, force: true });
+  }
+});
+
+test('propose-pr refuses duplicate stub ids, sanitized destination collisions, and main-contract collisions', () => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'dsc-propose-collisions-'));
+  const file = path.join(dir, 'proposal.json');
+  const cases = [
+    {
+      stubs: [{ ...STUB }, { ...STUB }],
+      error: /duplicate child stub id "polaris\.icon"/,
+    },
+    {
+      stubs: [{ ...STUB, id: 'ds.a/b' }, { ...STUB, id: 'ds.a\u2215b' }],
+      error: /same destination/,
+    },
+    {
+      stubs: [{ ...STUB, id: 'other.badge' }],
+      error: /main contract destination/,
+    },
+    {
+      stubs: [{ ...STUB, id: 'polaris.badge' }],
+      error: /main proposed contract id/,
+    },
+  ];
+  try {
+    for (const c of cases) {
+      writeFileSync(file, JSON.stringify({ ...ENVELOPE, childStubs: c.stubs }));
+      assert.throws(() => buildPlan(file, 'acme/design-system', {}), c.error);
+    }
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('propose-pr sanitizes hostile main-id sidecar paths and preserves valid destination names', () => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'dsc-propose-paths-'));
+  try {
+    const valid = path.join(dir, 'valid.json');
+    writeFileSync(valid, JSON.stringify({ ...ENVELOPE, mintedTokens: MINTED }));
+    const validPlan = buildPlan(valid, 'acme/design-system', {}).plan;
+    assert.ok(validPlan.files.some((f) => f.destPath === 'contracts/badge.contract.json'));
+    assert.ok(validPlan.files.some((f) => f.destPath === 'contracts/polaris.badge.minted.dtcg.json'));
+
+    for (const hostileId of ['../../ESCAPE', '/tmp/ESCAPE', String.raw`C:\temp\ESCAPE`, 'ds.a\uFF0Fb']) {
+      const file = path.join(dir, `${Buffer.from(hostileId).toString('hex')}.json`);
+      writeFileSync(file, JSON.stringify({
+        ...ENVELOPE,
+        baseContractId: hostileId,
+        proposedContract: { ...ENVELOPE.proposedContract, id: hostileId },
+        mintedTokens: MINTED,
+      }));
+      const plan = buildPlan(file, 'acme/design-system', {}).plan;
+      for (const output of plan.files) {
+        assert.ok(output.destPath.startsWith('contracts/'), output.destPath);
+        assert.ok(!output.destPath.includes('\\') && !output.destPath.split('/').includes('..'), output.destPath);
+      }
+    }
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('propose-pr collision refusal performs no GitHub request and leaves no planned output behind', async () => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'dsc-propose-atomic-refusal-'));
+  const file = path.join(dir, 'proposal.json');
+  writeFileSync(file, JSON.stringify({ ...ENVELOPE, childStubs: [{ ...STUB }, { ...STUB }] }));
+  const originalFetch = globalThis.fetch;
+  let requests = 0;
+  globalThis.fetch = (async () => {
+    requests += 1;
+    throw new Error('fetch must not be reached');
+  }) as typeof fetch;
+  try {
+    await assert.rejects(
+      proposePrCommand([file, '--repo', 'acme/design-system', '--token', 'secret', '--no-code']),
+      /duplicate child stub id/,
+    );
+    assert.equal(requests, 0);
+    assert.deepEqual(readdirSync(dir), ['proposal.json']);
+  } finally {
+    globalThis.fetch = originalFetch;
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('propose-pr live path preserves an existing real contract instead of PUTting its auto-proposed stub', async () => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'dsc-propose-preserve-'));
+  const file = path.join(dir, 'proposal.json');
+  writeFileSync(file, JSON.stringify({ ...ENVELOPE, childStubs: [STUB] }));
+  const originalFetch = globalThis.fetch;
+  const requests: Array<{ method: string; url: string }> = [];
+  globalThis.fetch = (async (input, init) => {
+    const url = String(input);
+    const method = init?.method ?? 'GET';
+    requests.push({ method, url });
+    if (url.includes('/contents/contracts/icon.contract.json?ref=main')) {
+      return new Response(JSON.stringify({ sha: 'real-contract-sha' }), { status: 200 });
+    }
+    if (url.endsWith('/git/ref/heads/main')) {
+      return new Response(JSON.stringify({ object: { sha: 'base-sha' } }), { status: 200 });
+    }
+    if (method === 'POST' && url.endsWith('/git/refs')) {
+      return new Response('{}', { status: 201 });
+    }
+    if (url.includes('/contents/contracts/badge.contract.json?ref=')) {
+      return new Response('{}', { status: 404 });
+    }
+    if (method === 'PUT' && url.endsWith('/contents/contracts/badge.contract.json')) {
+      return new Response('{}', { status: 201 });
+    }
+    if (method === 'POST' && url.endsWith('/pulls')) {
+      return new Response(JSON.stringify({ html_url: 'https://example.test/pr/1', number: 1 }), { status: 201 });
+    }
+    return new Response(JSON.stringify({ message: `unexpected ${method} ${url}` }), { status: 500 });
+  }) as typeof fetch;
+  try {
+    assert.equal(
+      await proposePrCommand([file, '--repo', 'acme/design-system', '--base', 'main', '--token', 'secret', '--no-code']),
+      0,
+    );
+    assert.ok(requests.some((r) => r.url.includes('/contents/contracts/icon.contract.json?ref=main')));
+    assert.ok(!requests.some((r) => r.method === 'PUT' && r.url.includes('icon.contract.json')));
+    assert.equal(requests.filter((r) => r.method === 'PUT').length, 1, JSON.stringify(requests));
+  } finally {
+    globalThis.fetch = originalFetch;
+    rmSync(dir, { recursive: true, force: true });
   }
 });
 

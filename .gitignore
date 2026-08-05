@@ -1,6 +1,7 @@
 node_modules/
 storybook-static/
 dist/
+coverage/
 *.log
 .DS_Store
 evals/.scratch/

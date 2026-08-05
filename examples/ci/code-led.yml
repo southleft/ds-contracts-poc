@@ -43,7 +43,7 @@
 #
 # ----------------------------------------------------------------------------
 # On every push to main (and on each published release) this workflow:
-#   1. runs the PUBLISHED @ds-contracts/cli@0.3.0 `extract` over the component
+#   1. runs the published @ds-contracts/cli@0.4.0 `extract` over the component
 #      source (config: ds-contracts.config.json, committed in the repo),
 #   2. adopts the freshly proposed contracts into contracts/ (code-led means
 #      code wins — extraction output IS the new truth),
@@ -111,7 +111,11 @@ jobs:
 
       - name: Extract contracts from code
         run: |
-          npx --yes @ds-contracts/cli@0.3.0 extract ds-contracts.config.json | tee extract.log
+          # Keep the copyable path on the published stable CLI. The
+          # `--canonical` guard is a 0.5.0-rc.1 source/next-release feature,
+          # not a flag shipped by 0.4.0; do not advertise or pin an
+          # unpublished registry version here.
+          npx --yes @ds-contracts/cli@0.4.0 extract ds-contracts.config.json | tee extract.log
 
       - name: Adopt the proposed contracts (code-led — extraction is the new truth)
         run: |

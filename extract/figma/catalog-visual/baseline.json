@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-08-04T23:50:53.969Z",
- "headCommit": "be4c0be64fda496198a0c36f719a4ec5c7e33f3c",
+ "generatedAt": "2026-08-05T01:36:33.307Z",
+ "headCommit": "014ce3b293e4aab9e8a09d0ae10bbecac17bb094",
  "epsilonPp": 0.1,
  "denominator": {
   "contracts": 51,
@@ -571,7 +571,7 @@
   "ds.citation :: Variant=Label": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 1.22,
+   "unmasked": 5.38,
    "sizeCss": "186x38",
    "sizeCanvas": "186x36",
    "causeClass": "text-raster",
@@ -580,7 +580,7 @@
   "ds.citation :: Variant=Number": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 1.19,
+   "unmasked": 2.32,
    "sizeCss": "42x38",
    "sizeCanvas": "42x38",
    "causeClass": "text-raster",
@@ -597,21 +597,25 @@
   },
   "ds.divider :: Variant=Strong": {
    "status": "diffed",
-   "masked": 11.29,
-   "unmasked": 13.43,
-   "sizeCss": "108x41",
+   "masked": 3.03,
+   "unmasked": 3.03,
+   "sizeCss": "96x132",
    "sizeCanvas": "640x4",
    "causeClass": "size-delta",
-   "invariant": []
+   "invariant": [
+    "one-surface-blank: css ink 0% vs canvas ink 100% (each of its OWN painted box)"
+   ]
   },
   "ds.divider :: Variant=Subtle": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 2.54,
-   "sizeCss": "108x39",
+   "unmasked": 0,
+   "sizeCss": "96x132",
    "sizeCanvas": "640x2",
    "causeClass": "size-delta",
-   "invariant": []
+   "invariant": [
+    "one-surface-blank: css ink 0% vs canvas ink 100% (each of its OWN painted box)"
+   ]
   },
   "ds.empty-state :: EmptyState": {
    "status": "diffed",
@@ -904,34 +908,34 @@
   "ds.inline :: Gap=Large": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 5.02,
-   "sizeCss": "74x25",
+   "unmasked": 0,
+   "sizeCss": "96x96",
    "sizeCanvas": "96x96",
-   "causeClass": "size-delta",
+   "causeClass": null,
    "invariant": [
-    "one-surface-blank: canvas ink 0% vs css ink 47.14% (each of its OWN painted box)"
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
    ]
   },
   "ds.inline :: Gap=Medium": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 5.02,
-   "sizeCss": "74x25",
+   "unmasked": 0,
+   "sizeCss": "96x96",
    "sizeCanvas": "96x96",
-   "causeClass": "size-delta",
+   "causeClass": null,
    "invariant": [
-    "one-surface-blank: canvas ink 0% vs css ink 47.14% (each of its OWN painted box)"
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
    ]
   },
   "ds.inline :: Gap=Small": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 5.02,
-   "sizeCss": "74x25",
+   "unmasked": 0,
+   "sizeCss": "96x96",
    "sizeCanvas": "96x96",
-   "causeClass": "size-delta",
+   "causeClass": null,
    "invariant": [
-    "one-surface-blank: canvas ink 0% vs css ink 47.14% (each of its OWN painted box)"
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
    ]
   },
   "ds.kbd :: Kbd": {
@@ -1090,8 +1094,8 @@
   "ds.side-nav-item :: State=Default": {
    "status": "diffed",
    "masked": null,
-   "unmasked": 0,
-   "sizeCss": "205x28",
+   "unmasked": 6.49,
+   "sizeCss": "209x28",
    "sizeCanvas": "205x28",
    "causeClass": "empty-slot-geometry",
    "invariant": []
@@ -1099,7 +1103,7 @@
   "ds.side-nav-item :: State=Selected": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 5.05,
+   "unmasked": 5.95,
    "sizeCss": "288x66",
    "sizeCanvas": "640x66",
    "causeClass": "size-delta",
@@ -1153,90 +1157,80 @@
   "ds.stack :: Gap=Large": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 5.47,
-   "sizeCss": "79x25",
+   "unmasked": 0,
+   "sizeCss": "96x96",
    "sizeCanvas": "96x96",
-   "causeClass": "size-delta",
+   "causeClass": null,
    "invariant": [
-    "one-surface-blank: canvas ink 0% vs css ink 49.16% (each of its OWN painted box)"
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
    ]
   },
   "ds.stack :: Gap=Medium": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 5.47,
-   "sizeCss": "79x25",
+   "unmasked": 0,
+   "sizeCss": "96x96",
    "sizeCanvas": "96x96",
-   "causeClass": "size-delta",
+   "causeClass": null,
    "invariant": [
-    "one-surface-blank: canvas ink 0% vs css ink 49.16% (each of its OWN painted box)"
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
    ]
   },
   "ds.stack :: Gap=Small": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 5.47,
-   "sizeCss": "79x25",
+   "unmasked": 0,
+   "sizeCss": "96x96",
    "sizeCanvas": "96x96",
-   "causeClass": "size-delta",
+   "causeClass": null,
    "invariant": [
-    "one-surface-blank: canvas ink 0% vs css ink 49.16% (each of its OWN painted box)"
+    "both-surfaces-blank: css ink 0%, canvas ink 0% of their own boxes — a 0-vs-0 comparison is VOID, not a pass"
    ]
   },
   "ds.status-dot :: Variant=Accent": {
    "status": "diffed",
-   "masked": null,
-   "unmasked": 26.07,
-   "sizeCss": "112x25",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "16x16",
    "sizeCanvas": "16x16",
-   "causeClass": "size-delta",
-   "invariant": [
-    "text-overflows-root-css: text escapes the root border box by 31.14px (root 8x8)"
-   ]
+   "causeClass": null,
+   "invariant": []
   },
   "ds.status-dot :: Variant=Error": {
    "status": "diffed",
-   "masked": null,
-   "unmasked": 26.07,
-   "sizeCss": "112x25",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "16x16",
    "sizeCanvas": "16x16",
-   "causeClass": "size-delta",
-   "invariant": [
-    "text-overflows-root-css: text escapes the root border box by 31.14px (root 8x8)"
-   ]
+   "causeClass": null,
+   "invariant": []
   },
   "ds.status-dot :: Variant=Neutral": {
    "status": "diffed",
-   "masked": null,
-   "unmasked": 26.04,
-   "sizeCss": "112x25",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "16x16",
    "sizeCanvas": "16x16",
-   "causeClass": "size-delta",
-   "invariant": [
-    "text-overflows-root-css: text escapes the root border box by 31.14px (root 8x8)"
-   ]
+   "causeClass": null,
+   "invariant": []
   },
   "ds.status-dot :: Variant=Success": {
    "status": "diffed",
-   "masked": null,
-   "unmasked": 26.11,
-   "sizeCss": "112x25",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "16x16",
    "sizeCanvas": "16x16",
-   "causeClass": "size-delta",
-   "invariant": [
-    "text-overflows-root-css: text escapes the root border box by 31.14px (root 8x8)"
-   ]
+   "causeClass": null,
+   "invariant": []
   },
   "ds.status-dot :: Variant=Warning": {
    "status": "diffed",
-   "masked": null,
-   "unmasked": 26.11,
-   "sizeCss": "112x25",
+   "masked": 0,
+   "unmasked": 0,
+   "sizeCss": "16x16",
    "sizeCanvas": "16x16",
-   "causeClass": "size-delta",
-   "invariant": [
-    "text-overflows-root-css: text escapes the root border box by 31.14px (root 8x8)"
-   ]
+   "causeClass": null,
+   "invariant": []
   },
   "ds.switch :: Value=Off": {
    "status": "diffed",
@@ -1763,8 +1757,8 @@
   "ds.top-nav-item :: State=Default": {
    "status": "diffed",
    "masked": null,
-   "unmasked": 0,
-   "sizeCss": "114x23",
+   "unmasked": 9.42,
+   "sizeCss": "118x26",
    "sizeCanvas": "114x23",
    "causeClass": "empty-slot-geometry",
    "invariant": []
@@ -1772,7 +1766,7 @@
   "ds.top-nav-item :: State=Selected": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 2.08,
+   "unmasked": 4.12,
    "sizeCss": "174x66",
    "sizeCanvas": "174x66",
    "causeClass": "text-raster",

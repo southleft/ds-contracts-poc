@@ -1,0 +1,6 @@
+* @southleft
+
+/.github/ @southleft
+/package.json @southleft
+/package-lock.json @southleft
+/scripts/publish-check.mjs @southleft
