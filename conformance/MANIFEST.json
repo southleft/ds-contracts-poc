@@ -823,7 +823,7 @@
       "construct": "<svg> whose children are <circle> and <rect>",
       "why": "Half the icon sets in the world ship circles and rects, not paths.",
       "expect": "REFUSED",
-      "expectName": "svg",
+      "expectName": "part \"part-0-0\" tokens sets \"r\"",
       "expectWhere": "LEDGER.md",
       "observable": {
         "part": "a",

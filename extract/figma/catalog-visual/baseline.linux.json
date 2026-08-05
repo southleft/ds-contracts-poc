@@ -591,10 +591,10 @@
   "ds.code :: Code": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 13.71,
-   "sizeCss": "214x44",
+   "unmasked": 13.83,
+   "sizeCss": "252x40",
    "sizeCanvas": "216x42",
-   "causeClass": "text-raster",
+   "causeClass": "size-delta",
    "invariant": []
   },
   "ds.divider :: Variant=Strong": {
@@ -943,8 +943,8 @@
   "ds.kbd :: Kbd": {
    "status": "diffed",
    "masked": 0,
-   "unmasked": 10.01,
-   "sizeCss": "72x46",
+   "unmasked": 11.88,
+   "sizeCss": "64x40",
    "sizeCanvas": "76x40",
    "causeClass": "size-delta",
    "invariant": []
