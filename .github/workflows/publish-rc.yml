@@ -1,0 +1,154 @@
+name: publish npm release candidate
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type PUBLISH_RC to publish manifest versions under npm dist-tag next'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-npm-rc
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: build and seal RC tarballs
+    if: ${{ inputs.confirm == 'PUBLISH_RC' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: clean checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          clean: true
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: set up Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24.15.0'
+
+      - name: install npm CLI with trusted-publishing support
+        run: npm install --global npm@12.0.2
+
+      - name: install exact dependencies
+        run: npm ci
+
+      - name: require coordinated prerelease manifests
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const paths = [
+            'package.json',
+            'packages/schema/package.json',
+            'packages/emitter-web-components/package.json',
+            'packages/cli/package.json',
+          ];
+          for (const path of paths) {
+            const pkg = JSON.parse(fs.readFileSync(path, 'utf8'));
+            if (!/-rc\.\d+$/.test(pkg.version)) {
+              throw new Error(`${path} is not an RC version: ${pkg.version}`);
+            }
+          }
+          NODE
+
+      - name: build all public packages
+        run: |
+          npm --prefix packages/schema run build
+          npm --prefix packages/emitter-web-components run build
+          npm --prefix packages/cli run build
+
+      - name: verify existing exact versions or source-ahead state
+        run: npm run publish:check
+
+      - name: pack exact artifacts once
+        run: |
+          set -euo pipefail
+          mkdir -p dist/npm-rc
+          : > dist/npm-rc/publish-plan.tsv
+          for dir in packages/schema packages/emitter-web-components packages/cli; do
+            name="$(node -p "require('./${dir}/package.json').name")"
+            version="$(node -p "require('./${dir}/package.json').version")"
+            filename="$(npm pack "./${dir}" --pack-destination dist/npm-rc --silent)"
+            printf '%s\t%s\t%s\n' "${name}" "${version}" "${filename}" >> dist/npm-rc/publish-plan.tsv
+          done
+          sha256sum dist/npm-rc/*.tgz > dist/npm-rc/SHA256SUMS
+
+      - name: upload sealed RC tarballs
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: npm-rc-tarballs-${{ github.sha }}
+          path: dist/npm-rc/
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    name: publish RC packages with provenance
+    needs: build
+    if: ${{ inputs.confirm == 'PUBLISH_RC' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: npm-rc
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: set up Node for trusted publishing
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24.15.0'
+
+      - name: install npm CLI with trusted-publishing support
+        run: npm install --global npm@12.0.2
+
+      - name: download sealed RC tarballs
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: npm-rc-tarballs-${{ github.sha }}
+          path: dist/npm-rc
+
+      - name: publish missing exact tarballs with provenance under next
+        run: |
+          set -euo pipefail
+          verify_registry_bytes() {
+            local name="$1" version="$2" local_tarball="$3"
+            local tmp registry_tarball
+            tmp="$(mktemp -d)"
+            registry_tarball="$(npm pack "${name}@${version}" --pack-destination "${tmp}" --silent)"
+            mkdir "${tmp}/local" "${tmp}/registry"
+            tar xzf "${local_tarball}" -C "${tmp}/local"
+            tar xzf "${tmp}/${registry_tarball}" -C "${tmp}/registry"
+            diff -qr "${tmp}/local/package" "${tmp}/registry/package"
+            rm -rf "${tmp}"
+          }
+
+          while IFS=$'\t' read -r name version filename; do
+            tarball="dist/npm-rc/${filename}"
+            if npm view "${name}@${version}" version >/dev/null 2>&1; then
+              verify_registry_bytes "${name}" "${version}" "${tarball}"
+              echo "already published and byte-verified: ${name}@${version}"
+            else
+              npm publish "${tarball}" --access public --tag next --provenance
+              for attempt in 1 2 3 4 5 6; do
+                npm view "${name}@${version}" version >/dev/null 2>&1 && break
+                sleep 5
+              done
+              verify_registry_bytes "${name}" "${version}" "${tarball}"
+            fi
+          done < dist/npm-rc/publish-plan.tsv
+
+      - name: verify exact versions and dist-tags
+        run: |
+          set -euo pipefail
+          while IFS=$'\t' read -r name version filename; do
+            test "$(npm view "${name}@${version}" version)" = "${version}"
+            test "$(npm view "${name}" dist-tags.next)" = "${version}"
+          done < dist/npm-rc/publish-plan.tsv
