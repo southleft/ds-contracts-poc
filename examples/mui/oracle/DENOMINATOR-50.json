@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "library": "mui",
+  "source": "@mui/material export family list (Wave 2 discovery ~62–63)",
+  "denominatorSize": 31,
+  "denominatorRule": "Predeclared 50% of ~62 Material UI component families before expansion work begins. Membership is frozen here; support may only grow by completing members — never by shrinking this list or accuracy/baseline.json.",
+  "accuracyBaselinesUntouched": true,
+  "members": [
+    {
+      "stem": "button",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "chip",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "card",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "switch",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "slider",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "tabs",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "accordion",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "autocomplete",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "tooltip",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "menu",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "dialog",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "checkbox",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "table-pagination",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "table",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "input-adornment",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "text-field",
+      "status": "carried",
+      "inPilot": true
+    },
+    {
+      "stem": "alert",
+      "status": "carried",
+      "stratum": "feedback"
+    },
+    {
+      "stem": "avatar",
+      "status": "carried",
+      "stratum": "display"
+    },
+    {
+      "stem": "badge",
+      "status": "carried",
+      "stratum": "display"
+    },
+    {
+      "stem": "breadcrumbs",
+      "status": "carried",
+      "stratum": "navigation"
+    },
+    {
+      "stem": "circular-progress",
+      "status": "carried",
+      "stratum": "feedback"
+    },
+    {
+      "stem": "divider",
+      "status": "carried",
+      "stratum": "layout"
+    },
+    {
+      "stem": "drawer",
+      "status": "carried",
+      "stratum": "navigation"
+    },
+    {
+      "stem": "fab",
+      "status": "carried",
+      "stratum": "input"
+    },
+    {
+      "stem": "icon-button",
+      "status": "carried",
+      "stratum": "input"
+    },
+    {
+      "stem": "linear-progress",
+      "status": "carried",
+      "stratum": "feedback"
+    },
+    {
+      "stem": "link",
+      "status": "carried",
+      "stratum": "navigation"
+    },
+    {
+      "stem": "paper",
+      "status": "carried",
+      "stratum": "layout"
+    },
+    {
+      "stem": "radio",
+      "status": "carried",
+      "stratum": "input"
+    },
+    {
+      "stem": "select",
+      "status": "carried",
+      "stratum": "input"
+    },
+    {
+      "stem": "snackbar",
+      "status": "carried",
+      "stratum": "feedback"
+    }
+  ],
+  "negativeControls": [
+    {
+      "stem": "speed-dial",
+      "status": "unsupported",
+      "reason": "nested Fab+actions organism — fail-closed (outside denominator)"
+    }
+  ],
+  "acceptance": {
+    "carriedCountMustReach": 31,
+    "commands": [
+      "npm run mui:denominator:check",
+      "npm run mui:oracle:offline",
+      "npm run accuracy:check"
+    ]
+  }
+}

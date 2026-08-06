@@ -1,0 +1,143 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.paper",
+  "name": "Paper",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "elevation",
+      "type": {
+        "enum": [
+          "0",
+          "1",
+          "3",
+          "8"
+        ]
+      },
+      "default": "1",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Elevation",
+          "values": {
+            "0": "0",
+            "1": "1",
+            "3": "3",
+            "8": "8"
+          }
+        },
+        "code": {
+          "prop": "elevation"
+        }
+      }
+    },
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "elevation",
+          "outlined"
+        ]
+      },
+      "default": "elevation",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "elevation": "Elevation",
+            "outlined": "Outlined"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "Paper content",
+      "description": "Promoted from the computed floor: the root renders its children as direct text (captured mount proof).",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Content"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "transition-duration": "0.3s",
+        "transition-property": "box-shadow",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      "content": {
+        "prop": "children"
+      },
+      "tokens": {
+        "background-color": "{imported.paper.root.background-color}",
+        "border-bottom-left-radius": "{imported.shared.size-4}",
+        "border-bottom-right-radius": "{imported.shared.size-4}",
+        "border-top-left-radius": "{imported.shared.size-4}",
+        "border-top-right-radius": "{imported.shared.size-4}",
+        "box-shadow": "{imported.paper.root.box-shadow.{elevation}.{variant}}",
+        "color": "{imported.paper.root.color}",
+        "font-size": "{imported.paper.root.font-size}",
+        "font-weight": "{imported.paper.root.font-weight}",
+        "min-height": "{imported.paper.root.min-height}",
+        "min-width": "{imported.paper.root.min-width}",
+        "width": "{imported.paper.root.width}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "variant",
+          "map": {
+            "elevation": {
+              "border-bottom-color": "{imported.paper.root.border-bottom-color.elevation}",
+              "border-bottom-width": "{imported.paper.root.border-bottom-width.elevation}",
+              "border-left-color": "{imported.paper.root.border-left-color.elevation}",
+              "border-left-width": "{imported.paper.root.border-left-width.elevation}",
+              "border-right-color": "{imported.paper.root.border-right-color.elevation}",
+              "border-right-width": "{imported.paper.root.border-right-width.elevation}",
+              "border-top-color": "{imported.paper.root.border-top-color.elevation}",
+              "border-top-width": "{imported.paper.root.border-top-width.elevation}"
+            },
+            "outlined": {
+              "border-bottom-color": "{imported.paper.root.border-bottom-color.outlined}",
+              "border-bottom-width": "{imported.paper.root.border-bottom-width.outlined}",
+              "border-left-color": "{imported.paper.root.border-left-color.outlined}",
+              "border-left-width": "{imported.paper.root.border-left-width.outlined}",
+              "border-right-color": "{imported.paper.root.border-right-color.outlined}",
+              "border-right-width": "{imported.paper.root.border-right-width.outlined}",
+              "border-top-color": "{imported.paper.root.border-top-color.outlined}",
+              "border-top-width": "{imported.paper.root.border-top-width.outlined}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Paper"
+    }
+  }
+}

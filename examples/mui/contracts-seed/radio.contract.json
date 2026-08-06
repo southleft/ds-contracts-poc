@@ -1,0 +1,60 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.radio",
+  "name": "Radio",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — color×checked axes (Switch/Checkbox STATE-PLANE PROJECTION precedent); size held fixed; disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "color",
+      "type": {
+        "enum": ["primary", "secondary", "error", "info", "success", "warning", "default"]
+      },
+      "default": "primary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "primary": "Primary",
+            "secondary": "Secondary",
+            "error": "Error",
+            "info": "Info",
+            "success": "Success",
+            "warning": "Warning",
+            "default": "Default"
+          }
+        },
+        "code": { "prop": "color" }
+      }
+    },
+    {
+      "name": "checked",
+      "type": {
+        "enum": ["unchecked", "checked"]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": { "prop": "checked" }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": { "root": {} },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@mui/material", "export": "Radio" }
+  }
+}

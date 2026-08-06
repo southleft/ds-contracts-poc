@@ -1,0 +1,422 @@
+[
+  {
+    "key": "primary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.hover__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.hover__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.hover__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.hover__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.always__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.always__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.always__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "primary.always__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.hover__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.hover__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.hover__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.hover__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.always__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.always__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.always__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "secondary.always__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.hover__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.hover__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.hover__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.hover__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.always__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.always__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.always__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "error.always__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.hover__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.hover__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.hover__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.hover__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.always__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.always__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.always__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "info.always__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.hover__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.hover__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.hover__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.hover__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.always__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.always__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.always__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "success.always__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.hover__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.hover__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.hover__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.hover__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.always__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.always__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.always__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "warning.always__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.none__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.none__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.none__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.none__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.hover__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.hover__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.hover__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.hover__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.always__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.always__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.always__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inherit.always__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

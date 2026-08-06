@@ -1,0 +1,776 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@mui/material@9.2.0",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-20": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        },
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "size-5-59375": {
+          "$value": "5.59375px",
+          "$type": "dimension"
+        },
+        "size-10": {
+          "$value": "10px",
+          "$type": "dimension"
+        }
+      },
+      "badge": {
+        "root": {
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "height": {
+            "$value": "40px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "40px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "background-color": {
+            "$value": "#bdbdbd",
+            "$type": "color"
+          },
+          "color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          }
+        },
+        "badge-anchororigintopright": {
+          "background-color": {
+            "default": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            }
+          },
+          "bottom": {
+            "$value": "26.4062px",
+            "$type": "dimension"
+          },
+          "color": {
+            "default": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "left": {
+            "$value": "26.4062px",
+            "$type": "dimension"
+          },
+          "translate-y": {
+            "$value": "-4px",
+            "$type": "dimension"
+          },
+          "z-index": {
+            "$value": "1",
+            "$type": "number"
+          }
+        },
+        "label-2": {
+          "background-color": {
+            "default": {
+              "$value": "#00000000",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#1976d2",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#9c27b0",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#d32f2f",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#0288d1",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#2e7d32",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ed6c02",
+              "$type": "color"
+            }
+          },
+          "bottom": {
+            "$value": "14.4062px",
+            "$type": "dimension"
+          },
+          "color": {
+            "default": {
+              "$value": "#000000",
+              "$type": "color"
+            },
+            "primary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "secondary": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "info": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#ffffff",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#ffffff",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "left": {
+            "$value": "14.4062px",
+            "$type": "dimension"
+          },
+          "padding-left": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "6px",
+            "$type": "dimension"
+          },
+          "translate-y": {
+            "$value": "-10px",
+            "$type": "dimension"
+          },
+          "z-index": {
+            "$value": "1",
+            "$type": "number"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "label",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "badge-anchororigintopright",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "badge-anchororigintopright",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "label-2",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "label-2",
+        "field": "justify",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "label",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "badge-anchororigintopright",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "badge-anchororigintopright",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "badge-anchororigintopright",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 4, -4)"
+      },
+      {
+        "part": "badge-anchororigintopright",
+        "channel": "transition-duration",
+        "value": "0.225s"
+      },
+      {
+        "part": "badge-anchororigintopright",
+        "channel": "transition-property",
+        "value": "transform"
+      },
+      {
+        "part": "badge-anchororigintopright",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "transform",
+        "value": "matrix(1, 0, 0, 1, 10, -10)"
+      },
+      {
+        "part": "label-2",
+        "channel": "transition-duration",
+        "value": "0.225s"
+      },
+      {
+        "part": "label-2",
+        "channel": "transition-property",
+        "value": "transform"
+      },
+      {
+        "part": "label-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "vertical-align",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "middle",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-left-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-right-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "border-top-left-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "border-top-right-radius",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "50%",
+      "distinctValues": 1
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "align-content",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "center",
+      "distinctValues": 1
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "flex-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "wrap",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "align-content",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "center",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "flex-wrap",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "wrap",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [
+    "badge-anchororigintopright: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "badge-anchororigintopright: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "badge-anchororigintopright: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only"
+  ],
+  "interactionOnlyPlaneDropCount": 6,
+  "structureReceipts": [
+    "union-part-added: default.dot__default @1 (span|Badge-anchorOriginTopRight.Badge-anchorOriginTopRightCircular.Badge-badge.Badge-dot.Badge-overlapCircular)",
+    "part-missing: default.dot__default label-2",
+    "part-missing: default.dot__hover label-2",
+    "part-missing: default.dot__focus-visible label-2",
+    "part-missing: default.dot__active label-2",
+    "part-missing: primary.dot__default label-2",
+    "part-missing: primary.dot__hover label-2",
+    "part-missing: primary.dot__focus-visible label-2",
+    "part-missing: primary.dot__active label-2",
+    "part-missing: secondary.dot__default label-2",
+    "part-missing: secondary.dot__hover label-2",
+    "part-missing: secondary.dot__focus-visible label-2",
+    "part-missing: secondary.dot__active label-2",
+    "part-missing: error.dot__default label-2",
+    "part-missing: error.dot__hover label-2",
+    "part-missing: error.dot__focus-visible label-2",
+    "part-missing: error.dot__active label-2",
+    "part-missing: info.dot__default label-2",
+    "part-missing: info.dot__hover label-2",
+    "part-missing: info.dot__focus-visible label-2",
+    "part-missing: info.dot__active label-2",
+    "part-missing: success.dot__default label-2",
+    "part-missing: success.dot__hover label-2",
+    "part-missing: success.dot__focus-visible label-2",
+    "part-missing: success.dot__active label-2",
+    "part-missing: warning.dot__default label-2",
+    "part-missing: warning.dot__hover label-2",
+    "part-missing: warning.dot__focus-visible label-2",
+    "part-missing: warning.dot__active label-2"
+  ],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: badge-anchororigintopright — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: label-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "translate-door-generalized: badge-anchororigintopright — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "translate-door-generalized: label-2 — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "webkit-prefixed-channels-refused: 4 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (badge-anchororigintopright, label, label-2); -webkit-box-pack (badge-anchororigintopright, label, label-2); -webkit-text-fill-color (badge-anchororigintopright, label, label-2); -webkit-text-stroke-color (badge-anchororigintopright, label, label-2)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: badge-anchororigintopright.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: badge-anchororigintopright.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: badge-anchororigintopright.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: badge-anchororigintopright.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: badge-anchororigintopright.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "badge-anchororigintopright",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "label",
+      "badge-anchororigintopright",
+      "label-2"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "literal-text-carried: label = \"A\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
+      "presence-carried: badge-anchororigintopright (7/14 combos) →  hidden-when variant=standard",
+      "literal-text-carried: label-2 = \"4\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-2 (7/14 combos) →  hidden-when variant=dot"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: label.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: badge-anchororigintopright.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: badge-anchororigintopright.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-2.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: badge-anchororigintopright.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-anchororigintopright.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-anchororigintopright.transform = matrix(1, 0, 0, 1, 4, -4) (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: badge-anchororigintopright.transition-duration = 0.225s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: badge-anchororigintopright.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: badge-anchororigintopright.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.transform = matrix(1, 0, 0, 1, 10, -10) (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.transition-duration = 0.225s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

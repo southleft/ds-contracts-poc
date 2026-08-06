@@ -1,0 +1,66 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.avatar",
+  "name": "Avatar",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI Wave 5 denominator round — props/axes only; anatomy is promoted from captured DOM truth. Variant axis only (circular|rounded|square); initials children pinned via sampleText. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "circular",
+          "rounded",
+          "square"
+        ]
+      },
+      "default": "circular",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "circular": "Circular",
+            "rounded": "Rounded",
+            "square": "Square"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "A",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Initials"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Avatar"
+    }
+  }
+}

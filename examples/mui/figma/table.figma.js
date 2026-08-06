@@ -1756,9 +1756,9 @@ const boundPaint = (varName, consumer) => {
 
 // Named text styles (synced by 01-tokens.js): consumers look up OUR styles
 // only — the ds_contracts/textStyleToken marker is identity, a foreign style
-// sharing a name is never used. Missing style (tokens script not run yet)
-// degrades gracefully: the raw fontName/fontSize already set on the node
-// stand until the next amend after the styles exist.
+// sharing a name is never used. When a compiled spec carries textStyle, the
+// named style MUST bind — missing or failed setTextStyleIdAsync refuses by
+// the stable code text-style-identity-refused (never silently keep raw props).
 let _textStyleMap = null;
 async function ourTextStyle(name) {
   if (!_textStyleMap) {
@@ -1839,14 +1839,73 @@ async function wireStateReactions(setNode, byName, C) {
   return wired;
 }
 
-function findComponentByName(name) {
+function isSyncTarget(n) {
+  return n.type === 'COMPONENT_SET' ||
+    (n.type === 'COMPONENT' && (!n.parent || n.parent.type !== 'COMPONENT_SET'));
+}
+
+function allSyncTargets() {
+  const out = [];
   for (const page of figma.root.children) {
-    const hit = page.findOne(
-      (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === name,
-    );
-    if (hit) return hit;
+    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
   }
-  throw new Error('Dependency component not found in file: ' + name + ' (sync it first)');
+  return out;
+}
+
+// One resolver for nested instances, slot defaults/preferred values, and
+// top-level amend targets. Semantic identity wins; names are admitted only
+// for explicit pre-contractId generated nodes.
+function resolveComponentIdentity(ref, purpose, allowMissing) {
+  const targets = allSyncTargets();
+  const exact = targets.filter(
+    (n) => n.getSharedPluginData('ds_contracts', 'contractId') === ref.contractId,
+  );
+  if (exact.length > 1) {
+    throw new Error(
+      purpose + ': duplicate ds_contracts/contractId "' + ref.contractId +
+      '" on ' + exact.length + ' component targets — refusing ambiguous identity',
+    );
+  }
+  if (exact.length === 1) return exact[0];
+
+  if (ref.anchorKey) {
+    const anchored = targets.filter((n) => n.key === ref.anchorKey);
+    if (anchored.length > 1) {
+      throw new Error(
+        purpose + ': duplicate Figma anchor key "' + ref.anchorKey +
+        '" — refusing ambiguous identity',
+      );
+    }
+    if (anchored.length === 1) {
+      const marker = anchored[0].getSharedPluginData('ds_contracts', 'contractId');
+      if (marker && marker !== ref.contractId) {
+        throw new Error(
+          purpose + ': anchor key "' + ref.anchorKey + '" belongs to contractId "' +
+          marker + '", not "' + ref.contractId + '" — refusing contradictory identity',
+        );
+      }
+      return anchored[0];
+    }
+  }
+
+  const legacy = targets.filter(
+    (n) => n.name === ref.name &&
+      n.getSharedPluginData('ds_contracts', 'contractId') === '' &&
+      n.getSharedPluginData('ds_contracts', 'specHash') !== '',
+  );
+  if (legacy.length > 1) {
+    throw new Error(
+      purpose + ': duplicate explicit legacy-generated name "' + ref.name +
+      '" on ' + legacy.length + ' unmarked component targets — refusing ambiguous identity',
+    );
+  }
+  if (legacy.length === 1) return legacy[0];
+  if (allowMissing) return null;
+  throw new Error(
+    purpose + ': component not found for contractId "' + ref.contractId + '"' +
+    (ref.anchorKey ? ', anchor key "' + ref.anchorKey + '"' : '') +
+    ', or unique explicit legacy-generated name "' + ref.name + '" (sync it first)',
+  );
 }
 
 function setInstanceProps(inst, props, owner) {
@@ -2050,8 +2109,22 @@ async function buildNode(spec, registry) {
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
+      // Fail closed: a compiled textStyle that cannot bind is identity loss.
       const st = await ourTextStyle(spec.textStyle);
-      if (st) { try { await node.setTextStyleIdAsync(st.id); } catch (e) { /* raw props stand */ } }
+      if (!st) {
+        throw new Error(
+          'text-style-identity-refused: missing local text style "' + spec.textStyle +
+          '" (run the tokens sync so ds_contracts/textStyleToken styles exist)',
+        );
+      }
+      try {
+        await node.setTextStyleIdAsync(st.id);
+      } catch (e) {
+        throw new Error(
+          'text-style-identity-refused: setTextStyleIdAsync failed for "' + spec.textStyle +
+          '": ' + (e && e.message ? e.message : String(e)),
+        );
+      }
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -2097,7 +2170,11 @@ async function buildNode(spec, registry) {
       node = wrap;
     }
   } else if (spec.type === 'instance') {
-    const target = findComponentByName(spec.dep);
+    const target = resolveComponentIdentity(
+      { contractId: spec.depContractId, anchorKey: spec.depAnchorKey, name: spec.dep },
+      'Instance "' + spec.name + '"',
+      false,
+    );
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
@@ -2113,7 +2190,11 @@ async function buildNode(spec, registry) {
     } else {
       const instances = [];
       for (const item of defaults) {
-        const target = findComponentByName(item.dep);
+        const target = resolveComponentIdentity(
+          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+          'Slot "' + spec.name + '" default',
+          false,
+        );
         const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
         const inst = main.createInstance();
         if (item.props) setInstanceProps(inst, item.props, target);
@@ -2397,9 +2478,9 @@ async function amendSet(set, C) {
     if (!fpSkip || fpSkip.indexOf('v6:') !== 0) {
       dsStampFingerprints(set);
     }
-    return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
-  const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
+  const report = { name: C.setName, contractId: C.contractId, amended: true, nodeId: set.id, key: set.key,
     addedVariants: [], rebuiltVariants: 0, extraVariants: [], addedProps: [], editedDefaults: [] };
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
@@ -2491,8 +2572,12 @@ async function amendSet(set, C) {
       let k = defKey(sl.spec.slotProperty);
       if (!k) {
         const preferred = [];
-        for (const depName of sl.spec.slotAccepts || []) {
-          const target = findComponentByName(depName);
+        for (const depRef of sl.spec.slotAccepts || []) {
+          const target = resolveComponentIdentity(
+            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
+            'Slot "' + sl.spec.slotProperty + '" preferred value',
+            false,
+          );
           preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
         k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
@@ -2581,9 +2666,9 @@ async function amendComponent(comp, C) {
     if (!fpSkipC || fpSkipC.indexOf('v6:') !== 0) {
       dsStampFingerprints(comp);
     }
-    return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
-  const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
+  const report = { name: C.setName, contractId: C.contractId, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
@@ -2638,8 +2723,12 @@ async function amendComponent(comp, C) {
     let k = defKey(sl.spec.slotProperty);
     if (!k) {
       const preferred = [];
-      for (const depName of sl.spec.slotAccepts || []) {
-        const target = findComponentByName(depName);
+      for (const depRef of sl.spec.slotAccepts || []) {
+        const target = resolveComponentIdentity(
+          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
+          'Slot "' + sl.spec.slotProperty + '" preferred value',
+          false,
+        );
         preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
       k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
@@ -2670,38 +2759,15 @@ async function amendComponent(comp, C) {
 }
 
 async function syncOne(C) {
-  // Identity is the ds_contracts/contractId marker, NOT the set name — in a
-  // brownfield file a name can belong to the host system's own component
-  // (CBDS pilot: native 72-variant "Badge"). Legacy fallback: sets created
-  // before the marker existed carry only specHash under the same namespace.
-  let existing = null;
-  for (const page of figma.root.children) {
-    existing = page.findOne(
-      (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') &&
-        n.getSharedPluginData('ds_contracts', 'contractId') === C.contractId,
-    );
-    if (existing) break;
-  }
-  if (!existing) {
-    for (const page of figma.root.children) {
-      existing = page.findOne(
-        (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === C.setName &&
-          n.getSharedPluginData('ds_contracts', 'specHash') !== '',
-      );
-      if (existing) break;
-    }
-  }
-  // An anchored key is ours by definition — the contract records the key the
-  // canvas minted. Covers legacy nodes that predate both plugin-data markers
-  // (main-file finding, 2026-07-08: 17 standalone components duplicated).
-  if (!existing && C.anchorKey) {
-    for (const page of figma.root.children) {
-      existing = page.findOne(
-        (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.key === C.anchorKey,
-      );
-      if (existing) break;
-    }
-    if (existing) existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // Semantic marker → stable anchor → unique explicit legacy-generated name.
+  // A same-name foreign node has neither marker and is never adopted.
+  let existing = resolveComponentIdentity(
+    { contractId: C.contractId, anchorKey: C.anchorKey, name: C.setName },
+    'Sync target "' + C.setName + '"',
+    true,
+  );
+  if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
+    existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
   if (existing && existing.type === 'COMPONENT_SET' && C.isSet) {
     return await amendSet(existing, C);
@@ -2714,7 +2780,7 @@ async function syncOne(C) {
   }
   if (existing) {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
-    return { name: C.setName, skipped: true, reason: 'set/standalone shape mismatch (' + existing.type + ' vs isSet=' + C.isSet + ') — a human retires the old node', nodeId: existing.id, key: existing.key };
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'set/standalone shape mismatch (' + existing.type + ' vs isSet=' + C.isSet + ') — a human retires the old node', nodeId: existing.id, key: existing.key };
   }
 
   // A same-named unmarked set is foreign: leave it alone, disambiguate ours.
@@ -2772,8 +2838,12 @@ async function syncOne(C) {
       let key = keys[s.spec.slotProperty];
       if (!key) {
         const preferred = [];
-        for (const depName of s.spec.slotAccepts || []) {
-          const dep = findComponentByName(depName);
+        for (const depRef of s.spec.slotAccepts || []) {
+          const dep = resolveComponentIdentity(
+            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
+            'Slot "' + s.spec.slotProperty + '" preferred value',
+            false,
+          );
           preferred.push({
             type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
             key: dep.key,
@@ -2836,6 +2906,7 @@ async function syncOne(C) {
 
   return {
     name: C.setName,
+    contractId: C.contractId,
     nodeId: target.id,
     key: target.key,
     variants: C.isSet ? target.children.length : 1,

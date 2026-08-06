@@ -1,0 +1,62 @@
+[
+  {
+    "key": "fullWidth__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "fullWidth__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "fullWidth__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "fullWidth__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inset__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inset__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inset__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "inset__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "middle__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "middle__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "middle__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "middle__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

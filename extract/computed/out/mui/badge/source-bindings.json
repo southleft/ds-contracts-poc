@@ -1,0 +1,548 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Badge",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "background-color",
+      "combo": "primary.dot",
+      "axisValues": {
+        "color": "primary",
+        "variant": "dot"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-104rrlu-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "background-color",
+      "combo": "secondary.dot",
+      "axisValues": {
+        "color": "secondary",
+        "variant": "dot"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-1v5avu0-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "background-color",
+      "combo": "error.dot",
+      "axisValues": {
+        "color": "error",
+        "variant": "dot"
+      },
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-1xuqpsr-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "background-color",
+      "combo": "info.dot",
+      "axisValues": {
+        "color": "info",
+        "variant": "dot"
+      },
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-1v8dr38-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "background-color",
+      "combo": "success.dot",
+      "axisValues": {
+        "color": "success",
+        "variant": "dot"
+      },
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-137quj8-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "background-color",
+      "combo": "warning.dot",
+      "axisValues": {
+        "color": "warning",
+        "variant": "dot"
+      },
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-1jn4y8l-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "color",
+      "combo": "primary.dot",
+      "axisValues": {
+        "color": "primary",
+        "variant": "dot"
+      },
+      "token": "palette-primary-contrast-text",
+      "varName": "--mui-palette-primary-contrastText",
+      "anchor": {
+        "selector": ".css-104rrlu-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "color",
+      "combo": "secondary.dot",
+      "axisValues": {
+        "color": "secondary",
+        "variant": "dot"
+      },
+      "token": "palette-secondary-contrast-text",
+      "varName": "--mui-palette-secondary-contrastText",
+      "anchor": {
+        "selector": ".css-1v5avu0-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "color",
+      "combo": "error.dot",
+      "axisValues": {
+        "color": "error",
+        "variant": "dot"
+      },
+      "token": "palette-error-contrast-text",
+      "varName": "--mui-palette-error-contrastText",
+      "anchor": {
+        "selector": ".css-1xuqpsr-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "color",
+      "combo": "info.dot",
+      "axisValues": {
+        "color": "info",
+        "variant": "dot"
+      },
+      "token": "palette-info-contrast-text",
+      "varName": "--mui-palette-info-contrastText",
+      "anchor": {
+        "selector": ".css-1v8dr38-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "color",
+      "combo": "success.dot",
+      "axisValues": {
+        "color": "success",
+        "variant": "dot"
+      },
+      "token": "palette-success-contrast-text",
+      "varName": "--mui-palette-success-contrastText",
+      "anchor": {
+        "selector": ".css-137quj8-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "badge-anchororigintopright",
+      "channel": "color",
+      "combo": "warning.dot",
+      "axisValues": {
+        "color": "warning",
+        "variant": "dot"
+      },
+      "token": "palette-warning-contrast-text",
+      "varName": "--mui-palette-warning-contrastText",
+      "anchor": {
+        "selector": ".css-1jn4y8l-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "default.standard",
+      "axisValues": {
+        "color": "default",
+        "variant": "standard"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "default.dot",
+      "axisValues": {
+        "color": "default",
+        "variant": "dot"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "primary.standard",
+      "axisValues": {
+        "color": "primary",
+        "variant": "standard"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "primary.dot",
+      "axisValues": {
+        "color": "primary",
+        "variant": "dot"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "secondary.standard",
+      "axisValues": {
+        "color": "secondary",
+        "variant": "standard"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "secondary.dot",
+      "axisValues": {
+        "color": "secondary",
+        "variant": "dot"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "error.standard",
+      "axisValues": {
+        "color": "error",
+        "variant": "standard"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "error.dot",
+      "axisValues": {
+        "color": "error",
+        "variant": "dot"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "info.standard",
+      "axisValues": {
+        "color": "info",
+        "variant": "standard"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "info.dot",
+      "axisValues": {
+        "color": "info",
+        "variant": "dot"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "success.standard",
+      "axisValues": {
+        "color": "success",
+        "variant": "standard"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "success.dot",
+      "axisValues": {
+        "color": "success",
+        "variant": "dot"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "warning.standard",
+      "axisValues": {
+        "color": "warning",
+        "variant": "standard"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "warning.dot",
+      "axisValues": {
+        "color": "warning",
+        "variant": "dot"
+      },
+      "token": "palette-background-default",
+      "varName": "--mui-palette-background-default",
+      "anchor": {
+        "selector": ".css-bgqpfx-MuiAvatar-root"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "background-color",
+      "combo": "primary.standard",
+      "axisValues": {
+        "color": "primary",
+        "variant": "standard"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1aqfz6p-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "background-color",
+      "combo": "secondary.standard",
+      "axisValues": {
+        "color": "secondary",
+        "variant": "standard"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-ffwtai-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "background-color",
+      "combo": "error.standard",
+      "axisValues": {
+        "color": "error",
+        "variant": "standard"
+      },
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-1k83qqc-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "background-color",
+      "combo": "info.standard",
+      "axisValues": {
+        "color": "info",
+        "variant": "standard"
+      },
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-1utnimt-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "background-color",
+      "combo": "success.standard",
+      "axisValues": {
+        "color": "success",
+        "variant": "standard"
+      },
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-193sk91-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "background-color",
+      "combo": "warning.standard",
+      "axisValues": {
+        "color": "warning",
+        "variant": "standard"
+      },
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-vcuyf0-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "primary.standard",
+      "axisValues": {
+        "color": "primary",
+        "variant": "standard"
+      },
+      "token": "palette-primary-contrast-text",
+      "varName": "--mui-palette-primary-contrastText",
+      "anchor": {
+        "selector": ".css-1aqfz6p-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "secondary.standard",
+      "axisValues": {
+        "color": "secondary",
+        "variant": "standard"
+      },
+      "token": "palette-secondary-contrast-text",
+      "varName": "--mui-palette-secondary-contrastText",
+      "anchor": {
+        "selector": ".css-ffwtai-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "error.standard",
+      "axisValues": {
+        "color": "error",
+        "variant": "standard"
+      },
+      "token": "palette-error-contrast-text",
+      "varName": "--mui-palette-error-contrastText",
+      "anchor": {
+        "selector": ".css-1k83qqc-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "info.standard",
+      "axisValues": {
+        "color": "info",
+        "variant": "standard"
+      },
+      "token": "palette-info-contrast-text",
+      "varName": "--mui-palette-info-contrastText",
+      "anchor": {
+        "selector": ".css-1utnimt-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "success.standard",
+      "axisValues": {
+        "color": "success",
+        "variant": "standard"
+      },
+      "token": "palette-success-contrast-text",
+      "varName": "--mui-palette-success-contrastText",
+      "anchor": {
+        "selector": ".css-193sk91-MuiBadge-badge"
+      }
+    },
+    {
+      "part": "label-2",
+      "channel": "color",
+      "combo": "warning.standard",
+      "axisValues": {
+        "color": "warning",
+        "variant": "standard"
+      },
+      "token": "palette-warning-contrast-text",
+      "varName": "--mui-palette-warning-contrastText",
+      "anchor": {
+        "selector": ".css-vcuyf0-MuiBadge-badge"
+      }
+    }
+  ],
+  "skips": [
+    "label.background-color: candidate --mui-palette-Avatar-defaultBg → \"palette-avatar-default-bg\" = #bdbdbd (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

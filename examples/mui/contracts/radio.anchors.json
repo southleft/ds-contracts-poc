@@ -1,0 +1,118 @@
+{
+  "_marker": "PROVENANCE ANCHORS — write-back through-lines for source-aliased leaves. Sidecar, never contract vocabulary. selector = the CSSOM rule declaring the channel (render-level anchor for Emotion-runtime libraries; static readers will carry file:line anchors).",
+  "component": "radio",
+  "anchors": [
+    {
+      "leaf": "imported.radio.root.color.default.checked",
+      "token": "palette-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-hu0hv3-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+    },
+    {
+      "leaf": "imported.radio.root.color.default.unchecked",
+      "token": "palette-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-hu0hv3-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+    },
+    {
+      "leaf": "imported.radio.root.color.error.checked",
+      "token": "palette-error-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-error-main",
+      "selector": ".css-6mf0gg-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root.Mui-checked"
+    },
+    {
+      "leaf": "imported.radio.root.color.error.unchecked",
+      "token": "palette-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-6mf0gg-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+    },
+    {
+      "leaf": "imported.radio.root.color.info.checked",
+      "token": "palette-info-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-info-main",
+      "selector": ".css-18blzhd-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root.Mui-checked"
+    },
+    {
+      "leaf": "imported.radio.root.color.info.unchecked",
+      "token": "palette-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-18blzhd-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+    },
+    {
+      "leaf": "imported.radio.root.color.primary.checked",
+      "token": "palette-primary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-primary-main",
+      "selector": ".css-gj8b6i-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root.Mui-checked"
+    },
+    {
+      "leaf": "imported.radio.root.color.primary.unchecked",
+      "token": "palette-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-gj8b6i-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+    },
+    {
+      "leaf": "imported.radio.root.color.secondary.checked",
+      "token": "palette-secondary-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-secondary-main",
+      "selector": ".css-t4fbiv-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root.Mui-checked"
+    },
+    {
+      "leaf": "imported.radio.root.color.secondary.unchecked",
+      "token": "palette-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-t4fbiv-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+    },
+    {
+      "leaf": "imported.radio.root.color.success.checked",
+      "token": "palette-success-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-success-main",
+      "selector": ".css-q3hbl4-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root.Mui-checked"
+    },
+    {
+      "leaf": "imported.radio.root.color.success.unchecked",
+      "token": "palette-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-q3hbl4-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+    },
+    {
+      "leaf": "imported.radio.root.color.warning.checked",
+      "token": "palette-warning-main",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-warning-main",
+      "selector": ".css-zlwhq8-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root.Mui-checked"
+    },
+    {
+      "leaf": "imported.radio.root.color.warning.unchecked",
+      "token": "palette-text-secondary",
+      "part": "root",
+      "cssProperty": "color",
+      "varName": "--mui-palette-text-secondary",
+      "selector": ".css-zlwhq8-MuiButtonBase-root-MuiSwitchBase-root-MuiRadio-root"
+    }
+  ]
+}

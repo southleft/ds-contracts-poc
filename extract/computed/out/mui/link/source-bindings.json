@@ -1,0 +1,268 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Link",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "primary.none",
+      "axisValues": {
+        "color": "primary",
+        "underline": "none"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1716fz6-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "primary.hover",
+      "axisValues": {
+        "color": "primary",
+        "underline": "hover"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1845luc-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "primary.always",
+      "axisValues": {
+        "color": "primary",
+        "underline": "always"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-e8pmky-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "secondary.none",
+      "axisValues": {
+        "color": "secondary",
+        "underline": "none"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-t1k716-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "secondary.hover",
+      "axisValues": {
+        "color": "secondary",
+        "underline": "hover"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-yheiwv-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "secondary.always",
+      "axisValues": {
+        "color": "secondary",
+        "underline": "always"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-jodd2d-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "error.none",
+      "axisValues": {
+        "color": "error",
+        "underline": "none"
+      },
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-stnmjr-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "error.hover",
+      "axisValues": {
+        "color": "error",
+        "underline": "hover"
+      },
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-1xen7f8-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "error.always",
+      "axisValues": {
+        "color": "error",
+        "underline": "always"
+      },
+      "token": "palette-error-main",
+      "varName": "--mui-palette-error-main",
+      "anchor": {
+        "selector": ".css-1bu803m-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.none",
+      "axisValues": {
+        "color": "info",
+        "underline": "none"
+      },
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-16xmzux-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.hover",
+      "axisValues": {
+        "color": "info",
+        "underline": "hover"
+      },
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-1imvkyp-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "info.always",
+      "axisValues": {
+        "color": "info",
+        "underline": "always"
+      },
+      "token": "palette-info-main",
+      "varName": "--mui-palette-info-main",
+      "anchor": {
+        "selector": ".css-m3a1dc-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success.none",
+      "axisValues": {
+        "color": "success",
+        "underline": "none"
+      },
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-5wy5dt-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success.hover",
+      "axisValues": {
+        "color": "success",
+        "underline": "hover"
+      },
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-1ju5lr9-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "success.always",
+      "axisValues": {
+        "color": "success",
+        "underline": "always"
+      },
+      "token": "palette-success-main",
+      "varName": "--mui-palette-success-main",
+      "anchor": {
+        "selector": ".css-1phauc7-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning.none",
+      "axisValues": {
+        "color": "warning",
+        "underline": "none"
+      },
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-1nx11sy-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning.hover",
+      "axisValues": {
+        "color": "warning",
+        "underline": "hover"
+      },
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-1iz3f4o-MuiTypography-root-MuiLink-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "warning.always",
+      "axisValues": {
+        "color": "warning",
+        "underline": "always"
+      },
+      "token": "palette-warning-main",
+      "varName": "--mui-palette-warning-main",
+      "anchor": {
+        "selector": ".css-e8yf6b-MuiTypography-root-MuiLink-root"
+      }
+    }
+  ],
+  "skips": [
+    "root.text-decoration-color: candidates --mui-palette-error-mainChannel → \"palette-error-main-channel\" = 211 47 47 (value differs); --mui-palette-info-mainChannel → \"palette-info-main-channel\" = 2 136 209 (value differs); --mui-palette-primary-mainChannel → \"palette-primary-main-channel\" = 25 118 210 (value differs); --mui-palette-secondary-mainChannel → \"palette-secondary-main-channel\" = 156 39 176 (value differs); --mui-palette-success-mainChannel → \"palette-success-main-channel\" = 46 125 50 (value differs); --mui-palette-warning-mainChannel → \"palette-warning-main-channel\" = 237 108 2 (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

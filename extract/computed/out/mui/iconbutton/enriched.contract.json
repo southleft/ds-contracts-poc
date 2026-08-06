@@ -1,0 +1,211 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.icon-button",
+  "name": "IconButton",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI Wave 5 denominator round — bounded size × color cartesian (3×3); disableRipple pinned. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium",
+            "large": "Large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "color",
+      "type": {
+        "enum": [
+          "default",
+          "primary",
+          "secondary"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Color",
+          "values": {
+            "default": "Default",
+            "primary": "Primary",
+            "secondary": "Secondary"
+          }
+        },
+        "code": {
+          "prop": "color"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "children",
+      "type": "text",
+      "default": "★",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Icon"
+        },
+        "code": {
+          "prop": "children"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "hover",
+    "focus-visible",
+    "active"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "content": {
+        "prop": "children"
+      },
+      "declared": {
+        "appearance": "none",
+        "border-bottom-style": "none",
+        "border-left-style": "none",
+        "border-right-style": "none",
+        "border-top-style": "none",
+        "cursor": "pointer",
+        "position": "relative",
+        "transition-duration": "0.15s",
+        "transition-property": "background-color",
+        "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "user-select": "none"
+      },
+      "declaredStates": {
+        "disabled": {
+          "cursor": "default",
+          "pointer-events": "none"
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.icon-button.root.background-color}",
+        "border-bottom-width": "{imported.shared.size-0}",
+        "border-left-width": "{imported.shared.size-0}",
+        "border-right-width": "{imported.shared.size-0}",
+        "border-top-width": "{imported.shared.size-0}",
+        "bottom": "{imported.shared.size-0}",
+        "flex-shrink": "{imported.icon-button.root.flex-shrink}",
+        "font-weight": "{imported.icon-button.root.font-weight}",
+        "left": "{imported.shared.size-0}",
+        "outline-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "states": {
+        "disabled": {
+          "color": "{imported.icon-button.root.color-state-disabled}"
+        }
+      },
+      "tokensByProp": [
+        {
+          "prop": "color",
+          "map": {
+            "default": {
+              "color": "{imported.icon-button.root.color.default}"
+            },
+            "primary": {
+              "color": "{imported.icon-button.root.color.primary}"
+            },
+            "secondary": {
+              "color": "{imported.icon-button.root.color.secondary}"
+            }
+          }
+        },
+        {
+          "prop": "size",
+          "map": {
+            "large": {
+              "border-bottom-left-radius": "{imported.icon-button.root.border-bottom-left-radius.large}",
+              "border-bottom-right-radius": "{imported.icon-button.root.border-bottom-right-radius.large}",
+              "border-top-left-radius": "{imported.icon-button.root.border-top-left-radius.large}",
+              "border-top-right-radius": "{imported.icon-button.root.border-top-right-radius.large}",
+              "font-size": "{imported.icon-button.root.font-size.large}",
+              "padding-bottom": "{imported.icon-button.root.padding-bottom.large}",
+              "padding-left": "{imported.icon-button.root.padding-left.large}",
+              "padding-right": "{imported.icon-button.root.padding-right.large}",
+              "padding-top": "{imported.icon-button.root.padding-top.large}"
+            },
+            "medium": {
+              "border-bottom-left-radius": "{imported.icon-button.root.border-bottom-left-radius.medium}",
+              "border-bottom-right-radius": "{imported.icon-button.root.border-bottom-right-radius.medium}",
+              "border-top-left-radius": "{imported.icon-button.root.border-top-left-radius.medium}",
+              "border-top-right-radius": "{imported.icon-button.root.border-top-right-radius.medium}",
+              "font-size": "{imported.icon-button.root.font-size.medium}",
+              "padding-bottom": "{imported.icon-button.root.padding-bottom.medium}",
+              "padding-left": "{imported.icon-button.root.padding-left.medium}",
+              "padding-right": "{imported.icon-button.root.padding-right.medium}",
+              "padding-top": "{imported.icon-button.root.padding-top.medium}"
+            },
+            "small": {
+              "border-bottom-left-radius": "{imported.icon-button.root.border-bottom-left-radius.small}",
+              "border-bottom-right-radius": "{imported.icon-button.root.border-bottom-right-radius.small}",
+              "border-top-left-radius": "{imported.icon-button.root.border-top-left-radius.small}",
+              "border-top-right-radius": "{imported.icon-button.root.border-top-right-radius.small}",
+              "font-size": "{imported.icon-button.root.font-size.small}",
+              "padding-bottom": "{imported.icon-button.root.padding-bottom.small}",
+              "padding-left": "{imported.icon-button.root.padding-left.small}",
+              "padding-right": "{imported.icon-button.root.padding-right.small}",
+              "padding-top": "{imported.icon-button.root.padding-top.small}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "IconButton"
+    }
+  }
+}

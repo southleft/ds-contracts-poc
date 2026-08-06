@@ -1,0 +1,308 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@mui/material@9.2.0",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "linear-progress": {
+        "root": {
+          "background-color": {
+            "$value": "#a7caed",
+            "$type": "color"
+          },
+          "width": {
+            "$value": "288px",
+            "$type": "dimension"
+          },
+          "z-index": {
+            "$value": "0",
+            "$type": "number"
+          }
+        },
+        "linearprogress-bar": {
+          "background-color": {
+            "$value": "#1976d2",
+            "$type": "color"
+          },
+          "left": {
+            "determinate": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "-100.797px",
+              "$type": "dimension"
+            }
+          },
+          "right": {
+            "determinate": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "288px",
+              "$type": "dimension"
+            }
+          },
+          "translate-x": {
+            "determinate": {
+              "$value": "-172.8px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "determinate": {
+              "$value": "288px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "100.797px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "linearprogress-bar-2": {
+          "background-color": {
+            "$value": "#1976d2",
+            "$type": "color"
+          },
+          "right": {
+            "$value": "288px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "linearprogress-bar",
+        "channel": "transition-property",
+        "value": "transform"
+      },
+      {
+        "part": "linearprogress-bar",
+        "channel": "transition-timing-function",
+        "value": "linear"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "transition-duration",
+        "value": "0.2s"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "transition-property",
+        "value": "transform"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "channel": "transition-timing-function",
+        "value": "linear"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "linearprogress-bar",
+      "channel": "animation-duration",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "0s",
+      "distinctValues": 2
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "animation-iteration-count",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "infinite",
+      "distinctValues": 2
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "animation-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "none",
+      "distinctValues": 2
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "animation-timing-function",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "ease",
+      "distinctValues": 2
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "transform",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "matrix(1, 0, 0, 1, -172.8, 0)",
+      "distinctValues": 2
+    },
+    {
+      "part": "linearprogress-bar",
+      "channel": "transition-duration",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "0.4s",
+      "distinctValues": 2
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "animation-delay",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "1.15s",
+      "distinctValues": 1
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "animation-duration",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "2.1s",
+      "distinctValues": 1
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "animation-iteration-count",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "infinite",
+      "distinctValues": 1
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "animation-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "animation-19gglwu",
+      "distinctValues": 1
+    },
+    {
+      "part": "linearprogress-bar-2",
+      "channel": "animation-timing-function",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [
+    "linearprogress-bar-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "linearprogress-bar-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "linearprogress-bar-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only"
+  ],
+  "interactionOnlyPlaneDropCount": 3,
+  "structureReceipts": [
+    "root-signature-varies: determinate__default: span|LinearProgress-indeterminate.LinearProgress-root → span|LinearProgress-determinate.LinearProgress-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: determinate__hover: span|LinearProgress-indeterminate.LinearProgress-root → span|LinearProgress-determinate.LinearProgress-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: determinate__focus-visible: span|LinearProgress-indeterminate.LinearProgress-root → span|LinearProgress-determinate.LinearProgress-root (element-varies receipt; root always aligns)",
+    "root-signature-varies: determinate__active: span|LinearProgress-indeterminate.LinearProgress-root → span|LinearProgress-determinate.LinearProgress-root (element-varies receipt; root always aligns)",
+    "signature-drift: determinate__default root: span|LinearProgress-indeterminate.LinearProgress-root → span|LinearProgress-determinate.LinearProgress-root",
+    "part-missing: determinate__default linearprogress-bar-2",
+    "signature-drift: determinate__hover root: span|LinearProgress-indeterminate.LinearProgress-root → span|LinearProgress-determinate.LinearProgress-root",
+    "part-missing: determinate__hover linearprogress-bar-2",
+    "signature-drift: determinate__focus-visible root: span|LinearProgress-indeterminate.LinearProgress-root → span|LinearProgress-determinate.LinearProgress-root",
+    "part-missing: determinate__focus-visible linearprogress-bar-2",
+    "signature-drift: determinate__active root: span|LinearProgress-indeterminate.LinearProgress-root → span|LinearProgress-determinate.LinearProgress-root",
+    "part-missing: determinate__active linearprogress-bar-2"
+  ],
+  "styledChannelReceipts": [
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: linearprogress-bar — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: linearprogress-bar-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "translate-door-generalized: linearprogress-bar — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "linearprogress-bar",
+        "join": "computed-only"
+      },
+      {
+        "part": "linearprogress-bar-2",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "linearprogress-bar",
+      "linearprogress-bar-2"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "presence-carried: linearprogress-bar-2 (1/2 combos) →  hidden-when variant=determinate"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: linearprogress-bar.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: linearprogress-bar.transition-timing-function = linear (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: linearprogress-bar-2.transition-duration = 0.2s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: linearprogress-bar-2.transition-property = transform (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: linearprogress-bar-2.transition-timing-function = linear (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

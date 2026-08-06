@@ -1,0 +1,18 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.breadcrumbs",
+  "name": "Breadcrumbs",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — standalone (no variant axes); crumbs via childrenSpec. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "nav"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": { "root": {} },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@mui/material", "export": "Breadcrumbs" }
+  }
+}

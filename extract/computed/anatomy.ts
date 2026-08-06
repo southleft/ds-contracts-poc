@@ -742,12 +742,78 @@ const pxNum = (v: string | undefined): number | null => {
   return m ? Number(m[1]) : null;
 };
 
+/** Shared stroke-attribute reconstruction for path/circle children. */
+function svgStrokeAttrs(
+  el: CapturedNode,
+  inheritedColor: string | undefined,
+  receipts: string[],
+  label: string,
+  /** Path draw-on animation (pathLength-relative) drops dashes; progress
+   *  rings bake absolute px dasharray/offset so determinate arcs survive. */
+  dashMode: 'drop-pathlength' | 'bake-absolute',
+): string {
+  const strokeRaw = el.style['stroke'];
+  const stroke = strokeRaw && inheritedColor && strokeRaw === inheritedColor ? 'currentColor' : strokeRaw;
+  const strokeAttrs: string[] = [];
+  if (!stroke || stroke === 'none') return '';
+  strokeAttrs.push(` stroke="${stroke}"`);
+  const sw = el.style['stroke-width'];
+  const swNum = /^(-?\d+(?:\.\d+)?)px$/.exec(sw ?? '');
+  if (swNum && Number(swNum[1]) !== 1) strokeAttrs.push(` stroke-width="${swNum[1]}"`);
+  for (const [ch, attr] of [
+    ['stroke-linecap', 'stroke-linecap'],
+    ['stroke-linejoin', 'stroke-linejoin'],
+  ] as const) {
+    const v = el.style[ch];
+    if (v && v !== 'butt' && v !== 'miter') strokeAttrs.push(` ${attr}="${v}"`);
+  }
+  const dash = el.style['stroke-dasharray'];
+  const dashOffset = el.style['stroke-dashoffset'];
+  if (dashMode === 'drop-pathlength') {
+    // Round 5d (owner finding: the check glyph drew as SEGMENTED
+    // CAPSULES, not a continuous check): dash channels are
+    // pathLength-RELATIVE, and `pathLength` is an ATTRIBUTE — not a
+    // computed style (the viewBox class). Polaris normalizes the
+    // check path to pathLength=1 and drives stroke-dashoffset as a
+    // draw-on animation; the computed 2px dasharray is the ANIMATION
+    // VEHICLE, not resting geometry. Re-basing that pattern onto the
+    // real ~14-user-unit path drew 2px capsules with joints. The
+    // resting truth of a settled draw-on stroke is the CONTINUOUS
+    // stroke — dash channels are dropped with a named receipt
+    // (visibility still rides the captured opacity channel).
+    if ((dash && dash !== 'none') || (dashOffset && dashOffset !== '0px')) {
+      receipts.push(
+        `svg-dash-channels-dropped: ${label} — stroke-dasharray ${dash || 'none'} / stroke-dashoffset ${dashOffset || '0px'} are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)`,
+      );
+    }
+  } else if (dash && dash !== 'none') {
+    // WAVE 5 — MUI CircularProgress: dasharray/offset are absolute px
+    // circumference fractions (determinate arc), not pathLength=1 animation.
+    const dashNum = /^(-?\d+(?:\.\d+)?)px$/.exec(dash.trim());
+    const offNum = /^(-?\d+(?:\.\d+)?)px$/.exec((dashOffset ?? '0px').trim());
+    if (dashNum) {
+      strokeAttrs.push(` stroke-dasharray="${dashNum[1]}"`);
+      if (offNum) strokeAttrs.push(` stroke-dashoffset="${offNum[1]}"`);
+      receipts.push(
+        `svg-circle-dash-baked: ${label} — stroke-dasharray ${dash} / stroke-dashoffset ${dashOffset || '0px'} carried as absolute user units (progress-ring idiom; not pathLength-relative)`,
+      );
+    } else {
+      receipts.push(
+        `svg-circle-dash-unreadable: ${label} — stroke-dasharray ${dash} not px; dashes dropped`,
+      );
+    }
+  }
+  return strokeAttrs.join('');
+}
+
 /** Reconstruct inline SVG markup for one captured <svg> subtree. Returns
- *  null with a receipt when a child is not a <path> (bounded v1 grammar).
- *  Round 5c: the result also carries the reconstructed viewBox number, the
- *  path-coordinate extent, and whether the viewBox was BUMPED past the
- *  computed size — the authored-viewBox unification pass (promoteAnatomy)
- *  needs all three to recognize one authored glyph captured at many sizes. */
+ *  null with a receipt when a child is outside the bounded grammar
+ *  (path / g / circle). Round 5c: the result also carries the reconstructed
+ *  viewBox number, the path-coordinate extent, and whether the viewBox was
+ *  BUMPED past the computed size — the authored-viewBox unification pass
+ *  (promoteAnatomy) needs all three to recognize one authored glyph captured
+ *  at many sizes. Wave 5 adds `<circle>` so MUI CircularProgress (and peers)
+ *  promote as assets instead of minting unregistered cx/cy/r/stroke channels. */
 export function reconstructSvg(
   svgEl: CapturedNode,
   receipts: string[],
@@ -773,11 +839,25 @@ export function reconstructSvg(
   }
   const paths: string[] = [];
   let maxCoord = 0;
+  /** When every shape is a circle sharing one center, reconstruct the
+   *  MUI-style offset viewBox (`SIZE/2 SIZE/2 SIZE SIZE`) instead of
+   *  `0 0 vb vb` — otherwise cx=SIZE lands off-center in the display box. */
+  let circleCenter: number | null = null;
+  let circleOnly = true;
+  const resolveFill = (fillRaw: string): string =>
+    preferCurrentColor && fillRaw && inheritedColor && fillRaw === inheritedColor
+      ? 'currentColor'
+      : fillRaw && inheritedFill && fillRaw === inheritedFill
+        ? ''
+        : fillRaw && inheritedColor && fillRaw === inheritedColor
+          ? 'currentColor'
+          : fillRaw;
   const walkPaths = (n: CapturedNode): boolean => {
     for (const c of n.nodes) {
       if (c.t !== 'el') continue;
       const el = c.el;
       if (el.tag === 'path') {
+        circleOnly = false;
         const dRaw = el.style['d'] ?? '';
         const m = /^path\("(.*)"\)$/.exec(dRaw);
         if (!m) {
@@ -788,68 +868,42 @@ export function reconstructSvg(
         for (const num of d.match(/-?\d+(?:\.\d+)?/g) ?? []) {
           maxCoord = Math.max(maxCoord, Math.abs(Number(num)));
         }
-        const fillRaw = el.style['fill'] ?? '';
-        // fill equal to the svg's own computed fill is INHERITED (no
-        // attribute — the host part's minted fill channel cascades in CSS);
-        // fill equal to the inherited color is currentColor; else baked.
-        // Round 5c: when the fill==color identity holds across EVERY combo
-        // (preferCurrentColor — Spinner's `svg { fill: currentcolor }`), the
-        // glyph rides the color chain on every surface. Otherwise the round-4
-        // precedence stands: fill equal to the svg's own fill is INHERITED
-        // (host fill channel cascades); fill equal to the color is
-        // currentColor (Badge pip).
-        const fill = preferCurrentColor && fillRaw && inheritedColor && fillRaw === inheritedColor
-          ? 'currentColor'
-          : fillRaw && inheritedFill && fillRaw === inheritedFill
-            ? ''
-            : fillRaw && inheritedColor && fillRaw === inheritedColor
-              ? 'currentColor'
-              : fillRaw;
+        const fill = resolveFill(el.style['fill'] ?? '');
         const fillRule = el.style['fill-rule'];
         const opacity = el.style['opacity'];
         // STROKE channels (round 4 fix: Polaris's checkmark is a STROKED
         // path — fill-only reconstruction rendered it invisible). Computed
         // px lengths convert to user units 1:1 (viewBox == computed size).
-        const strokeRaw = el.style['stroke'];
-        const stroke = strokeRaw && inheritedColor && strokeRaw === inheritedColor ? 'currentColor' : strokeRaw;
-        const strokeAttrs: string[] = [];
-        if (stroke && stroke !== 'none') {
-          strokeAttrs.push(` stroke="${stroke}"`);
-          const sw = el.style['stroke-width'];
-          const swNum = /^(-?\d+(?:\.\d+)?)px$/.exec(sw ?? '');
-          if (swNum && Number(swNum[1]) !== 1) strokeAttrs.push(` stroke-width="${swNum[1]}"`);
-          for (const [ch, attr] of [
-            ['stroke-linecap', 'stroke-linecap'],
-            ['stroke-linejoin', 'stroke-linejoin'],
-          ] as const) {
-            const v = el.style[ch];
-            if (v && v !== 'butt' && v !== 'miter') strokeAttrs.push(` ${attr}="${v}"`);
-          }
-          // Round 5d (owner finding: the check glyph drew as SEGMENTED
-          // CAPSULES, not a continuous check): dash channels are
-          // pathLength-RELATIVE, and `pathLength` is an ATTRIBUTE — not a
-          // computed style (the viewBox class). Polaris normalizes the
-          // check path to pathLength=1 and drives stroke-dashoffset as a
-          // draw-on animation; the computed 2px dasharray is the ANIMATION
-          // VEHICLE, not resting geometry. Re-basing that pattern onto the
-          // real ~14-user-unit path drew 2px capsules with joints. The
-          // resting truth of a settled draw-on stroke is the CONTINUOUS
-          // stroke — dash channels are dropped with a named receipt
-          // (visibility still rides the captured opacity channel).
-          const dash = el.style['stroke-dasharray'];
-          const dashOffset = el.style['stroke-dashoffset'];
-          if ((dash && dash !== 'none') || (dashOffset && dashOffset !== '0px')) {
-            receipts.push(
-              `svg-dash-channels-dropped: ${label} — stroke-dasharray ${dash || 'none'} / stroke-dashoffset ${dashOffset || '0px'} are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)`,
-            );
-          }
-        }
+        const strokeAttrs = svgStrokeAttrs(el, inheritedColor, receipts, label, 'drop-pathlength');
         paths.push(
           `<path d="${d}"` +
             (fill ? ` fill="${fill}"` : '') +
             (fillRule === 'evenodd' ? ' fill-rule="evenodd"' : '') +
             (opacity && opacity !== '1' ? ` opacity="${opacity}"` : '') +
-            strokeAttrs.join('') +
+            strokeAttrs +
+            '/>',
+        );
+      } else if (el.tag === 'circle') {
+        const cx = pxNum(el.style['cx']);
+        const cy = pxNum(el.style['cy']);
+        const r = pxNum(el.style['r']);
+        if (cx === null || cy === null || r === null || r <= 0) {
+          receipts.push(`svg-circle-geometry-unreadable: ${label} — cx/cy/r not positive px; asset refused`);
+          return false;
+        }
+        if (cx !== cy) circleOnly = false;
+        else if (circleCenter === null) circleCenter = cx;
+        else if (circleCenter !== cx) circleOnly = false;
+        maxCoord = Math.max(maxCoord, Math.abs(cx) + r, Math.abs(cy) + r);
+        const fillRaw = el.style['fill'] ?? '';
+        const fill = fillRaw === 'none' ? 'none' : resolveFill(fillRaw);
+        const opacity = el.style['opacity'];
+        const strokeAttrs = svgStrokeAttrs(el, inheritedColor, receipts, label, 'bake-absolute');
+        paths.push(
+          `<circle cx="${cx}" cy="${cy}" r="${r}"` +
+            (fill ? ` fill="${fill}"` : '') +
+            (opacity && opacity !== '1' ? ` opacity="${opacity}"` : '') +
+            strokeAttrs +
             '/>',
         );
       } else if (el.tag === 'g') {
@@ -864,7 +918,7 @@ export function reconstructSvg(
         // captures reconstructible instead of silently refused.
         receipts.push(`svg-metadata-skipped: ${label} — <${el.tag}> is non-painting SVG metadata (SVG 1.1 §5.4), skipped rather than refusing the asset`);
       } else {
-        receipts.push(`svg-child-outside-grammar: ${label} — <${el.tag}> (v1 carries path/g only); asset refused`);
+        receipts.push(`svg-child-outside-grammar: ${label} — <${el.tag}> (v1 carries path/g/circle); asset refused`);
         return false;
       }
     }
@@ -872,13 +926,28 @@ export function reconstructSvg(
   };
   if (!walkPaths(svgEl)) return null;
   if (paths.length === 0) {
-    receipts.push(`svg-empty: ${label} — no path children; asset refused`);
+    receipts.push(`svg-empty: ${label} — no path/circle children; asset refused`);
     return null;
   }
   // viewBox reconstruction (NAMED): the viewBox attribute is not a computed
   // style — reconstructed as 0 0 W H from the svg's computed size, sanity-
   // checked against the path data's coordinate extent (a glyph drawn in a
-  // larger user space than its box would silently crop).
+  // larger user space than its box would silently crop). Circle-only MUI
+  // progress rings use the authored offset form `SIZE/2 SIZE/2 SIZE SIZE`.
+  if (circleOnly && circleCenter !== null && circleCenter > 0) {
+    const size = Math.round(circleCenter);
+    const origin = size / 2;
+    receipts.push(
+      `svg-viewbox-circle-offset: ${label} — ${origin} ${origin} ${size} ${size} from shared circle center ${circleCenter} (MUI CircularProgress idiom; viewBox is not a computed style — named reconstruction)`,
+    );
+    return {
+      markup: `<svg viewBox="${origin} ${origin} ${size} ${size}" xmlns="http://www.w3.org/2000/svg">${paths.join('')}</svg>`,
+      size: Math.round(Math.max(w, h)),
+      vb: size,
+      extent: maxCoord,
+      bumped: false,
+    };
+  }
   let vb = Math.round(Math.max(w, h));
   let bumped = false;
   if (maxCoord > vb * 1.02) {

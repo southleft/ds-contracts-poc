@@ -1,0 +1,42 @@
+[
+  {
+    "key": "determinate__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "determinate__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "determinate__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "determinate__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

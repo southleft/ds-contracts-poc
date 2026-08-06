@@ -1,0 +1,16 @@
+[
+  {
+    "key": "temporary__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "size-mismatch",
+    "note": "size mismatch ours 480x320 vs orig 900x1000 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
+  },
+  {
+    "key": "permanent__default",
+    "pctExact": null,
+    "pctAA": null,
+    "unscorable": "no-original",
+    "note": "original screenshot unavailable — pixel not scored"
+  }
+]

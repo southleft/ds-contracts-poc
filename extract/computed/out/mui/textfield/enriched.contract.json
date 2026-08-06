@@ -1,0 +1,301 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.text-field",
+  "name": "TextField",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI nested-instance/input-field round. The canonical capture mounts real start/end InputAdornment elements through the bounded $element marker, plus label and error helper text. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "outlined",
+          "filled",
+          "standard"
+        ]
+      },
+      "default": "outlined",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "outlined": "Outlined",
+            "filled": "Filled",
+            "standard": "Standard"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "default": "Amount",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "helperText",
+      "type": "text",
+      "default": "Enter a valid amount",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Helper Text"
+        },
+        "code": {
+          "prop": "helperText"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "column"
+      },
+      "parts": {
+        "label": {
+          "element": "label",
+          "content": {
+            "prop": "label"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label|FormLabel-root.InputLabel-animated.InputLabel-formControl.InputLabel-root.InputLabel-shrink — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "cursor": "default",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-overflow": "ellipsis",
+            "text-wrap-mode": "nowrap",
+            "transition-delay": "0s, 0s, 0s",
+            "transition-duration": "0.2s, 0.2s, 0.2s",
+            "transition-property": "color, transform, max-width",
+            "transition-timing-function": "cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1)",
+            "user-select": "none"
+          },
+          "tokens": {
+            "bottom": "{imported.text-field.label.bottom}",
+            "color": "{imported.shared.color-d32f2f}",
+            "font-size": "{imported.text-field.label.font-size}",
+            "font-weight": "{imported.shared.num-400}",
+            "height": "{imported.shared.size-23}",
+            "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-23}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.text-field.label.right}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.text-field.label.width}",
+            "z-index": "{imported.text-field.label.z-index}"
+          }
+        },
+        "inputbase-adornedend": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|InputBase-adornedEnd.InputBase-adornedStart.InputBase-formControl.InputBase-root.OutlinedInput-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "parts": {
+            "inputadornment-positionstart": {
+              "description": "Nested instance promoted from the captured InputAdornment subtree; identity is contract + anchor, not display name.",
+              "component": {
+                "id": "mui.input-adornment",
+                "props": {
+                  "position": "start",
+                  "children": "$"
+                }
+              }
+            },
+            "inputbase-input": {
+              "element": "input",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy input|InputBase-input.OutlinedInput-input — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "appearance": "auto",
+                "cursor": "text",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "overflow-x": "clip",
+                "overflow-y": "clip"
+              },
+              "tokens": {
+                "color": "{imported.shared.color-000000de}",
+                "height": "{imported.text-field.inputbase-input.height}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-23}",
+                "min-width": "{imported.shared.size-0}",
+                "padding-bottom": "{imported.text-field.inputbase-input.padding-bottom}",
+                "padding-top": "{imported.text-field.inputbase-input.padding-top}",
+                "width": "{imported.text-field.inputbase-input.width}"
+              }
+            },
+            "inputadornment-positionend": {
+              "description": "Nested instance promoted from the captured InputAdornment subtree; identity is contract + anchor, not display name.",
+              "component": {
+                "id": "mui.input-adornment",
+                "props": {
+                  "position": "end",
+                  "children": "USD"
+                }
+              }
+            },
+            "outlinedinput-notchedoutline": {
+              "element": "fieldset",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy fieldset|OutlinedInput-notchedOutline — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "absolute",
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "cursor": "text",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "pointer-events": "none",
+                "text-align": "left"
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-d32f2f}",
+                "border-bottom-left-radius": "{imported.shared.size-4}",
+                "border-bottom-right-radius": "{imported.shared.size-4}",
+                "border-bottom-width": "{imported.shared.size-1}",
+                "border-left-color": "{imported.shared.color-d32f2f}",
+                "border-left-width": "{imported.shared.size-1}",
+                "border-right-color": "{imported.shared.color-d32f2f}",
+                "border-right-width": "{imported.shared.size-1}",
+                "border-top-color": "{imported.shared.color-d32f2f}",
+                "border-top-left-radius": "{imported.shared.size-4}",
+                "border-top-right-radius": "{imported.shared.size-4}",
+                "border-top-width": "{imported.shared.size-1}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-000000de}",
+                "height": "{imported.text-field.outlinedinput-notchedoutline.height}",
+                "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-23}",
+                "min-height": "{imported.shared.size-0}",
+                "padding-left": "{imported.shared.size-8}",
+                "padding-right": "{imported.shared.size-8}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.text-field.outlinedinput-notchedoutline.top}",
+                "width": "{imported.shared.size-252-969}"
+              }
+            }
+          },
+          "declared": {
+            "box-sizing": "border-box",
+            "cursor": "text",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "position": "relative"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-4}",
+            "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-top-left-radius": "{imported.shared.size-4}",
+            "border-top-right-radius": "{imported.shared.size-4}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-000000de}",
+            "height": "{imported.text-field.inputbase-adornedend.height}",
+            "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-23}",
+            "padding-left": "{imported.shared.size-14}",
+            "padding-right": "{imported.shared.size-14}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-252-969}"
+          }
+        },
+        "label-5": {
+          "element": "p",
+          "content": {
+            "prop": "helperText"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy p|FormHelperText-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "text-align": "left"
+          },
+          "tokens": {
+            "color": "{imported.shared.color-d32f2f}",
+            "font-size": "{imported.text-field.label-5.font-size}",
+            "font-weight": "{imported.shared.num-400}",
+            "letter-spacing": "{imported.text-field.label-5.letter-spacing}",
+            "line-height": "{imported.text-field.label-5.line-height}",
+            "margin-left": "{imported.shared.size-14}",
+            "margin-right": "{imported.shared.size-14}",
+            "margin-top": "{imported.text-field.label-5.margin-top}"
+          }
+        }
+      },
+      "declared": {
+        "position": "relative"
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "height": "{imported.text-field.root.height}",
+        "left": "{imported.shared.size-0}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.shared.size-252-969}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "TextField"
+    }
+  }
+}

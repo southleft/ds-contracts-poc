@@ -1,0 +1,36 @@
+{
+  "setName": "Table",
+  "setId": "21:744",
+  "variantId": "21:650",
+  "variantName": "Size=Medium",
+  "partId": "21:654",
+  "partName": "buttonbase-root",
+  "field": "paddingTop",
+  "varName": "imported/table/buttonbase-root/padding-top/medium",
+  "before": {
+    "nodeId": "21:654",
+    "name": "buttonbase-root",
+    "paddingTop": 9,
+    "paddingLeft": 9,
+    "boundPaddingTop": "imported/table/buttonbase-root/padding-top/medium",
+    "boundPaddingLeft": "imported/table/buttonbase-root/padding-left/medium"
+  },
+  "afterEdit": {
+    "nodeId": "21:654",
+    "name": "buttonbase-root",
+    "paddingTop": 11,
+    "paddingLeft": 9,
+    "boundPaddingTop": null,
+    "boundPaddingLeft": "imported/table/buttonbase-root/padding-left/medium"
+  },
+  "afterRestore": {
+    "nodeId": "21:654",
+    "name": "buttonbase-root",
+    "paddingTop": 9,
+    "paddingLeft": 9,
+    "boundPaddingTop": "imported/table/buttonbase-root/padding-top/medium",
+    "boundPaddingLeft": "imported/table/buttonbase-root/padding-left/medium"
+  },
+  "drifted": true,
+  "restored": true
+}

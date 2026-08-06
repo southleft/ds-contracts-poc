@@ -66,7 +66,7 @@ export interface PresenceProp {
  *  MOLECULE round shipped a STRICTLY ONE-LEVEL list (`<Tabs><Tab/><Tab/></Tabs>`);
  *  a composed organism is a TREE (`<Table><TableHead><TableRow><TableCell>
  *  <Checkbox/></TableCell>…`). `children` recurses; the marker grammar
- *  ($callback/$import/$render) is resolved at EVERY depth, and every
+ *  ($callback/$import/$render/$element) is resolved at EVERY depth, and every
  *  referenced export is imported at every depth.
  *
  *  `children` and `text` are MUTUALLY EXCLUSIVE on one node (refused at load
@@ -128,11 +128,13 @@ export interface ComponentConfig {
   stateProps?: StateAxisSpec[];
   /** Props pinned to fixed values on every mount (recorded). MOLECULE round:
    *  widened from scalars — arrays/objects mount verbatim through the marker
-   *  grammar (Autocomplete options/value), and the `$render` marker mounts
+   *  grammar (Autocomplete options/value), `$render` mounts
    *  the ONLY function shape the vocabulary admits: {"$render":"pkg#Export"}
    *  → (params) => <Export {...params} /> — the identity render-prop
    *  (Autocomplete's required renderInput). Any richer function body is a
-   *  named refusal, never config. */
+   *  named refusal, never config. `$element` is the bounded React-node form:
+   *  {"$element":"pkg#Export","props":{...},"text":"..."}; it exists for
+   *  element-valued component props such as MUI input adornments. */
   fixedProps?: Record<string, unknown>;
   /** MUI round (Card live finding): the library's CANONICAL child
    *  composition — sampleText mounts wrapped in this imported component
@@ -670,13 +672,19 @@ export function buildHarnessPage(
   );
   // Round 4 presence-value marker grammar: collect $import values into real
   // import statements; markers resolve at mount time (resolveMarkers below).
-  // MOLECULE round: $render carries the same "pkg#Export" spelling — the
-  // referenced Export is imported the same way.
+  // MOLECULE round: $render/$element carry the same "pkg#Export" spelling —
+  // the referenced Export is imported the same way.
   const extraImports = new Map<string, Set<string>>(); // pkg → exports
   const collectImports = (v: unknown): void => {
     if (v && typeof v === 'object') {
       const rec = v as Record<string, unknown>;
-      const imp = typeof rec['$import'] === 'string' ? rec['$import'] : typeof rec['$render'] === 'string' ? rec['$render'] : undefined;
+      const imp = typeof rec['$import'] === 'string'
+        ? rec['$import']
+        : typeof rec['$render'] === 'string'
+          ? rec['$render']
+          : typeof rec['$element'] === 'string'
+            ? rec['$element']
+            : undefined;
       if (typeof imp === 'string') {
         const [pkg, name] = imp.split('#');
         (extraImports.get(pkg) ?? extraImports.set(pkg, new Set()).get(pkg)!).add(name);
@@ -735,12 +743,17 @@ const stage = stageStyle({ width: ${cfg.stage.width}, height: ${cfg.stage.height
 // presence-value marker grammar: {"$callback":true} → () => {};
 // {"$import":"pkg#Name"} → the imported binding (resolved recursively);
 // {"$render":"pkg#Name"} → (params) => <Name {...params} /> — the identity
-// render-prop, the ONLY function shape admitted (MOLECULE round).
+// render-prop; {"$element":"pkg#Name","props":{},"text":"..."} → a bounded
+// React element for element-valued props (for example input adornments).
 function resolveMarkers(v) {
   if (v && typeof v === 'object') {
     if (v.$callback === true) return () => {};
     if (typeof v.$import === 'string') return EXTRA[v.$import.split('#')[1]];
     if (typeof v.$render === 'string') { const K = EXTRA[v.$render.split('#')[1]]; return (params) => React.createElement(K, params); }
+    if (typeof v.$element === 'string') {
+      const K = EXTRA[v.$element.split('#')[1]];
+      return React.createElement(K, resolveMarkers(v.props || {}), v.text == null ? undefined : String(v.text));
+    }
     if (Array.isArray(v)) return v.map(resolveMarkers);
     const out = {};
     for (const [k, x] of Object.entries(v)) out[k] = resolveMarkers(x);
@@ -1700,7 +1713,8 @@ const PORTAL_STAGE_ID = 'depth-stage';
  *  combo). MOLECULE round: every enumerated combo is baked (per-combo props
  *  via comboProps — presence/state axes included), and the canonical-children
  *  vocabulary (childWrap / childrenSpec / $render) matches buildHarnessPage.
- *  Mirrors buildHarnessPage's marker grammar ($callback/$import/$render) and
+ *  Mirrors buildHarnessPage's marker grammar
+ *  ($callback/$import/$render/$element) and
  *  provider wrapping. */
 export function buildPortalHarnessPage(
   harness: string,
@@ -1715,13 +1729,19 @@ export function buildPortalHarnessPage(
     props: { ...comboProps(comp, space, combo), ...(comp.openDriver ?? {}) } as Record<string, unknown>,
   }));
 
-  // $import/$render markers anywhere in the props become real import
+  // $import/$render/$element markers anywhere in the props become real import
   // statements (resolved at mount by resolveMarkers), as buildHarnessPage.
   const extraImports = new Map<string, Set<string>>();
   const collectImports = (v: unknown): void => {
     if (v && typeof v === 'object') {
       const rec = v as Record<string, unknown>;
-      const imp = typeof rec['$import'] === 'string' ? rec['$import'] : typeof rec['$render'] === 'string' ? rec['$render'] : undefined;
+      const imp = typeof rec['$import'] === 'string'
+        ? rec['$import']
+        : typeof rec['$render'] === 'string'
+          ? rec['$render']
+          : typeof rec['$element'] === 'string'
+            ? rec['$element']
+            : undefined;
       if (typeof imp === 'string') {
         const [pkg, name] = imp.split('#');
         (extraImports.get(pkg) ?? extraImports.set(pkg, new Set()).get(pkg)!).add(name);
@@ -1779,6 +1799,10 @@ function resolveMarkers(v) {
     if (v.$callback === true) return () => {};
     if (typeof v.$import === 'string') return EXTRA[v.$import.split('#')[1]];
     if (typeof v.$render === 'string') { const K = EXTRA[v.$render.split('#')[1]]; return (params) => React.createElement(K, params); }
+    if (typeof v.$element === 'string') {
+      const K = EXTRA[v.$element.split('#')[1]];
+      return React.createElement(K, resolveMarkers(v.props || {}), v.text == null ? undefined : String(v.text));
+    }
     if (Array.isArray(v)) return v.map(resolveMarkers);
     const out = {};
     for (const [k, x] of Object.entries(v)) out[k] = resolveMarkers(x);

@@ -1,0 +1,560 @@
+{
+  "ok": true,
+  "fatal": false,
+  "version": 1,
+  "runId": "exact-conversion-finish-wave2",
+  "library": "mui",
+  "scoredAt": "2026-08-06T00:22:34.605Z",
+  "accuracyDenominatorsUntouched": true,
+  "summary": {
+    "match": 32,
+    "pending": 0,
+    "fail": 0,
+    "facts": 32
+  },
+  "errors": [],
+  "components": [
+    {
+      "id": "mui.button",
+      "stem": "button",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": true,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 3,
+        "namedReceiptCount": 23
+      },
+      "facts": [
+        {
+          "channel": "variant-space",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: 3 VARIANT axis(es) + figma script + compile receipt",
+          "fatal": false
+        },
+        {
+          "channel": "states.disabled",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "disabled listed in contract.states",
+          "fatal": false
+        },
+        {
+          "channel": "prototype.change-to",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "figma-script:CHANGE_TO with ON_HOVER reaction wiring",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.chip",
+      "stem": "chip",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": true,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 3,
+        "namedReceiptCount": 34
+      },
+      "facts": [
+        {
+          "channel": "variant-space",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: 3 VARIANT axis(es) + figma script + compile receipt",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: drawable anatomy present on contract root",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.switch",
+      "stem": "switch",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": true,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 3,
+        "namedReceiptCount": 67
+      },
+      "facts": [
+        {
+          "channel": "props.checked",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "checked is a VARIANT axis (not -state-checked name invention)",
+          "fatal": false
+        },
+        {
+          "channel": "layout.thumb-translate",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "contract/mint binding path: anatomy.root.parts.buttonbase-root.tokensByProp[0].map.checked.translate-x (4 minted leaves)",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.checkbox",
+      "stem": "checkbox",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": true,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 1,
+        "namedReceiptCount": 91
+      },
+      "facts": [
+        {
+          "channel": "variant-space",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: 1 VARIANT axis(es) + figma script + compile receipt",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: drawable anatomy present on contract root",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.slider",
+      "stem": "slider",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": true,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 2,
+        "namedReceiptCount": 53
+      },
+      "facts": [
+        {
+          "channel": "variant-space",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: 2 VARIANT axis(es) + figma script + compile receipt",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: drawable anatomy present on contract root",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.card",
+      "stem": "card",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": true,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 1,
+        "namedReceiptCount": 20
+      },
+      "facts": [
+        {
+          "channel": "variant-space",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: 1 VARIANT axis(es) + figma script + compile receipt",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: drawable anatomy present on contract root",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.accordion",
+      "stem": "accordion",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": true,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 2,
+        "namedReceiptCount": 77
+      },
+      "facts": [
+        {
+          "channel": "variant-space",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: 2 VARIANT axis(es) + figma script + compile receipt",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: drawable anatomy present on contract root",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.tabs",
+      "stem": "tabs",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": true,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 2,
+        "namedReceiptCount": 95
+      },
+      "facts": [
+        {
+          "channel": "variant-space",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: 2 VARIANT axis(es) + figma script + compile receipt",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: drawable anatomy present on contract root",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.autocomplete",
+      "stem": "autocomplete",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": true,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 1,
+        "namedReceiptCount": 244
+      },
+      "facts": [
+        {
+          "channel": "variant-space",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: 1 VARIANT axis(es) + figma script + compile receipt",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: drawable anatomy present on contract root",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy.listbox",
+          "expect": "LEDGERED",
+          "expectName": "autocomplete-listbox-closed-capture",
+          "result": "MATCH",
+          "observed": "LEDGERED",
+          "reason": "named receipt/prose hit: listbox",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.dialog",
+      "stem": "dialog",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": true,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 1,
+        "namedReceiptCount": 45
+      },
+      "facts": [
+        {
+          "channel": "anatomy.root",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: drawable anatomy present on contract root",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy.focus-trap-sentinel",
+          "expect": "REFUSED",
+          "expectName": "portal-inert-child",
+          "result": "MATCH",
+          "observed": "REFUSED",
+          "reason": "named receipt/prose hit: portal-inert-children-dropped",
+          "fatal": false
+        },
+        {
+          "channel": "states.interaction",
+          "expect": "LEDGERED",
+          "expectName": "portal-states-empty",
+          "result": "MATCH",
+          "observed": "LEDGERED",
+          "reason": "contract declares states: [] (portal capture boundary)",
+          "fatal": false
+        },
+        {
+          "channel": "layout.full-bleed-scrim-width",
+          "expect": "REFUSED",
+          "expectName": "full-bleed-scrim-stage-width",
+          "result": "MATCH",
+          "observed": "REFUSED",
+          "reason": "figma emission omits capture-stage 900px root width (boundFullBleedScrimRoot / blockRoot)",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.table",
+      "stem": "table",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": true,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 1,
+        "namedReceiptCount": 439
+      },
+      "facts": [
+        {
+          "channel": "semantics.table",
+          "expect": "LOWERED",
+          "expectName": "table-box-to-accessible-structure",
+          "result": "MATCH",
+          "observed": "LOWERED",
+          "reason": "named lowering receipt: table-geometry-excluded",
+          "fatal": false
+        },
+        {
+          "channel": "layout.stickyHeader",
+          "expect": "REFUSED",
+          "expectName": "sticky-header-excluded",
+          "result": "MATCH",
+          "observed": "REFUSED",
+          "reason": "named receipt/prose hit: stickyHeader",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy.row-menu-open",
+          "expect": "REFUSED",
+          "expectName": "portal-single-root-drops-in-stage",
+          "result": "MATCH",
+          "observed": "REFUSED",
+          "reason": "named receipt/prose hit: single-portaled-root",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy.inlined-checkbox",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "inlined checkbox anatomy without nested component identity",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.text-field",
+      "stem": "text-field",
+      "status": "in-pilot",
+      "inPilot": true,
+      "evidence": {
+        "contract": true,
+        "extension": true,
+        "figma": true,
+        "captureOut": false,
+        "compileReceipt": true,
+        "dump": false,
+        "promoted": true,
+        "variantAxisCount": 2,
+        "namedReceiptCount": 128
+      },
+      "facts": [
+        {
+          "channel": "component",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "structural: promoted contract + extension + figma + compile receipt",
+          "fatal": false
+        },
+        {
+          "channel": "anatomy.adornment",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "nested identity: two mui.input-adornment refs + emitted depContractId/depAnchorKey pairs",
+          "fatal": false
+        },
+        {
+          "channel": "text.style",
+          "expect": "CARRIED",
+          "expectName": null,
+          "result": "MATCH",
+          "observed": "CARRIED",
+          "reason": "named text identity: label + helper/error anatomy, 12 emitted textStyle specs, fail-closed runtime",
+          "fatal": false
+        }
+      ]
+    },
+    {
+      "id": "mui.speed-dial",
+      "stem": "speed-dial",
+      "status": "negative-control",
+      "inPilot": false,
+      "evidence": {
+        "contract": false,
+        "extension": false,
+        "figma": false,
+        "captureOut": false,
+        "compileReceipt": false,
+        "dump": false,
+        "promoted": false,
+        "variantAxisCount": 0,
+        "namedReceiptCount": 0
+      },
+      "facts": [
+        {
+          "channel": "component",
+          "expect": "UNSUPPORTED",
+          "expectName": "mui-speed-dial-outside-grammar",
+          "result": "MATCH",
+          "observed": "UNSUPPORTED",
+          "reason": "negative-control remains unpromoted (fail-closed)",
+          "fatal": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "No MUI Figma dumps in-tree — exact projection remains unscored.",
+    "Prototype CHANGE_TO uses committed figma-script emission evidence; Switch checked translation uses promoted contract bindings plus minted leaves.",
+    "Compile/genesis not re-executed; COMPILE-RECEIPT.md row presence is the cheap compile signal.",
+    "CARRIED claims are structural (contract/figma/extension) unless a named receipt proves LOWERED/REFUSED/LEDGERED.",
+    "Seeded TextField is scored from promoted contract/emission identity only; negative-control SpeedDial fails closed on any promotion."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Breadcrumbs",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-9wyelp-MuiTypography-root-MuiBreadcrumbs-root"
+      }
+    }
+  ],
+  "skips": [],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

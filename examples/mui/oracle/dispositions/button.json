@@ -1,0 +1,26 @@
+{
+  "componentId": "mui.button",
+  "stem": "button",
+  "status": "in-pilot",
+  "authoredFrom": [
+    "examples/mui/PROVENANCE.md state-preview / cartesian notes",
+    "accuracy/grammar.json archetype button"
+  ],
+  "facts": [
+    {
+      "channel": "variant-space",
+      "expect": "CARRIED",
+      "expectWhere": "Structured VARIANT definitions + complete tuples; ragged/ambiguous exact mode REFUSED with EXACT_* — no silent Cartesian fill"
+    },
+    {
+      "channel": "states.disabled",
+      "expect": "CARRIED",
+      "expectWhere": "Disabled participates as accepted state/preview axis when referee accepts; otherwise REFUSED by name"
+    },
+    {
+      "channel": "prototype.change-to",
+      "expect": "CARRIED",
+      "expectWhere": "Default→Hover/Active CHANGE_TO wiring when state siblings exist; Focus Visible/Disabled are destinations only"
+    }
+  ]
+}

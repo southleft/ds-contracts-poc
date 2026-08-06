@@ -1,0 +1,18 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.snackbar",
+  "name": "Snackbar",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — standalone open=true capture via openDriver; no variant axes. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": { "root": {} },
+  "anchors": {
+    "figma": { "fileKey": null, "componentSetKey": null },
+    "code": { "importPath": "@mui/material", "export": "Snackbar" }
+  }
+}

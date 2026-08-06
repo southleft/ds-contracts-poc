@@ -33,9 +33,21 @@ const ORDER = [
   // (standalone — no variant axes).
   'checkbox.figma.js', 'table.figma.js', 'table-pagination.figma.js',
   'menu.figma.js', 'tooltip.figma.js',
+  // Nested-instance round: dependency MUST precede the parent.
+  'input-adornment.figma.js', 'text-field.figma.js',
+  // Wave 5 denominator slice (avatar / fab / icon-button / progress).
+  'avatar.figma.js', 'fab.figma.js', 'icon-button.figma.js',
+  'circular-progress.figma.js', 'linear-progress.figma.js',
+  // Wave 5 A-batch: alert/badge/divider/link/paper.
+  'alert.figma.js', 'badge.figma.js', 'divider.figma.js',
+  'link.figma.js', 'paper.figma.js',
+  // Wave 5 C-batch: breadcrumbs/drawer/radio/select/snackbar.
+  'breadcrumbs.figma.js', 'drawer.figma.js', 'radio.figma.js',
+  'select.figma.js', 'snackbar.figma.js',
 ];
 // standalone (no variant axes → COMPONENT, not COMPONENT_SET)
-const STANDALONE = ['Menu', 'Tooltip', 'TablePagination'];
+// Snackbar carries a promoted `position` VARIANT axis (3 values) — COMPONENT_SET.
+const STANDALONE = ['Menu', 'Tooltip', 'TablePagination', 'Breadcrumbs'];
 
 const blocks = ORDER.map((f) => `// ───── ${f} ─────
 await (async () => {

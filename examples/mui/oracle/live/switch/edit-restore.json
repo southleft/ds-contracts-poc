@@ -1,0 +1,36 @@
+{
+  "setName": "Switch",
+  "setId": "21:624",
+  "variantId": "21:512",
+  "variantName": "Color=Primary, Size=Medium, Checked=Unchecked",
+  "partId": "21:512",
+  "partName": "Color=Primary, Size=Medium, Checked=Unchecked",
+  "field": "paddingTop",
+  "varName": "imported/switch/root/padding-top/medium",
+  "before": {
+    "nodeId": "21:512",
+    "name": "Color=Primary, Size=Medium, Checked=Unchecked",
+    "paddingTop": 12,
+    "paddingLeft": 12,
+    "boundPaddingTop": "imported/switch/root/padding-top/medium",
+    "boundPaddingLeft": "imported/switch/root/padding-left/medium"
+  },
+  "afterEdit": {
+    "nodeId": "21:512",
+    "name": "Color=Primary, Size=Medium, Checked=Unchecked",
+    "paddingTop": 14,
+    "paddingLeft": 12,
+    "boundPaddingTop": null,
+    "boundPaddingLeft": "imported/switch/root/padding-left/medium"
+  },
+  "afterRestore": {
+    "nodeId": "21:512",
+    "name": "Color=Primary, Size=Medium, Checked=Unchecked",
+    "paddingTop": 12,
+    "paddingLeft": 12,
+    "boundPaddingTop": "imported/switch/root/padding-top/medium",
+    "boundPaddingLeft": "imported/switch/root/padding-left/medium"
+  },
+  "drifted": true,
+  "restored": true
+}

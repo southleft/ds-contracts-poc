@@ -1,0 +1,140 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.linear-progress",
+  "name": "LinearProgress",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI Wave 5 denominator round — variant axis only (determinate|indeterminate); color/value pinned via fixedProps; buffer/query excluded. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "determinate",
+          "indeterminate"
+        ]
+      },
+      "default": "indeterminate",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "determinate": "Determinate",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "overflow-x": "hidden",
+        "overflow-y": "hidden",
+        "position": "relative"
+      },
+      "parts": {
+        "linearprogress-bar": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|LinearProgress-bar.LinearProgress-bar1 — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "transition-property": "transform",
+            "transition-timing-function": "linear"
+          },
+          "tokens": {
+            "background-color": "{imported.linear-progress.linearprogress-bar.background-color}",
+            "bottom": "{imported.shared.size-0}",
+            "height": "{imported.shared.size-4}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "translate-y": "{imported.shared.size-0}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "variant",
+              "map": {
+                "determinate": {
+                  "left": "{imported.linear-progress.linearprogress-bar.left.determinate}",
+                  "right": "{imported.linear-progress.linearprogress-bar.right.determinate}",
+                  "translate-x": "{imported.linear-progress.linearprogress-bar.translate-x.determinate}",
+                  "width": "{imported.linear-progress.linearprogress-bar.width.determinate}"
+                },
+                "indeterminate": {
+                  "left": "{imported.linear-progress.linearprogress-bar.left.indeterminate}",
+                  "right": "{imported.linear-progress.linearprogress-bar.right.indeterminate}",
+                  "translate-x": "{imported.linear-progress.linearprogress-bar.translate-x.indeterminate}",
+                  "width": "{imported.linear-progress.linearprogress-bar.width.indeterminate}"
+                }
+              }
+            }
+          ]
+        },
+        "linearprogress-bar-2": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|LinearProgress-bar.LinearProgress-bar2 — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "transition-duration": "0.2s",
+            "transition-property": "transform",
+            "transition-timing-function": "linear"
+          },
+          "stylesWhen": [
+            {
+              "prop": "variant",
+              "equals": "determinate",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "tokens": {
+            "background-color": "{imported.linear-progress.linearprogress-bar-2.background-color}",
+            "bottom": "{imported.shared.size-0}",
+            "height": "{imported.shared.size-4}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.linear-progress.linearprogress-bar-2.right}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-0}"
+          }
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.linear-progress.root.background-color}",
+        "bottom": "{imported.shared.size-0}",
+        "height": "{imported.shared.size-4}",
+        "left": "{imported.shared.size-0}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.linear-progress.root.width}",
+        "z-index": "{imported.linear-progress.root.z-index}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "LinearProgress"
+    }
+  }
+}

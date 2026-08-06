@@ -1,0 +1,27 @@
+{
+  "componentId": "mui.text-field",
+  "stem": "text-field",
+  "status": "in-pilot",
+  "authoredFrom": [
+    "accuracy/grammar.json archetype input-field",
+    "Wave 0 identity archaeology — MUI pilot lacked nested instance refs",
+    "Wave 1 exact dependency identity — depContractId + depAnchorKey"
+  ],
+  "facts": [
+    {
+      "channel": "component",
+      "expect": "CARRIED",
+      "expectWhere": "examples/mui/contracts/text-field.contract.json + examples/mui/figma/text-field.figma.js; both artifacts required"
+    },
+    {
+      "channel": "anatomy.adornment",
+      "expect": "CARRIED",
+      "expectWhere": "contract anatomy contains two mui.input-adornment component refs; emitted specs must carry depContractId=mui.input-adornment and depAnchorKey=mui.input-adornment for both start and end"
+    },
+    {
+      "channel": "text.style",
+      "expect": "CARRIED",
+      "expectWhere": "label/helper/error text anatomy binds minted font-size leaves with dsContracts.textStyle identity; emitted text specs carry textStyle and runtime fails closed as text-style-identity-refused"
+    }
+  ]
+}

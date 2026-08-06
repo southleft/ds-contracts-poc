@@ -1,0 +1,28 @@
+{
+  "componentId": "mui.autocomplete",
+  "stem": "autocomplete",
+  "status": "in-pilot",
+  "authoredFrom": [
+    "examples/mui/PROVENANCE.md",
+    "examples/mui/oracle/EXPECTED.md",
+    "accuracy/grammar.json"
+  ],
+  "facts": [
+    {
+      "channel": "variant-space",
+      "expect": "CARRIED",
+      "expectWhere": "Structured axes/tuples when present; exact mode REFUSED with EXACT_* on ragged/ambiguous — no silent invention"
+    },
+    {
+      "channel": "anatomy",
+      "expect": "CARRIED",
+      "expectWhere": "Drawable substance required; hollow parts REFUSED as drawable-empty on apply/bundle"
+    },
+    {
+      "channel": "anatomy.listbox",
+      "expect": "LEDGERED",
+      "expectName": "autocomplete-listbox-closed-capture",
+      "expectWhere": "Closed capture is policy — open listbox portal path is not silently claimed CARRIED"
+    }
+  ]
+}

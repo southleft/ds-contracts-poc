@@ -386,6 +386,338 @@
           ]
         }
       ]
+    },
+    {
+      "__note": "NESTED-INSTANCE ROUND — standalone dependency captured first so TextField can carry two instance refs with stable contract/anchor identity.",
+      "name": "InputAdornment",
+      "importName": "InputAdornment",
+      "contract": "examples/mui/contracts-seed/input-adornment.contract.json",
+      "sampleText": "$",
+      "axes": [
+        "position"
+      ]
+    },
+    {
+      "__note": "NESTED-INSTANCE ROUND — real InputAdornment elements are mounted through the bounded $element marker. Label + error helper text are present in every capture so typography identity can be scored without a canvas dump.",
+      "name": "TextField",
+      "importName": "TextField",
+      "contract": "examples/mui/contracts-seed/text-field.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "fixedProps": {
+        "id": "mui-text-field-oracle",
+        "label": "Amount",
+        "helperText": "Enter a valid amount",
+        "error": true,
+        "slotProps": {
+          "input": {
+            "startAdornment": {
+              "$element": "@mui/material#InputAdornment",
+              "props": {
+                "position": "start"
+              },
+              "text": "$"
+            },
+            "endAdornment": {
+              "$element": "@mui/material#InputAdornment",
+              "props": {
+                "position": "end"
+              },
+              "text": "USD"
+            }
+          }
+        }
+      },
+      "blockStage": true,
+      "stage": {
+        "width": 360,
+        "height": 140,
+        "padding": 16
+      }
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — Avatar. Variant axis only (circular|rounded|square); initials via sampleText. Size is sx-driven in MUI and deliberately out of v1.",
+      "name": "Avatar",
+      "importName": "Avatar",
+      "contract": "examples/mui/contracts-seed/avatar.contract.json",
+      "sampleText": "A",
+      "axes": [
+        "variant"
+      ]
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — Fab ONLY (NOT SpeedDial). Bounded size×color (3×3=9); variant pinned circular; disableRipple pinned (Button/Switch precedent).",
+      "name": "Fab",
+      "importName": "Fab",
+      "contract": "examples/mui/contracts-seed/fab.contract.json",
+      "sampleText": "+",
+      "axes": [
+        "size",
+        "color"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "variant": "circular",
+        "disableRipple": true
+      }
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — IconButton. Bounded size×color (3×3=9); disableRipple pinned.",
+      "name": "IconButton",
+      "importName": "IconButton",
+      "contract": "examples/mui/contracts-seed/icon-button.contract.json",
+      "sampleText": "★",
+      "axes": [
+        "size",
+        "color"
+      ],
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "disableRipple": true,
+        "aria-label": "icon action"
+      }
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — CircularProgress. Variant axis only; color/size/value pinned. Infinite spin animations are pinned at currentTime 0 by the capture runner.",
+      "name": "CircularProgress",
+      "importName": "CircularProgress",
+      "contract": "examples/mui/contracts-seed/circular-progress.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant"
+      ],
+      "fixedProps": {
+        "color": "primary",
+        "size": 40,
+        "value": 60
+      }
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — LinearProgress. Variant axis only (determinate|indeterminate); buffer/query excluded; color/value pinned. blockStage required for bar width.",
+      "name": "LinearProgress",
+      "importName": "LinearProgress",
+      "contract": "examples/mui/contracts-seed/linear-progress.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant"
+      ],
+      "fixedProps": {
+        "color": "primary",
+        "value": 40
+      },
+      "blockStage": true,
+      "stage": {
+        "width": 320,
+        "height": 48,
+        "padding": 16
+      }
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — severity×variant is cheap (4×3=12). Children sample text mounts the message slot.",
+      "name": "Alert",
+      "importName": "Alert",
+      "contract": "examples/mui/contracts-seed/alert.contract.json",
+      "sampleText": "This is an alert — check it out!",
+      "axes": [
+        "severity",
+        "variant"
+      ],
+      "blockStage": true
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — color×variant (7×2=14). badgeContent fixed; Avatar child via childrenSpec (Button childWrap caused double-run anatomy identity thrash).",
+      "name": "Badge",
+      "importName": "Badge",
+      "contract": "examples/mui/contracts-seed/badge.contract.json",
+      "sampleText": "",
+      "axes": [
+        "color",
+        "variant"
+      ],
+      "fixedProps": {
+        "badgeContent": 4,
+        "overlap": "circular"
+      },
+      "childrenSpec": [
+        { "importName": "Avatar", "props": { "variant": "circular" }, "text": "A" }
+      ]
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — variant only (fullWidth/inset/middle). Horizontal + blockStage (Altitude Divider precedent: an <hr> in a flex stage shrinks to 0×1).",
+      "name": "Divider",
+      "importName": "Divider",
+      "contract": "examples/mui/contracts-seed/divider.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant"
+      ],
+      "blockStage": true
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — color×underline (7×3=21). href pinned so the <a> is a real link.",
+      "name": "Link",
+      "importName": "Link",
+      "contract": "examples/mui/contracts-seed/link.contract.json",
+      "sampleText": "Link",
+      "axes": [
+        "color",
+        "underline"
+      ],
+      "fixedProps": {
+        "href": "#mui-link"
+      }
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — elevation bounded like Card (0/1/3/8) × variant (elevation/outlined) = 8. Sample text + blockStage.",
+      "name": "Paper",
+      "importName": "Paper",
+      "contract": "examples/mui/contracts-seed/paper.contract.json",
+      "sampleText": "Paper content",
+      "axes": [
+        "elevation",
+        "variant"
+      ],
+      "axisValueMap": {
+        "elevation": {
+          "0": 0,
+          "1": 1,
+          "3": 3,
+          "8": 8
+        }
+      },
+      "blockStage": true
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — Breadcrumbs. Standalone (no variant axes); Link crumbs + current Typography via childrenSpec.",
+      "name": "Breadcrumbs",
+      "importName": "Breadcrumbs",
+      "contract": "examples/mui/contracts-seed/breadcrumbs.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "childrenSpec": [
+        { "importName": "Link", "props": { "underline": "hover", "color": "inherit", "href": "#home" }, "text": "Home" },
+        { "importName": "Link", "props": { "underline": "hover", "color": "inherit", "href": "#catalog" }, "text": "Catalog" },
+        { "importName": "Typography", "props": { "color": "text.primary" }, "text": "Breadcrumbs" }
+      ],
+      "blockStage": true
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — Drawer. Tiny axis: variant temporary|permanent only; open pinned true; portalCapture (temporary portals; permanent stays in-stage — portalSweep allows either). transitionDuration:0 (Dialog/Menu precedent).",
+      "name": "Drawer",
+      "importName": "Drawer",
+      "contract": "examples/mui/contracts-seed/drawer.contract.json",
+      "sampleText": "Drawer content",
+      "axes": [
+        "variant"
+      ],
+      "fixedProps": {
+        "open": true,
+        "transitionDuration": 0
+      },
+      "callbackProps": [
+        "onClose"
+      ],
+      "portalCapture": true,
+      "blockStage": true,
+      "stage": {
+        "width": 480,
+        "height": 320,
+        "padding": 16
+      }
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — Radio. color×checked (7×2=14) — Switch/Checkbox STATE-PLANE PROJECTION precedent; size held fixed. MUI Radio@9.2.0 destructures disableRipple for hover CSS but does NOT forward it to SwitchBase (Checkbox does) — so TouchRipple still mounts and focus-visible pulsate fails determinism. Pin via slotProps.root (and top-level for ownerState hover).",
+      "name": "Radio",
+      "importName": "Radio",
+      "contract": "examples/mui/contracts-seed/radio.contract.json",
+      "sampleText": "",
+      "axes": [
+        "color",
+        "checked"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": false,
+          "checked": true
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "disableRipple": true,
+        "slotProps": {
+          "root": {
+            "disableRipple": true,
+            "disableFocusRipple": true
+          }
+        }
+      }
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — Select. Bounded: size axis only; value + MenuItem children pinned; menu CONTROLLED-CLOSED (open=false — TablePagination select precedent).",
+      "name": "Select",
+      "importName": "Select",
+      "contract": "examples/mui/contracts-seed/select.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ],
+      "fixedProps": {
+        "value": "one",
+        "open": false,
+        "displayEmpty": false,
+        "inputProps": {
+          "id": "mui-select-oracle"
+        }
+      },
+      "callbackProps": [
+        "onChange",
+        "onClose",
+        "onOpen"
+      ],
+      "childrenSpec": [
+        { "importName": "MenuItem", "props": { "value": "one" }, "text": "One" },
+        { "importName": "MenuItem", "props": { "value": "two" }, "text": "Two" },
+        { "importName": "MenuItem", "props": { "value": "three" }, "text": "Three" }
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 280,
+        "height": 96,
+        "padding": 16
+      }
+    },
+    {
+      "__note": "WAVE 5 DENOMINATOR — Snackbar. Standalone; open=true + simple message pinned (no Alert child dependency); portalCapture; transitionDuration:0; autoHideDuration null so the overlay stays for the sweep.",
+      "name": "Snackbar",
+      "importName": "Snackbar",
+      "contract": "examples/mui/contracts-seed/snackbar.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "portalCapture": true,
+      "openDriver": {
+        "open": true,
+        "message": "Snackbar message",
+        "autoHideDuration": null,
+        "transitionDuration": 0
+      },
+      "callbackProps": [
+        "onClose"
+      ]
     }
   ]
 }

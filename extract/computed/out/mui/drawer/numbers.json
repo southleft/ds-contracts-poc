@@ -1,0 +1,173 @@
+{
+  "component": "Drawer",
+  "browser": "151.0.7922.34",
+  "captures": 2,
+  "combos": 2,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 678,
+  "elementsPerCapture": 3,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 9,
+    "backdrop-root": 10,
+    "label": 32
+  },
+  "folds": {
+    "count": 9,
+    "receipts": [
+      {
+        "part": "label",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 17,
+    "mintedLeavesFolded": 17
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 17,
+    "baseBindings": 17,
+    "stateBindings": 0,
+    "byShape": {
+      "uniform": 13,
+      "perAxis": 4,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 7,
+    "state": 0
+  },
+  "codeOnly": {
+    "base": 13,
+    "state": 0,
+    "overflowBindings": 0
+  },
+  "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 3,
+    "svgAssets": 0,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 3380,
+    "cellsMatched": 3378,
+    "pct": 99.94082840236686,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": [
+      [
+        "perspective-origin",
+        2
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 1,
+    "measured": 0,
+    "unscored": {
+      "sizeMismatch": 1,
+      "noOriginal": 1,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
+    "exact": {
+      "mean": null,
+      "max": null,
+      "perfect": 0
+    },
+    "aa": {
+      "mean": null,
+      "max": null,
+      "perfect": 0
+    },
+    "worst": [
+      {
+        "key": "temporary__default",
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "size-mismatch",
+        "note": "size mismatch ours 480x320 vs orig 900x1000 — NOT SCORED (pixelmatch cannot run across sizes; a wrong-sized box is a geometry failure, not a percentage)"
+      },
+      {
+        "key": "permanent__default",
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 80.43478260869566,
+    "rowsFullyEqual": 0,
+    "rows": 8,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 1
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 0
+}

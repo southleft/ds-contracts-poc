@@ -1,0 +1,170 @@
+{
+  "component": "InputAdornment",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "151.0.7922.34",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 2,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 280,
+    "cellsEqual": 280,
+    "pctEqual": 100,
+    "rowsFullyEqual": 8,
+    "rows": 8
+  },
+  "pixel": {
+    "pairs": 8,
+    "perfectExact": 8,
+    "perfectAA": 8,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 0,
+    "meanAA": 0,
+    "maxAA": 0
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 11,
+    "mintedLeavesUnfolded": 11,
+    "baseBindings": 9,
+    "stateBindings": 0,
+    "codeOnlyChannels": 1,
+    "overflowBindings": 0,
+    "folds": 20
+  },
+  "worstRows": [
+    {
+      "key": "start__default",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "start__hover",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "start__focus-visible",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "start__active",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "end__default",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "end__hover",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "end__focus-visible",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    },
+    {
+      "key": "end__active",
+      "pctAA": 0,
+      "pctExact": 0,
+      "channelsMismatched": 0
+    }
+  ],
+  "topMismatchedChannels": [],
+  "namedLosses": [
+    "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/mui/tokens/mui-minted.dtcg.json",
+    "leavesAdded": 1393,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "start__default",
+      "channelsCompared": 35,
+      "channelsEqual": 35,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "start__hover",
+      "channelsCompared": 35,
+      "channelsEqual": 35,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "start__focus-visible",
+      "channelsCompared": 35,
+      "channelsEqual": 35,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "start__active",
+      "channelsCompared": 35,
+      "channelsEqual": 35,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "end__default",
+      "channelsCompared": 35,
+      "channelsEqual": 35,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "end__hover",
+      "channelsCompared": 35,
+      "channelsEqual": 35,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "end__focus-visible",
+      "channelsCompared": 35,
+      "channelsEqual": 35,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    },
+    {
+      "key": "end__active",
+      "channelsCompared": 35,
+      "channelsEqual": 35,
+      "pctExact": 0,
+      "pctAA": 0,
+      "mismatches": []
+    }
+  ]
+}

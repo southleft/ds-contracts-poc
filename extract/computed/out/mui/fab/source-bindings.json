@@ -1,0 +1,521 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Fab",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "small.default.enabled",
+      "axisValues": {
+        "size": "small",
+        "color": "default"
+      },
+      "token": "palette-grey-300",
+      "varName": "--mui-palette-grey-300",
+      "anchor": {
+        "selector": ".css-1t563x9-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "small.default.disabled",
+      "axisValues": {
+        "size": "small",
+        "color": "default"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-1t563x9-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "small.primary.enabled",
+      "axisValues": {
+        "size": "small",
+        "color": "primary"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-esele7-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "small.primary.disabled",
+      "axisValues": {
+        "size": "small",
+        "color": "primary"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-esele7-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "small.secondary.enabled",
+      "axisValues": {
+        "size": "small",
+        "color": "secondary"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-1pwa833-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "small.secondary.disabled",
+      "axisValues": {
+        "size": "small",
+        "color": "secondary"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-1pwa833-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "medium.default.enabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "default"
+      },
+      "token": "palette-grey-300",
+      "varName": "--mui-palette-grey-300",
+      "anchor": {
+        "selector": ".css-qa7jeu-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "medium.default.disabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "default"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-qa7jeu-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "medium.primary.enabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "primary"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-1iqmgh1-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "medium.primary.disabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "primary"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-1iqmgh1-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "medium.secondary.enabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "secondary"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-849wey-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "medium.secondary.disabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "secondary"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-849wey-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.default.enabled",
+      "axisValues": {
+        "size": "large",
+        "color": "default"
+      },
+      "token": "palette-grey-300",
+      "varName": "--mui-palette-grey-300",
+      "anchor": {
+        "selector": ".css-1k17e0a-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.default.disabled",
+      "axisValues": {
+        "size": "large",
+        "color": "default"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-1k17e0a-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.primary.enabled",
+      "axisValues": {
+        "size": "large",
+        "color": "primary"
+      },
+      "token": "palette-primary-main",
+      "varName": "--mui-palette-primary-main",
+      "anchor": {
+        "selector": ".css-6hhdkn-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.primary.disabled",
+      "axisValues": {
+        "size": "large",
+        "color": "primary"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-6hhdkn-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.secondary.enabled",
+      "axisValues": {
+        "size": "large",
+        "color": "secondary"
+      },
+      "token": "palette-secondary-main",
+      "varName": "--mui-palette-secondary-main",
+      "anchor": {
+        "selector": ".css-p9xtox-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "background-color",
+      "combo": "large.secondary.disabled",
+      "axisValues": {
+        "size": "large",
+        "color": "secondary"
+      },
+      "token": "palette-action-disabled-background",
+      "varName": "--mui-palette-action-disabledBackground",
+      "anchor": {
+        "selector": ".css-p9xtox-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.default.enabled",
+      "axisValues": {
+        "size": "small",
+        "color": "default"
+      },
+      "token": "palette-grey-900",
+      "varName": "--mui-palette-grey-900",
+      "anchor": {
+        "selector": ".css-1t563x9-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.default.disabled",
+      "axisValues": {
+        "size": "small",
+        "color": "default"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-1t563x9-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.primary.enabled",
+      "axisValues": {
+        "size": "small",
+        "color": "primary"
+      },
+      "token": "palette-primary-contrast-text",
+      "varName": "--mui-palette-primary-contrastText",
+      "anchor": {
+        "selector": ".css-esele7-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.primary.disabled",
+      "axisValues": {
+        "size": "small",
+        "color": "primary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-esele7-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.secondary.enabled",
+      "axisValues": {
+        "size": "small",
+        "color": "secondary"
+      },
+      "token": "palette-secondary-contrast-text",
+      "varName": "--mui-palette-secondary-contrastText",
+      "anchor": {
+        "selector": ".css-1pwa833-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "small.secondary.disabled",
+      "axisValues": {
+        "size": "small",
+        "color": "secondary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-1pwa833-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.default.enabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "default"
+      },
+      "token": "palette-grey-900",
+      "varName": "--mui-palette-grey-900",
+      "anchor": {
+        "selector": ".css-qa7jeu-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.default.disabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "default"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-qa7jeu-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.primary.enabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "primary"
+      },
+      "token": "palette-primary-contrast-text",
+      "varName": "--mui-palette-primary-contrastText",
+      "anchor": {
+        "selector": ".css-1iqmgh1-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.primary.disabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "primary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-1iqmgh1-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.secondary.enabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "secondary"
+      },
+      "token": "palette-secondary-contrast-text",
+      "varName": "--mui-palette-secondary-contrastText",
+      "anchor": {
+        "selector": ".css-849wey-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "medium.secondary.disabled",
+      "axisValues": {
+        "size": "medium",
+        "color": "secondary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-849wey-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.default.enabled",
+      "axisValues": {
+        "size": "large",
+        "color": "default"
+      },
+      "token": "palette-grey-900",
+      "varName": "--mui-palette-grey-900",
+      "anchor": {
+        "selector": ".css-1k17e0a-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.default.disabled",
+      "axisValues": {
+        "size": "large",
+        "color": "default"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-1k17e0a-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.primary.enabled",
+      "axisValues": {
+        "size": "large",
+        "color": "primary"
+      },
+      "token": "palette-primary-contrast-text",
+      "varName": "--mui-palette-primary-contrastText",
+      "anchor": {
+        "selector": ".css-6hhdkn-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.primary.disabled",
+      "axisValues": {
+        "size": "large",
+        "color": "primary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-6hhdkn-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.secondary.enabled",
+      "axisValues": {
+        "size": "large",
+        "color": "secondary"
+      },
+      "token": "palette-secondary-contrast-text",
+      "varName": "--mui-palette-secondary-contrastText",
+      "anchor": {
+        "selector": ".css-p9xtox-MuiButtonBase-root-MuiFab-root"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "large.secondary.disabled",
+      "axisValues": {
+        "size": "large",
+        "color": "secondary"
+      },
+      "token": "palette-action-disabled",
+      "varName": "--mui-palette-action-disabled",
+      "anchor": {
+        "selector": ".css-p9xtox-MuiButtonBase-root-MuiFab-root.Mui-disabled"
+      }
+    }
+  ],
+  "skips": [
+    "root.box-shadow: candidate --mui-shadows-6 → \"shadows-6\" = 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.z-index: candidate --mui-zIndex-fab → \"z-index-fab\" = 1050 (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

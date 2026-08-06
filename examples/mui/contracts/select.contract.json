@@ -1,0 +1,342 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.select",
+  "name": "Select",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — props/axes only; anatomy is promoted from captured DOM truth. Bounded capture: value + MenuItem children pinned; menu held CONTROLLED-CLOSED (open=false — TablePagination select precedent). Small axis: size only. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/mui/scripts/promote-floor.mjs): enriched.contract.json — computed-capture truth; minted leaves source-aliased to MUI's own CSS-variable references where verified (source-bindings.json); extension sidecar carries the named overflow.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "small",
+          "medium"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "small": "Small",
+            "medium": "Medium"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "align": "center"
+      },
+      "parts": {
+        "label": {
+          "text": "One",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|InputBase-input.OutlinedInput-input.Select-select — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "cursor": "pointer",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-overflow": "ellipsis",
+            "text-wrap-mode": "nowrap",
+            "user-select": "none"
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-4}",
+            "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-top-left-radius": "{imported.shared.size-4}",
+            "border-top-right-radius": "{imported.shared.size-4}",
+            "color": "{imported.shared.color-000000de}",
+            "font-size": "{imported.select.label.font-size}",
+            "font-weight": "{imported.select.label.font-weight}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-23}",
+            "min-height": "{imported.shared.size-23}",
+            "min-width": "{imported.shared.size-0}",
+            "padding-left": "{imported.select.label.padding-left}",
+            "padding-right": "{imported.select.label.padding-right}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "medium": {
+                  "padding-bottom": "{imported.select.label.padding-bottom.medium}",
+                  "padding-top": "{imported.select.label.padding-top.medium}"
+                },
+                "small": {
+                  "padding-bottom": "{imported.select.label.padding-bottom.small}",
+                  "padding-top": "{imported.select.label.padding-top.small}"
+                }
+              }
+            }
+          ]
+        },
+        "select-nativeinput": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input|Select-nativeInput|sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "auto",
+            "box-sizing": "border-box",
+            "cursor": "text",
+            "font-family": "Arial",
+            "overflow-x": "clip",
+            "overflow-y": "clip",
+            "pointer-events": "none",
+            "position": "absolute"
+          },
+          "tokens": {
+            "background-color": "{imported.select.select-nativeinput.background-color}",
+            "border-bottom-color": "{imported.shared.color-767676}",
+            "border-bottom-width": "{imported.shared.size-2}",
+            "border-left-color": "{imported.shared.color-767676}",
+            "border-left-width": "{imported.shared.size-2}",
+            "border-right-color": "{imported.shared.color-767676}",
+            "border-right-width": "{imported.shared.size-2}",
+            "border-top-color": "{imported.shared.color-767676}",
+            "border-top-width": "{imported.shared.size-2}",
+            "bottom": "{imported.shared.size-0}",
+            "font-size": "{imported.select.select-nativeinput.font-size}",
+            "height": "{imported.select.select-nativeinput.height}",
+            "left": "{imported.shared.size-0}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "opacity": "{imported.select.select-nativeinput.opacity}",
+            "padding-bottom": "{imported.shared.size-1}",
+            "padding-left": "{imported.shared.size-2}",
+            "padding-right": "{imported.shared.size-2}",
+            "padding-top": "{imported.shared.size-1}",
+            "right": "{imported.shared.size-0}",
+            "width": "{imported.select.select-nativeinput.width}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "medium": {
+                  "top": "{imported.select.select-nativeinput.top.medium}"
+                },
+                "small": {
+                  "top": "{imported.select.select-nativeinput.top.small}"
+                }
+              }
+            }
+          ]
+        },
+        "icon": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy svg|Select-icon.SvgIcon-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "cursor": "text",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "pointer-events": "none",
+            "transition-duration": "0.3s",
+            "transition-property": "fill",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)",
+            "user-select": "none"
+          },
+          "icon": {
+            "asset": "select-icon",
+            "size": 24
+          },
+          "tokens": {
+            "color": "{imported.select.icon.color}",
+            "fill": "{imported.select.icon.fill}",
+            "flex-shrink": "{imported.select.icon.flex-shrink}",
+            "font-size": "{imported.shared.size-24}",
+            "height": "{imported.shared.size-24}",
+            "left": "{imported.select.icon.left}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-23}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.select.icon.right}",
+            "width": "{imported.shared.size-24}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "medium": {
+                  "bottom": "{imported.select.icon.bottom.medium}",
+                  "top": "{imported.select.icon.top.medium}"
+                },
+                "small": {
+                  "bottom": "{imported.select.icon.bottom.small}",
+                  "top": "{imported.select.icon.top.small}"
+                }
+              }
+            }
+          ]
+        },
+        "outlinedinput-notchedoutline": {
+          "element": "fieldset",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy fieldset|OutlinedInput-notchedOutline — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "cursor": "text",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "pointer-events": "none",
+            "text-align": "left"
+          },
+          "parts": {
+            "part-3-0": {
+              "element": "legend",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy legend| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "cursor": "text",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "pointer-events": "none",
+                "text-align": "left",
+                "transition-duration": "0.15s",
+                "transition-property": "width",
+                "transition-timing-function": "cubic-bezier(0, 0, 0.2, 1)"
+              },
+              "parts": {
+                "label-2": {
+                  "text": "​",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "inline",
+                    "cursor": "text",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                    "pointer-events": "none",
+                    "text-align": "left"
+                  },
+                  "tokens": {
+                    "color": "{imported.shared.color-000000de}",
+                    "font-size": "{imported.select.label-2.font-size}",
+                    "font-weight": "{imported.select.label-2.font-weight}",
+                    "letter-spacing": "{imported.shared.size-0-15008}",
+                    "line-height": "{imported.shared.size-11}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}"
+                  }
+                }
+              },
+              "tokens": {
+                "color": "{imported.shared.color-000000de}",
+                "height": "{imported.shared.size-11}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-11}",
+                "min-height": "{imported.shared.size-0}",
+                "min-width": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-0}"
+              }
+            }
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-0000003b}",
+            "border-bottom-left-radius": "{imported.shared.size-4}",
+            "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-0000003b}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-0000003b}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-0000003b}",
+            "border-top-left-radius": "{imported.shared.size-4}",
+            "border-top-right-radius": "{imported.shared.size-4}",
+            "border-top-width": "{imported.shared.size-1}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-000000de}",
+            "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-23}",
+            "min-height": "{imported.shared.size-0}",
+            "padding-left": "{imported.select.outlinedinput-notchedoutline.padding-left}",
+            "padding-right": "{imported.select.outlinedinput-notchedoutline.padding-right}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.select.outlinedinput-notchedoutline.top}",
+            "width": "{imported.select.outlinedinput-notchedoutline.width}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "medium": {
+                  "height": "{imported.select.outlinedinput-notchedoutline.height.medium}"
+                },
+                "small": {
+                  "height": "{imported.select.outlinedinput-notchedoutline.height.small}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "cursor": "text",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "position": "relative"
+      },
+      "tokens": {
+        "border-bottom-left-radius": "{imported.shared.size-4}",
+        "border-bottom-right-radius": "{imported.shared.size-4}",
+        "border-top-left-radius": "{imported.shared.size-4}",
+        "border-top-right-radius": "{imported.shared.size-4}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-000000de}",
+        "left": "{imported.shared.size-0}",
+        "letter-spacing": "{imported.shared.size-0-15008}",
+        "line-height": "{imported.shared.size-23}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.select.root.width}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "medium": {
+              "height": "{imported.select.root.height.medium}"
+            },
+            "small": {
+              "height": "{imported.select.root.height.small}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Select"
+    }
+  }
+}

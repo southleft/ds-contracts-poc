@@ -1,0 +1,115 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.snackbar",
+  "name": "Snackbar",
+  "version": "0.2.0",
+  "status": "draft",
+  "description": "SEED contract for the MUI 50% denominator round — open=true fixed; position axis expands to nested anchorOrigin via capture axisValueMap $props. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "position",
+      "type": {
+        "enum": [
+          "bottom-left",
+          "bottom-center",
+          "top-right"
+        ]
+      },
+      "default": "bottom-left",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Position",
+          "values": {
+            "bottom-left": "BottomLeft",
+            "bottom-center": "BottomCenter",
+            "top-right": "TopRight"
+          }
+        },
+        "code": {
+          "prop": "anchorOrigin"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "start"
+      },
+      "parts": {
+        "paper-root": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|Paper-root.SnackbarContent-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "parts": {
+            "label": {
+              "text": "Snackbar message",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|SnackbarContent-message — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif"
+              },
+              "tokens": {
+                "color": "{imported.snackbar.label.color}",
+                "font-size": "{imported.snackbar.label.font-size}",
+                "font-weight": "{imported.snackbar.label.font-weight}",
+                "letter-spacing": "{imported.snackbar.label.letter-spacing}",
+                "line-height": "{imported.snackbar.label.line-height}",
+                "padding-bottom": "{imported.snackbar.label.padding-bottom}",
+                "padding-top": "{imported.snackbar.label.padding-top}"
+              }
+            }
+          },
+          "declared": {
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "transition-delay": "0s, 0s",
+            "transition-duration": "0s, 0s",
+            "transition-property": "opacity, transform",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1), cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "tokens": {
+            "background-color": "{imported.snackbar.paper-root.background-color}",
+            "border-bottom-left-radius": "{imported.shared.size-4}",
+            "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-top-left-radius": "{imported.shared.size-4}",
+            "border-top-right-radius": "{imported.shared.size-4}",
+            "box-shadow": "{imported.snackbar.paper-root.box-shadow}",
+            "color": "{imported.snackbar.paper-root.color}",
+            "font-size": "{imported.snackbar.paper-root.font-size}",
+            "letter-spacing": "{imported.snackbar.paper-root.letter-spacing}",
+            "line-height": "{imported.snackbar.paper-root.line-height}",
+            "min-width": "{imported.snackbar.paper-root.min-width}",
+            "padding-bottom": "{imported.snackbar.paper-root.padding-bottom}",
+            "padding-left": "{imported.snackbar.paper-root.padding-left}",
+            "padding-right": "{imported.snackbar.paper-root.padding-right}",
+            "padding-top": "{imported.snackbar.paper-root.padding-top}"
+          }
+        }
+      },
+      "tokens": {
+        "min-height": "{imported.snackbar.root.min-height}",
+        "min-width": "{imported.snackbar.root.min-width}",
+        "z-index": "{imported.snackbar.root.z-index}"
+      }
+    }
+  },
+  "anchors": {
+    "figma": {
+      "fileKey": null,
+      "componentSetKey": null
+    },
+    "code": {
+      "importPath": "@mui/material",
+      "export": "Snackbar"
+    }
+  }
+}

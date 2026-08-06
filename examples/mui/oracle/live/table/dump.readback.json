@@ -1,0 +1,74 @@
+{
+  "_provenance": {
+    "fileKey": "59mLQlOMiD5w5za6SUcoO5",
+    "extractedAt": "2026-08-05",
+    "note": "Live fingerprint dump (mui oracle Wave 2) — compact post-session capture",
+    "dumpVersion": "live-fingerprint-1",
+    "target": "Table"
+  },
+  "_degradations": [],
+  "_variables": {},
+  "Table": {
+    "setName": "Table",
+    "type": "COMPONENT_SET",
+    "nodeId": "21:744",
+    "key": "6d991887730c8a52cf0be6cfe2664825169ab178",
+    "page": "Table",
+    "variants": [
+      {
+        "name": "Size=Medium",
+        "type": "COMPONENT",
+        "nodeId": "21:650",
+        "nodePath": "Table:Size=Medium",
+        "layout": {
+          "mode": "column",
+          "gap": 0,
+          "padding": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "children": [
+          {
+            "name": "buttonbase-root",
+            "type": "FRAME",
+            "nodeId": "21:654",
+            "nodePath": "Table:Size=Medium/.../buttonbase-root",
+            "layout": {
+              "mode": "row",
+              "gap": 0,
+              "padding": [
+                9,
+                9,
+                9,
+                9
+              ]
+            },
+            "bound": {
+              "paddingTop": "imported/table/buttonbase-root/padding-top/medium",
+              "paddingLeft": "imported/table/buttonbase-root/padding-left/medium"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Size=Small",
+        "type": "COMPONENT",
+        "nodeId": "21:697",
+        "nodePath": "Table:Size=Small"
+      }
+    ],
+    "propertyDefinitions": {
+      "Size": {
+        "type": "VARIANT",
+        "defaultValue": "Medium",
+        "variantOptions": [
+          "Medium",
+          "Small"
+        ]
+      }
+    }
+  }
+}
