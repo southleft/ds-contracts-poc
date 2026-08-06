@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "spinner",
+  "contract": "contracts/spinner.contract.json",
+  "script": "parity/receipts/console-loop/emitted/16-spinner.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:23.903Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:639",
+    "page": "Spinner",
+    "sectionId": "1:642",
+    "result": {
+      "createdNodeIds": [
+        "1:639"
+      ],
+      "results": [
+        {
+          "name": "Spinner",
+          "contractId": "ds.spinner",
+          "nodeId": "1:639",
+          "key": "e4186a26fc045ec96460b2a0165f2821732fe5de",
+          "variants": 1,
+          "properties": [
+            "Label#1:155"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:642 captured (ok).",
+      "Spinner: 1 variant(s); type COMPONENT; page Spinner.",
+      "Props: Label."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:592169333",
+    "lineCount": 13,
+    "sampleLines": [
+      ":COMPONENT/Spinner|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/Spinner|radius|0,0,0,0",
+      ":COMPONENT/Spinner|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+      ":COMPONENT/Spinner|sizing|HUG/HUG AUTO",
+      ":COMPONENT/Spinner|description|Spinner — generated from contract ds.spinner v1.0.0",
+      ":COMPONENT/Spinner|propdef|Label#1:155:TEXT=Loading",
+      "/0:FRAME/arc|fill|[]",
+      "/0:FRAME/arc|radius|0,0,0,0",
+      "/0:FRAME/arc|sizing|FIXED/FIXED AUTO",
+      "/0/0:VECTOR/Vector|fill|[]",
+      "/0/0:VECTOR/Vector|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.14509804546833038,\"g\":0.38823530077934265,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/action/primary/background\"}}}] w2",
+      "/0/0:VECTOR/Vector|radius|0,0,0,0",
+      "/0/0:VECTOR/Vector|sizing|FIXED/FIXED AUTO"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Label"
+    ],
+    "observed": {
+      "variantNames": [
+        "Spinner"
+      ],
+      "propDefs": [
+        {
+          "name": "Label#1:155",
+          "type": "TEXT",
+          "defaultValue": "Loading",
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "Spinner",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {},
+        "textChild": [],
+        "w": 20,
+        "h": 20,
+        "childNames": [
+          "arc:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

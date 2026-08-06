@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "checkbox",
+  "contract": "contracts/checkbox.contract.json",
+  "script": "parity/receipts/console-loop/emitted/08-checkbox.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:54:41.169Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:510",
+    "page": "Checkbox",
+    "sectionId": "1:511",
+    "result": {
+      "createdNodeIds": [
+        "1:510"
+      ],
+      "results": [
+        {
+          "name": "Checkbox",
+          "contractId": "ds.checkbox",
+          "nodeId": "1:510",
+          "key": "2a807d45d8da0a6638e70a9d3e3a2f41a64bf650",
+          "variants": 6,
+          "properties": [
+            "Label#1:96",
+            "Description#1:103",
+            "Value",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Section 1:511: 2×3 grid Unchecked/Checked/Indeterminate × Medium/Small.",
+      "Unchecked empty border box; Checked blue+checkmark; Indeterminate blue+dash; label+description present.",
+      "No visual defects flagged."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3433570960",
+    "lineCount": 234,
+    "sampleLines": [
+      ":COMPONENT_SET/Checkbox|fill|[]",
+      ":COMPONENT_SET/Checkbox|radius|5,5,5,5",
+      ":COMPONENT_SET/Checkbox|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Checkbox|description|Checkbox — generated from contract ds.checkbox v2.0.0 †",
+      ":COMPONENT_SET/Checkbox|propdef|Description#1:103:TEXT=Supporting detail for this option.",
+      ":COMPONENT_SET/Checkbox|propdef|Label#1:96:TEXT=Checkbox label",
+      ":COMPONENT_SET/Checkbox|propdef|Size:VARIANT=Medium",
+      ":COMPONENT_SET/Checkbox|propdef|Value:VARIANT=Unchecked",
+      "/0:COMPONENT/Value=Unchecked, Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Value=Unchecked, Size=Medium|radius|0,0,0,0",
+      "/0:COMPONENT/Value=Unchecked, Size=Medium|layout|HORIZONTAL MIN/MIN gap 8 pad 0,0,0,0",
+      "/0:COMPONENT/Value=Unchecked, Size=Medium|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Value=Unchecked, Size=Medium|bound:itemSpacing|space/gap/sm",
+      "/0/0:FRAME/box|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color/checkbox/unchecked/background\"}}}]",
+      "/0/0:FRAME/box|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.6117647290229797,\"g\":0.6392157077789307,\"b\":0.686274528503418},\"boundVariables\":{\"color\":{\"var\":\"color/checkbox/unchecked/border\"}}}] w1",
+      "/0/0:FRAME/box|radius|4,4,4,4",
+      "/0/0:FRAME/box|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0/0:FRAME/box|sizing|FIXED/FIXED AUTO",
+      "/0/0:FRAME/box|bound:bottomLeftRadius|radius/100",
+      "/0/0:FRAME/box|bound:bottomRightRadius|radius/100"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract states[]) — OK"
+    ],
+    "matchedAxes": [
+      "Value → Unchecked/Checked/Indeterminate",
+      "Size → Small/Medium",
+      "TEXT Label + Description defaults",
+      "root gap bound to space/gap/sm",
+      "box fill bound to color/checkbox/unchecked/background"
+    ],
+    "observed": {
+      "found": {
+        "page": "Checkbox",
+        "nodeId": "1:510",
+        "type": "COMPONENT_SET",
+        "sectionId": "1:511",
+        "key": "2a807d45d8da0a6638e70a9d3e3a2f41a64bf650",
+        "variants": 6
+      },
+      "propDefs": [
+        {
+          "name": "Label#1:96",
+          "type": "TEXT",
+          "defaultValue": "Checkbox label",
+          "variantOptions": null
+        },
+        {
+          "name": "Description#1:103",
+          "type": "TEXT",
+          "defaultValue": "Supporting detail for this option.",
+          "variantOptions": null
+        },
+        {
+          "name": "Value",
+          "type": "VARIANT",
+          "defaultValue": "Unchecked",
+          "variantOptions": [
+            "Unchecked",
+            "Checked",
+            "Indeterminate"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small"
+          ]
+        }
+      ],
+      "variantNames": [
+        "Value=Unchecked, Size=Medium",
+        "Value=Unchecked, Size=Small",
+        "Value=Checked, Size=Medium",
+        "Value=Checked, Size=Small",
+        "Value=Indeterminate, Size=Medium",
+        "Value=Indeterminate, Size=Small"
+      ],
+      "firstRoot": {
+        "name": "Value=Unchecked, Size=Medium",
+        "layoutMode": "HORIZONTAL",
+        "padBound": {
+          "itemSpacing": "space/gap/sm"
+        },
+        "textChild": [
+          {
+            "name": "labelText",
+            "chars": "Checkbox label",
+            "fontSize": 14
+          },
+          {
+            "name": "descriptionText",
+            "chars": "Supporting detail for this option.",
+            "fontSize": 14
+          }
+        ],
+        "childNames": [
+          "box:FRAME",
+          "textCol:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

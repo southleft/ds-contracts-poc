@@ -230,6 +230,14 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run test:live-figma-evidence
 
+      - name: console-loop:evidence:check (contract→Figma Console MCP loop receipts)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run console-loop:evidence:check
+
+      - name: test:console-loop-evidence (loop gate refuses mismatched round-trip)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:console-loop-evidence
+
       - name: human-gates:inventory (pilot/Wave8/publish/second-impl still open)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run human-gates:inventory

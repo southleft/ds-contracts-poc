@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "button",
+  "contract": "contracts/button.contract.json",
+  "script": "parity/receipts/console-loop/emitted/05-button.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:53:58.768Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:452",
+    "page": "Button",
+    "sectionId": "1:457",
+    "result": {
+      "createdNodeIds": [
+        "1:452"
+      ],
+      "results": [
+        {
+          "name": "Button",
+          "contractId": "ds.button",
+          "nodeId": "1:452",
+          "key": "9f674d31e995b198b61ad9ac27882886ad78f766",
+          "variants": 24,
+          "properties": [
+            "Disabled#1:17",
+            "Loading#1:42",
+            "Label#1:67",
+            "Variant",
+            "Size",
+            "State"
+          ],
+          "wiredReactions": 4
+        }
+      ]
+    },
+    "note": "Button already on canvas from Card dependency sync; receipt completed via screenshot/fingerprint/round-trip (no re-generate this session)."
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Section 1:457 screenshot shows 24 Button variants in a grid (4 intents × sizes/states).",
+      "Rows read as Primary (blue), Secondary (neutral gray), Danger (red), Ghost (transparent/white with dark label).",
+      "Columns cover Medium/Small/Large defaults plus Hover (darker fill), Focus Visible (blue ring), Disabled (faded).",
+      "Labels all read \"Button\"; radius and padding look consistent with control tokens.",
+      "No layout defects flagged."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:2550751704",
+    "lineCount": 638,
+    "sampleLines": [
+      ":COMPONENT_SET/Button|fill|[]",
+      ":COMPONENT_SET/Button|radius|5,5,5,5",
+      ":COMPONENT_SET/Button|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Button|description|Button — generated from contract ds.button v1.5.0",
+      ":COMPONENT_SET/Button|propdef|Disabled#1:17:BOOLEAN=false",
+      ":COMPONENT_SET/Button|propdef|Label#1:67:TEXT=Button",
+      ":COMPONENT_SET/Button|propdef|Loading#1:42:BOOLEAN=false",
+      ":COMPONENT_SET/Button|propdef|Size:VARIANT=Medium",
+      ":COMPONENT_SET/Button|propdef|State:VARIANT=Default",
+      ":COMPONENT_SET/Button|propdef|Variant:VARIANT=Primary",
+      "/0:COMPONENT/Variant=Primary, Size=Medium, State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.14509804546833038,\"g\":0.38823530077934265,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/action/primary/background\"}}}]",
+      "/0:COMPONENT/Variant=Primary, Size=Medium, State=Default|radius|8,8,8,8",
+      "/0:COMPONENT/Variant=Primary, Size=Medium, State=Default|layout|HORIZONTAL CENTER/CENTER gap 8 pad 8,16,8,16",
+      "/0:COMPONENT/Variant=Primary, Size=Medium, State=Default|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/Variant=Primary, Size=Medium, State=Default|bound:bottomLeftRadius|radius/control",
+      "/0:COMPONENT/Variant=Primary, Size=Medium, State=Default|bound:bottomRightRadius|radius/control",
+      "/0:COMPONENT/Variant=Primary, Size=Medium, State=Default|bound:itemSpacing|space/gap/control",
+      "/0:COMPONENT/Variant=Primary, Size=Medium, State=Default|bound:paddingBottom|space/inset-y/md",
+      "/0:COMPONENT/Variant=Primary, Size=Medium, State=Default|bound:paddingLeft|space/inset-x/md",
+      "/0:COMPONENT/Variant=Primary, Size=Medium, State=Default|bound:paddingRight|space/inset-x/md"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: loading spinner anatomy is BOOLEAN-gated visibility, not a separate variant axis — OK",
+      "Size axis default Medium (contract md) — option order Medium/Small/Large vs contract enum order sm/md/lg — OK (set membership match)"
+    ],
+    "matchedAxes": [
+      "Variant enum → Primary/Secondary/Danger/Ghost",
+      "Size enum → Small/Medium/Large",
+      "State previews → Default/Hover/Focus Visible/Disabled (contract hover/focus-visible/disabled)",
+      "BOOLEAN Disabled + Loading",
+      "TEXT Label default \"Button\"",
+      "Primary root fill bound to color/action/primary/background",
+      "Primary padding/radius bound to space/inset-*/md and radius/control"
+    ],
+    "observed": {
+      "variantNames": [
+        "Variant=Primary, Size=Medium, State=Default",
+        "Variant=Primary, Size=Small, State=Default",
+        "Variant=Primary, Size=Large, State=Default",
+        "Variant=Secondary, Size=Medium, State=Default",
+        "Variant=Secondary, Size=Small, State=Default",
+        "Variant=Secondary, Size=Large, State=Default",
+        "Variant=Danger, Size=Medium, State=Default",
+        "Variant=Danger, Size=Small, State=Default",
+        "Variant=Danger, Size=Large, State=Default",
+        "Variant=Ghost, Size=Medium, State=Default",
+        "Variant=Ghost, Size=Small, State=Default",
+        "Variant=Ghost, Size=Large, State=Default",
+        "Variant=Primary, Size=Medium, State=Hover",
+        "Variant=Secondary, Size=Medium, State=Hover",
+        "Variant=Danger, Size=Medium, State=Hover",
+        "Variant=Ghost, Size=Medium, State=Hover",
+        "Variant=Primary, Size=Medium, State=Focus Visible",
+        "Variant=Secondary, Size=Medium, State=Focus Visible",
+        "Variant=Danger, Size=Medium, State=Focus Visible",
+        "Variant=Ghost, Size=Medium, State=Focus Visible",
+        "Variant=Primary, Size=Medium, State=Disabled",
+        "Variant=Secondary, Size=Medium, State=Disabled",
+        "Variant=Danger, Size=Medium, State=Disabled",
+        "Variant=Ghost, Size=Medium, State=Disabled"
+      ],
+      "propDefs": [
+        {
+          "name": "Disabled#1:17",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Loading#1:42",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:67",
+          "type": "TEXT",
+          "defaultValue": "Button",
+          "variantOptions": null
+        },
+        {
+          "name": "Variant",
+          "type": "VARIANT",
+          "defaultValue": "Primary",
+          "variantOptions": [
+            "Primary",
+            "Secondary",
+            "Danger",
+            "Ghost"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small",
+            "Large"
+          ]
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Hover",
+            "Focus Visible",
+            "Disabled"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Variant=Primary, Size=Medium, State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 8,
+          "r": 16,
+          "b": 8,
+          "l": 16
+        },
+        "radius": 8,
+        "fillVarName": "color/action/primary/background",
+        "padBound": {
+          "itemSpacing": "space/gap/control",
+          "paddingLeft": "space/inset-x/md",
+          "paddingTop": "space/inset-y/md",
+          "paddingRight": "space/inset-x/md",
+          "paddingBottom": "space/inset-y/md",
+          "topLeftRadius": "radius/control",
+          "topRightRadius": "radius/control",
+          "bottomLeftRadius": "radius/control",
+          "bottomRightRadius": "radius/control",
+          "fills": "color/action/primary/background"
+        },
+        "textChild": [
+          {
+            "name": "label",
+            "chars": "Button",
+            "fontSize": 16
+          }
+        ],
+        "w": 83,
+        "h": 35
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

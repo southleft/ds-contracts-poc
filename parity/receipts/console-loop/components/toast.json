@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "toast",
+  "contract": "contracts/toast.contract.json",
+  "script": "parity/receipts/console-loop/emitted/22-toast.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:40.054Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:802",
+    "page": "Toast",
+    "sectionId": "1:803",
+    "result": {
+      "createdNodeIds": [
+        "1:802"
+      ],
+      "results": [
+        {
+          "name": "Toast",
+          "contractId": "ds.toast",
+          "nodeId": "1:802",
+          "key": "16a82a3e1e1005375b90b15a887dcd864788fd5d",
+          "variants": 2,
+          "properties": [
+            "Children#1:247",
+            "EndContent#1:250",
+            "Show EndContent#1:253",
+            "Type"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:803 captured (ok).",
+      "Toast: 2 variant(s); type COMPONENT_SET; page Toast.",
+      "Props: Children, EndContent, Show EndContent, Type.",
+      "First root fill bound to color/toast/info/background."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3355364986",
+    "lineCount": 88,
+    "sampleLines": [
+      ":COMPONENT_SET/Toast|fill|[]",
+      ":COMPONENT_SET/Toast|radius|5,5,5,5",
+      ":COMPONENT_SET/Toast|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Toast|description|Toast — generated from contract ds.toast v1.0.0",
+      ":COMPONENT_SET/Toast|propdef|Children#1:247:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/Toast|propdef|EndContent#1:250:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/Toast|propdef|Show EndContent#1:253:BOOLEAN=true",
+      ":COMPONENT_SET/Toast|propdef|Type:VARIANT=Info",
+      "/0:COMPONENT/Type=Info|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.06666667014360428,\"g\":0.0941176488995552,\"b\":0.15294118225574493},\"boundVariables\":{\"color\":{\"var\":\"color/toast/info/background\"}}}]",
+      "/0:COMPONENT/Type=Info|radius|8,8,8,8",
+      "/0:COMPONENT/Type=Info|layout|HORIZONTAL MIN/CENTER gap 8 pad 8,16,8,16",
+      "/0:COMPONENT/Type=Info|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Type=Info|bound:bottomLeftRadius|radius/control",
+      "/0:COMPONENT/Type=Info|bound:bottomRightRadius|radius/control",
+      "/0:COMPONENT/Type=Info|bound:itemSpacing|space/gap/sm",
+      "/0:COMPONENT/Type=Info|bound:paddingBottom|space/inset-y/md",
+      "/0:COMPONENT/Type=Info|bound:paddingLeft|space/inset-x/md",
+      "/0:COMPONENT/Type=Info|bound:paddingRight|space/inset-x/md",
+      "/0:COMPONENT/Type=Info|bound:paddingTop|space/inset-y/md",
+      "/0:COMPONENT/Type=Info|bound:topLeftRadius|radius/control"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Type"
+    ],
+    "observed": {
+      "variantNames": [
+        "Type=Info",
+        "Type=Error"
+      ],
+      "propDefs": [
+        {
+          "name": "Children#1:247",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "EndContent#1:250",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show EndContent#1:253",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "Type",
+          "type": "VARIANT",
+          "defaultValue": "Info",
+          "variantOptions": [
+            "Info",
+            "Error"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Type=Info",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 8,
+          "r": 16,
+          "b": 8,
+          "l": 16
+        },
+        "radius": 8,
+        "fillVarName": "color/toast/info/background",
+        "padBound": {
+          "itemSpacing": "space/gap/sm",
+          "paddingLeft": "space/inset-x/md",
+          "paddingTop": "space/inset-y/md",
+          "paddingRight": "space/inset-x/md",
+          "paddingBottom": "space/inset-y/md",
+          "width": "size/card/width",
+          "topLeftRadius": "radius/control",
+          "topRightRadius": "radius/control",
+          "bottomLeftRadius": "radius/control",
+          "bottomRightRadius": "radius/control",
+          "fills": "color/toast/info/background"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 320,
+        "h": 116,
+        "childNames": [
+          "body:FRAME",
+          "endContent:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

@@ -14,7 +14,8 @@ Wave 11 packaging (A/B/D) is READY; Candidate waits on a named second implementa
 
 | Gate | Result | Evidence |
 |---|---|---|
-| `npm run eval` | **190/190** (incl. live-figma + human-gate inventory) | local + full lane |
+| `npm run eval` | **191/191** (incl. live-figma, console-loop, human-gate inventory) | local + full lane |
+| `npm run console-loop:evidence:check` | pass — **49/49** first-party components on Testing file | `parity/receipts/console-loop/components/` |
 | `npm run docs:check` | pass | local + fast lane |
 | `npm run accuracy:check` | pass (ratchets not shrunk) | local + fast lane |
 | `npm run v1:definition:check` | pass | local + fast lane |
@@ -34,6 +35,12 @@ Live Figma V1-EVID-04: edit→detect→restore proven on
 (`v6:3552508208` → `v6:4062076634` → restore). **Console MCP re-ack complete**
 (local Desktop Bridge `figma_execute`, port 9224) — same stamps as the earlier
 cloud `use_figma` session. Replay scripts: `parity/receipts/console-mcp/`.
+
+Console MCP library loop: **49** first-party contracts (all except native
+`inline`/`stack`) generated → screenshot → audit → v6 fingerprint → light
+round-trip on the Testing file; receipts under
+`parity/receipts/console-loop/components/`; gated by
+`npm run console-loop:evidence:check` + eval `console-loop-evidence-receipt`.
 
 Wave ledgers: `PLAN.md`, `wave6/`…`wave11/`.
 

@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "avatar-group",
+  "contract": "contracts/avatar-group.contract.json",
+  "script": "parity/receipts/console-loop/emitted/04-avatargroup.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:04.824Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1442",
+    "page": "AvatarGroup",
+    "sectionId": "1:1455",
+    "result": {
+      "createdNodeIds": [
+        "1:1442"
+      ],
+      "results": [
+        {
+          "name": "AvatarGroup",
+          "contractId": "ds.avatar-group",
+          "nodeId": "1:1442",
+          "key": "a1eccef60a729d855c50df770de05271c577a9f1",
+          "variants": 1,
+          "properties": [
+            "Overflow#1:553"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1455 captured (ok).",
+      "AvatarGroup: 1 variant(s); type COMPONENT; page AvatarGroup.",
+      "Props: Overflow.",
+      "Sample text: \"AB\", \"CD\", \"EF\", \"+3\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:73520369",
+    "lineCount": 68,
+    "sampleLines": [
+      ":COMPONENT/AvatarGroup|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/AvatarGroup|radius|0,0,0,0",
+      ":COMPONENT/AvatarGroup|layout|HORIZONTAL MIN/CENTER gap 8 pad 0,0,0,0",
+      ":COMPONENT/AvatarGroup|sizing|HUG/HUG AUTO",
+      ":COMPONENT/AvatarGroup|bound:itemSpacing|space/gap/sm",
+      ":COMPONENT/AvatarGroup|description|AvatarGroup — generated from contract ds.avatar-group v1.0.0",
+      ":COMPONENT/AvatarGroup|propdef|Overflow#1:553:TEXT=+3",
+      "/0:FRAME/stack|fill|[]",
+      "/0:FRAME/stack|radius|0,0,0,0",
+      "/0:FRAME/stack|layout|HORIZONTAL MIN/CENTER gap -8 pad 0,0,0,0",
+      "/0:FRAME/stack|sizing|HUG/HUG AUTO",
+      "/0:FRAME/stack|bound:itemSpacing|space/avatarGroup/overlap",
+      "/0/0:INSTANCE/Avatar|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8588235378265381,\"g\":0.9176470637321472,\"b\":0.9960784316062927},\"boundVariables\":{\"color\":{\"var\":\"color/identity/background\"}}}]",
+      "/0/0:INSTANCE/Avatar|radius|999,999,999,999",
+      "/0/0:INSTANCE/Avatar|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0/0:INSTANCE/Avatar|sizing|FIXED/FIXED AUTO",
+      "/0/0:INSTANCE/Avatar|bound:bottomLeftRadius|radius/avatar",
+      "/0/0:INSTANCE/Avatar|bound:bottomRightRadius|radius/avatar",
+      "/0/0:INSTANCE/Avatar|bound:height|size/avatar/md",
+      "/0/0:INSTANCE/Avatar|bound:topLeftRadius|radius/avatar"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Overflow"
+    ],
+    "observed": {
+      "variantNames": [
+        "AvatarGroup"
+      ],
+      "propDefs": [
+        {
+          "name": "Overflow#1:553",
+          "type": "TEXT",
+          "defaultValue": "+3",
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "AvatarGroup",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/gap/sm"
+        },
+        "textChild": [
+          {
+            "name": "label",
+            "chars": "AB",
+            "fontSize": 14
+          },
+          {
+            "name": "label",
+            "chars": "CD",
+            "fontSize": 14
+          },
+          {
+            "name": "label",
+            "chars": "EF",
+            "fontSize": 14
+          },
+          {
+            "name": "+3",
+            "chars": "+3",
+            "fontSize": 14
+          }
+        ],
+        "w": 120,
+        "h": 32,
+        "childNames": [
+          "stack:FRAME",
+          "overflowText:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

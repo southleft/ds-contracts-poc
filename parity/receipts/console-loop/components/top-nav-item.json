@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "top-nav-item",
+  "contract": "contracts/top-nav-item.contract.json",
+  "script": "parity/receipts/console-loop/emitted/48-topnavitem.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:08.837Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1669",
+    "page": "TopNavItem",
+    "sectionId": "1:1670",
+    "result": {
+      "createdNodeIds": [
+        "1:1669"
+      ],
+      "results": [
+        {
+          "name": "TopNavItem",
+          "contractId": "ds.top-nav-item",
+          "nodeId": "1:1669",
+          "key": "1939bcffcda146eb9923dfbfd857d9db7f0cf49a",
+          "variants": 2,
+          "properties": [
+            "Href#1:619",
+            "Label#1:622",
+            "Icon#1:625",
+            "Show Icon#1:628",
+            "State"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1670 captured (ok).",
+      "TopNavItem: 2 variant(s); type COMPONENT_SET; page TopNavItem.",
+      "Props: Href, Label, Icon, Show Icon, State.",
+      "First root fill bound to color/nav/default/background.",
+      "Sample text: \"Slot\", \"Nav item\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:2704633324",
+    "lineCount": 69,
+    "sampleLines": [
+      ":COMPONENT_SET/TopNavItem|fill|[]",
+      ":COMPONENT_SET/TopNavItem|radius|5,5,5,5",
+      ":COMPONENT_SET/TopNavItem|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/TopNavItem|description|TopNavItem — generated from contract ds.top-nav-item v1.0.0",
+      ":COMPONENT_SET/TopNavItem|propdef|Href#1:619:TEXT=#",
+      ":COMPONENT_SET/TopNavItem|propdef|Icon#1:625:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/TopNavItem|propdef|Label#1:622:TEXT=Nav item",
+      ":COMPONENT_SET/TopNavItem|propdef|Show Icon#1:628:BOOLEAN=true",
+      ":COMPONENT_SET/TopNavItem|propdef|State:VARIANT=Default",
+      "/0:COMPONENT/State=Default|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color/nav/default/background\"}}}]",
+      "/0:COMPONENT/State=Default|radius|8,8,8,8",
+      "/0:COMPONENT/State=Default|layout|HORIZONTAL MIN/CENTER gap 4 pad 8,12,8,12",
+      "/0:COMPONENT/State=Default|sizing|HUG/HUG AUTO",
+      "/0:COMPONENT/State=Default|bound:bottomLeftRadius|radius/control",
+      "/0:COMPONENT/State=Default|bound:bottomRightRadius|radius/control",
+      "/0:COMPONENT/State=Default|bound:itemSpacing|space/inset-y/sm",
+      "/0:COMPONENT/State=Default|bound:paddingBottom|space/inset-y/md",
+      "/0:COMPONENT/State=Default|bound:paddingLeft|space/inset-x/sm",
+      "/0:COMPONENT/State=Default|bound:paddingRight|space/inset-x/sm",
+      "/0:COMPONENT/State=Default|bound:paddingTop|space/inset-y/md"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "State",
+      "Label",
+      "Href"
+    ],
+    "observed": {
+      "variantNames": [
+        "State=Default",
+        "State=Selected"
+      ],
+      "propDefs": [
+        {
+          "name": "Href#1:619",
+          "type": "TEXT",
+          "defaultValue": "#",
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:622",
+          "type": "TEXT",
+          "defaultValue": "Nav item",
+          "variantOptions": null
+        },
+        {
+          "name": "Icon#1:625",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Icon#1:628",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "State",
+          "type": "VARIANT",
+          "defaultValue": "Default",
+          "variantOptions": [
+            "Default",
+            "Selected"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "State=Default",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 8,
+          "r": 12,
+          "b": 8,
+          "l": 12
+        },
+        "radius": 8,
+        "fillVarName": "color/nav/default/background",
+        "padBound": {
+          "itemSpacing": "space/inset-y/sm",
+          "paddingLeft": "space/inset-x/sm",
+          "paddingTop": "space/inset-y/md",
+          "paddingRight": "space/inset-x/sm",
+          "paddingBottom": "space/inset-y/md",
+          "topLeftRadius": "radius/control",
+          "topRightRadius": "radius/control",
+          "bottomLeftRadius": "radius/control",
+          "bottomRightRadius": "radius/control",
+          "fills": "color/nav/default/background"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "labelText",
+            "chars": "Nav item",
+            "fontSize": 14
+          }
+        ],
+        "w": 136,
+        "h": 116,
+        "childNames": [
+          "iconSlot:FRAME",
+          "labelText:TEXT"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

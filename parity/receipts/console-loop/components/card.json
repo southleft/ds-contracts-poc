@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "card",
+  "contract": "contracts/card.contract.json",
+  "script": "parity/receipts/console-loop/emitted/07-card.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:50:38.679Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:459",
+    "page": "Card",
+    "sectionId": "1:470",
+    "result": {
+      "createdNodeIds": [
+        "1:459"
+      ],
+      "results": [
+        {
+          "name": "Card",
+          "contractId": "ds.card",
+          "nodeId": "1:459",
+          "key": "900b7ddfcd0b06da689f3e915ab62390b1783bb8",
+          "variants": 1,
+          "properties": [
+            "Title#1:92",
+            "Body#1:93",
+            "Actions#1:94",
+            "Show Actions#1:95"
+          ]
+        }
+      ]
+    },
+    "prerequisites": {
+      "avatar": "1:338",
+      "button": "1:452",
+      "badge": "1:309",
+      "note": "Card Actions slot preferred value requires ds.button; synced 05-button.js before successful retry"
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Section 1:470 screenshot shows a single Card: white raised surface, subtle border, rounded corners.",
+      "Header row: small circular Avatar (AB) + bold \"Card title\" — ds.avatar instance present.",
+      "Body and Actions show Slot utility placeholders (dashed) — expected for INSTANCE_SWAP defaults.",
+      "Vertical stack header/body/footer reads correctly; width ~320 matches size/card/width."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3317660404",
+    "lineCount": 82,
+    "sampleLines": [
+      ":COMPONENT/Card|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color/surface/raised\"}}}]",
+      ":COMPONENT/Card|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
+      ":COMPONENT/Card|radius|8,8,8,8",
+      ":COMPONENT/Card|layout|VERTICAL MIN/MIN gap 0 pad 0,0,0,0",
+      ":COMPONENT/Card|sizing|FIXED/HUG AUTO",
+      ":COMPONENT/Card|bound:bottomLeftRadius|radius/card",
+      ":COMPONENT/Card|bound:bottomRightRadius|radius/card",
+      ":COMPONENT/Card|bound:strokeBottomWeight|border-width/100",
+      ":COMPONENT/Card|bound:strokeLeftWeight|border-width/100",
+      ":COMPONENT/Card|bound:strokeRightWeight|border-width/100",
+      ":COMPONENT/Card|bound:strokeTopWeight|border-width/100",
+      ":COMPONENT/Card|bound:topLeftRadius|radius/card",
+      ":COMPONENT/Card|bound:topRightRadius|radius/card",
+      ":COMPONENT/Card|bound:width|size/card/width",
+      ":COMPONENT/Card|description|Card — generated from contract ds.card v1.1.0",
+      ":COMPONENT/Card|propdef|Actions#1:94:INSTANCE_SWAP=1:347",
+      ":COMPONENT/Card|propdef|Body#1:93:INSTANCE_SWAP=1:347",
+      ":COMPONENT/Card|propdef|Show Actions#1:95:BOOLEAN=true",
+      ":COMPONENT/Card|propdef|Title#1:92:TEXT=Card title",
+      "/0:FRAME/header|fill|[]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State/Variant axes (contract has empty states[] and no enum props beyond title) — OK",
+      "canvas-absent: Body/Actions default to Slot utility instance (1:347); preferredValues include Button/Badge at generate time — OK",
+      "canvas-absent: font channels on title/body text style not separate component properties — OK to note"
+    ],
+    "matchedAxes": [
+      "TEXT Title default \"Card title\"",
+      "INSTANCE_SWAP Body + Actions + BOOLEAN Show Actions",
+      "header avatar instance → ds.avatar Size=Small",
+      "root fill color/surface/raised, stroke color/border/subtle",
+      "root width size/card/width, radius radius/card, border-width/100",
+      "header/body/footer padding inset-x/md + inset-y/md, gap space/gap/control"
+    ],
+    "observed": {
+      "type": "COMPONENT",
+      "propDefs": [
+        {
+          "name": "Title#1:92",
+          "type": "TEXT",
+          "defaultValue": "Card title",
+          "variantOptions": null
+        },
+        {
+          "name": "Body#1:93",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Actions#1:94",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Actions#1:95",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "Card",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "width": 320,
+        "height": 274,
+        "radius": 8,
+        "fillVarName": "color/surface/raised",
+        "strokeVarName": "color/border/subtle",
+        "padBound": {
+          "width": "size/card/width",
+          "topLeftRadius": "radius/card",
+          "strokeTopWeight": "border-width/100",
+          "fills": "color/surface/raised",
+          "strokes": "color/border/subtle"
+        },
+        "children": [
+          "header",
+          "body",
+          "footer"
+        ],
+        "avatar": {
+          "contractId": "ds.avatar",
+          "mainName": "Size=Small"
+        },
+        "title": {
+          "chars": "Card title",
+          "fillVar": "color/surface/foreground"
+        }
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

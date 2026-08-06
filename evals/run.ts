@@ -8996,6 +8996,30 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       );
     },
   },
+
+  {
+    // Console MCP live loop: contract → chunked figma_execute → screenshot →
+    // audit → v6 fingerprint → zero-mismatch light round-trip, receipted under
+    // parity/receipts/console-loop/components/ on DS-Contracts-Testing.
+    id: 'console-loop-evidence-receipt',
+    claim: 'C3-detection',
+    run: () => {
+      const r = spawnSync(process.execPath, ['scripts/console-loop-evidence-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`console-loop-evidence-check failed:\n${out}`);
+      }
+      if (!out.includes('required ok')) {
+        throw new Error('console-loop-evidence-check did not report required ok');
+      }
+      console.log(
+        'console-loop-evidence-receipt: Console MCP generate→screenshot→audit→round-trip receipts pinned for required Testing-file components',
+      );
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "top-nav",
+  "contract": "contracts/top-nav.contract.json",
+  "script": "parity/receipts/console-loop/emitted/49-topnav.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:09.096Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1672",
+    "page": "TopNav",
+    "sectionId": "1:1682",
+    "result": {
+      "createdNodeIds": [
+        "1:1672"
+      ],
+      "results": [
+        {
+          "name": "TopNav",
+          "contractId": "ds.top-nav",
+          "nodeId": "1:1672",
+          "key": "2cf4440141fd6aa9ee814b7b965e2bb877249b88",
+          "variants": 1,
+          "properties": [
+            "Label#1:631",
+            "Heading#1:632",
+            "Show Heading#1:633",
+            "StartContent#1:634",
+            "Show StartContent#1:635",
+            "EndContent#1:636",
+            "Show EndContent#1:637"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1682 captured (ok).",
+      "TopNav: 1 variant(s); type COMPONENT; page TopNav.",
+      "Props: Label, Heading, Show Heading, StartContent, Show StartContent, EndContent, Show EndContent.",
+      "First root fill bound to color/surface/raised.",
+      "Sample text: \"Slot\", \"Slot\", \"Slot\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:3533008205",
+    "lineCount": 65,
+    "sampleLines": [
+      ":COMPONENT/TopNav|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color/surface/raised\"}}}]",
+      ":COMPONENT/TopNav|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
+      ":COMPONENT/TopNav|radius|0,0,0,0",
+      ":COMPONENT/TopNav|layout|HORIZONTAL SPACE_BETWEEN/CENTER gap 16 pad 8,16,8,16",
+      ":COMPONENT/TopNav|sizing|FIXED/HUG AUTO",
+      ":COMPONENT/TopNav|bound:itemSpacing|space/gap/md",
+      ":COMPONENT/TopNav|bound:paddingBottom|space/inset-y/md",
+      ":COMPONENT/TopNav|bound:paddingLeft|space/inset-x/md",
+      ":COMPONENT/TopNav|bound:paddingRight|space/inset-x/md",
+      ":COMPONENT/TopNav|bound:paddingTop|space/inset-y/md",
+      ":COMPONENT/TopNav|bound:strokeBottomWeight|border-width/100",
+      ":COMPONENT/TopNav|bound:strokeLeftWeight|border-width/100",
+      ":COMPONENT/TopNav|bound:strokeRightWeight|border-width/100",
+      ":COMPONENT/TopNav|bound:strokeTopWeight|border-width/100",
+      ":COMPONENT/TopNav|bound:width|size/banner/width",
+      ":COMPONENT/TopNav|description|TopNav — generated from contract ds.top-nav v1.0.0",
+      ":COMPONENT/TopNav|propdef|EndContent#1:636:INSTANCE_SWAP=1:347",
+      ":COMPONENT/TopNav|propdef|Heading#1:632:INSTANCE_SWAP=1:347",
+      ":COMPONENT/TopNav|propdef|Label#1:631:TEXT=Main",
+      ":COMPONENT/TopNav|propdef|Show EndContent#1:637:BOOLEAN=true"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Label"
+    ],
+    "observed": {
+      "variantNames": [
+        "TopNav"
+      ],
+      "propDefs": [
+        {
+          "name": "Label#1:631",
+          "type": "TEXT",
+          "defaultValue": "Main",
+          "variantOptions": null
+        },
+        {
+          "name": "Heading#1:632",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show Heading#1:633",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "StartContent#1:634",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show StartContent#1:635",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "EndContent#1:636",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show EndContent#1:637",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "TopNav",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 8,
+          "r": 16,
+          "b": 8,
+          "l": 16
+        },
+        "radius": 0,
+        "fillVarName": "color/surface/raised",
+        "padBound": {
+          "itemSpacing": "space/gap/md",
+          "paddingLeft": "space/inset-x/md",
+          "paddingTop": "space/inset-y/md",
+          "paddingRight": "space/inset-x/md",
+          "paddingBottom": "space/inset-y/md",
+          "width": "size/banner/width",
+          "strokeTopWeight": "border-width/100",
+          "strokeBottomWeight": "border-width/100",
+          "strokeLeftWeight": "border-width/100",
+          "strokeRightWeight": "border-width/100",
+          "fills": "color/surface/raised",
+          "strokes": "color/border/subtle"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 640,
+        "h": 118,
+        "childNames": [
+          "heading:FRAME",
+          "startContent:FRAME",
+          "endContent:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

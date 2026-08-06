@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "toolbar",
+  "contract": "contracts/toolbar.contract.json",
+  "script": "parity/receipts/console-loop/emitted/47-toolbar.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:08.439Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1656",
+    "page": "Toolbar",
+    "sectionId": "1:1657",
+    "result": {
+      "createdNodeIds": [
+        "1:1656"
+      ],
+      "results": [
+        {
+          "name": "Toolbar",
+          "contractId": "ds.toolbar",
+          "nodeId": "1:1656",
+          "key": "435f1c2531c7d01f97d15438df9cd9a54f221cd2",
+          "variants": 3,
+          "properties": [
+            "Label#1:591",
+            "StartContent#1:595",
+            "Show StartContent#1:599",
+            "CenterContent#1:603",
+            "Show CenterContent#1:607",
+            "EndContent#1:611",
+            "Show EndContent#1:615",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1657 captured (ok).",
+      "Toolbar: 3 variant(s); type COMPONENT_SET; page Toolbar.",
+      "Props: Label, StartContent, Show StartContent, CenterContent, Show CenterContent, EndContent, Show EndContent, Size.",
+      "First root fill bound to color/surface/raised.",
+      "Sample text: \"Slot\", \"Slot\", \"Slot\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:700448191",
+    "lineCount": 198,
+    "sampleLines": [
+      ":COMPONENT_SET/Toolbar|fill|[]",
+      ":COMPONENT_SET/Toolbar|radius|5,5,5,5",
+      ":COMPONENT_SET/Toolbar|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Toolbar|description|Toolbar — generated from contract ds.toolbar v1.0.0",
+      ":COMPONENT_SET/Toolbar|propdef|CenterContent#1:603:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/Toolbar|propdef|EndContent#1:611:INSTANCE_SWAP=1:347",
+      ":COMPONENT_SET/Toolbar|propdef|Label#1:591:TEXT=Toolbar",
+      ":COMPONENT_SET/Toolbar|propdef|Show CenterContent#1:607:BOOLEAN=true",
+      ":COMPONENT_SET/Toolbar|propdef|Show EndContent#1:615:BOOLEAN=true",
+      ":COMPONENT_SET/Toolbar|propdef|Show StartContent#1:599:BOOLEAN=true",
+      ":COMPONENT_SET/Toolbar|propdef|Size:VARIANT=Medium",
+      ":COMPONENT_SET/Toolbar|propdef|StartContent#1:595:INSTANCE_SWAP=1:347",
+      "/0:COMPONENT/Size=Medium|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{\"color\":{\"var\":\"color/surface/raised\"}}}]",
+      "/0:COMPONENT/Size=Medium|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
+      "/0:COMPONENT/Size=Medium|radius|8,8,8,8",
+      "/0:COMPONENT/Size=Medium|layout|HORIZONTAL SPACE_BETWEEN/CENTER gap 16 pad 4,12,4,12",
+      "/0:COMPONENT/Size=Medium|sizing|FIXED/HUG AUTO",
+      "/0:COMPONENT/Size=Medium|bound:bottomLeftRadius|radius/control",
+      "/0:COMPONENT/Size=Medium|bound:bottomRightRadius|radius/control",
+      "/0:COMPONENT/Size=Medium|bound:itemSpacing|space/gap/md"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Size",
+      "Label"
+    ],
+    "observed": {
+      "variantNames": [
+        "Size=Medium",
+        "Size=Small",
+        "Size=Large"
+      ],
+      "propDefs": [
+        {
+          "name": "Label#1:591",
+          "type": "TEXT",
+          "defaultValue": "Toolbar",
+          "variantOptions": null
+        },
+        {
+          "name": "StartContent#1:595",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show StartContent#1:599",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "CenterContent#1:603",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show CenterContent#1:607",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "EndContent#1:611",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        },
+        {
+          "name": "Show EndContent#1:615",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Medium",
+          "variantOptions": [
+            "Medium",
+            "Small",
+            "Large"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Medium",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 4,
+          "r": 12,
+          "b": 4,
+          "l": 12
+        },
+        "radius": 8,
+        "fillVarName": "color/surface/raised",
+        "padBound": {
+          "itemSpacing": "space/gap/md",
+          "paddingLeft": "space/inset-x/sm",
+          "paddingTop": "space/inset-y/sm",
+          "paddingRight": "space/inset-x/sm",
+          "paddingBottom": "space/inset-y/sm",
+          "width": "size/banner/width",
+          "topLeftRadius": "radius/control",
+          "topRightRadius": "radius/control",
+          "bottomLeftRadius": "radius/control",
+          "bottomRightRadius": "radius/control",
+          "strokeTopWeight": "border-width/100",
+          "strokeBottomWeight": "border-width/100",
+          "strokeLeftWeight": "border-width/100",
+          "strokeRightWeight": "border-width/100",
+          "minHeight": "size/toolbar/md",
+          "fills": "color/surface/raised",
+          "strokes": "color/border/subtle"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 640,
+        "h": 110,
+        "childNames": [
+          "startContent:FRAME",
+          "centerContent:FRAME",
+          "endContent:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

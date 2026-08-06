@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "field",
+  "contract": "contracts/field.contract.json",
+  "script": "parity/receipts/console-loop/emitted/10-field.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:39.093Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:742",
+    "page": "Field",
+    "sectionId": "1:753",
+    "result": {
+      "createdNodeIds": [
+        "1:742"
+      ],
+      "results": [
+        {
+          "name": "Field",
+          "contractId": "ds.field",
+          "nodeId": "1:742",
+          "key": "a2fbd2b25336f2bd7870a825fec63ea4c0157590",
+          "variants": 1,
+          "properties": [
+            "Required#1:222",
+            "InputID#1:223",
+            "Label#1:224",
+            "Description#1:225",
+            "Children#1:226"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:753 captured (ok).",
+      "Field: 1 variant(s); type COMPONENT; page Field.",
+      "Props: Required, InputID, Label, Description, Children."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:615833569",
+    "lineCount": 54,
+    "sampleLines": [
+      ":COMPONENT/Field|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/Field|radius|0,0,0,0",
+      ":COMPONENT/Field|layout|VERTICAL MIN/MIN gap 4 pad 0,0,0,0",
+      ":COMPONENT/Field|sizing|FIXED/HUG AUTO",
+      ":COMPONENT/Field|bound:itemSpacing|space/inset-y/sm",
+      ":COMPONENT/Field|bound:width|size/card/width",
+      ":COMPONENT/Field|description|Field — generated from contract ds.field v1.0.0",
+      ":COMPONENT/Field|propdef|Children#1:226:INSTANCE_SWAP=1:347",
+      ":COMPONENT/Field|propdef|Description#1:225:TEXT=Helper text for the wrapped control.",
+      ":COMPONENT/Field|propdef|InputID#1:223:TEXT=field-control",
+      ":COMPONENT/Field|propdef|Label#1:224:TEXT=Field label",
+      ":COMPONENT/Field|propdef|Required#1:222:BOOLEAN=false",
+      "/0:FRAME/labelRow|fill|[]",
+      "/0:FRAME/labelRow|radius|0,0,0,0",
+      "/0:FRAME/labelRow|layout|HORIZONTAL MIN/CENTER gap 4 pad 0,0,0,0",
+      "/0:FRAME/labelRow|sizing|FILL/HUG AUTO",
+      "/0:FRAME/labelRow|bound:itemSpacing|space/inset-y/sm",
+      "/0/0:TEXT/labelText|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.06666667014360428,\"g\":0.0941176488995552,\"b\":0.15294118225574493},\"boundVariables\":{\"color\":{\"var\":\"color/surface/foreground\"}}}]",
+      "/0/0:TEXT/labelText|radius|0,0,0,0",
+      "/0/0:TEXT/labelText|sizing|HUG/HUG AUTO"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Required",
+      "Label",
+      "InputID",
+      "Description"
+    ],
+    "observed": {
+      "variantNames": [
+        "Field"
+      ],
+      "propDefs": [
+        {
+          "name": "Required#1:222",
+          "type": "BOOLEAN",
+          "defaultValue": false,
+          "variantOptions": null
+        },
+        {
+          "name": "InputID#1:223",
+          "type": "TEXT",
+          "defaultValue": "field-control",
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:224",
+          "type": "TEXT",
+          "defaultValue": "Field label",
+          "variantOptions": null
+        },
+        {
+          "name": "Description#1:225",
+          "type": "TEXT",
+          "defaultValue": "Helper text for the wrapped control.",
+          "variantOptions": null
+        },
+        {
+          "name": "Children#1:226",
+          "type": "INSTANCE_SWAP",
+          "defaultValue": "1:347",
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "Field",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/inset-y/sm",
+          "width": "size/card/width"
+        },
+        "textChild": [
+          {
+            "name": "labelText",
+            "chars": "Field label",
+            "fontSize": 14
+          },
+          {
+            "name": "descriptionText",
+            "chars": "Helper text for the wrapped control.",
+            "fontSize": 14
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          }
+        ],
+        "w": 320,
+        "h": 142,
+        "childNames": [
+          "labelRow:FRAME",
+          "descriptionText:TEXT",
+          "control:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

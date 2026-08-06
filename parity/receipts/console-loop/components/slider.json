@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "slider",
+  "contract": "contracts/slider.contract.json",
+  "script": "parity/receipts/console-loop/emitted/15-slider.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:38.270Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:682",
+    "page": "Slider",
+    "sectionId": "1:689",
+    "result": {
+      "createdNodeIds": [
+        "1:682"
+      ],
+      "results": [
+        {
+          "name": "Slider",
+          "contractId": "ds.slider",
+          "nodeId": "1:682",
+          "key": "d121232b47c401e90e55d0ef8f9502d3c678c0db",
+          "variants": 1,
+          "properties": [
+            "Value#1:180",
+            "Max#1:181",
+            "Label#1:182"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:689 captured (ok).",
+      "Slider: 1 variant(s); type COMPONENT; page Slider.",
+      "Props: Value, Max, Label."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:1021231104",
+    "lineCount": 52,
+    "sampleLines": [
+      ":COMPONENT/Slider|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/Slider|radius|0,0,0,0",
+      ":COMPONENT/Slider|layout|VERTICAL MIN/MIN gap 4 pad 0,0,0,0",
+      ":COMPONENT/Slider|sizing|FIXED/HUG AUTO",
+      ":COMPONENT/Slider|bound:itemSpacing|space/inset-y/sm",
+      ":COMPONENT/Slider|bound:width|size/slider/width",
+      ":COMPONENT/Slider|description|Slider — generated from contract ds.slider v1.0.0 †",
+      ":COMPONENT/Slider|propdef|Label#1:182:TEXT=Volume",
+      ":COMPONENT/Slider|propdef|Max#1:181:TEXT=100",
+      ":COMPONENT/Slider|propdef|Value#1:180:TEXT=40",
+      "/0:TEXT/labelText|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.06666667014360428,\"g\":0.0941176488995552,\"b\":0.15294118225574493},\"boundVariables\":{\"color\":{\"var\":\"color/surface/foreground\"}}}]",
+      "/0:TEXT/labelText|radius|0,0,0,0",
+      "/0:TEXT/labelText|sizing|FILL/HUG AUTO",
+      "/0:TEXT/labelText|text|\"Volume\" 14px {\"family\":\"Inter\",\"style\":\"Medium\"}",
+      "/1:FRAME/trackRow|fill|[]",
+      "/1:FRAME/trackRow|radius|0,0,0,0",
+      "/1:FRAME/trackRow|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+      "/1:FRAME/trackRow|sizing|FIXED/HUG AUTO",
+      "/1:FRAME/trackRow|bound:width|size/slider/width",
+      "/1/0:FRAME/filled|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.14509804546833038,\"g\":0.38823530077934265,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/progress/accent\"}}}]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [
+      "Value",
+      "Max",
+      "Label"
+    ],
+    "observed": {
+      "variantNames": [
+        "Slider"
+      ],
+      "propDefs": [
+        {
+          "name": "Value#1:180",
+          "type": "TEXT",
+          "defaultValue": "40",
+          "variantOptions": null
+        },
+        {
+          "name": "Max#1:181",
+          "type": "TEXT",
+          "defaultValue": "100",
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:182",
+          "type": "TEXT",
+          "defaultValue": "Volume",
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "Slider",
+        "type": "COMPONENT",
+        "layoutMode": "VERTICAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/inset-y/sm",
+          "width": "size/slider/width"
+        },
+        "textChild": [
+          {
+            "name": "labelText",
+            "chars": "Volume",
+            "fontSize": 14
+          }
+        ],
+        "w": 320,
+        "h": 37,
+        "childNames": [
+          "labelText:TEXT",
+          "trackRow:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

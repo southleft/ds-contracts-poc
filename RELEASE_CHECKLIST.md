@@ -63,6 +63,7 @@ explicitly chosen. See
 - [x] Live Figma drift receipt linked: `parity/receipts/live-figma-variant-drift.md` + `.json` on file `GnQnjSNBXtgtd2Ht0Hs1C8` · `npm run live-figma:evidence:check`
 - [x] Figma controlled edit and restoration: Console MCP `figma_execute` re-ack (baseline `v6:3552508208` → edit `v6:4062076634` → restore); prior cloud `use_figma` same stamps; scripts under `parity/receipts/console-mcp/`
 - [x] Final live Figma stamp/file state is clean: restored fingerprint matches baseline; Console MCP Desktop Bridge re-ack recorded 2026-08-06
+- [x] Console MCP contract→Figma loop: 49/49 first-party components on Testing file · `npm run console-loop:evidence:check` · eval `console-loop-evidence-receipt`
 - [ ] Migration notes reviewed: **blocked — human/release**
 - [ ] Worker Durable Object migration rehearsed with Node 22+: **blocked — human/release**
 - [ ] First Worker rollout keeps assist disabled through the UTC boundary: **blocked — human/release**

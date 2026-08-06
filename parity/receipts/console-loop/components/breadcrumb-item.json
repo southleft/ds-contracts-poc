@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "breadcrumb-item",
+  "contract": "contracts/breadcrumb-item.contract.json",
+  "script": "parity/receipts/console-loop/emitted/09-breadcrumbitem.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:59:02.831Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:1274",
+    "page": "BreadcrumbItem",
+    "sectionId": "1:1278",
+    "result": {
+      "createdNodeIds": [
+        "1:1274"
+      ],
+      "results": [
+        {
+          "name": "BreadcrumbItem",
+          "contractId": "ds.breadcrumb-item",
+          "nodeId": "1:1274",
+          "key": "1293829bda0cdd1708fcd7e060516b0162ea34e9",
+          "variants": 1,
+          "properties": [
+            "Separator#1:538",
+            "Href#1:539",
+            "Label#1:540"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:1278 captured (ok).",
+      "BreadcrumbItem: 1 variant(s); type COMPONENT; page BreadcrumbItem.",
+      "Props: Separator, Href, Label.",
+      "Sample text: \"Page\"."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:1787875132",
+    "lineCount": 20,
+    "sampleLines": [
+      ":COMPONENT/BreadcrumbItem|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/BreadcrumbItem|radius|0,0,0,0",
+      ":COMPONENT/BreadcrumbItem|layout|HORIZONTAL MIN/CENTER gap 4 pad 0,0,0,0",
+      ":COMPONENT/BreadcrumbItem|sizing|HUG/HUG AUTO",
+      ":COMPONENT/BreadcrumbItem|bound:itemSpacing|space/inset-y/sm",
+      ":COMPONENT/BreadcrumbItem|description|BreadcrumbItem — generated from contract ds.breadcrumb-item v1.0.0",
+      ":COMPONENT/BreadcrumbItem|propdef|Href#1:539:TEXT=#",
+      ":COMPONENT/BreadcrumbItem|propdef|Label#1:540:TEXT=Page",
+      ":COMPONENT/BreadcrumbItem|propdef|Separator#1:538:BOOLEAN=true",
+      "/0:FRAME/separatorIcon|fill|[]",
+      "/0:FRAME/separatorIcon|radius|0,0,0,0",
+      "/0:FRAME/separatorIcon|sizing|FIXED/FIXED AUTO",
+      "/0/0:VECTOR/Vector|fill|[]",
+      "/0/0:VECTOR/Vector|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.29411765933036804,\"g\":0.3333333432674408,\"b\":0.38823530077934265},\"boundVariables\":{\"color\":{\"var\":\"color/text/secondary\"}}}] w0.9000000357627869",
+      "/0/0:VECTOR/Vector|radius|0,0,0,0",
+      "/0/0:VECTOR/Vector|sizing|FIXED/FIXED AUTO",
+      "/1:TEXT/link|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.29411765933036804,\"g\":0.3333333432674408,\"b\":0.38823530077934265},\"boundVariables\":{\"color\":{\"var\":\"color/text/secondary\"}}}]",
+      "/1:TEXT/link|radius|0,0,0,0",
+      "/1:TEXT/link|sizing|HUG/HUG AUTO",
+      "/1:TEXT/link|text|\"Page\" 14px {\"family\":\"Inter\",\"style\":\"Medium\"}"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Separator",
+      "Label",
+      "Href"
+    ],
+    "observed": {
+      "variantNames": [
+        "BreadcrumbItem"
+      ],
+      "propDefs": [
+        {
+          "name": "Separator#1:538",
+          "type": "BOOLEAN",
+          "defaultValue": true,
+          "variantOptions": null
+        },
+        {
+          "name": "Href#1:539",
+          "type": "TEXT",
+          "defaultValue": "#",
+          "variantOptions": null
+        },
+        {
+          "name": "Label#1:540",
+          "type": "TEXT",
+          "defaultValue": "Page",
+          "variantOptions": null
+        }
+      ],
+      "firstRoot": {
+        "name": "BreadcrumbItem",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/inset-y/sm"
+        },
+        "textChild": [
+          {
+            "name": "link",
+            "chars": "Page",
+            "fontSize": 14
+          }
+        ],
+        "w": 50,
+        "h": 17,
+        "childNames": [
+          "separatorIcon:FRAME",
+          "link:TEXT"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

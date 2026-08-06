@@ -1,6 +1,6 @@
 {
-  "passed": 190,
-  "total": 190,
+  "passed": 191,
+  "total": 191,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -950,6 +950,11 @@
     {
       "id": "human-gate-inventory-honest",
       "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "console-loop-evidence-receipt",
+      "claim": "C3-detection",
       "pass": true
     }
   ]

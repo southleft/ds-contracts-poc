@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "avatar",
+  "contract": "contracts/avatar.contract.json",
+  "script": "parity/receipts/console-loop/emitted/03-avatar.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:48:31.671Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:338",
+    "page": "Avatar",
+    "sectionId": "1:339",
+    "result": {
+      "createdNodeIds": [
+        "1:338"
+      ],
+      "results": [
+        {
+          "name": "Avatar",
+          "contractId": "ds.avatar",
+          "nodeId": "1:338",
+          "key": "28f94826bb4d18a5ba97613bdd7fc6a101efb962",
+          "variants": 2,
+          "properties": [
+            "Initials#1:12",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Section 1:339 screenshot shows 2 vertically stacked circular avatars labeled \"AB\".",
+      "Top is Small (~24px), bottom is Medium (larger) — Size axis only.",
+      "Light blue identity background with dark blue initials; centered text looks sane.",
+      "Pill/circle radius reads correctly; spacing between variants is consistent."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:1787641672",
+    "lineCount": 34,
+    "sampleLines": [
+      ":COMPONENT_SET/Avatar|fill|[]",
+      ":COMPONENT_SET/Avatar|radius|5,5,5,5",
+      ":COMPONENT_SET/Avatar|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Avatar|description|Avatar — generated from contract ds.avatar v1.0.0",
+      ":COMPONENT_SET/Avatar|propdef|Initials#1:12:TEXT=AB",
+      ":COMPONENT_SET/Avatar|propdef|Size:VARIANT=Small",
+      "/0:COMPONENT/Size=Small|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8588235378265381,\"g\":0.9176470637321472,\"b\":0.9960784316062927},\"boundVariables\":{\"color\":{\"var\":\"color/identity/background\"}}}]",
+      "/0:COMPONENT/Size=Small|radius|999,999,999,999",
+      "/0:COMPONENT/Size=Small|layout|HORIZONTAL CENTER/CENTER gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Size=Small|sizing|FIXED/FIXED AUTO",
+      "/0:COMPONENT/Size=Small|bound:bottomLeftRadius|radius/avatar",
+      "/0:COMPONENT/Size=Small|bound:bottomRightRadius|radius/avatar",
+      "/0:COMPONENT/Size=Small|bound:height|size/avatar/sm",
+      "/0:COMPONENT/Size=Small|bound:topLeftRadius|radius/avatar",
+      "/0:COMPONENT/Size=Small|bound:topRightRadius|radius/avatar",
+      "/0:COMPONENT/Size=Small|bound:width|size/avatar/sm",
+      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.11372549086809158,\"g\":0.30588236451148987,\"b\":0.8470588326454163},\"boundVariables\":{\"color\":{\"var\":\"color/identity/foreground\"}}}]",
+      "/0/0:TEXT/label|radius|0,0,0,0",
+      "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
+      "/0/0:TEXT/label|text|\"AB\" 12px {\"family\":\"Inter\",\"style\":\"Medium\"}"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty states[]) — OK",
+      "canvas-absent: font-family/weight via text style / raw props not separate component properties — OK to note",
+      "canvas-absent: font-size token channel (font.avatar.size.{size}) may be raw fontSize rather than bound variable — OK to note"
+    ],
+    "matchedAxes": [
+      "Size enum → Small/Medium (contract sm/md)",
+      "TEXT Initials default \"AB\"",
+      "Small root fill bound to color/identity/background",
+      "Small width/height bound to size/avatar/sm",
+      "Small radius bound to radius/avatar",
+      "label text fill bound to color/identity/foreground"
+    ],
+    "observed": {
+      "variantNames": [
+        "Size=Small",
+        "Size=Medium"
+      ],
+      "propDefs": [
+        {
+          "name": "Initials#1:12",
+          "type": "TEXT",
+          "defaultValue": "AB",
+          "variantOptions": null
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Small",
+          "variantOptions": [
+            "Small",
+            "Medium"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Size=Small",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "width": 24,
+        "height": 24,
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 999,
+        "fillVarName": "color/identity/background",
+        "padBound": {
+          "width": "size/avatar/sm",
+          "height": "size/avatar/sm",
+          "topLeftRadius": "radius/avatar",
+          "topRightRadius": "radius/avatar",
+          "bottomLeftRadius": "radius/avatar",
+          "bottomRightRadius": "radius/avatar",
+          "fills": "color/identity/background"
+        },
+        "textChild": [
+          {
+            "name": "label",
+            "chars": "AB",
+            "fontSize": 12
+          }
+        ],
+        "textFillVar": "color/identity/foreground"
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "tab-list",
+  "contract": "contracts/tab-list.contract.json",
+  "script": "parity/receipts/console-loop/emitted/20-tablist.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:55:41.390Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:860",
+    "page": "TabList",
+    "sectionId": "1:893",
+    "result": {
+      "createdNodeIds": [
+        "1:860"
+      ],
+      "results": [
+        {
+          "name": "TabList",
+          "contractId": "ds.tab-list",
+          "nodeId": "1:860",
+          "key": "53ca579dbe606ae58453d1823073cb256ac71af2",
+          "variants": 1,
+          "properties": []
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:893 captured (ok).",
+      "Tab List: 1 variant(s); type COMPONENT; page TabList.",
+      "Props: ."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:2665649309",
+    "lineCount": 147,
+    "sampleLines": [
+      ":COMPONENT/TabList|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      ":COMPONENT/TabList|stroke|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.8980392217636108,\"g\":0.9058823585510254,\"b\":0.9215686321258545},\"boundVariables\":{\"color\":{\"var\":\"color/border/subtle\"}}}] w1",
+      ":COMPONENT/TabList|radius|0,0,0,0",
+      ":COMPONENT/TabList|layout|HORIZONTAL MIN/CENTER gap 4 pad 2,0,2,0",
+      ":COMPONENT/TabList|sizing|HUG/HUG AUTO",
+      ":COMPONENT/TabList|bound:itemSpacing|space/inset-y/sm",
+      ":COMPONENT/TabList|bound:paddingBottom|space/inset-y/xs",
+      ":COMPONENT/TabList|bound:paddingTop|space/inset-y/xs",
+      ":COMPONENT/TabList|bound:strokeBottomWeight|border-width/100",
+      ":COMPONENT/TabList|bound:strokeLeftWeight|border-width/100",
+      ":COMPONENT/TabList|bound:strokeRightWeight|border-width/100",
+      ":COMPONENT/TabList|bound:strokeTopWeight|border-width/100",
+      ":COMPONENT/TabList|description|TabList — generated from contract ds.tab-list v1.0.0",
+      "/0:FRAME/tabs|fill|[]",
+      "/0:FRAME/tabs|radius|0,0,0,0",
+      "/0:FRAME/tabs|layout|HORIZONTAL MIN/CENTER gap 4 pad 0,0,0,0",
+      "/0:FRAME/tabs|sizing|HUG/HUG AUTO",
+      "/0:FRAME/tabs|bound:itemSpacing|space/inset-y/sm",
+      "/0/0:INSTANCE/Tab|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.9764705896377563,\"g\":0.9803921580314636,\"b\":0.9843137264251709},\"boundVariables\":{\"color\":{\"var\":\"color/surface/background\"}}}]",
+      "/0/0:INSTANCE/Tab|radius|4,4,4,4"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [],
+    "matchedAxes": [],
+    "observed": {
+      "variantNames": [
+        "TabList"
+      ],
+      "propDefs": [],
+      "firstRoot": {
+        "name": "TabList",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 2,
+          "r": 0,
+          "b": 2,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {
+          "itemSpacing": "space/inset-y/sm",
+          "paddingTop": "space/inset-y/xs",
+          "paddingBottom": "space/inset-y/xs",
+          "strokeTopWeight": "border-width/100",
+          "strokeBottomWeight": "border-width/100",
+          "strokeLeftWeight": "border-width/100",
+          "strokeRightWeight": "border-width/100",
+          "strokes": "color/border/subtle"
+        },
+        "textChild": [
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "labelText",
+            "chars": "Overview",
+            "fontSize": 14
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "labelText",
+            "chars": "Components",
+            "fontSize": 14
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "Slot",
+            "chars": "Slot",
+            "fontSize": 12
+          },
+          {
+            "name": "labelText",
+            "chars": "Tokens",
+            "fontSize": 14
+          }
+        ],
+        "w": 600,
+        "h": 122,
+        "childNames": [
+          "tabs:FRAME"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}

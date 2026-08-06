@@ -1,0 +1,169 @@
+{
+  "version": 1,
+  "kind": "console-loop-component",
+  "status": "completed",
+  "component": "heading",
+  "contract": "contracts/heading.contract.json",
+  "script": "parity/receipts/console-loop/emitted/21-heading.js",
+  "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+  "recordedAt": "2026-08-06T03:58:57.762Z",
+  "transport": "figma-console-mcp figma_execute + clientStorage chunk upload",
+  "generate": {
+    "ok": true,
+    "nodeId": "1:947",
+    "page": "Heading",
+    "sectionId": "1:948",
+    "result": {
+      "createdNodeIds": [
+        "1:947"
+      ],
+      "results": [
+        {
+          "name": "Heading",
+          "contractId": "ds.heading",
+          "nodeId": "1:947",
+          "key": "d9191d7e13eea42dc08e1eae6ede2656bacc1cb8",
+          "variants": 18,
+          "properties": [
+            "Text#1:285",
+            "Level",
+            "Size"
+          ]
+        }
+      ]
+    }
+  },
+  "visual": {
+    "ok": true,
+    "notes": [
+      "Screenshot of section/node 1:948 captured (ok).",
+      "Heading: 18 variant(s); type COMPONENT_SET; page Heading.",
+      "Props: Text, Level, Size.",
+      "Sample text: \"Heading\".",
+      "Spot-check: 6×3 Level×Size grid of “Heading” on light canvas; sizes step down H1→H6; columns read as Size Small/Medium/Large; spacing consistent; no layout defects."
+    ],
+    "defects": []
+  },
+  "fingerprint": {
+    "v6": "v6:822703176",
+    "lineCount": 151,
+    "sampleLines": [
+      ":COMPONENT_SET/Heading|fill|[]",
+      ":COMPONENT_SET/Heading|radius|5,5,5,5",
+      ":COMPONENT_SET/Heading|sizing|FIXED/FIXED AUTO",
+      ":COMPONENT_SET/Heading|description|Heading — generated from contract ds.heading v1.0.0",
+      ":COMPONENT_SET/Heading|propdef|Level:VARIANT=H2",
+      ":COMPONENT_SET/Heading|propdef|Size:VARIANT=Large",
+      ":COMPONENT_SET/Heading|propdef|Text#1:285:TEXT=Heading",
+      "/0:COMPONENT/Level=H2, Size=Large|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/0:COMPONENT/Level=H2, Size=Large|radius|0,0,0,0",
+      "/0:COMPONENT/Level=H2, Size=Large|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+      "/0:COMPONENT/Level=H2, Size=Large|sizing|HUG/HUG AUTO",
+      "/0/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.06666667014360428,\"g\":0.0941176488995552,\"b\":0.15294118225574493},\"boundVariables\":{\"color\":{\"var\":\"color/surface/foreground\"}}}]",
+      "/0/0:TEXT/label|radius|0,0,0,0",
+      "/0/0:TEXT/label|sizing|HUG/HUG AUTO",
+      "/0/0:TEXT/label|text|\"Heading\" 18px {\"family\":\"Inter\",\"style\":\"Semi Bold\"}",
+      "/1:COMPONENT/Level=H2, Size=Small|fill|[{\"type\":\"SOLID\",\"visible\":false,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":1,\"g\":1,\"b\":1},\"boundVariables\":{}}]",
+      "/1:COMPONENT/Level=H2, Size=Small|radius|0,0,0,0",
+      "/1:COMPONENT/Level=H2, Size=Small|layout|HORIZONTAL MIN/CENTER gap 0 pad 0,0,0,0",
+      "/1:COMPONENT/Level=H2, Size=Small|sizing|HUG/HUG AUTO",
+      "/1/0:TEXT/label|fill|[{\"type\":\"SOLID\",\"visible\":true,\"opacity\":1,\"blendMode\":\"NORMAL\",\"color\":{\"r\":0.06666667014360428,\"g\":0.0941176488995552,\"b\":0.15294118225574493},\"boundVariables\":{\"color\":{\"var\":\"color/surface/foreground\"}}}]"
+    ]
+  },
+  "roundtrip": {
+    "mismatches": [],
+    "gaps": [
+      "canvas-absent: no State axis (contract has empty/absent states) — OK",
+      "canvas-absent: anatomy token channels beyond exposed component properties may live on styles/bindings — OK to note"
+    ],
+    "matchedAxes": [
+      "Level",
+      "Size",
+      "Text"
+    ],
+    "observed": {
+      "variantNames": [
+        "Level=H2, Size=Large",
+        "Level=H2, Size=Small",
+        "Level=H2, Size=Medium",
+        "Level=H1, Size=Large",
+        "Level=H1, Size=Small",
+        "Level=H1, Size=Medium",
+        "Level=H3, Size=Large",
+        "Level=H3, Size=Small",
+        "Level=H3, Size=Medium",
+        "Level=H4, Size=Large",
+        "Level=H4, Size=Small",
+        "Level=H4, Size=Medium",
+        "Level=H5, Size=Large",
+        "Level=H5, Size=Small",
+        "Level=H5, Size=Medium",
+        "Level=H6, Size=Large",
+        "Level=H6, Size=Small",
+        "Level=H6, Size=Medium"
+      ],
+      "propDefs": [
+        {
+          "name": "Text#1:285",
+          "type": "TEXT",
+          "defaultValue": "Heading",
+          "variantOptions": null
+        },
+        {
+          "name": "Level",
+          "type": "VARIANT",
+          "defaultValue": "H2",
+          "variantOptions": [
+            "H2",
+            "H1",
+            "H3",
+            "H4",
+            "H5",
+            "H6"
+          ]
+        },
+        {
+          "name": "Size",
+          "type": "VARIANT",
+          "defaultValue": "Large",
+          "variantOptions": [
+            "Large",
+            "Small",
+            "Medium"
+          ]
+        }
+      ],
+      "firstRoot": {
+        "name": "Level=H2, Size=Large",
+        "type": "COMPONENT",
+        "layoutMode": "HORIZONTAL",
+        "padding": {
+          "t": 0,
+          "r": 0,
+          "b": 0,
+          "l": 0
+        },
+        "radius": 0,
+        "fillVarName": null,
+        "padBound": {},
+        "textChild": [
+          {
+            "name": "label",
+            "chars": "Heading",
+            "fontSize": 18
+          }
+        ],
+        "w": 73,
+        "h": 22,
+        "childNames": [
+          "label:TEXT"
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "generated": true,
+    "screenshotReviewed": true,
+    "zeroMismatch": true
+  }
+}
