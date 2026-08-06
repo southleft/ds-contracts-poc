@@ -39,6 +39,7 @@ import {
   type Prop,
 } from '../scripts/contract-schema.js';
 import { extractCode, type CodeExtract } from './extract-code.js';
+import { expectedCssVarsFromAnatomy } from '../core/anatomy-diff.js';
 import {
   compileVariantFingerprints,
   compareSetVariants,
@@ -361,6 +362,28 @@ for (const contract of contracts) {
       proposedPatch: patch,
       remedy: `Review + append to contracts/${contract.id.replace(/^[^.]+\./, '')}.contract.json props[], bump version, then npm run build && npm run figma:plan`,
     });
+  }
+
+  // Wave 7 — anatomy token floor on the code surface: every fully-resolved
+  // `{a.b.c}` binding in contract anatomy must appear as `--a-b-c` in the
+  // component CSS Module. Axis templates (`{color.action.{variant}.…}`) are
+  // skipped; extras from axis expansion are allowed (code AHEAD is not
+  // raised for them — generation invents the product by design).
+  {
+    const expected = expectedCssVarsFromAnatomy(contract);
+    if (expected.length > 0) {
+      const got = new Set(extracted.cssVars);
+      for (const v of expected) {
+        if (got.has(v)) continue;
+        add({
+          surface: 'code',
+          classification: 'behind',
+          subject: `${contract.name}.css(--${v})`,
+          detail: `Contract anatomy binds {${v.split('-').join('.')}} but ${contract.name}.module.css does not reference var(--${v})`,
+          remedy: 'npm run generate',
+        });
+      }
+    }
   }
 }
 

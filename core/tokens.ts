@@ -32,6 +32,7 @@ export function tokenInventoryFromJson(trees: unknown[]): Set<string> {
 export interface TokenEntry {
   value: unknown;
   type: string;
+  extensions?: Record<string, unknown>;
 }
 
 /** Flatten a DTCG tree to dot-path → { value, type } entries, inheriting
@@ -49,7 +50,15 @@ export function flattenTokens(
       const v = value as Record<string, unknown>;
       if ('$value' in v) {
         const type = typeof v.$type === 'string' ? v.$type : ownType;
-        out.set([...prefix, key].join('.'), { value: v.$value, type });
+        out.set([...prefix, key].join('.'), {
+          value: v.$value,
+          type,
+          ...(v.$extensions &&
+          typeof v.$extensions === 'object' &&
+          !Array.isArray(v.$extensions)
+            ? { extensions: v.$extensions as Record<string, unknown> }
+            : {}),
+        });
       } else {
         flattenTokens(v, [...prefix, key], ownType, out);
       }

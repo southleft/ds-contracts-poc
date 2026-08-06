@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "source": "extract/figma/roundtrip-uui/report.json",
+  "components": 15,
+  "componentIds": [
+    "ds.avatar",
+    "ds.avatar-add-button",
+    "ds.avatar-group",
+    "ds.avatar-label-group",
+    "ds.badge-base",
+    "ds.button-base",
+    "ds.button-group-base",
+    "ds.dropdown-list-item",
+    "ds.input-field-base",
+    "ds.progress-bar",
+    "ds.progress-circle",
+    "ds.slider",
+    "ds.social-button",
+    "ds.toggle-base",
+    "ds.tooltip"
+  ],
+  "metrics": {
+    "R1": {
+      "countEqualComponents": 9,
+      "countMismatchedComponents": 6,
+      "maxCountMismatchedComponents": 6,
+      "verifiedExactComponents": 0,
+      "sourceMatrixVerifiedComponents": 0,
+      "legacyUnverifiedComponents": 15,
+      "refusedExactComponents": 0
+    },
+    "R2": {
+      "identityViolations": 750,
+      "maxIdentityViolations": 750
+    },
+    "R3": {
+      "textStyleIdentityLosses": 238,
+      "maxTextStyleIdentityLosses": 238
+    },
+    "R4": {
+      "evidenceCommands": 3,
+      "requiredEvidenceCommands": 3,
+      "commands": [
+        "npm run eval",
+        "npm run generation:atomic:check",
+        "npm run provenance:check"
+      ]
+    },
+    "R5": {
+      "unclassifiedSourceFacts": 0,
+      "maxUnclassifiedSourceFacts": 0,
+      "conservationViolations": 0,
+      "maxConservationViolations": 0,
+      "returnConservationViolations": 0,
+      "maxReturnConservationViolations": 0,
+      "originalFacts": 20928,
+      "minOriginalFacts": 20928
+    },
+    "R6": {
+      "unclassifiedInventedFacts": 0,
+      "maxUnclassifiedInventedFacts": 0
+    }
+  }
+}

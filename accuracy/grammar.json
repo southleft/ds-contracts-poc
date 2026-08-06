@@ -1,0 +1,300 @@
+{
+  "version": 1,
+  "claim": "For every construct in the declared grammar, conversion carries it, lowers it by a named rule, or refuses it by name. Silent loss, invention, fallback, and overwrite are forbidden.",
+  "scope": {
+    "platform": "web-dom",
+    "designSurface": "figma",
+    "pilot": "mui-code-and-figma",
+    "supportedArchetypes": [
+      "accordion",
+      "avatar",
+      "badge-tag-chip",
+      "banner-alert-toast",
+      "button",
+      "card",
+      "checkbox-radio",
+      "input-field",
+      "progress-spinner",
+      "slider",
+      "tabs",
+      "toggle-switch"
+    ],
+    "dimensions": [
+      "variant-space",
+      "anatomy",
+      "nested-instance-identity",
+      "text-style-identity",
+      "tokens-and-literals",
+      "layout",
+      "interaction-states",
+      "semantics"
+    ]
+  },
+  "independentDenominators": [
+    {
+      "id": "css-dom",
+      "path": "conformance/MANIFEST.json",
+      "count": 53,
+      "expectations": {
+        "CARRIED": 22,
+        "LOWERED": 2,
+        "REFUSED": 11,
+        "UNSUPPORTED": 18
+      }
+    },
+    {
+      "id": "canvas",
+      "path": "extract/figma/conformance/MANIFEST.json",
+      "count": 91,
+      "expectations": {
+        "CARRIED": 72,
+        "LEDGERED": 11,
+        "REFUSED": 8
+      }
+    },
+    {
+      "id": "draw-read-closure",
+      "path": "extract/figma/channel-closure.json",
+      "count": 9,
+      "requiredSilent": 0
+    }
+  ],
+  "roundTripInvariants": [
+    {
+      "id": "R1",
+      "name": "variant-space",
+      "target": "Every diffed component preserves its realized variant count and structured tuple set exactly, unless an explicit projection receipt authorizes a different set."
+    },
+    {
+      "id": "R2",
+      "name": "nested-instance-identity",
+      "target": "A captured instance remains an instance and retains its instanceOf identity, or conversion refuses it by name."
+    },
+    {
+      "id": "R3",
+      "name": "text-style-identity",
+      "target": "A named text style survives by identity, or conversion refuses the identity by name."
+    },
+    {
+      "id": "R4",
+      "name": "deterministic-atomic",
+      "target": "Repeated conversion is byte-identical and any refused batch leaves every destination byte-identical."
+    },
+    {
+      "id": "R5",
+      "name": "source-fact-conservation",
+      "target": "Every original fact is matched, diverged with a named class, or lost with a named class. Unclassified source facts are zero."
+    },
+    {
+      "id": "R6",
+      "name": "no-unexplained-invention",
+      "target": "Every round-trip-only fact cites a declared normalization rule. Unclassified invented facts are zero."
+    }
+  ],
+  "normalizationRules": {
+    "auto-layout-inert": "A frame whose children are all absolutely positioned may acquire an inert auto-layout direction without changing rendering.",
+    "cartesian-fill": "A contract with independent axes emits the complete Cartesian product; strict exact mode refuses a ragged source instead of applying this rule.",
+    "declared-not-drawn": "The contract declares a property that the observed instance did not carry.",
+    "duplicate-sibling-expansion": "Repeated same-named source siblings share one normalized path while regenerated siblings receive numbered paths; every extra fact remains counted.",
+    "hug-vs-fixed": "Headless comparison cannot equate an observed hug measurement with a regenerated fixed or fill sizing mode.",
+    "instance-ink-loss": "Unresolved defect: a nested instance survives but its probed primary fill differs or disappears.",
+    "instance-target-loss": "Unresolved defect: a captured nested instance or instanceOf target returns as a non-instance or disappears.",
+    "interaction-states": "A canvas state axis was intentionally projected into bounded interaction previews rather than retained as an API axis.",
+    "geometry-projection-loss": "Unresolved defect: measured size, position, radius, arc, or fill sizing differs or disappears.",
+    "layout-projection-loss": "Unresolved defect: layout mode, alignment, sizing, or padding differs or disappears.",
+    "layout-mode-derivative": "A layout sub-fact remains counted but is dispositioned as derivative of an already-counted layout-mode change.",
+    "mixed-stroke-weight": "Figma reports per-side stroke weights as mixed, so a regenerated uniform weight has no source-side scalar.",
+    "paint-effect-projection-loss": "Unresolved defect: fill, stroke, or effect identity differs or disappears.",
+    "restructured": "The same value moved to a different named anatomy path; both the source loss and regenerated invention remain counted.",
+    "structure-wrapper-invention": "An introduced wrapper is an ancestor of a separately paired restructured node and cites that pair as evidence.",
+    "shape-kind-loss": "Unresolved defect: a captured parametric shape returns as a generic box or disappears.",
+    "text-content-projection-loss": "Unresolved defect: text content or raw typography differs or disappears.",
+    "text-style-identity": "Raw typography survived but a named text-style identity did not.",
+    "url-image": "An image or URL fill has no supported deterministic emitted asset projection.",
+    "variant-projection-loss": "Unresolved defect: a realized component-property value differs or disappears.",
+    "vector-glyph": "The headless mock cannot recover vector internals or instance primary ink.",
+    "zero-fill": "A rendering-neutral transparent solid explicitly carries the observed absence of a solid fill.",
+    "zero-stroke": "A rendering-neutral zero-width transparent stroke explicitly carries the observed absence of a stroke."
+  },
+  "factRulePredicates": {
+    "auto-layout-inert": {
+      "disposition": "NORMALIZATION",
+      "appliesTo": ["diverged"],
+      "channels": ["layout.mode"],
+      "valuePattern": "^NONE \u2192 (HORIZONTAL|VERTICAL)$"
+    },
+    "cartesian-fill": {
+      "disposition": "INTENTIONAL_PROJECTION",
+      "appliesTo": ["invented"],
+      "requiresExtraVariant": true
+    },
+    "declared-not-drawn": {
+      "disposition": "DEFECT",
+      "appliesTo": ["invented"],
+      "channelPrefixes": ["prop:"]
+    },
+    "duplicate-sibling-expansion": {
+      "disposition": "INSTRUMENT_LIMIT",
+      "appliesTo": ["invented"],
+      "channels": [
+        "fillWidth",
+        "height",
+        "instanceInk",
+        "kind",
+        "layout.align",
+        "layout.gap",
+        "layout.mode",
+        "layout.padding",
+        "layout.sizing",
+        "width"
+      ],
+      "pathPattern": "\\d+$"
+    },
+    "geometry-projection-loss": {
+      "disposition": "DEFECT",
+      "appliesTo": ["diverged", "loss"],
+      "channels": ["abs", "fillWidth", "height", "radius", "shape.arc", "width"]
+    },
+    "hug-vs-fixed": {
+      "disposition": "NORMALIZATION",
+      "appliesTo": ["invented"],
+      "channels": ["fillWidth", "height", "width"]
+    },
+    "instance-ink-loss": {
+      "disposition": "DEFECT",
+      "appliesTo": ["diverged", "loss"],
+      "channels": ["instanceInk"]
+    },
+    "instance-target-loss": {
+      "disposition": "DEFECT",
+      "appliesTo": ["diverged", "loss"],
+      "channels": ["instanceOf", "kind"]
+    },
+    "interaction-states": {
+      "disposition": "INTENTIONAL_PROJECTION",
+      "appliesTo": ["loss"],
+      "requiresStateVariant": true
+    },
+    "layout-mode-derivative": {
+      "disposition": "NORMALIZATION",
+      "appliesTo": ["loss", "invented"],
+      "channels": [
+        "layout.align",
+        "layout.gap",
+        "layout.padding",
+        "layout.sizing"
+      ]
+    },
+    "layout-projection-loss": {
+      "disposition": "DEFECT",
+      "appliesTo": ["diverged", "loss"],
+      "channels": [
+        "layout.align",
+        "layout.gap",
+        "layout.mode",
+        "layout.padding",
+        "layout.sizing"
+      ]
+    },
+    "mixed-stroke-weight": {
+      "disposition": "INSTRUMENT_LIMIT",
+      "appliesTo": ["invented"],
+      "channels": ["strokeWeight"]
+    },
+    "paint-effect-projection-loss": {
+      "disposition": "DEFECT",
+      "appliesTo": ["diverged", "loss"],
+      "channels": ["effects", "fill", "stroke", "strokeWeight"]
+    },
+    "restructured": {
+      "disposition": "NORMALIZATION",
+      "appliesTo": ["loss", "invented"],
+      "requiresPairedBasis": true
+    },
+    "shape-kind-loss": {
+      "disposition": "DEFECT",
+      "appliesTo": ["diverged", "loss"],
+      "channels": ["kind"]
+    },
+    "structure-wrapper-invention": {
+      "disposition": "DEFECT",
+      "appliesTo": ["invented"],
+      "channels": [
+        "fillWidth",
+        "height",
+        "kind",
+        "layout.align",
+        "layout.gap",
+        "layout.mode",
+        "layout.padding",
+        "layout.sizing",
+        "width"
+      ],
+      "requiresRestructuredDescendant": true
+    },
+    "text-content-projection-loss": {
+      "disposition": "DEFECT",
+      "appliesTo": ["diverged", "loss"],
+      "channels": [
+        "text.characters",
+        "text.fontSize",
+        "text.fontStyle",
+        "text.lineHeight"
+      ]
+    },
+    "text-style-identity": {
+      "disposition": "DEFECT",
+      "appliesTo": ["diverged", "loss", "invented"],
+      "channels": ["text.style"]
+    },
+    "url-image": {
+      "disposition": "REFUSED",
+      "appliesTo": ["loss"],
+      "channels": ["imageFill"]
+    },
+    "variant-projection-loss": {
+      "disposition": "DEFECT",
+      "appliesTo": ["diverged", "loss"],
+      "channelPrefixes": ["prop:"]
+    },
+    "vector-glyph": {
+      "disposition": "INSTRUMENT_LIMIT",
+      "appliesTo": ["diverged", "loss", "invented"],
+      "channels": ["instanceInk", "instancePrimaryFill", "kind"]
+    },
+    "zero-fill": {
+      "disposition": "NORMALIZATION",
+      "appliesTo": ["invented"],
+      "channels": ["fill"],
+      "valuePattern": "@0$"
+    },
+    "zero-stroke": {
+      "disposition": "NORMALIZATION",
+      "appliesTo": ["invented"],
+      "channels": ["stroke", "strokeWeight"],
+      "valuePattern": "(@0$|^0$)"
+    }
+  },
+  "variantRecoveryRefusals": [
+    "EXACT_DEFINITIONS_MISSING",
+    "EXACT_DEFINITION_CONTRADICTORY",
+    "EXACT_PROPERTY_CANONICAL_COLLISION",
+    "EXACT_VALUE_CANONICAL_COLLISION",
+    "EXACT_TUPLE_MISSING",
+    "EXACT_TUPLE_INCOMPLETE",
+    "EXACT_TUPLE_UNKNOWN_PROPERTY",
+    "EXACT_TUPLE_INVALID_VALUE",
+    "EXACT_TUPLE_DUPLICATE",
+    "EXACT_MATRIX_RAGGED",
+    "EXACT_ROWS_MISSING",
+    "EXACT_ROWS_EXTRA",
+    "EXACT_PROJECTION_COUNT_MISMATCH"
+  ],
+  "evidenceCommands": {
+    "R4": [
+      "npm run eval",
+      "npm run generation:atomic:check",
+      "npm run provenance:check"
+    ]
+  }
+}

@@ -358,6 +358,114 @@ export interface CompiledTokenSet {
   orphanModes: string[];
 }
 
+interface TokenSetTextStyle {
+  name: string;
+  tokenPath: string;
+  fontSize: number;
+  fontStyle: string;
+  sourceStyleKey?: string;
+}
+
+const FONT_STYLE_BY_WEIGHT: Record<number, string> = {
+  100: 'Thin',
+  200: 'Extra Light',
+  300: 'Light',
+  400: 'Regular',
+  500: 'Medium',
+  600: 'Semi Bold',
+  700: 'Bold',
+  800: 'Extra Bold',
+  900: 'Black',
+};
+
+function tokenSetTextStyles(
+  tokenSet: TokenSetPayload,
+  rows: TokenSetRow[],
+): TokenSetTextStyle[] {
+  if (!tokenSet.minted) return [];
+  const byName = new Map(rows.map((row) => [row.name, row]));
+  const out: TokenSetTextStyle[] = [];
+  const walk = (node: Record<string, unknown>, prefix: string[]) => {
+    for (const [key, raw] of Object.entries(node)) {
+      if (key.startsWith('$') || !raw || typeof raw !== 'object') continue;
+      const value = raw as Record<string, unknown>;
+      const next = [...prefix, key];
+      if ('$value' in value) {
+        const identity = (
+          value.$extensions as
+            | { dsContracts?: { textStyle?: { name?: unknown; key?: unknown } } }
+            | undefined
+        )?.dsContracts?.textStyle;
+        if (typeof identity?.name !== 'string') continue;
+        // font-size leaf, or an axis value under font-size
+        // (imported/avatar/text/font-size/xl).
+        const leaf = next[next.length - 1];
+        const parent = next[next.length - 2];
+        const isFontSizeLeaf = leaf === 'font-size';
+        const isFontSizeAxisLeaf = parent === 'font-size';
+        if (!isFontSizeLeaf && !isFontSizeAxisLeaf) continue;
+        const slashPath = next.join('/');
+        const sizeRow = byName.get(slashPath);
+        if (!sizeRow || sizeRow.type !== 'FLOAT') continue;
+        const groupPrefix = isFontSizeAxisLeaf
+          ? next.slice(0, -2)
+          : next.slice(0, -1);
+        const weightRow = byName.get([...groupPrefix, 'font-weight'].join('/'));
+        const weight =
+          weightRow?.type === 'FLOAT' ? weightRow.light : 500;
+        out.push({
+          name: identity.name,
+          tokenPath: next.join('.'),
+          fontSize: sizeRow.light,
+          fontStyle: FONT_STYLE_BY_WEIGHT[weight] ?? 'Medium',
+          ...(typeof identity.key === 'string'
+            ? { sourceStyleKey: identity.key }
+            : {}),
+        });
+      } else {
+        walk(value, next);
+      }
+    }
+  };
+  walk(tokenSet.minted, []);
+  // One canvas style per name; prefer imported.text.* as the upsert marker.
+  return prioritizeSharedTextStyles(out).sort((a, b) =>
+    a.name < b.name ? -1 : a.name > b.name ? 1 : 0,
+  );
+}
+
+/** Keep one TokenSetTextStyle per name, preferring imported.text.* tokenPath.
+ *  Same name with conflicting size/weight fails closed — never silently win. */
+function prioritizeSharedTextStyles(
+  styles: TokenSetTextStyle[],
+): TokenSetTextStyle[] {
+  const byName = new Map<string, TokenSetTextStyle>();
+  const rank = (t: TokenSetTextStyle) =>
+    t.tokenPath.startsWith('imported.text.') ? 0 : 1;
+  for (const s of [...styles].sort(
+    (a, b) =>
+      rank(a) - rank(b) ||
+      (a.tokenPath < b.tokenPath ? -1 : a.tokenPath > b.tokenPath ? 1 : 0),
+  )) {
+    const prev = byName.get(s.name);
+    if (!prev) {
+      byName.set(s.name, s);
+      continue;
+    }
+    if (prev.fontSize !== s.fontSize || prev.fontStyle !== s.fontStyle) {
+      throw new Error(
+        `text-style-identity-refused: text style ${JSON.stringify(s.name)} has conflicting definitions ` +
+          `(${prev.fontSize}px/${prev.fontStyle} via ${prev.tokenPath} vs ${s.fontSize}px/${s.fontStyle} via ${s.tokenPath})`,
+      );
+    }
+    if (rank(s) < rank(prev)) byName.set(s.name, s);
+    else if (!prev.sourceStyleKey && s.sourceStyleKey) {
+      prev.sourceStyleKey = s.sourceStyleKey;
+    }
+  }
+  return [...byName.values()];
+}
+
 /** Classify every base + minted token into the upsert payload — the exact
  *  two-block ordering (base sorted, then minted sorted) the example scripts
  *  emit, so a bundle-driven sync and a script-driven sync land the SAME
@@ -474,6 +582,7 @@ export function compileTokenSetRows(tokenSet: TokenSetPayload): CompiledTokenSet
  *  re-run safe. Run BEFORE the component scripts; they bind by name. */
 export function emitTokenSetScript(tokenSet: TokenSetPayload, fileKey: string | null): string {
   const { rows, aliasCount, unparsedColors, unparsedDimensions, orphanModes } = compileTokenSetRows(tokenSet);
+  const textStyles = tokenSetTextStyles(tokenSet, rows);
   const col = tokenSet.name;
   // THE RECEIPTS RIDE THE ARTIFACT. A count returned by compileTokenSetRows and
   // read by nobody is the same silent loss one layer up, so the three classes
@@ -498,6 +607,7 @@ export function emitTokenSetScript(tokenSet: TokenSetPayload, fileKey: string | 
 // the library's own token references). Runs BEFORE the component scripts.
 ${caveats ? `${caveats}\n` : ''}
 const TOKENS = ${JSON.stringify(rows)};
+const TEXT_STYLES = ${JSON.stringify(textStyles)};
 
 // File guard: multi-file bridge routing has been observed to hit the wrong
 // file — never write without verifying the target.
@@ -541,7 +651,30 @@ for (const t of TOKENS) {
   v.setValueForMode(darkId, alias);
   aliased++;
 }
-figma.notify(${JSON.stringify(col)} + ' tokens: ' + created + ' created, ' + updated + ' updated (' + TOKENS.length + ' total, ' + aliased + ' aliases, Light/Dark)');
-return { created, updated, aliased, total: TOKENS.length };
+const localTextStyles = await figma.getLocalTextStylesAsync();
+const styleByToken = {};
+for (const s of localTextStyles) {
+  const token = s.getSharedPluginData('ds_contracts', 'textStyleToken');
+  if (token) styleByToken[token] = s;
+}
+let createdStyles = 0;
+for (const t of TEXT_STYLES) {
+  let s = styleByToken[t.tokenPath];
+  if (!s) {
+    s = figma.createTextStyle();
+    s.setSharedPluginData('ds_contracts', 'textStyleToken', t.tokenPath);
+    styleByToken[t.tokenPath] = s;
+    createdStyles++;
+  }
+  if (t.sourceStyleKey) {
+    s.setSharedPluginData('ds_contracts', 'sourceTextStyleKey', t.sourceStyleKey);
+  }
+  await figma.loadFontAsync({ family: 'Inter', style: t.fontStyle });
+  s.name = t.name;
+  s.fontName = { family: 'Inter', style: t.fontStyle };
+  s.fontSize = t.fontSize;
+}
+figma.notify(${JSON.stringify(col)} + ' tokens: ' + created + ' created, ' + updated + ' updated (' + TOKENS.length + ' total, ' + aliased + ' aliases, Light/Dark; ' + createdStyles + ' text styles created)');
+return { created, updated, aliased, total: TOKENS.length, textStyles: TEXT_STYLES.length, createdStyles };
 `;
 }

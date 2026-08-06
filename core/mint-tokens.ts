@@ -72,6 +72,14 @@ export interface MintOccurrence {
    *  'true'/'false' and condition ROOT observations only (MintAxis.bool). */
   axisValues: Record<string, string>;
   value: string | number;
+  /** Per-variant text-style identity when styles DIFFER across the axis
+   *  (Avatar Size=xs → "Text xs/Medium", Size=2xl → "Display xs/Medium").
+   *  Obs-level styleName stays for the uniform-style / imported.text.* path;
+   *  this field carries identity onto each axis leaf so emit can recreate
+   *  the exact Figma style name (or refuse by name) instead of sanitizing
+   *  it away. */
+  styleName?: string;
+  styleKey?: string;
 }
 
 export interface MintObservation {
@@ -105,6 +113,8 @@ export interface MintObservation {
    *  `imported.text.<style>` group instead, so every part riding the style
    *  binds the same leaf and the name is the designer's own. */
   styleName?: string;
+  /** Published key when the source style has one. */
+  styleKey?: string;
   /** One entry per variant the node occurs in. */
   occurrences: MintOccurrence[];
   /** OPT-IN sparse-coverage fill for PRESENCE-shaped channels (canvas→code
@@ -142,6 +152,8 @@ export interface MintedEntry {
   /** "nodePath cssProperty" per binding site (plus the axis value when the
    *  leaf is per-variant) — a shared leaf lists every site that binds it. */
   usageSites: string[];
+  /** Exact design-side text-style identity carried into DTCG extensions. */
+  textStyle?: { name: string; key?: string };
 }
 
 export interface MintedBinding {
@@ -600,6 +612,7 @@ export function mintTokens(
     kind: MintKind,
     value: string | number,
     usageSite: string,
+    textStyle?: { name: string; key?: string },
   ): string => {
     const formatted = formatValue(kind, value);
     for (let n = 1; ; n++) {
@@ -607,10 +620,20 @@ export function mintTokens(
       const existing = leaves.get(path);
       if (!existing) {
         if (hasDescendants(path)) continue;
-        leaves.set(path, { ref: `{${path}}`, value: formatted, usageSites: [usageSite], type: dtcgType(kind, value) });
+        leaves.set(path, {
+          ref: `{${path}}`,
+          value: formatted,
+          usageSites: [usageSite],
+          type: dtcgType(kind, value),
+          ...(textStyle ? { textStyle } : {}),
+        });
         return path;
       }
-      if (existing.value === formatted) {
+      if (
+        existing.value === formatted &&
+        JSON.stringify(existing.textStyle ?? null) ===
+          JSON.stringify(textStyle ?? null)
+      ) {
         if (!existing.usageSites.includes(usageSite)) existing.usageSites.push(usageSite);
         return path;
       }
@@ -632,10 +655,22 @@ export function mintTokens(
     if (c.kind === 'uniform') {
       const key = `${obs.kind}|${formatValue(obs.kind, c.value)}`;
       const wanted =
+        obs.styleName === undefined &&
         (siteCount.get(key) ?? 0) >= MINT_SHARE_THRESHOLD
           ? `${MINT_NAMESPACE}.shared.${sharedName(obs.kind, c.value)}`
           : base;
-      const path = claim(wanted, obs.kind, c.value, site);
+      const path = claim(
+        wanted,
+        obs.kind,
+        c.value,
+        site,
+        obs.styleName
+          ? {
+              name: obs.styleName,
+              ...(obs.styleKey ? { key: obs.styleKey } : {}),
+            }
+          : undefined,
+      );
       return { nodePath: obs.nodePath, cssProperty: obs.cssProperty, ref: `{${path}}` };
     }
     // Per-variant (one, two, or three axes): one leaf per axis value (or
@@ -659,6 +694,27 @@ export function mintTokens(
       // so on the leaf, so a reader renaming these tokens against a real
       // system can see which cells the design never drew.
       const undrawnKeys = new Set(c.kind === 'variant2' ? (c.undrawn ?? []) : []);
+      const textStyleForKey = (
+        key: string,
+      ): { name: string; key?: string } | undefined => {
+        const axisVals = key.split('.');
+        const match = obs.occurrences.find((o) =>
+          axisProps.every((prop, i) => o.axisValues[prop] === axisVals[i]),
+        );
+        if (match?.styleName !== undefined) {
+          return {
+            name: match.styleName,
+            ...(match.styleKey ? { key: match.styleKey } : {}),
+          };
+        }
+        if (obs.styleName !== undefined) {
+          return {
+            name: obs.styleName,
+            ...(obs.styleKey ? { key: obs.styleKey } : {}),
+          };
+        }
+        return undefined;
+      };
       for (const [key, value] of c.byValue) {
         claim(
           `${groupBase}.${key}`,
@@ -667,6 +723,7 @@ export function mintTokens(
           undrawnKeys.has(key)
             ? `${site} (${siteSuffix(key)} — NOT DRAWN in the variant set; base value supplied so the pair can carry)`
             : `${site} (${siteSuffix(key)})`,
+          textStyleForKey(key),
         );
       }
       const cells2 =
@@ -735,13 +792,26 @@ export function mintTokens(
     for (const seg of segs.slice(0, -1)) {
       node = (node[seg] ??= {}) as Record<string, unknown>;
     }
-    node[segs[segs.length - 1]] = { $value: entry.value, ...(entry.type !== undefined ? { $type: entry.type } : {}) };
+    node[segs[segs.length - 1]] = {
+      $value: entry.value,
+      ...(entry.type !== undefined ? { $type: entry.type } : {}),
+      ...(entry.textStyle
+        ? { $extensions: { dsContracts: { textStyle: entry.textStyle } } }
+        : {}),
+    };
   }
 
   return {
     tree,
     count: leaves.size,
-    entries: [...leaves.values()].map(({ ref, value, usageSites }) => ({ ref, value, usageSites })),
+    entries: [...leaves.values()].map(
+      ({ ref, value, usageSites, textStyle }) => ({
+        ref,
+        value,
+        usageSites,
+        ...(textStyle ? { textStyle } : {}),
+      }),
+    ),
     bindings,
   };
 }
