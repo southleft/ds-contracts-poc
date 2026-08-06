@@ -2272,6 +2272,23 @@ const dumpPaint = async (paints, nodePath, field, consumer) => {
 async function dumpNode(node, nodePath, parent) {
   const out = { name: node.name, type: node.type };
 
+  // dump v1.14: the structured realized tuple for a direct component-set row.
+  // Names are presentation and may contain punctuation; exact recovery uses
+  // these verbatim property keys/values instead of splitting node.name.
+  if (node.type === 'COMPONENT' && parent && parent.type === 'COMPONENT_SET') {
+    try {
+      const tuple = node.variantProperties || null;
+      if (tuple && Object.keys(tuple).length > 0) {
+        out.variantProperties = Object.fromEntries(
+          Object.keys(tuple).sort().map((key) => [key, String(tuple[key])]),
+        );
+      }
+    } catch (e) {
+      // Absence means structured metadata was not captured. The exact
+      // projection gate reports legacy-unverified rather than guessing.
+    }
+  }
+
   // dump v1.5: variant-ROOT observed bounding box — the drawn dimension of a
   // FIXED root axis is otherwise unrecoverable (CBDS Dialog field case).
   if (node.type === 'COMPONENT' && typeof node.width === 'number' && typeof node.height === 'number') {
@@ -2599,7 +2616,12 @@ async function dumpNode(node, nodePath, parent) {
     if (typeof pxLineHeight === 'number') text.lineHeight = pxLineHeight;
     if (node.textStyleId && node.textStyleId !== figma.mixed) {
       const style = await figma.getStyleByIdAsync(node.textStyleId);
-      if (style) text.style = style.name;
+      if (style) {
+        text.style = style.name;
+        const sourceKey = style.getSharedPluginData('ds_contracts', 'sourceTextStyleKey');
+        if (sourceKey) text.styleKey = sourceKey;
+        else if (typeof style.key === 'string' && style.key) text.styleKey = style.key;
+      }
     }
     const fill = await dumpPaint(node.fills, nodePath, 'fill', node);
     if (fill && fill.var) text.fillVar = fill.var;
@@ -2704,10 +2726,22 @@ async function dumpNode(node, nodePath, parent) {
 // boolean props). Definitions can throw on broken sets — tolerated, the
 // channels are additive.
 function dumpPropertyDefinitions(node) {
-  const out = { swapPreferredValues: {}, boolDefaults: {} };
+  const out = { propertyDefinitions: {}, swapPreferredValues: {}, boolDefaults: {} };
   try {
     for (const [propName, def] of Object.entries(node.componentPropertyDefinitions || {})) {
       const name = propName.split('#')[0];
+      const captured = { type: def.type, defaultValue: def.defaultValue };
+      if (def.type === 'VARIANT' && Array.isArray(def.variantOptions)) {
+        captured.variantOptions = def.variantOptions.map(String);
+      }
+      if ((def.type === 'INSTANCE_SWAP' || def.type === 'SLOT') && Array.isArray(def.preferredValues) && def.preferredValues.length > 0) {
+        captured.preferredValues = def.preferredValues.map((v) => ({ type: v.type, key: v.key }));
+      }
+      if (def.type === 'SLOT') {
+        if (typeof def.description === 'string') captured.description = def.description;
+        if (def.slotSettings && typeof def.slotSettings === 'object') captured.slotSettings = def.slotSettings;
+      }
+      out.propertyDefinitions[propName] = captured;
       if (def.type === 'INSTANCE_SWAP' && Array.isArray(def.preferredValues) && def.preferredValues.length > 0) {
         out.swapPreferredValues[name] = def.preferredValues.map((v) => ({ type: v.type, key: v.key }));
       }
@@ -2726,8 +2760,8 @@ const dumps = {
   _provenance: {
     fileKey: figma.fileKey || null,
     extractedAt: new Date().toISOString().slice(0, 10),
-    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.13) for design→contract proposal.',
-    dumpVersion: '1.13',
+    note: 'Node-tree dump (extract/figma/dump.plugin.js, dump v1.15) for design→contract proposal.',
+    dumpVersion: '1.15',
   },
 };
 dumps._degradations = degradations;
@@ -2739,7 +2773,7 @@ for (const page of figma.root.children) {
     if (TARGET_SETS.length > 0 && !TARGET_SETS.includes(node.name)) continue;
     const variants = [];
     if (node.type === 'COMPONENT_SET') {
-      for (const variant of node.children) variants.push(await dumpNode(variant, node.name + ':' + variant.name));
+      for (const variant of node.children) variants.push(await dumpNode(variant, node.name + ':' + variant.name, node));
     } else {
       variants.push(await dumpNode(node, node.name + ':' + node.name));
     }
@@ -2751,6 +2785,7 @@ for (const page of figma.root.children) {
       key: node.key,
       variants,
     };
+    if (Object.keys(defs.propertyDefinitions).length > 0) dumps[node.name].propertyDefinitions = defs.propertyDefinitions;
     if (Object.keys(defs.swapPreferredValues).length > 0) dumps[node.name].swapPreferredValues = defs.swapPreferredValues;
     if (Object.keys(defs.boolDefaults).length > 0) dumps[node.name].boolDefaults = defs.boolDefaults;
   }

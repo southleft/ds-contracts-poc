@@ -69,7 +69,12 @@ console.log(
 
 // --- load the bundle in a bare VM (window sandbox, no node globals) --------
 const { figma, root } = createFigmaMock();
-const sandbox = { window: {}, console: { log() {}, warn() {}, error() {} } };
+const sandbox = {
+  window: {},
+  TextEncoder,
+  TextDecoder,
+  console: { log() {}, warn() {}, error() {} },
+};
 vm.createContext(sandbox);
 vm.runInContext(bundle.code, sandbox, { timeout: 120_000 });
 const DSC = sandbox.window.DSC;
@@ -157,6 +162,155 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   console.log(
     `✔ bundle order: ${composite.id} plans ${componentSteps.length} component scripts, dependencies first (${componentSteps.map((s) => s.contractId).join(' → ')})`,
   );
+}
+
+// --- 3b. nested semantic identity ------------------------------------------
+{
+  const clone = (value) => JSON.parse(JSON.stringify(value));
+  const childA = clone(badge);
+  childA.id = 'test.identity-child-a';
+  childA.name = 'CollisionChild';
+  childA.anchors.figma = { fileKey: null, componentSetKey: null, nodeId: null };
+  const childB = clone(childA);
+  childB.id = 'test.identity-child-b';
+  childB.description = 'The authoritative same-name child.';
+
+  const parent = clone(JSON.parse(read('contracts/card.contract.json')));
+  parent.id = 'test.identity-parent';
+  parent.name = 'IdentityParent';
+  parent.description = 'Exercises ordinary refs, slot defaults, and slot preferred values by semantic identity.';
+  parent.props = [];
+  parent.anatomy.root.parts = {
+    chosen: { component: { id: childB.id } },
+    choice: {
+      slot: {
+        name: 'choice',
+        figmaProperty: 'Choice',
+        required: true,
+        accepts: [childB.id],
+        defaultContent: [{ id: childB.id }],
+      },
+    },
+  };
+  parent.anchors.figma = { fileKey: null, componentSetKey: null, nodeId: null };
+
+  const identityMock = createFigmaMock();
+  const runIdentity = (code) =>
+    vm.runInContext(
+      `(async () => {\n${code}\n})()`,
+      vm.createContext({ figma: identityMock.figma, console: { log() {}, warn() {}, error() {} } }),
+      { timeout: 120_000 },
+    );
+  const initial = DSC.planGenerate([childA, childB, parent], { withTokens: true, fileKey: '' });
+  assert(initial.ok, `semantic identity fixture plans (${initial.ok ? '' : initial.issues.map((i) => i.headline).join('; ')})`);
+  for (const step of initial.steps) await runIdentity(step.code);
+
+  const marked = (id) =>
+    identityMock.root.findOne(
+      (n) =>
+        (n.type === 'COMPONENT_SET' || (n.type === 'COMPONENT' && n.parent?.type !== 'COMPONENT_SET')) &&
+        n.getSharedPluginData('ds_contracts', 'contractId') === id,
+    );
+  const childANode = marked(childA.id);
+  let childBNode = marked(childB.id);
+  let parentNode = marked(parent.id);
+  assert(childANode && childBNode && childANode !== childBNode, 'fresh same-name children retain distinct semantic identities');
+  const ownerOf = async (inst) => {
+    const main = await inst.getMainComponentAsync();
+    return main.parent?.type === 'COMPONENT_SET' ? main.parent : main;
+  };
+  let ordinary = parentNode.findOne((n) => n.type === 'INSTANCE' && n.name === 'chosen');
+  assert(ordinary && (await ownerOf(ordinary)) === childBNode, 'same-name distinct-ID parent targets the authoritative child');
+  const choiceDef = Object.values(parentNode.componentPropertyDefinitions).find(
+    (d) => d.type === 'INSTANCE_SWAP' && Array.isArray(d.preferredValues),
+  );
+  assert(
+    choiceDef?.preferredValues?.some((v) => v.key === childBNode.key) &&
+      !choiceDef.preferredValues.some((v) => v.key === childANode.key),
+    'slot preferred values resolve the authoritative child identity',
+  );
+  const choiceWrapper = parentNode.findOne((n) => n.type === 'FRAME' && n.name === 'choice');
+  const slotDefault = choiceWrapper?.findOne((n) => n.type === 'INSTANCE');
+  assert(slotDefault && (await ownerOf(slotDefault)) === childBNode, 'slot default resolves the authoritative child identity');
+  console.log('✔ nested semantic identity: fresh ordinary refs, slot defaults, and slot preferred values bind same-name children by contractId, never canvas name');
+
+  // Anchor adoption is rename-stable and amends the existing node/key. Clear
+  // the semantic marker to force the second resolver tier explicitly.
+  const childBKey = childBNode.key;
+  const childBId = childBNode.id;
+  childBNode.name = 'Designer-renamed child';
+  childBNode.setSharedPluginData('ds_contracts', 'contractId', '');
+  const anchoredB = clone(childB);
+  anchoredB.description += ' Amended through its stable anchor.';
+  anchoredB.anchors.figma.componentSetKey = childBKey;
+  const anchorPlan = DSC.planGenerate([anchoredB], { withTokens: false, fileKey: '' });
+  assert(anchorPlan.ok, 'rename-stability anchor fixture plans');
+  for (const step of anchorPlan.steps) await runIdentity(step.code);
+  childBNode = marked(childB.id);
+  assert(childBNode?.id === childBId && childBNode.key === childBKey, 'anchor-based amend preserves node id and component key');
+
+  const parentV2 = clone(parent);
+  parentV2.description += ' Rebuilt after the child rename.';
+  const renamePlan = DSC.planGenerate([anchoredB, parentV2], { withTokens: false, fileKey: '' });
+  assert(renamePlan.ok, 'rename-stability parent fixture plans');
+  for (const step of renamePlan.steps) await runIdentity(step.code);
+  parentNode = marked(parent.id);
+  ordinary = parentNode.findOne((n) => n.type === 'INSTANCE' && n.name === 'chosen');
+  assert(ordinary && (await ownerOf(ordinary)) === childBNode, 'child rename does not change nested semantic binding');
+  console.log(`✔ rename stability + amend key preservation: anchor adoption kept node ${childBId} / key ${childBKey}, and rebuilt parent refs still target it`);
+
+  // Two old generated nodes with the same legacy name are not evidence for
+  // either one. The resolver must refuse before creating or amending.
+  const legacyMock = createFigmaMock();
+  for (let i = 0; i < 2; i++) {
+    const legacy = legacyMock.figma.createComponent();
+    legacy.name = childA.name;
+    legacy.setSharedPluginData('ds_contracts', 'specHash', `legacy-${i}`);
+    legacyMock.figma.currentPage.appendChild(legacy);
+  }
+  const legacyPlan = DSC.planGenerate([childA], { withTokens: false, fileKey: '' });
+  assert(legacyPlan.ok, 'duplicate legacy refusal fixture plans');
+  let legacyRefusal = '';
+  try {
+    for (const step of legacyPlan.steps) {
+      await vm.runInContext(
+        `(async () => {\n${step.code}\n})()`,
+        vm.createContext({ figma: legacyMock.figma, console: { log() {}, warn() {}, error() {} } }),
+        { timeout: 120_000 },
+      );
+    }
+  } catch (error) {
+    legacyRefusal = String(error?.message ?? error);
+  }
+  assert(
+    legacyRefusal.includes('duplicate explicit legacy-generated name') && legacyRefusal.includes(childA.name),
+    `duplicate legacy targets refuse by name (got "${legacyRefusal}")`,
+  );
+  console.log('✔ duplicate legacy refusal: two unmarked generated same-name targets are ambiguous and the sync refuses instead of guessing');
+
+  const foreignMock = createFigmaMock();
+  const foreign = foreignMock.figma.createComponent();
+  foreign.name = childA.name;
+  foreignMock.figma.currentPage.appendChild(foreign);
+  const foreignPlan = DSC.planGenerate([childA], { withTokens: true, fileKey: '' });
+  assert(foreignPlan.ok, 'unmarked foreign same-name fixture plans');
+  for (const step of foreignPlan.steps) {
+    await vm.runInContext(
+      `(async () => {\n${step.code}\n})()`,
+      vm.createContext({ figma: foreignMock.figma, console: { log() {}, warn() {}, error() {} } }),
+      { timeout: 120_000 },
+    );
+  }
+  const generated = foreignMock.root.findOne(
+    (n) =>
+      (n.type === 'COMPONENT_SET' || (n.type === 'COMPONENT' && n.parent?.type !== 'COMPONENT_SET')) &&
+      n.getSharedPluginData('ds_contracts', 'contractId') === childA.id,
+  );
+  assert(
+    generated && generated !== foreign && foreign.getSharedPluginData('ds_contracts', 'contractId') === '',
+    'an unmarked foreign same-name component is never adopted',
+  );
+  console.log('✔ fresh semantic identity: an unmarked foreign same-name node remains untouched while a separately marked target is created');
 }
 
 // --- 4. update-library report + apply --------------------------------------
@@ -308,6 +462,20 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(scoped !== source, 'the dump script TARGET_SETS seam scopes');
   const dump = await runScript(scoped);
   assert(dump && dump.Badge, 'the dump captures the mock-built Badge set');
+  const structuredDefs = dump.Badge.propertyDefinitions ?? {};
+  const structuredAxes = Object.keys(structuredDefs)
+    .filter((key) => structuredDefs[key].type === 'VARIANT')
+    .sort();
+  assert(structuredAxes.length > 0, 'dump v1.14 captures structured VARIANT definitions');
+  assert(
+    dump.Badge.variants.every(
+      (variant) =>
+        variant.variantProperties &&
+        JSON.stringify(Object.keys(variant.variantProperties).sort()) ===
+          JSON.stringify(structuredAxes),
+    ),
+    'dump v1.14 captures a complete structured tuple on every direct variant row',
+  );
 
   const diff = DSC.proposeDiff(dump, 'Badge', badge);
   assert(diff.ok, `proposeDiff proposes from the drawn set (${diff.ok ? '' : diff.issue.headline})`);
@@ -319,6 +487,10 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   assert(
     exported.type === 'CONTRACT-PROPOSAL' && exported.baseContractId === badge.id && exported.proposedContract,
     'the export artifact carries base id/version + the proposed contract',
+  );
+  assert(
+    exported.projection?.status === 'verified-exact',
+    'a structured tool-generated set exports returned-tuple verified exactness',
   );
 
   // Delta detection: a base missing a prop the drawn set carries must
@@ -754,9 +926,11 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // drops it. MUI's shipped artifacts predated that refusal, so the bundle
   // had been carrying a glyph for a button the browser draws nowhere. A
   // DECREASE here is the phantom leaving, not coverage lost.
+  // Wave 5 denominator (2026-08-05): 13 → 22 as circular-progress + other
+  // promoted SVG assets joined the MUI bundle paste surface.
   assert(
-    parsed.icons && Object.keys(parsed.icons).length === 13,
-    `the bundle surfaces its 13 icon assets (got ${parsed.icons ? Object.keys(parsed.icons).length : 'none'})`,
+    parsed.icons && Object.keys(parsed.icons).length === 22,
+    `the bundle surfaces its 22 icon assets (got ${parsed.icons ? Object.keys(parsed.icons).length : 'none'})`,
   );
   const plan = DSC.planGenerate(parsed.contracts, { withTokens: true, fileKey: '', tokenSet: parsed.tokenSet, icons: parsed.icons });
   assert(plan.ok, `the foreign bundle plans clean (${plan.ok ? '' : plan.issues.map((i) => i.headline).join('; ')})`);
@@ -794,8 +968,10 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // an out-of-vocabulary stateProp to a real VARIANT AXIS) and Button 63 → 75
   // (the figmaStatePreviews probe accepted a State axis). Both must survive
   // the JSON-only paste identically to the compiled-script path.
+  // Wave 5 denominator (2026-08-05): Accordion→TextField carried set expanded
+  // from 11 to 27 COMPONENT_SETs as Alert/Avatar/Badge/… joined the paste surface.
   assert(
-    shapeA === 'Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6)',
+    shapeA === 'Accordion(4), Alert(12), Autocomplete(2), Avatar(3), Badge(14), Button(75), Card(4), Checkbox(3), Chip(28), CircularProgress(2), Dialog(5), Divider(3), Drawer(2), Fab(9), IconButton(9), InputAdornment(2), LinearProgress(2), Link(42), Paper(8), Radio(14), Select(2), Slider(12), Snackbar(3), Switch(28), Table(2), Tabs(6), TextField(6)',
     `the bundle path builds the exact MUI set shape (got ${shapeA})`,
   );
   assert(shapeA === shapeB, `bundle path ≡ script path on component sets (${shapeA} vs ${shapeB})`);
@@ -825,13 +1001,15 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // already refused by name. The EQUIVALENCE this pin exists for is unchanged
   // and is what matters: the bundle path and the compiled-script path land the
   // SAME count and the same NAME inventory.
+  // Wave 5 denominator (2026-08-05): 1543 → 2136 as carried Alert…TextField
+  // contracts joined the mint surface.
   assert(
-    mockA.variables.length === 1543 && mockB.variables.length === 1543,
-    `both paths land 1543 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
+    mockA.variables.length === 2136 && mockB.variables.length === 2136,
+    `both paths land 2136 variables (bundle ${mockA.variables.length}, script ${mockB.variables.length})`,
   );
   assert(
-    aliasCountOf(mockA) === 73 && aliasCountOf(mockB) === 73,
-    `both paths carry 73 Figma-native alias variables (bundle ${aliasCountOf(mockA)}, script ${aliasCountOf(mockB)})`,
+    aliasCountOf(mockA) === 134 && aliasCountOf(mockB) === 134,
+    `both paths carry 134 Figma-native alias variables (bundle ${aliasCountOf(mockA)}, script ${aliasCountOf(mockB)})`,
   );
   const namesA = mockA.variables.map((v) => v.name).sort().join('\n');
   const namesB = mockB.variables.map((v) => v.name).sort().join('\n');
@@ -927,7 +1105,7 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   );
 
   console.log(
-    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 1543 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
+    `✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds ${shapeA} + standalone ${soloA} with 2136 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME`,
   );
 
   // --- NESTED MODES ARE REFUSED, NOT SILENTLY FLATTENED TO BASE -----------
@@ -1522,6 +1700,39 @@ return { ok: true };
     baselessExport.type === 'CONTRACT-PROPOSAL' && baselessExport.baseContractId === null &&
       baselessExport.baseVersion === null && baselessExport.proposedContract,
     'the base-less export is a CONTRACT-PROPOSAL with a null base, never a fabricated one',
+  );
+  assert(
+    baselessExport.projection?.status === 'verified-exact',
+    'a structured hand-built set is exact on canvas-expressible variant projection even though generated code remains an inversion',
+  );
+  const legacyHandDump = JSON.parse(JSON.stringify(handDump));
+  delete legacyHandDump.HandBuilt.propertyDefinitions;
+  for (const variant of legacyHandDump.HandBuilt.variants) {
+    delete variant.variantProperties;
+  }
+  const explicitLegacy = DSC.proposeDiff(
+    legacyHandDump,
+    'HandBuilt',
+    null,
+    { toolGenerated: false },
+  );
+  assert(
+    explicitLegacy.ok &&
+      JSON.parse(explicitLegacy.exportJson).projection?.status ===
+        'legacy-unverified',
+    'only an explicitly hand-built legacy dump enters reviewable inversion',
+  );
+  const unknownLegacy = DSC.proposeDiff(
+    legacyHandDump,
+    'HandBuilt',
+    null,
+  );
+  assert(
+    !unknownLegacy.ok &&
+      unknownLegacy.issue.headline.includes(
+        'structured propertyDefinitions',
+      ),
+    'legacy evidence with unknown provenance refuses exact conversion',
   );
   // The WITH-base path is untouched, byte for byte.
   const withBase = DSC.proposeDiff(await runScript(

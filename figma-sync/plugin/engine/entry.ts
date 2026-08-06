@@ -1722,6 +1722,17 @@ return { inventory: rows };
     );
     const provenance = (dump as { _provenance?: { fileKey?: string | null } })
       ._provenance;
+    const targetSet = dump[setName] as
+      | {
+          propertyDefinitions?: Record<string, unknown>;
+          variants?: Array<{ variantProperties?: Record<string, unknown> }>;
+        }
+      | undefined;
+    const hasStructuredProjection =
+      !!targetSet?.propertyDefinitions &&
+      (targetSet.variants ?? []).every(
+        (variant) => !!variant.variantProperties,
+      );
     let batch;
     try {
       batch = proposeBatchFromDump(dump as never, {
@@ -1744,6 +1755,15 @@ return { inventory: rows };
         ),
         contractsById: new Map(bakedById),
         fileKey: provenance?.fileKey ?? null,
+        // Structured dumps prove the matrix in exact mode.
+        // Unstructured dumps with a known hand-built / tool-generated
+        // provenance stay on reviewable inversion (name-based path; the
+        // asymmetry copy still rides `toolGenerated`). Unrecorded
+        // provenance without structured evidence fails closed in exact.
+        projectionMode:
+          hasStructuredProjection || opts.toolGenerated == null
+            ? "exact"
+            : "reviewable-inversion",
         mintUnbound: true,
         hiddenCaptured: dumpCapturesHidden(provenance as never),
       });
@@ -1794,6 +1814,7 @@ return { inventory: rows };
         setName: proposal.setName,
         summary: summaryLines,
         proposedContract,
+        projection: proposal.projection,
         proposalNotes: proposal.notes,
         // ENVELOPE v2 — the two payloads the export doors used to DROP: the
         // stub contracts and the minted DTCG tree ride the SAME envelope the

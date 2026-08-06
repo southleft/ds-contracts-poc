@@ -396,6 +396,18 @@ export function createFigmaMock() {
     // definition reads and property minting — real Figma throws here, and the
     // old mock's lenient set-level hoist of variant-minted defs is exactly
     // what let the live "set-instance text not applied" bug pass 146 gates.
+    get variantProperties() {
+      if (this.type !== 'COMPONENT' || this.parent?.type !== 'COMPONENT_SET') {
+        return null;
+      }
+      const tuple = {};
+      for (const seg of String(this.name).split(',')) {
+        const [axis, value] = seg.split('=').map((part) => part?.trim());
+        if (axis && value !== undefined) tuple[axis] = value;
+      }
+      return Object.keys(tuple).length > 0 ? tuple : null;
+    }
+
     get componentPropertyDefinitions() {
       if (this.type === 'COMPONENT' && this.parent?.type === 'COMPONENT_SET') {
         throw new Error(

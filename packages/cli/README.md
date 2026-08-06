@@ -30,12 +30,12 @@ ds-contracts propose-pr <file> --repo owner/name [--dry-run]
 
 ## Release status
 
-This source tree stages `@ds-contracts/cli@0.5.0-rc.1`. It is source-only until
-a release owner publishes it. The npm registry check on 2026-08-04 reported
-`0.4.0` as `latest`; installing without an exact version therefore installs
-`0.4.0`, not this RC.
+The npm `next` tag carries `@ds-contracts/cli@0.5.0-rc.1`. This source tree is
+ahead at `0.5.0-rc.2` and remains unpublished until the conversion program has
+new release evidence. npm `latest` remains on the stable line; installing
+without an exact version does not install this source.
 
-After the RC is published, evaluate it without moving the stable tag:
+Evaluate the published candidate without moving the stable tag:
 
 ```sh
 npm exec --package=@ds-contracts/cli@0.5.0-rc.1 -- ds-contracts --help
