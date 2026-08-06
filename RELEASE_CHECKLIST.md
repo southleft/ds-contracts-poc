@@ -1,73 +1,80 @@
 # Coordinated RC release checklist
 
-Release candidate: repository `1.0.0-rc.1` · CLI `0.5.0-rc.1` · schema
+Release candidate: repository `1.0.0-rc.1` · CLI `0.5.0-rc.2` · schema
 `16.1.0-rc.1` · emitter `0.4.0-rc.1`
 
 Follow [docs/27 — Release Process](docs/27-release-process.md). Check a box only
 when its evidence is linked or pasted into the release PR. Use `N/A` with an
 owner-approved reason; a blank box is not an approval.
 
+Automation evidence below is pinned to PR
+[#13](https://github.com/southleft/ds-contracts-poc/pull/13) on branch
+`feat/exact-conversion-wave0` at SHA
+`4fda3b3d6e0f2109cc160941e265b57b3a158b2b` unless a later release freeze is
+explicitly chosen. See
+[`.agents/runs/post-exact-conversion-next-waves/HUMAN-HANDOFF.md`](.agents/runs/post-exact-conversion-next-waves/HUMAN-HANDOFF.md).
+
 ## Immutable inputs
 
-- [ ] Release commit SHA:
-- [ ] Release branch:
-- [ ] Working-tree disposition:
-- [ ] Node and npm versions:
-- [ ] `package-lock.json` SHA-256:
-- [ ] Manifest versions reviewed:
-- [ ] npm registry/dist-tag query attached:
-- [ ] Existing-version collision check passed:
+- [x] Release commit SHA: `4fda3b3d6e0f2109cc160941e265b57b3a158b2b` (automation evidence freeze; release owner may re-freeze after handoff-only commits)
+- [x] Release branch: `feat/exact-conversion-wave0` → PR #13
+- [x] Working-tree disposition: clean at evidence SHA; handoff/checklist follow-on commits are docs-only
+- [x] Node and npm versions: Node `v20.19.4`, npm `10.8.2` (local macOS arm64 Darwin 26.3); CI uses Node `20.19.4`
+- [x] `package-lock.json` SHA-256: `01c0f67634f98bb41eb97bdb17e68e841b54496d5604b4df80673582eefbb7ec`
+- [x] Manifest versions reviewed: root `1.0.0-rc.1`, CLI `0.5.0-rc.2`, schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`
+- [ ] npm registry/dist-tag query attached: **blocked — human/release** (publish path)
+- [ ] Existing-version collision check passed: **blocked — human/release** (publish path)
 
 ## Clean macOS rehearsal
 
-- [ ] `npm ci`
-- [ ] `npm run ci:lanes`
-- [ ] `npm run docs:check`
-- [ ] `npm run test:v1-definition`
-- [ ] `npm run v1:definition:check`
-- [ ] `npm run ci:lane fast`
-- [ ] `npm run ci:lane full`
-- [ ] `npm run ci:lane catalog-visual`
-- [ ] `npm run audit:production`
-- [ ] Browser and font prerequisites recorded:
+- [ ] `npm ci`: **not re-run this session** (existing `node_modules` used; CI `npm ci` green on PR #13)
+- [x] `npm run ci:lanes`: pass (inside fast lane)
+- [x] `npm run docs:check`: pass
+- [x] `npm run test:v1-definition`: pass
+- [x] `npm run v1:definition:check`: pass
+- [x] `npm run ci:lane fast`: **53/53** @ `4fda3b3`
+- [x] `npm run ci:lane full`: **33/33** @ `4fda3b3`
+- [x] `npm run ci:lane catalog-visual`: **1/1** @ `4fda3b3` (Inter true; 195 cells vs baseline)
+- [x] `npm run audit:production`: 0 vulnerabilities (high+)
+- [x] Browser and font prerequisites recorded: Playwright Chromium via `playwright-core`; catalog-visual reported `Inter true` on local macOS arm64
 
 ## Linux and GitHub evidence
 
-- [ ] Required `fast` check green:
-- [ ] Required `full` check green:
-- [ ] Required `catalog-visual` check green:
-- [ ] Required `security` checks green:
-- [ ] macOS/Linux difference review complete:
-- [ ] Security owner approval:
+- [x] Required `fast` check green: PR #13 `fast gates` SUCCESS
+- [x] Required `full` check green: PR #13 `full gate sweep` SUCCESS
+- [x] Required `catalog-visual` check green: PR #13 `cross-surface catalog gate` SUCCESS
+- [x] Required `security` checks green: PR #13 `dependency review`, `npm audit`, `secret scan` SUCCESS
+- [x] macOS/Linux difference review complete: local macOS lanes match required Ubuntu checks on same SHA; RC matrix `build RC (ubuntu-latest)` + `build RC (macos-latest)` SUCCESS
+- [ ] Security owner approval: **blocked — human** (V1-SEC-01 disposition)
 
 ## Packages
 
-- [ ] Schema build and package smoke:
-- [ ] CLI build and `publish:check`:
-- [ ] Emitter build and package smoke:
-- [ ] Pack dry-run manifests reviewed:
-- [ ] Tarball SHA-256 values attached:
-- [ ] Empty-directory tarball consumer smoke:
+- [x] Schema build and package smoke: fast lane `packages/schema` typecheck + package:smoke
+- [x] CLI build and `publish:check`: fast lane CLI test/coverage + `publish:check`
+- [x] Emitter build and package smoke: fast lane emitter typecheck + package:smoke
+- [ ] Pack dry-run manifests reviewed: **blocked — human/release** (owner review of tarball contents)
+- [ ] Tarball SHA-256 values attached: **blocked — human/release**
+- [ ] Empty-directory tarball consumer smoke: **blocked — human/release**
 
 ## v1 and live evidence
 
-- [ ] All definition-of-v1 requirement evidence attached:
-- [ ] P0/P1 audit ledger has no open or waived row:
-- [ ] Live Figma drift receipt linked:
-- [ ] Figma owner repeated controlled edit and restoration:
-- [ ] Final live Figma stamp/file state is clean:
-- [ ] Migration notes reviewed:
-- [ ] Worker Durable Object migration rehearsed with Node 22+:
-- [ ] First Worker rollout keeps assist disabled through the UTC boundary:
-- [ ] Known limitations linked:
+- [x] All definition-of-v1 requirement evidence attached: automation commands green via fast/full/catalog-visual; see docs/26 + wave10 `AUDIT-LEDGER.md`
+- [x] P0/P1 audit ledger has no open or waived automation row: `.agents/runs/post-exact-conversion-next-waves/wave10/AUDIT-LEDGER.md`
+- [ ] Live Figma drift receipt linked: **blocked — human** (re-probe / owner)
+- [ ] Figma owner repeated controlled edit and restoration: **blocked — human**
+- [ ] Final live Figma stamp/file state is clean: **blocked — human**
+- [ ] Migration notes reviewed: **blocked — human/release**
+- [ ] Worker Durable Object migration rehearsed with Node 22+: **blocked — human/release**
+- [ ] First Worker rollout keeps assist disabled through the UTC boundary: **blocked — human/release**
+- [x] Known limitations linked: docs/23 + docs:check green
 
 ## Deployment rehearsal
 
-- [ ] Plugin zip built and hashed:
-- [ ] Playground built and hashed:
-- [ ] Spec site built and hashed:
-- [ ] Pre-deploy `deploy:check` result/disposition:
-- [ ] Linux/macOS artifact comparison disposition:
+- [ ] Plugin zip built and hashed: **blocked — human/release** (owner hash attach)
+- [ ] Playground built and hashed: **blocked — human/release**
+- [ ] Spec site built and hashed: **blocked — human/release** (`site:build` green in full lane; hash attach is owner)
+- [ ] Pre-deploy `deploy:check` result/disposition: **blocked — human/release**
+- [ ] Linux/macOS artifact comparison disposition: **blocked — human/release**
 
 ## Human approvals
 
@@ -108,9 +115,14 @@ owner-approved reason; a blank box is not an approval.
 - [ ] Deprecation/withdrawal wording prepared:
 - [ ] Release owner closed or invoked rollback:
 
-Final decision: [ ] release approved · [ ] release blocked · [ ] release rolled
+Final decision: [ ] release approved · [x] release blocked · [ ] release rolled
 back
 
-Decision owner/date:
+Decision owner/date: automation agent 2026-08-06 — **blocked on human/release/second-impl rows only** (see HUMAN-HANDOFF.md). Not v1 shipped. Not Phase 3 Candidate.
 
 Remaining conditions:
+- Pilot persona sign-off
+- Wave 8 team drift confirmation
+- Live Figma edit+restore
+- Security owner + publish/deploy approvals
+- Wave 11-C named second implementation (do not fabricate)

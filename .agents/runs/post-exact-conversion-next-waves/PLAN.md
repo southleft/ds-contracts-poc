@@ -12,7 +12,7 @@ SpeedDial remains a fail-closed negative control outside the MUI denominator.
 | 7 Anatomy parity | READY | `wave7/` + `anatomy-diff:check` + `variant-drift:check` |
 | 8 G7 stubs | READY-with-human-gate | `wave8/` + `suggested-diff:check` |
 | 9 Spec draft | READY | `spec/` + `wave9/` |
-| 10 v1 gates | READY-with-human-gate | `wave10/` — evals **188/188**, fast **53/53**, full **33/33**; human release rows open |
+| 10 v1 gates | READY-with-human-gate | `wave10/` — evals **188/188**, fast **53/53**, full **33/33**, catalog-visual **1/1** @ `4fda3b3` / PR #13; human release rows open · see `HUMAN-HANDOFF.md` |
 | 11 Governance | BLOCKED (second impl) · A/B/D packaged | `wave11/` — subset + fixture-index + harness |
 
 Sources: [ROADMAP.md](../../../ROADMAP.md), [docs/26](../../../docs/26-v1-definition.md), [docs/12](../../../docs/12-roadmap.md).

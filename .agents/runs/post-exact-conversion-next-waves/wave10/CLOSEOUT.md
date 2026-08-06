@@ -9,12 +9,14 @@
 - `npm run docs:check` → pass
 - `npm run ci:lane -- fast` → **53/53**
 - `npm run ci:lane -- full` → **33/33**
+- `npm run ci:lane -- catalog-visual` → **1/1** (local + GH) @ `4fda3b3d6e0f2109cc160941e265b57b3a158b2b` · PR #13
 - Coverage honesty: docs/22 §8.3 MUI **31/31** (23.0%), corpus **79** contracts / **71** pinned (8.0%)
 - P0/P1 automation ledger: [AUDIT-LEDGER.md](./AUDIT-LEDGER.md)
+- Handoff: [../HUMAN-HANDOFF.md](../HUMAN-HANDOFF.md)
 
 ## What stays human
 
-Pilot sign-off, team drift confirmation, CI lanes on a frozen release commit, live Figma re-probe, publish/deploy — all still on `RELEASE_CHECKLIST.md`. Wave 10 does **not** claim v1 shipped.
+Pilot sign-off, team drift confirmation, live Figma re-probe, security-owner disposition, publish/deploy — all still on `RELEASE_CHECKLIST.md`. Wave 10 does **not** claim v1 shipped.
 
 ## Key repairs this wave
 

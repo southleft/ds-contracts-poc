@@ -9,6 +9,9 @@
     "v1DefinitionCheck": "pass",
     "ciLaneFast": "53/53",
     "ciLaneFull": "33/33",
+    "ciLaneCatalogVisual": "1/1",
+    "frozenSha": "4fda3b3d6e0f2109cc160941e265b57b3a158b2b",
+    "pr": "https://github.com/southleft/ds-contracts-poc/pull/13",
     "fullLaneUnblocks": "MCP legacy defs-without-tuples; plugin UI asymmetry; dagger 70→87 — 2026-08-06",
     "daggerCensus": "87 across 8 corpora (mui 31)",
     "auditLedger": "wave10/AUDIT-LEDGER.md"
@@ -16,9 +19,9 @@
   "humanGatesOpen": [
     "PILOT-ACCEPTANCE (Wave 6)",
     "Wave 8 team drift confirmation",
-    "ci:lane catalog-visual on frozen release commit",
     "live Figma re-probe",
+    "security owner secret-scan disposition",
     "publish/deploy approvals"
   ],
-  "next": "Wave 11 packaging READY; Candidate waits on named second impl; keep RELEASE_CHECKLIST human rows open"
+  "next": "HUMAN-HANDOFF.md — Candidate waits on named second impl; keep RELEASE_CHECKLIST human rows open"
 }
