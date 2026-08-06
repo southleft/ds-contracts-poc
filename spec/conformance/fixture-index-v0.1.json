@@ -1,0 +1,76 @@
+{
+  "id": "spec-conformance-fixture-index-v0.1",
+  "subsetId": "spec-conformance-subset-v0.1",
+  "frozenAt": "2026-08-05",
+  "note": "Paths relative to the repository root. A foreign runner SHOULD load only these files — not core/ or extract/computed/.",
+  "schema": "contracts/contract.schema.json",
+  "manifest": "conformance/MANIFEST.json",
+  "cases": [
+    {
+      "id": "border-radius-px",
+      "expect": "CARRIED",
+      "case": "conformance/cases/border-radius-px/case.json",
+      "seed": "conformance/seeds/border-radius-px.contract.json"
+    },
+    {
+      "id": "color-hex",
+      "expect": "CARRIED",
+      "case": "conformance/cases/color-hex/case.json",
+      "seed": "conformance/seeds/color-hex.contract.json"
+    },
+    {
+      "id": "display-flex",
+      "expect": "CARRIED",
+      "case": "conformance/cases/display-flex/case.json",
+      "seed": "conformance/seeds/display-flex.contract.json"
+    },
+    {
+      "id": "calc-var",
+      "expect": "LOWERED",
+      "case": "conformance/cases/calc-var/case.json",
+      "seed": "conformance/seeds/calc-var.contract.json"
+    },
+    {
+      "id": "custom-prop-two-hop",
+      "expect": "LOWERED",
+      "case": "conformance/cases/custom-prop-two-hop/case.json",
+      "seed": "conformance/seeds/custom-prop-two-hop.contract.json"
+    },
+    {
+      "id": "display-out-of-vocab",
+      "expect": "REFUSED",
+      "case": "conformance/cases/display-out-of-vocab/case.json",
+      "seed": "conformance/seeds/display-out-of-vocab.contract.json"
+    },
+    {
+      "id": "grid-2d",
+      "expect": "REFUSED",
+      "case": "conformance/cases/grid-2d/case.json",
+      "seed": "conformance/seeds/grid-2d.contract.json"
+    },
+    {
+      "id": "svg-outside-grammar",
+      "expect": "REFUSED",
+      "case": "conformance/cases/svg-outside-grammar/case.json",
+      "seed": "conformance/seeds/svg-outside-grammar.contract.json"
+    },
+    {
+      "id": "accent-color",
+      "expect": "UNSUPPORTED",
+      "case": "conformance/cases/accent-color/case.json",
+      "seed": "conformance/seeds/accent-color.contract.json"
+    },
+    {
+      "id": "backdrop-filter",
+      "expect": "UNSUPPORTED",
+      "case": "conformance/cases/backdrop-filter/case.json",
+      "seed": "conformance/seeds/backdrop-filter.contract.json"
+    },
+    {
+      "id": "filter-blur",
+      "expect": "UNSUPPORTED",
+      "case": "conformance/cases/filter-blur/case.json",
+      "seed": "conformance/seeds/filter-blur.contract.json"
+    }
+  ]
+}

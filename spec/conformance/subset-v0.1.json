@@ -1,0 +1,111 @@
+{
+  "$schema": "./subset.schema.json",
+  "id": "spec-conformance-subset-v0.1",
+  "title": "Minimal normative subset for foreign implementations (Wave 11-A)",
+  "specDraft": "0.1.0",
+  "frozenAt": "2026-08-05",
+  "status": "draft-frozen",
+  "note": "A second implementation claiming draft conformance MUST cover every rule and fixture below. Expanding the set is a draft bump, not a silent widen.",
+  "normativeRules": [
+    {
+      "id": "N-ID-01",
+      "section": "1. Contract identity",
+      "requirement": "MUST",
+      "text": "Every component contract MUST have a stable id that is never reused for a different component."
+    },
+    {
+      "id": "N-ID-02",
+      "section": "1. Contract identity",
+      "requirement": "MUST",
+      "text": "Identity MUST follow id (and per-surface anchors after first sync); display name MAY change."
+    },
+    {
+      "id": "N-ID-03",
+      "section": "1. Contract identity",
+      "requirement": "MUST",
+      "text": "version MUST be semver and MUST bump when a contract change is published."
+    },
+    {
+      "id": "N-DISP-01",
+      "section": "2. Dispositions",
+      "requirement": "MUST",
+      "text": "For every fact in the declared support grammar, conversion MUST return exactly one of CARRIED, LOWERED, REFUSED, UNSUPPORTED."
+    },
+    {
+      "id": "N-DISP-02",
+      "section": "2. Dispositions",
+      "requirement": "MUST NOT",
+      "text": "Silent loss, silent invention, silent fallback, and silent overwrite are MUST NOT."
+    },
+    {
+      "id": "N-COMPAT-01",
+      "section": "3. Compatibility",
+      "requirement": "MUST",
+      "text": "Removing/renaming a prop or value, or narrowing accepted slot content, MUST be a major change."
+    },
+    {
+      "id": "N-COMPAT-02",
+      "section": "3. Compatibility",
+      "requirement": "MUST NOT",
+      "text": "Existing fields MUST NOT be repurposed to mean something else without a major bump and migration note."
+    },
+    {
+      "id": "N-SURF-01",
+      "section": "4. Surfaces",
+      "requirement": "MUST NOT",
+      "text": "A surface binding MUST NOT invent a canonical value absent from the contract prop enum/type."
+    },
+    {
+      "id": "N-SURF-02",
+      "section": "4. Surfaces",
+      "requirement": "MUST",
+      "text": "Generated artifacts MUST be deterministic for the same supported inputs where the implementation claims determinism."
+    },
+    {
+      "id": "N-ANAT-01",
+      "section": "5. Anatomy",
+      "requirement": "MUST",
+      "text": "Styling decisions MUST live on named anatomy parts, not as unexplained literals on a single surface."
+    },
+    {
+      "id": "N-ANAT-02",
+      "section": "5. Anatomy",
+      "requirement": "MUST",
+      "text": "Nested component instances MUST preserve contract identity or be REFUSED by name."
+    },
+    {
+      "id": "N-REV-01",
+      "section": "6. Review before write",
+      "requirement": "MUST",
+      "text": "Tools that mutate contracts, source, or canvas MUST require an explicit confirmation step before write (or document an equivalent review gate)."
+    },
+    {
+      "id": "N-REV-02",
+      "section": "6. Review before write",
+      "requirement": "MUST",
+      "text": "Suggested write-backs MUST be propose-only unless the operator explicitly applies them."
+    },
+    {
+      "id": "N-CONF-01",
+      "section": "7. Conformance",
+      "requirement": "MUST",
+      "text": "An implementation claiming conformance MUST pass this subset kit (or publish a mapped equivalent with equal coverage) and disclose unsupported grammar rows rather than skipping them as green."
+    }
+  ],
+  "fixtures": {
+    "sourceManifest": "conformance/MANIFEST.json",
+    "cases": [
+      { "id": "border-radius-px", "expect": "CARRIED", "rules": ["N-DISP-01", "N-ANAT-01"] },
+      { "id": "color-hex", "expect": "CARRIED", "rules": ["N-DISP-01"] },
+      { "id": "display-flex", "expect": "CARRIED", "rules": ["N-DISP-01"] },
+      { "id": "calc-var", "expect": "LOWERED", "rules": ["N-DISP-01"] },
+      { "id": "custom-prop-two-hop", "expect": "LOWERED", "rules": ["N-DISP-01"] },
+      { "id": "display-out-of-vocab", "expect": "REFUSED", "rules": ["N-DISP-01", "N-DISP-02"] },
+      { "id": "grid-2d", "expect": "REFUSED", "rules": ["N-DISP-01", "N-DISP-02"] },
+      { "id": "svg-outside-grammar", "expect": "REFUSED", "rules": ["N-DISP-01", "N-DISP-02"] },
+      { "id": "accent-color", "expect": "UNSUPPORTED", "rules": ["N-DISP-01", "N-CONF-01"] },
+      { "id": "backdrop-filter", "expect": "UNSUPPORTED", "rules": ["N-DISP-01", "N-CONF-01"] },
+      { "id": "filter-blur", "expect": "UNSUPPORTED", "rules": ["N-DISP-01", "N-CONF-01"] }
+    ]
+  }
+}
