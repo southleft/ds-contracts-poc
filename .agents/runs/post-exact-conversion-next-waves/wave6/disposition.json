@@ -1,0 +1,21 @@
+{
+  "runId": "post-ecf-wave6",
+  "wave": 6,
+  "title": "ECF closeout + pilot sign-off packaging",
+  "status": "READY-with-human-gate",
+  "branch": "feat/exact-conversion-wave0",
+  "closedAt": "2026-08-05",
+  "ecf": {
+    "waves0to3": "READY",
+    "wave4": "READY-with-human-gate",
+    "wave5": "READY",
+    "denominator": "31/31",
+    "oracleOffline": "32 MATCH · 0 PENDING · 0 FAIL"
+  },
+  "humanGate": {
+    "checklist": ".agents/runs/exact-conversion-finish-wave4/PILOT-ACCEPTANCE.md",
+    "blocksWave7": false,
+    "note": "Persona sign-off is tracked but does not block Phase 1 parity work."
+  },
+  "next": "wave7-anatomy-parity"
+}

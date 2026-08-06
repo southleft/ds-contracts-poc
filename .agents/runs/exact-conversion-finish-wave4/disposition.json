@@ -1,0 +1,30 @@
+{
+  "runId": "exact-conversion-finish-wave4",
+  "wave": 4,
+  "title": "Closed-pilot UX",
+  "status": "READY-with-human-gate",
+  "branch": "feat/exact-conversion-wave0",
+  "closedAt": "2026-08-05",
+  "automation": {
+    "g6PlaygroundCostRouting": true,
+    "g11DiffSummarize": true,
+    "commandSpecificHelp": true,
+    "pilotAcceptanceChecklist": ".agents/runs/exact-conversion-finish-wave4/PILOT-ACCEPTANCE.md",
+    "checks": [
+      "npm run test:playground",
+      "npm run contract-summarize:check",
+      "npm run workflow-spine:check"
+    ]
+  },
+  "humanGate": {
+    "required": true,
+    "checklist": ".agents/runs/exact-conversion-finish-wave4/PILOT-ACCEPTANCE.md",
+    "designerSigned": false,
+    "engineerSigned": false,
+    "note": "Unaided designer + engineer acceptance is the plan exit criterion; automation is complete without claiming persona sign-off."
+  },
+  "deferred": [
+    "G7 suggested-diff stubs (Wave 8 in post-ECF plan)",
+    "Mount/config dry preview beyond review-gate advisories"
+  ]
+}

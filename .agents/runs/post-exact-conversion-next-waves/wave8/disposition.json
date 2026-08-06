@@ -1,0 +1,10 @@
+{
+  "runId": "post-ecf-wave8",
+  "wave": 8,
+  "title": "G7 suggested-diff stubs",
+  "status": "READY-with-human-gate",
+  "closedAt": "2026-08-05",
+  "checks": ["npm run suggested-diff:check", "npm run workflow-spine:check"],
+  "humanGate": "team confirmation of drift report (Phase 2 exit)",
+  "next": "wave9-spec-kit"
+}

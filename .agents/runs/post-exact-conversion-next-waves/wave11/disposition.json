@@ -1,0 +1,16 @@
+{
+  "wave": 11,
+  "name": "governance-second-impl",
+  "disposition": "BLOCKED",
+  "updated": "2026-08-05T23:20:00Z",
+  "blockedOn": "second independent implementation (owner + language)",
+  "packaging": {
+    "W11-A": "READY — spec/conformance/subset-v0.1.json (14 rules, 11 fixtures)",
+    "W11-B": "READY — harness.md + fixture-index-v0.1.json + check-subset.ts + npm run spec:conformance:subset:check",
+    "W11-C": "BLOCKED — no foreign dry-run yet",
+    "W11-D": "READY — spec/README.md graduation path"
+  },
+  "acceptance": {
+    "subsetPin": "npm run spec:conformance:subset:check"
+  }
+}

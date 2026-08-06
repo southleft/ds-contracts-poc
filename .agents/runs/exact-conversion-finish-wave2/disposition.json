@@ -1,0 +1,14 @@
+{
+  "run_id": "exact-conversion-finish-wave2",
+  "seams_triaged": [],
+  "seams": [],
+  "acceptance": {
+    "stratified_corpus": true,
+    "offline_oracle": "32 MATCH · 0 PENDING · 0 FAIL / 32 facts",
+    "live_receipts": "3 completed (button, switch, table); offlineVsLive.agreement=true; liveOnlyDefects=[]",
+    "accuracy_denominators": "untouched — accuracy:check holds",
+    "negative_control": "mui.speed-dial remains unpromoted / fail-closed",
+    "text_field_seed": "mui.text-field + mui.input-adornment promoted with depContractId/depAnchorKey and text-style identity"
+  },
+  "verdict_emitted": "READY"
+}

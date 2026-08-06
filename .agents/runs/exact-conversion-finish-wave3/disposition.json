@@ -1,0 +1,33 @@
+{
+  "run_id": "exact-conversion-finish-wave3",
+  "seams_triaged": ["writes-mutations"],
+  "seams": [
+    {
+      "class": "writes-mutations",
+      "hint": "examples/ci/code-led.yml PR-first branch push (no direct main)",
+      "contract_source": "manager",
+      "contract_evidence": "docs/18 G10 — PR-first CI defaults",
+      "review_result": "remediated-in-recipe",
+      "named_exposures": [],
+      "exposures": [
+        {
+          "id": "code-led-direct-main-write",
+          "summary": "code-led.yml previously git push'd contracts/ to the checked-out branch (main on push).",
+          "disposition": "remediated",
+          "disposer": "manager-implementer",
+          "tracking": "Open or update a PR for refreshed contracts (PR-first — G10); validate.mjs CI_ONLY updated"
+        }
+      ]
+    }
+  ],
+  "acceptance": {
+    "channel_diff": "core/channel-diff.ts + parity/variant-drift wiring; channel-diff:check",
+    "three_way_merge": "core/three-way-merge.ts — auto-compose, need-choices, stale-base; three-way-merge:check",
+    "awaiting_adoption": "awaiting-adoption:check pins silent-revert refusal + adoption clear",
+    "apply_preview": "core/apply-preview.ts recovery receipt; apply-preview:check",
+    "ci_pr_first": "examples/ci/code-led.yml PR-first",
+    "fast_ci": "workflow-spine:check in .github/workflows/fast.yml",
+    "mui_oracle_regression": "32 MATCH · 0 PENDING · 0 FAIL"
+  },
+  "verdict_emitted": "READY"
+}
