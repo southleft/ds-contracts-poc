@@ -128,26 +128,29 @@ function dsCanvasFingerprint(root) {
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return 'v6:' + String(h);
 }
-const TARGET = "2:6";
-const LABEL = "2:4";
 const VAR = "VariableID:2:3";
 const BASELINE = "v6:3552508208";
-const label = await figma.getNodeByIdAsync(LABEL);
-const paddingVar = await figma.variables.getVariableByIdAsync(VAR);
+const node = figma.currentPage.findOne((n) => n.type === "COMPONENT" && n.name === "Tooltip");
+const label = node && node.findOne((n) => n.name === "label");
+let paddingVar = await figma.variables.getVariableByIdAsync(VAR);
+if (!paddingVar) {
+  const vars = await figma.variables.getLocalVariablesAsync();
+  paddingVar = vars.find((v) => v.name === "tooltip/label/padding-left") || null;
+}
 if (!label || !paddingVar) throw new Error("label/variable missing");
-label.paddingLeft = 8;
 label.setBoundVariable("paddingLeft", paddingVar);
 await dsLoadVarNames();
-const node = await figma.getNodeByIdAsync(TARGET);
 const snap = dsCanvasSnapshot(node);
 const fp = dsCanvasFingerprint(node);
 const bv = label.boundVariables && label.boundVariables.paddingLeft;
 return {
   phase: "restored",
+  nodeId: node.id,
+  labelId: label.id,
   baseline: BASELINE,
   fingerprint: fp,
   clean: fp === BASELINE,
   paddingLeft: label.paddingLeft,
   bound: bv ? { id: bv.id, name: dsVarNames[bv.id] || null } : null,
-  layoutAndBoundLines: snap.filter(l => l.includes("|layout|") || l.includes("|bound:"))
+  layoutAndBoundLines: snap.filter((l) => l.includes("|layout|") || l.includes("|bound:"))
 };

@@ -31,8 +31,9 @@ Accuracy / grammar / MUI DENOMINATOR membership were **not** shrunk. SpeedDial r
 
 Live Figma V1-EVID-04: edit→detect→restore proven on
 [DS-Contracts-Testing](https://www.figma.com/design/GnQnjSNBXtgtd2Ht0Hs1C8/DS-Contracts-Testing)
-(`v6:3552508208` → `v6:4062076634` → restore). Console MCP replay scripts:
-`parity/receipts/console-mcp/` (cloud session used official `use_figma`; Plugin API equivalent).
+(`v6:3552508208` → `v6:4062076634` → restore). **Console MCP re-ack complete**
+(local Desktop Bridge `figma_execute`, port 9224) — same stamps as the earlier
+cloud `use_figma` session. Replay scripts: `parity/receipts/console-mcp/`.
 
 Wave ledgers: `PLAN.md`, `wave6/`…`wave11/`.
 
@@ -50,8 +51,6 @@ Wave ledgers: `PLAN.md`, `wave6/`…`wave11/`.
 | 6 | Cloudflare deploy + post-deploy `deploy:check` | `RELEASE_CHECKLIST.md` | Deploy secrets / owner |
 | 7 | Wave 11-C — named second implementation + harness dry-run | `wave11/ledger.md` · `spec/conformance/` | Packaging alone ≠ Candidate; **do not invent a foreign impl** |
 | 8 | Phase 4 governance / community after real second impl | `ROADMAP.md` · `docs/12-roadmap.md` | Blocked on W11-C |
-
-Optional owner acknowledgment (not automation-blocked): re-open Console MCP Desktop Bridge and replay `parity/receipts/console-mcp/` against the same file if you want a Console-MCP-native transport stamp.
 
 ---
 

@@ -128,21 +128,21 @@ function dsCanvasFingerprint(root) {
   for (var i = 0; i < s.length; i++) h = (((h << 5) + h) + s.charCodeAt(i)) >>> 0;
   return 'v6:' + String(h);
 }
-const TARGET = "2:6";
 const BASELINE = "v6:3552508208";
 await dsLoadVarNames();
-const node = await figma.getNodeByIdAsync(TARGET);
+const node = figma.currentPage.findOne((n) => n.type === "COMPONENT" && n.name === "Tooltip");
 if (!node) throw new Error("Tooltip missing");
-const label = node.findOne(n => n.name === "label");
+const label = node.findOne((n) => n.name === "label");
 const snap = dsCanvasSnapshot(node);
 const fp = dsCanvasFingerprint(node);
 const bv = label && label.boundVariables && label.boundVariables.paddingLeft;
 return {
   phase: "after-edit",
+  nodeId: node.id,
   baseline: BASELINE,
   fingerprint: fp,
   drifted: fp !== BASELINE,
   paddingLeft: label ? label.paddingLeft : null,
   bound: bv ? { id: bv.id, name: dsVarNames[bv.id] || null } : null,
-  layoutAndBoundLines: snap.filter(l => l.includes("|layout|") || l.includes("|bound:"))
+  layoutAndBoundLines: snap.filter((l) => l.includes("|layout|") || l.includes("|bound:"))
 };

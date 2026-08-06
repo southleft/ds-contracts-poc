@@ -9,17 +9,19 @@ Console MCP replay scripts: [console-mcp/](./console-mcp/)
 ## Baseline
 
 - File: `DS-Contracts-Testing` (`GnQnjSNBXtgtd2Ht0Hs1C8`)
-- Component: `Tooltip` (`2:6`)
-- Controlled part: `label` (`2:4`)
+- Component: `Tooltip` (`1:5` after Console MCP re-seed; prior cloud session used `2:6`)
+- Controlled part: `label` (`1:3`; prior `2:4`)
 - Variable: `tooltip/label/padding-left` (`VariableID:2:3`)
 - v6 baseline stamp: `v6:3552508208`
 - Baseline snapshot lines: 13
 - Baseline: label left padding 8, bound to `tooltip/label/padding-left`
 
-Transport note: this session executed Plugin API JS through the official Figma
-MCP `use_figma` because the cloud agent had no Figma Console MCP attached.
-`figma_execute` (Console MCP / Desktop Bridge) is the equivalent transport —
-replay scripts under `console-mcp/` are written for that path.
+Transport: **Figma Console MCP** `figma_execute` via Desktop Bridge (local mode,
+port 9224, plugin 1.39.0). Prior cloud session used official Figma MCP
+`use_figma` and produced the same v6 stamps; this local run re-seeded the
+Tooltip (canvas had been cleared; variable retained) and re-acked
+baseline→edit→restore. Replay scripts under `console-mcp/` discover nodes by
+name — do not hardcode stale node IDs.
 
 ## Controlled edit
 
@@ -49,7 +51,7 @@ meaning-changing variable detach. The result does not depend on mock geometry.
 The label padding was restored to 8 and rebound to
 `tooltip/label/padding-left` (`VariableID:2:3`). A final full recompute returned
 `v6:3552508208` with zero residual fingerprint drift. Final visual matched the
-baseline.
+baseline (section screenshot via `figma_capture_screenshot` on `1:2`).
 
 The component remains visually unchanged and clean under a v6 stamp. No token,
 credential, file content, or private API response is included in this receipt.

@@ -24,8 +24,10 @@ edit→detect→restore probe against
 | 5 | `figma_execute` | `05-restore.js` → must match baseline |
 | 6 | repo | `npm run live-figma:evidence:check` |
 
-If the seeded Tooltip (`2:6`) already exists from the 2026-08-06 session, skip
-re-seed and start at step 2.
+Scripts discover `Tooltip` / `label` by name (node IDs churn across re-seeds).
+If inspect reports `tooltip: null`, re-seed via `figma_execute` (see receipt
+narrative) before step 2. Variable `tooltip/label/padding-left` may already
+exist (`VariableID:2:3` on the 2026-08-06 file).
 
 ## Eval surface
 
