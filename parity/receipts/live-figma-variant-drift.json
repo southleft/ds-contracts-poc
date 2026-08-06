@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "kind": "live-figma-variant-drift",
+  "status": "completed",
+  "runId": "ds-contracts-testing-console-probe-2026-08-06",
+  "recordedAt": "2026-08-06T02:40:00Z",
+  "transport": {
+    "intended": "figma-console-mcp (figma_execute + Desktop Bridge)",
+    "used": "official-figma-mcp use_figma",
+    "note": "Cloud agent session had no Figma Console MCP attached; Plugin API execution model is equivalent per docs/handoff/06-tooling.md. Console-MCP replay scripts live under parity/receipts/console-mcp/."
+  },
+  "session": {
+    "fileKey": "GnQnjSNBXtgtd2Ht0Hs1C8",
+    "fileName": "DS-Contracts-Testing",
+    "fileUrl": "https://www.figma.com/design/GnQnjSNBXtgtd2Ht0Hs1C8/DS-Contracts-Testing",
+    "componentId": "2:6",
+    "componentName": "Tooltip",
+    "labelId": "2:4",
+    "variableId": "VariableID:2:3",
+    "variableName": "tooltip/label/padding-left"
+  },
+  "fingerprintVersion": "v6",
+  "phases": {
+    "baseline": {
+      "fingerprint": "v6:3552508208",
+      "paddingLeft": 8,
+      "bound": "tooltip/label/padding-left",
+      "lineCount": 13
+    },
+    "afterEdit": {
+      "fingerprint": "v6:4062076634",
+      "paddingLeft": 12,
+      "bound": null,
+      "drifted": true,
+      "changedFacts": [
+        "/0:FRAME/label|layout HORIZONTAL MIN/MIN gap 0 pad 4,8,4,8 → pad 4,8,4,12",
+        "/0:FRAME/label|bound:paddingLeft tooltip/label/padding-left → (removed)"
+      ]
+    },
+    "restored": {
+      "fingerprint": "v6:3552508208",
+      "paddingLeft": 8,
+      "bound": "tooltip/label/padding-left",
+      "clean": true,
+      "lineCount": 13
+    }
+  },
+  "acceptance": {
+    "editDetachedBinding": true,
+    "editChangedFingerprint": true,
+    "restoreMatchedBaseline": true,
+    "offlineVariantDriftCheck": "npm run variant-drift:check"
+  },
+  "artifacts": {
+    "narrative": "parity/receipts/live-figma-variant-drift.md",
+    "consoleMcpScripts": "parity/receipts/console-mcp/",
+    "fingerprintSource": "core/canvas-fingerprint.ts"
+  }
+}

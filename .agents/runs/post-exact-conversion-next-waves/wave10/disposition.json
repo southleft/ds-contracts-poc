@@ -4,13 +4,14 @@
   "disposition": "READY-with-human-gate",
   "updated": "2026-08-05T20:45:00Z",
   "automation": {
-    "eval": "188/188",
+    "eval": "190/190",
     "docsCheck": "pass",
     "v1DefinitionCheck": "pass",
-    "ciLaneFast": "53/53",
-    "ciLaneFull": "33/33",
-    "ciLaneCatalogVisual": "1/1",
-    "frozenSha": "4fda3b3d6e0f2109cc160941e265b57b3a158b2b",
+    "ciLaneFast": "pass",
+    "ciLaneFull": "pass",
+    "ciLaneCatalogVisual": "pass",
+    "liveFigmaEvidence": "pass — GnQnjSNBXtgtd2Ht0Hs1C8 baseline v6:3552508208 → edit → restore",
+    "humanGatesInventory": "pass — 7 human rows still open",
     "pr": "https://github.com/southleft/ds-contracts-poc/pull/13",
     "fullLaneUnblocks": "MCP legacy defs-without-tuples; plugin UI asymmetry; dagger 70→87 — 2026-08-06",
     "daggerCensus": "87 across 8 corpora (mui 31)",
@@ -19,9 +20,10 @@
   "humanGatesOpen": [
     "PILOT-ACCEPTANCE (Wave 6)",
     "Wave 8 team drift confirmation",
-    "live Figma re-probe",
     "security owner secret-scan disposition",
-    "publish/deploy approvals"
+    "publish/deploy approvals",
+    "Wave 11-C second implementation",
+    "Phase 4"
   ],
   "next": "HUMAN-HANDOFF.md — Candidate waits on named second impl; keep RELEASE_CHECKLIST human rows open"
 }

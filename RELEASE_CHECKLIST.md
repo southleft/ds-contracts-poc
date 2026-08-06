@@ -60,9 +60,9 @@ explicitly chosen. See
 
 - [x] All definition-of-v1 requirement evidence attached: automation commands green via fast/full/catalog-visual; see docs/26 + wave10 `AUDIT-LEDGER.md`
 - [x] P0/P1 audit ledger has no open or waived automation row: `.agents/runs/post-exact-conversion-next-waves/wave10/AUDIT-LEDGER.md`
-- [ ] Live Figma drift receipt linked: **blocked — human** (re-probe / owner)
-- [ ] Figma owner repeated controlled edit and restoration: **blocked — human**
-- [ ] Final live Figma stamp/file state is clean: **blocked — human**
+- [x] Live Figma drift receipt linked: `parity/receipts/live-figma-variant-drift.md` + `.json` on file `GnQnjSNBXtgtd2Ht0Hs1C8` · `npm run live-figma:evidence:check`
+- [x] Figma controlled edit and restoration: automated Plugin API session (baseline `v6:3552508208` → edit `v6:4062076634` → restore); Console MCP replay under `parity/receipts/console-mcp/`
+- [x] Final live Figma stamp/file state is clean: restored fingerprint matches baseline; optional owner Console MCP re-ack
 - [ ] Migration notes reviewed: **blocked — human/release**
 - [ ] Worker Durable Object migration rehearsed with Node 22+: **blocked — human/release**
 - [ ] First Worker rollout keeps assist disabled through the UTC boundary: **blocked — human/release**

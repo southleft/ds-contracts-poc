@@ -1,6 +1,6 @@
 {
-  "passed": 188,
-  "total": 188,
+  "passed": 190,
+  "total": 190,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -939,6 +939,16 @@
     },
     {
       "id": "minted-leaves-bind-to-something",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "live-figma-evidence-receipt",
+      "claim": "C3-detection",
+      "pass": true
+    },
+    {
+      "id": "human-gate-inventory-honest",
       "claim": "C2-refusal",
       "pass": true
     }

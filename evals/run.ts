@@ -8949,6 +8949,53 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       );
     },
   },
+
+  {
+    // V1-EVID-04 live half — machine receipt for edit→detect→restore on a real
+    // Figma file. Offline half stays variant-drift:check. Console MCP replay
+    // scripts under parity/receipts/console-mcp/ are transport docs, not this pin.
+    id: 'live-figma-evidence-receipt',
+    claim: 'C3-detection',
+    run: () => {
+      const r = spawnSync(process.execPath, ['scripts/live-figma-evidence-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`live-figma-evidence-check failed:\n${out}`);
+      }
+      if (!out.includes('completed receipt')) {
+        throw new Error('live-figma-evidence-check did not report a completed receipt');
+      }
+      console.log(
+        'live-figma-evidence-receipt: committed V1-EVID-04 machine twin proves baseline→detached-edit→restore on DS-Contracts-Testing; offline half remains variant-drift:check',
+      );
+    },
+  },
+
+  {
+    // Human/release/second-impl rows must stay listed open — packaging and live
+    // receipts must not silently promote to "v1 shipped" or Phase 3 Candidate.
+    id: 'human-gate-inventory-honest',
+    claim: 'C2-refusal',
+    run: () => {
+      const r = spawnSync(process.execPath, ['scripts/human-gate-inventory-check.mjs'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+      if ((r.status ?? -1) !== 0) {
+        throw new Error(`human-gates:inventory failed:\n${out}`);
+      }
+      if (!out.includes('still open')) {
+        throw new Error('human-gates:inventory did not report open rows');
+      }
+      console.log(
+        'human-gate-inventory-honest: HUMAN-HANDOFF still lists pilot/Wave8/security/publish/deploy/W11-C/Phase4 and refuses false v1/Candidate claims',
+      );
+    },
+  },
 ];
 
 // ---------------------------------------------------------------------------

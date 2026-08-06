@@ -451,7 +451,7 @@ What makes a library-specific hack expensive rather than merely discouraged:
 
 | instrument | what it pins | how to run |
 |---|---|---|
-| **Eval suite** | 188/188 evals as of `evals/results.json` — by claim family: 29 refusal, 32 determinism, 45 detection, 58 extraction, 4 convergence, 5 CLI, 13 journey, 1 theming (derive it: `python3 -c "import json,collections; print(collections.Counter(x['claim'] for x in json.load(open('evals/results.json'))['results']))"`) | `npm run eval` |
+| **Eval suite** | 190/190 evals as of `evals/results.json` — by claim family: 30 refusal, 32 determinism, 47 detection, 58 extraction, 4 convergence, 5 CLI, 13 journey, 1 theming (derive it: `python3 -c "import json,collections; print(collections.Counter(x['claim'] for x in json.load(open('evals/results.json'))['results']))"`) | `npm run eval` |
 | **Golden byte-identity** | recorded generated output, byte-compared — determinism against a *record*, not just against itself | `golden-generated-output` eval, `evals/golden.json` |
 | **Per-library genesis pins** | one eval each: `astryx-figma-genesis`, `mui-figma-genesis`, `tailwind-figma-genesis`, `carbon-figma-genesis`, `altitude-shadow-dom-genesis`, `polaris-showcase-reproducible` | `npm run eval` |
 | **Sibling-bundle flows** | each library's `*.bundle.json` runs through the **real engine path** and must build its full component count with its full variable inventory — MUI 14, Astryx 13, Polaris 12, Carbon 10, plus the Astryx docs-theme re-skin proving the same inventory re-themes | `npm run plugin:check` (`scripts/plugin-engine-check.mjs`, ~1,150 lines) |
@@ -845,7 +845,7 @@ Figma account or a network call except `npm install`.
 npm install
 
 # ── the claim's own numbers ────────────────────────────────────────────────
-npm run eval                       # 188/188 as of evals/results.json
+npm run eval                       # 190/190 as of evals/results.json
 node -e "const r=require('./evals/results.json');console.log(r.passed+'/'+r.total)"
 
 # 54 drift rows, per library

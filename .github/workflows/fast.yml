@@ -222,6 +222,18 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run mui:oracle:live:check
 
+      - name: live-figma:evidence:check (V1-EVID-04 live receipt machine twin)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run live-figma:evidence:check
+
+      - name: test:live-figma-evidence (receipt gate refuses forged clean edit)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run test:live-figma-evidence
+
+      - name: human-gates:inventory (pilot/Wave8/publish/second-impl still open)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run human-gates:inventory
+
       - name: mui 50% denominator freeze (Wave 5 — no shrink)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run mui:denominator:check

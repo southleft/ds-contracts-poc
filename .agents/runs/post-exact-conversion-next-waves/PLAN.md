@@ -12,7 +12,7 @@ SpeedDial remains a fail-closed negative control outside the MUI denominator.
 | 7 Anatomy parity | READY | `wave7/` + `anatomy-diff:check` + `variant-drift:check` |
 | 8 G7 stubs | READY-with-human-gate | `wave8/` + `suggested-diff:check` |
 | 9 Spec draft | READY | `spec/` + `wave9/` |
-| 10 v1 gates | READY-with-human-gate | `wave10/` — evals **188/188**, fast **53/53**, full **33/33**, catalog-visual **1/1** @ `4fda3b3` / PR #13; human release rows open · see `HUMAN-HANDOFF.md` |
+| 10 v1 gates | READY-with-human-gate | `wave10/` — evals **190/190**, live-figma evidence + human-gate inventory gated; lanes green on PR #13; human release rows open · see `HUMAN-HANDOFF.md` |
 | 11 Governance | BLOCKED (second impl) · A/B/D packaged | `wave11/` — subset + fixture-index + harness |
 
 Sources: [ROADMAP.md](../../../ROADMAP.md), [docs/26](../../../docs/26-v1-definition.md), [docs/12](../../../docs/12-roadmap.md).
@@ -37,7 +37,7 @@ Sources: [ROADMAP.md](../../../ROADMAP.md), [docs/26](../../../docs/26-v1-defini
 
 ## Wave 10 — v1 release gates (docs/26)
 
-**Goal:** Binary readiness inventory and close automation-capable gates. **DONE** for automation (`188/188`, `docs:check`); human/release surfaces remain READY-with-human-gate. See `wave10/CLOSEOUT.md` + `AUDIT-LEDGER.md`.
+**Goal:** Binary readiness inventory and close automation-capable gates. **DONE** for automation (`190/190`, live-figma evidence, `docs:check`); human/release surfaces remain READY-with-human-gate. See `wave10/CLOSEOUT.md` + `AUDIT-LEDGER.md` + `HUMAN-HANDOFF.md`.
 
 ## Wave 11 — Governance after second impl
 
