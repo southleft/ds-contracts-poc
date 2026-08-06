@@ -249,7 +249,7 @@
                     "color": "{imported.slider.progress-left-control-left-number.color}",
                     "font-size": "{imported.text.text-md-medium.font-size}",
                     "font-weight": "{imported.text.text-md-medium.font-weight}",
-                    "line-height": "{imported.shared.size-24}",
+                    "line-height": "{imported.text.text-md-medium.line-height}",
                     "left": "{imported.slider.progress-left-control-left-number.left.{leftControl}}",
                     "right": "{imported.slider.progress-left-control-left-number.right.{leftControl}}",
                     "top": "{imported.slider.progress-left-control-left-number.top}"
@@ -385,7 +385,7 @@
                     "color": "{imported.slider.progress-right-control-right-number.color}",
                     "font-size": "{imported.text.text-md-medium.font-size}",
                     "font-weight": "{imported.text.text-md-medium.font-weight}",
-                    "line-height": "{imported.shared.size-24}",
+                    "line-height": "{imported.text.text-md-medium.line-height}",
                     "right": "{imported.slider.progress-right-control-right-number.right.{rightControl}}",
                     "top": "{imported.slider.progress-right-control-right-number.top}"
                   }

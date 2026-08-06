@@ -271,27 +271,69 @@
         "font-size": {
           "xl": {
             "$value": "20px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text xl/Medium"
+                }
+              }
+            }
           },
           "2xl": {
             "$value": "24px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Display xs/Medium"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "18px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text lg/Medium"
+                }
+              }
+            }
           },
           "md": {
             "$value": "16px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Medium"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "14px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Medium"
+                }
+              }
+            }
           },
           "xs": {
             "$value": "12px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text xs/Medium"
+                }
+              }
+            }
           }
         },
         "font-weight": {
@@ -301,27 +343,69 @@
         "line-height": {
           "xl": {
             "$value": "30px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text xl/Medium"
+                }
+              }
+            }
           },
           "2xl": {
             "$value": "32px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Display xs/Medium"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "28px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text lg/Medium"
+                }
+              }
+            }
           },
           "md": {
             "$value": "24px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Medium"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "20px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Medium"
+                }
+              }
+            }
           },
           "xs": {
             "$value": "18px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text xs/Medium"
+                }
+              }
+            }
           }
         },
         "left": {
@@ -828,97 +912,316 @@
       "text-xs-medium": {
         "font-size": {
           "$value": "12px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text xs/Medium"
+              }
+            }
+          }
         },
         "font-weight": {
           "$value": "500",
-          "$type": "number"
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text xs/Medium"
+              }
+            }
+          }
         },
         "line-height": {
           "$value": "18px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text xs/Medium"
+              }
+            }
+          }
         }
       },
       "text-xs-semibold": {
+        "font-size": {
+          "$value": "12px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text xs/Semibold"
+              }
+            }
+          }
+        },
         "font-weight": {
           "$value": "600",
-          "$type": "number"
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text xs/Semibold"
+              }
+            }
+          }
         },
         "line-height": {
           "$value": "18px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text xs/Semibold"
+              }
+            }
+          }
         }
       },
       "text-xs-regular": {
+        "font-size": {
+          "$value": "12px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text xs/Regular"
+              }
+            }
+          }
+        },
         "font-weight": {
           "$value": "400",
-          "$type": "number"
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text xs/Regular"
+              }
+            }
+          }
         },
         "line-height": {
           "$value": "18px",
-          "$type": "dimension"
-        },
-        "font-size": {
-          "$value": "12px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text xs/Regular"
+              }
+            }
+          }
         }
       },
       "text-md-medium": {
         "font-size": {
           "$value": "16px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text md/Medium"
+              }
+            }
+          }
         },
         "font-weight": {
           "$value": "500",
-          "$type": "number"
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text md/Medium"
+              }
+            }
+          }
+        },
+        "line-height": {
+          "$value": "24px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text md/Medium"
+              }
+            }
+          }
         }
       },
       "text-sm-medium": {
         "font-size": {
           "$value": "14px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text sm/Medium"
+              }
+            }
+          }
         },
         "font-weight": {
           "$value": "500",
-          "$type": "number"
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text sm/Medium"
+              }
+            }
+          }
         },
         "line-height": {
           "$value": "20px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text sm/Medium"
+              }
+            }
+          }
+        }
+      },
+      "text-md-regular": {
+        "font-size": {
+          "$value": "16px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text md/Regular"
+              }
+            }
+          }
+        },
+        "font-weight": {
+          "$value": "400",
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text md/Regular"
+              }
+            }
+          }
+        },
+        "line-height": {
+          "$value": "24px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text md/Regular"
+              }
+            }
+          }
         }
       },
       "text-sm-regular": {
+        "font-size": {
+          "$value": "14px",
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text sm/Regular"
+              }
+            }
+          }
+        },
+        "font-weight": {
+          "$value": "400",
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text sm/Regular"
+              }
+            }
+          }
+        },
         "line-height": {
           "$value": "20px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text sm/Regular"
+              }
+            }
+          }
         }
       },
       "text-md-semibold": {
         "font-size": {
           "$value": "16px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text md/Semibold"
+              }
+            }
+          }
         },
         "font-weight": {
           "$value": "600",
-          "$type": "number"
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text md/Semibold"
+              }
+            }
+          }
         },
         "line-height": {
           "$value": "24px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text md/Semibold"
+              }
+            }
+          }
         }
       },
       "text-sm-semibold": {
         "font-size": {
           "$value": "14px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text sm/Semibold"
+              }
+            }
+          }
         },
         "font-weight": {
           "$value": "600",
-          "$type": "number"
+          "$type": "number",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text sm/Semibold"
+              }
+            }
+          }
         },
         "line-height": {
           "$value": "20px",
-          "$type": "dimension"
+          "$type": "dimension",
+          "$extensions": {
+            "dsContracts": {
+              "textStyle": {
+                "name": "Text sm/Semibold"
+              }
+            }
+          }
         }
       }
     },
@@ -1239,19 +1542,47 @@
         "font-size": {
           "md": {
             "$value": "14px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Semibold"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "16px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Semibold"
+                }
+              }
+            }
           },
           "xl": {
             "$value": "16px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Semibold"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "14px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Semibold"
+                }
+              }
+            }
           }
         },
         "font-weight": {
@@ -1261,19 +1592,47 @@
         "line-height": {
           "md": {
             "$value": "20px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Semibold"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "24px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Semibold"
+                }
+              }
+            }
           },
           "xl": {
             "$value": "24px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Semibold"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "20px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Semibold"
+                }
+              }
+            }
           }
         }
       }
@@ -1658,14 +2017,6 @@
       "color-737373": {
         "$value": "#737373",
         "$type": "color"
-      },
-      "size-16": {
-        "$value": "16px",
-        "$type": "dimension"
-      },
-      "num-400": {
-        "$value": "400",
-        "$type": "number"
       }
     },
     "avatar-add-button": {
@@ -2501,19 +2852,47 @@
         "font-size": {
           "md": {
             "$value": "14px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Medium"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "14px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Medium"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "12px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text xs/Medium"
+                }
+              }
+            }
           },
           "xs": {
             "$value": "12px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text xs/Medium"
+                }
+              }
+            }
           }
         },
         "font-weight": {
@@ -2523,19 +2902,47 @@
         "line-height": {
           "md": {
             "$value": "20px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Medium"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "20px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Medium"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "18px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text xs/Medium"
+                }
+              }
+            }
           },
           "xs": {
             "$value": "18px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text xs/Medium"
+                }
+              }
+            }
           }
         },
         "left": {
@@ -2631,19 +3038,47 @@
         "font-size": {
           "md": {
             "$value": "36px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Display md/Semibold"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "48px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Display lg/Semibold"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "30px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Display sm/Semibold"
+                }
+              }
+            }
           },
           "xs": {
             "$value": "24px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Display xs/Semibold"
+                }
+              }
+            }
           }
         },
         "font-weight": {
@@ -2653,19 +3088,47 @@
         "line-height": {
           "md": {
             "$value": "44px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Display md/Semibold"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "60px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Display lg/Semibold"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "38px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Display sm/Semibold"
+                }
+              }
+            }
           },
           "xs": {
             "$value": "32px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Display xs/Semibold"
+                }
+              }
+            }
           }
         }
       },
@@ -4719,19 +5182,47 @@
         "font-size": {
           "md": {
             "$value": "14px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Semibold"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "16px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Semibold"
+                }
+              }
+            }
           },
           "xl": {
             "$value": "18px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text lg/Semibold"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "14px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Semibold"
+                }
+              }
+            }
           }
         },
         "font-weight": {
@@ -4741,19 +5232,47 @@
         "line-height": {
           "md": {
             "$value": "20px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Semibold"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "24px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Semibold"
+                }
+              }
+            }
           },
           "xl": {
             "$value": "28px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text lg/Semibold"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "20px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Semibold"
+                }
+              }
+            }
           }
         }
       },
@@ -4765,19 +5284,47 @@
         "font-size": {
           "md": {
             "$value": "14px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Regular"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "16px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Regular"
+                }
+              }
+            }
           },
           "xl": {
             "$value": "16px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Regular"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "12px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text xs/Regular"
+                }
+              }
+            }
           }
         },
         "font-weight": {
@@ -4787,19 +5334,47 @@
         "line-height": {
           "md": {
             "$value": "20px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text sm/Regular"
+                }
+              }
+            }
           },
           "lg": {
             "$value": "24px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Regular"
+                }
+              }
+            }
           },
           "xl": {
             "$value": "24px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text md/Regular"
+                }
+              }
+            }
           },
           "sm": {
             "$value": "18px",
-            "$type": "dimension"
+            "$type": "dimension",
+            "$extensions": {
+              "dsContracts": {
+                "textStyle": {
+                  "name": "Text xs/Regular"
+                }
+              }
+            }
           }
         }
       }

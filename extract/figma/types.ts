@@ -60,6 +60,9 @@ export interface DumpText {
    *  styles mirror semantic size-token paths ('badge' ← font.badge.size,
    *  'control/sm' ← font.control.size.sm), so this is a token identity. */
   style?: string;
+  /** Published TextStyle key when available (dump v1.15, additive). Local
+   *  styles may have no portable key; their exact name remains the identity. */
+  styleKey?: string;
   /** Variable behind the text fill (slash-form), when bound. */
   fillVar?: string;
 }
@@ -135,6 +138,11 @@ export interface DumpNode {
    *  same contract `slot` part the INSTANCE_SWAP spelling maps to, with a
    *  named provenance note (regeneration should reproduce the spelling). */
   type: 'COMPONENT' | 'FRAME' | 'TEXT' | 'INSTANCE' | 'SLOT' | string;
+  /** dump v1.14: authoritative realized VARIANT values for a direct child of
+   *  a COMPONENT_SET. Keys are preserved verbatim from Figma's component
+   *  property API; consumers must not reconstruct this tuple from `name`.
+   *  Absence means legacy/not captured, never an empty tuple. */
+  variantProperties?: Record<string, string>;
   layout?: DumpLayout;
   /** Literal corner radius when uniform and nonzero. Bound radii are in `bound`. */
   cornerRadius?: number;
@@ -292,12 +300,48 @@ export interface DumpPreferredValue {
   key: string;
 }
 
+/** dump v1.14: the full set-level component property definition. Property
+ *  keys are preserved verbatim, including Figma's `#…` identity suffixes.
+ *  Keeping the discriminated shape lets exact-projection validation compare
+ *  the authoritative axis inventory against every realized row before any
+ *  name normalization or semantic state/theme promotion occurs. */
+export type DumpPropertyDefinition =
+  | {
+      type: 'VARIANT';
+      defaultValue: string;
+      variantOptions: string[];
+    }
+  | {
+      type: 'BOOLEAN';
+      defaultValue: boolean;
+    }
+  | {
+      type: 'TEXT';
+      defaultValue: string;
+    }
+  | {
+      type: 'INSTANCE_SWAP';
+      defaultValue: string;
+      preferredValues?: DumpPreferredValue[];
+    }
+  | {
+      type: 'SLOT';
+      defaultValue: string;
+      preferredValues?: DumpPreferredValue[];
+      description?: string;
+      slotSettings?: Record<string, unknown>;
+    };
+
 export interface DumpSet {
   setName: string;
   type: 'COMPONENT_SET' | 'COMPONENT';
   /** Set-level anchors (dump v1.1, additive). */
   nodeId?: string;
   key?: string;
+  /** Full, verbatim component-property definitions (dump v1.14, additive).
+   *  New exact consumers prefer this field. Absence means the producer did
+   *  not capture structured metadata, so exactness is unverified. */
+  propertyDefinitions?: Record<string, DumpPropertyDefinition>;
   /** INSTANCE_SWAP property definitions' preferredValues (dump v1.5,
    *  additive), keyed by property name with the "#id" suffix stripped —
    *  the same spelling propRefs.mainComponent carries. Absence in older

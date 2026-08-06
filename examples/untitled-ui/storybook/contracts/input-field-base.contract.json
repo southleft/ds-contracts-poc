@@ -84,7 +84,7 @@
               },
               "tokens": {
                 "color": "{imported.input-field-base.input-with-label-label.color}",
-                "font-size": "{imported.shared.size-14}",
+                "font-size": "{imported.text.text-sm-medium.font-size}",
                 "font-weight": "{imported.text.text-sm-medium.font-weight}",
                 "line-height": "{imported.text.text-sm-medium.line-height}"
               }
@@ -124,9 +124,9 @@
                       },
                       "tokens": {
                         "color": "{imported.shared.color-737373}",
-                        "font-size": "{imported.shared.size-16}",
-                        "font-weight": "{imported.shared.num-400}",
-                        "line-height": "{imported.shared.size-24}"
+                        "font-size": "{imported.text.text-md-regular.font-size}",
+                        "font-weight": "{imported.text.text-md-regular.font-weight}",
+                        "line-height": "{imported.text.text-md-regular.line-height}"
                       }
                     }
                   },
@@ -164,9 +164,9 @@
                       },
                       "tokens": {
                         "color": "{imported.input-field-base.input-with-label-input-dropdown-dropdown-text.color}",
-                        "font-size": "{imported.shared.size-16}",
-                        "font-weight": "{imported.shared.num-400}",
-                        "line-height": "{imported.shared.size-24}"
+                        "font-size": "{imported.text.text-md-regular.font-size}",
+                        "font-weight": "{imported.text.text-md-regular.font-weight}",
+                        "line-height": "{imported.text.text-md-regular.line-height}"
                       }
                     },
                     "chevronDown": {
@@ -253,9 +253,9 @@
                           },
                           "tokens": {
                             "color": "{imported.shared.color-737373}",
-                            "font-size": "{imported.shared.size-16}",
-                            "font-weight": "{imported.shared.num-400}",
-                            "line-height": "{imported.shared.size-24}"
+                            "font-size": "{imported.text.text-md-regular.font-size}",
+                            "font-weight": "{imported.text.text-md-regular.font-weight}",
+                            "line-height": "{imported.text.text-md-regular.line-height}"
                           }
                         },
                         "textInputText": {
@@ -271,9 +271,9 @@
                           },
                           "tokens": {
                             "color": "{imported.shared.color-737373}",
-                            "font-size": "{imported.shared.size-16}",
-                            "font-weight": "{imported.shared.num-400}",
-                            "line-height": "{imported.shared.size-24}"
+                            "font-size": "{imported.text.text-md-regular.font-size}",
+                            "font-weight": "{imported.text.text-md-regular.font-weight}",
+                            "line-height": "{imported.text.text-md-regular.line-height}"
                           }
                         }
                       },
@@ -312,8 +312,8 @@
         "hintText": {
           "text": "This is a hint text to help user.",
           "tokens": {
-            "font-size": "{imported.shared.size-14}",
-            "font-weight": "{imported.shared.num-400}",
+            "font-size": "{imported.text.text-sm-regular.font-size}",
+            "font-weight": "{imported.text.text-sm-regular.font-weight}",
             "line-height": "{imported.text.text-sm-regular.line-height}"
           }
         }

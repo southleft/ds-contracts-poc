@@ -65,7 +65,7 @@
  * the exact reason (e.g. a variable id that cannot be resolved because the
  * variables endpoint is Enterprise-only). Nothing is invented.
  */
-import type { DumpEffect, DumpFile, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpSet, DumpShape, DumpText } from '../types.js';
+import type { DumpEffect, DumpFile, DumpLayout, DumpNode, DumpPaint, DumpPreferredValue, DumpPropertyDefinition, DumpSet, DumpShape, DumpText } from '../types.js';
 
 // ---------------------------------------------------------------------------
 // REST shapes (trimmed to the consumed fields; figma/rest-api-spec names)
@@ -136,16 +136,18 @@ export interface RestEffect {
 
 /** ComponentProperty (api_types.ts) — applied values on an INSTANCE. */
 export interface RestComponentProperty {
-  type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT';
+  type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT' | 'SLOT';
   value: boolean | string;
 }
 
-/** ComponentPropertyDefinition (api_types.ts) — set-level definitions; only
- *  INSTANCE_SWAP preferredValues are consumed (dump v1.5). */
+/** ComponentPropertyDefinition (api_types.ts) — set-level definitions. */
 export interface RestComponentPropertyDefinition {
-  type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT';
+  type: 'BOOLEAN' | 'INSTANCE_SWAP' | 'TEXT' | 'VARIANT' | 'SLOT';
   defaultValue?: boolean | string;
+  variantOptions?: string[];
   preferredValues?: Array<{ type: string; key: string }>;
+  description?: string;
+  slotSettings?: Record<string, unknown>;
 }
 
 export interface RestNode {
@@ -218,7 +220,7 @@ export interface RestNodesResponse {
       document: RestNode;
       components?: Record<string, { name: string; componentSetId?: string; key?: string }>;
       componentSets?: Record<string, { name: string; key?: string }>;
-      styles?: Record<string, { name: string; styleType?: string }>;
+      styles?: Record<string, { name: string; key?: string; styleType?: string }>;
     } | null
   >;
 }
@@ -275,7 +277,7 @@ export interface MapOptions {
   variables?: RestVariablesResponse;
   /** Extra style-id → name map (e.g. from GET /v1/files/:key/styles). The
    *  nodes response's own styles metadata is always consulted first. */
-  styles?: Record<string, { name: string } | string>;
+  styles?: Record<string, { name: string; key?: string } | string>;
   /** Only map the set/component with this name. */
   target?: string;
   /** File key for _provenance (it rides the URL, not the nodes response). */
@@ -318,7 +320,7 @@ const isAlias = (v: unknown): v is RestVariableAlias =>
 
 interface Ctx {
   varNameById: Map<string, string>;
-  styleNameById: Map<string, string>;
+  styleById: Map<string, { name: string; key?: string }>;
   components: Map<string, { name: string; componentSetId?: string; key?: string }>;
   componentSets: Map<string, { name: string; key?: string }>;
   report: MapReport;
@@ -525,8 +527,11 @@ function mapText(node: RestNode, ctx: Ctx, nodePath: string): DumpText {
   }
   const styleId = node.styles?.text ?? node.styles?.TEXT;
   if (styleId) {
-    const name = ctx.styleNameById.get(styleId);
-    if (name) text.style = name;
+    const style = ctx.styleById.get(styleId);
+    if (style) {
+      text.style = style.name;
+      if (style.key) text.styleKey = style.key;
+    }
     else {
       ctx.report.degradations.push({
         code: 'text-style-unresolved',
@@ -695,6 +700,19 @@ function mapNode(
   parentBox: { x: number; y: number; width: number; height: number } | null = null,
 ): RestDumpNode {
   const out: RestDumpNode = { name: node.name, type: node.type };
+
+  // dump v1.14 structured-axis addition. The REST component-properties map
+  // carries each direct variant row's realized values; preserve its verbatim
+  // keys instead of re-parsing presentation names.
+  if (node.type === 'COMPONENT') {
+    const tuple = Object.fromEntries(
+      Object.entries(node.componentProperties ?? {})
+        .filter(([, property]) => property.type === 'VARIANT' && typeof property.value === 'string')
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([key, property]) => [key, String(property.value)]),
+    );
+    if (Object.keys(tuple).length > 0) out.variantProperties = tuple;
+  }
 
   // dump v1.5: variant-ROOT observed bounding box — the drawn dimension of a
   // FIXED root axis is otherwise unrecoverable (CBDS Dialog field case).
@@ -866,14 +884,21 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     if (doc.name === 'Slot') continue; // utility, never a contract component (dump.plugin.js rule)
     if (options.target && doc.name !== options.target) continue;
 
-    const styleNameById = new Map<string, string>();
-    for (const [id, s] of Object.entries(entry.styles ?? {})) styleNameById.set(id, s.name);
+    const styleById = new Map<string, { name: string; key?: string }>();
+    for (const [id, s] of Object.entries(entry.styles ?? {})) {
+      styleById.set(id, { name: s.name, ...(s.key ? { key: s.key } : {}) });
+    }
     for (const [id, s] of Object.entries(options.styles ?? {})) {
-      styleNameById.set(id, typeof s === 'string' ? s : s.name);
+      styleById.set(
+        id,
+        typeof s === 'string'
+          ? { name: s }
+          : { name: s.name, ...(s.key ? { key: s.key } : {}) },
+      );
     }
     const ctx: Ctx = {
       varNameById,
-      styleNameById,
+      styleById,
       components: new Map(Object.entries(entry.components ?? {})),
       componentSets: new Map(Object.entries(entry.componentSets ?? {})),
       report,
@@ -894,7 +919,48 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
     // `accepts` (unresolvable keys stay named notes, never guessed ids).
     const swapPreferredValues: Record<string, DumpPreferredValue[]> = {};
     const boolDefaults: Record<string, boolean> = {};
+    const propertyDefinitions: Record<string, DumpPropertyDefinition> = {};
     for (const [propName, def] of Object.entries(doc.componentPropertyDefinitions ?? {})) {
+      if (
+        def.type === 'VARIANT' &&
+        typeof def.defaultValue === 'string' &&
+        Array.isArray(def.variantOptions) &&
+        def.variantOptions.length > 0
+      ) {
+        propertyDefinitions[propName] = {
+          type: 'VARIANT',
+          defaultValue: def.defaultValue,
+          variantOptions: def.variantOptions.map(String),
+        };
+      } else if (def.type === 'BOOLEAN' && typeof def.defaultValue === 'boolean') {
+        propertyDefinitions[propName] = {
+          type: 'BOOLEAN',
+          defaultValue: def.defaultValue,
+        };
+      } else if (def.type === 'TEXT' && typeof def.defaultValue === 'string') {
+        propertyDefinitions[propName] = {
+          type: 'TEXT',
+          defaultValue: def.defaultValue,
+        };
+      } else if (def.type === 'INSTANCE_SWAP' && typeof def.defaultValue === 'string') {
+        propertyDefinitions[propName] = {
+          type: 'INSTANCE_SWAP',
+          defaultValue: def.defaultValue,
+          ...(Array.isArray(def.preferredValues) && def.preferredValues.length > 0
+            ? { preferredValues: def.preferredValues.map((value) => ({ type: value.type, key: value.key })) }
+            : {}),
+        };
+      } else if (def.type === 'SLOT' && typeof def.defaultValue === 'string') {
+        propertyDefinitions[propName] = {
+          type: 'SLOT',
+          defaultValue: def.defaultValue,
+          ...(Array.isArray(def.preferredValues) && def.preferredValues.length > 0
+            ? { preferredValues: def.preferredValues.map((value) => ({ type: value.type, key: value.key })) }
+            : {}),
+          ...(typeof def.description === 'string' ? { description: def.description } : {}),
+          ...(def.slotSettings ? { slotSettings: def.slotSettings } : {}),
+        };
+      }
       if (def.type === 'INSTANCE_SWAP' && Array.isArray(def.preferredValues) && def.preferredValues.length > 0) {
         swapPreferredValues[propName.split('#')[0]] = def.preferredValues.map((v) => ({ type: v.type, key: v.key }));
       }
@@ -909,6 +975,7 @@ export function mapRestToDump(nodesResponse: RestNodesResponse, options: MapOpti
       type: doc.type,
       nodeId: doc.id,
       ...(key ? { key } : {}),
+      ...(Object.keys(propertyDefinitions).length > 0 ? { propertyDefinitions } : {}),
       ...(Object.keys(swapPreferredValues).length > 0 ? { swapPreferredValues } : {}),
       ...(Object.keys(boolDefaults).length > 0 ? { boolDefaults } : {}),
       variants,

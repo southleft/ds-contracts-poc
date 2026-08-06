@@ -37,34 +37,58 @@
  * ISOLATION: one set's failure never kills the run. Writes ONLY under
  * extract/figma/gauntlet/live/ (gauntlet.json + GAUNTLET.md + fixtures/).
  */
-import { mkdirSync, readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
-import path from 'node:path';
-import { ContractSchema, componentRefsOf, slotsOf, type Contract } from '../../../../scripts/contract-schema.js';
-import { capturedTokensFromDump } from '../../../../core/captured-tokens.js';
-import { emitters, type EmitterCtx } from '../../../../core/emitter.js';
-import { emitHtml } from '../../../../core/emit-html.js';
-import { mintedTokenCss } from '../../../../core/mint-tokens.js';
-import { createFigmaEngine } from '../../../../core/emit-figma-script.js';
-import { generateCss, validateContract } from '../../../../core/emit-react.js';
-import { flattenTokens, tokenInventoryFromJson, type TokenTreeInput } from '../../../../core/tokens.js';
+import {
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+  existsSync,
+} from "node:fs";
+import path from "node:path";
+import {
+  ContractSchema,
+  componentRefsOf,
+  slotsOf,
+  type Contract,
+} from "../../../../scripts/contract-schema.js";
+import { capturedTokensFromDump } from "../../../../core/captured-tokens.js";
+import { emitters, type EmitterCtx } from "../../../../core/emitter.js";
+import { emitHtml } from "../../../../core/emit-html.js";
+import { mintedTokenCss } from "../../../../core/mint-tokens.js";
+import { createFigmaEngine } from "../../../../core/emit-figma-script.js";
+import { generateCss, validateContract } from "../../../../core/emit-react.js";
+import {
+  flattenTokens,
+  tokenInventoryFromJson,
+  type TokenTreeInput,
+} from "../../../../core/tokens.js";
 import {
   componentIdSlug,
   dumpCapturesHidden,
   proposeBatchFromDump,
   proposeFromDump,
   type MinimalChildContract,
-} from '../../../../core/propose-figma.js';
-import { loadTokenCorpus } from '../../tokens.js';
-import { loadContracts } from '../../propose.js';
-import { dumpSets, sampleSingles, tierSets, type Tier } from './tiers.js';
+} from "../../../../core/propose-figma.js";
+import { loadTokenCorpus } from "../../tokens.js";
+import { loadContracts } from "../../propose.js";
+import { dumpSets, sampleSingles, tierSets, type Tier } from "./tiers.js";
 
 const ROOT = process.cwd();
-const HERE = path.join(ROOT, 'extract', 'figma', 'gauntlet', 'live');
-const FIXTURE_DIR = path.join(HERE, 'fixtures');
-const DUMP_PATH = path.join('extract', 'figma', 'fixtures', 'cbds-plugin-all-sets.v16.dump.json');
+const HERE = path.join(ROOT, "extract", "figma", "gauntlet", "live");
+const FIXTURE_DIR = path.join(HERE, "fixtures");
+const DUMP_PATH = path.join(
+  "extract",
+  "figma",
+  "fixtures",
+  "cbds-plugin-all-sets.v16.dump.json",
+);
 const COMBO_CAP = 256;
 
-const read = (p: string) => JSON.parse(readFileSync(path.join(ROOT, p), 'utf8')) as Record<string, unknown>;
+const read = (p: string) =>
+  JSON.parse(readFileSync(path.join(ROOT, p), "utf8")) as Record<
+    string,
+    unknown
+  >;
 
 // ---------------------------------------------------------------------------
 // Repo composition (census conventions, verbatim semantics)
@@ -72,38 +96,57 @@ const read = (p: string) => JSON.parse(readFileSync(path.join(ROOT, p), 'utf8'))
 
 const dump = read(DUMP_PATH);
 const corpus = loadTokenCorpus(ROOT);
-const loaded = loadContracts(path.resolve(ROOT, 'contracts'));
+const loaded = loadContracts(path.resolve(ROOT, "contracts"));
 const repoContracts = new Map<string, Contract>(
-  readdirSync(path.join(ROOT, 'contracts'))
-    .filter((f) => f.endsWith('.contract.json'))
-    .map((f) => ContractSchema.parse(read(path.join('contracts', f))))
+  readdirSync(path.join(ROOT, "contracts"))
+    .filter((f) => f.endsWith(".contract.json"))
+    .map((f) => ContractSchema.parse(read(path.join("contracts", f))))
     .map((c) => [c.id, c]),
 );
 const icons = new Map<string, string>(
-  readdirSync(path.join(ROOT, 'assets', 'icons'))
-    .filter((f) => f.endsWith('.svg'))
-    .map((f) => [f.replace(/\.svg$/, ''), readFileSync(path.join(ROOT, 'assets', 'icons', f), 'utf8').trim()]),
+  readdirSync(path.join(ROOT, "assets", "icons"))
+    .filter((f) => f.endsWith(".svg"))
+    .map((f) => [
+      f.replace(/\.svg$/, ""),
+      readFileSync(path.join(ROOT, "assets", "icons", f), "utf8").trim(),
+    ]),
 );
 const brands = Object.fromEntries(
-  readdirSync(path.join(ROOT, 'tokens', 'modes'))
+  readdirSync(path.join(ROOT, "tokens", "modes"))
     .filter((f) => /^brand\.[a-z][a-z0-9-]*\.tokens\.json$/.test(f))
-    .map((f) => [f.replace(/^brand\.|\.tokens\.json$/g, ''), read(`tokens/modes/${f}`)]),
+    .map((f) => [
+      f.replace(/^brand\.|\.tokens\.json$/g, ""),
+      read(`tokens/modes/${f}`),
+    ]),
 );
 const repoTrees = {
-  primitives: read('tokens/primitives.tokens.json'),
-  semantic: read('tokens/semantic.tokens.json'),
-  light: read('tokens/modes/semantic.light.tokens.json'),
-  dark: read('tokens/modes/semantic.dark.tokens.json'),
+  primitives: read("tokens/primitives.tokens.json"),
+  semantic: read("tokens/semantic.tokens.json"),
+  light: read("tokens/modes/semantic.light.tokens.json"),
+  dark: read("tokens/modes/semantic.dark.tokens.json"),
 };
-const repoInventory = tokenInventoryFromJson([repoTrees.primitives, repoTrees.semantic, repoTrees.light, repoTrees.dark]);
+const repoInventory = tokenInventoryFromJson([
+  repoTrees.primitives,
+  repoTrees.semantic,
+  repoTrees.light,
+  repoTrees.dark,
+]);
 
 function mergeTrees(docs: Record<string, unknown>[]): Record<string, unknown> {
-  const merge = (a: Record<string, unknown>, b: Record<string, unknown>): Record<string, unknown> => {
+  const merge = (
+    a: Record<string, unknown>,
+    b: Record<string, unknown>,
+  ): Record<string, unknown> => {
     const out: Record<string, unknown> = { ...a };
     for (const [k, v] of Object.entries(b)) {
       const prev = out[k];
       out[k] =
-        prev && v && typeof prev === 'object' && typeof v === 'object' && !Array.isArray(prev) && !Array.isArray(v)
+        prev &&
+        v &&
+        typeof prev === "object" &&
+        typeof v === "object" &&
+        !Array.isArray(prev) &&
+        !Array.isArray(v)
           ? merge(prev as Record<string, unknown>, v as Record<string, unknown>)
           : v;
     }
@@ -115,20 +158,33 @@ function mergeTrees(docs: Record<string, unknown>[]): Record<string, unknown> {
 const captured = capturedTokensFromDump(dump);
 // Full captured-value index (path → resolved value) for the class-①
 // mint routing in SESSION proposals (stage A's batch builds its own).
-const sessionCapturedValues = new Map((captured?.entries ?? []).map((e) => [e.path, e.value] as const));
-const capturedRegistered = (captured?.entries ?? []).filter((e) => !repoInventory.has(e.path));
+const sessionCapturedValues = new Map(
+  (captured?.entries ?? []).map((e) => [e.path, e.value] as const),
+);
+const capturedRegistered = (captured?.entries ?? []).filter(
+  (e) => !repoInventory.has(e.path),
+);
 const capturedTree: Record<string, unknown> = {};
 for (const e of capturedRegistered) {
-  const segs = e.path.split('.');
+  const segs = e.path.split(".");
   let node = capturedTree;
-  for (const seg of segs.slice(0, -1)) node = (node[seg] ??= {}) as Record<string, unknown>;
+  for (const seg of segs.slice(0, -1))
+    node = (node[seg] ??= {}) as Record<string, unknown>;
   node[segs[segs.length - 1]] = { $value: e.value, $type: e.type };
 }
-const baseInventory = new Set<string>([...repoInventory, ...capturedRegistered.map((e) => e.path)]);
-const baseSemantic = mergeTrees([repoTrees.semantic as Record<string, unknown>, capturedTree]);
+const baseInventory = new Set<string>([
+  ...repoInventory,
+  ...capturedRegistered.map((e) => e.path),
+]);
+const baseSemantic = mergeTrees([
+  repoTrees.semantic as Record<string, unknown>,
+  capturedTree,
+]);
 
 const provenance = dump._provenance as { fileKey?: string } | undefined;
-const hiddenCaptured = dumpCapturesHidden(dump._provenance as { note?: string; dumpVersion?: string } | undefined);
+const hiddenCaptured = dumpCapturesHidden(
+  dump._provenance as { note?: string; dumpVersion?: string } | undefined,
+);
 const sets = dumpSets(dump);
 const tiers = tierSets(dump);
 const tierByName = new Map(tiers.map((t) => [t.setName, t]));
@@ -144,25 +200,82 @@ interface Finding {
   set: string;
   evidence: string;
   where: string;
-  known?: 'named-limit' | 'fix-in-flight';
+  known?: "named-limit" | "fix-in-flight";
 }
 const findings: Finding[] = [];
 const KNOWN_LIMIT = [
-  { test: /glyph ink|instance-internal glyph/i, tag: 'named-limit' as const, name: 'instance-internal glyph ink' },
-  { test: /ALPHA_TRIM|bare-alpha/i, tag: 'named-limit' as const, name: 'bare-alpha ALPHA_TRIM' },
-  { test: /small-vertical FILL/i, tag: 'named-limit' as const, name: 'small-vertical FILL' },
-  { test: /min-height-on-canvas/i, tag: 'named-limit' as const, name: 'min-height-on-canvas' },
-  { test: /spacing\/100-negative/i, tag: 'named-limit' as const, name: 'spacing/100-negative name' },
-  { test: /indeterminate/i, tag: 'named-limit' as const, name: 'indeterminate-AT' },
-  { test: /imported\..*does not exist in tokens\//i, tag: 'fix-in-flight' as const, name: 'cross-import minted-token scope' },
-  { test: /without correlating to any variant axis/i, tag: 'named-limit' as const, name: 'parent-axis-correlated stub geometry (197dd02)' },
-  { test: /part-level state overrides are outside the contract vocabulary/i, tag: 'fix-in-flight' as const, name: 'disabled part-label (Part.states P18 — parallel worktree)' },
-  { test: /cross-import-minted-token-scope/, tag: 'fix-in-flight' as const, name: 'cross-import minted-token scope (parallel worktree)' },
-  { test: /duplicate anatomy part name/i, tag: 'fix-in-flight' as const, name: 'duplicate-part-name (dedup branch)' },
+  {
+    test: /glyph ink|instance-internal glyph/i,
+    tag: "named-limit" as const,
+    name: "instance-internal glyph ink",
+  },
+  {
+    test: /ALPHA_TRIM|bare-alpha/i,
+    tag: "named-limit" as const,
+    name: "bare-alpha ALPHA_TRIM",
+  },
+  {
+    test: /small-vertical FILL/i,
+    tag: "named-limit" as const,
+    name: "small-vertical FILL",
+  },
+  {
+    test: /min-height-on-canvas/i,
+    tag: "named-limit" as const,
+    name: "min-height-on-canvas",
+  },
+  {
+    test: /spacing\/100-negative/i,
+    tag: "named-limit" as const,
+    name: "spacing/100-negative name",
+  },
+  {
+    test: /indeterminate/i,
+    tag: "named-limit" as const,
+    name: "indeterminate-AT",
+  },
+  {
+    test: /imported\..*does not exist in tokens\//i,
+    tag: "fix-in-flight" as const,
+    name: "cross-import minted-token scope",
+  },
+  {
+    test: /without correlating to any variant axis/i,
+    tag: "named-limit" as const,
+    name: "parent-axis-correlated stub geometry (197dd02)",
+  },
+  {
+    test: /part-level state overrides are outside the contract vocabulary/i,
+    tag: "fix-in-flight" as const,
+    name: "disabled part-label (Part.states P18 — parallel worktree)",
+  },
+  {
+    test: /cross-import-minted-token-scope/,
+    tag: "fix-in-flight" as const,
+    name: "cross-import minted-token scope (parallel worktree)",
+  },
+  {
+    test: /duplicate anatomy part name/i,
+    tag: "fix-in-flight" as const,
+    name: "duplicate-part-name (dedup branch)",
+  },
 ];
-function addFinding(cls: string, set: string, evidence: string, where: string): void {
-  const known = KNOWN_LIMIT.find((k) => k.test.test(evidence) || k.test.test(cls));
-  findings.push({ cls, set, evidence: evidence.slice(0, 300), where, ...(known ? { known: known.tag } : {}) });
+function addFinding(
+  cls: string,
+  set: string,
+  evidence: string,
+  where: string,
+): void {
+  const known = KNOWN_LIMIT.find(
+    (k) => k.test.test(evidence) || k.test.test(cls),
+  );
+  findings.push({
+    cls,
+    set,
+    evidence: evidence.slice(0, 300),
+    where,
+    ...(known ? { known: known.tag } : {}),
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -172,7 +285,7 @@ function addFinding(cls: string, set: string, evidence: string, where: string): 
 interface BaseRecord {
   setName: string;
   type: string;
-  tier: Tier | 'S'; // 'S' = singles sample
+  tier: Tier | "S"; // 'S' = singles sample
   proposed: boolean;
   skipReason?: string;
   violations: string[];
@@ -195,6 +308,7 @@ interface BaseRecord {
 
 const TOKEN_REF = /"\{[a-z][a-z0-9_-]*(?:\.[a-z0-9_-]+)*\}"/gi;
 const batch = proposeBatchFromDump(dump, {
+  projectionMode: "reviewable-inversion",
   corpus,
   contractIdByName: loaded.byName,
   contractIdByKey: loaded.byKey,
@@ -207,9 +321,13 @@ const proposalsBySet = new Map(batch.proposals.map((p) => [p.setName, p]));
 const skippedBySet = new Map(batch.skipped.map((s) => [s.setName, s]));
 
 const degradationCountBySet = new Map<string, number>();
-for (const d of (dump._degradations as Array<{ nodePath: string }> | undefined) ?? []) {
-  const setName = d.nodePath.slice(0, d.nodePath.indexOf(':'));
-  degradationCountBySet.set(setName, (degradationCountBySet.get(setName) ?? 0) + 1);
+for (const d of (dump._degradations as
+  Array<{ nodePath: string }> | undefined) ?? []) {
+  const setName = d.nodePath.slice(0, d.nodePath.indexOf(":"));
+  degradationCountBySet.set(
+    setName,
+    (degradationCountBySet.get(setName) ?? 0) + 1,
+  );
 }
 
 /** Referee + emit a proposal against a given contracts scope; returns the
@@ -218,12 +336,20 @@ function refereeAndEmit(
   proposal: NonNullable<ReturnType<typeof proposalsBySet.get>>,
   extraContracts: Map<string, Contract>,
   extraMintedTrees: Record<string, unknown>[],
-): { contract: Contract | null; violations: string[]; emitted: string[]; refusals: Array<{ emitter: string; message: string }>; stubs: number } {
+): {
+  contract: Contract | null;
+  violations: string[];
+  emitted: string[];
+  refusals: Array<{ emitter: string; message: string }>;
+  stubs: number;
+} {
   const parsed = ContractSchema.safeParse(proposal.contract);
   if (!parsed.success) {
     return {
       contract: null,
-      violations: parsed.error.issues.slice(0, 20).map((i) => `${i.path.join('.') || '(root)'}: ${i.message}`),
+      violations: parsed.error.issues
+        .slice(0, 20)
+        .map((i) => `${i.path.join(".") || "(root)"}: ${i.message}`),
       emitted: [],
       refusals: [],
       stubs: 0,
@@ -241,9 +367,16 @@ function refereeAndEmit(
       if (!contracts.has(stub.data.id)) contracts.set(stub.data.id, stub.data);
     }
   }
-  const mintedTree = (proposal.mintedTokens?.tree ?? {}) as Record<string, unknown>;
-  const inventory = new Set<string>([...baseInventory, ...flattenTokens(mintedTree).keys()]);
-  for (const tree of extraMintedTrees) for (const k of flattenTokens(tree).keys()) inventory.add(k);
+  const mintedTree = (proposal.mintedTokens?.tree ?? {}) as Record<
+    string,
+    unknown
+  >;
+  const inventory = new Set<string>([
+    ...baseInventory,
+    ...flattenTokens(mintedTree).keys(),
+  ]);
+  for (const tree of extraMintedTrees)
+    for (const k of flattenTokens(tree).keys()) inventory.add(k);
   const errors: string[] = [];
   validateContract(contract, contracts, errors, icons);
   generateCss(contract, inventory, errors);
@@ -253,7 +386,13 @@ function refereeAndEmit(
     semantic: mergeTrees([baseSemantic, ...extraMintedTrees, mintedTree]),
     brands,
   };
-  const ctx: EmitterCtx = { tokens, icons, contracts, fileKey: provenance?.fileKey ?? undefined, mintedTokens: mintedTree };
+  const ctx: EmitterCtx = {
+    tokens,
+    icons,
+    contracts,
+    fileKey: provenance?.fileKey ?? undefined,
+    mintedTokens: mintedTree,
+  };
   const emitted: string[] = [];
   const refusals: Array<{ emitter: string; message: string }> = [];
   for (const emitter of emitters) {
@@ -261,7 +400,13 @@ function refereeAndEmit(
       emitter.emit(contract, ctx);
       emitted.push(emitter.name);
     } catch (e) {
-      refusals.push({ emitter: emitter.name, message: (e instanceof Error ? e.message : String(e)).split('\n').slice(0, 2).join(' ') });
+      refusals.push({
+        emitter: emitter.name,
+        message: (e instanceof Error ? e.message : String(e))
+          .split("\n")
+          .slice(0, 2)
+          .join(" "),
+      });
     }
   }
   return { contract, violations: errors, emitted, refusals, stubs };
@@ -270,12 +415,16 @@ function refereeAndEmit(
 const baseRecords: BaseRecord[] = [];
 const baseByName = new Map<string, BaseRecord>();
 const contractsBySet = new Map<string, Contract>();
-const subjectNames = [...tiers.map((t) => t.setName), ...singles, 'RadioButton'];
+const subjectNames = [
+  ...tiers.map((t) => t.setName),
+  ...singles,
+  "RadioButton",
+];
 
 for (const setName of subjectNames) {
   const set = sets.get(setName);
   if (!set) continue;
-  const tier: Tier | 'S' = tierByName.get(setName)?.tier ?? 'S';
+  const tier: Tier | "S" = tierByName.get(setName)?.tier ?? "S";
   const rec: BaseRecord = {
     setName,
     type: set.type,
@@ -299,37 +448,81 @@ for (const setName of subjectNames) {
     const skip = skippedBySet.get(setName);
     if (skip) {
       rec.skipReason = skip.reason;
-      addFinding('propose-skip', setName, skip.reason, 'core/propose-figma.ts proposeFromDump');
+      addFinding(
+        "propose-skip",
+        setName,
+        skip.reason,
+        "core/propose-figma.ts proposeFromDump",
+      );
     } else {
       const proposal = proposalsBySet.get(setName);
-      if (!proposal) throw new Error('set neither proposed nor skipped — batch invariant broken');
+      if (!proposal)
+        throw new Error(
+          "set neither proposed nor skipped — batch invariant broken",
+        );
       rec.proposed = true;
       rec.notes = proposal.notes.length;
       rec.unbound = proposal.unbound.length;
       rec.minted = proposal.mintedTokens?.count ?? 0;
-      rec.tokenRefs = (JSON.stringify(proposal.contract).match(TOKEN_REF) ?? []).length;
-      rec.repeatParts = (JSON.stringify(proposal.contract).match(/"repeat":/g) ?? []).length;
-      const b7 = proposal.notes.filter((n) => n.includes('part-level state overrides are outside the contract vocabulary'));
+      rec.tokenRefs = (
+        JSON.stringify(proposal.contract).match(TOKEN_REF) ?? []
+      ).length;
+      rec.repeatParts = (
+        JSON.stringify(proposal.contract).match(/"repeat":/g) ?? []
+      ).length;
+      const b7 = proposal.notes.filter((n) =>
+        n.includes(
+          "part-level state overrides are outside the contract vocabulary",
+        ),
+      );
       rec.b7Notes = b7.length;
       if (b7.length > 0) {
-        addFinding('disabled-part-label-b7', setName, b7[0], 'core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)');
+        addFinding(
+          "disabled-part-label-b7",
+          setName,
+          b7[0],
+          "core/propose-figma.ts proposeStateDiffs — pre-P18 vocabulary (Part.states lands on the parallel worktree)",
+        );
       }
       rec.factsCarriedPct =
-        rec.tokenRefs + rec.unbound > 0 ? Math.round((100 * rec.tokenRefs) / (rec.tokenRefs + rec.unbound)) : null;
+        rec.tokenRefs + rec.unbound > 0
+          ? Math.round((100 * rec.tokenRefs) / (rec.tokenRefs + rec.unbound))
+          : null;
       const r = refereeAndEmit(proposal, new Map(), []);
       rec.violations = r.violations;
       rec.emitted = r.emitted;
       rec.emitterRefusals = r.refusals;
       rec.stubs = r.stubs;
       if (r.contract) contractsBySet.set(setName, r.contract);
-      for (const v of r.violations) addFinding('referee-violation', setName, v, 'core/emit-react.ts validateContract/generateCss');
-      for (const f of r.refusals) addFinding(`emitter-refusal:${f.emitter}`, setName, f.message, `core emitter ${f.emitter}`);
+      for (const v of r.violations)
+        addFinding(
+          "referee-violation",
+          setName,
+          v,
+          "core/emit-react.ts validateContract/generateCss",
+        );
+      for (const f of r.refusals)
+        addFinding(
+          `emitter-refusal:${f.emitter}`,
+          setName,
+          f.message,
+          `core emitter ${f.emitter}`,
+        );
     }
   } catch (e) {
     rec.internalError = e instanceof Error ? e.message : String(e);
-    addFinding('gauntlet-internal-error', setName, rec.internalError, 'gauntlet.ts stage A');
+    addFinding(
+      "gauntlet-internal-error",
+      setName,
+      rec.internalError,
+      "gauntlet.ts stage A",
+    );
   }
-  rec.clean = rec.proposed && rec.violations.length === 0 && rec.emitted.length === emitters.length && !rec.internalError;
+  rec.clean =
+    rec.proposed &&
+    rec.violations.length === 0 &&
+    rec.emitted.length === emitters.length &&
+    !rec.internalError;
   baseRecords.push(rec);
   baseByName.set(setName, rec);
 }
@@ -351,15 +544,23 @@ interface ComboRecord {
 }
 const comboRecords: ComboRecord[] = [];
 
-function comboSpace(contract: Contract): Array<Record<string, string | boolean>> {
-  const enums = contract.props.filter((p) => typeof p.type === 'object' && 'enum' in p.type) as Array<{
+function comboSpace(
+  contract: Contract,
+): Array<Record<string, string | boolean>> {
+  const enums = contract.props.filter(
+    (p) => typeof p.type === "object" && "enum" in p.type,
+  ) as Array<{
     name: string;
     type: { enum: string[] };
   }>;
-  const bools = contract.props.filter((p) => p.type === 'boolean').map((p) => p.name);
+  const bools = contract.props
+    .filter((p) => p.type === "boolean")
+    .map((p) => p.name);
   let combos: Array<Record<string, string | boolean>> = [{}];
   for (const e of enums) {
-    combos = combos.flatMap((c) => e.type.enum.map((v) => ({ ...c, [e.name]: v })));
+    combos = combos.flatMap((c) =>
+      e.type.enum.map((v) => ({ ...c, [e.name]: v })),
+    );
     if (combos.length > COMBO_CAP) return combos.slice(0, COMBO_CAP);
   }
   for (const b of bools) {
@@ -372,52 +573,92 @@ function comboSpace(contract: Contract): Array<Record<string, string | boolean>>
   return combos;
 }
 
-for (const t of tiers.filter((t) => t.tier === 'T2')) {
+for (const t of tiers.filter((t) => t.tier === "T2")) {
   const contract = contractsBySet.get(t.setName);
   const proposal = proposalsBySet.get(t.setName);
   if (!contract || !proposal) continue;
-  const rec: ComboRecord = { setName: t.setName, combos: 0, comboCap: false, htmlOk: 0, htmlFailures: [], canvasOk: false, canvasVariantSpecs: 0 };
+  const rec: ComboRecord = {
+    setName: t.setName,
+    combos: 0,
+    comboCap: false,
+    htmlOk: 0,
+    htmlFailures: [],
+    canvasOk: false,
+    canvasVariantSpecs: 0,
+  };
   try {
     const contracts = new Map(repoContracts);
     contracts.set(contract.id, contract);
     for (const raw of proposal.childStubs ?? []) {
       const stub = ContractSchema.safeParse(raw);
-      if (stub.success && !contracts.has(stub.data.id)) contracts.set(stub.data.id, stub.data);
+      if (stub.success && !contracts.has(stub.data.id))
+        contracts.set(stub.data.id, stub.data);
     }
-    const mintedTree = (proposal.mintedTokens?.tree ?? {}) as Record<string, unknown>;
-    const inventory = new Set<string>([...baseInventory, ...flattenTokens(mintedTree).keys()]);
+    const mintedTree = (proposal.mintedTokens?.tree ?? {}) as Record<
+      string,
+      unknown
+    >;
+    const inventory = new Set<string>([
+      ...baseInventory,
+      ...flattenTokens(mintedTree).keys(),
+    ]);
     const combos = comboSpace(contract);
     rec.combos = combos.length;
     rec.comboCap = combos.length >= COMBO_CAP;
     for (const combo of combos) {
       const clone = structuredClone(contract);
-      for (const prop of clone.props) if (prop.name in combo) prop.default = combo[prop.name];
+      for (const prop of clone.props)
+        if (prop.name in combo) prop.default = combo[prop.name];
       try {
         emitHtml(clone, { tokens: inventory, icons, contracts });
         rec.htmlOk += 1;
       } catch (e) {
-        const error = (e instanceof Error ? e.message : String(e)).split('\n')[0];
+        const error = (e instanceof Error ? e.message : String(e)).split(
+          "\n",
+        )[0];
         rec.htmlFailures.push({ combo: JSON.stringify(combo), error });
         if (rec.htmlFailures.length >= 5) break;
       }
     }
     try {
       const engine = createFigmaEngine({
-        tokens: { ...repoTrees, semantic: mergeTrees([baseSemantic, mintedTree]), brands },
+        tokens: {
+          ...repoTrees,
+          semantic: mergeTrees([baseSemantic, mintedTree]),
+          brands,
+        },
         icons,
       });
       const data = engine.compileComponentData(contract, contracts);
-      rec.canvasVariantSpecs = (data as { variants?: unknown[] }).variants?.length ?? 0;
+      rec.canvasVariantSpecs =
+        (data as { variants?: unknown[] }).variants?.length ?? 0;
       rec.canvasOk = true;
     } catch (e) {
-      rec.canvasError = (e instanceof Error ? e.message : String(e)).split('\n')[0];
-      addFinding('t2-canvas-compile', t.setName, rec.canvasError, 'core/emit-figma-script.ts compileComponentData');
+      rec.canvasError = (e instanceof Error ? e.message : String(e)).split(
+        "\n",
+      )[0];
+      addFinding(
+        "t2-canvas-compile",
+        t.setName,
+        rec.canvasError,
+        "core/emit-figma-script.ts compileComponentData",
+      );
     }
     for (const f of rec.htmlFailures) {
-      addFinding('t2-combo-html', t.setName, `${f.combo}: ${f.error}`, 'core/emit-html.ts at combo defaults');
+      addFinding(
+        "t2-combo-html",
+        t.setName,
+        `${f.combo}: ${f.error}`,
+        "core/emit-html.ts at combo defaults",
+      );
     }
   } catch (e) {
-    addFinding('gauntlet-internal-error', t.setName, e instanceof Error ? e.message : String(e), 'gauntlet.ts stage B');
+    addFinding(
+      "gauntlet-internal-error",
+      t.setName,
+      e instanceof Error ? e.message : String(e),
+      "gauntlet.ts stage B",
+    );
   }
   comboRecords.push(rec);
 }
@@ -435,7 +676,7 @@ interface PromotionRecord {
   /** Values outside the shipped interaction-state vocabulary — the axis is
    *  EXPECTED to stay an enum prop (the documented near-miss path). */
   outOfVocab: string[];
-  expected: 'promote' | 'near-miss-enum';
+  expected: "promote" | "near-miss-enum";
   statePropInApi: string | null;
   statesCarried: string[];
   drawnDisabled: boolean;
@@ -447,7 +688,15 @@ const promotionRecords: PromotionRecord[] = [];
 const STATE_PROP = /^(state|status|interaction)$/i;
 /** The proposer's interaction-state vocabulary (its own near-miss note names
  *  this list verbatim). */
-const STATE_VOCAB = new Set(['default', 'hover', 'focus', 'focus-visible', 'active', 'pressed', 'disabled']);
+const STATE_VOCAB = new Set([
+  "default",
+  "hover",
+  "focus",
+  "focus-visible",
+  "active",
+  "pressed",
+  "disabled",
+]);
 
 for (const t of tiers.filter((t) => t.stateAxes.length > 0)) {
   const contract = contractsBySet.get(t.setName);
@@ -456,47 +705,64 @@ for (const t of tiers.filter((t) => t.stateAxes.length > 0)) {
   for (const axis of t.stateAxes) {
     const values = t.axes[axis] ?? [];
     const outOfVocab = values.filter((v) => !STATE_VOCAB.has(v.toLowerCase()));
-    const expected: 'promote' | 'near-miss-enum' = outOfVocab.length === 0 ? 'promote' : 'near-miss-enum';
-    const stateProp = contract.props.find((p) => STATE_PROP.test(p.name))?.name ?? null;
+    const expected: "promote" | "near-miss-enum" =
+      outOfVocab.length === 0 ? "promote" : "near-miss-enum";
+    const stateProp =
+      contract.props.find((p) => STATE_PROP.test(p.name))?.name ?? null;
     const states = contract.states ?? [];
-    const drawnDisabled = values.some((v) => v.toLowerCase() === 'disabled');
+    const drawnDisabled = values.some((v) => v.toLowerCase() === "disabled");
     const disabledBoolean =
-      contract.props.find((p) => p.type === 'boolean' && /^(disabled|isdisabled)$/i.test(p.name))?.name ?? null;
+      contract.props.find(
+        (p) => p.type === "boolean" && /^(disabled|isdisabled)$/i.test(p.name),
+      )?.name ?? null;
     const nearMissNoteNamed = proposal.notes.some(
-      (n) => n.includes(`variant axis "${axis}"`) && n.includes('outside the interaction-state vocabulary'),
+      (n) =>
+        n.includes(`variant axis "${axis}"`) &&
+        n.includes("outside the interaction-state vocabulary"),
     );
-    const noOverrideNamed = proposal.notes.some(
-      (n) => n.includes('promoted from the axis but no root override was recoverable'),
+    const noOverrideNamed = proposal.notes.some((n) =>
+      n.includes("promoted from the axis but no root override was recoverable"),
     );
     let ok: boolean;
-    let evidence = '';
-    if (expected === 'promote') {
-      ok = stateProp === null && (states.length > 0 || noOverrideNamed) && (!drawnDisabled || disabledBoolean !== null);
+    let evidence = "";
+    if (expected === "promote") {
+      ok =
+        stateProp === null &&
+        (states.length > 0 || noOverrideNamed) &&
+        (!drawnDisabled || disabledBoolean !== null);
       if (!ok) {
         evidence = [
-          stateProp !== null ? `state-like prop "${stateProp}" survives in the API` : null,
-          states.length === 0 && !noOverrideNamed ? 'contract.states empty and no named no-override note' : null,
-          drawnDisabled && !disabledBoolean ? 'axis draws "disabled" but no boolean disabled prop proposed' : null,
+          stateProp !== null
+            ? `state-like prop "${stateProp}" survives in the API`
+            : null,
+          states.length === 0 && !noOverrideNamed
+            ? "contract.states empty and no named no-override note"
+            : null,
+          drawnDisabled && !disabledBoolean
+            ? 'axis draws "disabled" but no boolean disabled prop proposed'
+            : null,
         ]
           .filter(Boolean)
-          .join('; ');
+          .join("; ");
       }
     } else {
       // Near-miss: the shipped rule KEEPS the axis as an enum prop and NAMES
       // the out-of-vocabulary values. Correct = prop kept + note present.
       ok = stateProp !== null && nearMissNoteNamed;
       if (!ok) {
-        evidence = `out-of-vocab values [${outOfVocab.join(', ')}] but ${
-          stateProp === null ? 'the axis did NOT stay a prop' : 'no near-miss note names them'
+        evidence = `out-of-vocab values [${outOfVocab.join(", ")}] but ${
+          stateProp === null
+            ? "the axis did NOT stay a prop"
+            : "no near-miss note names them"
         }`;
       }
     }
     if (!ok) {
       addFinding(
-        't3-state-promotion',
+        "t3-state-promotion",
         t.setName,
-        `${axis}=[${values.join(', ')}] (expected ${expected}): ${evidence}`,
-        'core/propose-figma.ts state promotion',
+        `${axis}=[${values.join(", ")}] (expected ${expected}): ${evidence}`,
+        "core/propose-figma.ts state promotion",
       );
     }
     promotionRecords.push({
@@ -537,32 +803,55 @@ const keyContradictions: KeyContradiction[] = [];
   for (const t of tiers) {
     const set = sets.get(t.setName);
     if (!set) continue;
-    const walk = (node: { type?: string; instanceOf?: string; instanceKey?: string; instanceSetKey?: string; children?: unknown[] }): void => {
-      if (node.type === 'INSTANCE' && node.instanceOf && sets.has(node.instanceOf)) {
+    const walk = (node: {
+      type?: string;
+      instanceOf?: string;
+      instanceKey?: string;
+      instanceSetKey?: string;
+      children?: unknown[];
+    }): void => {
+      if (
+        node.type === "INSTANCE" &&
+        node.instanceOf &&
+        sets.has(node.instanceOf)
+      ) {
         const target = sets.get(node.instanceOf)!;
         const captured = node.instanceSetKey ?? node.instanceKey;
         // A set-keyed instance compares against the set key; a setless
         // COMPONENT compares its component key. Missing keys stay silent
         // (pre-v1.5 shapes) — absence is never evidence.
-        const comparable = node.instanceSetKey !== undefined || target.type !== 'COMPONENT_SET';
-        if (captured !== undefined && comparable && target.key && captured !== target.key) {
+        const comparable =
+          node.instanceSetKey !== undefined || target.type !== "COMPONENT_SET";
+        if (
+          captured !== undefined &&
+          comparable &&
+          target.key &&
+          captured !== target.key
+        ) {
           const k = `${t.setName}→${node.instanceOf}`;
           const cur = agg.get(k);
           if (cur) cur.occurrences += 1;
-          else agg.set(k, { setName: t.setName, instanceOf: node.instanceOf, capturedKey: captured, dumpSetKey: target.key, occurrences: 1 });
+          else
+            agg.set(k, {
+              setName: t.setName,
+              instanceOf: node.instanceOf,
+              capturedKey: captured,
+              dumpSetKey: target.key,
+              occurrences: 1,
+            });
         }
       }
-      for (const c of (node.children as typeof node[]) ?? []) walk(c);
+      for (const c of (node.children as (typeof node)[]) ?? []) walk(c);
     };
     for (const v of set.variants) walk(v as never);
   }
   keyContradictions.push(...agg.values());
   for (const kc of keyContradictions) {
     addFinding(
-      'duplicate-name-key-contradiction',
+      "duplicate-name-key-contradiction",
       kc.setName,
       `nested "${kc.instanceOf}" ×${kc.occurrences} carries key ${kc.capturedKey.slice(0, 10)}… but the name-keyed dump kept the copy with key ${kc.dumpSetKey.slice(0, 10)}… (the file draws duplicate-named components; the dump format collapses them last-wins, so the drawn parent of these instances is NOT in the dump and sessions stub honestly)`,
-      'capture convention: dump.plugin.js name-keyed records + resolveChildContract key refusal',
+      "capture convention: dump.plugin.js name-keyed records + resolveChildContract key refusal",
     );
   }
 }
@@ -605,7 +894,11 @@ interface ImportResult {
   error?: string;
   contract?: Contract;
   violations: string[];
-  refs: Array<{ refId: string; resolution: 'linked-session' | 'linked-repo' | 'stubbed' | 'unresolved'; targetSet?: string }>;
+  refs: Array<{
+    refId: string;
+    resolution: "linked-session" | "linked-repo" | "stubbed" | "unresolved";
+    targetSet?: string;
+  }>;
   stubIds: string[];
   stubGeometryMints: number;
   /** Proposer notes naming the stub-geometry mint SKIP ("resolved values
@@ -616,13 +909,22 @@ interface ImportResult {
 
 function importSet(session: Session, setName: string): ImportResult {
   const set = sets.get(setName);
-  const out: ImportResult = { setName, ok: false, violations: [], refs: [], stubIds: [], stubGeometryMints: 0, geometrySkipNotes: 0 };
+  const out: ImportResult = {
+    setName,
+    ok: false,
+    violations: [],
+    refs: [],
+    stubIds: [],
+    stubGeometryMints: 0,
+    geometrySkipNotes: 0,
+  };
   if (!set) {
     out.error = `set "${setName}" not in dump`;
     return out;
   }
   try {
     const proposal = proposeFromDump(set as never, {
+      projectionMode: "reviewable-inversion",
       corpus,
       // Captured-variable resolved values (class ① mint routing) — sessions
       // call proposeFromDump directly, so the index the batch entry builds
@@ -635,7 +937,7 @@ function importSet(session: Session, setName: string): ImportResult {
       // same id wins), so the class-③ key-contradiction guard can SEE an
       // earlier import's stub claim.
       contractsById: new Map([
-        ...session.stubs as unknown as Map<string, MinimalChildContract>,
+        ...(session.stubs as unknown as Map<string, MinimalChildContract>),
         ...loaded.byId,
         ...session.byIdMinimal,
       ]),
@@ -646,7 +948,7 @@ function importSet(session: Session, setName: string): ImportResult {
     });
     const parsed = ContractSchema.safeParse(proposal.contract);
     if (!parsed.success) {
-      out.error = `contract schema: ${parsed.error.issues[0]?.message ?? '?'}`;
+      out.error = `contract schema: ${parsed.error.issues[0]?.message ?? "?"}`;
       return out;
     }
     const contract = parsed.data;
@@ -654,46 +956,62 @@ function importSet(session: Session, setName: string): ImportResult {
     const stubIds = new Set<string>();
     for (const raw of proposal.childStubs ?? []) {
       const id = (raw as { id?: unknown }).id;
-      if (typeof id === 'string') stubIds.add(id);
+      if (typeof id === "string") stubIds.add(id);
     }
     out.stubIds = [...stubIds];
-    const mintedTree = (proposal.mintedTokens?.tree ?? {}) as Record<string, unknown>;
-    out.stubGeometryMints = [...flattenTokens(mintedTree).keys()].filter((k) => k.includes('.stub-')).length;
-    out.geometrySkipNotes = proposal.notes.filter((n) => n.includes('without correlating to any variant axis')).length;
+    const mintedTree = (proposal.mintedTokens?.tree ?? {}) as Record<
+      string,
+      unknown
+    >;
+    out.stubGeometryMints = [...flattenTokens(mintedTree).keys()].filter((k) =>
+      k.includes(".stub-"),
+    ).length;
+    out.geometrySkipNotes = proposal.notes.filter((n) =>
+      n.includes("without correlating to any variant axis"),
+    ).length;
 
     // Linked-vs-stubbed classification per component ref.
     for (const { ref } of componentRefsOf(contract)) {
       const refId = ref.id;
       const resolution = session.contracts.has(refId)
-        ? ('linked-session' as const)
+        ? ("linked-session" as const)
         : repoContracts.has(refId)
-          ? ('linked-repo' as const)
+          ? ("linked-repo" as const)
           : stubIds.has(refId)
-            ? ('stubbed' as const)
-            : ('unresolved' as const);
-      out.refs.push({ refId, resolution, targetSet: session.contractSetByName.get(refId) });
+            ? ("stubbed" as const)
+            : ("unresolved" as const);
+      out.refs.push({
+        refId,
+        resolution,
+        targetSet: session.contractSetByName.get(refId),
+      });
     }
 
     // Referee in session scope (playground validate semantics: session
     // contracts + stubs at lower precedence; session minted trees resolve
     // linked children's imported.* bindings).
-    const scope = new Map<string, Contract>([...session.stubs, ...session.contracts]);
-    const r = refereeAndEmit(
-      { ...proposal, setName } as never,
-      scope,
-      [...session.mintedTrees],
-    );
+    const scope = new Map<string, Contract>([
+      ...session.stubs,
+      ...session.contracts,
+    ]);
+    const r = refereeAndEmit({ ...proposal, setName } as never, scope, [
+      ...session.mintedTrees,
+    ]);
     out.violations = r.violations;
 
     // Register in the session (newest wins — the workspace re-import rule).
     session.contracts.set(contract.id, contract);
-    session.byIdMinimal.set(contract.id, contract as unknown as MinimalChildContract);
+    session.byIdMinimal.set(
+      contract.id,
+      contract as unknown as MinimalChildContract,
+    );
     session.idByName.set(contract.name, contract.id);
     session.idByName.set(setName, contract.id);
     session.claimedIds.add(contract.id);
     const key = contract.anchors.figma.componentSetKey;
     if (key) session.idByKey.set(key, contract.id);
-    if (mintedTree && Object.keys(mintedTree).length > 0) session.mintedTrees.push(mintedTree);
+    if (mintedTree && Object.keys(mintedTree).length > 0)
+      session.mintedTrees.push(mintedTree);
     session.contractSetByName.set(contract.id, setName);
     // Child stubs register at playground precedence — only ids no real
     // contract (repo or session) holds — so later imports' referees resolve
@@ -702,13 +1020,20 @@ function importSet(session: Session, setName: string): ImportResult {
       const stub = ContractSchema.safeParse(raw);
       if (!stub.success) continue;
       session.claimedIds.add(stub.data.id);
-      if (!session.contracts.has(stub.data.id) && !repoContracts.has(stub.data.id) && !session.stubs.has(stub.data.id)) {
+      if (
+        !session.contracts.has(stub.data.id) &&
+        !repoContracts.has(stub.data.id) &&
+        !session.stubs.has(stub.data.id)
+      ) {
         session.stubs.set(stub.data.id, stub.data);
       }
     }
     out.ok = true;
   } catch (e) {
-    out.error = e instanceof Error ? e.message.split('\n').slice(0, 2).join(' ') : String(e);
+    out.error =
+      e instanceof Error
+        ? e.message.split("\n").slice(0, 2).join(" ")
+        : String(e);
   }
   return out;
 }
@@ -768,7 +1093,7 @@ const sessionRecords: SessionRecord[] = [];
  *  onto ds.minus-square (the first-run harness bug, kept named here). */
 const idForSet = (setName: string): string => `ds.${componentIdSlug(setName)}`;
 
-for (const t of tiers.filter((t) => t.tier === 'T4' || t.tier === 'T5')) {
+for (const t of tiers.filter((t) => t.tier === "T4" || t.tier === "T5")) {
   if (t.childSets.length === 0) continue;
   const rec: SessionRecord = {
     setName: t.setName,
@@ -785,7 +1110,13 @@ for (const t of tiers.filter((t) => t.tier === 'T4' || t.tier === 'T5')) {
       stubbedDespiteImported: [],
       violations: [],
     },
-    adversarial: { parentFirstStubs: 0, stubGeometryMints: 0, geometrySkipNotes: 0, healedAfterReimport: null, stillStubbedAfterHeal: [] },
+    adversarial: {
+      parentFirstStubs: 0,
+      stubGeometryMints: 0,
+      geometrySkipNotes: 0,
+      healedAfterReimport: null,
+      stillStubbedAfterHeal: [],
+    },
   };
   try {
     // --- children-first ---
@@ -793,22 +1124,30 @@ for (const t of tiers.filter((t) => t.tier === 'T4' || t.tier === 'T5')) {
     for (const dep of rec.deps) {
       const r = importSet(session, dep);
       if (r.ok) rec.childrenFirst.importedDeps.push(dep);
-      else rec.childrenFirst.failedDeps.push({ set: dep, error: r.error ?? '?' });
+      else
+        rec.childrenFirst.failedDeps.push({ set: dep, error: r.error ?? "?" });
     }
     const parent = importSet(session, t.setName);
     rec.childrenFirst.parentOk = parent.ok;
     rec.childrenFirst.parentError = parent.error;
     rec.childrenFirst.violations = parent.violations;
     for (const ref of parent.refs) {
-      if (ref.resolution === 'linked-session') rec.childrenFirst.linkedSession += 1;
-      else if (ref.resolution === 'linked-repo') rec.childrenFirst.linkedRepo += 1;
-      else if (ref.resolution === 'stubbed') rec.childrenFirst.stubbed += 1;
+      if (ref.resolution === "linked-session")
+        rec.childrenFirst.linkedSession += 1;
+      else if (ref.resolution === "linked-repo")
+        rec.childrenFirst.linkedRepo += 1;
+      else if (ref.resolution === "stubbed") rec.childrenFirst.stubbed += 1;
       else rec.childrenFirst.unresolved += 1;
-      if (ref.resolution === 'stubbed') {
+      if (ref.resolution === "stubbed") {
         // Did the stubbed ref's set import earlier? Match by the stub slug —
         // the stub id derives from the drawn set name (stubIdFor).
-        const imported = rec.childrenFirst.importedDeps.find((d) => ref.refId === idForSet(d));
-        if (imported) rec.childrenFirst.stubbedDespiteImported.push(`${ref.refId} (set "${imported}" imported earlier)`);
+        const imported = rec.childrenFirst.importedDeps.find(
+          (d) => ref.refId === idForSet(d),
+        );
+        if (imported)
+          rec.childrenFirst.stubbedDespiteImported.push(
+            `${ref.refId} (set "${imported}" imported earlier)`,
+          );
       }
     }
     // Cross-import minted-token scope (fix in flight): the PLAYGROUND's
@@ -825,28 +1164,49 @@ for (const t of tiers.filter((t) => t.tier === 'T4' || t.tier === 'T5')) {
         const parentProposal = proposalsBySet.get(t.setName);
         for (const raw of parentProposal?.childStubs ?? []) {
           const stub = ContractSchema.safeParse(raw);
-          if (stub.success && !contracts.has(stub.data.id)) contracts.set(stub.data.id, stub.data);
+          if (stub.success && !contracts.has(stub.data.id))
+            contracts.set(stub.data.id, stub.data);
         }
-        const parentMinted = (parentProposal?.mintedTokens?.tree ?? {}) as Record<string, unknown>;
-        const inventory = new Set<string>([...baseInventory, ...flattenTokens(parentMinted).keys()]);
-        for (const tree of session.mintedTrees) for (const k of flattenTokens(tree).keys()) inventory.add(k);
-        const emitted = emitHtml(parent.contract, { tokens: inventory, icons, contracts });
+        const parentMinted = (parentProposal?.mintedTokens?.tree ??
+          {}) as Record<string, unknown>;
+        const inventory = new Set<string>([
+          ...baseInventory,
+          ...flattenTokens(parentMinted).keys(),
+        ]);
+        for (const tree of session.mintedTrees)
+          for (const k of flattenTokens(tree).keys()) inventory.add(k);
+        const emitted = emitHtml(parent.contract, {
+          tokens: inventory,
+          icons,
+          contracts,
+        });
         const usedImported = new Set(
-          [...`${emitted.html}\n${emitted.css}`.matchAll(/var\(--(imported-[a-z0-9-]+)/g)].map((m) => m[1]),
+          [
+            ...`${emitted.html}\n${emitted.css}`.matchAll(
+              /var\(--(imported-[a-z0-9-]+)/g,
+            ),
+          ].map((m) => m[1]),
         );
         const cssVarNamesOf = (tree: Record<string, unknown>) =>
-          new Set([...mintedTokenCss(tree).matchAll(/--(imported-[a-z0-9-]+):/g)].map((m) => m[1]));
+          new Set(
+            [...mintedTokenCss(tree).matchAll(/--(imported-[a-z0-9-]+):/g)].map(
+              (m) => m[1],
+            ),
+          );
         const parentDefined = cssVarNamesOf(parentMinted);
         const sessionDefined = new Set<string>();
-        for (const tree of session.mintedTrees) for (const v of cssVarNamesOf(tree)) sessionDefined.add(v);
-        const exposure = [...usedImported].filter((v) => !parentDefined.has(v) && sessionDefined.has(v));
+        for (const tree of session.mintedTrees)
+          for (const v of cssVarNamesOf(tree)) sessionDefined.add(v);
+        const exposure = [...usedImported].filter(
+          (v) => !parentDefined.has(v) && sessionDefined.has(v),
+        );
         rec.childrenFirst.crossImportMintedExposure = exposure.length;
         if (exposure.length > 0) {
           addFinding(
-            'cross-import-minted-token-scope',
+            "cross-import-minted-token-scope",
             t.setName,
             `parent doc uses ${exposure.length} imported.* var(s) only a session sibling's minted tree defines (e.g. --${exposure[0]}) — the playground's single on-screen minted layer would leave them unresolved`,
-            'playground token-source single minted layer (session-registry mintedTrees is the fix seam)',
+            "playground token-source single minted layer (session-registry mintedTrees is the fix seam)",
           );
         }
       } catch {
@@ -854,18 +1214,23 @@ for (const t of tiers.filter((t) => t.tier === 'T4' || t.tier === 'T5')) {
       }
     }
     for (const s of rec.childrenFirst.stubbedDespiteImported) {
-      addFinding('t4-stub-despite-import', t.setName, s, 'core/propose-figma.ts resolveChildContract / session indexes');
+      addFinding(
+        "t4-stub-despite-import",
+        t.setName,
+        s,
+        "core/propose-figma.ts resolveChildContract / session indexes",
+      );
     }
     for (const v of parent.violations) {
       addFinding(
-        v.includes('cannot compose itself')
-          ? 'session-id-collision-false-cycle'
-          : 't4-session-referee',
+        v.includes("cannot compose itself")
+          ? "session-id-collision-false-cycle"
+          : "t4-session-referee",
         t.setName,
         v,
-        v.includes('cannot compose itself')
+        v.includes("cannot compose itself")
           ? 'core/propose-figma.ts stubIdFor/selfContractId — cross-population id collision (RadioButton the COMPONENT vs "Radio button" the set claim ds.radio-button; the session newest-wins registry rebinds the child\'s ref onto the parent)'
-          : 'session-scope referee (validateContract/generateCss)',
+          : "session-scope referee (validateContract/generateCss)",
       );
     }
 
@@ -875,12 +1240,16 @@ for (const t of tiers.filter((t) => t.tier === 'T4' || t.tier === 'T5')) {
     rec.adversarial.parentFirstStubs = p1.stubIds.length;
     rec.adversarial.stubGeometryMints = p1.stubGeometryMints;
     rec.adversarial.geometrySkipNotes = p1.geometrySkipNotes;
-    if (p1.stubIds.length > 0 && p1.stubGeometryMints === 0 && p1.geometrySkipNotes > 0) {
+    if (
+      p1.stubIds.length > 0 &&
+      p1.stubGeometryMints === 0 &&
+      p1.geometrySkipNotes > 0
+    ) {
       addFinding(
-        'stub-geometry-not-minted',
+        "stub-geometry-not-minted",
         t.setName,
         `${p1.stubIds.length} stub(s) mint ZERO observed-geometry tokens; ${p1.geometrySkipNotes} note(s) say values differ "without correlating to any variant axis" — yet e.g. Checkbox-icon's 24/16px track size=large/small EXACTLY (the correlation is with the PARENT's axis, which the stub mint pass does not consult)`,
-        'core/propose-figma.ts stub mint pass (197dd02 named limit, quantified live)',
+        "core/propose-figma.ts stub mint pass (197dd02 named limit, quantified live)",
       );
     }
     // Heal path: import the first dep that stubbed, then re-import the parent.
@@ -899,18 +1268,23 @@ for (const t of tiers.filter((t) => t.tier === 'T4' || t.tier === 'T5')) {
       // stubs carrying null keys). Only a same-key (or keyless) stub that
       // stays stubbed is a heal failure.
       const depId = adv.idByName.get(stubbedDep) ?? idForSet(stubbedDep);
-      const depKey = adv.contracts.get(depId)?.anchors.figma.componentSetKey ?? null;
+      const depKey =
+        adv.contracts.get(depId)?.anchors.figma.componentSetKey ?? null;
       const stubKeyOf = (refId: string): string | null =>
         adv.stubs.get(refId)?.anchors.figma.componentSetKey ?? null;
       const depBase = idForSet(stubbedDep);
       const stillStubbed = p2.refs.filter(
-        (r) => r.resolution === 'stubbed' && (r.refId === depBase || r.refId.startsWith(`${depBase}-`)),
+        (r) =>
+          r.resolution === "stubbed" &&
+          (r.refId === depBase || r.refId.startsWith(`${depBase}-`)),
       );
       const honestlyKept = stillStubbed.filter((r) => {
         const sk = stubKeyOf(r.refId);
         return sk !== null && depKey !== null && sk !== depKey;
       });
-      const healFailures = stillStubbed.filter((r) => !honestlyKept.includes(r));
+      const healFailures = stillStubbed.filter(
+        (r) => !honestlyKept.includes(r),
+      );
       rec.adversarial.healedAfterReimport = p2.ok && healFailures.length === 0;
       rec.adversarial.stillStubbedAfterHeal = healFailures.map((r) => r.refId);
       if (honestlyKept.length > 0) {
@@ -918,15 +1292,20 @@ for (const t of tiers.filter((t) => t.tier === 'T4' || t.tier === 'T5')) {
       }
       if (!rec.adversarial.healedAfterReimport) {
         addFinding(
-          't4-self-heal-failed',
+          "t4-self-heal-failed",
           t.setName,
-          `after importing "${stubbedDep}" and re-importing, refs still stubbed: ${healFailures.map((r) => r.refId).join(', ') || `(parent re-import ${p2.ok ? 'ok' : `failed: ${p2.error}`})`}`,
-          'core/propose-figma.ts resolveChildContract (key-first, name fallback)',
+          `after importing "${stubbedDep}" and re-importing, refs still stubbed: ${healFailures.map((r) => r.refId).join(", ") || `(parent re-import ${p2.ok ? "ok" : `failed: ${p2.error}`})`}`,
+          "core/propose-figma.ts resolveChildContract (key-first, name fallback)",
         );
       }
     }
   } catch (e) {
-    addFinding('gauntlet-internal-error', t.setName, e instanceof Error ? e.message : String(e), 'gauntlet.ts stage D');
+    addFinding(
+      "gauntlet-internal-error",
+      t.setName,
+      e instanceof Error ? e.message : String(e),
+      "gauntlet.ts stage D",
+    );
   }
   sessionRecords.push(rec);
 }
@@ -944,37 +1323,54 @@ const t5Records: T5Record[] = [];
 
 // E1: repeat collections (Navigation-Header, _Nav-item-menu) — schema v12
 // repeat part + code-only arrayOf prop.
-for (const setName of ['Navigation-Header', '_Nav-item-menu']) {
+for (const setName of ["Navigation-Header", "_Nav-item-menu"]) {
   const contract = contractsBySet.get(setName);
   const rec = baseByName.get(setName);
   if (!contract || !rec) {
-    t5Records.push({ exercise: `repeat:${setName}`, ok: false, detail: 'no contract proposed' });
+    t5Records.push({
+      exercise: `repeat:${setName}`,
+      ok: false,
+      detail: "no contract proposed",
+    });
     continue;
   }
   const hasRepeat = rec.repeatParts > 0;
-  const arrayOfProps = contract.props.filter((p) => typeof p.type === 'object' && 'arrayOf' in (p.type as object));
+  const arrayOfProps = contract.props.filter(
+    (p) => typeof p.type === "object" && "arrayOf" in (p.type as object),
+  );
   const ok = hasRepeat && arrayOfProps.length > 0;
   if (!ok)
     addFinding(
-      't5-repeat-collection',
+      "t5-repeat-collection",
       setName,
       `repeat parts: ${rec.repeatParts}; arrayOf props: ${arrayOfProps.length}`,
-      'core/propose-figma.ts repeatRunAt/buildRepeatPart',
+      "core/propose-figma.ts repeatRunAt/buildRepeatPart",
     );
   t5Records.push({
     exercise: `repeat:${setName}`,
     ok,
-    detail: `repeat parts ${rec.repeatParts}, arrayOf props [${arrayOfProps.map((p) => p.name).join(', ')}]`,
+    detail: `repeat parts ${rec.repeatParts}, arrayOf props [${arrayOfProps.map((p) => p.name).join(", ")}]`,
   });
 }
 
 // E2: slot sets — INSTANCE_SWAP refs / _Slot-* placeholders → slot parts with
 // accepts (swapPreferredValues resolve where the keys are in scope).
-for (const setName of ['Dialog', 'Card-Image', 'Card-Basic', 'List item', '_Text-block-Panel', 'Icon']) {
+for (const setName of [
+  "Dialog",
+  "Card-Image",
+  "Card-Basic",
+  "List item",
+  "_Text-block-Panel",
+  "Icon",
+]) {
   const contract = contractsBySet.get(setName);
   const set = sets.get(setName);
   if (!contract || !set) {
-    t5Records.push({ exercise: `slot:${setName}`, ok: false, detail: 'no contract proposed' });
+    t5Records.push({
+      exercise: `slot:${setName}`,
+      ok: false,
+      detail: "no contract proposed",
+    });
     continue;
   }
   const slots = slotsOf(contract);
@@ -983,35 +1379,39 @@ for (const setName of ['Dialog', 'Card-Image', 'Card-Basic', 'List item', '_Text
   const ok = slots.length > 0;
   if (!ok)
     addFinding(
-      't5-slot-missing',
+      "t5-slot-missing",
       setName,
-      `drawn swaps/placeholders but proposal carries 0 slot parts (swapPreferredValues: ${prefer.join(', ') || 'none'})`,
-      'core/propose-figma.ts INSTANCE_SWAP/slot branch',
+      `drawn swaps/placeholders but proposal carries 0 slot parts (swapPreferredValues: ${prefer.join(", ") || "none"})`,
+      "core/propose-figma.ts INSTANCE_SWAP/slot branch",
     );
   t5Records.push({
     exercise: `slot:${setName}`,
     ok,
-    detail: `${slots.length} slot part(s) [${slots.map((s) => s.slot.name).join(', ')}], ${withAccepts.length} with accepts; drawn prefer-keys on [${prefer.join(', ') || '—'}]`,
+    detail: `${slots.length} slot part(s) [${slots.map((s) => s.slot.name).join(", ")}], ${withAccepts.length} with accepts; drawn prefer-keys on [${prefer.join(", ") || "—"}]`,
   });
 }
 
 // E3: id collision — RadioButton (plain COMPONENT) vs "Radio button" (set):
 // both must propose, the batch must NAME the collision, never merge.
 {
-  const note = batch.notes.find((n) => n.includes('ds.radio-button'));
-  const both = baseByName.get('RadioButton')?.proposed && baseByName.get('Radio button')?.proposed;
+  const note = batch.notes.find((n) => n.includes("ds.radio-button"));
+  const both =
+    baseByName.get("RadioButton")?.proposed &&
+    baseByName.get("Radio button")?.proposed;
   const ok = !!note && !!both;
   if (!ok)
     addFinding(
-      't5-id-collision',
-      'RadioButton / Radio button',
-      note ? 'collision note present but a side failed to propose' : 'no batch note names the ds.radio-button collision',
-      'core/propose-figma.ts proposeBatchFromDump claimedIds',
+      "t5-id-collision",
+      "RadioButton / Radio button",
+      note
+        ? "collision note present but a side failed to propose"
+        : "no batch note names the ds.radio-button collision",
+      "core/propose-figma.ts proposeBatchFromDump claimedIds",
     );
   t5Records.push({
-    exercise: 'id-collision:RadioButton/Radio button',
+    exercise: "id-collision:RadioButton/Radio button",
     ok,
-    detail: note ? `named: "${note.slice(0, 140)}…"` : 'NOT NAMED',
+    detail: note ? `named: "${note.slice(0, 140)}…"` : "NOT NAMED",
   });
 }
 
@@ -1019,29 +1419,40 @@ for (const setName of ['Dialog', 'Card-Image', 'Card-Basic', 'List item', '_Text
 // children on purpose), then a relink pass re-importing every composite.
 {
   const MEGA_ORDER = [
-    'List item', // before Icon/Avatar/Badge — stubs expected
-    'Icon',
-    'Button-Brand Primary',
-    'Dialog', // after Button — action links; before Card slots
-    'Menu',
-    'Avatar',
-    'Badge',
-    'Card-Image',
-    'Chip',
-    'Navigation-Header',
+    "List item", // before Icon/Avatar/Badge — stubs expected
+    "Icon",
+    "Button-Brand Primary",
+    "Dialog", // after Button — action links; before Card slots
+    "Menu",
+    "Avatar",
+    "Badge",
+    "Card-Image",
+    "Chip",
+    "Navigation-Header",
   ];
   const mega = newSession();
-  const firstPass: Record<string, { linkedSession: number; stubbed: number }> = {};
-  const relink: Record<string, { linkedSession: number; stubbed: number; stubbedDespiteInScope: string[] }> = {};
+  const firstPass: Record<string, { linkedSession: number; stubbed: number }> =
+    {};
+  const relink: Record<
+    string,
+    { linkedSession: number; stubbed: number; stubbedDespiteInScope: string[] }
+  > = {};
   let internalError: string | undefined;
   try {
     for (const name of MEGA_ORDER) {
       const r = importSet(mega, name);
       firstPass[name] = {
-        linkedSession: r.refs.filter((x) => x.resolution === 'linked-session').length,
-        stubbed: r.refs.filter((x) => x.resolution === 'stubbed').length,
+        linkedSession: r.refs.filter((x) => x.resolution === "linked-session")
+          .length,
+        stubbed: r.refs.filter((x) => x.resolution === "stubbed").length,
       };
-      if (!r.ok) addFinding('t5-mega-import-failed', name, r.error ?? '?', 'gauntlet.ts mega-session');
+      if (!r.ok)
+        addFinding(
+          "t5-mega-import-failed",
+          name,
+          r.error ?? "?",
+          "gauntlet.ts mega-session",
+        );
     }
     // Relink pass: every composite re-imported now that the whole scope exists.
     for (const name of MEGA_ORDER) {
@@ -1049,29 +1460,46 @@ for (const setName of ['Dialog', 'Card-Image', 'Card-Basic', 'List item', '_Text
       const r = importSet(mega, name);
       const inScope = new Set(MEGA_ORDER.filter((n) => mega.idByName.has(n)));
       const stubbedDespite = r.refs
-        .filter((x) => x.resolution === 'stubbed')
+        .filter((x) => x.resolution === "stubbed")
         .filter((x) => [...inScope].some((n) => x.refId === idForSet(n)))
         .map((x) => x.refId);
       relink[name] = {
-        linkedSession: r.refs.filter((x) => x.resolution === 'linked-session').length,
-        stubbed: r.refs.filter((x) => x.resolution === 'stubbed').length,
+        linkedSession: r.refs.filter((x) => x.resolution === "linked-session")
+          .length,
+        stubbed: r.refs.filter((x) => x.resolution === "stubbed").length,
         stubbedDespiteInScope: stubbedDespite,
       };
       for (const s of stubbedDespite) {
-        addFinding('t5-mega-stub-despite-scope', name, `${s} still stubbed with its set in scope`, 'core/propose-figma.ts resolveChildContract');
+        addFinding(
+          "t5-mega-stub-despite-scope",
+          name,
+          `${s} still stubbed with its set in scope`,
+          "core/propose-figma.ts resolveChildContract",
+        );
       }
     }
   } catch (e) {
     internalError = e instanceof Error ? e.message : String(e);
-    addFinding('gauntlet-internal-error', 'MEGA-SESSION', internalError, 'gauntlet.ts stage E4');
+    addFinding(
+      "gauntlet-internal-error",
+      "MEGA-SESSION",
+      internalError,
+      "gauntlet.ts stage E4",
+    );
   }
-  const totalStubbedDespite = Object.values(relink).reduce((a, r) => a + r.stubbedDespiteInScope.length, 0);
+  const totalStubbedDespite = Object.values(relink).reduce(
+    (a, r) => a + r.stubbedDespiteInScope.length,
+    0,
+  );
   t5Records.push({
-    exercise: 'mega-session',
+    exercise: "mega-session",
     ok: !internalError && totalStubbedDespite === 0,
     detail: `first pass: ${JSON.stringify(firstPass)}; relink: ${JSON.stringify(relink)}`,
   });
-  writeFileSync(path.join(HERE, 'mega-session.json'), JSON.stringify({ order: MEGA_ORDER, firstPass, relink }, null, 2));
+  writeFileSync(
+    path.join(HERE, "mega-session.json"),
+    JSON.stringify({ order: MEGA_ORDER, firstPass, relink }, null, 2),
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -1083,12 +1511,13 @@ function varNamesOf(set: unknown): Set<string> {
   const names = new Set<string>();
   const walk = (node: unknown): void => {
     if (Array.isArray(node)) return node.forEach(walk);
-    if (!node || typeof node !== 'object') return;
+    if (!node || typeof node !== "object") return;
     const o = node as Record<string, unknown>;
-    if (typeof o.var === 'string') names.add(o.var);
-    if (typeof o.fillVar === 'string') names.add(o.fillVar);
-    if (o.bound && typeof o.bound === 'object') {
-      for (const v of Object.values(o.bound as Record<string, unknown>)) if (typeof v === 'string') names.add(v);
+    if (typeof o.var === "string") names.add(o.var);
+    if (typeof o.fillVar === "string") names.add(o.fillVar);
+    if (o.bound && typeof o.bound === "object") {
+      for (const v of Object.values(o.bound as Record<string, unknown>))
+        if (typeof v === "string") names.add(v);
     }
     for (const v of Object.values(o)) walk(v);
   };
@@ -1098,26 +1527,42 @@ function varNamesOf(set: unknown): Set<string> {
 
 mkdirSync(FIXTURE_DIR, { recursive: true });
 const allVariables = (dump._variables ?? {}) as Record<string, unknown>;
-const allDegradations = (dump._degradations ?? []) as Array<{ code: string; nodePath: string; message: string }>;
-const writtenFixtures: Array<{ cls: string; setName: string; file: string }> = [];
+const allDegradations = (dump._degradations ?? []) as Array<{
+  code: string;
+  nodePath: string;
+  message: string;
+}>;
+const writtenFixtures: Array<{ cls: string; setName: string; file: string }> =
+  [];
 function writeClassFixture(cls: string, setName: string): void {
   const set = dump[setName];
   if (!set) return;
-  const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+  const slug = (s: string) =>
+    s
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 60);
   const file = `${slug(cls)}-${slug(setName)}.dump.json`;
   if (writtenFixtures.some((f) => f.file === file)) return;
   const slice: Record<string, unknown> = {};
-  for (const name of varNamesOf(set)) if (name in allVariables) slice[name] = allVariables[name];
+  for (const name of varNamesOf(set))
+    if (name in allVariables) slice[name] = allVariables[name];
   const fixture = {
     _provenance: {
       ...(dump._provenance as Record<string, unknown>),
       note: `Single-set LIVE-GAUNTLET fixture for class "${cls}" — sliced from ${path.basename(DUMP_PATH)} by extract/figma/gauntlet/live/gauntlet.ts.`,
     },
-    _degradations: allDegradations.filter((d) => d.nodePath.startsWith(`${setName}:`)),
+    _degradations: allDegradations.filter((d) =>
+      d.nodePath.startsWith(`${setName}:`),
+    ),
     _variables: slice,
     [setName]: set,
   };
-  writeFileSync(path.join(FIXTURE_DIR, file), JSON.stringify(fixture, null, 1) + '\n');
+  writeFileSync(
+    path.join(FIXTURE_DIR, file),
+    JSON.stringify(fixture, null, 1) + "\n",
+  );
   writtenFixtures.push({ cls, setName, file });
 }
 // New classes only: known named limits / fix-in-flight classes carry tags.
@@ -1129,21 +1574,40 @@ for (const f of findings) {
 for (const [cls, f] of newClasses) writeClassFixture(cls, f.set);
 // The false-cycle class needs the TRIO in one self-contained fixture (the
 // single-set slice cannot reproduce a cross-population id collision).
-if (newClasses.has('session-id-collision-false-cycle')) {
-  const trio = ['Radio button', 'Radio button-icon', 'RadioButton', 'Circle'].filter((n) => sets.has(n));
+if (newClasses.has("session-id-collision-false-cycle")) {
+  const trio = [
+    "Radio button",
+    "Radio button-icon",
+    "RadioButton",
+    "Circle",
+  ].filter((n) => sets.has(n));
   const slice: Record<string, unknown> = {};
-  for (const n of trio) for (const name of varNamesOf(dump[n])) if (name in allVariables) slice[name] = allVariables[name];
+  for (const n of trio)
+    for (const name of varNamesOf(dump[n]))
+      if (name in allVariables) slice[name] = allVariables[name];
   const fixture: Record<string, unknown> = {
     _provenance: {
       ...(dump._provenance as Record<string, unknown>),
       note: 'Multi-set LIVE-GAUNTLET fixture for class "session-id-collision-false-cycle" — RadioButton (plain COMPONENT) and "Radio button" (set) sanitize to ds.radio-button; importing Radio button-icon then Radio button in one session rebinds the icon\'s ref onto the parent and the referee reports a false cycle.',
     },
-    _degradations: allDegradations.filter((d) => trio.some((n) => d.nodePath.startsWith(`${n}:`))),
+    _degradations: allDegradations.filter((d) =>
+      trio.some((n) => d.nodePath.startsWith(`${n}:`)),
+    ),
     _variables: slice,
   };
   for (const n of trio) fixture[n] = dump[n];
-  writeFileSync(path.join(FIXTURE_DIR, 'session-id-collision-false-cycle-radio-button.dump.json'), JSON.stringify(fixture, null, 1) + '\n');
-  writtenFixtures.push({ cls: 'session-id-collision-false-cycle', setName: trio.join(' + '), file: 'session-id-collision-false-cycle-radio-button.dump.json' });
+  writeFileSync(
+    path.join(
+      FIXTURE_DIR,
+      "session-id-collision-false-cycle-radio-button.dump.json",
+    ),
+    JSON.stringify(fixture, null, 1) + "\n",
+  );
+  writtenFixtures.push({
+    cls: "session-id-collision-false-cycle",
+    setName: trio.join(" + "),
+    file: "session-id-collision-false-cycle-radio-button.dump.json",
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -1161,13 +1625,20 @@ for (const rec of baseRecords) {
 
 const out = {
   _provenance: {
-    generatedBy: 'extract/figma/gauntlet/live/gauntlet.ts',
+    generatedBy: "extract/figma/gauntlet/live/gauntlet.ts",
     dump: DUMP_PATH,
-    dumpFileVersion: (dump._provenance as { fileVersion?: string })?.fileVersion ?? null,
+    dumpFileVersion:
+      (dump._provenance as { fileVersion?: string })?.fileVersion ?? null,
     generatedAt: new Date().toISOString().slice(0, 10),
   },
   tierTotals,
-  tiers: tiers.map((t) => ({ setName: t.setName, tier: t.tier, variants: t.variants, realDeps: t.realDeps, stateAxes: t.stateAxes })),
+  tiers: tiers.map((t) => ({
+    setName: t.setName,
+    tier: t.tier,
+    variants: t.variants,
+    realDeps: t.realDeps,
+    stateAxes: t.stateAxes,
+  })),
   singlesSample: singles,
   baseRecords,
   comboRecords,
@@ -1178,31 +1649,59 @@ const out = {
   batchNotes: batch.notes,
   findings,
   fixtures: writtenFixtures,
-  capturedLayer: captured ? { count: captured.count, registered: capturedRegistered.length, skipped: captured.skipped.length } : null,
+  capturedLayer: captured
+    ? {
+        count: captured.count,
+        registered: capturedRegistered.length,
+        skipped: captured.skipped.length,
+      }
+    : null,
 };
-writeFileSync(path.join(HERE, 'gauntlet.json'), JSON.stringify(out, null, 1) + '\n');
+writeFileSync(
+  path.join(HERE, "gauntlet.json"),
+  JSON.stringify(out, null, 1) + "\n",
+);
 
 // ---------------------------------------------------------------------------
 // stdout scoreboard
 // ---------------------------------------------------------------------------
 
 console.log(`\nLIVE GAUNTLET over ${DUMP_PATH}`);
-console.log(`sets exercised: ${baseRecords.length} (76 COMPONENT_SETs tiered + ${singles.length} sampled singles + RadioButton)`);
-for (const tier of ['T1', 'T2', 'T3', 'T4', 'T5', 'S']) {
+console.log(
+  `sets exercised: ${baseRecords.length} (76 COMPONENT_SETs tiered + ${singles.length} sampled singles + RadioButton)`,
+);
+for (const tier of ["T1", "T2", "T3", "T4", "T5", "S"]) {
   const tt = tierTotals[tier];
   if (tt) console.log(`  ${tier}: ${tt.clean}/${tt.sets} clean`);
 }
-console.log(`\nT2 combos: ${comboRecords.reduce((a, r) => a + r.htmlOk, 0)}/${comboRecords.reduce((a, r) => a + r.combos, 0)} html-compiled; canvas ${comboRecords.filter((r) => r.canvasOk).length}/${comboRecords.length} sets`);
-console.log(`T3 promotion: ${promotionRecords.filter((r) => r.ok).length}/${promotionRecords.length} axes correct (${promotionRecords.filter((r) => r.expected === 'promote').length} promote-expected, ${promotionRecords.filter((r) => r.expected === 'near-miss-enum').length} near-miss-enum)`);
-console.log(`key contradictions (duplicate-name collapse): ${keyContradictions.length} parent→child pairs`);
+console.log(
+  `\nT2 combos: ${comboRecords.reduce((a, r) => a + r.htmlOk, 0)}/${comboRecords.reduce((a, r) => a + r.combos, 0)} html-compiled; canvas ${comboRecords.filter((r) => r.canvasOk).length}/${comboRecords.length} sets`,
+);
+console.log(
+  `T3 promotion: ${promotionRecords.filter((r) => r.ok).length}/${promotionRecords.length} axes correct (${promotionRecords.filter((r) => r.expected === "promote").length} promote-expected, ${promotionRecords.filter((r) => r.expected === "near-miss-enum").length} near-miss-enum)`,
+);
+console.log(
+  `key contradictions (duplicate-name collapse): ${keyContradictions.length} parent→child pairs`,
+);
 const cf = sessionRecords.map((r) => r.childrenFirst);
-console.log(`T4/T5 sessions: ${sessionRecords.length} composites; children-first stub-despite-import: ${cf.reduce((a, r) => a + r.stubbedDespiteImported.length, 0)}; self-heal failures: ${sessionRecords.filter((r) => r.adversarial.healedAfterReimport === false).length}`);
-console.log(`T5: ${t5Records.filter((r) => r.ok).length}/${t5Records.length} exercises ok`);
+console.log(
+  `T4/T5 sessions: ${sessionRecords.length} composites; children-first stub-despite-import: ${cf.reduce((a, r) => a + r.stubbedDespiteImported.length, 0)}; self-heal failures: ${sessionRecords.filter((r) => r.adversarial.healedAfterReimport === false).length}`,
+);
+console.log(
+  `T5: ${t5Records.filter((r) => r.ok).length}/${t5Records.length} exercises ok`,
+);
 const newFindings = findings.filter((f) => !f.known);
 const knownFindings = findings.filter((f) => f.known);
-console.log(`\nfindings: ${findings.length} total — ${newFindings.length} NEW, ${knownFindings.length} known (named-limit/fix-in-flight)`);
+console.log(
+  `\nfindings: ${findings.length} total — ${newFindings.length} NEW, ${knownFindings.length} known (named-limit/fix-in-flight)`,
+);
 const byCls = new Map<string, number>();
 for (const f of newFindings) byCls.set(f.cls, (byCls.get(f.cls) ?? 0) + 1);
-for (const [cls, n] of [...byCls].sort((a, b) => b[1] - a[1])) console.log(`  ${String(n).padStart(4)}  ${cls}`);
-console.log(`\nfixtures: ${writtenFixtures.length} new-class slices under gauntlet/live/fixtures/`);
-console.log(`wrote gauntlet.json${writtenFixtures.length ? ' + fixtures' : ''}`);
+for (const [cls, n] of [...byCls].sort((a, b) => b[1] - a[1]))
+  console.log(`  ${String(n).padStart(4)}  ${cls}`);
+console.log(
+  `\nfixtures: ${writtenFixtures.length} new-class slices under gauntlet/live/fixtures/`,
+);
+console.log(
+  `wrote gauntlet.json${writtenFixtures.length ? " + fixtures" : ""}`,
+);

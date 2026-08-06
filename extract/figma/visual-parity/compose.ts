@@ -16,8 +16,8 @@
  * sequence in one playground session: the subject's nested instances LINK
  * to the session contracts (key first, name fallback) instead of stubbing.
  */
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import {
   capturedTokensFromDump,
   ContractSchema,
@@ -27,10 +27,15 @@ import {
   tokenInventoryFromJson,
   type CapturedTokenLayer,
   type Contract,
-} from '../../../core/index.js';
-import { loadRepoData, readJson, REPO, type RepoData } from '../../fidelity-matrix/scripts/lib.js';
-import { isDumpSet, type DumpFile, type DumpSet } from '../types.js';
-import type { ParitySubject } from './subjects.js';
+} from "../../../core/index.js";
+import {
+  loadRepoData,
+  readJson,
+  REPO,
+  type RepoData,
+} from "../../fidelity-matrix/scripts/lib.js";
+import { isDumpSet, type DumpFile, type DumpSet } from "../types.js";
+import type { ParitySubject } from "./subjects.js";
 
 export interface RenderablePackage {
   subject: ParitySubject;
@@ -65,16 +70,20 @@ function composeCaptured(
   captured: CapturedTokenLayer | null,
 ): { inventory: Set<string>; css: string; shadowed: string[]; count: number } {
   if (!captured || captured.count === 0) {
-    return { inventory: baseInventory, css: '', shadowed: [], count: 0 };
+    return { inventory: baseInventory, css: "", shadowed: [], count: 0 };
   }
-  const shadowed = captured.entries.filter((e) => baseInventory.has(e.path)).map((e) => e.name);
+  const shadowed = captured.entries
+    .filter((e) => baseInventory.has(e.path))
+    .map((e) => e.name);
   const registered = captured.entries.filter((e) => !baseInventory.has(e.path));
-  if (registered.length === 0) return { inventory: baseInventory, css: '', shadowed, count: 0 };
+  if (registered.length === 0)
+    return { inventory: baseInventory, css: "", shadowed, count: 0 };
   const tree: Record<string, unknown> = {};
   for (const e of registered) {
-    const segs = e.path.split('.');
+    const segs = e.path.split(".");
     let node = tree;
-    for (const seg of segs.slice(0, -1)) node = (node[seg] ??= {}) as Record<string, unknown>;
+    for (const seg of segs.slice(0, -1))
+      node = (node[seg] ??= {}) as Record<string, unknown>;
     node[segs[segs.length - 1]] = { $value: e.value, $type: e.type };
   }
   return {
@@ -91,13 +100,22 @@ function composeCaptured(
  *  "_Tab-item", … and the old startsWith('_') guard made them unaddressable
  *  — 20 live composites' session scopes refused. The playground's own
  *  receive path checks the parsed shape; this now matches it). */
-const META_CHANNELS = new Set(['_provenance', '_variables', '_degradations']);
+const META_CHANNELS = new Set(["_provenance", "_variables", "_degradations"]);
 
-function pickSet(dump: DumpFile, dumpPath: string, wanted: string | undefined, who: string): [string, DumpSet] {
+function pickSet(
+  dump: DumpFile,
+  dumpPath: string,
+  wanted: string | undefined,
+  who: string,
+): [string, DumpSet] {
   const sets = Object.entries(dump).filter(
     (e): e is [string, DumpSet] => !META_CHANNELS.has(e[0]) && isDumpSet(e[1]),
   );
-  const picked = wanted ? sets.find(([name]) => name === wanted) : sets.length === 1 ? sets[0] : undefined;
+  const picked = wanted
+    ? sets.find(([name]) => name === wanted)
+    : sets.length === 1
+      ? sets[0]
+      : undefined;
   if (!picked) {
     throw new Error(
       `${who}: ${wanted ? `set "${wanted}" not in ${dumpPath}` : `${dumpPath} carries ${sets.length} sets — name one`}`,
@@ -108,11 +126,17 @@ function pickSet(dump: DumpFile, dumpPath: string, wanted: string | undefined, w
 
 export function composeSubject(subject: ParitySubject): RenderablePackage {
   const d = data();
-  const baseCss = readFileSync(path.join(REPO, 'src', 'styles', 'tokens.css'), 'utf8');
+  const baseCss = readFileSync(
+    path.join(REPO, "src", "styles", "tokens.css"),
+    "utf8",
+  );
 
-  if (subject.kind === 'contract') {
+  if (subject.kind === "contract") {
     const contract = d.contracts.get(subject.contractId);
-    if (!contract) throw new Error(`${subject.id}: contract "${subject.contractId}" not in contracts/`);
+    if (!contract)
+      throw new Error(
+        `${subject.id}: contract "${subject.contractId}" not in contracts/`,
+      );
     return {
       subject,
       contract,
@@ -120,7 +144,14 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
       inventory: d.inventory,
       tokensCss: baseCss,
       icons: d.icons,
-      receipts: { mintedCount: 0, capturedCount: 0, capturedShadowed: [], childStubs: [], sessionContracts: [], proposalNotes: 0 },
+      receipts: {
+        mintedCount: 0,
+        capturedCount: 0,
+        capturedShadowed: [],
+        childStubs: [],
+        sessionContracts: [],
+        proposalNotes: 0,
+      },
     };
   }
 
@@ -138,7 +169,7 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
   const sessionClaimedIds = new Set<string>();
   let inventory = d.inventory;
   const cssBlocks: string[] = [baseCss];
-  const receipts: RenderablePackage['receipts'] = {
+  const receipts: RenderablePackage["receipts"] = {
     mintedCount: 0,
     capturedCount: 0,
     capturedShadowed: [],
@@ -166,11 +197,14 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
     receipts.capturedShadowed.push(...withCaptured.shadowed);
 
     const result = proposeFromDump(set, {
+      projectionMode: "reviewable-inversion",
       // Captured-variable resolved values (class ① mint routing): a bound
       // paint whose refs refuse unification survives as per-variant minted
       // literals instead of dropping — the same index proposeBatchFromDump
       // builds automatically; direct proposeFromDump callers thread it.
-      capturedValues: new Map((captured?.entries ?? []).map((e) => [e.path, e.value] as const)),
+      capturedValues: new Map(
+        (captured?.entries ?? []).map((e) => [e.path, e.value] as const),
+      ),
       corpus: d.corpus,
       // The SESSION registries — repo + every previously registered proposal:
       // nested instances LINK (componentSetKey first, drawn-name fallback)
@@ -191,7 +225,10 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
     const stubs = (result.childStubs ?? []).map((s) => ContractSchema.parse(s));
 
     if (result.mintedTokens) {
-      inventory = new Set([...inventory, ...tokenInventoryFromJson([result.mintedTokens.tree])]);
+      inventory = new Set([
+        ...inventory,
+        ...tokenInventoryFromJson([result.mintedTokens.tree]),
+      ]);
       cssBlocks.push(
         `/* Minted provisional tokens (imported.*) — ${who}, literal fidelity. */\n${mintedTokenCss(result.mintedTokens.tree)}`,
       );
@@ -216,7 +253,11 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
   };
 
   for (const entry of subject.scope ?? []) {
-    const scoped = proposeOne(entry.dumpPath, entry.set, `${subject.id} scope(${entry.dumpPath})`);
+    const scoped = proposeOne(
+      entry.dumpPath,
+      entry.set,
+      `${subject.id} scope(${entry.dumpPath})`,
+    );
     receipts.sessionContracts.push(scoped.contract.id);
     receipts.proposalNotes += scoped.notes;
   }
@@ -228,9 +269,16 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
   // Registry/dump agreement (the original guard): the subject's set nodeId
   // must match the parity registry's.
   const ownDump = readJson(path.join(REPO, subject.dumpPath)) as DumpFile;
-  const [, ownSet] = pickSet(ownDump, subject.dumpPath, subject.set, subject.id);
+  const [, ownSet] = pickSet(
+    ownDump,
+    subject.dumpPath,
+    subject.set,
+    subject.id,
+  );
   if (ownSet.nodeId && ownSet.nodeId !== subject.setNodeId) {
-    throw new Error(`${subject.id}: dump set nodeId ${ownSet.nodeId} != registry setNodeId ${subject.setNodeId}`);
+    throw new Error(
+      `${subject.id}: dump set nodeId ${ownSet.nodeId} != registry setNodeId ${subject.setNodeId}`,
+    );
   }
 
   return {
@@ -238,7 +286,7 @@ export function composeSubject(subject: ParitySubject): RenderablePackage {
     contract: own.contract,
     contracts,
     inventory,
-    tokensCss: cssBlocks.filter(Boolean).join('\n'),
+    tokensCss: cssBlocks.filter(Boolean).join("\n"),
     icons: d.icons,
     receipts,
   };

@@ -303,15 +303,20 @@ export interface NodeSpec {
   contentProp?: string;
   // instance
   dep?: string;
+  /** Authoritative semantic identity for a nested component. Names are only
+   *  the explicit legacy-generated fallback at runtime. */
+  depContractId?: string;
+  /** Stable Figma identity when the child contract already has an anchor. */
+  depAnchorKey?: string;
   depProps?: Record<string, string | boolean>;
   // slot
   slotProperty?: string;
   slotOptional?: boolean;
-  slotAccepts?: string[];
+  slotAccepts?: Array<{ dep: string; contractId: string; anchorKey?: string }>;
   /** Design-time default content. >1 item = multi-child slot: rendered
    *  directly, NO swap property (INSTANCE_SWAP holds one instance — the
    *  native SLOT property type is the migration target, see docs/08). */
-  slotDefault?: Array<{ dep: string; props?: Record<string, string | boolean> }>;
+  slotDefault?: Array<{ dep: string; contractId: string; anchorKey?: string; props?: Record<string, string | boolean> }>;
   children?: NodeSpec[];
 }
 
@@ -564,10 +569,19 @@ interface DerivedTextStyle {
   tokenPath: string;
   fontSize: number;
   fontStyle: string;
+  sourceStyleKey?: string;
 }
 
-function deriveTextStyles(): DerivedTextStyle[] {
-  const out: DerivedTextStyle[] = [];
+function deriveTextStyles(): {
+  /** Canvas upsert list — one entry per semantic style name. */
+  styles: DerivedTextStyle[];
+  /** Every font-size token path that carries identity → its style (aliases
+   *  share one canvas style when names match). */
+  byTokenPath: Map<string, DerivedTextStyle>;
+} {
+  const styles: DerivedTextStyle[] = [];
+  const byTokenPath = new Map<string, DerivedTextStyle>();
+  const byName = new Map<string, DerivedTextStyle>();
   for (const [p] of semantic) {
     const m = p.match(/^font\.(.+?)\.size(?:\.([^.]+))?$/);
     if (!m) continue;
@@ -577,13 +591,95 @@ function deriveTextStyles(): DerivedTextStyle[] {
     const fontStyle = semantic.has(weightPath)
       ? (FONT_STYLE_BY_WEIGHT[px(resolveLiteral(weightPath))] ?? 'Medium')
       : 'Medium';
-    out.push({ name, tokenPath: p, fontSize: px(resolveLiteral(p)), fontStyle });
+    const style: DerivedTextStyle = {
+      name,
+      tokenPath: p,
+      fontSize: px(resolveLiteral(p)),
+      fontStyle,
+    };
+    styles.push(style);
+    byName.set(name, style);
+    byTokenPath.set(p, style);
   }
-  return out.sort((a, b) => a.name.localeCompare(b.name));
+  // Exact text-style identity from mint metadata. Prefer imported.text.*
+  // (designer vocabulary shared across components) as the canonical upsert
+  // tokenPath, then map every component-path axis leaf
+  // (imported.avatar.text.font-size.xl) to the same style by name so
+  // matchTextStyle resolves whichever path the contract binds.
+  const importedFontSize = /^(.+)\.font-size(?:\.[^.]+)?$/;
+  const preferShared = (path: string) => path.startsWith('imported.text.');
+  const candidates: Array<{
+    path: string;
+    identity: { name: string; key?: string; weight?: number };
+  }> = [];
+  for (const [p, entry] of primitives) {
+    if (!importedFontSize.test(p)) continue;
+    const identity = (
+      entry.extensions as
+        | {
+            dsContracts?: {
+              textStyle?: {
+                name?: unknown;
+                key?: unknown;
+                weight?: unknown;
+              };
+            };
+          }
+        | undefined
+    )?.dsContracts?.textStyle;
+    if (!identity || typeof identity.name !== 'string') continue;
+    candidates.push({
+      path: p,
+      identity: {
+        name: identity.name,
+        ...(typeof identity.key === 'string' ? { key: identity.key } : {}),
+        ...(typeof identity.weight === 'number' ? { weight: identity.weight } : {}),
+      },
+    });
+  }
+  candidates.sort((a, b) => {
+    const pref = Number(preferShared(b.path)) - Number(preferShared(a.path));
+    return pref !== 0 ? pref : a.path.localeCompare(b.path);
+  });
+  for (const { path: p, identity } of candidates) {
+    const group = p.replace(/\.font-size(?:\.[^.]+)?$/, '');
+    const weightPath = `${group}.font-weight`;
+    const fontStyle =
+      typeof identity.weight === 'number'
+        ? (FONT_STYLE_BY_WEIGHT[identity.weight] ?? 'Medium')
+        : primitives.has(weightPath)
+          ? (FONT_STYLE_BY_WEIGHT[px(resolveLiteral(weightPath))] ?? 'Medium')
+          : 'Medium';
+    const fontSize = px(resolveLiteral(p));
+    let style = byName.get(identity.name);
+    if (!style) {
+      style = {
+        name: identity.name,
+        tokenPath: p,
+        fontSize,
+        fontStyle,
+        ...(identity.key ? { sourceStyleKey: identity.key } : {}),
+      };
+      styles.push(style);
+      byName.set(identity.name, style);
+    } else if (style.fontSize !== fontSize || style.fontStyle !== fontStyle) {
+      // Same semantic name with contradictory size/weight — never let one
+      // definition silently win (exact text-style identity fails closed).
+      throw new Error(
+        `text-style-identity-refused: text style ${JSON.stringify(identity.name)} has conflicting definitions ` +
+          `(${style.fontSize}px/${style.fontStyle} via ${style.tokenPath} vs ${fontSize}px/${fontStyle} via ${p})`,
+      );
+    } else if (!style.sourceStyleKey && identity.key) {
+      style.sourceStyleKey = identity.key;
+    }
+    byTokenPath.set(p, style);
+  }
+  styles.sort((a, b) => a.name.localeCompare(b.name));
+  return { styles, byTokenPath };
 }
 
-const derivedTextStyles = deriveTextStyles();
-const textStyleByTokenPath = new Map(derivedTextStyles.map((t) => [t.tokenPath, t]));
+const { styles: derivedTextStyles, byTokenPath: textStyleByTokenPath } =
+  deriveTextStyles();
 
 // ---------------------------------------------------------------------------
 // 01-tokens.js (unchanged mechanism from v1)
@@ -783,6 +879,9 @@ for (const t of TEXT_STYLES) {
     s.setSharedPluginData('ds_contracts', 'textStyleToken', t.tokenPath);
     styleByToken[t.tokenPath] = s;
     createdStyles++;
+  }
+  if (t.sourceStyleKey) {
+    s.setSharedPluginData('ds_contracts', 'sourceTextStyleKey', t.sourceStyleKey);
   }
   await figma.loadFontAsync({ family: 'Inter', style: t.fontStyle });
   s.name = t.name;
@@ -2545,6 +2644,8 @@ function partToSpecs(
         type: 'instance',
         name: i === 0 ? name : `${name} ${i + 1}`,
         dep: dep.name,
+        depContractId: dep.id,
+        ...(dep.anchors.figma.componentSetKey ? { depAnchorKey: dep.anchors.figma.componentSetKey } : {}),
         depProps: mapDepProps(dep, { ...(part.component!.props ?? {}), ...fields }, subst, part.component!.text),
       };
       applyVisibleWhen(spec, part, contract);
@@ -2680,6 +2781,8 @@ function partToSpecInner(
       type: 'instance',
       name,
       dep: dep.name,
+      depContractId: dep.id,
+      ...(dep.anchors.figma.componentSetKey ? { depAnchorKey: dep.anchors.figma.componentSetKey } : {}),
       depProps: mapDepProps(dep, part.component.props ?? {}, subst, part.component.text, depLedger),
     };
     for (const line of depLedger) (spec.channelMiss ??= []).push(line);
@@ -2705,12 +2808,24 @@ function partToSpecInner(
       layout: layoutSpec(part, false, subst),
       slotProperty: slotFigmaProperty(part.slot),
       slotOptional: part.optional || undefined,
-      slotAccepts: (part.slot.accepts ?? []).map((id) => byId.get(id)!.name),
+      slotAccepts: (part.slot.accepts ?? []).map((id) => {
+        const dep = byId.get(id)!;
+        return {
+          dep: dep.name,
+          contractId: dep.id,
+          ...(dep.anchors.figma.componentSetKey ? { anchorKey: dep.anchors.figma.componentSetKey } : {}),
+        };
+      }),
     };
     if ((part.slot.defaultContent?.length ?? 0) > 0) {
       spec.slotDefault = part.slot.defaultContent!.map((item) => {
         const dep = byId.get(item.id)!;
-        return { dep: dep.name, props: mapDepProps(dep, item.props ?? {}, subst, item.text) };
+        return {
+          dep: dep.name,
+          contractId: dep.id,
+          ...(dep.anchors.figma.componentSetKey ? { anchorKey: dep.anchors.figma.componentSetKey } : {}),
+          props: mapDepProps(dep, item.props ?? {}, subst, item.text),
+        };
       });
     }
     applyStyling(spec, part, subst, ctx);
@@ -4203,9 +4318,9 @@ const boundPaint = (varName, consumer) => {
 
 // Named text styles (synced by 01-tokens.js): consumers look up OUR styles
 // only — the ds_contracts/textStyleToken marker is identity, a foreign style
-// sharing a name is never used. Missing style (tokens script not run yet)
-// degrades gracefully: the raw fontName/fontSize already set on the node
-// stand until the next amend after the styles exist.
+// sharing a name is never used. When a compiled spec carries textStyle, the
+// named style MUST bind — missing or failed setTextStyleIdAsync refuses by
+// the stable code text-style-identity-refused (never silently keep raw props).
 let _textStyleMap = null;
 async function ourTextStyle(name) {
   if (!_textStyleMap) {
@@ -4286,14 +4401,73 @@ async function wireStateReactions(setNode, byName, C) {
   return wired;
 }
 
-function findComponentByName(name) {
+function isSyncTarget(n) {
+  return n.type === 'COMPONENT_SET' ||
+    (n.type === 'COMPONENT' && (!n.parent || n.parent.type !== 'COMPONENT_SET'));
+}
+
+function allSyncTargets() {
+  const out = [];
   for (const page of figma.root.children) {
-    const hit = page.findOne(
-      (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === name,
-    );
-    if (hit) return hit;
+    for (const node of page.findAll((n) => isSyncTarget(n))) out.push(node);
   }
-  throw new Error('Dependency component not found in file: ' + name + ' (sync it first)');
+  return out;
+}
+
+// One resolver for nested instances, slot defaults/preferred values, and
+// top-level amend targets. Semantic identity wins; names are admitted only
+// for explicit pre-contractId generated nodes.
+function resolveComponentIdentity(ref, purpose, allowMissing) {
+  const targets = allSyncTargets();
+  const exact = targets.filter(
+    (n) => n.getSharedPluginData('ds_contracts', 'contractId') === ref.contractId,
+  );
+  if (exact.length > 1) {
+    throw new Error(
+      purpose + ': duplicate ds_contracts/contractId "' + ref.contractId +
+      '" on ' + exact.length + ' component targets — refusing ambiguous identity',
+    );
+  }
+  if (exact.length === 1) return exact[0];
+
+  if (ref.anchorKey) {
+    const anchored = targets.filter((n) => n.key === ref.anchorKey);
+    if (anchored.length > 1) {
+      throw new Error(
+        purpose + ': duplicate Figma anchor key "' + ref.anchorKey +
+        '" — refusing ambiguous identity',
+      );
+    }
+    if (anchored.length === 1) {
+      const marker = anchored[0].getSharedPluginData('ds_contracts', 'contractId');
+      if (marker && marker !== ref.contractId) {
+        throw new Error(
+          purpose + ': anchor key "' + ref.anchorKey + '" belongs to contractId "' +
+          marker + '", not "' + ref.contractId + '" — refusing contradictory identity',
+        );
+      }
+      return anchored[0];
+    }
+  }
+
+  const legacy = targets.filter(
+    (n) => n.name === ref.name &&
+      n.getSharedPluginData('ds_contracts', 'contractId') === '' &&
+      n.getSharedPluginData('ds_contracts', 'specHash') !== '',
+  );
+  if (legacy.length > 1) {
+    throw new Error(
+      purpose + ': duplicate explicit legacy-generated name "' + ref.name +
+      '" on ' + legacy.length + ' unmarked component targets — refusing ambiguous identity',
+    );
+  }
+  if (legacy.length === 1) return legacy[0];
+  if (allowMissing) return null;
+  throw new Error(
+    purpose + ': component not found for contractId "' + ref.contractId + '"' +
+    (ref.anchorKey ? ', anchor key "' + ref.anchorKey + '"' : '') +
+    ', or unique explicit legacy-generated name "' + ref.name + '" (sync it first)',
+  );
 }
 
 function setInstanceProps(inst, props, owner) {
@@ -4476,8 +4650,22 @@ async function buildNode(spec, registry) {
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
+      // Fail closed: a compiled textStyle that cannot bind is identity loss.
       const st = await ourTextStyle(spec.textStyle);
-      if (st) { try { await node.setTextStyleIdAsync(st.id); } catch (e) { /* raw props stand */ } }
+      if (!st) {
+        throw new Error(
+          'text-style-identity-refused: missing local text style "' + spec.textStyle +
+          '" (run the tokens sync so ds_contracts/textStyleToken styles exist)',
+        );
+      }
+      try {
+        await node.setTextStyleIdAsync(st.id);
+      } catch (e) {
+        throw new Error(
+          'text-style-identity-refused: setTextStyleIdAsync failed for "' + spec.textStyle +
+          '": ' + (e && e.message ? e.message : String(e)),
+        );
+      }
     }
     if (spec.textFill) node.fills = [boundPaint(spec.textFill, node)];
     if (spec.contentProp) {
@@ -4523,7 +4711,11 @@ async function buildNode(spec, registry) {
       node = wrap;
     }
   } else if (spec.type === 'instance') {
-    const target = findComponentByName(spec.dep);
+    const target = resolveComponentIdentity(
+      { contractId: spec.depContractId, anchorKey: spec.depAnchorKey, name: spec.dep },
+      'Instance "' + spec.name + '"',
+      false,
+    );
     const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
     node = main.createInstance();
     if (spec.depProps) setInstanceProps(node, spec.depProps, target);
@@ -4539,7 +4731,11 @@ async function buildNode(spec, registry) {
     } else {
       const instances = [];
       for (const item of defaults) {
-        const target = findComponentByName(item.dep);
+        const target = resolveComponentIdentity(
+          { contractId: item.contractId, anchorKey: item.anchorKey, name: item.dep },
+          'Slot "' + spec.name + '" default',
+          false,
+        );
         const main = target.type === 'COMPONENT_SET' ? target.defaultVariant : target;
         const inst = main.createInstance();
         if (item.props) setInstanceProps(inst, item.props, target);
@@ -4658,9 +4854,9 @@ async function amendSet(set, C) {
     if (!fpSkip || fpSkip.indexOf('${FINGERPRINT_VERSION}') !== 0) {
       dsStampFingerprints(set);
     }
-    return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: set.id, key: set.key };
   }
-  const report = { name: C.setName, amended: true, nodeId: set.id, key: set.key,
+  const report = { name: C.setName, contractId: C.contractId, amended: true, nodeId: set.id, key: set.key,
     addedVariants: [], rebuiltVariants: 0, extraVariants: [], addedProps: [], editedDefaults: [] };
   const defs = set.componentPropertyDefinitions;
   const newKeys = {};
@@ -4752,8 +4948,12 @@ async function amendSet(set, C) {
       let k = defKey(sl.spec.slotProperty);
       if (!k) {
         const preferred = [];
-        for (const depName of sl.spec.slotAccepts || []) {
-          const target = findComponentByName(depName);
+        for (const depRef of sl.spec.slotAccepts || []) {
+          const target = resolveComponentIdentity(
+            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
+            'Slot "' + sl.spec.slotProperty + '" preferred value',
+            false,
+          );
           preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
         }
         k = set.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
@@ -4842,9 +5042,9 @@ async function amendComponent(comp, C) {
     if (!fpSkipC || fpSkipC.indexOf('${FINGERPRINT_VERSION}') !== 0) {
       dsStampFingerprints(comp);
     }
-    return { name: C.setName, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'unchanged', nodeId: comp.id, key: comp.key };
   }
-  const report = { name: C.setName, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
+  const report = { name: C.setName, contractId: C.contractId, amended: true, standalone: true, nodeId: comp.id, key: comp.key, addedProps: [], editedDefaults: [] };
   const defs = comp.componentPropertyDefinitions;
   const newKeys = {};
   const defKey = (name) => newKeys[name] ||
@@ -4899,8 +5099,12 @@ async function amendComponent(comp, C) {
     let k = defKey(sl.spec.slotProperty);
     if (!k) {
       const preferred = [];
-      for (const depName of sl.spec.slotAccepts || []) {
-        const target = findComponentByName(depName);
+      for (const depRef of sl.spec.slotAccepts || []) {
+        const target = resolveComponentIdentity(
+          { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
+          'Slot "' + sl.spec.slotProperty + '" preferred value',
+          false,
+        );
         preferred.push({ type: target.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT', key: target.key });
       }
       k = comp.addComponentProperty(sl.spec.slotProperty, 'INSTANCE_SWAP', sl.defaultId || util.id,
@@ -4931,38 +5135,15 @@ async function amendComponent(comp, C) {
 }
 
 async function syncOne(C) {
-  // Identity is the ds_contracts/contractId marker, NOT the set name — in a
-  // brownfield file a name can belong to the host system's own component
-  // (CBDS pilot: native 72-variant "Badge"). Legacy fallback: sets created
-  // before the marker existed carry only specHash under the same namespace.
-  let existing = null;
-  for (const page of figma.root.children) {
-    existing = page.findOne(
-      (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') &&
-        n.getSharedPluginData('ds_contracts', 'contractId') === C.contractId,
-    );
-    if (existing) break;
-  }
-  if (!existing) {
-    for (const page of figma.root.children) {
-      existing = page.findOne(
-        (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === C.setName &&
-          n.getSharedPluginData('ds_contracts', 'specHash') !== '',
-      );
-      if (existing) break;
-    }
-  }
-  // An anchored key is ours by definition — the contract records the key the
-  // canvas minted. Covers legacy nodes that predate both plugin-data markers
-  // (main-file finding, 2026-07-08: 17 standalone components duplicated).
-  if (!existing && C.anchorKey) {
-    for (const page of figma.root.children) {
-      existing = page.findOne(
-        (n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.key === C.anchorKey,
-      );
-      if (existing) break;
-    }
-    if (existing) existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
+  // Semantic marker → stable anchor → unique explicit legacy-generated name.
+  // A same-name foreign node has neither marker and is never adopted.
+  let existing = resolveComponentIdentity(
+    { contractId: C.contractId, anchorKey: C.anchorKey, name: C.setName },
+    'Sync target "' + C.setName + '"',
+    true,
+  );
+  if (existing && existing.getSharedPluginData('ds_contracts', 'contractId') === '') {
+    existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
   }
   if (existing && existing.type === 'COMPONENT_SET' && C.isSet) {
     return await amendSet(existing, C);
@@ -4975,7 +5156,7 @@ async function syncOne(C) {
   }
   if (existing) {
     existing.setSharedPluginData('ds_contracts', 'contractId', C.contractId);
-    return { name: C.setName, skipped: true, reason: 'set/standalone shape mismatch (' + existing.type + ' vs isSet=' + C.isSet + ') — a human retires the old node', nodeId: existing.id, key: existing.key };
+    return { name: C.setName, contractId: C.contractId, skipped: true, reason: 'set/standalone shape mismatch (' + existing.type + ' vs isSet=' + C.isSet + ') — a human retires the old node', nodeId: existing.id, key: existing.key };
   }
 
   // A same-named unmarked set is foreign: leave it alone, disambiguate ours.
@@ -5033,8 +5214,12 @@ async function syncOne(C) {
       let key = keys[s.spec.slotProperty];
       if (!key) {
         const preferred = [];
-        for (const depName of s.spec.slotAccepts || []) {
-          const dep = findComponentByName(depName);
+        for (const depRef of s.spec.slotAccepts || []) {
+          const dep = resolveComponentIdentity(
+            { contractId: depRef.contractId, anchorKey: depRef.anchorKey, name: depRef.dep },
+            'Slot "' + s.spec.slotProperty + '" preferred value',
+            false,
+          );
           preferred.push({
             type: dep.type === 'COMPONENT_SET' ? 'COMPONENT_SET' : 'COMPONENT',
             key: dep.key,
@@ -5097,6 +5282,7 @@ async function syncOne(C) {
 
   return {
     name: C.setName,
+    contractId: C.contractId,
     nodeId: target.id,
     key: target.key,
     variants: C.isSet ? target.children.length : 1,

@@ -46,113 +46,144 @@
  *
  * Node shell over pure core functions. Reads the repo; writes nothing.
  */
-import { proposeFromDump } from '../../core/propose-figma.js';
-import { loadTokenCorpus } from './tokens.js';
+import { proposeFromDump } from "../../core/propose-figma.js";
+import { loadTokenCorpus } from "./tokens.js";
 
 const ROOT = process.cwd();
 const failures: string[] = [];
 const check = (label: string, cond: boolean) => {
   if (!cond) failures.push(label);
-  console.log(`  ${cond ? '✔' : '✖'} ${label}`);
+  console.log(`  ${cond ? "✔" : "✖"} ${label}`);
 };
 
 const corpus = loadTokenCorpus(ROOT);
-const opts = { corpus, contractIdByName: new Map<string, string>(), fileKey: null, mintUnbound: true };
+const opts = {
+  projectionMode: "reviewable-inversion" as const,
+  corpus,
+  contractIdByName: new Map<string, string>(),
+  fileKey: null,
+  mintUnbound: true,
+};
 
 /** A ring inset equally on all four sides of a 240px box — the Progress-circle
  *  shape, and the drawing STRETCH × STRETCH produces. */
 const variant = (tone: string, c?: { horizontal: string; vertical: string }) =>
   ({
     name: `Tone=${tone}`,
-    type: 'COMPONENT',
+    type: "COMPONENT",
     bbox: { width: 240, height: 240 },
     children: [
       {
-        name: 'Ring',
-        type: 'FRAME',
-        fill: { hex: '7f56d9' },
-        abs: { x: 12, y: 12, right: 12, bottom: 12, width: 216, height: 216, ...(c ? { constraints: c } : {}) },
+        name: "Ring",
+        type: "FRAME",
+        fill: { hex: "7f56d9" },
+        abs: {
+          x: 12,
+          y: 12,
+          right: 12,
+          bottom: 12,
+          width: 216,
+          height: 216,
+          ...(c ? { constraints: c } : {}),
+        },
       },
     ],
   }) as never;
 
-const setOf = (variants: unknown[]) => ({ setName: 'Circle', type: 'COMPONENT_SET', variants }) as never;
+const setOf = (variants: unknown[]) =>
+  ({ setName: "Circle", type: "COMPONENT_SET", variants }) as never;
 const ring = (r: ReturnType<typeof proposeFromDump>) =>
-  (r.contract.anatomy as Record<string, any>).root.parts.Ring as Record<string, any>;
+  (r.contract.anatomy as Record<string, any>).root.parts.Ring as Record<
+    string,
+    any
+  >;
 
 // ---------------------------------------------------------------------------
 // 1. STRETCH — carried as BOTH edges, with NO baked size
 // ---------------------------------------------------------------------------
 
-console.log('\nSTRETCH × STRETCH (the Progress-circle ring)');
-const S = { horizontal: 'STRETCH', vertical: 'STRETCH' };
-const stretched = proposeFromDump(setOf([variant('A', S), variant('B', S)]), opts);
+console.log("\nSTRETCH × STRETCH (the Progress-circle ring)");
+const S = { horizontal: "STRETCH", vertical: "STRETCH" };
+const stretched = proposeFromDump(
+  setOf([variant("A", S), variant("B", S)]),
+  opts,
+);
 const rs = ring(stretched);
 check(
-  'STRETCH pins BOTH edges on both axes (left+right / top+bottom)',
-  ['left', 'right', 'top', 'bottom'].every((k) => rs.tokens?.[k] !== undefined),
+  "STRETCH pins BOTH edges on both axes (left+right / top+bottom)",
+  ["left", "right", "top", "bottom"].every((k) => rs.tokens?.[k] !== undefined),
 );
 check(
-  'a STRETCHED axis bakes NO width/height (a size would freeze the resize the constraint expresses)',
+  "a STRETCHED axis bakes NO width/height (a size would freeze the resize the constraint expresses)",
   rs.tokens?.width === undefined && rs.tokens?.height === undefined,
 );
 check(
-  'the STRETCH carry is a NAMED note',
-  stretched.notes.some((n) => n.includes('is STRETCH, carried as BOTH edges')),
+  "the STRETCH carry is a NAMED note",
+  stretched.notes.some((n) => n.includes("is STRETCH, carried as BOTH edges")),
 );
 
 // ---------------------------------------------------------------------------
 // 2. SCALE — refused BY NAME (CSS has no proportional resize on a positioned box)
 // ---------------------------------------------------------------------------
 
-console.log('\nSCALE × SCALE');
-const SC = { horizontal: 'SCALE', vertical: 'SCALE' };
-const scaled = proposeFromDump(setOf([variant('A', SC), variant('B', SC)]), opts);
-check(
-  'SCALE is REFUSED BY NAME, and the reason says why CSS cannot spell it',
-  scaled.notes.some((n) => n.includes('SCALE resizes the box PROPORTIONALLY')),
+console.log("\nSCALE × SCALE");
+const SC = { horizontal: "SCALE", vertical: "SCALE" };
+const scaled = proposeFromDump(
+  setOf([variant("A", SC), variant("B", SC)]),
+  opts,
 );
 check(
-  'a refused SCALE part renders IN FLOW (no half-carried absolute box)',
-  ring(scaled).tokens?.left === undefined && ring(scaled).tokens?.right === undefined,
+  "SCALE is REFUSED BY NAME, and the reason says why CSS cannot spell it",
+  scaled.notes.some((n) => n.includes("SCALE resizes the box PROPORTIONALLY")),
+);
+check(
+  "a refused SCALE part renders IN FLOW (no half-carried absolute box)",
+  ring(scaled).tokens?.left === undefined &&
+    ring(scaled).tokens?.right === undefined,
 );
 
 // ---------------------------------------------------------------------------
 // 3. ABSENT — geometry unchanged, assumption NAMED
 // ---------------------------------------------------------------------------
 
-console.log('\nAbsent constraints (every pre-v1.13 dump)');
-const absent = proposeFromDump(setOf([variant('A'), variant('B')]), opts);
+console.log("\nAbsent constraints (every pre-v1.13 dump)");
+const absent = proposeFromDump(setOf([variant("A"), variant("B")]), opts);
 const ra = ring(absent);
 check(
-  'the LEFT×TOP assumption is NAMED (it used to be silent)',
-  absent.notes.some((n) => n.includes('carry NO constraints field')),
+  "the LEFT×TOP assumption is NAMED (it used to be silent)",
+  absent.notes.some((n) => n.includes("carry NO constraints field")),
 );
 check(
-  'and the note says a RE-CAPTURE is what distinguishes STRETCH from a real top-left pin',
-  absent.notes.some((n) => n.includes('re-capture with dump v1.13+')),
+  "and the note says a RE-CAPTURE is what distinguishes STRETCH from a real top-left pin",
+  absent.notes.some((n) => n.includes("re-capture with dump v1.13+")),
 );
 check(
-  'geometry is UNCHANGED (top-left + baked size) — naming the assumption moves no corpus',
-  ra.tokens?.left !== undefined && ra.tokens?.top !== undefined && ra.tokens?.width !== undefined,
+  "geometry is UNCHANGED (top-left + baked size) — naming the assumption moves no corpus",
+  ra.tokens?.left !== undefined &&
+    ra.tokens?.top !== undefined &&
+    ra.tokens?.width !== undefined,
 );
 
 // ---------------------------------------------------------------------------
 // 4. The control: an explicit MIN×MIN is an OBSERVATION, not an assumption
 // ---------------------------------------------------------------------------
 
-console.log('\nControl (explicit LEFT×TOP)');
+console.log("\nControl (explicit LEFT×TOP)");
 const explicit = proposeFromDump(
-  setOf([variant('A', { horizontal: 'LEFT', vertical: 'TOP' }), variant('B', { horizontal: 'LEFT', vertical: 'TOP' })]),
+  setOf([
+    variant("A", { horizontal: "LEFT", vertical: "TOP" }),
+    variant("B", { horizontal: "LEFT", vertical: "TOP" }),
+  ]),
   opts,
 );
 check(
-  'an EXPLICIT LEFT×TOP emits no assumption note (the note tracks the missing field, not the value)',
-  !explicit.notes.some((n) => n.includes('carry NO constraints field')),
+  "an EXPLICIT LEFT×TOP emits no assumption note (the note tracks the missing field, not the value)",
+  !explicit.notes.some((n) => n.includes("carry NO constraints field")),
 );
 check(
-  'and it still carries the top-left box',
-  ring(explicit).tokens?.left !== undefined && ring(explicit).tokens?.top !== undefined,
+  "and it still carries the top-left box",
+  ring(explicit).tokens?.left !== undefined &&
+    ring(explicit).tokens?.top !== undefined,
 );
 
 // ---------------------------------------------------------------------------
@@ -168,33 +199,46 @@ check(
 // the two surfaces disagree. The design's own binding is an OBSERVATION and
 // wins; the stretch is not carried on that axis and the conflict is named.
 
-console.log('\nSTRETCH with an already-BOUND size on the same axis');
+console.log("\nSTRETCH with an already-BOUND size on the same axis");
 const boundWidth = (tone: string) => {
   const v = variant(tone, S) as Record<string, any>;
-  v.children[0].bound = { width: 'spacing/xl' };
+  v.children[0].bound = { width: "spacing/xl" };
   return v as never;
 };
-const conflict = proposeFromDump(setOf([boundWidth('A'), boundWidth('B')]), opts);
+const conflict = proposeFromDump(
+  setOf([boundWidth("A"), boundWidth("B")]),
+  opts,
+);
 const rc = ring(conflict);
 check(
-  'a bound width WINS over the horizontal stretch (the design said this exact size)',
+  "a bound width WINS over the horizontal stretch (the design said this exact size)",
   rc.tokens?.width !== undefined,
 );
 check(
-  'and the box does NOT ship left+right+width together (CSS would silently drop an edge)',
-  !(rc.tokens?.left !== undefined && rc.tokens?.right !== undefined && rc.tokens?.width !== undefined),
+  "and the box does NOT ship left+right+width together (CSS would silently drop an edge)",
+  !(
+    rc.tokens?.left !== undefined &&
+    rc.tokens?.right !== undefined &&
+    rc.tokens?.width !== undefined
+  ),
 );
 check(
-  'the contradiction is NAMED',
-  conflict.notes.some((n) => n.includes('STRETCHes an axis whose size is ALREADY BOUND')),
+  "the contradiction is NAMED",
+  conflict.notes.some((n) =>
+    n.includes("STRETCHes an axis whose size is ALREADY BOUND"),
+  ),
 );
 check(
-  'the VERTICAL axis (unbound) still stretches — the refusal is per-axis, not whole-part',
-  rc.tokens?.top !== undefined && rc.tokens?.bottom !== undefined && rc.tokens?.height === undefined,
+  "the VERTICAL axis (unbound) still stretches — the refusal is per-axis, not whole-part",
+  rc.tokens?.top !== undefined &&
+    rc.tokens?.bottom !== undefined &&
+    rc.tokens?.height === undefined,
 );
 
 if (failures.length > 0) {
   console.error(`\n✖ ${failures.length} constraint invariant(s) failed`);
   process.exit(1);
 }
-console.log('\n✔ constraints reach the decision (dump v1.13: STRETCH carried as both edges, SCALE named, an absent field named as an assumption)');
+console.log(
+  "\n✔ constraints reach the decision (dump v1.13: STRETCH carried as both edges, SCALE named, an absent field named as an assumption)",
+);

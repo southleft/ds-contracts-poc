@@ -136,6 +136,9 @@ for (const t of TEXT_STYLES) {
     styleByToken[t.tokenPath] = s;
     createdStyles++;
   }
+  if (t.sourceStyleKey) {
+    s.setSharedPluginData('ds_contracts', 'sourceTextStyleKey', t.sourceStyleKey);
+  }
   await figma.loadFontAsync({ family: 'Inter', style: t.fontStyle });
   s.name = t.name;
   s.fontName = { family: 'Inter', style: t.fontStyle };

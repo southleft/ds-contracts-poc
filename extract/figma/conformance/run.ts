@@ -60,13 +60,16 @@
  * capturing them with dump.plugin.js, so the CAPTURE stage is measured too)
  * is named future work — see README.md alongside this file.
  */
-import { readFileSync, readdirSync } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { dumpCapturesHidden, proposeBatchFromDump } from '../../../core/propose-figma.js';
-import { loadTokenCorpus } from '../tokens.js';
-import { loadContracts } from '../propose.js';
-import type { DumpDegradation, DumpFile } from '../types.js';
+import { readFileSync, readdirSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import {
+  dumpCapturesHidden,
+  proposeBatchFromDump,
+} from "../../../core/propose-figma.js";
+import { loadTokenCorpus } from "../tokens.js";
+import { loadContracts } from "../propose.js";
+import type { DumpDegradation, DumpFile } from "../types.js";
 
 // ---------------------------------------------------------------------------
 // Manifest shapes (hand-authored — see MANIFEST.json)
@@ -92,7 +95,7 @@ interface ManifestCase {
   id: string;
   /** The document-model construct under test, in plain words. */
   construct: string;
-  expect: 'CARRIED' | 'REFUSED' | 'LEDGERED';
+  expect: "CARRIED" | "REFUSED" | "LEDGERED";
   /** One line: WHY the documentation model says this disposition. */
   why: string;
   /** The documentation-model check — what SHOULD happen. */
@@ -100,7 +103,7 @@ interface ManifestCase {
   /** green: the engine meets the doc model today. red: FAIL-EXPECTED-RED —
    *  the doc-model check is known to fail; the status quo is pinned in
    *  `observedCheck` and described in `observed`. */
-  status: 'green' | 'red';
+  status: "green" | "red";
   observed?: string;
   observedCheck?: CaseCheck;
 }
@@ -115,8 +118,8 @@ interface Manifest {
 // ---------------------------------------------------------------------------
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(HERE, '..', '..', '..');
-const CASES_DIR = path.join(HERE, 'cases');
+const ROOT = path.resolve(HERE, "..", "..", "..");
+const CASES_DIR = path.join(HERE, "cases");
 
 interface CaseRun {
   /** Searched by `check.carried` / `check.absent`. */
@@ -126,16 +129,20 @@ interface CaseRun {
 }
 
 function runCase(dumpPath: string, deps: ReturnType<typeof loadDeps>): CaseRun {
-  const dump = JSON.parse(readFileSync(dumpPath, 'utf8')) as DumpFile;
-  const batch = proposeBatchFromDump(dump as unknown as Record<string, unknown>, {
-    corpus: deps.corpus,
-    contractIdByName: deps.contracts.byName,
-    contractsById: deps.contracts.byId,
-    contractIdByKey: deps.contracts.byKey,
-    fileKey: dump._provenance?.fileKey ?? null,
-    mintUnbound: true,
-    hiddenCaptured: dumpCapturesHidden(dump._provenance),
-  });
+  const dump = JSON.parse(readFileSync(dumpPath, "utf8")) as DumpFile;
+  const batch = proposeBatchFromDump(
+    dump as unknown as Record<string, unknown>,
+    {
+      projectionMode: "reviewable-inversion",
+      corpus: deps.corpus,
+      contractIdByName: deps.contracts.byName,
+      contractsById: deps.contracts.byId,
+      contractIdByKey: deps.contracts.byKey,
+      fileKey: dump._provenance?.fileKey ?? null,
+      mintUnbound: true,
+      hiddenCaptured: dumpCapturesHidden(dump._provenance),
+    },
+  );
 
   const contractPieces: unknown[] = [];
   const union: string[] = [];
@@ -146,11 +153,12 @@ function runCase(dumpPath: string, deps: ReturnType<typeof loadDeps>): CaseRun {
     union.push(...p.notes);
     for (const u of p.unbound) {
       union.push(
-        `unbound ${u.nodePath} ${u.property} = ${String(u.value)}${u.suggestions.length > 0 ? ` (nearest: ${u.suggestions.join(', ')})` : ''}`,
+        `unbound ${u.nodePath} ${u.property} = ${String(u.value)}${u.suggestions.length > 0 ? ` (nearest: ${u.suggestions.join(", ")})` : ""}`,
       );
     }
   }
-  for (const s of batch.skipped) union.push(`skip: ${s.reason}${s.detail ? ` — ${s.detail}` : ''}`);
+  for (const s of batch.skipped)
+    union.push(`skip: ${s.reason}${s.detail ? ` — ${s.detail}` : ""}`);
   union.push(...batch.notes);
   // The dump's own capture-side receipts (dump v1.2 `_degradations`) join the
   // union: for capture-boundary constructs (no dump v1 field exists) the
@@ -165,7 +173,7 @@ function runCase(dumpPath: string, deps: ReturnType<typeof loadDeps>): CaseRun {
 function loadDeps() {
   return {
     corpus: loadTokenCorpus(ROOT), // standard corpus: the repo tokens/ layout
-    contracts: loadContracts(path.join(ROOT, 'contracts')),
+    contracts: loadContracts(path.join(ROOT, "contracts")),
   };
 }
 
@@ -181,18 +189,22 @@ interface CheckOutcome {
 function evaluate(check: CaseCheck, run: CaseRun): CheckOutcome {
   const failures: string[] = [];
   for (const c of check.carried ?? []) {
-    if (!new RegExp(c).test(run.contractText)) failures.push(`carried /${c}/ not in contract`);
+    if (!new RegExp(c).test(run.contractText))
+      failures.push(`carried /${c}/ not in contract`);
   }
   if (check.note !== undefined) {
     const re = new RegExp(check.note);
-    if (!run.namingUnion.some((n) => re.test(n))) failures.push(`note /${check.note}/ not in naming union`);
+    if (!run.namingUnion.some((n) => re.test(n)))
+      failures.push(`note /${check.note}/ not in naming union`);
   }
   for (const a of check.absent ?? []) {
-    if (new RegExp(a).test(run.contractText)) failures.push(`absent /${a}/ FOUND in contract`);
+    if (new RegExp(a).test(run.contractText))
+      failures.push(`absent /${a}/ FOUND in contract`);
   }
   for (const a of check.noteAbsent ?? []) {
     const re = new RegExp(a);
-    if (run.namingUnion.some((n) => re.test(n))) failures.push(`noteAbsent /${a}/ FOUND in naming union`);
+    if (run.namingUnion.some((n) => re.test(n)))
+      failures.push(`noteAbsent /${a}/ FOUND in naming union`);
   }
   return { pass: failures.length === 0, failures };
 }
@@ -201,7 +213,13 @@ function evaluate(check: CaseCheck, run: CaseRun): CheckOutcome {
 // The gate
 // ---------------------------------------------------------------------------
 
-type Verdict = 'PASS' | 'RED-EXPECTED' | 'FAIL' | 'UNEXPECTED-GREEN' | 'UNLISTED' | 'MISSING';
+type Verdict =
+  | "PASS"
+  | "RED-EXPECTED"
+  | "FAIL"
+  | "UNEXPECTED-GREEN"
+  | "UNLISTED"
+  | "MISSING";
 
 function main() {
   const args = process.argv.slice(2);
@@ -209,37 +227,64 @@ function main() {
     const i = args.indexOf(flag);
     return i >= 0 ? args.splice(i, 2)[1] : undefined;
   };
-  const only = readFlag('--case');
-  const probe = readFlag('--probe');
+  const only = readFlag("--case");
+  const probe = readFlag("--probe");
 
-  const manifest = JSON.parse(readFileSync(path.join(HERE, 'MANIFEST.json'), 'utf8')) as Manifest;
+  const manifest = JSON.parse(
+    readFileSync(path.join(HERE, "MANIFEST.json"), "utf8"),
+  ) as Manifest;
   const byId = new Map(manifest.cases.map((c) => [c.id, c]));
   if (byId.size !== manifest.cases.length) {
-    console.error('MANIFEST.json declares a duplicate case id — fix the manifest.');
+    console.error(
+      "MANIFEST.json declares a duplicate case id — fix the manifest.",
+    );
     process.exit(2);
   }
-  const caseFiles = readdirSync(CASES_DIR).filter((f) => f.endsWith('.dump.json'));
-  const fileIds = new Set(caseFiles.map((f) => f.replace(/\.dump\.json$/, '')));
+  const caseFiles = readdirSync(CASES_DIR).filter((f) =>
+    f.endsWith(".dump.json"),
+  );
+  const fileIds = new Set(caseFiles.map((f) => f.replace(/\.dump\.json$/, "")));
 
   const deps = loadDeps();
 
   if (probe !== undefined) {
     const run = runCase(path.join(CASES_DIR, `${probe}.dump.json`), deps);
-    console.log('--- naming union ---');
-    for (const n of run.namingUnion) console.log('  ' + n);
-    console.log('--- contract text ---');
+    console.log("--- naming union ---");
+    for (const n of run.namingUnion) console.log("  " + n);
+    console.log("--- contract text ---");
     console.log(run.contractText);
     return;
   }
 
-  const rows: Array<{ id: string; expect: string; pin: string; verdict: Verdict; detail: string }> = [];
+  const rows: Array<{
+    id: string;
+    expect: string;
+    pin: string;
+    verdict: Verdict;
+    detail: string;
+  }> = [];
 
   // Denominator independence, both directions.
   for (const id of [...fileIds].sort()) {
-    if (!byId.has(id)) rows.push({ id, expect: '—', pin: '—', verdict: 'UNLISTED', detail: 'case file has no manifest entry — the manifest is the denominator; list it (with an expectation) or delete the file' });
+    if (!byId.has(id))
+      rows.push({
+        id,
+        expect: "—",
+        pin: "—",
+        verdict: "UNLISTED",
+        detail:
+          "case file has no manifest entry — the manifest is the denominator; list it (with an expectation) or delete the file",
+      });
   }
   for (const c of manifest.cases) {
-    if (!fileIds.has(c.id)) rows.push({ id: c.id, expect: c.expect, pin: c.status, verdict: 'MISSING', detail: 'manifest entry has no cases/<id>.dump.json' });
+    if (!fileIds.has(c.id))
+      rows.push({
+        id: c.id,
+        expect: c.expect,
+        pin: c.status,
+        verdict: "MISSING",
+        detail: "manifest entry has no cases/<id>.dump.json",
+      });
   }
 
   for (const c of manifest.cases) {
@@ -249,51 +294,105 @@ function main() {
     try {
       run = runCase(path.join(CASES_DIR, `${c.id}.dump.json`), deps);
     } catch (e) {
-      rows.push({ id: c.id, expect: c.expect, pin: c.status, verdict: 'FAIL', detail: `runner threw: ${e instanceof Error ? e.message : String(e)}` });
+      rows.push({
+        id: c.id,
+        expect: c.expect,
+        pin: c.status,
+        verdict: "FAIL",
+        detail: `runner threw: ${e instanceof Error ? e.message : String(e)}`,
+      });
       continue;
     }
     const expected = evaluate(c.check, run);
-    if (c.status === 'green') {
+    if (c.status === "green") {
       rows.push(
         expected.pass
-          ? { id: c.id, expect: c.expect, pin: 'green', verdict: 'PASS', detail: '' }
-          : { id: c.id, expect: c.expect, pin: 'green', verdict: 'FAIL', detail: expected.failures.join('; ') },
+          ? {
+              id: c.id,
+              expect: c.expect,
+              pin: "green",
+              verdict: "PASS",
+              detail: "",
+            }
+          : {
+              id: c.id,
+              expect: c.expect,
+              pin: "green",
+              verdict: "FAIL",
+              detail: expected.failures.join("; "),
+            },
       );
       continue;
     }
     // FAIL-EXPECTED-RED: doc-model check must STILL fail; the pinned status
     // quo must STILL hold. Either side moving is a finding.
     if (expected.pass) {
-      rows.push({ id: c.id, expect: c.expect, pin: 'red', verdict: 'UNEXPECTED-GREEN', detail: 'doc-model check now passes — re-record this case green (and celebrate)' });
+      rows.push({
+        id: c.id,
+        expect: c.expect,
+        pin: "red",
+        verdict: "UNEXPECTED-GREEN",
+        detail:
+          "doc-model check now passes — re-record this case green (and celebrate)",
+      });
       continue;
     }
-    const observed = c.observedCheck ? evaluate(c.observedCheck, run) : { pass: true, failures: [] as string[] };
+    const observed = c.observedCheck
+      ? evaluate(c.observedCheck, run)
+      : { pass: true, failures: [] as string[] };
     rows.push(
       observed.pass
-        ? { id: c.id, expect: c.expect, pin: 'red', verdict: 'RED-EXPECTED', detail: c.observed ?? '' }
-        : { id: c.id, expect: c.expect, pin: 'red', verdict: 'FAIL', detail: `status-quo pin drifted: ${observed.failures.join('; ')}` },
+        ? {
+            id: c.id,
+            expect: c.expect,
+            pin: "red",
+            verdict: "RED-EXPECTED",
+            detail: c.observed ?? "",
+          }
+        : {
+            id: c.id,
+            expect: c.expect,
+            pin: "red",
+            verdict: "FAIL",
+            detail: `status-quo pin drifted: ${observed.failures.join("; ")}`,
+          },
     );
   }
 
   // Table.
-  const w = { id: Math.max(...rows.map((r) => r.id.length), 4), expect: 8, pin: 5, verdict: Math.max(...rows.map((r) => r.verdict.length), 7) };
+  const w = {
+    id: Math.max(...rows.map((r) => r.id.length), 4),
+    expect: 8,
+    pin: 5,
+    verdict: Math.max(...rows.map((r) => r.verdict.length), 7),
+  };
   const pad = (s: string, n: number) => s.padEnd(n);
-  console.log(`${pad('case', w.id)}  ${pad('expect', w.expect)}  ${pad('pin', w.pin)}  ${pad('verdict', w.verdict)}  detail`);
-  console.log('-'.repeat(w.id + w.expect + w.pin + w.verdict + 14));
+  console.log(
+    `${pad("case", w.id)}  ${pad("expect", w.expect)}  ${pad("pin", w.pin)}  ${pad("verdict", w.verdict)}  detail`,
+  );
+  console.log("-".repeat(w.id + w.expect + w.pin + w.verdict + 14));
   for (const r of rows) {
-    console.log(`${pad(r.id, w.id)}  ${pad(r.expect, w.expect)}  ${pad(r.pin, w.pin)}  ${pad(r.verdict, w.verdict)}  ${r.detail}`);
+    console.log(
+      `${pad(r.id, w.id)}  ${pad(r.expect, w.expect)}  ${pad(r.pin, w.pin)}  ${pad(r.verdict, w.verdict)}  ${r.detail}`,
+    );
   }
   const count = (v: Verdict) => rows.filter((r) => r.verdict === v).length;
-  const bad = count('FAIL') + count('UNEXPECTED-GREEN') + count('UNLISTED') + count('MISSING');
-  console.log('');
+  const bad =
+    count("FAIL") +
+    count("UNEXPECTED-GREEN") +
+    count("UNLISTED") +
+    count("MISSING");
+  console.log("");
   console.log(
-    `${rows.length} case(s): ${count('PASS')} PASS, ${count('RED-EXPECTED')} RED-EXPECTED (pinned findings), ${count('FAIL')} FAIL, ${count('UNEXPECTED-GREEN')} UNEXPECTED-GREEN, ${count('UNLISTED')} UNLISTED, ${count('MISSING')} MISSING`,
+    `${rows.length} case(s): ${count("PASS")} PASS, ${count("RED-EXPECTED")} RED-EXPECTED (pinned findings), ${count("FAIL")} FAIL, ${count("UNEXPECTED-GREEN")} UNEXPECTED-GREEN, ${count("UNLISTED")} UNLISTED, ${count("MISSING")} MISSING`,
   );
   if (bad > 0) {
-    console.error('CANVAS CONFORMANCE: RED');
+    console.error("CANVAS CONFORMANCE: RED");
     process.exit(1);
   }
-  console.log('CANVAS CONFORMANCE: GREEN (reds above are pinned, named findings — the next work order, not silence)');
+  console.log(
+    "CANVAS CONFORMANCE: GREEN (reds above are pinned, named findings — the next work order, not silence)",
+  );
 }
 
 main();
