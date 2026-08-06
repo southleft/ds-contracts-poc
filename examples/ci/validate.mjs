@@ -58,8 +58,8 @@ const CLI_SPEC = '@ds-contracts/cli@0.3.0';
 
 const CI_ONLY = {
   'code-led.yml': {
-    'Commit the refreshed contracts back to the branch':
-      'pushes with the workflow GITHUB_TOKEN — the scratch consumer is not a git remote; shell syntax-checked (bash -n)',
+    'Open or update a PR for refreshed contracts (PR-first — G10)':
+      'opens/updates a PR with the workflow GITHUB_TOKEN — the scratch consumer is not a git remote; shell syntax-checked (bash -n). Direct-main pushes are no longer the default (docs/18 G10).',
     'Publish to the standing CI→Figma channel':
       'needs a LIVE channel — a minted write key plus the deployed worker. (`figma publish` and `figma claim-channel` ARE in the pinned 0.3.0; an earlier revision of this note claimed otherwise and was wrong.) Shell syntax-checked (bash -n). The channel transport itself is pinned network-free by workers/assist/test/channel.test.ts (24 cases) and the `channel-round-trip` eval.',
   },

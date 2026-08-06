@@ -64,7 +64,7 @@ ${codeBlock(`npm i -g @ds-contracts/cli     # or: npx --yes @ds-contracts/cli@${
 
 <h2 id="usage">Usage ${badge('generated', 'Extracted verbatim from packages/cli/src/cli.ts at build time — the CLI names this block its own reference.')}</h2>
 ${codeBlock(usage.trimEnd(), 'text', `packages/cli/src/cli.ts — the shipping usage block, v${cliVersion}; extracted at build time`)}
-<p class="section-note">The last line is the CLI's own honesty: <code>--help</code> on a verb shows nothing beyond this block — this page and that block are the reference.</p>
+<p class="section-note">Each verb also prints its own section via <code>ds-contracts &lt;command&gt; --help</code>. This page and the top-level help block remain the full reference.</p>
 
 <h2 id="onboard">onboard — the whole code→canvas pipeline, in two phases</h2>
 <p><code>ds-contracts onboard &lt;package-or-path&gt; [--components a,b,c] [--workspace &lt;dir&gt;]</code> then <code>ds-contracts onboard --continue [--channel-key K] [--from &lt;stage&gt;] [--dry-run] [--bridge &lt;url&gt;]</code>. Phase 1 detects the adapter and styling method, creates or reuses a pinned sandbox, seeds contracts from the static pass, drafts the capture config — and <strong>stops</strong>, printing what a human must decide and why each field matters. Phase 2 runs capture → promote → emit → bundle → publish without stopping, one progress line per stage, and ends with a summary naming what was produced <em>and what was refused</em>.</p>

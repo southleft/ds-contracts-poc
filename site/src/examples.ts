@@ -13,21 +13,24 @@
  *      build time, so an illustrative example that stops being legal breaks
  *      the build.
  */
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
-import * as z from 'zod';
-import { codeBlock, badge } from './html.js';
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import * as z from "zod";
+import { codeBlock, badge } from "./html.js";
 
 const ROOT = process.cwd();
 
 const readJson = (rel: string): Record<string, unknown> =>
-  JSON.parse(readFileSync(path.join(ROOT, rel), 'utf8')) as Record<string, unknown>;
+  JSON.parse(readFileSync(path.join(ROOT, rel), "utf8")) as Record<
+    string,
+    unknown
+  >;
 
 /** Select a nested value by dotted path ("anatomy.root.tokens"). */
 function pick(obj: unknown, dotted: string): unknown {
   let cur: unknown = obj;
-  for (const seg of dotted.split('.')) {
-    if (cur == null || typeof cur !== 'object') return undefined;
+  for (const seg of dotted.split(".")) {
+    if (cur == null || typeof cur !== "object") return undefined;
     cur = (cur as Record<string, unknown>)[seg];
   }
   return cur;
@@ -41,15 +44,19 @@ export interface ExcerptSpec {
   limit?: Record<string, number>;
 }
 
-function assemble(source: Record<string, unknown>, spec: ExcerptSpec): Record<string, unknown> {
+function assemble(
+  source: Record<string, unknown>,
+  spec: ExcerptSpec,
+): Record<string, unknown> {
   const out: Record<string, unknown> = {};
   for (const p of spec.paths) {
     let v = pick(source, p);
-    if (v === undefined) throw new Error(`example excerpt: path "${p}" not found`);
+    if (v === undefined)
+      throw new Error(`example excerpt: path "${p}" not found`);
     const max = spec.limit?.[p];
     if (max !== undefined && Array.isArray(v)) v = v.slice(0, max);
     // Rebuild the nesting so the excerpt reads like the source document.
-    const segs = p.split('.');
+    const segs = p.split(".");
     let node = out;
     for (const seg of segs.slice(0, -1)) {
       node = (node[seg] ??= {}) as Record<string, unknown>;
@@ -60,13 +67,18 @@ function assemble(source: Record<string, unknown>, spec: ExcerptSpec): Record<st
 }
 
 /** A shipping-contract excerpt with provenance caption. */
-export function shippingExample(file: string, spec: ExcerptSpec, note?: string): string {
+export function shippingExample(
+  file: string,
+  spec: ExcerptSpec,
+  note?: string,
+): string {
   const rel = `contracts/${file}`;
   const contract = readJson(rel);
   const body = assemble(contract, spec);
-  const version = typeof contract.version === 'string' ? ` · v${contract.version}` : '';
-  const caption = `${rel} (excerpt${version}) — shipping contract, loaded at build time${note ? ` · ${note}` : ''}`;
-  return codeBlock(JSON.stringify(body, null, 2), 'json', caption) ;
+  const version =
+    typeof contract.version === "string" ? ` · v${contract.version}` : "";
+  const caption = `${rel} (excerpt${version}) — shipping contract, loaded at build time${note ? ` · ${note}` : ""}`;
+  return codeBlock(JSON.stringify(body, null, 2), "json", caption);
 }
 
 /** A hand-written example, VALIDATED against the given schema at build time. */
@@ -77,16 +89,18 @@ export function illustrativeExample<T>(
 ): string {
   const parsed = schema.safeParse(value);
   if (!parsed.success) {
-    throw new Error(`illustrative example failed schema validation (${caption}):\n${parsed.error}`);
+    throw new Error(
+      `illustrative example failed schema validation (${caption}):\n${parsed.error}`,
+    );
   }
   return codeBlock(
     JSON.stringify(value, null, 2),
-    'json',
+    "json",
     `${caption} — illustrative, schema-validated at build time`,
   );
 }
 
-export const exampleBadge = (): string => badge('example');
+export const exampleBadge = (): string => badge("example");
 
 // ---------------------------------------------------------------------------
 // Engine replays — run the real import engine over committed capture
@@ -107,36 +121,44 @@ let replays: Replays | undefined;
 
 export async function loadReplays(): Promise<Replays> {
   if (replays) return replays;
-  const [{ loadTokenCorpus }, { proposeFromDump, loadContracts }, { proposeBatchFromDump }, schemaMod] =
-    await Promise.all([
-      import('../../extract/figma/tokens.js'),
-      import('../../extract/figma/propose.js'),
-      import('../../core/propose-figma.js'),
-      import('../../scripts/contract-schema.js'),
-    ]);
+  const [
+    { loadTokenCorpus },
+    { proposeFromDump, loadContracts },
+    { proposeBatchFromDump },
+    schemaMod,
+  ] = await Promise.all([
+    import("../../extract/figma/tokens.js"),
+    import("../../extract/figma/propose.js"),
+    import("../../core/propose-figma.js"),
+    import("../../scripts/contract-schema.js"),
+  ]);
   const { ContractSchema, walkAnatomy } = schemaMod;
   const clone = <T>(v: T): T => JSON.parse(JSON.stringify(v)) as T;
   const corpus = loadTokenCorpus(ROOT);
 
   // 1 · Tooltip (shape): the CBDS field case, from the committed REST dump.
-  const tooltipDump = readJson('extract/figma/fixtures/cbds-tooltip.rest-dump.json');
-  const tooltip = proposeFromDump(clone(tooltipDump['Tooltip']) as never, {
+  const tooltipDump = readJson(
+    "extract/figma/fixtures/cbds-tooltip.rest-dump.json",
+  );
+  const tooltip = proposeFromDump(clone(tooltipDump["Tooltip"]) as never, {
+    projectionMode: "reviewable-inversion",
     corpus,
     contractIdByName: new Map<string, string>(),
-    fileKey: 'WofZT8xaxXuc2Q6Je9S4XE',
+    fileKey: "WofZT8xaxXuc2Q6Je9S4XE",
     mintUnbound: true,
   });
   const tooltipContract = ContractSchema.parse(tooltip.contract);
   const pointer = walkAnatomy(tooltipContract).find((w) => w.part.shape);
-  if (!pointer) throw new Error('replay: tooltip proposal has no shape part');
+  if (!pointer) throw new Error("replay: tooltip proposal has no shape part");
 
   // 2 · Navigation header (repeat): the owner's-kit P9 fixture.
-  const loaded = loadContracts(path.resolve(ROOT, 'contracts'));
+  const loaded = loadContracts(path.resolve(ROOT, "contracts"));
   const navDump = readJson(
-    'extract/figma/gauntlet/fixtures/pattern-repeat-collection-navigation-header.dump.json',
+    "extract/figma/gauntlet/fixtures/pattern-repeat-collection-navigation-header.dump.json",
   );
   const provenance = navDump._provenance as { fileKey?: string } | undefined;
   const batch = proposeBatchFromDump(navDump, {
+    projectionMode: "reviewable-inversion",
     corpus,
     contractIdByName: loaded.byName,
     contractsById: loaded.byId,
@@ -145,18 +167,24 @@ export async function loadReplays(): Promise<Replays> {
   });
   const navContract = ContractSchema.parse(batch.proposals[0].contract);
   const repeatWalk = walkAnatomy(navContract).find((w) => w.part.repeat);
-  if (!repeatWalk) throw new Error('replay: navigation-header proposal has no repeat part');
+  if (!repeatWalk)
+    throw new Error("replay: navigation-header proposal has no repeat part");
   const itemsPropName = repeatWalk.part.repeat!.itemsProp;
   const repeatProp = navContract.props.find((p) => p.name === itemsPropName);
-  if (!repeatProp) throw new Error('replay: repeat itemsProp not found on the proposal');
+  if (!repeatProp)
+    throw new Error("replay: repeat itemsProp not found on the proposal");
 
   replays = {
     shapePart: {
       [pointer.name]: {
         shape: pointer.part.shape,
         ...(pointer.part.tokens ? { tokens: pointer.part.tokens } : {}),
-        ...(pointer.part.visibleWhen ? { visibleWhen: pointer.part.visibleWhen } : {}),
-        ...(pointer.part.stylesWhen ? { stylesWhen: pointer.part.stylesWhen.slice(0, 3) } : {}),
+        ...(pointer.part.visibleWhen
+          ? { visibleWhen: pointer.part.visibleWhen }
+          : {}),
+        ...(pointer.part.stylesWhen
+          ? { stylesWhen: pointer.part.stylesWhen.slice(0, 3) }
+          : {}),
       },
     },
     shapeStates: {
@@ -175,5 +203,5 @@ export async function loadReplays(): Promise<Replays> {
 }
 
 export function replayedBlock(body: unknown, caption: string): string {
-  return codeBlock(JSON.stringify(body, null, 2), 'json', caption);
+  return codeBlock(JSON.stringify(body, null, 2), "json", caption);
 }

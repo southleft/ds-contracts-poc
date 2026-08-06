@@ -17,11 +17,11 @@ Short version — four phases, each with a falsifiable exit criterion:
 ## Where it actually stands (2026-08-04)
 
 Updated against source, registry, and deployed surfaces separately rather than
-treating a manifest edit as a release. The tree stages repository
-`1.0.0-rc.1`, CLI `0.5.0-rc.1`, schema `16.1.0-rc.1`, and emitter
-`0.4.0-rc.1`; those RCs are source-only until human publication. npm `latest`
-still reports CLI `0.4.0`, schema `16.0.0`, and emitter `0.3.0` as of this
-update. The coordinated verification and approval sequence is
+treating a manifest edit as a release. Repository `1.0.0-rc.1`, CLI
+`0.5.0-rc.1`, schema `16.1.0-rc.1`, and emitter `0.4.0-rc.1` were published as
+the coordinated candidate under npm `next`; `latest` remains on the stable
+line. The current conversion program advances CLI source to unpublished
+`0.5.0-rc.2`. The coordinated verification and approval sequence is
 [docs/27](docs/27-release-process.md).
 Every open product limitation below has its symptom and status in
 [docs/23](docs/23-known-limitations.md).
@@ -31,7 +31,14 @@ Every open product limitation below has its symptom and status in
 - ✅ Fresh-file rebuild (2026-07-06) — unchanged.
 - ✅ **A standing offline drift instrument** — 54 rows across six libraries pinning `pctEqual` within tolerance, `cellsCompared` exactly, and `unresolvedTokenRefs` exactly ([docs/20](docs/20-regate-drift.md)). This is what makes cross-library damage a number rather than a vibe.
 - ✅ **A canvas-drift fingerprint** in the plugin — per-variant, with snapshots of *what* changed — and the update check now refuses to overwrite a canvas edit without a named warning (gap G2, a live covenant violation, closed).
-- 🟡 **Anatomy-level parity** — still open. The differ has not been extended below the API surface.
+- 🟡 **Anatomy-level parity** — **instrument green (2026-08-05).**
+  `npm run variant-drift:check` drives `parity/diff.ts` over committed
+  fixtures and catches a four-way part-layout + binding edit inside one
+  variant. Wave 7 also adds `npm run anatomy-diff:check` (contract anatomy
+  channel lines + resolved cssVars floor). Stale `parity/snapshots/` without
+  `variants` still report NOT EXTRACTED on a raw `npm run parity` until
+  re-extracted — the CI exit criterion is the fixture gate, not the stale
+  snapshot.
 - 🟡 **Automated visual regression** — the per-library canvas gates are a regression net, not a frontier detector, and their canvas half is the weakest instrument in the repo (see Phase 3).
 - 🟡 **Nested-part states** — narrowed, not closed: `Part.states` carries plain colour-kind refs only, so a delta that is a function of a state *and* an enum axis stays a named `overflowBindings` refusal. The base-plane equivalent is solved.
 
@@ -42,13 +49,16 @@ Every open product limitation below has its symptom and status in
 - ✅ **Foreign token import shipped** — `figma bundle --tokens` compiles contracts against an org's own DTCG tree, and the contract JSON is now the only thing anyone pastes.
 - ✅ **The coverage fraction is published for the first time** — 62 contracts across 893 library components, **6.9%**, per library, with denominators. It belongs on the roadmap because it defines what "adoption" currently means: *a hand-picked slice, configured by an expert, one round per novel styling method.*
 - 🟡 **Still open:** binding-inference confidence scoring, the reconciliation UI, and the second half of the exit criterion — *a design system team confirming the drift report is true*. Note also that reconciliation compares API surfaces only; it cannot adjudicate a token or spacing disagreement.
-- 🟡 **The concurrent-change story is not built.** Three-way merge (G3), the silent-revert guard (G4) and write-back suggested diffs (G7) are all open, and G4 is a green gate hiding a lie.
+- 🟡 **The concurrent-change story is partial.** Three-way merge engine (G3),
+  awaiting-adoption pin (G4), and G7 propose-only suggested-diff stubs shipped
+  under `workflow-spine:check`. UI surfaces, PR emitters, and team confirmation
+  of a drift report remain open (docs/23 §B.13).
 
 **Phase 3 — Spec candidacy.** *Groundwork, plus one distinction worth stating loudly.*
 
 - ✅ **A CSS/DOM conformance fixture exists** ([conformance/](conformance/README.md)) — 53 synthetic cases whose expected dispositions are authored *independently* of the engine, so a construct that is neither carried nor named-refused is a hard failure rather than an absence. 50 green, 3 red, 0 yellow, on a decrease-only ratchet.
 - ⚠️ **It is not Phase 3's conformance kit and should not be read as one.** It measures *this* engine's CSS/DOM frontier; Phase 3 asks for the eval suite repackaged to run against *any* implementation, which is a different artifact. Two things must also close before it could become one: the fixture's **canvas half is declared, not measured** ("carried" means "reached the contract", not "reached the canvas"), and every case is **one combo with no state axes** — precisely where the MUI and Carbon rounds found most of their defects.
-- 🟡 The `spec/` draft, namespacing, normative compatibility rules and the extension model are unstarted. `@ds-contracts/schema@16.0.0` is the latest published stable schema; the source tree's `16.1.0-rc.1` is not registry evidence until publication. The format is mature enough to specify; the specification does not exist yet.
+- 🟡 The `spec/` draft, namespacing, normative compatibility rules and the extension model — **draft started 2026-08-05** (`spec/normative.md` + `spec/conformance/`). Second independent implementation and black-box harness remain open. `@ds-contracts/schema@16.0.0` is the latest published stable schema; the source tree's `16.1.0-rc.1` is not registry evidence until publication.
 
 **Phase 4 — Community & governance.** Unstarted, as designed — it follows a second implementation.
 
@@ -56,6 +66,15 @@ Every open product limitation below has its symptom and status in
 
 ## The next honest step
 
-Not a seventh library. **One library taken to 50%** — because no library here is captured past 11.9%, and the long tail (the data grid, the tree, the virtualized list, the date picker, the rich-text surface) has never been touched. Everything else on this page is a claim about the *engine*; that would be the first claim about a *library*.
+**Done (2026-08-05):** MUI predeclared 50% denominator is **31/31 carried**
+(`examples/mui/oracle/DENOMINATOR-50.json`, `npm run mui:denominator:check`)
+under the Exact Conversion Finish accuracy contract. SpeedDial remains a
+fail-closed negative control outside the denominator. Offline oracle:
+32 MATCH · 0 PENDING · 0 FAIL.
 
-Both prerequisites are now closed. Astryx closed on 2026-07-29 — its capture had been reading its own promote output, and that failure mode is now gated for **every** library, not patched for one. **Polaris closed the same day (#26)**: all 12 components recaptured with the CSS-vars reader on, 5,201 verified source facts, 179 minted leaves aliased to Polaris's own `{p.*}` tokens, promotion migrated to the shared pipeline, and the figma-script freshness gate's last named hole closed — 6/6 libraries byte-fresh ([docs/23 §3.2](docs/23-known-limitations.md)). Note that "rebuildable" is two different bars in this repo — (1) the capture→promote→figma-script chain reruns from committed configs and seeds, and (2) a committed npm sandbox recipe reconstructs the extraction environment itself. Polaris now clears both; the other five libraries clear bar 1 but their sandbox recipes remain PROVENANCE prose, the named follow-up. Nothing blocks the 50% round.
+**Next:** Human/release gates on `RELEASE_CHECKLIST.md` (pilot sign-off,
+Wave 8 drift confirmation, frozen-commit `ci:lane` full/catalog-visual,
+live Figma re-probe, publish). Wave 11 packaging is READY (`spec/conformance/`);
+Candidate status waits on a named second implementation. Not a seventh library.
+
+

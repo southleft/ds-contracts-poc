@@ -13,13 +13,12 @@ This repository is the working proof, and the candidate reference implementation
 
 ## Release-candidate status
 
-The coordinated release candidate is staged in source as repository
-`1.0.0-rc.1`, CLI `0.5.0-rc.1`, schema `16.1.0-rc.1`, and web-components
-emitter `0.4.0-rc.1`. The RC versions are **not published merely
-because they appear in package manifests**. As checked on 2026-08-04, npm's
-`latest` tags still resolve to CLI `0.4.0`, schema `16.0.0`, and emitter
-`0.3.0`. Use an exact version when evaluating an RC after publication; do not
-assume `latest` points to it.
+The coordinated release candidate is repository `1.0.0-rc.1`, schema
+`16.1.0-rc.1`, and web-components emitter `0.4.0-rc.1`. Those exact package
+RCs were published under npm's `next` tag. The current conversion work advances
+the CLI source to `0.5.0-rc.2`; it is source-ahead and unpublished. npm's
+`latest` tags remain on the stable line. Use an exact version when evaluating
+an RC; do not assume `latest` or `next` points to the current source tree.
 
 Publication, tagging, the GitHub release, and deployment remain explicit human
 approvals. The repeatable procedure, verification matrix, migration notes, and
@@ -326,9 +325,8 @@ What is in there:
 
 Prefer a terminal? The engine also ships as npm packages. For the currently
 published stable CLI, use `npm exec --package=@ds-contracts/cli@0.4.0 --
-ds-contracts init`. The source tree stages CLI `0.5.0-rc.1`, schema
-`16.1.0-rc.1`, and emitter `0.4.0-rc.1`; those versions are source-only until a
-release owner publishes them. Every CLI verb is eval-pinned by a consumer-style
+ds-contracts init`. npm `next` carries CLI `0.5.0-rc.1`; the source tree is
+ahead at CLI `0.5.0-rc.2`. Every CLI verb is eval-pinned by a consumer-style
 smoke test.
 
 ## The model

@@ -390,6 +390,7 @@ const resolveInvocation = (
   step: Step,
   prefix: string | undefined,
   name: string,
+  seen: Set<string> = new Set(),
 ) => {
   const dir = prefix ? path.resolve(ROOT, prefix) : ROOT;
   const manifestPath = path.join(dir, "package.json");
@@ -408,11 +409,23 @@ const resolveInvocation = (
     );
     return;
   }
+  const dedupeKey = `${dir}\0${name}`;
+  if (seen.has(dedupeKey)) return;
+  seen.add(dedupeKey);
   ciInvocations.push({ dir, name, lane });
   const configured = manifestByDir.get(path.resolve(dir));
   if (configured) {
     const key = scriptKey(configured, name);
     invocations.set(key, (invocations.get(key) ?? new Set()).add(lane));
+  }
+  // Composite scripts (`npm run a && npm run b`) cover their nested gates —
+  // otherwise workflow-spine:check leaves anatomy-diff / suggested-diff / …
+  // looking unwatched while they actually run in the fast lane.
+  const body = manifestScripts[name] ?? "";
+  const nested = /npm(?:\s+run)\s+([A-Za-z0-9:_-]+)/g;
+  let nm: RegExpExecArray | null;
+  while ((nm = nested.exec(body)) !== null) {
+    resolveInvocation(file, lane, step, prefix, nm[1]!, seen);
   }
 };
 

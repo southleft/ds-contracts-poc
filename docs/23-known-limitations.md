@@ -486,12 +486,12 @@ re-verified against docs/18's own rows today:
 
 | gap | status | what is missing |
 |---|---|---|
-| **G3 — three-way merge** (genesis × incoming × canvas, per-channel resolution) | **OPEN** | there is no screen for "two writers touched the same component this week." Named by all three personas as the decisive moment. |
-| **G4 — silent-revert guard** | **OPEN** | after a design-led merge, the next code-led extract reads unchanged source and re-commits the old value — reverting the approved change **with drift green**. The lead's stated trust-killer. |
-| **G7 — brownfield write-back suggested diffs** | **OPEN** | design-led merges leave hand-written components stale; there is no anchor-derived suggested patch on the PR. |
+| **G3 — three-way merge** (genesis × incoming × canvas, per-channel resolution) | **PARTIAL** | engine + checks shipped (`core/three-way-merge.ts`); designer/engineer **UI screen** still open |
+| **G4 — silent-revert guard** | **PARTIAL** | `awaiting-adoption-check` pins refuse-on-silent-revert; full extract-path wiring coverage still expanding |
+| **G7 — brownfield write-back suggested diffs** | **PARTIAL** | `core/suggested-diff.ts` propose-only stubs (file:line when anchor carries it); PR comment emitter + static `file:line` readers still open |
 | **G5 — org-level GitHub App** | OPEN | designers still paste a fine-grained PAT into a plugin field. |
-| **G10 — PR-first CI defaults** | OPEN | the code-led recipe commits contracts to main rather than opening a PR. |
-| **G11 — contract-diff English summarizer** | OPEN | no `diff --summarize` for PR comments. |
+| **G10 — PR-first CI defaults** | **PARTIAL** | `examples/ci/code-led.yml` is PR-first; confirm every published recipe |
+| **G11 — contract-diff English summarizer** | **PARTIAL** | `ds-contracts diff --summarize` + `contract-summarize:check` shipped |
 | **G13 — audit trail & loop closure** | OPEN (record shape exists) | no viewer tab, no "resolved by PR #N". |
 
 **G2 (drift-aware update warning), G8 (plain-words style diffs), G9 (sample-library
@@ -1223,7 +1223,7 @@ on your canvas. The counts are the honest way to see both halves at once.
 |---|---|---|---|
 | CSS / DOM frontier | 53 | CARRIED 22 · LOWERED 2 · REFUSED 11 · UNSUPPORTED 18 | `conformance/MANIFEST.json` (run today) |
 | canvas constructs | 91 | CARRIED 72 · LEDGERED 11 · REFUSED 8 | `extract/figma/conformance/MANIFEST.json` |
-| dropped-fact receipts (`†`) | 70 across 8 corpora | pinned exactly, in both directions | `extract/figma/dagger-census.json` |
+| dropped-fact receipts (`†`) | 87 across 8 corpora | pinned exactly, in both directions | `extract/figma/dagger-census.json` |
 
 **REFUSED and UNSUPPORTED are different facts** and the fixture counts them
 separately on purpose. A refusal appears in a receipt you can grep. An

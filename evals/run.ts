@@ -1953,7 +1953,13 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       editJson('extract/figma/fixtures/main-file-dumps.json', (d) => {
         for (const v of d.Badge.variants) v.fill = { hex: '3b82f6' };
       });
-      const r = run(TSX, ['extract/figma/propose.ts', 'extract/figma/fixtures/main-file-dumps.json', '--out', 'extract/out/figma']);
+      const r = run(TSX, [
+        'extract/figma/propose.ts',
+        'extract/figma/fixtures/main-file-dumps.json',
+        '--out',
+        'extract/out/figma',
+        '--reviewable-inversion',
+      ]);
       if (r.status !== 0) throw new Error(`Proposal failed on an unbound fill:\n${r.out}`);
       const proposed = JSON.parse(readFileSync(path.join(SCRATCH, 'extract', 'out', 'figma', 'badge.contract.proposed.json'), 'utf8'));
       const ref = proposed.anatomy.root.tokens?.['background-color'];
@@ -2287,7 +2293,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         const corpus = loadTokenCorpus(process.cwd());
         const loaded = loadContracts(path.resolve('contracts'));
         const dump = j('extract/figma/fixtures/cbds-plugin-button-brand-primary.dump.json');
-        const batch = proposeBatchFromDump(dump, { corpus, contractIdByName: loaded.byName, contractsById: loaded.byId, fileKey: 'WofZT8xaxXuc2Q6Je9S4XE', mintUnbound: true });
+        const batch = proposeBatchFromDump(dump, { projectionMode: 'reviewable-inversion', corpus, contractIdByName: loaded.byName, contractsById: loaded.byId, fileKey: 'WofZT8xaxXuc2Q6Je9S4XE', mintUnbound: true });
         const p = batch.proposals[0];
         const c = ContractSchema.parse(p.contract);
         const contracts = new Map([[c.id, c]]);
@@ -4930,7 +4936,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         const WORK = 'jwork';
         const dump = JSON.parse(fs.readFileSync('extract/figma/fixtures/cbds-plugin-button-brand-primary.dump.json', 'utf8'));
         const loaded = loadContracts(path.resolve('contracts'));
-        const batch = proposeBatchFromDump(dump, { corpus: loadTokenCorpus(process.cwd()), contractIdByName: loaded.byName, contractsById: loaded.byId, fileKey: 'WofZT8xaxXuc2Q6Je9S4XE', mintUnbound: true });
+        const batch = proposeBatchFromDump(dump, { projectionMode: 'reviewable-inversion', corpus: loadTokenCorpus(process.cwd()), contractIdByName: loaded.byName, contractsById: loaded.byId, fileKey: 'WofZT8xaxXuc2Q6Je9S4XE', mintUnbound: true });
         if (batch.proposals.length !== 1 || batch.skipped.length !== 0) throw new Error('dump replay must propose exactly 1 with 0 skips (got ' + batch.proposals.length + '/' + batch.skipped.length + ')');
         const proposal = batch.proposals[0];
         const c = proposal.contract;
@@ -5649,14 +5655,14 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         // gap stopped being refused and now mint 16+16+4 leaves. The exact
         // number is pinned, not just the >=900 floor, so a channel silently
         // ceasing to mint is a failure and not a quiet pass.
-        'the collection plans ≥900 variables (1026)',
+        'the collection plans ≥900 variables (1031)',
         'genuinely DIFFER between Light and Dark (43)',
         '✔ THE PASTE DOOR IS OPEN for both kits',
       ]) {
         if (!check.out.includes(want)) throw new Error(`paste-door-check missing receipt: ${want}\n${check.out}`);
       }
       console.log(
-        'paste-door-open: the developer path (contract → CLI bundle → paste → variable collection + component sets) runs END TO END through the REAL referee, with no bypass, for BOTH a Figma Community kit that publishes ZERO variables (Untitled UI — 30 contracts, 1026 minted variables, 17 icon assets incl. the per-variant {platform} glyph) and a kit that publishes real ones (Eventz — 17 contracts, 112 variables, 43 genuinely differing between Light and Dark). LEDGER §3.4 recorded this door SHUT for two rounds.',
+        'paste-door-open: the developer path (contract → CLI bundle → paste → variable collection + component sets) runs END TO END through the REAL referee, with no bypass, for BOTH a Figma Community kit that publishes ZERO variables (Untitled UI — 30 contracts, 1031 minted variables, 17 icon assets incl. the per-variant {platform} glyph) and a kit that publishes real ones (Eventz — 17 contracts, 112 variables, 43 genuinely differing between Light and Dark). LEDGER §3.4 recorded this door SHUT for two rounds.',
       );
     },
   },
@@ -5680,15 +5686,15 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
         '✔ G9 sample library: the baked bundle (Card, Badge, Avatar, Button) parses, plans tokens-first, and builds in the mock',
         '✔ bundle order: ds.card plans 4 component scripts, dependencies first (ds.avatar → ds.button → ds.badge → ds.card)',
         // FOREIGN TOKEN SET — the JSON-only Generate: the MUI bundle
-        // (contracts + tokenSet + icons in ONE paste, MOLECULE round) through
+        // (contracts + tokenSet + icons in ONE paste, Wave 5 denominator) through
         // the real engine bundle path is EQUIVALENT to the compiled-script
-        // path (same sets + standalone Menu/Tooltip, 1543 variables incl. 73
+        // path (same sets + standalone Menu/Tooltip/TablePagination, 2136 variables incl. 134
         // Figma-native aliases, contained-primary Button fill resolves
         // #1976d2), and a contract ref outside base+minted refuses BY NAME.
         // STATE-PLANE PROJECTION round: Switch 14→28 (checked is a VARIANT
         // AXIS now) and Button 63→75 (accepted State preview axis) — both
         // survive the JSON-only paste identically to the script path.
-        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Autocomplete(2), Button(75), Card(4), Checkbox(3), Chip(28), Dialog(5), Slider(12), Switch(28), Table(2), Tabs(6) + standalone Menu, TablePagination, Tooltip with 1543 variables (73 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
+        '✔ foreign token set (MUI): mui.bundle.json — ONE JSON paste — plans tokenSet-first ("MUI" collection) and builds Accordion(4), Alert(12), Autocomplete(2), Avatar(3), Badge(14), Button(75), Card(4), Checkbox(3), Chip(28), CircularProgress(2), Dialog(5), Divider(3), Drawer(2), Fab(9), IconButton(9), InputAdornment(2), LinearProgress(2), Link(42), Paper(8), Radio(14), Select(2), Slider(12), Snackbar(3), Switch(28), Table(2), Tabs(6), TextField(6) + standalone Menu, TablePagination, Tooltip with 2136 variables (134 Figma-native aliases), EQUIVALENT to the compiled-script path (sets, standalone, variants, variable inventory); contained-primary Button fill resolves #1976d2; a ref outside base+minted refuses BY NAME',
         'plugin-engine-check: all flows green',
       ]) {
         if (!check.out.includes(want)) throw new Error(`missing "${want}" in:\n${check.out}`);
@@ -7195,12 +7201,12 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       });
       const receipt = run(process.execPath, ['examples/mui/scripts/figma-compile-receipt.mjs']);
       if (receipt.status !== 0) throw new Error(`mui figma compile receipt failed:\n${receipt.out.slice(0, 1600)}`);
-      if (!receipt.out.includes('14 scripts, 160 variants')) {
-        throw new Error(`mui figma compile receipt missing the 14-scripts/160-variants line:\n${receipt.out.slice(0, 800)}`);
+      if (!receipt.out.includes('31 scripts, 273 variants')) {
+        throw new Error(`mui figma compile receipt missing the 31-scripts/273-variants line:\n${receipt.out.slice(0, 800)}`);
       }
       const batch = run(process.execPath, ['examples/mui/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`mui genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(11 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\); standalone: TablePagination, Menu, Tooltip; 1543 variables\)/.test(batch.out)) {
+      if (!/mock-proven \(27 sets: Button\(75\), Card\(4\), Chip\(28\), Slider\(12\), Switch\(28\), Tabs\(6\), Accordion\(4\), Autocomplete\(2\), Dialog\(5\), Checkbox\(3\), Table\(2\), InputAdornment\(2\), TextField\(6\), Avatar\(3\), Fab\(9\), IconButton\(9\), CircularProgress\(2\), LinearProgress\(2\), Alert\(12\), Badge\(14\), Divider\(3\), Link\(42\), Paper\(8\), Drawer\(2\), Radio\(14\), Select\(2\), Snackbar\(3\); standalone: TablePagination, Menu, Tooltip, Breadcrumbs; 2136 variables\)/.test(batch.out)) {
         throw new Error(`mui genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // FOREIGN-TOKEN BUNDLE (the JSON-only payload): `figma bundle` is
@@ -7225,7 +7231,7 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       if (runA !== runB) throw new Error('figma bundle is NOT byte-deterministic — two builds from identical inputs differ');
       const committed = readFileSync(path.join(ROOT, 'examples/mui/figma/mui.bundle.json'), 'utf8');
       if (runA !== committed) throw new Error('committed examples/mui/figma/mui.bundle.json is STALE — a fresh `figma bundle` build differs; regenerate and commit it');
-      console.log('mui-figma-genesis: 14/14 Emotion-runtime scripts referee+execute headless (160 variants — state-plane projection round: Switch 14→28 on the new Checked axis, Button 63→75 on the accepted State preview axis); token sync 1543 variables incl. 73 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 13 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
+      console.log('mui-figma-genesis: 31/31 Emotion-runtime scripts referee+execute headless (273 variants — Wave 5 denominator; state-plane projection: Switch 14→28 on Checked, Button 63→75 on State preview); token sync 2136 variables incl. 134 Figma-native source aliases; one-paste batch mock-proven; figma bundle (with 22 embedded icon assets) byte-deterministic twice and committed mui.bundle.json fresh');
     },
   },
   {

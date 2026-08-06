@@ -94,7 +94,12 @@ function fingerprint(node, varNameById, styleNameById) {
 // Run the plugin engine's contract→canvas once, in a fresh mocked Figma.
 function contractToCanvas(bundleText) {
   const { figma, root, variables, styles } = createFigmaMock();
-  const sandbox = { window: {}, console: { log() {}, warn() {}, error() {} } };
+  const sandbox = {
+    window: {},
+    TextEncoder,
+    TextDecoder,
+    console: { log() {}, warn() {}, error() {} },
+  };
   vm.createContext(sandbox);
   vm.runInContext(bundle.code, sandbox, { timeout: 120_000 });
   const DSC = sandbox.window.DSC;

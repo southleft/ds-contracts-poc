@@ -127,7 +127,19 @@ Live receipts: extraction against **Shoelace v2.20.1** (58/58 components, 411 pr
 
 The differ verifies the **contracted API surface** on every component: props and their types AND KINDS, variant axes and option sets, defaults on BOTH surfaces (including boolean/text canvas defaults, numeric code defaults, and one-sided deletion), slot properties and their `accepts`/preferred values, nested component instances, and every token variable (name, mode values, alias targets). That is what "parity clean" asserts — and each of those checks has a corresponding drift eval above.
 
-It does **not** inspect anatomy internals: part-level layout and alignment, icon glyphs, meter geometry, static text parts, or `visibleWhen` wiring inside variants. Those are generated from the contract, but post-generation damage to them is invisible to the differ. This is not hypothetical: a July 2026 visual audit found a canvas-only defect (a chat bubble collapsing to hug-width because canvas and CSS have different `align` defaults) on a component the differ reported clean, because the defect lived below the API surface. The honest statement is therefore: *parity clean means the API contract holds on all three surfaces; anatomy fidelity is enforced at generation time and re-verified visually, not continuously.* Extending the differ one level down — an anatomy checksum per variant — is the identified next engineering round.
+It **does** inspect anatomy internals when the Figma snapshot carries per-variant
+v6 fingerprints (part tree, layout, and bindings): `parity/diff.ts` section 2.5
+via `parity/variant-drift.ts`. That surface is gated offline by
+`npm run variant-drift:check` (committed pristine/edited fixtures). A hand edit
+to padding, spacing, alignment, or a detached binding inside one variant is a
+finding — not "Parity clean". Stale snapshots without a `variants` array are
+reported as **NOT EXTRACTED** (unmeasured), never as agreement.
+
+Contract↔contract anatomy channel lines and a resolved CSS custom-property
+floor on generated modules are gated by `npm run anatomy-diff:check` (Wave 7).
+
+Icon glyphs, meter geometry taste, and axis-templated token products remain
+generation-time / visual concerns; the differ names what it measured.
 
 **Snapshot provenance — corrected 2026-08-04, the previous version of this paragraph was wrong.** It said the token snapshot "has been *derived* from `tokens/`", and warned about self-reference. Measured: `parity/snapshots/figma-tokens.json` carries `fileKey: 8nim1d0IPnehMxA7B7SYxC` and `extractedAt: 1783527446758` (2026-07-08T16:17:26.758Z) — the same file key the contracts anchor, and a timestamp **identical to the millisecond** to the one in `figma-components.json`. Both fields are written by `parity/extract-figma.plugin.js` (`:84-85`) and appear in no token file. The snapshot is a **live plugin extraction**, not a derivation, and the two snapshots were taken in the same run.
 

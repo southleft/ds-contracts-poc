@@ -738,6 +738,13 @@ export function Playground() {
   // Discovered token stylesheets (a tokens.css no component imports) — the
   // :root vocabulary foreign var()s mint against; reused by the assist re-run.
   const [codeExtraCss, setCodeExtraCss] = useState<string[]>([]);
+  /** G6: runtime-styled paste cost panel — set before propose; cleared on success. */
+  const [codeCost, setCodeCost] = useState<null | {
+    kind: string;
+    lines: string[];
+    cta: string;
+    pending: { tsx: string; css: string; origin: string };
+  }>(null);
 
   /** Shared landing for every code proposal (paste, trace, assist re-run):
    *  receipts assembled, workspace recorded, editor loaded. Returns the
@@ -813,12 +820,32 @@ export function Playground() {
     return result.skipped.map((s) => `component ${s.name} skipped: ${s.reason}`);
   };
 
-  const runCodePropose = async (tsx: string, css: string, origin: string) => {
-    setCodeBusy('Loading the TypeScript compiler (lazy chunk, ~5 MB — first run only)…');
+  const runCodePropose = async (
+    tsx: string,
+    css: string,
+    origin: string,
+    opts: { forceStub?: boolean } = {},
+  ) => {
     setCodeError(null);
     setCodeTrace(null);
     setCodeGaps([]);
     setCodeExtraCss([]);
+    if (!opts.forceStub) {
+      const { detectStyling } = await import('../engine/styling-detect');
+      const detected = detectStyling(tsx, css);
+      if (detected.needsComputedCapture) {
+        setCodeCost({
+          kind: detected.kind,
+          lines: detected.costLines,
+          cta: detected.cta,
+          pending: { tsx, css, origin },
+        });
+        setCodeBusy(null);
+        return;
+      }
+    }
+    setCodeCost(null);
+    setCodeBusy('Loading the TypeScript compiler (lazy chunk, ~5 MB — first run only)…');
     try {
       const { proposeFromCodeText } = await import('../engine/code-import');
       setCodeBusy('Proposing…');
@@ -2621,6 +2648,35 @@ export function Playground() {
                 </button>
                 {codeBusy ? <p className="hint">{codeBusy}</p> : null}
                 {codeError ? <div className="notice notice--error">{codeError}</div> : null}
+                {codeCost ? (
+                  <div className="notice" role="status">
+                    <strong>Computed capture needed ({codeCost.kind})</strong>
+                    <ul style={{ margin: '8px 0 0', paddingLeft: 18 }}>
+                      {codeCost.lines.map((line) => (
+                        <li key={line.slice(0, 48)}>{line}</li>
+                      ))}
+                    </ul>
+                    <div style={{ marginTop: 8, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                      <button
+                        type="button"
+                        className="btn--ghost"
+                        onClick={() => setCodeCost(null)}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        disabled={!!codeBusy}
+                        onClick={() => {
+                          const { tsx, css, origin } = codeCost.pending;
+                          void runCodePropose(tsx, css, origin, { forceStub: true });
+                        }}
+                      >
+                        {codeCost.cta}
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
               </>
             )}
 
