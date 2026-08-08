@@ -86,7 +86,9 @@
       "astryx.button": 1,
       "astryx.card": 1,
       "astryx.dropdown-menu": 1,
+      "astryx.progress-bar": 1,
       "astryx.slider": 1,
+      "astryx.switch": 1,
       "astryx.toast": 1
     },
     "polaris": {

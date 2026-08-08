@@ -6436,7 +6436,8 @@
             "justify": "center"
           },
           "declared": {
-            "box-sizing": "border-box"
+            "box-sizing": "border-box",
+            "font-family": "\"IBM Plex Sans\", sans-serif"
           },
           "tokens": {
             "background-color": "{imported.badge.root.background-color.unset}",
@@ -7148,7 +7149,8 @@
         "root": {
           "declared": {
             "display": "block",
-            "box-sizing": "border-box"
+            "box-sizing": "border-box",
+            "font-family": "\"IBM Plex Sans\", sans-serif"
           },
           "content": {
             "prop": "children"
@@ -7518,6 +7520,7 @@
           },
           "declared": {
             "box-sizing": "border-box",
+            "font-family": "\"IBM Plex Sans\", sans-serif",
             "transition-delay": "0s, 0s",
             "transition-duration": "0.2s, 0.2s",
             "transition-property": "color, background-color",

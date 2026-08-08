@@ -1,6 +1,6 @@
 {
-  "passed": 199,
-  "total": 199,
+  "passed": 204,
+  "total": 204,
   "results": [
     {
       "id": "refuse-unknown-token-reference",
@@ -114,6 +114,11 @@
     },
     {
       "id": "refuse-contract-edge-cases",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "refuse-underscore-ref-names-unset-sentinel",
       "claim": "C2-refusal",
       "pass": true
     },
@@ -528,6 +533,16 @@
       "pass": true
     },
     {
+      "id": "refuse-void-element-children-mount",
+      "claim": "C2-refusal",
+      "pass": true
+    },
+    {
+      "id": "design-void-element-re-root",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
       "id": "playground-caption-consistency",
       "claim": "C3-detection",
       "pass": true
@@ -599,6 +614,11 @@
     },
     {
       "id": "wrapping-survives-the-round-trip",
+      "claim": "C5-extraction",
+      "pass": true
+    },
+    {
+      "id": "design-gradient-textcase-carriage",
       "claim": "C5-extraction",
       "pass": true
     },
@@ -750,6 +770,11 @@
     {
       "id": "plugin-propose-dry-run",
       "claim": "C4-convergence",
+      "pass": true
+    },
+    {
+      "id": "plugin-stale-base-guard",
+      "claim": "C2-refusal",
       "pass": true
     },
     {

@@ -37,6 +37,36 @@
       }
     },
     {
+      "name": "icon",
+      "description": "Flowbite Alert renders the status icon only when the icon prop is passed; the developed default (gate-shots *__default) shows none.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Icon"
+        },
+        "code": {
+          "prop": "icon"
+        }
+      }
+    },
+    {
+      "name": "dismissable",
+      "description": "Flowbite Alert renders the dismiss button only when onDismiss is provided; the developed default shows none.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Dismissable"
+        },
+        "code": {
+          "prop": "onDismiss"
+        }
+      }
+    },
+    {
       "name": "children",
       "type": "text",
       "default": "Alert message",
@@ -137,7 +167,10 @@
                     }
                   }
                 }
-              ]
+              ],
+              "visibleWhen": {
+                "prop": "icon"
+              }
             },
             "label": {
               "content": {
@@ -222,7 +255,10 @@
                     }
                   }
                 }
-              ]
+              ],
+              "visibleWhen": {
+                "prop": "dismissable"
+              }
             }
           },
           "tokens": {

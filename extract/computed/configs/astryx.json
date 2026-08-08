@@ -83,7 +83,6 @@
       "contract": "examples/astryx/contracts-seed/switch.contract.json",
       "sampleText": "Enable notifications",
       "axes": [
-        "value",
         "labelPosition"
       ],
       "stateProps": [
@@ -95,7 +94,7 @@
       "fixedProps": {
         "label": "Enable notifications"
       },
-      "__note:valueAxis": "Wave B.3 FC-MISSING-AXIS — value is a VARIANT axis (off/on). Code prop is boolean; harness maps enum via prop adapter / sample casting in capture."
+      "__note:valueAxis": "Wave B.3 FC-MISSING-AXIS — value IS a variant axis on the contract side (seed + committed switch.contract.json v0.2.0 carry it as a VARIANT-bound boolean; thumb geometry from Switch.tsx source constants, not harness-captured). It is NOT listed in `axes`: capture's propSpaceFor enumerates enum props only (booleans ride stateProps — §1.4), the claimed 'prop adapter / sample casting in capture' was never built, and the committed captured truth (33a1ded2) carries no value dimension — so listing it made every offline re-fuse (ua-baseline:check) refuse while capturing nothing. Re-adding it requires a REAL recapture with the MUI Switch spelling: enum seed axis (off/on) + axisValueMap {off:false,on:true}."
     },
     {
       "name": "Slider",

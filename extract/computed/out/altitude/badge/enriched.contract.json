@@ -83,7 +83,8 @@
         "justify": "center"
       },
       "declared": {
-        "box-sizing": "border-box"
+        "box-sizing": "border-box",
+        "font-family": "\"IBM Plex Sans\", sans-serif"
       },
       "tokens": {
         "background-color": "{imported.badge.root.background-color.unset}",
